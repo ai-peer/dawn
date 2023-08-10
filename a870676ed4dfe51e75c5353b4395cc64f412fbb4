@@ -39,6 +39,30 @@
       },
       "revId": "a870676ed4dfe51e75c5353b4395cc64f412fbb4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ea624a3_ba33eef3",
+        "filename": "src/dawn/native/CopyTextureForBrowserHelper.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-10T20:16:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c8ae74d_c1ec3d0e",
+      "range": {
+        "startLine": 603,
+        "startChar": 41,
+        "endLine": 603,
+        "endChar": 52
+      },
+      "revId": "a870676ed4dfe51e75c5353b4395cc64f412fbb4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
