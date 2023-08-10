@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea41acd9_790304fc",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:31:33Z",
+      "side": 1,
+      "message": "Isn\u0027t every var always a ptr, so the check below could probably be an ICE instead?",
+      "revId": "f4f27cacb7163e431c08d29566c4abbe0306459a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fda8a222_e0279cc4",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:31:33Z",
+      "side": 1,
+      "message": "nit: TextureLoadExternal? (Makes the comment at the call site make more sense)",
+      "revId": "f4f27cacb7163e431c08d29566c4abbe0306459a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfc17eb6_3cd54f26",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 361,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:31:33Z",
+      "side": 1,
+      "message": "nit: this happens after the `let y ` line in the code below",
+      "revId": "f4f27cacb7163e431c08d29566c4abbe0306459a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dfa246b1_0389b940",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:31:33Z",
+      "side": 1,
+      "message": "nit: TextureSampleExternal",
+      "revId": "f4f27cacb7163e431c08d29566c4abbe0306459a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6580474_b147cc03",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 504,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:31:33Z",
+      "side": 1,
+      "message": "Commented code says `textureDimensions(plane_0, 0)` (same with call below)",
+      "range": {
+        "startLine": 504,
+        "startChar": 23,
+        "endLine": 504,
+        "endChar": 90
+      },
+      "revId": "f4f27cacb7163e431c08d29566c4abbe0306459a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b58c8016_24d7a8e7",
+        "filename": "src/tint/lang/spirv/writer/raise/raise.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:31:33Z",
+      "side": 1,
+      "message": "Does this mean that for every transform with params, we\u0027ll have another parameter here?",
+      "revId": "f4f27cacb7163e431c08d29566c4abbe0306459a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
