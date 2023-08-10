@@ -33,6 +33,23 @@
       "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,*\u0027 with tags [clang-coverage, dawn-no-backend-validation, linux, nvidia-0x2184, webgpu-adapter-default]",
       "revId": "ce59abc0e294a085f3b3ab5662dd49ffaac61035",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a35e0b83_36ffe34b",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-08-10T09:12:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,*\u0027 with tags [clang-coverage, dawn-no-backend-validation, linux, nvidia-0x2184, webgpu-adapter-default]",
+      "revId": "ce59abc0e294a085f3b3ab5662dd49ffaac61035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
