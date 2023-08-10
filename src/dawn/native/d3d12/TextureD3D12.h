@@ -31,6 +31,7 @@
 
 namespace dawn::native::d3d12 {
 
+class SharedTextureMemory;
 class CommandRecordingContext;
 class Device;
 
@@ -50,6 +51,9 @@ class Texture final : public d3d::Texture {
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D12Resource> d3d12Texture);
+    static ResultOrError<Ref<Texture>> CreateFromSharedTextureMemory(
+        SharedTextureMemory* memory,
+        const TextureDescriptor* descriptor);
 
     // For external textures, returns the Device internal fence's value associated with the last
     // ExecuteCommandLists that used this texture. If nullopt is returned, the texture wasn't used.
