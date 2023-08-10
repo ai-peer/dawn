@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc46eae3_e15ef35e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-08-10T04:21:14Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,*\u0027 with tags [clang-coverage, dawn-no-backend-validation, linux, nvidia-0x2184, webgpu-adapter-default]",
+      "revId": "ce59abc0e294a085f3b3ab5662dd49ffaac61035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
