@@ -22,6 +22,30 @@
       },
       "revId": "0b27e5d283214c882d369b21a53cfb3d8307c40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3068f68_2cf9167f",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-10T20:30:55Z",
+      "side": 1,
+      "message": "Please can you test: `for(var i \u003d 0; i \u003c 3; textureStore(t, c, v))`",
+      "parentUuid": "a2f6ffc2_de7807e2",
+      "range": {
+        "startLine": 1266,
+        "startChar": 0,
+        "endLine": 1274,
+        "endChar": 5
+      },
+      "revId": "0b27e5d283214c882d369b21a53cfb3d8307c40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
