@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91a8e1cb_da0ec0f0",
+        "filename": "src/tint/lang/spirv/writer/raise/raise.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-10T16:47:18Z",
+      "side": 1,
+      "message": "Done in previous CL.",
+      "parentUuid": "13a18305_7373a6c3",
+      "revId": "63b70627e808c94599416db66540ba596bf65278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4167eb60_7d10f422",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "282506fc_e1d2655b",
+        "filename": "src/tint/lang/spirv/writer/raise/shader_io.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-10T16:47:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4167eb60_7d10f422",
+      "revId": "63b70627e808c94599416db66540ba596bf65278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "454a8107_6290b304",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-08-10T14:37:48Z",
       "side": 1,
       "message": "This would also be a bit nicer if we could use an enum class here or something?\n\n```\nRun(ShaderIO, ShaderIOOptions::kNoClampFragDepth)\n```\n\n?",
+      "revId": "63b70627e808c94599416db66540ba596bf65278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f791cd0b_1b496603",
+        "filename": "src/tint/lang/spirv/writer/raise/shader_io_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-10T16:47:18Z",
+      "side": 1,
+      "message": "Added a `ShaderIOConfig` struct which it more explicit. There will be at least one more option in the future.",
+      "parentUuid": "454a8107_6290b304",
       "revId": "63b70627e808c94599416db66540ba596bf65278",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
