@@ -121,6 +121,12 @@ class Device final : public d3d::Device {
     void InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPipeline,
                                            WGPUCreateRenderPipelineAsyncCallback callback,
                                            void* userdata) override;
+
+    ResultOrError<Ref<SharedTextureMemoryBase>> ImportSharedTextureMemoryImpl(
+        const SharedTextureMemoryDescriptor* descriptor) override;
+    ResultOrError<Ref<SharedFenceBase>> ImportSharedFenceImpl(
+        const SharedFenceDescriptor* descriptor) override;
+
     void DestroyImpl() override;
     MaybeError WaitForIdleForDestruction() override;
     bool HasPendingCommands() const override;
