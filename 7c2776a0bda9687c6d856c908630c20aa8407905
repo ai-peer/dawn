@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf1f148_3d21784d",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-10T08:46:26Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "7c2776a0bda9687c6d856c908630c20aa8407905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

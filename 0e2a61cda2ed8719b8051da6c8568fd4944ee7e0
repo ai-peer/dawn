@@ -50,6 +50,24 @@
       "message": "It might be good to assert that we have the simultaneous usage flags so that the state is COMMON, or even ASSERT that the state is common for all subresources. This is both to check the assumption that the rest of the code works, and that imported textures are indeed always simultaneous access.",
       "revId": "0e2a61cda2ed8719b8051da6c8568fd4944ee7e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2133810_9d03b786",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-10T08:46:26Z",
+      "side": 1,
+      "message": "Done\n\nOh the lastState may not be common at this time because we only change lastState in next transition barrier [1], so at this time lastState is the state before the decay.",
+      "parentUuid": "23151dad_7a5db01e",
+      "revId": "0e2a61cda2ed8719b8051da6c8568fd4944ee7e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
