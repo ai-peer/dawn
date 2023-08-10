@@ -154,6 +154,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "775aa7ab_8ff9cc61",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-10T14:55:11Z",
+      "side": 1,
+      "message": "well, I may be able to have the null backend require no chained structs",
+      "parentUuid": "428d50bd_f56d5092",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8ea170ec_68278017",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
