@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa06bcf_2e41b318",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-10T07:03:39Z",
+      "side": 1,
+      "message": "Removed.",
+      "parentUuid": "b519c903_83a56add",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7652aef2_d1bd44e0",
@@ -313,6 +331,24 @@
       "side": 1,
       "message": "From a wgpu::Adapter you can call EnumerateFeatures: https://source.chromium.org/chromium/chromium/src/+/main:out/Debug/gen/third_party/dawn/include/dawn/webgpu_cpp.h;drc\u003d36aded67edbf6d7ade45a9f3bdeb8e29cf303828;l\u003d889\n\nYou can get a wgpu::Adapter with .Get() it\u0027s a bit wonky but should work and is better than looking in dawn::native https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/include/dawn/native/DawnNative.h;drc\u003dcc06e477bc011fd8a770d2250ec74f380da8e77a;l\u003d118\n\nThe EnumerateFeatures call will not list the experimental features if allowUnsafeAPIs is not set so I think this should solve both issues.",
       "parentUuid": "38615c59_e963534f",
+      "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36fd2f36_779d19e4",
+        "filename": "src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 756,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-10T07:03:39Z",
+      "side": 1,
+      "message": "The tricky point is that `ValidationTest` currently provide no way to change the adapter creating behavior, and the default adapter will inherit the `AllowUnsafeAPIs` toggle enabled from the instance, which is enabled by default there and also not configurable currently.\n\nIn the latest patch I modify the `ValidationTest` to allow changing the adapter creation behavior, and prevent using `dawn::native` with that.",
+      "parentUuid": "40c3e82f_c7892137",
       "revId": "50985060d47fc205bc400fcbd88897da8ed5bf80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
