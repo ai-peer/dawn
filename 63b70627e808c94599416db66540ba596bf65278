@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13a18305_7373a6c3",
+        "filename": "src/tint/lang/spirv/writer/raise/raise.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:37:48Z",
+      "side": 1,
+      "message": "Move to a structure for params?",
+      "revId": "63b70627e808c94599416db66540ba596bf65278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4167eb60_7d10f422",
+        "filename": "src/tint/lang/spirv/writer/raise/shader_io.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:37:48Z",
+      "side": 1,
+      "message": "default value?",
+      "revId": "63b70627e808c94599416db66540ba596bf65278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "454a8107_6290b304",
+        "filename": "src/tint/lang/spirv/writer/raise/shader_io_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 919,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-10T14:37:48Z",
+      "side": 1,
+      "message": "This would also be a bit nicer if we could use an enum class here or something?\n\n```\nRun(ShaderIO, ShaderIOOptions::kNoClampFragDepth)\n```\n\n?",
+      "revId": "63b70627e808c94599416db66540ba596bf65278",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
