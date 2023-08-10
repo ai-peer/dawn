@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90c58c72_6a02af4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T08:18:53Z",
+      "side": 1,
+      "message": "LGTM thank you for the iteration, it makes a lot more sense now!",
+      "revId": "0e2a61cda2ed8719b8051da6c8568fd4944ee7e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1cbd430_89ec32a3",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T08:18:53Z",
+      "side": 1,
+      "message": "I\u0027m wondering if it might always be valid to say that we can decay resources after creation. So this would be `COMMON, 0 (kBeginningOfTime or we/e), true`. WDYT?",
+      "revId": "0e2a61cda2ed8719b8051da6c8568fd4944ee7e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23151dad_7a5db01e",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 356,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T08:18:53Z",
+      "side": 1,
+      "message": "It might be good to assert that we have the simultaneous usage flags so that the state is COMMON, or even ASSERT that the state is common for all subresources. This is both to check the assumption that the rest of the code works, and that imported textures are indeed always simultaneous access.",
+      "revId": "0e2a61cda2ed8719b8051da6c8568fd4944ee7e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
