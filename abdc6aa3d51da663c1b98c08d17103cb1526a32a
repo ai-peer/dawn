@@ -16,6 +16,24 @@
       "message": "LGTM though android still seems unhappy with the roll :-/ \n\nbrandon FYI this might conflict with your https://dawn-review.googlesource.com/c/dawn/+/145601",
       "revId": "abdc6aa3d51da663c1b98c08d17103cb1526a32a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38da0eb4_dabdb83e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-10T19:28:18Z",
+      "side": 1,
+      "message": "actually CC brandon.",
+      "parentUuid": "d6833d1f_7ae08839",
+      "revId": "abdc6aa3d51da663c1b98c08d17103cb1526a32a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
