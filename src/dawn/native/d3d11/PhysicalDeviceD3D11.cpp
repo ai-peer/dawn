@@ -146,6 +146,10 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
         EnableFeature(Feature::DawnMultiPlanarFormats);
     }
+
+    EnableFeature(Feature::SharedTextureMemoryDXGISharedHandle);
+    EnableFeature(Feature::SharedTextureMemoryD3D11Texture2D);
+    EnableFeature(Feature::SharedFenceDXGISharedHandle);
 }
 
 MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits) {

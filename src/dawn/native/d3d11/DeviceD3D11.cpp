@@ -20,6 +20,7 @@
 #include <utility>
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/D3D11Backend.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/Instance.h"
@@ -41,6 +42,8 @@
 #include "dawn/native/d3d11/RenderPipelineD3D11.h"
 #include "dawn/native/d3d11/SamplerD3D11.h"
 #include "dawn/native/d3d11/ShaderModuleD3D11.h"
+#include "dawn/native/d3d11/SharedFenceD3D11.h"
+#include "dawn/native/d3d11/SharedTextureMemoryD3D11.h"
 #include "dawn/native/d3d11/SwapChainD3D11.h"
 #include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -301,6 +304,50 @@ void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPip
                                                WGPUCreateRenderPipelineAsyncCallback callback,
                                                void* userdata) {
     RenderPipeline::InitializeAsync(std::move(renderPipeline), callback, userdata);
+}
+
+ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
+    const SharedTextureMemoryDescriptor* baseDescriptor) {
+    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
+                                 wgpu::SType::SharedTextureMemoryDXGISharedHandleDescriptor,
+                                 wgpu::SType::SharedTextureMemoryD3D11Texture2DDescriptor));
+
+    const SharedTextureMemoryDXGISharedHandleDescriptor* dxgiDescriptor = nullptr;
+    FindInChain(baseDescriptor->nextInChain, &dxgiDescriptor);
+
+    const SharedTextureMemoryD3D11Texture2DDescriptor* d3d11TextureDescriptor = nullptr;
+    FindInChain(baseDescriptor->nextInChain, &d3d11TextureDescriptor);
+
+    if (dxgiDescriptor != nullptr) {
+        DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryDXGISharedHandle),
+                        "%s is not enabled.",
+                        wgpu::FeatureName::SharedTextureMemoryDXGISharedHandle);
+        return SharedTextureMemory::Create(this, baseDescriptor->label, dxgiDescriptor);
+    } else if (d3d11TextureDescriptor != nullptr) {
+        DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryD3D11Texture2D),
+                        "%s is not enabled.", wgpu::FeatureName::SharedTextureMemoryD3D11Texture2D);
+        return SharedTextureMemory::Create(this, baseDescriptor->label, d3d11TextureDescriptor);
+    } else {
+        return DAWN_VALIDATION_ERROR(
+            "SharedTextureMemoryDXGISharedHandleDescriptor or "
+            "SharedTextureMemoryD3D11Texture2DDescriptor must be chained.");
+    }
+}
+
+ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
+    const SharedFenceDescriptor* baseDescriptor) {
+    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
+                                 wgpu::SType::SharedFenceDXGISharedHandleDescriptor));
+
+    const SharedFenceDXGISharedHandleDescriptor* descriptor = nullptr;
+    FindInChain(baseDescriptor->nextInChain, &descriptor);
+
+    DAWN_INVALID_IF(descriptor == nullptr,
+                    "SharedFenceDXGISharedHandleDescriptor must be chained.");
+
+    DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceDXGISharedHandle), "%s is not enabled.",
+                    wgpu::FeatureName::SharedFenceDXGISharedHandle);
+    return SharedFence::Create(this, baseDescriptor->label, descriptor);
 }
 
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
