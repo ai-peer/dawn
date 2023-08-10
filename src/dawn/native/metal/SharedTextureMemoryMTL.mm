@@ -153,7 +153,9 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(TextureBas
         DAWN_TRY_ASSIGN(fence, SharedFence::Create(ToBackend(GetDevice()),
                                                    "Internal MTLSharedEvent", &newDesc));
 
-        return FenceAndSignalValue{std::move(fence), static_cast<uint64_t>(GetLastUsageSerial())};
+        return FenceAndSignalValue{
+            std::move(fence),
+            static_cast<uint64_t>(texture->GetSharedTextureMemoryState()->GetLastUsageSerial())};
     }
     UNREACHABLE();
 }
