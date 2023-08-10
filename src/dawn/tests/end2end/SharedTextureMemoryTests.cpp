@@ -42,6 +42,13 @@ void SharedTextureMemoryTests::SetUp() {
     DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures(GetParam().mBackend->RequiredFeatures()));
 }
 
+wgpu::Device SharedTextureMemoryTests::CreateDevice() {
+    if (GetParam().mBackend->UseSameDevice()) {
+        return device;
+    }
+    return DawnTestBase::CreateDevice();
+}
+
 void SharedTextureMemoryTests::UseInRenderPass(wgpu::Device& deviceObj, wgpu::Texture& texture) {
     wgpu::CommandEncoder encoder = deviceObj.CreateCommandEncoder();
     utils::ComboRenderPassDescriptor passDescriptor({texture.CreateView()});
