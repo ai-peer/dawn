@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2f6ffc2_de7807e2",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1274,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-10T20:11:51Z",
+      "side": 1,
+      "message": "This is a bit of a gross hack, but this backend is going away soon(ish). In the IR version we can more easily use a transform to insert a call to an MSL intrinsic function.",
+      "range": {
+        "startLine": 1266,
+        "startChar": 0,
+        "endLine": 1274,
+        "endChar": 5
+      },
+      "revId": "0b27e5d283214c882d369b21a53cfb3d8307c40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
