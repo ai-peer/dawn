@@ -454,6 +454,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bdeb0873_6be7e6b5",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T15:01:00Z",
+      "side": 1,
+      "message": "My understanding is that the fence should be gathered in `AcquireBeginFences` and `PopAccessFences` in this case, but that seems to not be the case. So at the moment I believe that:\n\n```\nt \u003d stm.CreateTexture()\nstm.BeginAccess(texture, [fence1])\nstm.BeginAccess(texture, [fence2])\nfences \u003d stm.EndAccess(texture);\n\n// My understanding is that fences \u003d\u003d [fence2] and not [fence1, fence2] which we want.\n```\n\nWhat do you think of changing the data structure to an unordered_map\u003cRef\u003cTexture\u003e, vector\u003cFences\u003e\u003e? It would make it easy if the texture is from this STM, and would simplify the fence tracking logic a bunch.",
+      "parentUuid": "0cf95ba3_bb3036e5",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de3dbb1a_b2cb5686",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
