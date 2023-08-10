@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "26ea74f9_ab6d8d28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T16:49:20Z",
+      "side": 1,
+      "message": "Didn\u0027t check the giant test file yet.",
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "db1866f6_b3488dac",
         "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
         "patchSetId": 25
@@ -65,6 +82,63 @@
       "writtenOn": "2023-08-10T14:56:13Z",
       "side": 1,
       "message": "I wonder if instead of this dance we could just cast to the proper fence type. (or dynamic cast + assert)?",
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e18ed4d_8c10010e",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 25
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T16:49:20Z",
+      "side": 1,
+      "message": "optional u-nit: this could be a const char*",
+      "range": {
+        "startLine": 40,
+        "startChar": 5,
+        "endLine": 40,
+        "endChar": 15
+      },
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04cf0187_f77077a4",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 25
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T16:49:20Z",
+      "side": 1,
+      "message": "We might be able to use CFRef.h",
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d8f01e_19f52175",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 25
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-10T16:49:20Z",
+      "side": 1,
+      "message": "ditto we can use NSPRef\u003c\u003e",
       "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
