@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7a4525f_551afaf1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T21:23:16Z",
+      "side": 1,
+      "message": "I think we can make TextureState an atomic. where the top 62 bits are last usage serial and the bottom two bits are these bools",
+      "parentUuid": "03b00769_3537a060",
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69521827_b75dcb72",
@@ -66,6 +84,30 @@
       "writtenOn": "2023-08-11T20:44:36Z",
       "side": 1,
       "message": "nit. The naming is a bit awkward? Maybe something like `SetAccessibility`?",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 40
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6d5aa8c_337c0f02",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T21:23:16Z",
+      "side": 1,
+      "message": "I named it \"SetHasAccess\"; same as the var name",
+      "parentUuid": "69521827_b75dcb72",
       "range": {
         "startLine": 86,
         "startChar": 4,
@@ -122,6 +164,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "711a1052_03f910e1",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T21:23:16Z",
+      "side": 1,
+      "message": "not possible until a later c++20 version; added comments though",
+      "parentUuid": "34aea8bc_3e22f789",
+      "range": {
+        "startLine": 141,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 27
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef534f72_0f8460ca",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T21:23:16Z",
+      "side": 1,
+      "message": "I think this is going to become an atomic with last usage serial bits stored in the upper bits\n\nso submit will atomically:\n - validate destroyed \u0026\u0026 hasAccess\n - set last usage serial to pending serial\n \nend access will atomically:\n - set hasAccess \u003d false\n - fetch and return the serial after which access is ended\n \ndestroy will atomically\n - set destroyed \u003d true\n - fetch and return the last usage serial; enqueue for destruction after it",
+      "parentUuid": "e8dc9909_60741b90",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 27
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51acf63e_a3771d90",
@@ -135,6 +225,30 @@
       "writtenOn": "2023-08-11T20:44:36Z",
       "side": 1,
       "message": "u-nit. is",
+      "range": {
+        "startLine": 1007,
+        "startChar": 59,
+        "endLine": 1007,
+        "endChar": 61
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b83e386f_fd06fde0",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T21:23:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51acf63e_a3771d90",
       "range": {
         "startLine": 1007,
         "startChar": 59,
