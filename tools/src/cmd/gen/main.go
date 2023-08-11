@@ -20,6 +20,7 @@ import (
 	"fmt"
 	"os"
 
+	"dawn.googlesource.com/dawn/tools/src/cmd/gen/build"
 	"dawn.googlesource.com/dawn/tools/src/cmd/gen/common"
 	"dawn.googlesource.com/dawn/tools/src/cmd/gen/templates"
 	"dawn.googlesource.com/dawn/tools/src/subcmd"
@@ -66,6 +67,10 @@ func (c *cmdAll) RegisterFlags(ctx context.Context, cfg common.Config) ([]string
 func (c cmdAll) Run(ctx context.Context, cfg common.Config) error {
 	templatesCmd := templates.Cmd{}
 	if err := templatesCmd.Run(ctx, cfg); err != nil {
+		return err
+	}
+	buildCmd := build.Cmd{}
+	if err := buildCmd.Run(ctx, cfg); err != nil {
 		return err
 	}
 	return nil
