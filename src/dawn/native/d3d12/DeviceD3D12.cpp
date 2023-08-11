@@ -23,6 +23,7 @@
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/ExtensionStructMatch.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d/ExternalImageDXGIImpl.h"
@@ -458,35 +459,18 @@ void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPip
 
 ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
     const SharedTextureMemoryDescriptor* baseDescriptor) {
-    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
-                                 wgpu::SType::SharedTextureMemoryDXGISharedHandleDescriptor));
-
-    const SharedTextureMemoryDXGISharedHandleDescriptor* descriptor = nullptr;
-    FindInChain(baseDescriptor->nextInChain, &descriptor);
-
-    if (descriptor) {
-        DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryDXGISharedHandle),
-                        "%s is not enabled.",
-                        wgpu::FeatureName::SharedTextureMemoryDXGISharedHandle);
-        return SharedTextureMemory::Create(this, baseDescriptor->label, descriptor);
-    }
-    return DAWN_VALIDATION_ERROR("Unsupported shared texture memory import.");
+    return ExtensionStructMatch(this, baseDescriptor,
+                                ExtensionStructCase<SharedTextureMemoryDXGISharedHandleDescriptor,
+                                                    Feature::SharedTextureMemoryDXGISharedHandle>(
+                                    SharedTextureMemory::Create));
 }
 
 ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
     const SharedFenceDescriptor* baseDescriptor) {
-    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
-                                 wgpu::SType::SharedFenceDXGISharedHandleDescriptor));
-
-    const SharedFenceDXGISharedHandleDescriptor* descriptor = nullptr;
-    FindInChain(baseDescriptor->nextInChain, &descriptor);
-
-    if (descriptor) {
-        DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceDXGISharedHandle), "%s is not enabled.",
-                        wgpu::FeatureName::SharedFenceDXGISharedHandle);
-        return SharedFence::Create(this, baseDescriptor->label, descriptor);
-    }
-    return DAWN_VALIDATION_ERROR("Unsupported shared fence import.");
+    return ExtensionStructMatch(
+        this, baseDescriptor,
+        ExtensionStructCase<SharedFenceDXGISharedHandleDescriptor,
+                            Feature::SharedTextureMemoryDXGISharedHandle>(SharedFence::Create));
 }
 
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,

@@ -253,37 +253,24 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
 
 ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
     const SharedTextureMemoryDescriptor* baseDescriptor) {
-    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
-                                 wgpu::SType::SharedTextureMemoryIOSurfaceDescriptor));
-
-    const SharedTextureMemoryIOSurfaceDescriptor* descriptor = nullptr;
-    FindInChain(baseDescriptor->nextInChain, &descriptor);
-
-    DAWN_INVALID_IF(descriptor == nullptr,
-                    "SharedTextureMemoryIOSurfaceDescriptor must be chained.");
-
-    DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryIOSurface), "%s is not enabled.",
-                    wgpu::FeatureName::SharedTextureMemoryIOSurface);
-
-    return SharedTextureMemory::Create(this, baseDescriptor->label, descriptor);
+    return ExtensionStructMatch(
+        this, baseDescriptor,
+        ExtensionStructCase<SharedTextureMemoryIOSurfaceDescriptor,
+                            Feature::SharedTextureMemoryIOSurface>(SharedTextureMemory::Create), );
 }
 
 ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
     const SharedFenceDescriptor* baseDescriptor) {
-    DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
-                                 wgpu::SType::SharedFenceMTLSharedEventDescriptor));
-
-    const SharedFenceMTLSharedEventDescriptor* descriptor = nullptr;
-    FindInChain(baseDescriptor->nextInChain, &descriptor);
-
-    if (descriptor) {
-        DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceMTLSharedEvent), "%s is not enabled.",
-                        wgpu::FeatureName::SharedFenceMTLSharedEvent);
-        if (@available(macOS 10.14, ios 12.0, *)) {
-            return SharedFence::Create(this, baseDescriptor->label, descriptor);
-        }
-    }
-    return DAWN_VALIDATION_ERROR("Unsupported shared fence import.");
+    return ExtensionStructMatch(this, baseDescriptor,
+                                ExtensionStructCase<SharedFenceMTLSharedEventDescriptor,
+                                                    Feature::SharedFenceMTLSharedEvent>(
+                                    [](Device* device, const char* label,
+                                       const SharedFenceMTLSharedEventDescriptor* descriptor) {
+                                        if (@available(macOS 10.14, ios 12.0, *)) {
+                                            return SharedFence::Create(device, label, descriptor);
+                                        }
+                                        UNREACHABLE();
+                                    }));
 }
 
 ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
