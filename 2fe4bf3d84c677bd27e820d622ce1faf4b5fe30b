@@ -241,6 +241,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef28312b_f25d413d",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-11T01:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5e7ab975_d445b8ed",
+      "range": {
+        "startLine": 39,
+        "startChar": 22,
+        "endLine": 39,
+        "endChar": 68
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e49cb5eb_e3ec9d44",
@@ -605,6 +629,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcc7455d_1d38cfc3",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-11T01:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "680743d2_71ae6f5e",
+      "range": {
+        "startLine": 113,
+        "startChar": 12,
+        "endLine": 113,
+        "endChar": 22
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "539ba20d_9f3b9612",
@@ -683,6 +731,24 @@
       "side": 1,
       "message": "I wasn\u0027t aware of `tint::sem::Module::DependencyOrderedDeclarations()`, that might be the thing to help reduce complexity.\n\nI read through this and what this simplified version trying to do is that iterate all direct calls of all functions once\n\n```\nforeach fn\n foreach fn-\u003eDirectCalls\n   // process\n end\nend\n```\n\nwhere user functions directly calling texture_builtins comes first in vector, and then depth\u003d2 user functions, ...\n\ninstead of what is for now: iterating all interested texture builtin calls -\u003e bubble up to function -\u003e bubble up to function callsites.\n\ne.g.\n\n```\nfn f1(t: texture_type) {\n  _ \u003d texture_builtin(t);\n}\n\nfn f2(t: texture_type) {\n  _ \u003d f1(t);\n}\n\n@group(0) @binding(0) var tex1: texture_type;\n\nfn main() {\n  f2(tex1);\n}\n```\n\nDependencyOrderedDeclarations returns vector \u003d {f1, f2, main}\n\n\nprocess f1, for all direct_calls \u003d {texture_builtin}, add a(f1, {new_param_1, 0}) to new_params\n\nprocess f2. for all direct_calls \u003d {f1}, find {new_param_1, 0}, add a (f2, {new_param_2, 0}\n\nprocess main. for all direct_calls \u003d {f2}, tex1 is module scope, directly replace\n\n\nPlease let me know if I understand this correctly.\n\n------------\n\nAnd one thing I\u0027m unsure: I need to know how many module-scope texture var are ever passed in into the texture builtins, to decide the array size of the uniform buffer. So two parses of the texture builtin calls seem inevitable to me. First parse: count how many of them; Second parse: replace with uniform array index access. (Otherwise it would end in out-of-bounds error in the middle?). So still 2 passes on the texture_builtin calls are needed, `ctx.Replace` still needs to happen on the second pass?",
       "parentUuid": "a951c7bf_f1628047",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0017b8b5_7adda30c",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-11T01:33:33Z",
+      "side": 1,
+      "message": "Done. Using `DependencyOrderedDeclarations`",
+      "parentUuid": "4b9a6bb7_8beb2eb0",
       "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1000,6 +1066,24 @@
       "side": 1,
       "message": "Added tests for 4.\nIf statement at [1] is true, then we don\u0027t need tests for 1 and 2.\nI believe 3 is already covered by SameBuiltinCalledMultipleTimes and 5 by TextureAsFunctionParameterMixed?",
       "parentUuid": "233c21fe_e8b7362e",
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb7cef9_0f59d3ed",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-11T01:33:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07425987_878fb3f7",
       "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
