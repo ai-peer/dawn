@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure about this for the `cmd` executables. I consider the Tint exe to be an example of a use of the Tint public API. It shouldn\u0027t need to do anything that requires poking directly behind the public API, and we sometimes point external users to it as an example of how to use Tint as a library.\n\nIf this is solely to help the build generator, then maybe this is an argument for not using the build generator for the cmd executables and just using handwritten build files instead. They have few source files, shouldn\u0027t change often, and should just be able to link against a single `libtint` (when we eventually get there).",
       "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92c9da9a_3e951d7c",
+        "filename": "src/tint/cmd/common/helper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T23:48:22Z",
+      "side": 0,
+      "message": "I\u0027d buy that argument if we had a public API, but we currently don\u0027t. `tint/tint.h` is just a master include to a bunch of internal headers, and this CL just skips that step.\nIf we had a module that isolated the guts of Tint from the public API, then yes, we\u0027d include that, and not violate any PIMPL rules, but currently we don\u0027t.\n\n`api/tint.cc` gives us a place to start building that public API.",
+      "parentUuid": "553a4ae8_422fbb03",
+      "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
