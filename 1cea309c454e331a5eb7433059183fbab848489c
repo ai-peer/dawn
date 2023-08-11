@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39de7bc2_31986276",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:52:44Z",
+      "side": 1,
+      "message": "maybe we should have done this initially. but\nought we mark it [[deprecated]] first? so other projects get warnings",
+      "revId": "1cea309c454e331a5eb7433059183fbab848489c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
