@@ -16,6 +16,115 @@
       "message": "loko, ptal!",
       "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03b00769_3537a060",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-11T20:44:36Z",
+      "side": 1,
+      "message": "Hmm overall LGTM. Not sure if the complexity of the bitfield is really that important? (i.e. maybe 2 bools would have been just fine?), but it\u0027s nice that the destroyed state is it\u0027s own thing now. I assume that eventually with this change, the entire `TextureState` struct will have to be mutex protected for multithread.",
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69521827_b75dcb72",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-11T20:44:36Z",
+      "side": 1,
+      "message": "nit. The naming is a bit awkward? Maybe something like `SetAccessibility`?",
+      "range": {
+        "startLine": 86,
+        "startChar": 4,
+        "endLine": 86,
+        "endChar": 40
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8dc9909_60741b90",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-11T20:44:36Z",
+      "side": 1,
+      "message": "(Unrelated) Hmm.. thinking about this w.r.t multithread destroy/submit... Originally thought that maybe it would mean it becomes an atomic, but the more I think about it, the more it seems like it would have to be a lock because submit has to complete entirely otherwise we race on validation?",
+      "range": {
+        "startLine": 142,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 27
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34aea8bc_3e22f789",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-11T20:44:36Z",
+      "side": 1,
+      "message": "nit. could we just default initialize these instead of declaring/implementing and explicit ctor? Also maybe a small docstring to make it more explicit what `hasAccess` means?",
+      "range": {
+        "startLine": 141,
+        "startChar": 8,
+        "endLine": 142,
+        "endChar": 27
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51acf63e_a3771d90",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1007,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-11T20:44:36Z",
+      "side": 1,
+      "message": "u-nit. is",
+      "range": {
+        "startLine": 1007,
+        "startChar": 59,
+        "endLine": 1007,
+        "endChar": 61
+      },
+      "revId": "e47dbdbb30ef78cc65121a5962460ca51e562fd9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
