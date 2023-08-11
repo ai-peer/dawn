@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bfe8ef2e_108fa533",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-11T02:20:06Z",
+      "side": 1,
+      "message": "I think \u0027decay\u0027 means a state implicitly turns into COMMON, as the initial state is always COMMON, maybe we don\u0027t need to say it can be decayed?",
+      "parentUuid": "b1cbd430_89ec32a3",
+      "revId": "0e2a61cda2ed8719b8051da6c8568fd4944ee7e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23151dad_7a5db01e",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 8
