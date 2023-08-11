@@ -16,6 +16,155 @@
       "message": "Havn\u0027t looked at the pipeline blob cache layout failure. But likely because of the gl backend internal uniform buffer.",
       "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a13004a_e6f8000a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:39:31Z",
+      "side": 1,
+      "message": "overall LGTM, some comments",
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27359f29_a77839e3",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:39:31Z",
+      "side": 1,
+      "message": "is it ever the case that mBindingPointBuiltinsDataInfo is empty, but mNeedsTextureBuiltinUniformBuffer is true?\n\nmaybe we can use just the length of mBindingPointBuiltinsDataInfo to determine whether we need the buffer. It doesn\u0027t look like we ever check mNeedsTextureBuiltinUniformBuffer",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 46
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb749a47_d26dbd41",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:39:31Z",
+      "side": 1,
+      "message": "nit: DAWN_TRY_ASSIGN instead of using AcquireSuccess",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 81
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54192a98_f2ac6311",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:39:31Z",
+      "side": 1,
+      "message": "can we check just one?",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 201,
+        "endChar": 5
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55f1c76b_46f264de",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:39:31Z",
+      "side": 1,
+      "message": "can we do all the uploads batched together just before draw?\n\nWe can build up a vector of all the data.\nIn BindGroupTracker::Apply, after doing all ApplyBindGroup; do something like ApplyUniforms where we upload all the dirty uniforms at once.\n\nBecause we are doing BufferSubData, it\u0027s probably sufficient to not track literally every dirty index, but the range of them - so the first/last in a range to update. This could result in uploading more data than necessary, but I think it\u0027s probably OK. We could optimize to a true bitset if we find it\u0027s important",
+      "range": {
+        "startLine": 222,
+        "startChar": 5,
+        "endLine": 224,
+        "endChar": 40
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4d91dcf_7a36183b",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:39:31Z",
+      "side": 1,
+      "message": "nit: i think you could do\n```\nstd::pair\u003cK, V\u003e p;\nDAWN_TRY(StreamOut(s, \u0026p));\nm-\u003einsert(std::move(p));\n```",
+      "range": {
+        "startLine": 312,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 39
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30ee526_c5fe8854",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T18:39:31Z",
+      "side": 1,
+      "message": "unit: usually we don\u0027t have underscores in variable names",
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
