@@ -16,6 +16,7 @@
 #include <vector>
 
 #include "dawn/common/DynamicLib.h"
+#include "dawn/native/Adapter.h"
 #include "dawn/native/OpenGLBackend.h"
 #include "dawn/native/opengl/DeviceGL.h"
 #include "dawn/tests/DawnTest.h"
@@ -70,6 +71,10 @@ class GLTextureTestBase : public DawnTest {
         DawnTest::SetUp();
         DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::ANGLETextureSharing}));
         DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+
+        // Create a second GL device from which we can vend textures.
+        mSecondDevice = CreateDevice();
+        mSecondDeviceGL = native::opengl::ToBackend(native::FromAPI(mSecondDevice.Get()));
     }
 
   public:
@@ -80,9 +85,7 @@ class GLTextureTestBase : public DawnTest {
                                     GLenum type,
                                     void* data,
                                     size_t size) {
-        native::opengl::Device* openglDevice =
-            native::opengl::ToBackend(native::FromAPI(device.Get()));
-        const native::opengl::OpenGLFunctions& gl = openglDevice->GetGL();
+        const native::opengl::OpenGLFunctions& gl = mSecondDeviceGL->GetGL();
         GLuint tex;
         gl.GenTextures(1, &tex);
         gl.BindTexture(GL_TEXTURE_2D, tex);
@@ -97,6 +100,10 @@ class GLTextureTestBase : public DawnTest {
         return wgpu::Texture::Acquire(
             native::opengl::WrapExternalGLTexture(device.Get(), &externDesc));
     }
+
+  protected:
+    native::opengl::Device* mSecondDeviceGL;
+    wgpu::Device mSecondDevice;
 };
 
 // A small fixture used to initialize default data for the GLTexture validation tests.
@@ -248,9 +255,7 @@ class GLTextureUsageTests : public GLTextureTestBase {
                      GLenum glType,
                      void* data,
                      size_t dataSize) {
-        native::opengl::Device* openglDevice =
-            native::opengl::ToBackend(native::FromAPI(device.Get()));
-        const native::opengl::OpenGLFunctions& gl = openglDevice->GetGL();
+        const native::opengl::OpenGLFunctions& gl = mSecondDeviceGL->GetGL();
 
         // Get a texture view for the GL texture.
         wgpu::TextureDescriptor textureDescriptor;
