@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eda6b8a_12d1b069",
+        "filename": "tools/src/cmd/gen/common/cmds.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-11T21:42:49Z",
+      "side": 1,
+      "message": "Nit: IIUC this is no longer specific to the `cts` tool? (same above)",
+      "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
