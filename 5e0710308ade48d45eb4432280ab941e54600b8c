@@ -39,6 +39,30 @@
       },
       "revId": "5e0710308ade48d45eb4432280ab941e54600b8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e308e4_db17555c",
+        "filename": "src/tint/lang/core/ir/transform/multiplanar_external_texture.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-11T10:47:14Z",
+      "side": 1,
+      "message": "Done in followup",
+      "parentUuid": "0b8478d0_2dac77dc",
+      "range": {
+        "startLine": 352,
+        "startChar": 30,
+        "endLine": 352,
+        "endChar": 36
+      },
+      "revId": "5e0710308ade48d45eb4432280ab941e54600b8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
