@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "553a4ae8_422fbb03",
+        "filename": "src/tint/cmd/common/helper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-11T21:54:10Z",
+      "side": 0,
+      "message": "I\u0027m not sure about this for the `cmd` executables. I consider the Tint exe to be an example of a use of the Tint public API. It shouldn\u0027t need to do anything that requires poking directly behind the public API, and we sometimes point external users to it as an example of how to use Tint as a library.\n\nIf this is solely to help the build generator, then maybe this is an argument for not using the build generator for the cmd executables and just using handwritten build files instead. They have few source files, shouldn\u0027t change often, and should just be able to link against a single `libtint` (when we eventually get there).",
+      "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
