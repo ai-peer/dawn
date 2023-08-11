@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d2a61f_117779df",
+        "filename": "src/dawn/native/SharedFence.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-11T08:47:29Z",
+      "side": 1,
+      "message": "I feel like my wording was a bit poor, what I meant is that I have a very tiny unease about this, not a big one, and if we can\u0027t fix this nicely / easily it would definitely be fine to keep the code as is.\n\nThat approach would be pretty interesting, it would combine the UnpackChain into also code that handles the validation of sType etc. Loko also said he was looking at the ChainUtils issue, so can you make sure to synchronize with him?",
+      "parentUuid": "5a823d6e_80531e2a",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5238ec60_ba63862c",
