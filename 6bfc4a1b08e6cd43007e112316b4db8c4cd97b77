@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07937519_27c223e9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-11T12:54:13Z",
+      "side": 1,
+      "message": "Lgtm",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "106b18de_1c56d2db",
@@ -78,6 +95,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "84d29c21_46cb7695",
+        "filename": "src/dawn/node/cts.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-11T12:54:13Z",
+      "side": 1,
+      "message": "Is it commonplace to have native modules accompanied by JS stubs like this?",
+      "parentUuid": "e3aa0f75_60037ec1",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c3f360c_70ce3033",
         "filename": "src/dawn/node/cts.js",
         "patchSetId": 2
@@ -107,6 +142,24 @@
       "side": 1,
       "message": "I don\u0027t think that the npm module should have `create` as part of its exposed api. is there a particular concern you have about the entrypoint files? Also, i don\u0027t think the globals injection is something a single entrypoint can handle. DAWN_FLAGS isn\u0027t needed, i just thought it would be nice for debugging. it isn\u0027t a security issue at least, something with env access can do a lot more damage than messing with dawn.",
       "parentUuid": "2c3f360c_70ce3033",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b63e976_5f7d0202",
+        "filename": "src/dawn/node/cts.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-11T12:54:13Z",
+      "side": 1,
+      "message": "Sounds good for the DAWN_FLAGS.\n\nJust have concerns about the entrypoint files because they make deployment slightly more complex I\u0027d imagine, and I don\u0027t know if it is a standard practice.",
+      "parentUuid": "029092fc_45f46119",
       "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -148,6 +201,30 @@
       "side": 1,
       "message": "i can call it something else but are any of the things here not specified to be globals? in my mind it still conceptually represents that, but we\u0027re just never actually attaching them in the npm case.",
       "parentUuid": "3e580f11_db63053c",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2989a9c4_fb688e9e",
+        "filename": "src/dawn/node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-11T12:54:13Z",
+      "side": 1,
+      "message": "No preference here.",
+      "parentUuid": "56692df7_aae79072",
       "range": {
         "startLine": 58,
         "startChar": 7,
