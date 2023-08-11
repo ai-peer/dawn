@@ -22,6 +22,30 @@
       },
       "revId": "c815aa05e0677335cdea6c91ed2d725c50769779",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3b08e90_b9980c3b",
+        "filename": "tools/src/container/map.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T23:52:38Z",
+      "side": 1,
+      "message": "Good catch. Added a second map lookup under write lock.",
+      "parentUuid": "9488da64_5eb4bc35",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 9
+      },
+      "revId": "c815aa05e0677335cdea6c91ed2d725c50769779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
