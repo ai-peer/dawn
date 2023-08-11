@@ -1,0 +1,222 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11fac220_de5a5878",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "Thanks for all the changes. Looking good, a few more suggestions.",
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bbdfc86e_1a87d465",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "nit: global",
+      "range": {
+        "startLine": 62,
+        "startChar": 23,
+        "endLine": 62,
+        "endChar": 28
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1cd425b_21c81131",
+        "filename": "src/tint/lang/glsl/writer/output.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "nit:global",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 28
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7041e006_2d7bbb89",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "Comment looks like it needs fixing.",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 29
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3d5e944_550cddb5",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "I don\u0027t quite understand this error message. Suggest removing the check or reducing to `TINT_ASSERT_OR_RETURN(texture_sem, SkipTransform);`.",
+      "range": {
+        "startLine": 173,
+        "startChar": 47,
+        "endLine": 173,
+        "endChar": 72
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "139fcdbb_31adbea7",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "Suggest moving to a static method to reduce the length of this function",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 29
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc3e09f3_738422f0",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "Suggest moving to a method to improve readability.",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 33
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d632e3f_933ce753",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "Suggest using\n\n```\ntint::Switch(texture_sem,\n  [\u0026](const sem::GlobalVariable* global) { /* code above */ },\n  [\u0026](const sem::Parameter* param) { /* this block */ },\n  [\u0026](Default) { TINT_ICE() \u003c\u003c \"unexpected texture root identifier\"; },\n );\n```\n\nYou can use `param` to simplify this block",
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf435dc4_2e895344",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "What if `param_to_info` already has an entry for `p` ?\n\nIt seems like you\u0027d then have an `Add()` that wouldn\u0027t do anything, `new_param` would be detached from the AST, which would cause an ICE in the resolver. I think you need to use `GetOrCreate()` to create `new_param` and add it to `builtin_to_replace` if there\u0027s no existing entry in the map.\n\nPlease add tests.",
+      "range": {
+        "startLine": 222,
+        "startChar": 40,
+        "endLine": 223,
+        "endChar": 45
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd457325_bf45d244",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T17:33:25Z",
+      "side": 1,
+      "message": "Same thing here, as this is essentially the same code. Recommend consolidating with a method.",
+      "range": {
+        "startLine": 274,
+        "startChar": 40,
+        "endLine": 290,
+        "endChar": 41
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
