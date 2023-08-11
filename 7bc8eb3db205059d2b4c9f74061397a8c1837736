@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a823d6e_80531e2a",
+        "filename": "src/dawn/native/SharedFence.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T03:36:43Z",
+      "side": 1,
+      "message": "I\u0027m trying out an idea for this which I have been uploaded yet. but overall the idea is to have a helper function which lets you match on descriptor types, and then the match case dispatches to a function. then the back ends would effectively just implement things by calling the match helper which dispatches to the back end specific creation function. the helper would do all of validating that the s types are valid, and the required features to use those a s types are enabled.",
+      "parentUuid": "949b5847_ac7f0494",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5238ec60_ba63862c",
