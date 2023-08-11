@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9488da64_5eb4bc35",
+        "filename": "tools/src/container/map.go",
+        "patchSetId": 5
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-11T21:38:49Z",
+      "side": 1,
+      "message": "IIUC two threads could concurrently enter this `if` for the same key, and then sequentially both call `create()` and set the value. Is that the expected behaviour here (i.e. `create()` needs to support being called multiple times for the same key)?",
+      "range": {
+        "startLine": 82,
+        "startChar": 0,
+        "endLine": 85,
+        "endChar": 9
+      },
+      "revId": "c815aa05e0677335cdea6c91ed2d725c50769779",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
