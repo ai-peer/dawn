@@ -33,6 +33,24 @@
       "message": "When would these be used on more than one thread at a time? They are only used on submit so shouldn\u0027t need any additional synchronization.",
       "revId": "9a24e1051d6cd13b938e6040e539e4e48040e4bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3beaef3_c20b1246",
+        "filename": "src/dawn/native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-11T22:17:06Z",
+      "side": 1,
+      "message": "Sorry for the delay! It\u0027s true that right now these are always safe given that they are only used on submit which is why I got a bit confused. I chatted with Austin though, and I think that while these allocators don\u0027t need the lock right now, in a multi-queue implementation they will (assuming that they continue to live on the device and not on the queue).\n\nMaking them safe with the lock also makes it a lot easier to reason about what should and shouldn\u0027t be protected as a whole. Otherwise we would need to specifically document each member and somehow audit their usage stack.",
+      "parentUuid": "dd29ee3c_bffee139",
+      "revId": "9a24e1051d6cd13b938e6040e539e4e48040e4bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
