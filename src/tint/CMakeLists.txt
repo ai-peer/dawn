@@ -80,6 +80,8 @@ endif()
 
 list(APPEND TINT_LIB_SRCS
   ../../include/tint/tint.h
+  api/tint.cc
+  api/tint.h
   lang/wgsl/ast/clone_context.cc
   lang/wgsl/ast/clone_context.h
   lang/core/binary_op.cc
@@ -534,7 +536,6 @@ list(APPEND TINT_LIB_SRCS
   lang/wgsl/resolver/uniformity.h
   lang/wgsl/resolver/validator.cc
   lang/wgsl/resolver/validator.h
-  tint.cc
   utils/cli/cli.cc
   utils/cli/cli.h
   utils/containers/bitset.h
