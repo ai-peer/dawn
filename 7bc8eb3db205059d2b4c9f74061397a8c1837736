@@ -297,6 +297,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9c7ef21f_c2522cec",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T22:01:02Z",
+      "side": 1,
+      "message": "well... we still want something about the chained structs though right?\n\nbut yea maybe we don\u0027t need to validate if the obj is an error or not",
+      "parentUuid": "03d061ec_74b20af1",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dda3dfab_1e7cd869",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -502,6 +520,24 @@
       "side": 1,
       "message": "My understanding is that the fence should be gathered in `AcquireBeginFences` and `PopAccessFences` in this case, but that seems to not be the case. So at the moment I believe that:\n\n```\nt \u003d stm.CreateTexture()\nstm.BeginAccess(texture, [fence1])\nstm.BeginAccess(texture, [fence2])\nfences \u003d stm.EndAccess(texture);\n\n// My understanding is that fences \u003d\u003d [fence2] and not [fence1, fence2] which we want.\n```\n\nWhat do you think of changing the data structure to an unordered_map\u003cRef\u003cTexture\u003e, vector\u003cFences\u003e\u003e? It would make it easy if the texture is from this STM, and would simplify the fence tracking logic a bunch.",
       "parentUuid": "0cf95ba3_bb3036e5",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b833e7d_a3f916ba",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-11T22:01:02Z",
+      "side": 1,
+      "message": "my goal was actually the following:\n\n```\nt \u003d stm.CreateTexture()\nstm.BeginAccess(texture, [fence1])\nstm.BeginAccess(texture, [fence2])\noutfences1 \u003d stm.EndAccess(texture); // [fence2]\noutfences2 \u003d stm.EndAccess(texture); // [fence1]\n```\n\nI feel like it\u0027s better this way. In your example, the first access is valid, and the second access is invalid.\n\nWhen you use the texture, do we wait on fence2 regardless of whether or not the access is valid? or does it only wait on fence1. If the former, then EndAccess would just return a new fence3. If the latter, then it would return [fence2, fence3] - the error access\u0027es fence is forwarded.\n\nbut IDK if you actually want to forward the error access wait here. It was an error after all.\n\nFurther, the nested access is probably a programmer error, but if the programmer still has balanced scopes, their valid access may be unexpected.\n\n```\nt \u003d stm.CreateTexture()\nstm.BeginAccess(texture, [fence1]) // valid!\nstm.BeginAccess(texture, [fence2]) // invalid!\n\n// use the texture\n\nfences \u003d stm.EndAccess(texture); // end the invalid access - get all the fences\n\nfences2 \u003d stm.EndAccess(texture);  // end the valid access, but the list of fences is actually empty! they were all returned earlier.\n```",
+      "parentUuid": "bdeb0873_6be7e6b5",
       "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
