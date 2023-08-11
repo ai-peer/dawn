@@ -18,6 +18,7 @@
 {% set native_dir = impl_dir + namespace_name.Dirs() %}
 #include "{{native_dir}}/ChainUtils_autogen.h"
 
+#include <tuple>
 #include <unordered_set>
 
 namespace {{native_namespace}} {
@@ -74,5 +75,46 @@ MaybeError ValidateSTypes(const ChainedStructOut* chain,
     DAWN_INVALID_IF(!allSTypes.empty(), "Unsupported sType %s.", *allSTypes.begin());
     return {};
 }
+
+#ifdef __GNUC__
+// Disable the following error because the generated code for currently unextended structs will
+// generate a loop that immediately just returns the validation error.
+// error: loop will run at most once (loop increment never executed)
+#pragma GCC diagnostic ignored "-Wunreachable-code-loop-increment"
+#endif
+
+//
+// Unpacked chain helpers.
+//
+{% for type in by_category["structure"] %}
+    {% if type.extensible == "in" %}
+        {% set unpackedChain = "Unpacked" + as_cppType(type.name) + "Chain" %}
+        ResultOrError<{{unpackedChain}}> ValidateAndUnpackChain(const {{as_cppType(type.name)}}* chain) {
+            {% for extension in type.extensions %}
+                const {{as_cppType(extension.name)}}* {{as_varName(extension.name)}} = nullptr;
+            {% endfor %}
+            for (const ChainedStruct* next = chain->nextInChain; next != nullptr; next = next->nextInChain) {
+                switch (next->sType) {
+                    {% for extension in type.extensions %}
+                        case STypeFor<{{as_cppType(extension.name)}}>:
+                            {{as_varName(extension.name)}} = static_cast<const {{as_cppType(extension.name)}}*>(next);
+                            break;
+                    {% endfor %}
+                    default:
+                      return DAWN_VALIDATION_ERROR(
+                          "Unexpected chained struct of type %s found on %s chain.",
+                          next->sType, "{{as_cppType(type.name)}}"
+                      );
+                }
+            }
+
+            return std::make_tuple(
+                {% for extension in type.extensions %}
+                    {{as_varName(extension.name)}}{{ "," if not loop.last else "" }}
+                {% endfor %}
+            );
+        }
+    {% endif %}
+{% endfor %}
 
 }  // namespace {{native_namespace}}
