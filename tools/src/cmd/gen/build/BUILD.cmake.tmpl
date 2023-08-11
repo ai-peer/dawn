@@ -1,0 +1,121 @@
+{{- Eval "Includes"         $}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "lib")}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "cmd")}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "test")}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "bench")}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a CMake target if it contains any files
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Includes"}}
+{{-   if $.Subdirectories}}
+{{-     range $subdir := $.Subdirectories }}
+include({{$subdir.Path}}/BUILD.cmake)
+{{-     end }}
+{{/*   newline */}}
+{{-   end }}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a CMake target if it contains any files
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "TargetIfNotEmpty"}}
+{{-   if $}}
+{{-     if len $.SourceFiles}}{{Eval "Target" $}}{{end}}
+{{-   end}}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a CMake target
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Target"}}
+{{-   if $.Condition}}
+if({{Eval "Expression" $.Condition}})
+{{-   end}}
+tint_add_target("{{$.Name}}"
+{{- /* Emit unconditional files */}}
+{{-   $UnconditionalSourceFiles := $.UnconditionalSourceFiles}}
+{{-   if $UnconditionalSourceFiles }}
+{{-     range $File := $UnconditionalSourceFiles}}
+  {{$File.Path}}
+{{-     end}}
+{{-   end}}
+)
+
+{{- /* Emit conditional files */}}
+{{-   range $File := $.SourceFiles}}
+{{-     if ne $File.Condition ""}}
+{{/*   newline */}}
+if ({{Eval "Expression" $File.Condition}})
+  tint_target_add_sources("{{$.Name}}" "{{$File.Path}}")
+endif()
+{{-     end}}
+{{-   end}}
+
+{{- /* Emit unconditional dependencies */}}
+{{-   $UnconditionalDeps    := $.UnconditionalDependencies }}
+{{-   if $UnconditionalDeps}}
+{{/*   newline */}}
+tint_target_add_dependencies("{{$.Name}}"
+{{-     range $Dep := $UnconditionalDeps}}
+  "{{$Dep.Name}}"
+{{-     end}}
+)
+{{-   end}}
+
+{{- /* Emit unconditional external dependencies */}}
+{{-   $UnconditionalExtDeps := $.UnconditionalExternalDependencies }}
+{{-   if $UnconditionalExtDeps}}
+{{/*   newline */}}
+tint_target_add_external_dependencies("{{$.Name}}"
+{{-     range $Dep := $UnconditionalExtDeps}}
+  "{{$Dep.Name}}"
+{{-     end}}
+)
+{{-   end}}
+
+{{- /* Emit conditional dependencies */}}
+{{-   range $Dep := $.ConditionalDependencies}}
+{{/*   newline */}}
+if ({{Eval "Expression" $Dep.Condition}})
+  tint_target_add_dependencies("{{$.Name}}" "{{$Dep.Name}}")
+endif()
+{{-   end}}
+
+{{- /* Emit conditional external dependencies */}}
+{{-   range $Dep := $.ConditionalExternalDependencies}}
+{{/*  newline */}}
+if ({{Eval "Expression" $Dep.Condition}})
+  tint_target_add_external_dependencies("{{$.Name}}" "{{$Dep.Name}}")
+endif()
+{{-   end}}
+{{-   if $.Condition}}
+endif({{Eval "Expression" $.Condition}})
+{{-   end}}
+{{/*   newline */}}
+{{- end}}
+
+
+{{- /*
+--------------------------------------------------------------------------------
+-- Emits a CMake conditional expression
+--------------------------------------------------------------------------------
+*/ -}}
+{{- define "Expression"}}
+{{-   $expr := $ }}
+{{-   $expr = Replace $expr "!"  "NOT "}}
+{{-   $expr = Replace $expr "&&" " AND "}}
+{{-   $expr = Replace $expr "||" " OR "}}
+{{-   ToUpper $expr}}
+{{- end}}
+
+{{- /* eat newlines */ -}}
