@@ -16,6 +16,24 @@
       "message": "s/Readr/Read/",
       "revId": "9e84ee218fcca2f6b356f855d8a7266a2f01a941",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eef0d8c_635c229a",
+        "filename": "src/tint/lang/spirv/reader/ast_parser/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 5,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-11T13:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d19cb65_b0da2d38",
+      "revId": "9e84ee218fcca2f6b356f855d8a7266a2f01a941",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
