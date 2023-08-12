@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb44b314_fb91a665",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-12T18:25:35Z",
+      "side": 1,
+      "message": "Yea, I am working on a follow up to incorporate them!",
+      "parentUuid": "d481bb07_1cf165d2",
+      "revId": "34cd2751ae4ed157816a8d3460be9f881307b06d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8a92bad_e6ffb0ae",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cdc9fbf_8f45d32d",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-12T18:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8a92bad_e6ffb0ae",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 95
+      },
+      "revId": "34cd2751ae4ed157816a8d3460be9f881307b06d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29acad4e_7197653c",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-08-12T02:07:48Z",
       "side": 1,
       "message": "validate it is null before assigning? if it is non-null, it means you have a duplicate stype",
+      "range": {
+        "startLine": 107,
+        "startChar": 31,
+        "endLine": 108,
+        "endChar": 38
+      },
+      "revId": "34cd2751ae4ed157816a8d3460be9f881307b06d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba958771_549a83bd",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-12T18:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29acad4e_7197653c",
       "range": {
         "startLine": 107,
         "startChar": 31,
