@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5d05801_98e85250",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "602f4c30_52fb3680",
+      "range": {
+        "startLine": 117,
+        "startChar": 30,
+        "endLine": 117,
+        "endChar": 31
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c53815e3_a55cf7bc",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-10T01:07:22Z",
       "side": 1,
       "message": "u-nit. exactly matches (remove the exactly at the end)",
+      "range": {
+        "startLine": 128,
+        "startChar": 33,
+        "endLine": 128,
+        "endChar": 45
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea39e5a0_9354ce18",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c53815e3_a55cf7bc",
       "range": {
         "startLine": 128,
         "startChar": 33,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b60f67_e32ef3f2",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32c2016f_48c74522",
+      "range": {
+        "startLine": 136,
+        "startChar": 84,
+        "endLine": 136,
+        "endChar": 91
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b52ab37c_dc41b5be",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-08-10T01:07:22Z",
       "side": 1,
       "message": "u-nit. Remove \u0027that\u0027",
+      "range": {
+        "startLine": 141,
+        "startChar": 16,
+        "endLine": 141,
+        "endChar": 20
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30b5a307_c7b7676d",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b52ab37c_dc41b5be",
       "range": {
         "startLine": 141,
         "startChar": 16,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2c0bb3c_647acab5",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 449,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "great point; done",
+      "parentUuid": "7113aa50_b3e72e40",
+      "range": {
+        "startLine": 435,
+        "startChar": 4,
+        "endLine": 449,
+        "endChar": 5
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "106a4eab_6d63726e",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-08-10T01:07:22Z",
       "side": 1,
       "message": "Hmm yea maybe this could be a reference and then you could leak just 1 Backend instead of potentially 2 right now?",
+      "range": {
+        "startLine": 65,
+        "startChar": 16,
+        "endLine": 65,
+        "endChar": 46
+      },
+      "revId": "5e9a2261e534172373a08f147c8583e291c4824a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8749d1d8_8b2348b3",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "106a4eab_6d63726e",
       "range": {
         "startLine": 65,
         "startChar": 16,

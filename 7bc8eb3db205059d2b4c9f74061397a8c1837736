@@ -544,6 +544,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5167fa0_d07b270b",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "I realized that you could have a logical programmer error in two different ways. \nIt\u0027s more clear if I write it with two different variable names aliasing the same object.\n\n```\nwgpu::Texture texture1 \u003d ...;\nwgpu::Texture texture2 \u003d texture1;\n\n// Nested access\n\nstm.BeginAccess(texture1, [fence1]); // valid\nstm.BeginAccess(texture2, [fence2]); // invalid\nstm.EndAccess(texture2); // end invalid\nstm.EndAccess(texture1); // end valid\n\n// Overlapping access\n\nstm.BeginAccess(texture1, [fence1]); // valid\nstm.BeginAccess(texture2, [fence2]); // invalid\nstm.EndAccess(texture1); // end **invalid**\nstm.EndAccess(texture2); // end **valid**\n\n```\n\nThe problem with the second example is that logically, the **first** EndAccess should be the valid one and the second EndAccess should be invalid. \n\nOne way we could restructure the API to capture both of these possibilities as a programmer might expect is to return a unique access token. You pass that access token back to EndAccess (instead of the texture) so it\u0027s clear which access you want to be ending.\n\n```\nauto accessToken1 \u003d stm.BeginAccess(texture1, [fence1]); // valid\nauto accessToken2 \u003d stm.BeginAccess(texture2, [fence2]); // invalid\nstm.EndAccess(accessToken1); // end valid\nstm.EndAccess(accessToken2); // end invalid\n```\n\nThis would be a lot more clear; but is it really worth it just to make the different error situations distinguishable?",
+      "parentUuid": "7b833e7d_a3f916ba",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "de3dbb1a_b2cb5686",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 18
@@ -1069,6 +1087,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab97d148_ea847410",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "resolving",
+      "parentUuid": "dce1b941_4c7bcd64",
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99d9c8f7_990bbd52",
@@ -1127,6 +1163,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f21a2d4_4f6c4b0d",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 629,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "78c48719_6cb9c6fc",
+      "range": {
+        "startLine": 625,
+        "startChar": 0,
+        "endLine": 629,
+        "endChar": 0
+      },
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7b45e952_39c6a0ee",
@@ -1164,6 +1224,30 @@
       "side": 1,
       "message": "Hmm, yea I think the alternative is better. Mainly because `GetInstance` is used twice below so we would be leaking 2, whereas a single function scope static doesn\u0027t feel as bad?",
       "parentUuid": "7b45e952_39c6a0ee",
+      "range": {
+        "startLine": 35,
+        "startChar": 4,
+        "endLine": 38,
+        "endChar": 5
+      },
+      "revId": "7bc8eb3db205059d2b4c9f74061397a8c1837736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "075bf7f8_2121e13f",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 18
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:35:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "968c3e67_8d5cad6f",
       "range": {
         "startLine": 35,
         "startChar": 4,
