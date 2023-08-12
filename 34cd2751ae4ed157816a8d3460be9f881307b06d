@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d481bb07_1cf165d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:07:48Z",
+      "side": 1,
+      "message": "LGTM though it\u0027s hard to say how helpful it will be without looking at the usages of it. We can always amend as needed later though.",
+      "revId": "34cd2751ae4ed157816a8d3460be9f881307b06d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8a92bad_e6ffb0ae",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:07:48Z",
+      "side": 1,
+      "message": "we can maybe make the tuple beforehand, and assign into it.\n\n```\nstd::get\u003cconst {{as_cppType(extension.name)}}*\u003e(tup) \u003d static_cast\u003cconst {{as_cppType(extension.name)}}*\u003e(next);\n```",
+      "range": {
+        "startLine": 88,
+        "startChar": 0,
+        "endLine": 88,
+        "endChar": 95
+      },
+      "revId": "34cd2751ae4ed157816a8d3460be9f881307b06d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29acad4e_7197653c",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-12T02:07:48Z",
+      "side": 1,
+      "message": "validate it is null before assigning? if it is non-null, it means you have a duplicate stype",
+      "range": {
+        "startLine": 107,
+        "startChar": 31,
+        "endLine": 108,
+        "endChar": 38
+      },
+      "revId": "34cd2751ae4ed157816a8d3460be9f881307b06d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
