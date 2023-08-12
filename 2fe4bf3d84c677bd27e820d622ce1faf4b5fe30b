@@ -918,6 +918,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca3f5b76_ce0975f1",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 271,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5892e211_2a15b931",
+      "range": {
+        "startLine": 269,
+        "startChar": 0,
+        "endLine": 271,
+        "endChar": 27
+      },
+      "revId": "2fe4bf3d84c677bd27e820d622ce1faf4b5fe30b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c0210c4_be6b7134",

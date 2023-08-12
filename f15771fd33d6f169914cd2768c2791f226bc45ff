@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f08918d_cf10795c",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bbdfc86e_1a87d465",
+      "range": {
+        "startLine": 62,
+        "startChar": 23,
+        "endLine": 62,
+        "endChar": 28
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1cd425b_21c81131",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-11T17:33:25Z",
       "side": 1,
       "message": "nit:global",
+      "range": {
+        "startLine": 47,
+        "startChar": 23,
+        "endLine": 47,
+        "endChar": 28
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da0758f1_9f60236c",
+        "filename": "src/tint/lang/glsl/writer/output.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1cd425b_21c81131",
       "range": {
         "startLine": 47,
         "startChar": 23,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82c0eaee_1f09c5f8",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7041e006_2d7bbb89",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 29
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f3d5e944_550cddb5",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-08-11T17:33:25Z",
       "side": 1,
       "message": "I don\u0027t quite understand this error message. Suggest removing the check or reducing to `TINT_ASSERT_OR_RETURN(texture_sem, SkipTransform);`.",
+      "range": {
+        "startLine": 173,
+        "startChar": 47,
+        "endLine": 173,
+        "endChar": 72
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab224b6d_ec8510d1",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f3d5e944_550cddb5",
       "range": {
         "startLine": 173,
         "startChar": 47,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b2562bd_3f9850f4",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "139fcdbb_31adbea7",
+      "range": {
+        "startLine": 177,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 29
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc3e09f3_738422f0",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-08-11T17:33:25Z",
       "side": 1,
       "message": "Suggest moving to a method to improve readability.",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 33
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f308e805_327dcd2a",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cc3e09f3_738422f0",
       "range": {
         "startLine": 195,
         "startChar": 0,
@@ -173,6 +317,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc93e66f_ba4659f7",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d632e3f_933ce753",
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf435dc4_2e895344",
@@ -196,6 +358,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26ab916f_10fcc305",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done. Thanks for catching this.",
+      "parentUuid": "bf435dc4_2e895344",
+      "range": {
+        "startLine": 222,
+        "startChar": 40,
+        "endLine": 223,
+        "endChar": 45
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd457325_bf45d244",
@@ -209,6 +395,30 @@
       "writtenOn": "2023-08-11T17:33:25Z",
       "side": 1,
       "message": "Same thing here, as this is essentially the same code. Recommend consolidating with a method.",
+      "range": {
+        "startLine": 274,
+        "startChar": 40,
+        "endLine": 290,
+        "endChar": 41
+      },
+      "revId": "f15771fd33d6f169914cd2768c2791f226bc45ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2997d26_0ae6f4ec",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-12T01:04:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd457325_bf45d244",
       "range": {
         "startLine": 274,
         "startChar": 40,
