@@ -34,6 +34,24 @@
       "parentUuid": "553a4ae8_422fbb03",
       "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72d5530b_c9774913",
+        "filename": "src/tint/cmd/common/helper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-13T11:41:25Z",
+      "side": 0,
+      "message": "I\u0027ve spent a bunch of time thinking about this - and I\u0027m still unconvinced that `tint/tint.h` is really giving us major benefits **today**.\n\nFirst of all, we need to consider who is using the public API. I think it\u0027s fairly safe to assume that the intended user of `tint/tint.h` is a client that wants to translate shaders from `A` to `B`. Below, I\u0027ll assume that\u0027s true - but it\u0027s also worth considering other users, like language servers, linters, formatters, etc. I think they fall out of the scope of what we\u0027re discussing, but do provide another counter-example of one-header-to-include-them-all.\n\nIn my opinion, a good public API typically provides:\n1. A stable API. You consider how changes to the public API will affect the users of your library.\n2. A constrained API. You can decorate the types, methods and functions that are to be exported, when building as a shared library.\n3. Additional public-facing documentation. Limits the details to just those that need to be known by the developer that doesn\u0027t know or care about the inner-workings of the project.\n\nIf you really embrace 1 and 2, you can use SemVer. Then and only then would I encourage package distributions to bundle a libtint library.\n\nToday `tint/tint.h` directly includes a bunch of bespoke AST transforms, the type manager, a handful of utils and each of the readers / writers guarded by `TINT_BUILD_*`. Each of those includes transitively include most of tint. You `#include \"tint/tint.h\"` and you\u0027re effectively getting everything, including all the stuff that will change and break you.\n\n* We\u0027ve put almost zero effort into `tint/tint.h` meeting 1. For example, having `tint.h` include the utils stuff is particularly iffy (e.g. `Vector` and `Hashmap` are never going to be final-API).\n* The code reshuffling efforts have improved 2, as the root level reader / writer interfaces _could_ be considered as reader / writer public-APIs, but we\u0027ve certainly not tried to make them stable (yet).\n* 3 has actually always been pretty good, in part because of doxygen. We haven\u0027t made a lot of effort to ensure public API can be understood by a client developer, but [it\u0027s something I\u0027ve started considering in reviews](https://dawn-review.googlesource.com/c/dawn/+/145621/comment/02a9e3fb_a959355e/).\n\nIf we actually want to address tint:342, then I think `tint.h` should only expose built-from-the-ground-up-public API. This would entirely abstract away the readers, writers, `Program`, ast, sem, etc. It would only use `std::vector`, `std::unordered_map`, etc. It would likely absorb `Inspector`.\n\nUntil we have that, I still think that IWYU is probably preferable over a master tint include. With the work that I\u0027ve been doing to modularize Tint, you really can pick the targets you want, and include the appropriate headers. If you don\u0027t use a bit of tint, then you don\u0027t have to build it, link it, then strip it.\n\n\nOne other thing I realised with this is that once everything has moved over to the IR, the `TINT_BUILD_*` preprocessor macros are not actually needed outside of the `tint` executable. They\u0027re flags that pick the targets that a client wants to build. This would allow us to change the flags without a full rebuild of every Tint source file. That would certainly speed up presubmit tests that check that stuff builds with various build permutations.",
+      "parentUuid": "92c9da9a_3e951d7c",
+      "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
