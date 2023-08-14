@@ -34,6 +34,295 @@
       "parentUuid": "0b95e6d7_009a18df",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aae42ff_3f9f0cec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "This is great work.\n\nApologies for not chiming in sooner. If any of my nits were already discussed and decided, feel free to ignore them.\n\nMy one conern is the complexity of the transform. Perhaps this is unavoidable, but I\u0027ll take another look at it to see if any simplifications suggest themselves.",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07f8c359_1277ddd8",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Naming nit: \"DataEntry\" doesn\u0027t convey much information. Perhaps \"FieldAndOffset\"?",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dd46796_a1ba337c",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Naming nit: \"DataInfo\" is also content-free. \"BindingPointToFieldAndOffset\" or \"FieldAndOffsetMap\" or something else? (I\u0027m not too happy with either of my suggestions, TBH.)",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dafa3582_46a574cf",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: would it work to construct the Config inline, on the stack? I think that\u0027s how it\u0027s done for other transforms. I.e.,\n\n    if (options.texture_builtins_from_uniform) {\n        manager.Add\u003cast::transform::TextureBuiltinsFromUniform\u003e();\n        data.Add\u003cast::transform::TextureBuiltinsFromUniform::Config\u003e(\n            options.texture_builtins_from_uniform-\u003eubo_binding);\n    }",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "894a022f_7c6d224c",
+        "filename": "src/tint/lang/glsl/writer/output.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: \"UBO of buffer\" seems a bit awkward. What is this trying to convey?",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aac06c05_30569c14",
+        "filename": "src/tint/lang/glsl/writer/output.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: \"binding point\" -\u003e \"binding points\"",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff48ccb5_12efdfa5",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: \"GLSL ES has no native...\" or \"ESSL has no native...\".",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5063df2_e6fbe27e",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Does this case have test coverage?",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1d4d7b23_b301e909",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Does this case have test coverage?",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67c4f835_159ac285",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "If this is commented-out code, please remove. (If it\u0027s meant to be a descriptive comment, I don\u0027t understand it. :) )",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc7434a5_e81df409",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit; \"param that needs\" -\u003e \"params that need\"",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82e10e9_1a23cbf6",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: \"make look for the param easier\" -\u003e \"make it easier to find the param\"",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3662816a_df85d334",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: \"that needs\" -\u003e \"that need\"",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0b0da17_389548b9",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: storing -\u003e store",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ae2cd12_bd32dfdd",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Ibid",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "632eb18c_45b2b928",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: \"uniform values or function parameters\"",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d29ff3d7_f1645f02",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-14T20:12:06Z",
+      "side": 1,
+      "message": "Nit: sentence fragment. I\u0027d join it up, something like \"from a uniform buffer, as those builtin functions are not available in GLSL ES\".",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
