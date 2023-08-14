@@ -16,6 +16,24 @@
       "message": "+2, but out of curiosity - what are you doing that needs this? I admit I don\u0027t know why this is currently working without being emitted right now :)",
       "revId": "f851a5e0cdcbd88a35c96ec38dd282d5d1111685",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e27db551_267a6fe8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:22:11Z",
+      "side": 1,
+      "message": "Is it that you\u0027re applying default-hidden visibility, and we\u0027re currently default-exported?",
+      "parentUuid": "d7e76f98_63990b50",
+      "revId": "f851a5e0cdcbd88a35c96ec38dd282d5d1111685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
