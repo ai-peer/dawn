@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "988934e6_78a4267f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-14T17:45:01Z",
+      "side": 1,
+      "message": "LGTM too though not sure how convenient the tuples will be.",
+      "revId": "1f4da433adcfb69f4a749478efb02fc162d26c5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
