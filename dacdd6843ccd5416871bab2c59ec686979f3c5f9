@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4317e4b_3ee52c8b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T23:10:19Z",
+      "side": 1,
+      "message": "nit: not sure what this is supposed to link to.\nIf this is supposed to associate with a monorail bug, then the syntax is:\n\n`Bug: tint:1974`\n`Bug: chromium:1974`\n\nand so on. I don\u0027t think that `1974` applies to any known monorail tracker though.",
+      "range": {
+        "startLine": 10,
+        "startChar": 0,
+        "endLine": 10,
+        "endChar": 12
+      },
+      "revId": "dacdd6843ccd5416871bab2c59ec686979f3c5f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
