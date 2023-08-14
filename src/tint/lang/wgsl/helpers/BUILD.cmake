@@ -62,9 +62,8 @@ tint_target_add_dependencies("lang/wgsl/helpers:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/helpers:test" "lang/core/ir")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/helpers:test" "lang/wgsl/reader/program_to_ir")
-endif()
+  tint_target_add_dependencies("lang/wgsl/helpers:test"
+    "lang/core/ir"
+    "lang/wgsl/reader/program_to_ir"
+  )
+endif(TINT_BUILD_IR)

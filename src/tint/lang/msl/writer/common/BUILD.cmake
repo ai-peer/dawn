@@ -37,14 +37,17 @@ tint_target_add_dependencies("lang/msl/writer/common"
   "utils/strconv"
   "utils/text"
 )
-endif(TINT_BUILD_MSL_WRITER)
 
+endif(TINT_BUILD_MSL_WRITER)
 if(TINT_BUILD_MSL_WRITER)
 tint_add_target("lang/msl/writer/common:test"
   lang/msl/writer/common/printer_support_test.cc
 )
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("lang/msl/writer/common:test" "lang/msl/writer/common")
-endif()
+  tint_target_add_dependencies("lang/msl/writer/common:test"
+    "lang/msl/writer/common"
+  )
+endif(TINT_BUILD_MSL_WRITER)
+
 endif(TINT_BUILD_MSL_WRITER)

@@ -32,4 +32,5 @@ tint_target_add_dependencies("lang/hlsl/validate"
   "utils/file"
   "utils/text"
 )
+
 endif(TINT_BUILD_HLSL_WRITER)

@@ -31,4 +31,5 @@ tint_target_add_dependencies("lang/glsl/writer/common"
   "lang/core"
   "lang/wgsl/sem"
 )
+
 endif(TINT_BUILD_GLSL_WRITER)

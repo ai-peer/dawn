@@ -31,22 +31,28 @@ tint_add_target("utils/diagnostic"
   utils/diagnostic/source.h
 )
 
-if ((NOT IS_LINUX)  AND  (NOT IS_MAC)  AND  (NOT IS_WIN))
-  tint_target_add_sources("utils/diagnostic" "utils/diagnostic/printer_other.cc")
-endif()
-
-if (IS_LINUX  OR  IS_MAC)
-  tint_target_add_sources("utils/diagnostic" "utils/diagnostic/printer_posix.cc")
-endif()
-
-if (IS_WIN)
-  tint_target_add_sources("utils/diagnostic" "utils/diagnostic/printer_windows.cc")
-endif()
-
 tint_target_add_dependencies("utils/diagnostic"
   "utils/text"
   "utils/traits"
 )
+
+if ((NOT IS_LINUX)  AND  (NOT IS_MAC)  AND  (NOT IS_WIN))
+  tint_target_add_sources("utils/diagnostic"
+    "utils/diagnostic/printer_other.cc"
+  )
+endif((NOT IS_LINUX)  AND  (NOT IS_MAC)  AND  (NOT IS_WIN))
+
+if (IS_LINUX  OR  IS_MAC)
+  tint_target_add_sources("utils/diagnostic"
+    "utils/diagnostic/printer_posix.cc"
+  )
+endif(IS_LINUX  OR  IS_MAC)
+
+if (IS_WIN)
+  tint_target_add_sources("utils/diagnostic"
+    "utils/diagnostic/printer_windows.cc"
+  )
+endif(IS_WIN)
 
 tint_add_target("utils/diagnostic:test"
   utils/diagnostic/diagnostic_test.cc

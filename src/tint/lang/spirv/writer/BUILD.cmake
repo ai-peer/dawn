@@ -37,117 +37,36 @@ tint_target_add_dependencies("lang/spirv/writer"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer" "lang/core/ir/transform")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer" "lang/spirv/writer/ast_printer")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer" "lang/spirv/writer/common")
-endif()
-
-if (TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer" "lang/spirv/writer/printer")
-endif()
-
-if (TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer" "lang/spirv/writer/raise")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer" "lang/wgsl/reader/program_to_ir")
-endif()
+  tint_target_add_dependencies("lang/spirv/writer"
+    "lang/core/ir/transform"
+    "lang/wgsl/reader/program_to_ir"
+  )
+endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
-  tint_target_add_external_dependencies("lang/spirv/writer" "spirv-headers")
-endif()
+  tint_target_add_external_dependencies("lang/spirv/writer"
+    "spirv-headers"
+  )
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
+
+if (TINT_BUILD_SPV_WRITER)
+  tint_target_add_dependencies("lang/spirv/writer"
+    "lang/spirv/writer/ast_printer"
+    "lang/spirv/writer/common"
+  )
 endif(TINT_BUILD_SPV_WRITER)
 
+if (TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
+  tint_target_add_dependencies("lang/spirv/writer"
+    "lang/spirv/writer/printer"
+    "lang/spirv/writer/raise"
+  )
+endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
+
+endif(TINT_BUILD_SPV_WRITER)
 if(TINT_BUILD_SPV_WRITER)
 tint_add_target("lang/spirv/writer:test"
 )
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/access_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/atomic_builtin_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/binary_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/bitcast_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/builtin_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/constant_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/construct_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/convert_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/discard_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/function_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/if_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/let_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/loop_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/switch_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/swizzle_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/texture_builtin_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/type_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/unary_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/var_test.cc")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:test" "lang/spirv/writer/writer_test.cc")
-endif()
 
 tint_target_add_dependencies("lang/spirv/writer:test"
   "lang/core"
@@ -155,27 +74,58 @@ tint_target_add_dependencies("lang/spirv/writer:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer:test" "lang/core/ir")
-endif()
+  tint_target_add_sources("lang/spirv/writer:test"
+    "lang/spirv/writer/access_test.cc"
+    "lang/spirv/writer/atomic_builtin_test.cc"
+    "lang/spirv/writer/binary_test.cc"
+    "lang/spirv/writer/bitcast_test.cc"
+    "lang/spirv/writer/builtin_test.cc"
+    "lang/spirv/writer/constant_test.cc"
+    "lang/spirv/writer/construct_test.cc"
+    "lang/spirv/writer/convert_test.cc"
+    "lang/spirv/writer/discard_test.cc"
+    "lang/spirv/writer/function_test.cc"
+    "lang/spirv/writer/if_test.cc"
+    "lang/spirv/writer/let_test.cc"
+    "lang/spirv/writer/loop_test.cc"
+    "lang/spirv/writer/switch_test.cc"
+    "lang/spirv/writer/swizzle_test.cc"
+    "lang/spirv/writer/texture_builtin_test.cc"
+    "lang/spirv/writer/type_test.cc"
+    "lang/spirv/writer/unary_test.cc"
+    "lang/spirv/writer/var_test.cc"
+    "lang/spirv/writer/writer_test.cc"
+  )
+  tint_target_add_dependencies("lang/spirv/writer:test"
+    "lang/core/ir"
+  )
+endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer:test" "lang/spirv/writer/common:test")
-endif()
+  tint_target_add_dependencies("lang/spirv/writer:test"
+    "lang/spirv/writer/common:test"
+  )
 endif(TINT_BUILD_SPV_WRITER)
 
+endif(TINT_BUILD_SPV_WRITER)
 if(TINT_BUILD_SPV_WRITER)
 tint_add_target("lang/spirv/writer:bench"
 )
-
-if (TINT_BUILD_IR)
-  tint_target_add_sources("lang/spirv/writer:bench" "lang/spirv/writer/writer_bench.cc")
-endif()
 
 tint_target_add_dependencies("lang/spirv/writer:bench"
   "cmd/bench"
 )
 
+if (TINT_BUILD_IR)
+  tint_target_add_sources("lang/spirv/writer:bench"
+    "lang/spirv/writer/writer_bench.cc"
+  )
+endif(TINT_BUILD_IR)
+
 if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer:bench" "lang/spirv/writer")
-endif()
+  tint_target_add_dependencies("lang/spirv/writer:bench"
+    "lang/spirv/writer"
+  )
+endif(TINT_BUILD_SPV_WRITER)
+
 endif(TINT_BUILD_SPV_WRITER)

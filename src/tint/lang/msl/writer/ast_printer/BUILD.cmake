@@ -43,10 +43,12 @@ tint_target_add_dependencies("lang/msl/writer/ast_printer"
 )
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("lang/msl/writer/ast_printer" "lang/msl/writer/common")
-endif()
+  tint_target_add_dependencies("lang/msl/writer/ast_printer"
+    "lang/msl/writer/common"
+  )
 endif(TINT_BUILD_MSL_WRITER)
 
+endif(TINT_BUILD_MSL_WRITER)
 if(TINT_BUILD_MSL_WRITER)
 tint_add_target("lang/msl/writer/ast_printer:test"
   lang/msl/writer/ast_printer/array_accessor_test.cc
@@ -92,10 +94,10 @@ tint_target_add_dependencies("lang/msl/writer/ast_printer:test"
 )
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("lang/msl/writer/ast_printer:test" "lang/msl/writer")
-endif()
+  tint_target_add_dependencies("lang/msl/writer/ast_printer:test"
+    "lang/msl/writer"
+    "lang/msl/writer/ast_printer"
+  )
+endif(TINT_BUILD_MSL_WRITER)
 
-if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("lang/msl/writer/ast_printer:test" "lang/msl/writer/ast_printer")
-endif()
 endif(TINT_BUILD_MSL_WRITER)
