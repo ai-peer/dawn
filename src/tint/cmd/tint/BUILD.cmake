@@ -40,50 +40,48 @@ tint_target_add_dependencies("cmd/tint:cmd"
   "utils/text"
 )
 
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/core/ir")
-endif()
-
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/glsl/writer")
-endif()
+  tint_target_add_dependencies("cmd/tint:cmd"
+    "lang/glsl/writer"
+  )
+  tint_target_add_external_dependencies("cmd/tint:cmd"
+    "glslang"
+    "glslang-res-limits"
+  )
+endif(TINT_BUILD_GLSL_WRITER)
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/hlsl/validate")
-endif()
+  tint_target_add_dependencies("cmd/tint:cmd"
+    "lang/hlsl/validate"
+    "lang/hlsl/writer"
+  )
+endif(TINT_BUILD_HLSL_WRITER)
 
-if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/hlsl/writer")
-endif()
+if (TINT_BUILD_IR)
+  tint_target_add_dependencies("cmd/tint:cmd"
+    "lang/core/ir"
+    "lang/wgsl/reader/program_to_ir"
+  )
+endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/msl/validate")
-endif()
-
-if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/msl/writer")
-endif()
+  tint_target_add_dependencies("cmd/tint:cmd"
+    "lang/msl/validate"
+    "lang/msl/writer"
+  )
+endif(TINT_BUILD_MSL_WRITER)
 
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/spirv/reader")
-endif()
+  tint_target_add_dependencies("cmd/tint:cmd"
+    "lang/spirv/reader"
+  )
+  tint_target_add_external_dependencies("cmd/tint:cmd"
+    "spirv-tools"
+  )
+endif(TINT_BUILD_SPV_READER)
 
 if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/spirv/writer")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/tint:cmd" "lang/wgsl/reader/program_to_ir")
-endif()
-
-if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_external_dependencies("cmd/tint:cmd" "glslang")
-endif()
-
-if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_external_dependencies("cmd/tint:cmd" "glslang-res-limits")
-endif()
-
-if (TINT_BUILD_SPV_READER)
-  tint_target_add_external_dependencies("cmd/tint:cmd" "spirv-tools")
-endif()
+  tint_target_add_dependencies("cmd/tint:cmd"
+    "lang/spirv/writer"
+  )
+endif(TINT_BUILD_SPV_WRITER)

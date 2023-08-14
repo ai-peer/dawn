@@ -38,10 +38,12 @@ tint_target_add_dependencies("lang/hlsl/writer"
 )
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("lang/hlsl/writer" "lang/hlsl/writer/ast_printer")
-endif()
+  tint_target_add_dependencies("lang/hlsl/writer"
+    "lang/hlsl/writer/ast_printer"
+  )
 endif(TINT_BUILD_HLSL_WRITER)
 
+endif(TINT_BUILD_HLSL_WRITER)
 if(TINT_BUILD_HLSL_WRITER)
 tint_add_target("lang/hlsl/writer:bench"
   lang/hlsl/writer/writer_bench.cc
@@ -52,6 +54,9 @@ tint_target_add_dependencies("lang/hlsl/writer:bench"
 )
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("lang/hlsl/writer:bench" "lang/hlsl/writer")
-endif()
+  tint_target_add_dependencies("lang/hlsl/writer:bench"
+    "lang/hlsl/writer"
+  )
+endif(TINT_BUILD_HLSL_WRITER)
+
 endif(TINT_BUILD_HLSL_WRITER)

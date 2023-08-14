@@ -39,22 +39,28 @@ tint_target_add_dependencies("lang/spirv/writer/printer"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer/printer" "lang/core/ir")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer/printer" "lang/spirv/writer/ast_printer")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer/printer" "lang/spirv/writer/common")
-endif()
-
-if (TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer/printer" "lang/spirv/writer/raise")
-endif()
+  tint_target_add_dependencies("lang/spirv/writer/printer"
+    "lang/core/ir"
+  )
+endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
-  tint_target_add_external_dependencies("lang/spirv/writer/printer" "spirv-headers")
-endif()
+  tint_target_add_external_dependencies("lang/spirv/writer/printer"
+    "spirv-headers"
+  )
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
+
+if (TINT_BUILD_SPV_WRITER)
+  tint_target_add_dependencies("lang/spirv/writer/printer"
+    "lang/spirv/writer/ast_printer"
+    "lang/spirv/writer/common"
+  )
+endif(TINT_BUILD_SPV_WRITER)
+
+if (TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
+  tint_target_add_dependencies("lang/spirv/writer/printer"
+    "lang/spirv/writer/raise"
+  )
+endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
+
 endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)

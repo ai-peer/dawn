@@ -24,22 +24,28 @@ tint_add_target("utils/command"
   utils/command/command.h
 )
 
-if ((NOT IS_LINUX)  AND  (NOT IS_MAC)  AND  (NOT IS_WIN))
-  tint_target_add_sources("utils/command" "utils/command/command_other.cc")
-endif()
-
-if (IS_LINUX  OR  IS_MAC)
-  tint_target_add_sources("utils/command" "utils/command/command_posix.cc")
-endif()
-
-if (IS_WIN)
-  tint_target_add_sources("utils/command" "utils/command/command_windows.cc")
-endif()
-
 tint_target_add_dependencies("utils/command"
   "utils/macros"
   "utils/text"
 )
+
+if ((NOT IS_LINUX)  AND  (NOT IS_MAC)  AND  (NOT IS_WIN))
+  tint_target_add_sources("utils/command"
+    "utils/command/command_other.cc"
+  )
+endif((NOT IS_LINUX)  AND  (NOT IS_MAC)  AND  (NOT IS_WIN))
+
+if (IS_LINUX  OR  IS_MAC)
+  tint_target_add_sources("utils/command"
+    "utils/command/command_posix.cc"
+  )
+endif(IS_LINUX  OR  IS_MAC)
+
+if (IS_WIN)
+  tint_target_add_sources("utils/command"
+    "utils/command/command_windows.cc"
+  )
+endif(IS_WIN)
 
 tint_add_target("utils/command:test"
   utils/command/command_test.cc

@@ -60,58 +60,56 @@ tint_target_add_dependencies("cmd/test:test"
   "utils/traits:test"
 )
 
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/test:test" "lang/core/ir/transform:test")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/test:test" "lang/core/ir:test")
-endif()
-
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("cmd/test:test" "lang/glsl/writer/ast_printer:test")
-endif()
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/glsl/writer/ast_printer:test"
+  )
+endif(TINT_BUILD_GLSL_WRITER)
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("cmd/test:test" "lang/hlsl/writer/ast_printer:test")
-endif()
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/hlsl/writer/ast_printer:test"
+  )
+endif(TINT_BUILD_HLSL_WRITER)
+
+if (TINT_BUILD_IR)
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/core/ir/transform:test"
+    "lang/core/ir:test"
+    "lang/wgsl/reader/program_to_ir:test"
+    "lang/wgsl/writer/ir_to_program:test"
+  )
+endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("cmd/test:test" "lang/msl/writer/ast_printer:test")
-endif()
-
-if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("cmd/test:test" "lang/msl/writer/common:test")
-endif()
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/msl/writer/ast_printer:test"
+    "lang/msl/writer/common:test"
+  )
+endif(TINT_BUILD_MSL_WRITER)
 
 if (TINT_BUILD_MSL_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/test:test" "lang/msl/writer/printer:test")
-endif()
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/msl/writer/printer:test"
+  )
+endif(TINT_BUILD_MSL_WRITER  AND  TINT_BUILD_IR)
 
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_dependencies("cmd/test:test" "lang/spirv/reader/ast_parser:test")
-endif()
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/spirv/reader/ast_parser:test"
+  )
+endif(TINT_BUILD_SPV_READER)
 
 if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("cmd/test:test" "lang/spirv/writer/ast_printer:test")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("cmd/test:test" "lang/spirv/writer/common:test")
-endif()
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/spirv/writer/ast_printer:test"
+    "lang/spirv/writer/common:test"
+    "lang/spirv/writer:test"
+  )
+endif(TINT_BUILD_SPV_WRITER)
 
 if (TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/test:test" "lang/spirv/writer/raise:test")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("cmd/test:test" "lang/spirv/writer:test")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/test:test" "lang/wgsl/reader/program_to_ir:test")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/test:test" "lang/wgsl/writer/ir_to_program:test")
-endif()
+  tint_target_add_dependencies("cmd/test:test"
+    "lang/spirv/writer/raise:test"
+  )
+endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)

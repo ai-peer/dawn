@@ -32,10 +32,6 @@ include(lang/wgsl/writer/BUILD.cmake)
 tint_add_target("lang/wgsl:test"
 )
 
-if (TINT_BUILD_WGSL_READER  AND  TINT_BUILD_WGSL_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_sources("lang/wgsl:test" "lang/wgsl/ir_roundtrip_test.cc")
-endif()
-
 tint_target_add_dependencies("lang/wgsl:test"
   "lang/wgsl/helpers:test"
   "lang/wgsl/reader"
@@ -44,9 +40,14 @@ tint_target_add_dependencies("lang/wgsl:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl:test" "lang/wgsl/reader/program_to_ir")
-endif()
+  tint_target_add_dependencies("lang/wgsl:test"
+    "lang/wgsl/reader/program_to_ir"
+    "lang/wgsl/writer/ir_to_program"
+  )
+endif(TINT_BUILD_IR)
 
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl:test" "lang/wgsl/writer/ir_to_program")
-endif()
+if (TINT_BUILD_WGSL_READER  AND  TINT_BUILD_WGSL_WRITER  AND  TINT_BUILD_IR)
+  tint_target_add_sources("lang/wgsl:test"
+    "lang/wgsl/ir_roundtrip_test.cc"
+  )
+endif(TINT_BUILD_WGSL_READER  AND  TINT_BUILD_WGSL_WRITER  AND  TINT_BUILD_IR)

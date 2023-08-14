@@ -32,4 +32,5 @@ tint_target_add_dependencies("lang/msl/validate"
   "utils/command"
   "utils/file"
 )
+
 endif(TINT_BUILD_MSL_WRITER)

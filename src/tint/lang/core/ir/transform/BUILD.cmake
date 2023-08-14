@@ -50,10 +50,12 @@ tint_target_add_dependencies("lang/core/ir/transform"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/core/ir/transform" "lang/core/ir")
-endif()
+  tint_target_add_dependencies("lang/core/ir/transform"
+    "lang/core/ir"
+  )
 endif(TINT_BUILD_IR)
 
+endif(TINT_BUILD_IR)
 if(TINT_BUILD_IR)
 tint_add_target("lang/core/ir/transform:test"
   lang/core/ir/transform/add_empty_entry_point_test.cc
@@ -72,10 +74,10 @@ tint_target_add_dependencies("lang/core/ir/transform:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/core/ir/transform:test" "lang/core/ir")
-endif()
+  tint_target_add_dependencies("lang/core/ir/transform:test"
+    "lang/core/ir"
+    "lang/core/ir/transform"
+  )
+endif(TINT_BUILD_IR)
 
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/core/ir/transform:test" "lang/core/ir/transform")
-endif()
 endif(TINT_BUILD_IR)

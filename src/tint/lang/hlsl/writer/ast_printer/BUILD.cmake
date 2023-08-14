@@ -45,8 +45,8 @@ tint_target_add_dependencies("lang/hlsl/writer/ast_printer"
   "utils/strconv"
   "utils/text"
 )
-endif(TINT_BUILD_HLSL_WRITER)
 
+endif(TINT_BUILD_HLSL_WRITER)
 if(TINT_BUILD_HLSL_WRITER)
 tint_add_target("lang/hlsl/writer/ast_printer:test"
   lang/hlsl/writer/ast_printer/array_accessor_test.cc
@@ -94,10 +94,10 @@ tint_target_add_dependencies("lang/hlsl/writer/ast_printer:test"
 )
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("lang/hlsl/writer/ast_printer:test" "lang/hlsl/writer")
-endif()
+  tint_target_add_dependencies("lang/hlsl/writer/ast_printer:test"
+    "lang/hlsl/writer"
+    "lang/hlsl/writer/ast_printer"
+  )
+endif(TINT_BUILD_HLSL_WRITER)
 
-if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("lang/hlsl/writer/ast_printer:test" "lang/hlsl/writer/ast_printer")
-endif()
 endif(TINT_BUILD_HLSL_WRITER)

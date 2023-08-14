@@ -35,5 +35,7 @@ tint_target_add_dependencies("cmd/info:cmd"
 )
 
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_external_dependencies("cmd/info:cmd" "spirv-tools")
-endif()
+  tint_target_add_external_dependencies("cmd/info:cmd"
+    "spirv-tools"
+  )
+endif(TINT_BUILD_SPV_READER)

@@ -38,14 +38,13 @@ tint_target_add_dependencies("lang/glsl/writer"
 )
 
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("lang/glsl/writer" "lang/glsl/writer/ast_printer")
-endif()
-
-if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("lang/glsl/writer" "lang/glsl/writer/common")
-endif()
+  tint_target_add_dependencies("lang/glsl/writer"
+    "lang/glsl/writer/ast_printer"
+    "lang/glsl/writer/common"
+  )
 endif(TINT_BUILD_GLSL_WRITER)
 
+endif(TINT_BUILD_GLSL_WRITER)
 if(TINT_BUILD_GLSL_WRITER)
 tint_add_target("lang/glsl/writer:bench"
   lang/glsl/writer/writer_bench.cc
@@ -57,6 +56,9 @@ tint_target_add_dependencies("lang/glsl/writer:bench"
 )
 
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("lang/glsl/writer:bench" "lang/glsl/writer")
-endif()
+  tint_target_add_dependencies("lang/glsl/writer:bench"
+    "lang/glsl/writer"
+  )
+endif(TINT_BUILD_GLSL_WRITER)
+
 endif(TINT_BUILD_GLSL_WRITER)

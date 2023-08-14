@@ -36,23 +36,26 @@ tint_target_add_dependencies("lang/msl/writer"
   "utils/result"
 )
 
-if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("lang/msl/writer" "lang/msl/writer/ast_printer")
-endif()
-
-if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("lang/msl/writer" "lang/msl/writer/common")
-endif()
-
-if (TINT_BUILD_MSL_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/msl/writer" "lang/msl/writer/printer")
-endif()
-
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/msl/writer" "lang/wgsl/reader/program_to_ir")
-endif()
+  tint_target_add_dependencies("lang/msl/writer"
+    "lang/wgsl/reader/program_to_ir"
+  )
+endif(TINT_BUILD_IR)
+
+if (TINT_BUILD_MSL_WRITER)
+  tint_target_add_dependencies("lang/msl/writer"
+    "lang/msl/writer/ast_printer"
+    "lang/msl/writer/common"
+  )
 endif(TINT_BUILD_MSL_WRITER)
 
+if (TINT_BUILD_MSL_WRITER  AND  TINT_BUILD_IR)
+  tint_target_add_dependencies("lang/msl/writer"
+    "lang/msl/writer/printer"
+  )
+endif(TINT_BUILD_MSL_WRITER  AND  TINT_BUILD_IR)
+
+endif(TINT_BUILD_MSL_WRITER)
 if(TINT_BUILD_MSL_WRITER)
 tint_add_target("lang/msl/writer:bench"
   lang/msl/writer/writer_bench.cc
@@ -65,6 +68,9 @@ tint_target_add_dependencies("lang/msl/writer:bench"
 )
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("lang/msl/writer:bench" "lang/msl/writer")
-endif()
+  tint_target_add_dependencies("lang/msl/writer:bench"
+    "lang/msl/writer"
+  )
+endif(TINT_BUILD_MSL_WRITER)
+
 endif(TINT_BUILD_MSL_WRITER)

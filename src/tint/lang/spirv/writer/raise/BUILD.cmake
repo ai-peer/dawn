@@ -47,22 +47,25 @@ tint_target_add_dependencies("lang/spirv/writer/raise"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer/raise" "lang/core/ir")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer/raise" "lang/core/ir/transform")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer/raise" "lang/spirv/writer/common")
-endif()
+  tint_target_add_dependencies("lang/spirv/writer/raise"
+    "lang/core/ir"
+    "lang/core/ir/transform"
+  )
+endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
-  tint_target_add_external_dependencies("lang/spirv/writer/raise" "spirv-headers")
-endif()
-endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
+  tint_target_add_external_dependencies("lang/spirv/writer/raise"
+    "spirv-headers"
+  )
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
 
+if (TINT_BUILD_SPV_WRITER)
+  tint_target_add_dependencies("lang/spirv/writer/raise"
+    "lang/spirv/writer/common"
+  )
+endif(TINT_BUILD_SPV_WRITER)
+
+endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
 if(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
 tint_add_target("lang/spirv/writer/raise:test"
   lang/spirv/writer/raise/builtin_polyfill_test.cc
@@ -78,10 +81,15 @@ tint_target_add_dependencies("lang/spirv/writer/raise:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer/raise:test" "lang/core/ir/transform:test")
-endif()
+  tint_target_add_dependencies("lang/spirv/writer/raise:test"
+    "lang/core/ir/transform:test"
+  )
+endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/spirv/writer/raise:test" "lang/spirv/writer/raise")
-endif()
+  tint_target_add_dependencies("lang/spirv/writer/raise:test"
+    "lang/spirv/writer/raise"
+  )
+endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)
+
 endif(TINT_BUILD_SPV_WRITER  AND  TINT_BUILD_IR)

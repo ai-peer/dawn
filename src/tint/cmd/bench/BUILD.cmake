@@ -45,21 +45,31 @@ tint_target_add_dependencies("cmd/bench:bench"
 )
 
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench" "lang/glsl/writer:bench")
-endif()
+  tint_target_add_dependencies("cmd/bench:bench"
+    "lang/glsl/writer:bench"
+  )
+endif(TINT_BUILD_GLSL_WRITER)
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench" "lang/hlsl/writer:bench")
-endif()
+  tint_target_add_dependencies("cmd/bench:bench"
+    "lang/hlsl/writer:bench"
+  )
+endif(TINT_BUILD_HLSL_WRITER)
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench" "lang/msl/writer:bench")
-endif()
+  tint_target_add_dependencies("cmd/bench:bench"
+    "lang/msl/writer:bench"
+  )
+endif(TINT_BUILD_MSL_WRITER)
 
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_dependencies("cmd/bench:bench" "lang/spirv/reader")
-endif()
+  tint_target_add_dependencies("cmd/bench:bench"
+    "lang/spirv/reader"
+  )
+endif(TINT_BUILD_SPV_READER)
 
 if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench" "lang/spirv/writer:bench")
-endif()
+  tint_target_add_dependencies("cmd/bench:bench"
+    "lang/spirv/writer:bench"
+  )
+endif(TINT_BUILD_SPV_WRITER)

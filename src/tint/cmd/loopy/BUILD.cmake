@@ -32,30 +32,39 @@ tint_target_add_dependencies("cmd/loopy:cmd"
   "lang/wgsl/writer"
 )
 
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/loopy:cmd" "lang/core/ir")
-endif()
-
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("cmd/loopy:cmd" "lang/glsl/writer")
-endif()
+  tint_target_add_dependencies("cmd/loopy:cmd"
+    "lang/glsl/writer"
+  )
+endif(TINT_BUILD_GLSL_WRITER)
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("cmd/loopy:cmd" "lang/hlsl/writer")
-endif()
-
-if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("cmd/loopy:cmd" "lang/msl/writer")
-endif()
-
-if (TINT_BUILD_SPV_READER)
-  tint_target_add_dependencies("cmd/loopy:cmd" "lang/spirv/reader")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("cmd/loopy:cmd" "lang/spirv/writer")
-endif()
+  tint_target_add_dependencies("cmd/loopy:cmd"
+    "lang/hlsl/writer"
+  )
+endif(TINT_BUILD_HLSL_WRITER)
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("cmd/loopy:cmd" "lang/wgsl/reader/program_to_ir")
-endif()
+  tint_target_add_dependencies("cmd/loopy:cmd"
+    "lang/core/ir"
+    "lang/wgsl/reader/program_to_ir"
+  )
+endif(TINT_BUILD_IR)
+
+if (TINT_BUILD_MSL_WRITER)
+  tint_target_add_dependencies("cmd/loopy:cmd"
+    "lang/msl/writer"
+  )
+endif(TINT_BUILD_MSL_WRITER)
+
+if (TINT_BUILD_SPV_READER)
+  tint_target_add_dependencies("cmd/loopy:cmd"
+    "lang/spirv/reader"
+  )
+endif(TINT_BUILD_SPV_READER)
+
+if (TINT_BUILD_SPV_WRITER)
+  tint_target_add_dependencies("cmd/loopy:cmd"
+    "lang/spirv/writer"
+  )
+endif(TINT_BUILD_SPV_WRITER)

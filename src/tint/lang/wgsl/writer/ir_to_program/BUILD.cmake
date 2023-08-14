@@ -43,10 +43,12 @@ tint_target_add_dependencies("lang/wgsl/writer/ir_to_program"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/writer/ir_to_program" "lang/core/ir")
-endif()
+  tint_target_add_dependencies("lang/wgsl/writer/ir_to_program"
+    "lang/core/ir"
+  )
 endif(TINT_BUILD_IR)
 
+endif(TINT_BUILD_IR)
 if(TINT_BUILD_IR)
 tint_add_target("lang/wgsl/writer/ir_to_program:test"
   lang/wgsl/writer/ir_to_program/inlining_test.cc
@@ -62,14 +64,11 @@ tint_target_add_dependencies("lang/wgsl/writer/ir_to_program:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/writer/ir_to_program:test" "lang/core/ir")
-endif()
+  tint_target_add_dependencies("lang/wgsl/writer/ir_to_program:test"
+    "lang/core/ir"
+    "lang/core/ir:test"
+    "lang/wgsl/writer/ir_to_program"
+  )
+endif(TINT_BUILD_IR)
 
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/writer/ir_to_program:test" "lang/core/ir:test")
-endif()
-
-if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/writer/ir_to_program:test" "lang/wgsl/writer/ir_to_program")
-endif()
 endif(TINT_BUILD_IR)

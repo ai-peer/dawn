@@ -44,15 +44,19 @@ tint_target_add_dependencies("lang/spirv/writer/ast_printer"
   "utils/text"
 )
 
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer/ast_printer" "lang/spirv/writer/common")
-endif()
-
 if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
-  tint_target_add_external_dependencies("lang/spirv/writer/ast_printer" "spirv-headers")
-endif()
+  tint_target_add_external_dependencies("lang/spirv/writer/ast_printer"
+    "spirv-headers"
+  )
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
+
+if (TINT_BUILD_SPV_WRITER)
+  tint_target_add_dependencies("lang/spirv/writer/ast_printer"
+    "lang/spirv/writer/common"
+  )
 endif(TINT_BUILD_SPV_WRITER)
 
+endif(TINT_BUILD_SPV_WRITER)
 if(TINT_BUILD_SPV_WRITER)
 tint_add_target("lang/spirv/writer/ast_printer:test"
   lang/spirv/writer/ast_printer/accessor_expression_test.cc
@@ -95,19 +99,18 @@ tint_target_add_dependencies("lang/spirv/writer/ast_printer:test"
   "utils/text"
 )
 
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer/ast_printer:test" "lang/spirv/writer")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer/ast_printer:test" "lang/spirv/writer/ast_printer")
-endif()
-
-if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("lang/spirv/writer/ast_printer:test" "lang/spirv/writer/common")
-endif()
-
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_external_dependencies("lang/spirv/writer/ast_printer:test" "spirv-tools")
-endif()
+  tint_target_add_external_dependencies("lang/spirv/writer/ast_printer:test"
+    "spirv-tools"
+  )
+endif(TINT_BUILD_SPV_READER)
+
+if (TINT_BUILD_SPV_WRITER)
+  tint_target_add_dependencies("lang/spirv/writer/ast_printer:test"
+    "lang/spirv/writer"
+    "lang/spirv/writer/ast_printer"
+    "lang/spirv/writer/common"
+  )
+endif(TINT_BUILD_SPV_WRITER)
+
 endif(TINT_BUILD_SPV_WRITER)

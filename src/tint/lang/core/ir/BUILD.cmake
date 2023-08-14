@@ -138,8 +138,8 @@ tint_target_add_dependencies("lang/core/ir"
   "utils/symbol"
   "utils/text"
 )
-endif(TINT_BUILD_IR)
 
+endif(TINT_BUILD_IR)
 if(TINT_BUILD_IR)
 tint_add_target("lang/core/ir:test"
   lang/core/ir/access_test.cc
@@ -190,6 +190,9 @@ tint_target_add_dependencies("lang/core/ir:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/core/ir:test" "lang/core/ir")
-endif()
+  tint_target_add_dependencies("lang/core/ir:test"
+    "lang/core/ir"
+  )
+endif(TINT_BUILD_IR)
+
 endif(TINT_BUILD_IR)
