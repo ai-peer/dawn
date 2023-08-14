@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a60f5035_fa9276d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2023-08-14T16:18:23Z",
+      "side": 1,
+      "message": "I tested this on device and verified a full ballot can be returned now.",
+      "revId": "96b681214b9ffe2e1e94d2021b150a8f76495053",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
