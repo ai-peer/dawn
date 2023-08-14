@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5e32825_d40749db",
+        "filename": "tools/src/cmd/remote-compile/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-14T19:14:03Z",
+      "side": 1,
+      "message": "I had to pull this up into the `metal` arg handling. This is a bodge to emulate the xcrun flags.",
+      "range": {
+        "startLine": 324,
+        "startChar": 16,
+        "endLine": 330,
+        "endChar": 17
+      },
+      "revId": "9ba34dd75b73f4c4e10b70f199aa7717aa1653b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
