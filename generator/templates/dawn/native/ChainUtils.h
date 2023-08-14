@@ -145,19 +145,45 @@ namespace {{native_namespace}} {
     //   Note that unpacked types are tuples to enable further templating extensions based on
     //   typing via something like std::get<const Extension*> in templated functions.
     //
+
+    // Typelist type used to further add extensions to chain roots when they are not in the json.
+    template <typename... Exts>
+    struct AdditionalExtensionsList {};
+
+    // Root specializations for adding additional extensions.
+    template <typename Root>
+    struct AdditionalExtensions {
+        using List = AdditionalExtensionsList<>;
+    };
+
+    // Template structs to get the typing for the unpacked chains.
+    template <typename...>
+    struct UnpackedChain {};
+    template <typename... Additionals, typename... Ts>
+    struct UnpackedChain<AdditionalExtensionsList<Additionals...>, Ts...> {
+        using Type = std::tuple<Ts..., Additionals...>;
+    };
+
+}  // namespace {{native_namespace}}
+
+// Include specializations before declaring types for ordering purposes.
+#include "{{native_dir}}/ChainUtilsImpl.h"
+
+namespace {{native_namespace}} {
+
     {% for type in by_category["structure"] %}
         {% if type.extensible == "in" %}
             {% set unpackedChain = "Unpacked" + as_cppType(type.name) + "Chain" %}
-            using {{unpackedChain}} = std::tuple<
+            using {{unpackedChain}} = UnpackedChain<
+                AdditionalExtensions<{{as_cppType(type.name)}}>::List{{ "," if len(type.extensions) != 0 else ""}}
                 {% for extension in type.extensions %}
                     const {{as_cppType(extension.name)}}*{{ "," if not loop.last else "" }}
                 {% endfor %}
-            >;
+            >::Type;
             ResultOrError<{{unpackedChain}}> ValidateAndUnpackChain(const {{as_cppType(type.name)}}* chain);
 
         {% endif %}
     {% endfor %}
-
 
 }  // namespace {{native_namespace}}
 
