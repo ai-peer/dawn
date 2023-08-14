@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6c5a28_92c84657",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T18:01:50Z",
+      "side": 1,
+      "message": "A script that I\u0027ve had knocking around for a long time, that I should really commit.",
+      "revId": "f20a49309b9c2fcb3ae74c751143ed4ab4a46722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
