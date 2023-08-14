@@ -92,5 +92,7 @@ tint_target_add_dependencies("lang/hlsl/writer/ast_printer:test"
 )
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("lang/hlsl/writer/ast_printer:test" "lang/hlsl/writer")
-endif()
+  tint_target_add_dependencies("lang/hlsl/writer/ast_printer:test"
+    "lang/hlsl/writer"
+  )
+endif(TINT_BUILD_HLSL_WRITER)

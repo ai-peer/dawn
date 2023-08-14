@@ -34,4 +34,5 @@ tint_target_add_dependencies("lang/spirv/reader"
   "lang/spirv/reader/common"
   "lang/wgsl/program"
 )
+
 endif(TINT_BUILD_SPV_READER)

@@ -62,13 +62,17 @@ tint_target_add_dependencies("lang/spirv/reader/ast_parser"
   "utils/traits"
 )
 
-if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
-  tint_target_add_external_dependencies("lang/spirv/reader/ast_parser" "spirv-headers")
-endif()
-
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_external_dependencies("lang/spirv/reader/ast_parser" "spirv-opt-internal")
-endif()
+  tint_target_add_external_dependencies("lang/spirv/reader/ast_parser"
+    "spirv-opt-internal"
+  )
+endif(TINT_BUILD_SPV_READER)
+
+if (TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
+  tint_target_add_external_dependencies("lang/spirv/reader/ast_parser"
+    "spirv-headers"
+  )
+endif(TINT_BUILD_SPV_READER  OR  TINT_BUILD_SPV_WRITER)
 
 tint_add_target("lang/spirv/reader/ast_parser:test"
   lang/spirv/reader/ast_parser/ast_parser_test.cc
@@ -120,9 +124,8 @@ tint_target_add_dependencies("lang/spirv/reader/ast_parser:test"
 )
 
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_external_dependencies("lang/spirv/reader/ast_parser:test" "spirv-opt-internal")
-endif()
-
-if (TINT_BUILD_SPV_READER)
-  tint_target_add_external_dependencies("lang/spirv/reader/ast_parser:test" "spirv-tools")
-endif()
+  tint_target_add_external_dependencies("lang/spirv/reader/ast_parser:test"
+    "spirv-opt-internal"
+    "spirv-tools"
+  )
+endif(TINT_BUILD_SPV_READER)

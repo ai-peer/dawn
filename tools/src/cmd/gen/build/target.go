@@ -15,6 +15,8 @@
 package build
 
 import (
+	"sort"
+
 	"dawn.googlesource.com/dawn/tools/src/container"
 	"dawn.googlesource.com/dawn/tools/src/transform"
 )
@@ -51,11 +53,6 @@ func (t *Target) SourceFiles() []*File {
 	return out
 }
 
-// SourceFiles returns the sorted list of the target's source files that have a build condition
-func (t *Target) ConditionalSourceFiles() []*File {
-	return transform.Filter(t.SourceFiles(), func(t *File) bool { return t.Condition != "" })
-}
-
 // SourceFiles returns the sorted list of the target's source files that have no build condition
 func (t *Target) UnconditionalSourceFiles() []*File {
 	return transform.Filter(t.SourceFiles(), func(t *File) bool { return t.Condition == "" })
@@ -86,11 +83,6 @@ func (t *Target) Dependencies() []*Target {
 	return out
 }
 
-// ConditionalDependencies returns the sorted list of dependencies that have a build condition.
-func (t *Target) ConditionalDependencies() []*Target {
-	return transform.Filter(t.Dependencies(), func(t *Target) bool { return t.Condition != "" })
-}
-
 // UnconditionalDependencies returns the sorted list of dependencies that have no build condition.
 func (t *Target) UnconditionalDependencies() []*Target {
 	return transform.Filter(t.Dependencies(), func(t *Target) bool { return t.Condition == "" })
@@ -115,4 +107,49 @@ func (t *Target) ConditionalExternalDependencies() []ExternalDependency {
 // build condition.
 func (t *Target) UnconditionalExternalDependencies() []ExternalDependency {
 	return transform.Filter(t.ExternalDependencies(), func(t ExternalDependency) bool { return t.Condition == "" })
+}
+
+// A collection of source files and dependencies sharing the same condition
+type TargetConditional struct {
+	Condition            string
+	SourceFiles          []*File
+	InternalDependencies []*Target
+	ExternalDependencies []ExternalDependency
+}
+
+// Conditionals returns a sorted list of TargetConditional, which are grouped by condition
+func (t *Target) Conditionals() []*TargetConditional {
+	m := container.NewMap[string, *TargetConditional]()
+	for name := range t.SourceFileSet {
+		file := t.Directory.Project.Files[name]
+		if file.Condition != "" {
+			c := m.GetOrCreate(file.Condition, func() *TargetConditional {
+				return &TargetConditional{Condition: file.Condition}
+			})
+			c.SourceFiles = append(c.SourceFiles, file)
+		}
+	}
+	for name := range t.DependencyNames {
+		dep := t.Directory.Project.Targets[name]
+		if dep.Condition != "" {
+			c := m.GetOrCreate(dep.Condition, func() *TargetConditional {
+				return &TargetConditional{Condition: dep.Condition}
+			})
+			c.InternalDependencies = append(c.InternalDependencies, dep)
+		}
+	}
+	for _, dep := range t.ExternalDependencyMap {
+		if dep.Condition != "" {
+			c := m.GetOrCreate(dep.Condition, func() *TargetConditional {
+				return &TargetConditional{Condition: dep.Condition}
+			})
+			c.ExternalDependencies = append(c.ExternalDependencies, dep)
+		}
+	}
+	for _, c := range m {
+		sort.Slice(c.SourceFiles, func(a, b int) bool { return c.SourceFiles[a].Name < c.SourceFiles[b].Name })
+		sort.Slice(c.InternalDependencies, func(a, b int) bool { return c.InternalDependencies[a].Name < c.InternalDependencies[b].Name })
+		sort.Slice(c.ExternalDependencies, func(a, b int) bool { return c.ExternalDependencies[a].Name < c.ExternalDependencies[b].Name })
+	}
+	return m.Values()
 }

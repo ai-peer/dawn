@@ -38,10 +38,12 @@ tint_target_add_dependencies("lang/wgsl/reader/program_to_ir"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/reader/program_to_ir" "lang/core/ir")
-endif()
+  tint_target_add_dependencies("lang/wgsl/reader/program_to_ir"
+    "lang/core/ir"
+  )
 endif(TINT_BUILD_IR)
 
+endif(TINT_BUILD_IR)
 if(TINT_BUILD_IR)
 tint_add_target("lang/wgsl/reader/program_to_ir:test"
   lang/wgsl/reader/program_to_ir/accessor_test.cc
@@ -66,6 +68,9 @@ tint_target_add_dependencies("lang/wgsl/reader/program_to_ir:test"
 )
 
 if (TINT_BUILD_IR)
-  tint_target_add_dependencies("lang/wgsl/reader/program_to_ir:test" "lang/core/ir")
-endif()
+  tint_target_add_dependencies("lang/wgsl/reader/program_to_ir:test"
+    "lang/core/ir"
+  )
+endif(TINT_BUILD_IR)
+
 endif(TINT_BUILD_IR)

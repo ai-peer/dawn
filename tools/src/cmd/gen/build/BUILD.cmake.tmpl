@@ -51,16 +51,6 @@ tint_add_target("{{$.Name}}"
 {{-   end}}
 )
 
-{{- /* Emit conditional files */}}
-{{-   range $File := $.SourceFiles}}
-{{-     if ne $File.Condition ""}}
-{{/*   newline */}}
-if ({{Eval "Expression" $File.Condition}})
-  tint_target_add_sources("{{$.Name}}" "{{$File.Path}}")
-endif()
-{{-     end}}
-{{-   end}}
-
 {{- /* Emit unconditional dependencies */}}
 {{-   $UnconditionalDeps    := $.UnconditionalDependencies }}
 {{-   if $UnconditionalDeps}}
@@ -83,25 +73,37 @@ tint_target_add_external_dependencies("{{$.Name}}"
 )
 {{-   end}}
 
-{{- /* Emit conditional dependencies */}}
-{{-   range $Dep := $.ConditionalDependencies}}
+{{- /* Emit conditional source files dependencies */}}
+{{-   range $Cond := $.Conditionals}}
 {{/*   newline */}}
-if ({{Eval "Expression" $Dep.Condition}})
-  tint_target_add_dependencies("{{$.Name}}" "{{$Dep.Name}}")
-endif()
+if ({{Eval "Expression" $Cond.Condition}})
+{{-     if $Cond.SourceFiles}}
+  tint_target_add_sources("{{$.Name}}"
+{{-       range $File := $Cond.SourceFiles}}
+    "{{$File.Path}}"
+{{-       end}}
+  )
+{{-     end}}
+{{-     if $Cond.InternalDependencies}}
+  tint_target_add_dependencies("{{$.Name}}"
+{{-       range $Dep := $Cond.InternalDependencies}}
+    "{{$Dep.Name}}"
+{{-       end}}
+  )
+{{-     end}}
+{{-     if $Cond.ExternalDependencies}}
+  tint_target_add_external_dependencies("{{$.Name}}"
+{{-       range $Dep := $Cond.ExternalDependencies}}
+    "{{$Dep.Name}}"
+{{-       end}}
+  )
+{{-     end}}
+endif({{Eval "Expression" $Cond.Condition}})
 {{-   end}}
-
-{{- /* Emit conditional external dependencies */}}
-{{-   range $Dep := $.ConditionalExternalDependencies}}
-{{/*  newline */}}
-if ({{Eval "Expression" $Dep.Condition}})
-  tint_target_add_external_dependencies("{{$.Name}}" "{{$Dep.Name}}")
-endif()
-{{-   end}}
+{{/*   newline */}}
 {{-   if $.Condition}}
 endif({{Eval "Expression" $.Condition}})
 {{-   end}}
-{{/*   newline */}}
 {{- end}}
 
 

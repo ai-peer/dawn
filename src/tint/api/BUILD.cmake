@@ -31,21 +31,31 @@ tint_target_add_dependencies("api"
 )
 
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("api" "lang/glsl/writer")
-endif()
+  tint_target_add_dependencies("api"
+    "lang/glsl/writer"
+  )
+endif(TINT_BUILD_GLSL_WRITER)
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("api" "lang/hlsl/writer")
-endif()
+  tint_target_add_dependencies("api"
+    "lang/hlsl/writer"
+  )
+endif(TINT_BUILD_HLSL_WRITER)
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("api" "lang/msl/writer")
-endif()
+  tint_target_add_dependencies("api"
+    "lang/msl/writer"
+  )
+endif(TINT_BUILD_MSL_WRITER)
 
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_dependencies("api" "lang/spirv/reader")
-endif()
+  tint_target_add_dependencies("api"
+    "lang/spirv/reader"
+  )
+endif(TINT_BUILD_SPV_READER)
 
 if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("api" "lang/spirv/writer")
-endif()
+  tint_target_add_dependencies("api"
+    "lang/spirv/writer"
+  )
+endif(TINT_BUILD_SPV_WRITER)
