@@ -77,6 +77,30 @@ MaybeError ValidateSTypes(const ChainedStructOut* chain,
     return {};
 }
 
+template <typename Root, typename Unpacked, typename Ext>
+wgpu::SType UnpackExtension(Unpacked& unpacked, const ChainedStruct* chain) {
+    if (chain->sType == STypeFor<Ext>) {
+        std::get<Ext>(unpacked) = reinterpret_cast<Ext>(chain);
+        return chain->sType;
+    }
+    return wgpu::SType::Invalid;
+}
+
+template <typename Root, typename Unpacked, typename AdditionalExts>
+struct AdditionalExtensionParser {};
+template <typename Root, typename Unpacked, typename... Exts>
+struct AdditionalExtensionParser<Root, Unpacked, detail::AdditionalExtensionsList<Exts...>> {
+    static wgpu::SType UnpackExtensions(Unpacked& unpacked, const ChainedStruct* chain) {
+        wgpu::SType result = wgpu::SType::Invalid;
+        // Using || to early out as soon as we find a match.
+        DAWN_UNUSED((([&](){
+            result = UnpackExtension<Root, Unpacked, Exts>(unpacked, chain);
+            return result != wgpu::SType::Invalid;
+        }()) || ...));
+        return result;
+    }
+};
+
 //
 // Unpacked chain helpers.
 //
@@ -87,42 +111,38 @@ MaybeError ValidateSTypes(const ChainedStructOut* chain,
             const ChainedStruct* next = chain->nextInChain;
             {{unpackedChain}} result;
 
-            //* Branching generation block to avoid warnings when the struct is not currently
-            //* extendable:
-            //*   -Wunreachable-code-loop-increment:
-            //*      error: loop will run at most once (loop increment never executed)
-            {% if len(type.extensions) == 0 %}
-                if (next != nullptr) {
+            std::unordered_set<wgpu::SType> seen;
+            for (; next != nullptr; next = next->nextInChain) {
+                if (seen.count(next->sType)) {
                     return DAWN_VALIDATION_ERROR(
-                        "Unexpected chained struct of type %s found on %s chain.",
-                        next->sType, "{{as_cppType(type.name)}}"
+                        "Duplicate chained struct of type %s found on %s chain.",
+                         next->sType, "{{as_cppType(type.name)}}"
                     );
                 }
-            {% else %}
-                for (; next != nullptr; next = next->nextInChain) {
-                    switch (next->sType) {
-                        {% for extension in type.extensions %}
-                            case STypeFor<{{as_cppType(extension.name)}}>: {
-                                auto& member = std::get<const {{as_cppType(extension.name)}}*>(result);
-                                if (member != nullptr) {
-                                    return DAWN_VALIDATION_ERROR(
-                                        "Duplicate chained struct of type %s found on %s chain.",
-                                        next->sType, "{{as_cppType(type.name)}}"
-                                    );
-                                } else {
-                                    member = static_cast<const {{as_cppType(extension.name)}}*>(next);
-                                }
-                                break;
-                            }
-                        {% endfor %}
-                        default:
+                seen.insert(next->sType);
+
+                switch (next->sType) {
+                    {% for extension in type.extensions %}
+                        case STypeFor<{{as_cppType(extension.name)}}>: {
+                            std::get<const {{as_cppType(extension.name)}}*>(result) =
+                                static_cast<const {{as_cppType(extension.name)}}*>(next);
+                            break;
+                        }
+                    {% endfor %}
+                    default: {
+                      if (AdditionalExtensionParser<
+                          {{as_cppType(type.name)}},
+                          {{unpackedChain}},
+                          detail::AdditionalExtensions<{{as_cppType(type.name)}}>::List>::UnpackExtensions(result, next) == wgpu::SType::Invalid) {
                           return DAWN_VALIDATION_ERROR(
                               "Unexpected chained struct of type %s found on %s chain.",
                               next->sType, "{{as_cppType(type.name)}}"
                           );
+                      }
+                      break;
                     }
                 }
-            {% endif %}
+            }
             return result;
         }
 
