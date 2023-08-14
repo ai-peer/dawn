@@ -171,6 +171,8 @@ BindGroup::BindGroup(Device* device,
                         break;
                     }
 
+                    case wgpu::StorageTextureAccess::ReadOnly:
+                    case wgpu::StorageTextureAccess::ReadWrite:
                     case wgpu::StorageTextureAccess::Undefined:
                         UNREACHABLE();
                 }
