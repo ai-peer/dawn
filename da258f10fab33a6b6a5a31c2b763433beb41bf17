@@ -16,6 +16,24 @@
       "message": "I didn\u0027t figure out what step brings in the win clang failure. Locally on mac cannot repro. Could it be something triggered compiler issue?\n\nwin-clang-dbg-x64 has this flake\n[ RUN      ] TextureBuiltinsFromUniformTest.BasicTextureNumLevels\n..\\..\\src\\tint\\cmd\\test\\main_test.cc(21): error: Failed\n..\\..\\src\\tint\\utils\\containers\\vector.h:215 internal compiler error: TINT_ASSERT(i \u003c Length())\n..\\..\\src\\tint\\cmd\\test\\main_test.cc(21): error: Failed",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94c0863b_07cf3d54",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-14T18:25:02Z",
+      "side": 1,
+      "message": "I get to my windows machine and I can reproduce this which is good news",
+      "parentUuid": "0b95e6d7_009a18df",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
