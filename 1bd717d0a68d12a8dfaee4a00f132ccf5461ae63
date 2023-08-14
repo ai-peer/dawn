@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f6918fb_45bbd8db",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-14T22:10:04Z",
+      "side": 1,
+      "message": "For now there isn\u0027t. For future there could be push constants using the internal uniform buffer as well. I\u0027d like to keep it here, as adding/removing the needsTextureBuiltinUniform flag across output/sanitizedResult/compile results seems really a trouble.",
+      "parentUuid": "27359f29_a77839e3",
+      "range": {
+        "startLine": 76,
+        "startChar": 8,
+        "endLine": 76,
+        "endChar": 46
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bb749a47_d26dbd41",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0d5c69f_0cba3c7a",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-14T22:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb749a47_d26dbd41",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 81,
+        "endChar": 81
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54192a98_f2ac6311",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-08-11T18:39:31Z",
       "side": 1,
       "message": "can we check just one?",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 201,
+        "endChar": 5
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e0b7a34_c273747d",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-14T22:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54192a98_f2ac6311",
       "range": {
         "startLine": 199,
         "startChar": 4,
@@ -129,6 +201,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "15780251_8a80f65a",
+        "filename": "src/dawn/native/opengl/PipelineGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-14T22:10:04Z",
+      "side": 1,
+      "message": "I find there\u0027s `BindGroupTrackerD3D11` but not yet a `BindGroupTrackerGL`. Are you suggesting adding one to the GL backend?",
+      "parentUuid": "55f1c76b_46f264de",
+      "range": {
+        "startLine": 222,
+        "startChar": 5,
+        "endLine": 224,
+        "endChar": 40
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f4d91dcf_7a36183b",
         "filename": "src/dawn/native/stream/Stream.h",
         "patchSetId": 4
@@ -140,6 +236,30 @@
       "writtenOn": "2023-08-11T18:39:31Z",
       "side": 1,
       "message": "nit: i think you could do\n```\nstd::pair\u003cK, V\u003e p;\nDAWN_TRY(StreamOut(s, \u0026p));\nm-\u003einsert(std::move(p));\n```",
+      "range": {
+        "startLine": 312,
+        "startChar": 12,
+        "endLine": 315,
+        "endChar": 39
+      },
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3aa525f_fa6d0eb0",
+        "filename": "src/dawn/native/stream/Stream.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-14T22:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4d91dcf_7a36183b",
       "range": {
         "startLine": 312,
         "startChar": 12,
@@ -163,6 +283,24 @@
       "writtenOn": "2023-08-11T18:39:31Z",
       "side": 1,
       "message": "unit: usually we don\u0027t have underscores in variable names",
+      "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ae0ce1_1dc86d78",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-14T22:10:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e30ee526_c5fe8854",
       "revId": "1bd717d0a68d12a8dfaee4a00f132ccf5461ae63",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
