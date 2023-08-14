@@ -22,6 +22,30 @@
       },
       "revId": "bc3c63fa5a4b16792b0db45848399a5214ae25a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d379f633_6c8c0868",
+        "filename": "src/tint/lang/wgsl/ast/transform/msl_subgroup_ballot.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-14T10:57:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b06ca60_4f87d7bf",
+      "range": {
+        "startLine": 26,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 3
+      },
+      "revId": "bc3c63fa5a4b16792b0db45848399a5214ae25a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
