@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13433571_c9b2ffd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "Code is looking good, thank you for all the changes, Shrek.\nI\u0027ll +2 once Stephen\u0027s comments are addressed.",
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a26a154a_21f3dbd5",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "übernit: More typical to use `foo-\u003e` instead of `(*foo).`",
+      "range": {
+        "startLine": 164,
+        "startChar": 64,
+        "endLine": 164,
+        "endChar": 66
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33224f15_d235b920",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "nit: I\u0027d flip this to reduce the large indentation:\n```\nif (ubo) {\n  return ubo-\u003ename-\u003esymbol;  // Already created\n}\n```",
+      "range": {
+        "startLine": 334,
+        "startChar": 8,
+        "endLine": 334,
+        "endChar": 19
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cba8227_a131a6ae",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "nit:`global`",
+      "range": {
+        "startLine": 349,
+        "startChar": 44,
+        "endLine": 349,
+        "endChar": 50
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c5c651f_407d564b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "nit: slightly confusing name. Why is the structure AST node a `buffer_size`?",
+      "range": {
+        "startLine": 382,
+        "startChar": 18,
+        "endLine": 382,
+        "endChar": 36
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cdd4f1f_509f564f",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "`std::move(new_members)`",
+      "range": {
+        "startLine": 382,
+        "startChar": 60,
+        "endLine": 384,
+        "endChar": 61
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24b15cfa_130789f7",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "No action required:\nWe\u0027re still depending quite heavily on the assumption that a single texture would only ever have one uniform values. Probably okay, but I personally probably would have made this more future-proof by pairing the texture and the field.",
+      "range": {
+        "startLine": 395,
+        "startChar": 43,
+        "endLine": 395,
+        "endChar": 70
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5627e66_d06bfd38",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-14T21:42:40Z",
+      "side": 1,
+      "message": "nit: all this byte offset \u003c-\u003e index is a bit icky. Would it not be better to hold a map of `BindingPoint` to symbol? The byte offsets seem less important for the majority of the logic in this transform, and could be held by a separate map.",
+      "range": {
+        "startLine": 400,
+        "startChar": 25,
+        "endLine": 400,
+        "endChar": 64
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
