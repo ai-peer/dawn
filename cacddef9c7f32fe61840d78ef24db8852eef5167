@@ -52,6 +52,24 @@
       "parentUuid": "92c9da9a_3e951d7c",
       "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "513367de_1b106e69",
+        "filename": "src/tint/cmd/common/helper.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-14T17:57:24Z",
+      "side": 0,
+      "message": "My knee-jerk objection stemmed from what appeared to be a shift from including a \"public\" header (something in `include/`), to directly including internal headers (not in `include/`). But as you rightly point out, `tint/tint.h` was just including the internal stuff anyway. So this change isn\u0027t really the regression that I initially thought it was. I think we\u0027re on the same page about where we\u0027d like to get to (eventually).\n\nThanks for writing down your rationale so clearly.",
+      "parentUuid": "72d5530b_c9774913",
+      "revId": "cacddef9c7f32fe61840d78ef24db8852eef5167",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
