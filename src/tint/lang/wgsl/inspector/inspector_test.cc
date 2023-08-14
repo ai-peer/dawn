@@ -14,6 +14,7 @@
 
 #include "gmock/gmock.h"
 
+#include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/depth_texture.h"
 #include "src/tint/lang/core/type/external_texture.h"
 #include "src/tint/lang/core/type/multisampled_texture.h"
@@ -30,7 +31,8 @@
 #include "src/tint/lang/wgsl/sem/variable.h"
 #include "tint/tint.h"
 
-using namespace tint::number_suffixes;  // NOLINT
+using namespace tint::core::number_suffixes;  // NOLINT
+using namespace tint::core::fluent_types;     // NOLINT
 
 namespace tint::inspector {
 namespace {
