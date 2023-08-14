@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2fa64cc_e27edf27",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-08-14T22:55:25Z",
+      "side": 1,
+      "message": "PTAL - not sure if this is the best way to approach this, but it was useful while debugging crbug.com/1468848",
+      "revId": "1ac586b196f128b7a9abbc45be62653f84511a81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
