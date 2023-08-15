@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d2a947b_ee81c2c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T17:03:09Z",
+      "side": 1,
+      "message": "devsnek, thank you for your patience during the review. Please address the last two open comments and we can land this. Putting CR+2 so you can land directly after addressing them (and avoid future merge conflicts in Converter.cpp cropping up)",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "106b18de_1c56d2db",
@@ -48,6 +65,30 @@
       "writtenOn": "2023-08-07T10:36:02Z",
       "side": 1,
       "message": "Looks like this should go into a separate change, along with the `wgpu::FeatureName` change.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 125,
+        "endChar": 5
+      },
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "180e0518_07ba3819",
+        "filename": "src/dawn/node/binding/GPUAdapter.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T17:03:09Z",
+      "side": 1,
+      "message": "Let\u0027s land this together with the rest in this CL to avoid churn, but next time trivial changes like this can be split off to help them land faster.",
+      "parentUuid": "106b18de_1c56d2db",
       "range": {
         "startLine": 122,
         "startChar": 0,
@@ -125,6 +166,24 @@
       "side": 1,
       "message": "yes, in fact usually native modules have as much logic in JS as possible so they only pay the cost for jumping between JS and C++ when absolutely necessary.",
       "parentUuid": "84d29c21_46cb7695",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65a1ddc9_d1c05c26",
+        "filename": "src/dawn/node/cts.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T17:03:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4c79c796_4b3e74da",
       "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -255,6 +314,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bca3da60_5e6dfb80",
+        "filename": "src/dawn/node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T17:03:09Z",
+      "side": 1,
+      "message": "Ok please rename to `exports` so that it is clear what it is.",
+      "parentUuid": "2989a9c4_fb688e9e",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83b3ab29_3b6c4b2b",
         "filename": "src/dawn/node/interop/WebGPU.h.tmpl",
         "patchSetId": 2
@@ -266,6 +349,24 @@
       "writtenOn": "2023-08-07T10:36:02Z",
       "side": 1,
       "message": "Please document the return object.",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfdc5c62_166a62d2",
+        "filename": "src/dawn/node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T17:03:09Z",
+      "side": 1,
+      "message": "+1",
+      "parentUuid": "83b3ab29_3b6c4b2b",
       "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
