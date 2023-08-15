@@ -32,6 +32,8 @@ libtint_source_set("common") {
     "helper.h",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
+    "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core/type",
     "${tint_src_dir}/lang/spirv/reader/common",
     "${tint_src_dir}/lang/wgsl/ast",
@@ -57,6 +59,7 @@ tint_unittests_source_set("unittests") {
   testonly = true
   sources = [ "generate_external_texture_bindings_test.cc" ]
   deps = [
+    "${tint_src_dir}/api/common",
     "${tint_src_dir}/cmd/common",
     "${tint_src_dir}/lang/wgsl/program",
     "${tint_src_dir}/lang/wgsl/resolver",

@@ -26,5 +26,7 @@ tint_add_target("lang/hlsl/writer/common"
 )
 
 tint_target_add_dependencies("lang/hlsl/writer/common"
+  "api/common"
+  "api/options"
   "utils/reflection"
 )
