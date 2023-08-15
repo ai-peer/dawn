@@ -17,6 +17,7 @@
 
 #include <cstdint>
 
+#include "src/tint/lang/core/access.h"
 #include "src/tint/lang/core/texel_format.h"
 #include "src/tint/lang/core/type/texture_dimension.h"
 #include "src/tint/lang/core/type/type.h"
@@ -79,6 +80,8 @@ struct ResourceBinding {
         kSampledTexture,
         kMultisampledTexture,
         kWriteOnlyStorageTexture,
+        kReadOnlyStorageTexture,
+        kReadWriteStorageTexture,
         kDepthTexture,
         kDepthMultisampledTexture,
         kExternalTexture
