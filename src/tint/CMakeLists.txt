@@ -151,9 +151,44 @@ function(tint_spvtools_compile_options TARGET)
   target_include_directories(${TARGET} PRIVATE "${TINT_SPIRV_TOOLS_DIR}/include")
 endfunction()
 
-function(tint_bench_compile_options TARGET)
+function(tint_test_compile_options TARGET)
   tint_default_compile_options(${TARGET})
+  set_target_properties(${TARGET} PROPERTIES FOLDER "Tests")
+  target_include_directories(${TARGET} PRIVATE ${gmock_SOURCE_DIR}/include )
+  target_link_libraries(${TARGET} PRIVATE gmock)
+
+  if(NOT MSVC)
+    target_compile_options(${TARGET} PRIVATE
+      -Wno-global-constructors
+      -Wno-weak-vtables
+    )
+  endif()
+endfunction()
+
+function(tint_bench_compile_options TARGET)
+  tint_core_compile_options(${TARGET})
   set_target_properties(${TARGET} PROPERTIES FOLDER "Benchmarks")
+  target_link_libraries(${TARGET} PRIVATE benchmark::benchmark)
+endfunction()
+
+function(tint_test_cmd_compile_options TARGET)
+  tint_test_compile_options(${TARGET})
+
+  if(MSVC)
+    # TODO(crbug.com/tint/1749): MSVC debug builds can suffer from stack
+    # overflows when resolving deeply nested expression chains or statements.
+    # Production builds neither use MSVC nor debug, so just bump the stack size
+    # for this build combination.
+    if(IS_DEBUG_BUILD)
+      target_link_options(${TARGET} PRIVATE "/STACK:4194304") # 4MB, default is 1MB
+    endif()
+  endif()
+
+  target_link_libraries(${TARGET} PRIVATE gmock)
+endfunction()
+
+function(tint_bench_cmd_compile_options TARGET)
+  tint_bench_compile_options(${TARGET})
   target_link_libraries(${TARGET} PRIVATE benchmark::benchmark)
 endfunction()
 
@@ -172,6 +207,20 @@ function(tint_fuzzer_compile_options TARGET)
     target_link_options(${TARGET} PUBLIC -fsanitize=fuzzer -fsanitize-coverage=trace-cmp)
   endif()
 endfunction()
+
+# Renames the output name of the target TARGET with the regex sub-match of TARGET using REGEX.
+# If the target name does not match REGEX, then this is a no-op
+function(tint_rename_output TARGET REGEX)
+  string(REGEX MATCH "${REGEX}" IGNORED "${TARGET}")
+  if(MATCH)
+    set(OUTPUT_NAME ${CMAKE_MATCH_1})
+    if(NOT OUTPUT_NAME STREQUAL "tint")
+      set(OUTPUT_NAME "tint_${OUTPUT_NAME}")
+    endif()
+    set_target_properties(${TARGET} PROPERTIES OUTPUT_NAME ${OUTPUT_NAME})
+  endif()
+endfunction()
+
 
 if(TINT_ENABLE_BREAK_IN_DEBUGGER)
   set_source_files_properties(utils/debug/debugger.cc
@@ -195,10 +244,6 @@ endif()
 # Tests
 ################################################################################
 if(TINT_BUILD_TESTS)
-  add_executable(tint_unittests)
-
-  tint_default_compile_options(tint_unittests)
-
   if(${TINT_BUILD_FUZZERS})
     target_sources(tint_unittests PRIVATE
       fuzzers/mersenne_twister_engine.cc
@@ -211,29 +256,6 @@ if(TINT_BUILD_TESTS)
     )
   endif()
 
-  set_target_properties(tint_unittests PROPERTIES FOLDER "Tests")
-
-  target_include_directories(tint_unittests PRIVATE
-    ${gmock_SOURCE_DIR}/include
-  )
-
-  if(MSVC)
-    # TODO(crbug.com/tint/1749): MSVC debug builds can suffer from stack
-    # overflows when resolving deeply nested expression chains or statements.
-    # Production builds neither use MSVC nor debug, so just bump the stack size
-    # for this build combination.
-    if(IS_DEBUG_BUILD)
-      target_link_options(tint_unittests PRIVATE "/STACK:4194304") # 4MB, default is 1MB
-    endif()
-  else()
-    target_compile_options(tint_unittests PRIVATE
-      -Wno-global-constructors
-      -Wno-weak-vtables
-    )
-  endif()
-
-  target_link_libraries(tint_unittests PRIVATE gmock)
-
   add_test(NAME tint_unittests COMMAND tint_unittests)
 endif(TINT_BUILD_TESTS)
 
@@ -241,14 +263,6 @@ endif(TINT_BUILD_TESTS)
 # Benchmarks
 ################################################################################
 if(TINT_BUILD_BENCHMARKS)
-  add_executable(tint_benchmark
-    "cmd/bench/main_bench.cc"
-  )
-
-  tint_core_compile_options(tint_benchmark)
-
-  target_link_libraries(tint_benchmark PRIVATE benchmark::benchmark)
-
   if(TINT_EXTERNAL_BENCHMARK_CORPUS_DIR)
     # Glob all the files at TINT_EXTERNAL_BENCHMARK_CORPUS_DIR, and create a header
     # that lists these with the macros:
@@ -302,22 +316,18 @@ endif()
 ################################################################################
 # Functions used by BUILD.cmake files
 # The CMake build handles the target kinds in different ways:
-# 'lib'   - Translates to CMake static library.
-#           If TINT_BUILD_FUZZERS is enabled, then a second static library with
-#           the ${TINT_FUZZ_SUFFIX} suffix is also created. This is done because
-#           the fuzzer build requires compilation with the '-fsanitize=fuzzer'
-#           flag, which results in a separate set of compilation units.
-# 'test'  - Appends files to the 'tint_unittests' CMake target.
-#           Static libraries are not created for each test target, as gtest
-#           relies on static constructors to register the test fixtures, and
-#           these will get stripped by the linker if each target is packaged in
-#           a separate library.
-# 'bench' - Appends files to the 'tint_benchmark' CMake target.
-#           Static libraries are not created for each test target, as google
-#           benchmark relies on static constructors to register the benchmark
-#           fixtures, and these will get stripped by the linker if each target
-#           is packaged in a separate library.
-# 'cmd'   - Translates to a CMake executable target.
+# 'cmd'       - Translates to a CMake executable target.
+# 'lib'       - Translates to CMake static library.
+#               If TINT_BUILD_FUZZERS is enabled, then a second static library with
+#               the ${TINT_FUZZ_SUFFIX} suffix is also created. This is done because
+#               the fuzzer build requires compilation with the '-fsanitize=fuzzer'
+#               flag, which results in a separate set of compilation units.
+# 'test'      - Translates to a CMake object library, configured for compiling and
+#               linking against google-test.
+# 'bench'     - Translates to a CMake object library, configured for compiling and
+#               linking against google-benchmark.
+# 'test_cmd'  - Translates to a CMake executable target linked against google-test.
+# 'bench_cmd' - Translates to a CMake executable target linked against google-benchmark.
 # See also: docs/tint/gen.md
 ################################################################################
 
@@ -337,47 +347,42 @@ set(TINT_TARGET_DISABLED "<DISABLED>")
 #   GN_TARGET_IN - The GN-style target name
 function(tint_translate_target TARGET_OUT KIND_OUT GN_TARGET_IN)
   string(REGEX MATCH "^([^:]+):(.+)$" MATCH ${GN_TARGET_IN})
-  if (MATCH)
+  if(MATCH)
     # Explicit target kind
     set(TARGET ${CMAKE_MATCH_1})
     set(KIND ${CMAKE_MATCH_2})
   else()
-    # No target kind. Most likely a 'lib', but needs to handle 'tint_unittests' or 'tint_benchmark'
+    # Implicit 'lib'
     set(TARGET ${GN_TARGET_IN})
-    set(KIND "<unknown>")
+    set(KIND "lib")
   endif()
 
   # Remove path slashes.
   string(REPLACE "/" "_" TARGET "${TARGET}")
 
-  # Infer kind, and apply naming tweaks
-  if ((${TARGET} STREQUAL "tint_unittests") OR (${KIND} STREQUAL "test"))
-    if(TINT_BUILD_TESTS)
-      set(TARGET "tint_unittests")
-      set(KIND   "test")
-    else()
+  # Add 'tint_' prefix
+  set(TARGET "tint_${TARGET}")
+
+  if(${KIND} STREQUAL cmd)
+    if(NOT TINT_BUILD_CMD_TOOLS)
       set(TARGET TINT_TARGET_DISABLED)
       set(KIND   TINT_TARGET_DISABLED)
     endif()
-  elseif ((${TARGET} STREQUAL "tint_benchmark") OR (${KIND} STREQUAL "bench"))
-    if(TINT_BUILD_BENCHMARKS)
-      set(TARGET "tint_benchmark")
-      set(KIND   "bench")
-    else()
+  elseif((${KIND} STREQUAL test) OR (${KIND} STREQUAL test_cmd))
+    if(NOT TINT_BUILD_TESTS)
       set(TARGET TINT_TARGET_DISABLED)
       set(KIND   TINT_TARGET_DISABLED)
     endif()
-  elseif (${KIND} STREQUAL "cmd")
-    if(TINT_BUILD_CMD_TOOLS)
-      set(TARGET "tint_${TARGET}")
-      set(KIND   "cmd")
-    else()
+    set(TARGET "${TARGET}_test")
+  elseif((${KIND} STREQUAL bench) OR (${KIND} STREQUAL bench_cmd))
+    if(NOT TINT_BUILD_BENCHMARKS)
       set(TARGET TINT_TARGET_DISABLED)
       set(KIND   TINT_TARGET_DISABLED)
     endif()
+    set(TARGET "${TARGET}_bench")
+  elseif(${KIND} STREQUAL lib)
   else()
-    set(TARGET "tint_${TARGET}")
-    set(KIND   "lib")
+    message(FATAL_ERROR "unhandled target kind ${KIND}")
   endif()
 
   # Output values
@@ -404,7 +409,6 @@ function(tint_add_target GN_TARGET)
     return() # Target is disabled via build flags
   elseif(${KIND} STREQUAL lib)
     add_library(${TARGET} STATIC EXCLUDE_FROM_ALL)
-    target_sources(${TARGET} PRIVATE ${SOURCES})
     tint_default_compile_options(${TARGET})
 
     if(TINT_BUILD_FUZZERS)
@@ -417,26 +421,34 @@ function(tint_add_target GN_TARGET)
     endif()
   elseif(${KIND} STREQUAL cmd)
     add_executable(${TARGET})
-    target_sources(${TARGET} PRIVATE ${SOURCES})
     tint_default_compile_options(${TARGET})
 
     # Strip the 'tint_cmd_' prefix for commands under src/tint/cmd/...
-    string(REGEX MATCH "^tint_cmd_(.+)$" MATCH ${CMD_NAME} ${TARGET})
-    if (MATCH)
-      set(OUTPUT_NAME ${CMAKE_MATCH_1})
-      if(NOT OUTPUT_NAME STREQUAL "tint")
-        set(OUTPUT_NAME "tint_${OUTPUT_NAME}")
-      endif()
-      set_target_properties(${TARGET} PROPERTIES OUTPUT_NAME ${OUTPUT_NAME})
-    endif()
+    tint_rename_output(${TARGET} "^tint_cmd_(.+)$")
+  elseif(${KIND} STREQUAL test_cmd)
+    add_executable(${TARGET})
+    tint_test_cmd_compile_options(${TARGET})
 
+    # Strip the 'tint_cmd_' prefix and '_test' suffix for test executables under src/tint/cmd/...
+    tint_rename_output(${TARGET} "^tint_cmd_(.+)_test$")
+  elseif(${KIND} STREQUAL bench_cmd)
+    add_executable(${TARGET})
+    tint_bench_cmd_compile_options(${TARGET})
+
+    # Strip the 'tint_cmd_' prefix and '_bench' suffix for benchmark executables under src/tint/cmd/...
+    tint_rename_output(${TARGET} "^tint_cmd_(.+)_bench$")
   elseif(${KIND} STREQUAL test)
-    target_sources(${TARGET} PRIVATE ${SOURCES})
+    add_library(${TARGET} OBJECT EXCLUDE_FROM_ALL)
+    tint_test_compile_options(${TARGET})
   elseif(${KIND} STREQUAL bench)
-    target_sources(${TARGET} PRIVATE ${SOURCES})
+    add_library(${TARGET} OBJECT EXCLUDE_FROM_ALL)
+    tint_bench_compile_options(${TARGET})
   else()
-    message(FATAL_ERROR "unhandled kind ${KIND}")
+    message(FATAL_ERROR "unhandled target kind ${KIND}")
   endif()
+
+  # Add the sources to the target
+  target_sources(${TARGET} PRIVATE ${SOURCES})
 endfunction()
 
 # tint_target_add_sources(GN_TARGET [SOURCES...])
@@ -486,9 +498,7 @@ function(tint_target_add_dependencies GN_TARGET)
   set(DEPENDENCY_TARGETS "")
   foreach(DEPENDENCY ${DEPENDENCIES})
     tint_translate_target(DEP_TARGET DEP_KIND ${DEPENDENCY})
-    if (DEP_KIND STREQUAL lib) # If the dependency is a 'lib'
-      list(APPEND DEPENDENCY_TARGETS ${DEP_TARGET})
-    endif()
+    list(APPEND DEPENDENCY_TARGETS ${DEP_TARGET})
   endforeach()
 
   # Register the dependencies
@@ -554,7 +564,7 @@ function(tint_target_add_external_dependencies GN_TARGET)
         )
       elseif(${DEPENDENCY} STREQUAL "glslang")
         target_link_libraries(${TARGET} PRIVATE glslang)
-        if (NOT MSVC)
+        if(NOT MSVC)
           target_compile_options(${TARGET} PRIVATE
             -Wno-reserved-id-macro
             -Wno-shadow-field-in-constructor

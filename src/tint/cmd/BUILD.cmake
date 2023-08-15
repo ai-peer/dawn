@@ -20,9 +20,9 @@
 # Do not modify this file directly
 ################################################################################
 
-include(cmd/bench/BUILD.cmake)
+include(cmd/benchmark/BUILD.cmake)
 include(cmd/common/BUILD.cmake)
 include(cmd/info/BUILD.cmake)
 include(cmd/loopy/BUILD.cmake)
-include(cmd/test/BUILD.cmake)
 include(cmd/tint/BUILD.cmake)
+include(cmd/unittests/BUILD.cmake)

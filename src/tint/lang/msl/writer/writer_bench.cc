@@ -14,7 +14,7 @@
 
 #include <string>
 
-#include "src/tint/cmd/bench/bench.h"
+#include "src/tint/cmd/benchmark/bench.h"
 #include "src/tint/lang/msl/writer/writer.h"
 #include "src/tint/lang/wgsl/ast/module.h"
 #include "src/tint/lang/wgsl/sem/variable.h"

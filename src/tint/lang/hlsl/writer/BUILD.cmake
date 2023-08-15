@@ -69,7 +69,7 @@ tint_add_target("lang/hlsl/writer:bench"
 )
 
 tint_target_add_dependencies("lang/hlsl/writer:bench"
-  "cmd/bench"
+  "cmd/benchmark"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"
