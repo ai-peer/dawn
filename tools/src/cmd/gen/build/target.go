@@ -117,8 +117,21 @@ type TargetConditional struct {
 	ExternalDependencies []ExternalDependency
 }
 
+// A collection of source files and dependencies sharing the same condition
+type TargetConditionals []*TargetConditional
+
+// HasSourceFiles returns true if any of the conditionals in l have source files
+func (l TargetConditionals) HasSourceFiles() bool {
+	for _, c := range l {
+		if len(c.SourceFiles) > 0 {
+			return true
+		}
+	}
+	return false
+}
+
 // Conditionals returns a sorted list of TargetConditional, which are grouped by condition
-func (t *Target) Conditionals() []*TargetConditional {
+func (t *Target) Conditionals() TargetConditionals {
 	m := container.NewMap[string, *TargetConditional]()
 	for name := range t.SourceFileSet {
 		file := t.Directory.Project.Files[name]
@@ -151,5 +164,5 @@ func (t *Target) Conditionals() []*TargetConditional {
 		sort.Slice(c.InternalDependencies, func(a, b int) bool { return c.InternalDependencies[a].Name < c.InternalDependencies[b].Name })
 		sort.Slice(c.ExternalDependencies, func(a, b int) bool { return c.ExternalDependencies[a].Name < c.ExternalDependencies[b].Name })
 	}
-	return m.Values()
+	return TargetConditionals(m.Values())
 }
