@@ -30,6 +30,7 @@ tint_add_target("lang/wgsl/program"
 )
 
 tint_target_add_dependencies("lang/wgsl/program"
+  "api/common"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"

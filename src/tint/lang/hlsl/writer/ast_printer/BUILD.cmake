@@ -27,6 +27,7 @@ tint_add_target("lang/hlsl/writer/ast_printer"
 )
 
 tint_target_add_dependencies("lang/hlsl/writer/ast_printer"
+  "api/common"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"

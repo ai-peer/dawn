@@ -21,7 +21,7 @@
 #include "src/tint/lang/core/type/pointer.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/rtti/castable.h"
-#include "tint/binding_point.h"
+#include "src/tint/api/common/binding_point.h"
 
 namespace tint::ir {
 

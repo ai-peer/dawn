@@ -18,7 +18,7 @@
 #include <unordered_map>
 
 #include "src/tint/lang/core/access.h"
-#include "tint/binding_point.h"
+#include "src/tint/api/common/binding_point.h"
 
 namespace tint {
 

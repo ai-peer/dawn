@@ -89,6 +89,7 @@ tint_add_target("lang/wgsl/sem"
 )
 
 tint_target_add_dependencies("lang/wgsl/sem"
+  "api/common"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"

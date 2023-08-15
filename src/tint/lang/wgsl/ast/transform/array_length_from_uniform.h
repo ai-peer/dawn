@@ -19,7 +19,7 @@
 #include <unordered_set>
 
 #include "src/tint/lang/wgsl/ast/transform/transform.h"
-#include "tint/binding_point.h"
+#include "src/tint/api/common/binding_point.h"
 
 namespace tint::ast::transform {
 

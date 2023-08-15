@@ -19,7 +19,7 @@
 #include <functional>
 
 #include "src/tint/utils/text/string_stream.h"
-#include "tint/binding_point.h"
+#include "src/tint/api/common/binding_point.h"
 
 namespace tint::sem {
 

@@ -34,7 +34,7 @@
 #include "src/tint/utils/diagnostic/formatter.h"
 #include "src/tint/utils/diagnostic/printer.h"
 #include "tint/array_length_from_uniform_options.h"
-#include "tint/binding_point.h"
+#include "src/tint/api/common/binding_point.h"
 #include "tint/binding_remapper_options.h"
 #include "tint/external_texture_options.h"
 

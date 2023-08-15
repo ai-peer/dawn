@@ -39,7 +39,7 @@
 #include "src/tint/utils/diagnostic/formatter.h"
 #include "src/tint/utils/diagnostic/printer.h"
 #include "src/tint/utils/math/hash.h"
-#include "tint/binding_point.h"
+#include "src/tint/api/common/binding_point.h"
 
 namespace tint::fuzzers {
 

@@ -28,6 +28,7 @@ tint_add_target("cmd/common"
 )
 
 tint_target_add_dependencies("cmd/common"
+  "api/common"
   "lang/core/type"
   "lang/spirv/reader/common"
   "lang/wgsl/ast"
@@ -57,6 +58,7 @@ tint_add_target("cmd/common:test"
 )
 
 tint_target_add_dependencies("cmd/common:test"
+  "api/common"
   "cmd/common"
   "lang/wgsl/program"
   "lang/wgsl/resolver"

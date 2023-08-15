@@ -36,6 +36,7 @@ tint_add_target("lang/wgsl/resolver"
 )
 
 tint_target_add_dependencies("lang/wgsl/resolver"
+  "api/common"
   "lang/core"
   "lang/core/constant"
   "lang/core/intrinsic"

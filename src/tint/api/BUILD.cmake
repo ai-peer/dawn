@@ -20,6 +20,9 @@
 # Do not modify this file directly
 ################################################################################
 
+include(api/common/BUILD.cmake)
+include(api/options/BUILD.cmake)
+
 tint_add_target("api"
   api/tint.cc
   api/tint.h

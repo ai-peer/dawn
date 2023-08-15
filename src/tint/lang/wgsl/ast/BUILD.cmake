@@ -182,6 +182,7 @@ tint_add_target("lang/wgsl/ast"
 )
 
 tint_target_add_dependencies("lang/wgsl/ast"
+  "api/common"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"

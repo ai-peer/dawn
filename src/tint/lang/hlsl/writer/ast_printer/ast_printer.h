@@ -29,7 +29,7 @@
 #include "src/tint/utils/generator/text_generator.h"
 #include "src/tint/utils/math/hash.h"
 #include "tint/array_length_from_uniform_options.h"
-#include "tint/binding_point.h"
+#include "src/tint/api/common/binding_point.h"
 
 // Forward declarations
 namespace tint::sem {
