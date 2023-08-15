@@ -32,6 +32,8 @@ if (tint_build_msl_writer) {
       "printer_support.h",
     ]
     deps = [
+      "${tint_src_dir}/api/common",
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/type",
       "${tint_src_dir}/utils/containers",
