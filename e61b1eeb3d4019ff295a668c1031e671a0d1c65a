@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac5268a_02e85bbb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-15T20:52:42Z",
+      "side": 1,
+      "message": "Couple of questions but seems fine in general.",
+      "revId": "e61b1eeb3d4019ff295a668c1031e671a0d1c65a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab3f94e_0481cabf",
+        "filename": "src/tint/api/BUILD.cmake",
+        "patchSetId": 27
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-15T20:52:42Z",
+      "side": 1,
+      "message": "Why aren\u0027t these two guarded by `TINT_BUILD_WGSL_{READER,WRITER}`?",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 20
+      },
+      "revId": "e61b1eeb3d4019ff295a668c1031e671a0d1c65a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01a66888_b1a5b4e2",
+        "filename": "src/tint/lang/spirv/writer/BUILD.cmake",
+        "patchSetId": 27
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-15T20:52:42Z",
+      "side": 1,
+      "message": "Why is this checking for `TINT_BUILD_SPV_READER` in here? And why are we checking for `TINT_BUILD_SPV_WRITER`, when we\u0027re already inside an `if(TINT_BUILD_SPV_WRITER)`?",
+      "revId": "e61b1eeb3d4019ff295a668c1031e671a0d1c65a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
