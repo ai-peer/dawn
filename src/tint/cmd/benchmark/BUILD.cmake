@@ -20,12 +20,12 @@
 # Do not modify this file directly
 ################################################################################
 
-tint_add_target("cmd/bench"
-  cmd/bench/bench.h
-  cmd/bench/benchmark.cc
+tint_add_target("cmd/benchmark"
+  cmd/benchmark/bench.h
+  cmd/benchmark/benchmark.cc
 )
 
-tint_target_add_dependencies("cmd/bench"
+tint_target_add_dependencies("cmd/benchmark"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"
@@ -46,12 +46,12 @@ tint_target_add_dependencies("cmd/bench"
   "utils/traits"
 )
 
-tint_add_target("cmd/bench:bench"
-  cmd/bench/main_bench.cc
+tint_add_target("cmd/benchmark:bench_cmd"
+  cmd/benchmark/main_bench.cc
 )
 
-tint_target_add_dependencies("cmd/bench:bench"
-  "cmd/bench"
+tint_target_add_dependencies("cmd/benchmark:bench_cmd"
+  "cmd/benchmark"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"
@@ -81,31 +81,31 @@ tint_target_add_dependencies("cmd/bench:bench"
 )
 
 if (TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench"
+  tint_target_add_dependencies("cmd/benchmark:bench_cmd"
     "lang/glsl/writer:bench"
   )
 endif(TINT_BUILD_GLSL_WRITER)
 
 if (TINT_BUILD_HLSL_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench"
+  tint_target_add_dependencies("cmd/benchmark:bench_cmd"
     "lang/hlsl/writer:bench"
   )
 endif(TINT_BUILD_HLSL_WRITER)
 
 if (TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench"
+  tint_target_add_dependencies("cmd/benchmark:bench_cmd"
     "lang/msl/writer:bench"
   )
 endif(TINT_BUILD_MSL_WRITER)
 
 if (TINT_BUILD_SPV_READER)
-  tint_target_add_dependencies("cmd/bench:bench"
+  tint_target_add_dependencies("cmd/benchmark:bench_cmd"
     "lang/spirv/reader"
   )
 endif(TINT_BUILD_SPV_READER)
 
 if (TINT_BUILD_SPV_WRITER)
-  tint_target_add_dependencies("cmd/bench:bench"
+  tint_target_add_dependencies("cmd/benchmark:bench_cmd"
     "lang/spirv/writer:bench"
   )
 endif(TINT_BUILD_SPV_WRITER)

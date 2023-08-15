@@ -246,8 +246,12 @@ func applyDirectoryConfigs(p *Project) error {
 		Lib TargetConfig
 		// Configuration for the 'test' target
 		Test TargetConfig
+		// Configuration for the 'test_cmd' target
+		TestCmd TargetConfig `json:"test_cmd"`
 		// Configuration for the 'bench' target
 		Bench TargetConfig
+		// Configuration for the 'bench_cmd' target
+		BenchCmd TargetConfig `json:"bench_cmd"`
 		// Configuration for the 'cmd' target
 		Cmd TargetConfig
 	}
@@ -278,7 +282,9 @@ func applyDirectoryConfigs(p *Project) error {
 		}{
 			{&cfg.Lib, targetLib},
 			{&cfg.Test, targetTest},
+			{&cfg.TestCmd, targetTestCmd},
 			{&cfg.Bench, targetBench},
+			{&cfg.BenchCmd, targetBenchCmd},
 			{&cfg.Cmd, targetCmd},
 		} {
 			// Add any additional dependencies
@@ -553,21 +559,6 @@ func emitBuildFiles(p *Project) error {
 	}
 
 	return nil
-}
-
-// targetKindFromFilename returns the target kind my pattern matching the filename
-func targetKindFromFilename(filename string) TargetKind {
-	switch {
-	case strings.HasSuffix(filename, "_test.cc"), strings.HasSuffix(filename, "_test.h"):
-		return targetTest
-	case strings.HasSuffix(filename, "_bench.cc"), strings.HasSuffix(filename, "_bench.h"):
-		return targetBench
-	case filename == "main.cc":
-		return targetCmd
-	case strings.HasSuffix(filename, ".cc"), strings.HasSuffix(filename, ".h"):
-		return targetLib
-	}
-	return targetInvalid
 }
 
 // emitDotFile writes a GraphViz DOT file visualizing the target dependency graph

@@ -16,7 +16,7 @@
 
 #include <string>
 
-#include "src/tint/cmd/bench/bench.h"
+#include "src/tint/cmd/benchmark/bench.h"
 #include "src/tint/lang/spirv/writer/writer.h"
 
 namespace tint::spirv::writer {

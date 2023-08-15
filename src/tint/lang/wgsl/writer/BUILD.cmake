@@ -63,7 +63,7 @@ tint_add_target("lang/wgsl/writer:bench"
 )
 
 tint_target_add_dependencies("lang/wgsl/writer:bench"
-  "cmd/bench"
+  "cmd/benchmark"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"

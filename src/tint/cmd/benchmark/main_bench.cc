@@ -17,7 +17,7 @@
 #include <utility>
 #include <vector>
 
-#include "src/tint/cmd/bench/bench.h"
+#include "src/tint/cmd/benchmark/bench.h"
 #include "src/tint/lang/spirv/reader/reader.h"
 #include "src/tint/lang/wgsl/reader/reader.h"
 #include "src/tint/lang/wgsl/writer/writer.h"

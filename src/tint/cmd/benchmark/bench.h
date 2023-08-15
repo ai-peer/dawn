@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_CMD_BENCH_BENCH_H_
-#define SRC_TINT_CMD_BENCH_BENCH_H_
+#ifndef SRC_TINT_CMD_BENCHMARK_BENCH_H_
+#define SRC_TINT_CMD_BENCHMARK_BENCH_H_
 
 #include <memory>
 #include <string>
@@ -87,4 +87,4 @@ std::variant<ProgramAndFile, Error> LoadProgram(std::string name);
 
 }  // namespace tint::bench
 
-#endif  // SRC_TINT_CMD_BENCH_BENCH_H_
+#endif  // SRC_TINT_CMD_BENCHMARK_BENCH_H_
