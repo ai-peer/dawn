@@ -45,6 +45,7 @@ tint_unittests_source_set("unittests") {
     "switch_test.cc",
   ]
   deps = [
+    "${tint_glslang_dir}:gtest",
     "${tint_src_dir}:gmock_and_gtest",
     "${tint_src_dir}/utils/macros",
     "${tint_src_dir}/utils/math",

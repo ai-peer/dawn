@@ -70,6 +70,7 @@ if (tint_build_ir) {
       "rename_conflicts_test.cc",
     ]
     deps = [
+      "${tint_glslang_dir}:gtest",
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
