@@ -16,6 +16,52 @@
       "message": "Guys, can you still recall why we decided not to support R16Unorm and RG16Unorm in V1? If any hard limitation insurmountable, I would have to make it as an optional feature. Otherwise I should try to implement them fully supported like R8Unorm and RG8Unorm. I would really appreciate your perspective on this!\n\nBTW, this CL, jointly with the other two below, can barely work for P010 videos.\nhttps://skia-review.googlesource.com/c/skia/+/742636\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4780335",
       "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f84bf23_7f254a98",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3141,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-15T14:39:21Z",
+      "side": 1,
+      "message": "This change will break ABI. Does dawn have the requirement to keep binary compatible?",
+      "range": {
+        "startLine": 3141,
+        "startChar": 12,
+        "endLine": 3141,
+        "endChar": 45
+      },
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed79ab82_bb4e4534",
+        "filename": "src/dawn/utils/TextureUtils.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-15T14:39:21Z",
+      "side": 1,
+      "message": "Where is R16Unorm?",
+      "range": {
+        "startLine": 144,
+        "startChar": 62,
+        "endLine": 144,
+        "endChar": 71
+      },
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
