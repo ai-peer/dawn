@@ -2544,7 +2544,8 @@ const Type* ASTParser::GetHandleTypeForSpirvHandle(const spvtools::opt::Instruct
 
         // WGSL textures are always formatted.  Unformatted textures are always
         // sampled.
-        if (usage.IsSampledTexture() || usage.IsStorageReadTexture() ||
+        if (usage.IsSampledTexture() ||
+            (usage.IsStorageReadTexture() && !usage.IsStorageWriteTexture()) ||
             (uint32_t(image_type->format()) == uint32_t(spv::ImageFormat::Unknown))) {
             // Make a sampled texture type.
             auto* ast_sampled_component_type =
@@ -2572,7 +2573,11 @@ const Type* ASTParser::GetHandleTypeForSpirvHandle(const spvtools::opt::Instruct
                 ast_handle_type = ty_.SampledTexture(dim, ast_sampled_component_type);
             }
         } else {
-            const auto access = core::Access::kWrite;
+            const auto access =
+                usage.IsStorageReadTexture() ? core::Access::kReadWrite : core::Access::kWrite;
+            if (access == core::Access::kReadWrite) {
+                Enable(core::Extension::kChromiumExperimentalReadWriteStorageTexture);
+            }
             const auto format = enum_converter_.ToTexelFormat(image_type->format());
             if (format == core::TexelFormat::kUndefined) {
                 return nullptr;
