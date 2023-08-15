@@ -34,6 +34,24 @@
       "parentUuid": "d7e76f98_63990b50",
       "revId": "f851a5e0cdcbd88a35c96ec38dd282d5d1111685",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae9c7564_b3e96bd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003421
+      },
+      "writtenOn": "2023-08-15T01:52:45Z",
+      "side": 1,
+      "message": "Dynamic linking to dawn.node on Windows. Without this DLL export decoration, the Initialize() symbol is not available for calling from my code.",
+      "parentUuid": "e27db551_267a6fe8",
+      "revId": "f851a5e0cdcbd88a35c96ec38dd282d5d1111685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
