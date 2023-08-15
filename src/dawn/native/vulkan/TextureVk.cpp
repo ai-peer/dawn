@@ -254,6 +254,8 @@ VkFormat VulkanImageFormat(const Device* device, wgpu::TextureFormat format) {
         case wgpu::TextureFormat::R8Sint:
             return VK_FORMAT_R8_SINT;
 
+        case wgpu::TextureFormat::R16Unorm:
+            return VK_FORMAT_R16_UNORM;
         case wgpu::TextureFormat::R16Uint:
             return VK_FORMAT_R16_UINT;
         case wgpu::TextureFormat::R16Sint:
@@ -275,6 +277,8 @@ VkFormat VulkanImageFormat(const Device* device, wgpu::TextureFormat format) {
             return VK_FORMAT_R32_SINT;
         case wgpu::TextureFormat::R32Float:
             return VK_FORMAT_R32_SFLOAT;
+        case wgpu::TextureFormat::RG16Unorm:
+            return VK_FORMAT_R16G16_UNORM;
         case wgpu::TextureFormat::RG16Uint:
             return VK_FORMAT_R16G16_UINT;
         case wgpu::TextureFormat::RG16Sint:
@@ -458,6 +462,8 @@ VkFormat VulkanImageFormat(const Device* device, wgpu::TextureFormat format) {
 
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
             return VK_FORMAT_G8_B8R8_2PLANE_420_UNORM;
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+            return VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16;
 
         case wgpu::TextureFormat::Undefined:
             break;

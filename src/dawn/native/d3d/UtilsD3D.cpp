@@ -92,6 +92,7 @@ DXGI_FORMAT DXGITypelessTextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::R8Sint:
             return DXGI_FORMAT_R8_TYPELESS;
 
+        case wgpu::TextureFormat::R16Unorm:
         case wgpu::TextureFormat::R16Uint:
         case wgpu::TextureFormat::R16Sint:
         case wgpu::TextureFormat::R16Float:
@@ -109,6 +110,7 @@ DXGI_FORMAT DXGITypelessTextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::R32Float:
             return DXGI_FORMAT_R32_TYPELESS;
 
+        case wgpu::TextureFormat::RG16Unorm:
         case wgpu::TextureFormat::RG16Uint:
         case wgpu::TextureFormat::RG16Sint:
         case wgpu::TextureFormat::RG16Float:
@@ -229,6 +231,7 @@ DXGI_FORMAT DXGITypelessTextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::ASTC12x12UnormSrgb:
 
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
         case wgpu::TextureFormat::Undefined:
             UNREACHABLE();
     }
@@ -245,6 +248,8 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::R8Sint:
             return DXGI_FORMAT_R8_SINT;
 
+        case wgpu::TextureFormat::R16Unorm:
+            return DXGI_FORMAT_R16_UNORM;
         case wgpu::TextureFormat::R16Uint:
             return DXGI_FORMAT_R16_UINT;
         case wgpu::TextureFormat::R16Sint:
@@ -266,6 +271,8 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
             return DXGI_FORMAT_R32_SINT;
         case wgpu::TextureFormat::R32Float:
             return DXGI_FORMAT_R32_FLOAT;
+        case wgpu::TextureFormat::RG16Unorm:
+            return DXGI_FORMAT_R16G16_UNORM;
         case wgpu::TextureFormat::RG16Uint:
             return DXGI_FORMAT_R16G16_UINT;
         case wgpu::TextureFormat::RG16Sint:
@@ -356,6 +363,8 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
 
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
             return DXGI_FORMAT_NV12;
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+            return DXGI_FORMAT_P010;
 
         case wgpu::TextureFormat::ETC2RGB8Unorm:
         case wgpu::TextureFormat::ETC2RGB8UnormSrgb:

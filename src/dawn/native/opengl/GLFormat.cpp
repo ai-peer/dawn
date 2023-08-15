@@ -50,6 +50,7 @@ GLFormatTable BuildGLFormatTable(GLenum internalFormatForBGRA) {
         AddFormat(wgpu::TextureFormat::R8Sint, GL_R8I, GL_RED_INTEGER, GL_BYTE, Type::Int);
 
         // 2 bytes color formats
+        AddFormat(wgpu::TextureFormat::R16Unorm, GL_R16, GL_RED_INTEGER, GL_UNSIGNED_SHORT, Type::Float);
         AddFormat(wgpu::TextureFormat::R16Uint, GL_R16UI, GL_RED_INTEGER, GL_UNSIGNED_SHORT, Type::Uint);
         AddFormat(wgpu::TextureFormat::R16Sint, GL_R16I, GL_RED_INTEGER, GL_SHORT, Type::Int);
         AddFormat(wgpu::TextureFormat::R16Float, GL_R16F, GL_RED, GL_HALF_FLOAT, Type::Float);
@@ -62,6 +63,7 @@ GLFormatTable BuildGLFormatTable(GLenum internalFormatForBGRA) {
         AddFormat(wgpu::TextureFormat::R32Uint, GL_R32UI, GL_RED_INTEGER, GL_UNSIGNED_INT, Type::Uint);
         AddFormat(wgpu::TextureFormat::R32Sint, GL_R32I, GL_RED_INTEGER, GL_INT, Type::Int);
         AddFormat(wgpu::TextureFormat::R32Float, GL_R32F, GL_RED, GL_FLOAT, Type::Float);
+        AddFormat(wgpu::TextureFormat::RG16Unorm, GL_RG16, GL_RG_INTEGER, GL_UNSIGNED_SHORT, Type::Float);
         AddFormat(wgpu::TextureFormat::RG16Uint, GL_RG16UI, GL_RG_INTEGER, GL_UNSIGNED_SHORT, Type::Uint);
         AddFormat(wgpu::TextureFormat::RG16Sint, GL_RG16I, GL_RG_INTEGER, GL_SHORT, Type::Int);
         AddFormat(wgpu::TextureFormat::RG16Float, GL_RG16F, GL_RG, GL_HALF_FLOAT, Type::Float);

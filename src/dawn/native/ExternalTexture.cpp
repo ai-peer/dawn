@@ -74,12 +74,16 @@ MaybeError ValidateExternalTextureDescriptor(const DeviceBase* device,
         DAWN_TRY(device->ValidateObject(descriptor->plane1));
         wgpu::TextureFormat plane1Format = descriptor->plane1->GetFormat().format;
 
-        DAWN_INVALID_IF(plane0Format != wgpu::TextureFormat::R8Unorm,
-                        "The bi-planar external texture plane (%s) format (%s) is not %s.",
-                        descriptor->plane0, plane0Format, wgpu::TextureFormat::R8Unorm);
-        DAWN_INVALID_IF(plane1Format != wgpu::TextureFormat::RG8Unorm,
-                        "The bi-planar external texture plane (%s) format (%s) is not %s.",
-                        descriptor->plane1, plane1Format, wgpu::TextureFormat::RG8Unorm);
+        DAWN_INVALID_IF(plane0Format != wgpu::TextureFormat::R8Unorm &&
+                            plane0Format != wgpu::TextureFormat::R16Unorm,
+                        "The bi-planar external texture plane (%s) format (%s) is not %s or %s.",
+                        descriptor->plane0, plane0Format, wgpu::TextureFormat::R8Unorm,
+                        wgpu::TextureFormat::R16Unorm);
+        DAWN_INVALID_IF(plane1Format != wgpu::TextureFormat::RG8Unorm &&
+                            plane1Format != wgpu::TextureFormat::RG16Unorm,
+                        "The bi-planar external texture plane (%s) format (%s) is not %s or %s.",
+                        descriptor->plane1, plane1Format, wgpu::TextureFormat::RG8Unorm,
+                        wgpu::TextureFormat::RG16Unorm);
 
         DAWN_TRY(ValidateExternalTexturePlane(descriptor->plane0));
         DAWN_TRY(ValidateExternalTexturePlane(descriptor->plane1));

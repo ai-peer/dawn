@@ -378,6 +378,7 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         AddColorFormat(wgpu::TextureFormat::R8Sint, true, false, true, false, 1, SampleTypeBit::Sint, 1, 1, 1);
 
         // 2 bytes color formats
+        AddColorFormat(wgpu::TextureFormat::R16Unorm, true, false, true, true, 2, kAnyFloat, 1, 2, 2);
         AddColorFormat(wgpu::TextureFormat::R16Uint, true, false, true, false, 2, SampleTypeBit::Uint, 1, 2, 2);
         AddColorFormat(wgpu::TextureFormat::R16Sint, true, false, true, false, 2, SampleTypeBit::Sint, 1, 2, 2);
         AddColorFormat(wgpu::TextureFormat::R16Float, true, false, true, true, 2, kAnyFloat, 1, 2, 2);
@@ -391,6 +392,7 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         AddColorFormat(wgpu::TextureFormat::R32Uint, true, true, false, false, 4, SampleTypeBit::Uint, 1, 4, 4);
         AddColorFormat(wgpu::TextureFormat::R32Sint, true, true, false, false, 4, SampleTypeBit::Sint, 1, 4, 4);
         AddColorFormat(wgpu::TextureFormat::R32Float, true, true, true, false, 4, sampleTypeFor32BitFloatFormats, 1, 4, 4);
+        AddColorFormat(wgpu::TextureFormat::RG16Unorm, true, false, true, true, 4, kAnyFloat, 2, 4, 2);
         AddColorFormat(wgpu::TextureFormat::RG16Uint, true, false, true, false, 4, SampleTypeBit::Uint, 2, 4, 2);
         AddColorFormat(wgpu::TextureFormat::RG16Sint, true, false, true, false, 4, SampleTypeBit::Sint, 2, 4, 2);
         AddColorFormat(wgpu::TextureFormat::RG16Float, true, false, true, true, 4, kAnyFloat, 2, 4, 2);
@@ -501,15 +503,17 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         const UnsupportedReason multiPlanarFormatUnsupportedReason = device->HasFeature(Feature::MultiPlanarFormats) ?  Format::supported : RequiresFeature{wgpu::FeatureName::DawnMultiPlanarFormats};
         AddMultiAspectFormat(wgpu::TextureFormat::R8BG8Biplanar420Unorm, Aspect::Plane0 | Aspect::Plane1,
             wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::RG8Unorm, false, multiPlanarFormatUnsupportedReason, false, 3);
+        AddMultiAspectFormat(wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm, Aspect::Plane0 | Aspect::Plane1,
+            wgpu::TextureFormat::R16Unorm, wgpu::TextureFormat::RG16Unorm, false, multiPlanarFormatUnsupportedReason, false, 3);
 
-    // clang-format on
+        // clang-format on
 
-    // This checks that each format is set at least once, the second part of checking that all
-    // formats are checked exactly once. If this assertion is failing and texture formats have
-    // been added or removed recently, check that kKnownFormatCount has been updated.
-    ASSERT(formatsSet.all());
+        // This checks that each format is set at least once, the second part of checking that all
+        // formats are checked exactly once. If this assertion is failing and texture formats have
+        // been added or removed recently, check that kKnownFormatCount has been updated.
+        ASSERT(formatsSet.all());
 
-    return table;
+        return table;
 }
 
 namespace {

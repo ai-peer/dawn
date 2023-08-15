@@ -600,9 +600,19 @@ TEST_P(TextureFormatTest, RGBA8Uint) {
     DoUintTest<uint8_t>({wgpu::TextureFormat::RGBA8Uint, 4, TextureComponentType::Uint, 4});
 }
 
+// Test the R16Unorm format
+TEST_P(TextureFormatTest, R16Unorm) {
+    DoUnormTest<uint16_t>({wgpu::TextureFormat::R16Unorm, 2, TextureComponentType::Float, 1});
+}
+
 // Test the R16Uint format
 TEST_P(TextureFormatTest, R16Uint) {
     DoUintTest<uint16_t>({wgpu::TextureFormat::R16Uint, 2, TextureComponentType::Uint, 1});
+}
+
+// Test the RG16Unorm format
+TEST_P(TextureFormatTest, RG16Unorm) {
+    DoUnormTest<uint16_t>({wgpu::TextureFormat::RG16Unorm, 4, TextureComponentType::Float, 2});
 }
 
 // Test the RG16Uint format
