@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "786c00e1_3c51049c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 27
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-15T21:32:45Z",
+      "side": 1,
+      "message": "Thanks. I\u0027m going to submit as rebasing this is no fun, and I\u0027d like to know sooner rather than later if there\u0027s issues.\n\nI have a followup change that cleans up the CMakeLists.txt file based on a suggestion from James.",
+      "revId": "e61b1eeb3d4019ff295a668c1031e671a0d1c65a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aab3f94e_0481cabf",
@@ -43,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6cb96b9_2acca53f",
+        "filename": "src/tint/api/BUILD.cmake",
+        "patchSetId": 27
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-15T21:32:45Z",
+      "side": 1,
+      "message": "Because we\u0027re still in a world where WGSL is used for all sorts of things it shouldn\u0027t be. Once we\u0027re done decoupling WGSL, these will get conditioned.",
+      "parentUuid": "aab3f94e_0481cabf",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 20
+      },
+      "revId": "e61b1eeb3d4019ff295a668c1031e671a0d1c65a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "01a66888_b1a5b4e2",
         "filename": "src/tint/lang/spirv/writer/BUILD.cmake",
         "patchSetId": 27
@@ -54,6 +95,24 @@
       "writtenOn": "2023-08-15T20:52:42Z",
       "side": 1,
       "message": "Why is this checking for `TINT_BUILD_SPV_READER` in here? And why are we checking for `TINT_BUILD_SPV_WRITER`, when we\u0027re already inside an `if(TINT_BUILD_SPV_WRITER)`?",
+      "revId": "e61b1eeb3d4019ff295a668c1031e671a0d1c65a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64775f22_0ce777bf",
+        "filename": "src/tint/lang/spirv/writer/BUILD.cmake",
+        "patchSetId": 27
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-15T21:32:45Z",
+      "side": 1,
+      "message": "\u003e Why is this checking for `TINT_BUILD_SPV_READER` in here?\n\nBecause that\u0027s part of the condition set in [`externals.json`](https://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/cmd/gen/build/externals.json)\n\nWe probably want to drop this for a new `TINT_BUILD_SPV_VALIDATION` flag. For now, I\u0027m just matching the patterns we seemed to have.",
+      "parentUuid": "01a66888_b1a5b4e2",
       "revId": "e61b1eeb3d4019ff295a668c1031e671a0d1c65a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
