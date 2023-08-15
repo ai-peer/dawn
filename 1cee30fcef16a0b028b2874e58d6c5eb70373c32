@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc0d9246_10a55c31",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-15T21:01:18Z",
+      "side": 0,
+      "message": "Just for my curiosity, which parts of this condition was wrong?",
+      "range": {
+        "startLine": 1001,
+        "startChar": 4,
+        "endLine": 1006,
+        "endChar": 54
+      },
+      "revId": "1cee30fcef16a0b028b2874e58d6c5eb70373c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
