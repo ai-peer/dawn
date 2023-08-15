@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f19ca76a_5c99ffaf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-08-15T22:11:13Z",
+      "side": 1,
+      "message": "Thanks for the pointer! I changed it to use Dawn\u0027s implementation of spirv validation and disasm.",
+      "parentUuid": "55f23c0f_03697bae",
+      "revId": "c62a80a71ce8f48e385f294eefcfc1f297a0586d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd7d3679_fb7462cc",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f78b7096_02a2ef5f",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 988,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-08-15T22:11:13Z",
+      "side": 1,
+      "message": "Done but I didn\u0027t move the ifdef into ValidateSpriv since that code is only compiled under that build flag.",
+      "parentUuid": "cd7d3679_fb7462cc",
+      "revId": "c62a80a71ce8f48e385f294eefcfc1f297a0586d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9a8b0b1_a98e499a",
@@ -48,6 +84,30 @@
       "writtenOn": "2023-08-15T15:06:34Z",
       "side": 1,
       "message": "This was in `tint_unittests_spv_writer_src` - which was a test-only source set. We don\u0027t build with SPIR-V Tools on Android, so I\u0027m confused why the Android bots passed.",
+      "range": {
+        "startLine": 1019,
+        "startChar": 0,
+        "endLine": 1020,
+        "endChar": 42
+      },
+      "revId": "c62a80a71ce8f48e385f294eefcfc1f297a0586d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae2d5afe_7fcc8a74",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-08-15T22:11:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f9a8b0b1_a98e499a",
       "range": {
         "startLine": 1019,
         "startChar": 0,
