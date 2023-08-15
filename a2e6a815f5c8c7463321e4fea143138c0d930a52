@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0595554_39a3a660",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:50:18Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9ad76c1_efe282ca",
@@ -107,6 +124,97 @@
         "endLine": 1423,
         "endChar": 5
       },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d749f633_3bcfb918",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:50:18Z",
+      "side": 1,
+      "message": "Optional nit, we could render a single point in a 1x1 render target.",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ea62e34_4ef17a9d",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:50:18Z",
+      "side": 1,
+      "message": "nit: maybe testData : TestData? It\u0027s not exactly a fragment input (like @position is for example).",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53f26f9_5f3ee616",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:50:18Z",
+      "side": 1,
+      "message": "nit: It might be possible to skip writing std::array... with just {color1, color2}. That would be less verbose.",
+      "range": {
+        "startLine": 137,
+        "startChar": 56,
+        "endLine": 137,
+        "endChar": 84
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74a90bb5_45048ade",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:50:18Z",
+      "side": 1,
+      "message": "What about just buffer \u003d utils::CreateBufferFromData(device, \u0026data, sizeof(colors), Uniform)?",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7dbf589_7d1da263",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:50:18Z",
+      "side": 1,
+      "message": "nit: We might be able to move this in SetUp() right after the call to DawnTest::Setup() to factor it in a single place for the whole file.",
       "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
