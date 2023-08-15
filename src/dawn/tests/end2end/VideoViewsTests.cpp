@@ -842,6 +842,16 @@ TEST_P(VideoViewsValidationTests, RenderAttachmentInvalid) {
     mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
 }
 
+// Tests creating a texture with a multi-plane format.
+TEST_P(VideoViewsValidationTests, RenderAttachmentValid) {
+    // multi-planar formats should be allowed to be renderable.
+    auto platformTexture = mBackend->CreateVideoTextureForTest(
+        wgpu::TextureFormat::R8BG8Biplanar420Unorm, wgpu::TextureUsage::RenderAttachment,
+        /*isCheckerboard*/ true,
+        /*initialized*/ true);
+    mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+}
+
 // Tests writing into a multi-planar format fails.
 TEST_P(VideoViewsValidationTests, WriteTextureAllAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
