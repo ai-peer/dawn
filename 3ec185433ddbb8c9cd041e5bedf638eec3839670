@@ -33,6 +33,24 @@
       "message": "Was there a bug for this? (Or was this done preemptively because of the similar leak in Vulkan?)",
       "revId": "3ec185433ddbb8c9cd041e5bedf638eec3839670",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9466ca4_8800d30a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-15T21:10:08Z",
+      "side": 1,
+      "message": "stephen chatted me that it was broken locally, but it apparently didn\u0027t fail any tests\n\nbut yes, also semi proactively since overall it\u0027s the same type of problem",
+      "parentUuid": "b4777139_71940f7c",
+      "revId": "3ec185433ddbb8c9cd041e5bedf638eec3839670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
