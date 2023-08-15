@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e49a734a_74a6d579",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "07f8c359_1277ddd8",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1dd46796_a1ba337c",
@@ -101,6 +119,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Naming nit: \"DataInfo\" is also content-free. \"BindingPointToFieldAndOffset\" or \"FieldAndOffsetMap\" or something else? (I\u0027m not too happy with either of my suggestions, TBH.)",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a93bb2_5be41056",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dd46796_a1ba337c",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a69bbf55_2861cec6",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dafa3582_46a574cf",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "894a022f_7c6d224c",
@@ -135,6 +189,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Nit: \"UBO of buffer\" seems a bit awkward. What is this trying to convey?",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee8274ef_7e422cae",
+        "filename": "src/tint/lang/glsl/writer/output.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "894a022f_7c6d224c",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f62e2db8_265cf023",
+        "filename": "src/tint/lang/glsl/writer/output.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aac06c05_30569c14",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff48ccb5_12efdfa5",
@@ -169,6 +259,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Nit: \"GLSL ES has no native...\" or \"ESSL has no native...\".",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86f37a73_3e1cb98d",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff48ccb5_12efdfa5",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -208,6 +316,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d883ea8a_cc351f6e",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "641f16b6_dbada195",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d4d7b23_b301e909",
@@ -221,6 +347,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Does this case have test coverage?",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78060266_6800b39a",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Ditto",
+      "parentUuid": "1d4d7b23_b301e909",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -242,6 +386,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a898e5_c1fb2c39",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "It\u0027s left-over comment out code. Removed.",
+      "parentUuid": "67c4f835_159ac285",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc7434a5_e81df409",
@@ -255,6 +417,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Nit; \"param that needs\" -\u003e \"params that need\"",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "802b9131_8925a262",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc7434a5_e81df409",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -276,6 +456,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f75e5a96_d9e6c016",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f82e10e9_1a23cbf6",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3662816a_df85d334",
@@ -289,6 +487,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Nit: \"that needs\" -\u003e \"that need\"",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ff1ba3b_31502030",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3662816a_df85d334",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -310,6 +526,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65ff1531_4676858f",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0b0da17_389548b9",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ae2cd12_bd32dfdd",
@@ -323,6 +557,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Ibid",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ffec839_07e55b1b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ae2cd12_bd32dfdd",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -344,6 +596,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73be7b5_3ff8a1cd",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "632eb18c_45b2b928",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d29ff3d7_f1645f02",
@@ -357,6 +627,24 @@
       "writtenOn": "2023-08-14T20:12:06Z",
       "side": 1,
       "message": "Nit: sentence fragment. I\u0027d join it up, something like \"from a uniform buffer, as those builtin functions are not available in GLSL ES\".",
+      "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f311a56_08bc1b40",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d29ff3d7_f1645f02",
       "revId": "da258f10fab33a6b6a5a31c2b763433beb41bf17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3852ccc5_c2495f29",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a26a154a_21f3dbd5",
+      "range": {
+        "startLine": 164,
+        "startChar": 64,
+        "endLine": 164,
+        "endChar": 66
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33224f15_d235b920",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-14T21:42:40Z",
       "side": 1,
       "message": "nit: I\u0027d flip this to reduce the large indentation:\n```\nif (ubo) {\n  return ubo-\u003ename-\u003esymbol;  // Already created\n}\n```",
+      "range": {
+        "startLine": 334,
+        "startChar": 8,
+        "endLine": 334,
+        "endChar": 19
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5635de83_d7e1f17a",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 334,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33224f15_d235b920",
       "range": {
         "startLine": 334,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d18b36ba_38f5ab11",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cba8227_a131a6ae",
+      "range": {
+        "startLine": 349,
+        "startChar": 44,
+        "endLine": 349,
+        "endChar": 50
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c5c651f_407d564b",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b0ecbdc_4564fc5a",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c5c651f_407d564b",
+      "range": {
+        "startLine": 382,
+        "startChar": 18,
+        "endLine": 382,
+        "endChar": 36
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cdd4f1f_509f564f",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-08-14T21:42:40Z",
       "side": 1,
       "message": "`std::move(new_members)`",
+      "range": {
+        "startLine": 382,
+        "startChar": 60,
+        "endLine": 384,
+        "endChar": 61
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ee9bee9_d1159c64",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cdd4f1f_509f564f",
       "range": {
         "startLine": 382,
         "startChar": 60,
@@ -169,6 +289,30 @@
       "writtenOn": "2023-08-14T21:42:40Z",
       "side": 1,
       "message": "nit: all this byte offset \u003c-\u003e index is a bit icky. Would it not be better to hold a map of `BindingPoint` to symbol? The byte offsets seem less important for the majority of the logic in this transform, and could be held by a separate map.",
+      "range": {
+        "startLine": 400,
+        "startChar": 25,
+        "endLine": 400,
+        "endChar": 64
+      },
+      "revId": "f40ae2474953f815addb65df973f603066487914",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41ef706e_ebf68481",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 400,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T01:36:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5627e66_d06bfd38",
       "range": {
         "startLine": 400,
         "startChar": 25,
