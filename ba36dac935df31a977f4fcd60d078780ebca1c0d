@@ -175,6 +175,29 @@
       "message": "nit: tags",
       "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e448587_706128c7",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-15T12:18:23Z",
+      "side": 1,
+      "message": "nit: maybe mention that barrier still won\u0027t prevent the data races between fragment shaders on the same pixels within the same draw call?",
+      "range": {
+        "startLine": 168,
+        "startChar": 72,
+        "endLine": 168,
+        "endChar": 84
+      },
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
