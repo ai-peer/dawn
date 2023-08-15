@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55f23c0f_03697bae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-15T15:06:34Z",
+      "side": 1,
+      "message": "The Tint team have discussed this and the disassembly logic should be test-only. We don\u0027t want to make this production code.\nPlease revert the tint changes and call the SPIR-V disassembly directly from Dawn.\nThere\u0027s code already in Dawn to do this:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/SpirvValidation.cpp;l\u003d57?q\u003dSpirvValidation.cpp\u0026ss\u003dchromium",
+      "revId": "c62a80a71ce8f48e385f294eefcfc1f297a0586d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd7d3679_fb7462cc",
@@ -14,6 +31,29 @@
       "writtenOn": "2023-08-15T01:54:09Z",
       "side": 1,
       "message": "maybe we should copy the other bit of code we have for spirv validation.\n\n#ifdef DAWN_ENABLE_SPIRV_VALIDATION\n    DAWN_TRY(ValidateSpirv(GetDevice(), compilation-\u003espirv.data(), compilation-\u003espirv.size(),\n                           GetDevice()-\u003eIsToggleEnabled(Toggle::DumpShaders)));\n#endif\n\nperhaps move the ifdef into ValidateSpirv so we don\u0027t forget it.",
+      "revId": "c62a80a71ce8f48e385f294eefcfc1f297a0586d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9a8b0b1_a98e499a",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 1020,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-15T15:06:34Z",
+      "side": 1,
+      "message": "This was in `tint_unittests_spv_writer_src` - which was a test-only source set. We don\u0027t build with SPIR-V Tools on Android, so I\u0027m confused why the Android bots passed.",
+      "range": {
+        "startLine": 1019,
+        "startChar": 0,
+        "endLine": 1020,
+        "endChar": 42
+      },
       "revId": "c62a80a71ce8f48e385f294eefcfc1f297a0586d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
