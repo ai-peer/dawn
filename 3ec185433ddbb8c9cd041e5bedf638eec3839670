@@ -16,6 +16,23 @@
       "message": "LGTM! Thanks!",
       "revId": "3ec185433ddbb8c9cd041e5bedf638eec3839670",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4777139_71940f7c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-15T21:02:36Z",
+      "side": 1,
+      "message": "Was there a bug for this? (Or was this done preemptively because of the similar leak in Vulkan?)",
+      "revId": "3ec185433ddbb8c9cd041e5bedf638eec3839670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
