@@ -1,0 +1,45 @@
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+config_setting(
+    name = "not_is_linux_and_not_is_mac_and_not_is_win",
+    values = {"cpu": "arm"},
+)
+
+config_setting(
+    name = "tint_build_wgsl_reader",
+    values = {"cpu": "arm"},
+)
+
+config_setting(
+    name = "tint_build_wgsl_writer",
+    values = {"cpu": "arm"},
+)
+
+config_setting(
+    name = "tint_build_ir",
+    values = {"cpu": "arm"},
+)
+
+selects.config_setting_group(
+    name = "is_linux_or_is_mac",
+    match_any = [
+        "@platforms//os:linux",
+        "@platforms//os:macos",
+    ],
+)
+
+selects.config_setting_group(
+    name = "is_win",
+    match_any = [
+        "@platforms//os:windows",
+    ],
+)
+
+selects.config_setting_group(
+    name = "tint_build_wgsl_reader_and_tint_build_wgsl_writer_and_tint_build_ir",
+    match_all = [
+        ":tint_build_wgsl_reader",
+        ":tint_build_wgsl_writer",
+        ":tint_build_ir",
+    ],
+)
