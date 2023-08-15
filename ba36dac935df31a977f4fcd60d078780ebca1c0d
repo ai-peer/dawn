@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9ff609a_f9885cd1",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2008,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "641b2b8c_945ee2fa",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cd1a389_aa2ac5e1",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-08-15T01:39:51Z",
       "side": 1,
       "message": "nit: tags",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c2177e_46ad5888",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2018,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cd1a389_aa2ac5e1",
       "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1ca2c52_e02c74e2",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2022,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27ad05a1_83da3b91",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04d70c9b_72d584b5",
@@ -99,6 +153,24 @@
       "writtenOn": "2023-08-15T01:39:51Z",
       "side": 1,
       "message": "nit: tags",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fea910af_1d73ff47",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04d70c9b_72d584b5",
       "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +198,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3a6de75_bfb093b9",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2418,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13a520e8_ac66b235",
+      "range": {
+        "startLine": 2418,
+        "startChar": 30,
+        "endLine": 2418,
+        "endChar": 42
+      },
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "55ad2074_b49c4564",
@@ -139,6 +235,24 @@
       "writtenOn": "2023-08-15T01:39:51Z",
       "side": 1,
       "message": "nit: tags",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b994c164_7cde9cd6",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55ad2074_b49c4564",
       "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +274,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab758374_cf93d4b1",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2425,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e936f9e2_2db81b8d",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "167a1f7a_238b1e2e",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2425,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "FYI updated the offset to uint64_t because it isn\u0027t a CPU offset but an offset on the GPU (even if it will likely never be larger than 4GB).",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6b98b03_a59f8672",
@@ -177,6 +326,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c69095f_1d482354",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2582,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d6b98b03_a59f8672",
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e448587_706128c7",
@@ -190,6 +357,30 @@
       "writtenOn": "2023-08-15T12:18:23Z",
       "side": 1,
       "message": "nit: maybe mention that barrier still won\u0027t prevent the data races between fragment shaders on the same pixels within the same draw call?",
+      "range": {
+        "startLine": 168,
+        "startChar": 72,
+        "endLine": 168,
+        "endChar": 84
+      },
+      "revId": "ba36dac935df31a977f4fcd60d078780ebca1c0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a55e0106_80e98c7c",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T14:59:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e448587_706128c7",
       "range": {
         "startLine": 168,
         "startChar": 72,
