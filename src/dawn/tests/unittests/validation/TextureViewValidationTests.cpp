@@ -53,7 +53,7 @@ wgpu::Texture Create3DTexture(wgpu::Device& device) {
     descriptor.sampleCount = 1;
     descriptor.format = kDefaultTextureFormat;
     descriptor.mipLevelCount = kDefaultMipLevels;
-    descriptor.usage = wgpu::TextureUsage::TextureBinding;
+    descriptor.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment;
     return device.CreateTexture(&descriptor);
 }
 
