@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2696b91e_4ed70421",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-15T02:01:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9ad76c1_efe282ca",
+        "filename": "docs/dawn/features/dual_source_blending.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-15T02:01:44Z",
+      "side": 1,
+      "message": "```suggestion\n### Restrictions:\n```",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078c3c01_74608040",
+        "filename": "docs/dawn/features/dual_source_blending.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-15T02:01:44Z",
+      "side": 1,
+      "message": "\"makes it invalid to render to multiple..\"",
+      "range": {
+        "startLine": 32,
+        "startChar": 27,
+        "endLine": 32,
+        "endChar": 76
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79a343d6_8bb701ca",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-15T02:01:44Z",
+      "side": 1,
+      "message": "nit: we should have a small test to validate it is invalid to use the wgsl extension if the wgpu extension is not enabled.\n\nprobably in unittests/validation/ShaderModuleValidationTests.cpp",
+      "range": {
+        "startLine": 1421,
+        "startChar": 5,
+        "endLine": 1423,
+        "endChar": 5
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
