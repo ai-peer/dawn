@@ -113,6 +113,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c79c796_4b3e74da",
+        "filename": "src/dawn/node/cts.js",
+        "patchSetId": 2
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-08-15T15:24:37Z",
+      "side": 1,
+      "message": "yes, in fact usually native modules have as much logic in JS as possible so they only pay the cost for jumping between JS and C++ when absolutely necessary.",
+      "parentUuid": "84d29c21_46cb7695",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c3f360c_70ce3033",
         "filename": "src/dawn/node/cts.js",
         "patchSetId": 2
