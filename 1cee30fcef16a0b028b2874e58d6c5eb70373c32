@@ -22,6 +22,30 @@
       },
       "revId": "1cee30fcef16a0b028b2874e58d6c5eb70373c32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17cdbadc_5f6a3ff5",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1006,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-15T21:14:46Z",
+      "side": 0,
+      "message": "it was partially allocated but hit an error during creation. so it was internally allocated, but the allocation method was invalid and the handle was non-null",
+      "parentUuid": "cc0d9246_10a55c31",
+      "range": {
+        "startLine": 1001,
+        "startChar": 4,
+        "endLine": 1006,
+        "endChar": 54
+      },
+      "revId": "1cee30fcef16a0b028b2874e58d6c5eb70373c32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
