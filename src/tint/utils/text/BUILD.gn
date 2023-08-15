@@ -52,6 +52,7 @@ tint_unittests_source_set("unittests") {
     "unicode_test.cc",
   ]
   deps = [
+    "${tint_glslang_dir}:gtest",
     "${tint_src_dir}:gmock_and_gtest",
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/ice",

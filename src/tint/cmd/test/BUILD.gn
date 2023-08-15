@@ -32,6 +32,7 @@ test("test") {
   output_name = "tint_unittests"
   sources = [ "main_test.cc" ]
   deps = [
+    "${tint_glslang_dir}:gtest",
     "${tint_src_dir}:gmock_and_gtest",
     "${tint_src_dir}/api",
     "${tint_src_dir}/cmd/common:unittests",
