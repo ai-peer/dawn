@@ -36,6 +36,7 @@ libtint_source_set("inspector") {
     "scalar.h",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",
@@ -49,6 +50,7 @@ libtint_source_set("inspector") {
     "${tint_src_dir}/utils/macros",
     "${tint_src_dir}/utils/math",
     "${tint_src_dir}/utils/memory",
+    "${tint_src_dir}/utils/reflection",
     "${tint_src_dir}/utils/result",
     "${tint_src_dir}/utils/rtti",
     "${tint_src_dir}/utils/symbol",
@@ -67,6 +69,7 @@ tint_unittests_source_set("unittests") {
     "inspector_test.cc",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",
@@ -83,6 +86,7 @@ tint_unittests_source_set("unittests") {
     "${tint_src_dir}/utils/macros",
     "${tint_src_dir}/utils/math",
     "${tint_src_dir}/utils/memory",
+    "${tint_src_dir}/utils/reflection",
     "${tint_src_dir}/utils/result",
     "${tint_src_dir}/utils/rtti",
     "${tint_src_dir}/utils/symbol",

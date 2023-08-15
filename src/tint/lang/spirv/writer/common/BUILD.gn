@@ -39,9 +39,14 @@ if (tint_build_spv_writer) {
       "options.h",
     ]
     deps = [
+      "${tint_src_dir}/api/common",
+      "${tint_src_dir}/api/options",
+      "${tint_src_dir}/lang/core",
       "${tint_src_dir}/utils/macros",
       "${tint_src_dir}/utils/math",
       "${tint_src_dir}/utils/reflection",
+      "${tint_src_dir}/utils/text",
+      "${tint_src_dir}/utils/traits",
     ]
 
     if (tint_build_spv_reader || tint_build_spv_writer) {
@@ -61,6 +66,8 @@ if (tint_build_spv_writer) {
       "spv_dump_test.h",
     ]
     deps = [
+      "${tint_src_dir}/api/common",
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",

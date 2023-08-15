@@ -30,6 +30,8 @@ if (tint_build_hlsl_writer) {
       "ast_printer.h",
     ]
     deps = [
+      "${tint_src_dir}/api/common",
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",
@@ -94,6 +96,8 @@ if (tint_build_hlsl_writer) {
       "workgroup_var_test.cc",
     ]
     deps = [
+      "${tint_src_dir}/api/common",
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",
