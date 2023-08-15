@@ -36,6 +36,7 @@ tint_add_target("lang/spirv/writer/common"
 )
 
 tint_target_add_dependencies("lang/spirv/writer/common"
+  "api/options"
   "utils/math"
   "utils/reflection"
 )

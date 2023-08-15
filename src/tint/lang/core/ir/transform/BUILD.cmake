@@ -43,6 +43,7 @@ tint_add_target("lang/core/ir/transform"
 )
 
 tint_target_add_dependencies("lang/core/ir/transform"
+  "api/options"
   "lang/core/type"
   "utils/ice"
   "utils/result"

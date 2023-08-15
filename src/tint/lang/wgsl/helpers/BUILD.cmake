@@ -30,6 +30,7 @@ tint_add_target("lang/wgsl/helpers"
 )
 
 tint_target_add_dependencies("lang/wgsl/helpers"
+  "api/common"
   "lang/core"
   "lang/wgsl/ast"
   "lang/wgsl/ast/transform"

@@ -132,6 +132,8 @@ tint_add_target("lang/wgsl/ast/transform"
 )
 
 tint_target_add_dependencies("lang/wgsl/ast/transform"
+  "api/common"
+  "api/options"
   "lang/core"
   "lang/core/type"
   "lang/wgsl/ast"

@@ -136,6 +136,8 @@ libtint_source_set("transform") {
     "zero_init_workgroup_memory.h",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
+    "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/type",
     "${tint_src_dir}/lang/wgsl/ast",

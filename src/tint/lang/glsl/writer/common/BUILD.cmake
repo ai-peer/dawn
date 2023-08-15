@@ -28,6 +28,7 @@ tint_add_target("lang/glsl/writer/common"
 )
 
 tint_target_add_dependencies("lang/glsl/writer/common"
+  "api/options"
   "lang/core"
   "lang/wgsl/sem"
 )

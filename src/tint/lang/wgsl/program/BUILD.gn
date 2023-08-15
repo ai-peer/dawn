@@ -34,6 +34,7 @@ libtint_source_set("program") {
     "program_builder.h",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",
