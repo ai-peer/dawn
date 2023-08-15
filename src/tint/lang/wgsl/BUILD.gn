@@ -28,6 +28,7 @@ tint_unittests_source_set("unittests") {
   testonly = true
   sources = []
   deps = [
+    "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",

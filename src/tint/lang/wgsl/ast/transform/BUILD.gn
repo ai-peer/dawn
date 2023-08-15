@@ -136,6 +136,8 @@ libtint_source_set("transform") {
     "zero_init_workgroup_memory.h",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
+    "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",
@@ -221,6 +223,8 @@ tint_unittests_source_set("unittests") {
     "zero_init_workgroup_memory_test.cc",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
+    "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",
