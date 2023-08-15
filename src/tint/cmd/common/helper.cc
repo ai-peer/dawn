@@ -394,6 +394,8 @@ std::string ResourceTypeToString(tint::inspector::ResourceBinding::ResourceType 
             return "MultisampledTexture";
         case tint::inspector::ResourceBinding::ResourceType::kWriteOnlyStorageTexture:
             return "WriteOnlyStorageTexture";
+        case tint::inspector::ResourceBinding::ResourceType::kReadWriteStorageTexture:
+            return "ReadWriteStorageTexture";
         case tint::inspector::ResourceBinding::ResourceType::kDepthTexture:
             return "DepthTexture";
         case tint::inspector::ResourceBinding::ResourceType::kDepthMultisampledTexture:
