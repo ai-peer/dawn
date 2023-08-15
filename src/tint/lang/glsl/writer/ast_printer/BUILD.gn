@@ -30,6 +30,8 @@ if (tint_build_glsl_writer) {
       "ast_printer.h",
     ]
     deps = [
+      "${tint_src_dir}/api/common",
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",
@@ -46,6 +48,7 @@ if (tint_build_glsl_writer) {
       "${tint_src_dir}/utils/macros",
       "${tint_src_dir}/utils/math",
       "${tint_src_dir}/utils/memory",
+      "${tint_src_dir}/utils/reflection",
       "${tint_src_dir}/utils/result",
       "${tint_src_dir}/utils/rtti",
       "${tint_src_dir}/utils/strconv",
@@ -98,6 +101,8 @@ if (tint_build_glsl_writer) {
     ]
     deps = [
       "${tint_src_dir}:gmock_and_gtest",
+      "${tint_src_dir}/api/common",
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",
@@ -115,6 +120,7 @@ if (tint_build_glsl_writer) {
       "${tint_src_dir}/utils/macros",
       "${tint_src_dir}/utils/math",
       "${tint_src_dir}/utils/memory",
+      "${tint_src_dir}/utils/reflection",
       "${tint_src_dir}/utils/result",
       "${tint_src_dir}/utils/rtti",
       "${tint_src_dir}/utils/symbol",
