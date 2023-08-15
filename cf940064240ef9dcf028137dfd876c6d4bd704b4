@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "cf940064240ef9dcf028137dfd876c6d4bd704b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c65392ec_cf1ba4f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T08:10:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cf940064240ef9dcf028137dfd876c6d4bd704b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a3002c2_16cf454c",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T08:10:24Z",
+      "side": 1,
+      "message": "Well that\u0027s a lot of booleans, one day we might want to have some kind of bitmask to make the table more readable. Not sure.",
+      "revId": "cf940064240ef9dcf028137dfd876c6d4bd704b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
