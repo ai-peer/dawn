@@ -16,6 +16,24 @@
       "message": "The msvc failure\n```\n[ RUN      ] TextureBuiltinsFromUniformTest.TextureAsFunctionParameterMultipleParameters\n../../src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform_test.cc(409): error: Expected equality of these values:\n  expect\n    Which is: \"\\nstruct tint_symbol_3 {\\n  texture_builtin_value_2 : u32,\\n  texture_builtin_value_1 : u32,\\n  texture_builtin_value : u32,\\n}\\n\\n@group(0) @binding(30) var\u003cuniform\u003e tint_symbol_4 : tint_symbol_3;\\n\\n@group(0) @binding(0) var tex1 : texture_2d\u003cf32\u003e;\\n\\n@group(0) @binding(1) var tex2 : texture_2d\u003cf32\u003e;\\n\\n@group(0) @binding(2) var tex3 : texture_2d\u003cf32\u003e;\\n\\nfn f(t1 : texture_2d\u003cf32\u003e, t2 : texture_2d\u003cf32\u003e, t3 : texture_2d\u003cf32\u003e, tint_symbol : u32, tint_symbol_1 : u32, tint_symbol_2 : u32) -\u003e u32 {\\n  return ((tint_symbol + tint_symbol_1) + tint_symbol_2);\\n}\\n\\n@compute @workgroup_size(1)\\nfn main() {\\n  var len : u32 \u003d f(tex1, tex2, tex3, tint_symbol_4.texture_builtin_value_2, tint_symbol_4.texture_builtin_value_1, tint_symbol_4.texture_builtin_value);\\n}\\n\"\n  str(got)\n    Which is: \"\\nstruct tint_symbol_3 {\\n  texture_builtin_value : u32,\\n  texture_builtin_value_1 : u32,\\n  texture_builtin_value_2 : u32,\\n}\\n\\n@group(0) @binding(30) var\u003cuniform\u003e tint_symbol_4 : tint_symbol_3;\\n\\n@group(0) @binding(0) var tex1 : texture_2d\u003cf32\u003e;\\n\\n@group(0) @binding(1) var tex2 : texture_2d\u003cf32\u003e;\\n\\n@group(0) @binding(2) var tex3 : texture_2d\u003cf32\u003e;\\n\\nfn f(t1 : texture_2d\u003cf32\u003e, t2 : texture_2d\u003cf32\u003e, t3 : texture_2d\u003cf32\u003e, tint_symbol : u32, tint_symbol_1 : u32, tint_symbol_2 : u32) -\u003e u32 {\\n  return ((tint_symbol + tint_symbol_1) + tint_symbol_2);\\n}\\n\\n@compute @workgroup_size(1)\\nfn main() {\\n  var len : u32 \u003d f(tex1, tex2, tex3, tint_symbol_4.texture_builtin_value, tint_symbol_4.texture_builtin_value_1, tint_symbol_4.texture_builtin_value_2);\\n}\\n\"\nWith diff:\n@@ -1,7 +1,7 @@\n \n struct tint_symbol_3 {\n-  texture_builtin_value_2 : u32,\n+  texture_builtin_value : u32,\n   texture_builtin_value_1 : u32,\n-  texture_builtin_value : u32,\n+  texture_builtin_value_2 : u32,\n }\n \n@@ -20,4 +20,4 @@\n @compute @workgroup_size(1)\n fn main() {\n-  var len : u32 \u003d f(tex1, tex2, tex3, tint_symbol_4.texture_builtin_value_2, tint_symbol_4.texture_builtin_value_1, tint_symbol_4.texture_builtin_value);\n+  var len : u32 \u003d f(tex1, tex2, tex3, tint_symbol_4.texture_builtin_value, tint_symbol_4.texture_builtin_value_1, tint_symbol_4.texture_builtin_value_2);\n }\\n\n\n[  FAILED  ] TextureBuiltinsFromUniformTest.TextureAsFunctionParameterMultipleParameters (0 ms)\n```\n\nThe naming is different, but the byte offset inside the struct is the same. So the value upload and retrieved from the struct should be the same. So it seems to only bother the test.\nLikely triggered by some unstable compiler issue lead to different visit order of dependency function.\n\nBut if we use array instead of scalar in the struct, we can avoid the test failure (cuz only the offset matters for the data and that order is preserved)\n\nShall we can back to use array\u003cvec4u, N\u003e for the builtin_values?",
       "revId": "0c1b1910f4944d6b11c0c3e4b547721df7fe2a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49ddfe26_f077a7c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-15T22:31:01Z",
+      "side": 1,
+      "message": "I changed back to use array\u003cvec4u, N\u003e. Kokoro and msvc now seems happy",
+      "parentUuid": "2c7ac540_dc634eda",
+      "revId": "0c1b1910f4944d6b11c0c3e4b547721df7fe2a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
