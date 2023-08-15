@@ -313,11 +313,18 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
         "format (%s).",
         usage, wgpu::TextureUsage::RenderAttachment, format->format);
 
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D &&
+    DAWN_INVALID_IF(descriptor->dimension == wgpu::TextureDimension::e1D &&
                         (usage & wgpu::TextureUsage::RenderAttachment),
                     "The texture usage (%s) includes %s, which is incompatible with the texture "
                     "dimension (%s).",
                     usage, wgpu::TextureUsage::RenderAttachment, descriptor->dimension);
+
+    DAWN_INVALID_IF(!device->IsToggleEnabled(Toggle::AllowUnsafeAPIs) &&
+                        descriptor->dimension == wgpu::TextureDimension::e3D &&
+                        (usage & wgpu::TextureUsage::RenderAttachment),
+                    "It does not allow to create 3D textures with the usage (%s) because "
+                    "rendering to 3D texture is not fully implemented. See crbug.com/dawn/1020.",
+                    wgpu::TextureUsage::RenderAttachment);
 
     DAWN_INVALID_IF(
         !format->supportsStorageUsage && (usage & wgpu::TextureUsage::StorageBinding),
