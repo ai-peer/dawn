@@ -1,0 +1,21 @@
+load("@bazel_skylib//lib:selects.bzl", "selects")
+
+config_setting(
+    name = "not_is_linux_and_not_is_mac_and_not_is_win",
+    values = {"cpu": "arm"},
+)
+
+selects.config_setting_group(
+    name = "is_linux_or_is_mac",
+    match_any = [
+        "@platforms//os:linux",
+        "@platforms//os:macos",
+    ],
+)
+
+selects.config_setting_group(
+    name = "is_win",
+    match_any = [
+        "@platforms//os:windows",
+    ],
+)
