@@ -32,6 +32,7 @@ tint_add_target("lang/wgsl/inspector"
 )
 
 tint_target_add_dependencies("lang/wgsl/inspector"
+  "api/common"
   "lang/core"
   "lang/core/type"
   "lang/wgsl/ast"

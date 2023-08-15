@@ -20,40 +20,14 @@
 # Do not modify this file directly
 ################################################################################
 
-tint_add_target("lang/wgsl/program"
-  lang/wgsl/program/clone_context.cc
-  lang/wgsl/program/clone_context.h
-  lang/wgsl/program/program.cc
-  lang/wgsl/program/program.h
-  lang/wgsl/program/program_builder.cc
-  lang/wgsl/program/program_builder.h
+tint_add_target("api/common"
+  api/common/binding_point.h
+  api/common/override_id.h
 )
 
-tint_target_add_dependencies("lang/wgsl/program"
-  "api/common"
-  "lang/core"
-  "lang/core/constant"
-  "lang/core/type"
-  "lang/wgsl/ast"
-  "lang/wgsl/sem"
-  "utils/containers"
-  "utils/ice"
-  "utils/id"
-  "utils/macros"
-  "utils/rtti"
-  "utils/symbol"
+tint_target_add_dependencies("api/common"
+  "utils/math"
+  "utils/reflection"
   "utils/text"
-)
-
-tint_add_target("lang/wgsl/program:test"
-  lang/wgsl/program/clone_context_test.cc
-  lang/wgsl/program/program_builder_test.cc
-  lang/wgsl/program/program_test.cc
-)
-
-tint_target_add_dependencies("lang/wgsl/program:test"
-  "lang/wgsl/ast"
-  "lang/wgsl/ast:test"
-  "lang/wgsl/program"
-  "lang/wgsl/resolver"
+  "utils/traits"
 )

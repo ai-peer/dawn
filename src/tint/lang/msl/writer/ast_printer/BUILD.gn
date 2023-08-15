@@ -30,6 +30,7 @@ if (tint_build_msl_writer) {
       "ast_printer.h",
     ]
     deps = [
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",

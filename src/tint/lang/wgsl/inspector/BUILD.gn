@@ -36,6 +36,7 @@ libtint_source_set("inspector") {
     "scalar.h",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/type",
     "${tint_src_dir}/lang/wgsl/ast",

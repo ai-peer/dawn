@@ -31,6 +31,7 @@ if (tint_build_glsl_writer) {
       "version.h",
     ]
     deps = [
+      "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/wgsl/sem",
     ]

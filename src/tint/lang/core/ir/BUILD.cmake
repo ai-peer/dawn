@@ -124,6 +124,7 @@ tint_add_target("lang/core/ir"
 )
 
 tint_target_add_dependencies("lang/core/ir"
+  "api/common"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"

@@ -27,6 +27,7 @@ tint_add_target("lang/msl/writer/ast_printer"
 )
 
 tint_target_add_dependencies("lang/msl/writer/ast_printer"
+  "api/options"
   "lang/core"
   "lang/core/constant"
   "lang/core/type"
