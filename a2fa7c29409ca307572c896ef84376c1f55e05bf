@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8fb6c04_6ab7c764",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T15:14:38Z",
+      "side": 1,
+      "message": "This seems like a good direction but we should separate it in at least 3 commits:\n\n - Addition of a feature for R/RG/RGBA16Unorm with validation tests in addition to the formats tests added in this CL.\n - Loosening the validation of ExternalTexture to allow planes to be any 1/2 component filterable formats. Plus tests would be good. (validation and simple end2end).\n - The commit adding P010 support, along with a whitebox test if possible.",
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f84bf23_7f254a98",
@@ -37,6 +54,64 @@
         "endLine": 3141,
         "endChar": 45
       },
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d40ffc97_c4b54592",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3141,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T15:14:38Z",
+      "side": 1,
+      "message": "We don\u0027t have ABI requirements (yet?), but until the formats are upstreamed in webgpu.h I think it\u0027s better to keep them below ASTC formats that are the last upstream formats we added. Also could we tag them with \"dawn\" until they are upstreamed?",
+      "parentUuid": "4f84bf23_7f254a98",
+      "range": {
+        "startLine": 3141,
+        "startChar": 12,
+        "endLine": 3141,
+        "endChar": 45
+      },
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2af0d1_3130b8ee",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T15:14:38Z",
+      "side": 1,
+      "message": "We should probably update the validation to check the number of components and the filterability of the plane\u0027s formats instead of hardcoding them. This could be done in a other commit (before this one?)",
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cdeb2ea_80d7f003",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 381,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-15T15:14:38Z",
+      "side": 1,
+      "message": "Could this be done in a separate commit, with an extension for all 3 16Unorm formats? Right now this is extending the capabilities available on devices with no-optional features enabled, and the reason we didn\u0027t put this format in the spec is that at least some devices can\u0027t support 16Unorm formats.",
       "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
