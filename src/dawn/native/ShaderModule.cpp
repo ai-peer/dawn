@@ -65,6 +65,8 @@ BindingInfoType TintResourceTypeToBindingInfoType(
         case tint::inspector::ResourceBinding::ResourceType::kDepthMultisampledTexture:
             return BindingInfoType::Texture;
         case tint::inspector::ResourceBinding::ResourceType::kWriteOnlyStorageTexture:
+        case tint::inspector::ResourceBinding::ResourceType::kReadOnlyStorageTexture:
+        case tint::inspector::ResourceBinding::ResourceType::kReadWriteStorageTexture:
             return BindingInfoType::StorageTexture;
         case tint::inspector::ResourceBinding::ResourceType::kExternalTexture:
             return BindingInfoType::ExternalTexture;
@@ -208,6 +210,10 @@ ResultOrError<wgpu::StorageTextureAccess> TintResourceTypeToStorageTextureAccess
     switch (resource_type) {
         case tint::inspector::ResourceBinding::ResourceType::kWriteOnlyStorageTexture:
             return wgpu::StorageTextureAccess::WriteOnly;
+        case tint::inspector::ResourceBinding::ResourceType::kReadOnlyStorageTexture:
+            return wgpu::StorageTextureAccess::ReadOnly;
+        case tint::inspector::ResourceBinding::ResourceType::kReadWriteStorageTexture:
+            return wgpu::StorageTextureAccess::ReadWrite;
         default:
             return DAWN_VALIDATION_ERROR("Attempted to convert non-storage texture resource type");
     }
@@ -741,6 +747,14 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
                                     !device->HasFeature(Feature::BGRA8UnormStorage),
                                 "BGRA8Unorm storage textures are not supported if optional feature "
                                 "bgra8unorm-storage is not supported.");
+                if (info.storageTexture.access == wgpu::StorageTextureAccess::ReadWrite) {
+                    const Format* format = nullptr;
+                    DAWN_TRY_ASSIGN(format, device->GetInternalFormat(info.storageTexture.format));
+                    DAWN_INVALID_IF(!format->supportsReadWriteStorageUsage,
+                                    "%s cannot be used with the storage texture access %s.",
+                                    info.storageTexture.format,
+                                    wgpu::StorageTextureAccess::ReadWrite);
+                }
 
                 break;
             case BindingInfoType::ExternalTexture:
