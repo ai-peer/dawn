@@ -16,6 +16,40 @@
       "message": "I suspect this fixes the tests on Qualcomm and NVIDIA.  I don\u0027t have a QC device to test.",
       "revId": "c5300e9c16a5efe52da8de4d31eeda929e1fe754",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9b3f339_390423d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-16T21:26:35Z",
+      "side": 1,
+      "message": "LGTM with the compile issue fixed.",
+      "revId": "c5300e9c16a5efe52da8de4d31eeda929e1fe754",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d63c99f_541da239",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 384,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-16T21:26:35Z",
+      "side": 1,
+      "message": "Leftover debug line? This is what\u0027s failing the compile.",
+      "revId": "c5300e9c16a5efe52da8de4d31eeda929e1fe754",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
