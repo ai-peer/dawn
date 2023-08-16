@@ -312,12 +312,11 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
         return {};
     }
 
-    DAWN_TRY(ValidateSingleSType(colorAttachment.nextInChain,
-                                 wgpu::SType::DawnRenderPassColorAttachmentRenderToSingleSampled));
+    UnpackedRenderPassColorAttachmentChain unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(&colorAttachment));
 
-    const DawnRenderPassColorAttachmentRenderToSingleSampled* msaaRenderToSingleSampledDesc =
-        nullptr;
-    FindInChain(colorAttachment.nextInChain, &msaaRenderToSingleSampledDesc);
+    const auto* msaaRenderToSingleSampledDesc =
+        std::get<const DawnRenderPassColorAttachmentRenderToSingleSampled*>(unpacked);
     if (msaaRenderToSingleSampledDesc) {
         DAWN_TRY(ValidateColorAttachmentRenderToSingleSampled(device, colorAttachment,
                                                               msaaRenderToSingleSampledDesc));
@@ -519,9 +518,8 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
                                         uint32_t* sampleCount,
                                         uint32_t* implicitSampleCount,
                                         UsageValidationMode usageValidationMode) {
-    DAWN_TRY(
-        ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::RenderPassDescriptorMaxDrawCount},
-                                                 {wgpu::SType::RenderPassPixelLocalStorage}}));
+    UnpackedRenderPassDescriptorChain unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
 
     uint32_t maxColorAttachments = device->GetLimits().v1.maxColorAttachments;
     DAWN_INVALID_IF(
@@ -615,8 +613,7 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
             descriptor->colorAttachmentCount, *implicitSampleCount);
     }
 
-    const RenderPassPixelLocalStorage* pls = nullptr;
-    FindInChain(descriptor->nextInChain, &pls);
+    const auto* pls = std::get<const RenderPassPixelLocalStorage*>(unpacked);
     if (pls != nullptr) {
         DAWN_TRY(ValidateHasPLSFeature(device));
 
@@ -856,12 +853,10 @@ Color ClampClearColorValueToLegalRange(const Color& originalColor, const Format&
 
 MaybeError ValidateCommandEncoderDescriptor(const DeviceBase* device,
                                             const CommandEncoderDescriptor* descriptor) {
-    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
-                                 wgpu::SType::DawnEncoderInternalUsageDescriptor));
+    UnpackedCommandEncoderDescriptorChain unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
 
-    const DawnEncoderInternalUsageDescriptor* internalUsageDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &internalUsageDesc);
-
+    const auto* internalUsageDesc = std::get<const DawnEncoderInternalUsageDescriptor*>(unpacked);
     DAWN_INVALID_IF(internalUsageDesc != nullptr &&
                         !device->APIHasFeature(wgpu::FeatureName::DawnInternalUsages),
                     "%s is not available.", wgpu::FeatureName::DawnInternalUsages);

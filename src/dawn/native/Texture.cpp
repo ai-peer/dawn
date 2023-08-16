@@ -429,12 +429,10 @@ MaybeError ValidateTextureDescriptor(
     const TextureDescriptor* descriptor,
     AllowMultiPlanarTextureFormat allowMultiPlanar,
     std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage) {
-    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
-                                 wgpu::SType::DawnTextureInternalUsageDescriptor));
+    UnpackedTextureDescriptorChain unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
 
-    const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &internalUsageDesc);
-
+    const auto* internalUsageDesc = std::get<const DawnTextureInternalUsageDescriptor*>(unpacked);
     DAWN_INVALID_IF(
         internalUsageDesc != nullptr && !device->HasFeature(Feature::DawnInternalUsages),
         "The internalUsageDesc is not empty while the dawn-internal-usages feature is not "

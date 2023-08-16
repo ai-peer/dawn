@@ -21,7 +21,6 @@
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
 #include "dawn/native/CallbackTaskManager.h"
-#include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/Surface.h"
@@ -109,8 +108,12 @@ Ref<InstanceBase> InstanceBase::Create(const InstanceDescriptor* descriptor) {
         descriptor = &kDefaultDesc;
     }
 
-    const DawnTogglesDescriptor* instanceTogglesDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &instanceTogglesDesc);
+    UnpackedInstanceDescriptorChain unpacked;
+    DAWN_TRY_ASSIGN_WITH_CLEANUP(
+        unpacked, ValidateAndUnpackChain(descriptor),
+        { dawn::ErrorLog() << DAWN_LOCAL_VAR(Error)->GetFormattedMessage(); }, nullptr);
+
+    const auto* instanceTogglesDesc = std::get<const DawnTogglesDescriptor*>(unpacked);
 
     // Set up the instance toggle state from toggles descriptor
     TogglesState instanceToggles =
@@ -120,9 +123,7 @@ Ref<InstanceBase> InstanceBase::Create(const InstanceDescriptor* descriptor) {
     instanceToggles.Default(Toggle::AllowUnsafeAPIs, false);
 
     Ref<InstanceBase> instance = AcquireRef(new InstanceBase(instanceToggles));
-    if (instance->ConsumedError(instance->Initialize(descriptor))) {
-        return nullptr;
-    }
+    instance->Initialize(unpacked);
     return instance;
 }
 
@@ -146,13 +147,8 @@ void InstanceBase::WillDropLastExternalRef() {
     }
 }
 
-// TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
-MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
-    DAWN_TRY(ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::DawnInstanceDescriptor},
-                                                      {wgpu::SType::DawnTogglesDescriptor}}));
-
-    const DawnInstanceDescriptor* dawnDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &dawnDesc);
+void InstanceBase::Initialize(const UnpackedInstanceDescriptorChain& unpacked) {
+    const auto* dawnDesc = std::get<const DawnInstanceDescriptor*>(unpacked);
     if (dawnDesc != nullptr) {
         for (uint32_t i = 0; i < dawnDesc->additionalRuntimeSearchPathsCount; ++i) {
             mRuntimeSearchPaths.push_back(dawnDesc->additionalRuntimeSearchPaths[i]);
@@ -173,8 +169,6 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(dawnDesc != nullptr ? dawnDesc->platform : mDefaultPlatform.get());
-
-    return {};
 }
 
 void InstanceBase::APIRequestAdapter(const RequestAdapterOptions* options,
