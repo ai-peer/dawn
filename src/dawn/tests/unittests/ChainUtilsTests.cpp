@@ -338,7 +338,7 @@ TEST(ChainUtilsTests, ValidateAndUnpackEmpty) {
     }
 }
 
-// Invalid chain extensions should cause an error.
+// Invalid chain extensions cause an error.
 TEST(ChainUtilsTests, ValidateAndUnpackUnexpected) {
     {
         // TextureViewDescriptor (as of when this test was written) does not have any valid chains
@@ -359,7 +359,7 @@ TEST(ChainUtilsTests, ValidateAndUnpackUnexpected) {
     }
 }
 
-// Duplicate valid extensions should cause an error.
+// Valid extensions unpack properly.
 TEST(ChainUtilsTests, ValidateAndUnpack) {
     // DawnTogglesDescriptor is a valid extension for InstanceDescriptor.
     InstanceDescriptor desc;
@@ -369,7 +369,7 @@ TEST(ChainUtilsTests, ValidateAndUnpack) {
     EXPECT_EQ(std::get<const DawnTogglesDescriptor*>(unpacked), &chain);
 }
 
-// Duplicate valid extensions should cause an error.
+// Duplicate valid extensions cause an error.
 TEST(ChainUtilsTests, ValidateAndUnpackDuplicate) {
     // DawnTogglesDescriptor is a valid extension for InstanceDescriptor.
     InstanceDescriptor desc;
@@ -381,7 +381,7 @@ TEST(ChainUtilsTests, ValidateAndUnpackDuplicate) {
                 HasSubstr("Duplicate"));
 }
 
-// Additional extensions added via template specialization and not specified in the JSON should work
+// Additional extensions added via template specialization and not specified in the JSON unpack
 // properly.
 TEST(ChainUtilsTests, ValidateAndUnpackAdditionalExtensions) {
     // DawnInstanceDescriptor is an extension on InstanceDescriptor added in ChainUtilsImpl.h.
@@ -402,6 +402,97 @@ TEST(ChainUtilsTests, ValidateAndUnpackDuplicateAdditionalExtensions) {
     chain1.nextInChain = &chain2;
     EXPECT_THAT(ValidateAndUnpackChain(&desc).AcquireError()->GetFormattedMessage(),
                 HasSubstr("Duplicate"));
+}
+
+using NoExtensionBranches =
+    BranchExtensionsList<BranchExtensions<Branch<ShaderModuleWGSLDescriptor>>,
+                         BranchExtensions<Branch<ShaderModuleSPIRVDescriptor>>>;
+using ExtensionBranches =
+    BranchExtensionsList<BranchExtensions<Branch<ShaderModuleWGSLDescriptor>>,
+                         BranchExtensions<Branch<ShaderModuleSPIRVDescriptor>,
+                                          Extensions<DawnShaderModuleSPIRVOptionsDescriptor>>>;
+
+// Validates exacly 1 branch and ensures that there are no other extensions.
+TEST(ChainUtilsTests, ValidateBranchExtensionsOneValidBranch) {
+    ShaderModuleDescriptor desc;
+    // Either allowed branches should validate successfully and return the expected enum.
+    {
+        ShaderModuleWGSLDescriptor chain;
+        desc.nextInChain = &chain;
+        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        EXPECT_EQ((ValidateBranchExtensions<ShaderModuleDescriptor, NoExtensionBranches>(unpacked)
+                       .AcquireSuccess()),
+                  wgpu::SType::ShaderModuleWGSLDescriptor);
+    }
+    {
+        ShaderModuleSPIRVDescriptor chain;
+        desc.nextInChain = &chain;
+        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        EXPECT_EQ((ValidateBranchExtensions<ShaderModuleDescriptor, NoExtensionBranches>(unpacked)
+                       .AcquireSuccess()),
+                  wgpu::SType::ShaderModuleSPIRVDescriptor);
+
+        // Extensions are optional so validation should still pass when the extension is not
+        // provided.
+        EXPECT_EQ((ValidateBranchExtensions<ShaderModuleDescriptor, ExtensionBranches>(unpacked)
+                       .AcquireSuccess()),
+                  wgpu::SType::ShaderModuleSPIRVDescriptor);
+    }
+}
+
+// An allowed chain that is not one of the branches causes an error.
+TEST(ChainUtilsTests, ValidateBranchExtensionsInvalidBranch) {
+    ShaderModuleDescriptor desc;
+    DawnShaderModuleSPIRVOptionsDescriptor chain;
+    desc.nextInChain = &chain;
+    auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+    EXPECT_NE((ValidateBranchExtensions<ShaderModuleDescriptor, NoExtensionBranches>(unpacked)
+                   .AcquireError()),
+              nullptr);
+    EXPECT_NE((ValidateBranchExtensions<ShaderModuleDescriptor, ExtensionBranches>(unpacked)
+                   .AcquireError()),
+              nullptr);
+}
+
+// Additional chains should cause an error when branches don't allow extensions.
+TEST(ChainUtilsTests, ValidateBranchExtensionsInvalidExtension) {
+    ShaderModuleDescriptor desc;
+    {
+        ShaderModuleWGSLDescriptor chain1;
+        DawnShaderModuleSPIRVOptionsDescriptor chain2;
+        desc.nextInChain = &chain1;
+        chain1.nextInChain = &chain2;
+        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        EXPECT_NE((ValidateBranchExtensions<ShaderModuleDescriptor, NoExtensionBranches>(unpacked)
+                       .AcquireError()),
+                  nullptr);
+        EXPECT_NE((ValidateBranchExtensions<ShaderModuleDescriptor, ExtensionBranches>(unpacked)
+                       .AcquireError()),
+                  nullptr);
+    }
+    {
+        ShaderModuleSPIRVDescriptor chain1;
+        DawnShaderModuleSPIRVOptionsDescriptor chain2;
+        desc.nextInChain = &chain1;
+        chain1.nextInChain = &chain2;
+        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        EXPECT_NE((ValidateBranchExtensions<ShaderModuleDescriptor, NoExtensionBranches>(unpacked)
+                       .AcquireError()),
+                  nullptr);
+    }
+}
+
+// Branches that allow extensions pass successfully.
+TEST(ChainUtilsTests, ValidateBranchExtensionsAllowedExtensions) {
+    ShaderModuleDescriptor desc;
+    ShaderModuleSPIRVDescriptor chain1;
+    DawnShaderModuleSPIRVOptionsDescriptor chain2;
+    desc.nextInChain = &chain1;
+    chain1.nextInChain = &chain2;
+    auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+    EXPECT_EQ((ValidateBranchExtensions<ShaderModuleDescriptor, ExtensionBranches>(unpacked)
+                   .AcquireSuccess()),
+              wgpu::SType::ShaderModuleSPIRVDescriptor);
 }
 
 }  // anonymous namespace
