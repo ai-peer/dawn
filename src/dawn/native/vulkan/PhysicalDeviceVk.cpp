@@ -260,6 +260,22 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         EnableFeature(Feature::BGRA8UnormStorage);
     }
 
+    bool unorm16TextureFormatsSupported = true;
+    for (const auto& unorm16Format :
+         {VK_FORMAT_R16_UNORM, VK_FORMAT_R16G16_UNORM, VK_FORMAT_R16G16B16A16_UNORM}) {
+        VkFormatProperties unorm16Properties;
+        mVulkanInstance->GetFunctions().GetPhysicalDeviceFormatProperties(
+            mVkPhysicalDevice, unorm16Format, &unorm16Properties);
+        unorm16TextureFormatsSupported &= IsSubset(
+            static_cast<VkFormatFeatureFlags>(VK_FORMAT_FEATURE_SAMPLED_IMAGE_BIT |
+                                              VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BIT |
+                                              VK_FORMAT_FEATURE_COLOR_ATTACHMENT_BLEND_BIT),
+            rg11b10Properties.optimalTilingFeatures);
+    }
+    if (unorm16TextureFormatsSupported) {
+        EnableFeature(Feature::Unorm16TextureFormats);
+    }
+
     // 32 bit float channel formats.
     VkFormatProperties r32Properties;
     VkFormatProperties rg32Properties;
