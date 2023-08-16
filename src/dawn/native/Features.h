@@ -58,6 +58,7 @@ enum class Feature {
     ANGLETextureSharing,
     PixelLocalStorageCoherent,
     PixelLocalStorageNonCoherent,
+    Unorm16TextureFormats,
 
     SharedTextureMemoryVkDedicatedAllocation,
     SharedTextureMemoryAHardwareBuffer,

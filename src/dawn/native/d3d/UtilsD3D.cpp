@@ -92,6 +92,7 @@ DXGI_FORMAT DXGITypelessTextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::R8Sint:
             return DXGI_FORMAT_R8_TYPELESS;
 
+        case wgpu::TextureFormat::R16Unorm:
         case wgpu::TextureFormat::R16Uint:
         case wgpu::TextureFormat::R16Sint:
         case wgpu::TextureFormat::R16Float:
@@ -109,6 +110,7 @@ DXGI_FORMAT DXGITypelessTextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::R32Float:
             return DXGI_FORMAT_R32_TYPELESS;
 
+        case wgpu::TextureFormat::RG16Unorm:
         case wgpu::TextureFormat::RG16Uint:
         case wgpu::TextureFormat::RG16Sint:
         case wgpu::TextureFormat::RG16Float:
@@ -138,6 +140,7 @@ DXGI_FORMAT DXGITypelessTextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::RG32Float:
             return DXGI_FORMAT_R32G32_TYPELESS;
 
+        case wgpu::TextureFormat::RGBA16Unorm:
         case wgpu::TextureFormat::RGBA16Uint:
         case wgpu::TextureFormat::RGBA16Sint:
         case wgpu::TextureFormat::RGBA16Float:
@@ -245,6 +248,8 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
         case wgpu::TextureFormat::R8Sint:
             return DXGI_FORMAT_R8_SINT;
 
+        case wgpu::TextureFormat::R16Unorm:
+            return DXGI_FORMAT_R16_UNORM;
         case wgpu::TextureFormat::R16Uint:
             return DXGI_FORMAT_R16_UINT;
         case wgpu::TextureFormat::R16Sint:
@@ -266,6 +271,9 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
             return DXGI_FORMAT_R32_SINT;
         case wgpu::TextureFormat::R32Float:
             return DXGI_FORMAT_R32_FLOAT;
+
+        case wgpu::TextureFormat::RG16Unorm:
+            return DXGI_FORMAT_R16G16_UNORM;
         case wgpu::TextureFormat::RG16Uint:
             return DXGI_FORMAT_R16G16_UINT;
         case wgpu::TextureFormat::RG16Sint:
@@ -299,6 +307,8 @@ DXGI_FORMAT DXGITextureFormat(wgpu::TextureFormat format) {
             return DXGI_FORMAT_R32G32_SINT;
         case wgpu::TextureFormat::RG32Float:
             return DXGI_FORMAT_R32G32_FLOAT;
+        case wgpu::TextureFormat::RGBA16Unorm:
+            return DXGI_FORMAT_R16G16B16A16_UNORM;
         case wgpu::TextureFormat::RGBA16Uint:
             return DXGI_FORMAT_R16G16B16A16_UINT;
         case wgpu::TextureFormat::RGBA16Sint:
