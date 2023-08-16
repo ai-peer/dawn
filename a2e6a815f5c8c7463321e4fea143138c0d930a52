@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92574cfb_539600a1",
+        "filename": "docs/dawn/features/dual_source_blending.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9ad76c1_efe282ca",
+      "range": {
+        "startLine": 30,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 16
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "078c3c01_74608040",
@@ -107,6 +131,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "79b66f1f_2b8544f7",
+        "filename": "docs/dawn/features/dual_source_blending.md",
+        "patchSetId": 10
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Added a test that ensures the shader is rejected. Do we need Dawn-side validation for this?",
+      "parentUuid": "154591bd_138a0421",
+      "range": {
+        "startLine": 32,
+        "startChar": 27,
+        "endLine": 32,
+        "endChar": 76
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79a343d6_8bb701ca",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 10
@@ -118,6 +166,30 @@
       "writtenOn": "2023-08-15T02:01:44Z",
       "side": 1,
       "message": "nit: we should have a small test to validate it is invalid to use the wgsl extension if the wgpu extension is not enabled.\n\nprobably in unittests/validation/ShaderModuleValidationTests.cpp",
+      "range": {
+        "startLine": 1421,
+        "startChar": 5,
+        "endLine": 1423,
+        "endChar": 5
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2255b24_b07f1b1c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1423,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "79a343d6_8bb701ca",
       "range": {
         "startLine": 1421,
         "startChar": 5,
@@ -145,6 +217,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "96f20f02_21ed7ab8",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d749f633_3bcfb918",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ea62e34_4ef17a9d",
@@ -158,6 +248,24 @@
       "writtenOn": "2023-08-15T14:50:18Z",
       "side": 1,
       "message": "nit: maybe testData : TestData? It\u0027s not exactly a fragment input (like @position is for example).",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6625f065_1684ba0b",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ea62e34_4ef17a9d",
       "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -185,6 +293,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d051640_48b98742",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c53f26f9_5f3ee616",
+      "range": {
+        "startLine": 137,
+        "startChar": 56,
+        "endLine": 137,
+        "endChar": 84
+      },
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74a90bb5_45048ade",
@@ -202,6 +334,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2de52a90_074af501",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "74a90bb5_45048ade",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f7dbf589_7d1da263",
@@ -215,6 +365,24 @@
       "writtenOn": "2023-08-15T14:50:18Z",
       "side": 1,
       "message": "nit: We might be able to move this in SetUp() right after the call to DawnTest::Setup() to factor it in a single place for the whole file.",
+      "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73022510_71d39694",
+        "filename": "src/dawn/tests/end2end/DualSourceBlendTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000248
+      },
+      "writtenOn": "2023-08-16T05:33:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7dbf589_7d1da263",
       "revId": "a2e6a815f5c8c7463321e4fea143138c0d930a52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
