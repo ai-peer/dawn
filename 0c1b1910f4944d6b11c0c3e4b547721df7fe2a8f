@@ -34,6 +34,24 @@
       "parentUuid": "2c7ac540_dc634eda",
       "revId": "0c1b1910f4944d6b11c0c3e4b547721df7fe2a8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ae70946_039d3a87",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-16T09:02:09Z",
+      "side": 1,
+      "message": "\u003e Likely triggered by some unstable compiler issue lead to different visit order of dependency function.\n\nIt was that you were iterating over a `std::unordered_map`, which has no deterministic ordering, and calling `b.Symbols().New()` with incrementally allocates the colliding symbol suffixes:\n\n```\n    for (auto it : bindpoint_to_data) {\n        // Emit a u32 scalar for each binding that needs builtin value passed in.\n        auto sym \u003d b.Symbols().New(kTextureBuiltinValuesMemberName);\n        ...\n```\n\nUsing scalars is preferable for memory efficiency and readability. I\u0027d prefer it if you used scalars. You should be able to fix this by using the texture variable name as part of the the structure member name.",
+      "parentUuid": "49ddfe26_f077a7c3",
+      "revId": "0c1b1910f4944d6b11c0c3e4b547721df7fe2a8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
