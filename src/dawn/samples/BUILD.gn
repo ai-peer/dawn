@@ -75,3 +75,12 @@ sample("Animometer") {
 sample("ManualSwapChainTest") {
   sources = [ "ManualSwapChainTest.cpp" ]
 }
+
+executable("SimpleTest") {
+  deps = [
+    "${dawn_root}/src/dawn:cpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn/native",
+  ]
+  sources = [ "SimpleTest.cpp" ]
+}
