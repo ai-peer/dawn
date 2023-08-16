@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "877d522c_8f41f21f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-16T22:22:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9fd5876a0a885920e76a3cf224a26f32b7b42bef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf01a9e_e0b866fe",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-16T22:22:26Z",
+      "side": 1,
+      "message": "shouldn\u0027t we remove this now in favor of the check you\u0027ve added below?",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 47
+      },
+      "revId": "9fd5876a0a885920e76a3cf224a26f32b7b42bef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da2ba80b_1f6cd46b",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 13
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-16T22:22:26Z",
+      "side": 1,
+      "message": "you shouldn\u0027t need KEEP if these are going to be consistent failures",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 6
+      },
+      "revId": "9fd5876a0a885920e76a3cf224a26f32b7b42bef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
