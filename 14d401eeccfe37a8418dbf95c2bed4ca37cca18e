@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec780c57_b6dad530",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-16T18:28:43Z",
+      "side": 1,
+      "message": "PTAL. Will report the kokoro time when it completes.",
+      "revId": "14d401eeccfe37a8418dbf95c2bed4ca37cca18e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
