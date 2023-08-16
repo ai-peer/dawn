@@ -187,6 +187,10 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (mFunctions.IsGLExtensionSupported("GL_AMD_gpu_shader_half_float")) {
         EnableFeature(Feature::ShaderF16);
     }
+
+    if (mFunctions.IsGLExtensionSupported("GL_EXT_texture_norm16")) {
+        EnableFeature(Feature::Unorm16TextureFormats);
+    }
 }
 
 namespace {

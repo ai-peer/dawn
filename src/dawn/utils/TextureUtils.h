@@ -22,11 +22,12 @@
 #include "dawn/common/Assert.h"
 
 namespace dawn::utils {
-static constexpr std::array<wgpu::TextureFormat, 94> kAllTextureFormats = {
+static constexpr std::array<wgpu::TextureFormat, 97> kAllTextureFormats = {
     wgpu::TextureFormat::R8Unorm,
     wgpu::TextureFormat::R8Snorm,
     wgpu::TextureFormat::R8Uint,
     wgpu::TextureFormat::R8Sint,
+    wgpu::TextureFormat::R16Unorm,
     wgpu::TextureFormat::R16Uint,
     wgpu::TextureFormat::R16Sint,
     wgpu::TextureFormat::R16Float,
@@ -37,6 +38,7 @@ static constexpr std::array<wgpu::TextureFormat, 94> kAllTextureFormats = {
     wgpu::TextureFormat::R32Float,
     wgpu::TextureFormat::R32Uint,
     wgpu::TextureFormat::R32Sint,
+    wgpu::TextureFormat::RG16Unorm,
     wgpu::TextureFormat::RG16Uint,
     wgpu::TextureFormat::RG16Sint,
     wgpu::TextureFormat::RG16Float,
@@ -53,6 +55,7 @@ static constexpr std::array<wgpu::TextureFormat, 94> kAllTextureFormats = {
     wgpu::TextureFormat::RG32Float,
     wgpu::TextureFormat::RG32Uint,
     wgpu::TextureFormat::RG32Sint,
+    wgpu::TextureFormat::RGBA16Unorm,
     wgpu::TextureFormat::RGBA16Uint,
     wgpu::TextureFormat::RGBA16Sint,
     wgpu::TextureFormat::RGBA16Float,
@@ -205,6 +208,12 @@ static_assert(kCompressedFormats.size() ==
                   kBCFormats.size() + kETC2Formats.size() + kASTCFormats.size(),
               "Number of compressed format must equal number of BC, ETC2, and ASTC formats.");
 
+static constexpr std::array<wgpu::TextureFormat, 3> kUnorm16Formats = {
+    wgpu::TextureFormat::R16Unorm,
+    wgpu::TextureFormat::RG16Unorm,
+    wgpu::TextureFormat::RGBA16Unorm,
+};
+
 static constexpr std::array<wgpu::TextureFormat, 5> kDepthFormats = {
     wgpu::TextureFormat::Depth16Unorm,         wgpu::TextureFormat::Depth32Float,
     wgpu::TextureFormat::Depth24Plus,          wgpu::TextureFormat::Depth24PlusStencil8,
@@ -226,6 +235,7 @@ bool TextureFormatSupportsReadWriteStorageTexture(wgpu::TextureFormat format);
 bool IsBCTextureFormat(wgpu::TextureFormat textureFormat);
 bool IsETC2TextureFormat(wgpu::TextureFormat textureFormat);
 bool IsASTCTextureFormat(wgpu::TextureFormat textureFormat);
+bool IsUnorm16TextureFormat(wgpu::TextureFormat textureFormat);
 
 bool IsDepthOnlyFormat(wgpu::TextureFormat textureFormat);
 bool IsStencilOnlyFormat(wgpu::TextureFormat textureFormat);

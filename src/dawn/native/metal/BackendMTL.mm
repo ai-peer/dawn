@@ -546,6 +546,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
                 EnableFeature(Feature::ChromiumExperimentalSubgroups);
             }
         }
+
+        if (@available(macOS 10.11, iOS 8.0, *)) {
+            EnableFeature(Feature::Unorm16TextureFormats);
+        }
     }
 
     void InitializeVendorArchitectureImpl() override {
