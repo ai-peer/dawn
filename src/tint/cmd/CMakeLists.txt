@@ -39,6 +39,26 @@ if (${TINT_BUILD_GLSL_WRITER})
       -Wno-weak-vtables
     )
   endif()
+
+  add_executable(glval "")
+  target_sources(glval PRIVATE
+    "common/helper.cc"
+    "common/helper.h"
+    "glval/main.cc"
+  )
+  if (${TINT_BUILD_SPV_READER})
+    target_link_libraries(glval SPIRV-Tools)
+  endif()
+  if (NOT MSVC)
+    target_compile_options(glval PRIVATE
+      -Wno-reserved-id-macro
+      -Wno-shadow-field-in-constructor
+      -Wno-weak-vtables
+    )
+  endif()
+
+  tint_default_compile_options(glval)
+  target_link_libraries(glval libtint glslang glslang-default-resource-limits profiler)
 endif()
 
 add_executable(tint_info "")
