@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6efd4637_2988f08d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-16T18:44:14Z",
+      "side": 1,
+      "message": "PTAL! Didn\u0027t exactly try it but it should work ^^\u0027",
+      "revId": "600e9e87c16f218d749e8c46f7f48e981dd8a2dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
