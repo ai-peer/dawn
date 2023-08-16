@@ -909,6 +909,28 @@ class TintSource {
     tint::Source::File file;
 };
 
+namespace detail {
+
+// A WGSL (or SPIR-V, if enabled) subdescriptor is required, and a Dawn-specific SPIR-V options
+// descriptor is allowed when using SPIR-V.
+#if TINT_BUILD_SPV_READER
+template <>
+struct RootBranchExtensions<ShaderModuleDescriptor> {
+    using List =
+        BranchExtensionsList<BranchExtensions<Branch<ShaderModuleWGSLDescriptor>, Extensions<>>,
+                             BranchExtensions<Branch<ShaderModuleSPIRVDescriptor>,
+                                              Extensions<DawnShaderModuleSPIRVOptionsDescriptor>>>;
+};
+#else
+template <>
+struct RootBranchExtensions<ShaderModuleDescriptor> {
+    using List =
+        BranchExtensionsList<BranchExtensions<Branch<ShaderModuleWGSLDescriptor>, Extensions<>>>;
+};
+#endif
+
+}  // namespace detail
+
 MaybeError ValidateAndParseShaderModule(DeviceBase* device,
                                         const ShaderModuleDescriptor* descriptor,
                                         ShaderModuleParseResult* parseResult,
@@ -919,73 +941,65 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
     DAWN_INVALID_IF(chainedDescriptor == nullptr,
                     "Shader module descriptor missing chained descriptor");
 
-// A WGSL (or SPIR-V, if enabled) subdescriptor is required, and a Dawn-specific SPIR-V options
-// descriptor is allowed when using SPIR-V.
-#if TINT_BUILD_SPV_READER
-    DAWN_TRY(ValidateSTypes(
-        chainedDescriptor,
-        {{wgpu::SType::ShaderModuleSPIRVDescriptor, wgpu::SType::ShaderModuleWGSLDescriptor},
-         {wgpu::SType::DawnShaderModuleSPIRVOptionsDescriptor}}));
-#else
-    DAWN_TRY(ValidateSingleSType(chainedDescriptor, wgpu::SType::ShaderModuleWGSLDescriptor));
-#endif
+    UnpackedShaderModuleDescriptorChain unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
+    wgpu::SType moduleType;
+    DAWN_TRY_ASSIGN(moduleType, ValidateRootBranchExtensions(unpacked));
+    ASSERT(moduleType != wgpu::SType::Invalid);
 
     ScopedTintICEHandler scopedICEHandler(device);
 
+    // Multiple paths may use a WGSL descriptor so declare it here now.
     const ShaderModuleWGSLDescriptor* wgslDesc = nullptr;
-    FindInChain(chainedDescriptor, &wgslDesc);
 
-    const DawnShaderModuleSPIRVOptionsDescriptor* spirvOptions = nullptr;
-    FindInChain(chainedDescriptor, &spirvOptions);
-
-    DAWN_INVALID_IF(wgslDesc != nullptr && spirvOptions != nullptr,
-                    "SPIR-V options descriptor not valid with WGSL descriptor");
-
+    switch (moduleType) {
 #if TINT_BUILD_SPV_READER
-    const ShaderModuleSPIRVDescriptor* spirvDesc = nullptr;
-    FindInChain(chainedDescriptor, &spirvDesc);
+        case wgpu::SType::ShaderModuleSPIRVDescriptor: {
+            DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowSpirv),
+                            "SPIR-V is disallowed.");
+            auto spirvDesc = std::get<const ShaderModuleSPIRVDescriptor*>(unpacked);
+            auto spirvOptions = std::get<const DawnShaderModuleSPIRVOptionsDescriptor*>(unpacked);
 
-    DAWN_INVALID_IF(spirvOptions != nullptr && spirvDesc == nullptr,
-                    "SPIR-V options descriptor can only be used with SPIR-V input");
-
-    // We have a temporary toggle to force the SPIRV ingestion to go through a WGSL
-    // intermediate step. It is done by switching the spirvDesc for a wgslDesc below.
-    ShaderModuleWGSLDescriptor newWgslDesc;
-    std::string newWgslCode;
-    if (spirvDesc && device->IsToggleEnabled(Toggle::ForceWGSLStep)) {
+            // We have a temporary toggle to force the SPIRV ingestion to go through a WGSL
+            // intermediate step. It is done by switching the spirvDesc for a wgslDesc below.
+            ShaderModuleWGSLDescriptor newWgslDesc;
+            std::string newWgslCode;
+            if (device->IsToggleEnabled(Toggle::ForceWGSLStep)) {
 #if TINT_BUILD_WGSL_WRITER
-        std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
-        tint::Program program;
-        DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages, spirvOptions));
+                std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+                tint::Program program;
+                DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages, spirvOptions));
 
-        tint::wgsl::writer::Options options;
-        auto result = tint::wgsl::writer::Generate(&program, options);
-        DAWN_INVALID_IF(!result, "Tint WGSL failure: Generator: %s", result.Failure());
+                tint::wgsl::writer::Options options;
+                auto result = tint::wgsl::writer::Generate(&program, options);
+                DAWN_INVALID_IF(!result, "Tint WGSL failure: Generator: %s", result.Failure());
 
-        newWgslCode = std::move(result->wgsl);
-        newWgslDesc.code = newWgslCode.c_str();
-
-        spirvDesc = nullptr;
-        wgslDesc = &newWgslDesc;
+                newWgslCode = std::move(result->wgsl);
+                newWgslDesc.code = newWgslCode.c_str();
+                wgslDesc = &newWgslDesc;
+                break;
 #else
-        device->EmitLog(
-            WGPULoggingType_Info,
-            "Toggle::ForceWGSLStep skipped because TINT_BUILD_WGSL_WRITER is not defined\n");
+                device->EmitLog(WGPULoggingType_Info,
+                                "Toggle::ForceWGSLStep skipped because TINT_BUILD_WGSL_WRITER is "
+                                "not defined\n");
 #endif  // TINT_BUILD_WGSL_WRITER
-    }
+            }
 
-    if (spirvDesc) {
-        DAWN_INVALID_IF(device->IsToggleEnabled(Toggle::DisallowSpirv), "SPIR-V is disallowed.");
+            std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
+            tint::Program program;
+            DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages, spirvOptions));
+            parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
 
-        std::vector<uint32_t> spirv(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
-        tint::Program program;
-        DAWN_TRY_ASSIGN(program, ParseSPIRV(spirv, outMessages, spirvOptions));
-        parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
-
-        return {};
-    }
+            return {};
+        }
 #endif  // TINT_BUILD_SPV_READER
-
+        case wgpu::SType::ShaderModuleWGSLDescriptor: {
+            wgslDesc = std::get<const ShaderModuleWGSLDescriptor*>(unpacked);
+            break;
+        }
+        default:
+            UNREACHABLE();
+    }
     ASSERT(wgslDesc != nullptr);
 
     auto tintSource = std::make_unique<TintSource>("", wgslDesc->code);
