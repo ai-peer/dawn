@@ -16,6 +16,23 @@
       "message": "Just an idea, no worries if you don\u0027t like it.",
       "revId": "57355f81bdf6a9958a5698d325e8d9ef8626a960",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59a93785_409e7651",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-08-16T22:48:58Z",
+      "side": 1,
+      "message": "Notes: AFIACT you can\u0027t assign the wrong parameter. You can cast one to the other though as in Width(Height(16)) but I don\u0027t think that would ever come up. You could change the type to have a `get` function instead of value operator which would fix that casting issue if you want to be more pure.",
+      "revId": "57355f81bdf6a9958a5698d325e8d9ef8626a960",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
