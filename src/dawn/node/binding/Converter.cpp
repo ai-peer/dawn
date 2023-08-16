@@ -273,6 +273,9 @@ bool Converter::Convert(wgpu::TextureFormat& out, const interop::GPUTextureForma
         case interop::GPUTextureFormat::kRg32Float:
             out = wgpu::TextureFormat::RG32Float;
             return true;
+        case interop::GPUTextureFormat::kRgba16Unorm:
+            out = wgpu::TextureFormat::RGBA16Unorm;
+            return true;
         case interop::GPUTextureFormat::kRgba16Uint:
             out = wgpu::TextureFormat::RGBA16Uint;
             return true;
