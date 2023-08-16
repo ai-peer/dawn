@@ -69,6 +69,30 @@
       },
       "revId": "d47e8c58409e3af68bc5f6b2d8cd1bc5c8697efb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99fcf1fc_39e9e361",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 24
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-16T00:58:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb027df1_68a92d47",
+      "range": {
+        "startLine": 95,
+        "startChar": 16,
+        "endLine": 96,
+        "endChar": 50
+      },
+      "revId": "d47e8c58409e3af68bc5f6b2d8cd1bc5c8697efb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

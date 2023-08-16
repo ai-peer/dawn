@@ -127,6 +127,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fbcbab9_032649a9",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 25
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-16T00:58:04Z",
+      "side": 1,
+      "message": "anticipating need to concat std::strings in other implementations, so not doing this for now",
+      "parentUuid": "7e18ed4d_8c10010e",
+      "range": {
+        "startLine": 40,
+        "startChar": 5,
+        "endLine": 40,
+        "endChar": 15
+      },
+      "revId": "0fbe8fcc4a1379cfae242589b1523bb842c1e684",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04cf0187_f77077a4",
