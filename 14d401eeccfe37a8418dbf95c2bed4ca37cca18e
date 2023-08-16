@@ -16,6 +16,23 @@
       "message": "PTAL. Will report the kokoro time when it completes.",
       "revId": "14d401eeccfe37a8418dbf95c2bed4ca37cca18e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de85c75_135f4f61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-16T20:32:01Z",
+      "side": 1,
+      "message": "The GLSL time on Windows is down in line with the other formats now being ~30 minutes on MSVC debug.",
+      "revId": "14d401eeccfe37a8418dbf95c2bed4ca37cca18e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
