@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!",
       "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "317a1934_23025c3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-16T11:29:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f565dd9_f59005dc",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-16T11:29:52Z",
+      "side": 1,
+      "message": "What about readonly, can it be supported without supportsReadWriteStorageUsage?",
+      "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a4ced6_f4c848b6",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-16T11:29:52Z",
+      "side": 1,
+      "message": "This condition seems like it is always true given the definition of kStorageTextureAccesses above.",
+      "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
