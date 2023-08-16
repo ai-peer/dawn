@@ -547,6 +547,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
                 EnableFeature(Feature::ChromiumExperimentalSubgroups);
             }
         }
+
+        EnableFeature(Feature::Norm16TextureFormats);
     }
 
     void InitializeVendorArchitectureImpl() override {

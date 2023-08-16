@@ -921,6 +921,43 @@ TEST_F(BGRA8UnormTextureFormatsValidationTests, StorageFeature) {
     device.CreateTexture(&descriptor);
 }
 
+class Norm16TextureFormatsValidationTests : public TextureValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::Norm16TextureFormats};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Test that Norm16 formats are valid as renderable and sample-able texture if
+// 'norm16-texture-formats' is enabled.
+TEST_F(Norm16TextureFormatsValidationTests, RenderAndSample) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.size = {1, 1, 1};
+    descriptor.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding;
+
+    descriptor.format = wgpu::TextureFormat::R16Unorm;
+    device.CreateTexture(&descriptor);
+
+    descriptor.format = wgpu::TextureFormat::RG16Unorm;
+    device.CreateTexture(&descriptor);
+
+    descriptor.format = wgpu::TextureFormat::RGBA16Unorm;
+    device.CreateTexture(&descriptor);
+
+    descriptor.format = wgpu::TextureFormat::R16Snorm;
+    device.CreateTexture(&descriptor);
+
+    descriptor.format = wgpu::TextureFormat::RG16Snorm;
+    device.CreateTexture(&descriptor);
+
+    descriptor.format = wgpu::TextureFormat::RGBA16Snorm;
+    device.CreateTexture(&descriptor);
+}
+
 static void CheckTextureMatchesDescriptor(const wgpu::Texture& tex,
                                           const wgpu::TextureDescriptor& desc) {
     EXPECT_EQ(desc.size.width, tex.GetWidth());
