@@ -842,6 +842,208 @@ TEST_P(VideoViewsValidationTests, RenderAttachmentInvalid) {
     mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
 }
 
+// Tests creating a texture with a multi-plane format.
+TEST_P(VideoViewsValidationTests, RenderAttachmentValid) {
+    // multi-planar formats should be allowed to be renderable.
+    auto platformTexture = mBackend->CreateVideoTextureForTest(
+        wgpu::TextureFormat::R8BG8Biplanar420Unorm,
+        wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment,
+        /*isCheckerboard*/ true,
+        /*initialized*/ true);
+
+    ASSERT_NE(platformTexture.get(), nullptr);
+    if (!platformTexture->CanWrapAsWGPUTexture()) {
+        mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+        GTEST_SKIP() << "Skipped because not supported.";
+    }
+
+    wgpu::TextureViewDescriptor viewDesc = {};
+
+    // Success case: Per plane view formats unspecified.
+    {
+        viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+        wgpu::TextureView plane0View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+        wgpu::TextureView plane1View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        ASSERT_NE(plane0View.Get(), nullptr);
+        ASSERT_NE(plane1View.Get(), nullptr);
+    }
+
+    // Success case: Per plane view formats specified and aspect.
+    {
+        viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+        viewDesc.format = wgpu::TextureFormat::R8Unorm;
+        wgpu::TextureView plane0View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+        viewDesc.format = wgpu::TextureFormat::RG8Unorm;
+        wgpu::TextureView plane1View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        ASSERT_NE(plane0View.Get(), nullptr);
+        ASSERT_NE(plane1View.Get(), nullptr);
+    }
+    dawn::ErrorLog() << "Creating luma shaders..";
+
+    // Some valid view format, but no plane specified.
+    viewDesc = {};
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Some valid view format, but no plane specified.
+    viewDesc = {};
+    viewDesc.format = wgpu::TextureFormat::RG8Unorm;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Correct plane index but incompatible view format.
+    viewDesc.format = wgpu::TextureFormat::R8Uint;
+    viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Compatible view format but wrong plane index.
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Compatible view format but wrong aspect.
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    viewDesc.aspect = wgpu::TextureAspect::All;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Create a single plane texture.
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.dimension = wgpu::TextureDimension::e2D;
+    desc.usage = wgpu::TextureUsage::TextureBinding;
+    desc.size = {1, 1, 1};
+
+    wgpu::Texture texture = device.CreateTexture(&desc);
+
+    // Plane aspect specified with non-planar texture.
+    viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    // Planar views with non-planar texture.
+    viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    viewDesc.format = wgpu::TextureFormat::RG8Unorm;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    {
+        wgpu::TextureViewDescriptor lumaViewDesc;
+        lumaViewDesc.format = wgpu::TextureFormat::R8Unorm;
+        lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+        wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
+
+        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+
+        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+                @group(0) @binding(0) var sampler0 : sampler;
+                @group(0) @binding(1) var texture : texture_2d<f32>;
+
+                @fragment
+                fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
+                let y : f32 = textureSample(texture, sampler0, texCoord).r;
+                return vec4f(y, 0.0, 0.0, 1.0);
+                })");
+
+        dawn::ErrorLog() << "Creating luma render pass...";
+
+        utils::BasicRenderPass renderPass =
+            utils::CreateBasicRenderPass(device, kYUVImageDataWidthInTexels,
+                                         kYUVImageDataHeightInTexels, wgpu::TextureFormat::R8Unorm);
+        renderPipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::R8Unorm;
+        renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+
+        wgpu::RenderPipeline renderPipeline =
+            device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+        wgpu::Sampler sampler = device.CreateSampler();
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+            pass.SetPipeline(renderPipeline);
+            pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                      {{0, sampler}, {1, lumaTextureView}}));
+            pass.Draw(6);
+            pass.End();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        std::vector<uint8_t> expectedData = GetTestTextureDataWithPlaneIndex(
+            0u, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels, true);
+        for (size_t i = 0; i < expectedData.size(); i++) {
+            dawn::ErrorLog() << std::hex << expectedData[i] << ", ";
+        }
+        EXPECT_TEXTURE_EQ(expectedData.data(), renderPass.color, {0, 0},
+                          {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels});
+    }
+
+    {
+        wgpu::TextureViewDescriptor chromaViewDesc;
+        chromaViewDesc.format = wgpu::TextureFormat::RG8Unorm;
+        chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+        wgpu::TextureView chromaTextureView =
+            platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
+
+        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+
+        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+                @group(0) @binding(0) var sampler0 : sampler;
+                @group(0) @binding(1) var texture : texture_2d<f32>;
+
+                @fragment
+                fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
+                let u : f32 = textureSample(texture, sampler0, texCoord).r;
+                let v : f32 = textureSample(texture, sampler0, texCoord).g;
+                return vec4f(u, v, 0.0, 1.0);
+                })");
+
+        utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+            device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels,
+            wgpu::TextureFormat::RG8Unorm);
+        renderPipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::RG8Unorm;
+        renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+
+        wgpu::RenderPipeline renderPipeline =
+            device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+        wgpu::Sampler sampler = device.CreateSampler();
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        {
+            wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+            pass.SetPipeline(renderPipeline);
+            pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                      {{0, sampler}, {1, chromaTextureView}}));
+            pass.Draw(6);
+            pass.End();
+        }
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        std::vector<uint8_t> expectedData = GetTestTextureDataWithPlaneIndex(
+            1u, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels, true);
+        EXPECT_TEXTURE_EQ(expectedData.data(), renderPass.color, {0, 0},
+                          {kYUVImageDataWidthInTexels / 2, kYUVImageDataHeightInTexels});
+    }
+
+    mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+}
+
 // Tests writing into a multi-planar format fails.
 TEST_P(VideoViewsValidationTests, WriteTextureAllAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =

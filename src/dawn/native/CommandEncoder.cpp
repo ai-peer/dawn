@@ -19,6 +19,7 @@
 #include <vector>
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/ApplyClearColorValueWithDrawHelper.h"
 #include "dawn/native/BindGroup.h"
@@ -134,10 +135,16 @@ MaybeError ValidateAttachmentArrayLayersAndLevelCount(const TextureViewBase* att
 MaybeError ValidateOrSetAttachmentSize(const TextureViewBase* attachment,
                                        uint32_t* width,
                                        uint32_t* height) {
+    dawn::ErrorLog() << "CommandEncoder - ValidateOrSetAttachmentSize called";
     const Extent3D& attachmentSize =
         attachment->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
             attachment->GetBaseMipLevel());
-
+    dawn::ErrorLog() << "CommandEncoder - ValidateOrSetAttachmentSize - format = "
+                     << static_cast<int>(attachment->GetTexture()->GetFormat().format)
+                     << " baseFormat = "
+                     << static_cast<int>(attachment->GetTexture()->GetFormat().baseFormat)
+                     << " width = " << attachmentSize.width
+                     << " height = " << attachmentSize.height;
     if (*width == 0) {
         DAWN_ASSERT(*height == 0);
         *width = attachmentSize.width;
