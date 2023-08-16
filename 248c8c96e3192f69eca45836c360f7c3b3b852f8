@@ -16,6 +16,24 @@
       "message": "This merits an update to usage.h, where the comments imply storage textures are either readonly or writeonly\n\nAlso, please add a test to usage_test.cc showing we can create and dump a usage for a read-write storage texture.",
       "revId": "248c8c96e3192f69eca45836c360f7c3b3b852f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "306ef7b3_7c180479",
+        "filename": "src/tint/lang/spirv/reader/ast_parser/usage.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-16T17:39:55Z",
+      "side": 0,
+      "message": "Changed the query methods so that there is now:\n```\nIsStorageReadOnlyTexture()\nIsStorageReadWriteTexture()\nIsStorageWriteOnlyTexture()\n```\n\nAdded the requested test.",
+      "parentUuid": "5efb8fa5_0df33f83",
+      "revId": "248c8c96e3192f69eca45836c360f7c3b3b852f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
