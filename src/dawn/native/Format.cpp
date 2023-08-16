@@ -147,6 +147,17 @@ FormatIndex ComputeFormatIndex(wgpu::TextureFormat format) {
     return static_cast<FormatIndex>(static_cast<uint32_t>(format) - 1);
 }
 
+template <typename T>
+class NumberWrapper {
+  public:
+    NumberWrapper() = default;
+    explicit constexpr NumberWrapper(T const& value) : value(value) {}
+    operator T&() { return value; }
+
+  private:
+    T value;
+};
+
 FormatTable BuildFormatTable(const DeviceBase* device) {
     FormatTable table;
     FormatSet formatsSet;
@@ -172,28 +183,63 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         formatsSet.set(index);
     };
 
+    enum class Renderable { False, True };
+    auto ToRenderable = [](bool v) { return v ? Renderable::True : Renderable::False; };
+    enum class SupportsStorageUsage {
+        False,
+        True,
+    };
+    auto ToSupportsStorageUsage = [](bool v) {
+        return v ? SupportsStorageUsage::True : SupportsStorageUsage::False;
+    };
+    enum class SupportsMultisample {
+        False,
+        True,
+    };
+    auto ToSupportsMultisample = [](bool v) {
+        return v ? SupportsMultisample::True : SupportsMultisample::False;
+    };
+    enum class SupportsResolveTarget {
+        False,
+        True,
+    };
+    auto ToSupportsResolveTarget = [](bool v) {
+        return v ? SupportsResolveTarget::True : SupportsResolveTarget::False;
+    };
+    typedef NumberWrapper<uint32_t> Width;
+    typedef NumberWrapper<uint32_t> Height;
+    typedef NumberWrapper<uint32_t> ByteSize;
+    typedef NumberWrapper<uint8_t> RenderTargetPixelByteCost;
+    typedef NumberWrapper<uint8_t> ComponentCount;
+    typedef NumberWrapper<uint8_t> RenderTargetComponentAlignment;
+
     auto AddConditionalColorFormat =
-        [&AddFormat](wgpu::TextureFormat format, UnsupportedReason unsupportedReason,
-                     bool renderable, bool supportsStorageUsage, bool supportsMultisample,
-                     bool supportsResolveTarget, uint32_t byteSize, SampleTypeBit sampleTypes,
-                     uint8_t componentCount, uint8_t renderTargetPixelByteCost = 0,
-                     uint8_t renderTargetComponentAlignment = 0,
-                     wgpu::TextureFormat baseFormat = wgpu::TextureFormat::Undefined) {
+        [&AddFormat](
+            wgpu::TextureFormat format, UnsupportedReason unsupportedReason, Renderable renderable,
+            SupportsStorageUsage supportsStorageUsage, SupportsMultisample supportsMultisample,
+            SupportsResolveTarget supportsResolveTarget, ByteSize byteSize,
+            SampleTypeBit sampleTypes, ComponentCount componentCount,
+            RenderTargetPixelByteCost renderTargetPixelByteCost = RenderTargetPixelByteCost(0),
+            RenderTargetComponentAlignment renderTargetComponentAlignment =
+                RenderTargetComponentAlignment(0),
+            wgpu::TextureFormat baseFormat = wgpu::TextureFormat::Undefined) {
             Format internalFormat;
             internalFormat.format = format;
-            internalFormat.isRenderable = renderable;
+            internalFormat.isRenderable = renderable == Renderable::True;
             internalFormat.isCompressed = false;
             internalFormat.unsupportedReason = unsupportedReason;
-            internalFormat.supportsStorageUsage = supportsStorageUsage;
+            internalFormat.supportsStorageUsage =
+                supportsStorageUsage == SupportsStorageUsage::True;
 
-            if (supportsMultisample) {
+            if (supportsMultisample == SupportsMultisample::True) {
                 ASSERT(renderable);
             }
-            internalFormat.supportsMultisample = supportsMultisample;
-            internalFormat.supportsResolveTarget = supportsResolveTarget;
+            internalFormat.supportsMultisample = supportsMultisample == SupportsMultisample::True;
+            internalFormat.supportsResolveTarget =
+                supportsResolveTarget == SupportsResolveTarget::True;
             internalFormat.aspects = Aspect::Color;
             internalFormat.componentCount = componentCount;
-            if (renderable) {
+            if (renderable == Renderable::True) {
                 // If the color format is renderable, it must have a pixel byte size and component
                 // alignment specified.
                 ASSERT(renderTargetPixelByteCost != 0 && renderTargetComponentAlignment != 0);
@@ -238,10 +284,13 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
 
     auto AddColorFormat =
         [&AddConditionalColorFormat](
-            wgpu::TextureFormat format, bool renderable, bool supportsStorageUsage,
-            bool supportsMultisample, bool supportsResolveTarget, uint32_t byteSize,
-            SampleTypeBit sampleTypes, uint8_t componentCount,
-            uint8_t renderTargetPixelByteCost = 0, uint8_t renderTargetComponentAlignment = 0,
+            wgpu::TextureFormat format, Renderable renderable,
+            SupportsStorageUsage supportsStorageUsage, SupportsMultisample supportsMultisample,
+            SupportsResolveTarget supportsResolveTarget, ByteSize byteSize,
+            SampleTypeBit sampleTypes, ComponentCount componentCount,
+            RenderTargetPixelByteCost renderTargetPixelByteCost = RenderTargetPixelByteCost(0),
+            RenderTargetComponentAlignment renderTargetComponentAlignment =
+                RenderTargetComponentAlignment(0),
             wgpu::TextureFormat baseFormat = wgpu::TextureFormat::Undefined) {
             AddConditionalColorFormat(format, std::monostate{}, renderable, supportsStorageUsage,
                                       supportsMultisample, supportsResolveTarget, byteSize,
@@ -307,8 +356,8 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
     };
 
     auto AddCompressedFormat =
-        [&AddFormat](wgpu::TextureFormat format, uint32_t byteSize, uint32_t width, uint32_t height,
-                     UnsupportedReason unsupportedReason, uint8_t componentCount,
+        [&AddFormat](wgpu::TextureFormat format, ByteSize byteSize, Width width, Height height,
+                     UnsupportedReason unsupportedReason, ComponentCount componentCount,
                      wgpu::TextureFormat baseFormat = wgpu::TextureFormat::Undefined) {
             Format internalFormat;
             internalFormat.format = format;
@@ -341,16 +390,17 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
     auto AddMultiAspectFormat =
         [&AddFormat, &table](wgpu::TextureFormat format, Aspect aspects,
                              wgpu::TextureFormat firstFormat, wgpu::TextureFormat secondFormat,
-                             bool isRenderable, UnsupportedReason unsupportedReason,
-                             bool supportsMultisample, uint8_t componentCount) {
+                             Renderable renderable, UnsupportedReason unsupportedReason,
+                             SupportsMultisample supportsMultisample,
+                             ComponentCount componentCount) {
             Format internalFormat;
             internalFormat.format = format;
             internalFormat.baseFormat = format;
-            internalFormat.isRenderable = isRenderable;
+            internalFormat.isRenderable = renderable == Renderable::True;
             internalFormat.isCompressed = false;
             internalFormat.unsupportedReason = unsupportedReason;
             internalFormat.supportsStorageUsage = false;
-            internalFormat.supportsMultisample = supportsMultisample;
+            internalFormat.supportsMultisample = supportsMultisample == SupportsMultisample::True;
             internalFormat.supportsResolveTarget = false;
             internalFormat.aspects = aspects;
             internalFormat.componentCount = componentCount;
@@ -372,55 +422,55 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
 
     // clang-format off
         // 1 byte color formats
-        AddColorFormat(wgpu::TextureFormat::R8Unorm, true, false, true, true, 1, kAnyFloat, 1, 1, 1);
-        AddColorFormat(wgpu::TextureFormat::R8Snorm, false, false, false, false, 1, kAnyFloat, 1);
-        AddColorFormat(wgpu::TextureFormat::R8Uint, true, false, true, false, 1, SampleTypeBit::Uint, 1, 1, 1);
-        AddColorFormat(wgpu::TextureFormat::R8Sint, true, false, true, false, 1, SampleTypeBit::Sint, 1, 1, 1);
+        AddColorFormat(wgpu::TextureFormat::R8Unorm, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(1), kAnyFloat, ComponentCount(1), RenderTargetPixelByteCost(1), RenderTargetComponentAlignment(1));
+        AddColorFormat(wgpu::TextureFormat::R8Snorm, Renderable::False, SupportsStorageUsage::False, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(1), kAnyFloat, ComponentCount(1));
+        AddColorFormat(wgpu::TextureFormat::R8Uint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(1), SampleTypeBit::Uint, ComponentCount(1), RenderTargetPixelByteCost(1), RenderTargetComponentAlignment(1));
+        AddColorFormat(wgpu::TextureFormat::R8Sint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(1), SampleTypeBit::Sint, ComponentCount(1), RenderTargetPixelByteCost(1), RenderTargetComponentAlignment(1));
 
         // 2 bytes color formats
-        AddColorFormat(wgpu::TextureFormat::R16Uint, true, false, true, false, 2, SampleTypeBit::Uint, 1, 2, 2);
-        AddColorFormat(wgpu::TextureFormat::R16Sint, true, false, true, false, 2, SampleTypeBit::Sint, 1, 2, 2);
-        AddColorFormat(wgpu::TextureFormat::R16Float, true, false, true, true, 2, kAnyFloat, 1, 2, 2);
-        AddColorFormat(wgpu::TextureFormat::RG8Unorm, true, false, true, true, 2, kAnyFloat, 2, 2, 1);
-        AddColorFormat(wgpu::TextureFormat::RG8Snorm, false, false, false, false, 2, kAnyFloat, 2);
-        AddColorFormat(wgpu::TextureFormat::RG8Uint, true, false, true, false, 2, SampleTypeBit::Uint, 2, 2, 1);
-        AddColorFormat(wgpu::TextureFormat::RG8Sint, true, false, true, false, 2, SampleTypeBit::Sint, 2, 2, 1);
+        AddColorFormat(wgpu::TextureFormat::R16Uint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(2), SampleTypeBit::Uint, ComponentCount(1), RenderTargetPixelByteCost(2), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::R16Sint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(2), SampleTypeBit::Sint, ComponentCount(1), RenderTargetPixelByteCost(2), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::R16Float, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(2), kAnyFloat, ComponentCount(1), RenderTargetPixelByteCost(2), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::RG8Unorm, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(2), kAnyFloat, ComponentCount(2), RenderTargetPixelByteCost(2), RenderTargetComponentAlignment(1));
+        AddColorFormat(wgpu::TextureFormat::RG8Snorm, Renderable::False, SupportsStorageUsage::False, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(2), kAnyFloat, ComponentCount(2));
+        AddColorFormat(wgpu::TextureFormat::RG8Uint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(2), SampleTypeBit::Uint, ComponentCount(2), RenderTargetPixelByteCost(2), RenderTargetComponentAlignment(1));
+        AddColorFormat(wgpu::TextureFormat::RG8Sint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(2), SampleTypeBit::Sint, ComponentCount(2), RenderTargetPixelByteCost(2), RenderTargetComponentAlignment(1));
 
         // 4 bytes color formats
         SampleTypeBit sampleTypeFor32BitFloatFormats = device->HasFeature(Feature::Float32Filterable) ? kAnyFloat : SampleTypeBit::UnfilterableFloat;
-        AddColorFormat(wgpu::TextureFormat::R32Uint, true, true, false, false, 4, SampleTypeBit::Uint, 1, 4, 4);
-        AddColorFormat(wgpu::TextureFormat::R32Sint, true, true, false, false, 4, SampleTypeBit::Sint, 1, 4, 4);
-        AddColorFormat(wgpu::TextureFormat::R32Float, true, true, true, false, 4, sampleTypeFor32BitFloatFormats, 1, 4, 4);
-        AddColorFormat(wgpu::TextureFormat::RG16Uint, true, false, true, false, 4, SampleTypeBit::Uint, 2, 4, 2);
-        AddColorFormat(wgpu::TextureFormat::RG16Sint, true, false, true, false, 4, SampleTypeBit::Sint, 2, 4, 2);
-        AddColorFormat(wgpu::TextureFormat::RG16Float, true, false, true, true, 4, kAnyFloat, 2, 4, 2);
-        AddColorFormat(wgpu::TextureFormat::RGBA8Unorm, true, true, true, true, 4, kAnyFloat, 4, 8, 1);
-        AddColorFormat(wgpu::TextureFormat::RGBA8UnormSrgb, true, false, true, true, 4, kAnyFloat, 4, 8, 1, wgpu::TextureFormat::RGBA8Unorm);
-        AddColorFormat(wgpu::TextureFormat::RGBA8Snorm, false, true, false, false, 4, kAnyFloat, 4);
-        AddColorFormat(wgpu::TextureFormat::RGBA8Uint, true, true, true, false, 4, SampleTypeBit::Uint, 4, 4, 1);
-        AddColorFormat(wgpu::TextureFormat::RGBA8Sint, true, true, true, false, 4, SampleTypeBit::Sint, 4, 4, 1);
+        AddColorFormat(wgpu::TextureFormat::R32Uint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(4), SampleTypeBit::Uint, ComponentCount(1), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::R32Sint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(4), SampleTypeBit::Sint, ComponentCount(1), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::R32Float, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(4), sampleTypeFor32BitFloatFormats, ComponentCount(1), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::RG16Uint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(4), SampleTypeBit::Uint, ComponentCount(2), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::RG16Sint, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(4), SampleTypeBit::Sint, ComponentCount(2), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::RG16Float, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(4), kAnyFloat, ComponentCount(2), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::RGBA8Unorm, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(4), kAnyFloat, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(1));
+        AddColorFormat(wgpu::TextureFormat::RGBA8UnormSrgb, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(4), kAnyFloat, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(1), wgpu::TextureFormat::RGBA8Unorm);
+        AddColorFormat(wgpu::TextureFormat::RGBA8Snorm, Renderable::False, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(4), kAnyFloat, ComponentCount(4));
+        AddColorFormat(wgpu::TextureFormat::RGBA8Uint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(4), SampleTypeBit::Uint, ComponentCount(4), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(1));
+        AddColorFormat(wgpu::TextureFormat::RGBA8Sint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(4), SampleTypeBit::Sint, ComponentCount(4), RenderTargetPixelByteCost(4), RenderTargetComponentAlignment(1));
 
-        bool BGRA8UnormSupportsStorageUsage = device->HasFeature(Feature::BGRA8UnormStorage);
-        AddColorFormat(wgpu::TextureFormat::BGRA8Unorm, true, BGRA8UnormSupportsStorageUsage, true, true, 4, kAnyFloat, 4, 8, 1);
-        AddConditionalColorFormat(wgpu::TextureFormat::BGRA8UnormSrgb, device->IsCompatibilityMode() ? UnsupportedReason(CompatibilityMode{}) : Format::supported, true, false, true, true, 4, kAnyFloat, 4, 8, 1, wgpu::TextureFormat::BGRA8Unorm);
-        AddColorFormat(wgpu::TextureFormat::RGB10A2Unorm, true, false, true, true, 4, kAnyFloat, 4, 8, 4);
+        auto BGRA8UnormSupportsStorageUsage = ToSupportsStorageUsage(device->HasFeature(Feature::BGRA8UnormStorage));
+        AddColorFormat(wgpu::TextureFormat::BGRA8Unorm, Renderable::True, BGRA8UnormSupportsStorageUsage, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(4), kAnyFloat, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(1));
+        AddConditionalColorFormat(wgpu::TextureFormat::BGRA8UnormSrgb, device->IsCompatibilityMode() ? UnsupportedReason(CompatibilityMode{}) : Format::supported, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(4), kAnyFloat, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(1), wgpu::TextureFormat::BGRA8Unorm);
+        AddColorFormat(wgpu::TextureFormat::RGB10A2Unorm, Renderable::True, SupportsStorageUsage::False, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(4), kAnyFloat, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(4));
 
-        bool isRG11B10UfloatRenderable = device->HasFeature(Feature::RG11B10UfloatRenderable);
-        AddColorFormat(wgpu::TextureFormat::RG11B10Ufloat, isRG11B10UfloatRenderable, false, isRG11B10UfloatRenderable, isRG11B10UfloatRenderable, 4, kAnyFloat, 3, 8, 4);
-        AddColorFormat(wgpu::TextureFormat::RGB9E5Ufloat, false, false, false, false, 4, kAnyFloat, 3);
+        auto isRG11B10UfloatRenderable = device->HasFeature(Feature::RG11B10UfloatRenderable);
+        AddColorFormat(wgpu::TextureFormat::RG11B10Ufloat, ToRenderable(isRG11B10UfloatRenderable), SupportsStorageUsage::False, ToSupportsMultisample(isRG11B10UfloatRenderable), ToSupportsResolveTarget(isRG11B10UfloatRenderable), ByteSize(4), kAnyFloat, ComponentCount(3), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::RGB9E5Ufloat, Renderable::False,  SupportsStorageUsage::False, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(4), kAnyFloat, ComponentCount(3));
 
         // 8 bytes color formats
-        AddColorFormat(wgpu::TextureFormat::RG32Uint, true, true, false, false, 8, SampleTypeBit::Uint, 2, 8, 4);
-        AddColorFormat(wgpu::TextureFormat::RG32Sint, true, true, false, false, 8, SampleTypeBit::Sint, 2, 8, 4);
-        AddColorFormat(wgpu::TextureFormat::RG32Float, true, true, false, false, 8, sampleTypeFor32BitFloatFormats, 2, 8, 4);
-        AddColorFormat(wgpu::TextureFormat::RGBA16Uint, true, true, true, false, 8, SampleTypeBit::Uint, 4, 8, 2);
-        AddColorFormat(wgpu::TextureFormat::RGBA16Sint, true, true, true, false, 8, SampleTypeBit::Sint, 4, 8, 2);
-        AddColorFormat(wgpu::TextureFormat::RGBA16Float, true, true, true, true, 8, kAnyFloat, 4, 8, 2);
+        AddColorFormat(wgpu::TextureFormat::RG32Uint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(8), SampleTypeBit::Uint, ComponentCount(2), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::RG32Sint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(8), SampleTypeBit::Sint, ComponentCount(2), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::RG32Float, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(8), sampleTypeFor32BitFloatFormats, ComponentCount(2), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::RGBA16Uint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(8), SampleTypeBit::Uint, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::RGBA16Sint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::True, SupportsResolveTarget::False, ByteSize(8), SampleTypeBit::Sint, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(2));
+        AddColorFormat(wgpu::TextureFormat::RGBA16Float, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::True, SupportsResolveTarget::True, ByteSize(8), kAnyFloat, ComponentCount(4), RenderTargetPixelByteCost(8), RenderTargetComponentAlignment(2));
 
         // 16 bytes color formats
-        AddColorFormat(wgpu::TextureFormat::RGBA32Uint, true, true, false, false, 16, SampleTypeBit::Uint, 4, 16, 4);
-        AddColorFormat(wgpu::TextureFormat::RGBA32Sint, true, true, false, false, 16, SampleTypeBit::Sint, 4, 16, 4);
-        AddColorFormat(wgpu::TextureFormat::RGBA32Float, true, true, false, false, 16, sampleTypeFor32BitFloatFormats, 4, 16, 4);
+        AddColorFormat(wgpu::TextureFormat::RGBA32Uint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(16), SampleTypeBit::Uint, ComponentCount(4), RenderTargetPixelByteCost(16), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::RGBA32Sint, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(16), SampleTypeBit::Sint, ComponentCount(4), RenderTargetPixelByteCost(16), RenderTargetComponentAlignment(4));
+        AddColorFormat(wgpu::TextureFormat::RGBA32Float, Renderable::True, SupportsStorageUsage::True, SupportsMultisample::False, SupportsResolveTarget::False, ByteSize(16), sampleTypeFor32BitFloatFormats, ComponentCount(4), RenderTargetPixelByteCost(16), RenderTargetComponentAlignment(4));
 
         // Depth-stencil formats
         AddStencilFormat(wgpu::TextureFormat::Stencil8, Format::supported);
@@ -430,77 +480,77 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         // using 0 here to mean "unsized" and adding a backend-specific query for the block size.
         AddDepthFormat(wgpu::TextureFormat::Depth24Plus, 4, Format::supported);
         AddMultiAspectFormat(wgpu::TextureFormat::Depth24PlusStencil8,
-                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, true, Format::supported, true, 2);
+                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth24Plus, wgpu::TextureFormat::Stencil8, Renderable::True, Format::supported, SupportsMultisample::True, ComponentCount(2));
         AddDepthFormat(wgpu::TextureFormat::Depth32Float, 4, Format::supported);
         UnsupportedReason d32s8UnsupportedReason = device->HasFeature(Feature::Depth32FloatStencil8) ? Format::supported : RequiresFeature{wgpu::FeatureName::Depth32FloatStencil8};
         AddMultiAspectFormat(wgpu::TextureFormat::Depth32FloatStencil8,
-                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth32Float, wgpu::TextureFormat::Stencil8, true, d32s8UnsupportedReason, true, 2);
+                              Aspect::Depth | Aspect::Stencil, wgpu::TextureFormat::Depth32Float, wgpu::TextureFormat::Stencil8, Renderable::True, d32s8UnsupportedReason, SupportsMultisample::True, ComponentCount(2));
 
         // BC compressed formats
         UnsupportedReason bcFormatUnsupportedReason = device->HasFeature(Feature::TextureCompressionBC) ? Format::supported : RequiresFeature{wgpu::FeatureName::TextureCompressionBC};
-        AddCompressedFormat(wgpu::TextureFormat::BC1RGBAUnorm, 8, 4, 4, bcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::BC1RGBAUnormSrgb, 8, 4, 4, bcFormatUnsupportedReason, 4, wgpu::TextureFormat::BC1RGBAUnorm);
-        AddCompressedFormat(wgpu::TextureFormat::BC4RSnorm, 8, 4, 4, bcFormatUnsupportedReason, 1);
-        AddCompressedFormat(wgpu::TextureFormat::BC4RUnorm, 8, 4, 4, bcFormatUnsupportedReason, 1);
-        AddCompressedFormat(wgpu::TextureFormat::BC2RGBAUnorm, 16, 4, 4, bcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::BC2RGBAUnormSrgb, 16, 4, 4, bcFormatUnsupportedReason, 4, wgpu::TextureFormat::BC2RGBAUnorm);
-        AddCompressedFormat(wgpu::TextureFormat::BC3RGBAUnorm, 16, 4, 4, bcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::BC3RGBAUnormSrgb, 16, 4, 4, bcFormatUnsupportedReason, 4, wgpu::TextureFormat::BC3RGBAUnorm);
-        AddCompressedFormat(wgpu::TextureFormat::BC5RGSnorm, 16, 4, 4, bcFormatUnsupportedReason, 2);
-        AddCompressedFormat(wgpu::TextureFormat::BC5RGUnorm, 16, 4, 4, bcFormatUnsupportedReason, 2);
-        AddCompressedFormat(wgpu::TextureFormat::BC6HRGBFloat, 16, 4, 4, bcFormatUnsupportedReason, 3);
-        AddCompressedFormat(wgpu::TextureFormat::BC6HRGBUfloat, 16, 4, 4, bcFormatUnsupportedReason, 3);
-        AddCompressedFormat(wgpu::TextureFormat::BC7RGBAUnorm, 16, 4, 4, bcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::BC7RGBAUnormSrgb, 16, 4, 4, bcFormatUnsupportedReason, 4, wgpu::TextureFormat::BC7RGBAUnorm);
+        AddCompressedFormat(wgpu::TextureFormat::BC1RGBAUnorm, ByteSize(8), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::BC1RGBAUnormSrgb, ByteSize(8), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::BC1RGBAUnorm);
+        AddCompressedFormat(wgpu::TextureFormat::BC4RSnorm, ByteSize(8), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(1));
+        AddCompressedFormat(wgpu::TextureFormat::BC4RUnorm, ByteSize(8), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(1));
+        AddCompressedFormat(wgpu::TextureFormat::BC2RGBAUnorm, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::BC2RGBAUnormSrgb, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::BC2RGBAUnorm);
+        AddCompressedFormat(wgpu::TextureFormat::BC3RGBAUnorm, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::BC3RGBAUnormSrgb, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::BC3RGBAUnorm);
+        AddCompressedFormat(wgpu::TextureFormat::BC5RGSnorm, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(2));
+        AddCompressedFormat(wgpu::TextureFormat::BC5RGUnorm, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(2));
+        AddCompressedFormat(wgpu::TextureFormat::BC6HRGBFloat, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(3));
+        AddCompressedFormat(wgpu::TextureFormat::BC6HRGBUfloat, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(3));
+        AddCompressedFormat(wgpu::TextureFormat::BC7RGBAUnorm, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::BC7RGBAUnormSrgb, ByteSize(16), Width(4), Height(4), bcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::BC7RGBAUnorm);
 
         // ETC2/EAC compressed formats
         UnsupportedReason etc2FormatUnsupportedReason = device->HasFeature(Feature::TextureCompressionETC2) ?  Format::supported : RequiresFeature{wgpu::FeatureName::TextureCompressionETC2};
-        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8Unorm, 8, 4, 4, etc2FormatUnsupportedReason, 3);
-        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8UnormSrgb, 8, 4, 4, etc2FormatUnsupportedReason, 3, wgpu::TextureFormat::ETC2RGB8Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8A1Unorm, 8, 4, 4, etc2FormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8A1UnormSrgb, 8, 4, 4, etc2FormatUnsupportedReason, 4, wgpu::TextureFormat::ETC2RGB8A1Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ETC2RGBA8Unorm, 16, 4, 4, etc2FormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ETC2RGBA8UnormSrgb, 16, 4, 4, etc2FormatUnsupportedReason, 4, wgpu::TextureFormat::ETC2RGBA8Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::EACR11Unorm, 8, 4, 4, etc2FormatUnsupportedReason, 1);
-        AddCompressedFormat(wgpu::TextureFormat::EACR11Snorm, 8, 4, 4, etc2FormatUnsupportedReason, 1);
-        AddCompressedFormat(wgpu::TextureFormat::EACRG11Unorm, 16, 4, 4, etc2FormatUnsupportedReason, 2);
-        AddCompressedFormat(wgpu::TextureFormat::EACRG11Snorm, 16, 4, 4, etc2FormatUnsupportedReason, 2);
+        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8Unorm, ByteSize(8), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(3));
+        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8UnormSrgb, ByteSize(8), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(3), wgpu::TextureFormat::ETC2RGB8Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8A1Unorm, ByteSize(8), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ETC2RGB8A1UnormSrgb, ByteSize(8), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ETC2RGB8A1Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ETC2RGBA8Unorm, ByteSize(16), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ETC2RGBA8UnormSrgb, ByteSize(16), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ETC2RGBA8Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::EACR11Unorm, ByteSize(8), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(1));
+        AddCompressedFormat(wgpu::TextureFormat::EACR11Snorm, ByteSize(8), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(1));
+        AddCompressedFormat(wgpu::TextureFormat::EACRG11Unorm, ByteSize(16), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(2));
+        AddCompressedFormat(wgpu::TextureFormat::EACRG11Snorm, ByteSize(16), Width(4), Height(4), etc2FormatUnsupportedReason, ComponentCount(2));
 
         // ASTC compressed formats
         UnsupportedReason astcFormatUnsupportedReason = device->HasFeature(Feature::TextureCompressionASTC) ?  Format::supported : RequiresFeature{wgpu::FeatureName::TextureCompressionASTC};
-        AddCompressedFormat(wgpu::TextureFormat::ASTC4x4Unorm, 16, 4, 4, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC4x4UnormSrgb, 16, 4, 4, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC4x4Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC5x4Unorm, 16, 5, 4, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC5x4UnormSrgb, 16, 5, 4, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC5x4Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC5x5Unorm, 16, 5, 5, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC5x5UnormSrgb, 16, 5, 5, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC5x5Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC6x5Unorm, 16, 6, 5, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC6x5UnormSrgb, 16, 6, 5, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC6x5Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC6x6Unorm, 16, 6, 6, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC6x6UnormSrgb, 16, 6, 6, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC6x6Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC8x5Unorm, 16, 8, 5, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC8x5UnormSrgb, 16, 8, 5, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC8x5Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC8x6Unorm, 16, 8, 6, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC8x6UnormSrgb, 16, 8, 6, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC8x6Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC8x8Unorm, 16, 8, 8, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC8x8UnormSrgb, 16, 8, 8, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC8x8Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x5Unorm, 16, 10, 5, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x5UnormSrgb, 16, 10, 5, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC10x5Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x6Unorm, 16, 10, 6, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x6UnormSrgb, 16, 10, 6, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC10x6Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x8Unorm, 16, 10, 8, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x8UnormSrgb, 16, 10, 8, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC10x8Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x10Unorm, 16, 10, 10, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC10x10UnormSrgb, 16, 10, 10, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC10x10Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC12x10Unorm, 16, 12, 10, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC12x10UnormSrgb, 16, 12, 10, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC12x10Unorm);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC12x12Unorm, 16, 12, 12, astcFormatUnsupportedReason, 4);
-        AddCompressedFormat(wgpu::TextureFormat::ASTC12x12UnormSrgb, 16, 12, 12, astcFormatUnsupportedReason, 4, wgpu::TextureFormat::ASTC12x12Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC4x4Unorm, ByteSize(16), Width(4), Height(4), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC4x4UnormSrgb, ByteSize(16), Width(4), Height(4), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC4x4Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC5x4Unorm, ByteSize(16), Width(5), Height(4), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC5x4UnormSrgb, ByteSize(16), Width(5), Height(4), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC5x4Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC5x5Unorm, ByteSize(16), Width(5), Height(5), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC5x5UnormSrgb, ByteSize(16), Width(5), Height(5), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC5x5Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC6x5Unorm, ByteSize(16), Width(6), Height(5), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC6x5UnormSrgb, ByteSize(16), Width(6), Height(5), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC6x5Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC6x6Unorm, ByteSize(16), Width(6), Height(6), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC6x6UnormSrgb, ByteSize(16), Width(6), Height(6), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC6x6Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC8x5Unorm, ByteSize(16), Width(8), Height(5), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC8x5UnormSrgb, ByteSize(16), Width(8), Height(5), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC8x5Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC8x6Unorm, ByteSize(16), Width(8), Height(6), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC8x6UnormSrgb, ByteSize(16), Width(8), Height(6), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC8x6Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC8x8Unorm, ByteSize(16), Width(8), Height(8), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC8x8UnormSrgb, ByteSize(16), Width(8), Height(8), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC8x8Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x5Unorm, ByteSize(16), Width(10), Height(5), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x5UnormSrgb, ByteSize(16), Width(10), Height(5), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC10x5Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x6Unorm, ByteSize(16), Width(10), Height(6), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x6UnormSrgb, ByteSize(16), Width(10), Height(6), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC10x6Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x8Unorm, ByteSize(16), Width(10), Height(8), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x8UnormSrgb, ByteSize(16), Width(10), Height(8), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC10x8Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x10Unorm, ByteSize(16), Width(10), Height(10), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC10x10UnormSrgb, ByteSize(16), Width(10), Height(10), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC10x10Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC12x10Unorm, ByteSize(16), Width(12), Height(10), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC12x10UnormSrgb, ByteSize(16), Width(12), Height(10), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC12x10Unorm);
+        AddCompressedFormat(wgpu::TextureFormat::ASTC12x12Unorm, ByteSize(16), Width(12), Height(12), astcFormatUnsupportedReason, ComponentCount(4));
+        AddCompressedFormat(wgpu::TextureFormat::ASTC12x12UnormSrgb, ByteSize(16), Width(12), Height(12), astcFormatUnsupportedReason, ComponentCount(4), wgpu::TextureFormat::ASTC12x12Unorm);
 
         // multi-planar formats
         const UnsupportedReason multiPlanarFormatUnsupportedReason = device->HasFeature(Feature::MultiPlanarFormats) ?  Format::supported : RequiresFeature{wgpu::FeatureName::DawnMultiPlanarFormats};
         AddMultiAspectFormat(wgpu::TextureFormat::R8BG8Biplanar420Unorm, Aspect::Plane0 | Aspect::Plane1,
-            wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::RG8Unorm, false, multiPlanarFormatUnsupportedReason, false, 3);
+            wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::RG8Unorm, Renderable::False, multiPlanarFormatUnsupportedReason, SupportsMultisample(false), ComponentCount(3));
 
     // clang-format on
 
