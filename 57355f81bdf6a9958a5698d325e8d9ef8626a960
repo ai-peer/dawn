@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bcb29e9_9fde1fab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-08-16T22:43:41Z",
+      "side": 1,
+      "message": "Just an idea, no worries if you don\u0027t like it.",
+      "revId": "57355f81bdf6a9958a5698d325e8d9ef8626a960",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
