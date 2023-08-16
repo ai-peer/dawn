@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a30fc290_119973b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-08-16T13:51:01Z",
+      "side": 1,
+      "message": "Minor updates requested.",
+      "revId": "fae26b867b701f22c82089843909568f7f7e7f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9338d35b_c1647a6f",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 2012,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-08-16T13:51:01Z",
+      "side": 1,
+      "message": "I noticed the CmakeLists.txt file already has this.\nok.",
+      "revId": "fae26b867b701f22c82089843909568f7f7e7f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fd6f0b8_211da6ec",
+        "filename": "src/tint/lang/spirv/reader/ast_parser/ast_parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2545,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-08-16T13:51:01Z",
+      "side": 1,
+      "message": "nit: There\u0027s a missing word here.\nWGSL storage textures are always formatted. (!)\n\nMy bad.",
+      "range": {
+        "startLine": 2545,
+        "startChar": 10,
+        "endLine": 2545,
+        "endChar": 46
+      },
+      "revId": "fae26b867b701f22c82089843909568f7f7e7f1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
