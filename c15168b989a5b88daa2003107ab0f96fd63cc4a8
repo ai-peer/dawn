@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "c15168b989a5b88daa2003107ab0f96fd63cc4a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b16682_c0009602",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T09:38:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c15168b989a5b88daa2003107ab0f96fd63cc4a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94479a5_d69c180b",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1033,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T09:38:04Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we skip the tests if this is false? 😊",
+      "revId": "c15168b989a5b88daa2003107ab0f96fd63cc4a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
