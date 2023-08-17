@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f36b91a_87a98ae8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-17T20:59:42Z",
+      "side": 1,
+      "message": "IMO, probably easiest to restore [2] and only loosen validation behind AllowUnsafeAPIs",
+      "parentUuid": "265fc9ef_e74048ea",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37340ae9_60c21885",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-08-17T10:05:52Z",
       "side": 1,
       "message": "Kai, we should probably discuss this with webgpu-native, and figure out what guarantees of stability we give to the header.\n\nHao, optional: true does nothing for value types in dawn.json so that annotation can be removed.",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "263a89be_01013fba",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2339,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-17T20:59:42Z",
+      "side": 1,
+      "message": "@kainino@chromium.org i filed https://github.com/webgpu-native/webgpu-headers/issues/215",
+      "parentUuid": "37340ae9_60c21885",
       "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

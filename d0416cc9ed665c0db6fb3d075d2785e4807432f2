@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7d71a425_bf18279d",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-17T20:59:42Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 316,
+        "startChar": 3,
+        "endLine": 321,
+        "endChar": 0
+      },
+      "revId": "d0416cc9ed665c0db6fb3d075d2785e4807432f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3aa322b2_f56055e9",
         "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
         "patchSetId": 4
