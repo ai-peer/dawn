@@ -119,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "363dabfa_665a3a89",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-17T02:24:34Z",
+      "side": 1,
+      "message": "Not sure I understand you exactly. Do you mean something like this:\n```\n    ...\n    if (descriptor-\u003eplane1) {\n        DAWN_INVALID_IF(\n            !descriptor-\u003eyuvToRgbConversionMatrix,\n            \"When more than one plane is set, the YUV-to-RGB conversion matrix must be non-null.\");\n\n        for (const auto\u0026 plane : {descriptor-\u003eplane0, descriptor-\u003eplane1}) {\n            DAWN_TRY(device-\u003eValidateObject(plane));\n            wgpu::TextureFormat planeFormat \u003d plane-\u003eGetFormat().format;\n            bool planeFormatValid \u003d false;\n            switch (planeFormat) {\n                case wgpu::TextureFormat::R8Unorm:\n                case wgpu::TextureFormat::RG8Unorm:\n                case wgpu::TextureFormat::R16Unorm:\n                case wgpu::TextureFormat::RG16Unorm:\n                    planeFormatValid \u003d true;\n                    break;\n                default:;\n            }\n            DAWN_INVALID_IF(!planeFormatValid,\n                            \"The bi-planar external texture plane format (%s) is not valid.\",\n                            planeFormat);\n\n            DAWN_TRY(ValidateExternalTexturePlane(plane));\n        }\n    } else {\n    ...\n```",
+      "parentUuid": "6e2af0d1_3130b8ee",
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4cdeb2ea_80d7f003",
         "filename": "src/dawn/native/Format.cpp",
         "patchSetId": 1
