@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4af1c13e_b69208ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-17T01:36:22Z",
+      "side": 1,
+      "message": "I\u0027m testing sending a CL for review to the rotation alias.\nlet me know if you get this!",
+      "revId": "ac946f445160df051a0c90ff22b61f7cfdeb79e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
