@@ -109,7 +109,7 @@ ComboRenderPassDescriptor::ComboRenderPassDescriptor(
     for (uint32_t i = 0; i < kMaxColorAttachments; ++i) {
         cColorAttachments[i].loadOp = wgpu::LoadOp::Clear;
         cColorAttachments[i].storeOp = wgpu::StoreOp::Store;
-        cColorAttachments[i].clearValue = {0.0f, 0.0f, 0.0f, 0.0f};
+        cColorAttachments[i].clearValue = {1.0f, 1.0f, 1.0f, 1.0f};
     }
 
     cDepthStencilAttachmentInfo.depthClearValue = 1.0f;

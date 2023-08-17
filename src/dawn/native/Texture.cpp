@@ -340,8 +340,9 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
     }
 
     // Only allows simple readonly texture usages.
-    constexpr wgpu::TextureUsage kValidMultiPlanarUsages =
-        wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc;
+    constexpr wgpu::TextureUsage kValidMultiPlanarUsages = wgpu::TextureUsage::TextureBinding |
+                                                           wgpu::TextureUsage::CopySrc |
+                                                           wgpu::TextureUsage::RenderAttachment;
     DAWN_INVALID_IF(format->IsMultiPlanar() && !IsSubset(usage, kValidMultiPlanarUsages),
                     "The texture usage (%s) is incompatible with the multi-planar format (%s).",
                     usage, format->format);

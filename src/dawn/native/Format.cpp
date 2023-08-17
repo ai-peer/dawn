@@ -500,16 +500,16 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
         // multi-planar formats
         const UnsupportedReason multiPlanarFormatUnsupportedReason = device->HasFeature(Feature::MultiPlanarFormats) ?  Format::supported : RequiresFeature{wgpu::FeatureName::DawnMultiPlanarFormats};
         AddMultiAspectFormat(wgpu::TextureFormat::R8BG8Biplanar420Unorm, Aspect::Plane0 | Aspect::Plane1,
-            wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::RG8Unorm, false, multiPlanarFormatUnsupportedReason, false, 3);
+            wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::RG8Unorm, true, multiPlanarFormatUnsupportedReason, false, 3);
 
-    // clang-format on
+        // clang-format on
 
-    // This checks that each format is set at least once, the second part of checking that all
-    // formats are checked exactly once. If this assertion is failing and texture formats have
-    // been added or removed recently, check that kKnownFormatCount has been updated.
-    ASSERT(formatsSet.all());
+        // This checks that each format is set at least once, the second part of checking that all
+        // formats are checked exactly once. If this assertion is failing and texture formats have
+        // been added or removed recently, check that kKnownFormatCount has been updated.
+        ASSERT(formatsSet.all());
 
-    return table;
+        return table;
 }
 
 namespace {
