@@ -35,12 +35,26 @@ namespace dawn::native {
 MaybeError ValidatePipelineLayoutDescriptor(DeviceBase* device,
                                             const PipelineLayoutDescriptor* descriptor,
                                             PipelineCompatibilityToken pipelineCompatibilityToken) {
+    // Validation for any pixel local storage.
     const PipelineLayoutPixelLocalStorage* pls = nullptr;
     FindInChain(descriptor->nextInChain, &pls);
     if (pls != nullptr) {
-        DAWN_TRY(ValidateHasPLSFeature(device));
+        StackVector<StorageAttachmentInfoForValidation, 4> attachments;
+        for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
+            const PipelineLayoutStorageAttachment& attachment = pls->storageAttachments[i];
 
-        // TODO(dawn:1704): Validate limits, formats, offsets don't collide and the total size.
+            const Format* format;
+            DAWN_TRY_ASSIGN_CONTEXT(format, device->GetInternalFormat(attachment.format),
+                                    "validating storageAttachments[%i]", i);
+            DAWN_INVALID_IF(!format->supportsStorageAttachment,
+                            "storageAttachments[%i]'s format (%s) cannot be used with %s.", i,
+                            format->format, wgpu::TextureUsage::StorageAttachment);
+
+            attachments->push_back({attachment.offset, attachment.format});
+        }
+
+        DAWN_TRY(ValidatePLSInfo(device, pls->totalPixelLocalStorageSize,
+                                 {attachments->data(), attachments->size()}));
     }
 
     DAWN_INVALID_IF(descriptor->bindGroupLayoutCount > kMaxBindGroups,
@@ -77,6 +91,18 @@ PipelineLayoutBase::PipelineLayoutBase(DeviceBase* device,
          ++group) {
         mBindGroupLayouts[group] = descriptor->bindGroupLayouts[static_cast<uint32_t>(group)];
         mMask.set(group);
+    }
+
+    // Gather the PLS information.
+    const PipelineLayoutPixelLocalStorage* pls = nullptr;
+    FindInChain(descriptor->nextInChain, &pls);
+    if (pls != nullptr) {
+        mStorageAttachmentSlots = std::vector<wgpu::TextureFormat>(
+            pls->totalPixelLocalStorageSize / kPLSSlotByteSize, wgpu::TextureFormat::Undefined);
+        for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
+            size_t slot = pls->storageAttachments[i].offset / kPLSSlotByteSize;
+            mStorageAttachmentSlots[slot] = pls->storageAttachments[i].format;
+        }
     }
 }
 
@@ -376,6 +402,10 @@ BindGroupLayoutInternalBase* PipelineLayoutBase::GetBindGroupLayout(BindGroupInd
 const BindGroupLayoutMask& PipelineLayoutBase::GetBindGroupLayoutsMask() const {
     ASSERT(!IsError());
     return mMask;
+}
+
+const std::vector<wgpu::TextureFormat>& PipelineLayoutBase::GetStorageAttachmentSlots() const {
+    return mStorageAttachmentSlots;
 }
 
 BindGroupLayoutMask PipelineLayoutBase::InheritedGroupsMask(const PipelineLayoutBase* other) const {
