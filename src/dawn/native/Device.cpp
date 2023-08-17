@@ -1789,6 +1789,7 @@ ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
 ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* descriptor) {
     DAWN_TRY(ValidateIsAlive());
     if (IsValidationEnabled()) {
+        // dawn::ErrorLog() << "DeviceBase::CreateTexture called";
         DAWN_TRY_CONTEXT(ValidateTextureDescriptor(this, descriptor), "validating %s.", descriptor);
     }
     return CreateTextureImpl(descriptor);

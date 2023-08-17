@@ -15,6 +15,7 @@
 #include "dawn/native/metal/DeviceMTL.h"
 
 #include "dawn/common/GPUInfo.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Platform.h"
 #include "dawn/native/Adapter.h"
 #include "dawn/native/BackendConnection.h"
@@ -423,6 +424,7 @@ Ref<Texture> Device::CreateTextureWrappingIOSurface(
     if (ConsumedError(ValidateIsAlive())) {
         return nullptr;
     }
+    // dawn::ErrorLog() << "Device::CreateTextureWrappingIOSurface called";
     if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor,
                                                 AllowMultiPlanarTextureFormat::Yes))) {
         return nullptr;
@@ -430,13 +432,13 @@ Ref<Texture> Device::CreateTextureWrappingIOSurface(
     if (ConsumedError(ValidateIOSurfaceCanBeWrapped(this, textureDescriptor, ioSurface))) {
         return nullptr;
     }
-    if (GetValidInternalFormat(textureDescriptor->format).IsMultiPlanar() &&
-        !descriptor->isInitialized) {
-        bool consumed = ConsumedError(DAWN_VALIDATION_ERROR(
-            "External textures with multiplanar formats must be initialized."));
-        DAWN_UNUSED(consumed);
-        return nullptr;
-    }
+    // if (GetValidInternalFormat(textureDescriptor->format).IsMultiPlanar() &&
+    //     !descriptor->isInitialized) {
+    //     bool consumed = ConsumedError(DAWN_VALIDATION_ERROR(
+    //         "External textures with multiplanar formats must be initialized."));
+    //     DAWN_UNUSED(consumed);
+    //     return nullptr;
+    // }
 
     Ref<Texture> result;
     if (ConsumedError(

@@ -842,6 +842,308 @@ TEST_P(VideoViewsValidationTests, RenderAttachmentInvalid) {
     mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
 }
 
+// Tests creating a texture with a multi-plane format.
+TEST_P(VideoViewsValidationTests, RenderAttachmentValid) {
+    // multi-planar formats should be allowed to be renderable.
+    auto platformTexture = mBackend->CreateVideoTextureForTest(
+        wgpu::TextureFormat::R8BG8Biplanar420Unorm,
+        wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment,
+        /*isCheckerboard*/ true,
+        /*initialized*/ true);
+
+    ASSERT_NE(platformTexture.get(), nullptr);
+    if (!platformTexture->CanWrapAsWGPUTexture()) {
+        mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+        GTEST_SKIP() << "Skipped because not supported.";
+    }
+
+    wgpu::TextureViewDescriptor viewDesc = {};
+
+    // Success case: Per plane view formats unspecified.
+    {
+        viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+        wgpu::TextureView plane0View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+        wgpu::TextureView plane1View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        ASSERT_NE(plane0View.Get(), nullptr);
+        ASSERT_NE(plane1View.Get(), nullptr);
+    }
+
+    // Success case: Per plane view formats specified and aspect.
+    {
+        viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+        viewDesc.format = wgpu::TextureFormat::R8Unorm;
+        wgpu::TextureView plane0View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+        viewDesc.format = wgpu::TextureFormat::RG8Unorm;
+        wgpu::TextureView plane1View = platformTexture->wgpuTexture.CreateView(&viewDesc);
+
+        ASSERT_NE(plane0View.Get(), nullptr);
+        ASSERT_NE(plane1View.Get(), nullptr);
+    }
+
+    // Some valid view format, but no plane specified.
+    viewDesc = {};
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Some valid view format, but no plane specified.
+    viewDesc = {};
+    viewDesc.format = wgpu::TextureFormat::RG8Unorm;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Correct plane index but incompatible view format.
+    viewDesc.format = wgpu::TextureFormat::R8Uint;
+    viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Compatible view format but wrong plane index.
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Compatible view format but wrong aspect.
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    viewDesc.aspect = wgpu::TextureAspect::All;
+    ASSERT_DEVICE_ERROR(platformTexture->wgpuTexture.CreateView(&viewDesc));
+
+    // Create a single plane texture.
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::RGBA8Unorm;
+    desc.dimension = wgpu::TextureDimension::e2D;
+    desc.usage = wgpu::TextureUsage::TextureBinding;
+    desc.size = {1, 1, 1};
+
+    wgpu::Texture texture = device.CreateTexture(&desc);
+
+    // Plane aspect specified with non-planar texture.
+    viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    // Planar views with non-planar texture.
+    viewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    viewDesc.format = wgpu::TextureFormat::R8Unorm;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    viewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    viewDesc.format = wgpu::TextureFormat::RG8Unorm;
+    ASSERT_DEVICE_ERROR(texture.CreateView(&viewDesc));
+
+    mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+}
+
+TEST_P(VideoViewsValidationTests, RenderAttachmentNV12) {
+    // multi-planar formats should be allowed to be renderable.
+
+    // Create uninitialized video texture
+    auto platformTexture = mBackend->CreateVideoTextureForTest(
+        wgpu::TextureFormat::R8BG8Biplanar420Unorm,
+        wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment,
+        /*isCheckerboard*/ false,
+        /*initialized*/ false);
+
+    ASSERT_NE(platformTexture.get(), nullptr);
+    if (!platformTexture->CanWrapAsWGPUTexture()) {
+        mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+        GTEST_SKIP() << "Skipped because not supported.";
+    }
+
+    uint32_t kTextureBytesPerRowAlignment = 256u;
+
+    dawn::ErrorLog() << "Creating y source texture...";
+
+    // Create Y source texture (R8Unorm) with data
+    wgpu::TextureDescriptor y_textureDesc;
+    y_textureDesc.size = {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels, 1};
+    y_textureDesc.format = wgpu::TextureFormat::R8Unorm;
+    y_textureDesc.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopyDst |
+                          wgpu::TextureUsage::TextureBinding;
+    wgpu::Texture y_texture = device.CreateTexture(&y_textureDesc);
+
+    wgpu::CommandEncoder encoder1 = device.CreateCommandEncoder();
+
+    dawn::ErrorLog() << "Copying data to y source texture...";
+
+    // Copy data to R8Unorm texture
+    std::vector<uint8_t> y_data = GetTestTextureDataWithPlaneIndex(
+        kYUVLumaPlaneIndex, kTextureBytesPerRowAlignment, kYUVImageDataHeightInTexels, false);
+    wgpu::Buffer stagingBuffer = utils::CreateBufferFromData(
+        device, y_data.data(), y_data.size() * sizeof(utils::RGBA8), wgpu::BufferUsage::CopySrc);
+    wgpu::ImageCopyBuffer imageCopyBuffer =
+        utils::CreateImageCopyBuffer(stagingBuffer, 0, kTextureBytesPerRowAlignment);
+    wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
+        y_texture, /*miplevel=*/0, /*origin=*/{/*x=*/0, /*y=*/0, /*z=*/0});
+    wgpu::Extent3D copySize = {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels, 1};
+    encoder1.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &copySize);
+
+    dawn::ErrorLog() << "Creating uv source texture...";
+
+    // Create UV source texture (RG8Unorm) with data
+    wgpu::TextureDescriptor uv_textureDesc;
+    uv_textureDesc.size = {kYUVImageDataWidthInTexels / 2, kYUVImageDataHeightInTexels / 2, 1};
+    uv_textureDesc.format = wgpu::TextureFormat::RG8Unorm;
+    uv_textureDesc.usage = wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopyDst |
+                           wgpu::TextureUsage::TextureBinding;
+    wgpu::Texture uv_texture = device.CreateTexture(&uv_textureDesc);
+
+    dawn::ErrorLog() << "Copying data to uv source texture...";
+
+    // Copy data to RG8Unorm texture
+    std::vector<uint8_t> uv_data = GetTestTextureDataWithPlaneIndex(
+        kYUVChromaPlaneIndex, kTextureBytesPerRowAlignment, kYUVImageDataHeightInTexels / 2, false);
+    stagingBuffer = utils::CreateBufferFromData(
+        device, uv_data.data(), uv_data.size() * sizeof(utils::RGBA8), wgpu::BufferUsage::CopySrc);
+    imageCopyBuffer = utils::CreateImageCopyBuffer(stagingBuffer, 0, kTextureBytesPerRowAlignment);
+    imageCopyTexture = utils::CreateImageCopyTexture(uv_texture, /*miplevel=*/0,
+                                                     /*origin=*/{/*x=*/0, /*y=*/0, /*z=*/0});
+    copySize = {kYUVImageDataWidthInTexels / 2, kYUVImageDataHeightInTexels / 2, 1};
+    encoder1.CopyBufferToTexture(&imageCopyBuffer, &imageCopyTexture, &copySize);
+
+    dawn::ErrorLog() << "Creating luma texture view...";
+
+    // Create luma texture view.
+    wgpu::TextureViewDescriptor lumaViewDesc;
+    lumaViewDesc.format = wgpu::TextureFormat::R8Unorm;
+    lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
+
+    dawn::ErrorLog() << "Creating chroma texture view...";
+
+    // Create chroma texture view.
+    wgpu::TextureViewDescriptor chromaViewDesc;
+    chromaViewDesc.format = wgpu::TextureFormat::RG8Unorm;
+    chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
+
+    wgpu::CommandBuffer commands1 = encoder1.Finish();
+    queue.Submit(1, &commands1);
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::ErrorLog() << "Creating y plane render pipeline...";
+        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+                @group(0) @binding(0) var sampler0 : sampler;
+                @group(0) @binding(1) var texture : texture_2d<f32>;
+
+                @fragment
+                fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
+                return textureSample(texture, sampler0, texCoord);
+                })");
+        renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+        renderPipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::R8Unorm;
+        wgpu::RenderPipeline renderPipeline =
+            device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+        wgpu::Sampler sampler = device.CreateSampler();
+
+        dawn::ErrorLog() << "Creating y render pass...";
+        utils::ComboRenderPassDescriptor renderPass({lumaTextureView});
+
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetPipeline(renderPipeline);
+        dawn::ErrorLog() << "Making y bind group...";
+        pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                  {{0, sampler}, {1, y_texture.CreateView()}}));
+        pass.Draw(6);
+        pass.End();
+
+        dawn::ErrorLog() << "Creating another r8 basic render pass...";
+        utils::BasicRenderPass basicRenderPass =
+            utils::CreateBasicRenderPass(device, kYUVImageDataWidthInTexels,
+                                         kYUVImageDataHeightInTexels, wgpu::TextureFormat::R8Unorm);
+
+        wgpu::RenderPassEncoder secondPass =
+            encoder.BeginRenderPass(&basicRenderPass.renderPassInfo);
+        secondPass.SetPipeline(renderPipeline);
+        dawn::ErrorLog() << "Making another y bind group with lumaTextureView as source...";
+        secondPass.SetBindGroup(0,
+                                utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                     {{0, sampler}, {1, y_texture.CreateView()}}));
+        secondPass.Draw(6);
+        secondPass.End();
+
+        dawn::ErrorLog() << "Submitting y commands...";
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        dawn::ErrorLog() << "Getting y data...";
+        std::vector<uint8_t> expectedData = GetTestTextureDataWithPlaneIndex(
+            kYUVLumaPlaneIndex, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels, false);
+        dawn::ErrorLog() << "Checking equality for y...";
+        EXPECT_TEXTURE_EQ(expectedData.data(), basicRenderPass.color, {0, 0},
+                          {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels});
+    }
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        dawn::ErrorLog() << "Creating uv plane render pipeline...";
+        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+                @group(0) @binding(0) var sampler0 : sampler;
+                @group(0) @binding(1) var texture : texture_2d<f32>;
+
+                @fragment
+                fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
+                return textureSample(texture, sampler0, texCoord);
+                })");
+        renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+        renderPipelineDescriptor.cTargets[0].format = wgpu::TextureFormat::RG8Unorm;
+        wgpu::RenderPipeline renderPipeline =
+            device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+        wgpu::Sampler sampler = device.CreateSampler();
+
+        dawn::ErrorLog() << "Creating uv render pass...";
+        utils::ComboRenderPassDescriptor renderPass({chromaTextureView});
+
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetPipeline(renderPipeline);
+        dawn::ErrorLog() << "Making uv bind group...";
+        pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                  {{0, sampler}, {1, uv_texture.CreateView()}}));
+        pass.Draw(6);
+        pass.End();
+
+        dawn::ErrorLog() << "Creating another rg8 basic render pass...";
+        utils::BasicRenderPass basicRenderPass = utils::CreateBasicRenderPass(
+            device, kYUVImageDataWidthInTexels / 2, kYUVImageDataHeightInTexels / 2,
+            wgpu::TextureFormat::RG8Unorm);
+
+        wgpu::RenderPassEncoder secondPass =
+            encoder.BeginRenderPass(&basicRenderPass.renderPassInfo);
+        secondPass.SetPipeline(renderPipeline);
+        dawn::ErrorLog() << "Making another uv bind group with chromaTextureView as source...";
+        secondPass.SetBindGroup(0,
+                                utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                     {{0, sampler}, {1, uv_texture.CreateView()}}));
+        secondPass.Draw(6);
+        secondPass.End();
+
+        dawn::ErrorLog() << "Submitting uv commands...";
+        wgpu::CommandBuffer commands = encoder.Finish();
+        queue.Submit(1, &commands);
+
+        dawn::ErrorLog() << "Getting expected uv data...";
+        std::vector<uint8_t> expectedData =
+            GetTestTextureDataWithPlaneIndex(kYUVChromaPlaneIndex, kYUVImageDataWidthInTexels,
+                                             kYUVImageDataHeightInTexels / 2, false);
+        dawn::ErrorLog() << "Checking equality for uv...";
+        EXPECT_TEXTURE_EQ(expectedData.data(), basicRenderPass.color, {0, 0},
+                          {kYUVImageDataWidthInTexels / 2, kYUVImageDataHeightInTexels / 2});
+    }
+
+    mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+}
+
 // Tests writing into a multi-planar format fails.
 TEST_P(VideoViewsValidationTests, WriteTextureAllAspectsFails) {
     std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
