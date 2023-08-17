@@ -1,0 +1,146 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfd34f18_b0a50e20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "LGTM. Nits are at your discretion.",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "036c2da6_06fc6b2c",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: If there\u0027s any function needs extra param\" -\u003e \"If any functions need extra params\"",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8aa0b31_8f9c2338",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: \"using\" here to avoid saying it twice?",
+      "range": {
+        "startLine": 285,
+        "startChar": 8,
+        "endLine": 285,
+        "endChar": 41
+      },
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "676299f4_6777fcdc",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "uNit: \"Ubo\" -\u003e \"UBO\" (sorry, I\u0027m OCD about non-capitalized acronyms)",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa2ab0d3_cfb99526",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Would it be any neater to store the index rather than the size, so you didn\u0027t have to convert here? If not, ignore me.",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98759eb9_63e19774",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: using an index would obviate the need for this sizeof().",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61aef35c_dbef0c2a",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: \"is provided\" -\u003e \"are provided\"",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ce404eb_c6aba50b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Maybe also explain here how functions are transformed: what new parameters are added, etc.",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

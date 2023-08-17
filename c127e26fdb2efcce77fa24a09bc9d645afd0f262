@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c514b40_bad92da2",
+        "filename": "include/tint/texture_builtins_from_uniform_options.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: could skip the scope:\n\n```\nusing FieldAndOffset \u003d std::pair\u003cField, uint32_t\u003e;\n```",
+      "revId": "c127e26fdb2efcce77fa24a09bc9d645afd0f262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "630b6377_95f35c64",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: \"needs a UBO of buffer\" -\u003e \"needs a UBO\"?",
+      "revId": "c127e26fdb2efcce77fa24a09bc9d645afd0f262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3f348cb_8e570f37",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 17
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Is this uniquified somewhere so that user code won\u0027t collide with it?",
+      "revId": "c127e26fdb2efcce77fa24a09bc9d645afd0f262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f01b9490_e4c08163",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: \"bind point\" -\u003e \"binding point\"",
+      "range": {
+        "startLine": 90,
+        "startChar": 57,
+        "endLine": 90,
+        "endChar": 58
+      },
+      "revId": "c127e26fdb2efcce77fa24a09bc9d645afd0f262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35ed72e5_a8bfe1c8",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-17T21:43:59Z",
+      "side": 1,
+      "message": "Nit: \"globl\" -\u003e \"global\"\nNit: \"binding point to the byte offset and data type\" -\u003e \"binding points to byte offsets and data types\"",
+      "range": {
+        "startLine": 100,
+        "startChar": 21,
+        "endLine": 100,
+        "endChar": 26
+      },
+      "revId": "c127e26fdb2efcce77fa24a09bc9d645afd0f262",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
