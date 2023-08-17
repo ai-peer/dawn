@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c217a30a_2e69b68f",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-17T23:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "036c2da6_06fc6b2c",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e8aa0b31_8f9c2338",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-08-17T21:43:59Z",
       "side": 1,
       "message": "Nit: \"using\" here to avoid saying it twice?",
+      "range": {
+        "startLine": 285,
+        "startChar": 8,
+        "endLine": 285,
+        "endChar": 41
+      },
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14fd34e2_9df01c0c",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 285,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-17T23:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e8aa0b31_8f9c2338",
       "range": {
         "startLine": 285,
         "startChar": 8,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c29fe37_f7a55faa",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 329,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-17T23:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "676299f4_6777fcdc",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aa2ab0d3_cfb99526",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-08-17T21:43:59Z",
       "side": 1,
       "message": "Would it be any neater to store the index rather than the size, so you didn\u0027t have to convert here? If not, ignore me.",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eb65d3d_934bd26f",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 341,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-17T23:11:01Z",
+      "side": 1,
+      "message": "ditto[2]",
+      "parentUuid": "aa2ab0d3_cfb99526",
       "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "749d77ba_831e1b3b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-17T23:11:01Z",
+      "side": 1,
+      "message": "[2]`bindpoint_to_data` is passing to dawn and on dawn side a byte offset is preferred. I really don\u0027t want to introduce another temporary hashmap just to store the index. I think I will just preserve this as is.",
+      "parentUuid": "98759eb9_63e19774",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61aef35c_dbef0c2a",
@@ -126,6 +222,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c95596c_5fa07856",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-17T23:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61aef35c_dbef0c2a",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6ce404eb_c6aba50b",
@@ -139,6 +253,24 @@
       "writtenOn": "2023-08-17T21:43:59Z",
       "side": 1,
       "message": "Maybe also explain here how functions are transformed: what new parameters are added, etc.",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa3e6dc7_5e0296b6",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-17T23:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ce404eb_c6aba50b",
       "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
