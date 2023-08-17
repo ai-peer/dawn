@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "265fc9ef_e74048ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T10:05:52Z",
+      "side": 1,
+      "message": "Given that this isn\u0027t an optional feature, we need to implement it in the backends otherwise a compromised renderer process could start using the feature and crash the backends in interesting ways. Alternatively we could gate on AllowUnsafeAPIs for now and ungate once the implementation is complete.\n\nAlso is this supported in OpenGL ES or do we need to validate depthSlice !\u003d 0 in compat?",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37340ae9_60c21885",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2339,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T10:05:52Z",
+      "side": 1,
+      "message": "Kai, we should probably discuss this with webgpu-native, and figure out what guarantees of stability we give to the header.\n\nHao, optional: true does nothing for value types in dawn.json so that annotation can be removed.",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "233aa1cc_41ca0e4d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T10:05:52Z",
+      "side": 1,
+      "message": "```suggestion\n                        \"The depth slice index (%u) of non-3D %s used as attachment is not 0.\",\n```",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adad1fe8_4c16e4f7",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T10:05:52Z",
+      "side": 1,
+      "message": "Can we have validation that depthSlice must be 0 for a 2D view?",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
