@@ -509,6 +509,13 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
 
     // clang-format on
 
+        if (device->HasFeature(Feature::PixelLocalStorageCoherent) ||
+            device->HasFeature(Feature::PixelLocalStorageNonCoherent)) {
+        table[ComputeFormatIndex(wgpu::TextureFormat::R32Uint)].supportsStorageAttachment = true;
+        table[ComputeFormatIndex(wgpu::TextureFormat::R32Sint)].supportsStorageAttachment = true;
+        table[ComputeFormatIndex(wgpu::TextureFormat::R32Float)].supportsStorageAttachment = true;
+        }
+
     // This checks that each format is set at least once, the second part of checking that all
     // formats are checked exactly once. If this assertion is failing and texture formats have
     // been added or removed recently, check that kKnownFormatCount has been updated.

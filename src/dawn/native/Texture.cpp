@@ -325,6 +325,11 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
         "The texture usage (%s) includes %s, which is incompatible with the format (%s).", usage,
         wgpu::TextureUsage::StorageBinding, format->format);
 
+    DAWN_INVALID_IF(
+        !format->supportsStorageAttachment && (usage & wgpu::TextureUsage::StorageAttachment),
+        "The texture usage (%s) includes %s, which is incompatible with the format (%s).", usage,
+        wgpu::TextureUsage::StorageAttachment, format->format);
+
     const auto kTransientAttachment = wgpu::TextureUsage::TransientAttachment;
     if (usage & kTransientAttachment) {
         DAWN_INVALID_IF(
@@ -338,13 +343,6 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
                         "The texture usage (%s) includes %s, which requires that the texture usage "
                         "be exactly %s",
                         usage, kTransientAttachment, kAllowedTransientUsage);
-    }
-
-    if (usage & wgpu::TextureUsage::StorageAttachment) {
-        DAWN_TRY_CONTEXT(ValidateHasPLSFeature(device), "validating usage of %s",
-                         wgpu::TextureUsage::StorageAttachment);
-
-        // TODO(dawn:1704): Validate the constraints on the dimension, format, etc.
     }
 
     // Only allows simple readonly texture usages.

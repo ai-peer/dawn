@@ -62,6 +62,11 @@ struct BindingSlot {
     BindingNumber binding;
 };
 
+struct StorageAttachmentInfo {
+    uint64_t offset;
+    wgpu::TextureFormat format;
+};
+
 struct PerStageBindingCounts {
     uint32_t sampledTextureCount;
     uint32_t samplerCount;

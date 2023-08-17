@@ -40,7 +40,53 @@ MaybeError ValidatePipelineLayoutDescriptor(DeviceBase* device,
     if (pls != nullptr) {
         DAWN_TRY(ValidateHasPLSFeature(device));
 
-        // TODO(dawn:1704): Validate limits, formats, offsets don't collide and the total size.
+        // Validate totalPixelLocalStorageSize
+        uint64_t totalPLSSize = pls->totalPixelLocalStorageSize;
+        DAWN_INVALID_IF(totalPLSSize % kPLSSlotByteSize != 0,
+                        "totalPixelLocalStorageSize (%i) is not a multiple of %i.", totalPLSSize,
+                        kPLSSlotByteSize);
+        DAWN_INVALID_IF(
+            totalPLSSize > kMaxPLSSize,
+            "totalPixelLocalStorageSize (%i) is larger than maxPixelLocalStorageSize (%i).",
+            totalPLSSize, kMaxPLSSize);
+
+        std::array<size_t, kMaxPLSSlots> indexForSlot;
+        constexpr size_t kSlotNotSet = std::numeric_limits<size_t>::max();
+        indexForSlot.fill(kSlotNotSet);
+        for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
+            // Validate the slot's format.
+            const Format* format;
+            DAWN_TRY_ASSIGN_CONTEXT(format,
+                                    device->GetInternalFormat(pls->storageAttachments[i].format),
+                                    "validating storageAttachments[%i]", i);
+            DAWN_INVALID_IF(!format->supportsStorageAttachment,
+                            "storageAttachments[%i].format (%s) cannot be used with %s.", i,
+                            format->format, wgpu::TextureUsage::StorageAttachment);
+
+            // Validate the slot's offset.
+            uint64_t offset = pls->storageAttachments[i].offset;
+            DAWN_INVALID_IF(offset % kPLSSlotByteSize != 0,
+                            "storageAttachments[%i].offset (%i) is not a multiple of %i.", i,
+                            offset, kPLSSlotByteSize);
+            DAWN_INVALID_IF(
+                offset > kMaxPLSSize,
+                "storageAttachments[%i].offset (%i) is larger than maxPixelLocalStorageSize (%i).",
+                i, offset, kMaxPLSSize);
+            // This can't overflow because kMaxPLSSize + max texel byte size is way less than 2^32.
+            DAWN_INVALID_IF(
+                offset + format->GetAspectInfo(Aspect::Color).block.byteSize > totalPLSSize,
+                "storageAttachments[%i]'s footprint [%i, %i) does not fit in the total size (%i).",
+                i, offset, format->GetAspectInfo(Aspect::Color).block.byteSize, totalPLSSize);
+
+            // Validate that there are no collisions, each storage attachment takes a single slot so
+            // we don't need to loop over all slots for a storage attachment.
+            ASSERT(format->GetAspectInfo(Aspect::Color).block.byteSize == kPLSSlotByteSize);
+            size_t slot = offset / kPLSSlotByteSize;
+            DAWN_INVALID_IF(indexForSlot[slot] != kSlotNotSet,
+                            "storageAttachments[%i] and storageAttachment[%i] conflict.", i,
+                            indexForSlot[slot]);
+            indexForSlot[slot] = i;
+        }
     }
 
     DAWN_INVALID_IF(descriptor->bindGroupLayoutCount > kMaxBindGroups,
@@ -77,6 +123,17 @@ PipelineLayoutBase::PipelineLayoutBase(DeviceBase* device,
          ++group) {
         mBindGroupLayouts[group] = descriptor->bindGroupLayouts[static_cast<uint32_t>(group)];
         mMask.set(group);
+    }
+
+    const PipelineLayoutPixelLocalStorage* pls = nullptr;
+    FindInChain(descriptor->nextInChain, &pls);
+    if (pls != nullptr) {
+        mStorageAttachmentSlots = std::vector<wgpu::TextureFormat>(
+            pls->totalPixelLocalStorageSize / kPLSSlotByteSize, wgpu::TextureFormat::Undefined);
+        for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
+            size_t slot = pls->storageAttachments[i].offset / kPLSSlotByteSize;
+            mStorageAttachmentSlots[slot] = pls->storageAttachments[i].format;
+        }
     }
 }
 
@@ -376,6 +433,10 @@ BindGroupLayoutInternalBase* PipelineLayoutBase::GetBindGroupLayout(BindGroupInd
 const BindGroupLayoutMask& PipelineLayoutBase::GetBindGroupLayoutsMask() const {
     ASSERT(!IsError());
     return mMask;
+}
+
+const std::vector<wgpu::TextureFormat>& PipelineLayoutBase::GetStorageAttachmentSlots() const {
+    return mStorageAttachmentSlots;
 }
 
 BindGroupLayoutMask PipelineLayoutBase::InheritedGroupsMask(const PipelineLayoutBase* other) const {
