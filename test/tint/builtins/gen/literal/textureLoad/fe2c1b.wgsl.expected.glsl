@@ -2,13 +2,13 @@ SKIP: FAILED
 
 #version 310 es
 
-layout(rgba32ui) uniform highp writeonly uimage2DArray arg_0;
+layout(rgba32ui) uniform highp uimage2DArray arg_0;
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
 
 void textureLoad_fe2c1b() {
-  uvec4 res = texelFetch(arg_0, ivec3(ivec2(1), int(1u)));
+  uvec4 res = imageLoad(arg_0, ivec3(ivec2(1), int(1u)));
   prevent_dce.inner = res;
 }
 
@@ -26,23 +26,21 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:9: 'texelFetch' : no matching overloaded function found 
-ERROR: 0:9: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of uint'
-ERROR: 0:9: '' : compilation terminated 
-ERROR: 3 compilation errors.  No code generated.
+ERROR: 0:3: 'rgba32ui' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
 
 
 
 #version 310 es
 precision highp float;
 
-layout(rgba32ui) uniform highp writeonly uimage2DArray arg_0;
+layout(rgba32ui) uniform highp uimage2DArray arg_0;
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
 
 void textureLoad_fe2c1b() {
-  uvec4 res = texelFetch(arg_0, ivec3(ivec2(1), int(1u)));
+  uvec4 res = imageLoad(arg_0, ivec3(ivec2(1), int(1u)));
   prevent_dce.inner = res;
 }
 
@@ -55,22 +53,20 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:10: 'texelFetch' : no matching overloaded function found 
-ERROR: 0:10: '=' :  cannot convert from ' const float' to ' temp mediump 4-component vector of uint'
-ERROR: 0:10: '' : compilation terminated 
-ERROR: 3 compilation errors.  No code generated.
+ERROR: 0:4: 'rgba32ui' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
 
 
 
 #version 310 es
 
-layout(rgba32ui) uniform highp writeonly uimage2DArray arg_0;
+layout(rgba32ui) uniform highp uimage2DArray arg_0;
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
 
 void textureLoad_fe2c1b() {
-  uvec4 res = texelFetch(arg_0, ivec3(ivec2(1), int(1u)));
+  uvec4 res = imageLoad(arg_0, ivec3(ivec2(1), int(1u)));
   prevent_dce.inner = res;
 }
 
@@ -84,10 +80,8 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
-ERROR: 0:9: 'texelFetch' : no matching overloaded function found 
-ERROR: 0:9: '=' :  cannot convert from ' const float' to ' temp highp 4-component vector of uint'
-ERROR: 0:9: '' : compilation terminated 
-ERROR: 3 compilation errors.  No code generated.
+ERROR: 0:3: 'rgba32ui' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
 
 
 

@@ -2,7 +2,7 @@ SKIP: FAILED
 
 #version 310 es
 
-layout(rg32f) uniform highp writeonly image2D arg_0;
+layout(rg32f) uniform highp image2D arg_0;
 void textureStore_5b17eb() {
   uvec2 arg_1 = uvec2(1u);
   vec4 arg_2 = vec4(1.0f);
@@ -32,7 +32,7 @@ ERROR: 2 compilation errors.  No code generated.
 #version 310 es
 precision highp float;
 
-layout(rg32f) uniform highp writeonly image2D arg_0;
+layout(rg32f) uniform highp image2D arg_0;
 void textureStore_5b17eb() {
   uvec2 arg_1 = uvec2(1u);
   vec4 arg_2 = vec4(1.0f);
@@ -56,7 +56,7 @@ ERROR: 2 compilation errors.  No code generated.
 
 #version 310 es
 
-layout(rg32f) uniform highp writeonly image2D arg_0;
+layout(rg32f) uniform highp image2D arg_0;
 void textureStore_5b17eb() {
   uvec2 arg_1 = uvec2(1u);
   vec4 arg_2 = vec4(1.0f);

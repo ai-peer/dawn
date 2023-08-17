@@ -1,6 +1,8 @@
+SKIP: FAILED
+
 #version 310 es
 
-layout(rgba16ui) uniform highp writeonly uimage2D arg_0;
+layout(rgba16ui) uniform highp uimage2D arg_0;
 void textureStore_9ba5c1() {
   uint arg_1 = 1u;
   uvec4 arg_2 = uvec4(1u);
@@ -20,10 +22,16 @@ void main() {
   gl_Position.z = ((2.0f * gl_Position.z) - gl_Position.w);
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:3: 'rgba16ui' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
+
+
+
 #version 310 es
 precision highp float;
 
-layout(rgba16ui) uniform highp writeonly uimage2D arg_0;
+layout(rgba16ui) uniform highp uimage2D arg_0;
 void textureStore_9ba5c1() {
   uint arg_1 = 1u;
   uvec4 arg_2 = uvec4(1u);
@@ -38,9 +46,15 @@ void main() {
   fragment_main();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:4: 'rgba16ui' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
+
+
+
 #version 310 es
 
-layout(rgba16ui) uniform highp writeonly uimage2D arg_0;
+layout(rgba16ui) uniform highp uimage2D arg_0;
 void textureStore_9ba5c1() {
   uint arg_1 = 1u;
   uvec4 arg_2 = uvec4(1u);
@@ -56,3 +70,9 @@ void main() {
   compute_main();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:3: 'rgba16ui' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
+
+
+

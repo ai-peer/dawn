@@ -1,6 +1,8 @@
+SKIP: FAILED
+
 #version 310 es
 
-layout(rgba8) uniform highp writeonly image2D arg_0;
+layout(rgba8) uniform highp image2D arg_0;
 void textureStore_e46fd8() {
   imageStore(arg_0, ivec2(uvec2(1u)), vec4(1.0f));
 }
@@ -18,10 +20,16 @@ void main() {
   gl_Position.z = ((2.0f * gl_Position.z) - gl_Position.w);
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:3: 'rgba8' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
+
+
+
 #version 310 es
 precision highp float;
 
-layout(rgba8) uniform highp writeonly image2D arg_0;
+layout(rgba8) uniform highp image2D arg_0;
 void textureStore_e46fd8() {
   imageStore(arg_0, ivec2(uvec2(1u)), vec4(1.0f));
 }
@@ -34,9 +42,15 @@ void main() {
   fragment_main();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:4: 'rgba8' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
+
+
+
 #version 310 es
 
-layout(rgba8) uniform highp writeonly image2D arg_0;
+layout(rgba8) uniform highp image2D arg_0;
 void textureStore_e46fd8() {
   imageStore(arg_0, ivec2(uvec2(1u)), vec4(1.0f));
 }
@@ -50,3 +64,9 @@ void main() {
   compute_main();
   return;
 }
+Error parsing GLSL shader:
+ERROR: 0:3: 'rgba8' : format requires readonly or writeonly memory qualifier 
+ERROR: 1 compilation errors.  No code generated.
+
+
+

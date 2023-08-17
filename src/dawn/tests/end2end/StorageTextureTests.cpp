@@ -1148,10 +1148,11 @@ enable chromium_experimental_read_write_storage_texture;
                               expectedData.size() * sizeof(uint32_t));
 }
 
-// TODO(dawn:1972): Support ReadWrite storage texture access on OpenGL
 DAWN_INSTANTIATE_TEST(ReadWriteStorageTextureTests,
                       D3D11Backend(),
                       D3D12Backend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
                       MetalBackend(),
                       VulkanBackend());
 

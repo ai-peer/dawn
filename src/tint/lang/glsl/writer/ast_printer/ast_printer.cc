@@ -1471,7 +1471,11 @@ void ASTPrinter::EmitTextureCall(StringStream& out,
             glsl_ret_width = 1;
             break;
         case core::Function::kTextureLoad:
-            out << "texelFetch";
+            if (texture_type->Is<core::type::StorageTexture>()) {
+                out << "imageLoad";
+            } else {
+                out << "texelFetch";
+            }
             break;
         case core::Function::kTextureStore:
             out << "imageStore";
@@ -2712,8 +2716,20 @@ void ASTPrinter::EmitType(StringStream& out,
 
         out << "highp ";
 
-        if (storage && storage->access() != core::Access::kRead) {
-            out << "writeonly ";
+        if (storage) {
+            switch (storage->access()) {
+                case core::Access::kRead:
+                    out << "readonly ";
+                    break;
+                case core::Access::kWrite:
+                    out << "writeonly ";
+                    break;
+                case core::Access::kReadWrite:
+                    break;
+                default:
+                    TINT_UNREACHABLE() << "unexpected storage texture access " << storage->access();
+                    return;
+            }
         }
         auto* subtype = sampled   ? sampled->type()
                         : storage ? storage->type()
