@@ -72,6 +72,7 @@ class PipelineLayoutBase : public ApiObjectBase,
     const BindGroupLayoutInternalBase* GetBindGroupLayout(BindGroupIndex group) const;
     BindGroupLayoutInternalBase* GetBindGroupLayout(BindGroupIndex group);
     const BindGroupLayoutMask& GetBindGroupLayoutsMask() const;
+    const std::vector<wgpu::TextureFormat>& GetStorageAttachmentSlots() const;
 
     // Utility functions to compute inherited bind groups.
     // Returns the inherited bind groups as a mask.
@@ -94,6 +95,7 @@ class PipelineLayoutBase : public ApiObjectBase,
 
     BindGroupLayoutArray mBindGroupLayouts;
     BindGroupLayoutMask mMask;
+    std::vector<wgpu::TextureFormat> mStorageAttachmentSlots;
 };
 
 }  // namespace dawn::native

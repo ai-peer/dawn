@@ -101,6 +101,15 @@ MaybeError ValidateColorAttachmentBytesPerSample(DeviceBase* device,
 
 MaybeError ValidateHasPLSFeature(const DeviceBase* device);
 
+struct StorageAttachmentInfoForValidation {
+    uint64_t offset;
+    wgpu::TextureFormat format;
+};
+MaybeError ValidatePLSInfo(
+    const DeviceBase* device,
+    uint64_t totalSize,
+    ityp::span<size_t, StorageAttachmentInfoForValidation> storageAttachments);
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_COMMANDVALIDATION_H_

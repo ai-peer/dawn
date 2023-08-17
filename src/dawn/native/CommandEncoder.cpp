@@ -596,9 +596,14 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
     const RenderPassPixelLocalStorage* pls = nullptr;
     FindInChain(descriptor->nextInChain, &pls);
     if (pls != nullptr) {
-        DAWN_TRY(ValidateHasPLSFeature(device));
+        StackVector<StorageAttachmentInfoForValidation, 4> storages;
+        for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
+            storages->push_back({pls->storageAttachments[i].offset,
+                                 pls->storageAttachments[i].storage->GetFormat().format});
+        }
 
-        // TODO(dawn:1704): Validate limits, formats, offsets don't collide and the total size.
+        DAWN_TRY(ValidatePLSInfo(device, pls->totalPixelLocalStorageSize,
+                                 {storages->data(), storages->size()}));
     }
 
     return {};
