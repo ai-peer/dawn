@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f89220bd_abd59251",
+        "filename": "src/tint/fuzzers/tint_ast_fuzzer/mutation_finders/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-17T19:04:17Z",
+      "side": 0,
+      "message": "Why did these get deleted?",
+      "revId": "a4d058b9e8d512bc8e8305665e24b27a54ad3ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "929c6ade_244f060d",
+        "filename": "src/tint/lang/wgsl/ast/transform/utils/BUILD.gn",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-17T19:04:17Z",
+      "side": 0,
+      "message": "ditto? Because it\u0027s empty?",
+      "range": {
+        "startLine": 1,
+        "startChar": 2,
+        "endLine": 1,
+        "endChar": 11
+      },
+      "revId": "a4d058b9e8d512bc8e8305665e24b27a54ad3ce3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
