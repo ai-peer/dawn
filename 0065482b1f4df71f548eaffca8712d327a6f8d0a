@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c05ec224_1df26aa8",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-17T19:40:00Z",
+      "side": 1,
+      "message": "uunit: maybe it can be *even* shorter; like just Cap::Multisample, Cap::Resolve, Cap::Storage, and Cap::StorageRW\n\nwe should probably make Cap::Storage be Cap::StorageW now (write-only)\n\nand maybe StorageRW could imply StorageW? should be able to set the values so the bits overlap.",
+      "revId": "0065482b1f4df71f548eaffca8712d327a6f8d0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
