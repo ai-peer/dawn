@@ -137,6 +137,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cb6645d5_1bea8719",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T09:18:23Z",
+      "side": 1,
+      "message": "I was thinking of something like:\n\n```\nauto CheckPlaneFormat \u003d [](device, format, requiredComponentCount) -\u003e MaybeError {\n    DAWN_INVALID_IF(format.aspects !\u003d Color);\n    DAWN_INVALID_IF(format.GetAspectInfo(Color).supportSampleTypes doesn\u0027t have FilterableFloat);\n    DAWN_INVALID_IF(format.GetAspectInfo(Color).componentCount !\u003d requiredComponentCount);\n    return {};\n}\n\nif (descriptor-\u003eplane1 !\u003d nullptr) {\n    // Y + UV case.\n    DAWN_TRY_CONTEXT(CheckPlaneFormat(device, plane0.format, 1), \"validating the format of plane 0\");\n    DAWN_TRY_CONTEXT(CheckPlaneFormat(device, plane0.format, 2), \"validating the format of plane 1\");\n} else {\n    // RGBA case.\n    DAWN_TRY_CONTEXT(CheckPlaneFormat(device, plane0.format, 4), \"validating the format of plane 0\");\n}\n```\n\nGiven the way Dawn implements ExternalTextures, it should be possible to use any filterable format with the correct component count in the various planes.",
+      "parentUuid": "363dabfa_665a3a89",
+      "revId": "a2fa7c29409ca307572c896ef84376c1f55e05bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4cdeb2ea_80d7f003",
         "filename": "src/dawn/native/Format.cpp",
         "patchSetId": 1
