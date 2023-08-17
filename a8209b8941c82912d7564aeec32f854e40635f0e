@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2670d4c_5bfb2457",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T09:31:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a8209b8941c82912d7564aeec32f854e40635f0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52173dc9_7aec7e07",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T09:31:23Z",
+      "side": 1,
+      "message": "I don\u0027t think we\u0027re allowed to use regex in Chromium, sorry. Given the simple regex, we could replace it with something like:\n\n```\nuint32_t GetDeviceIdFromRenderer(std::string_view renderer) {\n    size_t pos \u003d renderer.find(\"0X\");\n    if (pos \u003d\u003d std::string::npos) {\n        pos \u003d renderer.find(\"0x\");\n    }\n    if (pos \u003d\u003d std::string::npos) {\n        return 0;\n    }\n    renderer.remove_prefix(pos);\n    return static_cast\u003cuint32_t\u003e(std::stoul(renderer, nullptr, 16));\n}\n\n```",
+      "revId": "a8209b8941c82912d7564aeec32f854e40635f0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
