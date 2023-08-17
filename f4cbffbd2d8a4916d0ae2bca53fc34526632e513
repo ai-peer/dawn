@@ -103,6 +103,24 @@
       "parentUuid": "33a4ced6_f4c848b6",
       "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a51be574_eb8c0933",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T09:32:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "23801dd7_9a39bc9c",
+      "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
