@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17c6d366_55a3cd4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-17T01:28:53Z",
+      "side": 1,
+      "message": "ANGLE\u0027s vulkan backend puts the deviceId in the renderer description\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/vulkan/RendererVk.cpp;l\u003d3652;drc\u003dc410120011084508641f34a24d77d7625bd4f4bf;bpv\u003d1;bpt\u003d1\n\n\nmaybe we can change it to do that in d3d11 as well?\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/d3d/d3d11/Renderer11.cpp;l\u003d2391?q\u003df:angle%20getRendererDescription%20f:d3d11\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "revId": "028fa86c943983d13d605fd369db41021af3eb9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
