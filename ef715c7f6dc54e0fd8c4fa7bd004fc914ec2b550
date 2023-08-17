@@ -16,6 +16,75 @@
       "message": "PTAL",
       "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c9ed04d_83bae33f",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1817,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-17T03:56:15Z",
+      "side": 1,
+      "message": "Should we add unorm16 and snorm16 formats together?",
+      "range": {
+        "startLine": 1817,
+        "startChar": 37,
+        "endLine": 1817,
+        "endChar": 44
+      },
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff19c57f_65d23008",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-17T03:56:15Z",
+      "side": 1,
+      "message": "Should we query those format\u0027s properties from device instead of hardcoding them here?\nFor example:\n```\n  const auto\u0026 properties \u003d\n      device-\u003eGetFormatProperty(wgpu::TextureFormat::RG16Unorm);\n  AddColorFormat(wgpu::TextureFormat::RG16Unorm, properties.isRenderable, ...);\n```",
+      "range": {
+        "startLine": 431,
+        "startChar": 54,
+        "endLine": 431,
+        "endChar": 77
+      },
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04db62c4_7c695152",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-17T03:56:15Z",
+      "side": 1,
+      "message": "Looks like Metal is available since iOS 8.0 and macOS 10.11. So this check should be always true.\n\nhttps://developer.apple.com/documentation/metal",
+      "range": {
+        "startLine": 551,
+        "startChar": 8,
+        "endLine": 551,
+        "endChar": 50
+      },
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
