@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f68dc51_4865fd97",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-17T04:50:41Z",
+      "side": 1,
+      "message": "Have no idea about the Kokoro error below. Could you advice how to fix it? Or can I simply ignore it?\n```\n[ 90%] Building CXX object src/dawn/native/CMakeFiles/dawn_native.dir/CompilationMessages.cpp.o\n/dawn/src/src/dawn/node/binding/Converter.cpp: In member function \u0027bool wgpu::binding::Converter::Convert(wgpu::TextureFormat\u0026, const wgpu::interop::GPUTextureFormat\u0026)\u0027:\n/dawn/src/src/dawn/node/binding/Converter.cpp:198:41: error: \u0027kR16Unorm\u0027 is not a member of \u0027wgpu::interop::GPUTextureFormat\u0027; did you mean \u0027kR8Unorm\u0027?\n  198 |         case interop::GPUTextureFormat::kR16Unorm:\n      |                                         ^~~~~~~~~\n      |                                         kR8Unorm```\n```",
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c9ed04d_83bae33f",
@@ -31,6 +48,30 @@
       "writtenOn": "2023-08-17T03:56:15Z",
       "side": 1,
       "message": "Should we add unorm16 and snorm16 formats together?",
+      "range": {
+        "startLine": 1817,
+        "startChar": 37,
+        "endLine": 1817,
+        "endChar": 44
+      },
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de5ae5a1_6ca63fd7",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1817,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-17T04:50:41Z",
+      "side": 1,
+      "message": "Personally I am not seeing any requirements to add snorm16 at present. How doesn\u0027t that sound to you?  @kainino@chromium.org @cwallez@chromium.org",
+      "parentUuid": "8c9ed04d_83bae33f",
       "range": {
         "startLine": 1817,
         "startChar": 37,
@@ -66,6 +107,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "003c9c0d_c14f29d5",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-17T04:50:41Z",
+      "side": 1,
+      "message": "I am not sure. It doesn\u0027t matter much as far as I can see. Let me know If I am missing something!",
+      "parentUuid": "ff19c57f_65d23008",
+      "range": {
+        "startLine": 431,
+        "startChar": 54,
+        "endLine": 431,
+        "endChar": 77
+      },
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "04db62c4_7c695152",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
@@ -77,6 +142,30 @@
       "writtenOn": "2023-08-17T03:56:15Z",
       "side": 1,
       "message": "Looks like Metal is available since iOS 8.0 and macOS 10.11. So this check should be always true.\n\nhttps://developer.apple.com/documentation/metal",
+      "range": {
+        "startLine": 551,
+        "startChar": 8,
+        "endLine": 551,
+        "endChar": 50
+      },
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8849cf_4eef148e",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-17T04:50:41Z",
+      "side": 1,
+      "message": "Nice.",
+      "parentUuid": "04db62c4_7c695152",
       "range": {
         "startLine": 551,
         "startChar": 8,
