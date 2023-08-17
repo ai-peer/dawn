@@ -16,6 +16,41 @@
       "message": "```suggestion\nTEST_F(RenderPassDescriptorValidationTest, TextureViewDepthSliceForColor) {\n```",
       "revId": "d0416cc9ed665c0db6fb3d075d2785e4807432f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1dc97f3_664ea476",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-17T15:46:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3aa322b2_f56055e9",
+      "revId": "d0416cc9ed665c0db6fb3d075d2785e4807432f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49104f00_753eb6cd",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-17T15:46:44Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "d0416cc9ed665c0db6fb3d075d2785e4807432f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
