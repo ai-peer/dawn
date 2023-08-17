@@ -16,6 +16,24 @@
       "message": "ANGLE\u0027s vulkan backend puts the deviceId in the renderer description\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/vulkan/RendererVk.cpp;l\u003d3652;drc\u003dc410120011084508641f34a24d77d7625bd4f4bf;bpv\u003d1;bpt\u003d1\n\n\nmaybe we can change it to do that in d3d11 as well?\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/d3d/d3d11/Renderer11.cpp;l\u003d2391?q\u003df:angle%20getRendererDescription%20f:d3d11\u0026ss\u003dchromium%2Fchromium%2Fsrc",
       "revId": "028fa86c943983d13d605fd369db41021af3eb9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f4cfa17_daf0fbd1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-17T06:50:56Z",
+      "side": 1,
+      "message": "Sure. That\u0027s a better workaround, it can void to add platform-specific codes in OpenGL backend. I\u0027ve submited the changes in ANGLE: https://chromium-review.googlesource.com/c/angle/angle/+/4786902.\n\nAnd will change this CL to get device id from the render string.",
+      "parentUuid": "17c6d366_55a3cd4f",
+      "revId": "028fa86c943983d13d605fd369db41021af3eb9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
