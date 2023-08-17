@@ -103,6 +103,24 @@
       "parentUuid": "adad1fe8_4c16e4f7",
       "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72cfe700_ebcbd09b",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T14:43:03Z",
+      "side": 1,
+      "message": "Where do we test that setting depthSlice !\u003d 0 with a 2D view causes a validation error?",
+      "parentUuid": "ea5fdf86_1914ab1c",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
