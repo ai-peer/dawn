@@ -33,6 +33,23 @@
       "message": "Notes: AFIACT you can\u0027t assign the wrong parameter. You can cast one to the other though as in Width(Height(16)) but I don\u0027t think that would ever come up. You could change the type to have a `get` function instead of value operator which would fix that casting issue if you want to be more pure.",
       "revId": "57355f81bdf6a9958a5698d325e8d9ef8626a960",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a1a496_54edb36f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-17T01:10:00Z",
+      "side": 1,
+      "message": "I like the idea overall, but now it\u0027s super verbose. What if we compress all the boolean args into a bitmask? then you don\u0027t have to pass `MyBool(true), OtherBool(true);` you just pass `kMyCapability | kOtherCapability`\n\nnote: we already have a thing called TypedInteger; could use that instead of NumberWrapper",
+      "revId": "57355f81bdf6a9958a5698d325e8d9ef8626a960",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
