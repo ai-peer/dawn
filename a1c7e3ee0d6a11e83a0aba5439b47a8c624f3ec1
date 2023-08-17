@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6ae39da_bf96bfb0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-17T13:59:53Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "233aa1cc_41ca0e4d",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adad1fe8_4c16e4f7",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-08-17T10:05:52Z",
       "side": 1,
       "message": "Can we have validation that depthSlice must be 0 for a 2D view?",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea5fdf86_1914ab1c",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-17T13:59:53Z",
+      "side": 1,
+      "message": "I think other tests have covered the default 0 for 2d views, so not add this case here. But it\u0027s OK to add it here as a control case.",
+      "parentUuid": "adad1fe8_4c16e4f7",
       "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
