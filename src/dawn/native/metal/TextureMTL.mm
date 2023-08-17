@@ -15,6 +15,7 @@
 #include "dawn/native/metal/TextureMTL.h"
 
 #include "dawn/common/Constants.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Math.h"
 #include "dawn/common/Platform.h"
 #include "dawn/native/DynamicUploader.h"
@@ -31,6 +32,8 @@ namespace {
 
 MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage) {
     MTLTextureUsage result = MTLTextureUsageUnknown;  // This is 0
+
+    dawn::ErrorLog() << "MetalTextureUsage - usage = " << static_cast<int>(usage);
 
     if (usage & (wgpu::TextureUsage::StorageBinding)) {
         result |= MTLTextureUsageShaderWrite | MTLTextureUsageShaderRead;
@@ -49,6 +52,7 @@ MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage
     }
 
     if (usage & wgpu::TextureUsage::RenderAttachment) {
+        dawn::ErrorLog() << "MetalTextureUsage - usage has renderAttachment";
         result |= MTLTextureUsageRenderTarget;
     }
 
@@ -1115,6 +1119,7 @@ ResultOrError<Ref<TextureView>> TextureView::Create(TextureBase* texture,
 }
 
 MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
+    dawn::ErrorLog() << "TextureView::Initialize called";
     DeviceBase* device = GetDevice();
     Texture* texture = ToBackend(GetTexture());
 
@@ -1136,6 +1141,9 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
     if (!needsNewView) {
         mMtlTextureView = mtlTexture;
     } else if (texture->GetFormat().IsMultiPlanar()) {
+        dawn::ErrorLog() << "TextureView::Initialize format = "
+                         << static_cast<int>(texture->GetFormat().format)
+                         << " baseFormat = " << static_cast<int>(texture->GetFormat().baseFormat);
         NSRef<MTLTextureDescriptor> mtlDescRef = AcquireNSRef([MTLTextureDescriptor new]);
         MTLTextureDescriptor* mtlDesc = mtlDescRef.Get();
 
@@ -1148,6 +1156,8 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
         uint32_t plane = GetIOSurfacePlane(descriptor->aspect);
         mtlDesc.width = IOSurfaceGetWidthOfPlane(texture->GetIOSurface(), plane);
         mtlDesc.height = IOSurfaceGetHeightOfPlane(texture->GetIOSurface(), plane);
+        dawn::ErrorLog() << "TextureView::Initialize plane = " << plane
+                         << " width = " << mtlDesc.width << " height = " << mtlDesc.height;
 
         // Multiplanar texture is validated to only have single layer, single mipLevel
         // and 2d textures (depth == 1)

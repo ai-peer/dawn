@@ -138,6 +138,10 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         if (initialized) {
             IOSurfaceLock(surface, 0, nullptr);
             for (size_t plane = 0; plane < num_planes; ++plane) {
+                dawn::ErrorLog() << "mac - CreateVideoTextureForTest - plane = " << plane
+                                 << " bytesPerRow = "
+                                 << IOSurfaceGetBytesPerRowOfPlane(surface, plane)
+                                 << " height = " << IOSurfaceGetHeightOfPlane(surface, plane);
                 std::vector<uint8_t> data = VideoViewsTests::GetTestTextureDataWithPlaneIndex(
                     plane, IOSurfaceGetBytesPerRowOfPlane(surface, plane),
                     IOSurfaceGetHeightOfPlane(surface, plane), isCheckerboard);
