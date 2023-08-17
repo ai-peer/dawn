@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "416ba847_c3382960",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-17T01:18:51Z",
+      "side": 1,
+      "message": "Done\n\nI think so. Formats that support STORAGE usage should all support ReadOnly STORAGE. Only ReadWrite STORAGE needs additional requirements.\n\nI find actually we don\u0027t need to add checks here. There have already been checks in the creation of bind group layout, which will be triggered in the creation of default pipeline layout.",
+      "parentUuid": "2f565dd9_f59005dc",
+      "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "33a4ced6_f4c848b6",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-08-16T11:29:52Z",
       "side": 1,
       "message": "This condition seems like it is always true given the definition of kStorageTextureAccesses above.",
+      "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23801dd7_9a39bc9c",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 959,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-17T01:18:51Z",
+      "side": 1,
+      "message": "I\u0027ve put all these conditions in a switch-case block so that we can better understand the code here.\n\nPTAL, thanks!",
+      "parentUuid": "33a4ced6_f4c848b6",
       "revId": "f4cbffbd2d8a4916d0ae2bca53fc34526632e513",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
