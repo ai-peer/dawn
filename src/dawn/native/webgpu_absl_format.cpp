@@ -233,6 +233,20 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
                                   value->IsMSAARenderToSingleSampledEnabled()));
     }
 
+    if (value->HasPixelLocalStorage()) {
+        const std::vector<wgpu::TextureFormat>& plsSlots = value->GetStorageAttachmentSlots();
+        s->Append(absl::StrFormat(", totalPixelLocalStorageSize: %d",
+                                  plsSlots.size() * kPLSSlotByteSize));
+        s->Append(", storageAttachments: [ ");
+        for (size_t i = 0; i < plsSlots.size(); i++) {
+            if (plsSlots[i] != wgpu::TextureFormat::Undefined) {
+                s->Append(absl::StrFormat("{format: %s, offset: %d}, ", plsSlots[i],
+                                          i * kPLSSlotByteSize));
+            }
+        }
+        s->Append("]");
+    }
+
     s->Append(" }");
 
     return {true};
