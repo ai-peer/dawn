@@ -36,6 +36,7 @@ executable("tint") {
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",
     "${tint_src_dir}/lang/hlsl/writer/common",
+    "${tint_src_dir}/lang/msl/validate",
     "${tint_src_dir}/lang/spirv/reader/common",
     "${tint_src_dir}/lang/wgsl/ast",
     "${tint_src_dir}/lang/wgsl/ast/transform",
@@ -88,7 +89,6 @@ executable("tint") {
 
   if (tint_build_msl_writer) {
     deps += [
-      "${tint_src_dir}/lang/msl/validate",
       "${tint_src_dir}/lang/msl/writer",
       "${tint_src_dir}/lang/msl/writer/common",
     ]

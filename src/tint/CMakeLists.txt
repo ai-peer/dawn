@@ -75,11 +75,6 @@ function(tint_default_compile_options TARGET)
     -Weverything
   )
 
-  if(APPLE)
-    # Silence 'has no symbols' warnings for header-only libraries.
-    target_link_options(${TARGET} PRIVATE "-no_warning_for_no_symbols")
-  endif()
-
   if(COMPILER_IS_LIKE_GNU)
     target_compile_options(${TARGET} PRIVATE
       -pedantic-errors
@@ -550,14 +545,18 @@ endfunction()
 ################################################################################
 include("BUILD.cmake")
 
+find_package(Threads REQUIRED)
+target_link_libraries(tint_cmd_remote_compile_cmd PRIVATE Threads::Threads)
+
 # If we're building on mac / ios and we have CoreGraphics, then we can use the
 # metal API to validate our shaders. This is roughly 4x faster than invoking
 # the metal shader compiler executable.
-if(APPLE AND TINT_BUILD_MSL_WRITER)
+if(APPLE)
   find_library(LIB_CORE_GRAPHICS CoreGraphics)
 
   if(LIB_CORE_GRAPHICS)
     target_sources("tint_lang_msl_validate" PRIVATE "lang/msl/validate/msl_metal.mm")
+    target_compile_definitions("tint_cmd_remote_compile_cmd" PRIVATE "-DTINT_ENABLE_MSL_VALIDATION_USING_METAL_API=1")
     target_compile_definitions("tint_lang_msl_validate" PUBLIC "-DTINT_ENABLE_MSL_VALIDATION_USING_METAL_API=1")
     target_compile_options("tint_lang_msl_validate" PRIVATE "-fmodules" "-fcxx-modules")
     target_link_options("tint_lang_msl_validate" PUBLIC "-framework" "CoreGraphics")

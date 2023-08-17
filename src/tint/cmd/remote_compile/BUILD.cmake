@@ -20,23 +20,16 @@
 # Do not modify this file directly
 ################################################################################
 
-include(utils/cli/BUILD.cmake)
-include(utils/command/BUILD.cmake)
-include(utils/containers/BUILD.cmake)
-include(utils/debug/BUILD.cmake)
-include(utils/diagnostic/BUILD.cmake)
-include(utils/file/BUILD.cmake)
-include(utils/generator/BUILD.cmake)
-include(utils/ice/BUILD.cmake)
-include(utils/id/BUILD.cmake)
-include(utils/macros/BUILD.cmake)
-include(utils/math/BUILD.cmake)
-include(utils/memory/BUILD.cmake)
-include(utils/reflection/BUILD.cmake)
-include(utils/result/BUILD.cmake)
-include(utils/rtti/BUILD.cmake)
-include(utils/socket/BUILD.cmake)
-include(utils/strconv/BUILD.cmake)
-include(utils/symbol/BUILD.cmake)
-include(utils/text/BUILD.cmake)
-include(utils/traits/BUILD.cmake)
+tint_add_target("cmd/remote_compile:cmd"
+  cmd/remote_compile/main.cc
+)
+
+tint_target_add_dependencies("cmd/remote_compile:cmd"
+  "lang/msl/validate"
+  "lang/wgsl/ast"
+  "utils/socket"
+  "utils/text"
+  "utils/traits"
+)
+
+tint_target_set_output_name("cmd/remote_compile:cmd" "tint_remote_compile")

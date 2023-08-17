@@ -20,7 +20,6 @@
 # Do not modify this file directly
 ################################################################################
 
-if(TINT_BUILD_MSL_WRITER)
 tint_add_target("lang/msl/validate"
   lang/msl/validate/msl.cc
   lang/msl/validate/val.h
@@ -48,5 +47,3 @@ tint_target_add_dependencies("lang/msl/validate"
   "utils/text"
   "utils/traits"
 )
-
-endif(TINT_BUILD_MSL_WRITER)

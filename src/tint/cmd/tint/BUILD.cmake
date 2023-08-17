@@ -33,6 +33,7 @@ tint_target_add_dependencies("cmd/tint:cmd"
   "lang/core/constant"
   "lang/core/type"
   "lang/hlsl/writer/common"
+  "lang/msl/validate"
   "lang/spirv/reader/common"
   "lang/wgsl/ast"
   "lang/wgsl/ast/transform"
@@ -87,7 +88,6 @@ endif(TINT_BUILD_IR)
 
 if (TINT_BUILD_MSL_WRITER)
   tint_target_add_dependencies("cmd/tint:cmd"
-    "lang/msl/validate"
     "lang/msl/writer"
     "lang/msl/writer/common"
   )
