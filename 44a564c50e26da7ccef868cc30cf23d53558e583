@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "af0d532c_7dc66b42",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "Ok I think it\u0027s time for an LGTM because this is clearly in the right direction and has relatively few comments compared to the size of the CL 😊",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c12c7ac4_dd7b4000",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "It seems that because this is a raw pointer, a texture stored here could be destroyed then a new one created in the same spot, causing state tracking issue. The list of scopes is also difficult to understand.\n\nAn unordered_map\u003cRef\u003cTextureBase\u003e, std::stack\u003cPendingFenceList\u003e\u003e would solve both issues.",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36de69ba_d2e1a0d5",
@@ -20,6 +54,103 @@
         "endLine": 37,
         "endChar": 1
       },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aef1c2e9_c173257a",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "nit: FragmentIn",
+      "range": {
+        "startLine": 84,
+        "startChar": 13,
+        "endLine": 84,
+        "endChar": 21
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097e49a9_7666c04c",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "nit: unnecessary?",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 74
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "198b307b_f5a9c1d5",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "This is done twice: here and at the bottom of the file.",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c983d75d_56966599",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "Could we have the same test for imported fences?",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "709ce3c3_b476fbc9",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "Why can\u0027t we ASSERT_DEVICE_ERROR_MSG here? Is it because there could be multiple errors and we only care about the first one?",
       "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -187,6 +318,40 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b9961bfe_4ed4d762",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "u-nit: Maybe check that texture.GetUsage() is what we expect.",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99f0f71_5bfbfd1f",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "What about a BeginAccess on a texture but an EndAccess on another one?",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ded6f73_b06e08e0",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
         "patchSetId": 33
@@ -227,6 +392,40 @@
         "endLine": 836,
         "endChar": 78
       },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb18cae3_5bbc51f6",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "Maybe we could consider allowing nullptr here as a way to get the default descriptor (which is the one we build in the vast majority of tests).",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dffe8ade_0c629f15",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T15:35:07Z",
+      "side": 1,
+      "message": "Don\u0027t we check that the texture has been cleared to 0 too?",
       "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
