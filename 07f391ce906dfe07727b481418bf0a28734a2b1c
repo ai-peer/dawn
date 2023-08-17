@@ -16,6 +16,23 @@
       "message": "running locally with\n\n```\nvpython3 ./content/test/gpu/run_gpu_integration_test.py webgpu_cts -v --jobs\u003d16 --browser\u003drelease --skip-post-test-cleanup-and-debug-info --write-full-results-to\u003dout.json --use-webgpu-compat-mode \"--extra-browser-args\u003d--use-webgpu-adapter\u003dopengles --use-angle\u003dswiftshader --no-sandbox --enable-webgpu-developer-features\" \u003e $T/out.txt 2\u003e\u00261\n```\n\nI get \n\n```\n70801 tests passed in 2169.9s, 16588 skipped, 808 failures.\n```\n\nThere\u0027s no unexpected failures. There are lots of issue in compat though.\n\n1. all the texture issues\n\n   Basic stuff seems to fail all over. It\u0027s possible some of these are\n   testing 2d vs 2d-array things that would validate out if/when we start\n   validating those. Many though are precision issues and at a glance seem\n   wrong\n   \n2. occlusion queries don\u0027t work at all (and crash eventually)\n\n3. several draw tests fail\n\n4. Tons of WGSL tests fail\n\n5. etc...",
       "revId": "07f391ce906dfe07727b481418bf0a28734a2b1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e71c8c5_f41971e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-08-17T22:01:17Z",
+      "side": 1,
+      "message": "Also, I\u0027m not entirely sure \u0027webgpu-compat\u0027 is enough. As it is they are all set to `[angle-swiftshader webgpu-compat]` but that means there are often conflicts with `[angle-swiftshader other tags]`. You can see that in the CL.",
+      "revId": "07f391ce906dfe07727b481418bf0a28734a2b1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
