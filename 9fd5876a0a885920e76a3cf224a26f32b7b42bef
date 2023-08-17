@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1bedcc5_79707c42",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-17T08:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaf01a9e_e0b866fe",
+      "range": {
+        "startLine": 278,
+        "startChar": 0,
+        "endLine": 278,
+        "endChar": 47
+      },
+      "revId": "9fd5876a0a885920e76a3cf224a26f32b7b42bef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da2ba80b_1f6cd46b",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-16T22:22:26Z",
       "side": 1,
       "message": "you shouldn\u0027t need KEEP if these are going to be consistent failures",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 6
+      },
+      "revId": "9fd5876a0a885920e76a3cf224a26f32b7b42bef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba0e2d95_f127411e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 13
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-17T08:48:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da2ba80b_1f6cd46b",
       "range": {
         "startLine": 103,
         "startChar": 0,
