@@ -593,12 +593,37 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
             descriptor->colorAttachmentCount, *implicitSampleCount);
     }
 
+    // Validation for any pixel local storage.
     const RenderPassPixelLocalStorage* pls = nullptr;
     FindInChain(descriptor->nextInChain, &pls);
     if (pls != nullptr) {
-        DAWN_TRY(ValidateHasPLSFeature(device));
+        StackVector<StorageAttachmentInfoForValidation, 4> attachments;
+        for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
+            const RenderPassStorageAttachment& attachment = pls->storageAttachments[i];
 
-        // TODO(dawn:1704): Validate limits, formats, offsets don't collide and the total size.
+            DAWN_TRY(ValidateCanUseAs(attachment.storage->GetTexture(),
+                                      wgpu::TextureUsage::StorageAttachment, usageValidationMode));
+
+            DAWN_TRY(ValidateLoadOp(attachment.loadOp));
+            DAWN_TRY(ValidateStoreOp(attachment.storeOp));
+            DAWN_INVALID_IF(attachment.loadOp == wgpu::LoadOp::Undefined,
+                            "storageAttachments[%i].loadOp must be set.", i);
+            DAWN_INVALID_IF(attachment.storeOp == wgpu::StoreOp::Undefined,
+                            "storageAttachments[%i].storeOp must be set.", i);
+
+            const dawn::native::Color& clearValue = attachment.clearValue;
+            if (attachment.loadOp == wgpu::LoadOp::Clear) {
+                DAWN_INVALID_IF(std::isnan(clearValue.r) || std::isnan(clearValue.g) ||
+                                    std::isnan(clearValue.b) || std::isnan(clearValue.a),
+                                "storageAttachments[%i].clearValue (%s) contain a NaN.", i,
+                                &clearValue);
+            }
+
+            attachments->push_back({attachment.offset, attachment.storage->GetFormat().format});
+        }
+
+        DAWN_TRY(ValidatePLSInfo(device, pls->totalPixelLocalStorageSize,
+                                 {attachments->data(), attachments->size()}));
     }
 
     return {};
