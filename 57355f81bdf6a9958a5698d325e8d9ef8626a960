@@ -50,6 +50,24 @@
       "message": "I like the idea overall, but now it\u0027s super verbose. What if we compress all the boolean args into a bitmask? then you don\u0027t have to pass `MyBool(true), OtherBool(true);` you just pass `kMyCapability | kOtherCapability`\n\nnote: we already have a thing called TypedInteger; could use that instead of NumberWrapper",
       "revId": "57355f81bdf6a9958a5698d325e8d9ef8626a960",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a31a3fce_81729e30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-17T16:35:53Z",
+      "side": 1,
+      "message": "The type safety is pretty cool for sure! We could use the EnumClassBitmask for the bitmask of functionality. I agree that we should have a bitmask because in the future we could have extensions adding capabilities, like a `unorm16Storage \u003d deviceSupportsTheExtenbsion? Storage : None`",
+      "parentUuid": "21a1a496_54edb36f",
+      "revId": "57355f81bdf6a9958a5698d325e8d9ef8626a960",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
