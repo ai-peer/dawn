@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b349209_7ddd3425",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-08-18T17:31:37Z",
+      "side": 1,
+      "message": "I have added some tests and loosened some of the validation around RenderAttachment and uninitialized multiplanar textures. I think it needs some more work for D3D11 that I\u0027m looking into where I think it fails [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/DeviceD3D11.cpp;drc\u003d0d6e097c1e1aeaa0c4200d8e2b1d887d14f74a63;l\u003d464) on bots. Please take a look.",
+      "revId": "94d4bf28f3a400b6ec4a451330c3948b5b3c8035",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
