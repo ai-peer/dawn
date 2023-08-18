@@ -39,6 +39,30 @@
       },
       "revId": "0339cabb8e6a9f30208a9a353db3aad4ebdb2c35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a97b995e_911b7443",
+        "filename": "src/dawn/native/d3d12/DeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-18T09:03:59Z",
+      "side": 1,
+      "message": "Yep that\u0027s the only functional change. This is necessary because the Queue isn\u0027t set up at this point, but we end up calling GetLastSubmittedCommandSerial() on it, which causes an NPE.\n\nThe value 0 is fine since it represents the beginning of time, which is already finished executing on the GPU during initialization. Added a constant names kBeginningOfGPUTime for this. Note that this changes can be undone in follow-up CLs when the fence creation moves to the ExecutionQueue.",
+      "parentUuid": "95837f25_476ba3a0",
+      "range": {
+        "startLine": 104,
+        "startChar": 47,
+        "endLine": 104,
+        "endChar": 48
+      },
+      "revId": "0339cabb8e6a9f30208a9a353db3aad4ebdb2c35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
