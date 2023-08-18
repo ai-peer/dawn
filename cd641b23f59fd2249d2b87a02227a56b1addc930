@@ -16,6 +16,24 @@
       "message": "Would it work to remove these files using the Copybara import script and then switch to using some other Khronos headers / gl.xml in g3?\n\nBut otherwise this works.",
       "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66567ed9_837a5813",
+        "filename": "LICENSE",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-18T15:38:31Z",
+      "side": 1,
+      "message": "If we remove these files from third_party, then yes, we don\u0027t need the license here. That\u0027s the preferred way (no third party source checked into the repo).\n\n\u003e Would it work to remove these files using the Copybara import script\nWhy wouldn\u0027t we just remove them from the repo directly?",
+      "parentUuid": "0dac8e5c_7a2a4d87",
+      "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
