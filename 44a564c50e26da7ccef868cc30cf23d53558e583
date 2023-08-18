@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aea937d9_537a0a70",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 33
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "I was hoping to avoid unnecessary allocations for error situations, but I guess this is more straightforward. Using map because Ref doesn\u0027t support usage in unordered_map",
+      "parentUuid": "c12c7ac4_dd7b4000",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36de69ba_d2e1a0d5",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "u-nit. Maybe move this above the `GetRequiredFeatures` above to group all the same class implementations together.",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 1
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0417c53_0038e44b",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36de69ba_d2e1a0d5",
       "range": {
         "startLine": 34,
         "startChar": 0,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "563ae4db_dac13d22",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aef1c2e9_c173257a",
+      "range": {
+        "startLine": 84,
+        "startChar": 13,
+        "endLine": 84,
+        "endChar": 21
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "097e49a9_7666c04c",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-08-17T15:35:07Z",
       "side": 1,
       "message": "nit: unnecessary?",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 192,
+        "endChar": 74
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ad041bd_918a49ce",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "097e49a9_7666c04c",
       "range": {
         "startLine": 191,
         "startChar": 0,
@@ -121,6 +211,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53cf2c8_a6bd66d1",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "198b307b_f5a9c1d5",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c983d75d_56966599",
@@ -134,6 +242,24 @@
       "writtenOn": "2023-08-17T15:35:07Z",
       "side": 1,
       "message": "Could we have the same test for imported fences?",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "889d541d_5ca758b4",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done. I had to put this in the apple-specific tests since not all backends have a way (or an easy way) to spin up fences on the fly",
+      "parentUuid": "c983d75d_56966599",
       "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -155,6 +281,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd072e6d_8442ca39",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "yes - you get one error per CreateSharedTextureMemories, and ASSERT_DEVICE_ERROR_MSG doesn\u0027t support multiple errors happening at once.",
+      "parentUuid": "709ce3c3_b476fbc9",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d942177_984efcde",
@@ -168,6 +312,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "nit. `using testing::MockCallback`",
+      "range": {
+        "startLine": 259,
+        "startChar": 4,
+        "endLine": 259,
+        "endChar": 11
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5792eaeb_b802c15b",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d942177_984efcde",
       "range": {
         "startLine": 259,
         "startChar": 4,
@@ -201,6 +369,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "50d91480_09f27407",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45f448a8_7abced3e",
+      "range": {
+        "startLine": 261,
+        "startChar": 47,
+        "endLine": 261,
+        "endChar": 54
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "453f702e_512d1faf",
@@ -214,6 +406,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "nit. to",
+      "range": {
+        "startLine": 290,
+        "startChar": 28,
+        "endLine": 290,
+        "endChar": 31
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd532a19_36196748",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "453f702e_512d1faf",
       "range": {
         "startLine": 290,
         "startChar": 28,
@@ -247,6 +463,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e5b743a_6ed43731",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 298,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e77a7a71_d7290658",
+      "range": {
+        "startLine": 298,
+        "startChar": 28,
+        "endLine": 298,
+        "endChar": 31
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6df5a78a_8a12ca85",
@@ -260,6 +500,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "nit. to",
+      "range": {
+        "startLine": 313,
+        "startChar": 28,
+        "endLine": 313,
+        "endChar": 31
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4a23492_32698df8",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6df5a78a_8a12ca85",
       "range": {
         "startLine": 313,
         "startChar": 28,
@@ -293,6 +557,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1eaf4eff_6a6640ad",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9a8be3c0_5e9612bd",
+      "range": {
+        "startLine": 323,
+        "startChar": 28,
+        "endLine": 323,
+        "endChar": 31
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "793d1c11_fbf688b9",
@@ -306,6 +594,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "nit. Thinking whether this would work with just a `wgpu::ChainedStruct`. It would be a bit more generic and by default the default constructed should have a 0 SType.",
+      "range": {
+        "startLine": 352,
+        "startChar": 4,
+        "endLine": 352,
+        "endChar": 58
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "908ec998_a565fdac",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "793d1c11_fbf688b9",
       "range": {
         "startLine": 352,
         "startChar": 4,
@@ -333,6 +645,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9977546_9f29273b",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b9961bfe_4ed4d762",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f99f0f71_5bfbfd1f",
@@ -350,6 +680,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9ea60e1_f83d4003",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f99f0f71_5bfbfd1f",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ded6f73_b06e08e0",
@@ -363,6 +711,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 660,
+        "startChar": 8,
+        "endLine": 664,
+        "endChar": 73
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "48a9dc28_3443a3e2",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 664,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ded6f73_b06e08e0",
       "range": {
         "startLine": 660,
         "startChar": 8,
@@ -396,6 +768,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e79e25c4_42dafafd",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 836,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fcf38623_53e53939",
+      "range": {
+        "startLine": 836,
+        "startChar": 8,
+        "endLine": 836,
+        "endChar": 78
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb18cae3_5bbc51f6",
@@ -409,6 +805,24 @@
       "writtenOn": "2023-08-17T15:35:07Z",
       "side": 1,
       "message": "Maybe we could consider allowing nullptr here as a way to get the default descriptor (which is the one we build in the vast majority of tests).",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4667e4f7_2769b184",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 845,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "great idea!!\n\nthis could be portability hazard, but we\u0027ll see when we bring to webgpu.h. use of this API is WebGPU on hard mode anyway, so you should be checking usages instead of blinding using it.",
+      "parentUuid": "cb18cae3_5bbc51f6",
       "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -430,6 +844,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b892fa0b_9575abcc",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dffe8ade_0c629f15",
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6f2682f2_71e8624b",
@@ -443,6 +875,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "uu-nit. comment formatting",
+      "range": {
+        "startLine": 868,
+        "startChar": 0,
+        "endLine": 868,
+        "endChar": 24
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfce058f_ba3543bc",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 868,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6f2682f2_71e8624b",
       "range": {
         "startLine": 868,
         "startChar": 0,
@@ -476,6 +932,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28628197_f74845f1",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 883,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e24f85b_95daa522",
+      "range": {
+        "startLine": 883,
+        "startChar": 8,
+        "endLine": 883,
+        "endChar": 79
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "53c3b419_21d97b24",
@@ -489,6 +969,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "nit. performing",
+      "range": {
+        "startLine": 1040,
+        "startChar": 87,
+        "endLine": 1040,
+        "endChar": 96
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9541b082_155d02e7",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1040,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53c3b419_21d97b24",
       "range": {
         "startLine": 1040,
         "startChar": 87,
@@ -522,6 +1026,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4937bacb_2e7b3966",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "merged into one test which destroys or loses the device using a lambda.",
+      "parentUuid": "ee37b1c6_a77ce3fe",
+      "range": {
+        "startLine": 1043,
+        "startChar": 0,
+        "endLine": 1043,
+        "endChar": 85
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8522011a_9baf85c8",
@@ -535,6 +1063,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "nit. performing",
+      "range": {
+        "startLine": 1101,
+        "startChar": 70,
+        "endLine": 1101,
+        "endChar": 79
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d3b746a_bf634b91",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8522011a_9baf85c8",
       "range": {
         "startLine": 1101,
         "startChar": 70,
@@ -568,6 +1120,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84213a20_9371e0b3",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "846aba80_d94d945d",
+      "range": {
+        "startLine": 1166,
+        "startChar": 67,
+        "endLine": 1166,
+        "endChar": 76
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5d46c62e_5f9acd06",
@@ -581,6 +1157,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "nit. I think this is an inaccurate comment?",
+      "range": {
+        "startLine": 1230,
+        "startChar": 0,
+        "endLine": 1230,
+        "endChar": 66
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e1d678e_51f3243f",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1230,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5d46c62e_5f9acd06",
       "range": {
         "startLine": 1230,
         "startChar": 0,
@@ -614,6 +1214,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "12a9d708_a3830548",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "I made a helper for this to remove the usage checking from the test; hopefully this makes it less distracting",
+      "parentUuid": "c2e04cb3_4c518461",
+      "range": {
+        "startLine": 1233,
+        "startChar": 4,
+        "endLine": 1234,
+        "endChar": 78
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0714f9e_80e5dd5b",
@@ -637,6 +1261,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9440b784_fa4acb1f",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 1260,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d0714f9e_80e5dd5b",
+      "range": {
+        "startLine": 1257,
+        "startChar": 8,
+        "endLine": 1260,
+        "endChar": 81
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "56f26b5f_7c8bd906",
@@ -650,6 +1298,30 @@
       "writtenOn": "2023-08-16T23:29:51Z",
       "side": 1,
       "message": "ditto, maybe we can use `wgpu::ChainedStruct`?",
+      "range": {
+        "startLine": 214,
+        "startChar": 8,
+        "endLine": 214,
+        "endChar": 62
+      },
+      "revId": "44a564c50e26da7ccef868cc30cf23d53558e583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fda6c0f_875c9b84",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 33
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T01:41:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "56f26b5f_7c8bd906",
       "range": {
         "startLine": 214,
         "startChar": 8,
