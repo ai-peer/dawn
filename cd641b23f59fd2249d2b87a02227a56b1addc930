@@ -34,6 +34,24 @@
       "parentUuid": "0dac8e5c_7a2a4d87",
       "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd2a99f2_3ff1892e",
+        "filename": "LICENSE",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T15:54:06Z",
+      "side": 1,
+      "message": "maybe we can take a DEP on https://github.com/KhronosGroup/EGL-Registry then?",
+      "parentUuid": "66567ed9_837a5813",
+      "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
