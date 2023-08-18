@@ -81,7 +81,8 @@ class VideoViewsTests : public DawnTest {
         dawn::utils::RGBA8{81, 0, 0, 0xFF},     // Y
         dawn::utils::RGBA8{90, 240, 0, 0xFF}};  // UV
 
-    static std::vector<uint8_t> GetTestTextureData(wgpu::TextureFormat format, bool isCheckerboard);
+    template <typename T>
+    static std::vector<T> GetTestTextureData(wgpu::TextureFormat format, bool isCheckerboard);
     static uint32_t NumPlanes(wgpu::TextureFormat format);
     static std::vector<uint8_t> GetTestTextureDataWithPlaneIndex(size_t planeIndex,
                                                                  size_t bytesPerRow,
@@ -93,10 +94,12 @@ class VideoViewsTests : public DawnTest {
     void TearDown() override;
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override;
     bool IsMultiPlanarFormatsSupported() const;
+    bool IsNorm16TextureFormatsSupported() const;
     wgpu::ShaderModule GetTestVertexShaderModule() const;
 
     std::unique_ptr<VideoViewsTestBackend> mBackend;
     bool mIsMultiPlanarFormatsSupported = false;
+    bool mIsNorm16TextureFormatsSupported = false;
 };
 
 }  // namespace dawn
