@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "808155d4615d31e8092554f9c1949f29d8e902ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91a47a9_fdded674",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 326,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T20:02:45Z",
+      "side": 1,
+      "message": "nit: \"The texture dimension must not be %s if allow_unsafe_apis is not enabled. See crbug.com/dawn/1020.\", wgpu::TextureDimension::e3D \n\ni think would be slightly more clear",
+      "range": {
+        "startLine": 325,
+        "startChar": 20,
+        "endLine": 326,
+        "endChar": 97
+      },
+      "revId": "808155d4615d31e8092554f9c1949f29d8e902ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
