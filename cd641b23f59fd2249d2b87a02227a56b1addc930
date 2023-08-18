@@ -70,6 +70,24 @@
       "parentUuid": "dd2a99f2_3ff1892e",
       "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b705246d_8663608d",
+        "filename": "LICENSE",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T16:06:55Z",
+      "side": 1,
+      "message": "should already be mirrored if i\u0027m not mistaken\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/DEPS;l\u003d418?q\u003df:DEPS%20KhronosGroup%2FEGL-Registry\n\nANGLE has it in their DEPS",
+      "parentUuid": "e548694f_e1e4eeed",
+      "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
