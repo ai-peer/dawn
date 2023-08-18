@@ -16,6 +16,23 @@
       "message": "This supercedes https://dawn-review.googlesource.com/c/dawn/+/147720",
       "revId": "66c867f41f2ce2916483e2f5a6d0364aee21aedd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "601ce35e_a1f37de6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T21:26:10Z",
+      "side": 1,
+      "message": "nice, LGTM!\n\nI think you need to add the new deps in .gitignore or they will start showing up as dirty",
+      "revId": "66c867f41f2ce2916483e2f5a6d0364aee21aedd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
