@@ -16,6 +16,23 @@
       "message": "Seems rharrison is OOO; Corentin PTAL!",
       "revId": "42948ecda93d17f3f4317e48b3b6dc6f2a9913fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80957a6d_0aeb4a5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-18T15:38:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "42948ecda93d17f3f4317e48b3b6dc6f2a9913fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
