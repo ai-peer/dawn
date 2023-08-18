@@ -53,6 +53,10 @@ std::vector<wgpu::FeatureName> VideoViewsTests::GetRequiredFeatures() {
     if (mIsMultiPlanarFormatsSupported) {
         requiredFeatures.push_back(wgpu::FeatureName::DawnMultiPlanarFormats);
     }
+    mIsNorm16TextureFormatsSupported = SupportsFeatures({wgpu::FeatureName::Norm16TextureFormats});
+    if (mIsNorm16TextureFormatsSupported) {
+        requiredFeatures.push_back(wgpu::FeatureName::Norm16TextureFormats);
+    }
     requiredFeatures.push_back(wgpu::FeatureName::DawnInternalUsages);
     return requiredFeatures;
 }
@@ -61,35 +65,42 @@ bool VideoViewsTests::IsMultiPlanarFormatsSupported() const {
     return mIsMultiPlanarFormatsSupported;
 }
 
+bool VideoViewsTests::IsNorm16TextureFormatsSupported() const {
+    return mIsNorm16TextureFormatsSupported;
+}
+
 // Returns a pre-prepared multi-planar formatted texture
 // The encoded texture data represents a 4x4 converted image. When |isCheckerboard| is true,
 // the top left is a 2x2 yellow block, bottom right is a 2x2 red block, top right is a 2x2
 // blue block, and bottom left is a 2x2 white block. When |isCheckerboard| is false, the
 // image is converted from a solid yellow 4x4 block.
 // static
-std::vector<uint8_t> VideoViewsTests::GetTestTextureData(wgpu::TextureFormat format,
-                                                         bool isCheckerboard) {
-    constexpr uint8_t Yy = kYellowYUVColor[kYUVLumaPlaneIndex].r;
-    constexpr uint8_t Yu = kYellowYUVColor[kYUVChromaPlaneIndex].r;
-    constexpr uint8_t Yv = kYellowYUVColor[kYUVChromaPlaneIndex].g;
+template <typename T>
+std::vector<T> VideoViewsTests::GetTestTextureData(wgpu::TextureFormat format,
+                                                   bool isCheckerboard) {
+    const uint8_t kLeftShiftBits = (sizeof(T) - 1) * 8;
+    constexpr T Yy = kYellowYUVColor[kYUVLumaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Yu = kYellowYUVColor[kYUVChromaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Yv = kYellowYUVColor[kYUVChromaPlaneIndex].g << kLeftShiftBits;
 
-    constexpr uint8_t Wy = kWhiteYUVColor[kYUVLumaPlaneIndex].r;
-    constexpr uint8_t Wu = kWhiteYUVColor[kYUVChromaPlaneIndex].r;
-    constexpr uint8_t Wv = kWhiteYUVColor[kYUVChromaPlaneIndex].g;
+    constexpr T Wy = kWhiteYUVColor[kYUVLumaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Wu = kWhiteYUVColor[kYUVChromaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Wv = kWhiteYUVColor[kYUVChromaPlaneIndex].g << kLeftShiftBits;
 
-    constexpr uint8_t Ry = kRedYUVColor[kYUVLumaPlaneIndex].r;
-    constexpr uint8_t Ru = kRedYUVColor[kYUVChromaPlaneIndex].r;
-    constexpr uint8_t Rv = kRedYUVColor[kYUVChromaPlaneIndex].g;
+    constexpr T Ry = kRedYUVColor[kYUVLumaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Ru = kRedYUVColor[kYUVChromaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Rv = kRedYUVColor[kYUVChromaPlaneIndex].g << kLeftShiftBits;
 
-    constexpr uint8_t By = kBlueYUVColor[kYUVLumaPlaneIndex].r;
-    constexpr uint8_t Bu = kBlueYUVColor[kYUVChromaPlaneIndex].r;
-    constexpr uint8_t Bv = kBlueYUVColor[kYUVChromaPlaneIndex].g;
+    constexpr T By = kBlueYUVColor[kYUVLumaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Bu = kBlueYUVColor[kYUVChromaPlaneIndex].r << kLeftShiftBits;
+    constexpr T Bv = kBlueYUVColor[kYUVChromaPlaneIndex].g << kLeftShiftBits;
 
     switch (format) {
         // The first 16 bytes is the luma plane (Y), followed by the chroma plane (UV) which
         // is half the number of bytes (subsampled by 2) but same bytes per line as luma
         // plane.
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
             if (isCheckerboard) {
                 return {
                     Wy, Wy, Ry, Ry,  // plane 0, start + 0
@@ -132,9 +143,17 @@ std::vector<uint8_t> VideoViewsTests::GetTestTextureData(wgpu::TextureFormat for
     }
 }
 
+template std::vector<uint8_t> VideoViewsTests::GetTestTextureData<uint8_t>(
+    wgpu::TextureFormat format,
+    bool isCheckerboard);
+template std::vector<uint16_t> VideoViewsTests::GetTestTextureData<uint16_t>(
+    wgpu::TextureFormat format,
+    bool isCheckerboard);
+
 uint32_t VideoViewsTests::NumPlanes(wgpu::TextureFormat format) {
     switch (format) {
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+        case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
             return 2;
         default:
             UNREACHABLE();
@@ -145,7 +164,7 @@ std::vector<uint8_t> VideoViewsTests::GetTestTextureDataWithPlaneIndex(size_t pl
                                                                        size_t bytesPerRow,
                                                                        size_t height,
                                                                        bool isCheckerboard) {
-    std::vector<uint8_t> texelData = VideoViewsTests::GetTestTextureData(
+    std::vector<uint8_t> texelData = VideoViewsTests::GetTestTextureData<uint8_t>(
         wgpu::TextureFormat::R8BG8Biplanar420Unorm, isCheckerboard);
     const uint32_t texelDataRowBytes = kYUVImageDataWidthInTexels;
     const uint32_t texelDataHeight =
@@ -402,7 +421,8 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGB) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint8_t> expectedData = GetTestTextureData(wgpu::TextureFormat::RGBA8Unorm, true);
+    std::vector<uint8_t> expectedData =
+        GetTestTextureData<uint8_t>(wgpu::TextureFormat::RGBA8Unorm, true);
     std::vector<utils::RGBA8> expectedRGBA;
     for (uint8_t i = 0; i < expectedData.size(); i += 3) {
         expectedRGBA.push_back({expectedData[i], expectedData[i + 1], expectedData[i + 2], 0xFF});
@@ -410,6 +430,87 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGB) {
 
     EXPECT_TEXTURE_EQ(expectedRGBA.data(), renderPass.color, {0, 0},
                       {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels});
+    mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+}
+
+// Renders a P010 "checkerboard" texture into a RGB quad, then checks the the entire
+// contents to ensure the image has not been flipped.
+TEST_P(VideoViewsTests, P010SampleYUVtoRGB) {
+    DAWN_TEST_UNSUPPORTED_IF(!IsNorm16TextureFormatsSupported());
+
+    // TODO(dawn:551): P010 format is not supported on WARP. Except D3D11, the support on other
+    // backends is TBD.
+    DAWN_SUPPRESS_TEST_IF(!IsD3D11() || IsWARP());
+    std::unique_ptr<VideoViewsTestBackend::PlatformTexture> platformTexture =
+        mBackend->CreateVideoTextureForTest(wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm,
+                                            wgpu::TextureUsage::TextureBinding,
+                                            /*isCheckerboard*/ true,
+                                            /*initialized*/ true);
+    ASSERT_NE(platformTexture.get(), nullptr);
+    if (!platformTexture->CanWrapAsWGPUTexture()) {
+        mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
+        GTEST_SKIP() << "Skipped because not supported.";
+    }
+
+    wgpu::TextureViewDescriptor lumaViewDesc;
+    lumaViewDesc.format = wgpu::TextureFormat::R16Unorm;
+    lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    wgpu::TextureView lumaTextureView = platformTexture->wgpuTexture.CreateView(&lumaViewDesc);
+
+    wgpu::TextureViewDescriptor chromaViewDesc;
+    chromaViewDesc.format = wgpu::TextureFormat::RG16Unorm;
+    chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    wgpu::TextureView chromaTextureView = platformTexture->wgpuTexture.CreateView(&chromaViewDesc);
+
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+
+    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            @group(0) @binding(0) var sampler0 : sampler;
+            @group(0) @binding(1) var lumaTexture : texture_2d<f32>;
+            @group(0) @binding(2) var chromaTexture : texture_2d<f32>;
+
+            @fragment
+            fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
+               let y : f32 = textureSample(lumaTexture, sampler0, texCoord).r;
+               let u : f32 = textureSample(chromaTexture, sampler0, texCoord).r;
+               let v : f32 = textureSample(chromaTexture, sampler0, texCoord).g;
+               return vec4f(y, u, v, 1.0);
+            })");
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+        device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels);
+    renderPipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+    wgpu::Sampler sampler = device.CreateSampler();
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(renderPipeline);
+        pass.SetBindGroup(
+            0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                    {{0, sampler}, {1, lumaTextureView}, {2, chromaTextureView}}));
+        pass.Draw(6);
+        pass.End();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    std::vector<uint8_t> expectedData =
+        GetTestTextureData<uint8_t>(wgpu::TextureFormat::RGBA8Unorm, true);
+    std::vector<utils::RGBA8> expectedRGBA;
+    for (uint8_t i = 0; i < expectedData.size(); i += 3) {
+        expectedRGBA.push_back({expectedData[i], expectedData[i + 1], expectedData[i + 2], 0xFF});
+    }
+
+    const utils::RGBA8 tolerance{1, 1, 1, 0};
+    EXPECT_TEXTURE_EQ(expectedRGBA.data(), renderPass.color, {0, 0},
+                      {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels}, 0,
+                      wgpu::TextureAspect::All, 0, tolerance);
     mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
 }
 
@@ -478,7 +579,8 @@ TEST_P(VideoViewsTests, NV12SampleYUVtoRGBMultipleSamplers) {
     wgpu::CommandBuffer commands = encoder.Finish();
     queue.Submit(1, &commands);
 
-    std::vector<uint8_t> expectedData = GetTestTextureData(wgpu::TextureFormat::RGBA8Unorm, true);
+    std::vector<uint8_t> expectedData =
+        GetTestTextureData<uint8_t>(wgpu::TextureFormat::RGBA8Unorm, true);
     std::vector<utils::RGBA8> expectedRGBA;
     for (uint8_t i = 0; i < expectedData.size(); i += 3) {
         expectedRGBA.push_back({expectedData[i], expectedData[i + 1], expectedData[i + 2], 0xFF});
