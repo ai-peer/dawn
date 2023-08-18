@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-cmake_minimum_required(VERSION 3.10.2)
+cmake_minimum_required(VERSION 3.16.0)
 
 # When upgrading to CMake 3.11 we can remove DAWN_PLACEHOLDER_FILE because source-less add_library
 # becomes available.
@@ -21,10 +21,16 @@ cmake_minimum_required(VERSION 3.10.2)
 # override options in third_party dependencies. We can also add the HOMEPAGE_URL
 # entry to the project `HOMEPAGE_URL "https://dawn.googlesource.com/dawn"`
 
+set(ENABLED_LANGUAGES C CXX)
+if(APPLE)
+  # Enable Objective-C++ on Apple so that we can compile sources that use the Metal API.
+  set(ENABLED_LANGUAGES ${ENABLED_LANGUAGES} OBJCXX)
+endif()
+
 project(
     Dawn
     DESCRIPTION "Dawn, a WebGPU implementation"
-    LANGUAGES C CXX
+    LANGUAGES ${ENABLED_LANGUAGES}
 )
 enable_testing()
 
@@ -33,6 +39,7 @@ set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${PROJECT_BINARY_DIR})
 set(CMAKE_POSITION_INDEPENDENT_CODE ON)
 set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_OBJCXX_STANDARD 17)
 set(CMAKE_DEBUG_POSTFIX "")
 
 if ("${CMAKE_BUILD_TYPE}" STREQUAL "")
