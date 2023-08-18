@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25bc39dc_a91c40f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-18T18:47:20Z",
+      "side": 1,
+      "message": "This supercedes https://dawn-review.googlesource.com/c/dawn/+/147720",
+      "revId": "66c867f41f2ce2916483e2f5a6d0364aee21aedd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
