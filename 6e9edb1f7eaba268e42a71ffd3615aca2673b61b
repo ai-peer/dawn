@@ -205,6 +205,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "803e7e84_73483dd8",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-18T16:57:10Z",
+      "side": 1,
+      "message": "Why not just multiply by sizeof(uint32_t) on the Dawn side? I don\u0027t think you need another hashmap. Am I missing something?",
+      "parentUuid": "749d77ba_831e1b3b",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61aef35c_dbef0c2a",
