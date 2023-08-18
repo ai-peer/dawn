@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c8fc647_475462e3",
+        "filename": "tools/src/cnf/decompose.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-18T18:28:51Z",
+      "side": 1,
+      "message": "Nit: s/Ands/Ors/",
+      "revId": "ac814fb4c1f47f0db20bb417642336f5088d1164",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
