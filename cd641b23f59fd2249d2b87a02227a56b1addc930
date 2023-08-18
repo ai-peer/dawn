@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dac8e5c_7a2a4d87",
+        "filename": "LICENSE",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-18T15:36:51Z",
+      "side": 1,
+      "message": "Would it work to remove these files using the Copybara import script and then switch to using some other Khronos headers / gl.xml in g3?\n\nBut otherwise this works.",
+      "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
