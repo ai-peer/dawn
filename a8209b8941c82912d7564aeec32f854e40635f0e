@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "368b2f32_e7c2b576",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-18T10:46:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "52173dc9_7aec7e07",
+      "revId": "a8209b8941c82912d7564aeec32f854e40635f0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d606cbd1_5a6bb29d",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-17T18:50:50Z",
       "side": 1,
       "message": "I think we should only do this if we know we\u0027re running on ANGLE. otherwise it could be something else (like the vendor id inside the string instead of the device id)",
+      "revId": "a8209b8941c82912d7564aeec32f854e40635f0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3428d6_9990470a",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-18T10:46:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d606cbd1_5a6bb29d",
       "revId": "a8209b8941c82912d7564aeec32f854e40635f0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
