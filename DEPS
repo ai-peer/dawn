@@ -181,10 +181,19 @@ deps = {
   'third_party/dxc': {
     'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@1d6b5627ac46a8b433f21fae50b9192689336c15',
   },
+
   'third_party/dxheaders': {
     # The non-Windows build of DXC depends on DirectX-Headers, and at a specific commit (not ToT)
     'url': '{chromium_git}/external/github.com/microsoft/DirectX-Headers@980971e835876dc0cde415e8f9bc646e64667bf7',
     'condition': 'host_os != "win"',
+  },
+
+  'third_party/khronos/OpenGL-Registry': {
+    'url': '{chromium_git}/external/github.com/KhronosGroup/OpenGL-Registry@5bae8738b23d06968e7c3a41308568120943ae77',
+  },
+
+  'third_party/khronos/EGL-Registry': {
+    'url': '{chromium_git}/external/github.com/KhronosGroup/EGL-Registry@7dea2ed79187cd13f76183c4b9100159b9e3e071',
   },
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
