@@ -16,6 +16,23 @@
       "message": "thank you all for the patience on this massive cl!",
       "revId": "0480801a0dde939d75e518a627471c1ca7a5a042",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20064c7c_c92c8944",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-18T08:24:53Z",
+      "side": 1,
+      "message": "LGTM, thanks a TON for the iterations!",
+      "revId": "0480801a0dde939d75e518a627471c1ca7a5a042",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
