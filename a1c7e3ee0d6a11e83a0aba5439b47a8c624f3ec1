@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "522a243a_8f8da2a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-18T02:32:49Z",
+      "side": 1,
+      "message": "\u003e Also is this supported in OpenGL ES or do we need to validate depthSlice !\u003d 0 in compat?\n\nThe glFramebufferTextureLayer could render to a single layer of 3d texture from OpenGLES 3.0.\n\n\u003e IMO, probably easiest to restore [2] and only loosen validation behind AllowUnsafeAPIs\nSure. What I thought was to allow 3d render attachment creation bebind AllowUnsafeAPIs.",
+      "parentUuid": "2f36b91a_87a98ae8",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37340ae9_60c21885",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "@kainino@chromium.org i filed https://github.com/webgpu-native/webgpu-headers/issues/215",
       "parentUuid": "37340ae9_60c21885",
+      "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4873c32_4c79d42f",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 2339,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-08-18T02:32:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "263a89be_01013fba",
       "revId": "a1c7e3ee0d6a11e83a0aba5439b47a8c624f3ec1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
