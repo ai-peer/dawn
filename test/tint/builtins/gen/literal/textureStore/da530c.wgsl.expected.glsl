@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(rgba8i) uniform highp writeonly iimage2D arg_0;
+layout(rgba8i) uniform highp iimage2D arg_0;
 void textureStore_da530c() {
   imageStore(arg_0, ivec2(uvec2(1u)), ivec4(1));
 }
@@ -21,7 +21,7 @@ void main() {
 #version 310 es
 precision highp float;
 
-layout(rgba8i) uniform highp writeonly iimage2D arg_0;
+layout(rgba8i) uniform highp iimage2D arg_0;
 void textureStore_da530c() {
   imageStore(arg_0, ivec2(uvec2(1u)), ivec4(1));
 }
@@ -36,7 +36,7 @@ void main() {
 }
 #version 310 es
 
-layout(rgba8i) uniform highp writeonly iimage2D arg_0;
+layout(rgba8i) uniform highp iimage2D arg_0;
 void textureStore_da530c() {
   imageStore(arg_0, ivec2(uvec2(1u)), ivec4(1));
 }
