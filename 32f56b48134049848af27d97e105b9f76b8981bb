@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94623cac_0b91998d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-18T18:35:42Z",
+      "side": 1,
+      "message": "LGTM, but if we have these files checked in should we have some test coverage on a bot?",
+      "revId": "32f56b48134049848af27d97e105b9f76b8981bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
