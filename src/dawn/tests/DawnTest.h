@@ -770,6 +770,15 @@ using DawnTest = DawnTestWithParams<>;
         DawnTestBase::PrintToStringParamName(#testName));                                      \
     GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(testName)
 
+// Basically same as DAWN_INSTANTIATE_TEST_P, except that each backend is provided in the
+// 'backends' param list.
+#define DAWN_INSTANTIATE_TEST_B(testName, backends, ...)                                     \
+    INSTANTIATE_TEST_SUITE_P(                                                                \
+        , testName,                                                                          \
+        ::testing::ValuesIn(MakeParamGenerator<testName::ParamType>(backends, __VA_ARGS__)), \
+        DawnTestBase::PrintToStringParamName(#testName));                                    \
+    GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(testName)
+
 // Implementation for DAWN_TEST_PARAM_STRUCT to declare/print struct fields.
 #define DAWN_TEST_PARAM_STRUCT_DECL_STRUCT_FIELD(Type) Type DAWN_PP_CONCATENATE(m, Type);
 #define DAWN_TEST_PARAM_STRUCT_PRINT_STRUCT_FIELD(Type) \
