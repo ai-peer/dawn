@@ -544,6 +544,8 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
     const UnsupportedReason multiPlanarFormatUnsupportedReason = device->HasFeature(Feature::DawnMultiPlanarFormats) ?  Format::supported : RequiresFeature{wgpu::FeatureName::DawnMultiPlanarFormats};
     AddMultiAspectFormat(wgpu::TextureFormat::R8BG8Biplanar420Unorm, Aspect::Plane0 | Aspect::Plane1,
         wgpu::TextureFormat::R8Unorm, wgpu::TextureFormat::RG8Unorm, Cap::None, multiPlanarFormatUnsupportedReason, ComponentCount(3));
+    AddMultiAspectFormat(wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm, Aspect::Plane0 | Aspect::Plane1,
+        wgpu::TextureFormat::R16Unorm, wgpu::TextureFormat::RG16Unorm, Cap::None, multiPlanarFormatUnsupportedReason, ComponentCount(3));
 
     // clang-format on
 
