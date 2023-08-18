@@ -52,6 +52,24 @@
       "parentUuid": "66567ed9_837a5813",
       "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e548694f_e1e4eeed",
+        "filename": "LICENSE",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-18T16:05:29Z",
+      "side": 1,
+      "message": "Yes, that could work. I think we would first need to create a mirror of that repo on chromium.googlesource.com to be able to add a dep to it, right? If so, I can move ahead with making that happen.",
+      "parentUuid": "dd2a99f2_3ff1892e",
+      "revId": "cd641b23f59fd2249d2b87a02227a56b1addc930",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
