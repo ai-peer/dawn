@@ -125,6 +125,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6b0c4937_251766b3",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1817,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-18T01:14:56Z",
+      "side": 1,
+      "message": "Do note in that issue, r/rg have slightly better support than rgba. snorm and unorm have the same support but rgba is a slightly higher tier. I\u0027m not sure if we will end up splitting this at all for a standardized extension. Maybe as part of the tiered texture capabilities? Or maybe as part of a finer grained texture capabilities thing... TBD.",
+      "parentUuid": "2c15112b_2d52c2da",
+      "range": {
+        "startLine": 1817,
+        "startChar": 37,
+        "endLine": 1817,
+        "endChar": 44
+      },
+      "revId": "ef715c7f6dc54e0fd8c4fa7bd004fc914ec2b550",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ff19c57f_65d23008",
         "filename": "src/dawn/native/Format.cpp",
         "patchSetId": 3
