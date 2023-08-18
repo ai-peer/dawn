@@ -223,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8513201e_b3d96d2d",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-18T17:03:38Z",
+      "side": 1,
+      "message": "For now we only have uint32 for the data. But in future we could have other internal uniform member sharing this ubo (e.g. push constant). So I think to keep the interface all use offset is better.",
+      "parentUuid": "803e7e84_73483dd8",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61aef35c_dbef0c2a",
