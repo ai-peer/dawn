@@ -314,7 +314,7 @@ class SwapChain final : public SwapChainBase {
     void DetachFromSurfaceImpl() override;
 };
 
-class Texture : public TextureBase {
+class Texture final : public TextureBase {
   public:
     Texture(DeviceBase* device, const TextureDescriptor* descriptor);
 };

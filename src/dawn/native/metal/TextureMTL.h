@@ -53,8 +53,6 @@ class Texture final : public TextureBase {
                                        const TextureDescriptor* descriptor,
                                        NSPRef<id<MTLTexture>> wrapped);
 
-    Texture(DeviceBase* device, const TextureDescriptor* descriptor);
-
     id<MTLTexture> GetMTLTexture() const;
     IOSurfaceRef GetIOSurface();
     NSPRef<id<MTLTexture>> CreateFormatView(wgpu::TextureFormat format);
@@ -69,8 +67,7 @@ class Texture final : public TextureBase {
     void IOSurfaceEndAccess(ExternalImageIOSurfaceEndAccessDescriptor* descriptor);
 
   private:
-    using TextureBase::TextureBase;
-    ~Texture() override;
+    Texture(DeviceBase* device, const TextureDescriptor* descriptor);
 
     NSRef<MTLTextureDescriptor> CreateMetalTextureDescriptor() const;
 

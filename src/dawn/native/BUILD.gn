@@ -247,6 +247,7 @@ source_set("sources") {
     "ComputePassEncoder.h",
     "ComputePipeline.cpp",
     "ComputePipeline.h",
+    "ConstContent.h",
     "CopyTextureForBrowserHelper.cpp",
     "CopyTextureForBrowserHelper.h",
     "CreatePipelineAsyncTask.cpp",

@@ -20,6 +20,7 @@
 #include "dawn/common/WeakRef.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
+#include "dawn/native/ConstContent.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/Forward.h"
@@ -59,6 +60,59 @@ static constexpr wgpu::TextureUsage kReadOnlyTextureUsages =
 static constexpr wgpu::TextureUsage kResolveTextureLoadAndStoreUsages =
     kResolveAttachmentLoadingUsage | wgpu::TextureUsage::RenderAttachment;
 
+namespace detail {
+
+struct TextureBaseContents {
+    wgpu::TextureDimension mDimension;
+    const Format& mFormat;
+    FormatSet mViewFormats;
+    Extent3D mSize;
+    uint32_t mMipLevelCount;
+    uint32_t mSampleCount;
+    wgpu::TextureUsage mUsage = wgpu::TextureUsage::None;
+    wgpu::TextureUsage mInternalUsage = wgpu::TextureUsage::None;
+    wgpu::TextureFormat mFormatEnumForReflection;
+
+    TextureBaseContents(DeviceBase* device,
+                        const TextureDescriptor* descriptor,
+                        ObjectBase::ErrorTag tag);
+    TextureBaseContents(DeviceBase* device, const TextureDescriptor* descriptor);
+
+    void AddInternalUsage(wgpu::TextureUsage usage);
+
+#define TEXTURE_BASE_CONTENT_FUNCS(X)                                                              \
+    X(wgpu::TextureDimension, GetDimension, ())                                                    \
+    X(const Format&, GetFormat, ())                                                                \
+    X(const FormatSet&, GetViewFormats, ())                                                        \
+    X(const Extent3D&, GetSize, ())                                                                \
+    X(uint32_t, GetWidth, ())                                                                      \
+    X(uint32_t, GetHeight, ())                                                                     \
+    X(uint32_t, GetDepth, ())                                                                      \
+    X(uint32_t, GetArrayLayers, ())                                                                \
+    X(uint32_t, GetNumMipLevels, ())                                                               \
+    X(SubresourceRange, GetAllSubresources, ())                                                    \
+    X(uint32_t, GetSampleCount, ())                                                                \
+    X(bool, IsMultisampledTexture, ())                                                             \
+    /* Returns the usage the texture was created with via the API.                              */ \
+    X(wgpu::TextureUsage, GetUsage, ())                                                            \
+    /* Returns union of base and extension usages.                                              */ \
+    X(wgpu::TextureUsage, GetInternalUsage, ())                                                    \
+    /* For a texture with non-block-compressed texture format, its physical size is always      */ \
+    /* equal to its virtual size. For a texture with block compressed texture format, the       */ \
+    /* physical size is the one with paddings if necessary, which is always a multiple of the   */ \
+    /* block size and used in texture copying. The virtual size is the one without paddings,    */ \
+    /* which is not required to be a multiple of the block size and used in texture sampling.   */ \
+    X(Extent3D, GetMipLevelSingleSubresourcePhysicalSize, (uint32_t level))                        \
+    X(Extent3D, GetMipLevelSingleSubresourceVirtualSize, (uint32_t level))                         \
+    /* For 2d-array textures, this keeps the array layers in contrast to                        */ \
+    /* GetMipLevelSingleSubresourceVirtualSize.                                                 */ \
+    X(Extent3D, GetMipLevelSubresourceVirtualSize, (uint32_t level))
+
+    DAWN_CONTENT_FUNC_HEADERS(TEXTURE_BASE_CONTENT_FUNCS)
+};
+
+}  // namespace detail
+
 class TextureBase : public ApiObjectBase {
   public:
     enum class ClearValue { Zero, NonZero };
@@ -67,24 +121,11 @@ class TextureBase : public ApiObjectBase {
 
     ObjectType GetType() const override;
 
-    wgpu::TextureDimension GetDimension() const;
-    const Format& GetFormat() const;
-    const FormatSet& GetViewFormats() const;
-    const Extent3D& GetSize() const;
-    uint32_t GetWidth() const;
-    uint32_t GetHeight() const;
-    uint32_t GetDepth() const;
-    uint32_t GetArrayLayers() const;
-    uint32_t GetNumMipLevels() const;
-    SubresourceRange GetAllSubresources() const;
-    uint32_t GetSampleCount() const;
-    uint32_t GetSubresourceCount() const;
+    // Inline proxy functions that just call into the contents.
+    DAWN_CONTENT_PROXY_FUNCS(TEXTURE_BASE_CONTENT_FUNCS)
+#undef TEXTURE_BASE_CONTENT_FUNCS
 
-    // |GetUsage| returns the usage with which the texture was created using the base WebGPU
-    // API. The dawn-internal-usages extension may add additional usages. |GetInternalUsage|
-    // returns the union of base usage and the usages added by the extension.
-    wgpu::TextureUsage GetUsage() const;
-    wgpu::TextureUsage GetInternalUsage() const;
+    uint32_t GetSubresourceCount() const;
 
     bool IsDestroyed() const;
     void SetHasAccess(bool hasAccess);
@@ -94,24 +135,12 @@ class TextureBase : public ApiObjectBase {
 
     MaybeError ValidateCanUseInSubmitNow() const;
 
-    bool IsMultisampledTexture() const;
-
     // Returns true if the size covers the whole subresource.
     bool CoverFullSubresource(uint32_t mipLevel, const Extent3D& size) const;
 
-    // For a texture with non-block-compressed texture format, its physical size is always equal
-    // to its virtual size. For a texture with block compressed texture format, the physical
-    // size is the one with paddings if necessary, which is always a multiple of the block size
-    // and used in texture copying. The virtual size is the one without paddings, which is not
-    // required to be a multiple of the block size and used in texture sampling.
-    Extent3D GetMipLevelSingleSubresourcePhysicalSize(uint32_t level) const;
-    Extent3D GetMipLevelSingleSubresourceVirtualSize(uint32_t level) const;
     Extent3D ClampToMipLevelVirtualSize(uint32_t level,
                                         const Origin3D& origin,
                                         const Extent3D& extent) const;
-    // For 2d-array textures, this keeps the array layers in contrast to
-    // GetMipLevelSingleSubresourceVirtualSize.
-    Extent3D GetMipLevelSubresourceVirtualSize(uint32_t level) const;
 
     ResultOrError<Ref<TextureViewBase>> CreateView(
         const TextureViewDescriptor* descriptor = nullptr);
@@ -135,10 +164,12 @@ class TextureBase : public ApiObjectBase {
 
   protected:
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor);
+    TextureBase(DeviceBase* device,
+                const TextureDescriptor* descriptor,
+                const detail::TextureBaseContents contents);
     ~TextureBase() override;
 
     void DestroyImpl() override;
-    void AddInternalUsage(wgpu::TextureUsage usage);
 
     // The shared texture memory the texture was created from. May be null.
     WeakRef<SharedTextureMemoryBase> mSharedTextureMemory;
@@ -155,16 +186,9 @@ class TextureBase : public ApiObjectBase {
 
     TextureBase(DeviceBase* device, const TextureDescriptor* descriptor, ObjectBase::ErrorTag tag);
 
-    wgpu::TextureDimension mDimension;
-    const Format& mFormat;
-    FormatSet mViewFormats;
-    Extent3D mSize;
-    uint32_t mMipLevelCount;
-    uint32_t mSampleCount;
-    wgpu::TextureUsage mUsage = wgpu::TextureUsage::None;
-    wgpu::TextureUsage mInternalUsage = wgpu::TextureUsage::None;
+    const detail::TextureBaseContents mContents;
+
     TextureState mState;
-    wgpu::TextureFormat mFormatEnumForReflection;
 
     // Textures track texture views created from them so that they can be destroyed when the texture
     // is destroyed.

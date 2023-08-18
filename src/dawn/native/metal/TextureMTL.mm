@@ -843,6 +843,8 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
     return {};
 }
 
+Texture::Texture(DeviceBase* dev, const TextureDescriptor* desc) : TextureBase(dev, desc) {}
+
 void Texture::SynchronizeTextureBeforeUse(CommandRecordingContext* commandContext) {
     if (@available(macOS 10.14, iOS 12.0, *)) {
         SharedTextureMemoryBase::PendingFenceList fences;
@@ -879,10 +881,6 @@ void Texture::IOSurfaceEndAccess(ExternalImageIOSurfaceEndAccessDescriptor* desc
     // Destroy the texture as it should not longer be used after EndAccess.
     Destroy();
 }
-
-Texture::Texture(DeviceBase* dev, const TextureDescriptor* desc) : TextureBase(dev, desc) {}
-
-Texture::~Texture() {}
 
 void Texture::DestroyImpl() {
     TextureBase::DestroyImpl();
