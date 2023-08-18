@@ -33,6 +33,46 @@
       "message": "LGTM, thanks a TON for the iterations!",
       "revId": "0480801a0dde939d75e518a627471c1ca7a5a042",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c2dd8fe_91de11fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-18T23:11:59Z",
+      "side": 1,
+      "message": "Thanks for the patience and the revisions! Last nit, otherwise it LGTM!",
+      "revId": "0480801a0dde939d75e518a627471c1ca7a5a042",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b82b8ea9_892a2465",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-18T23:11:59Z",
+      "side": 1,
+      "message": "In the following device destroy/loss tests, we don\u0027t bother testing all the different memories, do we actually need it for this test either? If not, I was thinking that you could roll this one into the one below also. (Just add a texture argument to the lambda.)",
+      "range": {
+        "startLine": 1033,
+        "startChar": 4,
+        "endLine": 1035,
+        "endChar": 97
+      },
+      "revId": "0480801a0dde939d75e518a627471c1ca7a5a042",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
