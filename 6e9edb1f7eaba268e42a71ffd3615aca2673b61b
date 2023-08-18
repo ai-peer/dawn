@@ -277,6 +277,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58d3cd31_b43a340b",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-18T22:23:29Z",
+      "side": 1,
+      "message": "OK, that makes sense. I leave it up to your judgement. Still LGTM.",
+      "parentUuid": "e5c0f111_8971edd9",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61aef35c_dbef0c2a",
