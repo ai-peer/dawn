@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0666e26_b408b3f8",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-18T14:49:57Z",
+      "side": 1,
+      "message": "See line 442 for example.",
+      "parentUuid": "af41beb5_5809992f",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 459,
+        "endChar": 31
+      },
+      "revId": "9a87e35bc2d7523e11722f932e5eed3b8ec45345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "69abdfbe_72819808",
