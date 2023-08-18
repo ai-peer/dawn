@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(rgba16ui) uniform highp writeonly uimage2DArray arg_0;
+layout(rgba16ui) uniform highp uimage2DArray arg_0;
 void textureStore_c1f760() {
   uvec2 arg_1 = uvec2(1u);
   uint arg_2 = 1u;
@@ -24,7 +24,7 @@ void main() {
 #version 310 es
 precision highp float;
 
-layout(rgba16ui) uniform highp writeonly uimage2DArray arg_0;
+layout(rgba16ui) uniform highp uimage2DArray arg_0;
 void textureStore_c1f760() {
   uvec2 arg_1 = uvec2(1u);
   uint arg_2 = 1u;
@@ -42,7 +42,7 @@ void main() {
 }
 #version 310 es
 
-layout(rgba16ui) uniform highp writeonly uimage2DArray arg_0;
+layout(rgba16ui) uniform highp uimage2DArray arg_0;
 void textureStore_c1f760() {
   uvec2 arg_1 = uvec2(1u);
   uint arg_2 = 1u;
