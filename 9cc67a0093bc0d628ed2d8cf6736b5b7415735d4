@@ -1,0 +1,170 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6dc759d0_3be3fea5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "LGTM templates are slightly more clunky than I hoped but I don\u0027t have better ideas",
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c111e4d_18edc129",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "nit: ASSERT non-null",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 13
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5326022a_64a19d68",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "I think it\u0027s ok if you do no braces\n\n```suggestion\nstruct AdditionalExtensionUnpacker;\n```",
+      "range": {
+        "startLine": 90,
+        "startChar": 34,
+        "endLine": 90,
+        "endChar": 38
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2362ec72_8c6615d4",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "why the set versus the previous approach of checking if the tuple member was already assigned?",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 49
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85ddbf35_928f431e",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "nit: maybe hoist this out into a separate name so that it\u0027s easier to read that you\u0027re doing: `Unpacker\u003cType, Chain, Additional\u003e::Unpack`.",
+      "range": {
+        "startLine": 128,
+        "startChar": 26,
+        "endLine": 128,
+        "endChar": 87
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c78b62b6_4e8c5764",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "I think the braces aren\u0027t needed\n\n```suggestion\n    struct AdditionalExtensionsList;\n```",
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ab15596_a6a82df1",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b81dec5_f5b4bd14",
+        "filename": "src/dawn/tests/unittests/ChainUtilsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T23:18:53Z",
+      "side": 1,
+      "message": "nit: comment doesn\u0027t match the test",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 52
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
