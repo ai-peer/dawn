@@ -34,6 +34,24 @@
       "parentUuid": "94623cac_0b91998d",
       "revId": "32f56b48134049848af27d97e105b9f76b8981bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e4ebba0_c02fd4bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-18T20:17:30Z",
+      "side": 1,
+      "message": "turns out there\u0027s some examples out there of putting bazel builds in the build recipe\n\nhttps://source.chromium.org/chromium/chromium/tools/build/+/main:recipes/recipes/v8/bazel.py;l\u003d47?q\u003dbazel%20f:recipes\n\nsubjectively, so long as we actually have a way to do the builds on CI/CQ, then I think it will be not that hard to maintain\n\nthey use a prebuilt though, and it has \"v8\" in the name.\nhttps://source.chromium.org/chromium/chromium/src/+/main:v8/DEPS;l\u003d373?q\u003ddownload_prebuilt_bazel\n\nthere\u0027s a CIPD package that Chromium uses https://chrome-infra-packages.appspot.com/p/infra/3pp/tools/bazel_bootstrap which is used by tools/rust/build_crubit.py though it says Crubit itself is experimental. Hopefully we can still use the infra package though.",
+      "parentUuid": "b52347eb_4bcdfd2b",
+      "revId": "32f56b48134049848af27d97e105b9f76b8981bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
