@@ -259,6 +259,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5c0f111_8971edd9",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-18T19:32:03Z",
+      "side": 1,
+      "message": "Not really? The future case could be in another transform (e.g. PushConstantsFromUniform). So within this TextureBuiltinsFromUniform transform, it can always assume data this transform adds are uint32_t.\n\nBut adding another hashmap along side with `Result::BindingPointToFieldAndOffset bindpoint_to_data;` to track index, is sort of a tradeoff of (a little) memory/singleness to readability. I don\u0027t have a strong opinion against this. Let me add it anyway.\n\nWhat I really don\u0027t want to change is the interface passing result to dawn. That would be a lot of change.",
+      "parentUuid": "3e075d7a_18a5c282",
+      "revId": "6e9edb1f7eaba268e42a71ffd3615aca2673b61b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61aef35c_dbef0c2a",
