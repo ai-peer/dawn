@@ -165,6 +165,7 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescri
                                                    outDescriptor->compute.constantCount,
                                                    outDescriptor->compute.constants,
                                                }}));
+
         outDescriptor->layout = layoutRef.Get();
     }
 
