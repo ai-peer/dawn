@@ -3408,7 +3408,8 @@
             {"value": 99, "name": "RG16 snorm", "tags": ["dawn"]},
             {"value": 100, "name": "RGBA16 snorm", "tags": ["dawn"]},
 
-            {"value": 101, "name": "R8 BG8 Biplanar 420 unorm", "tags": ["dawn"]}
+            {"value": 101, "name": "R8 BG8 Biplanar 420 unorm", "tags": ["dawn"]},
+            {"value": 102, "name": "R10X6 BG10X6 Biplanar 420 unorm", "tags": ["dawn"]}
         ]
     },
     "texture usage": {
