@@ -16,6 +16,46 @@
       "message": "PTAL! If you have suggestions for functional changes in this or similar CLs, please comment them in and I\u0027ll do them as follow-ups.",
       "revId": "db5e5fb1cdb8566fbddaf01cd46b925cafc3a5b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "777e75d6_41fc0463",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-19T00:31:38Z",
+      "side": 1,
+      "message": "LGTM one question",
+      "revId": "db5e5fb1cdb8566fbddaf01cd46b925cafc3a5b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "468dce31_e6e93a02",
+        "filename": "src/dawn/native/metal/DeviceMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 343,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-19T00:31:38Z",
+      "side": 1,
+      "message": "do we need to clear mQueue to null to break the reference cycle?\n\nalternatively, only get the queue from the frontend? if the ref lives in two places, then we have to think harder about its lifetime",
+      "range": {
+        "startLine": 343,
+        "startChar": 0,
+        "endLine": 343,
+        "endChar": 22
+      },
+      "revId": "db5e5fb1cdb8566fbddaf01cd46b925cafc3a5b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
