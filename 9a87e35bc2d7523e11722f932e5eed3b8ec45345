@@ -108,6 +108,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f87defee_12d8d7de",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-19T09:34:01Z",
+      "side": 1,
+      "message": "Good point, thanks!",
+      "parentUuid": "f0666e26_b408b3f8",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 459,
+        "endChar": 31
+      },
+      "revId": "9a87e35bc2d7523e11722f932e5eed3b8ec45345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "69abdfbe_72819808",
         "filename": "src/dawn/native/opengl/GLFormat.cpp",
         "patchSetId": 6
