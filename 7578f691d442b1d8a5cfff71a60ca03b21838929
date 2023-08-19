@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "7578f691d442b1d8a5cfff71a60ca03b21838929",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a076a8_87f9cae2",
+        "filename": "src/dawn/native/opengl/DeviceGL.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-19T00:45:00Z",
+      "side": 1,
+      "message": "same thing about this leaking\n\nI think that\u0027s why the tests fail\n\n..\\..\\src\\dawn\\tests\\DawnTest.cpp(1097): ERROR: this mock object (used in test GpuMemorySyncTests.RenderPassToComputePass/OpenGLES_ANGLE_Google_Vulkan_1_3_0_SwiftShader_Device_Subzero_0x0000C0DE_SwiftShader_driver_5_0_0__compat) should be deleted but never is. Its address is @000002CA9498B310.\n ERROR: 1 leaked mock object found at program exit. Expectations on a mock object are verified when the object is destructed. Leaking a mock means that its expectations aren\u0027t verified, which is usually a test bug. If you really intend to leak a mock, you can suppress this error using testing::Mock::AllowLeak(mock_object), or you may use a fake or stub instead of a mock.\n ERR: GlobalMutex.cpp:42 (lock): \t! Assert failed in lock (..\\..\\third_party\\angle\\src\\libANGLE\\GlobalMutex.cpp:42): getOwnerThreadId() !\u003d threadId\n FATAL: GlobalMutex.cpp:42 (lock): \t! Assert failed in lock (..\\..\\third_party\\angle\\src\\libANGLE\\GlobalMutex.cpp:42): getOwnerThreadId() !\u003d threadId",
+      "range": {
+        "startLine": 131,
+        "startChar": 0,
+        "endLine": 131,
+        "endChar": 22
+      },
+      "revId": "7578f691d442b1d8a5cfff71a60ca03b21838929",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
