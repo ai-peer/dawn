@@ -73,6 +73,30 @@
       },
       "revId": "0480801a0dde939d75e518a627471c1ca7a5a042",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "884430e7_20dd92a8",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 34
+      },
+      "lineNbr": 1035,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-19T00:18:18Z",
+      "side": 1,
+      "message": "hmmm in that one we can\u0027t do it easily because well, the device is lost. Ideally I\u0027d like to test all of them there as well but may need to change the harness in the future to support it.\n\nI think it\u0027s worth testing all the memories because there could be interesting interactions that happen; like extra allocations created for different types - and it\u0027s good to make sure those all work",
+      "parentUuid": "b82b8ea9_892a2465",
+      "range": {
+        "startLine": 1033,
+        "startChar": 4,
+        "endLine": 1035,
+        "endChar": 97
+      },
+      "revId": "0480801a0dde939d75e518a627471c1ca7a5a042",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
