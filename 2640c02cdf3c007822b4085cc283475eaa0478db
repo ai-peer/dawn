@@ -16,6 +16,52 @@
       "message": "PTAL!",
       "revId": "2640c02cdf3c007822b4085cc283475eaa0478db",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bf4921e_79209810",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 725,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-19T00:43:37Z",
+      "side": 1,
+      "message": "same question as in metal about clearing this ref, or always getting it from the frontend instead",
+      "range": {
+        "startLine": 725,
+        "startChar": 0,
+        "endLine": 725,
+        "endChar": 22
+      },
+      "revId": "2640c02cdf3c007822b4085cc283475eaa0478db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64bc742d_ab4f4085",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-19T00:43:37Z",
+      "side": 1,
+      "message": "?\n\nare you asking yourself if you should move the call to vkGetDeviceQueue here since we know the family already? \n\nI think you should even though it never really fails",
+      "range": {
+        "startLine": 93,
+        "startChar": 7,
+        "endLine": 93,
+        "endChar": 12
+      },
+      "revId": "2640c02cdf3c007822b4085cc283475eaa0478db",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
