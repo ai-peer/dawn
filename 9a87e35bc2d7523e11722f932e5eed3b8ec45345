@@ -132,6 +132,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2c835c56_7cd4004d",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-19T11:41:16Z",
+      "side": 1,
+      "message": "Unfortunately this broke the case [MultisampledRenderPassDescriptorValidationTest.ResolveTargetFormat](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp;drc\u003d44fc9da6f3a178b50feb434f2725083f10748659;l\u003d933).\n\nIt seems if we use this changeable format caps, the test utils like [utils::TextureFormatSupportsResolveTarget](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/utils/TextureUtils.cpp;drc\u003d48290eaa6a80203b317bff0b5e6cf91005602c41;l\u003d176) should be aware of the availability of the feature as well. However the formats are hard-coded in the test utils now. Could you please propose how to proceed?",
+      "parentUuid": "f87defee_12d8d7de",
+      "range": {
+        "startLine": 459,
+        "startChar": 8,
+        "endLine": 459,
+        "endChar": 31
+      },
+      "revId": "9a87e35bc2d7523e11722f932e5eed3b8ec45345",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "69abdfbe_72819808",
         "filename": "src/dawn/native/opengl/GLFormat.cpp",
         "patchSetId": 6
