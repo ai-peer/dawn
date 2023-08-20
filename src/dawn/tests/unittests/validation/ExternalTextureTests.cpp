@@ -331,6 +331,23 @@ TEST_F(ExternalTextureTest, CreateMultiplanarExternalTextureValidation) {
 
         ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
     }
+
+    // Creating a multiplanar external texture with an unfilterable format for planes should
+    // result in an error.
+    {
+        wgpu::TextureDescriptor plane0TextureDescriptor =
+            CreateTextureDescriptor(wgpu::TextureFormat::R32Float);
+        wgpu::TextureDescriptor plane1TextureDescriptor =
+            CreateTextureDescriptor(wgpu::TextureFormat::RG32Float);
+        wgpu::Texture texture0 = device.CreateTexture(&plane0TextureDescriptor);
+        wgpu::Texture texture1 = device.CreateTexture(&plane1TextureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture0.CreateView();
+        externalDesc.plane1 = texture1.CreateView();
+
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
+    }
 }
 
 // Test that refresh on an expired/active external texture.
@@ -640,6 +657,78 @@ TEST_F(ExternalTextureTest, SubmitExternalTextureWithDestroyedPlane) {
 
         wgpu::CommandBuffer commands = encoder.Finish();
         ASSERT_DEVICE_ERROR(queue.Submit(1, &commands));
+    }
+}
+
+class ExternalTextureNorm16Test : public ExternalTextureTest {
+  protected:
+    void SetUp() override { ExternalTextureTest::SetUp(); }
+
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::Norm16TextureFormats};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+
+    static constexpr wgpu::TextureFormat kBiplanarPlane0FormatNorm16 =
+        wgpu::TextureFormat::R16Unorm;
+    static constexpr wgpu::TextureFormat kBiplanarPlane1FormatNorm16 =
+        wgpu::TextureFormat::RG16Unorm;
+};
+
+// Test that norm16 external texture creation works as expected in multiplane scenarios.
+TEST_F(ExternalTextureNorm16Test, CreateMultiplanarExternalTextureValidation) {
+    // Creating an external texture from two 2D, single-subresource textures with a biplanar
+    // format should succeed.
+    {
+        wgpu::TextureDescriptor plane0TextureDescriptor =
+            CreateTextureDescriptor(kBiplanarPlane0FormatNorm16);
+        wgpu::TextureDescriptor plane1TextureDescriptor =
+            CreateTextureDescriptor(kBiplanarPlane1FormatNorm16);
+        wgpu::Texture texture0 = device.CreateTexture(&plane0TextureDescriptor);
+        wgpu::Texture texture1 = device.CreateTexture(&plane1TextureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture0.CreateView();
+        externalDesc.plane1 = texture1.CreateView();
+
+        device.CreateExternalTexture(&externalDesc);
+    }
+
+    // Creating a multiplanar external texture with an unsupported format for plane0 should
+    // result in an error.
+    {
+        wgpu::TextureDescriptor plane0TextureDescriptor =
+            CreateTextureDescriptor(kDefaultTextureFormat);
+        wgpu::TextureDescriptor plane1TextureDescriptor =
+            CreateTextureDescriptor(kBiplanarPlane1FormatNorm16);
+        wgpu::Texture texture0 = device.CreateTexture(&plane0TextureDescriptor);
+        wgpu::Texture texture1 = device.CreateTexture(&plane1TextureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture0.CreateView();
+        externalDesc.plane1 = texture1.CreateView();
+
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
+    }
+
+    // Creating a multiplanar external texture with an unsupported format for plane1 should
+    // result in an error.
+    {
+        wgpu::TextureDescriptor plane0TextureDescriptor =
+            CreateTextureDescriptor(kBiplanarPlane0FormatNorm16);
+        wgpu::TextureDescriptor plane1TextureDescriptor =
+            CreateTextureDescriptor(kDefaultTextureFormat);
+        wgpu::Texture texture0 = device.CreateTexture(&plane0TextureDescriptor);
+        wgpu::Texture texture1 = device.CreateTexture(&plane1TextureDescriptor);
+
+        wgpu::ExternalTextureDescriptor externalDesc = CreateDefaultExternalTextureDescriptor();
+        externalDesc.plane0 = texture0.CreateView();
+        externalDesc.plane1 = texture1.CreateView();
+
+        ASSERT_DEVICE_ERROR(device.CreateExternalTexture(&externalDesc));
     }
 }
 
