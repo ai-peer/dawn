@@ -407,8 +407,8 @@ TEST_F(BindGroupValidationTest, ExternalTextureBindingType) {
 
     // Setting the external texture to an error external texture is an error.
     {
-        wgpu::Texture errorTexture = CreateTexture(wgpu::TextureUsage::TextureBinding,
-                                                   wgpu::TextureFormat::RGBA8UnormSrgb, 1);
+        wgpu::Texture errorTexture =
+            CreateTexture(wgpu::TextureUsage::TextureBinding, wgpu::TextureFormat::R8Unorm, 1);
         wgpu::ExternalTextureDescriptor errorExternalDesciptor =
             CreateDefaultExternalTextureDescriptor();
         errorExternalDesciptor.plane0 = errorTexture.CreateView();
