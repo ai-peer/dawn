@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b385910f_86c54865",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-20T15:03:39Z",
+      "side": 1,
+      "message": "Still LGTM",
+      "revId": "27ed16885c14fec2d045495549146c119048acb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e8e268e_9f004599",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-20T15:03:39Z",
+      "side": 1,
+      "message": "nit: just \"norm16Capabilities\"? \"is\" make it sound like it should be a boolean.",
+      "range": {
+        "startLine": 460,
+        "startChar": 13,
+        "endLine": 460,
+        "endChar": 33
+      },
+      "revId": "27ed16885c14fec2d045495549146c119048acb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92295c92_bcbf83aa",
+        "filename": "src/dawn/utils/TextureUtils.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-20T15:03:39Z",
+      "side": 1,
+      "message": "Can\u0027t we pass the device and as device.HasFeature(foo)?",
+      "revId": "27ed16885c14fec2d045495549146c119048acb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
