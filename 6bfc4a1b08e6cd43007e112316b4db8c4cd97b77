@@ -336,6 +336,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e306288b_a2eaf4e9",
+        "filename": "src/dawn/node/interop/WebGPU.cpp.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-08-20T17:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bca3da60_5e6dfb80",
+      "range": {
+        "startLine": 58,
+        "startChar": 7,
+        "endLine": 58,
+        "endChar": 14
+      },
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83b3ab29_3b6c4b2b",
@@ -367,6 +391,24 @@
       "side": 1,
       "message": "+1",
       "parentUuid": "83b3ab29_3b6c4b2b",
+      "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "924ba65a_691fddfb",
+        "filename": "src/dawn/node/interop/WebGPU.h.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003896
+      },
+      "writtenOn": "2023-08-20T17:28:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfdc5c62_166a62d2",
       "revId": "6bfc4a1b08e6cd43007e112316b4db8c4cd97b77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
