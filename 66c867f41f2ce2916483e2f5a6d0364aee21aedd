@@ -33,6 +33,57 @@
       "message": "nice, LGTM!\n\nI think you need to add the new deps in .gitignore or they will start showing up as dirty",
       "revId": "66c867f41f2ce2916483e2f5a6d0364aee21aedd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92423d61_5fea79a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-20T14:45:46Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "66c867f41f2ce2916483e2f5a6d0364aee21aedd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8a95a9d_a9a34e6f",
+        "filename": "PRESUBMIT.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-20T14:45:46Z",
+      "side": 1,
+      "message": "nit: extra whitespace.",
+      "revId": "66c867f41f2ce2916483e2f5a6d0364aee21aedd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b742b26_ea708e1b",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-20T14:45:46Z",
+      "side": 1,
+      "message": "LGTM but I think we should allow both of these new dependencies to have customizable paths in both the CMake and GN build. It should be possible to follow what is done for dependency like abseil, GLFW or spirv-tools.",
+      "revId": "66c867f41f2ce2916483e2f5a6d0364aee21aedd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
