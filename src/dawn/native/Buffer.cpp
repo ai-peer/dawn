@@ -22,12 +22,15 @@
 
 #include "dawn/common/Alloc.h"
 #include "dawn/common/Assert.h"
+#include "dawn/native/Adapter.h"
 #include "dawn/native/CallbackTaskManager.h"
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/ErrorData.h"
 #include "dawn/native/ObjectType_autogen.h"
+#include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/Queue.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -107,8 +110,33 @@ static uint32_t sZeroSizedMappingData = 0xCAFED00D;
 }  // anonymous namespace
 
 MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr");
+    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::BufferHostMappedPointer));
     DAWN_TRY(ValidateBufferUsage(descriptor->usage));
+
+    const BufferHostMappedPointer* hostMappedDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &hostMappedDesc);
+
+    if (hostMappedDesc != nullptr) {
+        // TODO(crbug.com/dawn/2018): Properly expose this limit.
+        uint32_t requiredAlignment = 4096;
+        if (device->GetAdapter()->GetPhysicalDevice()->GetBackendType() ==
+            wgpu::BackendType::D3D12) {
+            requiredAlignment = 65536;
+        }
+
+        DAWN_INVALID_IF(!device->HasFeature(Feature::HostMappedPointer), "%s requires %s.",
+                        hostMappedDesc->sType, ToAPI(Feature::HostMappedPointer));
+        DAWN_INVALID_IF(
+            (descriptor->usage & kMappableBufferUsages) == 0,
+            "Buffer usage (%s) created from host-mapped pointer requires mappable buffer usage.",
+            descriptor->usage);
+        DAWN_INVALID_IF(!IsAligned(descriptor->size, requiredAlignment),
+                        "Buffer size (%u) wrapping host-mapped memory was not aligned to %u.",
+                        descriptor->size, requiredAlignment);
+        DAWN_INVALID_IF(!IsPtrAligned(hostMappedDesc->pointer, requiredAlignment),
+                        "Host-mapped memory pointer (%p) was not aligned to %u.",
+                        hostMappedDesc->pointer, requiredAlignment);
+    }
 
     wgpu::BufferUsage usage = descriptor->usage;
 
