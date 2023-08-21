@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "be998e07_35bda88d",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-21T19:43:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d21a3edd_908136a8",
+      "range": {
+        "startLine": 421,
+        "startChar": 2,
+        "endLine": 422,
+        "endChar": 17
+      },
+      "revId": "f2da09c6952760a291136fce4f144c98d4230da7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "745d46ad_a5b02f27",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-21T17:42:11Z",
       "side": 1,
       "message": "`changeID, message, reviewer string`",
+      "range": {
+        "startLine": 315,
+        "startChar": 35,
+        "endLine": 315,
+        "endChar": 76
+      },
+      "revId": "f2da09c6952760a291136fce4f144c98d4230da7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ef0462e_66f4a090",
+        "filename": "tools/src/gerrit/gerrit.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-21T19:43:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "745d46ad_a5b02f27",
       "range": {
         "startLine": 315,
         "startChar": 35,
