@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71598211_b0c2025c",
+        "filename": "test/tint/builtins/gen/literal/textureLoad/01cd01.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-21T02:34:31Z",
+      "side": 1,
+      "message": "I don\u0027t know how to get rid of it.\n\nI manually remove this line and this test can pass but I cannot remove it with either  -generate-skip or  -generate-expected. Do you know how I can do it?",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 12
+      },
+      "revId": "2aacf6ec0a9b48e04e05c390c7f6196e0edb7dcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
