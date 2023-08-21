@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc4559c5_bf7b8ebb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-21T13:13:54Z",
+      "side": 1,
+      "message": "LGTM but please also update `node/README.md` for the change of flag.",
+      "revId": "b9607fbaaba5c3b7a496d8c1c8921cab36d96379",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
