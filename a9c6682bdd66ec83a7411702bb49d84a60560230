@@ -22,6 +22,30 @@
       },
       "revId": "a9c6682bdd66ec83a7411702bb49d84a60560230",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f0041a5_33b234a3",
+        "filename": "src/dawn/native/Features.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-21T18:40:36Z",
+      "side": 0,
+      "message": "it will still be searchable",
+      "parentUuid": "1ee59c7e_30ebe462",
+      "range": {
+        "startLine": 29,
+        "startChar": 11,
+        "endLine": 29,
+        "endChar": 19
+      },
+      "revId": "a9c6682bdd66ec83a7411702bb49d84a60560230",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
