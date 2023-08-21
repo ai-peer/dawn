@@ -105,6 +105,30 @@
       },
       "revId": "7964faee01e0a48b94fea789a4cd0d6ee67c16cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b05fc51_f661ceef",
+        "filename": "src/tint/utils/macros/compiler.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-21T17:42:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f95548d6_4f4a412e",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "7964faee01e0a48b94fea789a4cd0d6ee67c16cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
