@@ -94,6 +94,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7a795980_d08dd73a",
+        "filename": "src/tint/utils/diagnostic/BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002886
+      },
+      "writtenOn": "2023-08-21T13:57:49Z",
+      "side": 1,
+      "message": "If you are trying to join those three with an \"and\" logic, should this be match_all?",
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dfc6c866_bf9d23f9",
         "filename": "tools/src/cmd/gen/build/BUILD.bazel.tmpl",
         "patchSetId": 21
