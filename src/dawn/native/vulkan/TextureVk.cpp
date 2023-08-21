@@ -718,6 +718,22 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
         viewFormats.push_back(VK_FORMAT_R8G8B8A8_UNORM);
         requiresCreateMutableFormatBit = true;
     }
+    if (GetFormat().IsMultiPlanar() && !requiresCreateMutableFormatBit) {
+        // Multi-planar image needs to have VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT in order to be able
+        // to create per-plane view. See
+        // https://registry.khronos.org/vulkan/specs/1.3-extensions/man/html/VkImageCreateFlagBits.html
+        // TODO(crbug.com/dawn/1332): autogenerate format compat table.
+        switch (createInfo.format) {
+            case VK_FORMAT_G8_B8R8_2PLANE_420_UNORM:
+                viewFormats.push_back(VK_FORMAT_R8_UNORM);
+                viewFormats.push_back(VK_FORMAT_R8G8_UNORM);
+                break;
+            default:
+                UNREACHABLE();
+        }
+        requiresCreateMutableFormatBit = true;
+    }
+
     if (requiresCreateMutableFormatBit) {
         createInfo.flags |= VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT;
         if (device->GetDeviceInfo().HasExt(DeviceExt::ImageFormatList)) {
@@ -1271,15 +1287,17 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
     imageRange.levelCount = 1;
     imageRange.layerCount = 1;
 
-    if (GetFormat().isCompressed) {
+    if (GetFormat().isCompressed || GetFormat().IsMultiPlanar()) {
         if (range.aspects == Aspect::None) {
             return {};
         }
         // need to clear the texture with a copy from buffer
-        ASSERT(range.aspects == Aspect::Color);
+        ASSERT(range.aspects == Aspect::Color || range.aspects == Aspect::Plane0 ||
+               range.aspects == Aspect::Plane1);
         const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
 
         Extent3D largestMipSize = GetMipLevelSingleSubresourcePhysicalSize(range.baseMipLevel);
+        largestMipSize = GetFormat().GetAspectSize(range.aspects, largestMipSize);
 
         uint32_t bytesPerRow = Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
                                      device->GetOptimalBytesPerRowAlignment());
@@ -1296,6 +1314,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
         for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
              ++level) {
             Extent3D copySize = GetMipLevelSingleSubresourcePhysicalSize(level);
+            copySize = GetFormat().GetAspectSize(range.aspects, copySize);
             imageRange.baseMipLevel = level;
             for (uint32_t layer = range.baseArrayLayer;
                  layer < range.baseArrayLayer + range.layerCount; ++layer) {
