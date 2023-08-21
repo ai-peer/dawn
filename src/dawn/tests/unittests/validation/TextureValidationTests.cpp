@@ -1118,5 +1118,51 @@ TEST_F(TransientAttachmentValidationTest, FlagsBeyondRenderAttachment) {
     ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
 }
 
+class MultiPlanarTextureValidationTest : public TextureValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DawnMultiPlanarFormats};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Test that creating multi-planar texture by default should not be allowed.
+// Such texture is only allowed to be created by importing an external image.
+TEST_F(MultiPlanarTextureValidationTest, CreateTextureFails) {
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::R8BG8Biplanar420Unorm;
+    desc.size = {2, 2, 1};
+    desc.usage = wgpu::TextureUsage::TextureBinding;
+
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&desc), testing::HasSubstr("is not allowed"));
+}
+
+// Test that creating multi-planar texture should success if device is created with
+// "allow_multi_planar_texture_creation" toggle enabled.
+TEST_F(MultiPlanarTextureValidationTest, CreateTextureSucceedsWithAllowToggle) {
+    const char* allowMuliPlanarTextureCreation = "allow_multi_planar_texture_creation";
+
+    wgpu::DawnTogglesDescriptor togglesDesc;
+    togglesDesc.enabledToggleCount = 1;
+    togglesDesc.enabledToggles = &allowMuliPlanarTextureCreation;
+
+    wgpu::DeviceDescriptor deviceDesc;
+    deviceDesc.nextInChain = &togglesDesc;
+
+    auto device2 = adapter.CreateDevice(&deviceDesc);
+    ASSERT_NE(device2, nullptr);
+
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::R8BG8Biplanar420Unorm;
+    desc.size = {2, 2, 1};
+    desc.usage = wgpu::TextureUsage::TextureBinding;
+
+    auto texture = device2.CreateTexture(&desc);
+    EXPECT_NE(texture, nullptr);
+}
+
 }  // anonymous namespace
 }  // namespace dawn
