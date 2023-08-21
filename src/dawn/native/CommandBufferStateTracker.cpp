@@ -157,10 +157,8 @@ Return FindStorageBufferBindingAliasing(
             switch (bindingInfo.storageTexture.access) {
                 case wgpu::StorageTextureAccess::WriteOnly:
                 case wgpu::StorageTextureAccess::ReadWrite:
-                    break;
-
-                // TODO(dawn:1972): Implement ReadOnly storage texture
                 case wgpu::StorageTextureAccess::ReadOnly:
+                    break;
                 case wgpu::StorageTextureAccess::Undefined:
                 default:
                     UNREACHABLE();
