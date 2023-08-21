@@ -106,6 +106,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46bdf447_cd2dd83f",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-21T05:40:12Z",
+      "side": 1,
+      "message": "I think this part could be in a dedicated function `ValidateRenderPassPLS`?",
+      "range": {
+        "startLine": 589,
+        "startChar": 8,
+        "endLine": 623,
+        "endChar": 78
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d45e9ac_430ea6a0",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -145,6 +168,76 @@
         "startChar": 0,
         "endLine": 639,
         "endChar": 89
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de1188ab_dde4e9db",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-21T05:40:12Z",
+      "side": 1,
+      "message": "Also maybe we need to have a TODO here. Since Graphite might use MSAA render to single sampled and PLS extensively together.",
+      "parentUuid": "a58961df_b47388ab",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 89
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dda3827_d61277c1",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-21T05:40:12Z",
+      "side": 1,
+      "message": "Wondering why we don\u0027t support PLS on RGBA for now?",
+      "range": {
+        "startLine": 434,
+        "startChar": 44,
+        "endLine": 434,
+        "endChar": 54
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40ba60c9_87c99087",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-21T05:40:12Z",
+      "side": 1,
+      "message": "nit: This and the respective code in AttachmentState look identical. Perhaps we could move it to an utility function?",
+      "range": {
+        "startLine": 96,
+        "startChar": 7,
+        "endLine": 106,
+        "endChar": 5
       },
       "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
