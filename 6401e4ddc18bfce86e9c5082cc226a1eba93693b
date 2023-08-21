@@ -16,6 +16,24 @@
       "message": "If we add this, we should add an end2end test that such creation works.\nOn Metal, you cannot simply create a texture of format  wgpu::TextureFormat::R8BG8Biplanar420Unorm. You can emulate it by making an IOSurface with that format, then wrapping it. Not sure about other backends.\n\nPerhaps this ought to be a feature that we query support for.\n\nIf we can\u0027t support creation everywhere, an alternative could be to make two separate textures one for each plane - so long as we\u0027re able to copy/blit those planes into the real backing afterward (adding rendering + copy support is a separate issue).",
       "revId": "6401e4ddc18bfce86e9c5082cc226a1eba93693b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfb998a4_8de607ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-21T20:05:52Z",
+      "side": 1,
+      "message": "+1 that this should probably be a feature, not a toggle.",
+      "parentUuid": "007d6af7_3f324c3f",
+      "revId": "6401e4ddc18bfce86e9c5082cc226a1eba93693b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
