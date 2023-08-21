@@ -227,6 +227,11 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
      {"Support for importing and exporting MTLSharedEvent used for GPU synchronization.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/shared_fence.md",
       FeatureInfo::FeatureState::Experimental}},
+    {Feature::BufferHostMappedPointer,
+     {"Support creation of buffers from host-mapped pointers.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "buffer_host_mapped_pointer.md",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace

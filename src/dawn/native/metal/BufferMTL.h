@@ -28,6 +28,10 @@ class Device;
 
 class Buffer final : public BufferBase {
   public:
+    static ResultOrError<Ref<Buffer>> CreateFromVirtualMemory(
+        Device* device,
+        const BufferDescriptor* descriptor,
+        const BufferHostMappedPointer* regionDesc);
     static ResultOrError<Ref<Buffer>> Create(Device* device, const BufferDescriptor* descriptor);
 
     Buffer(DeviceBase* device, const BufferDescriptor* descriptor);
@@ -46,7 +50,6 @@ class Buffer final : public BufferBase {
 
   private:
     using BufferBase::BufferBase;
-    MaybeError Initialize(bool mappedAtCreation);
 
     ~Buffer() override;
 

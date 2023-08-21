@@ -554,6 +554,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
         }
 
         EnableFeature(Feature::Norm16TextureFormats);
+
+        EnableFeature(Feature::BufferHostMappedPointer);
     }
 
     void InitializeVendorArchitectureImpl() override {
