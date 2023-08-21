@@ -16,6 +16,97 @@
       "message": "PTAL.",
       "revId": "ff6d745e7998d634e2a497ab5b6d236aa771f1fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5246aa53_3fa8657a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-21T21:07:35Z",
+      "side": 1,
+      "message": "Looks good, with a few tweaks",
+      "revId": "ff6d745e7998d634e2a497ab5b6d236aa771f1fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7bdf76a_d0979333",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 913,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-21T21:07:35Z",
+      "side": 1,
+      "message": "I missed the capitalization used in the upstream header; I\u0027d like to have this be \"Premultiplied\" and \"Unpremultiplied\" because that\u0027s how the JS spec refers to them. I\u0027ll open a PR for that, so please change this now in Dawn assuming that will happen (even though it\u0027ll create a merge \"conflict\" in webgpu-headers)",
+      "revId": "ff6d745e7998d634e2a497ab5b6d236aa771f1fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "187411de_6d7c5bca",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1155,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-21T21:07:35Z",
+      "side": 1,
+      "message": "Please add the \"emscripten\" tag to this as well, as Emscripten still implements it for the moment.",
+      "revId": "ff6d745e7998d634e2a497ab5b6d236aa771f1fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "515fc25f_4bbfa478",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-21T21:07:35Z",
+      "side": 1,
+      "message": "This is in the JS spec, so we should go ahead and upstream it to webgpu-headers (you should remove the tag).",
+      "revId": "ff6d745e7998d634e2a497ab5b6d236aa771f1fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9fe0f981_33195048",
+        "filename": "dawn.json",
+        "patchSetId": 4
+      },
+      "lineNbr": 3107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-21T21:07:35Z",
+      "side": 1,
+      "message": "\"emscripten\" tag for these as well.",
+      "range": {
+        "startLine": 3098,
+        "startChar": 0,
+        "endLine": 3107,
+        "endChar": 25
+      },
+      "revId": "ff6d745e7998d634e2a497ab5b6d236aa771f1fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
