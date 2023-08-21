@@ -295,9 +295,17 @@ std::shared_ptr<Socket> Socket::Connect(const char* address,
         } else {
             const auto timeout_us = timeout_ms * 1000;
 
+// Ignore -Wreserved-identifier as these macros introduce identifiers that start with `__`.
+#if defined(__clang__)
+#pragma clang diagnostic push
+#pragma clang diagnostic ignored "-Wreserved-identifier"
+#endif
             fd_set fdset;
             FD_ZERO(&fdset);
             FD_SET(socket, &fdset);
+#if defined(__clang__)
+#pragma clang diagnostic pop
+#endif
 
             timeval tv;
             tv.tv_sec = timeout_us / 1000000;
