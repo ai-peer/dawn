@@ -34,6 +34,24 @@
       "parentUuid": "007d6af7_3f324c3f",
       "revId": "6401e4ddc18bfce86e9c5082cc226a1eba93693b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91e9db30_1b6b57b2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-21T23:26:13Z",
+      "side": 1,
+      "message": "This toggle is currently only relevant to swiftshader usage in chrome. Because currently multiplanar IOSurface cannot be imported into Dawn\u0027s Vulkan backend, the workaround in chrome is creating a multiplanar wgpu::Texture and copying the IOSurface content into it. But Dawn currently blocks that.\n\nThis workaround is not needed for any other backends. Because the native APIs (metal, d3d, etc) already support the shared image type (IOSurface, D3D) specific to their platform.\n\nTbh, I feel adding a feature just to enable swiftshader to create a multiplanar `wgpu::Texture` seems too complicated for this simple use case. Now I realized that currently Dawn doesn\u0027t even allow copy buffer to multiplanar texture either [1]. Should I create two additional features (allow creation \u0026 allow copy dest)?\n\nEmulating Vulkan\u0027s IOSurfaceExternalImage directly inside Dawn instead of Chrome would have been a better/simpler choice. It reduces the duplicated mutliplanar tests (in Dawn and in Chrome), it could avoid the shenanigans such as these extra features.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.cpp;drc\u003d6d6ff81c27d10c12e3308b6bd488b042cf8967ac;l\u003d358",
+      "parentUuid": "cfb998a4_8de607ea",
+      "revId": "6401e4ddc18bfce86e9c5082cc226a1eba93693b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
