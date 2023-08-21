@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "693d6f94_a34927de",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-21T16:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69950d2f_ee3677e7",
+      "range": {
+        "startLine": 10,
+        "startChar": 7,
+        "endLine": 10,
+        "endChar": 20
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d038584f_f801711c",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -683,6 +707,30 @@
       "writtenOn": "2023-08-18T23:09:22Z",
       "side": 1,
       "message": "```suggestion\n        // Note that BeginRenderPass is not tested here as a different test checks that the\n```",
+      "range": {
+        "startLine": 265,
+        "startChar": 11,
+        "endLine": 265,
+        "endChar": 14
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d68f58c3_24448d7b",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-21T16:51:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1e2fc9e0_41e150f5",
       "range": {
         "startLine": 265,
         "startChar": 11,
