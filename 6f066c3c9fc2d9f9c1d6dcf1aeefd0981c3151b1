@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97eca3c0_1a33cf02",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T15:19:21Z",
+      "side": 1,
+      "message": "Isn\u0027t the problem just a parenthesis problem where it should be `OR (UNIX AND NOT ANDROID)`?",
+      "revId": "6f066c3c9fc2d9f9c1d6dcf1aeefd0981c3151b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
