@@ -23,6 +23,7 @@
 #include "dawn/common/Alloc.h"
 #include "dawn/common/Assert.h"
 #include "dawn/native/CallbackTaskManager.h"
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/DynamicUploader.h"
@@ -107,8 +108,26 @@ static uint32_t sZeroSizedMappingData = 0xCAFED00D;
 }  // anonymous namespace
 
 MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr");
+    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain, wgpu::SType::BufferHostMappedPointer));
     DAWN_TRY(ValidateBufferUsage(descriptor->usage));
+
+    const BufferHostMappedPointer* hostMappedDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &hostMappedDesc);
+
+    if (hostMappedDesc != nullptr) {
+        DAWN_INVALID_IF(!device->HasFeature(Feature::BufferHostMappedPointer), "%s requires %s.",
+                        hostMappedDesc->sType, ToAPI(Feature::BufferHostMappedPointer));
+        DAWN_INVALID_IF(
+            (descriptor->usage & kMappableBufferUsages) == 0,
+            "Buffer usage (%s) created from host-mapped pointer requires mappable buffer usage.",
+            descriptor->usage);
+        DAWN_INVALID_IF(!IsAligned(descriptor->size, kMinImportedHostPointerAlignment),
+                        "Buffer size (%u) wrapping host-mapped memory was not aligned to %u.",
+                        descriptor->size, kMinImportedHostPointerAlignment);
+        DAWN_INVALID_IF(!IsPtrAligned(hostMappedDesc->pointer, kMinImportedHostPointerAlignment),
+                        "Host-mapped memory pointer (%p) was not aligned to %u.",
+                        hostMappedDesc->pointer, kMinImportedHostPointerAlignment);
+    }
 
     wgpu::BufferUsage usage = descriptor->usage;
 

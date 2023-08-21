@@ -68,6 +68,12 @@ static constexpr uint8_t kUniformsPerExternalTexture = 1u;
 // Wire buffer alignments.
 static constexpr size_t kWireBufferAlignment = 8u;
 
+// Vulkan: Nearly 100% report 4096.
+// https://vulkan.gpuinfo.org/displayextensionproperty.php?platform=linux&extensionname=VK_EXT_external_memory_host&extensionproperty=minImportedHostPointerAlignment
+// Metal: Validation layers report this value in [MTLDevice newBufferWithBytesNoCopy].
+// It requires the page size and could be queried with sysconf(_SC_PAGESIZE)).
+static constexpr uint32_t kMinImportedHostPointerAlignment = 4096u;
+
 }  // namespace dawn
 
 #endif  // SRC_DAWN_COMMON_CONSTANTS_H_
