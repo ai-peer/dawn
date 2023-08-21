@@ -542,7 +542,7 @@ void InstanceBase::RemoveDevice(DeviceBase* device) {
     mDevicesList.erase(device);
 }
 
-bool InstanceBase::APIProcessEvents() {
+void InstanceBase::APIProcessEvents() {
     std::vector<Ref<DeviceBase>> devices;
     {
         std::lock_guard<std::mutex> lg(mDevicesListMutex);
@@ -551,14 +551,11 @@ bool InstanceBase::APIProcessEvents() {
         }
     }
 
-    bool hasMoreEvents = false;
     for (auto device : devices) {
-        hasMoreEvents = device->APITick() || hasMoreEvents;
+        device->APITick();
     }
 
     mCallbackTaskManager->Flush();
-
-    return hasMoreEvents || !mCallbackTaskManager->IsEmpty();
 }
 
 const std::vector<std::string>& InstanceBase::GetRuntimeSearchPaths() const {
