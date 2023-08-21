@@ -115,6 +115,11 @@ static constexpr FeatureEnumAndInfoList kFeatureNameAndInfoList = {{
     {Feature::MultiPlanarFormats,
      {"multiplanar-formats", "Import and use multi-planar texture formats with per plane views",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=551", FeatureInfo::FeatureState::Stable}},
+    {Feature::MultiPlanarFormatExtendedUsages,
+     {"multiplanar-format-extended-usages",
+      "Enable creating multi-planar formatted textures directly without importing. Also allows "
+      "including CopyDst as texture's usage and per plane copies between a texture and a buffer.",
+      "https://bugs.chromium.org/p/dawn/issues/detail?id=551", FeatureInfo::FeatureState::Stable}},
     {Feature::DawnNative,
      {"dawn-native", "WebGPU is running on top of dawn_native.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
@@ -282,6 +287,8 @@ Feature FromAPIFeature(wgpu::FeatureName feature) {
             return Feature::DawnInternalUsages;
         case wgpu::FeatureName::DawnMultiPlanarFormats:
             return Feature::MultiPlanarFormats;
+        case wgpu::FeatureName::MultiPlanarFormatExtendedUsages:
+            return Feature::MultiPlanarFormatExtendedUsages;
         case wgpu::FeatureName::DawnNative:
             return Feature::DawnNative;
         case wgpu::FeatureName::ChromiumExperimentalDp4a:
@@ -376,6 +383,8 @@ wgpu::FeatureName ToAPIFeature(Feature feature) {
             return wgpu::FeatureName::DawnInternalUsages;
         case Feature::MultiPlanarFormats:
             return wgpu::FeatureName::DawnMultiPlanarFormats;
+        case Feature::MultiPlanarFormatExtendedUsages:
+            return wgpu::FeatureName::MultiPlanarFormatExtendedUsages;
         case Feature::Norm16TextureFormats:
             return wgpu::FeatureName::Norm16TextureFormats;
         case Feature::DawnNative:

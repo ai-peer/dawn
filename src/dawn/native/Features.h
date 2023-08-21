@@ -48,6 +48,7 @@ enum class Feature {
     // Dawn-specific
     DawnInternalUsages,
     MultiPlanarFormats,
+    MultiPlanarFormatExtendedUsages,
     DawnNative,
     ImplicitDeviceSynchronization,
     SurfaceCapabilities,
