@@ -343,6 +343,12 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
          VK_TRUE)) {
         EnableFeature(Feature::ChromiumExperimentalSubgroupUniformControlFlow);
     }
+
+    if (mDeviceInfo.HasExt(DeviceExt::ExternalMemoryHost) &&
+        mDeviceInfo.externalMemoryHostProperties.minImportedHostPointerAlignment <=
+            kMinImportedHostPointerAlignment) {
+        EnableFeature(Feature::BufferHostMappedPointer);
+    }
 }
 
 MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
