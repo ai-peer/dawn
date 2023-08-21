@@ -90,12 +90,10 @@ class VideoViewsTests : public DawnTest {
 
   protected:
     void SetUp() override;
-    void TearDown() override;
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override;
     bool IsMultiPlanarFormatsSupported() const;
     wgpu::ShaderModule GetTestVertexShaderModule() const;
 
-    std::unique_ptr<VideoViewsTestBackend> mBackend;
     bool mIsMultiPlanarFormatsSupported = false;
 };
 
