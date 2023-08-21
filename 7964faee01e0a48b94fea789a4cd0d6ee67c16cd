@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b79181e_ee7ee3b1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-21T17:01:28Z",
+      "side": 1,
+      "message": "+2, but I suspect you\u0027re going to have to use an external dependency to get the GN build to work, as you need to link against winsock.",
+      "revId": "7964faee01e0a48b94fea789a4cd0d6ee67c16cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1442c88e_3696ba36",
+        "filename": "src/tint/utils/macros/compiler.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-21T17:01:28Z",
+      "side": 1,
+      "message": "It\u0027s actually just DEPRECATED:\nhttps://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996?view\u003dmsvc-170",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "7964faee01e0a48b94fea789a4cd0d6ee67c16cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
