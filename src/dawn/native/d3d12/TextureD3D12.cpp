@@ -240,9 +240,16 @@ MaybeError Texture::InitializeAsInternalTexture() {
     resourceDescriptor.DepthOrArraySize = size.depthOrArrayLayers;
 
     Device* device = ToBackend(GetDevice());
+    // When the depth stencil texture is created on a not-zeroed heap, its first usage will also be
+    // copy destination when it is initialized with a non-zero value, which also triggered the issue
+    // about copying data into a placed depth stencil texture with a dirty memory, so in this
+    // situation the workaround should also be enabled.
     bool applyForceClearCopyableDepthStencilTextureOnCreationToggle =
         device->IsToggleEnabled(Toggle::D3D12ForceClearCopyableDepthStencilTextureOnCreation) &&
-        GetFormat().HasDepthOrStencil() && (GetInternalUsage() & wgpu::TextureUsage::CopyDst);
+        GetFormat().HasDepthOrStencil() &&
+        ((GetInternalUsage() & wgpu::TextureUsage::CopyDst) ||
+         (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
+          device->IsToggleEnabled(Toggle::D3D12CreateNotZeroedHeap)));
     if (applyForceClearCopyableDepthStencilTextureOnCreationToggle) {
         AddInternalUsage(wgpu::TextureUsage::RenderAttachment);
     }
