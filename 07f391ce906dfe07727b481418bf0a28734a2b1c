@@ -33,6 +33,23 @@
       "message": "Also, I\u0027m not entirely sure \u0027webgpu-compat\u0027 is enough. As it is they are all set to `[angle-swiftshader webgpu-compat]` but that means there are often conflicts with `[angle-swiftshader other tags]`. You can see that in the CL.",
       "revId": "07f391ce906dfe07727b481418bf0a28734a2b1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d80f6ac_ae9bbb45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-21T15:04:18Z",
+      "side": 1,
+      "message": "Thanks for taking on this exercise!\n\n1) Is there a way we can avoid adding \"non-compat\" on so many expectations? Given that we don\u0027t run Compat on any of those devices (yet), can we just ignore them for now?\n2) Does all of the automated tooling support compat/non-compat tags? CTS roller, etc? +Ben\n3) I\u0027m not sure we actually want to add suppressions for SwiftShader, unless we plan to run it on the bots. I\u0027d prefer to pick a platform we do want to run. Desktop GL on Linux would be fine, now that it\u0027s working. D3D11 is important too, although that won\u0027t run Dawn\u0027s GLES backend.",
+      "revId": "07f391ce906dfe07727b481418bf0a28734a2b1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
