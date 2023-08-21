@@ -22,6 +22,30 @@
       },
       "revId": "5a798f57d72f114d69c49ceb7d32fd91bef91722",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669da9f0_40842a97",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-21T17:18:03Z",
+      "side": 1,
+      "message": "I tried `return Empty;` and got:\n```\n../../src/tint/utils/containers/hashmap.h:172:28: error: use of overloaded operator \u0027\u003d\u0027 is ambiguous (with operand types \u0027Value\u0027 (aka \u0027tint::Vector\u003cstd::variant\u003ctint::BindingPoint, const tint::ast::Parameter *\u003e, 4\u003e\u0027) and \u0027__libcpp_remove_reference_t\u003cEmptyType \u0026\u003e\u0027 (aka \u0027tint::EmptyType\u0027))\n                *res.value \u003d std::move(value);\n                ~~~~~~~~~~ ^ ~~~~~~~~~~~~~~~~\n../../src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc:169:63: note: in instantiation of function template specialization \u0027tint::Hashmap\u003cconst tint::ast::CallExpression *, tint::Vector\u003cstd::variant\u003ctint::BindingPoint, const tint::ast::Parameter *\u003e, 4\u003e, 8\u003e::GetOrCreate\u003cconst tint::ast::CallExpression *\u0026, (lambda at ../../src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc:169:86)\u003e\u0027 requested here\n                                    auto\u0026 args \u003d call_to_data.GetOrCreate(call_expr, [\u0026] {\n                                                              ^\n```\n\nI tried `return {};` and got:\n```\ntexture_builtins_from_uniform.cc:174:48: error: cannot deduce lambda return type from initializer list\n```",
+      "parentUuid": "dabbb1c7_afb2f2d4",
+      "range": {
+        "startLine": 169,
+        "startChar": 47,
+        "endLine": 170,
+        "endChar": 100
+      },
+      "revId": "5a798f57d72f114d69c49ceb7d32fd91bef91722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
