@@ -1271,15 +1271,17 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
     imageRange.levelCount = 1;
     imageRange.layerCount = 1;
 
-    if (GetFormat().isCompressed) {
+    if (GetFormat().isCompressed || GetFormat().IsMultiPlanar()) {
         if (range.aspects == Aspect::None) {
             return {};
         }
         // need to clear the texture with a copy from buffer
-        ASSERT(range.aspects == Aspect::Color);
+        ASSERT(range.aspects == Aspect::Color || range.aspects == Aspect::Plane0 ||
+               range.aspects == Aspect::Plane1);
         const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
 
         Extent3D largestMipSize = GetMipLevelSingleSubresourcePhysicalSize(range.baseMipLevel);
+        largestMipSize = GetFormat().GetAspectSize(range.aspects, largestMipSize);
 
         uint32_t bytesPerRow = Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
                                      device->GetOptimalBytesPerRowAlignment());
