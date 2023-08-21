@@ -16,6 +16,63 @@
       "message": "PTAL, thanks!",
       "revId": "fa1fce215322a71737b5edb692f1f204cc477754",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96d0d1fc_e28f866c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:54:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "fa1fce215322a71737b5edb692f1f204cc477754",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "099b983f_78a035a2",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:54:47Z",
+      "side": 1,
+      "message": "For some reason I thought I remembered we couldn\u0027t combine read only storage usage with other readonly usages. But I don\u0027t remember exactly why, it was some UAV vs SRV thing? Do you remember? If not then let\u0027s go with the and rely on tests to catch issues.",
+      "revId": "fa1fce215322a71737b5edb692f1f204cc477754",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd499c8e_343a4e28",
+        "filename": "src/dawn/native/dawn_platform.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:54:47Z",
+      "side": 1,
+      "message": "nit: while we have bits left, it might be good to avoid conflicts between internal usages. Now ROStorage + CopySrc \u003d\u003d kAgainAsRenderAttachment. 0x0800\u00270000 is still available.",
+      "range": {
+        "startLine": 57,
+        "startChar": 36,
+        "endLine": 57,
+        "endChar": 46
+      },
+      "revId": "fa1fce215322a71737b5edb692f1f204cc477754",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
