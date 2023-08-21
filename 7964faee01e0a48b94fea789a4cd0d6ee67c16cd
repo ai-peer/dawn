@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a47d63e7_0cbe5c6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-21T17:20:34Z",
+      "side": 1,
+      "message": "The bots seem happy, but i\u0027m not sure what the chrome roll will do as chromium sometimes seems to build things differently.",
+      "parentUuid": "9b79181e_ee7ee3b1",
+      "revId": "7964faee01e0a48b94fea789a4cd0d6ee67c16cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1442c88e_3696ba36",
         "filename": "src/tint/utils/macros/compiler.h",
         "patchSetId": 11
@@ -31,6 +49,30 @@
       "writtenOn": "2023-08-21T17:01:28Z",
       "side": 1,
       "message": "It\u0027s actually just DEPRECATED:\nhttps://learn.microsoft.com/en-us/cpp/error-messages/compiler-warnings/compiler-warning-level-3-c4996?view\u003dmsvc-170",
+      "range": {
+        "startLine": 34,
+        "startChar": 29,
+        "endLine": 34,
+        "endChar": 42
+      },
+      "revId": "7964faee01e0a48b94fea789a4cd0d6ee67c16cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2c000c6_fbdfbbd7",
+        "filename": "src/tint/utils/macros/compiler.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-21T17:20:34Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you\u0027re requesting here? The compiler emitted a warning, possibly due ot the deprecation, so I\u0027m disabling the warning. Did you want me to change this to DEPRECATION_UNSAFE_GETENV ?",
+      "parentUuid": "1442c88e_3696ba36",
       "range": {
         "startLine": 34,
         "startChar": 29,
