@@ -81,6 +81,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91cb6a0_59b652a8",
+        "filename": "docs/dawn/features/pixel_local_storage.md",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ce1a70a1_8ce7d3c8",
+      "range": {
+        "startLine": 11,
+        "startChar": 0,
+        "endLine": 11,
+        "endChar": 38
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ba35cd9_ea4877cd",
@@ -94,6 +118,30 @@
       "writtenOn": "2023-08-18T23:09:22Z",
       "side": 1,
       "message": "could we factor this with the other load/store/clearValue validation?\n\nyou don\u0027t have tests for this bit",
+      "range": {
+        "startLine": 603,
+        "startChar": 0,
+        "endLine": 617,
+        "endChar": 13
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab051d19_f68d06e0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "The tests are in the test plan, sorry for sending an incomplete CL but I wanted to be able to iterate. Sounds good about putting in a helper function.",
+      "parentUuid": "4ba35cd9_ea4877cd",
       "range": {
         "startLine": 603,
         "startChar": 0,
@@ -129,6 +177,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e0c8f6d5_30c81de4",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "That\u0027d work, but it would need the number of transient attachments.",
+      "parentUuid": "46bdf447_cd2dd83f",
+      "range": {
+        "startLine": 589,
+        "startChar": 8,
+        "endLine": 623,
+        "endChar": 78
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d45e9ac_430ea6a0",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 5
@@ -140,6 +212,30 @@
       "writtenOn": "2023-08-18T23:09:22Z",
       "side": 1,
       "message": "wondering - why isn\u0027t the total size implicit?",
+      "range": {
+        "startLine": 622,
+        "startChar": 0,
+        "endLine": 624,
+        "endChar": 0
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78c4383d_64459d7c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "There are both transient and persistent pixel local storage. transient is just a tile memory allocation, while the persistent one gets written out to a StorageAttachment. Because the transient local storage can be after the last persistent local storage, we need to know the total size of the PLS data structure.",
+      "parentUuid": "6d45e9ac_430ea6a0",
       "range": {
         "startLine": 622,
         "startChar": 0,
@@ -197,6 +293,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaee2927_36e4b298",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 639,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Done, added to the test plan.",
+      "parentUuid": "de1188ab_dde4e9db",
+      "range": {
+        "startLine": 639,
+        "startChar": 0,
+        "endLine": 639,
+        "endChar": 89
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dda3827_d61277c1",
@@ -210,6 +330,30 @@
       "writtenOn": "2023-08-21T05:40:12Z",
       "side": 1,
       "message": "Wondering why we don\u0027t support PLS on RGBA for now?",
+      "range": {
+        "startLine": 434,
+        "startChar": 44,
+        "endLine": 434,
+        "endChar": 54
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6524d0d7_131549c6",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 434,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Because they don\u0027t support read-write storage usage. Though we could extend support when relying on true PLS, or when rw storage is available on rgba8unorm. Would this work?",
+      "parentUuid": "7dda3827_d61277c1",
       "range": {
         "startLine": 434,
         "startChar": 44,
@@ -245,6 +389,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50c3dd1a_693e48ae",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Unfortunately the types are different. One is a PipelineLayoutPixelLocalStorage and has the format in the descriptor, the other is a RenderPassPixelLocalStorage and has the view in the descriptor so we need to extract the format from the view.",
+      "parentUuid": "40ba60c9_87c99087",
+      "range": {
+        "startLine": 96,
+        "startChar": 7,
+        "endLine": 106,
+        "endChar": 5
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bed04be9_c8b75a60",
         "filename": "src/dawn/native/PipelineLayout.h",
         "patchSetId": 5
@@ -256,6 +424,30 @@
       "writtenOn": "2023-08-18T23:09:22Z",
       "side": 1,
       "message": "will it work if it is a StackVector kMaxPLSSlots ?",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 61
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a840f40c_71d54a9e",
+        "filename": "src/dawn/native/PipelineLayout.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Good idea! We could also have a typedef for this.",
+      "parentUuid": "bed04be9_c8b75a60",
       "range": {
         "startLine": 98,
         "startChar": 0,
@@ -289,6 +481,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "873790ca_fbdd8001",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e96a3fc_82fb5185",
+      "range": {
+        "startLine": 171,
+        "startChar": 0,
+        "endLine": 176,
+        "endChar": 49
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1d14be6d_3c0bcc41",
@@ -302,6 +518,30 @@
       "writtenOn": "2023-08-18T23:09:22Z",
       "side": 1,
       "message": "avoid a copy\n\n```suggestion\n    const std::vector\u003cwgpu::TextureFormat\u003e\u0026 plsSlots \u003d value-\u003eGetStorageAttachmentSlots();\n```",
+      "range": {
+        "startLine": 236,
+        "startChar": 0,
+        "endLine": 236,
+        "endChar": 89
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03139425_d2909969",
+        "filename": "src/dawn/native/webgpu_absl_format.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1d14be6d_3c0bcc41",
       "range": {
         "startLine": 236,
         "startChar": 0,
@@ -358,6 +598,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b79ef07_1b20fc80",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0b8eff9_a276d7b6",
+      "range": {
+        "startLine": 150,
+        "startChar": 24,
+        "endLine": 150,
+        "endChar": 26
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e2fc9e0_41e150f5",
@@ -404,6 +668,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4926266a_d7f552c0",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99bc0bb4_d1b6ee0e",
+      "range": {
+        "startLine": 295,
+        "startChar": 32,
+        "endLine": 295,
+        "endChar": 51
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a59fc8e_af4c7c8c",
@@ -427,6 +715,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db6dbdf7_9ebb7caa",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a59fc8e_af4c7c8c",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 54
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91951af0_f90b3a53",
@@ -440,6 +752,30 @@
       "writtenOn": "2023-08-18T23:09:22Z",
       "side": 1,
       "message": "```suggestion\n    // Error case: collisions, boo!\n```",
+      "range": {
+        "startLine": 375,
+        "startChar": 0,
+        "endLine": 375,
+        "endChar": 40
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "319b51a6_aeff29c4",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T11:36:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91951af0_f90b3a53",
       "range": {
         "startLine": 375,
         "startChar": 0,
