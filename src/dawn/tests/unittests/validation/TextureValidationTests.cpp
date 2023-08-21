@@ -1118,5 +1118,26 @@ TEST_F(TransientAttachmentValidationTest, FlagsBeyondRenderAttachment) {
     ASSERT_DEVICE_ERROR(device.CreateTexture(&desc));
 }
 
+class MultiPlanarTextureValidationTest : public TextureValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[1] = {wgpu::FeatureName::DawnMultiPlanarFormats};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 1;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Test that creating multi-planar texture by default should not be allowed.
+// Such texture is only allowed to be created by importing an external image.
+TEST_F(MultiPlanarTextureValidationTest, CreateTextureFails) {
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::R8BG8Biplanar420Unorm;
+    desc.size = {2, 2, 1};
+    desc.usage = wgpu::TextureUsage::TextureBinding;
+
+    ASSERT_DEVICE_ERROR(device.CreateTexture(&desc), testing::HasSubstr("is not allowed"));
+}
 }  // anonymous namespace
 }  // namespace dawn
