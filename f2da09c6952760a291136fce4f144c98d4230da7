@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d21a3edd_908136a8",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-21T17:42:11Z",
+      "side": 1,
+      "message": "`if err :\u003d json.Unmarshal(jsonResponse, \u0026jsonRes); err !\u003d nil {`",
+      "range": {
+        "startLine": 421,
+        "startChar": 2,
+        "endLine": 422,
+        "endChar": 17
+      },
+      "revId": "f2da09c6952760a291136fce4f144c98d4230da7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "745d46ad_a5b02f27",
+        "filename": "tools/src/gerrit/gerrit.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-21T17:42:11Z",
+      "side": 1,
+      "message": "`changeID, message, reviewer string`",
+      "range": {
+        "startLine": 315,
+        "startChar": 35,
+        "endLine": 315,
+        "endChar": 76
+      },
+      "revId": "f2da09c6952760a291136fce4f144c98d4230da7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
