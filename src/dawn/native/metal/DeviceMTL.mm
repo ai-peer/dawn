@@ -187,6 +187,15 @@ ResultOrError<Ref<BindGroupLayoutInternalBase>> Device::CreateBindGroupLayoutImp
     return BindGroupLayout::Create(this, descriptor);
 }
 ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
+    const BufferHostMappedPointer* regionDesc = nullptr;
+    FindInChain(descriptor->nextInChain, &regionDesc);
+    if (regionDesc != nullptr) {
+        if (!HasFeature(Feature::BufferHostMappedPointer)) {
+            return DAWN_VALIDATION_ERROR("%s requires %s.", regionDesc->sType,
+                                         ToAPI(Feature::BufferHostMappedPointer));
+        }
+        return Buffer::CreateFromVirtualMemory(this, descriptor, regionDesc);
+    }
     return Buffer::Create(this, descriptor);
 }
 ResultOrError<Ref<CommandBufferBase>> Device::CreateCommandBuffer(
