@@ -12,10 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+#include "dawn/tests/end2end/VideoViewsTests.h"
+
 #include <utility>
 
-#include "dawn/tests/end2end/VideoViewsTests.h"
+#include "dawn/common/Math.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
+#include "dawn/utils/TestUtils.h"
+#include "dawn/utils/TextureUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
 namespace dawn {
@@ -887,8 +891,252 @@ TEST_P(VideoViewsValidationTests, WriteTexturePlaneAspectsFails) {
     mBackend->DestroyVideoTextureForTest(std::move(platformTexture));
 }
 
+// Test that creating multi-planar texture by default should not be allowed.
+// Such texture is only allowed to be created by importing an external image.
+TEST_P(VideoViewsValidationTests, CreateTextureFails) {
+    wgpu::TextureDescriptor desc;
+    desc.format = wgpu::TextureFormat::R8BG8Biplanar420Unorm;
+    desc.size = {2, 2, 1};
+    desc.usage = wgpu::TextureUsage::TextureBinding;
+
+    ASSERT_DEVICE_ERROR_MSG(device.CreateTexture(&desc), testing::HasSubstr("is not allowed"));
+}
+
+class VideoViewsExtendedUsagesTests : public VideoViewsTests {
+  protected:
+    void SetUp() override {
+        VideoViewsTests::SetUp();
+
+        DAWN_TEST_UNSUPPORTED_IF(!IsMultiPlanarFormatsSupported());
+
+        DAWN_TEST_UNSUPPORTED_IF(
+            !device.HasFeature(wgpu::FeatureName::MultiPlanarFormatExtendedUsages));
+    }
+
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> requiredFeatures = VideoViewsTests::GetRequiredFeatures();
+        if (SupportsFeatures({wgpu::FeatureName::MultiPlanarFormatExtendedUsages})) {
+            requiredFeatures.push_back(wgpu::FeatureName::MultiPlanarFormatExtendedUsages);
+        }
+        return requiredFeatures;
+    }
+
+    wgpu::Texture CreateMultiPlanarTexture(wgpu::TextureFormat format,
+                                           wgpu::TextureUsage usage,
+                                           bool isCheckerboard = false,
+                                           bool initialized = true) {
+        wgpu::TextureDescriptor desc;
+        desc.format = format;
+        desc.size = {VideoViewsTests::kYUVImageDataWidthInTexels,
+                     VideoViewsTests::kYUVImageDataHeightInTexels, 1};
+        desc.usage = usage;
+
+        wgpu::DawnTextureInternalUsageDescriptor internalDesc;
+        internalDesc.internalUsage = wgpu::TextureUsage::CopyDst;
+        desc.nextInChain = &internalDesc;
+
+        auto texture = device.CreateTexture(&desc);
+        if (texture == nullptr) {
+            return nullptr;
+        }
+
+        if (initialized) {
+            size_t numPlanes = VideoViewsTests::NumPlanes(format);
+
+            wgpu::DawnEncoderInternalUsageDescriptor encoderInternalDesc;
+            encoderInternalDesc.useInternalUsages = true;
+            wgpu::CommandEncoderDescriptor encoderDesc;
+            encoderDesc.nextInChain = &encoderInternalDesc;
+
+            wgpu::CommandEncoder encoder = device.CreateCommandEncoder(&encoderDesc);
+
+            for (size_t plane = 0; plane < numPlanes; ++plane) {
+                size_t bytesPerRow = VideoViewsTests::kYUVImageDataWidthInTexels;
+                bytesPerRow = Align(bytesPerRow, 256);
+
+                wgpu::ImageCopyTexture copyDst =
+                    utils::CreateImageCopyTexture(texture, 0, {0, 0, 0});
+
+                wgpu::Extent3D copySize{VideoViewsTests::kYUVImageDataWidthInTexels,
+                                        VideoViewsTests::kYUVImageDataHeightInTexels, 1};
+                switch (plane) {
+                    case VideoViewsTests::kYUVLumaPlaneIndex:
+                        copyDst.aspect = wgpu::TextureAspect::Plane0Only;
+                        break;
+                    case VideoViewsTests::kYUVChromaPlaneIndex:
+                        copyDst.aspect = wgpu::TextureAspect::Plane1Only;
+                        copySize.width /= 2;
+                        copySize.height /= 2;
+                        break;
+                    default:
+                        UNREACHABLE();
+                }
+
+                // Staging buffer.
+                wgpu::BufferDescriptor bufferDesc;
+                bufferDesc.size = bytesPerRow * copySize.height;
+                bufferDesc.mappedAtCreation = true;
+                bufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+
+                auto buffer = device.CreateBuffer(&bufferDesc);
+
+                std::vector<uint8_t> data = VideoViewsTests::GetTestTextureDataWithPlaneIndex(
+                    plane, bytesPerRow, VideoViewsTests::kYUVImageDataHeightInTexels,
+                    isCheckerboard);
+
+                memcpy(buffer.GetMappedRange(), data.data(), bufferDesc.size);
+                buffer.Unmap();
+
+                wgpu::ImageCopyBuffer copySrc =
+                    utils::CreateImageCopyBuffer(buffer, 0, bytesPerRow);
+
+                encoder.CopyBufferToTexture(&copySrc, &copyDst, &copySize);
+            }  // for plane
+
+            auto cmdBuffer = encoder.Finish();
+            device.GetQueue().Submit(1, &cmdBuffer);
+        }  // initialized
+
+        return texture;
+    }
+};
+
+// Test that creating multi-planar texture should success if device is created with
+// MultiPlanarFormatExtendedUsages feature enabled.
+TEST_P(VideoViewsExtendedUsagesTests, CreateTextureSucceeds) {
+    auto texture = CreateMultiPlanarTexture(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
+                                            wgpu::TextureUsage::TextureBinding);
+    EXPECT_NE(texture, nullptr);
+}
+
+// Tests sampling a multi-planar texture.
+TEST_P(VideoViewsExtendedUsagesTests, SamplingMultiPlanarTexture) {
+    auto texture = CreateMultiPlanarTexture(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
+                                            wgpu::TextureUsage::TextureBinding,
+                                            /*isCheckerboard*/ true,
+                                            /*initialized*/ true);
+    EXPECT_NE(texture, nullptr);
+
+    wgpu::TextureViewDescriptor lumaViewDesc;
+    lumaViewDesc.format = wgpu::TextureFormat::R8Unorm;
+    lumaViewDesc.aspect = wgpu::TextureAspect::Plane0Only;
+    wgpu::TextureView lumaTextureView = texture.CreateView(&lumaViewDesc);
+
+    wgpu::TextureViewDescriptor chromaViewDesc;
+    chromaViewDesc.format = wgpu::TextureFormat::RG8Unorm;
+    chromaViewDesc.aspect = wgpu::TextureAspect::Plane1Only;
+    wgpu::TextureView chromaTextureView = texture.CreateView(&chromaViewDesc);
+
+    utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+    renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+
+    renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            @group(0) @binding(0) var sampler0 : sampler;
+            @group(0) @binding(1) var lumaTexture : texture_2d<f32>;
+            @group(0) @binding(2) var chromaTexture : texture_2d<f32>;
+
+            @fragment
+            fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
+               let y : f32 = textureSample(lumaTexture, sampler0, texCoord).r;
+               let u : f32 = textureSample(chromaTexture, sampler0, texCoord).r;
+               let v : f32 = textureSample(chromaTexture, sampler0, texCoord).g;
+               return vec4f(y, u, v, 1.0);
+            })");
+
+    utils::BasicRenderPass renderPass = utils::CreateBasicRenderPass(
+        device, kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels);
+    renderPipelineDescriptor.cTargets[0].format = renderPass.colorFormat;
+
+    wgpu::RenderPipeline renderPipeline = device.CreateRenderPipeline(&renderPipelineDescriptor);
+
+    wgpu::Sampler sampler = device.CreateSampler();
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    {
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
+        pass.SetPipeline(renderPipeline);
+        pass.SetBindGroup(
+            0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                    {{0, sampler}, {1, lumaTextureView}, {2, chromaTextureView}}));
+        pass.Draw(6);
+        pass.End();
+    }
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    std::vector<uint8_t> expectedData =
+        GetTestTextureData(wgpu::TextureFormat::RGBA8Unorm, /*isCheckerboard*/ true);
+    std::vector<utils::RGBA8> expectedRGBA;
+    for (uint8_t i = 0; i < expectedData.size(); i += 3) {
+        expectedRGBA.push_back({expectedData[i], expectedData[i + 1], expectedData[i + 2], 0xFF});
+    }
+
+    EXPECT_TEXTURE_EQ(expectedRGBA.data(), renderPass.color, {0, 0},
+                      {kYUVImageDataWidthInTexels, kYUVImageDataHeightInTexels});
+}
+
+// Test copying from multi-planar format per plane to a buffer succeeds.
+TEST_P(VideoViewsExtendedUsagesTests, T2BCopyPlaneAspectsSucceeds) {
+    const std::vector<uint8_t> expectedData =
+        GetTestTextureData(wgpu::TextureFormat::RGBA8Unorm, /*isCheckerboard*/ false);
+
+    auto srcTexture =
+        CreateMultiPlanarTexture(wgpu::TextureFormat::R8BG8Biplanar420Unorm,
+                                 wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc,
+                                 /*isCheckerboard*/ false,
+                                 /*initialized*/ true);
+    EXPECT_NE(srcTexture, nullptr);
+
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = 256;
+    bufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer dstBuffer = device.CreateBuffer(&bufferDescriptor);
+
+    wgpu::ImageCopyBuffer copyDst = utils::CreateImageCopyBuffer(dstBuffer, 0, 256);
+
+    wgpu::Extent3D copySize = {1, 1, 1};
+
+    // Plane0
+    wgpu::ImageCopyTexture copySrc =
+        utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane0Only);
+
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyTextureToBuffer(&copySrc, &copyDst, &copySize);
+
+        auto cmdBuffer = encoder.Finish();
+        device.GetQueue().Submit(1, &cmdBuffer);
+
+        EXPECT_BUFFER_U8_EQ(expectedData[0], dstBuffer, 0);
+    }
+
+    // Plane1
+    copySrc =
+        utils::CreateImageCopyTexture(srcTexture, 0, {0, 0, 0}, wgpu::TextureAspect::Plane1Only);
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyTextureToBuffer(&copySrc, &copyDst, &copySize);
+
+        auto cmdBuffer = encoder.Finish();
+        device.GetQueue().Submit(1, &cmdBuffer);
+
+        uint16_t expectedUVData;
+        memcpy(&expectedUVData, expectedData.data() + 1, sizeof(expectedUVData));
+        EXPECT_BUFFER_U16_EQ(expectedUVData, dstBuffer, 0);
+    }
+}
+
 DAWN_INSTANTIATE_TEST_V(VideoViewsTests, VideoViewsTestBackend::Backends());
 DAWN_INSTANTIATE_TEST_V(VideoViewsValidationTests, VideoViewsTestBackend::Backends());
+
+DAWN_INSTANTIATE_TEST(VideoViewsExtendedUsagesTests,
+                      D3D11Backend(),
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
 
 }  // anonymous namespace
 }  // namespace dawn
