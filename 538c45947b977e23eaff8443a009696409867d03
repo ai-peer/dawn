@@ -68,6 +68,30 @@
       },
       "revId": "538c45947b977e23eaff8443a009696409867d03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033801ab_f89ab8cf",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-21T20:43:14Z",
+      "side": 1,
+      "message": "\"data race free\"; but yea we should probably write it out",
+      "parentUuid": "f2b9a81f_4fa27dee",
+      "range": {
+        "startLine": 125,
+        "startChar": 19,
+        "endLine": 125,
+        "endChar": 22
+      },
+      "revId": "538c45947b977e23eaff8443a009696409867d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
