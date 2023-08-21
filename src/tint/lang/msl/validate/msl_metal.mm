@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// GEN_BUILD:CONDITION(is_mac)
+
 #ifdef TINT_ENABLE_MSL_VALIDATION_USING_METAL_API
 
 @import Metal;

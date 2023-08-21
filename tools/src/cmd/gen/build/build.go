@@ -122,25 +122,25 @@ func loadExternals(p *Project) error {
 
 	for _, name := range externals.Keys() {
 		external := externals[name]
-		if len(external.IncludePatterns) == 0 {
-			return fmt.Errorf("%v: '%v' requires at least one pattern in IncludePatterns",
-				p.externalsJsonPath, name)
-		}
-		matchers := []match.Test{}
-		for _, pattern := range external.IncludePatterns {
-			matcher, err := match.New(pattern)
-			if err != nil {
-				return fmt.Errorf("%v: matcher error: %w", p.externalsJsonPath, err)
-			}
-			matchers = append(matchers, matcher)
-		}
-		match := func(s string) bool {
-			for _, matcher := range matchers {
-				if matcher(s) {
-					return true
+
+		includePatternMatch := func(s string) bool { return false }
+		if len(external.IncludePatterns) > 0 {
+			matchers := []match.Test{}
+			for _, pattern := range external.IncludePatterns {
+				matcher, err := match.New(pattern)
+				if err != nil {
+					return fmt.Errorf("%v: matcher error: %w", p.externalsJsonPath, err)
 				}
+				matchers = append(matchers, matcher)
 			}
-			return false
+			includePatternMatch = func(s string) bool {
+				for _, matcher := range matchers {
+					if matcher(s) {
+						return true
+					}
+				}
+				return false
+			}
 		}
 
 		cond, err := cnf.Parse(external.Condition)
@@ -153,7 +153,7 @@ func loadExternals(p *Project) error {
 		p.externals.Add(name, ExternalDependency{
 			Name:                name,
 			Condition:           cond,
-			includePatternMatch: match,
+			includePatternMatch: includePatternMatch,
 		})
 	}
 
@@ -169,7 +169,8 @@ func populateSourceFiles(p *Project) error {
 				"include": [
 					"*/**.cc",
 					"*/**.h",
-					"*/**.inl"
+					"*/**.inl",
+					"*/**.mm"
 				]
 			},
 			{
@@ -223,6 +224,9 @@ func scanSourceFiles(p *Project) error {
 			}
 			if !reIgnoreInclude.MatchString(line) {
 				if match := reInclude.FindStringSubmatch(line); len(match) > 0 {
+					out.includes = append(out.includes, Include{match[1], i + 1})
+				}
+				if match := reImport.FindStringSubmatch(line); len(match) > 0 {
 					out.includes = append(out.includes, Include{match[1], i + 1})
 				}
 			}
@@ -642,6 +646,7 @@ func emitDotFile(p *Project, kind TargetKind) error {
 var (
 	// Regular expressions used by this file
 	reInclude       = regexp.MustCompile(`\s*#\s*include\s*\"([^"]+)\"`)
+	reImport        = regexp.MustCompile(`\s*@import\s*([\w]+)`)
 	reIgnoreFile    = regexp.MustCompile(`//\s*GEN_BUILD:IGNORE_FILE`)
 	reIgnoreInclude = regexp.MustCompile(`//\s*GEN_BUILD:IGNORE_INCLUDE`)
 	reCondition     = regexp.MustCompile(`//\s*GEN_BUILD:CONDITION\((.*)\)\s*$`)

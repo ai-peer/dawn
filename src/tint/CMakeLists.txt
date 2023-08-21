@@ -448,6 +448,13 @@ function(tint_target_add_external_dependencies UNSUFFIXED_TARGET KIND)
         target_link_libraries(${TARGET} PRIVATE
           glslang-default-resource-limits
         )
+      elseif(${DEPENDENCY} STREQUAL "metal")
+        find_library(LIB_CORE_GRAPHICS CoreGraphics)
+        if(NOT LIB_CORE_GRAPHICS)
+          message(FATAL_ERROR "CoreGraphics not found")
+        endif()
+        target_compile_options(${TARGET} PRIVATE "-fmodules" "-fcxx-modules")
+        target_link_options(${TARGET} PRIVATE "-framework" "CoreGraphics")
       else()
         message(FATAL_ERROR "unhandled external dependency ${DEPENDENCY}")
       endif()
