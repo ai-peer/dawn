@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dabbb1c7_afb2f2d4",
+        "filename": "src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-21T16:57:32Z",
+      "side": 1,
+      "message": "I believe you can just use `Empty` here.",
+      "range": {
+        "startLine": 169,
+        "startChar": 47,
+        "endLine": 170,
+        "endChar": 100
+      },
+      "revId": "5a798f57d72f114d69c49ceb7d32fd91bef91722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
