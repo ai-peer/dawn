@@ -58,6 +58,7 @@ class Buffer final : public BufferBase {
     ~Buffer() override;
 
     MaybeError Initialize(bool mappedAtCreation);
+    MaybeError InitializeHostMapped(const BufferHostMappedPointer* hostMappedDesc);
     MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
     void UnmapImpl() override;
     void DestroyImpl() override;
@@ -80,6 +81,10 @@ class Buffer final : public BufferBase {
 
     D3D12_RANGE mWrittenMappedRange = {0, 0};
     void* mMappedData = nullptr;
+
+    std::unique_ptr<Heap> mHostMappedHeap;
+    wgpu::Callback mHostMappedDisposeCallback = nullptr;
+    void* mHostMappedDisposeUserdata = nullptr;
 };
 
 }  // namespace dawn::native::d3d12

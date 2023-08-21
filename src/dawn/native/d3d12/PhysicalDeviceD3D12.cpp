@@ -157,6 +157,13 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         (bgra8unormFormatInfo.Support1 & D3D12_FORMAT_SUPPORT1_TYPED_UNORDERED_ACCESS_VIEW)) {
         EnableFeature(Feature::BGRA8UnormStorage);
     }
+
+    D3D12_FEATURE_DATA_EXISTING_HEAPS existingHeapInfo = {};
+    hr = mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_EXISTING_HEAPS, &existingHeapInfo,
+                                           sizeof(existingHeapInfo));
+    if (SUCCEEDED(hr) && existingHeapInfo.Supported) {
+        EnableFeature(Feature::BufferHostMappedPointer);
+    }
 }
 
 MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits) {
