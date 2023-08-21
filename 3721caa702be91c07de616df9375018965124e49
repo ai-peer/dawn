@@ -16,6 +16,154 @@
       "message": "PTAL",
       "revId": "3721caa702be91c07de616df9375018965124e49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "56e3cfcf_dfe88c9b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e468e8f_35f6b740",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "Here this would allow Int/Uint formats, we should check for `Float` being in the supported sample types.",
+      "range": {
+        "startLine": 74,
+        "startChar": 43,
+        "endLine": 74,
+        "endChar": 60
+      },
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2a1bd39_3aa7cd74",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "nit: The format (%s) component count (%u) is not %u.",
+      "range": {
+        "startLine": 77,
+        "startChar": 25,
+        "endLine": 77,
+        "endChar": 69
+      },
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6fcf06e_7e9671fd",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "nit: maybe we can do \"validating the format of plane 0 (%s)\", descriptor-\u003eplane0",
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff76dbe0_ccae2758",
+        "filename": "src/dawn/tests/end2end/ExternalTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "nit: leftover code?",
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b238e79_247e91dc",
+        "filename": "src/dawn/tests/unittests/validation/BindGroupValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 412,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "```suggestion\n        wgpu::ExternalTextureDescriptor errorExternalDescriptor \u003d\n```",
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4dc8fa_e8ff1cc0",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 336,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "Maybe we could try int and uint too given that it would be allowed in the current version of the CL but wouldn\u0027t work when trying to use the external texture.",
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53bef752_54ce62c1",
+        "filename": "src/dawn/tests/unittests/validation/ExternalTextureTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 701,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-21T09:43:03Z",
+      "side": 1,
+      "message": "That\u0027s not really what\u0027s happening if I understand correctly: we are combining a 4 component format in plane 0 with a plane 1, which is not allowed. Instead of testing this for norm16, we could test the following in the test without optional features:\n\n - single planar with rgba8unorm -\u003e control case, success\n - single planer with rg8unorm -\u003e error case\n - two planar with rg8unorm + r16float -\u003e control case, success\n - two planar with r16float + r16 float -\u003e error\n - two planar with rgba8unrom + r16 float -\u003e error\n - two planar with rg8unorm + rg8unorm -\u003e error.\n \nWDYT?",
+      "revId": "3721caa702be91c07de616df9375018965124e49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
