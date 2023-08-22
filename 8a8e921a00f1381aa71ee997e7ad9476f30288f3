@@ -22,6 +22,30 @@
       },
       "revId": "8a8e921a00f1381aa71ee997e7ad9476f30288f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56cc59b1_1699d51e",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2758,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-22T12:19:57Z",
+      "side": 1,
+      "message": "@senorblanco@chromium.org - WDYT?",
+      "parentUuid": "fb68380b_9fa5ad8b",
+      "range": {
+        "startLine": 2754,
+        "startChar": 1,
+        "endLine": 2758,
+        "endChar": 25
+      },
+      "revId": "8a8e921a00f1381aa71ee997e7ad9476f30288f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
