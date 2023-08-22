@@ -52,6 +52,24 @@
       "parentUuid": "cfb998a4_8de607ea",
       "revId": "6401e4ddc18bfce86e9c5082cc226a1eba93693b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d2ff828_9717fae0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-22T10:13:05Z",
+      "side": 1,
+      "message": "Btw, I have added the composite feature `MultiPlanarFormatExtendedUsages` which allows the multi-planar texture to be created \u0026 copied to/from buffer.\n\nPTAL.",
+      "parentUuid": "91e9db30_1b6b57b2",
+      "revId": "6401e4ddc18bfce86e9c5082cc226a1eba93693b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
