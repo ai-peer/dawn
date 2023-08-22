@@ -16,6 +16,23 @@
       "message": "good improvement!",
       "revId": "a7304421299b2043abedaaeb9b581b6d47a134e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2173435c_94802a0a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-22T23:47:02Z",
+      "side": 1,
+      "message": "Agreed! This is a great change and I don\u0027t know why I didn\u0027t do it like this in the first place.",
+      "revId": "a7304421299b2043abedaaeb9b581b6d47a134e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
