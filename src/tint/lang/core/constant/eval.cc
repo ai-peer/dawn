@@ -511,14 +511,15 @@ Eval::Result TransformElements(Manager& mgr,
     return detail::TransformElements(mgr, composite_ty, f, 0, cs...);
 }
 
+using BinaryTransform = std::function<Eval::Result(const Value*, const Value*)>;
+
 /// TransforyBinaryDifferingArityElements constructs a new constant of type `composite_ty` by
 /// applying the transformation function 'f' on each of the most deeply nested elements of both `c0`
 /// and `c1`. Unlike TransformElements, this function handles the constants being of different
 /// arity, e.g. vector-scalar, scalar-vector.
-template <typename F>
 Eval::Result TransforyBinaryDifferingArityElements(Manager& mgr,
                                                    const core::type::Type* composite_ty,
-                                                   F&& f,
+                                                   BinaryTransform&& f,
                                                    const Value* c0,
                                                    const Value* c1) {
     uint32_t n0 = c0->Type()->Elements(nullptr, 1).count;
@@ -540,9 +541,9 @@ Eval::Result TransforyBinaryDifferingArityElements(Manager& mgr,
             }
             return c->Index(i);
         };
-        if (auto el = TransforyBinaryDifferingArityElements(mgr, element_ty, std::forward<F>(f),
-                                                            nested_or_self(c0, n0),
-                                                            nested_or_self(c1, n1))) {
+        if (auto el = TransforyBinaryDifferingArityElements(
+                mgr, element_ty, std::forward<BinaryTransform>(f), nested_or_self(c0, n0),
+                nested_or_self(c1, n1))) {
             els.Push(el.Get());
         } else {
             return el.Failure();
