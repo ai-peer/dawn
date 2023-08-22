@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dded4ae_9006f22f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-22T13:48:12Z",
+      "side": 1,
+      "message": "PTAL. Wasn\u0027t sure if it should also be emscripten?",
+      "revId": "213114ae981732dacabb1621b3cc36868dc93e2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
