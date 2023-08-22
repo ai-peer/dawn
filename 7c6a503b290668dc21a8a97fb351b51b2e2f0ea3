@@ -20,6 +20,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e9a8ac71_9cba6760",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-22T12:29:07Z",
+      "side": 1,
+      "message": "merge conflict, could you please rebase the CL?",
+      "revId": "7c6a503b290668dc21a8a97fb351b51b2e2f0ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "145df2d0_b6883cfc",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 5
@@ -54,6 +71,30 @@
       "writtenOn": "2023-08-22T07:48:49Z",
       "side": 1,
       "message": "Guys, is there anyway to make `DAWN_INSTANTIATE_TEST_V` support param? So that I could do this here:\n```\nreturn {{D3D11Backend(), {NV12, P010}}, (D3D12Backend(), {NV12}}};\n```\nThis way I could avoid copying/pasting NV12 code lines like[1] for P010.",
+      "range": {
+        "startLine": 222,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 44
+      },
+      "revId": "7c6a503b290668dc21a8a97fb351b51b2e2f0ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f61ec3bd_078d39d8",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_win.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-22T12:29:07Z",
+      "side": 1,
+      "message": "I think you need to create a new macro similar to `DAWN_INSTANTIATE_TEST_P`\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/DawnTest.h;l\u003d760;drc\u003dd708cc843536cc344f0f7679a978634cc14d6153;bpv\u003d1;bpt\u003d1",
+      "parentUuid": "11010c47_d68b8393",
       "range": {
         "startLine": 222,
         "startChar": 4,
