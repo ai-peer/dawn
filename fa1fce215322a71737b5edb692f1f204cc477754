@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9677e393_8049dd0f",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-22T10:14:58Z",
+      "side": 1,
+      "message": "In this patch I\u0027ve added several tests about the usage scope with read-only and read-write storage texture accesses. PTAL, thanks!",
+      "parentUuid": "89cdbd53_8d1aff8d",
+      "revId": "fa1fce215322a71737b5edb692f1f204cc477754",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "dd499c8e_343a4e28",
         "filename": "src/dawn/native/dawn_platform.h",
         "patchSetId": 2
