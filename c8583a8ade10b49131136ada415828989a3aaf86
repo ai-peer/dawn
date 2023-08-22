@@ -16,6 +16,29 @@
       "message": "Looks like still needs your owner approval for files enga@",
       "revId": "c8583a8ade10b49131136ada415828989a3aaf86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2e8480_6b5095ab",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T23:03:14Z",
+      "side": 1,
+      "message": "you could use StackVector for this purpose as well",
+      "range": {
+        "startLine": 461,
+        "startChar": 7,
+        "endLine": 463,
+        "endChar": 51
+      },
+      "revId": "c8583a8ade10b49131136ada415828989a3aaf86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
