@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9e89dbb_3c6d4644",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c111e4d_18edc129",
+      "range": {
+        "startLine": 82,
+        "startChar": 8,
+        "endLine": 82,
+        "endChar": 13
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5326022a_64a19d68",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-18T23:18:53Z",
       "side": 1,
       "message": "I think it\u0027s ok if you do no braces\n\n```suggestion\nstruct AdditionalExtensionUnpacker;\n```",
+      "range": {
+        "startLine": 90,
+        "startChar": 34,
+        "endLine": 90,
+        "endChar": 38
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f2a619_fa851aa3",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5326022a_64a19d68",
       "range": {
         "startLine": 90,
         "startChar": 34,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76d03d6b_5943019f",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:06:32Z",
+      "side": 1,
+      "message": "I wanted the error message to be the same if a duplicate happens regardless for a normal JSON extension or a specialization one. I couldn\u0027t (in a simple and nice way...) print the root type the same way in the `UnpackExtension` helper though so I just used the set.\n\nInitially I had the `Unpack` helper return the `SType` of the additional extension that it found. The problem with that is that there isn\u0027t a good way to differentiate between unpacking duplicates (I can\u0027t use `Invalid` because in this solution I used it for an unexpected SType.)\n\nEDIT: Nvm, I found a reasonable way to do it without the set.",
+      "parentUuid": "2362ec72_8c6615d4",
+      "range": {
+        "startLine": 108,
+        "startChar": 0,
+        "endLine": 108,
+        "endChar": 49
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "85ddbf35_928f431e",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-08-18T23:18:53Z",
       "side": 1,
       "message": "nit: maybe hoist this out into a separate name so that it\u0027s easier to read that you\u0027re doing: `Unpacker\u003cType, Chain, Additional\u003e::Unpack`.",
+      "range": {
+        "startLine": 128,
+        "startChar": 26,
+        "endLine": 128,
+        "endChar": 87
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73756d5f_1559cc51",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "85ddbf35_928f431e",
       "range": {
         "startLine": 128,
         "startChar": 26,
@@ -127,6 +223,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bf69d58_cfe75588",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c78b62b6_4e8c5764",
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ab15596_a6a82df1",
@@ -144,6 +258,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7500b832_91704908",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ab15596_a6a82df1",
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b81dec5_f5b4bd14",
@@ -157,6 +289,30 @@
       "writtenOn": "2023-08-18T23:18:53Z",
       "side": 1,
       "message": "nit: comment doesn\u0027t match the test",
+      "range": {
+        "startLine": 362,
+        "startChar": 0,
+        "endLine": 362,
+        "endChar": 52
+      },
+      "revId": "9cc67a0093bc0d628ed2d8cf6736b5b7415735d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5357f0df_092af34f",
+        "filename": "src/dawn/tests/unittests/ChainUtilsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:06:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1b81dec5_f5b4bd14",
       "range": {
         "startLine": 362,
         "startChar": 0,
