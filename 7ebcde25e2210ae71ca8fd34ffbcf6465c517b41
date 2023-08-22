@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a56bdb41_9ea894a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:15:53Z",
+      "side": 1,
+      "message": "overall LGTM with some suggestions\n\nI don\u0027t like that the function returns a bool AND writes a bool\u0026 out. Weird it outputs in two places and would be nice if it\u0027s just one.",
+      "revId": "7ebcde25e2210ae71ca8fd34ffbcf6465c517b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e7980d_012dc7ec",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:15:53Z",
+      "side": 1,
+      "message": "this could use a helper\n`DAWN_TRY(PopulateMember\u003c\u003e(result));`",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "7ebcde25e2210ae71ca8fd34ffbcf6465c517b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f99c87a5_d435fb7e",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:15:53Z",
+      "side": 1,
+      "message": "this could be `return DAWN_VALIDATION_ERROR(...)`",
+      "range": {
+        "startLine": 95,
+        "startChar": 4,
+        "endLine": 95,
+        "endChar": 17
+      },
+      "revId": "7ebcde25e2210ae71ca8fd34ffbcf6465c517b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dc097aa_9873e9e7",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:15:53Z",
+      "side": 1,
+      "message": "this could helper like\n\n`DAWN_TRY(PopulateMember\u003c\u003e(result));`",
+      "range": {
+        "startLine": 125,
+        "startChar": 28,
+        "endLine": 130,
+        "endChar": 29
+      },
+      "revId": "7ebcde25e2210ae71ca8fd34ffbcf6465c517b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdafa2aa_0268f645",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:15:53Z",
+      "side": 1,
+      "message": "this could be `DAWN_TRY(Unpacker::Unpack(...))`",
+      "range": {
+        "startLine": 140,
+        "startChar": 29,
+        "endLine": 140,
+        "endChar": 45
+      },
+      "revId": "7ebcde25e2210ae71ca8fd34ffbcf6465c517b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
