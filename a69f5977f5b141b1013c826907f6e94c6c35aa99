@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab37d06a_fb0d4f28",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-08-22T19:48:02Z",
+      "side": 1,
+      "message": "PTAL",
+      "revId": "a69f5977f5b141b1013c826907f6e94c6c35aa99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "125bfc8d_86b27909",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2023-08-22T19:48:02Z",
+      "side": 1,
+      "message": "Conflicting expectations.",
+      "range": {
+        "startLine": 594,
+        "startChar": 0,
+        "endLine": 596,
+        "endChar": 0
+      },
+      "revId": "a69f5977f5b141b1013c826907f6e94c6c35aa99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
