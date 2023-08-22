@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cdc4126_216f15a1",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:59:32Z",
+      "side": 1,
+      "message": "nit: common/Math.h defines IsSubset",
+      "revId": "060c4fbcf4b3b911a50823d2f182699a2d35d466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

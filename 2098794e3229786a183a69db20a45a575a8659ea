@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "283d529f_6ed2df78",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:59:32Z",
+      "side": 1,
+      "message": "maybe we can remove the other definition of STypesToString then?\n\nand do `if constexpr(sizeof...(Rest))` inside the body",
+      "parentUuid": "62b4419e_79114c79",
+      "range": {
+        "startLine": 55,
+        "startChar": 47,
+        "endLine": 55,
+        "endChar": 97
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23cb6b73_9cc4630c",
         "filename": "generator/templates/dawn/native/ChainUtils.h",
         "patchSetId": 10
@@ -255,6 +279,24 @@
       "side": 1,
       "message": "Changed it to use a bitset in a slightly different way. Lmk what you think.",
       "parentUuid": "68dc4ff8_37c17073",
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21ae235b_c34ee1ce",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:59:32Z",
+      "side": 1,
+      "message": "this works too!",
+      "parentUuid": "06346e4d_da9a4e85",
       "revId": "2098794e3229786a183a69db20a45a575a8659ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -648,6 +690,30 @@
       "side": 1,
       "message": "I can add something like this in a follow up because it might be a bit more involved to make the `unpacked` types into something custom instead of just an alias to a tuple.",
       "parentUuid": "a211ecd6_b5f74ee3",
+      "range": {
+        "startLine": 953,
+        "startChar": 12,
+        "endLine": 955,
+        "endChar": 82
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a14a7e1_19dad3ef",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-22T20:59:32Z",
+      "side": 1,
+      "message": "ok",
+      "parentUuid": "62ef2fe8_3d8df2cc",
       "range": {
         "startLine": 953,
         "startChar": 12,
