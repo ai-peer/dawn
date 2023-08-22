@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62b4419e_79114c79",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Agreed, but I get a compilation failure if I don\u0027t do this:\n`error: call to \u0027STypesToString\u0027 is ambiguous`\n\nI think it has to do with struct specialization vs function specialization. I could probably make it work with a struct and a function inside it, but probably not too important?",
+      "parentUuid": "c5db9e8a_ed630c93",
+      "range": {
+        "startLine": 55,
+        "startChar": 47,
+        "endLine": 55,
+        "endChar": 97
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23cb6b73_9cc4630c",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-19T00:15:44Z",
       "side": 1,
       "message": "nit: probably better to just say if arg !\u003d nullptr, append\n\ninstead of appending empty string",
+      "range": {
+        "startLine": 91,
+        "startChar": 0,
+        "endLine": 91,
+        "endChar": 84
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89fbddf_6834cc64",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23cb6b73_9cc4630c",
       "range": {
         "startLine": 91,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1f01629_5a27f297",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c06ca06_1c7a9adc",
+      "range": {
+        "startLine": 233,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 23
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "69c82ee5_59de9ba4",
@@ -87,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a982b2a_afb10fa6",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Ah.. its not an easy thing to do atm... To be fair, it will fail compilation if you do that atm because `UnpackedIndexOf` will fail.",
+      "parentUuid": "69c82ee5_59de9ba4",
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec19d35e_cdd43dcf",
@@ -100,6 +190,30 @@
       "writtenOn": "2023-08-19T00:15:44Z",
       "side": 1,
       "message": "Can you say \u003cB, Exts...\u003e ?",
+      "range": {
+        "startLine": 57,
+        "startChar": 0,
+        "endLine": 57,
+        "endChar": 74
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1694e088_ec6c7f6b",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec19d35e_cdd43dcf",
       "range": {
         "startLine": 57,
         "startChar": 0,
@@ -129,6 +243,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06346e4d_da9a4e85",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Changed it to use a bitset in a slightly different way. Lmk what you think.",
+      "parentUuid": "68dc4ff8_37c17073",
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "199698fb_932f884e",
         "filename": "src/dawn/native/ChainUtils.h",
         "patchSetId": 10
@@ -140,6 +272,24 @@
       "writtenOn": "2023-08-19T00:15:44Z",
       "side": 1,
       "message": "even with the comment above, it\u0027s a bit hard to read. maybe some more comments to document what is going on.\n\n// loop over each element in unpacked\n// check that it is either absent, or in set valid set of sTypes",
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1cb6a33_cf37e69a",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "No longer applicable. I think it\u0027s a lot clearer this new way also.",
+      "parentUuid": "199698fb_932f884e",
       "revId": "2098794e3229786a183a69db20a45a575a8659ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +317,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "92c957ae_4bf3cb39",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e71466d_96d7d5c4",
+      "range": {
+        "startLine": 77,
+        "startChar": 23,
+        "endLine": 77,
+        "endChar": 24
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91c9cc75_ada633d1",
@@ -184,6 +358,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5512109_e54f2a54",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91c9cc75_ada633d1",
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a065fe3_8965109b",
@@ -197,6 +389,30 @@
       "writtenOn": "2023-08-19T00:15:44Z",
       "side": 1,
       "message": "nit: give this an alias since you use it twice. once for Validate, once for ToString",
+      "range": {
+        "startLine": 106,
+        "startChar": 4,
+        "endLine": 106,
+        "endChar": 63
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bb6f924_94c9e35b",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a065fe3_8965109b",
       "range": {
         "startLine": 106,
         "startChar": 4,
@@ -230,6 +446,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "91355dc8_c5dba64d",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c093c76_3ea24be1",
+      "range": {
+        "startLine": 107,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 5
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8776427a_f1103fc7",
@@ -243,6 +483,30 @@
       "writtenOn": "2023-08-19T00:15:44Z",
       "side": 1,
       "message": "maybe the message should use some newlines and list things as bullet points. I expect it might get hard to read",
+      "range": {
+        "startLine": 114,
+        "startChar": 7,
+        "endLine": 114,
+        "endChar": 80
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7dfbd6_86e3ab9f",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8776427a_f1103fc7",
       "range": {
         "startLine": 114,
         "startChar": 7,
@@ -276,6 +540,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "431525cd_57933cc2",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 918,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e3e2c4b_e2958147",
+      "range": {
+        "startLine": 917,
+        "startChar": 42,
+        "endLine": 918,
+        "endChar": 93
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1f3f955_82b18111",
@@ -299,6 +587,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ee0af7_63c8b910",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 936,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "Updated it a bit so that it\u0027s a little easier to use. I don\u0027t think the macro nets too much at the moment, and it\u0027s not trivial to implement because of the prefixing on the arglist of tuples.\n\nDidn\u0027t actually need the Root type at all so removed it.\n\nI think for the no chains branch, I will leave it out for now. We definitely do not need it now, and I can\u0027t convince myself that it will be common in the future either. If it does come up we can add support then.",
+      "parentUuid": "b1f3f955_82b18111",
+      "range": {
+        "startLine": 935,
+        "startChar": 9,
+        "endLine": 936,
+        "endChar": 24
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a211ecd6_b5f74ee3",
@@ -312,6 +624,30 @@
       "writtenOn": "2023-08-19T00:15:44Z",
       "side": 1,
       "message": "nit: maybe we can write our own Get so alleviate the syntax. input chains are always const* and output chains are always *\n\nconst auto* spirvDesc \u003d unpacked.Get\u003cShaderModuleSPIRVDescriptor\u003e();\nconst auto* spirvOptions \u003d unpacked.Get\u003cDawnShaderModuleSPIRVOptionsDescriptor\u003e();",
+      "range": {
+        "startLine": 953,
+        "startChar": 12,
+        "endLine": 955,
+        "endChar": 82
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62ef2fe8_3d8df2cc",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 955,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-22T19:08:10Z",
+      "side": 1,
+      "message": "I can add something like this in a follow up because it might be a bit more involved to make the `unpacked` types into something custom instead of just an alias to a tuple.",
+      "parentUuid": "a211ecd6_b5f74ee3",
       "range": {
         "startLine": 953,
         "startChar": 12,
