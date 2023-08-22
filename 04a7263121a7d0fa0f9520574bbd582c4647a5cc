@@ -22,6 +22,30 @@
       },
       "revId": "04a7263121a7d0fa0f9520574bbd582c4647a5cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c815fea3_f9be6096",
+        "filename": "src/tint/utils/socket/socket.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-08-22T12:14:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "012f93d1_cb7353f3",
+      "range": {
+        "startLine": 299,
+        "startChar": 0,
+        "endLine": 302,
+        "endChar": 6
+      },
+      "revId": "04a7263121a7d0fa0f9520574bbd582c4647a5cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
