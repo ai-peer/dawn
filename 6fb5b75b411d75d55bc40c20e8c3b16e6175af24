@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccab5636_9a522358",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-22T22:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c52938f1_45b10bf3",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0d63812_06e71ced",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-08-22T20:06:48Z",
       "side": 1,
       "message": "Nit: \"Data\" and \"Info\" are content-free. Maybe mBindingPointBuiltins? or mBuiltinBindingPoints? or mEmulatedBuiltins?",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177bf06e_72037e0a",
+        "filename": "src/dawn/native/opengl/PipelineGL.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-22T22:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0d63812_06e71ced",
       "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27662b9f_852a14b5",
+        "filename": "src/dawn/native/opengl/PipelineLayoutGL.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-22T22:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "274445e8_e5a9ca31",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d8792f07_69dd85bd",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2050d407_f7f5effe",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-22T22:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8792f07_69dd85bd",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48e81bf8_aefce92a",
@@ -99,6 +171,24 @@
       "writtenOn": "2023-08-22T20:06:48Z",
       "side": 1,
       "message": "Nit: \"run\" -\u003e \"runs\", \"We\" -\u003e \"we\"",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72682d15_20d27037",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-08-22T22:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48e81bf8_aefce92a",
       "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
