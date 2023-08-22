@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb68380b_9fa5ad8b",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2758,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-22T05:06:52Z",
+      "side": 1,
+      "message": "I have to do this to pass glsl validation. I am not sure if we should put this limitation to the front end of Tint as only OpenGL has such limitation. What do you think?",
+      "range": {
+        "startLine": 2754,
+        "startChar": 1,
+        "endLine": 2758,
+        "endChar": 25
+      },
+      "revId": "8a8e921a00f1381aa71ee997e7ad9476f30288f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

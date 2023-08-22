@@ -70,6 +70,30 @@
       },
       "revId": "2aacf6ec0a9b48e04e05c390c7f6196e0edb7dcd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c587bcef_801abab2",
+        "filename": "test/tint/builtins/gen/literal/textureLoad/01cd01.wgsl.expected.glsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-22T05:06:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df75fdab_12f9874f",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 12
+      },
+      "revId": "2aacf6ec0a9b48e04e05c390c7f6196e0edb7dcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
