@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4c699c8e_6932c8f0",
+        "filename": ".bazelrc",
+        "patchSetId": 21
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-22T16:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe3b5806_2bb035dd",
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "52f948a1_fce544c7",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 21
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4028781_3fd16003",
+        "filename": "BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-22T16:42:19Z",
+      "side": 1,
+      "message": "It can be used by skia (via dawn) to use the public headers.",
+      "parentUuid": "04d8c569_0897b871",
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a812d16_ac5cb65d",
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac8da1e_26068444",
+        "filename": "WORKSPACE.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-22T16:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a812d16_ac5cb65d",
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b295d036_f9d5a77c",
@@ -82,6 +136,30 @@
       "writtenOn": "2023-08-20T14:57:21Z",
       "side": 1,
       "message": "nit: bool_flag",
+      "range": {
+        "startLine": 7,
+        "startChar": 4,
+        "endLine": 7,
+        "endChar": 14
+      },
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2f721a0_95527e97",
+        "filename": "src/tint/flags.bzl",
+        "patchSetId": 21
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-22T16:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b295d036_f9d5a77c",
       "range": {
         "startLine": 7,
         "startChar": 4,
@@ -127,6 +205,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0caea063_a2702158",
+        "filename": "src/tint/utils/diagnostic/BUILD.bazel",
+        "patchSetId": 21
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-22T16:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e236d06_a4ba21c8",
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dfc6c866_bf9d23f9",
@@ -144,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c1b4cbd_44b7b690",
+        "filename": "tools/src/cmd/gen/build/BUILD.bazel.tmpl",
+        "patchSetId": 21
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-22T16:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dfc6c866_bf9d23f9",
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b9ed7cb_77ddafee",
@@ -157,6 +271,30 @@
       "writtenOn": "2023-08-20T14:57:21Z",
       "side": 1,
       "message": "```suggestion\n{{- $C :\u003d Replace $C \" \" \"_\"}}\n```",
+      "range": {
+        "startLine": 212,
+        "startChar": 29,
+        "endLine": 212,
+        "endChar": 30
+      },
+      "revId": "4dff7460743558a0972d335f70cb9cac609848ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0421d5b_bd281d52",
+        "filename": "tools/src/cmd/gen/build/BUILD.bazel.tmpl",
+        "patchSetId": 21
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-08-22T16:42:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b9ed7cb_77ddafee",
       "range": {
         "startLine": 212,
         "startChar": 29,
