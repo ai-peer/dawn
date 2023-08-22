@@ -360,9 +360,10 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
     if (!allowedSharedTextureMemoryUsage) {
         // Legacy path
         // TODO(crbug.com/dawn/1795): Remove after migrating all old usages.
-        // Only allows simple readonly texture usages.
-        constexpr wgpu::TextureUsage kValidMultiPlanarUsages =
-            wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc;
+        // Allows simple readonly texture usages and RenderAttachment.
+        constexpr wgpu::TextureUsage kValidMultiPlanarUsages = wgpu::TextureUsage::TextureBinding |
+                                                               wgpu::TextureUsage::CopySrc |
+                                                               wgpu::TextureUsage::RenderAttachment;
         DAWN_INVALID_IF(format->IsMultiPlanar() && !IsSubset(usage, kValidMultiPlanarUsages),
                         "The texture usage (%s) is incompatible with the multi-planar format (%s).",
                         usage, format->format);
@@ -1038,6 +1039,19 @@ Aspect TextureViewBase::GetAspects() const {
 const Format& TextureViewBase::GetFormat() const {
     ASSERT(!IsError());
     return mFormat;
+}
+
+Extent3D TextureViewBase::GetSize() const {
+    ASSERT(!IsError());
+    Aspect aspect = GetAspects();
+    Extent3D size = GetTexture()->GetSize();
+    // TODO(buglink): Possibly add support for multiplanar formats with plane configs different than
+    // Y_UV and subsampling other than 4:2:0 in which case the size changes for different aspects.
+    if (aspect & Aspect::Plane1) {
+        size.width /= 2;
+        size.height /= 2;
+    }
+    return size;
 }
 
 wgpu::TextureViewDimension TextureViewBase::GetDimension() const {
