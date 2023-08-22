@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15153e09_f06fe72f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-22T20:06:48Z",
+      "side": 1,
+      "message": "LGTM2. Nits are at your discretion.",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c52938f1_45b10bf3",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-22T20:06:48Z",
+      "side": 1,
+      "message": "Nit: perhaps a comment to explain why a size of 4 uint32_t\u0027s was chosen?",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d63812_06e71ced",
+        "filename": "src/dawn/native/opengl/PipelineGL.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-22T20:06:48Z",
+      "side": 1,
+      "message": "Nit: \"Data\" and \"Info\" are content-free. Maybe mBindingPointBuiltins? or mBuiltinBindingPoints? or mEmulatedBuiltins?",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "274445e8_e5a9ca31",
+        "filename": "src/dawn/native/opengl/PipelineLayoutGL.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-22T20:06:48Z",
+      "side": 1,
+      "message": "Nit: separate",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8792f07_69dd85bd",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-22T20:06:48Z",
+      "side": 1,
+      "message": "Nit: suggest \"Some texture builtin functions are unsupported on GLSL ES. These are emulated with internal uniforms.\"",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48e81bf8_aefce92a",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-22T20:06:48Z",
+      "side": 1,
+      "message": "Nit: \"run\" -\u003e \"runs\", \"We\" -\u003e \"we\"",
+      "revId": "6fb5b75b411d75d55bc40c20e8c3b16e6175af24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
