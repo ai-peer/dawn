@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1828a11f_7930c620",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-23T06:59:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "283d529f_6ed2df78",
+      "range": {
+        "startLine": 55,
+        "startChar": 47,
+        "endLine": 55,
+        "endChar": 97
+      },
+      "revId": "2098794e3229786a183a69db20a45a575a8659ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "23cb6b73_9cc4630c",
