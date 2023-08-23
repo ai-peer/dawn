@@ -145,6 +145,30 @@
       },
       "revId": "7c6a503b290668dc21a8a97fb351b51b2e2f0ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65032df9_1f652397",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_win.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-23T09:09:36Z",
+      "side": 1,
+      "message": "Found a way out. PTAL",
+      "parentUuid": "1ae2fb66_ab697fad",
+      "range": {
+        "startLine": 222,
+        "startChar": 4,
+        "endLine": 222,
+        "endChar": 44
+      },
+      "revId": "7c6a503b290668dc21a8a97fb351b51b2e2f0ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
