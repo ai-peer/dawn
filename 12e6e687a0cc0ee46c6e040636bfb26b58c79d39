@@ -16,6 +16,75 @@
       "message": "PTAL.",
       "revId": "12e6e687a0cc0ee46c6e040636bfb26b58c79d39",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4dde4e9e_d072b6da",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:32:42Z",
+      "side": 1,
+      "message": "comment please",
+      "range": {
+        "startLine": 514,
+        "startChar": 6,
+        "endLine": 514,
+        "endChar": 20
+      },
+      "revId": "12e6e687a0cc0ee46c6e040636bfb26b58c79d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f466b91c_f47c2b3f",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:32:42Z",
+      "side": 1,
+      "message": "`const UnaryTransform\u0026`",
+      "range": {
+        "startLine": 520,
+        "startChar": 36,
+        "endLine": 520,
+        "endChar": 52
+      },
+      "revId": "12e6e687a0cc0ee46c6e040636bfb26b58c79d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c468da2c_a3a34f59",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:32:42Z",
+      "side": 1,
+      "message": "`f`",
+      "range": {
+        "startLine": 532,
+        "startChar": 67,
+        "endLine": 532,
+        "endChar": 98
+      },
+      "revId": "12e6e687a0cc0ee46c6e040636bfb26b58c79d39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
