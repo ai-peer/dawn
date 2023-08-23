@@ -56,7 +56,7 @@ class TextureView final : public TextureViewBase {
 
     GLuint GetHandle() const;
     GLenum GetGLTarget() const;
-    void BindToFramebuffer(GLenum target, GLenum attachment);
+    void BindToFramebuffer(GLenum target, GLenum attachment, GLuint depthLayer = 0);
     void CopyIfNeeded();
 
   private:

@@ -752,6 +752,11 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
         createInfo.flags |= VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
     }
 
+    if (createInfo.imageType == VK_IMAGE_TYPE_3D &&
+        createInfo.usage & VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT) {
+        createInfo.flags |= VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT;
+    }
+
     // We always set VK_IMAGE_USAGE_TRANSFER_DST_BIT unconditionally beause the Vulkan images
     // that are used in vkCmdClearColorImage() must have been created with this flag, which is
     // also required for the implementation of robust resource initialization.
@@ -1532,6 +1537,13 @@ void TextureView::DestroyImpl() {
         device->GetFencedDeleter()->DeleteWhenUnused(mHandleForBGRA8UnormStorage);
         mHandleForBGRA8UnormStorage = VK_NULL_HANDLE;
     }
+
+    for (auto& [index, handle] : mHandlesFor2DViewOn3D) {
+        if (handle != VK_NULL_HANDLE) {
+            device->GetFencedDeleter()->DeleteWhenUnused(handle);
+            handle = VK_NULL_HANDLE;
+        }
+    }
 }
 
 VkImageView TextureView::GetHandle() const {
@@ -1540,6 +1552,46 @@ VkImageView TextureView::GetHandle() const {
 
 VkImageView TextureView::GetHandleForBGRA8UnormStorage() const {
     return mHandleForBGRA8UnormStorage;
+}
+
+ResultOrError<VkImageView> TextureView::GetOrCreate2DViewOn3D(uint32_t depthSlice) {
+    ASSERT(GetTexture()->GetDimension() == wgpu::TextureDimension::e3D);
+    const SubresourceRange& subresources = GetSubresourceRange();
+    ASSERT(depthSlice >= 0 &&
+           depthSlice < GetTexture()
+                            ->GetMipLevelSingleSubresourceVirtualSize(subresources.baseMipLevel)
+                            .depthOrArrayLayers);
+
+    auto it = mHandlesFor2DViewOn3D.find(depthSlice);
+    if (it != mHandlesFor2DViewOn3D.end()) {
+        return std::move(it->second);
+    }
+
+    Device* device = ToBackend(GetTexture()->GetDevice());
+
+    VkImageViewCreateInfo createInfo;
+    createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    createInfo.pNext = nullptr;
+    createInfo.flags = 0;
+    createInfo.image = ToBackend(GetTexture())->GetHandle();
+    createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    createInfo.format = VulkanImageFormat(device, GetFormat().format);
+    createInfo.components = VkComponentMapping{VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G,
+                                               VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A};
+    createInfo.subresourceRange.baseMipLevel = subresources.baseMipLevel;
+    createInfo.subresourceRange.levelCount = 1;
+    createInfo.subresourceRange.baseArrayLayer = depthSlice;
+    createInfo.subresourceRange.layerCount = 1;
+    createInfo.subresourceRange.aspectMask = VulkanAspectMask(subresources.aspects);
+
+    VkImageView view;
+    DAWN_TRY(CheckVkSuccess(
+        device->fn.CreateImageView(device->GetVkDevice(), &createInfo, nullptr, &*view),
+        "CreateImageView for 2D view on 3D image"));
+
+    mHandlesFor2DViewOn3D[depthSlice] = view;
+
+    return view;
 }
 
 void TextureView::SetLabelImpl() {
