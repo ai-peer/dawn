@@ -16,6 +16,52 @@
       "message": "These kind of threading shenanigans always make my head spin, but this seems like a reasonable approach to the issue outlined in the bug. LGTM",
       "revId": "cd7b882f293180b793d00c06ac169392041f1f01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da16f04d_382c4d39",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T18:48:05Z",
+      "side": 1,
+      "message": "the ref may be empty in the Pointer and Erasing case, right?\n\nWe can avoid pushing it into the list in that case",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "revId": "cd7b882f293180b793d00c06ac169392041f1f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4057db63_5e0edb83",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T18:48:05Z",
+      "side": 1,
+      "message": "here\u0027s a thought:\n\nthe vector could be a `StackVector temps;`\n\nwe could save the pointer to it before calling `func`.\n`this-\u003emTemporaryRefs \u003d \u0026temps; result \u003d func();`\n\nthen, we don\u0027t need to do any heap allocations if there are a few number of temp refs!",
+      "range": {
+        "startLine": 246,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 22
+      },
+      "revId": "cd7b882f293180b793d00c06ac169392041f1f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
