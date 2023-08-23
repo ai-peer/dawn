@@ -16,6 +16,69 @@
       "message": "PTAL.",
       "revId": "0e613fee846029fbbf2bf2c4dc060d7188f307a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "938ba9c2_598f772e",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:31:19Z",
+      "side": 1,
+      "message": "`const BinaryTransform\u0026`",
+      "range": {
+        "startLine": 520,
+        "startChar": 37,
+        "endLine": 520,
+        "endChar": 54
+      },
+      "revId": "0e613fee846029fbbf2bf2c4dc060d7188f307a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe0b22ad_e6fe2897",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:31:19Z",
+      "side": 1,
+      "message": "I think this function could benefit from `TINT_ASSERT(c0-\u003eType() \u003d\u003d c1-\u003eType())` as the first statement",
+      "revId": "0e613fee846029fbbf2bf2c4dc060d7188f307a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19464286_f56752e4",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:31:19Z",
+      "side": 1,
+      "message": "`f`",
+      "range": {
+        "startLine": 534,
+        "startChar": 62,
+        "endLine": 534,
+        "endChar": 94
+      },
+      "revId": "0e613fee846029fbbf2bf2c4dc060d7188f307a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
