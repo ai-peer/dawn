@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21695549_98c145d5",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-23T06:50:38Z",
+      "side": 1,
+      "message": "Hmm to address all the comments as a whole, how would the folds work with `MaybeError`s? Is the suggestion to add like a `bool()` operator on `MaybeError`s where `{} -\u003e true`, and an `\u0026` operator such that a `{} \u0026 error \u003d error`? Then we would do something like an \u0026 fold instead? (Not even sure if this would work yet)",
+      "parentUuid": "d7e7980d_012dc7ec",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "7ebcde25e2210ae71ca8fd34ffbcf6465c517b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f99c87a5_d435fb7e",
         "filename": "generator/templates/dawn/native/ChainUtils.cpp",
         "patchSetId": 7
