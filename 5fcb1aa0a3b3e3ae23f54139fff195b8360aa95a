@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d7798a_04cc5d87",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-23T14:19:30Z",
+      "side": 1,
+      "message": "I see.",
+      "parentUuid": "62ca8be5_a223d77f",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 25
+      },
+      "revId": "5fcb1aa0a3b3e3ae23f54139fff195b8360aa95a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21a245a8_fe6dac3c",
