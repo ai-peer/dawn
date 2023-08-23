@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c626760_7525d3b5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T20:50:27Z",
+      "side": 1,
+      "message": "so this is a bug - am I understanding correctly?\n\nit would be great to have a regression test for the issue;\nit could go in\nsrc/dawn/tests/end2end/DrawIndexedIndirectTests.cpp\nor\nsrc/dawn/tests/end2end/DrawIndexedTests.cpp",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "6038711b58cfac3c0350d2255b6f05e09a05e780",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
