@@ -47,8 +47,7 @@ class ContentLessObjectCacheable : public detail::ContentLessObjectCacheableBase
     }
 
   protected:
-    // The dtor asserts that the cache isn't set to ensure that we were Uncache-d or never cached.
-    ~ContentLessObjectCacheable() override { ASSERT(mCache == nullptr); }
+    ~ContentLessObjectCacheable() override { Uncache(); }
 
   private:
     friend class ContentLessObjectCache<RefCountedT>;
