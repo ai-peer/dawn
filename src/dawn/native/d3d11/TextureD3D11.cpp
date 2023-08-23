@@ -1274,11 +1274,26 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> TextureView::CreateD3D11ShaderRe
 }
 
 ResultOrError<ComPtr<ID3D11RenderTargetView>> TextureView::CreateD3D11RenderTargetView(
-    uint32_t mipLevel) const {
+    uint32_t mipLevel,
+    uint32_t depthSlice) const {
     auto range = GetSubresourceRange();
     ASSERT(mipLevel >= range.baseMipLevel && mipLevel < range.baseMipLevel + range.levelCount);
+
+    uint32_t baseLayer = range.baseArrayLayer;
+    // Use depth slice instead of base array layer for 3D textures used as render attachment.
+    if (GetDimension() == wgpu::TextureViewDimension::e3D &&
+        GetTexture()->GetUsage() & wgpu::TextureUsage::RenderAttachment) {
+        ASSERT(
+            depthSlice >= 0 &&
+            depthSlice <
+                GetTexture()->GetMipLevelSingleSubresourceVirtualSize(mipLevel).depthOrArrayLayers);
+        baseLayer = depthSlice;
+    }
+
     range.baseMipLevel = mipLevel;
     range.levelCount = 1u;
+    range.baseArrayLayer = baseLayer;
+    range.layerCount = 1u;
     D3D11_RENDER_TARGET_VIEW_DESC rtvDesc =
         ToBackend(GetTexture())->GetRTVDescriptor(GetFormat(), range);
     ComPtr<ID3D11RenderTargetView> rtv;

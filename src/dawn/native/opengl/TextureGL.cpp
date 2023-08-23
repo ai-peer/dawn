@@ -600,7 +600,19 @@ GLenum TextureView::GetGLTarget() const {
     return mTarget;
 }
 
-void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
+void TextureView::BindToFramebuffer(GLenum target, GLenum attachment, GLuint depthSlice) {
+    uint32_t baseLayer = GetBaseArrayLayer();
+    // Use depth slice instead of base array layer for 3D textures used as render attachment.
+    if (GetDimension() == wgpu::TextureViewDimension::e3D &&
+        GetTexture()->GetUsage() & wgpu::TextureUsage::RenderAttachment) {
+        ASSERT(depthSlice >= 0 &&
+               depthSlice < static_cast<GLuint>(
+                                GetTexture()
+                                    ->GetMipLevelSingleSubresourceVirtualSize(GetBaseMipLevel())
+                                    .depthOrArrayLayers));
+        baseLayer = depthSlice;
+    }
+
     const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
 
     // Use the base texture where possible to minimize the amount of copying required on GLES.
@@ -621,7 +633,7 @@ void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
         handle = ToBackend(GetTexture())->GetHandle();
         textarget = ToBackend(GetTexture())->GetGLTarget();
         mipLevel = GetBaseMipLevel();
-        arrayLayer = GetBaseArrayLayer();
+        arrayLayer = baseLayer;
     }
 
     ASSERT(handle != 0);
