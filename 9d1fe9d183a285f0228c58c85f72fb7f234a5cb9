@@ -39,6 +39,29 @@
       },
       "revId": "9d1fe9d183a285f0228c58c85f72fb7f234a5cb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9703fd4_5892f4ad",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:25:43Z",
+      "side": 1,
+      "message": "Antonio to confirm, but I think this `std::forward` was always incorrect inside this loop. If the callee `std::move()`s the forwarded value, then we can have a use after free.\n\nSuggest making this just `f`.",
+      "range": {
+        "startLine": 543,
+        "startChar": 77,
+        "endLine": 543,
+        "endChar": 92
+      },
+      "revId": "9d1fe9d183a285f0228c58c85f72fb7f234a5cb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
