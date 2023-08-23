@@ -122,6 +122,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "06eabb9b_3aa4a68d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T14:22:20Z",
+      "side": 1,
+      "message": "Updated the commit comment.",
+      "parentUuid": "bbdfc5d1_58e16d26",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ee07ff2b_58192f42",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
