@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "555ba420_b84c5262",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-23T08:54:57Z",
+      "side": 1,
+      "message": "Right now only native Vulkan on Intel is failing the tests (swiftshader and NVIDIA Vulkan passed). I have suppressed testing on Intel and created a tracking bug for that. I think fixing them is not super critical for now since we only care about swiftshader in this case.",
+      "parentUuid": "43978046_8d71907e",
+      "revId": "8e778fac3f1b7387449b7dd5f7506a9957f8295c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5369fdf9_62ddd13e",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6925c62_7008818e",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-23T08:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5369fdf9_62ddd13e",
+      "range": {
+        "startLine": 114,
+        "startChar": 63,
+        "endLine": 114,
+        "endChar": 96
+      },
+      "revId": "8e778fac3f1b7387449b7dd5f7506a9957f8295c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59643939_dcca6dc2",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-08-22T15:59:38Z",
       "side": 1,
       "message": "nit: list the other options here instead of the default case. There aren\u0027t many and it\u0027ll help catch bugs when we add new formats",
+      "range": {
+        "startLine": 169,
+        "startChar": 8,
+        "endLine": 170,
+        "endChar": 18
+      },
+      "revId": "8e778fac3f1b7387449b7dd5f7506a9957f8295c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "445f12f6_0eeec325",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-08-23T08:54:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59643939_dcca6dc2",
       "range": {
         "startLine": 169,
         "startChar": 8,
