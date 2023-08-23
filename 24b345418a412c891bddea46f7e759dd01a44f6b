@@ -16,6 +16,23 @@
       "message": "Switching to Brandon for review since Corentin is OOO for the week.",
       "revId": "24b345418a412c891bddea46f7e759dd01a44f6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b27d423_f46a198b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-23T15:30:09Z",
+      "side": 1,
+      "message": "LGTM! A couple of the changes in ValidateAndParseShaderModule took me a bit to follow, but it all checks out! Feels like an easier to use validation mechanism long term that will produce better error messages.",
+      "revId": "24b345418a412c891bddea46f7e759dd01a44f6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
