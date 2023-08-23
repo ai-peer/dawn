@@ -202,6 +202,9 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
         descriptor.colorAttachments[i].texture = colorAttachment.texture.Get();
         descriptor.colorAttachments[i].level = colorAttachment.baseMipLevel;
         descriptor.colorAttachments[i].slice = colorAttachment.baseArrayLayer;
+        if (attachmentInfo.view->GetDimension() == wgpu::TextureViewDimension::e3D) {
+            descriptor.colorAttachments[i].depthPlane = attachmentInfo.depthSlice;
+        }
 
         bool hasResolveTarget = attachmentInfo.resolveTarget != nullptr;
         if (hasResolveTarget) {

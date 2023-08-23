@@ -1318,7 +1318,12 @@ MaybeError CommandBuffer::SetupRenderPass(CommandRecordingContext* commandContex
                 rtvAllocation,
                 device->GetRenderTargetViewAllocator()->AllocateTransientCPUDescriptors());
 
-            const D3D12_RENDER_TARGET_VIEW_DESC viewDesc = view->GetRTVDescriptor();
+            D3D12_RENDER_TARGET_VIEW_DESC viewDesc = view->GetRTVDescriptor();
+            if (view->GetDimension() == wgpu::TextureViewDimension::e3D) {
+                viewDesc.Texture3D.FirstWSlice = attachmentInfo.depthSlice;
+                viewDesc.Texture3D.WSize = 1u;
+            }
+
             const D3D12_CPU_DESCRIPTOR_HANDLE baseDescriptor = rtvAllocation.GetBaseDescriptor();
 
             device->GetD3D12Device()->CreateRenderTargetView(
