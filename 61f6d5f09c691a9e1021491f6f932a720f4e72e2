@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f85d8174_e412a9c4",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T22:15:08Z",
+      "side": 1,
+      "message": "instead of adding yet another macro; can we change merge this one and DAWN_INSTANTIATE_TEST_V ?\n\nafter this change, DAWN_INSTANTIATE_TEST_V is unused",
+      "range": {
+        "startLine": 775,
+        "startChar": 8,
+        "endLine": 775,
+        "endChar": 31
+      },
+      "revId": "61f6d5f09c691a9e1021491f6f932a720f4e72e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934db937_f4dcbb3f",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T22:15:08Z",
+      "side": 1,
+      "message": "does it work on Linux? the test isn\u0027t enabled yet - so does Linux validate that the format is not supported?",
+      "range": {
+        "startLine": 229,
+        "startChar": 0,
+        "endLine": 229,
+        "endChar": 56
+      },
+      "revId": "61f6d5f09c691a9e1021491f6f932a720f4e72e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec7806a_f78b6059",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T22:15:08Z",
+      "side": 1,
+      "message": "does it work on Mac? the test isn\u0027t enabled yet - so does Mac validate that the format is not supported?",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 56
+      },
+      "revId": "61f6d5f09c691a9e1021491f6f932a720f4e72e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
