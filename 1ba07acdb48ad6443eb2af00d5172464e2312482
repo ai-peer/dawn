@@ -184,6 +184,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "497c78cf_f0b989a4",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T14:04:27Z",
+      "side": 1,
+      "message": "I\u0027m fairly sure I\u0027ve seen it moan about this scoping before. We have bits of the codebase where doxygen ignores code for some reason (I suspect something in headers it doesn\u0027t like that infects `cc` files).\nThanks for the change.",
+      "parentUuid": "78447375_442f0c4b",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 514,
+        "endChar": 21
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d4c9829_9c837da5",
