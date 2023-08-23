@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b37f07_1ab7a751",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-23T07:00:31Z",
+      "side": 1,
+      "message": "Switching to Brandon for review since Corentin is OOO for the week.",
+      "revId": "24b345418a412c891bddea46f7e759dd01a44f6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
