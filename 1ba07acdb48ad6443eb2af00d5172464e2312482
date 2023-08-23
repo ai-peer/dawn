@@ -16,6 +16,75 @@
       "message": "PTAL.",
       "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe5116ee_1771e1dd",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 514,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:27:26Z",
+      "side": 1,
+      "message": "Surprised doxygen isn\u0027t moaning here. Please add a comment.",
+      "range": {
+        "startLine": 514,
+        "startChar": 0,
+        "endLine": 514,
+        "endChar": 21
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d4c9829_9c837da5",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 522,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:27:26Z",
+      "side": 1,
+      "message": "`const BinaryTransform\u0026`",
+      "range": {
+        "startLine": 522,
+        "startChar": 51,
+        "endLine": 522,
+        "endChar": 68
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58634658_40a15da7",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 545,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-08-23T09:27:26Z",
+      "side": 1,
+      "message": "`f`",
+      "range": {
+        "startLine": 545,
+        "startChar": 33,
+        "endLine": 545,
+        "endChar": 65
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
