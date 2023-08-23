@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51cd169_4e8527da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-23T13:17:51Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "parentUuid": "7b13e6c4_83b05f2f",
+      "revId": "5fcb1aa0a3b3e3ae23f54139fff195b8360aa95a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81bf0465_2253c53d",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-08-23T11:49:36Z",
       "side": 1,
       "message": "are they necessary?",
+      "range": {
+        "startLine": 164,
+        "startChar": 0,
+        "endLine": 169,
+        "endChar": 25
+      },
+      "revId": "5fcb1aa0a3b3e3ae23f54139fff195b8360aa95a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62ca8be5_a223d77f",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-23T13:17:51Z",
+      "side": 1,
+      "message": "Otherwise link error:\n```\nFAILED: dawn_end2end_tests.exe dawn_end2end_tests.exe.pdb\n..\\..\\third_party\\llvm-build\\Release+Asserts\\bin\\lld-link.exe \"/OUT:./dawn_end2end_tests.exe\" /nologo -libpath:..\\..\\third_party\\llvm-build\\Release+Asserts\\lib\\clang\\17\\lib\\windows \"-libpath:C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\ATLMFC\\lib\\x64\" \"-libpath:C:\\Program Files\\Microsoft Visual Studio\\2022\\Community\\VC\\Tools\\MSVC\\14.36.32532\\lib\\x64\" \"-libpath:C:\\Program Files (x86)\\Windows Kits\\NETFXSDK\\4.8\\lib\\um\\x64\" \"-libpath:C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.22621.0\\ucrt\\x64\" \"-libpath:C:\\Program Files (x86)\\Windows Kits\\10\\\\lib\\10.0.22621.0\\\\um\\x64\" /MACHINE:X64  \"/PDB:./dawn_end2end_tests.exe.pdb\" \"@./dawn_end2end_tests.exe.rsp\"\nlld-link: error: undefined symbol: public: static class std::__Cr::vector\u003cunsigned short, class std::__Cr::allocator\u003cunsigned short\u003e\u003e __cdecl dawn::VideoViewsTests::GetTestTextureData\u003cunsigned short\u003e(enum wgpu::TextureFormat, bool)\n\u003e\u003e\u003e referenced by .\\..\\..\\src\\dawn\\tests\\end2end\\VideoViewsTests_win.cpp:127\n\u003e\u003e\u003e               obj/src/dawn/tests/end2end_tests_sources/VideoViewsTests_win.obj:(protected: virtual class std::__Cr::unique_ptr\u003cclass dawn::VideoViewsTestBackend::PlatformTexture, struct std::__Cr::default_delete\u003cclass dawn::VideoViewsTestBackend::PlatformTexture\u003e\u003e __cdecl dawn::`anonymous namespace\u0027::VideoViewsTestBackendWin::CreateVideoTextureForTest(enum wgpu::TextureFormat, enum TextureFormat::TextureUsage, bool, bool))\n```",
+      "parentUuid": "81bf0465_2253c53d",
       "range": {
         "startLine": 164,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c2883a0_2c3cebcd",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-23T13:17:51Z",
+      "side": 1,
+      "message": "Sounds good, done!",
+      "parentUuid": "21a245a8_fe6dac3c",
+      "range": {
+        "startLine": 272,
+        "startChar": 44,
+        "endLine": 272,
+        "endChar": 62
+      },
+      "revId": "5fcb1aa0a3b3e3ae23f54139fff195b8360aa95a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35f80f9e_0f3d6b26",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-08-23T11:49:36Z",
       "side": 1,
       "message": "nit: Looks like `PlaneFormats()` is always called with `GetParam().mFormat`. In the case, I would suggest changing it to `wgpu::TextureFormat GetPlaneFormat(int plane);`",
+      "range": {
+        "startLine": 281,
+        "startChar": 22,
+        "endLine": 281,
+        "endChar": 57
+      },
+      "revId": "5fcb1aa0a3b3e3ae23f54139fff195b8360aa95a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46b51837_74763e8e",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 281,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-23T13:17:51Z",
+      "side": 1,
+      "message": "Nice, thanks!",
+      "parentUuid": "35f80f9e_0f3d6b26",
       "range": {
         "startLine": 281,
         "startChar": 22,
