@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1df0bb12_a7b74cde",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T14:12:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "938ba9c2_598f772e",
+      "range": {
+        "startLine": 520,
+        "startChar": 37,
+        "endLine": 520,
+        "endChar": 54
+      },
+      "revId": "0e613fee846029fbbf2bf2c4dc060d7188f307a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe0b22ad_e6fe2897",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a7b191_d6ba92b9",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T14:12:06Z",
+      "side": 1,
+      "message": "The types differ, but the counts match. I added an assert for the counts.",
+      "parentUuid": "fe0b22ad_e6fe2897",
+      "revId": "0e613fee846029fbbf2bf2c4dc060d7188f307a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19464286_f56752e4",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-08-23T09:31:19Z",
       "side": 1,
       "message": "`f`",
+      "range": {
+        "startLine": 534,
+        "startChar": 62,
+        "endLine": 534,
+        "endChar": 94
+      },
+      "revId": "0e613fee846029fbbf2bf2c4dc060d7188f307a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89916c80_55804934",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 534,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T14:12:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19464286_f56752e4",
       "range": {
         "startLine": 534,
         "startChar": 62,
