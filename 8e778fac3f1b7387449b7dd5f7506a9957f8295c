@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "24cf9963_216364bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T20:36:17Z",
+      "side": 1,
+      "message": "I think it is only Linux Intel Vulkan. So you could add IsLinux() \u0026\u0026 to your skip condition.",
+      "parentUuid": "555ba420_b84c5262",
+      "revId": "8e778fac3f1b7387449b7dd5f7506a9957f8295c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5369fdf9_62ddd13e",
         "filename": "src/dawn/native/Features.cpp",
         "patchSetId": 12
