@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1dde608_2f9c3ca9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T13:54:00Z",
+      "side": 1,
+      "message": "I can see binary size differences in my local build, but I don\u0027t know all the flags used to build canary so I don\u0027t know how much it will/could drop. I need to wait for a canary and then diff the results.",
+      "parentUuid": "542af003_50cf2861",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ee07ff2b_58192f42",
