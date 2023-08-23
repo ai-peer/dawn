@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a61b0908_9df4fe4a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-23T13:44:28Z",
+      "side": 1,
+      "message": "Is this the main reason for this change? Or is it to reduce binary size? Note that using std::function\u003c\u003e can impact performance as it may heap allocate depending on the size of the function object. Further, swapping out the template arg for a std::function removes inlining opportunities.\n\nIf the goal is to reduce binary size, can you please use Bloaty or something to show the savings? If the goal is to make the function type more clear, then using std::function is not the best way, as it\u0027s an owning type (with storage). We would need something like [LLVM\u0027s function_ref](https://llvm.org/doxygen/STLFunctionalExtras_8h_source.html).",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ee07ff2b_58192f42",
