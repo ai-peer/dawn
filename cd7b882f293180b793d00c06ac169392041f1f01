@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d81b90ae_eb11af0c",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-23T20:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da16f04d_382c4d39",
+      "range": {
+        "startLine": 145,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 55
+      },
+      "revId": "cd7b882f293180b793d00c06ac169392041f1f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4057db63_5e0edb83",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-23T18:48:05Z",
       "side": 1,
       "message": "here\u0027s a thought:\n\nthe vector could be a `StackVector temps;`\n\nwe could save the pointer to it before calling `func`.\n`this-\u003emTemporaryRefs \u003d \u0026temps; result \u003d func();`\n\nthen, we don\u0027t need to do any heap allocations if there are a few number of temp refs!",
+      "range": {
+        "startLine": 246,
+        "startChar": 8,
+        "endLine": 252,
+        "endChar": 22
+      },
+      "revId": "cd7b882f293180b793d00c06ac169392041f1f01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d311dbfa_f9df3767",
+        "filename": "src/dawn/common/ContentLessObjectCache.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-23T20:55:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4057db63_5e0edb83",
       "range": {
         "startLine": 246,
         "startChar": 8,
