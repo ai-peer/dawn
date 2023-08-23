@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "670a9535_634d32ce",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-23T15:28:34Z",
+      "side": 1,
+      "message": "mm you\u0027re right; hard to do I guess",
+      "parentUuid": "21695549_98c145d5",
+      "range": {
+        "startLine": 87,
+        "startChar": 8,
+        "endLine": 92,
+        "endChar": 9
+      },
+      "revId": "7ebcde25e2210ae71ca8fd34ffbcf6465c517b41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f99c87a5_d435fb7e",
