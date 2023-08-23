@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37b20bfe_5686c1c0",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 519,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T13:55:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c1150473_da011650",
+      "range": {
+        "startLine": 519,
+        "startChar": 13,
+        "endLine": 519,
+        "endChar": 22
+      },
+      "revId": "9d1fe9d183a285f0228c58c85f72fb7f234a5cb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9703fd4_5892f4ad",
@@ -78,6 +102,30 @@
       "side": 1,
       "message": "Yes, you\u0027re right! Nice catch. Agree to just make this `f`",
       "parentUuid": "a9703fd4_5892f4ad",
+      "range": {
+        "startLine": 543,
+        "startChar": 77,
+        "endLine": 543,
+        "endChar": 92
+      },
+      "revId": "9d1fe9d183a285f0228c58c85f72fb7f234a5cb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f4e7b4a_18ba4d7c",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T13:55:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c135120d_aa80e9f0",
       "range": {
         "startLine": 543,
         "startChar": 77,
