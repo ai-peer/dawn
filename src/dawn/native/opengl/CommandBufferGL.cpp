@@ -960,9 +960,12 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
              IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
             TextureView* textureView = ToBackend(renderPass->colorAttachments[i].view.Get());
             GLenum glAttachment = GL_COLOR_ATTACHMENT0 + static_cast<uint8_t>(i);
+            GLint baseLayer = textureView->GetDimension() == wgpu::TextureViewDimension::e3D
+                                  ? renderPass->colorAttachments[i].depthSlice
+                                  : textureView->GetBaseArrayLayer();
 
             // Attach color buffers.
-            textureView->BindToFramebuffer(GL_DRAW_FRAMEBUFFER, glAttachment);
+            textureView->BindToFramebuffer(GL_DRAW_FRAMEBUFFER, glAttachment, baseLayer);
             drawBuffers[i] = glAttachment;
             attachmentCount = i;
             attachmentCount++;

@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_VULKAN_TEXTUREVK_H_
 
 #include <memory>
+#include <unordered_map>
 #include <vector>
 
 #include "dawn/common/vulkan_platform.h"
@@ -196,6 +197,8 @@ class TextureView final : public TextureViewBase {
     VkImageView GetHandle() const;
     VkImageView GetHandleForBGRA8UnormStorage() const;
 
+    ResultOrError<VkImageView> GetOrCreate2DViewOn3D(uint32_t baseLayer);
+
   private:
     ~TextureView() override;
     void DestroyImpl() override;
@@ -207,6 +210,7 @@ class TextureView final : public TextureViewBase {
 
     VkImageView mHandle = VK_NULL_HANDLE;
     VkImageView mHandleForBGRA8UnormStorage = VK_NULL_HANDLE;
+    std::unordered_map<uint32_t, VkImageView> mHandlesFor2DViewOn3D;
 };
 
 }  // namespace dawn::native::vulkan

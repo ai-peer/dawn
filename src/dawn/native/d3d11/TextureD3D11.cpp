@@ -1274,11 +1274,19 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> TextureView::CreateD3D11ShaderRe
 }
 
 ResultOrError<ComPtr<ID3D11RenderTargetView>> TextureView::CreateD3D11RenderTargetView(
-    uint32_t mipLevel) const {
+    uint32_t mipLevel,
+    uint32_t baseLayer) const {
     auto range = GetSubresourceRange();
     ASSERT(mipLevel >= range.baseMipLevel && mipLevel < range.baseMipLevel + range.levelCount);
+    uint32_t layersAtLevel0 = GetDimension() == wgpu::TextureViewDimension::e3D
+                                  ? GetTexture()->GetDepth()
+                                  : GetTexture()->GetArrayLayers();
+    ASSERT(baseLayer >= range.baseArrayLayer &&
+           baseLayer + range.layerCount <= std::max(layersAtLevel0 >> mipLevel, 1u));
     range.baseMipLevel = mipLevel;
     range.levelCount = 1u;
+    range.baseArrayLayer = baseLayer;
+    range.layerCount = 1u;
     D3D11_RENDER_TARGET_VIEW_DESC rtvDesc =
         ToBackend(GetTexture())->GetRTVDescriptor(GetFormat(), range);
     ComPtr<ID3D11RenderTargetView> rtv;

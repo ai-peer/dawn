@@ -1049,8 +1049,16 @@ const D3D12_SHADER_RESOURCE_VIEW_DESC& TextureView::GetSRVDescriptor() const {
 }
 
 D3D12_RENDER_TARGET_VIEW_DESC TextureView::GetRTVDescriptor() const {
+    uint32_t baseMipLevel = GetBaseMipLevel();
+    uint32_t baseSlice = GetBaseArrayLayer();
+    uint32_t sliceCount = GetLayerCount();
+    if (GetDimension() == wgpu::TextureViewDimension::e3D) {
+        baseSlice = 0;
+        sliceCount = std::max(GetTexture()->GetDepth() >> baseMipLevel, 1u);
+    }
+
     return ToBackend(GetTexture())
-        ->GetRTVDescriptor(GetFormat(), GetBaseMipLevel(), GetBaseArrayLayer(), GetLayerCount());
+        ->GetRTVDescriptor(GetFormat(), baseMipLevel, baseSlice, sliceCount);
 }
 
 D3D12_DEPTH_STENCIL_VIEW_DESC TextureView::GetDSVDescriptor(bool depthReadOnly,

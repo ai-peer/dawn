@@ -14,6 +14,7 @@
 
 #include "dawn/native/opengl/TextureGL.h"
 
+#include <algorithm>
 #include <limits>
 #include <utility>
 
@@ -600,33 +601,39 @@ GLenum TextureView::GetGLTarget() const {
     return mTarget;
 }
 
-void TextureView::BindToFramebuffer(GLenum target, GLenum attachment) {
+void TextureView::BindToFramebuffer(GLenum target, GLenum attachment, uint32_t layer) {
+    uint32_t layersAtLevel0 = GetDimension() == wgpu::TextureViewDimension::e3D
+                                  ? GetTexture()->GetDepth()
+                                  : GetTexture()->GetArrayLayers();
+    ASSERT(layer >= GetBaseArrayLayer() &&
+           layer + GetLayerCount() <= std::max(layersAtLevel0 >> GetBaseMipLevel(), 1u));
+
     const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
 
     // Use the base texture where possible to minimize the amount of copying required on GLES.
     bool useOwnView = GetFormat().format != GetTexture()->GetFormat().format &&
                       !GetTexture()->GetFormat().HasDepthOrStencil();
 
-    GLuint handle, textarget, mipLevel, arrayLayer;
+    GLuint handle, textarget, mipLevel, baseLayer;
     if (useOwnView) {
         // Use our own texture handle and target which points to a subset of the texture's
         // subresources.
         handle = GetHandle();
         textarget = GetGLTarget();
         mipLevel = 0;
-        arrayLayer = 0;
+        baseLayer = 0;
     } else {
         // Use the texture's handle and target, with the view's base mip level and base array
 
         handle = ToBackend(GetTexture())->GetHandle();
         textarget = ToBackend(GetTexture())->GetGLTarget();
         mipLevel = GetBaseMipLevel();
-        arrayLayer = GetBaseArrayLayer();
+        baseLayer = layer;
     }
 
     ASSERT(handle != 0);
     if (textarget == GL_TEXTURE_2D_ARRAY || textarget == GL_TEXTURE_3D) {
-        gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, arrayLayer);
+        gl.FramebufferTextureLayer(target, attachment, handle, mipLevel, baseLayer);
     } else {
         gl.FramebufferTexture2D(target, attachment, textarget, handle, mipLevel);
     }

@@ -438,8 +438,13 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     for (ColorAttachmentIndex i :
          IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
         TextureView* colorTextureView = ToBackend(renderPass->colorAttachments[i].view.Get());
-        DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i], colorTextureView->CreateD3D11RenderTargetView(
-                                                       colorTextureView->GetBaseMipLevel()));
+        uint32_t baseLayer = colorTextureView->GetBaseArrayLayer();
+        if (colorTextureView->GetDimension() == wgpu::TextureViewDimension::e3D) {
+            baseLayer = renderPass->colorAttachments[i].depthSlice;
+        }
+        DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i],
+                        colorTextureView->CreateD3D11RenderTargetView(
+                            colorTextureView->GetBaseMipLevel(), baseLayer));
         d3d11RenderTargetViewPtrs[i] = d3d11RenderTargetViews[i].Get();
         if (renderPass->colorAttachments[i].loadOp == wgpu::LoadOp::Clear) {
             std::array<float, 4> clearColor =

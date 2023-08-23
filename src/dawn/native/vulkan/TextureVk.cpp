@@ -14,6 +14,7 @@
 
 #include "dawn/native/vulkan/TextureVk.h"
 
+#include <algorithm>
 #include <utility>
 
 #include "dawn/common/Assert.h"
@@ -750,6 +751,11 @@ MaybeError Texture::InitializeAsInternalTexture(VkImageUsageFlags extraUsages) {
 
     if (GetArrayLayers() >= 6 && GetWidth() == GetHeight()) {
         createInfo.flags |= VK_IMAGE_CREATE_CUBE_COMPATIBLE_BIT;
+    }
+
+    if (createInfo.imageType == VK_IMAGE_TYPE_3D &&
+        createInfo.usage & VK_IMAGE_USAGE_COLOR_ATTACHMENT_BIT) {
+        createInfo.flags |= VK_IMAGE_CREATE_2D_ARRAY_COMPATIBLE_BIT;
     }
 
     // We always set VK_IMAGE_USAGE_TRANSFER_DST_BIT unconditionally beause the Vulkan images
@@ -1532,6 +1538,13 @@ void TextureView::DestroyImpl() {
         device->GetFencedDeleter()->DeleteWhenUnused(mHandleForBGRA8UnormStorage);
         mHandleForBGRA8UnormStorage = VK_NULL_HANDLE;
     }
+
+    for (auto& [index, handle] : mHandlesFor2DViewOn3D) {
+        if (handle != VK_NULL_HANDLE) {
+            device->GetFencedDeleter()->DeleteWhenUnused(handle);
+            handle = VK_NULL_HANDLE;
+        }
+    }
 }
 
 VkImageView TextureView::GetHandle() const {
@@ -1540,6 +1553,43 @@ VkImageView TextureView::GetHandle() const {
 
 VkImageView TextureView::GetHandleForBGRA8UnormStorage() const {
     return mHandleForBGRA8UnormStorage;
+}
+
+ResultOrError<VkImageView> TextureView::GetOrCreate2DViewOn3D(uint32_t baseLayer) {
+    ASSERT(GetTexture()->GetDimension() == wgpu::TextureDimension::e3D);
+    const SubresourceRange& subresources = GetSubresourceRange();
+    ASSERT(baseLayer < std::max(GetTexture()->GetDepth() >> subresources.baseMipLevel, 1u));
+
+    auto it = mHandlesFor2DViewOn3D.find(baseLayer);
+    if (it != mHandlesFor2DViewOn3D.end()) {
+        return std::move(it->second);
+    }
+
+    Device* device = ToBackend(GetTexture()->GetDevice());
+
+    VkImageViewCreateInfo createInfo;
+    createInfo.sType = VK_STRUCTURE_TYPE_IMAGE_VIEW_CREATE_INFO;
+    createInfo.pNext = nullptr;
+    createInfo.flags = 0;
+    createInfo.image = ToBackend(GetTexture())->GetHandle();
+    createInfo.viewType = VK_IMAGE_VIEW_TYPE_2D;
+    createInfo.format = VulkanImageFormat(device, GetFormat().format);
+    createInfo.components = VkComponentMapping{VK_COMPONENT_SWIZZLE_R, VK_COMPONENT_SWIZZLE_G,
+                                               VK_COMPONENT_SWIZZLE_B, VK_COMPONENT_SWIZZLE_A};
+    createInfo.subresourceRange.baseMipLevel = subresources.baseMipLevel;
+    createInfo.subresourceRange.levelCount = 1;
+    createInfo.subresourceRange.baseArrayLayer = baseLayer;
+    createInfo.subresourceRange.layerCount = 1;
+    createInfo.subresourceRange.aspectMask = VulkanAspectMask(subresources.aspects);
+
+    VkImageView view;
+    DAWN_TRY(CheckVkSuccess(
+        device->fn.CreateImageView(device->GetVkDevice(), &createInfo, nullptr, &*view),
+        "CreateImageView for 2D view on 3D image"));
+
+    mHandlesFor2DViewOn3D[baseLayer] = view;
+
+    return view;
 }
 
 void TextureView::SetLabelImpl() {
