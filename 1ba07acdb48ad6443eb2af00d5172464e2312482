@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "09d25a2c_a28ef42d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-23T13:48:18Z",
+      "side": 1,
+      "message": "There are 65 separate copies of this function in the current chrome canary. One for each template usage. Each of those copies takes .25kb of space in the binary for a total of ~16k.\n\nAccording to perfmon, there does not appear to be any impact on performance from making this change.",
+      "parentUuid": "a61b0908_9df4fe4a",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 66
+      },
+      "revId": "1ba07acdb48ad6443eb2af00d5172464e2312482",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ee07ff2b_58192f42",
