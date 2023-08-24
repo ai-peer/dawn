@@ -22,6 +22,30 @@
       },
       "revId": "6038711b58cfac3c0350d2255b6f05e09a05e780",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "23dba50d_4680be32",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1004116
+      },
+      "writtenOn": "2023-08-24T04:00:11Z",
+      "side": 1,
+      "message": "Yes, it\u0027s a bug. I\u0027ve updated the patch set to include a test.",
+      "parentUuid": "9c626760_7525d3b5",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 0
+      },
+      "revId": "6038711b58cfac3c0350d2255b6f05e09a05e780",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
