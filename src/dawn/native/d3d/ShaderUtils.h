@@ -42,7 +42,8 @@ DAWN_SERIALIZABLE(struct, CompiledShader, COMPILED_SHADER_MEMBERS){};
 ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r);
 
 void DumpCompiledShader(Device* device,
-                        const CompiledShader& compiledShader,
+                        const std::string& hlslSource,
+                        const Blob* shaderBlob,
                         uint32_t compileFlags);
 
 }  // namespace dawn::native::d3d

@@ -188,6 +188,12 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     const CombinedLimits& limits = device->GetLimits();
     req.hlsl.limits = LimitsForCompilationRequest::Create(limits.v1);
 
+    const bool dumpShaders = device->IsToggleEnabled(Toggle::DumpShaders);
+    std::string hlslOutputForDumpShaders;
+    if (dumpShaders) {
+        req.hlslOutputForDumpShaders = &hlslOutputForDumpShaders;
+    }
+
     CacheResult<d3d::CompiledShader> compiledShader;
     MaybeError compileError = [&]() -> MaybeError {
         DAWN_TRY_LOAD_OR_RUN(compiledShader, device, std::move(req), d3d::CompiledShader::FromBlob,
@@ -195,8 +201,9 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
         return {};
     }();
 
-    if (device->IsToggleEnabled(Toggle::DumpShaders)) {
-        d3d::DumpCompiledShader(device, *compiledShader, compileFlags);
+    if (dumpShaders) {
+        const Blob* blob = compileError.IsError() ? nullptr : &compiledShader->shaderBlob;
+        d3d::DumpCompiledShader(device, hlslOutputForDumpShaders, blob, compileFlags);
     }
 
     if (compileError.IsError()) {

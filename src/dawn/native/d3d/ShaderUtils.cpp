@@ -324,6 +324,11 @@ ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r) {
     DAWN_TRY(
         TranslateToHLSL(std::move(r.hlsl), r.tracePlatform, &remappedEntryPoint, &compiledShader));
 
+    if (shouldDumpShader) {
+        // Copy out the hlsl source so we can log it later.
+        *r.hlslOutputForDumpShaders.UnsafeGetValue() = compiledShader.hlslSource;
+    }
+
     switch (r.bytecode.compiler) {
         case d3d::Compiler::DXC: {
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "CompileShaderDXC");
@@ -352,18 +357,17 @@ ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r) {
 }
 
 void DumpCompiledShader(Device* device,
-                        const CompiledShader& compiledShader,
+                        const std::string& hlslSource,
+                        const Blob* shaderBlob,
                         uint32_t compileFlags) {
     std::ostringstream dumpedMsg;
     // The HLSL may be empty if compilation failed.
-    if (!compiledShader.hlslSource.empty()) {
-        dumpedMsg << "/* Dumped generated HLSL */" << std::endl
-                  << compiledShader.hlslSource << std::endl;
+    if (!hlslSource.empty()) {
+        dumpedMsg << "/* Dumped generated HLSL */" << std::endl << hlslSource << std::endl;
     }
 
     // The blob may be empty if FXC/DXC compilation failed.
-    const Blob& shaderBlob = compiledShader.shaderBlob;
-    if (!shaderBlob.Empty()) {
+    if (shaderBlob && !shaderBlob->Empty()) {
         if (device->IsToggleEnabled(Toggle::UseDXC)) {
             dumpedMsg << "/* DXC compile flags */ " << std::endl
                       << CompileFlagsToString(compileFlags) << std::endl;
@@ -371,7 +375,7 @@ void DumpCompiledShader(Device* device,
             ComPtr<IDxcBlobEncoding> dxcBlob;
             ComPtr<IDxcBlobEncoding> disassembly;
             if (FAILED(device->GetDxcLibrary()->CreateBlobWithEncodingFromPinned(
-                    shaderBlob.Data(), shaderBlob.Size(), 0, &dxcBlob)) ||
+                    shaderBlob->Data(), shaderBlob->Size(), 0, &dxcBlob)) ||
                 FAILED(device->GetDxcCompiler()->Disassemble(dxcBlob.Get(), &disassembly))) {
                 dumpedMsg << "DXC disassemble failed" << std::endl;
             } else {
@@ -388,8 +392,8 @@ void DumpCompiledShader(Device* device,
                 // Some literals are printed as floats with precision(6) which is not enough
                 // precision for values very close to 0, so always print literals as hex values.
                 D3D_DISASM_PRINT_HEX_LITERALS;
-            if (FAILED(device->GetFunctions()->d3dDisassemble(shaderBlob.Data(), shaderBlob.Size(),
-                                                              flags, nullptr, &disassembly))) {
+            if (FAILED(device->GetFunctions()->d3dDisassemble(
+                    shaderBlob->Data(), shaderBlob->Size(), flags, nullptr, &disassembly))) {
                 dumpedMsg << "D3D disassemble failed" << std::endl;
             } else {
                 dumpedMsg << std::string_view(
