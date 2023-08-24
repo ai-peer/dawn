@@ -218,6 +218,12 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
     } else {
         GetDefaultLimits(&mLimits.v1);
     }
+    // Query experimentalSubgroupLimits from adapter
+    {
+        SupportedLimits limits;
+        limits.nextInChain = &mLimits.experimentalSubgroupLimits;
+        ASSERT(adapter->APIGetLimits(&limits));
+    }
 
     mFormatTable = BuildFormatTable(this);
 
@@ -1493,10 +1499,36 @@ void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
 
 bool DeviceBase::APIGetLimits(SupportedLimits* limits) const {
     ASSERT(limits != nullptr);
-    if (limits->nextInChain != nullptr) {
+    MaybeError result =
+        ValidateSTypes(limits->nextInChain, {{wgpu::SType::DawnExperimentalSubgroupLimits}});
+    if (GetPhysicalDevice()->GetInstance()->ConsumedError(std::move(result))) {
         return false;
     }
+
     limits->limits = mLimits.v1;
+
+    for (auto* chain = limits->nextInChain; chain; chain = chain->nextInChain) {
+        wgpu::ChainedStructOut originalChain = *chain;
+        switch (chain->sType) {
+            case (wgpu::SType::DawnExperimentalSubgroupLimits): {
+                DawnExperimentalSubgroupLimits* subgroupLimits =
+                    reinterpret_cast<DawnExperimentalSubgroupLimits*>(chain);
+                if (!mToggles.IsEnabled(Toggle::AllowUnsafeAPIs)) {
+                    // If AllowUnsafeAPIs is not enabled, return the default-initialized
+                    // DawnExperimentalSubgroupLimits object, where minSubgroupSize and
+                    // maxSubgroupSize are WGPU_LIMIT_U32_UNDEFINED.
+                    *subgroupLimits = DawnExperimentalSubgroupLimits{};
+                } else {
+                    *subgroupLimits = mLimits.experimentalSubgroupLimits;
+                }
+                break;
+            }
+            default:
+                UNREACHABLE();
+        }
+        // Recover the original chain
+        *chain = originalChain;
+    }
     return true;
 }
 
