@@ -50,6 +50,24 @@
       "message": "Why does this one say invaild? The other backends seem to produce content?",
       "revId": "af3963eaf604936b4553a4c7ee398fb7a95bd14e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a20184d_761a1bb5",
+        "filename": "test/tint/bug/tint/749.spvasm.expected.glsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-24T18:43:16Z",
+      "side": 1,
+      "message": "I get that same \"input program is not valid\" error if I attempt to update the other backend results. Either my local build is weird in some way, or no one has updated the other results.",
+      "parentUuid": "76f7e9fb_836ff951",
+      "revId": "af3963eaf604936b4553a4c7ee398fb7a95bd14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
