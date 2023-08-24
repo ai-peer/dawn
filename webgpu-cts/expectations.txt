@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-08-22 01:50:49AM
+# Last rolled: 2023-08-24 05:16:07PM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -631,12 +631,12 @@ crbug.com/dawn/1992 [ android-r qualcomm ] webgpu:shader,execution,expression,bi
 ################################################################################
 # WebGpuMessageTimeoutError on Win Intel Release
 ################################################################################
-crbug.com/1462375 [ intel win10 release ] webgpu:shader,validation,expression,call,builtin* [ Failure ]
+crbug.com/1462375 [ intel release win10 ] webgpu:shader,validation,expression,call,builtin* [ Failure ]
 
 ################################################################################
 # WebGpuMessageTimeoutError on Win Nvidia
 ################################################################################
-crbug.com/dawn/1994 [ nvidia-0x2184 win10 webgpu-adapter-default ] webgpu:web_platform,copyToTexture,video:copy_from_video:* [ RetryOnFailure ]
+crbug.com/dawn/1994 [ nvidia-0x2184 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,video:copy_from_video:* [ RetryOnFailure ]
 
 ################################################################################
 # device_lost tests GPU connection lost on Win Nvidia
