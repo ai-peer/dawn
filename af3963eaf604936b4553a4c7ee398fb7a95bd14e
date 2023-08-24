@@ -16,6 +16,40 @@
       "message": "Dan: PTAL. Thanks!",
       "revId": "af3963eaf604936b4553a4c7ee398fb7a95bd14e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58efc174_3563639e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-24T18:33:58Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "af3963eaf604936b4553a4c7ee398fb7a95bd14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f7e9fb_836ff951",
+        "filename": "test/tint/bug/tint/749.spvasm.expected.glsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-24T18:33:58Z",
+      "side": 1,
+      "message": "Why does this one say invaild? The other backends seem to produce content?",
+      "revId": "af3963eaf604936b4553a4c7ee398fb7a95bd14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
