@@ -1,0 +1,188 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d72ae04b_3cee0e6d",
+        "filename": "src/dawn/native/d3d/SharedFenceD3D.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "Does this file need to depend on d3d12?",
+      "range": {
+        "startLine": 22,
+        "startChar": 22,
+        "endLine": 22,
+        "endChar": 44
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981aeb1e_9d007b53",
+        "filename": "src/dawn/native/d3d/SharedFenceD3D.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "Consider avoiding template. It is hard to understand, and seem it just shares code of duplicate the handle.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 28,
+        "endChar": 51
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7e58987_3d0b96f3",
+        "filename": "src/dawn/native/d3d/SharedFenceD3D.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "Seems it is only used in `SharedFence::Create()` to initialize mD3DFence, consider changing it to `virtual MaybeError Initialize() \u003d 0;`",
+      "range": {
+        "startLine": 78,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 85
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2491acc_53709622",
+        "filename": "src/dawn/native/d3d/SharedFenceD3D.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "Considering move it to child classes.",
+      "range": {
+        "startLine": 81,
+        "startChar": 4,
+        "endLine": 81,
+        "endChar": 46
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e128944a_85d03e27",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "same here, consider avoiding template? Code uses BackendTraits could be put in a virtual method.",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 60
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee45adff_742629f8",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "How does dawn prevent user releasing the SharedTextureMemory before using the texture in a command buffer?",
+      "range": {
+        "startLine": 101,
+        "startChar": 8,
+        "endLine": 101,
+        "endChar": 25
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1733ad7e_a878878e",
+        "filename": "src/dawn/native/d3d11/SharedTextureMemoryD3D11.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "nit: Is it necessary? I believe below `QueryInterface()` will fail, if the resource is not a D3D11Texture2D.",
+      "range": {
+        "startLine": 99,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 66
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f5cd62d_b2e30e06",
+        "filename": "src/dawn/native/d3d11/SharedTextureMemoryD3D11.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-24T19:39:53Z",
+      "side": 1,
+      "message": "nit: `.As(\u0026d3d11Texture)`",
+      "range": {
+        "startLine": 106,
+        "startChar": 34,
+        "endLine": 106,
+        "endChar": 79
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
