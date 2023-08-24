@@ -16,6 +16,46 @@
       "message": "LGTM",
       "revId": "f4cfdf4b6c83c1faa93bb9fab43486ab796d6f40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "007b0dce_7ce80edf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-24T19:51:30Z",
+      "side": 1,
+      "message": "LGTM2",
+      "revId": "f4cfdf4b6c83c1faa93bb9fab43486ab796d6f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e830b04_d4ef695e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-24T19:51:30Z",
+      "side": 1,
+      "message": "nit: maybe put \"Source\" in the name since TextureToTexture doesn\u0027t communicate which texture you\u0027re validating",
+      "range": {
+        "startLine": 97,
+        "startChar": 11,
+        "endLine": 97,
+        "endChar": 74
+      },
+      "revId": "f4cfdf4b6c83c1faa93bb9fab43486ab796d6f40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
