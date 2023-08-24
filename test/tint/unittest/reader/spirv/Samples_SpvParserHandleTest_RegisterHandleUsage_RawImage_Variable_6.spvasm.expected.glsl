@@ -1,26 +1,9 @@
 SKIP: FAILED
 
-#version 310 es
-precision highp float;
-
-uniform highp sampler2DMS x_20_1;
-void main_1() {
-  uint x_125 = uint(textureSamples(x_20_1));
-  return;
-}
-
-void tint_symbol() {
-  main_1();
-}
-
-void main() {
-  tint_symbol();
-  return;
-}
-Error parsing GLSL shader:
-ERROR: 0:6: 'textureSamples' : no matching overloaded function found 
-ERROR: 0:6: '' : compilation terminated 
-ERROR: 2 compilation errors.  No code generated.
-
-
-
+../../src/tint/lang/wgsl/ast/transform/texture_builtins_from_uniform.cc:369 internal compiler error: existing ubo binding [group: 0, binding: 0] is not a struct.
+********************************************************************
+*  The tint shader compiler has encountered an unexpected error.   *
+*                                                                  *
+*  Please help us fix this issue by submitting a bug report at     *
+*  crbug.com/tint with the source program that triggered the bug.  *
+********************************************************************
