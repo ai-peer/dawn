@@ -195,12 +195,12 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
         return {};
     }();
 
-    if (device->IsToggleEnabled(Toggle::DumpShaders)) {
-        d3d::DumpCompiledShader(device, *compiledShader, compileFlags);
-    }
-
     if (compileError.IsError()) {
         return {compileError.AcquireError()};
+    }
+
+    if (device->IsToggleEnabled(Toggle::DumpShaders)) {
+        d3d::DumpCompiledShader(device, *compiledShader, compileFlags);
     }
 
     device->GetBlobCache()->EnsureStored(compiledShader);

@@ -324,6 +324,11 @@ ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r) {
     DAWN_TRY(
         TranslateToHLSL(std::move(r.hlsl), r.tracePlatform, &remappedEntryPoint, &compiledShader));
 
+    if (shouldDumpShader) {
+        // Copy out the hlsl source so we can log it later.
+        *r.hlslOutputForDumpShaders.UnsafeGetValue() = compiledShader.hlslSource;
+    }
+
     switch (r.bytecode.compiler) {
         case d3d::Compiler::DXC: {
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "CompileShaderDXC");
