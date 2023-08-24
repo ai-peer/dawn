@@ -63,6 +63,30 @@
       },
       "revId": "8a8e921a00f1381aa71ee997e7ad9476f30288f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a48765c0_14b737bd",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 2758,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-24T16:00:21Z",
+      "side": 1,
+      "message": "I think it\u0027s ok to produce valid (but unusable) ESSL here. We currently do that for other features such as cube map arrays. I think this can be validated on the API side by checking that StorageTextureBindingLayout\u0027s format must be r32* when the access is read-write in Compat mode (D3D11 also has this limitation.)\n\n(As a side note, there is a workaround in both GL and D3D11 where other 32-bit formats (e.g., RGBA8) can be bound as read-write storage textures to R32* binding points. The swizzling is up to the developer, however. Not sure if/how that should be exposed in WebGPU/WGSL.)",
+      "parentUuid": "56cc59b1_1699d51e",
+      "range": {
+        "startLine": 2754,
+        "startChar": 1,
+        "endLine": 2758,
+        "endChar": 25
+      },
+      "revId": "8a8e921a00f1381aa71ee997e7ad9476f30288f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
