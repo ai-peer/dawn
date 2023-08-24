@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71db6513_1ca0d39d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-24T19:52:58Z",
+      "side": 1,
+      "message": "WGLS instead of WLSL? (Or was that GLSL?)",
+      "revId": "1d0e743b0f18f80e70457df1e77fdef91c341ae9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97b57887_dcbf4201",
+        "filename": "test/tint/builtins/gen/var/textureNumLevels/1a7fc3.wgsl.expected.glsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-24T19:52:58Z",
+      "side": 1,
+      "message": "These all become 0 because of the binding remapper?",
+      "range": {
+        "startLine": 7,
+        "startChar": 7,
+        "endLine": 7,
+        "endChar": 18
+      },
+      "revId": "1d0e743b0f18f80e70457df1e77fdef91c341ae9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
