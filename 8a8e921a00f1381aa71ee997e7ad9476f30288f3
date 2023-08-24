@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59076ead_ff823e31",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-08-24T16:06:02Z",
+      "side": 1,
+      "message": "Please also add bug dawn:595 to the CL description, since it\u0027s related to the storage texture failures.",
+      "revId": "8a8e921a00f1381aa71ee997e7ad9476f30288f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e2e5067_77390a2d",
