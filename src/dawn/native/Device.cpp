@@ -218,6 +218,12 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
     } else {
         GetDefaultLimits(&mLimits.v1);
     }
+    // Require experimentalSubgroupLimits from adapter
+    {
+        SupportedLimits limits;
+        limits.nextInChain = &mLimits.experimentalSubgroupLimits;
+        ASSERT(adapter->APIGetLimits(&limits));
+    }
 
     mFormatTable = BuildFormatTable(this);
 
@@ -1493,10 +1499,34 @@ void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
 
 bool DeviceBase::APIGetLimits(SupportedLimits* limits) const {
     ASSERT(limits != nullptr);
-    if (limits->nextInChain != nullptr) {
+    MaybeError result =
+        ValidateSTypes(limits->nextInChain, {{wgpu::SType::DawnExperimentalSubgroupLimits}});
+    if (result.IsError()) {
+        GetAdapter()->APIGetInstance()->ConsumedError(result.AcquireError());
         return false;
     }
+
     limits->limits = mLimits.v1;
+
+    for (auto* chain = limits->nextInChain; chain; chain = chain->nextInChain) {
+        wgpu::ChainedStructOut originalChain = *chain;
+        switch (chain->sType) {
+            case (wgpu::SType::DawnExperimentalSubgroupLimits): {
+                DawnExperimentalSubgroupLimits* subgroupLimits =
+                    reinterpret_cast<DawnExperimentalSubgroupLimits*>(chain);
+                if (!mToggles.IsEnabled(Toggle::AllowUnsafeAPIs)) {
+                    *subgroupLimits = DawnExperimentalSubgroupLimits{};
+                } else {
+                    *subgroupLimits = mLimits.experimentalSubgroupLimits;
+                }
+                break;
+            }
+            default:
+                UNREACHABLE();
+        }
+        // Recover the original chain
+        *chain = originalChain;
+    }
     return true;
 }
 
