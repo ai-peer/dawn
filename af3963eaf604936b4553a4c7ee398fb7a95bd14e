@@ -68,6 +68,24 @@
       "parentUuid": "76f7e9fb_836ff951",
       "revId": "af3963eaf604936b4553a4c7ee398fb7a95bd14e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fad3e9e_5e1956c4",
+        "filename": "test/tint/bug/tint/749.spvasm.expected.glsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-24T18:51:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6a20184d_761a1bb5",
+      "revId": "af3963eaf604936b4553a4c7ee398fb7a95bd14e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
