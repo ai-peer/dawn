@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f79d84c_5ac6c338",
+        "filename": "webgpu-cts/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-24T21:42:54Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "daf684eb92b056e44ceade9289fa1c778a1f69b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0fe91c3_413c9c24",
+        "filename": "webgpu-cts/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-24T21:42:54Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "daf684eb92b056e44ceade9289fa1c778a1f69b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "74be419f_874316b2",
@@ -31,6 +65,30 @@
       "writtenOn": "2023-08-24T21:23:29Z",
       "side": 1,
       "message": "Since this is in the Dawn repo now, probably good to mention that running these tests requires a Chromium checkout, and that all commands are being run from chromium/src",
+      "range": {
+        "startLine": 24,
+        "startChar": 3,
+        "endLine": 24,
+        "endChar": 37
+      },
+      "revId": "daf684eb92b056e44ceade9289fa1c778a1f69b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c67e644_081d9638",
+        "filename": "webgpu-cts/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-08-24T21:42:54Z",
+      "side": 1,
+      "message": "That\u0027s mentioned earlier in the doc ([1], [2]) so I felt comfortable omitting it here.",
+      "parentUuid": "74be419f_874316b2",
       "range": {
         "startLine": 24,
         "startChar": 3,
