@@ -114,6 +114,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0152c997_6fab49b9",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-25T23:17:48Z",
+      "side": 1,
+      "message": "APIBeginAccess returns void\n\nthere\u0027s no synchronous error reporting in WebGPU so the caller doesn\u0027t check if BeginAccess failed or succeeded.",
+      "parentUuid": "b28ed5b4_0c19bded",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 29
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "571d6707_818fecb8",
         "filename": "src/dawn/native/SharedTextureMemory.h",
         "patchSetId": 19
@@ -185,6 +209,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b840700a_881e3f0b",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-25T23:17:48Z",
+      "side": 1,
+      "message": "Right - we don\u0027t support two valid accesses at once, but eventually we will add support for concurrent access.\nAnd secondly, it\u0027s important to track fences even in the error case so that we don\u0027t drop the wait condition on the floor.\n\nFor example, consider the following scenario.\n\n```\n// use the texture with some system, and get fences to wait on\nwaitFences \u003d UseSomeTexture(texture, {});\n\n// Now use the texture with webgpu, but it is invalid!\ntexture.BeginAccess(waitFences, {someInvalidOption} );\nwaitFences2 \u003d texture.EndAccess();\n\n// WebGPU incorrectly used the texture, so this should be the forwarded wait condition.\n// That is, waitFences2 should \u003d\u003d waitFences.\n// Otherwise, this access will race with the first access.\nUseTextureAgain(texture, waitFences2);\n```",
+      "parentUuid": "263c2528_d680e112",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 12
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18fc0198_236e2bf9",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
         "patchSetId": 19
@@ -219,6 +267,30 @@
       "writtenOn": "2023-08-25T20:54:16Z",
       "side": 1,
       "message": "nit. Add labels for debugging like in Metal version.",
+      "range": {
+        "startLine": 244,
+        "startChar": 24,
+        "endLine": 244,
+        "endChar": 65
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e89ab16d_89643918",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-25T23:17:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91f12efb_4a85325f",
       "range": {
         "startLine": 244,
         "startChar": 24,
@@ -265,6 +337,30 @@
       "writtenOn": "2023-08-25T20:54:16Z",
       "side": 1,
       "message": "nit. To be more consistent with the Metal tests, we could pass `wgpu::ChainedStructOut otherStruct` instead?",
+      "range": {
+        "startLine": 457,
+        "startChar": 4,
+        "endLine": 457,
+        "endChar": 58
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2762dac9_72968f1b",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-25T23:17:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2ea5ca7b_229ca786",
       "range": {
         "startLine": 457,
         "startChar": 4,
