@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cffaa42a_21e57a9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-25T14:29:37Z",
+      "side": 1,
+      "message": "Ping @enga@chromium.org @cwallez@chromium.org\nPTAL, this is a finch blocker issue.",
+      "revId": "613cc58f90a7dc213f116b4e259d7a4472174db4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
