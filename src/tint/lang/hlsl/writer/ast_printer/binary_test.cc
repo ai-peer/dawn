@@ -188,7 +188,7 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_VectorScalar_f32) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "(1.0f).xxx");
+    EXPECT_EQ(out.str(), "float3(1.0f, 1.0f, 1.0f)");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_VectorScalar_f16) {
@@ -205,7 +205,7 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_VectorScalar_f16) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "(float16_t(1.0h)).xxx");
+    EXPECT_EQ(out.str(), "vector<float16_t, 3>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h))");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_ScalarVector_f32) {
@@ -220,7 +220,7 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_ScalarVector_f32) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "(1.0f).xxx");
+    EXPECT_EQ(out.str(), "float3(1.0f, 1.0f, 1.0f)");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_ScalarVector_f16) {
@@ -237,7 +237,7 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_ScalarVector_f16) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "(float16_t(1.0h)).xxx");
+    EXPECT_EQ(out.str(), "vector<float16_t, 3>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h))");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_MatrixScalar_f32) {
@@ -316,7 +316,7 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_MatrixVector_f32) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "mul((1.0f).xxx, mat)");
+    EXPECT_EQ(out.str(), "mul(float3(1.0f, 1.0f, 1.0f), mat)");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_MatrixVector_f16) {
@@ -333,7 +333,8 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_MatrixVector_f16) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "mul((float16_t(1.0h)).xxx, mat)");
+    EXPECT_EQ(out.str(),
+              "mul(vector<float16_t, 3>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h)), mat)");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_VectorMatrix_f32) {
@@ -348,7 +349,7 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_VectorMatrix_f32) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "mul(mat, (1.0f).xxx)");
+    EXPECT_EQ(out.str(), "mul(mat, float3(1.0f, 1.0f, 1.0f))");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_VectorMatrix_f16) {
@@ -365,7 +366,8 @@ TEST_F(HlslASTPrinterTest_Binary, Multiply_VectorMatrix_f16) {
 
     StringStream out;
     EXPECT_TRUE(gen.EmitExpression(out, expr)) << gen.Diagnostics();
-    EXPECT_EQ(out.str(), "mul(mat, (float16_t(1.0h)).xxx)");
+    EXPECT_EQ(out.str(),
+              "mul(mat, vector<float16_t, 3>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h)))");
 }
 
 TEST_F(HlslASTPrinterTest_Binary, Multiply_MatrixMatrix_f32) {

@@ -1,5 +1,5 @@
 void fma_143d5d() {
-  float4 res = (2.0f).xxxx;
+  float4 res = float4(2.0f, 2.0f, 2.0f, 2.0f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   fma_143d5d();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

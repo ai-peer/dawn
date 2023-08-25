@@ -1,5 +1,5 @@
 void func(inout float2 pointer) {
-  pointer = (0.0f).xx;
+  pointer = float2(0.0f, 0.0f);
 }
 
 [numthreads(1, 1, 1)]

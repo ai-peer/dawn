@@ -1,11 +1,9 @@
-SKIP: FAILED
-
 Texture2DArray arg_0 : register(t0, space1);
 SamplerState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureGather_d90605() {
-  float4 res = arg_0.Gather(arg_1, float3((1.0f).xx, float(1)), (1).xx);
+  float4 res = arg_0.Gather(arg_1, float3(float2(1.0f, 1.0f), float(1)), int2(1, 1));
   prevent_dce.Store4(0u, asuint(res));
 }
 
@@ -15,7 +13,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureGather_d90605();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {
@@ -35,40 +33,3 @@ void compute_main() {
   textureGather_d90605();
   return;
 }
-DXC validation failure:
-warning: DXIL.dll not found.  Resulting DXIL will not be signed for use in release environments.
-
-error: validation errors
-error: Module bitcode is invalid.
-error: Call parameter type does not match function signature!
-i64 1
- i32  %4 = call %dx.types.ResRet.f32 @dx.op.textureGather.f32(i32 73, %dx.types.Handle %2, %dx.types.Handle %3, float 1.000000e+00, float 1.000000e+00, float 1.000000e+00, float undef, i64 1, i64 1, i32 0)
-
-Validation failed.
-
-
-
-warning: DXIL.dll not found.  Resulting DXIL will not be signed for use in release environments.
-
-error: validation errors
-error: Module bitcode is invalid.
-error: Call parameter type does not match function signature!
-i64 1
- i32  %4 = call %dx.types.ResRet.f32 @dx.op.textureGather.f32(i32 73, %dx.types.Handle %2, %dx.types.Handle %3, float 1.000000e+00, float 1.000000e+00, float 1.000000e+00, float undef, i64 1, i64 1, i32 0)
-
-Validation failed.
-
-
-
-warning: DXIL.dll not found.  Resulting DXIL will not be signed for use in release environments.
-
-error: validation errors
-error: Module bitcode is invalid.
-error: Call parameter type does not match function signature!
-i64 1
- i32  %4 = call %dx.types.ResRet.f32 @dx.op.textureGather.f32(i32 73, %dx.types.Handle %2, %dx.types.Handle %3, float 1.000000e+00, float 1.000000e+00, float 1.000000e+00, float undef, i64 1, i64 1, i32 0)
-
-Validation failed.
-
-
-

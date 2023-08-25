@@ -1,6 +1,6 @@
 void select_b93806() {
-  bool3 arg_2 = (true).xxx;
-  int3 res = (arg_2 ? (1).xxx : (1).xxx);
+  bool3 arg_2 = bool3(true, true, true);
+  int3 res = (arg_2 ? int3(1, 1, 1) : int3(1, 1, 1));
 }
 
 struct tint_symbol {
@@ -9,7 +9,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   select_b93806();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

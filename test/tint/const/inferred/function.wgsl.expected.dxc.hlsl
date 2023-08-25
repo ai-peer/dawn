@@ -6,7 +6,7 @@ struct tint_symbol {
 };
 
 float4 main_inner() {
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol main() {

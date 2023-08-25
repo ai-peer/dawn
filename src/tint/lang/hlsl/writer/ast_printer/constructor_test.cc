@@ -148,7 +148,7 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_Empty_F32) {
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("0.0f).xxx"));
+    EXPECT_THAT(gen.Result(), HasSubstr("0.0f, 0.0f, 0.0f"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_Empty_F16) {
@@ -159,7 +159,7 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_Empty_F16) {
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("(float16_t(0.0h)).xxx"));
+    EXPECT_THAT(gen.Result(), HasSubstr("(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h))"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_F32_Literal) {
@@ -168,7 +168,7 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_F32_Literal) {
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("2.0f).xxx"));
+    EXPECT_THAT(gen.Result(), HasSubstr("2.0f, 2.0f, 2.0f)"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_F16_Literal) {
@@ -179,7 +179,7 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_F16_Literal) {
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("(float16_t(2.0h)).xxx"));
+    EXPECT_THAT(gen.Result(), HasSubstr("(float16_t(2.0h), float16_t(2.0h), float16_t(2.0h))"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_F32_Var) {
@@ -214,7 +214,7 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_Bool_Literal) {
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("(true).xxx"));
+    EXPECT_THAT(gen.Result(), HasSubstr("true, true, true"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_Bool_Var) {
@@ -235,7 +235,7 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_Int) {
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("2).xxx"));
+    EXPECT_THAT(gen.Result(), HasSubstr("2, 2, 2"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_UInt) {
@@ -244,7 +244,7 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Vec_SingleScalar_UInt) {
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
-    EXPECT_THAT(gen.Result(), HasSubstr("2u).xxx"));
+    EXPECT_THAT(gen.Result(), HasSubstr("2u, 2u, 2u"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_F32) {
@@ -297,8 +297,10 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Complex_F32) {
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
 
-    EXPECT_THAT(gen.Result(), HasSubstr("float4x4(float4(2.0f, 3.0f, 4.0f, 8.0f), (0.0f).xxxx, "
-                                        "(7.0f).xxxx, float4(42.0f, 21.0f, 6.0f, -5.0f))"));
+    EXPECT_THAT(
+        gen.Result(),
+        HasSubstr("float4x4(float4(2.0f, 3.0f, 4.0f, 8.0f), float4(0.0f, 0.0f, 0.0f, 0.0f), "
+                  "float4(7.0f, 7.0f, 7.0f, 7.0f), float4(42.0f, 21.0f, 6.0f, -5.0f))"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Complex_F16) {
@@ -325,12 +327,13 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Complex_F16) {
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
 
-    EXPECT_THAT(gen.Result(), HasSubstr("matrix<float16_t, 4, 4>("
-                                        "vector<float16_t, 4>(float16_t(2.0h), float16_t(3.0h), "
-                                        "float16_t(4.0h), float16_t(8.0h)), "
-                                        "(float16_t(0.0h)).xxxx, (float16_t(7.0h)).xxxx, "
-                                        "vector<float16_t, 4>(float16_t(42.0h), float16_t(21.0h), "
-                                        "float16_t(6.0h), float16_t(-5.0h)))"));
+    EXPECT_THAT(gen.Result(),
+                HasSubstr("matrix<float16_t, 4, 4>(vector<float16_t, 4>(float16_t(2.0h), "
+                          "float16_t(3.0h), float16_t(4.0h), float16_t(8.0h)), vector<float16_t, "
+                          "4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), "
+                          "vector<float16_t, 4>(float16_t(7.0h), float16_t(7.0h), float16_t(7.0h), "
+                          "float16_t(7.0h)), vector<float16_t, 4>(float16_t(42.0h), "
+                          "float16_t(21.0h), float16_t(6.0h), float16_t(-5.0h)))"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Empty_F32) {
@@ -340,7 +343,10 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Empty_F32) {
 
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
 
-    EXPECT_THAT(gen.Result(), HasSubstr("float2x3 tint_symbol = float2x3((0.0f).xxx, (0.0f).xxx)"));
+    EXPECT_THAT(
+        gen.Result(),
+        HasSubstr(
+            "float2x3 tint_symbol = float2x3(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f)"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Empty_F16) {
@@ -353,7 +359,9 @@ TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Empty_F16) {
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
 
     EXPECT_THAT(gen.Result(),
-                HasSubstr("matrix<float16_t, 2, 3>((float16_t(0.0h)).xxx, (float16_t(0.0h)).xxx)"));
+                HasSubstr("matrix<float16_t, 2, 3>(vector<float16_t, 3>(float16_t(0.0h), "
+                          "float16_t(0.0h), float16_t(0.0h)), vector<float16_t, "
+                          "3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)"));
 }
 
 TEST_F(HlslASTPrinterTest_Constructor, Type_Mat_Identity_F32) {

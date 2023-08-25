@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void countTrailingZeros_8ed26f() {
-  uint3 res = (0u).xxx;
+  uint3 res = uint3(0u, 0u, 0u);
   prevent_dce.Store3(0u, asuint(res));
 }
 
@@ -11,7 +11,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   countTrailingZeros_8ed26f();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

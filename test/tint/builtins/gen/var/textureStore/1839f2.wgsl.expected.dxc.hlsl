@@ -1,8 +1,8 @@
 RWTexture2D<int4> arg_0 : register(u0, space1);
 
 void textureStore_1839f2() {
-  uint2 arg_1 = (1u).xx;
-  int4 arg_2 = (1).xxxx;
+  uint2 arg_1 = uint2(1u, 1u);
+  int4 arg_2 = int4(1, 1, 1, 1);
   arg_0[arg_1] = arg_2;
 }
 
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureStore_1839f2();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

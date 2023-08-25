@@ -3,7 +3,7 @@ struct modf_result_vec3_f32 {
   float3 whole;
 };
 void modf_68d8ee() {
-  modf_result_vec3_f32 res = {(-0.5f).xxx, (-1.0f).xxx};
+  modf_result_vec3_f32 res = {float3(-0.5f, -0.5f, -0.5f), float3(-1.0f, -1.0f, -1.0f)};
 }
 
 struct tint_symbol {
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   modf_68d8ee();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

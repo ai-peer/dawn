@@ -4,7 +4,7 @@ void unused_entry_point() {
 }
 
 int2 tint_ftoi(float2 v) {
-  return ((v < (2147483520.0f).xx) ? ((v < (-2147483648.0f).xx) ? (-2147483648).xx : int2(v)) : (2147483647).xx);
+  return ((v < float2(2147483520.0f, 2147483520.0f)) ? ((v < float2(-2147483648.0f, -2147483648.0f)) ? int2(-2147483648, -2147483648) : int2(v)) : int2(2147483647, 2147483647));
 }
 
 static float t = 0.0f;

@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void reverseBits_a6ccd4() {
-  uint3 arg_0 = (1u).xxx;
+  uint3 arg_0 = uint3(1u, 1u, 1u);
   uint3 res = reversebits(arg_0);
   prevent_dce.Store3(0u, asuint(res));
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   reverseBits_a6ccd4();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

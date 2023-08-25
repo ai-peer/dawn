@@ -34,7 +34,7 @@ void f_inner(uint local_invocation_index) {
   {
     for(uint idx = local_invocation_index; (idx < 4u); idx = (idx + 1u)) {
       const uint i = idx;
-      w[i] = matrix<float16_t, 4, 2>((float16_t(0.0h)).xx, (float16_t(0.0h)).xx, (float16_t(0.0h)).xx, (float16_t(0.0h)).xx);
+      w[i] = matrix<float16_t, 4, 2>(vector<float16_t, 2>(float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 2>(float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 2>(float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 2>(float16_t(0.0h), float16_t(0.0h)));
     }
   }
   GroupMemoryBarrierWithGroupSync();

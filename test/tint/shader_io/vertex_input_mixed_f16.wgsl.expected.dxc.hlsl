@@ -29,7 +29,7 @@ float4 main_inner(VertexInputs0 inputs0, uint loc1, uint instance_index, VertexI
   const float4 v = inputs1.loc3;
   const float16_t x = loc4;
   const vector<float16_t, 3> y = inputs1.loc5;
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol_2 main(tint_symbol_1 tint_symbol) {

@@ -1,7 +1,7 @@
 RWTexture3D<int4> arg_0 : register(u0, space1);
 
 void textureStore_486500() {
-  arg_0[(1u).xxx] = (1).xxxx;
+  arg_0[uint3(1u, 1u, 1u)] = int4(1, 1, 1, 1);
 }
 
 struct tint_symbol {
@@ -10,7 +10,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureStore_486500();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

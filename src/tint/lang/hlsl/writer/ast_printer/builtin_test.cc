@@ -533,7 +533,7 @@ TEST_F(HlslASTPrinterTest_Builtin, Const_Modf_Vector_f32) {
 };
 [numthreads(1, 1, 1)]
 void test_function() {
-  const modf_result_vec3_f32 v = {(0.5f).xxx, float3(1.0f, 2.0f, 3.0f)};
+  const modf_result_vec3_f32 v = {float3(0.5f, 0.5f, 0.5f), float3(1.0f, 2.0f, 3.0f)};
   return;
 }
 )");
@@ -553,7 +553,7 @@ TEST_F(HlslASTPrinterTest_Builtin, Const_Modf_Vector_f16) {
 };
 [numthreads(1, 1, 1)]
 void test_function() {
-  const modf_result_vec3_f16 v = {(float16_t(0.5h)).xxx, vector<float16_t, 3>(float16_t(1.0h), float16_t(2.0h), float16_t(3.0h))};
+  const modf_result_vec3_f16 v = {vector<float16_t, 3>(float16_t(0.5h), float16_t(0.5h), float16_t(0.5h)), vector<float16_t, 3>(float16_t(1.0h), float16_t(2.0h), float16_t(3.0h))};
   return;
 }
 )");
@@ -577,8 +577,8 @@ TEST_F(HlslASTPrinterTest_Builtin, NonInitializer_Modf_Vector_f32) {
 };
 [numthreads(1, 1, 1)]
 void test_function() {
-  modf_result_vec3_f32 v = {(0.5f).xxx, float3(1.0f, 2.0f, 3.0f)};
-  const modf_result_vec3_f32 c = {(0.5f).xxx, float3(4.0f, 5.0f, 6.0f)};
+  modf_result_vec3_f32 v = {float3(0.5f, 0.5f, 0.5f), float3(1.0f, 2.0f, 3.0f)};
+  const modf_result_vec3_f32 c = {float3(0.5f, 0.5f, 0.5f), float3(4.0f, 5.0f, 6.0f)};
   v = c;
   return;
 }
@@ -661,7 +661,7 @@ frexp_result_vec3_f32 tint_frexp(float3 param_0) {
 
 [numthreads(1, 1, 1)]
 void test_function() {
-  float3 f = (0.0f).xxx;
+  float3 f = float3(0.0f, 0.0f, 0.0f);
   frexp_result_vec3_f32 v = tint_frexp(f);
   return;
 }
@@ -690,7 +690,7 @@ frexp_result_vec3_f16 tint_frexp(vector<float16_t, 3> param_0) {
 
 [numthreads(1, 1, 1)]
 void test_function() {
-  vector<float16_t, 3> f = (float16_t(0.0h)).xxx;
+  vector<float16_t, 3> f = vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h));
   frexp_result_vec3_f16 v = tint_frexp(f);
   return;
 }
@@ -792,7 +792,7 @@ TEST_F(HlslASTPrinterTest_Builtin, NonInitializer_Frexp_Vector_f32) {
 [numthreads(1, 1, 1)]
 void test_function() {
   frexp_result_vec3_f32 v = {float3(0.75f, 0.625f, 0.875f), int3(1, 2, 2)};
-  const frexp_result_vec3_f32 c = {float3(0.5625f, 0.6875f, 0.8125f), (3).xxx};
+  const frexp_result_vec3_f32 c = {float3(0.5625f, 0.6875f, 0.8125f), int3(3, 3, 3)};
   v = c;
   return;
 }

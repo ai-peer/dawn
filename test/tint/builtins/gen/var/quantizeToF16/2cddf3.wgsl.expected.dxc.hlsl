@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void quantizeToF16_2cddf3() {
-  float2 arg_0 = (1.0f).xx;
+  float2 arg_0 = float2(1.0f, 1.0f);
   float2 res = f16tof32(f32tof16(arg_0));
   prevent_dce.Store2(0u, asuint(res));
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   quantizeToF16_2cddf3();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

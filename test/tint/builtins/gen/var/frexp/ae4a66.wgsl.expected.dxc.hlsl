@@ -10,7 +10,7 @@ frexp_result_vec3_f16 tint_frexp(vector<float16_t, 3> param_0) {
 }
 
 void frexp_ae4a66() {
-  vector<float16_t, 3> arg_0 = (float16_t(1.0h)).xxx;
+  vector<float16_t, 3> arg_0 = vector<float16_t, 3>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h));
   frexp_result_vec3_f16 res = tint_frexp(arg_0);
 }
 
@@ -20,7 +20,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   frexp_ae4a66();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

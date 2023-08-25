@@ -1,6 +1,6 @@
 void select_431dfb() {
-  bool2 arg_2 = (true).xx;
-  int2 res = (arg_2 ? (1).xx : (1).xx);
+  bool2 arg_2 = bool2(true, true);
+  int2 res = (arg_2 ? int2(1, 1) : int2(1, 1));
 }
 
 struct tint_symbol {
@@ -9,7 +9,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   select_431dfb();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

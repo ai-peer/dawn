@@ -1,5 +1,5 @@
 void normalize_e7def8() {
-  float3 res = (0.57735025882720947266f).xxx;
+  float3 res = float3(0.57735025882720947266f, 0.57735025882720947266f, 0.57735025882720947266f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   normalize_e7def8();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

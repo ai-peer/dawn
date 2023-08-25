@@ -12,11 +12,11 @@ struct tint_symbol_2 {
 };
 
 Output main_inner(uint VertexIndex, uint InstanceIndex) {
-  const float2 zv[4] = {(0.20000000298023223877f).xx, (0.30000001192092895508f).xx, (-0.10000000149011611938f).xx, (1.10000002384185791016f).xx};
+  const float2 zv[4] = {float2(0.20000000298023223877f, 0.20000000298023223877f), float2(0.30000001192092895508f, 0.30000001192092895508f), float2(-0.10000000149011611938f, -0.10000000149011611938f), float2(1.10000002384185791016f, 1.10000002384185791016f)};
   const float z = zv[InstanceIndex].x;
   Output output = (Output)0;
   output.Position = float4(0.5f, 0.5f, z, 1.0f);
-  const float4 colors[4] = {float4(1.0f, 0.0f, 0.0f, 1.0f), float4(0.0f, 1.0f, 0.0f, 1.0f), float4(0.0f, 0.0f, 1.0f, 1.0f), (1.0f).xxxx};
+  const float4 colors[4] = {float4(1.0f, 0.0f, 0.0f, 1.0f), float4(0.0f, 1.0f, 0.0f, 1.0f), float4(0.0f, 0.0f, 1.0f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f)};
   output.color = colors[InstanceIndex];
   return output;
 }

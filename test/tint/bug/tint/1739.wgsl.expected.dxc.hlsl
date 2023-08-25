@@ -33,7 +33,7 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 }
 
 float4 textureLoadExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, int2 coord, ExternalTextureParams params) {
-  const int2 coord1 = (coord >> (1u).xx);
+  const int2 coord1 = (coord >> uint2(1u, 1u));
   float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
     color = plane0.Load(int3(coord, 0)).rgba;
@@ -94,8 +94,8 @@ ExternalTextureParams ext_tex_params_load(uint offset) {
 
 [numthreads(1, 1, 1)]
 void main() {
-  float4 red = textureLoadExternal(t, ext_tex_plane_1, (10).xx, ext_tex_params_load(0u));
-  outImage[(0).xx] = red;
+  float4 red = textureLoadExternal(t, ext_tex_plane_1, int2(10, 10), ext_tex_params_load(0u));
+  outImage[int2(0, 0)] = red;
   float4 green = textureLoadExternal(t, ext_tex_plane_1, int2(70, 118), ext_tex_params_load(0u));
   outImage[int2(1, 0)] = green;
   return;

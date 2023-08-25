@@ -5,7 +5,7 @@ struct tint_symbol_1 {
 };
 
 void main_inner(uint3 id) {
-  const int3 pos = (asint(input.Load3(0u)) - (0).xxx);
+  const int3 pos = (asint(input.Load3(0u)) - int3(0, 0, 0));
 }
 
 [numthreads(1, 1, 1)]

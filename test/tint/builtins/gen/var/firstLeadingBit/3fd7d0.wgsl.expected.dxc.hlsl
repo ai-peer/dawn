@@ -1,22 +1,22 @@
 uint3 tint_first_leading_bit(uint3 v) {
   uint3 x = v;
-  const uint3 b16 = (bool3((x & (4294901760u).xxx)) ? (16u).xxx : (0u).xxx);
+  const uint3 b16 = (bool3((x & uint3(4294901760u, 4294901760u, 4294901760u))) ? uint3(16u, 16u, 16u) : uint3(0u, 0u, 0u));
   x = (x >> b16);
-  const uint3 b8 = (bool3((x & (65280u).xxx)) ? (8u).xxx : (0u).xxx);
+  const uint3 b8 = (bool3((x & uint3(65280u, 65280u, 65280u))) ? uint3(8u, 8u, 8u) : uint3(0u, 0u, 0u));
   x = (x >> b8);
-  const uint3 b4 = (bool3((x & (240u).xxx)) ? (4u).xxx : (0u).xxx);
+  const uint3 b4 = (bool3((x & uint3(240u, 240u, 240u))) ? uint3(4u, 4u, 4u) : uint3(0u, 0u, 0u));
   x = (x >> b4);
-  const uint3 b2 = (bool3((x & (12u).xxx)) ? (2u).xxx : (0u).xxx);
+  const uint3 b2 = (bool3((x & uint3(12u, 12u, 12u))) ? uint3(2u, 2u, 2u) : uint3(0u, 0u, 0u));
   x = (x >> b2);
-  const uint3 b1 = (bool3((x & (2u).xxx)) ? (1u).xxx : (0u).xxx);
-  const uint3 is_zero = ((x == (0u).xxx) ? (4294967295u).xxx : (0u).xxx);
+  const uint3 b1 = (bool3((x & uint3(2u, 2u, 2u))) ? uint3(1u, 1u, 1u) : uint3(0u, 0u, 0u));
+  const uint3 is_zero = ((x == uint3(0u, 0u, 0u)) ? uint3(4294967295u, 4294967295u, 4294967295u) : uint3(0u, 0u, 0u));
   return uint3((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void firstLeadingBit_3fd7d0() {
-  uint3 arg_0 = (1u).xxx;
+  uint3 arg_0 = uint3(1u, 1u, 1u);
   uint3 res = tint_first_leading_bit(arg_0);
   prevent_dce.Store3(0u, asuint(res));
 }
@@ -27,7 +27,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   firstLeadingBit_3fd7d0();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

@@ -3,7 +3,7 @@ void set_uint4(inout uint4 vec, int idx, uint val) {
 }
 
 uint4 tint_ftou(float4 v) {
-  return ((v < (4294967040.0f).xxxx) ? ((v < (0.0f).xxxx) ? (0u).xxxx : uint4(v)) : (4294967295u).xxxx);
+  return ((v < float4(4294967040.0f, 4294967040.0f, 4294967040.0f, 4294967040.0f)) ? ((v < float4(0.0f, 0.0f, 0.0f, 0.0f)) ? uint4(0u, 0u, 0u, 0u) : uint4(v)) : uint4(4294967295u, 4294967295u, 4294967295u, 4294967295u));
 }
 
 Texture2D<float4> src : register(t0);

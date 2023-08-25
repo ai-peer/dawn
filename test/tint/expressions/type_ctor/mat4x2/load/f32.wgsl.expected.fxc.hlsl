@@ -4,6 +4,6 @@ void unused_entry_point() {
 }
 
 void f() {
-  float4x2 m = float4x2((0.0f).xx, (0.0f).xx, (0.0f).xx, (0.0f).xx);
+  float4x2 m = float4x2(float2(0.0f, 0.0f), float2(0.0f, 0.0f), float2(0.0f, 0.0f), float2(0.0f, 0.0f));
   const float4x2 m_1 = float4x2(m);
 }

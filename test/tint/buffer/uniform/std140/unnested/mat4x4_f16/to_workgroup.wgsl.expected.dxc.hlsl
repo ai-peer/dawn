@@ -33,7 +33,7 @@ matrix<float16_t, 4, 4> u_load(uint offset) {
 
 void f_inner(uint local_invocation_index) {
   {
-    w = matrix<float16_t, 4, 4>((float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx);
+    w = matrix<float16_t, 4, 4>(vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)));
   }
   GroupMemoryBarrierWithGroupSync();
   w = u_load(0u);

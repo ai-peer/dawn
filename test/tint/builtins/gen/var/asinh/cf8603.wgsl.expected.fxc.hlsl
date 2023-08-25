@@ -1,5 +1,5 @@
 void asinh_cf8603() {
-  float4 res = (0.88137358427047729492f).xxxx;
+  float4 res = float4(0.88137358427047729492f, 0.88137358427047729492f, 0.88137358427047729492f, 0.88137358427047729492f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   asinh_cf8603();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

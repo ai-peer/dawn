@@ -1,11 +1,11 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void select_3c25ce() {
-  bool3 arg_0 = (true).xxx;
-  bool3 arg_1 = (true).xxx;
+  bool3 arg_0 = bool3(true, true, true);
+  bool3 arg_1 = bool3(true, true, true);
   bool arg_2 = true;
   bool3 res = (arg_2 ? arg_1 : arg_0);
-  prevent_dce.Store(0u, asuint((all((res == (false).xxx)) ? 1 : 0)));
+  prevent_dce.Store(0u, asuint((all((res == bool3(false, false, false))) ? 1 : 0)));
 }
 
 struct tint_symbol {
@@ -14,7 +14,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   select_3c25ce();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

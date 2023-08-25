@@ -18,8 +18,8 @@ struct tint_symbol_7 {
 };
 
 float4 main_inner(uint VertexIndex) {
-  const float4 tint_symbol = (0.0f).xxxx;
-  const float4 tint_symbol_1 = (1.0f).xxxx;
+  const float4 tint_symbol = float4(0.0f, 0.0f, 0.0f, 0.0f);
+  const float4 tint_symbol_1 = float4(1.0f, 1.0f, 1.0f, 1.0f);
   const int tint_symbol_2 = vec4f();
   const float tint_symbol_3 = vec2f(tint_symbol_2);
   const bool tint_symbol_4 = vec2i(tint_symbol_3);

@@ -7,7 +7,7 @@ struct tint_symbol {
 float4 vertex_main_inner() {
   const float4 value = float4(1.0f, 2.0f, 3.0f, 4.0f);
   tex[int2(9, 8)] = value;
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

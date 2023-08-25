@@ -339,7 +339,7 @@ TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Const_arr_vec
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
 
     EXPECT_EQ(gen.Result(), R"(void f() {
-  const bool2 l[3] = {bool2(true, false), bool2(false, true), (true).xx};
+  const bool2 l[3] = {bool2(true, false), bool2(false, true), bool2(true, true)};
 }
 )");
 }
@@ -379,7 +379,7 @@ TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Initializer_Z
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.EmitStatement(stmt)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(float3 a = (0.0f).xxx;
+    EXPECT_EQ(gen.Result(), R"(float3 a = float3(0.0f, 0.0f, 0.0f);
 )");
 }
 
@@ -394,7 +394,9 @@ TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Initializer_Z
     ASTPrinter& gen = Build();
 
     ASSERT_TRUE(gen.EmitStatement(stmt)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(vector<float16_t, 3> a = (float16_t(0.0h)).xxx;
+    EXPECT_EQ(
+        gen.Result(),
+        R"(vector<float16_t, 3> a = vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h));
 )");
 }
 
@@ -408,7 +410,7 @@ TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Initializer_Z
 
     ASSERT_TRUE(gen.EmitStatement(stmt)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(),
-              R"(float2x3 a = float2x3((0.0f).xxx, (0.0f).xxx);
+              R"(float2x3 a = float2x3(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
 )");
 }
 
@@ -425,7 +427,7 @@ TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Initializer_Z
     ASSERT_TRUE(gen.EmitStatement(stmt)) << gen.Diagnostics();
     EXPECT_EQ(
         gen.Result(),
-        R"(matrix<float16_t, 2, 3> a = matrix<float16_t, 2, 3>((float16_t(0.0h)).xxx, (float16_t(0.0h)).xxx);
+        R"(matrix<float16_t, 2, 3> a = matrix<float16_t, 2, 3>(vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)));
 )");
 }
 

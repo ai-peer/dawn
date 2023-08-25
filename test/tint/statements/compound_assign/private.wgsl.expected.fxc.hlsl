@@ -13,6 +13,6 @@ int tint_div(int lhs, int rhs) {
 
 void foo() {
   a = tint_div(a, 2);
-  b = mul(float4x4((0.0f).xxxx, (0.0f).xxxx, (0.0f).xxxx, (0.0f).xxxx), b);
+  b = mul(float4x4(float4(0.0f, 0.0f, 0.0f, 0.0f), float4(0.0f, 0.0f, 0.0f, 0.0f), float4(0.0f, 0.0f, 0.0f, 0.0f), float4(0.0f, 0.0f, 0.0f, 0.0f)), b);
   c = (c * 2.0f);
 }

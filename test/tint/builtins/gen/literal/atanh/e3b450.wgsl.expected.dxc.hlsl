@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void atanh_e3b450() {
-  vector<float16_t, 4> res = (float16_t(0.548828125h)).xxxx;
+  vector<float16_t, 4> res = vector<float16_t, 4>(float16_t(0.548828125h), float16_t(0.548828125h), float16_t(0.548828125h), float16_t(0.548828125h));
   prevent_dce.Store<vector<float16_t, 4> >(0u, res);
 }
 
@@ -11,7 +11,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   atanh_e3b450();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

@@ -3,10 +3,10 @@ SamplerComparisonState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureSampleCompare_7b5025() {
-  float2 arg_2 = (1.0f).xx;
+  float2 arg_2 = float2(1.0f, 1.0f);
   uint arg_3 = 1u;
   float arg_4 = 1.0f;
-  float res = arg_0.SampleCmp(arg_1, float3(arg_2, float(arg_3)), arg_4, (1).xx);
+  float res = arg_0.SampleCmp(arg_1, float3(arg_2, float(arg_3)), arg_4, int2(1, 1));
   prevent_dce.Store(0u, asuint(res));
 }
 

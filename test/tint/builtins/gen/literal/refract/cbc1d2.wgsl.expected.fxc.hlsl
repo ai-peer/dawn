@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void refract_cbc1d2() {
-  float3 res = (-5.0f).xxx;
+  float3 res = float3(-5.0f, -5.0f, -5.0f);
   prevent_dce.Store3(0u, asuint(res));
 }
 
@@ -11,7 +11,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   refract_cbc1d2();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

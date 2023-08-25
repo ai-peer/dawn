@@ -3,7 +3,7 @@ SamplerComparisonState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureGatherCompare_b5bc43() {
-  float4 res = arg_0.GatherCmp(arg_1, float3((1.0f).xx, float(1u)), 1.0f);
+  float4 res = arg_0.GatherCmp(arg_1, float3(float2(1.0f, 1.0f), float(1u)), 1.0f);
   prevent_dce.Store4(0u, asuint(res));
 }
 
@@ -13,7 +13,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureGatherCompare_b5bc43();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

@@ -1149,7 +1149,7 @@ void data_store(uint offset, float2x3 value) {
 }
 
 void main() {
-  data_store(16u, float2x3((0.0f).xxx, (0.0f).xxx));
+  data_store(16u, float2x3(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f)));
   return;
 }
 )";

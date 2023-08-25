@@ -1,5 +1,5 @@
 int4 g() {
-  return (0).xxxx;
+  return int4(0, 0, 0, 0);
 }
 
 void main() {

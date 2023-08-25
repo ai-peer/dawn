@@ -3,10 +3,10 @@ SamplerState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureSampleGrad_5884dd() {
-  float3 arg_2 = (1.0f).xxx;
-  float3 arg_3 = (1.0f).xxx;
-  float3 arg_4 = (1.0f).xxx;
-  float4 res = arg_0.SampleGrad(arg_1, arg_2, arg_3, arg_4, (1).xxx);
+  float3 arg_2 = float3(1.0f, 1.0f, 1.0f);
+  float3 arg_3 = float3(1.0f, 1.0f, 1.0f);
+  float3 arg_4 = float3(1.0f, 1.0f, 1.0f);
+  float4 res = arg_0.SampleGrad(arg_1, arg_2, arg_3, arg_4, int3(1, 1, 1));
   prevent_dce.Store4(0u, asuint(res));
 }
 
@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureSampleGrad_5884dd();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

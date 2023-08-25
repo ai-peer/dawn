@@ -5,7 +5,7 @@ struct str {
 groupshared str S;
 
 void func_S_i() {
-  S.i = (0.0f).xxxx;
+  S.i = float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 struct tint_symbol_1 {

@@ -1,6 +1,6 @@
 uint3 tint_div(uint3 lhs, uint rhs) {
   const uint3 r = uint3((rhs).xxx);
-  return (lhs / ((r == (0u).xxx) ? (1u).xxx : r));
+  return (lhs / ((r == uint3(0u, 0u, 0u)) ? uint3(1u, 1u, 1u) : r));
 }
 
 [numthreads(1, 1, 1)]

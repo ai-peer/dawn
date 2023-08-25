@@ -5,7 +5,7 @@ int4 textureLoad2d(Texture2D<int4> tint_symbol, int2 coords, int level) {
 }
 
 void doTextureLoad() {
-  int4 res = textureLoad2d(arg_0, (0).xx, 0);
+  int4 res = textureLoad2d(arg_0, int2(0, 0), 0);
 }
 
 struct tint_symbol_1 {
@@ -14,7 +14,7 @@ struct tint_symbol_1 {
 
 float4 vertex_main_inner() {
   doTextureLoad();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol_1 vertex_main() {

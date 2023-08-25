@@ -3,4 +3,4 @@ void unused_entry_point() {
   return;
 }
 
-static int4 u = (1).xxxx;
+static int4 u = int4(1, 1, 1, 1);

@@ -243,7 +243,7 @@ struct tint_symbol {
 };
 
 Interface vert_main_inner() {
-  const Interface tint_symbol_3 = {(0.0f).xxxx, 0.5f, 0.25f};
+  const Interface tint_symbol_3 = {float4(0.0f, 0.0f, 0.0f, 0.0f), 0.5f, 0.25f};
   return tint_symbol_3;
 }
 

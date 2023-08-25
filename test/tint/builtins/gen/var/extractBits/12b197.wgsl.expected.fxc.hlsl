@@ -3,14 +3,14 @@ uint3 tint_extract_bits(uint3 v, uint offset, uint count) {
   const uint e = min(32u, (s + count));
   const uint shl = (32u - e);
   const uint shr = (shl + s);
-  const uint3 shl_result = ((shl < 32u) ? (v << uint3((shl).xxx)) : (0u).xxx);
-  return ((shr < 32u) ? (shl_result >> uint3((shr).xxx)) : ((shl_result >> (31u).xxx) >> (1u).xxx));
+  const uint3 shl_result = ((shl < 32u) ? (v << uint3((shl).xxx)) : uint3(0u, 0u, 0u));
+  return ((shr < 32u) ? (shl_result >> uint3((shr).xxx)) : ((shl_result >> uint3(31u, 31u, 31u)) >> uint3(1u, 1u, 1u)));
 }
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void extractBits_12b197() {
-  uint3 arg_0 = (1u).xxx;
+  uint3 arg_0 = uint3(1u, 1u, 1u);
   uint arg_1 = 1u;
   uint arg_2 = 1u;
   uint3 res = tint_extract_bits(arg_0, arg_1, arg_2);
@@ -23,7 +23,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   extractBits_12b197();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

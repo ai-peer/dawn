@@ -6,7 +6,7 @@ struct tint_symbol {
 };
 
 float4 f_inner() {
-  return t.Sample(s, (0.0f).xx, int2(4, 6));
+  return t.Sample(s, float2(0.0f, 0.0f), int2(4, 6));
 }
 
 tint_symbol f() {

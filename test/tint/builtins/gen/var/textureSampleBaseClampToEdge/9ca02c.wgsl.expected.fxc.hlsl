@@ -2,7 +2,7 @@ float4 tint_textureSampleBaseClampToEdge(Texture2D<float4> t, SamplerState s, fl
   uint3 tint_tmp;
   t.GetDimensions(0, tint_tmp.x, tint_tmp.y, tint_tmp.z);
   const float2 dims = float2(tint_tmp.xy);
-  const float2 half_texel = ((0.5f).xx / dims);
+  const float2 half_texel = (float2(0.5f, 0.5f) / dims);
   const float2 clamped = clamp(coord, half_texel, (1.0f - half_texel));
   return t.SampleLevel(s, clamped, 0.0f);
 }
@@ -12,7 +12,7 @@ SamplerState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureSampleBaseClampToEdge_9ca02c() {
-  float2 arg_2 = (1.0f).xx;
+  float2 arg_2 = float2(1.0f, 1.0f);
   float4 res = tint_textureSampleBaseClampToEdge(arg_0, arg_1, arg_2);
   prevent_dce.Store4(0u, asuint(res));
 }
@@ -23,7 +23,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureSampleBaseClampToEdge_9ca02c();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

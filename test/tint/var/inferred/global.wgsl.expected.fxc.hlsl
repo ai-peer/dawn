@@ -5,7 +5,7 @@ struct MyStruct {
 static int v1 = 1;
 static uint v2 = 1u;
 static float v3 = 1.0f;
-static int3 v4 = (1).xxx;
+static int3 v4 = int3(1, 1, 1);
 static uint3 v5 = uint3(1u, 2u, 3u);
 static float3 v6 = float3(1.0f, 2.0f, 3.0f);
 const MyStruct c = {1.0f};

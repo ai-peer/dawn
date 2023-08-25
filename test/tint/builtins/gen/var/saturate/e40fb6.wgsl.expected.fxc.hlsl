@@ -1,5 +1,5 @@
 void saturate_e40fb6() {
-  float2 res = (1.0f).xx;
+  float2 res = float2(1.0f, 1.0f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   saturate_e40fb6();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

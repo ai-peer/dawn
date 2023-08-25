@@ -17,7 +17,7 @@ float4 main_inner(int loc0, uint loc1, float loc2, float4 loc3, float16_t loc4, 
   const float4 v = loc3;
   const float16_t x = loc4;
   const vector<float16_t, 3> y = loc5;
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol_2 main(tint_symbol_1 tint_symbol) {

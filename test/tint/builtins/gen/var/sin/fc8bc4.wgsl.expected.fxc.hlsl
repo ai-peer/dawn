@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void sin_fc8bc4() {
-  float2 arg_0 = (1.57079637050628662109f).xx;
+  float2 arg_0 = float2(1.57079637050628662109f, 1.57079637050628662109f);
   float2 res = sin(arg_0);
   prevent_dce.Store2(0u, asuint(res));
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   sin_fc8bc4();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

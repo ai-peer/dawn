@@ -88,7 +88,7 @@ void dst_nested_store(uint offset, int value[4][3][2]) {
 
 void foo(int4 src_param[4]) {
   int4 src_function[4] = (int4[4])0;
-  const int4 tint_symbol_4[4] = {(1).xxxx, (2).xxxx, (3).xxxx, (3).xxxx};
+  const int4 tint_symbol_4[4] = {int4(1, 1, 1, 1), int4(2, 2, 2, 2), int4(3, 3, 3, 3), int4(3, 3, 3, 3)};
   tint_symbol_store(0u, tint_symbol_4);
   tint_symbol_store(0u, src_param);
   tint_symbol_store(0u, ret_arr());

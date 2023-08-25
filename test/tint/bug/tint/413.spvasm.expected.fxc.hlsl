@@ -6,7 +6,7 @@ void main_1() {
   srcValue = Src.Load(int3(0, 0, 0));
   srcValue.x = (srcValue.x + 1u);
   const uint4 x_27 = srcValue;
-  Dst[(0).xx] = x_27;
+  Dst[int2(0, 0)] = x_27;
   return;
 }
 

@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void dpdy_699a05() {
-  float4 res = ddy((1.0f).xxxx);
+  float4 res = ddy(float4(1.0f, 1.0f, 1.0f, 1.0f));
   prevent_dce.Store4(0u, asuint(res));
 }
 

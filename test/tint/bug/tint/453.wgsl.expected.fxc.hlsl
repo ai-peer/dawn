@@ -9,6 +9,6 @@ void main() {
   const uint x_24 = srcValue.x;
   const uint x_25 = (x_24 + 1u);
   const uint4 x_27 = srcValue;
-  Dst[(0).xx] = x_27.xxxx;
+  Dst[int2(0, 0)] = x_27.xxxx;
   return;
 }

@@ -1,5 +1,5 @@
 void normalize_584e47() {
-  float2 res = (0.70710676908493041992f).xx;
+  float2 res = float2(0.70710676908493041992f, 0.70710676908493041992f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   normalize_584e47();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

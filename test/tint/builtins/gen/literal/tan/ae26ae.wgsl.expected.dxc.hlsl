@@ -1,5 +1,5 @@
 void tan_ae26ae() {
-  float3 res = (1.55740773677825927734f).xxx;
+  float3 res = float3(1.55740773677825927734f, 1.55740773677825927734f, 1.55740773677825927734f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   tan_ae26ae();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

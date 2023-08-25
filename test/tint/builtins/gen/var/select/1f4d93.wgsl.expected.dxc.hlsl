@@ -1,6 +1,6 @@
 void select_1f4d93() {
-  bool2 arg_2 = (true).xx;
-  float2 res = (arg_2 ? (1.0f).xx : (1.0f).xx);
+  bool2 arg_2 = bool2(true, true);
+  float2 res = (arg_2 ? float2(1.0f, 1.0f) : float2(1.0f, 1.0f));
 }
 
 struct tint_symbol {
@@ -9,7 +9,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   select_1f4d93();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

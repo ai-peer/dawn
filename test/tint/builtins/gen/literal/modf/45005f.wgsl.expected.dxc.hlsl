@@ -3,7 +3,7 @@ struct modf_result_vec3_f16 {
   vector<float16_t, 3> whole;
 };
 void modf_45005f() {
-  modf_result_vec3_f16 res = {(float16_t(-0.5h)).xxx, (float16_t(-1.0h)).xxx};
+  modf_result_vec3_f16 res = {vector<float16_t, 3>(float16_t(-0.5h), float16_t(-0.5h), float16_t(-0.5h)), vector<float16_t, 3>(float16_t(-1.0h), float16_t(-1.0h), float16_t(-1.0h))};
 }
 
 struct tint_symbol {
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   modf_45005f();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

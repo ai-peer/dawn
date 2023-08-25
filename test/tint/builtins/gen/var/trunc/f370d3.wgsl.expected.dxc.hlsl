@@ -5,7 +5,7 @@ float2 tint_trunc(float2 param_0) {
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void trunc_f370d3() {
-  float2 arg_0 = (1.5f).xx;
+  float2 arg_0 = float2(1.5f, 1.5f);
   float2 res = tint_trunc(arg_0);
   prevent_dce.Store2(0u, asuint(res));
 }
@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   trunc_f370d3();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

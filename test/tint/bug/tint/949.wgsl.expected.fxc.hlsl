@@ -120,7 +120,7 @@ float3 perturbNormal_mf33_vf3_f1_(inout float3x3 cotangentFrame_1, inout float3 
   const float3 x_119 = textureSample;
   const float3x3 x_125 = cotangentFrame_1;
   param = x_125;
-  param_1 = ((x_119 * 2.0f) - (1.0f).xxx);
+  param_1 = ((x_119 * 2.0f) - float3(1.0f, 1.0f, 1.0f));
   const float x_128 = scale_1;
   param_2 = x_128;
   const float3 x_129 = perturbNormalBase_mf33_vf3_f1_(param, param_1, param_2);
@@ -210,7 +210,7 @@ void main_1() {
   float3 specularOutput = float3(0.0f, 0.0f, 0.0f);
   float3 output3 = float3(0.0f, 0.0f, 0.0f);
   u_Float = 100.0f;
-  u_Color = (0.5f).xxx;
+  u_Color = float3(0.5f, 0.5f, 0.5f);
   const float2 x_261 = vMainuv;
   const float4 x_262 = TextureSamplerTexture.Sample(TextureSamplerSampler, x_261);
   tempTextureRead = x_262;
@@ -220,8 +220,8 @@ void main_1() {
   const float3 x_279 = asfloat(x_269[9].xyz);
   const float4 x_282 = v_output1;
   output5 = normalize((x_279 - float3(x_282.x, x_282.y, x_282.z)));
-  output4 = (0.0f).xxxx;
-  uvOffset = (0.0f).xx;
+  output4 = float4(0.0f, 0.0f, 0.0f, 0.0f);
+  uvOffset = float2(0.0f, 0.0f);
   const float x_292 = asfloat(x_269[8].x);
   normalScale = (1.0f / x_292);
   const bool x_298 = gl_FrontFacing;
@@ -273,8 +273,8 @@ void main_1() {
   const float x_374 = numSamples;
   stepSize = (1.0f / x_374);
   currRayHeight = 1.0f;
-  vCurrOffset = (0.0f).xx;
-  vLastOffset = (0.0f).xx;
+  vCurrOffset = float2(0.0f, 0.0f);
+  vLastOffset = float2(0.0f, 0.0f);
   lastSampledHeight = 1.0f;
   currSampledHeight = 1.0f;
   i = 0;
@@ -286,7 +286,7 @@ void main_1() {
     }
     const float2 x_394 = v_uv;
     const float2 x_395 = vCurrOffset;
-    const float4 x_397 = (0.0f).xxxx;
+    const float4 x_397 = float4(0.0f, 0.0f, 0.0f, 0.0f);
     currSampledHeight = x_397.w;
     const float x_400 = currSampledHeight;
     const float x_401 = currRayHeight;
@@ -355,8 +355,8 @@ void main_1() {
   shadow = 1.0f;
   const float x_488 = u_Float;
   glossiness_1 = (1.0f * x_488);
-  diffuseBase = (0.0f).xxx;
-  specularBase = (0.0f).xxx;
+  diffuseBase = float3(0.0f, 0.0f, 0.0f);
+  specularBase = float3(0.0f, 0.0f, 0.0f);
   const float4 x_494 = output4;
   normalW = float3(x_494.x, x_494.y, x_494.z);
   const float3 x_501 = viewDirectionW_1;

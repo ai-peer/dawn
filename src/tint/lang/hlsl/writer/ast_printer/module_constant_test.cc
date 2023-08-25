@@ -237,7 +237,7 @@ TEST_F(HlslASTPrinterTest_ModuleConstant, Emit_GlobalConst_arr_vec2_bool) {
     ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
 
     EXPECT_EQ(gen.Result(), R"(void f() {
-  const bool2 l[3] = {bool2(true, false), bool2(false, true), (true).xx};
+  const bool2 l[3] = {bool2(true, false), bool2(false, true), bool2(true, true)};
 }
 )");
 }

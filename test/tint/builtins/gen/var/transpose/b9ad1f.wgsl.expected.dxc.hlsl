@@ -6,7 +6,7 @@ void prevent_dce_store(uint offset, matrix<float16_t, 2, 3> value) {
 }
 
 void transpose_b9ad1f() {
-  matrix<float16_t, 3, 2> arg_0 = matrix<float16_t, 3, 2>((float16_t(1.0h)).xx, (float16_t(1.0h)).xx, (float16_t(1.0h)).xx);
+  matrix<float16_t, 3, 2> arg_0 = matrix<float16_t, 3, 2>(vector<float16_t, 2>(float16_t(1.0h), float16_t(1.0h)), vector<float16_t, 2>(float16_t(1.0h), float16_t(1.0h)), vector<float16_t, 2>(float16_t(1.0h), float16_t(1.0h)));
   matrix<float16_t, 2, 3> res = transpose(arg_0);
   prevent_dce_store(0u, res);
 }
@@ -17,7 +17,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   transpose_b9ad1f();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

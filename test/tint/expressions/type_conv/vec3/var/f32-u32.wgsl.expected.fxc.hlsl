@@ -4,10 +4,10 @@ void unused_entry_point() {
 }
 
 uint3 tint_ftou(float3 v) {
-  return ((v < (4294967040.0f).xxx) ? ((v < (0.0f).xxx) ? (0u).xxx : uint3(v)) : (4294967295u).xxx);
+  return ((v < float3(4294967040.0f, 4294967040.0f, 4294967040.0f)) ? ((v < float3(0.0f, 0.0f, 0.0f)) ? uint3(0u, 0u, 0u) : uint3(v)) : uint3(4294967295u, 4294967295u, 4294967295u));
 }
 
-static float3 u = (1.0f).xxx;
+static float3 u = float3(1.0f, 1.0f, 1.0f);
 
 void f() {
   const uint3 v = tint_ftou(u);

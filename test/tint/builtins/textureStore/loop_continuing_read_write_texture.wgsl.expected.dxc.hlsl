@@ -15,7 +15,7 @@ void foo() {
       {
       }
       {
-        tex[(0).xx] = (0).xxxx;
+        tex[int2(0, 0)] = int4(0, 0, 0, 0);
       }
     }
   }

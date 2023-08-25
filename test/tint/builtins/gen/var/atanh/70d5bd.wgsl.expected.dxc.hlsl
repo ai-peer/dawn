@@ -1,5 +1,5 @@
 void atanh_70d5bd() {
-  float2 res = (0.54930615425109863281f).xx;
+  float2 res = float2(0.54930615425109863281f, 0.54930615425109863281f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   atanh_70d5bd();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

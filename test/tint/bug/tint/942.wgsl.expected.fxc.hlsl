@@ -25,7 +25,7 @@ void main_inner(uint3 WorkGroupID, uint3 LocalInvocationID, uint local_invocatio
     for(uint idx = local_invocation_index; (idx < 1024u); idx = (idx + 64u)) {
       const uint i_1 = (idx / 256u);
       const uint i_2 = (idx % 256u);
-      tile[i_1][i_2] = (0.0f).xxx;
+      tile[i_1][i_2] = float3(0.0f, 0.0f, 0.0f);
     }
   }
   GroupMemoryBarrierWithGroupSync();
@@ -42,7 +42,7 @@ void main_inner(uint3 WorkGroupID, uint3 LocalInvocationID, uint local_invocatio
           if ((flip[0].x != 0u)) {
             loadIndex = loadIndex.yx;
           }
-          tile[r][((4u * LocalInvocationID.x) + c)] = inputTex.SampleLevel(samp, ((float2(loadIndex) + (0.25f).xx) / float2(dims)), 0.0f).rgb;
+          tile[r][((4u * LocalInvocationID.x) + c)] = inputTex.SampleLevel(samp, ((float2(loadIndex) + float2(0.25f, 0.25f)) / float2(dims)), 0.0f).rgb;
         }
       }
     }
@@ -66,7 +66,7 @@ void main_inner(uint3 WorkGroupID, uint3 LocalInvocationID, uint local_invocatio
             tint_tmp_1 = all((writeIndex < dims));
           }
           if ((tint_tmp_1)) {
-            float3 acc = (0.0f).xxx;
+            float3 acc = float3(0.0f, 0.0f, 0.0f);
             {
               for(uint f = 0u; (f < params[0].x); f = (f + 1u)) {
                 uint i = ((center + f) - filterOffset);

@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void countOneBits_0f7980() {
-  int4 arg_0 = (1).xxxx;
+  int4 arg_0 = int4(1, 1, 1, 1);
   int4 res = asint(countbits(asuint(arg_0)));
   prevent_dce.Store4(0u, asuint(res));
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   countOneBits_0f7980();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

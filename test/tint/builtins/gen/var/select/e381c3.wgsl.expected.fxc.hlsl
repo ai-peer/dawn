@@ -1,6 +1,6 @@
 void select_e381c3() {
   bool arg_2 = true;
-  int4 res = (arg_2 ? (1).xxxx : (1).xxxx);
+  int4 res = (arg_2 ? int4(1, 1, 1, 1) : int4(1, 1, 1, 1));
 }
 
 struct tint_symbol {
@@ -9,7 +9,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   select_e381c3();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

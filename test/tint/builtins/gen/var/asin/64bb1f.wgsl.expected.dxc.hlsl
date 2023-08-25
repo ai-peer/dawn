@@ -1,5 +1,5 @@
 void asin_64bb1f() {
-  float4 res = (0.5f).xxxx;
+  float4 res = float4(0.5f, 0.5f, 0.5f, 0.5f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   asin_64bb1f();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

@@ -1,5 +1,5 @@
 void min_af364e() {
-  int4 res = (1).xxxx;
+  int4 res = int4(1, 1, 1, 1);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   min_af364e();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

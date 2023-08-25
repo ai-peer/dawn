@@ -11,7 +11,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   cos_c5c28e();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

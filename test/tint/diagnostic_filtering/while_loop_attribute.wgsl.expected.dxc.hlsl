@@ -15,7 +15,7 @@ struct tint_symbol_1 {
 };
 
 void main_inner(float x) {
-  float4 v = (0.0f).xxxx;
+  float4 v = float4(0.0f, 0.0f, 0.0f, 0.0f);
   while (true) {
     bool tint_tmp = (x > 0.0f);
     if (tint_tmp) {

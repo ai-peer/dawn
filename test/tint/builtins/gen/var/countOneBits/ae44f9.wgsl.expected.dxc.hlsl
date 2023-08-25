@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   countOneBits_ae44f9();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

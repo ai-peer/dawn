@@ -9,7 +9,7 @@ modf_result_vec4_f32 tint_modf(float4 param_0) {
 }
 
 void modf_4bfced() {
-  float4 arg_0 = (-1.5f).xxxx;
+  float4 arg_0 = float4(-1.5f, -1.5f, -1.5f, -1.5f);
   modf_result_vec4_f32 res = tint_modf(arg_0);
 }
 
@@ -19,7 +19,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   modf_4bfced();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

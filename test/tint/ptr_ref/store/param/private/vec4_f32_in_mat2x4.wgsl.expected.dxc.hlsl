@@ -1,5 +1,5 @@
 void func(inout float4 pointer) {
-  pointer = (0.0f).xxxx;
+  pointer = float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 static float2x4 P = float2x4(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
