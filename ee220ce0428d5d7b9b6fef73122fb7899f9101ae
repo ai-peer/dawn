@@ -285,6 +285,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bb26d31_427a5ca2",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-25T11:34:10Z",
+      "side": 1,
+      "message": "Where? I saw TextureBase only holds a weak ref of the SharedTextureMemory.?",
+      "parentUuid": "cfe85e0a_467fc5cb",
+      "range": {
+        "startLine": 101,
+        "startChar": 8,
+        "endLine": 101,
+        "endChar": 25
+      },
+      "revId": "ee220ce0428d5d7b9b6fef73122fb7899f9101ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1733ad7e_a878878e",
         "filename": "src/dawn/native/d3d11/SharedTextureMemoryD3D11.cpp",
         "patchSetId": 17

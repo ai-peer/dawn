@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5820013b_e0deb12d",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-25T11:34:10Z",
+      "side": 1,
+      "message": "A question: I saw some code in dawn will skip validation, if skip_validation is specified. But some validations are always enabled (like code in this CL). So how to decide which validation should skip or not?",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "298eac8c0e874dba0812108068a683dddb3c7a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
