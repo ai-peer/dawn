@@ -22,6 +22,30 @@
       },
       "revId": "298eac8c0e874dba0812108068a683dddb3c7a02",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "143c652e_cc6d7040",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-25T18:16:31Z",
+      "side": 1,
+      "message": "generally we only skip at encoding time because that\u0027s the more performance sensitive code.",
+      "parentUuid": "5820013b_e0deb12d",
+      "range": {
+        "startLine": 44,
+        "startChar": 16,
+        "endLine": 44,
+        "endChar": 31
+      },
+      "revId": "298eac8c0e874dba0812108068a683dddb3c7a02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
