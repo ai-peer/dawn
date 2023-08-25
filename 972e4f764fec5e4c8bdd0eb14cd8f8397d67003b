@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d33a7e_b14e3a17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-25T20:54:16Z",
+      "side": 1,
+      "message": "Nice! Thanks Austin!",
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18fc0198_236e2bf9",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-25T20:54:16Z",
+      "side": 1,
+      "message": "nit. Add labels for debugging like in Metal version.",
+      "range": {
+        "startLine": 220,
+        "startChar": 24,
+        "endLine": 220,
+        "endChar": 65
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91f12efb_4a85325f",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-25T20:54:16Z",
+      "side": 1,
+      "message": "nit. Add labels for debugging like in Metal version.",
+      "range": {
+        "startLine": 244,
+        "startChar": 24,
+        "endLine": 244,
+        "endChar": 65
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7834d900_c81f485e",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-25T20:54:16Z",
+      "side": 1,
+      "message": "Wondering if this test (and the respective Metal one) could be implemented in the generic test file using `CreateSharedTextureMemory`?",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 1
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ea5ca7b_229ca786",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 457,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-25T20:54:16Z",
+      "side": 1,
+      "message": "nit. To be more consistent with the Metal tests, we could pass `wgpu::ChainedStructOut otherStruct` instead?",
+      "range": {
+        "startLine": 457,
+        "startChar": 4,
+        "endLine": 457,
+        "endChar": 58
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
