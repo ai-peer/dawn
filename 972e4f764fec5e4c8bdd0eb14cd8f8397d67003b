@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9776709_34bd018e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-25T22:34:01Z",
+      "side": 1,
+      "message": "this is intended to be this way - the access is \"current\" even if something downstream errors.\n\nThis makes it simpler for the calling code to always BeingAccess + EndAccess without needing to know the error state.",
+      "parentUuid": "65a2d240_cc1503ff",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 29
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "571d6707_818fecb8",
         "filename": "src/dawn/native/SharedTextureMemory.h",
         "patchSetId": 19
@@ -54,6 +78,30 @@
       "writtenOn": "2023-08-25T22:20:40Z",
       "side": 1,
       "message": "Is it really necessary to have one `SharedTextureMemoryState` per `TextureBase`? Can all `TextureBase` share one state?",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 12
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c21613e6_6e47cfc5",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-25T22:34:01Z",
+      "side": 1,
+      "message": "They need to be different because the fence scope is per texture.\n\nif you:\n\nt1.BeginAccess();\nt2.BeginAccess();\nt2.EndAccess();\nt1.EndAccess();\n\nwe need to track the stack of fences per access\n\nyou can look at the \"AccessStack\" test for more detail",
+      "parentUuid": "571d6707_818fecb8",
       "range": {
         "startLine": 109,
         "startChar": 4,
