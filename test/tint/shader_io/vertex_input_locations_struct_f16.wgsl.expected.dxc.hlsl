@@ -25,7 +25,7 @@ float4 main_inner(VertexInputs inputs) {
   const float4 v = inputs.loc3;
   const float16_t x = inputs.loc4;
   const vector<float16_t, 3> y = inputs.loc5;
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol_2 main(tint_symbol_1 tint_symbol) {

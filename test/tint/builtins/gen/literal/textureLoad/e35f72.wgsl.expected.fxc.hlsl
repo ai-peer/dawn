@@ -2,7 +2,7 @@ Texture3D<int4> arg_0 : register(t0, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureLoad_e35f72() {
-  int4 res = arg_0.Load(int4((1).xxx, int(1u)));
+  int4 res = arg_0.Load(int4(int3(1, 1, 1), int(1u)));
   prevent_dce.Store4(0u, asuint(res));
 }
 
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureLoad_e35f72();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

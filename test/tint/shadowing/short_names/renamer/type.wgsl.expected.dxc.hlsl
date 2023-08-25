@@ -12,7 +12,7 @@ float4 main_inner(uint VertexIndex) {
   const vec4f s = {1};
   const float f = float(s.i);
   const bool b = bool(f);
-  return (b ? (1.0f).xxxx : (0.0f).xxxx);
+  return (b ? float4(1.0f, 1.0f, 1.0f, 1.0f) : float4(0.0f, 0.0f, 0.0f, 0.0f));
 }
 
 tint_symbol_2 main(tint_symbol_1 tint_symbol) {

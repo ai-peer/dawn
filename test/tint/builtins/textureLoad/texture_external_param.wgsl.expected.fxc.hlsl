@@ -32,7 +32,7 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 }
 
 float4 textureLoadExternal(Texture2D<float4> plane0, Texture2D<float4> plane1, int2 coord, ExternalTextureParams params) {
-  const int2 coord1 = (coord >> (1u).xx);
+  const int2 coord1 = (coord >> uint2(1u, 1u));
   float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
     color = plane0.Load(int3(coord, 0)).rgba;
@@ -96,7 +96,7 @@ ExternalTextureParams ext_tex_params_load(uint offset) {
 }
 
 void doTextureLoad() {
-  float4 res = textureLoad2d(arg_0, ext_tex_plane_1, ext_tex_params_load(0u), (0).xx);
+  float4 res = textureLoad2d(arg_0, ext_tex_plane_1, ext_tex_params_load(0u), int2(0, 0));
 }
 
 struct tint_symbol_1 {
@@ -105,7 +105,7 @@ struct tint_symbol_1 {
 
 float4 vertex_main_inner() {
   doTextureLoad();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol_1 vertex_main() {

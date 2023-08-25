@@ -3,7 +3,7 @@ struct str {
 };
 
 void func(inout float4 pointer) {
-  pointer = (0.0f).xxxx;
+  pointer = float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 static str P = (str)0;

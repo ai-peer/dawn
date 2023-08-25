@@ -37,7 +37,7 @@ float4 main_inner(float2 vUV) {
     const float sampleDepth = 0.0f;
     i = (i + 1);
   }
-  return (1.0f).xxxx;
+  return float4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 tint_symbol_3 main(tint_symbol_2 tint_symbol_1) {

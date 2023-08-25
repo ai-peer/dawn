@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void determinant_fc12a5() {
-  matrix<float16_t, 2, 2> arg_0 = matrix<float16_t, 2, 2>((float16_t(1.0h)).xx, (float16_t(1.0h)).xx);
+  matrix<float16_t, 2, 2> arg_0 = matrix<float16_t, 2, 2>(vector<float16_t, 2>(float16_t(1.0h), float16_t(1.0h)), vector<float16_t, 2>(float16_t(1.0h), float16_t(1.0h)));
   float16_t res = determinant(arg_0);
   prevent_dce.Store<float16_t>(0u, res);
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   determinant_fc12a5();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

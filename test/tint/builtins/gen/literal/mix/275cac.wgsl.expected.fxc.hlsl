@@ -1,5 +1,5 @@
 void mix_275cac() {
-  float4 res = (1.0f).xxxx;
+  float4 res = float4(1.0f, 1.0f, 1.0f, 1.0f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   mix_275cac();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

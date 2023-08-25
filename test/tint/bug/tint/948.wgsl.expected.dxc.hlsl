@@ -34,7 +34,7 @@ float4x4 getFrameData_f1_(inout float frameID) {
   const float4 x_47 = frameMapTexture.SampleBias(frameMapSampler, float2(x_44, 0.25f), 0.0f);
   const float x_51 = fX;
   const float4 x_54 = frameMapTexture.SampleBias(frameMapSampler, float2(x_51, 0.5f), 0.0f);
-  return float4x4(float4(x_40.x, x_40.y, x_40.z, x_40.w), float4(x_47.x, x_47.y, x_47.z, x_47.w), float4(x_54.x, x_54.y, x_54.z, x_54.w), (0.0f).xxxx);
+  return float4x4(float4(x_40.x, x_40.y, x_40.z, x_40.w), float4(x_47.x, x_47.y, x_47.z, x_47.w), float4(x_54.x, x_54.y, x_54.z, x_54.w), float4(0.0f, 0.0f, 0.0f, 0.0f));
 }
 
 float tint_float_mod(float lhs, float rhs) {
@@ -60,7 +60,7 @@ void main_1() {
   float4 nc = float4(0.0f, 0.0f, 0.0f, 0.0f);
   float alpha = 0.0f;
   float3 mixed = float3(0.0f, 0.0f, 0.0f);
-  color = (0.0f).xxxx;
+  color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   const float2 x_86 = tUV;
   tileUV = frac(x_86);
   const float x_91 = tileUV.y;
@@ -68,11 +68,11 @@ void main_1() {
   const float2 x_95 = tUV;
   tileID = floor(x_95);
   const float2 x_101 = asfloat(x_20[6].xy);
-  sheetUnits = ((1.0f).xx / x_101);
+  sheetUnits = (float2(1.0f, 1.0f) / x_101);
   const float x_106 = asfloat(x_20[6].w);
   spriteUnits = (1.0f / x_106);
   const float2 x_111 = asfloat(x_20[5].zw);
-  stageUnits = ((1.0f).xx / x_111);
+  stageUnits = (float2(1.0f, 1.0f) / x_111);
   i = 0;
   while (true) {
     const int x_122 = i;
@@ -85,14 +85,14 @@ void main_1() {
       case 1: {
         const float2 x_150 = tileID;
         const float2 x_154 = asfloat(x_20[5].zw);
-        const float4 x_156 = tileMapsTexture1.SampleBias(tileMapsSampler, ((x_150 + (0.5f).xx) / x_154), 0.0f);
+        const float4 x_156 = tileMapsTexture1.SampleBias(tileMapsSampler, ((x_150 + float2(0.5f, 0.5f)) / x_154), 0.0f);
         frameID_1 = x_156.x;
         break;
       }
       case 0: {
         const float2 x_136 = tileID;
         const float2 x_140 = asfloat(x_20[5].zw);
-        const float4 x_142 = tileMapsTexture0.SampleBias(tileMapsSampler, ((x_136 + (0.5f).xx) / x_140), 0.0f);
+        const float4 x_142 = tileMapsTexture0.SampleBias(tileMapsSampler, ((x_136 + float2(0.5f, 0.5f)) / x_140), 0.0f);
         frameID_1 = x_142.x;
         break;
       }
@@ -126,7 +126,7 @@ void main_1() {
         const float x_208 = frameID_1;
         const float x_211 = asfloat(x_20[6].w);
         const float x_214 = f;
-        const float4 x_217 = (0.0f).xxxx;
+        const float4 x_217 = float4(0.0f, 0.0f, 0.0f, 0.0f);
         animationData = x_217;
         {
           const float x_218 = f;

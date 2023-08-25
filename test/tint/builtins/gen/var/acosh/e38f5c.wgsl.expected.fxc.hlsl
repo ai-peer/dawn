@@ -5,7 +5,7 @@ float3 tint_acosh(float3 x) {
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void acosh_e38f5c() {
-  float3 arg_0 = (1.54308068752288818359f).xxx;
+  float3 arg_0 = float3(1.54308068752288818359f, 1.54308068752288818359f, 1.54308068752288818359f);
   float3 res = tint_acosh(arg_0);
   prevent_dce.Store3(0u, asuint(res));
 }
@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   acosh_e38f5c();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

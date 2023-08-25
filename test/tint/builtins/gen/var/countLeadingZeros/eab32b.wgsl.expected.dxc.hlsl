@@ -1,22 +1,22 @@
 int4 tint_count_leading_zeros(int4 v) {
   uint4 x = uint4(v);
-  const uint4 b16 = ((x <= (65535u).xxxx) ? (16u).xxxx : (0u).xxxx);
+  const uint4 b16 = ((x <= uint4(65535u, 65535u, 65535u, 65535u)) ? uint4(16u, 16u, 16u, 16u) : uint4(0u, 0u, 0u, 0u));
   x = (x << b16);
-  const uint4 b8 = ((x <= (16777215u).xxxx) ? (8u).xxxx : (0u).xxxx);
+  const uint4 b8 = ((x <= uint4(16777215u, 16777215u, 16777215u, 16777215u)) ? uint4(8u, 8u, 8u, 8u) : uint4(0u, 0u, 0u, 0u));
   x = (x << b8);
-  const uint4 b4 = ((x <= (268435455u).xxxx) ? (4u).xxxx : (0u).xxxx);
+  const uint4 b4 = ((x <= uint4(268435455u, 268435455u, 268435455u, 268435455u)) ? uint4(4u, 4u, 4u, 4u) : uint4(0u, 0u, 0u, 0u));
   x = (x << b4);
-  const uint4 b2 = ((x <= (1073741823u).xxxx) ? (2u).xxxx : (0u).xxxx);
+  const uint4 b2 = ((x <= uint4(1073741823u, 1073741823u, 1073741823u, 1073741823u)) ? uint4(2u, 2u, 2u, 2u) : uint4(0u, 0u, 0u, 0u));
   x = (x << b2);
-  const uint4 b1 = ((x <= (2147483647u).xxxx) ? (1u).xxxx : (0u).xxxx);
-  const uint4 is_zero = ((x == (0u).xxxx) ? (1u).xxxx : (0u).xxxx);
+  const uint4 b1 = ((x <= uint4(2147483647u, 2147483647u, 2147483647u, 2147483647u)) ? uint4(1u, 1u, 1u, 1u) : uint4(0u, 0u, 0u, 0u));
+  const uint4 is_zero = ((x == uint4(0u, 0u, 0u, 0u)) ? uint4(1u, 1u, 1u, 1u) : uint4(0u, 0u, 0u, 0u));
   return int4((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void countLeadingZeros_eab32b() {
-  int4 arg_0 = (1).xxxx;
+  int4 arg_0 = int4(1, 1, 1, 1);
   int4 res = tint_count_leading_zeros(arg_0);
   prevent_dce.Store4(0u, asuint(res));
 }
@@ -27,7 +27,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   countLeadingZeros_eab32b();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

@@ -5,7 +5,7 @@ float3 tint_radians(float3 param_0) {
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void radians_f96258() {
-  float3 arg_0 = (1.0f).xxx;
+  float3 arg_0 = float3(1.0f, 1.0f, 1.0f);
   float3 res = tint_radians(arg_0);
   prevent_dce.Store3(0u, asuint(res));
 }
@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   radians_f96258();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

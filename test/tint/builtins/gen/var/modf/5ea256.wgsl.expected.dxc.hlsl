@@ -9,7 +9,7 @@ modf_result_vec3_f32 tint_modf(float3 param_0) {
 }
 
 void modf_5ea256() {
-  float3 arg_0 = (-1.5f).xxx;
+  float3 arg_0 = float3(-1.5f, -1.5f, -1.5f);
   modf_result_vec3_f32 res = tint_modf(arg_0);
 }
 
@@ -19,7 +19,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   modf_5ea256();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

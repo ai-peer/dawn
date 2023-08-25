@@ -5,7 +5,7 @@ float3 tint_atanh(float3 x) {
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void atanh_440cca() {
-  float3 arg_0 = (0.5f).xxx;
+  float3 arg_0 = float3(0.5f, 0.5f, 0.5f);
   float3 res = tint_atanh(arg_0);
   prevent_dce.Store3(0u, asuint(res));
 }
@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   atanh_440cca();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

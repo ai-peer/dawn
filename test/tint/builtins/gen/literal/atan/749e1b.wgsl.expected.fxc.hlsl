@@ -1,5 +1,5 @@
 void atan_749e1b() {
-  float3 res = (0.78539818525314331055f).xxx;
+  float3 res = float3(0.78539818525314331055f, 0.78539818525314331055f, 0.78539818525314331055f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   atan_749e1b();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

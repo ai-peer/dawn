@@ -10,7 +10,7 @@ struct tint_symbol_1 {
 
 void main_inner(uint local_invocation_index) {
   {
-    S = float2x2((0.0f).xx, (0.0f).xx);
+    S = float2x2(float2(0.0f, 0.0f), float2(0.0f, 0.0f));
   }
   GroupMemoryBarrierWithGroupSync();
   const uint tint_symbol_2[1] = {1u};

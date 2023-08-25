@@ -3,7 +3,7 @@ void unused_entry_point() {
   return;
 }
 
-static int4 u = (1).xxxx;
+static int4 u = int4(1, 1, 1, 1);
 
 void f() {
   const uint4 v = uint4(u);

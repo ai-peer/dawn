@@ -3,7 +3,7 @@ SamplerState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureSample_ea7030() {
-  float res = arg_0.Sample(arg_1, (1.0f).xxx).x;
+  float res = arg_0.Sample(arg_1, float3(1.0f, 1.0f, 1.0f)).x;
   prevent_dce.Store(0u, asuint(res));
 }
 

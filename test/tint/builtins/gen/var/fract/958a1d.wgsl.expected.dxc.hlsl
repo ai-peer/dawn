@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void fract_958a1d() {
-  vector<float16_t, 3> arg_0 = (float16_t(1.25h)).xxx;
+  vector<float16_t, 3> arg_0 = vector<float16_t, 3>(float16_t(1.25h), float16_t(1.25h), float16_t(1.25h));
   vector<float16_t, 3> res = frac(arg_0);
   prevent_dce.Store<vector<float16_t, 3> >(0u, res);
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   fract_958a1d();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

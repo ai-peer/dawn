@@ -3,4 +3,4 @@ void unused_entry_point() {
   return;
 }
 
-static float3 u = (1.0f).xxx;
+static float3 u = float3(1.0f, 1.0f, 1.0f);

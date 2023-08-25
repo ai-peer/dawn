@@ -3,7 +3,7 @@ void unused_entry_point() {
   return;
 }
 
-static vector<float16_t, 3> u = (float16_t(1.0h)).xxx;
+static vector<float16_t, 3> u = vector<float16_t, 3>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h));
 
 void f() {
   const bool3 v = bool3(u);

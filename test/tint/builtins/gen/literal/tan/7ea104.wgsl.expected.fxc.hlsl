@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void tan_7ea104() {
-  float3 res = (1.55740773677825927734f).xxx;
+  float3 res = float3(1.55740773677825927734f, 1.55740773677825927734f, 1.55740773677825927734f);
   prevent_dce.Store3(0u, asuint(res));
 }
 
@@ -11,7 +11,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   tan_7ea104();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

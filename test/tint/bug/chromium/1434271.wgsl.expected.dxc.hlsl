@@ -17,7 +17,7 @@ struct tint_symbol_4 {
 
 float4 vertex_main_inner() {
   asinh_468a48();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol_4 vertex_main() {
@@ -161,7 +161,7 @@ void export_level_inner(uint3 coord) {
     const float b = asfloat(buf_in.Load((4u * (src_offset + 1u))));
     const float c = asfloat(buf_in.Load((4u * ((src_offset + 1u) + ubo[0].x))));
     const float d = asfloat(buf_in.Load((4u * ((src_offset + 1u) + ubo[0].x))));
-    const float sum = dot(float4(a, b, c, d), (1.0f).xxxx);
+    const float sum = dot(float4(a, b, c, d), float4(1.0f, 1.0f, 1.0f, 1.0f));
     buf_out.Store((4u * dst_offset), asuint(tint_float_mod(sum, 4.0f)));
     const float4 probabilities = (float4(a, (a * b), ((a / b) + c), sum) + max(sum, 0.0f));
     tex_out[int2(coord.xy)] = probabilities;

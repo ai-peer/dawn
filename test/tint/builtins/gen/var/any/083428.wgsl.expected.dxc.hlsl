@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void any_083428() {
-  bool4 arg_0 = (true).xxxx;
+  bool4 arg_0 = bool4(true, true, true, true);
   bool res = any(arg_0);
   prevent_dce.Store(0u, asuint((all((res == false)) ? 1 : 0)));
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   any_083428();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

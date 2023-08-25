@@ -3559,18 +3559,23 @@ bool ASTPrinter::EmitConstant(StringStream& out,
             return true;
         },
         [&](const core::type::Vector* v) {
-            if (auto* splat = constant->As<core::constant::Splat>()) {
-                {
-                    ScopedParen sp(out);
-                    if (!EmitConstant(out, splat->el, is_variable_initializer)) {
-                        return false;
+            // TODO(crbug.com/tint/1976): Workaround DXC bug that fails to handle buffer loads using
+            // a splatted constant location.
+            constexpr bool kDisableConstantVectorSplatDxcWorkaround = true;
+            if (!kDisableConstantVectorSplatDxcWorkaround) {
+                if (auto* splat = constant->As<core::constant::Splat>()) {
+                    {
+                        ScopedParen sp(out);
+                        if (!EmitConstant(out, splat->el, is_variable_initializer)) {
+                            return false;
+                        }
                     }
+                    out << ".";
+                    for (size_t i = 0; i < v->Width(); i++) {
+                        out << "x";
+                    }
+                    return true;
                 }
-                out << ".";
-                for (size_t i = 0; i < v->Width(); i++) {
-                    out << "x";
-                }
-                return true;
             }
 
             if (!EmitType(out, v, core::AddressSpace::kUndefined, core::Access::kUndefined, "")) {

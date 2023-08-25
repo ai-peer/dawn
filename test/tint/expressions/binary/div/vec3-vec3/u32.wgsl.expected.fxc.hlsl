@@ -1,5 +1,5 @@
 uint3 tint_div(uint3 lhs, uint3 rhs) {
-  return (lhs / ((rhs == (0u).xxx) ? (1u).xxx : rhs));
+  return (lhs / ((rhs == uint3(0u, 0u, 0u)) ? uint3(1u, 1u, 1u) : rhs));
 }
 
 [numthreads(1, 1, 1)]

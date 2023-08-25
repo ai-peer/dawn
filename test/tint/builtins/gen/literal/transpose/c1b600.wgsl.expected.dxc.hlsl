@@ -8,7 +8,7 @@ void prevent_dce_store(uint offset, float4x4 value) {
 }
 
 void transpose_c1b600() {
-  float4x4 res = float4x4((1.0f).xxxx, (1.0f).xxxx, (1.0f).xxxx, (1.0f).xxxx);
+  float4x4 res = float4x4(float4(1.0f, 1.0f, 1.0f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f), float4(1.0f, 1.0f, 1.0f, 1.0f));
   prevent_dce_store(0u, res);
 }
 
@@ -18,7 +18,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   transpose_c1b600();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

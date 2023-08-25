@@ -3,7 +3,7 @@ void unused_entry_point() {
   return;
 }
 
-static uint2 arr[2] = {(1u).xx, (2u).xx};
+static uint2 arr[2] = {uint2(1u, 1u), uint2(2u, 2u)};
 
 void f() {
   uint2 v[2] = arr;

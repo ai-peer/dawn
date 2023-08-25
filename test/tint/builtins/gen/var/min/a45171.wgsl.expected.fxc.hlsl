@@ -1,8 +1,8 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void min_a45171() {
-  int3 arg_0 = (1).xxx;
-  int3 arg_1 = (1).xxx;
+  int3 arg_0 = int3(1, 1, 1);
+  int3 arg_1 = int3(1, 1, 1);
   int3 res = min(arg_0, arg_1);
   prevent_dce.Store3(0u, asuint(res));
 }
@@ -13,7 +13,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   min_a45171();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

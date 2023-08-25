@@ -3,4 +3,4 @@ void unused_entry_point() {
   return;
 }
 
-static matrix<float16_t, 4, 3> m = matrix<float16_t, 4, 3>((float16_t(0.0h)).xxx, (float16_t(0.0h)).xxx, (float16_t(0.0h)).xxx, (float16_t(0.0h)).xxx);
+static matrix<float16_t, 4, 3> m = matrix<float16_t, 4, 3>(vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 3>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)));

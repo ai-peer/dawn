@@ -30,7 +30,7 @@ void f_inner(uint local_invocation_index) {
   {
     for(uint idx = local_invocation_index; (idx < 4u); idx = (idx + 1u)) {
       const uint i = idx;
-      w[i] = float2x2((0.0f).xx, (0.0f).xx);
+      w[i] = float2x2(float2(0.0f, 0.0f), float2(0.0f, 0.0f));
     }
   }
   GroupMemoryBarrierWithGroupSync();

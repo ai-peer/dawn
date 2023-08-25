@@ -9,7 +9,7 @@ modf_result_vec3_f16 tint_modf(vector<float16_t, 3> param_0) {
 }
 
 void modf_45005f() {
-  vector<float16_t, 3> arg_0 = (float16_t(-1.5h)).xxx;
+  vector<float16_t, 3> arg_0 = vector<float16_t, 3>(float16_t(-1.5h), float16_t(-1.5h), float16_t(-1.5h));
   modf_result_vec3_f16 res = tint_modf(arg_0);
 }
 
@@ -19,7 +19,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   modf_45005f();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

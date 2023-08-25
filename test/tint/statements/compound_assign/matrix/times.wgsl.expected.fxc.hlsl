@@ -17,5 +17,5 @@ float4x4 v_load(uint offset) {
 }
 
 void foo() {
-  v_store(0u, mul(float4x4((0.0f).xxxx, (0.0f).xxxx, (0.0f).xxxx, (0.0f).xxxx), v_load(0u)));
+  v_store(0u, mul(float4x4(float4(0.0f, 0.0f, 0.0f, 0.0f), float4(0.0f, 0.0f, 0.0f, 0.0f), float4(0.0f, 0.0f, 0.0f, 0.0f), float4(0.0f, 0.0f, 0.0f, 0.0f)), v_load(0u)));
 }

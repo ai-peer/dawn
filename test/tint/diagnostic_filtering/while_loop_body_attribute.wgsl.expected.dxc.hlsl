@@ -18,9 +18,9 @@ struct tint_symbol_1 {
 };
 
 void main_inner(float x) {
-  float4 v = (0.0f).xxxx;
+  float4 v = float4(0.0f, 0.0f, 0.0f, 0.0f);
   while((x > v.x)) {
-    v = t.Sample(s, (0.0f).xx);
+    v = t.Sample(s, float2(0.0f, 0.0f));
   }
 }
 

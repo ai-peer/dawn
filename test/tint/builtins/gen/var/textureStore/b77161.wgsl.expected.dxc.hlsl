@@ -2,7 +2,7 @@ RWTexture1D<uint4> arg_0 : register(u0, space1);
 
 void textureStore_b77161() {
   uint arg_1 = 1u;
-  uint4 arg_2 = (1u).xxxx;
+  uint4 arg_2 = uint4(1u, 1u, 1u, 1u);
   arg_0[arg_1] = arg_2;
 }
 
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureStore_b77161();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

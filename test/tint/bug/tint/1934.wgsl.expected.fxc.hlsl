@@ -5,5 +5,5 @@ void unused_entry_point() {
 
 void v() {
   const int i = 1;
-  int b = (1).xx[i];
+  int b = int2(1, 1)[i];
 }

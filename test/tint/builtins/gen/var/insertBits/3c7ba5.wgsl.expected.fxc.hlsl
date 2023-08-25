@@ -1,14 +1,14 @@
 uint2 tint_insert_bits(uint2 v, uint2 n, uint offset, uint count) {
   const uint e = (offset + count);
   const uint mask = ((((offset < 32u) ? (1u << offset) : 0u) - 1u) ^ (((e < 32u) ? (1u << e) : 0u) - 1u));
-  return ((((offset < 32u) ? (n << uint2((offset).xx)) : (0u).xx) & uint2((mask).xx)) | (v & uint2((~(mask)).xx)));
+  return ((((offset < 32u) ? (n << uint2((offset).xx)) : uint2(0u, 0u)) & uint2((mask).xx)) | (v & uint2((~(mask)).xx)));
 }
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void insertBits_3c7ba5() {
-  uint2 arg_0 = (1u).xx;
-  uint2 arg_1 = (1u).xx;
+  uint2 arg_0 = uint2(1u, 1u);
+  uint2 arg_1 = uint2(1u, 1u);
   uint arg_2 = 1u;
   uint arg_3 = 1u;
   uint2 res = tint_insert_bits(arg_0, arg_1, arg_2, arg_3);
@@ -21,7 +21,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   insertBits_3c7ba5();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

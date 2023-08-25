@@ -2,7 +2,7 @@ Texture2DMS<float4> arg_0 : register(t0, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureLoad_4db25c() {
-  uint2 arg_1 = (1u).xx;
+  uint2 arg_1 = uint2(1u, 1u);
   uint arg_2 = 1u;
   float res = arg_0.Load(uint3(arg_1, uint(0)), arg_2).x;
   prevent_dce.Store(0u, asuint(res));
@@ -14,7 +14,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureLoad_4db25c();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

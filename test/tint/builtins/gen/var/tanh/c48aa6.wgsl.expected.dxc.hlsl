@@ -1,5 +1,5 @@
 void tanh_c48aa6() {
-  float2 res = (0.76159417629241943359f).xx;
+  float2 res = float2(0.76159417629241943359f, 0.76159417629241943359f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   tanh_c48aa6();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

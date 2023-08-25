@@ -1,8 +1,8 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void max_320815() {
-  uint2 arg_0 = (1u).xx;
-  uint2 arg_1 = (1u).xx;
+  uint2 arg_0 = uint2(1u, 1u);
+  uint2 arg_1 = uint2(1u, 1u);
   uint2 res = max(arg_0, arg_1);
   prevent_dce.Store2(0u, asuint(res));
 }
@@ -13,7 +13,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   max_320815();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

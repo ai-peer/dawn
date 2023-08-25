@@ -14,17 +14,17 @@ void main() {
   uint u32_var1 = 123u;
   uint u32_var2 = 123u;
   uint u32_var3 = 1u;
-  bool3 v3bool_var1 = (true).xxx;
-  bool3 v3bool_var11 = (true).xxx;
-  bool3 v3bool_var2 = (true).xxx;
-  bool3 v3bool_var3 = (true).xxx;
-  int3 v3i32_var1 = (123).xxx;
-  int3 v3i32_var2 = (123).xxx;
-  int3 v3i32_var3 = (1).xxx;
-  uint3 v3u32_var1 = (123u).xxx;
-  uint3 v3u32_var2 = (123u).xxx;
-  uint3 v3u32_var3 = (1u).xxx;
-  bool3 v3bool_var4 = (true).xxx;
+  bool3 v3bool_var1 = bool3(true, true, true);
+  bool3 v3bool_var11 = bool3(true, true, true);
+  bool3 v3bool_var2 = bool3(true, true, true);
+  bool3 v3bool_var3 = bool3(true, true, true);
+  int3 v3i32_var1 = int3(123, 123, 123);
+  int3 v3i32_var2 = int3(123, 123, 123);
+  int3 v3i32_var3 = int3(1, 1, 1);
+  uint3 v3u32_var1 = uint3(123u, 123u, 123u);
+  uint3 v3u32_var2 = uint3(123u, 123u, 123u);
+  uint3 v3u32_var3 = uint3(1u, 1u, 1u);
+  bool3 v3bool_var4 = bool3(true, true, true);
   bool4 v4bool_var5 = bool4(true, false, true, false);
   return;
 }

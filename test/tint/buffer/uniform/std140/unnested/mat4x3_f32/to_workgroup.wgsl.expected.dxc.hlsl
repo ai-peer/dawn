@@ -17,7 +17,7 @@ float4x3 u_load(uint offset) {
 
 void f_inner(uint local_invocation_index) {
   {
-    w = float4x3((0.0f).xxx, (0.0f).xxx, (0.0f).xxx, (0.0f).xxx);
+    w = float4x3(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
   }
   GroupMemoryBarrierWithGroupSync();
   w = u_load(0u);

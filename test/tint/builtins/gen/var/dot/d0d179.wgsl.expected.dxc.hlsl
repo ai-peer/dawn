@@ -1,8 +1,8 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void dot_d0d179() {
-  vector<float16_t, 4> arg_0 = (float16_t(1.0h)).xxxx;
-  vector<float16_t, 4> arg_1 = (float16_t(1.0h)).xxxx;
+  vector<float16_t, 4> arg_0 = vector<float16_t, 4>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h), float16_t(1.0h));
+  vector<float16_t, 4> arg_1 = vector<float16_t, 4>(float16_t(1.0h), float16_t(1.0h), float16_t(1.0h), float16_t(1.0h));
   float16_t res = dot(arg_0, arg_1);
   prevent_dce.Store<float16_t>(0u, res);
 }
@@ -13,7 +13,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   dot_d0d179();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

@@ -1,5 +1,5 @@
 void degrees_c0880c() {
-  float3 res = (57.295780181884765625f).xxx;
+  float3 res = float3(57.295780181884765625f, 57.295780181884765625f, 57.295780181884765625f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   degrees_c0880c();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

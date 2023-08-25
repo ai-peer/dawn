@@ -3,7 +3,7 @@ SamplerState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureSampleLevel_1bf73e() {
-  float2 arg_2 = (1.0f).xx;
+  float2 arg_2 = float2(1.0f, 1.0f);
   int arg_3 = 1;
   int arg_4 = 1;
   float res = arg_0.SampleLevel(arg_1, float3(arg_2, float(arg_3)), arg_4).x;
@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureSampleLevel_1bf73e();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

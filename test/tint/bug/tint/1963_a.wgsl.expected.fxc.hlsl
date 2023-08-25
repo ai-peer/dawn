@@ -7,13 +7,13 @@ void X(float2 a, float2 b) {
 }
 
 float2 Y() {
-  return (0.0f).xx;
+  return float2(0.0f, 0.0f);
 }
 
 void f() {
   float2 v = float2(0.0f, 0.0f);
-  X((0.0f).xx, v);
-  const float2 tint_symbol = (0.0f).xx;
+  X(float2(0.0f, 0.0f), v);
+  const float2 tint_symbol = float2(0.0f, 0.0f);
   const float2 tint_symbol_1 = Y();
   X(tint_symbol, tint_symbol_1);
 }

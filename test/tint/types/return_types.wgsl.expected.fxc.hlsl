@@ -19,19 +19,19 @@ float ret_f32() {
 }
 
 int2 ret_v2i32() {
-  return (0).xx;
+  return int2(0, 0);
 }
 
 uint3 ret_v3u32() {
-  return (0u).xxx;
+  return uint3(0u, 0u, 0u);
 }
 
 float4 ret_v4f32() {
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 float2x3 ret_m2x3() {
-  return float2x3((0.0f).xxx, (0.0f).xxx);
+  return float2x3(float3(0.0f, 0.0f, 0.0f), float3(0.0f, 0.0f, 0.0f));
 }
 
 typedef float ret_arr_ret[4];

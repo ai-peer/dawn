@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void atan_331e6d() {
-  float3 res = (0.78539818525314331055f).xxx;
+  float3 res = float3(0.78539818525314331055f, 0.78539818525314331055f, 0.78539818525314331055f);
   prevent_dce.Store3(0u, asuint(res));
 }
 
@@ -11,7 +11,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   atan_331e6d();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

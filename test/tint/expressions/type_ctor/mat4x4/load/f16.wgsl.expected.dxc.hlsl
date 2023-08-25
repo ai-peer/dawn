@@ -4,6 +4,6 @@ void unused_entry_point() {
 }
 
 void f() {
-  matrix<float16_t, 4, 4> m = matrix<float16_t, 4, 4>((float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx, (float16_t(0.0h)).xxxx);
+  matrix<float16_t, 4, 4> m = matrix<float16_t, 4, 4>(vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)), vector<float16_t, 4>(float16_t(0.0h), float16_t(0.0h), float16_t(0.0h), float16_t(0.0h)));
   const matrix<float16_t, 4, 4> m_1 = matrix<float16_t, 4, 4>(m);
 }

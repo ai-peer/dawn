@@ -3,7 +3,7 @@ struct frexp_result_vec4_f16 {
   int4 exp;
 };
 void frexp_3dd21e() {
-  frexp_result_vec4_f16 res = {(float16_t(0.5h)).xxxx, (1).xxxx};
+  frexp_result_vec4_f16 res = {vector<float16_t, 4>(float16_t(0.5h), float16_t(0.5h), float16_t(0.5h), float16_t(0.5h)), int4(1, 1, 1, 1)};
 }
 
 struct tint_symbol {
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   frexp_3dd21e();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

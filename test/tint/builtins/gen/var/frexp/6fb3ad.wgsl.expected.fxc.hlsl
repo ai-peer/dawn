@@ -3,7 +3,7 @@ struct frexp_result_vec2_f32 {
   int2 exp;
 };
 void frexp_6fb3ad() {
-  frexp_result_vec2_f32 res = {(0.5f).xx, (1).xx};
+  frexp_result_vec2_f32 res = {float2(0.5f, 0.5f), int2(1, 1)};
 }
 
 struct tint_symbol {
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   frexp_6fb3ad();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

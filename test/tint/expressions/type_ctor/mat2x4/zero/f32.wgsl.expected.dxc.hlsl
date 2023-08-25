@@ -3,4 +3,4 @@ void unused_entry_point() {
   return;
 }
 
-static float2x4 m = float2x4((0.0f).xxxx, (0.0f).xxxx);
+static float2x4 m = float2x4(float4(0.0f, 0.0f, 0.0f, 0.0f), float4(0.0f, 0.0f, 0.0f, 0.0f));

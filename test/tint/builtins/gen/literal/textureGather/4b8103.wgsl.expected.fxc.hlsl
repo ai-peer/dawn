@@ -3,7 +3,7 @@ SamplerState arg_2 : register(s2, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureGather_4b8103() {
-  float4 res = arg_1.GatherGreen(arg_2, float3((1.0f).xx, float(1)), (1).xx);
+  float4 res = arg_1.GatherGreen(arg_2, float3(float2(1.0f, 1.0f), float(1)), int2(1, 1));
   prevent_dce.Store4(0u, asuint(res));
 }
 
@@ -13,7 +13,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureGather_4b8103();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

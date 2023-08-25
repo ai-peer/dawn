@@ -5,9 +5,9 @@ uint3 tint_clamp(uint3 e, uint3 low, uint3 high) {
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void clamp_548fc7() {
-  uint3 arg_0 = (1u).xxx;
-  uint3 arg_1 = (1u).xxx;
-  uint3 arg_2 = (1u).xxx;
+  uint3 arg_0 = uint3(1u, 1u, 1u);
+  uint3 arg_1 = uint3(1u, 1u, 1u);
+  uint3 arg_2 = uint3(1u, 1u, 1u);
   uint3 res = tint_clamp(arg_0, arg_1, arg_2);
   prevent_dce.Store3(0u, asuint(res));
 }
@@ -18,7 +18,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   clamp_548fc7();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

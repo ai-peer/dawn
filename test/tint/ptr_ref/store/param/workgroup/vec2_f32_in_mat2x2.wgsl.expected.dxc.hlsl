@@ -8,7 +8,7 @@ void set_vector_float2x2(inout float2x2 mat, int col, float2 val) {
 groupshared float2x2 S;
 
 void func_S_X(uint pointer[1]) {
-  set_vector_float2x2(S, pointer[0], (0.0f).xx);
+  set_vector_float2x2(S, pointer[0], float2(0.0f, 0.0f));
 }
 
 struct tint_symbol_1 {
@@ -17,7 +17,7 @@ struct tint_symbol_1 {
 
 void main_inner(uint local_invocation_index) {
   {
-    S = float2x2((0.0f).xx, (0.0f).xx);
+    S = float2x2(float2(0.0f, 0.0f), float2(0.0f, 0.0f));
   }
   GroupMemoryBarrierWithGroupSync();
   const uint tint_symbol_2[1] = {1u};

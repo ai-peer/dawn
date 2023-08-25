@@ -1,7 +1,7 @@
 RWByteAddressBuffer S : register(u0);
 
 void func_S_X(uint pointer[1]) {
-  S.Store4((16u * pointer[0]), asuint((0.0f).xxxx));
+  S.Store4((16u * pointer[0]), asuint(float4(0.0f, 0.0f, 0.0f, 0.0f)));
 }
 
 [numthreads(1, 1, 1)]

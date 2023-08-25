@@ -3,6 +3,6 @@ void unused_entry_point() {
   return;
 }
 
-static float3 f = (0.0f).xxx;
-static int3 i = (0).xxx;
-static uint3 u = (0u).xxx;
+static float3 f = float3(0.0f, 0.0f, 0.0f);
+static int3 i = int3(0, 0, 0);
+static uint3 u = uint3(0u, 0u, 0u);

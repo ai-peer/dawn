@@ -4,7 +4,7 @@ void unused_entry_point() {
 }
 
 void f() {
-  uint2 v2 = (3u).xx;
-  uint3 v3 = (3u).xxx;
-  uint4 v4 = (3u).xxxx;
+  uint2 v2 = uint2(3u, 3u);
+  uint3 v3 = uint3(3u, 3u, 3u);
+  uint4 v4 = uint4(3u, 3u, 3u, 3u);
 }

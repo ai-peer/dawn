@@ -37,12 +37,12 @@ float4 textureSampleExternal(Texture2D<float4> plane0, Texture2D<float4> plane1,
   uint3 tint_tmp;
   plane0.GetDimensions(0, tint_tmp.x, tint_tmp.y, tint_tmp.z);
   const float2 plane0_dims = float2(tint_tmp.xy);
-  const float2 plane0_half_texel = ((0.5f).xx / plane0_dims);
+  const float2 plane0_half_texel = (float2(0.5f, 0.5f) / plane0_dims);
   const float2 plane0_clamped = clamp(modifiedCoords, plane0_half_texel, (1.0f - plane0_half_texel));
   uint3 tint_tmp_1;
   plane1.GetDimensions(0, tint_tmp_1.x, tint_tmp_1.y, tint_tmp_1.z);
   const float2 plane1_dims = float2(tint_tmp_1.xy);
-  const float2 plane1_half_texel = ((0.5f).xx / plane1_dims);
+  const float2 plane1_half_texel = (float2(0.5f, 0.5f) / plane1_dims);
   const float2 plane1_clamped = clamp(modifiedCoords, plane1_half_texel, (1.0f - plane1_half_texel));
   float4 color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   if ((params.numPlanes == 1u)) {
@@ -105,7 +105,7 @@ ExternalTextureParams ext_tex_params_load(uint offset) {
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureSampleBaseClampToEdge_7c04e6() {
-  float2 arg_2 = (1.0f).xx;
+  float2 arg_2 = float2(1.0f, 1.0f);
   float4 res = textureSampleExternal(arg_0, ext_tex_plane_1, arg_1, arg_2, ext_tex_params_load(0u));
   prevent_dce.Store4(0u, asuint(res));
 }
@@ -116,7 +116,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureSampleBaseClampToEdge_7c04e6();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

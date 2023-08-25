@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   quantizeToF16_12e50e();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

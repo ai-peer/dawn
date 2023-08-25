@@ -3,7 +3,7 @@ SamplerComparisonState arg_1 : register(s1, space1);
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void textureSampleCompareLevel_958c87() {
-  float3 arg_2 = (1.0f).xxx;
+  float3 arg_2 = float3(1.0f, 1.0f, 1.0f);
   uint arg_3 = 1u;
   float arg_4 = 1.0f;
   float res = arg_0.SampleCmpLevelZero(arg_1, float4(arg_2, float(arg_3)), arg_4);
@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   textureSampleCompareLevel_958c87();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

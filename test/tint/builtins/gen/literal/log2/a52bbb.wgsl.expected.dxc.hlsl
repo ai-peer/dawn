@@ -1,5 +1,5 @@
 void log2_a52bbb() {
-  float4 res = (0.0f).xxxx;
+  float4 res = float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   log2_a52bbb();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

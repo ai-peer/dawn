@@ -1,8 +1,8 @@
 Texture2DMS<float4> arg_0 : register(t0, space1);
-static float4 tint_symbol_1 = (0.0f).xxxx;
+static float4 tint_symbol_1 = float4(0.0f, 0.0f, 0.0f, 0.0f);
 
 void textureDimensions_f60bdb() {
-  int2 res = (0).xx;
+  int2 res = int2(0, 0);
   uint3 tint_tmp;
   arg_0.GetDimensions(tint_tmp.x, tint_tmp.y, tint_tmp.z);
   res = int2(tint_tmp.xy);
@@ -16,7 +16,7 @@ void tint_symbol_2(float4 tint_symbol) {
 
 void vertex_main_1() {
   textureDimensions_f60bdb();
-  tint_symbol_2((0.0f).xxxx);
+  tint_symbol_2(float4(0.0f, 0.0f, 0.0f, 0.0f));
   return;
 }
 

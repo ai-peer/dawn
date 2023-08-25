@@ -1,7 +1,7 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void acos_8e2acf() {
-  float4 arg_0 = (0.96891242265701293945f).xxxx;
+  float4 arg_0 = float4(0.96891242265701293945f, 0.96891242265701293945f, 0.96891242265701293945f, 0.96891242265701293945f);
   float4 res = acos(arg_0);
   prevent_dce.Store4(0u, asuint(res));
 }
@@ -12,7 +12,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   acos_8e2acf();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

@@ -1,5 +1,5 @@
 void asinh_16b543() {
-  float2 res = (0.88137358427047729492f).xx;
+  float2 res = float2(0.88137358427047729492f, 0.88137358427047729492f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   asinh_16b543();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

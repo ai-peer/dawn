@@ -4,5 +4,5 @@ void unused_entry_point() {
 }
 
 void f() {
-  vector<float16_t, 2> v = (float16_t(0.0h)).xx;
+  vector<float16_t, 2> v = vector<float16_t, 2>(float16_t(0.0h), float16_t(0.0h));
 }

@@ -1,9 +1,9 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void smoothstep_392c19() {
-  float2 arg_0 = (2.0f).xx;
-  float2 arg_1 = (4.0f).xx;
-  float2 arg_2 = (3.0f).xx;
+  float2 arg_0 = float2(2.0f, 2.0f);
+  float2 arg_1 = float2(4.0f, 4.0f);
+  float2 arg_2 = float2(3.0f, 3.0f);
   float2 res = smoothstep(arg_0, arg_1, arg_2);
   prevent_dce.Store2(0u, asuint(res));
 }
@@ -14,7 +14,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   smoothstep_392c19();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

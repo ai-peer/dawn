@@ -10,7 +10,7 @@ static bool sk_Clockwise = false;
 static float4 vcolor_S0 = float4(0.0f, 0.0f, 0.0f, 0.0f);
 
 int4 tint_div(int4 lhs, int4 rhs) {
-  return (lhs / (((rhs == (0).xxxx) | ((lhs == (-2147483648).xxxx) & (rhs == (-1).xxxx))) ? (1).xxxx : rhs));
+  return (lhs / (((rhs == int4(0, 0, 0, 0)) | ((lhs == int4(-2147483648, -2147483648, -2147483648, -2147483648)) & (rhs == int4(-1, -1, -1, -1)))) ? int4(1, 1, 1, 1) : rhs));
 }
 
 bool test_int_S1_c0_b() {
@@ -28,19 +28,19 @@ bool test_int_S1_c0_b() {
   ok = true;
   x_41 = false;
   if (true) {
-    x_40 = all((tint_div((0).xxxx, int4((x_27).xxxx)) == (0).xxxx));
+    x_40 = all((tint_div(int4(0, 0, 0, 0), int4((x_27).xxxx)) == int4(0, 0, 0, 0)));
     x_41 = x_40;
   }
   ok = x_41;
   const int4 x_44 = int4((x_27).xxxx);
   val = x_44;
-  const int4 x_47 = (x_44 + (1).xxxx);
+  const int4 x_47 = (x_44 + int4(1, 1, 1, 1));
   val = x_47;
-  const int4 x_48 = (x_47 - (1).xxxx);
+  const int4 x_48 = (x_47 - int4(1, 1, 1, 1));
   val = x_48;
-  const int4 x_49 = (x_48 + (1).xxxx);
+  const int4 x_49 = (x_48 + int4(1, 1, 1, 1));
   val = x_49;
-  const int4 x_50 = (x_49 - (1).xxxx);
+  const int4 x_50 = (x_49 - int4(1, 1, 1, 1));
   val = x_50;
   x_55 = false;
   if (x_41) {
@@ -48,13 +48,13 @@ bool test_int_S1_c0_b() {
     x_55 = x_54;
   }
   ok = x_55;
-  const int4 x_58 = (x_50 * (2).xxxx);
+  const int4 x_58 = (x_50 * int4(2, 2, 2, 2));
   val = x_58;
-  const int4 x_59 = tint_div(x_58, (2).xxxx);
+  const int4 x_59 = tint_div(x_58, int4(2, 2, 2, 2));
   val = x_59;
-  const int4 x_60 = (x_59 * (2).xxxx);
+  const int4 x_60 = (x_59 * int4(2, 2, 2, 2));
   val = x_60;
-  const int4 x_61 = tint_div(x_60, (2).xxxx);
+  const int4 x_61 = tint_div(x_60, int4(2, 2, 2, 2));
   val = x_61;
   x_66 = false;
   if (x_55) {
@@ -86,19 +86,19 @@ void main_1() {
   x_9_ok = true;
   x_87 = false;
   if (true) {
-    x_86 = all((((0.0f).xxxx / float4((x_77).xxxx)) == (0.0f).xxxx));
+    x_86 = all(((float4(0.0f, 0.0f, 0.0f, 0.0f) / float4((x_77).xxxx)) == float4(0.0f, 0.0f, 0.0f, 0.0f)));
     x_87 = x_86;
   }
   x_9_ok = x_87;
   const float4 x_89 = float4((x_77).xxxx);
   x_10_val = x_89;
-  const float4 x_92 = (x_89 + (1.0f).xxxx);
+  const float4 x_92 = (x_89 + float4(1.0f, 1.0f, 1.0f, 1.0f));
   x_10_val = x_92;
-  const float4 x_93 = (x_92 - (1.0f).xxxx);
+  const float4 x_93 = (x_92 - float4(1.0f, 1.0f, 1.0f, 1.0f));
   x_10_val = x_93;
-  const float4 x_94 = (x_93 + (1.0f).xxxx);
+  const float4 x_94 = (x_93 + float4(1.0f, 1.0f, 1.0f, 1.0f));
   x_10_val = x_94;
-  const float4 x_95 = (x_94 - (1.0f).xxxx);
+  const float4 x_95 = (x_94 - float4(1.0f, 1.0f, 1.0f, 1.0f));
   x_10_val = x_95;
   x_100 = false;
   if (x_87) {
@@ -106,13 +106,13 @@ void main_1() {
     x_100 = x_99;
   }
   x_9_ok = x_100;
-  const float4 x_103 = (x_95 * (2.0f).xxxx);
+  const float4 x_103 = (x_95 * float4(2.0f, 2.0f, 2.0f, 2.0f));
   x_10_val = x_103;
-  const float4 x_104 = (x_103 / (2.0f).xxxx);
+  const float4 x_104 = (x_103 / float4(2.0f, 2.0f, 2.0f, 2.0f));
   x_10_val = x_104;
-  const float4 x_105 = (x_104 * (2.0f).xxxx);
+  const float4 x_105 = (x_104 * float4(2.0f, 2.0f, 2.0f, 2.0f));
   x_10_val = x_105;
-  const float4 x_106 = (x_105 / (2.0f).xxxx);
+  const float4 x_106 = (x_105 / float4(2.0f, 2.0f, 2.0f, 2.0f));
   x_10_val = x_106;
   x_111 = false;
   if (x_100) {

@@ -1,8 +1,8 @@
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void step_07cb06() {
-  vector<float16_t, 2> arg_0 = (float16_t(1.0h)).xx;
-  vector<float16_t, 2> arg_1 = (float16_t(1.0h)).xx;
+  vector<float16_t, 2> arg_0 = vector<float16_t, 2>(float16_t(1.0h), float16_t(1.0h));
+  vector<float16_t, 2> arg_1 = vector<float16_t, 2>(float16_t(1.0h), float16_t(1.0h));
   vector<float16_t, 2> res = step(arg_0, arg_1);
   prevent_dce.Store<vector<float16_t, 2> >(0u, res);
 }
@@ -13,7 +13,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   step_07cb06();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

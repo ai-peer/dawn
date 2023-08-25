@@ -6,8 +6,8 @@ void unused_entry_point() {
 RWByteAddressBuffer v : register(u0);
 
 int4 tint_mod(int4 lhs, int4 rhs) {
-  const int4 rhs_or_one = (((rhs == (0).xxxx) | ((lhs == (-2147483648).xxxx) & (rhs == (-1).xxxx))) ? (1).xxxx : rhs);
-  if (any(((uint4((lhs | rhs_or_one)) & (2147483648u).xxxx) != (0u).xxxx))) {
+  const int4 rhs_or_one = (((rhs == int4(0, 0, 0, 0)) | ((lhs == int4(-2147483648, -2147483648, -2147483648, -2147483648)) & (rhs == int4(-1, -1, -1, -1)))) ? int4(1, 1, 1, 1) : rhs);
+  if (any(((uint4((lhs | rhs_or_one)) & uint4(2147483648u, 2147483648u, 2147483648u, 2147483648u)) != uint4(0u, 0u, 0u, 0u)))) {
     return (lhs - ((lhs / rhs_or_one) * rhs_or_one));
   } else {
     return (lhs % rhs_or_one);
@@ -15,5 +15,5 @@ int4 tint_mod(int4 lhs, int4 rhs) {
 }
 
 void foo() {
-  v.Store4(0u, asuint(tint_mod(asint(v.Load4(0u)), (2).xxxx)));
+  v.Store4(0u, asuint(tint_mod(asint(v.Load4(0u)), int4(2, 2, 2, 2))));
 }

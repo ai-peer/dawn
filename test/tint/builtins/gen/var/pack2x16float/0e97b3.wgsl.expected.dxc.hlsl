@@ -6,7 +6,7 @@ uint tint_pack2x16float(float2 param_0) {
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void pack2x16float_0e97b3() {
-  float2 arg_0 = (1.0f).xx;
+  float2 arg_0 = float2(1.0f, 1.0f);
   uint res = tint_pack2x16float(arg_0);
   prevent_dce.Store(0u, asuint(res));
 }
@@ -17,7 +17,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   pack2x16float_0e97b3();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

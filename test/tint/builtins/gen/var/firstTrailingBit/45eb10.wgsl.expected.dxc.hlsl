@@ -1,22 +1,22 @@
 uint2 tint_first_trailing_bit(uint2 v) {
   uint2 x = uint2(v);
-  const uint2 b16 = (bool2((x & (65535u).xx)) ? (0u).xx : (16u).xx);
+  const uint2 b16 = (bool2((x & uint2(65535u, 65535u))) ? uint2(0u, 0u) : uint2(16u, 16u));
   x = (x >> b16);
-  const uint2 b8 = (bool2((x & (255u).xx)) ? (0u).xx : (8u).xx);
+  const uint2 b8 = (bool2((x & uint2(255u, 255u))) ? uint2(0u, 0u) : uint2(8u, 8u));
   x = (x >> b8);
-  const uint2 b4 = (bool2((x & (15u).xx)) ? (0u).xx : (4u).xx);
+  const uint2 b4 = (bool2((x & uint2(15u, 15u))) ? uint2(0u, 0u) : uint2(4u, 4u));
   x = (x >> b4);
-  const uint2 b2 = (bool2((x & (3u).xx)) ? (0u).xx : (2u).xx);
+  const uint2 b2 = (bool2((x & uint2(3u, 3u))) ? uint2(0u, 0u) : uint2(2u, 2u));
   x = (x >> b2);
-  const uint2 b1 = (bool2((x & (1u).xx)) ? (0u).xx : (1u).xx);
-  const uint2 is_zero = ((x == (0u).xx) ? (4294967295u).xx : (0u).xx);
+  const uint2 b1 = (bool2((x & uint2(1u, 1u))) ? uint2(0u, 0u) : uint2(1u, 1u));
+  const uint2 is_zero = ((x == uint2(0u, 0u)) ? uint2(4294967295u, 4294967295u) : uint2(0u, 0u));
   return uint2((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void firstTrailingBit_45eb10() {
-  uint2 arg_0 = (1u).xx;
+  uint2 arg_0 = uint2(1u, 1u);
   uint2 res = tint_first_trailing_bit(arg_0);
   prevent_dce.Store2(0u, asuint(res));
 }
@@ -27,7 +27,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   firstTrailingBit_45eb10();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

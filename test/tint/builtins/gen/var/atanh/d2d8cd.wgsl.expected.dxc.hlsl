@@ -16,7 +16,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   atanh_d2d8cd();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

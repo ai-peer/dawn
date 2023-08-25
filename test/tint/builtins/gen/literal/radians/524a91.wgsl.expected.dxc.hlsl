@@ -1,5 +1,5 @@
 void radians_524a91() {
-  float4 res = (0.01745329238474369049f).xxxx;
+  float4 res = float4(0.01745329238474369049f, 0.01745329238474369049f, 0.01745329238474369049f, 0.01745329238474369049f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   radians_524a91();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {

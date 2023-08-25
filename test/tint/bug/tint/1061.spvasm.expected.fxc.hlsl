@@ -11,7 +11,7 @@ void main_1() {
   if ((distance(v, asfloat(x_7[0])) < 0.10000000149011611938f)) {
     x_GLF_color = float4(1.0f, 0.0f, 0.0f, 1.0f);
   } else {
-    x_GLF_color = (0.0f).xxxx;
+    x_GLF_color = float4(0.0f, 0.0f, 0.0f, 0.0f);
   }
   return;
 }

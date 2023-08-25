@@ -1,5 +1,5 @@
 void sinh_a3da7c() {
-  float4 res = (1.17520117759704589844f).xxxx;
+  float4 res = float4(1.17520117759704589844f, 1.17520117759704589844f, 1.17520117759704589844f, 1.17520117759704589844f);
 }
 
 struct tint_symbol {
@@ -8,7 +8,7 @@ struct tint_symbol {
 
 float4 vertex_main_inner() {
   sinh_a3da7c();
-  return (0.0f).xxxx;
+  return float4(0.0f, 0.0f, 0.0f, 0.0f);
 }
 
 tint_symbol vertex_main() {
