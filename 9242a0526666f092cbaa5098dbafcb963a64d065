@@ -50,6 +50,24 @@
       "message": "LGTM but new failures?",
       "revId": "9242a0526666f092cbaa5098dbafcb963a64d065",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc27a922_8c9b0bb4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-25T09:59:28Z",
+      "side": 1,
+      "message": "I\u0027ve fixed the failures. PTAL, thanks!",
+      "parentUuid": "828b6491_15c41fba",
+      "revId": "9242a0526666f092cbaa5098dbafcb963a64d065",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
