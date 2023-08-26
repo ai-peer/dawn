@@ -138,6 +138,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef274585_56e4beb0",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-26T00:00:00Z",
+      "side": 1,
+      "message": "I added some comments now where mCurrentAccess is assigned to help explain",
+      "parentUuid": "0152c997_6fab49b9",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 29
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "571d6707_818fecb8",
         "filename": "src/dawn/native/SharedTextureMemory.h",
         "patchSetId": 19
@@ -244,6 +268,30 @@
       "writtenOn": "2023-08-25T20:54:16Z",
       "side": 1,
       "message": "nit. Add labels for debugging like in Metal version.",
+      "range": {
+        "startLine": 220,
+        "startChar": 24,
+        "endLine": 220,
+        "endChar": 65
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c123caec_f5aa901d",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-26T00:00:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18fc0198_236e2bf9",
       "range": {
         "startLine": 220,
         "startChar": 24,
