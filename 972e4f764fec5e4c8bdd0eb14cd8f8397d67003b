@@ -257,6 +257,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5af3f673_b56a74f1",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-26T00:57:43Z",
+      "side": 1,
+      "message": "Just realized the APIBeginAccess() returns void. However I don\u0027t like returning void for fail-able native API. The API will be hard to understand and use, users have to understand all those implementation details for error cases and know how to diagnose the errors. And I think the native API will not be used via wire, right? What is the benefit of it? Does dawn API have to return void and reports errors through callbacks?",
+      "parentUuid": "b840700a_881e3f0b",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 12
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18fc0198_236e2bf9",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
         "patchSetId": 19
