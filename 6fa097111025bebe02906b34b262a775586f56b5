@@ -51,6 +51,24 @@
       "message": "I assume this change is to fix issues with using Dawn as a subdirectory of a parent CMake project? Please provide the rationale for the change in the commit message.",
       "revId": "6fa097111025bebe02906b34b262a775586f56b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c90c1a5_223a36fe",
+        "filename": "src/dawn/node/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1003421
+      },
+      "writtenOn": "2023-08-28T20:40:40Z",
+      "side": 1,
+      "message": "It\u0027s mentioned in the linked ticket, but I can repeat that here.",
+      "parentUuid": "a0702cc7_9192295f",
+      "revId": "6fa097111025bebe02906b34b262a775586f56b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
