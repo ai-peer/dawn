@@ -74,6 +74,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "54abf6d6_56caa10b",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-28T21:04:13Z",
+      "side": 1,
+      "message": "there\u0027s still the case where the client passes in multiple fences into BeginAccess, and does not consume them before calling EndAccess. The same fences need to be returned there. We will also need to return multiple fences for multi-queue",
+      "parentUuid": "4d57dbc2_7a1e7979",
+      "range": {
+        "startLine": 220,
+        "startChar": 7,
+        "endLine": 220,
+        "endChar": 32
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e7b4eb3_474adc99",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 21
