@@ -22,6 +22,30 @@
       },
       "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "699c7b0a_13c7e9c9",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-28T20:07:45Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand. We always need an array anyway because there can be multiple fences that need to be waited on.",
+      "parentUuid": "c81167a7_05f628de",
+      "range": {
+        "startLine": 220,
+        "startChar": 7,
+        "endLine": 220,
+        "endChar": 32
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
