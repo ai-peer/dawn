@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c81167a7_05f628de",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-28T20:00:27Z",
+      "side": 1,
+      "message": "Is it possible only add fences to `mState-\u003emPendingFences`, when `BeginAccess()` is successful? In this case, `EndAccess()` will only return one `SharedFence` and one `SignalValue` in `EndAccessState`. We don\u0027t need to allocate two arrays.",
+      "range": {
+        "startLine": 220,
+        "startChar": 7,
+        "endLine": 220,
+        "endChar": 32
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
