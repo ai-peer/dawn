@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a8e7c3e_ce783ecc",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3564,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-28T15:04:11Z",
+      "side": 1,
+      "message": "Should this be a real option, otherwise what\u0027s the point of the if? If it was a real option we could turn it off in FXC",
+      "revId": "541d949b9e1edb506a47b5cba3a1a23c7ba393d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "574ca2b3_f4bafc4d",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3565,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-28T15:04:11Z",
+      "side": 1,
+      "message": "Can we invert the flag to remove the double negative here if we keep the flag?",
+      "revId": "541d949b9e1edb506a47b5cba3a1a23c7ba393d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
