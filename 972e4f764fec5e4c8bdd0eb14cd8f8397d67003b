@@ -281,6 +281,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90765ea1_850e734f",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-28T19:12:28Z",
+      "side": 1,
+      "message": "you\u0027re right that we probably don\u0027t need it for the wire, and it\u0027s a lot simpler to have a single state.\n\nI\u0027ve now changed it so we don\u0027t need to keep track of it per texture - and we return false from APIBegin/APIEnd if you do things like a nested begin or an end without a begin. It makes the state tracking a lot simpler - PTAL!\nthe other errors again done after checking/setting `mCurrentAccess` again so that applications don\u0027t need to handle a lot of different error cases. The only case you get a `false` status that you need to handle is when you have a clear, predictable programming error - like a nested BeginAccess.",
+      "parentUuid": "5af3f673_b56a74f1",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 12
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18fc0198_236e2bf9",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
         "patchSetId": 19
