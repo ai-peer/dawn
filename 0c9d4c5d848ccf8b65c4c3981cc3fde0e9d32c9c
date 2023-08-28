@@ -146,6 +146,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "171264b1_95e7d846",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-28T22:03:00Z",
+      "side": 1,
+      "message": "OK. I see. However I still feel it is better `APIBeginAccess()` only returns true, when it is successful. So chrome can skip further operations on the texture, if `APIBeginAccess()` fails (usually chrome will use a fallback blank texture to replace the problem texture). \n\nFor example, when chrome draws several textures to the back buffer, if one texture is in invalid state (due to `APIBeginAccess()` failure), whether the all following draws to the back buffer will fail and lead to a complete blank frame?",
+      "parentUuid": "ff27d637_a97207ff",
+      "range": {
+        "startLine": 220,
+        "startChar": 7,
+        "endLine": 220,
+        "endChar": 32
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e7b4eb3_474adc99",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 21
