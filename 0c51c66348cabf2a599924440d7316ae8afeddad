@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f932b36_22d07b3e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-28T19:39:54Z",
+      "side": 1,
+      "message": "PTAL. I\u0027ve filed a bug to track the reduction in binary size. We can tag the chromium roll with the needed lines when it triggers. The chromium bug is: https://crbug.com/1476649",
+      "revId": "0c51c66348cabf2a599924440d7316ae8afeddad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
