@@ -122,6 +122,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ff27d637_a97207ff",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-28T21:23:47Z",
+      "side": 1,
+      "message": "Why should it be illegal? that sounds like it would be rather fragile to use and it is very simple to support returning multiple fences given we will have multiple queues and need multiple fences.\n\nYes - one device will be able to have multiple queues each with their own logical GPU timeline.",
+      "parentUuid": "16c50498_1bf16dd7",
+      "range": {
+        "startLine": 220,
+        "startChar": 7,
+        "endLine": 220,
+        "endChar": 32
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e7b4eb3_474adc99",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 21
