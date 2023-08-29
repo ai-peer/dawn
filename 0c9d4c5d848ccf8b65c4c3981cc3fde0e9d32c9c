@@ -218,6 +218,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e737742c_b4bbbf8c",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T01:41:46Z",
+      "side": 1,
+      "message": "I don\u0027t think any of the errors happening here in BeginAccess are things Chrome would respond to and create a fallback image for. They\u0027re in the class of \"you\u0027re holding it wrong\" or \"something else you did is very wrong\". There\u0027s generally no need to look at the status result and respond to it. I would expect Chrome to `CHECK` that BeginAccess returns true - and also `CHECK` that no unexpected validation errors occur.\n\nbut is theoretically what you would do if you wanted to catch errors is do something like:\n```\ndevice.PushErrorScope(type);\nbacking-\u003eBeginAccess(...);\n\n// will be called synchronously in Dawn native.\ndevice.PopErrorScope([](WGPUErrorType error, const char* msg, void* userdata) {\n // do something\n}, userdata)\n```",
+      "parentUuid": "0b89964d_f43cc552",
+      "range": {
+        "startLine": 220,
+        "startChar": 7,
+        "endLine": 220,
+        "endChar": 32
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0e7b4eb3_474adc99",
         "filename": "src/dawn/native/SharedTextureMemory.cpp",
         "patchSetId": 21
