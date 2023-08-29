@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "355bd99e_436be173",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-29T16:03:11Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "e22a275f0ffd16bd7eda434e78b8800a95a1b051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a42a6bd4_df61ae7b",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-08-29T16:03:11Z",
+      "side": 1,
+      "message": "nit: Maybe mention returning true doesn\u0027t mean the APIBeginAccess() is successful, but APIEndAccess() has to be called. And error callback can be used to confirm the success of the being access.",
+      "range": {
+        "startLine": 51,
+        "startChar": 15,
+        "endLine": 51,
+        "endChar": 19
+      },
+      "revId": "e22a275f0ffd16bd7eda434e78b8800a95a1b051",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
