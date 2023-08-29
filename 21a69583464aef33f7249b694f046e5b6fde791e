@@ -121,6 +121,24 @@
       "parentUuid": "f85862b0_3e29ae7c",
       "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3594d3fd_f0e3ad16",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2871,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-29T19:47:22Z",
+      "side": 1,
+      "message": "It looks like you did a different instance of this, but not this one? This can join with the else above.",
+      "parentUuid": "ef1f9060_f2eee463",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
