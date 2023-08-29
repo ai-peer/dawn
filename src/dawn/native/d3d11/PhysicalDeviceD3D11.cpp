@@ -145,7 +145,6 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     // To import multi planar textures, we need to at least tier 2 support.
     if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
         EnableFeature(Feature::DawnMultiPlanarFormats);
-        EnableFeature(Feature::MultiPlanarFormatP010);
     }
 }
 
