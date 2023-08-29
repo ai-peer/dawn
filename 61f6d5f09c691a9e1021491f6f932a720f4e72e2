@@ -212,6 +212,30 @@
       },
       "revId": "61f6d5f09c691a9e1021491f6f932a720f4e72e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78a0bb51_ccb76069",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-29T01:21:55Z",
+      "side": 1,
+      "message": "Done, thanks!",
+      "parentUuid": "06369711_55a9ca52",
+      "range": {
+        "startLine": 187,
+        "startChar": 0,
+        "endLine": 187,
+        "endChar": 56
+      },
+      "revId": "61f6d5f09c691a9e1021491f6f932a720f4e72e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
