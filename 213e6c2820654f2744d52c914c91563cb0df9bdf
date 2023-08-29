@@ -1,0 +1,257 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca789127_fc91a738",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "casing: WrapString\n\nadd a comment documenting what it does",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d410f3f_891a219d",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "DAWN_UNREACHABLE for Force32",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51564ab2_64ba22fd",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "DAWN_UNREACHABLE for Force32",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "995fd66f_9597f6b8",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "DAWN_UNREACHABLE for Force32",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 41
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1347326_418eb893",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "print as hex?",
+      "range": {
+        "startLine": 115,
+        "startChar": 27,
+        "endLine": 115,
+        "endChar": 41
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ed60bee_987fd747",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "print as hex?",
+      "range": {
+        "startLine": 118,
+        "startChar": 27,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "576e0e6d_14d60c21",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "seems simpler to just print out `PowerPreferenceToString` at the same place you\u0027re calling `AdapterPropertiesToString` since we are always chaining it.\n\nThen we don\u0027t need FindInChain",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 5
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c3c85c2_406103e9",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "it\u0027s because you haven\u0027t set the proc table\n\nneed to `wgpuDawnSetProcs(\u0026dawn::native::GetProcs())`",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 0
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17572096_883fc5f3",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "delete",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 4
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "404c4f10_8969b642",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "use wgpu::Adapter instead of dawn::native::Adapter\n\nthen you should be able to use the C++ API",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 1
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de29b551_622c42fc",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-29T20:58:56Z",
+      "side": 1,
+      "message": "pass in `wgpu::Adapter(adapter.Get())` so we can use wgpu::Adapter",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 29
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
