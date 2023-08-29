@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9df1f9c_2bd2ffd9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-29T06:59:19Z",
+      "side": 1,
+      "message": "Please help revert. Sorry about this. I forgot that we don\u0027t have Dawn ChromeOS bots, so I didn\u0027t locally build and check it on ChromeOS.",
+      "revId": "dde0fa291a4eed2f0b2dc1244af93b77fd43c38b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
