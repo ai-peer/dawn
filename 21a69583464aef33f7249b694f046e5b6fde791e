@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cfa7e68_0cad633c",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2827,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-29T14:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "345eeddb_068f922e",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "458d2b2c_8ce6a6af",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94284bf5_cd09c11a",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2832,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-29T14:19:00Z",
+      "side": 1,
+      "message": "This means we only need to apply this workaround for splatted i32 constants, because u32s are emitted with a \u0027u\u0027 suffix, so DXC treats it as an unsigned 32 bit value.",
+      "parentUuid": "458d2b2c_8ce6a6af",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f85862b0_3e29ae7c",
         "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2023-08-29T14:04:01Z",
       "side": 1,
       "message": "This can be pulled and just use an `else if`",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef1f9060_f2eee463",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2871,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-29T14:19:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f85862b0_3e29ae7c",
       "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
