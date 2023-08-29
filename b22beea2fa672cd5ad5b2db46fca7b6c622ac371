@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2f70a6e_4d8f16a2",
+        "filename": "test/tint/parse_hlsl_errors.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-29T19:49:06Z",
+      "side": 1,
+      "message": "Why reverse? This could use a comment.",
+      "revId": "b22beea2fa672cd5ad5b2db46fca7b6c622ac371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
