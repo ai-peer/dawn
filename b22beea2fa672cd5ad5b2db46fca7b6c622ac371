@@ -16,6 +16,24 @@
       "message": "Why reverse? This could use a comment.",
       "revId": "b22beea2fa672cd5ad5b2db46fca7b6c622ac371",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee4d9c05_3f63b0d9",
+        "filename": "test/tint/parse_hlsl_errors.py",
+        "patchSetId": 1
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-29T20:15:51Z",
+      "side": 1,
+      "message": "Good point. Done.",
+      "parentUuid": "b2f70a6e_4d8f16a2",
+      "revId": "b22beea2fa672cd5ad5b2db46fca7b6c622ac371",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
