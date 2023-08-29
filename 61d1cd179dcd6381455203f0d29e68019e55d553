@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73d149bf_85b5f5c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-08-29T07:34:41Z",
+      "side": 1,
+      "message": "May I directly fix the issue in this CL? I locally verified it on ChromeOS build already. Let me know if I still need to go through the revert-reland process. Sorry for troubling you guys!",
+      "revId": "61d1cd179dcd6381455203f0d29e68019e55d553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
