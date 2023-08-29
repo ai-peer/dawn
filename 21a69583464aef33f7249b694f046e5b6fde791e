@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7aa4c9_e9e1ceed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-29T20:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c5c91d43_7c6b1f1f",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "345eeddb_068f922e",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "This means we only need to apply this workaround for splatted i32 constants, because u32s are emitted with a \u0027u\u0027 suffix, so DXC treats it as an unsigned 32 bit value.",
       "parentUuid": "458d2b2c_8ce6a6af",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73253376_1eb51df8",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2832,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-08-29T20:16:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94284bf5_cd09c11a",
       "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
