@@ -16,6 +16,57 @@
       "message": "This supercedes https://dawn-review.googlesource.com/c/dawn/+/148741",
       "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "345eeddb_068f922e",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2827,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-29T14:04:01Z",
+      "side": 1,
+      "message": "This doesn\u0027t match the code below. Should be `int3(0.xx)`",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "458d2b2c_8ce6a6af",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2832,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-29T14:04:01Z",
+      "side": 1,
+      "message": "Does this mean DXC does the right thing if the value is negative?",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f85862b0_3e29ae7c",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 2871,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-29T14:04:01Z",
+      "side": 1,
+      "message": "This can be pulled and just use an `else if`",
+      "revId": "21a69583464aef33f7249b694f046e5b6fde791e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
