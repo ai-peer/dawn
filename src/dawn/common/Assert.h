@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_COMMON_ASSERT_H_
 #define SRC_DAWN_COMMON_ASSERT_H_
 
+#include <cstdlib>
+
 #include "dawn/common/Compiler.h"
 
 // Dawn asserts to be used instead of the regular C stdlib assert function (if you don't use assert
@@ -60,16 +62,30 @@
 #endif
 #endif
 
+// Debug-only assert (similar to Chromium DCHECK).
+// In release, this provides optimization hints to the compiler.
 #define DAWN_ASSERT(condition) DAWN_ASSERT_CALLSITE_HELPER(__FILE__, __func__, __LINE__, condition)
+// Debug-only assert-false (similar to Chromium NOTREACHED).
+// In release, this provides optimization hints to the compiler.
 #define DAWN_UNREACHABLE()                                                 \
     do {                                                                   \
         DAWN_ASSERT(DAWN_ASSERT_LOOP_CONDITION && "Unreachable code hit"); \
         DAWN_BUILTIN_UNREACHABLE();                                        \
     } while (DAWN_ASSERT_LOOP_CONDITION)
+// Release-mode assert (similar to Chromium CHECK).
+// First does a debug-mode assert for better a better debugging experience, then hard-aborts.
+#define DAWN_CHECK(condition)   \
+    do {                        \
+        DAWN_ASSERT(condition); \
+        if (!(condition)) {     \
+            abort();            \
+        }                       \
+    } while (DAWN_ASSERT_LOOP_CONDITION)
 
 #if !defined(DAWN_SKIP_ASSERT_SHORTHANDS)
 #define ASSERT DAWN_ASSERT
 #define UNREACHABLE DAWN_UNREACHABLE
+#define CHECK DAWN_CHECK
 #endif
 
 namespace dawn {
