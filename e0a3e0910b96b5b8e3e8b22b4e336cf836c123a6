@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0a63d8_4eeb7a3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-30T16:28:37Z",
+      "side": 1,
+      "message": "Took a look out of curiosity.",
+      "revId": "e0a3e0910b96b5b8e3e8b22b4e336cf836c123a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7421bd1e_312f9d09",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 23
+      },
+      "lineNbr": 179,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-30T16:28:37Z",
+      "side": 1,
+      "message": "u-nit: group the methods per object.",
+      "revId": "e0a3e0910b96b5b8e3e8b22b4e336cf836c123a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5db7d5fd_b9470d03",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 23
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-30T16:28:37Z",
+      "side": 1,
+      "message": "Can we have a comment explaining why this indirection is necessary? Also won\u0027t we need the backend to be able to extend the state with its own information?",
+      "revId": "e0a3e0910b96b5b8e3e8b22b4e336cf836c123a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
