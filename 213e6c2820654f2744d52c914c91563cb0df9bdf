@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c71549a4_b75252b7",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca789127_fc91a738",
+      "range": {
+        "startLine": 36,
+        "startChar": 12,
+        "endLine": 36,
+        "endChar": 23
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4d410f3f_891a219d",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-29T20:58:56Z",
       "side": 1,
       "message": "DAWN_UNREACHABLE for Force32",
+      "range": {
+        "startLine": 67,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 37
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0e8f0e0_5a23f782",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d410f3f_891a219d",
       "range": {
         "startLine": 67,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc49e814_43146276",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51564ab2_64ba22fd",
+      "range": {
+        "startLine": 92,
+        "startChar": 0,
+        "endLine": 92,
+        "endChar": 37
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "995fd66f_9597f6b8",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-08-29T20:58:56Z",
       "side": 1,
       "message": "DAWN_UNREACHABLE for Force32",
+      "range": {
+        "startLine": 107,
+        "startChar": 0,
+        "endLine": 107,
+        "endChar": 41
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8e9ebaa_fd1262e1",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "995fd66f_9597f6b8",
       "range": {
         "startLine": 107,
         "startChar": 0,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6edba326_90df999e",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1347326_418eb893",
+      "range": {
+        "startLine": 115,
+        "startChar": 27,
+        "endLine": 115,
+        "endChar": 41
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ed60bee_987fd747",
@@ -129,6 +249,30 @@
       "writtenOn": "2023-08-29T20:58:56Z",
       "side": 1,
       "message": "print as hex?",
+      "range": {
+        "startLine": 118,
+        "startChar": 27,
+        "endLine": 118,
+        "endChar": 41
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57308789_a847f085",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ed60bee_987fd747",
       "range": {
         "startLine": 118,
         "startChar": 27,
@@ -162,6 +306,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ddf4fdb_a0eba973",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "576e0e6d_14d60c21",
+      "range": {
+        "startLine": 124,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 5
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c3c85c2_406103e9",
@@ -175,6 +343,30 @@
       "writtenOn": "2023-08-29T20:58:56Z",
       "side": 1,
       "message": "it\u0027s because you haven\u0027t set the proc table\n\nneed to `wgpuDawnSetProcs(\u0026dawn::native::GetProcs())`",
+      "range": {
+        "startLine": 223,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 0
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d577512f_5450b058",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done (although, I had to use dawnProcSetProcs(\u0026dawn::native::GetProcs()))",
+      "parentUuid": "3c3c85c2_406103e9",
       "range": {
         "startLine": 223,
         "startChar": 0,
@@ -208,6 +400,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "763e2a6c_3d284010",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17572096_883fc5f3",
+      "range": {
+        "startLine": 228,
+        "startChar": 0,
+        "endLine": 235,
+        "endChar": 4
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "404c4f10_8969b642",
@@ -231,6 +447,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93fed01b_0e7f0101",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Ah, it was the magic `wgpu::Adapter(adapter.Get())`, thank you.",
+      "parentUuid": "404c4f10_8969b642",
+      "range": {
+        "startLine": 213,
+        "startChar": 0,
+        "endLine": 265,
+        "endChar": 1
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de29b551_622c42fc",
@@ -244,6 +484,30 @@
       "writtenOn": "2023-08-29T20:58:56Z",
       "side": 1,
       "message": "pass in `wgpu::Adapter(adapter.Get())` so we can use wgpu::Adapter",
+      "range": {
+        "startLine": 290,
+        "startChar": 0,
+        "endLine": 290,
+        "endChar": 29
+      },
+      "revId": "213e6c2820654f2744d52c914c91563cb0df9bdf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "922ceb45_69782ff4",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 290,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-30T15:30:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de29b551_622c42fc",
       "range": {
         "startLine": 290,
         "startChar": 0,
