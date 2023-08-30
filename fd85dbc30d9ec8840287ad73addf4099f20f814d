@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32ac6166_ca03fbcc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T15:58:11Z",
+      "side": 1,
+      "message": "LGTM. note that setting toggles can change the availability of features - so you may eventually want to add parsing of cmd line args to set toggles\n\nalso, it could be valuable to know what toggles are defaulted on a particular device - though unfortunately that information is not available until you actually go and make the device",
+      "revId": "fd85dbc30d9ec8840287ad73addf4099f20f814d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
