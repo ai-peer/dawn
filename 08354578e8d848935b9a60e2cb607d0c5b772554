@@ -16,6 +16,29 @@
       "message": "Hi Corentin or Austin, PTAL. Thanks",
       "revId": "08354578e8d848935b9a60e2cb607d0c5b772554",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00ef0bcd_ae55bcfd",
+        "filename": "scripts/dawn_overrides_with_defaults.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T16:36:42Z",
+      "side": 1,
+      "message": "should we do it like here where we use //third_party if not standalone, and otherwise use ${dawn_root}/third_party ?",
+      "range": {
+        "startLine": 58,
+        "startChar": 2,
+        "endLine": 61,
+        "endChar": 3
+      },
+      "revId": "08354578e8d848935b9a60e2cb607d0c5b772554",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
