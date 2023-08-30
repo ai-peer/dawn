@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2f326e1_98376284",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-08-30T09:56:25Z",
+      "side": 1,
+      "message": "Please take a look, thanks! This CL modify the Tint SPIRV AST writer to require `SPV_KHR_subgroup_uniform_control_flow` extension and `SubgroupUniformControlFlowKHR` execution mode for compute-stagfe entry point if the `Chromium-experimental-subgroup-uniform-control-flow` feature is enabled.",
+      "revId": "740182f3426ce5b890faa9ce63ed7d2668753981",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
