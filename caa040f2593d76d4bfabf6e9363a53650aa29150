@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "caa040f2593d76d4bfabf6e9363a53650aa29150",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "569b9be0_6d72551c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-30T12:34:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "caa040f2593d76d4bfabf6e9363a53650aa29150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79396d7b_9e8bc8c3",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-30T12:34:46Z",
+      "side": 1,
+      "message": "Does this type require any MSL version? IIRC Tint supports MSL 1.2 at the moment.",
+      "range": {
+        "startLine": 1348,
+        "startChar": 52,
+        "endLine": 1348,
+        "endChar": 64
+      },
+      "revId": "caa040f2593d76d4bfabf6e9363a53650aa29150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
