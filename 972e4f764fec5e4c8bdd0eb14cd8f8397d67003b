@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2d6d9a_c6893453",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "357654fd_b216b0c0",
+      "range": {
+        "startLine": 235,
+        "startChar": 20,
+        "endLine": 235,
+        "endChar": 45
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "65a2d240_cc1503ff",
@@ -150,6 +174,30 @@
       "side": 1,
       "message": "I added some comments now where mCurrentAccess is assigned to help explain",
       "parentUuid": "0152c997_6fab49b9",
+      "range": {
+        "startLine": 238,
+        "startChar": 4,
+        "endLine": 238,
+        "endChar": 29
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d61c200_ea50f388",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef274585_56e4beb0",
       "range": {
         "startLine": 238,
         "startChar": 4,
@@ -303,6 +351,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8caf1c09_c4ed18d4",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90765ea1_850e734f",
+      "range": {
+        "startLine": 109,
+        "startChar": 4,
+        "endLine": 109,
+        "endChar": 12
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18fc0198_236e2bf9",
@@ -410,6 +482,30 @@
       "writtenOn": "2023-08-25T20:54:16Z",
       "side": 1,
       "message": "Wondering if this test (and the respective Metal one) could be implemented in the generic test file using `CreateSharedTextureMemory`?",
+      "range": {
+        "startLine": 286,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 1
+      },
+      "revId": "972e4f764fec5e4c8bdd0eb14cd8f8397d67003b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf5fb518_a4897351",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "this one is fences not memory, but unfortunately we won\u0027t be able to implement the same general concept for fences because not all backends are going to let you create shareable fences out of thin air like this. (will be tremendous boilerplate on Vulkan)",
+      "parentUuid": "7834d900_c81f485e",
       "range": {
         "startLine": 286,
         "startChar": 0,

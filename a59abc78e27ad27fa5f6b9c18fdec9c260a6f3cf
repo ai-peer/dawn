@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cab86109_58b193d9",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "24e359ed_41bc2c51",
+      "range": {
+        "startLine": 93,
+        "startChar": 24,
+        "endLine": 93,
+        "endChar": 101
+      },
+      "revId": "a59abc78e27ad27fa5f6b9c18fdec9c260a6f3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c78b252_ec4b4de5",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-30T18:16:09Z",
       "side": 1,
       "message": "nit. Is it worth it to pass through the label from `SharedTextureMemoryBase` to the `SharedTextureMemoryState` so that for errors/validation we can print it better? (i.e. at [1])",
+      "range": {
+        "startLine": 104,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 52
+      },
+      "revId": "a59abc78e27ad27fa5f6b9c18fdec9c260a6f3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16d6f84c_5352bc86",
+        "filename": "src/dawn/native/SharedTextureMemory.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Updated to print better errors without storing the label.\nThe label goes away if you drop the last ref to SharedTextureMemoryBase, but that should be more rare, and the message is also updated to say that happened.",
+      "parentUuid": "6c78b252_ec4b4de5",
       "range": {
         "startLine": 104,
         "startChar": 0,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15e0f427_a00cbcce",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 838,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "054f3ed6_08632077",
+      "range": {
+        "startLine": 838,
+        "startChar": 8,
+        "endLine": 838,
+        "endChar": 96
+      },
+      "revId": "a59abc78e27ad27fa5f6b9c18fdec9c260a6f3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6e03098_0d661c4c",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-08-30T18:16:09Z",
       "side": 1,
       "message": "nit. I\u0027m wondering whether it would be better to just make `SharedFence::ExportInfo` public and call that here with a `DAWN_TRY` instead of a re-entrant call? It would probably make the errors (if they happen in `ExportInfo`) a bit easier to trace?",
+      "range": {
+        "startLine": 41,
+        "startChar": 8,
+        "endLine": 41,
+        "endChar": 42
+      },
+      "revId": "a59abc78e27ad27fa5f6b9c18fdec9c260a6f3cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9426219_fe6eb0cb",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "excellent point. Done",
+      "parentUuid": "a6e03098_0d661c4c",
       "range": {
         "startLine": 41,
         "startChar": 8,

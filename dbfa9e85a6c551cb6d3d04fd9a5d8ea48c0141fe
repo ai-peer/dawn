@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd62434b_569dc9ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "PTAL! needs re-review because of vote stickiness changes",
+      "revId": "dbfa9e85a6c551cb6d3d04fd9a5d8ea48c0141fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -281,6 +281,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "368fa0aa_d044b47f",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd546d67_d7d89e75",
+      "range": {
+        "startLine": 220,
+        "startChar": 7,
+        "endLine": 220,
+        "endChar": 32
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e7b4eb3_474adc99",
@@ -294,6 +318,30 @@
       "writtenOn": "2023-08-28T20:43:34Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 264,
+        "startChar": 4,
+        "endLine": 264,
+        "endChar": 45
+      },
+      "revId": "0c9d4c5d848ccf8b65c4c3981cc3fde0e9d32c9c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "038c13c5_ae1bc54e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T23:40:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0e7b4eb3_474adc99",
       "range": {
         "startLine": 264,
         "startChar": 4,
