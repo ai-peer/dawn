@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "10f83b07_733f356b",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-08-30T01:44:20Z",
+      "side": 1,
+      "message": "Hmm sorry it took a while to get back to this, but I\u0027m not sure how easy/practical it would be to do that. Most of the places that call this `Create` function are constructors, with the API call being the only other call site.\n\nI\u0027m not sure how we would properly handle an `Error` in those cases. Regardless of how we want to fix it though, I will also defer it to a follow up CL since I don\u0027t think it will be trivial.",
+      "parentUuid": "21944fe0_1fbaa654",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 88
+      },
+      "revId": "224fb7581f0cf0db8a5f3732a3169f252b43d7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b87cc551_5ded2505",
