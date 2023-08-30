@@ -118,7 +118,7 @@ template <typename... MSG_ARGS>
         Write(msg, std::forward<MSG_ARGS>(msg_args)...);
     }
     std::cout << msg.str() << std::endl;
-    abort();
+    CHECK(false);
 }
 
 // LOG() prints the current file, line and function to stdout, followed by a

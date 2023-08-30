@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_COMMON_ASSERT_H_
 #define SRC_DAWN_COMMON_ASSERT_H_
 
+#include <cstdlib>
+
 #include "dawn/common/Compiler.h"
 
 // Dawn asserts to be used instead of the regular C stdlib assert function (if you don't use assert
@@ -66,10 +68,16 @@
         DAWN_ASSERT(DAWN_ASSERT_LOOP_CONDITION && "Unreachable code hit"); \
         DAWN_BUILTIN_UNREACHABLE();                                        \
     } while (DAWN_ASSERT_LOOP_CONDITION)
+#define DAWN_CHECK(condition)   \
+    do {                        \
+        DAWN_ASSERT(condition); \
+        abort();                \
+    } while (DAWN_ASSERT_LOOP_CONDITION)
 
 #if !defined(DAWN_SKIP_ASSERT_SHORTHANDS)
 #define ASSERT DAWN_ASSERT
 #define UNREACHABLE DAWN_UNREACHABLE
+#define CHECK DAWN_CHECK
 #endif
 
 namespace dawn {
