@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f074a0_22d8ebdf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T16:57:05Z",
+      "side": 1,
+      "message": "LGTM but I\u0027ll swap Ben since he is OOO",
+      "revId": "caa040f2593d76d4bfabf6e9363a53650aa29150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "79396d7b_9e8bc8c3",
@@ -48,6 +65,30 @@
       "writtenOn": "2023-08-30T12:34:46Z",
       "side": 1,
       "message": "Does this type require any MSL version? IIRC Tint supports MSL 1.2 at the moment.",
+      "range": {
+        "startLine": 1348,
+        "startChar": 52,
+        "endLine": 1348,
+        "endChar": 64
+      },
+      "revId": "caa040f2593d76d4bfabf6e9363a53650aa29150",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a1859e8_03a058d4",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T16:57:05Z",
+      "side": 1,
+      "message": "I just checked that it\u0027s in an old copy of the MSL 1.2 spec!\nin the current spec, it also doesn\u0027t say it needs a particular version. whereas it does for other types like \"packed_longn (supported since Metal 2.3)\"",
+      "parentUuid": "79396d7b_9e8bc8c3",
       "range": {
         "startLine": 1348,
         "startChar": 52,
