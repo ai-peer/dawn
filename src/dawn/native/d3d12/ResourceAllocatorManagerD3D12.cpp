@@ -581,9 +581,14 @@ ResultOrError<ResourceHeapAllocation> ResourceAllocatorManager::CreateCommittedR
         mDevice->IsToggleEnabled(Toggle::D3D12Use64KBAlignedMSAATexture)) {
         appliedResourceDescriptor.Alignment = D3D12_SMALL_MSAA_RESOURCE_PLACEMENT_ALIGNMENT;
     }
+
+    D3D12_HEAP_FLAGS createNotZeroedHeapFlag =
+        mDevice->IsToggleEnabled(Toggle::D3D12CreateNotZeroedHeap)
+            ? D3D12_HEAP_FLAG_CREATE_NOT_ZEROED
+            : D3D12_HEAP_FLAG_NONE;
     DAWN_TRY(CheckOutOfMemoryHRESULT(
         mDevice->GetD3D12Device()->CreateCommittedResource(
-            &heapProperties, D3D12_HEAP_FLAG_NONE, &appliedResourceDescriptor, initialUsage,
+            &heapProperties, createNotZeroedHeapFlag, &appliedResourceDescriptor, initialUsage,
             optimizedClearValue, IID_PPV_ARGS(&committedResource)),
         "ID3D12Device::CreateCommittedResource"));
 
