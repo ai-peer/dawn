@@ -106,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "9dfb1071_a9f5deea",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-30T16:25:22Z",
+      "side": 1,
+      "message": "a lot of those places are tests where the error should never happen; we can do AcquireSuccess?\n\nthen the only other one is APICreateInstance where you can handle the error in the function body",
+      "parentUuid": "10f83b07_733f356b",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 88
+      },
+      "revId": "224fb7581f0cf0db8a5f3732a3169f252b43d7a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b87cc551_5ded2505",
