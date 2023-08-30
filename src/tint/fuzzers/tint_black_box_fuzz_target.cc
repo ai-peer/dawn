@@ -151,6 +151,6 @@ int main(int argc, const char** argv) {
             std::cerr << "Aborting due to unknown target language; fuzzer must be "
                          "misconfigured."
                       << std::endl;
-            abort();
+            CHECK(false);
     }
 }
