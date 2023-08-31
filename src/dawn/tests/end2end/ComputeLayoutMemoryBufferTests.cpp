@@ -483,8 +483,6 @@ DAWN_TEST_PARAM_STRUCT(ComputeLayoutMemoryBufferTestParams, AddressSpace, Field)
 
 class ComputeLayoutMemoryBufferTests
     : public DawnTestWithParams<ComputeLayoutMemoryBufferTestParams> {
-    // void SetUp() override { DawnTestBase::SetUp(); }
-
   protected:
     // Require f16 feature if possible
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {

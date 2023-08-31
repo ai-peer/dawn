@@ -1155,6 +1155,9 @@ void DawnTestBase::SetUp() {
     ASSERT(device);
 
     queue = device.GetQueue();
+
+    // TODO(crbug.com/tint/2021, crbug.com/tint/1998): pervasive ASAN failures with DXC
+    DAWN_SUPPRESS_TEST_IF(IsAsan() && IsDXC());
 }
 
 void DawnTestBase::TearDown() {
