@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce9c7130_daefac89",
+        "filename": "src/dawn/native/ExecutionQueue.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T07:55:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a396aa1_4fce0a08",
+      "range": {
+        "startLine": 59,
+        "startChar": 72,
+        "endLine": 59,
+        "endChar": 97
+      },
+      "revId": "538c45947b977e23eaff8443a009696409867d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "95d2da8f_b8b97385",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-08-21T20:42:10Z",
       "side": 1,
       "message": "nit. existing, but extra \u0027.\u0027",
+      "range": {
+        "startLine": 122,
+        "startChar": 80,
+        "endLine": 122,
+        "endChar": 81
+      },
+      "revId": "538c45947b977e23eaff8443a009696409867d03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21708950_63a5eb9d",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 14
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T07:55:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95d2da8f_b8b97385",
       "range": {
         "startLine": 122,
         "startChar": 80,
