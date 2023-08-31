@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d5f4fd4_faf2cb75",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-31T01:53:43Z",
+      "side": 1,
+      "message": "I fail to build DawnInfo on Windows. According to the error messages, the dependencies for dawn/native is not properly defined in gn files:\n\nD:\\workspace\\dawn\u003eninja -C out\\Debug\nninja: Entering directory `out\\Debug\u0027\n[0/1] Regenerating ninja files\n[1/4] LINK DawnInfo.exe DawnInfo.exe.pdb\nFAILED: DawnInfo.exe DawnInfo.exe.pdb\n..\\..\\third_party\\llvm-build\\Release+Asserts\\bin\\lld-link.exe \"/OUT:./DawnInfo.exe\" /nologo -libpath:..\\..\\third_party\\llvm-build\\Release+Asserts\\lib\\clang\\17\\lib\\windows \"-libpath:C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.33.31629\\ATLMFC\\lib\\x64\" \"-libpath:C:\\Program Files\\Microsoft Visual Studio\\2022\\Professional\\VC\\Tools\\MSVC\\14.33.31629\\lib\\x64\" \"-libpath:C:\\Program Files (x86)\\Windows Kits\\10\\lib\\10.0.22621.0\\ucrt\\x64\" \"-libpath:C:\\Program Files (x86)\\Windows Kits\\10\\\\lib\\10.0.22621.0\\\\um\\x64\" /MACHINE:X64  \"/PDB:./DawnInfo.exe.pdb\" \"@./DawnInfo.exe.rsp\"\nlld-link: error: undefined symbol: public: static class std::__Cr::vector\u003cstruct dawn::native::ToggleInfo const *, class std::__Cr::allocator\u003cstruct dawn::native::ToggleInfo const *\u003e\u003e __cdecl dawn::native::TogglesInfo::AllToggleInfos(void)\n\u003e\u003e\u003e referenced by .\\..\\..\\src\\dawn\\samples\\DawnInfo.cpp:256\n\u003e\u003e\u003e               obj/src/dawn/samples/DawnInfo/DawnInfo.obj:(main)\n\nlld-link: error: undefined symbol: enum dawn::native::Feature __cdecl dawn::native::FromAPI(enum wgpu::FeatureName)\n\u003e\u003e\u003e referenced by .\\..\\..\\src\\dawn\\samples\\DawnInfo.cpp:226\n\u003e\u003e\u003e               obj/src/dawn/samples/DawnInfo/DawnInfo.obj:(void __cdecl `anonymous namespace\u0027::DumpAdapterFeatures(class wgpu::Adapter const \u0026))\n\nlld-link: error: undefined symbol: class dawn::ityp::array\u003cenum dawn::native::Feature, struct dawn::native::FeatureInfo, 46\u003e const dawn::native::kFeatureNameAndInfoList\n\u003e\u003e\u003e referenced by .\\..\\..\\src\\dawn\\samples\\DawnInfo.cpp:227\n\u003e\u003e\u003e               obj/src/dawn/samples/DawnInfo/DawnInfo.obj:(void __cdecl `anonymous namespace\u0027::DumpAdapterFeatures(class wgpu::Adapter const \u0026))\nninja: build stopped: subcommand failed.",
+      "revId": "dcc2dc1dce4e1102d4aefd1a30c3b94314dd5969",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
