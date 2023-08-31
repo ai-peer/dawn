@@ -16,6 +16,363 @@
       "message": "Just realized I should send this now before Europe day. I\u0027ve kind of put off sending this for review but I don\u0027t think it\u0027s getting any better at this point, PTAL\n\nAustin/Loko, we can talk about this in person if you\u0027d like",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8140eab7_6c8ada1a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "Started reviewing. Spent most time on the wire to understand the API using a smaller example. Some of the same comments likely apply to native/",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5a86e7e_c0b2242d",
+        "filename": "dawn.json",
+        "patchSetId": 40
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "Didn\u0027t we want two userdatas as well?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f2f2e2e7_00ca008c",
+        "filename": "src/dawn/common/FutureUtils.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "How difficult would it be to make this a typed integer? (using ityp*)? It would prevent potential confusion with other types that are uint64_t",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d465d0b_eef6dd3f",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: we tended to use pointers for mutable objects. Not sure if we want to change that convention.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69466741_601a0465",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "API* that return objects shouldn\u0027t be used because they return a new ref. We can use device-\u003eadapter-\u003ephysicaldevice-\u003einstance to get a raw pointer to the instance. But also we could consider having a copy of this instance pointer on the device and just do GetInstance there (to avoid bloating ObjectBase). Not 100% sure which is best.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c141c242_ef44bbdf",
+        "filename": "src/dawn/samples/SampleUtils.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: these changes seem unused?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c107b90_6b3d25d2",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: slight preference having a constexpr ObjectHandle::kInvalid and comparing against it instead of an implicit conversion to bool.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82da4b98_635ed959",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: this can be moved to the .cpp",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b12a5aae_79af748b",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we check this first and not add the event to the map of tracked events if it is Spontaneously fired?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3abdb7be_b68ea28e",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "This should probably be guarded by the mutex in case another operation updates the map concurrently.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c41016e_adbb8c95",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "When spontaneously fired shouldn\u0027t the event be removed from the map?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f3a33eb_81650ea1",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "Could we gather the list of futures to call the callback on while holding the mutex, and only afterwards call all the callbacks (that could take arbitrary amounts of time and be reentrant)",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a82daed6_8e06a129",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: Maybe ASSERT future.id \u003c\u003d currentOne as suggested in the design doc.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92fe4ee4_c53f9c10",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "ditto, we should perform the callback outside of the critical section.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fb0f92c_cb91d788",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "TBH given how small these are we could just make TrackedEvent a basic struct and mutate it directly in EventManager.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b48536a_dd18c6d2",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: small comment describing what this does?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ee18cfe_4ea764ef",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: This can use NonMovable from NonCopyable.h",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77d38e29_a7af271b",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: Could use MutexProtected.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22fe2d88_97036805",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "Why can\u0027t this be the case right now? Ah got it. Shouldn\u0027t it be easy-ish to get the device from objects, and then the instance from the device?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2320a940_3ef81175",
+        "filename": "src/dawn/wire/client/Instance.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "nit: unnecessary new includes?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be15a875_f6d647fe",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T15:54:11Z",
+      "side": 1,
+      "message": "What if the status returned by the server is not Success? This seems like it will always pretend it was a Success.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
