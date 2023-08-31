@@ -133,6 +133,7 @@ TEST_P(WaitAnyTests, Validation_UnsupportedMixedSources) {
 
 DAWN_INSTANTIATE_TEST(WaitAnyTests,
                       // TODO(crbug.com/dawn/1987): Enable tests for the rest of the backends.
+                      D3D12Backend(),
                       MetalBackend());
 
 }  // anonymous namespace

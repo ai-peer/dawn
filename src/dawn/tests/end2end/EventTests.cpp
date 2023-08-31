@@ -334,7 +334,7 @@ TEST_P(EventTests, WorkDone_OutOfOrder) {
 
 DAWN_INSTANTIATE_TEST_P(EventTests,
                         // TODO(crbug.com/dawn/1987): Enable tests for the rest of the backends.
-                        {MetalBackend()},
+                        {D3D12Backend(), MetalBackend()},
                         {
                             WaitTypeAndCallbackMode::TimedWaitAny_Future,
                             WaitTypeAndCallbackMode::TimedWaitAny_FutureSpontaneous,
