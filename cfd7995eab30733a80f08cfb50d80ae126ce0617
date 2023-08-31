@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "11271d65_e4a9c74f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-08-31T18:20:50Z",
+      "side": 1,
+      "message": "it should be OK to No-Try: true so we don\u0027t waste bot resources on a CL that should have minor impact",
+      "revId": "cfd7995eab30733a80f08cfb50d80ae126ce0617",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3a2e88f9_de6019b3",
