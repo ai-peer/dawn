@@ -61,8 +61,8 @@ class PlatformFunctions {
   private:
     MaybeError LoadDXGI();
     void LoadDXCLibraries();
-    void LoadDXIL(const std::string& baseWindowsSDKPath);
-    void LoadDXCompiler(const std::string& baseWindowsSDKPath);
+    bool LoadDXIL(const std::string& basePath);
+    bool LoadDXCompiler(const std::string& basePath);
     MaybeError LoadFXCompiler();
     void LoadPIXRuntime();
 
