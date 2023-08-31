@@ -38,6 +38,7 @@ class Queue final : public QueueBase {
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
+    OSEventReceiver InsertWorkDoneEvent(ExecutionSerial) override;
 
     // Dawn API
     void SetLabelImpl() override;

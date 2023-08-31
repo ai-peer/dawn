@@ -77,6 +77,24 @@ MaybeError Queue::WaitForIdleForDestruction() {
     return ToBackend(GetDevice())->WaitForIdleForDestruction();
 }
 
+OSEventReceiver Queue::InsertWorkDoneEvent(ExecutionSerial serial) {
+    if (serial > GetLastSubmittedCommandSerial()) {
+        ForceEventualFlushOfCommands();
+    }
+
+    HANDLE event = CreateEvent(nullptr, FALSE, FALSE, nullptr);
+    if (IsLost()) {
+        bool succeeded = SetEvent(event);
+        if (!succeeded) {
+            return DAWN_INTERNAL_ERROR("SetEvent failed");
+        }
+    } else {
+        DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(uint64_t(serial), event),
+                              "SetEventOnCompletion failed"));
+    }
+    return OSEventReceiver{event};
+}
+
 void Queue::SetLabelImpl() {
     Device* device = ToBackend(GetDevice());
     // TODO(crbug.com/dawn/1344): When we start using multiple queues this needs to be adjusted
