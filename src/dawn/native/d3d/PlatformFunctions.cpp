@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn/native/d3d/PlatformFunctions.h"
+#include "dawn/common/Log.h"
 
 #include <comdef.h>
 
@@ -23,6 +24,50 @@
 
 namespace dawn::native::d3d {
 namespace {
+
+std::string GetFileVersionString(const std::string& path) {
+    auto size = GetFileVersionInfoSizeA(path.c_str(), NULL);
+    if (size == 0) {
+        return {};
+    }
+
+    std::vector<char> versionInfo(size);
+    if (!GetFileVersionInfoA(path.c_str(), 0, size, versionInfo.data())) {
+        return {};
+    }
+
+    VS_FIXEDFILEINFO* fileInfo = NULL;
+    UINT valueLength = 0;
+    if (!VerQueryValueA(versionInfo.data(), "\\", reinterpret_cast<LPVOID*>(&fileInfo),
+                        &valueLength)) {
+        return {};
+    }
+
+    auto ms = fileInfo->dwFileVersionMS;
+    auto ls = fileInfo->dwFileVersionLS;
+    char textBuffer[1024];
+    snprintf(textBuffer, std::size(textBuffer), "%d.%d.%d.%d",  //
+             static_cast<int>((ms >> 16) & 0xffff),             //
+             static_cast<int>((ms >> 0) & 0xffff),              //
+             static_cast<int>((ls >> 16) & 0xffff),             //
+             static_cast<int>((ls >> 0) & 0xffff));
+
+    std::string result = textBuffer;
+
+#define SZ_HEX_LANG_ID_EN_US "0409"
+#define SZ_HEX_CODE_PAGE_ID_UNICODE "04B0"
+
+    char* fileDescription = nullptr;
+    if (VerQueryValueA(versionInfo.data(),
+                       "\\StringFileInfo\\" SZ_HEX_LANG_ID_EN_US SZ_HEX_CODE_PAGE_ID_UNICODE
+                       "\\FileDescription",
+                       reinterpret_cast<LPVOID*>(&fileDescription), &valueLength)) {
+        result += std::string{" ("} + fileDescription + ")";
+    }
+    return result;
+}
+
+#ifndef DAWN_USE_BUILT_DXC
 // Extract Version from "10.0.{Version}.0" if possible, otherwise return 0.
 uint32_t GetWindowsSDKVersionFromDirectoryName(const char* directoryName) {
     constexpr char kPrefix[] = "10.0.";
@@ -93,6 +138,7 @@ std::string GetWindowsSDKBasePath() {
 
     return ostream.str();
 }
+#endif
 }  // anonymous namespace
 
 PlatformFunctions::PlatformFunctions() = default;
@@ -135,59 +181,62 @@ void PlatformFunctions::LoadDXCLibraries() {
     // LoadDXIL and LoadDXCompiler will fail in UWP, but LoadFunctions() can still be
     // successfully executed.
 
-    const std::string& windowsSDKBasePath = GetWindowsSDKBasePath();
+#ifdef DAWN_USE_BUILT_DXC
+    // If using built DXC, only look in the current working directory where the DLLs should reside.
+    char currDirBuff[MAX_PATH];
+    DWORD ret = ::GetCurrentDirectoryA(MAX_PATH, currDirBuff);
+    ASSERT(ret != 0);
+    std::string currDir = std::string{currDirBuff} + "\\";
 
-    LoadDXIL(windowsSDKBasePath);
-    LoadDXCompiler(windowsSDKBasePath);
+    LoadDXIL(currDir);
+    LoadDXCompiler(currDir);
+#else
+    // If not using built DXC, look first using the default search strategy (e.g. current directory,
+    // PATH, etc.) by specifying no base path (see
+    // https://learn.microsoft.com/en-us/windows/win32/api/libloaderapi/nf-libloaderapi-loadlibrarya#remarks)
+    // If that fails, we look in the SDK path.
+    bool loaded = LoadDXIL("") && LoadDXCompiler("");
+    if (!loaded) {
+        const std::string& windowsSDKBasePath = GetWindowsSDKBasePath();
+        LoadDXIL(windowsSDKBasePath);
+        LoadDXCompiler(windowsSDKBasePath);
+    }
+#endif
 }
 
-void PlatformFunctions::LoadDXIL(const std::string& baseWindowsSDKPath) {
+bool PlatformFunctions::LoadDXIL(const std::string& basePath) {
     constexpr char kDxilDLLName[] = "dxil.dll";
-    const std::array kDxilDLLPaths{
-#ifdef DAWN_USE_BUILT_DXC
-        std::string{kDxilDLLName},
-#else
-        std::string{kDxilDLLName},
-        baseWindowsSDKPath + kDxilDLLName,
-#endif
-    };
+    const std::string dllName = basePath + kDxilDLLName;
 
-    for (const std::string& dxilDLLPath : kDxilDLLPaths) {
-        if (mDXILLib.Open(dxilDLLPath, nullptr)) {
-            return;
-        }
+    if (mDXILLib.Open(dllName, nullptr)) {
+        WarningLog() << "Loaded " << dllName << ", version: " << GetFileVersionString(dllName);
+        return true;
     }
     ASSERT(!mDXILLib.Valid());
+    return false;
 }
 
-void PlatformFunctions::LoadDXCompiler(const std::string& baseWindowsSDKPath) {
+bool PlatformFunctions::LoadDXCompiler(const std::string& basePath) {
     // DXIL must be loaded before DXC, otherwise shader signing is unavailable
     if (!mDXILLib.Valid()) {
-        return;
+        return false;
     }
 
     constexpr char kDxCompilerDLLName[] = "dxcompiler.dll";
-    const std::array kDxCompilerDLLPaths{
-#ifdef DAWN_USE_BUILT_DXC
-        std::string{kDxCompilerDLLName},
-#else
-        std::string{kDxCompilerDLLName}, baseWindowsSDKPath + kDxCompilerDLLName
-#endif
-    };
+    const std::string dllName = basePath + kDxCompilerDLLName;
 
     DynamicLib dxCompilerLib;
-    for (const std::string& dllName : kDxCompilerDLLPaths) {
-        if (dxCompilerLib.Open(dllName, nullptr)) {
-            break;
+    if (dxCompilerLib.Open(dllName, nullptr)) {
+        if (dxCompilerLib.Valid() &&
+            dxCompilerLib.GetProc(&dxcCreateInstance, "DxcCreateInstance", nullptr)) {
+            mDXCompilerLib = std::move(dxCompilerLib);
+            WarningLog() << "Loaded" << dllName << ", version: " << GetFileVersionString(dllName);
+            return true;
+        } else {
+            mDXILLib.Close();
         }
     }
-
-    if (dxCompilerLib.Valid() &&
-        dxCompilerLib.GetProc(&dxcCreateInstance, "DxcCreateInstance", nullptr)) {
-        mDXCompilerLib = std::move(dxCompilerLib);
-    } else {
-        mDXILLib.Close();
-    }
+    return false;
 }
 
 MaybeError PlatformFunctions::LoadFXCompiler() {

@@ -26,10 +26,12 @@ namespace dawn::native::d3d {
 
 class Device;
 
-#define COMPILED_SHADER_MEMBERS(X) \
-    X(Blob, shaderBlob)            \
-    X(std::string, hlslSource)     \
-    X(bool, usesVertexIndex)       \
+#define COMPILED_SHADER_MEMBERS(X)         \
+    X(Blob, shaderBlob)                    \
+    X(std::string, hlslSource)             \
+    X(std::string, input_wgslSource)       \
+    X(std::string, transformed_wgslSource) \
+    X(bool, usesVertexIndex)               \
     X(bool, usesInstanceIndex)
 
 // `CompiledShader` holds a ref to one of the various representations of shader blobs and
