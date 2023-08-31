@@ -53,6 +53,41 @@ T ToMillisecondsGeneric(Nanoseconds timeout) {
 #define ToMilliseconds ToMillisecondsGeneric<int, -1>
 #endif
 
+#if DAWN_PLATFORM_IS(WINDOWS)
+bool WaitOnceWin32(size_t count, TrackedFutureWaitInfo* futures, Nanoseconds timeout) {
+    // FIXME: Fix and test this code on Windows
+    static_assert(kTimedWaitAnyMaxCountDefault == MAXIMUM_WAIT_OBJECTS);
+    ASSERT(count <= MAXIMUM_WAIT_OBJECTS);
+    std::vector<HANDLE> handles(count);
+    for (size_t i = 0; i < count; ++i) {
+        handles[i] = futures[i].future->GetPrimitive();
+    }
+
+    DWORD code = WaitForMultipleObjects(handles.size(), handles.data(), /* bWaitAll */ false,
+                                        ToMilliseconds(timeout));
+    if (DAWN_UNLIKELY(code == WAIT_FAILED)) {
+        CHECK(false);
+    }
+
+    for (size_t i = 0; i < count; ++i) {
+        futures[i].ready = false;
+    }
+    if (code == WAIT_TIMEOUT) {
+        return false;
+    }
+
+    ASSERT(code < WAIT_ABANDONED_0);
+    DWORD signaledIndex = code - WAIT_OBJECT_0;
+    if (signaledIndex < count) {
+        futures[signaledIndex].ready = true;
+    } else {
+        ASSERT(false);
+    }
+
+    return true;
+}
+#endif
+
 }  // namespace
 
 // OSEventPrimitive
@@ -81,8 +116,7 @@ void OSEventPrimitive::Close() {
 
 OSEventReceiver OSEventReceiver::CreateAlreadySignaled() {
 #if DAWN_PLATFORM_IS(WINDOWS)
-    // TODO(crbug.com/dawn/1987): Implement this.
-    CHECK(false);
+    UNREACHABLE();  // FIXME: unimplemented
 #else
     int status;
 
@@ -113,8 +147,15 @@ OSEventReceiver OSEventReceiver::CreateAlreadySignaled() {
 
 bool OSEventReceiver::Wait(size_t count, TrackedFutureWaitInfo* futures, Nanoseconds timeout) {
 #if DAWN_PLATFORM_IS(WINDOWS)
-    // TODO(crbug.com/dawn/1987): Implement this.
-    CHECK(false);
+    // Ensure the timeout doesn't get stacked multiple times.
+    ASSERT(timeout == 0 || count <= MAXIMUM_WAIT_OBJECTS);
+
+    bool anyReady = false;
+    for (size_t start = 0; start < count; start += MAXIMUM_WAIT_OBJECTS) {
+        size_t sliceCount = std::min(count - start, MAXIMUM_WAIT_OBJECTS);
+        anyReady |= WaitOnceWin32(sliceCount, &futures[start], timeout);
+    }
+    return anyReady;
 #else
     std::vector<pollfd> pollfds(count);
     for (size_t i = 0; i < count; ++i) {
