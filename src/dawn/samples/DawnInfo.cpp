@@ -24,7 +24,6 @@
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/Toggles.h"
-#include "dawn/webgpu_cpp.h"
 
 namespace {
 
@@ -223,8 +222,7 @@ void DumpAdapterFeatures(const wgpu::Adapter& adapter) {
     std::cout << "  Features\n";
     std::cout << "  ========\n";
     for (const auto& f : features) {
-        auto feature = dawn::native::FromAPI(f);
-        auto info = dawn::native::kFeatureNameAndInfoList[feature];
+        auto info = dawn::native::GetFeatureInfo(f);
         std::cout << "   * " << info.name << "\n";
         std::cout << WrapString(info.description, "      ") << "\n";
         std::cout << "      " << info.url << "\n";
@@ -253,7 +251,7 @@ void DumpAdapter(const wgpu::Adapter& adapter) {
 }  // namespace
 
 int main(int argc, const char* argv[]) {
-    auto toggles = dawn::native::TogglesInfo::AllToggleInfos();
+    auto toggles = dawn::native::AllToggleInfos();
     std::sort(toggles.begin(), toggles.end(), [](const auto* a, const auto* b) {
         return std::string(a->name) < std::string(b->name);
     });
