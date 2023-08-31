@@ -34,6 +34,24 @@
       "parentUuid": "5d5f4fd4_faf2cb75",
       "revId": "dcc2dc1dce4e1102d4aefd1a30c3b94314dd5969",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cdbb970_ee98841f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-08-31T07:27:33Z",
+      "side": 1,
+      "message": "I have written a CL to fix the build failures:\nhttps://dawn-review.googlesource.com/c/dawn/+/149226\n\nPTAL, thanks!",
+      "parentUuid": "91b7b59e_51aad315",
+      "revId": "dcc2dc1dce4e1102d4aefd1a30c3b94314dd5969",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
