@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a4afcf_8e09f079",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-31T17:39:09Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "28b8127756f6ec280762895764db8cd9a17e5264",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13846d13_f40e1698",
+        "filename": "src/tint/lang/spirv/reader/ast_parser/function_arithmetic_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 597,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-08-31T17:39:09Z",
+      "side": 1,
+      "message": "```suggestion\n// But then Vulkan says behaviour is undefined if either operand is negative.\n// You may as well use OpUMod.\n```",
+      "range": {
+        "startLine": 596,
+        "startChar": 0,
+        "endLine": 597,
+        "endChar": 54
+      },
+      "revId": "28b8127756f6ec280762895764db8cd9a17e5264",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
