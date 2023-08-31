@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "f2d49d8aed9236c510c5414d78c8ae46636b3e52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96b6a898_eea265a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T08:18:05Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f2d49d8aed9236c510c5414d78c8ae46636b3e52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78a2b9e4_28978b56",
+        "filename": "src/dawn/samples/DawnInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-08-31T08:18:05Z",
+      "side": 1,
+      "message": "We should be able to remove these two.",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 26,
+        "endChar": 32
+      },
+      "revId": "f2d49d8aed9236c510c5414d78c8ae46636b3e52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
