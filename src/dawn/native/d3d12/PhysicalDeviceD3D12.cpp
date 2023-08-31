@@ -485,6 +485,8 @@ void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adapterToggles) co
 }
 
 void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
+    deviceToggles->ForceSet(Toggle::DumpShaders, true); // TEMP
+
     const bool useResourceHeapTier2 = (GetDeviceInfo().resourceHeapTier >= 2);
     deviceToggles->Default(Toggle::UseD3D12ResourceHeapTier2, useResourceHeapTier2);
     deviceToggles->Default(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
