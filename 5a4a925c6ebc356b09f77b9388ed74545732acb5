@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "055f2876_3cf57d20",
+        "filename": "dawn.json",
+        "patchSetId": 40
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Yes, but it would require updating more code to handle it. So I decided it should be a later change.",
+      "parentUuid": "a5a86e7e_c0b2242d",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f2f2e2e7_00ca008c",
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "50895f18_b1387998",
+        "filename": "src/dawn/common/FutureUtils.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "I had this as a typed integer initially, but almost every single usage required me to cast it:\n- `atomic\u003cFutureID\u003e` isn\u0027t valid\n- `unordered_map\u003cFutureID, ...\u003e` isn\u0027t valid\n- `WGPUFuture` holds a uint64_t\n\nSo I removed it and decided to just be diligent about naming it \"futureID\" for now. Could change it back though. Now that EventManager is split out it might be a little more useful.",
+      "parentUuid": "f2f2e2e7_00ca008c",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d465d0b_eef6dd3f",
         "filename": "src/dawn/native/Instance.h",
         "patchSetId": 40
@@ -82,6 +118,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "nit: we tended to use pointers for mutable objects. Not sure if we want to change that convention.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0997f7c9_b94b2dce",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Done, I followed that convention most places but not here for some reason.",
+      "parentUuid": "3d465d0b_eef6dd3f",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +174,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e011778a_2e757a37",
+        "filename": "src/dawn/samples/SampleUtils.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c141c242_ef44bbdf",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9c107b90_6b3d25d2",
@@ -137,6 +209,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9e658a3_64bd034d",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Couldn\u0027t figure out how to put a constexpr of type ObjectHandle inside ObjectHandle (\"invalid use of incomplete type\") so I just renamed this to a method for now.",
+      "parentUuid": "9c107b90_6b3d25d2",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82da4b98_635ed959",
@@ -150,6 +240,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "nit: this can be moved to the .cpp",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51726a36_0151406c",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82da4b98_635ed959",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -218,6 +326,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "Could we gather the list of futures to call the callback on while holding the mutex, and only afterwards call all the callbacks (that could take arbitrary amounts of time and be reentrant)",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9b26559_c83577f4",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Oops. I did this correctly in the non-wire implementation but for some reason I forgot about it here.",
+      "parentUuid": "7f3a33eb_81650ea1",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -307,6 +433,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d8bd5f_b59368d3",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ee18cfe_4ea764ef",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "77d38e29_a7af271b",
@@ -343,6 +487,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94683b3a_89ab3999",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "We could check the instance of each event to make sure it\u0027s the correct one, yeah. But it seemed like such a rare case to have multiple instances on a client that it\u0027s not worth bothering to fix this until we move the EventManager to the Instance anyway. (it would require TrackedEvents knowing their device/instance which they don\u0027t currently)",
+      "parentUuid": "22fe2d88_97036805",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2320a940_3ef81175",
         "filename": "src/dawn/wire/client/Instance.h",
         "patchSetId": 40
@@ -354,6 +516,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "nit: unnecessary new includes?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35ce5db7_1aa2487d",
+        "filename": "src/dawn/wire/client/Instance.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2320a940_3ef81175",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -371,6 +551,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "What if the status returned by the server is not Success? This seems like it will always pretend it was a Success.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1731fd0e_37fff0fc",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-08-31T17:00:58Z",
+      "side": 1,
+      "message": "OnSubmittedWorkDone doesn\u0027t actually have any error cases. In Dawn it can return DeviceLost but we\u0027re changing the C API to match the JS API to pretend things work while the device is lost, at least by default.",
+      "parentUuid": "be15a875_f6d647fe",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
