@@ -16,6 +16,57 @@
       "message": "lgtm snafu 😅",
       "revId": "aae86ba7f34431263c90531b927ffff8e10b0bde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a38c489_f745918d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-09-01T17:57:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "aae86ba7f34431263c90531b927ffff8e10b0bde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34af264c_af2cd992",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-09-01T17:57:46Z",
+      "side": 1,
+      "message": "Nit: could you modify the comment to explain that ANGLE and GLES are only enabled for component build on Android?",
+      "revId": "aae86ba7f34431263c90531b927ffff8e10b0bde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cbc81ad_8d349105",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-09-01T17:57:46Z",
+      "side": 1,
+      "message": "Nit: add a comment here to explain why Android currently requires ANGLE?",
+      "revId": "aae86ba7f34431263c90531b927ffff8e10b0bde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
