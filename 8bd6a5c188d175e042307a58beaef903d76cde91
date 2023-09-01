@@ -33,6 +33,24 @@
       "message": "only abort() if !(condition) ?",
       "revId": "8bd6a5c188d175e042307a58beaef903d76cde91",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1451fc39_8c2bc537",
+        "filename": "src/dawn/common/Assert.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-01T19:10:21Z",
+      "side": 1,
+      "message": "oops! I only used this with `false` as the condition so didn\u0027t catch it",
+      "parentUuid": "e1ef0dca_189b5f42",
+      "revId": "8bd6a5c188d175e042307a58beaef903d76cde91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

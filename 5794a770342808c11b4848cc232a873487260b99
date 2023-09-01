@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a9c4393_882bebca",
+        "filename": "src/dawn/common/Assert.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-01T19:10:21Z",
+      "side": 1,
+      "message": "I was reading through the other comments and realized this is unsound. It generates `__assume(condition)` and then immediately goes and checks `if (!(condition))`. Fixed.",
+      "revId": "5794a770342808c11b4848cc232a873487260b99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
