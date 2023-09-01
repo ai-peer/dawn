@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ea01251_d693a82a",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-01T22:30:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "34af264c_af2cd992",
+      "revId": "aae86ba7f34431263c90531b927ffff8e10b0bde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9cbc81ad_8d349105",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-09-01T17:57:46Z",
       "side": 1,
       "message": "Nit: add a comment here to explain why Android currently requires ANGLE?",
+      "revId": "aae86ba7f34431263c90531b927ffff8e10b0bde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e975a43_f9605f38",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-01T22:30:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cbc81ad_8d349105",
       "revId": "aae86ba7f34431263c90531b927ffff8e10b0bde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
