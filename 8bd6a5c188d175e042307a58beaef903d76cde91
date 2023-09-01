@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2e59974_fae4ab68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-01T18:23:30Z",
+      "side": 1,
+      "message": "lgtm one comment",
+      "revId": "8bd6a5c188d175e042307a58beaef903d76cde91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ef0dca_189b5f42",
+        "filename": "src/dawn/common/Assert.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-01T18:23:30Z",
+      "side": 1,
+      "message": "only abort() if !(condition) ?",
+      "revId": "8bd6a5c188d175e042307a58beaef903d76cde91",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
