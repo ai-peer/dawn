@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60be93bc_275beef4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-09-01T12:45:55Z",
+      "side": 1,
+      "message": "There is an issue when installing tint and disabling building benchmarks because the target tint_cmd_bench inside src/tint/cmd/bench/BUILD.cmake should be of the kind bench but, I could not figure it out how to regenerate that file with that value. \n\nConcretely, when we disable `TINT_BUILD_BENCHMARKS` the other targets that depend on tint_cmd_bench are not built and cmake optimizes and doesnt generate a library. I tried locally to manually change the file and it works for both enabled and disabled",
+      "revId": "03a1a09dc499977f4afcf6e1b38df5bed28f327e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
