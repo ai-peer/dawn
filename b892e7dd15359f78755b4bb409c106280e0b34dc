@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc4e37bf_55f440af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 41
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-01T00:46:19Z",
+      "side": 1,
+      "message": "Addressed some comments, and also added wgpuGetInstanceFeatures per today\u0027s webgpu.h meeting",
+      "revId": "b892e7dd15359f78755b4bb409c106280e0b34dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

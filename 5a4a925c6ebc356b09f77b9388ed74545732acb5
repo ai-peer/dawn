@@ -296,6 +296,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f718ffab_8b827e00",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-01T00:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3abdb7be_b68ea28e",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c41016e_adbb8c95",
@@ -309,6 +327,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "When spontaneously fired shouldn\u0027t the event be removed from the map?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99efb19e_2138f4df",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-01T00:46:19Z",
+      "side": 1,
+      "message": "It should be. I probably got over eager implementing spontaneous here. It\u0027s not really implemented in non-wire, might be better to not implement it here too. I\u0027ll look at this again more closely.",
+      "parentUuid": "7c41016e_adbb8c95",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -361,6 +397,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "nit: Maybe ASSERT future.id \u003c\u003d currentOne as suggested in the design doc.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c91a228_57391d10",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-01T00:46:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a82daed6_8e06a129",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
