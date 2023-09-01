@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80edbfcc_da949c17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004116
+      },
+      "writtenOn": "2023-09-01T13:25:24Z",
+      "side": 1,
+      "message": "I\u0027ll pass over the baton since I don\u0027t believe that I can proceed.\n\n(This is my first contribution and I\u0027m still learning the process.)",
+      "revId": "5abe1c487d70aab97e0c885994f0405beb631969",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
