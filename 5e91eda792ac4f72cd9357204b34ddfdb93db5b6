@@ -16,6 +16,23 @@
       "message": "small thing I noticed",
       "revId": "5e91eda792ac4f72cd9357204b34ddfdb93db5b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6bad82b_d55272df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-01T08:26:40Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "5e91eda792ac4f72cd9357204b34ddfdb93db5b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
