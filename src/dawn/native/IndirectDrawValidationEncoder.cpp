@@ -256,12 +256,11 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
         uint64_t outputParamsOffset;
         uint64_t outputParamsSize;
         BatchInfo* batchInfo;
+        uint32_t flags;
     };
 
     struct Pass {
-        uint32_t flags;
         BufferBase* inputIndirectBuffer;
-        IndirectDrawMetadata::DrawType drawType;
         uint64_t outputParamsSize = 0;
         uint64_t batchDataSize = 0;
         std::unique_ptr<void, void (*)(void*)> batchData{nullptr, std::free};
@@ -270,9 +269,8 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
 
     // First stage is grouping all batches into passes. We try to pack as many batches into a
     // single pass as possible. Batches can be grouped together as long as they're validating
-    // data from the same indirect buffer and draw type, but they may still be split into
-    // multiple passes if the number of draw calls in a pass would exceed some (very high)
-    // upper bound.
+    // data from the same indirect buffer, but they may still be split into multiple passes if
+    // the number of draw calls in a pass would exceed some (very high) upper bound.
     uint64_t outputParamsSize = 0;
     std::vector<Pass> passes;
     IndirectDrawMetadata::IndexedIndirectBufferValidationInfoMap& bufferInfoMap =
@@ -309,6 +307,20 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             newBatch.inputIndirectSize =
                 batch.maxOffset + indirectDrawCommandSize - minOffsetAlignedDown;
 
+            newBatch.flags = 0;
+            if (config.duplicateBaseVertexInstance) {
+                newBatch.flags |= kDuplicateBaseVertexInstance;
+            }
+            if (config.drawType == IndirectDrawMetadata::DrawType::Indexed) {
+                newBatch.flags |= kIndexedDraw;
+            }
+            if (device->IsValidationEnabled()) {
+                newBatch.flags |= kValidationEnabled;
+            }
+            if (device->HasFeature(Feature::IndirectFirstInstance)) {
+                newBatch.flags |= kIndirectFirstInstanceEnabled;
+            }
+
             newBatch.outputParamsSize = batch.draws.size() * outputIndirectSize;
             newBatch.outputParamsOffset = Align(outputParamsSize, minStorageBufferOffsetAlignment);
             outputParamsSize = newBatch.outputParamsOffset + newBatch.outputParamsSize;
@@ -317,8 +329,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             }
 
             Pass* currentPass = passes.empty() ? nullptr : &passes.back();
-            if (currentPass && currentPass->inputIndirectBuffer == config.inputIndirectBuffer &&
-                currentPass->drawType == config.drawType) {
+            if (currentPass && currentPass->inputIndirectBuffer == config.inputIndirectBuffer) {
                 uint64_t nextBatchDataOffset =
                     Align(currentPass->batchDataSize, minStorageBufferOffsetAlignment);
                 uint64_t newPassBatchDataSize = nextBatchDataOffset + newBatch.dataSize;
@@ -336,22 +347,8 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
 
             Pass newPass{};
             newPass.inputIndirectBuffer = config.inputIndirectBuffer;
-            newPass.drawType = config.drawType;
             newPass.batchDataSize = newBatch.dataSize;
             newPass.batches.push_back(newBatch);
-            newPass.flags = 0;
-            if (config.duplicateBaseVertexInstance) {
-                newPass.flags |= kDuplicateBaseVertexInstance;
-            }
-            if (config.drawType == IndirectDrawMetadata::DrawType::Indexed) {
-                newPass.flags |= kIndexedDraw;
-            }
-            if (device->IsValidationEnabled()) {
-                newPass.flags |= kValidationEnabled;
-            }
-            if (device->HasFeature(Feature::IndirectFirstInstance)) {
-                newPass.flags |= kIndirectFirstInstanceEnabled;
-            }
             passes.push_back(std::move(newPass));
         }
     }
@@ -380,7 +377,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             batch.batchInfo = new (&batchData[batch.dataBufferOffset]) BatchInfo();
             batch.batchInfo->numIndexBufferElements = batch.numIndexBufferElements;
             batch.batchInfo->numDraws = static_cast<uint32_t>(batch.metadata->draws.size());
-            batch.batchInfo->flags = pass.flags;
+            batch.batchInfo->flags = batch.flags;
 
             uint32_t* indirectOffsets = reinterpret_cast<uint32_t*>(batch.batchInfo + 1);
             uint64_t outputParamsOffset = batch.outputParamsOffset;
@@ -391,7 +388,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
 
                 draw.cmd->indirectBuffer = outputParamsBuffer.GetBuffer();
                 draw.cmd->indirectOffset = outputParamsOffset;
-                if (pass.flags & kIndexedDraw) {
+                if (batch.flags & kIndexedDraw) {
                     outputParamsOffset += kDrawIndexedIndirectSize;
                 } else {
                     outputParamsOffset += kDrawIndirectSize;
