@@ -176,6 +176,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f49f89d_bc04848e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-02T12:20:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab051d19_f68d06e0",
+      "range": {
+        "startLine": 603,
+        "startChar": 0,
+        "endLine": 617,
+        "endChar": 13
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46bdf447_cd2dd83f",
@@ -213,6 +237,30 @@
       "side": 1,
       "message": "That\u0027d work, but it would need the number of transient attachments.",
       "parentUuid": "46bdf447_cd2dd83f",
+      "range": {
+        "startLine": 589,
+        "startChar": 8,
+        "endLine": 623,
+        "endChar": 78
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d36eed2f_466a1e00",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-02T12:20:39Z",
+      "side": 1,
+      "message": "The block of code was reduced a bunch, do you still think this should be split off?",
+      "parentUuid": "e0c8f6d5_30c81de4",
       "range": {
         "startLine": 589,
         "startChar": 8,
@@ -520,6 +568,30 @@
       "side": 1,
       "message": "Good idea! We could also have a typedef for this.",
       "parentUuid": "bed04be9_c8b75a60",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 61
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b03a77_0d967e19",
+        "filename": "src/dawn/native/PipelineLayout.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-02T12:20:39Z",
+      "side": 1,
+      "message": "I didn\u0027t really find a good place to put the typedef, and this is cold-ish code so maybe it\u0027s not worth it?",
+      "parentUuid": "a840f40c_71d54a9e",
       "range": {
         "startLine": 98,
         "startChar": 0,
