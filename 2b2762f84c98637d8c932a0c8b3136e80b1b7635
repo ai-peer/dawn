@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf070f8_787ec831",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T06:09:04Z",
+      "side": 1,
+      "message": "finally passing. I was too impatient before; needs another LGTM",
+      "revId": "2b2762f84c98637d8c932a0c8b3136e80b1b7635",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
