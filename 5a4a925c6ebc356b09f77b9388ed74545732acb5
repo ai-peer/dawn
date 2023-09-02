@@ -157,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3c488c6_7732f7e6",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69466741_601a0465",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c141c242_ef44bbdf",
@@ -279,6 +297,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "915836d1_d3979b07",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b12a5aae_79af748b",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3abdb7be_b68ea28e",
@@ -349,6 +385,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2baf742_6aa81a5e",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "99efb19e_2138f4df",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f3a33eb_81650ea1",
@@ -380,6 +434,24 @@
       "side": 1,
       "message": "Oops. I did this correctly in the non-wire implementation but for some reason I forgot about it here.",
       "parentUuid": "7f3a33eb_81650ea1",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3a268eb_af647008",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a9b26559_c83577f4",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -436,6 +508,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7c09a9c_73ce5491",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "92fe4ee4_c53f9c10",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fb0f92c_cb91d788",
@@ -453,6 +543,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "45e2bd89_fa9b3d2c",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fb0f92c_cb91d788",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b48536a_dd18c6d2",
@@ -466,6 +574,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "nit: small comment describing what this does?",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f7bd123_69c11f32",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b48536a_dd18c6d2",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -518,6 +644,24 @@
       "writtenOn": "2023-08-31T15:54:11Z",
       "side": 1,
       "message": "nit: Could use MutexProtected.",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5273db4e_d06cc518",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-02T05:58:16Z",
+      "side": 1,
+      "message": "This was great. I found 2 bugs ^_^",
+      "parentUuid": "77d38e29_a7af271b",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
