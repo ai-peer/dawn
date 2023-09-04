@@ -16,6 +16,75 @@
       "message": "I updated the Dawn part to automatically handle headers, Aura PTAL.\n\nHowever leaving up to Ben what to do on the Tint side.",
       "revId": "3e70927bd711c87f5b9b21e26384d6a7e7a0f937",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04767490_06343cc5",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-04T14:44:11Z",
+      "side": 1,
+      "message": "I doubt you want to install anything other than the `tint_cmd_tint_cmd` executable target.",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 11
+      },
+      "revId": "3e70927bd711c87f5b9b21e26384d6a7e7a0f937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d04717c5_d325d766",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-04T14:44:11Z",
+      "side": 1,
+      "message": "nit: `if(`. Consistency helps with searching.",
+      "range": {
+        "startLine": 592,
+        "startChar": 0,
+        "endLine": 592,
+        "endChar": 4
+      },
+      "revId": "3e70927bd711c87f5b9b21e26384d6a7e7a0f937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7c5335_dae6e5da",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-04T14:44:11Z",
+      "side": 1,
+      "message": "recurse",
+      "range": {
+        "startLine": 593,
+        "startChar": 15,
+        "endLine": 593,
+        "endChar": 23
+      },
+      "revId": "3e70927bd711c87f5b9b21e26384d6a7e7a0f937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

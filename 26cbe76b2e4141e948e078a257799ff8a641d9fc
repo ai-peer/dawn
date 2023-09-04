@@ -104,6 +104,24 @@
       "parentUuid": "7d675e49_f9387b39",
       "revId": "26cbe76b2e4141e948e078a257799ff8a641d9fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23705e34_43f1dcd5",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-04T14:44:11Z",
+      "side": 1,
+      "message": "With the usual disclaimer that I think setting up install targets for an unversioned, unstable API is a Really Bad Idea, this is probably fine for now.\n\nWe will not maintain the install targets, and there\u0027s a good chance this will frequently break.\n\nWe have so far put zero effort into a stable, public Tint API, but [we at least now have a place](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/api/) to put a public API. It\u0027s my intention that this will decouple the private implementation and headers from the publicly facing API. When that\u0027s done, we can remove the `GLOB_RECURSE` for all headers.",
+      "parentUuid": "26a96fbb_a21ade26",
+      "revId": "26cbe76b2e4141e948e078a257799ff8a641d9fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
