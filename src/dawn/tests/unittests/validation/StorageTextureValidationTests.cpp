@@ -1180,5 +1180,25 @@ TEST_F(ReadWriteStorageTextureResourceUsageTrackingTests, StorageTextureInComput
     }
 }
 
+class ReadWriteStorageTextureCompatibilityModeTest : public ReadWriteStorageTextureValidationTests {
+  protected:
+    bool UseCompatibilityMode() const override { return true; }
+};
+
+// Test that using read-only or read-write storage texture in BindGroupLayout is valid under
+// compatibility mode with the optional feature "chromium-experimental-read-write-storage-texture".
+// In compatibility mode ReadOnly storage texture access cannot be used in vertex shader because
+// MAX_VERTEX_IMAGE_UNIFORMS can be 0 according to OpenGL ES 3.1 SPEC.
+TEST_F(ReadWriteStorageTextureCompatibilityModeTest, BindGroupLayoutWithStorageTextureBindingType) {
+    const std::vector<BindGroupLayoutTestSpec> kTestSpecs = {
+        {{wgpu::ShaderStage::Vertex, wgpu::StorageTextureAccess::ReadOnly, false},
+         {wgpu::ShaderStage::Vertex, wgpu::StorageTextureAccess::ReadWrite, false},
+         {wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::ReadOnly, true},
+         {wgpu::ShaderStage::Fragment, wgpu::StorageTextureAccess::ReadWrite, true},
+         {wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::ReadOnly, true},
+         {wgpu::ShaderStage::Compute, wgpu::StorageTextureAccess::ReadWrite, true}}};
+    DoBindGroupLayoutTest(kTestSpecs);
+}
+
 }  // anonymous namespace
 }  // namespace dawn

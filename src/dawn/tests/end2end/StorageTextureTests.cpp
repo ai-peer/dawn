@@ -1211,9 +1211,7 @@ fn main() {
 TEST_P(ReadWriteStorageTextureTests, ReadOnlyStorageTextureInVertexShader) {
     DAWN_TEST_UNSUPPORTED_IF(!IsReadWriteStorageTextureSupported());
 
-    // TODO(dawn:1972): Investigate why ANGLE produces wrong HLSL code for read-only storage
-    // textures in vertex shader.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
+    DAWN_SUPPRESS_TEST_IF(IsCompatibilityMode());
 
     constexpr wgpu::TextureFormat kStorageTextureFormat = wgpu::TextureFormat::R32Uint;
     const std::vector<uint8_t> kInitialTextureData = GetExpectedData(kStorageTextureFormat);
@@ -1263,9 +1261,6 @@ struct FragmentInput {
 // Verify read-only storage texture can work correctly in fragment shaders.
 TEST_P(ReadWriteStorageTextureTests, ReadOnlyStorageTextureInFragmentShader) {
     DAWN_TEST_UNSUPPORTED_IF(!IsReadWriteStorageTextureSupported());
-
-    // TODO(dawn:1972): Investigate why the test fails on ANGLE.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
 
     constexpr wgpu::TextureFormat kStorageTextureFormat = wgpu::TextureFormat::R32Uint;
     const std::vector<uint8_t> kInitialTextureData = GetExpectedData(kStorageTextureFormat);

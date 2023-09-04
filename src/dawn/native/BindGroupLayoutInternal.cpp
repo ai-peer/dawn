@@ -179,7 +179,13 @@ MaybeError ValidateBindGroupLayoutEntry(DeviceBase* device,
         DAWN_TRY(ValidateReadWriteStorageTextureAccess(device, storageTexture));
 
         switch (storageTexture.access) {
+            // MAX_VERTEX_IMAGE_UNIFORMS can be 0 according to OpenGL ES 3.1 SPEC.
             case wgpu::StorageTextureAccess::ReadOnly:
+                DAWN_INVALID_IF(
+                    device->IsCompatibilityMode() && (entry.visibility & wgpu::ShaderStage::Vertex),
+                    "Storage texture binding with %s is used with a visibility (%s) "
+                    "that contains %s.",
+                    storageTexture.access, entry.visibility, wgpu::ShaderStage::Vertex);
                 break;
             case wgpu::StorageTextureAccess::ReadWrite:
             case wgpu::StorageTextureAccess::WriteOnly:
