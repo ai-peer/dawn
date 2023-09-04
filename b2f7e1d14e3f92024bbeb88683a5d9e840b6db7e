@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae99bf81_6bff52d3",
+        "filename": "src/dawn/common/WeakRefSupport.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-04T21:12:25Z",
+      "side": 1,
+      "message": "Minor edit as I just saw the comment `Do not use #ifdef or the naked macro DAWN_COMPILER_IS_XXX.`",
+      "revId": "b2f7e1d14e3f92024bbeb88683a5d9e840b6db7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
