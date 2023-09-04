@@ -1,0 +1,362 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d4b67fc_324f3b51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 48
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "Still didn\u0027t look at the tests. I feel like the native side could be made a bunch simpler somehow but I didn\u0027t take the time to wrap my head around it yet.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4196ffe_fbbadee0",
+        "filename": "generator/templates/dawn/wire/client/ApiProcs.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: in a follow-up could we 1) do like generator/templates/dawn/native/Proctable.cpp and autogen this for each freestanding function and 2) move ClientCreateInstance and ClientGetInstanceFeatures to client/Instance.h/.cpp ?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f149e26_271bc03d",
+        "filename": "src/dawn/common/FutureUtils.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "There\u0027s a lot of cases which are ASSERTs in the API contract instead of validation errors. Don\u0027t we want to properly define them so that there is less footguns / crashes? Or since this is not Web-exposed, we can afford to be more lenient?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d35aaa7_280e2bec",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: put a comment here as well (potentially referencing the one above?)",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4858eaa9_a2fdb64c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: kInvalidFuture?",
+      "range": {
+        "startLine": 110,
+        "startChar": 15,
+        "endLine": 110,
+        "endChar": 16
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39a74335_5ab31e96",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "I\u0027m slightly concerned about the repeated O(N) processing here. Couldn\u0027t the completion of an event signal that the future is ready and only then would we need to iterate over them here?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1ddb061_05a8072b",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "Maybe the nodiscard could be on these types directly. (ditto for WaitStatus)",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a776785_c1b388ff",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: it is surprising that this is a reference given that the webgpu.h API is a pointer. The reinterpret_cast can work I guess but IMHO it might be better (and not that much more annoying) to keep it as a pointer.",
+      "range": {
+        "startLine": 65,
+        "startChar": 74,
+        "endLine": 65,
+        "endChar": 75
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4391cbea_5b7e7acc",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "u-nit: put in the .cpp?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58961269_bc48c0e3",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "All the logic for WorkDoneEvent feels like it should live in the queue?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f9bff76_3bf757de",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: Can be declared just when needed.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd2b495_9b754c94",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "Can we have some more explanations there?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d19eeda_04d58ef7",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: The assert could be done by the caller so we don\u0027t need these two methods.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "15ef2882_354dd201",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit extra ASSERTs that a single WaitRef can be present at a time, used to check that the WaitAny algorithm doesn\u0027t concurrently call wait() on the same future.",
+      "range": {
+        "startLine": 52,
+        "startChar": 43,
+        "endLine": 52,
+        "endChar": 50
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cec4862_b044840b",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06ef2884_9081830f",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "A lot of different things will be using the GPU\u0027s progress to signal futures. Wouldn\u0027t it be better to eagerly add a an OSReceiver/OSPipe (names could be better) and then when a WorkDoneEvent request is there, dup() the last submit\u0027s OSReceiver?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81844c90_bc1f73ba",
+        "filename": "src/dawn/wire/client/Client.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "u-nit: Can be in the .cpp",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5879b58d_8e5ee5ad",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "u-nit: we could use an early out to simplify control a tiny bit:\n\n if (!event.mReady || !(event.mMode \u0026 WGPUCallbackMode_ProcessEvents)) {\n   return false;\n }\n \n if (event.mCallback !\u003d nullptr) // add to vector\n \n return true;",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7833e17_d19c739b",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "u-nit: we could early continue to dedent. Likewise for !event.mReady.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1584af16_36f0d8ea",
+        "filename": "src/dawn/wire/client/RequestTracker.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "nit: stray include?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

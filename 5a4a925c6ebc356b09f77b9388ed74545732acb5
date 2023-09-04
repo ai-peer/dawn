@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "660c0700_7261e5ab",
+        "filename": "src/dawn/common/FutureUtils.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "50895f18_b1387998",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d465d0b_eef6dd3f",
@@ -241,6 +259,24 @@
       "side": 1,
       "message": "Couldn\u0027t figure out how to put a constexpr of type ObjectHandle inside ObjectHandle (\"invalid use of incomplete type\") so I just renamed this to a method for now.",
       "parentUuid": "9c107b90_6b3d25d2",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e983a826_1105f2dc",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "Ah, I guess it could be outside as a kInvalidHandle, can we at least remove the default constructor and have ObjectHandle::MakeInvalid()? This would make sure people don\u0027t end up relying on invalid handles by mistake (could be a follow-up or a TODO)",
+      "parentUuid": "e9e658a3_64bd034d",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -701,6 +737,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb1f95f5_8b5c1cc3",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "94683b3a_89ab3999",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2320a940_3ef81175",
@@ -767,6 +821,24 @@
       "side": 1,
       "message": "OnSubmittedWorkDone doesn\u0027t actually have any error cases. In Dawn it can return DeviceLost but we\u0027re changing the C API to match the JS API to pretend things work while the device is lost, at least by default.",
       "parentUuid": "be15a875_f6d647fe",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa38977a_914ac5e1",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 40
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-04T13:42:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1731fd0e_37fff0fc",
       "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
