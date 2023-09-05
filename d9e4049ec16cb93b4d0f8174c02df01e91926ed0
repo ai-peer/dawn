@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "751f7943_4d5ba9c5",
+        "filename": "src/dawn/native/OSEventPipe.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "nit: probably should use `DAWN_PLATFORM_IS(POSIX)`. There\u0027s also some Zircon stuff in Dawn",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 5
+      },
+      "revId": "d9e4049ec16cb93b4d0f8174c02df01e91926ed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

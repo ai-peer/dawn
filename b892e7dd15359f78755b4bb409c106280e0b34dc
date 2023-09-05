@@ -16,6 +16,29 @@
       "message": "Addressed some comments, and also added wgpuGetInstanceFeatures per today\u0027s webgpu.h meeting",
       "revId": "b892e7dd15359f78755b4bb409c106280e0b34dc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a52791fb_397311f4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 41
+      },
+      "lineNbr": 753,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "mAdapter-\u003eGetPhysicalDevice()-\u003eGetInstance()\n\nAPI version adds a ref",
+      "range": {
+        "startLine": 753,
+        "startChar": 0,
+        "endLine": 753,
+        "endChar": 38
+      },
+      "revId": "b892e7dd15359f78755b4bb409c106280e0b34dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -54,6 +54,98 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "779cba67_e9aa4efc",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 2059,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "should this be named \"WaitAny\" ?",
+      "range": {
+        "startLine": 2059,
+        "startChar": 28,
+        "endLine": 2059,
+        "endChar": 32
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aee944e_b8fa84eb",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "nit: unnecessary parens\n\n```suggestion\n        DeviceBase* waitDevice \u003d futures[sliceStart].event-\u003eGetWaitDevice();\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 78
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd9ac57d_5cd27497",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "this comment implies the future is returned to the application such that it can call WaitAny before Track.\n\nHowever, it looks like Track is always called during creation of the future",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 25
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f721eaa_739fc92f",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "if the mode is Future | ProcessEvents, we don\u0027t track it in `mTrackedPollEvents`\n\nis that correct?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 33
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2d35aaa7_280e2bec",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 48
@@ -111,6 +203,69 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c3f72c1_587fae99",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "should we `break` as soon as we see `anyCompleted`?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3c9d76e_539e58d4",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "nit: dedent",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 5
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "528cd190_68bb9e68",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "EnsureCompleteFromWaitAny calls callbacks. Should we set the completed bit first? that way if the caller checks the info inside the callback, they see it is done",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 0
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a1ddb061_05a8072b",
         "filename": "src/dawn/native/EventManager.h",
         "patchSetId": 48
@@ -122,6 +277,29 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "Maybe the nodiscard could be on these types directly. (ditto for WaitStatus)",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0deb08dd_49ddd3ed",
+        "filename": "src/dawn/native/OSEventPipe.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "nit: maybe just CHECK(status \u003e\u003d 0) and fold the UNLIKELY into the CHECK ?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 5
+      },
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -168,6 +346,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1acdb73_2d42b4d8",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 1
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "351044f7_b6e6ed16",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "not used",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "58961269_bc48c0e3",
         "filename": "src/dawn/native/TrackedEvent.cpp",
         "patchSetId": 48
@@ -196,6 +420,29 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "nit: Can be declared just when needed.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3d13e18_70469ab0",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "SetEarlyReady is only used here.\n\nI think it\u0027ll be easier to understand if immediately on creation, it is created as ready - instead of mutating its state after. Then, we don\u0027t have to think about when/if TriggerEarlyReady is called on some event that has a not-yet-signaled receiver.",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 68
+      },
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -259,6 +506,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52619914_0f581e3f",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "Overall, I\u0027m wondering if TrackedEvent should store OSEventReceiver, or it would be better to store some object with virtual methods from which you can get an OSEventReceiver/Primitive.\n\nThen, we do not need to pay the cost of making pipes / Win32 events in poll-only mode. We can also defer making the pipe/event until we really need it - which allows the already-signaled case to make nothing at all.\n\nI guess it is just an optimization though and could be left as a TODO",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 30
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9cec4862_b044840b",
         "filename": "src/dawn/native/TrackedEvent.h",
         "patchSetId": 48
@@ -270,6 +540,52 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2f6213c_f8cf5dfd",
+        "filename": "src/dawn/native/metal/QueueMTL.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "```suggestion\n    // TODO(dawn:1987): if we atomically knew a conservative lower bound on the mWaitingEvents\n```",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6e24aa9_4d1596cd",
+        "filename": "src/dawn/native/metal/QueueMTL.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "nit: use MutexProtected",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 61
+      },
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -338,6 +654,29 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "u-nit: we could early continue to dedent. Likewise for !event.mReady.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cfebfbab_5fc4318b",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:48:04Z",
+      "side": 1,
+      "message": "static_cast should work\n\n```suggestion\n             auto* lambda \u003d static_cast\u003cLambda*\u003e(userdata);\n```",
+      "range": {
+        "startLine": 71,
+        "startChar": 28,
+        "endLine": 71,
+        "endChar": 44
+      },
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
