@@ -308,6 +308,14 @@ class ASTPrinter : public tint::TextGenerator {
     /// @param expr the expression
     /// @returns true if the expression was emitted
     bool EmitExpression(StringStream& out, const ast::Expression* expr);
+    /// Handles generate an Expression for texture or storage buffer call arguments. This is
+    /// specifically to work around a DXC bug around passing signed integer splatted constants as
+    /// args to these functions (see crbug.com/tint/1976)
+    /// @param out the output of the expression stream
+    /// @param expr the expression
+    /// @returns true if the expression was emitted
+    bool EmitTextureOrStorageBufferCallArgExpression(StringStream& out,
+                                                     const ast::Expression* expr);
     /// Handles generating a function
     /// @param func the function to generate
     /// @returns true if the function was emitted
