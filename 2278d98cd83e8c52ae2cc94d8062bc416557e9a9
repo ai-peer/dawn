@@ -34,6 +34,24 @@
       "parentUuid": "fd2075c9_7fa4fc49",
       "revId": "2278d98cd83e8c52ae2cc94d8062bc416557e9a9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e05cd5_d23270b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-09-05T15:54:06Z",
+      "side": 1,
+      "message": "Ok, that CL sounds better.",
+      "parentUuid": "8c74519a_65300e74",
+      "revId": "2278d98cd83e8c52ae2cc94d8062bc416557e9a9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
