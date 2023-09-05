@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43124e1f_5b2793b0",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-05T17:54:21Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "8fa08204_4ef7c0c6",
+      "revId": "70da3144e2f02c5ba967ca1b7d43b625f5de320d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "594868cd_158ca4c6",
