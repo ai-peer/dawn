@@ -383,6 +383,9 @@ BeginOcclusionQueryCmd::~BeginOcclusionQueryCmd() = default;
 RenderPassColorAttachmentInfo::RenderPassColorAttachmentInfo() = default;
 RenderPassColorAttachmentInfo::~RenderPassColorAttachmentInfo() = default;
 
+RenderPassStorageAttachmentInfo::RenderPassStorageAttachmentInfo() = default;
+RenderPassStorageAttachmentInfo::~RenderPassStorageAttachmentInfo() = default;
+
 RenderPassDepthStencilAttachmentInfo::RenderPassDepthStencilAttachmentInfo() = default;
 RenderPassDepthStencilAttachmentInfo::~RenderPassDepthStencilAttachmentInfo() = default;
 
