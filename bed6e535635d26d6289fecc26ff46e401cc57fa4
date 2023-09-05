@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b807ef2d_9daa53a4",
+        "filename": "src/tint/lang/spirv/writer/texture_builtin_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-05T19:00:16Z",
+      "side": 1,
+      "message": "Only 2 coords",
+      "revId": "bed6e535635d26d6289fecc26ff46e401cc57fa4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
