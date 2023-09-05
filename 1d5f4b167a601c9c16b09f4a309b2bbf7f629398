@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5808ed8_93fe576f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-05T18:07:55Z",
+      "side": 1,
+      "message": "Going to hold off landing this until the branch is cut.",
+      "revId": "1d5f4b167a601c9c16b09f4a309b2bbf7f629398",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
