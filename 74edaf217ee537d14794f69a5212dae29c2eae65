@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "088e9365_fabf9462",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-09-05T12:33:22Z",
+      "side": 1,
+      "message": "Actually, I\u0027ll ask Corentin to approve this, so we can resume the autoroll sooner.\nWhy didn\u0027t it occur to me yesterday?",
+      "revId": "74edaf217ee537d14794f69a5212dae29c2eae65",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
