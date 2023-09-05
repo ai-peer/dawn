@@ -75,6 +75,13 @@ void stream::Stream<tint::ExternalTextureOptions>::Write(
 
 // static
 template <>
+void stream::Stream<tint::PixelLocalOptions>::Write(stream::Sink* sink,
+                                                    const tint::PixelLocalOptions& options) {
+    StreamInTintObject(options, sink);
+}
+
+// static
+template <>
 void stream::Stream<tint::ast::transform::VertexPulling::Config>::Write(
     stream::Sink* sink,
     const tint::ast::transform::VertexPulling::Config& cfg) {
