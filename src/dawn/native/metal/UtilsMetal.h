@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_METAL_UTILSMETAL_H_
 
 #include <string>
+#include <vector>
 
 #include "dawn/common/NSRef.h"
 #include "dawn/common/StackContainer.h"
