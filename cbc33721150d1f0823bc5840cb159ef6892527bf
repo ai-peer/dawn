@@ -100,6 +100,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4eb9ba4b_bd1b0b98",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:54:46Z",
+      "side": 1,
+      "message": "```suggestion\n        mTimedWaitEnable \u003d descriptor-\u003efeatures.timedWaitAnyEnable;\n        mTimedWaitMaxCount \u003d descriptor-\u003efeatures.timedWaitAnyMaxCount;\n```\n?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd9ac57d_5cd27497",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 48
@@ -214,6 +231,24 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "should we `break` as soon as we see `anyCompleted`?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d306be6_b8bafa20",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T22:54:46Z",
+      "side": 1,
+      "message": "nevermind - I suppose you want to mark all of the completed ones as completed.",
+      "parentUuid": "0c3f72c1_587fae99",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
