@@ -55,6 +55,11 @@ MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage
         result |= MTLTextureUsageRenderTarget;
     }
 
+    if (usage & wgpu::TextureUsage::StorageAttachment) {
+        // TODO(dawn:1704): Support PLS on non-tiler Metal devices.
+        result |= MTLTextureUsageRenderTarget;
+    }
+
     return result;
 }
 
@@ -83,8 +88,9 @@ bool RequiresCreatingNewTextureView(const TextureBase* texture,
                                     const TextureViewDescriptor* textureViewDescriptor) {
     constexpr wgpu::TextureUsage kShaderUsageNeedsView =
         wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
-    constexpr wgpu::TextureUsage kUsageNeedsView =
-        kShaderUsageNeedsView | wgpu::TextureUsage::RenderAttachment;
+    constexpr wgpu::TextureUsage kUsageNeedsView = kShaderUsageNeedsView |
+                                                   wgpu::TextureUsage::RenderAttachment |
+                                                   wgpu::TextureUsage::StorageAttachment;
     if ((texture->GetInternalUsage() & kUsageNeedsView) == 0) {
         return false;
     }

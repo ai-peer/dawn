@@ -122,6 +122,10 @@ bool SupportCounterSamplingAtCommandBoundary(id<MTLDevice> device)
 bool SupportCounterSamplingAtStageBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0));
 
+std::vector<ColorAttachmentIndex> PackPLSInColorAttachments(
+    ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> colorAttachmentMask,
+    std::vector<wgpu::TextureFormat> storageAttachments);
+
 }  // namespace dawn::native::metal
 
 #endif  // SRC_DAWN_NATIVE_METAL_UTILSMETAL_H_

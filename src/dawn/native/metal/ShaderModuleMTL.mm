@@ -183,6 +183,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
         substituteOverrideConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
     }
 
+    // XXX pls options here.
+
     MslCompilationRequest req = {};
     req.stage = stage;
     req.inputProgram = programmableStage.module->GetTintProgram();
