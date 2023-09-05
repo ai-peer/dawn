@@ -16,6 +16,23 @@
       "message": "PTAL! Local testing shows that these suppressions are no longer needed after your work in this area.",
       "revId": "2c8d7a0ebdb9513df9a83d8e3876e5984e5370a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c66217b9_593b53dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-09-05T18:33:19Z",
+      "side": 1,
+      "message": "Post-weekend review ping?",
+      "revId": "2c8d7a0ebdb9513df9a83d8e3876e5984e5370a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
