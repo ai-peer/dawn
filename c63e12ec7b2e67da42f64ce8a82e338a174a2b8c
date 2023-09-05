@@ -33,6 +33,24 @@
       "message": "Isn\u0027t is possible to support this in OpenGL ES by converting the readonly storage textures to just regular textures and using `texelFetch`?",
       "revId": "c63e12ec7b2e67da42f64ce8a82e338a174a2b8c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69fef436_e60fc77e",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-09-05T05:43:30Z",
+      "side": 1,
+      "message": "It\u0027s a bit tricky and complicated. Can we do it later?",
+      "parentUuid": "0789bbd7_d169b5eb",
+      "revId": "c63e12ec7b2e67da42f64ce8a82e338a174a2b8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
