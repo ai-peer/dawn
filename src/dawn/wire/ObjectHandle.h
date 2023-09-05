@@ -16,6 +16,7 @@
 #define DAWN_WIRE_OBJECTHANDLE_H_
 
 #include <cstdint>
+#include <optional>
 
 namespace dawn::wire {
 
@@ -25,7 +26,8 @@ struct ObjectHandle {
     ObjectId id;
     ObjectGeneration generation;
 
-    ObjectHandle();
+    ObjectHandle() = delete;
+    ObjectHandle(std::nullopt_t);  // NOLINT(runtime/explicit)
     ObjectHandle(ObjectId id, ObjectGeneration generation);
 
     explicit ObjectHandle(const volatile ObjectHandle& rhs);
