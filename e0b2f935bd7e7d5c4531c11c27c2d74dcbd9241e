@@ -34,6 +34,24 @@
       "parentUuid": "a69361c5_5f0b02d0",
       "revId": "e0b2f935bd7e7d5c4531c11c27c2d74dcbd9241e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2017cde3_85af1dba",
+        "filename": "src/tint/lang/spirv/writer/texture_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-05T18:53:23Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "95bcd507_26b0aa78",
+      "revId": "e0b2f935bd7e7d5c4531c11c27c2d74dcbd9241e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
