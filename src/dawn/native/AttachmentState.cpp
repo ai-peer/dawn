@@ -116,7 +116,6 @@ AttachmentState::AttachmentState(DeviceBase* device, const RenderPassDescriptor*
             ASSERT(mSampleCount == attachment->GetTexture()->GetSampleCount());
         }
     }
-    ASSERT(mSampleCount > 0);
 
     // Gather the PLS information.
     const RenderPassPixelLocalStorage* pls = nullptr;
@@ -128,8 +127,15 @@ AttachmentState::AttachmentState(DeviceBase* device, const RenderPassDescriptor*
         for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
             size_t slot = pls->storageAttachments[i].offset / kPLSSlotByteSize;
             mStorageAttachmentSlots[slot] = pls->storageAttachments[i].storage->GetFormat().format;
+            if (mSampleCount == 0) {
+                mSampleCount = 1;
+            } else {
+                // ????
+            }
         }
     }
+
+    ASSERT(mSampleCount > 0);
 
     SetContentHash(ComputeContentHash());
 }

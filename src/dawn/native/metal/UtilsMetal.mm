@@ -517,4 +517,25 @@ DAWN_NOINLINE bool SupportCounterSamplingAtStageBoundary(id<MTLDevice> device)
     return [device supportsCounterSampling:MTLCounterSamplingPointAtStageBoundary];
 }
 
+std::vector<ColorAttachmentIndex> PackPLSInColorAttachments(
+    ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> colorAttachmentMask,
+    std::vector<wgpu::TextureFormat> storageAttachments) {
+    std::vector<ColorAttachmentIndex> result(
+        storageAttachments.size(), ColorAttachmentIndex(uint8_t(kMaxColorAttachments + 1)));
+
+    auto availableSlots = ~colorAttachmentMask;
+    for (size_t i = 0; i < storageAttachments.size(); i++) {
+        if (storageAttachments[i] == wgpu::TextureFormat::Undefined) {
+            continue;
+        }
+
+        ASSERT(!availableSlots.none());
+        auto slot = ColorAttachmentIndex(uint8_t(ScanForward(availableSlots.to_ulong())));
+        availableSlots.reset(slot);
+        result[i] = slot;
+    }
+
+    return result;
+}
+
 }  // namespace dawn::native::metal

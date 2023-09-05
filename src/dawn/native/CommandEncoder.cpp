@@ -582,7 +582,7 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
         "Color attachment count (%u) exceeds the maximum number of color attachments (%u).",
         descriptor->colorAttachmentCount, maxColorAttachments);
 
-    bool isAllColorAttachmentNull = true;
+    // bool isAllColorAttachmentNull = true;
     ColorAttachmentFormats colorAttachmentFormats;
     for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
         DAWN_TRY_CONTEXT(ValidateRenderPassColorAttachment(
@@ -590,7 +590,7 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
                              implicitSampleCount, usageValidationMode),
                          "validating colorAttachments[%u].", i);
         if (descriptor->colorAttachments[i].view) {
-            isAllColorAttachmentNull = false;
+            //      isAllColorAttachmentNull = false;
             colorAttachmentFormats->push_back(&descriptor->colorAttachments[i].view->GetFormat());
         }
     }
@@ -603,9 +603,9 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
                              usageValidationMode),
                          "validating depthStencilAttachment.");
     } else {
-        DAWN_INVALID_IF(
-            isAllColorAttachmentNull,
-            "No color or depthStencil attachments specified. At least one is required.");
+        // DAWN_INVALID_IF(
+        //     isAllColorAttachmentNull,
+        //     "No color or depthStencil attachments specified. At least one is required.");
     }
 
     if (descriptor->occlusionQuerySet != nullptr) {
@@ -1248,7 +1248,17 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
             FindInChain(descriptor->nextInChain, &pls);
             if (pls != nullptr) {
                 for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
-                    usageTracker.TextureViewUsedAs(pls->storageAttachments[i].storage,
+                    const RenderPassStorageAttachment& apiAttachment = pls->storageAttachments[i];
+                    RenderPassStorageAttachmentInfo* attachmentInfo =
+                        &cmd->storageAttachments[apiAttachment.offset / kPLSSlotByteSize];
+
+                    attachmentInfo->storage = apiAttachment.storage;
+                    attachmentInfo->loadOp = apiAttachment.loadOp;
+                    attachmentInfo->storeOp = apiAttachment.storeOp;
+                    attachmentInfo->clearColor = ClampClearColorValueToLegalRange(
+                        apiAttachment.clearValue, apiAttachment.storage->GetFormat());
+
+                    usageTracker.TextureViewUsedAs(apiAttachment.storage,
                                                    wgpu::TextureUsage::StorageAttachment);
                 }
             }

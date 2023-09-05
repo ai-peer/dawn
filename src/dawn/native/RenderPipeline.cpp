@@ -643,8 +643,8 @@ MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                                descriptor->multisample.alphaToCoverageEnabled),
                          "validating fragment state.");
 
-        DAWN_INVALID_IF(descriptor->fragment->targetCount == 0 && !descriptor->depthStencil,
-                        "Must have at least one color or depthStencil target.");
+        // DAWN_INVALID_IF(descriptor->fragment->targetCount == 0 && !descriptor->depthStencil,
+        //                 "Must have at least one color or depthStencil target.");
 
         DAWN_TRY(ValidateInterStageMatching(device, descriptor->vertex, *(descriptor->fragment)));
     }
