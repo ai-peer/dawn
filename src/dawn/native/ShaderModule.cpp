@@ -17,7 +17,6 @@
 #include <algorithm>
 #include <sstream>
 
-#include "absl/strings/str_format.h"
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Constants.h"
 #include "dawn/native/BindGroupLayoutInternal.h"
@@ -692,6 +691,8 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             metadata->fragmentOutputVariables[attachment] = variable;
             metadata->fragmentOutputsWritten.set(attachment);
         }
+
+        // XXX PLS reflection once there.
     }
 
     for (const tint::inspector::ResourceBinding& resource :
@@ -1078,6 +1079,56 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
             static_cast<uint32_t>(pair.texture.group), static_cast<uint32_t>(pair.texture.binding),
             wgpu::TextureSampleType::UnfilterableFloat, static_cast<uint32_t>(pair.sampler.group),
             static_cast<uint32_t>(pair.sampler.binding), wgpu::SamplerBindingType::Filtering);
+    }
+
+    // Validate compatibility of the pixel local storage.
+    if (entryPoint.usesPixelLocal) {
+        DAWN_INVALID_IF(!layout->HasPixelLocalStorage(),
+                        "The entry-point uses `pixel_local` block but the pipeline layout doesn't "
+                        "contain a pixel local storage.");
+
+        // TODO(dawn:1704): Allow entryPoint.pixelLocalBlockSize < layoutPixelLocalSize.
+        auto layoutStorageAttachments = layout->GetStorageAttachmentSlots();
+        size_t layoutPixelLocalSize = layoutStorageAttachments.size() * kPLSSlotByteSize;
+        DAWN_INVALID_IF(entryPoint.pixelLocalBlockSize != layoutPixelLocalSize,
+                        "The entry-point's pixel local block size (%u) is different from the "
+                        "layout's total pixel local size (%u).",
+                        entryPoint.pixelLocalBlockSize, layoutPixelLocalSize);
+
+        for (size_t i = 0; i < entryPoint.pixelLocalMemberTypes.size(); i++) {
+            wgpu::TextureFormat layoutFormat = layoutStorageAttachments[i];
+
+            // TODO(dawn:1704): Allow format conversions by injecting them in the shader
+            // automatically.
+            PixelLocalMemberType expectedType;
+            switch (layoutFormat) {
+                case wgpu::TextureFormat::R32Sint:
+                    expectedType = PixelLocalMemberType::I32;
+                    break;
+                case wgpu::TextureFormat::R32Float:
+                    expectedType = PixelLocalMemberType::F32;
+                    break;
+                case wgpu::TextureFormat::R32Uint:
+                case wgpu::TextureFormat::Undefined:
+                    expectedType = PixelLocalMemberType::U32;
+                    break;
+
+                default:
+                    UNREACHABLE();
+            }
+
+            PixelLocalMemberType entryPointType = entryPoint.pixelLocalMemberTypes[i];
+            DAWN_INVALID_IF(
+                expectedType != entryPointType,
+                "The `pixel_local` block's member at index %u has a type (%s) that's not "
+                "compatible with the layout's storage format (s), the expected type is s.",
+                i, entryPointType /*, layoutFormat, expectedType*/);
+        }
+    } else {
+        // TODO(dawn:1704): Allow an entry-point without PLS to be used with a layout that has PLS.
+        DAWN_INVALID_IF(layout->HasPixelLocalStorage(),
+                        "The layout contains a pixel local storage but the entry-point doesn't use "
+                        "a `pixel local` block.");
     }
 
     return {};
