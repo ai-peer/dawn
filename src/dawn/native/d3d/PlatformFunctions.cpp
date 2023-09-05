@@ -13,6 +13,7 @@
 // limitations under the License.
 
 #include "dawn/native/d3d/PlatformFunctions.h"
+#include "dawn/common/Log.h"
 
 #include <comdef.h>
 
@@ -23,6 +24,48 @@
 
 namespace dawn::native::d3d {
 namespace {
+
+std::string GetFileVersionString(const std::string& path) {
+    auto size = GetFileVersionInfoSizeA(path.c_str(), NULL);
+    if (size == 0) {
+        return {};
+    }
+
+    std::vector<char> versionInfo(size);
+    if (!GetFileVersionInfoA(path.c_str(), 0, size, versionInfo.data())) {
+        return {};
+    }
+
+    VS_FIXEDFILEINFO* fileInfo = NULL;
+    UINT valueLength = 0;
+    if (!VerQueryValueA(versionInfo.data(), "\\", reinterpret_cast<LPVOID*>(&fileInfo),
+                        &valueLength)) {
+        return {};
+    }
+
+    auto ms = fileInfo->dwFileVersionMS;
+    auto ls = fileInfo->dwFileVersionLS;
+    char textBuffer[1024];
+    snprintf(textBuffer, std::size(textBuffer), "%d.%d.%d.%d",  //
+             static_cast<int>((ms >> 16) & 0xffff),             //
+             static_cast<int>((ms >> 0) & 0xffff),              //
+             static_cast<int>((ls >> 16) & 0xffff),             //
+             static_cast<int>((ls >> 0) & 0xffff));
+
+    std::string result = textBuffer;
+
+#define SZ_HEX_LANG_ID_EN_US "0409"
+#define SZ_HEX_CODE_PAGE_ID_UNICODE "04B0"
+
+    char* fileDescription = nullptr;
+    if (VerQueryValueA(versionInfo.data(),
+                       "\\StringFileInfo\\" SZ_HEX_LANG_ID_EN_US SZ_HEX_CODE_PAGE_ID_UNICODE
+                       "\\FileDescription",
+                       reinterpret_cast<LPVOID*>(&fileDescription), &valueLength)) {
+        result += std::string{" ("} + fileDescription + ")";
+    }
+    return result;
+}
 
 #ifndef DAWN_USE_BUILT_DXC
 // Extract Version from "10.0.{Version}.0" if possible, otherwise return 0.
@@ -166,6 +209,7 @@ bool PlatformFunctions::LoadDXIL(const std::string& basePath) {
     const std::string dllName = basePath + kDxilDLLName;
 
     if (mDXILLib.Open(dllName, nullptr)) {
+        WarningLog() << "Loaded " << dllName << ", version: " << GetFileVersionString(dllName);
         return true;
     }
     ASSERT(!mDXILLib.Valid());
@@ -186,6 +230,7 @@ bool PlatformFunctions::LoadDXCompiler(const std::string& basePath) {
         if (dxCompilerLib.Valid() &&
             dxCompilerLib.GetProc(&dxcCreateInstance, "DxcCreateInstance", nullptr)) {
             mDXCompilerLib = std::move(dxCompilerLib);
+            WarningLog() << "Loaded" << dllName << ", version: " << GetFileVersionString(dllName);
             return true;
         } else {
             mDXILLib.Close();
