@@ -88,7 +88,8 @@ std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags, bool enable16
 
 ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const d3d::D3DBytecodeCompilationRequest& r,
                                                  const std::string& entryPointName,
-                                                 const std::string& hlslSource) {
+                                                 const std::string& hlslSource,
+                                                 const CompiledShader& in_compiledShader) {
     ComPtr<IDxcBlobEncoding> sourceBlob;
     DAWN_TRY(CheckHRESULT(r.dxcLibrary->CreateBlobWithEncodingFromPinned(
                               hlslSource.c_str(), hlslSource.length(), CP_UTF8, &sourceBlob),
@@ -112,8 +113,12 @@ ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const d3d::D3DBytecodeCompilati
         ComPtr<IDxcBlobEncoding> errors;
         DAWN_TRY(CheckHRESULT(result->GetErrorBuffer(&errors), "DXC get error buffer"));
 
-        return DAWN_VALIDATION_ERROR("DXC compile failed with: %s",
-                                     static_cast<char*>(errors->GetBufferPointer()));
+        return DAWN_VALIDATION_ERROR(
+            "DXC compile failed with: %s\nHLSL source:\n%s\n\nWGSL input source:\n%s\n\nWGSL "
+            "transformed source:\n%s\n\n",
+            static_cast<char*>(errors->GetBufferPointer()), hlslSource.c_str(),
+            in_compiledShader.input_wgslSource.c_str(),
+            in_compiledShader.transformed_wgslSource.c_str());
     }
 
     ComPtr<IDxcBlob> compiledShader;
@@ -246,9 +251,15 @@ MaybeError TranslateToHLSL(d3d::HlslCompilationRequest r,
     auto result = tint::hlsl::writer::Generate(&transformedProgram, options);
     DAWN_INVALID_IF(!result, "An error occured while generating HLSL: %s", result.Failure());
 
+    auto input_wgsl = tint::wgsl::writer::Generate(r.inputProgram, {});
+    auto transformed_wgsl = tint::wgsl::writer::Generate(&transformedProgram, {});
+
     compiledShader->usesVertexIndex = usesVertexIndex;
     compiledShader->usesInstanceIndex = usesInstanceIndex;
     compiledShader->hlslSource = std::move(result->hlsl);
+    compiledShader->input_wgslSource = input_wgsl ? std::move(input_wgsl->wgsl) : "INVALID";
+    compiledShader->transformed_wgslSource =
+        transformed_wgsl ? std::move(transformed_wgsl->wgsl) : "INVALID";
     return {};
 }
 
@@ -328,8 +339,9 @@ ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r) {
         case d3d::Compiler::DXC: {
             TRACE_EVENT0(r.tracePlatform.UnsafeGetValue(), General, "CompileShaderDXC");
             ComPtr<IDxcBlob> compiledDXCShader;
-            DAWN_TRY_ASSIGN(compiledDXCShader, CompileShaderDXC(r.bytecode, remappedEntryPoint,
-                                                                compiledShader.hlslSource));
+            DAWN_TRY_ASSIGN(compiledDXCShader,
+                            CompileShaderDXC(r.bytecode, remappedEntryPoint,
+                                             compiledShader.hlslSource, compiledShader));
             compiledShader.shaderBlob = CreateBlob(std::move(compiledDXCShader));
             break;
         }
@@ -347,6 +359,13 @@ ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r) {
     // isn't stored into the cache.
     if (!shouldDumpShader) {
         compiledShader.hlslSource = "";
+        compiledShader.input_wgslSource = "";
+        compiledShader.transformed_wgslSource = "";
+    } else {
+        // HACKITY HACK HACK!
+        compiledShader.hlslSource += "\n\nInput WGSL:\n" + compiledShader.input_wgslSource +
+                                     "\n\nTransformed WGSL:\n" +
+                                     compiledShader.transformed_wgslSource + "\n\n";
     }
     return compiledShader;
 }
