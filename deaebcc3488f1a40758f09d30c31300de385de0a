@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "157b4765_ce3860d4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-05T17:39:45Z",
+      "side": 1,
+      "message": "lgtm w/ nits.",
+      "revId": "deaebcc3488f1a40758f09d30c31300de385de0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23d75c98_85de172c",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-05T17:39:45Z",
+      "side": 1,
+      "message": "```suggestion\n    /// Handles generating an Expression for texture or storage buffer call arguments. This is\n```",
+      "range": {
+        "startLine": 311,
+        "startChar": 16,
+        "endLine": 311,
+        "endChar": 24
+      },
+      "revId": "deaebcc3488f1a40758f09d30c31300de385de0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf3924b0_bd4d826d",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-05T17:39:45Z",
+      "side": 1,
+      "message": "This is the stream to output too, is it not? This makes it sound like this is purely an out param?",
+      "range": {
+        "startLine": 314,
+        "startChar": 19,
+        "endLine": 314,
+        "endChar": 54
+      },
+      "revId": "deaebcc3488f1a40758f09d30c31300de385de0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
