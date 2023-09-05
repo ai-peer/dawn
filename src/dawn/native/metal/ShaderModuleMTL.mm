@@ -43,7 +43,8 @@ using OptionalVertexPullingTransformConfig =
     X(const tint::Program*, inputProgram)                                                        \
     X(tint::ArrayLengthFromUniformOptions, arrayLengthFromUniform)                               \
     X(tint::BindingRemapperOptions, bindingRemapper)                                             \
-    X(tint::ExternalTextureOptions, externalTextureOptions)                                      \
+    X(tint::ExternalTextureOptions, externalTexture)                                             \
+    X(tint::PixelLocalOptions, pixelLocal)                                                       \
     X(OptionalVertexPullingTransformConfig, vertexPullingTransformConfig)                        \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                       \
@@ -183,11 +184,31 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
         substituteOverrideConfig = BuildSubstituteOverridesTransformConfig(programmableStage);
     }
 
+    tint::PixelLocalOptions pixelLocal;
+    if (stage == SingleShaderStage::Fragment && layout->HasPixelLocalStorage()) {
+        const AttachmentState* attachmentState = renderPipeline->GetAttachmentState();
+        std::vector<wgpu::TextureFormat> storageAttachmentFormats =
+            attachmentState->GetStorageAttachmentSlots();
+        std::vector<ColorAttachmentIndex> storageAttachmentSlots = PackPLSInColorAttachments(
+            renderPipeline->GetColorAttachmentsMask(), storageAttachmentFormats);
+
+        for (size_t i = 0; i < storageAttachmentFormats.size(); i++) {
+            if (storageAttachmentFormats[i] == wgpu::TextureFormat::Undefined) {
+                // TODO VALIDATION YAAAAAAAAAY
+                continue;
+            }
+
+            pixelLocal.attachments[i] = uint8_t(storageAttachmentSlots[i]);
+        }
+    }
+    // XXX pls options here.
+
     MslCompilationRequest req = {};
     req.stage = stage;
     req.inputProgram = programmableStage.module->GetTintProgram();
     req.bindingRemapper = std::move(bindingRemapper);
-    req.externalTextureOptions = BuildExternalTextureTransformBindings(layout);
+    req.externalTexture = BuildExternalTextureTransformBindings(layout);
+    req.pixelLocal = std::move(pixelLocal);
     req.vertexPullingTransformConfig = std::move(vertexPullingTransformConfig);
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
     req.entryPointName = programmableStage.entryPoint.c_str();
@@ -277,7 +298,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             options.emit_vertex_point_size = r.emitVertexPointSize;
             options.array_length_from_uniform = r.arrayLengthFromUniform;
             options.binding_remapper_options = r.bindingRemapper;
-            options.external_texture_options = r.externalTextureOptions;
+            options.external_texture_options = r.externalTexture;
+            options.pixel_local_options = r.pixelLocal;
 
             TRACE_EVENT0(r.platform.UnsafeGetValue(), General, "tint::msl::writer::Generate");
             auto result = tint::msl::writer::Generate(&program, options);
