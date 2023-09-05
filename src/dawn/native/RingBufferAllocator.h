@@ -27,7 +27,7 @@ namespace dawn::native {
 class RingBufferAllocator {
   public:
     RingBufferAllocator();
-    explicit RingBufferAllocator(uint64_t maxSize);
+    explicit RingBufferAllocator(uint64_t maxSize, uint64_t offsetAlignment = 0);
     RingBufferAllocator(const RingBufferAllocator&);
     ~RingBufferAllocator();
 
@@ -51,9 +51,11 @@ class RingBufferAllocator {
     SerialQueue<ExecutionSerial, Request> mInflightRequests;  // Queue of the recorded sub-alloc
                                                               // requests (e.g. frame of resources).
 
+    uint64_t mMaxBlockSize = 0;     // Max size of the ring buffer (in bytes).
+    uint64_t mOffsetAlignment = 0;  // Offset alignment requirement for returned offsets.
+
     uint64_t mUsedEndOffset = 0;    // Tail of used sub-alloc requests (in bytes).
     uint64_t mUsedStartOffset = 0;  // Head of used sub-alloc requests (in bytes).
-    uint64_t mMaxBlockSize = 0;     // Max size of the ring buffer (in bytes).
     uint64_t mUsedSize = 0;         // Size of the sub-alloc requests (in bytes) of the ring buffer.
     uint64_t mCurrentRequestSize =
         0;  // Size of the sub-alloc requests (in bytes) of the current serial.

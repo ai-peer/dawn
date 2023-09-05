@@ -32,7 +32,8 @@ namespace dawn::native {
 
 RingBufferAllocator::RingBufferAllocator() = default;
 
-RingBufferAllocator::RingBufferAllocator(uint64_t maxSize) : mMaxBlockSize(maxSize) {}
+RingBufferAllocator::RingBufferAllocator(uint64_t maxSize, uint64_t offsetAlignment)
+    : mMaxBlockSize(maxSize), mOffsetAlignment(offsetAlignment) {}
 
 RingBufferAllocator::RingBufferAllocator(const RingBufferAllocator&) = default;
 
