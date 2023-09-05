@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "594868cd_158ca4c6",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-05T17:32:21Z",
+      "side": 1,
+      "message": "Oops. :embarrased:",
+      "range": {
+        "startLine": 152,
+        "startChar": 0,
+        "endLine": 153,
+        "endChar": 17
+      },
+      "revId": "70da3144e2f02c5ba967ca1b7d43b625f5de320d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
