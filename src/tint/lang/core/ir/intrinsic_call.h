@@ -49,6 +49,7 @@ class IntrinsicCall : public Castable<IntrinsicCall, Call> {
         kSpirvImageDrefGather,
         kSpirvImageQuerySize,
         kSpirvImageQuerySizeLod,
+        kSpirvImageRead,
         kSpirvImageSampleImplicitLod,
         kSpirvImageSampleExplicitLod,
         kSpirvImageSampleDrefImplicitLod,

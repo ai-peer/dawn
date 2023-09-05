@@ -70,6 +70,8 @@ std::string_view ToString(enum IntrinsicCall::Kind kind) {
             return "spirv.image_query_size";
         case IntrinsicCall::Kind::kSpirvImageQuerySizeLod:
             return "spirv.image_query_size_lod";
+        case IntrinsicCall::Kind::kSpirvImageRead:
+            return "spirv.image_read";
         case IntrinsicCall::Kind::kSpirvImageSampleImplicitLod:
             return "spirv.image_sample_implicit_lod";
         case IntrinsicCall::Kind::kSpirvImageSampleExplicitLod:

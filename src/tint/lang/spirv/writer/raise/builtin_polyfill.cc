@@ -670,8 +670,10 @@ struct State {
         if (expects_scalar_result) {
             result_ty = ty.vec4(result_ty);
         }
-        auto* texture_call = b.Call(result_ty, core::ir::IntrinsicCall::Kind::kSpirvImageFetch,
-                                    std::move(intrinsic_args));
+        auto intrinsic = texture_ty->Is<core::type::StorageTexture>()
+                             ? core::ir::IntrinsicCall::Kind::kSpirvImageRead
+                             : core::ir::IntrinsicCall::Kind::kSpirvImageFetch;
+        auto* texture_call = b.Call(result_ty, intrinsic, std::move(intrinsic_args));
         texture_call->InsertBefore(builtin);
         auto* result = texture_call->Result();
 
