@@ -857,7 +857,7 @@ source_set("sources") {
     }
   }
 
-  if (use_angle) {
+  if (use_angle && dawn_standalone) {
     data_deps += [
       "${dawn_angle_dir}:libEGL",
       "${dawn_angle_dir}:libGLESv2",
