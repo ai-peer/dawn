@@ -1597,6 +1597,9 @@ void Printer::EmitIntrinsicCall(spirv::ir::IntrinsicCall* call) {
             module_.PushCapability(SpvCapabilityImageQuery);
             op = spv::Op::OpImageQuerySizeLod;
             break;
+        case spirv::ir::Intrinsic::kImageRead:
+            op = spv::Op::OpImageRead;
+            break;
         case spirv::ir::Intrinsic::kImageSampleImplicitLod:
             op = spv::Op::OpImageSampleImplicitLod;
             break;
