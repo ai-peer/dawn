@@ -80,6 +80,12 @@ enum class InterpolationSampling {
     Sample,
 };
 
+enum class PixelLocalMemberType {
+    I32,
+    U32,
+    F32,
+};
+
 // Use map to make sure constant keys are sorted for creating shader cache keys
 using PipelineConstantEntries = std::map<std::string, double>;
 
@@ -214,7 +220,7 @@ struct EntryPointMetadata {
     std::array<InterStageVariableInfo, kMaxInterStageShaderVariables> interStageVariables;
     uint32_t totalInterStageShaderComponents;
 
-    // The shader stage for this binding.
+    // The shader stage for this entry point.
     SingleShaderStage stage;
 
     struct Override {
@@ -245,9 +251,13 @@ struct EntryPointMetadata {
     // overridden
     std::unordered_set<std::string> initializedOverrides;
 
+    // XXX
+    bool usesPixelLocal = false;
+    size_t pixelLocalBlockSize = 0;
+    std::vector<PixelLocalMemberType> pixelLocalMemberTypes;  // eww.
+
     bool usesNumWorkgroups = false;
     bool usesFragDepth = false;
-    // Used at render pipeline validation.
     bool usesSampleMaskOutput = false;
 };
 
