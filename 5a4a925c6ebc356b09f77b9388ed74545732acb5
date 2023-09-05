@@ -283,6 +283,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "483e6903_9ba9b846",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-05T23:30:42Z",
+      "side": 1,
+      "message": "+1 to removing the default ctor.",
+      "parentUuid": "e983a826_1105f2dc",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82da4b98_635ed959",
         "filename": "src/dawn/wire/ObjectHandle.h",
         "patchSetId": 40

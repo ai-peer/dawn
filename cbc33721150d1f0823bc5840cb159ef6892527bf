@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "640e6f5e_2f4102bd",
+        "filename": "dawn.json",
+        "patchSetId": 48
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-05T23:30:42Z",
+      "side": 1,
+      "message": "nit. Should this be called `future count` with a default of 0?",
+      "range": {
+        "startLine": 1958,
+        "startChar": 20,
+        "endLine": 1958,
+        "endChar": 56
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a4196ffe_fbbadee0",
         "filename": "generator/templates/dawn/wire/client/ApiProcs.cpp",
         "patchSetId": 48
@@ -117,6 +140,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c671bd18_fa9d8e79",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-05T23:30:42Z",
+      "side": 1,
+      "message": "Hmm.. now that I see the handling/logic here, I do feel like just having the explicit modes instead of flags could be simpler? It would also allow for a `switch/case` here which is a bit easier to read. Not too partial about it though?",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bd9ac57d_5cd27497",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 48
@@ -174,6 +220,29 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "nit: put a comment here as well (potentially referencing the one above?)",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ef0dde5e_1ad552b0",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-05T23:30:42Z",
+      "side": 1,
+      "message": "Is this `ASSERT` really worth anything? We are in an `else if` clause after `if (isFuture)`.",
+      "range": {
+        "startLine": 109,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 26
+      },
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -689,6 +758,29 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "u-nit: we could early continue to dedent. Likewise for !event.mReady.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9759ed10_f1adf157",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-05T23:30:42Z",
+      "side": 1,
+      "message": "nit. Unclear what these were added for?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 18
+      },
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

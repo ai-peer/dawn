@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2dab39b3_0e71ef48",
+        "filename": "src/dawn/tests/end2end/WaitAnyTests.cpp",
+        "patchSetId": 49
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-05T23:30:42Z",
+      "side": 1,
+      "message": "nit. Could maybe deindent?",
+      "range": {
+        "startLine": 33,
+        "startChar": 6,
+        "endLine": 72,
+        "endChar": 5
+      },
+      "revId": "f90ba81249be32adb8a434bb26be2aaf895cb05e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
