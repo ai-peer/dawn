@@ -325,6 +325,56 @@ NSRef<MTLRenderPassDescriptor> CreateMTLRenderPassDescriptor(
         }
     }
 
+    if (renderPass->attachmentState->HasPixelLocalStorage()) {
+        std::vector<wgpu::TextureFormat> storageAttachmentFormats =
+            renderPass->attachmentState->GetStorageAttachmentSlots();
+        std::vector<ColorAttachmentIndex> storageAttachmentSlots =
+            renderPass->attachmentState->ComputeStorageAttachmentPackingInColorAttachments();
+
+        for (size_t attachment = 0; attachment < storageAttachmentFormats.size(); attachment++) {
+            if (storageAttachmentFormats[attachment] == wgpu::TextureFormat::Undefined) {
+                continue;
+            }
+
+            auto& attachmentInfo = renderPass->storageAttachments[attachment];
+            uint8_t i = static_cast<uint8_t>(storageAttachmentSlots[attachment]);
+
+            switch (attachmentInfo.loadOp) {
+                case wgpu::LoadOp::Clear:
+                    descriptor.colorAttachments[i].loadAction = MTLLoadActionClear;
+                    descriptor.colorAttachments[i].clearColor =
+                        MTLClearColorMake(attachmentInfo.clearColor.r, attachmentInfo.clearColor.g,
+                                          attachmentInfo.clearColor.b, attachmentInfo.clearColor.a);
+                    break;
+
+                case wgpu::LoadOp::Load:
+                    descriptor.colorAttachments[i].loadAction = MTLLoadActionLoad;
+                    break;
+
+                case wgpu::LoadOp::Undefined:
+                    DAWN_UNREACHABLE();
+                    break;
+            }
+
+            auto storageAttachment = ToBackend(attachmentInfo.storage)->GetAttachmentInfo();
+            descriptor.colorAttachments[i].texture = storageAttachment.texture.Get();
+            descriptor.colorAttachments[i].level = storageAttachment.baseMipLevel;
+            descriptor.colorAttachments[i].slice = storageAttachment.baseArrayLayer;
+
+            switch (attachmentInfo.storeOp) {
+                case wgpu::StoreOp::Store:
+                    descriptor.colorAttachments[i].storeAction = MTLStoreActionStore;
+                    break;
+                case wgpu::StoreOp::Discard:
+                    descriptor.colorAttachments[i].storeAction = MTLStoreActionDontCare;
+                    break;
+                case wgpu::StoreOp::Undefined:
+                    DAWN_UNREACHABLE();
+                    break;
+            }
+        }
+    }
+
     return descriptorRef;
 }
 
