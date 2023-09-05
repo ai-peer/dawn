@@ -140,6 +140,8 @@ AttachmentState::AttachmentState(DeviceBase* device, const RenderPassDescriptor*
     }
     ASSERT(mSampleCount > 0);
 
+    ASSERT(mSampleCount > 0);
+
     SetContentHash(ComputeContentHash());
 }
 
