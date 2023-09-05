@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c712c348_22540ffe",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-05T17:51:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23d75c98_85de172c",
+      "range": {
+        "startLine": 311,
+        "startChar": 16,
+        "endLine": 311,
+        "endChar": 24
+      },
+      "revId": "deaebcc3488f1a40758f09d30c31300de385de0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf3924b0_bd4d826d",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-05T17:39:45Z",
       "side": 1,
       "message": "This is the stream to output too, is it not? This makes it sound like this is purely an out param?",
+      "range": {
+        "startLine": 314,
+        "startChar": 19,
+        "endLine": 314,
+        "endChar": 54
+      },
+      "revId": "deaebcc3488f1a40758f09d30c31300de385de0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a51bce8e_70974650",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-05T17:51:28Z",
+      "side": 1,
+      "message": "Yes, this was copypasta. I fixed the other 36 or so that this was copied from.",
+      "parentUuid": "cf3924b0_bd4d826d",
       "range": {
         "startLine": 314,
         "startChar": 19,
