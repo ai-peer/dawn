@@ -51,6 +51,24 @@
       "parentUuid": "5e6f721c_aa76d425",
       "revId": "e946b462339da616a7c22b61db276f2c955e07e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cb40beb_5f86a212",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-05T12:57:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1e4bf5a7_8e62c07d",
+      "revId": "e946b462339da616a7c22b61db276f2c955e07e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
