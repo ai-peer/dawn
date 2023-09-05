@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0cdafc7_e09f0ac1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-05T12:37:37Z",
+      "side": 1,
+      "message": "Force submitting, as clang-format is broken with partial file spans - it aligns comments with the wrong section.\nRunning `./tools/format` gives you this CL.",
+      "revId": "2605c001a944cb7adc7b0901abe30c512917e3f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
