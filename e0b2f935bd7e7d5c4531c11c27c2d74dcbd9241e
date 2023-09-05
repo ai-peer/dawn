@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a69361c5_5f0b02d0",
+        "filename": "src/tint/lang/spirv/writer/texture_builtin_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1341,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-05T13:26:35Z",
+      "side": 0,
+      "message": "Why was this removed? Looks like the coordinate count is wrong, but otherwise this should work.",
+      "revId": "e0b2f935bd7e7d5c4531c11c27c2d74dcbd9241e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
