@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2c82179b_f5838602",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-05T17:46:16Z",
+      "side": 1,
+      "message": "```suggestion\nconst isWindows \u003d navigator.userAgent.includes(\"Windows\");\n```\n\nmore readable",
+      "revId": "70da3144e2f02c5ba967ca1b7d43b625f5de320d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "594868cd_158ca4c6",
         "filename": "webgpu-cts/test_runner.js",
         "patchSetId": 1
