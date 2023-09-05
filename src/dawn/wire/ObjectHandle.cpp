@@ -16,7 +16,7 @@
 
 namespace dawn::wire {
 
-ObjectHandle::ObjectHandle() = default;
+ObjectHandle::ObjectHandle(std::nullopt_t) {}
 ObjectHandle::ObjectHandle(ObjectId id, ObjectGeneration generation)
     : id(id), generation(generation) {}
 
