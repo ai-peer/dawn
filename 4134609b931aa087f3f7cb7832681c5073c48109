@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12590a80_fd8d3b26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T16:42:49Z",
+      "side": 1,
+      "message": "lgtm w/ nit.",
+      "revId": "4134609b931aa087f3f7cb7832681c5073c48109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf065849_6e2aa9ba",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T16:42:49Z",
+      "side": 1,
+      "message": "```suggestion\n    set TEST_FORMATS\u003dwgsl,spvasm,msl,hlsl\n```\n\nThis is just a list of formats, but isn\u0027t all the formats.",
+      "revId": "4134609b931aa087f3f7cb7832681c5073c48109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
