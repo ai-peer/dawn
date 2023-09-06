@@ -50,6 +50,24 @@
       "message": "I have a slight concern that this means that code using texture\u0027s GetWidth/Height/Size needs to opt-into doing the size reduction. This is bug-prone. Instead the texture\u0027s getters should all take an Aspect and apply the reduction if needed (It is indeed a much larger change in Dawn, probably needs helpers on texture views as well to avoid passing aspects manually literally everywhere)",
       "revId": "7431c9d182e23dd3e2c5abb957e47445911d16e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e92f497c_737f2ff4",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 157,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-09-06T05:05:17Z",
+      "side": 1,
+      "message": "noted. I will create a following up patch to add aspect to Texture\u0027s size getters.",
+      "parentUuid": "30cb9281_88f6cbc4",
+      "revId": "7431c9d182e23dd3e2c5abb957e47445911d16e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
