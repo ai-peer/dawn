@@ -299,6 +299,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60a0b344_69026f30",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 40
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "https://crbug.com/dawn/2035",
+      "parentUuid": "e983a826_1105f2dc",
+      "revId": "5a4a925c6ebc356b09f77b9388ed74545732acb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82da4b98_635ed959",

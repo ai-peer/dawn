@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ddb6f9_66d80159",
+        "filename": "dawn.json",
+        "patchSetId": 48
+      },
+      "lineNbr": 1958,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "It\u0027s a function argument, so the name is mostly invisible to the user, but renaming it to match the other argument makes sense. Done, and done in the design doc too.\n\nIt can\u0027t have a default because there are required args after it.",
+      "parentUuid": "640e6f5e_2f4102bd",
+      "range": {
+        "startLine": 1958,
+        "startChar": 20,
+        "endLine": 1958,
+        "endChar": 56
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4196ffe_fbbadee0",
@@ -98,6 +122,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47becf75_98701be1",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 2059,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "779cba67_e9aa4efc",
+      "range": {
+        "startLine": 2059,
+        "startChar": 28,
+        "endLine": 2059,
+        "endChar": 32
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aee944e_b8fa84eb",
@@ -111,6 +159,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "nit: unnecessary parens\n\n```suggestion\n        DeviceBase* waitDevice \u003d futures[sliceStart].event-\u003eGetWaitDevice();\n```",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 78
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d15ff5a8_61a01d75",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2aee944e_b8fa84eb",
       "range": {
         "startLine": 50,
         "startChar": 0,
@@ -138,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "051edbe5_f4abdfe5",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eb9ba4b_bd1b0b98",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c671bd18_fa9d8e79",
@@ -151,6 +241,30 @@
       "writtenOn": "2023-09-05T23:30:42Z",
       "side": 1,
       "message": "Hmm.. now that I see the handling/logic here, I do feel like just having the explicit modes instead of flags could be simpler? It would also allow for a `switch/case` here which is a bit easier to read. Not too partial about it though?",
+      "range": {
+        "startLine": 89,
+        "startChar": 4,
+        "endLine": 92,
+        "endChar": 0
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7f02808_9d0eaddc",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "This is a fair point. I originally was going to return a future for everything but decided it was unnecessarily difficult to do so alongside ProcessEvents.\n\nI\u0027ll change our implementation to convert this to an enum first for clearer logic.\nIMO let\u0027s leave the API side of this as a followup for the moment. Left a comment here:\nhttps://docs.google.com/document/d/1qJRTJRY318ZEqhK6ryw4P-91FumYQfOnNP6LpANYy6A/edit?pli\u003d1\u0026disco\u003dAAAA4rhkko0",
+      "parentUuid": "c671bd18_fa9d8e79",
       "range": {
         "startLine": 89,
         "startChar": 4,
@@ -184,6 +298,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "37025eac_db3efc71",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Good catch. I think I used to have some logic where this was a problem because I stored the future id into the TrackedFuture. I think it\u0027s fine now. Done.",
+      "parentUuid": "bd9ac57d_5cd27497",
+      "range": {
+        "startLine": 97,
+        "startChar": 12,
+        "endLine": 99,
+        "endChar": 25
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f721eaa_739fc92f",
@@ -197,6 +335,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "if the mode is Future | ProcessEvents, we don\u0027t track it in `mTrackedPollEvents`\n\nis that correct?",
+      "range": {
+        "startLine": 103,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 33
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd090268_eb9e6ed5",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "`Future | ProcessEvents` is not allowed by AssertValidCallbackMode. Made this clearer.",
+      "parentUuid": "2f721eaa_739fc92f",
       "range": {
         "startLine": 103,
         "startChar": 0,
@@ -224,6 +386,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb881c7d_0192a860",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Obsolete thanks to Austin\u0027s comment.",
+      "parentUuid": "2d35aaa7_280e2bec",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef0dde5e_1ad552b0",
@@ -247,6 +427,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cf18392_949208a6",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Not really. The comment is enough.",
+      "parentUuid": "ef0dde5e_1ad552b0",
+      "range": {
+        "startLine": 109,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 26
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4858eaa9_a2fdb64c",
@@ -260,6 +464,30 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "nit: kInvalidFuture?",
+      "range": {
+        "startLine": 110,
+        "startChar": 15,
+        "endLine": 110,
+        "endChar": 16
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e80760c5_a4c0f4f5",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4858eaa9_a2fdb64c",
       "range": {
         "startLine": 110,
         "startChar": 15,
@@ -345,6 +573,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea6ecdb1_e3085327",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3c9d76e_539e58d4",
+      "range": {
+        "startLine": 205,
+        "startChar": 0,
+        "endLine": 205,
+        "endChar": 5
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "528cd190_68bb9e68",
@@ -358,6 +610,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "EnsureCompleteFromWaitAny calls callbacks. Should we set the completed bit first? that way if the caller checks the info inside the callback, they see it is done",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 221,
+        "endChar": 0
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "134cc24c_c9e220be",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "I hadn\u0027t thought of a good reason to do this one way or the other, but this is a good reason. I\u0027ll write it in the design doc too.",
+      "parentUuid": "528cd190_68bb9e68",
       "range": {
         "startLine": 219,
         "startChar": 0,
@@ -385,6 +661,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09add622_97c850f9",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "I don\u0027t think it\u0027s possible to put `[[nodiscard]]` on a typedef/`using`. It might work (in debug builds) if FutureID were a TypedInteger though it would be a bit of a pain to wire through.\n\nWaitStatus is generated in webgpu_cpp.h, so I added a TODO in dawn.json.",
+      "parentUuid": "a1ddb061_05a8072b",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0deb08dd_49ddd3ed",
@@ -398,6 +692,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "nit: maybe just CHECK(status \u003e\u003d 0) and fold the UNLIKELY into the CHECK ?",
+      "range": {
+        "startLine": 37,
+        "startChar": 4,
+        "endLine": 39,
+        "endChar": 5
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1da5bee4_1c278937",
+        "filename": "src/dawn/native/OSEventPipe.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0deb08dd_49ddd3ed",
       "range": {
         "startLine": 37,
         "startChar": 4,
@@ -433,6 +751,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a2f0659_aef06347",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "It\u0027s actually passed by value, not by pointer, in the C API. Do you think it should be passed by pointer? Or change this plumbing to use a value instead of a reference?\n(cwfitzgerald has expressed a general preference for passing small structs by value; here in particular, passing by value is more similar to what we would do without the struct, just pass 4 function arguments.)",
+      "parentUuid": "6a776785_c1b388ff",
+      "range": {
+        "startLine": 65,
+        "startChar": 74,
+        "endLine": 65,
+        "endChar": 75
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4391cbea_5b7e7acc",
         "filename": "src/dawn/native/Queue.h",
         "patchSetId": 48
@@ -444,6 +786,24 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "u-nit: put in the .cpp?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "416dcd25_7e9a4e2d",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4391cbea_5b7e7acc",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -471,6 +831,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "18a9b9da_dea601cc",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1acdb73_2d42b4d8",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 41,
+        "endChar": 1
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "351044f7_b6e6ed16",
@@ -484,6 +868,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "not used",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 46,
+        "endChar": 0
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f47a0037_f9368d1f",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "351044f7_b6e6ed16",
       "range": {
         "startLine": 43,
         "startChar": 2,
@@ -524,6 +932,24 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "nit: Can be declared just when needed.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb261c17_f96d1a4d",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f9bff76_3bf757de",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -608,6 +1034,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44fd92ec_27664d1b",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15ef2882_354dd201",
+      "range": {
+        "startLine": 52,
+        "startChar": 43,
+        "endLine": 52,
+        "endChar": 50
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52619914_0f581e3f",
@@ -648,6 +1098,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5050735_ab01e0f3",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "These are used in EventManager. Added comments.",
+      "parentUuid": "9cec4862_b044840b",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2f6213c_f8cf5dfd",
@@ -671,6 +1139,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60042c23_218b1294",
+        "filename": "src/dawn/native/metal/QueueMTL.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2f6213c_f8cf5dfd",
+      "range": {
+        "startLine": 74,
+        "startChar": 12,
+        "endLine": 74,
+        "endChar": 19
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6e24aa9_4d1596cd",
@@ -684,6 +1176,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "nit: use MutexProtected",
+      "range": {
+        "startLine": 77,
+        "startChar": 4,
+        "endLine": 78,
+        "endChar": 61
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd2174e5_8d283ba0",
+        "filename": "src/dawn/native/metal/QueueMTL.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6e24aa9_4d1596cd",
       "range": {
         "startLine": 77,
         "startChar": 4,
@@ -821,6 +1337,24 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "nit: stray include?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99932c2c_21a2e65b",
+        "filename": "src/dawn/wire/client/RequestTracker.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1584af16_36f0d8ea",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

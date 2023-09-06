@@ -22,6 +22,30 @@
       },
       "revId": "d9e4049ec16cb93b4d0f8174c02df01e91926ed0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b82db501_898ab7d4",
+        "filename": "src/dawn/native/OSEventPipe.cpp",
+        "patchSetId": 46
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T01:52:02Z",
+      "side": 1,
+      "message": "Done. AFAICT on Fuchsia we assume the presence of POSIX though. I assume Fuchsia has a userspace POSIX implementation over Zircon or something? But anyway better to have an error.",
+      "parentUuid": "751f7943_4d5ba9c5",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 5
+      },
+      "revId": "d9e4049ec16cb93b4d0f8174c02df01e91926ed0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
