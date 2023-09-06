@@ -82,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb1c35bf_d88b09e5",
+        "filename": "generator/templates/dawn/wire/client/ApiProcs.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "This is a tiny change, so just did it now.",
+      "parentUuid": "a4196ffe_fbbadee0",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f149e26_271bc03d",
@@ -95,6 +113,24 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "There\u0027s a lot of cases which are ASSERTs in the API contract instead of validation errors. Don\u0027t we want to properly define them so that there is less footguns / crashes? Or since this is not Web-exposed, we can afford to be more lenient?",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6c32ae9_a805854b",
+        "filename": "src/dawn/common/FutureUtils.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "I don\u0027t know for sure. Having error reporting for every single possible error is kind of onerous. For example, if you pass bogus CallbackMode flags, what\u0027s a reasonable thing to happen? Call the callback immediately with an Unknown status (ignoring the flags) [a]? Make a best guess at how it was meant to be called (immediate or ProcessEvents or WaitAny) and call it then with Unknown? Never call it but return a failure status some other way?\n\nI partly left it UB because if we really want to tighten it up later we can define the behavior and do something. I\u0027d propose [a] if we do. But ASSERTs also seem more friendly to developers. Passing bogus flags seems almost as silly as, like, `wgpuDeviceCreateTexture(nullptr, desc)`, except that two different webgpu.h implementations could support a different set of flags. For that we should have better feature detection via GetInstanceFeatures.",
+      "parentUuid": "9f149e26_271bc03d",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -517,6 +553,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92c920d9_b833477b",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "It\u0027s not always possible. If it\u0027s backed by an OS event, the only way to find out it\u0027s ready is to poll it. There are a lot of possible optimizations, but I don\u0027t want to do them yet:\n- Only pay attention to the earliest serial on each queue.\n- Spontaneously set events as \"early-ready\" in other places when we see serials advance, e.g. Submit, checking a later wait before an earlier wait.\n- Once we have thread-driven events (async pipeline compilation), defer tracking it for ProcessEvents until the event is already completed.\n\nI\u0027ve written all this out in a TODO.",
+      "parentUuid": "39a74335_5ab31e96",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c3f72c1_587fae99",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 48
@@ -921,6 +975,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "53a9e882_23904d1c",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "I\u0027ll try to move this in the next patchset.",
+      "parentUuid": "58961269_bc48c0e3",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8f9bff76_3bf757de",
         "filename": "src/dawn/native/TrackedEvent.cpp",
         "patchSetId": 48
@@ -1018,6 +1090,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce957cfd_3c1399d5",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cd2b495_9b754c94",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d19eeda_04d58ef7",
@@ -1049,6 +1139,24 @@
       "side": 1,
       "message": "I somewhat prefer the two methods because otherwise mCallbackMode is currently `protected`. I could make it unprotected (and therefore mutable) or replace these two methods with a GetCallbackMode method which doesn\u0027t seem like a great tradeoff.",
       "parentUuid": "9d19eeda_04d58ef7",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35e03a81_bedddbec",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "Maybe I can move this to an inner class of EventManager, like in the wire. I thought this class would be more widely used but it turns out that probably makes more sense.",
+      "parentUuid": "7f1f598c_5957f1b4",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1113,6 +1221,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "Overall, I\u0027m wondering if TrackedEvent should store OSEventReceiver, or it would be better to store some object with virtual methods from which you can get an OSEventReceiver/Primitive.\n\nThen, we do not need to pay the cost of making pipes / Win32 events in poll-only mode. We can also defer making the pipe/event until we really need it - which allows the already-signaled case to make nothing at all.\n\nI guess it is just an optimization though and could be left as a TODO",
+      "range": {
+        "startLine": 76,
+        "startChar": 0,
+        "endLine": 76,
+        "endChar": 30
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "668a3522_0da4d59f",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "Added TODO",
+      "parentUuid": "52619914_0f581e3f",
       "range": {
         "startLine": 76,
         "startChar": 0,
@@ -1271,6 +1403,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "283dfb7a_e15e7d28",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand the goal. Wouldn\u0027t this result in more pipes in most cases? Seems like we should try to cut down on the number of pipes (maybe even lower than this). See also the comment I added in native/TrackedEvent.h about optimizing.",
+      "parentUuid": "06ef2884_9081830f",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81844c90_bc1f73ba",
         "filename": "src/dawn/wire/client/Client.h",
         "patchSetId": 48
@@ -1282,6 +1432,24 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "u-nit: Can be in the .cpp",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10fafeee_1421d478",
+        "filename": "src/dawn/wire/client/Client.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "81844c90_bc1f73ba",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1305,6 +1473,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "086c37d0_fdb78284",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "I think I prefer the code I\u0027ve written because it clearly names the bool variable. Otherwise I find it kind of hard to follow the logic when I\u0027m embedding so much logic inside of erase_if.",
+      "parentUuid": "5879b58d_8e5ee5ad",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f7833e17_d19c739b",
         "filename": "src/dawn/wire/client/EventManager.cpp",
         "patchSetId": 48
@@ -1316,6 +1502,24 @@
       "writtenOn": "2023-09-04T13:42:03Z",
       "side": 1,
       "message": "u-nit: we could early continue to dedent. Likewise for !event.mReady.",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6040098c_54bedfb1",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "Done, flattened the first one but not the second one. Found it weird to say:\n\n```\nif (...) { completed \u003d true; continue; }\nif (...) { completed \u003d false; continue; }\ncompleted \u003d true;\n````",
+      "parentUuid": "f7833e17_d19c739b",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -1343,6 +1547,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e8dba4c_5c800e16",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "Ugh. I ended up with a lot of these stray includes because I kept moving code around.",
+      "parentUuid": "9759ed10_f1adf157",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 18,
+        "endChar": 18
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cfebfbab_5fc4318b",
@@ -1356,6 +1584,30 @@
       "writtenOn": "2023-09-05T22:48:04Z",
       "side": 1,
       "message": "static_cast should work\n\n```suggestion\n             auto* lambda \u003d static_cast\u003cLambda*\u003e(userdata);\n```",
+      "range": {
+        "startLine": 71,
+        "startChar": 28,
+        "endLine": 71,
+        "endChar": 44
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c713275_937e7609",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T04:38:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cfebfbab_5fc4318b",
       "range": {
         "startLine": 71,
         "startChar": 28,
