@@ -33,6 +33,24 @@
       "message": "LGTM if Antonio thinks this is ok\n\nhe requested in chat to avoid expectations updates for a bit",
       "revId": "7fd8bb7b58ce24c412b820dbbc2172c6a49fba9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58057be8_7fe66860",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-06T17:04:18Z",
+      "side": 1,
+      "message": "Yeah, if we don\u0027t mind just waiting for the manual CTS into Dawn roll I launched to complete, I would appreciate it.",
+      "parentUuid": "8202a863_e19c2908",
+      "revId": "7fd8bb7b58ce24c412b820dbbc2172c6a49fba9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
