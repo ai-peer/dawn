@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08b8140c_30493167",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T17:36:56Z",
+      "side": 1,
+      "message": "LGTM - I\u0027m surprised we didn\u0027t have this already for ASSERT.",
+      "revId": "46512ae26cb5974a3c9a245970ea0bd092dbe456",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
