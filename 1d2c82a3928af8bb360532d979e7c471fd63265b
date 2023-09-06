@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b038632e_da4c1cc3",
+        "filename": "src/tint/lang/spirv/ir/intrinsic.cc.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 22,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T15:15:31Z",
+      "side": 1,
+      "message": "So, there is no way to remove the declaration from the header file, which means if I remove this we have a `ParseIntrinsic` in the header, but no implementation which ... is bleh. So, leaving this for now. This whole file will go away once we get shifted over to builtins for these.",
+      "parentUuid": "2d175f93_b5ae8398",
+      "revId": "1d2c82a3928af8bb360532d979e7c471fd63265b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "254bdeec_9c893067",
         "filename": "src/tint/lang/spirv/ir/intrinsic.h",
         "patchSetId": 1
@@ -101,6 +119,30 @@
       "writtenOn": "2023-09-06T15:05:00Z",
       "side": 1,
       "message": "No action needed here, but we don\u0027t actually need these strings. Hopefully compilers are smart enough to optimize them out, but it\u0027d be nice if we had a way of telling the generator to not emit them.",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 2
+      },
+      "revId": "1d2c82a3928af8bb360532d979e7c471fd63265b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de6bcb10_d781a526",
+        "filename": "src/tint/lang/spirv/ir/intrinsic.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T15:15:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "254bdeec_9c893067",
       "range": {
         "startLine": 83,
         "startChar": 0,
