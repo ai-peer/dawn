@@ -50,6 +50,23 @@
       "message": "Not needed",
       "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be4d5fda_cf6c52d8",
+        "filename": "src/tint/lang/spirv/ir/spirv.def",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T16:35:45Z",
+      "side": 1,
+      "message": "drop must_use and const",
+      "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
