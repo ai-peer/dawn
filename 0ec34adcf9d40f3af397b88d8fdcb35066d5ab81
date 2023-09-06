@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "0ec34adcf9d40f3af397b88d8fdcb35066d5ab81",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fb394b0_4349fdc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-06T21:57:26Z",
+      "side": 1,
+      "message": "Spot on.\nI considered the `Context` struct (but didn\u0027t mention it), and you implemented exactly what I had imagined. Ace.",
+      "revId": "0ec34adcf9d40f3af397b88d8fdcb35066d5ab81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
