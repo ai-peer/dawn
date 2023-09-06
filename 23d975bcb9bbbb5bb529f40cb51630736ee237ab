@@ -1,0 +1,135 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3018637a_d1e1dcf6",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:44:26Z",
+      "side": 1,
+      "message": "nit: this is always true because depthSlice is an unsigned integer.",
+      "range": {
+        "startLine": 1282,
+        "startChar": 11,
+        "endLine": 1282,
+        "endChar": 29
+      },
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "359482e5_977203fb",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:44:26Z",
+      "side": 1,
+      "message": "nit: maybe we could pass in the depth slice into this call and make the logic live inside TextureView? This way if we use GetRTVDescriptor somewhere else we\u0027ll know to handle a depthSlice.",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "412e7e2b_cd23dcec",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:44:26Z",
+      "side": 1,
+      "message": "nit: we can set this unconditionnally since it is validated to be 0 for 2D textures. Ditto in other backends we can in most cases skip the check for 3D textures and just pass the depthSlice or do baseArrayLayer + depthSlice.",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d886b72_748db565",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:44:26Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 604,
+        "startChar": 11,
+        "endLine": 604,
+        "endChar": 29
+      },
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "641955b6_e1708d9f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:44:26Z",
+      "side": 1,
+      "message": "Could we factor this code with the similar code in Initialize?",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ddecc08_9343d08b",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:44:26Z",
+      "side": 1,
+      "message": "Unordered map for something like this seem pretty expensive. Maybe we could have an std::vector\u003cVkImageView\u003e and the first time a view on a 3D texture is requested we resize it to the depth of the base mip level. It is likely that if a single plane of a 3D texture is rendered, then most planes will.",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0d3be36_56874d59",
+        "filename": "src/dawn/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:44:26Z",
+      "side": 1,
+      "message": "nit: small comment describing the test.",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
