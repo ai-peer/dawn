@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "1d2c82a3928af8bb360532d979e7c471fd63265b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2dec8bc_f3f255c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-06T10:50:09Z",
+      "side": 1,
+      "message": "A +1 for removing SPIR-V stuff from the core language, but I think longer term we want to replace the use of `IntrinsicCall` with intrinsic table functions (`fn`) so you get overload validation.\n\nWith per-language definition files, I\u0027m not entirely sure we need `InstrinsicCall` any more.",
+      "revId": "1d2c82a3928af8bb360532d979e7c471fd63265b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
