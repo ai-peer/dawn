@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a442178c_16524f90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 54
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T21:27:58Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6e590f3a5e1f47065e88460177549eda8a41de44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9cb5a103_0b5e6129",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 54
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T21:27:58Z",
+      "side": 1,
+      "message": "nit: unused",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 0
+      },
+      "revId": "6e590f3a5e1f47065e88460177549eda8a41de44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "668ac6b6_45db2d21",
+        "filename": "src/dawn/tests/end2end/WaitAnyTests.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T21:27:58Z",
+      "side": 1,
+      "message": "nit: could use the max value reported from the instance here - as well as configure it to a lower value",
+      "range": {
+        "startLine": 89,
+        "startChar": 26,
+        "endLine": 89,
+        "endChar": 33
+      },
+      "revId": "6e590f3a5e1f47065e88460177549eda8a41de44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
