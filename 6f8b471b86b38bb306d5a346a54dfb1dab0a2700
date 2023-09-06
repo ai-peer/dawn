@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d1f5f7_4b92a29d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:34:18Z",
+      "side": 1,
+      "message": "Looks good overall, one small comment.",
+      "revId": "6f8b471b86b38bb306d5a346a54dfb1dab0a2700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e73ba189_593fae66",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-06T08:34:18Z",
+      "side": 1,
+      "message": "We could use Unknown to tag that there is no preference. Right now I believe the samples will start to fail on devices with only an integrated GPU.",
+      "range": {
+        "startLine": 94,
+        "startChar": 58,
+        "endLine": 94,
+        "endChar": 69
+      },
+      "revId": "6f8b471b86b38bb306d5a346a54dfb1dab0a2700",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
