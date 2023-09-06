@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2404c04_30a8d4dd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T17:33:14Z",
+      "side": 1,
+      "message": "LGTM - but I\u0027ll let lehoangquyen@ have another look",
+      "revId": "5bbe6c592d837c4839e0dbb9521f705eafbea3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a3d2b2_8b5b00b2",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T17:33:14Z",
+      "side": 1,
+      "message": "uuunit:\n\n```suggestion\n                                \"storageAttachments[%i].clearValue (%s) contains a NaN.\", i,\n```\n\nI think because the message references just one clearValue, the verb should be singular",
+      "range": {
+        "startLine": 647,
+        "startChar": 72,
+        "endLine": 647,
+        "endChar": 79
+      },
+      "revId": "5bbe6c592d837c4839e0dbb9521f705eafbea3d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

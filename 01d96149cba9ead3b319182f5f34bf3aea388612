@@ -602,6 +602,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0de6d08c_4e1fdf6c",
+        "filename": "src/dawn/native/PipelineLayout.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T17:33:14Z",
+      "side": 1,
+      "message": "you\u0027re right it\u0027s probably not super important",
+      "parentUuid": "73b03a77_0d967e19",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 61
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e96a3fc_82fb5185",
@@ -733,6 +757,30 @@
       "side": 1,
       "message": "Could you detail a bit more? I have trouble understanding what concrete changes I should make.",
       "parentUuid": "a34b414c_7d731b37",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 63
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f52c6eb1_a7612d73",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T17:33:14Z",
+      "side": 1,
+      "message": "\u003e Do we need to test both extensions?\n\nI don\u0027t think it\u0027s necessary to test stuff like validation against limits or that multi-subresource views are invalid with both extensions.\n\nI think it would be useful to have just one basic validation test that says \"using PLS is allowed if you enable either PixelLocalStorageNonCoherent OR PixelLocalStorageCoherent\"\n\nok as a follow-up too",
+      "parentUuid": "e74e9c38_5cd73e6d",
       "range": {
         "startLine": 126,
         "startChar": 0,
