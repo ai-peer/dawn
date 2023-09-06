@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74cd917f_13838e9c",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 3
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-06T00:00:52Z",
+      "side": 1,
+      "message": "Note that with the user-agent information reduction ongoing in Chromium, at some point the user-agent string will report \"Windows\" as the OS on all platforms. See crbug.com/1175225 , crbug.com/955620 , and duplicate bugs of the latter.",
+      "revId": "8a15bb12b0be03d9850cb59a2d16ec5deb066189",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
