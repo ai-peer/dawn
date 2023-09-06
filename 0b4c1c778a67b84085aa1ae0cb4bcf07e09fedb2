@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13101414_d68b822b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003733
+      },
+      "writtenOn": "2023-09-06T19:28:58Z",
+      "side": 1,
+      "message": "@enga@chromium.org \nI am wondering if we need your \"Kokoro +1\" like last time (https://dawn-review.googlesource.com/c/dawn/+/145900).\nThanks!",
+      "revId": "0b4c1c778a67b84085aa1ae0cb4bcf07e09fedb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
