@@ -77,6 +77,7 @@ data/webgpu/shader/execution/case-cache/unpack2x16snorm.json
 data/webgpu/shader/execution/case-cache/unpack2x16unorm.json
 data/webgpu/shader/execution/case-cache/unpack4x8snorm.json
 data/webgpu/shader/execution/case-cache/unpack4x8unorm.json
+data/webgpu/shader/execution/case-cache/unary/af_arithmetic.json
 data/webgpu/shader/execution/case-cache/unary/af_assignment.json
 data/webgpu/shader/execution/case-cache/unary/bool_conversion.json
 data/webgpu/shader/execution/case-cache/unary/f32_arithmetic.json
