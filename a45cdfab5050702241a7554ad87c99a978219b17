@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ec16d30_b1ba553b",
+        "filename": "src/tint/lang/spirv/ir/function.h.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T17:01:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7eb15729_83412074",
+      "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b902fdeb_26d3eea6",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-06T16:16:54Z",
       "side": 1,
       "message": "Not needed",
+      "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f91f93_a60721bc",
+        "filename": "src/tint/lang/spirv/ir/function.h.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T17:01:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b902fdeb_26d3eea6",
       "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47de471d_6461df48",
+        "filename": "src/tint/lang/spirv/ir/spirv.def",
+        "patchSetId": 3
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T17:01:15Z",
+      "side": 1,
+      "message": "Done, added a todo for crbug.com/2036 which is for include support.",
+      "parentUuid": "80dec1f8_cbd14942",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 0
+      },
+      "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be4d5fda_cf6c52d8",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-09-06T16:35:45Z",
       "side": 1,
       "message": "drop must_use and const",
+      "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c77ecf5_c097c17a",
+        "filename": "src/tint/lang/spirv/ir/spirv.def",
+        "patchSetId": 3
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T17:01:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "be4d5fda_cf6c52d8",
       "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
