@@ -16,6 +16,24 @@
       "message": "@enga@chromium.org \nI am wondering if we need your \"Kokoro +1\" like last time (https://dawn-review.googlesource.com/c/dawn/+/145900).\nThanks!",
       "revId": "0b4c1c778a67b84085aa1ae0cb4bcf07e09fedb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5efaedf8_a8ad8995",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T19:29:51Z",
+      "side": 1,
+      "message": "no, Kokoro is overriden \n\nOverride condition:\nuploader:dawn-autoroll@skia-public.iam.gserviceaccount.com OR uploader:chrome-automated-expectation@chops-service-accounts.iam.gserviceaccount.com OR uploader:chrome-branch-day@chops-service-accounts.iam.gserviceaccount.com",
+      "parentUuid": "13101414_d68b822b",
+      "revId": "0b4c1c778a67b84085aa1ae0cb4bcf07e09fedb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
