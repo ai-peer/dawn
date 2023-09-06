@@ -33,6 +33,23 @@
       "message": "Post-weekend review ping?",
       "revId": "2c8d7a0ebdb9513df9a83d8e3876e5984e5370a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7ab384b_fd9d6162",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-06T15:22:37Z",
+      "side": 1,
+      "message": "Yay, nice.\nI hoped this would be possible.  :-)\nThank you for following up!",
+      "revId": "2c8d7a0ebdb9513df9a83d8e3876e5984e5370a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
