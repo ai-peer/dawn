@@ -69,6 +69,24 @@
       "parentUuid": "27cf7ea4_3c0c10a6",
       "revId": "4134609b931aa087f3f7cb7832681c5073c48109",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8eed280_d485593d",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-06T17:01:48Z",
+      "side": 1,
+      "message": "I misunderstood your original point and suggestion. The reason for the name is that the script is called `test-all` so these are the formats we\u0027re passing to `test-all`. But I totally agree that it\u0027s confusing. We can follow up with a rename.",
+      "parentUuid": "0c630364_85d03c92",
+      "revId": "4134609b931aa087f3f7cb7832681c5073c48109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
