@@ -991,6 +991,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf9cd53d_734aef93",
+        "filename": "src/dawn/native/TrackedEvent.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T05:07:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "53a9e882_23904d1c",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8f9bff76_3bf757de",
@@ -1157,6 +1175,24 @@
       "side": 1,
       "message": "Maybe I can move this to an inner class of EventManager, like in the wire. I thought this class would be more widely used but it turns out that probably makes more sense.",
       "parentUuid": "7f1f598c_5957f1b4",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "242612bc_893a90c4",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-06T05:07:34Z",
+      "side": 1,
+      "message": "It\u0027s a bit hefty but I\u0027ve moved it in the latest patchset (52-\u003e53). Could be undone if it\u0027s too much.",
+      "parentUuid": "35e03a81_bedddbec",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
