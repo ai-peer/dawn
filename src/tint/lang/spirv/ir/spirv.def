@@ -16,9 +16,18 @@
 // Spirv builtin definition file                                              //
 ////////////////////////////////////////////////////////////////////////////////
 
+match f32_f16: f32 | f16
+
 ////////////////////////////////////////////////////////////////////////////////
 // Enumerators                                                                //
 ////////////////////////////////////////////////////////////////////////////////
+
+type f32
+type f16
+type vec2<T>
+type vec3<T>
+type vec4<T>
+@display("vec{N}<{T}>")     type vec<N: num, T>
 
 enum intrinsic {
   array_length
@@ -52,5 +61,10 @@ enum intrinsic {
   sampled_image
   select
   vector_times_matrix
-  vector_times_scalar
 }
+
+////////////////////////////////////////////////////////////////////////////////
+// Builtin Functions                                                          //
+////////////////////////////////////////////////////////////////////////////////
+@must_use @const fn vector_times_scalar<T: f32_f16, N: num>(vec<N, T>, T) -> vec<N, T>
+
