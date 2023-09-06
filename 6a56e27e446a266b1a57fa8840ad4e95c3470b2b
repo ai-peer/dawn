@@ -16,6 +16,24 @@
       "message": "Note, this is what causes the test changes, we emited `ExplicitLod` as `implicit_lod`.",
       "revId": "6a56e27e446a266b1a57fa8840ad4e95c3470b2b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2997851a_3e65499a",
+        "filename": "src/tint/lang/core/ir/intrinsic_call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-06T15:05:00Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "42276f1c_2cd73dc7",
+      "revId": "6a56e27e446a266b1a57fa8840ad4e95c3470b2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
