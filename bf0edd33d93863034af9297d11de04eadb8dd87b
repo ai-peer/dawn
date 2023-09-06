@@ -131,7 +131,7 @@
         },
         "overrideExpression": {
           "value": {
-            "expressionString": "uploader:dawn-autoroll@skia-public.iam.gserviceaccount.com OR uploader:chrome-automated-expectation@chops-service-accounts.iam.gserviceaccount.com"
+            "expressionString": "uploader:dawn-autoroll@skia-public.iam.gserviceaccount.com OR uploader:chrome-automated-expectation@chops-service-accounts.iam.gserviceaccount.com OR uploader:chrome-branch-day@chops-service-accounts.iam.gserviceaccount.com"
           }
         },
         "allowOverrideInChildProjects": true
@@ -141,7 +141,7 @@
         "value": {"expression":{"expressionString":"label:Kokoro=MAX AND -label:Kokoro=MIN"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":["label:Kokoro=MIN"],"failingAtoms":["label:Kokoro=MAX"]}
       },
       "overrideExpressionResult": {
-        "value": {"expression":{"expressionString":"uploader:dawn-autoroll@skia-public.iam.gserviceaccount.com OR uploader:chrome-automated-expectation@chops-service-accounts.iam.gserviceaccount.com"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["uploader:dawn-autoroll@skia-public.iam.gserviceaccount.com","uploader:chrome-automated-expectation@chops-service-accounts.iam.gserviceaccount.com"]}
+        "value": {"expression":{"expressionString":"uploader:dawn-autoroll@skia-public.iam.gserviceaccount.com OR uploader:chrome-automated-expectation@chops-service-accounts.iam.gserviceaccount.com OR uploader:chrome-branch-day@chops-service-accounts.iam.gserviceaccount.com"},"status":"FAIL","errorMessage":{"value":null},"passingAtoms":[],"failingAtoms":["uploader:dawn-autoroll@skia-public.iam.gserviceaccount.com","uploader:chrome-automated-expectation@chops-service-accounts.iam.gserviceaccount.com","uploader:chrome-branch-day@chops-service-accounts.iam.gserviceaccount.com"]}
       },
       "patchSetCommitId": "bf0edd33d93863034af9297d11de04eadb8dd87b",
       "legacy": {
