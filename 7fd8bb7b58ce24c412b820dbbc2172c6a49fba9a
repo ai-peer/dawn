@@ -16,6 +16,23 @@
       "message": "PTAL! Depending on what happens with https://dawn-review.googlesource.com/c/dawn/+/149940 after the revert gets sorted out I might have to do a messy rebase this one, but review-wise it should be pretty straightforward.",
       "revId": "7fd8bb7b58ce24c412b820dbbc2172c6a49fba9a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8202a863_e19c2908",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-06T16:29:36Z",
+      "side": 1,
+      "message": "LGTM if Antonio thinks this is ok\n\nhe requested in chat to avoid expectations updates for a bit",
+      "revId": "7fd8bb7b58ce24c412b820dbbc2172c6a49fba9a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
