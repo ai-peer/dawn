@@ -738,7 +738,7 @@ crbug.com/dawn/0000 [ dawn-no-backend-validation intel-0x9bc5 target-cpu-32 ] wo
 crbug.com/dawn/0000 [ dawn-no-backend-validation intel-0x9bc5 target-cpu-32 ] worker_webgpu:api,operation,render_pass,storeOp:render_pass_store_op,color_attachment_with_depth_stencil_attachment:colorStoreOperation="store";depthStencilStoreOperation="store" [ RetryOnFailure ]
 
 ################################################################################
-# untriaged DXC failures
+# untriaged DXC failures - TOUCH
 ################################################################################
 crbug.com/tint/0000 [ win10 webgpu-dxc-enabled ] webgpu:shader,execution,expression,binary,bitwise:* [ Failure ]
 crbug.com/tint/0000 [ win10 webgpu-dxc-enabled ] webgpu:shader,execution,expression,binary,bitwise_shift:* [ Failure ]
