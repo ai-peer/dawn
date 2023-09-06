@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eb15729_83412074",
+        "filename": "src/tint/lang/spirv/ir/function.h.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T16:16:54Z",
+      "side": 1,
+      "message": "Not needed",
+      "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b902fdeb_26d3eea6",
+        "filename": "src/tint/lang/spirv/ir/function.h.tmpl",
+        "patchSetId": 3
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-06T16:16:54Z",
+      "side": 1,
+      "message": "Not needed",
+      "revId": "a45cdfab5050702241a7554ad87c99a978219b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
