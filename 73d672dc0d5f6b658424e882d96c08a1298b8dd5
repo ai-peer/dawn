@@ -16,6 +16,24 @@
       "message": "Please can we have both of these as e2e tests? Would be good to check this for the other backends + IR versions.",
       "revId": "73d672dc0d5f6b658424e882d96c08a1298b8dd5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bfa2f21_968a65cf",
+        "filename": "src/tint/lang/spirv/writer/ast_raise/var_for_dynamic_index_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-06T23:05:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cc5ddde_2751857c",
+      "revId": "73d672dc0d5f6b658424e882d96c08a1298b8dd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
