@@ -33,6 +33,24 @@
       "message": "```suggestion\n    set TEST_FORMATS\u003dwgsl,spvasm,msl,hlsl\n```\n\nThis is just a list of formats, but isn\u0027t all the formats.",
       "revId": "4134609b931aa087f3f7cb7832681c5073c48109",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27cf7ea4_3c0c10a6",
+        "filename": "infra/kokoro/windows/build.bat",
+        "patchSetId": 1
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-06T16:54:47Z",
+      "side": 1,
+      "message": "Yeah, I did this because it makes it really clear what is different between the two. If we make this \"all\", then say we add a new format in the future, we\u0027re more likely to notice that it\u0027s not being tested because neither bot will test it.",
+      "parentUuid": "bf065849_6e2aa9ba",
+      "revId": "4134609b931aa087f3f7cb7832681c5073c48109",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
