@@ -1570,14 +1570,14 @@ constexpr TypeMatcher kIu32Matcher {
 /// EnumMatcher for 'match f32_texel_format'
 constexpr NumberMatcher kF32TexelFormatMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    switch (static_cast<TexelFormat>(number.Value())) {
-      case TexelFormat::kBgra8Unorm:
-      case TexelFormat::kRgba8Unorm:
-      case TexelFormat::kRgba8Snorm:
-      case TexelFormat::kRgba16Float:
-      case TexelFormat::kR32Float:
-      case TexelFormat::kRg32Float:
-      case TexelFormat::kRgba32Float:
+    switch (static_cast<core::TexelFormat>(number.Value())) {
+      case core::TexelFormat::kBgra8Unorm:
+      case core::TexelFormat::kRgba8Unorm:
+      case core::TexelFormat::kRgba8Snorm:
+      case core::TexelFormat::kRgba16Float:
+      case core::TexelFormat::kR32Float:
+      case core::TexelFormat::kRg32Float:
+      case core::TexelFormat::kRgba32Float:
         return number;
       default:
         return Number::invalid;
@@ -1591,12 +1591,12 @@ constexpr NumberMatcher kF32TexelFormatMatcher {
 /// EnumMatcher for 'match i32_texel_format'
 constexpr NumberMatcher kI32TexelFormatMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    switch (static_cast<TexelFormat>(number.Value())) {
-      case TexelFormat::kRgba8Sint:
-      case TexelFormat::kRgba16Sint:
-      case TexelFormat::kR32Sint:
-      case TexelFormat::kRg32Sint:
-      case TexelFormat::kRgba32Sint:
+    switch (static_cast<core::TexelFormat>(number.Value())) {
+      case core::TexelFormat::kRgba8Sint:
+      case core::TexelFormat::kRgba16Sint:
+      case core::TexelFormat::kR32Sint:
+      case core::TexelFormat::kRg32Sint:
+      case core::TexelFormat::kRgba32Sint:
         return number;
       default:
         return Number::invalid;
@@ -1610,12 +1610,12 @@ constexpr NumberMatcher kI32TexelFormatMatcher {
 /// EnumMatcher for 'match u32_texel_format'
 constexpr NumberMatcher kU32TexelFormatMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    switch (static_cast<TexelFormat>(number.Value())) {
-      case TexelFormat::kRgba8Uint:
-      case TexelFormat::kRgba16Uint:
-      case TexelFormat::kR32Uint:
-      case TexelFormat::kRg32Uint:
-      case TexelFormat::kRgba32Uint:
+    switch (static_cast<core::TexelFormat>(number.Value())) {
+      case core::TexelFormat::kRgba8Uint:
+      case core::TexelFormat::kRgba16Uint:
+      case core::TexelFormat::kR32Uint:
+      case core::TexelFormat::kRg32Uint:
+      case core::TexelFormat::kRgba32Uint:
         return number;
       default:
         return Number::invalid;
@@ -1629,8 +1629,8 @@ constexpr NumberMatcher kU32TexelFormatMatcher {
 /// EnumMatcher for 'match write'
 constexpr NumberMatcher kWriteMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    if (number.IsAny() || number.Value() == static_cast<uint32_t>(Access::kWrite)) {
-      return Number(static_cast<uint32_t>(Access::kWrite));
+    if (number.IsAny() || number.Value() == static_cast<uint32_t>(core::Access::kWrite)) {
+      return Number(static_cast<uint32_t>(core::Access::kWrite));
     }
     return Number::invalid;
   },
@@ -1642,8 +1642,8 @@ constexpr NumberMatcher kWriteMatcher {
 /// EnumMatcher for 'match read_write'
 constexpr NumberMatcher kReadWriteMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    if (number.IsAny() || number.Value() == static_cast<uint32_t>(Access::kReadWrite)) {
-      return Number(static_cast<uint32_t>(Access::kReadWrite));
+    if (number.IsAny() || number.Value() == static_cast<uint32_t>(core::Access::kReadWrite)) {
+      return Number(static_cast<uint32_t>(core::Access::kReadWrite));
     }
     return Number::invalid;
   },
@@ -1655,9 +1655,9 @@ constexpr NumberMatcher kReadWriteMatcher {
 /// EnumMatcher for 'match readable'
 constexpr NumberMatcher kReadableMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    switch (static_cast<Access>(number.Value())) {
-      case Access::kRead:
-      case Access::kReadWrite:
+    switch (static_cast<core::Access>(number.Value())) {
+      case core::Access::kRead:
+      case core::Access::kReadWrite:
         return number;
       default:
         return Number::invalid;
@@ -1671,9 +1671,9 @@ constexpr NumberMatcher kReadableMatcher {
 /// EnumMatcher for 'match writable'
 constexpr NumberMatcher kWritableMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    switch (static_cast<Access>(number.Value())) {
-      case Access::kWrite:
-      case Access::kReadWrite:
+    switch (static_cast<core::Access>(number.Value())) {
+      case core::Access::kWrite:
+      case core::Access::kReadWrite:
         return number;
       default:
         return Number::invalid;
@@ -1687,10 +1687,10 @@ constexpr NumberMatcher kWritableMatcher {
 /// EnumMatcher for 'match function_private_workgroup'
 constexpr NumberMatcher kFunctionPrivateWorkgroupMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    switch (static_cast<AddressSpace>(number.Value())) {
-      case AddressSpace::kFunction:
-      case AddressSpace::kPrivate:
-      case AddressSpace::kWorkgroup:
+    switch (static_cast<core::AddressSpace>(number.Value())) {
+      case core::AddressSpace::kFunction:
+      case core::AddressSpace::kPrivate:
+      case core::AddressSpace::kWorkgroup:
         return number;
       default:
         return Number::invalid;
@@ -1704,9 +1704,9 @@ constexpr NumberMatcher kFunctionPrivateWorkgroupMatcher {
 /// EnumMatcher for 'match workgroup_or_storage'
 constexpr NumberMatcher kWorkgroupOrStorageMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    switch (static_cast<AddressSpace>(number.Value())) {
-      case AddressSpace::kWorkgroup:
-      case AddressSpace::kStorage:
+    switch (static_cast<core::AddressSpace>(number.Value())) {
+      case core::AddressSpace::kWorkgroup:
+      case core::AddressSpace::kStorage:
         return number;
       default:
         return Number::invalid;
@@ -1720,8 +1720,8 @@ constexpr NumberMatcher kWorkgroupOrStorageMatcher {
 /// EnumMatcher for 'match storage'
 constexpr NumberMatcher kStorageMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    if (number.IsAny() || number.Value() == static_cast<uint32_t>(AddressSpace::kStorage)) {
-      return Number(static_cast<uint32_t>(AddressSpace::kStorage));
+    if (number.IsAny() || number.Value() == static_cast<uint32_t>(core::AddressSpace::kStorage)) {
+      return Number(static_cast<uint32_t>(core::AddressSpace::kStorage));
     }
     return Number::invalid;
   },
@@ -1733,8 +1733,8 @@ constexpr NumberMatcher kStorageMatcher {
 /// EnumMatcher for 'match workgroup'
 constexpr NumberMatcher kWorkgroupMatcher {
 /* match */ [](MatchState&, Number number) -> Number {
-    if (number.IsAny() || number.Value() == static_cast<uint32_t>(AddressSpace::kWorkgroup)) {
-      return Number(static_cast<uint32_t>(AddressSpace::kWorkgroup));
+    if (number.IsAny() || number.Value() == static_cast<uint32_t>(core::AddressSpace::kWorkgroup)) {
+      return Number(static_cast<uint32_t>(core::AddressSpace::kWorkgroup));
     }
     return Number::invalid;
   },
