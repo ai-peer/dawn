@@ -273,6 +273,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d646101e_179dbcfe",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-09-07T11:14:46Z",
+      "side": 1,
+      "message": "Sorry for late reply. I was ooo last week so missed this notification. Not sure I don\u0027t see any change in this block of code between ps5 and current ps.\n\nI think my original comment was meant for the block of code from line 621 to 655. Sorry seems like the original comment didn\u0027t cover the lines precisely. It would be great to be in a dedicated helper function. The current function `ValidateRenderPassDescriptor`\u0027s code seems to become quite large now.",
+      "parentUuid": "d36eed2f_466a1e00",
+      "range": {
+        "startLine": 589,
+        "startChar": 8,
+        "endLine": 623,
+        "endChar": 78
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d45e9ac_430ea6a0",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 5
