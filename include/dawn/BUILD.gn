@@ -56,7 +56,10 @@ source_set("cpp_headers") {
   ]
 
   sources = get_target_outputs(":cpp_headers_gen")
-  sources += [ "${dawn_root}/include/dawn/EnumClassBitmasks.h" ]
+  sources += [
+    "${dawn_root}/include/dawn/EnumClassBitmasks.h",
+    "${dawn_root}/include/dawn/dawn_proc.h",
+  ]
 }
 
 ###############################################################################
