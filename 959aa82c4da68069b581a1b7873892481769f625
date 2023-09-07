@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "685550e5_e856d0cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004191
+      },
+      "writtenOn": "2023-09-07T01:06:38Z",
+      "side": 1,
+      "message": "This is my first contribution to dawn. Can I have commit rights, please?",
+      "revId": "959aa82c4da68069b581a1b7873892481769f625",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
