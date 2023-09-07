@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ea7ae2_936d22fb",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-07T15:58:33Z",
+      "side": 1,
+      "message": "this line is missing the status",
+      "range": {
+        "startLine": 754,
+        "startChar": 100,
+        "endLine": 754,
+        "endChar": 149
+      },
+      "revId": "1f5ef469ce5a709cb5bd85fdb0ca4cf2b082c47d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
