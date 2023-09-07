@@ -16,6 +16,222 @@
       "message": "Oops, CQ didn\u0027t catch some C++20 I accidentally used. Thanks Kokoro.",
       "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4783be22_8e4d2aba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 56
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7476b038_672ce658",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "u-nit: this can be in the .cpp :)",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47395a3_a6569426",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "nit: Maybe could take a Ref and then we\u0027d std::move from Queue::OnSubmittedWorkDoneF",
+      "range": {
+        "startLine": 59,
+        "startChar": 66,
+        "endLine": 59,
+        "endChar": 79
+      },
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f08bf94e_8aba16ae",
+        "filename": "src/dawn/native/OSEventReceiver.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "We could use CreateEventPipe then drop the OSEventPipe one the floor, it would run the same code as this without duplicating the posix calls.",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af626bed_52239520",
+        "filename": "src/dawn/native/OSEventReceiver.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "While the functionality works, the API for all this seems a bit scattered and more verbose than needed? What about the following (using System instead of OS), cf SystemUtils. This is very similar but tries to make the implementation more basic while using more of the move semantics of C++ etc.\n\nAlso everything could be in the same file IMHO. It\u0027s not that big.\n\n```\nstruct SystemEventPrimitive : NonCopyable {\n  SystemEventPrimitive(uintptr_t value);\n  static SystemEventPrimitive MakeInvalid();\n  ~SystemEventPrimitive(); // calls Close();\n  \n  // Move constructor / assignment that Close() if needed etc.\n\n  IsValid() const;\n  Close();\n  SystemEventPrimitive Duplicate() const;\n\n  private:\n    SystemEventPrimitive(); // Makes invalid.\n};\n\nclass SystemEventSource {\n  // movable is defaulted I believe.\n  explicit SystemEventSource(SystemEventPrimitive\u0026\u0026);\n  void Signal() \u0026\u0026; // Forces std::move(target).Signal() to say it is consumed\n\n  private:\n    SystemEventPrimitive mPrimitive;\n};\n\nclass SystemEventTarget {\n  explicit SystemEventTarget(SystemEventPrimitive\u0026\u0026);\n  static CreateAlreadySignaled();\n  SystemEventTarget Duplicate() const;\n  \n  const SystemEventPrimitive\u0026 GetPrimitive() const;\n  private:\n    SystemEventPrimitive mPrimitive;\n};\n\nstd::pair\u003cSystemEventSource, SystemEventTarget\u003e MakeSystemEventPipe();\n\nstruct TrackedFutureWaitInfo;\n[[nodiscard]] bool WaitAnySystemEvent(size_t count,\n                                      TrackedFutureWaitInfo* futures,\n                                      Nanoseconds timeout);\n```\n\nBen suggests `CreateSystemEvent` `SystemEventSendHandle` and `SystemEventReceiveHandle`. Names are hard.",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ddb3338_bd3e1f54",
+        "filename": "src/dawn/native/OSEventReceiver.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "Could we just use void*? Or maybe a uintptr_t in OSEventPrimitive and wast 4 bytes on posix so that we can avoid platform specific things in this header?a",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6359c539_09f58b6b",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "nit: inline in Queue::OnSubmittedWorkDoneF?",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e86c4ad_bc05dce8",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "Isn\u0027t that the same as Queue::ValidateOnSubmittedWorkDone(0, earlyStatus) ?",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83802cf7_6cd09e55",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "nit: Could be private.",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f1fa532_54bdacc2",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "It seems that this could be defined entirely in the .cpp so we don\u0027t need to include EventManager nor forward declare the class?",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bca10dcc_3a99076a",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "Maybe the TrackedEvent constructor could take a DeviceBase instead of storing a Ref to the queue here just to get the Device.",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d5c38d_d982d87c",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "nit: ToAPI\n```suggestion\n    cmd.self \u003d ToAPI(this);\n```",
+      "range": {
+        "startLine": 142,
+        "startChar": 15,
+        "endLine": 142,
+        "endChar": 45
+      },
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -135,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90cd9eea_c82a09c3",
+        "filename": "src/dawn/common/FutureUtils.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "Ok sounds good, thanks you for the discussion (and I agree that [a] would be preferred). We can always add proper validation later if we want.",
+      "parentUuid": "b6c32ae9_a805854b",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "779cba67_e9aa4efc",
@@ -569,6 +587,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c099a9_6dc2e79e",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "92c920d9_b833477b",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c3f72c1_587fae99",
@@ -817,6 +853,30 @@
       "side": 1,
       "message": "It\u0027s actually passed by value, not by pointer, in the C API. Do you think it should be passed by pointer? Or change this plumbing to use a value instead of a reference?\n(cwfitzgerald has expressed a general preference for passing small structs by value; here in particular, passing by value is more similar to what we would do without the struct, just pass 4 function arguments.)",
       "parentUuid": "6a776785_c1b388ff",
+      "range": {
+        "startLine": 65,
+        "startChar": 74,
+        "endLine": 65,
+        "endChar": 75
+      },
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5627bd5_2da2d182",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "Ah I didn\u0027t realize it was passed by value. Sounds good.",
+      "parentUuid": "1a2f0659_aef06347",
       "range": {
         "startLine": 65,
         "startChar": 74,
@@ -1197,6 +1257,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc6b1dbf_091fd89d",
+        "filename": "src/dawn/native/TrackedEvent.h",
+        "patchSetId": 48
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "Looks good!",
+      "parentUuid": "242612bc_893a90c4",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "15ef2882_354dd201",
@@ -1451,6 +1529,24 @@
       "side": 1,
       "message": "I\u0027m not sure I understand the goal. Wouldn\u0027t this result in more pipes in most cases? Seems like we should try to cut down on the number of pipes (maybe even lower than this). See also the comment I added in native/TrackedEvent.h about optimizing.",
       "parentUuid": "06ef2884_9081830f",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a940d521_16c21ae4",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:15:52Z",
+      "side": 1,
+      "message": "It depends if there\u0027s rolling mapped buffers going on for example you might have many events for a single submitted serial. But we could add a TODO and optimize later. Or we could use OSEventReceiver::Duplicate to insert at most once per submitted serial (though mapped buffers don\u0027t necessarily need to wait for the last submitted).",
+      "parentUuid": "283dfb7a_e15e7d28",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
