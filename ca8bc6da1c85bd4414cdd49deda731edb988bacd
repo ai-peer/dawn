@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "ca8bc6da1c85bd4414cdd49deda731edb988bacd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41ab9f68_fcbc1796",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-07T13:45:07Z",
+      "side": 1,
+      "message": "The signatures are missing the memory scope and semantics operands, which should both be `@const u32`, as well as the `ptr` operand that is being accessed.",
+      "revId": "ca8bc6da1c85bd4414cdd49deda731edb988bacd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
