@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a7402f7_1e4f6211",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004236
+      },
+      "writtenOn": "2023-09-07T22:25:42Z",
+      "side": 1,
+      "message": "Hi Antonio,\n\nThis change is causing some issues with licensing and credits. There is a special cases reference to this directory in licenses.py which now points to a file that doesn\u0027t exist. \nhttps://source.chromium.org/chromium/chromium/src/+/main:tools/licenses/licenses.py;l\u003d404?q\u003dlicenses.py\n\nI can\u0027t see a LICENSE file in any of the child directories either. Where should we be getting this license from after this change?",
+      "revId": "83bdc7fa46edd17e858e60c1e8c1c2224e1caeff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
