@@ -22,6 +22,7 @@ match f32_f16: f32 | f16
 
 type f32
 type f16
+type i32
 type u32
 type vec2<T>
 type vec3<T>
@@ -40,6 +41,8 @@ type mat4x4<T>
 type ptr<S: address_space, T, A: access>
 type array<T>
 
+type __atomic_compare_exchange_result<T>
+
 enum address_space {
   function
   private
@@ -56,6 +59,8 @@ enum access {
   read_write
 }
 
+match iu32: i32 | u32
+
 match storage
   : address_space.storage
 
@@ -64,19 +69,6 @@ match storage
 ////////////////////////////////////////////////////////////////////////////////
 
 enum intrinsic {
-  atomic_and
-  atomic_compare_exchange
-  atomic_exchange
-  atomic_iadd
-  atomic_isub
-  atomic_load
-  atomic_or
-  atomic_smax
-  atomic_smin
-  atomic_store
-  atomic_umax
-  atomic_umin
-  atomic_xor
   dot
   image_fetch
   image_gather
@@ -96,6 +88,19 @@ enum intrinsic {
 // Builtin Functions                                                          //
 ////////////////////////////////////////////////////////////////////////////////
 fn array_length<T, A: access>(ptr<storage, array<T>, A>) -> u32
+@stage("fragment", "compute") fn atomic_and<T: iu32>(T) -> T
+@stage("fragment", "compute") fn atomic_compare_exchange<T: iu32, M: u32>(M, T, T) -> __atomic_compare_exchange_result<T>
+@stage("fragment", "compute") fn atomic_exchange<T: iu32>(T) -> T
+@stage("fragment", "compute") fn atomic_iadd<T: i32>(T) -> T
+@stage("fragment", "compute") fn atomic_isub<T: i32>(T) -> T
+@stage("fragment", "compute") fn atomic_load<T: iu32>() -> T
+@stage("fragment", "compute") fn atomic_or<T: iu32>(T) -> T
+@stage("fragment", "compute") fn atomic_smax<T: i32>(T) -> T
+@stage("fragment", "compute") fn atomic_smin<T: i32>(T) -> T
+@stage("fragment", "compute") fn atomic_store<T: iu32>(T)
+@stage("fragment", "compute") fn atomic_umax<T: u32>(T) -> T
+@stage("fragment", "compute") fn atomic_umin<T: u32>(T) -> T
+@stage("fragment", "compute") fn atomic_xor<T: iu32>(T) -> T
 fn matrix_times_matrix<T: f32, K: num, C: num, R: num>(mat<K, R, T>, mat<C, K, T>) -> mat<C, R, T>
 fn matrix_times_scalar<T: f32, N: num, M: num>(mat<N, M, T>, T) -> mat<N, M, T>
 fn matrix_times_vector<T: f32, N: num, M: num>(mat<N, M, T>, vec<N, T>) -> vec<M, T>
