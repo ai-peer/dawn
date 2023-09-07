@@ -16,6 +16,7 @@
 #define SRC_TINT_LANG_SPIRV_INTRINSIC_DATA_TYPE_MATCHERS_H_
 
 #include "src/tint/lang/core/intrinsic/table.h"
+#include "src/tint/lang/spirv/type/sampled_image.h"
 
 namespace tint::spirv::intrinsic::data {
 
@@ -36,6 +37,26 @@ inline bool MatchStructWithRuntimeArray(core::intrinsic::MatchState&, const core
 inline const core::type::Type* BuildStructWithRuntimeArray(core::intrinsic::MatchState&,
                                                            const core::type::Type* ty) {
     return ty;
+}
+
+inline bool MatchSampledImage(core::intrinsic::MatchState&,
+                              const core::type::Type* ty,
+                              const core::type::Type*& T) {
+    if (ty->Is<core::intrinsic::Any>()) {
+        T = ty;
+        return true;
+    }
+    if (auto* v = ty->As<core::type::SampledTexture>()) {
+        T = v->type();
+        return true;
+    }
+    return false;
+}
+
+inline const core::type::Type* BuildSampledImage(core::intrinsic::MatchState& state,
+                                                 const core::type::Type*,
+                                                 const core::type::Type* T) {
+    return state.types.Get<type::SampledImage>(T);
 }
 
 }  // namespace tint::spirv::intrinsic::data
