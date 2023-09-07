@@ -16,6 +16,24 @@
       "message": "Hi Antonio,\n\nThis change is causing some issues with licensing and credits. There is a special cases reference to this directory in licenses.py which now points to a file that doesn\u0027t exist. \nhttps://source.chromium.org/chromium/chromium/src/+/main:tools/licenses/licenses.py;l\u003d404?q\u003dlicenses.py\n\nI can\u0027t see a LICENSE file in any of the child directories either. Where should we be getting this license from after this change?",
       "revId": "83bdc7fa46edd17e858e60c1e8c1c2224e1caeff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50fdde36_c636bfd4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-07T23:10:31Z",
+      "side": 1,
+      "message": "Hi Rachel,\n\nFormerly, we had this extra license file checked into that subdirectory, but now we are using 2 DEPs that are mirrors of these upstream repos:\n\nhttps://github.com/KhronosGroup/EGL-Registry\nhttps://github.com/KhronosGroup/OpenGL-Registry\n\nIt looks like neither of these repositories have a LICENSE file. For EGL-Registry, there\u0027s a Copyright notice at the top of this root file: `third_party/khronos/EGL-Registry/registry.tcl` that says:\n\n```\n# Copyright 2006-2021 The Khronos Group Inc.\n# SPDX-License-Identifier: Apache-2.0\n```\n\nAnd for OpenGL-Registry, the root README file at `third_party/khronos/OpenGL-Registry/README.adoc` contains this header:\n\n```\n// Copyright 2017-2021 The Khronos Group Inc.\n// SPDX-License-Identifier: CC-BY-4.0\n```\n\nThese two repositories were already mirrored for Chromium here:\n```\nhttps://chromium.googlesource.com/external/github.com/KhronosGroup/OpenGL-Registry\nhttps://chromium.googlesource.com/external/github.com/KhronosGroup/EGL-Registry\n```\n\nSo it\u0027s possible they are already referenced by other modules in Chromium, and therefore, the licenses are already added for licensing and credits?",
+      "parentUuid": "5a7402f7_1e4f6211",
+      "revId": "83bdc7fa46edd17e858e60c1e8c1c2224e1caeff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
