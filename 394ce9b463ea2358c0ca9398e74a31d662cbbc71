@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "394ce9b463ea2358c0ca9398e74a31d662cbbc71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0d50e4e_4e9bcee4",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-07T13:48:49Z",
+      "side": 1,
+      "message": "Condition comes first in SPIR-V.",
+      "revId": "394ce9b463ea2358c0ca9398e74a31d662cbbc71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
