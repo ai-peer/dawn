@@ -39,6 +39,30 @@
       },
       "revId": "6f5529cfce2c9138e869c05bf3ea67e1e731fb5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b36501d3_5c17faf0",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-07T09:40:36Z",
+      "side": 1,
+      "message": "[Still need a way to `#include`](https://dawn-review.googlesource.com/c/dawn/+/150103/comment/de509a35_bb93621d/)",
+      "parentUuid": "90388991_09a94db3",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 38,
+        "endChar": 55
+      },
+      "revId": "6f5529cfce2c9138e869c05bf3ea67e1e731fb5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
