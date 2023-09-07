@@ -33,6 +33,23 @@
       "message": "LGTM for Tint changes. Needs Austin\u0027s approval for Dawn side but that LGTM too.",
       "revId": "1eb2f110815f1e050c34cf3824ab39d4ee46f7fe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7350480f_575349ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-07T02:34:41Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "1eb2f110815f1e050c34cf3824ab39d4ee46f7fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
