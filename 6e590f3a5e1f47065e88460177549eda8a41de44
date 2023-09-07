@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2919d5a_95c4ec37",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 54
+      },
+      "lineNbr": 227,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-07T00:31:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9cb5a103_0b5e6129",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 227,
+        "endChar": 0
+      },
+      "revId": "6e590f3a5e1f47065e88460177549eda8a41de44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "668ac6b6_45db2d21",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-06T21:27:58Z",
       "side": 1,
       "message": "nit: could use the max value reported from the instance here - as well as configure it to a lower value",
+      "range": {
+        "startLine": 89,
+        "startChar": 26,
+        "endLine": 89,
+        "endChar": 33
+      },
+      "revId": "6e590f3a5e1f47065e88460177549eda8a41de44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91640067_f4e3518a",
+        "filename": "src/dawn/tests/end2end/WaitAnyTests.cpp",
+        "patchSetId": 54
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-07T00:31:30Z",
+      "side": 1,
+      "message": "Similar to device limits if you request less than 64 we just give you 64. And if you don\u0027t request anything (which the tests don\u0027t), you get the default 64. I haven\u0027t implemented (and probably won\u0027t implement) values higher than 64 so for now I think this should be left as a fixed value (though I fixed it to say `kTimedWaitAnyMaxCountDefault, kTimedWaitAnyMaxCountDefault + 1`)\n\nAlso added a test for GetInstanceFeatures.",
+      "parentUuid": "668ac6b6_45db2d21",
       "range": {
         "startLine": 89,
         "startChar": 26,
