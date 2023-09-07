@@ -70,11 +70,11 @@ VkAccessFlags VulkanAccessFlags(wgpu::TextureUsage usage, const Format& format) 
     if (usage & wgpu::TextureUsage::CopyDst) {
         flags |= VK_ACCESS_TRANSFER_WRITE_BIT;
     }
-    if (usage & (wgpu::TextureUsage::TextureBinding | kReadOnlyStorageTexture)) {
+    if (usage & (wgpu::TextureUsage::TextureBinding | kReadableStorageTexture)) {
         flags |= VK_ACCESS_SHADER_READ_BIT;
     }
-    if (usage & wgpu::TextureUsage::StorageBinding) {
-        flags |= VK_ACCESS_SHADER_READ_BIT | VK_ACCESS_SHADER_WRITE_BIT;
+    if (usage & kWritableStorageTexture) {
+        flags |= VK_ACCESS_SHADER_WRITE_BIT;
     }
     if (usage & wgpu::TextureUsage::RenderAttachment) {
         if (format.HasDepthOrStencil()) {
@@ -121,14 +121,14 @@ VkPipelineStageFlags VulkanPipelineStage(wgpu::TextureUsage usage, const Format&
     if (usage & (wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst)) {
         flags |= VK_PIPELINE_STAGE_TRANSFER_BIT;
     }
-    if (usage & (wgpu::TextureUsage::TextureBinding | kReadOnlyStorageTexture)) {
+    if (usage & (wgpu::TextureUsage::TextureBinding | kReadableStorageTexture)) {
         // TODO(crbug.com/dawn/851): Only transition to the usage we care about to avoid
         // introducing FS -> VS dependencies that would prevent parallelization on tiler
         // GPUs
         flags |= VK_PIPELINE_STAGE_VERTEX_SHADER_BIT | VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT |
                  VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
     }
-    if (usage & wgpu::TextureUsage::StorageBinding) {
+    if (usage & kWritableStorageTexture) {
         flags |= VK_PIPELINE_STAGE_FRAGMENT_SHADER_BIT | VK_PIPELINE_STAGE_COMPUTE_SHADER_BIT;
     }
     if (usage & (wgpu::TextureUsage::RenderAttachment | kReadOnlyRenderAttachment)) {
@@ -499,7 +499,7 @@ VkImageUsageFlags VulkanImageUsage(wgpu::TextureUsage usage, const Format& forma
             flags |= VK_IMAGE_USAGE_DEPTH_STENCIL_ATTACHMENT_BIT;
         }
     }
-    if (usage & wgpu::TextureUsage::StorageBinding) {
+    if (usage & kReadWriteStorageTexture) {
         flags |= VK_IMAGE_USAGE_STORAGE_BIT;
     }
     if (usage & wgpu::TextureUsage::RenderAttachment) {
@@ -526,17 +526,22 @@ VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage
     }
 
     if (!wgpu::HasZeroOrOneBits(usage)) {
-        // Sampled | kReadOnlyRenderAttachment is the only possible multi-bit usage, if more
-        // appear we might need additional special-casing.
-        ASSERT(usage == (wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment));
-
-        // WebGPU requires both aspects to be readonly if the attachment's format does have
-        // both depth and stencil aspects. Vulkan 1.0 supports readonly for both aspects too
-        // via DEPTH_STENCIL_READ_ONLY image layout. Vulkan 1.1 and above can support separate
-        // readonly for a single aspect via DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL and
-        // DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL layouts. But Vulkan 1.0 cannot support
-        // it, and WebGPU doesn't need that currently.
-        return VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+        if (usage == (wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment)) {
+            // WebGPU requires both aspects to be readonly if the attachment's format does have
+            // both depth and stencil aspects. Vulkan 1.0 supports readonly for both aspects too
+            // via DEPTH_STENCIL_READ_ONLY image layout. Vulkan 1.1 and above can support separate
+            // readonly for a single aspect via DEPTH_ATTACHMENT_STENCIL_READ_ONLY_OPTIMAL and
+            // DEPTH_READ_ONLY_STENCIL_ATTACHMENT_OPTIMAL layouts. But Vulkan 1.0 cannot support it,
+            // and WebGPU doesn't need that currently.
+            return VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL;
+        } else if (usage == kReadWriteStorageTexture) {
+            // Storage textures must use general layout because load and storage operations on
+            // on storage images can only be done on the images in VK_IMAGE_LAYOUT_GENERAL layout.
+            return VK_IMAGE_LAYOUT_GENERAL;
+        }
+        // Above are only possible multi-bit usages, if more appear we might need additional
+        // special-casing.
+        UNREACHABLE();
     }
 
     // Usage has a single bit so we can switch on its value directly.
@@ -551,7 +556,7 @@ VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage
         case wgpu::TextureUsage::TextureBinding:
             // Only VK_IMAGE_LAYOUT_GENERAL can do sampling and storage access of texture at the
             // same time.
-            if (texture->GetInternalUsage() & wgpu::TextureUsage::StorageBinding) {
+            if (texture->GetInternalUsage() & kReadWriteStorageTexture) {
                 return VK_IMAGE_LAYOUT_GENERAL;
             }
             // The sampled image can be used as a readonly depth/stencil attachment at the same
@@ -570,11 +575,10 @@ VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage
             // TODO(crbug.com/dawn/851): We no longer need to transition resources all at
             // once and can instead track subresources so we should lift this limitation.
         case wgpu::TextureUsage::CopySrc:
-            // Read-only and write-only storage textures must use general layout because load
-            // and store operations on storage images can only be done on the images in
-            // VK_IMAGE_LAYOUT_GENERAL layout.
-        case wgpu::TextureUsage::StorageBinding:
-        case kReadOnlyStorageTexture:
+            // Storage textures must use general layout because load and storage operations on
+            // on storage images can only be done on the images in VK_IMAGE_LAYOUT_GENERAL layout.
+        case kReadableStorageTexture:
+        case kWritableStorageTexture:
             return VK_IMAGE_LAYOUT_GENERAL;
 
         case wgpu::TextureUsage::RenderAttachment:
@@ -599,6 +603,9 @@ VkImageLayout VulkanImageLayout(const Texture* texture, wgpu::TextureUsage usage
 
         case wgpu::TextureUsage::StorageAttachment:
             // TODO(dawn:1704): Support PLS on Vulkan.
+            UNREACHABLE();
+
+        case wgpu::TextureUsage::StorageBinding:
             UNREACHABLE();
 
         case wgpu::TextureUsage::None:
@@ -1136,7 +1143,7 @@ void Texture::TweakTransitionForExternalUsage(CommandRecordingContext* recording
 
 bool Texture::CanReuseWithoutBarrier(wgpu::TextureUsage lastUsage, wgpu::TextureUsage usage) {
     // Reuse the texture directly and avoid encoding barriers when it isn't needed.
-    bool lastReadOnly = IsSubset(lastUsage, kReadOnlyTextureUsages);
+    bool lastReadOnly = IsReadOnlyTextureUsage(lastUsage);
     if (lastReadOnly && lastUsage == usage && mLastExternalState == mExternalState) {
         return true;
     }
@@ -1506,7 +1513,7 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
     // We should create an image view with format RGBA8Unorm on the BGRA8Unorm texture when the
     // texture is used as storage texture. See http://crbug.com/dawn/1641 for more details.
     if (createInfo.format == VK_FORMAT_B8G8R8A8_UNORM &&
-        (GetTexture()->GetInternalUsage() & wgpu::TextureUsage::StorageBinding)) {
+        (GetTexture()->GetInternalUsage() & kReadWriteStorageTexture)) {
         createInfo.format = VK_FORMAT_R8G8B8A8_UNORM;
         DAWN_TRY(CheckVkSuccess(device->fn.CreateImageView(device->GetVkDevice(), &createInfo,
                                                            nullptr, &*mHandleForBGRA8UnormStorage),

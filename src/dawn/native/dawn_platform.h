@@ -52,9 +52,16 @@ static constexpr wgpu::TextureUsage kPresentTextureUsage =
 static constexpr wgpu::TextureUsage kReadOnlyRenderAttachment =
     static_cast<wgpu::TextureUsage>(0x40000000);
 
-// Add an extra texture usage (readonly storage texture usage) for resource tracking
-static constexpr wgpu::TextureUsage kReadOnlyStorageTexture =
+// Add an extra texture usage (readable storage texture usage) for resource tracking
+static constexpr wgpu::TextureUsage kReadableStorageTexture =
     static_cast<wgpu::TextureUsage>(0x08000000);
+
+// Add an extra texture usage (writable storage texture usage) for resource tracking
+static constexpr wgpu::TextureUsage kWritableStorageTexture =
+    static_cast<wgpu::TextureUsage>(0x04000000);
+
+static constexpr wgpu::TextureUsage kReadWriteStorageTexture =
+    kReadableStorageTexture | kWritableStorageTexture;
 
 // Internal usage to help tracking when a subresource is used as render attachment usage
 // more than once in a render pass.

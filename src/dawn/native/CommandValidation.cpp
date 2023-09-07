@@ -57,9 +57,9 @@ MaybeError ValidateSyncScopeResourceUsage(const SyncScopeResourceUsage& scope) {
         const TextureSubresourceUsage& textureUsage = scope.textureUsages[i];
         DAWN_TRY(textureUsage.Iterate(
             [&](const SubresourceRange&, const wgpu::TextureUsage& usage) -> MaybeError {
-                bool readOnly = IsSubset(usage, kReadOnlyTextureUsages);
-                bool singleUse = wgpu::HasZeroOrOneBits(usage);
-                if (readOnly || singleUse) {
+                bool singleUse =
+                    wgpu::HasZeroOrOneBits(usage) || (usage == kReadWriteStorageTexture);
+                if (IsReadOnlyTextureUsage(usage) || singleUse) {
                     return {};
                 }
                 // kResolveTextureLoadAndStoreUsages are kResolveAttachmentLoadingUsage &
