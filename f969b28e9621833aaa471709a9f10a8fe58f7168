@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "f969b28e9621833aaa471709a9f10a8fe58f7168",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de509a35_bb93621d",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-07T09:40:01Z",
+      "side": 1,
+      "message": "following on from [the earlier comment](https://dawn-review.googlesource.com/c/dawn/+/150085/comment/90388991_09a94db3/)... \nhowever, these *must* be exactly the same, otherwise [the enums will go out of sync](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/core/intrinsic/data/type_matchers.h#268). So yes, we need that `#include`.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 0
+      },
+      "revId": "f969b28e9621833aaa471709a9f10a8fe58f7168",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
