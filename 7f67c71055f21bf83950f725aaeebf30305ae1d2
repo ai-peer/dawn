@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "7f67c71055f21bf83950f725aaeebf30305ae1d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e448717d_d411028e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:09:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7f67c71055f21bf83950f725aaeebf30305ae1d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a035b9b_d1f45bec",
+        "filename": "src/dawn/native/dawn_platform.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-07T13:09:32Z",
+      "side": 1,
+      "message": "nit: this is the same as kReadOnlyRenderAttachment maybe we should use another value?",
+      "revId": "7f67c71055f21bf83950f725aaeebf30305ae1d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
