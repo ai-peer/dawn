@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27d01177_d9ee61dc",
+        "filename": "src/tint/lang/core/intrinsic/table.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-07T11:12:26Z",
+      "side": 1,
+      "message": "I\u0027d recommend making this a template argument and calling it `fn`. Can use [`std::is_enum`](https://en.cppreference.com/w/cpp/types/is_enum) to ensure that the argument actually is an enum. It can then accept any `\u003clang\u003e::Function` enum.",
+      "range": {
+        "startLine": 112,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 46
+      },
+      "revId": "f85a867f75cedec886a3eb5d41d1cd495c811f4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
