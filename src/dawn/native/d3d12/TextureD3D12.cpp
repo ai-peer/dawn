@@ -59,11 +59,13 @@ D3D12_RESOURCE_STATES D3D12TextureUsage(wgpu::TextureUsage usage, const Format& 
     if (usage & wgpu::TextureUsage::CopyDst) {
         resourceState |= D3D12_RESOURCE_STATE_COPY_DEST;
     }
-    if (usage & (wgpu::TextureUsage::TextureBinding | kReadOnlyStorageTexture)) {
+    if (usage & wgpu::TextureUsage::TextureBinding) {
         resourceState |= D3D12_RESOURCE_STATE_ALL_SHADER_RESOURCE;
     }
-    if (usage & wgpu::TextureUsage::StorageBinding) {
+    if (usage & kWritableStorageTexture) {
         resourceState |= D3D12_RESOURCE_STATE_UNORDERED_ACCESS;
+    } else if (usage & kReadableStorageTexture) {
+        resourceState |= D3D12_RESOURCE_STATE_ALL_SHADER_RESOURCE;
     }
     if (usage & wgpu::TextureUsage::RenderAttachment) {
         if (format.HasDepthOrStencil()) {
@@ -84,7 +86,7 @@ D3D12_RESOURCE_STATES D3D12TextureUsage(wgpu::TextureUsage usage, const Format& 
 D3D12_RESOURCE_FLAGS D3D12ResourceFlags(wgpu::TextureUsage usage, const Format& format) {
     D3D12_RESOURCE_FLAGS flags = D3D12_RESOURCE_FLAG_NONE;
 
-    if (usage & wgpu::TextureUsage::StorageBinding) {
+    if (usage & kWritableStorageTexture) {
         flags |= D3D12_RESOURCE_FLAG_ALLOW_UNORDERED_ACCESS;
     }
 

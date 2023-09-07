@@ -85,7 +85,7 @@ GLenum TargetForTextureViewDimension(wgpu::TextureViewDimension dimension,
 bool RequiresCreatingNewTextureView(const TextureBase* texture,
                                     const TextureViewDescriptor* textureViewDescriptor) {
     constexpr wgpu::TextureUsage kShaderUsageNeedsView =
-        wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
+        kReadWriteStorageTexture | wgpu::TextureUsage::TextureBinding;
     constexpr wgpu::TextureUsage kUsageNeedsView =
         kShaderUsageNeedsView | wgpu::TextureUsage::RenderAttachment;
     if ((texture->GetInternalUsage() & kUsageNeedsView) == 0) {

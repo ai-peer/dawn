@@ -35,11 +35,11 @@ namespace {
 MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage) {
     MTLTextureUsage result = MTLTextureUsageUnknown;  // This is 0
 
-    if (usage & (wgpu::TextureUsage::StorageBinding)) {
-        result |= MTLTextureUsageShaderWrite | MTLTextureUsageShaderRead;
+    if (usage & kWritableStorageTexture) {
+        result |= MTLTextureUsageShaderWrite;
     }
 
-    if (usage & (wgpu::TextureUsage::TextureBinding)) {
+    if (usage & (wgpu::TextureUsage::TextureBinding | kReadableStorageTexture)) {
         result |= MTLTextureUsageShaderRead;
 
         // For sampling stencil aspect of combined depth/stencil.
@@ -82,7 +82,7 @@ MTLTextureType MetalTextureViewType(wgpu::TextureViewDimension dimension,
 bool RequiresCreatingNewTextureView(const TextureBase* texture,
                                     const TextureViewDescriptor* textureViewDescriptor) {
     constexpr wgpu::TextureUsage kShaderUsageNeedsView =
-        wgpu::TextureUsage::StorageBinding | wgpu::TextureUsage::TextureBinding;
+        kReadWriteStorageTexture | wgpu::TextureUsage::TextureBinding;
     constexpr wgpu::TextureUsage kUsageNeedsView =
         kShaderUsageNeedsView | wgpu::TextureUsage::RenderAttachment;
     if ((texture->GetInternalUsage() & kUsageNeedsView) == 0) {

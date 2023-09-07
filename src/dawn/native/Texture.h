@@ -50,9 +50,7 @@ ResultOrError<TextureViewDescriptor> GetTextureViewDescriptorWithDefaults(
 
 bool IsValidSampleCount(uint32_t sampleCount);
 
-static constexpr wgpu::TextureUsage kReadOnlyTextureUsages =
-    wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding | kReadOnlyRenderAttachment |
-    kReadOnlyStorageTexture;
+bool IsReadOnlyTextureUsage(wgpu::TextureUsage usage);
 
 // Valid texture usages for a resolve texture that are loaded from at the beginning of a render
 // pass.

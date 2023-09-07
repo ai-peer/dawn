@@ -623,6 +623,12 @@ bool IsValidSampleCount(uint32_t sampleCount) {
     }
 }
 
+bool IsReadOnlyTextureUsage(wgpu::TextureUsage usage) {
+    return (usage & (wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding |
+                     kReadOnlyRenderAttachment | kReadableStorageTexture)) > 0 &&
+           (usage != kReadWriteStorageTexture);
+}
+
 // TextureBase
 
 TextureBase::TextureState::TextureState() : hasAccess(true), destroyed(false) {}
@@ -678,7 +684,13 @@ TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor
         }
     }
     if (mInternalUsage & wgpu::TextureUsage::StorageBinding) {
-        AddInternalUsage(kReadOnlyStorageTexture);
+        AddInternalUsage(kReadWriteStorageTexture);
+
+        // We should never use wgpu::TextureUsage::StorageBinding internally. Instead we should
+        // always track the internal use of storage textures with kReadableStorageBinding,
+        // kWritableStorageBinding and kReadWriteStorageBinding.
+        constexpr uint32_t kMask = ~static_cast<uint32_t>(wgpu::TextureUsage::StorageBinding);
+        mInternalUsage &= static_cast<wgpu::TextureUsage>(kMask);
     }
 }
 
@@ -773,10 +785,12 @@ wgpu::TextureUsage TextureBase::GetUsage() const {
 }
 wgpu::TextureUsage TextureBase::GetInternalUsage() const {
     ASSERT(!IsError());
+    ASSERT((mInternalUsage & wgpu::TextureUsage::StorageBinding) == 0);
     return mInternalUsage;
 }
 void TextureBase::AddInternalUsage(wgpu::TextureUsage usage) {
     ASSERT(!IsError());
+    ASSERT((usage & wgpu::TextureUsage::StorageBinding) == 0);
     mInternalUsage |= usage;
 }
 

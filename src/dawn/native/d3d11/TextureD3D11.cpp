@@ -40,11 +40,11 @@ namespace {
 UINT D3D11TextureBindFlags(wgpu::TextureUsage usage, const Format& format) {
     bool isDepthOrStencilFormat = format.HasDepthOrStencil();
     UINT bindFlags = 0;
-    if (usage & wgpu::TextureUsage::TextureBinding) {
+    if (usage & (wgpu::TextureUsage::TextureBinding | kReadableStorageTexture)) {
         bindFlags |= D3D11_BIND_SHADER_RESOURCE;
     }
-    if (usage & wgpu::TextureUsage::StorageBinding) {
-        bindFlags |= D3D11_BIND_UNORDERED_ACCESS | D3D11_BIND_SHADER_RESOURCE;
+    if (usage & kWritableStorageTexture) {
+        bindFlags |= D3D11_BIND_UNORDERED_ACCESS;
     }
     if (usage & wgpu::TextureUsage::RenderAttachment) {
         bindFlags |= isDepthOrStencilFormat ? D3D11_BIND_DEPTH_STENCIL : D3D11_BIND_RENDER_TARGET;
