@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c179d61a_8f8422fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 56
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-07T05:33:53Z",
+      "side": 1,
+      "message": "Oops, CQ didn\u0027t catch some C++20 I accidentally used. Thanks Kokoro.",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
