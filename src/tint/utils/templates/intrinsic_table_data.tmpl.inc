@@ -88,7 +88,7 @@ constexpr ParameterInfo kParameters[] = {
 {{- range $i, $p := .Parameters }}
   {
     /* [{{$i}}] */
-    /* usage */ ParameterUsage::
+    /* usage */ core::ParameterUsage::
 {{-   if $p.Usage }}k{{PascalCase $p.Usage}}
 {{-   else        }}kNone
 {{-   end }},
@@ -136,9 +136,9 @@ constexpr TemplateNumberInfo kTemplateNumbers[] = {
 static_assert(TemplateNumberIndex::CanIndex(kTemplateNumbers),
               "TemplateNumberIndex is not large enough to index kTemplateNumbers");
 
-constexpr constant::Eval::Function kConstEvalFunctions[] = {
+constexpr core::constant::Eval::Function kConstEvalFunctions[] = {
 {{- range $i, $f := .ConstEvalFunctions }}
-  /* [{{$i}}] */ &constant::Eval::{{template "ExpandName" $f}},
+  /* [{{$i}}] */ &core::constant::Eval::{{template "ExpandName" $f}},
 {{- end }}
 };
 
