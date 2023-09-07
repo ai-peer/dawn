@@ -44,6 +44,7 @@
 #include "src/tint/lang/core/type/void.h"
 #include "src/tint/lang/msl/writer/ast_raise/module_scope_var_to_entry_point_param.h"
 #include "src/tint/lang/msl/writer/ast_raise/packed_vec3.h"
+#include "src/tint/lang/msl/writer/ast_raise/pixel_local.h"
 #include "src/tint/lang/msl/writer/ast_raise/subgroup_ballot.h"
 #include "src/tint/lang/msl/writer/common/printer_support.h"
 #include "src/tint/lang/wgsl/ast/alias.h"
@@ -135,6 +136,14 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
     ast::transform::Manager manager;
     ast::transform::DataMap data;
 
+    {
+        PixelLocal::Config cfg;
+        for (auto it : options.pixel_local_options.attachments) {
+            cfg.attachments.Add(it.first, it.second);
+        }
+        data.Add<PixelLocal::Config>(cfg);
+        manager.Add<PixelLocal>();
+    }
     manager.Add<ast::transform::DisableUniformityAnalysis>();
 
     // ExpandCompoundAssignment must come before BuiltinPolyfill
@@ -248,14 +257,15 @@ bool ASTPrinter::Generate() {
             "MSL", builder_.AST(), diagnostics_,
             Vector{
                 core::Extension::kChromiumDisableUniformityAnalysis,
+                core::Extension::kChromiumExperimentalDp4A,
                 core::Extension::kChromiumExperimentalFullPtrParameters,
+                core::Extension::kChromiumExperimentalPixelLocal,
                 core::Extension::kChromiumExperimentalPushConstant,
                 core::Extension::kChromiumExperimentalReadWriteStorageTexture,
                 core::Extension::kChromiumExperimentalSubgroups,
+                core::Extension::kChromiumInternalDualSourceBlending,
                 core::Extension::kChromiumInternalRelaxedUniformLayout,
                 core::Extension::kF16,
-                core::Extension::kChromiumInternalDualSourceBlending,
-                core::Extension::kChromiumExperimentalDp4A,
             })) {
         return false;
     }
