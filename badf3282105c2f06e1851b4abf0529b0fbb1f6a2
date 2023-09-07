@@ -22,6 +22,30 @@
       },
       "revId": "badf3282105c2f06e1851b4abf0529b0fbb1f6a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "14d6cbed_51d68a0d",
+        "filename": "src/tint/tint.natvis",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-07T19:29:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de3532fc_11ab4715",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 102,
+        "endChar": 1
+      },
+      "revId": "badf3282105c2f06e1851b4abf0529b0fbb1f6a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
