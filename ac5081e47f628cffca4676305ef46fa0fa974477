@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd5e153_7c41d402",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 63
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T23:35:38Z",
+      "side": 1,
+      "message": "typo: make sure we don\u0027t have* any Spontaneous events in the EventManager\n\nUploaded a proposed fix (still need to write tests)",
+      "parentUuid": "82618f18_4d403809",
+      "revId": "ac5081e47f628cffca4676305ef46fa0fa974477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b79304e3_23af6be3",
