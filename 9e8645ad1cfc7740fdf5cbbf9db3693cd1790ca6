@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0866a742_1d7a64b8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-08T00:30:23Z",
+      "side": 1,
+      "message": "Signature now LGTM, leaving Ben to approve the matching code.",
+      "revId": "9e8645ad1cfc7740fdf5cbbf9db3693cd1790ca6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

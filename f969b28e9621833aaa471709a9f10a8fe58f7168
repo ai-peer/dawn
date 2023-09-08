@@ -56,6 +56,24 @@
       "message": "The operands are not right here. The `OpArrayLength` operands are a pointer to the structure and then a literal index: `OpArrayLength \u003cptr to structure\u003e \u003cliteral\u003e`. See the change in `raise/builtin_polyfill.cc` for an example.\n\nThis will presumably require a custom matcher for `LiteralOperand`. That is currently defined inside `raise/builtin_polyfill.h`, but I\u0027ve been meaning to move it into `spirv/ir/` which is where it should live (as should `SampledImage`).",
       "revId": "f969b28e9621833aaa471709a9f10a8fe58f7168",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f419628_94ef30bd",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-08T00:30:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e78e9793_ff58695a",
+      "revId": "f969b28e9621833aaa471709a9f10a8fe58f7168",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
