@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include <game-activity/GameActivity.cpp>
-#include "Renderer.h"  // NOLINT
+#include "Renderer.h" // NOLINT
 
 extern "C" {
 #include <game-activity/native_app_glue/android_native_app_glue.c>  // NOLINT

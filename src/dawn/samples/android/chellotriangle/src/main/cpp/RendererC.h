@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include <game-activity/native_app_glue/android_native_app_glue.h>
-#include "dawn/samples/SampleUtils.h"
+#include "dawn/samples/utils/SampleUtils.h"
 
 #ifndef APP_SRC_MAIN_CPP2_RENDERER_H_
 #define APP_SRC_MAIN_CPP2_RENDERER_H_

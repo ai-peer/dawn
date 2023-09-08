@@ -12,22 +12,22 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include <game-activity/GameActivity.cpp>
-#include "RendererC.h" // NOLINT
+#include "Renderer.h" // NOLINT
 
 extern "C" {
-#include <game-activity/native_app_glue/android_native_app_glue.c>  // NOLINT
+#include <game-activity/native_app_glue/android_native_app_glue.c>
 
 void handle_cmd(android_app* pApp, int32_t cmd) {
     switch (cmd) {
         case APP_CMD_INIT_WINDOW:
             // A new window is created, associate a renderer with it.
-            pApp->userData = new RendererC(pApp);
+            pApp->userData = new Renderer(pApp);
             break;
         case APP_CMD_TERM_WINDOW:
             // The window is being destroyed. Use this to clean up your userData to avoid leaking
             // resources.
             if (pApp->userData) {
-                auto* pRenderer = reinterpret_cast<RendererC*>(pApp->userData);
+                auto* pRenderer = reinterpret_cast<Renderer*>(pApp->userData);
                 pApp->userData = nullptr;
                 delete pRenderer;
             }
@@ -41,6 +41,7 @@ void android_main(android_app* pApp) {
     pApp->onAppCmd = handle_cmd;
     int events;
     android_poll_source* pSource;
+
     do {
         if (ALooper_pollAll(0, nullptr, &events, reinterpret_cast<void**>(&pSource)) >= 0) {
             if (pSource) {
@@ -48,7 +49,7 @@ void android_main(android_app* pApp) {
             }
         }
         if (pApp->userData) {
-            auto* pRenderer = reinterpret_cast<RendererC*>(pApp->userData);
+            auto* pRenderer = reinterpret_cast<Renderer*>(pApp->userData);
             pRenderer->GameLoop();
         }
     } while (!pApp->destroyRequested);

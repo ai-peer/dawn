@@ -16,4 +16,6 @@ rootProject.name = "android-samples"
 include ':chellotriangle'
 include ':cpphellotriangle'
 include ':common'
+include ':computeboids'
 project(':common').projectDir = new File(settingsDir, 'common')
+

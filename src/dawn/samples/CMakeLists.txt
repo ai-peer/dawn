@@ -30,6 +30,7 @@ add_subdirectory(utils)
 if (DAWN_BUILD_ANDROID_SAMPLES)
   add_subdirectory(android/chellotriangle)
   add_subdirectory(android/cpphellotriangle)
+  add_subdirectory(android/computeboids)
 
 else()
 

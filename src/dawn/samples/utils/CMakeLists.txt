@@ -38,5 +38,8 @@ if (DAWN_BUILD_ANDROID_SAMPLES)
     game-activity::game-activity_static
   )
 else()
-  target_link_libraries(dawn_sample_utils PUBLIC glfw)
+  target_link_libraries(dawn_sample_utils PUBLIC 
+    dawn_glfw
+    glfw
+  )
 endif()

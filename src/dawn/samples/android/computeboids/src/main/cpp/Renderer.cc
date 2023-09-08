@@ -1,76 +1,23 @@
-// Copyright 2017 The Dawn & Tint Authors
+// Copyright 2023 The Dawn Authors
 //
-// Redistribution and use in source and binary forms, with or without
-// modification, are permitted provided that the following conditions are met:
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
 //
-// 1. Redistributions of source code must retain the above copyright notice, this
-//    list of conditions and the following disclaimer.
+//     http://www.apache.org/licenses/LICENSE-2.0
 //
-// 2. Redistributions in binary form must reproduce the above copyright notice,
-//    this list of conditions and the following disclaimer in the documentation
-//    and/or other materials provided with the distribution.
-//
-// 3. Neither the name of the copyright holder nor the names of its
-//    contributors may be used to endorse or promote products derived from
-//    this software without specific prior written permission.
-//
-// THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-// AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-// IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-// DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-// FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-// DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-// SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-// CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-// OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-// OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-
-#include <array>
-#include <cstring>
-#include <random>
-#include <vector>
-
-#include "dawn/samples/utils/SampleUtils.h"
-
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+#include "Renderer.h" // NOLINT
+#include "dawn/common/Log.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/SystemUtils.h"
 #include "dawn/utils/WGPUHelpers.h"
 
-wgpu::Device device;
-wgpu::Queue queue;
-wgpu::SwapChain swapchain;
-wgpu::TextureView depthStencilView;
-
-wgpu::Buffer modelBuffer;
-std::array<wgpu::Buffer, 2> particleBuffers;
-
-wgpu::RenderPipeline renderPipeline;
-
-wgpu::Buffer updateParams;
-wgpu::ComputePipeline updatePipeline;
-std::array<wgpu::BindGroup, 2> updateBGs;
-
-size_t pingpong = 0;
-
-static const uint32_t kNumParticles = 1024;
-
-struct Particle {
-    std::array<float, 2> pos;
-    std::array<float, 2> vel;
-};
-
-struct SimParams {
-    float deltaT;
-    float rule1Distance;
-    float rule2Distance;
-    float rule3Distance;
-    float rule1Scale;
-    float rule2Scale;
-    float rule3Scale;
-    int particleCount;
-};
-
-void initBuffers() {
+void Renderer::InitBuffers() {
     std::array<std::array<float, 2>, 3> model = {{
         {-0.01, -0.02},
         {0.01, -0.02},
@@ -79,7 +26,7 @@ void initBuffers() {
     modelBuffer =
         dawn::utils::CreateBufferFromData(device, &model, sizeof(model), wgpu::BufferUsage::Vertex);
 
-    SimParams params = {0.04f, 0.1f, 0.025f, 0.025f, 0.02f, 0.05f, 0.005f, kNumParticles};
+    Renderer::SimParams params = {0.04f, 0.1f, 0.025f, 0.025f, 0.02f, 0.05f, 0.005f, kNumParticles};
     updateParams = dawn::utils::CreateBufferFromData(device, &params, sizeof(params),
                                                      wgpu::BufferUsage::Uniform);
 
@@ -106,7 +53,7 @@ void initBuffers() {
     }
 }
 
-void initRender() {
+void Renderer::InitRender() {
     wgpu::ShaderModule vsModule = dawn::utils::CreateShaderModule(device, R"(
         struct VertexIn {
             @location(0) a_particlePos : vec2f,
@@ -158,7 +105,7 @@ void initRender() {
     renderPipeline = device.CreateRenderPipeline(&descriptor);
 }
 
-void initSim() {
+void Renderer::InitSim() {
     wgpu::ShaderModule module = dawn::utils::CreateShaderModule(device, R"(
         struct Particle {
             pos : vec2f,
@@ -280,7 +227,8 @@ void initSim() {
     }
 }
 
-wgpu::CommandBuffer createCommandBuffer(const wgpu::TextureView backbufferView, size_t i) {
+wgpu::CommandBuffer Renderer::createCommandBuffer(const wgpu::TextureView backbufferView,
+                                                  size_t i) {
     auto& bufferDst = particleBuffers[(i + 1) % 2];
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
@@ -305,37 +253,30 @@ wgpu::CommandBuffer createCommandBuffer(const wgpu::TextureView backbufferView, 
     return encoder.Finish();
 }
 
-void init() {
-    device = CreateCppDawnDevice();
-
+void Renderer::Init() {
+    device = CreateCppDawnDeviceForAndroid(androidDesc);
     queue = device.GetQueue();
     swapchain = GetSwapChain();
 
-    initBuffers();
-    initRender();
-    initSim();
+    InitBuffers();
+    InitRender();
+    InitSim();
 }
 
-void frame() {
+void Renderer::Frame() {
     wgpu::TextureView backbufferView = swapchain.GetCurrentTextureView();
 
     wgpu::CommandBuffer commandBuffer = createCommandBuffer(backbufferView, pingpong);
     queue.Submit(1, &commandBuffer);
     swapchain.Present();
-    DoFlush();
 
     pingpong = (pingpong + 1) % 2;
 }
 
-int main(int argc, const char* argv[]) {
-    if (!InitSample(argc, argv)) {
-        return 1;
+void Renderer::GameLoop() {
+    if (!deviceInitialised) {
+        Init();
+        deviceInitialised = true;
     }
-    init();
-
-    while (!ShouldQuit()) {
-        ProcessEvents();
-        frame();
-        dawn::utils::USleep(16000);
-    }
+    Frame();
 }

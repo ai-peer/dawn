@@ -504,6 +504,9 @@ endif()
 if (WIN32)
     target_compile_definitions(dawn_internal_config INTERFACE "NOMINMAX" "WIN32_LEAN_AND_MEAN")
 endif()
+if (ANDROID)
+    target_compile_definitions(dawn_internal_config INTERFACE "DAWN_ENABLE_BACKEND_ANDROID")
+endif()
 
 set(CMAKE_CXX_STANDARD "17")
 

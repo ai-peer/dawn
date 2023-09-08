@@ -31,7 +31,7 @@
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireServer.h"
 
-#if !(ANDROID)
+#if !defined(DAWN_ENABLE_BACKEND_ANDROID)
 #include "GLFW/glfw3.h"
 #include "webgpu/webgpu_glfw.h"
 #endif
@@ -78,14 +78,14 @@ enum class CmdBufType {
 
 // Default to D3D12, Metal, Vulkan, OpenGL in that order as D3D12 and Metal are the preferred on
 // their respective platforms, and Vulkan is preferred to OpenGL
-#if defined(DAWN_ENABLE_BACKEND_D3D12) && (!ANDROID)
+#if defined(DAWN_ENABLE_BACKEND_VULKAN) || defined (DAWN_ENABLE_BACKEND_ANDROID)
+static wgpu::BackendType backendType = wgpu::BackendType::Vulkan;
+#elif defined(DAWN_ENABLE_BACKEND_D3D12)
 static wgpu::BackendType backendType = wgpu::BackendType::D3D12;
 #elif defined(DAWN_ENABLE_BACKEND_D3D11)
 static wgpu::BackendType backendType = wgpu::BackendType::D3D11;
 #elif defined(DAWN_ENABLE_BACKEND_METAL)
 static wgpu::BackendType backendType = wgpu::BackendType::Metal;
-#elif defined(DAWN_ENABLE_BACKEND_VULKAN) || (ANDROID)
-static wgpu::BackendType backendType = wgpu::BackendType::Vulkan;
 #elif defined(DAWN_ENABLE_BACKEND_OPENGLES)
 static wgpu::BackendType backendType = wgpu::BackendType::OpenGLES;
 #elif defined(DAWN_ENABLE_BACKEND_DESKTOP_GL)
@@ -112,7 +112,7 @@ static dawn::utils::TerribleCommandBuffer* s2cBuf = nullptr;
 static constexpr uint32_t kWidth = 640;
 static constexpr uint32_t kHeight = 480;
 
-#if (ANDROID)
+#if defined(DAWN_ENABLE_BACKEND_ANDROID)
 static wgpu::SurfaceDescriptorFromAndroidNativeWindow androidDesc;
 
 wgpu::Device CreateCppDawnDeviceForAndroid(wgpu::SurfaceDescriptorFromAndroidNativeWindow desc) {
@@ -122,7 +122,7 @@ wgpu::Device CreateCppDawnDeviceForAndroid(wgpu::SurfaceDescriptorFromAndroidNat
 #endif
 
 wgpu::Device CreateCppDawnDevice() {
-#if (!ANDROID)
+#if !defined(DAWN_ENABLE_BACKEND_ANDROID)
     dawn::ScopedEnvironmentVar angleDefaultPlatform;
     if (dawn::GetEnvironmentVar("ANGLE_DEFAULT_PLATFORM").first.empty()) {
         angleDefaultPlatform.Set("ANGLE_DEFAULT_PLATFORM", "swiftshader");
@@ -194,14 +194,14 @@ wgpu::Device CreateCppDawnDevice() {
     DawnProcTable backendProcs = dawn::native::GetProcs();
 
     // Create the swapchain
-#if !(ANDROID)
+#if defined(DAWN_ENABLE_BACKEND_ANDROID)
+    WGPUSurfaceDescriptor surfaceDesc = {};
+    surfaceDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(&androidDesc);
+    WGPUSurface surface = backendProcs.instanceCreateSurface(instance->Get(), &surfaceDesc);
+#else
     auto surfaceChainedDesc = wgpu::glfw::SetupWindowAndGetSurfaceDescriptor(window);
     WGPUSurfaceDescriptor surfaceDesc;
     surfaceDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(surfaceChainedDesc.get());
-    WGPUSurface surface = backendProcs.instanceCreateSurface(instance->Get(), &surfaceDesc);
-#else
-    WGPUSurfaceDescriptor surfaceDesc = {};
-    surfaceDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(&androidDesc);
     WGPUSurface surface = backendProcs.instanceCreateSurface(instance->Get(), &surfaceDesc);
 #endif
 
@@ -263,13 +263,13 @@ wgpu::Device CreateCppDawnDevice() {
     return wgpu::Device::Acquire(cDevice);
 }
 
-#if !(ANDROID)
+#if !defined(DAWN_ENABLE_BACKEND_ANDROID)
 void DoFlush() {
     if (cmdBufType == CmdBufType::Terrible) {
         bool c2sSuccess = c2sBuf->Flush();
         bool s2cSuccess = s2cBuf->Flush();
 
-        ASSERT(c2sSuccess && s2cSuccess);
+        DAWN_ASSERT(c2sSuccess && s2cSuccess);
     }
     glfwPollEvents();
 }
@@ -286,7 +286,7 @@ GLFWwindow* GetGLFWWindow() {
 
 wgpu::TextureFormat GetPreferredSwapChainTextureFormat() {
 // Currently, dawn accepts only RGBA8Unorm for Android.
-#if (ANDROID)
+#if defined(DAWN_ENABLE_BACKEND_ANDROID)
     return wgpu::TextureFormat::RGBA8Unorm;
 #endif
 

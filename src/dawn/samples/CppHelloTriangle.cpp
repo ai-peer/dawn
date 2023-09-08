@@ -27,7 +27,7 @@
 
 #include <vector>
 
-#include "dawn/samples/SampleUtils.h"
+#include "dawn/samples/utils/SampleUtils.h"
 
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/SystemUtils.h"

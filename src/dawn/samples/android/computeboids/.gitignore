@@ -1,3 +1,4 @@
+build/
 *.iml
 /local.properties
 /.idea/caches
@@ -11,5 +12,5 @@
 /captures
 .externalNativeBuild
 .cxx
+/.cxx
 local.properties
-build/
