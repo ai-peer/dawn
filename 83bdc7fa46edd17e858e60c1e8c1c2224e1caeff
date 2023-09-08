@@ -34,6 +34,24 @@
       "parentUuid": "5a7402f7_1e4f6211",
       "revId": "83bdc7fa46edd17e858e60c1e8c1c2224e1caeff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9b2fcb7_ef54aefd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004236
+      },
+      "writtenOn": "2023-09-08T00:15:59Z",
+      "side": 1,
+      "message": "Understand that these are DEPS\u0027d instead of being checked in but the requirement for providing 3P metadata files (README.chromium, LICENSE) is still there. Regardless of how the dependencies end up in the code, we need to acknowledge them directly where they\u0027re added. \nSee https://chromium.googlesource.com/chromium/src/+/HEAD/docs/adding_to_third_party.md \n\nTypically when we do this we add the LICENSE and README files in the top level `//third_party/dawn/khronos` directory to ensure they\u0027re properly credited and have their metadata set and then DEPS the code into the child directories. You can have multiple dependencies in a README file by following this structure:\nhttps://source.chromium.org/chromium/chromium/tools/depot_tools/+/main:metadata/tests/data/README.chromium.test.multi-valid?q\u003dREADME.chromium.test.multi-valid\n\nIf we don\u0027t have these the SBOM data will be invalid and so will `about:credits`.\nRelying on the fact that someone else has credited it somewhere else might lead us into compliance trouble.",
+      "parentUuid": "50fdde36_c636bfd4",
+      "revId": "83bdc7fa46edd17e858e60c1e8c1c2224e1caeff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
