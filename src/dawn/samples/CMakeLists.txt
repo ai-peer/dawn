@@ -25,23 +25,13 @@
 # OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 # OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-add_library(dawn_sample_utils STATIC ${DAWN_PLACEHOLDER_FILE})
-common_compile_options(dawn_sample_utils)
-target_sources(dawn_sample_utils PRIVATE
-    "SampleUtils.cpp"
-    "SampleUtils.h"
-)
-target_link_libraries(dawn_sample_utils PUBLIC
-    dawn_internal_config
-    dawncpp
-    dawn_proc
-    dawn_common
-    dawn_glfw
-    dawn_native
-    dawn_wire
-    dawn_utils
-    glfw
-)
+add_subdirectory(utils)
+
+if (DAWN_BUILD_ANDROID_SAMPLES)
+  add_subdirectory(android/chellotriangle)
+  add_subdirectory(android/cpphellotriangle)
+
+else()
 
 add_executable(CppHelloTriangle "CppHelloTriangle.cpp")
 common_compile_options(CppHelloTriangle)
@@ -62,4 +52,6 @@ target_link_libraries(Animometer dawn_sample_utils)
 add_executable(DawnInfo "DawnInfo.cpp")
 common_compile_options(DawnInfo)
 target_link_libraries(DawnInfo dawn_sample_utils)
+
+endif()
 
