@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "99f0aa05_fc95b61f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 63
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T21:33:41Z",
+      "side": 1,
+      "message": "Never mind, I didn\u0027t think this through. Can\u0027t break cycles in the destructor because cycles prevent the destructor from running.\n\nI realized there\u0027s WillDropLastExternalRef where we do other ref cycle breaking and that\u0027s where it should be.",
+      "parentUuid": "b5af6e48_ea2c2e4f",
+      "revId": "ac5081e47f628cffca4676305ef46fa0fa974477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b79304e3_23af6be3",
