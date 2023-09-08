@@ -52,6 +52,24 @@
       "parentUuid": "50fdde36_c636bfd4",
       "revId": "83bdc7fa46edd17e858e60c1e8c1c2224e1caeff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c0e782_22c0d03e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-08T12:57:01Z",
+      "side": 1,
+      "message": "Landed this CL to bring back the two metadata files: https://dawn-review.googlesource.com/c/dawn/+/150540",
+      "parentUuid": "e9b2fcb7_ef54aefd",
+      "revId": "83bdc7fa46edd17e858e60c1e8c1c2224e1caeff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
