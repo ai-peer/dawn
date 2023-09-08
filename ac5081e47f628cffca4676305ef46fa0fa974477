@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "82618f18_4d403809",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 63
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T21:51:35Z",
+      "side": 1,
+      "message": "And Loko points out that doesn\u0027t work either because the user could drop the instance if they\u0027re not using WaitAny/ProcessEvents.\nThis would mean we have to make sure any Spontaneous events in the EventManager.\nAnd any Spontaneous|Future or Spontaneous|ProcessEvents events would have to be dropped without completing and assumed to complete spontaneously later.\n\nToo complicated to get right. Just gonna use a WeakRef and break the cycle properly.",
+      "parentUuid": "99f0aa05_fc95b61f",
+      "revId": "ac5081e47f628cffca4676305ef46fa0fa974477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b79304e3_23af6be3",
