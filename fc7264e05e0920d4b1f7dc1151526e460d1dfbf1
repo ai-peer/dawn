@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd849eac_674ad43f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-08T00:47:13Z",
+      "side": 1,
+      "message": "As per the conversation with Rachel on the original CL (https://dawn-review.googlesource.com/c/dawn/+/147722/comments/5a7402f7_1e4f6211), Chromium\u0027s rules for third_party libs is different from google3. We can keep the deps, but lets add back the metadata files used to parse out the license info.",
+      "revId": "fc7264e05e0920d4b1f7dc1151526e460d1dfbf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
