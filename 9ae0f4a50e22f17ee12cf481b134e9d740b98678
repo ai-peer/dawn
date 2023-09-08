@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85de7fb8_ad9d6bb8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-08T19:24:14Z",
+      "side": 1,
+      "message": "LGTM\n\nI had a thought that you may want to set this in the root \n.gn in case this does indeed cause problems and someone wants to revert it.\nthey\u0027ll have to revert the whole dawn roll, which is not terrible but slightly annoying.\n\nI\u0027m fine with landing this though. if something does break, we can probably move forward by enabling in the root .gn for future attempts.",
+      "revId": "9ae0f4a50e22f17ee12cf481b134e9d740b98678",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
