@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c12a7ee7_beb6784f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-08T16:28:19Z",
+      "side": 1,
+      "message": "ll",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "52729131_68806b28",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-09-08T13:14:07Z",
       "side": 1,
       "message": "Do we need to support other ways to import the memory, for example via a HANDLE or an fd? IIRC Rafael explained that using the import path from a HANDLE was way better on Windows to avoid double-counting the memory for the memory subsystem.",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f308bb17_81131e68",
+        "filename": "dawn.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-08T16:28:19Z",
+      "side": 1,
+      "message": "that sounds like a good reason though - can look into it in the future; I\u0027ll leave a TODO in the doc for now. It\u0027s nice to have the pointer version that works everywhere, but we can certainly add a windows-specific HANDLE one too.",
+      "parentUuid": "52729131_68806b28",
       "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ccb4ea3b_6161da65",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-08T16:28:19Z",
+      "side": 1,
+      "message": "why do you think we should? here, I feel like it wouldn\u0027t help for performance because the rest of the stuff we\u0027re doing in the function looks pretty expensive. And, it\u0027s totally ok if the function fails because this function is able to report errors.\n\ncaching on the device is useful when we can\u0027t report errors, or we really care about the performance - none of which apply here.\ndownside of caching is that the already fat device gets even fatter",
+      "parentUuid": "42c327ea_f179111d",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e046df_58045975",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 16
@@ -105,6 +158,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9b3eb5f0_550e45d6",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-08T16:28:19Z",
+      "side": 1,
+      "message": "we definitely should; I\u0027ve noted doing dispose handling and testing of it in the readme of the doc\n\nwe also probably need to call the dispose callback on validation errors. Unclear what we\u0027re supposed to do in the case where you don\u0027t enable the feature. was discussing with kai about this and what we think we\u0027ll do generally for feature-not-enabled cases in webgpu.h so I punted error handling for now",
+      "parentUuid": "c1e046df_58045975",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0d3aefc_a525c728",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 16
@@ -116,6 +187,24 @@
       "writtenOn": "2023-09-08T13:14:07Z",
       "side": 1,
       "message": "Is this still called if the call to BindBufferMemory fails?",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8ce3670_ed9156b2",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-08T16:28:19Z",
+      "side": 1,
+      "message": "yes, it is - InitializeHostMapped is populating the members immediately as it goes, so if vkBindBufferMemoryFails, mDedicatedDeviceMemory will still be a valid handle.\n\nlosing the last Buffer ref will do ApiObjectBase::Destroy -\u003e DestroyImpl",
+      "parentUuid": "f0d3aefc_a525c728",
       "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
