@@ -153,6 +153,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72280c60_833ed075",
+        "filename": "src/dawn/common/FutureUtils.cpp",
+        "patchSetId": 48
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "FYI this ended up going a slightly different direction, will be a followup to implement. (Left TODO.)\n\nhttps://github.com/webgpu-native/webgpu-headers/issues/199#issuecomment-1710784711",
+      "parentUuid": "90cd9eea_c82a09c3",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "779cba67_e9aa4efc",
@@ -1547,6 +1565,24 @@
       "side": 1,
       "message": "It depends if there\u0027s rolling mapped buffers going on for example you might have many events for a single submitted serial. But we could add a TODO and optimize later. Or we could use OSEventReceiver::Duplicate to insert at most once per submitted serial (though mapped buffers don\u0027t necessarily need to wait for the last submitted).",
       "parentUuid": "283dfb7a_e15e7d28",
+      "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0bcf3adc_2c624568",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 48
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure the optimization to not create pipes until we need them is going to work out and be strictly better than this, but will leave a TODO just in case.",
+      "parentUuid": "a940d521_16c21ae4",
       "revId": "cbc33721150d1f0823bc5840cb159ef6892527bf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

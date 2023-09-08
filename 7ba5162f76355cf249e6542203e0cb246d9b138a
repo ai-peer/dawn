@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fb9b09b4_94ef47cf",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Done, though OK to keep default destructors and move constructors in .h? And trivial default constructors for OSEventPipe/OSEventReceiver and wire client TrackedEvent?",
+      "parentUuid": "7476b038_672ce658",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c47395a3_a6569426",
         "filename": "src/dawn/native/EventManager.h",
         "patchSetId": 56
@@ -65,6 +83,30 @@
       "writtenOn": "2023-09-07T13:15:52Z",
       "side": 1,
       "message": "nit: Maybe could take a Ref and then we\u0027d std::move from Queue::OnSubmittedWorkDoneF",
+      "range": {
+        "startLine": 59,
+        "startChar": 66,
+        "endLine": 59,
+        "endChar": 79
+      },
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bffe7ef7_a00709ce",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Done (had to also change a `Ref\u003cWorkDoneEvent\u003e` to `Ref\u003cTrackedEvent\u003e` in `WorkDoneEvent::Create` but this is fine)",
+      "parentUuid": "c47395a3_a6569426",
       "range": {
         "startLine": 59,
         "startChar": 66,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6a5c070_b32defae",
+        "filename": "src/dawn/native/OSEventReceiver.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Good idea, done.",
+      "parentUuid": "f08bf94e_8aba16ae",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "af626bed_52239520",
@@ -105,6 +165,24 @@
       "writtenOn": "2023-09-07T13:15:52Z",
       "side": 1,
       "message": "While the functionality works, the API for all this seems a bit scattered and more verbose than needed? What about the following (using System instead of OS), cf SystemUtils. This is very similar but tries to make the implementation more basic while using more of the move semantics of C++ etc.\n\nAlso everything could be in the same file IMHO. It\u0027s not that big.\n\n```\nstruct SystemEventPrimitive : NonCopyable {\n  SystemEventPrimitive(uintptr_t value);\n  static SystemEventPrimitive MakeInvalid();\n  ~SystemEventPrimitive(); // calls Close();\n  \n  // Move constructor / assignment that Close() if needed etc.\n\n  IsValid() const;\n  Close();\n  SystemEventPrimitive Duplicate() const;\n\n  private:\n    SystemEventPrimitive(); // Makes invalid.\n};\n\nclass SystemEventSource {\n  // movable is defaulted I believe.\n  explicit SystemEventSource(SystemEventPrimitive\u0026\u0026);\n  void Signal() \u0026\u0026; // Forces std::move(target).Signal() to say it is consumed\n\n  private:\n    SystemEventPrimitive mPrimitive;\n};\n\nclass SystemEventTarget {\n  explicit SystemEventTarget(SystemEventPrimitive\u0026\u0026);\n  static CreateAlreadySignaled();\n  SystemEventTarget Duplicate() const;\n  \n  const SystemEventPrimitive\u0026 GetPrimitive() const;\n  private:\n    SystemEventPrimitive mPrimitive;\n};\n\nstd::pair\u003cSystemEventSource, SystemEventTarget\u003e MakeSystemEventPipe();\n\nstruct TrackedFutureWaitInfo;\n[[nodiscard]] bool WaitAnySystemEvent(size_t count,\n                                      TrackedFutureWaitInfo* futures,\n                                      Nanoseconds timeout);\n```\n\nBen suggests `CreateSystemEvent` `SystemEventSendHandle` and `SystemEventReceiveHandle`. Names are hard.",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5329f426_17ca65e0",
+        "filename": "src/dawn/native/OSEventReceiver.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Done as much as I could.\n\nMoving the RAII to Primitive is good, leaves less work to do in the others. Also had completely forgotten you could do `void Signal() \u0026\u0026`.\nI ended up relying on `friend` a lot here to avoid the Primitive leaking out of this file any more than it needs to.\n\nThis is better but I don\u0027t want to go too far with making this perfect because I think some of the other work is going to change this up significantly. (The optimization to not create OS events until they\u0027re waited may mean that the sender and receiver need to become a single object, or it may mean they get wrapped up in another outer object, I don\u0027t know yet.)",
+      "parentUuid": "af626bed_52239520",
       "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +204,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ccfe281_e7494ec6",
+        "filename": "src/dawn/native/OSEventReceiver.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Probably a good tradeoff. It\u0027s a bit tricky because int is signed and void* isn\u0027t, but we can use 0 for both since we obviously don\u0027t need to support fd 0 (stdin).",
+      "parentUuid": "6ddb3338_bd3e1f54",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6359c539_09f58b6b",
@@ -139,6 +235,24 @@
       "writtenOn": "2023-09-07T13:15:52Z",
       "side": 1,
       "message": "nit: inline in Queue::OnSubmittedWorkDoneF?",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cd2a985_ab066b0f",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 588,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6359c539_09f58b6b",
       "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +274,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b45476db_b67f0cbf",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Pretty much yes, just need to paper over a small thing.",
+      "parentUuid": "6e86c4ad_bc05dce8",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83802cf7_6cd09e55",
@@ -173,6 +305,24 @@
       "writtenOn": "2023-09-07T13:15:52Z",
       "side": 1,
       "message": "nit: Could be private.",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fb116fa_dd4f4df8",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83802cf7_6cd09e55",
       "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +344,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b4d41e_65e07eef",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Good catch, I tried to do this yesterday but something prevented me from succeeding, not a problem anymore apparently.",
+      "parentUuid": "3f1fa532_54bdacc2",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bca10dcc_3a99076a",
@@ -211,6 +379,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0baf8a73_c442abda",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Done. Thought we\u0027d need to have the queue to check its serial for some optimizations but that may end up getting abstracted totally differently.\n\nUnfortunately I think it still should be a Ref. A WeakRef could kinda work but it adds extra logic for not much value, I think.",
+      "parentUuid": "bca10dcc_3a99076a",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8d5c38d_d982d87c",
@@ -224,6 +410,30 @@
       "writtenOn": "2023-09-07T13:15:52Z",
       "side": 1,
       "message": "nit: ToAPI\n```suggestion\n    cmd.self \u003d ToAPI(this);\n```",
+      "range": {
+        "startLine": 142,
+        "startChar": 15,
+        "endLine": 142,
+        "endChar": 45
+      },
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e4287d2_7eed7ae6",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 56
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T02:18:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8d5c38d_d982d87c",
       "range": {
         "startLine": 142,
         "startChar": 15,
