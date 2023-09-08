@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "34675894_ddde60fc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 62
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T12:30:40Z",
+      "side": 1,
+      "message": "Still LGTM!",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7340309e_f3111585",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T12:30:40Z",
+      "side": 1,
+      "message": "Oh I was suggesting moving this in TrackedEvent so that we no longer need GetWaitDevice.\n\nAlso couldn\u0027t this be a raw pointer because the event outlives the device? (aaaand turns out that\u0027s not true). Maybe a TODO to break the ref pseudo-cycle?",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bca01d_42c65f39",
+        "filename": "src/dawn/native/SystemEvent.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T12:30:40Z",
+      "side": 1,
+      "message": "It\u0027d be nice to be able to do `using ToMilliseconds \u003d ToMillisecondsGeneric\u003cDWORD, INFINITE\u003e` but I\u0027m not sure C++ allows that.",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d29f4d95_6ada9567",
+        "filename": "src/dawn/native/SystemEvent.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T12:30:40Z",
+      "side": 1,
+      "message": "It seems like we could Close() to act as RAII?",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3925ba5_3aebd8f6",
+        "filename": "src/dawn/native/SystemEvent.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T12:30:40Z",
+      "side": 1,
+      "message": "What if this has a value already, shouldn\u0027t we Close() it? Also what if rhs \u003d\u003d this?",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

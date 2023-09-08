@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07c6477a_82a8f6eb",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T12:30:40Z",
+      "side": 1,
+      "message": "In general we try to keep everything in the .cpp but this is really a u-u-nit 😊",
+      "parentUuid": "fb9b09b4_94ef47cf",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c47395a3_a6569426",
         "filename": "src/dawn/native/EventManager.h",
         "patchSetId": 56
@@ -201,6 +219,24 @@
       "side": 1,
       "message": "Oh and BTW I don\u0027t think the names should be symmetric - SystemEventReceiver is going to also be used for things other than pipes (when we hook it up to D3D12 for example).\n\nI find the Send/Receive names much clearer than Source/Target, and weakly prefer Sender over SendHandle, so used that naming.",
       "parentUuid": "5329f426_17ca65e0",
+      "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43ef308f_90e20dc0",
+        "filename": "src/dawn/native/OSEventReceiver.h",
+        "patchSetId": 56
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T12:30:40Z",
+      "side": 1,
+      "message": "Thank you for all the changes there, the current state looks good and we can always improve things later if need be. Naming sounds good!",
+      "parentUuid": "6abc9edb_3da37ae6",
       "revId": "7ba5162f76355cf249e6542203e0cb246d9b138a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
