@@ -89,6 +89,8 @@ MTLVertexFormat VertexFormatType(wgpu::VertexFormat format) {
             return MTLVertexFormatInt3;
         case wgpu::VertexFormat::Sint32x4:
             return MTLVertexFormatInt4;
+        case wgpu::VertexFormat::Rgb10a2:
+            return MTLVertexFormatUInt1010102Normalized;
         default:
             UNREACHABLE();
     }
