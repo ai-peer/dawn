@@ -27,10 +27,13 @@ using ResolverPixelLocalExtensionTest = ResolverTest;
 
 TEST_F(ResolverPixelLocalExtensionTest, AddressSpaceUsedWithExtension) {
     // enable chromium_experimental_pixel_local;
-    // var<pixel_local> v : f16;
+    // struct S { a : i32 }
+    // var<pixel_local> v : S;
     Enable(Source{{12, 34}}, core::Extension::kChromiumExperimentalPixelLocal);
 
-    GlobalVar("v", ty.u32(), core::AddressSpace::kPixelLocal);
+    Structure("S", Vector{Member("a", ty.i32())});
+
+    GlobalVar("v", ty("S"), core::AddressSpace::kPixelLocal);
 
 #if TINT_ENABLE_PIXEL_LOCAL_EXTENSION
     EXPECT_TRUE(r()->Resolve()) << r()->error();
@@ -44,10 +47,14 @@ TEST_F(ResolverPixelLocalExtensionTest, AddressSpaceUsedWithExtension) {
 }
 
 TEST_F(ResolverPixelLocalExtensionTest, AddressSpaceUsedWithoutExtension) {
-    // var<pixel_local> v : u32;
+    // struct S { a : i32 }
+    // var<pixel_local> v : S;
+
+    Structure("S", Vector{Member("a", ty.i32())});
+
     AST().AddGlobalVariable(create<ast::Var>(
         /* name */ Ident("v"),
-        /* type */ ty.u32(),
+        /* type */ ty("S"),
         /* declared_address_space */ Expr(Source{{12, 34}}, core::AddressSpace::kPixelLocal),
         /* declared_access */ nullptr,
         /* initializer */ nullptr,
@@ -90,14 +97,9 @@ TEST_P(ResolverPixelLocalExtensionTest_Types, Direct) {
     Enable(core::Extension::kChromiumExperimentalPixelLocal);
     GlobalVar(Source{{12, 34}}, "v", GetParam().type(*this), core::AddressSpace::kPixelLocal);
 
-    if (GetParam().pass) {
-        EXPECT_TRUE(r()->Resolve()) << r()->error();
-    } else {
-        EXPECT_FALSE(r()->Resolve());
-        EXPECT_EQ(
-            r()->error(),
-            R"(12:34 error: 'pixel_local' address space variables can only be of type 'i32', 'u32', 'f32' or a struct of those types)");
-    }
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(r()->error(),
+              R"(12:34 error: 'pixel_local' variable only support struct storage types)");
 }
 
 TEST_P(ResolverPixelLocalExtensionTest_Types, Struct) {
