@@ -388,6 +388,11 @@ TEST_F(VertexStateTest, BaseTypeMatching) {
     DoTest(wgpu::VertexFormat::Unorm16x2, "i32", false);
     DoTest(wgpu::VertexFormat::Unorm16x2, "u32", false);
 
+    // Test that rgb10a2 format is compatible only with f32.
+    DoTest(wgpu::VertexFormat::Rgb10a2, "f32", true);
+    DoTest(wgpu::VertexFormat::Rgb10a2, "i32", false);
+    DoTest(wgpu::VertexFormat::Rgb10a2, "u32", false);
+
     // Test that an snorm format is compatible only with f32.
     DoTest(wgpu::VertexFormat::Snorm16x4, "f32", true);
     DoTest(wgpu::VertexFormat::Snorm16x4, "i32", false);
