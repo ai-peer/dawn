@@ -69,6 +69,7 @@ class VertexFormatTest : public DawnTest {
             case wgpu::VertexFormat::Unorm16x4:
             case wgpu::VertexFormat::Snorm16x2:
             case wgpu::VertexFormat::Snorm16x4:
+            case wgpu::VertexFormat::Rgb10a2:
                 return true;
             default:
                 return false;
@@ -89,6 +90,7 @@ class VertexFormatTest : public DawnTest {
             case wgpu::VertexFormat::Unorm8x4:
             case wgpu::VertexFormat::Unorm16x2:
             case wgpu::VertexFormat::Unorm16x4:
+            case wgpu::VertexFormat::Rgb10a2:
                 return true;
             default:
                 return false;
@@ -153,6 +155,7 @@ class VertexFormatTest : public DawnTest {
             case wgpu::VertexFormat::Sint32x2:
             case wgpu::VertexFormat::Sint32x3:
             case wgpu::VertexFormat::Sint32x4:
+            case wgpu::VertexFormat::Rgb10a2:
                 return 4;
             default:
                 DAWN_UNREACHABLE();
@@ -194,6 +197,7 @@ class VertexFormatTest : public DawnTest {
             case wgpu::VertexFormat::Float32x4:
             case wgpu::VertexFormat::Uint32x4:
             case wgpu::VertexFormat::Sint32x4:
+            case wgpu::VertexFormat::Rgb10a2:
                 return 4;
             default:
                 DAWN_UNREACHABLE();
@@ -847,6 +851,30 @@ TEST_P(VertexFormatTest, Sint32x4) {
         std::numeric_limits<int8_t>::max(),  std::numeric_limits<int8_t>::min(),  256,  -4567};
 
     DoVertexFormatTest(wgpu::VertexFormat::Sint32x4, vertexData, vertexData);
+}
+
+TEST_P(VertexFormatTest, Rgb10a2) {
+    auto MakeRGB10A2 = [](uint32_t r, uint32_t g, uint32_t b, uint32_t a) -> uint32_t {
+        ASSERT((r & 0x3FF) == r);
+        ASSERT((g & 0x3FF) == g);
+        ASSERT((b & 0x3FF) == b);
+        ASSERT((a & 0x3) == a);
+        return r | g << 10 | b << 20 | a << 30;
+    };
+
+    std::vector<uint32_t> vertexData = {MakeRGB10A2(0, 0, 0, 0), MakeRGB10A2(1023, 1023, 1023, 1),
+                                        MakeRGB10A2(243, 578, 765, 2), MakeRGB10A2(0, 0, 0, 3)};
+
+    // clang-format off
+    std::vector<float> expectedData = {
+        0.0f, 0.0f, 0.0f, 0.0f,
+        1.0f, 1.0f, 1.0f, 1 / 3.0f,
+        243 / 1023.0f, 576 / 1023.0f, 765 / 1023.0f, 2 / 3.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
+    };
+    // clang-format on
+
+    DoVertexFormatTest(wgpu::VertexFormat::Rgb10a2, vertexData, expectedData);
 }
 
 DAWN_INSTANTIATE_TEST(VertexFormatTest,
