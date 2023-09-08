@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5af6e48_ea2c2e4f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 63
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T21:27:53Z",
+      "side": 1,
+      "message": "I decided to just do it in the destructor (which will be automatically called by Instance\u0027s destructor. Unlike devices, client instances, etc., I don\u0027t think dawn::native::InstanceBase needs an explicit shutdown prior to the destructor.",
+      "parentUuid": "5ee269a3_5c39c36f",
+      "revId": "ac5081e47f628cffca4676305ef46fa0fa974477",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "b79304e3_23af6be3",
