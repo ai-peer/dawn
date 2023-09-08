@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "52bbc5cd_ac04a939",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T21:21:47Z",
+      "side": 1,
+      "message": "Ahh I see. In the future there will be events for non-device events. But in dawn native it now occurs to me we shouldn\u0027t ever need to track those so they won\u0027t need TrackedEvents.\n\nWe still need GetWaitDevice because it might return the source device, and it might not. But I was able to abstract it better.\n\nAdded a TODO. Actually, I kept forgetting about this problem - I think there was a *real* ref cycle, because shutdown is not implemented. So I\u0027ve implemented shutdown! It was pretty easy because I already figured it out for the wire client. Better that it\u0027s done now anyway.",
+      "parentUuid": "7340309e_f3111585",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "31bca01d_42c65f39",
         "filename": "src/dawn/native/SystemEvent.cpp",
         "patchSetId": 62
@@ -83,6 +101,24 @@
       "writtenOn": "2023-09-08T21:12:53Z",
       "side": 1,
       "message": "Acknowledged",
+      "parentUuid": "31bca01d_42c65f39",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "757d049e_7e2c2471",
+        "filename": "src/dawn/native/SystemEvent.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T21:21:47Z",
+      "side": 1,
+      "message": "Unfortunately not, it was the first thing I tried.",
       "parentUuid": "31bca01d_42c65f39",
       "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -123,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc061d8c_cc2a5672",
+        "filename": "src/dawn/native/SystemEvent.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T21:21:47Z",
+      "side": 1,
+      "message": "This was to force users to call Close() explicitly. It\u0027s handy because SystemEventReceiver doesn\u0027t care (calls Close in the destructor) but SystemEventPipeSender would like to detect if you accidentally closed without signalling (because then the receiver will \"leak\").\n\nHowever since there are only 2 users (in the same file) and this makes operator\u003d feel fragile (it would also have to assert), this is probably better. Done.",
+      "parentUuid": "d29f4d95_6ada9567",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c3925ba5_3aebd8f6",
@@ -153,6 +207,24 @@
       "writtenOn": "2023-09-08T21:12:53Z",
       "side": 1,
       "message": "Done",
+      "parentUuid": "c3925ba5_3aebd8f6",
+      "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab75844b_c4779ad8",
+        "filename": "src/dawn/native/SystemEvent.cpp",
+        "patchSetId": 62
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-08T21:21:47Z",
+      "side": 1,
+      "message": "Oops. Yes ^_^",
       "parentUuid": "c3925ba5_3aebd8f6",
       "revId": "15cb5cf2955ba28adb0cb2d6f23e204fbe39779d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
