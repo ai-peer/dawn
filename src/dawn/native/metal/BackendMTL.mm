@@ -456,7 +456,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
                     return true;
                 }
 #if DAWN_PLATFORM_IS(MACOS)
-                if (gpu_info::IsIntel(vendorId) && !IsMacOSVersionAtLeast(11)) {
+                if (!gpu_info::IsApple(vendorId) && !IsMacOSVersionAtLeast(11)) {
                     return true;
                 }
 #endif
