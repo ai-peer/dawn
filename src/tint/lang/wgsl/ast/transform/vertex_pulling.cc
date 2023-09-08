@@ -126,6 +126,8 @@ StringStream& operator<<(StringStream& out, VertexFormat format) {
             return out << "sint32x3";
         case VertexFormat::kSint32x4:
             return out << "sint32x4";
+        case VertexFormat::kRgb10a2:
+            return out << "rgb10a2";
     }
     return out << "<unknown>";
 }
@@ -224,6 +226,9 @@ VertexFormatType VertexFormatTypeOf(VertexFormat format) {
         case VertexFormat::kFloat16x4:
         case VertexFormat::kFloat32x4:
             return {VertexDataType::kFloat, 4};
+        case VertexFormat::kRgb10a2:
+            // TODO
+            return {VertexDataType::kInvalid, 0};
     }
     return {VertexDataType::kInvalid, 0};
 }
@@ -667,6 +672,9 @@ struct VertexPulling::State {
             case VertexFormat::kFloat16x4:
                 return b.Call<vec4<f32>>(b.Call("unpack2x16float", load_u32()),
                                          b.Call("unpack2x16float", load_next_u32()));
+            case VertexFormat::kRgb10a2:
+                // TODO
+                return nullptr;
         }
 
         TINT_UNREACHABLE() << "format " << static_cast<int>(format);
