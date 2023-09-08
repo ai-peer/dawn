@@ -12,6 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+if (BUILD_ANDROID_SAMPLES)
+  add_subdirectory(android)
+else()	
 add_library(dawn_sample_utils STATIC ${DAWN_PLACEHOLDER_FILE})
 common_compile_options(dawn_sample_utils)
 target_sources(dawn_sample_utils PRIVATE
@@ -49,4 +52,6 @@ target_link_libraries(Animometer dawn_sample_utils)
 add_executable(DawnInfo "DawnInfo.cpp")
 common_compile_options(DawnInfo)
 target_link_libraries(DawnInfo dawn_sample_utils)
+
+endif()
 
