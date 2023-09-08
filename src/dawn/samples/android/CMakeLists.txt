@@ -1,0 +1,5 @@
+project(dawn-on-android)
+cmake_minimum_required(VERSION 3.22)
+#add_subdirectory(../../../../../dawn EXCLUDE_FROM_ALL)
+add_subdirectory(game_activity/app/src/main/cpp)
+add_subdirectory(game_activity/app/src/main/cpp2)
