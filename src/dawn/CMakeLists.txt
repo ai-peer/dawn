@@ -38,11 +38,12 @@ add_subdirectory(utils)
 add_subdirectory(glfw)
 add_subdirectory(tests/benchmarks)
 
-if (DAWN_BUILD_SAMPLES)
+if (DAWN_BUILD_SAMPLES OR DAWN_BUILD_ANDROID_SAMPLES)
     #TODO(dawn:269): Add this once implementation-based swapchains are removed.
     #add_subdirectory(src/utils)
     add_subdirectory(samples)
 endif()
+
 
 if (DAWN_BUILD_NODE_BINDINGS)
     set(NODE_BINDING_DEPS

@@ -37,6 +37,8 @@ bool ShouldQuit();
 struct GLFWwindow;
 struct GLFWwindow* GetGLFWWindow();
 
+wgpu::Device CreateCppDawnDeviceForAndroid(
+    wgpu::SurfaceDescriptorFromAndroidNativeWindow androidDesc);
 wgpu::Device CreateCppDawnDevice();
 wgpu::TextureFormat GetPreferredSwapChainTextureFormat();
 wgpu::SwapChain GetSwapChain();
