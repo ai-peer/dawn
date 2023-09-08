@@ -33,6 +33,24 @@
       "message": "in what way did you see this was necessary?\n\nthe c++ headers should only depend on the C headers. the proc table is a separate thing, so maybe wherever you\u0027re using Dawn, you should be explicitly adding `dawn:proc` as a dependency?\n\nwebgpu.h declares the C functions wgpuFooBar*, wgpuFoo*, etc.\n\ndawn_proc is a separate library which defines those functions using a dispatch table, and gives you a way to set the dispatch table.",
       "revId": "54d63c6cf84ea36c0a141a873b90cc226190ac6d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7735b9f5_ad1c1e43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004036
+      },
+      "writtenOn": "2023-09-08T16:14:47Z",
+      "side": 1,
+      "message": "ah thanks, it was something that includes dawn_proc.h but only depended on third_party/dawn/include/dawn:cpp_headers.",
+      "parentUuid": "151a98e6_f42f18dd",
+      "revId": "54d63c6cf84ea36c0a141a873b90cc226190ac6d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
