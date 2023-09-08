@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73218851_ac120355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "Very nice, LGTM!",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52729131_68806b28",
+        "filename": "dawn.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "Do we need to support other ways to import the memory, for example via a HANDLE or an fd? IIRC Rafael explained that using the import path from a HANDLE was way better on Windows to avoid double-counting the memory for the memory subsystem.",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "527cc9ef_6c9d3758",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "nit: Maybe we could explain why this works with files, and how we believe this works on the system?",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2233bdeb_05f06f94",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "TODO(dawn: ...) consider allowing the host-mapped buffers to be mapped through WebGPU.",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42c327ea_f179111d",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "nit: we could cache this on the device.",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1e046df_58045975",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "Shouldn\u0027t we call dispose if any of these calls fail?",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0d3aefc_a525c728",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "Is this still called if the call to BindBufferMemory fails?",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23182d4_6a78ee6e",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "nit: \u003c\u003d?",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6b52e58_8b9ed909",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T13:14:07Z",
+      "side": 1,
+      "message": "nit: TODO ... make a proper limit for this.",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
