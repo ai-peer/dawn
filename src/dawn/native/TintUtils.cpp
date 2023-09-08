@@ -104,6 +104,8 @@ tint::ast::transform::VertexFormat ToTintVertexFormat(wgpu::VertexFormat format)
             return tint::ast::transform::VertexFormat::kSint32x3;
         case wgpu::VertexFormat::Sint32x4:
             return tint::ast::transform::VertexFormat::kSint32x4;
+        case wgpu::VertexFormat::Rgb10a2:
+            return tint::ast::transform::VertexFormat::kRgb10a2;
 
         case wgpu::VertexFormat::Undefined:
             break;
