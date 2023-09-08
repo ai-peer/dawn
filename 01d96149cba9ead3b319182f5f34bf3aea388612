@@ -295,6 +295,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "57ef942b_59fc1ad5",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T14:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d646101e_179dbcfe",
+      "range": {
+        "startLine": 589,
+        "startChar": 8,
+        "endLine": 623,
+        "endChar": 78
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d45e9ac_430ea6a0",
@@ -805,6 +829,30 @@
       "side": 1,
       "message": "\u003e Do we need to test both extensions?\n\nI don\u0027t think it\u0027s necessary to test stuff like validation against limits or that multi-subresource views are invalid with both extensions.\n\nI think it would be useful to have just one basic validation test that says \"using PLS is allowed if you enable either PixelLocalStorageNonCoherent OR PixelLocalStorageCoherent\"\n\nok as a follow-up too",
       "parentUuid": "e74e9c38_5cd73e6d",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 63
+      },
+      "revId": "01d96149cba9ead3b319182f5f34bf3aea388612",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9767ea6_caeeda4e",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-08T14:14:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f52c6eb1_a7612d73",
       "range": {
         "startLine": 126,
         "startChar": 0,
