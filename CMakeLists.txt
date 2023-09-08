@@ -87,6 +87,8 @@ set(USE_WAYLAND OFF)
 set(USE_X11 OFF)
 set(USE_WINDOWS_UI OFF)
 set(BUILD_SAMPLES OFF)
+set(BUILD_ANDROID_SAMPLES OFF)
+
 if (WIN32)
     set(ENABLE_D3D11 ON)
     set(USE_WINDOWS_UI ON)
@@ -118,6 +120,8 @@ endif()
 # Current examples are depend on GLFW
 if (DAWN_SUPPORTS_GLFW_FOR_WINDOWING)
     set(BUILD_SAMPLES ON)
+elseif (ANDROID)
+    set(BUILD_ANDROID_SAMPLES ON)
 endif()
 
 option_if_not_defined(DAWN_ENABLE_ASAN "Enable address sanitizer" OFF)
@@ -140,6 +144,7 @@ option_if_not_defined(DAWN_USE_GLFW "Enable compilation of the GLFW windowing ut
 option_if_not_defined(DAWN_USE_WINDOWS_UI "Enable support for Windows UI surface" ${USE_WINDOWS_UI})
 
 option_if_not_defined(DAWN_BUILD_SAMPLES "Enables building Dawn's samples" ${BUILD_SAMPLES})
+option_if_not_defined(DAWN_BUILD_ANDROID_SAMPLES "Enables building Dawn's samples" ${BUILD_ANDROID_SAMPLES})
 option_if_not_defined(DAWN_BUILD_NODE_BINDINGS "Enables building Dawn's NodeJS bindings" OFF)
 option_if_not_defined(DAWN_ENABLE_SWIFTSHADER "Enables building Swiftshader as part of the build and Vulkan adapter discovery" OFF)
 option_if_not_defined(DAWN_BUILD_BENCHMARKS "Build Dawn benchmarks" OFF)
@@ -155,7 +160,12 @@ else()
   set(TINT_DEFAULT_GLSL OFF)
 endif()
 
-option_if_not_defined(TINT_BUILD_CMD_TOOLS "Build the Tint command line tools" ON)
+if (ANDROID)
+  set(TINT_BUILD_CMD_TOOLS OFF)
+else()
+  set(TINT_BUILD_CMD_TOOLS ON)
+endif()
+
 option_if_not_defined(TINT_BUILD_DOCS "Build documentation" ON)
 option_if_not_defined(TINT_DOCS_WARN_AS_ERROR "When building documentation, treat warnings as errors" OFF)
 
@@ -292,6 +302,7 @@ message(STATUS "Dawn build X11 support: ${DAWN_USE_X11}")
 message(STATUS "Dawn build Windows UI support: ${DAWN_USE_WINDOWS_UI}")
 
 message(STATUS "Dawn build samples: ${DAWN_BUILD_SAMPLES}")
+message(STATUS "Dawn build Android samples: ${DAWN_BUILD_ANDROID_SAMPLES}")
 message(STATUS "Dawn build Node bindings: ${DAWN_BUILD_NODE_BINDINGS}")
 message(STATUS "Dawn build Swiftshader: ${DAWN_ENABLE_SWIFTSHADER}")
 message(STATUS "Dawn build benchmarks: ${DAWN_BUILD_BENCHMARKS}")
