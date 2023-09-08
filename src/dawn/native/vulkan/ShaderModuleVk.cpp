@@ -14,7 +14,9 @@
 
 #include "dawn/native/vulkan/ShaderModuleVk.h"
 
+#ifdef DAWN_ENABLE_SPIRV_VALIDATION
 #include <spirv-tools/libspirv.hpp>
+#endif
 
 #include <map>
 #include <string>
@@ -22,7 +24,9 @@
 
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/Serializable.h"
+#ifdef DAWN_ENABLE_SPIRV_VALIDATION
 #include "dawn/native/SpirvValidation.h"
+#endif
 #include "dawn/native/TintUtils.h"
 #include "dawn/native/vulkan/BindGroupLayoutVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
