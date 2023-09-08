@@ -69,6 +69,7 @@ class VertexFormatTest : public DawnTest {
             case wgpu::VertexFormat::Unorm16x4:
             case wgpu::VertexFormat::Snorm16x2:
             case wgpu::VertexFormat::Snorm16x4:
+            case wgpu::VertexFormat::Rgb10a2:
                 return true;
             default:
                 return false;
@@ -89,6 +90,7 @@ class VertexFormatTest : public DawnTest {
             case wgpu::VertexFormat::Unorm8x4:
             case wgpu::VertexFormat::Unorm16x2:
             case wgpu::VertexFormat::Unorm16x4:
+            case wgpu::VertexFormat::Rgb10a2:
                 return true;
             default:
                 return false;
@@ -119,41 +121,44 @@ class VertexFormatTest : public DawnTest {
         }
     }
 
-    uint32_t BytesPerComponents(wgpu::VertexFormat format) {
+    uint32_t ByteSize(wgpu::VertexFormat format) {
         switch (format) {
-            case wgpu::VertexFormat::Uint8x2:
-            case wgpu::VertexFormat::Uint8x4:
             case wgpu::VertexFormat::Sint8x2:
-            case wgpu::VertexFormat::Sint8x4:
-            case wgpu::VertexFormat::Unorm8x2:
-            case wgpu::VertexFormat::Unorm8x4:
             case wgpu::VertexFormat::Snorm8x2:
-            case wgpu::VertexFormat::Snorm8x4:
-                return 1;
-            case wgpu::VertexFormat::Uint16x2:
-            case wgpu::VertexFormat::Uint16x4:
-            case wgpu::VertexFormat::Unorm16x2:
-            case wgpu::VertexFormat::Unorm16x4:
-            case wgpu::VertexFormat::Sint16x2:
-            case wgpu::VertexFormat::Sint16x4:
-            case wgpu::VertexFormat::Snorm16x2:
-            case wgpu::VertexFormat::Snorm16x4:
-            case wgpu::VertexFormat::Float16x2:
-            case wgpu::VertexFormat::Float16x4:
+            case wgpu::VertexFormat::Uint8x2:
+            case wgpu::VertexFormat::Unorm8x2:
                 return 2;
+            case wgpu::VertexFormat::Float16x2:
             case wgpu::VertexFormat::Float32:
-            case wgpu::VertexFormat::Float32x2:
-            case wgpu::VertexFormat::Float32x3:
-            case wgpu::VertexFormat::Float32x4:
-            case wgpu::VertexFormat::Uint32:
-            case wgpu::VertexFormat::Uint32x2:
-            case wgpu::VertexFormat::Uint32x3:
-            case wgpu::VertexFormat::Uint32x4:
+            case wgpu::VertexFormat::Rgb10a2:
+            case wgpu::VertexFormat::Sint16x2:
             case wgpu::VertexFormat::Sint32:
-            case wgpu::VertexFormat::Sint32x2:
-            case wgpu::VertexFormat::Sint32x3:
-            case wgpu::VertexFormat::Sint32x4:
+            case wgpu::VertexFormat::Sint8x4:
+            case wgpu::VertexFormat::Snorm16x2:
+            case wgpu::VertexFormat::Snorm8x4:
+            case wgpu::VertexFormat::Uint16x2:
+            case wgpu::VertexFormat::Uint32:
+            case wgpu::VertexFormat::Uint8x4:
+            case wgpu::VertexFormat::Unorm16x2:
+            case wgpu::VertexFormat::Unorm8x4:
                 return 4;
+            case wgpu::VertexFormat::Float16x4:
+            case wgpu::VertexFormat::Float32x2:
+            case wgpu::VertexFormat::Sint16x4:
+            case wgpu::VertexFormat::Sint32x2:
+            case wgpu::VertexFormat::Snorm16x4:
+            case wgpu::VertexFormat::Uint16x4:
+            case wgpu::VertexFormat::Uint32x2:
+            case wgpu::VertexFormat::Unorm16x4:
+                return 8;
+            case wgpu::VertexFormat::Float32x3:
+            case wgpu::VertexFormat::Sint32x3:
+            case wgpu::VertexFormat::Uint32x3:
+                return 12;
+            case wgpu::VertexFormat::Float32x4:
+            case wgpu::VertexFormat::Sint32x4:
+            case wgpu::VertexFormat::Uint32x4:
+                return 16;
             default:
                 DAWN_UNREACHABLE();
         }
@@ -194,6 +199,7 @@ class VertexFormatTest : public DawnTest {
             case wgpu::VertexFormat::Float32x4:
             case wgpu::VertexFormat::Uint32x4:
             case wgpu::VertexFormat::Sint32x4:
+            case wgpu::VertexFormat::Rgb10a2:
                 return 4;
             default:
                 DAWN_UNREACHABLE();
@@ -320,8 +326,7 @@ class VertexFormatTest : public DawnTest {
                     // Move normalize operation into shader because of CPU and GPU precision
                     // different on float math.
                     vs << "max(f32(" << std::to_string(expectedData[i * componentCount + j])
-                       << ") / " << std::to_string(std::numeric_limits<T>::max())
-                       << ".0 , -1.0));\n";
+                       << ") / " << std::to_string(std::numeric_limits<T>::max()) << ", -1.0));\n";
                 } else if (isHalf) {
                     // Because Vulkan and D3D12 handle -0.0f through bitcast have different
                     // result (Vulkan take -0.0f as -0.0 but D3D12 take -0.0f as 0), add workaround
@@ -389,12 +394,7 @@ class VertexFormatTest : public DawnTest {
                     return color;
                 })");
 
-        uint32_t bytesPerComponents = BytesPerComponents(format);
-        uint32_t strideBytes = bytesPerComponents * componentCount;
-        // Stride size must be multiple of 4 bytes.
-        if (strideBytes % 4 != 0) {
-            strideBytes += (4 - strideBytes % 4);
-        }
+        uint32_t strideBytes = Align(ByteSize(format), 4);
 
         utils::ComboRenderPipelineDescriptor descriptor;
         descriptor.vertex.module = vsModule;
@@ -847,6 +847,30 @@ TEST_P(VertexFormatTest, Sint32x4) {
         std::numeric_limits<int8_t>::max(),  std::numeric_limits<int8_t>::min(),  256,  -4567};
 
     DoVertexFormatTest(wgpu::VertexFormat::Sint32x4, vertexData, vertexData);
+}
+
+TEST_P(VertexFormatTest, Rgb10a2) {
+    auto MakeRGB10A2 = [](uint32_t r, uint32_t g, uint32_t b, uint32_t a) -> uint32_t {
+        ASSERT((r & 0x3FF) == r);
+        ASSERT((g & 0x3FF) == g);
+        ASSERT((b & 0x3FF) == b);
+        ASSERT((a & 0x3) == a);
+        return r | g << 10 | b << 20 | a << 30;
+    };
+
+    std::vector<uint32_t> vertexData = {MakeRGB10A2(0, 0, 0, 0), MakeRGB10A2(1023, 1023, 1023, 1),
+                                        MakeRGB10A2(243, 578, 765, 2), MakeRGB10A2(0, 0, 0, 3)};
+
+    // clang-format off
+    std::vector<float> expectedData = {
+        0.0f, 0.0f, 0.0f, 0.0f,
+        1.0f, 1.0f, 1.0f, 1 / 3.0f,
+        243 / 1023.0f, 576 / 1023.0f, 765 / 1023.0f, 2 / 3.0f,
+        0.0f, 0.0f, 0.0f, 1.0f
+    };
+    // clang-format on
+
+    DoVertexFormatTest(wgpu::VertexFormat::Rgb10a2, vertexData, expectedData);
 }
 
 DAWN_INSTANTIATE_TEST(VertexFormatTest,
