@@ -16,6 +16,23 @@
       "message": "Ken - cherry-picking",
       "revId": "a7d14db395b074304efbe16eabbd8db9d16a4e42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dddb0b7_612c9d2c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-09T00:32:02Z",
+      "side": 1,
+      "message": "Nice! Please tell AMD about this bug and how to disable the workaround so that they can hopefully fix it in the future and we can conditionalize the workaround to particular driver versions. Just ran into a problem with longstanding driver bug workarounds causing problems in crbug.com/1480622 and we should try to avoid that in Dawn.",
+      "revId": "a7d14db395b074304efbe16eabbd8db9d16a4e42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
