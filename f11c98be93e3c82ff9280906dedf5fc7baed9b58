@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ad6a171_e55b786b",
+        "filename": "src/dawn/tests/end2end/EventTests.cpp",
+        "patchSetId": 66
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-09T01:47:01Z",
+      "side": 1,
+      "message": "unit. Ah sorry for not noticing before, but even though we already have quite a few tests with _ in them, I\u0027m pretty sure that the gtest style suggests to not use them. I think just dropping them is fine?\n\nSee: https://google.github.io/googletest/primer.html#simple-tests",
+      "range": {
+        "startLine": 397,
+        "startChar": 29,
+        "endLine": 397,
+        "endChar": 61
+      },
+      "revId": "f11c98be93e3c82ff9280906dedf5fc7baed9b58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
