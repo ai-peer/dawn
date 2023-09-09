@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e904f10_4ef55bba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 65
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-09-09T00:46:35Z",
+      "side": 1,
+      "message": "PS66: added some shutdown tests! (unfortunately don\u0027t work on wire but that\u0027s to be expected because of the problem where events are actually tracked on the Client instead of the Instance)",
+      "revId": "c1a914fd4e1578fc042fd9884832756f2123a4bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
