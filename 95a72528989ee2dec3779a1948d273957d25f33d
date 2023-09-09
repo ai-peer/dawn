@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01ea6ba2_25c90a18",
+        "filename": "src/dawn/tests/unittests/native/mocks/DeviceMock.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-09T01:56:14Z",
+      "side": 1,
+      "message": "nit. is this a stray include?",
+      "range": {
+        "startLine": 17,
+        "startChar": 0,
+        "endLine": 17,
+        "endChar": 33
+      },
+      "revId": "95a72528989ee2dec3779a1948d273957d25f33d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
