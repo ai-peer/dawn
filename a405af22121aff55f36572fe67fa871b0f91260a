@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "33a691e9_a2a9253c",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1004246
+      },
+      "writtenOn": "2023-09-09T07:56:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2734d34f_e25be578",
+      "revId": "a405af22121aff55f36572fe67fa871b0f91260a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "755e14ec_7ff27074",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-08T15:18:48Z",
       "side": 1,
       "message": "nit: can this be moved in its own block after the other includes? I think CPPlint will complain otherwise.",
+      "revId": "a405af22121aff55f36572fe67fa871b0f91260a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0066037f_29b1ef94",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1004246
+      },
+      "writtenOn": "2023-09-09T07:56:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "755e14ec_7ff27074",
       "revId": "a405af22121aff55f36572fe67fa871b0f91260a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
