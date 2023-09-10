@@ -556,4 +556,16 @@ uint32_t Device::GetUAVSlotCount() const {
     return ToBackend(GetPhysicalDevice())->GetUAVSlotCount();
 }
 
+void Device::AddUploadBuffer(Buffer* buffer) {
+    mUploadBuffers.insert(buffer);
+}
+
+MaybeError Device::UnmapUploadBuffers() {
+    for (auto* buffer : mUploadBuffers) {
+        DAWN_TRY(buffer->Unmap());
+    }
+    mUploadBuffers.clear();
+    return {};
+}
+
 }  // namespace dawn::native::d3d11

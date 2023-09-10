@@ -281,6 +281,11 @@ void Buffer::UnmapImpl() {
 }
 
 void* Buffer::GetMappedPointer() {
+    // Try to map the buffer if not mapped.
+    if (!mMappedData && MapInternal().IsError()) {
+        return nullptr;
+    }
+
     // The frontend asks that the pointer returned is from the start of the resource
     // irrespective of the offset passed in MapAsyncImpl, which is what mMappedData is.
     return mMappedData;
@@ -534,18 +539,20 @@ MaybeError Buffer::WriteInternal(CommandRecordingContext* commandContext,
     // If the mD3d11NonConstantBuffer is null, we have to create a staging buffer for transfer the
     // data to mD3d11ConstantBuffer, since UpdateSubresource() has many restrictions. For example,
     // the size of the data has to be a multiple of 16, etc
-    BufferDescriptor descriptor;
-    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-    descriptor.size = Align(size, D3D11BufferSizeAlignment(descriptor.usage));
-    descriptor.mappedAtCreation = false;
-    descriptor.label = "DawnWriteStagingBuffer";
-    Ref<BufferBase> stagingBuffer;
-    DAWN_TRY_ASSIGN(stagingBuffer, GetDevice()->CreateBuffer(&descriptor));
-
-    DAWN_TRY(ToBackend(stagingBuffer)->WriteInternal(commandContext, 0, data, size));
-
-    return Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()), /*sourceOffset=*/0,
-                                /*size=*/size, this, offset);
+    DynamicUploader* uploader = GetDevice()->GetDynamicUploader();
+    UploadHandle uploadHandle;
+    DAWN_TRY_ASSIGN(
+        uploadHandle,
+        uploader->Allocate(Align(size, D3D11BufferSizeAlignment(wgpu::BufferUsage::MapWrite |
+                                                                wgpu::BufferUsage::CopySrc)),
+                           GetDevice()->GetPendingCommandSerial(),
+                           kCopyBufferToBufferOffsetAlignment));
+    ASSERT(uploadHandle.mappedBuffer != nullptr);
+    memcpy(uploadHandle.mappedBuffer, data, size);
+    DAWN_TRY(CopyInternal(commandContext, ToBackend(uploadHandle.stagingBuffer),
+                          uploadHandle.startOffset, size, this, offset));
+    ToBackend(GetDevice())->AddUploadBuffer(ToBackend(uploadHandle.stagingBuffer));
+    return {};
 }
 
 // static

@@ -398,6 +398,7 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
                 DAWN_TRY(bindGroupTracker.Apply());
 
                 DAWN_TRY(RecordNumWorkgroupsForDispatch(lastPipeline, commandContext, dispatch));
+                DAWN_TRY(commandContext->GetDevice()->UnmapUploadBuffers());
                 commandContext->GetD3D11DeviceContext()->Dispatch(dispatch->x, dispatch->y,
                                                                   dispatch->z);
 
@@ -418,6 +419,7 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
                                           0));
                 }
 
+                DAWN_TRY(commandContext->GetDevice()->UnmapUploadBuffers());
                 commandContext->GetD3D11DeviceContext()->DispatchIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), dispatch->indirectOffset);
 
@@ -557,6 +559,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 vertexBufferTracker.Apply(lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->firstVertex,
                                                 draw->firstInstance));
+                DAWN_TRY(commandContext->GetDevice()->UnmapUploadBuffers());
                 commandContext->GetD3D11DeviceContext()->DrawInstanced(
                     draw->vertexCount, draw->instanceCount, draw->firstVertex, draw->firstInstance);
 
@@ -570,6 +573,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 vertexBufferTracker.Apply(lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->baseVertex,
                                                 draw->firstInstance));
+                DAWN_TRY(commandContext->GetDevice()->UnmapUploadBuffers());
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstanced(
                     draw->indexCount, draw->instanceCount, draw->firstIndex, draw->baseVertex,
                     draw->firstInstance);
@@ -597,6 +601,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                                           0));
                 }
 
+                DAWN_TRY(commandContext->GetDevice()->UnmapUploadBuffers());
                 commandContext->GetD3D11DeviceContext()->DrawInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
@@ -623,6 +628,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                                           0));
                 }
 
+                DAWN_TRY(commandContext->GetDevice()->UnmapUploadBuffers());
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 

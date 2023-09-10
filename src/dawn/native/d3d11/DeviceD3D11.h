@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_D3D11_DEVICED3D11_H_
 
 #include <memory>
+#include <set>
 #include <vector>
 
 #include "dawn/common/SerialQueue.h"
@@ -90,6 +91,11 @@ class Device final : public d3d::Device {
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials();
     MaybeError WaitForIdleForDestruction();
 
+    // Records that the buffer is being used as a staging buffer for uploading.
+    void AddUploadBuffer(Buffer* buffer);
+    // Unmap all upload buffers to make them available before next launching of GPU pipeline.
+    MaybeError UnmapUploadBuffers();
+
   private:
     using Base = d3d::Device;
     using Base::Base;
@@ -143,6 +149,8 @@ class Device final : public d3d::Device {
     ComPtr<ID3D11Device5> mD3d11Device5;
     CommandRecordingContext mPendingCommands;
     SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
+
+    std::set<Buffer*> mUploadBuffers;
 };
 
 }  // namespace dawn::native::d3d11
