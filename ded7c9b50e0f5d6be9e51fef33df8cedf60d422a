@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "786f78a1_db98021d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T15:05:05Z",
+      "side": 1,
+      "message": "PTAL! This CL and the smaller ones lower down the stack!",
+      "revId": "ded7c9b50e0f5d6be9e51fef33df8cedf60d422a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
