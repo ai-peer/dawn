@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa045d7f_b7795207",
+        "filename": "dawn.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T12:19:36Z",
+      "side": 1,
+      "message": "Sounds good!",
+      "parentUuid": "f308bb17_81131e68",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "527cc9ef_6c9d3758",
         "filename": "docs/dawn/features/host_mapped_pointer.md",
         "patchSetId": 16
@@ -141,6 +159,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66a54833_aede9472",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T12:19:36Z",
+      "side": 1,
+      "message": "I\u0027m too concerned about a fat device, they are already pretty big and this is simple code (or if it\u0027s about caches /shrug) But also this is very optional!",
+      "parentUuid": "ccb4ea3b_6161da65",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c1e046df_58045975",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 16
@@ -176,6 +212,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83bdac22_993d5b7f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T12:19:36Z",
+      "side": 1,
+      "message": "Sounds good, maybe we should have a TODO in the feature\u0027s doc?",
+      "parentUuid": "9b3eb5f0_550e45d6",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f0d3aefc_a525c728",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 16
@@ -205,6 +259,24 @@
       "side": 1,
       "message": "yes, it is - InitializeHostMapped is populating the members immediately as it goes, so if vkBindBufferMemoryFails, mDedicatedDeviceMemory will still be a valid handle.\n\nlosing the last Buffer ref will do ApiObjectBase::Destroy -\u003e DestroyImpl",
       "parentUuid": "f0d3aefc_a525c728",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c7f20ee_24bada5c",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T12:19:36Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f8ce3670_ed9156b2",
       "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
