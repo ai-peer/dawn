@@ -21,6 +21,7 @@
 
 #include "benchmark/benchmark.h"
 #include "src/tint/lang/wgsl/program/program.h"
+#include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/macros/concat.h"
 
 namespace tint::bench {
@@ -38,6 +39,11 @@ struct ProgramAndFile {
     /// The source file
     std::unique_ptr<Source::File> file;
 };
+
+/// Initializes the internal state for benchmarking.
+/// Must be called once by the benchmark executable entry point.
+/// @returns true on success, false of failure
+bool Initialize();
 
 /// LoadInputFile attempts to load a benchmark input file with the given file
 /// name. Accepts files with the .wgsl and .spv extension.
@@ -64,7 +70,7 @@ std::variant<ProgramAndFile, Error> LoadProgram(std::string name);
 #endif
 
 /// Declares a benchmark with the given function and WGSL file name
-#define TINT_BENCHMARK_WGSL_PROGRAM(FUNC, WGSL_NAME) BENCHMARK_CAPTURE(FUNC, WGSL_NAME, WGSL_NAME);
+#define TINT_BENCHMARK_WGSL_PROGRAM(FUNC, WGSL_NAME) BENCHMARK_CAPTURE(FUNC, WGSL_NAME, WGSL_NAME)
 
 /// Declares a set of benchmarks for the given function using a list of WGSL files.
 #define TINT_BENCHMARK_WGSL_PROGRAMS(FUNC)                                   \
@@ -83,7 +89,8 @@ std::variant<ProgramAndFile, Error> LoadProgram(std::string name);
 /// Declares a set of benchmarks for the given function using a list of WGSL and SPIR-V files.
 #define TINT_BENCHMARK_PROGRAMS(FUNC)  \
     TINT_BENCHMARK_WGSL_PROGRAMS(FUNC) \
-    TINT_BENCHMARK_SPV_PROGRAMS(FUNC)
+    TINT_BENCHMARK_SPV_PROGRAMS(FUNC)  \
+    TINT_REQUIRE_SEMICOLON
 
 }  // namespace tint::bench
 
