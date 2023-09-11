@@ -16,6 +16,328 @@
       "message": "Still LGTM",
       "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6acc491d_8794c1d9",
+        "filename": "dawn.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. In most other places, we explicitly name the callback type. Should we do that here also? Or is there an expectation that callbacks are going to become more generic or something?",
+      "range": {
+        "startLine": 530,
+        "startChar": 12,
+        "endLine": 535,
+        "endChar": 39
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9da16f2_7ec6a538",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. This seems a bit weird? If this is true, should we have a new usage instead? Otherwise it\u0027ll be a bit weird? Especially if users reflect anything and then try to do something based on that?\n\nEDIT: [1]",
+      "range": {
+        "startLine": 11,
+        "startChar": 186,
+        "endLine": 11,
+        "endChar": 355
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e310d99_4b1a0de2",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. mapped*",
+      "range": {
+        "startLine": 42,
+        "startChar": 70,
+        "endLine": 42,
+        "endChar": 75
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96e4edb2_4cca748e",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. for this*? Or just drop the \u0027this\u0027.",
+      "range": {
+        "startLine": 46,
+        "startChar": 20,
+        "endLine": 46,
+        "endChar": 24
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d7d2a7f_a9c43f5e",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "Ah, this is related to [1]. Fine with the way it is for now if we have a TODO to improve it.",
+      "range": {
+        "startLine": 47,
+        "startChar": 3,
+        "endLine": 47,
+        "endChar": 106
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c1a2588_bf7730e1",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. memory",
+      "range": {
+        "startLine": 48,
+        "startChar": 87,
+        "endLine": 48,
+        "endChar": 94
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf07534_e7da9b8d",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. Any reason not to use the new unpacking utils? (Could get rid of the `FindInChain` below if we do.",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 97
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322c00d2_b2cab465",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 577,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. Hmm maybe we should at least return a different error for the host mapped ones?",
+      "range": {
+        "startLine": 577,
+        "startChar": 8,
+        "endLine": 577,
+        "endChar": 47
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4f79950_5ed49ad9",
+        "filename": "src/dawn/native/Queue.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. a",
+      "range": {
+        "startLine": 87,
+        "startChar": 13,
+        "endLine": 87,
+        "endChar": 15
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27211c76_927ed6c1",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. doubled //",
+      "range": {
+        "startLine": 100,
+        "startChar": 7,
+        "endLine": 100,
+        "endChar": 9
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa1f6219_dc2e504c",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 28,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "We have quite a few instances of these nowadays. Maybe we should pull the name and stream parts ([2]) out to a base class at some point. (Could add a TODO and just do in another follow up eventually... feel free to also just file a cleanup bug)",
+      "range": {
+        "startLine": 27,
+        "startChar": 4,
+        "endLine": 28,
+        "endChar": 41
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa8458b4_63015e95",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 1
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "250d299e_36a2dab9",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests_posix.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "u-unit. Maybe \"Posix\" is fine for casing? Just to match the other ones.",
+      "range": {
+        "startLine": 85,
+        "startChar": 33,
+        "endLine": 85,
+        "endChar": 38
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac896636_24100cce",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests_win.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-11T20:55:08Z",
+      "side": 1,
+      "message": "nit. Should we at least log or something in this case? Otherwise couldn\u0027t this cause issues? Ditto for the other backends.",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 65
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
