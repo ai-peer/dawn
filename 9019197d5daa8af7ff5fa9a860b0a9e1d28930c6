@@ -70,6 +70,24 @@
       "parentUuid": "52973a2e_a51a8027",
       "revId": "9019197d5daa8af7ff5fa9a860b0a9e1d28930c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b5e6e9c_89bc3464",
+        "filename": "src/tint/api/BUILD.bazel",
+        "patchSetId": 22
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-11T15:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e3ba53e_dae67d91",
+      "revId": "9019197d5daa8af7ff5fa9a860b0a9e1d28930c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
