@@ -34,8 +34,17 @@ namespace dawn::native::d3d {
 
 namespace {
 
-std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags, bool enable16BitTypes) {
+std::vector<const wchar_t*> GetDXCArguments(std::wstring_view entryPointNameW,
+                                            const d3d::D3DBytecodeCompilationRequest& r) {
     std::vector<const wchar_t*> arguments;
+
+    arguments.push_back(L"-T");
+    arguments.push_back(r.dxcShaderProfile.data());
+
+    arguments.push_back(L"-E");
+    arguments.push_back(entryPointNameW.data());
+
+    uint32_t compileFlags = r.compileFlags;
     if (compileFlags & D3DCOMPILE_ENABLE_BACKWARDS_COMPATIBILITY) {
         arguments.push_back(L"/Gec");
     }
@@ -75,7 +84,7 @@ std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags, bool enable16
         arguments.push_back(L"/res_may_alias");
     }
 
-    if (enable16BitTypes) {
+    if (r.hasShaderF16Feature) {
         // enable-16bit-types are only allowed in -HV 2018 (default)
         arguments.push_back(L"/enable-16bit-types");
     }
@@ -86,23 +95,35 @@ std::vector<const wchar_t*> GetDXCArguments(uint32_t compileFlags, bool enable16
     return arguments;
 }
 
+ResultOrError<DxcBuffer> GetDxcBuffer(IDxcLibrary* dxcLibrary,
+                                      LPCVOID pText,
+                                      uint32_t length,
+                                      IDxcBlobEncoding* sourceBlob) {
+    DAWN_TRY(CheckHRESULT(
+        dxcLibrary->CreateBlobWithEncodingFromPinned(pText, length, CP_UTF8, &sourceBlob),
+        "DXC create blob"));
+    DxcBuffer dxcBuffer;
+    dxcBuffer.Ptr = sourceBlob->GetBufferPointer();
+    dxcBuffer.Size = sourceBlob->GetBufferSize();
+    dxcBuffer.Encoding = DXC_CP_UTF8;
+    return dxcBuffer;
+}
+
 ResultOrError<ComPtr<IDxcBlob>> CompileShaderDXC(const d3d::D3DBytecodeCompilationRequest& r,
                                                  const std::string& entryPointName,
                                                  const std::string& hlslSource) {
-    ComPtr<IDxcBlobEncoding> sourceBlob;
-    DAWN_TRY(CheckHRESULT(r.dxcLibrary->CreateBlobWithEncodingFromPinned(
-                              hlslSource.c_str(), hlslSource.length(), CP_UTF8, &sourceBlob),
-                          "DXC create blob"));
+    ComPtr<IDxcBlobEncoding> dxcBlob;
+    DxcBuffer dxcBuffer;
+    DAWN_TRY_ASSIGN(dxcBuffer, GetDxcBuffer(r.dxcLibrary, hlslSource.c_str(), hlslSource.length(),
+                                            dxcBlob.Get()));
 
     std::wstring entryPointW;
     DAWN_TRY_ASSIGN(entryPointW, d3d::ConvertStringToWstring(entryPointName));
 
-    std::vector<const wchar_t*> arguments = GetDXCArguments(r.compileFlags, r.hasShaderF16Feature);
-
-    ComPtr<IDxcOperationResult> result;
-    DAWN_TRY(CheckHRESULT(r.dxcCompiler->Compile(sourceBlob.Get(), nullptr, entryPointW.c_str(),
-                                                 r.dxcShaderProfile.data(), arguments.data(),
-                                                 arguments.size(), nullptr, 0, nullptr, &result),
+    std::vector<const wchar_t*> arguments = GetDXCArguments(entryPointW, r);
+    ComPtr<IDxcResult> result;
+    DAWN_TRY(CheckHRESULT(r.dxcCompiler->Compile(&dxcBuffer, arguments.data(), arguments.size(),
+                                                 nullptr, IID_PPV_ARGS(&result)),
                           "DXC compile"));
 
     HRESULT hr;
@@ -370,9 +391,14 @@ void DumpCompiledShader(Device* device,
             dumpedMsg << "/* Dumped disassembled DXIL */" << std::endl;
             ComPtr<IDxcBlobEncoding> dxcBlob;
             ComPtr<IDxcBlobEncoding> disassembly;
-            if (FAILED(device->GetDxcLibrary()->CreateBlobWithEncodingFromPinned(
-                    shaderBlob.Data(), shaderBlob.Size(), 0, &dxcBlob)) ||
-                FAILED(device->GetDxcCompiler()->Disassemble(dxcBlob.Get(), &disassembly))) {
+            DxcBuffer dxcBuffer;
+            if (device->ConsumedError(GetDxcBuffer(device->GetDxcLibrary().Get(), shaderBlob.Data(),
+                                                   shaderBlob.Size(), dxcBlob.Get()),
+                                      &dxcBuffer, "DXC disassemble failed")) {
+                return;
+            }
+            if (FAILED(device->GetDxcCompiler()->Disassemble(&dxcBuffer,
+                                                             IID_PPV_ARGS(&disassembly)))) {
                 dumpedMsg << "DXC disassemble failed" << std::endl;
             } else {
                 dumpedMsg << std::string_view(
