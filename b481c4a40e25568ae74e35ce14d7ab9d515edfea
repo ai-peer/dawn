@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b65ea9dd_d12ea858",
+        "filename": "BUILD.bazel",
+        "patchSetId": 24
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1002886
+      },
+      "writtenOn": "2023-09-11T14:27:02Z",
+      "side": 1,
+      "message": "I think you want this to be in hdrs so they are publicly usable. I also don\u0027t think you want to mention headers under src/ at all here since the \"proper\" way to get those headers is by depending on the cc_libraries under src/",
+      "range": {
+        "startLine": 18,
+        "startChar": 5,
+        "endLine": 18,
+        "endChar": 12
+      },
+      "revId": "b481c4a40e25568ae74e35ce14d7ab9d515edfea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
