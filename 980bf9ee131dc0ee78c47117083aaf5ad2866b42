@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52c32226_60c76995",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-09-11T17:12:01Z",
+      "side": 1,
+      "message": "Austin, PTAL.\nStarted failing on M117 when machines were upgraded to 13.5\nhttps://ci.chromium.org/ui/p/chromium-m117/builders/luci.chromium-m117.ci/Dawn%20Mac%20x64%20DEPS%20Release%20%28AMD%29?limit\u003d200\u0026cursor\u003did%3E8770233198929964177",
+      "revId": "980bf9ee131dc0ee78c47117083aaf5ad2866b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
