@@ -18,6 +18,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d75ea522_f306d6f8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T13:35:56Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 486,
+        "startChar": 0,
+        "endLine": 495,
+        "endChar": 0
+      },
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4bd08cc8_be95b651",
@@ -31,6 +54,24 @@
       "writtenOn": "2023-09-11T11:59:12Z",
       "side": 1,
       "message": "Can\u0027t we use the DynamicUploader?",
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22622d50_0514b650",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-11T13:35:56Z",
+      "side": 1,
+      "message": "D3D11 cannot invoke CopySubresourceRegion while a Subresource of the source is mapped. For one common staging buffer, ScopeMap [1] ensures the map/unmap pair to work as expected for each write.\nHowever, in case of DynamicUploader, it assumes the staging buffers should be always mapped, and one staging buffer can be shared by many allocates. So it\u0027s kind of unclear how we can keep map/unmap state in pair.\nBTW, the one common staging buffer is simple and effective enough to the address the problem.",
+      "parentUuid": "4bd08cc8_be95b651",
       "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
