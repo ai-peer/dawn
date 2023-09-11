@@ -28,9 +28,9 @@ void GenerateHLSL(benchmark::State& state, std::string input_name) {
     }
     auto& program = std::get<bench::ProgramAndFile>(res).program;
     for (auto _ : state) {
-        auto res = Generate(&program, {});
-        if (!res) {
-            state.SkipWithError(res.Failure().c_str());
+        auto gen_res = Generate(&program, {});
+        if (!gen_res) {
+            state.SkipWithError(gen_res.Failure().c_str());
         }
     }
 }

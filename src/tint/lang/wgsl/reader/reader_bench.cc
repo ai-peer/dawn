@@ -28,9 +28,9 @@ void ParseWGSL(benchmark::State& state, std::string input_name) {
     }
     auto& file = std::get<Source::File>(res);
     for (auto _ : state) {
-        auto res = Parse(&file);
-        if (res.Diagnostics().contains_errors()) {
-            state.SkipWithError(res.Diagnostics().str().c_str());
+        auto program = Parse(&file);
+        if (program.Diagnostics().contains_errors()) {
+            state.SkipWithError(program.Diagnostics().str().c_str());
         }
     }
 }
