@@ -18,6 +18,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c3d8d5_d39f13b7",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-11T14:27:08Z",
+      "side": 1,
+      "message": "FYI, I found Map() d3d11 buffer could be expensive. Map() call will sync with GPU. Maybe we should always use system memory for staging dawn buffers, and use UpdateSubResource() as much as possible.\n\nhttps://gamedev.stackexchange.com/questions/60668/how-to-use-updatesubresource-and-map-unmap",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d75ea522_f306d6f8",
@@ -36,6 +59,29 @@
         "startChar": 0,
         "endLine": 495,
         "endChar": 0
+      },
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9a4327c_13a46c96",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-11T14:27:08Z",
+      "side": 1,
+      "message": "Does motionmark hit the restrictions of UpdateSubresource(). How about only create and use the stage buffer if it is really needed?",
+      "range": {
+        "startLine": 535,
+        "startChar": 37,
+        "endLine": 536,
+        "endChar": 59
       },
       "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
