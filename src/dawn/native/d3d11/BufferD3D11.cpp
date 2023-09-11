@@ -534,15 +534,16 @@ MaybeError Buffer::WriteInternal(CommandRecordingContext* commandContext,
     // If the mD3d11NonConstantBuffer is null, we have to create a staging buffer for transfer the
     // data to mD3d11ConstantBuffer, since UpdateSubresource() has many restrictions. For example,
     // the size of the data has to be a multiple of 16, etc
-    BufferDescriptor descriptor;
-    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-    descriptor.size = Align(size, D3D11BufferSizeAlignment(descriptor.usage));
-    descriptor.mappedAtCreation = false;
-    descriptor.label = "DawnWriteStagingBuffer";
-    Ref<BufferBase> stagingBuffer;
-    DAWN_TRY_ASSIGN(stagingBuffer, GetDevice()->CreateBuffer(&descriptor));
-
-    DAWN_TRY(ToBackend(stagingBuffer)->WriteInternal(commandContext, 0, data, size));
+    Ref<BufferBase> stagingBuffer = commandContext->GetStagingBuffer();
+    if (size > CommandRecordingContext::kStagingBufferSize) {
+        BufferDescriptor descriptor;
+        descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+        descriptor.size = Align(size, D3D11BufferSizeAlignment(descriptor.usage));
+        descriptor.mappedAtCreation = false;
+        descriptor.label = "DawnWriteStagingBuffer";
+        DAWN_TRY_ASSIGN(stagingBuffer, GetDevice()->CreateBuffer(&descriptor));
+    }
+    DAWN_TRY(ToBackend(stagingBuffer.Get())->WriteInternal(commandContext, 0, data, size));
 
     return Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()), /*sourceOffset=*/0,
                                 /*size=*/size, this, offset);

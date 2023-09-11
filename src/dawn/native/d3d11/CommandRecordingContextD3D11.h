@@ -27,6 +27,8 @@ class Device;
 
 class CommandRecordingContext {
   public:
+    static constexpr uint64_t kStagingBufferSize = 4 * 1024 * 1024;
+
     MaybeError Intialize(Device* device);
 
     void Release();
@@ -42,6 +44,7 @@ class CommandRecordingContext {
     ID3D11DeviceContext4* GetD3D11DeviceContext4() const;
     ID3DUserDefinedAnnotation* GetD3DUserDefinedAnnotation() const;
     Buffer* GetUniformBuffer() const;
+    Buffer* GetStagingBuffer() const;
     Device* GetDevice() const;
 
     struct ScopedCriticalSection : NonMovable {
@@ -75,6 +78,8 @@ class CommandRecordingContext {
     static constexpr size_t kMaxNumBuiltinElements = 4;
     // The uniform buffer for built-in variables.
     Ref<Buffer> mUniformBuffer;
+    // The staging buffer for small size writes.
+    Ref<Buffer> mStagingBuffer;
     std::array<uint32_t, kMaxNumBuiltinElements> mUniformBufferData;
     bool mUniformBufferDirty = true;
 

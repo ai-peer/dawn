@@ -56,8 +56,21 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
     mD3D11DeviceContext4 = std::move(d3d11DeviceContext4);
     mIsOpen = true;
 
-    // Create a uniform buffer for built in variables.
+    // Create a staging buffer to be re-used by buffer writes.
     BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+    descriptor.size = kStagingBufferSize;
+    descriptor.mappedAtCreation = false;
+    descriptor.label = "DawnWriteStagingBuffer";
+    Ref<BufferBase> stagingBuffer;
+    {
+        // Lock the device to protect the clearing of the staging buffer.
+        auto deviceLock(device->GetScopedLock());
+        DAWN_TRY_ASSIGN(stagingBuffer, device->CreateBuffer(&descriptor));
+    }
+    mStagingBuffer = ToBackend(std::move(stagingBuffer));
+
+    // Create a uniform buffer for built in variables.
     descriptor.size = sizeof(uint32_t) * kMaxNumBuiltinElements;
     descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
     descriptor.mappedAtCreation = false;
@@ -113,6 +126,10 @@ ID3DUserDefinedAnnotation* CommandRecordingContext::GetD3DUserDefinedAnnotation(
 
 Buffer* CommandRecordingContext::GetUniformBuffer() const {
     return mUniformBuffer.Get();
+}
+
+Buffer* CommandRecordingContext::GetStagingBuffer() const {
+    return mStagingBuffer.Get();
 }
 
 Device* CommandRecordingContext::GetDevice() const {
