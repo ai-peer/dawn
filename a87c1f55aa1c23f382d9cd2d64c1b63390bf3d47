@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0722c79e_66a29b00",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1535,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-11T17:03:51Z",
+      "side": 1,
+      "message": "Gets removed in https://dawn-review.googlesource.com/c/dawn/+/150146",
+      "range": {
+        "startLine": 1535,
+        "startChar": 5,
+        "endLine": 1535,
+        "endChar": 38
+      },
+      "revId": "a87c1f55aa1c23f382d9cd2d64c1b63390bf3d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a78226b_e3de0f88",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1570,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-11T17:03:51Z",
+      "side": 1,
+      "message": "`ASSERT` is friendlier, as it\u0027s less likely to take out the process if the size \u003c 4.\nAlternatively, use `testing::ContainerEq` for a one-liner.",
+      "range": {
+        "startLine": 1570,
+        "startChar": 4,
+        "endLine": 1570,
+        "endChar": 10
+      },
+      "revId": "a87c1f55aa1c23f382d9cd2d64c1b63390bf3d47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
