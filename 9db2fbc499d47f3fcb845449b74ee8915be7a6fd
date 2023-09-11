@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d8cbbd6_0dd2e57f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T12:22:06Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "9db2fbc499d47f3fcb845449b74ee8915be7a6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abee351e_d5fca67c",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T12:22:06Z",
+      "side": 1,
+      "message": "optional nit: it seems a forward declaration next to [1] would be sufficient?",
+      "revId": "9db2fbc499d47f3fcb845449b74ee8915be7a6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2370c4e4_871f30a1",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T12:22:06Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "9db2fbc499d47f3fcb845449b74ee8915be7a6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
