@@ -16,6 +16,24 @@
       "message": "Should the first one just be `\"bench\"`?",
       "revId": "c213ed11438740ad583e671cb082d2b7838f0107",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cff3eeca_7f06e7e0",
+        "filename": "tools/src/cmd/gen/build/BUILD.gn.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-11T19:01:33Z",
+      "side": 1,
+      "message": "Indeed it should have been. Great spot. Done.",
+      "parentUuid": "5f701ed9_3719df13",
+      "revId": "c213ed11438740ad583e671cb082d2b7838f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
