@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64991e4a_86c44522",
+        "filename": "src/tint/lang/core/ir/transform/robustness_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-11T15:25:42Z",
+      "side": 1,
+      "message": "Could walk past `let` if it\u0027s a constant like this.",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 41
+      },
+      "revId": "5b306beaba9ba3325e5a3a278c7af2f1cfad2943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
