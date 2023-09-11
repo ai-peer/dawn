@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f701ed9_3719df13",
+        "filename": "tools/src/cmd/gen/build/BUILD.gn.tmpl",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-11T18:52:00Z",
+      "side": 1,
+      "message": "Should the first one just be `\"bench\"`?",
+      "revId": "c213ed11438740ad583e671cb082d2b7838f0107",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
