@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "2fda7288_029d3001",
+        "filename": "src/dawn/native/vulkan/BackendVk.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004221
+      },
+      "writtenOn": "2023-09-11T23:42:48Z",
+      "side": 1,
+      "message": "That doesn\u0027t work unfortunately, because Ref\u003cPhysicalDeviceBase\u003e on line 97 and Ref\u003cPhysicalDevice\u003e on line 105 need the complete type.",
+      "parentUuid": "abee351e_d5fca67c",
+      "revId": "9db2fbc499d47f3fcb845449b74ee8915be7a6fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "2370c4e4_871f30a1",
         "filename": "src/dawn/native/vulkan/BackendVk.h",
         "patchSetId": 1
