@@ -52,6 +52,24 @@
       "parentUuid": "66548966_5db7fc37",
       "revId": "9019197d5daa8af7ff5fa9a860b0a9e1d28930c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e3ba53e_dae67d91",
+        "filename": "src/tint/api/BUILD.bazel",
+        "patchSetId": 22
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-11T14:23:31Z",
+      "side": 1,
+      "message": "Right, I can add a cc_library for it. I thought you were suggesting that something in tint was attempting to include it. Added to the root `BUILD.bazel`",
+      "parentUuid": "52973a2e_a51a8027",
+      "revId": "9019197d5daa8af7ff5fa9a860b0a9e1d28930c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
