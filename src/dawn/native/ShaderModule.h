@@ -148,10 +148,6 @@ struct ShaderTextureBindingInfo {
 // Per-binding shader metadata contains some SPIRV specific information in addition to
 // most of the frontend per-binding information.
 struct ShaderBindingInfo {
-    // The SPIRV ID of the resource.
-    uint32_t id;
-    uint32_t base_type_id;
-
     BindingNumber binding;
     BindingInfoType bindingType;
 
