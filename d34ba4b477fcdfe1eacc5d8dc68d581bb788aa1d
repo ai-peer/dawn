@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4bd08cc8_be95b651",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-11T11:59:12Z",
+      "side": 1,
+      "message": "Can\u0027t we use the DynamicUploader?",
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
