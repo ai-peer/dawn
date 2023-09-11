@@ -2671,10 +2671,10 @@ bool Validator::CheckTypeAccessAddressSpace(const core::type::Type* store_ty,
 
     switch (address_space) {
         case core::AddressSpace::kPixelLocal:
-            using AllowedTypes = std::tuple<core::type::I32, core::type::U32, core::type::F32>;
             if (auto* str = store_ty->As<sem::Struct>()) {
                 for (auto* member : str->Members()) {
-                    if (TINT_UNLIKELY(!member->Type()->TypeInfo().IsAnyOfTuple<AllowedTypes>())) {
+                    using Allowed = std::tuple<core::type::I32, core::type::U32, core::type::F32>;
+                    if (TINT_UNLIKELY(!member->Type()->TypeInfo().IsAnyOfTuple<Allowed>())) {
                         AddError(
                             "struct members used in the 'pixel_local' address space can only be of "
                             "the type 'i32', 'u32' or 'f32'",
@@ -2685,11 +2685,8 @@ bool Validator::CheckTypeAccessAddressSpace(const core::type::Type* store_ty,
                         return false;
                     }
                 }
-            } else if (TINT_UNLIKELY(!store_ty->TypeInfo().IsAnyOfTuple<AllowedTypes>())) {
-                AddError(
-                    "'pixel_local' address space variables can only be of type 'i32', 'u32', 'f32' "
-                    "or a struct of those types",
-                    source);
+            } else if (TINT_UNLIKELY(!store_ty->TypeInfo().Is<core::type::Struct>())) {
+                AddError("'pixel_local' variable only support struct storage types", source);
                 return false;
             }
             break;
