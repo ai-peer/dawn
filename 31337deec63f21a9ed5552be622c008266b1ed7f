@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f69d790_372ed393",
+        "filename": "dawn.json",
+        "patchSetId": 16
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-11T17:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fa045d7f_b7795207",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "527cc9ef_6c9d3758",
@@ -105,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ad4a4d9_4f56050b",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 16
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-11T17:04:19Z",
+      "side": 1,
+      "message": "Done. Also noted that you should not do something to manually ask the OS to decommit it.",
+      "parentUuid": "527cc9ef_6c9d3758",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2233bdeb_05f06f94",
@@ -118,6 +154,24 @@
       "writtenOn": "2023-09-08T13:14:07Z",
       "side": 1,
       "message": "TODO(dawn: ...) consider allowing the host-mapped buffers to be mapped through WebGPU.",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b01fe5_15b37189",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-11T17:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2233bdeb_05f06f94",
       "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -175,6 +229,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e2e4ec6_101b5dea",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-11T17:04:19Z",
+      "side": 1,
+      "message": "ok, I\u0027ll keep this as is for now",
+      "parentUuid": "66a54833_aede9472",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c1e046df_58045975",
@@ -224,6 +296,24 @@
       "side": 1,
       "message": "Sounds good, maybe we should have a TODO in the feature\u0027s doc?",
       "parentUuid": "9b3eb5f0_550e45d6",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6371cfe8_097ff74b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-11T17:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83bdac22_993d5b7f",
       "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -298,6 +388,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "200c4d9e_6759912f",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 349,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-11T17:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c23182d4_6a78ee6e",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6b52e58_8b9ed909",
@@ -311,6 +419,24 @@
       "writtenOn": "2023-09-08T13:14:07Z",
       "side": 1,
       "message": "nit: TODO ... make a proper limit for this.",
+      "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "abb2315f_9049d971",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-11T17:04:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6b52e58_8b9ed909",
       "revId": "31337deec63f21a9ed5552be622c008266b1ed7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
