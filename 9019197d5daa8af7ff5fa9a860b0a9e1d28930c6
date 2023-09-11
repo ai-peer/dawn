@@ -16,6 +16,24 @@
       "message": "Don\u0027t forget to also have\n//include/tint/tint.h\nbe here",
       "revId": "9019197d5daa8af7ff5fa9a860b0a9e1d28930c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66548966_5db7fc37",
+        "filename": "src/tint/api/BUILD.bazel",
+        "patchSetId": 22
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-11T14:07:53Z",
+      "side": 1,
+      "message": "I don\u0027t see why this is needed. Nothing under `src/tint` (except for fuzzers, which aren\u0027t part of the bazel build) includes `include/tint/tint.h`",
+      "parentUuid": "a402bd3a_d14afdcb",
+      "revId": "9019197d5daa8af7ff5fa9a860b0a9e1d28930c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
