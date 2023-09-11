@@ -16,6 +16,24 @@
       "message": "The name doesn\u0027t seem to match the rest. unorm1010102? (not sure) We can start with a name in Dawn and then fix it up once we agree on one for the spec.",
       "revId": "85296168c56ff1db7dc4c1278a4d9316ff37c795",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2db956b8_343df34c",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3504,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-11T09:31:13Z",
+      "side": 1,
+      "message": "I\u0027ve started a discussion at https://github.com/gpuweb/gpuweb/issues/4275#issuecomment-1713516273",
+      "parentUuid": "7665997f_5102395c",
+      "revId": "85296168c56ff1db7dc4c1278a4d9316ff37c795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
