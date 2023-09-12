@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "efe76cd53bbb08ec6b4e3e7f0a6c6e6df43d05ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "540090c2_68971af6",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-12T17:17:52Z",
+      "side": 1,
+      "message": "That\u0027s some unforunate formatting",
+      "range": {
+        "startLine": 1058,
+        "startChar": 15,
+        "endLine": 1059,
+        "endChar": 36
+      },
+      "revId": "efe76cd53bbb08ec6b4e3e7f0a6c6e6df43d05ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
