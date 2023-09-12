@@ -34,6 +34,24 @@
       "parentUuid": "7665997f_5102395c",
       "revId": "85296168c56ff1db7dc4c1278a4d9316ff37c795",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "762c232a_960e6afc",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 3504,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-12T11:57:30Z",
+      "side": 1,
+      "message": "I\u0027ll wait until https://github.com/gpuweb/gpuweb/pull/4288 is merged and update the name accordingly if that\u0027s okay for a clean history.\nIn the meantime, I\u0027ll start working on WebGPU CTS.",
+      "parentUuid": "2db956b8_343df34c",
+      "revId": "85296168c56ff1db7dc4c1278a4d9316ff37c795",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -39,6 +39,30 @@
       },
       "revId": "7b3e05012ce2316b5692d6ef4c423c902793feaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "924e5812_7f3836a2",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-12T11:57:30Z",
+      "side": 1,
+      "message": "Thanks for the tip!",
+      "parentUuid": "4b2d3b23_67a7f2b6",
+      "range": {
+        "startLine": 890,
+        "startChar": 0,
+        "endLine": 892,
+        "endChar": 25
+      },
+      "revId": "7b3e05012ce2316b5692d6ef4c423c902793feaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
