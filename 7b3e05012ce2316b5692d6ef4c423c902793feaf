@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a92f8eb6_e2b30cef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-12T10:44:09Z",
+      "side": 1,
+      "message": "Tint side looks great. Well done!",
+      "revId": "7b3e05012ce2316b5692d6ef4c423c902793feaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2d3b23_67a7f2b6",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 892,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-12T10:44:09Z",
+      "side": 1,
+      "message": "FYI: you can use trailing `//` to force a line break with clang-format.\nAlternatively, because you\u0027ve disabled formatting, you could align the columns with additional whitespace.",
+      "range": {
+        "startLine": 890,
+        "startChar": 0,
+        "endLine": 892,
+        "endChar": 25
+      },
+      "revId": "7b3e05012ce2316b5692d6ef4c423c902793feaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
