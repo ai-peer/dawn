@@ -349,7 +349,8 @@ void ComputePassEncoder::APIDispatchWorkgroupsIndirect(BufferBase* indirectBuffe
             }
 
             SyncScopeUsageTracker scope;
-            scope.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect);
+            scope.BufferUsedAs(indirectBuffer, wgpu::BufferUsage::Indirect,
+                               wgpu::ShaderStage::None);
             mUsageTracker.AddReferencedBuffer(indirectBuffer);
             // TODO(crbug.com/dawn/1166): If validation is enabled, adding |indirectBuffer|
             // is needed for correct usage validation even though it will only be bound for
@@ -379,7 +380,8 @@ void ComputePassEncoder::APIDispatchWorkgroupsIndirect(BufferBase* indirectBuffe
             if (indirectBufferRef.Get() != indirectBuffer) {
                 // |indirectBufferRef| was replaced with a scratch buffer. Add it to the
                 // synchronization scope.
-                scope.BufferUsedAs(indirectBufferRef.Get(), wgpu::BufferUsage::Indirect);
+                scope.BufferUsedAs(indirectBufferRef.Get(), wgpu::BufferUsage::Indirect,
+                                   wgpu::ShaderStage::None);
                 mUsageTracker.AddReferencedBuffer(indirectBufferRef.Get());
             }
 

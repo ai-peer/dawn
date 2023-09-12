@@ -1137,11 +1137,13 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 cmd->colorAttachments[index].clearColor =
                     ClampClearColorValueToLegalRange(color, colorTarget->GetFormat());
 
-                usageTracker.TextureViewUsedAs(colorTarget, wgpu::TextureUsage::RenderAttachment);
+                usageTracker.TextureViewUsedAs(colorTarget, wgpu::TextureUsage::RenderAttachment,
+                                               wgpu::ShaderStage::None);
 
                 if (resolveTarget != nullptr) {
                     usageTracker.TextureViewUsedAs(resolveTarget,
-                                                   wgpu::TextureUsage::RenderAttachment);
+                                                   wgpu::TextureUsage::RenderAttachment,
+                                                   wgpu::ShaderStage::None);
                 }
             }
 
@@ -1206,9 +1208,11 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 }
 
                 if (IsReadOnlyDepthStencilAttachment(descriptor->depthStencilAttachment)) {
-                    usageTracker.TextureViewUsedAs(view, kReadOnlyRenderAttachment);
+                    usageTracker.TextureViewUsedAs(view, kReadOnlyRenderAttachment,
+                                                   wgpu::ShaderStage::None);
                 } else {
-                    usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment);
+                    usageTracker.TextureViewUsedAs(view, wgpu::TextureUsage::RenderAttachment,
+                                                   wgpu::ShaderStage::None);
                 }
 
                 depthReadOnly = descriptor->depthStencilAttachment->depthReadOnly;
@@ -1249,7 +1253,8 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
             if (pls != nullptr) {
                 for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
                     usageTracker.TextureViewUsedAs(pls->storageAttachments[i].storage,
-                                                   wgpu::TextureUsage::StorageAttachment);
+                                                   wgpu::TextureUsage::StorageAttachment,
+                                                   wgpu::ShaderStage::None);
                 }
             }
 
@@ -1419,7 +1424,8 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
 
                 // Replace the given resolve attachment with the temporary one.
                 usageTracker->TextureViewUsedAs(temporaryResolveView.Get(),
-                                                wgpu::TextureUsage::RenderAttachment);
+                                                wgpu::TextureUsage::RenderAttachment,
+                                                wgpu::ShaderStage::None);
                 cmd->colorAttachments[index].resolveTarget = temporaryResolveView;
             }
         }
