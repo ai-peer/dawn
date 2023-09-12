@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ca23f67_e5244685",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-12T09:08:08Z",
+      "side": 1,
+      "message": "Why do we need to create a buffer just to put it\u0027s base pointer and size in a DxcBuffer structure?",
+      "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd2b2cdb_1f51d4c4",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-12T09:08:08Z",
+      "side": 1,
+      "message": "Some of the pointers in this vector don\u0027t have static lifetime and if we start moving the vector around we could have use-after-frees. Any idea on how to make this a bit more robust?",
+      "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
