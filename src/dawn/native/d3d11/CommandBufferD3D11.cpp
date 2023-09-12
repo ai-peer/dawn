@@ -480,8 +480,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     for (ColorAttachmentIndex i :
          IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
         TextureView* colorTextureView = ToBackend(renderPass->colorAttachments[i].view.Get());
-        DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i], colorTextureView->CreateD3D11RenderTargetView(
-                                                       colorTextureView->GetBaseMipLevel()));
+        DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i],
+                        colorTextureView->GetOrCreateD3D11RenderTargetView(
+                            colorTextureView->GetBaseMipLevel()));
         d3d11RenderTargetViewPtrs[i] = d3d11RenderTargetViews[i].Get();
         if (renderPass->colorAttachments[i].loadOp == wgpu::LoadOp::Clear) {
             std::array<float, 4> clearColor =
@@ -501,7 +502,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
         TextureView* depthStencilTextureView =
             ToBackend(renderPass->depthStencilAttachment.view.Get());
         DAWN_TRY_ASSIGN(d3d11DepthStencilView,
-                        depthStencilTextureView->CreateD3D11DepthStencilView(
+                        depthStencilTextureView->GetOrCreateD3D11DepthStencilView(
                             attachmentInfo->depthReadOnly, attachmentInfo->stencilReadOnly,
                             depthStencilTextureView->GetBaseMipLevel()));
         UINT clearFlags = 0;
