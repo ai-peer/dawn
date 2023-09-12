@@ -16,6 +16,23 @@
       "message": "No idea about the trybot errors. I couldn\u0027t reproduce them locally. Likely an infra problem. I will check it again later.",
       "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be4c05bb_666642b0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-12T14:37:38Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
