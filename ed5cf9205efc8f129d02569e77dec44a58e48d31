@@ -114,6 +114,29 @@
       },
       "revId": "ed5cf9205efc8f129d02569e77dec44a58e48d31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37eb7efb_d01a8334",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-12T19:44:56Z",
+      "side": 1,
+      "message": "This is a bit unusual. Please can we have a second case that is just `{ continue; }` ?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 14
+      },
+      "revId": "ed5cf9205efc8f129d02569e77dec44a58e48d31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
