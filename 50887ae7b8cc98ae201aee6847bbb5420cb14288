@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71029894_25740dbc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-12T19:11:08Z",
+      "side": 1,
+      "message": "Nicely done",
+      "revId": "50887ae7b8cc98ae201aee6847bbb5420cb14288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "229ef29d_fbf9d8cc",
+        "filename": "src/tint/lang/core/ir/transform/robustness.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-12T19:11:08Z",
+      "side": 1,
+      "message": "(no changes required) This is a bit unfortunate. In the sem we have information about parameters, which we don\u0027t have in the IR. Perhaps we should be splitting up these overloads in the `core` definition.",
+      "range": {
+        "startLine": 307,
+        "startChar": 25,
+        "endLine": 307,
+        "endChar": 33
+      },
+      "revId": "50887ae7b8cc98ae201aee6847bbb5420cb14288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
