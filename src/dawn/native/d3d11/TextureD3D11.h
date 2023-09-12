@@ -180,14 +180,12 @@ class TextureView final : public TextureViewBase {
   public:
     static Ref<TextureView> Create(TextureBase* texture, const TextureViewDescriptor* descriptor);
 
-    ResultOrError<ComPtr<ID3D11ShaderResourceView>> GetOrCreateD3D11ShaderResourceView();
-    ResultOrError<ComPtr<ID3D11RenderTargetView>> GetOrCreateD3D11RenderTargetView(
-        uint32_t mipLevel = 0u);
-    ResultOrError<ComPtr<ID3D11DepthStencilView>> GetOrCreateD3D11DepthStencilView(
-        bool depthReadOnly,
-        bool stencilReadOnly,
-        uint32_t mipLevel = 0u);
-    ResultOrError<ComPtr<ID3D11UnorderedAccessView>> GetOrCreateD3D11UnorderedAccessView();
+    ResultOrError<ID3D11ShaderResourceView*> GetOrCreateD3D11ShaderResourceView();
+    ResultOrError<ID3D11RenderTargetView*> GetOrCreateD3D11RenderTargetView(uint32_t mipLevel = 0u);
+    ResultOrError<ID3D11DepthStencilView*> GetOrCreateD3D11DepthStencilView(bool depthReadOnly,
+                                                                            bool stencilReadOnly,
+                                                                            uint32_t mipLevel = 0u);
+    ResultOrError<ID3D11UnorderedAccessView*> GetOrCreateD3D11UnorderedAccessView();
 
   private:
     using TextureViewBase::TextureViewBase;

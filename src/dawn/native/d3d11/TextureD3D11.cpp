@@ -519,16 +519,16 @@ MaybeError Texture::ClearRenderable(CommandRecordingContext* commandContext,
                 continue;
             }
             if (GetFormat().HasDepthOrStencil()) {
-                ComPtr<ID3D11DepthStencilView> d3d11DSV;
+                ID3D11DepthStencilView* d3d11DSV;
                 DAWN_TRY_ASSIGN(d3d11DSV, view->GetOrCreateD3D11DepthStencilView(
                                               /*depthReadOnly=*/false,
                                               /*stencilReadOnly=*/false, mipLevel));
                 d3d11DeviceContext->ClearDepthStencilView(
-                    d3d11DSV.Get(), clearFlags, d3d11ClearValue.depth, d3d11ClearValue.stencil);
+                    d3d11DSV, clearFlags, d3d11ClearValue.depth, d3d11ClearValue.stencil);
             } else {
-                ComPtr<ID3D11RenderTargetView> d3d11RTV;
+                ID3D11RenderTargetView* d3d11RTV;
                 DAWN_TRY_ASSIGN(d3d11RTV, view->GetOrCreateD3D11RenderTargetView(mipLevel));
-                d3d11DeviceContext->ClearRenderTargetView(d3d11RTV.Get(), d3d11ClearValue.color);
+                d3d11DeviceContext->ClearRenderTargetView(d3d11RTV, d3d11ClearValue.color);
             }
         }
     }
@@ -1150,9 +1150,9 @@ Ref<TextureView> TextureView::Create(TextureBase* texture,
 
 TextureView::~TextureView() = default;
 
-ResultOrError<ComPtr<ID3D11ShaderResourceView>> TextureView::GetOrCreateD3D11ShaderResourceView() {
+ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderResourceView() {
     if (mD3d11SharedResourceView) {
-        return ComPtr<ID3D11ShaderResourceView>(mD3d11SharedResourceView);
+        return mD3d11SharedResourceView.Get();
     }
 
     Device* device = ToBackend(GetDevice());
@@ -1285,14 +1285,14 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> TextureView::GetOrCreateD3D11Sha
         device->GetD3D11Device()->CreateShaderResourceView(
             ToBackend(GetTexture())->GetD3D11Resource(), &srvDesc, &mD3d11SharedResourceView),
         "CreateShaderResourceView"));
-    return ComPtr<ID3D11ShaderResourceView>(mD3d11SharedResourceView);
+    return mD3d11SharedResourceView.Get();
 }
 
-ResultOrError<ComPtr<ID3D11RenderTargetView>> TextureView::GetOrCreateD3D11RenderTargetView(
+ResultOrError<ID3D11RenderTargetView*> TextureView::GetOrCreateD3D11RenderTargetView(
     uint32_t mipLevel) {
     if (mD3d11RenderTargetView) {
         if (mD3d11RenderTargetViewMipLevel == mipLevel) {
-            return ComPtr<ID3D11RenderTargetView>(mD3d11RenderTargetView);
+            return mD3d11RenderTargetView.Get();
         }
         mD3d11RenderTargetView.Reset();
     }
@@ -1309,10 +1309,10 @@ ResultOrError<ComPtr<ID3D11RenderTargetView>> TextureView::GetOrCreateD3D11Rende
                                                        &rtvDesc, &mD3d11RenderTargetView),
                           "CreateRenderTargetView"));
     mD3d11RenderTargetViewMipLevel = mipLevel;
-    return ComPtr<ID3D11RenderTargetView>(mD3d11RenderTargetView);
+    return mD3d11RenderTargetView.Get();
 }
 
-ResultOrError<ComPtr<ID3D11DepthStencilView>> TextureView::GetOrCreateD3D11DepthStencilView(
+ResultOrError<ID3D11DepthStencilView*> TextureView::GetOrCreateD3D11DepthStencilView(
     bool depthReadOnly,
     bool stencilReadOnly,
     uint32_t mipLevel) {
@@ -1320,7 +1320,7 @@ ResultOrError<ComPtr<ID3D11DepthStencilView>> TextureView::GetOrCreateD3D11Depth
         if (mD3d11DepthStencilViewDepthReadOnly == depthReadOnly &&
             mD3d11DepthStencilViewStencilReadOnly == stencilReadOnly &&
             mD3d11DepthStencilViewMipLevel == mipLevel) {
-            return ComPtr<ID3D11DepthStencilView>(mD3d11DepthStencilView);
+            return mD3d11DepthStencilView.Get();
         }
         mD3d11DepthStencilView.Reset();
     }
@@ -1339,13 +1339,12 @@ ResultOrError<ComPtr<ID3D11DepthStencilView>> TextureView::GetOrCreateD3D11Depth
     mD3d11DepthStencilViewDepthReadOnly = depthReadOnly;
     mD3d11DepthStencilViewStencilReadOnly = stencilReadOnly;
     mD3d11DepthStencilViewMipLevel = mipLevel;
-    return ComPtr<ID3D11DepthStencilView>(mD3d11DepthStencilView);
+    return mD3d11DepthStencilView.Get();
 }
 
-ResultOrError<ComPtr<ID3D11UnorderedAccessView>>
-TextureView::GetOrCreateD3D11UnorderedAccessView() {
+ResultOrError<ID3D11UnorderedAccessView*> TextureView::GetOrCreateD3D11UnorderedAccessView() {
     if (mD3d11UnorderedAccessView) {
-        return ComPtr<ID3D11UnorderedAccessView>(mD3d11UnorderedAccessView);
+        return mD3d11UnorderedAccessView.Get();
     }
 
     D3D11_UNORDERED_ACCESS_VIEW_DESC uavDesc;
@@ -1391,7 +1390,7 @@ TextureView::GetOrCreateD3D11UnorderedAccessView() {
     SetDebugName(ToBackend(GetDevice()), mD3d11UnorderedAccessView.Get(), "Dawn_TextureView",
                  GetLabel());
 
-    return ComPtr<ID3D11UnorderedAccessView>(mD3d11UnorderedAccessView);
+    return mD3d11UnorderedAccessView.Get();
 }
 
 }  // namespace dawn::native::d3d11

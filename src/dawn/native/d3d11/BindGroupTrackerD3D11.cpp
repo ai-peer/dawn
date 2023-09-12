@@ -386,28 +386,26 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                 switch (bindingInfo.storageTexture.access) {
                     case wgpu::StorageTextureAccess::WriteOnly:
                     case wgpu::StorageTextureAccess::ReadWrite: {
-                        ComPtr<ID3D11UnorderedAccessView> d3d11UAV;
+                        ID3D11UnorderedAccessView* d3d11UAV = nullptr;
                         DAWN_TRY_ASSIGN(d3d11UAV, view->GetOrCreateD3D11UnorderedAccessView());
                         if (bindingVisibility & wgpu::ShaderStage::Compute) {
-                            deviceContext1->CSSetUnorderedAccessViews(
-                                bindingSlot, 1, d3d11UAV.GetAddressOf(), nullptr);
+                            deviceContext1->CSSetUnorderedAccessViews(bindingSlot, 1, &d3d11UAV,
+                                                                      nullptr);
                         }
                         break;
                     }
                     case wgpu::StorageTextureAccess::ReadOnly: {
-                        ComPtr<ID3D11ShaderResourceView> d3d11SRV;
+                        ID3D11ShaderResourceView* d3d11SRV = nullptr;
                         DAWN_TRY_ASSIGN(d3d11SRV, view->GetOrCreateD3D11ShaderResourceView());
                         if (bindingVisibility & wgpu::ShaderStage::Vertex) {
                             deviceContext1->VSSetShaderResources(bindingSlot, 1,
-                                                                 d3d11SRV.GetAddressOf());
+                                                                 &d3d11SRV));
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Fragment) {
-                            deviceContext1->PSSetShaderResources(bindingSlot, 1,
-                                                                 d3d11SRV.GetAddressOf());
+                            deviceContext1->PSSetShaderResources(bindingSlot, 1, &d3d11SRV);
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Compute) {
-                            deviceContext1->CSSetShaderResources(bindingSlot, 1,
-                                                                 d3d11SRV.GetAddressOf());
+                            deviceContext1->CSSetShaderResources(bindingSlot, 1, &d3d11SRV);
                         }
                         break;
                     }

@@ -471,10 +471,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
 
     // Hold ID3D11RenderTargetView ComPtr to make attachments alive.
-    ityp::array<ColorAttachmentIndex, ComPtr<ID3D11RenderTargetView>, kMaxColorAttachments>
-        d3d11RenderTargetViews = {};
     ityp::array<ColorAttachmentIndex, ID3D11RenderTargetView*, kMaxColorAttachments>
-        d3d11RenderTargetViewPtrs = {};
+        d3d11RenderTargetViews = {};
     ColorAttachmentIndex attachmentCount(uint8_t(0));
     // TODO(dawn:1815): Shrink the sparse attachments to accommodate more UAVs.
     for (ColorAttachmentIndex i :
@@ -483,18 +481,17 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
         DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i],
                         colorTextureView->GetOrCreateD3D11RenderTargetView(
                             colorTextureView->GetBaseMipLevel()));
-        d3d11RenderTargetViewPtrs[i] = d3d11RenderTargetViews[i].Get();
         if (renderPass->colorAttachments[i].loadOp == wgpu::LoadOp::Clear) {
             std::array<float, 4> clearColor =
                 ConvertToFloatColor(renderPass->colorAttachments[i].clearColor);
-            d3d11DeviceContext1->ClearRenderTargetView(d3d11RenderTargetViews[i].Get(),
+            d3d11DeviceContext1->ClearRenderTargetView(d3d11RenderTargetViews[i],
                                                        clearColor.data());
         }
         attachmentCount = i;
         attachmentCount++;
     }
 
-    ComPtr<ID3D11DepthStencilView> d3d11DepthStencilView;
+    ID3D11DepthStencilView* d3d11DepthStencilView = nullptr;
     if (renderPass->attachmentState->HasDepthStencilAttachment()) {
         auto* attachmentInfo = &renderPass->depthStencilAttachment;
         const Format& attachmentFormat = attachmentInfo->view->GetTexture()->GetFormat();
@@ -516,14 +513,13 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             clearFlags |= D3D11_CLEAR_STENCIL;
         }
 
-        d3d11DeviceContext1->ClearDepthStencilView(d3d11DepthStencilView.Get(), clearFlags,
+        d3d11DeviceContext1->ClearDepthStencilView(d3d11DepthStencilView, clearFlags,
                                                    attachmentInfo->clearDepth,
                                                    attachmentInfo->clearStencil);
     }
 
     d3d11DeviceContext1->OMSetRenderTargets(static_cast<uint8_t>(attachmentCount),
-                                            d3d11RenderTargetViewPtrs.data(),
-                                            d3d11DepthStencilView.Get());
+                                            d3d11RenderTargetViews.data(), d3d11DepthStencilView);
 
     // Set viewport
     D3D11_VIEWPORT defautViewport;
