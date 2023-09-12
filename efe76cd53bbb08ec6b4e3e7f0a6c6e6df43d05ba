@@ -39,6 +39,30 @@
       },
       "revId": "efe76cd53bbb08ec6b4e3e7f0a6c6e6df43d05ba",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47274ac5_c1beac09",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-09-12T20:04:25Z",
+      "side": 1,
+      "message": "that\u0027s git cl format\u0027s formatting, not mine 😥",
+      "parentUuid": "540090c2_68971af6",
+      "range": {
+        "startLine": 1058,
+        "startChar": 15,
+        "endLine": 1059,
+        "endChar": 36
+      },
+      "revId": "efe76cd53bbb08ec6b4e3e7f0a6c6e6df43d05ba",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
