@@ -33,6 +33,23 @@
       "message": "Nice! Please tell AMD about this bug and how to disable the workaround so that they can hopefully fix it in the future and we can conditionalize the workaround to particular driver versions. Just ran into a problem with longstanding driver bug workarounds causing problems in crbug.com/1480622 and we should try to avoid that in Dawn.",
       "revId": "a7d14db395b074304efbe16eabbd8db9d16a4e42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "539e91bd_8c090b25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000009
+      },
+      "writtenOn": "2023-09-12T00:19:09Z",
+      "side": 1,
+      "message": "I think this DCHECK might have been fixed by omerkatz@.\n\n---\nThread 0 (crashed)\n 0  Chromium Framework!v8::base::OS::Abort() + 0x13\n 1  Chromium Framework!v8::base::(anonymous namespace)::DefaultDcheckHandler(char const*, int, char const*) + 0x15\n 2  Chromium Framework!v8::internal::Heap::FinalizeIncrementalMarkingAtomically(v8::internal::GarbageCollectionReason) + 0x54\n 3  Chromium Framework!v8::internal::CppHeap::ReportBufferedAllocationSizeIfPossible() + 0xc3\n 4  Chromium Framework!cppgc::internal::StatsCollector::AllocatedObjectSizeSafepointImpl() + 0x45\n 5  Chromium Framework!cppgc::internal::ObjectAllocator::OutOfLineAllocateGCSafePoint(cppgc::internal::NormalPageSpace\u0026, unsigned long, cppgc::internal::AlignVal, unsigned short, void**) + 0x3a\n 6  Chromium Framework!cppgc::internal::ObjectAllocator::AllocateObjectOnSpace(cppgc::internal::NormalPageSpace\u0026, unsigned long, unsigned short) + 0x13c\n---\n\nNot able to cc omerkatz@ to ask, though.",
+      "revId": "a7d14db395b074304efbe16eabbd8db9d16a4e42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
