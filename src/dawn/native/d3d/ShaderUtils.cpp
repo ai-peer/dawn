@@ -14,6 +14,7 @@
 
 #include "dawn/native/d3d/ShaderUtils.h"
 
+#include <iostream>
 #include <sstream>
 #include <string>
 #include <utility>
