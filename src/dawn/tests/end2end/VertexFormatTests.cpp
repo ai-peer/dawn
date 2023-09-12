@@ -76,6 +76,27 @@ class VertexFormatTest : public DawnTest {
         }
     }
 
+    uint32_t NormalizationFactor(wgpu::VertexFormat format, uint32_t component) {
+        switch (format) {
+            case wgpu::VertexFormat::Unorm8x2:
+            case wgpu::VertexFormat::Unorm8x4:
+                return 255;
+            case wgpu::VertexFormat::Snorm8x2:
+            case wgpu::VertexFormat::Snorm8x4:
+                return 127;
+            case wgpu::VertexFormat::Unorm16x2:
+            case wgpu::VertexFormat::Unorm16x4:
+                return 65536;
+            case wgpu::VertexFormat::Snorm16x2:
+            case wgpu::VertexFormat::Snorm16x4:
+                return 32767;
+            case wgpu::VertexFormat::Rgb10a2:
+                return (component == 3) ? 3 : 1023;
+            default:
+                UNREACHABLE();
+        }
+    }
+
     bool IsUnsignedFormat(wgpu::VertexFormat format) {
         switch (format) {
             case wgpu::VertexFormat::Uint32:
@@ -326,7 +347,7 @@ class VertexFormatTest : public DawnTest {
                     // Move normalize operation into shader because of CPU and GPU precision
                     // different on float math.
                     vs << "max(f32(" << std::to_string(expectedData[i * componentCount + j])
-                       << ") / " << std::to_string(std::numeric_limits<T>::max()) << ", -1.0));\n";
+                       << ") / " << std::to_string(NormalizationFactor(format, j)) << ", -1.0));\n";
                 } else if (isHalf) {
                     // Because Vulkan and D3D12 handle -0.0f through bitcast have different
                     // result (Vulkan take -0.0f as -0.0 but D3D12 take -0.0f as 0), add workaround
@@ -858,15 +879,17 @@ TEST_P(VertexFormatTest, Rgb10a2) {
         return r | g << 10 | b << 20 | a << 30;
     };
 
-    std::vector<uint32_t> vertexData = {MakeRGB10A2(0, 0, 0, 0), MakeRGB10A2(1023, 1023, 1023, 1),
-                                        MakeRGB10A2(243, 578, 765, 2), MakeRGB10A2(0, 0, 0, 3)};
+    std::vector<uint32_t> vertexData = {
+        MakeRGB10A2(0, 0, 0, 0),
+        MakeRGB10A2(1023, 1023, 1023, 3),
+        MakeRGB10A2(243, 578, 765, 2),
+    };
 
     // clang-format off
-    std::vector<float> expectedData = {
-        0.0f, 0.0f, 0.0f, 0.0f,
-        1.0f, 1.0f, 1.0f, 1 / 3.0f,
-        243 / 1023.0f, 576 / 1023.0f, 765 / 1023.0f, 2 / 3.0f,
-        0.0f, 0.0f, 0.0f, 1.0f
+    std::vector<uint32_t> expectedData = {
+        0, 0, 0, 0,
+        1023, 1023, 1023, 3,
+        243, 567, 765, 2,
     };
     // clang-format on
 
