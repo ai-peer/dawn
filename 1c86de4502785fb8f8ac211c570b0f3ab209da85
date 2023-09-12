@@ -50,6 +50,24 @@
       "message": "Can we also add a small test in src/dawn/tests/unittests/validation/VertexStateValidationTests.cpp for the matching with the WGSL types? (similar to Snorm16x4 for example)",
       "revId": "1c86de4502785fb8f8ac211c570b0f3ab209da85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c04d602_f6582258",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-12T09:38:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fac7892_c8fe3c7a",
+      "revId": "1c86de4502785fb8f8ac211c570b0f3ab209da85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
