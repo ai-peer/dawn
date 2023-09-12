@@ -39,6 +39,30 @@
       },
       "revId": "50887ae7b8cc98ae201aee6847bbb5420cb14288",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d77b2e_ef6adf2f",
+        "filename": "src/tint/lang/core/ir/transform/robustness.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-12T19:20:50Z",
+      "side": 1,
+      "message": "Yeah, I agree that this feels a little fragile. I\u0027ve opened crbug.com/tint/2040 to track the work to improve this.",
+      "parentUuid": "229ef29d_fbf9d8cc",
+      "range": {
+        "startLine": 307,
+        "startChar": 25,
+        "endLine": 307,
+        "endChar": 33
+      },
+      "revId": "50887ae7b8cc98ae201aee6847bbb5420cb14288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
