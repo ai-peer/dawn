@@ -42,10 +42,14 @@ class SyncScopeUsageTracker {
 
     SyncScopeUsageTracker& operator=(SyncScopeUsageTracker&&);
 
-    void BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage usage);
-    void TextureViewUsedAs(TextureViewBase* texture, wgpu::TextureUsage usage);
+    void BufferUsedAs(BufferBase* buffer,
+                      wgpu::BufferUsage usage,
+                      wgpu::ShaderStage shaderStages = wgpu::ShaderStage::None);
+    void TextureViewUsedAs(TextureViewBase* texture,
+                           wgpu::TextureUsage usage,
+                           wgpu::ShaderStage shaderStages = wgpu::ShaderStage::None);
     void AddRenderBundleTextureUsage(TextureBase* texture,
-                                     const TextureSubresourceUsage& textureUsage);
+                                     const TextureSubresourceSyncInfo& textureSyncInfo);
 
     // Walks the bind groups and tracks all its resources.
     void AddBindGroup(BindGroupBase* group);
@@ -54,8 +58,8 @@ class SyncScopeUsageTracker {
     SyncScopeResourceUsage AcquireSyncScopeUsage();
 
   private:
-    std::map<BufferBase*, wgpu::BufferUsage> mBufferUsages;
-    std::map<TextureBase*, TextureSubresourceUsage> mTextureUsages;
+    std::map<BufferBase*, BufferSyncInfo> mBufferSyncInfos;
+    std::map<TextureBase*, TextureSubresourceSyncInfo> mTextureSyncInfos;
     std::set<ExternalTextureBase*> mExternalTextureUsages;
 };
 
