@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "1c86de4502785fb8f8ac211c570b0f3ab209da85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fdaaab65_e1907571",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-12T09:11:42Z",
+      "side": 1,
+      "message": "LGTM but the name seems very likely to change.",
+      "revId": "1c86de4502785fb8f8ac211c570b0f3ab209da85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fac7892_c8fe3c7a",
+        "filename": "src/dawn/tests/end2end/VertexFormatTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-12T09:11:42Z",
+      "side": 1,
+      "message": "Can we also add a small test in src/dawn/tests/unittests/validation/VertexStateValidationTests.cpp for the matching with the WGSL types? (similar to Snorm16x4 for example)",
+      "revId": "1c86de4502785fb8f8ac211c570b0f3ab209da85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
