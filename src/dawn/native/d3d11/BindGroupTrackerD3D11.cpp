@@ -398,8 +398,7 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                         ID3D11ShaderResourceView* d3d11SRV = nullptr;
                         DAWN_TRY_ASSIGN(d3d11SRV, view->GetOrCreateD3D11ShaderResourceView());
                         if (bindingVisibility & wgpu::ShaderStage::Vertex) {
-                            deviceContext1->VSSetShaderResources(bindingSlot, 1,
-                                                                 &d3d11SRV));
+                            deviceContext1->VSSetShaderResources(bindingSlot, 1, &d3d11SRV);
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Fragment) {
                             deviceContext1->PSSetShaderResources(bindingSlot, 1, &d3d11SRV);
