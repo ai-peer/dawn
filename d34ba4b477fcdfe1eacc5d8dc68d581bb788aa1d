@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "5967929b_fa517b7d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-12T12:42:54Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "31c3d8d5_d39f13b7",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d75ea522_f306d6f8",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
@@ -89,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fc2047d3_0facb199",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 536,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-12T12:42:54Z",
+      "side": 1,
+      "message": "Fortunately the MotionMark Design case mostly involves full range buffer writes, which are suitable to use UpdateSubresource(). With this improvement, Buffer::Write no longer exists in the hotspots.\n\n```\nFunction Name\tTotal CPU [unit, %]\tSelf CPU [unit, %]\tModule\tCategory\n| + dawn::native::d3d11::Queue::SubmitImpl\t2336 (60.22%)\t0 (0.00%)\tchrome\tIO | Kernel\n|| + dawn::native::d3d11::CommandBuffer::Execute\t2315 (59.68%)\t4 (0.10%)\tchrome\tIO | Kernel\n||| - dawn::native::d3d11::CommandBuffer::ExecuteRenderPass\t1239 (31.94%)\t3 (0.08%)\tchrome\tIO | Kernel\n||| - dawn::native::d3d11::Buffer::Write\t885 (22.82%)\t0 (0.00%)\tchrome\tKernel\n||| - dawn::native::d3d11::Texture::Copy\t127 (3.27%)\t0 (0.00%)\tchrome\tIO\n||| - dawn::native::d3d11::Buffer::Copy\t26 (0.67%)\t0 (0.00%)\tchrome\t\n||| - dawn::native::d3d11::Texture::Write\t14 (0.36%)\t0 (0.00%)\tchrome\t\n\n```\n\n\n```\n\nFunction Name\tTotal CPU [unit, %]\tSelf CPU [unit, %]\tModule\tCategory\n| + dawn::native::d3d11::Queue::SubmitImpl\t2058 (34.20%)\t1 (0.02%)\tchrome\tKernel\n|| + dawn::native::d3d11::CommandBuffer::Execute\t2009 (33.39%)\t4 (0.07%)\tchrome\tKernel\n||| + dawn::native::d3d11::CommandBuffer::ExecuteRenderPass\t1664 (27.65%)\t2 (0.03%)\tchrome\tKernel\n|||| - dawn::native::d3d11::CommandBuffer::ExecuteRenderPass::\u003clambda_2\u003e::operator()\t788 (13.10%)\t1 (0.02%)\tchrome\tKernel\n|||| - dawn::native::d3d11::BindGroupTracker::~BindGroupTracker\t643 (10.69%)\t17 (0.28%)\tchrome\tKernel\n|||| - dawn::native::d3d11::TextureView::CreateD3D11RenderTargetView\t70 (1.16%)\t2 (0.03%)\tchrome\t\n|||| - dawn::native::d3d11::TextureView::CreateD3D11DepthStencilView\t61 (1.01%)\t2 (0.03%)\tchrome\tKernel\n```",
+      "parentUuid": "e9a4327c_13a46c96",
+      "range": {
+        "startLine": 535,
+        "startChar": 37,
+        "endLine": 536,
+        "endChar": 59
+      },
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4bd08cc8_be95b651",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2
@@ -118,6 +166,24 @@
       "side": 1,
       "message": "D3D11 cannot invoke CopySubresourceRegion while a Subresource of the source is mapped. For one common staging buffer, ScopeMap [1] ensures the map/unmap pair to work as expected for each write.\nHowever, in case of DynamicUploader, it assumes the staging buffers should be always mapped, and one staging buffer can be shared by many allocates. So it\u0027s kind of unclear how we can keep map/unmap state in pair.\nBTW, the one common staging buffer is simple and effective enough to the address the problem.",
       "parentUuid": "4bd08cc8_be95b651",
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b006b16c_275687b2",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 537,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-12T12:42:54Z",
+      "side": 1,
+      "message": "Let\u0027s see if this staging buffer issue will come up in other cases. For now, UpdateSubresource() is good enough.",
+      "parentUuid": "22622d50_0514b650",
       "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
