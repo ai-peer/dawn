@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "906bc4ab_a24c5f59",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 70
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-12T11:43:27Z",
+      "side": 1,
+      "message": "If shut down, shouldn\u0027t we call the event with shutdown? Otherwise we might never call the callback.",
+      "revId": "be98f27ad3a22a79c67e1b29d9c6b414139d7cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86310249_0773cdc8",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-12T11:43:27Z",
+      "side": 1,
+      "message": "Isn\u0027t there a race between the std::optional\u0027s reset() call and the accesses to its value?\n\nMaybe not because Instance destruction shouldn\u0027t happen racily with anything else, but it would be nice to note it.",
+      "revId": "be98f27ad3a22a79c67e1b29d9c6b414139d7cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
