@@ -33,6 +33,23 @@
       "message": "Austin, ping, looks like you\u0027ve missed this yesterday.",
       "revId": "980bf9ee131dc0ee78c47117083aaf5ad2866b42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2503015_162339f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-09-12T16:53:11Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "980bf9ee131dc0ee78c47117083aaf5ad2866b42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
