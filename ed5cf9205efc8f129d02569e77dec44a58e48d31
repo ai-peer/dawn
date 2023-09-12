@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9dc1f916_943299d6",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-12T19:51:19Z",
+      "side": 1,
+      "message": "Yeah, actually this was how it looked originally (mostly), but I changed to using `.Add` at one point in order to add the `SwitchInfo*` to a Vector of them. But then I realized that these were getting invalidated, so I am now just adding a Vector of `SwitchStatements` and looking them up again in the map later. Will change back to `GetOrCreate`.",
+      "parentUuid": "d245a8fb_e673c217",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 64,
+        "endChar": 39
+      },
+      "revId": "ed5cf9205efc8f129d02569e77dec44a58e48d31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2fc8896b_3a890c2b",
         "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch.cc",
         "patchSetId": 3
@@ -95,6 +119,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0026eed5_436ef83f",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-12T19:51:19Z",
+      "side": 1,
+      "message": "Good point, that\u0027ll clean this up.",
+      "parentUuid": "ec1fb354_3aba1b4b",
+      "range": {
+        "startLine": 98,
+        "startChar": 16,
+        "endLine": 98,
+        "endChar": 75
+      },
+      "revId": "ed5cf9205efc8f129d02569e77dec44a58e48d31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e30347ad_840fc845",
         "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch.cc",
         "patchSetId": 3
@@ -129,6 +177,30 @@
       "writtenOn": "2023-09-12T19:44:56Z",
       "side": 1,
       "message": "This is a bit unusual. Please can we have a second case that is just `{ continue; }` ?",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 14
+      },
+      "revId": "ed5cf9205efc8f129d02569e77dec44a58e48d31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8bf5fd6_1118def7",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-12T19:51:19Z",
+      "side": 1,
+      "message": "Yeah, I wanted to remove these, but if you think it\u0027s useful to have both, I can do that.",
+      "parentUuid": "37eb7efb_d01a8334",
       "range": {
         "startLine": 119,
         "startChar": 0,
