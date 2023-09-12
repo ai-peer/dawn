@@ -22,6 +22,30 @@
       },
       "revId": "5b306beaba9ba3325e5a3a278c7af2f1cfad2943",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9eabcb8b_3793784a",
+        "filename": "src/tint/lang/core/ir/transform/robustness_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-12T18:15:57Z",
+      "side": 1,
+      "message": "Discussed offline - we plan to reply on a generic constant folding transform for this sort of optimisation.",
+      "parentUuid": "64991e4a_86c44522",
+      "range": {
+        "startLine": 102,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 41
+      },
+      "revId": "5b306beaba9ba3325e5a3a278c7af2f1cfad2943",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
