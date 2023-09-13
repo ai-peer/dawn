@@ -16,6 +16,23 @@
       "message": "Given that the filterable tests seemed to work fine in this (un-submitted) roll: https://dawn-review.googlesource.com/c/dawn/+/150800\n\nI will wait until we get a successful CTS roll before landing this, but wanted to get the review out of the way.",
       "revId": "842a0058e879bc65ef0e24bd60e3a57f9a86c05d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f66996_134fb973",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-13T15:46:14Z",
+      "side": 1,
+      "message": "LGTM!\n\ntests have not *actually* landed yet because the roll is broken, but they\u0027re passing here:\nhttps://dawn-review.googlesource.com/c/dawn/+/151320",
+      "revId": "842a0058e879bc65ef0e24bd60e3a57f9a86c05d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
