@@ -33,6 +33,154 @@
       "message": "Please take a look, thaks",
       "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3c9b30c_fb4a991c",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "I think we could use ValidateAndUnpackChain(limits);\n\n```\n// something like\nUnpackedLimits unpackedLimits;\nif (GetInstance()-\u003eConsumedError(ValidateAndUnpackChain(limits), \u0026unpackedLimits)) {\n    return false;\n}\n\n```",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9df26a31_16af527f",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "Should asking for the DawnExperimentalSubgroupLimits be an error and return false if the extension is not present on the Adapter? This would match the behavior of requesting a limit for an extension that\u0027s not known.",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2ba2087_3a60ef7e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "It\u0027s weird to use the API for this, can\u0027t we just have a getter?",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d16829a7_cf7d0a51",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "ditto, same comment as for the adapter.",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818933d9_84fb9a1b",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "nit: leftover include",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a5db46c_a1443f2a",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "max 😊\n```suggestion\n        mDeviceInfo.subgroupSizeControlProperties.maxSubgroupSize;\n```",
+      "range": {
+        "startLine": 517,
+        "startChar": 50,
+        "endLine": 517,
+        "endChar": 65
+      },
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50aa2d34_6b51ae4b",
+        "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "We should return false here, and like for the native Adapter and Device have validation that the subgroup limits can\u0027t be queried if the extension is not enabled. (we can have a member bitset of enabled features in this class imho)\n\nCan we have a validation for this behavior and GetLimit returning false for unknown sTypes?",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd46a423_a95273f3",
+        "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T15:32:39Z",
+      "side": 1,
+      "message": "nit: not needed.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
