@@ -86,12 +86,12 @@ class ErrorBuffer final : public BufferBase {
     }
 
   private:
-    bool IsCPUWritableAtCreation() const override { UNREACHABLE(); }
+    bool IsCPUWritableAtCreation() const override { DAWN_UNREACHABLE(); }
 
-    MaybeError MapAtCreationImpl() override { UNREACHABLE(); }
+    MaybeError MapAtCreationImpl() override { DAWN_UNREACHABLE(); }
 
     MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override {
-        UNREACHABLE();
+        DAWN_UNREACHABLE();
     }
 
     void* GetMappedPointer() override { return mFakeMappedData.get(); }
@@ -263,7 +263,7 @@ wgpu::BufferMapState BufferBase::APIGetMapState() const {
         case BufferState::Destroyed:
             return wgpu::BufferMapState::Unmapped;
         default:
-            UNREACHABLE();
+            DAWN_UNREACHABLE();
             return wgpu::BufferMapState::Unmapped;
     }
 }
@@ -350,7 +350,7 @@ MaybeError BufferBase::ValidateCanUseOnQueueNow() const {
         case BufferState::Unmapped:
             return {};
     }
-    UNREACHABLE();
+    DAWN_UNREACHABLE();
 }
 
 std::function<void()> BufferBase::PrepareMappingCallback(MapRequestID mapID,
@@ -536,7 +536,7 @@ MaybeError BufferBase::ValidateMapAsync(wgpu::MapMode mode,
         case BufferState::MappedAtCreation:
             return DAWN_VALIDATION_ERROR("%s is already mapped.", this);
         case BufferState::PendingMap:
-            UNREACHABLE();
+            DAWN_UNREACHABLE();
         case BufferState::Destroyed:
             return DAWN_VALIDATION_ERROR("%s is destroyed.", this);
         case BufferState::Unmapped:
@@ -602,7 +602,7 @@ bool BufferBase::CanGetMappedRange(bool writable, size_t offset, size_t size) co
         case BufferState::Destroyed:
             return false;
     }
-    UNREACHABLE();
+    DAWN_UNREACHABLE();
 }
 
 MaybeError BufferBase::ValidateUnmap() const {
