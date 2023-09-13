@@ -617,6 +617,8 @@ source_set("sources") {
       "metal/Forward.h",
       "metal/PipelineLayoutMTL.h",
       "metal/PipelineLayoutMTL.mm",
+      "metal/Process.h",
+      "metal/Process.mm",
       "metal/QuerySetMTL.h",
       "metal/QuerySetMTL.mm",
       "metal/QueueMTL.h",
