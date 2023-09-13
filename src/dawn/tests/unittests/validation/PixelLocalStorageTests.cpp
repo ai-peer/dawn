@@ -1028,11 +1028,82 @@ TEST_F(PixelLocalStorageTest, Reflection_FormatMatching) {
     }
 }
 
+// Check that it is allowed to create render passes with only a storage attachment.
+TEST_F(PixelLocalStorageTest, RenderPassOnlyStorageAttachment) {
+    wgpu::TextureDescriptor tDesc;
+    tDesc.format = wgpu::TextureFormat::R32Uint;
+    tDesc.size = {1, 1};
+    tDesc.usage = wgpu::TextureUsage::StorageAttachment;
+    wgpu::Texture tex = device.CreateTexture(&tDesc);
+
+    wgpu::RenderPassStorageAttachment rpAttachment;
+    rpAttachment.storage = tex.CreateView();
+    rpAttachment.offset = 0;
+    rpAttachment.loadOp = wgpu::LoadOp::Load;
+    rpAttachment.storeOp = wgpu::StoreOp::Store;
+
+    wgpu::RenderPassPixelLocalStorage rpPlsDesc;
+    rpPlsDesc.totalPixelLocalStorageSize = 4;
+    rpPlsDesc.storageAttachmentCount = 1;
+    rpPlsDesc.storageAttachments = &rpAttachment;
+
+    wgpu::RenderPassDescriptor rpDesc;
+    rpDesc.nextInChain = &rpPlsDesc;
+    rpDesc.colorAttachmentCount = 0;
+    rpDesc.depthStencilAttachment = nullptr;
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&rpDesc);
+    pass.End();
+    encoder.Finish();
+}
+
+// Check that it is allowed to create render pipelines with only a storage attachment.
+TEST_F(PixelLocalStorageTest, RenderPipelineOnlyStorageAttachment) {
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        enable chromium_experimental_pixel_local;
+
+        @vertex fn vs() -> @builtin(position) vec4f {
+            return vec4f(0, 0, 0, 0.5);
+        }
+
+        struct PLS {
+            value : u32,
+        };
+        var<pixel_local> pls : PLS;
+        @fragment fn fs() {
+            pls.value = pls.value + 1;
+        }
+    )");
+
+    wgpu::PipelineLayoutStorageAttachment plAttachment;
+    plAttachment.offset = 0;
+    plAttachment.format = wgpu::TextureFormat::R32Uint;
+
+    wgpu::PipelineLayoutPixelLocalStorage plPlsDesc;
+    plPlsDesc.totalPixelLocalStorageSize = 4;
+    plPlsDesc.storageAttachmentCount = 1;
+    plPlsDesc.storageAttachments = &plAttachment;
+
+    wgpu::PipelineLayoutDescriptor plDesc;
+    plDesc.nextInChain = &plPlsDesc;
+    plDesc.bindGroupLayoutCount = 0;
+    wgpu::PipelineLayout pl = device.CreatePipelineLayout(&plDesc);
+
+    utils::ComboRenderPipelineDescriptor pDesc;
+    pDesc.layout = pl;
+    pDesc.vertex.module = module;
+    pDesc.vertex.entryPoint = "vs";
+    pDesc.cFragment.module = module;
+    pDesc.cFragment.entryPoint = "fs";
+    pDesc.cFragment.targetCount = 0;
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&pDesc);
+}
+
 class PixelLocalStorageAndRenderToSingleSampledTest : public PixelLocalStorageTest {
   protected:
     WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
                                 wgpu::DeviceDescriptor descriptor) override {
-        // TODO(dawn:1704): Do we need to test both extensions?
         wgpu::FeatureName requiredFeatures[2] = {wgpu::FeatureName::PixelLocalStorageNonCoherent,
                                                  wgpu::FeatureName::MSAARenderToSingleSampled};
         descriptor.requiredFeatures = requiredFeatures;
@@ -1056,7 +1127,31 @@ TEST_F(PixelLocalStorageAndRenderToSingleSampledTest, CombinationIsNotAllowed) {
     ASSERT_DEVICE_ERROR(RecordRenderPass(&desc.rpDesc));
 }
 
+class PixelLocalStorageAndTransientAttachmentTest : public PixelLocalStorageTest {
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        wgpu::FeatureName requiredFeatures[2] = {wgpu::FeatureName::PixelLocalStorageNonCoherent,
+                                                 wgpu::FeatureName::TransientAttachments};
+        descriptor.requiredFeatures = requiredFeatures;
+        descriptor.requiredFeatureCount = 2;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Check that a transient + storage attachment is allowed.
+TEST_F(PixelLocalStorageAndTransientAttachmentTest, TransientStorageAttachment) {
+    wgpu::TextureDescriptor desc;
+    desc.size = {1, 1};
+    desc.format = wgpu::TextureFormat::R32Uint;
+    desc.usage = wgpu::TextureUsage::StorageAttachment | wgpu::TextureUsage::TransientAttachment;
+    device.CreateTexture(&desc);
+
+    desc.usage |= wgpu::TextureUsage::RenderAttachment;
+    device.CreateTexture(&desc);
+}
+
 // TODO(dawn:1704): Add tests for limits
+// TODO(dawn:1704): Allow multisampled storage attachments
 
 }  // anonymous namespace
 }  // namespace dawn
