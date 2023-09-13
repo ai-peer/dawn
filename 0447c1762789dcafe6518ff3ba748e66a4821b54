@@ -122,6 +122,24 @@
       "parentUuid": "bcad76f1_87f761f4",
       "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c230e6ac_47c42f97",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-13T16:00:58Z",
+      "side": 1,
+      "message": "I thought about this for a bit and don\u0027t have better ideas either.\n\nLet\u0027s just leave a comment when you assign to the `arguments` vector and say that the contents it points to shouldn\u0027t be mutated.\nSeems not *that* risky since `entryPointW` and `r` and const - right?",
+      "parentUuid": "f5874b47_aa7e9c32",
+      "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
