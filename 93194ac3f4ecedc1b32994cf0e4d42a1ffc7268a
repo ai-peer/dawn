@@ -16,6 +16,24 @@
       "message": "You can also have `InterpolateAttribute` and `InvariantAttribute` on fragment parameters (the latter is ignored but valid to have on `@builtin(position)`).",
       "revId": "93194ac3f4ecedc1b32994cf0e4d42a1ffc7268a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dae5450_b6bd064e",
+        "filename": "src/tint/lang/msl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-13T13:56:49Z",
+      "side": 1,
+      "message": "Thanks. Can\u0027t remember all these attributes. Done.",
+      "parentUuid": "170f8767_3036bb43",
+      "revId": "93194ac3f4ecedc1b32994cf0e4d42a1ffc7268a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
