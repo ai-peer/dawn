@@ -16,6 +16,29 @@
       "message": "PTAL, thanks.",
       "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d41202b_e4531135",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-13T16:09:06Z",
+      "side": 1,
+      "message": "this seems like a weird way to do caching. Why not have a proper map?",
+      "range": {
+        "startLine": 1319,
+        "startChar": 4,
+        "endLine": 1326,
+        "endChar": 5
+      },
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
