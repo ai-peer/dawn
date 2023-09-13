@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65aefdc7_7ad48022",
+        "filename": "src/tint/api/options/pixel_local.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-13T12:00:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f02f5eaf_5b2ccbb6",
+      "revId": "7da382ad1450daed11686e18ba195b63d4e58f02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f5832c0_b1ad586a",
