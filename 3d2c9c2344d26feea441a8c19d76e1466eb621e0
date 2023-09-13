@@ -276,6 +276,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e9fb1be_c301d02f",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 17
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-13T17:53:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3c1a2588_bf7730e1",
+      "range": {
+        "startLine": 48,
+        "startChar": 87,
+        "endLine": 48,
+        "endChar": 94
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cf07534_e7da9b8d",
@@ -289,6 +313,30 @@
       "writtenOn": "2023-09-11T20:55:08Z",
       "side": 1,
       "message": "nit. Any reason not to use the new unpacking utils? (Could get rid of the `FindInChain` below if we do.",
+      "range": {
+        "startLine": 113,
+        "startChar": 4,
+        "endLine": 113,
+        "endChar": 97
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b0824d_6b506ffe",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-13T17:53:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cf07534_e7da9b8d",
       "range": {
         "startLine": 113,
         "startChar": 4,
