@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a885cb05_353a1a95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-13T12:04:24Z",
+      "side": 1,
+      "message": "Marking unresolved to make sure you see this (I always forget that Gerrit defaults global comments to resolved).",
+      "parentUuid": "916be379_a211a883",
+      "revId": "7da382ad1450daed11686e18ba195b63d4e58f02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f02f5eaf_5b2ccbb6",
         "filename": "src/tint/api/options/pixel_local.h",
         "patchSetId": 7
