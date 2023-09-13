@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1012650_e97f5406",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-13T17:31:24Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "09302b6286f1b21c3ee8fb39521e17c74dc7a24a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c56b9c4b_9814b753",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-13T17:31:24Z",
+      "side": 1,
+      "message": "`switch_stmts` seems to just mirror the keys of `switch_infos` so seems redundant?",
+      "revId": "09302b6286f1b21c3ee8fb39521e17c74dc7a24a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
