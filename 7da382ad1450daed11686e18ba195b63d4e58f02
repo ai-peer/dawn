@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29a2fc0e_2eb0914c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-13T12:36:10Z",
+      "side": 1,
+      "message": "Great spot. Done.",
+      "parentUuid": "a885cb05_353a1a95",
+      "revId": "7da382ad1450daed11686e18ba195b63d4e58f02",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f02f5eaf_5b2ccbb6",
