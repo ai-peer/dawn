@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87aba6bc_16b86d50",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-13T00:00:33Z",
+      "side": 1,
+      "message": "Given that the filterable tests seemed to work fine in this (un-submitted) roll: https://dawn-review.googlesource.com/c/dawn/+/150800\n\nI will wait until we get a successful CTS roll before landing this, but wanted to get the review out of the way.",
+      "revId": "842a0058e879bc65ef0e24bd60e3a57f9a86c05d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
