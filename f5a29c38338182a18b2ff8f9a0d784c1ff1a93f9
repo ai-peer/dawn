@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9bc27e3_e394e558",
+        "filename": "src/dawn/node/interop/NodeAPI.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-13T16:15:31Z",
+      "side": 1,
+      "message": "Needs two spaces. Run `git cl format --python`, or use clang-format on the file.",
+      "range": {
+        "startLine": 21,
+        "startChar": 17,
+        "endLine": 21,
+        "endChar": 18
+      },
+      "revId": "f5a29c38338182a18b2ff8f9a0d784c1ff1a93f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
