@@ -15,6 +15,7 @@
 #include "dawn/native/metal/ShaderModuleMTL.h"
 
 #include "dawn/native/BindGroupLayoutInternal.h"
+#include "dawn/native/Blob.h"
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/Serializable.h"
 #include "dawn/native/TintUtils.h"
@@ -29,8 +30,6 @@
 #include "dawn/platform/tracing/TraceEvent.h"
 
 #include <tint/tint.h>
-
-#include <sstream>
 
 namespace dawn::native::metal {
 namespace {
@@ -53,6 +52,7 @@ using OptionalVertexPullingTransformConfig =
     X(bool, isRobustnessEnabled)                                                                 \
     X(bool, disableSymbolRenaming)                                                               \
     X(bool, disableWorkgroupInit)                                                                \
+    X(CacheKey::UnsafeUnkeyedValue<bool>, compileMSLToBinary)                                    \
     X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)
 
 DAWN_MAKE_CACHE_REQUEST(MslCompilationRequest, MSL_COMPILATION_REQUEST_MEMBERS);
@@ -62,6 +62,7 @@ using WorkgroupAllocations = std::vector<uint32_t>;
 
 #define MSL_COMPILATION_MEMBERS(X)                \
     X(std::string, msl)                           \
+    X(Blob, blob)                                 \
     X(std::string, remappedEntryPointName)        \
     X(bool, needsStorageBufferLength)             \
     X(bool, hasInvariantAttribute)                \
@@ -100,14 +101,15 @@ MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult,
 
 namespace {
 
-ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
+ResultOrError<CacheResult<MslCompilation>> TranslateToMSLAndCompile(
     DeviceBase* device,
     const ProgrammableStage& programmableStage,
     SingleShaderStage stage,
     const PipelineLayout* layout,
     ShaderModule::MetalFunctionData* out,
     uint32_t sampleMask,
-    const RenderPipeline* renderPipeline) {
+    const RenderPipeline* renderPipeline,
+    bool compileMSLToBinary) {
     ScopedTintICEHandler scopedICEHandler(device);
 
     std::ostringstream errorStream;
@@ -197,6 +199,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
         renderPipeline->GetPrimitiveTopology() == wgpu::PrimitiveTopology::PointList;
     req.isRobustnessEnabled = device->IsRobustnessEnabled();
     req.disableSymbolRenaming = device->IsToggleEnabled(Toggle::DisableSymbolRenaming);
+    req.compileMSLToBinary = UnsafeUnkeyedValue(compileMSLToBinary);
     req.platform = UnsafeUnkeyedValue(device->GetPlatform());
     req.arrayLengthFromUniform = std::move(arrayLengthFromUniform);
 
@@ -295,10 +298,16 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                 #endif
             )" + msl;
 
+            Blob blob;
+            if (r.compileMSLToBinary.UnsafeGetValue()) {
+                DAWN_TRY_ASSIGN(blob, CompileMSLToBinary(msl, result->has_invariant_attribute));
+            }
+
             auto workgroupAllocations =
                 std::move(result->workgroup_allocations.at(remappedEntryPointName));
             return MslCompilation{{
                 std::move(msl),
+                std::move(blob),
                 std::move(remappedEntryPointName),
                 result->needs_storage_buffer_sizes,
                 result->has_invariant_attribute,
@@ -337,35 +346,48 @@ MaybeError ShaderModule::CreateFunction(SingleShaderStage stage,
         ASSERT(renderPipeline != nullptr);
     }
 
+    constexpr bool kCompileMSLToBinary = true;
     CacheResult<MslCompilation> mslCompilation;
-    DAWN_TRY_ASSIGN(mslCompilation, TranslateToMSL(GetDevice(), programmableStage, stage, layout,
-                                                   out, sampleMask, renderPipeline));
+    DAWN_TRY_ASSIGN(mslCompilation,
+                    TranslateToMSLAndCompile(GetDevice(), programmableStage, stage, layout, out,
+                                             sampleMask, renderPipeline, kCompileMSLToBinary));
     out->needsStorageBufferLength = mslCompilation->needsStorageBufferLength;
     out->workgroupAllocations = std::move(mslCompilation->workgroupAllocations);
     out->localWorkgroupSize = MTLSizeMake(mslCompilation->localWorkgroupSize.width,
                                           mslCompilation->localWorkgroupSize.height,
                                           mslCompilation->localWorkgroupSize.depthOrArrayLayers);
 
-    NSRef<NSString> mslSource =
-        AcquireNSRef([[NSString alloc] initWithUTF8String:mslCompilation->msl.c_str()]);
-
-    NSRef<MTLCompileOptions> compileOptions = AcquireNSRef([[MTLCompileOptions alloc] init]);
-    if (mslCompilation->hasInvariantAttribute) {
-        if (@available(macOS 11.0, iOS 13.0, *)) {
-            (*compileOptions).preserveInvariance = true;
-        }
-    }
-    (*compileOptions).fastMathEnabled = true;
-
     auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
     NSError* error = nullptr;
 
     NSPRef<id<MTLLibrary>> library;
-    {
+    if (mslCompilation->blob.Empty()) {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "MTLDevice::newLibraryWithSource");
+        SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetDevice()->GetPlatform(),
+                                           "MTLDevice::newLibraryWithSource");
+        NSRef<NSString> mslSource =
+            AcquireNSRef([[NSString alloc] initWithUTF8String:mslCompilation->msl.c_str()]);
+
+        NSRef<MTLCompileOptions> compileOptions = AcquireNSRef([[MTLCompileOptions alloc] init]);
+        if (mslCompilation->hasInvariantAttribute) {
+            if (@available(macOS 11.0, iOS 13.0, *)) {
+                (*compileOptions).preserveInvariance = true;
+            }
+        }
+        (*compileOptions).fastMathEnabled = true;
         library = AcquireNSPRef([mtlDevice newLibraryWithSource:mslSource.Get()
                                                         options:compileOptions.Get()
                                                           error:&error]);
+    } else {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "MTLDevice::newLibraryWithData");
+        SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetDevice()->GetPlatform(),
+                                           "MTLDevice::newLibraryWithData");
+
+        auto shaderData =
+            dispatch_data_create(mslCompilation->blob.Data(), mslCompilation->blob.Size(),
+                                 dispatch_get_main_queue(), DISPATCH_DATA_DESTRUCTOR_DEFAULT);
+        library = AcquireNSPRef([mtlDevice newLibraryWithData:shaderData error:&error]);
+        dispatch_release(shaderData);
     }
 
     if (error != nullptr) {

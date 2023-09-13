@@ -14,10 +14,13 @@
 
 #include "dawn/native/metal/UtilsMetal.h"
 
+#include <array>
+
 #include "dawn/common/Assert.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/Pipeline.h"
 #include "dawn/native/ShaderModule.h"
+#include "dawn/native/metal/Process.h"
 
 namespace dawn::native::metal {
 
@@ -515,6 +518,33 @@ DAWN_NOINLINE bool SupportCounterSamplingAtCommandBoundary(id<MTLDevice> device)
 DAWN_NOINLINE bool SupportCounterSamplingAtStageBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0)) {
     return [device supportsCounterSampling:MTLCounterSamplingPointAtStageBoundary];
+}
+
+ResultOrError<Blob> CompileMSLToBinary(const std::string msl, bool preserveInvariance) {
+    static int i = 0;
+    fprintf(stderr, "EEEE CompileMSLToBinary() i=%d\n", i++);
+    static const char* const kMetalArgs[] = {
+        "/usr/bin/xcrun", "-sdk", "macosx", "metal", "-x", "metal",
+        "-ffast-math",    "-c",   "-",      "-o",    "-",  nullptr};
+    static const char* const kMetalArgsWithPreserveInvariance[] = {
+        "/usr/bin/xcrun", "-sdk", "macosx", "metal", "-x", "metal",
+        "-ffast-math",    "-c",   "-",      "-o",    "-",  "-fpreserve-invariance",
+        nullptr};
+
+    auto metalProcess = Process::MakeWithStringInput(
+        preserveInvariance ? kMetalArgsWithPreserveInvariance : kMetalArgs, msl);
+
+    static const char* const kMetallibArgs[] = {
+        "/usr/bin/xcrun", "-sdk", "macosx", "metallib", "-", "-o", "-", nullptr};
+    auto metallibProcess = Process::MakeWithProcessInput(kMetallibArgs, std::move(metalProcess));
+
+    std::vector<char> buffer;
+    do {
+        constexpr size_t kReadSize = 4 * 1024;
+        metallibProcess->ReadFromStdout(buffer, kReadSize);
+    } while (!metallibProcess->IsExited());
+
+    return CreateBlob(std::move(buffer));
 }
 
 }  // namespace dawn::native::metal

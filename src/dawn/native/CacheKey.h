@@ -51,6 +51,11 @@ CacheKey::UnsafeUnkeyedValue<T> UnsafeUnkeyedValue(T&& value) {
     return CacheKey::UnsafeUnkeyedValue<T>(std::forward<T>(value));
 }
 
+template <typename T>
+CacheKey::UnsafeUnkeyedValue<T> UnsafeUnkeyedValue(T& value) {
+    return CacheKey::UnsafeUnkeyedValue<T>(std::forward<T>(value));
+}
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_CACHEKEY_H_
