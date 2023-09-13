@@ -104,6 +104,24 @@
       "parentUuid": "99e7787e_a743d9c9",
       "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5874b47_aa7e9c32",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T11:54:29Z",
+      "side": 1,
+      "message": "Sure we could use std::string_view, but here the issue is the pointers to the data of entryPointW and dxcShaderProfile as you guessed. Though maybe that\u0027s fine for such local use.",
+      "parentUuid": "bcad76f1_87f761f4",
+      "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
