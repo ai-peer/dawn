@@ -51,6 +51,24 @@
       "parentUuid": "c56b9c4b_9814b753",
       "revId": "09302b6286f1b21c3ee8fb39521e17c74dc7a24a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac15040_fb412550",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-13T17:41:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ae6ffdd7_367485e2",
+      "revId": "09302b6286f1b21c3ee8fb39521e17c74dc7a24a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
