@@ -86,6 +86,24 @@
       "parentUuid": "cd2b2cdb_1f51d4c4",
       "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcad76f1_87f761f4",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-09-13T05:25:21Z",
+      "side": 1,
+      "message": "I just learned that it is recommended to use std::string_view instead of const std::string\u0026 for better performance, so I pass a std::wstring_view into GetDXCArguments().",
+      "parentUuid": "99e7787e_a743d9c9",
+      "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
