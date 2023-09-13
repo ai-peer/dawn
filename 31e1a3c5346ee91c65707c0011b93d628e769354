@@ -51,6 +51,29 @@
       "parentUuid": "581fe734_d2c0c04a",
       "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d15d34f5_c5011013",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-13T14:05:40Z",
+      "side": 1,
+      "message": "Use `GetAllocatedSize()`? I think the crashed tests are related to it.",
+      "range": {
+        "startLine": 535,
+        "startChar": 16,
+        "endLine": 535,
+        "endChar": 23
+      },
+      "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
