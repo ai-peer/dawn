@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "220286e6_431e7d37",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T17:03:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6caa1fcd_d1d191a3",
+      "range": {
+        "startLine": 303,
+        "startChar": 4,
+        "endLine": 306,
+        "endChar": 0
+      },
+      "revId": "60c9d444d103d1d7870eece6c4831a50a1629f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "777555a0_11707bcc",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-13T16:59:12Z",
       "side": 1,
       "message": "?",
+      "range": {
+        "startLine": 1163,
+        "startChar": 61,
+        "endLine": 1163,
+        "endChar": 64
+      },
+      "revId": "60c9d444d103d1d7870eece6c4831a50a1629f5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "77dc8f59_4858f255",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T17:03:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "777555a0_11707bcc",
       "range": {
         "startLine": 1163,
         "startChar": 61,
