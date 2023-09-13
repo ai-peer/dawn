@@ -19,6 +19,7 @@
 
 #include "dawn/common/NSRef.h"
 #include "dawn/common/StackContainer.h"
+#include "dawn/native/Blob.h"
 #include "dawn/native/dawn_platform.h"
 #include "dawn/native/metal/DeviceMTL.h"
 #include "dawn/native/metal/ShaderModuleMTL.h"
@@ -121,6 +122,8 @@ bool SupportCounterSamplingAtCommandBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0));
 bool SupportCounterSamplingAtStageBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0));
+
+ResultOrError<Blob> CompileMSLToBinary(const std::string msl, bool preserveInvariance);
 
 }  // namespace dawn::native::metal
 
