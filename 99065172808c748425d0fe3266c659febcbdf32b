@@ -16,6 +16,23 @@
       "message": "I noticed I forgot to update `src/dawn/node/binding/Converter.cpp` as well. So here\u0027s a new patch.\n\nAs discussed offline yesterday with Corentin, it would be nice if compiler would complain about unhandled cases in `switch`s.",
       "revId": "99065172808c748425d0fe3266c659febcbdf32b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74f06183_568c29c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T11:52:28Z",
+      "side": 1,
+      "message": "LGTM % dawn.node compilation issue. You need to add the enum to DawnExtensions.idl.",
+      "revId": "99065172808c748425d0fe3266c659febcbdf32b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
