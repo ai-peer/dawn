@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa09737_e39de8e8",
+        "filename": "src/dawn/node/interop/NodeAPI.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-13T13:35:58Z",
+      "side": 1,
+      "message": "Looks like you might need:\n\n```suggestion\n#include \"napi.h\"  // NOLINT(build/include_directory) - external include\n```",
+      "revId": "126c05d21ae021a999a8f53191f25a4bea3914ad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
