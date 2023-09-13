@@ -67,6 +67,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "0abb267b_c0311fd3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-13T06:24:25Z",
+      "side": 1,
+      "message": "BTW\n\u003e the general advice is to create buffers with dynamic usage and use Map() with D3D11_MAP_WRITE_DISCARD, when the data needs to be updated frequently.\n\nThis looks the optimal way. At lease we can apply it to the builtin uniform buffer in CommandRecordingContext.",
+      "parentUuid": "5967929b_fa517b7d",
+      "range": {
+        "startLine": 56,
+        "startChar": 15,
+        "endLine": 56,
+        "endChar": 34
+      },
+      "revId": "d34ba4b477fcdfe1eacc5d8dc68d581bb788aa1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d75ea522_f306d6f8",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 2

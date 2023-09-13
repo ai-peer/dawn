@@ -33,6 +33,24 @@
       "message": "lgtm",
       "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47ecc111_5ef3a53f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-13T06:24:25Z",
+      "side": 1,
+      "message": "The trybot error looks relevant to my change. I still need to figure it out.\n```\n[ RUN      ] BindGroupTests.ReusedUBO/D3D11_Intel_R__UHD_Graphics_630\nReceived fatal exception EXCEPTION_ACCESS_VIOLATION\n\tOpenAdapter10_2 [0x00007FFC23512AEE+1567118]\n\tOpenAdapter10_2 [0x00007FFC233EDE03+367779]\n\tCreateDirect3D11SurfaceFromDXGISurface [0x00007FFC29979A41+66737]\n\tdawn::native::d3d11::Buffer::WriteInternal [0x00007FF65E8A942C+570] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\BufferD3D11.cpp:0)\n\tdawn::native::d3d11::Buffer::Write [0x00007FF65E8A9812+256] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\BufferD3D11.cpp:475)\n\tdawn::native::d3d11::CommandRecordingContext::FlushUniformBuffer [0x00007FF65E8AE2A0+88] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\CommandRecordingContextD3D11.cpp:181)\n\tdawn::native::d3d11::CommandBuffer::RecordFirstIndexOffset [0x00007FF65E8AD7D1+79] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\CommandBufferD3D11.cpp:855)\n\tdawn::native::d3d11::CommandBuffer::ExecuteRenderPass::\u003clambda_2\u003e::operator() [0x00007FF65E8AD1EE+386] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\CommandBufferD3D11.cpp:558)\n\tdawn::native::d3d11::CommandBuffer::ExecuteRenderPass [0x00007FF65E8AC5F0+1630] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\CommandBufferD3D11.cpp:803)\n\tdawn::native::d3d11::CommandBuffer::Execute [0x00007FF65E8AA96A+3290] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\CommandBufferD3D11.cpp:194)\n\tdawn::native::d3d11::Queue::SubmitImpl [0x00007FF65E8B51B4+244] (o:\\third_party\\dawn\\src\\dawn\\native\\d3d11\\QueueD3D11.cpp:39)\n\tdawn::native::QueueBase::SubmitInternal [0x00007FF65E86616C+430] (o:\\third_party\\dawn\\src\\dawn\\native\\Queue.cpp:649)\n\tdawn::native::QueueBase::APISubmit [0x00007FF65E865F25+63] (o:\\third_party\\dawn\\src\\dawn\\native\\Queue.cpp:256)\n\tdawn::native::NativeQueueSubmit [0x00007FF65E7DD890+80] (o:\\fake\\prefix\\gen\\third_party\\dawn\\src\\dawn\\native\\ProcTable.cpp:1336)\n\tdawn::`anonymous namespace\u0027::BindGroupTests_ReusedUBO_Test::TestBody [0x00007FF65E3D5D73+755] (o:\\third_party\\dawn\\src\\dawn\\tests\\end2end\\BindGroupTests.cpp:230)\n\ttesting::Test::Run [0x00007FF65E7C9A73+255] (o:\\third_party\\googletest\\src\\googletest\\src\\gtest.cc:2677)\n\ttesting::TestInfo::Run [0x00007FF65E7CA4A2+262] (o:\\third_party\\googletest\\src\\googletest\\src\\gtest.cc:2852)\n\ttesting::TestSuite::Run [0x00007FF65E7CAD0D+361] (o:\\third_party\\googletest\\src\\googletest\\src\\gtest.cc:3010)\n\ttesting::internal::UnitTestImpl::RunAllTests [0x00007FF65E7D4C86+710] (o:\\third_party\\googletest\\src\\googletest\\src\\gtest.cc:5867)\n\ttesting::UnitTest::Run [0x00007FF65E7D4935+209] (o:\\third_party\\googletest\\src\\googletest\\src\\gtest.cc:5440)\n\tbase::TestSuite::Run [0x00007FF65EC10F16+166] (o:\\base\\test\\test_suite.cc:406)\n\t`anonymous namespace\u0027::RunHelper [0x00007FF65E76D307+71] (o:\\gpu\\dawn_end2end_tests_main.cc:18)\n\tbase::OnceCallback\u003cint ()\u003e::Run [0x00007FF65EC1088F+73] (o:\\base\\functional\\callback.h:152)\n\tbase::`anonymous namespace\u0027::LaunchUnitTestsInternal [0x00007FF65EC0F4FD+373] (o:\\base\\test\\launcher\\unit_test_launcher.cc:240)\n\tbase::LaunchUnitTestsWithOptions [0x00007FF65EC0FACD+200] (o:\\base\\test\\launcher\\unit_test_launcher.cc:311)\n\tmain [0x00007FF65E76D22A+270] (o:\\gpu\\dawn_end2end_tests_main.cc:36)\n\t__scrt_common_main_seh [0x00007FF65EE7F088+268] (D:\\a\\_work\\1\\s\\src\\vctools\\crt\\vcstartup\\src\\startup\\exe_common.inl:288)\n\tBaseThreadInitThunk [0x00007FFC2F047034+20]\n\tRtlUserThreadStart [0x00007FFC2FE02651+33]\n[63/20369] BindGroupTests.ReusedUBO/D3D11_Intel_R__UHD_Graphics_630 (CRASHED)\n```",
+      "parentUuid": "581fe734_d2c0c04a",
+      "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
