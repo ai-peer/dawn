@@ -22,6 +22,30 @@
       },
       "revId": "e3012a7738a2362f886d8289de2afb60ad3af807",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72cbb0f2_16d970b0",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-13T16:01:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb5f7a5d_839af2fc",
+      "range": {
+        "startLine": 330,
+        "startChar": 12,
+        "endLine": 330,
+        "endChar": 14
+      },
+      "revId": "e3012a7738a2362f886d8289de2afb60ad3af807",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
