@@ -4,7 +4,7 @@
 # you may not use this file except in compliance with the License.
 # You may obtain a copy of the License at
 #
-#     http://www.apache.org/licenses/LICENSE-2.0
+# http://www.apache.org/licenses/LICENSE-2.0
 #
 # Unless required by applicable law or agreed to in writing, software
 # distributed under the License is distributed on an "AS IS" BASIS,
@@ -22,6 +22,7 @@ add_library(dawn_native ${DAWN_PLACEHOLDER_FILE})
 common_compile_options(dawn_native)
 
 target_compile_definitions(dawn_native PRIVATE "DAWN_NATIVE_IMPLEMENTATION")
+
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(dawn_native PRIVATE "DAWN_NATIVE_SHARED_LIBRARY")
 endif()
@@ -77,7 +78,7 @@ target_sources(dawn_native PRIVATE
     "CallbackTaskManager.cpp"
     "CallbackTaskManager.h"
     "ChainUtils.h"
-    "ChainUtilsImpl.h"
+    "ChainUtilsImpl.inl"
     "CommandAllocator.cpp"
     "CommandAllocator.h"
     "CommandBuffer.cpp"
@@ -233,17 +234,17 @@ target_sources(dawn_native PRIVATE
 target_link_libraries(dawn_native
     PUBLIC dawncpp_headers
     PRIVATE dawn_common
-            dawn_platform
-            dawn_internal_config
-            libtint
-            SPIRV-Tools-opt
-            absl_strings
-            absl_str_format_internal
+    dawn_platform
+    dawn_internal_config
+    libtint
+    SPIRV-Tools-opt
+    absl_strings
+    absl_str_format_internal
 )
 
 target_include_directories(dawn_native PRIVATE ${DAWN_ABSEIL_DIR})
 
-if (DAWN_USE_X11)
+if(DAWN_USE_X11)
     target_include_directories(dawn_native PRIVATE ${X11_INCLUDE_DIR})
     target_sources(dawn_native PRIVATE
         "X11Functions.cpp"
@@ -254,7 +255,7 @@ endif()
 # Only win32 app needs to link with user32.lib
 # In UWP, all availiable APIs are defined in WindowsApp.lib
 # and is automatically linked when WINDOWS_STORE set
-if (WIN32 AND NOT WINDOWS_STORE)
+if(WIN32 AND NOT WINDOWS_STORE)
     target_link_libraries(dawn_native PRIVATE user32.lib)
 endif()
 
@@ -265,11 +266,11 @@ endif()
 # So we only link to it in debug build when compiling for UWP.
 # In win32 we load dxgi.dll using LoadLibrary
 # so no need for static linking.
-if (WINDOWS_STORE)
+if(WINDOWS_STORE)
     target_link_libraries(dawn_native PRIVATE debug dxgi.lib)
 endif()
 
-if (DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12)
+if(DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/D3DBackend.h"
         "d3d/BackendD3D.cpp"
@@ -306,7 +307,7 @@ if (DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12)
     )
 endif()
 
-if (DAWN_ENABLE_D3D11)
+if(DAWN_ENABLE_D3D11)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/D3D11Backend.h"
         "d3d11/BackendD3D11.cpp"
@@ -361,7 +362,7 @@ if (DAWN_ENABLE_D3D11)
     )
 endif()
 
-if (DAWN_ENABLE_D3D12)
+if(DAWN_ENABLE_D3D12)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/D3D12Backend.h"
         "d3d12/BackendD3D12.cpp"
@@ -446,7 +447,7 @@ if (DAWN_ENABLE_D3D12)
     target_link_libraries(dawn_native PRIVATE dxguid.lib)
 endif()
 
-if (DAWN_ENABLE_METAL)
+if(DAWN_ENABLE_METAL)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/MetalBackend.h"
         "Surface_metal.mm"
@@ -499,7 +500,7 @@ if (DAWN_ENABLE_METAL)
     )
 endif()
 
-if (DAWN_ENABLE_NULL)
+if(DAWN_ENABLE_NULL)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/NullBackend.h"
         "null/DeviceNull.cpp"
@@ -507,7 +508,7 @@ if (DAWN_ENABLE_NULL)
     )
 endif()
 
-if (DAWN_ENABLE_OPENGL OR DAWN_ENABLE_VULKAN)
+if(DAWN_ENABLE_OPENGL OR DAWN_ENABLE_VULKAN)
     target_compile_definitions(dawn_native PRIVATE "DAWN_ENABLE_SPIRV_VALIDATION")
     target_sources(dawn_native PRIVATE
         "SpirvValidation.cpp"
@@ -515,14 +516,14 @@ if (DAWN_ENABLE_OPENGL OR DAWN_ENABLE_VULKAN)
     )
 endif()
 
-if (DAWN_ENABLE_OPENGL)
+if(DAWN_ENABLE_OPENGL)
     DawnGenerator(
         SCRIPT "${Dawn_SOURCE_DIR}/generator/opengl_loader_generator.py"
         PRINT_NAME "OpenGL function loader"
         ARGS "--gl-xml"
-             "${Dawn_SOURCE_DIR}/third_party/khronos/OpenGL-Registry/xml/gl.xml"
-             "--supported-extensions"
-             "${Dawn_SOURCE_DIR}/src/dawn/native/opengl/supported_extensions.json"
+        "${Dawn_SOURCE_DIR}/third_party/khronos/OpenGL-Registry/xml/gl.xml"
+        "--supported-extensions"
+        "${Dawn_SOURCE_DIR}/src/dawn/native/opengl/supported_extensions.json"
         RESULT_VARIABLE "DAWN_NATIVE_OPENGL_AUTOGEN_SOURCES"
     )
 
@@ -585,11 +586,11 @@ if (DAWN_ENABLE_OPENGL)
     target_link_libraries(dawn_native PRIVATE dawn_khronos_platform)
 endif()
 
-if (DAWN_ENABLE_SWIFTSHADER)
+if(DAWN_ENABLE_SWIFTSHADER)
     target_compile_definitions(dawn_native PRIVATE "DAWN_ENABLE_SWIFTSHADER")
 endif()
 
-if (DAWN_ENABLE_VULKAN)
+if(DAWN_ENABLE_VULKAN)
     target_sources(dawn_native PRIVATE
         "${DAWN_INCLUDE_DIR}/dawn/native/VulkanBackend.h"
         "vulkan/BackendVk.cpp"
@@ -665,14 +666,14 @@ if (DAWN_ENABLE_VULKAN)
     target_link_libraries(dawn_native PUBLIC Vulkan-Headers)
     target_include_directories(dawn_native PRIVATE ${DAWN_VULKAN_TOOLS_DIR})
 
-    if (ANDROID)
+    if(ANDROID)
         target_sources(dawn_native PRIVATE
             "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.cpp"
             "vulkan/external_memory/MemoryServiceImplementationAHardwareBuffer.h"
             "vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp"
             "vulkan/external_semaphore/SemaphoreServiceImplementationFD.h"
         )
-    elseif (UNIX AND NOT APPLE)
+    elseif(UNIX AND NOT APPLE)
         target_sources(dawn_native PRIVATE
             "vulkan/external_memory/MemoryServiceImplementationDmaBuf.cpp"
             "vulkan/external_memory/MemoryServiceImplementationDmaBuf.h"
@@ -686,25 +687,32 @@ endif()
 
 # TODO how to do the component build in CMake?
 target_sources(dawn_native PRIVATE "DawnNative.cpp")
-if (DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12)
+
+if(DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12)
     target_sources(dawn_native PRIVATE "d3d/D3DBackend.cpp")
 endif()
-if (DAWN_ENABLE_D3D11)
+
+if(DAWN_ENABLE_D3D11)
     target_sources(dawn_native PRIVATE "d3d11/D3D11Backend.cpp")
 endif()
-if (DAWN_ENABLE_D3D12)
+
+if(DAWN_ENABLE_D3D12)
     target_sources(dawn_native PRIVATE "d3d12/D3D12Backend.cpp")
 endif()
-if (DAWN_ENABLE_METAL)
+
+if(DAWN_ENABLE_METAL)
     target_sources(dawn_native PRIVATE "metal/MetalBackend.mm")
 endif()
-if (DAWN_ENABLE_NULL)
+
+if(DAWN_ENABLE_NULL)
     target_sources(dawn_native PRIVATE "null/NullBackend.cpp")
 endif()
-if (DAWN_ENABLE_OPENGL)
+
+if(DAWN_ENABLE_OPENGL)
     target_sources(dawn_native PRIVATE "opengl/OpenGLBackend.cpp")
 endif()
-if (DAWN_ENABLE_VULKAN)
+
+if(DAWN_ENABLE_VULKAN)
     target_sources(dawn_native PRIVATE "vulkan/VulkanBackend.cpp")
 endif()
 
@@ -719,7 +727,9 @@ common_compile_options(webgpu_dawn)
 target_link_libraries(webgpu_dawn PRIVATE dawn_native)
 target_link_libraries(webgpu_dawn PUBLIC dawn_headers)
 target_compile_definitions(webgpu_dawn PRIVATE "WGPU_IMPLEMENTATION")
+
 if(BUILD_SHARED_LIBS)
     target_compile_definitions(webgpu_dawn PRIVATE "WGPU_SHARED_LIBRARY")
 endif()
+
 target_sources(webgpu_dawn PRIVATE ${WEBGPU_DAWN_NATIVE_PROC_GEN})

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_DAWN_NATIVE_CHAINUTILS_H_
-#define SRC_DAWN_NATIVE_CHAINUTILS_H_
+#ifndef SRC_DAWN_NATIVE_CHAINUTILS_INL_
+#define SRC_DAWN_NATIVE_CHAINUTILS_INL_
 
 #include <bitset>
 #include <string>
@@ -163,4 +163,4 @@ ResultOrError<wgpu::SType> ValidateBranches(const Unpacked& unpacked) {
 
 }  // namespace dawn::native
 
-#endif  // SRC_DAWN_NATIVE_CHAINUTILS_H_
+#endif  // SRC_DAWN_NATIVE_CHAINUTILS_INL_
