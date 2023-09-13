@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63a2263d_2d5e3918",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-13T18:58:56Z",
+      "side": 1,
+      "message": "Doing an on-demand backwards walk to determine the preceding control instruction ended up being pretty straight-forward and probably low overhead.",
+      "revId": "c403d47cde84644613e4daa694d409619d4722c4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
