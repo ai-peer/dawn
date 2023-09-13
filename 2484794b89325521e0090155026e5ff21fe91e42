@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a2d5205b_6ae07d04",
+        "filename": "src/dawn/native/VertexFormat.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-13T16:32:08Z",
+      "side": 1,
+      "message": "This file was separated from RenderPipeline.cpp/.h because of historical reasons. In a follow-up could you merge it back in there and remove the componentByteSize that\u0027s unused?",
+      "revId": "2484794b89325521e0090155026e5ff21fe91e42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0a48b1a_44abb17e",
         "filename": "src/dawn/native/VertexFormat.cpp",
         "patchSetId": 18
