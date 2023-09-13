@@ -21,7 +21,6 @@
 #include <vector>
 
 #include "dawn/native/dawn_platform.h"
-
 #include "dawn/native/Commands.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/metal/CommandRecordingContext.h"

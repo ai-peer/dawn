@@ -14,10 +14,15 @@
 
 #include "dawn/native/metal/UtilsMetal.h"
 
+#include <stdio.h>
+#include <iostream>
+#include <sstream>
+
 #include "dawn/common/Assert.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/Pipeline.h"
 #include "dawn/native/ShaderModule.h"
+#include "dawn/native/metal/Process.h"
 
 namespace dawn::native::metal {
 
@@ -515,6 +520,33 @@ DAWN_NOINLINE bool SupportCounterSamplingAtCommandBoundary(id<MTLDevice> device)
 DAWN_NOINLINE bool SupportCounterSamplingAtStageBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0)) {
     return [device supportsCounterSampling:MTLCounterSamplingPointAtStageBoundary];
+}
+
+ResultOrError<Blob> CompileShader(const std::string msl, bool preserveInvariance) {
+    std::cerr << "EEE mls=" << msl << std::endl;
+    std::vector<const char*> metalArgs = {
+        "/usr/bin/xcrun", "-sdk", "macosx", "metal", "-x", "metal",
+        "-ffast-math",    "-c",   "-",      "-o",    "-"};
+    // if (preserveInvariance) {
+    //     metalArgs.push_back(" -fpreserve-invariance");
+    // }
+
+    auto metalProcess = Process::MakeWithStringInput(metalArgs, msl);
+    std::cerr << "EEEE metalProcess=" << metalProcess.get() << std::endl;
+
+    std::vector<const char*> metallibArgs = {
+        "/usr/bin/xcrun", "-sdk", "macosx", "metallib", "-", "-o", "-"};
+    auto metallibProcess = Process::MakeWithProcessInput(metallibArgs, std::move(metalProcess));
+    std::cerr << "EEEE metallibProcess=" << metallibProcess.get() << std::endl;
+
+    std::vector<char> buffer;
+    do {
+        metallibProcess->ReadDataFromStdout(buffer, 4096);
+    } while (!metallibProcess->IsExited());
+
+    std::cerr << "EEEE buffer.size()=" << buffer.size() << std::endl;
+
+    return CreateBlob(std::move(buffer));
 }
 
 }  // namespace dawn::native::metal

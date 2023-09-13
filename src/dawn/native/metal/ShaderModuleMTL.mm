@@ -15,6 +15,7 @@
 #include "dawn/native/metal/ShaderModuleMTL.h"
 
 #include "dawn/native/BindGroupLayoutInternal.h"
+#include "dawn/native/Blob.h"
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/Serializable.h"
 #include "dawn/native/TintUtils.h"
@@ -31,6 +32,8 @@
 #include <tint/tint.h>
 
 #include <sstream>
+
+#include <stdio.h>
 
 namespace dawn::native::metal {
 namespace {
@@ -62,6 +65,7 @@ using WorkgroupAllocations = std::vector<uint32_t>;
 
 #define MSL_COMPILATION_MEMBERS(X)                \
     X(std::string, msl)                           \
+    X(Blob, blob)                                 \
     X(std::string, remappedEntryPointName)        \
     X(bool, needsStorageBufferLength)             \
     X(bool, hasInvariantAttribute)                \
@@ -299,6 +303,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                 std::move(result->workgroup_allocations.at(remappedEntryPointName));
             return MslCompilation{{
                 std::move(msl),
+                Blob(),
                 std::move(remappedEntryPointName),
                 result->needs_storage_buffer_sizes,
                 result->has_invariant_attribute,
@@ -345,27 +350,53 @@ MaybeError ShaderModule::CreateFunction(SingleShaderStage stage,
     out->localWorkgroupSize = MTLSizeMake(mslCompilation->localWorkgroupSize.width,
                                           mslCompilation->localWorkgroupSize.height,
                                           mslCompilation->localWorkgroupSize.depthOrArrayLayers);
-
-    NSRef<NSString> mslSource =
-        AcquireNSRef([[NSString alloc] initWithUTF8String:mslCompilation->msl.c_str()]);
-
-    NSRef<MTLCompileOptions> compileOptions = AcquireNSRef([[MTLCompileOptions alloc] init]);
-    if (mslCompilation->hasInvariantAttribute) {
-        if (@available(macOS 11.0, iOS 13.0, *)) {
-            (*compileOptions).preserveInvariance = true;
+    constexpr bool kFastMathEnabled = true;
+    constexpr bool kCompileShader = true;
+    if (mslCompilation->blob.Empty() && kCompileShader) {
+        Blob blob;
+        DAWN_TRY_ASSIGN(blob, CompileShader(mslCompilation->msl, true));
+        if (!blob.Empty()) {
+            auto cacheKey = mslCompilation.GetCacheKey();
+            auto newMslCompilation = mslCompilation.Acquire();
+            newMslCompilation.blob = std::move(blob);
+            mslCompilation =
+                CacheResult<MslCompilation>::CacheMiss(cacheKey, std::move(newMslCompilation));
         }
     }
-    (*compileOptions).fastMathEnabled = true;
 
     auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
     NSError* error = nullptr;
 
     NSPRef<id<MTLLibrary>> library;
-    {
+    if (mslCompilation->blob.Empty()) {
         TRACE_EVENT0(GetDevice()->GetPlatform(), General, "MTLDevice::newLibraryWithSource");
+        SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetDevice()->GetPlatform(),
+                                           "MTLDevice::newLibraryWithSource");
+        NSRef<NSString> mslSource =
+            AcquireNSRef([[NSString alloc] initWithUTF8String:mslCompilation->msl.c_str()]);
+
+        NSRef<MTLCompileOptions> compileOptions = AcquireNSRef([[MTLCompileOptions alloc] init]);
+        if (mslCompilation->hasInvariantAttribute) {
+            if (@available(macOS 11.0, iOS 13.0, *)) {
+                (*compileOptions).preserveInvariance = true;
+            }
+        }
+        (*compileOptions).fastMathEnabled = kFastMathEnabled;
         library = AcquireNSPRef([mtlDevice newLibraryWithSource:mslSource.Get()
                                                         options:compileOptions.Get()
                                                           error:&error]);
+    } else {
+        TRACE_EVENT0(GetDevice()->GetPlatform(), General, "MTLDevice::newLibraryWithData");
+        SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetDevice()->GetPlatform(),
+                                           "MTLDevice::newLibraryWithData");
+
+        // std::vector<char>* data = new std::vector<char>();
+
+        auto shaderData =
+            dispatch_data_create(mslCompilation->blob.Data(), mslCompilation->blob.Size(),
+                                 dispatch_get_main_queue(), DISPATCH_DATA_DESTRUCTOR_DEFAULT);
+        library = AcquireNSPRef([mtlDevice newLibraryWithData:shaderData error:&error]);
+        dispatch_release(shaderData);
     }
 
     if (error != nullptr) {
