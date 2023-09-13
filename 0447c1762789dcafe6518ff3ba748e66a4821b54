@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edfb3469_4e2b7361",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-09-13T03:24:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ca23f67_e5244685",
+      "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cd2b2cdb_1f51d4c4",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-12T09:08:08Z",
       "side": 1,
       "message": "Some of the pointers in this vector don\u0027t have static lifetime and if we start moving the vector around we could have use-after-frees. Any idea on how to make this a bit more robust?",
+      "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99e7787e_a743d9c9",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-09-13T03:24:19Z",
+      "side": 1,
+      "message": "Do you mean entryPointW and r.dxcShaderProfile?\n\nI thought the vector arguments is just a temporary variable and used here so I didn\u0027t consider it too much...",
+      "parentUuid": "cd2b2cdb_1f51d4c4",
       "revId": "0447c1762789dcafe6518ff3ba748e66a4821b54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
