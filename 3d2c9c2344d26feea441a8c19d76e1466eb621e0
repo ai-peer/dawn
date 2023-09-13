@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddc837ca_2997d43d",
+        "filename": "dawn.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-13T18:54:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "3ffb16bb_6b0e9060",
+      "range": {
+        "startLine": 530,
+        "startChar": 12,
+        "endLine": 535,
+        "endChar": 39
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b9da16f2_7ec6a538",
@@ -666,6 +690,30 @@
       "side": 1,
       "message": "error should go to the uncaptured error scope? unless it is wrapped with ASSERT_DEVICE_ERROR_ in which case we don\u0027t want to log it I think",
       "parentUuid": "ac896636_24100cce",
+      "range": {
+        "startLine": 139,
+        "startChar": 8,
+        "endLine": 139,
+        "endChar": 65
+      },
+      "revId": "3d2c9c2344d26feea441a8c19d76e1466eb621e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cb4f8eb_21ff660f",
+        "filename": "src/dawn/tests/end2end/BufferHostMappedPointerTests_win.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-13T18:54:21Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "ba576d0b_a723fe7a",
       "range": {
         "startLine": 139,
         "startChar": 8,
