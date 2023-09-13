@@ -778,6 +778,7 @@ dawn_test("dawn_perf_tests") {
     "perf_tests/DawnPerfTestPlatform.cpp",
     "perf_tests/DawnPerfTestPlatform.h",
     "perf_tests/DrawCallPerf.cpp",
+    "perf_tests/ShaderMathPerf.cpp",
     "perf_tests/ShaderRobustnessPerf.cpp",
     "perf_tests/SubresourceTrackingPerf.cpp",
     "perf_tests/VulkanZeroInitializeWorkgroupMemoryPerf.cpp",
