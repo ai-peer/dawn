@@ -41,6 +41,10 @@ class Buffer final : public ObjectBase {
                   size_t size,
                   WGPUBufferMapCallback callback,
                   void* userdata);
+    WGPUFuture MapAsyncF(WGPUMapModeFlags mode,
+                         size_t offset,
+                         size_t size,
+                         const WGPUBufferMapCallbackInfo& callbackInfo);
     void* GetMappedRange(size_t offset, size_t size);
     const void* GetConstMappedRange(size_t offset, size_t size);
     void Unmap();
@@ -80,6 +84,7 @@ class Buffer final : public ObjectBase {
         size_t offset = 0;
         size_t size = 0;
         MapRequestType type = MapRequestType::None;
+        WGPUBufferMapAsyncStatus result = WGPUBufferMapAsyncStatus_Unknown;
     };
     MapRequestData mRequest;
     bool mPendingMap = false;
