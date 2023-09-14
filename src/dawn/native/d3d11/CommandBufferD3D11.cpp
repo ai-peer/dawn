@@ -398,6 +398,7 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
                 DAWN_TRY(bindGroupTracker.Apply());
 
                 DAWN_TRY(RecordNumWorkgroupsForDispatch(lastPipeline, commandContext, dispatch));
+                commandContext->OnDrawOrDispatch(/*indirect=*/false);
                 commandContext->GetD3D11DeviceContext()->Dispatch(dispatch->x, dispatch->y,
                                                                   dispatch->z);
 
@@ -414,10 +415,11 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
                 if (lastPipeline->UsesNumWorkgroups()) {
                     // Copy indirect args into the uniform buffer for built-in workgroup variables.
                     DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, dispatch->indirectOffset,
-                                          sizeof(uint32_t) * 3, commandContext->GetUniformBuffer(),
-                                          0));
+                                          sizeof(uint32_t) * 3,
+                                          commandContext->GetIndirectUniformBuffer(), 0));
                 }
 
+                commandContext->OnDrawOrDispatch(/*indirect=*/true);
                 commandContext->GetD3D11DeviceContext()->DispatchIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), dispatch->indirectOffset);
 
@@ -557,6 +559,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 vertexBufferTracker.Apply(lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->firstVertex,
                                                 draw->firstInstance));
+                commandContext->OnDrawOrDispatch(/*indirect=*/false);
                 commandContext->GetD3D11DeviceContext()->DrawInstanced(
                     draw->vertexCount, draw->instanceCount, draw->firstVertex, draw->firstInstance);
 
@@ -570,6 +573,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 vertexBufferTracker.Apply(lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->baseVertex,
                                                 draw->firstInstance));
+                commandContext->OnDrawOrDispatch(/*indirect=*/false);
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstanced(
                     draw->indexCount, draw->instanceCount, draw->firstIndex, draw->baseVertex,
                     draw->firstInstance);
@@ -593,10 +597,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                         draw->indirectOffset +
                         offsetof(D3D11_DRAW_INSTANCED_INDIRECT_ARGS, StartVertexLocation);
                     DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, offset,
-                                          sizeof(uint32_t) * 2, commandContext->GetUniformBuffer(),
-                                          0));
+                                          sizeof(uint32_t) * 2,
+                                          commandContext->GetIndirectUniformBuffer(), 0));
                 }
-
+                commandContext->OnDrawOrDispatch(/*indirect=*/true);
                 commandContext->GetD3D11DeviceContext()->DrawInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
@@ -619,10 +623,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                         draw->indirectOffset +
                         offsetof(D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS, BaseVertexLocation);
                     DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, offset,
-                                          sizeof(uint32_t) * 2, commandContext->GetUniformBuffer(),
-                                          0));
+                                          sizeof(uint32_t) * 2,
+                                          commandContext->GetIndirectUniformBuffer(), 0));
                 }
 
+                commandContext->OnDrawOrDispatch(/*indirect=*/true);
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
