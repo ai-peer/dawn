@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669895d7_944ab4df",
+        "filename": "test/tint/loops/nested_loop_switch_loop_switch_switch.wgsl.expected.fxc.hlsl",
+        "patchSetId": 5
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001816
+      },
+      "writtenOn": "2023-09-14T15:09:12Z",
+      "side": 1,
+      "message": "Feels like this could be folded out but I don\u0027t know if WGSL has a deep-enough analysis to notice that.",
+      "range": {
+        "startLine": 29,
+        "startChar": 0,
+        "endLine": 32,
+        "endChar": 24
+      },
+      "revId": "d6f6f005b3d0c0b5bbb175a500df8e638fd7ea81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
