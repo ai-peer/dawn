@@ -275,7 +275,14 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         GetDevice()->IsToggleEnabled(Toggle::VulkanUseBufferRobustAccess2);
     req.platform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    // Always use the IR backend on Android.
+    req.useTintIR = true;
+#else
     req.useTintIR = GetDevice()->IsToggleEnabled(Toggle::UseTintIR);
+#endif
+
     // Set subgroup uniform control flow flag for subgroup experiment, if device has
     // Chromium-experimental-subgroup-uniform-control-flow feature. (dawn:464)
     if (GetDevice()->HasFeature(Feature::ChromiumExperimentalSubgroupUniformControlFlow)) {
