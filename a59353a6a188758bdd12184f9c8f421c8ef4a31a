@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1750b6e0_70488205",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-09-14T22:35:17Z",
+      "side": 1,
+      "message": "I wasn\u0027t sure what to do for the DeviceBase empty constructor. It has no info to choose compat vs core.",
+      "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
