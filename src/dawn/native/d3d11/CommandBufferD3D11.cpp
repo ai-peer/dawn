@@ -25,7 +25,7 @@
 #include "dawn/native/Commands.h"
 #include "dawn/native/ExternalTexture.h"
 #include "dawn/native/RenderBundle.h"
-#include "dawn/native/VertexFormat.h"
+#include "dawn/native/RenderPipeline.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/BindGroupTrackerD3D11.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
