@@ -25,9 +25,18 @@ TEST(Limits, GetDefaultLimits) {
     native::Limits limits = {};
     EXPECT_NE(limits.maxBindGroups, 4u);
 
-    native::GetDefaultLimits(&limits);
+    native::GetDefaultLimits(&limits, native::FeatureLevel::Core);
 
     EXPECT_EQ(limits.maxBindGroups, 4u);
+}
+
+TEST(Limits, GetDefaultLimits_Compat) {
+    native::Limits limits = {};
+    EXPECT_NE(limits.maxColorAttachments, 4u);
+
+    native::GetDefaultLimits(&limits, native::FeatureLevel::Compatibility);
+
+    EXPECT_EQ(limits.maxColorAttachments, 4u);
 }
 
 // Test |ReifyDefaultLimits| populates the default if
@@ -37,8 +46,19 @@ TEST(Limits, ReifyDefaultLimits_PopulatesDefault) {
     limits.maxComputeWorkgroupStorageSize = wgpu::kLimitU32Undefined;
     limits.maxStorageBufferBindingSize = wgpu::kLimitU64Undefined;
 
-    native::Limits reified = native::ReifyDefaultLimits(limits);
+    native::Limits reified = native::ReifyDefaultLimits(limits, native::FeatureLevel::Core);
     EXPECT_EQ(reified.maxComputeWorkgroupStorageSize, 16384u);
+    EXPECT_EQ(reified.maxStorageBufferBindingSize, 134217728ul);
+}
+
+TEST(Limits, ReifyDefaultLimits_PopulatesDefault_Compat) {
+    native::Limits limits;
+    limits.maxTextureDimension1D = wgpu::kLimitU32Undefined;
+    limits.maxStorageBufferBindingSize = wgpu::kLimitU64Undefined;
+
+    native::Limits reified =
+        native::ReifyDefaultLimits(limits, native::FeatureLevel::Compatibility);
+    EXPECT_EQ(reified.maxTextureDimension1D, 4096u);
     EXPECT_EQ(reified.maxStorageBufferBindingSize, 134217728ul);
 }
 
@@ -49,7 +69,7 @@ TEST(Limits, ReifyDefaultLimits_Clamps) {
     limits.maxStorageBuffersPerShaderStage = 4;
     limits.minUniformBufferOffsetAlignment = 512;
 
-    native::Limits reified = native::ReifyDefaultLimits(limits);
+    native::Limits reified = native::ReifyDefaultLimits(limits, native::FeatureLevel::Core);
     EXPECT_EQ(reified.maxStorageBuffersPerShaderStage, 8u);
     EXPECT_EQ(reified.minUniformBufferOffsetAlignment, 256u);
 }
@@ -59,7 +79,7 @@ TEST(Limits, ReifyDefaultLimits_Clamps) {
 TEST(Limits, ValidateLimits) {
     // Start with the default for supported.
     native::Limits defaults;
-    native::GetDefaultLimits(&defaults);
+    native::GetDefaultLimits(&defaults, native::FeatureLevel::Core);
 
     // Test supported == required is valid.
     {
@@ -134,7 +154,7 @@ TEST(Limits, ApplyLimitTiers) {
         limits->maxBufferSize = 2147483648;
     };
     native::Limits limitsStorageBufferBindingSizeTier2;
-    native::GetDefaultLimits(&limitsStorageBufferBindingSizeTier2);
+    native::GetDefaultLimits(&limitsStorageBufferBindingSizeTier2, native::FeatureLevel::Core);
     SetLimitsStorageBufferBindingSizeTier2(&limitsStorageBufferBindingSizeTier2);
 
     auto SetLimitsStorageBufferBindingSizeTier3 = [](native::Limits* limits) {
@@ -145,21 +165,21 @@ TEST(Limits, ApplyLimitTiers) {
         limits->maxBufferSize = 2147483648;
     };
     native::Limits limitsStorageBufferBindingSizeTier3;
-    native::GetDefaultLimits(&limitsStorageBufferBindingSizeTier3);
+    native::GetDefaultLimits(&limitsStorageBufferBindingSizeTier3, native::FeatureLevel::Core);
     SetLimitsStorageBufferBindingSizeTier3(&limitsStorageBufferBindingSizeTier3);
 
     auto SetLimitsComputeWorkgroupStorageSizeTier1 = [](native::Limits* limits) {
         limits->maxComputeWorkgroupStorageSize = 16384;
     };
     native::Limits limitsComputeWorkgroupStorageSizeTier1;
-    native::GetDefaultLimits(&limitsComputeWorkgroupStorageSizeTier1);
+    native::GetDefaultLimits(&limitsComputeWorkgroupStorageSizeTier1, native::FeatureLevel::Core);
     SetLimitsComputeWorkgroupStorageSizeTier1(&limitsComputeWorkgroupStorageSizeTier1);
 
     auto SetLimitsComputeWorkgroupStorageSizeTier3 = [](native::Limits* limits) {
         limits->maxComputeWorkgroupStorageSize = 65536;
     };
     native::Limits limitsComputeWorkgroupStorageSizeTier3;
-    native::GetDefaultLimits(&limitsComputeWorkgroupStorageSizeTier3);
+    native::GetDefaultLimits(&limitsComputeWorkgroupStorageSizeTier3, native::FeatureLevel::Core);
     SetLimitsComputeWorkgroupStorageSizeTier3(&limitsComputeWorkgroupStorageSizeTier3);
 
     // Test that applying tiers to limits that are exactly
@@ -203,7 +223,7 @@ TEST(Limits, ApplyLimitTiers) {
     // Test that limits may be simultaneously degraded in two tiers independently.
     {
         native::Limits limits;
-        native::GetDefaultLimits(&limits);
+        native::GetDefaultLimits(&limits, native::FeatureLevel::Core);
         SetLimitsComputeWorkgroupStorageSizeTier3(&limits);
         SetLimitsStorageBufferBindingSizeTier3(&limits);
         limits.maxComputeWorkgroupStorageSize =
@@ -225,7 +245,7 @@ TEST(Limits, ApplyLimitTiers) {
 TEST(Limits, TieredMaxStorageBufferBindingSizeNoLargerThanMaxBufferSize) {
     // Start with the default for supported.
     native::Limits defaults;
-    native::GetDefaultLimits(&defaults);
+    native::GetDefaultLimits(&defaults, native::FeatureLevel::Core);
 
     // Test reported maxStorageBufferBindingSize around 128MB, 1GB, 2GB-4 and 4GB-4.
     constexpr uint64_t storageSizeTier1 = 134217728ull;   // 128MB
@@ -267,7 +287,7 @@ TEST(Limits, TieredMaxStorageBufferBindingSizeNoLargerThanMaxBufferSize) {
 TEST(Limits, TieredMaxUniformBufferBindingSizeNoLargerThanMaxBufferSize) {
     // Start with the default for supported.
     native::Limits defaults;
-    native::GetDefaultLimits(&defaults);
+    native::GetDefaultLimits(&defaults, native::FeatureLevel::Core);
 
     // Test reported maxStorageBufferBindingSize around 64KB, and a large 1GB.
     constexpr uint64_t uniformSizeTier1 = 65536ull;       // 64KB
@@ -304,7 +324,7 @@ TEST(Limits, TieredMaxUniformBufferBindingSizeNoLargerThanMaxBufferSize) {
 TEST(Limits, NormalizeLimits) {
     // Start with the default for supported.
     native::Limits defaults;
-    native::GetDefaultLimits(&defaults);
+    native::GetDefaultLimits(&defaults, native::FeatureLevel::Core);
 
     // Test specific limit values are clamped to internal Dawn constants.
     {

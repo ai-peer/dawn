@@ -21,17 +21,19 @@
 
 namespace dawn::native {
 
+enum class FeatureLevel { Compatibility, Core };
+
 struct CombinedLimits {
     Limits v1;
 };
 
 // Populate |limits| with the default limits.
-void GetDefaultLimits(Limits* limits);
+void GetDefaultLimits(Limits* limits, FeatureLevel featureLevel);
 
 // Returns a copy of |limits| where all undefined values are replaced
 // with their defaults. Also clamps to the defaults if the provided limits
 // are worse.
-Limits ReifyDefaultLimits(const Limits& limits);
+Limits ReifyDefaultLimits(const Limits& limits, FeatureLevel featureLevel);
 
 // Validate that |requiredLimits| are no better than |supportedLimits|.
 MaybeError ValidateLimits(const Limits& supportedLimits, const Limits& requiredLimits);
