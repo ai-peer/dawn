@@ -52,6 +52,29 @@
       "parentUuid": "ea4098d6_88b04aa9",
       "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e13a8e9_c350da93",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-14T06:23:24Z",
+      "side": 1,
+      "message": "Even I tried to build the tests for chromeos using ` if (is_linux || is_chromeos) {` here, all tests were skipped due to the error below\n\n\n```\nWarning: Loader Message: terminator_CreateDevice: Device pointer (0x1090002b4000) has invalid MAGIC value 0x0410aded. Device value possibly corrupted by active layer (Policy #LLP_LAYER_22).\nInfo: Test unsupported: bo \u003d\u003d nullptr\n[minigbm:i915.c(762)] DRM_IOCTL_I915_GEM_CREATE failed (size\u003d4096)\n../../third_party/dawn/src/dawn/tests/end2end/SharedTextureMemoryTests_linux.cpp:260: Skipped\n\nStack trace:\n#0 0x56019792eb98 dawn::(anonymous namespace)::Backend\u003c\u003e::SetUp()\n#1 0x560197888e17 dawn::SharedTextureMemoryTests::SetUp()\n```",
+      "range": {
+        "startLine": 651,
+        "startChar": 1,
+        "endLine": 651,
+        "endChar": 17
+      },
+      "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
