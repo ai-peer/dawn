@@ -34,6 +34,24 @@
       "parentUuid": "014499cd_161543d6",
       "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbe71bac_f011e1ee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-14T06:07:34Z",
+      "side": 1,
+      "message": "No new SharedTextureMemory tests are available to run on ChromeOS.\n```\n./dawn_end2end_tests --test-launcher-shard-index\u003d0 --test-launcher-total-shards\u003d1 --gtest_filter\u003dSharedTextureMemory*\n...\nWARNING: No matching tests to run.\nSUCCESS: all tests passed.\nTests took 0 seconds.\n```\n\nThe VideoViews tests can still pass.\n```\n[  PASSED  ] 20 tests.\n[1/20] VideoViewsTests.CreateVideoTextureWithoutInitializedData/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (18 ms)\n[2/20] VideoViewsTests.SampleYtoR/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (28 ms)\n[3/20] VideoViewsTests.SampleUVtoRG/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (28 ms)\n[4/20] VideoViewsTests.SampleYUVtoRGB/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (29 ms)\n[5/20] VideoViewsTests.SampleYUVtoRGBMultipleSamplers/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (28 ms)\n[6/20] VideoViewsValidationTests.ExplicitCreation/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (13 ms)\n[7/20] VideoViewsValidationTests.CreateViewValidation/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (18 ms)\n[8/20] VideoViewsValidationTests.T2TCopyAllAspectsFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (18 ms)\n[9/20] VideoViewsValidationTests.T2TCopyPlaneAspectFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (17 ms)\n[10/20] VideoViewsValidationTests.T2BCopyAllAspectsFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (19 ms)\n[11/20] VideoViewsValidationTests.T2BCopyPlaneAspectsFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (19 ms)\n[12/20] VideoViewsValidationTests.B2TCopyAllAspectsFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (21 ms)\n[13/20] VideoViewsValidationTests.B2TCopyPlaneAspectsFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (21 ms)\n[14/20] VideoViewsValidationTests.SamplingMultiPlanarTexture/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (17 ms)\n[15/20] VideoViewsValidationTests.RenderAttachmentInvalid/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (13 ms)\n[16/20] VideoViewsValidationTests.WriteTextureAllAspectsFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (16 ms)\n[17/20] VideoViewsValidationTests.WriteTexturePlaneAspectsFails/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (16 ms)\n[18/20] VideoViewsExtendedUsagesTests.CreateTextureSucceeds/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (19 ms)\n[19/20] VideoViewsExtendedUsagesTests.SamplingMultiPlanarTexture/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (30 ms)\n[20/20] VideoViewsExtendedUsagesTests.T2BCopyPlaneAspectsSucceeds/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Format_TextureFormat__R8BG8Biplanar420Unorm (20 ms)\nSUCCESS: all tests passed.\n```",
+      "parentUuid": "ea4098d6_88b04aa9",
+      "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
