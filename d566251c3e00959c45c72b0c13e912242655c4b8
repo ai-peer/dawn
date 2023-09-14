@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1073a445_16a40dab",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Cool.  This is exactly the kind of guidance I was looking for.\nThis is my first resolver code; trying to grow some skills here.",
+      "parentUuid": "e949b0cc_76ed355c",
+      "range": {
+        "startLine": 677,
+        "startChar": 25,
+        "endLine": 677,
+        "endChar": 57
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "19490567_d86e2b43",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-14T14:27:52Z",
       "side": 1,
       "message": "nit: `Source{{12, 34}}` is far more common",
+      "range": {
+        "startLine": 687,
+        "startChar": 25,
+        "endLine": 687,
+        "endChar": 57
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b58d3ed_391d94c6",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "19490567_d86e2b43",
       "range": {
         "startLine": 687,
         "startChar": 25,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3dc38c6_7dd5e860",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c6eccbe_d4bca0ca",
+      "range": {
+        "startLine": 703,
+        "startChar": 25,
+        "endLine": 703,
+        "endChar": 58
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29c11c29_3a35be99",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-09-14T14:27:52Z",
       "side": 1,
       "message": "nit: rm",
+      "range": {
+        "startLine": 714,
+        "startChar": 22,
+        "endLine": 714,
+        "endChar": 36
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aba99a14_1f2f3693",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "29c11c29_3a35be99",
       "range": {
         "startLine": 714,
         "startChar": 22,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e1daa70_bfc6c13d",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69b9fa33_f7227fe5",
+      "range": {
+        "startLine": 715,
+        "startChar": 12,
+        "endLine": 715,
+        "endChar": 23
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20020988_f71f4df5",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-09-14T14:27:52Z",
       "side": 1,
       "message": "nit: rm",
+      "range": {
+        "startLine": 730,
+        "startChar": 9,
+        "endLine": 730,
+        "endChar": 24
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bf310cb_857b94e0",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20020988_f71f4df5",
       "range": {
         "startLine": 730,
         "startChar": 9,
@@ -179,6 +323,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ca90ad3_ab470c35",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33e49b37_68c41e13",
+      "range": {
+        "startLine": 747,
+        "startChar": 9,
+        "endLine": 747,
+        "endChar": 24
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f11bb668_04e96b73",
@@ -202,6 +370,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b95265ca_7d01780c",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "I didn\u0027t know (for certain) until I tried. \n\nThe const-expression test is required, because that is not checked by the intrinsic machinery alone.",
+      "parentUuid": "f11bb668_04e96b73",
+      "range": {
+        "startLine": 758,
+        "startChar": 4,
+        "endLine": 758,
+        "endChar": 68
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3deee27c_5239452d",
@@ -215,6 +407,30 @@
       "writtenOn": "2023-09-14T14:27:52Z",
       "side": 1,
       "message": "nit: `Source{{12, 34}}`\n\nAnd so on.",
+      "range": {
+        "startLine": 765,
+        "startChar": 25,
+        "endLine": 765,
+        "endChar": 57
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1741d08_369f91d9",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T15:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3deee27c_5239452d",
       "range": {
         "startLine": 765,
         "startChar": 25,
