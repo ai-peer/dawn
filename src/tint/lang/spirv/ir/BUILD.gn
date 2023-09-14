@@ -35,8 +35,11 @@ libtint_source_set("ir") {
     "intrinsic.h",
     "intrinsic_call.cc",
     "intrinsic_call.h",
+    "io_var.cc",
+    "io_var.h",
   ]
   deps = [
+    "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/intrinsic",
@@ -48,6 +51,7 @@ libtint_source_set("ir") {
     "${tint_src_dir}/utils/macros",
     "${tint_src_dir}/utils/math",
     "${tint_src_dir}/utils/memory",
+    "${tint_src_dir}/utils/reflection",
     "${tint_src_dir}/utils/result",
     "${tint_src_dir}/utils/rtti",
     "${tint_src_dir}/utils/text",

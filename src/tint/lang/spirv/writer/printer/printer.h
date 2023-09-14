@@ -26,6 +26,7 @@
 #include "src/tint/lang/core/texel_format.h"
 #include "src/tint/lang/spirv/ir/builtin_call.h"
 #include "src/tint/lang/spirv/ir/intrinsic_call.h"
+#include "src/tint/lang/spirv/ir/io_var.h"
 #include "src/tint/lang/spirv/writer/common/binary_writer.h"
 #include "src/tint/lang/spirv/writer/common/function.h"
 #include "src/tint/lang/spirv/writer/common/module.h"
@@ -98,10 +99,8 @@ class Printer {
 
     /// Get the result ID of the type `ty`, emitting a type declaration instruction if necessary.
     /// @param ty the type to get the ID for
-    /// @param addrspace the optional address space that this type is being used for
     /// @returns the result ID of the type
-    uint32_t Type(const core::type::Type* ty,
-                  core::AddressSpace addrspace = core::AddressSpace::kUndefined);
+    uint32_t Type(const core::type::Type* ty);
 
   private:
     /// Convert a builtin to the corresponding SPIR-V enum value, taking into account the target
@@ -148,11 +147,8 @@ class Printer {
 
     /// Emit a struct type.
     /// @param id the result ID to use
-    /// @param addrspace the optional address space that this type is being used for
     /// @param str the struct type to emit
-    void EmitStructType(uint32_t id,
-                        const core::type::Struct* str,
-                        core::AddressSpace addrspace = core::AddressSpace::kUndefined);
+    void EmitStructType(uint32_t id, const core::type::Struct* str);
 
     /// Emit a texture type.
     /// @param id the result ID to use
@@ -219,6 +215,14 @@ class Printer {
     /// Emit an intrinsic call instruction.
     /// @param call the intrinsic call instruction to emit
     void EmitIntrinsicCall(spirv::ir::IntrinsicCall* call);
+
+    /// Emit IO attributes.
+    /// @param id the ID of the variable to decorate
+    /// @param attrs the shader IO attrs
+    /// @param addrspace the address of the variable
+    void EmitIOAttributes(uint32_t id,
+                          const ir::IOVarAttributes& attrs,
+                          core::AddressSpace addrspace);
 
     /// Emit a load instruction.
     /// @param load the load instruction to emit

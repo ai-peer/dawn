@@ -34,9 +34,12 @@ tint_add_target(tint_lang_spirv_ir lib
   lang/spirv/ir/intrinsic.h
   lang/spirv/ir/intrinsic_call.cc
   lang/spirv/ir/intrinsic_call.h
+  lang/spirv/ir/io_var.cc
+  lang/spirv/ir/io_var.h
 )
 
 tint_target_add_dependencies(tint_lang_spirv_ir lib
+  tint_api_common
   tint_lang_core
   tint_lang_core_constant
   tint_lang_core_intrinsic
@@ -48,6 +51,7 @@ tint_target_add_dependencies(tint_lang_spirv_ir lib
   tint_utils_macros
   tint_utils_math
   tint_utils_memory
+  tint_utils_reflection
   tint_utils_result
   tint_utils_rtti
   tint_utils_text
