@@ -98,6 +98,30 @@
       },
       "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f114db3f_8569213d",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 535,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-14T05:46:43Z",
+      "side": 1,
+      "message": "The bots look happy now with always updating with `GetAllocatedSize()`. Thanks!",
+      "parentUuid": "5127882b_a94c7a7c",
+      "range": {
+        "startLine": 535,
+        "startChar": 16,
+        "endLine": 535,
+        "endChar": 23
+      },
+      "revId": "31e1a3c5346ee91c65707c0011b93d628e769354",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
