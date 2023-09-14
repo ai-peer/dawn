@@ -40,7 +40,9 @@ void SyncScopeUsageTracker::BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage u
     mBufferUsages[buffer] |= usage;
 }
 
-void SyncScopeUsageTracker::TextureViewUsedAs(TextureViewBase* view, wgpu::TextureUsage usage) {
+void SyncScopeUsageTracker::TextureViewUsedAs(TextureViewBase* view,
+                                              wgpu::TextureUsage usage,
+                                              uint32_t depthSlice) {
     TextureBase* texture = view->GetTexture();
     const SubresourceRange& range = view->GetSubresourceRange();
 
@@ -52,7 +54,12 @@ void SyncScopeUsageTracker::TextureViewUsedAs(TextureViewBase* view, wgpu::Textu
                               texture->GetNumMipLevels(), wgpu::TextureUsage::None));
     TextureSubresourceUsage& textureUsage = it.first->second;
 
-    textureUsage.Update(range, [usage](const SubresourceRange&, wgpu::TextureUsage* storedUsage) {
+    auto checkIt = mColorAttachmentDepthSlices.find(texture);
+    bool usedDepthSlice =
+        checkIt != mColorAttachmentDepthSlices.end() && checkIt->second[depthSlice];
+
+    textureUsage.Update(range, [usage, &usedDepthSlice](const SubresourceRange&,
+                                                        wgpu::TextureUsage* storedUsage) {
         // TODO(crbug.com/dawn/1001): Consider optimizing to have fewer branches.
 
         // Using the same subresource for two different attachments is a write-write or read-write
@@ -60,12 +67,20 @@ void SyncScopeUsageTracker::TextureViewUsedAs(TextureViewBase* view, wgpu::Textu
         // subresource with a writable usage has a single usage.
         constexpr wgpu::TextureUsage kWritableAttachmentUsages =
             wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::StorageAttachment;
-        if ((usage & kWritableAttachmentUsages) && (*storedUsage & kWritableAttachmentUsages)) {
+        if ((usage & kWritableAttachmentUsages) && (*storedUsage & kWritableAttachmentUsages) &&
+            !usedDepthSlice) {
             *storedUsage |= kAgainAsAttachment;
         }
 
         *storedUsage |= usage;
     });
+
+    auto sliceIt = mColorAttachmentDepthSlices
+                       .emplace(texture, texture->GetDimension() == wgpu::TextureDimension::e3D
+                                             ? texture->GetDepth()
+                                             : 1u)
+                       .first;
+    sliceIt->second[depthSlice] = true;
 }
 
 void SyncScopeUsageTracker::AddRenderBundleTextureUsage(

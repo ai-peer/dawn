@@ -32,6 +32,7 @@ class QuerySetBase;
 class TextureBase;
 
 using QueryAvailabilityMap = std::map<QuerySetBase*, std::vector<bool>>;
+using ColorAttachmentDepthSliceMap = std::map<TextureBase*, std::vector<bool>>;
 
 // Helper class to build SyncScopeResourceUsages
 class SyncScopeUsageTracker {
@@ -43,7 +44,9 @@ class SyncScopeUsageTracker {
     SyncScopeUsageTracker& operator=(SyncScopeUsageTracker&&);
 
     void BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage usage);
-    void TextureViewUsedAs(TextureViewBase* texture, wgpu::TextureUsage usage);
+    void TextureViewUsedAs(TextureViewBase* texture,
+                           wgpu::TextureUsage usage,
+                           uint32_t depthSlice = 0u);
     void AddRenderBundleTextureUsage(TextureBase* texture,
                                      const TextureSubresourceUsage& textureUsage);
 
@@ -57,6 +60,7 @@ class SyncScopeUsageTracker {
     std::map<BufferBase*, wgpu::BufferUsage> mBufferUsages;
     std::map<TextureBase*, TextureSubresourceUsage> mTextureUsages;
     std::set<ExternalTextureBase*> mExternalTextureUsages;
+    ColorAttachmentDepthSliceMap mColorAttachmentDepthSlices;
 };
 
 // Helper class to build ComputePassResourceUsages
