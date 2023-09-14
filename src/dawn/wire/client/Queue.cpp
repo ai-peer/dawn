@@ -52,18 +52,18 @@ void Queue::OnSubmittedWorkDone(uint64_t signalValue,
     client->SerializeCommand(cmd);
 }
 
-WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo) {
+WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo* callbackInfo) {
     // TODO(crbug.com/dawn/2052): Once we always return a future, change this to log to the instance
     // (note, not raise a validation error to the device) and return the null future.
-    DAWN_ASSERT(callbackInfo.nextInChain == nullptr);
+    DAWN_ASSERT(callbackInfo->nextInChain == nullptr);
 
     Client* client = GetClient();
     FutureID futureIDInternal = client->GetEventManager()->TrackEvent(
-        callbackInfo.mode, [=](EventCompletionType completionType) {
+        callbackInfo->mode, [=](EventCompletionType completionType) {
             WGPUQueueWorkDoneStatus status = completionType == EventCompletionType::Shutdown
                                                  ? WGPUQueueWorkDoneStatus_Unknown
                                                  : WGPUQueueWorkDoneStatus_Success;
-            callbackInfo.callback(status, callbackInfo.userdata);
+            callbackInfo->callback(status, callbackInfo->userdata);
         });
 
     struct Lambda {
@@ -86,7 +86,7 @@ WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& call
 
     client->SerializeCommand(cmd);
 
-    FutureID futureID = (callbackInfo.mode & WGPUCallbackMode_Future) ? futureIDInternal : 0;
+    FutureID futureID = (callbackInfo->mode & WGPUCallbackMode_Future) ? futureIDInternal : 0;
     return {futureID};
 }
 

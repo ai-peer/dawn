@@ -2285,7 +2285,7 @@
                 "tags": ["dawn", "emscripten"],
                 "returns": "future",
                 "args": [
-                    {"name": "callback info", "type": "queue work done callback info"}
+                    {"name": "callback info", "type": "queue work done callback info", "annotation": "const*"}
                 ]
             },
             {

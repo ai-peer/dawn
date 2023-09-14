@@ -179,8 +179,7 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
             WGPUQueueWorkDoneStatus expectedStatus;
         };
         Userdata* userdata = new Userdata{this, expectedStatus};
-
-        return testQueue.OnSubmittedWorkDoneF({
+        wgpu::QueueWorkDoneCallbackInfo callbackInfo{
             nullptr,
             GetCallbackMode(),
             [](WGPUQueueWorkDoneStatus status, void* userdata) {
@@ -190,7 +189,9 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
                 delete u;
             },
             userdata,
-        });
+        };
+
+        return testQueue.OnSubmittedWorkDoneF(&callbackInfo);
     }
 
     void TestWaitAll(bool loopOnlyOnce = false) {
@@ -402,12 +403,13 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceBeforeEvent) {
     testInstance = nullptr;  // Drop the last external ref to the instance.
 
     WGPUQueueWorkDoneStatus status = kStatusUninitialized;
-    testQueue.OnSubmittedWorkDoneF({nullptr, GetCallbackMode(),
-                                    [](WGPUQueueWorkDoneStatus status, void* userdata) {
-                                        *reinterpret_cast<WGPUQueueWorkDoneStatus*>(userdata) =
-                                            status;
-                                    },
-                                    &status});
+    wgpu::QueueWorkDoneCallbackInfo callbackInfo{
+        nullptr, GetCallbackMode(),
+        [](WGPUQueueWorkDoneStatus status, void* userdata) {
+            *reinterpret_cast<WGPUQueueWorkDoneStatus*>(userdata) = status;
+        },
+        &status};
+    testQueue.OnSubmittedWorkDoneF(&callbackInfo);
 
     // Callback should have been called immediately because we leaked it since there's no way to
     // call WaitAny or ProcessEvents anymore.
@@ -424,12 +426,13 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceAfterEvent) {
     UseSecondInstance();
 
     WGPUQueueWorkDoneStatus status = kStatusUninitialized;
-    testQueue.OnSubmittedWorkDoneF({nullptr, GetCallbackMode(),
-                                    [](WGPUQueueWorkDoneStatus status, void* userdata) {
-                                        *reinterpret_cast<WGPUQueueWorkDoneStatus*>(userdata) =
-                                            status;
-                                    },
-                                    &status});
+    wgpu::QueueWorkDoneCallbackInfo callbackInfo{
+        nullptr, GetCallbackMode(),
+        [](WGPUQueueWorkDoneStatus status, void* userdata) {
+            *reinterpret_cast<WGPUQueueWorkDoneStatus*>(userdata) = status;
+        },
+        &status};
+    testQueue.OnSubmittedWorkDoneF(&callbackInfo);
 
     ASSERT_EQ(status, kStatusUninitialized);
 
@@ -501,8 +504,9 @@ TEST_P(WaitAnyTests, UnsupportedTimeout) {
     }
 
     for (uint64_t timeout : {uint64_t(1), uint64_t(0), UINT64_MAX}) {
-        wgpu::FutureWaitInfo info{device2.GetQueue().OnSubmittedWorkDoneF(
-            {nullptr, wgpu::CallbackMode::Future, [](WGPUQueueWorkDoneStatus, void*) {}, nullptr})};
+        wgpu::QueueWorkDoneCallbackInfo callbackInfo{
+            nullptr, wgpu::CallbackMode::Future, [](WGPUQueueWorkDoneStatus, void*) {}, nullptr};
+        wgpu::FutureWaitInfo info{device2.GetQueue().OnSubmittedWorkDoneF(&callbackInfo)};
         wgpu::WaitStatus status = instance2.WaitAny(1, &info, timeout);
         if (timeout == 0) {
             ASSERT_TRUE(status == wgpu::WaitStatus::Success ||
@@ -520,9 +524,10 @@ TEST_P(WaitAnyTests, UnsupportedCount) {
         for (size_t count : {kTimedWaitAnyMaxCountDefault, kTimedWaitAnyMaxCountDefault + 1}) {
             std::vector<wgpu::FutureWaitInfo> infos;
             for (size_t i = 0; i < count; ++i) {
-                infos.push_back(
-                    {queue.OnSubmittedWorkDoneF({nullptr, wgpu::CallbackMode::Future,
-                                                 [](WGPUQueueWorkDoneStatus, void*) {}, nullptr})});
+                wgpu::QueueWorkDoneCallbackInfo callbackInfo{nullptr, wgpu::CallbackMode::Future,
+                                                             [](WGPUQueueWorkDoneStatus, void*) {},
+                                                             nullptr};
+                infos.push_back({queue.OnSubmittedWorkDoneF(&callbackInfo)});
             }
             wgpu::WaitStatus status = GetInstance().WaitAny(infos.size(), infos.data(), timeout);
             if (timeout == 0) {
@@ -544,11 +549,11 @@ TEST_P(WaitAnyTests, UnsupportedMixedSources) {
     wgpu::Device device2 = CreateDevice();
     wgpu::Queue queue2 = device2.GetQueue();
     for (uint64_t timeout : {uint64_t(0), uint64_t(1)}) {
+        wgpu::QueueWorkDoneCallbackInfo callbackInfo{
+            nullptr, wgpu::CallbackMode::Future, [](WGPUQueueWorkDoneStatus, void*) {}, nullptr};
         std::vector<wgpu::FutureWaitInfo> infos{{
-            {queue.OnSubmittedWorkDoneF({nullptr, wgpu::CallbackMode::Future,
-                                         [](WGPUQueueWorkDoneStatus, void*) {}, nullptr})},
-            {queue2.OnSubmittedWorkDoneF({nullptr, wgpu::CallbackMode::Future,
-                                          [](WGPUQueueWorkDoneStatus, void*) {}, nullptr})},
+            {queue.OnSubmittedWorkDoneF(&callbackInfo)},
+            {queue2.OnSubmittedWorkDoneF(&callbackInfo)},
         }};
         wgpu::WaitStatus status = GetInstance().WaitAny(infos.size(), infos.data(), timeout);
         if (timeout == 0) {

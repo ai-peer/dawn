@@ -64,8 +64,9 @@ namespace {{native_namespace}} {
                 {{as_cppType(type.name)}}& operator=(const {{as_cppType(type.name)}}&) = delete;
                 {{as_cppType(type.name)}}({{as_cppType(type.name)}}&&);
                 {{as_cppType(type.name)}}& operator=({{as_cppType(type.name)}}&&);
-
             {% endif %}
+            operator {{as_cType(type.name)}}&();
+
             {% if type.extensible %}
                 {% set chainedStructType = "ChainedStructOut" if type.output else "ChainedStruct const" %}
                 {{chainedStructType}} * nextInChain = nullptr;
