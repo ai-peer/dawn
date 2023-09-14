@@ -206,6 +206,72 @@ void Buffer::MapAsync(WGPUMapModeFlags mode,
     client->SerializeCommand(cmd);
 }
 
+WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
+                             size_t offset,
+                             size_t size,
+                             const WGPUBufferMapCallbackInfo& callbackInfo) {
+    Client* client = GetClient();
+    FutureID futureIDInternal = client->GetEventManager()->TrackEvent(
+        callbackInfo.mode, [=](EventCompletionType completionType) {
+            if (completionType == EventCompletionType::Shutdown) {
+                return callbackInfo.callback(WGPUBufferMapAsyncStatus_DeviceLost, callbackInfo.userdata);
+            }
+            return callbackInfo.callback(mRequest.result, callbackInfo.userdata);
+        });
+
+    // Handle the defaulting of size required by WebGPU.
+    if ((size == WGPU_WHOLE_MAP_SIZE) && (offset <= mSize)) {
+        size = mSize - offset;
+    }
+
+    // Sets up the modified callback.
+    struct Lambda {
+        Client* client;
+        FutureID futureIDInternal;
+        WGPUBufferMapAsyncStatus* result;
+    };
+    Lambda* lambda = new Lambda{client, futureIDInternal, &mRequest.result};
+    auto callback = [](WGPUBufferMapAsyncStatus result, void* userdata) {
+        auto* lambda = static_cast<Lambda*>(userdata);
+        *(lambda->result) = result;
+        lambda->client->GetEventManager()->SetFutureReady(lambda->futureIDInternal);
+        delete lambda;
+    }
+
+    uint64_t serial = mOnWorkDoneRequests.Add(
+        {[](WGPUBufferMapAsyncStatus result, void* userdata) {
+             auto* lambda = static_cast<Lambda*>(userdata);
+             lambda->client->GetEventManager()->SetFutureReady(lambda->futureIDInternal);
+             delete lambda;
+         },
+         lambda});
+
+    // Set up the request structure that will hold information while this mapping is in flight.
+    mRequest.callback = callback;
+    mRequest.userdata = userdata;
+    mRequest.offset = offset;
+    mRequest.size = size;
+    if (mode & WGPUMapMode_Read) {
+        mRequest.type = MapRequestType::Read;
+    } else if (mode & WGPUMapMode_Write) {
+        mRequest.type = MapRequestType::Write;
+    }
+
+    // Serialize the command to send to the server.
+    mPendingMap = true;
+    mSerial++;
+    BufferMapAsyncCmd cmd;
+    cmd.bufferId = GetWireId();
+    cmd.requestSerial = mSerial;
+    cmd.mode = mode;
+    cmd.offset = offset;
+    cmd.size = size;
+
+    client->SerializeCommand(cmd);
+
+    return {futureIDInternal};
+}
+
 bool Buffer::OnMapAsyncCallback(uint64_t requestSerial,
                                 uint32_t status,
                                 uint64_t readDataUpdateInfoLength,
