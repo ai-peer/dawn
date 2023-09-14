@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7bea77_fd8f7113",
+        "filename": "src/dawn/native/VertexFormat.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-14T11:30:10Z",
+      "side": 1,
+      "message": "Yep!",
+      "parentUuid": "da8ca661_609fc16f",
+      "revId": "2484794b89325521e0090155026e5ff21fe91e42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0a48b1a_44abb17e",
