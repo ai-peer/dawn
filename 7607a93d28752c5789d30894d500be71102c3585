@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a07f0502_eb6103f9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T08:12:48Z",
+      "side": 1,
+      "message": "You also need to commit the generated e2e test files (and preferably the expectations too)",
+      "revId": "7607a93d28752c5789d30894d500be71102c3585",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
