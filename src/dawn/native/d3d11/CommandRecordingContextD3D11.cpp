@@ -56,7 +56,7 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
     mD3D11DeviceContext4 = std::move(d3d11DeviceContext4);
     mIsOpen = true;
 
-    // Create a uniform buffer for built in variables.
+    // Create a uniform buffer for indirect draw/dispatch args.
     BufferDescriptor descriptor;
     descriptor.size = sizeof(uint32_t) * kMaxNumBuiltinElements;
     descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
@@ -69,16 +69,22 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
         auto deviceLock(device->GetScopedLock());
         DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&descriptor));
     }
-    mUniformBuffer = ToBackend(std::move(uniformBuffer));
+    mIndirectUniformBuffer = ToBackend(std::move(uniformBuffer));
 
-    // Always bind the uniform buffer to the reserved slot for all pipelines.
-    // This buffer will be updated with the correct values before each draw or dispatch call.
-    ID3D11Buffer* bufferPtr = mUniformBuffer->GetD3D11ConstantBuffer();
-    mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
-                                               &bufferPtr);
-    mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
-                                               &bufferPtr);
+    // Create a d3d11 buffer of dynamic usage for built-in variables.
+    {
+        D3D11_BUFFER_DESC bufferDescriptor;
+        bufferDescriptor.ByteWidth = Align(descriptor.size, 256);
+        bufferDescriptor.Usage = D3D11_USAGE_DYNAMIC;
+        bufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        bufferDescriptor.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+        bufferDescriptor.MiscFlags = 0;
+        bufferDescriptor.StructureByteStride = 0;
 
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            GetD3D11Device()->CreateBuffer(&bufferDescriptor, nullptr, &mD3D11UniformBuffer),
+            "ID3D11Device::CreateBuffer"));
+    }
     return {};
 }
 
@@ -111,8 +117,8 @@ ID3DUserDefinedAnnotation* CommandRecordingContext::GetD3DUserDefinedAnnotation(
     return mD3DUserDefinedAnnotation.Get();
 }
 
-Buffer* CommandRecordingContext::GetUniformBuffer() const {
-    return mUniformBuffer.Get();
+Buffer* CommandRecordingContext::GetIndirectUniformBuffer() const {
+    return mIndirectUniformBuffer.Get();
 }
 
 Device* CommandRecordingContext::GetDevice() const {
@@ -125,7 +131,8 @@ void CommandRecordingContext::Release() {
         ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
         mIsOpen = false;
         mNeedsSubmit = false;
-        mUniformBuffer = nullptr;
+        mIndirectUniformBuffer = nullptr;
+        mD3D11UniformBuffer = nullptr;
         mDevice = nullptr;
         ID3D11Buffer* nullBuffer = nullptr;
         mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
@@ -178,11 +185,28 @@ void CommandRecordingContext::WriteUniformBuffer(uint32_t offset, uint32_t eleme
 
 MaybeError CommandRecordingContext::FlushUniformBuffer() {
     if (mUniformBufferDirty) {
-        DAWN_TRY(mUniformBuffer->Write(this, 0, mUniformBufferData.data(),
-                                       mUniformBufferData.size() * sizeof(uint32_t)));
+        D3D11_MAPPED_SUBRESOURCE mappedResource;
+        DAWN_TRY(
+            CheckHRESULT(GetD3D11DeviceContext()->Map(mD3D11UniformBuffer.Get(),
+                                                      /*Subresource=*/0, D3D11_MAP_WRITE_DISCARD,
+                                                      /*MapFlags=*/0, &mappedResource),
+                         "ID3D11DeviceContext::Map"));
+        std::memcpy(mappedResource.pData, mUniformBufferData.data(),
+                    mUniformBufferData.size() * sizeof(uint32_t));
+        GetD3D11DeviceContext()->Unmap(mD3D11UniformBuffer.Get(), /*Subresource=*/0);
         mUniformBufferDirty = false;
     }
     return {};
+}
+
+void CommandRecordingContext::OnDrawOrDispatch(bool indirect) {
+    // Bind the indirect uniform buffer for indirect draw/dispatch.
+    ID3D11Buffer* bufferPtr =
+        indirect ? mIndirectUniformBuffer->GetD3D11ConstantBuffer() : mD3D11UniformBuffer.Get();
+    mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+                                               &bufferPtr);
+    mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+                                               &bufferPtr);
 }
 
 }  // namespace dawn::native::d3d11
