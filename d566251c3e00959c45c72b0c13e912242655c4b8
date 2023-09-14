@@ -1,0 +1,228 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd2cf141_46aec45d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "+2 with a bunch of nits",
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e949b0cc_76ed355c",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: We usually don\u0027t put a source if the test doesn\u0027t use it. Having a source suggests to the reader that it\u0027ll be used in a diagnostic.",
+      "range": {
+        "startLine": 677,
+        "startChar": 25,
+        "endLine": 677,
+        "endChar": 57
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19490567_d86e2b43",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 687,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: `Source{{12, 34}}` is far more common",
+      "range": {
+        "startLine": 687,
+        "startChar": 25,
+        "endLine": 687,
+        "endChar": 57
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6eccbe_d4bca0ca",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 703,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: rm",
+      "range": {
+        "startLine": 703,
+        "startChar": 25,
+        "endLine": 703,
+        "endChar": 58
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c11c29_3a35be99",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 714,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: rm",
+      "range": {
+        "startLine": 714,
+        "startChar": 22,
+        "endLine": 714,
+        "endChar": 36
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69b9fa33_f7227fe5",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 715,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: rm",
+      "range": {
+        "startLine": 715,
+        "startChar": 12,
+        "endLine": 715,
+        "endChar": 23
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20020988_f71f4df5",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 730,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: rm",
+      "range": {
+        "startLine": 730,
+        "startChar": 9,
+        "endLine": 730,
+        "endChar": 24
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33e49b37_68c41e13",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 747,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: rm",
+      "range": {
+        "startLine": 747,
+        "startChar": 9,
+        "endLine": 747,
+        "endChar": 24
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f11bb668_04e96b73",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 758,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "While I won\u0027t object to additional tests, they\u0027re somewhat unnecessary as the intrinsic table lookup is well tested, and this particular builtin doesn\u0027t introduce logic different from other overload resolves.\n\nCould remove the new tests from here downwards.",
+      "range": {
+        "startLine": 758,
+        "startChar": 4,
+        "endLine": 758,
+        "endChar": 68
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3deee27c_5239452d",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-14T14:27:52Z",
+      "side": 1,
+      "message": "nit: `Source{{12, 34}}`\n\nAnd so on.",
+      "range": {
+        "startLine": 765,
+        "startChar": 25,
+        "endLine": 765,
+        "endChar": 57
+      },
+      "revId": "d566251c3e00959c45c72b0c13e912242655c4b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
