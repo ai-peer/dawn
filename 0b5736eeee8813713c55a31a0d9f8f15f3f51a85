@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9c8d70e_94883be9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-14T16:03:29Z",
+      "side": 1,
+      "message": "I changed my mind once I saw MSL and SPIR-V both wanted unsigned.",
+      "revId": "0b5736eeee8813713c55a31a0d9f8f15f3f51a85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
