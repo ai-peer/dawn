@@ -55,6 +55,10 @@ namespace {{native_namespace}} {
                          "offsetof mismatch for {{CppType}}::{{memberName}}");
         {% endfor %}
 
+        {{CppType}}::operator {{as_cType(type.name)}}&() {
+            return *reinterpret_cast<{{as_cType(type.name)}}*>(this);
+        }
+
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
             return {% if type.extensible or type.chained -%}
                 (nextInChain == rhs.nextInChain) &&
