@@ -28,7 +28,6 @@
 #include "dawn/native/Subresource.h"
 #include "dawn/native/Surface.h"
 #include "dawn/native/Texture.h"
-#include "dawn/native/VertexFormat.h"
 
 namespace dawn::native {
 
