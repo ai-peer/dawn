@@ -16,6 +16,23 @@
       "message": "Austin PTAL again!",
       "revId": "7ae98175e207f3f1329f0adf29db8f99c4445e95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b002b9c6_67f61c8e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-14T15:31:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7ae98175e207f3f1329f0adf29db8f99c4445e95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
