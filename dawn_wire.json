@@ -188,6 +188,7 @@
             "AdapterEnumerateFeatures",
             "AdapterRequestDevice",
             "BufferMapAsync",
+            "BufferMapAsyncF",
             "BufferGetConstMappedRange",
             "BufferGetMappedRange",
             "BufferGetMapState",
