@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13641b86_c361e3ec",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-14T13:24:35Z",
+      "side": 1,
+      "message": "Tried something, not sure it\u0027s much better unfortunately.",
+      "parentUuid": "0b42cfee_7f10b0c7",
+      "range": {
+        "startLine": 662,
+        "startChar": 25,
+        "endLine": 662,
+        "endChar": 52
+      },
+      "revId": "89a5668bd70b5565451acb85e8e8f279f3540f25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb119f3f_4fa73bc5",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-09-13T17:40:14Z",
       "side": 1,
       "message": "unit: \"requires\"",
+      "range": {
+        "startLine": 355,
+        "startChar": 56,
+        "endLine": 355,
+        "endChar": 63
+      },
+      "revId": "89a5668bd70b5565451acb85e8e8f279f3540f25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fca8317_8021ddf6",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-14T13:24:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb119f3f_4fa73bc5",
       "range": {
         "startLine": 355,
         "startChar": 56,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ba64d6a_5c6c3dff",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 360,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-14T13:24:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8fbc3aba_12d78c2c",
+      "range": {
+        "startLine": 360,
+        "startChar": 90,
+        "endLine": 360,
+        "endChar": 91
+      },
+      "revId": "89a5668bd70b5565451acb85e8e8f279f3540f25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8ed3e80_c2624665",
@@ -117,6 +189,30 @@
       "writtenOn": "2023-09-13T17:40:14Z",
       "side": 1,
       "message": "ideally we can have a test as well that tests the render area or viewport doesn\u0027t end up being 0. i.e. we correctly gather the width/height from the storage attachment(s)",
+      "range": {
+        "startLine": 1061,
+        "startChar": 0,
+        "endLine": 1063,
+        "endChar": 0
+      },
+      "revId": "89a5668bd70b5565451acb85e8e8f279f3540f25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9521dec0_ca3e7cc0",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1063,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-14T13:24:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8ed3e80_c2624665",
       "range": {
         "startLine": 1061,
         "startChar": 0,
