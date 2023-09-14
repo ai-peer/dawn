@@ -41,7 +41,7 @@ class CommandRecordingContext {
     ID3D11DeviceContext1* GetD3D11DeviceContext1() const;
     ID3D11DeviceContext4* GetD3D11DeviceContext4() const;
     ID3DUserDefinedAnnotation* GetD3DUserDefinedAnnotation() const;
-    Buffer* GetUniformBuffer() const;
+    Buffer* GetIndirectUniformBuffer() const;
     Device* GetDevice() const;
 
     struct ScopedCriticalSection : NonMovable {
@@ -49,7 +49,7 @@ class CommandRecordingContext {
         ~ScopedCriticalSection();
 
       private:
-        ComPtr<ID3D11Multithread> mD3D11Multithread;
+        ComPtr<ID3D11Multithread> mD3d11Multithread;
     };
     // Returns a scoped object that marks a critical section using the
     // ID3D11Multithread Enter and Leave methods. This allows minimizing the
@@ -63,20 +63,27 @@ class CommandRecordingContext {
     void WriteUniformBuffer(uint32_t offset, uint32_t element);
     MaybeError FlushUniformBuffer();
 
+    void OnDrawOrDispatch(bool indirect);
+
   private:
     bool mIsOpen = false;
     bool mNeedsSubmit = false;
-    ComPtr<ID3D11Device> mD3D11Device;
-    ComPtr<ID3D11DeviceContext4> mD3D11DeviceContext4;
-    ComPtr<ID3D11Multithread> mD3D11Multithread;
-    ComPtr<ID3DUserDefinedAnnotation> mD3DUserDefinedAnnotation;
+    ComPtr<ID3D11Device> mD3d11Device;
+    ComPtr<ID3D11DeviceContext4> mD3d11DeviceContext4;
+    ComPtr<ID3D11Multithread> mD3d11Multithread;
+    ComPtr<ID3DUserDefinedAnnotation> mD3dUserDefinedAnnotation;
 
     // The maximum number of builtin elements is 4 (vec4). It must be multiple of 4.
     static constexpr size_t kMaxNumBuiltinElements = 4;
     // The uniform buffer for built-in variables.
-    Ref<Buffer> mUniformBuffer;
+    ComPtr<ID3D11Buffer> mD3d11UniformBuffer;
     std::array<uint32_t, kMaxNumBuiltinElements> mUniformBufferData;
     bool mUniformBufferDirty = true;
+
+    // The built-in uniform buffer for indirect draw/dispatch args.
+    Ref<Buffer> mIndirectUniformBuffer;
+
+    bool mIsLastDrawOrDisplayIndirect = false;
 
     Ref<Device> mDevice;
 };

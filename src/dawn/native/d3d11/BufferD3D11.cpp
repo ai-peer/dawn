@@ -117,7 +117,10 @@ UINT D3D11BufferMiscFlags(wgpu::BufferUsage usage) {
     return miscFlags;
 }
 
-size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
+}  // namespace
+
+// static
+size_t Buffer::D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
     if (usage & wgpu::BufferUsage::Uniform) {
         // https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/nf-d3d11_1-id3d11devicecontext1-vssetconstantbuffers1
         // Each number of constants must be a multiple of 16 shader constants(sizeof(float) * 4 *
@@ -131,8 +134,6 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
     }
     return 1;
 }
-
-}  // namespace
 
 // static
 ResultOrError<Ref<Buffer>> Buffer::Create(Device* device, const BufferDescriptor* descriptor) {

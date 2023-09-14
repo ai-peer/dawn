@@ -43,20 +43,20 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
                           "D3D11 querying immediate context for ID3D11DeviceContext4 interface"));
 
     DAWN_TRY(
-        CheckHRESULT(d3d11DeviceContext4.As(&mD3DUserDefinedAnnotation),
+        CheckHRESULT(d3d11DeviceContext4.As(&mD3dUserDefinedAnnotation),
                      "D3D11 querying immediate context for ID3DUserDefinedAnnotation interface"));
 
     if (device->HasFeature(Feature::D3D11MultithreadProtected)) {
-        DAWN_TRY(CheckHRESULT(d3d11DeviceContext.As(&mD3D11Multithread),
+        DAWN_TRY(CheckHRESULT(d3d11DeviceContext.As(&mD3d11Multithread),
                               "D3D11 querying immediate context for ID3D11Multithread interface"));
-        mD3D11Multithread->SetMultithreadProtected(TRUE);
+        mD3d11Multithread->SetMultithreadProtected(TRUE);
     }
 
-    mD3D11Device = d3d11Device;
-    mD3D11DeviceContext4 = std::move(d3d11DeviceContext4);
+    mD3d11Device = d3d11Device;
+    mD3d11DeviceContext4 = std::move(d3d11DeviceContext4);
     mIsOpen = true;
 
-    // Create a uniform buffer for built in variables.
+    // Create a uniform buffer for indirect draw/dispatch args.
     BufferDescriptor descriptor;
     descriptor.size = sizeof(uint32_t) * kMaxNumBuiltinElements;
     descriptor.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
@@ -69,16 +69,30 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
         auto deviceLock(device->GetScopedLock());
         DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&descriptor));
     }
-    mUniformBuffer = ToBackend(std::move(uniformBuffer));
+    mIndirectUniformBuffer = ToBackend(std::move(uniformBuffer));
 
-    // Always bind the uniform buffer to the reserved slot for all pipelines.
-    // This buffer will be updated with the correct values before each draw or dispatch call.
-    ID3D11Buffer* bufferPtr = mUniformBuffer->GetD3D11ConstantBuffer();
-    mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
-                                               &bufferPtr);
-    mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
-                                               &bufferPtr);
+    // Create a d3d11 buffer of dynamic usage for built-in variables.
+    {
+        D3D11_BUFFER_DESC bufferDescriptor;
+        bufferDescriptor.ByteWidth =
+            Align(descriptor.size, Buffer::D3D11BufferSizeAlignment(wgpu::BufferUsage::Uniform));
+        bufferDescriptor.Usage = D3D11_USAGE_DYNAMIC;
+        bufferDescriptor.BindFlags = D3D11_BIND_CONSTANT_BUFFER;
+        bufferDescriptor.CPUAccessFlags = D3D11_CPU_ACCESS_WRITE;
+        bufferDescriptor.MiscFlags = 0;
+        bufferDescriptor.StructureByteStride = 0;
 
+        DAWN_TRY(CheckOutOfMemoryHRESULT(
+            GetD3D11Device()->CreateBuffer(&bufferDescriptor, nullptr, &mD3d11UniformBuffer),
+            "ID3D11Device::CreateBuffer"));
+    }
+
+    // Bind the dynamic built-in uniform buffer.
+    {
+        auto deviceLock(device->GetScopedLock());
+        mIsLastDrawOrDisplayIndirect = true;
+        OnDrawOrDispatch(/*indirect=*/false);
+    }
     return {};
 }
 
@@ -89,30 +103,30 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
 }
 
 ID3D11Device* CommandRecordingContext::GetD3D11Device() const {
-    return mD3D11Device.Get();
+    return mD3d11Device.Get();
 }
 
 ID3D11DeviceContext* CommandRecordingContext::GetD3D11DeviceContext() const {
     DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
-    return mD3D11DeviceContext4.Get();
+    return mD3d11DeviceContext4.Get();
 }
 
 ID3D11DeviceContext1* CommandRecordingContext::GetD3D11DeviceContext1() const {
     DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
-    return mD3D11DeviceContext4.Get();
+    return mD3d11DeviceContext4.Get();
 }
 
 ID3D11DeviceContext4* CommandRecordingContext::GetD3D11DeviceContext4() const {
     DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
-    return mD3D11DeviceContext4.Get();
+    return mD3d11DeviceContext4.Get();
 }
 
 ID3DUserDefinedAnnotation* CommandRecordingContext::GetD3DUserDefinedAnnotation() const {
-    return mD3DUserDefinedAnnotation.Get();
+    return mD3dUserDefinedAnnotation.Get();
 }
 
-Buffer* CommandRecordingContext::GetUniformBuffer() const {
-    return mUniformBuffer.Get();
+Buffer* CommandRecordingContext::GetIndirectUniformBuffer() const {
+    return mIndirectUniformBuffer.Get();
 }
 
 Device* CommandRecordingContext::GetDevice() const {
@@ -125,15 +139,16 @@ void CommandRecordingContext::Release() {
         DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
         mIsOpen = false;
         mNeedsSubmit = false;
-        mUniformBuffer = nullptr;
+        mIndirectUniformBuffer = nullptr;
+        mD3d11UniformBuffer = nullptr;
         mDevice = nullptr;
         ID3D11Buffer* nullBuffer = nullptr;
-        mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+        mD3d11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
                                                    &nullBuffer);
-        mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+        mD3d11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
                                                    &nullBuffer);
-        mD3D11DeviceContext4 = nullptr;
-        mD3D11Device = nullptr;
+        mD3d11DeviceContext4 = nullptr;
+        mD3d11Device = nullptr;
     }
 }
 
@@ -151,21 +166,21 @@ void CommandRecordingContext::SetNeedsSubmit() {
 
 CommandRecordingContext::ScopedCriticalSection::ScopedCriticalSection(
     ComPtr<ID3D11Multithread> d3d11Multithread)
-    : mD3D11Multithread(std::move(d3d11Multithread)) {
-    if (mD3D11Multithread) {
-        mD3D11Multithread->Enter();
+    : mD3d11Multithread(std::move(d3d11Multithread)) {
+    if (mD3d11Multithread) {
+        mD3d11Multithread->Enter();
     }
 }
 
 CommandRecordingContext::ScopedCriticalSection::~ScopedCriticalSection() {
-    if (mD3D11Multithread) {
-        mD3D11Multithread->Leave();
+    if (mD3d11Multithread) {
+        mD3d11Multithread->Leave();
     }
 }
 
 CommandRecordingContext::ScopedCriticalSection
 CommandRecordingContext::EnterScopedCriticalSection() {
-    return ScopedCriticalSection(mD3D11Multithread);
+    return ScopedCriticalSection(mD3d11Multithread);
 }
 
 void CommandRecordingContext::WriteUniformBuffer(uint32_t offset, uint32_t element) {
@@ -178,11 +193,31 @@ void CommandRecordingContext::WriteUniformBuffer(uint32_t offset, uint32_t eleme
 
 MaybeError CommandRecordingContext::FlushUniformBuffer() {
     if (mUniformBufferDirty) {
-        DAWN_TRY(mUniformBuffer->Write(this, 0, mUniformBufferData.data(),
-                                       mUniformBufferData.size() * sizeof(uint32_t)));
+        D3D11_MAPPED_SUBRESOURCE mappedResource;
+        DAWN_TRY(
+            CheckHRESULT(GetD3D11DeviceContext()->Map(mD3d11UniformBuffer.Get(),
+                                                      /*Subresource=*/0, D3D11_MAP_WRITE_DISCARD,
+                                                      /*MapFlags=*/0, &mappedResource),
+                         "ID3D11DeviceContext::Map"));
+        std::memcpy(mappedResource.pData, mUniformBufferData.data(),
+                    mUniformBufferData.size() * sizeof(uint32_t));
+        GetD3D11DeviceContext()->Unmap(mD3d11UniformBuffer.Get(), /*Subresource=*/0);
         mUniformBufferDirty = false;
     }
     return {};
+}
+
+void CommandRecordingContext::OnDrawOrDispatch(bool indirect) {
+    if (mIsLastDrawOrDisplayIndirect != indirect) {
+        mIsLastDrawOrDisplayIndirect = indirect;
+        // Bind the indirect uniform buffer for indirect draw/dispatch.
+        ID3D11Buffer* bufferPtr =
+            indirect ? mIndirectUniformBuffer->GetD3D11ConstantBuffer() : mD3d11UniformBuffer.Get();
+        mD3d11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+                                                   &bufferPtr);
+        mD3d11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+                                                   &bufferPtr);
+    }
 }
 
 }  // namespace dawn::native::d3d11

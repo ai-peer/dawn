@@ -29,6 +29,7 @@ class Device;
 class Buffer final : public BufferBase {
   public:
     static ResultOrError<Ref<Buffer>> Create(Device* device, const BufferDescriptor* descriptor);
+    static size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage);
 
     MaybeError EnsureDataInitialized(CommandRecordingContext* commandContext);
     MaybeError EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
