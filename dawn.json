@@ -468,6 +468,18 @@
                     {"name": "userdata", "type": "void *"}
                 ]
             },
+	    {
+                "name": "map async f",
+	        "_comment": "TODO(crbug.com/dawn/2021): This is dawn/emscripten-only until we rename it to replace the old API. See bug for details.",
+	        "tags": ["dawn", "emscripten"],
+                "returns": "future",
+                "args": [
+                    {"name": "mode", "type": "map mode"},
+                    {"name": "offset", "type": "size_t"},
+                    {"name": "size", "type": "size_t"},
+		    {"name": "callback info", "type": "buffer map callback info"}
+                ]
+            },
             {
                 "name": "get mapped range",
                 "returns": "void *",
@@ -545,6 +557,15 @@
             {"name": "status", "type": "buffer map async status"},
             {"name": "userdata", "type": "void *"}
         ]
+    },
+    "buffer map callback info": {
+        "category": "structure",
+        "extensible": "in",
+        "members": [
+	    {"name": "mode", "type": "callback mode"},
+	    {"name": "callback", "type": "buffer map callback"},
+	    {"name": "userdata", "type": "void *"}
+	]
     },
     "buffer map async status": {
         "category": "enum",
