@@ -555,7 +555,22 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
 
     bool anyColorAttachment = false;
     ColorAttachmentFormats colorAttachmentFormats;
+
+    ColorAttachmentDepthSliceMap usedDepthSlices;
+
     for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
+        TextureBase* texture = descriptor->colorAttachments[i].view->GetTexture();
+
+        if (texture->GetDimension() == wgpu::TextureDimension::e3D) {
+            auto checkIt = usedDepthSlices.find(texture);
+            uint32_t depthSlice = descriptor->colorAttachments[i].depthSlice;
+            DAWN_INVALID_IF(checkIt != usedDepthSlices.end() && checkIt->second[depthSlice],
+                            "depth slice %u of %s is written to twice in a render pass.",
+                            depthSlice, texture);
+            auto addIt = usedDepthSlices.emplace(texture, texture->GetDepth(Aspect::Color)).first;
+            addIt->second[depthSlice] = true;
+        }
+
         DAWN_TRY_CONTEXT(ValidateRenderPassColorAttachment(
                              device, descriptor->colorAttachments[i], width, height, sampleCount,
                              implicitSampleCount, usageValidationMode),

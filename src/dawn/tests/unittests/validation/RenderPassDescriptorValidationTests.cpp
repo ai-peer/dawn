@@ -466,6 +466,40 @@ TEST_F(RenderPassDescriptorValidationTest, TextureViewDepthSliceForColor) {
         renderPass.cColorAttachments[0].depthSlice = 1;
         AssertBeginRenderPassError(&renderPass);
     }
+
+    // Control case: Different depth slices of same texture used in color attachemnts of a render
+    // pass is valid.
+    {
+        wgpu::TextureView view = colorTexture3D.CreateView(&baseDescriptor);
+        utils::ComboRenderPassDescriptor renderPass({view, view});
+        renderPass.cColorAttachments[0].depthSlice = 0;
+        renderPass.cColorAttachments[1].depthSlice = 1;
+        AssertBeginRenderPassSuccess(&renderPass);
+    }
+
+    // Same depth slice of different textures used in color attachemnts of a render pass is valid.
+    {
+        wgpu::Texture otherColorTexture3D =
+            CreateTexture(device, wgpu::TextureDimension::e3D, kColorFormat, kSize, kSize,
+                          kDepthOrArrayLayers, 2);
+
+        wgpu::TextureView view = colorTexture3D.CreateView(&baseDescriptor);
+        wgpu::TextureView view2 = otherColorTexture3D.CreateView(&baseDescriptor);
+
+        utils::ComboRenderPassDescriptor renderPass({view, view2});
+        renderPass.cColorAttachments[0].depthSlice = 0;
+        renderPass.cColorAttachments[1].depthSlice = 0;
+        AssertBeginRenderPassSuccess(&renderPass);
+    }
+
+    // Same depth slice of a texture used in color attachemnts of a render pass is invalid.
+    {
+        wgpu::TextureView view = colorTexture3D.CreateView(&baseDescriptor);
+        utils::ComboRenderPassDescriptor renderPass({view, view});
+        renderPass.cColorAttachments[0].depthSlice = 0;
+        renderPass.cColorAttachments[1].depthSlice = 0;
+        AssertBeginRenderPassError(&renderPass);
+    }
 }
 
 // Check that the render pass depth attachment must have the RenderAttachment usage.
