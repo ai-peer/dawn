@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2a9013a_f9f92258",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-09-14T11:29:43Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "6b95b1a7656f00e265a0e73e38a3064f5cc5b200",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9482e2f7_6ecfc098",
+        "filename": "src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-09-14T11:29:43Z",
+      "side": 1,
+      "message": "nit\n```suggestion\n    // Error case: using a pixel_local block is not ok.\n```",
+      "range": {
+        "startLine": 893,
+        "startChar": 19,
+        "endLine": 893,
+        "endChar": 55
+      },
+      "revId": "6b95b1a7656f00e265a0e73e38a3064f5cc5b200",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
