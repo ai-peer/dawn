@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da8ca661_609fc16f",
+        "filename": "src/dawn/native/VertexFormat.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-14T09:11:09Z",
+      "side": 1,
+      "message": "In merging back, you mean move `src/dawn/native/VertexFormat.cpp/.h` content in `third_party/dawn/src/dawn/native/RenderPipeline.cpp/.h` right?\nSimilarly to https://dawn-review.googlesource.com/c/dawn/+/42561?",
+      "parentUuid": "a2d5205b_6ae07d04",
+      "revId": "2484794b89325521e0090155026e5ff21fe91e42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d0a48b1a_44abb17e",
         "filename": "src/dawn/native/VertexFormat.cpp",
         "patchSetId": 18
