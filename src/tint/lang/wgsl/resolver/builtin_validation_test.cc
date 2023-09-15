@@ -537,7 +537,7 @@ using ResolverDP4aExtensionValidationTest = ResolverTest;
 TEST_F(ResolverDP4aExtensionValidationTest, Dot4I8PackedWithExtension) {
     // enable chromium_experimental_dp4a;
     // fn func { return dot4I8Packed(1u, 2u); }
-    Enable(core::Extension::kChromiumExperimentalDp4A);
+    Enable(wgsl::Extension::kChromiumExperimentalDp4A);
 
     Func("func", tint::Empty, ty.i32(),
          Vector{
@@ -565,7 +565,7 @@ TEST_F(ResolverDP4aExtensionValidationTest, Dot4I8PackedWithoutExtension) {
 TEST_F(ResolverDP4aExtensionValidationTest, Dot4U8PackedWithExtension) {
     // enable chromium_experimental_dp4a;
     // fn func { return dot4U8Packed(1u, 2u); }
-    Enable(core::Extension::kChromiumExperimentalDp4A);
+    Enable(wgsl::Extension::kChromiumExperimentalDp4A);
 
     Func("func", tint::Empty, ty.u32(),
          Vector{
@@ -670,7 +670,7 @@ TEST_F(ResolverBuiltinValidationTest, SubgroupBallotWithoutExtension) {
 TEST_F(ResolverBuiltinValidationTest, SubgroupBallotWithExtension) {
     // enable chromium_experimental_subgroups;
     // fn func { return subgroupBallot(); }
-    Enable(core::Extension::kChromiumExperimentalSubgroups);
+    Enable(wgsl::Extension::kChromiumExperimentalSubgroups);
 
     Func("func", tint::Empty, ty.vec4<u32>(),
          Vector{
@@ -696,7 +696,7 @@ TEST_F(ResolverBuiltinValidationTest, TextureBarrierWithoutExtension) {
 TEST_F(ResolverBuiltinValidationTest, TextureBarrierWithExtension) {
     // enable chromium_experimental_read_write_storage_texture;
     // fn func { textureBarrier(); }
-    Enable(core::Extension::kChromiumExperimentalReadWriteStorageTexture);
+    Enable(wgsl::Extension::kChromiumExperimentalReadWriteStorageTexture);
 
     Func("func", tint::Empty, ty.void_(),
          Vector{
