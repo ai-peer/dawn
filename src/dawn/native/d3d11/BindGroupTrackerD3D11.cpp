@@ -32,6 +32,7 @@ namespace dawn::native::d3d11 {
 namespace {
 
 bool CheckAllSlotsAreEmpty(CommandRecordingContext* commandContext) {
+#if defined(DAWN_ENABLE_ASSERTS)
     ID3D11DeviceContext1* deviceContext1 = commandContext->GetD3D11DeviceContext1();
 
     // Reserve one slot for builtin constants.
@@ -84,7 +85,7 @@ bool CheckAllSlotsAreEmpty(CommandRecordingContext* commandContext) {
                                                                   &uav);
         ASSERT(uav == nullptr);
     }
-
+#endif
     return true;
 }
 
