@@ -39,6 +39,30 @@
       },
       "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "401486a3_b9c862a8",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1326,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-15T14:21:27Z",
+      "side": 1,
+      "message": "I think the common use cases are a depth stencil texture is always use the view with same properties, right? If it is true, then this CL should be good enough. Do you think we need cache all resource views for all uncommon use cases?",
+      "parentUuid": "0d41202b_e4531135",
+      "range": {
+        "startLine": 1319,
+        "startChar": 4,
+        "endLine": 1326,
+        "endChar": 5
+      },
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
