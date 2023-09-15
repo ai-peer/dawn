@@ -237,16 +237,13 @@ func (r *roller) roll(ctx context.Context) error {
 		return fmt.Errorf("failed to load expectations: %v", err)
 	}
 
-	// If the user requested a full rebuild of the expecations, strip out
+	// If the user requested a full rebuild of the expectations, strip out
 	// everything but comment chunks.
 	if r.flags.rebuild {
 		rebuilt := ex.Clone()
 		rebuilt.Chunks = rebuilt.Chunks[:0]
 		for _, c := range ex.Chunks {
-			switch {
-			case c.IsBlankLine():
-				rebuilt.MaybeAddBlankLine()
-			case c.IsCommentOnly():
+			if c.IsCommentOnly() {
 				rebuilt.Chunks = append(rebuilt.Chunks, c)
 			}
 		}
