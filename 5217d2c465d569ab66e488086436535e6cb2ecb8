@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "321f529d_fdb2bcca",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-15T11:35:48Z",
+      "side": 1,
+      "message": "Why we need this change? Switching buffer in device context is not cost free as well.",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6160c030_c3ebe809",
@@ -14,6 +37,52 @@
       "writtenOn": "2023-09-15T01:17:48Z",
       "side": 1,
       "message": "PTAL",
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35af1f03_878e6098",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-15T11:35:48Z",
+      "side": 1,
+      "message": "nit: `/*indirect\u003d*/`",
+      "range": {
+        "startLine": 401,
+        "startChar": 51,
+        "endLine": 401,
+        "endChar": 59
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7a714b4d_faa37aef",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-15T11:35:48Z",
+      "side": 1,
+      "message": "nit: I think we use `mD3d11` instead of `mD3D11` elsewhere.",
+      "range": {
+        "startLine": 79,
+        "startChar": 26,
+        "endLine": 79,
+        "endChar": 31
+      },
       "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
