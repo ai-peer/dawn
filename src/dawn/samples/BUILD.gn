@@ -80,3 +80,27 @@ sample("ManualSwapChainTest") {
 sample("DawnInfo") {
   sources = [ "DawnInfo.cpp" ]
 }
+
+executable("Conv1x1") {
+  sources = [ "Conv1x1.cpp" ]
+  deps = [
+    "${dawn_root}/src/dawn:cpp",
+    "${dawn_root}/src/dawn:proc_shared",
+    "${dawn_root}/src/dawn/native",
+    # "${dawn_root}/third_party/abseil-cpp/absl/flags:flag",
+    # "${dawn_root}/third_party/abseil-cpp/absl/flags:flag_parse",
+  ]
+  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
+}
+
+executable("Conv1x1Subgroups") {
+  sources = [ "Conv1x1Subgroups.cpp" ]
+  deps = [
+    "${dawn_root}/src/dawn:cpp",
+    "${dawn_root}/src/dawn:proc_shared",
+    "${dawn_root}/src/dawn/native",
+    # "${dawn_root}/third_party/abseil-cpp/absl/flags:flag",
+    # "${dawn_root}/third_party/abseil-cpp/absl/flags:flag_parse",
+  ]
+  configs += [ "${dawn_root}/src/dawn/common:internal_config" ]
+}
