@@ -1996,6 +1996,15 @@
             {"name": "future", "value": 1},
             {"name": "process events", "value": 2},
             {"name": "spontaneous", "value": 4}
+
+        ]
+    },
+    "new callback mode": {
+        "category": "enum",
+        "values": [
+            {"name": "wait any only", "value": 0},
+            {"name": "allow process events", "value": 1},
+            {"name": "allow spontaneous", "value": 2}
         ]
     },
     "future": {
