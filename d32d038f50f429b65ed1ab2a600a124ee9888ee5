@@ -46,6 +46,30 @@
       },
       "revId": "d32d038f50f429b65ed1ab2a600a124ee9888ee5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc8b3f06_afcc96d5",
+        "filename": "src/tint/lang/spirv/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-15T23:32:00Z",
+      "side": 1,
+      "message": "Ack, thanks.",
+      "parentUuid": "63d59651_4f83bac2",
+      "range": {
+        "startLine": 842,
+        "startChar": 23,
+        "endLine": 842,
+        "endChar": 31
+      },
+      "revId": "d32d038f50f429b65ed1ab2a600a124ee9888ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
