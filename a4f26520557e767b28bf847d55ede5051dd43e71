@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "19857fa5_abf09cb2",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-15T18:10:52Z",
+      "side": 1,
+      "message": "Yea, I didn\u0027t implement them for `out` types yet atm. Feel free to add those. If not, you can add a TODO to https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1955 here and I\u0027ll get back to finishing implementing the helpers and cleaning up the codebase eventually...",
+      "parentUuid": "408271ae_a79e4add",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9df26a31_16af527f",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 5
@@ -137,6 +155,24 @@
       "side": 1,
       "message": "I understand that this works, but IIRC it is not the semantic we are going for with out chained structs. But I may be wrong. Austin or Loko do you remember if we decided for webgpu-native?",
       "parentUuid": "e186b330_92a19966",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ec120d_b14bf59e",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-15T18:10:52Z",
+      "side": 1,
+      "message": "I think the decision was more complicated... https://github.com/webgpu-native/webgpu-headers/issues/115. IIUC, the decision is basically to add an enum on all `out` structs and set it to something like `Success` or `Failure` to indicate whether it was populated. Assuming we do that, I think the implication is that the returned `bool` would eventually go away? So maybe this is fine?",
+      "parentUuid": "ed014a76_46558b9d",
       "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
