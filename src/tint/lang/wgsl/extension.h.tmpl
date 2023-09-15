@@ -8,7 +8,7 @@ See:
 --------------------------------------------------------------------------------
 */ -}}
 
-{{- $I := LoadIntrinsics "src/tint/lang/core/core.def" -}}
+{{- $I := LoadIntrinsics "src/tint/lang/wgsl/wgsl.def" -}}
 {{- Import "src/tint/utils/templates/enums.tmpl.inc" -}}
 {{- $enum := ($I.Sem.Enum "extension") -}}
 
@@ -18,7 +18,7 @@ See:
 #include "src/tint/utils/traits/traits.h"
 #include "src/tint/utils/containers/unique_vector.h"
 
-namespace tint::core {
+namespace tint::wgsl {
 
 /// An enumerator of WGSL extensions
 /// @see src/tint/lang/wgsl/intrinsics.def for extension descriptions
@@ -27,6 +27,6 @@ namespace tint::core {
 // A unique vector of extensions
 using Extensions = UniqueVector<Extension, 4>;
 
-}  // namespace tint::core
+}  // namespace tint::wgsl
 
 #endif  // SRC_TINT_LANG_CORE_EXTENSION_H_

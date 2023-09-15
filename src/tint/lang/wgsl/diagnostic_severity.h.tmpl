@@ -8,7 +8,7 @@ See:
 --------------------------------------------------------------------------------
 */ -}}
 
-{{- $I := LoadIntrinsics "src/tint/lang/core/core.def" -}}
+{{- $I := LoadIntrinsics "src/tint/lang/wgsl/wgsl.def" -}}
 {{- Import "src/tint/utils/templates/enums.tmpl.inc" -}}
 
 #ifndef SRC_TINT_LANG_CORE_DIAGNOSTIC_SEVERITY_H_
@@ -18,10 +18,10 @@ See:
 #include <unordered_map>
 
 #include "src/tint/utils/traits/traits.h"
-#include "src/tint/lang/core/diagnostic_rule.h"
+#include "src/tint/lang/wgsl/diagnostic_rule.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
 
-namespace tint::core {
+namespace tint::wgsl {
 
 /// The diagnostic severity control.
 {{ Eval "DeclareEnum" ($I.Sem.Enum "diagnostic_severity") }}
@@ -32,6 +32,6 @@ diag::Severity ToSeverity(DiagnosticSeverity sc);
 /// DiagnosticRuleSeverities is a map from diagnostic rule to diagnostic severity.
 using DiagnosticRuleSeverities = std::unordered_map<DiagnosticRule, DiagnosticSeverity>;
 
-}  // namespace tint::core
+}  // namespace tint::wgsl
 
 #endif  // SRC_TINT_LANG_CORE_DIAGNOSTIC_SEVERITY_H_
