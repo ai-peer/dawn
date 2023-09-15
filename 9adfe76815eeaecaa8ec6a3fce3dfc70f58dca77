@@ -63,6 +63,23 @@
       },
       "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10473a0d_11939ae0",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-15T17:03:22Z",
+      "side": 1,
+      "message": "IMHO we could store the views in the d3d11::BindGroup which would be most similar to what other backends are doing and would provide decent caching? Creating RTVs and DSVs doesn\u0027t seem too hot so that\u0027d be ok? We could also reorder bindings in the bindgroup to set a whole bunch of bindings at once in the BindGroupTracker instead of one by one.",
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
