@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f85e698_d9ac1c77",
+        "filename": "src/tint/lang/core/ir/transform/shader_io.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-15T20:47:56Z",
+      "side": 1,
+      "message": "nit: I\u0027d use `std::optional` instead of magic numbers",
+      "range": {
+        "startLine": 109,
+        "startChar": 8,
+        "endLine": 109,
+        "endChar": 16
+      },
+      "revId": "b755286464e9370a51c4fb8c808e34218a070715",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
