@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fec650ac_9555e9b2",
+        "filename": "src/dawn/native/VertexFormat.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-15T15:07:42Z",
+      "side": 1,
+      "message": "Once https://dawn-review.googlesource.com/c/dawn/+/151720 is merged, I\u0027ll rebase this CL.",
+      "parentUuid": "3f7bea77_fd8f7113",
+      "revId": "2484794b89325521e0090155026e5ff21fe91e42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0a48b1a_44abb17e",
