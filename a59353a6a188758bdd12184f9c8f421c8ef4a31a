@@ -16,6 +16,23 @@
       "message": "I wasn\u0027t sure what to do for the DeviceBase empty constructor. It has no info to choose compat vs core.",
       "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe934ad6_2e460e4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-15T02:19:25Z",
+      "side": 1,
+      "message": "didn\u0027t get to this today and probably will be OOO tomorrow; maybe Loko will have a chance to take a look",
+      "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
