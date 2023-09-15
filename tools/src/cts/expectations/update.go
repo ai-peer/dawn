@@ -306,19 +306,49 @@ func (u *updater) preserveRetryOnFailures() error {
 // build first appends to u.out all chunks from 'u.in' with expectations updated
 // using the new results, and then appends any new expectations to u.out.
 func (u *updater) build() error {
-	// Update all the existing chunks
-	for _, in := range u.in.Chunks {
-		out := u.chunk(in)
+	// Bin the chunks into those marked 'KEEP' or 'BEGIN TAG HEADER' and those
+	// that do not have these markers.
+	immutableChunks, mutableChunks := []Chunk{}, []Chunk{}
+	for _, chunk := range u.in.Chunks {
+		// Does the chunk comment contain 'KEEP' or 'BEGIN TAG HEADER' ?
+		keep := len(chunk.Expectations) == 0
+		for _, l := range chunk.Comments {
+			if strings.Contains(l, "KEEP") || strings.Contains(l, "BEGIN TAG HEADER") {
+				keep = true
+				break
+			}
+		}
+		if keep {
+			immutableChunks = append(immutableChunks, chunk)
+		} else {
+			mutableChunks = append(mutableChunks, chunk)
+		}
+	}
 
-		// If all chunk had expectations, but now they've gone, remove the chunk
-		if len(in.Expectations) > 0 && len(out.Expectations) == 0 {
-			continue
+	// Update all the existing chunks in two passes - those that are immutable
+	// then those that are mutable. We do this because the former can't be
+	// altered and may declare expectations that may collide with later
+	// expectations.
+	for _, group := range []struct {
+		chunks    []Chunk
+		immutable bool
+	}{
+		{immutableChunks, true},
+		{mutableChunks, false},
+	} {
+		for _, in := range group.chunks {
+			out := u.chunk(in, group.immutable)
+
+			// If all chunk had expectations, but now they've gone, remove the chunk
+			if len(in.Expectations) > 0 && len(out.Expectations) == 0 {
+				continue
+			}
+			if out.IsBlankLine() {
+				u.out.MaybeAddBlankLine()
+				continue
+			}
+			u.out.Chunks = append(u.out.Chunks, out)
 		}
-		if out.IsBlankLine() {
-			u.out.MaybeAddBlankLine()
-			continue
-		}
-		u.out.Chunks = append(u.out.Chunks, out)
 	}
 
 	// Emit new expectations (flaky, failing)
@@ -330,25 +360,18 @@ func (u *updater) build() error {
 }
 
 // chunk returns a new Chunk, based on 'in', with the expectations updated.
-func (u *updater) chunk(in Chunk) Chunk {
+// immutable is true if the chunk is labelled with 'KEEP' or 'BEGIN TAG HEADER'.
+func (u *updater) chunk(in Chunk, immutable bool) Chunk {
 	if len(in.Expectations) == 0 {
 		return in // Just a comment / blank line
 	}
 
 	// Skip over any untriaged failures / flake chunks.
 	// We'll just rebuild them at the end.
-	if len(in.Comments) > 0 {
-		switch in.Comments[0] {
-		case newFailuresComment, newFlakesComment:
+	for _, line := range in.Comments {
+		if strings.HasPrefix(line, newFailuresComment) ||
+			strings.HasPrefix(line, newFlakesComment) {
 			return Chunk{}
-		}
-	}
-
-	keep := false // Does the chunk comment contain 'KEEP' ?
-	for _, l := range in.Comments {
-		if strings.Contains(l, "KEEP") {
-			keep = true
-			break
 		}
 	}
 
@@ -358,7 +381,7 @@ func (u *updater) chunk(in Chunk) Chunk {
 
 	// Build the new chunk's expectations
 	for _, exIn := range in.Expectations {
-		exOut := u.expectation(exIn, keep)
+		exOut := u.expectation(exIn, immutable)
 		out.Expectations = append(out.Expectations, exOut...)
 	}
 
@@ -369,7 +392,7 @@ func (u *updater) chunk(in Chunk) Chunk {
 
 // expectation returns a new list of Expectations, based on the Expectation 'in',
 // using the new result data.
-func (u *updater) expectation(in Expectation, keep bool) []Expectation {
+func (u *updater) expectation(in Expectation, immutable bool) []Expectation {
 	// noResults is a helper for returning when the expectation has no test
 	// results.
 	noResults := func() []Expectation {
@@ -404,7 +427,7 @@ func (u *updater) expectation(in Expectation, keep bool) []Expectation {
 	// expectationsForRoot()
 	defer u.qt.markAsConsumed(q, in.Tags, in.Line)
 
-	if keep { // Expectation chunk was marked with 'KEEP'
+	if immutable { // Expectation chunk was marked with 'KEEP'
 		// Add a diagnostic if all tests of the expectation were 'Pass'
 		if s := results.Statuses(); len(s) == 1 && s.One() == result.Pass {
 			if ex := container.NewSet(in.Status...); len(ex) == 1 && ex.One() == string(result.Slow) {
@@ -494,7 +517,11 @@ func (u *updater) addNewExpectations() error {
 		if len(group.results) > 0 {
 			u.out.MaybeAddBlankLine()
 			u.out.Chunks = append(u.out.Chunks, Chunk{
-				Comments:     []string{group.comment},
+				Comments: []string{
+					"################################################################################",
+					group.comment,
+					"################################################################################",
+				},
 				Expectations: group.results,
 			})
 		}
@@ -627,9 +654,9 @@ func (u *updater) cleanupTags(results result.List) result.List {
 // tree nodes with the same status.
 // treeReducer will collapse trees nodes if any of the following are true:
 //   - All child nodes have the same status
-//   - More than 75% of the child nodes have a non-pass status, and none of the
+//   - More than 50% of the child nodes have a non-pass status, and none of the
 //     children are consumed.
-//   - There are more than 20 child nodes with a non-pass status, and none of the
+//   - There are more than 10 child nodes with a non-pass status, and none of the
 //     children are consumed.
 func treeReducer(statuses []result.Status) *result.Status {
 	counts := map[result.Status]int{}
@@ -646,8 +673,8 @@ func treeReducer(statuses []result.Status) *result.Status {
 	highestNonPassStatus := result.Failure
 	for s, n := range counts {
 		if s != result.Pass {
-			if percent := (100 * n) / len(statuses); percent > 75 {
-				// Over 75% of all the children are of non-pass status s.
+			if percent := (100 * n) / len(statuses); percent > 50 {
+				// Over 50% of all the children are of non-pass status s.
 				return &s
 			}
 			if n > highestNonPassCount {
@@ -657,8 +684,8 @@ func treeReducer(statuses []result.Status) *result.Status {
 		}
 	}
 
-	if highestNonPassCount > 20 {
-		// Over 20 child node failed.
+	if highestNonPassCount > 10 {
+		// Over 10 child node failed.
 		return &highestNonPassStatus
 	}
 
