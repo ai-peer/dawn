@@ -364,9 +364,10 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
     if (!allowedSharedTextureMemoryUsage) {
         // Legacy path
         // TODO(crbug.com/dawn/1795): Remove after migrating all old usages.
-        // Only allows simple readonly texture usages.
-        wgpu::TextureUsage validMultiPlanarUsages =
-            wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc;
+        // Only allows simple readonly texture usages and RenderAttachment.
+        wgpu::TextureUsage validMultiPlanarUsages = wgpu::TextureUsage::TextureBinding |
+                                                    wgpu::TextureUsage::CopySrc |
+                                                    wgpu::TextureUsage::RenderAttachment;
         if (device->HasFeature(Feature::MultiPlanarFormatExtendedUsages)) {
             validMultiPlanarUsages |= wgpu::TextureUsage::CopyDst;
         }
@@ -1060,6 +1061,19 @@ Aspect TextureViewBase::GetAspects() const {
 const Format& TextureViewBase::GetFormat() const {
     DAWN_ASSERT(!IsError());
     return mFormat;
+}
+
+Extent3D TextureViewBase::GetSize() const {
+    DAWN_ASSERT(!IsError());
+    Aspect aspect = GetAspects();
+    Extent3D size = GetTexture()->GetSize();
+    // TODO(buglink): Possibly add support for multiplanar formats with plane configs different than
+    // Y_UV and subsampling other than 4:2:0 in which case the size changes for different aspects.
+    if (aspect & Aspect::Plane1) {
+        size.width /= 2;
+        size.height /= 2;
+    }
+    return size;
 }
 
 wgpu::TextureViewDimension TextureViewBase::GetDimension() const {
