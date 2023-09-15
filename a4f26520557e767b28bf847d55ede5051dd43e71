@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "408271ae_a79e4add",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-15T14:02:44Z",
+      "side": 1,
+      "message": "We could generate these helpers for out chained objects as well.",
+      "parentUuid": "f1ca6d75_7c8cbc2e",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9df26a31_16af527f",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 5
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "We can trigger an error in Dawn Native, where we have access to adapters and devices\u0027 toggles state. But currently in Dawn Wire and Blink renderer, we don\u0027t track the toggles state, but we need to construct the input chain there.\n\nIf we return default value (`WGPU_LIMIT_U32_UNDEFINED`) as least in Dawn Wire, we can always chain the `DawnExperimentalSubgroupLimits`. If we decide to result in error, than I thought we have to add toggles state record for at least adapters and devices in Dawn Wire and Blnik renderer.",
       "parentUuid": "9df26a31_16af527f",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed014a76_46558b9d",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-15T14:02:44Z",
+      "side": 1,
+      "message": "I understand that this works, but IIRC it is not the semantic we are going for with out chained structs. But I may be wrong. Austin or Loko do you remember if we decided for webgpu-native?",
+      "parentUuid": "e186b330_92a19966",
       "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
