@@ -22,6 +22,30 @@
       },
       "revId": "d32d038f50f429b65ed1ab2a600a124ee9888ee5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "63d59651_4f83bac2",
+        "filename": "src/tint/lang/spirv/writer/raise/builtin_polyfill.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 842,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-15T21:06:42Z",
+      "side": 1,
+      "message": "The argument is never a pointer, so there\u0027s no loads and stores here.",
+      "parentUuid": "e70aca87_12254d11",
+      "range": {
+        "startLine": 842,
+        "startChar": 23,
+        "endLine": 842,
+        "endChar": 31
+      },
+      "revId": "d32d038f50f429b65ed1ab2a600a124ee9888ee5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
