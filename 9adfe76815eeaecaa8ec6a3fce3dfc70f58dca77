@@ -80,6 +80,24 @@
       "message": "IMHO we could store the views in the d3d11::BindGroup which would be most similar to what other backends are doing and would provide decent caching? Creating RTVs and DSVs doesn\u0027t seem too hot so that\u0027d be ok? We could also reorder bindings in the bindgroup to set a whole bunch of bindings at once in the BindGroupTracker instead of one by one.",
       "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43a9752d_13137c27",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-15T18:24:28Z",
+      "side": 1,
+      "message": "Graphite recreates BindGroup for each draw, it doesn\u0027t cache and reuse BindGroups.\n\nCreating RTVs and DSVs consume 2.82% and 1.68% of total CPU time. See crbug.com/1481660",
+      "parentUuid": "10473a0d_11939ae0",
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
