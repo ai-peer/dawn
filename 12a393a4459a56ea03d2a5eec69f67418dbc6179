@@ -22,6 +22,30 @@
       },
       "revId": "12a393a4459a56ea03d2a5eec69f67418dbc6179",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba01cb01_93219e87",
+        "filename": "src/tint/lang/spirv/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1888,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-15T21:05:29Z",
+      "side": 1,
+      "message": "That\u0027s right. Prior to SPIR-V 1.4 you\u0027re only allowed to use this on storage textures and block structs in the `Uniform` and `StorageBuffer` storage classes.",
+      "parentUuid": "7f6ef979_b5755bb5",
+      "range": {
+        "startLine": 1888,
+        "startChar": 22,
+        "endLine": 1888,
+        "endChar": 56
+      },
+      "revId": "12a393a4459a56ea03d2a5eec69f67418dbc6179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
