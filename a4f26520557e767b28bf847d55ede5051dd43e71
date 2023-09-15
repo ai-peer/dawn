@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f1ca6d75_7c8cbc2e",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "If I get it right, currently `ValidateAndUnpackChain` only works for `in` type of chain instead of `out`, as this helper function copy the possible chained structures to the returned object. And currently the `ValidateAndUnpackChain` is actually not generated for any `out` type chain.\n\nBut the proposed `DawnExperimentalSubgroupLimits` is `out` type chained object, and we have to modify the given object in order to return the value to caller, instead of get a copy and use the value.\n\nSo I thought we can\u0027t use `ValidateAndUnpackChain` here?",
+      "parentUuid": "b3c9b30c_fb4a991c",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9df26a31_16af527f",
         "filename": "src/dawn/native/Adapter.cpp",
         "patchSetId": 5
@@ -71,6 +89,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e186b330_92a19966",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "We can trigger an error in Dawn Native, where we have access to adapters and devices\u0027 toggles state. But currently in Dawn Wire and Blink renderer, we don\u0027t track the toggles state, but we need to construct the input chain there.\n\nIf we return default value (`WGPU_LIMIT_U32_UNDEFINED`) as least in Dawn Wire, we can always chain the `DawnExperimentalSubgroupLimits`. If we decide to result in error, than I thought we have to add toggles state record for at least adapters and devices in Dawn Wire and Blnik renderer.",
+      "parentUuid": "9df26a31_16af527f",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2ba2087_3a60ef7e",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
@@ -82,6 +118,24 @@
       "writtenOn": "2023-09-13T15:32:39Z",
       "side": 1,
       "message": "It\u0027s weird to use the API for this, can\u0027t we just have a getter?",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5daca775_4a2d08b3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "Done, get it directly from physical device.",
+      "parentUuid": "a2ba2087_3a60ef7e",
       "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +174,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5792f3a8_b8746ed8",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 21,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "818933d9_84fb9a1b",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3a5db46c_a1443f2a",
@@ -143,6 +215,47 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9d54372_35949433",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3a5db46c_a1443f2a",
+      "range": {
+        "startLine": 517,
+        "startChar": 50,
+        "endLine": 517,
+        "endChar": 65
+      },
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20872a0b_bf8b1a65",
+        "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50aa2d34_6b51ae4b",
@@ -162,6 +275,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "104e4609_2958493b",
+        "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "Return `false` here if `sType` is unknown: done.\n\nI am not sure about the validation on extension (feature) or toggles, since that might introduce complexity in Blink renderer when handling limits.",
+      "parentUuid": "50aa2d34_6b51ae4b",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fd46a423_a95273f3",
         "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
         "patchSetId": 5
@@ -173,6 +304,30 @@
       "writtenOn": "2023-09-13T15:32:39Z",
       "side": 1,
       "message": "nit: not needed.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "688e677b_733cab42",
+        "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-15T09:15:02Z",
+      "side": 1,
+      "message": "I thought the assignment [1] would also set the `chain-\u003enext` field and break the chain pointer?",
+      "parentUuid": "fd46a423_a95273f3",
       "range": {
         "startLine": 46,
         "startChar": 0,
