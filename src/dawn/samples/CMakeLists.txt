@@ -63,3 +63,25 @@ add_executable(DawnInfo "DawnInfo.cpp")
 common_compile_options(DawnInfo)
 target_link_libraries(DawnInfo dawn_sample_utils)
 
+add_executable(Conv1x1 "Conv1x1.cpp")
+target_link_libraries(Conv1x1
+    dawn_internal_config
+    dawncpp
+    dawn_proc
+    dawn_native
+    absl_flags
+    absl_flags_parse)
+
+find_package(OpenCL REQUIRED)
+target_link_libraries(Conv1x1 OpenCL::OpenCL)
+
+add_executable(Conv1x1Subgroups "Conv1x1Subgroups.cpp")
+target_link_libraries(Conv1x1Subgroups
+    dawn_internal_config
+    dawncpp
+    dawn_proc
+    dawn_native
+    absl_flags
+    absl_flags_parse)
+
+target_link_libraries(Conv1x1Subgroups OpenCL::OpenCL)
