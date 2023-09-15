@@ -43,8 +43,7 @@ struct InstanceDescriptor;
 // There are various ways to optimize ProcessEvents/WaitAny:
 // - TODO(crbug.com/dawn/2064) Only pay attention to the earliest serial on each queue.
 // - TODO(crbug.com/dawn/2059) Spontaneously set events as "early-ready" in other places when we see
-//   serials advance, e.g.
-//   Submit, or when checking a later wait before an earlier wait.
+//   serials advance, e.g. Submit, or when checking a later wait before an earlier wait.
 // - TODO(crbug.com/dawn/2049) For thread-driven events (async pipeline compilation and Metal queue
 //   events), defer tracking for ProcessEvents until the event is already completed.
 // - TODO(crbug.com/dawn/2051) Avoid creating OS events until they're actually needed (see the todo
@@ -69,11 +68,14 @@ class EventManager final : NonMovable {
                                            Nanoseconds timeout);
 
   private:
+    using EventMap = std::unordered_map<FutureID, Ref<TrackedEvent>>;
     struct Trackers : dawn::NonMovable {
         // Tracks Futures (used by WaitAny).
-        MutexProtected<std::unordered_map<FutureID, Ref<TrackedEvent>>> futures;
+        EventMap futures;
         // Tracks events polled by ProcessEvents.
-        MutexProtected<std::unordered_map<FutureID, Ref<TrackedEvent>>> pollEvents;
+        EventMap pollEvents;
+        // Tracks spontaneous events used by both WaitAny and ProcessEvents.
+        EventMap spontaneousEvents;
     };
 
     bool mTimedWaitAnyEnable = false;
@@ -82,7 +84,7 @@ class EventManager final : NonMovable {
 
     // Freed once the user has dropped their last ref to the Instance, so can't call WaitAny or
     // ProcessEvents anymore. This breaks reference cycles.
-    std::optional<Trackers> mTrackers;
+    std::optional<MutexProtected<Trackers>> mTrackers;
 };
 
 // Base class for the objects that back WGPUFutures. TrackedEvent is responsible for the lifetime
