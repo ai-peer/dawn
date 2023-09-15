@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f6ef979_b5755bb5",
+        "filename": "src/tint/lang/spirv/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1888,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-15T20:52:03Z",
+      "side": 1,
+      "message": "This is only required for a pointer to a storage-texture and structure, and not to any other type? e.g. you can\u0027t apply the decoration to a `ptr\u003ci32\u003e`?",
+      "range": {
+        "startLine": 1888,
+        "startChar": 22,
+        "endLine": 1888,
+        "endChar": 56
+      },
+      "revId": "12a393a4459a56ea03d2a5eec69f67418dbc6179",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
