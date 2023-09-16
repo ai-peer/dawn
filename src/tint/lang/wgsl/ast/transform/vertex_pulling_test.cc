@@ -1000,6 +1000,7 @@ fn main(
     @location(11) float32x2 : vec2<f32>,
     @location(12) float32x3 : vec3<f32>,
     @location(13) float32x4 : vec4<f32>,
+    @location(14) rgb10a2 : vec4<f32>,
   ) -> @builtin(position) vec4<f32> {
   return vec4<f32>(0.0, 0.0, 0.0, 1.0);
 }
@@ -1028,6 +1029,7 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
   var float32x2 : vec2<f32>;
   var float32x3 : vec3<f32>;
   var float32x4 : vec4<f32>;
+  var rgb10a2 : vec4<f32>;
   {
     let buffer_array_base_0 = (tint_pulling_vertex_index * 64u);
     unorm8x2 = unpack4x8unorm((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] & 65535u)).xy;
@@ -1044,6 +1046,7 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
     float32x2 = vec2<f32>(bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)]));
     float32x3 = vec3<f32>(bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)]));
     float32x4 = vec4<f32>(bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 19u)]));
+    rgb10a2 = (vec4<f32>(((vec4<u32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]) >> vec4<u32>(0u, 10u, 20u, 30u)) & vec4<u32>(1023u, 1023u, 1023u, 3u))) / vec4<f32>(1023.0f, 1023.0f, 1023.0f, 3.0f));
   }
   return vec4<f32>(0.0, 0.0, 0.0, 1.0);
 }
@@ -1067,6 +1070,7 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
                               {VertexFormat::kFloat32x2, 64, 11},
                               {VertexFormat::kFloat32x3, 64, 12},
                               {VertexFormat::kFloat32x4, 64, 13},
+                              {VertexFormat::kRgb10a2, 64, 14},
                           }}}};
 
     DataMap data;
@@ -1332,6 +1336,7 @@ fn main(
     @location(11) float32x2 : vec2<f32>,
     @location(12) float32x3 : vec3<f32>,
     @location(13) float32x4 : vec4<f32>,
+    @location(14) rgb10a2 : vec4<f32>,
   ) -> @builtin(position) vec4<f32> {
   return vec4<f32>(0.0, 0.0, 0.0, 1.0);
 }
@@ -1360,6 +1365,7 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
   var float32x2 : vec2<f32>;
   var float32x3 : vec3<f32>;
   var float32x4 : vec4<f32>;
+  var rgb10a2 : vec4<f32>;
   {
     let buffer_array_base_0 = (tint_pulling_vertex_index * 64u);
     unorm8x2 = unpack4x8unorm((((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] << 8u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 15u)] >> 24u)) & 65535u)).xy;
@@ -1376,6 +1382,7 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
     float32x2 = vec2<f32>(bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 15u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] << 8u))), bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)] << 8u))));
     float32x3 = vec3<f32>(bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 15u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] << 8u))), bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)] << 8u))), bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)] << 8u))));
     float32x4 = vec4<f32>(bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 15u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] << 8u))), bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)] << 8u))), bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)] << 8u))), bitcast<f32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 19u)] << 8u))));
+    rgb10a2 = (vec4<f32>(((vec4<u32>(((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 15u)] >> 24u) | (tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] << 8u))) >> vec4<u32>(0u, 10u, 20u, 30u)) & vec4<u32>(1023u, 1023u, 1023u, 3u))) / vec4<f32>(1023.0f, 1023.0f, 1023.0f, 3.0f));
   }
   return vec4<f32>(0.0, 0.0, 0.0, 1.0);
 }
@@ -1399,6 +1406,7 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
                               {VertexFormat::kFloat32x2, 63, 11},
                               {VertexFormat::kFloat32x3, 63, 12},
                               {VertexFormat::kFloat32x4, 63, 13},
+                              {VertexFormat::kRgb10a2, 63, 14},
                           }}}};
 
     DataMap data;
@@ -2088,6 +2096,9 @@ fn main(
     @location(23) sclr_float32x4 :      f32 ,
     @location(24) vec2_float32x4 : vec2<f32>,
     @location(25) vec3_float32x4 : vec3<f32>,
+    @location(26) sclr_rgb10a2   :      f32 ,
+    @location(27) vec2_rgb10a2   : vec2<f32>,
+    @location(28) vec3_rgb10a2   : vec3<f32>,
   ) -> @builtin(position) vec4<f32> {
   return vec4<f32>(0.0, 0.0, 0.0, 1.0);
 }
@@ -2128,6 +2139,9 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
   var sclr_float32x4 : f32;
   var vec2_float32x4 : vec2<f32>;
   var vec3_float32x4 : vec3<f32>;
+  var sclr_rgb10a2 : f32;
+  var vec2_rgb10a2 : vec2<f32>;
+  var vec3_rgb10a2 : vec3<f32>;
   {
     let buffer_array_base_0 = (tint_pulling_vertex_index * 64u);
     sclr_unorm8x2 = unpack4x8unorm((tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)] & 65535u)).xy.x;
@@ -2156,6 +2170,9 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
     sclr_float32x4 = vec4<f32>(bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 19u)])).x;
     vec2_float32x4 = vec4<f32>(bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 19u)])).xy;
     vec3_float32x4 = vec4<f32>(bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 17u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 18u)]), bitcast<f32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 19u)])).xyz;
+    sclr_rgb10a2 = ((vec4<f32>(((vec4<u32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]) >> vec4<u32>(0u, 10u, 20u, 30u)) & vec4<u32>(1023u, 1023u, 1023u, 3u))) / vec4<f32>(1023.0f, 1023.0f, 1023.0f, 3.0f))).x;
+    vec2_rgb10a2 = ((vec4<f32>(((vec4<u32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]) >> vec4<u32>(0u, 10u, 20u, 30u)) & vec4<u32>(1023u, 1023u, 1023u, 3u))) / vec4<f32>(1023.0f, 1023.0f, 1023.0f, 3.0f))).xy;
+    vec3_rgb10a2 = ((vec4<f32>(((vec4<u32>(tint_pulling_vertex_buffer_0.tint_vertex_data[(buffer_array_base_0 + 16u)]) >> vec4<u32>(0u, 10u, 20u, 30u)) & vec4<u32>(1023u, 1023u, 1023u, 3u))) / vec4<f32>(1023.0f, 1023.0f, 1023.0f, 3.0f))).xyz;
   }
   return vec4<f32>(0.0, 0.0, 0.0, 1.0);
 }
@@ -2179,6 +2196,8 @@ fn main(@builtin(vertex_index) tint_pulling_vertex_index : u32) -> @builtin(posi
               {VertexFormat::kFloat32x2, 64, 20}, {VertexFormat::kFloat32x3, 64, 21},
               {VertexFormat::kFloat32x3, 64, 22}, {VertexFormat::kFloat32x4, 64, 23},
               {VertexFormat::kFloat32x4, 64, 24}, {VertexFormat::kFloat32x4, 64, 25},
+              {VertexFormat::kRgb10a2, 64, 26},   {VertexFormat::kRgb10a2, 64, 27},
+              {VertexFormat::kRgb10a2, 64, 28},
           }}}};
 
     DataMap data;
