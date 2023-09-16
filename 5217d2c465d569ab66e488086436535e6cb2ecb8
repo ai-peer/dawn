@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc7b0161_15158ced",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-16T06:07:21Z",
+      "side": 1,
+      "message": "Refined to only re-bind the uniform buffer in case that there is an actual direct/indirect switching from clients. It should be rare that the switching from clients is very frequent.\n\n\nAccording to the quotes of manual below, D3D11_USAGE_DYNAMIC+D3D11_MAP_WRITE_DISCARD is the most recommended way for uniform buffer use, as updating the buffer doesn\u0027t incur any CPU-GPU wait.\n\n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d11/ne-d3d11-d3d11_usage\n\u003eD3D11_USAGE_DYNAMIC usage is a special case that optimizes the flow of data from CPU to GPU when the CPU generates that data on-the-fly and sends that data with high frequency. D3D11_USAGE_DYNAMIC is typically used on resources with vertex data and on constant buffers. Use the ID3D11DeviceContext::Map and ID3D11DeviceContext::Unmap methods to write data to these resources. To achieve the highest performance for data consumed serially, like vertex data, use the D3D11_MAP_WRITE_NO_OVERWRITE and D3D11_MAP_WRITE_DISCARD sequence.\n\n\nhttps://learn.microsoft.com/en-us/windows/win32/direct3d11/how-to--use-dynamic-resources\n\u003eTo receive a performance improvement when you use dynamic vertex buffers, your app must call Map with the appropriate D3D11_MAP values. D3D11_MAP_WRITE_DISCARD indicates that the app doesn\u0027t need to keep the old vertex or index data in the buffer. If the GPU is still using the buffer when you call Map with D3D11_MAP_WRITE_DISCARD, the runtime returns a pointer to a new region of memory instead of the old buffer data. This allows the GPU to continue using the old data while the app places data in the new buffer.",
+      "parentUuid": "321f529d_fdb2bcca",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6160c030_c3ebe809",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dc59f24_c551f223",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-16T06:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35af1f03_878e6098",
+      "range": {
+        "startLine": 401,
+        "startChar": 51,
+        "endLine": 401,
+        "endChar": 59
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7a714b4d_faa37aef",
@@ -77,6 +125,30 @@
       "writtenOn": "2023-09-15T11:35:48Z",
       "side": 1,
       "message": "nit: I think we use `mD3d11` instead of `mD3D11` elsewhere.",
+      "range": {
+        "startLine": 79,
+        "startChar": 26,
+        "endLine": 79,
+        "endChar": 31
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8fb1e13_06a621ce",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-16T06:07:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a714b4d_faa37aef",
       "range": {
         "startLine": 79,
         "startChar": 26,
