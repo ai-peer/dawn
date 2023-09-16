@@ -110,6 +110,30 @@
       },
       "revId": "2484794b89325521e0090155026e5ff21fe91e42",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c6a1687_c828283d",
+        "filename": "src/dawn/native/VertexFormat.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-16T06:23:52Z",
+      "side": 1,
+      "message": "Not anymore since I rebased it.",
+      "parentUuid": "d0a48b1a_44abb17e",
+      "range": {
+        "startLine": 59,
+        "startChar": 40,
+        "endLine": 59,
+        "endChar": 41
+      },
+      "revId": "2484794b89325521e0090155026e5ff21fe91e42",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
