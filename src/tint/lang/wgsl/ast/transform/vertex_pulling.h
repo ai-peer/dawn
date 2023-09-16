@@ -57,6 +57,7 @@ enum class VertexFormat {
     kSint32x2,   // sint32x2
     kSint32x3,   // sint32x3
     kSint32x4,   // sint32x4
+    kRgb10a2,    // rgb10a2
 
     kLastEntry = kSint32x4,
 };
