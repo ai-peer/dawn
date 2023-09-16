@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "637eba30_6ede6433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-16T00:18:47Z",
+      "side": 1,
+      "message": "Passes CQ, but there\u0027s some concurrency questions I want to make sure I understood correctly?",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a969992_c60878f1",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-16T00:18:47Z",
+      "side": 1,
+      "message": "This might be contingent on how we want to handle cases where users are either:\n(1) calling `WaitAny` concurrently with the same Future\n(2) calling `WaitAny` concurrently with a `ProcessEvents`\n\nBasically, in those cases, it\u0027s possible that we end up calling `WaitImpl` on the same `AllowProcessEvents` or `AllowSpontaneous` future. Two possible cases highlighted below\n\nCase 1\nt1: `WaitAny(Timeout)` acquires `mTracker` lock and populates `futures` with `e1`\nt2: `WaitAny(Spin)` acquires `mTracker` lock and populates `futures` with `e1`\nt1: `WaitAny(Timeout)` calls `WaitImpl` which `e1` successfully finishes in.\nt2: `WaitAny(Spin)` calls `WaitImpl`... (Does this hang? Naively it looks like `SystemEventReceiver` doesn\u0027t cache anything but it doesn\u0027t reset so I\u0027m not entirely sure I understand what happens here?)\n\nCase 2\nt1: `WaitAny(Spin)` acquires `mTracker` lock and populates `futures` with `e1`\nt2: `ProcessEvents` acquires `mTracker` lock, populates `futures` with `e1`, and finishes it.\nt1: `WaitAny(Spin)` calls `WaitImpl`... ^Same situation as above.",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 96
+      },
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
