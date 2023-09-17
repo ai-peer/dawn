@@ -179,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "92f72753_89e2d201",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T16:19:06Z",
+      "side": 1,
+      "message": "Is the decision to add an enum to all out structs or only the root out struct? Either way let\u0027s agree to this in webgpu-native and revisit here. Can we add a TODO associated with a corresponding issue for this in both Adapter.cpp and Device.cpp?",
+      "parentUuid": "a3ec120d_b14bf59e",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2ba2087_3a60ef7e",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
