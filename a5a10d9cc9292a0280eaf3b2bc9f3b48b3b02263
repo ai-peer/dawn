@@ -16,6 +16,23 @@
       "message": "I rebased this CL.",
       "revId": "a5a10d9cc9292a0280eaf3b2bc9f3b48b3b02263",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "42cab4f6_9338a22d",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T16:28:07Z",
+      "side": 1,
+      "message": "```suggestion\n        case interop::GPUVertexFormat::kRgb10A2:\n```",
+      "revId": "a5a10d9cc9292a0280eaf3b2bc9f3b48b3b02263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
