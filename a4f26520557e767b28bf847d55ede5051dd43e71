@@ -346,6 +346,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b39270_a6f876ae",
+        "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T16:21:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "20872a0b_bf8b1a65",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50aa2d34_6b51ae4b",
@@ -418,6 +436,30 @@
       "side": 1,
       "message": "I thought the assignment [1] would also set the `chain-\u003enext` field and break the chain pointer?",
       "parentUuid": "fd46a423_a95273f3",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 42
+      },
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2731ea_7367186d",
+        "filename": "src/dawn/wire/client/LimitsAndFeatures.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T16:21:37Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "688e677b_733cab42",
       "range": {
         "startLine": 46,
         "startChar": 0,
