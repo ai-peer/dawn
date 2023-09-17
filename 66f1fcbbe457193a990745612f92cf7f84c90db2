@@ -16,6 +16,23 @@
       "message": "PTAL, assuming the reporter of the issue confirms that it fixes things.",
       "revId": "66f1fcbbe457193a990745612f92cf7f84c90db2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d97075_e1f84b5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T17:25:59Z",
+      "side": 1,
+      "message": "Austin PTAL!",
+      "revId": "66f1fcbbe457193a990745612f92cf7f84c90db2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
