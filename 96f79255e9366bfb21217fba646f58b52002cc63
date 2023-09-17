@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3620209f_93dbc740",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T16:46:49Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "96f79255e9366bfb21217fba646f58b52002cc63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e6a7553_2f591c01",
+        "filename": "generator/templates/dawn/native/api_structs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T16:46:49Z",
+      "side": 1,
+      "message": "Do we really need to add an implicit cast to the C struct for this CL? This seems to blur the line between C and C++ and risk causing issues, for example when assigning a struct with free members to a C struct.",
+      "revId": "96f79255e9366bfb21217fba646f58b52002cc63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "917d9b27_76436ce9",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-17T16:46:49Z",
+      "side": 1,
+      "message": "nit: would ToAPI() work here?",
+      "range": {
+        "startLine": 220,
+        "startChar": 18,
+        "endLine": 220,
+        "endChar": 29
+      },
+      "revId": "96f79255e9366bfb21217fba646f58b52002cc63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
