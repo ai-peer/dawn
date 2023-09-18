@@ -16,6 +16,29 @@
       "message": "Please take a look, thanks",
       "revId": "f4b8ebcc41a7bb9379d39b2fa2c6e2ed274cef18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9683c76_3041cdaf",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 1399,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T19:47:19Z",
+      "side": 1,
+      "message": "I think in general we always have the names with spaces, i.e.:\n`min subgroup size` and `max subgroup size`. (They are converted to camelCase when the struct is generated.)",
+      "range": {
+        "startLine": 1398,
+        "startChar": 22,
+        "endLine": 1399,
+        "endChar": 38
+      },
+      "revId": "f4b8ebcc41a7bb9379d39b2fa2c6e2ed274cef18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

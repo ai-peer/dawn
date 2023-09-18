@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "950a81dc_90196010",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T19:47:19Z",
+      "side": 1,
+      "message": "I suspect it should be to all out structs since we may be able to populate some information and ignore other out structs that are not relevant? But agreed that we should add a TODO and address this once we have a consensus on the decision.",
+      "parentUuid": "92f72753_89e2d201",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a2ba2087_3a60ef7e",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 5
