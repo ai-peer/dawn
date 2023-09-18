@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26f31d27_b8638057",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 19,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T23:40:23Z",
+      "side": 1,
+      "message": "Bleh, presubmit doesn\u0027t like this atm... I think it\u0027s because C++20 headers aren\u0027t included in the cpplink.py check yet? (https://source.chromium.org/chromium/chromium/src/+/main:third_party/depot_tools/cpplint.py;l\u003d275?q\u003dcpplint.py\u0026ss\u003dchromium%2Fchromium%2Fsrc) \n\nI might just remove this and keep the vector for now, (maybe adding a TODO?). Will do so in the next revision as a whole change after another round of reviews though.",
+      "range": {
+        "startLine": 19,
+        "startChar": 0,
+        "endLine": 19,
+        "endChar": 15
+      },
+      "revId": "93420b2088eb624e2c2b62e73c2fdd65f19cf810",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
