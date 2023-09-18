@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5a77abb9_062615ef",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-18T15:39:31Z",
+      "side": 1,
+      "message": "It is also used internal for clear texture per level.",
+      "parentUuid": "e1194ec1_1f95d1ca",
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d41202b_e4531135",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 3
@@ -149,6 +167,24 @@
       "side": 1,
       "message": "Graphite should probably try to cache bindgroups when it can, using dynamic uniform buffers for step buffers if needed.\n\nWhat are the improvements for each of the cached descriptor types? It seems that some of the view would get recreated all the time anyway so the improvement could be null.\n\nOk in general to add this caching temporarily but I expect that at least for SRV and UAV it should be done at the BindGroup level, and for RTV it would be easy to detect when we need to eagerly create one on a view. (DSV is fine uncached maybe?)",
       "parentUuid": "5dd4f8df_e38bd3c2",
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d994ea1c_c9bb0c0f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-18T15:39:31Z",
+      "side": 1,
+      "message": "I dumped new profile at https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1481660#c3\n\nAs my test:\n\nFor SRV: 5.44% -\u003e 0.08%\nFor RTV:  2.82% -\u003e 0.19%\nFor DSV: 1.68% -\u003e 0.02%",
+      "parentUuid": "bb5f8cac_7eaeab98",
       "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
