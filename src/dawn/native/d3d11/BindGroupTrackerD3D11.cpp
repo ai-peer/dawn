@@ -14,6 +14,7 @@
 
 #include "dawn/native/d3d11/BindGroupTrackerD3D11.h"
 
+#include <algorithm>
 #include <utility>
 #include <vector>
 
@@ -88,31 +89,29 @@ bool CheckAllSlotsAreEmpty(CommandRecordingContext* commandContext) {
     return true;
 }
 
-void ResetAllRenderSlots(CommandRecordingContext* commandContext) {
+void ResetAllRenderSlots(CommandRecordingContext* commandContext,
+                         uint32_t constantBufferCount,
+                         uint32_t shaderResourceViewCount,
+                         uint32_t samplerCount) {
     ID3D11DeviceContext1* deviceContext1 = commandContext->GetD3D11DeviceContext1();
 
-    // Reserve one slot for builtin constants.
-    constexpr uint32_t kReservedCBVSlots = 1;
-
     ID3D11Buffer* d3d11Buffers[D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT] = {};
-    uint32_t num = D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT - kReservedCBVSlots;
-    deviceContext1->VSSetConstantBuffers1(0, num, d3d11Buffers, nullptr, nullptr);
-    deviceContext1->PSSetConstantBuffers1(0, num, d3d11Buffers, nullptr, nullptr);
+    deviceContext1->VSSetConstantBuffers1(0, constantBufferCount, d3d11Buffers, nullptr, nullptr);
+    deviceContext1->PSSetConstantBuffers1(0, constantBufferCount, d3d11Buffers, nullptr, nullptr);
 
     ID3D11ShaderResourceView* d3d11SRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
-    num = D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT;
-    deviceContext1->VSSetShaderResources(0, num, d3d11SRVs);
-    deviceContext1->PSSetShaderResources(0, num, d3d11SRVs);
+    deviceContext1->VSSetShaderResources(0, shaderResourceViewCount, d3d11SRVs);
+    deviceContext1->PSSetShaderResources(0, shaderResourceViewCount, d3d11SRVs);
 
     ID3D11SamplerState* d3d11Samplers[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT] = {};
-    num = D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT;
-    deviceContext1->VSSetSamplers(0, num, d3d11Samplers);
-    deviceContext1->PSSetSamplers(0, num, d3d11Samplers);
+    deviceContext1->VSSetSamplers(0, samplerCount, d3d11Samplers);
+    deviceContext1->PSSetSamplers(0, samplerCount, d3d11Samplers);
 
     ID3D11UnorderedAccessView* d3d11UAVs[D3D11_1_UAV_SLOT_COUNT] = {};
-    num = commandContext->GetDevice()->GetUAVSlotCount();
+    // Resetting 1 UAV slot actually resets all UAV slots as D3d11 UAV slots cannot be set
+    // independently. They all need to be set at the same time.
     deviceContext1->OMSetRenderTargetsAndUnorderedAccessViews(
-        D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr, 0, num, d3d11UAVs, nullptr);
+        D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr, 0, 1, d3d11UAVs, nullptr);
 }
 
 }  // namespace
@@ -127,7 +126,8 @@ BindGroupTracker::BindGroupTracker(CommandRecordingContext* commandContext, bool
 
 BindGroupTracker::~BindGroupTracker() {
     if (mIsRenderPass) {
-        ResetAllRenderSlots(mCommandContext);
+        ResetAllRenderSlots(mCommandContext, mConstantBufferCount, mShaderResourceViewCount,
+                            mSamplerCount);
     } else {
         for (BindGroupIndex index :
              IterateBitSet(mLastAppliedPipelineLayout->GetBindGroupLayoutsMask())) {
@@ -142,6 +142,7 @@ MaybeError BindGroupTracker::Apply() {
     BeforeApply();
 
     if (mIsRenderPass) {
+        UpdateBindingCounts();
         // As D3d11 requires to bind all UAVs slots at the same time for pixel shaders, we record
         // all UAV slot assignments in the bind groups, and then bind them all together.
         const BindGroupLayoutMask uavBindGroups =
@@ -558,6 +559,16 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
                 break;
             }
         }
+    }
+}
+
+void BindGroupTracker::UpdateBindingCounts() {
+    if (mLastAppliedPipelineLayout != mPipelineLayout) {
+        mConstantBufferCount =
+            std::max(mConstantBufferCount, ToBackend(mPipelineLayout)->GetConstantBufferCount());
+        mShaderResourceViewCount = std::max(
+            mShaderResourceViewCount, ToBackend(mPipelineLayout)->GetShaderResourceViewCount());
+        mSamplerCount = std::max(mSamplerCount, ToBackend(mPipelineLayout)->GetSamplerCount());
     }
 }
 
