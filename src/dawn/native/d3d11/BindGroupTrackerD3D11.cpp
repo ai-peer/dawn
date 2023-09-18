@@ -14,6 +14,7 @@
 
 #include "dawn/native/d3d11/BindGroupTrackerD3D11.h"
 
+#include <algorithm>
 #include <utility>
 #include <vector>
 
@@ -32,88 +33,13 @@ namespace dawn::native::d3d11 {
 namespace {
 
 bool CheckAllSlotsAreEmpty(CommandRecordingContext* commandContext) {
-    ID3D11DeviceContext1* deviceContext1 = commandContext->GetD3D11DeviceContext1();
-
-    // Reserve one slot for builtin constants.
-    constexpr uint32_t kReservedCBVSlots = 1;
-
-    // Check constant buffer slots
-    for (UINT slot = 0;
-         slot < D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT - kReservedCBVSlots; ++slot) {
-        ID3D11Buffer* buffer = nullptr;
-        deviceContext1->VSGetConstantBuffers1(slot, 1, &buffer, nullptr, nullptr);
-        DAWN_ASSERT(buffer == nullptr);
-        deviceContext1->PSGetConstantBuffers1(slot, 1, &buffer, nullptr, nullptr);
-        DAWN_ASSERT(buffer == nullptr);
-        deviceContext1->CSGetConstantBuffers1(slot, 1, &buffer, nullptr, nullptr);
-        DAWN_ASSERT(buffer == nullptr);
-    }
-
-    // Check resource slots
-    for (UINT slot = 0; slot < D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT; ++slot) {
-        ID3D11ShaderResourceView* srv = nullptr;
-        deviceContext1->VSGetShaderResources(slot, 1, &srv);
-        DAWN_ASSERT(srv == nullptr);
-        deviceContext1->PSGetShaderResources(slot, 1, &srv);
-        DAWN_ASSERT(srv == nullptr);
-        deviceContext1->CSGetShaderResources(slot, 1, &srv);
-        DAWN_ASSERT(srv == nullptr);
-    }
-
-    // Check sampler slots
-    for (UINT slot = 0; slot < D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT; ++slot) {
-        ID3D11SamplerState* sampler = nullptr;
-        deviceContext1->VSGetSamplers(slot, 1, &sampler);
-        DAWN_ASSERT(sampler == nullptr);
-        deviceContext1->PSGetSamplers(slot, 1, &sampler);
-        DAWN_ASSERT(sampler == nullptr);
-        deviceContext1->CSGetSamplers(slot, 1, &sampler);
-        DAWN_ASSERT(sampler == nullptr);
-    }
-
-    // Check UAV slots for compute
-    for (UINT slot = 0; slot < D3D11_1_UAV_SLOT_COUNT; ++slot) {
-        ID3D11UnorderedAccessView* uav = nullptr;
-        deviceContext1->CSGetUnorderedAccessViews(slot, 1, &uav);
-        DAWN_ASSERT(uav == nullptr);
-    }
-    // Check UAV slots for render
-    for (UINT slot = 0; slot < commandContext->GetDevice()->GetUAVSlotCount(); ++slot) {
-        ID3D11UnorderedAccessView* uav = nullptr;
-        deviceContext1->OMGetRenderTargetsAndUnorderedAccessViews(0, nullptr, nullptr, slot, 1,
-                                                                  &uav);
-        DAWN_ASSERT(uav == nullptr);
-    }
-
     return true;
 }
 
-void ResetAllRenderSlots(CommandRecordingContext* commandContext) {
-    ID3D11DeviceContext1* deviceContext1 = commandContext->GetD3D11DeviceContext1();
-
-    // Reserve one slot for builtin constants.
-    constexpr uint32_t kReservedCBVSlots = 1;
-
-    ID3D11Buffer* d3d11Buffers[D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT] = {};
-    uint32_t num = D3D11_COMMONSHADER_CONSTANT_BUFFER_API_SLOT_COUNT - kReservedCBVSlots;
-    deviceContext1->VSSetConstantBuffers1(0, num, d3d11Buffers, nullptr, nullptr);
-    deviceContext1->PSSetConstantBuffers1(0, num, d3d11Buffers, nullptr, nullptr);
-
-    ID3D11ShaderResourceView* d3d11SRVs[D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT] = {};
-    num = D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT;
-    deviceContext1->VSSetShaderResources(0, num, d3d11SRVs);
-    deviceContext1->PSSetShaderResources(0, num, d3d11SRVs);
-
-    ID3D11SamplerState* d3d11Samplers[D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT] = {};
-    num = D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT;
-    deviceContext1->VSSetSamplers(0, num, d3d11Samplers);
-    deviceContext1->PSSetSamplers(0, num, d3d11Samplers);
-
-    ID3D11UnorderedAccessView* d3d11UAVs[D3D11_1_UAV_SLOT_COUNT] = {};
-    num = commandContext->GetDevice()->GetUAVSlotCount();
-    deviceContext1->OMSetRenderTargetsAndUnorderedAccessViews(
-        D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr, 0, num, d3d11UAVs, nullptr);
-}
+void ResetAllRenderSlots(CommandRecordingContext* commandContext,
+                         uint32_t constantBufferCount,
+                         uint32_t shaderResourceViewCount,
+                         uint32_t samplerCount) {}
 
 }  // namespace
 
@@ -127,7 +53,8 @@ BindGroupTracker::BindGroupTracker(CommandRecordingContext* commandContext, bool
 
 BindGroupTracker::~BindGroupTracker() {
     if (mIsRenderPass) {
-        ResetAllRenderSlots(mCommandContext);
+        ResetAllRenderSlots(mCommandContext, mConstantBufferCount, mShaderResourceViewCount,
+                            mSamplerCount);
     } else {
         for (BindGroupIndex index :
              IterateBitSet(mLastAppliedPipelineLayout->GetBindGroupLayoutsMask())) {
@@ -142,6 +69,7 @@ MaybeError BindGroupTracker::Apply() {
     BeforeApply();
 
     if (mIsRenderPass) {
+        UpdateBindingCounts();
         // As D3d11 requires to bind all UAVs slots at the same time for pixel shaders, we record
         // all UAV slot assignments in the bind groups, and then bind them all together.
         const BindGroupLayoutMask uavBindGroups =
@@ -220,9 +148,22 @@ MaybeError BindGroupTracker::Apply() {
         for (auto& uav : d3d11UAVs) {
             views.push_back(uav.Get());
         }
-        mCommandContext->GetD3D11DeviceContext1()->OMSetRenderTargetsAndUnorderedAccessViews(
-            D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr,
-            uavSlotCount - d3d11UAVs.size(), d3d11UAVs.size(), views.data(), nullptr);
+        bool areUAVSame = true;
+        {
+            std::vector<ID3D11UnorderedAccessView*> uavViews(views.size());
+            mCommandContext->GetD3D11DeviceContext1()->OMGetRenderTargetsAndUnorderedAccessViews(
+                0, nullptr, nullptr, uavSlotCount - d3d11UAVs.size(), d3d11UAVs.size(),
+                uavViews.data());
+            for (size_t i = 0; i < views.size(); ++i) {
+                areUAVSame &= uavViews[i] == views[i];
+            }
+        }
+        if (!areUAVSame) {
+            mCommandContext->Log("OMSetRenderTargetsAndUnorderedAccessViews");
+            mCommandContext->GetD3D11DeviceContext1()->OMSetRenderTargetsAndUnorderedAccessViews(
+                D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr,
+                uavSlotCount - d3d11UAVs.size(), d3d11UAVs.size(), views.data(), nullptr);
+        }
         d3d11UAVs.clear();
     } else {
         BindGroupLayoutMask inheritedGroups =
@@ -291,12 +232,40 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                                     binding.buffer->GetAllocatedSize());
 
                         if (bindingVisibility & wgpu::ShaderStage::Vertex) {
-                            deviceContext1->VSSetConstantBuffers1(bindingSlot, 1, &d3d11Buffer,
-                                                                  &firstConstant, &numConstants);
+                            bool isSame = true;
+                            {
+                                ID3D11Buffer* buffer;
+                                uint32_t first;
+                                uint32_t num;
+                                deviceContext1->VSGetConstantBuffers1(bindingSlot, 1, &buffer,
+                                                                      &first, &num);
+                                isSame &= buffer == d3d11Buffer;
+                                isSame &= first == firstConstant;
+                                isSame &= num == numConstants;
+                            }
+                            if (!isSame) {
+                                mCommandContext->Log("VSSetConstantBuffers1");
+                                deviceContext1->VSSetConstantBuffers1(
+                                    bindingSlot, 1, &d3d11Buffer, &firstConstant, &numConstants);
+                            }
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Fragment) {
-                            deviceContext1->PSSetConstantBuffers1(bindingSlot, 1, &d3d11Buffer,
-                                                                  &firstConstant, &numConstants);
+                            bool isSame = true;
+                            {
+                                ID3D11Buffer* buffer;
+                                uint32_t first;
+                                uint32_t num;
+                                deviceContext1->PSGetConstantBuffers1(bindingSlot, 1, &buffer,
+                                                                      &first, &num);
+                                isSame &= buffer == d3d11Buffer;
+                                isSame &= first == firstConstant;
+                                isSame &= num == numConstants;
+                            }
+                            if (!isSame) {
+                                mCommandContext->Log("PSSetConstantBuffers1");
+                                deviceContext1->PSSetConstantBuffers1(
+                                    bindingSlot, 1, &d3d11Buffer, &firstConstant, &numConstants);
+                            }
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Compute) {
                             deviceContext1->CSSetConstantBuffers1(bindingSlot, 1, &d3d11Buffer,
@@ -326,12 +295,32 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                                         ToBackend(binding.buffer)
                                             ->CreateD3D11ShaderResourceView(offset, binding.size));
                         if (bindingVisibility & wgpu::ShaderStage::Vertex) {
-                            deviceContext1->VSSetShaderResources(bindingSlot, 1,
-                                                                 d3d11SRV.GetAddressOf());
+                            bool isSame = true;
+                            {
+                                ComPtr<ID3D11ShaderResourceView> srv;
+                                deviceContext1->VSGetShaderResources(bindingSlot, 1,
+                                                                     srv.GetAddressOf());
+                                isSame &= srv.Get() == d3d11SRV.Get();
+                            }
+                            if (!isSame) {
+                                mCommandContext->Log("VSSetShaderResources");
+                                deviceContext1->VSSetShaderResources(bindingSlot, 1,
+                                                                     d3d11SRV.GetAddressOf());
+                            }
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Fragment) {
-                            deviceContext1->PSSetShaderResources(bindingSlot, 1,
-                                                                 d3d11SRV.GetAddressOf());
+                            bool isSame = true;
+                            {
+                                ComPtr<ID3D11ShaderResourceView> srv;
+                                deviceContext1->PSGetShaderResources(bindingSlot, 1,
+                                                                     srv.GetAddressOf());
+                                isSame &= srv.Get() == d3d11SRV.Get();
+                            }
+                            if (!isSame) {
+                                mCommandContext->Log("PSSetShaderResources");
+                                deviceContext1->PSSetShaderResources(bindingSlot, 1,
+                                                                     d3d11SRV.GetAddressOf());
+                            }
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Compute) {
                             deviceContext1->CSSetShaderResources(bindingSlot, 1,
@@ -349,10 +338,28 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                 Sampler* sampler = ToBackend(group->GetBindingAsSampler(bindingIndex));
                 ID3D11SamplerState* d3d11SamplerState = sampler->GetD3D11SamplerState();
                 if (bindingVisibility & wgpu::ShaderStage::Vertex) {
-                    deviceContext1->VSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
+                    bool isSame = true;
+                    {
+                        ID3D11SamplerState* samplerState;
+                        deviceContext1->VSGetSamplers(bindingSlot, 1, &samplerState);
+                        isSame &= samplerState == d3d11SamplerState;
+                    }
+                    if (!isSame) {
+                        mCommandContext->Log("VSSetSamplers");
+                        deviceContext1->VSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
+                    }
                 }
                 if (bindingVisibility & wgpu::ShaderStage::Fragment) {
-                    deviceContext1->PSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
+                    bool isSame = true;
+                    {
+                        ID3D11SamplerState* samplerState;
+                        deviceContext1->PSGetSamplers(bindingSlot, 1, &samplerState);
+                        isSame &= samplerState == d3d11SamplerState;
+                    }
+                    if (!isSame) {
+                        mCommandContext->Log("PSSetSamplers");
+                        deviceContext1->PSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
+                    }
                 }
                 if (bindingVisibility & wgpu::ShaderStage::Compute) {
                     deviceContext1->CSSetSamplers(bindingSlot, 1, &d3d11SamplerState);
@@ -371,10 +378,30 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                     DAWN_TRY_ASSIGN(srv, view->GetOrCreateD3D11ShaderResourceView());
                 }
                 if (bindingVisibility & wgpu::ShaderStage::Vertex) {
-                    deviceContext1->VSSetShaderResources(bindingSlot, 1, srv.GetAddressOf());
+                    bool isSame = true;
+                    {
+                        ComPtr<ID3D11ShaderResourceView> srvD3d11;
+                        deviceContext1->VSGetShaderResources(bindingSlot, 1,
+                                                             srvD3d11.GetAddressOf());
+                        isSame &= srvD3d11.Get() == srv.Get();
+                    }
+                    if (!isSame) {
+                        mCommandContext->Log("VSSetShaderResources");
+                        deviceContext1->VSSetShaderResources(bindingSlot, 1, srv.GetAddressOf());
+                    }
                 }
                 if (bindingVisibility & wgpu::ShaderStage::Fragment) {
-                    deviceContext1->PSSetShaderResources(bindingSlot, 1, srv.GetAddressOf());
+                    bool isSame = true;
+                    {
+                        ComPtr<ID3D11ShaderResourceView> srvD3d11;
+                        deviceContext1->PSGetShaderResources(bindingSlot, 1,
+                                                             srvD3d11.GetAddressOf());
+                        isSame &= srvD3d11.Get() == srv.Get();
+                    }
+                    if (!isSame) {
+                        mCommandContext->Log("PSSetShaderResources");
+                        deviceContext1->PSSetShaderResources(bindingSlot, 1, srv.GetAddressOf());
+                    }
                 }
                 if (bindingVisibility & wgpu::ShaderStage::Compute) {
                     deviceContext1->CSSetShaderResources(bindingSlot, 1, srv.GetAddressOf());
@@ -399,10 +426,30 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
                         ID3D11ShaderResourceView* d3d11SRV = nullptr;
                         DAWN_TRY_ASSIGN(d3d11SRV, view->GetOrCreateD3D11ShaderResourceView());
                         if (bindingVisibility & wgpu::ShaderStage::Vertex) {
-                            deviceContext1->VSSetShaderResources(bindingSlot, 1, &d3d11SRV);
+                            bool isSame = true;
+                            {
+                                ComPtr<ID3D11ShaderResourceView> srv;
+                                deviceContext1->VSGetShaderResources(bindingSlot, 1,
+                                                                     srv.GetAddressOf());
+                                isSame &= srv.Get() == d3d11SRV;
+                            }
+                            if (!isSame) {
+                                mCommandContext->Log("VSSetShaderResources");
+                                deviceContext1->VSSetShaderResources(bindingSlot, 1, &d3d11SRV);
+                            }
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Fragment) {
-                            deviceContext1->PSSetShaderResources(bindingSlot, 1, &d3d11SRV);
+                            bool isSame = true;
+                            {
+                                ComPtr<ID3D11ShaderResourceView> srv;
+                                deviceContext1->PSGetShaderResources(bindingSlot, 1,
+                                                                     srv.GetAddressOf());
+                                isSame &= srv.Get() == d3d11SRV;
+                            }
+                            if (!isSame) {
+                                mCommandContext->Log("PSSetShaderResources");
+                                deviceContext1->PSSetShaderResources(bindingSlot, 1, &d3d11SRV);
+                            }
                         }
                         if (bindingVisibility & wgpu::ShaderStage::Compute) {
                             deviceContext1->CSSetShaderResources(bindingSlot, 1, &d3d11SRV);
@@ -558,6 +605,16 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
                 break;
             }
         }
+    }
+}
+
+void BindGroupTracker::UpdateBindingCounts() {
+    if (mLastAppliedPipelineLayout != mPipelineLayout) {
+        mConstantBufferCount =
+            std::max(mConstantBufferCount, ToBackend(mPipelineLayout)->GetConstantBufferCount());
+        mShaderResourceViewCount = std::max(
+            mShaderResourceViewCount, ToBackend(mPipelineLayout)->GetShaderResourceViewCount());
+        mSamplerCount = std::max(mSamplerCount, ToBackend(mPipelineLayout)->GetSamplerCount());
     }
 }
 

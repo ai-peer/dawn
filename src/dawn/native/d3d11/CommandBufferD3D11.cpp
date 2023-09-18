@@ -61,8 +61,6 @@ class VertexBufferTracker {
         mD3D11Buffers = {};
         mStrides = {};
         mOffsets = {};
-        mCommandContext->GetD3D11DeviceContext()->IASetVertexBuffers(
-            0, kMaxVertexBuffers, mD3D11Buffers.data(), mStrides.data(), mOffsets.data());
     }
 
     void OnSetVertexBuffer(VertexBufferSlot slot, ID3D11Buffer* buffer, uint64_t offset) {
@@ -81,8 +79,7 @@ class VertexBufferTracker {
                 mStrides[slot] = renderPipeline->GetVertexBuffer(slot).arrayStride;
             }
         }
-
-        mCommandContext->GetD3D11DeviceContext()->IASetVertexBuffers(
+        mCommandContext->GetDeviceContextTrackerD3D11()->IASetVertexBuffers(
             0, kMaxVertexBuffers, mD3D11Buffers.data(), mStrides.data(), mOffsets.data());
     }
 
@@ -197,6 +194,7 @@ MaybeError CommandBuffer::Execute() {
             }
 
             case Command::CopyBufferToBuffer: {
+                commandContext->Log("CopyBufferToBuffer");
                 CopyBufferToBufferCmd* copy = mCommands.NextCommand<CopyBufferToBufferCmd>();
                 if (copy->size == 0) {
                     // Skip no-op copies.
@@ -215,6 +213,7 @@ MaybeError CommandBuffer::Execute() {
             }
 
             case Command::CopyBufferToTexture: {
+                commandContext->Log("CopyBufferToTexture");
                 CopyBufferToTextureCmd* copy = mCommands.NextCommand<CopyBufferToTextureCmd>();
                 if (copy->copySize.width == 0 || copy->copySize.height == 0 ||
                     copy->copySize.depthOrArrayLayers == 0) {
@@ -266,6 +265,7 @@ MaybeError CommandBuffer::Execute() {
             }
 
             case Command::CopyTextureToBuffer: {
+                commandContext->Log("CopyTextureToBuffer");
                 CopyTextureToBufferCmd* copy = mCommands.NextCommand<CopyTextureToBufferCmd>();
                 if (copy->copySize.width == 0 || copy->copySize.height == 0 ||
                     copy->copySize.depthOrArrayLayers == 0) {
@@ -304,6 +304,7 @@ MaybeError CommandBuffer::Execute() {
             }
 
             case Command::CopyTextureToTexture: {
+                commandContext->Log("CopyTextureToTexture");
                 CopyTextureToTextureCmd* copy = mCommands.NextCommand<CopyTextureToTextureCmd>();
                 if (copy->copySize.width == 0 || copy->copySize.height == 0 ||
                     copy->copySize.depthOrArrayLayers == 0) {
@@ -350,6 +351,7 @@ MaybeError CommandBuffer::Execute() {
             }
 
             case Command::WriteBuffer: {
+                commandContext->Log("WriteBuffer");
                 WriteBufferCmd* cmd = mCommands.NextCommand<WriteBufferCmd>();
                 if (cmd->size == 0) {
                     // Skip no-op writes.
@@ -467,6 +469,8 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
 
 MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                                             CommandRecordingContext* commandContext) {
+    commandContext->Log("ExecuteRenderPass");
+
     ID3D11DeviceContext1* d3d11DeviceContext1 = commandContext->GetD3D11DeviceContext1();
 
     // Hold ID3D11RenderTargetView ComPtr to make attachments alive.
@@ -514,9 +518,26 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                                                    attachmentInfo->clearDepth,
                                                    attachmentInfo->clearStencil);
     }
-
-    d3d11DeviceContext1->OMSetRenderTargets(static_cast<uint8_t>(attachmentCount),
-                                            d3d11RenderTargetViews.data(), d3d11DepthStencilView);
+    bool areRenderTargetsSame = true;
+    {
+        ityp::array<ColorAttachmentIndex, ID3D11RenderTargetView*, kMaxColorAttachments> rtvArray =
+            {};
+        ID3D11DepthStencilView* dsv = nullptr;
+        d3d11DeviceContext1->OMGetRenderTargets(kMaxColorAttachments, rtvArray.data(), &dsv);
+        areRenderTargetsSame &= d3d11DepthStencilView == dsv;
+        for (size_t i = 0; i < attachmentCount; ++i) {
+            areRenderTargetsSame &= d3d11RenderTargetViews[i] == rtvArray[i];
+        }
+        for (size_t i = attachmentCount; i < kMaxColorAttachments; ++i) {
+            areRenderTargetsSame &= rtvArray[i] == nullptr;
+        }
+    }
+    if (!areRenderTargetsSame) {
+        commandContext->Log("OMSetRenderTargets");
+        d3d11DeviceContext1->OMSetRenderTargets(static_cast<uint8_t>(attachmentCount),
+                                                d3d11RenderTargetViews.data(),
+                                                d3d11DepthStencilView);
+    }
 
     // Set viewport
     D3D11_VIEWPORT defautViewport;
@@ -526,7 +547,12 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     defautViewport.Height = renderPass->height;
     defautViewport.MinDepth = 0.0f;
     defautViewport.MaxDepth = 1.0f;
-    d3d11DeviceContext1->RSSetViewports(1, &defautViewport);
+    commandContext->GetDeviceContextTrackerD3D11()->RSSetViewports(&defautViewport);
+    {
+        std::stringstream ss;
+        ss << "Set Default Viewport -- [" << renderPass->width << ", " << renderPass->height << "]";
+        commandContext->Log(ss.str().c_str());
+    }
 
     // Set scissor
     D3D11_RECT scissor;
@@ -534,7 +560,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     scissor.top = 0;
     scissor.right = renderPass->width;
     scissor.bottom = renderPass->height;
-    d3d11DeviceContext1->RSSetScissorRects(1, &scissor);
+    commandContext->GetDeviceContextTrackerD3D11()->RSSetScissorRects(&scissor);
 
     RenderPipeline* lastPipeline = nullptr;
     BindGroupTracker bindGroupTracker(commandContext, /*isRenderPass=*/true);
@@ -553,6 +579,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                                                 draw->firstInstance));
                 commandContext->GetD3D11DeviceContext()->DrawInstanced(
                     draw->vertexCount, draw->instanceCount, draw->firstVertex, draw->firstInstance);
+                {
+                    std::stringstream ss;
+                    ss << "Draw -- instance count:" << draw->instanceCount;
+                    commandContext->Log(ss.str().c_str());
+                }
 
                 break;
             }
@@ -567,6 +598,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstanced(
                     draw->indexCount, draw->instanceCount, draw->firstIndex, draw->baseVertex,
                     draw->firstInstance);
+                {
+                    std::stringstream ss;
+                    ss << "DrawIndexed -- instance count:" << draw->instanceCount;
+                    commandContext->Log(ss.str().c_str());
+                }
 
                 break;
             }
@@ -594,6 +630,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 commandContext->GetD3D11DeviceContext()->DrawInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
+                commandContext->Log("DrawIndirect");
                 break;
             }
 
@@ -620,6 +657,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 commandContext->GetD3D11DeviceContext()->DrawIndexedInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
+                commandContext->Log("DrawIndexedIndirect");
                 break;
             }
 
@@ -627,6 +665,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 SetRenderPipelineCmd* cmd = iter->NextCommand<SetRenderPipelineCmd>();
 
                 lastPipeline = ToBackend(cmd->pipeline.Get());
+                {
+                    std::stringstream ss;
+                    ss << "SetRenderPipeline:" << static_cast<void*>(lastPipeline);
+                    commandContext->Log(ss.str().c_str());
+                }
                 lastPipeline->ApplyNow(commandContext, blendColor, stencilReference);
                 bindGroupTracker.OnSetPipeline(lastPipeline);
 
@@ -640,6 +683,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 if (cmd->dynamicOffsetCount > 0) {
                     dynamicOffsets = iter->NextData<uint32_t>(cmd->dynamicOffsetCount);
                 }
+                {
+                    std::stringstream ss;
+                    ss << "SetBindGroup:" << static_cast<void*>(cmd->group.Get());
+                    commandContext->Log(ss.str().c_str());
+                }
                 bindGroupTracker.OnSetBindGroup(cmd->index, cmd->group.Get(),
                                                 cmd->dynamicOffsetCount, dynamicOffsets);
 
@@ -652,6 +700,12 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 UINT indexBufferBaseOffset = cmd->offset;
                 DXGI_FORMAT indexBufferFormat = DXGIIndexFormat(cmd->format);
 
+                {
+                    std::stringstream ss;
+                    ss << "SetIndexBuffer:" << static_cast<void*>(cmd->buffer.Get());
+                    commandContext->Log(ss.str().c_str());
+                }
+
                 commandContext->GetD3D11DeviceContext()->IASetIndexBuffer(
                     ToBackend(cmd->buffer)->GetD3D11NonConstantBuffer(), indexBufferFormat,
                     indexBufferBaseOffset);
@@ -661,6 +715,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
 
             case Command::SetVertexBuffer: {
                 SetVertexBufferCmd* cmd = iter->NextCommand<SetVertexBufferCmd>();
+                {
+                    std::stringstream ss;
+                    ss << "SetVertexBuffer:" << static_cast<void*>(cmd->buffer.Get());
+                    commandContext->Log(ss.str().c_str());
+                }
                 ID3D11Buffer* buffer = ToBackend(cmd->buffer)->GetD3D11NonConstantBuffer();
                 vertexBufferTracker.OnSetVertexBuffer(cmd->slot, buffer, cmd->offset);
                 break;
@@ -685,9 +744,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     while (mCommands.NextCommandId(&type)) {
         switch (type) {
             case Command::EndRenderPass: {
+                commandContext->Log("EndRenderPass\n");
                 mCommands.NextCommand<EndRenderPassCmd>();
                 ID3D11DeviceContext* d3d11DeviceContext = commandContext->GetD3D11DeviceContext();
-                d3d11DeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
+                // d3d11DeviceContext->OMSetRenderTargets(0, nullptr, nullptr);
 
                 if (renderPass->attachmentState->GetSampleCount() <= 1) {
                     return {};
@@ -722,6 +782,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             }
 
             case Command::SetStencilReference: {
+                commandContext->Log("SetStencilRef");
                 SetStencilReferenceCmd* cmd = mCommands.NextCommand<SetStencilReferenceCmd>();
                 stencilReference = cmd->reference;
                 if (lastPipeline) {
@@ -732,6 +793,12 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
 
             case Command::SetViewport: {
                 SetViewportCmd* cmd = mCommands.NextCommand<SetViewportCmd>();
+                {
+                    std::stringstream ss;
+                    ss << "SetViewport -- [" << cmd->x << ", " << cmd->y << ", " << cmd->width
+                       << ", " << cmd->height << "]";
+                    commandContext->Log(ss.str().c_str());
+                }
 
                 D3D11_VIEWPORT viewport;
                 viewport.TopLeftX = cmd->x;
@@ -740,21 +807,29 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 viewport.Height = cmd->height;
                 viewport.MinDepth = cmd->minDepth;
                 viewport.MaxDepth = cmd->maxDepth;
-                commandContext->GetD3D11DeviceContext()->RSSetViewports(1, &viewport);
+                commandContext->GetDeviceContextTrackerD3D11()->RSSetViewports(&viewport);
                 break;
             }
 
             case Command::SetScissorRect: {
                 SetScissorRectCmd* cmd = mCommands.NextCommand<SetScissorRectCmd>();
 
+                {
+                    std::stringstream ss;
+                    ss << "SetSissorRect -- [" << cmd->x << ", " << cmd->y << ", " << cmd->width
+                       << ", " << cmd->height << "]";
+                    commandContext->Log(ss.str().c_str());
+                }
+
                 D3D11_RECT scissorRect = {static_cast<LONG>(cmd->x), static_cast<LONG>(cmd->y),
                                           static_cast<LONG>(cmd->x + cmd->width),
                                           static_cast<LONG>(cmd->y + cmd->height)};
-                commandContext->GetD3D11DeviceContext()->RSSetScissorRects(1, &scissorRect);
+                commandContext->GetDeviceContextTrackerD3D11()->RSSetScissorRects(&scissorRect);
                 break;
             }
 
             case Command::SetBlendConstant: {
+                commandContext->Log("SetBlendConstant");
                 SetBlendConstantCmd* cmd = mCommands.NextCommand<SetBlendConstantCmd>();
                 blendColor = ConvertToFloatColor(cmd->color);
                 if (lastPipeline) {

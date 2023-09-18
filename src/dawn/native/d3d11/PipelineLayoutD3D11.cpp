@@ -30,9 +30,6 @@ ResultOrError<Ref<PipelineLayout>> PipelineLayout::Create(
 }
 
 MaybeError PipelineLayout::Initialize(Device* device) {
-    unsigned int constantBufferIndex = 0;
-    unsigned int samplerIndex = 0;
-    unsigned int shaderResourceViewIndex = 0;
     // For d3d11 pixel shaders, the render targets and unordered-access views share the same
     // resource slots when being written out. So we assign UAV binding index decreasingly here.
     // https://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews
@@ -50,7 +47,7 @@ MaybeError PipelineLayout::Initialize(Device* device) {
                 case BindingInfoType::Buffer:
                     switch (bindingInfo.buffer.type) {
                         case wgpu::BufferBindingType::Uniform:
-                            mIndexInfo[group][bindingIndex] = constantBufferIndex++;
+                            mIndexInfo[group][bindingIndex] = mMaxConstantBufferIndex++;
                             break;
                         case wgpu::BufferBindingType::Storage:
                         case kInternalStorageBufferBinding:
@@ -58,7 +55,7 @@ MaybeError PipelineLayout::Initialize(Device* device) {
                             mUAVBindGroups.set(group);
                             break;
                         case wgpu::BufferBindingType::ReadOnlyStorage:
-                            mIndexInfo[group][bindingIndex] = shaderResourceViewIndex++;
+                            mIndexInfo[group][bindingIndex] = mMaxShaderResourceViewIndex++;
                             break;
                         case wgpu::BufferBindingType::Undefined:
                             DAWN_UNREACHABLE();
@@ -66,12 +63,12 @@ MaybeError PipelineLayout::Initialize(Device* device) {
                     break;
 
                 case BindingInfoType::Sampler:
-                    mIndexInfo[group][bindingIndex] = samplerIndex++;
+                    mIndexInfo[group][bindingIndex] = mMaxSamplerIndex++;
                     break;
 
                 case BindingInfoType::Texture:
                 case BindingInfoType::ExternalTexture:
-                    mIndexInfo[group][bindingIndex] = shaderResourceViewIndex++;
+                    mIndexInfo[group][bindingIndex] = mMaxShaderResourceViewIndex++;
                     break;
 
                 case BindingInfoType::StorageTexture:
@@ -82,7 +79,7 @@ MaybeError PipelineLayout::Initialize(Device* device) {
                             mUAVBindGroups.set(group);
                             break;
                         case wgpu::StorageTextureAccess::ReadOnly:
-                            mIndexInfo[group][bindingIndex] = shaderResourceViewIndex++;
+                            mIndexInfo[group][bindingIndex] = mMaxShaderResourceViewIndex++;
                             break;
                         case wgpu::StorageTextureAccess::Undefined:
                             DAWN_UNREACHABLE();
@@ -92,7 +89,7 @@ MaybeError PipelineLayout::Initialize(Device* device) {
         }
     }
     mUnusedUAVBindingCount = unorderedAccessViewIndex;
-    DAWN_ASSERT(constantBufferIndex <= kReservedConstantBufferSlot);
+    DAWN_ASSERT(mMaxConstantBufferIndex <= kReservedConstantBufferSlot);
 
     return {};
 }

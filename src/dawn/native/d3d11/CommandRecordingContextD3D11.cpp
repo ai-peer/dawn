@@ -27,6 +27,124 @@
 
 namespace dawn::native::d3d11 {
 
+void DeviceContextTrackerD3D11::Initialize(ID3D11DeviceContext4* context4,
+                                           CommandRecordingContext* commandContext) {
+    mContext4 = context4;
+    mCommandContext = commandContext;
+}
+
+void DeviceContextTrackerD3D11::RSSetViewports(const D3D11_VIEWPORT* pViewport) {
+    if (pViewport && *pViewport != mViewport) {
+        mViewport = *pViewport;
+        mCommandContext->Log("RSSetViewports");
+        mContext4->RSSetViewports(1, pViewport);
+    }
+}
+
+void DeviceContextTrackerD3D11::RSSetScissorRects(const D3D11_RECT* pRect) {
+    if (pRect && *pRect != mScissorRect) {
+        mScissorRect = *pRect;
+        mCommandContext->Log("RSSetScissorRects");
+        mContext4->RSSetScissorRects(1, pRect);
+    }
+}
+
+void DeviceContextTrackerD3D11::IASetVertexBuffers(UINT StartSlot,
+                                                   UINT NumBuffers,
+                                                   ID3D11Buffer* const* ppVertexBuffers,
+                                                   const UINT* pStrides,
+                                                   const UINT* pOffsets) {
+    bool areSame = true;
+    for (UINT i = 0; i < NumBuffers; ++i) {
+        UINT slot = i + StartSlot;
+        if (ppVertexBuffers[i] != mVertextBuffers[slot] ||
+            pStrides[i] != mVertexBufferStrides[slot] ||
+            pOffsets[i] != mVertexBufferOffsets[slot]) {
+            mVertextBuffers[slot] = ppVertexBuffers[i];
+            mVertexBufferStrides[slot] = pStrides[i];
+            mVertexBufferOffsets[slot] = pOffsets[i];
+            areSame = false;
+            break;
+        }
+    }
+    if (!areSame) {
+        mCommandContext->Log("IASetVertexBuffers");
+        mContext4->IASetVertexBuffers(StartSlot, NumBuffers, ppVertexBuffers, pStrides, pOffsets);
+    }
+}
+
+void DeviceContextTrackerD3D11::IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY Topology) {
+    if (Topology != mTopology) {
+        mTopology = Topology;
+        mCommandContext->Log("IASetPrimitiveTopology");
+        mContext4->IASetPrimitiveTopology(Topology);
+    }
+}
+
+void DeviceContextTrackerD3D11::IASetInputLayout(ID3D11InputLayout* pInputLayout) {
+    if (pInputLayout != mInputLayout) {
+        mInputLayout = pInputLayout;
+        mCommandContext->Log("IASetInputLayout");
+        mContext4->IASetInputLayout(pInputLayout);
+    }
+}
+
+void DeviceContextTrackerD3D11::RSSetState(ID3D11RasterizerState* pRasterizerState) {
+    if (pRasterizerState != mRasterizerState) {
+        mRasterizerState = pRasterizerState;
+        mCommandContext->Log("RSSetState");
+        mContext4->RSSetState(pRasterizerState);
+    }
+}
+
+void DeviceContextTrackerD3D11::VSSetShader(ID3D11VertexShader* pVertexShader,
+                                            ID3D11ClassInstance* const* ppClassInstances,
+                                            UINT NumClassInstances) {
+    if (pVertexShader != mVertexShader) {
+        mVertexShader = pVertexShader;
+        mCommandContext->Log("VSSetShader");
+        mContext4->VSSetShader(pVertexShader, ppClassInstances, NumClassInstances);
+    }
+}
+
+void DeviceContextTrackerD3D11::PSSetShader(ID3D11PixelShader* pPixelShader,
+                                            ID3D11ClassInstance* const* ppClassInstances,
+                                            UINT NumClassInstances) {
+    if (pPixelShader != mPixelShader) {
+        mPixelShader = pPixelShader;
+        mCommandContext->Log("PSSetShader");
+        mContext4->PSSetShader(pPixelShader, ppClassInstances, NumClassInstances);
+    }
+}
+
+void DeviceContextTrackerD3D11::OMSetBlendState(ID3D11BlendState* pBlendState,
+                                                const FLOAT BlendFactor[4],
+                                                UINT SampleMask) {
+    if (pBlendState != mBlendState || BlendFactor[0] != mBlendFactor[0] ||
+        BlendFactor[1] != mBlendFactor[1] || BlendFactor[2] != mBlendFactor[2] ||
+        BlendFactor[3] != mBlendFactor[3] || SampleMask != mSampleMask) {
+        mBlendState = pBlendState;
+        std::memcpy(mBlendFactor, BlendFactor, sizeof(mBlendFactor));
+        mSampleMask = SampleMask;
+        mCommandContext->Log("OMSetBlendState");
+        mContext4->OMSetBlendState(pBlendState, BlendFactor, SampleMask);
+    }
+}
+
+void DeviceContextTrackerD3D11::OMSetDepthStencilState(ID3D11DepthStencilState* pDepthStencilState,
+                                                       UINT StencilRef) {
+    if (pDepthStencilState != mDepthStencilState || StencilRef != mStencilRef) {
+        mDepthStencilState = pDepthStencilState;
+        mStencilRef = StencilRef;
+        mCommandContext->Log("OMSetDepthStencilState");
+        mContext4->OMSetDepthStencilState(pDepthStencilState, StencilRef);
+    }
+}
+
+void CommandRecordingContext::Log(const char* message) {
+    // GetDevice()->EmitLog(WGPULoggingType_Error, message);
+}
+
 MaybeError CommandRecordingContext::Intialize(Device* device) {
     DAWN_ASSERT(!IsOpen());
     DAWN_ASSERT(device);
@@ -54,6 +172,9 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
 
     mD3D11Device = d3d11Device;
     mD3D11DeviceContext4 = std::move(d3d11DeviceContext4);
+
+    mDeviceContextTrackerD3D11.Initialize(mD3D11DeviceContext4.Get(), this);
+
     mIsOpen = true;
 
     // Create a uniform buffer for built in variables.
@@ -105,6 +226,11 @@ ID3D11DeviceContext1* CommandRecordingContext::GetD3D11DeviceContext1() const {
 ID3D11DeviceContext4* CommandRecordingContext::GetD3D11DeviceContext4() const {
     DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
     return mD3D11DeviceContext4.Get();
+}
+
+DeviceContextTrackerD3D11* CommandRecordingContext::GetDeviceContextTrackerD3D11() {
+    DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
+    return &mDeviceContextTrackerD3D11;
 }
 
 ID3DUserDefinedAnnotation* CommandRecordingContext::GetD3DUserDefinedAnnotation() const {

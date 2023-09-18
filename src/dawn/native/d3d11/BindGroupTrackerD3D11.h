@@ -34,9 +34,15 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/tr
     MaybeError ApplyBindGroup(BindGroupIndex index);
     void UnApplyBindGroup(BindGroupIndex index);
 
+    void UpdateBindingCounts();
+
     CommandRecordingContext* const mCommandContext;
     const bool mIsRenderPass;
     const wgpu::ShaderStage mVisibleStages;
+
+    uint32_t mConstantBufferCount = 0u;
+    uint32_t mShaderResourceViewCount = 0u;
+    uint32_t mSamplerCount = 0u;
 };
 
 }  // namespace dawn::native::d3d11

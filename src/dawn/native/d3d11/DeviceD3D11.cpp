@@ -175,11 +175,13 @@ MaybeError Device::NextSerial() {
     TRACE_EVENT1(GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
 
+#if 0
     CommandRecordingContext* commandContext =
         GetPendingCommandContext(DeviceBase::SubmitMode::Passive);
     DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Signal(
                               mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
                           "D3D11 command queue signal fence"));
+#endif
 
     return {};
 }
@@ -196,7 +198,8 @@ MaybeError Device::WaitForSerial(ExecutionSerial serial) {
 }
 
 ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
-    ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
+    // ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
+    ExecutionSerial completedSerial = ExecutionSerial(GetLastSubmittedCommandSerial());
     if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
         // GetCompletedValue returns UINT64_MAX if the device was removed.
         // Try to query the failure reason.
