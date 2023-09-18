@@ -59,6 +59,10 @@ class PipelineLayout final : public PipelineLayoutBase {
     // Get the bind groups that use one or more UAV slots.
     const BindGroupLayoutMask& GetUAVBindGroupLayoutsMask() const;
 
+    uint32_t GetConstantBufferCount() const { return mMaxConstantBufferIndex + 1; }
+    uint32_t GetSamplerCount() const { return mMaxSamplerIndex + 1; }
+    uint32_t GetShaderResourceViewCount() const { return mMaxShaderResourceViewIndex + 1; }
+
   private:
     using PipelineLayoutBase::PipelineLayoutBase;
 
@@ -71,6 +75,9 @@ class PipelineLayout final : public PipelineLayoutBase {
     uint32_t mUnusedUAVBindingCount = 0u;
     uint32_t mTotalUAVBindingCount = 0u;
     BindGroupLayoutMask mUAVBindGroups = 0;
+    uint32_t mMaxConstantBufferIndex = 0;
+    uint32_t mMaxSamplerIndex = 0;
+    uint32_t mMaxShaderResourceViewIndex = 0;
 };
 
 }  // namespace dawn::native::d3d11
