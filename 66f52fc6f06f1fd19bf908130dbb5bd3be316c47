@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7619342c_bedba72c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T15:22:43Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ef5fb2d_bd8cfccc",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T15:22:43Z",
+      "side": 1,
+      "message": "u-nit: Maybe we could change these to take an std::span?",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff676b1f_1f292022",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T15:22:43Z",
+      "side": 1,
+      "message": "Maybe detail a bit more that we can \"spontaneously\" trigger events here (is this called regularly? Are there other places where events could be called spontaneously?)",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4a969992_c60878f1",
@@ -37,6 +88,64 @@
         "endLine": 200,
         "endChar": 96
       },
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a874a51f_d1c2061f",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T15:22:43Z",
+      "side": 1,
+      "message": "My understanding is that the underlying FD / HANDLE stays signaled so there is no issue. However the WaitRef being used outside the lock means that two waitref could be created at the same time on the same future. I\u0027m not sure how to avoid this without putting a big lock around all WaitAnyImpl calls.",
+      "parentUuid": "4a969992_c60878f1",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 96
+      },
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e605d1b_3fe75ab8",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T15:22:43Z",
+      "side": 1,
+      "message": "It\u0027s a bit unfortunate that we need to look up the futures in multiple maps repeatedly. This is to just be to separate the futures that can only be triggered in waitAny from the other ones so why do we need the third map? Also maybe we could just iterate all futures in ProcessPollEvents or alternatively have a map of all futures and a set of the processPollEventable futureIDs (then when we remove them we can also remove the id from the set).",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4ac6936_bb60a149",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T15:22:43Z",
+      "side": 1,
+      "message": "nit: used by WaitAny and ProcessEvents",
       "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
