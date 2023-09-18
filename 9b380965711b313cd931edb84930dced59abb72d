@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f8f6857_6996bc22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-09-18T16:00:09Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, I created a CL during shader compile server exploration.  The exploration is for creating remote server which can compile shaders for chrome users. Do you think I should land it? maybe behind a dawn feature or toggle?",
+      "revId": "9b380965711b313cd931edb84930dced59abb72d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
