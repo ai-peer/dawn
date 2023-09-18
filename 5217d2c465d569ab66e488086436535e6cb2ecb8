@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "b565d997_966fa5ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T16:18:38Z",
+      "side": 1,
+      "message": "The D3D11 spec says this because writing a subresource in the middle of a \"render pass\" forces a potential GPU stall to wait for all the previous draws are finished before starting the new ones. The DISCARD thing is so that internally the driver uses a ringbuffer to upload the data. Why can\u0027t we do that ourselves in Dawn and have a unified path for both indirect and direct operations?",
+      "parentUuid": "bc7b0161_15158ced",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6160c030_c3ebe809",
