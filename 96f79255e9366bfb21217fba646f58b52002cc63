@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "19618128_97b83341",
+        "filename": "generator/templates/dawn/native/api_structs.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T20:44:12Z",
+      "side": 1,
+      "message": "Yea, you make a good point. I changed it so that we just do the conversion in the proc table now. Should be more consistent with how we are doing everything else. Thanks!",
+      "parentUuid": "9e6a7553_2f591c01",
+      "revId": "96f79255e9366bfb21217fba646f58b52002cc63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "917d9b27_76436ce9",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-09-17T16:46:49Z",
       "side": 1,
       "message": "nit: would ToAPI() work here?",
+      "range": {
+        "startLine": 220,
+        "startChar": 18,
+        "endLine": 220,
+        "endChar": 29
+      },
+      "revId": "96f79255e9366bfb21217fba646f58b52002cc63",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ac3436b_afe2437d",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T20:44:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "917d9b27_76436ce9",
       "range": {
         "startLine": 220,
         "startChar": 18,
