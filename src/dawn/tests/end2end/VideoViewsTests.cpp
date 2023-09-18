@@ -16,6 +16,7 @@
 
 #include <utility>
 
+#include "dawn/common/Log.h"
 #include "dawn/common/Math.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/TestUtils.h"
@@ -57,6 +58,9 @@ std::vector<wgpu::FeatureName> VideoViewsTestsBase::GetRequiredFeatures() {
         requiredFeatures.push_back(wgpu::FeatureName::Norm16TextureFormats);
     }
     requiredFeatures.push_back(wgpu::FeatureName::DawnInternalUsages);
+    dawn::ErrorLog() << "test - GetRequiredFeatures - mIsMultiPlanarFormatP010Supported = "
+                     << mIsMultiPlanarFormatP010Supported
+                     << " mIsNorm16TextureFormatsSupported = " << mIsNorm16TextureFormatsSupported;
     return requiredFeatures;
 }
 
@@ -121,7 +125,7 @@ std::vector<T> VideoViewsTestsBase::GetTestTextureData(wgpu::TextureFormat forma
         case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
         case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
             if (isCheckerboard) {
-                return {
+                auto ret = {
                     Wy, Wy, Ry, Ry,  // plane 0, start + 0
                     Wy, Wy, Ry, Ry,  //
                     Yy, Yy, By, By,  //
@@ -129,8 +133,13 @@ std::vector<T> VideoViewsTestsBase::GetTestTextureData(wgpu::TextureFormat forma
                     Wu, Wv, Ru, Rv,  // plane 1, start + 16
                     Yu, Yv, Bu, Bv,  //
                 };
+                std::cout << "\nGetTestTextureData with checkerboard....\n";
+                for (T i : ret) {
+                    std::cout << std::hex << i << " ";
+                }
+                return ret;
             } else {
-                return {
+                auto ret = {
                     Yy, Yy, Yy, Yy,  // plane 0, start + 0
                     Yy, Yy, Yy, Yy,  //
                     Yy, Yy, Yy, Yy,  //
@@ -138,6 +147,11 @@ std::vector<T> VideoViewsTestsBase::GetTestTextureData(wgpu::TextureFormat forma
                     Yu, Yv, Yu, Yv,  // plane 1, start + 16
                     Yu, Yv, Yu, Yv,  //
                 };
+                std::cout << "\nGetTestTextureData without checkerboard....\n";
+                for (T i : ret) {
+                    std::cout << std::hex << i << " ";
+                }
+                return ret;
             }
         case wgpu::TextureFormat::RGBA8Unorm:
             // Combines both NV12 planes by directly mapping back to RGB: R=Y, G=U, B=V.
@@ -179,18 +193,30 @@ uint32_t VideoViewsTestsBase::NumPlanes(wgpu::TextureFormat format) {
             return 0;
     }
 }
-std::vector<uint8_t> VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex(size_t planeIndex,
-                                                                           size_t bytesPerRow,
-                                                                           size_t height,
-                                                                           bool isCheckerboard) {
-    std::vector<uint8_t> texelData = VideoViewsTestsBase::GetTestTextureData<uint8_t>(
+
+template <typename T>
+std::vector<T> VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex(size_t planeIndex,
+                                                                     size_t bytesPerRow,
+                                                                     size_t height,
+                                                                     bool isCheckerboard) {
+    std::cout << "\ntest - GetTestTextureDataWithPlaneIndex - bytesPerRow = " << bytesPerRow
+              << " height = " << height << " planeIndex = " << planeIndex;
+    std::vector<T> texelData = VideoViewsTestsBase::GetTestTextureData<T>(
         wgpu::TextureFormat::R8BG8Biplanar420Unorm, isCheckerboard);
     const uint32_t texelDataRowBytes = kYUVImageDataWidthInTexels;
     const uint32_t texelDataHeight =
         planeIndex == 0 ? kYUVImageDataHeightInTexels : kYUVImageDataHeightInTexels / 2;
 
-    std::vector<uint8_t> texels(bytesPerRow * height, 0);
+    std::cout << "\ntest - GetTestTextureDataWithPlaneIndex - texelData = \n";
+    for (T i : texelData) {
+        std::cout << std::hex << i << ' ';
+    }
+    std::cout << "\ntest - GetTestTextureDataWithPlaneIndex again - bytesPerRow = " << bytesPerRow
+              << " height = " << height << " planeIndex = " << planeIndex;
+    std::vector<T> texels(bytesPerRow * height, 0);
     uint32_t plane_first_texel_offset = 0;
+    std::cout << "\ntest - GetTestTextureDataWithPlaneIndex again - bytesPerRow = " << bytesPerRow
+              << " height = " << height << " planeIndex = " << planeIndex;
     // The size of the test video frame is 4 x 4
     switch (planeIndex) {
         case VideoViewsTestsBase::kYUVLumaPlaneIndex:
@@ -201,6 +227,10 @@ std::vector<uint8_t> VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex(size_
                             texelData[texelDataRowBytes * i + j + plane_first_texel_offset];
                     }
                 }
+            }
+            std::cout << "\ntest - GetTestTextureDataWithPlaneIndex - texels = \n";
+            for (T i : texels) {
+                std::cout << std::hex << i << ' ';
             }
             return texels;
         case VideoViewsTestsBase::kYUVChromaPlaneIndex:
@@ -215,12 +245,27 @@ std::vector<uint8_t> VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex(size_
                     }
                 }
             }
+            std::cout << "\ntest - GetTestTextureDataWithPlaneIndex - texels = \n";
+            for (T i : texels) {
+                std::cout << std::hex << i << ' ';
+            }
             return texels;
         default:
             DAWN_UNREACHABLE();
             return {};
     }
 }
+
+template std::vector<uint8_t> VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<uint8_t>(
+    size_t planeIndex,
+    size_t bytesPerRow,
+    size_t height,
+    bool isCheckerboard);
+template std::vector<uint16_t> VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<uint16_t>(
+    size_t planeIndex,
+    size_t bytesPerRow,
+    size_t height,
+    bool isCheckerboard);
 
 wgpu::TextureFormat VideoViewsTestsBase::GetFormat() const {
     return GetParam().mFormat;
@@ -1031,9 +1076,10 @@ class VideoViewsExtendedUsagesTests : public VideoViewsTestsBase {
 
                 auto buffer = device.CreateBuffer(&bufferDesc);
 
-                std::vector<uint8_t> data = VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex(
-                    plane, bytesPerRow, VideoViewsTestsBase::kYUVImageDataHeightInTexels,
-                    isCheckerboard);
+                std::vector<uint8_t> data =
+                    VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<uint8_t>(
+                        plane, bytesPerRow, VideoViewsTestsBase::kYUVImageDataHeightInTexels,
+                        isCheckerboard);
 
                 memcpy(buffer.GetMappedRange(), data.data(), bufferDesc.size);
                 buffer.Unmap();
