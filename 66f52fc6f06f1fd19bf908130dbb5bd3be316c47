@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b84f3b2a_5ea9447d",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T23:27:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ef5fb2d_bd8cfccc",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff676b1f_1f292022",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-09-18T15:22:43Z",
       "side": 1,
       "message": "Maybe detail a bit more that we can \"spontaneously\" trigger events here (is this called regularly? Are there other places where events could be called spontaneously?)",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9ea12da_19d67fa4",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T23:27:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff676b1f_1f292022",
       "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -142,6 +178,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5ccfccb5_9d66d28c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T23:27:16Z",
+      "side": 1,
+      "message": "Assuming what you said though, I (1) added some documentation about the `WaitRef`, and (2) changed `ProcessEvents` to use a specialized lock instead of overloading the `mEvents` lock which I **think** means we shouldn\u0027t have problems with having to deal with stacked timeouts anymore.",
+      "parentUuid": "e65e76fd_a74f5a1b",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 96
+      },
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e605d1b_3fe75ab8",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 2
@@ -153,6 +213,24 @@
       "writtenOn": "2023-09-18T15:22:43Z",
       "side": 1,
       "message": "It\u0027s a bit unfortunate that we need to look up the futures in multiple maps repeatedly. This is to just be to separate the futures that can only be triggered in waitAny from the other ones so why do we need the third map? Also maybe we could just iterate all futures in ProcessPollEvents or alternatively have a map of all futures and a set of the processPollEventable futureIDs (then when we remove them we can also remove the id from the set).",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "507e4d68_d6e1b8a8",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T23:27:16Z",
+      "side": 1,
+      "message": "Hmm, I consolidated it into 1 map. I think iterating it all on `ProcessEvents` didn\u0027t seem too bad.",
+      "parentUuid": "1e605d1b_3fe75ab8",
       "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -170,6 +248,24 @@
       "writtenOn": "2023-09-18T15:22:43Z",
       "side": 1,
       "message": "nit: used by WaitAny and ProcessEvents",
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca52666f_9ae898e0",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T23:27:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b4ac6936_bb60a149",
       "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
