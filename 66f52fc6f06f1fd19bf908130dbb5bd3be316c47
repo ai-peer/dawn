@@ -118,6 +118,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e65e76fd_a74f5a1b",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-18T20:38:16Z",
+      "side": 1,
+      "message": "Hmm that\u0027s what I assumed also, but when I look at the implementation of `WaitAnyImpl` and `WaitAnySystemEvent` I don\u0027t see how/where they are checking if the signal happened already? Are we assuming / is it common knowledge (that I am not aware of) that the system level FD / HANDLE will always immediately report signaled on a second call, i.e. `poll` on an invalid FD immediately reports signaled?\n\nLooking it up online it seems like `poll` would likely trigger both waiting threads (idk about Windows) if they are already both waiting. Idk what happens if one starts waiting, the `poll` succeeds, then another thread tries to wait on it again though.",
+      "parentUuid": "a874a51f_d1c2061f",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 96
+      },
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1e605d1b_3fe75ab8",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 2
