@@ -33,6 +33,24 @@
       "message": "```suggestion\n        case interop::GPUVertexFormat::kRgb10A2:\n```",
       "revId": "a5a10d9cc9292a0280eaf3b2bc9f3b48b3b02263",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b6f269b_4a5ea521",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-18T07:46:37Z",
+      "side": 1,
+      "message": "I\u0027m surprised it was not caught by bots. Do you know why?",
+      "parentUuid": "42cab4f6_9338a22d",
+      "revId": "a5a10d9cc9292a0280eaf3b2bc9f3b48b3b02263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
