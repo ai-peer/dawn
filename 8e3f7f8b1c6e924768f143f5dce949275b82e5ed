@@ -51,6 +51,24 @@
       "parentUuid": "7f0367a2_4c35c589",
       "revId": "8e3f7f8b1c6e924768f143f5dce949275b82e5ed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d38dab9c_1847eb99",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-18T03:50:56Z",
+      "side": 1,
+      "message": "Thanks, Jiawei.\n`is_official_build \u003d true` works. Sorry for the noise.",
+      "parentUuid": "3a711ce6_cb8fc20b",
+      "revId": "8e3f7f8b1c6e924768f143f5dce949275b82e5ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
