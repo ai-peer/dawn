@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b2edf31_0185cd66",
+        "filename": "src/tint/lang/spirv/writer/builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1803,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-18T22:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b3c6f902_993a3366",
+      "revId": "761d0cad3cc8ad034fae353369cc6b7ba71c093b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "707ec57e_944389ee",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-14T21:59:44Z",
       "side": 1,
       "message": "ty.u32()",
+      "revId": "761d0cad3cc8ad034fae353369cc6b7ba71c093b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76208d96_ec28a726",
+        "filename": "src/tint/lang/spirv/writer/builtin_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1816,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-18T22:19:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "707ec57e_944389ee",
       "revId": "761d0cad3cc8ad034fae353369cc6b7ba71c093b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
