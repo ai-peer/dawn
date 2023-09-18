@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "14552801_7d0d8130",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T16:08:14Z",
+      "side": 1,
+      "message": "Clearing would use each RTV only once, and applications shouldn\u0027t rely too much on lazy-clearing for performance, so IMHO it could use CreateD3D11RTV (maybe there will be one duplicated RTV creation compared to your profile but that seems ok?) Same comment for the DSV.",
+      "parentUuid": "5a77abb9_062615ef",
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0d41202b_e4531135",
         "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
         "patchSetId": 3
@@ -185,6 +203,24 @@
       "side": 1,
       "message": "I dumped new profile at https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1481660#c3\n\nAs my test:\n\nFor SRV: 5.44% -\u003e 0.08%\nFor RTV:  2.82% -\u003e 0.19%\nFor DSV: 1.68% -\u003e 0.02%",
       "parentUuid": "bb5f8cac_7eaeab98",
+      "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f75b7e2_9579188e",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T16:08:14Z",
+      "side": 1,
+      "message": "The data is pretty clear that we should do this even if there\u0027s also the opportunity for Graphite to cache bindgroups IMHO. The code for SRV/UAV/RTV is pretty small anyway.",
+      "parentUuid": "d994ea1c_c9bb0c0f",
       "revId": "9adfe76815eeaecaa8ec6a3fce3dfc70f58dca77",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
