@@ -51,6 +51,24 @@
       "parentUuid": "42cab4f6_9338a22d",
       "revId": "a5a10d9cc9292a0280eaf3b2bc9f3b48b3b02263",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cfcb6d4_fba84757",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-18T11:22:12Z",
+      "side": 1,
+      "message": "It was caught by Kokoro though, which is one of the bots. Chromium CQ doesn\u0027t work super well with CMake so dawn.node is only built on Kokoro.",
+      "parentUuid": "0b6f269b_4a5ea521",
+      "revId": "a5a10d9cc9292a0280eaf3b2bc9f3b48b3b02263",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
