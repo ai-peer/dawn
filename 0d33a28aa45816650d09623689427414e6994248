@@ -16,6 +16,23 @@
       "message": "Small bug, was missing size_t types but never hit it until: https://dawn-review.googlesource.com/c/dawn/+/135623",
       "revId": "0d33a28aa45816650d09623689427414e6994248",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eeea9e24_0e67226a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-19T22:36:08Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "0d33a28aa45816650d09623689427414e6994248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
