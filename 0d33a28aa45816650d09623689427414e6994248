@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6acea81d_a79811e1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-09-19T20:27:03Z",
+      "side": 1,
+      "message": "Small bug, was missing size_t types but never hit it until: https://dawn-review.googlesource.com/c/dawn/+/135623",
+      "revId": "0d33a28aa45816650d09623689427414e6994248",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
