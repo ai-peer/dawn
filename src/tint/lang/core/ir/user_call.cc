@@ -33,10 +33,17 @@ UserCall::UserCall(InstructionResult* result, Function* func, VectorRef<Value*> 
 UserCall::~UserCall() = default;
 
 UserCall* UserCall::Clone(CloneContext& ctx) {
+    auto* target = ctx.Remap(Target());
     auto* new_result = ctx.Clone(Result());
-    auto* new_target = ctx.Clone(Target());
     auto new_args = ctx.Clone<UserCall::kDefaultNumOperands>(Args());
-    return ctx.ir.instructions.Create<UserCall>(new_result, new_target, new_args);
+    return ctx.ir.instructions.Create<UserCall>(new_result, target, new_args);
+}
+
+void UserCall::SetArgs(VectorRef<Value*> arguments) {
+    auto* fn = Target();
+    ClearOperands();
+    AddOperand(UserCall::kFunctionOperandOffset, fn);
+    AddOperands(UserCall::kArgsOperandOffset, std::move(arguments));
 }
 
 }  // namespace tint::core::ir

@@ -40,6 +40,8 @@ tint_add_target(tint_lang_core_ir_transform lib
   lang/core/ir/transform/builtin_polyfill.h
   lang/core/ir/transform/demote_to_helper.cc
   lang/core/ir/transform/demote_to_helper.h
+  lang/core/ir/transform/direct_variable_access.cc
+  lang/core/ir/transform/direct_variable_access.h
   lang/core/ir/transform/multiplanar_external_texture.cc
   lang/core/ir/transform/multiplanar_external_texture.h
   lang/core/ir/transform/robustness.cc
@@ -86,6 +88,7 @@ tint_add_target(tint_lang_core_ir_transform_test test
   lang/core/ir/transform/block_decorated_structs_test.cc
   lang/core/ir/transform/builtin_polyfill_test.cc
   lang/core/ir/transform/demote_to_helper_test.cc
+  lang/core/ir/transform/direct_variable_access_wgsl_test.cc
   lang/core/ir/transform/helper_test.h
   lang/core/ir/transform/multiplanar_external_texture_test.cc
   lang/core/ir/transform/robustness_test.cc
@@ -102,6 +105,14 @@ tint_target_add_dependencies(tint_lang_core_ir_transform_test test
   tint_lang_core_ir
   tint_lang_core_ir_transform
   tint_lang_core_type
+  tint_lang_wgsl
+  tint_lang_wgsl_ast
+  tint_lang_wgsl_program
+  tint_lang_wgsl_reader
+  tint_lang_wgsl_reader_program_to_ir
+  tint_lang_wgsl_sem
+  tint_lang_wgsl_writer
+  tint_lang_wgsl_writer_ir_to_program
   tint_utils_containers
   tint_utils_diagnostic
   tint_utils_ice
