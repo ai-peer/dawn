@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5013629_21cb8425",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-09-19T17:17:42Z",
+      "side": 1,
+      "message": "This looks incorrect since P010 has more bytes per plane/element than NV12.",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 83,
+        "endChar": 66
+      },
+      "revId": "64203aeb022e70ec4ebacdb9966c103b840dc48c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
