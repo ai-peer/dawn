@@ -224,6 +224,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b9ee84ac_f840f01f",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-19T23:55:26Z",
+      "side": 1,
+      "message": "Ah, you\u0027re right about the FD\u0027s only becoming invalid when the event is removed from the map.\n\nRegarding duplicated FDs, from here: https://pubs.opengroup.org/onlinepubs/9699919799/functions/V2_chap02.html#tag_15_14 under section 2.14, it seems like they are atomically allocated so maybe overall this is a no-op. Since there\u0027s no immediate issue, I won\u0027t bother with a TODO for now. Will close this thread to unblock and continue progress. Thanks!",
+      "parentUuid": "e9c289c3_2d631c45",
+      "range": {
+        "startLine": 199,
+        "startChar": 4,
+        "endLine": 200,
+        "endChar": 96
+      },
+      "revId": "66f52fc6f06f1fd19bf908130dbb5bd3be316c47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1e605d1b_3fe75ab8",
