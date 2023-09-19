@@ -38,4 +38,10 @@ BreakIf::BreakIf(Value* condition, ir::Loop* loop, VectorRef<Value*> args) : loo
 
 BreakIf::~BreakIf() = default;
 
+BreakIf* BreakIf::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

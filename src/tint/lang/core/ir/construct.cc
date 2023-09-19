@@ -27,4 +27,10 @@ Construct::Construct(InstructionResult* result, VectorRef<Value*> arguments) {
 
 Construct::~Construct() = default;
 
+Construct* Construct::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

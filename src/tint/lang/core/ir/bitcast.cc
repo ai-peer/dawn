@@ -25,4 +25,10 @@ Bitcast::Bitcast(InstructionResult* result, Value* val) {
 
 Bitcast::~Bitcast() = default;
 
+Bitcast* Bitcast::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

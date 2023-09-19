@@ -13,6 +13,9 @@
 // limitations under the License.
 
 #include "src/tint/lang/core/ir/block.h"
+
+#include "src/tint/lang/core/ir/clone_context.h"
+#include "src/tint/lang/core/ir/module.h"
 #include "src/tint/utils/ice/ice.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::core::ir::Block);
@@ -22,6 +25,21 @@ namespace tint::core::ir {
 Block::Block() : Base() {}
 
 Block::~Block() = default;
+
+Block* Block::Clone(CloneContext& ctx) {
+    auto* out = ctx.ir.blocks.Create();
+    for (auto* inst_in : *this) {
+        auto* inst_out = inst_in->Clone(ctx);
+        auto results_out = inst_out->Results();
+        auto results_in = inst_in->Results();
+        TINT_ASSERT_OR_RETURN_VALUE(results_out.Length() == results_in.Length(), nullptr);
+        for (size_t i = 0, n = results_out.Length(); i < n; i++) {
+            ctx.Replace(results_in[i], results_out[i]);
+        }
+        out->Append(inst_out);
+    }
+    return out;
+}
 
 Instruction* Block::Prepend(Instruction* inst) {
     TINT_ASSERT_OR_RETURN_VALUE(inst, inst);

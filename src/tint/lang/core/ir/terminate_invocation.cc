@@ -20,4 +20,10 @@ namespace tint::core::ir {
 
 TerminateInvocation::~TerminateInvocation() = default;
 
+TerminateInvocation* TerminateInvocation::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

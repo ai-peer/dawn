@@ -20,4 +20,10 @@ namespace tint::core::ir {
 
 Unreachable::~Unreachable() = default;
 
+Unreachable* Unreachable::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir
