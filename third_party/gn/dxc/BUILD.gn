@@ -21,7 +21,7 @@ import("build/add_hlsl_hctgen.gni")
 import("build/built_target_action.gni")
 import("build/cmake_configure_file.gni")
 import("build/generate_version_include.gni")
-import("build/system_binary_action.gni")
+import("build/message_compiler.gni")
 
 dawn_dxc_gn_dir = "$dawn_dxc_dir/../gn"
 llvm_target_triple = "dxil-ms-dx"  # Force target triple
@@ -42,27 +42,27 @@ if (host_cpu == "x86" || host_cpu == "x64") {
 }
 
 if (target_cpu == "x64") {
-  if (current_os == "linux") {
+  if (target_os == "linux") {
     llvm_current_triple = "x86_64-unknown-linux-gnu"
-  } else if (current_os == "win") {
+  } else if (target_os == "win") {
     llvm_current_triple = "x86_64-pc-win32"
   } else {
     assert(
         false,
-        "define 'llvm_current_triple' for target_cpu: $target_cpu, target_os: $current_os")
+        "define 'llvm_current_triple' for target_cpu: $target_cpu, target_os: $target_os")
   }
 } else if (target_cpu == "x86") {
-  if (current_os == "win") {
+  if (target_os == "win") {
     llvm_current_triple = "x86_32-pc-win32"
   } else {
     assert(
         false,
-        "define 'llvm_current_triple' for target_cpu: $target_cpu, target_os: $current_os")
+        "define 'llvm_current_triple' for target_cpu: $target_cpu, target_os: $target_os")
   }
 } else {
   assert(
       false,
-      "define 'llvm_current_triple' for target_cpu: $target_cpu, target_os: $current_os")
+      "define 'llvm_current_triple' for target_cpu: $target_cpu, target_os: $target_os")
 }
 
 #######################################################################
@@ -735,16 +735,39 @@ template("tblgen") {
   }
 }
 
-template("clang_tablegen") {
+# Support cross-compilation from Linux/Mac to Windows by specifying
+# the host-toolchain to use when building the tablegen executables.
+if (host_os != "win" && target_os == "win") {
+  host_tblgen_target = ":llvm-tblgen(//build/toolchain/${host_os}:clang_${target_cpu})"
+  host_clang_target = ":clang-tblgen(//build/toolchain/${host_os}:clang_${target_cpu})"
+} else {
+  host_tblgen_target = ":llvm-tblgen"
+  host_clang_target = ":clang-tblgen"
+}
+
+template("llvm_tablegen") {
   tblgen(target_name) {
     forward_variables_from(invoker,
                            [
+                             "args",
                              "output_name",
                              "td_file",
                              "visibility",
                            ])
-    args = invoker.args
-    tblgen_target = ":clang-tblgen"
+    tblgen_target = host_tblgen_target
+  }
+}
+
+template("clang_tablegen") {
+  tblgen(target_name) {
+    forward_variables_from(invoker,
+                           [
+                            "args",
+                             "output_name",
+                             "td_file",
+                             "visibility",
+                           ])
+    tblgen_target = host_clang_target
   }
 }
 
@@ -765,25 +788,22 @@ template("clang_diag_gen") {
 ## llvm-tblgen and clang-tblgen targets
 #######################################################################
 
-tblgen("HLSLOptions-inc") {
+llvm_tablegen("HLSLOptions-inc") {
   args = [ "-gen-opt-parser-defs" ]
   td_file = "$dawn_dxc_dir/include/dxc/Support/HLSLOptions.td"
   output_name = "include/dxc/Support/HLSLOptions.inc"
-  tblgen_target = ":llvm-tblgen"
 }
 
-tblgen("Intrinsics-td") {
+llvm_tablegen("Intrinsics-td") {
   args = [ "-gen-intrinsic" ]
   td_file = "$dawn_dxc_dir/include/llvm/IR/Intrinsics.td"
   output_name = "include/llvm/IR/Intrinsics.gen"
-  tblgen_target = ":llvm-tblgen"
 }
 
-tblgen("clang-Driver-Options-inc") {
+llvm_tablegen("clang-Driver-Options-inc") {
   args = [ "-gen-opt-parser-defs" ]
   td_file = "$dawn_dxc_dir/tools/clang/include/clang/Driver/Options.td"
   output_name = "tools/clang/include/clang/Driver/Options.inc"
-  tblgen_target = ":llvm-tblgen"
 }
 
 clang_diag_gen("Analysis") {
@@ -1021,32 +1041,16 @@ clang_tablegen("AttrPCHWrite-inc") {
 #######################################################################
 
 # Generates dxcetw.h used by dxcompiler
-system_binary_action("dxcetw-h") {
-  manifest = "$dawn_dxc_dir/include/dxc/Tracing/dxcetw.man"
-  inputs = [ manifest ]
-  gen_output_dir = "$target_gen_dir/include/dxc/Tracing/dxcetw"
-  outputs = [
-    "$gen_output_dir/dxcetw.h",
-    "$gen_output_dir/dxcetw.rc",
-    "$gen_output_dir/dxcetwTEMP.bin",
-
-    # Note: CMake copies from tmpdxcetw_MSG00001.bin to MSG00001.bin,
-    # but we don't copy, so we get the default output name. Is this okay?
-    "$gen_output_dir/dxcetw_MSG00001.bin",
-  ]
-  args = [
-    "mc",
-    "-r",
-    rebase_path(gen_output_dir, root_build_dir),
-    "-h",
-    rebase_path(gen_output_dir, root_build_dir),
+message_compiler("dxcetw-h") {
+  sources = [ "$dawn_dxc_dir/include/dxc/Tracing/dxcetw.man" ]
+  extra_args = [
     "-p",
     "DxcEtw_",
     "-um",
     "-z",
     "dxcetw",
-    rebase_path(manifest, root_build_dir),
   ]
+  output_dir = "$target_gen_dir/include/dxc/Tracing/dxcetw"
 }
 
 generate_version_include("hlsl_dxcversion_autogen") {
