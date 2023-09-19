@@ -96,6 +96,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ab0f359_5d890a4c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-19T15:46:17Z",
+      "side": 1,
+      "message": "Thank you, after thinking about this more, the current approach seems good. The reason why a ringbuffer is not as good as MAP_DISCARD (compared to other backends) is that D3D11 draws/dispatches happen \"immediately\". However for indirect dispatches/draws we should use https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.h;drc\u003de60adb28edec185d84d27074c2a2dfb7bb833dca;l\u003d391 and https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.h;drc\u003de60adb28edec185d84d27074c2a2dfb7bb833dca;l\u003d386 if we can.",
+      "parentUuid": "1535ff78_ff9cf478",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6160c030_c3ebe809",
