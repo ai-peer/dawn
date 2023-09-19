@@ -42,6 +42,12 @@ Loop::Loop(ir::Block* i, ir::MultiInBlock* b, ir::MultiInBlock* c)
 
 Loop::~Loop() = default;
 
+Loop* Loop::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 void Loop::ForeachBlock(const std::function<void(ir::Block*)>& cb) {
     if (initializer_) {
         cb(initializer_);

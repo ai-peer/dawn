@@ -25,4 +25,8 @@ Constant::Constant(const core::constant::Value* val) : value_(val) {
 
 Constant::~Constant() = default;
 
+Constant* Constant::Clone(CloneContext&) {
+    return this;  // Constants are immutable can are unscoped.
+}
+
 }  // namespace tint::core::ir

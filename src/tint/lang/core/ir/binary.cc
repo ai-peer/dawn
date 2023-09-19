@@ -26,6 +26,12 @@ Binary::Binary(InstructionResult* result, enum Kind kind, Value* lhs, Value* rhs
 
 Binary::~Binary() = default;
 
+Binary* Binary::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 std::string_view ToString(enum Binary::Kind kind) {
     switch (kind) {
         case Binary::Kind::kAdd:

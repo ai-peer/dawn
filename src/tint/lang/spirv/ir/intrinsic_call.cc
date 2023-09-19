@@ -27,4 +27,10 @@ IntrinsicCall::IntrinsicCall(core::ir::InstructionResult* result,
 
 IntrinsicCall::~IntrinsicCall() = default;
 
+IntrinsicCall* IntrinsicCall::Clone(core::ir::CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::spirv::ir

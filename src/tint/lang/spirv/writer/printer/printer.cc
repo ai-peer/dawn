@@ -1771,7 +1771,7 @@ void Printer::EmitUnary(core::ir::Unary* unary) {
 
 void Printer::EmitUserCall(core::ir::UserCall* call) {
     auto id = Value(call);
-    OperandList operands = {Type(call->Result()->Type()), id, Value(call->Func())};
+    OperandList operands = {Type(call->Result()->Type()), id, Value(call->Target())};
     for (auto* arg : call->Args()) {
         operands.push_back(Value(arg));
     }

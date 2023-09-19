@@ -25,4 +25,10 @@ Unary::Unary(InstructionResult* result, enum Kind k, Value* val) : kind_(k) {
 
 Unary::~Unary() = default;
 
+Unary* Unary::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

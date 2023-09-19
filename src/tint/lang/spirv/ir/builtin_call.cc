@@ -31,4 +31,10 @@ BuiltinCall::BuiltinCall(core::ir::InstructionResult* result,
 
 BuiltinCall::~BuiltinCall() = default;
 
+BuiltinCall* BuiltinCall::Clone(core::ir::CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::spirv::ir
