@@ -33,6 +33,12 @@ Return::Return(Function* func, ir::Value* arg) {
 
 Return::~Return() = default;
 
+Return* Return::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 Function* Return::Func() const {
     return tint::As<Function>(operands_[kFunctionOperandOffset]);
 }

@@ -46,4 +46,10 @@ void If::ForeachBlock(const std::function<void(ir::Block*)>& cb) {
     }
 }
 
+If* If::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

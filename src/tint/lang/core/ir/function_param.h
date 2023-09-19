@@ -25,6 +25,10 @@
 #include "src/tint/utils/rtti/castable.h"
 
 namespace tint::core::ir {
+class Builder;
+}
+
+namespace tint::core::ir {
 
 /// A function parameter in the IR.
 class FunctionParam : public Castable<FunctionParam, Value> {
@@ -66,6 +70,9 @@ class FunctionParam : public Castable<FunctionParam, Value> {
 
     /// @returns the type of the var
     const core::type::Type* Type() override { return type_; }
+
+    /// @copydoc Value::Clone()
+    FunctionParam* Clone(CloneContext& ctx) override;
 
     /// Sets the builtin information. Note, it is currently an error if the builtin is already set.
     /// @param val the builtin to set

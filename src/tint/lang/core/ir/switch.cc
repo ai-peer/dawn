@@ -34,4 +34,10 @@ void Switch::ForeachBlock(const std::function<void(ir::Block*)>& cb) {
     }
 }
 
+Switch* Switch::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

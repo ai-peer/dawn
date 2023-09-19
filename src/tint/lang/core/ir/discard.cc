@@ -23,4 +23,10 @@ Discard::Discard() = default;
 
 Discard::~Discard() = default;
 
+Discard* Discard::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

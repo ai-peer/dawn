@@ -32,4 +32,10 @@ CoreBuiltinCall::CoreBuiltinCall(InstructionResult* result,
 
 CoreBuiltinCall::~CoreBuiltinCall() = default;
 
+CoreBuiltinCall* CoreBuiltinCall::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

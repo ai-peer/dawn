@@ -27,4 +27,10 @@ Convert::Convert(InstructionResult* result, Value* value) {
 
 Convert::~Convert() = default;
 
+Convert* Convert::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

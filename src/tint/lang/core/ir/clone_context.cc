@@ -12,18 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/terminate_invocation.h"
+#include "src/tint/lang/core/ir/clone_context.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::TerminateInvocation);
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/let.h"
 
 namespace tint::core::ir {
 
-TerminateInvocation::~TerminateInvocation() = default;
-
-TerminateInvocation* TerminateInvocation::Clone(CloneContext& ctx)  {
-    (void)ctx;
-    TINT_UNIMPLEMENTED();
-    return nullptr;
-}
+CloneContext::CloneContext(Module& module) : ir(module) {}
 
 }  // namespace tint::core::ir
