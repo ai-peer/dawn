@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "b4847ee0b6282e2a7de5f5abe5126074c8fcf82e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38268740_249ea1ea",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-19T00:34:46Z",
+      "side": 1,
+      "message": "Suggest using a matcher to exclude write-only storage images for these overloads. See the `readable` matcher and its use for `textureLoad` in the `core.def` file.",
+      "revId": "b4847ee0b6282e2a7de5f5abe5126074c8fcf82e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
