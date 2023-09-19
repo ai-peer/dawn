@@ -50,6 +50,24 @@
       "message": "nit: Data never escapes the scope it is initialized in, so maybe we don\u0027t need to keep it in a local variant and can just declare it in each of the branches of the if?",
       "revId": "33a1fd88c7f61e9ccc4bf1a0237af4928e3b318a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c875d64_a3666ceb",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-09-19T17:56:10Z",
+      "side": 1,
+      "message": "Yep, you\u0027re right. Moved it inside and removed variant.",
+      "parentUuid": "811ee01c_6dc9f6ce",
+      "revId": "33a1fd88c7f61e9ccc4bf1a0237af4928e3b318a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

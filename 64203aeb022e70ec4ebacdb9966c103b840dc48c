@@ -39,6 +39,30 @@
       },
       "revId": "64203aeb022e70ec4ebacdb9966c103b840dc48c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb8bb9e3_7635baeb",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-09-19T17:56:10Z",
+      "side": 1,
+      "message": "Oh yeah, updated to return 2/4 for P010.",
+      "parentUuid": "d5013629_21cb8425",
+      "range": {
+        "startLine": 83,
+        "startChar": 12,
+        "endLine": 83,
+        "endChar": 66
+      },
+      "revId": "64203aeb022e70ec4ebacdb9966c103b840dc48c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
