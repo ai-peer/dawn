@@ -16,6 +16,52 @@
       "message": "Loko PTAL!",
       "revId": "6ed47d89d6fc0f50d38c5567730e00b470cf5bcc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e6d0174_450555d8",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-19T22:49:58Z",
+      "side": 1,
+      "message": "I see that this same call happens later in [1]. Does this imply we don\u0027t need the other one anymore?",
+      "range": {
+        "startLine": 1114,
+        "startChar": 0,
+        "endLine": 1114,
+        "endChar": 40
+      },
+      "revId": "6ed47d89d6fc0f50d38c5567730e00b470cf5bcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1653f88_1ed109fa",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-19T22:49:58Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1128,
+        "startChar": 0,
+        "endLine": 1128,
+        "endChar": 40
+      },
+      "revId": "6ed47d89d6fc0f50d38c5567730e00b470cf5bcc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
