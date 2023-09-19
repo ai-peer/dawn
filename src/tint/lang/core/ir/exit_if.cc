@@ -30,6 +30,12 @@ ExitIf::ExitIf(ir::If* i, VectorRef<Value*> args) {
 
 ExitIf::~ExitIf() = default;
 
+ExitIf* ExitIf::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 void ExitIf::SetIf(ir::If* i) {
     SetControlInstruction(i);
 }

@@ -25,6 +25,12 @@ MultiInBlock::MultiInBlock() : Base() {}
 
 MultiInBlock::~MultiInBlock() = default;
 
+MultiInBlock* MultiInBlock::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 void MultiInBlock::SetParams(VectorRef<BlockParam*> params) {
     params_ = std::move(params);
 }

@@ -28,4 +28,10 @@ StoreVectorElement::StoreVectorElement(ir::Value* to, ir::Value* index, ir::Valu
 
 StoreVectorElement::~StoreVectorElement() = default;
 
+StoreVectorElement* StoreVectorElement::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

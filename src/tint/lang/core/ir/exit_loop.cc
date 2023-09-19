@@ -31,6 +31,12 @@ ExitLoop::ExitLoop(ir::Loop* loop, VectorRef<Value*> args /* = tint::Empty */) {
 
 ExitLoop::~ExitLoop() = default;
 
+ExitLoop* ExitLoop::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 void ExitLoop::SetLoop(ir::Loop* l) {
     SetControlInstruction(l);
 }

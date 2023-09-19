@@ -34,6 +34,12 @@ Var::Var(InstructionResult* result) {
 
 Var::~Var() = default;
 
+Var* Var::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 void Var::SetInitializer(Value* initializer) {
     SetOperand(Var::kInitializerOperandOffset, initializer);
 }

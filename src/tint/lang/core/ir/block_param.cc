@@ -25,4 +25,10 @@ BlockParam::BlockParam(const core::type::Type* ty) : type_(ty) {
 
 BlockParam::~BlockParam() = default;
 
+BlockParam* BlockParam::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir
