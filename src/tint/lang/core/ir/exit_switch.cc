@@ -30,6 +30,12 @@ ExitSwitch::ExitSwitch(ir::Switch* sw, VectorRef<Value*> args /* = tint::Empty *
 
 ExitSwitch::~ExitSwitch() = default;
 
+ExitSwitch* ExitSwitch::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 void ExitSwitch::SetSwitch(ir::Switch* s) {
     SetControlInstruction(s);
 }

@@ -33,6 +33,9 @@ class IntrinsicCall : public Castable<IntrinsicCall, Call> {
     /// @param args the intrinsic call arguments
     explicit IntrinsicCall(InstructionResult* result, VectorRef<Value*> args = tint::Empty);
     ~IntrinsicCall() override;
+
+    /// @copydoc Instruction::Clone()
+    IntrinsicCall* Clone(CloneContext& ctx) override;
 };
 
 }  // namespace tint::core::ir

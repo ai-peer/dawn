@@ -14,6 +14,9 @@
 
 #include "src/tint/lang/core/ir/multi_in_block.h"
 
+#include "src/tint/lang/core/ir/block_param.h"
+#include "src/tint/lang/core/ir/clone_context.h"
+#include "src/tint/lang/core/ir/module.h"
 #include "src/tint/utils/containers/predicates.h"
 #include "src/tint/utils/ice/ice.h"
 
@@ -24,6 +27,16 @@ namespace tint::core::ir {
 MultiInBlock::MultiInBlock() : Base() {}
 
 MultiInBlock::~MultiInBlock() = default;
+
+MultiInBlock* MultiInBlock::Clone(CloneContext& ctx) {
+    auto new_params = ctx.Clone(params_);
+
+    auto* blk = ctx.ir.blocks.Create<MultiInBlock>();
+    blk->SetParams(new_params);
+
+    CloneInto(ctx, blk);
+    return blk;
+}
 
 void MultiInBlock::SetParams(VectorRef<BlockParam*> params) {
     params_ = std::move(params);

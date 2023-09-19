@@ -12,26 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/user_call.h"
-
-#include <utility>
-
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::UserCall);
+#include "gtest/gtest-spi.h"
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/instruction.h"
+#include "src/tint/lang/core/ir/ir_helper_test.h"
 
 namespace tint::core::ir {
+namespace {
 
-UserCall::UserCall(InstructionResult* result, Function* func, VectorRef<Value*> arguments) {
-    AddOperand(UserCall::kFunctionOperandOffset, func);
-    AddOperands(UserCall::kArgsOperandOffset, std::move(arguments));
-    AddResult(result);
+using IR_UnreachableTest = IRTestHelper;
+
+TEST_F(IR_UnreachableTest, Unreachable) {
+    auto* inst = b.Unreachable();
+    ASSERT_TRUE(inst->Is<ir::Unreachable>());
 }
 
-UserCall::~UserCall() = default;
+TEST_F(IR_UnreachableTest, Result) {
+    auto* inst = b.Unreachable();
 
-UserCall* UserCall::Clone(CloneContext& ctx) {
-    (void)ctx;
-    TINT_UNIMPLEMENTED();
-    return nullptr;
+    EXPECT_FALSE(inst->HasResults());
+    EXPECT_FALSE(inst->HasMultiResults());
 }
 
+TEST_F(IR_UnreachableTest, Clone) {
+    auto* d = b.Unreachable();
+    auto* new_d = clone_ctx.Clone(d);
+    EXPECT_NE(nullptr, new_d);
+}
+
+}  // namespace
 }  // namespace tint::core::ir

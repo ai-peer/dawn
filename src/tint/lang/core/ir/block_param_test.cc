@@ -32,5 +32,12 @@ TEST_F(IR_BlockParamTest, Fail_NullType) {
         "");
 }
 
+TEST_F(IR_BlockParamTest, Clone) {
+    auto* inst = b.BlockParam(mod.Types().i32());
+
+    auto* new_inst = clone_ctx.Clone(inst);
+    EXPECT_EQ(mod.Types().i32(), new_inst->Type());
+}
+
 }  // namespace
 }  // namespace tint::core::ir

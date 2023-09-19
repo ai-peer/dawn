@@ -12,26 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/user_call.h"
+#include "src/tint/lang/core/ir/clone_context.h"
 
-#include <utility>
-
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::UserCall);
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/let.h"
 
 namespace tint::core::ir {
 
-UserCall::UserCall(InstructionResult* result, Function* func, VectorRef<Value*> arguments) {
-    AddOperand(UserCall::kFunctionOperandOffset, func);
-    AddOperands(UserCall::kArgsOperandOffset, std::move(arguments));
-    AddResult(result);
-}
-
-UserCall::~UserCall() = default;
-
-UserCall* UserCall::Clone(CloneContext& ctx) {
-    (void)ctx;
-    TINT_UNIMPLEMENTED();
-    return nullptr;
-}
+CloneContext::CloneContext(Module& module) : ir(module) {}
 
 }  // namespace tint::core::ir
