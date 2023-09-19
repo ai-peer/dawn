@@ -33,4 +33,10 @@ Load::Load(InstructionResult* result, Value* from) {
 
 Load::~Load() = default;
 
+Load* Load::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

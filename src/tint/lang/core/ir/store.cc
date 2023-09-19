@@ -27,4 +27,10 @@ Store::Store(Value* to, Value* from) {
 
 Store::~Store() = default;
 
+Store* Store::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir
