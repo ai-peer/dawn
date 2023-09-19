@@ -119,6 +119,7 @@ class State {
         for (auto* fn : mod.functions) {
             Fn(fn);
         }
+
         return Program{resolver::Resolve(b)};
     }
 
