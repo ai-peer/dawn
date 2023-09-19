@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "847f0b84_18a61645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-09-19T21:05:46Z",
+      "side": 1,
+      "message": "I think I fixed them for now.",
+      "parentUuid": "9a4ccea1_28e3a1a4",
+      "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "990e28d1_3baea520",
         "filename": "src/dawn/native/Limits.cpp",
         "patchSetId": 1
@@ -99,6 +117,30 @@
       "writtenOn": "2023-09-15T06:00:07Z",
       "side": 1,
       "message": "u-nit. I didn\u0027t immediately see these \"header\" since it was at the bottom which I guess I wasn\u0027t expecting? WDYT about putting it at the top instead of at the bottom?",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 94
+      },
+      "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0dddd4c9_e3dad5fc",
+        "filename": "src/dawn/native/Limits.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-09-19T21:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "990e28d1_3baea520",
       "range": {
         "startLine": 39,
         "startChar": 0,
@@ -122,6 +164,30 @@
       "writtenOn": "2023-09-15T06:00:07Z",
       "side": 1,
       "message": "u-nit. I\u0027m wondering if this should go in maybe `Features.h` instead? It\u0027s not exactly a \"feature\", but its kinda related? It doesn\u0027t feel right to put it in `Limits.h` since it definitely affects more than just the limits.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 48
+      },
+      "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1dfb4df0_e3460268",
+        "filename": "src/dawn/native/Limits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-09-19T21:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5979085e_02e6d4dc",
       "range": {
         "startLine": 24,
         "startChar": 0,
@@ -157,6 +223,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d3e64618_a0c23b21",
+        "filename": "src/dawn/native/Limits.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-09-19T21:05:46Z",
+      "side": 1,
+      "message": "I think it\u0027s better explicit. It hopefully makes it clear to devs the defaults are not fixed like they used to be",
+      "parentUuid": "973835cd_95896e80",
+      "range": {
+        "startLine": 31,
+        "startChar": 38,
+        "endLine": 31,
+        "endChar": 63
+      },
+      "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "187a6e6e_1e08271e",
         "filename": "src/dawn/tests/unittests/LimitsTests.cpp",
         "patchSetId": 1
@@ -168,6 +258,30 @@
       "writtenOn": "2023-09-15T06:00:07Z",
       "side": 1,
       "message": "Hmm, I wouldn\u0027t be opposed to just making the namespace dawn::native so that we don\u0027t need all the extra `native::`-s.",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 16
+      },
+      "revId": "a59353a6a188758bdd12184f9c8f421c8ef4a31a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "712a1ba3_bbe67962",
+        "filename": "src/dawn/tests/unittests/LimitsTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-09-19T21:05:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "187a6e6e_1e08271e",
       "range": {
         "startLine": 20,
         "startChar": 0,
