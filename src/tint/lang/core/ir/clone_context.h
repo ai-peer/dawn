@@ -43,11 +43,9 @@ class CloneContext {
     template <typename T>
     T* Clone(T* what) {
         if (auto replacement = replacements_.Get(what)) {
-            auto* cast = As<T>((*replacement)());
-            TINT_ASSERT(cast);
-            return cast;
+            return (*replacement)->template As<T>();
         }
-        auto* result = what->Clone(*this)->template As<T>();
+        T* result = what->Clone(*this);
         Replace(what, result);
         return result;
     }
@@ -76,34 +74,30 @@ class CloneContext {
         return Transform(what, [&](T* p) { return Clone(p); });
     }
 
+    /// @return the cloned item for @p what, or the original pointer if @p what has not been cloned.
+    /// @param what the item
+    template <typename T>
+    T* Remap(T* what) {
+        if (auto replacement = replacements_.Get(what)) {
+            return (*replacement)->template As<T>();
+        }
+        return what;
+    }
+
     /// Registers the replacement of `what` with `with`
     /// @param what the value or instruction to replace
-    /// @param with either a pointer to a replacement instruction, or a function with the signature
-    /// `T*(T*)` used to build the replacement
+    /// @param with a pointer to a replacement value or instruction
     template <typename WHAT, typename WITH>
-    void Replace(WHAT* what, WITH&& with) {
-        using T = std::decay_t<WHAT>;
-        using F = std::decay_t<WITH>;
-
-        constexpr bool T_is_value = traits::IsTypeOrDerived<T, Value>;
-        constexpr bool T_is_instruction = traits::IsTypeOrDerived<T, Instruction>;
-        static_assert(T_is_value || T_is_instruction);
-
-        constexpr bool F_is_pointer = std::is_pointer_v<F>;
-        constexpr bool F_is_function = std::is_function_v<F>;
-        static_assert(F_is_pointer || F_is_function);
-
-        if constexpr (F_is_pointer) {
-            replacements_.Add(what, [with]() { return with; });
-        } else if constexpr (F_is_function) {
-            static_assert(std::is_same_v<traits::ParameterType<F, 0>, T*>);
-            static_assert(std::is_same_v<traits::ReturnType<F>, T*>);
-            replacements_.Add(what, [what, with]() { return with(what); });
-        }
+    void Replace(WHAT* what, WITH* with) {
+        static_assert(traits::IsTypeOrDerived<WHAT, ir::Instruction> ||
+                      traits::IsTypeOrDerived<WHAT, ir::Value>);
+        static_assert(traits::IsTypeOrDerived<WITH, WHAT>);
+        TINT_ASSERT(with);
+        replacements_.Add(what, with);
     }
 
   private:
-    Hashmap<CastableBase*, std::function<CastableBase*()>, 8> replacements_;
+    Hashmap<CastableBase*, CastableBase*, 8> replacements_;
 };
 
 }  // namespace tint::core::ir
