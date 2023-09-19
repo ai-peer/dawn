@@ -16,6 +16,46 @@
       "message": "Forwarding to Corentin since Austin and Kai are both OOO.",
       "revId": "64befea490346c5322f89687ad9371d408203f7e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f4bb978_f6a528d5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-19T12:43:15Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "64befea490346c5322f89687ad9371d408203f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2a9ed0f_a409aeca",
+        "filename": "src/dawn/native/RingBufferAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-19T12:43:15Z",
+      "side": 1,
+      "message": "nit: it might be worth introducing an `alignedUsedEndOffset` and using that in a bunch of places, for example here the code would be:\n\n```\n        if (alignedUsedEndOffset + alignmentOffset \u003c\u003d mMaxBlockSize) {\n            startOffset \u003d alignedUsedEndOffset;\n            mUsedSize +\u003d allocationSize + alignmentOffset;\n```\n\nReally, why do we have an mUsedSize? Isn\u0027t is sufficient to check if we can fit at the start or the end? Or doing usedSize \u003d endOffset - startOffset (accounting for roll over). If you ever feel an itch to simplify this code, have a go at it 😊",
+      "range": {
+        "startLine": 105,
+        "startChar": 25,
+        "endLine": 105,
+        "endChar": 57
+      },
+      "revId": "64befea490346c5322f89687ad9371d408203f7e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
