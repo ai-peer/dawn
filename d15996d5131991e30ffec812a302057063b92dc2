@@ -16,6 +16,46 @@
       "message": "LGTM! Thank you for the iteration.",
       "revId": "d15996d5131991e30ffec812a302057063b92dc2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00363f12_058fdaf2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-19T17:19:46Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "d15996d5131991e30ffec812a302057063b92dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3592d73_be4f3a95",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1304,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-19T17:19:46Z",
+      "side": 1,
+      "message": "While I agree with your point about DSV generally using the same properties, I also agree with Austin that this is a bit weird, and in some usage patterns could be equivalent to no caching. For now though a TODO if we need it in the future is fine? (A comment on the member field in the header that explains that the cached value changes w.r.t the bools would also be nice, just as documentation to help remind ourselves why we did it like this!)",
+      "range": {
+        "startLine": 1299,
+        "startChar": 4,
+        "endLine": 1304,
+        "endChar": 35
+      },
+      "revId": "d15996d5131991e30ffec812a302057063b92dc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
