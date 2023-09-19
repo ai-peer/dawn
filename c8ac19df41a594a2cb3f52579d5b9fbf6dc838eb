@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "10382261_056cdea7",
+        "filename": "docs/tint/testing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-19T16:00:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b851c127_8763609d",
+      "range": {
+        "startLine": 11,
+        "startChar": 33,
+        "endLine": 11,
+        "endChar": 37
+      },
+      "revId": "c8ac19df41a594a2cb3f52579d5b9fbf6dc838eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df0d0f84_406c8cfd",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-09-19T02:37:23Z",
       "side": 1,
       "message": "Is there a doc or note this can link too so the person can know how to run with `dawn.node`? (Or even how to build it, heh)",
+      "revId": "c8ac19df41a594a2cb3f52579d5b9fbf6dc838eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc7feb58_1a3d6d10",
+        "filename": "docs/tint/testing.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-19T16:00:52Z",
+      "side": 1,
+      "message": "Good point.  Linked to the dawn.node README.",
+      "parentUuid": "df0d0f84_406c8cfd",
       "revId": "c8ac19df41a594a2cb3f52579d5b9fbf6dc838eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
