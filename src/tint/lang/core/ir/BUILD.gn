@@ -118,6 +118,7 @@ libtint_source_set("ir") {
     "terminate_invocation.h",
     "terminator.cc",
     "terminator.h",
+    "traverse.h",
     "unary.cc",
     "unary.h",
     "unreachable.cc",
