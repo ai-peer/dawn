@@ -12,25 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/convert.h"
-
-#include <utility>
-
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::Convert);
+#include "src/tint/lang/core/ir/terminate_invocation.h"
+#include "gtest/gtest.h"
+#include "src/tint/lang/core/ir/ir_helper_test.h"
 
 namespace tint::core::ir {
+namespace {
 
-Convert::Convert(InstructionResult* result, Value* value) {
-    AddOperand(Convert::kValueOperandOffset, value);
-    AddResult(result);
+using IR_TerminateInvocationTest = IRTestHelper;
+
+TEST_F(IR_TerminateInvocationTest, Clone) {
+    auto* ti = b.TerminateInvocation();
+    auto* new_ti = clone_ctx.Clone(ti);
+    EXPECT_NE(nullptr, new_ti);
+    EXPECT_NE(ti, new_ti);
 }
 
-Convert::~Convert() = default;
-
-Convert* Convert::Clone(CloneContext& ctx) {
-    (void)ctx;
-    TINT_UNIMPLEMENTED();
-    return nullptr;
-}
-
+}  // namespace
 }  // namespace tint::core::ir

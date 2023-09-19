@@ -28,4 +28,10 @@ UserCall::UserCall(InstructionResult* result, Function* func, VectorRef<Value*> 
 
 UserCall::~UserCall() = default;
 
+UserCall* UserCall::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

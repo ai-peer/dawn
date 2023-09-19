@@ -16,6 +16,8 @@
 
 #include <utility>
 
+#include "src/tint/lang/core/ir/clone_context.h"
+#include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/ir/multi_in_block.h"
 #include "src/tint/utils/ice/ice.h"
 
@@ -41,6 +43,13 @@ Loop::Loop(ir::Block* i, ir::MultiInBlock* b, ir::MultiInBlock* c)
 }
 
 Loop::~Loop() = default;
+
+Loop* Loop::Clone(CloneContext& ctx) {
+    auto* new_init = ctx.Clone(initializer_);
+    auto* new_body = ctx.Clone(body_);
+    auto* new_continuing = ctx.Clone(continuing_);
+    return ctx.ir.instructions.Create<Loop>(new_init, new_body, new_continuing);
+}
 
 void Loop::ForeachBlock(const std::function<void(ir::Block*)>& cb) {
     if (initializer_) {

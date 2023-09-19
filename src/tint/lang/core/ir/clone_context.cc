@@ -12,25 +12,13 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/convert.h"
+#include "src/tint/lang/core/ir/clone_context.h"
 
-#include <utility>
-
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::Convert);
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/let.h"
 
 namespace tint::core::ir {
 
-Convert::Convert(InstructionResult* result, Value* value) {
-    AddOperand(Convert::kValueOperandOffset, value);
-    AddResult(result);
-}
-
-Convert::~Convert() = default;
-
-Convert* Convert::Clone(CloneContext& ctx) {
-    (void)ctx;
-    TINT_UNIMPLEMENTED();
-    return nullptr;
-}
+CloneContext::CloneContext(Module& module) : ir(module) {}
 
 }  // namespace tint::core::ir

@@ -65,5 +65,21 @@ TEST_F(IR_LoopTest, Fail_NullContinuingBlock) {
         "");
 }
 
+TEST_F(IR_LoopTest, Clone) {
+    auto* loop = b.Loop();
+    auto* new_loop = clone_ctx.Clone(loop);
+
+    EXPECT_FALSE(new_loop->HasResults());
+    EXPECT_EQ(0u, new_loop->Exits().Count());
+    EXPECT_NE(nullptr, new_loop->Initializer());
+    EXPECT_NE(loop->Initializer(), new_loop->Initializer());
+
+    EXPECT_NE(nullptr, new_loop->Body());
+    EXPECT_NE(loop->Body(), new_loop->Body());
+
+    EXPECT_NE(nullptr, new_loop->Continuing());
+    EXPECT_NE(loop->Continuing(), new_loop->Continuing());
+}
+
 }  // namespace
 }  // namespace tint::core::ir
