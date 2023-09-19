@@ -33,4 +33,10 @@ void InstructionResult::Destroy() {
     Base::Destroy();
 }
 
+InstructionResult* InstructionResult::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

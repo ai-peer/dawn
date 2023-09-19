@@ -37,4 +37,10 @@ Continue::Continue(ir::Loop* loop, VectorRef<Value*> args) : loop_(loop) {
 
 Continue::~Continue() = default;
 
+Continue* Continue::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir
