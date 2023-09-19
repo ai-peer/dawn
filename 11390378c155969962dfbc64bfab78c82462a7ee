@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d0150e3_4069e845",
+        "filename": "src/tint/lang/core/access.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-19T20:30:58Z",
+      "side": 1,
+      "message": "add `match readable: read | read_write` in here so it doesn\u0027t have to be duplicated?",
+      "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9798c2b_a306c134",
+        "filename": "src/tint/lang/core/address_space.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-19T20:30:58Z",
+      "side": 1,
+      "message": "do we consider `__in`, `__out` and `@internal handle` to be core or WGSL?",
+      "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4380799_551c09ff",
+        "filename": "src/tint/lang/core/texel_format.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-19T20:30:58Z",
+      "side": 1,
+      "message": "Add the texel format matchers like: `match f32_texel_format` and same for i32, u32 ?",
+      "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
