@@ -33,6 +33,24 @@
       "message": "Suggest using a matcher to exclude write-only storage images for these overloads. See the `readable` matcher and its use for `textureLoad` in the `core.def` file.",
       "revId": "b4847ee0b6282e2a7de5f5abe5126074c8fcf82e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53af3810_523702c5",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-19T14:16:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38268740_249ea1ea",
+      "revId": "b4847ee0b6282e2a7de5f5abe5126074c8fcf82e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
