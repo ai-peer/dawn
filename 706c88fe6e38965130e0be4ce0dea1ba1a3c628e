@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf843289_b09eb773",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-19T14:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66771636_26f9e4e6",
+      "revId": "706c88fe6e38965130e0be4ce0dea1ba1a3c628e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b1dcf31_5d232f40",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-19T00:42:37Z",
       "side": 1,
       "message": "Can\u0027t use `OpImageQuerySizeLod` with multi-sampled textures.",
+      "revId": "706c88fe6e38965130e0be4ce0dea1ba1a3c628e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59bc87f5_46b75fc8",
+        "filename": "src/tint/lang/spirv/spirv.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-19T14:26:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b1dcf31_5d232f40",
       "revId": "706c88fe6e38965130e0be4ce0dea1ba1a3c628e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
