@@ -191,6 +191,10 @@ class Validator {
     /// @param call the call to validate
     void CheckBuiltinCall(BuiltinCall* call);
 
+    /// Validates the given user call
+    /// @param call the call to validate
+    void CheckUserCall(UserCall* call);
+
     /// Validates the given access
     /// @param a the access to validate
     void CheckAccess(ir::Access* a);
@@ -267,7 +271,7 @@ class Validator {
     diag::List diagnostics_;
     Disassembler dis_{mod_};
     Block* current_block_ = nullptr;
-    Hashset<Function*, 4> seen_functions_;
+    Hashset<Function*, 4> all_functions_;
     Vector<ControlInstruction*, 8> control_stack_;
 
     void DisassembleIfNeeded();
@@ -286,6 +290,12 @@ void Validator::DisassembleIfNeeded() {
 
 Result<SuccessType, diag::List> Validator::IsValid() {
     CheckRootBlock(mod_.root_block);
+
+    for (auto* func : mod_.functions) {
+        if (!all_functions_.Add(func)) {
+            AddError("function '" + Name(func) + "' added to module multiple times");
+        }
+    }
 
     for (auto* func : mod_.functions) {
         CheckFunction(func);
@@ -400,6 +410,12 @@ void Validator::CheckRootBlock(Block* blk) {
     TINT_SCOPED_ASSIGNMENT(current_block_, blk);
 
     for (auto* inst : *blk) {
+        if (inst->Block() != blk) {
+            AddError(
+                inst,
+                InstError(inst, "instruction in root block does not have root block as parent"));
+            continue;
+        }
         auto* var = inst->As<ir::Var>();
         if (!var) {
             AddError(inst,
@@ -411,10 +427,6 @@ void Validator::CheckRootBlock(Block* blk) {
 }
 
 void Validator::CheckFunction(Function* func) {
-    if (!seen_functions_.Add(func)) {
-        AddError("function '" + Name(func) + "' added to module multiple times");
-    }
-
     CheckBlock(func->Block());
 }
 
@@ -426,6 +438,11 @@ void Validator::CheckBlock(Block* blk) {
     }
 
     for (auto* inst : *blk) {
+        if (inst->Block() != blk) {
+            AddError(inst, InstError(inst, "block instruction does not have same block as parent"));
+            AddNote(current_block_, "In block");
+            continue;
+        }
         if (inst->Is<ir::Terminator>() && inst != blk->Terminator()) {
             AddError(inst, "block: terminator which isn't the final instruction");
             continue;
@@ -468,11 +485,14 @@ void Validator::CheckInstruction(Instruction* inst) {
         // Note, a `nullptr` is a valid operand in some cases, like `var` so we can't just check
         // for `nullptr` here.
         if (!op->Alive()) {
-            AddError(inst, i, InstError(inst, "instruction has operand which is not alive"));
+            AddError(inst, i,
+                     InstError(inst, "instruction operand " + std::to_string(i) + " is not alive"));
         }
 
         if (!op->Usages().Contains({inst, i})) {
-            AddError(inst, i, InstError(inst, "instruction operand missing usage"));
+            AddError(
+                inst, i,
+                InstError(inst, "instruction operand " + std::to_string(i) + " missing usage"));
         }
     }
 
@@ -522,7 +542,7 @@ void Validator::CheckCall(Call* call) {
         [&](Construct*) {},                            //
         [&](Convert*) {},                              //
         [&](Discard*) {},                              //
-        [&](UserCall*) {},                             //
+        [&](UserCall* c) { CheckUserCall(c); },        //
         [&](Default) {
             // Validation of custom IR instructions
         });
@@ -538,6 +558,13 @@ void Validator::CheckBuiltinCall(BuiltinCall* call) {
         if (result->return_type != call->Result()->Type()) {
             AddError(call, InstError(call, "call result type does not match builtin return type"));
         }
+    }
+}
+
+void Validator::CheckUserCall(UserCall* call) {
+    if (!all_functions_.Contains(call->Target())) {
+        AddError(call, UserCall::kFunctionOperandOffset,
+                 InstError(call, "call target is not part of the module"));
     }
 }
 

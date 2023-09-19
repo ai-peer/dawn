@@ -25,6 +25,10 @@
 #include "src/tint/utils/rtti/castable.h"
 
 namespace tint::core::ir {
+class Builder;
+}
+
+namespace tint::core::ir {
 
 /// A function parameter in the IR.
 class FunctionParam : public Castable<FunctionParam, Value> {
