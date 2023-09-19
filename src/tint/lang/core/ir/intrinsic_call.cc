@@ -27,4 +27,10 @@ IntrinsicCall::IntrinsicCall(InstructionResult* result, VectorRef<Value*> argume
 
 IntrinsicCall::~IntrinsicCall() = default;
 
+IntrinsicCall* IntrinsicCall::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

@@ -37,4 +37,10 @@ Swizzle::Swizzle(InstructionResult* result, Value* object, VectorRef<uint32_t> i
 
 Swizzle::~Swizzle() = default;
 
+Swizzle* Swizzle::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

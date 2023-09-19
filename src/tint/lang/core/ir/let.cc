@@ -26,4 +26,10 @@ Let::Let(InstructionResult* result, ir::Value* value) {
 
 Let::~Let() = default;
 
+Let* Let::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir
