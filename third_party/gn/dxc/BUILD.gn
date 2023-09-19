@@ -21,7 +21,9 @@ import("build/add_hlsl_hctgen.gni")
 import("build/built_target_action.gni")
 import("build/cmake_configure_file.gni")
 import("build/generate_version_include.gni")
-import("build/system_binary_action.gni")
+if (is_win) {
+  import("build/message_compiler.gni")
+}
 
 dawn_dxc_gn_dir = "$dawn_dxc_dir/../gn"
 llvm_target_triple = "dxil-ms-dx"  # Force target triple
@@ -1021,32 +1023,16 @@ clang_tablegen("AttrPCHWrite-inc") {
 #######################################################################
 
 # Generates dxcetw.h used by dxcompiler
-system_binary_action("dxcetw-h") {
-  manifest = "$dawn_dxc_dir/include/dxc/Tracing/dxcetw.man"
-  inputs = [ manifest ]
-  gen_output_dir = "$target_gen_dir/include/dxc/Tracing/dxcetw"
-  outputs = [
-    "$gen_output_dir/dxcetw.h",
-    "$gen_output_dir/dxcetw.rc",
-    "$gen_output_dir/dxcetwTEMP.bin",
-
-    # Note: CMake copies from tmpdxcetw_MSG00001.bin to MSG00001.bin,
-    # but we don't copy, so we get the default output name. Is this okay?
-    "$gen_output_dir/dxcetw_MSG00001.bin",
-  ]
-  args = [
-    "mc",
-    "-r",
-    rebase_path(gen_output_dir, root_build_dir),
-    "-h",
-    rebase_path(gen_output_dir, root_build_dir),
+message_compiler("dxcetw-h") {
+  sources = [ "$dawn_dxc_dir/include/dxc/Tracing/dxcetw.man" ]
+  extra_args = [
     "-p",
     "DxcEtw_",
     "-um",
     "-z",
     "dxcetw",
-    rebase_path(manifest, root_build_dir),
   ]
+  output_dir = "$target_gen_dir/include/dxc/Tracing/dxcetw"
 }
 
 generate_version_include("hlsl_dxcversion_autogen") {
