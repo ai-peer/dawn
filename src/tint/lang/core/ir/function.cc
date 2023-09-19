@@ -32,6 +32,12 @@ Function::Function(const core::type::Type* rt,
 
 Function::~Function() = default;
 
+Function* Function::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 void Function::SetParams(VectorRef<FunctionParam*> params) {
     params_ = std::move(params);
     TINT_ASSERT(!params_.Any(IsNull));

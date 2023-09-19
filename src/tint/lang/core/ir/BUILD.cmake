@@ -46,6 +46,8 @@ tint_add_target(tint_lang_core_ir lib
   lang/core/ir/builtin_call.h
   lang/core/ir/call.cc
   lang/core/ir/call.h
+  lang/core/ir/clone_context.cc
+  lang/core/ir/clone_context.h
   lang/core/ir/constant.cc
   lang/core/ir/constant.h
   lang/core/ir/construct.cc
@@ -113,6 +115,7 @@ tint_add_target(tint_lang_core_ir lib
   lang/core/ir/terminate_invocation.h
   lang/core/ir/terminator.cc
   lang/core/ir/terminator.h
+  lang/core/ir/traverse.h
   lang/core/ir/unary.cc
   lang/core/ir/unary.h
   lang/core/ir/unreachable.cc

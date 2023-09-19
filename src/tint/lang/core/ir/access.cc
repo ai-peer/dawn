@@ -28,6 +28,12 @@ Access::Access(InstructionResult* result, Value* object, VectorRef<Value*> indic
 }
 
 Access::~Access() = default;
+
+Access* Access::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
 //! @endcond
 
 }  // namespace tint::core::ir

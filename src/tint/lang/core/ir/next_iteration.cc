@@ -37,4 +37,10 @@ NextIteration::NextIteration(ir::Loop* loop, VectorRef<Value*> args /* = tint::E
 
 NextIteration::~NextIteration() = default;
 
+NextIteration* NextIteration::Clone(CloneContext& ctx)  {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

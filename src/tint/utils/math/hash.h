@@ -60,6 +60,15 @@ struct HashCombineOffset<8> {
     }
 };
 
+template <typename T, typename = void>
+struct HasHashCodeMember : std::false_type {};
+
+template <typename T>
+struct HasHashCodeMember<
+    T,
+    std::enable_if_t<std::is_member_function_pointer_v<decltype(&T::HashCode)>>> : std::true_type {
+};
+
 }  // namespace detail
 
 /// Forward declarations (see below)
@@ -76,7 +85,13 @@ template <typename T>
 struct Hasher {
     /// @param value the value to hash
     /// @returns a hash of the value
-    size_t operator()(const T& value) const { return std::hash<T>()(value); }
+    size_t operator()(const T& value) const {
+        if constexpr (detail::HasHashCodeMember<T>::value) {
+            return value.HashCode();
+        } else {
+            return std::hash<T>()(value);
+        }
+    }
 };
 
 /// Hasher specialization for pointers
