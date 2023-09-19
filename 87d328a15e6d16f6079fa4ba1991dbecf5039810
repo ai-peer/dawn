@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1a7b0ad1_3825167c",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-19T08:28:07Z",
+      "side": 1,
+      "message": "Changed to use the existing `D3D11BufferSizeAlignment` instead.",
+      "parentUuid": "b7818fc7_6f476a68",
+      "range": {
+        "startLine": 77,
+        "startChar": 60,
+        "endLine": 77,
+        "endChar": 63
+      },
+      "revId": "87d328a15e6d16f6079fa4ba1991dbecf5039810",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a58a4269_60122677",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 3
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-18T13:35:31Z",
       "side": 1,
       "message": "nit: why it is needed?",
+      "range": {
+        "startLine": 91,
+        "startChar": 8,
+        "endLine": 91,
+        "endChar": 49
+      },
+      "revId": "87d328a15e6d16f6079fa4ba1991dbecf5039810",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64d5d04d_d79f869f",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-19T08:28:07Z",
+      "side": 1,
+      "message": "OnDrawOrDispatch uses `mD3d11DeviceContext4` which is not thread-safe.",
+      "parentUuid": "a58a4269_60122677",
       "range": {
         "startLine": 91,
         "startChar": 8,

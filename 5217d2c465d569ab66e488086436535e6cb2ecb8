@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "1535ff78_ff9cf478",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-19T08:28:07Z",
+      "side": 1,
+      "message": "Basically we have 4 options to implement uniform buffer write on D3D11:\n1) D3D11_USAGE_DYNAMIC + D3D11_MAP_WRITE_DISCARD\n2) D3D11_USAGE_DEFAULT + UpdateSubresource\n3) D3D11_USAGE_DEFAULT + stagging buffer(new buffer)\n4) D3D11_USAGE_DEFAULT + stagging buffer(ring buffer)\n\nWe need to weigh these options to come to a conclusion.\n\nThe option 1 seems to be the most recommended way according to many blogs and manual docs. However, I haven\u0027t got any solid perf data to prove that per the benchmark cases I am running so far.\n\nThe option 2 can only cover full size buffer write. The [CL](https://dawn-review.googlesource.com/c/dawn/+/150702) has proved that it\u0027s much better than the option 3.\n\nThe major problem of the option 3 is the overhead of creating a new staging each time. We should avoid it as much as possible.\n\nThe option 4 could be a little bit hard to implement, as managing the map/unmap state of a shared ring buffer may be complicated. Besides, its perf improvement \n compared with the option 1 and 2 is yet to prove. In fact, [Graphite internally uses a specific same size staging buffer for each uniform buffer](https://source.chromium.org/chromium/chromium/src/+/main:third_party/skia/src/gpu/graphite/BufferManager.cpp;drc\u003da6bdc8f2993883fc55eb9cb0945694299b056675;l\u003d315). The copy from the staging buffer might not be cost-free as sometimes it stands out to me.\n```\nFunction Name\tTotal CPU [unit, %]\tSelf CPU [unit, %]\tModule\tCategory\n| + dawn::native::d3d11::Queue::SubmitImpl\t1715 (35.27%)\t1 (0.02%)\tchrome\tKernel\n|| + dawn::native::d3d11::CommandBuffer::Execute\t1413 (29.06%)\t6 (0.12%)\tchrome\tKernel\n||| - dawn::native::d3d11::CommandBuffer::ExecuteRenderPass\t1034 (21.26%)\t7 (0.14%)\tchrome\tKernel\n||| - dawn::native::d3d11::Buffer::Copy\t151 (3.11%)\t0 (0.00%)\tchrome\tKernel\n||| - dawn::native::d3d11::Texture::Write\t124 (2.55%)\t2 (0.04%)\tchrome\t\n||| - dawn::native::d3d11::Texture::Copy\t45 (0.93%)\t0 (0.00%)\tchrome\t\n```",
+      "parentUuid": "b565d997_966fa5ff",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6160c030_c3ebe809",
