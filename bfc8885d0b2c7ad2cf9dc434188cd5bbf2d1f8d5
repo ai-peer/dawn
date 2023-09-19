@@ -16,6 +16,23 @@
       "message": "PTAL! I checked that the test fails without the fix.",
       "revId": "bfc8885d0b2c7ad2cf9dc434188cd5bbf2d1f8d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "066ec08b_e4f651df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-19T12:45:02Z",
+      "side": 1,
+      "message": "Loko PTAL!",
+      "revId": "bfc8885d0b2c7ad2cf9dc434188cd5bbf2d1f8d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
