@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a3baf57_aa95e62e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-19T17:02:04Z",
+      "side": 1,
+      "message": "Nice bit of simplification and bug fixing!",
+      "revId": "e239301972e1606391341bfaed1b65c5f9e1e9b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
