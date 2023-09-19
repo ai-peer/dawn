@@ -119,6 +119,7 @@ class State {
         for (auto* fn : mod.functions) {
             Fn(fn);
         }
+
         return Program{resolver::Resolve(b)};
     }
 
@@ -202,6 +203,10 @@ class State {
             auto ty = Type(param->Type());
             auto name = NameFor(param);
             Bind(param, name, PtrKind::kPtr);
+
+            if (RequiresFullPtrParameters(param->Type())) {
+                Enable(wgsl::Extension::kChromiumExperimentalFullPtrParameters);
+            }
             return b.Param(name, ty);
         });
 
@@ -1160,6 +1165,21 @@ class State {
             default:
                 return false;
         }
+    }
+
+    /// @returns true if a parameter of the type @p ty requires the
+    /// kChromiumExperimentalFullPtrParameters extension to be enabled.
+    bool RequiresFullPtrParameters(const core::type::Type* ty) {
+        if (auto* ptr = ty->As<core::type::Pointer>()) {
+            switch (ptr->AddressSpace()) {
+                case core::AddressSpace::kUniform:
+                case core::AddressSpace::kStorage:
+                    return true;
+                default:
+                    return false;
+            }
+        }
+        return false;
     }
 };
 
