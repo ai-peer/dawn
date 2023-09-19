@@ -1428,7 +1428,10 @@ tint::Result<core::ir::Module, diag::List> ProgramToIR(const Program& program) {
     Impl b(program);
     auto r = b.Build();
     if (!r) {
-        return r.Failure();
+        diag::List err;
+        err.add(r.Failure());
+        err.add_note(diag::System::IR, "AST:\n" + Program::printer(program), Source{});
+        return err;
     }
 
     return r.Move();
