@@ -44,5 +44,44 @@ TEST_F(IR_FunctionParamTest, Fail_SetDuplicateBuiltin) {
         "");
 }
 
+TEST_F(IR_FunctionParamTest, CloneEmpty) {
+    auto* fp = b.FunctionParam(mod.Types().f32());
+
+    auto* new_fp = clone_ctx.Clone(fp);
+    EXPECT_EQ(new_fp->Type(), mod.Types().f32());
+    EXPECT_FALSE(new_fp->Builtin().has_value());
+    EXPECT_FALSE(new_fp->Location().has_value());
+    EXPECT_FALSE(new_fp->BindingPoint().has_value());
+    EXPECT_FALSE(new_fp->Invariant());
+}
+
+TEST_F(IR_FunctionParamTest, Clone) {
+    auto* fp = b.FunctionParam(mod.Types().f32());
+    fp->SetBuiltin(FunctionParam::Builtin::kVertexIndex);
+    fp->SetLocation(
+        1, Interpolation{core::InterpolationType::kFlat, core::InterpolationSampling::kCentroid});
+    fp->SetInvariant(true);
+    fp->SetBindingPoint(1, 2);
+
+    auto* new_fp = clone_ctx.Clone(fp);
+    EXPECT_EQ(new_fp->Type(), mod.Types().f32());
+
+    EXPECT_TRUE(new_fp->Builtin().has_value());
+    EXPECT_EQ(FunctionParam::Builtin::kVertexIndex, new_fp->Builtin().value());
+
+    EXPECT_TRUE(new_fp->Location().has_value());
+    auto loc = new_fp->Location();
+    EXPECT_EQ(1, loc->value);
+    EXPECT_EQ(core::InterpolationType::kFlat, loc->interpolation->type);
+    EXPECT_EQ(core::InterpolationSampling::kCentroid, loc->interpolation->sampling);
+
+    EXPECT_TRUE(new_fp->BindingPoint().has_value());
+    auto bp = new_fp->BindingPoint();
+    EXPECT_EQ(1, bp->group);
+    EXPECT_EQ(2, bp->binding);
+
+    EXPECT_TRUE(new_fp->Invariant());
+}
+
 }  // namespace
 }  // namespace tint::core::ir
