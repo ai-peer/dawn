@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e72d73a7_6e2455c2",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-20T14:47:10Z",
+      "side": 1,
+      "message": "As noted in our 1-1, we can use `myTarget($default_toolchain)` and simplify this code out.",
+      "revId": "d2d69b951d0b18bd605c75755b7831f3b90f836d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
