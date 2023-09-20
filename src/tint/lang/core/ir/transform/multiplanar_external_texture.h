@@ -18,6 +18,7 @@
 #include <string>
 
 #include "src/tint/api/options/external_texture.h"
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -30,9 +31,9 @@ namespace tint::core::ir::transform {
 /// MultiplanarExternalTexture is a transform that... TODO
 /// @param module the module to transform
 /// @param options the external texture options
-/// @returns an error string on failure
-Result<SuccessType, std::string> MultiplanarExternalTexture(Module* module,
-                                                            const ExternalTextureOptions& options);
+/// @returns error diagnostics on failure
+Result<SuccessType, diag::List> MultiplanarExternalTexture(Module* module,
+                                                           const ExternalTextureOptions& options);
 
 }  // namespace tint::core::ir::transform
 

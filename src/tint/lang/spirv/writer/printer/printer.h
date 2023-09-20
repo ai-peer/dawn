@@ -85,8 +85,8 @@ class Printer {
     ///                                   storage class with OpConstantNull
     Printer(core::ir::Module* module, bool zero_init_workgroup_memory);
 
-    /// @returns the generated SPIR-V binary on success, or an error string on failure
-    tint::Result<std::vector<uint32_t>, std::string> Generate();
+    /// @returns the generated SPIR-V binary on success, or error diagnostics on failure
+    tint::Result<std::vector<uint32_t>, diag::List> Generate();
 
     /// @returns the module that this writer has produced
     writer::Module& Module() { return module_; }
