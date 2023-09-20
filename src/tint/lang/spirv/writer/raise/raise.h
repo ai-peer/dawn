@@ -32,7 +32,7 @@ namespace tint::spirv::writer::raise {
 /// @param module the core IR module to raise to SPIR-V dialect
 /// @param options the SPIR-V writer options
 /// @returns success or error diagnostics
-Result<SuccessType, diag::List> Raise(core::ir::Module* module, const Options& options);
+Result<SuccessType, diag::List> Raise(core::ir::Module& module, const Options& options);
 
 }  // namespace tint::spirv::writer::raise
 
