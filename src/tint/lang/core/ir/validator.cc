@@ -870,15 +870,12 @@ Result<SuccessType, diag::List> Validate(Module& mod) {
     return v.IsValid();
 }
 
-Result<SuccessType, std::string> ValidateAndDumpIfNeeded([[maybe_unused]] Module& ir,
-                                                         [[maybe_unused]] const char* msg) {
+Result<SuccessType, diag::List> ValidateAndDumpIfNeeded([[maybe_unused]] Module& ir,
+                                                        [[maybe_unused]] const char* msg) {
 #ifndef NDEBUG
     auto result = Validate(ir);
     if (!result) {
-        diag::List errors;
-        StringStream ss;
-        ss << "validating input to " << msg << " failed" << std::endl << result.Failure().str();
-        return ss.str();
+        return result.Failure();
     }
 #endif
 

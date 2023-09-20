@@ -1417,15 +1417,15 @@ class Impl {
 
 }  // namespace
 
-tint::Result<core::ir::Module, std::string> ProgramToIR(const Program& program) {
+tint::Result<core::ir::Module, diag::List> ProgramToIR(const Program& program) {
     if (!program.IsValid()) {
-        return std::string("input program is not valid");
+        return program.Diagnostics();
     }
 
     Impl b(program);
     auto r = b.Build();
     if (!r) {
-        return r.Failure().str();
+        return r.Failure();
     }
 
     return r.Move();
