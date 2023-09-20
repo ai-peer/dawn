@@ -40,7 +40,7 @@ struct BinaryPolyfillConfig {
 /// @param module the module to transform
 /// @param config the polyfill configuration
 /// @returns error diagnostics on failure
-Result<SuccessType, diag::List> BinaryPolyfill(Module* module, const BinaryPolyfillConfig& config);
+Result<SuccessType, diag::List> BinaryPolyfill(Module& module, const BinaryPolyfillConfig& config);
 
 }  // namespace tint::core::ir::transform
 
