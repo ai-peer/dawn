@@ -31,6 +31,7 @@ tint_add_target(tint_lang_msl_writer_raise lib
 )
 
 tint_target_add_dependencies(tint_lang_msl_writer_raise lib
+  tint_utils_diagnostic
   tint_utils_ice
   tint_utils_macros
   tint_utils_result
