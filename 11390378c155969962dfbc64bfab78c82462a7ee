@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec9fe570_346e2137",
+        "filename": "src/tint/lang/core/access.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T20:22:26Z",
+      "side": 1,
+      "message": "Ack, will polish once more stuff is split up.",
+      "parentUuid": "2d0150e3_4069e845",
+      "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a9798c2b_a306c134",
@@ -53,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f94cafc7_60669c0e",
+        "filename": "src/tint/lang/core/address_space.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T20:22:26Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "39d52f63_097b58ca",
+      "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4380799_551c09ff",
@@ -66,6 +102,24 @@
       "writtenOn": "2023-09-19T20:30:58Z",
       "side": 1,
       "message": "Add the texel format matchers like: `match f32_texel_format` and same for i32, u32 ?",
+      "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f7b99cd_14355c0d",
+        "filename": "src/tint/lang/core/texel_format.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T20:22:26Z",
+      "side": 1,
+      "message": "Ack, will polish once more stuff is split up.",
+      "parentUuid": "d4380799_551c09ff",
       "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
