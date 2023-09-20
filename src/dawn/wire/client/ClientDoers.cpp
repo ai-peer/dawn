@@ -89,13 +89,13 @@ bool Client::DoBufferMapAsyncCallback(Buffer* buffer,
 }
 
 bool Client::DoQueueWorkDoneCallback(Queue* queue,
-                                     uint64_t requestSerial,
+                                     WGPUFuture future,
                                      WGPUQueueWorkDoneStatus status) {
     // The queue might have been deleted or recreated so this isn't an error.
     if (queue == nullptr) {
         return true;
     }
-    return queue->OnWorkDoneCallback(requestSerial, status);
+    return queue->OnWorkDoneCallback(future, status);
 }
 
 bool Client::DoDeviceCreateComputePipelineAsyncCallback(Device* device,
