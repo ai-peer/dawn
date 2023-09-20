@@ -12,30 +12,33 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/block_param.h"
-
-#include "src/tint/lang/core/ir/clone_context.h"
-#include "src/tint/lang/core/ir/module.h"
-#include "src/tint/utils/ice/ice.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::BlockParam);
+#include "gtest/gtest-spi.h"
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/instruction.h"
+#include "src/tint/lang/core/ir/ir_helper_test.h"
 
 namespace tint::core::ir {
+namespace {
 
-BlockParam::BlockParam(const core::type::Type* ty) : type_(ty) {
-    TINT_ASSERT(type_ != nullptr);
+using IR_UnreachableTest = IRTestHelper;
+
+TEST_F(IR_UnreachableTest, Unreachable) {
+    auto* inst = b.Unreachable();
+    ASSERT_TRUE(inst->Is<ir::Unreachable>());
 }
 
-BlockParam::~BlockParam() = default;
+TEST_F(IR_UnreachableTest, Result) {
+    auto* inst = b.Unreachable();
 
-BlockParam* BlockParam::Clone(CloneContext& ctx) {
-    auto* new_bp = ctx.ir.values.Create<BlockParam>(type_);
-
-    auto name = ctx.ir.NameOf(this);
-    if (name.IsValid()) {
-        ctx.ir.SetName(new_bp, ctx.ir.NameOf(this).Name());
-    }
-    return new_bp;
+    EXPECT_FALSE(inst->HasResults());
+    EXPECT_FALSE(inst->HasMultiResults());
 }
 
+TEST_F(IR_UnreachableTest, Clone) {
+    auto* d = b.Unreachable();
+    auto* new_d = clone_ctx.Clone(d);
+    EXPECT_NE(nullptr, new_d);
+}
+
+}  // namespace
 }  // namespace tint::core::ir
