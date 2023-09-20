@@ -111,7 +111,7 @@ void Run(Module* ir) {
 
 }  // namespace
 
-Result<SuccessType, std::string> BlockDecoratedStructs(Module* ir) {
+Result<SuccessType, diag::List> BlockDecoratedStructs(Module* ir) {
     auto result = ValidateAndDumpIfNeeded(*ir, "BlockDecoratedStructs transform");
     if (!result) {
         return result;
