@@ -32,7 +32,7 @@ namespace dawn::wire::client {
 class Client;
 
 // Code to run to complete the event (after receiving a ready notification from the wire).
-using EventCallback = std::function<void(EventCompletionType)>;
+using EventCallback = std::function<void(EventCompletionType, void*)>;
 
 // Subcomponent which tracks callback events for the Future-based callback
 // entrypoints. All events from this instance (regardless of whether from an adapter, device, queue,
@@ -48,7 +48,7 @@ class EventManager final : NonMovable {
     // false otherwise. Events may not be tracked if the client is already disconnected.
     std::pair<FutureID, bool> TrackEvent(WGPUCallbackMode mode, EventCallback&& callback);
     void ShutDown();
-    void SetFutureReady(FutureID futureID);
+    void SetFutureReady(FutureID futureID, void* userdata = nullptr);
     void ProcessPollEvents();
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
@@ -57,12 +57,17 @@ class EventManager final : NonMovable {
         TrackedEvent(WGPUCallbackMode mode, EventCallback&& callback);
         ~TrackedEvent();
 
-        TrackedEvent(TrackedEvent&&) = default;
-        TrackedEvent& operator=(TrackedEvent&&) = default;
+        TrackedEvent(TrackedEvent&& other);
+        TrackedEvent& operator=(TrackedEvent&& other);
+
+        void Complete(EventCompletionType type);
 
         WGPUCallbackMode mMode;
         // Callback. Falsey if already called.
         EventCallback mCallback;
+        // Extra userdata that the callback may need. This is set when the corresponding future is
+        // set to be ready, and should be freed and null-ed in the EventCallback if it is used.
+        void* mUserdata = nullptr;
         // These states don't need to be atomic because they're always protected by
         // mTrackedEventsMutex (or moved out to a local variable).
         bool mReady = false;

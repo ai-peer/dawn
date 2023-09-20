@@ -116,7 +116,7 @@ struct QueueWorkDoneUserdata : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
     ObjectHandle queue;
-    uint64_t requestSerial;
+    WGPUFuture future;
 };
 
 struct CreatePipelineAsyncUserData : CallbackUserdata {
