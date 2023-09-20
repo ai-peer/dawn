@@ -359,8 +359,10 @@ INSTANTIATE_TEST_SUITE_P(
         /* Data packing builtin */
         BuiltinData{core::BuiltinFn::kPack4X8Snorm, CallParamType::kF32, "pack_float_to_snorm4x8"},
         BuiltinData{core::BuiltinFn::kPack4X8Unorm, CallParamType::kF32, "pack_float_to_unorm4x8"},
-        BuiltinData{core::BuiltinFn::kPack2X16Snorm, CallParamType::kF32, "pack_float_to_snorm2x16"},
-        BuiltinData{core::BuiltinFn::kPack2X16Unorm, CallParamType::kF32, "pack_float_to_unorm2x16"},
+        BuiltinData{core::BuiltinFn::kPack2X16Snorm, CallParamType::kF32,
+                    "pack_float_to_snorm2x16"},
+        BuiltinData{core::BuiltinFn::kPack2X16Unorm, CallParamType::kF32,
+                    "pack_float_to_unorm2x16"},
         /* Data unpacking builtin */
         BuiltinData{core::BuiltinFn::kUnpack4X8Snorm, CallParamType::kU32,
                     "unpack_snorm4x8_to_float"},

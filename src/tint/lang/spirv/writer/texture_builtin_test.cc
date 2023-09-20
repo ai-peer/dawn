@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/builtin_fn.h"
+#include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/type/depth_multisampled_texture.h"
 #include "src/tint/lang/spirv/writer/common/helper_test.h"
 
@@ -1977,7 +1977,8 @@ TEST_F(SpirvWriterTest, TextureLoad_WithRobustness) {
     auto* func = b.Function("foo", ty.vec4<f32>());
     func->SetParams({texture, coords, level});
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureLoad, texture, coords, level);
+        auto* result =
+            b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureLoad, texture, coords, level);
         b.Return(func, result);
         mod.SetName(result, "result");
     });

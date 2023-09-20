@@ -23,10 +23,10 @@ TINT_INSTANTIATE_TYPEINFO(tint::spirv::ir::BuiltinCall);
 namespace tint::spirv::ir {
 
 BuiltinCall::BuiltinCall(core::ir::InstructionResult* result,
-                         Function func,
+                         BuiltinFn func,
                          VectorRef<core::ir::Value*> arguments)
     : Base(result, arguments), func_(func) {
-    TINT_ASSERT(func != Function::kNone);
+    TINT_ASSERT(func != BuiltinFn::kNone);
 }
 
 BuiltinCall::~BuiltinCall() = default;

@@ -1744,7 +1744,8 @@ std::vector<Case> LogF16Cases() {
 INSTANTIATE_TEST_SUITE_P(  //
     LogF16,
     ConstEvalBuiltinTest,
-    testing::Combine(testing::Values(core::BuiltinFn::kLog), testing::ValuesIn(LogF16Cases<f16>())));
+    testing::Combine(testing::Values(core::BuiltinFn::kLog),
+                     testing::ValuesIn(LogF16Cases<f16>())));
 template <typename T>
 std::vector<Case> LogF32Cases() {
     return {
@@ -1754,7 +1755,8 @@ std::vector<Case> LogF32Cases() {
 INSTANTIATE_TEST_SUITE_P(  //
     LogF32,
     ConstEvalBuiltinTest,
-    testing::Combine(testing::Values(core::BuiltinFn::kLog), testing::ValuesIn(LogF32Cases<f32>())));
+    testing::Combine(testing::Values(core::BuiltinFn::kLog),
+                     testing::ValuesIn(LogF32Cases<f32>())));
 
 template <typename T>
 std::vector<Case> LogAbstractCases() {
