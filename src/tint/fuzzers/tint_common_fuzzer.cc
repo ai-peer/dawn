@@ -293,7 +293,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
     switch (output_) {
         case OutputFormat::kWGSL: {
 #if TINT_BUILD_WGSL_WRITER
-            (void)wgsl::writer::Generate(&program, options_wgsl_);
+            (void)wgsl::writer::Generate(program, options_wgsl_);
 #endif  // TINT_BUILD_WGSL_WRITER
             break;
         }
@@ -306,7 +306,7 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
                 return 0;
             }
 
-            auto result = spirv::writer::Generate(&program, options_spirv_);
+            auto result = spirv::writer::Generate(program, options_spirv_);
             if (result) {
                 generated_spirv_ = std::move(result->spirv);
 

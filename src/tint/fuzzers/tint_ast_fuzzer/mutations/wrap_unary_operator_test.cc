@@ -55,7 +55,7 @@ TEST(WrapUnaryOperatorTest, Applicable1) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -96,7 +96,7 @@ TEST(WrapUnaryOperatorTest, Applicable2) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -134,7 +134,7 @@ TEST(WrapUnaryOperatorTest, Applicable3) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -176,7 +176,7 @@ TEST(WrapUnaryOperatorTest, Applicable4) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() -> vec2<bool> {
@@ -217,7 +217,7 @@ TEST(WrapUnaryOperatorTest, Applicable5) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -256,7 +256,7 @@ TEST(WrapUnaryOperatorTest, Applicable6) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -299,7 +299,7 @@ TEST(WrapUnaryOperatorTest, Applicable7) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -341,7 +341,7 @@ TEST(WrapUnaryOperatorTest, Applicable8) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {

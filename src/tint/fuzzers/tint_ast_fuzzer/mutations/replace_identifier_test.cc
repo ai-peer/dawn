@@ -487,7 +487,7 @@ fn f() {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn f() {
@@ -531,7 +531,7 @@ fn f(b: ptr<function, vec2<u32>>) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn f(b : ptr<function, vec2<u32>>) {
