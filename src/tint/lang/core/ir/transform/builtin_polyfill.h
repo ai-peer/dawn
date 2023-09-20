@@ -48,7 +48,7 @@ struct BuiltinPolyfillConfig {
 /// @param module the module to transform
 /// @param config the polyfill configuration
 /// @returns error diagnostics on failure
-Result<SuccessType, diag::List> BuiltinPolyfill(Module* module,
+Result<SuccessType, diag::List> BuiltinPolyfill(Module& module,
                                                 const BuiltinPolyfillConfig& config);
 
 }  // namespace tint::core::ir::transform
