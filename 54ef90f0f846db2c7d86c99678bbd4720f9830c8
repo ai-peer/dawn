@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa116697_e1921cfc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T21:19:50Z",
+      "side": 1,
+      "message": "LGTM, but I need to do another proper review when I\u0027m less tired. A bunch of nits so far.",
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "349da378_bb0a935b",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T21:19:50Z",
+      "side": 1,
+      "message": "why `map`?",
+      "range": {
+        "startLine": 75,
+        "startChar": 21,
+        "endLine": 75,
+        "endChar": 29
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4809a74f_cf39b497",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T21:19:50Z",
+      "side": 1,
+      "message": "nit: `if (auto itr \u003d block_to_direct_vars.Find(block)) {`",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4131fa1_66c42c8c",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T21:19:50Z",
+      "side": 1,
+      "message": "If you take https://dawn-review.googlesource.com/c/dawn/+/152400/6/src/tint/lang/core/ir/traverse.h, this becomes:\n\n```\nir::Traverse(block, [\u0026](UserCall* call) {\n    // Get variables referenced by a function called from this block.\n    for (auto* var : GetReferencedVars(call-\u003eTarget())) {\n        vars.Add(var);\n    }\n});\n```",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c6aa0a6_4b184215",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T21:19:50Z",
+      "side": 1,
+      "message": "nit: `for (auto idx : Reverse(store.indices)) {`",
+      "range": {
+        "startLine": 222,
+        "startChar": 12,
+        "endLine": 222,
+        "endChar": 89
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
