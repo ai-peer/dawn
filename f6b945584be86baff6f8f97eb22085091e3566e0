@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9017bb30_1ca314f7",
+        "filename": "src/tint/lang/core/constant/manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-20T13:48:45Z",
+      "side": 1,
+      "message": "If this is in the constant manger now, and it deals in values, can this just be `Zero` ?",
+      "revId": "f6b945584be86baff6f8f97eb22085091e3566e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
