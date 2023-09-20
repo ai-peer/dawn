@@ -17,6 +17,7 @@
 
 #include <string>
 
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -29,8 +30,8 @@ namespace tint::core::ir::transform {
 /// Bgra8UnormPolyfill is a transform that changes the texel format of storage textures from
 /// bgra8unorm to rgba8unorm, inserting swizzles before and after texture accesses as necessary.
 /// @param module the module to transform
-/// @returns an error string on failure
-Result<SuccessType, std::string> Bgra8UnormPolyfill(Module* module);
+/// @returns success or failure
+Result<SuccessType> Bgra8UnormPolyfill(Module* module);
 
 }  // namespace tint::core::ir::transform
 

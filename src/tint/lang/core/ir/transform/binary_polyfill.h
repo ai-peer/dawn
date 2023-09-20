@@ -17,6 +17,7 @@
 
 #include <string>
 
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -38,8 +39,8 @@ struct BinaryPolyfillConfig {
 /// backend dialects that may have different semantics.
 /// @param module the module to transform
 /// @param config the polyfill configuration
-/// @returns an error string on failure
-Result<SuccessType, std::string> BinaryPolyfill(Module* module, const BinaryPolyfillConfig& config);
+/// @returns success or failure
+Result<SuccessType> BinaryPolyfill(Module* module, const BinaryPolyfillConfig& config);
 
 }  // namespace tint::core::ir::transform
 

@@ -17,6 +17,7 @@
 
 #include <string>
 
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -46,9 +47,8 @@ struct BuiltinPolyfillConfig {
 /// features with equivalent alternatives.
 /// @param module the module to transform
 /// @param config the polyfill configuration
-/// @returns an error string on failure
-Result<SuccessType, std::string> BuiltinPolyfill(Module* module,
-                                                 const BuiltinPolyfillConfig& config);
+/// @returns success or failure
+Result<SuccessType> BuiltinPolyfill(Module* module, const BuiltinPolyfillConfig& config);
 
 }  // namespace tint::core::ir::transform
 
