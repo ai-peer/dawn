@@ -1087,6 +1087,278 @@
       "message": "🟨 warning: no results found for \u0027worker_webgpu:api,validation,buffer,mapping:mapAsync,usage:*\u0027 with tags [intel, win10]",
       "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc8de98a_95c5361e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture*\u0027 with tags [mac, webgpu-adapter-swiftshader]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c931c8_38820fdd",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture*\u0027 with tags [webgpu-adapter-swiftshader, win]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5beba6a5_a51e84da",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 363,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟦 note: all 1574 tests now pass",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab94deb0_43cef851",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 630,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin*\u0027 with tags [intel, release, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "43dd0716_d60f26d2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,state,device_lost,destroy:createRenderBundleEncoder*\u0027 with tags [nvidia-0x2184, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28bcbc3b_e33adda3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,state,device_lost,destroy:createTexture*\u0027 with tags [nvidia-0x2184, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b29529b_92889966",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,state,device_lost,destroy:createView*\u0027 with tags [nvidia-0x2184, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccaea279_19035727",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,state,device_lost,destroy:queue*\u0027 with tags [nvidia-0x2184, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8b13b3b_77a802ac",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,state,device_lost,destroy:createBuffer*\u0027 with tags [nvidia-0x2184, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d8abfc_976ab49c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,state,device_lost,destroy:createPipelineLayout*\u0027 with tags [nvidia-0x2184, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a373c5d_58a6bfe1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 654,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fee7fde0_8725a0da",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 655,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "804245a2_f9b53dec",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1043fdc3_8f8c16df",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f85f93f1_e1d2836a",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 658,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟦 note: all 96 tests now pass",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71e20806_d08e6e61",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 1629,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T10:42:16Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027worker_webgpu:api,validation,buffer,mapping:mapAsync,usage:*\u0027 with tags [intel, win10]",
+      "revId": "5ca21ed720844ddd5b10547f0758564cfc59997a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
