@@ -103,7 +103,7 @@ class SpirvWriterTestHelperBase : public BASE {
     /// @param options the optional writer options to use when raising the IR
     /// @returns true if generation and validation succeeded
     bool Generate(Printer& writer, Options options = {}) {
-        auto raised = raise::Raise(&mod, options);
+        auto raised = raise::Raise(mod, options);
         if (!raised) {
             err_ = raised.Failure().str();
             return false;
