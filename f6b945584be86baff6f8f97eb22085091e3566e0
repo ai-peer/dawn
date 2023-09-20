@@ -16,6 +16,24 @@
       "message": "If this is in the constant manger now, and it deals in values, can this just be `Zero` ?",
       "revId": "f6b945584be86baff6f8f97eb22085091e3566e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fc3d3aa_9c5a686b",
+        "filename": "src/tint/lang/core/constant/manager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-20T14:42:50Z",
+      "side": 1,
+      "message": "I briefly considered this but wasn\u0027t sure at the time. I\u0027ve done it now.",
+      "parentUuid": "9017bb30_1ca314f7",
+      "revId": "f6b945584be86baff6f8f97eb22085091e3566e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
