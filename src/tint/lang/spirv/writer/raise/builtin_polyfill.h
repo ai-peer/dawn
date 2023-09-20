@@ -34,7 +34,7 @@ namespace tint::spirv::writer::raise {
 /// SPIR-V backend intrinsic functions.
 /// @param module the module to transform
 /// @returns error diagnostics on failure
-Result<SuccessType, diag::List> BuiltinPolyfill(core::ir::Module* module);
+Result<SuccessType, diag::List> BuiltinPolyfill(core::ir::Module& module);
 
 /// LiteralOperand is a type of constant value that is intended to be emitted as a literal in
 /// the SPIR-V instruction stream.
