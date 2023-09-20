@@ -882,8 +882,7 @@ void ASTPrinter::EmitBuiltinCall(StringStream& out,
                TypeOf(expr->args[0])->UnwrapRef()->is_unsigned_integer_scalar_or_vector()) {
         // GLSL does not support abs() on unsigned arguments. However, it's a no-op.
         EmitExpression(out, expr->args[0]);
-    } else if ((builtin->Fn() == core::BuiltinFn::kAny ||
-                builtin->Fn() == core::BuiltinFn::kAll) &&
+    } else if ((builtin->Fn() == core::BuiltinFn::kAny || builtin->Fn() == core::BuiltinFn::kAll) &&
                TypeOf(expr->args[0])->UnwrapRef()->Is<core::type::Scalar>()) {
         // GLSL does not support any() or all() on scalar arguments. It's a no-op.
         EmitExpression(out, expr->args[0]);

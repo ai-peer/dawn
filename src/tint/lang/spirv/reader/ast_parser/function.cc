@@ -17,9 +17,9 @@
 #include <algorithm>
 #include <array>
 
+#include "src/tint/lang/core/builtin_fn.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/core/fluent_types.h"
-#include "src/tint/lang/core/builtin_fn.h"
 #include "src/tint/lang/core/type/depth_texture.h"
 #include "src/tint/lang/core/type/sampled_texture.h"
 #include "src/tint/lang/core/type/texture_dimension.h"

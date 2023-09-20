@@ -38,8 +38,9 @@ class AtomicsTest : public ast::transform::TransformTest {
         auto& b = parser.builder();
 
         core::BuiltinFn two_params[] = {
-            core::BuiltinFn::kAtomicExchange, core::BuiltinFn::kAtomicAdd, core::BuiltinFn::kAtomicSub,
-            core::BuiltinFn::kAtomicMin,      core::BuiltinFn::kAtomicMax, core::BuiltinFn::kAtomicAnd,
+            core::BuiltinFn::kAtomicExchange, core::BuiltinFn::kAtomicAdd,
+            core::BuiltinFn::kAtomicSub,      core::BuiltinFn::kAtomicMin,
+            core::BuiltinFn::kAtomicMax,      core::BuiltinFn::kAtomicAnd,
             core::BuiltinFn::kAtomicOr,       core::BuiltinFn::kAtomicXor,
         };
         for (auto& a : two_params) {

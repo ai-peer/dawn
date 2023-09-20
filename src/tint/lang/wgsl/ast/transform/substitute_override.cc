@@ -17,8 +17,8 @@
 #include <functional>
 #include <utility>
 
-#include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/core/builtin_fn.h"
+#include "src/tint/lang/core/fluent_types.h"
 #include "src/tint/lang/wgsl/program/clone_context.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"

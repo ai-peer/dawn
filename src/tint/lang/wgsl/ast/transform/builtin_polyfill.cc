@@ -858,13 +858,13 @@ struct BuiltinPolyfill::State {
         const uint32_t width = WidthOf(target);
 
         // select(target(v), low_limit, v < low_condition)
-        auto* select_low = b.Call(core::BuiltinFn::kSelect,                  //
+        auto* select_low = b.Call(core::BuiltinFn::kSelect,                 //
                                   b.Call(T(target), "v"),                   //
                                   ScalarOrVector(width, limits.low_limit),  //
                                   b.LessThan("v", ScalarOrVector(width, limits.low_condition)));
 
         // select(high_limit, select_low, v < high_condition)
-        auto* select_high = b.Call(core::BuiltinFn::kSelect,                   //
+        auto* select_high = b.Call(core::BuiltinFn::kSelect,                  //
                                    ScalarOrVector(width, limits.high_limit),  //
                                    select_low,                                //
                                    b.LessThan("v", ScalarOrVector(width, limits.high_condition)));

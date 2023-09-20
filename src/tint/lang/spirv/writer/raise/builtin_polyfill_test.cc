@@ -381,7 +381,8 @@ TEST_F(SpirvWriter_BuiltinPolyfillTest, AtomicCompareExchangeWeak) {
 
     b.Append(func->Block(), [&] {
         auto* result_ty = core::type::CreateAtomicCompareExchangeResult(ty, mod.symbols, ty.i32());
-        auto* result = b.Call(result_ty, core::BuiltinFn::kAtomicCompareExchangeWeak, var, cmp, val);
+        auto* result =
+            b.Call(result_ty, core::BuiltinFn::kAtomicCompareExchangeWeak, var, cmp, val);
         b.Return(func, b.Access(ty.i32(), result, 0_u));
     });
 
@@ -1873,8 +1874,8 @@ TEST_F(SpirvWriter_BuiltinPolyfillTest, TextureSampleGrad_2D_Offset) {
     func->SetParams({t, s, coords, ddx, ddy});
 
     b.Append(func->Block(), [&] {
-        auto* result = b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureSampleGrad, t, s, coords, ddx,
-                              ddy, b.Splat(ty.vec2<i32>(), 1_i, 2));
+        auto* result = b.Call(ty.vec4<f32>(), core::BuiltinFn::kTextureSampleGrad, t, s, coords,
+                              ddx, ddy, b.Splat(ty.vec2<i32>(), 1_i, 2));
         b.Return(func, result);
     });
 

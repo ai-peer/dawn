@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_LANG_WGSL_SEM_BUILTIN_H_
-#define SRC_TINT_LANG_WGSL_SEM_BUILTIN_H_
+#ifndef SRC_TINT_LANG_WGSL_SEM_BUILTIN_FN_H_
+#define SRC_TINT_LANG_WGSL_SEM_BUILTIN_FN_H_
 
 #include <string>
 #include <vector>
@@ -123,4 +123,4 @@ static constexpr double kDegToRad = 0.017453292519943295474;
 
 }  // namespace tint::sem
 
-#endif  // SRC_TINT_LANG_WGSL_SEM_BUILTIN_H_
+#endif  // SRC_TINT_LANG_WGSL_SEM_BUILTIN_FN_H_
