@@ -17,6 +17,7 @@
 
 #include <string>
 
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -30,8 +31,8 @@ namespace tint::core::ir::transform {
 /// structure that is recognized as needing a block decoration in SPIR-V, potentially wrapping the
 /// existing store type in a new structure if necessary.
 /// @param module the module to transform
-/// @returns an error string on failure
-Result<SuccessType, std::string> BlockDecoratedStructs(Module* module);
+/// @returns error diagnostics on failure
+Result<SuccessType, diag::List> BlockDecoratedStructs(Module* module);
 
 }  // namespace tint::core::ir::transform
 
