@@ -568,8 +568,8 @@ struct State {
 
 }  // namespace
 
-Result<SuccessType, std::string> MultiplanarExternalTexture(Module* ir,
-                                                            const ExternalTextureOptions& options) {
+Result<SuccessType, diag::List> MultiplanarExternalTexture(Module* ir,
+                                                           const ExternalTextureOptions& options) {
     auto result = ValidateAndDumpIfNeeded(*ir, "MultiplanarExternalTexture transform");
     if (!result) {
         return result;
