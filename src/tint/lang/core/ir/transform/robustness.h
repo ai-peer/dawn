@@ -19,6 +19,7 @@
 #include <unordered_set>
 
 #include "src/tint/api/common/binding_point.h"
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -59,8 +60,8 @@ struct RobustnessConfig {
 /// Robustness is a transform that prevents out-of-bounds memory accesses.
 /// @param module the module to transform
 /// @param config the robustness configuration
-/// @returns an error string on failure
-Result<SuccessType, std::string> Robustness(Module* module, const RobustnessConfig& config);
+/// @returns error diagnostics on failure
+Result<SuccessType, diag::List> Robustness(Module* module, const RobustnessConfig& config);
 
 }  // namespace tint::core::ir::transform
 

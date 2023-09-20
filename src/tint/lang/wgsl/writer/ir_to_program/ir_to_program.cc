@@ -100,7 +100,7 @@ class State {
         {
             auto result = RenameConflicts(&mod);
             if (!result) {
-                b.Diagnostics().add_error(diag::System::Transform, result.Failure());
+                b.Diagnostics().add(result.Failure());
                 return Program(std::move(b));
             }
         }

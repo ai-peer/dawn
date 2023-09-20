@@ -28,9 +28,12 @@ namespace tint::core::ir::transform {
 
 namespace {
 
-Result<SuccessType, std::string> Run(ir::Module* ir, const BindingRemapperOptions& options) {
+Result<SuccessType, diag::List> Run(ir::Module* ir, const BindingRemapperOptions& options) {
     if (!options.access_controls.empty()) {
-        return std::string("remapping access controls is currently unsupported");
+        diag::List errors;
+        errors.add_error(diag::System::Transform,
+                         "remapping access controls is currently unsupported");
+        return errors;
     }
     if (options.binding_points.empty()) {
         return Success;
@@ -63,8 +66,7 @@ Result<SuccessType, std::string> Run(ir::Module* ir, const BindingRemapperOption
 
 }  // namespace
 
-Result<SuccessType, std::string> BindingRemapper(Module* ir,
-                                                 const BindingRemapperOptions& options) {
+Result<SuccessType, diag::List> BindingRemapper(Module* ir, const BindingRemapperOptions& options) {
     auto result = ValidateAndDumpIfNeeded(*ir, "BindingRemapper transform");
     if (!result) {
         return result;

@@ -17,6 +17,7 @@
 
 #include <string>
 
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -33,8 +34,8 @@ namespace tint::core::ir::transform {
 /// derivative operations. We do this by setting a global flag and masking all writes to storage
 /// buffers and textures.
 /// @param module the module to transform
-/// @returns an error string on failure
-Result<SuccessType, std::string> DemoteToHelper(Module* module);
+/// @returns error diagnostics on failure
+Result<SuccessType, diag::List> DemoteToHelper(Module* module);
 
 }  // namespace tint::core::ir::transform
 

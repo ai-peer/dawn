@@ -276,7 +276,7 @@ struct State {
 
 }  // namespace
 
-Result<SuccessType, std::string> RenameConflicts(core::ir::Module* ir) {
+Result<SuccessType, diag::List> RenameConflicts(core::ir::Module* ir) {
     auto result = ValidateAndDumpIfNeeded(*ir, "RenameConflicts transform");
     if (!result) {
         return result;
