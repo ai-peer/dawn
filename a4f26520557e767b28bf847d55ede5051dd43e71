@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a90662a1_060ae6e7",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-20T05:27:34Z",
+      "side": 1,
+      "message": "Done adding TODO, thanks",
+      "parentUuid": "19857fa5_abf09cb2",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9df26a31_16af527f",
@@ -261,6 +279,24 @@
       "writtenOn": "2023-09-13T15:32:39Z",
       "side": 1,
       "message": "ditto, same comment as for the adapter.",
+      "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c795fe6_a18c9cdf",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1503,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-20T05:27:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d16829a7_cf7d0a51",
       "revId": "a4f26520557e767b28bf847d55ede5051dd43e71",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
