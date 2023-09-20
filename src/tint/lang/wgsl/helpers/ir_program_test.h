@@ -24,6 +24,7 @@
 #include "src/tint/lang/core/ir/validator.h"
 #include "src/tint/lang/core/number.h"
 #include "src/tint/lang/wgsl/program/program_builder.h"
+#include "src/tint/lang/wgsl/reader/lower/lower.h"
 #include "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.h"
 #include "src/tint/lang/wgsl/reader/reader.h"
 #include "src/tint/lang/wgsl/resolver/resolve.h"
@@ -38,8 +39,8 @@ class IRProgramTestBase : public BASE, public ProgramBuilder {
     IRProgramTestBase() = default;
     ~IRProgramTestBase() override = default;
 
-    /// Build the module, cleaning up the program before returning.
-    /// @returns the generated module
+    /// Builds a core-dialect module from this ProgramBuilder.
+    /// @returns the generated core-dialect module
     tint::Result<core::ir::Module, diag::List> Build() {
         Program program{resolver::Resolve(*this)};
         if (!program.IsValid()) {
@@ -47,11 +48,17 @@ class IRProgramTestBase : public BASE, public ProgramBuilder {
         }
 
         auto result = wgsl::reader::ProgramToIR(program);
-        if (result) {
-            auto validated = core::ir::Validate(result.Get());
-            if (!validated) {
-                return validated.Failure();
-            }
+        if (!result) {
+            return result.Failure();
+        }
+
+        // WGSL-dialect -> core-dialect
+        if (auto lower = wgsl::reader::Lower(result.Get()); !lower) {
+            return lower.Failure();
+        }
+
+        if (auto validate = core::ir::Validate(result.Get()); !validate) {
+            return validate.Failure();
         }
         return result;
     }
@@ -62,12 +69,7 @@ class IRProgramTestBase : public BASE, public ProgramBuilder {
     tint::Result<core::ir::Module, diag::List> Build(std::string wgsl) {
 #if TINT_BUILD_WGSL_READER
         Source::File file("test.wgsl", std::move(wgsl));
-        auto program = wgsl::reader::Parse(&file);
-        if (!program.IsValid()) {
-            return program.Diagnostics();
-        }
-
-        auto result = wgsl::reader::ProgramToIR(program);
+        auto result = wgsl::reader::WgslToIR(&file);
         if (result) {
             auto validated = core::ir::Validate(result.Get());
             if (!validated) {
