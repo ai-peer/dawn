@@ -28,7 +28,7 @@ namespace tint::core::ir::transform {
 
 namespace {
 
-Result<SuccessType, diag::List> Run(ir::Module* ir, const BindingRemapperOptions& options) {
+Result<SuccessType, diag::List> Run(ir::Module& ir, const BindingRemapperOptions& options) {
     if (!options.access_controls.empty()) {
         diag::List errors;
         errors.add_error(diag::System::Transform,
@@ -38,12 +38,12 @@ Result<SuccessType, diag::List> Run(ir::Module* ir, const BindingRemapperOptions
     if (options.binding_points.empty()) {
         return Success;
     }
-    if (!ir->root_block) {
+    if (!ir.root_block) {
         return Success;
     }
 
     // Find binding resources.
-    for (auto inst : *ir->root_block) {
+    for (auto inst : *ir.root_block) {
         auto* var = inst->As<Var>();
         if (!var || !var->Alive()) {
             continue;
@@ -66,8 +66,8 @@ Result<SuccessType, diag::List> Run(ir::Module* ir, const BindingRemapperOptions
 
 }  // namespace
 
-Result<SuccessType, diag::List> BindingRemapper(Module* ir, const BindingRemapperOptions& options) {
-    auto result = ValidateAndDumpIfNeeded(*ir, "BindingRemapper transform");
+Result<SuccessType, diag::List> BindingRemapper(Module& ir, const BindingRemapperOptions& options) {
+    auto result = ValidateAndDumpIfNeeded(ir, "BindingRemapper transform");
     if (!result) {
         return result;
     }
