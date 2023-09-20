@@ -31,6 +31,7 @@ libtint_source_set("raise") {
     "raise.h",
   ]
   deps = [
+    "${tint_src_dir}/utils/diagnostic",
     "${tint_src_dir}/utils/ice",
     "${tint_src_dir}/utils/macros",
     "${tint_src_dir}/utils/result",
