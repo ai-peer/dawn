@@ -35,8 +35,8 @@ Result<SuccessType, diag::List> Validate(Module& mod);
 /// Validates the module @p ir and dumps its contents if required by the build configuration.
 /// @param ir the module to transform
 /// @param msg the msg to accompany the output
-/// @returns an error string if the module is not valid
-Result<SuccessType, std::string> ValidateAndDumpIfNeeded(Module& ir, const char* msg);
+/// @returns error diagnostics if the module is not valid
+Result<SuccessType, diag::List> ValidateAndDumpIfNeeded(Module& ir, const char* msg);
 
 }  // namespace tint::core::ir
 

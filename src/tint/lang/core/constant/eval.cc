@@ -1471,7 +1471,7 @@ Eval::Result Eval::Bitcast(const core::type::Type* ty, const Value* value, const
     Vector<const Value*, 4> els;
 
     // Reinterprets the buffer bits as destination element and push the result into the vector.
-    // Return false if an error occured, otherwise return true.
+    // Return false if an error occurred, otherwise return true.
     auto push_dst_element = [&](size_t offset) -> bool {
         uint32_t v;
         if (dst_el_ty->Size() == 4) {
