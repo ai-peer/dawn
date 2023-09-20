@@ -31,7 +31,7 @@ namespace tint::spirv::writer::raise {
 /// instructions and binary instructions where not supported by SPIR-V.
 /// @param module the module to transform
 /// @returns error diagnostics on failure
-Result<SuccessType, diag::List> ExpandImplicitSplats(core::ir::Module* module);
+Result<SuccessType, diag::List> ExpandImplicitSplats(core::ir::Module& module);
 
 }  // namespace tint::spirv::writer::raise
 

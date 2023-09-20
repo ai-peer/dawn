@@ -30,7 +30,7 @@ namespace tint::core::ir::transform {
 /// Add an empty entry point to the module, if no other entry points exist.
 /// @param module the module to transform
 /// @returns error diagnostics on failure
-Result<SuccessType, diag::List> AddEmptyEntryPoint(Module* module);
+Result<SuccessType, diag::List> AddEmptyEntryPoint(Module& module);
 
 }  // namespace tint::core::ir::transform
 
