@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0cc16d8_b24b073b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-20T12:53:01Z",
+      "side": 1,
+      "message": "Love it!",
+      "revId": "04dcbfe063eca14ad510e0736ff4c6dfc93ae7ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28991165_a0612aa1",
+        "filename": "src/tint/utils/math/hash.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-20T12:53:01Z",
+      "side": 1,
+      "message": "Nice! I don\u0027t think I\u0027ve used this one yet.",
+      "range": {
+        "startLine": 69,
+        "startChar": 26,
+        "endLine": 69,
+        "endChar": 54
+      },
+      "revId": "04dcbfe063eca14ad510e0736ff4c6dfc93ae7ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
