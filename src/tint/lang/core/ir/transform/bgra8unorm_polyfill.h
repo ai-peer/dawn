@@ -31,7 +31,7 @@ namespace tint::core::ir::transform {
 /// bgra8unorm to rgba8unorm, inserting swizzles before and after texture accesses as necessary.
 /// @param module the module to transform
 /// @returns error diagnostics on failure
-Result<SuccessType, diag::List> Bgra8UnormPolyfill(Module* module);
+Result<SuccessType, diag::List> Bgra8UnormPolyfill(Module& module);
 
 }  // namespace tint::core::ir::transform
 
