@@ -19,6 +19,8 @@
 
 #include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/lang/wgsl/writer/ast_printer/ast_printer.h"
+#include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.h"
+#include "src/tint/lang/wgsl/writer/raise/raise.h"
 
 #if TINT_BUILD_SYNTAX_TREE_WRITER
 #include "src/tint/lang/wgsl/writer/syntax_tree_printer/syntax_tree_printer.h"
@@ -50,6 +52,20 @@ Result<Output, diag::List> Generate(const Program& program, const Options& optio
     }
 
     return output;
+}
+
+Result<Output, diag::List> WgslFromIR(core::ir::Module& module) {
+    // core-dialect -> WGSL-dialect
+    if (auto res = raise::Raise(module); !res) {
+        return res.Failure();
+    }
+
+    auto program = IRToProgram(module);
+    if (!program.IsValid()) {
+        return program.Diagnostics();
+    }
+
+    return Generate(program, Options{});
 }
 
 }  // namespace tint::wgsl::writer
