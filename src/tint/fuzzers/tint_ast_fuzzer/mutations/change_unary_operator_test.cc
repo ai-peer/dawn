@@ -158,7 +158,7 @@ TEST(ChangeUnaryOperatorTest, Signed_Integer_Types_Applicable1) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -199,7 +199,7 @@ TEST(ChangeUnaryOperatorTest, Signed_Integer_Types_Applicable2) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -242,7 +242,7 @@ TEST(ChangeUnaryOperatorTest, Signed_Integer_Types_Applicable3) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -284,7 +284,7 @@ TEST(ChangeUnaryOperatorTest, Signed_Integer_Types_Applicable4) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics().str();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
