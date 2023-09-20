@@ -28,4 +28,10 @@ LoadVectorElement::LoadVectorElement(InstructionResult* result, ir::Value* from,
 
 LoadVectorElement::~LoadVectorElement() = default;
 
+LoadVectorElement* LoadVectorElement::Clone(CloneContext& ctx) {
+    (void)ctx;
+    TINT_UNIMPLEMENTED();
+    return nullptr;
+}
+
 }  // namespace tint::core::ir

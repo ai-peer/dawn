@@ -63,5 +63,19 @@ TEST_F(IR_IfTest, Fail_NullFalseBlock) {
         "");
 }
 
+TEST_F(IR_IfTest, Clone) {
+    auto* if_ = b.If(b.Constant(true));
+    auto* new_if = clone_ctx.Clone(if_);
+
+    auto new_cond = new_if->Condition()->As<Constant>()->Value();
+    ASSERT_TRUE(new_cond->Is<core::constant::Scalar<bool>>());
+    EXPECT_TRUE(new_cond->As<core::constant::Scalar<bool>>()->ValueAs<bool>());
+
+    EXPECT_NE(nullptr, new_if->True());
+    EXPECT_NE(nullptr, new_if->False());
+    EXPECT_NE(if_->True(), new_if->True());
+    EXPECT_NE(if_->False(), new_if->False());
+}
+
 }  // namespace
 }  // namespace tint::core::ir

@@ -12,26 +12,21 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/core/ir/user_call.h"
-
-#include <utility>
-
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::UserCall);
+#include "src/tint/lang/core/ir/terminate_invocation.h"
+#include "gtest/gtest.h"
+#include "src/tint/lang/core/ir/ir_helper_test.h"
 
 namespace tint::core::ir {
+namespace {
 
-UserCall::UserCall(InstructionResult* result, Function* func, VectorRef<Value*> arguments) {
-    AddOperand(UserCall::kFunctionOperandOffset, func);
-    AddOperands(UserCall::kArgsOperandOffset, std::move(arguments));
-    AddResult(result);
+using IR_TerminateInvocationTest = IRTestHelper;
+
+TEST_F(IR_TerminateInvocationTest, Clone) {
+    auto* ti = b.TerminateInvocation();
+    auto* new_ti = clone_ctx.Clone(ti);
+    EXPECT_NE(nullptr, new_ti);
+    EXPECT_NE(ti, new_ti);
 }
 
-UserCall::~UserCall() = default;
-
-UserCall* UserCall::Clone(CloneContext& ctx) {
-    (void)ctx;
-    TINT_UNIMPLEMENTED();
-    return nullptr;
-}
-
+}  // namespace
 }  // namespace tint::core::ir

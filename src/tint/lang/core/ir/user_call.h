@@ -24,7 +24,7 @@
 namespace tint::core::ir {
 
 /// A user call instruction in the IR.
-class UserCall : public Castable<UserCall, Call> {
+class UserCall final : public Castable<UserCall, Call> {
   public:
     /// The offset in Operands() for the function being called
     static constexpr size_t kFunctionOperandOffset = 0;
@@ -39,11 +39,18 @@ class UserCall : public Castable<UserCall, Call> {
     UserCall(InstructionResult* result, Function* func, VectorRef<Value*> args);
     ~UserCall() override;
 
+    /// @copydoc Instruction::Clone()
+    UserCall* Clone(CloneContext& ctx) override;
+
     /// @returns the call arguments
     tint::Slice<Value*> Args() override { return operands_.Slice().Offset(kArgsOperandOffset); }
 
-    /// @returns the called function name
-    Function* Func() { return operands_[kFunctionOperandOffset]->As<ir::Function>(); }
+    /// @returns the called function
+    Function* Target() { return operands_[kFunctionOperandOffset]->As<ir::Function>(); }
+
+    /// Sets called function
+    /// @param target the new target of the call
+    void SetTarget(Function* target) { operands_[kFunctionOperandOffset] = target; }
 
     /// @returns the friendly name for the instruction
     std::string FriendlyName() override { return "call"; }
