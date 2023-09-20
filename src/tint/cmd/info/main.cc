@@ -71,7 +71,7 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
     return true;
 }
 
-void EmitJson(const tint::Program* program) {
+void EmitJson(const tint::Program& program) {
     tint::inspector::Inspector inspector(program);
 
     std::cout << "{" << std::endl;
@@ -223,7 +223,7 @@ void EmitJson(const tint::Program* program) {
     std::cout << "\"structures\": [";
 
     bool struct_first = true;
-    for (const auto* ty : program->Types()) {
+    for (const auto* ty : program.Types()) {
         if (!ty->Is<tint::core::type::Struct>()) {
             continue;
         }
@@ -277,7 +277,7 @@ void EmitJson(const tint::Program* program) {
     std::cout << "}" << std::endl;
 }
 
-void EmitText(const tint::Program* program) {
+void EmitText(const tint::Program& program) {
     tint::inspector::Inspector inspector(program);
     if (!inspector.GetUsedExtensionNames().empty()) {
         std::cout << "Extensions:" << std::endl;
@@ -290,7 +290,7 @@ void EmitText(const tint::Program* program) {
     tint::cmd::PrintInspectorData(inspector);
 
     bool has_struct = false;
-    for (const auto* ty : program->Types()) {
+    for (const auto* ty : program.Types()) {
         if (!ty->Is<tint::core::type::Struct>()) {
             continue;
         }
@@ -300,7 +300,7 @@ void EmitText(const tint::Program* program) {
 
     if (has_struct) {
         std::cout << "Structures" << std::endl;
-        for (const auto* ty : program->Types()) {
+        for (const auto* ty : program.Types()) {
             if (!ty->Is<tint::core::type::Struct>()) {
                 continue;
             }
@@ -344,9 +344,9 @@ int main(int argc, const char** argv) {
     }
 
     if (options.emit_json) {
-        EmitJson(program.get());
+        EmitJson(*program);
     } else {
-        EmitText(program.get());
+        EmitText(*program);
     }
 
     return 0;
