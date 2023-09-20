@@ -57,8 +57,8 @@ void CheckStatementDeletionWorks(
                                    &program, &node_id_map, nullptr));
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics();
     wgsl::writer::Options options;
-    auto transformed_result = wgsl::writer::Generate(&program, options);
-    auto expected_result = wgsl::writer::Generate(&expected_program, options);
+    auto transformed_result = wgsl::writer::Generate(program, options);
+    auto expected_result = wgsl::writer::Generate(expected_program, options);
     ASSERT_TRUE(transformed_result) << transformed_result.Failure();
     ASSERT_TRUE(expected_result) << expected_result.Failure();
     ASSERT_EQ(expected_result->wgsl, transformed_result->wgsl);

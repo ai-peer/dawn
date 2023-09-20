@@ -80,7 +80,7 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     auto dst = tint::wgsl::writer::IRToProgram(ir.Get());
     if (!dst.IsValid()) {
 #if TINT_BUILD_WGSL_WRITER
-        if (auto result = tint::wgsl::writer::Generate(&dst, {}); result) {
+        if (auto result = tint::wgsl::writer::Generate(dst, {}); result) {
             std::cerr << result->wgsl << std::endl << std::endl;
         }
 #endif
