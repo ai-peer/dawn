@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a43f29dd_a4a9cd3b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-09-20T18:13:30Z",
+      "side": 1,
+      "message": "This is a small change that results in more interesting coverage. It also aligns with Chrome\u0027s Dawn Wire Serialization better.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/wire/ObjectHandle.cpp;l\u003d24;drc\u003de60adb28edec185d84d27074c2a2dfb7bb833dca",
+      "revId": "17ebe280dd7afa795d4fef69ce9a1a49856fc006",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
