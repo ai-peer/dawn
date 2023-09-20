@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "39d52f63_097b58ca",
+        "filename": "src/tint/lang/core/address_space.def",
+        "patchSetId": 1
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-20T20:21:10Z",
+      "side": 1,
+      "message": "Will shuffle edge cases like this after getting things split up.",
+      "parentUuid": "a9798c2b_a306c134",
+      "revId": "11390378c155969962dfbc64bfab78c82462a7ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d4380799_551c09ff",
         "filename": "src/tint/lang/core/texel_format.def",
         "patchSetId": 1
