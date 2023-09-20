@@ -142,7 +142,7 @@ TEST(ChangeBinaryOperatorTest, Applicable_Simple) {
     ASSERT_TRUE(program.IsValid()) << program.Diagnostics();
 
     wgsl::writer::Options options;
-    auto result = wgsl::writer::Generate(&program, options);
+    auto result = wgsl::writer::Generate(program, options);
     ASSERT_TRUE(result) << result.Failure();
 
     std::string expected_shader = R"(fn main() {
@@ -219,7 +219,7 @@ void CheckMutations(const std::string& lhs_type,
             ASSERT_TRUE(program.IsValid()) << program.Diagnostics();
 
             wgsl::writer::Options options;
-            auto result = wgsl::writer::Generate(&program, options);
+            auto result = wgsl::writer::Generate(program, options);
             ASSERT_TRUE(result) << result.Failure();
 
             ASSERT_EQ(expected_shader.str(), result->wgsl);
