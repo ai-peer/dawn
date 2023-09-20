@@ -18,6 +18,7 @@
 #include <string>
 
 #include "src/tint/api/options/binding_remapper.h"
+#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -30,9 +31,9 @@ namespace tint::core::ir::transform {
 /// BindingRemapper is a transform that remaps binding point indices and access controls.
 /// @param module the module to transform
 /// @param options the remapping options
-/// @returns an error string on failure
-Result<SuccessType, std::string> BindingRemapper(Module* module,
-                                                 const BindingRemapperOptions& options);
+/// @returns error diagnostics on failure
+Result<SuccessType, diag::List> BindingRemapper(Module* module,
+                                                const BindingRemapperOptions& options);
 
 }  // namespace tint::core::ir::transform
 
