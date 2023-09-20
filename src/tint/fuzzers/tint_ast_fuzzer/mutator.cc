@@ -65,7 +65,7 @@ MutationFinderList CreateMutationFinders(ProbabilityContext* probability_context
 bool MaybeApplyMutation(const tint::Program& program,
                         const Mutation& mutation,
                         const NodeIdMap& node_id_map,
-                        tint::Program* out_program,
+                        tint::Program& out_program,
                         NodeIdMap* out_node_id_map,
                         protobufs::MutationSequence* mutation_sequence) {
     assert(out_program && "`out_program` may not be a nullptr");

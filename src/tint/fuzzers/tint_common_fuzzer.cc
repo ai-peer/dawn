@@ -68,14 +68,14 @@ namespace {
 // Wrapping in a macro, so it can be a one-liner in the code, but not
 // introduce another level in the stack trace. This will help with de-duping
 // ClusterFuzz issues.
-#define CHECK_INSPECTOR(program, inspector)                                                  \
-    do {                                                                                     \
-        if ((inspector).has_error()) {                                                       \
-            if (!enforce_validity) {                                                         \
-                return;                                                                      \
-            }                                                                                \
-            FATAL_ERROR(program->Diagnostics(), "Inspector failed: " + (inspector).error()); \
-        }                                                                                    \
+#define CHECK_INSPECTOR(program, inspector)                                                 \
+    do {                                                                                    \
+        if ((inspector).has_error()) {                                                      \
+            if (!enforce_validity) {                                                        \
+                return;                                                                     \
+            }                                                                               \
+            FATAL_ERROR(program.Diagnostics(), "Inspector failed: " + (inspector).error()); \
+        }                                                                                   \
     } while (false)
 
 // Wrapping in a macro to make code more readable and help with issue de-duping.
@@ -352,9 +352,9 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
 
 void CommonFuzzer::RunInspector(Program* program) {
     inspector::Inspector inspector(program);
-    diagnostics_ = program->Diagnostics();
+    diagnostics_ = program.Diagnostics();
 
-    if (!program->IsValid()) {
+    if (!program.IsValid()) {
         // It's not safe to use the inspector on invalid programs.
         return;
     }
