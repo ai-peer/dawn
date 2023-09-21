@@ -17,6 +17,7 @@
 
 #include <memory>
 
+#include "dawn/common/FutureUtils.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/client/ObjectBase.h"
@@ -32,7 +33,7 @@ class Buffer final : public ObjectBase {
     Buffer(const ObjectBaseParams& params, const WGPUBufferDescriptor* descriptor);
     ~Buffer() override;
 
-    bool OnMapAsyncCallback(uint64_t requestSerial,
+    bool OnMapAsyncCallback(WGPUFuture future,
                             uint32_t status,
                             uint64_t readDataUpdateInfoLength,
                             const uint8_t* readDataUpdateInfo);
@@ -58,7 +59,6 @@ class Buffer final : public ObjectBase {
     WGPUBufferMapState GetMapState() const;
 
   private:
-    void CancelCallbacksForDisconnect() override;
     void InvokeAndClearCallback(WGPUBufferMapAsyncStatus status);
 
     bool IsMappedForReading() const;
@@ -79,15 +79,13 @@ class Buffer final : public ObjectBase {
     // Up to only one request can exist at a single time.
     // Other requests are rejected.
     struct MapRequestData {
-        WGPUBufferMapCallback callback = nullptr;
-        void* userdata = nullptr;
+        WGPUFuture future = {kNullFutureID};
         size_t offset = 0;
         size_t size = 0;
         MapRequestType type = MapRequestType::None;
     };
     MapRequestData mRequest;
     bool mPendingMap = false;
-    uint64_t mSerial = 0;
     uint64_t mSize = 0;
     WGPUBufferUsage mUsage;
 

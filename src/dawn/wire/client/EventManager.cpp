@@ -64,6 +64,12 @@ void EventManager::ShutDown() {
 
 void EventManager::SetFutureReady(FutureID futureID, void* userdata) {
     DAWN_ASSERT(futureID > 0);
+    // If the client was already disconnected, then all the callbacks should already have fired so
+    // we don't need to fire the callback anymore.
+    if (mClient->IsDisconnected()) {
+        return;
+    }
+
     std::optional<TrackedEvent> event;
     mTrackedEvents.Use([&](auto trackedEvents) {
         TrackedEvent& trackedEvent = trackedEvents->at(futureID);  // Asserts futureID is in the map
