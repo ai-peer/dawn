@@ -18,6 +18,7 @@
 #include <d3dcompiler.h>
 
 #include <string>
+#include <unordered_map>
 #include <vector>
 
 #include "dawn/native/CacheRequest.h"
@@ -64,6 +65,7 @@ enum class Compiler { FXC, DXC };
     X(tint::ExternalTextureOptions, externalTextureOptions)                                      \
     X(tint::ArrayLengthFromUniformOptions, arrayLengthFromUniform)                               \
     X(tint::BindingRemapperOptions, bindingRemapper)                                             \
+    X(std::unordered_map<BindingPoint, core::Access>, accessControls)                            \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(std::bitset<kMaxInterStageShaderVariables>, interstageLocations)                           \
     X(LimitsForCompilationRequest, limits)                                                       \
