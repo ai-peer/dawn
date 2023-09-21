@@ -19,37 +19,22 @@
 
 namespace dawn::wire::client {
 
-Queue::~Queue() {
-    ClearAllCallbacks(WGPUQueueWorkDoneStatus_Unknown);
-}
+Queue::~Queue() = default;
 
-bool Queue::OnWorkDoneCallback(uint64_t requestSerial, WGPUQueueWorkDoneStatus status) {
-    OnWorkDoneData request;
-    if (!mOnWorkDoneRequests.Acquire(requestSerial, &request)) {
-        return false;
-    }
-
-    request.callback(status, request.userdata);
+bool Queue::OnWorkDoneCallback(WGPUFuture future, WGPUQueueWorkDoneStatus status) {
+    WGPUQueueWorkDoneStatus* userdata = new WGPUQueueWorkDoneStatus(status);
+    GetClient()->GetEventManager()->SetFutureReady(future.id, userdata);
     return true;
 }
 
 void Queue::OnSubmittedWorkDone(uint64_t signalValue,
                                 WGPUQueueWorkDoneCallback callback,
                                 void* userdata) {
-    Client* client = GetClient();
-    if (client->IsDisconnected()) {
-        callback(WGPUQueueWorkDoneStatus_DeviceLost, userdata);
-        return;
-    }
-
-    uint64_t serial = mOnWorkDoneRequests.Add({callback, userdata});
-
-    QueueOnSubmittedWorkDoneCmd cmd;
-    cmd.queueId = GetWireId();
-    cmd.signalValue = signalValue;
-    cmd.requestSerial = serial;
-
-    client->SerializeCommand(cmd);
+    WGPUQueueWorkDoneCallbackInfo callbackInfo = {};
+    callbackInfo.mode = WGPUCallbackMode_AllowProcessEvents;
+    callbackInfo.callback = callback;
+    callbackInfo.userdata = userdata;
+    OnSubmittedWorkDoneF(callbackInfo);
 }
 
 WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo) {
@@ -61,7 +46,7 @@ WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& call
     auto [futureIDInternal, tracked] = client->GetEventManager()->TrackEvent(
         callbackInfo.mode, [=](EventCompletionType completionType, void* userdata) {
             WGPUQueueWorkDoneStatus status = completionType == EventCompletionType::Shutdown
-                                                 ? WGPUQueueWorkDoneStatus_Unknown
+                                                 ? WGPUQueueWorkDoneStatus_DeviceLost
                                                  : WGPUQueueWorkDoneStatus_Success;
             if (userdata) {
                 auto* callbackStatus = static_cast<WGPUQueueWorkDoneStatus*>(userdata);
@@ -74,26 +59,10 @@ WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& call
         return {futureIDInternal};
     }
 
-    struct Lambda {
-        Client* client;
-        FutureID futureIDInternal;
-    };
-    Lambda* lambda = new Lambda{client, futureIDInternal};
-    uint64_t serial =
-        mOnWorkDoneRequests.Add({[](WGPUQueueWorkDoneStatus status, void* userdata) {
-                                     auto* lambda = static_cast<Lambda*>(userdata);
-                                     WGPUQueueWorkDoneStatus* futureUserdata =
-                                         new WGPUQueueWorkDoneStatus(status);
-                                     lambda->client->GetEventManager()->SetFutureReady(
-                                         lambda->futureIDInternal, futureUserdata);
-                                     delete lambda;
-                                 },
-                                 lambda});
-
     QueueOnSubmittedWorkDoneCmd cmd;
     cmd.queueId = GetWireId();
     cmd.signalValue = 0;
-    cmd.requestSerial = serial;
+    cmd.future = {futureIDInternal};
 
     client->SerializeCommand(cmd);
     return {futureIDInternal};
@@ -126,18 +95,6 @@ void Queue::WriteTexture(const WGPUImageCopyTexture* destination,
     cmd.writeSize = writeSize;
 
     GetClient()->SerializeCommand(cmd);
-}
-
-void Queue::CancelCallbacksForDisconnect() {
-    ClearAllCallbacks(WGPUQueueWorkDoneStatus_DeviceLost);
-}
-
-void Queue::ClearAllCallbacks(WGPUQueueWorkDoneStatus status) {
-    mOnWorkDoneRequests.CloseAll([status](OnWorkDoneData* request) {
-        if (request->callback != nullptr) {
-            request->callback(status, request->userdata);
-        }
-    });
 }
 
 }  // namespace dawn::wire::client
