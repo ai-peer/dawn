@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9e3bc8e_f60f6cab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T19:27:01Z",
+      "side": 1,
+      "message": "lgtm w/ nits.",
+      "revId": "96279defd2458305a2f80dc068cb959621bbcba4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "828be2e0_d708c3b0",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T19:27:01Z",
+      "side": 1,
+      "message": "```suggestion\nTo test against SwiftShader (software implementation of Vulkan) instead of the default Vulkan device, prefix `./tools/run run-cts` with `VK_ICD_FILENAMES\u003d\u003cswiftshader-cmake-build\u003e/Linux/vk_swiftshader_icd.json`. For example:\n```",
+      "revId": "96279defd2458305a2f80dc068cb959621bbcba4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a83a1812_967fe951",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T19:27:01Z",
+      "side": 1,
+      "message": "```suggestion\nTo test against Lavapipe (mesa\u0027s software implementation of Vulkan), similarly to SwiftShader, prefix `./tools/run run-cts` with `VK_ICD_FILENAMES\u003d\u003clavapipe-install-dir\u003e/share/vulkan/icd.d/lvp_icd.x86_64.json`. For example:\n```",
+      "revId": "96279defd2458305a2f80dc068cb959621bbcba4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
