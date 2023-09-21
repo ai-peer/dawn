@@ -14,10 +14,38 @@
 
 #include "dawn/wire/client/Queue.h"
 
+#include <functional>
+
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/EventManager.h"
 
 namespace dawn::wire::client {
+namespace {
+
+struct WorkDoneEvent : public TrackedEvent {
+    WorkDoneEvent(const WGPUQueueWorkDoneCallbackInfo& callbackInfo)
+        : TrackedEvent(callbackInfo.mode, [=](EventCompletionType completionType) {
+              // TODO(crbug.com/dawn/2021): Pretend things success when the device is lost.
+              WGPUQueueWorkDoneStatus status = completionType == EventCompletionType::Shutdown
+                                                   ? WGPUQueueWorkDoneStatus_Unknown
+                                                   : WGPUQueueWorkDoneStatus_Success;
+              if (mStatus) {
+                  // TODO(crbug.com/dawn/2021): Pretend things success when the device is lost.
+                  status = *mStatus == WGPUQueueWorkDoneStatus_DeviceLost
+                               ? WGPUQueueWorkDoneStatus_Success
+                               : *mStatus;
+              }
+              callbackInfo.callback(status, callbackInfo.userdata);
+          }) {}
+
+    static void WorkDoneEventReady(TrackedEvent& event, WGPUQueueWorkDoneStatus status) {
+        static_cast<WorkDoneEvent&>(event).mStatus = status;
+    }
+
+    std::optional<WGPUQueueWorkDoneStatus> mStatus;
+};
+
+}  // namespace
 
 Queue::~Queue() {
     ClearAllCallbacks(WGPUQueueWorkDoneStatus_Unknown);
@@ -58,13 +86,8 @@ WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& call
     DAWN_ASSERT(callbackInfo.nextInChain == nullptr);
 
     Client* client = GetClient();
-    auto [futureIDInternal, tracked] = client->GetEventManager()->TrackEvent(
-        callbackInfo.mode, [=](EventCompletionType completionType) {
-            WGPUQueueWorkDoneStatus status = completionType == EventCompletionType::Shutdown
-                                                 ? WGPUQueueWorkDoneStatus_Unknown
-                                                 : WGPUQueueWorkDoneStatus_Success;
-            callbackInfo.callback(status, callbackInfo.userdata);
-        });
+    auto [futureIDInternal, tracked] =
+        client->GetEventManager()->TrackEvent(WorkDoneEvent(callbackInfo));
     if (!tracked) {
         return {futureIDInternal};
     }
@@ -74,13 +97,15 @@ WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& call
         FutureID futureIDInternal;
     };
     Lambda* lambda = new Lambda{client, futureIDInternal};
-    uint64_t serial = mOnWorkDoneRequests.Add(
-        {[](WGPUQueueWorkDoneStatus /* ignored */, void* userdata) {
-             auto* lambda = static_cast<Lambda*>(userdata);
-             lambda->client->GetEventManager()->SetFutureReady(lambda->futureIDInternal);
-             delete lambda;
-         },
-         lambda});
+    uint64_t serial =
+        mOnWorkDoneRequests.Add({[](WGPUQueueWorkDoneStatus status, void* userdata) {
+                                     using namespace std::placeholders;
+                                     auto* lambda = static_cast<Lambda*>(userdata);
+                                     lambda->client->GetEventManager()->SetFutureReady(
+                                         lambda->futureIDInternal,
+                                         std::bind(WorkDoneEvent::WorkDoneEventReady, _1, status));
+                                 },
+                                 lambda});
 
     QueueOnSubmittedWorkDoneCmd cmd;
     cmd.queueId = GetWireId();

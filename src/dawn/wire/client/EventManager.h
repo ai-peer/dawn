@@ -34,6 +34,23 @@ class Client;
 // Code to run to complete the event (after receiving a ready notification from the wire).
 using EventCallback = std::function<void(EventCompletionType)>;
 
+struct TrackedEvent : dawn::NonCopyable {
+    TrackedEvent(WGPUCallbackMode mode, EventCallback&& callback);
+    ~TrackedEvent();
+
+    TrackedEvent(TrackedEvent&& other);
+    TrackedEvent& operator=(TrackedEvent&& other);
+
+    void Complete(EventCompletionType type) &&;
+
+    WGPUCallbackMode mMode;
+    // Callback. Falsey if already called.
+    EventCallback mCallback;
+    // These states don't need to be atomic because they're always protected by
+    // mTrackedEventsMutex (or moved out to a local variable).
+    bool mReady = false;
+};
+
 // Subcomponent which tracks callback events for the Future-based callback
 // entrypoints. All events from this instance (regardless of whether from an adapter, device, queue,
 // etc.) are tracked here, and used by the instance-wide ProcessEvents and WaitAny entrypoints.
@@ -46,28 +63,16 @@ class EventManager final : NonMovable {
 
     // Returns a pair of the FutureID and a bool that is true iff the event was successfuly tracked,
     // false otherwise. Events may not be tracked if the client is already disconnected.
-    std::pair<FutureID, bool> TrackEvent(WGPUCallbackMode mode, EventCallback&& callback);
+    std::pair<FutureID, bool> TrackEvent(TrackedEvent&& event);
     void ShutDown();
-    void SetFutureReady(FutureID futureID);
+
+    // Sets the event to be ready, calling an additional specialized callback to set further event
+    // arguments when necessary.
+    void SetFutureReady(FutureID futureID, std::function<void(TrackedEvent&)>&& ready = {});
     void ProcessPollEvents();
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
   private:
-    struct TrackedEvent : dawn::NonCopyable {
-        TrackedEvent(WGPUCallbackMode mode, EventCallback&& callback);
-        ~TrackedEvent();
-
-        TrackedEvent(TrackedEvent&&) = default;
-        TrackedEvent& operator=(TrackedEvent&&) = default;
-
-        WGPUCallbackMode mMode;
-        // Callback. Falsey if already called.
-        EventCallback mCallback;
-        // These states don't need to be atomic because they're always protected by
-        // mTrackedEventsMutex (or moved out to a local variable).
-        bool mReady = false;
-    };
-
     Client* mClient;
 
     // Tracks all kinds of events (for both WaitAny and ProcessEvents). We use an ordered map so
