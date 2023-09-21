@@ -59,6 +59,7 @@ enum class Function : uint8_t {
     kImageSampleExplicitLod,
     kImageSampleDrefImplicitLod,
     kImageSampleDrefExplicitLod,
+    kImageWrite,
     kMatrixTimesMatrix,
     kMatrixTimesScalar,
     kMatrixTimesVector,

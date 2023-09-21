@@ -31,10 +31,6 @@ libtint_source_set("ir") {
     "builtin_call.h",
     "function.cc",
     "function.h",
-    "intrinsic.cc",
-    "intrinsic.h",
-    "intrinsic_call.cc",
-    "intrinsic_call.h",
   ]
   deps = [
     "${tint_src_dir}/lang/core",

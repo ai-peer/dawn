@@ -79,6 +79,8 @@ const char* str(Function i) {
             return "spirv.image_sample_dref_implicit_lod";
         case Function::kImageSampleDrefExplicitLod:
             return "spirv.image_sample_dref_explicit_lod";
+        case Function::kImageWrite:
+            return "spirv.image_write";
         case Function::kMatrixTimesMatrix:
             return "spirv.matrix_times_matrix";
         case Function::kMatrixTimesScalar:

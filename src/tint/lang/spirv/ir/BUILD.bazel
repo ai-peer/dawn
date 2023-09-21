@@ -28,14 +28,10 @@ cc_library(
   srcs = [
     "builtin_call.cc",
     "function.cc",
-    "intrinsic.cc",
-    "intrinsic_call.cc",
   ],
   hdrs = [
     "builtin_call.h",
     "function.h",
-    "intrinsic.h",
-    "intrinsic_call.h",
   ],
   deps = [
     "//src/tint/lang/core",
