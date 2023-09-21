@@ -64,12 +64,23 @@ void EventManager::ShutDown() {
 
 void EventManager::SetFutureReady(FutureID futureID, void* userdata) {
     DAWN_ASSERT(futureID > 0);
+    std::optional<TrackedEvent> event;
     mTrackedEvents.Use([&](auto trackedEvents) {
         TrackedEvent& trackedEvent = trackedEvents->at(futureID);  // Asserts futureID is in the map
         trackedEvent.mReady = true;
         trackedEvent.mUserdata = userdata;
+
+        // If the event can be spontaneously completed, do so now.
+        if (trackedEvent.mMode == WGPUCallbackMode_AllowSpontaneous) {
+            event = std::move(trackedEvent);
+            trackedEvents->erase(futureID);
+        }
     });
-    // TODO(crbug.com/dawn/2059): Handle spontaneous completions.
+
+    // Handle spontaneous completions.
+    if (event.has_value()) {
+        event->Complete(EventCompletionType::Ready);
+    }
 }
 
 void EventManager::ProcessPollEvents() {
