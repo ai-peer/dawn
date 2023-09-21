@@ -34,6 +34,24 @@
       "parentUuid": "33cbb09c_069cb5c5",
       "revId": "4dcbddaee8328d6cc50b65d25871a4baf5d7bafb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f39df56_d4214069",
+        "filename": "src/tint/lang/core/ir/builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T08:49:39Z",
+      "side": 0,
+      "message": "If we don\u0027t think we need to name the `let`, then we should probably change the API to make it invalid to try naming _any_ instruction. Otherwise it\u0027s unclear whether you should be taking the name of the instruction or its result.",
+      "parentUuid": "3becbcf8_359aafee",
+      "revId": "4dcbddaee8328d6cc50b65d25871a4baf5d7bafb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

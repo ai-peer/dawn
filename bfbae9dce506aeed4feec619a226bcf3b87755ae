@@ -211,6 +211,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f613a2d_5af8f9bc",
+        "filename": "src/tint/lang/core/ir/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T08:49:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "059a6320_c8fa1b22",
+      "range": {
+        "startLine": 39,
+        "startChar": 23,
+        "endLine": 39,
+        "endChar": 56
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6e3b555d_ba8b3524",
@@ -307,6 +331,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f11593c_673ad9d5",
+        "filename": "src/tint/lang/core/ir/ir_helper_test.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T08:49:39Z",
+      "side": 1,
+      "message": "\u003e Does it add that much to the ir test helper that it really matters? I\u0027m not too concerned about the amount of memory the unit tests take, and there are less then 1k ir tests in total.\n\nIt\u0027s not really about memory, just about having a tendency of pulling in All The Things into a common base test class. It\u0027s minor, but this sort of hidden boilerplate in other tests have caused confusion and bugs before in the past. \n\n\u003e If you want to generate a new module from an old one we need more stuff. Symbols, types, constants don\u0027t clone at the moment. So clone is really just cloning into itself.\n\nI meant something like:\n\n```\nauto* orig \u003d b.Block(...);\n\nauto* clone_a \u003d CloneContext{mod}.Clone(orig);\nauto* clone_b \u003d CloneContext{mod}.Clone(orig);\n// Check that all the things in `clone_a` are different from `clone_b`.\n```\n\nOn reflection of what we\u0027re attempting to use cloning for in the IR, I\u0027m starting to wonder if the developer should have to explicitly construct a `CloneContext` to clone something. The `CloneContext::Replace(T*, \u003cfunction\u003e)` overload is probably unnecessary, and `Replace(T*, T*)` (for the vast majority of use-cases) is to only be used by the `T::Clone()` methods themselves. Maybe we should add a `T* Clone(T*)` method to `ir::Module`, and use that:\n\n```\ntemplate\u003ctypename T\u003e\nT* Module::Clone(T* p) {\n  return CloneContext{mod}.Clone(p);\n}\n```",
+      "parentUuid": "7b57d4a1_d485c105",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 32
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1a9392c_37f4cc0a",
         "filename": "src/tint/lang/core/ir/multi_in_block.cc",
         "patchSetId": 7
@@ -354,6 +402,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8bfa43d1_187e6b22",
+        "filename": "src/tint/lang/core/ir/multi_in_block.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T08:49:39Z",
+      "side": 1,
+      "message": "I understand that it\u0027s a footgun for `ControlInstruction::Clone()`, but there\u0027s a finite number of them, and an unbounded number of places where we\u0027d want to call `Clone()`.\n\nIt seems totally reasonable for someone to want to write:\n\n```\nir::If* if \u003d \u003cblah\u003e;\nauto* cloned \u003d if-\u003eTrue()-\u003eClone(); // BANG\nfixup_terminator(cloned);\n```\n\nTo make this work, we\u0027d probably have to make `Block::Clone()` not attempt to clone the parent, but try and get the parent control instruction if it was cloned. If it wasn\u0027t use the uncloned instruction or nullptr.\n\nI\u0027m not suggesting blocking the CL on this - just something I think we\u0027ll likely to eventually want.",
+      "parentUuid": "c2457cca_fa0ed426",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 65
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce554134_ad0a1c53",
         "filename": "src/tint/lang/core/ir/switch.cc",
         "patchSetId": 7
@@ -383,6 +455,24 @@
       "side": 1,
       "message": "Possibly, but that also feels like a pattern we\u0027d want to avoid. I don\u0027t think we should have pointers to other control instruction blocks.\n\nWe can add the replacement if you\u0027d prefer, but it feels like it\u0027s just adding things to the map that should never get used.",
       "parentUuid": "ce554134_ad0a1c53",
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0baa7ec2_782cfe14",
+        "filename": "src/tint/lang/core/ir/switch.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T08:49:39Z",
+      "side": 1,
+      "message": "Fair enough. Can add if we need it.",
+      "parentUuid": "f1054239_106701d7",
       "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
