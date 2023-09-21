@@ -110,6 +110,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83d83891_afed43c7",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-21T13:38:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "971aa390_9901201f",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21e3fa07_9424c474",
@@ -161,6 +185,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e07cfae_fda56e85",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-21T13:38:48Z",
+      "side": 1,
+      "message": "I was wrong about those bin files. They are indeed needed. The generated `dxcetw.rc` file refers to them:\n\n```\nLANGUAGE 0x9,0x1\n1 11 \"dxcetw_MSG00001.bin\"\n1 WEVT_TEMPLATE \"dxcetwTEMP.BIN\"\n```\n\nMakes more sense as they are also committed to the Chromium repo.",
+      "parentUuid": "11ab04d4_f430b941",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee3c280c_0bef49dd",
@@ -178,6 +220,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe2df36_cce01e08",
+        "filename": "third_party/gn/dxc/win_build_output/.gitattributes",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-21T13:38:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee3c280c_0bef49dd",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37faf303_0e969707",
@@ -191,6 +251,24 @@
       "writtenOn": "2023-09-21T09:39:43Z",
       "side": 1,
       "message": "You mentioned this file was technically not needed, any chance it could be removed?",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75f0c5e4_fb7a6719",
+        "filename": "third_party/gn/dxc/win_build_output/mc/include/dxc/Tracing/dxcetw/dxcetwTEMP.BIN",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-21T13:38:48Z",
+      "side": 1,
+      "message": "I was wrong, see my [reply above](https://dawn-review.googlesource.com/c/dawn/+/152222/comment/11ab04d4_f430b941/)",
+      "parentUuid": "37faf303_0e969707",
       "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
