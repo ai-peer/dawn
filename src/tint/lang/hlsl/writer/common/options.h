@@ -22,13 +22,13 @@
 #include "src/tint/api/common/binding_point.h"
 #include "src/tint/api/options/array_length_from_uniform.h"
 #include "src/tint/api/options/binding_remapper.h"
-#include "src/tint/api/options/external_texture.h"
+#include "src/tint/api/options/common.h"
 #include "src/tint/utils/reflection/reflection.h"
 
 namespace tint::hlsl::writer {
 
 /// Configuration options used for generating HLSL.
-struct Options {
+struct Options : tint::options::Common {
     /// Constructor
     Options();
     /// Destructor
@@ -39,17 +39,8 @@ struct Options {
     /// @returns this Options
     Options& operator=(const Options&);
 
-    /// Set to `true` to disable software robustness that prevents out-of-bounds accesses.
-    bool disable_robustness = false;
-
     /// The binding point to use for information passed via root constants.
     std::optional<BindingPoint> root_constant_binding_point;
-
-    /// Set to `true` to disable workgroup memory zero initialization
-    bool disable_workgroup_init = false;
-
-    /// Options used in the binding mappings for external textures
-    ExternalTextureOptions external_texture_options = {};
 
     /// Options used to specify a mapping of binding points to indices into a UBO
     /// from which to load buffer sizes.

@@ -17,14 +17,14 @@
 
 #include "src/tint/api/options/array_length_from_uniform.h"
 #include "src/tint/api/options/binding_remapper.h"
-#include "src/tint/api/options/external_texture.h"
+#include "src/tint/api/options/common.h"
 #include "src/tint/api/options/pixel_local.h"
 #include "src/tint/utils/reflection/reflection.h"
 
 namespace tint::msl::writer {
 
 /// Configuration options used for generating MSL.
-struct Options {
+struct Options : tint::options::Common {
     /// Constructor
     Options();
     /// Destructor
@@ -34,9 +34,6 @@ struct Options {
     /// Copy assignment
     /// @returns this Options
     Options& operator=(const Options&);
-
-    /// Set to `true` to disable software robustness that prevents out-of-bounds accesses.
-    bool disable_robustness = false;
 
     /// The index to use when generating a UBO to receive storage buffer sizes.
     /// Defaults to 30, which is the last valid buffer slot.
@@ -50,14 +47,8 @@ struct Options {
     /// for all vertex shaders in the module.
     bool emit_vertex_point_size = false;
 
-    /// Set to `true` to disable workgroup memory zero initialization
-    bool disable_workgroup_init = false;
-
     /// Options used for dealing with pixel local storage
     PixelLocalOptions pixel_local_options = {};
-
-    /// Options used in the binding mappings for external textures
-    ExternalTextureOptions external_texture_options = {};
 
     /// Options used to specify a mapping of binding points to indices into a UBO
     /// from which to load buffer sizes.
@@ -65,9 +56,6 @@ struct Options {
 
     /// Options used in the bindings remapper
     BindingRemapperOptions binding_remapper_options = {};
-
-    /// Set to `true` to generate MSL via the Tint IR instead of from the AST.
-    bool use_tint_ir = false;
 
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(disable_robustness,

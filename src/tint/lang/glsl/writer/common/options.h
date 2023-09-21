@@ -20,7 +20,7 @@
 #include <unordered_map>
 
 #include "src/tint/api/options/binding_remapper.h"
-#include "src/tint/api/options/external_texture.h"
+#include "src/tint/api/options/common.h"
 #include "src/tint/api/options/texture_builtins_from_uniform.h"
 #include "src/tint/lang/core/access.h"
 #include "src/tint/lang/glsl/writer/common/version.h"
@@ -31,7 +31,7 @@ namespace tint::glsl::writer {
 using BindingMap = std::unordered_map<sem::SamplerTexturePair, std::string>;
 
 /// Configuration options used for generating GLSL.
-struct Options {
+struct Options : tint::options::Common {
     /// Constructor
     Options();
 
@@ -48,17 +48,8 @@ struct Options {
     /// The binding point to use for placeholder samplers.
     BindingPoint placeholder_binding_point;
 
-    /// Set to `true` to disable software robustness that prevents out-of-bounds accesses.
-    bool disable_robustness = false;
-
-    /// Set to `true` to disable workgroup memory zero initialization
-    bool disable_workgroup_init = false;
-
     /// Options used in the bindings remapper
     BindingRemapperOptions binding_remapper_options = {};
-
-    /// Options used in the binding mappings for external textures
-    ExternalTextureOptions external_texture_options = {};
 
     /// Options used to map WGSL textureNumLevels/textureNumSamples builtins to internal uniform
     /// buffer values. If not specified, emits corresponding GLSL builtins

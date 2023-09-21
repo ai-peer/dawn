@@ -16,28 +16,19 @@
 #define SRC_TINT_LANG_SPIRV_WRITER_COMMON_OPTIONS_H_
 
 #include "src/tint/api/options/binding_remapper.h"
-#include "src/tint/api/options/external_texture.h"
+#include "src/tint/api/options/common.h"
 #include "src/tint/utils/reflection/reflection.h"
 
 namespace tint::spirv::writer {
 
 /// Configuration options used for generating SPIR-V.
-struct Options {
-    /// Set to `true` to disable software robustness that prevents out-of-bounds accesses.
-    bool disable_robustness = false;
-
+struct Options : tint::options::Common {
     /// Set to `true` to generate a PointSize builtin and have it set to 1.0
     /// from all vertex shaders in the module.
     bool emit_vertex_point_size = true;
 
-    /// Set to `true` to disable workgroup memory zero initialization
-    bool disable_workgroup_init = false;
-
     /// Set to `true` to clamp frag depth
     bool clamp_frag_depth = false;
-
-    /// Options used in the binding mappings for external textures
-    ExternalTextureOptions external_texture_options = {};
 
     /// Options used in the bindings remapper
     BindingRemapperOptions binding_remapper_options = {};
@@ -51,9 +42,6 @@ struct Options {
 
     /// Set to `true` to disable index clamping on the runtime-sized arrays in robustness transform.
     bool disable_runtime_sized_array_index_clamping = false;
-
-    /// Set to `true` to generate SPIR-V via the Tint IR instead of from the AST.
-    bool use_tint_ir = false;
 
     /// Set to `true` to require `SPV_KHR_subgroup_uniform_control_flow` extension and
     /// `SubgroupUniformControlFlowKHR` execution mode for compute stage entry points in generated
