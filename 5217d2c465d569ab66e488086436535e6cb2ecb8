@@ -122,6 +122,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d557e036_6cacaeac",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-09-21T02:09:30Z",
+      "side": 1,
+      "message": "That explains it.\nLet\u0027s pend the CL for now, and revisit it once we have concrete perf data about the various ways of updating uniform buffers, or it comes up again in other benchmark cases. Thanks anyway!",
+      "parentUuid": "4ab0f359_5d890a4c",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 62
+      },
+      "revId": "5217d2c465d569ab66e488086436535e6cb2ecb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6160c030_c3ebe809",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
