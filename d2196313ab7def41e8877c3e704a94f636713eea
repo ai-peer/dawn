@@ -16,6 +16,23 @@
       "message": "PTAL! Trying to make my life a bit easier as I attempt to run the CTS on a variety of non-Pixel devices.",
       "revId": "d2196313ab7def41e8877c3e704a94f636713eea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd854867_ceaf3e1f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-21T22:04:04Z",
+      "side": 1,
+      "message": "LGTM, but I\u0027m minorly worried that the roller might narrow some of these expectations again later on?",
+      "revId": "d2196313ab7def41e8877c3e704a94f636713eea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
