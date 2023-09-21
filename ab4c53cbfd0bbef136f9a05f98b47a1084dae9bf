@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57040650_fd02543f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T16:33:43Z",
+      "side": 1,
+      "message": "Brilliantly done. All nits.",
+      "revId": "ab4c53cbfd0bbef136f9a05f98b47a1084dae9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7453bdef_11ef2c0a",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T16:33:43Z",
+      "side": 1,
+      "message": "Please can you elaborate? What\u0027s `this depth`? Looks like an inner data field of the variable?",
+      "range": {
+        "startLine": 168,
+        "startChar": 31,
+        "endLine": 168,
+        "endChar": 71
+      },
+      "revId": "ab4c53cbfd0bbef136f9a05f98b47a1084dae9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb7ad298_a5520335",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T16:33:43Z",
+      "side": 1,
+      "message": "suggest giving this a name. Helps with IR readability.",
+      "range": {
+        "startLine": 282,
+        "startChar": 14,
+        "endLine": 282,
+        "endChar": 19
+      },
+      "revId": "ab4c53cbfd0bbef136f9a05f98b47a1084dae9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36c68afc_c86251ef",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T16:33:43Z",
+      "side": 1,
+      "message": "übernit: It\u0027s a bit tricky reading the code when this is far from the immediate callees. I tend to try writing code so that the outermost function is at the top, it\u0027s direct callees are next, and so on.",
+      "range": {
+        "startLine": 331,
+        "startChar": 9,
+        "endLine": 331,
+        "endChar": 26
+      },
+      "revId": "ab4c53cbfd0bbef136f9a05f98b47a1084dae9bf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

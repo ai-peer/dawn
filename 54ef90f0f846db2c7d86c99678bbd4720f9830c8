@@ -67,6 +67,53 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ebd0067d_f20dbd4e",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T16:33:43Z",
+      "side": 1,
+      "message": "It should avoid heap allocations. I can\u0027t guarantee it\u0027ll be faster without benchmarking - but historically I\u0027ve been hurt by the really crappy performance of `std::map`. I would hope that a single sort-at-end would be faster than preserving the order on insertion.",
+      "parentUuid": "f8fb091a_af64db8e",
+      "range": {
+        "startLine": 75,
+        "startChar": 21,
+        "endLine": 75,
+        "endChar": 29
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b461880_84c8442e",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T16:33:43Z",
+      "side": 1,
+      "message": "Note to self: function-block -\u003e function information could simplify the traversals required by this transform. Call graph information would also be helpful.",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 44
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4809a74f_cf39b497",
         "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
         "patchSetId": 6
@@ -149,6 +196,30 @@
       "side": 1,
       "message": "Will do if DVA lands first, otherwise will do as a follow-up afterwards.",
       "parentUuid": "b4131fa1_66c42c8c",
+      "range": {
+        "startLine": 129,
+        "startChar": 8,
+        "endLine": 144,
+        "endChar": 9
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4505cf7a_2399eab0",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-21T16:33:43Z",
+      "side": 1,
+      "message": "Ack. I will pull it out as a separate change - but still happy for this to be done as a follow up.",
+      "parentUuid": "b9c87d3b_6d65d96f",
       "range": {
         "startLine": 129,
         "startChar": 8,
