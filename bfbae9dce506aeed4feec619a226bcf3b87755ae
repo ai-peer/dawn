@@ -426,6 +426,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f9a4076d_5384f9f2",
+        "filename": "src/tint/lang/core/ir/multi_in_block.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:10:05Z",
+      "side": 1,
+      "message": "But, why would you clone the `True` out of the if? You can\u0027t set it back into the `if` afterwards. You\u0027d want to clone the `if` and then edit the `true` which I think is a _lot_ safer.",
+      "parentUuid": "8bfa43d1_187e6b22",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 65
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce554134_ad0a1c53",
         "filename": "src/tint/lang/core/ir/switch.cc",
         "patchSetId": 7

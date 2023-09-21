@@ -52,6 +52,24 @@
       "parentUuid": "3becbcf8_359aafee",
       "revId": "4dcbddaee8328d6cc50b65d25871a4baf5d7bafb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f2ab9a7_b5f0c238",
+        "filename": "src/tint/lang/core/ir/builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:10:05Z",
+      "side": 0,
+      "message": "You never name an instruction. If you look at `SetName` for an instruction it just checks for a result and names that. So, we could have kept either this line or the next, but I thought it was closer to what actually happens keeping the next.",
+      "parentUuid": "8f39df56_d4214069",
+      "revId": "4dcbddaee8328d6cc50b65d25871a4baf5d7bafb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
