@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de51d20_d9bf4614",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "lgtm w/ suggestions.",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6988782_fa536fea",
+        "filename": "src/tint/lang/core/type/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9b510b11_be1d8a14",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b97bad03_a767392f",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4b14e0_15b6977c",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a611e78_3e6b311c",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d6279a8_a78c5ac0",
+        "filename": "src/tint/lang/msl/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30571259_60ba004a",
+        "filename": "src/tint/lang/msl/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ac0e582_aef15b77",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e9e1d12_d3073a00",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1907a6f_9befe546",
+        "filename": "src/tint/lang/wgsl/sem/helper_test.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T11:25:50Z",
+      "side": 1,
+      "message": "```suggestion\n            ADD_FAILURE() \u003c\u003c \"ProgramBuilder is not valid: \" \u003c\u003c Diagnostics().str();\n```",
+      "revId": "94971d0ec022afcd99cc243407c7f3ac93093c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
