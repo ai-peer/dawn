@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "831a711d_59cfcc6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-09-21T21:17:39Z",
+      "side": 1,
+      "message": "PTAL! Trying to make my life a bit easier as I attempt to run the CTS on a variety of non-Pixel devices.",
+      "revId": "d2196313ab7def41e8877c3e704a94f636713eea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
