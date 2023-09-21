@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87ba1751_7fbcada3",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T14:18:55Z",
+      "side": 1,
+      "message": "install_if_enabled is not sufficient? Ditto below",
+      "revId": "54492c96c3c877285464331a6116d3fd1f1b4ee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
