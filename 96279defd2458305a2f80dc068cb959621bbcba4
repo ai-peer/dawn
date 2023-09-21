@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0a0d51c_2ff86542",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-09-21T19:36:51Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "828be2e0_d708c3b0",
+      "revId": "96279defd2458305a2f80dc068cb959621bbcba4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a83a1812_967fe951",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-21T19:27:01Z",
       "side": 1,
       "message": "```suggestion\nTo test against Lavapipe (mesa\u0027s software implementation of Vulkan), similarly to SwiftShader, prefix `./tools/run run-cts` with `VK_ICD_FILENAMES\u003d\u003clavapipe-install-dir\u003e/share/vulkan/icd.d/lvp_icd.x86_64.json`. For example:\n```",
+      "revId": "96279defd2458305a2f80dc068cb959621bbcba4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "869fbd39_385abe0c",
+        "filename": "src/dawn/node/README.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-09-21T19:36:51Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "a83a1812_967fe951",
       "revId": "96279defd2458305a2f80dc068cb959621bbcba4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
