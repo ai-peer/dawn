@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "767992bf_62aabb1c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-09-21T19:14:51Z",
+      "side": 1,
+      "message": "Tried to get bug number to show as a link, but looks like Dawn project doesn\u0027t have this Gerrit plugin set up properly 😞",
+      "revId": "941da0efe4238b7c59b10247e34cde9016be42b8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
