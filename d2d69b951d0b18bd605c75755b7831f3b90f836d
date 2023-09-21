@@ -16,6 +16,24 @@
       "message": "As noted in our 1-1, we can use `myTarget($default_toolchain)` and simplify this code out.",
       "revId": "d2d69b951d0b18bd605c75755b7831f3b90f836d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7fa0103_c0b3c200",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 757,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-21T01:45:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e72d73a7_6e2455c2",
+      "revId": "d2d69b951d0b18bd605c75755b7831f3b90f836d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
