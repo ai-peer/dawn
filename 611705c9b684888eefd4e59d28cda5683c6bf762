@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5ab73b6_1e5eda71",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-21T13:09:47Z",
+      "side": 1,
+      "message": "Thank you very much for the thorough review. I agree that the Python used in message_compiler.py can be improved. I considered rewriting it from scratch, but decided to keep it as close to the source from the Chromium repo as possible. I\u0027ve created https://crbug.com/dawn/2093 and assigned to myself to tackle all of these issues (modulo the extraneous temp files) as a follow-up.",
+      "parentUuid": "54acd649_3e767879",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e31d0c81_de8b5400",
