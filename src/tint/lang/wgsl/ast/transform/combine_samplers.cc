@@ -145,6 +145,43 @@ struct CombineSamplers::State {
         }
     }
 
+    void InsertPair(sem::VariablePair pair,
+                    const sem::Function* fn,
+                    tint::Vector<const Parameter*, 8>* params) {
+        const sem::Variable* texture_var = pair.first;
+        const sem::Variable* sampler_var = pair.second;
+        std::string name = texture_var->Declaration()->name->symbol.Name();
+        if (sampler_var) {
+            name += "_" + sampler_var->Declaration()->name->symbol.Name();
+        }
+        if (IsGlobal(pair)) {
+            // Both texture and sampler are global; add a new global variable
+            // to represent the combined sampler (if not already created).
+            tint::GetOrCreate(global_combined_texture_samplers_, pair,
+                              [&] { return CreateCombinedGlobal(texture_var, sampler_var, name); });
+        } else {
+            // Either texture or sampler (or both) is a function parameter;
+            // add a new function parameter to represent the combined sampler.
+            Type type = CreateCombinedASTTypeFor(texture_var, sampler_var);
+            auto* var = ctx.dst->Param(ctx.dst->Symbols().New(name), type);
+            params->Push(var);
+            function_combined_texture_samplers_[fn][pair] = var;
+        }
+    }
+
+    // For a given texture, find any texture/sampler pair with a non-null sampler in the given
+    // function scope.
+    const sem::VariablePair* FindFullTextureSamplerPair(const sem::Variable* texture_var,
+                                                        const sem::Function* fn) {
+        for (auto pairIter = fn->TextureSamplerPairs().begin();
+             pairIter != fn->TextureSamplerPairs().end(); pairIter++) {
+            if (pairIter->first == texture_var && pairIter->second) {
+                return pairIter;
+            }
+        }
+        return nullptr;
+    }
+
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
     ApplyResult Run() {
@@ -176,25 +213,27 @@ struct CombineSamplers::State {
                 }
                 tint::Vector<const Parameter*, 8> params;
                 for (auto pair : fn->TextureSamplerPairs()) {
-                    const sem::Variable* texture_var = pair.first;
-                    const sem::Variable* sampler_var = pair.second;
-                    std::string name = texture_var->Declaration()->name->symbol.Name();
-                    if (sampler_var) {
-                        name += "_" + sampler_var->Declaration()->name->symbol.Name();
+                    if (!pair.second) {
+                        continue;
                     }
-                    if (IsGlobal(pair)) {
-                        // Both texture and sampler are global; add a new global variable
-                        // to represent the combined sampler (if not already created).
-                        tint::GetOrCreate(global_combined_texture_samplers_, pair, [&] {
-                            return CreateCombinedGlobal(texture_var, sampler_var, name);
-                        });
+                    InsertPair(pair, fn, &params);
+                }
+                for (auto pair : fn->TextureSamplerPairs()) {
+                    if (pair.second) {
+                        continue;
+                    }
+                    // Look for another pair with a non-null sampler.
+                    if (const sem::VariablePair* fullPair =
+                            FindFullTextureSamplerPair(pair.first, fn)) {
+                        if (IsGlobal(pair)) {
+                            global_combined_texture_samplers_[pair] =
+                                global_combined_texture_samplers_[*fullPair];
+                        } else {
+                            auto* var = function_combined_texture_samplers_[fn][*fullPair];
+                            function_combined_texture_samplers_[fn][pair] = var;
+                        }
                     } else {
-                        // Either texture or sampler (or both) is a function parameter;
-                        // add a new function parameter to represent the combined sampler.
-                        Type type = CreateCombinedASTTypeFor(texture_var, sampler_var);
-                        auto* var = ctx.dst->Param(ctx.dst->Symbols().New(name), type);
-                        params.Push(var);
-                        function_combined_texture_samplers_[fn][pair] = var;
+                        InsertPair(pair, fn, &params);
                     }
                 }
                 // Filter out separate textures and samplers from the original
@@ -284,6 +323,12 @@ struct CombineSamplers::State {
                         if (IsGlobal(pair)) {
                             continue;
                         }
+                        // Texture-only pairs do not require a function parameter if they've been
+                        // replaced by a real pair.
+                        if (!pair.second && FindFullTextureSamplerPair(pair.first, callee)) {
+                            continue;
+                        }
+
                         const sem::Variable* texture_var = pair.first;
                         const sem::Variable* sampler_var = pair.second;
                         if (auto* param = texture_var->As<sem::Parameter>()) {
