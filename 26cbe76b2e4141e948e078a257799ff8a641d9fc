@@ -122,6 +122,24 @@
       "parentUuid": "26a96fbb_a21ade26",
       "revId": "26cbe76b2e4141e948e078a257799ff8a641d9fc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "05258bd8_2e3f864d",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-09-21T14:54:16Z",
+      "side": 1,
+      "message": "I could update this code when you feel this is done in the future. We are also using tint as a dependency, so it is in my best interested this doesn\u0027t break 😊",
+      "parentUuid": "23705e34_43f1dcd5",
+      "revId": "26cbe76b2e4141e948e078a257799ff8a641d9fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7269bc92_778cfa46",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-09-21T14:54:16Z",
+      "side": 1,
+      "message": "Makes sense. Just gonna remove this piece then. I thought it was implementing a command tool or something like glslang",
+      "parentUuid": "04767490_06343cc5",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 11
+      },
+      "revId": "3e70927bd711c87f5b9b21e26384d6a7e7a0f937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d04717c5_d325d766",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 5
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-04T14:44:11Z",
       "side": 1,
       "message": "nit: `if(`. Consistency helps with searching.",
+      "range": {
+        "startLine": 592,
+        "startChar": 0,
+        "endLine": 592,
+        "endChar": 4
+      },
+      "revId": "3e70927bd711c87f5b9b21e26384d6a7e7a0f937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5182b38_e20ea539",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-09-21T14:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d04717c5_d325d766",
       "range": {
         "startLine": 592,
         "startChar": 0,
@@ -77,6 +125,30 @@
       "writtenOn": "2023-09-04T14:44:11Z",
       "side": 1,
       "message": "recurse",
+      "range": {
+        "startLine": 593,
+        "startChar": 15,
+        "endLine": 593,
+        "endChar": 23
+      },
+      "revId": "3e70927bd711c87f5b9b21e26384d6a7e7a0f937",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b060b305_cf25ffcf",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-09-21T14:54:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2a7c5335_dae6e5da",
       "range": {
         "startLine": 593,
         "startChar": 15,
