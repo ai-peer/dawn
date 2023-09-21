@@ -31,7 +31,7 @@ std::pair<FutureID, bool> EventManager::TrackEvent(WGPUCallbackMode mode,
     FutureID futureID = mNextFutureID++;
 
     if (mClient->IsDisconnected()) {
-        callback(EventCompletionType::Shutdown);
+        callback(EventCompletionType::Shutdown, nullptr);
         return {futureID, false};
     }
 
@@ -56,20 +56,18 @@ void EventManager::ShutDown() {
 
         // Ordering guaranteed because we are using a sorted map.
         for (auto& [futureID, trackedEvent] : movedEvents) {
-            // Event should be already marked Ready since events are actually driven by
-            // RequestTrackers (at the time of this writing), which all shut down before this.
-            DAWN_ASSERT(trackedEvent.mReady);
-            trackedEvent.mCallback(EventCompletionType::Shutdown);
-            trackedEvent.mCallback = nullptr;
+            trackedEvent.mReady = true;
+            trackedEvent.Complete(EventCompletionType::Shutdown);
         }
     }
 }
 
-void EventManager::SetFutureReady(FutureID futureID) {
+void EventManager::SetFutureReady(FutureID futureID, void* userdata) {
     DAWN_ASSERT(futureID > 0);
     mTrackedEvents.Use([&](auto trackedEvents) {
         TrackedEvent& trackedEvent = trackedEvents->at(futureID);  // Asserts futureID is in the map
         trackedEvent.mReady = true;
+        trackedEvent.mUserdata = userdata;
     });
     // TODO(crbug.com/dawn/2059): Handle spontaneous completions.
 }
@@ -77,11 +75,6 @@ void EventManager::SetFutureReady(FutureID futureID) {
 void EventManager::ProcessPollEvents() {
     // Since events are already stored in an ordered map, this list must already be ordered.
     std::vector<TrackedEvent> eventsToCompleteNow;
-
-    // TODO(crbug.com/dawn/2060): EventManager shouldn't bother to track ProcessEvents-type events
-    // until they've completed. We can queue them up when they're received on the wire. (Before that
-    // point, the RequestTracker tracks them. If/when we merge this with RequestTracker, then we'll
-    // track both here but still don't need to queue them for ProcessEvents until they complete.)
     mTrackedEvents.Use([&](auto trackedEvents) {
         for (auto it = trackedEvents->begin(); it != trackedEvents->end();) {
             TrackedEvent& event = it->second;
@@ -92,19 +85,13 @@ void EventManager::ProcessPollEvents() {
                 ++it;
                 continue;
             }
-
-            // mCallback may still be null if it's stale (was already spontaneously completed).
-            if (event.mCallback) {
-                eventsToCompleteNow.emplace_back(std::move(event));
-            }
+            eventsToCompleteNow.emplace_back(std::move(event));
             it = trackedEvents->erase(it);
         }
     });
 
     for (TrackedEvent& event : eventsToCompleteNow) {
-        DAWN_ASSERT(event.mReady && event.mCallback);
-        event.mCallback(EventCompletionType::Ready);
-        event.mCallback = nullptr;
+        event.Complete(EventCompletionType::Ready);
     }
 }
 
@@ -144,9 +131,7 @@ WGPUWaitStatus EventManager::WaitAny(size_t count, WGPUFutureWaitInfo* infos, ui
             infos[i].completed = event.mReady;
             if (event.mReady) {
                 anyCompleted = true;
-                if (event.mCallback) {
-                    eventsToCompleteNow.emplace(it->first, std::move(event));
-                }
+                eventsToCompleteNow.emplace(it->first, std::move(event));
                 trackedEvents->erase(it);
             }
         }
@@ -154,10 +139,8 @@ WGPUWaitStatus EventManager::WaitAny(size_t count, WGPUFutureWaitInfo* infos, ui
 
     // TODO(crbug.com/dawn/2066): Guarantee the event ordering from the JS spec.
     for (auto& [_, event] : eventsToCompleteNow) {
-        DAWN_ASSERT(event.mReady && event.mCallback);
         // .completed has already been set to true (before the callback, per API contract).
-        event.mCallback(EventCompletionType::Ready);
-        event.mCallback = nullptr;
+        event.Complete(EventCompletionType::Ready);
     }
 
     return anyCompleted ? WGPUWaitStatus_Success : WGPUWaitStatus_TimedOut;
@@ -171,6 +154,35 @@ EventManager::TrackedEvent::TrackedEvent(WGPUCallbackMode mode, EventCallback&& 
 EventManager::TrackedEvent::~TrackedEvent() {
     // Make sure we're not dropping a callback on the floor.
     DAWN_ASSERT(!mCallback);
+    // Make sure we are not leaking userdata.
+    DAWN_ASSERT(!mUserdata);
+}
+
+EventManager::TrackedEvent::TrackedEvent(TrackedEvent&& other)
+    : mMode(other.mMode),
+      mCallback(other.mCallback),
+      mUserdata(other.mUserdata),
+      mReady(other.mReady) {
+    other.mCallback = nullptr;
+    other.mUserdata = nullptr;
+}
+
+EventManager::TrackedEvent& EventManager::TrackedEvent::operator=(TrackedEvent&& other) {
+    mMode = other.mMode;
+    mCallback = other.mCallback;
+    mUserdata = other.mUserdata;
+    mReady = other.mReady;
+
+    other.mCallback = nullptr;
+    other.mUserdata = nullptr;
+    return *this;
+}
+
+void EventManager::TrackedEvent::Complete(EventCompletionType type) {
+    DAWN_ASSERT(mReady && mCallback);
+    mCallback(type, mUserdata);
+    mCallback = nullptr;
+    mUserdata = nullptr;
 }
 
 }  // namespace dawn::wire::client

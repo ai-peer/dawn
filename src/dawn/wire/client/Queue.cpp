@@ -59,10 +59,18 @@ WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& call
 
     Client* client = GetClient();
     auto [futureIDInternal, tracked] = client->GetEventManager()->TrackEvent(
-        callbackInfo.mode, [=](EventCompletionType completionType) {
+        callbackInfo.mode, [=](EventCompletionType completionType, void* userdata) {
             WGPUQueueWorkDoneStatus status = completionType == EventCompletionType::Shutdown
                                                  ? WGPUQueueWorkDoneStatus_Unknown
                                                  : WGPUQueueWorkDoneStatus_Success;
+            if (userdata) {
+                auto* callbackStatus = static_cast<WGPUQueueWorkDoneStatus*>(userdata);
+                // TODO(crbug.com/dawn/2021): Pretend things success when the device is lost.
+                status = *callbackStatus == WGPUQueueWorkDoneStatus_DeviceLost
+                             ? WGPUQueueWorkDoneStatus_Success
+                             : *callbackStatus;
+                delete callbackStatus;
+            }
             callbackInfo.callback(status, callbackInfo.userdata);
         });
     if (!tracked) {
@@ -74,13 +82,16 @@ WGPUFuture Queue::OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& call
         FutureID futureIDInternal;
     };
     Lambda* lambda = new Lambda{client, futureIDInternal};
-    uint64_t serial = mOnWorkDoneRequests.Add(
-        {[](WGPUQueueWorkDoneStatus /* ignored */, void* userdata) {
-             auto* lambda = static_cast<Lambda*>(userdata);
-             lambda->client->GetEventManager()->SetFutureReady(lambda->futureIDInternal);
-             delete lambda;
-         },
-         lambda});
+    uint64_t serial =
+        mOnWorkDoneRequests.Add({[](WGPUQueueWorkDoneStatus status, void* userdata) {
+                                     auto* lambda = static_cast<Lambda*>(userdata);
+                                     WGPUQueueWorkDoneStatus* futureUserdata =
+                                         new WGPUQueueWorkDoneStatus(status);
+                                     lambda->client->GetEventManager()->SetFutureReady(
+                                         lambda->futureIDInternal, futureUserdata);
+                                     delete lambda;
+                                 },
+                                 lambda});
 
     QueueOnSubmittedWorkDoneCmd cmd;
     cmd.queueId = GetWireId();
