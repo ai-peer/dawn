@@ -150,13 +150,13 @@ void Buffer::CancelCallbacksForDisconnect() {
 }
 
 void Buffer::InvokeAndClearCallback(WGPUBufferMapAsyncStatus status) {
-    WGPUBufferMapCallback callback = mRequest.callback;
-    void* userdata = mRequest.userdata;
-    mRequest.callback = nullptr;
-    mRequest.userdata = nullptr;
     mPendingMap = false;
-    if (callback != nullptr) {
-        callback(status, userdata);
+
+    if (mRequest.future.id != kNullFutureID) {
+        FutureID futureID = mRequest.future.id;
+        mRequest.future.id = kNullFutureID;
+        WGPUBufferMapAsyncStatus* userdata = new WGPUBufferMapAsyncStatus(status);
+        GetClient()->GetEventManager()->SetFutureReady(futureID, userdata);
     }
 }
 
@@ -165,51 +165,19 @@ void Buffer::MapAsync(WGPUMapModeFlags mode,
                       size_t size,
                       WGPUBufferMapCallback callback,
                       void* userdata) {
-    DAWN_ASSERT(GetRefcount() != 0);
-
-    if (mPendingMap) {
-        return callback(WGPUBufferMapAsyncStatus_MappingAlreadyPending, userdata);
-    }
-
-    Client* client = GetClient();
-    if (client->IsDisconnected()) {
-        return callback(WGPUBufferMapAsyncStatus_DeviceLost, userdata);
-    }
-
-    // Handle the defaulting of size required by WebGPU.
-    if ((size == WGPU_WHOLE_MAP_SIZE) && (offset <= mSize)) {
-        size = mSize - offset;
-    }
-
-    // Set up the request structure that will hold information while this mapping is
-    // in flight.
-    mRequest.callback = callback;
-    mRequest.userdata = userdata;
-    mRequest.offset = offset;
-    mRequest.size = size;
-    if (mode & WGPUMapMode_Read) {
-        mRequest.type = MapRequestType::Read;
-    } else if (mode & WGPUMapMode_Write) {
-        mRequest.type = MapRequestType::Write;
-    }
-
-    // Serialize the command to send to the server.
-    mPendingMap = true;
-    mSerial++;
-    BufferMapAsyncCmd cmd;
-    cmd.bufferId = GetWireId();
-    cmd.requestSerial = mSerial;
-    cmd.mode = mode;
-    cmd.offset = offset;
-    cmd.size = size;
-
-    client->SerializeCommand(cmd);
+    WGPUBufferMapCallbackInfo callbackInfo = {};
+    callbackInfo.mode = WGPUCallbackMode_AllowSpontaneous;
+    callbackInfo.callback = callback;
+    callbackInfo.userdata = userdata;
+    MapAsyncF(mode, offset, size, callbackInfo);
 }
 
 WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
                              size_t offset,
                              size_t size,
                              const WGPUBufferMapCallbackInfo& callbackInfo) {
+    DAWN_ASSERT(GetRefcount() != 0);
+
     Client* client = GetClient();
     auto [futureIDInternal, tracked] = client->GetEventManager()->TrackEvent(
         callbackInfo.mode, [=](EventCompletionType completionType, void* userdata) {
@@ -221,7 +189,9 @@ WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
                 status = *callbackStatus;
                 delete callbackStatus;
             }
-            callbackInfo.callback(status, callbackInfo.userdata);
+            if (callbackInfo.callback) {
+                callbackInfo.callback(status, callbackInfo.userdata);
+            }
         });
     if (!tracked) {
         return {futureIDInternal};
@@ -231,6 +201,7 @@ WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
         WGPUBufferMapAsyncStatus* userdata =
             new WGPUBufferMapAsyncStatus(WGPUBufferMapAsyncStatus_MappingAlreadyPending);
         client->GetEventManager()->SetFutureReady(futureIDInternal, userdata);
+        return {futureIDInternal};
     }
 
     // Handle the defaulting of size required by WebGPU.
@@ -239,18 +210,7 @@ WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
     }
 
     // Set up the request structure that will hold information while this mapping is in flight.
-    struct Lambda {
-        Client* client;
-        FutureID futureIDInternal;
-    };
-    Lambda* lambda = new Lambda{client, futureIDInternal};
-    mRequest.callback = [](WGPUBufferMapAsyncStatus status, void* userdata) {
-        auto* lambda = static_cast<Lambda*>(userdata);
-        WGPUBufferMapAsyncStatus* futureUserdata = new WGPUBufferMapAsyncStatus(status);
-        lambda->client->GetEventManager()->SetFutureReady(lambda->futureIDInternal, futureUserdata);
-        delete lambda;
-    };
-    mRequest.userdata = lambda;
+    mRequest.future = {futureIDInternal};
     mRequest.offset = offset;
     mRequest.size = size;
     if (mode & WGPUMapMode_Read) {
@@ -261,27 +221,24 @@ WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
 
     // Serialize the command to send to the server.
     mPendingMap = true;
-    mSerial++;
     BufferMapAsyncCmd cmd;
     cmd.bufferId = GetWireId();
-    cmd.requestSerial = mSerial;
+    cmd.future = {futureIDInternal};
     cmd.mode = mode;
     cmd.offset = offset;
     cmd.size = size;
 
     client->SerializeCommand(cmd);
-
     return {futureIDInternal};
 }
 
-bool Buffer::OnMapAsyncCallback(uint64_t requestSerial,
+bool Buffer::OnMapAsyncCallback(WGPUFuture future,
                                 uint32_t status,
                                 uint64_t readDataUpdateInfoLength,
                                 const uint8_t* readDataUpdateInfo) {
-    // If requestSerial doesn't match mSerial the corresponding request must have
-    // already been rejected by unmap or destroy and another MapAsync request must
-    // have been issued.
-    if (mSerial != requestSerial) {
+    // If future doesn't match the corresponding request must have already been rejected by unmap
+    // or destroy and another MapAsync request must have been issued.
+    if (mRequest.future.id != future.id) {
         return true;
     }
 
