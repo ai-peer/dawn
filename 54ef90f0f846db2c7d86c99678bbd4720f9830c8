@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30f9b296_96d6a361",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-21T18:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebd0067d_f20dbd4e",
+      "range": {
+        "startLine": 75,
+        "startChar": 21,
+        "endLine": 75,
+        "endChar": 29
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b461880_84c8442e",
@@ -149,6 +173,30 @@
       "side": 1,
       "message": "Will do.",
       "parentUuid": "4809a74f_cf39b497",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 18
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "632b1325_7f3380b1",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-21T18:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cde637dc_d6e574ae",
       "range": {
         "startLine": 122,
         "startChar": 0,
@@ -267,6 +315,30 @@
       "side": 1,
       "message": "Will do.",
       "parentUuid": "2c6aa0a6_4b184215",
+      "range": {
+        "startLine": 222,
+        "startChar": 12,
+        "endLine": 222,
+        "endChar": 89
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f866f0b8_45ff2f0b",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-21T18:47:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6bd8d7bc_f259e9f3",
       "range": {
         "startLine": 222,
         "startChar": 12,
