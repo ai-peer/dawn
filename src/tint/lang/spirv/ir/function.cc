@@ -71,6 +71,14 @@ const char* str(Function i) {
             return "spirv.image_query_size_lod";
         case Function::kImageRead:
             return "spirv.image_read";
+        case Function::kImageSampleImplicitLod:
+            return "spirv.image_sample_implicit_lod";
+        case Function::kImageSampleExplicitLod:
+            return "spirv.image_sample_explicit_lod";
+        case Function::kImageSampleDrefImplicitLod:
+            return "spirv.image_sample_dref_implicit_lod";
+        case Function::kImageSampleDrefExplicitLod:
+            return "spirv.image_sample_dref_explicit_lod";
         case Function::kMatrixTimesMatrix:
             return "spirv.matrix_times_matrix";
         case Function::kMatrixTimesScalar:
