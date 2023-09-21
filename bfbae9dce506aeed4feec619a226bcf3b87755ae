@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "965f62ba_3333308d",
+        "filename": "src/tint/lang/core/ir/continue_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "626ef45f_24dac7d1",
+      "range": {
+        "startLine": 61,
+        "startChar": 10,
+        "endLine": 61,
+        "endChar": 13
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abed002b_15467c89",
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc1c2490_c89747e8",
+        "filename": "src/tint/lang/core/ir/continue_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "Did `cont` here, add the `loop` check in the loop clone test.",
+      "parentUuid": "abed002b_15467c89",
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7fc734dd_fd91599f",
@@ -88,6 +130,30 @@
       "writtenOn": "2023-09-20T21:04:09Z",
       "side": 1,
       "message": "`cont` ?",
+      "range": {
+        "startLine": 77,
+        "startChar": 10,
+        "endLine": 77,
+        "endChar": 13
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2eb61d40_a85f8769",
+        "filename": "src/tint/lang/core/ir/continue_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fc734dd_fd91599f",
       "range": {
         "startLine": 77,
         "startChar": 10,
@@ -123,6 +189,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "059a6320_c8fa1b22",
+        "filename": "src/tint/lang/core/ir/function.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "That pattern would work here, but falls apart in `if` where we pass the blocks into the constructor. So, this uses the same pattern as the other control flow of manually making a block and then cloning into it.",
+      "parentUuid": "0c6c4d4b_f04ac96f",
+      "range": {
+        "startLine": 39,
+        "startChar": 23,
+        "endLine": 39,
+        "endChar": 56
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6e3b555d_ba8b3524",
         "filename": "src/tint/lang/core/ir/function_param_test.cc",
         "patchSetId": 7
@@ -134,6 +224,30 @@
       "writtenOn": "2023-09-20T21:04:09Z",
       "side": 1,
       "message": "bots are unhappy that you had the audacity to omit a `u`. Probably same in many other places.",
+      "range": {
+        "startLine": 76,
+        "startChar": 14,
+        "endLine": 76,
+        "endChar": 15
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2d4f170_067d8b90",
+        "filename": "src/tint/lang/core/ir/function_param_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e3b555d_ba8b3524",
       "range": {
         "startLine": 76,
         "startChar": 14,
@@ -169,6 +283,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b57d4a1_d485c105",
+        "filename": "src/tint/lang/core/ir/ir_helper_test.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "Does it add that much to the ir test helper that it really matters? I\u0027m not too concerned about the amount of memory the unit tests take, and there are less then 1k ir tests in total.\n\nIf you want to generate a new module from an old one we need more stuff. Symbols, types, constants don\u0027t clone at the moment. So clone is really just cloning into itself.",
+      "parentUuid": "ee5e9657_ec0e1b8b",
+      "range": {
+        "startLine": 39,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 32
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b1a9392c_37f4cc0a",
         "filename": "src/tint/lang/core/ir/multi_in_block.cc",
         "patchSetId": 7
@@ -192,6 +330,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2457cca_fa0ed426",
+        "filename": "src/tint/lang/core/ir/multi_in_block.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "I\u0027d prefer not, it\u0027s pretty much always wrong given the way the IR is currently setup. Every block ends with a terminator that links back to the thing it\u0027s terminating. That thing has to have been cloned first, and in the context replacement. So, it\u0027s really easy to get into an infinite clone loop as you jump back out the parent and try to clone that (as evidenced by the several stack overflows I got while building this)",
+      "parentUuid": "b1a9392c_37f4cc0a",
+      "range": {
+        "startLine": 32,
+        "startChar": 4,
+        "endLine": 32,
+        "endChar": 65
+      },
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce554134_ad0a1c53",
         "filename": "src/tint/lang/core/ir/switch.cc",
         "patchSetId": 7
@@ -203,6 +365,24 @@
       "writtenOn": "2023-09-20T21:04:09Z",
       "side": 1,
       "message": "While I don\u0027t think anything currently has pointers to the blocks, aside from the owning `ControlInstruction`s, I think it might be a good idea to add `ctx.Replace(cse.block, new_case.block)`. Here and the other control instructions.",
+      "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1054239_106701d7",
+        "filename": "src/tint/lang/core/ir/switch.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 1,
+      "message": "Possibly, but that also feels like a pattern we\u0027d want to avoid. I don\u0027t think we should have pointers to other control instruction blocks.\n\nWe can add the replacement if you\u0027d prefer, but it feels like it\u0027s just adding things to the map that should never get used.",
+      "parentUuid": "ce554134_ad0a1c53",
       "revId": "bfbae9dce506aeed4feec619a226bcf3b87755ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

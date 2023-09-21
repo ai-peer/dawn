@@ -16,6 +16,24 @@
       "message": "Unrelated change?",
       "revId": "4dcbddaee8328d6cc50b65d25871a4baf5d7bafb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3becbcf8_359aafee",
+        "filename": "src/tint/lang/core/ir/builder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:14:00Z",
+      "side": 0,
+      "message": "Kind of, I need to replicate what this is doing in clone and we don\u0027t need to set name on the `let` because it uses the result anyway. This keeps it the same with what clone is doing.",
+      "parentUuid": "33cbb09c_069cb5c5",
+      "revId": "4dcbddaee8328d6cc50b65d25871a4baf5d7bafb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
