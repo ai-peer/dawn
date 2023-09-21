@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7920990b_89aec7e5",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 17
+      },
+      "lineNbr": 1023,
+      "author": {
+        "id": 1000211
+      },
+      "writtenOn": "2023-09-21T16:01:45Z",
+      "side": 1,
+      "message": "This breaks the Windows cross-compile. It looks like there\u0027s a build helper for this in Chrome\u0027s //build directory, which I believe dawn imports. Can we use that here as well?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:build/win/message_compiler.gni;l\u003d41;drc\u003d73a09d1a67a9bab66eba08b51372f431ab709b2d",
+      "revId": "b94856d02b0e99a6ccb599ef67d1f41065d31b3b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
