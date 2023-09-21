@@ -16,6 +16,23 @@
       "message": "Still LGTM with the new TODOs",
       "revId": "dbfc34e29247ccdcd1ba36bd08e61b6508b8d331",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97d71e2_2761b0df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-09-21T06:52:24Z",
+      "side": 1,
+      "message": "Thanks for reviewing!",
+      "revId": "dbfc34e29247ccdcd1ba36bd08e61b6508b8d331",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
