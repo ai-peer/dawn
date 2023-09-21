@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10be631e_188b3d9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:23:50Z",
+      "side": 1,
+      "message": "lgtm w/ nits. Feel free to ignore as they\u0027re from the renamed templates.",
+      "revId": "a09e872082d70b1fee14d66f8350b4bd8fce0d8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc463f40_d4a94404",
+        "filename": "src/tint/lang/core/builtin_type.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:23:50Z",
+      "side": 1,
+      "message": "nit: 2023",
+      "revId": "a09e872082d70b1fee14d66f8350b4bd8fce0d8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1142c9a_115b76f3",
+        "filename": "src/tint/lang/core/builtin_type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-21T01:23:50Z",
+      "side": 1,
+      "message": "nit: 2023",
+      "revId": "a09e872082d70b1fee14d66f8350b4bd8fce0d8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
