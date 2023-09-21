@@ -1,0 +1,180 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "54acd649_3e767879",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "LGTM! All the comments on the Python file could be done as follow up to unblock the fix, except that it would be real nice to remove the .BIN files from the CL (and that requires a minor change to the Python script)",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e31d0c81_de8b5400",
+        "filename": "third_party/gn/dxc/BUILD.gn",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "After this land I\u0027ll fix this up so that cross compilation works on mac M1.",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f79f8cb7_9aa3db0f",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "This seems like ancient Python, could it be made to use argparse?",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e80bd9_39805318",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "nit: could be an extra argument provided by the GN file instead of hardcoding the removal of gn/dxc\n\nAlso `source` is weird because it is the copy destination. Maybe copy_source and copy_destination, then set diff_source \u003d copy_destination.",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "971aa390_9901201f",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "nit: os.makedirs(source, exist_ok\u003dTrue)",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 27
+      },
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e3fa07_9424c474",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "Let\u0027s use argparse xD manual parsing of command line like this is a bit wonky.",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "023f4939_2627987e",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "We already did the split earlier, so we could have separated the ext from the base file name and used that here.",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11ab04d4_f430b941",
+        "filename": "third_party/gn/dxc/build/message_compiler.py",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "We could loop over the .rc and .h and just diff these two so that the .BIN become unused and we can remove them from the CL.",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee3c280c_0bef49dd",
+        "filename": "third_party/gn/dxc/win_build_output/.gitattributes",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "u-nit: Could we have a small readme explaining what this directory and files are for?",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37faf303_0e969707",
+        "filename": "third_party/gn/dxc/win_build_output/mc/include/dxc/Tracing/dxcetw/dxcetwTEMP.BIN",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-21T09:39:43Z",
+      "side": 1,
+      "message": "You mentioned this file was technically not needed, any chance it could be removed?",
+      "revId": "611705c9b684888eefd4e59d28cda5683c6bf762",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
