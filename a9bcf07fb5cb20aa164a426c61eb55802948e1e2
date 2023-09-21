@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc17f423_3ea6d1c9",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1054,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-21T10:33:24Z",
+      "side": 1,
+      "message": "Added a `DAWN_ASSERT`",
+      "parentUuid": "dbe3d41b_03281fa6",
+      "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b13fd428_e45e051a",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-21T01:40:54Z",
       "side": 1,
       "message": "Is program always guaranteed to be non-null? What happens if the program load fails, does this case issues with the `*program` below?",
+      "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0510d3d6_4b25a1c6",
+        "filename": "src/tint/cmd/info/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-21T10:33:24Z",
+      "side": 1,
+      "message": "It was guaranteed, but it wasn\u0027t clearly described and the pointers made this confusing. Reworked this to return a `Program` by value and updated the `LoadProgramInfo()` docs.",
+      "parentUuid": "b13fd428_e45e051a",
       "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c611f3a_c8eab9ec",
+        "filename": "src/tint/cmd/loopy/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 385,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-21T10:33:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d90d678e_0afc6202",
+      "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "abde6cf8_32cddf98",
@@ -65,6 +119,24 @@
       "writtenOn": "2023-09-21T01:40:54Z",
       "side": 1,
       "message": "ditto",
+      "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44043638_458e0087",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1097,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-21T10:33:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "abde6cf8_32cddf98",
       "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b959daa7_92e05329",
+        "filename": "src/tint/lang/wgsl/ast/transform/manager.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-21T10:33:24Z",
+      "side": 1,
+      "message": "No. It\u0027s taking the address of a reference. I don\u0027t believe there\u0027s any way for a nullptr to creep in here.",
+      "parentUuid": "4cf2fd97_c028fbc7",
+      "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b573eec8_8fc0a8f3",
@@ -99,6 +189,24 @@
       "writtenOn": "2023-09-21T01:40:54Z",
       "side": 1,
       "message": "can resolve return a nullptr?",
+      "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6543b2d8_b76c6cde",
+        "filename": "src/tint/lang/wgsl/inspector/inspector_builder_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-21T10:33:24Z",
+      "side": 1,
+      "message": "No, it returns a `Program`.",
+      "parentUuid": "b573eec8_8fc0a8f3",
       "revId": "a9bcf07fb5cb20aa164a426c61eb55802948e1e2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
