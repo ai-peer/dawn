@@ -51,10 +51,6 @@ struct Options {
     /// transform
     std::unordered_map<BindingPoint, BindingPoint> binding_points;
 
-    /// A map of old binding point to new access control for the BindingRemapper
-    /// transform
-    std::unordered_map<BindingPoint, core::Access> access_controls;
-
     /// Set to `true` to disable software robustness that prevents out-of-bounds accesses.
     bool disable_robustness = false;
 
@@ -80,7 +76,6 @@ struct Options {
     TINT_REFLECT(binding_map,
                  placeholder_binding_point,
                  binding_points,
-                 access_controls,
                  disable_robustness,
                  allow_collisions,
                  disable_workgroup_init,
