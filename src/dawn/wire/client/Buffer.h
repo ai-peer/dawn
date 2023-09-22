@@ -41,6 +41,10 @@ class Buffer final : public ObjectBase {
                   size_t size,
                   WGPUBufferMapCallback callback,
                   void* userdata);
+    WGPUFuture MapAsyncF(WGPUMapModeFlags mode,
+                         size_t offset,
+                         size_t size,
+                         const WGPUBufferMapCallbackInfo& callbackInfo);
     void* GetMappedRange(size_t offset, size_t size);
     const void* GetConstMappedRange(size_t offset, size_t size);
     void Unmap();
