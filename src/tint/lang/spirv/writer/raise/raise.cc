@@ -67,8 +67,16 @@ Result<SuccessType, std::string> Raise(core::ir::Module* module, const Options& 
         RUN_TRANSFORM(core::ir::transform::Robustness, module, config);
     }
 
+    tint::ExternalTextureOptions external_texture_options{};
+    for (const auto& [plane0, et_info] : options.bindings.external_texture) {
+        external_texture_options.bindings_map.emplace(
+            tint::BindingPoint{plane0.group, plane0.binding},
+            tint::ExternalTextureOptions::BindingPoints{
+                /* plane_1 */ tint::BindingPoint{et_info.plane1.group, et_info.plane1.binding},
+                /* params */ tint::BindingPoint{et_info.metadata.group, et_info.metadata.binding}});
+    }
     RUN_TRANSFORM(core::ir::transform::MultiplanarExternalTexture, module,
-                  options.external_texture_options);
+                  external_texture_options);
 
     RUN_TRANSFORM(core::ir::transform::AddEmptyEntryPoint, module);
     RUN_TRANSFORM(core::ir::transform::Bgra8UnormPolyfill, module);

@@ -192,8 +192,9 @@ bool ParseArgs(const std::vector<std::string>& args, Options* opts) {
 bool GenerateSpirv(const tint::Program* program) {
 #if TINT_BUILD_SPV_WRITER
     tint::spirv::writer::Options gen_options;
-    gen_options.external_texture_options.bindings_map =
-        tint::cmd::GenerateExternalTextureBindings(program);
+    // TODO(crbug.com/tint/1501): Restore this using the specific MSL bindings.external_texture
+    // gen_options.external_texture_options.bindings_map =
+    //    tint::cmd::GenerateExternalTextureBindings(program);
     auto result = tint::spirv::writer::Generate(program, gen_options);
     if (!result) {
         tint::cmd::PrintWGSL(std::cerr, *program);
