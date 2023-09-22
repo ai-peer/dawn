@@ -34,6 +34,24 @@
       "parentUuid": "87ba1751_7fbcada3",
       "revId": "54492c96c3c877285464331a6116d3fd1f1b4ee6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24f34f8_1ce9bf12",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-22T17:15:40Z",
+      "side": 1,
+      "message": "Looking at https://github.com/Kitware/CMake/blob/122ec98dcfa273d17c2ae7ccacbaf3a47d14152c/Source/cmSourceFile.cxx#L127 it seems that it could be because we don\u0027t mark the files as generated. Does adding the following in https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/CMakeLists.txt;drc\u003d6b67a90d8b72bcbe6a2ac350091c447a40f488c4;l\u003d94 help?\n\n```\nset_file_properties(${OUTPUTS} PROPERTIES GENERATED TRUE)\n```\n\nSee https://cmake.org/cmake/help/latest/prop_sf/GENERATED.html",
+      "parentUuid": "31840b28_795f4d10",
+      "revId": "54492c96c3c877285464331a6116d3fd1f1b4ee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
