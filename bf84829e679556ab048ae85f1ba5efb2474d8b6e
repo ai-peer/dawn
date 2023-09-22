@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c526bea8_3844cd96",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-22T17:07:30Z",
+      "side": 1,
+      "message": "Dawn LGTM",
+      "revId": "bf84829e679556ab048ae85f1ba5efb2474d8b6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eff0a131_c19afd7e",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-22T17:07:30Z",
+      "side": 1,
+      "message": "nit: externalTextureExpansionMap?",
+      "range": {
+        "startLine": 80,
+        "startChar": 18,
+        "endLine": 80,
+        "endChar": 30
+      },
+      "revId": "bf84829e679556ab048ae85f1ba5efb2474d8b6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
