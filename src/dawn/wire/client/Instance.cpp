@@ -141,9 +141,8 @@ bool Instance::OnRequestAdapterCallback(WGPUFuture future,
                                         uint32_t featuresCount,
                                         const WGPUFeatureName* features) {
     RequestAdapterEventData data = {status, message, properties, limits, featuresCount, features};
-    GetClient()->GetEventManager()->SetFutureReady<RequestAdapterEventBase>(future.id,
-                                                                            std::move(data));
-    return true;
+    return GetClient()->GetEventManager()->SetFutureReady<RequestAdapterEventBase>(
+               future.id, std::move(data)) == WireResult::Success;
 }
 
 void Instance::ProcessEvents() {
