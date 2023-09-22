@@ -52,6 +52,24 @@
       "parentUuid": "31840b28_795f4d10",
       "revId": "54492c96c3c877285464331a6116d3fd1f1b4ee6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d3e9b82_d4910545",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 9
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-09-22T18:35:09Z",
+      "side": 1,
+      "message": "Tried but didn\u0027t work, was getting the same error of not finding the generated files. Not sure how to handle those generated files based on an external script",
+      "parentUuid": "d24f34f8_1ce9bf12",
+      "revId": "54492c96c3c877285464331a6116d3fd1f1b4ee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
