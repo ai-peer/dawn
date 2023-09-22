@@ -18,7 +18,6 @@
 #include <unordered_map>
 
 #include "src/tint/api/common/binding_point.h"
-#include "src/tint/api/options/binding_remapper.h"
 #include "src/tint/utils/reflection/reflection.h"
 
 namespace tint::spirv::writer {
@@ -91,9 +90,6 @@ struct Options {
     /// Set to `true` to clamp frag depth
     bool clamp_frag_depth = false;
 
-    /// Options used in the bindings remapper
-    BindingRemapperOptions binding_remapper_options = {};
-
     /// Set to `true` to initialize workgroup memory with OpConstantNull when
     /// VK_KHR_zero_initialize_workgroup_memory is enabled.
     bool use_zero_initialize_workgroup_memory_extension = false;
@@ -120,7 +116,6 @@ struct Options {
                  emit_vertex_point_size,
                  disable_workgroup_init,
                  clamp_frag_depth,
-                 binding_remapper_options,
                  use_zero_initialize_workgroup_memory_extension,
                  disable_image_robustness,
                  disable_runtime_sized_array_index_clamping,

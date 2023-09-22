@@ -168,7 +168,6 @@ ShaderModule::~ShaderModule() = default;
 #define SPIRV_COMPILATION_REQUEST_MEMBERS(X)                                                     \
     X(SingleShaderStage, stage)                                                                  \
     X(const tint::Program*, inputProgram)                                                        \
-    X(tint::BindingRemapperOptions, bindingRemapper)                                             \
     X(tint::spirv::writer::Bindings, bindings)                                                   \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                       \
@@ -212,7 +211,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     // Remap BindingNumber to BindingIndex in WGSL shader
     using BindingPoint = tint::BindingPoint;
 
-    tint::BindingRemapperOptions bindingRemapper;
     tint::spirv::writer::Bindings bindings;
 
     const BindingInfoArray& moduleBindingInfo =
@@ -230,9 +228,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
             BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
                                          static_cast<uint32_t>(bindingIndex)};
-            if (srcBindingPoint != dstBindingPoint) {
-                bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
-            }
 
             const BindingInfo& info = bgl_internal->GetBindingInfo(bindingIndex);
 
@@ -301,7 +296,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     SpirvCompilationRequest req = {};
     req.stage = stage;
     req.inputProgram = GetTintProgram();
-    req.bindingRemapper = std::move(bindingRemapper);
     req.bindings = std::move(bindings);
     req.entryPointName = programmableStage.entryPoint;
     req.isRobustnessEnabled = GetDevice()->IsRobustnessEnabled();
@@ -390,7 +384,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             options.disable_workgroup_init = r.disableWorkgroupInit;
             options.use_zero_initialize_workgroup_memory_extension =
                 r.useZeroInitializeWorkgroupMemoryExtension;
-            options.binding_remapper_options = r.bindingRemapper;
             options.bindings = r.bindings;
             options.disable_image_robustness = r.disableImageRobustness;
             options.disable_runtime_sized_array_index_clamping =

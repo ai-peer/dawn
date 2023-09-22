@@ -17,7 +17,6 @@
 #include <memory>
 #include <utility>
 
-#include "src/tint/lang/core/ir/transform/binding_remapper.h"
 #include "src/tint/lang/spirv/writer/ast_printer/ast_printer.h"
 #include "src/tint/lang/spirv/writer/printer/printer.h"
 #include "src/tint/lang/spirv/writer/raise/raise.h"
@@ -50,12 +49,6 @@ Result<Output, std::string> Generate(const Program* program, const Options& opti
         }
 
         auto ir = converted.Move();
-
-        // Apply transforms as required by writer options.
-        auto remapper = core::ir::transform::BindingRemapper(&ir, options.binding_remapper_options);
-        if (!remapper) {
-            return remapper.Failure();
-        }
 
         // Raise the IR to the SPIR-V dialect.
         auto raised = raise::Raise(&ir, options);

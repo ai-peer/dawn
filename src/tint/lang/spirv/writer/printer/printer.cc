@@ -1860,11 +1860,50 @@ void Printer::EmitVar(core::ir::Var* var) {
             TINT_ASSERT(!current_function_);
             module_.PushType(spv::Op::OpVariable,
                              {ty, id, U32Operand(StorageClass(ptr->AddressSpace()))});
-            auto bp = var->BindingPoint().value();
+            auto remap_binding =
+                [](const tint::BindingPoint& bp,
+                   const core::type::Pointer* src) -> std::pair<uint32_t, uint32_t> {
+                if (src->AddressSpace() == core::AddressSpace::kUniform) {
+                    if (auto it = options.bindings.uniform.find(bp);
+                        it != options.bindings.uniform.end()) {
+                        return {it->group, it->binding};
+                    } else {
+                        TINT_ICE() << "failed to find binding information for uniform";
+                        return {bp.group, bp.binding};
+                    }
+                } else if (src->AddressSpace() == core::AddressSpace::kStorage) {
+                    if (auto it = options.bindings.storage.find(bp);
+                        it != options.bindings.storage.end()) {
+                        return {it->group, it->binding};
+                    } else {
+                        TINT_ICE() << "failed to find binding information for storage";
+                        return {bp.group, bp.binding};
+                    }
+                } else if (src->StoreType()->Is<core::type::Texture>()) {
+                    if (auto it = options.bindings.texture.find(bp);
+                        it != options.bindings.texture.end()) {
+                        return {it->group, it->binding};
+                    } else {
+                        TINT_ICE() << "failed to find binding information for texture";
+                        return {bp.group, bp.binding};
+                    }
+                } else if (src->StoreType()->Is<core::type::Sampler>()) {
+                    if (auto it = options.bindings.sampler.find(bp);
+                        it != options.bindings.sampler.end()) {
+                        return {it->group, it->binding};
+                    } else {
+                        TINT_ICE() << "failed to find binding information for sampler";
+                        return {bp.group, bp.binding};
+                    }
+                } else {
+                    TINT_ICE() << "unknown kind of item to fetch binding data";
+                }
+            };
+
+            auto [group, binding] = remap_binding(var->BindingPoint().value(), ptr);
             module_.PushAnnot(spv::Op::OpDecorate,
-                              {id, U32Operand(SpvDecorationDescriptorSet), bp.group});
-            module_.PushAnnot(spv::Op::OpDecorate,
-                              {id, U32Operand(SpvDecorationBinding), bp.binding});
+                              {id, U32Operand(SpvDecorationDescriptorSet), group});
+            module_.PushAnnot(spv::Op::OpDecorate, {id, U32Operand(SpvDecorationBinding), binding});
 
             // Add NonReadable and NonWritable decorations to storage textures and buffers.
             auto* st = store_ty->As<core::type::StorageTexture>();

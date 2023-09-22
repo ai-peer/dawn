@@ -26,7 +26,6 @@
 #include "src/tint/lang/spirv/writer/ast_raise/while_to_loop.h"
 #include "src/tint/lang/wgsl/ast/transform/add_block_attribute.h"
 #include "src/tint/lang/wgsl/ast/transform/add_empty_entry_point.h"
-#include "src/tint/lang/wgsl/ast/transform/binding_remapper.h"
 #include "src/tint/lang/wgsl/ast/transform/builtin_polyfill.h"
 #include "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.h"
 #include "src/tint/lang/wgsl/ast/transform/demote_to_helper.h"
@@ -92,13 +91,6 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
             options.disable_runtime_sized_array_index_clamping;
         data.Add<ast::transform::Robustness::Config>(config);
     }
-
-    // BindingRemapper must come before MultiplanarExternalTexture. Note, this is flipped to the
-    // other generators which run Multiplanar first and then binding remapper.
-    manager.Add<ast::transform::BindingRemapper>();
-    data.Add<ast::transform::BindingRemapper::Remappings>(
-        options.binding_remapper_options.binding_points,
-        std::unordered_map<BindingPoint, core::Access>{}, /* allow_collisions */ false);
 
     tint::ExternalTextureOptions::BindingsMap bindings_map{};
     for (const auto& [plane0, et_info] : options.bindings.external_texture) {

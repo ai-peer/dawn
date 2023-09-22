@@ -783,6 +783,40 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
 
     module_.PushType(spv::Op::OpVariable, std::move(ops));
 
+    auto remap_binding = [&sc, &type](const BindingPoint& bp) -> std::pair<uint32_t, uint32_t> {
+        if (sc == core::AddressSpace::kUniform) {
+            if (auto it = options.bindings.uniform.find(bp); it != options.bindings.uniform.end()) {
+                return {it->group, it->binding};
+            } else {
+                TINT_ICE() << "failed to find binding information for uniform";
+                return {bp.group, bp.binding};
+            }
+        } else if (sc == core::AddressSpace::kStorage) {
+            if (auto it = options.bindings.storage.find(bp); it != options.bindings.storage.end()) {
+                return {it->group, it->binding};
+            } else {
+                TINT_ICE() << "failed to find binding information for storage";
+                return {bp.group, bp.binding};
+            }
+        } else if (type->Is<core::type::Texture>()) {
+            if (auto it = options.bindings.texture.find(bp); it != options.bindings.texture.end()) {
+                return {it->group, it->binding};
+            } else {
+                TINT_ICE() << "failed to find binding information for texture";
+                return {bp.group, bp.binding};
+            }
+        } else if (type->Is<core::type::Sampler>()) {
+            if (auto it = options.bindings.sampler.find(bp); it != options.bindings.sampler.end()) {
+                return {it->group, it->binding};
+            } else {
+                TINT_ICE() << "failed to find binding information for sampler";
+                return {bp.group, bp.binding};
+            }
+        } else {
+            TINT_ICE() << "unknown kind of item to fetch binding data";
+        }
+    };
+
     for (auto* attr : v->attributes) {
         bool ok = Switch(
             attr,
@@ -827,17 +861,17 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
                 return true;
             },
             [&](const ast::BindingAttribute*) {
-                auto bp = sem->BindingPoint();
+                auto [_, binding] = remap_binding(sem->BindingPoint().value());
                 module_.PushAnnot(
                     spv::Op::OpDecorate,
-                    {Operand(var_id), U32Operand(SpvDecorationBinding), Operand(bp->binding)});
+                    {Operand(var_id), U32Operand(SpvDecorationBinding), Operand(binding)});
                 return true;
             },
             [&](const ast::GroupAttribute*) {
-                auto bp = sem->BindingPoint();
+                auto [group, _] = remap_binding(sem->BindingPoint().value());
                 module_.PushAnnot(
                     spv::Op::OpDecorate,
-                    {Operand(var_id), U32Operand(SpvDecorationDescriptorSet), Operand(bp->group)});
+                    {Operand(var_id), U32Operand(SpvDecorationDescriptorSet), Operand(group)});
                 return true;
             },
             [&](const ast::IdAttribute*) {
