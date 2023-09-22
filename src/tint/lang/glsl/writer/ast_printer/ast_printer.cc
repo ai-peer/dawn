@@ -244,7 +244,8 @@ SanitizedResult Sanitize(const Program* in,
     manager.Add<CombineSamplers>();
 
     data.Add<ast::transform::BindingRemapper::Remappings>(
-        options.binding_points, options.access_controls, options.allow_collisions);
+        options.binding_points, std::unordered_map<BindingPoint, core::Access>{},
+        options.allow_collisions);
     manager.Add<ast::transform::BindingRemapper>();
 
     manager.Add<ast::transform::PromoteInitializersToLet>();
