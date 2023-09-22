@@ -169,7 +169,6 @@ ShaderModule::~ShaderModule() = default;
     X(SingleShaderStage, stage)                                                                  \
     X(const tint::Program*, inputProgram)                                                        \
     X(tint::BindingRemapperOptions, bindingRemapper)                                             \
-    X(tint::ExternalTextureOptions, externalTextureOptions)                                      \
     X(tint::spirv::writer::Bindings, bindings)                                                   \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                       \
@@ -259,7 +258,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
     // Transform external textures into the binding locations specified in the bgl
     // TODO(dawn:1082): Replace this block with BuildExternalTextureTransformBindings.
-    tint::ExternalTextureOptions externalTextureOptions;
     for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutInternalBase* bgl = layout->GetBindGroupLayout(i);
 
@@ -270,19 +268,17 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             tint::BindingPoint plane1{
                 static_cast<uint32_t>(i),
                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))};
-            tint::BindingPoint metadata{
-                static_cast<uint32_t>(i),
-                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))};
 
-            externalTextureOptions.bindings_map[plane0] = {plane1, metadata};
+            tint::spirv::writer::binding::ExternalTexture external_texture{
+                /* metadata */ {static_cast<uint32_t>(i),
+                                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))},
+                /* plane0 */ {plane0.group, plane0.binding},
+                /* plane1 */ {plane1.group, plane1.binding}};
 
             // The external texture bindings will be through the `texture` bindings. So, that means
             // that these bindings must be unique compared to the incoming WGSL bindings, and if
             // they need to be remapped should be inserted into the `texture` bindings above.
-            bindings.external_texture.emplace(plane0, tint::spirv::writer::binding::ExternalTexture{
-                                                          {metadata.group, metadata.binding},
-                                                          {plane0.group, plane0.binding},
-                                                          {plane1.group, plane1.binding}});
+            bindings.external_texture.emplace(plane0, external_texture);
 
             // Set both planes as textures if they aren't already set
             if (auto it = bindings.texture.find(plane0); it == bindings.texture.end()) {
@@ -306,7 +302,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     req.stage = stage;
     req.inputProgram = GetTintProgram();
     req.bindingRemapper = std::move(bindingRemapper);
-    req.externalTextureOptions = std::move(externalTextureOptions);
     req.bindings = std::move(bindings);
     req.entryPointName = programmableStage.entryPoint;
     req.isRobustnessEnabled = GetDevice()->IsRobustnessEnabled();
@@ -396,7 +391,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             options.use_zero_initialize_workgroup_memory_extension =
                 r.useZeroInitializeWorkgroupMemoryExtension;
             options.binding_remapper_options = r.bindingRemapper;
-            options.external_texture_options = r.externalTextureOptions;
             options.bindings = r.bindings;
             options.disable_image_robustness = r.disableImageRobustness;
             options.disable_runtime_sized_array_index_clamping =

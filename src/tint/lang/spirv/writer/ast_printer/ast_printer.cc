@@ -100,9 +100,17 @@ SanitizedResult Sanitize(const Program* in, const Options& options) {
         options.binding_remapper_options.binding_points,
         std::unordered_map<BindingPoint, core::Access>{}, /* allow_collisions */ false);
 
+    tint::ExternalTextureOptions::BindingsMap bindings_map{};
+    for (const auto& [plane0, et_info] : options.bindings.external_texture) {
+        bindings_map.emplace(
+            tint::BindingPoint{plane0.group, plane0.binding},
+            tint::ExternalTextureOptions::BindingPoints{
+                /* plane_1 */ tint::BindingPoint{et_info.plane1.group, et_info.plane1.binding},
+                /* params */ tint::BindingPoint{et_info.metadata.group, et_info.metadata.binding}});
+    }
+
     // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
-    data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
-        options.external_texture_options.bindings_map);
+    data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(bindings_map);
     manager.Add<ast::transform::MultiplanarExternalTexture>();
 
     {  // Builtin polyfills

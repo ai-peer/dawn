@@ -579,8 +579,9 @@ bool GenerateSpirv(const tint::Program* program, const Options& options) {
     tint::spirv::writer::Options gen_options;
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
-    gen_options.external_texture_options.bindings_map =
-        tint::cmd::GenerateExternalTextureBindings(program);
+    // TODO(crbug.com/tint/1501): Restore this using the specific MSL bindings.external_texture
+    // gen_options.external_texture_options.bindings_map =
+    //     tint::cmd::GenerateExternalTextureBindings(program);
     gen_options.use_tint_ir = options.use_ir;
 
     auto result = tint::spirv::writer::Generate(program, gen_options);

@@ -92,9 +92,6 @@ struct Options {
     /// Set to `true` to clamp frag depth
     bool clamp_frag_depth = false;
 
-    /// Options used in the binding mappings for external textures
-    ExternalTextureOptions external_texture_options = {};
-
     /// Options used in the bindings remapper
     BindingRemapperOptions binding_remapper_options = {};
 
@@ -124,7 +121,6 @@ struct Options {
                  emit_vertex_point_size,
                  disable_workgroup_init,
                  clamp_frag_depth,
-                 external_texture_options,
                  binding_remapper_options,
                  use_zero_initialize_workgroup_memory_extension,
                  disable_image_robustness,
