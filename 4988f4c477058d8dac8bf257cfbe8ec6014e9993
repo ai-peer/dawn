@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb644c84_c25a52e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-22T17:17:00Z",
+      "side": 1,
+      "message": "LGTM after the last couple fixes! Thank you for your patience!",
+      "revId": "4988f4c477058d8dac8bf257cfbe8ec6014e9993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5005d7d9_abb9a740",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-22T17:17:00Z",
+      "side": 1,
+      "message": "nit: recurse",
+      "range": {
+        "startLine": 604,
+        "startChar": 15,
+        "endLine": 604,
+        "endChar": 23
+      },
+      "revId": "4988f4c477058d8dac8bf257cfbe8ec6014e9993",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
