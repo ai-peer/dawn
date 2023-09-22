@@ -9,7 +9,7 @@ layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
 
 void textureLoad_126466() {
   ivec3 arg_1 = ivec3(1);
-  vec4 res = texelFetch(arg_0, arg_1);
+  vec4 res = imageLoad(arg_0, arg_1);
   prevent_dce.inner = res;
 }
 
@@ -28,7 +28,7 @@ void main() {
 }
 Error parsing GLSL shader:
 ERROR: 0:3: 'image load-store format' : not supported with this profile: es
-ERROR: 0:3: '' : compilation terminated 
+ERROR: 0:3: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 
@@ -43,7 +43,7 @@ layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
 
 void textureLoad_126466() {
   ivec3 arg_1 = ivec3(1);
-  vec4 res = texelFetch(arg_0, arg_1);
+  vec4 res = imageLoad(arg_0, arg_1);
   prevent_dce.inner = res;
 }
 
@@ -57,7 +57,7 @@ void main() {
 }
 Error parsing GLSL shader:
 ERROR: 0:4: 'image load-store format' : not supported with this profile: es
-ERROR: 0:4: '' : compilation terminated 
+ERROR: 0:4: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 
@@ -71,7 +71,7 @@ layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
 
 void textureLoad_126466() {
   ivec3 arg_1 = ivec3(1);
-  vec4 res = texelFetch(arg_0, arg_1);
+  vec4 res = imageLoad(arg_0, arg_1);
   prevent_dce.inner = res;
 }
 
@@ -86,7 +86,7 @@ void main() {
 }
 Error parsing GLSL shader:
 ERROR: 0:3: 'image load-store format' : not supported with this profile: es
-ERROR: 0:3: '' : compilation terminated 
+ERROR: 0:3: '' : compilation terminated
 ERROR: 2 compilation errors.  No code generated.
 
 
