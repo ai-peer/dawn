@@ -18,6 +18,7 @@
 #include <cstddef>
 #include <functional>
 #include <map>
+#include <memory>
 #include <utility>
 
 #include "dawn/common/FutureUtils.h"
@@ -35,20 +36,22 @@ class Client;
 using EventCallback = std::function<void(EventCompletionType)>;
 
 struct TrackedEvent : dawn::NonCopyable {
-    TrackedEvent(WGPUCallbackMode mode, EventCallback&& callback);
-    ~TrackedEvent();
+    TrackedEvent(WGPUCallbackMode mode, void* userdata);
+    virtual ~TrackedEvent();
 
     TrackedEvent(TrackedEvent&& other);
     TrackedEvent& operator=(TrackedEvent&& other);
 
-    void Complete(EventCompletionType type) &&;
+    void Complete(EventCompletionType type);
 
     WGPUCallbackMode mMode;
-    // Callback. Falsey if already called.
-    EventCallback mCallback;
-    // These states don't need to be atomic because they're always protected by
-    // mTrackedEventsMutex (or moved out to a local variable).
+    void* mUserdata = nullptr;
+    // These states don't need to be atomic because they're always protected by mTrackedEventsMutex
+    // (or moved out to a local variable).
     bool mReady = false;
+
+  protected:
+    virtual void CompleteImpl(EventCompletionType type) = 0;
 };
 
 // Subcomponent which tracks callback events for the Future-based callback
@@ -63,7 +66,7 @@ class EventManager final : NonMovable {
 
     // Returns a pair of the FutureID and a bool that is true iff the event was successfuly tracked,
     // false otherwise. Events may not be tracked if the client is already disconnected.
-    std::pair<FutureID, bool> TrackEvent(TrackedEvent&& event);
+    std::pair<FutureID, bool> TrackEvent(TrackedEvent* event);
     void ShutDown();
 
     // Sets the event to be ready, calling an additional specialized callback to set further event
@@ -78,7 +81,7 @@ class EventManager final : NonMovable {
     // Tracks all kinds of events (for both WaitAny and ProcessEvents). We use an ordered map so
     // that in most cases, event ordering is already implicit when we iterate the map. (Not true for
     // WaitAny though because the user could specify the FutureIDs out of order.)
-    MutexProtected<std::map<FutureID, TrackedEvent>> mTrackedEvents;
+    MutexProtected<std::map<FutureID, std::unique_ptr<TrackedEvent>>> mTrackedEvents;
     std::atomic<FutureID> mNextFutureID = 1;
 };
 
