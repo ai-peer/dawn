@@ -15,11 +15,67 @@
 #ifndef SRC_TINT_LANG_SPIRV_WRITER_COMMON_OPTIONS_H_
 #define SRC_TINT_LANG_SPIRV_WRITER_COMMON_OPTIONS_H_
 
+#include <unordered_map>
+
+#include "src/tint/api/common/binding_point.h"
 #include "src/tint/api/options/binding_remapper.h"
 #include "src/tint/api/options/external_texture.h"
 #include "src/tint/utils/reflection/reflection.h"
 
 namespace tint::spirv::writer {
+namespace binding {
+
+/// Generic binding point
+struct Generic {
+    /// The group
+    uint32_t group = 0;
+    /// The binding
+    uint32_t binding = 0;
+
+    /// Reflect the fields of this class so that it can be used by tint::ForeachField()
+    TINT_REFLECT(group, binding);
+};
+using Uniform = Generic;
+using Storage = Generic;
+using Texture = Generic;
+using Sampler = Generic;
+
+/// An external texture
+struct ExternalTexture {
+    /// Metadata
+    Generic metadata{};
+    /// Plane0 binding data
+    Generic plane0{};
+    /// Plane1 binding data
+    Generic plane1{};
+
+    /// Reflect the fields of this class so that it can be used by tint::ForeachField()
+    TINT_REFLECT(metadata, plane0, plane1);
+};
+
+};  // namespace binding
+
+using UniformBindings = std::unordered_map<BindingPoint, binding::Uniform>;
+using StorageBindings = std::unordered_map<BindingPoint, binding::Storage>;
+using TextureBindings = std::unordered_map<BindingPoint, binding::Texture>;
+using SamplerBindings = std::unordered_map<BindingPoint, binding::Sampler>;
+using ExternalTextureBindings = std::unordered_map<BindingPoint, binding::ExternalTexture>;
+
+struct Bindings {
+    /// Uniform bindings
+    UniformBindings uniform{};
+    /// Storage bindings
+    StorageBindings storage{};
+    /// Texture bindings
+    TextureBindings texture{};
+    /// Sampler bindings
+    SamplerBindings sampler{};
+    /// External bindings
+    ExternalTextureBindings external_texture{};
+
+    /// Reflect the fields of this class so that it can be used by tint::ForeachField()
+    TINT_REFLECT(uniform, storage, texture, sampler, external_texture);
+};
 
 /// Configuration options used for generating SPIR-V.
 struct Options {
@@ -60,6 +116,9 @@ struct Options {
     /// SPIRV module. Issue: dawn:464
     bool experimental_require_subgroup_uniform_control_flow = false;
 
+    /// The bindings
+    Bindings bindings;
+
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
     TINT_REFLECT(disable_robustness,
                  emit_vertex_point_size,
@@ -71,7 +130,8 @@ struct Options {
                  disable_image_robustness,
                  disable_runtime_sized_array_index_clamping,
                  use_tint_ir,
-                 experimental_require_subgroup_uniform_control_flow);
+                 experimental_require_subgroup_uniform_control_flow,
+                 bindings);
 };
 
 }  // namespace tint::spirv::writer

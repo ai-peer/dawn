@@ -170,6 +170,7 @@ ShaderModule::~ShaderModule() = default;
     X(const tint::Program*, inputProgram)                                                        \
     X(tint::BindingRemapperOptions, bindingRemapper)                                             \
     X(tint::ExternalTextureOptions, externalTextureOptions)                                      \
+    X(tint::spirv::writer::Bindings, bindings)                                                   \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                       \
     X(std::string_view, entryPointName)                                                          \
@@ -213,14 +214,17 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     using BindingPoint = tint::BindingPoint;
 
     tint::BindingRemapperOptions bindingRemapper;
+    tint::spirv::writer::Bindings bindings;
 
     const BindingInfoArray& moduleBindingInfo =
         GetEntryPoint(programmableStage.entryPoint.c_str()).bindings;
 
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-        const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
+        const BindGroupLayoutInternalBase* bgl_internal = layout->GetBindGroupLayout(group);
+        const BindGroupLayout* bgl = ToBackend(bgl_internal);
+
         const auto& groupBindingInfo = moduleBindingInfo[group];
-        for (const auto& [binding, _] : groupBindingInfo) {
+        for (const auto& [binding, shader_binding_info] : groupBindingInfo) {
             BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
             BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
                                          static_cast<uint32_t>(binding)};
@@ -229,6 +233,26 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                                          static_cast<uint32_t>(bindingIndex)};
             if (srcBindingPoint != dstBindingPoint) {
                 bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
+            }
+
+            const BindingInfo& info = bgl_internal->GetBindingInfo(bindingIndex);
+
+            if (shader_binding_info.buffer.type == wgpu::BufferBindingType::Uniform) {
+                bindings.uniform.emplace(srcBindingPoint,
+                                         tint::spirv::writer::binding::Uniform{
+                                             dstBindingPoint.group, dstBindingPoint.binding});
+            } else if (shader_binding_info.buffer.type == wgpu::BufferBindingType::Storage) {
+                bindings.storage.emplace(srcBindingPoint,
+                                         tint::spirv::writer::binding::Storage{
+                                             dstBindingPoint.group, dstBindingPoint.binding});
+            } else if (info.bindingType == BindingInfoType::Sampler) {
+                bindings.sampler.emplace(srcBindingPoint,
+                                         tint::spirv::writer::binding::Sampler{
+                                             dstBindingPoint.group, dstBindingPoint.binding});
+            } else if (info.bindingType == BindingInfoType::Texture) {
+                bindings.texture.emplace(srcBindingPoint,
+                                         tint::spirv::writer::binding::Texture{
+                                             dstBindingPoint.group, dstBindingPoint.binding});
             }
         }
     }
@@ -240,13 +264,35 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
         const BindGroupLayoutInternalBase* bgl = layout->GetBindGroupLayout(i);
 
         for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
-            externalTextureOptions
-                .bindings_map[{static_cast<uint32_t>(i),
-                               static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))}] = {
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))},
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))}};
+            tint::BindingPoint plane0{
+                static_cast<uint32_t>(i),
+                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))};
+            tint::BindingPoint plane1{
+                static_cast<uint32_t>(i),
+                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))};
+            tint::BindingPoint metadata{
+                static_cast<uint32_t>(i),
+                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))};
+
+            externalTextureOptions.bindings_map[plane0] = {plane1, metadata};
+
+            // The external texture bindings will be through the `texture` bindings. So, that means
+            // that these bindings must be unique compared to the incoming WGSL bindings, and if
+            // they need to be remapped should be inserted into the `texture` bindings above.
+            bindings.external_texture.emplace(plane0, tint::spirv::writer::binding::ExternalTexture{
+                                                          {metadata.group, metadata.binding},
+                                                          {plane0.group, plane0.binding},
+                                                          {plane1.group, plane1.binding}});
+
+            // Set both planes as textures if they aren't already set
+            if (auto it = bindings.texture.find(plane0); it == bindings.texture.end()) {
+                bindings.texture.emplace(
+                    plane0, tint::spirv::writer::binding::Generic{plane0.group, plane0.binding});
+            }
+            if (auto it = bindings.texture.find(plane1); it == bindings.texture.end()) {
+                bindings.texture.emplace(
+                    plane1, tint::spirv::writer::binding::Generic{plane1.group, plane1.binding});
+            }
         }
     }
 
@@ -261,6 +307,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     req.inputProgram = GetTintProgram();
     req.bindingRemapper = std::move(bindingRemapper);
     req.externalTextureOptions = std::move(externalTextureOptions);
+    req.bindings = std::move(bindings);
     req.entryPointName = programmableStage.entryPoint;
     req.isRobustnessEnabled = GetDevice()->IsRobustnessEnabled();
     req.disableWorkgroupInit = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
@@ -350,6 +397,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                 r.useZeroInitializeWorkgroupMemoryExtension;
             options.binding_remapper_options = r.bindingRemapper;
             options.external_texture_options = r.externalTextureOptions;
+            options.bindings = r.bindings;
             options.disable_image_robustness = r.disableImageRobustness;
             options.disable_runtime_sized_array_index_clamping =
                 r.disableRuntimeSizedArrayIndexClamping;

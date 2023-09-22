@@ -59,6 +59,30 @@ MaybeError stream::Stream<tint::BindingPoint>::Read(Source* s, tint::BindingPoin
 
 // static
 template <>
+void stream::Stream<tint::spirv::writer::Bindings>::Write(
+    stream::Sink* sink,
+    const tint::spirv::writer::Bindings& bindings) {
+    StreamInTintObject(bindings, sink);
+}
+
+// static
+template <>
+void stream::Stream<tint::spirv::writer::binding::ExternalTexture>::Write(
+    stream::Sink* sink,
+    const tint::spirv::writer::binding::ExternalTexture& et) {
+    StreamInTintObject(et, sink);
+}
+
+// static
+template <>
+void stream::Stream<tint::spirv::writer::binding::Generic>::Write(
+    stream::Sink* sink,
+    const tint::spirv::writer::binding::Generic& point) {
+    StreamInTintObject(point, sink);
+}
+
+// static
+template <>
 void stream::Stream<tint::ExternalTextureOptions::BindingPoints>::Write(
     stream::Sink* sink,
     const tint::ExternalTextureOptions::BindingPoints& point) {
