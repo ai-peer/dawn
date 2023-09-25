@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aadd6e0d_97b5d263",
+        "filename": "src/dawn/tests/unittests/validation/QueueOnSubmittedWorkDoneValidationTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:10:11Z",
+      "side": 0,
+      "message": "We should really remove that signal value at some point xD",
+      "revId": "753e38697f360b90e431620a21c92dfa11e91ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

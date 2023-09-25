@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d86bc7ae_ffd94131",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:10:11Z",
+      "side": 1,
+      "message": "nit: why?",
+      "revId": "318271d1e156076efa1962fdab71a09166496757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "279222c7_885704ff",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:10:11Z",
+      "side": 1,
+      "message": "When would this happen to be called after the client is disconnected?",
+      "revId": "318271d1e156076efa1962fdab71a09166496757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
