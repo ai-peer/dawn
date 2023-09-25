@@ -136,6 +136,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b63f6226_6a2c8013",
+        "filename": "src/tint/lang/core/ir/transform/zero_init_workgroup_memory.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-25T17:33:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8b461880_84c8442e",
+      "range": {
+        "startLine": 91,
+        "startChar": 24,
+        "endLine": 91,
+        "endChar": 44
+      },
+      "revId": "54ef90f0f846db2c7d86c99678bbd4720f9830c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4809a74f_cf39b497",
