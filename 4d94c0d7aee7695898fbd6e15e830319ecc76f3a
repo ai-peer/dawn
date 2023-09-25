@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "262eeec5_c2c44058",
+        "filename": "src/tint/lang/core/ir/module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T20:36:38Z",
+      "side": 1,
+      "message": "Re added `\u003d nullptr` as otherwise the move constructor gets sad.",
+      "parentUuid": "68e2317d_3fbd5b3e",
+      "range": {
+        "startLine": 100,
+        "startChar": 21,
+        "endLine": 100,
+        "endChar": 22
+      },
+      "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1ec9bb3_0116f194",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-09-25T20:33:55Z",
       "side": 1,
       "message": "Nit: I\u0027d suggest that most of these checks could actually just be removed altogether now.",
+      "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c26ceff4_7347dc79",
+        "filename": "src/tint/lang/core/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T20:36:38Z",
+      "side": 1,
+      "message": "Yea, I did that, then it seemed like this would be a bit faster as it doesn\u0027t need to make the vector or do the empty loops, so I left them in.",
+      "parentUuid": "d1ec9bb3_0116f194",
       "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
