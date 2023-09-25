@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd45a4c0_1fe3be71",
+        "filename": "src/dawn/CMakeLists.txt",
+        "patchSetId": 12
+      },
+      "lineNbr": 82,
+      "author": {
+        "id": 1003691
+      },
+      "writtenOn": "2023-09-25T09:16:23Z",
+      "side": 1,
+      "message": "Ah, my bad, I forgot to add this when I tried locally. Hope it works",
+      "revId": "a270f01fce74d1364a2407fc1af5e8b343373d2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
