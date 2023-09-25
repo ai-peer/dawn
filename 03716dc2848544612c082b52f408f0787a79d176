@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1ddd80a_f4a9001d",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3635,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "83924da3_ad62cdc8",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd40eed1_692bf7b8",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9853b9cc_e74e621b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd40eed1_692bf7b8",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0e1774f_b022974b",
@@ -65,6 +101,24 @@
       "writtenOn": "2023-09-25T14:01:05Z",
       "side": 1,
       "message": "This is a comment that seems more historical than informative. We don\u0027t really need to explain the evolution of the code in the comments, only how it works right now because right now this comment would make the readers more confused for no gains in understanding. Can you remove it?",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adc5018c_7993be08",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0e1774f_b022974b",
       "revId": "03716dc2848544612c082b52f408f0787a79d176",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39061156_b41295e3",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ba298ea2_b538c29c",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b34af747_0dc2c463",
@@ -116,6 +188,24 @@
       "writtenOn": "2023-09-25T14:01:05Z",
       "side": 1,
       "message": "Alternatively instead of a pointer, we could have it as a value with the default value \u003d {} and then check if any of the two indices in timestampWritesOnAnotherPass is not undefined.\n\n```\nbool hasOtherPass \u003d timestampWritesOnAnotherPass.beginningOfPassWriteIndex !\u003d wgpu::kQueryIndexUndefined || timestampWritesOnAnotherPass.bendOfPassWriteIndex !\u003d wgpu::kQueryIndexUndefined;\n```",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53411999_902b3080",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b34af747_0dc2c463",
       "revId": "03716dc2848544612c082b52f408f0787a79d176",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +227,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9bf346ae_d0ec52d0",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Thank you!",
+      "parentUuid": "1eb69c06_bd6336c4",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dcea9446_4a5bfda4",
@@ -154,6 +262,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "605162f8_25dc17dc",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcea9446_4a5bfda4",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59989d9c_38877825",
@@ -167,6 +293,24 @@
       "writtenOn": "2023-09-25T14:01:05Z",
       "side": 1,
       "message": "u-nit: slight preference for spelling out beginning/endOfPassWriteIndex for clarity of what 0 and 1 are. You could use C++ designated initializers for this I believe. Or just timestampWrites.foo \u003d blah.\n\nIn other tests that are more query focused and like data tables it\u0027s maybe ok, but here it would be more confusing.",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fab5390c_a6c34efb",
+        "filename": "src/dawn/tests/white_box/GPUTimestampCalibrationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:48:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59989d9c_38877825",
       "revId": "03716dc2848544612c082b52f408f0787a79d176",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
