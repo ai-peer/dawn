@@ -836,8 +836,7 @@
         "extensible": "in",
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
-            {"name": "timestamp write count", "type": "size_t", "default": 0},
-            {"name": "timestamp writes", "type": "compute pass timestamp write", "annotation": "const*", "length": "timestamp write count"}
+            {"name": "timestamp writes", "type": "compute pass timestamp writes", "annotation": "const*", "optional": true}
         ]
     },
     "compute pass encoder": {
@@ -933,19 +932,12 @@
             {"value": 4, "name": "inherit"}
         ]
     },
-    "compute pass timestamp location": {
-        "category": "enum",
-        "values": [
-            {"value": 0, "name": "beginning"},
-            {"value": 1, "name": "end"}
-        ]
-    },
-    "compute pass timestamp write": {
+    "compute pass timestamp writes": {
         "category": "structure",
         "members": [
             {"name": "query set", "type": "query set"},
-            {"name": "query index", "type": "uint32_t"},
-            {"name": "location", "type": "compute pass timestamp location"}
+            {"name": "beginning of pass write index", "type": "uint32_t", "default": "WGPU_QUERY_SET_INDEX_UNDEFINED"},
+            {"name": "end of pass write index", "type": "uint32_t", "default": "WGPU_QUERY_SET_INDEX_UNDEFINED"}
         ]
     },
     "compute pipeline": {
@@ -2555,8 +2547,7 @@
             {"name": "color attachments", "type": "render pass color attachment", "annotation": "const*", "length": "color attachment count"},
             {"name": "depth stencil attachment", "type": "render pass depth stencil attachment", "annotation": "const*", "optional": true},
             {"name": "occlusion query set", "type": "query set", "optional": true},
-            {"name": "timestamp write count", "type": "size_t", "default": 0},
-            {"name": "timestamp writes", "type": "render pass timestamp write", "annotation": "const*", "length": "timestamp write count"}
+            {"name": "timestamp writes", "type": "render pass timestamp writes", "annotation": "const*", "optional": true}
         ]
     },
     "render pass descriptor max draw count": {
@@ -2760,19 +2751,12 @@
             }
         ]
     },
-    "render pass timestamp location": {
-        "category": "enum",
-        "values": [
-            {"value": 0, "name": "beginning"},
-            {"value": 1, "name": "end"}
-        ]
-    },
-    "render pass timestamp write": {
+    "render pass timestamp writes": {
         "category": "structure",
         "members": [
             {"name": "query set", "type": "query set"},
-            {"name": "query index", "type": "uint32_t"},
-            {"name": "location", "type": "render pass timestamp location"}
+            {"name": "beginning of pass write index", "type": "uint32_t", "default": "WGPU_QUERY_SET_INDEX_UNDEFINED"},
+            {"name": "end of pass write index", "type": "uint32_t", "default": "WGPU_QUERY_SET_INDEX_UNDEFINED"}
         ]
     },
     "render pipeline": {
@@ -3636,6 +3620,11 @@
         "value":  "(0xffffffffUL)"
     },
     "mip level count undefined" : {
+        "category": "constant",
+        "type": "uint32_t",
+        "value":  "(0xffffffffUL)"
+    },
+    "query set index undefined" : {
         "category": "constant",
         "type": "uint32_t",
         "value":  "(0xffffffffUL)"
