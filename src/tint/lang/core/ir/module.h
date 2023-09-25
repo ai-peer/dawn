@@ -97,7 +97,7 @@ class Module {
     Vector<Function*, 8> functions;
 
     /// The block containing module level declarations, if any exist.
-    Block* root_block = nullptr;
+    Block* root_block;
 
     /// The symbol table for the module
     SymbolTable symbols{prog_id_};
