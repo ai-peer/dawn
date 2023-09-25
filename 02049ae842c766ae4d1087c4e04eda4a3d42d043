@@ -50,6 +50,24 @@
       "message": "Add a KEEP otherwise the suppressions will be removed in the next CTS roll. Also mention that it is temporary while we disable them Blink to change the Dawn API.",
       "revId": "02049ae842c766ae4d1087c4e04eda4a3d42d043",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9870891f_3c4f6594",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 1624,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T13:59:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a2296f7_30b83d29",
+      "revId": "02049ae842c766ae4d1087c4e04eda4a3d42d043",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
