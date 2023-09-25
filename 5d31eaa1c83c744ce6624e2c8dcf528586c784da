@@ -16,6 +16,199 @@
       "message": "(this is still on my review queue but I\u0027m thinking about the approach taken here still, sorry for the delays)",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7c3d22c_004b931c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "Finally got to this and than ran out of time. Working through the Vulkan backend changes.\n\nI believe that the PassResourceUsage changes might be easier to land than the rest so we can start splitting that off.\n\nAustin, Loko PTAL everything but the Vulkan backend changes for now.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eeaf3dd_11084146",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "I believe we don\u0027t need this BufferUsedAs because it should already be done in [1] and not needed in the usageTracker of the current pass?",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cff7e98a_1c492546",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "But here we could use a comment that we swap the buffer used as indirect buffer so we need to add the usage explicitly.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "371d4305_10e52833",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9543397_cdc2b050",
+        "filename": "src/dawn/native/PassResourceUsage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "nit: can we have a TODO(dawn:N): Consider micro-optimizing with \u003cideas here\u003e.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b436133_f73e9f97",
+        "filename": "src/dawn/native/PassResourceUsageTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "AFAIK the shader stages are only useful for bindings from bindgroups so we should be able either remove them from the API of `SyncScopeUsageTracker` or default them to `None`. The one case in `IndirectDrawValidation.cpp` seems like it might not be needed. This would simplify users of `SyncScopeUsageTracker` a bit.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a52a8b83_144e514b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "nit: all of these could be in Buffer.h, kMapUsages is already duplicated there.",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82f985f0_bda4a8c2",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "I wonder if we could fold this rule under the skipping of readonly barrier rule. On initialization we would set mReadStage and mReadUsages to all the values, and then they should never change?",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4dd3275_1e164cdd",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "This is skipped for upload buffers right now. I wonder if we could do this logic only for readback buffers given that upload buffers will skip all barriers (granted we\u0027ll eventually add some form of UMA support and the logic will not be as clear cut).",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eaf6fbb_a27094d9",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "This seems unnecessary given it is done below and doesn\u0027t change the result of the next if.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2132bde4_f1df2c04",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T16:37:37Z",
+      "side": 1,
+      "message": "It seems that we model the buffer as either in 1 last write usage on a specific stage, or a combination of all the readonly usages on a variety of stages. This could lead to a bunch of simplification I believe:\n\n```\n if (readonly) {\n   if (mLastUsage \u0026 writableUsages) {\n     barrier-\u003esrcAccessMask \u003d VulkanAccessFlags(mLastUsage);\n     *srcStages |\u003d mLastAccessStage;\n     *dstStages |\u003d ...\n     mLastUsage \u003d kAllReadonlyUsage \u0026 GetUsage();\n     mLastStage \u003d stage;\n   } else {\n     if (vertex -\u003e fragment) {\n       // No barrier, but record that we\u0027ll have to wait on fragment before any write\n       mLastStage |\u003d wgpu::ShaderStage::Fragment;\n     }\n   }\n }\n```",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
