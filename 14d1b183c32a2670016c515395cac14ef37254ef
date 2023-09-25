@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0fc2267_2f78b93b",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2766,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T11:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73f1c257_93938da1",
+      "range": {
+        "startLine": 2766,
+        "startChar": 86,
+        "endLine": 2766,
+        "endChar": 112
+      },
+      "revId": "14d1b183c32a2670016c515395cac14ef37254ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d931cd43_f59435a5",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13cd8765_66e029ee",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T11:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d931cd43_f59435a5",
+      "revId": "14d1b183c32a2670016c515395cac14ef37254ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ddaefbed_f0aecf8f",
@@ -54,6 +96,24 @@
       "writtenOn": "2023-09-25T08:58:50Z",
       "side": 1,
       "message": "nit: beginningOfPassWriteIndex (%u) is equal to endOfPassWriteIndex (%u) ... so that users have more info in case of an error.",
+      "revId": "14d1b183c32a2670016c515395cac14ef37254ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc21ebd7_8f32805b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T11:46:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddaefbed_f0aecf8f",
       "revId": "14d1b183c32a2670016c515395cac14ef37254ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
