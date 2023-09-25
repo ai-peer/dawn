@@ -93,9 +93,10 @@ MaybeError ValidateTimestampQuery(const DeviceBase* device,
     DAWN_INVALID_IF(querySet->GetQueryType() != wgpu::QueryType::Timestamp,
                     "The type of %s is not %s.", querySet, wgpu::QueryType::Timestamp);
 
-    DAWN_INVALID_IF(queryIndex >= querySet->GetQueryCount(),
-                    "Query index (%u) exceeds the number of queries (%u) in %s.", queryIndex,
-                    querySet->GetQueryCount(), querySet);
+    DAWN_INVALID_IF(
+        queryIndex != wgpu::kQueryIndexUndefined && queryIndex >= querySet->GetQueryCount(),
+        "Query index (%u) exceeds the number of queries (%u) in %s.", queryIndex,
+        querySet->GetQueryCount(), querySet);
 
     return {};
 }

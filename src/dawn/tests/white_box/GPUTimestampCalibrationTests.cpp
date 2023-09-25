@@ -187,13 +187,8 @@ class GPUTimestampCalibrationTests : public DawnTestWithParams<GPUTimestampCalib
 
         switch (GetParam().mFeatureName) {
             case wgpu::FeatureName::TimestampQuery: {
-                std::vector<wgpu::RenderPassTimestampWrite> timestampWrites;
-                timestampWrites.push_back(
-                    {querySet, 0, wgpu::RenderPassTimestampLocation::Beginning});
-                timestampWrites.push_back({querySet, 1, wgpu::RenderPassTimestampLocation::End});
-
-                renderPass.renderPassInfo.timestampWriteCount = timestampWrites.size();
-                renderPass.renderPassInfo.timestampWrites = timestampWrites.data();
+                wgpu::RenderPassTimestampWrites timestampWrites = {querySet, 0, 1};
+                renderPass.renderPassInfo.timestampWrites = &timestampWrites;
 
                 wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass.renderPassInfo);
                 pass.SetPipeline(CreateRenderPipeline());
