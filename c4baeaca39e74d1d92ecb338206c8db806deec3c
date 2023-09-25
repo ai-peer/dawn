@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e0a1c8c_efab07ea",
+        "filename": "src/tint/lang/core/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T19:13:57Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "37aa22da_26e689b2",
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c6158e09_771d0389",
