@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73f1c257_93938da1",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2766,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:58:50Z",
+      "side": 1,
+      "message": "nit: QUERY_SET_INDEX_UNDEFINED",
+      "range": {
+        "startLine": 2766,
+        "startChar": 86,
+        "endLine": 2766,
+        "endChar": 112
+      },
+      "revId": "14d1b183c32a2670016c515395cac14ef37254ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d931cd43_f59435a5",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 615,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:58:50Z",
+      "side": 1,
+      "message": "nit: Both ... and ... are undefined. (to follow error message conventions.)",
+      "revId": "14d1b183c32a2670016c515395cac14ef37254ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddaefbed_f0aecf8f",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:58:50Z",
+      "side": 1,
+      "message": "nit: beginningOfPassWriteIndex (%u) is equal to endOfPassWriteIndex (%u) ... so that users have more info in case of an error.",
+      "revId": "14d1b183c32a2670016c515395cac14ef37254ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
