@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db48580f_d60dad5f",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3116,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T18:43:54Z",
+      "side": 1,
+      "message": "Test where it moves through a let?",
+      "revId": "e0b4724a799c3a7a953466951a5ae3046bbfe120",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
