@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4756401_d69b3d90",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "Allez!",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83924da3_ad62cdc8",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3635,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "u-nit: maybe \"query set index undefined\" to be very precise.",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd40eed1_692bf7b8",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "We\u0027re going to need the same changes for compute pass right?",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0e1774f_b022974b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 605,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "This is a comment that seems more historical than informative. We don\u0027t really need to explain the evolution of the code in the comments, only how it works right now because right now this comment would make the readers more confused for no gains in understanding. Can you remove it?",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e3bbb5b_7e560e04",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "In a follow-up can we change the definition of BeginRenderPassCmd to align with the API (so there is a single query set and two indices?) (ditto for compute)",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba298ea2_b538c29c",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "We shouldn\u0027t do this, because this validation method is used for other things, and would now allow the invalid kQueryIndexUndefined through. We should filter that special value earlier, only in places that are defined to allow undefined indices.",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b34af747_0dc2c463",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "Alternatively instead of a pointer, we could have it as a value with the default value \u003d {} and then check if any of the two indices in timestampWritesOnAnotherPass is not undefined.\n\n```\nbool hasOtherPass \u003d timestampWritesOnAnotherPass.beginningOfPassWriteIndex !\u003d wgpu::kQueryIndexUndefined || timestampWritesOnAnotherPass.bendOfPassWriteIndex !\u003d wgpu::kQueryIndexUndefined;\n```",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1eb69c06_bd6336c4",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 828,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "This test checks that timestamps increase, but here if a writeTimestamp index is specified then we have a hole in the query set that will have a zero. Instead we could do something like:\n\n\n```\n// Create query set and buffer with 4 entries all the time.\n\n\n   currentOffset \u003d 0;\n        if (timestampWrites.beginningOfPassWriteIndex !\u003d wgpu::kQueryIndexUndefined) {\n            encoder.ResolveQuerySet(timestampWrites.querySet,\n                                    timestampWrites.beginningOfPassWriteIndex, 1, destination, currentOffset);\n             currentOffset +\u003d kMinDestinationOffset;\n        }\n        if (timestampWrites.endOfPassWriteIndex !\u003d wgpu::kQueryIndexUndefined) {\n            encoder.ResolveQuerySet(timestampWrites.querySet, timestampWrites.endOfPassWriteIndex,\n                                    1, destination, currentOffset);\n             currentOffset +\u003d kMinDestinationOffset;\n        }\n\n        if (hasOtherPass) {\n            if (timestampWritesOnAnotherPass.beginningOfPassWriteIndex !\u003d\n                wgpu::kQueryIndexUndefined) {\n                encoder.ResolveQuerySet(timestampWritesOnAnotherPass.querySet,\n                                        timestampWritesOnAnotherPass.beginningOfPassWriteIndex, 1,\n                                        destination, currentOffset);\n                currentOffset +\u003d kMinDestinationOffset;\n            }\n            if (timestampWritesOnAnotherPass.endOfPassWriteIndex !\u003d wgpu::kQueryIndexUndefined) {\n                encoder.ResolveQuerySet(timestampWritesOnAnotherPass.querySet,\n                                        timestampWritesOnAnotherPass.endOfPassWriteIndex, 1,\n                                        destination, currentOffset);\n                currentOffset +\u003d kMinDestinationOffset;                     \n            }\n        }\n        \n        // submit\n        \n        entryCount \u003d currentOffset / kMinDestinationOffset;\n        \n        for(i \u003d 0 .. entryCount) {\n          expect ...\n        }\n```",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcea9446_4a5bfda4",
+        "filename": "src/dawn/tests/unittests/validation/QueryValidationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 473,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "Can we have a test for with undefined being valid for end or for beginning, and one that having both undefined is invalid?",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59989d9c_38877825",
+        "filename": "src/dawn/tests/white_box/GPUTimestampCalibrationTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T14:01:05Z",
+      "side": 1,
+      "message": "u-nit: slight preference for spelling out beginning/endOfPassWriteIndex for clarity of what 0 and 1 are. You could use C++ designated initializers for this I believe. Or just timestampWrites.foo \u003d blah.\n\nIn other tests that are more query focused and like data tables it\u0027s maybe ok, but here it would be more confusing.",
+      "revId": "03716dc2848544612c082b52f408f0787a79d176",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
