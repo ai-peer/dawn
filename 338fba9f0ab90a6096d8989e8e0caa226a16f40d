@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "84f5b284_e5fccdc4",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:25:46Z",
+      "side": 1,
+      "message": "This is the AST printer, not IR path.",
+      "parentUuid": "98b51fdc_ca790c99",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21de7382_551ae7bb",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-25T15:20:25Z",
       "side": 1,
       "message": "ditto, should be core",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "773fb404_fdfc47c8",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:25:46Z",
+      "side": 1,
+      "message": "This is the AST printer, not IR path.",
+      "parentUuid": "21de7382_551ae7bb",
       "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e143661d_116e9514",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:25:46Z",
+      "side": 1,
+      "message": "This is the AST printer, not IR path.",
+      "parentUuid": "8badbb5b_0f0fb372",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "308cd61c_fd1b689e",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b816815_963d5afb",
+        "filename": "src/tint/lang/spirv/reader/ast_lower/atomics.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:25:46Z",
+      "side": 1,
+      "message": "This is the AST printer, not IR path.",
+      "parentUuid": "308cd61c_fd1b689e",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8654953_7b809f72",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-09-25T15:20:25Z",
       "side": 1,
       "message": "ditto",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16c4fa01_8c3d8030",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/builder.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:25:46Z",
+      "side": 1,
+      "message": "This is the AST printer, not IR path.",
+      "parentUuid": "a8654953_7b809f72",
       "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -174,6 +264,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4a5a2aa_349e0ca1",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:25:46Z",
+      "side": 1,
+      "message": "Core IR -\u003e [raise] -\u003e WGSL IR -\u003e [printer] -\u003e WGSL.",
+      "parentUuid": "4f8608b3_201e8707",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "558e0ac8_d7420f6b",
@@ -187,6 +295,24 @@
       "writtenOn": "2023-09-25T15:20:25Z",
       "side": 1,
       "message": "These should be core not wgsl",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a59626d_7cfaae94",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:25:46Z",
+      "side": 1,
+      "message": "Ditto",
+      "parentUuid": "558e0ac8_d7420f6b",
       "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
