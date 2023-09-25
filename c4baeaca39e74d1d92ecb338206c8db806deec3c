@@ -1,0 +1,112 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a170535c_23d6ba45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T18:54:04Z",
+      "side": 1,
+      "message": "lgtm w/ nits.",
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4ca6647_53c6bfae",
+        "filename": "src/tint/lang/core/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T18:54:04Z",
+      "side": 1,
+      "message": "These were originally named to make it clear they were the `new_` values. Renaming them is fine, but then you should also rename `new_result` to be consistent.",
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6158e09_771d0389",
+        "filename": "src/tint/lang/core/ir/bitcast.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T18:54:04Z",
+      "side": 1,
+      "message": "```suggestion\n    auto* new_result \u003d ctx.Clone(Result());\n```",
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b617509a_0f04f66c",
+        "filename": "src/tint/lang/core/ir/exit_switch.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T18:54:04Z",
+      "side": 1,
+      "message": "```suggestion\n    auto* switch_ \u003d ctx.Remap(Switch());\n```",
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84c8b59b_f2d88951",
+        "filename": "src/tint/lang/core/ir/exit_switch.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T18:54:04Z",
+      "side": 1,
+      "message": "```suggestion\n    return ctx.ir.instructions.Create\u003cExitSwitch\u003e(switch_, args);\n```",
+      "range": {
+        "startLine": 38,
+        "startChar": 50,
+        "endLine": 38,
+        "endChar": 54
+      },
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4904b8a0_75bd85e8",
+        "filename": "src/tint/lang/core/ir/user_call.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T18:54:04Z",
+      "side": 1,
+      "message": "nit: result comes first in all other cases.",
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
