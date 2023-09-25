@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c9961f8_9f308d6e",
+        "filename": "src/tint/lang/wgsl/wgsl.def",
+        "patchSetId": 15
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T14:23:35Z",
+      "side": 1,
+      "message": "Why duplicate all of them instead of duplicating them if/when they deviate? This seems like a lot of duplication for little gain?",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
