@@ -16,6 +16,69 @@
       "message": "Can you have a look at this CL?\n\nFYI, the order of CLs is the following:\n\n153361: Add temporary timestamp queries CTS failures | https://dawn-review.googlesource.com/c/dawn/+/153361\n4889919: Disable timestampWrites temporarily | https://chromium-review.googlesource.com/c/chromium/src/+/4889919\n153320: Align timestampWrites with WebGPU | https://dawn-review.googlesource.com/c/dawn/+/153320\n4891709: Align timestampWrites with WebGPU spec | https://chromium-review.googlesource.com/c/chromium/src/+/4891709",
       "revId": "7c03cae83560f73e0558aa4b7f4383119f178f13",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e769427_3c542321",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T15:56:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "7c03cae83560f73e0558aa4b7f4383119f178f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64a28286_47c9ccdc",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T15:56:41Z",
+      "side": 1,
+      "message": "nit: ValidatePassTimestampWrites",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 34
+      },
+      "revId": "7c03cae83560f73e0558aa4b7f4383119f178f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8792130_a87c0120",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T15:56:41Z",
+      "side": 1,
+      "message": "nit: \"in %s\" makes it seems like the content in querySet is equal, when it\u0027s just the indices that are. I suggest just removing the \"in %s\"",
+      "range": {
+        "startLine": 131,
+        "startChar": 88,
+        "endLine": 131,
+        "endChar": 94
+      },
+      "revId": "7c03cae83560f73e0558aa4b7f4383119f178f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
