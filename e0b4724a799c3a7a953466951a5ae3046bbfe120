@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "97d4b616_e10789ad",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1181,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-25T18:44:25Z",
+      "side": 1,
+      "message": "Also `workgroup`.",
+      "revId": "e0b4724a799c3a7a953466951a5ae3046bbfe120",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db48580f_d60dad5f",
         "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program_test.cc",
         "patchSetId": 1
