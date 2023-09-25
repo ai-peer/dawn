@@ -98,6 +98,24 @@
       "parentUuid": "d1ec9bb3_0116f194",
       "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcc8b4af_05e8ba72",
+        "filename": "src/tint/lang/core/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-25T21:38:50Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c26ceff4_7347dc79",
+      "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
