@@ -33,6 +33,24 @@
       "message": "Note that this is O(N^2) in the number of pairs, since FindFullTextureSamplerPair() also loops over all pairs. If this proves problematic, it could be optimized in a number of ways.",
       "revId": "f545d661de96f804b9d0750cb8f489008b916689",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deb280bd_6d5902a6",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T11:13:01Z",
+      "side": 1,
+      "message": "Please can you add a small `NOTE:` comment here with this comment? Would just save a few brain cycles for someone who is looking at making optimizations.",
+      "parentUuid": "e1b7ea22_fd8e3268",
+      "revId": "f545d661de96f804b9d0750cb8f489008b916689",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
