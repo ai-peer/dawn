@@ -1620,6 +1620,18 @@ crbug.com/dawn/0000 [ win10 webgpu-adapter-default ] webgpu:web_platform,copyToT
 crbug.com/dawn/0000 [ win10 webgpu-adapter-default ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:* [ Failure ]
 
 ################################################################################
+# Temporary failures for timestamps queries captured at the beginning and end of
+# passes.
+################################################################################
+crbug.com/dawn/1800 webgpu:api,validation,encoding,beginComputePass:timestampWrites,invalid_query_set:querySetState="invalid" [ Failure ]
+crbug.com/dawn/1800 webgpu:api,validation,encoding,beginComputePass:timestampWrites,query_index: [ Failure ]
+crbug.com/dawn/1800 webgpu:api,validation,encoding,beginComputePass:timestampWrites,query_set_type:queryType="occlusion" [ Failure ]
+crbug.com/dawn/1800 webgpu:api,validation,encoding,beginComputePass:timestamp_query_set,device_mismatch: [ Failure ]
+crbug.com/dawn/1800 webgpu:api,validation,encoding,beginRenderPass:timestamp_query_set,device_mismatch: [ Failure ]
+crbug.com/dawn/1800 webgpu:api,validation,render_pass,render_pass_descriptor:timestampWrite,query_index: [ Failure ]
+crbug.com/dawn/1800 webgpu:api,validation,render_pass,render_pass_descriptor:timestampWrites,query_set_type:queryType="occlusion" [ Failure ]
+
+################################################################################
 # Manually added failures to facilitate roll. Please triage:
 ################################################################################
 crbug.com/dawn/0000 [ win10 ] webgpu:shader,validation,expression,call,builtin,atan2:values:stage="override";type="f32" [ Failure ]
