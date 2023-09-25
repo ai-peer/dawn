@@ -39,6 +39,23 @@
       },
       "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ec9bb3_0116f194",
+        "filename": "src/tint/lang/core/ir/transform/block_decorated_structs.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-25T20:33:55Z",
+      "side": 1,
+      "message": "Nit: I\u0027d suggest that most of these checks could actually just be removed altogether now.",
+      "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
