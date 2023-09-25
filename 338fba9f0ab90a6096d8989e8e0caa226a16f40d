@@ -177,6 +177,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c499bd73_11afacc9",
+        "filename": "src/tint/lang/spirv/reader/ast_lower/atomics.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:38:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "4bbe7dc4_ba2b62c6",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a8654953_7b809f72",
@@ -350,6 +368,24 @@
       "side": 1,
       "message": "Core IR -\u003e `[raise]` -\u003e WGSL IR -\u003e `[ir-to-program]` Program -\u003e `[printer]` -\u003e WGSL.",
       "parentUuid": "5c4d1a37_cb532b8f",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d49d14e_3b679814",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T15:38:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "08f2b95f_d479e790",
       "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
