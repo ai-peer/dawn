@@ -51,6 +51,24 @@
       "parentUuid": "e1b7ea22_fd8e3268",
       "revId": "f545d661de96f804b9d0750cb8f489008b916689",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e128a782_3c10683f",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-09-25T14:49:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deb280bd_6d5902a6",
+      "revId": "f545d661de96f804b9d0750cb8f489008b916689",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
