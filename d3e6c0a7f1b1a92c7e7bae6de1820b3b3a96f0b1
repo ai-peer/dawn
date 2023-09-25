@@ -16,6 +16,40 @@
       "message": "See Chromium CL that will land after this: https://chromium-review.googlesource.com/c/chromium/src/+/4886244",
       "revId": "d3e6c0a7f1b1a92c7e7bae6de1820b3b3a96f0b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7574243_7312627b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:16:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d3e6c0a7f1b1a92c7e7bae6de1820b3b3a96f0b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ccac2e_5c9c1cf5",
+        "filename": "include/dawn/platform/DawnPlatform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:16:22Z",
+      "side": 1,
+      "message": "u-nit: no need for the k prefix for enum classes.",
+      "revId": "d3e6c0a7f1b1a92c7e7bae6de1820b3b3a96f0b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
