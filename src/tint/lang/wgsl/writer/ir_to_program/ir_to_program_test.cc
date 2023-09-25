@@ -3096,5 +3096,48 @@ fn f() {
 )");
 }
 
+////////////////////////////////////////////////////////////////////////////////
+// chromium_experimental_full_ptr_parameters
+////////////////////////////////////////////////////////////////////////////////
+TEST_F(IRToProgramTest, Enable_ChromiumExperimentalFullPtrParameters_PtrParameter) {
+    auto* fn = b.Function("f", ty.void_());
+    fn->SetParams({b.FunctionParam("p", ty.ptr<storage, i32>())});
+
+    b.Append(fn->Block(), [&] { b.Return(fn); });
+
+    EXPECT_WGSL(R"(
+enable chromium_experimental_full_ptr_parameters;
+
+fn f(p : ptr<storage, i32, read_write>) {
+}
+)");
+}
+
+TEST_F(IRToProgramTest, Enable_ChromiumExperimentalFullPtrParameters_SubObjectPtrArg) {
+    auto* x = b.Function("x", ty.void_());
+    x->SetParams({b.FunctionParam("p", ty.ptr<function, vec3<f32>>())});
+    b.Append(x->Block(), [&] { b.Return(x); });
+
+    auto* y = b.Function("y", ty.void_());
+    b.Append(y->Block(), [&] {
+        auto* m = b.Var<function, mat3x3<f32>>();
+        auto* v = b.Access(ty.ptr<function, vec3<f32>>(), m, 1_i);
+        b.Call(ty.void_(), x, v);
+        b.Return(y);
+    });
+
+    EXPECT_WGSL(R"(
+enable chromium_experimental_full_ptr_parameters;
+
+fn x(p : ptr<function, vec3<f32>>) {
+}
+
+fn y() {
+  var v : mat3x3<f32>;
+  x(&(v[1i]));
+}
+)");
+}
+
 }  // namespace
 }  // namespace tint::wgsl::writer
