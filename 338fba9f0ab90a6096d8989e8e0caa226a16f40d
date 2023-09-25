@@ -3,6 +3,91 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "98b51fdc_ca790c99",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "Why is the GLSL backend emitting WGSL builtins? Shouldn\u0027t this be core?",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21de7382_551ae7bb",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1176,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "ditto, should be core",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8badbb5b_0f0fb372",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "308cd61c_fd1b689e",
+        "filename": "src/tint/lang/spirv/reader/ast_lower/atomics.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8654953_7b809f72",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/builder.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2c9961f8_9f308d6e",
         "filename": "src/tint/lang/wgsl/wgsl.def",
         "patchSetId": 15
@@ -50,6 +135,58 @@
       "side": 1,
       "message": "Nor via the enums that are used by ast / sem / ast-transforms and ast-writers.",
       "parentUuid": "2bd999e1_f5f98d4a",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00950689_5aba4df8",
+        "filename": "src/tint/lang/wgsl/wgsl.def",
+        "patchSetId": 15
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "50cd1b94_1674f62d",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f8608b3_201e8707",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 582,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "This shouldn\u0027t be in ir_to_program as it should be a core builtin.",
+      "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "558e0ac8_d7420f6b",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 1147,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-25T15:20:25Z",
+      "side": 1,
+      "message": "These should be core not wgsl",
       "revId": "338fba9f0ab90a6096d8989e8e0caa226a16f40d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
