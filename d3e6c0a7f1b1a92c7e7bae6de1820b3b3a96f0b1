@@ -50,6 +50,24 @@
       "message": "u-nit: no need for the k prefix for enum classes.",
       "revId": "d3e6c0a7f1b1a92c7e7bae6de1820b3b3a96f0b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d603c1c2_ea51150d",
+        "filename": "include/dawn/platform/DawnPlatform.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-25T13:29:02Z",
+      "side": 1,
+      "message": "Going to keep as-is for now, as the variable matches the Feature variable in Chrome. In any case, this will eventually be removed once the Finch trial is over.",
+      "parentUuid": "a0ccac2e_5c9c1cf5",
+      "revId": "d3e6c0a7f1b1a92c7e7bae6de1820b3b3a96f0b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
