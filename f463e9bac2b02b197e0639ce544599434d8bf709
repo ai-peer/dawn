@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e06d8176_72091efd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-09-25T18:00:02Z",
+      "side": 1,
+      "message": "PTAL! Speculative fix for the linked issue because I don\u0027t have access to the devices in question, but at the very least it won\u0027t make anything worse.",
+      "revId": "f463e9bac2b02b197e0639ce544599434d8bf709",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
