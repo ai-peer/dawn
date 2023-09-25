@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "37aa22da_26e689b2",
+        "filename": "src/tint/lang/core/ir/access.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T19:09:16Z",
+      "side": 1,
+      "message": "I renamed them as we\u0027re not creating a new one here. It differentiates the things that are immediately cloned and those that are not.",
+      "parentUuid": "d4ca6647_53c6bfae",
+      "revId": "c4baeaca39e74d1d92ecb338206c8db806deec3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c6158e09_771d0389",
         "filename": "src/tint/lang/core/ir/bitcast.cc",
         "patchSetId": 1
