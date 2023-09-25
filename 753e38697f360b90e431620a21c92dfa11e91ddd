@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f9dd74d_6638e7fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:04:27Z",
+      "side": 1,
+      "message": "LGTM but it will need change with the new TrackedEvent mechanism in dawn::wire",
+      "revId": "753e38697f360b90e431620a21c92dfa11e91ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af7f819c_30f3ec40",
+        "filename": "dawn.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:04:27Z",
+      "side": 1,
+      "message": "nit: stray tab",
+      "revId": "753e38697f360b90e431620a21c92dfa11e91ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92d6dc40_d8f52bc0",
+        "filename": "dawn_wire.json",
+        "patchSetId": 17
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:04:27Z",
+      "side": 1,
+      "message": "Doesn\u0027t seem to be added in dawn.json?",
+      "revId": "753e38697f360b90e431620a21c92dfa11e91ddd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
