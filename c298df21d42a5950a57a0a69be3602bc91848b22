@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "921a627b_490fc660",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003291
+      },
+      "writtenOn": "2023-09-25T14:12:24Z",
+      "side": 1,
+      "message": "Relanding DawnLPM for continuous ClusterFuzz fuzzing.\n\nThe original CL got reverted due to two bugs which have now been fixed:\nhttps://dawn-review.googlesource.com/c/dawn/+/152500\nhttps://dawn-review.googlesource.com/c/dawn/+/152562",
+      "revId": "c298df21d42a5950a57a0a69be3602bc91848b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
