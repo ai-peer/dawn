@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68e2317d_3fbd5b3e",
+        "filename": "src/tint/lang/core/ir/module.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-25T20:30:56Z",
+      "side": 1,
+      "message": "Please either keep the `\u003d nullptr` or make this `Block* const root_block;`",
+      "range": {
+        "startLine": 100,
+        "startChar": 21,
+        "endLine": 100,
+        "endChar": 22
+      },
+      "revId": "4d94c0d7aee7695898fbd6e15e830319ecc76f3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
