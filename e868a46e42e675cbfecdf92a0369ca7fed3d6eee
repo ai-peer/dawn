@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a26ce9_04540a8f",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:02:12Z",
+      "side": 1,
+      "message": "u-nit: !\u003d nullptr here and below.",
+      "revId": "e868a46e42e675cbfecdf92a0369ca7fed3d6eee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c60f5d6_dc7b6adb",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:02:12Z",
+      "side": 1,
+      "message": "u-nit: maybe !\u003d nullptr.",
+      "range": {
+        "startLine": 182,
+        "startChar": 26,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "e868a46e42e675cbfecdf92a0369ca7fed3d6eee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "353c4b4e_3fdc708d",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:02:12Z",
+      "side": 1,
+      "message": "If this can be done only once, we could force it to be used on an rvalue reference by adding \u0026\u0026 at the end of the prototype. This way we need to do std::move(event).Complete() which clearly shows it being consumed.\n\n```\nvoid Complete(EventCompletionType type) \u0026\u0026;\n```",
+      "revId": "e868a46e42e675cbfecdf92a0369ca7fed3d6eee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f6a0ff1_4a883ed5",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-25T08:02:12Z",
+      "side": 1,
+      "message": "Passing userdatas around like this seems error prone, adds extra allocations and would need to be manually done for each type of future. What about doing something more like dawn::native where the TrackedEvent is refcounted and extended by child classes. Then here we would take a ref to the event for the RequestTracker lambda to set the userdata of the tracked event, then define an OnWorkDoneEvent somewhere in this file.\n\nIt would also have the benefit to make the pattern of dawn::native and dawn::wire match a bit more. (of course this would change a bunch of the follow-up CLs as well. Sorry about that.)",
+      "revId": "e868a46e42e675cbfecdf92a0369ca7fed3d6eee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
