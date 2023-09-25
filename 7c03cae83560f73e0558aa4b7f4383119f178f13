@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e868353_1ecd9feb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T15:52:30Z",
+      "side": 1,
+      "message": "Can you have a look at this CL?\n\nFYI, the order of CLs is the following:\n\n153361: Add temporary timestamp queries CTS failures | https://dawn-review.googlesource.com/c/dawn/+/153361\n4889919: Disable timestampWrites temporarily | https://chromium-review.googlesource.com/c/chromium/src/+/4889919\n153320: Align timestampWrites with WebGPU | https://dawn-review.googlesource.com/c/dawn/+/153320\n4891709: Align timestampWrites with WebGPU spec | https://chromium-review.googlesource.com/c/chromium/src/+/4891709",
+      "revId": "7c03cae83560f73e0558aa4b7f4383119f178f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
