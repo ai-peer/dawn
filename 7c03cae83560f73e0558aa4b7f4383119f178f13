@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd0ee9e6_9e0852cc",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T18:28:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64a28286_47c9ccdc",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 34
+      },
+      "revId": "7c03cae83560f73e0558aa4b7f4383119f178f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b8792130_a87c0120",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-09-25T15:56:41Z",
       "side": 1,
       "message": "nit: \"in %s\" makes it seems like the content in querySet is equal, when it\u0027s just the indices that are. I suggest just removing the \"in %s\"",
+      "range": {
+        "startLine": 131,
+        "startChar": 88,
+        "endLine": 131,
+        "endChar": 94
+      },
+      "revId": "7c03cae83560f73e0558aa4b7f4383119f178f13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42b7c4ea_5bb0668f",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-25T18:28:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8792130_a87c0120",
       "range": {
         "startLine": 131,
         "startChar": 88,
