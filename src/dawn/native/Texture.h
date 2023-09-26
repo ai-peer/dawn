@@ -189,6 +189,7 @@ class TextureViewBase : public ApiObjectBase {
 
     Aspect GetAspects() const;
     const Format& GetFormat() const;
+    // Extent3D GetSize() const;
     wgpu::TextureViewDimension GetDimension() const;
     uint32_t GetBaseMipLevel() const;
     uint32_t GetLevelCount() const;

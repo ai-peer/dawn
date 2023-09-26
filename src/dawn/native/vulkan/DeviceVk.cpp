@@ -907,13 +907,6 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
                       textureDescriptor)) {
         return nullptr;
     }
-    if (GetValidInternalFormat(textureDescriptor->format).IsMultiPlanar() &&
-        !descriptor->isInitialized) {
-        bool consumed = ConsumedError(DAWN_VALIDATION_ERROR(
-            "External textures with multiplanar formats must be initialized."));
-        DAWN_UNUSED(consumed);
-        return nullptr;
-    }
 
     VkDeviceMemory allocation = VK_NULL_HANDLE;
     std::vector<VkSemaphore> waitSemaphores;
