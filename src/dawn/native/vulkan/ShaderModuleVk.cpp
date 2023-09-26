@@ -14,6 +14,7 @@
 
 #include "dawn/native/vulkan/ShaderModuleVk.h"
 
+#include <algorithm>
 #include <map>
 #include <string>
 #include <vector>
@@ -217,9 +218,15 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     const BindingInfoArray& moduleBindingInfo =
         GetEntryPoint(programmableStage.entryPoint.c_str()).bindings;
 
+    // Store the max binding number so we can put the multiplanar values after it. This just gets
+    // the max over all groups instead of doing it per group, the value will be remapped down to the
+    // correct position by the remapper.
+    uint32_t maxSrcBinding = 0;
+
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
         const auto& groupBindingInfo = moduleBindingInfo[group];
+
         for (const auto& [binding, _] : groupBindingInfo) {
             BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
             BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
@@ -227,11 +234,34 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
             BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
                                          static_cast<uint32_t>(bindingIndex)};
+
+            maxSrcBinding = std::max(maxSrcBinding, srcBindingPoint.binding);
+
             if (srcBindingPoint != dstBindingPoint) {
                 bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
             }
         }
     }
+
+    // If there is already a binding where we want to put external texture information, then we need
+    // to put the external texture information after the last binding and it will remap to the
+    // correct position.
+    auto updateBinding = [&bindingRemapper, &maxSrcBinding](uint32_t group,
+                                                            uint32_t binding) -> BindingPoint {
+        BindingPoint bp{group, binding};
+        // If this value wasn't remapped then we can just use the binding value without having to
+        // replace it.
+        if (bindingRemapper.binding_points.find(bp) == bindingRemapper.binding_points.end()) {
+            return bp;
+        }
+
+        // The value is in the remapper, which means the desired binding value is in use, so make a
+        // new binding value to use for the item, and insert a remapping to go from the made up
+        // value to the correct binding value.
+        BindingPoint new_binding = {group, ++maxSrcBinding};
+        bindingRemapper.binding_points[new_binding] = bp;
+        return new_binding;
+    };
 
     // Transform external textures into the binding locations specified in the bgl
     // TODO(dawn:1082): Replace this block with BuildExternalTextureTransformBindings.
@@ -239,14 +269,19 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutInternalBase* bgl = layout->GetBindGroupLayout(i);
 
-        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
-            externalTextureOptions
-                .bindings_map[{static_cast<uint32_t>(i),
-                               static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))}] = {
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))},
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))}};
+        for (const auto& [binding, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
+            // Plane0 is put at the original binding value as the remapper handles moving it from
+            // the original value to the actual plane0 binding value.
+            BindingPoint plane0 = {static_cast<uint32_t>(i), static_cast<uint32_t>(binding)};
+
+            BindingPoint plane1 =
+                updateBinding(static_cast<uint32_t>(i),
+                              static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1)));
+            BindingPoint metadata =
+                updateBinding(static_cast<uint32_t>(i),
+                              static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params)));
+
+            externalTextureOptions.bindings_map[plane0] = {plane1, metadata};
         }
     }
 

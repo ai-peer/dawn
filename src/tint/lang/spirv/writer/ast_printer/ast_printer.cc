@@ -93,17 +93,15 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
         data.Add<ast::transform::Robustness::Config>(config);
     }
 
-    // BindingRemapper must come before MultiplanarExternalTexture. Note, this is flipped to the
-    // other generators which run Multiplanar first and then binding remapper.
-    manager.Add<ast::transform::BindingRemapper>();
-    data.Add<ast::transform::BindingRemapper::Remappings>(
-        options.binding_remapper_options.binding_points,
-        std::unordered_map<BindingPoint, core::Access>{}, /* allow_collisions */ false);
-
     // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
     data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
         options.external_texture_options.bindings_map);
     manager.Add<ast::transform::MultiplanarExternalTexture>();
+
+    manager.Add<ast::transform::BindingRemapper>();
+    data.Add<ast::transform::BindingRemapper::Remappings>(
+        options.binding_remapper_options.binding_points,
+        std::unordered_map<BindingPoint, core::Access>{}, /* allow_collisions */ false);
 
     {  // Builtin polyfills
         // BuiltinPolyfill must come before DirectVariableAccess, due to the use of pointer
