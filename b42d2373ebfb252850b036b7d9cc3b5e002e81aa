@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86adf12e_ef9e6dd7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-09-26T02:27:47Z",
+      "side": 1,
+      "message": "Hi Corentin,\n\nAre you still working on this CL?",
+      "revId": "b42d2373ebfb252850b036b7d9cc3b5e002e81aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
