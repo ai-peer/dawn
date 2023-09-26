@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89756a8b_0e4b1d3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-26T18:10:23Z",
+      "side": 1,
+      "message": "The changes look fine, but it looks like we might need to split the changes up a bit to make the chromium side happy since some of these look like breaking changes.\n\nHistorically I\u0027ve used macros to accomplish this:\n\n- Land Chromium fix, i.e. https://chromium-review.googlesource.com/c/chromium/src/+/4740656\n\n- Land Dawn changes, i.e. https://dawn-review.googlesource.com/c/dawn/+/144207\n\n- Land Chromium cleanup, i.e. https://chromium-review.googlesource.com/c/chromium/src/+/4740397\n\n- Finally land Dawn cleanup, i.e. https://dawn-review.googlesource.com/c/dawn/+/144205",
+      "revId": "f507a0dec0a88e84c293d290bcbb9c881b982751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
