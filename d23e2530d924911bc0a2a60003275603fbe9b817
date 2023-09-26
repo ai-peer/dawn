@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44167454_4d1ca70e",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-26T15:35:34Z",
+      "side": 1,
+      "message": "As discussed, that shouldn\u0027t be an issue. `AccessChainFor` is only called for pointer arguments. Given that you cannot get a pointer to a vector element, this shouldn\u0027t be needed.",
+      "parentUuid": "ac0d52e6_1991f8e0",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54248d1c_5687ebc3",
