@@ -18,6 +18,7 @@
 #include <cstring>
 #include <utility>
 #include <vector>
+#include <iostream>
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/FutureUtils.h"
@@ -326,6 +327,10 @@ void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSeri
     // If the task depends on a serial which is not submitted yet, force a flush.
     if (serial > GetLastSubmittedCommandSerial()) {
         ForceEventualFlushOfCommands();
+    }
+
+    if (serial > GetScheduledWorkDoneSerial()) {
+        std::cerr << "EEEE serial=" << (unsigned long long)serial << "  GetScheduledWorkDoneSerial()=" << (unsigned long long)GetScheduledWorkDoneSerial()  << std::endl;
     }
 
     DAWN_ASSERT(serial <= GetScheduledWorkDoneSerial());
