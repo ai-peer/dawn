@@ -268,8 +268,14 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // TODO(dawn:1705): make sure the map call is not blocked by the GPU operations.
     DAWN_TRY(MapInternal());
 
+    // EnsureDataInitialized() will use CPU to initialized the mapped buffer.
     CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
     DAWN_TRY(EnsureDataInitialized(commandContext));
+
+    // MapInternal() will call ID3D11DeviceContext::Map() which forces submitting pending tasks to
+    // GPU and wait and synchronization with CPU, so call ExecuteCommandList() which will reset
+    // commandContext to avoid unnecessary synchronization in further TickImpl() call.
+    DAWN_TRY(commandContext->ExecuteCommandList(ToBackend(GetDevice())));
 
     return {};
 }
