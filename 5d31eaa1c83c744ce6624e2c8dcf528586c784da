@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c1baa21_b8cf2ef1",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "Yes, this seems unnecessary.",
+      "parentUuid": "9eeaf3dd_11084146",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cff7e98a_1c492546",
         "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
         "patchSetId": 2
@@ -105,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58adcead_aa2d25e5",
+        "filename": "src/dawn/native/PassResourceUsage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "Will do. The main thing I can think of is merging these into one `u32` to avoid a bigger `std::map`, but could get messy.",
+      "parentUuid": "f9543397_cdc2b050",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b436133_f73e9f97",
         "filename": "src/dawn/native/PassResourceUsageTracker.h",
         "patchSetId": 2
@@ -116,6 +152,24 @@
       "writtenOn": "2023-09-25T16:37:37Z",
       "side": 1,
       "message": "AFAIK the shader stages are only useful for bindings from bindgroups so we should be able either remove them from the API of `SyncScopeUsageTracker` or default them to `None`. The one case in `IndirectDrawValidation.cpp` seems like it might not be needed. This would simplify users of `SyncScopeUsageTracker` a bit.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ed832a0_046a869c",
+        "filename": "src/dawn/native/PassResourceUsageTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "I initially used a `None` default value, but there were changes to `AddBindGroup` to enable write-only storage textures which didn\u0027t cause git conflicts or compilation errors but would cause synchronization issues (which might not be caught in tests since they\u0027re cache/timing issues). I caught them when rebasing (due to git conflicts in `TextureVk.cpp`) but removed the default value to be safe, in case anyone else is writing code using the old API. I wouldn\u0027t mind adding it back for convenience but we need to be careful when merging (and when reviewing any changes after the merge).\n\nI considered adding an assert when calling these methods with a usage that implies a shader stage but `shaderStages` is `None`. But I don\u0027t think that\u0027s valid as users can create bind groups with `visibility\u003d0` (pointless but legal).",
+      "parentUuid": "5b436133_f73e9f97",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -145,6 +199,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "72af6b72_5a342f8a",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "I don\u0027t mind that, will do.",
+      "parentUuid": "a52a8b83_144e514b",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82f985f0_bda4a8c2",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 2
@@ -156,6 +234,24 @@
       "writtenOn": "2023-09-25T16:37:37Z",
       "side": 1,
       "message": "I wonder if we could fold this rule under the skipping of readonly barrier rule. On initialization we would set mReadStage and mReadUsages to all the values, and then they should never change?",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7c5a793_d7894575",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 396,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "They could still change (be cleared) due to `MapWrite`.",
+      "parentUuid": "82f985f0_bda4a8c2",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -179,6 +275,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b66fdb5a_484e61dd",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "This will be skipped for upload buffers. Internal upload buffers for `queue.writeBuffer` are skipped as `TransitionUsage` is never called (see `CopyFromStagingToBufferImpl` in `DeviceVk.cpp`).\n\nFor upload buffers created by the user, any buffer with `MapWrite` usage can only be combined with `CopySrc`. So the buffer will have no GPU write usages, and we will skip synchronization based on the previous `if`.",
+      "parentUuid": "d4dd3275_1e164cdd",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1eaf6fbb_a27094d9",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 2
@@ -190,6 +304,24 @@
       "writtenOn": "2023-09-25T16:37:37Z",
       "side": 1,
       "message": "This seems unnecessary given it is done below and doesn\u0027t change the result of the next if.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "96394a77_8f75210f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "It changes `shaderStage` and `mReadShaderStages` so it can change whether the next `if` is taken. Eg. if a compute pass writes to a buffer, then a render pass reads the buffer in the vertex stage, a second compute pass which writes unrelated data, then a second render pass reads the buffer in the fragment stage.\n\nWithout this logic, this will result in a COMPUTE-\u003eVERTEX barrier before the first render pass and a COMPUTE-\u003eFRAGMENT barrier before the second render pass, unnecessarily blocking the second compute pass from executing in parallel with the second render pass\u0027 fragment work.\n\nWith this logic we will skip the second barrier, keeping only the COMPUTE-\u003eVERTEX barrier before the first render pass.\n\nThough this is a very specific scenario (applies to transfer as well, but still needs compute/transfer-\u003erender pass (vertex)-\u003ecompute/transfer-\u003erender pass (fragment) to trigger it, which is not a common case (but could occur when eg. micro-patching a GPU scene). Maybe it\u0027s not worth the extra `if` in what is likely a hot path on CPU.",
+      "parentUuid": "1eaf6fbb_a27094d9",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -231,6 +363,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5d13ed8c_61e6009a",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "Considering only one last usage (or multiple in terms of read) can work but is a different strategy for handling read after read after write cases, and if you want to do it optimally I\u0027m not sure it\u0027s simpler.\n\nEg. consider compute (write) -\u003e fragment (read) -\u003e vertex (read) -\u003e compute (read) -\u003e transfer (read). This would be the worst pathological case (technically you could probably also get an indirect usage in there somewhere).\n\n1st use: `usage \u003d Storage`, `Stage \u003d Compute`. `mLastUsage \u003d None`, `mLastStage \u003d None`.\nNo barrier needed, but set `mLastUsage` and `mLastStage`.\n\n2nd use: `usage \u003d Uniform`, `stage \u003d Fragment`. `mLastUsage \u003d Storage`, `mLastStage \u003d Compute`.\nInsert a Compute -\u003e Fragment barrier. Since we\u0027re going from write to read usage we set `mLastUsage` and `mLastStage` instead of adding to them.\n\n3rd use: `usage \u003d Uniform`, `stage \u003d Fragment`. `mLastUsage \u003d Uniform`, `mLastStage \u003d Fragment`.\nThe write from the compute job is not visible in Vertex so we need to make it visible. We no longer know that the last write was in Compute so we\u0027ll insert a Fragment -\u003e Vertex barrier, which will take care of the Compute -\u003e Vertex dependency indirectly since Fragment has already waited for the write.\n\n4th use: `usage \u003d Uniform`, `stage \u003d Compute`. `mLastUsage \u003d Uniform`, `mLastStage \u003d Vertex | Fragment`.\nWe insert a Vertex | Fragment -\u003e Compute barrier.\n\n5th use: `usage \u003d CopySrc`, `stage \u003d None`. `mLastUsage \u003d Uniform`, `mLastStage \u003d Vertex | Fragment | Compute`.\nWe insert a Vertex | Fragment | Compute -\u003e Transfer barrier.\n\nWe can optimize this. While we need each barrier, we can optimize the source stages. These are read-\u003eread barriers so we don\u0027t actually need to wait for Vertex | Fragment | Compute. We just need to wait for something that we know has waited for the last write. So instead of waiting for all stages, pick one. Prioritize Vertex over Fragment since it\u0027s earlier in the pipeline. Otherwise pick arbitrarily (how to prioritize stages would depend on what content does).\n\nOf course this is a contrived case. It\u0027s unlikely we\u0027ll see something *that* bad.",
+      "parentUuid": "2132bde4_f1df2c04",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "361a5de2_f9efa7e6",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 2
@@ -265,6 +415,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f714c403_fafb4258",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "Yes, makes sense.",
+      "parentUuid": "25185ecd_5d35585e",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81ddac9d_ccb23733",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 2
@@ -276,6 +444,30 @@
       "writtenOn": "2023-09-26T11:48:19Z",
       "side": 1,
       "message": "nit: Prefer CamelCase for lambdas as well.",
+      "range": {
+        "startLine": 201,
+        "startChar": 9,
+        "endLine": 201,
+        "endChar": 27
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2dab64d_822e9f1b",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "Will do.",
+      "parentUuid": "81ddac9d_ccb23733",
       "range": {
         "startLine": 201,
         "startChar": 9,
@@ -305,6 +497,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bca8d2a7_142eccb0",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "The way TransitionUsageForPass currently works, in the case of images with multiple subresources, we don\u0027t know the final `dstStages` until we\u0027ve already added the image memory barriers to the vector. So it would need some refactoring. But refactoring that will affect the way external textures are handled. I\u0027ve avoided this, but I can add a TODO.",
+      "parentUuid": "8c4379c7_c384a02c",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0c8335c3_9aea19f9",
         "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
         "patchSetId": 2
@@ -322,6 +532,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b1a294c3_4a41daeb",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "That will make things a bit shorter. Will do.",
+      "parentUuid": "0c8335c3_9aea19f9",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c91401bd_a8e30321",
         "filename": "src/dawn/native/vulkan/TextureVk.cpp",
         "patchSetId": 2
@@ -333,6 +561,30 @@
       "writtenOn": "2023-09-26T11:48:19Z",
       "side": 1,
       "message": "I believe this could become:\n\n```\n if (usage \u0026 kTextureShaderUsages) {\n    switch over shader stages\n }\n```\n\nWritable storage textures are disallowed in the vertex stage by the BGL validation.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 5
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ca42dc8_06feb94c",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-09-26T13:50:56Z",
+      "side": 1,
+      "message": "Sure.",
+      "parentUuid": "c91401bd_a8e30321",
       "range": {
         "startLine": 129,
         "startChar": 0,
