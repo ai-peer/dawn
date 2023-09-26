@@ -209,6 +209,138 @@
       "message": "It seems that we model the buffer as either in 1 last write usage on a specific stage, or a combination of all the readonly usages on a variety of stages. This could lead to a bunch of simplification I believe:\n\n```\n if (readonly) {\n   if (mLastUsage \u0026 writableUsages) {\n     barrier-\u003esrcAccessMask \u003d VulkanAccessFlags(mLastUsage);\n     *srcStages |\u003d mLastAccessStage;\n     *dstStages |\u003d ...\n     mLastUsage \u003d kAllReadonlyUsage \u0026 GetUsage();\n     mLastStage \u003d stage;\n   } else {\n     if (vertex -\u003e fragment) {\n       // No barrier, but record that we\u0027ll have to wait on fragment before any write\n       mLastStage |\u003d wgpu::ShaderStage::Fragment;\n     }\n   }\n }\n```",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d7622f7_84c85658",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 437,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-26T11:48:19Z",
+      "side": 1,
+      "message": "Ah maybe not because of the non-shader usages.",
+      "parentUuid": "2132bde4_f1df2c04",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "361a5de2_f9efa7e6",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-26T11:48:19Z",
+      "side": 1,
+      "message": "Changes here seem easier as well and could be landed separately.",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25185ecd_5d35585e",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-26T11:48:19Z",
+      "side": 1,
+      "message": "Maybe draw indirect as well?",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81ddac9d_ccb23733",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-26T11:48:19Z",
+      "side": 1,
+      "message": "nit: Prefer CamelCase for lambdas as well.",
+      "range": {
+        "startLine": 201,
+        "startChar": 9,
+        "endLine": 201,
+        "endChar": 27
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c4379c7_c384a02c",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-26T11:48:19Z",
+      "side": 1,
+      "message": "nit: Can we have a TODO to have the barriers directly added in the correct place?",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8335c3_9aea19f9",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-26T11:48:19Z",
+      "side": 1,
+      "message": "I believe something like this works:\n\n```\nfor (auto\u0026 barriers : {vertexBarriers, nonVertexBarriers}) {\n   // ...\n}\n```",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c91401bd_a8e30321",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-26T11:48:19Z",
+      "side": 1,
+      "message": "I believe this could become:\n\n```\n if (usage \u0026 kTextureShaderUsages) {\n    switch over shader stages\n }\n```\n\nWritable storage textures are disallowed in the vertex stage by the BGL validation.",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 5
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
