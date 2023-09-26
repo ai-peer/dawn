@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "67f0d7ea_f783383a",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-26T15:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "685dda26_ee6ddedb",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2527e1b4_b2382bd1",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-09-26T14:18:08Z",
       "side": 1,
       "message": "What about `LoadVectorElement` and `StoreVectorElement`?",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3edca4cc_7bcc66e9",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-26T15:12:48Z",
+      "side": 1,
+      "message": "Can\u0027t currently get pointers to these?",
+      "parentUuid": "2527e1b4_b2382bd1",
       "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +111,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bded775_7481ee85",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-26T15:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54248d1c_5687ebc3",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "383bfc63_f51736ba",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-09-26T14:18:08Z",
       "side": 1,
       "message": "Wouldn\u0027t mind seeing a couple of tests that forward the pointers onto builtins, e.g. `arrayLength()` and `workgroupUniformLoad()`.",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7301a6_7231fb90",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_wgsl_test.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-26T15:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "383bfc63_f51736ba",
       "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +193,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9778e0ac_e7c08673",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_wgsl_test.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-26T15:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69f9b7cb_279c5d80",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 43
+      },
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "192770e9_1f348c93",
@@ -128,6 +230,24 @@
       "writtenOn": "2023-09-26T14:24:33Z",
       "side": 1,
       "message": "Why does this need to make a new diagnostics, can\u0027t it just move the one out from the failure?",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca10f9a9_ba0ff131",
+        "filename": "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 1431,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-09-26T15:12:48Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "192770e9_1f348c93",
       "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
