@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65e2308e_5914c34d",
+        "filename": "src/tint/lang/wgsl/writer/writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-26T14:01:56Z",
+      "side": 1,
+      "message": "All of the others are `raise::Raise`, why is WGSL different?",
+      "revId": "b9e15e003ebe03ea193db02d70f409eb59f815a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
