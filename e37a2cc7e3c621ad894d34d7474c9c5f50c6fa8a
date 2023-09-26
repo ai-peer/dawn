@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "29c90424_20f3c4af",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2413,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-26T14:03:34Z",
+      "side": 1,
+      "message": "Is `core` the wrong place for `intrinsic` to live? This makes me think you\u0027re using the core IR, when it\u0027s actually passing in the IR.",
+      "revId": "e37a2cc7e3c621ad894d34d7474c9c5f50c6fa8a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
