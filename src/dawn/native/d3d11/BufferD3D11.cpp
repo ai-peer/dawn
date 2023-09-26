@@ -268,8 +268,14 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // TODO(dawn:1705): make sure the map call is not blocked by the GPU operations.
     DAWN_TRY(MapInternal());
 
+    // EnsureDataInitialized() will use CPU to initialized the mapped buffer.
     CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
     DAWN_TRY(EnsureDataInitialized(commandContext));
+
+    // MapInternal() will call ID3D11DeviceContext::Map() which forces submitting pending tasks to
+    // GPU and wait them done, so call ExecuteCommandList() which will reset commandContext to avoid
+    // unnecessary synchronization in further TickImpl() call.
+    DAWN_TRY(commandContext->ExecuteCommandList(ToBackend(GetDevice())));
 
     return {};
 }
@@ -463,11 +469,15 @@ MaybeError Buffer::Write(CommandRecordingContext* commandContext,
                          size_t size) {
     DAWN_ASSERT(size != 0);
 
-    MarkUsedInPendingCommands();
     // Map the buffer if it is possible, so EnsureDataInitializedAsDestination() and WriteInternal()
     // can write the mapped memory directly.
     ScopedMap scopedMap;
     DAWN_TRY_ASSIGN(scopedMap, ScopedMap::Create(this));
+
+    // If the buffer cannot be mapped, we will use GPU to write the buffer.
+    if (!scopedMap.GetMappedData()) {
+        MarkUsedInPendingCommands();
+    }
 
     // For non-staging buffers, we can use UpdateSubresource to write the data.
     DAWN_TRY(EnsureDataInitializedAsDestination(commandContext, offset, size));
