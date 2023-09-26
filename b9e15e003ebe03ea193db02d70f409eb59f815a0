@@ -16,6 +16,24 @@
       "message": "All of the others are `raise::Raise`, why is WGSL different?",
       "revId": "b9e15e003ebe03ea193db02d70f409eb59f815a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8f78fdf9_33ddc3fc",
+        "filename": "src/tint/lang/wgsl/writer/writer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-26T14:03:01Z",
+      "side": 1,
+      "message": "The repetition isn\u0027t helpful. I\u0027ll fix the other languages as a followup.",
+      "parentUuid": "65e2308e_5914c34d",
+      "revId": "b9e15e003ebe03ea193db02d70f409eb59f815a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
