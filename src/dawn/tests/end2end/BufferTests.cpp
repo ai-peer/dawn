@@ -676,6 +676,8 @@ TEST_P(BufferMappingCallbackTests, UseTheBufferAndThenMap) {
 }
 
 TEST_P(BufferMappingCallbackTests, EmptySubmissionWriteAndThenMap) {
+    // D3D11 always synchronizes with GPU for Map() call.
+    DAWN_TEST_UNSUPPORTED_IF(IsD3D11());
     wgpu::Buffer buffer = CreateMapReadBuffer(4);
     MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, wgpu::kWholeMapSize);
     buffer.Unmap();
