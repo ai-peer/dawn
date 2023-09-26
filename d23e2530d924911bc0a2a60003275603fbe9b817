@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "183d7b90_aa9c82a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-26T14:18:08Z",
+      "side": 1,
+      "message": "Awesome work!",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "685dda26_ee6ddedb",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-26T14:18:08Z",
+      "side": 1,
+      "message": "Nit: builder",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2527e1b4_b2382bd1",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 461,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-26T14:18:08Z",
+      "side": 1,
+      "message": "What about `LoadVectorElement` and `StoreVectorElement`?",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54248d1c_5687ebc3",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.h",
+        "patchSetId": 29
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-26T14:18:08Z",
+      "side": 1,
+      "message": "Nit: Don\u0027t need `\u003cstring\u003e` or \".../diagnostic.h\" any more?",
+      "range": {
+        "startLine": 18,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "383bfc63_f51736ba",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_wgsl_test.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-26T14:18:08Z",
+      "side": 1,
+      "message": "Wouldn\u0027t mind seeing a couple of tests that forward the pointers onto builtins, e.g. `arrayLength()` and `workgroupUniformLoad()`.",
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69f9b7cb_279c5d80",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_wgsl_test.cc",
+        "patchSetId": 29
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-26T14:18:08Z",
+      "side": 1,
+      "message": "Nit: don\u0027t need these here",
+      "range": {
+        "startLine": 22,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 43
+      },
+      "revId": "d23e2530d924911bc0a2a60003275603fbe9b817",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
