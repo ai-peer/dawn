@@ -142,7 +142,7 @@ Ref<ComputePassEncoder> ComputePassEncoder::MakeError(DeviceBase* device,
         new ComputePassEncoder(device, commandEncoder, encodingContext, ObjectBase::kError, label));
 }
 
-void ComputePassEncoder::DestroyImpl() {
+void ComputePassEncoder::DestroyImpl() {  // CHECK THREADSAFE
     // Ensure that the pass has exited. This is done for passes only since validation requires
     // they exit before destruction while bundles do not.
     mEncodingContext->EnsurePassExited(this);

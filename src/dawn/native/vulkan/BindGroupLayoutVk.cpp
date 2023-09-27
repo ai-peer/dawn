@@ -148,7 +148,7 @@ BindGroupLayout::BindGroupLayout(DeviceBase* device, const BindGroupLayoutDescri
 
 BindGroupLayout::~BindGroupLayout() = default;
 
-void BindGroupLayout::DestroyImpl() {
+void BindGroupLayout::DestroyImpl() {  // CHECK THREADSAFE
     BindGroupLayoutInternalBase::DestroyImpl();
 
     Device* device = ToBackend(GetDevice());

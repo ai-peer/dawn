@@ -41,7 +41,7 @@ ResultOrError<Ref<SharedFence>> SharedFence::Create(
     return fence;
 }
 
-void SharedFence::DestroyImpl() {
+void SharedFence::DestroyImpl() {  // CHECK THREADSAFE
     ToBackend(GetDevice())->ReferenceUntilUnused(std::move(mFence));
     mFence = nullptr;
 }

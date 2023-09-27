@@ -77,7 +77,7 @@ DXGI_USAGE ToDXGIUsage(wgpu::TextureUsage usage) {
 
 SwapChain::~SwapChain() = default;
 
-void SwapChain::DestroyImpl() {
+void SwapChain::DestroyImpl() {  // CHECK THREADSAFE
     SwapChainBase::DestroyImpl();
     DetachFromSurface();
 }

@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_NATIVE_EXECUTIONQUEUE_H_
 #define SRC_DAWN_NATIVE_EXECUTIONQUEUE_H_
 
+#include <atomic>
+
 #include "dawn/native/Error.h"
 #include "dawn/native/IntegerTypes.h"
 
@@ -69,8 +71,8 @@ class ExecutionQueueBase {
     // mLastSubmittedSerial tracks the last submitted command serial.
     // During device removal, the serials could be artificially incremented
     // to make it appear as if commands have been compeleted.
-    ExecutionSerial mCompletedSerial = kBeginningOfGPUTime;
-    ExecutionSerial mLastSubmittedSerial = kBeginningOfGPUTime;
+    std::atomic<uint64_t> mCompletedSerial = static_cast<uint64_t>(kBeginningOfGPUTime);
+    std::atomic<uint64_t> mLastSubmittedSerial = static_cast<uint64_t>(kBeginningOfGPUTime);
 
     // Indicates whether the backend has pending commands to be submitted as soon as possible.
     virtual bool HasPendingCommands() const = 0;

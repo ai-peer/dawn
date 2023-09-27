@@ -112,7 +112,7 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
 
 Sampler::~Sampler() = default;
 
-void Sampler::DestroyImpl() {
+void Sampler::DestroyImpl() {  // CHECK THREADSAFE
     SamplerBase::DestroyImpl();
     if (mHandle != VK_NULL_HANDLE) {
         ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);

@@ -241,7 +241,14 @@ BufferBase::~BufferBase() {
     DAWN_ASSERT(mState == BufferState::Unmapped || mState == BufferState::Destroyed);
 }
 
-void BufferBase::DestroyImpl() {
+void BufferBase::DestroyImpl() {  // CHECK THREADSAFE
+    // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.
+    // - It may be called if the buffer is explicitly destroyed with APIDestroy.
+    //   This case is NOT thread-safe and needs proper synchronization with other
+    //   simultaneous uses of the buffer.
+    // - It may be called when the last ref to the buffer is dropped and the buffer
+    //   is implicitly destroyed. This case is thread-safe because there are no
+    //   other threads using the buffer since there are no other live refs.
     if (mState == BufferState::Mapped || mState == BufferState::PendingMap) {
         UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
     } else if (mState == BufferState::MappedAtCreation) {
