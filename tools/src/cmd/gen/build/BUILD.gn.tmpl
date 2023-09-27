@@ -14,6 +14,8 @@ if (tint_build_unittests) {
 {{- Eval "TargetIfNotEmpty" ($.Project.Target $ "cmd")}}
 {{- Eval "TargetIfNotEmpty" ($.Project.Target $ "test")}}
 {{- Eval "TargetIfNotEmpty" ($.Project.Target $ "test_cmd")}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "fuzz")}}
+{{- Eval "TargetIfNotEmpty" ($.Project.Target $ "fuzz_cmd")}}
 
 
 {{- /*
@@ -51,8 +53,13 @@ executable("{{$.Directory.Name}}") {
 {{- else if $.Kind.IsTest -}}
 tint_unittests_source_set("unittests") {
   testonly = true
+{{- else if $.Kind.IsFuzz -}}
+tint_fuzz_source_set("fuzz") {
+  testonly = true
 {{- else if $.Kind.IsTestCmd -}}
 test("{{$.Directory.Name}}") {
+{{- else if $.Kind.IsFuzzCmd -}}
+tint_fuzzer_test("{{$.Directory.Name}}") {
 {{- else }}{{Error $.Kind}}
 {{- end  }}
 {{- if $.OutputName }}
