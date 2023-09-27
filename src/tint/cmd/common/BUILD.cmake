@@ -26,6 +26,8 @@
 # Kind:      lib
 ################################################################################
 tint_add_target(tint_cmd_common lib
+  cmd/common/generate_bindings.cc
+  cmd/common/generate_bindings.h
   cmd/common/generate_external_texture_bindings.cc
   cmd/common/generate_external_texture_bindings.h
   cmd/common/helper.cc
@@ -73,6 +75,12 @@ if(TINT_BUILD_SPV_READER OR TINT_BUILD_SPV_WRITER)
     "spirv-tools"
   )
 endif(TINT_BUILD_SPV_READER OR TINT_BUILD_SPV_WRITER)
+
+if(TINT_BUILD_SPV_WRITER)
+  tint_target_add_dependencies(tint_cmd_common lib
+    tint_lang_spirv_writer_common
+  )
+endif(TINT_BUILD_SPV_WRITER)
 
 ################################################################################
 # Target:    tint_cmd_common_test

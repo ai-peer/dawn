@@ -31,6 +31,7 @@
 #endif  // TINT_BUILD_SPV_READER || TINT_BUILD_SPV_WRITER
 
 #include "src/tint/api/common/binding_point.h"
+#include "src/tint/cmd/common/generate_bindings.h"
 #include "src/tint/fuzzers/apply_substitute_overrides.h"
 #include "src/tint/lang/core/type/external_texture.h"
 #include "src/tint/lang/wgsl/ast/module.h"
@@ -242,10 +243,23 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
         return 0;
     }
 
+    switch (output_) {
+        case OutputFormat::kMSL:
+            break;
+        case OutputFormat::kHLSL:
+            break;
+        case OutputFormat::kSpv:
+#if TINT_BUILD_SPV_WRITER
+            options_spirv_.bindings = tint::cmd::GenerateSpirvBindings(program);
+#endif  // TINT_BUILD_SPV_WRITER
+            break;
+        case OutputFormat::kWGSL:
+            break;
+    }
+
     // For the generates which use MultiPlanar, make sure the configuration options are provided so
     // that the transformer will execute.
-    if (output_ == OutputFormat::kMSL || output_ == OutputFormat::kHLSL ||
-        output_ == OutputFormat::kSpv) {
+    if (output_ == OutputFormat::kMSL || output_ == OutputFormat::kHLSL) {
         // Gather external texture binding information
         // Collect next valid binding number per group
         std::unordered_map<uint32_t, uint32_t> group_to_next_binding_number;
@@ -282,7 +296,6 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
                 break;
             }
             case OutputFormat::kSpv: {
-                options_spirv_.external_texture_options.bindings_map = new_bindings_map;
                 break;
             }
             default:

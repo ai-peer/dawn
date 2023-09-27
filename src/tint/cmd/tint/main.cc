@@ -35,6 +35,7 @@
 
 #include "src/tint/api/options/pixel_local.h"
 #include "src/tint/api/tint.h"
+#include "src/tint/cmd/common/generate_bindings.h"
 #include "src/tint/cmd/common/generate_external_texture_bindings.h"
 #include "src/tint/cmd/common/helper.h"
 #include "src/tint/lang/core/ir/disassembler.h"
@@ -579,8 +580,7 @@ bool GenerateSpirv(const tint::Program& program, const Options& options) {
     tint::spirv::writer::Options gen_options;
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
-    gen_options.external_texture_options.bindings_map =
-        tint::cmd::GenerateExternalTextureBindings(program);
+    gen_options.bindings = tint::cmd::GenerateSpirvBindings(program);
     gen_options.use_tint_ir = options.use_ir;
 
     auto result = tint::spirv::writer::Generate(program, gen_options);

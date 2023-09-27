@@ -26,10 +26,12 @@ load("@bazel_skylib//lib:selects.bzl", "selects")
 cc_library(
   name = "common",
   srcs = [
+    "generate_bindings.cc",
     "generate_external_texture_bindings.cc",
     "helper.cc",
   ],
   hdrs = [
+    "generate_bindings.h",
     "generate_external_texture_bindings.h",
     "helper.h",
   ],
@@ -69,6 +71,11 @@ cc_library(
   }) + select({
     ":tint_build_spv_reader_or_tint_build_spv_writer": [
       "@spirv_tools",
+    ],
+    "//conditions:default": [],
+  }) + select({
+    ":tint_build_spv_writer": [
+      "//src/tint/lang/spirv/writer/common",
     ],
     "//conditions:default": [],
   }),
