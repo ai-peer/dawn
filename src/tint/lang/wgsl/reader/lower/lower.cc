@@ -18,6 +18,7 @@
 
 #include "src/tint/lang/core/builtin_fn.h"
 #include "src/tint/lang/core/ir/core_builtin_call.h"
+#include "src/tint/lang/core/ir/validator.h"
 #include "src/tint/lang/wgsl/builtin_fn.h"
 #include "src/tint/lang/wgsl/ir/builtin_call.h"
 
@@ -155,15 +156,26 @@ core::BuiltinFn Convert(wgsl::BuiltinFn fn) {
 }  // namespace
 
 Result<SuccessType> Lower(core::ir::Module& mod) {
+    if (auto res = core::ir::ValidateAndDumpIfNeeded(mod, "lowering from WGSL"); !res) {
+        return res.Failure();
+    }
+
+    // Collect builtins that need to be converted.
+    Vector<wgsl::ir::BuiltinCall*, 64> worklist;
     for (auto* inst : mod.instructions.Objects()) {
         if (auto* call = inst->As<wgsl::ir::BuiltinCall>()) {
-            Vector<core::ir::Value*, 8> args(call->Args());
-            auto* replacement = mod.instructions.Create<core::ir::CoreBuiltinCall>(
-                call->Result(), Convert(call->Func()), std::move(args));
-            call->ReplaceWith(replacement);
-            call->ClearResults();
-            call->Destroy();
+            worklist.Push(call);
         }
+    }
+
+    // Convert all of the builtins that we found.
+    for (auto* call : worklist) {
+        Vector<core::ir::Value*, 8> args(call->Args());
+        auto* replacement = mod.instructions.Create<core::ir::CoreBuiltinCall>(
+            call->Result(), Convert(call->Func()), std::move(args));
+        call->ReplaceWith(replacement);
+        call->ClearResults();
+        call->Destroy();
     }
     return Success;
 }
