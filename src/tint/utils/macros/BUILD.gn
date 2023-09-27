@@ -37,6 +37,7 @@ libtint_source_set("macros") {
     "foreach.h",
     "macros.cc",
     "scoped_assignment.h",
+    "static_init.h",
   ]
   deps = []
 }
