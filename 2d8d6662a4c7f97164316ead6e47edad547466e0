@@ -20,6 +20,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ddfc951_55f43205",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:45:20Z",
+      "side": 1,
+      "message": "nit: bglInternal",
+      "range": {
+        "startLine": 217,
+        "startChar": 43,
+        "endLine": 217,
+        "endChar": 55
+      },
+      "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44288946_a90472f9",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:45:20Z",
+      "side": 1,
+      "message": "nit: shaderBindingInfo (yes I know casing is different :/)",
+      "range": {
+        "startLine": 221,
+        "startChar": 35,
+        "endLine": 221,
+        "endChar": 54
+      },
+      "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8d716c46_0824de8f",
         "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 3
@@ -36,6 +82,53 @@
         "startChar": 12,
         "endLine": 231,
         "endChar": 86
+      },
+      "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c586ebe_0be46558",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:45:20Z",
+      "side": 1,
+      "message": "+1 the switch on `info.bindingType` would have found that StorageTexture isn\u0027t handled.",
+      "parentUuid": "8d716c46_0824de8f",
+      "range": {
+        "startLine": 231,
+        "startChar": 12,
+        "endLine": 231,
+        "endChar": 86
+      },
+      "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd27f6d2_31e3411b",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:45:20Z",
+      "side": 1,
+      "message": "This options struct could be build outside of the cache func and passed directly in SPIRV_COMPILATION_REQUEST_MEMBERS for even less copying!!!",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 46
       },
       "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
@@ -123,6 +216,23 @@
         "endLine": 26,
         "endChar": 39
       },
+      "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "102f2d20_56dfdbae",
+        "filename": "src/tint/lang/spirv/writer/common/options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:45:20Z",
+      "side": 1,
+      "message": "We separate storage and uniform buffers, but what about sampled and storage textures?",
       "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
