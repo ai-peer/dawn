@@ -142,7 +142,7 @@ MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     mSamplerHeapCache = std::make_unique<SamplerHeapCache>(this);
 
     mResidencyManager = std::make_unique<ResidencyManager>(this);
-    mResourceAllocatorManager = std::make_unique<ResourceAllocatorManager>(this);
+    mResourceAllocatorManager = std::make_unique<MutexProtected<ResourceAllocatorManager>>(this);
 
     // ShaderVisibleDescriptorAllocators use the ResidencyManager and must be initialized after.
     DAWN_TRY_ASSIGN(
@@ -321,7 +321,7 @@ MaybeError Device::TickImpl() {
     (*mSamplerShaderVisibleDescriptorAllocator)->Tick(completedSerial);
     (*mRenderTargetViewAllocator)->Tick(completedSerial);
     (*mDepthStencilViewAllocator)->Tick(completedSerial);
-    mUsedComObjectRefs.ClearUpTo(completedSerial);
+    mUsedComObjectRefs->ClearUpTo(completedSerial);
 
     if (mPendingCommands.IsOpen() && mPendingCommands.NeedsSubmit()) {
         DAWN_TRY(ExecutePendingCommandContext());
@@ -374,7 +374,7 @@ ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
 }
 
 void Device::ReferenceUntilUnused(ComPtr<IUnknown> object) {
-    mUsedComObjectRefs.Enqueue(object, GetPendingCommandSerial());
+    mUsedComObjectRefs->Enqueue(std::move(object), GetPendingCommandSerial());
 }
 
 bool Device::HasPendingCommands() const {
@@ -741,8 +741,16 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
     AppendDebugLayerMessagesToError(infoQueue.Get(), totalErrors, error);
 }
 
-void Device::DestroyImpl() {
+void Device::DestroyImpl() {  // CHECK THREADSAFE
     DAWN_ASSERT(GetState() == State::Disconnected);
+
+    // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.
+    // - It may be called if the device is explicitly destroyed with APIDestroy.
+    //   This case is NOT thread-safe and needs proper synchronization with other
+    //   simultaneous uses of the device.
+    // - It may be called when the last ref to the device is dropped and the device
+    //   is implicitly destroyed. This case is thread-safe because there are no
+    //   other threads using the device since there are no other live refs.
 
     Base::DestroyImpl();
 
@@ -761,9 +769,9 @@ void Device::DestroyImpl() {
     mResourceAllocatorManager.reset();
 
     // We need to handle clearing up com object refs that were enqeued after TickImpl
-    mUsedComObjectRefs.ClearUpTo(std::numeric_limits<ExecutionSerial>::max());
+    mUsedComObjectRefs->ClearUpTo(std::numeric_limits<ExecutionSerial>::max());
 
-    DAWN_ASSERT(mUsedComObjectRefs.Empty());
+    DAWN_ASSERT(mUsedComObjectRefs->Empty());
     DAWN_ASSERT(!mPendingCommands.IsOpen());
 
     // Now that we've cleared out pending work from the queue, we can safely release it and reclaim

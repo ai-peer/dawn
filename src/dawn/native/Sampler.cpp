@@ -94,7 +94,7 @@ SamplerBase::SamplerBase(DeviceBase* device, ObjectBase::ErrorTag tag, const cha
 
 SamplerBase::~SamplerBase() = default;
 
-void SamplerBase::DestroyImpl() {
+void SamplerBase::DestroyImpl() {  // CHECK THREADSAFE
     Uncache();
 }
 

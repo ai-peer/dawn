@@ -76,7 +76,7 @@ MaybeError PipelineLayout::Initialize() {
 
 PipelineLayout::~PipelineLayout() = default;
 
-void PipelineLayout::DestroyImpl() {
+void PipelineLayout::DestroyImpl() {  // CHECK THREADSAFE
     PipelineLayoutBase::DestroyImpl();
     if (mHandle != VK_NULL_HANDLE) {
         ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
