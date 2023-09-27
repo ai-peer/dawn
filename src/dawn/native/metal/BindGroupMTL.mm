@@ -23,7 +23,7 @@ BindGroup::BindGroup(Device* device, const BindGroupDescriptor* descriptor)
 
 BindGroup::~BindGroup() = default;
 
-void BindGroup::DestroyImpl() {
+void BindGroup::DestroyImpl() {  // CHECK THREADSAFE
     BindGroupBase::DestroyImpl();
     ToBackend(GetLayout())->DeallocateBindGroup(this);
 }

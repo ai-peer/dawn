@@ -238,7 +238,7 @@ QueueBase::QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* l
     : ApiObjectBase(device, tag, label) {}
 
 QueueBase::~QueueBase() {
-    DAWN_ASSERT(mTasksInFlight.Empty());
+    DAWN_ASSERT(mTasksInFlight->Empty());
 }
 
 void QueueBase::DestroyImpl() {}
@@ -336,7 +336,7 @@ void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSeri
         task->SetFinishedSerial(GetCompletedCommandSerial());
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
     } else {
-        mTasksInFlight.Enqueue(std::move(task), serial);
+        mTasksInFlight->Enqueue(std::move(task), serial);
     }
 }
 
@@ -346,7 +346,7 @@ void QueueBase::TrackTaskAfterEventualFlush(std::unique_ptr<TrackTaskCallback> t
 }
 
 void QueueBase::TrackPendingTask(std::unique_ptr<TrackTaskCallback> task) {
-    mTasksInFlight.Enqueue(std::move(task), GetPendingCommandSerial());
+    mTasksInFlight->Enqueue(std::move(task), GetPendingCommandSerial());
 }
 
 void QueueBase::Tick(ExecutionSerial finishedSerial) {
@@ -359,10 +359,10 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
                  uint64_t(finishedSerial));
 
     std::vector<std::unique_ptr<TrackTaskCallback>> tasks;
-    for (auto& task : mTasksInFlight.IterateUpTo(finishedSerial)) {
+    for (auto& task : mTasksInFlight->IterateUpTo(finishedSerial)) {
         tasks.push_back(std::move(task));
     }
-    mTasksInFlight.ClearUpTo(finishedSerial);
+    mTasksInFlight->ClearUpTo(finishedSerial);
 
     // Tasks' serials have passed. Move them to the callback task manager. They
     // are ready to be called.
@@ -373,11 +373,11 @@ void QueueBase::Tick(ExecutionSerial finishedSerial) {
 }
 
 void QueueBase::HandleDeviceLoss() {
-    for (auto& task : mTasksInFlight.IterateAll()) {
+    for (auto& task : mTasksInFlight->IterateAll()) {
         task->OnDeviceLoss();
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(std::move(task));
     }
-    mTasksInFlight.Clear();
+    mTasksInFlight->Clear();
 }
 
 void QueueBase::APIWriteBuffer(BufferBase* buffer,

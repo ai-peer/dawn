@@ -454,7 +454,7 @@ MaybeError RenderPipeline::Initialize() {
 
 RenderPipeline::~RenderPipeline() = default;
 
-void RenderPipeline::DestroyImpl() {
+void RenderPipeline::DestroyImpl() {  // CHECK THREADSAFE
     RenderPipelineBase::DestroyImpl();
     ToBackend(GetDevice())->ReferenceUntilUnused(mPipelineState);
 }
