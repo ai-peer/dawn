@@ -12,19 +12,24 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/wgsl/resolver/resolve.h"
-
-#include <utility>
-
-#include "src/tint/lang/wgsl/resolver/resolver.h"
 #include "src/tint/utils/macros/static_init.h"
 
-namespace tint::resolver {
+#include "gtest/gtest.h"
 
-Program Resolve(ProgramBuilder& builder) {
-    Resolver resolver(&builder);
-    resolver.Resolve();
-    return Program(std::move(builder));
+namespace tint {
+namespace {
+
+int global_var = 0;
+
+void SetGlobalVar(int i) {
+    global_var = i;
 }
 
-}  // namespace tint::resolver
+TINT_STATIC_INIT(SetGlobalVar(42));
+
+TEST(TestStaticInit, Global) {
+    EXPECT_EQ(global_var, 42);
+}
+
+}  // namespace
+}  // namespace tint
