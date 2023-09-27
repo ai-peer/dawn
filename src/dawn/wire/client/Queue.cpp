@@ -14,38 +14,35 @@
 
 #include "dawn/wire/client/Queue.h"
 
+#include <utility>
+
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/EventManager.h"
 
 namespace dawn::wire::client {
 namespace {
 
-struct WorkDoneEvent : public TrackedEvent {
+using WorkDoneEventBase =
+    TrackedEvent<EventType::WorkDone, WGPUQueueWorkDoneCallback, WGPUQueueWorkDoneStatus>;
+class WorkDoneEvent : public WorkDoneEventBase {
+  public:
     explicit WorkDoneEvent(const WGPUQueueWorkDoneCallbackInfo& callbackInfo)
-        : TrackedEvent(callbackInfo.mode, callbackInfo.userdata),
-          mCallback(callbackInfo.callback) {}
+        : WorkDoneEventBase(callbackInfo.mode, callbackInfo.callback, callbackInfo.userdata) {}
 
+  private:
     void CompleteImpl(EventCompletionType completionType) override {
         WGPUQueueWorkDoneStatus status = completionType == EventCompletionType::Shutdown
                                              ? WGPUQueueWorkDoneStatus_DeviceLost
                                              : WGPUQueueWorkDoneStatus_Success;
-        if (mStatus) {
+        if (mData) {
             // TODO(crbug.com/dawn/2021): Pretend things success when the device is lost.
-            status = *mStatus == WGPUQueueWorkDoneStatus_DeviceLost
-                         ? WGPUQueueWorkDoneStatus_Success
-                         : *mStatus;
+            status = *mData == WGPUQueueWorkDoneStatus_DeviceLost ? WGPUQueueWorkDoneStatus_Success
+                                                                  : *mData;
         }
         if (mCallback) {
             mCallback(status, mUserdata);
         }
     }
-
-    static void WorkDoneEventReady(TrackedEvent& event, WGPUQueueWorkDoneStatus status) {
-        static_cast<WorkDoneEvent&>(event).mStatus = status;
-    }
-
-    WGPUQueueWorkDoneCallback mCallback;
-    std::optional<WGPUQueueWorkDoneStatus> mStatus;
 };
 
 }  // anonymous namespace
@@ -53,8 +50,7 @@ struct WorkDoneEvent : public TrackedEvent {
 Queue::~Queue() = default;
 
 bool Queue::OnWorkDoneCallback(WGPUFuture future, WGPUQueueWorkDoneStatus status) {
-    GetClient()->GetEventManager()->SetFutureReady(
-        future.id, std::bind(WorkDoneEvent::WorkDoneEventReady, std::placeholders::_1, status));
+    GetClient()->GetEventManager()->SetFutureReady<WorkDoneEventBase>(future.id, std::move(status));
     return true;
 }
 

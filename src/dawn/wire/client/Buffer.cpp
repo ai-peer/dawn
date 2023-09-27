@@ -22,6 +22,7 @@
 #include "dawn/wire/WireCmd_autogen.h"
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/Device.h"
+#include "dawn/wire/client/EventManager.h"
 
 namespace dawn::wire::client {
 namespace {
@@ -38,29 +39,25 @@ WGPUBuffer CreateErrorBufferOOMAtClient(Device* device, const WGPUBufferDescript
     return GetProcs().deviceCreateErrorBuffer(ToAPI(device), &errorBufferDescriptor);
 }
 
-struct MapAsyncEvent : public TrackedEvent {
+using MapAsyncEventBase =
+    TrackedEvent<EventType::MapAsync, WGPUBufferMapCallback, WGPUBufferMapAsyncStatus>;
+class MapAsyncEvent : public MapAsyncEventBase {
+  public:
     explicit MapAsyncEvent(const WGPUBufferMapCallbackInfo& callbackInfo)
-        : TrackedEvent(callbackInfo.mode, callbackInfo.userdata),
-          mCallback(callbackInfo.callback) {}
+        : MapAsyncEventBase(callbackInfo.mode, callbackInfo.callback, callbackInfo.userdata) {}
 
+  private:
     void CompleteImpl(EventCompletionType completionType) override {
         WGPUBufferMapAsyncStatus status = completionType == EventCompletionType::Shutdown
                                               ? WGPUBufferMapAsyncStatus_DeviceLost
                                               : WGPUBufferMapAsyncStatus_Success;
-        if (mStatus) {
-            status = *mStatus;
+        if (mData) {
+            status = *mData;
         }
         if (mCallback) {
             mCallback(status, mUserdata);
         }
     }
-
-    static void MapAsyncEventReady(TrackedEvent& event, WGPUBufferMapAsyncStatus status) {
-        static_cast<MapAsyncEvent&>(event).mStatus = status;
-    }
-
-    WGPUBufferMapCallback mCallback;
-    std::optional<WGPUBufferMapAsyncStatus> mStatus;
 };
 
 }  // anonymous namespace
@@ -181,8 +178,7 @@ void Buffer::InvokeAndClearCallback(WGPUBufferMapAsyncStatus status) {
 
     FutureID futureID = mPendingMapRequest->futureID;
     mPendingMapRequest.reset();
-    GetClient()->GetEventManager()->SetFutureReady(
-        futureID, std::bind(MapAsyncEvent::MapAsyncEventReady, std::placeholders::_1, status));
+    GetClient()->GetEventManager()->SetFutureReady<MapAsyncEventBase>(futureID, std::move(status));
 }
 
 void Buffer::MapAsync(WGPUMapModeFlags mode,
@@ -211,9 +207,8 @@ WGPUFuture Buffer::MapAsyncF(WGPUMapModeFlags mode,
     }
 
     if (mPendingMapRequest) {
-        client->GetEventManager()->SetFutureReady(
-            futureIDInternal, std::bind(MapAsyncEvent::MapAsyncEventReady, std::placeholders::_1,
-                                        WGPUBufferMapAsyncStatus_MappingAlreadyPending));
+        client->GetEventManager()->SetFutureReady<MapAsyncEventBase>(
+            futureIDInternal, WGPUBufferMapAsyncStatus_MappingAlreadyPending);
         return {futureIDInternal};
     }
 

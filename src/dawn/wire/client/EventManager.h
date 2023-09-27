@@ -27,25 +27,64 @@
 #include "dawn/common/Ref.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/ObjectHandle.h"
+#include "dawn/wire/WireResult.h"
+#include "dawn/wire/client/Client.h"
 
 namespace dawn::wire::client {
 
-class Client;
+enum class EventType {
+    MapAsync,
+    WorkDone,
+};
 
-struct TrackedEvent : NonMovable {
-    TrackedEvent(WGPUCallbackMode mode, void* userdata);
-    virtual ~TrackedEvent();
+namespace detail {
 
-    void Complete(EventCompletionType type);
+class TrackedEventBase : NonMovable {
+  public:
+    explicit TrackedEventBase(WGPUCallbackMode mode);
+    virtual ~TrackedEventBase();
 
-    WGPUCallbackMode mMode;
-    void* mUserdata = nullptr;
-    // These states don't need to be atomic because they're always protected by mTrackedEventsMutex
-    // (or moved out to a local variable).
-    bool mReady = false;
+    virtual EventType GetEventType() const = 0;
+    WGPUCallbackMode GetCallbackMode() const;
+    virtual bool IsReady() const = 0;
+    virtual void Complete(EventCompletionType type) = 0;
+
+  private:
+    const WGPUCallbackMode mMode;
+};
+
+}  // namespace detail
+
+template <EventType EType, typename CallbackT, typename DataT>
+class TrackedEvent : public detail::TrackedEventBase {
+  public:
+    static constexpr EventType Type = EType;
+    using Data = DataT;
+
+    static TrackedEvent& ToEvent(TrackedEventBase& event) {
+        DAWN_ASSERT(event.GetEventType() == Type);
+        return static_cast<TrackedEvent&>(event);
+    }
+
+    TrackedEvent(WGPUCallbackMode mode, CallbackT callback, void* userdata)
+        : TrackedEventBase(mode), mCallback(callback), mUserdata(userdata) {}
+    ~TrackedEvent() override { DAWN_ASSERT(mCallback == nullptr); }
+
+    EventType GetEventType() const final { return Type; }
+    bool IsReady() const final { return mData.has_value(); }
+    void Complete(EventCompletionType type) final {
+        DAWN_ASSERT(type == EventCompletionType::Shutdown || IsReady());
+        CompleteImpl(type);
+        mCallback = nullptr;
+    }
+    void SetReady(Data&& readyData) { mData = readyData; }
 
   protected:
     virtual void CompleteImpl(EventCompletionType type) = 0;
+
+    CallbackT mCallback;
+    void* mUserdata;
+    std::optional<DataT> mData;
 };
 
 // Subcomponent which tracks callback events for the Future-based callback
@@ -60,9 +99,39 @@ class EventManager final : NonMovable {
 
     // Returns a pair of the FutureID and a bool that is true iff the event was successfuly tracked,
     // false otherwise. Events may not be tracked if the client is already disconnected.
-    std::pair<FutureID, bool> TrackEvent(TrackedEvent* event);
+    std::pair<FutureID, bool> TrackEvent(detail::TrackedEventBase* event);
     void ShutDown();
-    void SetFutureReady(FutureID futureID, std::function<void(TrackedEvent&)>&& ready = {});
+
+    template <typename T>
+    void SetFutureReady(FutureID futureID, T::Data&& readyData) {
+        DAWN_ASSERT(futureID > 0);
+        // If the client was already disconnected, then all the callbacks should already have fired
+        // so we don't need to fire the callback anymore.
+        if (mClient->IsDisconnected()) {
+            return;
+        }
+
+        std::optional<std::unique_ptr<detail::TrackedEventBase>> event;
+        mTrackedEvents.Use([&](auto trackedEvents) {
+            std::unique_ptr<detail::TrackedEventBase>& trackedEvent =
+                trackedEvents->at(futureID);  // Asserts futureID is in the map
+
+            // Asserts that the event is the expected type and sets the ready data.
+            T::ToEvent(*trackedEvent.get()).SetReady(std::move(readyData));
+
+            // If the event can be spontaneously completed, do so now.
+            if (trackedEvent->GetCallbackMode() == WGPUCallbackMode_AllowSpontaneous) {
+                event = std::move(trackedEvent);
+                trackedEvents->erase(futureID);
+            }
+        });
+
+        // Handle spontaneous completions.
+        if (event.has_value()) {
+            std::move(*event)->Complete(EventCompletionType::Ready);
+        }
+    }
+
     void ProcessPollEvents();
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
@@ -72,7 +141,7 @@ class EventManager final : NonMovable {
     // Tracks all kinds of events (for both WaitAny and ProcessEvents). We use an ordered map so
     // that in most cases, event ordering is already implicit when we iterate the map. (Not true for
     // WaitAny though because the user could specify the FutureIDs out of order.)
-    MutexProtected<std::map<FutureID, std::unique_ptr<TrackedEvent>>> mTrackedEvents;
+    MutexProtected<std::map<FutureID, std::unique_ptr<detail::TrackedEventBase>>> mTrackedEvents;
     std::atomic<FutureID> mNextFutureID = 1;
 };
 
