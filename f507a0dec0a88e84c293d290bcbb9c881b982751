@@ -16,6 +16,24 @@
       "message": "The changes look fine, but it looks like we might need to split the changes up a bit to make the chromium side happy since some of these look like breaking changes.\n\nHistorically I\u0027ve used macros to accomplish this:\n\n- Land Chromium fix, i.e. https://chromium-review.googlesource.com/c/chromium/src/+/4740656\n\n- Land Dawn changes, i.e. https://dawn-review.googlesource.com/c/dawn/+/144207\n\n- Land Chromium cleanup, i.e. https://chromium-review.googlesource.com/c/chromium/src/+/4740397\n\n- Finally land Dawn cleanup, i.e. https://dawn-review.googlesource.com/c/dawn/+/144205",
       "revId": "f507a0dec0a88e84c293d290bcbb9c881b982751",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "928f8aa5_000361ba",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-27T12:41:18Z",
+      "side": 1,
+      "message": "As discussed offline with Corentin, here\u0027s what we\u0027ll do to minimize breaking changes:\n\n1. Disable timestampWrites temporarily in Chrome | https://chromium-review.googlesource.com/c/chromium/src/+/4889919\n2. Land this CL | https://dawn-review.googlesource.com/c/dawn/+/153320\n3. Align timestampWrites with WebGPU spec in Chrome | https://chromium-review.googlesource.com/c/chromium/src/+/4891709\n4. Update CTS\n5. Remove temporary CTS expectations failures \n\nWe\u0027re doing this because the timestamp-query feature has always been behind the --enable-dawn-features\u003dallow_unsafe_apis flag and chances of anyone using it are pretty low.",
+      "parentUuid": "89756a8b_0e4b1d3f",
+      "revId": "f507a0dec0a88e84c293d290bcbb9c881b982751",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
