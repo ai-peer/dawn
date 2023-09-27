@@ -32,6 +32,7 @@ tint_add_target(tint_utils_macros lib
   utils/macros/foreach.h
   utils/macros/macros.cc
   utils/macros/scoped_assignment.h
+  utils/macros/static_init.h
 )
 
 ################################################################################

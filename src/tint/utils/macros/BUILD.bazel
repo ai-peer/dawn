@@ -34,6 +34,7 @@ cc_library(
     "defer.h",
     "foreach.h",
     "scoped_assignment.h",
+    "static_init.h",
   ],
   deps = [
   ],
