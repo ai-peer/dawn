@@ -23,6 +23,7 @@ group("all") {
     "src/dawn/tests",
     "src/tint/api",
     "src/tint/fuzzers",
+    "src/tint/cmd/fuzz/wgsl",
   ]
   if (tint_build_unittests) {
     deps += [ "src/tint/cmd/test" ]
