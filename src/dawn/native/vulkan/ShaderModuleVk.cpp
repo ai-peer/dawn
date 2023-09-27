@@ -157,7 +157,7 @@ MaybeError ShaderModule::Initialize(ShaderModuleParseResult* parseResult,
     return InitializeBase(parseResult, compilationMessages);
 }
 
-void ShaderModule::DestroyImpl() {
+void ShaderModule::DestroyImpl() {  // CHECK THREADSAFE
     ShaderModuleBase::DestroyImpl();
     // Remove reference to internal cache to trigger cleanup.
     mTransformedShaderModuleCache = nullptr;

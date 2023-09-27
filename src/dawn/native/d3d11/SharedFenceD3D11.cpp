@@ -39,7 +39,7 @@ ResultOrError<Ref<SharedFence>> SharedFence::Create(
     return fence;
 }
 
-void SharedFence::DestroyImpl() {
+void SharedFence::DestroyImpl() {  // CHECK THREADSAFE
     mFence = nullptr;
 }
 

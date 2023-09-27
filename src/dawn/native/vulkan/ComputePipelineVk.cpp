@@ -117,7 +117,7 @@ void ComputePipeline::SetLabelImpl() {
 
 ComputePipeline::~ComputePipeline() = default;
 
-void ComputePipeline::DestroyImpl() {
+void ComputePipeline::DestroyImpl() {  // CHECK THREADSAFE
     ComputePipelineBase::DestroyImpl();
 
     if (mHandle != VK_NULL_HANDLE) {

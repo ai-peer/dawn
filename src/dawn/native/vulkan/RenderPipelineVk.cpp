@@ -635,7 +635,7 @@ VkPipelineVertexInputStateCreateInfo RenderPipeline::ComputeVertexInputDesc(
 
 RenderPipeline::~RenderPipeline() = default;
 
-void RenderPipeline::DestroyImpl() {
+void RenderPipeline::DestroyImpl() {  // CHECK THREADSAFE
     RenderPipelineBase::DestroyImpl();
     if (mHandle != VK_NULL_HANDLE) {
         ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(mHandle);
