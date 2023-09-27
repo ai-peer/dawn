@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06c62cde_493d32fe",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T19:25:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7601f3f9_b5e5b635",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b749fe22_0c52dde2",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8545800_766c17a7",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T19:25:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b749fe22_0c52dde2",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d06a7617_71680d0f",
@@ -82,6 +118,30 @@
       "writtenOn": "2023-09-27T14:15:44Z",
       "side": 1,
       "message": "nit: this can be NonMovable now!",
+      "range": {
+        "startLine": 38,
+        "startChar": 28,
+        "endLine": 38,
+        "endChar": 39
+      },
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60a74c93_c7db1734",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T19:25:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d06a7617_71680d0f",
       "range": {
         "startLine": 38,
         "startChar": 28,
@@ -132,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a907fc81_dc806e7d",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T19:25:51Z",
+      "side": 1,
+      "message": "Ack! Will do in a follow up!",
+      "parentUuid": "536b87dd_e103c4ed",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30927d1c_781ff0a5",
@@ -145,6 +223,24 @@
       "writtenOn": "2023-09-27T14:15:44Z",
       "side": 1,
       "message": "I believe this doesn\u0027t need to be optional as we could do the following in CompleteImpl\n\n```\n  mStatus is always initialized to success.\n\n  status \u003d *mStatus;\n  if status \u003d device lost, status \u003d success;\n  if completionType \u003d shutdown, status \u003d deviceLost\n  \n  if mCallback, call it, null the callback.\n```",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da44eb4a_cd19ffa6",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T19:25:51Z",
+      "side": 1,
+      "message": "Hmm, I think that\u0027s true, but thinking about https://dawn-review.googlesource.com/c/dawn/+/152621/comment/536b87dd_e103c4ed/, I think that in the generalized form, we probably have to use an optional for the data anyways? (Assuming shutdown case where we end up calling `SetFutureReady(Shutdown, {})` where we don\u0027t set the data.) Gonna keep it as is for now and implement the updated suggestion above and see how that looks.",
+      "parentUuid": "30927d1c_781ff0a5",
       "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
