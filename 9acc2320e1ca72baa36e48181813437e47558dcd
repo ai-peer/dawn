@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c791cdd9_db7feb70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-27T20:10:36Z",
+      "side": 1,
+      "message": "Note: This changes the standalone build, in that we need to set `use_libfuzzer \u003d true` in `args.gn` to build the fuzzers.",
+      "revId": "9acc2320e1ca72baa36e48181813437e47558dcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
