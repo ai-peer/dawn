@@ -73,6 +73,24 @@
       "message": "Passing userdatas around like this seems error prone, adds extra allocations and would need to be manually done for each type of future. What about doing something more like dawn::native where the TrackedEvent is refcounted and extended by child classes. Then here we would take a ref to the event for the RequestTracker lambda to set the userdata of the tracked event, then define an OnWorkDoneEvent somewhere in this file.\n\nIt would also have the benefit to make the pattern of dawn::native and dawn::wire match a bit more. (of course this would change a bunch of the follow-up CLs as well. Sorry about that.)",
       "revId": "e868a46e42e675cbfecdf92a0369ca7fed3d6eee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6f72785_670d3006",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T01:20:42Z",
+      "side": 1,
+      "message": "Ah, updated in https://dawn-review.googlesource.com/c/dawn/+/152621. I didn\u0027t bother fixing this CL because it was more work that it was worth it...",
+      "parentUuid": "3f6a0ff1_4a883ed5",
+      "revId": "e868a46e42e675cbfecdf92a0369ca7fed3d6eee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
