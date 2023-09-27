@@ -26,12 +26,16 @@ const (
 	targetTest TargetKind = "test"
 	// A library target, used for benchmark binaries.
 	targetBench TargetKind = "bench"
+	// A library target, used for fuzzer binaries.
+	targetFuzz TargetKind = "fuzz"
 	// An executable target.
 	targetCmd TargetKind = "cmd"
 	// A test executable target.
 	targetTestCmd TargetKind = "test_cmd"
 	// A benchmark executable target.
 	targetBenchCmd TargetKind = "bench_cmd"
+	// A fuzzer executable target.
+	targetFuzzCmd TargetKind = "fuzz_cmd"
 	// An invalid target.
 	targetInvalid TargetKind = "<invalid>"
 )
@@ -45,6 +49,9 @@ func (k TargetKind) IsTest() bool { return k == targetTest }
 // IsBench returns true if the TargetKind is 'bench'
 func (k TargetKind) IsBench() bool { return k == targetBench }
 
+// IsBench returns true if the TargetKind is 'fuzz'
+func (k TargetKind) IsFuzz() bool { return k == targetFuzz }
+
 // IsCmd returns true if the TargetKind is 'cmd'
 func (k TargetKind) IsCmd() bool { return k == targetCmd }
 
@@ -54,6 +61,9 @@ func (k TargetKind) IsTestCmd() bool { return k == targetTestCmd }
 // IsBenchCmd returns true if the TargetKind is 'bench_cmd'
 func (k TargetKind) IsBenchCmd() bool { return k == targetBenchCmd }
 
+// IsFuzzCmd returns true if the TargetKind is 'fuzz_cmd'
+func (k TargetKind) IsFuzzCmd() bool { return k == targetFuzzCmd }
+
 // IsTestOrTestCmd returns true if the TargetKind is 'test' or 'test_cmd'
 func (k TargetKind) IsTestOrTestCmd() bool { return k.IsTest() || k.IsTestCmd() }
 
@@ -62,9 +72,11 @@ var AllTargetKinds = []TargetKind{
 	targetLib,
 	targetTest,
 	targetBench,
+	targetFuzz,
 	targetCmd,
 	targetTestCmd,
 	targetBenchCmd,
+	targetFuzzCmd,
 }
 
 // targetKindFromFilename returns the target kind my pattern matching the filename
@@ -74,10 +86,14 @@ func targetKindFromFilename(filename string) TargetKind {
 		return targetTestCmd
 	case filename == "main_bench.cc":
 		return targetBenchCmd
+	case filename == "main_fuzz.cc":
+		return targetFuzzCmd
 	case strings.HasSuffix(filename, "_test.cc"), strings.HasSuffix(filename, "_test.h"):
 		return targetTest
 	case strings.HasSuffix(filename, "_bench.cc"), strings.HasSuffix(filename, "_bench.h"):
 		return targetBench
+	case strings.HasSuffix(filename, "_fuzz.cc"), strings.HasSuffix(filename, "_fuzz.h"):
+		return targetFuzz
 	case filename == "main.cc":
 		return targetCmd
 	case strings.HasSuffix(filename, ".cc"),
