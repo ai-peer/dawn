@@ -77,7 +77,7 @@ MaybeError CommandBufferBase::ValidateCanUseInSubmitNow() const {
     return {};
 }
 
-void CommandBufferBase::DestroyImpl() {
+void CommandBufferBase::DestroyImpl() {  // CHECK THREADSAFE
     FreeCommands(&mCommands);
     mResourceUsages = {};
 }

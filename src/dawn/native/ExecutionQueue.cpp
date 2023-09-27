@@ -17,45 +17,49 @@
 namespace dawn::native {
 
 ExecutionSerial ExecutionQueueBase::GetPendingCommandSerial() const {
-    return mLastSubmittedSerial + ExecutionSerial(1);
+    return ExecutionSerial(mLastSubmittedSerial.load(std::memory_order_acquire) + 1);
 }
 
 ExecutionSerial ExecutionQueueBase::GetLastSubmittedCommandSerial() const {
-    return mLastSubmittedSerial;
+    return ExecutionSerial(mLastSubmittedSerial.load(std::memory_order_acquire));
 }
 
 ExecutionSerial ExecutionQueueBase::GetCompletedCommandSerial() const {
-    return mCompletedSerial;
+    return ExecutionSerial(mCompletedSerial.load(std::memory_order_acquire));
 }
 
 MaybeError ExecutionQueueBase::CheckPassedSerials() {
     ExecutionSerial completedSerial;
     DAWN_TRY_ASSIGN(completedSerial, CheckAndUpdateCompletedSerials());
 
-    DAWN_ASSERT(completedSerial <= mLastSubmittedSerial);
+    uint64_t completionSerialValue = static_cast<uint64_t>(completedSerial);
+
+    DAWN_ASSERT(completionSerialValue <= mLastSubmittedSerial);
     // completedSerial should not be less than mCompletedSerial unless it is 0.
     // It can be 0 when there's no fences to check.
-    DAWN_ASSERT(completedSerial >= mCompletedSerial || completedSerial == ExecutionSerial(0));
+    DAWN_ASSERT(completionSerialValue >= mCompletedSerial || completionSerialValue == 0);
 
-    if (completedSerial > mCompletedSerial) {
-        mCompletedSerial = completedSerial;
+    uint64_t current = mCompletedSerial.load();
+    while (completionSerialValue > current &&
+           !mCompletedSerial.compare_exchange_weak(current, completionSerialValue)) {
     }
-
     return {};
 }
 
 void ExecutionQueueBase::AssumeCommandsComplete() {
     // Bump serials so any pending callbacks can be fired.
-    mLastSubmittedSerial++;
-    mCompletedSerial = mLastSubmittedSerial;
+    uint64_t prev = mLastSubmittedSerial.fetch_add(1u, std::memory_order_release);
+    mCompletedSerial.store(prev + 1, std::memory_order_release);
 }
 
 void ExecutionQueueBase::IncrementLastSubmittedCommandSerial() {
-    mLastSubmittedSerial++;
+    mLastSubmittedSerial.fetch_add(1u, std::memory_order_release);
 }
 
 bool ExecutionQueueBase::HasScheduledCommands() const {
-    return mLastSubmittedSerial > mCompletedSerial || HasPendingCommands();
+    return mLastSubmittedSerial.load(std::memory_order_acquire) >
+               mCompletedSerial.load(std::memory_order_acquire) ||
+           HasPendingCommands();
 }
 
 // All prevously submitted works at the moment will supposedly complete at this serial.

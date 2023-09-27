@@ -1208,7 +1208,7 @@ ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag,
 
 ShaderModuleBase::~ShaderModuleBase() = default;
 
-void ShaderModuleBase::DestroyImpl() {
+void ShaderModuleBase::DestroyImpl() {  // CHECK THREADSAFE
     Uncache();
 }
 

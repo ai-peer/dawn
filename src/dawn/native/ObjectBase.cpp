@@ -136,7 +136,7 @@ ApiObjectList* ApiObjectBase::GetObjectTrackingList() {
 }
 
 void ApiObjectBase::Destroy() {
-    if (!IsAlive()) {
+    if (IsError()) {
         return;
     }
     ApiObjectList* list = GetObjectTrackingList();
