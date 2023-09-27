@@ -13,9 +13,8 @@
 // limitations under the License.
 
 #include <iostream>
-#include <string>
-#include <unordered_set>
 
+#include "src/tint/cmd/fuzz/wgsl/wgsl_fuzz.h"
 #include "src/tint/lang/wgsl/helpers/apply_substitute_overrides.h"
 #include "src/tint/lang/wgsl/reader/lower/lower.h"
 #include "src/tint/lang/wgsl/reader/parser/parser.h"
@@ -24,15 +23,29 @@
 #include "src/tint/lang/wgsl/writer/raise/raise.h"
 #include "src/tint/lang/wgsl/writer/writer.h"
 
-[[noreturn]] void TintInternalCompilerErrorReporter(const tint::InternalCompilerError& err) {
-    std::cerr << err.Error() << std::endl;
-    __builtin_trap();
+namespace {
+
+bool IsUnsupported(const tint::ast::Enable* enable) {
+    for (auto ext : enable->extensions) {
+        switch (ext->name) {
+            case tint::wgsl::Extension::kChromiumExperimentalDp4A:
+            case tint::wgsl::Extension::kChromiumExperimentalFullPtrParameters:
+            case tint::wgsl::Extension::kChromiumExperimentalPixelLocal:
+            case tint::wgsl::Extension::kChromiumExperimentalPushConstant:
+            case tint::wgsl::Extension::kChromiumInternalDualSourceBlending:
+            case tint::wgsl::Extension::kChromiumInternalRelaxedUniformLayout:
+                return true;
+            default:
+                break;
+        }
+    }
+    return false;
 }
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
-    std::string str(reinterpret_cast<const char*>(data), size);
+}  // namespace
 
-    tint::SetInternalCompilerErrorReporter(&TintInternalCompilerErrorReporter);
+void IRRoundtripFuzzer(tint::Slice<const uint8_t> input) {
+    std::string str(reinterpret_cast<const char*>(input.data), input.len);
 
     tint::Source::File file("test.wgsl", str);
 
@@ -40,53 +53,37 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
     tint::wgsl::reader::Parser parser(&file);
     parser.set_max_errors(1);
     if (!parser.Parse()) {
-        return 0;
+        return;
     }
+
     auto src = parser.program();
     if (!src.IsValid()) {
-        return 0;
+        return;
     }
 
-    auto is_unsupported = [](const tint::ast::Enable* enable) {
-        for (auto ext : enable->extensions) {
-            switch (ext->name) {
-                case tint::wgsl::Extension::kChromiumExperimentalDp4A:
-                case tint::wgsl::Extension::kChromiumExperimentalFullPtrParameters:
-                case tint::wgsl::Extension::kChromiumExperimentalPixelLocal:
-                case tint::wgsl::Extension::kChromiumExperimentalPushConstant:
-                case tint::wgsl::Extension::kChromiumInternalDualSourceBlending:
-                case tint::wgsl::Extension::kChromiumInternalRelaxedUniformLayout:
-                    return true;
-                default:
-                    break;
-            }
-        }
-        return false;
-    };
-
-    if (src.AST().Enables().Any(is_unsupported)) {
-        return 0;
+    if (src.AST().Enables().Any(IsUnsupported)) {
+        return;
     }
 
     src = tint::wgsl::ApplySubstituteOverrides(std::move(src));
     if (!src.IsValid()) {
-        return 0;
+        return;
     }
 
     auto ir = tint::wgsl::reader::ProgramToIR(src);
     if (!ir) {
-        std::cerr << ir.Failure() << std::endl;
-        __builtin_trap();
+        TINT_ICE() << ir.Failure();
+        return;
     }
 
     if (auto res = tint::wgsl::reader::Lower(ir.Get()); !res) {
-        std::cerr << res.Failure() << std::endl;
-        __builtin_trap();
+        TINT_ICE() << res.Failure();
+        return;
     }
 
     if (auto res = tint::wgsl::writer::Raise(ir.Get()); !res) {
-        std::cerr << res.Failure() << std::endl;
-        __builtin_trap();
+        TINT_ICE() << res.Failure();
+        return;
     }
 
     auto dst = tint::wgsl::writer::IRToProgram(ir.Get());
@@ -97,9 +94,11 @@ extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
         }
 #endif
 
-        std::cerr << dst.Diagnostics() << std::endl;
-        __builtin_trap();
+        TINT_ICE() << dst.Diagnostics();
+        return;
     }
 
-    return 0;
+    return;
 }
+
+TINT_WGSL_FUZZER(IRRoundtripFuzzer);
