@@ -168,8 +168,7 @@ ShaderModule::~ShaderModule() = default;
 #define SPIRV_COMPILATION_REQUEST_MEMBERS(X)                                                     \
     X(SingleShaderStage, stage)                                                                  \
     X(const tint::Program*, inputProgram)                                                        \
-    X(tint::BindingRemapperOptions, bindingRemapper)                                             \
-    X(tint::ExternalTextureOptions, externalTextureOptions)                                      \
+    X(tint::spirv::writer::Bindings, bindings)                                                   \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                       \
     X(std::string_view, entryPointName)                                                          \
@@ -209,44 +208,87 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
 
     // Creation of module and spirv is deferred to this point when using tint generator
 
-    // Remap BindingNumber to BindingIndex in WGSL shader
-    using BindingPoint = tint::BindingPoint;
-
-    tint::BindingRemapperOptions bindingRemapper;
+    tint::spirv::writer::Bindings bindings;
 
     const BindingInfoArray& moduleBindingInfo =
         GetEntryPoint(programmableStage.entryPoint.c_str()).bindings;
 
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-        const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
+        const BindGroupLayoutInternalBase* bglInternal = layout->GetBindGroupLayout(group);
+        const BindGroupLayout* bgl = ToBackend(bglInternal);
+
         const auto& groupBindingInfo = moduleBindingInfo[group];
         for (const auto& [binding, _] : groupBindingInfo) {
-            BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
-            BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
-                                         static_cast<uint32_t>(binding)};
+            tint::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                               static_cast<uint32_t>(binding)};
 
-            BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
-                                         static_cast<uint32_t>(bindingIndex)};
-            if (srcBindingPoint != dstBindingPoint) {
-                bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
+            BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
+            const BindingInfo& info = bglInternal->GetBindingInfo(bindingIndex);
+
+            tint::BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
+                                               static_cast<uint32_t>(bindingIndex)};
+
+            switch (info.bindingType) {
+                case BindingInfoType::Buffer:
+                    switch (info.buffer.type) {
+                        case wgpu::BufferBindingType::Uniform:
+                            bindings.uniform.emplace(
+                                srcBindingPoint,
+                                tint::spirv::writer::binding::Uniform{dstBindingPoint.group,
+                                                                      dstBindingPoint.binding});
+                            break;
+                        case kInternalStorageBufferBinding:
+                        case wgpu::BufferBindingType::Storage:
+                        case wgpu::BufferBindingType::ReadOnlyStorage:
+                            bindings.storage.emplace(
+                                srcBindingPoint,
+                                tint::spirv::writer::binding::Storage{dstBindingPoint.group,
+                                                                      dstBindingPoint.binding});
+                            break;
+                        case wgpu::BufferBindingType::Undefined:
+                            DAWN_ASSERT(info.buffer.type != wgpu::BufferBindingType::Undefined);
+                            break;
+                    }
+                    break;
+                case BindingInfoType::Sampler:
+                    bindings.sampler.emplace(srcBindingPoint,
+                                             tint::spirv::writer::binding::Sampler{
+                                                 dstBindingPoint.group, dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::Texture:
+                case BindingInfoType::StorageTexture:
+                    bindings.texture.emplace(srcBindingPoint,
+                                             tint::spirv::writer::binding::Texture{
+                                                 dstBindingPoint.group, dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::ExternalTexture:
+                    // Handled below
+                    break;
             }
         }
     }
 
     // Transform external textures into the binding locations specified in the bgl
-    // TODO(dawn:1082): Replace this block with BuildExternalTextureTransformBindings.
-    tint::ExternalTextureOptions externalTextureOptions;
     for (BindGroupIndex i : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayoutInternalBase* bgl = layout->GetBindGroupLayout(i);
 
-        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
-            externalTextureOptions
-                .bindings_map[{static_cast<uint32_t>(i),
-                               static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))}] = {
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))},
-                {static_cast<uint32_t>(i),
-                 static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))}};
+        for (const auto& [binding, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
+            tint::spirv::writer::binding::BindingInfo plane0{
+                static_cast<uint32_t>(i),
+                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane0))};
+            tint::spirv::writer::binding::BindingInfo plane1{
+                static_cast<uint32_t>(i),
+                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.plane1))};
+            tint::spirv::writer::binding::BindingInfo metadata{
+                static_cast<uint32_t>(i),
+                static_cast<uint32_t>(bgl->GetBindingIndex(expansion.params))};
+
+            tint::BindingPoint srcBindingPoint{static_cast<uint32_t>(i),
+                                               static_cast<uint32_t>(binding)};
+
+            bindings.external_texture.emplace(
+                srcBindingPoint,
+                tint::spirv::writer::binding::ExternalTexture{metadata, plane0, plane1});
         }
     }
 
@@ -259,8 +301,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     SpirvCompilationRequest req = {};
     req.stage = stage;
     req.inputProgram = GetTintProgram();
-    req.bindingRemapper = std::move(bindingRemapper);
-    req.externalTextureOptions = std::move(externalTextureOptions);
+    req.bindings = std::move(bindings);
     req.entryPointName = programmableStage.entryPoint;
     req.isRobustnessEnabled = GetDevice()->IsRobustnessEnabled();
     req.disableWorkgroupInit = GetDevice()->IsToggleEnabled(Toggle::DisableWorkgroupInit);
@@ -348,8 +389,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             options.disable_workgroup_init = r.disableWorkgroupInit;
             options.use_zero_initialize_workgroup_memory_extension =
                 r.useZeroInitializeWorkgroupMemoryExtension;
-            options.binding_remapper_options = r.bindingRemapper;
-            options.external_texture_options = r.externalTextureOptions;
+            options.bindings = r.bindings;
             options.disable_image_robustness = r.disableImageRobustness;
             options.disable_runtime_sized_array_index_clamping =
                 r.disableRuntimeSizedArrayIndexClamping;
