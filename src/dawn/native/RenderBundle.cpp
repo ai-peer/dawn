@@ -44,7 +44,7 @@ RenderBundleBase::RenderBundleBase(RenderBundleEncoder* encoder,
     GetObjectTrackingList()->Track(this);
 }
 
-void RenderBundleBase::DestroyImpl() {
+void RenderBundleBase::DestroyImpl() {  // CHECK THREADSAFE
     FreeCommands(&mCommands);
 
     // Remove reference to the attachment state so that we don't have lingering references to

@@ -355,7 +355,7 @@ MaybeError PipelineLayout::Initialize() {
     return {};
 }
 
-void PipelineLayout::DestroyImpl() {
+void PipelineLayout::DestroyImpl() {  // CHECK THREADSAFE
     PipelineLayoutBase::DestroyImpl();
 
     Device* device = ToBackend(GetDevice());
