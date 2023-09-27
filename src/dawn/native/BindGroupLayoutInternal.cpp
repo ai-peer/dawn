@@ -549,7 +549,7 @@ BindGroupLayoutInternalBase::BindGroupLayoutInternalBase(DeviceBase* device,
 
 BindGroupLayoutInternalBase::~BindGroupLayoutInternalBase() = default;
 
-void BindGroupLayoutInternalBase::DestroyImpl() {
+void BindGroupLayoutInternalBase::DestroyImpl() {  // CHECK THREADSAFE
     Uncache();
 }
 

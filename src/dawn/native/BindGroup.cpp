@@ -471,7 +471,7 @@ BindGroupBase::BindGroupBase(DeviceBase* device,
 
 BindGroupBase::~BindGroupBase() = default;
 
-void BindGroupBase::DestroyImpl() {
+void BindGroupBase::DestroyImpl() {  // CHECK THREADSAFE
     if (mLayout != nullptr) {
         DAWN_ASSERT(!IsError());
         for (BindingIndex i{0}; i < GetLayout()->GetBindingCount(); ++i) {

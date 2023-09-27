@@ -143,7 +143,7 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
     : d3d::SharedTextureMemory(device, label, properties, resource.Get()),
       mResource(std::move(resource)) {}
 
-void SharedTextureMemory::DestroyImpl() {
+void SharedTextureMemory::DestroyImpl() {  // CHECK THREADSAFE
     mResource = nullptr;
 }
 

@@ -338,7 +338,7 @@ Texture::Texture(Device* device, const TextureDescriptor* descriptor)
 
 Texture::~Texture() = default;
 
-void Texture::DestroyImpl() {
+void Texture::DestroyImpl() {  // CHECK THREADSAFE
     TextureBase::DestroyImpl();
     ToBackend(GetDevice())->DeallocateMemory(mResourceAllocation);
     // Set mSwapChainTexture to false to prevent ever calling ID3D12SharingContract::Present again.

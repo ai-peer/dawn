@@ -253,7 +253,7 @@ ResultOrError<Ref<SwapChain>> SwapChain::Create(Device* device,
 
 SwapChain::~SwapChain() = default;
 
-void SwapChain::DestroyImpl() {
+void SwapChain::DestroyImpl() {  // CHECK THREADSAFE
     SwapChainBase::DestroyImpl();
     DetachFromSurface();
 }

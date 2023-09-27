@@ -105,7 +105,7 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
                                          IOSurfaceRef ioSurface)
     : SharedTextureMemoryBase(device, label, properties), mIOSurface(ioSurface) {}
 
-void SharedTextureMemory::DestroyImpl() {
+void SharedTextureMemory::DestroyImpl() {  // CHECK THREADSAFE
     SharedTextureMemoryBase::DestroyImpl();
     mIOSurface = nullptr;
 }

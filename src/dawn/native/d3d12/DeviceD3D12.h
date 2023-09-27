@@ -239,10 +239,10 @@ class Device final : public d3d::Device {
 
     CommandRecordingContext mPendingCommands;
 
-    SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
+    MutexProtected<SerialQueue<ExecutionSerial, ComPtr<IUnknown>>> mUsedComObjectRefs;
 
     std::unique_ptr<CommandAllocatorManager> mCommandAllocatorManager;
-    std::unique_ptr<ResourceAllocatorManager> mResourceAllocatorManager;
+    std::unique_ptr<MutexProtected<ResourceAllocatorManager>> mResourceAllocatorManager;
     std::unique_ptr<ResidencyManager> mResidencyManager;
 
     static constexpr uint32_t kMaxSamplerDescriptorsPerBindGroup = 3 * kMaxSamplersPerShaderStage;
