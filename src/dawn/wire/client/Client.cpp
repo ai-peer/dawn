@@ -16,6 +16,7 @@
 
 #include "dawn/common/Compiler.h"
 #include "dawn/wire/client/Device.h"
+#include "dawn/wire/client/EventManager.h"
 
 namespace dawn::wire::client {
 
@@ -38,10 +39,8 @@ class NoopCommandSerializer final : public CommandSerializer {
 }  // anonymous namespace
 
 Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
-    : ClientBase(),
-      mSerializer(serializer),
-      mMemoryTransferService(memoryTransferService),
-      mEventManager(this) {
+    : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
+    mEventManager = std::make_unique<EventManager>(this);
     if (mMemoryTransferService == nullptr) {
         // If a MemoryTransferService is not provided, fall back to inline memory.
         mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
@@ -51,7 +50,7 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 
 Client::~Client() {
     DestroyAllObjects();
-    mEventManager.ShutDown();
+    mEventManager->ShutDown();
 }
 
 void Client::DestroyAllObjects() {
@@ -147,7 +146,7 @@ void Client::ReclaimInstanceReservation(const ReservedInstance& reservation) {
 }
 
 EventManager* Client::GetEventManager() {
-    return &mEventManager;
+    return mEventManager.get();
 }
 
 void Client::Disconnect() {
@@ -168,7 +167,7 @@ void Client::Disconnect() {
             object->value()->CancelCallbacksForDisconnect();
         }
     }
-    mEventManager.ShutDown();
+    mEventManager->ShutDown();
 }
 
 bool Client::IsDisconnected() const {

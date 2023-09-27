@@ -27,25 +27,39 @@
 #include "dawn/common/Ref.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/ObjectHandle.h"
+#include "dawn/wire/WireResult.h"
+#include "dawn/wire/client/Client.h"
 
 namespace dawn::wire::client {
 
-class Client;
+enum class EventType {
+    MapAsync,
+    WorkDone,
+};
 
-struct TrackedEvent : NonMovable {
-    TrackedEvent(WGPUCallbackMode mode, void* userdata);
+class TrackedEvent : NonMovable {
+  public:
+    explicit TrackedEvent(WGPUCallbackMode mode);
     virtual ~TrackedEvent();
 
-    void Complete(EventCompletionType type);
+    virtual EventType GetType() = 0;
 
-    WGPUCallbackMode mMode;
-    void* mUserdata = nullptr;
-    // These states don't need to be atomic because they're always protected by mTrackedEventsMutex
-    // (or moved out to a local variable).
-    bool mReady = false;
+    WGPUCallbackMode GetCallbackMode() const;
+    bool IsReady() const;
+
+    void SetReady();
+    void Complete(EventCompletionType type);
 
   protected:
     virtual void CompleteImpl(EventCompletionType type) = 0;
+
+    const WGPUCallbackMode mMode;
+    enum class EventState {
+        Pending,
+        Ready,
+        Complete,
+    };
+    EventState mEventState = EventState::Pending;
 };
 
 // Subcomponent which tracks callback events for the Future-based callback
@@ -60,9 +74,50 @@ class EventManager final : NonMovable {
 
     // Returns a pair of the FutureID and a bool that is true iff the event was successfuly tracked,
     // false otherwise. Events may not be tracked if the client is already disconnected.
-    std::pair<FutureID, bool> TrackEvent(TrackedEvent* event);
+    std::pair<FutureID, bool> TrackEvent(std::unique_ptr<TrackedEvent> event);
     void ShutDown();
-    void SetFutureReady(FutureID futureID, std::function<void(TrackedEvent&)>&& ready = {});
+
+    template <typename Event, typename... ReadyArgs>
+    WireResult SetFutureReady(FutureID futureID, ReadyArgs&&... readyArgs) {
+        DAWN_ASSERT(futureID > 0);
+        // If the client was already disconnected, then all the callbacks should already have fired
+        // so we don't need to fire the callback anymore.
+        if (mClient->IsDisconnected()) {
+            DAWN_ASSERT(mTrackedEvents.Use([&](auto trackedEvents) {
+                return trackedEvents->find(futureID) == trackedEvents->end();
+            }));
+            return WireResult::Success;
+        }
+
+        std::unique_ptr<TrackedEvent> spontaneousEvent;
+        WIRE_TRY(mTrackedEvents.Use([&](auto trackedEvents) {
+            auto& trackedEvent = trackedEvents->at(futureID);  // Asserts futureID is in the map
+
+            if (trackedEvent->GetType() != Event::kType) {
+                // Assert here for debugging, before returning a fatal error that is handled upwards
+                // in production.
+                DAWN_ASSERT(trackedEvent->GetType() == Event::kType);
+                return WireResult::FatalError;
+            }
+            static_cast<Event*>(trackedEvent.get())
+                ->ReadyHook(std::forward<ReadyArgs>(readyArgs)...);
+            trackedEvent->SetReady();
+
+            // If the event can be spontaneously completed, prepare to do so now.
+            if (trackedEvent->GetCallbackMode() == WGPUCallbackMode_AllowSpontaneous) {
+                spontaneousEvent = std::move(trackedEvent);
+                trackedEvents->erase(futureID);
+            }
+            return WireResult::Success;
+        }));
+
+        // Handle spontaneous completions.
+        if (spontaneousEvent) {
+            spontaneousEvent->Complete(EventCompletionType::Ready);
+        }
+        return WireResult::Success;
+    }
+
     void ProcessPollEvents();
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
