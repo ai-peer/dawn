@@ -22,8 +22,8 @@ group("all") {
     "src/dawn/native:webgpu_dawn",
     "src/dawn/tests",
     "src/tint/api",
-    "src/tint/fuzzers",
     "src/tint/cmd/fuzz/wgsl",
+    "src/tint/fuzzers",
   ]
   if (tint_build_unittests) {
     deps += [ "src/tint/cmd/test" ]

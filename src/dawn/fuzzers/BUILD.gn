@@ -15,9 +15,9 @@
 import("../../../scripts/dawn_overrides_with_defaults.gni")
 
 import("//build_overrides/build.gni")
+import("//testing/libfuzzer/fuzzer_test.gni")
 import("${dawn_root}/scripts/dawn_features.gni")
 import("${dawn_root}/src/dawn/fuzzers/dawn_fuzzers.gni")
-import("//testing/libfuzzer/fuzzer_test.gni")
 
 static_library("dawn_wire_server_fuzzer_common") {
   sources = [
