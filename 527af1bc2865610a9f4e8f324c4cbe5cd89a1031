@@ -20,6 +20,80 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "990bb51c_906b9591",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:15:44Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7601f3f9_b5e5b635",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:15:44Z",
+      "side": 1,
+      "message": "Maybe explain why we move the request locally before calling it. Since we only use the futureID we could do:\n\n```\nif (!mPendingMapRequest) {\n  return;\n}\n\nFutureID future \u003d mPendingMapRequest-\u003efuture;\nmPendingMapRequest.reset();\nSetFutureReady\n```",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b749fe22_0c52dde2",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:15:44Z",
+      "side": 1,
+      "message": "nit: no longer used I believe.",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d06a7617_71680d0f",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:15:44Z",
+      "side": 1,
+      "message": "nit: this can be NonMovable now!",
+      "range": {
+        "startLine": 38,
+        "startChar": 28,
+        "endLine": 38,
+        "endChar": 39
+      },
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0fdce61b_e59ce402",
         "filename": "src/dawn/wire/client/EventManager.h",
         "patchSetId": 14
@@ -37,6 +111,40 @@
         "endLine": 42,
         "endChar": 26
       },
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "536b87dd_e103c4ed",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:15:44Z",
+      "side": 1,
+      "message": "It\u0027d be nice to avoid this static cast to shield the client from a bad server. But also this could be a follow-up. I\u0027m thinking something like the following could work:\n\n```\n// In EventManager.h\nenum class EventType {\n   MapAsync,\n   OnSubmittedWorkDone,\n   ...\n};\n\nRename TrackedEvent to TrackedEventBase\n\nclass TrackedEventBase {\n  private:\n      // Using a vtable entry instead of one more enum in each TrackedEvent instance, but does it matter? Could be packed with another boolean somewhere maybe.\n     EventType GetEventType() const \u003d 0;\n};\n\ntemplate\u003ctypename Data, EventType type\u003e\nclass TrackedEvent : TrackedEventBase{\n  using Data \u003d Data;\n\n    EventType GetEventType() const final {return type};\n\n    friend class EventTracker;\n    Data mData \u003d {};\n};\n\n\nclass EventManager {\n   template\u003ctypename T\u003e\n   WireResult SetFutureReady(FutureID futureID, T::Data\u0026\u0026 readyData) {\n       // Same logic as SetFutureReady right now, but doesn\u0027t call a function, instead sets mData.\n       // Also returns WireResult::FatalError if the type of the event is not the correct one.\n       // Finally bool mReady likely becomes an enum with the full state machine of the event: Pending -\u003e Ready -\u003e Fired with asserts in a bunch of places.\n   }\n};\n```",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30927d1c_781ff0a5",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-27T14:15:44Z",
+      "side": 1,
+      "message": "I believe this doesn\u0027t need to be optional as we could do the following in CompleteImpl\n\n```\n  mStatus is always initialized to success.\n\n  status \u003d *mStatus;\n  if status \u003d device lost, status \u003d success;\n  if completionType \u003d shutdown, status \u003d deviceLost\n  \n  if mCallback, call it, null the callback.\n```",
       "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
