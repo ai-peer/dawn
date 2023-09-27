@@ -112,7 +112,7 @@ RenderBundleEncoder::RenderBundleEncoder(DeviceBase* device, ErrorTag errorTag, 
     : RenderEncoderBase(device, &mBundleEncodingContext, errorTag, label),
       mBundleEncodingContext(device, this) {}
 
-void RenderBundleEncoder::DestroyImpl() {
+void RenderBundleEncoder::DestroyImpl() {  // CHECK THREADSAFE
     RenderEncoderBase::DestroyImpl();
     mBundleEncodingContext.Destroy();
 }

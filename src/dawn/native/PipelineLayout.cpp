@@ -120,7 +120,7 @@ PipelineLayoutBase::PipelineLayoutBase(DeviceBase* device,
 
 PipelineLayoutBase::~PipelineLayoutBase() = default;
 
-void PipelineLayoutBase::DestroyImpl() {
+void PipelineLayoutBase::DestroyImpl() {  // CHECK THREADSAFE
     Uncache();
 }
 

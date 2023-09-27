@@ -37,7 +37,7 @@ SwapChain::SwapChain(DeviceBase* dev, Surface* sur, const SwapChainDescriptor* d
 
 SwapChain::~SwapChain() = default;
 
-void SwapChain::DestroyImpl() {
+void SwapChain::DestroyImpl() {  // CHECK THREADSAFE
     SwapChainBase::DestroyImpl();
     DetachFromSurface();
 }
