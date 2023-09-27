@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "66ed4003_e97d00af",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T01:20:00Z",
+      "side": 1,
+      "message": "Sorry for the larger CL now, I ended up merging a bunch of them together because it became really hard to make them work individually... And a lot of the intermediate changes would require decent amount of work to get the tests passing just so I could remove it all in favor of the new code path in the follow up.\n\nLMK if its too confusing and we can chat about it if necessary.",
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fdce61b_e59ce402",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T01:20:00Z",
+      "side": 1,
+      "message": "Regarding https://dawn-review.googlesource.com/c/dawn/+/153020/comment/353c4b4e_3fdc708d/ since these are always `unique_ptrs` now, the rvalue didn\u0027t work anymore. Leaving as is unless you have another suggestion?\n\n(Note that I am moving the `unique_ptrs` instead so the semantic still implies that it\u0027s 1 time use?)",
+      "range": {
+        "startLine": 42,
+        "startChar": 4,
+        "endLine": 42,
+        "endChar": 26
+      },
+      "revId": "527af1bc2865610a9f4e8f324c4cbe5cd89a1031",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

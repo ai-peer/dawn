@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55ed1008_6bd1f151",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T01:20:00Z",
+      "side": 1,
+      "message": "Added a comment, but basically because we call this in the dtor and its not guaranteed that we have a pending request at that time.",
+      "parentUuid": "d86bc7ae_ffd94131",
+      "revId": "318271d1e156076efa1962fdab71a09166496757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "279222c7_885704ff",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-09-25T08:10:11Z",
       "side": 1,
       "message": "When would this happen to be called after the client is disconnected?",
+      "revId": "318271d1e156076efa1962fdab71a09166496757",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0340a148_c060f7a1",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-09-27T01:20:00Z",
+      "side": 1,
+      "message": "This can happen in cleanup code. For example right now `~Buffer` tries set the future ready, but if we disconnected before, then we would already have removed the event from being tracked and as a result crash at the `trackedEvents-\u003eat` call.",
+      "parentUuid": "279222c7_885704ff",
       "revId": "318271d1e156076efa1962fdab71a09166496757",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
