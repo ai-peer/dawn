@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db4cdd8e_5a7de605",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-09-27T18:45:36Z",
+      "side": 1,
+      "message": "This change adds a new MultiPlanarRenderTargets feature which will add the RenderAttachment usage support. I tried using the MultiPlanarFormatsExtendedUsages feature instead directly here but that would mean first adding support for metal backend there for allowing VideoViewsExtendedUsagesTests::CreateMultiPlanarTexture() which didn\u0027t seem straight-forward; so decided to add this feature instead which added support for metal here and will add other platform support in follow-ups.\n\nPlease take a look.",
+      "revId": "4900e31bb1b5dd8bb17e45382e9de452f1b6eb2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
