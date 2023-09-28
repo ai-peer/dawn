@@ -53,6 +53,7 @@ function(configure_spirv_tools_fuzzer_target NAME SOURCES)
         SPIRV-Tools-reduce
     )
     tint_default_compile_options(${NAME})
+    target_link_libraries(${NAME} PRIVATE tint_lang_spirv_writer_helpers)
     target_compile_options(${NAME} PRIVATE
         -Wno-conditional-uninitialized
         -Wno-covered-switch-default
