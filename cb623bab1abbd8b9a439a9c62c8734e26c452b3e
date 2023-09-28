@@ -1,0 +1,294 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8f2c28d_21602c10",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "I feel pretty strongly that we shouldn\u0027t special case this every time we want to maybe handle multi planar formats. Instead TextureBase::GetWidth/Height/... should take an Aspect and do the computation if needed. This would require a lot of change so it\u0027s not necessary to do for this CL, but please file and issue and add a TODO(dawn:that issue number). We really need to get to doing this cleanup to avoid multiplanar texture handling bugs. Not that these bugs can be used to attack the GPU process from the renderer process as the renderer process is able to AssociateMailbox a SharedImage into a multiplanar texture.",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5eba80f3_35cbe5f5",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "I think we can unconditionally add these aspects to kRenderableAspects: validation that the texture has RenderAttachment usage should be enough.",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1daa288d_37693fe8",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 586,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "nit: multiPlanarCapabilities, this isn\u0027t a boolean :)",
+      "range": {
+        "startLine": 586,
+        "startChar": 9,
+        "endLine": 586,
+        "endChar": 34
+      },
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36b17102_06c87128",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "Can we check that the texture contains 0s? The backend should try to initialize the textures, and given the other comment, I\u0027m not sure that they all know how to do that.",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de91bda0_e03e52f9",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 607,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68eacc04_4e68c33e",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 982,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "Can we have a validation test that the attachment size is correctly computed, by trying to make a render pass with control case with a second texture that\u0027s the size of the multiplanar texture plane 1, then an error case with a second texture that\u0027s the size of the plane 0?",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80a33aae_5b6edd5c",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 999,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "Can you detail how this test is different than [1]?",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59a0d350_54925a49",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "[2] means that this test is ran twice, once for each multiplanar formats, so it should be reasonably easy to add P010 support for this test in this CL.",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4247db8_fcf05222",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1067,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "nit: Can we have a small description of what the test does as a comment here?",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "648268b7_46a7f241",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1070,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "nit: this constant is found in common/Constants.h",
+      "range": {
+        "startLine": 1070,
+        "startChar": 23,
+        "endLine": 1070,
+        "endChar": 51
+      },
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66c5dff_d5532cad",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1076,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "nit: TODO(dawn:SomeBugID)",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b925bc71_c532c772",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1092,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "It seems that a queue.WriteTexture would be sufficient and simpler than creating a staging buffer. Ditto below.",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac438976_5ee6aae6",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "nit: this can be moved to right before it is needed.",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a04e53f_b1b4945b",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "```suggestion\n        renderPipelineDescriptor.cFragment.module \u003d utils::CreateShaderModule(device, R\"(\n            @group(0) @binding(0) var sampler0 : sampler;\n            @group(0) @binding(1) var texture : texture_2d\u003cf32\u003e;\n\n            @fragment\n            fn main(@location(0) texCoord : vec2f) -\u003e @location(0) vec4f {\n                return textureSample(texture, sampler0, texCoord);\n            })\");\n```",
+      "range": {
+        "startLine": 1135,
+        "startChar": 0,
+        "endLine": 1142,
+        "endChar": 21
+      },
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33b7dc69_3bfa221b",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1189,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "Same comments as for the Y plane",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c96f81d_755642ac",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 1489,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "cb623bab1abbd8b9a439a9c62c8734e26c452b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

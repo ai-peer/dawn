@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac7c01c_f9690d76",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 0,
+      "message": "What if the MultiPlanarRenderTargets extension is not enabled? Are we sure the backend is always able to clear out the texture using rendering or copying?",
+      "revId": "a1de3cc53ee4049ca5e2aa9e536e67532d6b8541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d83d300f_0002e36e",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:59:06Z",
+      "side": 0,
+      "message": "We can keep this test since the extension is not enabled there.",
+      "revId": "a1de3cc53ee4049ca5e2aa9e536e67532d6b8541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
