@@ -160,5 +160,19 @@ TEST_F(BlockAllocatorTest, ObjectOrder) {
     }
 }
 
+TEST_F(BlockAllocatorTest, AddWhileIterating) {
+    using Allocator = BlockAllocator<size_t>;
+
+    Allocator allocator;
+    for (int i = 0; i < 20; i++) {
+        allocator.Create(allocator.Count());
+        for (auto* j : allocator.Objects()) {
+            if (*j % 3 == 0) {
+                allocator.Create(allocator.Count());
+            }
+        }
+    }
+}
+
 }  // namespace
 }  // namespace tint
