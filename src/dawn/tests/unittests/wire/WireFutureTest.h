@@ -26,8 +26,6 @@
 
 #include "gtest/gtest.h"
 
-#include "webgpu/webgpu_cpp.h"
-
 namespace dawn::wire {
 
 enum class CallbackMode {
@@ -85,7 +83,7 @@ class WireFutureTestWithParams : public WireTest, public testing::WithParamInter
         WireTest::SetUp();
 
         auto reservation = GetWireClient()->ReserveInstance();
-        instance = wgpu::Instance::Acquire(reservation.instance);
+        instance = reservation.instance;
 
         apiInstance = api.GetNewInstance();
         EXPECT_CALL(api, InstanceReference(apiInstance));
@@ -163,18 +161,18 @@ class WireFutureTestWithParams : public WireTest, public testing::WithParamInter
                 WireTest::FlushServer();
                 return;
             }
-            std::vector<wgpu::FutureWaitInfo> waitInfos;
+            std::vector<WGPUFutureWaitInfo> waitInfos;
             for (auto futureID : mFutureIDs) {
                 waitInfos.push_back({{futureID}, false});
             }
-            EXPECT_EQ(instance.WaitAny(mFutureIDs.size(), waitInfos.data(), 0),
-                      wgpu::WaitStatus::Success);
+            EXPECT_EQ(wgpuInstanceWaitAny(instance, mFutureIDs.size(), waitInfos.data(), 0),
+                      WGPUWaitStatus_Success);
         } else if (callbackMode == CallbackMode::ProcessEvents) {
-            instance.ProcessEvents();
+            wgpuInstanceProcessEvents(instance);
         }
     }
 
-    wgpu::Instance instance;
+    WGPUInstance instance;
     WGPUInstance apiInstance;
 
   private:

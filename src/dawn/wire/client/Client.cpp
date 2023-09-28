@@ -48,8 +48,8 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 }
 
 Client::~Client() {
-    DestroyAllObjects();
     mEventManager->ShutDown();
+    DestroyAllObjects();
 }
 
 void Client::DestroyAllObjects() {
