@@ -505,6 +505,24 @@
       "parentUuid": "38c04220_78299c63",
       "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae907d3b_cd8d8478",
+        "filename": "src/tint/lang/spirv/writer/common/options.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-28T18:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8687aec5_182d8060",
+      "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
