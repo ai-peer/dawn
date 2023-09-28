@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1af98c1d_e4d7ada0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-28T11:07:09Z",
+      "side": 1,
+      "message": "Bug: chromium:1487321, oss-fuzz:62750",
+      "revId": "f067749755e6aa15f2a9b7c7a184841b91ac5e59",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
