@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06d2fcbc_a1c8b0de",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-28T08:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ded80b65_d6a1f390",
+      "range": {
+        "startLine": 1199,
+        "startChar": 39,
+        "endLine": 1199,
+        "endChar": 47
+      },
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a520e5ef_12251c4e",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76c3c93b_c684d374",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-28T08:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a520e5ef_12251c4e",
+      "range": {
+        "startLine": 130,
+        "startChar": 27,
+        "endLine": 130,
+        "endChar": 42
+      },
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "48b1e08c_4a2c8acd",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-09-28T08:00:04Z",
       "side": 1,
       "message": "nit: unorm10-10-10-2",
+      "range": {
+        "startLine": 60,
+        "startChar": 26,
+        "endLine": 60,
+        "endChar": 41
+      },
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b7edc51_8e0700d6",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-28T08:43:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48b1e08c_4a2c8acd",
       "range": {
         "startLine": 60,
         "startChar": 26,
