@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3604428a_df38bd68",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:21:15Z",
+      "side": 1,
+      "message": "Instead of ASSERTing I think we could be validating with the EventType with a WireResult returned if this is the wrong event type.",
+      "revId": "a9737fd300e574175f7dedca427a17a6ad8367f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35a93f1f_7ebd02c5",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:21:15Z",
+      "side": 1,
+      "message": "u-nit: slight preference for having a state machine enum, because it would also work for when mCallback is nullptr, and wouldn\u0027t use any more memory than this class does. WDYT?",
+      "revId": "a9737fd300e574175f7dedca427a17a6ad8367f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc561088_d8f55923",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:21:15Z",
+      "side": 1,
+      "message": "Maybe ASSERT that the callback was fired here?",
+      "revId": "a9737fd300e574175f7dedca427a17a6ad8367f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "79f475a5_e7480a21",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:21:15Z",
+      "side": 1,
+      "message": "Ah, maybe we don\u0027t need the \u0026\u0026 in SetFutureReady, and just std::move larger classes instead. It\u0027s weird to need to std::move an enum value.",
+      "range": {
+        "startLine": 53,
+        "startChar": 81,
+        "endLine": 53,
+        "endChar": 98
+      },
+      "revId": "a9737fd300e574175f7dedca427a17a6ad8367f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
