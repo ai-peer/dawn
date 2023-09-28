@@ -14,10 +14,59 @@
 
 #include "dawn/wire/client/Instance.h"
 
+#include <utility>
+
+#include "dawn/common/Log.h"
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/EventManager.h"
 
 namespace dawn::wire::client {
+namespace {
+
+struct RequestAdapterEventData {
+    WGPURequestAdapterStatus status;
+    const char* message;
+    const WGPUAdapterProperties* properties;
+    const WGPUSupportedLimits* limits;
+    uint32_t featuresCount;
+    const WGPUFeatureName* features;
+};
+
+using RequestAdapterEventBase =
+    TrackedEvent<EventType::RequestAdapter, WGPURequestAdapterCallback, RequestAdapterEventData>;
+class RequestAdapterEvent : public RequestAdapterEventBase {
+  public:
+    RequestAdapterEvent(const WGPURequestAdapterCallbackInfo& callbackInfo, Adapter* adapter)
+        : RequestAdapterEventBase(callbackInfo.mode, callbackInfo.callback, callbackInfo.userdata),
+          mAdapter(adapter) {}
+
+  private:
+    void CompleteImpl(EventCompletionType completionType) override {
+        static constexpr RequestAdapterEventData kShutdownData = {
+            WGPURequestAdapterStatus_Unknown, "GPU connection lost", nullptr, nullptr, 0, nullptr};
+        if (completionType == EventCompletionType::Shutdown && !mData) {
+            mData = kShutdownData;
+        }
+
+        if (mData->status != WGPURequestAdapterStatus_Success && mAdapter != nullptr) {
+            // If there was a failure, we need to free the adapter before calling the callback.
+            mAdapter->GetClient()->Free(mAdapter);
+            mAdapter = nullptr;
+        } else {
+            // Otherwise we set all the fields on the new adapter before calling the adapter.
+            mAdapter->SetProperties(mData->properties);
+            mAdapter->SetLimits(mData->limits);
+            mAdapter->SetFeatures(mData->features, mData->featuresCount);
+        }
+        if (mCallback) {
+            mCallback(mData->status, ToAPI(mAdapter), mData->message, mUserdata);
+        }
+    }
+
+    Adapter* mAdapter = nullptr;
+};
+
+}  // anonymous namespace
 
 // Free-standing API functions
 
@@ -38,43 +87,38 @@ WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {
 
 // Instance
 
-Instance::~Instance() {
-    mRequestAdapterRequests.CloseAll([](RequestAdapterData* request) {
-        request->callback(WGPURequestAdapterStatus_Unknown, nullptr,
-                          "Instance destroyed before callback", request->userdata);
-    });
-}
-
-void Instance::CancelCallbacksForDisconnect() {
-    mRequestAdapterRequests.CloseAll([](RequestAdapterData* request) {
-        request->callback(WGPURequestAdapterStatus_Unknown, nullptr, "GPU connection lost",
-                          request->userdata);
-    });
-}
-
 void Instance::RequestAdapter(const WGPURequestAdapterOptions* options,
                               WGPURequestAdapterCallback callback,
                               void* userdata) {
-    Client* client = GetClient();
-    if (client->IsDisconnected()) {
-        callback(WGPURequestAdapterStatus_Error, nullptr, "GPU connection lost", userdata);
-        return;
-    }
+    WGPURequestAdapterCallbackInfo callbackInfo = {};
+    callbackInfo.mode = WGPUCallbackMode_AllowSpontaneous;
+    callbackInfo.callback = callback;
+    callbackInfo.userdata = userdata;
+    RequestAdapterF(options, callbackInfo);
+}
 
+WGPUFuture Instance::RequestAdapterF(const WGPURequestAdapterOptions* options,
+                                     const WGPURequestAdapterCallbackInfo& callbackInfo) {
+    Client* client = GetClient();
     Adapter* adapter = client->Make<Adapter>();
-    uint64_t serial = mRequestAdapterRequests.Add({callback, adapter->GetWireId(), userdata});
+    auto [futureIDInternal, tracked] =
+        client->GetEventManager()->TrackEvent(new RequestAdapterEvent(callbackInfo, adapter));
+    if (!tracked) {
+        return {futureIDInternal};
+    }
 
     InstanceRequestAdapterCmd cmd;
     cmd.instanceId = GetWireId();
-    cmd.requestSerial = serial;
+    cmd.future = {futureIDInternal};
     cmd.adapterObjectHandle = adapter->GetWireHandle();
     cmd.options = options;
 
     client->SerializeCommand(cmd);
+    return {futureIDInternal};
 }
 
 bool Client::DoInstanceRequestAdapterCallback(Instance* instance,
-                                              uint64_t requestSerial,
+                                              WGPUFuture future,
                                               WGPURequestAdapterStatus status,
                                               const char* message,
                                               const WGPUAdapterProperties* properties,
@@ -85,38 +129,20 @@ bool Client::DoInstanceRequestAdapterCallback(Instance* instance,
     if (instance == nullptr) {
         return true;
     }
-    return instance->OnRequestAdapterCallback(requestSerial, status, message, properties, limits,
+    return instance->OnRequestAdapterCallback(future, status, message, properties, limits,
                                               featuresCount, features);
 }
 
-bool Instance::OnRequestAdapterCallback(uint64_t requestSerial,
+bool Instance::OnRequestAdapterCallback(WGPUFuture future,
                                         WGPURequestAdapterStatus status,
                                         const char* message,
                                         const WGPUAdapterProperties* properties,
                                         const WGPUSupportedLimits* limits,
                                         uint32_t featuresCount,
                                         const WGPUFeatureName* features) {
-    RequestAdapterData request;
-    if (!mRequestAdapterRequests.Acquire(requestSerial, &request)) {
-        return false;
-    }
-
-    Client* client = GetClient();
-    Adapter* adapter = client->Get<Adapter>(request.adapterObjectId);
-
-    // If the return status is a failure we should give a null adapter to the callback and
-    // free the allocation.
-    if (status != WGPURequestAdapterStatus_Success) {
-        client->Free(adapter);
-        request.callback(status, nullptr, message, request.userdata);
-        return true;
-    }
-
-    adapter->SetProperties(properties);
-    adapter->SetLimits(limits);
-    adapter->SetFeatures(features, featuresCount);
-
-    request.callback(status, ToAPI(adapter), message, request.userdata);
+    RequestAdapterEventData data = {status, message, properties, limits, featuresCount, features};
+    GetClient()->GetEventManager()->SetFutureReady<RequestAdapterEventBase>(future.id,
+                                                                            std::move(data));
     return true;
 }
 

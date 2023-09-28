@@ -82,6 +82,7 @@ void EventManager::ShutDown() {
             CompleteEvent(futureID, std::move(event), EventCompletionType::Shutdown);
         }
     }
+    mIsShutdown = true;
 }
 
 void EventManager::ProcessPollEvents() {

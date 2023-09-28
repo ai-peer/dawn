@@ -34,6 +34,7 @@ namespace dawn::wire::client {
 
 enum class EventType {
     MapAsync,
+    RequestAdapter,
     WorkDone,
 };
 
@@ -80,9 +81,10 @@ class EventManager final : NonMovable {
     template <typename Event, typename... ReadyArgs>
     WireResult SetFutureReady(FutureID futureID, ReadyArgs&&... readyArgs) {
         DAWN_ASSERT(futureID > 0);
-        // If the client was already disconnected, then all the callbacks should already have fired
-        // so we don't need to fire the callback anymore.
-        if (mClient->IsDisconnected()) {
+        // If already shutdown, then all the callbacks should already have fired so we don't need to
+        // fire the callback anymore. This may happen if cleanup/dtor functions try to call this
+        // unconditionally on objects.
+        if (mIsShutdown) {
             DAWN_ASSERT(mTrackedEvents.Use([&](auto trackedEvents) {
                 return trackedEvents->find(futureID) == trackedEvents->end();
             }));
@@ -123,6 +125,7 @@ class EventManager final : NonMovable {
 
   private:
     Client* mClient;
+    bool mIsShutdown = false;
 
     // Completes the event and frees any memory used for command deserialization.
     void CompleteEvent(FutureID futureID,
