@@ -57,6 +57,7 @@ void EventManager::ShutDown() {
             std::move(trackedEvent)->Complete(EventCompletionType::Shutdown);
         }
     }
+    isShutdown = true;
 }
 
 void EventManager::ProcessPollEvents() {

@@ -87,7 +87,7 @@
         ],
         "instance request adapter": [
             { "name": "instance id", "type": "ObjectId", "id_type": "instance" },
-            { "name": "request serial", "type": "uint64_t" },
+            { "name": "future", "type": "future" },
             { "name": "adapter object handle", "type": "ObjectHandle", "handle_type": "adapter"},
             { "name": "options", "type": "request adapter options", "annotation": "const*", "optional": true }
         ],
@@ -152,7 +152,7 @@
         ],
         "instance request adapter callback": [
             { "name": "instance", "type": "ObjectHandle", "handle_type": "instance" },
-            { "name": "request serial", "type": "uint64_t" },
+            { "name": "future", "type": "future" },
             { "name": "status", "type": "request adapter status" },
             { "name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true },
             { "name": "properties", "type": "adapter properties", "annotation": "const*", "optional": "true" },
@@ -205,6 +205,7 @@
             "DeviceSetUncapturedErrorCallback",
             "DeviceSetLoggingCallback",
             "InstanceRequestAdapter",
+            "InstanceRequestAdapterF",
             "ShaderModuleGetCompilationInfo",
             "QuerySetGetType",
             "QuerySetGetCount",

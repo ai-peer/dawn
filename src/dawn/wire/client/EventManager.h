@@ -34,6 +34,7 @@ namespace dawn::wire::client {
 
 enum class EventType {
     MapAsync,
+    RequestAdapter,
     WorkDone,
 };
 
@@ -105,9 +106,10 @@ class EventManager final : NonMovable {
     template <typename T>
     void SetFutureReady(FutureID futureID, T::Data&& readyData) {
         DAWN_ASSERT(futureID > 0);
-        // If the client was already disconnected, then all the callbacks should already have fired
-        // so we don't need to fire the callback anymore.
-        if (mClient->IsDisconnected()) {
+        // If already shutdown, then all the callbacks should already have fired so we don't need to
+        // fire the callback anymore. This may happen if cleanup/dtor functions try to call this
+        // unconditionally on objects.
+        if (isShutdown) {
             return;
         }
 
@@ -137,6 +139,7 @@ class EventManager final : NonMovable {
 
   private:
     Client* mClient;
+    bool isShutdown = false;
 
     // Tracks all kinds of events (for both WaitAny and ProcessEvents). We use an ordered map so
     // that in most cases, event ordering is already implicit when we iterate the map. (Not true for
