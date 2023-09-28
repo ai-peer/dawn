@@ -278,6 +278,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40c07962_b19d361c",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-28T18:59:05Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/154100",
+      "parentUuid": "f747eae3_6c1b0683",
+      "range": {
+        "startLine": 366,
+        "startChar": 0,
+        "endLine": 379,
+        "endChar": 46
+      },
+      "revId": "2d8d6662a4c7f97164316ead6e47edad547466e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df1af449_2c5a951e",
