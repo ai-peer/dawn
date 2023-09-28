@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f709d4c_4c4dfca0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-28T04:04:12Z",
+      "side": 1,
+      "message": "PTAL. The tests all appear to be passing now, so this should be good to go.",
+      "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
