@@ -16,6 +16,92 @@
       "message": "I\u0027ve renamed rgb10a2 to unorm10-10-10-2 as agreed in latest WG meeting.",
       "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a48df1_fda14e3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:00:04Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ded80b65_d6a1f390",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 1199,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:00:04Z",
+      "side": 1,
+      "message": "nit: this needs updating!",
+      "range": {
+        "startLine": 1199,
+        "startChar": 39,
+        "endLine": 1199,
+        "endChar": 47
+      },
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a520e5ef_12251c4e",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling.cc",
+        "patchSetId": 22
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:00:04Z",
+      "side": 1,
+      "message": "nit: maybe this can be unorm10-10-10-2 as well?",
+      "range": {
+        "startLine": 130,
+        "startChar": 27,
+        "endLine": 130,
+        "endChar": 42
+      },
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48b1e08c_4a2c8acd",
+        "filename": "src/tint/lang/wgsl/ast/transform/vertex_pulling.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:00:04Z",
+      "side": 1,
+      "message": "nit: unorm10-10-10-2",
+      "range": {
+        "startLine": 60,
+        "startChar": 26,
+        "endLine": 60,
+        "endChar": 41
+      },
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
