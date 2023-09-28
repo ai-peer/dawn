@@ -59,6 +59,24 @@
             {"name": "compatibility mode", "type": "bool", "default": "false", "tags": ["dawn", "emscripten"]}
         ]
     },
+    "request adapter callback": {
+        "category": "function pointer",
+        "args": [
+            {"name": "status", "type": "request adapter status"},
+            {"name": "adapter", "type": "adapter", "optional": true},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
+            {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "request adapter callback info": {
+         "category": "structure",
+         "extensible": "in",
+         "members": [
+            {"name": "mode", "type": "callback mode"},
+            {"name": "callback", "type": "request adapter callback"},
+            {"name": "userdata", "type": "void *"}
+         ]
+    },
     "request adapter status": {
         "category": "enum",
         "emscripten_no_enum_table": true,
@@ -67,15 +85,6 @@
             {"value": 1, "name": "unavailable"},
             {"value": 2, "name": "error"},
             {"value": 3, "name": "unknown"}
-        ]
-    },
-    "request adapter callback": {
-        "category": "function pointer",
-        "args": [
-            {"name": "status", "type": "request adapter status"},
-            {"name": "adapter", "type": "adapter", "optional": true},
-            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
-            {"name": "userdata", "type": "void *"}
         ]
     },
     "adapter": {
@@ -565,7 +574,7 @@
             {"name": "mode", "type": "callback mode"},
             {"name": "callback", "type": "buffer map callback"},
             {"name": "userdata", "type": "void *"}
-	]
+        ]
     },
     "buffer map async status": {
         "category": "enum",
