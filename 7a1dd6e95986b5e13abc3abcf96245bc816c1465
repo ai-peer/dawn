@@ -16,6 +16,40 @@
       "message": "Thanks a lot for the pointers Corentin, this is much nicer.",
       "revId": "7a1dd6e95986b5e13abc3abcf96245bc816c1465",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4e13872_ca92fdf0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T18:25:17Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "7a1dd6e95986b5e13abc3abcf96245bc816c1465",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "917fb457_0540251d",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T18:25:17Z",
+      "side": 1,
+      "message": "nit: This could be a DAWN_ASSERT",
+      "revId": "7a1dd6e95986b5e13abc3abcf96245bc816c1465",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

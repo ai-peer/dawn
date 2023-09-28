@@ -16,6 +16,24 @@
       "message": "I left this looping over the IterateBitSet because the `moduleBindingInfo` is an `ityp::array` and I wasn\u0027t sure if it was a sparse or packed array of groups. So, it seemed safer to keep this going over hte bitset and pulling out the group info in the below loop.\n\nIf the array is packed tightly, then i can change this to a counter over the array size.",
       "revId": "19871c6ccce7f0377b96782404e19be97c893660",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13c91351_88e5b9be",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T18:25:17Z",
+      "side": 1,
+      "message": "The array is packed tightly but either option sounds good, and correct!",
+      "parentUuid": "1867d551_236b2fab",
+      "revId": "19871c6ccce7f0377b96782404e19be97c893660",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
