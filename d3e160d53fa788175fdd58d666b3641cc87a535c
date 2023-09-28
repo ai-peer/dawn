@@ -50,6 +50,24 @@
       "message": "If this is an issue, then we probably have the same issue for uniform buffers.",
       "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3afb64aa_d6ca0efc",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-28T11:34:58Z",
+      "side": 1,
+      "message": "Not sure what you mean, uniform buffers wills show up twice? What would be the other type they show up as?",
+      "parentUuid": "ddd103ee_90fc0b89",
+      "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
