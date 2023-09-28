@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27581896_ba160fc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:48:06Z",
+      "side": 1,
+      "message": "LGTM, the Tint logic didn\u0027t change since the last time Ben looked at it.",
+      "revId": "b44abc2f72a27d33e46124883fadbd84236e49e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
