@@ -50,6 +50,24 @@
       "message": "nit: This could be a DAWN_ASSERT",
       "revId": "7a1dd6e95986b5e13abc3abcf96245bc816c1465",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc214bea_295465ad",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-09-28T18:31:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "917fb457_0540251d",
+      "revId": "7a1dd6e95986b5e13abc3abcf96245bc816c1465",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
