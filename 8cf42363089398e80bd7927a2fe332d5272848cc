@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7d375bb_9288c19f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-28T07:56:37Z",
+      "side": 1,
+      "message": "I\u0027ve renamed rgb10a2 to unorm10-10-10-2 as agreed in latest WG meeting.",
+      "revId": "8cf42363089398e80bd7927a2fe332d5272848cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
