@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c23fac06_dc1c235e",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 6
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-28T13:46:22Z",
+      "side": 1,
+      "message": "This function seems unnecessary. Can\u0027t we just fold its contents directly into `function(tint_fuzzer_compile_options...)` where it\u0027s being invoked?",
+      "revId": "db3f61879f05e5cbffed3055b87d11b942e60ed1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
