@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80680684_2bf5fa8b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-09-28T12:57:17Z",
+      "side": 1,
+      "message": "android-binary-size supersize result:\n\"total\u003d-32.0kb\" (if I\u0027m reading the metrics correctly): https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8768710426162276273/+/u/Read_diff_results/json.output",
+      "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
