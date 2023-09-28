@@ -40,6 +40,7 @@ function(add_tint_fuzzer NAME)
     tint_spvheaders_compile_options(${NAME})
     tint_spvtools_compile_options(${NAME})
   endif()
+  target_link_libraries(${NAME} PRIVATE tint_lang_spirv_writer_helpers)
   target_compile_options(${NAME} PRIVATE -Wno-missing-prototypes)
 endfunction()
 
@@ -122,7 +123,7 @@ if (${TINT_BUILD_WGSL_READER}
     tint_common_fuzzer.cc
     tint_common_fuzzer.h
   )
-  target_link_libraries(tint_black_box_fuzz_target PRIVATE libtint)
+  target_link_libraries(tint_black_box_fuzz_target PRIVATE libtint tint_lang_spirv_writer_helpers)
   tint_default_compile_options(tint_black_box_fuzz_target)
   tint_spvtools_compile_options(tint_black_box_fuzz_target)
 endif()
