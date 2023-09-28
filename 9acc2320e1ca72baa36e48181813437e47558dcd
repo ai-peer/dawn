@@ -16,6 +16,40 @@
       "message": "Note: This changes the standalone build, in that we need to set `use_libfuzzer \u003d true` in `args.gn` to build the fuzzers.",
       "revId": "9acc2320e1ca72baa36e48181813437e47558dcd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b266706_de3d90a8",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T09:13:59Z",
+      "side": 1,
+      "message": "I didn\u0027t see that this now requires use_libfuzzer \u003d true, can you update fuzzing.md?",
+      "revId": "9acc2320e1ca72baa36e48181813437e47558dcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87e1401f_a7b24b78",
+        "filename": "src/dawn/fuzzers/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T09:13:59Z",
+      "side": 1,
+      "message": "Given that fuzzer_test is a noop without libfuzzer\u003dtrue, do we have tesing of that build configuration in standalone? Otherwise the files like DawnWireServerAndFrontendFuzzer.cpp might not even be compiled on CQ.",
+      "revId": "9acc2320e1ca72baa36e48181813437e47558dcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
