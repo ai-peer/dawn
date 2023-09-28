@@ -160,5 +160,30 @@ TEST_F(BlockAllocatorTest, ObjectOrder) {
     }
 }
 
+TEST_F(BlockAllocatorTest, AddWhileIterating) {
+    using Allocator = BlockAllocator<size_t>;
+
+    Allocator allocator;
+    for (int i = 0; i < 20; i++) {
+        allocator.Create(allocator.Count());
+
+        std::vector<size_t*> seen;
+        for (auto* j : allocator.Objects()) {
+            if (*j % 3 == 0) {
+                allocator.Create(allocator.Count());
+            }
+            seen.push_back(j);
+        }
+
+        // Check that iteration-while-adding saw the same list of objects as an
+        // iteration-without-adding.
+        size_t n = 0;
+        for (auto* obj : allocator.Objects()) {
+            ASSERT_TRUE(n < seen.size());
+            EXPECT_EQ(seen[n++], obj);
+        }
+    }
+}
+
 }  // namespace
 }  // namespace tint
