@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b0b16053_545b4d5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:26:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67d41f88_8dd9f76d",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:26:48Z",
+      "side": 1,
+      "message": "nit: mIsShutdown",
+      "range": {
+        "startLine": 142,
+        "startChar": 9,
+        "endLine": 142,
+        "endChar": 19
+      },
+      "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe2f4781_968be454",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:26:48Z",
+      "side": 1,
+      "message": "This only works because the event is spontaneous at the moment, but as soon as it might not be spontaneous, we will be storing pointers in the event to data that becomes invalid right after `OnRequestAdapterCallback`. The members should be owned by the data.",
+      "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd80813e_37ceeaaf",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:26:48Z",
+      "side": 1,
+      "message": "Maybe this could be a ref to the adapter just to make the lifetime semantic more clear?",
+      "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
