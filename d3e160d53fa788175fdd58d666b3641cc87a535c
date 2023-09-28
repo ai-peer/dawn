@@ -86,6 +86,24 @@
       "parentUuid": "3afb64aa_d6ca0efc",
       "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bac2b108_a28d2e5f",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T11:56:03Z",
+      "side": 1,
+      "message": "Thinking about this more, it seems we could fix this by using the shader\u0027s info instead of the bind group\u0027s info to get the type of the binding. Here the code is seeing the \"decayed\" bindings from the bind group layout, when what Tint cares about are the actual bindings from the module. Then we could have a \n\n```\n  case BindingInfoType::ExternalTexture:\n    // Replace the external texture with the decayed bindings\n    expandedExternalTexture \u003d GetExternalTextureBindingExpansionMap()[srcBindingPoint]\n    // Do the logic in the loop above\n```\n\nWDYT?",
+      "parentUuid": "3c40d233_3a2283b0",
+      "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
