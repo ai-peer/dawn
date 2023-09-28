@@ -22,6 +22,30 @@
       },
       "revId": "fdab14e2280e514d30300d8cdfb68bbc0767f326",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aec64882_894e0b9f",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3915,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-28T11:42:32Z",
+      "side": 0,
+      "message": "I don\u0027t think we have any other builtins that take pointers?",
+      "parentUuid": "96fb90d6_ad3a5315",
+      "range": {
+        "startLine": 3915,
+        "startChar": 46,
+        "endLine": 3915,
+        "endChar": 66
+      },
+      "revId": "fdab14e2280e514d30300d8cdfb68bbc0767f326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
