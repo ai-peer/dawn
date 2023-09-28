@@ -206,6 +206,12 @@ void InstanceBase::APIRequestAdapter(const RequestAdapterOptions* options,
     }
 }
 
+Future InstanceBase::APIRequestAdapterF(const RequestAdapterOptions* options,
+                                        const RequestAdapterCallbackInfo& callbackInfo) {
+    // TODO(dawn:1987) Implement this.
+    DAWN_UNREACHABLE();
+}
+
 void InstanceBase::DiscoverDefaultPhysicalDevices() {
     dawn::WarningLog() << "DiscoverDefaultPhysicalDevices is deprecated. Call EnumerateAdapters or "
                           "RequestAdapter instead.";

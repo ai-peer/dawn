@@ -62,6 +62,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     void APIRequestAdapter(const RequestAdapterOptions* options,
                            WGPURequestAdapterCallback callback,
                            void* userdata);
+    Future APIRequestAdapterF(const RequestAdapterOptions* options,
+                              const RequestAdapterCallbackInfo& callbackInfo);
 
     // Deprecated: Discover physical devices and save them on the instance.
     void DiscoverDefaultPhysicalDevices();
