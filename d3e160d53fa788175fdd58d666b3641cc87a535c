@@ -16,6 +16,40 @@
       "message": "PTAL. The tests all appear to be passing now, so this should be good to go.",
       "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0d86bb_efd1abee",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:34:01Z",
+      "side": 1,
+      "message": "nit: default: DAWN_UNREACHABLE() works here and for ExternalTexture below (which should be already be decayed before the data is put in bglInternal).",
+      "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddd103ee_90fc0b89",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T08:34:01Z",
+      "side": 1,
+      "message": "If this is an issue, then we probably have the same issue for uniform buffers.",
+      "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
