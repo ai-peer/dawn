@@ -68,6 +68,24 @@
       "parentUuid": "ddd103ee_90fc0b89",
       "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3c40d233_3a2283b0",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-28T11:47:13Z",
+      "side": 1,
+      "message": "Sorry I should have described this more. The ExternalTexture bindings in the wgpu:: API bind group layouts get transformed in the Dawn frontend into a uniform buffer and two texture bindings. This is what the bind group layout internal shows to the backend. If the textures added by this decaying are showing up twice in here, then why isn\u0027t the uniform buffer showing twice as well?\n\nDigging into it, it seems we reuse the external texture binding entry for plane0, which is probably the issue.\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/BindGroupLayoutInternal.cpp;drc\u003d4ef1375effe7f385c713ce0e6211a13739b03cb2;l\u003d270\n\nDoes changing that line to use    `nextOpenBindingNumberForNewEntry++` as well fix the issue you were seeing (without breaking everything else?)",
+      "parentUuid": "3afb64aa_d6ca0efc",
+      "revId": "d3e160d53fa788175fdd58d666b3641cc87a535c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
