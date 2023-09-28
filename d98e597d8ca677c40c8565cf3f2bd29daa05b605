@@ -33,6 +33,24 @@
       "message": "LGTM but I would like Ben and Ryan to review as well.\n\nBen, Ryan do you think this feature is ready on the Tint and CTS side?",
       "revId": "d98e597d8ca677c40c8565cf3f2bd29daa05b605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad1f3fcb_938dcec7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000250
+      },
+      "writtenOn": "2023-09-28T15:09:39Z",
+      "side": 1,
+      "message": "From a CTS perspective, the f16 coverage is as complete as the f32 coverage, and both of those are in a better position than f32 was when we launched WebGPU, so I think we are at a good point on the test everything in detail vs launch the thing scale.",
+      "parentUuid": "faacbbb6_234a94b7",
+      "revId": "d98e597d8ca677c40c8565cf3f2bd29daa05b605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
