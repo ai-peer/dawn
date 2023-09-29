@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "09caf9b0_1650a09c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:32:59Z",
+      "side": 1,
+      "message": "(left a couple comments on the previous CL while I was understanding this one)",
+      "revId": "a9737fd300e574175f7dedca427a17a6ad8367f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3604428a_df38bd68",
