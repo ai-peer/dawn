@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdb1ac2d_1f40e423",
+        "filename": "src/dawn/native/QueryHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-29T12:21:18Z",
+      "side": 1,
+      "message": "nit: quantizationMask, if that triggers a -Wshadow then you can call it quantizationMaskIn.",
+      "range": {
+        "startLine": 168,
+        "startChar": 42,
+        "endLine": 168,
+        "endChar": 59
+      },
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0e77ee6_6d185ecc",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-29T12:21:18Z",
+      "side": 1,
+      "message": "Can we enable this by default in https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Adapter.cpp;drc\u003d77806a4cacd6357ff9b2fcb63ad8f53f62453d6d;l\u003d193 ?",
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb17ff5d_163bd825",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-29T12:21:18Z",
+      "side": 1,
+      "message": "nit: to reduce the precision of timers that can be create with timestamp queries.",
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "473903ea_638e0e52",
+        "filename": "src/dawn/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-29T12:21:18Z",
+      "side": 1,
+      "message": "Can we have a test that when a quantization mask is provided the correct quantization happens?",
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
