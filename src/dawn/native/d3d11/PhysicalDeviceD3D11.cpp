@@ -185,6 +185,7 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
     limits->v1.maxSampledTexturesPerShaderStage = D3D11_COMMONSHADER_INPUT_RESOURCE_SLOT_COUNT;
     limits->v1.maxSamplersPerShaderStage = D3D11_COMMONSHADER_SAMPLER_SLOT_COUNT;
     limits->v1.maxColorAttachments = D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT;
+    limits->v1.maxColorAttachmentBytesPerSample = D3D11_SIMULTANEOUS_RENDER_TARGET_COUNT * 16;
 
     limits->v1.maxDynamicUniformBuffersPerPipelineLayout =
         limits->v1.maxUniformBuffersPerShaderStage;
