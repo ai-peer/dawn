@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38bca9c8_aef95444",
+        "filename": "src/tint/lang/core/ir/transform/conversion_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-29T16:58:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b1dbcaf_4ef834cf",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 13
+      },
+      "revId": "7bee478b5451f043820f71ffdf4b05f0045e0355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a2c9fb6_77ecbcdf",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-09-29T16:24:48Z",
       "side": 1,
       "message": "Please can you add some comments where these magic biases come from?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 96
+      },
+      "revId": "7bee478b5451f043820f71ffdf4b05f0045e0355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f37a738e_8564a02e",
+        "filename": "src/tint/lang/core/ir/transform/conversion_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-29T16:58:13Z",
+      "side": 1,
+      "message": "Done, and switched to using `std::nexttoward()` to generate the values to make it a little less magic.",
+      "parentUuid": "5a2c9fb6_77ecbcdf",
       "range": {
         "startLine": 124,
         "startChar": 0,
