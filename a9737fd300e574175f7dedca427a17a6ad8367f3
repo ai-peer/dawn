@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c1f888b_bea8a6b7",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T01:16:02Z",
+      "side": 1,
+      "message": "wondering if we really need to template this\n\nalternatively, it could store the mode + ready bool.\n\nand the derived classes continue storing their specific ready data and callback (like they do previous to this change).\n\nTo handle event-specific data, SetFutureReady could be:\n\n```\n    // (removed the sync stuff for simplicity)\n    template \u003ctypename Event, typename... ReadyArgs\u003e\n    bool SetFutureReady(int futureId, ReadyArgs\u0026\u0026... readyArgs) {\n        auto\u0026 ev \u003d events.at(futureId);\n        ev-\u003eready \u003d true;\n    \n        if (ev-\u003eGetType() !\u003d Event::kType) {\n            return false;\n        }\n        static_cast\u003cEvent*\u003e(ev.get())-\u003eReadyHook(std::forward\u003cReadyArgs\u003e(readyArgs)...);\n\n        std::unique_ptr\u003cTrackedEvent\u003e spontaneousEvent;\n        if (ev-\u003emode \u003d\u003d spontaneous) {\n            spontaneousEvent \u003d std::move(ev);\n        }\n\n        if (spontaneousEvent) {\n            spontaneousEvent-\u003eComplete(EventCompletionType::Ready);\n        }\n        return true;\n    }\n```",
+      "revId": "a9737fd300e574175f7dedca427a17a6ad8367f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3604428a_df38bd68",
         "filename": "src/dawn/wire/client/EventManager.h",
         "patchSetId": 1
