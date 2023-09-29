@@ -705,9 +705,13 @@ MaybeError EncodeTimestampsToNanosecondsConversion(CommandEncoder* encoder,
     DAWN_TRY(device->GetQueue()->WriteBuffer(availabilityBuffer.Get(), 0, availability.data(),
                                              availability.size() * sizeof(uint32_t)));
 
+    // Quantization mask allows us to perform a granularity of ~0.1ms.
+    const uint32_t quantization_mask =
+        (device->IsToggleEnabled(Toggle::TimestampQuantization)) ? 0xFFFF0000 : 0xFFFFFFFF;
+
     // Timestamp params uniform buffer
     TimestampParams params(firstQuery, queryCount, static_cast<uint32_t>(destinationOffset),
-                           device->GetTimestampPeriodInNS());
+                           quantization_mask, device->GetTimestampPeriodInNS());
 
     BufferDescriptor parmsDesc = {};
     parmsDesc.usage = wgpu::BufferUsage::Uniform | wgpu::BufferUsage::CopyDst;
