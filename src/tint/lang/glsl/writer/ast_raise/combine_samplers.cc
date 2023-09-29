@@ -136,12 +136,18 @@ struct CombineSamplers::State {
     /// @param sampler the texture variable of interest
     /// @returns the newly-created type
     ast::Type CreateCombinedASTTypeFor(const sem::Variable* texture, const sem::Variable* sampler) {
-        const core::type::Type* texture_type = texture->Type()->UnwrapRef();
-        const core::type::DepthTexture* depth = texture_type->As<core::type::DepthTexture>();
-        if (depth && !sampler) {
-            return ctx.dst->ty.sampled_texture(depth->dim(), ctx.dst->ty.f32());
+        if (texture) {
+            const core::type::Type* texture_type = texture->Type()->UnwrapRef();
+            const core::type::DepthTexture* depth = texture_type->As<core::type::DepthTexture>();
+            if (depth && !sampler) {
+                return ctx.dst->ty.sampled_texture(depth->dim(), ctx.dst->ty.f32());
+            } else {
+                return CreateASTTypeFor(ctx, texture_type);
+            }
         } else {
-            return CreateASTTypeFor(ctx, texture_type);
+            TINT_ASSERT(sampler != nullptr);
+            const core::type::Type* sampler_type = sampler->Type()->UnwrapRef();
+            return CreateASTTypeFor(ctx, sampler_type);
         }
     }
 
@@ -155,7 +161,10 @@ struct CombineSamplers::State {
                     tint::Vector<const ast::Parameter*, 8>* params) {
         const sem::Variable* texture_var = pair.first;
         const sem::Variable* sampler_var = pair.second;
-        std::string name = texture_var->Declaration()->name->symbol.Name();
+        std::string name = "";
+        if (texture_var) {
+            name = texture_var->Declaration()->name->symbol.Name();
+        }
         if (sampler_var) {
             name += "_" + sampler_var->Declaration()->name->symbol.Name();
         }
