@@ -58,6 +58,7 @@ tint_fuzz_source_set("fuzz") {
 }
 
 tint_fuzzer_test("wgsl") {
+  output_name = "tint_wgsl_fuzzer"
   sources = [ "main_fuzz.cc" ]
   deps = [
     "${tint_src_dir}/cmd/fuzz/wgsl:fuzz",
@@ -65,6 +66,7 @@ tint_fuzzer_test("wgsl") {
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/type",
     "${tint_src_dir}/lang/wgsl",
+    "${tint_src_dir}/lang/wgsl:fuzz",
     "${tint_src_dir}/lang/wgsl/ast",
     "${tint_src_dir}/lang/wgsl/ast/transform:fuzz",
     "${tint_src_dir}/lang/wgsl/program",
