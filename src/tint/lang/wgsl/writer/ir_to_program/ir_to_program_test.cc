@@ -16,6 +16,7 @@
 #include <string>
 
 #include "src/tint/lang/core/ir/disassembler.h"
+#include "src/tint/lang/wgsl/ir/builtin_call.h"
 #include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.h"
 #include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program_test.h"
 #include "src/tint/lang/wgsl/writer/writer.h"
@@ -1637,6 +1638,48 @@ TEST_F(IRToProgramTest, NonShortCircuit_Or_Param_3_a_bc_EarlyEval) {
 fn f(a : bool, b : bool, c : bool) -> bool {
   let v = (b || c);
   return (a || v);
+}
+)");
+}
+
+TEST_F(IRToProgramTest, NonShortCircuit_LogicalAnd) {
+    // %a:bool = let true
+    // %3:bool = and %a, true
+    // %4:bool = wgsl.select %3, true, false
+    // %v:ptr<function, bool, read_write> = var, %4
+
+    auto* fn = b.Function("f", ty.bool_());
+
+    b.Append(fn->Block(), [&] {
+        auto* a = b.Let("a", true);
+        auto* logical_and = b.And(ty.bool_(), a, true);
+        auto* select = b.Append(mod.instructions.Create<wgsl::ir::BuiltinCall>(
+            b.InstructionResult(ty.bool_()), wgsl::BuiltinFn::kSelect,
+            Vector{
+                logical_and->Result(),
+                b.Value(true),
+                b.Value(false),
+            }));
+        auto* var = b.Var<function>("v", select);
+        b.Return(fn, b.Load(var));
+    });
+
+    EXPECT_WGSL(R"(
+fn a() -> bool {
+  return true;
+}
+
+fn b() -> bool {
+  return true;
+}
+
+fn c() -> bool {
+  return true;
+}
+
+fn f() -> bool {
+  let v = (b() || c());
+  return (a() || v);
 }
 )");
 }
