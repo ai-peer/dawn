@@ -33,6 +33,40 @@
       "message": "LGTM\n\nnit: I think we should use +\u003d instead of \u003c\u003c.\nThe stream abstraction isn\u0027t that useful in this particular case\n\nyou could also explore doing the \"string-per-line\" idea that was mentioned in the bug, though it may not help as much as this first major reduction here.",
       "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2086e15_2c59608f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-29T12:33:34Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38faa9e0_8facafa8",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-29T12:33:34Z",
+      "side": 1,
+      "message": "I wonder if we could have a constexpr type / function that \"compresses\" strings in release builds for binary size, for example by removing extra spaces.",
+      "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
