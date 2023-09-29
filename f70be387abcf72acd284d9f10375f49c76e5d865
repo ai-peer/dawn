@@ -90,6 +90,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "48e7e694_1c784775",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-09-29T14:08:28Z",
+      "side": 1,
+      "message": "Turns out the stirng-per-line style loses natrual line breaks which lead to some syntax error.\nKeep using R\"()\" in this patch.",
+      "parentUuid": "f237b7d3_94343d18",
+      "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "38faa9e0_8facafa8",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 1
