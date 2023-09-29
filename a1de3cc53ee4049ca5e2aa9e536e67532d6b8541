@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8797a6c1_3d4eef84",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:09:44Z",
+      "side": 0,
+      "message": "yea, we shouldn\u0027t delete this yet until you\u0027ve implemented lazy clear for multiplanar textures. This will be more complicated on Vulkan/D3D12 because you need to do the barriers.\nI believe it\u0027s the case you should only lift the validation for Metal since that\u0027s where the clearing will work.\n\nFor metal, you should be making the texture with internal RenderAttachment usage.\nThen, you can write a test which prepopulates some multiplanar IOSurface, then imports it a uninitialized - sampling it should yield zeros.\n\nyou can check native::GetLazyClearCountForTesting before/after the sampling operation to check that the texture indeed was lazy-cleared when it was sampled.",
+      "parentUuid": "fac7c01c_f9690d76",
+      "revId": "a1de3cc53ee4049ca5e2aa9e536e67532d6b8541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d83d300f_0002e36e",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 24
