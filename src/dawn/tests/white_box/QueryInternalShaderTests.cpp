@@ -165,8 +165,10 @@ class QueryInternalShaderTests : public DawnTest {
             utils::CreateBufferFromData(device, availabilities.data(),
                                         kQueryCount * sizeof(uint32_t), wgpu::BufferUsage::Storage);
 
+        uint32_t quantizationMask = 0xFFFFFFFF;
         // The params uniform buffer
-        native::TimestampParams params(firstQuery, queryCount, destinationOffset, period);
+        native::TimestampParams params(firstQuery, queryCount, destinationOffset, quantizationMask,
+                                       period);
         wgpu::Buffer paramsBuffer = utils::CreateBufferFromData(device, &params, sizeof(params),
                                                                 wgpu::BufferUsage::Uniform);
 
