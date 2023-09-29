@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5cc077e_44d07513",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T21:00:20Z",
+      "side": 1,
+      "message": "Note: I\u0027m removing the global lock for Release calls in the next CL to derisk this. (I ran the tests on that CL)\n\nremoving that lock makes it so that DestroyImpl may be called whenever someone drops a resource on another thread.\n\nI did a find and replace to tag all DestroyImpl with `// CHECK THREADSAFE` so that you can have the context for all of them in the CL.\nI will remove that comment after review.",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
