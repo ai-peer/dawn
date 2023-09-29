@@ -66,6 +66,7 @@ tint_fuzzer_test("wgsl") {
     "${tint_src_dir}/lang/core/type",
     "${tint_src_dir}/lang/wgsl",
     "${tint_src_dir}/lang/wgsl/ast",
+    "${tint_src_dir}/lang/wgsl/ast/transform:fuzz",
     "${tint_src_dir}/lang/wgsl/program",
     "${tint_src_dir}/lang/wgsl/program:fuzz",
     "${tint_src_dir}/lang/wgsl/sem",
