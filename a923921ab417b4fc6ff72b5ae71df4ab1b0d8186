@@ -1,0 +1,142 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "def16872_bcc0bcea",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:32:33Z",
+      "side": 1,
+      "message": "why doesn\u0027t this take unique_ptr and the caller passes it in via std::make_unique ?",
+      "range": {
+        "startLine": 30,
+        "startChar": 51,
+        "endLine": 30,
+        "endChar": 70
+      },
+      "revId": "a923921ab417b4fc6ff72b5ae71df4ab1b0d8186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fcc51de_b74fb144",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:32:33Z",
+      "side": 1,
+      "message": "why this std::move?",
+      "range": {
+        "startLine": 35,
+        "startChar": 9,
+        "endLine": 35,
+        "endChar": 22
+      },
+      "revId": "a923921ab417b4fc6ff72b5ae71df4ab1b0d8186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7aa34dbb_3fdb7fcd",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:32:33Z",
+      "side": 1,
+      "message": "why this std::move?",
+      "range": {
+        "startLine": 59,
+        "startChar": 12,
+        "endLine": 59,
+        "endChar": 21
+      },
+      "revId": "a923921ab417b4fc6ff72b5ae71df4ab1b0d8186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e6e3da7_0c295ccc",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:32:33Z",
+      "side": 1,
+      "message": "nit: probably could have been named `spontaneousEvent`",
+      "range": {
+        "startLine": 72,
+        "startChar": 49,
+        "endLine": 72,
+        "endChar": 54
+      },
+      "revId": "a923921ab417b4fc6ff72b5ae71df4ab1b0d8186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d20ae45d_0c80061e",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:32:33Z",
+      "side": 1,
+      "message": "why the std::move()? it\u0027s about to be dropped anyway",
+      "range": {
+        "startLine": 90,
+        "startChar": 8,
+        "endLine": 90,
+        "endChar": 25
+      },
+      "revId": "a923921ab417b4fc6ff72b5ae71df4ab1b0d8186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "873c12a9_705c7479",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T00:32:33Z",
+      "side": 1,
+      "message": "why the std::move()? it\u0027s about to be dropped anyway",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 25
+      },
+      "revId": "a923921ab417b4fc6ff72b5ae71df4ab1b0d8186",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
