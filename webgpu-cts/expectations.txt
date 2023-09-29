@@ -695,6 +695,7 @@ crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension=
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rg8sint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rg8uint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rg8unorm" [ Failure ]
+crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgb10a2uint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgb10a2unorm" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba16float" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba16sint" [ Failure ]
