@@ -37,8 +37,11 @@ class InternalShaderExpectation : public ::dawn::detail::Expectation {
   public:
     ~InternalShaderExpectation() override = default;
 
-    InternalShaderExpectation(const uint64_t* values, const unsigned int count) {
+    InternalShaderExpectation(const uint64_t* values,
+                              const unsigned int count,
+                              const uint32_t quantizationMask) {
         mExpected.assign(values, values + count);
+        mQuantizationMask = quantizationMask;
     }
 
     // Expect the actual results are approximately equal to the expected values.
@@ -62,13 +65,33 @@ class InternalShaderExpectation : public ::dawn::detail::Expectation {
                 continue;
             }
 
-            float errorRate = abs(static_cast<int64_t>(mExpected[i] - actual[i])) /
-                              static_cast<float>(mExpected[i]);
-            if (errorRate > kErrorToleranceRatio) {
+            // Get the upper 32 bits.
+            uint32_t highExpected = (mExpected[i] >> 32) & 0xFFFFFFFF;
+            uint32_t highActual = (actual[i] >> 32) & 0xFFFFFFFF;
+
+            float highErrorRate = abs(static_cast<int64_t>(highExpected - highActual)) /
+                                  static_cast<float>(highExpected);
+            if (highErrorRate > kErrorToleranceRatio) {
                 return testing::AssertionFailure()
-                       << "Expected data[" << i << "] to be " << mExpected[i] << ", actual "
-                       << actual[i] << ". Error rate " << errorRate << " is larger than "
-                       << kErrorToleranceRatio << std::endl;
+                       << "Expected upper 32 bits data[" << i << "] to be " << highExpected
+                       << ", actual " << highActual << ". Error rate " << highErrorRate
+                       << " is larger than " << kErrorToleranceRatio << std::endl;
+            }
+
+            // Get the lower 32 bits.
+            uint32_t lowExpected = mExpected[i] & 0xFFFFFFFF;
+            uint32_t lowActual = actual[i] & 0xFFFFFFFF;
+
+            // Apply quantization mask.
+            lowExpected &= mQuantizationMask;
+
+            float lowErrorRate = abs(static_cast<int64_t>(lowExpected - lowActual)) /
+                                 static_cast<float>(lowExpected);
+            if (lowErrorRate > kErrorToleranceRatio) {
+                return testing::AssertionFailure()
+                       << "Expected lower 32 bits data[" << i << "] to be " << lowExpected
+                       << ", actual " << lowActual << ". Error rate " << lowErrorRate
+                       << " is larger than " << kErrorToleranceRatio << std::endl;
             }
         }
 
@@ -77,6 +100,7 @@ class InternalShaderExpectation : public ::dawn::detail::Expectation {
 
   private:
     std::vector<uint64_t> mExpected;
+    uint32_t mQuantizationMask;
 };
 
 constexpr static uint64_t kSentinelValue = ~uint64_t(0u);
@@ -138,6 +162,7 @@ class QueryInternalShaderTests : public DawnTest {
     void RunTest(uint32_t firstQuery,
                  uint32_t queryCount,
                  uint32_t destinationOffset,
+                 uint32_t quantizationMask,
                  float period) {
         DAWN_ASSERT(destinationOffset % kQueryResolveAlignment == 0);
 
@@ -166,7 +191,8 @@ class QueryInternalShaderTests : public DawnTest {
                                         kQueryCount * sizeof(uint32_t), wgpu::BufferUsage::Storage);
 
         // The params uniform buffer
-        native::TimestampParams params(firstQuery, queryCount, destinationOffset, period);
+        native::TimestampParams params(firstQuery, queryCount, destinationOffset, quantizationMask,
+                                       period);
         wgpu::Buffer paramsBuffer = utils::CreateBufferFromData(device, &params, sizeof(params),
                                                                 wgpu::BufferUsage::Uniform);
 
@@ -180,9 +206,11 @@ class QueryInternalShaderTests : public DawnTest {
             GetExpectedResults(timestampValues, start, firstQuery, queryCount, period);
 
         EXPECT_BUFFER(timestampsBuffer, 0, size,
-                      new InternalShaderExpectation(expected.data(), size / sizeof(uint64_t)))
+                      new InternalShaderExpectation(expected.data(), size / sizeof(uint64_t),
+                                                    quantizationMask))
             << "Conversion test for period:" << period << " firstQuery:" << firstQuery
-            << " queryCount:" << queryCount << " destinationOffset:" << destinationOffset;
+            << " queryCount:" << queryCount << " destinationOffset:" << destinationOffset
+            << " quantizationMask: 0x" << std::hex << quantizationMask;
     }
 };
 
@@ -198,7 +226,7 @@ class QueryInternalShaderTests : public DawnTest {
 // - The params buffer passes the timestamp count, the offset in timestamps buffer and the
 //   timestamp period (here use GPU frequency (HZ) on Intel D3D12 to calculate the period in
 //   ns for testing).
-TEST_P(QueryInternalShaderTests, TimestampComputeShader) {
+TEST_P(QueryInternalShaderTests, TimestampComputeShaderMultiplication) {
     // TODO(crbug.com/dawn/741): Test output is wrong with D3D12 + WARP.
     DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWARP());
     // TODO(crbug.com/dawn/1617): VUID-vkUpdateDescriptorSets-None-03047 on UHD630
@@ -214,18 +242,41 @@ TEST_P(QueryInternalShaderTests, TimestampComputeShader) {
         65535,
     };
 
+    const uint32_t kNoOpQuantizationBitmask = 0xFFFFFFFF;
+
     for (float period : kPeriodsToTest) {
         // Convert timestamps in timestamps buffer with offset 0
         // Test for ResolveQuerySet(querySet, 0, kQueryCount, timestampsBuffer, 0)
-        RunTest(0, kQueryCount, 0, period);
+        RunTest(0, kQueryCount, 0, kNoOpQuantizationBitmask, period);
 
         // Convert timestamps in timestamps buffer with offset 256
         // Test for ResolveQuerySet(querySet, 1, kQueryCount - 1, timestampsBuffer, 256)
-        RunTest(1, kQueryCount - 1, kQueryResolveAlignment, period);
+        RunTest(1, kQueryCount - 1, kQueryResolveAlignment, kNoOpQuantizationBitmask, period);
 
         // Convert partial timestamps in timestamps buffer with offset 256
         // Test for ResolveQuerySet(querySet, 1, 4, timestampsBuffer, 256)
-        RunTest(1, 4, kQueryResolveAlignment, period);
+        RunTest(1, 4, kQueryResolveAlignment, kNoOpQuantizationBitmask, period);
+    }
+}
+
+TEST_P(QueryInternalShaderTests, TimestampComputeShaderQuantization) {
+    DAWN_TEST_UNSUPPORTED_IF(!HasToggleEnabled("timestamp_quantization"));
+    // TODO(crbug.com/dawn/741): Test output is wrong with D3D12 + WARP.
+    DAWN_SUPPRESS_TEST_IF(IsD3D12() && IsWARP());
+    // TODO(crbug.com/dawn/1617): VUID-vkUpdateDescriptorSets-None-03047 on UHD630
+    // driver 31.0.101.2111
+    DAWN_SUPPRESS_TEST_IF(IsWindows() && IsVulkan() && IsIntel());
+
+    constexpr std::array<uint32_t, 3> kQuantizationMasksToTest = {
+        0xFFFFFFFF,
+        0xFFFFFF00,
+        0xFFFF0000,
+    };
+
+    for (uint32_t quantizationMask : kQuantizationMasksToTest) {
+        // Convert timestamps in timestamps buffer with offset 0
+        // Test for ResolveQuerySet(querySet, 0, kQueryCount, timestampsBuffer, 0)
+        RunTest(0, kQueryCount, 0, quantizationMask, 1);
     }
 }
 
