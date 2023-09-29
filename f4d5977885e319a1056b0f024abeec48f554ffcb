@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef33ebf6_2540674c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-09-29T21:44:35Z",
+      "side": 1,
+      "message": "Addressed feedback and added back uninitialized texture validation. Please take another look, thanks.",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

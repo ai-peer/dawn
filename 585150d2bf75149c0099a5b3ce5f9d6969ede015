@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12ef10ce_39a99dfd",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-09-29T21:44:35Z",
+      "side": 1,
+      "message": "This was needed to be added for P010 format otherwise it led to alignment issues in checking for size. Not sure if its expected to be passed or it assumes single channel.",
+      "range": {
+        "startLine": 1164,
+        "startChar": 30,
+        "endLine": 1164,
+        "endChar": 47
+      },
+      "revId": "585150d2bf75149c0099a5b3ce5f9d6969ede015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

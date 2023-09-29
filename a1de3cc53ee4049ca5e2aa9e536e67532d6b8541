@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c25e53a_14386d98",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-09-29T21:44:35Z",
+      "side": 0,
+      "message": "That makes sense. I\u0027ve added back all the necessary validations for uninitialized multiplanar textures (and updated tests as well).\n\nI looked into checking if it clears the texture before sampling. It goes through blit path but fails in [ComputeMTLBlitOption](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/TextureMTL.mm;drc\u003dba15ffd71335c75897f4bd8501b3c8ed00a284da;l\u003d1101). Hacking there a bit to pass right MTLPixelFormat for plane I get null [GetMTLTexture()](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/TextureMTL.mm;drc\u003dba15ffd71335c75897f4bd8501b3c8ed00a284da;l\u003d1109)\n\nI\u0027ll add a TODO so that this is handled for metal (and other platforms) as this seems a fair bit of work on its own.",
+      "parentUuid": "8797a6c1_3d4eef84",
+      "revId": "a1de3cc53ee4049ca5e2aa9e536e67532d6b8541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d83d300f_0002e36e",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 24
@@ -49,6 +67,24 @@
       "writtenOn": "2023-09-28T08:59:06Z",
       "side": 0,
       "message": "We can keep this test since the extension is not enabled there.",
+      "revId": "a1de3cc53ee4049ca5e2aa9e536e67532d6b8541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87e81e3c_bbc7a98a",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 24
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-09-29T21:44:35Z",
+      "side": 0,
+      "message": "Makes sense, added it back.",
+      "parentUuid": "d83d300f_0002e36e",
       "revId": "a1de3cc53ee4049ca5e2aa9e536e67532d6b8541",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
