@@ -677,6 +677,7 @@ crbug.com/dawn/1960 [ intel-0x9bc5 ubuntu ] webgpu:api,validation,error_scope:pa
 ################################################################################
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="bgra8unorm" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="bgra8unorm-srgb" [ Failure ]
+crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="bgra8unorm" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="r16float" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="r16sint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="r16uint" [ Failure ]
@@ -695,6 +696,7 @@ crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension=
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rg8sint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rg8uint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rg8unorm" [ Failure ]
+crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgb10a2uint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgb10a2unorm" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba16float" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba16sint" [ Failure ]
@@ -706,6 +708,7 @@ crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension=
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba8uint" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba8unorm" [ Failure ]
 crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba8unorm-srgb" [ Failure ]
+crbug.com/dawn/1020 webgpu:api,validation,createTexture:texture_usage:dimension="3d";format="rgba8unorm" [ Failure ]
 
 ################################################################################
 # Shader corr failing flakily on Android Pixel 6
