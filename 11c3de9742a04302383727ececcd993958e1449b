@@ -16,6 +16,75 @@
       "message": "PTAL",
       "revId": "11c3de9742a04302383727ececcd993958e1449b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8aa1721_d7d41695",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T01:31:40Z",
+      "side": 1,
+      "message": "nit:\n```suggestion\n  if (testcases.length \u003d\u003d\u003d 0) {\n```",
+      "range": {
+        "startLine": 167,
+        "startChar": 23,
+        "endLine": 167,
+        "endChar": 25
+      },
+      "revId": "11c3de9742a04302383727ececcd993958e1449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5c92192_e2f3636d",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T01:31:40Z",
+      "side": 1,
+      "message": "nit\n```suggestion\n  if (testcases.length !\u003d\u003d 1) {\n    sendMessageInfraFailure(\u0027Found more than 1 test for given query\u0027);\n    return;\n  }\n```",
+      "range": {
+        "startLine": 171,
+        "startChar": 2,
+        "endLine": 174,
+        "endChar": 3
+      },
+      "revId": "11c3de9742a04302383727ececcd993958e1449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7f2e43_79f65f35",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 1
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T01:31:40Z",
+      "side": 1,
+      "message": "nit: hoist this up after checking the length of testcases",
+      "range": {
+        "startLine": 190,
+        "startChar": 0,
+        "endLine": 190,
+        "endChar": 32
+      },
+      "revId": "11c3de9742a04302383727ececcd993958e1449b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
