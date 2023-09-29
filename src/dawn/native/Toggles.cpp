@@ -232,6 +232,9 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"disable_timestamp_query_conversion",
       "Resolve timestamp queries into ticks instead of nanoseconds.", "https://crbug.com/dawn/1305",
       ToggleStage::Device}},
+    {Toggle::TimestampQuantization,
+     {"timestamp_quantization", "Enable timestamp queries quantization.",
+      "https://crbug.com/dawn/1800", ToggleStage::Device}},
     {Toggle::ClearBufferBeforeResolveQueries,
      {"clear_buffer_before_resolve_queries",
       "clear destination buffer to zero before resolving queries. This toggle is enabled on Intel "
