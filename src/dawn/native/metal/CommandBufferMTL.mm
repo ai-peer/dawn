@@ -120,33 +120,23 @@ void SetSampleBufferAttachments(PassDescriptor* descriptor, BeginPass* cmd) {
     // Use @available instead of API_AVAILABLE because GetCounterSampleBuffer() also needs checking
     // API availability.
     if (@available(macOS 11.0, iOS 14.0, *)) {
-        QuerySetBase* beginQuerySet = cmd->beginTimestamp.querySet.Get();
-        QuerySetBase* endQuerySet = cmd->endTimestamp.querySet.Get();
-
+        QuerySetBase* querySet = cmd->timestampWrites.querySet.Get();
+        if (querySet == nullptr) {
+            return;
+        }
         SampleBufferAttachment<PassDescriptor> sampleBufferAttachment;
-
-        if (beginQuerySet != nullptr) {
-            sampleBufferAttachment.SetSampleBuffer(
-                descriptor, ToBackend(beginQuerySet)->GetCounterSampleBuffer());
-            sampleBufferAttachment.SetStartSampleIndex(descriptor,
-                                                       NSUInteger(cmd->beginTimestamp.queryIndex));
-
-            if (beginQuerySet == endQuerySet) {
-                sampleBufferAttachment.SetEndSampleIndex(descriptor,
-                                                         NSUInteger(cmd->endTimestamp.queryIndex));
-            } else {
-                sampleBufferAttachment.SetEndSampleIndex(descriptor, MTLCounterDontSample);
-            }
-        }
-
-        // Set to other sampleBufferAttachment if the endQuerySet is different with beginQuerySet.
-        if (endQuerySet != nullptr && beginQuerySet != endQuerySet) {
-            sampleBufferAttachment.SetSampleBuffer(
-                descriptor, ToBackend(endQuerySet)->GetCounterSampleBuffer());
-            sampleBufferAttachment.SetStartSampleIndex(descriptor, MTLCounterDontSample);
-            sampleBufferAttachment.SetEndSampleIndex(descriptor,
-                                                     NSUInteger(cmd->endTimestamp.queryIndex));
-        }
+        sampleBufferAttachment.SetSampleBuffer(descriptor,
+                                               ToBackend(querySet)->GetCounterSampleBuffer());
+        uint32_t beginningOfPassWriteIndex = cmd->timestampWrites.beginningOfPassWriteIndex;
+        sampleBufferAttachment.SetStartSampleIndex(
+            descriptor, beginningOfPassWriteIndex != wgpu::kQuerySetIndexUndefined
+                            ? NSUInteger(beginningOfPassWriteIndex)
+                            : MTLCounterDontSample);
+        uint32_t endOfPassWriteIndex = cmd->timestampWrites.endOfPassWriteIndex;
+        sampleBufferAttachment.SetEndSampleIndex(
+            descriptor, endOfPassWriteIndex != wgpu::kQuerySetIndexUndefined
+                            ? NSUInteger(endOfPassWriteIndex)
+                            : MTLCounterDontSample);
     } else {
         DAWN_UNREACHABLE();
     }
@@ -1213,14 +1203,15 @@ MaybeError CommandBuffer::EncodeComputePass(CommandRecordingContext* commandCont
         encoder = commandContext->BeginCompute();
 
         if (@available(macOS 10.15, iOS 14.0, *)) {
-            if (computePassCmd->beginTimestamp.querySet.Get() != nullptr) {
+            QuerySetBase* querySet = computePassCmd->timestampWrites.querySet.Get();
+            if (querySet != nullptr && computePassCmd->timestampWrites.beginningOfPassWriteIndex !=
+                                           wgpu::kQuerySetIndexUndefined) {
                 DAWN_ASSERT(ToBackend(GetDevice())->UseCounterSamplingAtCommandBoundary());
 
-                [encoder
-                    sampleCountersInBuffer:ToBackend(computePassCmd->beginTimestamp.querySet.Get())
-                                               ->GetCounterSampleBuffer()
-                             atSampleIndex:NSUInteger(computePassCmd->beginTimestamp.queryIndex)
-                               withBarrier:YES];
+                [encoder sampleCountersInBuffer:ToBackend(querySet)->GetCounterSampleBuffer()
+                                  atSampleIndex:NSUInteger(computePassCmd->timestampWrites
+                                                               .beginningOfPassWriteIndex)
+                                    withBarrier:YES];
             }
         }
     }
@@ -1233,18 +1224,19 @@ MaybeError CommandBuffer::EncodeComputePass(CommandRecordingContext* commandCont
                 mCommands.NextCommand<EndComputePassCmd>();
 
                 if (@available(macOS 10.15, iOS 14.0, *)) {
+                    QuerySetBase* querySet = computePassCmd->timestampWrites.querySet.Get();
                     // Simulate timestamp write at the end of render pass if it does not support
                     // counter sampling at stage boundary.
                     if (ToBackend(GetDevice())->UseCounterSamplingAtCommandBoundary() &&
-                        computePassCmd->endTimestamp.querySet.Get() != nullptr) {
+                        querySet != nullptr &&
+                        computePassCmd->timestampWrites.endOfPassWriteIndex !=
+                            wgpu::kQuerySetIndexUndefined) {
                         DAWN_ASSERT(!ToBackend(GetDevice())->UseCounterSamplingAtStageBoundary());
 
                         [encoder
-                            sampleCountersInBuffer:ToBackend(
-                                                       computePassCmd->endTimestamp.querySet.Get())
-                                                       ->GetCounterSampleBuffer()
-                                     atSampleIndex:NSUInteger(
-                                                       computePassCmd->endTimestamp.queryIndex)
+                            sampleCountersInBuffer:ToBackend(querySet)->GetCounterSampleBuffer()
+                                     atSampleIndex:NSUInteger(computePassCmd->timestampWrites
+                                                                  .endOfPassWriteIndex)
                                        withBarrier:YES];
                     }
                 }
@@ -1374,16 +1366,19 @@ MaybeError CommandBuffer::EncodeRenderPass(id<MTLRenderCommandEncoder> encoder,
     BindGroupTracker bindGroups(&storageBufferLengths);
 
     if (@available(macOS 10.15, iOS 14.0, *)) {
+        QuerySetBase* querySet = renderPassCmd->timestampWrites.querySet.Get();
         // Simulate timestamp write at the beginning of render pass by
         // sampleCountersInBuffer if it does not support counter sampling at stage boundary.
-        if (ToBackend(GetDevice())->UseCounterSamplingAtCommandBoundary() &&
-            renderPassCmd->beginTimestamp.querySet.Get() != nullptr) {
+        if (ToBackend(GetDevice())->UseCounterSamplingAtCommandBoundary() && querySet != nullptr &&
+            renderPassCmd->timestampWrites.beginningOfPassWriteIndex !=
+                wgpu::kQuerySetIndexUndefined) {
             DAWN_ASSERT(!ToBackend(GetDevice())->UseCounterSamplingAtStageBoundary());
 
-            [encoder sampleCountersInBuffer:ToBackend(renderPassCmd->beginTimestamp.querySet.Get())
-                                                ->GetCounterSampleBuffer()
-                              atSampleIndex:NSUInteger(renderPassCmd->beginTimestamp.queryIndex)
-                                withBarrier:YES];
+            [encoder
+                sampleCountersInBuffer:ToBackend(querySet)->GetCounterSampleBuffer()
+                         atSampleIndex:NSUInteger(
+                                           renderPassCmd->timestampWrites.beginningOfPassWriteIndex)
+                           withBarrier:YES];
         }
     }
     SetDebugName(GetDevice(), encoder, "Dawn_RenderPassEncoder", renderPassCmd->label);
@@ -1594,18 +1589,19 @@ MaybeError CommandBuffer::EncodeRenderPass(id<MTLRenderCommandEncoder> encoder,
                 mCommands.NextCommand<EndRenderPassCmd>();
 
                 if (@available(macOS 10.15, iOS 14.0, *)) {
+                    QuerySetBase* querySet = renderPassCmd->timestampWrites.querySet.Get();
                     // Simulate timestamp write at the end of render pass if it does not support
                     // counter sampling at stage boundary.
                     if (ToBackend(GetDevice())->UseCounterSamplingAtCommandBoundary() &&
-                        renderPassCmd->endTimestamp.querySet.Get() != nullptr) {
+                        querySet != nullptr &&
+                        renderPassCmd->timestampWrites.endOfPassWriteIndex !=
+                            wgpu::kQuerySetIndexUndefined) {
                         DAWN_ASSERT(!ToBackend(GetDevice())->UseCounterSamplingAtStageBoundary());
 
                         [encoder
-                            sampleCountersInBuffer:ToBackend(
-                                                       renderPassCmd->endTimestamp.querySet.Get())
-                                                       ->GetCounterSampleBuffer()
-                                     atSampleIndex:NSUInteger(
-                                                       renderPassCmd->endTimestamp.queryIndex)
+                            sampleCountersInBuffer:ToBackend(querySet)->GetCounterSampleBuffer()
+                                     atSampleIndex:NSUInteger(renderPassCmd->timestampWrites
+                                                                  .endOfPassWriteIndex)
                                        withBarrier:YES];
                     }
                 }
