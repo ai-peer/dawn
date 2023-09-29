@@ -72,6 +72,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f237b7d3_94343d18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T14:02:53Z",
+      "side": 1,
+      "message": "yes, and yes.\n\nCorentin\u0027s idea is to have something like your previous constexpr concat function, but instead one that removes white spaces from the strings.\nI\u0027m not sure precisely how it would be done though - could be tricky",
+      "parentUuid": "4042fd24_55e30620",
+      "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "38faa9e0_8facafa8",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 1
