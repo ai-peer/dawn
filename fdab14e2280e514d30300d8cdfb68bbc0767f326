@@ -70,6 +70,30 @@
       },
       "revId": "fdab14e2280e514d30300d8cdfb68bbc0767f326",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a68305dc_d8ff0e45",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3915,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-29T16:58:48Z",
+      "side": 0,
+      "message": "Oh yeah, atomics are a thing. Done.",
+      "parentUuid": "f8b035b2_15a05d4c",
+      "range": {
+        "startLine": 3915,
+        "startChar": 46,
+        "endLine": 3915,
+        "endChar": 66
+      },
+      "revId": "fdab14e2280e514d30300d8cdfb68bbc0767f326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
