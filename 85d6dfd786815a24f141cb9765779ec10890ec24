@@ -16,6 +16,24 @@
       "message": "I\u0027d like to add tests for this but I\u0027m not sure how to do this properly:\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/QueryTests.cpp;l\u003d173;drc\u003d96bbbf8f84ec47886ed7c435abb25f69caa69f8a seems to check only for values greater than 0. \n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/white_box/QueryInternalShaderTests.cpp;l\u003d138;drc\u003de60adb28edec185d84d27074c2a2dfb7bb833dca would be a good candidate but I wouldn\u0027t be able to test whether the toggle has effect or not as well.",
       "revId": "85d6dfd786815a24f141cb9765779ec10890ec24",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa220cf8_c47753b4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-29T10:06:16Z",
+      "side": 1,
+      "message": "Note that I\u0027ve started https://chromium-review.googlesource.com/c/chromium/src/+/4903470 in the meantime.",
+      "parentUuid": "74252846_610465d0",
+      "revId": "85d6dfd786815a24f141cb9765779ec10890ec24",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
