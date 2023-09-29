@@ -945,14 +945,15 @@ Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescri
                     descriptor->timestampWrites->beginningOfPassWriteIndex;
                 uint32_t endOfPassWriteIndex = descriptor->timestampWrites->endOfPassWriteIndex;
 
+                DAWN_ASSERT(beginningOfPassWriteIndex != wgpu::kQuerySetIndexUndefined ||
+                            endOfPassWriteIndex != wgpu::kQuerySetIndexUndefined);
+                cmd->timestampWrites.querySet = querySet;
                 if (beginningOfPassWriteIndex != wgpu::kQuerySetIndexUndefined) {
-                    cmd->beginTimestamp.querySet = querySet;
-                    cmd->beginTimestamp.queryIndex = beginningOfPassWriteIndex;
+                    cmd->timestampWrites.beginningOfPassWriteIndex = beginningOfPassWriteIndex;
                     TrackQueryAvailability(querySet, beginningOfPassWriteIndex);
                 }
                 if (endOfPassWriteIndex != wgpu::kQuerySetIndexUndefined) {
-                    cmd->endTimestamp.querySet = querySet;
-                    cmd->endTimestamp.queryIndex = endOfPassWriteIndex;
+                    cmd->timestampWrites.endOfPassWriteIndex = endOfPassWriteIndex;
                     TrackQueryAvailability(querySet, endOfPassWriteIndex);
                 }
             }
@@ -1146,8 +1147,10 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                     descriptor->timestampWrites->beginningOfPassWriteIndex;
                 uint32_t endOfPassWriteIndex = descriptor->timestampWrites->endOfPassWriteIndex;
 
+                DAWN_ASSERT(beginningOfPassWriteIndex != wgpu::kQuerySetIndexUndefined ||
+                            endOfPassWriteIndex != wgpu::kQuerySetIndexUndefined);
+                cmd->timestampWrites.querySet = querySet;
                 if (beginningOfPassWriteIndex != wgpu::kQuerySetIndexUndefined) {
-                    cmd->beginTimestamp.querySet = querySet;
                     cmd->beginTimestamp.queryIndex = beginningOfPassWriteIndex;
                     TrackQueryAvailability(querySet, beginningOfPassWriteIndex);
                     // Track the query availability with true on render pass again for rewrite
@@ -1155,7 +1158,6 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                     usageTracker.TrackQueryAvailability(querySet, beginningOfPassWriteIndex);
                 }
                 if (endOfPassWriteIndex != wgpu::kQuerySetIndexUndefined) {
-                    cmd->endTimestamp.querySet = querySet;
                     cmd->endTimestamp.queryIndex = endOfPassWriteIndex;
                     TrackQueryAvailability(querySet, endOfPassWriteIndex);
                     // Track the query availability with true on render pass again for rewrite

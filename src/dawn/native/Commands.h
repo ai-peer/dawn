@@ -72,20 +72,20 @@ enum class Command {
     WriteTimestamp,
 };
 
-struct TimestampWrite {
-    TimestampWrite();
-    ~TimestampWrite();
+struct TimestampWrites {
+    TimestampWrites();
+    ~TimestampWrites();
 
     Ref<QuerySetBase> querySet;
-    uint32_t queryIndex;
+    uint32_t beginningOfPassWriteIndex;
+    uint32_t endOfPassWriteIndex;
 };
 
 struct BeginComputePassCmd {
     BeginComputePassCmd();
     ~BeginComputePassCmd();
 
-    TimestampWrite beginTimestamp;
-    TimestampWrite endTimestamp;
+    TimestampWrites timestampWrites;
     std::string label;
 };
 
