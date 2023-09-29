@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b1dbcaf_4ef834cf",
+        "filename": "src/tint/lang/core/ir/transform/conversion_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-29T16:24:48Z",
+      "side": 1,
+      "message": "nit: for vectors this gives the impression that it\u0027s a conversion of scalar to vector. e.g. `tint_f32_to_v2i32`",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 103,
+        "endChar": 13
+      },
+      "revId": "7bee478b5451f043820f71ffdf4b05f0045e0355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a2c9fb6_77ecbcdf",
+        "filename": "src/tint/lang/core/ir/transform/conversion_polyfill.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-29T16:24:48Z",
+      "side": 1,
+      "message": "Please can you add some comments where these magic biases come from?",
+      "range": {
+        "startLine": 124,
+        "startChar": 0,
+        "endLine": 129,
+        "endChar": 96
+      },
+      "revId": "7bee478b5451f043820f71ffdf4b05f0045e0355",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
