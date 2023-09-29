@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "4042fd24_55e30620",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-09-29T13:38:53Z",
+      "side": 1,
+      "message": "Do you mean using +\u003d operator of string directly?\n\nFor the string-per-line idea, I can think of changing in editor from\n```\nR\"(\naaa\nbbb\n)\"\n```\nto\n```\n\"aaa\"\n\"bbb\"\n```\n\nCorentin mentions \"type/function to compress in release builds. Can you and Corentin provides more details? Is it some config in the build/cmake, or some macro tricks?",
+      "parentUuid": "94e76f38_ae050bac",
+      "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "38faa9e0_8facafa8",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 1
