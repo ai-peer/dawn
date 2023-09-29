@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4af14ef_b2aa8add",
+        "filename": "tools/setup-build",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-29T16:31:52Z",
+      "side": 1,
+      "message": "Maybe more robust if we check whether args.gn exists in the build dir",
+      "revId": "aa3de1108fdb8f6cf16c220547761160ecc8308e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
