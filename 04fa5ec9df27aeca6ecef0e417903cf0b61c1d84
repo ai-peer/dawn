@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb0f09e_19f2d4b2",
+        "filename": "src/dawn/native/QueryHelper.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-29T12:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bdb1ac2d_1f40e423",
+      "range": {
+        "startLine": 168,
+        "startChar": 42,
+        "endLine": 168,
+        "endChar": 59
+      },
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b0e77ee6_6d185ecc",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-09-29T12:21:18Z",
       "side": 1,
       "message": "Can we enable this by default in https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Adapter.cpp;drc\u003d77806a4cacd6357ff9b2fcb63ad8f53f62453d6d;l\u003d193 ?",
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4bc87d3_ab6548bb",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-29T12:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0e77ee6_6d185ecc",
       "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b71674c6_6af9b75c",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-29T12:56:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb17ff5d_163bd825",
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "473903ea_638e0e52",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-09-29T12:21:18Z",
       "side": 1,
       "message": "Can we have a test that when a quantization mask is provided the correct quantization happens?",
+      "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c7dd0e7_d6751e47",
+        "filename": "src/dawn/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-09-29T12:56:32Z",
+      "side": 1,
+      "message": "I\u0027d love to. See https://dawn-review.googlesource.com/c/dawn/+/154240/comments/74252846_610465d0",
+      "parentUuid": "473903ea_638e0e52",
       "revId": "04fa5ec9df27aeca6ecef0e417903cf0b61c1d84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
