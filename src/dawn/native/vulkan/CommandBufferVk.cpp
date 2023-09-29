@@ -904,12 +904,13 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
                                             BeginComputePassCmd* computePassCmd,
                                             const ComputePassResourceUsage& resourceUsages) {
     Device* device = ToBackend(GetDevice());
+    QuerySetBase* querySet = computePassCmd->timestampWrites.querySet.Get();
 
     // Write timestamp at the beginning of compute pass if it's set
-    if (computePassCmd->beginTimestamp.querySet.Get() != nullptr) {
-        RecordWriteTimestampCmd(recordingContext, device,
-                                computePassCmd->beginTimestamp.querySet.Get(),
-                                computePassCmd->beginTimestamp.queryIndex, false);
+    if (querySet != nullptr && computePassCmd->timestampWrites.beginningOfPassWriteIndex !=
+                                   wgpu::kQuerySetIndexUndefined) {
+        RecordWriteTimestampCmd(recordingContext, device, querySet,
+                                computePassCmd->timestampWrites.beginningOfPassWriteIndex, false);
     }
 
     VkCommandBuffer commands = recordingContext->commandBuffer;
@@ -924,10 +925,11 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
                 mCommands.NextCommand<EndComputePassCmd>();
 
                 // Write timestamp at the end of compute pass if it's set.
-                if (computePassCmd->endTimestamp.querySet.Get() != nullptr) {
-                    RecordWriteTimestampCmd(recordingContext, device,
-                                            computePassCmd->endTimestamp.querySet.Get(),
-                                            computePassCmd->endTimestamp.queryIndex, false);
+                if (querySet != nullptr && computePassCmd->timestampWrites.endOfPassWriteIndex !=
+                                               wgpu::kQuerySetIndexUndefined) {
+                    RecordWriteTimestampCmd(recordingContext, device, querySet,
+                                            computePassCmd->timestampWrites.endOfPassWriteIndex,
+                                            false);
                 }
                 return {};
             }
@@ -1052,15 +1054,16 @@ MaybeError CommandBuffer::RecordComputePass(CommandRecordingContext* recordingCo
 MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingContext,
                                            BeginRenderPassCmd* renderPassCmd) {
     Device* device = ToBackend(GetDevice());
+    QuerySetBase* querySet = renderPassCmd->timestampWrites.querySet.Get();
     VkCommandBuffer commands = recordingContext->commandBuffer;
 
     DAWN_TRY(RecordBeginRenderPass(recordingContext, device, renderPassCmd));
 
     // Write timestamp at the beginning of render pass if it's set.
-    if (renderPassCmd->beginTimestamp.querySet.Get() != nullptr) {
-        RecordWriteTimestampCmd(recordingContext, device,
-                                renderPassCmd->beginTimestamp.querySet.Get(),
-                                renderPassCmd->beginTimestamp.queryIndex, true);
+    if (querySet != nullptr &&
+        renderPassCmd->timestampWrites.beginningOfPassWriteIndex != wgpu::kQuerySetIndexUndefined) {
+        RecordWriteTimestampCmd(recordingContext, device, querySet,
+                                renderPassCmd->timestampWrites.beginningOfPassWriteIndex, true);
     }
 
     // Set the default value for the dynamic state
@@ -1268,10 +1271,11 @@ MaybeError CommandBuffer::RecordRenderPass(CommandRecordingContext* recordingCon
                 mCommands.NextCommand<EndRenderPassCmd>();
 
                 // Write timestamp at the end of render pass if it's set.
-                if (renderPassCmd->endTimestamp.querySet.Get() != nullptr) {
-                    RecordWriteTimestampCmd(recordingContext, device,
-                                            renderPassCmd->endTimestamp.querySet.Get(),
-                                            renderPassCmd->endTimestamp.queryIndex, true);
+                if (querySet != nullptr && renderPassCmd->timestampWrites.endOfPassWriteIndex !=
+                                               wgpu::kQuerySetIndexUndefined) {
+                    RecordWriteTimestampCmd(recordingContext, device, querySet,
+                                            renderPassCmd->timestampWrites.endOfPassWriteIndex,
+                                            true);
                 }
 
                 device->fn.CmdEndRenderPass(commands);
