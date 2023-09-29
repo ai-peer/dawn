@@ -16,6 +16,24 @@
       "message": "Maybe more robust if we check whether args.gn exists in the build dir",
       "revId": "aa3de1108fdb8f6cf16c220547761160ecc8308e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c617c8e_83a426a3",
+        "filename": "tools/setup-build",
+        "patchSetId": 1
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-09-29T16:56:58Z",
+      "side": 1,
+      "message": "Good point. Done",
+      "parentUuid": "f4af14ef_b2aa8add",
+      "revId": "aa3de1108fdb8f6cf16c220547761160ecc8308e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
