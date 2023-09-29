@@ -16,6 +16,23 @@
       "message": "android-binary-size supersize result:\n\"total\u003d-32.0kb\" (if I\u0027m reading the metrics correctly): https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8768710426162276273/+/u/Read_diff_results/json.output",
       "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94e76f38_ae050bac",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T01:44:23Z",
+      "side": 1,
+      "message": "LGTM\n\nnit: I think we should use +\u003d instead of \u003c\u003c.\nThe stream abstraction isn\u0027t that useful in this particular case\n\nyou could also explore doing the \"string-per-line\" idea that was mentioned in the bug, though it may not help as much as this first major reduction here.",
+      "revId": "f70be387abcf72acd284d9f10375f49c76e5d865",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
