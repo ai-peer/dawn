@@ -88,6 +88,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4220dd23_628c12ab",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-29T01:17:19Z",
+      "side": 1,
+      "message": "nit: std::optional\u003cstd::unique isn\u0027t necessary.\nwe can use the nullability of the unique_ptr to check if it is set to anything",
+      "range": {
+        "startLine": 114,
+        "startChar": 0,
+        "endLine": 114,
+        "endChar": 71
+      },
+      "revId": "a9737fd300e574175f7dedca427a17a6ad8367f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "79f475a5_e7480a21",
         "filename": "src/dawn/wire/client/Queue.cpp",
         "patchSetId": 1
