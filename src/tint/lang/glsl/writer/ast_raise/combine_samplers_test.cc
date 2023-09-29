@@ -982,5 +982,137 @@ fn main() -> vec4<f32> {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(CombineSamplersTest, UnusedTextureFunctionParameter) {
+    auto* src = R"(
+@group(0) @binding(0) var t : texture_2d<f32>;
+
+fn f(tex: texture_2d<f32>) -> u32 {
+  return 1u;
+}
+
+fn main() {
+  _ = f(t);
+}
+)";
+    auto* expect = R"(
+@group(0) @binding(0) @internal(disable_validation__binding_point_collision) var t_1 : texture_2d<f32>;
+
+fn f() -> u32 {
+  return 1u;
+}
+
+fn main() {
+  _ = f();
+}
+)";
+
+    ast::transform::DataMap data;
+    data.Add<CombineSamplers::BindingInfo>(CombineSamplers::BindingMap(), BindingPoint());
+    auto got = Run<CombineSamplers>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(CombineSamplersTest, UnusedSamplerFunctionParameter) {
+    auto* src = R"(
+@group(0) @binding(0) var s : sampler;
+
+fn f(sampler1: sampler) -> u32 {
+  return 1u;
+}
+
+fn main() {
+  _ = f(s);
+}
+)";
+    auto* expect = R"(
+fn f(_s : sampler) -> u32 {
+  return 1u;
+}
+
+fn main(_s_1 : sampler) {
+  _ = f(_s_1);
+}
+)";
+
+    ast::transform::DataMap data;
+    data.Add<CombineSamplers::BindingInfo>(CombineSamplers::BindingMap(), BindingPoint());
+    auto got = Run<CombineSamplers>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(CombineSamplersTest, UnusedTextureFunctionParameter_Multiple) {
+    auto* src = R"(
+@group(0) @binding(0) var t : texture_2d<f32>;
+
+@group(0) @binding(1) var s : sampler;
+
+fn f(tex1: texture_2d<f32>, tex2: texture_2d<f32>, sampler1: sampler) -> u32 {
+  return 1u;
+}
+
+fn main() {
+  _ = f(t, t, s);
+}
+)";
+    auto* expect = R"(
+@group(0) @binding(0) @internal(disable_validation__binding_point_collision) var t_1 : texture_2d<f32>;
+
+fn f(_s : sampler) -> u32 {
+  return 1u;
+}
+
+fn main(_s_1 : sampler) {
+  _ = f(_s_1);
+}
+)";
+
+    ast::transform::DataMap data;
+    data.Add<CombineSamplers::BindingInfo>(CombineSamplers::BindingMap(), BindingPoint());
+    auto got = Run<CombineSamplers>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(CombineSamplersTest, UnusedTextureFunctionParameter_Nested) {
+    auto* src = R"(
+@group(0) @binding(0) var t : texture_2d<f32>;
+
+fn f_nested(tex: texture_2d<f32>) -> u32 {
+  return 1u;
+}
+
+fn f(tex: texture_2d<f32>) -> u32 {
+  return f_nested(tex);
+}
+
+fn main() {
+  _ = f(t);
+}
+)";
+    auto* expect = R"(
+fn f_nested(tex_1 : texture_2d<f32>) -> u32 {
+  return 1u;
+}
+
+fn f(tex_2 : texture_2d<f32>) -> u32 {
+  return f_nested(tex_2);
+}
+
+@group(0) @binding(0) @internal(disable_validation__binding_point_collision) var t_1 : texture_2d<f32>;
+
+fn main() {
+  _ = f(t_1);
+}
+)";
+
+    ast::transform::DataMap data;
+    data.Add<CombineSamplers::BindingInfo>(CombineSamplers::BindingMap(), BindingPoint());
+    auto got = Run<CombineSamplers>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 }  // namespace
 }  // namespace tint::glsl::writer
