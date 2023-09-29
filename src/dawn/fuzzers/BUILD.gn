@@ -130,6 +130,11 @@ if (is_dawn_lpm_fuzzer && build_with_chromium && dawn_use_swiftshader &&
       "${dawn_root}/src/dawn/wire:static",
       "//third_party/libprotobuf-mutator",
     ]
+
+    libfuzzer_options = [
+      "max_len=2111000",
+      "len_control=0",
+    ]
   }
 }
 
