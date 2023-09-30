@@ -22,6 +22,30 @@
       },
       "revId": "585150d2bf75149c0099a5b3ce5f9d6969ede015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0b17d48_dc41b98b",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T14:43:23Z",
+      "side": 1,
+      "message": "I\u0027m not sure. What is the exact error you get? Also we now have a getter for texture.GetFormat() so DawnTest could be changed to use that eventually.",
+      "parentUuid": "12ef10ce_39a99dfd",
+      "range": {
+        "startLine": 1164,
+        "startChar": 30,
+        "endLine": 1164,
+        "endChar": 47
+      },
+      "revId": "585150d2bf75149c0099a5b3ce5f9d6969ede015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

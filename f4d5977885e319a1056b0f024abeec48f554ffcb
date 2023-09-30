@@ -16,6 +16,74 @@
       "message": "Addressed feedback and added back uninitialized texture validation. Please take another look, thanks.",
       "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6749690b_478f585e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 26
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T14:43:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60ee7c41_defc8c2b",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T14:43:23Z",
+      "side": 1,
+      "message": "The creation of plane0/1Texture and the operations on Y or UV are extremely similar. Probably worth putting them in a lambda that\u0027s called once per plane.",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e0703cc_65e00531",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T14:43:23Z",
+      "side": 1,
+      "message": "u-nit: the inside of main count be indented.",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b7884a5_1fb018f2",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T14:43:23Z",
+      "side": 1,
+      "message": "nit: the plane that has a different size is the chrome one so it could be better to test that one if we test a single one (or we can just test both).",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
