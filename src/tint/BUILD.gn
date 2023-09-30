@@ -199,7 +199,6 @@ if (tint_build_benchmarks) {
     testonly = true
     public_deps = [
       "//third_party/google_benchmark",
-      "//third_party/google_benchmark:benchmark_main",
     ]
   }
 }
