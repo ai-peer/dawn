@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b702bce9_e9d2ee49",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 188,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-30T02:56:39Z",
+      "side": 1,
+      "message": "this is `maxColorRenderTargets` from the above row times 16, the color format with the largest \"cost\". I should put a comment",
+      "range": {
+        "startLine": 188,
+        "startChar": 0,
+        "endLine": 188,
+        "endChar": 94
+      },
+      "revId": "7679af4aa46eec76e0cb217493f04bebfff64793",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58b0572f_a9fe1fd5",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 718,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-30T02:56:39Z",
+      "side": 1,
+      "message": "this is `maxColorRenderTargets` from the above row times 16, the color format with the largest \"cost\". I should put a comment",
+      "range": {
+        "startLine": 718,
+        "startChar": 135,
+        "endLine": 718,
+        "endChar": 147
+      },
+      "revId": "7679af4aa46eec76e0cb217493f04bebfff64793",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
