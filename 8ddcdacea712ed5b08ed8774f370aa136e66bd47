@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5856963c_93de584c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-09-30T19:26:39Z",
+      "side": 1,
+      "message": "Very nice results on M1 Pro\n\n$ ./Conv1x1 --dispatches 50\nTesting OpenCL\nMin: 285.929 ms \nMax: 296.675 ms \nAvg: 287.789 ms \nDawn using Apple M1 Pro\nMin: 200.868 ms \nMax: 201.748 ms \nAvg: 201.139 ms",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
