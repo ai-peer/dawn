@@ -16,6 +16,125 @@
       "message": "Note: I\u0027m removing the global lock for Release calls in the next CL to derisk this. (I ran the tests on that CL)\n\nremoving that lock makes it so that DestroyImpl may be called whenever someone drops a resource on another thread.\n\nI did a find and replace to tag all DestroyImpl with `// CHECK THREADSAFE` so that you can have the context for all of them in the CL.\nI will remove that comment after review.",
       "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b8c2cc3_326e365b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T15:05:33Z",
+      "side": 1,
+      "message": "LGTM, though In general I\u0027m mildly concerned that we are adding mutex and atomics in places without a global view of how we\u0027d like to make things thread safe. Though that\u0027s more of the short-term benefits for Graphite and we\u0027ll get back later to doing a more consistent MT work.",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ccf6864_2b03bf3d",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T15:05:33Z",
+      "side": 1,
+      "message": "This seems like there could be a race?",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "577d6b42_cd4d5987",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T15:05:33Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34128b11_4d254b87",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T15:05:33Z",
+      "side": 1,
+      "message": "This should probably use .Use to make the extraction of tasks atomic.",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f9b7254_d6a26864",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T15:05:33Z",
+      "side": 1,
+      "message": "Ditto? Or we could have a helper in SerialQueues to acquire all the T up to a certain serial.",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f68ed22_e80051ca",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T15:05:33Z",
+      "side": 1,
+      "message": "It might be worth noting the intercation with SwapChain here.",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39e98cd4_03905150",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-09-30T15:05:33Z",
+      "side": 1,
+      "message": "What are these annotations?",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
