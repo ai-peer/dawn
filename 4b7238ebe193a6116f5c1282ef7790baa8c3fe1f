@@ -16,6 +16,46 @@
       "message": "Hi Corentin, Austin, PTAL. Thanks",
       "revId": "4b7238ebe193a6116f5c1282ef7790baa8c3fe1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "400420ed_d9952889",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-30T02:53:44Z",
+      "side": 1,
+      "message": "so I\u0027m understanding the change:\n - this change makes it so when you WriteBuffer, it may do a CPU write in which case we don\u0027t mark it in use on the GPU.\n - thus when you MapAsync, it can resolve immediately because there was no actual GPU use.\n \nis that correct?\n\nbut if the Map waited for the queue to complete, why does the callback order change in the test? both are complete so we should be able to preserve the ordering",
+      "revId": "4b7238ebe193a6116f5c1282ef7790baa8c3fe1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a36988e_1afd3d90",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-09-30T02:53:44Z",
+      "side": 1,
+      "message": "existing nit: this comment and the one in OnSubmittedWorkDone callback are written backward",
+      "range": {
+        "startLine": 712,
+        "startChar": 0,
+        "endLine": 712,
+        "endChar": 82
+      },
+      "revId": "4b7238ebe193a6116f5c1282ef7790baa8c3fe1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
