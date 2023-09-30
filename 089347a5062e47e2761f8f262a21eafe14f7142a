@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dd335ef_f5ff8a77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-09-30T04:20:38Z",
+      "side": 1,
+      "message": "Was tested in a Chrome build here: https://chromium-review.googlesource.com/c/chromium/src/+/4905425?tab\u003dchecks",
+      "revId": "089347a5062e47e2761f8f262a21eafe14f7142a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
