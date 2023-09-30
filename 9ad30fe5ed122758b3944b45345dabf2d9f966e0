@@ -16,6 +16,24 @@
       "message": "Please can we have some tests where the access chains are separated by blocks, like a separation of a ControlFlow instruction?",
       "revId": "9ad30fe5ed122758b3944b45345dabf2d9f966e0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b55aa3d2_7086d587",
+        "filename": "src/tint/lang/core/ir/transform/combine_access_instructions_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 690,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-09-30T01:37:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "730a86df_7b703d06",
+      "revId": "9ad30fe5ed122758b3944b45345dabf2d9f966e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
