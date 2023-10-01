@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0133df2_c5848e6a",
+        "filename": "src/dawn/native/ObjectBase.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-01T21:01:01Z",
+      "side": 0,
+      "message": "Is this fine for stuff like blueprints? Cause those aren\u0027t added to the list? Maybe it\u0027s fine because we have a clause around the `Untrack` call but just double checking.",
+      "range": {
+        "startLine": 139,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 5
+      },
+      "revId": "e0c66b24f4dc0aaff8d8dca12ebdc5ecda51b8d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
