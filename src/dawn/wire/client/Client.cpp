@@ -149,6 +149,10 @@ EventManager* Client::GetEventManager() {
     return mEventManager.get();
 }
 
+WireDeserializeAllocator* Client::GetWireDeserializeAllocator() {
+    return &mWireCommandAllocator;
+}
+
 void Client::Disconnect() {
     mDisconnected = true;
     mSerializer = ChunkedCommandSerializer(NoopCommandSerializer::GetInstance());

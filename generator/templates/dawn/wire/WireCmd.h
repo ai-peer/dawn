@@ -17,6 +17,7 @@
 
 #include "dawn/webgpu.h"
 
+#include "dawn/common/FutureUtils.h"
 #include "dawn/wire/BufferConsumer.h"
 #include "dawn/wire/ObjectType_autogen.h"
 #include "dawn/wire/ObjectHandle.h"
@@ -28,7 +29,7 @@ namespace dawn::wire {
     // nullptr is treated as an error.
     class DeserializeAllocator {
         public:
-            virtual void* GetSpace(size_t size) = 0;
+            virtual void* GetSpace(size_t size, FutureID futureID = kNullFutureID) = 0;
     };
 
     // Interface to convert an ID to a server object, if possible.
