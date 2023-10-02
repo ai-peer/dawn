@@ -301,6 +301,8 @@ void TestOpenCL() {
     std::cout << "Testing OpenCL" << std::endl;
     cl::Context context(CL_DEVICE_TYPE_GPU);
     cl::Program program(context, kOpenCLShader, true);
+    // By default, OpenCL queues are in-order. There is no need to put a barrier
+    // between dispatches.
     cl::CommandQueue queue(context);
 
     // Tensor size is divided by 4 in the Y dimension because 4 floats are packed in each texel.
@@ -321,8 +323,8 @@ void TestOpenCL() {
     for (uint32_t i = 0; i < absl::GetFlag(FLAGS_trials); ++i) {
         auto start = std::chrono::high_resolution_clock::now();
 
+        queue.enqueueBarrierWithWaitList();
         for (uint32_t d = 0; d < absl::GetFlag(FLAGS_dispatches); ++d) {
-            queue.enqueueBarrierWithWaitList();
             kernel(cl::EnqueueArgs(queue, cl::NDRange(kSharedDim, kDstDim / 4 / 4, 1),
                                    cl::NDRange(64, 1, 1)),
                    biasTensor, weightsTensor, dstTensor, srcTensor,
