@@ -70,6 +70,30 @@
       },
       "revId": "585150d2bf75149c0099a5b3ce5f9d6969ede015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa61b840_40beb8b9",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1003851
+      },
+      "writtenOn": "2023-10-02T17:28:37Z",
+      "side": 1,
+      "message": "Without passing format to EXPECT_TEXTURE_EQ `dataSize` [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/DawnTest.cpp;drc\u003d641d3b47c0dcd3fc1231ebf0b31722e0a9299b1d;l\u003d1245) will be [sizeof(U)](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/DawnTest.h;drc\u003d641d3b47c0dcd3fc1231ebf0b31722e0a9299b1d;l\u003d433), not the texel size. And so buffer size would be wrong.\n\nWith format it will be [size of texel](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/DawnTest.h;drc\u003d641d3b47c0dcd3fc1231ebf0b31722e0a9299b1d;l\u003d365). \n\nBut with NV12 it works accidentally due 4 byte alignment. Maybe it\u0027s designed that way, but a bit counter intuitive",
+      "parentUuid": "e05d096b_17c5d4d3",
+      "range": {
+        "startLine": 1164,
+        "startChar": 30,
+        "endLine": 1164,
+        "endChar": 47
+      },
+      "revId": "585150d2bf75149c0099a5b3ce5f9d6969ede015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
