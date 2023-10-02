@@ -68,6 +68,24 @@
       "parentUuid": "77e35ebd_6d0eb858",
       "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ae03238_91870b02",
+        "filename": "src/tint/cmd/fuzz/wgsl/wgsl_fuzz.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-02T17:35:07Z",
+      "side": 1,
+      "message": "\u003e \u003e Which means that anything later in the stack will end u getting fuzzed less then the stuff at the beginning as the earlier items trigger crashes.\n\u003e \n\u003e Only if we have a crashing bug that the fuzzers can\u0027t work around, which is a serious issue we need to fix ASAP.\n\u003e \n\nEvery fuzzer bug is a crashing bug, as that\u0027s how the fuzzer will notify the framework that it failed.\n\n\n\u003e \u003e It seems like this would be better as a general main and a simple way to combine that with a cc file in the cmake/gn files to generate each fuzz executable.\n\u003e \n\u003e Each fuzzer executable uses a separate fuzzer corpus - which is inefficient in terms of storage and means that some fuzzers will always be behind in terms of coverage of others.\n\nI don\u0027t think storage is an issue, at least not that I\u0027ve ever heard.\n\nNot sure I understand by the idea that some fuzzers are behind? They may explore different trees, but that just means they\u0027ve followed different paths, not that they\u0027re behind.\n\n\n\u003e \n\u003e This approach means that all the WGSL fuzzers gain the same level of knowledge, in-step. The SPIR-V reader can also pass the IR / WGSL program to the same set of transforms, without a combinatorial explosion of executables.\n\u003e \n\nWhy can\u0027t the SPIR-V reader pass the IR/WGSL program to the same set of transforms? We can just fuzz the spirv-reader path, we don\u0027t have to fuzz every possible transform coming out of spir-v reader?",
+      "parentUuid": "844fb254_db46e923",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
