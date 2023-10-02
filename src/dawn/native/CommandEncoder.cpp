@@ -1151,14 +1151,14 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                             endOfPassWriteIndex != wgpu::kQuerySetIndexUndefined);
                 cmd->timestampWrites.querySet = querySet;
                 if (beginningOfPassWriteIndex != wgpu::kQuerySetIndexUndefined) {
-                    cmd->beginTimestamp.queryIndex = beginningOfPassWriteIndex;
+                    cmd->timestampWrites.beginningOfPassWriteIndex = beginningOfPassWriteIndex;
                     TrackQueryAvailability(querySet, beginningOfPassWriteIndex);
                     // Track the query availability with true on render pass again for rewrite
                     // validation and query reset on Vulkan
                     usageTracker.TrackQueryAvailability(querySet, beginningOfPassWriteIndex);
                 }
                 if (endOfPassWriteIndex != wgpu::kQuerySetIndexUndefined) {
-                    cmd->endTimestamp.queryIndex = endOfPassWriteIndex;
+                    cmd->timestampWrites.endOfPassWriteIndex = endOfPassWriteIndex;
                     TrackQueryAvailability(querySet, endOfPassWriteIndex);
                     // Track the query availability with true on render pass again for rewrite
                     // validation and query reset on Vulkan

@@ -138,8 +138,7 @@ struct BeginRenderPassCmd {
     uint32_t height;
 
     Ref<QuerySetBase> occlusionQuerySet;
-    TimestampWrite beginTimestamp;
-    TimestampWrite endTimestamp;
+    TimestampWrites timestampWrites;
     std::string label;
 };
 
