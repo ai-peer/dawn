@@ -68,6 +68,23 @@
       "message": "Intel UHD 630 on Macbook pro 2017.\n\n$ ./Conv1x1 --dispatches 50\nTesting OpenCL\nMin: 1543.13 ms \nMax: 1779.36 ms \nAvg: 1602.89 ms \nDawn using Intel(R) HD Graphics 630\nMin: 976.629 ms \nMax: 1130.96 ms \nAvg: 997.879 ms",
       "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "791c49fe_d079b795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-02T18:07:24Z",
+      "side": 1,
+      "message": "M1 Pro subgropus\n\n$ ./Conv1x1Subgroups --dispatches 50\nTesting OpenCL\nUNSUPPORTED (log once): buildComputeProgram: cl2Metal failed\nMin: 4.00258 ms \nMax: 12.151 ms \nAvg: 5.49149 ms \nDawn using Apple M1 Pro\nMin: 0.099583 ms \nMax: 0.112334 ms",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
