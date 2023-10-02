@@ -164,6 +164,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "00189249_854cb7dc",
+        "filename": "src/dawn/native/SwapChain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-02T12:54:02Z",
+      "side": 1,
+      "message": "As long as the texture doesn\u0027t do anything with the swapchain until it is destroyed, I think that works. It means that the CPU data is reclaimed when both are at refcount 0, but that seems fine.",
+      "parentUuid": "8b4ba6b5_7f164013",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 56
+      },
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f68ed22_e80051ca",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 7
