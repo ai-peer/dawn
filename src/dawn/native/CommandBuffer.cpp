@@ -23,6 +23,8 @@
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/Texture.h"
 
+#include <iostream>
+
 namespace dawn::native {
 
 CommandBufferBase::CommandBufferBase(CommandEncoder* encoder,
@@ -124,6 +126,7 @@ SubresourceRange GetSubresourcesAffectedByCopy(const TextureCopy& copy, const Ex
 }
 
 void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass) {
+    std::cout << "\nLazyClearRenderPassAttachments\n";
     for (ColorAttachmentIndex i :
          IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
         auto& attachmentInfo = renderPass->colorAttachments[i];
@@ -137,6 +140,7 @@ void LazyClearRenderPassAttachments(BeginRenderPassCmd* renderPass) {
         // If the loadOp is Load, but the subresource is not initialized, use Clear instead.
         if (attachmentInfo.loadOp == wgpu::LoadOp::Load &&
             !view->GetTexture()->IsSubresourceContentInitialized(range)) {
+            std::cout << "\nLazyClearRenderPassAttachments -- clear\n";
             attachmentInfo.loadOp = wgpu::LoadOp::Clear;
             attachmentInfo.clearColor = {0.f, 0.f, 0.f, 0.f};
         }

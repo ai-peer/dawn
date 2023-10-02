@@ -33,6 +33,8 @@
 
 #include <tint/tint.h>
 
+#include <iostream>
+
 namespace dawn::native::metal {
 
 namespace {
@@ -738,6 +740,8 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
     size_t nextComputePassNumber = 0;
     size_t nextRenderPassNumber = 0;
 
+    std::cout << "\nGoes through CommandBufferMTL::FillCommands\n";
+
     auto LazyClearSyncScope = [](const SyncScopeResourceUsage& scope,
                                  CommandRecordingContext* commandContext) -> MaybeError {
         for (size_t i = 0; i < scope.textures.size(); ++i) {
@@ -748,7 +752,9 @@ MaybeError CommandBuffer::FillCommands(CommandRecordingContext* commandContext) 
             // subresource has not been initialized before the render pass.
             DAWN_TRY(scope.textureUsages[i].Iterate([&](const SubresourceRange& range,
                                                         wgpu::TextureUsage usage) -> MaybeError {
+                std::cout << "\nCommandBufferMTL::FillCommands - iterating over range usages\n";
                 if (usage & ~wgpu::TextureUsage::RenderAttachment) {
+                    std::cout << "\nCommandBufferMTL::FillCommands - ensuring initialized\n";
                     DAWN_TRY(texture->EnsureSubresourceContentInitialized(commandContext, range));
                 }
                 return {};

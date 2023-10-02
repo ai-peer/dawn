@@ -141,26 +141,24 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         IOSurfaceRef surface = IOSurfaceCreate(dict);
         CFRelease(dict);
 
-        if (initialized) {
-            IOSurfaceLock(surface, 0, nullptr);
-            for (size_t plane = 0; plane < num_planes; ++plane) {
-                void* pointer = IOSurfaceGetBaseAddressOfPlane(surface, plane);
-                if (format == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
-                    std::vector<uint16_t> data =
-                        VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<uint16_t>(
-                            plane, IOSurfaceGetBytesPerRowOfPlane(surface, plane) / 2,
-                            IOSurfaceGetHeightOfPlane(surface, plane), isCheckerboard);
-                    memcpy(pointer, data.data(), data.size() * 2);
-                } else {
-                    std::vector<uint8_t> data =
-                        VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<uint8_t>(
-                            plane, IOSurfaceGetBytesPerRowOfPlane(surface, plane),
-                            IOSurfaceGetHeightOfPlane(surface, plane), isCheckerboard);
-                    memcpy(pointer, data.data(), data.size());
-                }
+        IOSurfaceLock(surface, 0, nullptr);
+        for (size_t plane = 0; plane < num_planes; ++plane) {
+            void* pointer = IOSurfaceGetBaseAddressOfPlane(surface, plane);
+            if (format == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
+                std::vector<uint16_t> data =
+                    VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<uint16_t>(
+                        plane, IOSurfaceGetBytesPerRowOfPlane(surface, plane) / 2,
+                        IOSurfaceGetHeightOfPlane(surface, plane), isCheckerboard, initialized);
+                memcpy(pointer, data.data(), data.size() * 2);
+            } else {
+                std::vector<uint8_t> data =
+                    VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<uint8_t>(
+                        plane, IOSurfaceGetBytesPerRowOfPlane(surface, plane),
+                        IOSurfaceGetHeightOfPlane(surface, plane), isCheckerboard, initialized);
+                memcpy(pointer, data.data(), data.size());
             }
-            IOSurfaceUnlock(surface, 0, nullptr);
         }
+        IOSurfaceUnlock(surface, 0, nullptr);
 
         wgpu::TextureDescriptor textureDesc;
         textureDesc.format = format;

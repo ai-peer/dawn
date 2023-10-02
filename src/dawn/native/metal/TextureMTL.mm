@@ -28,6 +28,8 @@
 
 #include <CoreVideo/CVPixelBuffer.h>
 
+#include <iostream>
+
 namespace dawn::native::metal {
 
 namespace {
@@ -930,17 +932,20 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                                  const SubresourceRange& range,
                                  TextureBase::ClearValue clearValue) {
     Device* device = ToBackend(GetDevice());
+    std::cout << "\nTexture::ClearTexture\n";
 
     const uint8_t clearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0 : 1;
     const double dClearColor = (clearValue == TextureBase::ClearValue::Zero) ? 0.0 : 1.0;
 
     if ((mMtlUsage & MTLTextureUsageRenderTarget) != 0) {
         DAWN_ASSERT(GetFormat().isRenderable);
+        std::cout << "\nTexture::ClearTexture - MTLTextureUsageRenderTarget\n";
 
         // End the blit encoder if it is open.
         commandContext->EndBlit();
 
         if (GetFormat().HasDepthOrStencil()) {
+            std::cout << "\nTexture::ClearTexture - has depth or stencil\n";
             // Create a render pass to clear each subresource.
             for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
                  ++level) {
@@ -993,6 +998,9 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                         }
                     }
 
+                    std::cout << "\nTexture::ClearTexture - is stencil or depth - try empty render "
+                                 "pass\n";
+
                     DAWN_TRY(
                         EncodeEmptyMetalRenderPass(device, commandContext, descriptor,
                                                    GetMipLevelSingleSubresourceVirtualSize(level)));
@@ -1000,6 +1008,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
             }
         } else {
             DAWN_ASSERT(GetFormat().IsColor());
+            std::cout << "\nTexture::ClearTexture - is color\n";
             for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
                  ++level) {
                 // Create multiple render passes with each subresource as a color attachment to
@@ -1037,6 +1046,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                         [*descriptor colorAttachments][attachment].depthPlane = z;
 
                         attachment++;
+                        std::cout << "\nTexture::ClearTexture - is color - try empty render pass\n";
 
                         if (attachment == kMaxColorAttachments) {
                             attachment = 0;
@@ -1057,9 +1067,12 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
         }
     } else {
         DAWN_ASSERT(!IsMultisampledTexture());
+        std::cout << "\nTexture::ClearTexture - !IsMultisampledTexture\n";
 
         // Encode a buffer to texture copy to clear each subresource.
         for (Aspect aspect : IterateEnumMask(range.aspects)) {
+            std::cout << "\nTexture::ClearTexture - !IsMultisampledTexture - aspect = "
+                      << static_cast<int>(aspect) << "\n";
             // Compute the buffer size big enough to fill the largest mip.
             const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
 
@@ -1098,7 +1111,14 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                         continue;
                     }
 
+                    std::cout << "\nTexture::ClearTexture - blit something..\n";
+
                     MTLBlitOption blitOption = ComputeMTLBlitOption(aspect);
+                    std::cout << "\nTexture::ClearTexture - got blit options\n";
+                    auto texture = GetMTLTexture();
+                    if (!texture) {
+                        std::cout << "\nTexture::ClearTexture - mtl texture is null\n";
+                    }
                     [commandContext->EnsureBlit()
                              copyFromBuffer:uploadBuffer
                                sourceOffset:uploadHandle.startOffset
@@ -1121,7 +1141,33 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
 MTLBlitOption Texture::ComputeMTLBlitOption(Aspect aspect) const {
     DAWN_ASSERT(HasOneBit(aspect));
     DAWN_ASSERT(GetFormat().aspects & aspect);
-    MTLPixelFormat format = MetalPixelFormat(GetDevice(), GetFormat().format);
+    auto wgpu_format = GetFormat().format;
+    if (GetFormat().IsMultiPlanar()) {
+        if (aspect & Aspect::Plane0) {
+            switch (GetFormat().format) {
+                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                    wgpu_format = wgpu::TextureFormat::R8Unorm;
+                    break;
+                case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+                    wgpu_format = wgpu::TextureFormat::R16Unorm;
+                    break;
+                default:
+                    DAWN_UNREACHABLE();
+            }
+        } else if (aspect & Aspect::Plane1) {
+            switch (GetFormat().format) {
+                case wgpu::TextureFormat::R8BG8Biplanar420Unorm:
+                    wgpu_format = wgpu::TextureFormat::RG8Unorm;
+                    break;
+                case wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm:
+                    wgpu_format = wgpu::TextureFormat::RG16Unorm;
+                    break;
+                default:
+                    DAWN_UNREACHABLE();
+            }
+        }
+    }
+    MTLPixelFormat format = MetalPixelFormat(GetDevice(), wgpu_format);
 
     if (format == MTLPixelFormatDepth32Float_Stencil8) {
         // We only provide a blit option if the format has both depth and stencil.
@@ -1140,16 +1186,24 @@ MTLBlitOption Texture::ComputeMTLBlitOption(Aspect aspect) const {
 
 MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                         const SubresourceRange& range) {
+    std::cout << "\nTexture::EnsureSubresourceContentInitialized\n";
     if (!GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
         return {};
     }
     if (!IsSubresourceContentInitialized(range)) {
+        std::cout << "\nTexture::EnsureSubresourceContentInitialized - clearing subresource\n";
         // If subresource has not been initialized, clear it to black as it could
         // contain dirty bits from recycled memory
         DAWN_TRY(ClearTexture(commandContext, range, TextureBase::ClearValue::Zero));
+        std::cout << "\nTexture::EnsureSubresourceContentInitialized - clear texture succeeded!\n";
         SetIsSubresourceContentInitialized(true, range);
+        std::cout << "\nTexture::EnsureSubresourceContentInitialized - "
+                     "SetIsSubresourceContentInitialized succeeded!\n";
         GetDevice()->IncrementLazyClearCountForTesting();
+        std::cout << "\nTexture::EnsureSubresourceContentInitialized - "
+                     "IncrementLazyClearCountForTesting succeeded!\n";
     }
+    std::cout << "\nTexture::EnsureSubresourceContentInitialized - clear subresource succeeded!\n";
     return {};
 }
 

@@ -88,12 +88,15 @@ class VideoViewsTestsBase : public DawnTestWithParams<Params> {
     static constexpr dawn::utils::RGBA8 kTolerance{1, 1, 1, 0};
 
     template <typename T>
-    static std::vector<T> GetTestTextureData(wgpu::TextureFormat format, bool isCheckerboard);
+    static std::vector<T> GetTestTextureData(wgpu::TextureFormat format,
+                                             bool isCheckerboard,
+                                             bool initialized = true);
     template <typename T>
     static std::vector<T> GetTestTextureDataWithPlaneIndex(size_t planeIndex,
                                                            size_t bytesPerRow,
                                                            size_t height,
-                                                           bool isCheckerboard);
+                                                           bool isCheckerboard,
+                                                           bool initialized = true);
     static uint32_t NumPlanes(wgpu::TextureFormat format);
     static std::array<Format, 2> PlaneFormats(Format textureFormat);
 

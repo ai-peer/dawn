@@ -360,7 +360,8 @@ Ref<Texture> Device::CreateTextureWrappingIOSurface(
         return nullptr;
     }
     // TODO(dawn:1337): Allow creating uninitialized texture for rendering.
-    if (GetValidInternalFormat(textureDescriptor->format).IsMultiPlanar() &&
+    if (!HasFeature(Feature::MultiPlanarRenderTargets) &&
+        GetValidInternalFormat(textureDescriptor->format).IsMultiPlanar() &&
         !descriptor->isInitialized) {
         bool consumed = ConsumedError(DAWN_VALIDATION_ERROR(
             "External textures with multiplanar formats must be initialized."));
