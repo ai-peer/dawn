@@ -42,6 +42,15 @@ void stream::Stream<tint::Program>::Write(stream::Sink* sink, const tint::Progra
 #endif
 }
 
+#if TINT_BUILD_MSL_WRITER
+// static
+template <>
+void stream::Stream<tint::msl::writer::Options>::Write(stream::Sink* sink,
+                                                       const tint::msl::writer::Options& options) {
+    StreamInTintObject(options, sink);
+}
+#endif  // TINT_BUILD_MSL_WRITER
+
 // static
 template <>
 void stream::Stream<tint::BindingPoint>::Write(stream::Sink* sink,
