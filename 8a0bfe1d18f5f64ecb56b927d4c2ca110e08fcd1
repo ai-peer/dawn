@@ -50,6 +50,24 @@
       "message": "Still not sold on this idea. This means we\u0027ll be blocking fuzzing targets if earlier targets have bugs. Which means that anything later in the stack will end u getting fuzzed less then the stuff at the beginning as the earlier items trigger crashes.\n\nIt seems like this would be better as a general main and a simple way to combine that with a cc file in the cmake/gn files to generate each fuzz executable.\n\nIt would also mean you can run a fuzzer in isolation without having to run all the other fuzzers as well.",
       "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "844fb254_db46e923",
+        "filename": "src/tint/cmd/fuzz/wgsl/wgsl_fuzz.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-02T17:27:05Z",
+      "side": 1,
+      "message": "\u003e Which means that anything later in the stack will end u getting fuzzed less then the stuff at the beginning as the earlier items trigger crashes.\n\nOnly if we have a crashing bug that the fuzzers can\u0027t work around, which is a serious issue we need to fix ASAP.\n\n\u003e It seems like this would be better as a general main and a simple way to combine that with a cc file in the cmake/gn files to generate each fuzz executable.\n\nEach fuzzer executable uses a separate fuzzer corpus - which is inefficient in terms of storage and means that some fuzzers will always be behind in terms of coverage of others.\n\nThis approach means that all the WGSL fuzzers gain the same level of knowledge, in-step. The SPIR-V reader can also pass the IR / WGSL program to the same set of transforms, without a combinatorial explosion of executables.\n\n\u003e It would also mean you can run a fuzzer in isolation without having to run all the other fuzzers as well.\n\nI\u0027m not sold that this is a must-have feature. If it turns out it really helps debugging, then it\u0027s something I can easily add as a command line flag.",
+      "parentUuid": "77e35ebd_6d0eb858",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
