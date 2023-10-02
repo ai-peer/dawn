@@ -113,7 +113,7 @@ class EventManager final : NonMovable {
 
         // Handle spontaneous completions.
         if (spontaneousEvent) {
-            spontaneousEvent->Complete(EventCompletionType::Ready);
+            CompleteEvent(futureID, std::move(spontaneousEvent), EventCompletionType::Ready);
         }
         return WireResult::Success;
     }
@@ -123,6 +123,11 @@ class EventManager final : NonMovable {
 
   private:
     Client* mClient;
+
+    // Completes the event and frees any memory used for command deserialization.
+    void CompleteEvent(FutureID futureID,
+                       std::unique_ptr<TrackedEvent>&& event,
+                       EventCompletionType type);
 
     // Tracks all kinds of events (for both WaitAny and ProcessEvents). We use an ordered map so
     // that in most cases, event ordering is already implicit when we iterate the map. (Not true for

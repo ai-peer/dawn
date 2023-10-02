@@ -25,26 +25,65 @@ WireDeserializeAllocator::~WireDeserializeAllocator() {
     Reset();
 }
 
-void* WireDeserializeAllocator::GetSpace(size_t size) {
-    // Return space in the current buffer if possible first.
-    if (mRemainingSize >= size) {
-        char* buffer = mCurrentBuffer;
-        mCurrentBuffer += size;
-        mRemainingSize -= size;
-        return buffer;
-    }
+void* WireDeserializeAllocator::GetSpace(size_t size, FutureID futureID) {
+    if (futureID == kNullFutureID) {
+        // For non-Future events, use the old allocation path.
 
-    // Otherwise allocate a new buffer and try again.
-    size_t allocationSize = std::max(size, size_t(2048));
-    char* allocation = static_cast<char*>(malloc(allocationSize));
-    if (allocation == nullptr) {
-        return nullptr;
-    }
+        // Return space in the current buffer if possible first.
+        if (mRemainingSize >= size) {
+            char* buffer = mCurrentBuffer;
+            mCurrentBuffer += size;
+            mRemainingSize -= size;
+            return buffer;
+        }
 
-    mAllocations.push_back(allocation);
-    mCurrentBuffer = allocation;
-    mRemainingSize = allocationSize;
-    return GetSpace(size);
+        // Otherwise allocate a new buffer and try again.
+        size_t allocationSize = std::max(size, kAllocationSize);
+        char* allocation = static_cast<char*>(malloc(allocationSize));
+        if (allocation == nullptr) {
+            return nullptr;
+        }
+
+        mAllocations.push_back(allocation);
+        mCurrentBuffer = allocation;
+        mRemainingSize = allocationSize;
+    } else {
+        // For Future events, allocate in the maps. Note that we can potentially improve this by
+        // reusing/reclaiming blocks once a future is complete instead of waiting for all futures in
+        // that block to complete and then deallocating the entire block. Can be a future
+        // optimization.
+
+        // Return space in the current buffer if possible first.
+        if (mRemainingFutureSize >= size) {
+            char* result = mCurrentFutureBuffer + kAllocationSize - mRemainingFutureSize;
+            mRemainingFutureSize -= size;
+            mFutureToAllocations[futureID].insert(mCurrentFutureBuffer);
+            mAllocationToFutures[mCurrentFutureBuffer].insert(futureID);
+            return result;
+        }
+
+        // Otherwise allocate a new buffer and try again.
+        size_t allocationSize = std::max(size, kAllocationSize);
+        char* allocation = static_cast<char*>(malloc(allocationSize));
+        if (allocation == nullptr) {
+            return nullptr;
+        }
+
+        mCurrentFutureBuffer = allocation;
+        mRemainingFutureSize = allocationSize;
+    }
+    return GetSpace(size, futureID);
+}
+
+void WireDeserializeAllocator::FreeFuture(FutureID futureID) {
+    for (char* alloc : mFutureToAllocations[futureID]) {
+        auto& futures = mAllocationToFutures[alloc];
+        futures.erase(futureID);
+        if (futures.empty() && alloc != mCurrentFutureBuffer) {
+            free(alloc);
+        }
+    }
+    mFutureToAllocations.erase(futureID);
 }
 
 void WireDeserializeAllocator::Reset() {

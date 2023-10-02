@@ -55,7 +55,7 @@ std::pair<FutureID, bool> EventManager::TrackEvent(std::unique_ptr<TrackedEvent>
     FutureID futureID = mNextFutureID++;
 
     if (mClient->IsDisconnected()) {
-        event->Complete(EventCompletionType::Shutdown);
+        CompleteEvent(futureID, std::move(event), EventCompletionType::Shutdown);
         return {futureID, false};
     }
 
@@ -79,14 +79,13 @@ void EventManager::ShutDown() {
 
         // Ordering guaranteed because we are using a sorted map.
         for (auto& [futureID, event] : events) {
-            event->Complete(EventCompletionType::Shutdown);
+            CompleteEvent(futureID, std::move(event), EventCompletionType::Shutdown);
         }
     }
 }
 
 void EventManager::ProcessPollEvents() {
-    // Since events are already stored in an ordered map, this list must already be ordered.
-    std::vector<std::unique_ptr<TrackedEvent>> eventsToCompleteNow;
+    std::map<FutureID, std::unique_ptr<TrackedEvent>> eventsToCompleteNow;
     mTrackedEvents.Use([&](auto trackedEvents) {
         for (auto it = trackedEvents->begin(); it != trackedEvents->end();) {
             auto& event = it->second;
@@ -98,13 +97,13 @@ void EventManager::ProcessPollEvents() {
                 ++it;
                 continue;
             }
-            eventsToCompleteNow.emplace_back(std::move(event));
+            eventsToCompleteNow.emplace(it->first, std::move(event));
             it = trackedEvents->erase(it);
         }
     });
 
-    for (auto& event : eventsToCompleteNow) {
-        event->Complete(EventCompletionType::Ready);
+    for (auto& [futureID, event] : eventsToCompleteNow) {
+        CompleteEvent(futureID, std::move(event), EventCompletionType::Ready);
     }
 }
 
@@ -150,12 +149,19 @@ WGPUWaitStatus EventManager::WaitAny(size_t count, WGPUFutureWaitInfo* infos, ui
         }
     });
 
-    for (auto& [_, event] : eventsToCompleteNow) {
+    for (auto& [futureID, event] : eventsToCompleteNow) {
         // .completed has already been set to true (before the callback, per API contract).
-        event->Complete(EventCompletionType::Ready);
+        CompleteEvent(futureID, std::move(event), EventCompletionType::Ready);
     }
 
     return anyCompleted ? WGPUWaitStatus_Success : WGPUWaitStatus_TimedOut;
+}
+
+void EventManager::CompleteEvent(FutureID futureID,
+                                 std::unique_ptr<TrackedEvent>&& event,
+                                 EventCompletionType type) {
+    event->Complete(type);
+    mClient->GetWireDeserializeAllocator()->FreeFuture(futureID);
 }
 
 }  // namespace dawn::wire::client

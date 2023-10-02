@@ -15,6 +15,8 @@
 #ifndef SRC_DAWN_WIRE_WIREDESERIALIZEALLOCATOR_H_
 #define SRC_DAWN_WIRE_WIREDESERIALIZEALLOCATOR_H_
 
+#include <unordered_map>
+#include <unordered_set>
 #include <vector>
 
 #include "dawn/wire/WireCmd_autogen.h"
@@ -28,15 +30,29 @@ class WireDeserializeAllocator : public DeserializeAllocator {
     WireDeserializeAllocator();
     virtual ~WireDeserializeAllocator();
 
-    void* GetSpace(size_t size) override;
+    void* GetSpace(size_t size, FutureID futureID) override;
 
+    // Marks all space associated with the future as no longer used and ready to be reclaimed.
+    void FreeFuture(FutureID futureID);
+
+    // Resets all allocation and memory unrelated to futures.
     void Reset();
 
   private:
+    static constexpr size_t kAllocationSize = 2048;
+
     size_t mRemainingSize = 0;
     char* mCurrentBuffer = nullptr;
-    char mStaticBuffer[2048];
+    char mStaticBuffer[kAllocationSize];
     std::vector<char*> mAllocations;
+
+    // Future allocations are tracked separately for now since we have both types. The important
+    // thing about future allocations are that they should not be cleaned up until after the
+    // callback. The cleanup will be enforced by the EventManager.
+    size_t mRemainingFutureSize = 0;
+    char* mCurrentFutureBuffer = nullptr;
+    std::unordered_map<FutureID, std::unordered_set<char*>> mFutureToAllocations;
+    std::unordered_map<char*, std::unordered_set<FutureID>> mAllocationToFutures;
 };
 }  // namespace dawn::wire
 

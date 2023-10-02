@@ -93,6 +93,7 @@ class Client : public ClientBase {
     }
 
     EventManager* GetEventManager();
+    WireDeserializeAllocator* GetWireDeserializeAllocator();
 
     void Disconnect();
     bool IsDisconnected() const;

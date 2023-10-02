@@ -332,6 +332,16 @@
     ) {
         DAWN_UNUSED(allocator);
 
+        //* Temporary solution to check if a command is Future-based. If it is, we need to forward
+        //* the future id along.
+        FutureID futureID = kNullFutureID;
+        DAWN_UNUSED(futureID);
+        {% for member in members %}
+            {% if member.type.name.get() == "future" %}
+                futureID = transfer->future.id;
+            {% endif %}
+        {% endfor %}
+
         {% if is_cmd %}
             DAWN_ASSERT(transfer->commandId == {{Return}}WireCmd::{{name}});
         {% endif %}
@@ -342,7 +352,11 @@
         {% if record.extensible %}
             record->nextInChain = nullptr;
             if (transfer->hasNextInChain) {
-                WIRE_TRY(DeserializeChainedStruct(&record->nextInChain, deserializeBuffer, allocator, resolver));
+                WIRE_TRY(DeserializeChainedStruct(&record->nextInChain,
+                                                  deserializeBuffer,
+                                                  allocator,
+                                                  resolver,
+                                                  futureID));
             }
         {% endif %}
         {% if record.chained %}
@@ -384,7 +398,7 @@
                     WIRE_TRY(deserializeBuffer->ReadN(stringLength, &stringInBuffer));
 
                     char* copiedString;
-                    WIRE_TRY(GetSpace(allocator, stringLength + 1, &copiedString));
+                    WIRE_TRY(GetSpace(allocator, stringLength + 1, &copiedString, futureID));
                     //* We can cast away the volatile qualifier because DeserializeBuffer::ReadN already
                     //* validated that the range [stringInBuffer, stringInBuffer + stringLength) is valid.
                     //* memcpy may have an unknown access pattern, but this is fine since the string is only
@@ -426,7 +440,7 @@
 
                 {% else %}
                     {{as_cType(member.type.name)}}* copiedMembers;
-                    WIRE_TRY(GetSpace(allocator, memberLength, &copiedMembers));
+                    WIRE_TRY(GetSpace(allocator, memberLength, &copiedMembers, futureID));
                     record->{{memberName}} = copiedMembers;
 
                     {% if member.type.is_wire_transparent %}
@@ -612,7 +626,8 @@
     WireResult DeserializeChainedStruct({{ChainedStructPtr}}* outChainNext,
                                         DeserializeBuffer* deserializeBuffer,
                                         DeserializeAllocator* allocator,
-                                        const ObjectIdResolver& resolver) {
+                                        const ObjectIdResolver& resolver,
+                                        FutureID futureID) {
         bool hasNext;
         do {
             const volatile WGPUChainedStructTransfer* header;
@@ -679,7 +694,10 @@ namespace {
 // Return FatalError if the allocator couldn't allocate the memory.
 // Always writes to |out| on success.
 template <typename T, typename N>
-WireResult GetSpace(DeserializeAllocator* allocator, N count, T** out) {
+WireResult GetSpace(DeserializeAllocator* allocator,
+                    N count,
+                    T** out,
+                    FutureID futureID = kNullFutureID) {
     // Because we use this function extensively when `count` == 1, we can optimize the
     // size computations a bit more for those cases via constexpr version of the
     // alignment computation.
@@ -696,7 +714,7 @@ WireResult GetSpace(DeserializeAllocator* allocator, N count, T** out) {
       size = *sizeN;
     }
 
-    *out = static_cast<T*>(allocator->GetSpace(size));
+    *out = static_cast<T*>(allocator->GetSpace(size, futureID));
     if (*out == nullptr) {
         return WireResult::FatalError;
     }
@@ -716,7 +734,8 @@ size_t GetChainedStructExtraRequiredSize(const WGPUChainedStruct* chainedStruct)
 WireResult DeserializeChainedStruct(const WGPUChainedStruct** outChainNext,
                                     DeserializeBuffer* deserializeBuffer,
                                     DeserializeAllocator* allocator,
-                                    const ObjectIdResolver& resolver);
+                                    const ObjectIdResolver& resolver,
+                                    FutureID futureID = kNullFutureID);
 
 size_t GetChainedStructExtraRequiredSize(WGPUChainedStructOut* chainedStruct);
 [[nodiscard]] WireResult SerializeChainedStruct(WGPUChainedStructOut* chainedStruct,
@@ -725,7 +744,8 @@ size_t GetChainedStructExtraRequiredSize(WGPUChainedStructOut* chainedStruct);
 WireResult DeserializeChainedStruct(WGPUChainedStructOut** outChainNext,
                                     DeserializeBuffer* deserializeBuffer,
                                     DeserializeAllocator* allocator,
-                                    const ObjectIdResolver& resolver);
+                                    const ObjectIdResolver& resolver,
+                                    FutureID futureID = kNullFutureID);
 
 //* Output structure [de]serialization first because it is used by commands.
 {% for type in by_category["structure"] %}
