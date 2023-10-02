@@ -85,6 +85,24 @@
       "message": "M1 Pro subgropus\n\n$ ./Conv1x1Subgroups --dispatches 50\nTesting OpenCL\nUNSUPPORTED (log once): buildComputeProgram: cl2Metal failed\nMin: 4.00258 ms \nMax: 12.151 ms \nAvg: 5.49149 ms \nDawn using Apple M1 Pro\nMin: 0.099583 ms \nMax: 0.112334 ms",
       "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0425ad98_a09ebe45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-02T18:09:26Z",
+      "side": 1,
+      "message": "NVIDIA Quadro Pro 1000.  Slower than OpenCL\n\n$ ./Conv1x1Subgroups --dispatches 50\nTesting OpenCL\nMin: 0.075131 ms \nMax: 0.089859 ms \nAvg: 0.0767408 ms \nDawn using Quadro P1000\nMin: 0.135168 ms \nMax: 0.165888 ms \nAvg: 0.154726 ms",
+      "parentUuid": "791c49fe_d079b795",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
