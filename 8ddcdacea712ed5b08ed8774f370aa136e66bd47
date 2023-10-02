@@ -16,6 +16,41 @@
       "message": "Very nice results on M1 Pro\n\n$ ./Conv1x1 --dispatches 50\nTesting OpenCL\nMin: 285.929 ms \nMax: 296.675 ms \nAvg: 287.789 ms \nDawn using Apple M1 Pro\nMin: 200.868 ms \nMax: 201.748 ms \nAvg: 201.139 ms",
       "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85b97c40_c9de01e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-02T14:55:41Z",
+      "side": 1,
+      "message": "Also consistently faster on Linux x86 NVIDIA Quadro P1000",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5f43010_ca4bb185",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-02T14:55:41Z",
+      "side": 1,
+      "message": "$ ./Conv1x1 --dispatches 50\nTesting OpenCL\nMin: 355.917 ms \nMax: 402.95 ms \nAvg: 362.216 ms \nDawn using Quadro P1000\nMin: 307.052 ms \nMax: 307.445 ms \nAvg: 307.296 ms",
+      "parentUuid": "5856963c_93de584c",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
