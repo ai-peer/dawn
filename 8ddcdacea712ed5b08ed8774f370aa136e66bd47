@@ -103,6 +103,41 @@
       "parentUuid": "791c49fe_d079b795",
       "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82d683e3_5c02c7df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-02T18:18:56Z",
+      "side": 1,
+      "message": "Intel UHD Macbook pro 2017\n\n$ ./Conv1x1Subgroups --dispatches 50\nTesting OpenCL\nMin: 0.075131 ms \nMax: 0.089859 ms \nAvg: 0.0767408 ms \nDawn using Quadro P1000\nMin: 0.135168 ms \nMax: 0.165888 ms \nAvg: 0.154726 ms",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c500081f_e48d1090",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-02T18:18:56Z",
+      "side": 1,
+      "message": "Intel UHD 630 macbook pro 2017 subgroups\nA lot slower here.\n\n$ ./Conv1x1Subgroups --dispatches 50\nTesting OpenCL\nMin: 9.51465 ms \nMax: 13.3172 ms \nAvg: 11.5365 ms \nDawn using Intel(R) HD Graphics 630\nMin: 701.415 ms \nMax: 934.297 ms \nAvg: 756.141 ms",
+      "parentUuid": "0425ad98_a09ebe45",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
