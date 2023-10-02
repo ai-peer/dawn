@@ -51,6 +51,23 @@
       "parentUuid": "5856963c_93de584c",
       "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed018ede_a86e7286",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-02T18:00:35Z",
+      "side": 1,
+      "message": "Intel UHD 630 on Macbook pro 2017.\n\n$ ./Conv1x1 --dispatches 50\nTesting OpenCL\nMin: 1543.13 ms \nMax: 1779.36 ms \nAvg: 1602.89 ms \nDawn using Intel(R) HD Graphics 630\nMin: 976.629 ms \nMax: 1130.96 ms \nAvg: 997.879 ms",
+      "revId": "8ddcdacea712ed5b08ed8774f370aa136e66bd47",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
