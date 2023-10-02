@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2c9ba46_82888215",
+        "filename": "src/tint/cmd/fuzz/wgsl/generate_wgsl_corpus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-02T18:35:24Z",
+      "side": 1,
+      "message": "I considered other places for this, but it is tightly coupled to the specific GN target declared by this directory.",
+      "parentUuid": "33c2b301_00d43cc7",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "88d4fae7_8ed6dc59",
         "filename": "src/tint/cmd/fuzz/wgsl/generate_wgsl_corpus.py",
         "patchSetId": 4
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-02T17:16:52Z",
       "side": 1,
       "message": "nit: 2023",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "08bc1ed6_9aff0ff5",
+        "filename": "src/tint/cmd/fuzz/wgsl/generate_wgsl_corpus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-02T18:35:24Z",
+      "side": 1,
+      "message": "It\u0027s copied from `src/tint/fuzzers/generate_wgsl_corpus.py`, so isn\u0027t new, and so doesn\u0027t get a new year.",
+      "parentUuid": "88d4fae7_8ed6dc59",
       "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
