@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37bf2e0e_522eef22",
+        "filename": "src/tint/utils/containers/vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-02T13:57:35Z",
+      "side": 1,
+      "message": "Do you not need to check `FORWARD` here (and below)? I thought `++`, `+\u003d` etc went in the other direction for reverse iterators, and you seem to have done that for the binary `+` and `-` operators.",
+      "revId": "229ac0ec6e864b86989426ddab86d090ab8b3332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
