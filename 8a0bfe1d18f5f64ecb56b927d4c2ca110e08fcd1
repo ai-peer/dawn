@@ -86,6 +86,24 @@
       "parentUuid": "844fb254_db46e923",
       "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f71d5bca_e0e133dd",
+        "filename": "src/tint/cmd/fuzz/wgsl/wgsl_fuzz.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-02T18:13:31Z",
+      "side": 1,
+      "message": "Chatted with Ben. My largest concern that we\u0027d be blocking fuzzing things that happen to sort later, while, true, we think we can fix with policy instead of multiple fuzz targets. Something along the lines of Tint team comitting to fixing all fuzz issues (including non-stable block issues) in 2business days.\n\nThat would keep the fuzzers from stopping looking down mutation paths due to being block on crashes.",
+      "parentUuid": "4ae03238_91870b02",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
