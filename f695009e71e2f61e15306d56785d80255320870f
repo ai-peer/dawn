@@ -34,6 +34,24 @@
       "parentUuid": "eecdf252_9117da21",
       "revId": "f695009e71e2f61e15306d56785d80255320870f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73ac5cc0_198dc5af",
+        "filename": "src/dawn/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-02T13:03:28Z",
+      "side": 1,
+      "message": "That is impressive. Thank you!",
+      "parentUuid": "ff505fab_cdcdcb0c",
+      "revId": "f695009e71e2f61e15306d56785d80255320870f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
