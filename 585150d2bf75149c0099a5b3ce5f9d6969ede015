@@ -46,6 +46,30 @@
       },
       "revId": "585150d2bf75149c0099a5b3ce5f9d6969ede015",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e05d096b_17c5d4d3",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1164,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-02T16:43:47Z",
+      "side": 1,
+      "message": "Just that the expected and actual data were not matched. I chatted with Vasiliy about this and it may be due to byte alignment, like with RG8 it goes from 256 to 258 and get auto-aligned upto 260 which is enough for RG8, but for RG16 it goes from 256 to 260 but doesn\u0027t get aligned further (but needs 264 really) and fails.",
+      "parentUuid": "a0b17d48_dc41b98b",
+      "range": {
+        "startLine": 1164,
+        "startChar": 30,
+        "endLine": 1164,
+        "endChar": 47
+      },
+      "revId": "585150d2bf75149c0099a5b3ce5f9d6969ede015",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

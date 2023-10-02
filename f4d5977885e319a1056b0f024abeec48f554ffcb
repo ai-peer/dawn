@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c381a2c0_fdbcbef0",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-02T16:43:47Z",
+      "side": 1,
+      "message": "Makes sense, updated to use lambdas instead.",
+      "parentUuid": "60ee7c41_defc8c2b",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e0703cc_65e00531",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa05518c_73fe41a1",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1059,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-02T16:43:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e0703cc_65e00531",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2b7884a5_1fb018f2",
@@ -82,6 +118,24 @@
       "writtenOn": "2023-09-30T14:43:23Z",
       "side": 1,
       "message": "nit: the plane that has a different size is the chrome one so it could be better to test that one if we test a single one (or we can just test both).",
+      "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93e53fdb_7614d307",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 1243,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-02T16:43:47Z",
+      "side": 1,
+      "message": "That\u0027s a good point! Switched it around so we test the chroma view.",
+      "parentUuid": "2b7884a5_1fb018f2",
       "revId": "f4d5977885e319a1056b0f024abeec48f554ffcb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
