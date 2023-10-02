@@ -16,6 +16,24 @@
       "message": "Do you not need to check `FORWARD` here (and below)? I thought `++`, `+\u003d` etc went in the other direction for reverse iterators, and you seem to have done that for the binary `+` and `-` operators.",
       "revId": "229ac0ec6e864b86989426ddab86d090ab8b3332",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92b0a83_d955d09b",
+        "filename": "src/tint/utils/containers/vector.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-02T16:44:11Z",
+      "side": 1,
+      "message": "They\u0027re using `operator+()` which does check `FORWARD`.",
+      "parentUuid": "37bf2e0e_522eef22",
+      "revId": "229ac0ec6e864b86989426ddab86d090ab8b3332",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
