@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b45a034_4a975931",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-02T17:22:08Z",
+      "side": 1,
+      "message": "Nit: modify the docs to mention the null texture case?",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab996fea_b35fda55",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-02T17:22:08Z",
+      "side": 1,
+      "message": "Looks like this will create a variable with a leading underscore. Please check if that is reserved in WGSL.",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03e325dd_40952072",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-02T17:22:08Z",
+      "side": 1,
+      "message": "Could you add another test where there\u0027s both a texture and sampler argument, and both are unused?",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c29edc_fe140711",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-02T17:22:08Z",
+      "side": 1,
+      "message": "This seems to have added a parameter to main(). I\u0027m a bit surprised that this isn\u0027t causing a validation error. Usually by the time we get to entry points, all texture/sampler pairs should resolve to global variables. I suppose since the texture is null in this case, it doesn\u0027t.\n\nThis might be fixable by modifying IsGlobal() to check for (!pair.first || ...) the same way it checks for (!pair.second || ...). (Although I\u0027m surprised it isn\u0027t currently deref\u0027ing a null pointer if that\u0027s the case.)",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6e5943d_990fda23",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3150,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-02T17:22:08Z",
+      "side": 1,
+      "message": "This seems unfortunate, architecturally. We\u0027re kind of forcing the system to assume there is always such a pair, even where there isn\u0027t. It may also cause Dawn to create a placeholder sampler even when it\u0027s not necessary (although I could be wrong).",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
