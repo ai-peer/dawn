@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c2b301_00d43cc7",
+        "filename": "src/tint/cmd/fuzz/wgsl/generate_wgsl_corpus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-02T17:16:52Z",
+      "side": 1,
+      "message": "I think this should be in `scripts/` not `/src/tint/cmd/fuzz/wgsl`",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88d4fae7_8ed6dc59",
+        "filename": "src/tint/cmd/fuzz/wgsl/generate_wgsl_corpus.py",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-02T17:16:52Z",
+      "side": 1,
+      "message": "nit: 2023",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77e35ebd_6d0eb858",
+        "filename": "src/tint/cmd/fuzz/wgsl/wgsl_fuzz.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-02T17:16:52Z",
+      "side": 1,
+      "message": "Still not sold on this idea. This means we\u0027ll be blocking fuzzing targets if earlier targets have bugs. Which means that anything later in the stack will end u getting fuzzed less then the stuff at the beginning as the earlier items trigger crashes.\n\nIt seems like this would be better as a general main and a simple way to combine that with a cc file in the cmake/gn files to generate each fuzz executable.\n\nIt would also mean you can run a fuzzer in isolation without having to run all the other fuzzers as well.",
+      "revId": "8a0bfe1d18f5f64ecb56b927d4c2ca110e08fcd1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
