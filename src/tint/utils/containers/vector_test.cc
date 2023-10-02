@@ -18,6 +18,7 @@
 #include <tuple>
 
 #include "gmock/gmock.h"
+#include "gtest/gtest-spi.h"
 
 #include "src/tint/utils/containers/predicates.h"
 #include "src/tint/utils/memory/bitcast.h"
@@ -2091,6 +2092,60 @@ TEST(TintVectorTest, ostream) {
     EXPECT_EQ(ss.str(), "[1, 2, 3]");
 }
 
+TEST(TintVectorTest, AssertOOBs) {
+    EXPECT_FATAL_FAILURE(
+        {
+            Vector vec{1};
+            [[maybe_unused]] int i = vec[1];
+        },
+        "internal compiler error");
+}
+
+TEST(TintVectorTest, AssertPushWhileIterating) {
+    using V = Vector<int, 4>;
+    EXPECT_FATAL_FAILURE(
+        {
+            V vec;
+            vec.Push(1);
+            vec.Push(2);
+            for ([[maybe_unused]] int i : vec) {
+                vec.Push(3);
+                break;
+            }
+        },
+        "internal compiler error");
+}
+
+TEST(TintVectorTest, AssertPopWhileIterating) {
+    using V = Vector<int, 4>;
+    EXPECT_FATAL_FAILURE(
+        {
+            V vec;
+            vec.Push(1);
+            vec.Push(2);
+            for ([[maybe_unused]] int i : vec) {
+                vec.Pop();
+                break;
+            }
+        },
+        "internal compiler error");
+}
+
+TEST(TintVectorTest, AssertClearWhileIterating) {
+    using V = Vector<int, 4>;
+    EXPECT_FATAL_FAILURE(
+        {
+            V vec;
+            vec.Push(1);
+            vec.Push(2);
+            for ([[maybe_unused]] int i : vec) {
+                vec.Clear();
+                break;
+            }
+        },
+        "internal compiler error");
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // TintVectorRefTest
 ////////////////////////////////////////////////////////////////////////////////
@@ -2369,6 +2424,16 @@ TEST(TintVectorRefTest, ostream) {
     const VectorRef<int> vec_ref(vec);
     ss << vec_ref;
     EXPECT_EQ(ss.str(), "[1, 2, 3]");
+}
+
+TEST(TintVectorRefTest, AssertOOBs) {
+    EXPECT_FATAL_FAILURE(
+        {
+            Vector vec{1};
+            const VectorRef<int> vec_ref(vec);
+            [[maybe_unused]] int i = vec_ref[1];
+        },
+        "internal compiler error");
 }
 
 }  // namespace
