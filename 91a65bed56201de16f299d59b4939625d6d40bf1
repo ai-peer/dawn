@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52e58fda_bf129efe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-02T17:22:01Z",
+      "side": 1,
+      "message": "Mechanism LGTM, but are there any tests we could add here?",
+      "revId": "91a65bed56201de16f299d59b4939625d6d40bf1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
