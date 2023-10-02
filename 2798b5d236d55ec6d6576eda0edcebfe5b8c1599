@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d6bd301_d8eedff1",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-02T20:47:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b45a034_4a975931",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ab996fea_b35fda55",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-02T17:22:08Z",
       "side": 1,
       "message": "Looks like this will create a variable with a leading underscore. Please check if that is reserved in WGSL.",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e4f9342_5b14ecf6",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-02T20:47:35Z",
+      "side": 1,
+      "message": "Now only append \"_\" when `texture_var !\u003d nullptr`",
+      "parentUuid": "ab996fea_b35fda55",
       "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bdd3572_c2e836c8",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 985,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-02T20:47:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03e325dd_40952072",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f9c29edc_fe140711",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "89dca9d2_e74546a9",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1066,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-02T20:47:35Z",
+      "side": 1,
+      "message": "Ah I didn\u0027t think twice when seeing this result. Having sampler added to entry point function is incorrect result.\n\nFix with adding logic to process pair.first (texture_var) \u003d\u003d nullptr case.",
+      "parentUuid": "f9c29edc_fe140711",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e6e5943d_990fda23",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-10-02T17:22:08Z",
       "side": 1,
       "message": "This seems unfortunate, architecturally. We\u0027re kind of forcing the system to assume there is always such a pair, even where there isn\u0027t. It may also cause Dawn to create a placeholder sampler even when it\u0027s not necessary (although I could be wrong).",
+      "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38c188e1_ad79ae23",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3150,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-02T20:47:35Z",
+      "side": 1,
+      "message": "To avoid adding redundant combine sampler placeholders, is it a good idea (easy to implement and have minimal side effect):\n1. if we remove unused function parameters before (or inside) the combine sampler transform\n2. if after combine samplers are added, we iterate them again to remove those that are never referenced",
+      "parentUuid": "e6e5943d_990fda23",
       "revId": "2798b5d236d55ec6d6576eda0edcebfe5b8c1599",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
