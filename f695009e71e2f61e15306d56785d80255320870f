@@ -16,6 +16,24 @@
       "message": "You can\u0027t split an error ratio check like this unfortunately.\n\nMy suggestion is something like the following:\n\n```cpp\ndouble kErrorToleranceRatio // type is updated.\nconstexpr static double kUpperLimitMultiplier \u003d 1.0 + kErrorToleranceRatio;\nconstexpr static double kLowerLimitMultiplier \u003d 1.0 + kErrorToleranceRatio;\n\nuint64_t expected \u003d mExpected[i]\nuint64_t upperLimit \u003d double(mExpected[i]) * kUpperLimitMultiplier;\nuint64_t lowerLimit \u003d double(mExpected[i]) * kLowerLimitMultiplier;\n\n// Quantization may make an actual value close to the lower limit go below it.\n// Take this into account by also quantizing the lower limit.\nuint64_t quantizationMask64 \u003d ~uint64_t(~quantizationMask); // Yes magic\nlowerLimit \u0026\u003d quantizationMask64;\n\nif (actual[i] \u003c lowerLimit || actual[i] \u003e upperLimit) {\n  // error on the computation having an error rate too large.\n}\n\nif ((actual[i] \u0026 ~quantizationMask64) !\u003d 0) {\n  // error on quantization not happening correctly.\n}\n\n```",
       "revId": "f695009e71e2f61e15306d56785d80255320870f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff505fab_cdcdcb0c",
+        "filename": "src/dawn/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-02T12:45:35Z",
+      "side": 1,
+      "message": "```\n// - instead of + of course\nconstexpr static double kLowerLimitMultiplier \u003d 1.0 - kErrorToleranceRatio;\n```",
+      "parentUuid": "eecdf252_9117da21",
+      "revId": "f695009e71e2f61e15306d56785d80255320870f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
