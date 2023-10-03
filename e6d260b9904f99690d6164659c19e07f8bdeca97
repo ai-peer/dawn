@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "46921a16_a863417f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T09:53:53Z",
+      "side": 1,
+      "message": "Tint side good, aside from a possible issue with using high watermarks for bindings",
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e32da40_9c3949bc",
+        "filename": "src/tint/lang/spirv/writer/common/option_builder.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T09:53:53Z",
+      "side": 1,
+      "message": "übernit: All diagnostics from tint start with a lowercase character",
+      "range": {
+        "startLine": 67,
+        "startChar": 51,
+        "endLine": 67,
+        "endChar": 53
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2de676c7_7f834844",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T09:53:53Z",
+      "side": 1,
+      "message": "nit: These are all tint-internal, so should use tint\u0027s containers.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 48
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54a230a6_125fc9e7",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T09:53:53Z",
+      "side": 1,
+      "message": "nit: `would`",
+      "range": {
+        "startLine": 49,
+        "startChar": 27,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d59bd10_9d44f11d",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T09:53:53Z",
+      "side": 1,
+      "message": "generating",
+      "range": {
+        "startLine": 53,
+        "startChar": 23,
+        "endLine": 53,
+        "endChar": 31
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adf383c6_34c8de2e",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T09:53:53Z",
+      "side": 1,
+      "message": "What happens if there\u0027s a binding with `@binding(0x7fffffff)`?\nYou might need to change this to search for unused bindings instead of using a high watermark",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 49
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
