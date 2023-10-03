@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4334da09_eec272a0",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T13:19:08Z",
+      "side": 1,
+      "message": "Just to check `input_fns` is not `ir.functions` ? Otherwise aren\u0027t we adding/deleting while iterating?",
+      "revId": "34a852ff84b0792dc0998028a02dcabbfa024913",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
