@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a70f0f56_b27fcbde",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 295,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-03T17:02:20Z",
+      "side": 1,
+      "message": "Not an actual reviewer, but wanted to say thank you for this! It\u0027s probably the most disruptive bug we have on Android at the moment.",
+      "revId": "b549ab09dabcb4d9dc27e9e1a3c7a38290f34f45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
