@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b81bae_27050716",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 40
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-03T19:36:39Z",
+      "side": 1,
+      "message": "LGTM. And yes, this is the better place to enable this.",
+      "revId": "bda2089ae2c04b6cc806037f04a03b9943aff703",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
