@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "34e544b9_cfc734e9",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-03T21:36:25Z",
+      "side": 1,
+      "message": "yea, I\u0027m not sure what to do to make it clearly safe. all this specific CL needs is to query the pending command serial so that resources can be enqueued after some point. And it\u0027s fine if that is slightly later if someone incremented the serial at the same time.\n\nthe other cases like AssumeCommandsCompleted, HasScheduledCommands, and GetScheduledWorkDoneSerial are all called while the device lock is being held. Ideally the execution queue should be separated out with its own lock where needed but - we\u0027re still in the middle of that refactor",
+      "parentUuid": "7ccf6864_2b03bf3d",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "577d6b42_cd4d5987",
         "filename": "src/dawn/native/ExecutionQueue.cpp",
         "patchSetId": 7
@@ -104,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9d9170c_7ddbc544",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 362,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-03T21:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1416ae16_01a53bad",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f9b7254_d6a26864",
@@ -135,6 +171,24 @@
       "side": 1,
       "message": "+1 to this since in most places I see `IterateUpTo` is called and then at the end of the loop we do a `ClearUpTo`. We could have a version where we pass a lambda and call it something like `ProcessUpTo`? If we do that, then we don\u0027t need the loop and we can actually rely on the `Guard` in the comment above to hold the lock the whole time.",
       "parentUuid": "4f9b7254_d6a26864",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "774f479b_0f1d4dd9",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 376,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-03T21:36:25Z",
+      "side": 1,
+      "message": "Done, with Use() for now",
+      "parentUuid": "11022997_f875dd2c",
       "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -188,6 +242,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9db166c8_78cfd65e",
+        "filename": "src/dawn/native/SwapChain.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-03T21:36:25Z",
+      "side": 1,
+      "message": "this sounds reasonable, but it\u0027s not straightforward to do. I\u0027ll file a webgpu.h issue about whether this is the lifetime that should be expected and keep the code as-is for now.",
+      "parentUuid": "00189249_854cb7dc",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 72,
+        "endChar": 56
+      },
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1f68ed22_e80051ca",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 7
@@ -199,6 +277,24 @@
       "writtenOn": "2023-09-30T15:05:33Z",
       "side": 1,
       "message": "It might be worth noting the intercation with SwapChain here.",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d7d08b7_84fbc022",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 710,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-03T21:36:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f68ed22_e80051ca",
       "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -222,6 +318,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dcc89c01_de1fcffa",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-03T21:36:25Z",
+      "side": 1,
+      "message": "me tagging everything that would be affected so the CL has context when reviewing, but i\u0027ll remove before submitting",
+      "parentUuid": "39e98cd4_03905150",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03c1800c_05208975",
         "filename": "src/dawn/native/vulkan/DeviceVk.h",
         "patchSetId": 7
@@ -233,6 +347,30 @@
       "writtenOn": "2023-10-01T21:01:01Z",
       "side": 1,
       "message": "Thoughts on making these just return `Guards` instead? Might require making some aspects of `MutexProtected` public though?",
+      "range": {
+        "startLine": 64,
+        "startChar": 4,
+        "endLine": 66,
+        "endChar": 80
+      },
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e524e984_a3348c9f",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-03T21:36:25Z",
+      "side": 1,
+      "message": "I think it\u0027s slightly better this way because you avoid acquiring the lock until it is actually used. Also though, you can\u0027t get the guard directly without using operator-\u003e or Use with a lambda",
+      "parentUuid": "03c1800c_05208975",
       "range": {
         "startLine": 64,
         "startChar": 4,
