@@ -387,7 +387,6 @@ TEST_P(DeviceLostTest, GetMappedRange_MapAsyncWriting) {
 
 // Test that Command Encoder Finish fails when device lost
 TEST_P(DeviceLostTest, CommandEncoderFinishFails) {
-    wgpu::CommandBuffer commands;
     wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
 
     LoseDeviceForTesting();
@@ -434,6 +433,19 @@ TEST_P(DeviceLostTest, DeviceLostDoesntCallUncapturedError) {
     // Since the device has a default error callback set that fails if it is called, we just need
     // to lose the device and verify no failures.
     LoseDeviceForTesting();
+}
+
+// Test that resetting the uncaptured error callback after device loss works correctly.
+TEST_P(DeviceLostTest, ResetUncapturedErrorCallbackAfterDeviceLost) {
+    // Create an encoder before device lost to generate an error later.
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    // Since the device has a default error callback set that fails if it is called, we just need
+    // to lose the device and verify no failures.
+    LoseDeviceForTesting();
+    // Reset the error callback to null so it's not called.
+    device.SetUncapturedErrorCallback(nullptr, nullptr);
+    // This would caush the error callback to be called if it wasn't reset correctly.
+    encoder.Finish();
 }
 
 // Test that WGPUCreatePipelineAsyncStatus_Success is returned when device is lost
