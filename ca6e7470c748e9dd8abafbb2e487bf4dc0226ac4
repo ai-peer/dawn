@@ -34,6 +34,24 @@
       "parentUuid": "1258da2e_f948993d",
       "revId": "ca6e7470c748e9dd8abafbb2e487bf4dc0226ac4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f65ae6f8_069f1925",
+        "filename": "src/dawn/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-03T11:45:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5af64c64_12ef84ff",
+      "revId": "ca6e7470c748e9dd8abafbb2e487bf4dc0226ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
