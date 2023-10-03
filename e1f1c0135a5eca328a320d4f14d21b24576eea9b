@@ -356,6 +356,125 @@
       "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,mix:matching_f32:inputSource\u003d\"storage_r\";vectorize\u003d\"_undef_\"\u0027 with tags [android-r]",
       "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3dba1a4_bbc04731",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T06:44:33Z",
+      "side": 0,
+      "message": "🟦 note: all 1574 tests now pass",
+      "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae7ad969_e7ad0284",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T06:44:33Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcbab363_df3a2130",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T06:44:33Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59f5eaa2_806ef252",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T06:44:33Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ae90f34_61a56aac",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 170,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T06:44:33Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "692b8339_44aba60a",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T06:44:33Z",
+      "side": 0,
+      "message": "🟦 note: all 96 tests now pass",
+      "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84ccb750_3244ac05",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 798,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T06:44:33Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,mix:matching_f32:inputSource\u003d\"storage_r\";vectorize\u003d\"_undef_\"\u0027 with tags [android-r]",
+      "revId": "e1f1c0135a5eca328a320d4f14d21b24576eea9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
