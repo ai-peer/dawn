@@ -101,7 +101,7 @@ struct State {
     }
 
     /// Replace a function call argument with an equivalent passed by pointer.
-    void ReplaceCallArgument(core::ir::UserCall* call, uint32_t arg_index) {
+    void ReplaceCallArgument(core::ir::UserCall* call, size_t arg_index) {
         // Copy the argument to a locally declared variable.
         auto* arg = call->Args()[arg_index];
         auto* local_var = b.Var(ty.ptr(function, arg->Type()));
