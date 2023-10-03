@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e3868dd_dde1532d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T21:25:09Z",
+      "side": 1,
+      "message": "Tint side LGTM",
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e32da40_9c3949bc",
@@ -243,6 +260,30 @@
       "side": 1,
       "message": "This is only used as helper code in things like the `tint` executable and `loop` and the fuzzers. In this case, it would wrap and you\u0027d possibly end up with a conflict and get an error when it validates the bindings.\n\nI think that\u0027s Ok given the usage as you can always adjust the tested shader to not do that ...",
       "parentUuid": "adf383c6_34c8de2e",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 49
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a4daf51_b9d367f8",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T21:25:09Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0d40faca_52abeb31",
       "range": {
         "startLine": 61,
         "startChar": 16,
