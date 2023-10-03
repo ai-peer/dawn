@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1258da2e_f948993d",
+        "filename": "src/dawn/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-03T09:40:34Z",
+      "side": 1,
+      "message": "Windows bots fail with this error:\n\n../../src/dawn/tests/white_box/QueryInternalShaderTests.cpp(77): error C2220: the following warning is treated as an error\n../../src/dawn/tests/white_box/QueryInternalShaderTests.cpp(77): warning C4319: \u0027~\u0027: zero extending \u0027uint32_t\u0027 to \u0027uint64_t\u0027 of greater size\n\n\nCorentin, any idea how to solve this?",
+      "revId": "ca6e7470c748e9dd8abafbb2e487bf4dc0226ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
