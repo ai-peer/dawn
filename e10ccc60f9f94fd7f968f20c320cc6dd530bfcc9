@@ -16,6 +16,24 @@
       "message": "Nit: `workgroupUniformLoad`",
       "revId": "e10ccc60f9f94fd7f968f20c320cc6dd530bfcc9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af8e69e4_5594c1e7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-03T21:28:13Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1ffb8ea_9a6c4956",
+      "revId": "e10ccc60f9f94fd7f968f20c320cc6dd530bfcc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
