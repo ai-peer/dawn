@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e8387db9_c30ec134",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-03T20:23:53Z",
+      "side": 1,
+      "message": "And question for how to triage/reproduce the kokoro failure?\n\n```\n[ RUN      ] ModuleScopeVarToEntryPointParamTest.HandleTypes_Basic\n[       OK ] ModuleScopeVarToEntryPointParamTest.HandleTypes_Basic (0 ms)\n[ RUN      ] ModuleScopeVarToEntryPointParamTest.HandleTypes_FunctionCalls\n/tmpfs/src/git/dawn/infra/kokoro/linux/docker.sh: line 221: 31303 Segmentation fault      (core dumped) ./tint_unittests\n```",
+      "revId": "1e4498ece0f12aafcf6a59115335f97accae030d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
