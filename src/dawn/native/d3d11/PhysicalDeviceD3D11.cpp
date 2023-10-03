@@ -240,6 +240,9 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // D3D11 can only clear RTV with float values.
     deviceToggles->Default(Toggle::ApplyClearBigIntegerColorValueWithDraw, true);
     deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);
+    // FXC can miscompile code that depends on special float values (NaN, INF, etc) when IEEE
+    // strictness is not enabled. See crbug.com/tint/976.
+    deviceToggles->Default(Toggle::D3DUseIEEEStrictness, true);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,
