@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1ffb8ea_9a6c4956",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-03T17:16:29Z",
+      "side": 1,
+      "message": "Nit: `workgroupUniformLoad`",
+      "revId": "e10ccc60f9f94fd7f968f20c320cc6dd530bfcc9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
