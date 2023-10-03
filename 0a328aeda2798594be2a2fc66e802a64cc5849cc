@@ -16,6 +16,29 @@
       "message": "Please take a look.",
       "revId": "0a328aeda2798594be2a2fc66e802a64cc5849cc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5928589c_24f46a10",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-03T21:45:20Z",
+      "side": 1,
+      "message": "I think you need to add VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16 to this list in order to determine P010 feature support.\n\nOr check P010 feature support separately.",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 300,
+        "endChar": 42
+      },
+      "revId": "0a328aeda2798594be2a2fc66e802a64cc5849cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
