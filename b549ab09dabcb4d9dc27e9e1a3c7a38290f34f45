@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1c305d8c_5d96d859",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-03T18:16:01Z",
+      "side": 1,
+      "message": "Building and testing locally on https://playcanvas.com/demos/arealights/, which demonstrated the problem on a real-world page, I can confirm that this fixes the issue on a Pixel 4!",
+      "revId": "b549ab09dabcb4d9dc27e9e1a3c7a38290f34f45",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a70f0f56_b27fcbde",
         "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 5
