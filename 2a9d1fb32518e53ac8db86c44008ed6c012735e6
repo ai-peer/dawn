@@ -33,6 +33,109 @@
       "message": "lgtm",
       "revId": "2a9d1fb32518e53ac8db86c44008ed6c012735e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "00ce555c_028230e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 28
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-03T09:36:40Z",
+      "side": 1,
+      "message": "Thank you for the updates! Feel free to land after the minor fixes!",
+      "revId": "2a9d1fb32518e53ac8db86c44008ed6c012735e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4648369_c70c0a87",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1026,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-03T09:36:40Z",
+      "side": 1,
+      "message": "u-nit: CreatePlaneTexWithData",
+      "range": {
+        "startLine": 1026,
+        "startChar": 38,
+        "endLine": 1026,
+        "endChar": 60
+      },
+      "revId": "2a9d1fb32518e53ac8db86c44008ed6c012735e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5affc67a_0fe1e521",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1048,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-03T09:36:40Z",
+      "side": 1,
+      "message": "Note: I\u0027m filing an issue to make the TextureUtils.h helpers handle planes.",
+      "revId": "2a9d1fb32518e53ac8db86c44008ed6c012735e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec1fae8f_ac2298d4",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1117,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-03T09:36:40Z",
+      "side": 1,
+      "message": "u-u-nit: PerformPlaneOperations (CamelCase)",
+      "range": {
+        "startLine": 1117,
+        "startChar": 8,
+        "endLine": 1117,
+        "endChar": 30
+      },
+      "revId": "2a9d1fb32518e53ac8db86c44008ed6c012735e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6734cb9_c72f07e1",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 28
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-03T09:36:40Z",
+      "side": 1,
+      "message": "nit: chrome",
+      "range": {
+        "startLine": 1166,
+        "startChar": 48,
+        "endLine": 1166,
+        "endChar": 52
+      },
+      "revId": "2a9d1fb32518e53ac8db86c44008ed6c012735e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
