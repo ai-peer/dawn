@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4b5b15_24a8bc7a",
+        "filename": "src/tint/lang/spirv/writer/common/option_builder.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T15:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e32da40_9c3949bc",
+      "range": {
+        "startLine": 67,
+        "startChar": 51,
+        "endLine": 67,
+        "endChar": 53
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2de676c7_7f834844",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-03T09:53:53Z",
       "side": 1,
       "message": "nit: These are all tint-internal, so should use tint\u0027s containers.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 48
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3655e222_886fd0ff",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T15:20:53Z",
+      "side": 1,
+      "message": "Done, although it makes things more awkward.",
+      "parentUuid": "2de676c7_7f834844",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "487a5264_99768c27",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T15:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54a230a6_125fc9e7",
+      "range": {
+        "startLine": 49,
+        "startChar": 27,
+        "endLine": 49,
+        "endChar": 32
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3d59bd10_9d44f11d",
@@ -110,6 +182,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cf6d8fa_adb5a16b",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T15:20:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d59bd10_9d44f11d",
+      "range": {
+        "startLine": 53,
+        "startChar": 23,
+        "endLine": 53,
+        "endChar": 31
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "adf383c6_34c8de2e",
@@ -123,6 +219,30 @@
       "writtenOn": "2023-10-03T09:53:53Z",
       "side": 1,
       "message": "What happens if there\u0027s a binding with `@binding(0x7fffffff)`?\nYou might need to change this to search for unused bindings instead of using a high watermark",
+      "range": {
+        "startLine": 61,
+        "startChar": 16,
+        "endLine": 61,
+        "endChar": 49
+      },
+      "revId": "e6d260b9904f99690d6164659c19e07f8bdeca97",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d40faca_52abeb31",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-03T15:20:53Z",
+      "side": 1,
+      "message": "This is only used as helper code in things like the `tint` executable and `loop` and the fuzzers. In this case, it would wrap and you\u0027d possibly end up with a conflict and get an error when it validates the bindings.\n\nI think that\u0027s Ok given the usage as you can always adjust the tested shader to not do that ...",
+      "parentUuid": "adf383c6_34c8de2e",
       "range": {
         "startLine": 61,
         "startChar": 16,
