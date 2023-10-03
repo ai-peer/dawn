@@ -627,10 +627,12 @@ void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* use
     FlushCallbackTaskQueue();
     auto deviceLock(GetScopedLock());
     if (IsLost()) {
-        return;
+        mLoggingCallback = nullptr;
+        mLoggingUserdata = nullptr;
+    } else {
+        mLoggingCallback = callback;
+        mLoggingUserdata = userdata;
     }
-    mLoggingCallback = callback;
-    mLoggingUserdata = userdata;
 }
 
 void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
@@ -642,10 +644,12 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     FlushCallbackTaskQueue();
     auto deviceLock(GetScopedLock());
     if (IsLost()) {
-        return;
+        mUncapturedErrorCallback = nullptr;
+        mUncapturedErrorUserdata = nullptr;
+    } else {
+        mUncapturedErrorCallback = callback;
+        mUncapturedErrorUserdata = userdata;
     }
-    mUncapturedErrorCallback = callback;
-    mUncapturedErrorUserdata = userdata;
 }
 
 void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
@@ -659,10 +663,12 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     FlushCallbackTaskQueue();
     auto deviceLock(GetScopedLock());
     if (IsLost()) {
-        return;
+        mDeviceLostCallback = nullptr;
+        mDeviceLostUserdata = nullptr;
+    } else {
+        mDeviceLostCallback = callback;
+        mDeviceLostUserdata = userdata;
     }
-    mDeviceLostCallback = callback;
-    mDeviceLostUserdata = userdata;
 }
 
 void DeviceBase::APIPushErrorScope(wgpu::ErrorFilter filter) {
