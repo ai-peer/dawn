@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "934c98db_e45302a1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000493
+      },
+      "writtenOn": "2023-10-03T16:33:06Z",
+      "side": 1,
+      "message": "Hello Loko, please have a look at this CL.",
+      "revId": "ad9c605b4278ae67605d8b5ee206b9fe2aceac34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
