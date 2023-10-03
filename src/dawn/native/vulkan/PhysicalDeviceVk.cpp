@@ -318,6 +318,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (allMultiplanarFormatsSupported) {
         EnableFeature(Feature::DawnMultiPlanarFormats);
         EnableFeature(Feature::MultiPlanarFormatExtendedUsages);
+        EnableFeature(Feature::MultiPlanarFormatP010);
     }
 
     EnableFeature(Feature::SurfaceCapabilities);
