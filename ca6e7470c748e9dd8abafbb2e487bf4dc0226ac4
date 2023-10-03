@@ -16,6 +16,24 @@
       "message": "Windows bots fail with this error:\n\n../../src/dawn/tests/white_box/QueryInternalShaderTests.cpp(77): error C2220: the following warning is treated as an error\n../../src/dawn/tests/white_box/QueryInternalShaderTests.cpp(77): warning C4319: \u0027~\u0027: zero extending \u0027uint32_t\u0027 to \u0027uint64_t\u0027 of greater size\n\n\nCorentin, any idea how to solve this?",
       "revId": "ca6e7470c748e9dd8abafbb2e487bf4dc0226ac4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5af64c64_12ef84ff",
+        "filename": "src/dawn/tests/white_box/QueryInternalShaderTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-03T09:44:44Z",
+      "side": 1,
+      "message": "Not sure...\n\n```\nuint32_t invertedQuantizationMask \u003d ~mQuantizationMask\nuint64_t quantizationMask64 \u003d ~uint64_t(invertedQuantizationMask);\n```\n\n?",
+      "parentUuid": "1258da2e_f948993d",
+      "revId": "ca6e7470c748e9dd8abafbb2e487bf4dc0226ac4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
