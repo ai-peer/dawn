@@ -16,6 +16,23 @@
       "message": "PTAL, and see corresponding Chromium CL here:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4913679",
       "revId": "dbdc6228de0c67ad622294b05478ec1b528f1d40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25dd96e_7eca7028",
+        "filename": "src/dawn/platform/DawnPlatform.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-04T21:26:48Z",
+      "side": 1,
+      "message": "I get that we don\u0027t want to do it now because it would change the default on android until the Chromium side lands.\n\nMaybe in a follow-up we can turn this into:\n\n```\n#if DAWN_PLATFORM_IS(ANDROID)\nreturn true;\n#else\nreturn true;\n#endif\n```\n\n?",
+      "revId": "dbdc6228de0c67ad622294b05478ec1b528f1d40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
