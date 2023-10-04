@@ -16,6 +16,24 @@
       "message": "This has the unfortunate effect of making two copies of what might be a very large composite value. I can\u0027t think of a nice solution, so is fine for now.",
       "revId": "67051424e53487691b0e6b8dcd74aad57431055a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb8cb0e4_87d0dd63",
+        "filename": "src/tint/lang/spirv/writer/raise/pass_matrix_by_pointer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-04T13:28:28Z",
+      "side": 1,
+      "message": "Agreed, it\u0027s unfortunate but we\u0027re only using the pass on Qualcomm and hopefully the bug will be fixed on newer drivers so this will only affect older stuff.",
+      "parentUuid": "bb60f1d4_0740ff94",
+      "revId": "67051424e53487691b0e6b8dcd74aad57431055a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
