@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5f60fe6_95079807",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-04T21:21:25Z",
+      "side": 1,
+      "message": "PTAL, and see corresponding Chromium CL here:\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4913679",
+      "revId": "dbdc6228de0c67ad622294b05478ec1b528f1d40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
