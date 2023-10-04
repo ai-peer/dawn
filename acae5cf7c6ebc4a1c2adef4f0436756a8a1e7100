@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "665d9733_188d3971",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "How to read the kokoro\u0027s log? I am not sure what\u0027s the failure reason.",
+      "revId": "acae5cf7c6ebc4a1c2adef4f0436756a8a1e7100",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

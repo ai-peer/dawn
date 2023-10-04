@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eb4a63c_cb80f0df",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "Done. Assert that aspect is single bit or (special case) (Depth | Stencil).",
+      "parentUuid": "465ed64e_290108eb",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3cd4310e_d9168724",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-10-04T13:06:04Z",
       "side": 1,
       "message": "nit: this could be on the TextureView: GetSingleSubresourceVirtualSize so we don\u0027t need to pass the aspect and base mip level each time.",
+      "range": {
+        "startLine": 228,
+        "startChar": 34,
+        "endLine": 228,
+        "endChar": 73
+      },
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41aec196_4508cf84",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cd4310e_d9168724",
       "range": {
         "startLine": 228,
         "startChar": 34,
@@ -77,6 +119,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a11a46eb_b8f70d7e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "I have changed this to calling TextureViewBase::GetSingleSubresourceVirtualSize() instead.",
+      "parentUuid": "89be639f_eeece174",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2aef4b3d_74073ec0",
         "filename": "src/dawn/native/CommandValidation.cpp",
         "patchSetId": 5
@@ -88,6 +148,24 @@
       "writtenOn": "2023-10-04T13:06:04Z",
       "side": 1,
       "message": "This seems to come from another CL? Multiplanar textures don\u0027t support copy operations yet. Or we should validate all copies with multiplanar textures, not just the multi-aspect ones.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0040d17_1c055f51",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "There are some existing negative tests that try to do the copy with wgpu::TextureAspect::All. The tests expect an error.\n\nIIUC, the negative tests weren\u0027t 100% accurate at catching the \"copying multiplanar textures is not allowed\" error. The tests just passed because we caught different and unrelated errors. For example:\n- [1] passes because the dst texture doesn\u0027t have CopyDst usage, not because the validation didn\u0027t allow the multiple aspects T2T copy. Actually the current code doesn\u0027t seem to have any validation that prevents this scenario yet. I have added new validation to T2T encoding code.\n\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/VideoViewsTests.cpp;drc\u003d3d8b48e023f44645d8463868be8ba0ff539ebe81;l\u003d697",
+      "parentUuid": "2aef4b3d_74073ec0",
       "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +189,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b62b5c3_1075806e",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "I have changed to calling textureView-\u003eGetSingleSubresourceVirtualSize() instead.",
+      "parentUuid": "fa33bfb2_0d7a8a09",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "59e8ce28_5e93ad0b",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 5
@@ -122,6 +218,24 @@
       "writtenOn": "2023-10-04T13:06:04Z",
       "side": 1,
       "message": "Why is this not in the switch? Because of a warning? We could do something like Aspect(Aspect::Depth | Aspect::Stencil) to trick the compiler I belive.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e4491b3_114a6e47",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "I tried but compiler kept throwing this error:\n```\nerror: case value not in enumerated type \u0027Aspect\u0027 [-Werror,-Wswitch]\n```",
+      "parentUuid": "59e8ce28_5e93ad0b",
       "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -145,6 +259,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d8514626_50f46361",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "Removed view\u0027s GetSize(), GetWidth(), GetHeight(). Thanks for catching this.\nI will only keep GetSingleSubresourceVirtualSize() for now which will take into account the view\u0027s base mip level and aspect.",
+      "parentUuid": "c1389912_fa20be8d",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "81abf395_3f0c79bd",
         "filename": "src/dawn/native/Texture.h",
         "patchSetId": 5
@@ -156,6 +288,30 @@
       "writtenOn": "2023-10-04T13:06:04Z",
       "side": 1,
       "message": "nit: IntendedSize seems slightly weird but I\u0027m not sure what would be a better word. DescriptorSize? BasePlaneSize?",
+      "range": {
+        "startLine": 73,
+        "startChar": 20,
+        "endLine": 73,
+        "endChar": 35
+      },
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79e54394_78cf4fe8",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "Done. Changed to `BaseSize`. `BasePlaneSize` doesn\u0027t seem to be suitable since not all textures have concept of \"plane\".",
+      "parentUuid": "81abf395_3f0c79bd",
       "range": {
         "startLine": 73,
         "startChar": 20,
@@ -189,6 +345,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2428a20_c150a7f0",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "70cf6d54_b62c361b",
+      "range": {
+        "startLine": 102,
+        "startChar": 9,
+        "endLine": 102,
+        "endChar": 29
+      },
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "237193cb_4fcd41ee",
@@ -206,6 +386,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e413d7d4_2c4b6060",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "Done. Actually splitting is not needed. Passing Depth | Stencil to IsCompleteSubresourceCopiedTo() is ok since depth \u0026 stencil share the same size.",
+      "parentUuid": "237193cb_4fcd41ee",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d630a2_9c6d5645",
@@ -219,6 +417,24 @@
       "writtenOn": "2023-10-04T13:06:04Z",
       "side": 1,
       "message": "nit: We could assume swapchain textures are color textures.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5d0b6f7_a05575e8",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-04T22:13:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13d630a2_9c6d5645",
       "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
