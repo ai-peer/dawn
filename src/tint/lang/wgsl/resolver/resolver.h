@@ -164,8 +164,9 @@ class Resolver {
     /// ident.
     core::type::Vector* Vec(const ast::Identifier* ident, core::type::Type* el, uint32_t n);
 
-    /// @returns a vector of width @p n resolved from the templated identifier @p ident.
-    core::type::Vector* VecT(const ast::Identifier* ident, uint32_t n);
+    /// @returns a vector of width @p n resolved from the templated identifier @p ident, or an
+    /// IncompleteType if the identifier is not templated.
+    core::type::Type* VecT(const ast::Identifier* ident, core::BuiltinType builtin, uint32_t n);
 
     /// @returns a matrix with the element type @p el of dimensions @p num_columns x @p num_rows
     /// resolved from the identifier @p ident.
@@ -175,11 +176,15 @@ class Resolver {
                             uint32_t num_rows);
 
     /// @returns a matrix of dimensions @p num_columns x @p num_rows resolved from the templated
-    /// identifier @p ident.
-    core::type::Matrix* MatT(const ast::Identifier* ident, uint32_t num_columns, uint32_t num_rows);
+    /// identifier @p ident, or an IncompleteType if the identifier is not templated.
+    core::type::Type* MatT(const ast::Identifier* ident,
+                           core::BuiltinType builtin,
+                           uint32_t num_columns,
+                           uint32_t num_rows);
 
-    /// @returns an array resolved from the templated identifier @p ident.
-    core::type::Array* Array(const ast::Identifier* ident);
+    /// @returns an array resolved from the templated identifier @p ident, or an IncompleteType if
+    /// the identifier is not templated.
+    core::type::Type* Array(const ast::Identifier* ident);
 
     /// @returns an atomic resolved from the templated identifier @p ident.
     core::type::Atomic* Atomic(const ast::Identifier* ident);
@@ -210,6 +215,12 @@ class Resolver {
     const ast::TemplatedIdentifier* TemplatedIdentifier(const ast::Identifier* ident,
                                                         size_t min_args,
                                                         size_t max_args = /* use min */ 0);
+
+    /// @returns true if the number of templated arguments are between @p min_args and  @p max_args
+    /// otherwise raises an error and returns false.
+    bool CheckTemplatedIdentifierArgs(const ast::TemplatedIdentifier* ident,
+                                      size_t min_args,
+                                      size_t max_args = /* use min */ 0);
 
     /// @returns the call of Expression() cast to a
     /// sem::BuiltinEnumExpression<core::AddressSpace>. If the sem::Expression is not a
@@ -271,10 +282,9 @@ class Resolver {
     sem::ValueExpression* Bitcast(const ast::BitcastExpression*);
     sem::Call* Call(const ast::CallExpression*);
     sem::Function* Function(const ast::Function*);
-    template <size_t N>
     sem::Call* FunctionCall(const ast::CallExpression*,
                             sem::Function* target,
-                            Vector<const sem::ValueExpression*, N>& args,
+                            VectorRef<const sem::ValueExpression*> args,
                             sem::Behaviors arg_behaviors);
     sem::Expression* Identifier(const ast::IdentifierExpression*);
     template <size_t N>

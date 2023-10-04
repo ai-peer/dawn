@@ -27,6 +27,7 @@ cc_library(
   name = "resolver",
   srcs = [
     "dependency_graph.cc",
+    "incomplete_type.cc",
     "resolve.cc",
     "resolver.cc",
     "sem_helper.cc",
@@ -35,6 +36,7 @@ cc_library(
   ],
   hdrs = [
     "dependency_graph.h",
+    "incomplete_type.h",
     "resolve.h",
     "resolver.h",
     "sem_helper.h",

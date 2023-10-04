@@ -55,8 +55,8 @@ class SemHelper {
         return const_cast<T*>(As<T>(sem));
     }
 
-    /// GetVal is a helper for obtaining the semantic sem::ValueExpression for the given AST node.
-    /// Raises an error diagnostic and returns `nullptr` if the semantic node is not a
+    /// GetVal is a helper for obtaining the semantic sem::ValueExpression for the given AST
+    /// expression. Raises an error diagnostic and returns `nullptr` if the semantic node is not a
     /// sem::ValueExpression.
     /// @param ast the ast node to get the sem for
     /// @returns the sem node for @p ast
@@ -91,6 +91,19 @@ class SemHelper {
         return nullptr;
     }
 
+    /// GetType is a helper for obtaining the semantic type for the given AST expression.
+    /// Raises an error diagnostic and returns `nullptr` if the semantic node is not a
+    /// sem::TypeExpression
+    /// @param ast the ast node to get the sem for
+    /// @returns the sem node for @p ast
+    const core::type::Type* GetType(const ast::Expression* ast) const {
+        auto* expr = AsTypeExpression(Get(ast));
+        if (TINT_LIKELY(expr)) {
+            return expr->Type();
+        }
+        return nullptr;
+    }
+
     /// @param expr the semantic node
     /// @returns nullptr if @p expr is nullptr, or @p expr cast to sem::Function if the cast is
     /// successful, otherwise an error diagnostic is raised.
@@ -118,6 +131,19 @@ class SemHelper {
             ErrorUnexpectedExprKind(expr, "address space");
         }
         return nullptr;
+    }
+
+    /// GetAddressSpace is a helper for obtaining the address space for the given AST expression.
+    /// Raises an error diagnostic and returns core::AddressSpace::kUndefined if the semantic node
+    /// is not a sem::BuiltinEnumExpression<core::AddressSpace>
+    /// @param ast the ast node to get the address space
+    /// @returns the sem node for @p ast
+    core::AddressSpace GetAddressSpace(const ast::Expression* ast) const {
+        auto* expr = AsAddressSpace(Get(ast));
+        if (TINT_LIKELY(expr)) {
+            return expr->Value();
+        }
+        return core::AddressSpace::kUndefined;
     }
 
     /// @param expr the semantic node
@@ -150,6 +176,19 @@ class SemHelper {
         return nullptr;
     }
 
+    /// GetTexelFormat is a helper for obtaining the texel format for the given AST expression.
+    /// Raises an error diagnostic and returns core::TexelFormat::kUndefined if the semantic node
+    /// is not a sem::BuiltinEnumExpression<core::TexelFormat>
+    /// @param ast the ast node to get the texel format
+    /// @returns the sem node for @p ast
+    core::TexelFormat GetTexelFormat(const ast::Expression* ast) const {
+        auto* expr = AsTexelFormat(Get(ast));
+        if (TINT_LIKELY(expr)) {
+            return expr->Value();
+        }
+        return core::TexelFormat::kUndefined;
+    }
+
     /// @param expr the semantic node
     /// @returns nullptr if @p expr is nullptr, or @p expr cast to
     /// sem::BuiltinEnumExpression<core::Access> if the cast is successful, otherwise an error
@@ -163,6 +202,19 @@ class SemHelper {
             ErrorUnexpectedExprKind(expr, "access");
         }
         return nullptr;
+    }
+
+    /// GetAccess is a helper for obtaining the access mode for the given AST expression.
+    /// Raises an error diagnostic and returns core::Access::kUndefined if the semantic node
+    /// is not a sem::BuiltinEnumExpression<core::Access>
+    /// @param ast the ast node to get the access mode
+    /// @returns the sem node for @p ast
+    core::Access GetAccess(const ast::Expression* ast) const {
+        auto* expr = AsAccess(Get(ast));
+        if (TINT_LIKELY(expr)) {
+            return expr->Value();
+        }
+        return core::Access::kUndefined;
     }
 
     /// @param expr the semantic node

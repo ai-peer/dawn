@@ -69,6 +69,9 @@ std::string SemHelper::Describe(const sem::Expression* expr) const {
             auto name = fn->name->symbol.Name();
             return "function '" + name + "'";
         },
+        [&](const sem::BuiltinEnumExpression<wgsl::BuiltinFn>* fn) {
+            return "builtin function '" + tint::ToString(fn->Value()) + "'";
+        },
         [&](const sem::BuiltinEnumExpression<core::Access>* access) {
             return "access '" + tint::ToString(access->Value()) + "'";
         },
@@ -103,9 +106,10 @@ void SemHelper::ErrorUnexpectedExprKind(const sem::Expression* expr,
 
 void SemHelper::ErrorExpectedValueExpr(const sem::Expression* expr) const {
     ErrorUnexpectedExprKind(expr, "value");
-    if (auto* ty_expr = expr->As<sem::TypeExpression>()) {
-        if (auto* ident = ty_expr->Declaration()->As<ast::IdentifierExpression>()) {
-            AddNote("are you missing '()' for value constructor?", ident->source.End());
+    if (auto* ident = expr->Declaration()->As<ast::IdentifierExpression>()) {
+        if (expr->IsAnyOf<sem::FunctionExpression, sem::TypeExpression,
+                          sem::BuiltinEnumExpression<wgsl::BuiltinFn>>()) {
+            AddNote("are you missing '()'?", ident->source.End());
         }
     }
 }
