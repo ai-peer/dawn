@@ -14,6 +14,7 @@
 
 #include <memory>
 
+#include "dawn/tests/unittests/wire/WireFutureTest.h"
 #include "dawn/tests/unittests/wire/WireTest.h"
 #include "dawn/wire/WireClient.h"
 
@@ -34,70 +35,102 @@ static void ToMockQueueWorkDone(WGPUQueueWorkDoneStatus status, void* userdata) 
     mockQueueWorkDoneCallback->Call(status, userdata);
 }
 
-class WireQueueTests : public WireTest {
+using WireQueueTestBase = WireFutureTest<WGPUQueueWorkDoneCallback,
+                                         WGPUQueueWorkDoneCallbackInfo,
+                                         wgpuQueueOnSubmittedWorkDone,
+                                         wgpuQueueOnSubmittedWorkDoneF>;
+class WireQueueTests : public WireQueueTestBase {
+  public:
+    // Overriden version of wgpuQueueOnSubmittedWorkDone that defers to the API call based on the
+    // test callback mode.
+    void QueueOnSubmittedWorkDone(WGPUQueue q, WGPUQueueWorkDoneCallback cb, void* userdata) {
+        CallImpl(cb, userdata, q);
+    }
+
   protected:
     void SetUp() override {
-        WireTest::SetUp();
+        WireQueueTestBase::SetUp();
         mockQueueWorkDoneCallback = std::make_unique<MockQueueWorkDoneCallback>();
     }
 
     void TearDown() override {
-        WireTest::TearDown();
+        WireQueueTestBase::TearDown();
         mockQueueWorkDoneCallback = nullptr;
     }
 
-    void FlushServer() {
-        WireTest::FlushServer();
-        Mock::VerifyAndClearExpectations(&mockQueueWorkDoneCallback);
+    void FlushServerFutures() {
+        WireQueueTestBase::FlushServerFutures();
+        ASSERT_TRUE(Mock::VerifyAndClearExpectations(mockQueueWorkDoneCallback.get()));
     }
 };
 
+DAWN_INSTANTIATE_WIRE_FUTURE_TEST_P(WireQueueTests);
+
 // Test that a successful OnSubmittedWorkDone call is forwarded to the client.
-TEST_F(WireQueueTests, OnSubmittedWorkDoneSuccess) {
-    wgpuQueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
+TEST_P(WireQueueTests, OnSubmittedWorkDoneSuccess) {
+    QueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
     EXPECT_CALL(api, OnQueueOnSubmittedWorkDone(apiQueue, _, _)).WillOnce(InvokeWithoutArgs([&] {
         api.CallQueueOnSubmittedWorkDoneCallback(apiQueue, WGPUQueueWorkDoneStatus_Success);
     }));
-    FlushClient();
+    FlushClientFutures();
 
     EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_Success, this)).Times(1);
-    FlushServer();
+    FlushServerFutures();
 }
 
 // Test that an error OnSubmittedWorkDone call is forwarded as an error to the client.
-TEST_F(WireQueueTests, OnSubmittedWorkDoneError) {
-    wgpuQueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
+TEST_P(WireQueueTests, OnSubmittedWorkDoneError) {
+    QueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
     EXPECT_CALL(api, OnQueueOnSubmittedWorkDone(apiQueue, _, _)).WillOnce(InvokeWithoutArgs([&] {
         api.CallQueueOnSubmittedWorkDoneCallback(apiQueue, WGPUQueueWorkDoneStatus_Error);
     }));
-    FlushClient();
+    FlushClientFutures();
 
     EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_Error, this)).Times(1);
-    FlushServer();
+    FlushServerFutures();
 }
 
-// Test registering an OnSubmittedWorkDone then disconnecting the wire calls the callback with
-// device loss
-TEST_F(WireQueueTests, OnSubmittedWorkDoneBeforeDisconnect) {
-    wgpuQueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
+// Test registering an OnSubmittedWorkDone then disconnecting the wire after the server responded to
+// the client will call the callback with the server response.
+TEST_P(WireQueueTests, OnSubmittedWorkDoneBeforeDisconnectAfterReply) {
+    QueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
     EXPECT_CALL(api, OnQueueOnSubmittedWorkDone(apiQueue, _, _)).WillOnce(InvokeWithoutArgs([&] {
         api.CallQueueOnSubmittedWorkDoneCallback(apiQueue, WGPUQueueWorkDoneStatus_Error);
     }));
+    FlushClientFutures();
+
+    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_Error, this)).Times(1);
+    // Explicitly only flush the server since FlushServerFutures actually calls a synchronization
+    // entry point which would result in the callback happening now instead of on Disconnect. Note
+    // that for Async/Spontaneous events, the callback is actually going to happen in th
+    // FlushServer call, not the Disconnect.
+    FlushServer();
+    GetWireClient()->Disconnect();
+}
+
+// Test registering an OnSubmittedWorkDone then disconnecting the wire before the server responded
+// to the client will call the callback with success to make the lost device appear to continue to
+// function.
+TEST_P(WireQueueTests, OnSubmittedWorkDoneBeforeDisconnectBeforeReply) {
+    QueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
+    EXPECT_CALL(api, OnQueueOnSubmittedWorkDone(apiQueue, _, _)).WillOnce(InvokeWithoutArgs([&] {
+        api.CallQueueOnSubmittedWorkDoneCallback(apiQueue, WGPUQueueWorkDoneStatus_Error);
+    }));
+    // Explicitly only flush the client since FlushClientFutures actually triggers a flush on the
+    // server-side to get a response.
     FlushClient();
 
-    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, this))
-        .Times(1);
+    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_Success, this)).Times(1);
     GetWireClient()->Disconnect();
 }
 
 // Test registering an OnSubmittedWorkDone after disconnecting the wire calls the callback with
 // device loss
-TEST_F(WireQueueTests, OnSubmittedWorkDoneAfterDisconnect) {
+TEST_P(WireQueueTests, OnSubmittedWorkDoneAfterDisconnect) {
     GetWireClient()->Disconnect();
 
-    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, this))
-        .Times(1);
-    wgpuQueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
+    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_Success, this)).Times(1);
+    QueueOnSubmittedWorkDone(queue, ToMockQueueWorkDone, this);
 }
 
 // Hack to pass in test context into user callback
@@ -117,20 +150,23 @@ static void ToMockQueueWorkDoneWithNewRequests(WGPUQueueWorkDoneStatus status, v
 
     // Send the requests a number of times
     for (size_t i = 0; i < testData->numRequests; i++) {
-        wgpuQueueOnSubmittedWorkDone(*(testData->pTestQueue), ToMockQueueWorkDone, testData->pTest);
+        testData->pTest->QueueOnSubmittedWorkDone(*(testData->pTestQueue), ToMockQueueWorkDone,
+                                                  testData->pTest);
     }
 }
 
 // Test that requests inside user callbacks before disconnect are called
-TEST_F(WireQueueTests, OnSubmittedWorkDoneInsideCallbackBeforeDisconnect) {
+TEST_P(WireQueueTests, OnSubmittedWorkDoneInsideCallbackBeforeDisconnect) {
     TestData testData = {this, &queue, 10};
-    wgpuQueueOnSubmittedWorkDone(queue, ToMockQueueWorkDoneWithNewRequests, &testData);
+    QueueOnSubmittedWorkDone(queue, ToMockQueueWorkDoneWithNewRequests, &testData);
     EXPECT_CALL(api, OnQueueOnSubmittedWorkDone(apiQueue, _, _)).WillOnce(InvokeWithoutArgs([&] {
         api.CallQueueOnSubmittedWorkDoneCallback(apiQueue, WGPUQueueWorkDoneStatus_Error);
     }));
+    // Explicitly only flush the client since FlushClientFutures actually triggers a flush on the
+    // server-side to get a response.
     FlushClient();
 
-    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, this))
+    EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_Success, this))
         .Times(1 + testData.numRequests);
     GetWireClient()->Disconnect();
 }
