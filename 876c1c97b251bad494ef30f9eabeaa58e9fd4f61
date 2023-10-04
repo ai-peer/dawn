@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "876c1c97b251bad494ef30f9eabeaa58e9fd4f61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "32193aa0_3bb17468",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T12:36:33Z",
+      "side": 1,
+      "message": "As discussed offline, I was wrong and we don\u0027t need to do the @available and can use hasUnifiedMemory all the time.",
+      "revId": "876c1c97b251bad494ef30f9eabeaa58e9fd4f61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
