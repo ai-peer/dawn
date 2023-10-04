@@ -831,6 +831,8 @@ TEST_P(MultisampledRenderingTest, MultisampledRenderingWithDepthTestAndSampleMas
     // TODO(dawn:1549) Fails on Qualcomm-based Android devices.
     DAWN_SUPPRESS_TEST_IF(IsAndroid() && IsQualcomm());
 
+    device.Tick();
+
     constexpr bool kTestDepth = true;
     // The second sample is included in the first render pass and it's covered by the triangle.
     constexpr uint32_t kSampleMaskGreen = kSecondSampleMaskBit;

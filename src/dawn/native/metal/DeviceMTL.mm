@@ -21,6 +21,8 @@
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ErrorData.h"
+#include "dawn/native/Instance.h"
+#include "dawn/native/MetalBackend.h"
 #include "dawn/native/metal/BindGroupLayoutMTL.h"
 #include "dawn/native/metal/BindGroupMTL.h"
 #include "dawn/native/metal/BufferMTL.h"
@@ -146,6 +148,10 @@ Device::~Device() {
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
     Ref<Queue> queue;
     DAWN_TRY_ASSIGN(queue, Queue::Create(this, &descriptor->defaultQueue));
+    
+    if (GetPhysicalDevice()->GetInstance()->IsBeginCaptureOnStartupEnabled()) {
+        StartCapture(ToAPI(this));
+    }
 
     if (mIsTimestampQueryEnabled && !IsToggleEnabled(Toggle::DisableTimestampQueryConversion)) {
         // Make a best guess of timestamp period based on device vendor info, and converge it to
@@ -379,6 +385,10 @@ Ref<Texture> Device::CreateTextureWrappingIOSurface(
 
 void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
+    
+    if (GetPhysicalDevice()->GetInstance()->IsBeginCaptureOnStartupEnabled()) {
+        StopCapture();
+    }
 
     mMtlDevice = nullptr;
     mMockBlitMtlBuffer = nullptr;
