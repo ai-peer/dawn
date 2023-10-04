@@ -535,6 +535,12 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     deviceToggles->Default(Toggle::D3D12AlwaysUseTypelessFormatsForCastableTexture,
                            !GetDeviceInfo().supportsCastingFullyTypedFormat);
     deviceToggles->Default(Toggle::ApplyClearBigIntegerColorValueWithDraw, true);
+<<<<<<< PATCH SET (b39186 Disable IEEE strictness by default with DXC)
+    // FXC can miscompile code that depends on special float values (NaN, INF, etc) when IEEE
+    // strictness is not enabled. See crbug.com/tint/976.
+    deviceToggles->Default(Toggle::D3DUseIEEEStrictness, !deviceToggles->IsEnabled(Toggle::UseDXC));
+=======
+>>>>>>> BASE      (851652 Mark InstanceBase::mPlatform as still DanglingUntriaged.)
 
     // The restriction on the source box specifying a portion of the depth stencil texture in
     // CopyTextureRegion() is only available on the D3D12 platforms which doesn't support
