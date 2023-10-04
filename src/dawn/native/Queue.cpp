@@ -611,6 +611,7 @@ MaybeError QueueBase::ValidateWriteTexture(const ImageCopyTexture* destination,
     DAWN_TRY(GetDevice()->ValidateObject(this));
     DAWN_TRY(GetDevice()->ValidateObject(destination->texture));
 
+    DAWN_TRY(ValidateLinearToDepthStencilCopyRestrictions(*destination));
     DAWN_TRY(ValidateImageCopyTexture(GetDevice(), *destination, *writeSize));
 
     DAWN_INVALID_IF(dataLayout.offset > dataSize,
@@ -624,7 +625,6 @@ MaybeError QueueBase::ValidateWriteTexture(const ImageCopyTexture* destination,
     DAWN_INVALID_IF(destination->texture->GetSampleCount() > 1, "Sample count (%u) of %s is not 1",
                     destination->texture->GetSampleCount(), destination->texture);
 
-    DAWN_TRY(ValidateLinearToDepthStencilCopyRestrictions(*destination));
     // We validate texture copy range before validating linear texture data,
     // because in the latter we divide copyExtent.width by blockWidth and
     // copyExtent.height by blockHeight while the divisibility conditions are
