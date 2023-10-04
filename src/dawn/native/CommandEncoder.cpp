@@ -145,13 +145,7 @@ MaybeError ValidateOrSetAttachmentSize(const TextureViewBase* attachment,
                                        uint32_t* width,
                                        uint32_t* height) {
     Extent3D attachmentSize = attachment->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
-        attachment->GetBaseMipLevel());
-    // TODO(dawn:2099): TextureBase::GetWidth/Height should take an Aspect parameter and perform the
-    // necessary computation instead.
-    if (attachment->GetTexture()->GetFormat().IsMultiPlanar()) {
-        attachmentSize = attachment->GetTexture()->GetFormat().GetAspectSize(
-            attachment->GetAspects(), attachmentSize);
-    }
+        attachment->GetBaseMipLevel(), attachment->GetAspects());
 
     if (*width == 0) {
         DAWN_ASSERT(*height == 0);
@@ -232,10 +226,10 @@ MaybeError ValidateResolveTarget(const DeviceBase* device,
 
     const Extent3D& colorTextureSize =
         attachment->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
-            attachment->GetBaseMipLevel());
+            attachment->GetBaseMipLevel(), attachment->GetAspects());
     const Extent3D& resolveTextureSize =
         resolveTarget->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
-            resolveTarget->GetBaseMipLevel());
+            resolveTarget->GetBaseMipLevel(), attachment->GetAspects());
     DAWN_INVALID_IF(colorTextureSize.width != resolveTextureSize.width ||
                         colorTextureSize.height != resolveTextureSize.height,
                     "The Resolve target %s size (width: %u, height: %u) does not match the color "
@@ -262,7 +256,7 @@ MaybeError ValidateColorAttachmentDepthSlice(const TextureViewBase* attachment,
     if (attachment->GetDimension() == wgpu::TextureViewDimension::e3D) {
         const Extent3D& attachmentSize =
             attachment->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
-                attachment->GetBaseMipLevel());
+                attachment->GetBaseMipLevel(), attachment->GetAspects());
 
         DAWN_INVALID_IF(depthSlice >= attachmentSize.depthOrArrayLayers,
                         "The depth slice index (%u) of 3D %s used as attachment is >= the "
@@ -1051,7 +1045,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                     Ref<TextureViewBase> implicitMSAATargetRef;
                     DAWN_TRY_ASSIGN(implicitMSAATargetRef,
                                     device->CreateImplicitMSAARenderTextureViewFor(
-                                        resolveTarget->GetTexture(), implicitSampleCount));
+                                        resolveTarget, implicitSampleCount));
                     colorTarget = implicitMSAATargetRef.Get();
 
                     cmd->colorAttachments[index].view = std::move(implicitMSAATargetRef);
@@ -1312,6 +1306,7 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
 
         for (ColorAttachmentIndex index :
              IterateBitSet(cmd->attachmentState->GetColorAttachmentsMask())) {
+            TextureViewBase* attachment = cmd->colorAttachments[index].view.Get();
             TextureViewBase* resolveTarget = cmd->colorAttachments[index].resolveTarget.Get();
 
             if (resolveTarget != nullptr && (resolveTarget->GetBaseMipLevel() != 0 ||
@@ -1324,7 +1319,7 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                 descriptor.format = resolveTarget->GetFormat().format;
                 descriptor.size =
                     resolveTarget->GetTexture()->GetMipLevelSingleSubresourceVirtualSize(
-                        resolveTarget->GetBaseMipLevel());
+                        resolveTarget->GetBaseMipLevel(), attachment->GetAspects());
                 descriptor.dimension = wgpu::TextureDimension::e2D;
                 descriptor.mipLevelCount = 1;
 
@@ -1380,7 +1375,7 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                         dstImageCopyTexture.origin = {0, 0,
                                                       copyTarget.copyDst->GetBaseArrayLayer()};
 
-                        Extent3D extent3D = copyTarget.copySrc->GetTexture()->GetSize();
+                        Extent3D extent3D = copyTarget.copySrc->GetSingleSubresourceVirtualSize();
 
                         auto internalUsageScope = MakeInternalUsageScope();
                         this->APICopyTextureToTexture(&srcImageCopyTexture, &dstImageCopyTexture,
@@ -1498,6 +1493,7 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(ValidateLinearToDepthStencilCopyRestrictions(*destination));
                 DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *source));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->buffer, wgpu::BufferUsage::CopySrc),
                                  "validating source %s usage.", source->buffer);
@@ -1508,7 +1504,6 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
                                  "validating destination %s usage.", destination->texture);
                 DAWN_TRY(ValidateTextureSampleCountInBufferCopyCommands(destination->texture));
 
-                DAWN_TRY(ValidateLinearToDepthStencilCopyRestrictions(*destination));
                 // We validate texture copy range before validating linear texture data,
                 // because in the latter we divide copyExtent.width by blockWidth and
                 // copyExtent.height by blockHeight while the divisibility conditions are
@@ -1585,12 +1580,12 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
             if (GetDevice()->IsValidationEnabled()) {
+                DAWN_TRY(ValidateTextureDepthStencilToBufferCopyRestrictions(*source));
                 DAWN_TRY(ValidateImageCopyTexture(GetDevice(), *source, *copySize));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(source->texture, wgpu::TextureUsage::CopySrc,
                                                   mUsageValidationMode),
                                  "validating source %s usage.", source->texture);
                 DAWN_TRY(ValidateTextureSampleCountInBufferCopyCommands(source->texture));
-                DAWN_TRY(ValidateTextureDepthStencilToBufferCopyRestrictions(*source));
 
                 DAWN_TRY(ValidateImageCopyBuffer(GetDevice(), *destination));
                 DAWN_TRY_CONTEXT(ValidateCanUseAs(destination->buffer, wgpu::BufferUsage::CopyDst),
@@ -1685,6 +1680,10 @@ void CommandEncoder::APICopyTextureToTexture(const ImageCopyTexture* source,
                 DAWN_TRY(GetDevice()->ValidateObject(source->texture));
                 DAWN_TRY(GetDevice()->ValidateObject(destination->texture));
 
+                DAWN_INVALID_IF(source->texture->GetFormat().IsMultiPlanar() ||
+                                    destination->texture->GetFormat().IsMultiPlanar(),
+                                "Copying between a multiplanar texture and another texture is "
+                                "currently not allowed.");
                 DAWN_TRY_CONTEXT(ValidateImageCopyTexture(GetDevice(), *source, *copySize),
                                  "validating source %s.", source->texture);
                 DAWN_TRY_CONTEXT(ValidateImageCopyTexture(GetDevice(), *destination, *copySize),
