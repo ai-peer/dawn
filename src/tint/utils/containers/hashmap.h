@@ -15,6 +15,8 @@
 #ifndef SRC_TINT_UTILS_CONTAINERS_HASHMAP_H_
 #define SRC_TINT_UTILS_CONTAINERS_HASHMAP_H_
 
+// No-op change
+
 #include <functional>
 #include <optional>
 #include <utility>
