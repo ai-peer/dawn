@@ -16,6 +16,40 @@
       "message": "PTAL",
       "revId": "47798d781e663a78e335820282218fd629a057e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0dd5c0b_66143e82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T10:20:37Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "47798d781e663a78e335820282218fd629a057e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e232b4a4_eebed3fe",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T10:20:37Z",
+      "side": 1,
+      "message": "nit: here and in other places we could assume that the query set is not null if the index is not undefined, and extract the query set directly inside the if.",
+      "revId": "47798d781e663a78e335820282218fd629a057e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
