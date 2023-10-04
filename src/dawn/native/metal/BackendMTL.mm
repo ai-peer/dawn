@@ -246,10 +246,12 @@ class PhysicalDevice : public PhysicalDeviceBase {
         mAdapterType = wgpu::AdapterType::IntegratedGPU;
         const char* systemName = "iOS ";
 #elif DAWN_PLATFORM_IS(MACOS)
-        if ([*mDevice isLowPower]) {
-            mAdapterType = wgpu::AdapterType::IntegratedGPU;
+        if (@available(macOS 10.15, *)) {
+            mAdapterType = [*mDevice hasUnifiedMemory] ? wgpu::AdapterType::IntegratedGPU
+                                                       : wgpu::AdapterType::DiscreteGPU;
         } else {
-            mAdapterType = wgpu::AdapterType::DiscreteGPU;
+            mAdapterType = [*mDevice isLowPower] ? wgpu::AdapterType::IntegratedGPU
+                                                 : wgpu::AdapterType::DiscreteGPU;
         }
         const char* systemName = "macOS ";
 #else
