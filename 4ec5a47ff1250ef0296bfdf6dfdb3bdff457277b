@@ -1,0 +1,226 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b386ec02_56a53194",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "Thank you for the cleanup! It\u0027s much less changes than I feared.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "465ed64e_290108eb",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "A subresource is meant to be a single mip level, a single array layer and a single aspect, so we could assert this and keep the function as it was otherwise?",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cd4310e_d9168724",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "nit: this could be on the TextureView: GetSingleSubresourceVirtualSize so we don\u0027t need to pass the aspect and base mip level each time.",
+      "range": {
+        "startLine": 228,
+        "startChar": 34,
+        "endLine": 228,
+        "endChar": 73
+      },
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89be639f_eeece174",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "We could hardcode Aspect::Color here if we get rid of GetSize()",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2aef4b3d_74073ec0",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "This seems to come from another CL? Multiplanar textures don\u0027t support copy operations yet. Or we should validate all copies with multiplanar textures, not just the multi-aspect ones.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa33bfb2_0d7a8a09",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "We could hardcode Color if we get rid of GetSize().",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59e8ce28_5e93ad0b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "Why is this not in the switch? Because of a warning? We could do something like Aspect(Aspect::Depth | Aspect::Stencil) to trick the compiler I belive.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c1389912_fa20be8d",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "This returning the size of the full plane seems misleading as a texture view could have a baseMipLevel that\u0027s not 0 and then what is the size? The size of the full texture for that aspect or the size of the base mip level for that view?",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81abf395_3f0c79bd",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "nit: IntendedSize seems slightly weird but I\u0027m not sure what would be a better word. DescriptorSize? BasePlaneSize?",
+      "range": {
+        "startLine": 73,
+        "startChar": 20,
+        "endLine": 73,
+        "endChar": 35
+      },
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70cf6d54_b62c361b",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "u-nit: It seems that this should have an S, CoversFull...",
+      "range": {
+        "startLine": 102,
+        "startChar": 9,
+        "endLine": 102,
+        "endChar": 29
+      },
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "237193cb_4fcd41ee",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 767,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "We could split this assert into two asserts, one per plane.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13d630a2_9c6d5645",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 554,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T13:06:04Z",
+      "side": 1,
+      "message": "nit: We could assume swapchain textures are color textures.",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
