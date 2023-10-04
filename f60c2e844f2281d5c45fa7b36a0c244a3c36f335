@@ -33,6 +33,24 @@
       "message": "LGTM, could we have a test for some of this in DeviceLostTests.cpp? Could be a follow-up if this is urgent.",
       "revId": "f60c2e844f2281d5c45fa7b36a0c244a3c36f335",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7dc63db9_6725f305",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-10-04T18:32:37Z",
+      "side": 1,
+      "message": "Added the test - but only for the uncaptured callback since it\u0027s not easy to test the device lost callback after the device is lost already 😊\n\nAlso verified that the test fails before the fix.\n\nPTAL again - thanks!",
+      "parentUuid": "2ba9d57d_0be0850d",
+      "revId": "f60c2e844f2281d5c45fa7b36a0c244a3c36f335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
