@@ -58,9 +58,16 @@
     X(Maximum,   maxDynamicStorageBuffersPerPipelineLayout,         4,         4,          8) \
     X(Maximum,            maxSampledTexturesPerShaderStage,        16,        16,         16) \
     X(Maximum,                   maxSamplersPerShaderStage,        16,        16,         16) \
-    X(Maximum,             maxStorageBuffersPerShaderStage,         4,         8,          8) \
     X(Maximum,            maxStorageTexturesPerShaderStage,         4,         4,          8) \
     X(Maximum,             maxUniformBuffersPerShaderStage,        12,        12,         12)
+
+// Tiers for limits related to storage buffer bindings. Should probably be merged with
+// LIMITS_RESOURCE_BINDINGS.
+// TODO(crbug.com/dawn/685): Define these better. For now, use two tiers where one
+// offers slightly better than default limits.
+//
+#define LIMITS_STORAGE_BUFFER_BINDINGS(X)                                                           \
+    X(Maximum,             maxStorageBuffersPerShaderStage,         4,         8,          12)
 
 // TODO(crbug.com/dawn/685):
 // These limits aren't really tiered and could probably be grouped better.
@@ -100,6 +107,7 @@
     X(LIMITS_STORAGE_BUFFER_BINDING_SIZE) \
     X(LIMITS_MAX_BUFFER_SIZE)             \
     X(LIMITS_RESOURCE_BINDINGS)           \
+    X(LIMITS_STORAGE_BUFFER_BINDINGS)     \
     X(LIMITS_ATTACHMENTS)                 \
     X(LIMITS_OTHER)
 
@@ -109,6 +117,7 @@
     LIMITS_STORAGE_BUFFER_BINDING_SIZE(X) \
     LIMITS_MAX_BUFFER_SIZE(X)             \
     LIMITS_RESOURCE_BINDINGS(X)           \
+    LIMITS_STORAGE_BUFFER_BINDINGS(X)     \
     LIMITS_ATTACHMENTS(X)                 \
     LIMITS_OTHER(X)
 
