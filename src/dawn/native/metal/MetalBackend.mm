@@ -58,4 +58,37 @@ void WaitForCommandsToBeScheduled(WGPUDevice device) {
     ToBackend(backendDevice->GetQueue())->WaitForCommandsToBeScheduled();
 }
 
+void StartCapture(WGPUDevice device) {
+    Device* backendDevice = ToBackend(FromAPI(device));
+    (void)backendDevice;
+
+    if (@available(macOS 10.13, iOS 11.0, *)) {
+        // TODO: add newer Metal interface as well
+        MTLCaptureManager* captureManager = [MTLCaptureManager sharedCaptureManager];
+        if (captureManager.isCapturing) {
+            return;
+        }
+        if (@available(macOS 10.15, iOS 13.0, *)) {
+            MTLCaptureDescriptor* captureDescriptor = [[MTLCaptureDescriptor alloc] init];
+            captureDescriptor.captureObject = backendDevice->GetMTLDevice();
+
+            NSError* error;
+            if (![captureManager startCaptureWithDescriptor:captureDescriptor error:&error]) {
+                NSLog(@"Failed to start capture, error %@", error);
+            }
+        } else {
+            [captureManager startCaptureWithDevice:MTLCreateSystemDefaultDevice()];
+        }
+    }
+}
+
+void StopCapture() {
+    if (@available(macOS 10.13, iOS 11.0, *)) {
+        MTLCaptureManager* captureManager = [MTLCaptureManager sharedCaptureManager];
+        if (captureManager.isCapturing) {
+            [captureManager stopCapture];
+        }
+    }
+}
+
 }  // namespace dawn::native::metal

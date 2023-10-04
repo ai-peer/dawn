@@ -88,6 +88,9 @@ DAWN_NATIVE_EXPORT void IOSurfaceEndAccess(WGPUTexture texture,
 // scheduled could lead to races in who gets scheduled first and incorrect rendering.
 DAWN_NATIVE_EXPORT void WaitForCommandsToBeScheduled(WGPUDevice device);
 
+DAWN_NATIVE_EXPORT void StartCapture(WGPUDevice device);
+DAWN_NATIVE_EXPORT void StopCapture();
+
 }  // namespace dawn::native::metal
 
 #pragma clang diagnostic pop
