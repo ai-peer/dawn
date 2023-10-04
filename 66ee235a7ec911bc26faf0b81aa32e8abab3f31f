@@ -16,6 +16,23 @@
       "message": "See logs in https://fusion2.corp.google.com/invocations/6ffcfa7e-c8b0-4c50-923f-c92d9a76fa2d/targets/%2F%2Fgeo%2Fearth%2Fapp%2Fios:earth_app_build_test/log\n\n+cc dan - this should fix the roll into google3",
       "revId": "66ee235a7ec911bc26faf0b81aa32e8abab3f31f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a4255f2_ee004094",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-04T00:26:37Z",
+      "side": 1,
+      "message": "Thanks!\n\nI thought we had magic overloads for hashing `const char*` that did The Right Thing, but clearly I was mistaken.",
+      "revId": "66ee235a7ec911bc26faf0b81aa32e8abab3f31f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
