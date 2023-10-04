@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41353aa2_b612e5c9",
+        "filename": "src/tint/lang/spirv/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 169,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-04T18:16:37Z",
+      "side": 0,
+      "message": "Note: Extensions are emitted when we emit an instruction that needs them.",
+      "revId": "24a3fdd97e4443cbb1faa5f350fa46e6cf5f8f43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad2d9a5b_7dc6c25f",
+        "filename": "src/tint/lang/spirv/writer/type_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-04T18:16:37Z",
+      "side": 0,
+      "message": "Note: the bgra8unorm format is tested in `texture_builtin_test.cc` instead, since it never appears as a format by the time you get to the `printer`.",
+      "revId": "24a3fdd97e4443cbb1faa5f350fa46e6cf5f8f43",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
