@@ -246,7 +246,7 @@ MaybeError Texture::InitializeAsInternalTexture() {
     resourceDescriptor.Dimension = D3D12TextureDimension(GetDimension());
     resourceDescriptor.Alignment = 0;
 
-    const Extent3D& size = GetSize();
+    const Extent3D& size = GetIntendedSize();
     resourceDescriptor.Width = size.width;
     resourceDescriptor.Height = size.height;
     resourceDescriptor.DepthOrArraySize = size.depthOrArrayLayers;
@@ -830,7 +830,8 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
         for (Aspect aspect : IterateEnumMask(range.aspects)) {
             const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(aspect).block;
 
-            Extent3D largestMipSize = GetMipLevelSingleSubresourcePhysicalSize(range.baseMipLevel);
+            Extent3D largestMipSize =
+                GetMipLevelSingleSubresourcePhysicalSize(range.baseMipLevel, aspect);
 
             uint32_t bytesPerRow =
                 Align((largestMipSize.width / blockInfo.width) * blockInfo.byteSize,
@@ -847,7 +848,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
             for (uint32_t level = range.baseMipLevel; level < range.baseMipLevel + range.levelCount;
                  ++level) {
                 // compute d3d12 texture copy locations for texture and buffer
-                Extent3D copySize = GetMipLevelSingleSubresourcePhysicalSize(level);
+                Extent3D copySize = GetMipLevelSingleSubresourcePhysicalSize(level, aspect);
 
                 for (uint32_t layer = range.baseArrayLayer;
                      layer < range.baseArrayLayer + range.layerCount; ++layer) {
