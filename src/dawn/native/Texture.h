@@ -70,10 +70,12 @@ class TextureBase : public ApiObjectBase {
     wgpu::TextureDimension GetDimension() const;
     const Format& GetFormat() const;
     const FormatSet& GetViewFormats() const;
-    const Extent3D& GetSize() const;
-    uint32_t GetWidth() const;
-    uint32_t GetHeight() const;
-    uint32_t GetDepth() const;
+    const Extent3D& GetIntendedSize() const;
+    Extent3D GetSize(Aspect aspect) const;
+    Extent3D GetSize(wgpu::TextureAspect aspect) const;
+    uint32_t GetWidth(Aspect aspect) const;
+    uint32_t GetHeight(Aspect aspect) const;
+    uint32_t GetDepth(Aspect aspect) const;
     uint32_t GetArrayLayers() const;
     uint32_t GetNumMipLevels() const;
     SubresourceRange GetAllSubresources() const;
@@ -97,21 +99,22 @@ class TextureBase : public ApiObjectBase {
     bool IsMultisampledTexture() const;
 
     // Returns true if the size covers the whole subresource.
-    bool CoverFullSubresource(uint32_t mipLevel, const Extent3D& size) const;
+    bool CoverFullSubresource(uint32_t mipLevel, Aspect aspect, const Extent3D& size) const;
 
     // For a texture with non-block-compressed texture format, its physical size is always equal
     // to its virtual size. For a texture with block compressed texture format, the physical
     // size is the one with paddings if necessary, which is always a multiple of the block size
     // and used in texture copying. The virtual size is the one without paddings, which is not
     // required to be a multiple of the block size and used in texture sampling.
-    Extent3D GetMipLevelSingleSubresourcePhysicalSize(uint32_t level) const;
-    Extent3D GetMipLevelSingleSubresourceVirtualSize(uint32_t level) const;
+    Extent3D GetMipLevelSingleSubresourcePhysicalSize(uint32_t level, Aspect aspect) const;
+    Extent3D GetMipLevelSingleSubresourceVirtualSize(uint32_t level, Aspect aspect) const;
     Extent3D ClampToMipLevelVirtualSize(uint32_t level,
+                                        Aspect aspect,
                                         const Origin3D& origin,
                                         const Extent3D& extent) const;
     // For 2d-array textures, this keeps the array layers in contrast to
     // GetMipLevelSingleSubresourceVirtualSize.
-    Extent3D GetMipLevelSubresourceVirtualSize(uint32_t level) const;
+    Extent3D GetMipLevelSubresourceVirtualSize(uint32_t level, Aspect aspect) const;
 
     ResultOrError<Ref<TextureViewBase>> CreateView(
         const TextureViewDescriptor* descriptor = nullptr);
@@ -158,7 +161,7 @@ class TextureBase : public ApiObjectBase {
     wgpu::TextureDimension mDimension;
     const Format& mFormat;
     FormatSet mViewFormats;
-    Extent3D mSize;
+    Extent3D mIntendedSize;
     uint32_t mMipLevelCount;
     uint32_t mSampleCount;
     wgpu::TextureUsage mUsage = wgpu::TextureUsage::None;
@@ -186,6 +189,11 @@ class TextureViewBase : public ApiObjectBase {
 
     const TextureBase* GetTexture() const;
     TextureBase* GetTexture();
+
+    Extent3D GetSize() const;
+    uint32_t GetWidth() const;
+    uint32_t GetHeight() const;
+    uint32_t GetDepth() const;
 
     Aspect GetAspects() const;
     const Format& GetFormat() const;

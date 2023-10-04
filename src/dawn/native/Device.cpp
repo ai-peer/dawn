@@ -884,7 +884,7 @@ Ref<RenderPipelineBase> DeviceBase::AddOrGetCachedRenderPipeline(
 }
 
 ResultOrError<Ref<TextureViewBase>> DeviceBase::CreateImplicitMSAARenderTextureViewFor(
-    const TextureBase* singleSampledTexture,
+    const TextureViewBase* singleSampledTexture,
     uint32_t sampleCount) {
     DAWN_ASSERT(IsLockedByCurrentThreadIfNeeded());
 
