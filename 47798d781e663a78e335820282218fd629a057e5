@@ -50,6 +50,24 @@
       "message": "nit: here and in other places we could assume that the query set is not null if the index is not undefined, and extract the query set directly inside the if.",
       "revId": "47798d781e663a78e335820282218fd629a057e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36ff7ac_6d04eb61",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-04T11:58:57Z",
+      "side": 1,
+      "message": "I don\u0027t think. It is still possible that the index is not undefined (garbage) and query set null as we set timestampWrites.beginningOfPassWriteIndex only if descriptor.timestampWrites is not null.\nShall we update src/dawn/native/CommandEncoder.cpp and make sure default values are set when descriptor.timestampWrites is null then?",
+      "parentUuid": "e232b4a4_eebed3fe",
+      "revId": "47798d781e663a78e335820282218fd629a057e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
