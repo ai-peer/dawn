@@ -51,6 +51,24 @@
       "parentUuid": "b25dd96e_7eca7028",
       "revId": "dbdc6228de0c67ad622294b05478ec1b528f1d40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8191e20c_b36ded72",
+        "filename": "src/dawn/platform/DawnPlatform.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-04T21:32:32Z",
+      "side": 1,
+      "message": "fair point - maybe we shouldn\u0027t do it then.\nI don\u0027t love how these configs and stuff need coordination across Dawn/Chrome.\nI\u0027ll separately try and think if there\u0027s a way we can make that better.",
+      "parentUuid": "99b109c8_5ebf2512",
+      "revId": "dbdc6228de0c67ad622294b05478ec1b528f1d40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
