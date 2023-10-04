@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64c8c41c_9be77d3e",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-04T17:25:40Z",
+      "side": 1,
+      "message": "discussed on vc to leave TODO about this. Additionally though, I made only the last submitted serial atomic, and not the completed serial.\n\nOnly the pending one is actually needed by another thread. Keeping it more restricted is better so that TSAN will complain if we do something unsafe with the completed serial.",
+      "parentUuid": "2b806a99_fc474581",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "577d6b42_cd4d5987",
         "filename": "src/dawn/native/ExecutionQueue.cpp",
         "patchSetId": 7
