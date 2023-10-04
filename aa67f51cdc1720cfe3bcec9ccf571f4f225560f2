@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b806a99_fc474581",
+        "filename": "src/dawn/native/ExecutionQueue.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-04T03:50:04Z",
+      "side": 1,
+      "message": "I suppose I should do something about it though. two options I can think of:\n 1. just move the stuff around so I can safely mutex-protect all the mutating stuff on ExecutionQueue\n 2. leave ExecutionQueue as is, and have a separate atomic DeviceBase::mPendingCommandSerialForDeletion that we use for deletion. Kind of a duplication but makes it more clear that only that serial is thread-safe, and other bits of ExecutionQueueBase are not. it\u0027ll get updated next to IncrementLastSubmittedCommandSerial so it should be clear that there is a single writer to mPendingCommandSerialForDeletion assuming the global lock has been acquired in order to call IncrementLastSubmittedCommandSerial",
+      "parentUuid": "34e544b9_cfc734e9",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "577d6b42_cd4d5987",
         "filename": "src/dawn/native/ExecutionQueue.cpp",
         "patchSetId": 7
