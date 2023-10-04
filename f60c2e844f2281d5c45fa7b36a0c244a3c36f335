@@ -16,6 +16,23 @@
       "message": "PTAL",
       "revId": "f60c2e844f2281d5c45fa7b36a0c244a3c36f335",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ba9d57d_0be0850d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-04T10:32:56Z",
+      "side": 1,
+      "message": "LGTM, could we have a test for some of this in DeviceLostTests.cpp? Could be a follow-up if this is urgent.",
+      "revId": "f60c2e844f2281d5c45fa7b36a0c244a3c36f335",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
