@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9345d6c7_3265aad6",
+        "filename": "src/dawn/native/Commands.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-04T13:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11299737_c2504080",
+      "range": {
+        "startLine": 80,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 33
+      },
+      "revId": "47798d781e663a78e335820282218fd629a057e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e232b4a4_eebed3fe",
@@ -107,6 +131,24 @@
       "side": 1,
       "message": "[1]",
       "parentUuid": "c36ff7ac_6d04eb61",
+      "revId": "47798d781e663a78e335820282218fd629a057e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab08d927_3777eddc",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1173,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-04T13:09:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43e5fb6f_29211b53",
       "revId": "47798d781e663a78e335820282218fd629a057e5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
