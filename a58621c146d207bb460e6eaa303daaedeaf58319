@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e7550d1_1cccb4db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-04T21:12:11Z",
+      "side": 1,
+      "message": "PTAL again; inverted the Toggle and it needs re-review now",
+      "revId": "a58621c146d207bb460e6eaa303daaedeaf58319",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
