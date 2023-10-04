@@ -33,6 +33,24 @@
       "message": "I get that we don\u0027t want to do it now because it would change the default on android until the Chromium side lands.\n\nMaybe in a follow-up we can turn this into:\n\n```\n#if DAWN_PLATFORM_IS(ANDROID)\nreturn true;\n#else\nreturn true;\n#endif\n```\n\n?",
       "revId": "dbdc6228de0c67ad622294b05478ec1b528f1d40",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99b109c8_5ebf2512",
+        "filename": "src/dawn/platform/DawnPlatform.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-04T21:30:25Z",
+      "side": 1,
+      "message": "We could do, but that would mean duplicating the \"if Android\" logic in both Dawn and Chromium. The way I\u0027ve set it up for now decouples the Android default from the Chromium feature flag, since we\u0027re not going to be Finch trialling on Android at all.\n\nBut I\u0027m new to all of this so happy to change it if that\u0027s a weird way to do it!",
+      "parentUuid": "b25dd96e_7eca7028",
+      "revId": "dbdc6228de0c67ad622294b05478ec1b528f1d40",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
