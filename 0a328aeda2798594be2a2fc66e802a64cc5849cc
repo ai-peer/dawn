@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c4ad243_3fa14d41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-04T14:33:09Z",
+      "side": 1,
+      "message": "Yes, can look into this!",
+      "parentUuid": "6156f075_a460ba29",
+      "revId": "0a328aeda2798594be2a2fc66e802a64cc5849cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5928589c_24f46a10",
@@ -65,6 +83,30 @@
       "writtenOn": "2023-10-03T21:45:20Z",
       "side": 1,
       "message": "I think you need to add VK_FORMAT_G10X6_B10X6R10X6_2PLANE_420_UNORM_3PACK16 to this list in order to determine P010 feature support.\n\nOr check P010 feature support separately.",
+      "range": {
+        "startLine": 300,
+        "startChar": 8,
+        "endLine": 300,
+        "endChar": 42
+      },
+      "revId": "0a328aeda2798594be2a2fc66e802a64cc5849cc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9efe0eb8_adb026d5",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-04T14:33:09Z",
+      "side": 1,
+      "message": "Oops yes. Updated.",
+      "parentUuid": "5928589c_24f46a10",
       "range": {
         "startLine": 300,
         "startChar": 8,
