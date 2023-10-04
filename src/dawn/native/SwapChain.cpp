@@ -200,8 +200,8 @@ ResultOrError<Ref<TextureBase>> SwapChainBase::GetCurrentTexture() {
     DAWN_ASSERT(mCurrentTexture->GetFormat().format == mFormat);
     DAWN_ASSERT(IsSubset(mUsage, mCurrentTexture->GetUsage()));
     DAWN_ASSERT(mCurrentTexture->GetDimension() == wgpu::TextureDimension::e2D);
-    DAWN_ASSERT(mCurrentTexture->GetWidth() == mWidth);
-    DAWN_ASSERT(mCurrentTexture->GetHeight() == mHeight);
+    DAWN_ASSERT(mCurrentTexture->GetBaseSize().width == mWidth);
+    DAWN_ASSERT(mCurrentTexture->GetBaseSize().height == mHeight);
     DAWN_ASSERT(mCurrentTexture->GetNumMipLevels() == 1);
     DAWN_ASSERT(mCurrentTexture->GetArrayLayers() == 1);
 
