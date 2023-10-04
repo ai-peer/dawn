@@ -1223,29 +1223,34 @@ uint32_t Builder::GenerateConstructorExpression(const ast::Variable* var,
     return 0;
 }
 
-bool Builder::IsConstructorConst(const ast::Expression* expr) {
-    bool is_const = true;
-    ast::TraverseExpressions(expr, [&](const ast::Expression* e) {
-        if (e->Is<ast::LiteralExpression>()) {
-            return ast::TraverseAction::Descend;
-        }
-        if (auto* ce = e->As<ast::CallExpression>()) {
-            auto* sem = builder_.Sem().Get(ce);
-            if (sem->Is<sem::Materialize>()) {
-                // Materialize can only occur on compile time expressions, so this sub-tree must be
-                // constant.
-                return ast::TraverseAction::Skip;
-            }
-            auto* call = sem->As<sem::Call>();
-            if (call->Target()->Is<sem::ValueConstructor>()) {
+bool Builder::IsConstructorConst(const ast::CallExpression* expr) {
+    for (auto* arg : expr->args) {
+        bool is_const = true;
+        ast::TraverseExpressions(arg, [&](const ast::Expression* e) {
+            if (e->Is<ast::LiteralExpression>()) {
                 return ast::TraverseAction::Descend;
             }
-        }
+            if (auto* ce = e->As<ast::CallExpression>()) {
+                auto* sem = builder_.Sem().Get(ce);
+                if (sem->Is<sem::Materialize>()) {
+                    // Materialize can only occur on compile time expressions, so this sub-tree must
+                    // be constant.
+                    return ast::TraverseAction::Skip;
+                }
+                auto* call = sem->As<sem::Call>();
+                if (call->Target()->Is<sem::ValueConstructor>()) {
+                    return ast::TraverseAction::Descend;
+                }
+            }
 
-        is_const = false;
-        return ast::TraverseAction::Stop;
-    });
-    return is_const;
+            is_const = false;
+            return ast::TraverseAction::Stop;
+        });
+        if (!is_const) {
+            return false;
+        }
+    }
+    return true;
 }
 
 uint32_t Builder::GenerateValueConstructorOrConversion(const sem::Call* call,
