@@ -33,6 +33,29 @@
       "message": "Turns out owner is needed. Add enga@.",
       "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5447342_0e31967e",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 299,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T23:16:55Z",
+      "side": 1,
+      "message": "```suggestion\n// In this format float is represented as\n```",
+      "range": {
+        "startLine": 299,
+        "startChar": 27,
+        "endLine": 299,
+        "endChar": 36
+      },
+      "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
