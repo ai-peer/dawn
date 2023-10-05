@@ -31,13 +31,40 @@ import argparse
 import tarfile
 import datetime
 import os
+import subprocess
 import sys
+import tempfile
+
+script_root = os.path.dirname(os.path.abspath(sys.argv[0]))
+dawn_root = os.path.abspath(os.path.join(script_root, "../.."))
+bucket = 'dawn-webgpu-cts-cache'
+
+
+def cts_hash():
+    deps_path = os.path.join(script_root, '../../third_party/webgpu-cts')
+    hash = subprocess.check_output(['git', 'rev-parse', 'HEAD'], cwd=deps_path)
+    return hash.decode('UTF-8').strip('\n')
+
+
+def download_from_bucket(name, dst):
+    subprocess.check_output(
+        ['gsutil.py', 'cp', 'gs://{}/{}'.format(bucket, name), dst],
+        cwd=script_root)
 
 
 def gen_cache(out_dir):
-    script_directory = os.path.dirname(os.path.abspath(sys.argv[0]))
-    tar = tarfile.open(os.path.join(script_directory, '../cache.tar.gz'))
+    # Obtain the current hash of the CTS repo
+    hash = cts_hash()
+
+    # Download the cache.tar.gz compressed data from the GCP bucket
+    tmpDir = tempfile.TemporaryDirectory()
+    cacheTarPath = os.path.join(tmpDir.name, 'cache.tar.gz')
+    download_from_bucket(hash + "/data", cacheTarPath)
+
+    # Extract the cache.tar.gz into out_dir
+    tar = tarfile.open(cacheTarPath)
     tar.extractall(out_dir)
+
     # Update timestamps
     now = datetime.datetime.now().timestamp()
     for name in tar.getnames():
