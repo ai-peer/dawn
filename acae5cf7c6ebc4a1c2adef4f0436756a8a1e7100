@@ -69,6 +69,24 @@
       "parentUuid": "73975bb9_6779a230",
       "revId": "acae5cf7c6ebc4a1c2adef4f0436756a8a1e7100",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b827367e_c6718fb7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T16:25:58Z",
+      "side": 1,
+      "message": "all passed except windows msvc which seems to have failed to download depot_tools. assuming it\u0027s fine because the other tests passed.",
+      "parentUuid": "028a648e_2c9ab77b",
+      "revId": "acae5cf7c6ebc4a1c2adef4f0436756a8a1e7100",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
