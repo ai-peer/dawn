@@ -16,6 +16,24 @@
       "message": "Is this revert still needed?",
       "revId": "91565022484e1a56c95f9ade59ba0b48d7b7aff7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c19199a4_fa36a879",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-05T20:58:57Z",
+      "side": 1,
+      "message": "No. I don\u0027t believe we should be reverting these changes in the Dawn repo.",
+      "parentUuid": "1f8b388b_1a449209",
+      "revId": "91565022484e1a56c95f9ade59ba0b48d7b7aff7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
