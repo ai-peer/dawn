@@ -26,25 +26,34 @@ import (
 	"path/filepath"
 	"runtime"
 	"sort"
+	"strings"
 	"sync"
 
+	"cloud.google.com/go/storage"
+	"dawn.googlesource.com/dawn/tools/src/git"
 	"dawn.googlesource.com/dawn/tools/src/glob"
 )
 
-// Cache is the result of BuildCache()
-type Cache struct {
-	// The list of files
-	FileList []string
-	// The .tar.gz content
-	TarGz []byte
-}
+const gcpBucket = "dawn-cts-cache"
 
-// BuildCache builds the CTS case cache
-func BuildCache(ctx context.Context, ctsDir, nodePath string) (*Cache, error) {
+// BuildCache builds the CTS case cache and uploads it to gcpBucket.
+// Returns the cache file list
+func BuildCache(ctx context.Context, ctsDir, nodePath string) (string, error) {
+	ctsHash, err := gitHashOf(ctsDir)
+	if err != nil {
+		return "", fmt.Errorf("failed to get CTS hash: %w", err)
+	}
+
+	client, err := storage.NewClient(ctx)
+	if err != nil {
+		return "", fmt.Errorf("failed to create google cloud storage client: %w", err)
+	}
+	bucket := client.Bucket(gcpBucket)
+
 	// Create a temporary directory for cache files
 	cacheDir, err := os.MkdirTemp("", "dawn-cts-cache")
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	defer os.RemoveAll(cacheDir)
 
@@ -86,23 +95,22 @@ func BuildCache(ctx context.Context, ctsDir, nodePath string) (*Cache, error) {
 	}()
 
 	for err := range errs {
-		return nil, err
+		return "", err
 	}
 
 	files, err := glob.Glob(filepath.Join(cacheDir, "**.json"))
 	if err != nil {
-		return nil, fmt.Errorf("failed to glob cached files: %w", err)
+		return "", fmt.Errorf("failed to glob cached files: %w", err)
 	}
 
 	// Absolute path -> relative path
 	for i, absPath := range files {
 		relPath, err := filepath.Rel(cacheDir, absPath)
 		if err != nil {
-			return nil, fmt.Errorf("failed to get relative path for '%v': %w", absPath, err)
+			return "", fmt.Errorf("failed to get relative path for '%v': %w", absPath, err)
 		}
 		files[i] = relPath
 	}
-
 	sort.Strings(files)
 
 	tarBuffer := &bytes.Buffer{}
@@ -113,49 +121,88 @@ func BuildCache(ctx context.Context, ctsDir, nodePath string) (*Cache, error) {
 
 		fi, err := os.Stat(absPath)
 		if err != nil {
-			return nil, fmt.Errorf("failed to stat '%v': %w", relPath, err)
+			return "", fmt.Errorf("failed to stat '%v': %w", relPath, err)
 		}
 
 		header, err := tar.FileInfoHeader(fi, relPath)
 		if err != nil {
-			return nil, fmt.Errorf("failed to create tar file info header for '%v': %w", relPath, err)
+			return "", fmt.Errorf("failed to create tar file info header for '%v': %w", relPath, err)
 		}
 
 		header.Name = relPath // Use the relative path
 
 		if err := t.WriteHeader(header); err != nil {
-			return nil, fmt.Errorf("failed to write tar header for '%v': %w", relPath, err)
+			return "", fmt.Errorf("failed to write tar header for '%v': %w", relPath, err)
 		}
 
 		file, err := os.Open(absPath)
 		if err != nil {
-			return nil, fmt.Errorf("failed to open  '%v': %w", file, err)
+			return "", fmt.Errorf("failed to open  '%v': %w", file, err)
 		}
 		defer file.Close()
 
 		if _, err := io.Copy(t, file); err != nil {
-			return nil, fmt.Errorf("failed to write '%v' to tar: %w", file, err)
+			return "", fmt.Errorf("failed to write '%v' to tar: %w", file, err)
 		}
 
 		if err := t.Flush(); err != nil {
-			return nil, fmt.Errorf("failed to flush tar for '%v': %w", relPath, err)
+			return "", fmt.Errorf("failed to flush tar for '%v': %w", relPath, err)
 		}
 	}
 
 	if err := t.Close(); err != nil {
-		return nil, fmt.Errorf("failed to close the tar: %w", err)
+		return "", fmt.Errorf("failed to close the tar: %w", err)
 	}
 
 	compressed := &bytes.Buffer{}
 	gz, err := gzip.NewWriterLevel(compressed, gzip.BestCompression)
 	if err != nil {
-		return nil, fmt.Errorf("failed to create a gzip writer: %w", err)
+		return "", fmt.Errorf("failed to create a gzip writer: %w", err)
 	}
 	if _, err := gz.Write(tarBuffer.Bytes()); err != nil {
-		return nil, fmt.Errorf("failed to write to gzip writer: %w", err)
+		return "", fmt.Errorf("failed to write to gzip writer: %w", err)
 	}
 	if err := gz.Close(); err != nil {
-		return nil, fmt.Errorf("failed to close the gzip writer: %w", err)
+		return "", fmt.Errorf("failed to close the gzip writer: %w", err)
 	}
-	return &Cache{files, compressed.Bytes()}, nil
+
+	// Write the case list
+	list := bucket.Object(ctsHash + "/list")
+	listWriter := list.NewWriter(ctx)
+
+	fileList := strings.Join(files, "\n") + "\n"
+	if _, err := listWriter.Write([]byte(fileList)); err != nil {
+		return "", fmt.Errorf("failed to write to the bucket object: %w", err)
+	}
+	if err := listWriter.Close(); err != nil {
+		return "", fmt.Errorf("failed to close the bucket object: %w", err)
+	}
+
+	// Write the data
+	data := bucket.Object(ctsHash + "/data")
+	dataWriter := data.NewWriter(ctx)
+	if _, err := dataWriter.Write(compressed.Bytes()); err != nil {
+		return "", fmt.Errorf("failed to write to the bucket object: %w", err)
+	}
+	if err := dataWriter.Close(); err != nil {
+		return "", fmt.Errorf("failed to close the bucket object: %w", err)
+	}
+
+	return fileList, nil
+}
+
+func gitHashOf(dir string) (string, error) {
+	g, err := git.New("")
+	if err != nil {
+		return "", fmt.Errorf("failed to create a git api: %w", err)
+	}
+	r, err := g.Open(dir)
+	if err != nil {
+		return "", fmt.Errorf("failed to open git repo: %w", err)
+	}
+	log, err := r.Log(&git.LogOptions{From: "HEAD", To: "HEAD"})
+	if err != nil {
+		return "", fmt.Errorf("failed to obtain git log: %w", err)
+	}
+	return log[0].Hash.String(), nil
 }
