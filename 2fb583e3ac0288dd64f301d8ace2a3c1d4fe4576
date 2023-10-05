@@ -16,6 +16,23 @@
       "message": "This change passes cts webgpu:api,operation,command_buffer,image_copy:rowsPerImage_and_bytesPerRow:initMethod\u003d%22WriteTexture%22;checkMethod\u003d%22FullCopyT2B%22;format\u003d%22rgb9e5ufloat%22;*\n\nThere are other copy zero init tests failing, but they should be related to BlitTextureToBuffer general issue.",
       "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fba7d432_1da600ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-05T22:23:44Z",
+      "side": 1,
+      "message": "Turns out owner is needed. Add enga@.",
+      "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
