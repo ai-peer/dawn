@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "978158c9_f58af155",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T11:51:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b548207d_85ef3d1a",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T11:51:47Z",
+      "side": 1,
+      "message": "nit: Maybe ASSERT(mEventState \u003d\u003d EventState::Pending)",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31bc25c9_cd7117a0",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T11:51:47Z",
+      "side": 1,
+      "message": "u-nit: Maybe we can have a comment showing that we need to have both ReadyHook and CompleteImpl for child classes.",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c895be93_3e19e737",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T11:51:47Z",
+      "side": 1,
+      "message": "nit: Maybe this should return a FatalError as well.",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a1ee28c_4b7b3fbc",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T11:51:47Z",
+      "side": 1,
+      "message": "I wonder if it might be worth having FatalError created by a method so we can assert in it automatically. We could just file an issue for that and do it whenever.",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
