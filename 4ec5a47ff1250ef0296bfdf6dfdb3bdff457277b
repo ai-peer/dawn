@@ -135,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d96f2f52_1ab8195f",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T07:24:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a11a46eb_b8f70d7e",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2aef4b3d_74073ec0",
@@ -166,6 +184,24 @@
       "side": 1,
       "message": "There are some existing negative tests that try to do the copy with wgpu::TextureAspect::All. The tests expect an error.\n\nIIUC, the negative tests weren\u0027t 100% accurate at catching the \"copying multiplanar textures is not allowed\" error. The tests just passed because we caught different and unrelated errors. For example:\n- [1] passes because the dst texture doesn\u0027t have CopyDst usage, not because the validation didn\u0027t allow the multiple aspects T2T copy. Actually the current code doesn\u0027t seem to have any validation that prevents this scenario yet. I have added new validation to T2T encoding code.\n\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/VideoViewsTests.cpp;drc\u003d3d8b48e023f44645d8463868be8ba0ff539ebe81;l\u003d697",
       "parentUuid": "2aef4b3d_74073ec0",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b872c9e_1bfc7be2",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T07:24:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f0040d17_1c055f51",
       "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +272,24 @@
       "side": 1,
       "message": "I tried but compiler kept throwing this error:\n```\nerror: case value not in enumerated type \u0027Aspect\u0027 [-Werror,-Wswitch]\n```",
       "parentUuid": "59e8ce28_5e93ad0b",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79793136_d6ab0bd7",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 778,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T07:24:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1e4491b3_114a6e47",
       "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

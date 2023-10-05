@@ -16,6 +16,23 @@
       "message": "How to read the kokoro\u0027s log? I am not sure what\u0027s the failure reason.",
       "revId": "acae5cf7c6ebc4a1c2adef4f0436756a8a1e7100",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da032475_b7f4a856",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-05T07:24:22Z",
+      "side": 1,
+      "message": "LGTM thank you for the update!",
+      "revId": "acae5cf7c6ebc4a1c2adef4f0436756a8a1e7100",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
