@@ -1,0 +1,251 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a78af6f3_c7e7d24d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "overall LGTM",
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0dc10dc7_9ced376c",
+        "filename": "src/dawn/common/IOSurfaceUtils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "optional not used?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 19
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56761691_7e4e3e2a",
+        "filename": "src/dawn/common/IOSurfaceUtils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "nit:\n```suggestion\n#endif  // SRC_DAWN_COMMON_IOSURFACEUTILS_H_\n```",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 6
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93b8ef8a_527553c3",
+        "filename": "src/dawn/native/Subresource.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "why not return Aspect::Plane0/1 directly instead of converting?",
+      "range": {
+        "startLine": 53,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 18
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5b048a4_8da2da7c",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "this could use `kMaxPlanesPerFormat` - though slightly larger than what we need right now\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Subresource.h;l\u003d99;bpv\u003d1;bpt\u003d1?q\u003df:dawn%20kMaxPLane\u0026ss\u003dchromium%2Fchromium%2Fsrc",
+      "range": {
+        "startLine": 93,
+        "startChar": 40,
+        "endLine": 93,
+        "endChar": 41
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8117f67c_369b44e3",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "nit: factor this out with the one in InitializeAsInternalTexture?",
+      "range": {
+        "startLine": 753,
+        "startChar": 8,
+        "endLine": 761,
+        "endChar": 9
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "babb2f7f_4e41a178",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "nit: include the plane index in the name",
+      "range": {
+        "startLine": 956,
+        "startChar": 53,
+        "endLine": 956,
+        "endChar": 71
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d57fea07_1f0fa965",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "isn\u0027t this what is already returned at [1] ?",
+      "range": {
+        "startLine": 1227,
+        "startChar": 0,
+        "endLine": 1229,
+        "endChar": 5
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "240d19cc_6939da54",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 1245,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 1245,
+        "startChar": 0,
+        "endLine": 1245,
+        "endChar": 29
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01b0624b_8403016d",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 1295,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "that means it should be UNREACHABLE then - since validation of the aspect occurs before Initialize is called",
+      "range": {
+        "startLine": 1295,
+        "startChar": 15,
+        "endLine": 1295,
+        "endChar": 57
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bd67129_8e2d1f62",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_mac.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T15:39:38Z",
+      "side": 1,
+      "message": "existing nit: camelCase so `numPlanes`",
+      "range": {
+        "startLine": 58,
+        "startChar": 25,
+        "endLine": 58,
+        "endChar": 35
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
