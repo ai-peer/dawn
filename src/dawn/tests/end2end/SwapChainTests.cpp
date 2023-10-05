@@ -218,7 +218,8 @@ TEST_P(SwapChainTests, ResizingWindowAndSwapChain) {
 }
 
 // Test switching devices on the same adapter.
-TEST_P(SwapChainTests, SwitchingDevice) {
+// TODO(https://crbug.com/dawn/2116): Disabled due to new Validation Layer failures.
+TEST_P(SwapChainTests, DISABLED_SwitchingDevice) {
     wgpu::Device device2 = CreateDevice();
 
     for (int i = 0; i < 3; i++) {
