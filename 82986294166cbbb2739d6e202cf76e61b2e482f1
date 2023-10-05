@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "82986294166cbbb2739d6e202cf76e61b2e482f1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4663031f_2ae8915c",
+        "filename": "src/dawn/tests/end2end/SwapChainTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T17:40:23Z",
+      "side": 1,
+      "message": "prefer DAWN_SUPPRESS_TEST_IF(IsVulkan());",
+      "revId": "82986294166cbbb2739d6e202cf76e61b2e482f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
