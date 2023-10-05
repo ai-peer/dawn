@@ -33,6 +33,24 @@
       "message": "LGTM thank you for the update!",
       "revId": "acae5cf7c6ebc4a1c2adef4f0436756a8a1e7100",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73975bb9_6779a230",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T14:58:50Z",
+      "side": 1,
+      "message": "it takes a few clicks to get to the logs, like \nhttps://source.cloud.google.com/results/invocations/d185b1ef-7fc3-46f5-8374-0167ea94aa9d/targets/dawn%2Flinux%2Fcmake-clang-release%2Fpresubmit/log\n\nit doesn\u0027t look like it is your fault. It will probably work if you rebase this CL on HEAD.\n\nKokoro runs based on the actual commit revision, whereas CQ will always rebase before running tests",
+      "parentUuid": "665d9733_188d3971",
+      "revId": "acae5cf7c6ebc4a1c2adef4f0436756a8a1e7100",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

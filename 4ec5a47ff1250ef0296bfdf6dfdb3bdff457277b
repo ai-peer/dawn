@@ -241,6 +241,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "567b1012_b1a9867b",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T14:58:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b62b5c3_1075806e",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59e8ce28_5e93ad0b",
@@ -325,6 +343,24 @@
       "side": 1,
       "message": "Removed view\u0027s GetSize(), GetWidth(), GetHeight(). Thanks for catching this.\nI will only keep GetSingleSubresourceVirtualSize() for now which will take into account the view\u0027s base mip level and aspect.",
       "parentUuid": "c1389912_fa20be8d",
+      "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9378e1_b1da0c82",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-05T14:58:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d8514626_50f46361",
       "revId": "4ec5a47ff1250ef0296bfdf6dfdb3bdff457277b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
