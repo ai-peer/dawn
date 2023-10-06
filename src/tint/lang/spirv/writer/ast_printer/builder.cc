@@ -1223,7 +1223,7 @@ uint32_t Builder::GenerateConstructorExpression(const ast::Variable* var,
     return 0;
 }
 
-bool Builder::IsConstructorConst(const ast::Expression* expr) {
+bool Builder::IsConstructorConst(const ast::CallExpression* expr) {
     bool is_const = true;
     ast::TraverseExpressions(expr, [&](const ast::Expression* e) {
         if (e->Is<ast::LiteralExpression>()) {
