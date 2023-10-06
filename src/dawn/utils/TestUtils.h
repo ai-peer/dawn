@@ -53,24 +53,12 @@ struct TextureDataCopyLayout {
     wgpu::Extent3D mipSize;
 };
 
-uint32_t GetMinimumBytesPerRow(wgpu::TextureFormat format, uint32_t width);
 TextureDataCopyLayout GetTextureDataCopyLayoutForTextureAtLevel(
     wgpu::TextureFormat format,
     wgpu::Extent3D textureSizeAtLevel0,
     uint32_t mipmapLevel,
     wgpu::TextureDimension dimension = wgpu::TextureDimension::e2D,
     uint32_t rowsPerImage = wgpu::kCopyStrideUndefined);
-
-uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
-                             uint64_t rowsPerImage,
-                             wgpu::Extent3D copyExtent,
-                             wgpu::TextureFormat textureFormat);
-uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
-                             uint64_t rowsPerImage,
-                             uint64_t widthInBlocks,
-                             uint64_t heightInBlocks,
-                             uint64_t depth,
-                             uint64_t bytesPerBlock);
 
 uint64_t GetTexelCountInCopyRegion(uint64_t bytesPerRow,
                                    uint64_t rowsPerImage,

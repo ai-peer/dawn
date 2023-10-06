@@ -281,6 +281,19 @@ const char* GetWGSLImageFormatQualifier(wgpu::TextureFormat textureFormat);
 uint32_t GetWGSLRenderableColorTextureComponentCount(wgpu::TextureFormat textureFormat);
 
 wgpu::TextureDimension ViewDimensionToTextureDimension(const wgpu::TextureViewDimension dimension);
+
+uint32_t GetMinimumBytesPerRow(wgpu::TextureFormat format, uint32_t width);
+
+uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
+                             uint64_t rowsPerImage,
+                             wgpu::Extent3D copyExtent,
+                             wgpu::TextureFormat textureFormat);
+uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
+                             uint64_t rowsPerImage,
+                             uint64_t widthInBlocks,
+                             uint64_t heightInBlocks,
+                             uint64_t depth,
+                             uint64_t bytesPerBlock);
 }  // namespace dawn::utils
 
 #endif  // SRC_DAWN_UTILS_TEXTUREUTILS_H_
