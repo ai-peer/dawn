@@ -2013,7 +2013,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
     // * A builtin call.
     // * A value constructor.
     // * A value conversion.
-    auto* target = Expression(expr->target);
+    auto* target = sem_.Get(expr->target);
     if (TINT_UNLIKELY(!target)) {
         return nullptr;
     }
@@ -2684,7 +2684,7 @@ core::type::Type* Resolver::VecT(const ast::Identifier* ident,
         return nullptr;
     }
 
-    auto* ty = Type(tmpl_ident->arguments[0]);
+    auto* ty = sem_.GetType(tmpl_ident->arguments[0]);
     if (TINT_UNLIKELY(!ty)) {
         return nullptr;
     }
@@ -2732,9 +2732,6 @@ core::type::Type* Resolver::MatT(const ast::Identifier* ident,
 }
 
 core::type::Type* Resolver::Array(const ast::Identifier* ident) {
-    UniqueVector<const sem::GlobalVariable*, 4> transitively_referenced_overrides;
-    TINT_SCOPED_ASSIGNMENT(resolved_overrides_, &transitively_referenced_overrides);
-
     auto* tmpl_ident = ident->As<ast::TemplatedIdentifier>();
     if (!tmpl_ident) {
         // 'array' has no template arguments, so return an incomplete type.
@@ -2747,7 +2744,7 @@ core::type::Type* Resolver::Array(const ast::Identifier* ident) {
     auto* ast_el_ty = tmpl_ident->arguments[0];
     auto* ast_count = (tmpl_ident->arguments.Length() > 1) ? tmpl_ident->arguments[1] : nullptr;
 
-    auto* el_ty = Type(ast_el_ty);
+    auto* el_ty = sem_.GetType(ast_el_ty);
     if (!el_ty) {
         return nullptr;
     }
@@ -2780,11 +2777,6 @@ core::type::Type* Resolver::Array(const ast::Identifier* ident) {
         }
     }
 
-    // Track the pipeline-overridable constants that are transitively referenced by this
-    // array type.
-    for (auto* var : transitively_referenced_overrides) {
-        b.Sem().AddTransitivelyReferencedOverride(out, var);
-    }
     return out;
 }
 
@@ -2794,14 +2786,13 @@ core::type::Atomic* Resolver::Atomic(const ast::Identifier* ident) {
         return nullptr;
     }
 
-    auto* ty_expr = TypeExpression(tmpl_ident->arguments[0]);
-    if (TINT_UNLIKELY(!ty_expr)) {
+    auto* el_ty = sem_.GetType(tmpl_ident->arguments[0]);
+    if (TINT_UNLIKELY(!el_ty)) {
         return nullptr;
     }
-    auto* ty = ty_expr->Type();
 
-    auto* out = b.create<core::type::Atomic>(ty);
-    if (!validator_.Atomic(tmpl_ident, out)) {
+    auto* out = b.create<core::type::Atomic>(el_ty);
+    if (TINT_UNLIKELY(!validator_.Atomic(tmpl_ident, out))) {
         return nullptr;
     }
     return out;
@@ -2813,34 +2804,32 @@ core::type::Pointer* Resolver::Ptr(const ast::Identifier* ident) {
         return nullptr;
     }
 
-    auto* address_space_expr = AddressSpaceExpression(tmpl_ident->arguments[0]);
-    if (TINT_UNLIKELY(!address_space_expr)) {
+    auto address_space = sem_.GetAddressSpace(tmpl_ident->arguments[0]);
+    if (TINT_UNLIKELY(address_space == core::AddressSpace::kUndefined)) {
         return nullptr;
     }
-    auto address_space = address_space_expr->Value();
 
-    auto* store_ty_expr = TypeExpression(tmpl_ident->arguments[1]);
-    if (TINT_UNLIKELY(!store_ty_expr)) {
+    auto* store_ty = const_cast<core::type::Type*>(sem_.GetType(tmpl_ident->arguments[1]));
+    if (TINT_UNLIKELY(!store_ty)) {
         return nullptr;
     }
-    auto* store_ty = const_cast<core::type::Type*>(store_ty_expr->Type());
 
-    auto access = DefaultAccessForAddressSpace(address_space);
+    core::Access access = core::Access::kUndefined;
     if (tmpl_ident->arguments.Length() > 2) {
-        auto* access_expr = AccessExpression(tmpl_ident->arguments[2]);
-        if (TINT_UNLIKELY(!access_expr)) {
+        access = sem_.GetAccess(tmpl_ident->arguments[2]);
+        if (TINT_UNLIKELY(access == core::Access::kUndefined)) {
             return nullptr;
         }
-        access = access_expr->Value();
+    } else {
+        access = DefaultAccessForAddressSpace(address_space);
     }
 
     auto* out = b.create<core::type::Pointer>(address_space, store_ty, access);
-    if (!validator_.Pointer(tmpl_ident, out)) {
+    if (TINT_UNLIKELY(!validator_.Pointer(tmpl_ident, out))) {
         return nullptr;
     }
 
-    if (!ApplyAddressSpaceUsageToType(address_space, store_ty,
-                                      store_ty_expr->Declaration()->source)) {
+    if (!ApplyAddressSpaceUsageToType(address_space, store_ty, tmpl_ident->arguments[1]->source)) {
         AddNote("while instantiating " + out->FriendlyName(), ident->source);
         return nullptr;
     }
@@ -2854,12 +2843,12 @@ core::type::SampledTexture* Resolver::SampledTexture(const ast::Identifier* iden
         return nullptr;
     }
 
-    auto* ty_expr = TypeExpression(tmpl_ident->arguments[0]);
+    auto* ty_expr = sem_.GetType(tmpl_ident->arguments[0]);
     if (TINT_UNLIKELY(!ty_expr)) {
         return nullptr;
     }
 
-    auto* out = b.create<core::type::SampledTexture>(dim, ty_expr->Type());
+    auto* out = b.create<core::type::SampledTexture>(dim, ty_expr);
     return validator_.SampledTexture(out, ident->source) ? out : nullptr;
 }
 
@@ -2870,12 +2859,12 @@ core::type::MultisampledTexture* Resolver::MultisampledTexture(const ast::Identi
         return nullptr;
     }
 
-    auto* ty_expr = TypeExpression(tmpl_ident->arguments[0]);
+    auto* ty_expr = sem_.GetType(tmpl_ident->arguments[0]);
     if (TINT_UNLIKELY(!ty_expr)) {
         return nullptr;
     }
 
-    auto* out = b.create<core::type::MultisampledTexture>(dim, ty_expr->Type());
+    auto* out = b.create<core::type::MultisampledTexture>(dim, ty_expr);
     return validator_.MultisampledTexture(out, ident->source) ? out : nullptr;
 }
 
@@ -2886,19 +2875,18 @@ core::type::StorageTexture* Resolver::StorageTexture(const ast::Identifier* iden
         return nullptr;
     }
 
-    auto* format = TexelFormatExpression(tmpl_ident->arguments[0]);
-    if (TINT_UNLIKELY(!format)) {
+    auto format = sem_.GetTexelFormat(tmpl_ident->arguments[0]);
+    if (TINT_UNLIKELY(format == core::TexelFormat::kUndefined)) {
         return nullptr;
     }
 
-    auto* access = AccessExpression(tmpl_ident->arguments[1]);
-    if (TINT_UNLIKELY(!access)) {
+    auto access = sem_.GetAccess(tmpl_ident->arguments[1]);
+    if (TINT_UNLIKELY(access == core::Access::kUndefined)) {
         return nullptr;
     }
 
-    auto* subtype = core::type::StorageTexture::SubtypeFor(format->Value(), b.Types());
-    auto* tex =
-        b.create<core::type::StorageTexture>(dim, format->Value(), access->Value(), subtype);
+    auto* subtype = core::type::StorageTexture::SubtypeFor(format, b.Types());
+    auto* tex = b.create<core::type::StorageTexture>(dim, format, access, subtype);
     if (!validator_.StorageTexture(tex, ident->source)) {
         return nullptr;
     }
@@ -2912,7 +2900,7 @@ core::type::Vector* Resolver::PackedVec3T(const ast::Identifier* ident) {
         return nullptr;
     }
 
-    auto* el_ty = Type(tmpl_ident->arguments[0]);
+    auto* el_ty = sem_.GetType(tmpl_ident->arguments[0]);
     if (TINT_UNLIKELY(!el_ty)) {
         return nullptr;
     }
@@ -3215,30 +3203,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                     }
                 }
 
-                auto* global = variable->As<sem::GlobalVariable>();
-                if (current_function_) {
-                    if (global) {
-                        current_function_->AddDirectlyReferencedGlobal(global);
-                        auto* refs = b.Sem().TransitivelyReferencedOverrides(global);
-                        if (refs) {
-                            for (auto* var : *refs) {
-                                current_function_->AddTransitivelyReferencedGlobal(var);
-                            }
-                        }
-                    }
-                } else if (variable->Declaration()->Is<ast::Override>()) {
-                    if (resolved_overrides_) {
-                        // Track the reference to this pipeline-overridable constant and any other
-                        // pipeline-overridable constants that it references.
-                        resolved_overrides_->Add(global);
-                        auto* refs = b.Sem().TransitivelyReferencedOverrides(global);
-                        if (refs) {
-                            for (auto* var : *refs) {
-                                resolved_overrides_->Add(var);
-                            }
-                        }
-                    }
-                } else if (variable->Declaration()->Is<ast::Var>()) {
+                if (variable->Declaration()->Is<ast::Var>()) {
                     // Use of a module-scope 'var' outside of a function.
                     // Note: The spec is currently vague around the rules here. See
                     // https://github.com/gpuweb/gpuweb/issues/3081. Remove this comment when
@@ -3952,7 +3917,7 @@ core::type::Type* Resolver::TypeDecl(const ast::TypeDecl* named_type) {
 
 const core::type::ArrayCount* Resolver::ArrayCount(const ast::Expression* count_expr) {
     // Evaluate the constant array count expression.
-    const auto* count_sem = Materialize(ValueExpression(count_expr));
+    const auto* count_sem = Materialize(sem_.GetVal(count_expr));
     if (!count_sem) {
         return nullptr;
     }
