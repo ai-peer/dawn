@@ -307,7 +307,7 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
 
         DXGI_ADAPTER_FLAG requiredType =
             options->forceFallbackAdapter ? DXGI_ADAPTER_FLAG_SOFTWARE : DXGI_ADAPTER_FLAG_NONE;
-        if (desc1.Flags != requiredType) {
+        if (static_cast<DXGI_ADAPTER_FLAG>(desc1.Flags) != requiredType) {
             continue;
         }
 
