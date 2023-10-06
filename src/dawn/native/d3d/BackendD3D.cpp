@@ -277,10 +277,6 @@ ResultOrError<Ref<PhysicalDeviceBase>> Backend::GetOrCreatePhysicalDeviceFromIDX
 
 std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     const RequestAdapterOptions* options) {
-    if (options->forceFallbackAdapter) {
-        return {};
-    }
-
     FeatureLevel featureLevel =
         options->compatibilityMode ? FeatureLevel::Compatibility : FeatureLevel::Core;
 
@@ -304,6 +300,15 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
         ComPtr<IDXGIAdapter1> dxgiAdapter = nullptr;
         if (GetFactory()->EnumAdapters1(adapterIndex, &dxgiAdapter) == DXGI_ERROR_NOT_FOUND) {
             break;  // No more physicalDevices to enumerate.
+        }
+
+        DXGI_ADAPTER_DESC1 desc1 = {};
+        dxgiAdapter->GetDesc1(&desc1);
+
+        DXGI_ADAPTER_FLAG requiredType =
+            options->forceFallbackAdapter ? DXGI_ADAPTER_FLAG_SOFTWARE : DXGI_ADAPTER_FLAG_NONE;
+        if (desc1.Flags != requiredType) {
+            continue;
         }
 
         Ref<PhysicalDeviceBase> physicalDevice;
