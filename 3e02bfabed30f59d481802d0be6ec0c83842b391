@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62e7d467_121032d0",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-10-06T21:58:33Z",
+      "side": 1,
+      "message": "Edge telemetry shows that the majority of these hangs comes from creating non-warp devices. We really should stop doing this for anything but the adapters we\u0027re actually going to use for rendering.\n\nLater versions of Win10 had DXCore, the successor to DXGI, which exposed more properties via https://learn.microsoft.com/en-us/windows/win32/api/dxcore_interface/ne-dxcore_interface-dxcoreadapterproperty. If you absolutely need telemetry, gathering it using DXCore might be an adequate alternative to creating a D3D device on every adapter.\n\nThat said, merging this CL means the world is better than without it so I\u0027m not going to oppose merging it.",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 9
+      },
+      "revId": "3e02bfabed30f59d481802d0be6ec0c83842b391",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
