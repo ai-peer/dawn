@@ -16,6 +16,23 @@
       "message": "Greg, Austin: PTAL. Thanks!",
       "revId": "df705a07ea98c19a4bbdcb7455943b015a10b9a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93c04b81_64ac4044",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-06T21:33:07Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "df705a07ea98c19a4bbdcb7455943b015a10b9a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
