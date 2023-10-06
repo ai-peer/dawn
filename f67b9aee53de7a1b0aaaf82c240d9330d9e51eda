@@ -16,6 +16,24 @@
       "message": "Nit: type, not access",
       "revId": "f67b9aee53de7a1b0aaaf82c240d9330d9e51eda",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3b7737a0_83c10b51",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-06T23:13:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6050f9d8_c8de13fa",
+      "revId": "f67b9aee53de7a1b0aaaf82c240d9330d9e51eda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
