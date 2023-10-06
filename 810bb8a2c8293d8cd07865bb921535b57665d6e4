@@ -1,0 +1,118 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c02f47_e22c0365",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-06T14:18:06Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b9f10fd_bee9801e",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-06T14:18:06Z",
+      "side": 1,
+      "message": "I\u0027m wondering, can\u0027t both mMtlTexture and mMtlTexturePerPlane be replaced with an:\n\n`std::array\u003cid\u003cMTLTexture\u003e, kMaxPlanesPerFormat\u003e mMtlTexturePlanes` for the same effect and less storage / special cases?",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be23f452_cf2f3e12",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-06T14:18:06Z",
+      "side": 1,
+      "message": "u-nit: We could keep the code the new ClearTexture method and put it there, this way we avoid having a new function while keeping the clearing code factored.",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65cc2474_f76868b8",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-06T14:18:06Z",
+      "side": 1,
+      "message": "nit: ClearTextureOnCreation?",
+      "range": {
+        "startLine": 986,
+        "startChar": 20,
+        "endLine": 986,
+        "endChar": 32
+      },
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7d5b2e8_a27016d2",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-06T14:18:06Z",
+      "side": 1,
+      "message": "nit: Can\u0027t we use TextureViewBase::GetAspect() here?",
+      "range": {
+        "startLine": 1357,
+        "startChar": 58,
+        "endLine": 1357,
+        "endChar": 91
+      },
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44eeafa9_cc590241",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-06T14:18:06Z",
+      "side": 1,
+      "message": "nit: What about array layers and view formats?",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

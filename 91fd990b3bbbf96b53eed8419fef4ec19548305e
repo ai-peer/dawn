@@ -349,6 +349,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "96ebc4c0_7945f2b4",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 9
+      },
+      "lineNbr": 1229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-06T14:18:06Z",
+      "side": 1,
+      "message": "Maybe it would be worth caching the format in metal::Texture and use MTLPixelFormatInvalid for multi-planar? IDK",
+      "parentUuid": "dabe05b0_72336b64",
+      "range": {
+        "startLine": 1227,
+        "startChar": 0,
+        "endLine": 1229,
+        "endChar": 5
+      },
+      "revId": "91fd990b3bbbf96b53eed8419fef4ec19548305e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "240d19cc_6939da54",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 9
