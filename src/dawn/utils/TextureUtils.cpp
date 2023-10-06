@@ -13,6 +13,8 @@
 // limitations under the License.
 
 #include "dawn/utils/TextureUtils.h"
+#include "dawn/common/Constants.h"
+#include "dawn/common/Math.h"
 
 namespace dawn::utils {
 bool TextureFormatSupportsStorageTexture(wgpu::TextureFormat format, bool isCompatibilityMode) {
@@ -843,6 +845,48 @@ wgpu::TextureDimension ViewDimensionToTextureDimension(const wgpu::TextureViewDi
             DAWN_UNREACHABLE();
             break;
     }
+}
+
+uint32_t GetMinimumBytesPerRow(wgpu::TextureFormat format, uint32_t width) {
+    const uint32_t bytesPerBlock = dawn::utils::GetTexelBlockSizeInBytes(format);
+    const uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(format);
+    DAWN_ASSERT(width % blockWidth == 0);
+    return Align(bytesPerBlock * (width / blockWidth), kTextureBytesPerRowAlignment);
+}
+
+uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
+                             uint64_t rowsPerImage,
+                             wgpu::Extent3D copyExtent,
+                             wgpu::TextureFormat textureFormat) {
+    uint32_t blockSize = dawn::utils::GetTexelBlockSizeInBytes(textureFormat);
+    uint32_t blockWidth = dawn::utils::GetTextureFormatBlockWidth(textureFormat);
+    uint32_t blockHeight = dawn::utils::GetTextureFormatBlockHeight(textureFormat);
+    DAWN_ASSERT(copyExtent.width % blockWidth == 0);
+    uint32_t widthInBlocks = copyExtent.width / blockWidth;
+    DAWN_ASSERT(copyExtent.height % blockHeight == 0);
+    uint32_t heightInBlocks = copyExtent.height / blockHeight;
+    return RequiredBytesInCopy(bytesPerRow, rowsPerImage, widthInBlocks, heightInBlocks,
+                               copyExtent.depthOrArrayLayers, blockSize);
+}
+
+uint64_t RequiredBytesInCopy(uint64_t bytesPerRow,
+                             uint64_t rowsPerImage,
+                             uint64_t widthInBlocks,
+                             uint64_t heightInBlocks,
+                             uint64_t depth,
+                             uint64_t bytesPerBlock) {
+    if (depth == 0) {
+        return 0;
+    }
+
+    uint64_t bytesPerImage = bytesPerRow * rowsPerImage;
+    uint64_t requiredBytesInCopy = bytesPerImage * (depth - 1);
+    if (heightInBlocks != 0) {
+        uint64_t lastRowBytes = widthInBlocks * bytesPerBlock;
+        uint64_t lastImageBytes = bytesPerRow * (heightInBlocks - 1) + lastRowBytes;
+        requiredBytesInCopy += lastImageBytes;
+    }
+    return requiredBytesInCopy;
 }
 
 }  // namespace dawn::utils

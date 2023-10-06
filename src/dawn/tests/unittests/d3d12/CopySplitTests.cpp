@@ -21,6 +21,7 @@
 #include "dawn/native/d3d12/TextureCopySplitter.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 #include "dawn/utils/TestUtils.h"
+#include "dawn/utils/TextureUtils.h"
 #include "dawn/webgpu_cpp_print.h"
 #include "gtest/gtest.h"
 
