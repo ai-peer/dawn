@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6050f9d8_c8de13fa",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-06T19:21:26Z",
+      "side": 1,
+      "message": "Nit: type, not access",
+      "revId": "f67b9aee53de7a1b0aaaf82c240d9330d9e51eda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
