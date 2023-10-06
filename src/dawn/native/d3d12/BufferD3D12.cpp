@@ -19,6 +19,7 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/CommandBuffer.h"
@@ -209,10 +210,25 @@ MaybeError Buffer::InitializeHostMapped(const BufferHostMappedPointer* hostMappe
     DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->QueryInterface(IID_PPV_ARGS(&d3d12Device3)),
                           "QueryInterface ID3D12Device3"));
 
+    DAWN_DEBUG() << "Before open heap";
+    device->GetResidencyManager()->UpdateVideoMemoryInfo();
+
     ComPtr<ID3D12Heap> d3d12Heap;
     DAWN_TRY(CheckOutOfMemoryHRESULT(d3d12Device3->OpenExistingHeapFromAddress(
                                          hostMappedDesc->pointer, IID_PPV_ARGS(&d3d12Heap)),
                                      "ID3D12Device3::OpenExistingHeapFromAddress"));
+    DAWN_DEBUG() << "After open heap";
+    device->GetResidencyManager()->UpdateVideoMemoryInfo();
+
+    auto heapDesc = d3d12Heap->GetDesc();
+    DAWN_DEBUG() << "SizeInBytes: " << heapDesc.SizeInBytes;
+    DAWN_DEBUG() << "Type: " << heapDesc.Properties.Type;
+    DAWN_DEBUG() << "CPUPageProperty: " << heapDesc.Properties.CPUPageProperty;
+    DAWN_DEBUG() << "MemoryPoolPreference: " << heapDesc.Properties.MemoryPoolPreference;
+    DAWN_DEBUG() << "CreationNodeMask: " << heapDesc.Properties.CreationNodeMask;
+    DAWN_DEBUG() << "VisibleNodeMask: " << heapDesc.Properties.VisibleNodeMask;
+    DAWN_DEBUG() << "Alignment: " << heapDesc.Alignment;
+    DAWN_DEBUG() << "Flags: 0x" << std::hex << heapDesc.Flags;
 
     uint64_t heapSize = d3d12Heap->GetDesc().SizeInBytes;
 
@@ -256,6 +272,9 @@ MaybeError Buffer::InitializeHostMapped(const BufferHostMappedPointer* hostMappe
                                                        D3D12_RESOURCE_STATE_COMMON, nullptr,
                                                        IID_PPV_ARGS(&placedResource)),
         "ID3D12Device::CreatePlacedResource"));
+
+    DAWN_DEBUG() << "After create placed resource";
+    device->GetResidencyManager()->UpdateVideoMemoryInfo();
 
     mResourceAllocation = {AllocationInfo{0, AllocationMethod::kExternal}, 0,
                            std::move(placedResource),

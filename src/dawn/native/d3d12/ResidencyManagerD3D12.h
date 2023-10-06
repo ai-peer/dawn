@@ -44,6 +44,8 @@ class ResidencyManager {
 
     void RestrictBudgetForTesting(uint64_t artificialBudgetCap);
 
+    void UpdateVideoMemoryInfo();
+
   private:
     struct MemorySegmentInfo {
         const DXGI_MEMORY_SEGMENT_GROUP dxgiSegment;
@@ -67,7 +69,6 @@ class ResidencyManager {
                                        uint64_t sizeToMakeResident,
                                        uint64_t numberOfObjectsToMakeResident,
                                        ID3D12Pageable** allocations);
-    void UpdateVideoMemoryInfo();
     void UpdateMemorySegmentInfo(MemorySegmentInfo* segmentInfo);
 
     Device* mDevice;

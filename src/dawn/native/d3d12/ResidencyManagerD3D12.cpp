@@ -17,6 +17,7 @@
 #include <algorithm>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/Forward.h"
@@ -119,6 +120,12 @@ void ResidencyManager::UpdateMemorySegmentInfo(MemorySegmentInfo* segmentInfo) {
     ToBackend(mDevice->GetPhysicalDevice())
         ->GetHardwareAdapter()
         ->QueryVideoMemoryInfo(0, segmentInfo->dxgiSegment, &queryVideoMemoryInfo);
+
+    DAWN_DEBUG() << "  Memory Segment: " << segmentInfo->dxgiSegment;
+    DAWN_DEBUG() << "    Budget: " << queryVideoMemoryInfo.Budget;
+    DAWN_DEBUG() << "    CurrentUsage: " << queryVideoMemoryInfo.CurrentUsage;
+    DAWN_DEBUG() << "    AvailableForReservation: " << queryVideoMemoryInfo.AvailableForReservation;
+    DAWN_DEBUG() << "    CurrentReservation: " << queryVideoMemoryInfo.CurrentReservation;
 
     // The video memory budget provided by QueryVideoMemoryInfo is defined by the operating
     // system, and may be lower than expected in certain scenarios. Under memory pressure, we
