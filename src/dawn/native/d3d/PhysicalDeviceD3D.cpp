@@ -55,7 +55,10 @@ Backend* PhysicalDevice::GetBackend() const {
 MaybeError PhysicalDevice::InitializeImpl() {
     DXGI_ADAPTER_DESC1 adapterDesc;
     GetHardwareAdapter()->GetDesc1(&adapterDesc);
-
+    // Some WARP drivers incorrectly report DXGI_ADAPTER_FLAG_NONE instead of SOFTWARE.
+    if (gpu_info::IsMicrosoftWARP(adapterDesc.VendorId, adapterDesc.DeviceId)) {
+        adapterDesc.Flags |= DXGI_ADAPTER_FLAG_SOFTWARE;
+    }
     mDeviceId = adapterDesc.DeviceId;
     mVendorId = adapterDesc.VendorId;
     mName = WCharToUTF8(adapterDesc.Description);

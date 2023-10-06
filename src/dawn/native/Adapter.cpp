@@ -273,6 +273,15 @@ std::vector<Ref<AdapterBase>> SortAdapters(std::vector<Ref<AdapterBase>> adapter
         options != nullptr && options->powerPreference == wgpu::PowerPreference::HighPerformance;
 
     const auto ComputeAdapterTypeRank = [&](const Ref<AdapterBase>& a) {
+        if (options->forceFallbackAdapter) {
+            // Prefer SwiftShader as the fallback above all other adapters.
+            if (gpu_info::IsGoogleSwiftshader(a->GetPhysicalDevice()->GetVendorId(),
+                                              a->GetPhysicalDevice()->GetDeviceId())) {
+                return 0;
+            } else {
+                return 1;
+            }
+        }
         switch (a->GetPhysicalDevice()->GetAdapterType()) {
             case wgpu::AdapterType::DiscreteGPU:
                 return highPerformance ? 0 : 1;

@@ -290,10 +290,6 @@ ResultOrError<Ref<PhysicalDeviceBase>> Backend::GetOrCreatePhysicalDeviceFromIDX
 
 std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     const RequestAdapterOptions* options) {
-    if (options->forceFallbackAdapter) {
-        return {};
-    }
-
     FeatureLevel featureLevel =
         options->compatibilityMode ? FeatureLevel::Compatibility : FeatureLevel::Core;
 
@@ -319,6 +315,27 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
             break;  // No more physicalDevices to enumerate.
         }
 
+        DXGI_ADAPTER_DESC1 desc1 = {};
+        dxgiAdapter->GetDesc1(&desc1);
+        // Some WARP drivers incorrectly report DXGI_ADAPTER_FLAG_NONE instead of SOFTWARE.
+        if (gpu_info::IsMicrosoftWARP(desc1.VendorId, desc1.DeviceId)) {
+            desc1.Flags |= DXGI_ADAPTER_FLAG_SOFTWARE;
+        }
+        // Skip all remote adapters.
+        if (desc1.Flags & DXGI_ADAPTER_FLAG_REMOTE) {
+            continue;
+        }
+        if (options->forceFallbackAdapter) {
+            // Skip non-software adapters.
+            if (!(desc1.Flags & DXGI_ADAPTER_FLAG_SOFTWARE)) {
+                continue;
+            }
+        } else {
+            // Skip software adapters.
+            if (desc1.Flags & DXGI_ADAPTER_FLAG_SOFTWARE) {
+                continue;
+            }
+        }
         Ref<PhysicalDeviceBase> physicalDevice;
         if (GetInstance()->ConsumedErrorAndWarnOnce(
                 GetOrCreatePhysicalDeviceFromIDXGIAdapter(std::move(dxgiAdapter)),

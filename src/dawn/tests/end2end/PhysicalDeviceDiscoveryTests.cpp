@@ -258,7 +258,8 @@ class AdapterEnumerationTests : public ::testing::Test {
     void SetUp() override { dawnProcSetProcs(&dawn::native::GetProcs()); }
 };
 
-// Test only enumerating the fallback adapters
+// Test only enumerating the fallback adapters.
+// SwiftShader should be first, if present.
 TEST_F(AdapterEnumerationTests, OnlyFallback) {
     native::Instance instance;
 
@@ -270,9 +271,10 @@ TEST_F(AdapterEnumerationTests, OnlyFallback) {
         wgpu::AdapterProperties properties;
         adapter.GetProperties(&properties);
 
-        EXPECT_EQ(properties.backendType, wgpu::BackendType::Vulkan);
         EXPECT_EQ(properties.adapterType, wgpu::AdapterType::CPU);
-        EXPECT_TRUE(gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID));
+        if (gpu_info::IsGoogleSwiftshader(properties.vendorID, properties.deviceID)) {
+            EXPECT_EQ(&adapter, &adapters[0]);
+        }
     }
 }
 
