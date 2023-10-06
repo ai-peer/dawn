@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,17 +12,16 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_LANG_WGSL_SEM_PIPELINE_STAGE_SET_H_
-#define SRC_TINT_LANG_WGSL_SEM_PIPELINE_STAGE_SET_H_
+#include "src/tint/lang/wgsl/resolver/unresolved_identifier.h"
 
-#include "src/tint/lang/wgsl/ast/pipeline_stage.h"
-#include "src/tint/utils/containers/enum_set.h"
+TINT_INSTANTIATE_TYPEINFO(tint::resolver::UnresolvedIdentifier);
 
-namespace tint::sem {
+namespace tint::resolver {
 
-/// A set of PipelineStage
-using PipelineStageSet = tint::EnumSet<ast::PipelineStage>;
+UnresolvedIdentifier::UnresolvedIdentifier(const ast::IdentifierExpression* i,
+                                           const sem::Statement* stmt)
+    : Base(i, stmt) {}
 
-}  // namespace tint::sem
+UnresolvedIdentifier::~UnresolvedIdentifier() = default;
 
-#endif  // SRC_TINT_LANG_WGSL_SEM_PIPELINE_STAGE_SET_H_
+}  // namespace tint::resolver
