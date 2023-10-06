@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6afae8a7_60887603",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-06T14:40:16Z",
+      "side": 1,
+      "message": "LGTM w/nits",
+      "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5447342_0e31967e",
@@ -53,6 +70,63 @@
         "startChar": 27,
         "endLine": 299,
         "endChar": 36
+      },
+      "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cfd984d_f2f1da0d",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 306,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-06T14:40:16Z",
+      "side": 1,
+      "message": "```suggestion\n// 0x0a090807 and 0x0412100e both unpack to\n```",
+      "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28297c5b_4918e89e",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-06T14:40:16Z",
+      "side": 1,
+      "message": "```suggestion\n// So the bytes copied via blit could be different.\n```",
+      "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "078d12f8_c49a375b",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-06T14:40:16Z",
+      "side": 1,
+      "message": "Nit: please use consistent variable naming. Looks like most of this is snake_case, except for N, Emax and B.",
+      "range": {
+        "startLine": 312,
+        "startChar": 10,
+        "endLine": 312,
+        "endChar": 11
       },
       "revId": "2fb583e3ac0288dd64f301d8ace2a3c1d4fe4576",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
