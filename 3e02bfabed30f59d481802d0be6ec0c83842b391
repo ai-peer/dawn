@@ -22,6 +22,30 @@
       },
       "revId": "3e02bfabed30f59d481802d0be6ec0c83842b391",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be133d2a_b91a610c",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-06T22:01:20Z",
+      "side": 1,
+      "message": "oh interesting, in crbug.com/1487491 I see the stack right inside the warp driver.\n\nyour telemetry shows stacks inside other drivers too?",
+      "parentUuid": "62e7d467_121032d0",
+      "range": {
+        "startLine": 312,
+        "startChar": 0,
+        "endLine": 316,
+        "endChar": 9
+      },
+      "revId": "3e02bfabed30f59d481802d0be6ec0c83842b391",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
