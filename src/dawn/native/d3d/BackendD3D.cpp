@@ -306,6 +306,15 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
             break;  // No more physicalDevices to enumerate.
         }
 
+        DXGI_ADAPTER_DESC1 desc1 = {};
+        dxgiAdapter->GetDesc1(&desc1);
+
+        // Disallow Software and Remote adapters. Discovery of Software adapters like WARP
+        // cause GPU hangs. See crbug.com/1487491.
+        if (static_cast<DXGI_ADAPTER_FLAG>(desc1.Flags) != DXGI_ADAPTER_FLAG_NONE) {
+            continue;
+        }
+
         Ref<PhysicalDeviceBase> physicalDevice;
         if (GetInstance()->ConsumedErrorAndWarnOnce(
                 GetOrCreatePhysicalDeviceFromIDXGIAdapter(std::move(dxgiAdapter)),
