@@ -471,6 +471,9 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
     }
     limits->v1.maxInterStageShaderComponents =
         std::min(vkLimits.maxVertexOutputComponents, vkLimits.maxFragmentInputComponents);
+    // TODO(dawn:685, dawn:1448): Support higher values
+    limits->v1.maxInterStageShaderComponents =
+        std::min(limits->v1.maxInterStageShaderComponents, kMaxInterStageShaderComponents);
 
     CHECK_AND_SET_V1_MAX_LIMIT(maxComputeSharedMemorySize, maxComputeWorkgroupStorageSize);
     CHECK_AND_SET_V1_MAX_LIMIT(maxComputeWorkGroupInvocations, maxComputeInvocationsPerWorkgroup);
