@@ -58,7 +58,9 @@ struct Options {
 
     /// Interstage locations actually used as inputs in the next stage of the pipeline.
     /// This is potentially used for truncating unused interstage outputs at current shader stage.
-    std::bitset<16> interstage_locations;
+    /// interstage_locations.size() == D3D11_PS_INPUT_REGISTER_COUNT - 2
+    /// D3D11_PS_INPUT_REGISTER_COUNT == D3D12_PS_INPUT_REGISTER_COUNT
+    std::bitset<30> interstage_locations;
 
     /// The binding point to use for information passed via root constants.
     std::optional<BindingPoint> root_constant_binding_point;

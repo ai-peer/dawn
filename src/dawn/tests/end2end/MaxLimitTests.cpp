@@ -694,6 +694,14 @@ TEST_P(MaxLimitTests, WriteToMaxFragmentCombinedOutputResources) {
     }
 }
 
+DAWN_INSTANTIATE_TEST(MaxLimitTests,
+                      D3D11Backend(),
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
 // Verifies that supported buffer limits do not exceed maxBufferSize.
 TEST_P(MaxLimitTests, MaxBufferSizes) {
     // Base limits without tiering.
@@ -711,7 +719,74 @@ TEST_P(MaxLimitTests, MaxBufferSizes) {
     GetAdapter().SetUseTieredLimits(false);
 }
 
-DAWN_INSTANTIATE_TEST(MaxLimitTests,
+class MaxInterStageLimitTests : public MaxLimitTests {
+  public:
+    void SetUp() override {
+        MaxLimitTests::SetUp();
+        device.SetUncapturedErrorCallback(MaxInterStageLimitTests::OnDeviceError, nullptr);
+    }
+
+    static void OnDeviceError(WGPUErrorType type, const char* message, void* userdata) {
+        DAWN_ASSERT(type != WGPUErrorType_NoError);
+        FAIL() << "Unexpected error: " << message;
+    }
+
+    wgpu::RenderPipeline CreateRenderPipeline(const std::string& vertexShader,
+                                              const std::string& fragmentShader) {
+        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.vertex.bufferCount = 0;
+        descriptor.cBuffers[0].attributeCount = 0;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.primitive.topology = wgpu::PrimitiveTopology::LineList;
+        return device.CreateRenderPipeline(&descriptor);
+    }
+};
+
+TEST_P(MaxInterStageLimitTests, MaxInterStageShaderComponents) {
+    wgpu::Limits baseLimits = GetAdapterLimits().limits;
+
+    DAWN_TEST_UNSUPPORTED_IF(IsSwiftshader() || IsWARP() || IsANGLE());
+
+    std::stringstream stream;
+    for (uint32_t i = 0; i < baseLimits.maxInterStageShaderComponents / 4; ++i) {
+        stream << "    @location(" << i << ") color" << i << ": vec4f, " << std::endl;
+    }
+
+    std::string vertexShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+            @builtin(position) position : vec4<f32>,
+        }
+        @vertex
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2f, 3>(
+                vec2f(-1.0, -1.0),
+                vec2f( 2.0,  0.0),
+                vec2f( 0.0,  2.0));
+            var output : VertexOut;
+            output.position = vec4f(pos[vertexIndex], 0.0, 1.0);
+            return output;
+        })";
+
+    std::string fragmentShader = R"(
+        struct VertexOut {
+)" + stream.str() + R"(
+        }
+        @fragment
+        fn main(input: VertexOut) -> @location(0) vec4f {
+            return input.color0;
+        })";
+
+    wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+    EXPECT_NE(nullptr, pipeline.Get());
+}
+
+DAWN_INSTANTIATE_TEST(MaxInterStageLimitTests,
                       D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),

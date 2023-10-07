@@ -785,6 +785,9 @@ class PhysicalDevice : public PhysicalDeviceBase {
             limits->v1.maxVertexBuffers * mtlLimits.maxVertexAttribsPerDescriptor;
 
         limits->v1.maxInterStageShaderComponents = mtlLimits.maxFragmentInputComponents;
+        // TODO(dawn:685): Support higher values
+        limits->v1.maxInterStageShaderComponents =
+            std::min(limits->v1.maxInterStageShaderComponents, kMaxInterStageShaderComponents);
 
         limits->v1.maxComputeWorkgroupStorageSize = mtlLimits.maxTotalThreadgroupMemory;
         limits->v1.maxComputeInvocationsPerWorkgroup = mtlLimits.maxThreadsPerThreadgroup;

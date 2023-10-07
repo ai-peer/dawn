@@ -421,13 +421,16 @@ MaybeError RenderPipeline::InitializeShaders() {
 
     PerStage<d3d::CompiledShader> compiledShader;
 
-    std::bitset<kMaxInterStageShaderVariables>* usedInterstageVariables = nullptr;
+    dawn::native::d3d::InterStageShaderVariablesMask* usedInterstageVariablesPtr = nullptr;
+    dawn::native::d3d::InterStageShaderVariablesMask usedInterstageVariables;
     dawn::native::EntryPointMetadata fragmentEntryPoint;
     if (GetStageMask() & wgpu::ShaderStage::Fragment) {
         // Now that only fragment shader can have inter-stage inputs.
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Fragment);
         fragmentEntryPoint = programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
-        usedInterstageVariables = &fragmentEntryPoint.usedInterStageVariables;
+        usedInterstageVariables = dawn::native::d3d::ToInterStageShaderVariablesMask(
+            fragmentEntryPoint.usedInterStageVariables);
+        usedInterstageVariablesPtr = &usedInterstageVariables;
     }
 
     if (GetStageMask() & wgpu::ShaderStage::Vertex) {
@@ -436,7 +439,7 @@ MaybeError RenderPipeline::InitializeShaders() {
             compiledShader[SingleShaderStage::Vertex],
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Vertex, ToBackend(GetLayout()),
-                          compileFlags, usedInterstageVariables));
+                          compileFlags, usedInterstageVariablesPtr));
         const Blob& shaderBlob = compiledShader[SingleShaderStage::Vertex].shaderBlob;
         DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreateVertexShader(
                                   shaderBlob.Data(), shaderBlob.Size(), nullptr, &mVertexShader),
@@ -452,7 +455,7 @@ MaybeError RenderPipeline::InitializeShaders() {
             compiledShader[SingleShaderStage::Fragment],
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Fragment, ToBackend(GetLayout()),
-                          compileFlags, usedInterstageVariables));
+                          compileFlags, usedInterstageVariablesPtr));
         DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreatePixelShader(
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Data(),
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Size(),

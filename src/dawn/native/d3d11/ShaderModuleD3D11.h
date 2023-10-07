@@ -44,7 +44,7 @@ class ShaderModule final : public ShaderModuleBase {
         SingleShaderStage stage,
         const PipelineLayout* layout,
         uint32_t compileFlags,
-        const std::bitset<kMaxInterStageShaderVariables>* usedInterstageVariables = nullptr);
+        const dawn::native::d3d::InterStageShaderVariablesMask* usedInterstageVariables = nullptr);
 
   private:
     ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);

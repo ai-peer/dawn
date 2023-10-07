@@ -15,7 +15,9 @@
 #ifndef SRC_DAWN_NATIVE_D3D_SHADEUTILS_H_
 #define SRC_DAWN_NATIVE_D3D_SHADEUTILS_H_
 
+#include <bitset>
 #include <string>
+#include <vector>
 
 #include "dawn/native/Blob.h"
 #include "dawn/native/Serializable.h"
@@ -40,6 +42,11 @@ DAWN_SERIALIZABLE(struct, CompiledShader, COMPILED_SHADER_MEMBERS){};
 #undef COMPILED_SHADER_MEMBERS
 
 ResultOrError<CompiledShader> CompileShader(d3d::D3DCompilationRequest r);
+
+// InterStageShaderVariablesMask.size() == D3D11_PS_INPUT_REGISTER_COUNT - 2
+// D3D11_PS_INPUT_REGISTER_COUNT == D3D12_PS_INPUT_REGISTER_COUNT
+using InterStageShaderVariablesMask = std::bitset<30>;
+InterStageShaderVariablesMask ToInterStageShaderVariablesMask(const std::vector<bool>& inputMask);
 
 void DumpCompiledShader(Device* device,
                         const CompiledShader& compiledShader,

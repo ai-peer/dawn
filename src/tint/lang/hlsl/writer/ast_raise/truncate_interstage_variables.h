@@ -108,7 +108,9 @@ class TruncateInterstageVariables final
 
         /// Indicate which interstage io locations are actually used by the later stage.
         /// There can be at most 16 user defined interstage variables with locations.
-        std::bitset<16> interstage_locations;
+        /// interstage_locations.size() == D3D11_PS_INPUT_REGISTER_COUNT - 2
+        /// D3D11_PS_INPUT_REGISTER_COUNT == D3D12_PS_INPUT_REGISTER_COUNT
+        std::bitset<30> interstage_locations;
 
         /// Reflect the fields of this class so that it can be used by tint::ForeachField()
         TINT_REFLECT(interstage_variables);

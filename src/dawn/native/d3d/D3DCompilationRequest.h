@@ -23,6 +23,7 @@
 
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/Serializable.h"
+#include "dawn/native/d3d/ShaderUtils.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
 #include "tint/tint.h"
@@ -69,7 +70,7 @@ using AccessControl = std::unordered_map<tint::BindingPoint, tint::core::Access>
     X(tint::BindingRemapperOptions, bindingRemapper)                                             \
     X(AccessControl, accessControls)                                                             \
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
-    X(std::bitset<kMaxInterStageShaderVariables>, interstageLocations)                           \
+    X(std::bitset<30>, interstageLocations)                                                      \
     X(LimitsForCompilationRequest, limits)                                                       \
     X(bool, disableSymbolRenaming)                                                               \
     X(bool, isRobustnessEnabled)                                                                 \

@@ -328,13 +328,16 @@ MaybeError RenderPipeline::Initialize() {
 
     PerStage<d3d::CompiledShader> compiledShader;
 
-    std::bitset<kMaxInterStageShaderVariables>* usedInterstageVariables = nullptr;
+    dawn::native::d3d::InterStageShaderVariablesMask* usedInterStageVariablesPtr = nullptr;
+    dawn::native::d3d::InterStageShaderVariablesMask usedInterstageVariables;
     dawn::native::EntryPointMetadata fragmentEntryPoint;
     if (GetStageMask() & wgpu::ShaderStage::Fragment) {
         // Now that only fragment shader can have interstage inputs.
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Fragment);
         fragmentEntryPoint = programmableStage.module->GetEntryPoint(programmableStage.entryPoint);
-        usedInterstageVariables = &fragmentEntryPoint.usedInterStageVariables;
+        usedInterstageVariables = dawn::native::d3d::ToInterStageShaderVariablesMask(
+            fragmentEntryPoint.usedInterStageVariables);
+        usedInterStageVariablesPtr = &usedInterstageVariables;
     }
 
     for (auto stage : IterateStages(GetStageMask())) {
@@ -342,7 +345,7 @@ MaybeError RenderPipeline::Initialize() {
         DAWN_TRY_ASSIGN(compiledShader[stage],
                         ToBackend(programmableStage.module)
                             ->Compile(programmableStage, stage, ToBackend(GetLayout()),
-                                      compileFlags, usedInterstageVariables));
+                                      compileFlags, usedInterStageVariablesPtr));
         *shaders[stage] = {compiledShader[stage].shaderBlob.Data(),
                            compiledShader[stage].shaderBlob.Size()};
     }
