@@ -856,4 +856,16 @@ uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
     return DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil();
 }
 
+ComPtr<IDxcLibrary> Device::GetDxcLibrary() const {
+    return ToBackend(GetPhysicalDevice())->GetBackend()->GetDxcLibrary();
+}
+
+ComPtr<IDxcCompiler3> Device::GetDxcCompiler() const {
+    return ToBackend(GetPhysicalDevice())->GetBackend()->GetDxcCompiler();
+}
+
+ComPtr<IDxcValidator> Device::GetDxcValidator() const {
+    return ToBackend(GetPhysicalDevice())->GetBackend()->GetDxcValidator();
+}
+
 }  // namespace dawn::native::d3d12
