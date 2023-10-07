@@ -694,6 +694,14 @@ TEST_P(MaxLimitTests, WriteToMaxFragmentCombinedOutputResources) {
     }
 }
 
+DAWN_INSTANTIATE_TEST(MaxLimitTests,
+                      D3D11Backend(),
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
 // Verifies that supported buffer limits do not exceed maxBufferSize.
 TEST_P(MaxLimitTests, MaxBufferSizes) {
     // Base limits without tiering.
@@ -711,9 +719,272 @@ TEST_P(MaxLimitTests, MaxBufferSizes) {
     GetAdapter().SetUseTieredLimits(false);
 }
 
-DAWN_INSTANTIATE_TEST(MaxLimitTests,
+// Verifies the limits maxInterStageShaderVariables and maxInterStageShaderComponents work correctly
+class MaxInterStageLimitTests : public MaxLimitTests {
+  public:
+    // TODO(dawn:1443): Test rendering points
+    wgpu::RenderPipeline CreateRenderPipeline(const std::string& vertexShader,
+                                              const std::string& fragmentShader) {
+        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.vertex.bufferCount = 0;
+        descriptor.cBuffers[0].attributeCount = 0;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.primitive.topology = wgpu::PrimitiveTopology::LineList;
+        return device.CreateRenderPipeline(&descriptor);
+    }
+
+    uint32_t GetMaximumInterStageShaderVariablesInVec4() {
+        wgpu::Limits baseLimits = GetAdapterLimits().limits;
+
+        DAWN_ASSERT(baseLimits.maxInterStageShaderComponents % 4 == 0);
+        DAWN_ASSERT(baseLimits.maxInterStageShaderVariables >=
+                    baseLimits.maxInterStageShaderComponents / 4);
+
+        return baseLimits.maxInterStageShaderComponents / 4;
+    }
+
+    std::string GetVec4DeclarationsWithLocation(uint32_t vec4Count) {
+        std::stringstream stream;
+        for (uint32_t i = 0; i < vec4Count; ++i) {
+            stream << "    @location(" << i << ") color" << i << ": vec4f, " << std::endl;
+        }
+        return stream.str();
+    }
+
+    struct MaxInterStageShaderVariablesSpec {
+        uint32_t totalInterStageVariables;
+        bool hasSampleMask;
+        bool hasSampleIndex;
+        bool hasFrontFacing;
+    };
+
+    void DoTest(const MaxInterStageShaderVariablesSpec& spec) {
+        std::string vertexShader =
+            GetVertexShaderForRenderPipelineWithMaxInterStageShaderComponents(spec);
+        std::string fragmentShader = GetFragmentShaderWithMaxInterStageShaderComponents(spec);
+        wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader);
+        EXPECT_NE(nullptr, pipeline.Get());
+    }
+
+  private:
+    std::string GetInterStageDeclarations(uint32_t fragmentShaderBuiltinCount,
+                                          uint32_t interStageVec4Count,
+                                          uint32_t totalInterStageVariables) {
+        std::string vec4Declarations = GetVec4DeclarationsWithLocation(interStageVec4Count);
+
+        std::stringstream stream;
+        stream << "struct VertexOut {" << std::endl << vec4Declarations << std::endl;
+        switch (fragmentShaderBuiltinCount) {
+            case 0:
+                break;
+            case 1:
+                stream << "@location(" << (totalInterStageVariables - 1) << ") lastColor : vec3f,"
+                       << std::endl;
+                break;
+            case 2:
+                stream << "@location(" << (totalInterStageVariables - 1) << ") lastColor : vec2f,"
+                       << std::endl;
+                break;
+            case 3:
+                stream << "@location(" << (totalInterStageVariables - 1) << ") lastColor : f32,"
+                       << std::endl;
+                break;
+            default:
+                break;
+        }
+
+        stream << "@builtin(position) position : vec4f" << std::endl << "}";
+        return stream.str();
+    }
+
+    // Create a vertex shader for a render pipeline with maximum inter-stage shader components.
+    // Note that in the vertex shader the total number of inter-stage shader components may be less
+    // than the maximum value because the corresponding fragment shader has extra built-in variables
+    // that consume the inter-stage shader components of the vertex-fragment interface.
+    std::string GetVertexShaderForRenderPipelineWithMaxInterStageShaderComponents(
+        const MaxInterStageShaderVariablesSpec& spec) {
+        uint32_t fragmentShaderBuiltinCount = static_cast<uint32_t>(spec.hasFrontFacing) +
+                                              static_cast<uint32_t>(spec.hasSampleIndex) +
+                                              static_cast<uint32_t>(spec.hasSampleMask);
+
+        uint32_t interStageVec4Count = fragmentShaderBuiltinCount == 0
+                                           ? spec.totalInterStageVariables
+                                           : (spec.totalInterStageVariables - 1);
+
+        std::stringstream stream;
+        stream << GetInterStageDeclarations(fragmentShaderBuiltinCount, interStageVec4Count,
+                                            spec.totalInterStageVariables)
+               << R"(
+        @vertex
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2f, 3>(
+                vec2f(-1.0, -1.0),
+                vec2f( 2.0,  0.0),
+                vec2f( 0.0,  2.0));
+            var output : VertexOut;
+            var vertexIndexFloat  = f32(vertexIndex);
+            output.position = vec4f(pos[vertexIndex], 0.0, 1.0);
+        )";
+        for (uint32_t i = 0; i < interStageVec4Count; ++i) {
+            stream << "output.color" << i << " = vec4f(";
+            for (uint32_t index = 0; index < 4; ++index) {
+                stream << "f32(vertexIndexFloat / " << i * 4 + index + 1 << ")";
+                if (index != 3) {
+                    stream << ", ";
+                }
+            }
+            stream << ");" << std::endl;
+        }
+        switch (fragmentShaderBuiltinCount) {
+            case 0:
+                break;
+            case 1:
+                stream << "output.lastColor = vec3f(f32(vertexIndexFloat), "
+                          "f32(vertexIndexFloat) * 2.0, f32(vertexIndexFloat) * 3.0);"
+                       << std::endl;
+                break;
+            case 2:
+                stream << "output.lastColor = vec2f(f32(vertexIndexFloat), "
+                          "f32(vertexIndexFloat) * 2.0);"
+                       << std::endl;
+                break;
+            case 3:
+                stream << "output.lastColor = f32(vertexIndexFloat);" << std::endl;
+                break;
+            default:
+                break;
+        }
+        stream << R"(return output;
+})";
+        return stream.str();
+    }
+
+    // Create a fragment shader with maximum inter-stage shader components. The inter-stage shader
+    // components of the fragment shader are allocated as one of the ways below:
+    // - vec4f * (baseLimits.maxInterStageShaderComponents / 4)
+    // - vec4f * (baseLimits.maxInterStageShaderComponents / 4 - 1) + vec3f + built-in * 1
+    // - vec4f * (baseLimits.maxInterStageShaderComponents / 4 - 1) + vec2f + built-in * 2
+    // - vec4f * (baseLimits.maxInterStageShaderComponents / 4 - 1) + f32 + built-in * 3
+    std::string GetFragmentShaderWithMaxInterStageShaderComponents(
+        const MaxInterStageShaderVariablesSpec& spec) {
+        uint32_t fragmentShaderBuiltinCount = static_cast<uint32_t>(spec.hasFrontFacing) +
+                                              static_cast<uint32_t>(spec.hasSampleIndex) +
+                                              static_cast<uint32_t>(spec.hasSampleMask);
+
+        DAWN_ASSERT(fragmentShaderBuiltinCount < 4);
+        uint32_t interStageVec4Count = fragmentShaderBuiltinCount == 0
+                                           ? spec.totalInterStageVariables
+                                           : (spec.totalInterStageVariables - 1);
+
+        std::stringstream stream;
+        stream << GetInterStageDeclarations(fragmentShaderBuiltinCount, interStageVec4Count,
+                                            spec.totalInterStageVariables)
+               << "@fragment fn main(input: VertexOut";
+        if (spec.hasFrontFacing) {
+            stream << ", @builtin(front_facing) isFront : bool";
+        }
+        if (spec.hasSampleIndex) {
+            stream << ", @builtin(sample_index) sampleIndex : u32";
+        }
+        if (spec.hasSampleMask) {
+            stream << ", @builtin(sample_mask) sampleMask : u32";
+        }
+        stream << ") -> @location(0) vec4f {" << std::endl;
+        stream << "return input.position";
+        for (uint32_t i = 0; i < interStageVec4Count; ++i) {
+            stream << " + input.color" << i;
+        }
+        switch (fragmentShaderBuiltinCount) {
+            case 0:
+                break;
+            case 1:
+                stream << " + vec4f(input.lastColor, 1)";
+                break;
+            case 2:
+                stream << " + vec4f(input.lastColor, 0, 1)";
+                break;
+            case 3:
+                stream << " + vec4f(input.lastColor, 0, 0, 1)";
+                break;
+        }
+        if (spec.hasFrontFacing) {
+            stream << " + vec4f(f32(isFront), 0, 0, 1)";
+        }
+        if (spec.hasSampleIndex) {
+            stream << " + vec4f(f32(sampleIndex), 0, 0, 1)";
+        }
+        if (spec.hasSampleMask) {
+            stream << " + vec4f(f32(sampleMask), 0, 0, 1)";
+        }
+        stream << ";}";
+        return stream.str();
+    }
+};
+
+// Tests that maxInterStageShaderComponents works for a render pipeline with no built-in variables.
+TEST_P(MaxInterStageLimitTests, MaxInterStageShaderComponents_NoBuiltins) {
+    MaxInterStageShaderVariablesSpec spec = {};
+    spec.totalInterStageVariables = GetMaximumInterStageShaderVariablesInVec4();
+    DoTest(spec);
+}
+
+// Tests that maxInterStageShaderComponents works for a render pipeline with @builtin(sample_mask).
+// On D3D SV_Coverage doesn't consume an independent float4 register.
+TEST_P(MaxInterStageLimitTests, MaxInterStageShaderComponents_SampleMask) {
+    MaxInterStageShaderVariablesSpec spec = {};
+    spec.hasSampleMask = true;
+    spec.totalInterStageVariables = GetMaximumInterStageShaderVariablesInVec4();
+    DoTest(spec);
+}
+
+// Tests that maxInterStageShaderComponents works for a render pipeline with @builtin(sample_index).
+// On D3D SV_SampleIndex consumes an independent float4 register.
+TEST_P(MaxInterStageLimitTests, MaxInterStageShaderComponents_SampleIndex) {
+    MaxInterStageShaderVariablesSpec spec = {};
+    spec.hasSampleIndex = true;
+    spec.totalInterStageVariables = GetMaximumInterStageShaderVariablesInVec4();
+    DoTest(spec);
+}
+
+// Tests that maxInterStageShaderComponents works for a render pipeline with @builtin(front_facing).
+// On D3D SV_IsFrontFace consumes an independent float4 register.
+TEST_P(MaxInterStageLimitTests, MaxInterStageShaderComponents_FrontFacing) {
+    MaxInterStageShaderVariablesSpec spec = {};
+    spec.hasFrontFacing = true;
+    spec.totalInterStageVariables = GetMaximumInterStageShaderVariablesInVec4();
+    DoTest(spec);
+}
+
+// Tests that maxInterStageShaderComponents works for a render pipeline with @builtin(front_facing).
+// On D3D SV_IsFrontFace and SV_SampleIndex consume one independent float4 register.
+TEST_P(MaxInterStageLimitTests, MaxInterStageShaderComponents_SampleIndex_FrontFacing) {
+    MaxInterStageShaderVariablesSpec spec = {};
+    spec.hasSampleIndex = true;
+    spec.hasFrontFacing = true;
+    spec.totalInterStageVariables = GetMaximumInterStageShaderVariablesInVec4();
+    DoTest(spec);
+}
+
+// Tests that maxInterStageShaderComponents works for a render pipeline with @builtin(sample_mask),
+// @builtin(sample_index) and @builtin(front_facing).
+TEST_P(MaxInterStageLimitTests, MaxInterStageShaderComponents_SampleMask_SampleIndex_FrontFacing) {
+    MaxInterStageShaderVariablesSpec spec = {};
+    spec.hasSampleMask = true;
+    spec.hasSampleIndex = true;
+    spec.hasFrontFacing = true;
+    spec.totalInterStageVariables = GetMaximumInterStageShaderVariablesInVec4();
+    DoTest(spec);
+}
+
+DAWN_INSTANTIATE_TEST(MaxInterStageLimitTests,
                       D3D11Backend(),
-                      D3D12Backend(),
+                      D3D12Backend({}, {"use_dxc"}),
+                      D3D12Backend({"use_dxc"}),
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),

@@ -224,6 +224,11 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
     // D3D11 has no documented limit on the buffer size.
     limits->v1.maxBufferSize = kAssumedMaxBufferSize;
 
+    // 1 for SV_Position and 1 for (SV_IsFrontFace OR SV_SampleIndex).
+    limits->v1.maxInterStageShaderVariables = D3D11_PS_INPUT_REGISTER_COUNT - 2;
+    limits->v1.maxInterStageShaderComponents =
+        limits->v1.maxInterStageShaderVariables * D3D11_PS_INPUT_REGISTER_COMPONENTS;
+
     return {};
 }
 
