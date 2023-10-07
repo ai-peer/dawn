@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9410efcd_d64a8023",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 433,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-07T11:47:53Z",
+      "side": 1,
+      "message": "const declarations cannot reference override declarations, so I don\u0027t think this is needed.",
+      "range": {
+        "startLine": 422,
+        "startChar": 0,
+        "endLine": 433,
+        "endChar": 7
+      },
+      "revId": "bb57650f5ab30809ca626f57a457da979ca805b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b47366d_83ede302",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3274,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-07T11:47:53Z",
+      "side": 1,
+      "message": "Nit: The linked issue has now been resolved so could remove this comment while you\u0027re here.",
+      "range": {
+        "startLine": 3272,
+        "startChar": 0,
+        "endLine": 3274,
+        "endChar": 36
+      },
+      "revId": "bb57650f5ab30809ca626f57a457da979ca805b2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
