@@ -165,11 +165,11 @@ async function runCtsTest(queryString, use_worker) {
   const testcases = Array.from(await loader.loadCases(filterQuery));
 
   if (testcases.length === 0) {
-    sendMessageInfraFailure('Did not find matching test');
+    sendMessageInfraFailure('Did not find test matching query: ' + queryString);
     return;
   }
   if (testcases.length !== 1) {
-    sendMessageInfraFailure('Found more than 1 test for given query');
+    sendMessageInfraFailure('Found more than 1 test for given query: ' + queryString);
     return;
   }
   const testcase = testcases[0];
