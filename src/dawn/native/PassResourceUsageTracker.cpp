@@ -41,9 +41,12 @@ void SyncScopeUsageTracker::BufferUsedAs(BufferBase* buffer, wgpu::BufferUsage u
 }
 
 void SyncScopeUsageTracker::TextureViewUsedAs(TextureViewBase* view, wgpu::TextureUsage usage) {
-    TextureBase* texture = view->GetTexture();
-    const SubresourceRange& range = view->GetSubresourceRange();
+    TextureRangeUsedAs(view->GetTexture(), view->GetSubresourceRange(), usage);
+}
 
+void SyncScopeUsageTracker::TextureRangeUsedAs(TextureBase* texture,
+                                               const SubresourceRange& range,
+                                               wgpu::TextureUsage usage) {
     // Get or create a new TextureSubresourceUsage for that texture (initially filled with
     // wgpu::TextureUsage::None)
     auto it = mTextureUsages.emplace(

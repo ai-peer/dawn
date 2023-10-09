@@ -88,10 +88,6 @@ VkImageAspectFlags VulkanAspectMask(const Aspect& aspects) {
                 flags |= VK_IMAGE_ASPECT_STENCIL_BIT;
                 break;
 
-            case Aspect::CombinedDepthStencil:
-                flags |= VK_IMAGE_ASPECT_DEPTH_BIT | VK_IMAGE_ASPECT_STENCIL_BIT;
-                break;
-
             case Aspect::Plane0:
                 flags |= VK_IMAGE_ASPECT_PLANE_0_BIT;
                 break;

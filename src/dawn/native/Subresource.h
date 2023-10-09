@@ -32,10 +32,6 @@ enum class Aspect : uint8_t {
     // Aspects used to select individual planes in a multi-planar format.
     Plane0 = 0x8,
     Plane1 = 0x10,
-
-    // An aspect for that represents the combination of both the depth and stencil aspects. It
-    // can be ignored outside of the Vulkan backend.
-    CombinedDepthStencil = 0x20,
 };
 
 template <>
