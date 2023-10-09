@@ -719,5 +719,334 @@ DAWN_INSTANTIATE_TEST(MaxLimitTests,
                       OpenGLESBackend(),
                       VulkanBackend());
 
+// Verifies the limits maxInterStageShaderVariables and maxInterStageShaderComponents work correctly
+class MaxInterStageLimitTests : public MaxLimitTests {
+  public:
+    struct MaxInterStageLimitTestsSpec {
+        bool renderPointLists;
+        bool hasSampleMask;
+        bool hasSampleIndex;
+        bool hasFrontFacing;
+    };
+
+    struct InterStageVariableAllocation {
+        std::array<uint32_t, 2> variableSizes;
+        std::array<uint32_t, 2> variableSizesCount;
+    };
+
+    // Allocate the inter-stage shader variables that consume all inter-stage shader variables and
+    // components
+    InterStageVariableAllocation AllocateInterStageVariables(
+        const MaxInterStageLimitTestsSpec& spec) {
+        wgpu::Limits baseLimits = GetAdapterLimits().limits;
+
+        uint32_t interStageVariableCount = baseLimits.maxInterStageShaderVariables;
+
+        uint32_t builtinCount = static_cast<uint32_t>(spec.renderPointLists) +
+                                static_cast<uint32_t>(spec.hasFrontFacing) +
+                                static_cast<uint32_t>(spec.hasSampleIndex) +
+                                static_cast<uint32_t>(spec.hasSampleMask);
+        uint32_t userDefinedInterStageComponents =
+            baseLimits.maxInterStageShaderComponents - builtinCount;
+
+        InterStageVariableAllocation allocation;
+
+        allocation.variableSizes[0] = userDefinedInterStageComponents / interStageVariableCount;
+
+        if (userDefinedInterStageComponents % interStageVariableCount == 0) {
+            // For example, on D3D12 maxInterStageShaderVariables == 30 and
+            // maxInterStageShaderComponents == 120, so the inter-stage variables are 30 vec4fs.
+            allocation.variableSizesCount[0] = interStageVariableCount;
+            allocation.variableSizes[1] = allocation.variableSizesCount[1] = 0;
+        } else {
+            // For example, on Vulkan maxInterStageShaderVariables can be 16 and
+            // maxInterStageShaderComponents can be 60, so the inter-stage variables are 12 vec4fs
+            // and 4 vec3fs.
+            allocation.variableSizes[1] = allocation.variableSizes[0] + 1;
+            allocation.variableSizesCount[1] =
+                userDefinedInterStageComponents -
+                allocation.variableSizes[0] * interStageVariableCount;
+            allocation.variableSizesCount[0] =
+                interStageVariableCount - allocation.variableSizesCount[1];
+        }
+
+        DAWN_ASSERT(userDefinedInterStageComponents ==
+                    allocation.variableSizes[0] * allocation.variableSizesCount[0] +
+                        allocation.variableSizes[1] * allocation.variableSizesCount[1]);
+
+        return allocation;
+    }
+
+    std::string GetWGSLTypeFromVariableSize(uint32_t variableSize) {
+        switch (variableSize) {
+            // It's OK to return an empty string for variableSize == 0 as when variableSizes[i] ==
+            // 0, variableSizesCount[i] must also be 0, thus the returned empty string won't be
+            // used.
+            case 0:
+                return "";
+            case 1:
+                return "f32";
+            case 2:
+                return "vec2f";
+            case 3:
+                return "vec3f";
+            case 4:
+                return "vec4f";
+            default:
+                DAWN_UNREACHABLE();
+                return "";
+        }
+    }
+
+    std::string GetInterStageVariableDeclarations(const InterStageVariableAllocation& allocation) {
+        std::stringstream stream;
+
+        stream << "struct VertexOut {" << std::endl;
+
+        std::string variable1WGSLType = GetWGSLTypeFromVariableSize(allocation.variableSizes[0]);
+        for (uint32_t i = 0; i < allocation.variableSizesCount[0]; ++i) {
+            stream << "@location(" << i << ") color" << i << " : " << variable1WGSLType << ", "
+                   << std::endl;
+        }
+        std::string variable2WGSLType = GetWGSLTypeFromVariableSize(allocation.variableSizes[1]);
+        for (uint32_t i = 0; i < allocation.variableSizesCount[1]; ++i) {
+            uint32_t location = i + allocation.variableSizesCount[0];
+            stream << "@location(" << location << ") color" << location << " : "
+                   << variable2WGSLType << ", " << std::endl;
+        }
+
+        stream << "@builtin(position) pos : vec4f" << std::endl << "}" << std::endl;
+
+        return stream.str();
+    }
+
+    std::string GetVertexShaderForRenderPipelineWithMaxInterStageShaderComponents(
+        const InterStageVariableAllocation& allocation) {
+        std::stringstream stream;
+
+        stream << GetInterStageVariableDeclarations(allocation) << R"(
+        @vertex
+        fn main(@builtin(vertex_index) vertexIndex : u32) -> VertexOut {
+            var pos = array<vec2f, 3>(
+                vec2f(-1.0, -1.0),
+                vec2f( 2.0,  0.0),
+                vec2f( 0.0,  2.0));
+            var output : VertexOut;
+            output.pos = vec4f(pos[vertexIndex], 0.0, 1.0);
+            var vertexIndexFloat  = f32(vertexIndex);
+)";
+        // Ensure every inter-stage shader variable is used instead of being optimized out.
+        std::string variable1WGSLType = GetWGSLTypeFromVariableSize(allocation.variableSizes[0]);
+        for (uint32_t i = 0; i < allocation.variableSizesCount[0]; ++i) {
+            stream << "output.color" << i << " = " << variable1WGSLType << "(";
+            for (uint32_t index = 0; index < allocation.variableSizes[0]; ++index) {
+                stream << "f32(vertexIndexFloat / " << i * allocation.variableSizes[0] + index + 1
+                       << ")";
+                if (index != allocation.variableSizes[0] - 1) {
+                    stream << ", ";
+                }
+            }
+            stream << ");" << std::endl;
+        }
+        std::string variable2WGSLType = GetWGSLTypeFromVariableSize(allocation.variableSizes[1]);
+        for (uint32_t i = 0; i < allocation.variableSizesCount[1]; ++i) {
+            uint32_t location = i + allocation.variableSizesCount[0];
+            stream << "output.color" << location << " = " << variable2WGSLType << "(";
+            for (uint32_t index = 0; index < allocation.variableSizes[1]; ++index) {
+                stream << "f32(vertexIndexFloat / "
+                       << location * allocation.variableSizes[1] + index + 1 << ")";
+                if (index != allocation.variableSizes[1] - 1) {
+                    stream << ", ";
+                }
+            }
+            stream << ");" << std::endl;
+        }
+        stream << "return output;" << std::endl << "}" << std::endl;
+        return stream.str();
+    }
+
+    std::string GetInterStageVariableToVec4F(uint32_t location, uint32_t variableSize) {
+        std::stringstream stream;
+
+        switch (variableSize) {
+            case 1:
+                stream << "vec4f(input.color" << location << ", 0, 0, 1)";
+                break;
+            case 2:
+                stream << "vec4f(input.color" << location << ", 0, 1)";
+                break;
+            case 3:
+                stream << "vec4f(input.color" << location << ", 1)";
+                break;
+            case 4:
+                stream << "input.color" << location;
+                break;
+            default:
+                DAWN_UNREACHABLE();
+                break;
+        }
+
+        return stream.str();
+    }
+
+    std::string GetFragmentShaderForRenderPipelineWithWithMaxInterStageShaderComponents(
+        const InterStageVariableAllocation& allocation,
+        const MaxInterStageLimitTestsSpec& spec) {
+        std::stringstream stream;
+
+        stream << GetInterStageVariableDeclarations(allocation) << std::endl
+               << "@fragment fn main(input: VertexOut";
+        if (spec.hasFrontFacing) {
+            stream << ", @builtin(front_facing) isFront : bool";
+        }
+        if (spec.hasSampleIndex) {
+            stream << ", @builtin(sample_index) sampleIndex : u32";
+        }
+        if (spec.hasSampleMask) {
+            stream << ", @builtin(sample_mask) sampleMask : u32";
+        }
+        // Ensure every inter-stage shader variable and built-in variable is used instead of being
+        // optimized out.
+        stream << ") -> @location(0) vec4f {" << std::endl << "return input.pos";
+        if (spec.hasFrontFacing) {
+            stream << " + vec4f(f32(isFront), 0, 0, 1)";
+        }
+        if (spec.hasSampleIndex) {
+            stream << " + vec4f(f32(sampleIndex), 0, 0, 1)";
+        }
+        if (spec.hasSampleMask) {
+            stream << " + vec4f(f32(sampleMask), 0, 0, 1)";
+        }
+        std::string variable1WGSLType = GetWGSLTypeFromVariableSize(allocation.variableSizes[0]);
+        for (uint32_t i = 0; i < allocation.variableSizesCount[0]; ++i) {
+            stream << " + " << GetInterStageVariableToVec4F(i, allocation.variableSizes[0]);
+        }
+        std::string variable2WGSLType = GetWGSLTypeFromVariableSize(allocation.variableSizes[1]);
+        for (uint32_t i = 0; i < allocation.variableSizesCount[1]; ++i) {
+            uint32_t location = i + allocation.variableSizesCount[0];
+            stream << " + " << GetInterStageVariableToVec4F(location, allocation.variableSizes[1]);
+        }
+        stream << ";}";
+        return stream.str();
+    }
+
+    wgpu::RenderPipeline CreateRenderPipeline(const std::string& vertexShader,
+                                              const std::string& fragmentShader,
+                                              const MaxInterStageLimitTestsSpec& spec) {
+        wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, vertexShader.c_str());
+        wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, fragmentShader.c_str());
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = vsModule;
+        descriptor.cFragment.module = fsModule;
+        descriptor.vertex.bufferCount = 0;
+        descriptor.cBuffers[0].attributeCount = 0;
+        descriptor.cTargets[0].format = wgpu::TextureFormat::RGBA8Unorm;
+        descriptor.primitive.topology = spec.renderPointLists
+                                            ? wgpu::PrimitiveTopology::PointList
+                                            : wgpu::PrimitiveTopology::TriangleList;
+        if (spec.hasSampleIndex || spec.hasSampleMask) {
+            descriptor.multisample.count = 4;
+        }
+        return device.CreateRenderPipeline(&descriptor);
+    }
+
+    void DoTest(const MaxInterStageLimitTestsSpec& spec) {
+        InterStageVariableAllocation allocation = AllocateInterStageVariables(spec);
+        std::string vertexShader =
+            GetVertexShaderForRenderPipelineWithMaxInterStageShaderComponents(allocation);
+        std::string fragmentShader =
+            GetFragmentShaderForRenderPipelineWithWithMaxInterStageShaderComponents(allocation,
+                                                                                    spec);
+        wgpu::RenderPipeline pipeline = CreateRenderPipeline(vertexShader, fragmentShader, spec);
+        EXPECT_NE(nullptr, pipeline.Get());
+    }
+};
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with no built-in variables.
+TEST_P(MaxInterStageLimitTests, NoBuiltins) {
+    MaxInterStageLimitTestsSpec spec = {};
+    DoTest(spec);
+}
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with @builtin(sample_mask). On D3D SV_Coverage doesn't consume an independent float4
+// register.
+TEST_P(MaxInterStageLimitTests, SampleMask) {
+    MaxInterStageLimitTestsSpec spec = {};
+    spec.hasSampleMask = true;
+    DoTest(spec);
+}
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with @builtin(sample_index). On D3D SV_SampleIndex consumes an independent float4
+// register.
+TEST_P(MaxInterStageLimitTests, SampleIndex) {
+    MaxInterStageLimitTestsSpec spec = {};
+    spec.hasSampleIndex = true;
+    DoTest(spec);
+}
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with @builtin(front_facing). On D3D SV_IsFrontFace consumes an independent float4
+// register.
+TEST_P(MaxInterStageLimitTests, FrontFacing) {
+    MaxInterStageLimitTestsSpec spec = {};
+    spec.hasFrontFacing = true;
+    DoTest(spec);
+}
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with @builtin(front_facing). On D3D SV_IsFrontFace and SV_SampleIndex consume one
+// independent float4 register.
+TEST_P(MaxInterStageLimitTests, SampleIndex_FrontFacing) {
+    MaxInterStageLimitTestsSpec spec = {};
+    spec.hasSampleIndex = true;
+    spec.hasFrontFacing = true;
+    DoTest(spec);
+}
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with @builtin(sample_mask),
+// @builtin(sample_index) and @builtin(front_facing).
+TEST_P(MaxInterStageLimitTests, SampleMask_SampleIndex_FrontFacing) {
+    MaxInterStageLimitTestsSpec spec = {};
+    spec.hasSampleMask = true;
+    spec.hasSampleIndex = true;
+    spec.hasFrontFacing = true;
+    DoTest(spec);
+}
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with PointList primitive topology. On Vulkan when the primitive topology is PointList,
+// the SPIR-V builtin PointSize must be declared in vertex shader, which will consume 1 inter-stage
+// shader component.
+TEST_P(MaxInterStageLimitTests, RenderPointList) {
+    MaxInterStageLimitTestsSpec spec = {};
+    spec.renderPointLists = true;
+    DoTest(spec);
+}
+
+// Tests that both maxInterStageShaderComponents and maxInterStageShaderVariables work for a render
+// pipeline with PointList primitive topology, @builtin(sample_mask),
+// @builtin(sample_index) and @builtin(front_facing).
+TEST_P(MaxInterStageLimitTests, RenderPointList_SampleMask_SampleIndex_FrontFacing) {
+    MaxInterStageLimitTestsSpec spec = {};
+    spec.renderPointLists = true;
+    spec.hasSampleMask = true;
+    spec.hasSampleIndex = true;
+    spec.hasFrontFacing = true;
+    DoTest(spec);
+}
+
+DAWN_INSTANTIATE_TEST(MaxInterStageLimitTests,
+                      D3D11Backend(),
+                      D3D12Backend({}, {"use_dxc"}),
+                      D3D12Backend({"use_dxc"}),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
 }  // anonymous namespace
 }  // namespace dawn
