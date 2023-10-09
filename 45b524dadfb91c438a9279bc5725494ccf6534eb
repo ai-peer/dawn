@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t this also require `TINT_BUILD_WGSL_WRITER`? So in fact, should this whole fuzz target be conditionally included based on whether the WGSL writer is enabled?",
       "revId": "45b524dadfb91c438a9279bc5725494ccf6534eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62df0b79_0622a623",
+        "filename": "src/tint/lang/wgsl/ir_roundtrip_fuzz.cc",
+        "patchSetId": 12
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-09T19:07:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bd97fd0_e30e7c43",
+      "revId": "45b524dadfb91c438a9279bc5725494ccf6534eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
