@@ -46,7 +46,6 @@
 #include "src/tint/lang/wgsl/ast/transform/single_entry_point.h"
 #include "src/tint/lang/wgsl/ast/transform/substitute_override.h"
 #include "src/tint/lang/wgsl/helpers/flatten_bindings.h"
-#include "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.h"
 #include "src/tint/utils/cli/cli.h"
 #include "src/tint/utils/command/command.h"
 #include "src/tint/utils/containers/transform.h"
@@ -61,6 +60,7 @@
 #endif  // TINT_BUILD_SPV_READER
 
 #if TINT_BUILD_WGSL_READER
+#include "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.h"
 #include "src/tint/lang/wgsl/reader/reader.h"
 #endif  // TINT_BUILD_WGSL_READER
 
@@ -631,7 +631,8 @@ bool GenerateSpirv(const tint::Program& program, const Options& options) {
 /// @param program the program to generate
 /// @param options the options that Tint was invoked with
 /// @returns true on success
-bool GenerateWgsl(const tint::Program& program, const Options& options) {
+bool GenerateWgsl([[maybe_unused]] const tint::Program& program,
+                  [[maybe_unused]] const Options& options) {
 #if TINT_BUILD_WGSL_WRITER
     // TODO(jrprice): Provide a way for the user to set non-default options.
     tint::wgsl::writer::Options gen_options;
@@ -650,6 +651,7 @@ bool GenerateWgsl(const tint::Program& program, const Options& options) {
         PrintHash(hash);
     }
 
+#if TINT_BUILD_WGSL_READER
     if (options.validate && options.skip_hash.count(hash) == 0) {
         // Attempt to re-parse the output program with Tint's WGSL reader.
         auto source = std::make_unique<tint::Source::File>(options.input_filename, result->wgsl);
@@ -661,11 +663,10 @@ bool GenerateWgsl(const tint::Program& program, const Options& options) {
             return false;
         }
     }
+#endif  // TINT_BUILD_WGSL_READER
 
     return true;
 #else
-    (void)program;
-    (void)options;
     std::cerr << "WGSL writer not enabled in tint build" << std::endl;
     return false;
 #endif  // TINT_BUILD_WGSL_WRITER
