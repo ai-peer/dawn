@@ -1,4 +1,4 @@
-// Copyright 2021 The Tint Authors.
+// Copyright 2023 The Tint Authors.
 //
 // Licensed under the Apache License, Version 2.0 (the "License");
 // you may not use this file except in compliance with the License.
@@ -12,19 +12,20 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include <string>
+// GEN_BUILD:CONDITION(tint_build_wgsl_reader)
 
-#include "src/tint/fuzzers/fuzzer_init.h"
-#include "src/tint/fuzzers/tint_reader_writer_fuzzer.h"
+#include "src/tint/lang/wgsl/writer/ast_printer/ast_printer.h"
 
-namespace tint::fuzzers {
+#include "src/tint/cmd/fuzz/wgsl/wgsl_fuzz.h"
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
-    tint::fuzzers::ReaderWriterFuzzer fuzzer(InputFormat::kWGSL, OutputFormat::kWGSL);
-    fuzzer.SetDumpInput(GetCliParams().dump_input);
-    fuzzer.SetEnforceValidity(GetCliParams().enforce_validity);
+namespace tint::wgsl::writer {
+namespace {
 
-    return fuzzer.Run(data, size);
+void ASTPrinterFuzzer(const tint::Program& program) {
+    ASTPrinter{program}.Generate();
 }
 
-}  // namespace tint::fuzzers
+}  // namespace
+}  // namespace tint::wgsl::writer
+
+TINT_WGSL_PROGRAM_FUZZER(tint::wgsl::writer::ASTPrinterFuzzer);
