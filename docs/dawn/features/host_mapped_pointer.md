@@ -8,7 +8,8 @@ Allows creation of buffers from host-mapped pointers. These may be pointers from
 
 ## Requirements
  - `wgpu::FeatureName::HostMappedPointer` must be supported and enabled.
- - Both the address of the pointer and the size of the allocation that the pointer refers to must be aligned to OS-specific requirements. This is 4Kb on Mac / Linux and 64Kb on Windows. Buffers must be created with a mappable buffer usage. However, none of the mapping APIs may actually be called on the buffer since it is effectively persistently mapped.
+ - Both the address of the pointer and the size of the allocation that the pointer refers to must be aligned to OS-specific requirements. This is 4Kb on Mac / Linux and 64Kb on Windows.
+ - None of the mapping APIs may actually be called on the buffer since it is effectively persistently mapped.
 
 ## Example Usage
 ```c++
@@ -32,7 +33,7 @@ hostMappedDesc.disposeCallback = [](void* userdata) {
 hostMappedDesc.userdata = new std::tuple<int, void*, size_t>(fd, ptr, size);
 
 wgpu::BufferDescriptor bufferDesc;
-bufferDesc.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::MapWrite;
+bufferDesc.usage = wgpu::BufferUsage::CopySrc;
 bufferDesc.size = size;
 bufferDesc.nextInChain = &hostMappedDesc;
 
