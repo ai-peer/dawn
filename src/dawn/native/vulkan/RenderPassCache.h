@@ -46,9 +46,10 @@ struct RenderPassCacheQuery {
     void SetDepthStencil(wgpu::TextureFormat format,
                          wgpu::LoadOp depthLoadOp,
                          wgpu::StoreOp depthStoreOp,
+                         bool depthReadOnly,
                          wgpu::LoadOp stencilLoadOp,
                          wgpu::StoreOp stencilStoreOp,
-                         bool readOnly);
+                         bool stencilRendOnly);
     void SetSampleCount(uint32_t sampleCount);
 
     ityp::bitset<ColorAttachmentIndex, kMaxColorAttachments> colorMask;
@@ -61,9 +62,10 @@ struct RenderPassCacheQuery {
     wgpu::TextureFormat depthStencilFormat;
     wgpu::LoadOp depthLoadOp;
     wgpu::StoreOp depthStoreOp;
+    bool depthReadOnly;
     wgpu::LoadOp stencilLoadOp;
     wgpu::StoreOp stencilStoreOp;
-    bool readOnlyDepthStencil;
+    bool stencilReadOnly;
 
     uint32_t sampleCount;
 };
