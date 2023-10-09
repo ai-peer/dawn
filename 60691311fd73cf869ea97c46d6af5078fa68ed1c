@@ -16,6 +16,24 @@
       "message": "nit: we have [ComputeRequiredBytesInCopy](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CommandValidation.h;l\u003d60;drc\u003df5bdc89c7395ed24f1b8d196a3bdd6232d5bf771;bpv\u003d1;bpt\u003d1?q\u003df:dawn%20RequiredBytesIn\u0026ss\u003dchromium%2Fchromium%2Fsrc)",
       "revId": "60691311fd73cf869ea97c46d6af5078fa68ed1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5dba0c5_4ba4f421",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1727,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-09T23:46:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9161769d_1b3880f6",
+      "revId": "60691311fd73cf869ea97c46d6af5078fa68ed1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

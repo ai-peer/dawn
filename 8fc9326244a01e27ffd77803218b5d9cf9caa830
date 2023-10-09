@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3a373885_011ff26f",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 194,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-09T23:46:50Z",
+      "side": 1,
+      "message": "Skip ANGLE D3D11 failures. Since we are having D3D11 dawn backend, I think ANGLE + D3D11 will be \"Won\u0027t Fix\". Is this configuration recently added? Why do we need to run angle D3D11 for dawn compat tests?",
+      "revId": "8fc9326244a01e27ffd77803218b5d9cf9caa830",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
