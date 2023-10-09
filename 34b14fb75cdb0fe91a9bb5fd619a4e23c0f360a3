@@ -16,6 +16,57 @@
       "message": "PTAL, thanks!",
       "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29df2956_d3f09c3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-09T14:06:09Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2234df29_dee0810d",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-09T14:06:09Z",
+      "side": 1,
+      "message": "I\u0027d have thought we\u0027d increased the fixed size, but the vector seems fine. Any reason you preferred it?",
+      "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "399d09c4_ddffc973",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-09T14:06:09Z",
+      "side": 1,
+      "message": "We already compute the correct value in the adapter, it\u0027s the frontend that needs to limit the size of this. Why do we have to limit in the backend now?",
+      "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
