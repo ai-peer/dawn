@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2557dec_abb685ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-09T14:15:18Z",
+      "side": 1,
+      "message": "Reverting to unblock the Dawn-\u003eChrome roll. https://ci.chromium.org/ui/p/chromium/builders/try/linux-chromeos-rel-compilator/763880/overview \n\n```\nCXX obj/third_party/dawn/src/dawn/tests/end2end_tests_sources/VideoViewsTests_gbm.o\n../../third_party/llvm-build/Release+Asserts/bin/clang++ -MMD -MF obj/third_party/dawn/src/dawn/test...(too long)\n../../third_party/dawn/src/dawn/tests/end2end/VideoViewsTests_gbm.cpp:110:24: error: use of undeclared identifier \u0027GBM_FORMAT_P010\u0027\n  110 |                 return GBM_FORMAT_P010;\n      |                        ^\n1 error generated.\nrun for 4d609c15-7f76-490f-82d4-1405c8c82c36: reproxy error: exit\u003d1\nerror: run for 4d609c15-7f76-490f-82d4-1405c8c82c36: reproxy error: exit\u003d1\n```\n\nNot sure why, at least in a few gbm.h I looked at, that macro was defined.",
+      "revId": "ec011c4e2f8f0bdcb81dcde63ff7556cf3e562d9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
