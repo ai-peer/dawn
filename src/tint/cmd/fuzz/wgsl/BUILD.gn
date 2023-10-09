@@ -72,6 +72,7 @@ tint_fuzzer_test("wgsl") {
     "${tint_src_dir}/lang/wgsl/program",
     "${tint_src_dir}/lang/wgsl/program:fuzz",
     "${tint_src_dir}/lang/wgsl/sem",
+    "${tint_src_dir}/lang/wgsl/writer/ast_printer:fuzz",
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/diagnostic",
     "${tint_src_dir}/utils/ice",
