@@ -307,10 +307,7 @@ if (tint_has_fuzzers) {
     deps = []
 
     if (tint_build_wgsl_reader && tint_build_wgsl_writer) {
-      deps += [
-        ":tint_regex_wgsl_writer_fuzzer",
-        ":tint_wgsl_reader_wgsl_writer_fuzzer",
-      ]
+      deps += [ ":tint_regex_wgsl_writer_fuzzer" ]
       if (build_with_chromium) {
         deps += [ ":tint_ast_wgsl_writer_fuzzer" ]
       }
