@@ -232,18 +232,6 @@ void FillVulkanCreateInfoSizesAndType(const Texture& texture, VkImageCreateInfo*
 }
 
 Aspect ComputeCombinedAspect(Device* device, const Format& format) {
-    // In early Vulkan versions it is not possible to transition depth and stencil separetely so
-    // textures with Depth|Stencil will be promoted to a single CombinedDepthStencil aspect
-    // internally.
-    if (format.aspects == (Aspect::Depth | Aspect::Stencil)) {
-        return Aspect::CombinedDepthStencil;
-    }
-    // Same thing for Stencil8 if it is emulated with a depth-stencil format and not directly S8.
-    if (format.format == wgpu::TextureFormat::Stencil8 &&
-        !device->IsToggleEnabled(Toggle::VulkanUseS8)) {
-        return Aspect::CombinedDepthStencil;
-    }
-
     // Some multiplanar images cannot have planes transitioned separately and instead Vulkan
     // requires that the "Color" aspect be used for barriers, so Plane0|Plane1 is promoted to just
     // Color. The Vulkan spec requires: "If image has a single-plane color format or is not
@@ -1378,7 +1366,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* recordingContext,
                 imageRange.aspectMask = VulkanAspectMask(aspects);
                 imageRange.baseArrayLayer = layer;
 
-                if (aspects & (Aspect::Depth | Aspect::Stencil | Aspect::CombinedDepthStencil)) {
+                if (aspects & (Aspect::Depth | Aspect::Stencil)) {
                     VkClearDepthStencilValue clearDepthStencilValue[1];
                     clearDepthStencilValue[0].depth = fClearColor;
                     clearDepthStencilValue[0].stencil = uClearColor;
