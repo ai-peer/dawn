@@ -326,7 +326,6 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                             switch (aspect) {
                                 case Aspect::None:
                                 case Aspect::Color:
-                                case Aspect::CombinedDepthStencil:
                                 case Aspect::Plane0:
                                 case Aspect::Plane1:
                                     DAWN_UNREACHABLE();
@@ -708,7 +707,6 @@ MaybeError CommandBuffer::Execute() {
                         glType = GL_UNSIGNED_BYTE;
                         break;
 
-                    case Aspect::CombinedDepthStencil:
                     case Aspect::None:
                     case Aspect::Plane0:
                     case Aspect::Plane1:

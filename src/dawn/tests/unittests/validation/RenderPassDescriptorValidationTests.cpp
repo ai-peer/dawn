@@ -1247,6 +1247,7 @@ TEST_F(RenderPassDescriptorValidationTest, DefaultDepthClearValue) {
     AssertBeginRenderPassSuccess(&renderPassDescriptor);
 }
 
+// Check the validation rules around depth/stencilReadOnly
 TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     wgpu::TextureView colorView = Create2DAttachment(device, 1, 1, wgpu::TextureFormat::RGBA8Unorm);
     wgpu::TextureView depthStencilView =
@@ -1267,7 +1268,7 @@ TEST_F(RenderPassDescriptorValidationTest, ValidateDepthStencilReadOnly) {
     }
 
     // Tests that a pass with mismatched depthReadOnly and stencilReadOnly values passes when
-    // there is no stencil component in the format (deprecated).
+    // there is no stencil component in the format.
     {
         utils::ComboRenderPassDescriptor renderPass({colorView}, depthStencilViewNoStencil);
         renderPass.cDepthStencilAttachmentInfo.depthLoadOp = wgpu::LoadOp::Undefined;
