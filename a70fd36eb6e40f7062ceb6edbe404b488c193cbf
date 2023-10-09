@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b890bc4a_d473a436",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-09T15:52:09Z",
+      "side": 1,
+      "message": "Roll seemed to work last night - passing it off to you to verify it looks OK / submit",
+      "revId": "a70fd36eb6e40f7062ceb6edbe404b488c193cbf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
