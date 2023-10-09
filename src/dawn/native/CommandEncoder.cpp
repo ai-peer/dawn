@@ -411,13 +411,6 @@ MaybeError ValidateRenderPassDepthStencilAttachment(
                     "The depth stencil attachment %s format (%s) is not renderable.", attachment,
                     format.format);
 
-    DAWN_INVALID_IF(
-        attachment->GetAspects() == (Aspect::Depth | Aspect::Stencil) &&
-            depthStencilAttachment->depthReadOnly != depthStencilAttachment->stencilReadOnly,
-        "depthReadOnly (%u) and stencilReadOnly (%u) must be the same when texture aspect "
-        "is 'all'.",
-        depthStencilAttachment->depthReadOnly, depthStencilAttachment->stencilReadOnly);
-
     // Read only, or depth doesn't exist.
     if (depthStencilAttachment->depthReadOnly ||
         !IsSubset(Aspect::Depth, attachment->GetAspects())) {
