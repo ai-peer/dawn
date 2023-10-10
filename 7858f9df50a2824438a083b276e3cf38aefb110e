@@ -16,6 +16,23 @@
       "message": "can I haz re-review?",
       "revId": "7858f9df50a2824438a083b276e3cf38aefb110e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27dc313b_e4bb16a7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T13:15:22Z",
+      "side": 1,
+      "message": "LGTM too",
+      "revId": "7858f9df50a2824438a083b276e3cf38aefb110e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

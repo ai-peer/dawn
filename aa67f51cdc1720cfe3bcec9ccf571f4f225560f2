@@ -396,6 +396,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2cb09af2_34047ba9",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 211,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T13:15:22Z",
+      "side": 1,
+      "message": "They still need to be removed!",
+      "parentUuid": "dcc89c01_de1fcffa",
+      "revId": "aa67f51cdc1720cfe3bcec9ccf571f4f225560f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "03c1800c_05208975",
         "filename": "src/dawn/native/vulkan/DeviceVk.h",
         "patchSetId": 7
