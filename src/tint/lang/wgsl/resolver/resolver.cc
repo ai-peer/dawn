@@ -2155,8 +2155,11 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
             stage = core::EvaluationStage::kNotEvaluated;
         }
         if (stage == core::EvaluationStage::kConstant) {
-            auto els = tint::Transform(args, [&](auto* arg) { return arg->ConstantValue(); });
-            if (auto r = const_eval_.ArrayOrStructCtor(ty, std::move(els))) {
+            auto const_args = ConvertArguments(args, call_target);
+            if (!const_args) {
+                return nullptr;
+            }
+            if (auto r = const_eval_.ArrayOrStructCtor(ty, std::move(const_args.Get()))) {
                 value = r.Get();
             } else {
                 return nullptr;
