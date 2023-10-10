@@ -16,6 +16,57 @@
       "message": "Hi @cwallez@chromium.org and @bclayton@chromium.org,\n\nI addressed your main suggestion: We can now fetch partition_alloc in `third_party`. Partition_alloc is now declaring its include_dirs. \n\nIt took me longer than expected (\u003e40 patches so far), and I still have 3-4 to do. I am confident to complete it this week, so we can move forward with this patch.\n\nCould you please another look?",
       "revId": "310aa45d7836cf6c0d3338bcf32764da19926cb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "092eec1d_f826fd83",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T13:35:10Z",
+      "side": 1,
+      "message": "LGTM! Thank you for pulling partition alloc to its own dependency!",
+      "revId": "310aa45d7836cf6c0d3338bcf32764da19926cb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7b1cde7_d6a27240",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T13:35:10Z",
+      "side": 1,
+      "message": "This link doesn\u0027t work :(",
+      "revId": "310aa45d7836cf6c0d3338bcf32764da19926cb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9f2dc36d_5aaf0be8",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T13:35:10Z",
+      "side": 1,
+      "message": "Can you describe briefly why this is needed?",
+      "revId": "310aa45d7836cf6c0d3338bcf32764da19926cb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
