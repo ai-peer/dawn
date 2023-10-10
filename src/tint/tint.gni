@@ -123,8 +123,13 @@ if (tint_has_fuzzers) {
         ]
         seed_corpus = fuzzer_corpus_wgsl_dir
         seed_corpus_deps = [ "${tint_src_dir}:tint_generate_wgsl_corpus" ]
+      } else if (target_name == "ir") {
+        libfuzzer_options = [
+          "max_len=10000",
+        ]
       } else {
-        assert(false, "unsupported tint fuzzer target")
+        print("unsupported tint fuzzer target '${target_name}'")
+        assert(false)
       }
     }
   }
