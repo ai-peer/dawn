@@ -22,6 +22,30 @@
       },
       "revId": "5766a29826066bf3bf3490b624e6f0aaac8c017c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ed35cd3_6dbfa269",
+        "filename": "src/tint/cmd/loopy/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-10T20:10:49Z",
+      "side": 1,
+      "message": "Because we use `tint::writer::FlattenBindings` a few lines down.\n\nI\u0027m not attempting to untangle weird dependencies in this CL, just properly make stuff build.",
+      "parentUuid": "acd2098f_cbc4ac64",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 17
+      },
+      "revId": "5766a29826066bf3bf3490b624e6f0aaac8c017c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
