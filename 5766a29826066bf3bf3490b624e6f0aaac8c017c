@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "acd2098f_cbc4ac64",
+        "filename": "src/tint/cmd/loopy/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-10T19:25:50Z",
+      "side": 1,
+      "message": "Why are we guarding on WGSL writer here?",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 17
+      },
+      "revId": "5766a29826066bf3bf3490b624e6f0aaac8c017c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
