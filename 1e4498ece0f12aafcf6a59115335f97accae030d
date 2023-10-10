@@ -34,6 +34,46 @@
       "parentUuid": "e8387db9_c30ec134",
       "revId": "1e4498ece0f12aafcf6a59115335f97accae030d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a407df79_102d0117",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-10-10T18:30:37Z",
+      "side": 1,
+      "message": "`[1]` (see below)\n\n```\n        if (auto* param \u003d As\u003csem::Parameter\u003e(texture)) {\n            texture \u003d args[param-\u003eIndex()]-\u003eUnwrapLoad()-\u003eAs\u003csem::VariableUser\u003e()-\u003eVariable();\n            texture_sampler_set.Add(texture);\n        }\n        if (auto* param \u003d As\u003csem::Parameter\u003e(sampler)) {\n            sampler \u003d args[param-\u003eIndex()]-\u003eUnwrapLoad()-\u003eAs\u003csem::VariableUser\u003e()-\u003eVariable();\n            texture_sampler_set.Add(sampler);\n        }\n```",
+      "range": {
+        "startLine": 3125,
+        "startChar": 0,
+        "endLine": 3134,
+        "endChar": 9
+      },
+      "revId": "1e4498ece0f12aafcf6a59115335f97accae030d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6077014_a4c76b84",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3159,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-10-10T18:30:37Z",
+      "side": 1,
+      "message": "The reason for the crash is that you\u0027re adding a `nullptr` texture, then attempting to cast this pointer on L3125.\n\nThe docs for `AddTextureSamplerPair` says:\n`/// @param texture the texture (must be non-null)`\n\nIf you want to support null textures, then please fix the doxygen for `AddTextureSamplerPair` and change `texture-\u003eAs\u003csem::Parameter\u003e()` as described at `[1]`",
+      "revId": "1e4498ece0f12aafcf6a59115335f97accae030d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
