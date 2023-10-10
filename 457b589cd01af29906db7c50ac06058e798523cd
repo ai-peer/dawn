@@ -33,6 +33,24 @@
       "message": "This doesn\u0027t seem validated in this CL.",
       "revId": "457b589cd01af29906db7c50ac06058e798523cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cec3cc35_e8582f5b",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T15:50:47Z",
+      "side": 1,
+      "message": "it\u0027s validated already when the feature was added (and still tested).\nI just split the above comment into a new bullet point",
+      "parentUuid": "866239f0_f3dba274",
+      "revId": "457b589cd01af29906db7c50ac06058e798523cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
