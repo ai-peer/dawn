@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6233f1c0_0ad0944e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T11:27:50Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "457b589cd01af29906db7c50ac06058e798523cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "866239f0_f3dba274",
+        "filename": "docs/dawn/features/host_mapped_pointer.md",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T11:27:50Z",
+      "side": 1,
+      "message": "This doesn\u0027t seem validated in this CL.",
+      "revId": "457b589cd01af29906db7c50ac06058e798523cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
