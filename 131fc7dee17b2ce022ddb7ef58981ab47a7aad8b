@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e14be5aa_4762b03d",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-10T08:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd644799_c8419246",
+      "range": {
+        "startLine": 734,
+        "startChar": 32,
+        "endLine": 734,
+        "endChar": 50
+      },
+      "revId": "131fc7dee17b2ce022ddb7ef58981ab47a7aad8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "273c5575_13d9cdfa",
@@ -75,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2257cb76_0e78794d",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-10T08:10:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "273c5575_13d9cdfa",
+      "revId": "131fc7dee17b2ce022ddb7ef58981ab47a7aad8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d646b88a_201ce256",
@@ -88,6 +130,24 @@
       "writtenOn": "2023-10-09T13:57:09Z",
       "side": 1,
       "message": "I can\u0027t remember for sure, but are we allowed to nest IO structs?\n\n```\nstruct InterStage {\n  foo: f32,\n  bar : f32,\n}\n\nstruct VertexOutput {\n  is : InterStage,\n  @builtin(position) pos : vec4f,\n}\n\nstrict FragmentInput {\n  is : InterStage,\n  // other builtins\n}\n```\n\nIt could help simplify the code by having `GetInterStageVariableDeclarations` just used a single time for both shaders, so we have a single source and a single module.\n\n(and potentially we can loop over the variables only once, adding to the InterStage struct, its creation in the VS, its consumption in the FS and assembling everything at the end)",
+      "revId": "131fc7dee17b2ce022ddb7ef58981ab47a7aad8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "835157a3_2d7086db",
+        "filename": "src/dawn/tests/end2end/MaxLimitTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 804,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-10T08:10:32Z",
+      "side": 1,
+      "message": "Done\n\nOther builtins in fragment shader are declared as below (not in VertexOut):\n@fragment\nfn fs_main(\n    input: VertexOut,\n    @builtin(front_facing) isFront : bool,\n    @builtin(sample_index) sampleIndex : u32,\n    @builtin(sample_mask) sampleMask : u32) -\u003e @location(0) vec4f",
+      "parentUuid": "d646b88a_201ce256",
       "revId": "131fc7dee17b2ce022ddb7ef58981ab47a7aad8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
