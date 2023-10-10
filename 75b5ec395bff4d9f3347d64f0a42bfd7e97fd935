@@ -99,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa886f1d_70d3f546",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-10T11:56:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3f05b991_6c16ee9a",
+      "revId": "75b5ec395bff4d9f3347d64f0a42bfd7e97fd935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98255b91_ed19cbdd",
@@ -112,6 +130,24 @@
       "writtenOn": "2023-10-10T11:14:11Z",
       "side": 1,
       "message": "Does this need to be conditional as well?",
+      "revId": "75b5ec395bff4d9f3347d64f0a42bfd7e97fd935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efe361cd_a4ff0fa7",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-10T11:56:42Z",
+      "side": 1,
+      "message": "No, the fuzzer targets are no-op if `use_libfuzzer` isn\u0027t set - but I prefer the symmetry, so done.",
+      "parentUuid": "98255b91_ed19cbdd",
       "revId": "75b5ec395bff4d9f3347d64f0a42bfd7e97fd935",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
