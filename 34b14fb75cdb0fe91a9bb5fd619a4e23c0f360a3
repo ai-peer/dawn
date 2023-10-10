@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1110b079_96cd8021",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-10T08:10:38Z",
+      "side": 1,
+      "message": "I use vector\u003cbool\u003e because on Metal the “Maximum scalars or vectors inputs to a fragment function” can be 124 (https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf), which I feel is too large and wasting spaces for other backends, and I see vector\u003cbool\u003e has already been used in many places in Dawn.\n\nDo you prefer using 124 as the fixed size?",
+      "parentUuid": "2234df29_dee0810d",
+      "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "399d09c4_ddffc973",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 6
@@ -65,6 +83,24 @@
       "writtenOn": "2023-10-09T14:06:09Z",
       "side": 1,
       "message": "We already compute the correct value in the adapter, it\u0027s the frontend that needs to limit the size of this. Why do we have to limit in the backend now?",
+      "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e6f8f33_88e183d1",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-10T08:10:38Z",
+      "side": 1,
+      "message": "On Metal we lack the maximum value of maxInterStageShaderVariables (\"the maximum scalars or vectors inputs to a fragment function\" in https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf, Page 6).\n\nANGLE HLSL compilers will always generate extra varyings (e.g. gl_PointSize and dx_Position).\n\nI\u0027d like to add these values in separated CLs. What do you think?",
+      "parentUuid": "399d09c4_ddffc973",
       "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
