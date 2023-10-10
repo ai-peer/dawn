@@ -657,7 +657,8 @@ void Texture::ResetSubresourceStateAndDecayToCommon() {
 D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(const Format& format,
                                                         uint32_t mipLevel,
                                                         uint32_t baseSlice,
-                                                        uint32_t sliceCount) const {
+                                                        uint32_t sliceCount,
+                                                        uint32_t planeSlice) const {
     D3D12_RENDER_TARGET_VIEW_DESC rtvDesc;
     rtvDesc.Format = d3d::DXGITextureFormat(format.format);
     if (IsMultisampledTexture()) {
@@ -681,7 +682,7 @@ D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(const Format& format,
             rtvDesc.Texture2DArray.FirstArraySlice = baseSlice;
             rtvDesc.Texture2DArray.ArraySize = sliceCount;
             rtvDesc.Texture2DArray.MipSlice = mipLevel;
-            rtvDesc.Texture2DArray.PlaneSlice = 0;
+            rtvDesc.Texture2DArray.PlaneSlice = planeSlice;
             break;
         case wgpu::TextureDimension::e3D:
             rtvDesc.ViewDimension = D3D12_RTV_DIMENSION_TEXTURE3D;
@@ -815,7 +816,7 @@ MaybeError Texture::ClearTexture(CommandRecordingContext* commandContext,
                     sliceCount = std::max(GetDepth(Aspect::Color) >> level, 1u);
                 }
                 D3D12_RENDER_TARGET_VIEW_DESC rtvDesc =
-                    GetRTVDescriptor(GetFormat(), level, baseSlice, sliceCount);
+                    GetRTVDescriptor(GetFormat(), level, baseSlice, sliceCount, /*planeSlice=*/0);
                 device->GetD3D12Device()->CreateRenderTargetView(GetD3D12Resource(), &rtvDesc,
                                                                  rtvHandle);
                 commandList->ClearRenderTargetView(rtvHandle, clearColorRGBA, 0, nullptr);
@@ -1084,8 +1085,10 @@ const D3D12_SHADER_RESOURCE_VIEW_DESC& TextureView::GetSRVDescriptor() const {
 }
 
 D3D12_RENDER_TARGET_VIEW_DESC TextureView::GetRTVDescriptor() const {
+    uint32_t planeSlice = GetAspects() == Aspect::Plane1 ? 1 : 0;
     return ToBackend(GetTexture())
-        ->GetRTVDescriptor(GetFormat(), GetBaseMipLevel(), GetBaseArrayLayer(), GetLayerCount());
+        ->GetRTVDescriptor(GetFormat(), GetBaseMipLevel(), GetBaseArrayLayer(), GetLayerCount(),
+                           planeSlice);
 }
 
 D3D12_DEPTH_STENCIL_VIEW_DESC TextureView::GetDSVDescriptor(bool depthReadOnly,
