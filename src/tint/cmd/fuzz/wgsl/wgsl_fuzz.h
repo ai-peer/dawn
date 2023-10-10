@@ -17,9 +17,13 @@
 
 #include <string>
 
-#include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/utils/containers/slice.h"
 #include "src/tint/utils/macros/static_init.h"
+
+// Forward declarations
+namespace tint {
+class Program;
+}
 
 namespace tint::fuzz::wgsl {
 
