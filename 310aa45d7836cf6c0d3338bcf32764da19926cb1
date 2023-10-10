@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "59bc7a84_fe3a3c8c",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 269,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-10-10T14:38:49Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "f7b1cde7_d6a27240",
+      "revId": "310aa45d7836cf6c0d3338bcf32764da19926cb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f2dc36d_5aaf0be8",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-10-10T13:35:10Z",
       "side": 1,
       "message": "Can you describe briefly why this is needed?",
+      "revId": "310aa45d7836cf6c0d3338bcf32764da19926cb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1ecfe3d_e7ec1384",
+        "filename": "DEPS",
+        "patchSetId": 4
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-10-10T14:38:49Z",
+      "side": 1,
+      "message": "Excellent question!\n\nThe dependency over lss got removed, while I was working on this CL.\nhttps://chromium-review.googlesource.com/c/chromium/src/+/4660208\n\nSo, it isn\u0027t useful anymore. Excellent!",
+      "parentUuid": "9f2dc36d_5aaf0be8",
       "revId": "310aa45d7836cf6c0d3338bcf32764da19926cb1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
