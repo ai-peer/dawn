@@ -30,6 +30,7 @@
 #include <iostream>
 #include <thread>
 
+#include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/lang/wgsl/reader/reader.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/macros/defer.h"
