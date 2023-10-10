@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "492d11dd_50b299e3",
+        "filename": "LICENSE",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T23:05:51Z",
+      "side": 1,
+      "message": "manually did this",
+      "revId": "b2484b69c16e543974a84911b6322c2694fba543",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "991f053d_d497917b",
+        "filename": "README.chromium",
+        "patchSetId": 2
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T23:05:51Z",
+      "side": 1,
+      "message": "manually did this",
+      "revId": "b2484b69c16e543974a84911b6322c2694fba543",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e546aeef_bc97de8e",
+        "filename": "README.md",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T23:05:51Z",
+      "side": 1,
+      "message": "manually did this",
+      "revId": "b2484b69c16e543974a84911b6322c2694fba543",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "69cd9067_a59c072c",
+        "filename": "dawn.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T23:05:51Z",
+      "side": 1,
+      "message": "manually did this",
+      "revId": "b2484b69c16e543974a84911b6322c2694fba543",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a61c589b_41394284",
+        "filename": "dawn_wire.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T23:05:51Z",
+      "side": 1,
+      "message": "manually did this",
+      "revId": "b2484b69c16e543974a84911b6322c2694fba543",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5adefb3_d741536d",
+        "filename": "src/dawn/fuzzers/lpmfuzz/dawn_lpm.json",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T23:05:51Z",
+      "side": 1,
+      "message": "manually did this",
+      "revId": "b2484b69c16e543974a84911b6322c2694fba543",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
