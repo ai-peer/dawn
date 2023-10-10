@@ -46,6 +46,30 @@
       },
       "revId": "5766a29826066bf3bf3490b624e6f0aaac8c017c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddde8ee5_d5e957fd",
+        "filename": "src/tint/cmd/loopy/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-10T20:39:32Z",
+      "side": 1,
+      "message": "I see, but then surely we\u0027d need the same change in the main Tint exe as well?",
+      "parentUuid": "9ed35cd3_6dbfa269",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 17
+      },
+      "revId": "5766a29826066bf3bf3490b624e6f0aaac8c017c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
