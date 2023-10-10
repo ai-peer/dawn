@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aadc6008_df3c09d6",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T11:31:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1110b079_96cd8021",
+      "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "399d09c4_ddffc973",
@@ -101,6 +119,24 @@
       "side": 1,
       "message": "On Metal we lack the maximum value of maxInterStageShaderVariables (\"the maximum scalars or vectors inputs to a fragment function\" in https://developer.apple.com/metal/Metal-Feature-Set-Tables.pdf, Page 6).\n\nANGLE HLSL compilers will always generate extra varyings (e.g. gl_PointSize and dx_Position).\n\nI\u0027d like to add these values in separated CLs. What do you think?",
       "parentUuid": "399d09c4_ddffc973",
+      "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c42724cf_2bc239f3",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 6
+      },
+      "lineNbr": 788,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-10T11:31:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5e6f8f33_88e183d1",
       "revId": "34b14fb75cdb0fe91a9bb5fd619a4e23c0f360a3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
