@@ -59,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34b9edae_3dfddf5e",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3134,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-10T20:47:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a407df79_102d0117",
+      "range": {
+        "startLine": 3125,
+        "startChar": 0,
+        "endLine": 3134,
+        "endChar": 9
+      },
+      "revId": "1e4498ece0f12aafcf6a59115335f97accae030d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a6077014_a4c76b84",
@@ -72,6 +96,24 @@
       "writtenOn": "2023-10-10T18:30:37Z",
       "side": 1,
       "message": "The reason for the crash is that you\u0027re adding a `nullptr` texture, then attempting to cast this pointer on L3125.\n\nThe docs for `AddTextureSamplerPair` says:\n`/// @param texture the texture (must be non-null)`\n\nIf you want to support null textures, then please fix the doxygen for `AddTextureSamplerPair` and change `texture-\u003eAs\u003csem::Parameter\u003e()` as described at `[1]`",
+      "revId": "1e4498ece0f12aafcf6a59115335f97accae030d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2f8caa_600601ca",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 3159,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-10T20:47:27Z",
+      "side": 1,
+      "message": "Thanks for helping with the repro and answering!",
+      "parentUuid": "a6077014_a4c76b84",
       "revId": "1e4498ece0f12aafcf6a59115335f97accae030d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
