@@ -16,6 +16,23 @@
       "message": "Thank you for the discussions, still LGTM",
       "revId": "e3b52e74a0c9f1199ece1d220f9c2e420ec93f6c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecf12c34_89260804",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T16:58:42Z",
+      "side": 1,
+      "message": "src/dawn LGTM too",
+      "revId": "e3b52e74a0c9f1199ece1d220f9c2e420ec93f6c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
