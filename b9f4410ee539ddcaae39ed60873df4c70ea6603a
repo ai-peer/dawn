@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "471e8fae_7ea60b15",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-10T06:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b548207d_85ef3d1a",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31bc25c9_cd7117a0",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-10-05T11:51:47Z",
       "side": 1,
       "message": "u-nit: Maybe we can have a comment showing that we need to have both ReadyHook and CompleteImpl for child classes.",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4fc8f8f_369960ef",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-10T06:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31bc25c9_cd7117a0",
       "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2680e8e7_c99d0768",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-10T06:36:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c895be93_3e19e737",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a1ee28c_4b7b3fbc",
@@ -99,6 +153,24 @@
       "writtenOn": "2023-10-05T11:51:47Z",
       "side": 1,
       "message": "I wonder if it might be worth having FatalError created by a method so we can assert in it automatically. We could just file an issue for that and do it whenever.",
+      "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f40e0962_cccfc8cc",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-10T06:36:59Z",
+      "side": 1,
+      "message": "Ack, filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2130",
+      "parentUuid": "9a1ee28c_4b7b3fbc",
       "revId": "b9f4410ee539ddcaae39ed60873df4c70ea6603a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
