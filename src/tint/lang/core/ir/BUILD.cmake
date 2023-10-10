@@ -223,3 +223,33 @@ tint_target_add_dependencies(tint_lang_core_ir_test test
 tint_target_add_external_dependencies(tint_lang_core_ir_test test
   "gtest"
 )
+
+################################################################################
+# Target:    tint_lang_core_ir_fuzz
+# Kind:      fuzz
+################################################################################
+tint_add_target(tint_lang_core_ir_fuzz fuzz
+  lang/core/ir/disassembler_fuzz.cc
+)
+
+tint_target_add_dependencies(tint_lang_core_ir_fuzz fuzz
+  tint_api_common
+  tint_cmd_fuzz_ir_fuzz
+  tint_lang_core
+  tint_lang_core_constant
+  tint_lang_core_ir
+  tint_lang_core_type
+  tint_utils_containers
+  tint_utils_diagnostic
+  tint_utils_ice
+  tint_utils_id
+  tint_utils_macros
+  tint_utils_math
+  tint_utils_memory
+  tint_utils_reflection
+  tint_utils_result
+  tint_utils_rtti
+  tint_utils_symbol
+  tint_utils_text
+  tint_utils_traits
+)

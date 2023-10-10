@@ -63,11 +63,12 @@ namespace utf8 {
 ///          If the next code point cannot be decoded then returns [0,0].
 std::pair<CodePoint, size_t> Decode(const uint8_t* ptr, size_t len);
 
-/// Decodes the first code point in the utf8 string.
+/// Decodes the code point within in the utf8 string.
 /// @param utf8_string the string view that contains the utf8 sequence
+/// @param offset the optional byte offset within @p utf8_string to the code point
 /// @returns a pair of CodePoint and width in code units (bytes).
 ///          If the next code point cannot be decoded then returns [0,0].
-std::pair<CodePoint, size_t> Decode(std::string_view utf8_string);
+std::pair<CodePoint, size_t> Decode(std::string_view utf8_string, size_t offset = 0);
 
 /// @returns true if all the utf-8 code points in the string are ASCII
 /// (code-points 0x00..0x7f).

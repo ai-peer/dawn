@@ -407,8 +407,12 @@ std::pair<CodePoint, size_t> Decode(const uint8_t* ptr, size_t len) {
     return {c, n};
 }
 
-std::pair<CodePoint, size_t> Decode(std::string_view utf8_string) {
-    return Decode(reinterpret_cast<const uint8_t*>(utf8_string.data()), utf8_string.size());
+std::pair<CodePoint, size_t> Decode(std::string_view utf8_string, size_t offset /* = 0 */) {
+    if (offset >= utf8_string.size()) {
+        return {CodePoint{}, 0};
+    }
+    return Decode(reinterpret_cast<const uint8_t*>(utf8_string.data()) + offset,
+                  utf8_string.size() - offset);
 }
 
 bool IsASCII(std::string_view str) {

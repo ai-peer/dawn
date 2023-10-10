@@ -44,7 +44,9 @@ Function* Builder::Function(std::string_view name,
                             std::optional<std::array<uint32_t, 3>> wg_size) {
     auto* ir_func = ir.values.Create<ir::Function>(return_type, stage, wg_size);
     ir_func->SetBlock(Block());
-    ir.SetName(ir_func, name);
+    if (!name.empty()) {
+        ir.SetName(ir_func, name);
+    }
     ir.functions.Push(ir_func);
     return ir_func;
 }
@@ -94,7 +96,9 @@ ir::FunctionParam* Builder::FunctionParam(const core::type::Type* type) {
 
 ir::FunctionParam* Builder::FunctionParam(std::string_view name, const core::type::Type* type) {
     auto* param = ir.values.Create<ir::FunctionParam>(type);
-    ir.SetName(param, name);
+    if (!name.empty()) {
+        ir.SetName(param, name);
+    }
     return param;
 }
 
