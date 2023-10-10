@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03ba324b_fe73ad7b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T15:56:09Z",
+      "side": 1,
+      "message": "thanks! and now I need review again because I removed files which defeats vote stickiness..",
+      "revId": "d97954e534e132565f7d52fd4347846bcbe02f58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
