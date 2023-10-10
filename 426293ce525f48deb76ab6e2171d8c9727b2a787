@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aaba4bc0_dc06ea63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-10T18:22:59Z",
+      "side": 1,
+      "message": "Rebased after neglecting this for a bit.\n\n@cwallez or @enga, could you approve the README change?",
+      "revId": "426293ce525f48deb76ab6e2171d8c9727b2a787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
