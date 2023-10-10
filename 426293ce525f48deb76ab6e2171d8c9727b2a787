@@ -33,6 +33,24 @@
       "message": "rasterizationMask\u003d0 case passes\n\nthe roller will split this up again unless you mark it KEEP; up to you if you want to do that",
       "revId": "426293ce525f48deb76ab6e2171d8c9727b2a787",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b512b892_44a5bf6f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-10T20:25:23Z",
+      "side": 1,
+      "message": "Thanks for pointing that out!\n\nMarked as KEEP because these tests are just broken on this device and the fact that the 0 case works is because it doesn\u0027t actually exercise the behavior in question.",
+      "parentUuid": "281333c1_42f9655a",
+      "revId": "426293ce525f48deb76ab6e2171d8c9727b2a787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
