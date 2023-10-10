@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "844d43d0_e18b8138",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-10T22:34:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67d41f88_8dd9f76d",
+      "range": {
+        "startLine": 142,
+        "startChar": 9,
+        "endLine": 142,
+        "endChar": 19
+      },
+      "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe2f4781_968be454",
@@ -58,6 +82,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a00b504b_092d4ef7",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-10T22:34:29Z",
+      "side": 1,
+      "message": "Sorry it took so long to address this. I went through a whole rollercoaster of implementing a solution to make this work bu plumbing the FutureID through the wire allocators and keeping the memory alive until we `Complete`... But in the end I scrapped all that because I realized that with the new changes for `ReadyHook` where we can pass arbitrary arguments, it was actually just easier to do all the work immediately in the `ReadyHook` when we can guarantee that the deserialized memory is still valid and only defer the user callback until `Complete.\n\nAnyways... the good thing that came out of it is the new test infra I also added to test this kinda of thing by running through all the difference callback modes. Small win I guess 😂",
+      "parentUuid": "fe2f4781_968be454",
+      "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dd80813e_37ceeaaf",
@@ -71,6 +113,24 @@
       "writtenOn": "2023-09-28T08:26:48Z",
       "side": 1,
       "message": "Maybe this could be a ref to the adapter just to make the lifetime semantic more clear?",
+      "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0d2c6bf5_31997dda",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-10T22:34:29Z",
+      "side": 1,
+      "message": "Hmm, we don\u0027t really have a clear \"ref\" sorta thing in the wire atm? I **think** this is fine for now though. The allocation is guaranteed to still exist when the callback is called.",
+      "parentUuid": "dd80813e_37ceeaaf",
       "revId": "2536fb947af77af91dd6f7b38d9eedc249182baf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
