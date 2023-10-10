@@ -16,6 +16,23 @@
       "message": "Rebased after neglecting this for a bit.\n\n@cwallez or @enga, could you approve the README change?",
       "revId": "426293ce525f48deb76ab6e2171d8c9727b2a787",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "281333c1_42f9655a",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 520,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-10T18:57:06Z",
+      "side": 1,
+      "message": "rasterizationMask\u003d0 case passes\n\nthe roller will split this up again unless you mark it KEEP; up to you if you want to do that",
+      "revId": "426293ce525f48deb76ab6e2171d8c9727b2a787",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
