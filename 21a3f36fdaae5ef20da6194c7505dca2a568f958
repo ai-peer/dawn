@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba541e9f_3c24333b",
+        "filename": ".bazelrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:00:07Z",
+      "side": 1,
+      "message": "https://gist.github.com/austinEng/6bb57916f12db331fc8c716218274292",
+      "parentUuid": "45bc9774_350645d8",
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1ddaae6_842bc362",
