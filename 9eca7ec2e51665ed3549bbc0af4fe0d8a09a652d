@@ -33,6 +33,24 @@
       "message": "potential follow up? the generator could avoid producing these empty lines",
       "revId": "9eca7ec2e51665ed3549bbc0af4fe0d8a09a652d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3616dc2_9ee4531c",
+        "filename": "src/tint/lang/glsl/validate/BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-10-11T12:07:28Z",
+      "side": 1,
+      "message": "Yeah, maybe. This is because the validator depends on glslang, and we\u0027d normally emit an external dependency here - except I haven\u0027t set that up for the bazel build.",
+      "parentUuid": "a3747c89_8488ae9e",
+      "revId": "9eca7ec2e51665ed3549bbc0af4fe0d8a09a652d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
