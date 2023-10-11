@@ -173,6 +173,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ee9ae8b7_c9f00126",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-11T23:53:20Z",
+      "side": 1,
+      "message": "It\u0027s probably fine if this is a bit special such that:\n- implementations that understand compat will allow it (even if compat isn\u0027t enabled)\n- implementations that don\u0027t understand compat will error\n\nThough perhaps we could fix the second thing by declaring an SType range for compat (in https://github.com/webgpu-native/webgpu-headers/issues/214) and implementations are supposed to always ignore things in that range if compat isn\u0027t enabled (including if compat doesn\u0027t exist in that implementation).",
+      "parentUuid": "8cd2410f_ff4db689",
+      "range": {
+        "startLine": 483,
+        "startChar": 4,
+        "endLine": 488,
+        "endChar": 61
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83f0c05b_d3c18c81",
         "filename": "src/dawn/native/Texture.h",
         "patchSetId": 1
