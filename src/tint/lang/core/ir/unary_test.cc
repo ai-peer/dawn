@@ -31,7 +31,7 @@ TEST_F(IR_UnaryTest, CreateComplement) {
     auto* inst = b.Complement(mod.Types().i32(), 4_i);
 
     ASSERT_TRUE(inst->Is<Unary>());
-    EXPECT_EQ(inst->Kind(), Unary::Kind::kComplement);
+    EXPECT_EQ(inst->Op(), UnaryOp::kComplement);
 
     ASSERT_TRUE(inst->Val()->Is<Constant>());
     auto lhs = inst->Val()->As<Constant>()->Value();
@@ -43,7 +43,7 @@ TEST_F(IR_UnaryTest, CreateNegation) {
     auto* inst = b.Negation(mod.Types().i32(), 4_i);
 
     ASSERT_TRUE(inst->Is<Unary>());
-    EXPECT_EQ(inst->Kind(), Unary::Kind::kNegation);
+    EXPECT_EQ(inst->Op(), UnaryOp::kNegation);
 
     ASSERT_TRUE(inst->Val()->Is<Constant>());
     auto lhs = inst->Val()->As<Constant>()->Value();
@@ -54,7 +54,7 @@ TEST_F(IR_UnaryTest, CreateNegation) {
 TEST_F(IR_UnaryTest, Usage) {
     auto* inst = b.Negation(mod.Types().i32(), 4_i);
 
-    EXPECT_EQ(inst->Kind(), Unary::Kind::kNegation);
+    EXPECT_EQ(inst->Op(), UnaryOp::kNegation);
 
     ASSERT_NE(inst->Val(), nullptr);
     EXPECT_THAT(inst->Val()->Usages(), testing::UnorderedElementsAre(Usage{inst, 0u}));
@@ -86,7 +86,7 @@ TEST_F(IR_UnaryTest, Clone) {
     EXPECT_NE(nullptr, new_inst->Result());
     EXPECT_NE(inst->Result(), new_inst->Result());
 
-    EXPECT_EQ(Unary::Kind::kComplement, new_inst->Kind());
+    EXPECT_EQ(UnaryOp::kComplement, new_inst->Op());
 
     auto new_val = new_inst->Val()->As<Constant>()->Value();
     ASSERT_TRUE(new_val->Is<core::constant::Scalar<i32>>());
