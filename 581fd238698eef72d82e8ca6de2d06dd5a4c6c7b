@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "699a45c7_1a403b4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T10:58:35Z",
+      "side": 1,
+      "message": "LGTM. Stephen for +2",
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39d9b3d5_b326e287",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T10:58:35Z",
+      "side": 1,
+      "message": "```suggestion\n    return Is\u003ctint::sem::GlobalVariable\u003e(pair.first) \u0026\u0026\n           Is\u003ctint::sem::GlobalVariable\u003e(pair.second);\n```",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 74
+      },
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1110cf92_fe35e7fb",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T10:58:35Z",
+      "side": 1,
+      "message": "übernit: You really care about whether `name` is empty or not. I\u0027d personally change this to `if (!name.empty()) {` as that\u0027s a bit less fragile for future changes. It\u0027s also clear enough to drop the comment.",
+      "range": {
+        "startLine": 173,
+        "startChar": 16,
+        "endLine": 173,
+        "endChar": 27
+      },
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0577f732_c70a5555",
+        "filename": "src/tint/lang/wgsl/sem/function.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T10:58:35Z",
+      "side": 1,
+      "message": "nit: `TINT_ASSERT(texture || sampler);`",
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
