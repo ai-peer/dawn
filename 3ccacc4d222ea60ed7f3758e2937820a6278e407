@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e155c163_84405bc9",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/truncate_interstage_variables.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-11T07:27:19Z",
+      "side": 1,
+      "message": "On Linux and MacOS including `src/tint/lang/hlsl/writer/common/options.h` will cause compilation error, so I have to use `30` directly here.",
+      "revId": "3ccacc4d222ea60ed7f3758e2937820a6278e407",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
