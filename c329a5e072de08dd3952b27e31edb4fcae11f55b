@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db01fba2_e7ac7d58",
+        "filename": "build_overrides/tint.gni",
+        "patchSetId": 3
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-11T14:26:35Z",
+      "side": 1,
+      "message": "Why do we need this variable? Can\u0027t we use `dawn_standalone` instead?",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 16
+      },
+      "revId": "c329a5e072de08dd3952b27e31edb4fcae11f55b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
