@@ -19,6 +19,10 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/ErrorInjector.h"
 
+namespace dawn::native {
+class DeviceBase;
+}
+
 namespace dawn::native::d3d {
 
 constexpr HRESULT E_FAKE_ERROR_FOR_TESTING = MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0xFF);
@@ -26,19 +30,25 @@ constexpr HRESULT E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING =
     MAKE_HRESULT(SEVERITY_ERROR, FACILITY_ITF, 0xFE);
 
 // Returns a success only if result of HResult is success
-MaybeError CheckHRESULTImpl(HRESULT result, const char* context);
+MaybeError CheckHRESULTImpl(DeviceBase* device, HRESULT result, const char* context);
 
 // Uses CheckRESULT but returns OOM specific error when recoverable.
-MaybeError CheckOutOfMemoryHRESULTImpl(HRESULT result, const char* context);
+MaybeError CheckOutOfMemoryHRESULTImpl(DeviceBase* device, HRESULT result, const char* context);
 
-#define CheckHRESULT(resultIn, contextIn)  \
-    ::dawn::native::d3d::CheckHRESULTImpl( \
-        INJECT_ERROR_OR_RUN(resultIn, ::dawn::native::d3d::E_FAKE_ERROR_FOR_TESTING), contextIn)
-#define CheckOutOfMemoryHRESULT(resultIn, contextIn)                                             \
+#define CheckHRESULTWithDevice(device, resultIn, contextIn)                                   \
+    ::dawn::native::d3d::CheckHRESULTImpl(                                                    \
+        device, INJECT_ERROR_OR_RUN(resultIn, ::dawn::native::d3d::E_FAKE_ERROR_FOR_TESTING), \
+        contextIn)
+#define CheckHRESULT(resultIn, contextIn) CheckHRESULTWithDevice(nullptr, resultIn, contextIn)
+
+#define CheckOutOfMemoryHRESULTWithDevice(device, resultIn, contextIn)                           \
     ::dawn::native::d3d::CheckOutOfMemoryHRESULTImpl(                                            \
+        device,                                                                                  \
         INJECT_ERROR_OR_RUN(resultIn, ::dawn::native::d3d::E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING, \
                             ::dawn::native::d3d::E_FAKE_ERROR_FOR_TESTING),                      \
         contextIn)
+#define CheckOutOfMemoryHRESULT(resultIn, contextIn) \
+    CheckOutOfMemoryHRESULTWithDevice(nullptr, resultIn, contextIn)
 
 }  // namespace dawn::native::d3d
 

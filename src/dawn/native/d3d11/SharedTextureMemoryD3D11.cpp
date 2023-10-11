@@ -88,9 +88,10 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     DAWN_INVALID_IF(descriptor->handle == nullptr, "shared HANDLE is missing.");
 
     ComPtr<ID3D11Resource> d3d11Resource;
-    DAWN_TRY(CheckHRESULT(device->GetD3D11Device5()->OpenSharedResource1(
-                              descriptor->handle, IID_PPV_ARGS(&d3d11Resource)),
-                          "D3D11 open shared handle"));
+    DAWN_TRY(CheckHRESULTWithDevice(device,
+                                    device->GetD3D11Device5()->OpenSharedResource1(
+                                        descriptor->handle, IID_PPV_ARGS(&d3d11Resource)),
+                                    "D3D11 open shared handle"));
 
     D3D11_RESOURCE_DIMENSION type;
     d3d11Resource->GetType(&type);
@@ -98,8 +99,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
                     "Resource type (%d) was not Texture2D", type);
 
     ComPtr<ID3D11Texture2D> d3d11Texture;
-    DAWN_TRY(
-        CheckHRESULT(d3d11Resource.As(&d3d11Texture), "Cannot get ID3D11Texture2D from texture"));
+    DAWN_TRY(CheckHRESULTWithDevice(device, d3d11Resource.As(&d3d11Texture),
+                                    "Cannot get ID3D11Texture2D from texture"));
 
     SharedTextureMemoryProperties properties;
     DAWN_TRY_ASSIGN(properties, PropertiesFromD3D11Texture(device, d3d11Texture.Get()));
@@ -118,8 +119,8 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     DAWN_INVALID_IF(!descriptor->texture, "D3D11 texture is missing.");
 
     ComPtr<ID3D11Resource> d3d11Resource;
-    DAWN_TRY(CheckHRESULT(descriptor->texture.As(&d3d11Resource),
-                          "Cannot get ID3D11Resource from texture"));
+    DAWN_TRY(CheckHRESULTWithDevice(device, descriptor->texture.As(&d3d11Resource),
+                                    "Cannot get ID3D11Resource from texture"));
 
     ComPtr<ID3D11Device> textureDevice;
     d3d11Resource->GetDevice(textureDevice.GetAddressOf());

@@ -18,7 +18,11 @@
 #include <sstream>
 #include <string>
 
+#include "dawn/native/d3d/DeviceD3D.h"
+#include "dawn/native/d3d/Forward.h"
+
 namespace dawn::native::d3d {
+namespace {
 const char* HRESULTAsString(HRESULT result) {
     // There's a lot of possible HRESULTS, but these ones are the ones specifically listed as
     // being returned from D3D11 and D3D12, in addition to fake codes used internally for testing.
@@ -50,6 +54,8 @@ const char* HRESULTAsString(HRESULT result) {
             return "DXGI_ERROR_DEVICE_HUNG";
         case DXGI_ERROR_DEVICE_RESET:
             return "DXGI_ERROR_DEVICE_RESET";
+        case DXGI_ERROR_DRIVER_INTERNAL_ERROR:
+            return "DXGI_ERROR_DRIVER_INTERNAL_ERROR";
         case DXGI_ERROR_WAS_STILL_DRAWING:
             return "DXGI_ERROR_WAS_STILL_DRAWING";
 
@@ -80,29 +86,37 @@ const char* HRESULTAsString(HRESULT result) {
     }
 }
 
-MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
-    if (DAWN_LIKELY(SUCCEEDED(result))) {
-        return {};
-    }
-
+std::string HRESULTToErrorMessage(const char* context, HRESULT result) {
     std::ostringstream messageStream;
     messageStream << context << " failed with " << HRESULTAsString(result) << " (0x"
                   << std::uppercase << std::setfill('0') << std::setw(8) << std::hex << result
                   << ")";
+    return std::move(messageStream).str();
+}
+
+}  // namespace
+
+MaybeError CheckHRESULTImpl(DeviceBase* device, HRESULT result, const char* context) {
+    if (DAWN_LIKELY(SUCCEEDED(result))) {
+        return {};
+    }
 
     if (result == DXGI_ERROR_DEVICE_REMOVED) {
-        return DAWN_DEVICE_LOST_ERROR(messageStream.str());
+        if (device) {
+            result = ToBackend(device)->GetDeviceRemovedReason();
+        }
+        return DAWN_DEVICE_LOST_ERROR(HRESULTToErrorMessage(context, result));
     } else {
-        return DAWN_INTERNAL_ERROR(messageStream.str());
+        return DAWN_INTERNAL_ERROR(HRESULTToErrorMessage(context, result));
     }
 }
 
-MaybeError CheckOutOfMemoryHRESULTImpl(HRESULT result, const char* context) {
+MaybeError CheckOutOfMemoryHRESULTImpl(DeviceBase* device, HRESULT result, const char* context) {
     if (result == E_OUTOFMEMORY || result == E_FAKE_OUTOFMEMORY_ERROR_FOR_TESTING) {
         return DAWN_OUT_OF_MEMORY_ERROR(context);
     }
 
-    return CheckHRESULTImpl(result, context);
+    return CheckHRESULTImpl(device, result, context);
 }
 
 }  // namespace dawn::native::d3d

@@ -288,8 +288,8 @@ MaybeError RenderPipeline::InitializeRasterizerState() {
     rasterizerDesc.MultisampleEnable = (GetSampleCount() > 1) ? TRUE : FALSE;
     rasterizerDesc.AntialiasedLineEnable = FALSE;
 
-    DAWN_TRY(CheckHRESULT(
-        device->GetD3D11Device()->CreateRasterizerState(&rasterizerDesc, &mRasterizerState),
+    DAWN_TRY(CheckHRESULTWithDevice(
+        device, device->GetD3D11Device()->CreateRasterizerState(&rasterizerDesc, &mRasterizerState),
         "ID3D11Device::CreateRasterizerState"));
 
     return {};
@@ -327,7 +327,8 @@ MaybeError RenderPipeline::InitializeInputLayout(const Blob& vertexShader) {
 
     ID3D11Device* d3d11Device = ToBackend(GetDevice())->GetD3D11Device();
 
-    DAWN_TRY(CheckHRESULT(
+    DAWN_TRY(CheckHRESULTWithDevice(
+        GetDevice(),
         d3d11Device->CreateInputLayout(inputElementDescriptors.data(), count, vertexShader.Data(),
                                        vertexShader.Size(), &mInputLayout),
         "ID3D11Device::CreateInputLayout"));
@@ -370,8 +371,9 @@ MaybeError RenderPipeline::InitializeBlendState() {
         rtBlendDesc.RenderTargetWriteMask = D3DColorWriteMask(descriptor->writeMask);
     }
 
-    DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreateBlendState(&blendDesc, &mBlendState),
-                          "ID3D11Device::CreateBlendState"));
+    DAWN_TRY(CheckHRESULTWithDevice(
+        device, device->GetD3D11Device()->CreateBlendState(&blendDesc, &mBlendState),
+        "ID3D11Device::CreateBlendState"));
     return {};
 }
 
@@ -394,7 +396,8 @@ MaybeError RenderPipeline::InitializeDepthStencilState() {
     depthStencilDesc.FrontFace = StencilOpDesc(state->stencilFront);
     depthStencilDesc.BackFace = StencilOpDesc(state->stencilBack);
 
-    DAWN_TRY(CheckHRESULT(
+    DAWN_TRY(CheckHRESULTWithDevice(
+        device,
         device->GetD3D11Device()->CreateDepthStencilState(&depthStencilDesc, &mDepthStencilState),
         "ID3D11Device::CreateDepthStencilState"));
     return {};
@@ -440,9 +443,11 @@ MaybeError RenderPipeline::InitializeShaders() {
                 ->Compile(programmableStage, SingleShaderStage::Vertex, ToBackend(GetLayout()),
                           compileFlags, usedInterstageVariables));
         const Blob& shaderBlob = compiledShader[SingleShaderStage::Vertex].shaderBlob;
-        DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreateVertexShader(
-                                  shaderBlob.Data(), shaderBlob.Size(), nullptr, &mVertexShader),
-                              "D3D11 create vertex shader"));
+        DAWN_TRY(CheckHRESULTWithDevice(
+            device,
+            device->GetD3D11Device()->CreateVertexShader(shaderBlob.Data(), shaderBlob.Size(),
+                                                         nullptr, &mVertexShader),
+            "D3D11 create vertex shader"));
         DAWN_TRY(InitializeInputLayout(shaderBlob));
         mUsesVertexIndex = compiledShader[SingleShaderStage::Vertex].usesVertexIndex;
         mUsesInstanceIndex = compiledShader[SingleShaderStage::Vertex].usesInstanceIndex;
@@ -455,11 +460,13 @@ MaybeError RenderPipeline::InitializeShaders() {
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Fragment, ToBackend(GetLayout()),
                           compileFlags, usedInterstageVariables));
-        DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreatePixelShader(
-                                  compiledShader[SingleShaderStage::Fragment].shaderBlob.Data(),
-                                  compiledShader[SingleShaderStage::Fragment].shaderBlob.Size(),
-                                  nullptr, &mPixelShader),
-                              "D3D11 create pixel shader"));
+        DAWN_TRY(CheckHRESULTWithDevice(
+            device,
+            device->GetD3D11Device()->CreatePixelShader(
+                compiledShader[SingleShaderStage::Fragment].shaderBlob.Data(),
+                compiledShader[SingleShaderStage::Fragment].shaderBlob.Size(), nullptr,
+                &mPixelShader),
+            "D3D11 create pixel shader"));
     }
 
     return {};

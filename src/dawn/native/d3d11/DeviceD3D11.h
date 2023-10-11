@@ -81,6 +81,7 @@ class Device final : public d3d::Device {
         const d3d::ExternalImageDXGIFenceDescriptor* descriptor) override;
     ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> CreateExternalImageDXGIImplImpl(
         const ExternalImageDescriptor* descriptor) override;
+    HRESULT GetDeviceRemovedReason() override;
 
     uint32_t GetUAVSlotCount() const;
 

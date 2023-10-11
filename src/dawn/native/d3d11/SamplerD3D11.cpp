@@ -96,10 +96,11 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     samplerDesc.MinLOD = descriptor->lodMinClamp;
     samplerDesc.MaxLOD = descriptor->lodMaxClamp;
 
-    DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
-                              ->GetD3D11Device()
-                              ->CreateSamplerState(&samplerDesc, &mD3d11SamplerState),
-                          "ID3D11Device::CreateSamplerState"));
+    DAWN_TRY(CheckHRESULTWithDevice(GetDevice(),
+                                    ToBackend(GetDevice())
+                                        ->GetD3D11Device()
+                                        ->CreateSamplerState(&samplerDesc, &mD3d11SamplerState),
+                                    "ID3D11Device::CreateSamplerState"));
 
     SetLabelImpl();
     return {};

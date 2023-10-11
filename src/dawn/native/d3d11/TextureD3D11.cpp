@@ -295,7 +295,8 @@ MaybeError Texture::InitializeAsInternalTexture() {
         case wgpu::TextureDimension::e1D: {
             D3D11_TEXTURE1D_DESC desc = GetD3D11TextureDesc<D3D11_TEXTURE1D_DESC>();
             ComPtr<ID3D11Texture1D> d3d11Texture1D;
-            DAWN_TRY(CheckOutOfMemoryHRESULT(
+            DAWN_TRY(CheckOutOfMemoryHRESULTWithDevice(
+                GetDevice(),
                 device->GetD3D11Device()->CreateTexture1D(&desc, nullptr, &d3d11Texture1D),
                 "D3D11 create texture1d"));
             mD3d11Resource = std::move(d3d11Texture1D);
@@ -304,7 +305,8 @@ MaybeError Texture::InitializeAsInternalTexture() {
         case wgpu::TextureDimension::e2D: {
             D3D11_TEXTURE2D_DESC desc = GetD3D11TextureDesc<D3D11_TEXTURE2D_DESC>();
             ComPtr<ID3D11Texture2D> d3d11Texture2D;
-            DAWN_TRY(CheckOutOfMemoryHRESULT(
+            DAWN_TRY(CheckOutOfMemoryHRESULTWithDevice(
+                GetDevice(),
                 device->GetD3D11Device()->CreateTexture2D(&desc, nullptr, &d3d11Texture2D),
                 "D3D11 create texture2d"));
             mD3d11Resource = std::move(d3d11Texture2D);
@@ -313,7 +315,8 @@ MaybeError Texture::InitializeAsInternalTexture() {
         case wgpu::TextureDimension::e3D: {
             D3D11_TEXTURE3D_DESC desc = GetD3D11TextureDesc<D3D11_TEXTURE3D_DESC>();
             ComPtr<ID3D11Texture3D> d3d11Texture3D;
-            DAWN_TRY(CheckOutOfMemoryHRESULT(
+            DAWN_TRY(CheckOutOfMemoryHRESULTWithDevice(
+                GetDevice(),
                 device->GetD3D11Device()->CreateTexture3D(&desc, nullptr, &d3d11Texture3D),
                 "D3D11 create texture3d"));
             mD3d11Resource = std::move(d3d11Texture3D);
@@ -344,12 +347,14 @@ MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
                                                 std::vector<Ref<d3d::Fence>> waitFences,
                                                 bool isSwapChainTexture) {
     ComPtr<ID3D11Resource> d3d11Texture;
-    DAWN_TRY(CheckHRESULT(d3dTexture.As(&d3d11Texture), "Query ID3D11Resource from IUnknown"));
+    DAWN_TRY(CheckHRESULTWithDevice(GetDevice(), d3dTexture.As(&d3d11Texture),
+                                    "Query ID3D11Resource from IUnknown"));
 
     CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
     ID3D11DeviceContext4* d3d11DeviceContext4 = commandContext->GetD3D11DeviceContext4();
     for (Ref<d3d::Fence>& fence : waitFences) {
-        DAWN_TRY(CheckHRESULT(
+        DAWN_TRY(CheckHRESULTWithDevice(
+            GetDevice(),
             d3d11DeviceContext4->Wait(static_cast<Fence*>(fence.Get())->GetD3D11Fence(),
                                       fence->GetFenceValue()),
             "ID3D11DeviceContext4::Wait"));
@@ -421,10 +426,12 @@ ResultOrError<ComPtr<ID3D11RenderTargetView>> Texture::CreateD3D11RenderTargetVi
     }
 
     ComPtr<ID3D11RenderTargetView> rtv;
-    DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
-                              ->GetD3D11Device()
-                              ->CreateRenderTargetView(GetD3D11Resource(), &rtvDesc, &rtv),
-                          "CreateRenderTargetView"));
+    DAWN_TRY(
+        CheckHRESULTWithDevice(GetDevice(),
+                               ToBackend(GetDevice())
+                                   ->GetD3D11Device()
+                                   ->CreateRenderTargetView(GetD3D11Resource(), &rtvDesc, &rtv),
+                               "CreateRenderTargetView"));
 
     return rtv;
 }
@@ -458,10 +465,12 @@ ResultOrError<ComPtr<ID3D11DepthStencilView>> Texture::CreateD3D11DepthStencilVi
     }
 
     ComPtr<ID3D11DepthStencilView> dsv;
-    DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
-                              ->GetD3D11Device()
-                              ->CreateDepthStencilView(GetD3D11Resource(), &dsvDesc, &dsv),
-                          "CreateDepthStencilView"));
+    DAWN_TRY(
+        CheckHRESULTWithDevice(GetDevice(),
+                               ToBackend(GetDevice())
+                                   ->GetD3D11Device()
+                                   ->CreateDepthStencilView(GetD3D11Resource(), &dsvDesc, &dsv),
+                               "CreateDepthStencilView"));
     return dsv;
 }
 
@@ -806,9 +815,11 @@ MaybeError Texture::WriteDepthStencilInternal(CommandRecordingContext* commandCo
     D3D11_MAPPED_SUBRESOURCE mappedResource;
     const uint8_t* pSrcData = data;
     for (uint32_t layer = 0; layer < size.depthOrArrayLayers; ++layer) {
-        DAWN_TRY(CheckHRESULT(d3d11DeviceContext1->Map(stagingTexture->GetD3D11Resource(), layer,
-                                                       D3D11_MAP_READ, 0, &mappedResource),
-                              "D3D11 map staging texture"));
+        DAWN_TRY(CheckHRESULTWithDevice(
+            GetDevice(),
+            d3d11DeviceContext1->Map(stagingTexture->GetD3D11Resource(), layer, D3D11_MAP_READ, 0,
+                                     &mappedResource),
+            "D3D11 map staging texture"));
         uint8_t* pDstData = static_cast<uint8_t*>(mappedResource.pData);
         for (uint32_t y = 0; y < size.height; ++y) {
             const uint8_t* pSrcRow = pSrcData;
@@ -870,9 +881,11 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
             // The Map() will block until the GPU is done with the texture.
             // TODO(dawn:1705): avoid blocking the CPU.
             D3D11_MAPPED_SUBRESOURCE mappedResource;
-            DAWN_TRY(CheckHRESULT(d3d11DeviceContext1->Map(GetD3D11Resource(), layer,
-                                                           D3D11_MAP_READ, 0, &mappedResource),
-                                  "D3D11 map staging texture"));
+            DAWN_TRY(
+                CheckHRESULTWithDevice(GetDevice(),
+                                       d3d11DeviceContext1->Map(GetD3D11Resource(), layer,
+                                                                D3D11_MAP_READ, 0, &mappedResource),
+                                       "D3D11 map staging texture"));
 
             uint8_t* pSrcData = static_cast<uint8_t*>(mappedResource.pData);
             uint64_t dstOffset = dstBytesPerRow * dstRowsPerImage * layer;
@@ -918,7 +931,8 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
     // The Map() will block until the GPU is done with the texture.
     // TODO(dawn:1705): avoid blocking the CPU.
     D3D11_MAPPED_SUBRESOURCE mappedResource;
-    DAWN_TRY(CheckHRESULT(
+    DAWN_TRY(CheckHRESULTWithDevice(
+        GetDevice(),
         d3d11DeviceContext1->Map(GetD3D11Resource(), 0, D3D11_MAP_READ, 0, &mappedResource),
         "D3D11 map staging texture"));
 
@@ -1290,7 +1304,8 @@ ResultOrError<ID3D11ShaderResourceView*> TextureView::GetOrCreateD3D11ShaderReso
         }
     }
 
-    DAWN_TRY(CheckHRESULT(
+    DAWN_TRY(CheckHRESULTWithDevice(
+        GetDevice(),
         device->GetD3D11Device()->CreateShaderResourceView(
             ToBackend(GetTexture())->GetD3D11Resource(), &srvDesc, &mD3d11SharedResourceView),
         "CreateShaderResourceView"));
@@ -1365,12 +1380,13 @@ ResultOrError<ID3D11UnorderedAccessView*> TextureView::GetOrCreateD3D11Unordered
             DAWN_UNREACHABLE();
     }
 
-    DAWN_TRY(
-        CheckHRESULT(ToBackend(GetDevice())
-                         ->GetD3D11Device()
-                         ->CreateUnorderedAccessView(ToBackend(GetTexture())->GetD3D11Resource(),
-                                                     &uavDesc, &mD3d11UnorderedAccessView),
-                     "CreateUnorderedAccessView"));
+    DAWN_TRY(CheckHRESULTWithDevice(
+        GetDevice(),
+        ToBackend(GetDevice())
+            ->GetD3D11Device()
+            ->CreateUnorderedAccessView(ToBackend(GetTexture())->GetD3D11Resource(), &uavDesc,
+                                        &mD3d11UnorderedAccessView),
+        "CreateUnorderedAccessView"));
 
     SetDebugName(ToBackend(GetDevice()), mD3d11UnorderedAccessView.Get(), "Dawn_TextureView",
                  GetLabel());

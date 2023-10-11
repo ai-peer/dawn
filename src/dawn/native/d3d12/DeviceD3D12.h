@@ -163,6 +163,8 @@ class Device final : public d3d::Device {
 
     uint64_t GetBufferCopyOffsetAlignmentForDepthStencil() const override;
 
+    HRESULT GetDeviceRemovedReason() override;
+
     // Dawn APIs
     void SetLabelImpl() override;
 
