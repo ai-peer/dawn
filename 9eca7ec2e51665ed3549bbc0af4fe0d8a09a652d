@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "480ed9e3_2e67e54d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T11:58:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9eca7ec2e51665ed3549bbc0af4fe0d8a09a652d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3747c89_8488ae9e",
+        "filename": "src/tint/lang/glsl/validate/BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T11:58:53Z",
+      "side": 1,
+      "message": "potential follow up? the generator could avoid producing these empty lines",
+      "revId": "9eca7ec2e51665ed3549bbc0af4fe0d8a09a652d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
