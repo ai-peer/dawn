@@ -910,6 +910,152 @@ TEST_F(CompatValidationTest, CanNotCreateBGRA8UnormTextureWithBGRA8UnormSrgbView
                         testing::HasSubstr("not supported in compatibility mode"));
 }
 
+class CompatTextureViewDimensionValidationTests : public CompatValidationTest {
+  protected:
+    void TestBindingTextureViewDimensions(const uint32_t depth,
+                                          const wgpu::TextureViewDimension textureViewDimension,
+                                          const wgpu::TextureViewDimension viewDimension,
+                                          bool success) {
+        wgpu::BindGroupLayoutEntry entry;
+        entry.binding = 0;
+        entry.visibility = wgpu::ShaderStage::Fragment;
+        entry.texture.sampleType = wgpu::TextureSampleType::Float;
+        entry.texture.viewDimension = viewDimension == wgpu::TextureViewDimension::Undefined
+                                          ? wgpu::TextureViewDimension::e2D
+                                          : viewDimension;
+
+        wgpu::BindGroupLayoutDescriptor layoutDesc;
+        layoutDesc.entryCount = 1;
+        layoutDesc.entries = &entry;
+        wgpu::BindGroupLayout layout = device.CreateBindGroupLayout(&layoutDesc);
+
+        wgpu::Texture texture = CreateTextureWithViewDimension(depth, wgpu::TextureDimension::e2D,
+                                                               textureViewDimension);
+
+        wgpu::TextureViewDescriptor viewDesc = {};
+        viewDesc.dimension = viewDimension;
+
+        if (success) {
+            utils::MakeBindGroup(device, layout, {{0, texture.CreateView(&viewDesc)}});
+        } else {
+            ASSERT_DEVICE_ERROR(
+                utils::MakeBindGroup(device, layout, {{0, texture.CreateView(&viewDesc)}}),
+                testing::HasSubstr("must match viewDimension"));
+        }
+
+        texture.Destroy();
+    }
+
+    void TestCreateTextureWithViewDimension(const uint32_t depth,
+                                            const wgpu::TextureDimension dimension,
+                                            const wgpu::TextureViewDimension textureViewDimension,
+                                            bool success) {
+        if (success) {
+            CreateTextureWithViewDimension(depth, dimension, textureViewDimension);
+        } else {
+            ASSERT_DEVICE_ERROR(
+                CreateTextureWithViewDimension(depth, dimension, textureViewDimension);
+                testing::HasSubstr("is not compatible with the dimension"));
+        }
+    }
+
+    wgpu::Texture CreateTextureWithViewDimension(const uint32_t depth,
+                                                 const wgpu::TextureDimension dimension,
+                                                 const wgpu::TextureViewDimension viewDimension) {
+        constexpr wgpu::TextureFormat viewFormat = wgpu::TextureFormat::RGBA8Unorm;
+
+        wgpu::TextureDescriptor textureDesc;
+        textureDesc.size = {1, 1, depth};
+        textureDesc.dimension = dimension;
+        textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
+        textureDesc.usage = wgpu::TextureUsage::TextureBinding;
+        textureDesc.viewFormatCount = 1;
+        textureDesc.viewFormats = &viewFormat;
+
+        wgpu::TextureViewDimensionDescriptor textureViewDimensionDesc;
+
+        if (viewDimension != wgpu::TextureViewDimension::Undefined) {
+            textureDesc.nextInChain = &textureViewDimensionDesc;
+            textureViewDimensionDesc.viewDimension = viewDimension;
+        }
+
+        return device.CreateTexture(&textureDesc);
+    }
+};
+
+// Note: CubeArray is not included because CubeArray is not allowed
+// in compatibility mode.
+const wgpu::TextureViewDimension kViewDimensions[] = {
+    wgpu::TextureViewDimension::e1D,  wgpu::TextureViewDimension::e2D,
+    wgpu::TextureViewDimension::e3D,  wgpu::TextureViewDimension::e2DArray,
+    wgpu::TextureViewDimension::Cube,
+};
+
+// Test creating 1d textures with each view dimension.
+TEST_F(CompatTextureViewDimensionValidationTests, E1D) {
+    for (auto viewDimension : kViewDimensions) {
+        TestCreateTextureWithViewDimension(1, wgpu::TextureDimension::e1D, viewDimension,
+                                           viewDimension == wgpu::TextureViewDimension::e1D);
+    }
+}
+
+// Test creating 2d textures with each view dimension.
+TEST_F(CompatTextureViewDimensionValidationTests, E2D) {
+    for (auto viewDimension : kViewDimensions) {
+        TestCreateTextureWithViewDimension(6, wgpu::TextureDimension::e2D, viewDimension,
+                                           viewDimension != wgpu::TextureViewDimension::e1D &&
+                                               viewDimension != wgpu::TextureViewDimension::e3D);
+    }
+}
+
+// Test creating 1d textures with each view dimension.
+TEST_F(CompatTextureViewDimensionValidationTests, E3D) {
+    for (auto viewDimension : kViewDimensions) {
+        TestCreateTextureWithViewDimension(1, wgpu::TextureDimension::e3D, viewDimension,
+                                           viewDimension == wgpu::TextureViewDimension::e3D);
+    }
+}
+
+TEST_F(CompatTextureViewDimensionValidationTests, OneLayerIs2DView) {
+    TestBindingTextureViewDimensions(1, wgpu::TextureViewDimension::Undefined,
+                                     wgpu::TextureViewDimension::e2D, true);
+}
+
+// Test 2 layer texture gets a 2d-array viewDimension
+TEST_F(CompatTextureViewDimensionValidationTests, TwoLayersIs2DArrayView) {
+    TestBindingTextureViewDimensions(2, wgpu::TextureViewDimension::Undefined,
+                                     wgpu::TextureViewDimension::e2DArray, true);
+}
+
+// Test 6 layer texture gets a 2d-array viewDimension
+TEST_F(CompatTextureViewDimensionValidationTests, SixLayersIsCubeView) {
+    TestBindingTextureViewDimensions(6, wgpu::TextureViewDimension::Undefined,
+                                     wgpu::TextureViewDimension::Cube, true);
+}
+
+// Test 2d texture can not be viewed as 2D array
+TEST_F(CompatTextureViewDimensionValidationTests, TwoDTextureViewDimensionCanNotBeViewedAs2DArray) {
+    TestBindingTextureViewDimensions(1, wgpu::TextureViewDimension::e2D,
+                                     wgpu::TextureViewDimension::e2DArray, false);
+}
+
+// Test 2d-array texture can not be viewed as cube
+TEST_F(CompatTextureViewDimensionValidationTests,
+       TwoDArrayTextureViewDimensionCanNotBeViewedAsCube) {
+    TestBindingTextureViewDimensions(6, wgpu::TextureViewDimension::e2DArray,
+                                     wgpu::TextureViewDimension::Cube, false);
+}
+
+// Test cube texture can not be viewed as 2d-array
+TEST_F(CompatTextureViewDimensionValidationTests, CubeTextureViewDimensionCanNotBeViewedAs2DArray) {
+    TestBindingTextureViewDimensions(6, wgpu::TextureViewDimension::Cube,
+                                     wgpu::TextureViewDimension::e2DArray, false);
+}
+
+// Test 2Darray != 2d
+// Test cube !== 2d
+// Test cube !== 2d-array
+
 class CompatCompressedCopyT2BAndCopyT2TValidationTests : public CompatValidationTest {
   protected:
     WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
