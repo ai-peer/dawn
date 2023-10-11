@@ -72,6 +72,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "45bc9774_350645d8",
+        "filename": ".bazelrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T17:57:31Z",
+      "side": 1,
+      "message": "In general LGTM assuming the lawyers approved. Can you share the script that you used to do this so we can repro locally?",
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1ddaae6_842bc362",
@@ -85,6 +102,23 @@
       "writtenOn": "2023-10-11T11:03:05Z",
       "side": 1,
       "message": "No objections, but one suggestion for consolidating the authors.\n\n`-70820 +172534` - well that\u0027s certainly one way to bump your contribution stats 😜",
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96088c2c_b9b3b645",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T17:57:31Z",
+      "side": 1,
+      "message": "In general LG",
       "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
