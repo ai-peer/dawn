@@ -33,6 +33,24 @@
       "message": "Wh did this all need to move to C?",
       "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d6fda95_d743b921",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-11T18:44:30Z",
+      "side": 1,
+      "message": "It was easier to just use C because the testing infra I added in https://dawn-review.googlesource.com/c/dawn/+/154682.\n\nIt was easier to use the C entry points, but I COULD probably make it use the C++ entry points... Basically the other existing tests when I added that infra was using C so I just used C.",
+      "parentUuid": "4b5aeb1b_27daf152",
+      "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
