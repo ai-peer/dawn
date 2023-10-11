@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29992ac3_26f91152",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T23:18:03Z",
+      "side": 1,
+      "message": "Looks good. All nits.",
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aaf40c38_1ab2d724",
+        "filename": "src/tint/lang/core/ir/if.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T23:18:03Z",
+      "side": 1,
+      "message": "Given that there\u0027s only one argument here, you could just write:\n\n\n```suggestion\n    new_if-\u003eSetResults(ctx.Clone(results_));\n```\n\n\nYou wouldn\u0027t need to add `#include \u003cutility\u003e` then",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 43
+      },
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "864b0b4a_5ba55ecc",
+        "filename": "src/tint/lang/core/ir/if_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T23:18:03Z",
+      "side": 1,
+      "message": "Would be good to check that the returned values are different from the original `if_`\u0027s.\n\nSame for the other instructions\u0027 tests.",
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "181c5804_8420b3d9",
+        "filename": "src/tint/lang/core/ir/loop.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T23:18:03Z",
+      "side": 1,
+      "message": "```suggestion\n    new_loop-\u003eSetResults(ctx.Clone(results_));\n```",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 45
+      },
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1754ac2b_2ebb165f",
+        "filename": "src/tint/lang/core/ir/switch.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T23:18:03Z",
+      "side": 1,
+      "message": "```suggestion\n    new_switch-\u003eSetResults(ctx.Clone(results_));\n```",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 47
+      },
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
