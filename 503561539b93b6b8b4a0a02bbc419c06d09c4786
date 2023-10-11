@@ -52,6 +52,24 @@
       "parentUuid": "b4ac35ed_49eb3ae2",
       "revId": "503561539b93b6b8b4a0a02bbc419c06d09c4786",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4629244d_02622a41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-11T19:46:02Z",
+      "side": 1,
+      "message": "Should we always call `GetDeviceRemovedReason()`, or call it for device lost error, or parsing the error message, and only call it when DXGI_ERROR_DEVICE_REMOVED is in the message?",
+      "parentUuid": "59dc6653_320e9059",
+      "revId": "503561539b93b6b8b4a0a02bbc419c06d09c4786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
