@@ -16,6 +16,24 @@
       "message": "can you get the reason after we bubble the error out to HandleError?\nhere-ish https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;l\u003d541;bpv\u003d1;bpt\u003d1\n\nthen we don\u0027t need to pass the device into every call",
       "revId": "503561539b93b6b8b4a0a02bbc419c06d09c4786",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4ac35ed_49eb3ae2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-11T19:01:12Z",
+      "side": 1,
+      "message": "I considered it when I created this CL. Because it is only for d3d, so changing CheckHRAESULT() is simpler even it needs update more files, but the change is very straightforward.  And later, maybe we could change the macro to avoid adding `GetDevice()` at everywhere the macro is used. And add a special macro for where GetDevice() is not avaliable.",
+      "parentUuid": "f9a72a59_a8bc49f4",
+      "revId": "503561539b93b6b8b4a0a02bbc419c06d09c4786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
