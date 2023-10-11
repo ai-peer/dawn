@@ -451,8 +451,9 @@ bool CopySrcNeedsInternalTextureBindingUsage(const DeviceBase* device, const For
     return false;
 }
 
-wgpu::TextureViewDimension NormalizeViewDimension(const DeviceBase* device,
-                                                  const TextureDescriptor* descriptor) {
+wgpu::TextureViewDimension ResolveDefaultCompatiblityViewDimension(
+    const DeviceBase* device,
+    const TextureDescriptor* descriptor) {
     // In non-compatibility mode this value is not used so return undefined so that it is not
     // used by mistake.
     if (!device->IsCompatibilityMode()) {
@@ -465,24 +466,18 @@ wgpu::TextureViewDimension NormalizeViewDimension(const DeviceBase* device,
                                    ? wgpu::TextureViewDimension::Undefined
                                    : viewDimensionDescriptor->viewDimension;
 
-    if (viewDimension == wgpu::TextureViewDimension::Undefined) {
-        switch (descriptor->dimension) {
-            case wgpu::TextureDimension::e1D:
-                return wgpu::TextureViewDimension::e1D;
-            case wgpu::TextureDimension::e2D:
-                switch (descriptor->size.depthOrArrayLayers) {
-                    case 1:
-                        return wgpu::TextureViewDimension::e2D;
-                    case 6:
-                        return wgpu::TextureViewDimension::Cube;
-                    default:
-                        return wgpu::TextureViewDimension::e2DArray;
-                }
-            case wgpu::TextureDimension::e3D:
-                return wgpu::TextureViewDimension::e3D;
-        }
-    } else {
+    if (viewDimension != wgpu::TextureViewDimension::Undefined) {
         return viewDimension;
+    }
+
+    switch (descriptor->dimension) {
+        case wgpu::TextureDimension::e1D:
+            return wgpu::TextureViewDimension::e1D;
+        case wgpu::TextureDimension::e2D:
+            return descriptor->size.depthOrArrayLayers == 1 ? wgpu::TextureViewDimension::e2D
+                                                            : wgpu::TextureViewDimension::e2DArray;
+        case wgpu::TextureDimension::e3D:
+            return wgpu::TextureViewDimension::e3D;
     }
 }
 
@@ -539,7 +534,7 @@ MaybeError ValidateTextureDescriptor(
                                   std::move(allowedSharedTextureMemoryUsage)));
     DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
     if (device->IsCompatibilityMode()) {
-        const auto viewDimension = NormalizeViewDimension(device, descriptor);
+        const auto viewDimension = ResolveDefaultCompatiblityViewDimension(device, descriptor);
 
         DAWN_INVALID_IF(!IsTextureViewDimensionCompatibleWithTextureDimension(
                             viewDimension, descriptor->dimension),
@@ -707,7 +702,7 @@ TextureBase::TextureState::TextureState() : hasAccess(true), destroyed(false) {}
 TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor)
     : ApiObjectBase(device, descriptor->label),
       mDimension(descriptor->dimension),
-      mViewDimension(NormalizeViewDimension(device, descriptor)),
+      mCompatibilityViewDimension(ResolveDefaultCompatiblityViewDimension(device, descriptor)),
       mFormat(device->GetValidInternalFormat(descriptor->format)),
       mBaseSize(descriptor->size),
       mMipLevelCount(descriptor->mipLevelCount),
@@ -769,7 +764,7 @@ TextureBase::TextureBase(DeviceBase* device,
                          ObjectBase::ErrorTag tag)
     : ApiObjectBase(device, tag, descriptor->label),
       mDimension(descriptor->dimension),
-      mViewDimension(NormalizeViewDimension(device, descriptor)),
+      mCompatibilityViewDimension(ResolveDefaultCompatiblityViewDimension(device, descriptor)),
       mFormat(kUnusedFormat),
       mBaseSize(descriptor->size),
       mMipLevelCount(descriptor->mipLevelCount),
@@ -808,9 +803,9 @@ wgpu::TextureDimension TextureBase::GetDimension() const {
     return mDimension;
 }
 
-wgpu::TextureViewDimension TextureBase::GetViewDimension() const {
+wgpu::TextureViewDimension TextureBase::GetCompatibilityViewDimension() const {
     DAWN_ASSERT(!IsError());
-    return mViewDimension;
+    return mCompatibilityViewDimension;
 }
 
 const Format& TextureBase::GetFormat() const {
