@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4343c910_221bb6bb",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T08:24:09Z",
+      "side": 1,
+      "message": "IIRC D3D12 has a limitation that both planes must be transitioned together. Could we have a test that renders to a plane while reading from another to see if the debug layers yell or something?",
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78f85f25_cd8e1c84",
         "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
         "patchSetId": 7
