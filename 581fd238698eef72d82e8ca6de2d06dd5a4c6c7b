@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d2ec5c5_63d82c40",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-11T19:04:32Z",
+      "side": 1,
+      "message": "When `pair.second \u003d\u003d nullptr`,\n`!pair.second || pair.second-\u003eIs\u003ctint::sem::GlobalVariable\u003e()` evaluates to `true`\nwhile `Is\u003ctint::sem::GlobalVariable\u003e(pair.second)` evaluates to `false`.\n\n(i.e. One of pair.first/second being nullptr shouldn\u0027t impact the other one being global or not)\n\nI decided to change the second part to `Is\u003c\u003e` instead of `pair.second-\u003eIs\u003c\u003e`",
+      "parentUuid": "39d9b3d5_b326e287",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 74
+      },
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1110cf92_fe35e7fb",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f566e63_d6c5ef57",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-11T19:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1110cf92_fe35e7fb",
+      "range": {
+        "startLine": 173,
+        "startChar": 16,
+        "endLine": 173,
+        "endChar": 27
+      },
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0577f732_c70a5555",
@@ -77,6 +125,24 @@
       "writtenOn": "2023-10-11T10:58:35Z",
       "side": 1,
       "message": "nit: `TINT_ASSERT(texture || sampler);`",
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bae4b84_3487aab1",
+        "filename": "src/tint/lang/wgsl/sem/function.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-11T19:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0577f732_c70a5555",
       "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
