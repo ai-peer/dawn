@@ -1,0 +1,153 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9032a881_ab486849",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:28:47Z",
+      "side": 1,
+      "message": "y",
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b87ebda6_c94e45f7",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:28:47Z",
+      "side": 1,
+      "message": "maybe \"ResolveDefaultCompatiblityViewDimension\"",
+      "range": {
+        "startLine": 441,
+        "startChar": 27,
+        "endLine": 441,
+        "endChar": 49
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6fec6fa_59e7d101",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:28:47Z",
+      "side": 1,
+      "message": "nit: dedent the block below by inverting to return early.\n```\nif (viewDimension not undefined) {\n  return viewDimension;\n}\n```",
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e84af8f_54c41233",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:28:47Z",
+      "side": 1,
+      "message": "I *think* we should make it validation error to pass `viewDimensionDescriptor` if you\u0027re not in compatibility mode\n\n```suggestion\n    UnpackedTextureDescriptorChain unpacked;\n    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));\n;\n    const auto* internalUsageDesc \u003d std::get\u003cconst DawnTextureInternalUsageDescriptor*\u003e(unpacked);\n    const auto* viewDimensionDescriptor \u003d std::get\u003cconst TextureViewDimensionDescriptor*\u003e(unpacked);\n    \n    DAWN_INVALID_IF(!device-\u003eIsCompatibilityMode() \u0026\u0026 viewDimensionDescriptor !\u003d nullptr, \"msg\");\n```",
+      "range": {
+        "startLine": 483,
+        "startChar": 4,
+        "endLine": 488,
+        "endChar": 61
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83f0c05b_d3c18c81",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:28:47Z",
+      "side": 1,
+      "message": "nit: GetCompatibilityViewDimension",
+      "range": {
+        "startLine": 71,
+        "startChar": 31,
+        "endLine": 71,
+        "endChar": 47
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27162e3f_18ae9fa6",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:28:47Z",
+      "side": 1,
+      "message": "nit: then call it something like mCompatibilityViewDimension",
+      "range": {
+        "startLine": 166,
+        "startChar": 0,
+        "endLine": 166,
+        "endChar": 83
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd2189a_808d4916",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 930,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:28:47Z",
+      "side": 1,
+      "message": "nit: could use utils::MakeBindGroupLayout helper",
+      "range": {
+        "startLine": 919,
+        "startChar": 8,
+        "endLine": 930,
+        "endChar": 81
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
