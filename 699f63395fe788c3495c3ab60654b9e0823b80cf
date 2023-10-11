@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a829bd2c_438e3334",
+        "filename": "src/dawn/common/IOSurfaceUtils.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-11T23:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f2314461_ac7e9b38",
+      "range": {
+        "startLine": 83,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 4
+      },
+      "revId": "699f63395fe788c3495c3ab60654b9e0823b80cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4eb39e05_fae5d812",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-10-06T14:18:06Z",
       "side": 1,
       "message": "What do you think of supporting single-planar IOSurfaces as well? It would allow removing the redundant code from src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp and src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm as well.",
+      "revId": "699f63395fe788c3495c3ab60654b9e0823b80cf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da87db4f_f5e22dc5",
+        "filename": "src/dawn/common/IOSurfaceUtils.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 26,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-11T23:27:52Z",
+      "side": 1,
+      "message": "IMO the single plane IOSurface creation code in IOSurfaceWrappingTests.cpp and SharedTextureMemoryTests_apple.mm seems quite simple.\n\nAlso if we added an utility function in IOSurfaceUtils.h, it might need to support wgpu::TextureFormat as parameter and automatically calculate bytesPerElement like the `CreateMultiPlanarIOSurface` function. In other word, it should be more powerful than the existing function in IOSurfaceWrappingTests.cpp \u0026 SharedTextureMemoryTests_apple.mm.\n\nI think the effort is too much for the purpose of this CL. So I created a story so that we can clean them up in another CL https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2134",
+      "parentUuid": "4eb39e05_fae5d812",
       "revId": "699f63395fe788c3495c3ab60654b9e0823b80cf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

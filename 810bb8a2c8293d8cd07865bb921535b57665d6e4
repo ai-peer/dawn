@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75498b98_e6afdc8e",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-11T23:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b9f10fd_bee9801e",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "be23f452_cf2f3e12",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e7bb8966_baaee13a",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-11T23:27:52Z",
+      "side": 1,
+      "message": "Not sure I understand your suggestion correctly. Do you mean keeping only one ClearTexture and deduce the clearValue implicitly instead of having another one having explicit clearValue?\n\nI don\u0027t know it\u0027s intended or not but the `EnsureSubresourceContentInitialized` function only uses ClearTexture with explicit clearValue\u003dZero.",
+      "parentUuid": "be23f452_cf2f3e12",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65cc2474_f76868b8",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 10
@@ -65,6 +101,30 @@
       "writtenOn": "2023-10-06T14:18:06Z",
       "side": 1,
       "message": "nit: ClearTextureOnCreation?",
+      "range": {
+        "startLine": 986,
+        "startChar": 20,
+        "endLine": 986,
+        "endChar": 32
+      },
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb92f88d_633ae5f2",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 986,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-11T23:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65cc2474_f76868b8",
       "range": {
         "startLine": 986,
         "startChar": 20,
@@ -100,6 +160,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb02dff8_33d12551",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-11T23:27:52Z",
+      "side": 1,
+      "message": "IIUC there are two cases when view\u0027s aspect is different from the texture\u0027s aspect:\n1. texture is multiplanar and view is single plane.\n2. texture is depth stencil and view is depth or stencil.\n\nFor 1, view\u0027s format should always be different from the texture\u0027s format so we end up using `useOwnView` above.\nFor 2, when we render to depth stencil attachment, we must use the original texture and not the depth view nor stencil view.",
+      "parentUuid": "a7d5b2e8_a27016d2",
+      "range": {
+        "startLine": 1357,
+        "startChar": 58,
+        "endLine": 1357,
+        "endChar": 91
+      },
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "44eeafa9_cc590241",
         "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
         "patchSetId": 10
@@ -111,6 +195,24 @@
       "writtenOn": "2023-10-06T14:18:06Z",
       "side": 1,
       "message": "nit: What about array layers and view formats?",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d042747a_62bd0471",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-11T23:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44eeafa9_cc590241",
       "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
