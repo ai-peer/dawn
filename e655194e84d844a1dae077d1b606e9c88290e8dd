@@ -16,6 +16,69 @@
       "message": "Please take a look.",
       "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7638d74_55e8251d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T00:02:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78f85f25_cd8e1c84",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 819,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T00:02:23Z",
+      "side": 1,
+      "message": "nit: GetAspectIndex(range.aspects) instead of hardcoding 0",
+      "range": {
+        "startLine": 819,
+        "startChar": 80,
+        "endLine": 819,
+        "endChar": 96
+      },
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36825fa1_0ae28d00",
+        "filename": "src/dawn/native/d3d12/TextureD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1091,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T00:02:23Z",
+      "side": 1,
+      "message": "nit: can use GetAspectIndex(GetAspects()) to get the plane slice",
+      "range": {
+        "startLine": 1091,
+        "startChar": 27,
+        "endLine": 1091,
+        "endChar": 37
+      },
+      "revId": "e655194e84d844a1dae077d1b606e9c88290e8dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
