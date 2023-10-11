@@ -51,6 +51,24 @@
       "parentUuid": "a3747c89_8488ae9e",
       "revId": "9eca7ec2e51665ed3549bbc0af4fe0d8a09a652d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f392668_b2dc5c41",
+        "filename": "src/tint/lang/glsl/validate/BUILD.bazel",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T12:18:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c3616dc2_9ee4531c",
+      "revId": "9eca7ec2e51665ed3549bbc0af4fe0d8a09a652d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
