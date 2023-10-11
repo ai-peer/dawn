@@ -34,6 +34,24 @@
       "parentUuid": "f9a72a59_a8bc49f4",
       "revId": "503561539b93b6b8b4a0a02bbc419c06d09c4786",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59dc6653_320e9059",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T19:37:21Z",
+      "side": 1,
+      "message": "d3d12 will also want to use [GetDeviceRemovedReason](https://learn.microsoft.com/en-us/windows/win32/api/d3d12/nf-d3d12-id3d12device-getdeviceremovedreason)\n\nwe already have AppendDebugLayerMessages - we can have a similar thing to add in the device removed reason.",
+      "parentUuid": "b4ac35ed_49eb3ae2",
+      "revId": "503561539b93b6b8b4a0a02bbc419c06d09c4786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
