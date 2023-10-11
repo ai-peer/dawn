@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b64f697_6eb06200",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T12:48:47Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b5aeb1b_27daf152",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T12:48:47Z",
+      "side": 1,
+      "message": "Wh did this all need to move to C?",
+      "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
