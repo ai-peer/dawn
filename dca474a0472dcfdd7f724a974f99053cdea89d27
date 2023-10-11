@@ -39,6 +39,30 @@
       },
       "revId": "dca474a0472dcfdd7f724a974f99053cdea89d27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae620c74_2d37f695",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-11T16:05:07Z",
+      "side": 1,
+      "message": "I went back and forth on this one, but basically, this `hr` is the result of getting `dxcResult`, so `dxcResult` must be valid if `hr` is okay. This code is symmetrical to the code in the success branch above. I feel like we should keep the symmetry. What do you think?",
+      "parentUuid": "0246a33e_192b2dfa",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 30
+      },
+      "revId": "dca474a0472dcfdd7f724a974f99053cdea89d27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
