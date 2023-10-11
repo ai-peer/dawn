@@ -149,6 +149,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8cd2410f_ff4db689",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T19:58:39Z",
+      "side": 1,
+      "message": "@kainino@chromium.org this is interesting because this would be a case of \"you passed a chained struct that the implementation may not even recognize; but it is valid and you get no errors\".\n\nperhaps we can have a carve-out in webgpu.h for compat-mode structs.",
+      "parentUuid": "f3877bdc_a6cb56f7",
+      "range": {
+        "startLine": 483,
+        "startChar": 4,
+        "endLine": 488,
+        "endChar": 61
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83f0c05b_d3c18c81",
         "filename": "src/dawn/native/Texture.h",
         "patchSetId": 1
