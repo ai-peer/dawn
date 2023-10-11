@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e4cd811_bd055eaf",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-11T21:19:01Z",
+      "side": 1,
+      "message": "I wonder if we should, instead, align size_in_bytes to smallest multiple of the block size. So we basically always allocate n blocks. This would avoid the subsequent allocation after a large alloc having to grow again.",
+      "range": {
+        "startLine": 75,
+        "startChar": 37,
+        "endLine": 75,
+        "endChar": 84
+      },
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
