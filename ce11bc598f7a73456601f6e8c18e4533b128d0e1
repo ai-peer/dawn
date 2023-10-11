@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f94b8b1e_ce1840b0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-11T15:52:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84106132_7f68898e",
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d501eea1_23caa5ce",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0aa96bee_7dc4f1c3",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-11T15:52:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7fe88df_e5f16a1f",
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3965c663_2de18816",
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "542dddbf_afbd199c",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-11T15:52:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3965c663_2de18816",
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e3f6e472_31456e38",
@@ -82,6 +136,30 @@
       "writtenOn": "2023-10-11T14:59:16Z",
       "side": 1,
       "message": "nit: separate the check into dawn DAWN_INVALID_IF and then \"while depthCompare (%s) is not either %s or undefined.\"",
+      "range": {
+        "startLine": 314,
+        "startChar": 13,
+        "endLine": 314,
+        "endChar": 15
+      },
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8bb98460_c69c1e88",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-11T15:52:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3f6e472_31456e38",
       "range": {
         "startLine": 314,
         "startChar": 13,
