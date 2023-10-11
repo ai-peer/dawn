@@ -51,6 +51,24 @@
       "message": "Isn\u0027t there a race between the std::optional\u0027s reset() call and the accesses to its value?\n\nMaybe not because Instance destruction shouldn\u0027t happen racily with anything else, but it would be nice to note it.",
       "revId": "be98f27ad3a22a79c67e1b29d9c6b414139d7cce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0283f09_ec3aaab2",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 70
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-11T02:37:26Z",
+      "side": 1,
+      "message": "I think you\u0027re right, but IIUC the race you\u0027re talking about is between wgpuInstanceRelease and [anything which tracks or process events]. I\u0027m pretty sure there\u0027s several other things that are currently unsafe there. It may even be unsafe to do _anything_ else on the instance concurrently with wgpuInstanceRelease.",
+      "parentUuid": "86310249_0773cdc8",
+      "revId": "be98f27ad3a22a79c67e1b29d9c6b414139d7cce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
