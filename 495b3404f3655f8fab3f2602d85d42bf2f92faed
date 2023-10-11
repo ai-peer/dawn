@@ -22,6 +22,30 @@
       },
       "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9247a2c1_1a6b7c64",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T21:23:59Z",
+      "side": 1,
+      "message": "Let\u0027s get this in as-is. We can consider optimizations later.",
+      "parentUuid": "4e4cd811_bd055eaf",
+      "range": {
+        "startLine": 75,
+        "startChar": 37,
+        "endLine": 75,
+        "endChar": 84
+      },
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
