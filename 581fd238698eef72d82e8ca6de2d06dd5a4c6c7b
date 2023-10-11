@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "285f82b5_5b4b9b32",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-11T19:06:04Z",
+      "side": 1,
+      "message": "Trigged something for compiler that I don\u0027t know about. Is that due to a missing include?\n\n```\n/dawn/src/src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc:36:28: error: use of function template name with no prior declaration in function call with explicit template arguments is a C++20 extension [-Werror,-Wc++20-extensions]\n    return (!pair.first || Is\u003ctint::sem::GlobalVariable\u003e(pair.first)) \u0026\u0026\n```",
+      "parentUuid": "6d2ec5c5_63d82c40",
+      "range": {
+        "startLine": 36,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 74
+      },
+      "revId": "581fd238698eef72d82e8ca6de2d06dd5a4c6c7b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1110cf92_fe35e7fb",
         "filename": "src/tint/lang/glsl/writer/ast_raise/combine_samplers.cc",
         "patchSetId": 4
