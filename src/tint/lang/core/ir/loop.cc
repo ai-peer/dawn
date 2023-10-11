@@ -56,6 +56,9 @@ Loop* Loop::Clone(CloneContext& ctx) {
     body_->CloneInto(ctx, new_body);
     continuing_->CloneInto(ctx, new_continuing);
 
+    auto results = ctx.Clone(results_);
+    new_loop->SetResults(std::move(results));
+
     return new_loop;
 }
 

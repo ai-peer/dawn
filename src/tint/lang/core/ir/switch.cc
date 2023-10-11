@@ -14,6 +14,8 @@
 
 #include "src/tint/lang/core/ir/switch.h"
 
+#include <utility>
+
 #include "src/tint/lang/core/ir/clone_context.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/utils/ice/ice.h"
@@ -54,6 +56,10 @@ Switch* Switch::Clone(CloneContext& ctx) {
         }
         new_switch->cases_.Push(new_case);
     }
+
+    auto results = ctx.Clone(results_);
+    new_switch->SetResults(std::move(results));
+
     return new_switch;
 }
 

@@ -117,5 +117,23 @@ TEST_F(IR_LoopTest, CloneWithExits) {
     EXPECT_EQ(new_loop, new_loop->Body()->Back()->As<NextIteration>()->Loop());
 }
 
+TEST_F(IR_LoopTest, CloneWithResults) {
+    Loop* new_loop = nullptr;
+    {
+        auto* loop = b.Loop();
+        loop->SetResults(Vector{b.InstructionResult(ty.i32()), b.InstructionResult(ty.f32())});
+        b.Append(loop->Body(), [&] { b.ExitLoop(loop, b.Constant(42_i), b.Constant(42_f)); });
+        new_loop = clone_ctx.Clone(loop);
+    }
+
+    ASSERT_EQ(2u, new_loop->Results().Length());
+    auto* r0 = new_loop->Results()[0]->As<InstructionResult>();
+    ASSERT_NE(r0, nullptr);
+    EXPECT_EQ(r0->Type(), ty.i32());
+    auto* r1 = new_loop->Results()[1]->As<InstructionResult>();
+    ASSERT_NE(r1, nullptr);
+    EXPECT_EQ(r1->Type(), ty.f32());
+}
+
 }  // namespace
 }  // namespace tint::core::ir
