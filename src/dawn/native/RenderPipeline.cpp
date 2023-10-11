@@ -258,10 +258,16 @@ MaybeError ValidatePrimitiveState(const DeviceBase* device, const PrimitiveState
 
 MaybeError ValidateDepthStencilState(const DeviceBase* device,
                                      const DepthStencilState* descriptor) {
-    DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain is not nullptr.");
+    DAWN_TRY(ValidateSingleSType(descriptor->nextInChain,
+                                 wgpu::SType::DepthStencilStateDepthWriteDefinedDawn));
 
-    DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->depthCompare),
-                     "validating depth compare function");
+    const DepthStencilStateDepthWriteDefinedDawn* depthWriteDefined = nullptr;
+    FindInChain(descriptor->nextInChain, &depthWriteDefined);
+
+    if (descriptor->depthCompare != wgpu::CompareFunction::Undefined) {
+        DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->depthCompare),
+                         "validating depth compare function");
+    }
     DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->stencilFront.compare),
                      "validating stencil front compare function");
     DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilFront.failOp),
@@ -289,6 +295,14 @@ MaybeError ValidateDepthStencilState(const DeviceBase* device,
         std::isnan(descriptor->depthBiasSlopeScale) || std::isnan(descriptor->depthBiasClamp),
         "Either depthBiasSlopeScale (%f) or depthBiasClamp (%f) is NaN.",
         descriptor->depthBiasSlopeScale, descriptor->depthBiasClamp);
+
+    DAWN_INVALID_IF(
+        format->HasDepth() && descriptor->depthCompare == wgpu::CompareFunction::Undefined,
+        "Depth stencil format (%s) doesn't have depthCompare.", descriptor->format);
+
+    DAWN_INVALID_IF(format->HasDepth() && depthWriteDefined == nullptr,
+                    "Depth stencil format (%s) doesn't have depthWriteEnabled.",
+                    descriptor->format);
 
     DAWN_INVALID_IF(
         !format->HasDepth() && (descriptor->depthCompare != wgpu::CompareFunction::Always ||
