@@ -916,18 +916,11 @@ class CompatTextureViewDimensionValidationTests : public CompatValidationTest {
                                           const wgpu::TextureViewDimension textureViewDimension,
                                           const wgpu::TextureViewDimension viewDimension,
                                           bool success) {
-        wgpu::BindGroupLayoutEntry entry;
-        entry.binding = 0;
-        entry.visibility = wgpu::ShaderStage::Fragment;
-        entry.texture.sampleType = wgpu::TextureSampleType::Float;
-        entry.texture.viewDimension = viewDimension == wgpu::TextureViewDimension::Undefined
-                                          ? wgpu::TextureViewDimension::e2D
-                                          : viewDimension;
-
-        wgpu::BindGroupLayoutDescriptor layoutDesc;
-        layoutDesc.entryCount = 1;
-        layoutDesc.entries = &entry;
-        wgpu::BindGroupLayout layout = device.CreateBindGroupLayout(&layoutDesc);
+        wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
+            device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float,
+                      viewDimension == wgpu::TextureViewDimension::Undefined
+                          ? wgpu::TextureViewDimension::e2D
+                          : viewDimension}});
 
         wgpu::Texture texture = CreateTextureWithViewDimension(depth, wgpu::TextureDimension::e2D,
                                                                textureViewDimension);
@@ -1028,9 +1021,9 @@ TEST_F(CompatTextureViewDimensionValidationTests, TwoLayersIs2DArrayView) {
 }
 
 // Test 6 layer texture gets a 2d-array viewDimension
-TEST_F(CompatTextureViewDimensionValidationTests, SixLayersIsCubeView) {
+TEST_F(CompatTextureViewDimensionValidationTests, SixLayersIs2DArrayView) {
     TestBindingTextureViewDimensions(6, wgpu::TextureViewDimension::Undefined,
-                                     wgpu::TextureViewDimension::Cube, true);
+                                     wgpu::TextureViewDimension::e2DArray, true);
 }
 
 // Test 2d texture can not be viewed as 2D array
