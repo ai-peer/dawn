@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bedcc98_5b5c290a",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-11T21:08:15Z",
+      "side": 1,
+      "message": "Am pretty sure this will now leak memory, as the definition of BlockHeader has changed. You would need to cast `block` to `uint8_t*` then `delete [] ...`.",
+      "range": {
+        "startLine": 100,
+        "startChar": 12,
+        "endLine": 100,
+        "endChar": 25
+      },
+      "revId": "53efa400a8d7d618c30482fafed40aae117671e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
