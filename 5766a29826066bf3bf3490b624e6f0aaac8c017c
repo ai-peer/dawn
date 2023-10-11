@@ -70,6 +70,30 @@
       },
       "revId": "5766a29826066bf3bf3490b624e6f0aaac8c017c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "062a9515_17c99741",
+        "filename": "src/tint/cmd/loopy/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T08:11:26Z",
+      "side": 1,
+      "message": "Good point.\nI noticed that `FlattenBindings` is under `src/tint/lang/wgsl/helpers/`, and the namespace is just wrong. Fixed the namespaces of all the files in that directory, and changed these cmds to drop the `TINT_BUILD_WGSL_WRITER` flag.",
+      "parentUuid": "ddde8ee5_d5e957fd",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 240,
+        "endChar": 17
+      },
+      "revId": "5766a29826066bf3bf3490b624e6f0aaac8c017c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
