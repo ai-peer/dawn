@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9a72a59_a8bc49f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T18:24:50Z",
+      "side": 1,
+      "message": "can you get the reason after we bubble the error out to HandleError?\nhere-ish https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Device.cpp;l\u003d541;bpv\u003d1;bpt\u003d1\n\nthen we don\u0027t need to pass the device into every call",
+      "revId": "503561539b93b6b8b4a0a02bbc419c06d09c4786",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
