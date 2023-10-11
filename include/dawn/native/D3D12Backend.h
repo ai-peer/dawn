@@ -23,7 +23,7 @@
 #include "dawn/native/D3DBackend.h"
 
 struct ID3D12Device;
-struct ID3D12Resource;
+struct ID3D12CommandQueue;
 
 namespace dawn::native::d3d12 {
 
@@ -46,6 +46,9 @@ struct DAWN_NATIVE_EXPORT PhysicalDeviceDiscoveryOptions
 
 // TODO(dawn:1774): Deprecated.
 using AdapterDiscoveryOptions = PhysicalDeviceDiscoveryOptions;
+
+DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<ID3D12Device> GetD3D12Device(WGPUDevice device);
+DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<ID3D12CommandQueue> GetD3D12DefaultCommandQueue(WGPUDevice device);
 
 }  // namespace dawn::native::d3d12
 

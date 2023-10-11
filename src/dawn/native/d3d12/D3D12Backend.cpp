@@ -45,4 +45,13 @@ PhysicalDeviceDiscoveryOptions::PhysicalDeviceDiscoveryOptions()
 PhysicalDeviceDiscoveryOptions::PhysicalDeviceDiscoveryOptions(ComPtr<IDXGIAdapter> adapter)
     : d3d::PhysicalDeviceDiscoveryOptions(WGPUBackendType_D3D12, std::move(adapter)) {}
 
+ComPtr<ID3D12Device> GetD3D12Device(WGPUDevice device) {
+    return ToBackend(FromAPI(device))->GetD3D12Device();
+}
+
+ComPtr<ID3D12CommandQueue> GetD3D12DefaultCommandQueue(WGPUDevice device) {
+    return ToBackend(FromAPI(device))->GetCommandQueue();
+}
+
+
 }  // namespace dawn::native::d3d12
