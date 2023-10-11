@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78061260_5f9cb046",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 2878,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T12:05:54Z",
+      "side": 1,
+      "message": "nit: defined, but also the semantic change mentioned in the Chromium CL.",
+      "range": {
+        "startLine": 2878,
+        "startChar": 34,
+        "endLine": 2878,
+        "endChar": 41
+      },
+      "revId": "efc91c6eedb44176e095fd3c0ab5adb4b5b9312a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
