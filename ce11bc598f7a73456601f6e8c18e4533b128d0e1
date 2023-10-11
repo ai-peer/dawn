@@ -1,0 +1,95 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84106132_7f68898e",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T14:59:16Z",
+      "side": 1,
+      "message": "Please add a tracking issue.",
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d501eea1_23caa5ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T14:59:16Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7fe88df_e5f16a1f",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 301,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T14:59:16Z",
+      "side": 1,
+      "message": "\"Depth stencil format (%s) has a depth aspect and depthCompare is undefined.\"",
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3965c663_2de18816",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 305,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T14:59:16Z",
+      "side": 1,
+      "message": "\"Depth stencil format (%s) has a depth aspect and depthWriteEnabled is undefined.\"",
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3f6e472_31456e38",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-11T14:59:16Z",
+      "side": 1,
+      "message": "nit: separate the check into dawn DAWN_INVALID_IF and then \"while depthCompare (%s) is not either %s or undefined.\"",
+      "range": {
+        "startLine": 314,
+        "startChar": 13,
+        "endLine": 314,
+        "endChar": 15
+      },
+      "revId": "ce11bc598f7a73456601f6e8c18e4533b128d0e1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
