@@ -50,6 +50,29 @@
       "message": "for context, here\u0027s the chromium cl : https://dawn-review.googlesource.com/c/dawn/+/155720?usp\u003demail",
       "revId": "e8c085777eae06b8af180a9f19310d9b9a0dbfb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e82bfdc_e87cbdd2",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-11T19:13:54Z",
+      "side": 1,
+      "message": "Could consider using `ValidateAndUnpackChain` utils. (See this CL that I haven\u0027t gotten a chance to get back to and land for example.... https://dawn-review.googlesource.com/c/dawn/+/147223)",
+      "range": {
+        "startLine": 261,
+        "startChar": 4,
+        "endLine": 265,
+        "endChar": 61
+      },
+      "revId": "e8c085777eae06b8af180a9f19310d9b9a0dbfb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
