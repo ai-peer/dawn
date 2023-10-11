@@ -63,6 +63,30 @@
       },
       "revId": "dca474a0472dcfdd7f724a974f99053cdea89d27",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf82105b_1f533d05",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T16:08:17Z",
+      "side": 1,
+      "message": "I can\u0027t tell from the docs what a non-success status means - whether it was populated or not. were you able to test some kind of disassemble failure and see that we get the errors out successfully?",
+      "parentUuid": "ae620c74_2d37f695",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 30
+      },
+      "revId": "dca474a0472dcfdd7f724a974f99053cdea89d27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
