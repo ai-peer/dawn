@@ -16,11 +16,11 @@
 
 #import <Metal/Metal.h>
 
-#include "src/tint/lang/msl/validate/val.h"
+#include "src/tint/lang/msl/validate/validate.h"
 
 namespace tint::msl::validate {
 
-Result UsingMetalAPI(const std::string& src, MslVersion version) {
+Result ValidateUsingMetal(const std::string& src, MslVersion version) {
     Result result;
 
     NSError* error = nil;

@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_LANG_MSL_VALIDATE_VAL_H_
-#define SRC_TINT_LANG_MSL_VALIDATE_VAL_H_
+#ifndef SRC_TINT_LANG_MSL_VALIDATE_VALIDATE_H_
+#define SRC_TINT_LANG_MSL_VALIDATE_VALIDATE_H_
 
 #include <string>
 #include <utility>
@@ -54,7 +54,7 @@ struct Result {
 /// @param source the generated MSL source
 /// @param version the version of MSL to validate against
 /// @return the result of the compile
-Result Msl(const std::string& xcrun_path, const std::string& source, MslVersion version);
+Result Validate(const std::string& xcrun_path, const std::string& source, MslVersion version);
 
 #ifdef __APPLE__
 /// Msl attempts to compile the shader with the runtime Metal Shader Compiler
@@ -62,9 +62,9 @@ Result Msl(const std::string& xcrun_path, const std::string& source, MslVersion 
 /// @param source the generated MSL source
 /// @param version the version of MSL to validate against
 /// @return the result of the compile
-Result UsingMetalAPI(const std::string& source, MslVersion version);
+Result ValidateUsingMetal(const std::string& source, MslVersion version);
 #endif  // __APPLE__
 
 }  // namespace tint::msl::validate
 
-#endif  // SRC_TINT_LANG_MSL_VALIDATE_VAL_H_
+#endif  // SRC_TINT_LANG_MSL_VALIDATE_VALIDATE_H_
