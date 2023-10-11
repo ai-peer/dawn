@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "346c8744_911b9671",
+        "filename": ".bazelrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T15:28:52Z",
+      "side": 1,
+      "message": "do you still export Tint to a separate repo? I was thinking it may be slightly nicer to have that one only have \"Tint\" in it and not \"Dawn\"",
+      "parentUuid": "d583ace3_fade4d46",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 33
+      },
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1ddaae6_842bc362",
