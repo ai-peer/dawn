@@ -26,7 +26,7 @@ struct UnaryTestCase {
     /// The element type to test.
     TestElementType type;
     /// The unary operation.
-    enum core::ir::Unary::Kind kind;
+    enum core::ir::UnaryOp op;
     /// The expected SPIR-V instruction.
     std::string spirv_inst;
     /// The expected SPIR-V result type name.
@@ -41,7 +41,7 @@ TEST_P(Arithmetic, Scalar) {
     auto* func = b.Function("foo", ty.void_());
     func->SetParams({arg});
     b.Append(func->Block(), [&] {
-        auto* result = b.Unary(params.kind, MakeScalarType(params.type), arg);
+        auto* result = b.Unary(params.op, MakeScalarType(params.type), arg);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -56,7 +56,7 @@ TEST_P(Arithmetic, Vector) {
     auto* func = b.Function("foo", ty.void_());
     func->SetParams({arg});
     b.Append(func->Block(), [&] {
-        auto* result = b.Unary(params.kind, MakeVectorType(params.type), arg);
+        auto* result = b.Unary(params.op, MakeVectorType(params.type), arg);
         b.Return(func);
         mod.SetName(result, "result");
     });
@@ -67,11 +67,11 @@ TEST_P(Arithmetic, Vector) {
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Unary,
     Arithmetic,
-    testing::Values(UnaryTestCase{kI32, core::ir::Unary::Kind::kComplement, "OpNot", "int"},
-                    UnaryTestCase{kU32, core::ir::Unary::Kind::kComplement, "OpNot", "uint"},
-                    UnaryTestCase{kI32, core::ir::Unary::Kind::kNegation, "OpSNegate", "int"},
-                    UnaryTestCase{kF32, core::ir::Unary::Kind::kNegation, "OpFNegate", "float"},
-                    UnaryTestCase{kF16, core::ir::Unary::Kind::kNegation, "OpFNegate", "half"}));
+    testing::Values(UnaryTestCase{kI32, core::ir::UnaryOp::kComplement, "OpNot", "int"},
+                    UnaryTestCase{kU32, core::ir::UnaryOp::kComplement, "OpNot", "uint"},
+                    UnaryTestCase{kI32, core::ir::UnaryOp::kNegation, "OpSNegate", "int"},
+                    UnaryTestCase{kF32, core::ir::UnaryOp::kNegation, "OpFNegate", "float"},
+                    UnaryTestCase{kF16, core::ir::UnaryOp::kNegation, "OpFNegate", "half"}));
 
 }  // namespace
 }  // namespace tint::spirv::writer
