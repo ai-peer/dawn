@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "93c83ba7_f23e7a83",
+        "filename": ".bazelrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T16:11:39Z",
+      "side": 1,
+      "message": "It doesn\u0027t really matter, as it\u0027s a read-only mirror of a subset of Dawn.",
+      "parentUuid": "346c8744_911b9671",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 33
+      },
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "c1ddaae6_842bc362",
