@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a928eee_896bc61b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T16:00:42Z",
+      "side": 1,
+      "message": "thanks for the fix!",
+      "revId": "dca474a0472dcfdd7f724a974f99053cdea89d27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0246a33e_192b2dfa",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-11T16:00:42Z",
+      "side": 1,
+      "message": "didn\u0027t expect to check that the Disassemble was successful here.\n\nmaybe just check that dxcResult is non-null?",
+      "range": {
+        "startLine": 78,
+        "startChar": 16,
+        "endLine": 78,
+        "endChar": 30
+      },
+      "revId": "dca474a0472dcfdd7f724a974f99053cdea89d27",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
