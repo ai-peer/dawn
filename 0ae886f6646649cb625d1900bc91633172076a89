@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6efb237_eb836d30",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-11T17:34:10Z",
+      "side": 1,
+      "message": "Post-landing comment (sorry):\n\nIs T2B -\u003e B2T the only way to support this format? If so, we may want to benchmark it and validate it out if unpleasantly slow.\n\n(Should be all on-GPU copies, though, I\u0027m assuming?)",
+      "revId": "0ae886f6646649cb625d1900bc91633172076a89",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
