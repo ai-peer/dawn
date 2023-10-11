@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7976bb0_03ab50c2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-11T17:23:26Z",
+      "side": 1,
+      "message": "Updated a couple of E2E tests outputs which dropped the +2, PTAL.",
+      "revId": "bf217c7aaae41839e297d10b2271fde17eee7cb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
