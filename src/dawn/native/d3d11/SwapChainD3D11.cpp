@@ -55,8 +55,9 @@ MaybeError SwapChain::CollectSwapChainBuffers() {
     // https://learn.microsoft.com/en-us/windows/win32/api/dxgi/ne-dxgi-dxgi_swap_effect
     // DXGISwapChain is created with DXGI_SWAP_EFFECT_FLIP_DISCARD, we can read and write to the
     // buffer 0 only for D3D11.
-    DAWN_TRY(CheckHRESULT(GetDXGISwapChain()->GetBuffer(0, IID_PPV_ARGS(&mBuffer)),
-                          "Getting IDXGISwapChain buffer"));
+    DAWN_TRY(CheckHRESULTWithDevice(GetDevice(),
+                                    GetDXGISwapChain()->GetBuffer(0, IID_PPV_ARGS(&mBuffer)),
+                                    "Getting IDXGISwapChain buffer"));
 
     return {};
 }

@@ -864,6 +864,10 @@ uint64_t Device::GetBufferCopyOffsetAlignmentForDepthStencil() const {
     return DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil();
 }
 
+HRESULT Device::GetDeviceRemovedReason() {
+    return mD3d12Device->GetDeviceRemovedReason();
+}
+
 ComPtr<IDxcLibrary> Device::GetDxcLibrary() const {
     return ToBackend(GetPhysicalDevice())->GetBackend()->GetDxcLibrary();
 }

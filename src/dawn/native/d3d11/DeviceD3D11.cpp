@@ -177,9 +177,10 @@ MaybeError Device::NextSerial() {
 
     CommandRecordingContext* commandContext =
         GetPendingCommandContext(DeviceBase::SubmitMode::Passive);
-    DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Signal(
-                              mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
-                          "D3D11 command queue signal fence"));
+    DAWN_TRY(CheckHRESULTWithDevice(this,
+                                    commandContext->GetD3D11DeviceContext4()->Signal(
+                                        mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
+                                    "D3D11 command queue signal fence"));
 
     return {};
 }
@@ -557,6 +558,10 @@ Ref<TextureBase> Device::CreateD3DExternalTexture(const TextureDescriptor* descr
         return nullptr;
     }
     return {dawnTexture};
+}
+
+HRESULT Device::GetDeviceRemovedReason() {
+    return mD3d11Device->GetDeviceRemovedReason();
 }
 
 uint32_t Device::GetUAVSlotCount() const {

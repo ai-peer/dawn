@@ -54,6 +54,7 @@ class Device : public DeviceBase {
                                                       std::vector<Ref<Fence>> waitFences,
                                                       bool isSwapChainTexture,
                                                       bool isInitialized) = 0;
+    virtual HRESULT GetDeviceRemovedReason() = 0;
 
   protected:
     void DestroyImpl() override;

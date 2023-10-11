@@ -33,7 +33,8 @@ ResultOrError<Ref<SharedFence>> SharedFence::Create(
     }
 
     Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, ownedHandle));
-    DAWN_TRY(CheckHRESULT(
+    DAWN_TRY(CheckHRESULTWithDevice(
+        device,
         device->GetD3D11Device5()->OpenSharedFence(ownedHandle, IID_PPV_ARGS(&fence->mFence)),
         "D3D11 fence open shared handle"));
     return fence;

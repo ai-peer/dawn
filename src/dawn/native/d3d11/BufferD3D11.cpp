@@ -238,7 +238,8 @@ MaybeError Buffer::MapInternal() {
     // need write permission to initialize the buffer.
     // TODO(dawn:1705): investigate the performance impact of mapping with D3D11_MAP_READ_WRITE.
     D3D11_MAPPED_SUBRESOURCE mappedResource;
-    DAWN_TRY(CheckHRESULT(
+    DAWN_TRY(CheckHRESULTWithDevice(
+        GetDevice(),
         commandContext->GetD3D11DeviceContext()->Map(mD3d11NonConstantBuffer.Get(),
                                                      /*Subresource=*/0, D3D11_MAP_READ_WRITE,
                                                      /*MapFlags=*/0, &mappedResource),
@@ -388,11 +389,12 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Buffer::CreateD3D11ShaderResourc
     desc.BufferEx.NumElements = numElements;
     desc.BufferEx.Flags = D3D11_BUFFEREX_SRV_FLAG_RAW;
     ComPtr<ID3D11ShaderResourceView> srv;
-    DAWN_TRY(
-        CheckHRESULT(ToBackend(GetDevice())
-                         ->GetD3D11Device()
-                         ->CreateShaderResourceView(mD3d11NonConstantBuffer.Get(), &desc, &srv),
-                     "ShaderResourceView creation"));
+    DAWN_TRY(CheckHRESULTWithDevice(
+        GetDevice(),
+        ToBackend(GetDevice())
+            ->GetD3D11Device()
+            ->CreateShaderResourceView(mD3d11NonConstantBuffer.Get(), &desc, &srv),
+        "ShaderResourceView creation"));
 
     return srv;
 }
@@ -414,11 +416,12 @@ ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> Buffer::CreateD3D11UnorderedAc
     desc.Buffer.Flags = D3D11_BUFFER_UAV_FLAG_RAW;
 
     ComPtr<ID3D11UnorderedAccessView1> uav;
-    DAWN_TRY(
-        CheckHRESULT(ToBackend(GetDevice())
-                         ->GetD3D11Device5()
-                         ->CreateUnorderedAccessView1(mD3d11NonConstantBuffer.Get(), &desc, &uav),
-                     "UnorderedAccessView creation"));
+    DAWN_TRY(CheckHRESULTWithDevice(
+        GetDevice(),
+        ToBackend(GetDevice())
+            ->GetD3D11Device5()
+            ->CreateUnorderedAccessView1(mD3d11NonConstantBuffer.Get(), &desc, &uav),
+        "UnorderedAccessView creation"));
     return uav;
 }
 
