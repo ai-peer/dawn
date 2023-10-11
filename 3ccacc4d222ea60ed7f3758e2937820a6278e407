@@ -16,6 +16,24 @@
       "message": "On Linux and MacOS including `src/tint/lang/hlsl/writer/common/options.h` will cause compilation error, so I have to use `30` directly here.",
       "revId": "3ccacc4d222ea60ed7f3758e2937820a6278e407",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "facefb61_787b3ee2",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/truncate_interstage_variables.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T07:54:04Z",
+      "side": 1,
+      "message": "So long as there\u0027s a compiler error if the numbers mismatch, that\u0027s fine.",
+      "parentUuid": "e155c163_84405bc9",
+      "revId": "3ccacc4d222ea60ed7f3758e2937820a6278e407",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
