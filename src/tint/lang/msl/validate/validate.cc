@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#include "src/tint/lang/msl/validate/val.h"
+#include "src/tint/lang/msl/validate/validate.h"
 
 #include "src/tint/lang/wgsl/ast/module.h"
 #include "src/tint/lang/wgsl/program/program.h"
@@ -21,7 +21,7 @@
 
 namespace tint::msl::validate {
 
-Result Msl(const std::string& xcrun_path, const std::string& source, MslVersion version) {
+Result Validate(const std::string& xcrun_path, const std::string& source, MslVersion version) {
     Result result;
 
     auto xcrun = tint::Command(xcrun_path);

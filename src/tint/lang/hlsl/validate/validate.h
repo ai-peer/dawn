@@ -12,8 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-#ifndef SRC_TINT_LANG_HLSL_VALIDATE_VAL_H_
-#define SRC_TINT_LANG_HLSL_VALIDATE_VAL_H_
+#ifndef SRC_TINT_LANG_HLSL_VALIDATE_VALIDATE_H_
+#define SRC_TINT_LANG_HLSL_VALIDATE_VALIDATE_H_
 
 #include <string>
 #include <utility>
@@ -47,10 +47,10 @@ struct Result {
 /// @param source the generated HLSL source
 /// @param entry_points the list of entry points to validate
 /// @return the result of the compile
-Result UsingDXC(const std::string& dxc_path,
-                const std::string& source,
-                const EntryPointList& entry_points,
-                bool require_16bit_types);
+Result ValidateUsingDXC(const std::string& dxc_path,
+                        const std::string& source,
+                        const EntryPointList& entry_points,
+                        bool require_16bit_types);
 
 #ifdef _WIN32
 /// Hlsl attempts to compile the shader with FXC, verifying that the shader
@@ -59,11 +59,11 @@ Result UsingDXC(const std::string& dxc_path,
 /// @param source the generated HLSL source
 /// @param entry_points the list of entry points to validate
 /// @return the result of the compile
-Result UsingFXC(const std::string& fxc_path,
-                const std::string& source,
-                const EntryPointList& entry_points);
+Result ValidateUsingFXC(const std::string& fxc_path,
+                        const std::string& source,
+                        const EntryPointList& entry_points);
 #endif  // _WIN32
 
 }  // namespace tint::hlsl::validate
 
-#endif  // SRC_TINT_LANG_HLSL_VALIDATE_VAL_H_
+#endif  // SRC_TINT_LANG_HLSL_VALIDATE_VALIDATE_H_
