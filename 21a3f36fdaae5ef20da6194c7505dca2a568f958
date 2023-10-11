@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d583ace3_fade4d46",
+        "filename": ".bazelrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T11:03:05Z",
+      "side": 1,
+      "message": "Should we take this as an opportunity to consolidate the Authors in the repo? We have a weird mix of two sets of authors. The intersection points are muddy.\n\nSuggestion: `The Dawn \u0026 Tint Authors`\nor just `The Dawn Authors`. I\u0027m sure the tint team wouldn\u0027t be too upset 😊",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 33
+      },
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1ddaae6_842bc362",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-11T11:03:05Z",
+      "side": 1,
+      "message": "No objections, but one suggestion for consolidating the authors.\n\n`-70820 +172534` - well that\u0027s certainly one way to bump your contribution stats 😜",
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
