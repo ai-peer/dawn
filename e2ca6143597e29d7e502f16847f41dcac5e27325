@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "e2ca6143597e29d7e502f16847f41dcac5e27325",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f68a4a91_48016267",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T15:40:44Z",
+      "side": 1,
+      "message": "you may want to use AppendBackendMessage instead. if you look at the definition of GetFormattedMessage, this will print out as \"\" - While Device removed reason: ...\"",
+      "revId": "e2ca6143597e29d7e502f16847f41dcac5e27325",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
