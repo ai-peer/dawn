@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccaf3c59_19c53ed8",
+        "filename": "dawn.json",
+        "patchSetId": 7
+      },
+      "lineNbr": 2277,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T00:00:24Z",
+      "side": 1,
+      "message": "We don\u0027t need to keep this for Emscripten, we can fix Emscripten whenever the headers roll in. So you can remove this variant (and the tags below) sometime.",
+      "revId": "3a00a9e5c4179d789cfe89ba09c329b57d39f947",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
