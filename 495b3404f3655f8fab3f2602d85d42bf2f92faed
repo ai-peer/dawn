@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44b32ce5_4432492f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "More pairs of eyes! 😄",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9109fd91_8b2b0292",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "Is this ever supposed to happen if the size of allocations is a reasonable multiple of the input (aka shader source length)? This maybe could be a CHECK()?",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e4cd811_bd055eaf",
@@ -44,6 +78,108 @@
         "endLine": 75,
         "endChar": 84
       },
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "044682e9_9331e88d",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "Just to check, it is the caller that\u0027s supposed to care for alignment?",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09bbcc3b_8355f620",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "For safety we should set the `data.current_data_size` to 0 here, and set it to the size only after we know the allocation succeeded. Ditto data.current should be set only after the allocation succeeded.",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f31a62e2_cec59f61",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "Technically I think we should allocate chars because they are the only type of allocation that is allowed to be cast to other types of data.",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b01c72e5_1458a1a1",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "Note that in Chromium a failure to allocate the uint8_t will crash, and in C++ with exceptions on it will throw an exception. You might want to use `new(std::nothrow) uint8_t`",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4066216_baa17682",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "Q: We know that we never want to run any destructors here?",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ff2296f_c1fc4e5a",
+        "filename": "src/tint/utils/symbol/symbol_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:05:52Z",
+      "side": 1,
+      "message": "Slight worry that the overflow is hidden by returning a placeholder symbol instead of a proper error or a crash.",
       "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
