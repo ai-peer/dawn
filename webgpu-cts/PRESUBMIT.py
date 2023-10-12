@@ -46,6 +46,16 @@ def _DoCommonChecks(input_api, output_api):
             stdout=input_api.subprocess.PIPE,
             stderr=input_api.subprocess.PIPE,
             cwd=input_api.change.RepositoryRoot())
+
+        compat_expectations_path = input_api.os_path.join(
+            input_api.change.RepositoryRoot(), 'webgpu-cts',
+            'compat-expectations.txt')
+        cmd = [cts_bin, 'validate', '--expectations', compat_expectations_path]
+        input_api.subprocess.check_call_out(
+            cmd,
+            stdout=input_api.subprocess.PIPE,
+            stderr=input_api.subprocess.PIPE,
+            cwd=input_api.change.RepositoryRoot())
     except input_api.subprocess.CalledProcessError as e:
         results.append(output_api.PresubmitError('%s' % (e, )))
     return results
