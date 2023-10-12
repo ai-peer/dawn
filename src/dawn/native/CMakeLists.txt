@@ -498,8 +498,10 @@ if (DAWN_ENABLE_METAL)
         "metal/UtilsMetal.h"
         "metal/UtilsMetal.mm"
     )
+    if (NOT DAWN_TARGET_iOS)
+        target_link_libraries(dawn_native PRIVATE "-framework Cocoa")
+    endif()
     target_link_libraries(dawn_native PRIVATE
-        "-framework Cocoa"
         "-framework IOKit"
         "-framework IOSurface"
         "-framework QuartzCore"
