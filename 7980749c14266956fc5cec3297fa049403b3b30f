@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d19dc3eb_e2977ff6",
+        "filename": "src/tint/lang/core/ir/if.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-12T00:16:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aaf40c38_1ab2d724",
+      "range": {
+        "startLine": 64,
+        "startChar": 0,
+        "endLine": 65,
+        "endChar": 43
+      },
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "864b0b4a_5ba55ecc",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-10-11T23:18:03Z",
       "side": 1,
       "message": "Would be good to check that the returned values are different from the original `if_`\u0027s.\n\nSame for the other instructions\u0027 tests.",
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31064a22_230cf6aa",
+        "filename": "src/tint/lang/core/ir/if_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-12T00:16:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "864b0b4a_5ba55ecc",
       "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0ca46b6_a308425f",
+        "filename": "src/tint/lang/core/ir/loop.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-12T00:16:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "181c5804_8420b3d9",
+      "range": {
+        "startLine": 60,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 45
+      },
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1754ac2b_2ebb165f",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-10-11T23:18:03Z",
       "side": 1,
       "message": "```suggestion\n    new_switch-\u003eSetResults(ctx.Clone(results_));\n```",
+      "range": {
+        "startLine": 61,
+        "startChar": 4,
+        "endLine": 61,
+        "endChar": 47
+      },
+      "revId": "7980749c14266956fc5cec3297fa049403b3b30f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2faba5ef_343a961e",
+        "filename": "src/tint/lang/core/ir/switch.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-12T00:16:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1754ac2b_2ebb165f",
       "range": {
         "startLine": 61,
         "startChar": 4,
