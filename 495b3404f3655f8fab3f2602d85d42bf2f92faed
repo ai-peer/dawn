@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90731cd7_321f96e0",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:28:03Z",
+      "side": 1,
+      "message": "No, but the outcome of this actually happening is Not Good™. The unconditional guard is sensible, IMO.",
+      "parentUuid": "9109fd91_8b2b0292",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e4cd811_bd055eaf",
@@ -116,6 +134,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "21a00418_1ed2b166",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:28:03Z",
+      "side": 1,
+      "message": "David made the same comment, and I replied to that.",
+      "parentUuid": "044682e9_9331e88d",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e375c83_98c6a5dd",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:28:03Z",
+      "side": 1,
+      "message": "Ack. Will do as a follow-up",
+      "parentUuid": "09bbcc3b_8355f620",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f31a62e2_cec59f61",
@@ -129,6 +183,24 @@
       "writtenOn": "2023-10-12T09:05:52Z",
       "side": 1,
       "message": "Technically I think we should allocate chars because they are the only type of allocation that is allowed to be cast to other types of data.",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "456e9036_6193d7d7",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:28:03Z",
+      "side": 1,
+      "message": "We had this discussion before, but I still get spooked by the fluffiness of `char`\u0027s definition in C++. I\u0027ve been bitten by `char` being something unusual before, and I strongly prefer the explicitness of the `cstdint` types.\n\n\u003e Technically I think we should allocate chars because they are the only type of allocation that is allowed to be cast to other types of data.\n\nThis is new to me. Please can you point me at something describing this?\n\nRegardless, I\u0027ll still likely use `Bitcast\u003cT\u003e` as CFI checks can get grumpy about pointer reinterpretation. I\u0027d be hesitant to rely on a `char*` -\u003e `BlockHeader*` being exonerated.",
+      "parentUuid": "f31a62e2_cec59f61",
       "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -152,6 +224,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88a3317f_4195af66",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:28:03Z",
+      "side": 1,
+      "message": "Ack.",
+      "parentUuid": "b01c72e5_1458a1a1",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4066216_baa17682",
         "filename": "src/tint/utils/memory/bump_allocator.h",
         "patchSetId": 4
@@ -163,6 +253,24 @@
       "writtenOn": "2023-10-12T09:05:52Z",
       "side": 1,
       "message": "Q: We know that we never want to run any destructors here?",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aef20737_5ac51303",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:28:03Z",
+      "side": 1,
+      "message": "Yes, because the only way to allocate memory from this is with `Allocate()`, which does not provide a type to construct. Construction / Destruction (if you were to do with memory allocated from this class, which I would discourage) would need to be done externally.",
+      "parentUuid": "c4066216_baa17682",
       "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
