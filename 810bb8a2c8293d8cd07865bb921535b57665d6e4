@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0d830b30_cddad744",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-12T14:13:24Z",
+      "side": 1,
+      "message": "I would prefer using StackVector so that we could assert the size and make sure we don\u0027t use 2nd plane in the single plane texture for example. It also makes it easier to loop through the the planes in `SetLabelImpl`. Plus StackVector automatically inializes them as nil when first created and release them when clearing (AFAIK std::array doesn\u0027t do that automatically).",
+      "parentUuid": "8e97ac76_3c5541d4",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be23f452_cf2f3e12",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 10
@@ -120,6 +138,24 @@
       "side": 1,
       "message": "Sorry I wasn\u0027t clear. I was suggesting removing the ClearTextureOnCreation calls at a and c, and moving the code in b (ClearTextureOnCreation) here. Basically this is the only function that creates textures needing ClearOnCreation so we can just call it / inline it in this function.",
       "parentUuid": "e7bb8966_baaee13a",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "042d0259_505287a1",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-12T14:13:24Z",
+      "side": 1,
+      "message": "ok makes sense. Done.",
+      "parentUuid": "0064a0f2_9bfe35b3",
       "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

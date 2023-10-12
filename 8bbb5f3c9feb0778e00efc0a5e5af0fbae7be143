@@ -67,6 +67,24 @@
       "message": "One slightly unrelated question, that might lead to follow-up work: if the texture size is odd, say (3, 5) what should be the size of the UV plane? (2, 3)? I think the current computations would give (1, 2). Or is it validated out?",
       "revId": "8bbb5f3c9feb0778e00efc0a5e5af0fbae7be143",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6bfe86e_c24593d1",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-12T14:13:24Z",
+      "side": 1,
+      "message": "Ok I wasn\u0027t aware that odd sized YUV image would have rounded up UV size in some implementations. Looks like we need a separate CL to fix this. But I guess in practice odd size YUV images are rare. Most of them are used by video and standard video should be even sized.\n\nI added a tracker for this https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2135",
+      "parentUuid": "6cfe09ab_5d4b9310",
+      "revId": "8bbb5f3c9feb0778e00efc0a5e5af0fbae7be143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
