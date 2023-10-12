@@ -732,6 +732,9 @@ func (r *runner) runServer(ctx context.Context, id int, caseIndices <-chan int, 
 		cmd.Stdout = &pl
 		cmd.Stderr = &pl
 
+		if r.verbose {
+			PrintCommand(r.stdout, cmd)
+		}
 		err := cmd.Start()
 		if err != nil {
 			return fmt.Errorf("failed to start test runner server: %v", err)
@@ -1170,6 +1173,9 @@ func (r *runner) runTestcase(ctx context.Context, query string) result {
 	cmd.Stdout = &buf
 	cmd.Stderr = &buf
 
+	if r.verbose {
+		PrintCommand(r.stdout, cmd)
+	}
 	err := cmd.Run()
 
 	msg := buf.String()
@@ -1471,4 +1477,24 @@ func SplitCTSQuery(testcase string) cov.Path {
 		out = append(out, end)
 	}
 	return out
+}
+
+func PrintCommand(writer io.Writer, cmd *exec.Cmd) {
+	quote := func(s string) string {
+		if strings.ContainsAny(s, " ,()") {
+			return fmt.Sprintf("\"%v\"", s)
+		}
+		return s
+	}
+
+	fmt.Fprintf(writer, "Running:\n")
+	fmt.Fprintf(writer, "  Cmd: %v ", quote(cmd.Path))
+	for i, arg := range cmd.Args[1:] {
+		fmt.Fprintf(writer, "%v", quote(arg))
+		if (i + 1) < len(cmd.Args) {
+			fmt.Fprintf(writer, " ")
+		}
+	}
+	fmt.Fprintln(writer)
+	fmt.Fprintf(writer, "  Dir: %v\n", cmd.Dir)
 }
