@@ -34,6 +34,24 @@
       "parentUuid": "9bf9c689_89b41639",
       "revId": "e608f60f0184a4d55259c68d9d6153d952fd82b4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72383588_96b796b2",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-12T11:59:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7fa4cdd_23f8012f",
+      "revId": "e608f60f0184a4d55259c68d9d6153d952fd82b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
