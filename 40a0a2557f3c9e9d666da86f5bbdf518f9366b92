@@ -51,6 +51,24 @@
       "parentUuid": "4b5aeb1b_27daf152",
       "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "981a4523_a93a2506",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:56:02Z",
+      "side": 1,
+      "message": "simplest thing without overhauling the rest of the tests is probably to have `InstanceRequestAdapter` (or whatever function you are testing) take C++ args, but then cast to C for calling `CallImpl`",
+      "parentUuid": "2d6fda95_d743b921",
+      "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
