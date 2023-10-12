@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dea07cd5_68298c6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003891
+      },
+      "writtenOn": "2023-10-12T15:10:42Z",
+      "side": 1,
+      "message": "Found this when looking at binary size of a dawn roll CL.\n\nhttps://chrome-supersize.firebaseapp.com/viewer.html?load_url\u003dhttps%3A%2F%2Fstorage.googleapis.com%2Fchromium-binary-size-trybot-results%2Fandroid-binary-size%2F2023%2F09%2F26%2F1631006%2Fsupersize_diff.sizediff#focus\u003d481\n\nThought I\u0027d point out that the use of lambdas in data.cc leads to a lot of anonymous symbols. Not sure if it\u0027d be possible to switch to more explicit function pointers, but doing so would make inspections easier (e.g. for size or for sampling profilers), as well as reduce risk of PGO profiles not applying (e.g. a single added lambda will shift all the names)\n\nLikely not much of an issue (e.g. maybe the file won\u0027t change much), but thought I\u0027d point it out as a thing that\u0027s a bit unusual.",
+      "revId": "f319cdf324b17b378fb6b03c4965026195ab1faf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
