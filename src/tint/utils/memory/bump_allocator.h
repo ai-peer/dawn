@@ -65,20 +65,21 @@ class BumpAllocator {
     /// current block is full.
     /// @param size_in_bytes the number of bytes to allocate
     /// @returns the pointer to the allocated memory or `nullptr` if the memory can not be allocated
-    uint8_t* Allocate(size_t size_in_bytes) {
+    char* Allocate(size_t size_in_bytes) {
         if (TINT_UNLIKELY(data.current_offset + size_in_bytes < size_in_bytes)) {
             return nullptr;  // integer overflow
         }
         if (data.current_offset + size_in_bytes > data.current_data_size) {
             // Allocate a new block from the heap
             auto* prev_block = data.current;
-            data.current_data_size = std::max(size_in_bytes, kDefaultBlockDataSize);
+            size_t data_size = std::max(size_in_bytes, kDefaultBlockDataSize);
             data.current =
-                Bitcast<BlockHeader*>(new uint8_t[sizeof(BlockHeader) + data.current_data_size]);
-            if (!data.current) {
+                Bitcast<BlockHeader*>(new (std::nothrow) char[sizeof(BlockHeader) + data_size]);
+            if (TINT_UNLIKELY(!data.current)) {
                 return nullptr;  // out of memory
             }
             data.current->next = nullptr;
+            data.current_data_size = data_size;
             data.current_offset = 0;
             if (prev_block) {
                 prev_block->next = data.current;
@@ -87,7 +88,7 @@ class BumpAllocator {
             }
         }
 
-        auto* base = Bitcast<uint8_t*>(data.current) + sizeof(BlockHeader);
+        auto* base = Bitcast<char*>(data.current) + sizeof(BlockHeader);
         auto* ptr = base + data.current_offset;
         data.current_offset += size_in_bytes;
         data.count++;
