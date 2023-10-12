@@ -170,6 +170,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98588fec_7b9cdd50",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:46:41Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/155900",
+      "parentUuid": "1e375c83_98c6a5dd",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f31a62e2_cec59f61",
@@ -223,6 +241,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2e72d84_563418d6",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:46:41Z",
+      "side": 1,
+      "message": "Thanks. Done in:\n\nhttps://dawn-review.googlesource.com/c/dawn/+/155900",
+      "parentUuid": "518de186_f2dc506f",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b01c72e5_1458a1a1",
@@ -254,6 +290,24 @@
       "side": 1,
       "message": "Ack.",
       "parentUuid": "b01c72e5_1458a1a1",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cfeb81e_2bd8068b",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:46:41Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/155900",
+      "parentUuid": "88a3317f_4195af66",
       "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -324,6 +378,24 @@
       "side": 1,
       "message": "I\u0027ll add a `TINT_ICE` in this conditional.",
       "parentUuid": "8ff2296f_c1fc4e5a",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f9d63d_49f091c3",
+        "filename": "src/tint/utils/symbol/symbol_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:46:41Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/155900",
+      "parentUuid": "2a65281d_d25952bf",
       "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
