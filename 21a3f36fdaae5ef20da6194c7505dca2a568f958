@@ -109,6 +109,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8bd7ed4f_5fb38497",
+        "filename": ".bazelrc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T17:11:17Z",
+      "side": 1,
+      "message": "Done. with \"The Dawn \u0026 Tint Authors\"",
+      "parentUuid": "93c83ba7_f23e7a83",
+      "range": {
+        "startLine": 1,
+        "startChar": 17,
+        "endLine": 1,
+        "endChar": 33
+      },
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "c1ddaae6_842bc362",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -137,6 +161,24 @@
       "writtenOn": "2023-10-11T17:57:31Z",
       "side": 1,
       "message": "In general LG",
+      "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b7614a_b64ae1fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T17:11:17Z",
+      "side": 1,
+      "message": "that\u0027s how impact works right??\n\nthanks to your suggestion to normalize the Authors line, we are now at `-78655 +180413`!",
+      "parentUuid": "c1ddaae6_842bc362",
       "revId": "21a3f36fdaae5ef20da6194c7505dca2a568f958",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
