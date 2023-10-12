@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ffc7c0_b72bbd32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "overall LGTM, but it is admittedly a bit complicated to abstract over the callback modes",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd52095_9177a797",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "why do we need the wrapper struct? there are cases where for example we do:\n\n```\nusing TextureFormat \u003d wgpu::TextureFormat;\nDAWN_TEST_PARAM_STRUCT(CopyTextureFormatParams, TextureFormat);\n```",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e05305b3_8fcaa252",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "why does it need to be optional?",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 61,
+        "endChar": 43
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9fe6349_aecc0494",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "existing nit: this is LoseLastRef, not a buffer.Destroy\n\nwe should have a test for the destroy case as well though",
+      "range": {
+        "startLine": 325,
+        "startChar": 30,
+        "endLine": 325,
+        "endChar": 38
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe8ba244_14a8146b",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "nit: weird that this isn\u0027t const\n\nalso just so I understand - this is a function instead of inlined to keep this header thinner?",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 33
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8af594a_8685c267",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "```suggestion\n    //     FlushClientFutures();  // Emsures the callback is ready but NOT called.\n```",
+      "range": {
+        "startLine": 127,
+        "startChar": 37,
+        "endLine": 127,
+        "endChar": 45
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdb1d4b_28ac6741",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "maybe it would be better to split out the functions so test code is more verbose but more clear, doing:\n\nFlushClient();\nMakeFuturesReady();\nFlushServer();\nFlushCallbacks();\n\n?\n\nthis might help alleviate your comments thoughout which need to explain why you\u0027re calling FlushClient instead of FlushClientFutures(), or FlushServer() instead of FlushServerFutures()",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "040efa37_412a189d",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "nit: never used outside of SetUp();\n\ndoesn\u0027t need to be a member",
+      "range": {
+        "startLine": 178,
+        "startChar": 0,
+        "endLine": 178,
+        "endChar": 29
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7712311_4b1eb0a9",
+        "filename": "src/dawn/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T06:53:31Z",
+      "side": 1,
+      "message": "can we have Disconnect be like device lost where WaitAny/ProcessEvents futures will *not* be called automatically? instead, any futures that we don\u0027t know the status of get marked as \"done successfully\" and you still get those callbacks when calling WaitAny or ProcessEvents",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
