@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bf9c689_89b41639",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 841,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-12T09:30:13Z",
+      "side": 1,
+      "message": "I added this in latest patch as I was working on CTS.",
+      "revId": "e608f60f0184a4d55259c68d9d6153d952fd82b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
