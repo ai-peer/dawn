@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ce1e87_6c73998f",
+        "filename": "src/dawn/wire/client/Queue.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 0,
+      "message": "IIUC this changes the behavior for the old entry point too? If so, this is an important change and should be noted in the commit title.",
+      "revId": "3a00a9e5c4179d789cfe89ba09c329b57d39f947",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

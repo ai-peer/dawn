@@ -18,6 +18,46 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce84e37d_3c40325b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "c",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fb1753_9a657c95",
+        "filename": "dawn.json",
+        "patchSetId": 9
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "nit: the definition for `buffer map callback info` has a tab character before its last `]`:\nhttps://dawn-review.googlesource.com/c/dawn/+/152621/16/dawn.json",
+      "range": {
+        "startLine": 480,
+        "startChar": 55,
+        "endLine": 480,
+        "endChar": 79
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8fd52095_9177a797",
@@ -66,6 +106,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6e350c55_b327d11b",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "```suggestion\n// Check that the map callback is called with \"DestroyedBeforeCallback\" when the buffer is\n```",
+      "range": {
+        "startLine": 174,
+        "startChar": 18,
+        "endLine": 174,
+        "endChar": 35
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c9fe6349_aecc0494",
         "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
         "patchSetId": 9
@@ -83,6 +146,23 @@
         "endLine": 325,
         "endChar": 38
       },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1632c1fa_8eee27fb",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 325,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "Also do we have tests for LoseLastRef before the callback? In that case the callback should still be called I think (though it\u0027s a corner case)",
       "revId": "295742eb2ada98030f220f2968d3894be437db8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -175,6 +255,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "163dacef_0aedc500",
+        "filename": "src/dawn/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "```suggestion\n    // Overridden version of wgpuQueueOnSubmittedWorkDone that defers to the API call based on the\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 7,
+        "endLine": 44,
+        "endChar": 16
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "176fe732_49c239f8",
+        "filename": "src/dawn/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "```suggestion\n    // that for Async/Spontaneous events, the callback is actually going to happen in the\n```",
+      "range": {
+        "startLine": 105,
+        "startChar": 86,
+        "endLine": 105,
+        "endChar": 88
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a7712311_4b1eb0a9",
         "filename": "src/dawn/tests/unittests/wire/WireQueueTests.cpp",
         "patchSetId": 9
@@ -186,6 +312,47 @@
       "writtenOn": "2023-10-12T06:53:31Z",
       "side": 1,
       "message": "can we have Disconnect be like device lost where WaitAny/ProcessEvents futures will *not* be called automatically? instead, any futures that we don\u0027t know the status of get marked as \"done successfully\" and you still get those callbacks when calling WaitAny or ProcessEvents",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3a1e77f_164f5b13",
+        "filename": "src/dawn/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "I think this would be ideal, though I don\u0027t think chrome will rely on it (I think it\u0027s going to use spontaneous?) so it\u0027s not super important if it\u0027s hard to implement IMO",
+      "parentUuid": "a7712311_4b1eb0a9",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0315af1_3436dc4f",
+        "filename": "src/dawn/tests/unittests/wire/WireQueueTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-12T23:55:04Z",
+      "side": 1,
+      "message": "update comment",
+      "range": {
+        "startLine": 128,
+        "startChar": 3,
+        "endLine": 128,
+        "endChar": 14
+      },
       "revId": "295742eb2ada98030f220f2968d3894be437db8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
