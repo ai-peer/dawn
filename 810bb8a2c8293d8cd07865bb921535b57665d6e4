@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e97ac76_3c5541d4",
+        "filename": "src/dawn/native/metal/TextureMTL.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:20:20Z",
+      "side": 1,
+      "message": "What do you think of making it an array\u003c\u003e instead of a stackvector? I don\u0027t think we actually use the size, only that planes are nil vs. not.",
+      "parentUuid": "75498b98_e6afdc8e",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "be23f452_cf2f3e12",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 10
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "Not sure I understand your suggestion correctly. Do you mean keeping only one ClearTexture and deduce the clearValue implicitly instead of having another one having explicit clearValue?\n\nI don\u0027t know it\u0027s intended or not but the `EnsureSubresourceContentInitialized` function only uses ClearTexture with explicit clearValue\u003dZero.",
       "parentUuid": "be23f452_cf2f3e12",
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0064a0f2_9bfe35b3",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:20:20Z",
+      "side": 1,
+      "message": "Sorry I wasn\u0027t clear. I was suggesting removing the ClearTextureOnCreation calls at a and c, and moving the code in b (ClearTextureOnCreation) here. Basically this is the only function that creates textures needing ClearOnCreation so we can just call it / inline it in this function.",
+      "parentUuid": "e7bb8966_baaee13a",
       "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -172,6 +208,30 @@
       "side": 1,
       "message": "IIUC there are two cases when view\u0027s aspect is different from the texture\u0027s aspect:\n1. texture is multiplanar and view is single plane.\n2. texture is depth stencil and view is depth or stencil.\n\nFor 1, view\u0027s format should always be different from the texture\u0027s format so we end up using `useOwnView` above.\nFor 2, when we render to depth stencil attachment, we must use the original texture and not the depth view nor stencil view.",
       "parentUuid": "a7d5b2e8_a27016d2",
+      "range": {
+        "startLine": 1357,
+        "startChar": 58,
+        "endLine": 1357,
+        "endChar": 91
+      },
+      "revId": "810bb8a2c8293d8cd07865bb921535b57665d6e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c82bf49d_d771f6a9",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 10
+      },
+      "lineNbr": 1357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:20:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "bb02dff8_33d12551",
       "range": {
         "startLine": 1357,
         "startChar": 58,

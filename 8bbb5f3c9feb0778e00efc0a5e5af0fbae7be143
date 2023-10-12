@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17f969a3_cd300f20",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:20:20Z",
+      "side": 1,
+      "message": "[c]",
+      "revId": "8bbb5f3c9feb0778e00efc0a5e5af0fbae7be143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfcb464c_67715dd2",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 816,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:20:20Z",
+      "side": 1,
+      "message": "[a]",
+      "revId": "8bbb5f3c9feb0778e00efc0a5e5af0fbae7be143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2dc0c18_922b29ec",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 13
+      },
+      "lineNbr": 1008,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:20:20Z",
+      "side": 1,
+      "message": "[b]",
+      "revId": "8bbb5f3c9feb0778e00efc0a5e5af0fbae7be143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cfe09ab_5d4b9310",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:20:20Z",
+      "side": 1,
+      "message": "One slightly unrelated question, that might lead to follow-up work: if the texture size is odd, say (3, 5) what should be the size of the UV plane? (2, 3)? I think the current computations would give (1, 2). Or is it validated out?",
+      "revId": "8bbb5f3c9feb0778e00efc0a5e5af0fbae7be143",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
