@@ -16,6 +16,24 @@
       "message": "Your fix is good.\n\nSeparately, I wonder if the alignment of the returned pointer is sufficient for all data types you might be needing to allocate for.  That\u0027s an unenforced contract. In future we might want to consider it.",
       "revId": "5784a4bd7a0ca25ff2ec57a2b9759a34621ba51c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6568b355_d1d1ded7",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T08:37:16Z",
+      "side": 1,
+      "message": "Yes, I was wondering the same thing - however the only use right now is for byte array allocations, and the heap will allocate at least 4 byte alignment - so we\u0027re good for the immediate needs.",
+      "parentUuid": "67e8782c_5c6353d6",
+      "revId": "5784a4bd7a0ca25ff2ec57a2b9759a34621ba51c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
