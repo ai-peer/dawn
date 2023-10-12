@@ -290,6 +290,24 @@
       "message": "Slight worry that the overflow is hidden by returning a placeholder symbol instead of a proper error or a crash.",
       "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a65281d_d25952bf",
+        "filename": "src/tint/utils/symbol/symbol_table.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T09:30:29Z",
+      "side": 1,
+      "message": "I\u0027ll add a `TINT_ICE` in this conditional.",
+      "parentUuid": "8ff2296f_c1fc4e5a",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
