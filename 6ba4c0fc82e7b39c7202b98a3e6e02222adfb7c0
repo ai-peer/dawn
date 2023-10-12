@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ace15ce_c3a5916e",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T13:49:12Z",
+      "side": 1,
+      "message": "I assume the stub implementation (when MiraclePtr is disabled) will also zero if this is true?",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "6ba4c0fc82e7b39c7202b98a3e6e02222adfb7c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
