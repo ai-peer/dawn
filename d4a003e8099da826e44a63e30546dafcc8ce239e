@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db0cef6b_2180e09e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T15:47:51Z",
+      "side": 1,
+      "message": "+2. All style / readability nits.",
+      "revId": "d4a003e8099da826e44a63e30546dafcc8ce239e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9e98b4f_c20885e3",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1483,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T15:47:51Z",
+      "side": 1,
+      "message": "`maybeQuote`?",
+      "range": {
+        "startLine": 1483,
+        "startChar": 1,
+        "endLine": 1483,
+        "endChar": 6
+      },
+      "revId": "d4a003e8099da826e44a63e30546dafcc8ce239e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20029375_8574ccaa",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1494,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T15:47:51Z",
+      "side": 1,
+      "message": "nit: bit more common to see: \n```\n  if i \u003e 0 {\n    fmt.Fprint(writer, \" \")\n  }\n  fmt.Fprint(writer, quote(arg))\n```",
+      "range": {
+        "startLine": 1494,
+        "startChar": 1,
+        "endLine": 1494,
+        "endChar": 30
+      },
+      "revId": "d4a003e8099da826e44a63e30546dafcc8ce239e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b43d7cc_5f6c4238",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1512,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T15:47:51Z",
+      "side": 1,
+      "message": "purely personal taste, but I prefer: `b :\u003d \u0026bytes.Buffer{}`\n\nYou then don\u0027t need the `\u0026b` on the next line",
+      "range": {
+        "startLine": 1512,
+        "startChar": 1,
+        "endLine": 1512,
+        "endChar": 19
+      },
+      "revId": "d4a003e8099da826e44a63e30546dafcc8ce239e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9bc2eca_f5658028",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1515,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T15:47:51Z",
+      "side": 1,
+      "message": "it\u0027s good practice to check for the returned error, but I don\u0027t think there\u0027s any way this could error, so meh.",
+      "range": {
+        "startLine": 1515,
+        "startChar": 3,
+        "endLine": 1515,
+        "endChar": 9
+      },
+      "revId": "d4a003e8099da826e44a63e30546dafcc8ce239e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22761210_f5f213a3",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 1520,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-12T15:47:51Z",
+      "side": 1,
+      "message": "`fmt.Fprintln(writer, s)`",
+      "range": {
+        "startLine": 1520,
+        "startChar": 1,
+        "endLine": 1520,
+        "endChar": 31
+      },
+      "revId": "d4a003e8099da826e44a63e30546dafcc8ce239e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
