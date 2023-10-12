@@ -22,6 +22,30 @@
       },
       "revId": "6ba4c0fc82e7b39c7202b98a3e6e02222adfb7c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e418cc_3a90da66",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 6
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-10-12T13:57:14Z",
+      "side": 1,
+      "message": "This option directly govern the stub implementation.\n\nDawn can decide what its likes the most when MiraclePtr is disabled, by modifying this option. We can also make a per-pointer decision using `raw_ptr\u003cT, AllowUninitialized\u003e`.\n\n\nSee this [comment thread](https://docs.google.com/document/d/1wz45t0alQthsIU9P7_rQcfQyqnrBMXzrOjSzdQo-V-A/edit?disco\u003dAAAA1DcqrQM) associated with this [section](https://docs.google.com/document/d/1wz45t0alQthsIU9P7_rQcfQyqnrBMXzrOjSzdQo-V-A/edit#bookmark\u003did.vtsm5j6ans0j)",
+      "parentUuid": "0ace15ce_c3a5916e",
+      "range": {
+        "startLine": 25,
+        "startChar": 0,
+        "endLine": 25,
+        "endChar": 33
+      },
+      "revId": "6ba4c0fc82e7b39c7202b98a3e6e02222adfb7c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
