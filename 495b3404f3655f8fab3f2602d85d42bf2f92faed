@@ -207,6 +207,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "518de186_f2dc506f",
+        "filename": "src/tint/utils/memory/bump_allocator.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-12T09:45:48Z",
+      "side": 1,
+      "message": "Something like https://en.cppreference.com/w/cpp/language/reinterpret_cast#:~:text\u003dreinterpret_cast-,Type%20aliasing,-Whenever%20an%20attempt \n\nhttps://en.cppreference.com/w/cpp/language/types seems to say we can assume that char is 8 bytes in all common data models",
+      "parentUuid": "456e9036_6193d7d7",
+      "revId": "495b3404f3655f8fab3f2602d85d42bf2f92faed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b01c72e5_1458a1a1",
         "filename": "src/tint/utils/memory/bump_allocator.h",
         "patchSetId": 4
