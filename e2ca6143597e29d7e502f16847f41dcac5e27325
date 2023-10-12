@@ -33,6 +33,24 @@
       "message": "you may want to use AppendBackendMessage instead. if you look at the definition of GetFormattedMessage, this will print out as \"\" - While Device removed reason: ...\"",
       "revId": "e2ca6143597e29d7e502f16847f41dcac5e27325",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0defe42f_6f832dee",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-12T15:55:29Z",
+      "side": 1,
+      "message": "This message explains the last context message about DXGI_ERROR_DEVICE_REMOVED error. So it is better close to it in log, right? \nIf use AppendBackendMessage(), it will below the call stack, it will be harder to read.",
+      "parentUuid": "f68a4a91_48016267",
+      "revId": "e2ca6143597e29d7e502f16847f41dcac5e27325",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
