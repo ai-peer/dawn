@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e014ded_cb657fb9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-12T21:08:24Z",
+      "side": 1,
+      "message": "LGTM but overall maybe we can look into having all the CTS tooling use a default list of expectations paths\n\nor - just remove the defaults because now it is ambiguous about which expectations file is the right one.",
+      "revId": "fd1d6cbd79d4329252a30f6b1a0d2138dca7762f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
