@@ -311,9 +311,9 @@ class CopyTextureForBrowserTests : public Parent {
 
                     // Expect the dst texture channels should be all equal to alpha value
                     // after premultiply.
-                    let premultiplied = 0u;
-                    let unpremultiplied = 1u;
-                    let opaque = 2u;
+                    let premultiplied = 1u;
+                    let unpremultiplied = 2u;
+                    let opaque = 3u;
                     if (uniforms.srcAlphaMode == opaque) {
                         srcColor.a = 1.0;
                     }
