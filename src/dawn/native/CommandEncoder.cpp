@@ -14,6 +14,7 @@
 
 #include "dawn/native/CommandEncoder.h"
 
+#include <map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
@@ -246,21 +247,46 @@ MaybeError ValidateResolveTarget(const DeviceBase* device,
     return {};
 }
 
-MaybeError ValidateColorAttachmentDepthSlice(const TextureViewBase* attachment,
-                                             uint32_t depthSlice) {
-    if (attachment->GetDimension() == wgpu::TextureViewDimension::e3D) {
-        const Extent3D& attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+using ColorAttachmentDepthSliceMap = std::map<TextureBase*, std::vector<bool>>;
 
-        DAWN_INVALID_IF(depthSlice >= attachmentSize.depthOrArrayLayers,
-                        "The depth slice index (%u) of 3D %s used as attachment is >= the "
-                        "depthOrArrayLayers (%u) of its subresource at mip level (%u).",
-                        depthSlice, attachment, attachmentSize.depthOrArrayLayers,
-                        attachment->GetBaseMipLevel());
-    } else {
-        DAWN_INVALID_IF(depthSlice != 0,
-                        "The depth slice index (%u) of non-3D %s used as attachment is not 0.",
-                        depthSlice, attachment);
+MaybeError ValidateColorAttachmentDepthSlice(const RenderPassColorAttachment& colorAttachment,
+                                             ColorAttachmentDepthSliceMap* depthSliceMap) {
+    TextureViewBase* attachment = colorAttachment.view;
+    if (attachment == nullptr) {
+        return {};
     }
+
+    uint32_t depthSlice = colorAttachment.depthSlice;
+    if (attachment->GetDimension() != wgpu::TextureViewDimension::e3D) {
+        DAWN_INVALID_IF(depthSlice != WGPU_DEPTH_SLICE_UNDEFINED,
+                        "depthSlice (%u) must not be set for a non-3D attachment (%s).", depthSlice,
+                        attachment);
+
+        return {};
+    }
+
+    DAWN_INVALID_IF(depthSlice == WGPU_DEPTH_SLICE_UNDEFINED,
+                    "depthSlice (%u) must be set and must not be undefined value (%u) for a 3D "
+                    "attachment (%s).",
+                    depthSlice, WGPU_DEPTH_SLICE_UNDEFINED, attachment);
+
+    const Extent3D& attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+    DAWN_INVALID_IF(depthSlice >= attachmentSize.depthOrArrayLayers,
+                    "depthSlice (%u) of the attachment (%s) is >= the "
+                    "depthOrArrayLayers (%u) of the attachment's subresource at mip level (%u).",
+                    depthSlice, attachment, attachmentSize.depthOrArrayLayers,
+                    attachment->GetBaseMipLevel());
+
+    TextureBase* texture = attachment->GetTexture();
+    auto checkIt = depthSliceMap->find(texture);
+    bool isUsedDepthSlice = checkIt != depthSliceMap->end() && checkIt->second[depthSlice];
+    DAWN_INVALID_IF(isUsedDepthSlice,
+                    "The attachment (%s) overlaps with another attachment at depthSlice (%u).",
+                    attachment, depthSlice);
+
+    auto addIt =
+        depthSliceMap->emplace(texture, texture->GetDepth(texture->GetFormat().aspects)).first;
+    addIt->second[depthSlice] = true;
 
     return {};
 }
@@ -372,7 +398,6 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
         DAWN_TRY(ValidateResolveTarget(device, colorAttachment, usageValidationMode));
     }
 
-    DAWN_TRY(ValidateColorAttachmentDepthSlice(attachment, colorAttachment.depthSlice));
     DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
     DAWN_TRY(ValidateOrSetAttachmentSize(attachment, width, height));
 
@@ -555,11 +580,15 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
 
     bool anyColorAttachment = false;
     ColorAttachmentFormats colorAttachmentFormats;
+    ColorAttachmentDepthSliceMap depthSliceMap;
     for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
         DAWN_TRY_CONTEXT(ValidateRenderPassColorAttachment(
                              device, descriptor->colorAttachments[i], width, height, sampleCount,
                              implicitSampleCount, usageValidationMode),
                          "validating colorAttachments[%u].", i);
+        DAWN_TRY_CONTEXT(
+            ValidateColorAttachmentDepthSlice(descriptor->colorAttachments[i], &depthSliceMap),
+            "validating colorAttachments[%u].depthSlice", i);
         if (descriptor->colorAttachments[i].view) {
             anyColorAttachment = true;
             colorAttachmentFormats->push_back(&descriptor->colorAttachments[i].view->GetFormat());
@@ -1026,6 +1055,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
             cmd->attachmentState = device->GetOrCreateAttachmentState(descriptor);
             attachmentState = cmd->attachmentState;
 
+            std::set<TextureViewBase*> ColorAttachmentsOf3D;
             for (ColorAttachmentIndex index :
                  IterateBitSet(cmd->attachmentState->GetColorAttachmentsMask())) {
                 uint8_t i = static_cast<uint8_t>(index);
@@ -1063,7 +1093,22 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 cmd->colorAttachments[index].clearColor =
                     ClampClearColorValueToLegalRange(color, colorTarget->GetFormat());
 
-                usageTracker.TextureViewUsedAs(colorTarget, wgpu::TextureUsage::RenderAttachment);
+                // A 3d texture view can be used as color attachment more than once if each
+                // attachments refer to different regions of the 3D texture defined by depth slice,
+                // and all attachments pass the validation for overlaps in
+                // ValidateRenderPassDescriptor. We only need to track the same 3d texture view
+                // once.
+                bool usedMoreThanOnce = false;
+                if (colorTarget->GetDimension() == wgpu::TextureViewDimension::e3D) {
+                    usedMoreThanOnce =
+                        ColorAttachmentsOf3D.find(colorTarget) != ColorAttachmentsOf3D.end();
+                    ColorAttachmentsOf3D.insert(colorTarget);
+                }
+
+                if (!usedMoreThanOnce) {
+                    usageTracker.TextureViewUsedAs(colorTarget,
+                                                   wgpu::TextureUsage::RenderAttachment);
+                }
 
                 if (resolveTarget != nullptr) {
                     usageTracker.TextureViewUsedAs(resolveTarget,
