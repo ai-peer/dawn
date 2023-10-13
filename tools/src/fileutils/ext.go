@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,44 +25,17 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/core/ir/module.h"
+package fileutils
 
-#include <limits>
+import "strings"
 
-#include "src/tint/utils/ice/ice.h"
-
-namespace tint::core::ir {
-
-Module::Module() : root_block(blocks.Create<ir::Block>()) {}
-
-Module::Module(Module&&) = default;
-
-Module::~Module() = default;
-
-Module& Module::operator=(Module&&) = default;
-
-Symbol Module::NameOf(Instruction* inst) const {
-    TINT_ASSERT(inst->HasResults() && !inst->HasMultiResults());
-    return NameOf(inst->Result());
+// SplitExt splits the file name at the last '.', returning the no-extension and
+// extension parts.
+func SplitExt(filename string) (noExt, ext string) {
+	noExt, ext = filename, ""
+	if i := strings.LastIndex(filename, "."); i >= 0 {
+		noExt = filename[:i]
+		ext = filename[i+1:]
+	}
+	return
 }
-
-Symbol Module::NameOf(Value* value) const {
-    return value_to_name_.Get(value).value_or(Symbol{});
-}
-
-void Module::SetName(Instruction* inst, std::string_view name) {
-    TINT_ASSERT(inst->HasResults() && !inst->HasMultiResults());
-    return SetName(inst->Result(), name);
-}
-
-void Module::SetName(Value* value, std::string_view name) {
-    TINT_ASSERT(!name.empty());
-    value_to_name_.Replace(value, symbols.Register(name));
-}
-
-void Module::SetName(Value* value, Symbol name) {
-    TINT_ASSERT(name.IsValid());
-    value_to_name_.Replace(value, name);
-}
-
-}  // namespace tint::core::ir

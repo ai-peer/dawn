@@ -72,11 +72,11 @@ class Module {
     /// @param inst the instruction
     /// @return the name of the given instruction, or an invalid symbol if the instruction is not
     /// named. Requires that the instruction only has a single return value.
-    Symbol NameOf(Instruction* inst);
+    Symbol NameOf(Instruction* inst) const;
 
     /// @param value the value
     /// @return the name of the given value, or an invalid symbol if the value is not named.
-    Symbol NameOf(Value* value);
+    Symbol NameOf(Value* value) const;
 
     /// @param inst the instruction to set the name of
     /// @param name the desired name of the value. May be suffixed on collision.

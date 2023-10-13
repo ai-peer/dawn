@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,44 +25,20 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/core/ir/module.h"
+#ifndef SRC_TINT_LANG_CORE_IR_BINARY_DECODE_H_
+#define SRC_TINT_LANG_CORE_IR_BINARY_DECODE_H_
 
-#include <limits>
+#include "src/tint/utils/result/result.h"
 
-#include "src/tint/utils/ice/ice.h"
-
+// Forward declarartion
 namespace tint::core::ir {
-
-Module::Module() : root_block(blocks.Create<ir::Block>()) {}
-
-Module::Module(Module&&) = default;
-
-Module::~Module() = default;
-
-Module& Module::operator=(Module&&) = default;
-
-Symbol Module::NameOf(Instruction* inst) const {
-    TINT_ASSERT(inst->HasResults() && !inst->HasMultiResults());
-    return NameOf(inst->Result());
-}
-
-Symbol Module::NameOf(Value* value) const {
-    return value_to_name_.Get(value).value_or(Symbol{});
-}
-
-void Module::SetName(Instruction* inst, std::string_view name) {
-    TINT_ASSERT(inst->HasResults() && !inst->HasMultiResults());
-    return SetName(inst->Result(), name);
-}
-
-void Module::SetName(Value* value, std::string_view name) {
-    TINT_ASSERT(!name.empty());
-    value_to_name_.Replace(value, symbols.Register(name));
-}
-
-void Module::SetName(Value* value, Symbol name) {
-    TINT_ASSERT(name.IsValid());
-    value_to_name_.Replace(value, name);
-}
-
+class Module;
 }  // namespace tint::core::ir
+
+namespace tint::core::ir::binary {
+
+Result<Module> Decode(Slice<const std::byte> encoded);
+
+}  // namespace tint::core::ir::binary
+
+#endif  // SRC_TINT_LANG_CORE_IR_BINARY_DECODE_H_
