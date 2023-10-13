@@ -134,6 +134,17 @@ ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const VulkanFunctions& vkFuncti
     return std::move(info);
 }
 
+MaybeError AppendInstanceExtensions(const VulkanFunctions& vkFunctions,
+                                    VulkanGlobalInfo* globalInfo) {
+    std::unordered_map<std::string, InstanceExt> knownExts = CreateInstanceExtNameMap();
+
+    InstanceExtSet extensions;
+    DAWN_TRY_ASSIGN(extensions, GatherInstanceExtensions(nullptr, vkFunctions, knownExts));
+    globalInfo->extensions |= extensions;
+
+    return {};
+}
+
 ResultOrError<std::vector<VkPhysicalDevice>> GatherPhysicalDevices(
     VkInstance instance,
     const VulkanFunctions& vkFunctions) {
