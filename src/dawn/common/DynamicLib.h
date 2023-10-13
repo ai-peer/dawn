@@ -32,16 +32,14 @@
 #include <type_traits>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/NonCopyable.h"
 
 namespace dawn {
 
-class DynamicLib {
+class DynamicLib : NonCopyable {
   public:
     DynamicLib() = default;
     ~DynamicLib();
-
-    DynamicLib(const DynamicLib&) = delete;
-    DynamicLib& operator=(const DynamicLib&) = delete;
 
     DynamicLib(DynamicLib&& other);
     DynamicLib& operator=(DynamicLib&& other);
