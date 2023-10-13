@@ -173,10 +173,10 @@
         "category": "enum",
         "emscripten_no_enum_table": true,
         "values": [
-            {"value": 0, "name": "discrete GPU"},
-            {"value": 1, "name": "integrated GPU"},
-            {"value": 2, "name": "CPU"},
-            {"value": 3, "name": "unknown"}
+            {"value": 1, "name": "discrete GPU"},
+            {"value": 2, "name": "integrated GPU"},
+            {"value": 3, "name": "CPU"},
+            {"value": 4, "name": "unknown"}
         ]
     },
     "device descriptor": {
@@ -216,9 +216,9 @@
     "address mode": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "repeat"},
-            {"value": 1, "name": "mirror repeat"},
-            {"value": 2, "name": "clamp to edge"}
+            {"value": 1, "name": "clamp to edge"},
+            {"value": 2, "name": "repeat"},
+            {"value": 3, "name": "mirror repeat"}
         ]
     },
     "backend type": {
@@ -444,34 +444,35 @@
     },
     "blend factor": {
         "category": "enum",
+        "_comment": "TODO(github.com/gpuweb/gpuweb/issues/4283): make sure the dual source blending names match the spec when it lands, and remove the tags.",
         "values": [
-            {"value": 0, "name": "zero"},
-            {"value": 1, "name": "one"},
-            {"value": 2, "name": "src"},
-            {"value": 3, "name": "one minus src"},
-            {"value": 4, "name": "src alpha"},
-            {"value": 5, "name": "one minus src alpha"},
-            {"value": 6, "name": "dst"},
-            {"value": 7, "name": "one minus dst"},
-            {"value": 8, "name": "dst alpha"},
-            {"value": 9, "name": "one minus dst alpha"},
-            {"value": 10, "name": "src alpha saturated"},
-            {"value": 11, "name": "constant"},
-            {"value": 12, "name": "one minus constant"},
-            {"value": 13, "name": "src1", "tags": ["dawn"]},
-            {"value": 14, "name": "one minus src1", "tags": ["dawn"]},
-            {"value": 15, "name": "src1 alpha", "tags": ["dawn"]},
-            {"value": 16, "name": "one minus src1 alpha", "tags": ["dawn"]}
+            {"value": 1, "name": "zero"},
+            {"value": 2, "name": "one"},
+            {"value": 3, "name": "src"},
+            {"value": 4, "name": "one minus src"},
+            {"value": 5, "name": "src alpha"},
+            {"value": 6, "name": "one minus src alpha"},
+            {"value": 7, "name": "dst"},
+            {"value": 8, "name": "one minus dst"},
+            {"value": 9, "name": "dst alpha"},
+            {"value": 10, "name": "one minus dst alpha"},
+            {"value": 11, "name": "src alpha saturated"},
+            {"value": 12, "name": "constant"},
+            {"value": 13, "name": "one minus constant"},
+            {"value": 14, "name": "src1", "tags": ["dawn"]},
+            {"value": 15, "name": "one minus src1", "tags": ["dawn"]},
+            {"value": 16, "name": "src1 alpha", "tags": ["dawn"]},
+            {"value": 17, "name": "one minus src1 alpha", "tags": ["dawn"]}
         ]
     },
     "blend operation": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "add"},
-            {"value": 1, "name": "subtract"},
-            {"value": 2, "name": "reverse subtract"},
-            {"value": 3, "name": "min"},
-            {"value": 4, "name": "max"}
+            {"value": 1, "name": "add"},
+            {"value": 2, "name": "subtract"},
+            {"value": 3, "name": "reverse subtract"},
+            {"value": 4, "name": "min"},
+            {"value": 5, "name": "max"}
         ]
     },
     "bool": {
@@ -607,9 +608,9 @@
     "buffer map state": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "unmapped"},
-            {"value": 1, "name": "pending"},
-            {"value": 2, "name": "mapped"}
+            {"value": 1, "name": "unmapped"},
+            {"value": 2, "name": "pending"},
+            {"value": 3, "name": "mapped"}
         ]
     },
     "buffer usage": {
@@ -817,11 +818,11 @@
             {"value": 0, "name": "undefined", "jsrepr": "undefined", "valid": false},
             {"value": 1, "name": "never"},
             {"value": 2, "name": "less"},
-            {"value": 3, "name": "less equal"},
-            {"value": 4, "name": "greater"},
-            {"value": 5, "name": "greater equal"},
-            {"value": 6, "name": "equal"},
-            {"value": 7, "name": "not equal"},
+            {"value": 3, "name": "equal"},
+            {"value": 4, "name": "less equal"},
+            {"value": 5, "name": "greater"},
+            {"value": 6, "name": "not equal"},
+            {"value": 7, "name": "greater equal"},
             {"value": 8, "name": "always"}
         ]
     },
@@ -869,9 +870,9 @@
         "category": "enum",
         "emscripten_no_enum_table": true,
         "values": [
-            {"value": 0, "name": "error"},
-            {"value": 1, "name": "warning"},
-            {"value": 2, "name": "info"}
+            {"value": 1, "name": "error"},
+            {"value": 2, "name": "warning"},
+            {"value": 3, "name": "info"}
         ]
     },
     "compute pass descriptor": {
@@ -1003,9 +1004,9 @@
         "category": "enum",
         "tags": ["dawn"],
         "values": [
-            {"value": 0, "name": "premultiplied"},
-            {"value": 1, "name": "unpremultiplied"},
-            {"value": 2, "name": "opaque"}
+            {"value": 1, "name": "premultiplied"},
+            {"value": 2, "name": "unpremultiplied"},
+            {"value": 3, "name": "opaque"}
         ]
     },
     "copy texture for browser options": {
@@ -1059,9 +1060,9 @@
     "cull mode": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "none"},
-            {"value": 1, "name": "front"},
-            {"value": 2, "name": "back"}
+            {"value": 1, "name": "none"},
+            {"value": 2, "name": "front"},
+            {"value": 3, "name": "back"}
         ]
     },
     "device": {
@@ -1361,8 +1362,8 @@
         "category": "enum",
         "emscripten_no_enum_table": true,
         "values": [
-            {"value": 0, "name": "undefined", "jsrepr": "undefined"},
-            {"value": 1, "name": "destroyed"}
+            {"value": 1, "name": "undefined", "jsrepr": "undefined"},
+            {"value": 2, "name": "destroyed"}
         ]
     },
     "double": {
@@ -1448,9 +1449,9 @@
     "error filter": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "validation"},
-            {"value": 1, "name": "out of memory"},
-            {"value": 2, "name": "internal"}
+            {"value": 1, "name": "validation"},
+            {"value": 2, "name": "out of memory"},
+            {"value": 3, "name": "internal"}
         ]
     },
     "error type": {
@@ -1469,10 +1470,10 @@
         "category": "enum",
         "tags": ["dawn"],
         "values": [
-            {"value": 0, "name": "verbose"},
-            {"value": 1, "name": "info"},
-            {"value": 2, "name": "warning"},
-            {"value": 3, "name": "error"}
+            {"value": 1, "name": "verbose"},
+            {"value": 2, "name": "info"},
+            {"value": 3, "name": "warning"},
+            {"value": 4, "name": "error"}
         ]
     },
     "extent 2D": {
@@ -1520,10 +1521,10 @@
         "category": "enum",
         "tags": ["dawn"],
         "values": [
-            {"value": 0, "name": "rotate 0 degrees"},
-            {"value": 1, "name": "rotate 90 degrees"},
-            {"value": 2, "name": "rotate 180 degrees"},
-            {"value": 3, "name": "rotate 270 degrees"}
+            {"value": 1, "name": "rotate 0 degrees"},
+            {"value": 2, "name": "rotate 90 degrees"},
+            {"value": 3, "name": "rotate 180 degrees"},
+            {"value": 4, "name": "rotate 270 degrees"}
         ]
     },
     "external texture descriptor": {
@@ -1940,8 +1941,8 @@
     "filter mode": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "nearest"},
-            {"value": 1, "name": "linear"}
+            {"value": 1, "name": "nearest"},
+            {"value": 2, "name": "linear"}
         ]
     },
     "float": {
@@ -1950,8 +1951,8 @@
     "front face": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "CCW"},
-            {"value": 1, "name": "CW"}
+            {"value": 1, "name": "CCW"},
+            {"value": 2, "name": "CW"}
         ]
     },
     "image copy buffer": {
@@ -2036,9 +2037,9 @@
     "callback mode": {
         "category": "enum",
         "values": [
-            {"name": "wait any only", "value": 0},
-            {"name": "allow process events", "value": 1},
-            {"name": "allow spontaneous", "value": 2}
+            {"value": 1, "name": "wait any only"},
+            {"value": 2, "name": "allow process events"},
+            {"value": 3, "name": "allow spontaneous"}
         ]
     },
     "future": {
@@ -2052,12 +2053,12 @@
         "_comment": "TODO(crbug.com/dawn/2053): This could possibly be [[nodiscard]].",
         "emscripten_no_enum_table": true,
         "values": [
-            {"name": "success", "value": 0},
-            {"name": "timed out", "value": 1},
-            {"name": "unsupported timeout", "value": 2},
-            {"name": "unsupported count", "value": 3},
-            {"name": "unsupported mixed sources", "value": 4},
-            {"name": "unknown", "value": 5}
+            {"value": 0, "name": "success"},
+            {"value": 1, "name": "timed out"},
+            {"value": 2, "name": "unsupported timeout"},
+            {"value": 3, "name": "unsupported count"},
+            {"value": 4, "name": "unsupported mixed sources"},
+            {"value": 5, "name": "unknown"}
         ]
     },
     "future wait info": {
@@ -2112,9 +2113,9 @@
     "vertex step mode": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "vertex"},
-            {"value": 1, "name": "instance"},
-            {"value": 2, "name": "vertex buffer not used", "jsrepr": "undefined", "valid": true}
+            {"value": 0, "name": "vertex buffer not used", "jsrepr": "undefined", "valid": true},
+            {"value": 1, "name": "vertex"},
+            {"value": 2, "name": "instance"}
         ]
     },
     "load op": {
@@ -2136,8 +2137,8 @@
     "mipmap filter mode": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "nearest"},
-            {"value": 1, "name": "linear"}
+            {"value": 1, "name": "nearest"},
+            {"value": 2, "name": "linear"}
         ]
     },
     "store op": {
@@ -2217,10 +2218,10 @@
         "category": "enum",
         "emscripten_no_enum_table": true,
         "values": [
-            {"value": 0, "name": "fifo"},
-            {"value": 1, "name": "fifo relaxed", "tags": ["upstream"]},
-            {"value": 2, "name": "immediate"},
-            {"value": 3, "name": "mailbox"}
+            {"value": 1, "name": "fifo"},
+            {"value": 2, "name": "fifo relaxed", "tags": ["upstream"]},
+            {"value": 3, "name": "immediate"},
+            {"value": 4, "name": "mailbox"}
         ]
     },
     "programmable stage descriptor": {
@@ -2236,11 +2237,11 @@
     "primitive topology": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "point list"},
-            {"value": 1, "name": "line list"},
-            {"value": 2, "name": "line strip"},
-            {"value": 3, "name": "triangle list"},
-            {"value": 4, "name": "triangle strip"}
+            {"value": 1, "name": "point list"},
+            {"value": 2, "name": "line list"},
+            {"value": 3, "name": "line strip"},
+            {"value": 4, "name": "triangle list"},
+            {"value": 5, "name": "triangle strip"}
         ]
     },
     "query set": {
@@ -2278,8 +2279,8 @@
     "query type": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "occlusion"},
-            {"value": 1, "name": "timestamp"}
+            {"value": 1, "name": "occlusion"},
+            {"value": 2, "name": "timestamp"}
         ]
     },
     "queue": {
@@ -3055,14 +3056,14 @@
     "stencil operation": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "keep"},
-            {"value": 1, "name": "zero"},
-            {"value": 2, "name": "replace"},
-            {"value": 3, "name": "invert"},
-            {"value": 4, "name": "increment clamp"},
-            {"value": 5, "name": "decrement clamp"},
-            {"value": 6, "name": "increment wrap"},
-            {"value": 7, "name": "decrement wrap"}
+            {"value": 1, "name": "keep"},
+            {"value": 2, "name": "zero"},
+            {"value": 3, "name": "replace"},
+            {"value": 4, "name": "invert"},
+            {"value": 5, "name": "increment clamp"},
+            {"value": 6, "name": "decrement clamp"},
+            {"value": 7, "name": "increment wrap"},
+            {"value": 8, "name": "decrement wrap"}
         ]
     },
     "stencil face state": {
@@ -3383,12 +3384,12 @@
     "texture aspect": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "all"},
-            {"value": 1, "name": "stencil only"},
-            {"value": 2, "name": "depth only"},
-            {"value": 3, "name": "plane 0 only", "tags": ["dawn"]},
-            {"value": 4, "name": "plane 1 only", "tags": ["dawn"]},
-            {"value": 5, "name": "plane 2 only", "tags": ["dawn"]}
+            {"value": 1, "name": "all"},
+            {"value": 2, "name": "stencil only"},
+            {"value": 3, "name": "depth only"},
+            {"value": 4, "name": "plane 0 only", "tags": ["dawn"]},
+            {"value": 5, "name": "plane 1 only", "tags": ["dawn"]},
+            {"value": 6, "name": "plane 2 only", "tags": ["dawn"]}
         ]
     },
     "texture data layout": {
@@ -3426,9 +3427,9 @@
     "texture dimension": {
         "category": "enum",
         "values": [
-            {"value": 0, "name": "1D"},
-            {"value": 1, "name": "2D"},
-            {"value": 2, "name": "3D"}
+            {"value": 1, "name": "1D"},
+            {"value": 2, "name": "2D"},
+            {"value": 3, "name": "3D"}
         ]
     },
     "texture format": {
