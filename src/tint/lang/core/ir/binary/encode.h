@@ -25,33 +25,21 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
-#define SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
+#ifndef SRC_TINT_LANG_CORE_IR_BINARY_ENCODE_H_
+#define SRC_TINT_LANG_CORE_IR_BINARY_ENCODE_H_
 
-#include "src/tint/lang/core/ir/value.h"
-#include "src/tint/utils/rtti/castable.h"
+#include "src/tint/utils/containers/vector.h"
+#include "src/tint/utils/result/result.h"
 
+// Forward declarartion
 namespace tint::core::ir {
-
-/// An instruction in the IR.
-class BlockParam : public Castable<BlockParam, Value> {
-  public:
-    /// Constructor
-    /// @param type the type of the var
-    explicit BlockParam(const core::type::Type* type);
-    ~BlockParam() override;
-
-    /// @returns the type of the var
-    const core::type::Type* Type() const override { return type_; }
-
-    /// @copydoc Instruction::Clone()
-    BlockParam* Clone(CloneContext& ctx) override;
-
-  private:
-    /// the result type of the instruction
-    const core::type::Type* type_ = nullptr;
-};
-
+class Module;
 }  // namespace tint::core::ir
 
-#endif  // SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
+namespace tint::core::ir::binary {
+
+Result<Vector<std::byte, 0>> Encode(const Module& module);
+
+}  // namespace tint::core::ir::binary
+
+#endif  // SRC_TINT_LANG_CORE_IR_BINARY_ENCODE_H_
