@@ -62,6 +62,98 @@ namespace dawn::native {
 
 namespace {
 
+// Record and check attachment alias in render pass
+struct RecordedAttachment {
+    TextureBase* texture;
+    uint32_t mipLevel;
+    uint32_t depthOrArrayLayer;
+
+    bool operator==(const RecordedAttachment& other) const {
+        return ((other.texture == texture) && (other.mipLevel == mipLevel) &&
+                (other.depthOrArrayLayer == depthOrArrayLayer));
+    }
+};
+
+class RenderPassValidationState final : public NonMovable {
+  public:
+    RenderPassValidationState() = default;
+    ~RenderPassValidationState() = default;
+
+    MaybeError AddAttachment(TextureViewBase* attachment,
+                             uint32_t depthSlice = WGPU_DEPTH_SLICE_UNDEFINED) {
+        if (attachment == nullptr) {
+            return {};
+        }
+
+        DAWN_ASSERT(attachment->GetLevelCount() == 1);
+        DAWN_ASSERT(attachment->GetLayerCount() == 1);
+
+        if (!HasAttachment()) {
+            Extent3D attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+            mWidth = attachmentSize.width;
+            mHeight = attachmentSize.height;
+            mSampleCount = mImplicitSampleCount > 1 ? mImplicitSampleCount
+                                                    : attachment->GetTexture()->GetSampleCount();
+            DAWN_ASSERT(mWidth != 0);
+            DAWN_ASSERT(mHeight != 0);
+            DAWN_ASSERT(mSampleCount != 0);
+        }
+
+        RecordedAttachment record;
+        record.texture = attachment->GetTexture();
+        record.mipLevel = attachment->GetBaseMipLevel();
+        if (attachment->GetDimension() == wgpu::TextureViewDimension::e3D) {
+            DAWN_ASSERT(attachment->GetBaseArrayLayer() == 0);
+            record.depthOrArrayLayer = depthSlice;
+        } else {
+            // TODO(dawn:1020): Assert depthSlice should be the 'WGPU_DEPTH_SLICE_UNDEFINED' value
+            // if the attachment is a non-3d texture view after it's initialized correctly in Blink.
+            // DAWN_ASSERT(depthSlice == WGPU_DEPTH_SLICE_UNDEFINED);
+            record.depthOrArrayLayer = attachment->GetBaseArrayLayer();
+        }
+
+        for (size_t i = 0; i < mRecords->size(); i++) {
+            DAWN_INVALID_IF(mRecords[i] == record,
+                            "The attachment %s with usage (%s) has read-write or write-write "
+                            "conflict with another attachment at index %u",
+                            attachment, attachment->GetTexture()->GetUsage(), i);
+        }
+
+        mRecords->push_back(record);
+
+        return {};
+    }
+
+    bool HasAttachment() const { return mWidth != 0; }
+
+    bool IsValidState() const {
+        return ((mWidth > 0) && (mHeight > 0) && (mSampleCount > 0) &&
+                (mImplicitSampleCount == 0 || mImplicitSampleCount == mSampleCount));
+    }
+
+    uint32_t GetWidth() const { return mWidth; }
+
+    uint32_t GetHeight() const { return mHeight; }
+
+    uint32_t GetSampleCount() const { return mSampleCount; }
+
+    uint32_t GetImplicitSampleCount() const { return mImplicitSampleCount; }
+
+    void SetImplicitSampleCount(uint32_t implicitSampleCount) {
+        mImplicitSampleCount = implicitSampleCount;
+    }
+
+  private:
+    // All attachments in a render pass must have same width, height and sample count.
+    uint32_t mWidth = 0;
+    uint32_t mHeight = 0;
+    uint32_t mSampleCount = 0;
+    // The implicit multisample count used by MSAA render to single sampled.
+    uint32_t mImplicitSampleCount = 0;
+
+    StackVector<RecordedAttachment, kMaxColorAttachments> mRecords;
+};
+
 MaybeError ValidateB2BCopyAlignment(uint64_t dataSize, uint64_t srcOffset, uint64_t dstOffset) {
     // Copy size must be a multiple of 4 bytes on macOS.
     DAWN_INVALID_IF(dataSize % 4 != 0, "Copy size (%u) is not a multiple of 4.", dataSize);
@@ -154,53 +246,42 @@ MaybeError ValidateAttachmentArrayLayersAndLevelCount(const TextureViewBase* att
     return {};
 }
 
-MaybeError ValidateOrSetAttachmentSize(const TextureViewBase* attachment,
-                                       uint32_t* width,
-                                       uint32_t* height) {
+MaybeError ValidateAttachmentSize(const TextureViewBase* attachment,
+                                  RenderPassValidationState* validationState) {
     Extent3D attachmentSize = attachment->GetSingleSubresourceVirtualSize();
 
-    if (*width == 0) {
-        DAWN_ASSERT(*height == 0);
-        *width = attachmentSize.width;
-        *height = attachmentSize.height;
-        DAWN_ASSERT(*width != 0 && *height != 0);
-    } else {
-        DAWN_INVALID_IF(*width != attachmentSize.width || *height != attachmentSize.height,
+    if (validationState->HasAttachment()) {
+        DAWN_INVALID_IF(validationState->GetWidth() != attachmentSize.width ||
+                            validationState->GetHeight() != attachmentSize.height,
                         "Attachment %s size (width: %u, height: %u) does not match the size of the "
                         "other attachments (width: %u, height: %u).",
-                        attachment, attachmentSize.width, attachmentSize.height, *width, *height);
+                        attachment, attachmentSize.width, attachmentSize.height,
+                        validationState->GetWidth(), validationState->GetHeight());
     }
 
     return {};
 }
 
-MaybeError ValidateOrSetColorAttachmentSampleCount(const TextureViewBase* colorAttachment,
-                                                   uint32_t implicitSampleCount,
-                                                   uint32_t* sampleCount) {
-    uint32_t attachmentSampleCount = 0;
+MaybeError ValidateColorAttachmentSampleCount(const TextureViewBase* colorAttachment,
+                                              RenderPassValidationState* validationState) {
     std::string implicitPrefixStr;
-    if (implicitSampleCount > 1) {
+    if (validationState->GetImplicitSampleCount() > 1) {
         DAWN_INVALID_IF(colorAttachment->GetTexture()->GetSampleCount() != 1,
                         "Color attachment %s sample count (%u) is not 1 when it has implicit "
                         "sample count (%u).",
                         colorAttachment, colorAttachment->GetTexture()->GetSampleCount(),
-                        implicitSampleCount);
+                        validationState->GetImplicitSampleCount());
 
-        attachmentSampleCount = implicitSampleCount;
         implicitPrefixStr = "implicit ";
-    } else {
-        attachmentSampleCount = colorAttachment->GetTexture()->GetSampleCount();
     }
 
-    if (*sampleCount == 0) {
-        *sampleCount = attachmentSampleCount;
-        DAWN_ASSERT(*sampleCount != 0);
-    } else {
+    if (validationState->HasAttachment()) {
         DAWN_INVALID_IF(
-            *sampleCount != attachmentSampleCount,
+            colorAttachment->GetTexture()->GetSampleCount() != validationState->GetSampleCount(),
             "Color attachment %s %ssample count (%u) does not match the sample count of the "
             "other attachments (%u).",
-            colorAttachment, implicitPrefixStr, attachmentSampleCount, *sampleCount);
+            colorAttachment, implicitPrefixStr, colorAttachment->GetTexture()->GetSampleCount(),
+            validationState->GetSampleCount());
     }
 
     return {};
@@ -261,19 +342,24 @@ MaybeError ValidateResolveTarget(const DeviceBase* device,
 
 MaybeError ValidateColorAttachmentDepthSlice(const TextureViewBase* attachment,
                                              uint32_t depthSlice) {
-    if (attachment->GetDimension() == wgpu::TextureViewDimension::e3D) {
-        const Extent3D& attachmentSize = attachment->GetSingleSubresourceVirtualSize();
-
-        DAWN_INVALID_IF(depthSlice >= attachmentSize.depthOrArrayLayers,
-                        "The depth slice index (%u) of 3D %s used as attachment is >= the "
-                        "depthOrArrayLayers (%u) of its subresource at mip level (%u).",
-                        depthSlice, attachment, attachmentSize.depthOrArrayLayers,
-                        attachment->GetBaseMipLevel());
-    } else {
-        DAWN_INVALID_IF(depthSlice != 0,
-                        "The depth slice index (%u) of non-3D %s used as attachment is not 0.",
-                        depthSlice, attachment);
+    if (attachment->GetDimension() != wgpu::TextureViewDimension::e3D) {
+        // TODO(dawn:1020): Validate depthSlice must not set for non-3d attachments. The depthSlice
+        // from WebGPU is not the 'WGPU_DEPTH_SLICE_UNDEFINED' value if it's not defined, we need to
+        // initialize it in Blink first, otherwise it will always be validated as set.
+        return {};
     }
+
+    DAWN_INVALID_IF(depthSlice == WGPU_DEPTH_SLICE_UNDEFINED,
+                    "depthSlice (%u) must be set and must not be undefined value (%u) for a 3D "
+                    "attachment (%s).",
+                    depthSlice, WGPU_DEPTH_SLICE_UNDEFINED, attachment);
+
+    const Extent3D& attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+    DAWN_INVALID_IF(depthSlice >= attachmentSize.depthOrArrayLayers,
+                    "depthSlice (%u) of the attachment (%s) is >= the "
+                    "depthOrArrayLayers (%u) of the attachment's subresource at mip level (%u).",
+                    depthSlice, attachment, attachmentSize.depthOrArrayLayers,
+                    attachment->GetBaseMipLevel());
 
     return {};
 }
@@ -317,11 +403,8 @@ MaybeError ValidateColorAttachmentRenderToSingleSampled(
 
 MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
                                              const RenderPassColorAttachment& colorAttachment,
-                                             uint32_t* width,
-                                             uint32_t* height,
-                                             uint32_t* sampleCount,
-                                             uint32_t* implicitSampleCount,
-                                             UsageValidationMode usageValidationMode) {
+                                             UsageValidationMode usageValidationMode,
+                                             RenderPassValidationState* validationState) {
     TextureViewBase* attachment = colorAttachment.view;
     if (attachment == nullptr) {
         return {};
@@ -336,7 +419,7 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
     if (msaaRenderToSingleSampledDesc) {
         DAWN_TRY(ValidateColorAttachmentRenderToSingleSampled(device, colorAttachment,
                                                               msaaRenderToSingleSampledDesc));
-        *implicitSampleCount = msaaRenderToSingleSampledDesc->implicitSampleCount;
+        validationState->SetImplicitSampleCount(msaaRenderToSingleSampledDesc->implicitSampleCount);
         // Note: we don't need to check whether the implicit sample count of different attachments
         // are the same. That already is done by indirectly comparing the sample count in
         // ValidateOrSetColorAttachmentSampleCount.
@@ -376,10 +459,9 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
                         "Color clear value (%s) contains a NaN.", &clearValue);
     }
 
-    DAWN_TRY(
-        ValidateOrSetColorAttachmentSampleCount(attachment, *implicitSampleCount, sampleCount));
+    DAWN_TRY(ValidateColorAttachmentSampleCount(attachment, validationState));
 
-    if (*implicitSampleCount <= 1) {
+    if (validationState->GetImplicitSampleCount() <= 1) {
         // This step is skipped if implicitSampleCount > 1, because in that case, there shoudn't be
         // any explicit resolveTarget specified.
         DAWN_TRY(ValidateResolveTarget(device, colorAttachment, usageValidationMode));
@@ -387,7 +469,9 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
 
     DAWN_TRY(ValidateColorAttachmentDepthSlice(attachment, colorAttachment.depthSlice));
     DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
-    DAWN_TRY(ValidateOrSetAttachmentSize(attachment, width, height));
+    DAWN_TRY(ValidateAttachmentSize(attachment, validationState));
+
+    DAWN_TRY(validationState->AddAttachment(attachment, colorAttachment.depthSlice));
 
     return {};
 }
@@ -395,10 +479,8 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
 MaybeError ValidateRenderPassDepthStencilAttachment(
     DeviceBase* device,
     const RenderPassDepthStencilAttachment* depthStencilAttachment,
-    uint32_t* width,
-    uint32_t* height,
-    uint32_t* sampleCount,
-    UsageValidationMode usageValidationMode) {
+    UsageValidationMode usageValidationMode,
+    RenderPassValidationState* validationState) {
     DAWN_ASSERT(depthStencilAttachment != nullptr);
 
     TextureViewBase* attachment = depthStencilAttachment->view;
@@ -489,33 +571,31 @@ MaybeError ValidateRenderPassDepthStencilAttachment(
                         depthStencilAttachment->depthClearValue, attachment);
     }
 
-    // *sampleCount == 0 must only happen when there is no color attachment. In that case we
-    // do not need to validate the sample count of the depth stencil attachment.
+    // If there is no color attachment, we do not need to validate the sample count of the depth
+    // stencil attachment.
     const uint32_t depthStencilSampleCount = attachment->GetTexture()->GetSampleCount();
-    if (*sampleCount != 0) {
+    if (validationState->HasAttachment()) {
         DAWN_INVALID_IF(
-            depthStencilSampleCount != *sampleCount,
+            depthStencilSampleCount != validationState->GetSampleCount(),
             "The depth stencil attachment %s sample count (%u) does not match the sample "
             "count of the other attachments (%u).",
-            attachment, depthStencilSampleCount, *sampleCount);
-    } else {
-        *sampleCount = depthStencilSampleCount;
+            attachment, depthStencilSampleCount, validationState->GetSampleCount());
     }
 
     DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
-    DAWN_TRY(ValidateOrSetAttachmentSize(attachment, width, height));
+    DAWN_TRY(ValidateAttachmentSize(attachment, validationState));
+
+    DAWN_TRY(validationState->AddAttachment(attachment));
 
     return {};
 }
 
 MaybeError ValidateRenderPassPLS(DeviceBase* device,
                                  const RenderPassPixelLocalStorage* pls,
-                                 uint32_t* width,
-                                 uint32_t* height,
-                                 uint32_t* sampleCount,
-                                 uint32_t implicitSampleCount,
-                                 UsageValidationMode usageValidationMode) {
+                                 UsageValidationMode usageValidationMode,
+                                 RenderPassValidationState* validationState) {
     StackVector<StorageAttachmentInfoForValidation, 4> attachments;
+
     for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
         const RenderPassStorageAttachment& attachment = pls->storageAttachments[i];
 
@@ -524,9 +604,8 @@ MaybeError ValidateRenderPassPLS(DeviceBase* device,
         DAWN_TRY(ValidateCanUseAs(attachment.storage->GetTexture(),
                                   wgpu::TextureUsage::StorageAttachment, usageValidationMode));
         DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment.storage));
-        DAWN_TRY(ValidateOrSetColorAttachmentSampleCount(attachment.storage, implicitSampleCount,
-                                                         sampleCount));
-        DAWN_TRY(ValidateOrSetAttachmentSize(attachment.storage, width, height));
+        DAWN_TRY(ValidateColorAttachmentSampleCount(attachment.storage, validationState));
+        DAWN_TRY(ValidateAttachmentSize(attachment.storage, validationState));
 
         // Validate the load/storeOp and the clearValue.
         DAWN_TRY(ValidateLoadOp(attachment.loadOp));
@@ -544,6 +623,8 @@ MaybeError ValidateRenderPassPLS(DeviceBase* device,
                             &clearValue);
         }
 
+        DAWN_TRY(validationState->AddAttachment(attachment.storage));
+
         attachments->push_back({attachment.offset, attachment.storage->GetFormat().format});
     }
 
@@ -553,11 +634,8 @@ MaybeError ValidateRenderPassPLS(DeviceBase* device,
 
 MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
                                         const RenderPassDescriptor* descriptor,
-                                        uint32_t* width,
-                                        uint32_t* height,
-                                        uint32_t* sampleCount,
-                                        uint32_t* implicitSampleCount,
-                                        UsageValidationMode usageValidationMode) {
+                                        UsageValidationMode usageValidationMode,
+                                        RenderPassValidationState* validationState) {
     DAWN_TRY(
         ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::RenderPassDescriptorMaxDrawCount},
                                                  {wgpu::SType::RenderPassPixelLocalStorage}}));
@@ -571,9 +649,8 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
     bool anyColorAttachment = false;
     ColorAttachmentFormats colorAttachmentFormats;
     for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
-        DAWN_TRY_CONTEXT(ValidateRenderPassColorAttachment(
-                             device, descriptor->colorAttachments[i], width, height, sampleCount,
-                             implicitSampleCount, usageValidationMode),
+        DAWN_TRY_CONTEXT(ValidateRenderPassColorAttachment(device, descriptor->colorAttachments[i],
+                                                           usageValidationMode, validationState),
                          "validating colorAttachments[%u].", i);
         if (descriptor->colorAttachments[i].view) {
             anyColorAttachment = true;
@@ -584,10 +661,10 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
                      "validating color attachment bytes per sample.");
 
     if (descriptor->depthStencilAttachment != nullptr) {
-        DAWN_TRY_CONTEXT(ValidateRenderPassDepthStencilAttachment(
-                             device, descriptor->depthStencilAttachment, width, height, sampleCount,
-                             usageValidationMode),
-                         "validating depthStencilAttachment.");
+        DAWN_TRY_CONTEXT(
+            ValidateRenderPassDepthStencilAttachment(device, descriptor->depthStencilAttachment,
+                                                     usageValidationMode, validationState),
+            "validating depthStencilAttachment.");
     }
 
     if (descriptor->occlusionQuerySet != nullptr) {
@@ -615,21 +692,20 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
     FindInChain(descriptor->nextInChain, &pls);
     if (pls != nullptr) {
         storageAttachmentCount = pls->storageAttachmentCount;
-        DAWN_TRY(ValidateRenderPassPLS(device, pls, width, height, sampleCount,
-                                       *implicitSampleCount, usageValidationMode));
+        DAWN_TRY(ValidateRenderPassPLS(device, pls, usageValidationMode, validationState));
     }
 
     DAWN_INVALID_IF(!anyColorAttachment && descriptor->depthStencilAttachment == nullptr &&
                         storageAttachmentCount == 0,
                     "Render pass has no attachments.");
 
-    if (*implicitSampleCount > 1) {
+    if (validationState->GetImplicitSampleCount() > 1) {
         // TODO(dawn:1710): support multiple attachments.
         DAWN_INVALID_IF(
             descriptor->colorAttachmentCount != 1,
             "colorAttachmentCount (%u) is not supported when the render pass has implicit sample "
             "count (%u). (Currently) colorAttachmentCount = 1 is supported.",
-            descriptor->colorAttachmentCount, *implicitSampleCount);
+            descriptor->colorAttachmentCount, validationState->GetImplicitSampleCount());
         // TODO(dawn:1704): Consider supporting MSAARenderToSingleSampled + PLS
         DAWN_INVALID_IF(pls != nullptr,
                         "For now PLS is invalid to use with MSAARenderToSingleSampled.");
@@ -998,25 +1074,20 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
     RenderPassResourceUsageTracker usageTracker;
 
-    uint32_t width = 0;
-    uint32_t height = 0;
-    uint32_t sampleCount = 0;
-    // The implicit multisample count used by MSAA render to single sampled.
-    uint32_t implicitSampleCount = 0;
     bool depthReadOnly = false;
     bool stencilReadOnly = false;
     Ref<AttachmentState> attachmentState;
+    RenderPassValidationState validationState;
 
     std::function<void()> passEndCallback = nullptr;
 
     bool success = mEncodingContext.TryEncode(
         this,
         [&](CommandAllocator* allocator) -> MaybeError {
-            DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, &width, &height, &sampleCount,
-                                                  &implicitSampleCount, mUsageValidationMode));
+            DAWN_TRY(ValidateRenderPassDescriptor(device, descriptor, mUsageValidationMode,
+                                                  &validationState));
 
-            DAWN_ASSERT(width > 0 && height > 0 && sampleCount > 0 &&
-                        (implicitSampleCount == 0 || implicitSampleCount == sampleCount));
+            DAWN_ASSERT(validationState.IsValidState());
 
             mEncodingContext.WillBeginRenderPass();
             BeginRenderPassCmd* cmd =
@@ -1032,7 +1103,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 TextureViewBase* colorTarget;
                 TextureViewBase* resolveTarget;
 
-                if (implicitSampleCount <= 1) {
+                if (validationState.GetImplicitSampleCount() <= 1) {
                     colorTarget = descriptor->colorAttachments[i].view;
                     resolveTarget = descriptor->colorAttachments[i].resolveTarget;
 
@@ -1048,10 +1119,11 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                     Ref<TextureViewBase> implicitMSAATargetRef;
                     DAWN_TRY_ASSIGN(implicitMSAATargetRef,
                                     device->CreateImplicitMSAARenderTextureViewFor(
-                                        resolveTarget, implicitSampleCount));
+                                        resolveTarget, validationState.GetImplicitSampleCount()));
                     colorTarget = implicitMSAATargetRef.Get();
 
                     cmd->colorAttachments[index].view = std::move(implicitMSAATargetRef);
+                    // Without explicitly setting depthSlice to zero, its value would be undefined.
                     cmd->colorAttachments[index].depthSlice = 0;
                     cmd->colorAttachments[index].loadOp = wgpu::LoadOp::Clear;
                     cmd->colorAttachments[index].storeOp = wgpu::StoreOp::Discard;
@@ -1153,8 +1225,8 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 }
             }
 
-            cmd->width = width;
-            cmd->height = height;
+            cmd->width = validationState.GetWidth();
+            cmd->height = validationState.GetHeight();
 
             cmd->occlusionQuerySet = descriptor->occlusionQuerySet;
 
@@ -1198,18 +1270,18 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
         "encoding %s.BeginRenderPass(%s).", this, descriptor);
 
     if (success) {
-        Ref<RenderPassEncoder> passEncoder =
-            RenderPassEncoder::Create(device, descriptor, this, &mEncodingContext,
-                                      std::move(usageTracker), std::move(attachmentState), width,
-                                      height, depthReadOnly, stencilReadOnly, passEndCallback);
+        Ref<RenderPassEncoder> passEncoder = RenderPassEncoder::Create(
+            device, descriptor, this, &mEncodingContext, std::move(usageTracker),
+            std::move(attachmentState), validationState.GetWidth(), validationState.GetHeight(),
+            depthReadOnly, stencilReadOnly, passEndCallback);
 
         mEncodingContext.EnterPass(passEncoder.Get());
 
         MaybeError error;
 
-        if (implicitSampleCount > 1) {
+        if (validationState.GetImplicitSampleCount() > 1) {
             error = ApplyMSAARenderToSingleSampledLoadOp(device, passEncoder.Get(), descriptor,
-                                                         implicitSampleCount);
+                                                         validationState.GetImplicitSampleCount());
         } else if (ShouldApplyClearBigIntegerColorValueWithDraw(device, descriptor)) {
             // This is skipped if implicitSampleCount > 1. Because implicitSampleCount > 1 is only
             // supported for non-integer textures.

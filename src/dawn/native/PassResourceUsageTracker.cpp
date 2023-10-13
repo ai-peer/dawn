@@ -69,19 +69,6 @@ void SyncScopeUsageTracker::TextureRangeUsedAs(TextureBase* texture,
     TextureSubresourceUsage& textureUsage = it.first->second;
 
     textureUsage.Update(range, [usage](const SubresourceRange&, wgpu::TextureUsage* storedUsage) {
-        // TODO(crbug.com/dawn/1001): Consider optimizing to have fewer branches.
-
-        // Using the same subresource for two different attachments is a write-write or read-write
-        // hazard. Add an internal kAgainAsAttachment usage to fail the later check that a
-        // subresource with a writable usage has a single usage.
-        constexpr wgpu::TextureUsage kAgainAsAttachment =
-            kReservedTextureUsage | static_cast<wgpu::TextureUsage>(1);
-        constexpr wgpu::TextureUsage kWritableAttachmentUsages =
-            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::StorageAttachment;
-        if ((usage & kWritableAttachmentUsages) && (*storedUsage & kWritableAttachmentUsages)) {
-            *storedUsage |= kAgainAsAttachment;
-        }
-
         *storedUsage |= usage;
     });
 }
