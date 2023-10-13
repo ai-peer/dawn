@@ -27,6 +27,7 @@
 
 #include "dawn/native/CommandEncoder.h"
 
+#include <map>
 #include <unordered_set>
 #include <utility>
 #include <vector>
@@ -259,21 +260,70 @@ MaybeError ValidateResolveTarget(const DeviceBase* device,
     return {};
 }
 
-MaybeError ValidateColorAttachmentDepthSlice(const TextureViewBase* attachment,
-                                             uint32_t depthSlice) {
-    if (attachment->GetDimension() == wgpu::TextureViewDimension::e3D) {
-        const Extent3D& attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+using ColorAttachmentDepthSlices = std::map<TextureBase*, std::vector<bool>>;
 
-        DAWN_INVALID_IF(depthSlice >= attachmentSize.depthOrArrayLayers,
-                        "The depth slice index (%u) of 3D %s used as attachment is >= the "
-                        "depthOrArrayLayers (%u) of its subresource at mip level (%u).",
-                        depthSlice, attachment, attachmentSize.depthOrArrayLayers,
-                        attachment->GetBaseMipLevel());
-    } else {
-        DAWN_INVALID_IF(depthSlice != 0,
-                        "The depth slice index (%u) of non-3D %s used as attachment is not 0.",
-                        depthSlice, attachment);
+struct SubresourceRangeAndDepthSlice {
+    SubresourceRange range;
+    uint32_t depthSlice;
+};
+using WriteableSubresources =
+    std::map<const TextureBase*, std::vector<SubresourceRangeAndDepthSlice>>;
+
+MaybeError ValidateWriteableAttachmentOverlaps(const TextureViewBase* attachment,
+                                               WriteableSubresources* subresources,
+                                               uint32_t depthSlice = WGPU_DEPTH_SLICE_UNDEFINED) {
+    if (attachment == nullptr) {
+        return {};
     }
+
+    const TextureBase* texture = attachment->GetTexture();
+    auto& range = attachment->GetSubresourceRange();
+    auto checkIt = subresources->find(texture);
+    if (checkIt != subresources->end()) {
+        for (const auto& sub : checkIt->second) {
+            DAWN_INVALID_IF(sub.range.aspects == range.aspects &&
+                                sub.range.baseArrayLayer == range.baseArrayLayer &&
+                                sub.range.baseMipLevel == range.baseMipLevel &&
+                                sub.depthSlice == depthSlice,
+                            "The attachment (%s) has read-write or write-write conflict with "
+                            "another attachment in a render pass",
+                            attachment);
+        }
+    }
+
+    auto addIt = subresources->emplace(std::piecewise_construct, std::forward_as_tuple(texture),
+                                      std::forward_as_tuple(8));
+    addIt.first->second.push_back({range, depthSlice});
+
+    return {};
+}
+
+MaybeError ValidateColorAttachmentDepthSlice(const RenderPassColorAttachment& colorAttachment,
+                                             ColorAttachmentDepthSlices* depthSlices) {
+    TextureViewBase* attachment = colorAttachment.view;
+    if (attachment == nullptr) {
+        return {};
+    }
+
+    uint32_t depthSlice = colorAttachment.depthSlice;
+    if (attachment->GetDimension() != wgpu::TextureViewDimension::e3D) {
+        // TODO(dawn:1020): Validate depthSlice must not set for non-3d attachments. The depthSlice
+        // from WebGPU is not the 'WGPU_DEPTH_SLICE_UNDEFINED' value if it's not defined, we need to
+        // initialize it in Blink first, otherwise it will always be validated as set.
+        return {};
+    }
+
+    DAWN_INVALID_IF(depthSlice == WGPU_DEPTH_SLICE_UNDEFINED,
+                    "depthSlice (%u) must be set and must not be undefined value (%u) for a 3D "
+                    "attachment (%s).",
+                    depthSlice, WGPU_DEPTH_SLICE_UNDEFINED, attachment);
+
+    const Extent3D& attachmentSize = attachment->GetSingleSubresourceVirtualSize();
+    DAWN_INVALID_IF(depthSlice >= attachmentSize.depthOrArrayLayers,
+                    "depthSlice (%u) of the attachment (%s) is >= the "
+                    "depthOrArrayLayers (%u) of the attachment's subresource at mip level (%u).",
+                    depthSlice, attachment, attachmentSize.depthOrArrayLayers,
+                    attachment->GetBaseMipLevel());
 
     return {};
 }
@@ -385,7 +435,6 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
         DAWN_TRY(ValidateResolveTarget(device, colorAttachment, usageValidationMode));
     }
 
-    DAWN_TRY(ValidateColorAttachmentDepthSlice(attachment, colorAttachment.depthSlice));
     DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
     DAWN_TRY(ValidateOrSetAttachmentSize(attachment, width, height));
 
@@ -514,6 +563,9 @@ MaybeError ValidateRenderPassPLS(DeviceBase* device,
                                  uint32_t implicitSampleCount,
                                  UsageValidationMode usageValidationMode) {
     StackVector<StorageAttachmentInfoForValidation, 4> attachments;
+
+    WriteableSubresources subresources;
+
     for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
         const RenderPassStorageAttachment& attachment = pls->storageAttachments[i];
 
@@ -542,6 +594,8 @@ MaybeError ValidateRenderPassPLS(DeviceBase* device,
                             &clearValue);
         }
 
+        DAWN_TRY(ValidateWriteableAttachmentOverlaps(attachment.storage, &subresources));
+
         attachments->push_back({attachment.offset, attachment.storage->GetFormat().format});
     }
 
@@ -568,11 +622,23 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
 
     bool anyColorAttachment = false;
     ColorAttachmentFormats colorAttachmentFormats;
+    ColorAttachmentDepthSlices colorAttachmentDepthSlices;
+
+    WriteableSubresources subresources;
+
     for (uint32_t i = 0; i < descriptor->colorAttachmentCount; ++i) {
         DAWN_TRY_CONTEXT(ValidateRenderPassColorAttachment(
                              device, descriptor->colorAttachments[i], width, height, sampleCount,
                              implicitSampleCount, usageValidationMode),
                          "validating colorAttachments[%u].", i);
+        DAWN_TRY_CONTEXT(ValidateColorAttachmentDepthSlice(descriptor->colorAttachments[i],
+                                                           &colorAttachmentDepthSlices),
+                         "validating colorAttachments[%u].depthSlice", i);
+
+        DAWN_TRY(ValidateWriteableAttachmentOverlaps(descriptor->colorAttachments[i].view,
+                                                     &subresources,
+                                                     descriptor->colorAttachments[i].depthSlice));
+
         if (descriptor->colorAttachments[i].view) {
             anyColorAttachment = true;
             colorAttachmentFormats->push_back(&descriptor->colorAttachments[i].view->GetFormat());
@@ -1039,6 +1105,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
             cmd->attachmentState = device->GetOrCreateAttachmentState(descriptor);
             attachmentState = cmd->attachmentState;
 
+            std::set<TextureViewBase*> colorAttachmentsOf3D;
             for (ColorAttachmentIndex index :
                  IterateBitSet(cmd->attachmentState->GetColorAttachmentsMask())) {
                 uint8_t i = static_cast<uint8_t>(index);
@@ -1076,6 +1143,11 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 cmd->colorAttachments[index].clearColor =
                     ClampClearColorValueToLegalRange(color, colorTarget->GetFormat());
 
+                // A 3d texture view can be used as color attachment more than once if each
+                // attachments refer to different regions of the 3d texture defined by depth slice,
+                // and all attachments could pass the overlaps validation in
+                // ValidateRenderPassDescriptor. We only need to track the same 3d texture view
+                // once.
                 usageTracker.TextureViewUsedAs(colorTarget, wgpu::TextureUsage::RenderAttachment);
 
                 if (resolveTarget != nullptr) {
