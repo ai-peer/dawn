@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "beb0a943_33c94580",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-13T18:20:19Z",
+      "side": 1,
+      "message": "`dawn`",
+      "range": {
+        "startLine": 802,
+        "startChar": 10,
+        "endLine": 802,
+        "endChar": 14
+      },
+      "revId": "655069425f4ee4570be7f98a1e5c0d5510d8ea09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
