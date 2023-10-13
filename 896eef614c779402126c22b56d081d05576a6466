@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "010ab208_de24f5c6",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-13T03:17:48Z",
+      "side": 1,
+      "message": "Why does this value exist? I don\u0027t think there\u0027s anywhere in the actual API that uses it. In Dawn it seems to be used as a placeholder \"invalid\" value, but that doesn\u0027t seem like a very good reason for it to be in the header.",
+      "revId": "896eef614c779402126c22b56d081d05576a6466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
