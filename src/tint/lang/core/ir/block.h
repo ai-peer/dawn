@@ -75,16 +75,17 @@ class Block : public Castable<Block> {
     Instruction* Instructions() { return instructions_.first; }
 
     /// Iterator for the instructions inside a block
+    template <typename T>
     class Iterator {
       public:
         /// Constructor
         /// @param inst the instruction to start iterating from
-        explicit Iterator(Instruction* inst) : inst_(inst) {}
+        explicit Iterator(T* inst) : inst_(inst) {}
         ~Iterator() = default;
 
         /// Dereference operator
         /// @returns the instruction for this iterator
-        Instruction* operator*() const { return inst_; }
+        T* operator*() const { return inst_; }
 
         /// Comparison operator
         /// @param itr to compare against
@@ -104,14 +105,22 @@ class Block : public Castable<Block> {
         }
 
       private:
-        Instruction* inst_ = nullptr;
+        T* inst_ = nullptr;
     };
 
     /// @returns the iterator pointing to the start of the instruction list
-    Iterator begin() { return Iterator{instructions_.first}; }
+    Iterator<Instruction> begin() { return Iterator<Instruction>{instructions_.first}; }
 
     /// @returns the ending iterator
-    Iterator end() { return Iterator{nullptr}; }
+    Iterator<Instruction> end() { return Iterator<Instruction>{nullptr}; }
+
+    /// @returns the iterator pointing to the start of the instruction list
+    Iterator<const Instruction> begin() const {
+        return Iterator<const Instruction>{instructions_.first};
+    }
+
+    /// @returns the ending iterator
+    Iterator<const Instruction> end() const { return Iterator<const Instruction>{nullptr}; }
 
     /// @returns the first instruction in the instruction list
     Instruction* Front() { return instructions_.first; }

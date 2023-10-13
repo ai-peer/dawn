@@ -46,6 +46,11 @@ class Terminator : public Castable<Terminator, OperandInstruction<1, 0>> {
 
     /// @returns the terminator arguments
     virtual tint::Slice<Value* const> Args() { return operands_.Slice(); }
+
+    /// @returns the return arguments
+    tint::Slice<ir::Value const* const> Args() const {
+        return const_cast<Terminator*>(this)->Args();
+    }
 };
 
 }  // namespace tint::core::ir

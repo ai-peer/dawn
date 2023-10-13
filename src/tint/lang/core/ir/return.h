@@ -49,6 +49,9 @@ class Return final : public Castable<Return, Terminator> {
     /// The offset in Operands() for the return argument
     static constexpr size_t kArgOperandOffset = 1;
 
+    /// Constructor (no operands)
+    Return();
+
     /// Constructor (no return value)
     /// @param func the function being returned
     explicit Return(Function* func);
@@ -77,6 +80,11 @@ class Return final : public Castable<Return, Terminator> {
 
     /// @returns the return arguments
     tint::Slice<ir::Value* const> Args() override {
+        return operands_.Slice().Offset(kArgOperandOffset);
+    }
+
+    /// @returns the return arguments
+    tint::Slice<ir::Value const* const> Args() const {
         return operands_.Slice().Offset(kArgOperandOffset);
     }
 
