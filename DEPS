@@ -261,7 +261,12 @@ deps = {
 
   # Misc dependencies inherited from Tint
   'third_party/protobuf': {
-    'url': '{chromium_git}/external/github.com/protocolbuffers/protobuf.git@2b673bbb57e34fe1bd4570f726fc86b769a3a3d2',
+    'url': '{chromium_git}/chromium/src/third_party/protobuf@b2f4cca357754462dd8b47f33a02b1b41d152441',
+    'condition': 'dawn_standalone',
+  },
+  
+  'tools/protoc_wrapper': {
+    'url': '{chromium_git}/chromium/src/tools/protoc_wrapper@b5ea227bd88235ab3ccda964d5f3819c4e2d8032',
     'condition': 'dawn_standalone',
   },
 

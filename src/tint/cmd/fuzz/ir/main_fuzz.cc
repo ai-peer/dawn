@@ -15,6 +15,7 @@
 #include <iostream>
 
 #include "src/tint/cmd/fuzz/ir/ir_fuzz.h"
+#include "src/tint/lang/core/ir/binary/decode.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/validator.h"
 #include "src/tint/utils/bytes/reader.h"

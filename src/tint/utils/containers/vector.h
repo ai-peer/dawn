@@ -1049,8 +1049,8 @@ class VectorRef {
     template <typename U,
               size_t N,
               typename = std::enable_if_t<CanReinterpretSlice<ReinterpretMode::kSafe, T, U>>>
-    VectorRef(Vector<U, N>& vector)  // NOLINT(runtime/explicit)
-        : slice_(vector.impl_.slice.template Reinterpret<T>()) {}
+    VectorRef(const Vector<U, N>& vector)  // NOLINT(runtime/explicit)
+        : slice_(const_cast<tint::Slice<U>&>(vector.impl_.slice).template Reinterpret<T>()) {}
 
     /// Constructor from a moved Vector with covariance / const conversion
     /// @param vector the vector to create a reference of

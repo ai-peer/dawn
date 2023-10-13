@@ -47,7 +47,7 @@ class InstructionResult : public Castable<InstructionResult, Value> {
     void Destroy() override;
 
     /// @returns the type of the value
-    const core::type::Type* Type() override { return type_; }
+    const core::type::Type* Type() const override { return type_; }
 
     /// @copydoc Value::Clone()
     InstructionResult* Clone(CloneContext& ctx) override;
