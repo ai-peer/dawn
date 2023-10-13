@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0700734c_ae4f81f3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 797,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-13T15:59:54Z",
+      "side": 1,
+      "message": "Apparently this issue does not exist. Did you mean `crbug.com/dawn/2141` ?",
+      "range": {
+        "startLine": 797,
+        "startChar": 0,
+        "endLine": 797,
+        "endChar": 19
+      },
+      "revId": "35f10ab5ff5bdcc27b2dbfb5cec70b045c603b34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
