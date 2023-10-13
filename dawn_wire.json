@@ -63,6 +63,7 @@
         ],
         "queue on submitted work done": [
             { "name": "queue id", "type": "ObjectId", "id_type": "queue" },
+            { "name": "signal value", "type": "uint64_t" },
             { "name": "future", "type": "future" }
         ],
         "queue write buffer": [

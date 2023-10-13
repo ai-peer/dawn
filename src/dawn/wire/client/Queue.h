@@ -31,7 +31,9 @@ class Queue final : public ObjectBase {
     bool OnWorkDoneCallback(WGPUFuture future, WGPUQueueWorkDoneStatus status);
 
     // Dawn API
-    void OnSubmittedWorkDone(WGPUQueueWorkDoneCallback callback, void* userdata);
+    void OnSubmittedWorkDone(uint64_t signalValue,
+                             WGPUQueueWorkDoneCallback callback,
+                             void* userdata);
     WGPUFuture OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo);
     void WriteBuffer(WGPUBuffer cBuffer, uint64_t bufferOffset, const void* data, size_t size);
     void WriteTexture(const WGPUImageCopyTexture* destination,

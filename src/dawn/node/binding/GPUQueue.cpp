@@ -56,6 +56,7 @@ interop::Promise<void> GPUQueue::onSubmittedWorkDone(Napi::Env env) {
     auto promise = ctx->promise;
 
     queue_.OnSubmittedWorkDone(
+        0,
         [](WGPUQueueWorkDoneStatus status, void* userdata) {
             auto c = std::unique_ptr<Context>(static_cast<Context*>(userdata));
             if (status != WGPUQueueWorkDoneStatus::WGPUQueueWorkDoneStatus_Success) {

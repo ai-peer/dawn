@@ -401,7 +401,7 @@ TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneFails) {
     // callback should have device lost status
     EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, nullptr))
         .Times(1);
-    ASSERT_DEVICE_ERROR(queue.OnSubmittedWorkDone(ToMockQueueWorkDone, nullptr));
+    ASSERT_DEVICE_ERROR(queue.OnSubmittedWorkDone(0, ToMockQueueWorkDone, nullptr));
 }
 
 // Test that QueueOnSubmittedWorkDone when the device is lost after calling OnSubmittedWorkDone
@@ -409,7 +409,7 @@ TEST_P(DeviceLostTest, QueueOnSubmittedWorkDoneBeforeLossFails) {
     // callback should have device lost status
     EXPECT_CALL(*mockQueueWorkDoneCallback, Call(WGPUQueueWorkDoneStatus_DeviceLost, nullptr))
         .Times(1);
-    queue.OnSubmittedWorkDone(ToMockQueueWorkDone, nullptr);
+    queue.OnSubmittedWorkDone(0, ToMockQueueWorkDone, nullptr);
 
     LoseDeviceForTesting();
 }

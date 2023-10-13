@@ -609,6 +609,7 @@ TEST_P(BufferMappingCallbackTests, EmptySubmissionAndThenMap) {
     // 1. submission without using buffer.
     SubmitCommandBuffer({});
     queue.OnSubmittedWorkDone(
+        0,
         [](WGPUQueueWorkDoneStatus status, void* userdata) {
             EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
             auto& done = *static_cast<std::vector<bool>*>(userdata);
@@ -645,6 +646,7 @@ TEST_P(BufferMappingCallbackTests, UseTheBufferAndThenMap) {
     // 1. Submit a command buffer which uses the buffer
     SubmitCommandBuffer(buffer);
     queue.OnSubmittedWorkDone(
+        0,
         [](WGPUQueueWorkDoneStatus status, void* userdata) {
             EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
             auto& done = *static_cast<std::vector<bool>*>(userdata);
@@ -683,6 +685,7 @@ TEST_P(BufferMappingCallbackTests, EmptySubmissionWriteAndThenMap) {
     // 1. submission without using buffer.
     SubmitCommandBuffer({});
     queue.OnSubmittedWorkDone(
+        0,
         [](WGPUQueueWorkDoneStatus status, void* userdata) {
             EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
             auto& done = *static_cast<std::vector<bool>*>(userdata);

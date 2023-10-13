@@ -178,7 +178,7 @@ TEST_F(ErrorScopeValidationTest, EnclosedQueueSubmitNested) {
     device.PushErrorScope(wgpu::ErrorFilter::OutOfMemory);
 
     queue.Submit(0, nullptr);
-    queue.OnSubmittedWorkDone(ToMockQueueWorkDone, this);
+    queue.OnSubmittedWorkDone(0u, ToMockQueueWorkDone, this);
 
     Sequence seq;
 

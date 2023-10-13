@@ -38,6 +38,7 @@ TEST_P(DeviceLifetimeTests, DroppedWhileQueueOnSubmittedWorkDone) {
 
     // Ask for an onSubmittedWorkDone callback and drop the device.
     queue.OnSubmittedWorkDone(
+        0,
         [](WGPUQueueWorkDoneStatus status, void*) {
             // There is a bug in DeviceBase::Destroy(). If all submitted work is done when
             // OnSubmittedWorkDone() is being called, the callback will be resolved with
@@ -66,6 +67,7 @@ TEST_P(DeviceLifetimeTests, DroppedInsideQueueOnSubmittedWorkDone) {
     // Ask for an onSubmittedWorkDone callback and drop the device inside the callback.
     Userdata data = Userdata{std::move(device), false};
     queue.OnSubmittedWorkDone(
+        0,
         [](WGPUQueueWorkDoneStatus status, void* userdata) {
             EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
             static_cast<Userdata*>(userdata)->device = nullptr;

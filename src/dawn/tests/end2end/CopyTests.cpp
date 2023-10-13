@@ -2740,6 +2740,7 @@ TEST_P(CopyToDepthStencilTextureAfterDestroyingBigBufferTests, DoTest) {
     // Ensure the underlying ID3D12Resource of bigBuffer is deleted.
     bool submittedWorkDone = false;
     queue.OnSubmittedWorkDone(
+        0,
         [](WGPUQueueWorkDoneStatus status, void* userdata) {
             EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
             *static_cast<bool*>(userdata) = true;
@@ -3009,6 +3010,7 @@ class T2TCopyFromDirtyHeapTests : public DawnTest {
     void EnsureSubmittedWorkDone() {
         bool submittedWorkDone = false;
         queue.OnSubmittedWorkDone(
+            0,
             [](WGPUQueueWorkDoneStatus status, void* userdata) {
                 EXPECT_EQ(status, WGPUQueueWorkDoneStatus_Success);
                 *static_cast<bool*>(userdata) = true;
