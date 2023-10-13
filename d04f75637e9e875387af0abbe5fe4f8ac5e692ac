@@ -75,6 +75,30 @@
       },
       "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fb3e552_33796d60",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-13T00:13:38Z",
+      "side": 1,
+      "message": "I think it is because I was using GBM_FORMAT_ABGR8888 instead of GBM_FORMAT_XBGR8888\n\nI\u0027m now testing against XBGR - could you help me test again?",
+      "parentUuid": "7e13a8e9_c350da93",
+      "range": {
+        "startLine": 651,
+        "startChar": 1,
+        "endLine": 651,
+        "endChar": 17
+      },
+      "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
