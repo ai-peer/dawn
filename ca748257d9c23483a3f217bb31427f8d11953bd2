@@ -51,6 +51,24 @@
       "parentUuid": "b72b6765_f957aa20",
       "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98eb712c_581020f5",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2023-10-13T12:01:59Z",
+      "side": 1,
+      "message": "for reference here is how SDL manages it:\nhttps://github.com/libsdl-org/SDL/blob/main/cmake/sdlplatform.cmake#L8\n\nand linking\nhttps://github.com/libsdl-org/SDL/blob/main/CMakeLists.txt#L2019",
+      "parentUuid": "3bc66d7b_57148094",
+      "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
