@@ -25,33 +25,17 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
-#define SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
+package fileutils
 
-#include "src/tint/lang/core/ir/value.h"
-#include "src/tint/utils/rtti/castable.h"
+import "strings"
 
-namespace tint::core::ir {
-
-/// An instruction in the IR.
-class BlockParam : public Castable<BlockParam, Value> {
-  public:
-    /// Constructor
-    /// @param type the type of the var
-    explicit BlockParam(const core::type::Type* type);
-    ~BlockParam() override;
-
-    /// @returns the type of the var
-    const core::type::Type* Type() const override { return type_; }
-
-    /// @copydoc Instruction::Clone()
-    BlockParam* Clone(CloneContext& ctx) override;
-
-  private:
-    /// the result type of the instruction
-    const core::type::Type* type_ = nullptr;
-};
-
-}  // namespace tint::core::ir
-
-#endif  // SRC_TINT_LANG_CORE_IR_BLOCK_PARAM_H_
+// SplitExt splits the file name at the last '.', returning the no-extension and
+// extension parts.
+func SplitExt(filename string) (noExt, ext string) {
+	noExt, ext = filename, ""
+	if i := strings.LastIndex(filename, "."); i >= 0 {
+		noExt = filename[:i]
+		ext = filename[i+1:]
+	}
+	return
+}

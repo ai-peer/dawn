@@ -41,12 +41,12 @@ Module::~Module() = default;
 
 Module& Module::operator=(Module&&) = default;
 
-Symbol Module::NameOf(Instruction* inst) {
+Symbol Module::NameOf(Instruction* inst) const {
     TINT_ASSERT(inst->HasResults() && !inst->HasMultiResults());
     return NameOf(inst->Result());
 }
 
-Symbol Module::NameOf(Value* value) {
+Symbol Module::NameOf(const Value* value) const {
     return value_to_name_.Get(value).value_or(Symbol{});
 }
 

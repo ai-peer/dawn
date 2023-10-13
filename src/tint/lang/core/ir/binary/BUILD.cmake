@@ -35,27 +35,24 @@
 ################################################################################
 
 ################################################################################
-# Target:    tint_cmd_fuzz_ir_fuzz_cmd
-# Kind:      fuzz_cmd
+# Target:    tint_lang_core_ir_binary
+# Kind:      lib
 ################################################################################
-tint_add_target(tint_cmd_fuzz_ir_fuzz_cmd fuzz_cmd
-  cmd/fuzz/ir/main_fuzz.cc
+tint_add_target(tint_lang_core_ir_binary lib
+  lang/core/ir/binary/decode.cc
+  lang/core/ir/binary/decode.h
+  lang/core/ir/binary/encode.cc
+  lang/core/ir/binary/encode.h
 )
 
-tint_target_add_dependencies(tint_cmd_fuzz_ir_fuzz_cmd fuzz_cmd
+tint_target_add_dependencies(tint_lang_core_ir_binary lib
   tint_api_common
-  tint_cmd_fuzz_ir_fuzz
   tint_lang_core
   tint_lang_core_constant
   tint_lang_core_intrinsic
   tint_lang_core_ir
-  tint_lang_core_ir_binary
-  tint_lang_core_ir_fuzz
+  tint_lang_core_ir_binary_proto
   tint_lang_core_type
-  tint_lang_wgsl_program_fuzz
-  tint_lang_wgsl_fuzz
-  tint_utils_bytes
-  tint_utils_cli
   tint_utils_containers
   tint_utils_diagnostic
   tint_utils_ice
@@ -66,46 +63,43 @@ tint_target_add_dependencies(tint_cmd_fuzz_ir_fuzz_cmd fuzz_cmd
   tint_utils_reflection
   tint_utils_result
   tint_utils_rtti
-  tint_utils_strconv
   tint_utils_symbol
   tint_utils_text
   tint_utils_traits
 )
 
-if(TINT_BUILD_WGSL_READER)
-  tint_target_add_dependencies(tint_cmd_fuzz_ir_fuzz_cmd fuzz_cmd
-    tint_cmd_fuzz_wgsl_fuzz
-    tint_lang_wgsl_ast_transform_fuzz
-  )
-endif(TINT_BUILD_WGSL_READER)
-
-if(TINT_BUILD_WGSL_WRITER)
-  tint_target_add_dependencies(tint_cmd_fuzz_ir_fuzz_cmd fuzz_cmd
-    tint_lang_wgsl_writer_ast_printer_fuzz
-  )
-endif(TINT_BUILD_WGSL_WRITER)
-
-tint_target_set_output_name(tint_cmd_fuzz_ir_fuzz_cmd fuzz_cmd "tint_ir_fuzzer")
-
 ################################################################################
-# Target:    tint_cmd_fuzz_ir_fuzz
-# Kind:      fuzz
+# Target:    tint_lang_core_ir_binary_test
+# Kind:      test
 ################################################################################
-tint_add_target(tint_cmd_fuzz_ir_fuzz fuzz
-  cmd/fuzz/ir/ir_fuzz.cc
-  cmd/fuzz/ir/ir_fuzz.h
+tint_add_target(tint_lang_core_ir_binary_test test
+  lang/core/ir/binary/roundtrip_test.cc
 )
 
-tint_target_add_dependencies(tint_cmd_fuzz_ir_fuzz fuzz
+tint_target_add_dependencies(tint_lang_core_ir_binary_test test
+  tint_api_common
+  tint_lang_core
+  tint_lang_core_constant
+  tint_lang_core_intrinsic
+  tint_lang_core_ir
+  tint_lang_core_ir_binary
+  tint_lang_core_ir_test
+  tint_lang_core_type
   tint_utils_containers
+  tint_utils_diagnostic
   tint_utils_ice
+  tint_utils_id
   tint_utils_macros
   tint_utils_math
   tint_utils_memory
+  tint_utils_reflection
+  tint_utils_result
   tint_utils_rtti
+  tint_utils_symbol
+  tint_utils_text
   tint_utils_traits
 )
 
-tint_target_add_external_dependencies(tint_cmd_fuzz_ir_fuzz fuzz
-  "thread"
+tint_target_add_external_dependencies(tint_lang_core_ir_binary_test test
+  "gtest"
 )
