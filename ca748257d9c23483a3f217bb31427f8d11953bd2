@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8de0569b_044eebaa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-13T06:49:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b72b6765_f957aa20",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-13T06:49:52Z",
+      "side": 1,
+      "message": "Does iPadOS / tvOS and friends have Cocoa? If they don\u0027t maybe this condition should be inverted and be `\"${CMAKE_SYSTEM_NAME}\" MATCHES \"macOS\"`?",
+      "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
