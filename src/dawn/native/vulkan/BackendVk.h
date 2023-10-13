@@ -50,7 +50,7 @@ class Device;
 // can delete the VkInstances that are not in use to avoid holding the discrete GPU active.
 class VulkanInstance : public RefCounted {
   public:
-    static ResultOrError<Ref<VulkanInstance>> Create(const InstanceBase* instance, ICD icd);
+    static ResultOrError<Ref<VulkanInstance>> Create(const Backend* backend, ICD icd);
     ~VulkanInstance() override;
 
     const VulkanFunctions& GetFunctions() const;
@@ -67,12 +67,13 @@ class VulkanInstance : public RefCounted {
   private:
     VulkanInstance();
 
-    MaybeError Initialize(const InstanceBase* instance, ICD icd);
-    ResultOrError<VulkanGlobalKnobs> CreateVkInstance(const InstanceBase* instance);
+    MaybeError Initialize(const Backend* backend, ICD icd);
+    ResultOrError<VulkanGlobalKnobs> CreateVkInstance(const Backend* backend,
+                                                      const void* extensionChain = nullptr);
 
     MaybeError RegisterDebugUtils();
 
-    DynamicLib mVulkanLib;
+    DynamicLib mSwiftshaderLib;
     VulkanGlobalInfo mGlobalInfo = {};
     VkInstance mInstance = VK_NULL_HANDLE;
     VulkanFunctions mFunctions;
@@ -99,7 +100,11 @@ class Backend : public BackendConnection {
     void ClearPhysicalDevices() override;
     size_t GetPhysicalDeviceCountForTesting() const override;
 
+    ResultOrError<DynamicLib> LoadLib(std::string_view libName) const;
+    const DynamicLib& GetVulkanLoader() const;
+
   private:
+    DynamicLib mVulkanLoaderLib;
     ityp::bitset<ICD, kICDCount> mVulkanInstancesCreated = {};
     ityp::array<ICD, Ref<VulkanInstance>, kICDCount> mVulkanInstances = {};
     ityp::array<ICD, std::vector<Ref<PhysicalDevice>>, kICDCount> mPhysicalDevices = {};

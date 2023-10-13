@@ -65,17 +65,6 @@ config("internal") {
   ]
 }
 
-# Config that adds the @executable_path rpath if needed so that Swiftshader or the Vulkan loader are found.
-config("vulkan_rpath") {
-  if (is_apple && dawn_enable_vulkan &&
-      (use_swiftshader || enable_vulkan_loader)) {
-    ldflags = [
-      "-rpath",
-      "@executable_path/",
-    ]
-  }
-}
-
 # Config that adds include directory for vulkan-utility-libraries.
 config("vulkan_utility_libraries_include") {
   include_dirs = [ "${dawn_vulkan_utility_libraries_dir}/include" ]
@@ -881,7 +870,6 @@ dawn_component("native") {
   ]
   sources = [ "DawnNative.cpp" ]
   configs = [ ":internal" ]
-  public_configs = [ ":vulkan_rpath" ]
 
   if (dawn_enable_d3d11 || dawn_enable_d3d12) {
     sources += [ "d3d/D3DBackend.cpp" ]

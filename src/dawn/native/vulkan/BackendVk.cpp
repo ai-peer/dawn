@@ -43,16 +43,16 @@ constexpr char kSwiftshaderLibName[] = "libvk_swiftshader.dylib";
 
 #if DAWN_PLATFORM_IS(LINUX)
 #if DAWN_PLATFORM_IS(ANDROID)
-constexpr char kVulkanLibName[] = "libvulkan.so";
+constexpr char kVulkanLoaderLibName[] = "libvulkan.so";
 #else
-constexpr char kVulkanLibName[] = "libvulkan.so.1";
+constexpr char kVulkanLoaderLibName[] = "libvulkan.so.1";
 #endif
 #elif DAWN_PLATFORM_IS(WINDOWS)
-constexpr char kVulkanLibName[] = "vulkan-1.dll";
+constexpr char kVulkanLoaderLibName[] = "vulkan-1.dll";
 #elif DAWN_PLATFORM_IS(MACOS)
-constexpr char kVulkanLibName[] = "libvulkan.dylib";
+constexpr char kVulkanLoaderLibName[] = "libvulkan.dylib";
 #elif DAWN_PLATFORM_IS(FUCHSIA)
-constexpr char kVulkanLibName[] = "libvulkan.so";
+constexpr char kVulkanLoaderLibName[] = "libvulkan.so";
 #else
 #error "Unimplemented Vulkan backend platform"
 #endif
@@ -261,61 +261,19 @@ const std::vector<VkPhysicalDevice>& VulkanInstance::GetVkPhysicalDevices() cons
 }
 
 // static
-ResultOrError<Ref<VulkanInstance>> VulkanInstance::Create(const InstanceBase* instance, ICD icd) {
+ResultOrError<Ref<VulkanInstance>> VulkanInstance::Create(const Backend* backend, ICD icd) {
     Ref<VulkanInstance> vulkanInstance = AcquireRef(new VulkanInstance());
-    DAWN_TRY(vulkanInstance->Initialize(instance, icd));
+    DAWN_TRY(vulkanInstance->Initialize(backend, icd));
     return std::move(vulkanInstance);
 }
 
-MaybeError VulkanInstance::Initialize(const InstanceBase* instance, ICD icd) {
-    // These environment variables need only be set while loading procs and gathering device
-    // info.
-    ScopedEnvironmentVar vkICDFilenames;
+MaybeError VulkanInstance::Initialize(const Backend* backend, ICD icd) {
+    // Sets up environment variables for use when initializing the instance. It is done during
+    // the creation of VulkanInstance instead of the backend because it is not clear when the
+    // Vulkan loader library makes use of these variables. (hence way GlobalProcs have to be
+    // loaded redundantly each time as well)
     ScopedEnvironmentVar vkLayerPath;
-
-    const std::vector<std::string>& searchPaths = instance->GetRuntimeSearchPaths();
-
-    auto CommaSeparatedResolvedSearchPaths = [&](const char* name) {
-        std::string list;
-        bool first = true;
-        for (const std::string& path : searchPaths) {
-            if (!first) {
-                list += ", ";
-            }
-            first = false;
-            list += (path + name);
-        }
-        return list;
-    };
-
-    auto LoadVulkan = [&](const char* libName) -> MaybeError {
-        for (const std::string& path : searchPaths) {
-            std::string resolvedPath = path + libName;
-            if (mVulkanLib.Open(resolvedPath)) {
-                return {};
-            }
-        }
-        return DAWN_FORMAT_INTERNAL_ERROR("Couldn't load Vulkan. Searched %s.",
-                                          CommaSeparatedResolvedSearchPaths(libName));
-    };
-
-    switch (icd) {
-        case ICD::None: {
-            DAWN_TRY(LoadVulkan(kVulkanLibName));
-            // Succesfully loaded driver; break.
-            break;
-        }
-        case ICD::SwiftShader: {
-#if defined(DAWN_ENABLE_SWIFTSHADER)
-            DAWN_TRY(LoadVulkan(kSwiftshaderLibName));
-            break;
-#endif  // defined(DAWN_ENABLE_SWIFTSHADER)
-        // ICD::SwiftShader should not be passed if SwiftShader is not enabled.
-            DAWN_UNREACHABLE();
-        }
-    }
-
-    if (instance->IsBackendValidationEnabled()) {
+    if (backend->GetInstance()->IsBackendValidationEnabled()) {
 #if defined(DAWN_ENABLE_VULKAN_VALIDATION_LAYERS)
         auto execDir = GetExecutableDirectory();
         std::string vkDataDir = execDir.value_or("") + DAWN_VK_DATA_DIR;
@@ -328,22 +286,48 @@ MaybeError VulkanInstance::Initialize(const InstanceBase* instance, ICD icd) {
 #endif
     }
 
-    DAWN_TRY(mFunctions.LoadGlobalProcs(mVulkanLib));
-
+    // Load global procs/info and have an early blocklist.
+    DAWN_TRY(mFunctions.LoadGlobalProcs(backend->GetVulkanLoader()));
     DAWN_TRY_ASSIGN(mGlobalInfo, GatherGlobalInfo(mFunctions));
+
 #if DAWN_PLATFORM_IS(WINDOWS)
     if (icd != ICD::SwiftShader && mGlobalInfo.apiVersion < VK_MAKE_API_VERSION(0, 1, 1, 0)) {
-        // See crbug.com/850881, crbug.com/863086, crbug.com/1465064
         return DAWN_INTERNAL_ERROR(
             "Windows Vulkan 1.0 driver is unsupported. At least Vulkan 1.1 is required on "
-            "Windows.");
+            "Windows. See crbug.com/850881, crbug.com/863086, crbug.com/1465064");
     }
 #endif
 
+    // Create the instance, with direct driver loading for Swiftshader.
     VulkanGlobalKnobs usedGlobalKnobs = {};
-    DAWN_TRY_ASSIGN(usedGlobalKnobs, CreateVkInstance(instance));
-    *static_cast<VulkanGlobalKnobs*>(&mGlobalInfo) = usedGlobalKnobs;
 
+    if (icd == ICD::SwiftShader) {
+        DAWN_TRY_ASSIGN_CONTEXT(mSwiftshaderLib, backend->LoadLib(kSwiftshaderLibName),
+                                "Loading the swiftshader library %s.", kSwiftshaderLibName);
+
+        VkDirectDriverLoadingInfoLUNARG swiftshaderDriver;
+        swiftshaderDriver.sType = VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_INFO_LUNARG;
+        swiftshaderDriver.pNext = nullptr;
+        if (!mSwiftshaderLib.GetProc(&swiftshaderDriver.pfnGetInstanceProcAddr,
+                                     "vk_icdGetInstanceProcAddr")) {
+            return DAWN_INTERNAL_ERROR("Couldn't load Swiftshader's vkGetInstanceProcAddr.");
+        }
+
+        VkDirectDriverLoadingListLUNARG directLoading;
+        directLoading.sType = VK_STRUCTURE_TYPE_DIRECT_DRIVER_LOADING_LIST_LUNARG;
+        directLoading.pNext = nullptr;
+        directLoading.mode = VK_DIRECT_DRIVER_LOADING_MODE_EXCLUSIVE_LUNARG;
+        directLoading.driverCount = 1;
+        directLoading.pDrivers = &swiftshaderDriver;
+
+        DAWN_TRY_ASSIGN(usedGlobalKnobs, CreateVkInstance(backend, &directLoading));
+    } else {
+        DAWN_ASSERT(icd == ICD::None);
+        DAWN_TRY_ASSIGN(usedGlobalKnobs, CreateVkInstance(backend));
+    }
+
+    // Finish setting up the instance and gathering physical devices.
+    *static_cast<VulkanGlobalKnobs*>(&mGlobalInfo) = usedGlobalKnobs;
     DAWN_TRY(mFunctions.LoadInstanceProcs(mInstance, mGlobalInfo));
 
     if (usedGlobalKnobs.HasExt(InstanceExt::DebugUtils)) {
@@ -355,7 +339,8 @@ MaybeError VulkanInstance::Initialize(const InstanceBase* instance, ICD icd) {
     return {};
 }
 
-ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const InstanceBase* instance) {
+ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Backend* backend,
+                                                                  const void* extensionChain) {
     VulkanGlobalKnobs usedKnobs = {};
     std::vector<const char*> layerNames;
     InstanceExtSet extensionsToRequest = mGlobalInfo.extensions;
@@ -382,15 +367,15 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
     UseLayerIfAvailable(VulkanLayer::RenderDocCapture);
 #endif
 
-    if (instance->IsBackendValidationEnabled()) {
+    if (backend->GetInstance()->IsBackendValidationEnabled()) {
         UseLayerIfAvailable(VulkanLayer::Validation);
     }
 
     // Always use the Fuchsia swapchain layer if available.
     UseLayerIfAvailable(VulkanLayer::FuchsiaImagePipeSwapchain);
 
-    // Available and known instance extensions default to being requested, but some special
-    // cases are removed.
+    // Available and known instance extensions default to being requested, but promoted extension
+    // are removed as it's not valid to request them.
     usedKnobs.extensions = extensionsToRequest;
 
     std::vector<const char*> extensionNames;
@@ -413,7 +398,7 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
 
     VkInstanceCreateInfo createInfo;
     createInfo.sType = VK_STRUCTURE_TYPE_INSTANCE_CREATE_INFO;
-    createInfo.pNext = nullptr;
+    createInfo.pNext = extensionChain;
     createInfo.flags = 0;
     createInfo.pApplicationInfo = &appInfo;
     createInfo.enabledLayerCount = static_cast<uint32_t>(layerNames.size());
@@ -444,7 +429,7 @@ ResultOrError<VulkanGlobalKnobs> VulkanInstance::CreateVkInstance(const Instance
     VkValidationFeaturesEXT validationFeatures;
     VkValidationFeatureEnableEXT kEnableSynchronizationValidation =
         VK_VALIDATION_FEATURE_ENABLE_SYNCHRONIZATION_VALIDATION_EXT;
-    if (instance->IsBackendValidationEnabled() &&
+    if (backend->GetInstance()->IsBackendValidationEnabled() &&
         usedKnobs.HasExt(InstanceExt::ValidationFeatures)) {
         validationFeatures.enabledValidationFeatureCount = 1;
         validationFeatures.pEnabledValidationFeatures = &kEnableSynchronizationValidation;
@@ -499,6 +484,12 @@ Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::Bac
 
 Backend::~Backend() = default;
 
+MaybeError Backend::Initialize() {
+    DAWN_TRY_ASSIGN_CONTEXT(mVulkanLoaderLib, LoadLib(kVulkanLoaderLibName),
+                            "Loading the Vulkan loader library %s.", kVulkanLoaderLibName);
+    return {};
+}
+
 std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     const RequestAdapterOptions* options) {
     std::vector<Ref<PhysicalDeviceBase>> physicalDevices;
@@ -518,7 +509,7 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
                 mVulkanInstancesCreated.set(icd);
 
                 instance->ConsumedErrorAndWarnOnce([&]() -> MaybeError {
-                    DAWN_TRY_ASSIGN(mVulkanInstances[icd], VulkanInstance::Create(instance, icd));
+                    DAWN_TRY_ASSIGN(mVulkanInstances[icd], VulkanInstance::Create(this, icd));
                     return {};
                 }());
             }
@@ -559,8 +550,45 @@ size_t Backend::GetPhysicalDeviceCountForTesting() const {
     return count;
 }
 
+ResultOrError<DynamicLib> Backend::LoadLib(std::string_view libName) const {
+    const std::vector<std::string>& searchPaths = GetInstance()->GetRuntimeSearchPaths();
+
+    // Try loading the lib.
+    for (const std::string& path : searchPaths) {
+        std::string resolvedPath = path + libName.data();
+        DynamicLib lib;
+        if (lib.Open(resolvedPath)) {
+            return {std::move(lib)};
+        }
+    }
+
+    // None of the search paths worked, format the error message with the list of search paths.
+    std::string list;
+    bool first = true;
+    for (const std::string& path : searchPaths) {
+        if (!first) {
+            list += ", ";
+        }
+        first = false;
+        list += (path + libName.data());
+    }
+
+    return DAWN_FORMAT_INTERNAL_ERROR("Couldn't load %s. Searched %s.", libName, list);
+}
+
+const DynamicLib& Backend::GetVulkanLoader() const {
+    return mVulkanLoaderLib;
+}
+
 BackendConnection* Connect(InstanceBase* instance) {
-    return new Backend(instance);
+    Backend* backend = new Backend(instance);
+
+    if (instance->ConsumedError(backend->Initialize())) {
+        delete backend;
+        return nullptr;
+    }
+
+    return backend;
 }
 
 }  // namespace dawn::native::vulkan

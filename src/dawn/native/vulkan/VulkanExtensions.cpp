@@ -50,6 +50,7 @@ static constexpr std::array<InstanceExtInfo, kInstanceExtCount> sInstanceExtInfo
     {InstanceExt::AndroidSurface, "VK_KHR_android_surface", NeverPromoted},
 
     {InstanceExt::DebugUtils, "VK_EXT_debug_utils", NeverPromoted},
+    {InstanceExt::DirectDriverLoading, "VK_LUNARG_direct_driver_loading", NeverPromoted},
     {InstanceExt::ValidationFeatures, "VK_EXT_validation_features", NeverPromoted},
     //
 }};
@@ -91,6 +92,7 @@ InstanceExtSet EnsureDependencies(const InstanceExtSet& advertisedExts) {
             case InstanceExt::GetPhysicalDeviceProperties2:
             case InstanceExt::Surface:
             case InstanceExt::DebugUtils:
+            case InstanceExt::DirectDriverLoading:
             case InstanceExt::ValidationFeatures:
                 hasDependencies = true;
                 break;
