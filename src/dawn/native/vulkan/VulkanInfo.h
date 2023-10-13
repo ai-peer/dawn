@@ -102,6 +102,7 @@ struct VulkanSurfaceInfo {
 };
 
 ResultOrError<VulkanGlobalInfo> GatherGlobalInfo(const VulkanFunctions& vkFunctions);
+MaybeError AppendInstanceExtensions(const VulkanFunctions& vkFunctions, VulkanGlobalInfo* info);
 ResultOrError<std::vector<VkPhysicalDevice>> GatherPhysicalDevices(
     VkInstance instance,
     const VulkanFunctions& vkFunctions);
