@@ -33,6 +33,24 @@
       "message": "Does iPadOS / tvOS and friends have Cocoa? If they don\u0027t maybe this condition should be inverted and be `\"${CMAKE_SYSTEM_NAME}\" MATCHES \"macOS\"`?",
       "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc66d7b_57148094",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2023-10-13T11:51:03Z",
+      "side": 1,
+      "message": "It defaults to \"Darwin\" when not assigned, and it seems that linking the core Apple frameworks isn\u0027t needed when building with Xcode. I assume that building for iOS/iPad/tvOS are all done via Xcode while MacOS might be built without it. Maybe inverting it and using\n`\"${CMAKE_SYSTEM_NAME}\" MATCHES \"macOS\" OR \"${CMAKE_SYSTEM_NAME}\" MATCHES \"Darwin\"`?",
+      "parentUuid": "b72b6765_f957aa20",
+      "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
