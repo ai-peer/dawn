@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74473e1c_9b678ecb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000140
+      },
+      "writtenOn": "2023-10-15T01:38:08Z",
+      "side": 1,
+      "message": "Example build failure:\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/ios-blink-dbg-fyi/12804/overview",
+      "revId": "d3aa668afbed030c92dc67dafc39c0571b617bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
