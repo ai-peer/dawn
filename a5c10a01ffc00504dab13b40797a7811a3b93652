@@ -33,6 +33,23 @@
       "message": "LGTM!",
       "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57111e68_e70edb6e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-15T15:30:08Z",
+      "side": 1,
+      "message": "Hi Stephen and Austin,\n\nThis patch has passed all the trybots. Could you take a look?",
+      "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
