@@ -69,6 +69,24 @@
       "parentUuid": "3bc66d7b_57148094",
       "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c098c53d_c883d321",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-15T12:51:07Z",
+      "side": 1,
+      "message": "That sound good! And maybe we could call it TARGET_MACOS like you have done for IOS in the current patchset.",
+      "parentUuid": "98eb712c_581020f5",
+      "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
