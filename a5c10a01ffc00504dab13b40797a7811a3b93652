@@ -86,6 +86,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3c23bc_6c59517a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2023-10-16T17:59:30Z",
+      "side": 1,
+      "message": "sorry, i didn\u0027t know -1 would not block submit. changing to -2. \n\nI want to verify this is the correct place for this. If ANGLE changes tomorrow and starts reserving 3 varyings this change would break. It seems like ANGLE should be reporting what you can actually use. Or is there other reason why it should not be fixed in ANGLE rather than here?",
+      "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fb7c52e_96b9b6a8",
