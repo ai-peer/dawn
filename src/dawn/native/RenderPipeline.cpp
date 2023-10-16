@@ -291,9 +291,15 @@ MaybeError ValidateDepthStencilState(const DeviceBase* device,
         descriptor->depthBiasSlopeScale, descriptor->depthBiasClamp);
 
     DAWN_INVALID_IF(
-        format->HasDepth() && descriptor->depthCompare == wgpu::CompareFunction::Undefined,
-        "Depth stencil format (%s) has a depth aspect and depthCompare is %s.", descriptor->format,
-        wgpu::CompareFunction::Undefined);
+        format->HasDepth() && descriptor->depthCompare == wgpu::CompareFunction::Undefined &&
+            (descriptor->depthWriteEnabled ||
+             descriptor->stencilFront.depthFailOp != wgpu::StencilOperation::Keep ||
+             descriptor->stencilBack.depthFailOp != wgpu::StencilOperation::Keep),
+        "Depth stencil format (%s) has a depth aspect and depthCompare is %s while it's actually "
+        "used by depthWriteEnabled (%u), or stencil front depth fail operation (%s), or "
+        "stencil back depth fail operation (%s).",
+        descriptor->format, wgpu::CompareFunction::Undefined, descriptor->depthWriteEnabled,
+        descriptor->stencilFront.depthFailOp, descriptor->stencilBack.depthFailOp);
 
     UnpackedDepthStencilStateChain unpacked;
     DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
@@ -840,6 +846,13 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
         // Reify depth option for stencil-only formats
         const Format& format = device->GetValidInternalFormat(mDepthStencil.format);
         if (!format.HasDepth()) {
+            mDepthStencil.depthWriteEnabled = false;
+            mDepthStencil.depthCompare = wgpu::CompareFunction::Always;
+        }
+        if (format.HasDepth() && mDepthStencil.depthCompare == wgpu::CompareFunction::Undefined &&
+            !mDepthStencil.depthWriteEnabled &&
+            mDepthStencil.stencilFront.depthFailOp == wgpu::StencilOperation::Keep &&
+            mDepthStencil.stencilBack.depthFailOp == wgpu::StencilOperation::Keep) {
             mDepthStencil.depthWriteEnabled = false;
             mDepthStencil.depthCompare = wgpu::CompareFunction::Always;
         }
