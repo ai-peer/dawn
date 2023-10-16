@@ -39,6 +39,30 @@
       },
       "revId": "c66c2ee0e809880587b5903e9a1dad32817fe118",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97adb11d_16d3a66e",
+        "filename": "test/tint/bug/tint/2052.wgsl.expected.glsl",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-16T18:44:48Z",
+      "side": 1,
+      "message": "If you rebase all the tests without this change, you\u0027ll get two copies of `Error parsing GLSL shader`, one from src/tint/cmd/tint/main.cc and one from src/tint/lang/glsl/validate/validate.cc (see https://dawn-review.googlesource.com/c/dawn/+/155721/)\n\nWith this change, you\u0027ll get one, but it now has \"error:\" prefixed to it (which I couldn\u0027t figure out how to remove).",
+      "parentUuid": "71c1cf30_f8a543f4",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "c66c2ee0e809880587b5903e9a1dad32817fe118",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
