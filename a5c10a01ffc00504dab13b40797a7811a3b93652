@@ -69,6 +69,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49e49f42_bc5b5d79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002926
+      },
+      "writtenOn": "2023-10-16T17:51:15Z",
+      "side": 1,
+      "message": "This seems like a bug in angle. If you can\u0027t actually use GL_MAX_VARYING_VECTORS then ANGLE should not be reporting that you can",
+      "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fb7c52e_96b9b6a8",
