@@ -98,14 +98,20 @@ class EventManager::TrackedEvent : public RefCounted {
                  wgpu::CallbackMode callbackMode,
                  SystemEventReceiver&& receiver);
 
+    // Create a TrackedEvent from a queue completion serial.
+    TrackedEvent(DeviceBase* device,
+                 wgpu::CallbackMode callbackMode,
+                 ExecutionSerial completionSerial);
+
   public:
     // Subclasses must implement this to complete the event (if not completed) with
     // EventCompletionType::Shutdown.
     ~TrackedEvent() override;
 
     class WaitRef;
+    using CompletionData = std::variant<SystemEventReceiver, ExecutionSerial>;
 
-    const SystemEventReceiver& GetReceiver() const;
+    const CompletionData& GetCompletionData() const;
     DeviceBase* GetWaitDevice() const;
 
   protected:
@@ -143,7 +149,7 @@ class EventManager::TrackedEvent : public RefCounted {
     // This abstraction should probably be hidden from TrackedEvent - previous attempts to do
     // something similar in TrackedEvent turned out to be quite confusing. It can instead be an
     // "optimization" to the SystemEvent* or a layer between TrackedEvent and SystemEventReceiver.
-    SystemEventReceiver mReceiver;
+    CompletionData mCompletionData;
     // Callback has been called.
     std::atomic<bool> mCompleted = false;
 };

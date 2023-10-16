@@ -252,14 +252,20 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
 EventManager::TrackedEvent::TrackedEvent(DeviceBase* device,
                                          wgpu::CallbackMode callbackMode,
                                          SystemEventReceiver&& receiver)
-    : mDevice(device), mCallbackMode(callbackMode), mReceiver(std::move(receiver)) {}
+    : mDevice(device), mCallbackMode(callbackMode), mCompletionData(std::move(receiver)) {}
+
+EventManager::TrackedEvent::TrackedEvent(DeviceBase* device,
+                                         wgpu::CallbackMode callbackMode,
+                                         ExecutionSerial completionSerial)
+    : mDevice(device), mCallbackMode(callbackMode), mCompletionData(completionSerial) {}
 
 EventManager::TrackedEvent::~TrackedEvent() {
     DAWN_ASSERT(mCompleted);
 }
 
-const SystemEventReceiver& EventManager::TrackedEvent::GetReceiver() const {
-    return mReceiver;
+const EventManager::TrackedEvent::CompletionData& EventManager::TrackedEvent::GetCompletionData()
+    const {
+    return mCompletionData;
 }
 
 DeviceBase* EventManager::TrackedEvent::GetWaitDevice() const {

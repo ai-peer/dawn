@@ -169,7 +169,10 @@ bool WaitAnySystemEvent(size_t count, TrackedFutureWaitInfo* futures, Nanosecond
 #elif DAWN_PLATFORM_IS(POSIX)
     std::vector<pollfd> pollfds(count);
     for (size_t i = 0; i < count; ++i) {
-        int fd = AsFD(futures[i].event->GetReceiver().mPrimitive);
+        const auto& completionData = futures[i].event->GetCompletionData();
+        const auto* receiver = std::get_if<SystemEventReceiver>(&completionData);
+        DAWN_CHECK(receiver != nullptr);
+        int fd = AsFD(receiver->mPrimitive);
         pollfds[i] = pollfd{fd, POLLIN, 0};
     }
 
