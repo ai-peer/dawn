@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43b6921a_fee77878",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1867,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-16T18:59:38Z",
+      "side": 1,
+      "message": "Moved question to https://github.com/webgpu-native/webgpu-headers/issues/45, will resolve in a future CL",
+      "parentUuid": "17eb412f_0eadade8",
+      "revId": "896eef614c779402126c22b56d081d05576a6466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c90f416_065cff8f",
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "https://source.chromium.org/search?q\u003d(%5Cbstype::invalid%20OR%20wgpustype_invalid)%20-f:%2Fgen%2F\u0026ss\u003dchromium",
       "parentUuid": "7c90f416_065cff8f",
+      "revId": "896eef614c779402126c22b56d081d05576a6466",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba5208f_588a8c73",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 3240,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-16T18:59:38Z",
+      "side": 1,
+      "message": "Moved question to https://github.com/webgpu-native/webgpu-headers/issues/45, will resolve in a future CL",
+      "parentUuid": "9a127f22_9d580f10",
       "revId": "896eef614c779402126c22b56d081d05576a6466",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
