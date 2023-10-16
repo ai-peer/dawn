@@ -446,9 +446,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     virtual void AppendDebugLayerMessages(ErrorData* error) {}
     virtual void AppendDeviceLostMessage(ErrorData* error) {}
 
-    [[nodiscard]] virtual bool WaitAnyImpl(size_t futureCount,
-                                           TrackedFutureWaitInfo* futures,
-                                           Nanoseconds timeout);
+    ResultOrError<bool> WaitAny(size_t futureCount,
+                                TrackedFutureWaitInfo* futures,
+                                Nanoseconds timeout);
+    ResultOrError<bool> PollQueueFutures(size_t futureCount, TrackedFutureWaitInfo* futures);
 
     // It is guaranteed that the wrapped mutex will outlive the Device (if the Device is deleted
     // before the AutoLockAndHoldRef).

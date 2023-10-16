@@ -2115,11 +2115,121 @@ uint64_t DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil() const {
     return 4u;
 }
 
-bool DeviceBase::WaitAnyImpl(size_t futureCount,
-                             TrackedFutureWaitInfo* futures,
-                             Nanoseconds timeout) {
-    // Default for backends which don't actually need to do anything special in this case.
-    return WaitAnySystemEvent(futureCount, futures, timeout);
+ResultOrError<bool> DeviceBase::WaitAny(size_t futureCount,
+                                        TrackedFutureWaitInfo* futures,
+                                        Nanoseconds timeout) {
+    if (futureCount == 0) {
+        return false;
+    }
+
+    // Mark all futures as ready if the device is lost.
+    if (IsLost()) {
+        for (size_t i = 0; i < futureCount; ++i) {
+            futures[i].ready = true;
+        }
+        return true;
+    }
+
+    // Partition the futures so that all those with a SystemEventReceiver are at the front.
+    // At the same time, keep track of the lowest queue serial we see.
+    // When we have multi-queue, we should wait for the lowest serial from each queue.
+    ExecutionSerial lowestWaitSerial = kMaxExecutionSerial;
+    auto it =
+        std::partition(futures, futures + futureCount, [&](const TrackedFutureWaitInfo& info) {
+            if (std::holds_alternative<SystemEventReceiver>(info.event->GetCompletionData())) {
+                return true;
+            } else {
+                ExecutionSerial serial = std::get<ExecutionSerial>(info.event->GetCompletionData());
+                lowestWaitSerial = std::min(lowestWaitSerial, serial);
+                return false;
+            }
+        });
+
+    size_t eventReceiverCount = std::distance(futures, it);
+    size_t queueFutureCount = futureCount - eventReceiverCount;
+
+    // Poll only.
+    if (timeout == Nanoseconds(0)) {
+        bool systemEventCompleted = WaitAnySystemEvent(eventReceiverCount, futures, Nanoseconds(0));
+        bool queueCompleted;
+        DAWN_TRY_ASSIGN(queueCompleted,
+                        PollQueueFutures(queueFutureCount, futures + eventReceiverCount));
+        return systemEventCompleted || queueCompleted;
+    }
+
+    if (queueFutureCount > 0 && lowestWaitSerial > GetQueue()->GetLastSubmittedCommandSerial()) {
+        // Serial has not been submitted yet. Submit it now.
+        // TODO(dawn:1413): This doesn't need to be a full tick. It just needs to flush work
+        // up to `lowestWaitSerial`. This should be done after the ExecutionQueue /
+        // ExecutionContext refactor.
+        DAWN_TRY(Tick());
+    }
+
+    bool anyCompleted = false;
+    if (eventReceiverCount > 0) {
+        // Case 1:
+        // If there are a non-zero number of system events to wait on, convert queue waits into
+        // system events, if any, and wait using WaitAnySystemEvent.
+        Ref<EventManager::TrackedEvent> queueCompletionSystemEvent;
+        // For each queue that needs waiting, save off an arbitrary queue completion future from
+        // `futures`, and replace it with a minimized queue completion future for the lowest serial.
+        // There are strictly more queue completion futures than minimized futures, so there is
+        // sufficient space in the `futures` array to make all the replacements.
+        // For now, there is only a single queue, so at most one future will be replaced.
+        // Swapping in this manner allows us to push new system events into the futures list without
+        // copying the whole list.
+        size_t numSystemEvents = eventReceiverCount;
+        std::optional<TrackedFutureWaitInfo> savedFutureWaitInfo;
+        if (queueFutureCount > 0) {
+            queueCompletionSystemEvent = GetQueue()->GetOrCreateCompletionEvent(lowestWaitSerial);
+            savedFutureWaitInfo = std::move(futures[numSystemEvents]);
+            futures[numSystemEvents] = {
+                UINT64_MAX,
+                EventManager::TrackedEvent::WaitRef(queueCompletionSystemEvent.Get()),
+                SIZE_MAX,
+                false,
+            };
+            numSystemEvents++;
+        }
+
+        // Now that queue serial futures have been reduced to system events,
+        // wait/poll all the system events.
+        anyCompleted = WaitAnySystemEvent(numSystemEvents, futures, timeout);
+
+        // Restore any saved queue serial futures.
+        if (savedFutureWaitInfo) {
+            std::swap(futures[eventReceiverCount], *savedFutureWaitInfo);
+        }
+    } else if (queueFutureCount > 0) {
+        // Case 2: There are no system events to wait on; wait directly on the queue.
+        DAWN_TRY_ASSIGN(anyCompleted, GetQueue()->WaitForQueueSerial(lowestWaitSerial, timeout));
+    }
+
+    // Check and update queue completion statuses, then mark any completed queue serial
+    // futures as complete.
+    bool pollCompleted;
+    DAWN_TRY_ASSIGN(pollCompleted,
+                    PollQueueFutures(queueFutureCount, futures + eventReceiverCount));
+    return anyCompleted || pollCompleted;
+}
+
+ResultOrError<bool> DeviceBase::PollQueueFutures(size_t futureCount,
+                                                 TrackedFutureWaitInfo* futures) {
+    if (futureCount == 0) {
+        return false;
+    }
+
+    bool anyCompleted = false;
+    DAWN_TRY(GetQueue()->CheckPassedSerials());
+    const ExecutionSerial completedSerial = GetQueue()->GetCompletedCommandSerial();
+    for (size_t i = 0; i < futureCount; ++i) {
+        ExecutionSerial serial = std::get<ExecutionSerial>(futures[i].event->GetCompletionData());
+        if (serial <= completedSerial) {
+            anyCompleted = true;
+            futures[i].ready = true;
+        }
+    }
+    return anyCompleted;
 }
 
 MaybeError DeviceBase::CopyFromStagingToBuffer(BufferBase* source,
