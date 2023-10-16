@@ -40,6 +40,7 @@
 #include "dawn/native/Commands.h"
 #include "dawn/native/ComputePipeline.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/ExecutionQueue.h"
 #include "dawn/native/Features.h"
 #include "dawn/native/Format.h"
@@ -446,9 +447,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     virtual void AppendDebugLayerMessages(ErrorData* error) {}
     virtual void AppendDeviceLostMessage(ErrorData* error) {}
 
-    [[nodiscard]] virtual bool WaitAnyImpl(size_t futureCount,
-                                           TrackedFutureWaitInfo* futures,
-                                           Nanoseconds timeout);
+    ResultOrError<bool> WaitAny(size_t futureCount,
+                                TrackedFutureWaitInfo* futures,
+                                Nanoseconds timeout);
 
     // It is guaranteed that the wrapped mutex will outlive the Device (if the Device is deleted
     // before the AutoLockAndHoldRef).
@@ -479,6 +480,12 @@ class DeviceBase : public RefCountedWithExternalCount {
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
     void Destroy();
+
+    // Get or create an event that will be signaled after the ExecutionSerial passes.
+    virtual Ref<EventManager::TrackedEvent> GetOrCreateCompletionEvent(ExecutionSerial serial);
+    // Wait at most `timeout` synchronously for the ExecutionSerial to pass. Returns true
+    // if the serial passed.
+    virtual ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout);
 
   private:
     void WillDropLastExternalRef() override;
