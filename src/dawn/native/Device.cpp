@@ -2093,9 +2093,9 @@ uint64_t DeviceBase::GetBufferCopyOffsetAlignmentForDepthStencil() const {
     return 4u;
 }
 
-bool DeviceBase::WaitAnyImpl(size_t futureCount,
-                             TrackedFutureWaitInfo* futures,
-                             Nanoseconds timeout) {
+ResultOrError<bool> DeviceBase::WaitAnyImpl(size_t futureCount,
+                                            TrackedFutureWaitInfo* futures,
+                                            Nanoseconds timeout) {
     // Default for backends which don't actually need to do anything special in this case.
     return WaitAnySystemEvent(futureCount, futures, timeout);
 }

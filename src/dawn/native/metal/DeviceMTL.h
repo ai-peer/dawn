@@ -134,6 +134,10 @@ class Device final : public DeviceBase {
 
     void DestroyImpl() override;
 
+    [[nodiscard]] ResultOrError<bool> WaitAnyImpl(size_t futureCount,
+                                                  TrackedFutureWaitInfo* futures,
+                                                  Nanoseconds timeout) override;
+
     NSPRef<id<MTLDevice>> mMtlDevice;
 
     // The current estimation of timestamp period

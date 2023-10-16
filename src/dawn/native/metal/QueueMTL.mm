@@ -36,9 +36,10 @@ ResultOrError<Ref<Queue>> Queue::Create(Device* device, const QueueDescriptor* d
 Queue::Queue(Device* device, const QueueDescriptor* descriptor)
     : QueueBase(device, descriptor), mCompletedSerial(0) {}
 
-Queue::~Queue() {}
+Queue::~Queue() = default;
 
-void Queue::Destroy() {
+void Queue::DestroyImpl() {
+    QueueBase::DestroyImpl();
     // Forget all pending commands.
     mCommandContext.AcquireCommands();
     UpdateWaitingEvents(kMaxExecutionSerial);
@@ -63,40 +64,12 @@ MaybeError Queue::Initialize() {
 }
 
 void Queue::UpdateWaitingEvents(ExecutionSerial completedSerial) {
-    DAWN_ASSERT(mCompletedSerial >= uint64_t(completedSerial) ||
-                completedSerial == kMaxExecutionSerial);
-    mWaitingEvents.Use([&](auto waitingEvents) {
-        for (auto& waiting : waitingEvents->IterateUpTo(completedSerial)) {
-            std::move(waiting).Signal();
+    mCompletionSignals.Use([&](auto signals) {
+        for (auto& s : signals->senders.IterateUpTo(completedSerial)) {
+            std::move(s).Signal();
         }
-        waitingEvents->ClearUpTo(completedSerial);
+        signals->senders.ClearUpTo(completedSerial);
     });
-}
-
-SystemEventReceiver Queue::InsertWorkDoneEvent() {
-    ExecutionSerial serial = GetScheduledWorkDoneSerial();
-
-    // TODO(crbug.com/dawn/2051): Optimize to not create a pipe for every WorkDone/MapAsync event.
-    // Possible ways to do this:
-    // - Don't create the pipe until needed (see the todo on TrackedEvent::mReceiver).
-    // - Dedup event pipes when one serial is needed for multiple events (and add a
-    //   SystemEventReceiver::Duplicate() method which dup()s its underlying pipe receiver).
-    // - Create a pipe each for each new serial instead of for each requested event (tradeoff).
-    SystemEventPipeSender sender;
-    SystemEventReceiver receiver;
-    std::tie(sender, receiver) = CreateSystemEventPipe();
-
-    mWaitingEvents.Use([&](auto waitingEvents) {
-        // Check for device loss while the lock is held. Otherwise, we could enqueue the event
-        // after mWaitingEvents has been flushed for device loss, and it'll never get cleaned up.
-        if (GetDevice()->IsLost() || mCompletedSerial >= uint64_t(serial)) {
-            std::move(sender).Signal();
-        } else {
-            waitingEvents->Enqueue(std::move(sender), serial);
-        }
-    });
-
-    return receiver;
 }
 
 MaybeError Queue::WaitForIdleForDestruction() {
@@ -249,6 +222,69 @@ void Queue::ForceEventualFlushOfCommands() {
     if (mCommandContext.WasUsed()) {
         mCommandContext.SetNeedsSubmit();
     }
+}
+
+class Queue::CompletionEvent : public EventManager::TrackedEvent {
+  public:
+    CompletionEvent(Queue* queue, ExecutionSerial serial, SystemEventReceiver&& receiver);
+    ~CompletionEvent() override;
+
+    bool MustWaitUsingDevice() const override;
+    void Complete(EventCompletionType) override;
+
+  private:
+    WeakRef<Queue> mQueue;
+    ExecutionSerial mSerial;
+};
+
+Queue::CompletionEvent::CompletionEvent(Queue* queue,
+                                        ExecutionSerial serial,
+                                        SystemEventReceiver&& receiver)
+    : TrackedEvent(queue->GetDevice(), wgpu::CallbackMode::WaitAnyOnly, std::move(receiver)),
+      mQueue(GetWeakRef(queue)),
+      mSerial(serial) {}
+
+Queue::CompletionEvent::~CompletionEvent() {
+    EnsureComplete(EventCompletionType::Shutdown);
+}
+
+bool Queue::CompletionEvent::MustWaitUsingDevice() const {
+    return false;
+}
+
+void Queue::CompletionEvent::Complete(EventCompletionType) {
+    auto queue = mQueue.Promote();
+    if (queue != nullptr) {
+        queue->UntrackCompletionEvent(mSerial);
+    }
+}
+
+Ref<EventManager::TrackedEvent> Queue::GetOrCreateCompletionEvent(ExecutionSerial serial) {
+    return mCompletionSignals.Use([&](auto signals) -> Ref<CompletionEvent> {
+        // Now that we hold the lock, check against mCompletedSerial before inserting.
+        // This serial may have just completed.
+        if (serial <= ExecutionSerial(mCompletedSerial.load(std::memory_order_acquire))) {
+            return nullptr;
+        }
+
+        auto it = signals->receivers.find(serial);
+        if (it != signals->receivers.end()) {
+            return it->second;
+        }
+        SystemEventPipeSender sender;
+        SystemEventReceiver receiver;
+        std::tie(sender, receiver) = CreateSystemEventPipe();
+
+        bool inserted;
+        std::tie(it, inserted) = signals->receivers.emplace(
+            serial, AcquireRef(new CompletionEvent(this, serial, std::move(receiver))));
+        signals->senders.Enqueue(std::move(sender), serial);
+        return it->second;
+    });
+}
+
+void Queue::UntrackCompletionEvent(ExecutionSerial serial) {
+    mCompletionSignals.Use([&](auto signals) { signals->receivers.erase(serial); });
 }
 
 }  // namespace dawn::native::metal

@@ -63,7 +63,17 @@ wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanosecon
         {
             bool success;
             if (waitDevice) {
-                success = waitDevice->WaitAnyImpl(sliceLength, &futures[sliceStart], timeout);
+                auto result = waitDevice->WaitAnyImpl(sliceLength, &futures[sliceStart], timeout);
+                if (result.IsError()) {
+                    // There was an error. Mark all futures as ready.
+                    DAWN_UNUSED(waitDevice->ConsumedError(result.AcquireError()));
+                    for (size_t i = sliceStart; i < sliceStart + sliceLength; ++i) {
+                        futures[i].ready = true;
+                    }
+                    success = true;
+                } else {
+                    success = result.AcquireSuccess();
+                }
             } else {
                 success = WaitAnySystemEvent(sliceLength, &futures[sliceStart], timeout);
             }
@@ -252,14 +262,20 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
 EventManager::TrackedEvent::TrackedEvent(DeviceBase* device,
                                          wgpu::CallbackMode callbackMode,
                                          SystemEventReceiver&& receiver)
-    : mDevice(device), mCallbackMode(callbackMode), mReceiver(std::move(receiver)) {}
+    : mDevice(device), mCallbackMode(callbackMode), mCompletionData(std::move(receiver)) {}
+
+EventManager::TrackedEvent::TrackedEvent(DeviceBase* device,
+                                         wgpu::CallbackMode callbackMode,
+                                         ExecutionSerial completionSerial)
+    : mDevice(device), mCallbackMode(callbackMode), mCompletionData(completionSerial) {}
 
 EventManager::TrackedEvent::~TrackedEvent() {
     DAWN_ASSERT(mCompleted);
 }
 
-const SystemEventReceiver& EventManager::TrackedEvent::GetReceiver() const {
-    return mReceiver;
+const EventManager::TrackedEvent::CompletionData& EventManager::TrackedEvent::GetCompletionData()
+    const {
+    return mCompletionData;
 }
 
 DeviceBase* EventManager::TrackedEvent::GetWaitDevice() const {
