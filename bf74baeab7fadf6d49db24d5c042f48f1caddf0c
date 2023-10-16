@@ -22,6 +22,30 @@
       },
       "revId": "bf74baeab7fadf6d49db24d5c042f48f1caddf0c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4030c6de_a6f5a536",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-16T20:10:01Z",
+      "side": 1,
+      "message": "Change it to `type !\u003d InternalErrorType::Validation` instead.",
+      "parentUuid": "c5602d70_78818c85",
+      "range": {
+        "startLine": 538,
+        "startChar": 4,
+        "endLine": 540,
+        "endChar": 0
+      },
+      "revId": "bf74baeab7fadf6d49db24d5c042f48f1caddf0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
