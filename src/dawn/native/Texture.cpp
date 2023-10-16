@@ -451,7 +451,7 @@ bool CopySrcNeedsInternalTextureBindingUsage(const DeviceBase* device, const For
     return false;
 }
 
-wgpu::TextureViewDimension ResolveDefaultCompatiblityViewDimension(
+wgpu::TextureViewDimension ResolveDefaultCompatiblityTextureBindingViewDimension(
     const DeviceBase* device,
     const TextureDescriptor* descriptor) {
     // In non-compatibility mode this value is not used so return undefined so that it is not
@@ -460,14 +460,15 @@ wgpu::TextureViewDimension ResolveDefaultCompatiblityViewDimension(
         return wgpu::TextureViewDimension::Undefined;
     }
 
-    const TextureViewDimensionDescriptor* viewDimensionDescriptor = nullptr;
-    FindInChain(descriptor->nextInChain, &viewDimensionDescriptor);
-    const auto viewDimension = viewDimensionDescriptor == nullptr
-                                   ? wgpu::TextureViewDimension::Undefined
-                                   : viewDimensionDescriptor->viewDimension;
+    const TextureBindingViewDimensionDescriptor* textureBindingViewDimensionDescriptor = nullptr;
+    FindInChain(descriptor->nextInChain, &textureBindingViewDimensionDescriptor);
+    const auto textureBindingViewDimension =
+        textureBindingViewDimensionDescriptor == nullptr
+            ? wgpu::TextureViewDimension::Undefined
+            : textureBindingViewDimensionDescriptor->textureBindingViewDimension;
 
-    if (viewDimension != wgpu::TextureViewDimension::Undefined) {
-        return viewDimension;
+    if (textureBindingViewDimension != wgpu::TextureViewDimension::Undefined) {
+        return textureBindingViewDimension;
     }
 
     switch (descriptor->dimension) {
@@ -488,9 +489,9 @@ MaybeError ValidateTextureDescriptor(
     const TextureDescriptor* descriptor,
     AllowMultiPlanarTextureFormat allowMultiPlanar,
     std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage) {
-    DAWN_TRY(
-        ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::DawnTextureInternalUsageDescriptor,
-                                                  wgpu::SType::TextureViewDimensionDescriptor}}));
+    DAWN_TRY(ValidateSTypes(descriptor->nextInChain,
+                            {{wgpu::SType::DawnTextureInternalUsageDescriptor,
+                              wgpu::SType::TextureBindingViewDimensionDescriptor}}));
 
     const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
     FindInChain(descriptor->nextInChain, &internalUsageDesc);
@@ -534,12 +535,13 @@ MaybeError ValidateTextureDescriptor(
                                   std::move(allowedSharedTextureMemoryUsage)));
     DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
     if (device->IsCompatibilityMode()) {
-        const auto viewDimension = ResolveDefaultCompatiblityViewDimension(device, descriptor);
+        const auto textureBindingViewDimension =
+            ResolveDefaultCompatiblityTextureBindingViewDimension(device, descriptor);
 
         DAWN_INVALID_IF(!IsTextureViewDimensionCompatibleWithTextureDimension(
-                            viewDimension, descriptor->dimension),
+                            textureBindingViewDimension, descriptor->dimension),
                         "The viewDimension (%s) is not compatible with the dimension (%s)",
-                        viewDimension, descriptor->dimension);
+                        textureBindingViewDimension, descriptor->dimension);
     }
     DAWN_TRY(ValidateSampleCount(descriptor, usage, format));
 
@@ -702,7 +704,8 @@ TextureBase::TextureState::TextureState() : hasAccess(true), destroyed(false) {}
 TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor)
     : ApiObjectBase(device, descriptor->label),
       mDimension(descriptor->dimension),
-      mCompatibilityViewDimension(ResolveDefaultCompatiblityViewDimension(device, descriptor)),
+      mCompatibilityTextureBindingViewDimension(
+          ResolveDefaultCompatiblityTextureBindingViewDimension(device, descriptor)),
       mFormat(device->GetValidInternalFormat(descriptor->format)),
       mBaseSize(descriptor->size),
       mMipLevelCount(descriptor->mipLevelCount),
@@ -764,7 +767,8 @@ TextureBase::TextureBase(DeviceBase* device,
                          ObjectBase::ErrorTag tag)
     : ApiObjectBase(device, tag, descriptor->label),
       mDimension(descriptor->dimension),
-      mCompatibilityViewDimension(ResolveDefaultCompatiblityViewDimension(device, descriptor)),
+      mCompatibilityTextureBindingViewDimension(
+          ResolveDefaultCompatiblityTextureBindingViewDimension(device, descriptor)),
       mFormat(kUnusedFormat),
       mBaseSize(descriptor->size),
       mMipLevelCount(descriptor->mipLevelCount),
@@ -803,9 +807,9 @@ wgpu::TextureDimension TextureBase::GetDimension() const {
     return mDimension;
 }
 
-wgpu::TextureViewDimension TextureBase::GetCompatibilityViewDimension() const {
+wgpu::TextureViewDimension TextureBase::GetCompatibilityTextureBindingViewDimension() const {
     DAWN_ASSERT(!IsError());
-    return mCompatibilityViewDimension;
+    return mCompatibilityTextureBindingViewDimension;
 }
 
 const Format& TextureBase::GetFormat() const {
