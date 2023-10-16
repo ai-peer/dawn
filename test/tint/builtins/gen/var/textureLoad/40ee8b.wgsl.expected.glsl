@@ -28,6 +28,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:11: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
 ERROR: 0:11: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -58,6 +59,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:12: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
 ERROR: 0:12: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -88,6 +90,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:11: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
 ERROR: 0:11: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.

@@ -27,6 +27,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:10: 'sampler' : TextureOffset does not support sampler2DArrayShadow :  ES Profile
 ERROR: 0:10: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -56,6 +57,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:11: 'sampler' : TextureOffset does not support sampler2DArrayShadow :  ES Profile
 ERROR: 0:11: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -85,6 +87,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:10: 'sampler' : TextureOffset does not support sampler2DArrayShadow :  ES Profile
 ERROR: 0:10: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.

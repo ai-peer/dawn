@@ -25,6 +25,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:4: 'samplerCubeArray' : Reserved word. 
 ERROR: 0:4: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.

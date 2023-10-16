@@ -24,6 +24,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:3: 'image load-store format' : not supported with this profile: es
 ERROR: 0:3: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -50,6 +51,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:4: 'image load-store format' : not supported with this profile: es
 ERROR: 0:4: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -76,6 +78,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:3: 'image load-store format' : not supported with this profile: es
 ERROR: 0:3: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.

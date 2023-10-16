@@ -27,6 +27,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:10: 'textureLodOffset for sampler2DArrayShadow' : required extension not requested: GL_EXT_texture_shadow_lod
 ERROR: 0:10: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -56,6 +57,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:11: 'textureLodOffset for sampler2DArrayShadow' : required extension not requested: GL_EXT_texture_shadow_lod
 ERROR: 0:11: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
@@ -85,6 +87,7 @@ void main() {
   return;
 }
 Error parsing GLSL shader:
+error: Error parsing GLSL shader:
 ERROR: 0:10: 'textureLodOffset for sampler2DArrayShadow' : required extension not requested: GL_EXT_texture_shadow_lod
 ERROR: 0:10: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
