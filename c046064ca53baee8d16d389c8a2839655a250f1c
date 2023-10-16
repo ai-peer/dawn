@@ -16,6 +16,23 @@
       "message": "Hi Austin, PTAL. Thanks",
       "revId": "c046064ca53baee8d16d389c8a2839655a250f1c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "53d9bdb4_baf306a6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-16T19:55:56Z",
+      "side": 1,
+      "message": "maybe we should do it only on InternalError | DeviceLost. It would be weird to check this for example on validation errors",
+      "revId": "c046064ca53baee8d16d389c8a2839655a250f1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
