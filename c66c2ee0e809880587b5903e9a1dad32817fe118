@@ -16,6 +16,29 @@
       "message": "Ben: PTAL. Thanks!",
       "revId": "c66c2ee0e809880587b5903e9a1dad32817fe118",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71c1cf30_f8a543f4",
+        "filename": "test/tint/bug/tint/2052.wgsl.expected.glsl",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-16T17:58:39Z",
+      "side": 1,
+      "message": "I\u0027m confused. Shouldn\u0027t `Error parsing GLSL shader:` be deleted in this update?",
+      "range": {
+        "startLine": 13,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "c66c2ee0e809880587b5903e9a1dad32817fe118",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
