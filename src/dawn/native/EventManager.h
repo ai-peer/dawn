@@ -20,6 +20,7 @@
 #include <mutex>
 #include <optional>
 #include <unordered_map>
+#include <variant>
 #include <vector>
 
 #include "dawn/common/FutureUtils.h"
@@ -41,7 +42,6 @@ struct InstanceDescriptor;
 // TODO(crbug.com/dawn/2050): Can this eventually replace CallbackTaskManager?
 //
 // There are various ways to optimize ProcessEvents/WaitAny:
-// - TODO(crbug.com/dawn/2064) Only pay attention to the earliest serial on each queue.
 // - TODO(crbug.com/dawn/2059) Spontaneously set events as "early-ready" in other places when we see
 //   serials advance, e.g. Submit, or when checking a later wait before an earlier wait.
 // - TODO(crbug.com/dawn/2049) For thread-driven events (async pipeline compilation and Metal queue
@@ -98,14 +98,20 @@ class EventManager::TrackedEvent : public RefCounted {
                  wgpu::CallbackMode callbackMode,
                  SystemEventReceiver&& receiver);
 
+    // Create a TrackedEvent from a queue completion serial.
+    TrackedEvent(DeviceBase* device,
+                 wgpu::CallbackMode callbackMode,
+                 ExecutionSerial completionSerial);
+
   public:
     // Subclasses must implement this to complete the event (if not completed) with
     // EventCompletionType::Shutdown.
     ~TrackedEvent() override;
 
     class WaitRef;
+    using CompletionData = std::variant<SystemEventReceiver, ExecutionSerial>;
 
-    const SystemEventReceiver& GetReceiver() const;
+    const CompletionData& GetCompletionData() const;
     DeviceBase* GetWaitDevice() const;
 
   protected:
@@ -143,7 +149,7 @@ class EventManager::TrackedEvent : public RefCounted {
     // This abstraction should probably be hidden from TrackedEvent - previous attempts to do
     // something similar in TrackedEvent turned out to be quite confusing. It can instead be an
     // "optimization" to the SystemEvent* or a layer between TrackedEvent and SystemEventReceiver.
-    SystemEventReceiver mReceiver;
+    CompletionData mCompletionData;
     // Callback has been called.
     std::atomic<bool> mCompleted = false;
 };

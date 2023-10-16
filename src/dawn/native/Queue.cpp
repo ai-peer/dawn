@@ -183,11 +183,11 @@ struct WorkDoneEvent final : public EventManager::TrackedEvent {
     WGPUQueueWorkDoneCallback mCallback;
     void* mUserdata;
 
-    // Create an event backed by the given SystemEventReceiver.
+    // Create an event backed by the given a queue execution serial.
     WorkDoneEvent(DeviceBase* device,
                   const QueueWorkDoneCallbackInfo& callbackInfo,
-                  SystemEventReceiver&& receiver)
-        : TrackedEvent(device, callbackInfo.mode, std::move(receiver)),
+                  ExecutionSerial serial)
+        : TrackedEvent(device, callbackInfo.mode, serial),
           mCallback(callbackInfo.callback),
           mUserdata(callbackInfo.userdata) {}
 
@@ -195,7 +195,9 @@ struct WorkDoneEvent final : public EventManager::TrackedEvent {
     WorkDoneEvent(DeviceBase* device,
                   const QueueWorkDoneCallbackInfo& callbackInfo,
                   wgpu::QueueWorkDoneStatus earlyStatus)
-        : TrackedEvent(device, callbackInfo.mode, SystemEventReceiver::CreateAlreadySignaled()),
+        : TrackedEvent(device,
+                       callbackInfo.mode,
+                       /* zero serial is always complete */ ExecutionSerial(0)),
           mEarlyStatus(earlyStatus),
           mCallback(callbackInfo.callback),
           mUserdata(callbackInfo.userdata) {
@@ -306,18 +308,14 @@ Future QueueBase::APIOnSubmittedWorkDoneF(const QueueWorkDoneCallbackInfo& callb
         // Note: if the callback is spontaneous, it'll get called in here.
         event = AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, validationEarlyStatus));
     } else {
-        event = AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, InsertWorkDoneEvent()));
+        event =
+            AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, GetScheduledWorkDoneSerial()));
     }
 
     FutureID futureID =
         GetInstance()->GetEventManager()->TrackEvent(callbackInfo.mode, std::move(event));
 
     return {futureID};
-}
-
-SystemEventReceiver QueueBase::InsertWorkDoneEvent() {
-    // TODO(crbug.com/dawn/2058): Implement this in all backends and remove this default impl
-    DAWN_CHECK(false);
 }
 
 void QueueBase::TrackTask(std::unique_ptr<TrackTaskCallback> task, ExecutionSerial serial) {
