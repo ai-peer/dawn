@@ -33,6 +33,24 @@
       "message": "I think this can be simplified to:\n\n```\n                if (auto val \u003d group_to_next_binding_number.Find(bp-\u003egroup)) {\n                    **val \u003d std::max(**val, bp-\u003ebinding + 1);\n                } else {\n                    group_to_next_binding_number.Add(bp-\u003egroup, bp-\u003ebinding + 1);\n                }\n```",
       "revId": "f7a146e348749f0f03c81b8aa201187a0401cab0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6fc74b9_e1d71356",
+        "filename": "src/tint/lang/spirv/writer/helpers/generate_bindings.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-16T18:23:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea2cce93_aea3ded8",
+      "revId": "f7a146e348749f0f03c81b8aa201187a0401cab0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
