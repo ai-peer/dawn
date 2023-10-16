@@ -99,6 +99,30 @@
       },
       "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1de5cfd_141538d3",
+        "filename": "src/dawn/tests/BUILD.gn",
+        "patchSetId": 15
+      },
+      "lineNbr": 651,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-10-16T03:14:31Z",
+      "side": 1,
+      "message": "Failed to create the BO, while VideoViewsTests could still pass.\n\n```\n[ RUN      ] Vulkan/SharedTextureMemoryTests.RenderThenSampleEncodeAfterBeginAccess/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Backend_dma_buf__opaque_fd\nInfo: Test unsupported: bo \u003d\u003d nullptr\n[minigbm:i915.c(762)] DRM_IOCTL_I915_GEM_CREATE failed (size\u003d4096)\n../../third_party/dawn/src/dawn/tests/end2end/SharedTextureMemoryTests_linux.cpp:256: Skipped\n\nStack trace:\n#0 0x5c58f27cedfc dawn::(anonymous namespace)::Backend\u003c\u003e::SetUp()\n#1 0x5c58f27207d9 dawn::SharedTextureMemoryTests::SetUp()\n\n[  SKIPPED ] Vulkan/SharedTextureMemoryTests.RenderThenSampleEncodeAfterBeginAccess/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Backend_dma_buf__opaque_fd (13 ms)\n[ RUN      ] Vulkan/SharedTextureMemoryTests.RenderThenSampleEncodeAfterBeginAccess/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Backend_dma_buf__sync_fd\nInfo: Test unsupported: bo \u003d\u003d nullptr\n[minigbm:i915.c(762)] DRM_IOCTL_I915_GEM_CREATE failed (size\u003d4096)\n../../third_party/dawn/src/dawn/tests/end2end/SharedTextureMemoryTests_linux.cpp:256: Skipped\n\nStack trace:\n#0 0x5c58f27cedfc dawn::(anonymous namespace)::Backend\u003c\u003e::SetUp()\n#1 0x5c58f27207d9 dawn::SharedTextureMemoryTests::SetUp()\n\n[  SKIPPED ] Vulkan/SharedTextureMemoryTests.RenderThenSampleEncodeAfterBeginAccess/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Backend_dma_buf__sync_fd (13 ms)\n[ RUN      ] Vulkan/SharedTextureMemoryTests.RenderThenSampleEncodeBeforeBeginAccess/Vulkan_Intel_R__Xe_Graphics__TGL_GT2_____Backend_dma_buf__opaque_fd\nInfo: Test unsupported: bo \u003d\u003d nullptr\n[minigbm:i915.c(762)] DRM_IOCTL_I915_GEM_CREATE failed (size\u003d4096)\n../../third_party/dawn/src/dawn/tests/end2end/SharedTextureMemoryTests_linux.cpp:256: Skipped\n\nStack trace:\n#0 0x5c58f27cedfc dawn::(anonymous namespace)::Backend\u003c\u003e::SetUp()\n#1 0x5c58f27207d9 dawn::SharedTextureMemoryTests::SetUp()\n```",
+      "parentUuid": "0fb3e552_33796d60",
+      "range": {
+        "startLine": 651,
+        "startChar": 1,
+        "endLine": 651,
+        "endChar": 17
+      },
+      "revId": "d04f75637e9e875387af0abbe5fe4f8ac5e692ac",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
