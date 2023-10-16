@@ -163,13 +163,20 @@ void SystemEventPipeSender::Signal() && {
 // standalone functions
 
 bool WaitAnySystemEvent(size_t count, TrackedFutureWaitInfo* futures, Nanoseconds timeout) {
+    if (count == 0) {
+        // Check the count early. An infinite `poll` on zero fds will hang.
+        return false;
+    }
 #if DAWN_PLATFORM_IS(WINDOWS)
     // TODO(crbug.com/dawn/2054): Implement this.
     DAWN_CHECK(false);
 #elif DAWN_PLATFORM_IS(POSIX)
     std::vector<pollfd> pollfds(count);
     for (size_t i = 0; i < count; ++i) {
-        int fd = AsFD(futures[i].event->GetReceiver().mPrimitive);
+        const auto& completionData = futures[i].event->GetCompletionData();
+        const auto* receiver = std::get_if<SystemEventReceiver>(&completionData);
+        DAWN_CHECK(receiver != nullptr);
+        int fd = AsFD(receiver->mPrimitive);
         pollfds[i] = pollfd{fd, POLLIN, 0};
     }
 
