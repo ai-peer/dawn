@@ -50,6 +50,40 @@
       "message": "Hi Stephen and Austin,\n\nThis patch has passed all the trybots. Could you take a look?",
       "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dc829c2_a187f957",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-16T13:42:34Z",
+      "side": 1,
+      "message": "+Gregg FYI\n\nLGTM2",
+      "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fb7c52e_96b9b6a8",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-16T13:42:34Z",
+      "side": 1,
+      "message": "If this limitation only applies to ANGLE/D3D11, we should probably find a way to scope it to only that ANGLE backend. If so, could you log a bug to investigate that?",
+      "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
