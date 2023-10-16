@@ -34,6 +34,7 @@
 #include "dawn/native/ChainUtils_autogen.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ErrorData.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/metal/BindGroupLayoutMTL.h"
 #include "dawn/native/metal/BindGroupMTL.h"
 #include "dawn/native/metal/BufferMTL.h"
@@ -401,6 +402,21 @@ void Device::DestroyImpl() {
     //   other threads using the device since there are no other live refs.
     mMtlDevice = nullptr;
     mMockBlitMtlBuffer = nullptr;
+}
+
+Ref<EventManager::TrackedEvent> Device::GetOrCreateCompletionEvent(ExecutionSerial serial) {
+    return ToBackend(GetQueue())->GetOrCreateCompletionEvent(serial);
+}
+
+ResultOrError<bool> Device::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    auto event = GetOrCreateCompletionEvent(serial);
+    TrackedFutureWaitInfo waitInfo{
+        UINT64_MAX,
+        EventManager::TrackedEvent::WaitRef(event.Get()),
+        SIZE_MAX,
+        false,
+    };
+    return WaitAnySystemEvent(1, &waitInfo, timeout);
 }
 
 uint32_t Device::GetOptimalBytesPerRowAlignment() const {

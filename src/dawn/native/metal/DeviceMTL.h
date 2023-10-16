@@ -147,6 +147,9 @@ class Device final : public DeviceBase {
 
     void DestroyImpl() override;
 
+    Ref<EventManager::TrackedEvent> GetOrCreateCompletionEvent(ExecutionSerial serial) override;
+    ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+
     NSPRef<id<MTLDevice>> mMtlDevice;
 
     // The current estimation of timestamp period
