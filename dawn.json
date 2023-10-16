@@ -3405,12 +3405,12 @@
             {"name": "view formats", "type": "texture format", "annotation": "const*", "length": "view format count"}
         ]
     },
-    "texture view dimension descriptor": {
+    "texture binding view dimension descriptor": {
         "category": "structure",
         "chained": "in",
         "chain roots": ["texture descriptor"],
         "members": [
-            {"name": "view dimension", "type": "texture view dimension", "default": "undefined"}
+            {"name": "texture binding view dimension", "type": "texture view dimension", "default": "undefined"}
         ]
     },
     "texture dimension": {

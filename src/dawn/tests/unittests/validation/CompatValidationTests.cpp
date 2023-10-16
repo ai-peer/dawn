@@ -912,10 +912,11 @@ TEST_F(CompatValidationTest, CanNotCreateBGRA8UnormTextureWithBGRA8UnormSrgbView
 
 class CompatTextureViewDimensionValidationTests : public CompatValidationTest {
   protected:
-    void TestBindingTextureViewDimensions(const uint32_t depth,
-                                          const wgpu::TextureViewDimension textureViewDimension,
-                                          const wgpu::TextureViewDimension viewDimension,
-                                          bool success) {
+    void TestBindingTextureViewDimensions(
+        const uint32_t depth,
+        const wgpu::TextureViewDimension textureBindingViewDimension,
+        const wgpu::TextureViewDimension viewDimension,
+        bool success) {
         wgpu::BindGroupLayout layout = utils::MakeBindGroupLayout(
             device, {{0, wgpu::ShaderStage::Fragment, wgpu::TextureSampleType::Float,
                       viewDimension == wgpu::TextureViewDimension::Undefined
@@ -923,7 +924,7 @@ class CompatTextureViewDimensionValidationTests : public CompatValidationTest {
                           : viewDimension}});
 
         wgpu::Texture texture = CreateTextureWithViewDimension(depth, wgpu::TextureDimension::e2D,
-                                                               textureViewDimension);
+                                                               textureBindingViewDimension);
 
         wgpu::TextureViewDescriptor viewDesc = {};
         viewDesc.dimension = viewDimension;
@@ -939,22 +940,24 @@ class CompatTextureViewDimensionValidationTests : public CompatValidationTest {
         texture.Destroy();
     }
 
-    void TestCreateTextureWithViewDimension(const uint32_t depth,
-                                            const wgpu::TextureDimension dimension,
-                                            const wgpu::TextureViewDimension textureViewDimension,
-                                            bool success) {
+    void TestCreateTextureWithViewDimension(
+        const uint32_t depth,
+        const wgpu::TextureDimension dimension,
+        const wgpu::TextureViewDimension textureBindingViewDimension,
+        bool success) {
         if (success) {
-            CreateTextureWithViewDimension(depth, dimension, textureViewDimension);
+            CreateTextureWithViewDimension(depth, dimension, textureBindingViewDimension);
         } else {
             ASSERT_DEVICE_ERROR(
-                CreateTextureWithViewDimension(depth, dimension, textureViewDimension);
+                CreateTextureWithViewDimension(depth, dimension, textureBindingViewDimension);
                 testing::HasSubstr("is not compatible with the dimension"));
         }
     }
 
-    wgpu::Texture CreateTextureWithViewDimension(const uint32_t depth,
-                                                 const wgpu::TextureDimension dimension,
-                                                 const wgpu::TextureViewDimension viewDimension) {
+    wgpu::Texture CreateTextureWithViewDimension(
+        const uint32_t depth,
+        const wgpu::TextureDimension dimension,
+        const wgpu::TextureViewDimension textureBindingViewDimension) {
         constexpr wgpu::TextureFormat viewFormat = wgpu::TextureFormat::RGBA8Unorm;
 
         wgpu::TextureDescriptor textureDesc;
@@ -965,11 +968,12 @@ class CompatTextureViewDimensionValidationTests : public CompatValidationTest {
         textureDesc.viewFormatCount = 1;
         textureDesc.viewFormats = &viewFormat;
 
-        wgpu::TextureViewDimensionDescriptor textureViewDimensionDesc;
+        wgpu::TextureBindingViewDimensionDescriptor textureBindingViewDimensionDesc;
 
-        if (viewDimension != wgpu::TextureViewDimension::Undefined) {
-            textureDesc.nextInChain = &textureViewDimensionDesc;
-            textureViewDimensionDesc.viewDimension = viewDimension;
+        if (textureBindingViewDimension != wgpu::TextureViewDimension::Undefined) {
+            textureDesc.nextInChain = &textureBindingViewDimensionDesc;
+            textureBindingViewDimensionDesc.textureBindingViewDimension =
+                textureBindingViewDimension;
         }
 
         return device.CreateTexture(&textureDesc);

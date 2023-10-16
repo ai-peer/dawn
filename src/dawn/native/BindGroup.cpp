@@ -169,10 +169,11 @@ MaybeError ValidateTextureBinding(DeviceBase* device,
 
             DAWN_INVALID_IF(
                 device->IsCompatibilityMode() &&
-                    entry.textureView->GetDimension() != texture->GetCompatibilityViewDimension(),
+                    entry.textureView->GetDimension() !=
+                        texture->GetCompatibilityTextureBindingViewDimension(),
                 "Dimension (%s) of %s must match viewDimension (%s) of %s in compatibility mode.",
                 entry.textureView->GetDimension(), entry.textureView,
-                texture->GetCompatibilityViewDimension(), texture);
+                texture->GetCompatibilityTextureBindingViewDimension(), texture);
             break;
         }
         case BindingInfoType::StorageTexture: {
