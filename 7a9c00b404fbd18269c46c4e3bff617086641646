@@ -16,6 +16,23 @@
       "message": "Gregg: PTAL. Thanks!",
       "revId": "7a9c00b404fbd18269c46c4e3bff617086641646",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e14587c_c53ab54c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-16T21:45:27Z",
+      "side": 1,
+      "message": "fyi, expectations are now marked as not needing approval so you can add the rubber stamper and submit after it passes cq and kokoro",
+      "revId": "7a9c00b404fbd18269c46c4e3bff617086641646",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
