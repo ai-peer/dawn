@@ -57,7 +57,8 @@ class SystemEventReceiver final : NonCopyable {
     SystemEventReceiver& operator=(SystemEventReceiver&&) = default;
 
   private:
-    friend bool WaitAnySystemEvent(size_t, TrackedFutureWaitInfo*, Nanoseconds);
+    template <typename It>
+    friend bool WaitAnySystemEvent(It begin, It end, Nanoseconds timeout);
     friend std::pair<SystemEventPipeSender, SystemEventReceiver> CreateSystemEventPipe();
     SystemHandle mPrimitive;
 };
@@ -76,12 +77,6 @@ class SystemEventPipeSender final : NonCopyable {
     friend std::pair<SystemEventPipeSender, SystemEventReceiver> CreateSystemEventPipe();
     SystemHandle mPrimitive;
 };
-
-// Implementation of WaitAny when backed by SystemEventReceiver.
-// Returns true if some future is now ready, false if not (it timed out).
-[[nodiscard]] bool WaitAnySystemEvent(size_t count,
-                                      TrackedFutureWaitInfo* futures,
-                                      Nanoseconds timeout);
 
 // CreateSystemEventPipe provides an SystemEventReceiver that can be signalled by Dawn code. This is
 // useful for queue completions on Metal (where Metal signals us by calling a callback) and for

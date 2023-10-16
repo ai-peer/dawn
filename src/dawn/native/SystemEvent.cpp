@@ -44,29 +44,6 @@
 
 namespace dawn::native {
 
-namespace {
-
-template <typename T, T Infinity>
-T ToMillisecondsGeneric(Nanoseconds timeout) {
-    uint64_t ns = uint64_t{timeout};
-    uint64_t ms = 0;
-    if (ns > 0) {
-        ms = (ns - 1) / 1'000'000 + 1;
-        if (ms > std::numeric_limits<T>::max()) {
-            return Infinity;  // Round long timeout up to infinity
-        }
-    }
-    return static_cast<T>(ms);
-}
-
-#if DAWN_PLATFORM_IS(WINDOWS)
-// #define ToMilliseconds ToMillisecondsGeneric<DWORD, INFINITE>
-#elif DAWN_PLATFORM_IS(POSIX)
-#define ToMilliseconds ToMillisecondsGeneric<int, -1>
-#endif
-
-}  // namespace
-
 // SystemEventReceiver
 
 SystemEventReceiver SystemEventReceiver::CreateAlreadySignaled() {
@@ -101,43 +78,6 @@ void SystemEventPipeSender::Signal() && {
 #endif
 
     mPrimitive.Close();
-}
-
-// standalone functions
-
-bool WaitAnySystemEvent(size_t count, TrackedFutureWaitInfo* futures, Nanoseconds timeout) {
-#if DAWN_PLATFORM_IS(WINDOWS)
-    // TODO(crbug.com/dawn/2054): Implement this.
-    DAWN_CHECK(false);
-#elif DAWN_PLATFORM_IS(POSIX)
-    std::vector<pollfd> pollfds(count);
-    for (size_t i = 0; i < count; ++i) {
-        int fd = futures[i].event->GetReceiver().mPrimitive.Get();
-        pollfds[i] = pollfd{fd, POLLIN, 0};
-    }
-
-    int status = poll(pollfds.data(), pollfds.size(), ToMilliseconds(timeout));
-
-    DAWN_CHECK(status >= 0);
-    if (status == 0) {
-        return false;
-    }
-
-    for (size_t i = 0; i < count; ++i) {
-        int revents = pollfds[i].revents;
-        static constexpr int kAllowedEvents = POLLIN | POLLHUP;
-        DAWN_CHECK((revents & kAllowedEvents) == revents);
-    }
-
-    for (size_t i = 0; i < count; ++i) {
-        bool ready = (pollfds[i].revents & POLLIN) != 0;
-        futures[i].ready = ready;
-    }
-
-    return true;
-#else
-    DAWN_CHECK(false);  // Not implemented.
-#endif
 }
 
 std::pair<SystemEventPipeSender, SystemEventReceiver> CreateSystemEventPipe() {
