@@ -33,6 +33,8 @@
 #include <mutex>
 #include <optional>
 #include <unordered_map>
+#include <utility>
+#include <variant>
 #include <vector>
 
 #include "dawn/common/FutureUtils.h"
@@ -54,13 +56,10 @@ struct InstanceDescriptor;
 // TODO(crbug.com/dawn/2050): Can this eventually replace CallbackTaskManager?
 //
 // There are various ways to optimize ProcessEvents/WaitAny:
-// - TODO(crbug.com/dawn/2064) Only pay attention to the earliest serial on each queue.
 // - TODO(crbug.com/dawn/2059) Spontaneously set events as "early-ready" in other places when we see
 //   serials advance, e.g. Submit, or when checking a later wait before an earlier wait.
 // - TODO(crbug.com/dawn/2049) For thread-driven events (async pipeline compilation and Metal queue
 //   events), defer tracking for ProcessEvents until the event is already completed.
-// - TODO(crbug.com/dawn/2051) Avoid creating OS events until they're actually needed (see the todo
-//   in TrackedEvent).
 class EventManager final : NonMovable {
   public:
     EventManager();
@@ -94,6 +93,27 @@ class EventManager final : NonMovable {
     std::optional<MutexProtected<EventMap>> mEvents;
 };
 
+struct QueueAndSerial {
+    Ref<QueueBase> queue;
+    ExecutionSerial completionSerial;
+};
+
+class CompletionSystemEvent : public RefCounted {
+  public:
+    bool IsComplete() const;
+    void MarkComplete();
+
+    // Lazily create a system event receiver. Immediately after this receiver
+    // is signaled, IsComplete should always return true.
+    const SystemEventReceiver& GetOrCreateSystemEventReceiver();
+
+  private:
+    std::atomic<bool> mCompleted{false};
+    MutexProtected<
+        std::pair<std::optional<SystemEventPipeSender>, std::optional<SystemEventReceiver>>>
+        mPipe;
+};
+
 // Base class for the objects that back WGPUFutures. TrackedEvent is responsible for the lifetime
 // the callback it contains. If TrackedEvent gets destroyed before it completes, it's responsible
 // for cleaning up (by calling the callback with an "Unknown" status).
@@ -107,9 +127,12 @@ class EventManager::TrackedEvent : public RefCounted {
   protected:
     // Note: TrackedEvents are (currently) only for Device events. Events like RequestAdapter and
     // RequestDevice complete immediately in dawn native, so should never need to be tracked.
-    TrackedEvent(DeviceBase* device,
-                 wgpu::CallbackMode callbackMode,
-                 SystemEventReceiver&& receiver);
+    TrackedEvent(wgpu::CallbackMode callbackMode, Ref<CompletionSystemEvent> completionEvent);
+
+    // Create a TrackedEvent from a queue completion serial.
+    TrackedEvent(wgpu::CallbackMode callbackMode,
+                 QueueBase* queue,
+                 ExecutionSerial completionSerial);
 
   public:
     // Subclasses must implement this to complete the event (if not completed) with
@@ -117,23 +140,27 @@ class EventManager::TrackedEvent : public RefCounted {
     ~TrackedEvent() override;
 
     class WaitRef;
+    // Events may be one of two types:
+    // - A queue and the ExecutionSerial after which the event will be completed.
+    //   Used for queue completion.
+    // - A CompletionSystemEvent which will be signaled from our code, usually on a separate thread.
+    //   It stores a boolean that we can check instead of polling with the OS, or it can be
+    //   transformed lazily into a SystemEventReceiver. Used for async pipeline creation, and Metal
+    //   queue completion.
+    // The queue ref creates a temporary ref cycle
+    // (Queue->Device->Instance->EventManager->TrackedEvent). This is OK because the instance will
+    // clear out the EventManager on shutdown.
+    // TODO(crbug.com/dawn/2067): This is a bit fragile. Is it possible to remove the ref cycle?
+    using CompletionData = std::variant<QueueAndSerial, Ref<CompletionSystemEvent>>;
 
-    const SystemEventReceiver& GetReceiver() const;
-    DeviceBase* GetWaitDevice() const;
+    const CompletionData& GetCompletionData() const;
 
   protected:
     void EnsureComplete(EventCompletionType);
     void CompleteIfSpontaneous();
 
-    // True if the event can only be waited using its device (e.g. with vkWaitForFences).
-    // False if it can be waited using OS-level wait primitives (WaitAnySystemEvent).
-    virtual bool MustWaitUsingDevice() const = 0;
     virtual void Complete(EventCompletionType) = 0;
 
-    // This creates a temporary ref cycle (Device->Instance->EventManager->TrackedEvent).
-    // This is OK because the instance will clear out the EventManager on shutdown.
-    // TODO(crbug.com/dawn/2067): This is a bit fragile. Is it possible to remove the ref cycle?
-    Ref<DeviceBase> mDevice;
     wgpu::CallbackMode mCallbackMode;
 
 #if DAWN_ENABLE_ASSERTS
@@ -143,20 +170,7 @@ class EventManager::TrackedEvent : public RefCounted {
   private:
     friend class EventManager;
 
-    // TODO(crbug.com/dawn/2051): Optimize by creating an SystemEventReceiver only once actually
-    // needed (the user asks for a timed wait or an OS event handle). This should be generally
-    // achievable:
-    // - For thread-driven events (async pipeline compilation and Metal queue events), use a mutex
-    //   or atomics to atomically:
-    //   - On wait: { check if mKnownReady. if not, create the SystemEventPipe }
-    //   - On signal: { check if there's an SystemEventPipe. if not, set mKnownReady }
-    // - For D3D12/Vulkan fences, on timed waits, first use GetCompletedValue/GetFenceStatus, then
-    //   create an OS event if it's not ready yet (and we don't have one yet).
-    //
-    // This abstraction should probably be hidden from TrackedEvent - previous attempts to do
-    // something similar in TrackedEvent turned out to be quite confusing. It can instead be an
-    // "optimization" to the SystemEvent* or a layer between TrackedEvent and SystemEventReceiver.
-    SystemEventReceiver mReceiver;
+    CompletionData mCompletionData;
     // Callback has been called.
     std::atomic<bool> mCompleted = false;
 };
