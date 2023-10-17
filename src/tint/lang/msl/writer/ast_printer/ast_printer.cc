@@ -178,16 +178,20 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
         manager.Add<ast::transform::BuiltinPolyfill>();
     }
 
+    ExternalTextureOptions external_texture_options{};
+    RemapperData remapper_data{};
+    PopulateRemapperAndMultiplanarOptions(options, remapper_data, external_texture_options);
+
     // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
     data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
-        options.external_texture_options.bindings_map);
+        external_texture_options.bindings_map);
     manager.Add<ast::transform::MultiplanarExternalTexture>();
 
     // BindingRemapper must come after MultiplanarExternalTexture
     manager.Add<ast::transform::BindingRemapper>();
     data.Add<ast::transform::BindingRemapper::Remappings>(
-        options.binding_remapper_options.binding_points,
-        std::unordered_map<BindingPoint, core::Access>{}, /* allow_collisions */ true);
+        remapper_data, std::unordered_map<BindingPoint, core::Access>{},
+        /* allow_collisions */ true);
 
     if (!options.disable_workgroup_init) {
         // ZeroInitWorkgroupMemory must come before CanonicalizeEntryPointIO as

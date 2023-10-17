@@ -84,6 +84,7 @@ cc_binary(
       "//src/tint/lang/msl/validate",
       "//src/tint/lang/msl/writer",
       "//src/tint/lang/msl/writer/common",
+      "//src/tint/lang/msl/writer/helpers",
     ],
     "//conditions:default": [],
   }) + select({

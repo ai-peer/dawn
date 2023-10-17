@@ -11,34 +11,21 @@
 // WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 // See the License for the specific language governing permissions and
 // limitations under the License.
+//
+#ifndef SRC_TINT_LANG_MSL_WRITER_HELPERS_GENERATE_BINDINGS_H_
+#define SRC_TINT_LANG_MSL_WRITER_HELPERS_GENERATE_BINDINGS_H_
 
 #include "src/tint/lang/msl/writer/common/options.h"
 
-namespace tint::msl::writer {
-
-Options::Options() = default;
-
-Options::~Options() = default;
-
-Options::Options(const Options&) = default;
-
-Options& Options::operator=(const Options&) = default;
-
-std::ostream& operator<<(std::ostream& out, const binding::ResourceType& t) {
-    switch (t) {
-        case binding::ResourceType::kBuffer:
-            out << "buffer";
-            break;
-        case binding::ResourceType::kSampler:
-            out << "sampler";
-            break;
-        case binding::ResourceType::kTexture:
-            out << "texture";
-            break;
-        case binding::ResourceType::kThreadGroup:
-            out << "threadgroup";
-            break;
-    }
+// Forward declarations
+namespace tint {
+class Program;
 }
 
+namespace tint::msl::writer {
+
+Bindings GenerateBindings(const Program& program);
+
 }  // namespace tint::msl::writer
+
+#endif  // SRC_TINT_LANG_MSL_WRITER_HELPERS_GENERATE_BINDINGS_H_

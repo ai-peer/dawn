@@ -23,24 +23,25 @@
 
 if(TINT_BUILD_MSL_WRITER)
 ################################################################################
-# Target:    tint_lang_msl_writer_common
+# Target:    tint_lang_msl_writer_helpers
 # Kind:      lib
 # Condition: TINT_BUILD_MSL_WRITER
 ################################################################################
-tint_add_target(tint_lang_msl_writer_common lib
-  lang/msl/writer/common/option_builder.cc
-  lang/msl/writer/common/option_builder.h
-  lang/msl/writer/common/options.cc
-  lang/msl/writer/common/options.h
-  lang/msl/writer/common/printer_support.cc
-  lang/msl/writer/common/printer_support.h
+tint_add_target(tint_lang_msl_writer_helpers lib
+  lang/msl/writer/helpers/generate_bindings.cc
+  lang/msl/writer/helpers/generate_bindings.h
 )
 
-tint_target_add_dependencies(tint_lang_msl_writer_common lib
+tint_target_add_dependencies(tint_lang_msl_writer_helpers lib
   tint_api_common
   tint_api_options
   tint_lang_core
+  tint_lang_core_constant
   tint_lang_core_type
+  tint_lang_wgsl
+  tint_lang_wgsl_ast
+  tint_lang_wgsl_program
+  tint_lang_wgsl_sem
   tint_utils_containers
   tint_utils_diagnostic
   tint_utils_ice
@@ -49,43 +50,15 @@ tint_target_add_dependencies(tint_lang_msl_writer_common lib
   tint_utils_math
   tint_utils_memory
   tint_utils_reflection
+  tint_utils_result
   tint_utils_rtti
-  tint_utils_strconv
   tint_utils_symbol
   tint_utils_text
   tint_utils_traits
 )
 
-endif(TINT_BUILD_MSL_WRITER)
 if(TINT_BUILD_MSL_WRITER)
-################################################################################
-# Target:    tint_lang_msl_writer_common_test
-# Kind:      test
-# Condition: TINT_BUILD_MSL_WRITER
-################################################################################
-tint_add_target(tint_lang_msl_writer_common_test test
-  lang/msl/writer/common/printer_support_test.cc
-)
-
-tint_target_add_dependencies(tint_lang_msl_writer_common_test test
-  tint_lang_core
-  tint_lang_core_type
-  tint_utils_containers
-  tint_utils_ice
-  tint_utils_macros
-  tint_utils_math
-  tint_utils_memory
-  tint_utils_rtti
-  tint_utils_text
-  tint_utils_traits
-)
-
-tint_target_add_external_dependencies(tint_lang_msl_writer_common_test test
-  "gtest"
-)
-
-if(TINT_BUILD_MSL_WRITER)
-  tint_target_add_dependencies(tint_lang_msl_writer_common_test test
+  tint_target_add_dependencies(tint_lang_msl_writer_helpers lib
     tint_lang_msl_writer_common
   )
 endif(TINT_BUILD_MSL_WRITER)
