@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "09b1fd0f_e2605ed8",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1025,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T20:44:37Z",
+      "side": 1,
+      "message": "Much nicer, thanks.",
+      "revId": "52ef787f87abe6f67b7efc178d31154ab72c01bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8586ef33_9995537c",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2142,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T20:44:37Z",
+      "side": 1,
+      "message": "Ace, thank you!",
+      "revId": "52ef787f87abe6f67b7efc178d31154ab72c01bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
