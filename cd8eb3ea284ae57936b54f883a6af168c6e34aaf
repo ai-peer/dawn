@@ -51,6 +51,24 @@
       "parentUuid": "f7bbe62d_af12a87e",
       "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7fd8d00_62af5e3d",
+        "filename": "src/tint/lang/glsl/writer/printer/printer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-17T18:44:15Z",
+      "side": 1,
+      "message": "That would also be different from how both MSL and SPIR-V printers work. All three of them are currently setup the same way with a Printer class. There is no hidden Impl class.",
+      "parentUuid": "75544045_3b3a0042",
+      "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
