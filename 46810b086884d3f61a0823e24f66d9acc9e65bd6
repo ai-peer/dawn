@@ -16,6 +16,24 @@
       "message": "Please can you add a little bit of context of _why_ in the CL description?\nA link to the relevant bit of spec would be helpful.",
       "revId": "46810b086884d3f61a0823e24f66d9acc9e65bd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "572c50b0_8ce2927c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-17T17:35:38Z",
+      "side": 1,
+      "message": "Yes, sorry for the sparse commit. Updated the description.",
+      "parentUuid": "a302e50b_b2296913",
+      "revId": "46810b086884d3f61a0823e24f66d9acc9e65bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
