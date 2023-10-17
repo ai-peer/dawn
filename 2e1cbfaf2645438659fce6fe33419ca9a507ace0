@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "792357c0_4d2a1945",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-17T15:37:55Z",
+      "side": 1,
+      "message": "Rubber-stamper: PTAL. Thank you, bot! ;)",
+      "revId": "2e1cbfaf2645438659fce6fe33419ca9a507ace0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
