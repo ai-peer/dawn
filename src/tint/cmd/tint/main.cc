@@ -70,6 +70,7 @@
 
 #if TINT_BUILD_MSL_WRITER
 #include "src/tint/lang/msl/validate/val.h"
+#include "src/tint/lang/msl/writer/helpers/generate_bindings.h"
 #include "src/tint/lang/msl/writer/writer.h"
 #endif  // TINT_BUILD_MSL_WRITER
 
@@ -697,8 +698,7 @@ bool GenerateMsl([[maybe_unused]] const tint::Program& program,
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
     gen_options.pixel_local_options = options.pixel_local_options;
-    gen_options.external_texture_options.bindings_map =
-        tint::cmd::GenerateExternalTextureBindings(*input_program);
+    gen_options.bindings = tint::msl::writer::GenerateBindings(program);
     gen_options.array_length_from_uniform.ubo_binding = tint::BindingPoint{0, 30};
     gen_options.array_length_from_uniform.bindpoint_to_size_index.emplace(tint::BindingPoint{0, 0},
                                                                           0);
