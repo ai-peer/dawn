@@ -16,6 +16,23 @@
       "message": "Note: This is a cherry-pick.",
       "revId": "d4a8bef11ff4a9c3f25686981ea02ce45b8b48b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ded323a8_81c9e280",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T14:53:04Z",
+      "side": 1,
+      "message": "Thanks",
+      "revId": "d4a8bef11ff4a9c3f25686981ea02ce45b8b48b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
