@@ -51,6 +51,24 @@
       "parentUuid": "c041fa4d_48ccfc04",
       "revId": "9eaee8fe91356532df53066b4e41cc67a3844b22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c4f46ce_3d2f67b4",
+        "filename": "test/tint/bug/tint/2063.wgsl.expected.dxc.hlsl",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-17T20:24:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9aa08584_c7ea4499",
+      "revId": "9eaee8fe91356532df53066b4e41cc67a3844b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
