@@ -50,6 +50,24 @@
       "message": "Should this also add parenthesis around the expression?",
       "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6f38e20_33bd5fce",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T18:31:21Z",
+      "side": 1,
+      "message": "Probably, yes. In which case, I\u0027d unroll the loop.",
+      "parentUuid": "eeb2b997_b9952376",
+      "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
