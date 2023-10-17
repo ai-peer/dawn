@@ -60,7 +60,10 @@ cc_library(
   alwayslink = True,
   srcs = [
     "constant_test.cc",
+    "function_test.cc",
     "helper_test.h",
+    "type_test.cc",
+    "var_test.cc",
   ],
   deps = [
     "//src/tint/api/common",

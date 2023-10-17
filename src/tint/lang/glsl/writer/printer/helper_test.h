@@ -25,11 +25,14 @@
 
 namespace tint::glsl::writer {
 
+constexpr auto kGlslHeader = R"(#version 310 es
+)";
+
 /// Base helper class for testing the GLSL generator implementation.
 template <typename BASE>
 class GlslPrinterTestHelperBase : public BASE {
   public:
-    GlslPrinterTestHelperBase() : writer_(mod) {}
+    GlslPrinterTestHelperBase() : writer_(mod, Version()) {}
 
     /// The test module.
     core::ir::Module mod;
@@ -66,6 +69,9 @@ class GlslPrinterTestHelperBase : public BASE {
 
         return true;
     }
+
+    /// @returns the metal header string
+    std::string GlslHeader() const { return kGlslHeader; }
 };
 
 using GlslPrinterTest = GlslPrinterTestHelperBase<testing::Test>;

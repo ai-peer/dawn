@@ -58,7 +58,10 @@ tint_target_add_dependencies(tint_lang_glsl_writer_printer lib
 ################################################################################
 tint_add_target(tint_lang_glsl_writer_printer_test test
   lang/glsl/writer/printer/constant_test.cc
+  lang/glsl/writer/printer/function_test.cc
   lang/glsl/writer/printer/helper_test.h
+  lang/glsl/writer/printer/type_test.cc
+  lang/glsl/writer/printer/var_test.cc
 )
 
 tint_target_add_dependencies(tint_lang_glsl_writer_printer_test test
