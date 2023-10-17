@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aab8be21_0fc538c7",
+        "filename": "src/tint/lang/core/ir/binary_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-17T14:30:19Z",
+      "side": 1,
+      "message": "```suggestion\n// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.\n```",
+      "range": {
+        "startLine": 11,
+        "startChar": 43,
+        "endLine": 11,
+        "endChar": 45
+      },
+      "revId": "77802462d312968a6f8a8d9475cf1bb4ef122770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
