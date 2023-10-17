@@ -14,6 +14,8 @@
 
 #include "dawn/native/vulkan/DeviceVk.h"
 
+#include <algorithm>
+
 #include "dawn/common/Log.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Platform.h"
@@ -370,7 +372,7 @@ MaybeError Device::SubmitPendingCommands() {
     }
     GetQueue()->IncrementLastSubmittedCommandSerial();
     ExecutionSerial lastSubmittedSerial = GetLastSubmittedCommandSerial();
-    mFencesInFlight.emplace(fence, lastSubmittedSerial);
+    mFencesInFlight->emplace_back(fence, lastSubmittedSerial);
 
     for (size_t i = 0; i < mRecordingContext.commandBufferList.size(); ++i) {
         CommandPoolAndBuffer submittedCommands = {mRecordingContext.commandPoolList[i],
@@ -632,31 +634,120 @@ ResultOrError<VkFence> Device::GetUnusedFence() {
     return fence;
 }
 
-ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
-    ExecutionSerial fenceSerial(0);
-    while (!mFencesInFlight.empty()) {
-        VkFence fence = mFencesInFlight.front().first;
-        ExecutionSerial tentativeSerial = mFencesInFlight.front().second;
-        VkResult result = VkResult::WrapUnsafe(
-            INJECT_ERROR_OR_RUN(fn.GetFenceStatus(mVkDevice, fence), VK_ERROR_DEVICE_LOST));
+ResultOrError<bool> Device::WaitAnyImpl(size_t futureCount,
+                                        TrackedFutureWaitInfo* futures,
+                                        Nanoseconds timeout) {
+    // Partition the futures because we need to wait for VkFences using the device separately
+    // from OS events.
+    auto it = std::partition(futures, futures + futureCount, [](const TrackedFutureWaitInfo& info) {
+        return std::holds_alternative<ExecutionSerial>(info.event->GetCompletionData());
+    });
+    size_t queueFutureCount = std::distance(futures, it);
 
-        // Fence are added in order, so we can stop searching as soon
-        // as we see one that's not ready.
-        if (result == VK_NOT_READY) {
-            return fenceSerial;
-        } else {
-            DAWN_TRY(CheckVkSuccess(::VkResult(result), "GetFenceStatus"));
+    // TODO(dawn:2056): Handle futures that are not queue completion events.
+    DAWN_CHECK(futureCount == queueFutureCount);
+
+    return WaitAnyQueueFutures(queueFutureCount, futures, timeout);
+}
+
+ResultOrError<bool> Device::WaitAnyQueueFutures(size_t futureCount,
+                                                TrackedFutureWaitInfo* futures,
+                                                Nanoseconds timeout) {
+    if (futureCount == 0) {
+        return false;
+    }
+
+    bool anyCompleted = false;
+    const bool isPoll = timeout == Nanoseconds(0);
+
+    if (!isPoll) {
+        // Find the lowest serial which will complete first.
+        // When we have multi-queue, we should wait for the lowest serial from each queue.
+        ExecutionSerial lowestWaitSerial = ExecutionSerial(0xFFFFFFFF);
+        for (size_t i = 0; i < futureCount; ++i) {
+            const auto& completionData = futures[i].event->GetCompletionData();
+            lowestWaitSerial =
+                std::min(std::get<ExecutionSerial>(completionData), lowestWaitSerial);
         }
 
-        // Update fenceSerial since fence is ready.
-        fenceSerial = tentativeSerial;
+        // Waiting for a serial that hasn't been submitted yet. Submit it now.
+        if (lowestWaitSerial > GetQueue()->GetLastSubmittedCommandSerial()) {
+            DAWN_TRY(SubmitPendingCommands());
+        }
 
-        mUnusedFences.push_back(fence);
+        VkResult waitResult = mFencesInFlight.Use([&](auto fencesInFlight) {
+            // Search from the back for the most recent fence >= lowestWaitSerial.
+            VkFence waitFence = VK_NULL_HANDLE;
+            for (auto it = fencesInFlight->rbegin(); it != fencesInFlight->rend(); ++it) {
+                if (it->second >= lowestWaitSerial) {
+                    waitFence = it->first;
+                    break;
+                }
+            }
 
-        DAWN_ASSERT(fenceSerial > GetQueue()->GetCompletedCommandSerial());
-        mFencesInFlight.pop();
+            if (waitFence == VK_NULL_HANDLE) {
+                // Fence not found. This serial must have already completed.
+                // Return a VK_SUCCESS status.
+                DAWN_ASSERT(lowestWaitSerial <= GetQueue()->GetCompletedCommandSerial());
+                return VkResult::WrapUnsafe(VK_SUCCESS);
+            }
+
+            // Wait for the fence.
+            return VkResult::WrapUnsafe(INJECT_ERROR_OR_RUN(
+                fn.WaitForFences(mVkDevice, 1, &*waitFence, true, static_cast<uint64_t>(timeout)),
+                VK_ERROR_DEVICE_LOST));
+        });
+
+        if (waitResult == VK_TIMEOUT) {
+            return false;
+        }
+        DAWN_TRY(CheckVkSuccess(::VkResult(waitResult), "vkWaitForFences"));
+        anyCompleted = true;
     }
-    return fenceSerial;
+
+    if (anyCompleted || isPoll) {
+        // Check the completed serials so we know which fences completed.
+        DAWN_TRY(GetQueue()->CheckPassedSerials());
+
+        const ExecutionSerial completedSerial = GetQueue()->GetCompletedCommandSerial();
+        for (size_t i = 0; i < futureCount; ++i) {
+            const auto& completionData = futures[i].event->GetCompletionData();
+            if (std::get<ExecutionSerial>(completionData) <= completedSerial) {
+                anyCompleted = true;
+                futures[i].ready = true;
+            }
+        }
+    }
+    return anyCompleted;
+}
+
+ResultOrError<ExecutionSerial> Device::CheckAndUpdateCompletedSerials() {
+    return mFencesInFlight.Use([&](auto fencesInFlight) -> ResultOrError<ExecutionSerial> {
+        ExecutionSerial fenceSerial(0);
+        while (!fencesInFlight->empty()) {
+            VkFence fence = fencesInFlight->front().first;
+            ExecutionSerial tentativeSerial = fencesInFlight->front().second;
+            VkResult result = VkResult::WrapUnsafe(
+                INJECT_ERROR_OR_RUN(fn.GetFenceStatus(mVkDevice, fence), VK_ERROR_DEVICE_LOST));
+
+            // Fence are added in order, so we can stop searching as soon
+            // as we see one that's not ready.
+            if (result == VK_NOT_READY) {
+                return fenceSerial;
+            } else {
+                DAWN_TRY(CheckVkSuccess(::VkResult(result), "GetFenceStatus"));
+            }
+
+            // Update fenceSerial since fence is ready.
+            fenceSerial = tentativeSerial;
+
+            mUnusedFences.push_back(fence);
+
+            DAWN_ASSERT(fenceSerial > GetQueue()->GetCompletedCommandSerial());
+            fencesInFlight->pop_front();
+        }
+        return fenceSerial;
+    });
 }
 
 MaybeError Device::PrepareRecordingContext() {
@@ -1014,34 +1105,37 @@ MaybeError Device::WaitForIdleForDestruction() {
     DAWN_UNUSED(waitIdleResult);
 
     // Make sure all fences are complete by explicitly waiting on them all
-    while (!mFencesInFlight.empty()) {
-        VkFence fence = mFencesInFlight.front().first;
-        ExecutionSerial fenceSerial = mFencesInFlight.front().second;
-        DAWN_ASSERT(fenceSerial > GetQueue()->GetCompletedCommandSerial());
+    mFencesInFlight.Use([&](auto fencesInFlight) {
+        while (!fencesInFlight->empty()) {
+            VkFence fence = fencesInFlight->front().first;
+            ExecutionSerial fenceSerial = fencesInFlight->front().second;
+            DAWN_ASSERT(fenceSerial > GetQueue()->GetCompletedCommandSerial());
 
-        VkResult result = VkResult::WrapUnsafe(VK_TIMEOUT);
-        do {
-            // If WaitForIdleForDesctruction is called while we are Disconnected, it means that
-            // the device lost came from the ErrorInjector and we need to wait without allowing
-            // any more error to be injected. This is because the device lost was "fake" and
-            // commands might still be running.
-            if (GetState() == State::Disconnected) {
-                result =
-                    VkResult::WrapUnsafe(fn.WaitForFences(mVkDevice, 1, &*fence, true, UINT64_MAX));
-                continue;
-            }
+            VkResult result = VkResult::WrapUnsafe(VK_TIMEOUT);
+            do {
+                // If WaitForIdleForDesctruction is called while we are Disconnected, it means that
+                // the device lost came from the ErrorInjector and we need to wait without allowing
+                // any more error to be injected. This is because the device lost was "fake" and
+                // commands might still be running.
+                if (GetState() == State::Disconnected) {
+                    result = VkResult::WrapUnsafe(
+                        fn.WaitForFences(mVkDevice, 1, &*fence, true, UINT64_MAX));
+                    continue;
+                }
 
-            result = VkResult::WrapUnsafe(INJECT_ERROR_OR_RUN(
-                fn.WaitForFences(mVkDevice, 1, &*fence, true, UINT64_MAX), VK_ERROR_DEVICE_LOST));
-        } while (result == VK_TIMEOUT);
-        // Ignore errors from vkWaitForFences: it can be either OOM which we can't do anything
-        // about (and we need to keep going with the destruction of all fences), or device
-        // loss, which means the workload on the GPU is no longer accessible and we can
-        // safely destroy the fence.
+                result = VkResult::WrapUnsafe(
+                    INJECT_ERROR_OR_RUN(fn.WaitForFences(mVkDevice, 1, &*fence, true, UINT64_MAX),
+                                        VK_ERROR_DEVICE_LOST));
+            } while (result == VK_TIMEOUT);
+            // Ignore errors from vkWaitForFences: it can be either OOM which we can't do anything
+            // about (and we need to keep going with the destruction of all fences), or device
+            // loss, which means the workload on the GPU is no longer accessible and we can
+            // safely destroy the fence.
 
-        fn.DestroyFence(mVkDevice, fence, nullptr);
-        mFencesInFlight.pop();
-    }
+            fn.DestroyFence(mVkDevice, fence, nullptr);
+            fencesInFlight->pop_front();
+        }
+    });
     return {};
 }
 
@@ -1102,10 +1196,12 @@ void Device::DestroyImpl() {
 
     // Some fences might still be marked as in-flight if we shut down because of a device loss.
     // Delete them since at this point all commands are complete.
-    while (!mFencesInFlight.empty()) {
-        fn.DestroyFence(mVkDevice, *mFencesInFlight.front().first, nullptr);
-        mFencesInFlight.pop();
-    }
+    mFencesInFlight.Use([&](auto fencesInFlight) {
+        while (!fencesInFlight->empty()) {
+            fn.DestroyFence(mVkDevice, *fencesInFlight->front().first, nullptr);
+            fencesInFlight->pop_front();
+        }
+    });
 
     for (VkFence fence : mUnusedFences) {
         fn.DestroyFence(mVkDevice, fence, nullptr);
