@@ -122,6 +122,24 @@
       "parentUuid": "65def55b_97b3743f",
       "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "927adddc_5b18da96",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-17T19:47:21Z",
+      "side": 1,
+      "message": "Good catch. I should\u0027ve read the WGSL spec. \n\nModified the test and added parentheses.",
+      "parentUuid": "25eed654_13f6c3b6",
+      "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
