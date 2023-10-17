@@ -22,6 +22,30 @@
       },
       "revId": "77802462d312968a6f8a8d9475cf1bb4ef122770",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9808dc5_ae589cd5",
+        "filename": "src/tint/lang/core/ir/binary_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T14:58:05Z",
+      "side": 1,
+      "message": "Opps. Good spot. 😊",
+      "parentUuid": "aab8be21_0fc538c7",
+      "range": {
+        "startLine": 11,
+        "startChar": 43,
+        "endLine": 11,
+        "endChar": 45
+      },
+      "revId": "77802462d312968a6f8a8d9475cf1bb4ef122770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
