@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7bbe62d_af12a87e",
+        "filename": "src/tint/lang/glsl/writer/printer/printer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T18:39:42Z",
+      "side": 1,
+      "message": "As a followup, please can we move the impl to the .cc?",
+      "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
