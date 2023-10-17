@@ -104,6 +104,24 @@
       "parentUuid": "e6f38e20_33bd5fce",
       "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25eed654_13f6c3b6",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T19:03:26Z",
+      "side": 1,
+      "message": "```\nvar\u003cworkgroup\u003e i : atomic\u003ci32\u003e;\n\nfn f() {\n    atomicSub(\u0026i, -1);\n}\n```\n\nerrors with:\n\n```\n#version 310 es\n\nlayout(local_size_x \u003d 1, local_size_y \u003d 1, local_size_z \u003d 1) in;\nvoid unused_entry_point() {\n  return;\n}\nshared int i;\nvoid f() {\n  atomicAdd(i, --1);\n}\n\nerror: Error parsing GLSL shader:\nERROR: 0:9: \u0027--\u0027 :  l-value required (can\u0027t modify a const)\nERROR: 0:9: \u0027--\u0027 :  wrong operand type no operation \u0027--\u0027 exists that takes an operand of type  const int (or there is no acceptable conversion)\nERROR: 0:9: \u0027\u0027 : compilation terminated \nERROR: 3 compilation errors.  No code generated.\n```",
+      "parentUuid": "65def55b_97b3743f",
+      "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
