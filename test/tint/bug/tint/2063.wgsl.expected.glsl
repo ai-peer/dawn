@@ -1,21 +1,14 @@
 #version 310 es
 
 shared uint arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
-  uint inner;
-} prevent_dce;
-
-void atomicSub_0d26c2() {
-  uint res = atomicAdd(arg_0, -1u);
-  prevent_dce.inner = res;
-}
-
 void compute_main(uint local_invocation_index) {
   {
     atomicExchange(arg_0, 0u);
   }
   barrier();
-  atomicSub_0d26c2();
+  uint x = 1u;
+  uint y = 2u;
+  uint res = atomicAdd(arg_0, -(x + y));
 }
 
 layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;

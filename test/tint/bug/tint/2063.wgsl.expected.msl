@@ -1,0 +1,19 @@
+#include <metal_stdlib>
+
+using namespace metal;
+void compute_main_inner(uint local_invocation_index, threadgroup atomic_uint* const tint_symbol) {
+  {
+    atomic_store_explicit(tint_symbol, 0u, memory_order_relaxed);
+  }
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  uint const x = 1u;
+  uint const y = 2u;
+  uint res = atomic_fetch_sub_explicit(tint_symbol, (x + y), memory_order_relaxed);
+}
+
+kernel void compute_main(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  threadgroup atomic_uint tint_symbol_1;
+  compute_main_inner(local_invocation_index, &(tint_symbol_1));
+  return;
+}
+
