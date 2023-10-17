@@ -484,10 +484,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
             if (IsGPUCounterSupported(*mDevice, MTLCommonCounterSetTimestamp,
                                       {MTLCommonCounterTimestamp})) {
                 bool enableTimestampQuery = true;
-                bool enableTimestampQueryInsidePasses = true;
+                bool enableChromiumExperimentalTimestampQueryInsidePasses = true;
 
                 if (@available(macOS 11.0, iOS 14.0, *)) {
-                    enableTimestampQueryInsidePasses =
+                    enableChromiumExperimentalTimestampQueryInsidePasses =
                         SupportCounterSamplingAtCommandBoundary(*mDevice);
                 }
 
@@ -497,7 +497,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
                 // has been fixed on macOS 11.0. See crbug.com/dawn/545.
                 if (gpu_info::IsAMD(mVendorId) && !IsMacOSVersionAtLeast(11)) {
                     enableTimestampQuery = false;
-                    enableTimestampQueryInsidePasses = false;
+                    enableChromiumExperimentalTimestampQueryInsidePasses = false;
                 }
 #endif
 
@@ -505,8 +505,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
                     EnableFeature(Feature::TimestampQuery);
                 }
 
-                if (enableTimestampQueryInsidePasses) {
-                    EnableFeature(Feature::TimestampQueryInsidePasses);
+                if (enableChromiumExperimentalTimestampQueryInsidePasses) {
+                    EnableFeature(Feature::ChromiumExperimentalTimestampQueryInsidePasses);
                 }
             }
         }
