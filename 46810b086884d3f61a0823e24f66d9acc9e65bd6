@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a302e50b_b2296913",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 8,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T17:14:08Z",
+      "side": 1,
+      "message": "Please can you add a little bit of context of _why_ in the CL description?\nA link to the relevant bit of spec would be helpful.",
+      "revId": "46810b086884d3f61a0823e24f66d9acc9e65bd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
