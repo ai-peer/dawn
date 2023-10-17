@@ -34,6 +34,63 @@
       "parentUuid": "49ab0bc6_fdde1694",
       "revId": "b429beb3adc0fa75c8a88152bbecdf7e90e5221c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1175aa4_c3329d8d",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1484,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T01:21:31Z",
+      "side": 1,
+      "message": "```\n` ,()\"`\n```",
+      "range": {
+        "startLine": 1484,
+        "startChar": 28,
+        "endLine": 1484,
+        "endChar": 36
+      },
+      "revId": "b429beb3adc0fa75c8a88152bbecdf7e90e5221c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8990e23f_fd80eb8f",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1485,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T01:21:31Z",
+      "side": 1,
+      "message": "Use back-ticks so you don\u0027t need to escape the slashes and quotes:\n```suggestion\n\t\t\ts \u003d strings.ReplaceAll(s, `\"`, `\\\"`)\n```",
+      "revId": "b429beb3adc0fa75c8a88152bbecdf7e90e5221c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07555f99_beb54c41",
+        "filename": "tools/src/cmd/run-cts/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 1492,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T01:21:31Z",
+      "side": 1,
+      "message": "or `fmt.Fprintln(output, \"Running:\")`",
+      "revId": "b429beb3adc0fa75c8a88152bbecdf7e90e5221c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
