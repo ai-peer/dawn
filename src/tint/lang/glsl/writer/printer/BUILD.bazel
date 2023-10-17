@@ -24,28 +24,19 @@
 load("//src/tint:flags.bzl", "COPTS")
 load("@bazel_skylib//lib:selects.bzl", "selects")
 cc_library(
-  name = "writer",
+  name = "printer",
   srcs = [
-    "output.cc",
-    "writer.cc",
+    "printer.cc",
   ],
   hdrs = [
-    "output.h",
-    "writer.h",
+    "printer.h",
   ],
   deps = [
     "//src/tint/api/common",
-    "//src/tint/api/options",
     "//src/tint/lang/core",
     "//src/tint/lang/core/constant",
     "//src/tint/lang/core/ir",
     "//src/tint/lang/core/type",
-    "//src/tint/lang/glsl/writer/raise",
-    "//src/tint/lang/wgsl",
-    "//src/tint/lang/wgsl/ast",
-    "//src/tint/lang/wgsl/program",
-    "//src/tint/lang/wgsl/reader/lower",
-    "//src/tint/lang/wgsl/sem",
     "//src/tint/utils/containers",
     "//src/tint/utils/diagnostic",
     "//src/tint/utils/generator",
@@ -60,41 +51,28 @@ cc_library(
     "//src/tint/utils/symbol",
     "//src/tint/utils/text",
     "//src/tint/utils/traits",
-  ] + select({
-    ":tint_build_glsl_writer": [
-      "//src/tint/lang/glsl/writer/ast_printer",
-      "//src/tint/lang/glsl/writer/common",
-      "//src/tint/lang/glsl/writer/printer",
-    ],
-    "//conditions:default": [],
-  }) + select({
-    ":tint_build_wgsl_reader": [
-      "//src/tint/lang/wgsl/reader/program_to_ir",
-    ],
-    "//conditions:default": [],
-  }),
+  ],
   copts = COPTS,
   visibility = ["//visibility:public"],
 )
 cc_library(
-  name = "bench",
+  name = "test",
   alwayslink = True,
   srcs = [
-    "writer_bench.cc",
+    "constant_test.cc",
+    "helper_test.h",
   ],
   deps = [
     "//src/tint/api/common",
-    "//src/tint/api/options",
-    "//src/tint/cmd/bench:bench",
     "//src/tint/lang/core",
     "//src/tint/lang/core/constant",
+    "//src/tint/lang/core/intrinsic",
+    "//src/tint/lang/core/ir",
     "//src/tint/lang/core/type",
-    "//src/tint/lang/wgsl",
-    "//src/tint/lang/wgsl/ast",
-    "//src/tint/lang/wgsl/program",
-    "//src/tint/lang/wgsl/sem",
+    "//src/tint/lang/glsl/writer/raise",
     "//src/tint/utils/containers",
     "//src/tint/utils/diagnostic",
+    "//src/tint/utils/generator",
     "//src/tint/utils/ice",
     "//src/tint/utils/id",
     "//src/tint/utils/macros",
@@ -106,11 +84,10 @@ cc_library(
     "//src/tint/utils/symbol",
     "//src/tint/utils/text",
     "//src/tint/utils/traits",
-    "@benchmark",
+    "@gtest",
   ] + select({
     ":tint_build_glsl_writer": [
-      "//src/tint/lang/glsl/writer",
-      "//src/tint/lang/glsl/writer/common",
+      "//src/tint/lang/glsl/writer/printer",
     ],
     "//conditions:default": [],
   }),
@@ -121,10 +98,5 @@ cc_library(
 alias(
   name = "tint_build_glsl_writer",
   actual = "//src/tint:tint_build_glsl_writer_true",
-)
-
-alias(
-  name = "tint_build_wgsl_reader",
-  actual = "//src/tint:tint_build_wgsl_reader_true",
 )
 
