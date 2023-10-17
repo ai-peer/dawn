@@ -68,6 +68,23 @@
       "message": "I suppose I\u0027ll remove my +2 since people would like to discuss launch criteria.",
       "revId": "d98e597d8ca677c40c8565cf3f2bd29daa05b605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bb57d64_e0f712d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T22:36:05Z",
+      "side": 1,
+      "message": "We\u0027re still waiting on various approvals to happen on the Intent to Ship, but we can land this now. The feature is still guarded on the Chromium side and will not be exposed by default yet.",
+      "revId": "d98e597d8ca677c40c8565cf3f2bd29daa05b605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
