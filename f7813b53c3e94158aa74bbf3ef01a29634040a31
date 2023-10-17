@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "f7813b53c3e94158aa74bbf3ef01a29634040a31",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "249ea6ae_d875c26f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-17T11:50:02Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "f7813b53c3e94158aa74bbf3ef01a29634040a31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "88056c7e_9a3747a6",
+        "filename": "src/tint/lang/wgsl/sem/sampler_texture_pair.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-17T11:50:02Z",
+      "side": 1,
+      "message": "a neat trick is that std::tie(a1, a2) \u003c std::tie(b1, b2) works!",
+      "revId": "f7813b53c3e94158aa74bbf3ef01a29634040a31",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
