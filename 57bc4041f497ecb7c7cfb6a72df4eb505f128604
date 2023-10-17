@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63c0b9e6_8b4c75c6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-17T15:24:20Z",
+      "side": 1,
+      "message": "Hello Austin, please have a look at this first CL.\nThe Chromium CL is ready at https://chromium-review.googlesource.com/c/chromium/src/+/4946456",
+      "revId": "57bc4041f497ecb7c7cfb6a72df4eb505f128604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
