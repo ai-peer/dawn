@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "60b404f2_167e2db8",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 956,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T19:53:43Z",
+      "side": 1,
+      "message": "There are only two arguments for `atomicSub`. I think it would be cleaner to move the special casing out of this generic lambda, and into `case wgsl::BuiltinFn::kAtomicSub:` (with an unrolled loop) below.",
+      "revId": "9eaee8fe91356532df53066b4e41cc67a3844b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c041fa4d_48ccfc04",
         "filename": "test/tint/bug/tint/2063.wgsl.expected.dxc.hlsl",
         "patchSetId": 3
@@ -14,6 +31,24 @@
       "writtenOn": "2023-10-17T19:47:21Z",
       "side": 1,
       "message": "Looks like you\u0027ve found a bug in the HLSL generator as well.",
+      "revId": "9eaee8fe91356532df53066b4e41cc67a3844b22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa08584_c7ea4499",
+        "filename": "test/tint/bug/tint/2063.wgsl.expected.dxc.hlsl",
+        "patchSetId": 3
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T19:53:43Z",
+      "side": 1,
+      "message": "Please can you apply a small fix or file a bug?",
+      "parentUuid": "c041fa4d_48ccfc04",
       "revId": "9eaee8fe91356532df53066b4e41cc67a3844b22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
