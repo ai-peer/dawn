@@ -15,6 +15,7 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_QUEUEVK_H_
 #define SRC_DAWN_NATIVE_VULKAN_QUEUEVK_H_
 
+#include "dawn/native/EventManager.h"
 #include "dawn/native/Queue.h"
 
 namespace dawn::native::vulkan {

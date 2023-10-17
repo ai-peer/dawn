@@ -18,6 +18,7 @@
 #include <vector>
 
 #include "dawn/common/FutureUtils.h"
+#include "dawn/common/Platform.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/webgpu.h"
 
@@ -440,6 +441,12 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceAfterEvent) {
     ASSERT_EQ(status, WGPUQueueWorkDoneStatus_Unknown);
 }
 
+#if DAWN_PLATFORM_IS(POSIX)
+#define POSIX_VULKAN_BACKEND() VulkanBackend()
+#else
+#define POSIX_VULKAN_BACKEND()
+#endif
+
 // TODO(crbug.com/dawn/1987):
 // - Test any reentrancy guarantees (for ProcessEvents or WaitAny inside a callback),
 //   to make sure things don't blow up and we don't attempt to hold locks recursively.
@@ -447,7 +454,7 @@ TEST_P(EventCompletionTests, WorkDoneDropInstanceAfterEvent) {
 
 DAWN_INSTANTIATE_TEST_P(EventCompletionTests,
                         // TODO(crbug.com/dawn/2058): Enable tests for the rest of the backends.
-                        {MetalBackend()},
+                        {MetalBackend(), POSIX_VULKAN_BACKEND()},
                         {
                             WaitTypeAndCallbackMode::TimedWaitAny_WaitAnyOnly,
                             WaitTypeAndCallbackMode::TimedWaitAny_AllowSpontaneous,
@@ -563,7 +570,8 @@ TEST_P(WaitAnyTests, UnsupportedMixedSources) {
 
 DAWN_INSTANTIATE_TEST(WaitAnyTests,
                       // TODO(crbug.com/dawn/2058): Enable tests for the rest of the backends.
-                      MetalBackend());
+                      MetalBackend(),
+                      POSIX_VULKAN_BACKEND());
 
 }  // anonymous namespace
 }  // namespace dawn
