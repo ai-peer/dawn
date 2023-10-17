@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ecb5c0b_949ebccf",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T18:41:22Z",
+      "side": 0,
+      "message": "this was actually never called",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "8b28afe0df83ce011f2d92588d5770f6cf2f466a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eb8b211_68b6aa3d",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T18:41:22Z",
+      "side": 0,
+      "message": "in repetitive runs, this assertion is actually flaky because it races with the update in CheckAndUpdateCompletedSerials",
+      "range": {
+        "startLine": 66,
+        "startChar": 4,
+        "endLine": 67,
+        "endChar": 56
+      },
+      "revId": "8b28afe0df83ce011f2d92588d5770f6cf2f466a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
