@@ -127,6 +127,7 @@ void CopyImageSubData(const OpenGLFunctions& gl,
                 case Aspect::Stencil:
                     glAttachment = GL_STENCIL_ATTACHMENT;
                     break;
+                case Aspect::CombinedDepthStencil:
                 case Aspect::None:
                 case Aspect::Plane0:
                 case Aspect::Plane1:

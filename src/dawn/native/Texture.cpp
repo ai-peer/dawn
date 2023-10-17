@@ -782,6 +782,7 @@ Extent3D TextureBase::GetSize(Aspect aspect) const {
         case Aspect::Color:
         case Aspect::Depth:
         case Aspect::Stencil:
+        case Aspect::CombinedDepthStencil:
             return mBaseSize;
         case Aspect::Plane0:
             DAWN_ASSERT(GetFormat().IsMultiPlanar());

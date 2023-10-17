@@ -188,6 +188,9 @@ class Texture final : public TextureBase {
 
     // Sometimes the WebGPU aspects don't directly map to Vulkan aspects:
     //
+    //  - In early Vulkan versions it is not possible to transition depth and stencil separetely so
+    //    textures with Depth|Stencil will be promoted to a single CombinedDepthStencil aspect
+    //    internally.
     //  - Some multiplanar images cannot have planes transitioned separately and instead Vulkan
     //    requires that the "Color" aspect be used for barriers, so Plane0|Plane1 is promoted to
     //    just Color.

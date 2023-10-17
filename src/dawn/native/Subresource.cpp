@@ -98,6 +98,7 @@ uint8_t GetAspectIndex(Aspect aspect) {
         case Aspect::Color:
         case Aspect::Depth:
         case Aspect::Plane0:
+        case Aspect::CombinedDepthStencil:
             return 0;
         case Aspect::Plane1:
         case Aspect::Stencil:
