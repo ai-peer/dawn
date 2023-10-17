@@ -16,6 +16,23 @@
       "message": "kokoro rebuild",
       "revId": "f1489ddd76474ca8c2d4a4394d71dccecc1361f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35b09330_cb7e01d3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-17T15:12:58Z",
+      "side": 1,
+      "message": "LGTM! We might need to run it again after landing for new files that were addedi n the meantime.",
+      "revId": "f1489ddd76474ca8c2d4a4394d71dccecc1361f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
