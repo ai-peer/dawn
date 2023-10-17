@@ -21,38 +21,23 @@
 #                       Do not modify this file directly
 ################################################################################
 
-include(lang/glsl/writer/ast_printer/BUILD.cmake)
-include(lang/glsl/writer/ast_raise/BUILD.cmake)
-include(lang/glsl/writer/common/BUILD.cmake)
-include(lang/glsl/writer/printer/BUILD.cmake)
-include(lang/glsl/writer/raise/BUILD.cmake)
-
 if(TINT_BUILD_GLSL_WRITER)
 ################################################################################
-# Target:    tint_lang_glsl_writer
+# Target:    tint_lang_glsl_writer_printer
 # Kind:      lib
 # Condition: TINT_BUILD_GLSL_WRITER
 ################################################################################
-tint_add_target(tint_lang_glsl_writer lib
-  lang/glsl/writer/output.cc
-  lang/glsl/writer/output.h
-  lang/glsl/writer/writer.cc
-  lang/glsl/writer/writer.h
+tint_add_target(tint_lang_glsl_writer_printer lib
+  lang/glsl/writer/printer/printer.cc
+  lang/glsl/writer/printer/printer.h
 )
 
-tint_target_add_dependencies(tint_lang_glsl_writer lib
+tint_target_add_dependencies(tint_lang_glsl_writer_printer lib
   tint_api_common
-  tint_api_options
   tint_lang_core
   tint_lang_core_constant
   tint_lang_core_ir
   tint_lang_core_type
-  tint_lang_glsl_writer_raise
-  tint_lang_wgsl
-  tint_lang_wgsl_ast
-  tint_lang_wgsl_program
-  tint_lang_wgsl_reader_lower
-  tint_lang_wgsl_sem
   tint_utils_containers
   tint_utils_diagnostic
   tint_utils_generator
@@ -69,44 +54,29 @@ tint_target_add_dependencies(tint_lang_glsl_writer lib
   tint_utils_traits
 )
 
-if(TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies(tint_lang_glsl_writer lib
-    tint_lang_glsl_writer_ast_printer
-    tint_lang_glsl_writer_common
-    tint_lang_glsl_writer_printer
-  )
-endif(TINT_BUILD_GLSL_WRITER)
-
-if(TINT_BUILD_WGSL_READER)
-  tint_target_add_dependencies(tint_lang_glsl_writer lib
-    tint_lang_wgsl_reader_program_to_ir
-  )
-endif(TINT_BUILD_WGSL_READER)
-
 endif(TINT_BUILD_GLSL_WRITER)
 if(TINT_BUILD_GLSL_WRITER)
 ################################################################################
-# Target:    tint_lang_glsl_writer_bench
-# Kind:      bench
+# Target:    tint_lang_glsl_writer_printer_test
+# Kind:      test
 # Condition: TINT_BUILD_GLSL_WRITER
 ################################################################################
-tint_add_target(tint_lang_glsl_writer_bench bench
-  lang/glsl/writer/writer_bench.cc
+tint_add_target(tint_lang_glsl_writer_printer_test test
+  lang/glsl/writer/printer/constant_test.cc
+  lang/glsl/writer/printer/helper_test.h
 )
 
-tint_target_add_dependencies(tint_lang_glsl_writer_bench bench
+tint_target_add_dependencies(tint_lang_glsl_writer_printer_test test
   tint_api_common
-  tint_api_options
-  tint_cmd_bench_bench
   tint_lang_core
   tint_lang_core_constant
+  tint_lang_core_intrinsic
+  tint_lang_core_ir
   tint_lang_core_type
-  tint_lang_wgsl
-  tint_lang_wgsl_ast
-  tint_lang_wgsl_program
-  tint_lang_wgsl_sem
+  tint_lang_glsl_writer_raise
   tint_utils_containers
   tint_utils_diagnostic
+  tint_utils_generator
   tint_utils_ice
   tint_utils_id
   tint_utils_macros
@@ -120,14 +90,13 @@ tint_target_add_dependencies(tint_lang_glsl_writer_bench bench
   tint_utils_traits
 )
 
-tint_target_add_external_dependencies(tint_lang_glsl_writer_bench bench
-  "google-benchmark"
+tint_target_add_external_dependencies(tint_lang_glsl_writer_printer_test test
+  "gtest"
 )
 
 if(TINT_BUILD_GLSL_WRITER)
-  tint_target_add_dependencies(tint_lang_glsl_writer_bench bench
-    tint_lang_glsl_writer
-    tint_lang_glsl_writer_common
+  tint_target_add_dependencies(tint_lang_glsl_writer_printer_test test
+    tint_lang_glsl_writer_printer
   )
 endif(TINT_BUILD_GLSL_WRITER)
 
