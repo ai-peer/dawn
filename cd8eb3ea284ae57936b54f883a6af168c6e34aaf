@@ -69,6 +69,24 @@
       "parentUuid": "75544045_3b3a0042",
       "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4acd2a95_20cc373a",
+        "filename": "src/tint/lang/glsl/writer/printer/printer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-17T18:50:01Z",
+      "side": 1,
+      "message": "A single class, only in the `.cc` file. For the same reasons I\u0027ve asked before:\n\n* There\u0027s only a single free function that\u0027s needed to be public: `tint::Result\u003cstd::string\u003e Print(core::ir::Module\u0026 module)`. \n* The API is cleaner - no split between constructor, `Generate()` and `Result()`\n* The compiler / linker does a better job inlining - binary size is smaller, sometimes faster.\n* You don\u0027t have to forward-declare or `#include` a bunch of implementation details in the header.\n* You don\u0027t have to duplicate the methods in two files.\n\n\u003e Having the class definition in the `.h` makes it a lot easier to search and find things and to add new members.\n\nI personally find the opposite is true.",
+      "parentUuid": "75544045_3b3a0042",
+      "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
