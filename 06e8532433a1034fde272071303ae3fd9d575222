@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d30bea0f_303c6f0a",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-17T18:48:24Z",
+      "side": 1,
+      "message": "I think Kokoro is failing because we need to wrap this case in:\n\n```\n#if defined(DAWN_ENABLE_SWIFTSHADER)\n```\n\nOtherwise `kSwiftshaderLibName` may not be defined. And probably should retain the `DAWN_UNREACHABLE()` if not defined.",
+      "range": {
+        "startLine": 304,
+        "startChar": 4,
+        "endLine": 304,
+        "endChar": 34
+      },
+      "revId": "06e8532433a1034fde272071303ae3fd9d575222",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "18db2362_8117f42c",
         "filename": "src/dawn/native/vulkan/BackendVk.cpp",
         "patchSetId": 1
