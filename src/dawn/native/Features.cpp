@@ -52,7 +52,7 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
     {Feature::TimestampQuery,
      {"Support Timestamp Query", "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
       FeatureInfo::FeatureState::Experimental}},
-    {Feature::TimestampQueryInsidePasses,
+    {Feature::ChromiumExperimentalTimestampQueryInsidePasses,
      {"Support Timestamp Query inside render/compute pass",
       "https://bugs.chromium.org/p/dawn/issues/detail?id=434",
       FeatureInfo::FeatureState::Experimental}},

@@ -551,15 +551,16 @@ TEST_F(TimestampQueryValidationTest, WriteTimestampOnCommandEncoder) {
     }
 }
 
-class TimestampQueryInsidePassesValidationTest : public QuerySetValidationTest {
+class ChromiumExperimentalTimestampQueryInsidePassesValidationTest : public QuerySetValidationTest {
   protected:
     WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
                                 wgpu::DeviceDescriptor descriptor) override {
-        // The timestamp query feature must be supported if the timestamp query inside passes
-        // feature is supported. Enable timestamp query for validating queries overwrite inside and
-        // outside of the passes.
-        wgpu::FeatureName requiredFeatures[2] = {wgpu::FeatureName::TimestampQuery,
-                                                 wgpu::FeatureName::TimestampQueryInsidePasses};
+        // The timestamp query feature must be supported if the chromium experimental timestamp
+        // query inside passes feature is supported. Enable timestamp query for validating queries
+        // overwrite inside and outside of the passes.
+        wgpu::FeatureName requiredFeatures[2] = {
+            wgpu::FeatureName::TimestampQuery,
+            wgpu::FeatureName::ChromiumExperimentalTimestampQueryInsidePasses};
         descriptor.requiredFeatures = requiredFeatures;
         descriptor.requiredFeatureCount = 2;
 
@@ -568,7 +569,8 @@ class TimestampQueryInsidePassesValidationTest : public QuerySetValidationTest {
 };
 
 // Test write timestamp on compute pass encoder
-TEST_F(TimestampQueryInsidePassesValidationTest, WriteTimestampOnComputePassEncoder) {
+TEST_F(ChromiumExperimentalTimestampQueryInsidePassesValidationTest,
+       WriteTimestampOnComputePassEncoder) {
     wgpu::QuerySet timestampQuerySet = CreateQuerySet(device, wgpu::QueryType::Timestamp, 2);
     wgpu::QuerySet occlusionQuerySet = CreateQuerySet(device, wgpu::QueryType::Occlusion, 2);
 
@@ -614,7 +616,8 @@ TEST_F(TimestampQueryInsidePassesValidationTest, WriteTimestampOnComputePassEnco
 }
 
 // Test write timestamp on render pass encoder
-TEST_F(TimestampQueryInsidePassesValidationTest, WriteTimestampOnRenderPassEncoder) {
+TEST_F(ChromiumExperimentalTimestampQueryInsidePassesValidationTest,
+       WriteTimestampOnRenderPassEncoder) {
     PlaceholderRenderPass renderPass(device);
 
     wgpu::QuerySet timestampQuerySet = CreateQuerySet(device, wgpu::QueryType::Timestamp, 2);
