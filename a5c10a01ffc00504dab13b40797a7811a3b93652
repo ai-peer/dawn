@@ -103,6 +103,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f5f539_cdc9378f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-17T16:28:23Z",
+      "side": 1,
+      "message": "ANGLE already subtracts 2\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/d3d/d3d11/renderer11_utils.cpp;drc\u003d97a4891213554c6ae278ee621a75736df4939529;l\u003d695\n\nDoes it need to subtract more?",
+      "revId": "a5c10a01ffc00504dab13b40797a7811a3b93652",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fb7c52e_96b9b6a8",
