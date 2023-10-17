@@ -958,7 +958,13 @@ void ASTPrinter::EmitWorkgroupAtomicCall(StringStream& out,
                 if (i > 0) {
                     out << ", ";
                 }
-                EmitExpression(out, arg);
+                if (builtin->Fn() == wgsl::BuiltinFn::kAtomicSub && i == 1) {
+                    out << "-(";
+                    EmitExpression(out, arg);
+                    out << ")";
+                } else {
+                    EmitExpression(out, arg);
+                }
             }
         }
         return;
