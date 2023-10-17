@@ -28,10 +28,21 @@ func init() {
 	common.Register(&cmd{})
 }
 
+type arrayFlags []string
+
+func (i *arrayFlags) String() string {
+	return "wat?"
+}
+
+func (i *arrayFlags) Set(value string) error {
+	*i = append(*i, value)
+	return nil
+}
+
 type cmd struct {
 	flags struct {
-		expectations string // expectations file path
-		slow         string // slow test expectations file path
+		expectations arrayFlags // expectations file path
+		slow         string     // slow test expectations file path
 	}
 }
 
@@ -44,36 +55,41 @@ func (cmd) Desc() string {
 }
 
 func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, error) {
-	defaultExpectations := common.DefaultExpectationsPath()
 	slowExpectations := common.DefaultSlowExpectationsPath()
-	flag.StringVar(&c.flags.expectations, "expectations", defaultExpectations, "path to CTS expectations file to validate")
+	flag.Var(&c.flags.expectations, "expectations", "path to CTS expectations file to validate")
 	flag.StringVar(&c.flags.slow, "slow", slowExpectations, "path to CTS slow expectations file to validate")
 	return nil, nil
 }
 
 func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
-	// Load expectations.txt
-	content, err := expectations.Load(c.flags.expectations)
-	if err != nil {
-		return err
+	if len(c.flags.expectations) == 0 {
+		c.flags.expectations = common.DefaultExpectationsPaths()
 	}
-	diags := content.Validate()
 
-	// Print any diagnostics
-	diags.Print(os.Stdout, c.flags.expectations)
-	if numErrs := diags.NumErrors(); numErrs > 0 {
-		return fmt.Errorf("%v errors found", numErrs)
+	for _, expectationFilename := range c.flags.expectations {
+		// Load expectations.txt
+		content, err := expectations.Load(expectationFilename)
+		if err != nil {
+			return err
+		}
+		diags := content.Validate()
+
+		// Print any diagnostics
+		diags.Print(os.Stdout, expectationFilename)
+		if numErrs := diags.NumErrors(); numErrs > 0 {
+			return fmt.Errorf("%v errors found in %v", numErrs, expectationFilename)
+		}
 	}
 
 	// Load slow_tests.txt
-	content, err = expectations.Load(c.flags.slow)
+	content, err := expectations.Load(c.flags.slow)
 	if err != nil {
 		return err
 	}
 
-	diags = content.ValidateSlowTests()
+	diags := content.ValidateSlowTests()
 	// Print any diagnostics
-	diags.Print(os.Stdout, c.flags.expectations)
+	diags.Print(os.Stdout, c.flags.expectations[0])
 	if numErrs := diags.NumErrors(); numErrs > 0 {
 		return fmt.Errorf("%v errors found", numErrs)
 	}
