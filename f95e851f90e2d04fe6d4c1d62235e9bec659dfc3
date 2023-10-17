@@ -68,6 +68,42 @@
       "parentUuid": "eeb2b997_b9952376",
       "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65def55b_97b3743f",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-17T18:45:24Z",
+      "side": 1,
+      "message": "-10 is not a valid u32, so WGSL won\u0027t let me test it, AFAIK.\n\nI did add a test with x + y, and verified that it added parentheses. Presumably it would do the same for -10, if that were an issue.",
+      "parentUuid": "9ca7f14a_b0410623",
+      "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daf4c30a_f0a93802",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 962,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-17T18:45:24Z",
+      "side": 1,
+      "message": "Looks like this is already being done.",
+      "parentUuid": "e6f38e20_33bd5fce",
+      "revId": "f95e851f90e2d04fe6d4c1d62235e9bec659dfc3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
