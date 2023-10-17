@@ -28,8 +28,8 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_DEVICEVK_H_
 #define SRC_DAWN_NATIVE_VULKAN_DEVICEVK_H_
 
+#include <deque>
 #include <memory>
-#include <queue>
 #include <string>
 #include <utility>
 #include <vector>
@@ -186,6 +186,9 @@ class Device final : public DeviceBase {
 
     void DestroyImpl() override;
 
+    Ref<EventManager::TrackedEvent> GetOrCreateCompletionEvent(ExecutionSerial serial) override;
+    ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+
     // To make it easier to use fn it is a public const member. However
     // the Device is allowed to mutate them through these private methods.
     VulkanFunctions* GetMutableFunctions();
@@ -210,7 +213,7 @@ class Device final : public DeviceBase {
     // This works only because we have a single queue. Each submit to a queue is associated
     // to a serial and a fence, such that when the fence is "ready" we know the operations
     // have finished.
-    std::queue<std::pair<VkFence, ExecutionSerial>> mFencesInFlight;
+    MutexProtected<std::deque<std::pair<VkFence, ExecutionSerial>>> mFencesInFlight;
     // Fences in the unused list aren't reset yet.
     std::vector<VkFence> mUnusedFences;
 
