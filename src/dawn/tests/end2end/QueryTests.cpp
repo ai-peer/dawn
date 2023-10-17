@@ -1181,23 +1181,24 @@ TEST_P(TimestampQueryTests, ManyWriteTimestampDistinctQuerySets) {
     }
 }
 
-class TimestampQueryInsidePassesTests : public TimestampQueryTests {
+class ChromiumExperimentalTimestampQueryInsidePassesTests : public TimestampQueryTests {
   protected:
     void SetUp() override {
         DawnTest::SetUp();
 
         // Skip all tests if timestamp feature is not supported
         DAWN_TEST_UNSUPPORTED_IF(
-            !SupportsFeatures({wgpu::FeatureName::TimestampQueryInsidePasses}));
+            !SupportsFeatures({wgpu::FeatureName::ChromiumExperimentalTimestampQueryInsidePasses}));
     }
 
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
         std::vector<wgpu::FeatureName> requiredFeatures = {};
-        if (SupportsFeatures({wgpu::FeatureName::TimestampQueryInsidePasses})) {
-            requiredFeatures.push_back(wgpu::FeatureName::TimestampQueryInsidePasses);
-            // The timestamp query feature must be supported if the timestamp query inside passes
-            // feature is supported. Enable timestamp query for testing queries overwrite inside and
-            // outside of the passes.
+        if (SupportsFeatures({wgpu::FeatureName::ChromiumExperimentalTimestampQueryInsidePasses})) {
+            requiredFeatures.push_back(
+                wgpu::FeatureName::ChromiumExperimentalTimestampQueryInsidePasses);
+            // The timestamp query feature must be supported if the chromium experimental timestamp
+            // query inside passes feature is supported. Enable timestamp query for testing queries
+            // overwrite inside and outside of the passes.
             requiredFeatures.push_back(wgpu::FeatureName::TimestampQuery);
         }
         return requiredFeatures;
@@ -1205,7 +1206,7 @@ class TimestampQueryInsidePassesTests : public TimestampQueryTests {
 };
 
 // Test calling timestamp query from render pass encoder
-TEST_P(TimestampQueryInsidePassesTests, FromOnRenderPass) {
+TEST_P(ChromiumExperimentalTimestampQueryInsidePassesTests, FromOnRenderPass) {
     constexpr uint32_t kQueryCount = 2;
 
     // Write timestamp with different query indexes
@@ -1250,7 +1251,7 @@ TEST_P(TimestampQueryInsidePassesTests, FromOnRenderPass) {
 }
 
 // Test calling timestamp query from compute pass encoder
-TEST_P(TimestampQueryInsidePassesTests, FromComputePass) {
+TEST_P(ChromiumExperimentalTimestampQueryInsidePassesTests, FromComputePass) {
     // TODO(crbug.com/dawn/1852): Flaky negative timestamps on Mac AMD.
     DAWN_SUPPRESS_TEST_IF(IsMacOS() && IsMetal() && IsAMD());
 
@@ -1335,7 +1336,7 @@ DAWN_INSTANTIATE_TEST(TimestampQueryTests,
                       OpenGLBackend(),
                       OpenGLESBackend(),
                       VulkanBackend());
-DAWN_INSTANTIATE_TEST(TimestampQueryInsidePassesTests,
+DAWN_INSTANTIATE_TEST(ChromiumExperimentalTimestampQueryInsidePassesTests,
                       D3D11Backend(),
                       D3D12Backend(),
                       MetalBackend(),
