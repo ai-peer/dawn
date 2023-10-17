@@ -33,6 +33,24 @@
       "message": "As a followup, please can we move the impl to the .cc?",
       "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75544045_3b3a0042",
+        "filename": "src/tint/lang/glsl/writer/printer/printer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-17T18:41:51Z",
+      "side": 1,
+      "message": "I don\u0027t understand the comment, you want a second class that this calls into to do the work hidden inside the cc file? Why? Having the class definition in the `.h` makes it a lot easier to search and find things and to add new members.",
+      "parentUuid": "f7bbe62d_af12a87e",
+      "revId": "cd8eb3ea284ae57936b54f883a6af168c6e34aaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
