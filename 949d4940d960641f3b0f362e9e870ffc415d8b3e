@@ -16,6 +16,23 @@
       "message": "kokoro rebuild",
       "revId": "949d4940d960641f3b0f362e9e870ffc415d8b3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93cd20e5_3d0e98cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T17:24:23Z",
+      "side": 1,
+      "message": "I think Kokoro keeps giving TOOL_FAILED because of the huge diff. I\u0027m going to override. Can revert or fix forward if there is actually something wrong.",
+      "revId": "949d4940d960641f3b0f362e9e870ffc415d8b3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
