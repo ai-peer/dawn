@@ -16,6 +16,104 @@
       "message": "I\u0027m new to golang so I will probably make lots of noob mistakes and faux pas.\n\nIs this a good direct? I changed -expectations to be a list. I didn\u0027t see a way to set a default because all it would do is add to the list so, if the list is empty then I grab the default list which includes expectations.txt and compat-expectations.txt and then iterate over them.\n\nAlternatively I could add -compat-expectations and do each one separate. It seem weird tho if you do -expectations foo.txt and it still checks the default for -compat-expectations.\n\nthoughts?",
       "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1aed1dc3_0393807e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T21:49:46Z",
+      "side": 1,
+      "message": "LGTM with some comments; though I am also sort of a golang noob so adding Ben\n\nparticularly IDK the idiomatic way to do flags for a list of strings.",
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e7b5c0_d93ee73e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T21:49:46Z",
+      "side": 1,
+      "message": "I think validate the defaults or validate exactly what you ask as you\u0027ve done is fine. no one really uses anything other than the defaults anyway.",
+      "parentUuid": "7f6099f4_1c0cfef9",
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28ac4876_c82145bc",
+        "filename": "tools/src/cmd/cts/common/paths.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T21:49:46Z",
+      "side": 1,
+      "message": "compat-expectations.txt",
+      "range": {
+        "startLine": 52,
+        "startChar": 65,
+        "endLine": 52,
+        "endChar": 77
+      },
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04801319_8ca6f935",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T21:49:46Z",
+      "side": 1,
+      "message": "probably should stringify the array?\n\ndocs say:\n\nhttps://pkg.go.dev/flag\n\n// String is the method to format the flag\u0027s value, part of the flag.Value interface.\n// The String method\u0027s output will be used in diagnostics.\nfunc (i *interval) String() string {\n\treturn fmt.Sprint(*i)\n}",
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c842f3d5_47ed428d",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-17T21:49:46Z",
+      "side": 1,
+      "message": "we may need a separate slow list for compat as well",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 93
+      },
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
