@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f6099f4_1c0cfef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-17T21:40:40Z",
+      "side": 1,
+      "message": "I\u0027m new to golang so I will probably make lots of noob mistakes and faux pas.\n\nIs this a good direct? I changed -expectations to be a list. I didn\u0027t see a way to set a default because all it would do is add to the list so, if the list is empty then I grab the default list which includes expectations.txt and compat-expectations.txt and then iterate over them.\n\nAlternatively I could add -compat-expectations and do each one separate. It seem weird tho if you do -expectations foo.txt and it still checks the default for -compat-expectations.\n\nthoughts?",
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
