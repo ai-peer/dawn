@@ -16,7 +16,7 @@ float2x3 a_load_4(uint offset) {
 }
 
 Inner a_load_3(uint offset) {
-  const Inner tint_symbol = {a_load_4((offset + 0u))};
+  Inner tint_symbol = {a_load_4((offset + 0u))};
   return tint_symbol;
 }
 
@@ -52,7 +52,7 @@ void f() {
   const Outer l_a[4] = a_load(0u);
   const Outer l_a_3 = a_load_1(768u);
   const Inner l_a_3_a[4] = a_load_2(768u);
-  const Inner l_a_3_a_2 = a_load_3(896u);
+  Inner l_a_3_a_2 = a_load_3(896u);
   const float2x3 l_a_3_a_2_m = a_load_4(896u);
   const float3 l_a_3_a_2_m_1 = asfloat(a[57].xyz);
   const float l_a_3_a_2_m_1_0 = asfloat(a[57].x);

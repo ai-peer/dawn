@@ -429,5 +429,57 @@ TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Initializer_Z
 )");
 }
 
+TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Const_Struct_of_Mat) {
+    Structure("S", Vector{Member("m", ty.mat2x3<f32>())});
+    auto* C = Const("C", Call("S", Call<mat2x3<f32>>(1_f, 2_f, 3_f, 4_f, 5_f, 6_f)));
+
+    Func("f", tint::Empty, ty.void_(),
+         Vector{
+             Decl(C),
+             Decl(Let("l", Expr(C))),
+         });
+
+    ASTPrinter& gen = Build();
+
+    ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
+
+    EXPECT_EQ(gen.Result(), R"(struct S {
+  float2x3 m;
+};
+
+void f() {
+  S l = {float2x3(float3(1.0f, 2.0f, 3.0f), float3(4.0f, 5.0f, 6.0f))};
+}
+)");
+}
+
+TEST_F(HlslASTPrinterTest_VariableDecl, Emit_VariableDeclStatement_Const_Struct_of_Struct_of_Mat) {
+    Structure("S", Vector{Member("m", ty.mat2x3<f32>())});
+    Structure("S2", Vector{Member("s", ty("S"))});
+    auto* C = Const("C", Call("S2", Call("S", Call<mat2x3<f32>>(1_f, 2_f, 3_f, 4_f, 5_f, 6_f))));
+
+    Func("f", tint::Empty, ty.void_(),
+         Vector{
+             Decl(C),
+             Decl(Let("l", Expr(C))),
+         });
+
+    ASTPrinter& gen = Build();
+
+    ASSERT_TRUE(gen.Generate()) << gen.Diagnostics();
+
+    EXPECT_EQ(gen.Result(), R"(struct S {
+  float2x3 m;
+};
+struct S2 {
+  S s;
+};
+
+void f() {
+  S2 l = {{float2x3(float3(1.0f, 2.0f, 3.0f), float3(4.0f, 5.0f, 6.0f))}};
+}
+)");
+}
+
 }  // namespace
 }  // namespace tint::hlsl::writer

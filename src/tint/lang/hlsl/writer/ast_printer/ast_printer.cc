@@ -4565,12 +4565,46 @@ bool ASTPrinter::EmitVar(const ast::Var* var) {
     return true;
 }
 
+bool ASTPrinter::IsStructWithMatrixMember(const core::type::Type* ty) {
+    // Recursively searches for a matrix member in input struct
+    std::function<bool(const core::type::Struct*)> f;
+    f = [&](const core::type::Struct* s) {
+        for (auto* m : s->Members()) {
+            if (m->Type()->Is<core::type::Matrix>()) {
+                return true;
+            } else if (auto* ms = m->Type()->As<core::type::Struct>()) {
+                if (f(ms)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    };
+
+    bool result = false;
+    if (auto* s = ty->As<core::type::Struct>()) {
+        auto it = is_struct_with_matrix_member_.find(s);
+        if (it == is_struct_with_matrix_member_.end()) {
+            result = f(s);
+            is_struct_with_matrix_member_[s] = result;
+        } else {
+            result = it->second;
+        }
+    }
+    return result;
+}
+
 bool ASTPrinter::EmitLet(const ast::Let* let) {
     auto* sem = builder_.Sem().Get(let);
     auto* type = sem->Type()->UnwrapRef();
 
     auto out = Line();
-    out << "const ";
+
+    // TODO(crbug.com/tint/2059): Workaround DXC bug with const instances of struct-of-matrix.
+    if (!IsStructWithMatrixMember(type)) {
+        out << "const ";
+    }
+
     if (!EmitTypeAndName(out, type, core::AddressSpace::kUndefined, core::Access::kUndefined,
                          let->name->symbol.Name())) {
         return false;
