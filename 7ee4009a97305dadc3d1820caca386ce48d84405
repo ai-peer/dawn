@@ -16,6 +16,23 @@
       "message": "Ben: PTAnotherL? Just test result updates. Kokoro seems happy now.",
       "revId": "7ee4009a97305dadc3d1820caca386ce48d84405",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62dd85a4_f2f828f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-18T17:33:29Z",
+      "side": 1,
+      "message": "Why didn\u0027t the textureLod tests get marked skip earlier? Seems unrelated to this change, but doesn\u0027t that mean it was already broken?",
+      "revId": "7ee4009a97305dadc3d1820caca386ce48d84405",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
