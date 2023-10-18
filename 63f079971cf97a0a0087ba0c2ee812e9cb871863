@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4799bd4_37dde46c",
+        "filename": "src/dawn/gpu_info.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-18T23:23:24Z",
+      "side": 1,
+      "message": "I would guess softpipe (and swrast but that was removed in 2020) may also have this device id. I don\u0027t know if softpipe supports vulkan though.\n\nMaybe the architecture should just be \"software\"?",
+      "range": {
+        "startLine": 180,
+        "startChar": 24,
+        "endLine": 180,
+        "endChar": 30
+      },
+      "revId": "63f079971cf97a0a0087ba0c2ee812e9cb871863",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
