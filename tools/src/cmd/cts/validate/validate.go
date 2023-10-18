@@ -32,6 +32,7 @@ import (
 	"flag"
 	"fmt"
 	"os"
+	"strings"
 
 	"dawn.googlesource.com/dawn/tools/src/cmd/cts/common"
 	"dawn.googlesource.com/dawn/tools/src/cts/expectations"
@@ -44,7 +45,7 @@ func init() {
 type arrayFlags []string
 
 func (i *arrayFlags) String() string {
-	return "wat?"
+	return strings.Join((*i), " ")
 }
 
 func (i *arrayFlags) Set(value string) error {
