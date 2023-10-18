@@ -33,6 +33,24 @@
       "message": "Why didn\u0027t the textureLod tests get marked skip earlier? Seems unrelated to this change, but doesn\u0027t that mean it was already broken?",
       "revId": "7ee4009a97305dadc3d1820caca386ce48d84405",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fc4dae0_a1521319",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-18T17:52:28Z",
+      "side": 1,
+      "message": "They\u0027re marked as SKIP in main. See diff of base vs. PS8: they\u0027re now unmodified.\n\nHere\u0027s the sad saga: in patchset 6, I rebased with --generate-expected, and those got regenerated as now-passing. The Kokoro run failed because it thinks they\u0027re still failing.\n\nEventually I diagnosed it to a bad validation.cache on my local machine which considered the hash of the passing result as skipped. Removed it, rebased, and the tests went back to failing as expected (files reverted).",
+      "parentUuid": "62dd85a4_f2f828f4",
+      "revId": "7ee4009a97305dadc3d1820caca386ce48d84405",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
