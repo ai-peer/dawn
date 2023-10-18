@@ -76,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d46d65_14b86720",
+        "filename": "tools/src/cmd/cts/common/paths.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-18T00:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "28ac4876_c82145bc",
+      "range": {
+        "startLine": 52,
+        "startChar": 65,
+        "endLine": 52,
+        "endChar": 77
+      },
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04801319_8ca6f935",
@@ -93,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46aa7c64_b2a32069",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-18T00:16:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "04801319_8ca6f935",
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c842f3d5_47ed428d",
@@ -106,6 +148,30 @@
       "writtenOn": "2023-10-17T21:49:46Z",
       "side": 1,
       "message": "we may need a separate slow list for compat as well",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 93
+      },
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fa84ed6_fc7c53c8",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-18T00:16:16Z",
+      "side": 1,
+      "message": "Do we? I\u0027m expecting the same tests to be slow on both. Should would preemptively add this now or wait until we actually have a case where something slow in one or the other?",
+      "parentUuid": "c842f3d5_47ed428d",
       "range": {
         "startLine": 60,
         "startChar": 1,
