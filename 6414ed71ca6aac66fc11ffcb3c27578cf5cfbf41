@@ -16,6 +16,41 @@
       "message": "LGTM, though I would probably name the flag just `-compat`",
       "revId": "6414ed71ca6aac66fc11ffcb3c27578cf5cfbf41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba6656a9_ac92cb82",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-18T17:59:21Z",
+      "side": 1,
+      "message": "renamed to `-compat`.",
+      "parentUuid": "a5d790bf_a019af14",
+      "revId": "6414ed71ca6aac66fc11ffcb3c27578cf5cfbf41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8518c589_5be6ed63",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-18T17:59:21Z",
+      "side": 1,
+      "message": "note: needs latest CTS with this PR https://github.com/gpuweb/cts/pull/3073\n\nOne way to test is to pick a query that is skipped in compat. For example any test tries to copy a",
+      "revId": "6414ed71ca6aac66fc11ffcb3c27578cf5cfbf41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
