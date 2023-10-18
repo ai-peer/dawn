@@ -16,6 +16,29 @@
       "message": "Loko PTAL as well",
       "revId": "22812b01d19abc021a970c13475a4f5bac423d3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91628903_c8217677",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-18T18:47:33Z",
+      "side": 1,
+      "message": "Do we need some way to discover these later on? Or is it fine to just always skip the remote ones?",
+      "range": {
+        "startLine": 324,
+        "startChar": 8,
+        "endLine": 327,
+        "endChar": 9
+      },
+      "revId": "22812b01d19abc021a970c13475a4f5bac423d3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
