@@ -124,6 +124,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5177bdb9_d842db44",
+        "filename": "tools/src/cmd/cts/common/paths.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-18T18:59:33Z",
+      "side": 1,
+      "message": "Doh! Pushed.",
+      "parentUuid": "6403bd30_c83fa5fc",
+      "range": {
+        "startLine": 52,
+        "startChar": 65,
+        "endLine": 52,
+        "endChar": 77
+      },
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "04801319_8ca6f935",
