@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10c58aca_09e0a8e7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-18T14:18:43Z",
+      "side": 1,
+      "message": "PTAL. Updated copyrights and lost +2.",
+      "revId": "31b73e2998f42c20cbe9f4ab35c350d70f0fb8c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
