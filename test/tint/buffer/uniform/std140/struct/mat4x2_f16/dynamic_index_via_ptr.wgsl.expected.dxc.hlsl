@@ -28,7 +28,7 @@ matrix<float16_t, 4, 2> a_load_4(uint offset) {
 }
 
 Inner a_load_3(uint offset) {
-  const Inner tint_symbol_4 = {a_load_4((offset + 0u))};
+  Inner tint_symbol_4 = {a_load_4((offset + 0u))};
   return tint_symbol_4;
 }
 
@@ -67,7 +67,7 @@ void f() {
   const Outer l_a[4] = a_load(0u);
   const Outer l_a_i = a_load_1((256u * uint(p_a_i_save)));
   const Inner l_a_i_a[4] = a_load_2((256u * uint(p_a_i_save)));
-  const Inner l_a_i_a_i = a_load_3(((256u * uint(p_a_i_save)) + (64u * uint(p_a_i_a_i_save))));
+  Inner l_a_i_a_i = a_load_3(((256u * uint(p_a_i_save)) + (64u * uint(p_a_i_a_i_save))));
   const matrix<float16_t, 4, 2> l_a_i_a_i_m = a_load_4(((256u * uint(p_a_i_save)) + (64u * uint(p_a_i_a_i_save))));
   const uint scalar_offset_4 = ((((256u * uint(p_a_i_save)) + (64u * uint(p_a_i_a_i_save))) + (4u * uint(p_a_i_a_i_m_i_save)))) / 4;
   uint ubo_load_4 = a[scalar_offset_4 / 4][scalar_offset_4 % 4];
