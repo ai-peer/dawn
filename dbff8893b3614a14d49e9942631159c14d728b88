@@ -180,6 +180,30 @@
       },
       "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d23a90e_8efa9c66",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-18T18:07:38Z",
+      "side": 1,
+      "message": "you\u0027re right that it\u0027s probably fine / we can extend as needed.",
+      "parentUuid": "1fa84ed6_fc7c53c8",
+      "range": {
+        "startLine": 60,
+        "startChar": 1,
+        "endLine": 60,
+        "endChar": 93
+      },
+      "revId": "dbff8893b3614a14d49e9942631159c14d728b88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
