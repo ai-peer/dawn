@@ -51,6 +51,23 @@
       "parentUuid": "62dd85a4_f2f828f4",
       "revId": "7ee4009a97305dadc3d1820caca386ce48d84405",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12e3e3db_8c5556d9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-18T17:53:46Z",
+      "side": 1,
+      "message": "Ah, I was looking at the inter-patchset diff and seemed like they got changed, looking at the full diff, all good.",
+      "revId": "7ee4009a97305dadc3d1820caca386ce48d84405",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
