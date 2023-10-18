@@ -198,12 +198,20 @@ class GlobalVariable final : public Castable<GlobalVariable, Variable> {
         return transitively_referenced_overrides_;
     }
 
+    /// Sets the Type, Function or Variable that this local variable shadows
+    /// @param shadows the Type, Function or Variable that this variable shadows
+    void SetShadows(const CastableBase* shadows) { shadows_ = shadows; }
+
+    /// @returns the Type, Function or Variable that this local variable shadows
+    const CastableBase* Shadows() const { return shadows_; }
+
   private:
     std::optional<tint::BindingPoint> binding_point_;
     tint::OverrideId override_id_;
     std::optional<uint32_t> location_;
     std::optional<uint32_t> index_;
     UniqueVector<const GlobalVariable*, 4> transitively_referenced_overrides_;
+    const CastableBase* shadows_ = nullptr;
 };
 
 /// Parameter is a function parameter

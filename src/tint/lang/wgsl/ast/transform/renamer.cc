@@ -58,6 +58,9 @@ const char* const kReservedKeywordsGLSL[] = {
     "active",
     "all",
     "any",
+    // //
+    // "arrayLength",
+
     "asin",
     "asinh",
     "asm",

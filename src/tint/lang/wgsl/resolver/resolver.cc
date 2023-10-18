@@ -892,16 +892,29 @@ bool Resolver::AllocateOverridableConstantIds() {
 
 void Resolver::SetShadows() {
     for (auto it : dependencies_.shadows) {
-        CastableBase* shadowed = sem_.Get(it.value);
-        if (TINT_UNLIKELY(!shadowed)) {
-            StringStream err;
-            err << "AST node '" << it.value->TypeInfo().name << "' had no semantic info\n"
-                << "Pointer: " << it.value;
-            AddICE(err.str(), it.value->source);
+        CastableBase* shadowed = nullptr;
+
+        // if (const ast::Node* node = std::get_if<const ast::Node*>(it.value)) {
+        //     shadowed = sem_.Get(node);
+        if (std::holds_alternative<const ast::Node*>(it.value)) {
+            auto node = std::get<const ast::Node*>(it.value);
+            shadowed = sem_.Get(node);
+            if (TINT_UNLIKELY(!shadowed)) {
+                StringStream err;
+                err << "AST node '" << node->TypeInfo().name << "' had no semantic info\n"
+                    << "Pointer: " << node;
+                AddICE(err.str(), node->source);
+            }
+        } else {
+            TINT_ASSERT(std::holds_alternative<wgsl::BuiltinFn>(it.value));
+
+            // temp test: set something non-null
+            shadowed = sem_.Get(it.key);
         }
 
         Switch(
             sem_.Get(it.key),  //
+            [&](sem::GlobalVariable* global) { global->SetShadows(shadowed); },
             [&](sem::LocalVariable* local) { local->SetShadows(shadowed); },
             [&](sem::Parameter* param) { param->SetShadows(shadowed); });
     }

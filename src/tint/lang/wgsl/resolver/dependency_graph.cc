@@ -317,6 +317,10 @@ class DependencyScanner {
             [&](const ast::VariableDeclStatement* v) {
                 if (auto* shadows = scope_stack_.Get(v->variable->name->symbol)) {
                     graph_.shadows.Add(v->variable, shadows);
+                } else if (auto builtin_fn =
+                               wgsl::ParseBuiltinFn(v->variable->name->symbol.NameView());
+                           builtin_fn != wgsl::BuiltinFn::kNone) {
+                    graph_.shadows.Add(v->variable, builtin_fn);
                 }
                 TraverseVariable(v->variable);
                 Declare(v->variable->name->symbol, v->variable);

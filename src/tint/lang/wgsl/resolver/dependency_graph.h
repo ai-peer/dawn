@@ -221,7 +221,8 @@ struct DependencyGraph {
     /// the variable key. A declaration (X) shadows another (Y) if X and Y use
     /// the same symbol, and X is declared in a sub-scope of the scope that
     /// declares Y.
-    Hashmap<const ast::Variable*, const ast::Node*, 16> shadows;
+    Hashmap<const ast::Variable*, std::variant<const ast::Node*, wgsl::BuiltinFn>, 16> shadows;
+    // Hashmap<const ast::Variable*, const ast::Node*, 16> shadows;
 };
 
 }  // namespace tint::resolver

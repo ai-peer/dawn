@@ -99,6 +99,12 @@ struct Unshadow::State {
         for (auto* node : ctx.src->SemNodes().Objects()) {
             Switch(
                 node,  //
+                [&](const sem::GlobalVariable* global) {
+                    if (global->Shadows()) {
+                        ctx.Replace(global->Declaration(), [&, global] { return rename(global); });
+                        made_changes = true;
+                    }
+                },
                 [&](const sem::LocalVariable* local) {
                     if (local->Shadows()) {
                         ctx.Replace(local->Declaration(), [&, local] { return rename(local); });

@@ -314,6 +314,53 @@ fn c() {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(UnshadowTest, LocalShadowsBuiltinFn) {
+    auto* src = R"(
+fn a() {
+  var arrayLength = true;
+}
+
+fn b() {
+  let arrayLength = true;
+}
+
+fn c() {
+  const arrayLength = true;
+}
+)";
+
+    auto* expect = R"(
+fn a() {
+  var arrayLength_1 = true;
+}
+
+fn b() {
+  let arrayLength_2 = true;
+}
+
+fn c() {
+  const arrayLength_3 = true;
+}
+)";
+
+    auto got = Run<Unshadow>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+// TEST_F(UnshadowTest, GlobalVarShadowsBuiltinFn) {
+//     auto* src = R"(
+// var<private> arrayFromLength : i32;
+// )";
+
+//     auto* expect = R"(
+// )";
+
+//     auto got = Run<Unshadow>(src);
+
+//     EXPECT_EQ(expect, str(got));
+// }
+
 TEST_F(UnshadowTest, LocalShadowsGlobalVar) {
     auto* src = R"(
 var<private> a : i32;
