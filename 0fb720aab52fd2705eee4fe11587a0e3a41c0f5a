@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f19d3352_dec9a8f8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-18T18:32:56Z",
+      "side": 1,
+      "message": "Noticed that the Pixel 8 didn\u0027t report an architecture the other day, which I guess is my cue to update this thing. 😊 PTAL!",
+      "revId": "0fb720aab52fd2705eee4fe11587a0e3a41c0f5a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
