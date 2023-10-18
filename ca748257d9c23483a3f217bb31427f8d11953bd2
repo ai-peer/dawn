@@ -87,6 +87,24 @@
       "parentUuid": "98eb712c_581020f5",
       "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "97643056_61d4fda0",
+        "filename": "src/dawn/native/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1002706
+      },
+      "writtenOn": "2023-10-18T07:54:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c098c53d_c883d321",
+      "revId": "ca748257d9c23483a3f217bb31427f8d11953bd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
