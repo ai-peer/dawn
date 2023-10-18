@@ -85,6 +85,23 @@
       "message": "We\u0027re still waiting on various approvals to happen on the Intent to Ship, but we can land this now. The feature is still guarded on the Chromium side and will not be exposed by default yet.",
       "revId": "d98e597d8ca677c40c8565cf3f2bd29daa05b605",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2939a19_8d6630c9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-10-18T02:50:14Z",
+      "side": 1,
+      "message": "Thanks for reviewing! I am submitting this CL to enable f16 by default in Dawn.",
+      "revId": "d98e597d8ca677c40c8565cf3f2bd29daa05b605",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
