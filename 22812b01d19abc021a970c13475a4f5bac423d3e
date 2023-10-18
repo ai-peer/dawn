@@ -39,6 +39,30 @@
       },
       "revId": "22812b01d19abc021a970c13475a4f5bac423d3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9226c8b_67bf8c66",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-18T18:51:09Z",
+      "side": 1,
+      "message": "I don\u0027t see a reason we want these right now - do you?",
+      "parentUuid": "91628903_c8217677",
+      "range": {
+        "startLine": 324,
+        "startChar": 8,
+        "endLine": 327,
+        "endChar": 9
+      },
+      "revId": "22812b01d19abc021a970c13475a4f5bac423d3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
