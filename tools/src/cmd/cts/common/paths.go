@@ -49,7 +49,7 @@ func DefaultExpectationsPath() string {
 	return path
 }
 
-// DefaultCompatExpectationsPath returns the default path to the expectations.txt
+// DefaultCompatExpectationsPath returns the default path to the compat-expectations.txt
 // file. Returns an empty string if the file cannot be found.
 func DefaultCompatExpectationsPath() string {
 	path := filepath.Join(fileutils.DawnRoot(), RelativeCompatExpectationsPath)
