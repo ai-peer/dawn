@@ -63,7 +63,7 @@ func DefaultExpectationsPath() string {
 }
 
 // DefaultCompatExpectationsPath returns the default path to the compat-expectations.txt
-// file. Returns an empty string if the file cannot be found.
+// file for compat. Returns an empty string if the file cannot be found.
 func DefaultCompatExpectationsPath() string {
 	path := filepath.Join(fileutils.DawnRoot(), RelativeCompatExpectationsPath)
 	if _, err := os.Stat(path); err != nil {
