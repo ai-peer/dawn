@@ -63,6 +63,30 @@
       },
       "revId": "22812b01d19abc021a970c13475a4f5bac423d3e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b6123da_c3e9340a",
+        "filename": "src/dawn/native/d3d/BackendD3D.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 327,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-18T18:53:43Z",
+      "side": 1,
+      "message": "Nope. Was just curious",
+      "parentUuid": "b9226c8b_67bf8c66",
+      "range": {
+        "startLine": 324,
+        "startChar": 8,
+        "endLine": 327,
+        "endChar": 9
+      },
+      "revId": "22812b01d19abc021a970c13475a4f5bac423d3e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
