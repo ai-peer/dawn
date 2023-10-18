@@ -4565,12 +4565,30 @@ bool ASTPrinter::EmitVar(const ast::Var* var) {
     return true;
 }
 
+static bool IsStructWithMatrixMember(const core::type::Type* ty) {
+    if (auto* s = ty->As<core::type::Struct>()) {
+        for (auto* m : s->Members()) {
+            if (m->Type()->Is<core::type::Matrix>()) {
+                return true;
+            } else if (m->Type()->Is<core::type::Struct>()) {
+                if (IsStructWithMatrixMember(m->Type())) {
+                    return true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 bool ASTPrinter::EmitLet(const ast::Let* let) {
     auto* sem = builder_.Sem().Get(let);
     auto* type = sem->Type()->UnwrapRef();
 
     auto out = Line();
-    out << "const ";
+    if (!IsStructWithMatrixMember(type)) {
+    // if (!type->Is<sem::Struct>()) {
+        out << "const ";
+    }
     if (!EmitTypeAndName(out, type, core::AddressSpace::kUndefined, core::Access::kUndefined,
                          let->name->symbol.Name())) {
         return false;
