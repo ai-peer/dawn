@@ -333,6 +333,17 @@ ResultOrError<PixelLocalMemberType> FromTintPixelLocalMemberType(
     DAWN_UNREACHABLE();
 }
 
+// The name from Tint inspector StageVariable contains level accessing information.
+// Get the substring of the direct variable name part.
+// e.g. ``struct.variable` -> `variable`
+std::string GetDirectVariableName(const std::string& name) {
+    size_t last_dot_idx = name.find_last_of('.');
+    if (last_dot_idx != std::string::npos) {
+        return name.substr(last_dot_idx + 1);
+    }
+    return name;
+}
+
 ResultOrError<tint::Program> ParseWGSL(const tint::Source::File* file,
                                        OwnedCompilationMessages* outMessages) {
 #if TINT_BUILD_WGSL_READER
@@ -639,6 +650,7 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
         uint32_t totalInterStageShaderComponents = 0;
         for (const auto& outputVar : entryPoint.output_variables) {
             EntryPointMetadata::InterStageVariableInfo variable;
+            variable.name = GetDirectVariableName(outputVar.name);
             DAWN_TRY_ASSIGN(variable.baseType,
                             TintComponentTypeToInterStageComponentType(outputVar.component_type));
             DAWN_TRY_ASSIGN(variable.componentCount, TintCompositionTypeToInterStageComponentCount(
@@ -675,6 +687,7 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
         uint32_t totalInterStageShaderComponents = 0;
         for (const auto& inputVar : entryPoint.input_variables) {
             EntryPointMetadata::InterStageVariableInfo variable;
+            variable.name = GetDirectVariableName(inputVar.name);
             DAWN_TRY_ASSIGN(variable.baseType,
                             TintComponentTypeToInterStageComponentType(inputVar.component_type));
             DAWN_TRY_ASSIGN(variable.componentCount, TintCompositionTypeToInterStageComponentCount(
