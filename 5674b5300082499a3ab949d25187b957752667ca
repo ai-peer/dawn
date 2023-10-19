@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1854f6f7_fcfddc01",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "Having a hard time figuring out why DeviceBase::WaitAny would ever need to handle mixed SystemEventReceivers and non-SystemEventReceivers. Normally I\u0027d expect any given device to either have all SystemEvents or no SystemEvents. Is it because we may have upgraded a future to use a SystemEvent after it was created?",
+      "range": {
+        "startLine": 2136,
+        "startChar": 41,
+        "endLine": 2136,
+        "endChar": 73
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "80d39a69_d5153357",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "ExecutionSerial is 64-bit but this is UINT32_MAX. Use kMaxExecutionSerial?",
+      "range": {
+        "startLine": 2139,
+        "startChar": 39,
+        "endLine": 2139,
+        "endChar": 66
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "62e6db3b_6fb85bc1",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "What guarantees we can do this? It\u0027s not generally possible (on Vulkan).",
+      "range": {
+        "startLine": 2157,
+        "startChar": 79,
+        "endLine": 2158,
+        "endChar": 24
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c2ad86_daa8295d",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "Isn\u0027t this always false?",
+      "range": {
+        "startLine": 2190,
+        "startChar": 12,
+        "endLine": 2190,
+        "endChar": 24
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61959445_635a6225",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "I think I would slightly refactor so the top level is\n\n```\nif (isPoll) {\n  do a poll\n} else {\n  all of this\n}\n```",
+      "range": {
+        "startLine": 2155,
+        "startChar": 0,
+        "endLine": 2206,
+        "endChar": 5
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1afbc646_a45b04b5",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "This would be like, an error from vkWaitForFences? Does that lose the device? (If so, mention that here as an explanation for why we\u0027re marking all futures as ready.)",
+      "range": {
+        "startLine": 81,
+        "startChar": 23,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72f4af75_05373e80",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "```suggestion\n    // Create an event backed by the given queue execution serial.\n```",
+      "range": {
+        "startLine": 199,
+        "startChar": 43,
+        "endLine": 199,
+        "endChar": 45
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d9d58b9_3f369730",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-19T01:32:31Z",
+      "side": 1,
+      "message": "nit: kBeginningOfGPUTime",
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
