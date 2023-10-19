@@ -44,6 +44,7 @@
 #include "dawn/common/IOKitRef.h"
 #endif
 
+#include <string>
 #include <vector>
 
 namespace dawn::native::metal {
@@ -239,14 +240,43 @@ bool IsGPUCounterSupported(id<MTLDevice> device,
     return true;
 }
 
+bool CheckMetalValidationEnabled(InstanceBase* instance) {
+    if (instance->IsBackendValidationEnabled()) {
+        return true;
+    }
+
+    // Sometime validation layer can be enabled eternally via xcode or command line.
+    auto GetEnvVar = [](const char* name) -> std::string {
+        auto envCStr = std::getenv(name);
+        if (envCStr) {
+            return envCStr;
+        }
+
+        return "";
+    };
+
+    if (GetEnvVar("METAL_DEVICE_WRAPPER_TYPE") == "1") {
+        return true;
+    } else if (GetEnvVar("MTL_DEBUG_LAYER") == "1") {
+        return true;
+    }
+
+    return false;
+}
+
 }  // anonymous namespace
 
 // The Metal backend's PhysicalDevice.
+// TODO(dawn:2155): move this PhysicalDevice class to PhysicalDeviceMTL.mm
 
 class PhysicalDevice : public PhysicalDeviceBase {
   public:
-    PhysicalDevice(InstanceBase* instance, NSPRef<id<MTLDevice>> device)
-        : PhysicalDeviceBase(instance, wgpu::BackendType::Metal), mDevice(std::move(device)) {
+    PhysicalDevice(InstanceBase* instance,
+                   NSPRef<id<MTLDevice>> device,
+                   bool metalValidationEnabled)
+        : PhysicalDeviceBase(instance, wgpu::BackendType::Metal),
+          mDevice(std::move(device)),
+          mMetalValidationEnabled(metalValidationEnabled) {
         mName = std::string([[*mDevice name] UTF8String]);
 
         PCIIDs ids;
@@ -272,6 +302,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
         NSString* osVersion = [[NSProcessInfo processInfo] operatingSystemVersionString];
         mDriverDescription = "Metal driver on " + std::string(systemName) + [osVersion UTF8String];
     }
+
+    bool IsMetalValidationEnabled() const { return mMetalValidationEnabled; }
 
     // PhysicalDeviceBase Implementation
     bool SupportsExternalImages() const override {
@@ -846,7 +878,12 @@ class PhysicalDevice : public PhysicalDeviceBase {
     }
 
     NSPRef<id<MTLDevice>> mDevice;
+    const bool mMetalValidationEnabled;
 };
+
+bool IsMetalValidationEnabled(PhysicalDeviceBase* physicalDevice) {
+    return ToBackend(physicalDevice)->IsMetalValidationEnabled();
+}
 
 // Implementation of the Metal backend's BackendConnection
 
@@ -867,11 +904,13 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
         // Devices already discovered.
         return std::vector<Ref<PhysicalDeviceBase>>{mPhysicalDevices};
     }
+
+    bool metalValidationEnabled = CheckMetalValidationEnabled(GetInstance());
     @autoreleasepool {
 #if DAWN_PLATFORM_IS(MACOS)
         for (id<MTLDevice> device in MTLCopyAllDevices()) {
-            Ref<PhysicalDevice> physicalDevice =
-                AcquireRef(new PhysicalDevice(GetInstance(), AcquireNSPRef(device)));
+            Ref<PhysicalDevice> physicalDevice = AcquireRef(
+                new PhysicalDevice(GetInstance(), AcquireNSPRef(device), metalValidationEnabled));
             if (!GetInstance()->ConsumedErrorAndWarnOnce(physicalDevice->Initialize())) {
                 mPhysicalDevices.push_back(std::move(physicalDevice));
             }
@@ -880,8 +919,8 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
 
         // iOS only has a single device so MTLCopyAllDevices doesn't exist there.
 #if DAWN_PLATFORM_IS(IOS)
-        Ref<PhysicalDevice> physicalDevice = AcquireRef(
-            new PhysicalDevice(GetInstance(), AcquireNSPRef(MTLCreateSystemDefaultDevice())));
+        Ref<PhysicalDevice> physicalDevice = AcquireRef(new PhysicalDevice(
+            GetInstance(), AcquireNSPRef(MTLCreateSystemDefaultDevice()), metalValidationEnabled));
         if (!GetInstance()->ConsumedErrorAndWarnOnce(physicalDevice->Initialize())) {
             mPhysicalDevices.push_back(std::move(physicalDevice));
         }

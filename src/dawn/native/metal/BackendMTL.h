@@ -30,7 +30,9 @@
 
 #include <vector>
 
+#include "dawn/common/NSRef.h"
 #include "dawn/native/BackendConnection.h"
+#include "dawn/native/PhysicalDevice.h"
 
 namespace dawn::native::metal {
 
@@ -47,6 +49,8 @@ class Backend : public BackendConnection {
   private:
     std::vector<Ref<PhysicalDeviceBase>> mPhysicalDevices;
 };
+
+bool IsMetalValidationEnabled(PhysicalDeviceBase* physicalDevice);
 
 }  // namespace dawn::native::metal
 
