@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ffd9f56_ffaf9f28",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-19T21:26:39Z",
+      "side": 1,
+      "message": "Maybe we could cache this on the PhysicalDevice when we create the Metal devices?",
+      "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ed952d0_139fa920",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-19T21:26:39Z",
+      "side": 1,
+      "message": "We have GetEnviornmentVariable in SystemUtils.h",
+      "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce4e2f49_bc7ade8b",
+        "filename": "third_party/vulkan-deps",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-19T21:26:39Z",
+      "side": 1,
+      "message": "These should be removed, it\u0027s an artifact of the submodules change.",
+      "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
