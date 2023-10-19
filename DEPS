@@ -34,6 +34,15 @@ vars = {
 
   # Fetch clang-tidy into the same bin/ directory as our clang binary.
   'checkout_clang_tidy': False,
+  # Fetch //tools/rust, which does not exist yet.
+  'checkout_tools_rust': False,
+  # Fetch the rust toolchain.
+  #
+# Use a custom_vars section to enable it:
+  # "custom_vars": {
+  #   "checkout_rust": True,
+  # }
+  'checkout_rust': False,
 
   # Fetch configuration files required for the 'use_remoteexec' gn arg
   'download_remoteexec_cfg': False,
@@ -104,6 +113,10 @@ deps = {
   'tools/clang': {
     'url': '{chromium_git}/chromium/src/tools/clang@8f75392b4aa947fb55c7c206b36804229595e4da',
     'condition': 'dawn_standalone',
+  },
+  'tools/rust': {
+    'url': '{chromium_git}/chromium/src/tools/rust@8f75392b4aa947fb55c7c206b36804229595e4da',
+    'condition': 'dawn_standalone and checkout_tools_rust and checkout_rust',
   },
   'tools/clang/dsymutil': {
     'packages': [{
@@ -331,6 +344,12 @@ hooks = [
     'condition': 'dawn_standalone and checkout_clang_tidy',
     'action': ['python3', 'tools/clang/scripts/update.py',
                '--package=clang-tidy'],
+  },
+  {
+    'name': 'rust',
+    'pattern': '.',
+    'action': ['python3', 'tools/rust/update_rust.py'],
+    'condition': 'dawn_standalone and checkout_rust',
   },
   {
     # Pull rc binaries using checked-in hashes.
