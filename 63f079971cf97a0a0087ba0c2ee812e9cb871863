@@ -22,6 +22,30 @@
       },
       "revId": "63f079971cf97a0a0087ba0c2ee812e9cb871863",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9301590_61a05065",
+        "filename": "src/dawn/gpu_info.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-19T16:16:32Z",
+      "side": 1,
+      "message": "Done. Honestly I\u0027d forgotten that softpipe exists. It doesn\u0027t show up a single time in gpuinfo.org, at least.",
+      "parentUuid": "e4799bd4_37dde46c",
+      "range": {
+        "startLine": 180,
+        "startChar": 24,
+        "endLine": 180,
+        "endChar": 30
+      },
+      "revId": "63f079971cf97a0a0087ba0c2ee812e9cb871863",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
