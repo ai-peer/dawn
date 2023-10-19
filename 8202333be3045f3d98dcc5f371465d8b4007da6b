@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd5b5704_c55f9ba9",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-19T16:13:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "09052d3f_7a3b698e",
+      "range": {
+        "startLine": 73,
+        "startChar": 75,
+        "endLine": 73,
+        "endChar": 79
+      },
+      "revId": "8202333be3045f3d98dcc5f371465d8b4007da6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "829eb9e2_d37b6914",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-19T14:45:25Z",
       "side": 1,
       "message": "Looks like this was a typo, and this should have been `c.flags.slow`",
+      "range": {
+        "startLine": 106,
+        "startChar": 24,
+        "endLine": 106,
+        "endChar": 47
+      },
+      "revId": "8202333be3045f3d98dcc5f371465d8b4007da6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d4ca36c_b9edfc26",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-19T16:13:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "829eb9e2_d37b6914",
       "range": {
         "startLine": 106,
         "startChar": 24,
