@@ -423,33 +423,6 @@ crbug.com/dawn/2123 [ angle-opengl ] webgpu:api,validation,capability_checks,lim
 crbug.com/dawn/2123 [ angle-opengl ] webgpu:api,validation,capability_checks,limits,maxStorageBufferBindingSize:createBindGroup,at_over:limitTest="atMaximum";testValueName="atLimit";bufferPart="wholeBuffer" [ Failure ]
 crbug.com/dawn/2123 [ angle-opengl ] webgpu:api,validation,capability_checks,limits,maxStorageBufferBindingSize:createBindGroup,at_over:limitTest="atMaximum";testValueName="overLimit";bufferPart="wholeBuffer" [ Failure ]
 
-# Robustness failures
-# webgpu:shader,execution,robust_access:linear_memory:.*;access="read"
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="array";shadowingMode="function-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="array";shadowingMode="module-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="array";shadowingMode="none";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="matrix";shadowingMode="function-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="matrix";shadowingMode="module-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="matrix";shadowingMode="none";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="vector";shadowingMode="function-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="vector";shadowingMode="module-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="function";access="read";containerType="vector";shadowingMode="none";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="array";shadowingMode="function-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="array";shadowingMode="module-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="array";shadowingMode="none";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="matrix";shadowingMode="function-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="matrix";shadowingMode="module-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="matrix";shadowingMode="none";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="vector";shadowingMode="function-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="vector";shadowingMode="module-scope";isAtomic=false [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="read";containerType="vector";shadowingMode="none";isAtomic=false [ Failure ]
-
-# Robustness failures
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="private";access="write"* [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="storage"* [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="uniform"* [ Failure ]
-crbug.com/dawn/2124 [ angle-opengl ] webgpu:shader,execution,robust_access:linear_memory:addressSpace="workgroup"* [ Failure ]
-
 # Zero init issues, but only with batch__=9 (NVidia driver bug)
 crbug.com/dawn/2125 [ angle-opengl ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="function";workgroupSize=[1,1,1];batch__=9 [ Failure ]
 crbug.com/dawn/2125 [ angle-opengl ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="private";workgroupSize=[1,1,1];batch__=9 [ Failure ]
