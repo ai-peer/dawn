@@ -48,10 +48,21 @@ func init() {
 	common.Register(&cmd{})
 }
 
+type arrayFlags []string
+
+func (i *arrayFlags) String() string {
+	return strings.Join((*i), " ")
+}
+
+func (i *arrayFlags) Set(value string) error {
+	*i = append(*i, value)
+	return nil
+}
+
 type cmd struct {
 	flags struct {
 		results      common.ResultSource
-		expectations string
+		expectations arrayFlags
 		auth         authcli.Flags
 	}
 }
@@ -65,10 +76,9 @@ func (cmd) Desc() string {
 }
 
 func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, error) {
-	defaultExpectations := common.DefaultExpectationsPath()
 	c.flags.results.RegisterFlags(cfg)
 	c.flags.auth.Register(flag.CommandLine, auth.DefaultAuthOptions())
-	flag.StringVar(&c.flags.expectations, "expectations", defaultExpectations, "path to CTS expectations file to update")
+	flag.Var(&c.flags.expectations, "expectations", "path to CTS expectations file(s) to update")
 	return nil, nil
 }
 
@@ -86,6 +96,10 @@ func loadTestList(path string) ([]query.Query, error) {
 }
 
 func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
+	if len(c.flags.expectations) == 0 {
+		c.flags.expectations = common.DefaultExpectationsPaths()
+	}
+
 	// Validate command line arguments
 	auth, err := c.flags.auth.Options()
 	if err != nil {
@@ -94,20 +108,15 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 
 	// Fetch the results
 	log.Println("fetching results...")
-	results, err := c.flags.results.GetResults(ctx, cfg, auth)
+	resultsByName, err := c.flags.results.GetResults(ctx, cfg, auth)
 	if err != nil {
 		return err
 	}
 
 	// Merge to remove duplicates
 	log.Println("removing duplicate results...")
-	results = result.Merge(results)
-
-	// Load the expectations file
-	log.Println("loading expectations...")
-	ex, err := expectations.Load(c.flags.expectations)
-	if err != nil {
-		return err
+	for name := range resultsByName {
+		resultsByName[name] = result.Merge(resultsByName[name])
 	}
 
 	log.Println("loading test list...")
@@ -116,22 +125,40 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 		return err
 	}
 
-	log.Println("validating...")
-	if diag := ex.Validate(); diag.NumErrors() > 0 {
-		diag.Print(os.Stdout, c.flags.expectations)
-		return fmt.Errorf("validation failed")
+	for _, expectationsFilename := range c.flags.expectations {
+		// Load the expectations file
+		log.Printf("loading expectations %s...\n", expectationsFilename)
+		ex, err := expectations.Load(expectationsFilename)
+		if err != nil {
+			return err
+		}
+
+		log.Printf("validating %s...\n", expectationsFilename)
+		if diag := ex.Validate(); diag.NumErrors() > 0 {
+			diag.Print(os.Stdout, expectationsFilename)
+			return fmt.Errorf("validation failed")
+		}
+
+		// Update the expectations file with the results
+		log.Printf("updating expectations %s...\n", expectationsFilename)
+		// Not clear what to do here
+		name := "core"
+		if strings.Contains(expectationsFilename, "compat") {
+			name = "compat"
+		}
+		diag, err := ex.Update(resultsByName[name], testlist)
+		if err != nil {
+			return err
+		}
+
+		// Print any diagnostics
+		diag.Print(os.Stdout, expectationsFilename)
+
+		// Save the updated expectations file
+		err = ex.Save(expectationsFilename)
+		if err != nil {
+			break
+		}
 	}
-
-	// Update the expectations file with the results
-	log.Println("updating expectations...")
-	diag, err := ex.Update(results, testlist)
-	if err != nil {
-		return err
-	}
-
-	// Print any diagnostics
-	diag.Print(os.Stdout, c.flags.expectations)
-
-	// Save the updated expectations file
-	return ex.Save(c.flags.expectations)
+	return err
 }

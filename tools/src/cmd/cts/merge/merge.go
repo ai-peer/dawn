@@ -58,7 +58,7 @@ func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, e
 
 func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 	// Load each of the results files and merge together
-	var results result.List
+	var results result.Results
 	for _, path := range flag.Args() {
 		// Load results
 		r, err := result.Load(path)
@@ -66,7 +66,9 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 			return fmt.Errorf("while reading '%v': %w", path, err)
 		}
 		// Combine and merge
-		results = result.Merge(results, r)
+		for _, test := range cfg.Tests {
+			results[test.Name] = result.Merge(results[test.Name], r[test.Name])
+		}
 	}
 
 	// Open output file
