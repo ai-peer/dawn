@@ -29,6 +29,8 @@
 
 #include "dawn/common/Assert.h"
 #include "dawn/native/CommandBuffer.h"
+#include "dawn/native/Instance.h"
+#include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/Pipeline.h"
 #include "dawn/native/ShaderModule.h"
 

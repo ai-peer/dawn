@@ -43,6 +43,7 @@ namespace dawn::native {
 struct BeginRenderPassCmd;
 struct ProgrammableStage;
 struct EntryPointMetadata;
+class PhysicalDeviceBase;
 enum class SingleShaderStage;
 }  // namespace dawn::native
 
