@@ -30,6 +30,7 @@
 #include "dawn/native/Adapter.h"
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/metal/BackendMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
 #include "dawn/native/metal/PipelineLayoutMTL.h"
 #include "dawn/native/metal/ShaderModuleMTL.h"
@@ -538,13 +539,13 @@ NSRef<MTLVertexDescriptor> RenderPipeline::MakeVertexDesc() const {
 void RenderPipeline::InitializeAsync(Ref<RenderPipelineBase> renderPipeline,
                                      WGPUCreateRenderPipelineAsyncCallback callback,
                                      void* userdata) {
-    PhysicalDeviceBase* physicalDevice = renderPipeline->GetDevice()->GetPhysicalDevice();
+    PhysicalDevice* physicalDevice = ToBackend(renderPipeline->GetDevice()->GetPhysicalDevice());
     std::unique_ptr<CreateRenderPipelineAsyncTask> asyncTask =
         std::make_unique<CreateRenderPipelineAsyncTask>(std::move(renderPipeline), callback,
                                                         userdata);
     // Workaround a crash where the validation layers on AMD crash with partition alloc.
     // See crbug.com/dawn/1200.
-    if (physicalDevice->GetInstance()->IsBackendValidationEnabled() &&
+    if (physicalDevice->IsMetalValidationLayerEnabled() &&
         gpu_info::IsAMD(physicalDevice->GetVendorId())) {
         asyncTask->Run();
         return;
