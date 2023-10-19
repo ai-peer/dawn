@@ -16,6 +16,23 @@
       "message": "PTAL. Updated copyrights and lost +2.",
       "revId": "31b73e2998f42c20cbe9f4ab35c350d70f0fb8c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51c6f0a_82df3013",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-19T13:40:20Z",
+      "side": 1,
+      "message": "@rharrison, can you stamp this? I lost my +2 when fixing up the copyright messages during a rebase.",
+      "revId": "31b73e2998f42c20cbe9f4ab35c350d70f0fb8c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
