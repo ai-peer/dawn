@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a0cb020_8a233a64",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-19T02:25:21Z",
+      "side": 1,
+      "message": "yea, the plan is to sort of lazily create them. especially for Vulkan if we use the post task hook to convert fences into OS events - we don\u0027t want to do the post task all the time",
+      "parentUuid": "1854f6f7_fcfddc01",
+      "range": {
+        "startLine": 2136,
+        "startChar": 41,
+        "endLine": 2136,
+        "endChar": 73
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "80d39a69_d5153357",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 6
@@ -72,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e85c15bd_a6b1d1a4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-19T02:25:21Z",
+      "side": 1,
+      "message": "everywhere except Vulkan pretty much",
+      "parentUuid": "62e6db3b_6fb85bc1",
+      "range": {
+        "startLine": 2157,
+        "startChar": 79,
+        "endLine": 2158,
+        "endChar": 24
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c8c2ad86_daa8295d",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 6
@@ -95,6 +143,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d09d433e_1c02156b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-19T02:25:21Z",
+      "side": 1,
+      "message": "whoops, yes",
+      "parentUuid": "c8c2ad86_daa8295d",
+      "range": {
+        "startLine": 2190,
+        "startChar": 12,
+        "endLine": 2190,
+        "endChar": 24
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "61959445_635a6225",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 6
@@ -106,6 +178,30 @@
       "writtenOn": "2023-10-19T01:32:31Z",
       "side": 1,
       "message": "I think I would slightly refactor so the top level is\n\n```\nif (isPoll) {\n  do a poll\n} else {\n  all of this\n}\n```",
+      "range": {
+        "startLine": 2155,
+        "startChar": 0,
+        "endLine": 2206,
+        "endChar": 5
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1501ebee_89796348",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-19T02:25:21Z",
+      "side": 1,
+      "message": "so we need to have a poll after the wait - that\u0027s because we don\u0027t always know which ones completed after the wait. vkWaitForFences tells you if it finished but not which fences completed\n\nalso, because we\u0027re doing the thing where we only wait for the first queue serial, we don\u0027t know if the other serials passed and we need to poll them",
+      "parentUuid": "61959445_635a6225",
       "range": {
         "startLine": 2155,
         "startChar": 0,
