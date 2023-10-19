@@ -43,6 +43,7 @@ namespace dawn::native {
 struct BeginRenderPassCmd;
 struct ProgrammableStage;
 struct EntryPointMetadata;
+class PhysicalDeviceBase;
 enum class SingleShaderStage;
 }  // namespace dawn::native
 
@@ -134,6 +135,8 @@ bool SupportCounterSamplingAtCommandBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0));
 bool SupportCounterSamplingAtStageBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0));
+
+bool IsMetalValidationLayerEnabled(PhysicalDeviceBase* physicalDevice);
 
 }  // namespace dawn::native::metal
 

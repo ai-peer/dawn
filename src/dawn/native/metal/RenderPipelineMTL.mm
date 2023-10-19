@@ -544,7 +544,7 @@ void RenderPipeline::InitializeAsync(Ref<RenderPipelineBase> renderPipeline,
                                                         userdata);
     // Workaround a crash where the validation layers on AMD crash with partition alloc.
     // See crbug.com/dawn/1200.
-    if (physicalDevice->GetInstance()->IsBackendValidationEnabled() &&
+    if (IsMetalValidationLayerEnabled(physicalDevice) &&
         gpu_info::IsAMD(physicalDevice->GetVendorId())) {
         asyncTask->Run();
         return;

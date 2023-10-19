@@ -27,8 +27,13 @@
 
 #include "dawn/native/metal/UtilsMetal.h"
 
+#include <cstdlib>
+#include <string>
+
 #include "dawn/common/Assert.h"
 #include "dawn/native/CommandBuffer.h"
+#include "dawn/native/Instance.h"
+#include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/Pipeline.h"
 #include "dawn/native/ShaderModule.h"
 
@@ -528,6 +533,30 @@ DAWN_NOINLINE bool SupportCounterSamplingAtCommandBoundary(id<MTLDevice> device)
 DAWN_NOINLINE bool SupportCounterSamplingAtStageBoundary(id<MTLDevice> device)
     API_AVAILABLE(macos(11.0), ios(14.0)) {
     return [device supportsCounterSampling:MTLCounterSamplingPointAtStageBoundary];
+}
+
+bool IsMetalValidationLayerEnabled(PhysicalDeviceBase* physicalDevice) {
+    if (physicalDevice->GetInstance()->IsBackendValidationEnabled()) {
+        return true;
+    }
+
+    // Sometime validation layer can be enabled eternally via xcode or command line.
+    auto GetEnvVar = [](const char* name) -> std::string {
+        auto envCStr = std::getenv(name);
+        if (envCStr) {
+            return envCStr;
+        }
+
+        return "";
+    };
+
+    if (GetEnvVar("METAL_DEVICE_WRAPPER_TYPE") == "1") {
+        return true;
+    } else if (GetEnvVar("MTL_DEBUG_LAYER") == "1") {
+        return true;
+    }
+
+    return false;
 }
 
 }  // namespace dawn::native::metal
