@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99f650cf_1a6ce20a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-19T20:46:20Z",
+      "side": 1,
+      "message": "Not for review yet, but this will compile `rust_build_tests` once the steps in the description are done.",
+      "revId": "e9e532526f6359f0ceb0b9d462d27b16aa156d0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
