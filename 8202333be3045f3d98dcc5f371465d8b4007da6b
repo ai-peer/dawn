@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "209fe3e1_22043ba5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-19T14:45:25Z",
+      "side": 1,
+      "message": "+2 with a request to fix a prior-existing bug",
+      "revId": "8202333be3045f3d98dcc5f371465d8b4007da6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09052d3f_7a3b698e",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-19T14:45:25Z",
+      "side": 1,
+      "message": "Maybe update to hint it can take more than one? `file(s)`",
+      "range": {
+        "startLine": 73,
+        "startChar": 75,
+        "endLine": 73,
+        "endChar": 79
+      },
+      "revId": "8202333be3045f3d98dcc5f371465d8b4007da6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "829eb9e2_d37b6914",
+        "filename": "tools/src/cmd/cts/validate/validate.go",
+        "patchSetId": 4
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-19T14:45:25Z",
+      "side": 1,
+      "message": "Looks like this was a typo, and this should have been `c.flags.slow`",
+      "range": {
+        "startLine": 106,
+        "startChar": 24,
+        "endLine": 106,
+        "endChar": 47
+      },
+      "revId": "8202333be3045f3d98dcc5f371465d8b4007da6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
