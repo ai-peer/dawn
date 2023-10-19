@@ -605,9 +605,6 @@ fn fragmentMain(@builtin(position) position : vec4<f32>) -> @location(0) vec4f {
 // the BindingRemapper, causing an intermediate AST to be invalid (and fail the overall
 // compilation).
 TEST_P(ShaderTests, FirstIndexOffsetRegisterConflictInHLSLTransforms) {
-    // TODO(crbug.com/dawn/658): Crashes on bots because there are two entrypoints in the shader.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     const char* shader = R"(
 // Dumped WGSL:
 
@@ -1181,9 +1178,6 @@ TEST_P(ShaderTests, CheckUsageOf_chromium_disable_uniformity_analysis) {
 // Test that it is not possible to override the builtins in a way that breaks the robustness
 // transform.
 TEST_P(ShaderTests, ShaderOverridingRobustnessBuiltins) {
-    // TODO(dawn:1585): The OpenGL backend doesn't use the Renamer tint transform yet.
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() || IsOpenGLES());
-
     // Make the test compute pipeline.
     wgpu::ComputePipelineDescriptor cDesc;
     cDesc.compute.module = utils::CreateShaderModule(device, R"(
