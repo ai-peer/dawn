@@ -42,7 +42,9 @@ import (
 // tools/src/cmd/cts/config.json.
 type Config struct {
 	// Test holds configuration data for test results.
-	Test struct {
+	Tests []struct {
+		// Name used to refer to tests
+		Name string
 		// The ResultDB string prefix for CTS tests.
 		Prefixes []string
 	}
@@ -84,7 +86,8 @@ type GitProject struct {
 
 // HttpsURL returns the https URL of the project
 func (g GitProject) HttpsURL() string {
-	return fmt.Sprintf("https://%v/%v", g.Host, g.Project)
+	//return fmt.Sprintf("https://%v/%v", g.Host, g.Project)
+	return "/Users/gman/src/gpuweb/cts"
 }
 
 // LoadConfig loads the JSON config file at the given path
