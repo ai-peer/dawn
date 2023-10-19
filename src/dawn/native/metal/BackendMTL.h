@@ -30,7 +30,11 @@
 
 #include <vector>
 
+#include "dawn/common/NSRef.h"
 #include "dawn/native/BackendConnection.h"
+#include "dawn/native/PhysicalDevice.h"
+
+#import <Metal/Metal.h>
 
 namespace dawn::native::metal {
 
@@ -46,6 +50,58 @@ class Backend : public BackendConnection {
 
   private:
     std::vector<Ref<PhysicalDeviceBase>> mPhysicalDevices;
+};
+
+// TODO(dawn:2155): move this PhysicalDevice class to PhysicalDeviceMTL.h
+class PhysicalDevice : public PhysicalDeviceBase {
+  public:
+    PhysicalDevice(InstanceBase* instance,
+                   NSPRef<id<MTLDevice>> device,
+                   bool metalValidationEnabled);
+
+    // PhysicalDeviceBase Implementation
+    bool SupportsExternalImages() const override;
+
+    bool SupportsFeatureLevel(FeatureLevel) const override;
+
+    bool IsMetalValidationLayerEnabled() const { return mMetalValidationLayerEnabled; }
+
+  private:
+    ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(AdapterBase* adapter,
+                                                    const DeviceDescriptor* descriptor,
+                                                    const TogglesState& deviceToggles) override;
+
+    void SetupBackendAdapterToggles(TogglesState* adapterToggles) const override;
+
+    void SetupBackendDeviceToggles(TogglesState* deviceToggles) const override;
+
+    MaybeError InitializeImpl() override;
+
+    void InitializeSupportedFeaturesImpl() override;
+
+    void InitializeVendorArchitectureImpl() override;
+
+    enum class MTLGPUFamily {
+        Apple1,
+        Apple2,
+        Apple3,
+        Apple4,
+        Apple5,
+        Apple6,
+        Apple7,
+        Mac1,
+        Mac2,
+    };
+
+    ResultOrError<MTLGPUFamily> GetMTLGPUFamily() const;
+
+    MaybeError InitializeSupportedLimitsImpl(CombinedLimits* limits) override;
+
+    MaybeError ValidateFeatureSupportedWithTogglesImpl(wgpu::FeatureName feature,
+                                                       const TogglesState& toggles) const override;
+
+    NSPRef<id<MTLDevice>> mDevice;
+    const bool mMetalValidationLayerEnabled;
 };
 
 }  // namespace dawn::native::metal

@@ -31,6 +31,7 @@
 #include "dawn/native/Adapter.h"
 #include "dawn/native/CreatePipelineAsyncTask.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/metal/BackendMTL.h"
 #include "dawn/native/metal/DeviceMTL.h"
 #include "dawn/native/metal/ShaderModuleMTL.h"
 #include "dawn/native/metal/UtilsMetal.h"
@@ -110,13 +111,13 @@ bool ComputePipeline::RequiresStorageBufferLength() const {
 void ComputePipeline::InitializeAsync(Ref<ComputePipelineBase> computePipeline,
                                       WGPUCreateComputePipelineAsyncCallback callback,
                                       void* userdata) {
-    PhysicalDeviceBase* physicalDevice = computePipeline->GetDevice()->GetPhysicalDevice();
+    PhysicalDevice* physicalDevice = ToBackend(computePipeline->GetDevice()->GetPhysicalDevice());
     std::unique_ptr<CreateComputePipelineAsyncTask> asyncTask =
         std::make_unique<CreateComputePipelineAsyncTask>(std::move(computePipeline), callback,
                                                          userdata);
     // Workaround a crash where the validation layers on AMD crash with partition alloc.
     // See crbug.com/dawn/1200.
-    if (physicalDevice->GetInstance()->IsBackendValidationEnabled() &&
+    if (physicalDevice->IsMetalValidationLayerEnabled() &&
         gpu_info::IsAMD(physicalDevice->GetVendorId())) {
         asyncTask->Run();
         return;
