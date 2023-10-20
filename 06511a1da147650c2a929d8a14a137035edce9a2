@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "06511a1da147650c2a929d8a14a137035edce9a2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2cff7c5_162ef0e2",
+        "filename": "src/dawn/native/Limits.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-20T20:42:34Z",
+      "side": 1,
+      "message": "I assume this is because other backends allow 12? It\u0027s a bit weird because in the `Constants.h` we used 10 there?",
+      "range": {
+        "startLine": 83,
+        "startChar": 91,
+        "endLine": 83,
+        "endChar": 93
+      },
+      "revId": "06511a1da147650c2a929d8a14a137035edce9a2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
