@@ -70,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80a0934f_9a9bfb6f",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4c1baa21_b8cf2ef1",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cff7e98a_1c492546",
@@ -87,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "599fdbbc_51446e7b",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cff7e98a_1c492546",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "371d4305_10e52833",
@@ -100,6 +136,24 @@
       "writtenOn": "2023-09-25T16:37:37Z",
       "side": 1,
       "message": "[1]",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eacfd528_656ea29d",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "371d4305_10e52833",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +193,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d739580_f987a602",
+        "filename": "src/dawn/native/PassResourceUsage.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58adcead_aa2d25e5",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b436133_f73e9f97",
@@ -170,6 +242,24 @@
       "side": 1,
       "message": "I initially used a `None` default value, but there were changes to `AddBindGroup` to enable write-only storage textures which didn\u0027t cause git conflicts or compilation errors but would cause synchronization issues (which might not be caught in tests since they\u0027re cache/timing issues). I caught them when rebasing (due to git conflicts in `TextureVk.cpp`) but removed the default value to be safe, in case anyone else is writing code using the old API. I wouldn\u0027t mind adding it back for convenience but we need to be careful when merging (and when reviewing any changes after the merge).\n\nI considered adding an assert when calling these methods with a usage that implies a shader stage but `shaderStages` is `None`. But I don\u0027t think that\u0027s valid as users can create bind groups with `visibility\u003d0` (pointless but legal).",
       "parentUuid": "5b436133_f73e9f97",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d756c9ab_f95da4d8",
+        "filename": "src/dawn/native/PassResourceUsageTracker.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ed832a0_046a869c",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -211,6 +301,30 @@
       "side": 1,
       "message": "I don\u0027t mind that, will do.",
       "parentUuid": "a52a8b83_144e514b",
+      "range": {
+        "startLine": 40,
+        "startChar": 0,
+        "endLine": 45,
+        "endChar": 0
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8771ab7c_378b20fd",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72af6b72_5a342f8a",
       "range": {
         "startLine": 40,
         "startChar": 0,
@@ -328,6 +442,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06b4ec9c_7df9476b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "I think corentin is referring only to the `shaderStage \u0026\u003d ~wgpu::ShaderStage::Fragment` line.\n\nAfter adding Fragment to `mReadShaderStages`, we don\u0027t need to remove it from `shaderStage`\n\nif we don\u0027t remove it, the result of `IsSubset(shaderStage, mReadShaderStages)` will still be the same\n\nif\nIsSubset(shaderStage, mReadShaderStages) is true:\nIsSubset(shaderStage \u0026 ~Fragment, mReadShaderStages | Fragment)\nwill always be true as well because we are shrinking one set and growing the other set.\n\nif\nIsSubset(shaderStage, mReadShaderStages) is false:\nIsSubset(shaderStage \u0026 ~Fragment, mReadShaderStages)\nwill false as well. Removing fragment won\u0027t make it fail to be a subset because mReadShaderStages definitely has Fragment in it (we just added it).",
+      "parentUuid": "96394a77_8f75210f",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2132bde4_f1df2c04",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 2
@@ -431,6 +563,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa831760_d5481aae",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f714c403_fafb4258",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "81ddac9d_ccb23733",
@@ -478,6 +628,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed729f7d_8fe3de3e",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c2dab64d_822e9f1b",
+      "range": {
+        "startLine": 201,
+        "startChar": 9,
+        "endLine": 201,
+        "endChar": 27
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c4379c7_c384a02c",
@@ -513,6 +687,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7b0d259_f8473491",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bca8d2a7_142eccb0",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0c8335c3_9aea19f9",
@@ -544,6 +736,24 @@
       "side": 1,
       "message": "That will make things a bit shorter. Will do.",
       "parentUuid": "0c8335c3_9aea19f9",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce6cea0e_250abda7",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 237,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b1a294c3_4a41daeb",
       "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -585,6 +795,30 @@
       "side": 1,
       "message": "Sure.",
       "parentUuid": "c91401bd_a8e30321",
+      "range": {
+        "startLine": 129,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 5
+      },
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13a856d6_7a8c6306",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ca42dc8_06feb94c",
       "range": {
         "startLine": 129,
         "startChar": 0,

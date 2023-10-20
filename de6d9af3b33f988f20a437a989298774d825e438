@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "692f792a_7b9d8864",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba51e09_639715d9",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "nit: prefer to pass mutable args by pointer",
+      "range": {
+        "startLine": 197,
+        "startChar": 60,
+        "endLine": 197,
+        "endChar": 94
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e401baf_77e22314",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "ditto: mutable args by pointer",
+      "range": {
+        "startLine": 202,
+        "startChar": 33,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f65174c4_d1945338",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "```suggestion\n                                 const std::vector\u003cVkImageMemoryBarrier\u003e\u0026 imageBarriers) {\n```",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 84
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "772f63f7_8ae3b1cf",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T23:48:55Z",
+      "side": 1,
+      "message": "```suggestion\n            [\u0026](const SubresourceRange\u0026 range, const TextureSyncInfo\u0026 syncInfo) -\u003e MaybeError {\n```",
+      "range": {
+        "startLine": 223,
+        "startChar": 47,
+        "endLine": 223,
+        "endChar": 62
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
