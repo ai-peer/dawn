@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba4685c9_45ff7456",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-20T20:30:45Z",
+      "side": 1,
+      "message": "This change depends on this upstream one landing first:\nhttps://github.com/microsoft/DirectXShaderCompiler/pull/5903",
+      "revId": "b5f47d96d3a545815aaa36142d14410e3d58bcbc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
