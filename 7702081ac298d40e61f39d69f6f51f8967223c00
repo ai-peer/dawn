@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911eb31c_28abdbcc",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-20T20:08:34Z",
+      "side": 0,
+      "message": "I think it\u0027s odd to remove half of the extension but still leave the other half. It would make more sense to me to either remove it entirely, or implement these missing functions (even if they just throw validation errors because they\u0027re not implemented).",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
