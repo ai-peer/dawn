@@ -33,6 +33,24 @@
       "message": "Did you check to see if there are any GLES end-to-end tests that can be un-`SKIP`ed?",
       "revId": "ae1213c8a1659e0843902445428bf87973b885e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f428c9f_6e7ac97e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-20T16:51:55Z",
+      "side": 1,
+      "message": "Good call. I went through IsOpenGL suppression but didn\u0027t find new ones related to 1D texture.",
+      "parentUuid": "a071636b_1bbe5708",
+      "revId": "ae1213c8a1659e0843902445428bf87973b885e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
