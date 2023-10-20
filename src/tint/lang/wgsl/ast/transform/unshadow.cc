@@ -87,11 +87,8 @@ struct Unshadow::State {
                 },
                 [&](const Parameter*) {  //
                     return b.Param(source, symbol, type, attributes);
-                },
-                [&](Default) {
-                    TINT_ICE() << "unexpected variable type: " << decl->TypeInfo().name;
-                    return nullptr;
-                });
+                },  //
+                TINT_SWITCH_MUST_MATCH_CASE);
         };
 
         bool made_changes = false;
