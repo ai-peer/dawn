@@ -27,7 +27,9 @@
 
 import("../../../scripts/dawn_overrides_with_defaults.gni")
 
-import("//build/config/win/visual_studio_version.gni")
+if (is_win) {
+  import("//build/config/win/visual_studio_version.gni")
+}
 import("${dawn_root}/scripts/dawn_features.gni")
 
 import("build/add_hlsl_hctgen.gni")
@@ -399,11 +401,21 @@ cmake_configure_file("Disassemblers-def") {
 cmake_configure_file("SharedLibAffix-h") {
   input = "$dawn_dxc_dir/lib/DxcSupport/SharedLibAffix.inc"
   output = "$target_gen_dir/include/dxc/Support/SharedLibAffix.h"
+  shared_library_prefix = ""
+  if (is_linux || is_mac) {
+    shared_library_prefix = "lib"
+  }
+  shared_library_suffix = ""
+  if (is_win) {
+    shared_library_suffix = ".dll"
+  } else if (is_mac) {
+    shared_library_suffix = ".dylib"
+  } else {
+    shared_library_suffix = ".so"
+  }
   values = [
-    "CMAKE_SHARED_LIBRARY_PREFIX=",
-
-    # TODO(amaiorano): .dll for Win32, .so for Linux, .dylib for MacOS?
-    "CMAKE_SHARED_LIBRARY_SUFFIX=.dll",
+    "CMAKE_SHARED_LIBRARY_PREFIX=${shared_library_prefix}",
+    "CMAKE_SHARED_LIBRARY_SUFFIX=${shared_library_suffix}",
   ]
 }
 
@@ -2322,9 +2334,11 @@ executable("dxc") {
 
   data_deps = [ ":dxcompiler" ]
 
-  include_dirs = [
-    "$visual_studio_path/DIA SDK/include",  # Required for msvc builds
-  ]
+  if (is_win) {
+    include_dirs = [
+      "$visual_studio_path/DIA SDK/include",  # Required for msvc builds
+    ]
+  }
 
   sources = [
     "$dawn_dxc_dir/tools/clang/tools/dxc/dxcmain.cpp",
