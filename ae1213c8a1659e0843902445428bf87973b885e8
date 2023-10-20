@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33c141bf_0e3d5825",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-20T13:40:15Z",
+      "side": 1,
+      "message": "LGTM.\n\nCan\u0027t remember why I added that, but great to see removing it fixes things. 😊",
+      "revId": "ae1213c8a1659e0843902445428bf87973b885e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
