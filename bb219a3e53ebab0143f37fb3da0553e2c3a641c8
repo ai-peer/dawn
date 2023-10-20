@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3e2c46d_9c052efc",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-20T11:22:39Z",
+      "side": 1,
+      "message": "Ok done. Saw it. There are two SystemUtils.h. One in dawn/utils/. One in dawn/common/",
+      "parentUuid": "c7962727_ea7f3688",
+      "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce4e2f49_bc7ade8b",
