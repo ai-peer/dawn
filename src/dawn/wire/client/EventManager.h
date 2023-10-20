@@ -64,10 +64,10 @@ class TrackedEvent : NonMovable {
     bool IsReady() const;
 
     void SetReady();
-    void Complete(EventCompletionType type);
+    void Complete(FutureID futureID, EventCompletionType type);
 
   protected:
-    virtual void CompleteImpl(EventCompletionType type) = 0;
+    virtual void CompleteImpl(FutureID futureID, EventCompletionType type) = 0;
 
     const WGPUCallbackMode mMode;
     enum class EventState {
@@ -111,6 +111,7 @@ class EventManager final : NonMovable {
         }
 
         std::unique_ptr<TrackedEvent> spontaneousEvent;
+        FutureID spontaneousEventFutureID = kNullFutureID;
         WIRE_TRY(mTrackedEvents.Use([&](auto trackedEvents) {
             auto it = trackedEvents->find(futureID);
             if (it == trackedEvents->end()) {
@@ -131,6 +132,7 @@ class EventManager final : NonMovable {
             // If the event can be spontaneously completed, prepare to do so now.
             if (trackedEvent->GetCallbackMode() == WGPUCallbackMode_AllowSpontaneous) {
                 spontaneousEvent = std::move(trackedEvent);
+                spontaneousEventFutureID = futureID;
                 trackedEvents->erase(futureID);
             }
             return WireResult::Success;
@@ -138,7 +140,7 @@ class EventManager final : NonMovable {
 
         // Handle spontaneous completions.
         if (spontaneousEvent) {
-            spontaneousEvent->Complete(EventCompletionType::Ready);
+            spontaneousEvent->Complete(spontaneousEventFutureID, EventCompletionType::Ready);
         }
         return WireResult::Success;
     }
