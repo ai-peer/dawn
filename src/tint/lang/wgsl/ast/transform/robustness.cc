@@ -274,12 +274,8 @@ struct Robustness::State {
                 b.Diagnostics().add_error(diag::System::Transform,
                                           core::type::Array::kErrExpectedConstantCount);
                 return nullptr;
-            },
-            [&](Default) -> const Expression* {
-                TINT_ICE() << "unhandled object type in robustness of array index: "
-                           << obj_type->UnwrapRef()->FriendlyName();
-                return nullptr;
-            });
+            },  //
+            TINT_SWITCH_MUST_MATCH_CASE);
     }
 
     /// Transform the program to insert additional predicate parameters to all user functions that

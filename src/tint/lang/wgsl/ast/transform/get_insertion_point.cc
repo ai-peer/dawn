@@ -58,12 +58,8 @@ InsertionPoint GetInsertionPoint(program::CloneContext& ctx, const Statement* st
 
                 // Cannot insert before or after continuing statement of a for-loop
                 return {};
-            },
-            [&](Default) -> RetType {
-                TINT_ICE() << "expected parent of statement to be "
-                              "either a block or for loop";
-                return {};
-            });
+            },  //
+            TINT_SWITCH_MUST_MATCH_CASE);
     }
 
     return {};

@@ -154,8 +154,8 @@ class State {
             [&](const ast::WhileStatement* w) {
                 TINT_SCOPED_ASSIGNMENT(is_in_loop_or_switch, true);
                 ProcessStatement(w->body);
-            },
-            [&](Default) { TINT_ICE() << "unhandled statement type"; });
+            },  //
+            TINT_SWITCH_MUST_MATCH_CASE);
     }
 
     void ProcessBlock(const ast::BlockStatement* block) {
