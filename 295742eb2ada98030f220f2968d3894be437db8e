@@ -129,6 +129,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8464de9_24426e5c",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T22:21:51Z",
+      "side": 1,
+      "message": "WGPUMapMode is an enum though? should work I think\n\nhttps://godbolt.org/z/cK8nMccjE\n\nanyway I see you\u0027ve moved the mapping to the next CL anyway",
+      "parentUuid": "bdc6878b_a2fe0906",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e05305b3_8fcaa252",
