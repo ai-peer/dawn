@@ -87,12 +87,11 @@ Result<Output> Generate(const Program& program, const Options& options) {
         }
 
         // Generate the SPIR-V code.
-        auto impl = std::make_unique<Printer>(ir, zero_initialize_workgroup_memory);
-        auto spirv = impl->Generate();
+        auto spirv = Print(ir, zero_initialize_workgroup_memory);
         if (!spirv) {
             return std::move(spirv.Failure());
         }
-        output.spirv = std::move(spirv.Get());
+        output.spirv = std::move(spirv->Code());
 #else
         return Failure{"use_tint_ir requires building with TINT_BUILD_WGSL_READER"};
 #endif
