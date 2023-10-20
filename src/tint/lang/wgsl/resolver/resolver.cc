@@ -192,11 +192,8 @@ bool Resolver::ResolveInternal() {
                 [&](const ast::TypeDecl* td) { return TypeDecl(td); },
                 [&](const ast::Function* func) { return Function(func); },
                 [&](const ast::Variable* var) { return GlobalVariable(var); },
-                [&](const ast::ConstAssert* ca) { return ConstAssert(ca); },
-                [&](Default) {
-                    TINT_UNREACHABLE() << "unhandled global declaration: " << decl->TypeInfo().name;
-                    return false;
-                })) {
+                [&](const ast::ConstAssert* ca) { return ConstAssert(ca); },  //
+                TINT_SWITCH_MUST_MATCH_CASE)) {
             return false;
         }
     }
@@ -241,14 +238,8 @@ sem::Variable* Resolver::Variable(const ast::Variable* v, bool is_global) {
         [&](const ast::Var* var) { return Var(var, is_global); },
         [&](const ast::Let* let) { return Let(let); },
         [&](const ast::Override* override) { return Override(override); },
-        [&](const ast::Const* const_) { return Const(const_, is_global); },
-        [&](Default) {
-            StringStream err;
-            err << "Resolver::GlobalVariable() called with a unknown variable type: "
-                << v->TypeInfo().name;
-            AddICE(err.str(), v->source);
-            return nullptr;
-        });
+        [&](const ast::Const* const_) { return Const(const_, is_global); },  //
+        TINT_SWITCH_MUST_MATCH_CASE);
 }
 
 sem::Variable* Resolver::Let(const ast::Let* v) {
@@ -1248,11 +1239,8 @@ sem::Statement* Resolver::Statement(const ast::Statement* stmt) {
         [&](const ast::CaseStatement*) {
             AddError("case statement can only be used inside a switch statement", stmt->source);
             return nullptr;
-        },
-        [&](Default) {
-            AddError("unknown statement type: " + std::string(stmt->TypeInfo().name), stmt->source);
-            return nullptr;
-        });
+        },  //
+        TINT_SWITCH_MUST_MATCH_CASE);
 }
 
 sem::CaseStatement* Resolver::CaseStatement(const ast::CaseStatement* stmt,
@@ -1515,13 +1503,8 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
                                                       current_statement_,
                                                       /* constant_value */ nullptr,
                                                       /* has_side_effects */ false);
-            },
-            [&](Default) {
-                StringStream err;
-                err << "unhandled expression type: " << expr->TypeInfo().name;
-                AddICE(err.str(), expr->source);
-                return nullptr;
-            });
+            },  //
+            TINT_SWITCH_MUST_MATCH_CASE);
         if (!sem_expr) {
             return nullptr;
         }
@@ -1973,11 +1956,8 @@ sem::ValueExpression* Resolver::IndexAccessor(const ast::IndexAccessorExpression
         [&](const core::type::Vector* vec) { return vec->type(); },
         [&](const core::type::Matrix* mat) {
             return b.create<core::type::Vector>(mat->type(), mat->rows());
-        },
-        [&](Default) {
-            AddError("cannot index type '" + sem_.TypeNameOf(obj_ty) + "'", expr->source);
-            return nullptr;
-        });
+        },  //
+        TINT_SWITCH_MUST_MATCH_CASE);
     if (ty == nullptr) {
         return nullptr;
     }
@@ -3163,11 +3143,8 @@ sem::ValueExpression* Resolver::Literal(const ast::LiteralExpression* literal) {
             TINT_UNREACHABLE() << "Unhandled float literal suffix: " << f->suffix;
             return nullptr;
         },
-        [&](const ast::BoolLiteralExpression*) { return b.create<core::type::Bool>(); },
-        [&](Default) {
-            TINT_UNREACHABLE() << "Unhandled literal type: " << literal->TypeInfo().name;
-            return nullptr;
-        });
+        [&](const ast::BoolLiteralExpression*) { return b.create<core::type::Bool>(); },  //
+        TINT_SWITCH_MUST_MATCH_CASE);
 
     if (ty == nullptr) {
         return nullptr;
