@@ -34,6 +34,24 @@
       "parentUuid": "3e2c6693_7f17967b",
       "revId": "4fa1d3ca1814ed5c1b8478ae2e88d0fd0b5f7780",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92a69ffa_d7daa3c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T18:07:08Z",
+      "side": 1,
+      "message": "I\u0027m not sure if once we have a physical device it\u0027s useful to ask whether or not validation was requested. Whether or not it was requested impacts how we make the physical device - but after that point I think we only care whether or not it is enabled, and not whether it was requested.\n\nit depends on what we want the behavior to be, but it sounds like from the bug, Sunny would find it useful to, for example, externally enable the D3D debug layers and actually have it get turned on in Dawn. That would mean we want to do the backend validation things if the layers are on but not requested via instance\u003eEnableBackendValidation()",
+      "parentUuid": "e8628642_24659a10",
+      "revId": "4fa1d3ca1814ed5c1b8478ae2e88d0fd0b5f7780",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
