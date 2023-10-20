@@ -101,6 +101,57 @@
       "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:*\u0027 with tags [dawn-backend-validation, no-asan, no-clang-coverage, release-x64, target-cpu-64, webgpu-adapter-default, win10]",
       "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e26fb012_538e1455",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-10-20T12:15:10Z",
+      "side": 0,
+      "message": "🟦 note: all 1574 tests now pass",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7132e786_3a0df4e6",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-10-20T12:15:10Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:*\u0027 with tags [dawn-backend-validation, no-asan, no-clang-coverage, release-x64, target-cpu-64, webgpu-adapter-default, win10]",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c335be_07dc9629",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-10-20T12:15:10Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:*\u0027 with tags [dawn-backend-validation, no-asan, no-clang-coverage, release-x64, target-cpu-64, webgpu-adapter-default, win10]",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
