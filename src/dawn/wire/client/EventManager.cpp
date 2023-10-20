@@ -53,7 +53,7 @@ bool TrackedEvent::IsReady() const {
 }
 
 void TrackedEvent::SetReady() {
-    DAWN_ASSERT(mEventState == EventState::Pending);
+    DAWN_ASSERT(mEventState != EventState::Complete);
     mEventState = EventState::Ready;
 }
 

@@ -40,6 +40,19 @@ namespace dawn::wire::client {
 
 class Device;
 
+namespace detail {
+
+enum class MapRequestType { None, Read, Write };
+
+struct MapRequestData {
+    FutureID futureID = kNullFutureID;
+    size_t offset = 0;
+    size_t size = 0;
+    MapRequestType type = MapRequestType::None;
+};
+
+}  // namespace detail
+
 class Buffer final : public ObjectBase {
   public:
     static WGPUBuffer Create(Device* device, const WGPUBufferDescriptor* descriptor);
@@ -73,15 +86,15 @@ class Buffer final : public ObjectBase {
     WGPUBufferMapState GetMapState() const;
 
   private:
-    bool InvokeAndClearCallback(WGPUBufferMapAsyncStatus status);
+    // Prepares the callbacks to be called and potentially calls them
+    bool SetFutureStatus(WGPUBufferMapAsyncStatus status);
+    bool SetFutureStatusAndClearPending(WGPUBufferMapAsyncStatus status);
 
     bool IsMappedForReading() const;
     bool IsMappedForWriting() const;
     bool CheckGetMappedRangeOffsetSize(size_t offset, size_t size) const;
 
     void FreeMappedData();
-
-    enum class MapRequestType { None, Read, Write };
 
     enum class MapState {
         Unmapped,
@@ -90,14 +103,12 @@ class Buffer final : public ObjectBase {
         MappedAtCreation,
     };
 
-    // Up to only one request can exist at a single time. Other requests are rejected.
-    struct MapRequestData {
-        FutureID futureID = kNullFutureID;
-        size_t offset = 0;
-        size_t size = 0;
-        MapRequestType type = MapRequestType::None;
-    };
-    std::optional<MapRequestData> mPendingMapRequest;
+    // Up to only one request can exist at a single time. Other requests are rejected. The request
+    // is a shared resource with the TrackedEvent so that it can be reset only when the callback is
+    // actually called. This is important for WaitAny and ProcessEvents cases where the server may
+    // have responded, but due to an early Unmap or Destroy before the corresponding WaitAny or
+    // ProcessEvents call, we need to update the callback result.
+    std::shared_ptr<std::optional<detail::MapRequestData>> mPendingMapRequest;
 
     uint64_t mSize = 0;
     WGPUBufferUsage mUsage;
