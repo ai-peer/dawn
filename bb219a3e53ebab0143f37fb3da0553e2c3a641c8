@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "971a8c29_9f1c9672",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-20T10:57:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0ffd9f56_ffaf9f28",
+      "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0ed952d0_139fa920",
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c7962727_ea7f3688",
+        "filename": "src/dawn/native/metal/UtilsMetal.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 544,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-20T10:57:21Z",
+      "side": 1,
+      "message": "I don\u0027t see any GetEnviornmentVariable function in SystemUtils.h",
+      "parentUuid": "0ed952d0_139fa920",
+      "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ce4e2f49_bc7ade8b",
         "filename": "third_party/vulkan-deps",
         "patchSetId": 1
@@ -48,6 +84,24 @@
       "writtenOn": "2023-10-19T21:26:39Z",
       "side": 1,
       "message": "These should be removed, it\u0027s an artifact of the submodules change.",
+      "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9579195_74d49ac9",
+        "filename": "third_party/vulkan-deps",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-10-20T10:57:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce4e2f49_bc7ade8b",
       "revId": "bb219a3e53ebab0143f37fb3da0553e2c3a641c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
