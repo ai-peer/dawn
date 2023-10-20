@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32968ab3_be4fb54e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-20T18:10:31Z",
+      "side": 1,
+      "message": "Will wait for the Swiftshader ICD interface version 7 to land before landing this.",
+      "revId": "60eba27f7bd6363acf05c3e49248240c87c23449",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

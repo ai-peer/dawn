@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02f35b16_ef2f6dbf",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-20T18:10:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d30bea0f_303c6f0a",
+      "range": {
+        "startLine": 304,
+        "startChar": 4,
+        "endLine": 304,
+        "endChar": 34
+      },
+      "revId": "06e8532433a1034fde272071303ae3fd9d575222",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "18db2362_8117f42c",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-10-14T20:26:05Z",
       "side": 1,
       "message": "We should check for the DirectDriverLoading extension here.",
+      "revId": "06e8532433a1034fde272071303ae3fd9d575222",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5fe5319c_a2aaa75e",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-20T18:10:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "18db2362_8117f42c",
       "revId": "06e8532433a1034fde272071303ae3fd9d575222",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
