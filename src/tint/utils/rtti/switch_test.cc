@@ -30,6 +30,7 @@
 #include <memory>
 #include <string>
 
+#include "gtest/gtest-spi.h"
 #include "gtest/gtest.h"
 
 namespace tint {
@@ -163,6 +164,98 @@ TEST(Castable, SwitchDefault) {
             [&](Default) { gecko_matched_default = true; });
         EXPECT_TRUE(gecko_matched_default);
     }
+}
+
+TEST(Castable, SwitchMustMatch_MatchedWithoutReturnValue) {
+    std::unique_ptr<Animal> frog = std::make_unique<Frog>();
+    std::unique_ptr<Animal> bear = std::make_unique<Bear>();
+    std::unique_ptr<Animal> gecko = std::make_unique<Gecko>();
+    {
+        bool ok = false;
+        Switch(
+            frog.get(),                      //
+            [&](Amphibian*) { ok = true; },  //
+            [&](Mammal*) {},                 //
+            SwitchMustMatchCase);
+        EXPECT_TRUE(ok);
+    }
+    {
+        bool ok = false;
+        Switch(
+            bear.get(),                   //
+            [&](Amphibian*) {},           //
+            [&](Mammal*) { ok = true; },  //
+            SwitchMustMatchCase);         //
+        EXPECT_TRUE(ok);
+    }
+    {
+        bool ok = false;
+        Switch(
+            gecko.get(),                   //
+            [&](Reptile*) { ok = true; },  //
+            [&](Amphibian*) {},            //
+            SwitchMustMatchCase);          //
+        EXPECT_TRUE(ok);
+    }
+}
+
+TEST(Castable, SwitchMustMatch_MatchedWithReturnValue) {
+    std::unique_ptr<Animal> frog = std::make_unique<Frog>();
+    std::unique_ptr<Animal> bear = std::make_unique<Bear>();
+    std::unique_ptr<Animal> gecko = std::make_unique<Gecko>();
+    {
+        int res = Switch(
+            frog.get(),                     //
+            [&](Amphibian*) { return 1; },  //
+            [&](Mammal*) { return 0; },     //
+            SwitchMustMatchCase);
+        EXPECT_EQ(res, 1);
+    }
+    {
+        int res = Switch(
+            bear.get(),                     //
+            [&](Amphibian*) { return 0; },  //
+            [&](Mammal*) { return 2; },     //
+            SwitchMustMatchCase);
+        EXPECT_EQ(res, 2);
+    }
+    {
+        int res = Switch(
+            gecko.get(),                    //
+            [&](Reptile*) { return 3; },    //
+            [&](Amphibian*) { return 0; },  //
+            SwitchMustMatchCase);
+        EXPECT_EQ(res, 3);
+    }
+}
+
+TEST(Castable, SwitchMustMatch_NoMatchWithoutReturnValue) {
+    EXPECT_FATAL_FAILURE(
+        {
+            std::unique_ptr<Animal> frog = std::make_unique<Frog>();
+            Switch(
+                frog.get(),        //
+                [&](Reptile*) {},  //
+                [&](Mammal*) {},   //
+                SwitchMustMatchCase);
+        },
+        "internal compiler error: Switch() using SwitchMustMatchCase matched no cases. "
+        "Object type: Frog");
+}
+
+TEST(Castable, SwitchMustMatch_NoMatchWithReturnValue) {
+    EXPECT_FATAL_FAILURE(
+        {
+            std::unique_ptr<Animal> frog = std::make_unique<Frog>();
+            int res = Switch(
+                frog.get(),                   //
+                [&](Reptile*) { return 1; },  //
+                [&](Mammal*) { return 2; },   //
+                SwitchMustMatchCase);
+            ASSERT_EQ(res, 0);
+        },
+        "internal compiler error: Switch() using SwitchMustMatchCase matched no cases. "
+        "Object type: Frog");
 }
 
 TEST(Castable, SwitchMatchFirst) {
