@@ -155,6 +155,9 @@ class Module {
     /// @returns the functions
     const std::vector<Function>& Functions() const { return functions_; }
 
+    /// @returns the SPIR-V code as a vector of uint32_t
+    std::vector<uint32_t>& Code() { return code_; }
+
   private:
     uint32_t next_id_ = 1;
     InstructionList capabilities_;
@@ -169,6 +172,7 @@ class Module {
     std::vector<Function> functions_;
     Hashset<uint32_t, 8> capability_set_;
     Hashset<std::string, 8> extension_set_;
+    std::vector<uint32_t> code_;
 };
 
 }  // namespace tint::spirv::writer
