@@ -47,9 +47,7 @@ namespace {
 
 TEST_F(SpirvWriterTest, Type_Void) {
     auto* fn = b.Function("f", ty.void_());
-    b.Append(fn->Block(), [&]{
-        b.Return(fn);
-    });
+    b.Append(fn->Block(), [&] { b.Return(fn); });
 
     ASSERT_TRUE(Generate()) << Error() << output_;
     EXPECT_INST("%void = OpTypeVoid");
