@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e2c6693_7f17967b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-20T16:30:21Z",
+      "side": 1,
+      "message": "LGTM but can you either move, or file a bug about moving IsBackendValidationEnabled() to the physical device? it will be fragile now that you can check if validation is enabled two different ways, and one of them is not always correct on Metal.",
+      "revId": "4fa1d3ca1814ed5c1b8478ae2e88d0fd0b5f7780",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
