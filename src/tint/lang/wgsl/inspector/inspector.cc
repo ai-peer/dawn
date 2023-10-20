@@ -99,11 +99,8 @@ std::tuple<ComponentType, CompositionType> CalculateComponentAndComposition(
         [&](const core::type::F32*) { return ComponentType::kF32; },
         [&](const core::type::F16*) { return ComponentType::kF16; },
         [&](const core::type::I32*) { return ComponentType::kI32; },
-        [&](const core::type::U32*) { return ComponentType::kU32; },
-        [&](Default) {
-            TINT_UNREACHABLE() << "unhandled component type";
-            return ComponentType::kUnknown;
-        });
+        [&](const core::type::U32*) { return ComponentType::kU32; },  //
+        SwitchMustMatchCase);
 
     CompositionType compositionType;
     if (auto* vec = type->As<core::type::Vector>()) {
@@ -934,11 +931,8 @@ std::vector<PixelLocalMemberType> Inspector::ComputePixelLocalMemberTypes(
                 member->Type(),  //
                 [&](const core::type::F32*) { return PixelLocalMemberType::kF32; },
                 [&](const core::type::I32*) { return PixelLocalMemberType::kI32; },
-                [&](const core::type::U32*) { return PixelLocalMemberType::kU32; },
-                [&](Default) {
-                    TINT_UNREACHABLE() << "unhandled component type";
-                    return PixelLocalMemberType::kUnknown;
-                });
+                [&](const core::type::U32*) { return PixelLocalMemberType::kU32; },  //
+        SwitchMustMatchCase);
             types.push_back(type);
         }
 

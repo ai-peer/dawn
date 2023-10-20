@@ -260,10 +260,8 @@ struct State {
                         }
                     }
                     call->SetOperands(std::move(operands));
-                },
-                [&](Default) {
-                    TINT_ICE() << "unhandled instruction " << use.instruction->FriendlyName();
-                });
+                },  //
+                SwitchMustMatchCase);
         });
     }
 

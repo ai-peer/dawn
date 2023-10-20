@@ -270,10 +270,8 @@ struct State {
         Switch(
             thing,  //
             [&](core::ir::Value* value) { ir->SetName(value, new_name); },
-            [&](core::type::Struct* str) { str->SetName(new_name); },
-            [&](Default) {
-                TINT_ICE() << "unhandled type for renaming: " << thing->TypeInfo().name;
-            });
+            [&](core::type::Struct* str) { str->SetName(new_name); },  //
+        SwitchMustMatchCase);
     }
 
     /// @return true if @p s is a builtin (non-user declared) structure.

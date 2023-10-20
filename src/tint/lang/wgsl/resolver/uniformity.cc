@@ -1174,10 +1174,7 @@ class UniformityGraph {
                 return cf;  // No impact on uniformity
             },
 
-            [&](Default) {
-                TINT_ICE() << "unknown statement type: " << std::string(stmt->TypeInfo().name);
-                return nullptr;
-            });
+            SwitchMustMatchCase);
     }
 
     /// Process an identifier expression.
@@ -1306,11 +1303,7 @@ class UniformityGraph {
                 return std::make_pair(cf, node);
             },
 
-            [&](Default) {
-                TINT_ICE() << "unknown identifier expression type: "
-                           << std::string(sem->TypeInfo().name);
-                return std::pair<Node*, Node*>(nullptr, nullptr);
-            });
+            SwitchMustMatchCase);
     }
 
     /// Process an expression.
@@ -1379,10 +1372,7 @@ class UniformityGraph {
                 return ProcessExpression(cf, u->expr, load_rule);
             },
 
-            [&](Default) {
-                TINT_ICE() << "unknown expression type: " << std::string(expr->TypeInfo().name);
-                return std::pair<Node*, Node*>(nullptr, nullptr);
-            });
+            SwitchMustMatchCase);
     }
 
     /// @param u unary expression with op == kIndirection
@@ -1486,11 +1476,7 @@ class UniformityGraph {
                 return ProcessLValueExpression(cf, u->expr, is_partial_reference);
             },
 
-            [&](Default) {
-                TINT_ICE() << "unknown lvalue expression type: "
-                           << std::string(expr->TypeInfo().name);
-                return LValue{};
-            });
+            SwitchMustMatchCase);
     }
 
     /// Process a function call expression.
@@ -1608,8 +1594,8 @@ class UniformityGraph {
             [&](const sem::ValueConversion*) {
                 callsite_tag = {CallSiteTag::CallSiteNoRestriction};
                 function_tag = NoRestriction;
-            },
-            [&](Default) { TINT_ICE() << "unhandled function call target: " << name; });
+            },  //
+            SwitchMustMatchCase);
 
         cf_after->AddEdge(call_node);
 
@@ -1899,8 +1885,8 @@ class UniformityGraph {
             [&](const ast::Expression* e) {
                 diagnostics_.add_note(diag::System::Resolver,
                                       "result of expression may be non-uniform", e->source);
-            },
-            [&](Default) { TINT_ICE() << "unhandled source of non-uniformity"; });
+            },  //
+            SwitchMustMatchCase);
     }
 
     /// Generate a diagnostic message for a uniformity issue.

@@ -129,12 +129,8 @@ std::string SemHelper::Describe(const sem::Expression* expr) const {
         [&](const UnresolvedIdentifier* ui) {
             auto name = ui->Identifier()->identifier->symbol.Name();
             return "unresolved identifier '" + name + "'";
-        },
-        [&](Default) -> std::string {
-            TINT_ICE() << "unhandled sem::Expression type: "
-                       << (expr ? expr->TypeInfo().name : "<null>");
-            return "<unknown>";
-        });
+        },  //
+        SwitchMustMatchCase);
 }
 
 void SemHelper::ErrorUnexpectedExprKind(
