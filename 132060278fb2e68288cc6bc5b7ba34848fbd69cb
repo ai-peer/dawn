@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3104cf9c_b845ee6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-20T20:40:07Z",
+      "side": 1,
+      "message": "nit. Couple places uses `DAWN_CHECK(false)` over `DAWN_UNREACHABLE()`. Is there a preference for one over the other for some reason? Looking at the sources, I see a comment regarding prod vs debug mode? Should `DAWN_UNREACHABLE()` just be made equivalent to `DAWN_CHECK(false)` then?",
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6573695d_9593bceb",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-20T20:40:07Z",
+      "side": 1,
+      "message": "I think these if blocks can be simplified a bit to make it a little easier to follow with less nested blocks:\n\n```\nif (isPoll) {\n    return WaitAnyPollOnly(futures);\n}\n\nStackVector/optional\u003cTrackedFutureWaitInfo\u003e saved;\nif (hasSystemEvents \u0026\u0026 hasQueueEvents) {\n    // Convert queue events to system events.\n}\n\nbool anyCompleted \u003d false;\nif (hasSystemEvents) {\n    anyCompleted \u003d WaitAnySystemEvents();\n} else {\n    DAWN_TRY_ASSIGN(anyCompleted, WaitForQueueSerial());\n}\n\n// Restore any saved stuff here...\n\nif (anyCompleted) {\n    WaitAnyPollOnly(futures);\n}\nreturn anyCompleted;\n\n```",
+      "range": {
+        "startLine": 2163,
+        "startChar": 4,
+        "endLine": 2163,
+        "endChar": 33
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af30166e_a5c46b70",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2176,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-20T20:40:07Z",
+      "side": 1,
+      "message": "Hmm, maybe we can use the `vector` when we implement multi-queue? Otherwise this part is a bit confusing? We could just note it in the comments, and use like an `optional` or something for now? I imagine when we have multi-queue a decent amount of the logic would need to change anyways? i.e. we need to figure out the lowest serial for each and `lowestWaitSerial` would have to be a `vector` of results which we need to iterate and replace, etc...",
+      "range": {
+        "startLine": 2176,
+        "startChar": 8,
+        "endLine": 2176,
+        "endChar": 66
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881d13de_038ee734",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-20T20:40:07Z",
+      "side": 1,
+      "message": "IIUC, this is only a `WeakRef` because a raw pointer isn\u0027t as nice? It looks like it\u0027s impossible for the `Queue` to not exist if the event still exists. Maybe we can add a comment about the lifetime here.\n\nThis kinda usage of the `WeakRef` makes the `Promote` lock much more glaring and ugly 😞",
+      "range": {
+        "startLine": 249,
+        "startChar": 4,
+        "endLine": 249,
+        "endChar": 26
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
