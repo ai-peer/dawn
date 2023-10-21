@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-10-09 07:48:26AM
+# Last rolled: 2023-10-21 05:02:57AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -460,7 +460,6 @@ crbug.com/dawn/1706 [ intel-0x9bc5 win10 ] webgpu:api,operation,command_buffer,q
 ################################################################################
 crbug.com/tint/1943 [ webgpu-dxc-disabled win10 ] webgpu:shader,execution,memory_model,barrier:workgroup_barrier_load_store:memType="non_atomic_storage" [ Failure ]
 crbug.com/tint/1943 [ webgpu-dxc-disabled win10 ] webgpu:shader,execution,memory_model,barrier:workgroup_barrier_store_load:memType="non_atomic_storage" [ Failure ]
-
 
 ################################################################################
 # untriaged failures
