@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "184d699d_35b59214",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 186,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-10-22T07:42:27Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:*\u0027 with tags [dawn-backend-validation, no-asan, no-clang-coverage, release-x64, target-cpu-64, webgpu-adapter-default, win10]",
+      "revId": "6770957e5120a5ca96460d11b85a5c66cec47dfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cdf9282c_26ea43b3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-10-22T07:42:27Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:*\u0027 with tags [dawn-backend-validation, no-asan, no-clang-coverage, release-x64, target-cpu-64, webgpu-adapter-default, win10]",
+      "revId": "6770957e5120a5ca96460d11b85a5c66cec47dfa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
