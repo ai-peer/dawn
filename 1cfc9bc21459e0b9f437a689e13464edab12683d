@@ -1,0 +1,220 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b001a237_6393ec61",
+        "filename": "dawn.json",
+        "patchSetId": 25
+      },
+      "lineNbr": 1645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "nit: at this point we might as well introduce an intermadiate structure for the plane fD+offset+stride",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71967d3c_2ee54f11",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "Is the plan that we could eventually enable multiple of these, or do we expect to keep a single one at most?",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba2a5dac_f4cf6e08",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "The plan is to support other methods like memory FD or zircon w/e right?",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6b6e61_54891305",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "54b6e348_bc1d2d4e",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "u-nit: it seems that a method called repeatedly would be marginally simpler. Also is there any way we could avoid hardcode the gating on the OS?",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0386456c_704b0e39",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "I wonder if there would be a way to have system handles and their Dup()ing logic separated so we don\u0027t need to manually ifdef the OSes everywhere.",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8528ca0c_b7edbd86",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "u-nit: outHandle.",
+      "range": {
+        "startLine": 49,
+        "startChar": 16,
+        "endLine": 49,
+        "endChar": 26
+      },
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7df4928_df78cf05",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "nit: did I dream about having a mechanism to do?\n\n```\nif (auto* exportInfo \u003d FindInChain\u003cSharedFenceVkSemaphoreZirconHandleExportInfo\u003e(info)) {\n  stuff\n}\n```",
+      "range": {
+        "startLine": 118,
+        "startChar": 1,
+        "endLine": 122,
+        "endChar": 5
+      },
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b32db862_96bd8199",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "u-nit: It might help to have more block commands and maybe scopes so as to make it marginally easier to understand what\u0027s state and what\u0027s just building descriptors for Vulkan calls.",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0436f6d_477f41b4",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 442,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "Isn\u0027t this checked at [1]?",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65551a2d_c616aca1",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "I tried to understand what this does but couldn\u0027t really understand the spec, Mesa, or Swiftshader. What does this do? (and can we have a comment explaining it?)",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c3b277d_d2f8a96d",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_linux.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-22T17:14:49Z",
+      "side": 1,
+      "message": "nit: This method and the one below could share a ton of code.",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
