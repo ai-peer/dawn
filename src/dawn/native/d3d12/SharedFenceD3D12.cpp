@@ -41,15 +41,12 @@ ResultOrError<Ref<SharedFence>> SharedFence::Create(
     const SharedFenceDXGISharedHandleDescriptor* descriptor) {
     DAWN_INVALID_IF(descriptor->handle == nullptr, "shared HANDLE is missing.");
 
-    HANDLE ownedHandle;
-    if (!::DuplicateHandle(::GetCurrentProcess(), descriptor->handle, ::GetCurrentProcess(),
-                           &ownedHandle, 0, FALSE, DUPLICATE_SAME_ACCESS)) {
-        return DAWN_INTERNAL_ERROR("Failed to DuplicateHandle");
-    }
+    SystemHandle ownedHandle;
+    DAWN_TRY_ASSIGN(ownedHandle, SystemHandle::Duplicate(unownedHandle));
 
-    Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, ownedHandle));
+    Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, std::move(ownedHandle)));
     DAWN_TRY(CheckHRESULT(
-        device->GetD3D12Device()->OpenSharedHandle(ownedHandle, IID_PPV_ARGS(&fence->mFence)),
+        device->GetD3D12Device()->OpenSharedHandle(unownedHandle, IID_PPV_ARGS(&fence->mFence)),
         "D3D12 fence open shared handle"));
     return fence;
 }

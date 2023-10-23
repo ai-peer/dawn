@@ -25,38 +25,65 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "dawn/native/d3d11/FenceD3D11.h"
+#include "src/dawn/native/SystemHandle.h"
 
 #include <utility>
 
 #include "dawn/common/Log.h"
-#include "dawn/native/Error.h"
-#include "dawn/native/SystemHandle.h"
-#include "dawn/native/d3d/D3DError.h"
-#include "dawn/native/d3d12/DeviceD3D12.h"
 
-namespace dawn::native::d3d11 {
+namespace dawn::native {
 
-// static
-ResultOrError<Ref<Fence>> Fence::CreateFromHandle(ID3D11Device5* device,
-                                                  HANDLE unownedHandle,
-                                                  UINT64 fenceValue) {
-    DAWN_ASSERT(unownedHandle != nullptr);
-    SystemHandle handle;
-    DAWN_TRY_ASSIGN(handle, SystemHandle::Duplicate(unownedHandle));
-    ComPtr<ID3D11Fence> d3d11Fence;
-    DAWN_TRY(CheckHRESULT(device->OpenSharedFence(handle.Get(), IID_PPV_ARGS(&d3d11Fence)),
-                          "D3D11 fence open handle"));
-    return AcquireRef(new Fence(std::move(d3d11Fence), fenceValue, std::move(handle)));
+SystemHandle::SystemHandle() : mHandle(kInvalidHandle<T>) {}
+
+SystemHandle::SystemHandle(T handle) : mHandle(handle) {}
+
+bool SystemHandle::IsValid() const {
+    return IsHandleValid(mHandle);
 }
 
-Fence::Fence(ComPtr<ID3D11Fence> d3d11Fence, UINT64 fenceValue, HANDLE sharedHandle)
-    : Base(fenceValue, sharedHandle), mD3D11Fence(std::move(d3d11Fence)) {}
-
-Fence::~Fence() = default;
-
-ID3D11Fence* Fence::GetD3D11Fence() const {
-    return mD3D11Fence.Get();
+SystemHandle::SystemHandle(SystemHandle&& rhs) {
+    mHandle = rhs.mHandle;
+    rhs.mHandle = kInvalidHandle<T>;
 }
 
-}  // namespace dawn::native::d3d11
+SystemHandle& SystemHandle::operator=(SystemHandle&& rhs) {
+    if (this != &rhs) {
+        std::swap(mHandle, rhs.mHandle);
+    }
+    return *this;
+}
+
+SystemHandle::T SystemHandle::Get() const {
+    return mHandle;
+}
+
+SystemHandle::T SystemHandle::Detach() {
+    T handle = mHandle;
+    mHandle = kInvalidHandle<T>;
+    return handle;
+}
+
+ResultOrError<SystemHandle> SystemHandle::Duplicate() const {
+    T handle;
+    DAWN_TRY_ASSIGN(handle, DuplicateHandle(mHandle));
+    return SystemHandle(handle);
+}
+
+void SystemHandle::Close() {
+    DAWN_ASSERT(IsValid());
+    auto result = CloseHandle(mHandle);
+    // Still invalidate the handle if Close failed.
+    // If Close failed, the handle surely was invalid already.
+    mHandle = kInvalidHandle<T>;
+    if (DAWN_UNLIKELY(result.IsError())) {
+        dawn::ErrorLog() << result.AcquireError()->GetFormattedMessage();
+    }
+}
+
+SystemHandle::~SystemHandle() {
+    if (IsValid()) {
+        Close();
+    }
+}
+
+}  // namespace dawn::native
