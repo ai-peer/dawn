@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94a133ac_f2ef8c37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-23T08:52:42Z",
+      "side": 1,
+      "message": "Hey Ben, This is not ready but could you give me some feedback if I\u0027m going in an okay direction?\n\nOne constraint is it seems like, as is, there can only easily be one cache file since you can only specific one cache file with --results\u003d\u003cfile\u003e. Another is the results come all at once and get cached all that once so this is the direction I ended up with after a few other dead ends.\n\nHappy to throw it all away if you have some clear other direction I should go.\n\nAlso, if you have any tips for faster iteration. As it is, I end up making some changes and then running it and waiting 2-3 hours for the bots to come back with results.  Maybe --results would fix that but I haven\u0027t gotten a good run yet.",
+      "revId": "f5d603755638ed8a42d103511cd4b08329b95b25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
