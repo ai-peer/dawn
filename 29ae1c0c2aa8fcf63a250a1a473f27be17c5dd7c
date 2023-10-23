@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddb54597_95122e1f",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4571,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T18:11:56Z",
+      "side": 1,
+      "message": "I\u0027m a bit concerned about stack overflowing here. Please can you rework this to use a loop and a `Vector` stack?",
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "645bdb31_bbb76192",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4575,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T18:11:56Z",
+      "side": 1,
+      "message": "Is it just structures you have to peek inside? What about arrays? An additional e2d test would be reassuring.",
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "533ecd52_9dcb14f3",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4576,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T18:11:56Z",
+      "side": 1,
+      "message": "Would it not make sense for this to use the `is_struct_with_matrix_member_` cache?",
+      "range": {
+        "startLine": 4576,
+        "startChar": 20,
+        "endLine": 4576,
+        "endChar": 25
+      },
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bd7f609_738f0248",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4594,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T18:11:56Z",
+      "side": 1,
+      "message": "This would be cleaner if you used `Hashmap.GetOrCreate`",
+      "range": {
+        "startLine": 4584,
+        "startChar": 0,
+        "endLine": 4594,
+        "endChar": 18
+      },
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
