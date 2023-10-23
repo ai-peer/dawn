@@ -16,6 +16,40 @@
       "message": "PTAL.",
       "revId": "d630dda067db87c3c21273894d8041fdc5c0d4e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4679f5_3d3bd16d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-23T20:17:29Z",
+      "side": 1,
+      "message": "Dawn LGTM",
+      "revId": "d630dda067db87c3c21273894d8041fdc5c0d4e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03d78fd5_a88ad646",
+        "filename": "src/tint/lang/msl/writer/common/options.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-23T20:17:29Z",
+      "side": 1,
+      "message": "Missing `storage_texture`. Can we double check the other options.h don\u0027t have this problem?",
+      "revId": "d630dda067db87c3c21273894d8041fdc5c0d4e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
