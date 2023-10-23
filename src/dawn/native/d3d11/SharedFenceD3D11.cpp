@@ -27,6 +27,8 @@
 
 #include "dawn/native/d3d11/SharedFenceD3D11.h"
 
+#include <utility>
+
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
 
@@ -39,15 +41,12 @@ ResultOrError<Ref<SharedFence>> SharedFence::Create(
     const SharedFenceDXGISharedHandleDescriptor* descriptor) {
     DAWN_INVALID_IF(descriptor->handle == nullptr, "shared HANDLE is missing.");
 
-    HANDLE ownedHandle;
-    if (!::DuplicateHandle(::GetCurrentProcess(), descriptor->handle, ::GetCurrentProcess(),
-                           &ownedHandle, 0, FALSE, DUPLICATE_SAME_ACCESS)) {
-        return DAWN_INTERNAL_ERROR("Failed to DuplicateHandle");
-    }
+    SystemHandle ownedHandle;
+    DAWN_TRY_ASSIGN(ownedHandle, SystemHandle::Duplicate(unownedHandle));
 
-    Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, ownedHandle));
+    Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, std::move(ownedHandle)));
     DAWN_TRY(CheckHRESULT(
-        device->GetD3D11Device5()->OpenSharedFence(ownedHandle, IID_PPV_ARGS(&fence->mFence)),
+        device->GetD3D11Device5()->OpenSharedFence(unownedHandle, IID_PPV_ARGS(&fence->mFence)),
         "D3D11 fence open shared handle"));
     return fence;
 }
