@@ -16,6 +16,23 @@
       "message": "Hi Gregg and all,\n\nI am very sorry that I thought it too simple before. Today I did more investigation and found a better explanation about the new values in this CL.\n\nPTAL, thanks!",
       "revId": "3df68af9aafc1f91d67499d4cc2906a9c5777ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebdfa0f4_b2779a93",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-23T09:06:35Z",
+      "side": 1,
+      "message": "AFAICT this is not how we plan to implement this \n\n#1 According to syoussefi, ANGLE already subtracts the ones it always puts in. See link in previous comment\n\n#2 We don\u0027t plant to subtract these at this level in the OpenGL backend. It would make the system unusable. Rather, it will be up to the user to subtract them from the count if they happen to use these other inputs. See for example\n\nhttps://dawn-review.googlesource.com/c/dawn/+/150703/2/src/dawn/native/RenderPipeline.cpp",
+      "revId": "3df68af9aafc1f91d67499d4cc2906a9c5777ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
