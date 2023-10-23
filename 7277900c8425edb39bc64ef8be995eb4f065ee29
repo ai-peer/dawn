@@ -16,6 +16,24 @@
       "message": "Looks like there\u0027s some warnings in dawn on Windows that get called out by rolling Clang:\n\n```\n gen/src/dawn/wire/WireCmd_autogen.cpp(8663,15): error: offset of on non-standard-layout type \u0027AdapterGetInstanceTransfer\u0027 [-Werror,-Winvalid-offsetof]\n  8663 | static_assert(offsetof(AdapterGetInstanceTransfer, commandSize) \u003d\u003d 0);\n       |               ^                                    ~~~~~~~~~~~\n\n```",
       "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a4a30e2_7ab60756",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-23T21:12:14Z",
+      "side": 1,
+      "message": "Hm, there\u0027s already a pragma to remove these on `__GNUC__`, maybe it needs to be expanded to clang-cl?\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:out/win-Debug/gen/third_party/dawn/src/dawn/wire/WireCmd_autogen.cpp;l\u003d14-17?ss\u003dchromium%2Fchromium%2Fsrc\u0026q\u003dWinvalid-offsetof",
+      "parentUuid": "2faf9f57_b6be8724",
+      "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
