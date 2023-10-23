@@ -197,6 +197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4bb3e9bd_04797612",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-23T07:53:38Z",
+      "side": 1,
+      "message": "How can I proceed?",
+      "parentUuid": "ee9ae8b7_c9f00126",
+      "range": {
+        "startLine": 483,
+        "startChar": 4,
+        "endLine": 488,
+        "endChar": 61
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "83f0c05b_d3c18c81",
         "filename": "src/dawn/native/Texture.h",
         "patchSetId": 1
