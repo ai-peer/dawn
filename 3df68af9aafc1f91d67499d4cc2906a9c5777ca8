@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f2d6eaf_fc5655bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-23T08:48:07Z",
+      "side": 1,
+      "message": "Hi Gregg and all,\n\nI am very sorry that I thought it too simple before. Today I did more investigation and found a better explanation about the new values in this CL.\n\nPTAL, thanks!",
+      "revId": "3df68af9aafc1f91d67499d4cc2906a9c5777ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
