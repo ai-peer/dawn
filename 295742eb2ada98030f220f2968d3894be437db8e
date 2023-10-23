@@ -153,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79016dba_7bd3cb81",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-23T23:31:23Z",
+      "side": 1,
+      "message": "Yup moved to next CL. I got it to work after moving the \u003c\u003c operator into global namespace... Hopefully that\u0027s fine?",
+      "parentUuid": "d8464de9_24426e5c",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 2
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e05305b3_8fcaa252",

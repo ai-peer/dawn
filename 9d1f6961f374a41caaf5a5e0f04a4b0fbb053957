@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c07ade3_5cd7e2d2",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-23T23:31:23Z",
+      "side": 1,
+      "message": "Changed to do what we decided offine.",
+      "parentUuid": "e128c8cd_0f535931",
+      "range": {
+        "startLine": 72,
+        "startChar": 0,
+        "endLine": 83,
+        "endChar": 0
+      },
+      "revId": "9d1f6961f374a41caaf5a5e0f04a4b0fbb053957",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "218d810f_bffa7528",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-20T22:21:51Z",
       "side": 1,
       "message": "```suggestion\n        // the futures to become ready. For spontaneous mode, however, we don\u0027t flush the\n```",
+      "range": {
+        "startLine": 156,
+        "startChar": 60,
+        "endLine": 156,
+        "endChar": 62
+      },
+      "revId": "9d1f6961f374a41caaf5a5e0f04a4b0fbb053957",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84016b6a_d3e56265",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 156,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-23T23:31:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "218d810f_bffa7528",
       "range": {
         "startLine": 156,
         "startChar": 60,
