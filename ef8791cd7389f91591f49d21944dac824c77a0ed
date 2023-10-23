@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "afde0441_96c1fb35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-23T17:23:42Z",
+      "side": 1,
+      "message": "Kokoro doesn\u0027t test debug builds I guess \u003d)",
+      "revId": "ef8791cd7389f91591f49d21944dac824c77a0ed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
