@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2faf9f57_b6be8724",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-23T21:09:37Z",
+      "side": 1,
+      "message": "Looks like there\u0027s some warnings in dawn on Windows that get called out by rolling Clang:\n\n```\n gen/src/dawn/wire/WireCmd_autogen.cpp(8663,15): error: offset of on non-standard-layout type \u0027AdapterGetInstanceTransfer\u0027 [-Werror,-Winvalid-offsetof]\n  8663 | static_assert(offsetof(AdapterGetInstanceTransfer, commandSize) \u003d\u003d 0);\n       |               ^                                    ~~~~~~~~~~~\n\n```",
+      "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
