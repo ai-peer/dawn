@@ -3,6 +3,29 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "e20f8926_de7850f0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-10-23T16:00:17Z",
+      "side": 1,
+      "message": "I confirm running:\n```\ngit clone https://dawn.googlesource.com/dawn dawn \u0026\u0026 cd dawn\ngit pull https://dawn.googlesource.com/dawn refs/changes/00/157700/3\npython tools/fetch_dawn_dependencies.py --use-test-deps\nmkdir -p out/Debug\ncd out/Debug\ncmake ../..\n```\ndoesn\u0027t result in an error anymore.\n\nThanks Corentin!",
+      "range": {
+        "startLine": 9,
+        "startChar": 0,
+        "endLine": 9,
+        "endChar": 16
+      },
+      "revId": "8c74c48aa8dcc314175564b1c699e08a9cc3cf66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "11fd8897_fcd68f90",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -14,6 +37,23 @@
       "writtenOn": "2023-10-23T15:51:56Z",
       "side": 1,
       "message": "PTAL!",
+      "revId": "8c74c48aa8dcc314175564b1c699e08a9cc3cf66",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ab0ff2_928d9088",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-10-23T16:00:17Z",
+      "side": 1,
+      "message": "Thanks! LGTM!",
       "revId": "8c74c48aa8dcc314175564b1c699e08a9cc3cf66",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
