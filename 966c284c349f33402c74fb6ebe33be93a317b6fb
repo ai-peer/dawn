@@ -16,6 +16,46 @@
       "message": "PTAL again! Still no functional changes intended.",
       "revId": "966c284c349f33402c74fb6ebe33be93a317b6fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "274a7834_5253606c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T16:39:26Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "966c284c349f33402c74fb6ebe33be93a317b6fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7d5270a_6d88578c",
+        "filename": "src/dawn/native/vulkan/DeviceVk.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T16:39:26Z",
+      "side": 1,
+      "message": "nit: maybe a TODO to move this to the Queue/ExecutionContext/CommandContext something ?",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 74,
+        "endChar": 44
+      },
+      "revId": "966c284c349f33402c74fb6ebe33be93a317b6fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
