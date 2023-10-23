@@ -80,25 +80,6 @@ MaybeError ValidateStorageTextureViewDimension(wgpu::TextureViewDimension dimens
 MaybeError ValidateReadWriteStorageTextureAccess(
     DeviceBase* device,
     const StorageTextureBindingLayout& storageTextureBindingLayout) {
-    switch (storageTextureBindingLayout.access) {
-        case wgpu::StorageTextureAccess::ReadOnly:
-        case wgpu::StorageTextureAccess::ReadWrite:
-            if (!device->APIHasFeature(
-                    wgpu::FeatureName::ChromiumExperimentalReadWriteStorageTexture)) {
-                return DAWN_VALIDATION_ERROR(
-                    "storage texture access %s cannot be used without feature "
-                    "%s",
-                    storageTextureBindingLayout.access,
-                    wgpu::FeatureName::ChromiumExperimentalReadWriteStorageTexture);
-            }
-            break;
-
-        case wgpu::StorageTextureAccess::WriteOnly:
-            break;
-        default:
-            DAWN_UNREACHABLE();
-    }
-
     if (storageTextureBindingLayout.access == wgpu::StorageTextureAccess::ReadWrite) {
         const Format* format = nullptr;
         DAWN_TRY_ASSIGN(format, device->GetInternalFormat(storageTextureBindingLayout.format));
