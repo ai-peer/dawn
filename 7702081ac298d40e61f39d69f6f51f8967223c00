@@ -16,6 +16,24 @@
       "message": "I think it\u0027s odd to remove half of the extension but still leave the other half. It would make more sense to me to either remove it entirely, or implement these missing functions (even if they just throw validation errors because they\u0027re not implemented).",
       "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d015bc9d_5869321e",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-23T19:10:43Z",
+      "side": 0,
+      "message": "It would be extra-work when resuming work on this feature to remove the first part of the extension. Cleaning the dawn.json file only makes it clear which function are actually implemented, even if the current state is actually broken.\n\nIf we go with implementing missing functions, can you point to me how to properly throw validation errors? Would you use something like that?\n\n```\nreturn DAWN_VALIDATION_ERROR(\"beginPipelineStatisticsQuery is not implemented yet\"); \n```\n\nDo we agree that we should not expose them to emscripten as well, only native?",
+      "parentUuid": "911eb31c_28abdbcc",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
