@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "808d2fb2_40dd5f1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T17:49:03Z",
+      "side": 1,
+      "message": "Looks good! A few comments about terminology and go-isms.",
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1dac0a79_c0a28833",
+        "filename": "tools/src/cmd/cts/common/config.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T17:49:03Z",
+      "side": 1,
+      "message": "Revert",
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "df0545f7_7c09c31c",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T17:49:03Z",
+      "side": 1,
+      "message": "übernit: Given that you have `resultsByTestName`, I\u0027d probably just keep this `results`.",
+      "range": {
+        "startLine": 223,
+        "startChar": 2,
+        "endLine": 223,
+        "endChar": 12
+      },
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "deba8dee_88494406",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T17:49:03Z",
+      "side": 1,
+      "message": "Please document",
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6a86cd6_5fc13a9e",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T17:49:03Z",
+      "side": 1,
+      "message": "`TestName` is a bit confusing. An individual `Result` comes from a single CTS `Test`. Is there another term you can think of that is less ambiguous?\n`ExecutionMode`?",
+      "range": {
+        "startLine": 182,
+        "startChar": 14,
+        "endLine": 182,
+        "endChar": 22
+      },
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31fe2b25_e2f19760",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-23T17:49:03Z",
+      "side": 1,
+      "message": "Whatever you call the term, it might be good to make a new type for it so that:\n(a) It\u0027s self documenting\n(b) you don\u0027t accidentally mix up some other string for a \u003cthing\u003e.\n\n```\n// \u003cthing\u003e represents the execution mode for a test\ntype \u003cthing\u003e string\n```\n\nWith that it\u0027s a compile time error to use a string in the place of a `\u003cthing\u003e` without first casting.",
+      "range": {
+        "startLine": 182,
+        "startChar": 27,
+        "endLine": 182,
+        "endChar": 33
+      },
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
