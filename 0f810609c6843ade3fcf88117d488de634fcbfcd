@@ -16,6 +16,23 @@
       "message": "PTAL again!",
       "revId": "0f810609c6843ade3fcf88117d488de634fcbfcd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8a0ec5_12a126f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T16:23:20Z",
+      "side": 1,
+      "message": "LGTM but Chrome is saying the feature is not there; need to wait for vulkan-deps roll into Chrome I\u0027m guessing?",
+      "revId": "0f810609c6843ade3fcf88117d488de634fcbfcd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
