@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7075f913_73a52c6c",
+        "filename": "src/dawn/tests/end2end/ReadOnlyDepthStencilAttachmentTests.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T16:57:17Z",
+      "side": 1,
+      "message": "mmm.. std::optional less hacky?",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 66,
+        "endChar": 92
+      },
+      "revId": "410a1cdaacccdb0d21d68832c7b767c495579387",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

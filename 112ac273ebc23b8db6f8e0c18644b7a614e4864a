@@ -16,6 +16,63 @@
       "message": "PTAL!",
       "revId": "112ac273ebc23b8db6f8e0c18644b7a614e4864a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "381351c6_ae06f4fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T16:57:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "112ac273ebc23b8db6f8e0c18644b7a614e4864a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae227f94_fe8063be",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1119,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T16:57:17Z",
+      "side": 1,
+      "message": "```suggestion\n                // Stencil aspect:\n```",
+      "range": {
+        "startLine": 1119,
+        "startChar": 0,
+        "endLine": 1119,
+        "endChar": 32
+      },
+      "revId": "112ac273ebc23b8db6f8e0c18644b7a614e4864a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "383d914a_9bfdfd6b",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T16:57:17Z",
+      "side": 1,
+      "message": "it doesn\u0027t have to be for this CL, but an idea for this could be to have a dawn::native::vulkan::TextureUsage enum, and `TextureUsage ToBackend(wgpu::TextureUsage)` which converts the frontend version to the backend version. Then we can more type-safely extend the enum. It\u0027ll be kind of verbose because need to static assert all the values are the same so conversion is zero-cost and do it in a switch case we we know we did it exhaustively...\n\notherwise it\u0027s not super obvious to be sure that everything downstream of Merge knows how to handle the reserved usages.",
+      "revId": "112ac273ebc23b8db6f8e0c18644b7a614e4864a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
