@@ -458,6 +458,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "16ad9d29_d67a1c4d",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-10-23T13:33:12Z",
+      "side": 1,
+      "message": "`shaderStage` is also used to determine the `dstStageMask`, so I was thinking there were situations in which we can avoid putting fragment in the destination stages even if we do end up needing a barrier for other reasons (other buffer usage/shader stage in the same sync scope).\n\nThough in practice I think the only time this could happen is if we have a buffer being both read in a fragment shader (uniform or storage) and also used as an indirect or vertex buffer. (This may seem unlikely but the user can do buffer suballocation, so isn\u0027t necessarily that weird.) But the vertex/indirect buffer pipeline stage occurs earlier than the fragment stage, so avoiding the fragment stage doesn\u0027t matter.\n\nIn fact, this is a bug, as I modify only the `shaderStage` but not the `usage` and access masks are determined by `usage`. So we could end up with a `dstAccessMask` containing `VK_ACCESS_UNIFORM_READ_BIT` without the `dstStageMask` containing any supported pipeline stage for that access. I have removed this line now.",
+      "parentUuid": "06b4ec9c_7df9476b",
+      "revId": "5d31eaa1c83c744ce6624e2c8dcf528586c784da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2132bde4_f1df2c04",
