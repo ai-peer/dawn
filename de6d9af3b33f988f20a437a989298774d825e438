@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08450b97_22bb364b",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-10-23T14:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dba51e09_639715d9",
+      "range": {
+        "startLine": 197,
+        "startChar": 60,
+        "endLine": 197,
+        "endChar": 94
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e401baf_77e22314",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-20T23:48:55Z",
       "side": 1,
       "message": "ditto: mutable args by pointer",
+      "range": {
+        "startLine": 202,
+        "startChar": 33,
+        "endLine": 202,
+        "endChar": 51
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1cb60b5_0605ecfc",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-10-23T14:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e401baf_77e22314",
       "range": {
         "startLine": 202,
         "startChar": 33,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "923479dd_cfe25459",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-10-23T14:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f65174c4_d1945338",
+      "range": {
+        "startLine": 204,
+        "startChar": 0,
+        "endLine": 204,
+        "endChar": 84
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "772f63f7_8ae3b1cf",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-10-20T23:48:55Z",
       "side": 1,
       "message": "```suggestion\n            [\u0026](const SubresourceRange\u0026 range, const TextureSyncInfo\u0026 syncInfo) -\u003e MaybeError {\n```",
+      "range": {
+        "startLine": 223,
+        "startChar": 47,
+        "endLine": 223,
+        "endChar": 62
+      },
+      "revId": "de6d9af3b33f988f20a437a989298774d825e438",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f883fcf1_c26a6446",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-10-23T14:37:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "772f63f7_8ae3b1cf",
       "range": {
         "startLine": 223,
         "startChar": 47,
