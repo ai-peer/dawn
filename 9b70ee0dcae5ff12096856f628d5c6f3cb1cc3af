@@ -219,6 +219,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df92e1f9_a554f6af",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 488,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-23T15:59:58Z",
+      "side": 1,
+      "message": "we can land this as is based on that github discussion; I\u0027ll file a bug about implementing the compat-range stype block",
+      "parentUuid": "4bb3e9bd_04797612",
+      "range": {
+        "startLine": 483,
+        "startChar": 4,
+        "endLine": 488,
+        "endChar": 61
+      },
+      "revId": "9b70ee0dcae5ff12096856f628d5c6f3cb1cc3af",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "83f0c05b_d3c18c81",
