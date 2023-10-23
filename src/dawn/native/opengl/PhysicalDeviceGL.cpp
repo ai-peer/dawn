@@ -285,14 +285,23 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
     GLint maxVertexAttribs = Get(gl, GL_MAX_VERTEX_ATTRIBS);
     limits->v1.maxVertexAttributes = limits->v1.maxVertexBuffers * maxVertexAttribs;
     limits->v1.maxVertexBufferArrayStride = Get(gl, GL_MAX_VERTEX_ATTRIB_STRIDE);
-    limits->v1.maxInterStageShaderComponents = Get(gl, GL_MAX_VARYING_COMPONENTS);
-    limits->v1.maxInterStageShaderVariables = Get(gl, GL_MAX_VARYING_VECTORS);
-    // TODO(dawn:685, dawn:1448): Support higher values as ANGLE compiler always generates
-    // additional shader varyings (gl_PointSize and dx_Position) on ANGLE D3D backends.
-    limits->v1.maxInterStageShaderComponents =
-        std::min(limits->v1.maxInterStageShaderComponents, kMaxInterStageShaderComponents);
-    limits->v1.maxInterStageShaderVariables =
-        std::min(limits->v1.maxInterStageShaderVariables, kMaxInterStageShaderVariables);
+
+    // According to OpenGL ES 3.1 SPEC (11.1.2.1):
+    // "Each output variable component used as either a vertex shader output or fragment shader
+    // input count against this limit, except for the components of gl_Position".
+    // This means all other built-in variables (gl_FragCoord, gl_SampleID, gl_SampleMaskIn,
+    // gl_FrontFacing) should count in the limit on output variable components. In addition, Tint
+    // always generates gl_PointSize in the output GLSL vertex shaders whether the primitive
+    // topology of the render pipeline is PointList or not.
+    // - gl_FragCoord consumes 4 inter-stage shader components.
+    // - gl_SampleID, gl_SampleMaskIn and gl_FrontFacing totally consume 3 inter-stage shader
+    //   components.
+    // - gl_PointSize consumes 1 inter-stage shader component on non D3D9 backends according to
+    //   the helper function ShouldSkipPackedVarying() in ANGLE.
+    limits->v1.maxInterStageShaderComponents = Get(gl, GL_MAX_VARYING_COMPONENTS) - 8;
+    // "The implementation-dependent constant MAX_VARYING_VECTORS has a value equal to the value of
+    // MAX_VARYING_COMPONENTS divided by four".
+    limits->v1.maxInterStageShaderVariables = limits->v1.maxInterStageShaderComponents / 4;
 
     limits->v1.maxColorAttachments =
         std::min(Get(gl, GL_MAX_COLOR_ATTACHMENTS), Get(gl, GL_MAX_DRAW_BUFFERS));
