@@ -34,11 +34,93 @@
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/Forward.h"
+#include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
 namespace dawn::native::d3d11 {
+
+CommandRecordingContext::ScopedContext::ScopedContext() = default;
+CommandRecordingContext::ScopedContext::ScopedContext(CommandRecordingContext* commandContext,
+                                                      bool swapContextState)
+    : mCommandContext(commandContext),
+      mSwapContextState(swapContextState),
+      mD3D11Multithread(mCommandContext->mD3D11Multithread),
+      mDeviceContext(mCommandContext->mD3D11DeviceContext4) {
+    DAWN_ASSERT(!mCommandContext->mScopedAccessed);
+    mCommandContext->mScopedAccessed = true;
+
+    if (mD3D11Multithread) {
+        mD3D11Multithread->Enter();
+    }
+
+    if (mSwapContextState &&
+        ToBackend(mCommandContext->mDevice->GetPhysicalDevice())->IsSharedD3d11Device()) {
+        mDeviceContext->SwapDeviceContextState(mCommandContext->mD3D11DeviceContextState.Get(),
+                                               &mPreviousState);
+    }
+}
+
+CommandRecordingContext::ScopedContext::ScopedContext(ScopedContext&& other) {
+    this->operator=(std::move(other));
+}
+
+CommandRecordingContext::ScopedContext::~ScopedContext() {
+    Reset();
+}
+
+CommandRecordingContext::ScopedContext& CommandRecordingContext::ScopedContext::operator=(
+    ScopedContext&& other) {
+    Reset();
+    mPreviousState = std::move(other.mPreviousState);
+    mSwapContextState = other.mSwapContextState;
+    mD3D11Multithread = std::move(other.mD3D11Multithread);
+    mDeviceContext = std::move(other.mDeviceContext);
+    mCommandContext = std::move(other.mCommandContext);
+    return *this;
+}
+
+void CommandRecordingContext::ScopedContext::Reset() {
+    if (!mCommandContext) {
+        return;
+    }
+    DAWN_ASSERT(mCommandContext->mScopedAccessed);
+    mCommandContext->mScopedAccessed = false;
+
+    if (mSwapContextState &&
+        ToBackend(mCommandContext->mDevice->GetPhysicalDevice())->IsSharedD3d11Device()) {
+        mDeviceContext->SwapDeviceContextState(mPreviousState.Get(), nullptr);
+        mSwapContextState = false;
+        mPreviousState = nullptr;
+        mDeviceContext = nullptr;
+    }
+
+    if (mD3D11Multithread) {
+        mD3D11Multithread->Leave();
+        mD3D11Multithread = nullptr;
+    }
+    mCommandContext = nullptr;
+}
+
+void CommandRecordingContext::ScopedContext::WriteUniformBuffer(uint32_t offset,
+                                                                uint32_t element) const {
+    DAWN_ASSERT(offset < kMaxNumBuiltinElements);
+    if (mCommandContext->mUniformBufferData[offset] != element) {
+        mCommandContext->mUniformBufferData[offset] = element;
+        mCommandContext->mUniformBufferDirty = true;
+    }
+}
+
+MaybeError CommandRecordingContext::ScopedContext::FlushUniformBuffer() const {
+    if (mCommandContext->mUniformBufferDirty) {
+        DAWN_TRY(mCommandContext->mUniformBuffer->Write(
+            *this, 0, mCommandContext->mUniformBufferData.data(),
+            mCommandContext->mUniformBufferData.size() * sizeof(uint32_t)));
+        mCommandContext->mUniformBufferDirty = false;
+    }
+    return {};
+}
 
 MaybeError CommandRecordingContext::Intialize(Device* device) {
     DAWN_ASSERT(!IsOpen());
@@ -46,7 +128,16 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
     mDevice = device;
     mNeedsSubmit = false;
 
-    ID3D11Device* d3d11Device = device->GetD3D11Device();
+    ID3D11Device5* d3d11Device = device->GetD3D11Device5();
+
+    if (ToBackend(device->GetPhysicalDevice())->IsSharedD3d11Device()) {
+        const D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0};
+        DAWN_TRY(CheckHRESULT(
+            d3d11Device->CreateDeviceContextState(
+                /*Flags=*/0, featureLevels, std::size(featureLevels), D3D11_SDK_VERSION,
+                __uuidof(ID3D11Device5), nullptr, &mD3D11DeviceContextState),
+            "D3D11: create device context state"));
+    }
 
     ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
     device->GetD3D11Device()->GetImmediateContext(&d3d11DeviceContext);
@@ -101,28 +192,6 @@ MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
     return {};
 }
 
-ID3D11Device* CommandRecordingContext::GetD3D11Device() const {
-    return mD3D11Device.Get();
-}
-
-ID3D11DeviceContext4* CommandRecordingContext::GetD3D11DeviceContext4() const {
-    DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
-    return mD3D11DeviceContext4.Get();
-}
-
-ID3DUserDefinedAnnotation* CommandRecordingContext::GetD3DUserDefinedAnnotation() const {
-    return mD3DUserDefinedAnnotation.Get();
-}
-
-Buffer* CommandRecordingContext::GetUniformBuffer() const {
-    return mUniformBuffer.Get();
-}
-
-Device* CommandRecordingContext::GetDevice() const {
-    DAWN_ASSERT(mDevice.Get());
-    return mDevice.Get();
-}
-
 void CommandRecordingContext::Release() {
     if (mIsOpen) {
         DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
@@ -135,57 +204,10 @@ void CommandRecordingContext::Release() {
                                                    &nullBuffer);
         mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
                                                    &nullBuffer);
+        mD3D11DeviceContextState = nullptr;
         mD3D11DeviceContext4 = nullptr;
         mD3D11Device = nullptr;
     }
-}
-
-bool CommandRecordingContext::IsOpen() const {
-    return mIsOpen;
-}
-
-bool CommandRecordingContext::NeedsSubmit() const {
-    return mNeedsSubmit;
-}
-
-void CommandRecordingContext::SetNeedsSubmit() {
-    mNeedsSubmit = true;
-}
-
-CommandRecordingContext::ScopedCriticalSection::ScopedCriticalSection(
-    ComPtr<ID3D11Multithread> d3d11Multithread)
-    : mD3D11Multithread(std::move(d3d11Multithread)) {
-    if (mD3D11Multithread) {
-        mD3D11Multithread->Enter();
-    }
-}
-
-CommandRecordingContext::ScopedCriticalSection::~ScopedCriticalSection() {
-    if (mD3D11Multithread) {
-        mD3D11Multithread->Leave();
-    }
-}
-
-CommandRecordingContext::ScopedCriticalSection
-CommandRecordingContext::EnterScopedCriticalSection() {
-    return ScopedCriticalSection(mD3D11Multithread);
-}
-
-void CommandRecordingContext::WriteUniformBuffer(uint32_t offset, uint32_t element) {
-    DAWN_ASSERT(offset < kMaxNumBuiltinElements);
-    if (mUniformBufferData[offset] != element) {
-        mUniformBufferData[offset] = element;
-        mUniformBufferDirty = true;
-    }
-}
-
-MaybeError CommandRecordingContext::FlushUniformBuffer() {
-    if (mUniformBufferDirty) {
-        DAWN_TRY(mUniformBuffer->Write(this, 0, mUniformBufferData.data(),
-                                       mUniformBufferData.size() * sizeof(uint32_t)));
-        mUniformBufferDirty = false;
-    }
-    return {};
 }
 
 }  // namespace dawn::native::d3d11

@@ -67,14 +67,14 @@ DXGI_FORMAT DXGIIndexFormat(wgpu::IndexFormat format) {
 
 class VertexBufferTracker {
   public:
-    explicit VertexBufferTracker(CommandRecordingContext* commandContext)
+    explicit VertexBufferTracker(const CommandRecordingContext::ScopedContext& commandContext)
         : mCommandContext(commandContext) {}
 
     ~VertexBufferTracker() {
         mD3D11Buffers = {};
         mStrides = {};
         mOffsets = {};
-        mCommandContext->GetD3D11DeviceContext4()->IASetVertexBuffers(
+        mCommandContext.GetD3D11DeviceContext4()->IASetVertexBuffers(
             0, kMaxVertexBuffers, mD3D11Buffers.data(), mStrides.data(), mOffsets.data());
     }
 
@@ -95,19 +95,21 @@ class VertexBufferTracker {
             }
         }
 
-        mCommandContext->GetD3D11DeviceContext4()->IASetVertexBuffers(
+        mCommandContext.GetD3D11DeviceContext4()->IASetVertexBuffers(
             0, kMaxVertexBuffers, mD3D11Buffers.data(), mStrides.data(), mOffsets.data());
     }
 
   private:
-    CommandRecordingContext* const mCommandContext;
+    const CommandRecordingContext::ScopedContext& mCommandContext;
     const RenderPipeline* mLastAppliedRenderPipeline = nullptr;
     ityp::array<VertexBufferSlot, ID3D11Buffer*, kMaxVertexBuffers> mD3D11Buffers = {};
     ityp::array<VertexBufferSlot, UINT, kMaxVertexBuffers> mStrides = {};
     ityp::array<VertexBufferSlot, UINT, kMaxVertexBuffers> mOffsets = {};
 };
 
-MaybeError SynchronizeTextureBeforeUse(Texture* texture, CommandRecordingContext* commandContext) {
+MaybeError SynchronizeTextureBeforeUse(
+    Texture* texture,
+    const CommandRecordingContext::ScopedContext& commandContext) {
     SharedTextureMemoryBase::PendingFenceList fences;
     SharedTextureMemoryContents* contents = texture->GetSharedTextureMemoryContents();
     if (contents == nullptr) {
@@ -118,7 +120,7 @@ MaybeError SynchronizeTextureBeforeUse(Texture* texture, CommandRecordingContext
     contents->SetLastUsageSerial(texture->GetDevice()->GetPendingCommandSerial());
 
     for (auto& fence : fences) {
-        DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Wait(
+        DAWN_TRY(CheckHRESULT(commandContext.GetD3D11DeviceContext4()->Wait(
                                   ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
                               "ID3D11DeviceContext4::Wait"));
     }
@@ -133,14 +135,8 @@ Ref<CommandBuffer> CommandBuffer::Create(CommandEncoder* encoder,
     return AcquireRef(new CommandBuffer(encoder, descriptor));
 }
 
-MaybeError CommandBuffer::Execute() {
-    CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
-
-    // Mark a critical section for this entire scope to minimize the cost of mutex acquire/release
-    // when ID3D11Multithread protection is enabled.
-    auto scopedCriticalSection = commandContext->EnterScopedCriticalSection();
-
-    auto LazyClearSyncScope = [commandContext](const SyncScopeResourceUsage& scope) -> MaybeError {
+MaybeError CommandBuffer::Execute(const CommandRecordingContext::ScopedContext& commandContext) {
+    auto LazyClearSyncScope = [&commandContext](const SyncScopeResourceUsage& scope) -> MaybeError {
         for (size_t i = 0; i < scope.textures.size(); i++) {
             Texture* texture = ToBackend(scope.textures[i]);
 
@@ -262,7 +258,7 @@ MaybeError CommandBuffer::Execute() {
                 }
 
                 Buffer::ScopedMap scopedMap;
-                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(buffer));
+                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(commandContext, buffer));
                 DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
                 Texture* texture = ToBackend(dst.texture.Get());
@@ -297,7 +293,7 @@ MaybeError CommandBuffer::Execute() {
 
                 Buffer* buffer = ToBackend(dst.buffer.Get());
                 Buffer::ScopedMap scopedDstMap;
-                DAWN_TRY_ASSIGN(scopedDstMap, Buffer::ScopedMap::Create(buffer));
+                DAWN_TRY_ASSIGN(scopedDstMap, Buffer::ScopedMap::Create(commandContext, buffer));
 
                 DAWN_TRY(buffer->EnsureDataInitializedAsDestination(commandContext, copy));
 
@@ -392,7 +388,8 @@ MaybeError CommandBuffer::Execute() {
     return {};
 }
 
-MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandContext) {
+MaybeError CommandBuffer::ExecuteComputePass(
+    const CommandRecordingContext::ScopedContext& commandContext) {
     ComputePipeline* lastPipeline = nullptr;
     BindGroupTracker bindGroupTracker(commandContext, /*isRenderPass=*/false);
 
@@ -410,8 +407,8 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
                 DAWN_TRY(bindGroupTracker.Apply());
 
                 DAWN_TRY(RecordNumWorkgroupsForDispatch(lastPipeline, commandContext, dispatch));
-                commandContext->GetD3D11DeviceContext4()->Dispatch(dispatch->x, dispatch->y,
-                                                                   dispatch->z);
+                commandContext.GetD3D11DeviceContext4()->Dispatch(dispatch->x, dispatch->y,
+                                                                  dispatch->z);
 
                 break;
             }
@@ -426,11 +423,11 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
                 if (lastPipeline->UsesNumWorkgroups()) {
                     // Copy indirect args into the uniform buffer for built-in workgroup variables.
                     DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, dispatch->indirectOffset,
-                                          sizeof(uint32_t) * 3, commandContext->GetUniformBuffer(),
+                                          sizeof(uint32_t) * 3, commandContext.GetUniformBuffer(),
                                           0));
                 }
 
-                commandContext->GetD3D11DeviceContext4()->DispatchIndirect(
+                commandContext.GetD3D11DeviceContext4()->DispatchIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), dispatch->indirectOffset);
 
                 break;
@@ -478,9 +475,10 @@ MaybeError CommandBuffer::ExecuteComputePass(CommandRecordingContext* commandCon
     DAWN_UNREACHABLE();
 }
 
-MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
-                                            CommandRecordingContext* commandContext) {
-    auto* d3d11DeviceContext = commandContext->GetD3D11DeviceContext4();
+MaybeError CommandBuffer::ExecuteRenderPass(
+    BeginRenderPassCmd* renderPass,
+    const CommandRecordingContext::ScopedContext& commandContext) {
+    auto* d3d11DeviceContext = commandContext.GetD3D11DeviceContext4();
 
     // Hold ID3D11RenderTargetView ComPtr to make attachments alive.
     ityp::array<ColorAttachmentIndex, ID3D11RenderTargetView*, kMaxColorAttachments>
@@ -563,7 +561,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 vertexBufferTracker.Apply(lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->firstVertex,
                                                 draw->firstInstance));
-                commandContext->GetD3D11DeviceContext4()->DrawInstanced(
+                commandContext.GetD3D11DeviceContext4()->DrawInstanced(
                     draw->vertexCount, draw->instanceCount, draw->firstVertex, draw->firstInstance);
 
                 break;
@@ -576,7 +574,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 vertexBufferTracker.Apply(lastPipeline);
                 DAWN_TRY(RecordFirstIndexOffset(lastPipeline, commandContext, draw->baseVertex,
                                                 draw->firstInstance));
-                commandContext->GetD3D11DeviceContext4()->DrawIndexedInstanced(
+                commandContext.GetD3D11DeviceContext4()->DrawIndexedInstanced(
                     draw->indexCount, draw->instanceCount, draw->firstIndex, draw->baseVertex,
                     draw->firstInstance);
 
@@ -599,11 +597,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                         draw->indirectOffset +
                         offsetof(D3D11_DRAW_INSTANCED_INDIRECT_ARGS, StartVertexLocation);
                     DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, offset,
-                                          sizeof(uint32_t) * 2, commandContext->GetUniformBuffer(),
+                                          sizeof(uint32_t) * 2, commandContext.GetUniformBuffer(),
                                           0));
                 }
 
-                commandContext->GetD3D11DeviceContext4()->DrawInstancedIndirect(
+                commandContext.GetD3D11DeviceContext4()->DrawInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
                 break;
@@ -625,11 +623,11 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                         draw->indirectOffset +
                         offsetof(D3D11_DRAW_INDEXED_INSTANCED_INDIRECT_ARGS, BaseVertexLocation);
                     DAWN_TRY(Buffer::Copy(commandContext, indirectBuffer, offset,
-                                          sizeof(uint32_t) * 2, commandContext->GetUniformBuffer(),
+                                          sizeof(uint32_t) * 2, commandContext.GetUniformBuffer(),
                                           0));
                 }
 
-                commandContext->GetD3D11DeviceContext4()->DrawIndexedInstancedIndirect(
+                commandContext.GetD3D11DeviceContext4()->DrawIndexedInstancedIndirect(
                     indirectBuffer->GetD3D11NonConstantBuffer(), draw->indirectOffset);
 
                 break;
@@ -664,7 +662,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 UINT indexBufferBaseOffset = cmd->offset;
                 DXGI_FORMAT indexBufferFormat = DXGIIndexFormat(cmd->format);
 
-                commandContext->GetD3D11DeviceContext4()->IASetIndexBuffer(
+                commandContext.GetD3D11DeviceContext4()->IASetIndexBuffer(
                     ToBackend(cmd->buffer)->GetD3D11NonConstantBuffer(), indexBufferFormat,
                     indexBufferBaseOffset);
 
@@ -751,7 +749,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 viewport.Height = cmd->height;
                 viewport.MinDepth = cmd->minDepth;
                 viewport.MaxDepth = cmd->maxDepth;
-                commandContext->GetD3D11DeviceContext4()->RSSetViewports(1, &viewport);
+                commandContext.GetD3D11DeviceContext4()->RSSetViewports(1, &viewport);
                 break;
             }
 
@@ -761,7 +759,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
                 D3D11_RECT scissorRect = {static_cast<LONG>(cmd->x), static_cast<LONG>(cmd->y),
                                           static_cast<LONG>(cmd->x + cmd->width),
                                           static_cast<LONG>(cmd->y + cmd->height)};
-                commandContext->GetD3D11DeviceContext4()->RSSetScissorRects(1, &scissorRect);
+                commandContext.GetD3D11DeviceContext4()->RSSetScissorRects(1, &scissorRect);
                 break;
             }
 
@@ -790,14 +788,14 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
             case Command::BeginOcclusionQuery: {
                 BeginOcclusionQueryCmd* cmd = mCommands.NextCommand<BeginOcclusionQueryCmd>();
                 QuerySet* querySet = ToBackend(cmd->querySet.Get());
-                querySet->BeginQuery(commandContext->GetD3D11DeviceContext4(), cmd->queryIndex);
+                querySet->BeginQuery(commandContext.GetD3D11DeviceContext4(), cmd->queryIndex);
                 break;
             }
 
             case Command::EndOcclusionQuery: {
                 EndOcclusionQueryCmd* cmd = mCommands.NextCommand<EndOcclusionQueryCmd>();
                 QuerySet* querySet = ToBackend(cmd->querySet.Get());
-                querySet->EndQuery(commandContext->GetD3D11DeviceContext4(), cmd->queryIndex);
+                querySet->EndQuery(commandContext.GetD3D11DeviceContext4(), cmd->queryIndex);
                 break;
             }
 
@@ -814,27 +812,28 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass,
     DAWN_UNREACHABLE();
 }
 
-void CommandBuffer::HandleDebugCommands(CommandRecordingContext* commandContext,
-                                        CommandIterator* iter,
-                                        Command command) {
+void CommandBuffer::HandleDebugCommands(
+    const CommandRecordingContext::ScopedContext& commandContext,
+    CommandIterator* iter,
+    Command command) {
     switch (command) {
         case Command::InsertDebugMarker: {
             InsertDebugMarkerCmd* cmd = iter->NextCommand<InsertDebugMarkerCmd>();
             std::wstring label = UTF8ToWStr(iter->NextData<char>(cmd->length + 1));
-            commandContext->GetD3DUserDefinedAnnotation()->SetMarker(label.c_str());
+            commandContext.GetD3DUserDefinedAnnotation()->SetMarker(label.c_str());
             break;
         }
 
         case Command::PopDebugGroup: {
             std::ignore = iter->NextCommand<PopDebugGroupCmd>();
-            commandContext->GetD3DUserDefinedAnnotation()->EndEvent();
+            commandContext.GetD3DUserDefinedAnnotation()->EndEvent();
             break;
         }
 
         case Command::PushDebugGroup: {
             PushDebugGroupCmd* cmd = iter->NextCommand<PushDebugGroupCmd>();
             std::wstring label = UTF8ToWStr(iter->NextData<char>(cmd->length + 1));
-            commandContext->GetD3DUserDefinedAnnotation()->BeginEvent(label.c_str());
+            commandContext.GetD3DUserDefinedAnnotation()->BeginEvent(label.c_str());
             break;
         }
         default:
@@ -842,36 +841,38 @@ void CommandBuffer::HandleDebugCommands(CommandRecordingContext* commandContext,
     }
 }
 
-MaybeError CommandBuffer::RecordFirstIndexOffset(RenderPipeline* renderPipeline,
-                                                 CommandRecordingContext* commandContext,
-                                                 uint32_t firstVertex,
-                                                 uint32_t firstInstance) {
+MaybeError CommandBuffer::RecordFirstIndexOffset(
+    RenderPipeline* renderPipeline,
+    const CommandRecordingContext::ScopedContext& commandContext,
+    uint32_t firstVertex,
+    uint32_t firstInstance) {
     constexpr uint32_t kFirstVertexOffset = 0;
     constexpr uint32_t kFirstInstanceOffset = 1;
 
     if (renderPipeline->UsesVertexIndex()) {
-        commandContext->WriteUniformBuffer(kFirstVertexOffset, firstVertex);
+        commandContext.WriteUniformBuffer(kFirstVertexOffset, firstVertex);
     }
     if (renderPipeline->UsesInstanceIndex()) {
-        commandContext->WriteUniformBuffer(kFirstInstanceOffset, firstInstance);
+        commandContext.WriteUniformBuffer(kFirstInstanceOffset, firstInstance);
     }
 
-    return commandContext->FlushUniformBuffer();
+    return commandContext.FlushUniformBuffer();
 }
 
-MaybeError CommandBuffer::RecordNumWorkgroupsForDispatch(ComputePipeline* computePipeline,
-                                                         CommandRecordingContext* commandContext,
-                                                         DispatchCmd* dispatchCmd) {
+MaybeError CommandBuffer::RecordNumWorkgroupsForDispatch(
+    ComputePipeline* computePipeline,
+    const CommandRecordingContext::ScopedContext& commandContext,
+    DispatchCmd* dispatchCmd) {
     if (!computePipeline->UsesNumWorkgroups()) {
         // Workgroup size is not used in shader, so we don't need to update the uniform buffer. The
         // original value in the uniform buffer will not be used, so we don't need to clear it.
         return {};
     }
 
-    commandContext->WriteUniformBuffer(/*offset=*/0, dispatchCmd->x);
-    commandContext->WriteUniformBuffer(/*offset=*/1, dispatchCmd->y);
-    commandContext->WriteUniformBuffer(/*offset=*/2, dispatchCmd->z);
-    return commandContext->FlushUniformBuffer();
+    commandContext.WriteUniformBuffer(/*offset=*/0, dispatchCmd->x);
+    commandContext.WriteUniformBuffer(/*offset=*/1, dispatchCmd->y);
+    commandContext.WriteUniformBuffer(/*offset=*/2, dispatchCmd->z);
+    return commandContext.FlushUniformBuffer();
 }
 
 }  // namespace dawn::native::d3d11

@@ -30,6 +30,7 @@
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/CommandBufferD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
+#include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 #include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -48,10 +49,14 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     // TODO(dawn:1770): figure how if we need to track and restore the state of the immediate device
     // context.
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferD3D11::Execute");
-    for (uint32_t i = 0; i < commandCount; ++i) {
-        DAWN_TRY(ToBackend(commands[i])->Execute());
+    {
+        auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal,
+                                                                     /*swapContextState=*/true);
+        for (uint32_t i = 0; i < commandCount; ++i) {
+            DAWN_TRY(ToBackend(commands[i])->Execute(commandContext));
+        }
+        DAWN_TRY(device->ExecutePendingCommandContext());
     }
-    DAWN_TRY(device->ExecutePendingCommandContext());
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferD3D11::Execute");
 
     DAWN_TRY(device->NextSerial());
@@ -68,7 +73,9 @@ MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
         return {};
     }
 
-    CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
+    Device* device = ToBackend(GetDevice());
+    auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal,
+                                                                 /*swapContextState=*/false);
     return ToBackend(buffer)->Write(commandContext, bufferOffset, data, size);
 }
 
@@ -81,8 +88,9 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
         return {};
     }
 
-    CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
-
+    Device* device = ToBackend(GetDevice());
+    auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal,
+                                                                 /*swapContextState=*/false);
     TextureCopy textureCopy;
     textureCopy.texture = destination.texture;
     textureCopy.mipLevel = destination.mipLevel;

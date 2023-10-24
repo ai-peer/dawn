@@ -54,7 +54,8 @@ class Device final : public d3d::Device {
     ID3D11Device* GetD3D11Device() const;
     ID3D11Device5* GetD3D11Device5() const;
 
-    CommandRecordingContext* GetPendingCommandContext(SubmitMode submitMode = SubmitMode::Normal);
+    CommandRecordingContext::ScopedContext GetScopedPendingCommandContext(SubmitMode submitMode,
+                                                                          bool swapContextState);
 
     const DeviceInfo& GetDeviceInfo() const;
 

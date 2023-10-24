@@ -33,10 +33,10 @@
 
 #include "dawn/native/RenderPipeline.h"
 #include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 
 namespace dawn::native::d3d11 {
 
-class CommandRecordingContext;
 class Device;
 class PersistentPipelineState;
 
@@ -49,12 +49,13 @@ class RenderPipeline final : public RenderPipelineBase {
                                 WGPUCreateRenderPipelineAsyncCallback callback,
                                 void* userdata);
 
-    void ApplyNow(CommandRecordingContext* commandContext,
+    void ApplyNow(const CommandRecordingContext::ScopedContext& commandContext,
                   const std::array<float, 4>& blendColor,
                   uint32_t stencilReference);
-    void ApplyBlendState(CommandRecordingContext* commandContext,
+    void ApplyBlendState(const CommandRecordingContext::ScopedContext& commandContext,
                          const std::array<float, 4>& blendColor);
-    void ApplyDepthStencilState(CommandRecordingContext* commandContext, uint32_t stencilReference);
+    void ApplyDepthStencilState(const CommandRecordingContext::ScopedContext& commandContext,
+                                uint32_t stencilReference);
 
     bool UsesVertexIndex() const { return mUsesVertexIndex; }
     bool UsesInstanceIndex() const { return mUsesInstanceIndex; }

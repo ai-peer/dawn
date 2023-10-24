@@ -44,8 +44,8 @@
 namespace dawn::native::d3d11 {
 namespace {
 
-bool CheckAllSlotsAreEmpty(CommandRecordingContext* commandContext) {
-    auto* deviceContext = commandContext->GetD3D11DeviceContext4();
+bool CheckAllSlotsAreEmpty(const CommandRecordingContext::ScopedContext& commandContext) {
+    auto* deviceContext = commandContext.GetD3D11DeviceContext4();
 
     // Reserve one slot for builtin constants.
     constexpr uint32_t kReservedCBVSlots = 1;
@@ -91,7 +91,7 @@ bool CheckAllSlotsAreEmpty(CommandRecordingContext* commandContext) {
         DAWN_ASSERT(uav == nullptr);
     }
     // Check UAV slots for render
-    for (UINT slot = 0; slot < commandContext->GetDevice()->GetUAVSlotCount(); ++slot) {
+    for (UINT slot = 0; slot < commandContext.GetDevice()->GetUAVSlotCount(); ++slot) {
         ID3D11UnorderedAccessView* uav = nullptr;
         deviceContext->OMGetRenderTargetsAndUnorderedAccessViews(0, nullptr, nullptr, slot, 1,
                                                                  &uav);
@@ -101,8 +101,8 @@ bool CheckAllSlotsAreEmpty(CommandRecordingContext* commandContext) {
     return true;
 }
 
-void ResetAllRenderSlots(CommandRecordingContext* commandContext) {
-    auto* deviceContext = commandContext->GetD3D11DeviceContext4();
+void ResetAllRenderSlots(const CommandRecordingContext::ScopedContext& commandContext) {
+    auto* deviceContext = commandContext.GetD3D11DeviceContext4();
 
     // Reserve one slot for builtin constants.
     constexpr uint32_t kReservedCBVSlots = 1;
@@ -123,19 +123,20 @@ void ResetAllRenderSlots(CommandRecordingContext* commandContext) {
     deviceContext->PSSetSamplers(0, num, d3d11Samplers);
 
     ID3D11UnorderedAccessView* d3d11UAVs[D3D11_1_UAV_SLOT_COUNT] = {};
-    num = commandContext->GetDevice()->GetUAVSlotCount();
+    num = commandContext.GetDevice()->GetUAVSlotCount();
     deviceContext->OMSetRenderTargetsAndUnorderedAccessViews(
         D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr, 0, num, d3d11UAVs, nullptr);
 }
 
 }  // namespace
 
-BindGroupTracker::BindGroupTracker(CommandRecordingContext* commandContext, bool isRenderPass)
+BindGroupTracker::BindGroupTracker(const CommandRecordingContext::ScopedContext& commandContext,
+                                   bool isRenderPass)
     : mCommandContext(commandContext),
       mIsRenderPass(isRenderPass),
       mVisibleStages(isRenderPass ? wgpu::ShaderStage::Vertex | wgpu::ShaderStage::Fragment
                                   : wgpu::ShaderStage::Compute) {
-    mLastAppliedPipelineLayout = commandContext->GetDevice()->GetEmptyPipelineLayout();
+    mLastAppliedPipelineLayout = mCommandContext.GetDevice()->GetEmptyPipelineLayout();
 }
 
 BindGroupTracker::~BindGroupTracker() {
@@ -233,7 +234,7 @@ MaybeError BindGroupTracker::Apply() {
         for (auto& uav : d3d11UAVs) {
             views.push_back(uav.Get());
         }
-        mCommandContext->GetD3D11DeviceContext4()->OMSetRenderTargetsAndUnorderedAccessViews(
+        mCommandContext.GetD3D11DeviceContext4()->OMSetRenderTargetsAndUnorderedAccessViews(
             D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL, nullptr, nullptr,
             uavSlotCount - d3d11UAVs.size(), d3d11UAVs.size(), views.data(), nullptr);
         d3d11UAVs.clear();
@@ -266,7 +267,7 @@ MaybeError BindGroupTracker::Apply() {
 }
 
 MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
-    auto* deviceContext = mCommandContext->GetD3D11DeviceContext4();
+    auto* deviceContext = mCommandContext.GetD3D11DeviceContext4();
     BindGroupBase* group = mBindGroups[index];
     const ityp::vector<BindingIndex, uint64_t>& dynamicOffsets = mDynamicOffsets[index];
     const auto& indices = ToBackend(mPipelineLayout)->GetBindingIndexInfo()[index];
@@ -437,7 +438,7 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
 }
 
 void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
-    auto* deviceContext = mCommandContext->GetD3D11DeviceContext4();
+    auto* deviceContext = mCommandContext.GetD3D11DeviceContext4();
     BindGroupLayoutInternalBase* groupLayout =
         mLastAppliedPipelineLayout->GetBindGroupLayout(index);
     const auto& indices = ToBackend(mLastAppliedPipelineLayout)->GetBindingIndexInfo()[index];
