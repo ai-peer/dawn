@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2a376f6_0ad1239a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-24T21:35:14Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "75e2de4eef955f18d7be70e216b694a2d7d03eb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd1182e6_850b32dc",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-24T21:35:14Z",
+      "side": 1,
+      "message": "what needs fixing?",
+      "range": {
+        "startLine": 705,
+        "startChar": 98,
+        "endLine": 705,
+        "endChar": 109
+      },
+      "revId": "75e2de4eef955f18d7be70e216b694a2d7d03eb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
