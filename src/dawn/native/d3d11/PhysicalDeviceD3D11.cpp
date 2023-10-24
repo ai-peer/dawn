@@ -76,8 +76,12 @@ MaybeError InitializeDebugLayerFilters(ComPtr<ID3D11Device> d3d11Device) {
 
 }  // namespace
 
-PhysicalDevice::PhysicalDevice(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter)
-    : Base(backend, std::move(hardwareAdapter), wgpu::BackendType::D3D11) {}
+PhysicalDevice::PhysicalDevice(Backend* backend,
+                               ComPtr<IDXGIAdapter3> hardwareAdapter,
+                               ComPtr<ID3D11Device> d3d11Device)
+    : Base(backend, std::move(hardwareAdapter), wgpu::BackendType::D3D11),
+      mIsSharedD3d11Device(!!d3d11Device),
+      mD3d11Device(std::move(d3d11Device)) {}
 
 PhysicalDevice::~PhysicalDevice() = default;
 
@@ -102,7 +106,12 @@ const DeviceInfo& PhysicalDevice::GetDeviceInfo() const {
 }
 
 ResultOrError<ComPtr<ID3D11Device>> PhysicalDevice::CreateD3D11Device() {
-    ComPtr<ID3D11Device> device = std::move(mD3d11Device);
+    ComPtr<ID3D11Device> device = mD3d11Device;
+
+    if (!mIsSharedD3d11Device) {
+        mD3d11Device = nullptr;
+    }
+
     if (!device) {
         const PlatformFunctions* functions = static_cast<Backend*>(GetBackend())->GetFunctions();
         const D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0};
@@ -123,6 +132,7 @@ ResultOrError<ComPtr<ID3D11Device>> PhysicalDevice::CreateD3D11Device() {
             DAWN_TRY(InitializeDebugLayerFilters(device));
         }
     }
+
     return device;
 }
 

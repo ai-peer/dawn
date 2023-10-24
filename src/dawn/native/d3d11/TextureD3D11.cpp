@@ -338,8 +338,9 @@ MaybeError Texture::InitializeAsInternalTexture() {
     // Staging texture is used internally, so we don't need to clear it.
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         mKind == Kind::Normal) {
-        CommandRecordingContext* commandContext = device->GetPendingCommandContext();
-        DAWN_TRY(Clear(commandContext, GetAllSubresources(), TextureBase::ClearValue::NonZero));
+        auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal,
+                                                                     /*swapContextState=*/false);
+        DAWN_TRY(Clear(&commandContext, GetAllSubresources(), TextureBase::ClearValue::NonZero));
     }
 
     SetLabelImpl();
@@ -360,8 +361,10 @@ MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
     ComPtr<ID3D11Resource> d3d11Texture;
     DAWN_TRY(CheckHRESULT(d3dTexture.As(&d3d11Texture), "Query ID3D11Resource from IUnknown"));
 
-    CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
-    auto* d3d11DeviceContext = commandContext->GetD3D11DeviceContext4();
+    Device* device = ToBackend(GetDevice());
+    auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal,
+                                                                 /*swapContextState=*/false);
+    auto* d3d11DeviceContext = commandContext.GetD3D11DeviceContext4();
     for (Ref<d3d::Fence>& fence : waitFences) {
         DAWN_TRY(
             CheckHRESULT(d3d11DeviceContext->Wait(static_cast<Fence*>(fence.Get())->GetD3D11Fence(),
@@ -479,7 +482,7 @@ ResultOrError<ComPtr<ID3D11DepthStencilView>> Texture::CreateD3D11DepthStencilVi
     return dsv;
 }
 
-MaybeError Texture::Clear(CommandRecordingContext* commandContext,
+MaybeError Texture::Clear(const CommandRecordingContext::ScopedContext* commandContext,
                           const SubresourceRange& range,
                           TextureBase::ClearValue clearValue) {
     bool isRenderable = GetInternalUsage() & wgpu::TextureUsage::RenderAttachment;
@@ -504,7 +507,7 @@ MaybeError Texture::Clear(CommandRecordingContext* commandContext,
     return {};
 }
 
-MaybeError Texture::ClearRenderable(CommandRecordingContext* commandContext,
+MaybeError Texture::ClearRenderable(const CommandRecordingContext::ScopedContext* commandContext,
                                     const SubresourceRange& range,
                                     TextureBase::ClearValue clearValue,
                                     const D3D11ClearValue& d3d11ClearValue) {
@@ -552,7 +555,7 @@ MaybeError Texture::ClearRenderable(CommandRecordingContext* commandContext,
     return {};
 }
 
-MaybeError Texture::ClearNonRenderable(CommandRecordingContext* commandContext,
+MaybeError Texture::ClearNonRenderable(const CommandRecordingContext::ScopedContext* commandContext,
                                        const SubresourceRange& range,
                                        TextureBase::ClearValue clearValue) {
     const TexelBlockInfo& blockInfo = GetFormat().GetAspectInfo(range.aspects).block;
@@ -595,7 +598,7 @@ MaybeError Texture::ClearNonRenderable(CommandRecordingContext* commandContext,
     return {};
 }
 
-MaybeError Texture::ClearCompressed(CommandRecordingContext* commandContext,
+MaybeError Texture::ClearCompressed(const CommandRecordingContext::ScopedContext* commandContext,
                                     const SubresourceRange& range,
                                     TextureBase::ClearValue clearValue) {
     DAWN_ASSERT(range.aspects == Aspect::Color);
@@ -684,8 +687,9 @@ void Texture::SetLabelImpl() {
     SetLabelHelper("Dawn_InternalTexture");
 }
 
-MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
-                                                        const SubresourceRange& range) {
+MaybeError Texture::EnsureSubresourceContentInitialized(
+    const CommandRecordingContext::ScopedContext* commandContext,
+    const SubresourceRange& range) {
     if (!ToBackend(GetDevice())->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
         return {};
     }
@@ -697,7 +701,7 @@ MaybeError Texture::EnsureSubresourceContentInitialized(CommandRecordingContext*
     return {};
 }
 
-MaybeError Texture::Write(CommandRecordingContext* commandContext,
+MaybeError Texture::Write(const CommandRecordingContext::ScopedContext* commandContext,
                           const SubresourceRange& subresources,
                           const Origin3D& origin,
                           const Extent3D& size,
@@ -719,7 +723,7 @@ MaybeError Texture::Write(CommandRecordingContext* commandContext,
     return {};
 }
 
-MaybeError Texture::WriteInternal(CommandRecordingContext* commandContext,
+MaybeError Texture::WriteInternal(const CommandRecordingContext::ScopedContext* commandContext,
                                   const SubresourceRange& subresources,
                                   const Origin3D& origin,
                                   const Extent3D& size,
@@ -766,13 +770,14 @@ MaybeError Texture::WriteInternal(CommandRecordingContext* commandContext,
     return {};
 }
 
-MaybeError Texture::WriteDepthStencilInternal(CommandRecordingContext* commandContext,
-                                              const SubresourceRange& subresources,
-                                              const Origin3D& origin,
-                                              const Extent3D& size,
-                                              const uint8_t* data,
-                                              uint32_t bytesPerRow,
-                                              uint32_t rowsPerImage) {
+MaybeError Texture::WriteDepthStencilInternal(
+    const CommandRecordingContext::ScopedContext* commandContext,
+    const SubresourceRange& subresources,
+    const Origin3D& origin,
+    const Extent3D& size,
+    const uint8_t* data,
+    uint32_t bytesPerRow,
+    uint32_t rowsPerImage) {
     TextureDescriptor desc = {};
     desc.label = "WriteStencilTextureStaging";
     desc.dimension = GetDimension();
@@ -858,7 +863,7 @@ MaybeError Texture::WriteDepthStencilInternal(CommandRecordingContext* commandCo
     return {};
 }
 
-MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
+MaybeError Texture::ReadStaging(const CommandRecordingContext::ScopedContext* commandContext,
                                 const SubresourceRange& subresources,
                                 const Origin3D& origin,
                                 Extent3D size,
@@ -958,7 +963,7 @@ MaybeError Texture::ReadStaging(CommandRecordingContext* commandContext,
     return {};
 }
 
-MaybeError Texture::Read(CommandRecordingContext* commandContext,
+MaybeError Texture::Read(const CommandRecordingContext::ScopedContext* commandContext,
                          const SubresourceRange& subresources,
                          const Origin3D& origin,
                          Extent3D size,
@@ -1000,7 +1005,8 @@ MaybeError Texture::Read(CommandRecordingContext* commandContext,
 }
 
 // static
-MaybeError Texture::Copy(CommandRecordingContext* commandContext, CopyTextureToTextureCmd* copy) {
+MaybeError Texture::Copy(const CommandRecordingContext::ScopedContext* commandContext,
+                         CopyTextureToTextureCmd* copy) {
     DAWN_ASSERT(copy->copySize.width != 0 && copy->copySize.height != 0 &&
                 copy->copySize.depthOrArrayLayers != 0);
 
@@ -1035,7 +1041,7 @@ MaybeError Texture::Copy(CommandRecordingContext* commandContext, CopyTextureToT
 }
 
 // static
-MaybeError Texture::CopyInternal(CommandRecordingContext* commandContext,
+MaybeError Texture::CopyInternal(const CommandRecordingContext::ScopedContext* commandContext,
                                  CopyTextureToTextureCmd* copy) {
     auto& src = copy->source;
     auto& dst = copy->destination;
@@ -1091,7 +1097,7 @@ ResultOrError<ExecutionSerial> Texture::EndAccess() {
 }
 
 ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(
-    CommandRecordingContext* commandContext,
+    const CommandRecordingContext::ScopedContext* commandContext,
     const TextureView* view) {
     DAWN_ASSERT(GetFormat().HasStencil());
 
