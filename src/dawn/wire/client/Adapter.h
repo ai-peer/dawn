@@ -55,6 +55,8 @@ class Adapter final : public ObjectBase {
     void RequestDevice(const WGPUDeviceDescriptor* descriptor,
                        WGPURequestDeviceCallback callback,
                        void* userdata);
+    WGPUFuture RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
+                              const WGPURequestDeviceCallbackInfo& callbackInfo);
 
     bool OnRequestDeviceCallback(uint64_t requestSerial,
                                  WGPURequestDeviceStatus status,

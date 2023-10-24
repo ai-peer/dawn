@@ -137,6 +137,11 @@ void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
     client->SerializeCommand(cmd);
 }
 
+WGPUFuture Adapter::RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
+                                   const WGPURequestDeviceCallbackInfo& callbackInfo) {
+    return {kNullFutureID};
+}
+
 bool Client::DoAdapterRequestDeviceCallback(Adapter* adapter,
                                             uint64_t requestSerial,
                                             WGPURequestDeviceStatus status,
