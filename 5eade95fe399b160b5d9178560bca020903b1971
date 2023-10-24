@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "43a72f81_547fbd71",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-24T18:00:02Z",
+      "side": 1,
+      "message": "If you are in the process of refactoring transforms out of dawn and into tint, I can just wait a bit and rebase later when you are done.",
+      "parentUuid": "664a3328_7396434d",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "586db6e3_a1483e14",
         "filename": "src/tint/lang/wgsl/ast/transform/renamer.cc",
         "patchSetId": 6
