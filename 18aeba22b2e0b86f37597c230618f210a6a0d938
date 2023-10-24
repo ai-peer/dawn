@@ -16,6 +16,24 @@
       "message": "With my usual disclaimer that we\u0027ve been explicitly told by our management chain that we don\u0027t have funding to reimplement parts of Dawn or Tint in Rust - no objection to landing this.",
       "revId": "18aeba22b2e0b86f37597c230618f210a6a0d938",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d145d52_44191a2b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-24T14:13:05Z",
+      "side": 1,
+      "message": "Sounds good.",
+      "parentUuid": "85641874_8a8d258b",
+      "revId": "18aeba22b2e0b86f37597c230618f210a6a0d938",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
