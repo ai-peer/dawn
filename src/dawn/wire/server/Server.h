@@ -152,7 +152,7 @@ struct RequestDeviceUserdata : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
     ObjectHandle adapter;
-    uint64_t requestSerial;
+    WGPUFuture future;
     ObjectId deviceObjectId;
 };
 
