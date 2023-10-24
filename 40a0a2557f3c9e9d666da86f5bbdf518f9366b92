@@ -69,6 +69,24 @@
       "parentUuid": "2d6fda95_d743b921",
       "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5641b006_089b445b",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-24T20:11:15Z",
+      "side": 1,
+      "message": "I decided to keep it all in C for now because the mocks are all in C anyways, so even if we used the C++ ones in some places, we wouldn\u0027t be able to replace them all right now.",
+      "parentUuid": "981a4523_a93a2506",
+      "revId": "40a0a2557f3c9e9d666da86f5bbdf518f9366b92",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
