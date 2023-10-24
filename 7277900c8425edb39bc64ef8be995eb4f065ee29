@@ -69,6 +69,42 @@
       "parentUuid": "1a4a30e2_7ab60756",
       "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "702ec930_0cd13cbe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-24T13:44:57Z",
+      "side": 1,
+      "message": "Yes, thanks.",
+      "parentUuid": "0835786a_0739f9f7",
+      "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a432093_589a7ff3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-24T13:44:57Z",
+      "side": 1,
+      "message": "Verified that just rolling clang hits this as well: https://dawn-review.googlesource.com/c/dawn/+/157880?tab\u003dchecks",
+      "parentUuid": "9d844e10_c7d3ae53",
+      "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
