@@ -23,6 +23,7 @@
 
 # This is the default build configuration when building PartitionAlloc
 # as a standalone library.
+use_partition_alloc = false
 use_partition_alloc_as_malloc_default = false
 use_allocator_shim_default = false
 enable_backup_ref_ptr_support_default = false
