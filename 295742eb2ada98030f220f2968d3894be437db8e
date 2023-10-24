@@ -99,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d346214b_654460b0",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-24T19:49:21Z",
+      "side": 1,
+      "message": "This was moved to the child CL, but I **think** that it\u0027s actually fine for now because although the wire implements the future version, internally it actually still defers to the non-future version when the wire calls into native.",
+      "parentUuid": "87089629_ec966e58",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e14035f2_88978a9e",
@@ -116,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b2fb0f_4ea472bc",
+        "filename": "src/dawn/tests/ParamGenerator.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-24T19:49:21Z",
+      "side": 1,
+      "message": "Hopefully won\u0027t be too many iterations, so will just try to land with this one.",
+      "parentUuid": "e14035f2_88978a9e",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "08240179_7830ef47",
@@ -129,6 +165,24 @@
       "writtenOn": "2023-10-24T03:23:16Z",
       "side": 1,
       "message": "It seems that this is so other tests can use the operator\u003c\u003c? that\u0027s a bit weird and maybe should be moved to some common file instead of this specific file doing the magic for others.",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80dcf056_c9d58984",
+        "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-24T19:49:21Z",
+      "side": 1,
+      "message": "They are actually just used in this test file at the moment. Added a TODO to move them to a common place (maybe even generate some of these?).",
+      "parentUuid": "08240179_7830ef47",
       "revId": "295742eb2ada98030f220f2968d3894be437db8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -465,6 +519,30 @@
       "side": 1,
       "message": "(it could be a constexpr std::array)",
       "parentUuid": "fe8ba244_14a8146b",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 33
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3d3d091_2e869f60",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-24T19:49:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb7939bf_b3edfc9a",
       "range": {
         "startLine": 47,
         "startChar": 0,
