@@ -145,8 +145,6 @@ crbug.com/dawn/2076 [ angle-opengl ] webgpu:web_platform,canvas,readbackFromWebG
 [ angle-opengl ] webgpu:api,validation,encoding,queries,begin_end:occlusion_query,begin_end_invalid_nesting: [ Failure ]
 [ angle-opengl ] webgpu:api,validation,encoding,queries,begin_end:occlusion_query,begin_end_balance: [ Failure ]
 [ angle-opengl ] webgpu:api,validation,error_scope:* [ Failure ]
-[ angle-opengl ] webgpu:api,validation,image_copy,buffer_related:bytes_per_row_alignment:method="CopyB2T";format="stencil8";dimension="2d" [ Failure ]
-[ angle-opengl ] webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,* [ Failure ]
 [ angle-opengl ] webgpu:api,validation,queue,destroyed,query_set:beginOcclusionQuery: [ Failure ]
 [ angle-opengl ] webgpu:api,validation,render_pipeline,inter_stage:location,mismatch:* [ Failure ]
 [ angle-opengl ] webgpu:api,operation,command_buffer,queries,* [ Skip ]
