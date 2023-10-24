@@ -52,6 +52,7 @@ enum class EventType {
     MapAsync,
     PopErrorScope,
     RequestAdapter,
+    RequestDevice,
     WorkDone,
 };
 

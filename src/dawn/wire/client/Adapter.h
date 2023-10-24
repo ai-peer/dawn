@@ -45,8 +45,6 @@ class Adapter final : public ObjectWithEventsBase {
     using ObjectWithEventsBase::ObjectWithEventsBase;
     ~Adapter() override;
 
-    void CancelCallbacksForDisconnect() override;
-
     bool GetLimits(WGPUSupportedLimits* limits) const;
     bool HasFeature(WGPUFeatureName feature) const;
     size_t EnumerateFeatures(WGPUFeatureName* features) const;
@@ -57,8 +55,10 @@ class Adapter final : public ObjectWithEventsBase {
     void RequestDevice(const WGPUDeviceDescriptor* descriptor,
                        WGPURequestDeviceCallback callback,
                        void* userdata);
+    WGPUFuture RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
+                              const WGPURequestDeviceCallbackInfo& callbackInfo);
 
-    bool OnRequestDeviceCallback(uint64_t requestSerial,
+    bool OnRequestDeviceCallback(WGPUFuture future,
                                  WGPURequestDeviceStatus status,
                                  const char* message,
                                  const WGPUSupportedLimits* limits,

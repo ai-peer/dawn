@@ -262,6 +262,12 @@ void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
     callback(status, ToAPI(ReturnToAPI(std::move(device))), nullptr, userdata);
 }
 
+Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
+                                      const RequestDeviceCallbackInfo& callbackInfo) {
+    // TODO(dawn:1987) Implement this.
+    DAWN_UNREACHABLE();
+}
+
 const TogglesState& AdapterBase::GetTogglesState() const {
     return mTogglesState;
 }
