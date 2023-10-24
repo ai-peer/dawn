@@ -155,7 +155,8 @@ ID3D11Device5* Device::GetD3D11Device5() const {
     return mD3d11Device5.Get();
 }
 
-CommandRecordingContext* Device::GetPendingCommandContext(Device::SubmitMode submitMode) {
+CommandRecordingContext::ScopedContext Device::GetScopedPendingCommandContext(
+    SubmitMode submitMode) {
     // Callers of GetPendingCommandList do so to record commands. Only reserve a command
     // allocator when it is needed so we don't submit empty command lists
     DAWN_ASSERT(mPendingCommands.IsOpen());
@@ -163,7 +164,21 @@ CommandRecordingContext* Device::GetPendingCommandContext(Device::SubmitMode sub
     if (submitMode == SubmitMode::Normal) {
         mPendingCommands.SetNeedsSubmit();
     }
-    return &mPendingCommands;
+
+    return CommandRecordingContext::ScopedContext(&mPendingCommands);
+}
+
+CommandRecordingContext::ScopedSwapStateContext Device::GetScopedSwapStatePendingCommandContext(
+    SubmitMode submitMode) {
+    // Callers of GetPendingCommandList do so to record commands. Only reserve a command
+    // allocator when it is needed so we don't submit empty command lists
+    DAWN_ASSERT(mPendingCommands.IsOpen());
+
+    if (submitMode == SubmitMode::Normal) {
+        mPendingCommands.SetNeedsSubmit();
+    }
+
+    return CommandRecordingContext::ScopedSwapStateContext(&mPendingCommands);
 }
 
 MaybeError Device::TickImpl() {
@@ -188,11 +203,10 @@ MaybeError Device::NextSerial() {
     TRACE_EVENT1(GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
 
-    CommandRecordingContext* commandContext =
-        GetPendingCommandContext(DeviceBase::SubmitMode::Passive);
-    DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Signal(
-                              mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
-                          "D3D11 command queue signal fence"));
+    auto commandContext = GetScopedPendingCommandContext(DeviceBase::SubmitMode::Passive);
+    DAWN_TRY(
+        CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
+                     "D3D11 command queue signal fence"));
 
     return {};
 }
@@ -251,7 +265,7 @@ ResultOrError<Ref<BindGroupLayoutInternalBase>> Device::CreateBindGroupLayoutImp
 }
 
 ResultOrError<Ref<BufferBase>> Device::CreateBufferImpl(const BufferDescriptor* descriptor) {
-    return Buffer::Create(this, descriptor);
+    return Buffer::Create(this, descriptor, /*commandContext=*/nullptr);
 }
 
 ResultOrError<Ref<CommandBufferBase>> Device::CreateCommandBuffer(
@@ -380,8 +394,8 @@ MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
     // D3D11 requires that buffers are unmapped before being used in a copy.
     DAWN_TRY(source->Unmap());
 
-    CommandRecordingContext* commandContext = GetPendingCommandContext();
-    return Buffer::Copy(commandContext, ToBackend(source), sourceOffset, size,
+    auto commandContext = GetScopedPendingCommandContext(Device::SubmitMode::Normal);
+    return Buffer::Copy(&commandContext, ToBackend(source), sourceOffset, size,
                         ToBackend(destination), destinationOffset);
 }
 
