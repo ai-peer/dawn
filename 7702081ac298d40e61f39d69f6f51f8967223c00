@@ -70,6 +70,24 @@
       "parentUuid": "f0cb0198_0f13f901",
       "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bcfd475b_40a9bd17",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-24T17:35:33Z",
+      "side": 0,
+      "message": "Ack, no opinion about removing it vs adding the validation error. The validation code you suggested looks right to me.",
+      "parentUuid": "dac21b98_66859913",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

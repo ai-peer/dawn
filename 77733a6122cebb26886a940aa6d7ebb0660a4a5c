@@ -63,6 +63,30 @@
       },
       "revId": "77733a6122cebb26886a940aa6d7ebb0660a4a5c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68d5e581_f32c75b0",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 1900,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-24T17:35:33Z",
+      "side": 1,
+      "message": "I see. In that particular case I think that customer did know it was experimental, but they still needed it to do performance testing. A command line flag is needed to expose experimental features, so IMO there isn\u0027t usually that much danger of accidentally using an experimental feature. It could happen if the developer has the flag on all the time, say because they need one experimental feature, and they don\u0027t realize another one is also experimental. But they\u0027d probably discover this pretty quickly when they tried to test the user-facing application.",
+      "parentUuid": "21357930_60286de7",
+      "range": {
+        "startLine": 1900,
+        "startChar": 37,
+        "endLine": 1900,
+        "endChar": 58
+      },
+      "revId": "77733a6122cebb26886a940aa6d7ebb0660a4a5c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
