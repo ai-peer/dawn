@@ -16,6 +16,23 @@
       "message": "I appreciate you taking on this issue, but I\u0027d like to take a gain a more in-depth understanding of the problems this is attempting to solve before this lands. In general, we\u0027ve been trying to move as many transforms out of Dawn (ShaderModuleGL) and into Tint as possible, and this seems to be moving in the opposite direction. I\u0027ll set up a chat.",
       "revId": "5eade95fe399b160b5d9178560bca020903b1971",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c25cac61_90b25c24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T14:15:21Z",
+      "side": 1,
+      "message": "Swapping myself for Dan, as Dan\u0027s been working on cleaning up the Dawn / Tint interface, and is a better person to understand how this fits with his work.",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
