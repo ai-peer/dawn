@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5af47677_09507a78",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-24T16:52:51Z",
+      "side": 1,
+      "message": "Ah I think I misunderstands in chat. I thought we are adding a seperate renamer on the client side because other backend runs renamer on dawn side. Adding one to GL will fix chrome issue and not impacting other client using tint.\n\nSeems like the overall plan is to move these transforms inside Tint. (Renamer added by dawn in other backend will be refactored into Tint IIUC)\n\nIn that case (keeping one renamer running in Tint glsl writer). Yeah I will change the input to be passed via tintOptions.",
+      "parentUuid": "6aa3bfa6_544e94c7",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b8c1dd7b_70c55daf",
         "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
         "patchSetId": 6
@@ -82,6 +100,24 @@
       "writtenOn": "2023-10-24T15:30:34Z",
       "side": 1,
       "message": "I thought the plan was to not pass any data back from the transform to Dawn? So, instead of reading this back, Dawn should be adding an entry for the entry point names and the new names that Dawn wants them called which the renamer honours.",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "664a3328_7396434d",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-24T16:52:51Z",
+      "side": 1,
+      "message": "Reading back the remappedEntryPoint from transform output is copying from other backend (e.g. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d/ShaderUtils.cpp;l\u003d206;drc\u003dabbfc06e9b070c9ea64af2b233624646cef00252?q\u003dremappedEntrypoint%20f:dawn\u0026ss\u003dchromium)\n\nI think this refactor (dawn passes wanted entry point name, removing transform output) will be another CL. This CL aims to fix the arrayLength renaming/shadowing bug.",
+      "parentUuid": "b8c1dd7b_70c55daf",
       "revId": "5eade95fe399b160b5d9178560bca020903b1971",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
