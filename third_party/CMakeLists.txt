@@ -112,6 +112,25 @@ if (NOT TARGET libabsl)
     add_subdirectory(${DAWN_ABSEIL_DIR} "${CMAKE_CURRENT_BINARY_DIR}/abseil")
 endif()
 
+if (NOT TARGET partition_alloc)
+    message(STATUS "Dawn: using partition_alloc at ${DAWN_PARTITION_ALLOC_DIR}")
+
+    # This mimic the partition_alloc:raw_ptr target in the "no-op"
+    # implementation.
+    add_library(partition_alloc STATIC
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr_cast.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr_exclusion.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr_noop_impl.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ref.h"
+    )
+    target_include_directories(partition_alloc PUBLIC
+      "${DAWN_PARTITION_ALLOC_DIR}/src"
+    )
+    target_compile_definitions(partition_alloc PRIVATE IS_RAW_PTR_IMPL)
+    set_target_properties(partition_alloc PROPERTIES LINKER_LANGUAGE CXX)
+endif()
+
 if (NOT TARGET Vulkan-Headers)
     message(STATUS "Dawn: using Vulkan-Headers at ${DAWN_VULKAN_HEADERS_DIR}")
     add_subdirectory(${DAWN_VULKAN_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/vulkan-headers")
