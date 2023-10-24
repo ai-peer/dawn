@@ -34,6 +34,24 @@
       "parentUuid": "911eb31c_28abdbcc",
       "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0cb0198_0f13f901",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-24T13:34:24Z",
+      "side": 0,
+      "message": "After discussing offline with Corentin, it was decided to remove entirely this experimental feature both in Chromium and Dawn. I\u0027ll go ahead then.",
+      "parentUuid": "d015bc9d_5869321e",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
