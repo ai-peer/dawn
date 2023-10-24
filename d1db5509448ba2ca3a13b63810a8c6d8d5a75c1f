@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a560c16_a1d5407e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T15:49:43Z",
+      "side": 1,
+      "message": "LGTM. Just nits",
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca5a7a1b_1ddad0d7",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T15:49:43Z",
+      "side": 1,
+      "message": "Just remove?",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 13
+      },
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fe3aa71_f06d1396",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T15:49:43Z",
+      "side": 1,
+      "message": "Likewise",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 13
+      },
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c252b59f_c14ec862",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T15:49:43Z",
+      "side": 1,
+      "message": "If you change the return type to use `Result`, this becomes `Failure{diagnostics}`;",
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d537b6e_ca4fbaca",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T15:49:43Z",
+      "side": 1,
+      "message": "The file name made me think this was some Java-esq builder pattern. Suggest `option_helpers.h`",
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d373629_e486f092",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T15:49:43Z",
+      "side": 1,
+      "message": "Suggest `Result\u003cSuccessType\u003e`, then dropping the `diagnostics` parameter.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 4
+      },
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
