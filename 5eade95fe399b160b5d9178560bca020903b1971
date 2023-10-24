@@ -33,6 +33,125 @@
       "message": "Swapping myself for Dan, as Dan\u0027s been working on cleaning up the Dawn / Tint interface, and is a better person to understand how this fits with his work.",
       "revId": "5eade95fe399b160b5d9178560bca020903b1971",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e448bd1_744715e8",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:30:34Z",
+      "side": 1,
+      "message": "This seems like it might be safer to update the inspector to return a second `variable_name` or something instead of attempting to undo the change that Tint did?",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6aa3bfa6_544e94c7",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:30:34Z",
+      "side": 1,
+      "message": "I don\u0027t think this should get moved here (and it\u0027s going to be running the renamer twice at the moment isn\u0027t it since the Tint side also runs it?)\n\nThe remapping data should be passed through tintOptions to the backend writer which then provides it to the renammer.  We can change where the renamer runs in the backend.\n\nDoes it specifically need to be run before the override substitution?",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8c1dd7b_70c55daf",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:30:34Z",
+      "side": 1,
+      "message": "I thought the plan was to not pass any data back from the transform to Dawn? So, instead of reading this back, Dawn should be adding an entry for the entry point names and the new names that Dawn wants them called which the renamer honours.",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "586db6e3_a1483e14",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:30:34Z",
+      "side": 1,
+      "message": "Would this be safer as just `if (!cfg-\u003erename_map.empty())` instead of creating a pointer to the map?",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae61641e_68f672e1",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:30:34Z",
+      "side": 1,
+      "message": "I wonder if we shoudl add a debug assert here to check that the requested name is not in the should_rename set?",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03b740a0_5e6c5180",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:30:34Z",
+      "side": 1,
+      "message": "```suggestion\n        /// @param remappings requested old to new name map\n```",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90b5b543_687f4aa5",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:30:34Z",
+      "side": 1,
+      "message": "```suggestion\n        const Remappings requested_names \u003d {};\n```\n\nMaybe a better name?",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
