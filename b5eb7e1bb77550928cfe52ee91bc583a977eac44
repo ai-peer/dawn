@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "b5eb7e1bb77550928cfe52ee91bc583a977eac44",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "779a670a_ad94304b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-24T15:49:48Z",
+      "side": 1,
+      "message": "Hey Jiawei, can we do the following to launch the feature?\n\n1) make storage texture core but behind allow-unsafe-apis (with VERY minimal tests that the gating behind that flag works in UnsafeAPITests.cpp) (we can remove the experimental extension at this point, since it is gated behind UnsafeAPI already)\n1a) Do the same thing in Blink (raising an exception on unknown enums if not unsafe apis, mechanism TBD)\n1b) (Tint team): implement Tint making this a language feature rather than an extesnion, but still gate it behind unsafe API\n2) land CTS tests for this\n3) Get agreement to ship (we\u0027ll help a bunch with this)\n4) Remove the gating behind unsafe APIs",
+      "revId": "b5eb7e1bb77550928cfe52ee91bc583a977eac44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
