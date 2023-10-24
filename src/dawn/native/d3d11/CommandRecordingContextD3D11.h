@@ -40,21 +40,6 @@ class Device;
 
 class CommandRecordingContext {
   public:
-    MaybeError Intialize(Device* device);
-
-    void Release();
-    bool IsOpen() const;
-    bool NeedsSubmit() const;
-    void SetNeedsSubmit();
-
-    MaybeError ExecuteCommandList(Device* device);
-
-    ID3D11Device* GetD3D11Device() const;
-    ID3D11DeviceContext4* GetD3D11DeviceContext4() const;
-    ID3DUserDefinedAnnotation* GetD3DUserDefinedAnnotation() const;
-    Buffer* GetUniformBuffer() const;
-    Device* GetDevice() const;
-
     struct ScopedCriticalSection : NonMovable {
         explicit ScopedCriticalSection(ComPtr<ID3D11Multithread>);
         ~ScopedCriticalSection();
@@ -62,22 +47,59 @@ class CommandRecordingContext {
       private:
         ComPtr<ID3D11Multithread> mD3D11Multithread;
     };
-    // Returns a scoped object that marks a critical section using the
-    // ID3D11Multithread Enter and Leave methods. This allows minimizing the
-    // cost of D3D11 multithread protection by allowing a single mutex Acquire
-    // and Release call for an entire set of operations on the immediate context
-    // e.g. when executing command buffers. This only has an effect if the
-    // ImplicitDeviceSynchronization feature is enabled.
-    ScopedCriticalSection EnterScopedCriticalSection();
 
-    // Write the built-in variable value to the uniform buffer.
-    void WriteUniformBuffer(uint32_t offset, uint32_t element);
-    MaybeError FlushUniformBuffer();
+    class ScopedContext : NonCopyable {
+      public:
+        ScopedContext();
+        ScopedContext(CommandRecordingContext* commandContext, bool swapContextState);
+        ScopedContext(ScopedContext&& other);
+        ~ScopedContext();
+        ScopedContext& operator=(ScopedContext&& other);
+
+        void Reset();
+
+        ID3D11Device* GetD3D11Device() const { return mCommandContext->mD3D11Device.Get(); }
+        ID3D11DeviceContext4* GetD3D11DeviceContext4() const {
+            return mCommandContext->mD3D11DeviceContext4.Get();
+        }
+        ID3DUserDefinedAnnotation* GetD3DUserDefinedAnnotation() const {
+            return mCommandContext->mD3DUserDefinedAnnotation.Get();
+        }
+        Buffer* GetUniformBuffer() const { return mCommandContext->mUniformBuffer.Get(); }
+        Device* GetDevice() const { return mCommandContext->mDevice.Get(); }
+
+        // Returns a scoped object that marks a critical section using the
+        // ID3D11Multithread Enter and Leave methods. This allows minimizing the
+        // cost of D3D11 multithread protection by allowing a single mutex Acquire
+        // and Release call for an entire set of operations on the immediate context
+        // e.g. when executing command buffers. This only has an effect if the
+        // ImplicitDeviceSynchronization feature is enabled.
+        ScopedCriticalSection EnterScopedCriticalSection() const;
+
+        // Write the built-in variable value to the uniform buffer.
+        void WriteUniformBuffer(uint32_t offset, uint32_t element) const;
+        MaybeError FlushUniformBuffer() const;
+
+      private:
+        CommandRecordingContext* mCommandContext = nullptr;
+        ComPtr<ID3D11DeviceContext4> mDeviceContext;
+        ComPtr<ID3DDeviceContextState> mPreviousState;
+    };
+
+    MaybeError Intialize(Device* device);
+    void Release();
+    MaybeError ExecuteCommandList(Device* device);
+
+    bool IsOpen() const { return mIsOpen; }
+    bool NeedsSubmit() const { return mNeedsSubmit; }
+    void SetNeedsSubmit() { mNeedsSubmit = true; }
 
   private:
+    bool mScopedAccessed = false;
     bool mIsOpen = false;
     bool mNeedsSubmit = false;
     ComPtr<ID3D11Device> mD3D11Device;
+    ComPtr<ID3DDeviceContextState> mD3D11DeviceContextState;
     ComPtr<ID3D11DeviceContext4> mD3D11DeviceContext4;
     ComPtr<ID3D11Multithread> mD3D11Multithread;
     ComPtr<ID3DUserDefinedAnnotation> mD3DUserDefinedAnnotation;

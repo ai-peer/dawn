@@ -32,6 +32,7 @@
 #include "dawn/common/HashUtils.h"
 #include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
+#include "dawn/native/D3D11Backend.h"
 #include "dawn/native/D3DBackend.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/d3d/D3DError.h"

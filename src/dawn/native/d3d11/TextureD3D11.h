@@ -36,6 +36,7 @@
 #include "dawn/native/PassResourceUsage.h"
 #include "dawn/native/d3d/TextureD3D.h"
 #include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 
 namespace dawn::native {
 struct CopyTextureToTextureCmd;
@@ -47,7 +48,6 @@ class Fence;
 
 namespace dawn::native::d3d11 {
 
-class CommandRecordingContext;
 class Device;
 class TextureView;
 class SharedTextureMemory;
@@ -80,10 +80,11 @@ class Texture final : public d3d::Texture {
         const SubresourceRange& singleLevelRange,
         bool depthReadOnly,
         bool stencilReadOnly) const;
-    MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
-                                                   const SubresourceRange& range);
+    MaybeError EnsureSubresourceContentInitialized(
+        const CommandRecordingContext::ScopedContext& commandContext,
+        const SubresourceRange& range);
 
-    MaybeError Write(CommandRecordingContext* commandContext,
+    MaybeError Write(const CommandRecordingContext::ScopedContext& commandContext,
                      const SubresourceRange& subresources,
                      const Origin3D& origin,
                      const Extent3D& size,
@@ -91,14 +92,15 @@ class Texture final : public d3d::Texture {
                      uint32_t bytesPerRow,
                      uint32_t rowsPerImage);
     using ReadCallback = std::function<MaybeError(const uint8_t* data, size_t offset, size_t size)>;
-    MaybeError Read(CommandRecordingContext* commandContext,
+    MaybeError Read(const CommandRecordingContext::ScopedContext& commandContext,
                     const SubresourceRange& subresources,
                     const Origin3D& origin,
                     Extent3D size,
                     uint32_t bytesPerRow,
                     uint32_t rowsPerImage,
                     ReadCallback callback);
-    static MaybeError Copy(CommandRecordingContext* commandContext, CopyTextureToTextureCmd* copy);
+    static MaybeError Copy(const CommandRecordingContext::ScopedContext& commandContext,
+                           CopyTextureToTextureCmd* copy);
 
     ResultOrError<ExecutionSerial> EndAccess() override;
 
@@ -106,7 +108,7 @@ class Texture final : public d3d::Texture {
     // sample the stencil component directly. As a workaround we create an internal R8Uint texture,
     // holding the copy of its stencil data, and use the internal texture's SRV instead.
     ResultOrError<ComPtr<ID3D11ShaderResourceView>> GetStencilSRV(
-        CommandRecordingContext* commandContext,
+        const CommandRecordingContext::ScopedContext& commandContext,
         const TextureView* view);
 
   private:
@@ -141,21 +143,21 @@ class Texture final : public d3d::Texture {
     void SetLabelImpl() override;
     void DestroyImpl() override;
 
-    MaybeError Clear(CommandRecordingContext* commandContext,
+    MaybeError Clear(const CommandRecordingContext::ScopedContext& commandContext,
                      const SubresourceRange& range,
                      TextureBase::ClearValue clearValue);
-    MaybeError ClearRenderable(CommandRecordingContext* commandContext,
+    MaybeError ClearRenderable(const CommandRecordingContext::ScopedContext& commandContext,
                                const SubresourceRange& range,
                                TextureBase::ClearValue clearValue,
                                const D3D11ClearValue& d3d11ClearValue);
-    MaybeError ClearNonRenderable(CommandRecordingContext* commandContext,
+    MaybeError ClearNonRenderable(const CommandRecordingContext::ScopedContext& commandContext,
                                   const SubresourceRange& range,
                                   TextureBase::ClearValue clearValue);
-    MaybeError ClearCompressed(CommandRecordingContext* commandContext,
+    MaybeError ClearCompressed(const CommandRecordingContext::ScopedContext& commandContext,
                                const SubresourceRange& range,
                                TextureBase::ClearValue clearValue);
 
-    MaybeError ReadStaging(CommandRecordingContext* commandContext,
+    MaybeError ReadStaging(const CommandRecordingContext::ScopedContext& commandContext,
                            const SubresourceRange& subresources,
                            const Origin3D& origin,
                            Extent3D size,
@@ -164,7 +166,7 @@ class Texture final : public d3d::Texture {
                            ReadCallback callback);
 
     // Write the texture without the content initialization bookkeeping.
-    MaybeError WriteInternal(CommandRecordingContext* commandContext,
+    MaybeError WriteInternal(const CommandRecordingContext::ScopedContext& commandContext,
                              const SubresourceRange& subresources,
                              const Origin3D& origin,
                              const Extent3D& size,
@@ -173,16 +175,17 @@ class Texture final : public d3d::Texture {
                              uint32_t rowsPerImage);
 
     // Write the depth-stencil texture without the content initialization bookkeeping.
-    MaybeError WriteDepthStencilInternal(CommandRecordingContext* commandContext,
-                                         const SubresourceRange& subresources,
-                                         const Origin3D& origin,
-                                         const Extent3D& size,
-                                         const uint8_t* data,
-                                         uint32_t bytesPerRow,
-                                         uint32_t rowsPerImage);
+    MaybeError WriteDepthStencilInternal(
+        const CommandRecordingContext::ScopedContext& commandContext,
+        const SubresourceRange& subresources,
+        const Origin3D& origin,
+        const Extent3D& size,
+        const uint8_t* data,
+        uint32_t bytesPerRow,
+        uint32_t rowsPerImage);
 
     // Copy the textures without the content initialization bookkeeping.
-    static MaybeError CopyInternal(CommandRecordingContext* commandContext,
+    static MaybeError CopyInternal(const CommandRecordingContext::ScopedContext& commandContext,
                                    CopyTextureToTextureCmd* copy);
 
     const Kind mKind = Kind::Normal;

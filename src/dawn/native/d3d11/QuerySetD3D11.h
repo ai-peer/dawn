@@ -32,12 +32,12 @@
 
 #include "dawn/native/QuerySet.h"
 #include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 
 namespace dawn::native::d3d11 {
 
 class Device;
 class Buffer;
-class CommandRecordingContext;
 
 class QuerySet final : public QuerySetBase {
   public:
@@ -46,7 +46,7 @@ class QuerySet final : public QuerySetBase {
 
     void BeginQuery(ID3D11DeviceContext* d3d11DeviceContext, uint32_t query);
     void EndQuery(ID3D11DeviceContext* d3d11DeviceContext, uint32_t query);
-    MaybeError Resolve(CommandRecordingContext* commandContext,
+    MaybeError Resolve(const CommandRecordingContext::ScopedContext& commandContext,
                        uint32_t firstQuery,
                        uint32_t queryCount,
                        Buffer* destination,
