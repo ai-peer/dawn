@@ -16,6 +16,23 @@
       "message": "LGTM. +Hao FYI",
       "revId": "7935c69e53d5007ae250ef5f9f2b1dc78a38ece6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee7b68f6_98c2a5a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-24T17:38:11Z",
+      "side": 1,
+      "message": "LGTM once the Chromium CL is landed.",
+      "revId": "7935c69e53d5007ae250ef5f9f2b1dc78a38ece6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
