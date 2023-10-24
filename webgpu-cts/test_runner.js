@@ -157,6 +157,7 @@ wrapPromiseWithHeartbeat(GPUShaderModule.prototype, 'getCompilationInfo');
 
 globalTestConfig.testHeartbeatCallback = sendHeartbeat;
 globalTestConfig.noRaceWithRejectOnTimeout = true;
+globalTestConfig.maxSubcasesInFlight = 50;
 
 // FXC is very slow to compile unrolled const-eval loops, where the metal shader
 // compiler (Intel GPU) is very slow to compile rolled loops. Intel drivers for
