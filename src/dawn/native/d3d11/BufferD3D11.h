@@ -33,22 +33,22 @@
 
 #include "dawn/native/Buffer.h"
 #include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 
 namespace dawn::native::d3d11 {
-
-class CommandRecordingContext;
-class Device;
 
 class Buffer final : public BufferBase {
   public:
     static ResultOrError<Ref<Buffer>> Create(Device* device, const BufferDescriptor* descriptor);
 
-    MaybeError EnsureDataInitialized(CommandRecordingContext* commandContext);
-    MaybeError EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
-                                                  uint64_t offset,
-                                                  uint64_t size);
-    MaybeError EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
-                                                  const CopyTextureToBufferCmd* copy);
+    MaybeError EnsureDataInitialized(const CommandRecordingContext::ScopedContext* commandContext);
+    MaybeError EnsureDataInitializedAsDestination(
+        const CommandRecordingContext::ScopedContext* commandContext,
+        uint64_t offset,
+        uint64_t size);
+    MaybeError EnsureDataInitializedAsDestination(
+        const CommandRecordingContext::ScopedContext* commandContext,
+        const CopyTextureToBufferCmd* copy);
 
     // Dawn API
     void SetLabelImpl() override;
@@ -59,23 +59,24 @@ class Buffer final : public BufferBase {
     // it will be synced with mD3d11NonConstantBuffer before binding it to the constant buffer slot.
     void MarkMutated();
     // Update content of the mD3d11ConstantBuffer from mD3d11NonConstantBuffer if needed.
-    void EnsureConstantBufferIsUpdated(CommandRecordingContext* commandContext);
+    void EnsureConstantBufferIsUpdated(
+        const CommandRecordingContext::ScopedContext* commandContext);
     ResultOrError<ComPtr<ID3D11ShaderResourceView>> CreateD3D11ShaderResourceView(
         uint64_t offset,
         uint64_t size) const;
     ResultOrError<ComPtr<ID3D11UnorderedAccessView1>> CreateD3D11UnorderedAccessView1(
         uint64_t offset,
         uint64_t size) const;
-    MaybeError Clear(CommandRecordingContext* commandContext,
+    MaybeError Clear(const CommandRecordingContext::ScopedContext* commandContext,
                      uint8_t clearValue,
                      uint64_t offset,
                      uint64_t size);
-    MaybeError Write(CommandRecordingContext* commandContext,
+    MaybeError Write(const CommandRecordingContext::ScopedContext* commandContext,
                      uint64_t offset,
                      const void* data,
                      size_t size);
 
-    static MaybeError Copy(CommandRecordingContext* commandContext,
+    static MaybeError Copy(const CommandRecordingContext::ScopedContext* commandContext,
                            Buffer* source,
                            uint64_t sourceOffset,
                            size_t size,
@@ -86,7 +87,9 @@ class Buffer final : public BufferBase {
       public:
         // Map buffer and return a ScopedMap object. If the buffer is not mappable,
         // scopedMap.GetMappedData() will return nullptr.
-        static ResultOrError<ScopedMap> Create(Buffer* buffer);
+        static ResultOrError<ScopedMap> Create(
+            const CommandRecordingContext::ScopedContext* commandContext,
+            Buffer* buffer);
 
         ScopedMap();
         ~ScopedMap();
@@ -99,10 +102,12 @@ class Buffer final : public BufferBase {
         void Reset();
 
       private:
-        ScopedMap(Buffer* buffer, bool needsUnmap);
+        ScopedMap(const CommandRecordingContext::ScopedContext* commandContext,
+                  Buffer* buffer,
+                  bool needsUnmap);
 
+        const CommandRecordingContext::ScopedContext* mCommandContext = nullptr;
         Buffer* mBuffer = nullptr;
-
         // Whether the buffer needs to be unmapped when the ScopedMap object is destroyed.
         bool mNeedsUnmap = false;
     };
@@ -120,22 +125,22 @@ class Buffer final : public BufferBase {
     MaybeError MapAtCreationImpl() override;
     void* GetMappedPointer() override;
 
-    MaybeError MapInternal();
-    void UnmapInternal();
+    MaybeError MapInternal(const CommandRecordingContext::ScopedContext* commandContext);
+    void UnmapInternal(const CommandRecordingContext::ScopedContext* commandContext);
 
-    MaybeError InitializeToZero(CommandRecordingContext* commandContext);
+    MaybeError InitializeToZero(const CommandRecordingContext::ScopedContext* commandContext);
     // Clear the buffer without checking if the buffer is initialized.
-    MaybeError ClearInternal(CommandRecordingContext* commandContext,
+    MaybeError ClearInternal(const CommandRecordingContext::ScopedContext* commandContext,
                              uint8_t clearValue,
                              uint64_t offset = 0,
                              uint64_t size = 0);
     // Write the buffer without checking if the buffer is initialized.
-    MaybeError WriteInternal(CommandRecordingContext* commandContext,
+    MaybeError WriteInternal(const CommandRecordingContext::ScopedContext* commandContext,
                              uint64_t bufferOffset,
                              const void* data,
                              size_t size);
     // Copy the buffer without checking if the buffer is initialized.
-    static MaybeError CopyInternal(CommandRecordingContext* commandContext,
+    static MaybeError CopyInternal(const CommandRecordingContext::ScopedContext* commandContext,
                                    Buffer* source,
                                    uint64_t sourceOffset,
                                    size_t size,

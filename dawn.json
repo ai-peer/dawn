@@ -3276,7 +3276,10 @@
             {"value": 1210, "name": "shared fence DXGI shared handle descriptor", "tags": ["dawn", "native"]},
             {"value": 1211, "name": "shared fence DXGI shared handle export info", "tags": ["dawn", "native"]},
             {"value": 1212, "name": "shared fence MTL shared event descriptor", "tags": ["dawn", "native"]},
-            {"value": 1213, "name": "shared fence MTL shared event export info", "tags": ["dawn", "native"]}
+            {"value": 1213, "name": "shared fence MTL shared event export info", "tags": ["dawn", "native"]},
+
+            {"value": 1214, "name": "request adapter options D3D11 device", "tags": ["dawn", "native"]}
+
         ]
     },
     "texture": {

@@ -39,7 +39,9 @@ class Backend;
 
 class PhysicalDevice : public d3d::PhysicalDevice {
   public:
-    PhysicalDevice(Backend* backend, ComPtr<IDXGIAdapter3> hardwareAdapter);
+    PhysicalDevice(Backend* backend,
+                   ComPtr<IDXGIAdapter3> hardwareAdapter,
+                   ComPtr<ID3D11Device> d3d11Device);
     ~PhysicalDevice() override;
 
     // PhysicalDeviceBase Implementation
@@ -51,6 +53,7 @@ class PhysicalDevice : public d3d::PhysicalDevice {
     ResultOrError<ComPtr<ID3D11Device>> CreateD3D11Device();
 
     uint32_t GetUAVSlotCount() const { return mUAVSlotCount; }
+    bool IsSharedD3d11Device() const { return mIsSharedD3d11Device; }
 
   private:
     using Base = d3d::PhysicalDevice;
@@ -70,6 +73,7 @@ class PhysicalDevice : public d3d::PhysicalDevice {
 
     MaybeError ValidateFeatureSupportedWithTogglesImpl(wgpu::FeatureName feature,
                                                        const TogglesState& toggles) const override;
+    const bool mIsSharedD3d11Device;
     ComPtr<ID3D11Device> mD3d11Device;
     D3D_FEATURE_LEVEL mFeatureLevel;
     DeviceInfo mDeviceInfo = {};
