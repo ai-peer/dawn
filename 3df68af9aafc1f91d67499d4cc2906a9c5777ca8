@@ -33,6 +33,24 @@
       "message": "AFAICT this is not how we plan to implement this \n\n#1 According to syoussefi, ANGLE already subtracts the ones it always puts in. See link in previous comment\n\n#2 We don\u0027t plant to subtract these at this level in the OpenGL backend. It would make the system unusable. Rather, it will be up to the user to subtract them from the count if they happen to use these other inputs. See for example\n\nhttps://dawn-review.googlesource.com/c/dawn/+/150703/2/src/dawn/native/RenderPipeline.cpp",
       "revId": "3df68af9aafc1f91d67499d4cc2906a9c5777ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ad1757f_1075eb3e",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-24T00:44:37Z",
+      "side": 1,
+      "message": "Hi Gregg，\n\n\u003e #1 According to syoussefi, ANGLE already subtracts the ones it always puts in. See link in previous comment\n\nThat\u0027s exactly why ANGLE shows 30 as the value of GL_MAX_VARYING_VECTORS on its D3D11 backends (30 \u003d D3D12_PS_INPUT_REGISTER_COUNT - 2).\n\nAccording to https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/src/libANGLE/renderer/d3d/d3d11/renderer11_utils.cpp;l\u003d651, ANGLE only reserves 2 slots for dx_Position and gl_Position, and not for other built-ins, so the value of GL_MAX_VARYING_VECTORS queried from ANGLE does include other built-ins, which should be excluded in Dawn to match the WebGPU SPEC.\n\n\u003e #2 We don\u0027t plant to subtract these at this level in the OpenGL backend. It would make the system unusable. Rather, it will be up to the user to subtract them from the count if they happen to use these other inputs. See for example\n\nIn OpenGL SPEC, GL_MAX_VARYING_VECTORS counts in all the built-ins except for gl_Position, while in WebGPU SPEC we only counts in user-defined inter-stage shader variables. It is mainly because Metal only has limits on user-defined inter-stage shader variables, so it is wrong to expose a value of (MaxUserDefinedInterStageVariable + ReservedSlotsForBuiltins) as MaxInterStageShaderVariables on Metal.\n\nSo I think we still have to subtract all the built-ins other than gl_Position from the value queried from GL_MAX_VARYING_VECTORS as the value of MaxInterStageShaderVariables to match the current WebGPU SPEC.",
+      "parentUuid": "ebdfa0f4_b2779a93",
+      "revId": "3df68af9aafc1f91d67499d4cc2906a9c5777ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
