@@ -39,6 +39,30 @@
       },
       "revId": "75e2de4eef955f18d7be70e216b694a2d7d03eb9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e8251ed_5ddb0312",
+        "filename": "tools/src/cmd/cts/roll/roll.go",
+        "patchSetId": 10
+      },
+      "lineNbr": 705,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-24T21:40:21Z",
+      "side": 1,
+      "message": "ha. I need to feed in the flags. Thanks for spotting.",
+      "parentUuid": "fd1182e6_850b32dc",
+      "range": {
+        "startLine": 705,
+        "startChar": 98,
+        "endLine": 705,
+        "endChar": 109
+      },
+      "revId": "75e2de4eef955f18d7be70e216b694a2d7d03eb9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
