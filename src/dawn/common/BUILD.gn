@@ -171,6 +171,11 @@ config("internal_config") {
     } else {
       cflags += [ "-pedantic" ]
     }
+
+    # TODO(crbug.com/chromium/1498930] Remove this. This flag was implied by
+    # "-pedantic", but this is incompatible with the current implementation of
+    # `partition_alloc`.
+    cflags += [ "-Wno-expansion-to-defined" ]
   }
 
   if (!is_clang && is_win) {
