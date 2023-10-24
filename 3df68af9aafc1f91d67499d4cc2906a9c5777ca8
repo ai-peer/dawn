@@ -51,6 +51,24 @@
       "parentUuid": "ebdfa0f4_b2779a93",
       "revId": "3df68af9aafc1f91d67499d4cc2906a9c5777ca8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b89b05b5_e2829364",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 289,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-24T00:53:37Z",
+      "side": 1,
+      "message": "The OpenGL backend doesn\u0027t implement the WebGPU spec. It implements the \"compat\" spec. The compact spec will have different rules. Most likely it will say that other WGSL builtins will use an attribute. But we won\u0027t subtract them if the user doesn\u0027t use them",
+      "parentUuid": "1ad1757f_1075eb3e",
+      "revId": "3df68af9aafc1f91d67499d4cc2906a9c5777ca8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
