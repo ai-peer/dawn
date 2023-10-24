@@ -84,6 +84,57 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87089629_ec966e58",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 482,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-24T03:23:16Z",
+      "side": 1,
+      "message": "nit: Maybe we should not do UNREACHABLE() if this is reachable by the wire otherwise fuzzers will be unhappy when they reach this code.",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e14035f2_88978a9e",
+        "filename": "src/dawn/tests/ParamGenerator.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-24T03:23:16Z",
+      "side": 1,
+      "message": "Note: if we start to have many iterations on this CL, we could land this separately.",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08240179_7830ef47",
+        "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 25,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-24T03:23:16Z",
+      "side": 1,
+      "message": "It seems that this is so other tests can use the operator\u003c\u003c? that\u0027s a bit weird and maybe should be moved to some common file instead of this specific file doing the magic for others.",
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fd52095_9177a797",
         "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
         "patchSetId": 9
@@ -389,6 +440,30 @@
       "writtenOn": "2023-10-20T09:22:28Z",
       "side": 1,
       "message": "Made const.\n\nI **think** that if I inline it in the header the vector can be instantiated in different places more than once? But if I do the static inside the function it supposed to be in one place? Not entirely sure, but yea, it also makes the header slightly thinner.",
+      "parentUuid": "fe8ba244_14a8146b",
+      "range": {
+        "startLine": 47,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 33
+      },
+      "revId": "295742eb2ada98030f220f2968d3894be437db8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb7939bf_b3edfc9a",
+        "filename": "src/dawn/tests/unittests/wire/WireFutureTest.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-24T03:23:16Z",
+      "side": 1,
+      "message": "(it could be a constexpr std::array)",
       "parentUuid": "fe8ba244_14a8146b",
       "range": {
         "startLine": 47,
