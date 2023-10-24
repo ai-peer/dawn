@@ -31,10 +31,10 @@
 #include "dawn/native/ComputePipeline.h"
 
 #include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 
 namespace dawn::native::d3d11 {
 
-class CommandRecordingContext;
 class Device;
 
 class ComputePipeline final : public ComputePipelineBase {
@@ -45,7 +45,7 @@ class ComputePipeline final : public ComputePipelineBase {
                                 WGPUCreateComputePipelineAsyncCallback callback,
                                 void* userdata);
 
-    void ApplyNow(CommandRecordingContext* commandContext);
+    void ApplyNow(const CommandRecordingContext::ScopedContext* commandContext);
 
     MaybeError Initialize() override;
 
