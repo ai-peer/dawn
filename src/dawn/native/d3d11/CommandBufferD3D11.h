@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_D3D11_COMMANDBUFFERD3D11_H_
 
 #include "dawn/native/CommandBuffer.h"
+#include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 
 namespace dawn::native {
 enum class Command;
@@ -38,7 +39,6 @@ struct DispatchCmd;
 
 namespace dawn::native::d3d11 {
 
-class CommandRecordingContext;
 class ComputePipeline;
 class RenderPipeline;
 
@@ -46,25 +46,26 @@ class CommandBuffer final : public CommandBufferBase {
   public:
     static Ref<CommandBuffer> Create(CommandEncoder* encoder,
                                      const CommandBufferDescriptor* descriptor);
-    MaybeError Execute();
+    MaybeError Execute(const CommandRecordingContext::ScopedContext* commandContext);
 
   private:
     using CommandBufferBase::CommandBufferBase;
 
-    MaybeError ExecuteComputePass(CommandRecordingContext* commandContext);
+    MaybeError ExecuteComputePass(const CommandRecordingContext::ScopedContext* commandContext);
     MaybeError ExecuteRenderPass(BeginRenderPassCmd* renderPass,
-                                 CommandRecordingContext* commandContext);
-    void HandleDebugCommands(CommandRecordingContext* commandContext,
+                                 const CommandRecordingContext::ScopedContext* commandContext);
+    void HandleDebugCommands(const CommandRecordingContext::ScopedContext* commandContext,
                              CommandIterator* iter,
                              Command command);
 
     MaybeError RecordFirstIndexOffset(RenderPipeline* renderPipeline,
-                                      CommandRecordingContext* commandContext,
+                                      const CommandRecordingContext::ScopedContext* commandContext,
                                       uint32_t firstVertex,
                                       uint32_t firstInstance);
-    MaybeError RecordNumWorkgroupsForDispatch(ComputePipeline* computePipeline,
-                                              CommandRecordingContext* commandContext,
-                                              DispatchCmd* dispatchCmd);
+    MaybeError RecordNumWorkgroupsForDispatch(
+        ComputePipeline* computePipeline,
+        const CommandRecordingContext::ScopedContext* commandContext,
+        DispatchCmd* dispatchCmd);
 };
 
 }  // namespace dawn::native::d3d11
