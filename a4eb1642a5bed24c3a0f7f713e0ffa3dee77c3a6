@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "24296d3a_36d0f0cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-10-24T22:11:48Z",
+      "side": 1,
+      "message": "PTAL! I\u0027m fairly happy that this issue can be resolved by simply lifting some state tracking up one level of abstraction. 😊",
+      "revId": "a4eb1642a5bed24c3a0f7f713e0ffa3dee77c3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
