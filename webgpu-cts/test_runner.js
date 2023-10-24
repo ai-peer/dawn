@@ -117,18 +117,40 @@ async function runCtsTestViaSocket(event) {
   runCtsTest(input['q'], input['w']);
 }
 
-dataCache.setStore({
-  load: async (path) => {
-    return await (await fetch(`/third_party/webgpu-cts/cache/data/${path}`)).text();
-  }
-});
-
 // Make a rate-limited version `sendMessageTestHeartbeat` that executes
 // at most once every 500 ms.
 const [sendHeartbeat, {
   start: beginHeartbeatScope,
   stop: endHeartbeatScope
 }] = rateLimited(sendMessageTestHeartbeat, 500);
+
+dataCache.setStore({
+  load: async (path) => {
+    const url = `/third_party/webgpu-cts/cache/data/${path}`;
+    const headResponse = await fetch(url, {
+      method: 'HEAD',
+    });
+    sendHeartbeat();
+    const contentLength = headResponse.headers.get('Content-Length');
+    const chunkSize = 1024 * 1024;
+    const chunks = [];
+    for (let offset = 0; offset < contentLength; offset += chunkSize) {
+      chunks.push(fetch(url, {
+        headers: {
+          Range: `bytes=${offset}-${Math.min(offset + chunkSize - 1, contentLength - 1)}`
+        }
+      }).then(res => {
+        sendHeartbeat();
+        return res.arrayBuffer();
+      }));
+    }
+    const text = await new Blob(await Promise.all(chunks), {
+      type: 'text/plain',
+    }).text();
+    sendHeartbeat();
+    return text;
+  }
+});
 
 function wrapPromiseWithHeartbeat(prototype, key) {
   const old = prototype[key];
