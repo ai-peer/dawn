@@ -173,6 +173,10 @@ config("internal_config") {
     }
   }
 
+  # Needed by partition_alloc. We need to turn it off, because it was implied by
+  # `-pedantic`. TODO(crbug.com/chromium/1498930] Remove this.
+  cflags += [ "-Wno-expansion-to-defined" ]
+
   if (!is_clang && is_win) {
     # Dawn extends wgpu enums with internal enums.
     # MSVC considers these invalid switch values. crbug.com/dawn/397.
@@ -307,6 +311,7 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android ||
     public_deps = [
       ":dawn_gpu_info_gen",
       ":dawn_version_gen",
+      "${dawn_partition_alloc_dir}:raw_ptr",
     ]
 
     if (is_apple) {

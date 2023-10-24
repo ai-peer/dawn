@@ -189,6 +189,7 @@ source_set("sources") {
   public_deps = [
     ":abseil",
     "${dawn_root}/src/dawn/platform",
+    "${dawn_root}/third_party/partition_alloc:raw_ptr",
   ]
 
   sources = get_target_outputs(":utils_gen")
