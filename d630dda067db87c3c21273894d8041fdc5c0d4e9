@@ -50,6 +50,24 @@
       "message": "Missing `storage_texture`. Can we double check the other options.h don\u0027t have this problem?",
       "revId": "d630dda067db87c3c21273894d8041fdc5c0d4e9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "daeb5b4a_f12e3447",
+        "filename": "src/tint/lang/msl/writer/common/options.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-24T15:39:59Z",
+      "side": 1,
+      "message": "Done.\n\nThe SPIR-V options was also missing `storage_texture`, good catch.",
+      "parentUuid": "03d78fd5_a88ad646",
+      "revId": "d630dda067db87c3c21273894d8041fdc5c0d4e9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
