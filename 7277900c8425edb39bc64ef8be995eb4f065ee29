@@ -105,6 +105,24 @@
       "parentUuid": "9d844e10_c7d3ae53",
       "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4feb479_6f4548b5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003916
+      },
+      "writtenOn": "2023-10-24T14:12:47Z",
+      "side": 1,
+      "message": "Yeah ok the `__clang__` check resolves the clang-cl bots.",
+      "parentUuid": "2a432093_589a7ff3",
+      "revId": "7277900c8425edb39bc64ef8be995eb4f065ee29",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
