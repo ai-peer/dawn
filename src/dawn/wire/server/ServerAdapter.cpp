@@ -33,7 +33,7 @@
 namespace dawn::wire::server {
 
 WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
-                                          uint64_t requestSerial,
+                                          WGPUFuture future,
                                           ObjectHandle deviceHandle,
                                           const WGPUDeviceDescriptor* descriptor) {
     Known<WGPUDevice> device;
@@ -41,7 +41,7 @@ WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
 
     auto userdata = MakeUserdata<RequestDeviceUserdata>();
     userdata->adapter = adapter.AsHandle();
-    userdata->requestSerial = requestSerial;
+    userdata->future = future;
     userdata->deviceObjectId = device.id;
 
     mProcs.adapterRequestDevice(adapter->handle, descriptor,
@@ -56,7 +56,7 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
                                      const char* message) {
     ReturnAdapterRequestDeviceCallbackCmd cmd = {};
     cmd.adapter = data->adapter;
-    cmd.requestSerial = data->requestSerial;
+    cmd.future = data->future;
     cmd.status = status;
     cmd.message = message;
 
