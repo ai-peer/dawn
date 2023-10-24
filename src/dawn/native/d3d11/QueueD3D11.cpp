@@ -35,6 +35,31 @@
 #include "dawn/platform/tracing/TraceEvent.h"
 
 namespace dawn::native::d3d11 {
+namespace {
+
+class ScopedSwapDeviceContextState {
+  public:
+    ScopedSwapDeviceContextState(Device* device) {
+        ID3DDeviceContextState* state = device->GetD3D11DeviceContextState();
+        if (state) {
+            mCommandContext = device->GetPendingCommandContext(Device::SubmitMode::Passive);
+            mCommandContext->GetD3D11DeviceContext1()->SwapDeviceContextState(state,
+                                                                              &mPreviousState);
+        }
+    }
+    ~ScopedSwapDeviceContextState() {
+        if (mCommandContext) {
+            mCommandContext->GetD3D11DeviceContext1()->SwapDeviceContextState(mPreviousState.Get(),
+                                                                              nullptr);
+        }
+    }
+
+  private:
+    CommandRecordingContext* mCommandContext = nullptr;
+    ComPtr<ID3DDeviceContextState> mPreviousState;
+};
+
+}  // namespace
 
 Ref<Queue> Queue::Create(Device* device, const QueueDescriptor* descriptor) {
     return AcquireRef(new Queue(device, descriptor));
@@ -48,10 +73,13 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
     // TODO(dawn:1770): figure how if we need to track and restore the state of the immediate device
     // context.
     TRACE_EVENT_BEGIN0(GetDevice()->GetPlatform(), Recording, "CommandBufferD3D11::Execute");
-    for (uint32_t i = 0; i < commandCount; ++i) {
-        DAWN_TRY(ToBackend(commands[i])->Execute());
+    {
+        ScopedSwapDeviceContextState scopedSwapState(device);
+        for (uint32_t i = 0; i < commandCount; ++i) {
+            DAWN_TRY(ToBackend(commands[i])->Execute());
+        }
+        DAWN_TRY(device->ExecutePendingCommandContext());
     }
-    DAWN_TRY(device->ExecutePendingCommandContext());
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferD3D11::Execute");
 
     DAWN_TRY(device->NextSerial());

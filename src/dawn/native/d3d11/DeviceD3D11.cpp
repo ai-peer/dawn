@@ -118,14 +118,35 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
 }
 
 MaybeError Device::Initialize(const DeviceDescriptor* descriptor) {
-    DAWN_TRY_ASSIGN(mD3d11Device, ToBackend(GetPhysicalDevice())->CreateD3D11Device());
-    DAWN_ASSERT(mD3d11Device != nullptr);
+    const DeviceExternalD3D11DeviceDescriptor* externalDevice = nullptr;
+    FindInChain(descriptor->nextInChain, &externalDevice);
+
+    if (externalDevice) {
+        DAWN_INVALID_IF(!externalDevice->device,
+                        "DeviceExternalD3D11DeviceDescriptor::device is null.");
+        D3D_FEATURE_LEVEL featureLevel = externalDevice->device->GetFeatureLevel();
+        DAWN_INVALID_IF(featureLevel < D3D_FEATURE_LEVEL_11_0,
+                        "The external device feature level(%d) is less than 11.0", featureLevel);
+        mD3d11Device = externalDevice->device;
+    } else {
+        DAWN_TRY_ASSIGN(mD3d11Device, ToBackend(GetPhysicalDevice())->CreateD3D11Device());
+        DAWN_ASSERT(mD3d11Device != nullptr);
+    }
 
     DAWN_TRY(DeviceBase::Initialize(Queue::Create(this, &descriptor->defaultQueue)));
 
     // Get the ID3D11Device5 interface which is need for creating fences.
     // TODO(dawn:1741): Handle the case where ID3D11Device5 is not available.
     DAWN_TRY(CheckHRESULT(mD3d11Device.As(&mD3d11Device5), "D3D11: getting ID3D11Device5"));
+
+    if (externalDevice) {
+        const D3D_FEATURE_LEVEL featureLevels[] = {D3D_FEATURE_LEVEL_11_1, D3D_FEATURE_LEVEL_11_0};
+        DAWN_TRY(CheckHRESULT(
+            mD3d11Device5->CreateDeviceContextState(
+                /*Flags=*/0, featureLevels, std::size(featureLevels), D3D11_SDK_VERSION,
+                __uuidof(ID3D11Device5), nullptr, &mD3d11DeviceContextState),
+            "D3D11: create device context state"));
+    }
 
     // Create the fence.
     DAWN_TRY(
@@ -153,6 +174,10 @@ ID3D11Device* Device::GetD3D11Device() const {
 
 ID3D11Device5* Device::GetD3D11Device5() const {
     return mD3d11Device5.Get();
+}
+
+ID3DDeviceContextState* Device::GetD3D11DeviceContextState() const {
+    return mD3d11DeviceContextState.Get();
 }
 
 CommandRecordingContext* Device::GetPendingCommandContext(Device::SubmitMode submitMode) {

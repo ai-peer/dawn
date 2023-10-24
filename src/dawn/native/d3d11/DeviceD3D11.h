@@ -53,6 +53,7 @@ class Device final : public d3d::Device {
 
     ID3D11Device* GetD3D11Device() const;
     ID3D11Device5* GetD3D11Device5() const;
+    ID3DDeviceContextState* GetD3D11DeviceContextState() const;
 
     CommandRecordingContext* GetPendingCommandContext(SubmitMode submitMode = SubmitMode::Normal);
 
@@ -155,6 +156,7 @@ class Device final : public d3d::Device {
 
     ComPtr<ID3D11Device> mD3d11Device;
     ComPtr<ID3D11Device5> mD3d11Device5;
+    ComPtr<ID3DDeviceContextState> mD3d11DeviceContextState;
     CommandRecordingContext mPendingCommands;
     SerialQueue<ExecutionSerial, ComPtr<IUnknown>> mUsedComObjectRefs;
 };
