@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e361e872_b601766b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-24T20:04:34Z",
+      "side": 1,
+      "message": "LGTM but caught a few leftover renames",
+      "revId": "3505c729cf6050e60c7ffad4fb8840b55dc40bda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95f60e4d_e2d4041a",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-24T20:04:34Z",
+      "side": 1,
+      "message": "Should be textureBindingViewDimension",
+      "range": {
+        "startLine": 187,
+        "startChar": 49,
+        "endLine": 187,
+        "endChar": 62
+      },
+      "revId": "3505c729cf6050e60c7ffad4fb8840b55dc40bda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5756f09e_31eddc01",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-24T20:04:34Z",
+      "side": 1,
+      "message": "Should be textureBindingViewDimension",
+      "range": {
+        "startLine": 543,
+        "startChar": 29,
+        "endLine": 543,
+        "endChar": 42
+      },
+      "revId": "3505c729cf6050e60c7ffad4fb8840b55dc40bda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
