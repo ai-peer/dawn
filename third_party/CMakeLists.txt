@@ -112,6 +112,99 @@ if (NOT TARGET libabsl)
     add_subdirectory(${DAWN_ABSEIL_DIR} "${CMAKE_CURRENT_BINARY_DIR}/abseil")
 endif()
 
+if (NOT TARGET partition_alloc)
+    message(STATUS "Dawn: using partition_alloc at ${DAWN_PARTITION_ALLOC_DIR}")
+
+    file(WRITE "${DAWN_BUILD_GEN_DIR}/include/partition_alloc/partition_alloc_buildflags.h" "
+      #ifndef PARTITION_ALLOC_PARTITION_ALLOC_BUILDFLAGS_H_
+      #define PARTITION_ALLOC_PARTITION_ALLOC_BUILDFLAGS_H_
+
+      #include \"build/buildflag.h\" // IWYU pragma: export
+
+      #define BUILDFLAG_INTERNAL_HAS_64_BIT_POINTERS() (1)
+      #define BUILDFLAG_INTERNAL_USE_ALLOCATOR_SHIM() (0)
+      #define BUILDFLAG_INTERNAL_USE_PARTITION_ALLOC() (0)
+      #define BUILDFLAG_INTERNAL_USE_PARTITION_ALLOC_AS_MALLOC() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_BACKUP_REF_PTR_SUPPORT() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_BACKUP_REF_PTR_SLOW_CHECKS() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_BACKUP_REF_PTR_FEATURE_FLAG() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_DANGLING_RAW_PTR_CHECKS() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_DANGLING_RAW_PTR_FEATURE_FLAG() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_DANGLING_RAW_PTR_PERF_EXPERIMENT() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_POINTER_SUBTRACTION_CHECK() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_POINTER_ARITHMETIC_TRAIT_CHECK() (0)
+      #define BUILDFLAG_INTERNAL_BACKUP_REF_PTR_POISON_OOB_PTR() (0)
+      #define BUILDFLAG_INTERNAL_PUT_REF_COUNT_IN_PREVIOUS_SLOT() (0)
+      #define BUILDFLAG_INTERNAL_USE_ASAN_BACKUP_REF_PTR() (0)
+      #define BUILDFLAG_INTERNAL_USE_ASAN_UNOWNED_PTR() (0)
+      #define BUILDFLAG_INTERNAL_USE_HOOKABLE_RAW_PTR() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_GWP_ASAN_SUPPORT() (0)
+      #define BUILDFLAG_INTERNAL_FORCIBLY_ENABLE_BACKUP_REF_PTR_IN_ALL_PROCESSES() (0)
+      #define BUILDFLAG_INTERNAL_FORCE_ENABLE_RAW_PTR_EXCLUSION() (0)
+      #define BUILDFLAG_INTERNAL_RECORD_ALLOC_INFO() (0)
+      #define BUILDFLAG_INTERNAL_USE_FREESLOT_BITMAP() (0)
+      #define BUILDFLAG_INTERNAL_GLUE_CORE_POOLS() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_POINTER_COMPRESSION() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_SHADOW_METADATA_FOR_64_BITS_POINTERS() (0)
+      #define BUILDFLAG_INTERNAL_USE_FREELIST_POOL_OFFSETS() (0)
+      #define BUILDFLAG_INTERNAL_USE_STARSCAN() (0)
+      #define BUILDFLAG_INTERNAL_PCSCAN_STACK_SUPPORTED() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_PKEYS() (0)
+      #define BUILDFLAG_INTERNAL_ENABLE_THREAD_ISOLATION() (0)
+
+      #endif  // PARTITION_ALLOC_PARTITION_ALLOC_BUILDFLAGS_H_
+    ")
+
+    file(WRITE
+      "${DAWN_BUILD_GEN_DIR}/include/partition_alloc/raw_ptr_buildflags.h" "
+      #ifndef PARTITION_ALLOC_RAW_PTR_BUILDFLAGS_H_
+      #define PARTITION_ALLOC_RAW_PTR_BUILDFLAGS_H_
+
+      #include \"build/buildflag.h\" // IWYU pragma: export
+
+      #define BUILDFLAG_INTERNAL_RAW_PTR_ZERO_ON_CONSTRUCT() (1)
+      #define BUILDFLAG_INTERNAL_RAW_PTR_ZERO_ON_MOVE() (1)
+      #define BUILDFLAG_INTERNAL_RAW_PTR_ZERO_ON_DESTRUCT() (0)
+
+      #endif  // PARTITION_ALLOC_RAW_PTR_BUILDFLAGS_H_
+    ")
+
+    file(WRITE "${DAWN_BUILD_GEN_DIR}/include/partition_alloc/partition_alloc_base/debug/debugging_buildflags.h" "
+      #ifndef PARTITION_ALLOC_PARTITION_ALLOC_BASE_DEBUG_DEBUGGING_BUILDFLAGS_H_
+      #define PARTITION_ALLOC_PARTITION_ALLOC_BASE_DEBUG_DEBUGGING_BUILDFLAGS_H_
+
+      #include \"build/buildflag.h\" // IWYU pragma: export
+
+      #define BUILDFLAG_INTERNAL_PA_DCHECK_IS_ON() (0)
+      #define BUILDFLAG_INTERNAL_PA_EXPENSIVE_DCHECKS_ARE_ON() (0)
+      #define BUILDFLAG_INTERNAL_PA_DCHECK_IS_CONFIGURABLE() (0)
+      #define BUILDFLAG_INTERNAL_PA_CAN_UNWIND_WITH_FRAME_POINTERS() (0)
+
+      #endif  // PARTITION_ALLOC_PARTITION_ALLOC_BASE_DEBUG_DEBUGGING_BUILDFLAGS_H_
+    ")
+
+    # This mimic the partition_alloc:raw_ptr target in the "no-op"
+    # implementation.
+    add_library(partition_alloc STATIC
+      # Implementation:
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr_cast.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr_exclusion.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ptr_noop_impl.h"
+      "${DAWN_PARTITION_ALLOC_DIR}/src/partition_alloc/pointers/raw_ref.h"
+
+      # Generated files:
+      "${DAWN_BUILD_GEN_DIR}/include/partition_alloc/partition_alloc_buildflags.h"
+      "${DAWN_BUILD_GEN_DIR}/include/partition_alloc/raw_ptr_buildflags.h"
+      "${DAWN_BUILD_GEN_DIR}/include/partition_alloc/partition_alloc_base/debug/debugging_buildflags.h"
+    )
+    target_include_directories(partition_alloc PUBLIC
+      "${DAWN_PARTITION_ALLOC_DIR}/src"
+    )
+    target_compile_definitions(partition_alloc PRIVATE IS_RAW_PTR_IMPL)
+    set_target_properties(partition_alloc PROPERTIES LINKER_LANGUAGE CXX)
+endif()
+
 if (NOT TARGET Vulkan-Headers)
     message(STATUS "Dawn: using Vulkan-Headers at ${DAWN_VULKAN_HEADERS_DIR}")
     add_subdirectory(${DAWN_VULKAN_HEADERS_DIR} "${CMAKE_CURRENT_BINARY_DIR}/vulkan-headers")
