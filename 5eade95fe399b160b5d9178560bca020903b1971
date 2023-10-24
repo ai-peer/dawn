@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a74db628_5cdfe73a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-24T16:54:49Z",
+      "side": 1,
+      "message": "(We can talk more in compat meeting)\nNo this CL is aiming to fix the CTS revealed bug about var naming `arrayLength` shadowing issue on GL backend.\n\nI believe the refactoring of dawn transform into tint should be in another CL",
+      "parentUuid": "7208bd16_67d79165",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e448bd1_744715e8",
