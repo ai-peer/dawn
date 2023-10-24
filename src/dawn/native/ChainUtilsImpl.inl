@@ -37,6 +37,7 @@ struct RequestAdapterOptionsLUID;
 }
 
 namespace d3d11 {
+struct DeviceExternalD3D11DeviceDescriptor;
 struct SharedTextureMemoryD3D11Texture2DDescriptor;
 }
 
@@ -67,6 +68,16 @@ template <>
 struct AdditionalExtensions<RequestAdapterOptions> {
     using List = AdditionalExtensionsList<const d3d::RequestAdapterOptionsLUID*,
                                           const opengl::RequestAdapterOptionsGetGLProc*>;
+};
+
+template <>
+constexpr inline wgpu::SType STypeForImpl<d3d11::DeviceExternalD3D11DeviceDescriptor> =
+    wgpu::SType(WGPUSType_DeviceExternalD3D11DeviceDescriptor);
+
+template <>
+struct AdditionalExtensions<DeviceDescriptor> {
+    using List =
+        AdditionalExtensionsList<const d3d11::DeviceExternalD3D11DeviceDescriptor*>;
 };
 
 template <>
