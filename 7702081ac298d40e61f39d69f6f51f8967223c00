@@ -52,6 +52,24 @@
       "parentUuid": "d015bc9d_5869321e",
       "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dac21b98_66859913",
+        "filename": "dawn.json",
+        "patchSetId": 5
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-10-24T14:54:54Z",
+      "side": 0,
+      "message": "I\u0027ve updated this CL as discussed above. And here are the two other changes:\nChromium: https://chromium-review.googlesource.com/c/chromium/src/+/4971179\nCTS: https://github.com/gpuweb/cts/pull/3085",
+      "parentUuid": "f0cb0198_0f13f901",
+      "revId": "7702081ac298d40e61f39d69f6f51f8967223c00",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
