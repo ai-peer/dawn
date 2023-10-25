@@ -7,10 +7,12 @@ data/webgpu/shader/execution/case-cache/atan.json
 data/webgpu/shader/execution/case-cache/atan2.json
 data/webgpu/shader/execution/case-cache/atanh.json
 data/webgpu/shader/execution/case-cache/binary/af_addition.json
+data/webgpu/shader/execution/case-cache/binary/af_division.json
 data/webgpu/shader/execution/case-cache/binary/af_logical.json
 data/webgpu/shader/execution/case-cache/binary/af_matrix_addition.json
 data/webgpu/shader/execution/case-cache/binary/af_matrix_subtraction.json
 data/webgpu/shader/execution/case-cache/binary/af_multiplication.json
+data/webgpu/shader/execution/case-cache/binary/af_remainder.json
 data/webgpu/shader/execution/case-cache/binary/af_subtraction.json
 data/webgpu/shader/execution/case-cache/binary/f16_addition.json
 data/webgpu/shader/execution/case-cache/binary/f16_division.json
