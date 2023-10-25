@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a91c91a1_7ab8f255",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T16:50:10Z",
+      "side": 1,
+      "message": "Why is it a problem is CreateDevice is called more than once as long as each device uses its own context state?",
+      "parentUuid": "6a63d8b0_7ce71d69",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b69e947a_4504049e",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 2
