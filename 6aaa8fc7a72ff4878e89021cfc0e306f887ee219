@@ -52,6 +52,24 @@
       "parentUuid": "f7c4d81e_17963674",
       "revId": "6aaa8fc7a72ff4878e89021cfc0e306f887ee219",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "035dab1b_85a799ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-25T17:34:29Z",
+      "side": 1,
+      "message": "err it doesn\u0027t gclient sync but it does checkout latest cts into a temporary directory. it should be using that revision; so it should be right.",
+      "parentUuid": "cfb2fb19_f4d194f0",
+      "revId": "6aaa8fc7a72ff4878e89021cfc0e306f887ee219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
