@@ -16,6 +16,40 @@
       "message": "Please take a look.",
       "revId": "f32415d910eb014d0ab2fc8d09edd45e28d7c350",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bccbc87a_efaee11d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T14:05:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "f32415d910eb014d0ab2fc8d09edd45e28d7c350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf67590_00c73e5f",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T14:05:29Z",
+      "side": 1,
+      "message": "Can we add these to SharedTextureMemoryTests_apple.mm?",
+      "revId": "f32415d910eb014d0ab2fc8d09edd45e28d7c350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
