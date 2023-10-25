@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2ebd4be9_8d25fbd6",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 317,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-25T13:14:05Z",
+      "side": 1,
+      "message": "This will all go away once HLSL is done, so going to leave for now.",
+      "parentUuid": "ca5a7a1b_1ddad0d7",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 317,
+        "endChar": 13
+      },
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8fe3aa71_f06d1396",
         "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
         "patchSetId": 9
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-24T15:49:43Z",
       "side": 1,
       "message": "Likewise",
+      "range": {
+        "startLine": 322,
+        "startChar": 0,
+        "endLine": 324,
+        "endChar": 13
+      },
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c7242f9_e1e0c610",
+        "filename": "src/tint/fuzzers/tint_common_fuzzer.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-25T13:14:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "8fe3aa71_f06d1396",
       "range": {
         "startLine": 322,
         "startChar": 0,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c892f20_ed280e52",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.cc",
+        "patchSetId": 9
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-25T13:14:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c252b59f_c14ec862",
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0d537b6e_ca4fbaca",
@@ -100,6 +166,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "341b174c_deb44caa",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-25T13:14:05Z",
+      "side": 1,
+      "message": "Will do as a followup as there are multiple of these files.",
+      "parentUuid": "0d537b6e_ca4fbaca",
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7d373629_e486f092",
         "filename": "src/tint/lang/msl/writer/common/option_builder.h",
         "patchSetId": 9
@@ -111,6 +195,30 @@
       "writtenOn": "2023-10-24T15:49:43Z",
       "side": 1,
       "message": "Suggest `Result\u003cSuccessType\u003e`, then dropping the `diagnostics` parameter.",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 4
+      },
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4d0d3bc_67cf08de",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-25T13:14:05Z",
+      "side": 1,
+      "message": "Will do as part of the followup",
+      "parentUuid": "7d373629_e486f092",
       "range": {
         "startLine": 46,
         "startChar": 0,
