@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-10-09 07:48:26AM
+# Last rolled: 2023-10-25 05:03:15AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -104,7 +104,6 @@ crbug.com/1344876 [ webgpu-adapter-swiftshader win ] webgpu:web_platform,copyToT
 # KEEP
 ################################################################################
 crbug.com/dawn/0000 [ intel-0x9bc5 linux no-clang-coverage webgpu-adapter-default ] webgpu:web_platform,external_texture,* [ Failure ]
-
 
 ################################################################################
 # Skipped due to device creation failures
@@ -456,7 +455,6 @@ crbug.com/dawn/1706 [ intel-0x9bc5 win10 ] webgpu:api,operation,command_buffer,q
 crbug.com/tint/1943 [ webgpu-dxc-disabled win10 ] webgpu:shader,execution,memory_model,barrier:workgroup_barrier_load_store:memType="non_atomic_storage" [ Failure ]
 crbug.com/tint/1943 [ webgpu-dxc-disabled win10 ] webgpu:shader,execution,memory_model,barrier:workgroup_barrier_store_load:memType="non_atomic_storage" [ Failure ]
 
-
 ################################################################################
 # untriaged failures
 ################################################################################
@@ -788,7 +786,6 @@ crbug.com/tint/2069 [ intel-0x3e9b target-cpu-64 ventura webgpu-adapter-default 
 crbug.com/tint/2069 [ intel-0x3e9b target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,validation,expression,call,builtin,modf:values:stage="override";type="vec3%3Cf32%3E" [ Failure ]
 crbug.com/tint/2069 [ intel-0x3e9b target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,validation,expression,call,builtin,modf:values:stage="override";type="vec4%3Cf16%3E" [ Failure ]
 crbug.com/tint/2069 [ intel-0x3e9b target-cpu-64 ventura webgpu-adapter-default ] webgpu:shader,validation,expression,call,builtin,modf:values:stage="override";type="vec4%3Cf32%3E" [ Failure ]
-
 
 ################################################################################
 # Manually added failures to facilitate roll. Please triage:
