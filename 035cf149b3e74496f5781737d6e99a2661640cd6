@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "32e4d29c_7d84e964",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T16:33:20Z",
+      "side": 1,
+      "message": "This CL seems to be doing more than this: it also adds the scoping of state etc.",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "39e2b240_57a7e6be",
@@ -14,6 +31,40 @@
       "writtenOn": "2023-10-25T14:51:15Z",
       "side": 1,
       "message": "Hi Corentin and Austin, PTAL. Thanks",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "137ab2fd_b2e49490",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T16:33:20Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this be done at the PhysicalDeviceD3D11 Initialization? Instead of calling CreateD3D11Device it would just use the externalDevice and proceed as normal.",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b69e947a_4504049e",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T16:33:20Z",
+      "side": 1,
+      "message": "There might be other places where we use the device context, for example WriteBuffer. Can we make d3d11::Device only allow access to the device context through a NonMovable RAII helper like this one? This way we\u0027d be sure that we never forget to swap the context.",
       "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
