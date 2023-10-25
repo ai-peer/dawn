@@ -86,6 +86,24 @@
       "parentUuid": "c387bd99_59985761",
       "revId": "f32415d910eb014d0ab2fc8d09edd45e28d7c350",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4097dc88_67596b57",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-25T17:20:05Z",
+      "side": 1,
+      "message": "Sounds good. Added the TODOs.",
+      "parentUuid": "2bcc88d4_37cb463e",
+      "revId": "f32415d910eb014d0ab2fc8d09edd45e28d7c350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
