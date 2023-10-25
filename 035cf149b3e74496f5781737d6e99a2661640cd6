@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa6ab31c_c81fb016",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-25T19:45:02Z",
+      "side": 1,
+      "message": "Adapter and PhysicalDevice are representations for the physical GPU. So I feel calling `DiscoverPhysicalDevices()` or `EnumerateAdapters()` with a d3d11 device object is little bit weird.  However passing an external d3d11 device to `CreateDevice()` is more straightforward.  And it is also flexible. API users can create 2gpu::Device with or without an external device. WDYT?",
+      "parentUuid": "a91c91a1_7ab8f255",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b69e947a_4504049e",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 2
@@ -119,6 +137,24 @@
       "writtenOn": "2023-10-25T16:33:20Z",
       "side": 1,
       "message": "There might be other places where we use the device context, for example WriteBuffer. Can we make d3d11::Device only allow access to the device context through a NonMovable RAII helper like this one? This way we\u0027d be sure that we never forget to swap the context.",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8915a13b_febb5b9e",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-25T19:45:02Z",
+      "side": 1,
+      "message": "I checked other places which use DeviceContext, I think those places will not change the state in the DeviceContext. (Most usages are updating resource content, or mapping a buffer) So calling `SwapDeviceContextState()` is not really necessary.",
+      "parentUuid": "b69e947a_4504049e",
       "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
