@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e901d0_b217859a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "nit depthSlice",
+      "range": {
+        "startLine": 7,
+        "startChar": 9,
+        "endLine": 7,
+        "endChar": 19
+      },
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f418352_6a1e34bc",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "In addition to the [proposal] I think we could go much simpler (and faster) here with an O(n^2) algorithm because the constant would be much smaller than this typically O(n log n) algorithm (even if it were using a hashmap for a typical O(n)).\n\n```\nstruct RecordedAttachment {\n    TextureBase* texture;\n    uint16_t mipLevel;\n    uint16_t sliceOrArrayLayer;\n    \n    bool operator \u003d\u003d;\n};\n\nStackVector\u003cRecordedAttachment, 8\u003e mRecords;\n\n// In AddAttachment\n\nASSERT(single mip level and single array layer) // This way in the future when we add multiview or whatever the assert will trigger.\nRecordedAttachment record \u003d {view-\u003etexture, view-\u003ebasemiplevel, view-\u003ebaseArrayLayer}\nif (view is 3D texture) {\n  record.sliceOrArrayLayer \u003d depthSlice\n} (else assert depthSlice is 0?)\n\nif (find record in mRecords) { // This is O(n) but should be really fast on the small amount of data we have.\n  return error; (we could eventually add information to say what kind of attachment at which index it was)\n}\nmRecords.push_back(record);\n```",
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c36ccba_20b8eb50",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "[proposal] We are starting to have a bunch of gathering of things between this, width, height, sampleCount and validation at [1]. WDYT of having a class like:\n\n\n```\nclass RenderPassValidationState : public NonMovable {\n  public:\n    MaybeError AddAttachment(view, depthSlice \u003d 0);\n    \n    GetWidth/Height/SampleCount();\n    HasAttachment() {return width !\u003d0;}\n\n  private:\n    uint32_t width \u003d 0;\n    uint32_t height \u003d 0;\n    uint32_t sampleCount \u003d 0;\n\n    // Whatever is needed to make sure no attachment is used twice.\n};\n```\n\nThen propagate this in functions that need them by pointer.\n\nIt makes it easier to have everything in the same spot, also checks that StorageAttachment and RenderAttachment don\u0027t alias, is more consistent and code reuse etc.",
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b30ee2_f56417cf",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 672,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4244698c_3aad383e",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "IMHO we could have a different test for this because we are testing two very different things: checks on a single attachment to know if it is a valid attachment, and test of conflicts between two 3D attachments.",
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e76844b_f1aa2274",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "That\u0027s the same as UNDEFINED no? So we could just check that.",
+      "range": {
+        "startLine": 471,
+        "startChar": 34,
+        "endLine": 471,
+        "endChar": 44
+      },
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ce11819_bf1bebc0",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "Can we also have a Test on the OOBness of the depthSlice when baseMipLevel is not 0, including when depth isn\u0027t the biggest dimension so the depth of mip levels goes [4, 2, 1, 1]",
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8acc8a52_66661f4a",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 499,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "That\u0027s dependent on the Blink change as well.",
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d13892bd_e587f254",
+        "filename": "src/dawn/tests/unittests/validation/RenderPassDescriptorValidationTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 525,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:04:04Z",
+      "side": 1,
+      "message": "nit: Can we test the case where it is the same depth slice but two different mip levels? It should be possible with a texture with size (1, 1, 2) which have the second mip level of size (1, 1, 1).",
+      "revId": "aba20a0e58fb81c53a23e3716704c5b690a1841b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
