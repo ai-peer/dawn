@@ -51,6 +51,24 @@
       "parentUuid": "779a670a_ad94304b",
       "revId": "b5eb7e1bb77550928cfe52ee91bc583a977eac44",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b92d332d_0d232f5f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T16:22:46Z",
+      "side": 1,
+      "message": "We could do a staged thing, adding in care and then later remove the experimental extension if that would satisfy your concern. We\u0027ll need to update SPIR-V -\u003e WGSL in Tint to use the core version.",
+      "parentUuid": "5f32a09f_f8980f4f",
+      "revId": "b5eb7e1bb77550928cfe52ee91bc583a977eac44",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
