@@ -16,6 +16,23 @@
       "message": "PTAL! I\u0027m fairly happy that this issue can be resolved by simply lifting some state tracking up one level of abstraction. 😊",
       "revId": "a4eb1642a5bed24c3a0f7f713e0ffa3dee77c3a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "868ae4f9_24dda324",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-25T01:40:41Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "a4eb1642a5bed24c3a0f7f713e0ffa3dee77c3a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
