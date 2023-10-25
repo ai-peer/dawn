@@ -85,6 +85,8 @@ class Backend : public SharedTextureMemoryTestBackend {
                  std::make_pair(kCVPixelFormatType_64RGBAHalf, 8),
                  std::make_pair(kCVPixelFormatType_TwoComponent16Half, 4),
                  std::make_pair(kCVPixelFormatType_OneComponent16Half, 2),
+                 std::make_pair(kCVPixelFormatType_TwoComponent16, 4),
+                 std::make_pair(kCVPixelFormatType_OneComponent16, 2),
                  std::make_pair(kCVPixelFormatType_ARGB2101010LEPacked, 4),
                  std::make_pair(kCVPixelFormatType_32RGBA, 4),
                  std::make_pair(kCVPixelFormatType_32BGRA, 4),
