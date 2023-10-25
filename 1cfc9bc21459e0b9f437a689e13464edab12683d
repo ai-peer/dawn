@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "193521cf_60ad07de",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T22:05:03Z",
+      "side": 1,
+      "message": "Thank you, I think it makes sense to have a single one for now, and worst case we\u0027ll deal with this issue if we need to in the future but it seems unlikely.",
+      "parentUuid": "6419c3fa_65071cb4",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ba2a5dac_f4cf6e08",
@@ -272,6 +290,24 @@
         "endLine": 49,
         "endChar": 26
       },
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89802f28_521148a9",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T22:05:03Z",
+      "side": 1,
+      "message": "Amazing!",
+      "parentUuid": "2c12b071_4dafd895",
       "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
