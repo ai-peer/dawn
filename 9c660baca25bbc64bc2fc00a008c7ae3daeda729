@@ -67,6 +67,24 @@
       "message": "nit: this could use the Handle type directly, likewise for Acquire.",
       "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a7bc906_73e04504",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-25T22:49:54Z",
+      "side": 1,
+      "message": "I\u0027m worried about implicit conversion since fds are plain `int` you can pass something else here which might end up synthesizing not what you want.\n\nthis way, we hit a debug assert, and generate errors using a safe invalid handle even in release",
+      "parentUuid": "cc9bd4c1_56f29b40",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
