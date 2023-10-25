@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "31a8aed1_2f43c8f6",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T20:42:22Z",
+      "side": 1,
+      "message": "IMHO it\u0027s ok to create a physical device on a D3D11 device, because that\u0027s essentially what a physical device is in D3D11. But also right now it looks like you could do adapterForDiscreteGPU-\u003eCreateDevice(d3d11DeviceForIntegratedGPU).\n\nAnd this would allow reusing all the feature discovery etc that\u0027s present in the PhysicalDevice initialization.\n\nAre there architectural difficulties in Chromium / Skia with going the PhysicalDevice route?",
+      "parentUuid": "fa6ab31c_c81fb016",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b69e947a_4504049e",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 2
@@ -155,6 +173,24 @@
       "side": 1,
       "message": "I checked other places which use DeviceContext, I think those places will not change the state in the DeviceContext. (Most usages are updating resource content, or mapping a buffer) So calling `SwapDeviceContextState()` is not really necessary.",
       "parentUuid": "b69e947a_4504049e",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c07bb40e_d683623b",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T20:42:22Z",
+      "side": 1,
+      "message": "What about in the future when we might add code that might change state? Is there a way to separate the state-setting API from the rest somehow to make uses without ScopedSwapDeviceContextState not able to use state setting APIs?\n\nIn general if we\u0027re adding a guardrail here I feel that we should try to ensure any future code doesn\u0027t forget to use the guardrail.",
+      "parentUuid": "8915a13b_febb5b9e",
       "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
