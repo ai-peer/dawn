@@ -1057,7 +1057,7 @@ class CompatMaxVertexAttributesTest : public CompatValidationTest {
         }
 
         if (usesInstanceIndex) {
-            inputs.push_back("@builtin(instance_index) iNdx: u32");
+            inputs.push_back("@builtin(instance_index)  iNdx: u32");
             outputs.push_back("vec4f(f32(iNdx))");
         }
 
