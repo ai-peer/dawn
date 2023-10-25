@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7ffaca2_880416cb",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-25T02:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95f60e4d_e2d4041a",
+      "range": {
+        "startLine": 187,
+        "startChar": 49,
+        "endLine": 187,
+        "endChar": 62
+      },
+      "revId": "3505c729cf6050e60c7ffad4fb8840b55dc40bda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5756f09e_31eddc01",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-24T20:04:34Z",
       "side": 1,
       "message": "Should be textureBindingViewDimension",
+      "range": {
+        "startLine": 543,
+        "startChar": 29,
+        "endLine": 543,
+        "endChar": 42
+      },
+      "revId": "3505c729cf6050e60c7ffad4fb8840b55dc40bda",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e6a6906_353bf25e",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-25T02:52:20Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5756f09e_31eddc01",
       "range": {
         "startLine": 543,
         "startChar": 29,
