@@ -50,6 +50,24 @@
       "message": "Can we add these to SharedTextureMemoryTests_apple.mm?",
       "revId": "f32415d910eb014d0ab2fc8d09edd45e28d7c350",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c387bd99_59985761",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 1
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1003581
+      },
+      "writtenOn": "2023-10-25T16:02:17Z",
+      "side": 1,
+      "message": "Thanks for catching. Updated the test and also added to SharedTextureMemoryMTL.mm. I also tried doing same for kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange but led to some test failures when doing locally but didn\u0027t dig much. Are there any restrictions with P010?",
+      "parentUuid": "3cf67590_00c73e5f",
+      "revId": "f32415d910eb014d0ab2fc8d09edd45e28d7c350",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
