@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "352caa3d_afcbf115",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8e448bd1_744715e8",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6aa3bfa6_544e94c7",
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Ah I think I misunderstands in chat. I thought we are adding a seperate renamer on the client side because other backend runs renamer on dawn side. Adding one to GL will fix chrome issue and not impacting other client using tint.\n\nSeems like the overall plan is to move these transforms inside Tint. (Renamer added by dawn in other backend will be refactored into Tint IIUC)\n\nIn that case (keeping one renamer running in Tint glsl writer). Yeah I will change the input to be passed via tintOptions.",
       "parentUuid": "6aa3bfa6_544e94c7",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b28d583_eb90358d",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "Filed https://crbug.com/dawn/2180",
+      "parentUuid": "5af47677_09507a78",
       "revId": "5eade95fe399b160b5d9178560bca020903b1971",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -193,6 +229,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "257bba58_cd6cbc2e",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "Filed https://crbug.com/dawn/2180",
+      "parentUuid": "dee2b953_ef4d410b",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6ad9c58_140cc9cc",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1349,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "586db6e3_a1483e14",
@@ -206,6 +277,24 @@
       "writtenOn": "2023-10-24T15:30:34Z",
       "side": 1,
       "message": "Would this be safer as just `if (!cfg-\u003erename_map.empty())` instead of creating a pointer to the map?",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "438cbfb3_06f32e36",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1402,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "cfg could be nullptr. I guess that\u0027s what [1] is handling.",
+      "parentUuid": "586db6e3_a1483e14",
       "revId": "5eade95fe399b160b5d9178560bca020903b1971",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -227,6 +316,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "49a37fc5_68a595c4",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1406,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "I tried old_name \u003d\u003d same_name, that doesn\u0027t seem to have side effect (e.g. appending \"_1\"). so didn\u0027t add an assert.",
+      "parentUuid": "ae61641e_68f672e1",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03b740a0_5e6c5180",
@@ -244,6 +351,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "612f9cae_93dba12c",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03b740a0_5e6c5180",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90b5b543_687f4aa5",
@@ -257,6 +382,24 @@
       "writtenOn": "2023-10-24T15:30:34Z",
       "side": 1,
       "message": "```suggestion\n        const Remappings requested_names \u003d {};\n```\n\nMaybe a better name?",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47400e45_0b0fe056",
+        "filename": "src/tint/lang/wgsl/ast/transform/renamer.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-25T22:26:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90b5b543_687f4aa5",
       "revId": "5eade95fe399b160b5d9178560bca020903b1971",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
