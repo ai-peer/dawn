@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c17a5307_82c686a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:57:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5c3dfce_0ea5c192",
+        "filename": "src/dawn/native/SystemHandle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:57:22Z",
+      "side": 1,
+      "message": "Why do we need the templates instead of just defining the functions/constants based on the platform we\u0027re in?",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e10e64cc_64468113",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:57:22Z",
+      "side": 1,
+      "message": "nit: #else #error maybe.",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc9bd4c1_56f29b40",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T21:57:22Z",
+      "side": 1,
+      "message": "nit: this could use the Handle type directly, likewise for Acquire.",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
