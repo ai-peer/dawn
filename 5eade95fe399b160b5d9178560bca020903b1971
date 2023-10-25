@@ -53,6 +53,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e303661f_552ab08e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-25T15:10:16Z",
+      "side": 1,
+      "message": "I\u0027m happy for this to move forward as it unblocks robustness for GLSL things. I didnt\u0027 realize the reading data back was an existing pattern. So keeping that and filling a bug for me to clean it up works for me.\n\nI\u0027m specifically refactoring how we pass binding remappings and external textures at the moment, so this won\u0027t impact what I\u0027m doing.",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8e448bd1_744715e8",
@@ -154,6 +171,24 @@
       "side": 1,
       "message": "If you are in the process of refactoring transforms out of dawn and into tint, I can just wait a bit and rebase later when you are done.",
       "parentUuid": "664a3328_7396434d",
+      "revId": "5eade95fe399b160b5d9178560bca020903b1971",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee2b953_ef4d410b",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-25T15:10:16Z",
+      "side": 1,
+      "message": "Ok, if this is the existing pattern, copy it, and file a bug so I can look at fixing it up later?",
+      "parentUuid": "43a72f81_547fbd71",
       "revId": "5eade95fe399b160b5d9178560bca020903b1971",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
