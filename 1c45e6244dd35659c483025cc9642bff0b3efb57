@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0f690d5_a1861122",
+        "filename": "src/dawn/tests/end2end/DrawIndirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-25T22:35:44Z",
+      "side": 1,
+      "message": "Does this need to be virtual? Seems like it can just be non-virtual and a normal override would work?",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 11
+      },
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "910ffdad_06e89115",
+        "filename": "src/dawn/tests/end2end/DrawIndirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 322,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-25T22:35:44Z",
+      "side": 1,
+      "message": "Huh... I would think that because we have the `GetRequiredFeatures()` virtual func, that `DawnTest::SetUp()` would smartly already skip tests if the required features aren\u0027t available?\n\nBut I guess that might be too aggressive in skipping tests?... Anyways no change required here, just a thought lol.",
+      "range": {
+        "startLine": 322,
+        "startChar": 8,
+        "endLine": 322,
+        "endChar": 95
+      },
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
