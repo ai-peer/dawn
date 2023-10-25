@@ -85,6 +85,24 @@
       "parentUuid": "cc9bd4c1_56f29b40",
       "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52b0fe9e_2a78928e",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-25T23:12:35Z",
+      "side": 1,
+      "message": "Ah makes sense! Is there a way to make this a static assert that fails at compile time instead of an ASSERT()? If not the current approach LGTM with a comment that explains why a template (so we don\u0027t remove it later thinking it wasn\u0027t useful)",
+      "parentUuid": "2a7bc906_73e04504",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
