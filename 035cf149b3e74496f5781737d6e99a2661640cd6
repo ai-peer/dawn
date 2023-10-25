@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "536d1552_f31f50dd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-25T16:49:02Z",
+      "side": 1,
+      "message": "Add more detail in the comment for this change",
+      "parentUuid": "32e4d29c_7d84e964",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "39e2b240_57a7e6be",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
@@ -48,6 +66,24 @@
       "writtenOn": "2023-10-25T16:33:20Z",
       "side": 1,
       "message": "Shouldn\u0027t this be done at the PhysicalDeviceD3D11 Initialization? Instead of calling CreateD3D11Device it would just use the externalDevice and proceed as normal.",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a63d8b0_7ce71d69",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-25T16:49:02Z",
+      "side": 1,
+      "message": "Do you mean chrome passing the external d3d11 device in with `DiscoverPhysicalDevices()`? But `PhysicalDevice::CreateDevice()` can be called more than once. How do we handle it?",
+      "parentUuid": "137ab2fd_b2e49490",
       "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
