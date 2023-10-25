@@ -34,6 +34,24 @@
       "parentUuid": "18571afe_d4e28ac8",
       "revId": "6aaa8fc7a72ff4878e89021cfc0e306f887ee219",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfb2fb19_f4d194f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-25T17:29:50Z",
+      "side": 1,
+      "message": "it\u0027s trying to get b929ebb9bc13ee2cb1c0f7261c5c86ba512c87a4\n\nthe bucket only has 1281ee140066822ddf48d074c52eae54bdc84786 and 8bb48275486acc5ce8ec25dcd3eabaeba80ed832\n\n8bb48275486acc5ce8ec25dcd3eabaeba80ed832 is the current revision.\n\nb929ebb9bc13ee2cb1c0f7261c5c86ba512c87a4 is the revision it tried to roll to.\nso it looks like the roll script may have generated the cache at the wrong revision?\n\nI think this makes sense because the roller uses a checkout, it updates DEPS inside the CL but it doesn\u0027t update DEPS locally and do gclient sync - right??",
+      "parentUuid": "f7c4d81e_17963674",
+      "revId": "6aaa8fc7a72ff4878e89021cfc0e306f887ee219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
