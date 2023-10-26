@@ -27,6 +27,7 @@
 
 #include <EGL/egl.h>
 
+#include <string>
 #include <utility>
 #include <vector>
 
@@ -57,6 +58,7 @@ class EGLFunctions {
             reinterpret_cast<PFNEGLGETCURRENTCONTEXTPROC>(LoadProc("eglGetCurrentContext"));
         GetCurrentDisplay =
             reinterpret_cast<PFNEGLGETCURRENTDISPLAYPROC>(LoadProc("eglGetCurrentDisplay"));
+        QueryString = reinterpret_cast<PFNEGLQUERYSTRINGPROC>(LoadProc("eglQueryString"));
     }
 
   private:
@@ -71,6 +73,7 @@ class EGLFunctions {
     PFNEGLDESTROYIMAGEPROC DestroyImage;
     PFNEGLGETCURRENTCONTEXTPROC GetCurrentContext;
     PFNEGLGETCURRENTDISPLAYPROC GetCurrentDisplay;
+    PFNEGLQUERYSTRINGPROC QueryString;
 
   private:
     DynamicLib mlibEGL;
@@ -128,6 +131,23 @@ class EGLImageTestBase : public DawnTest {
   protected:
     std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
         return {wgpu::FeatureName::DawnInternalUsages};
+    }
+
+    bool HasExtension(const char* string) {
+        return strstr(egl.QueryString(egl.GetCurrentDisplay(), EGL_EXTENSIONS), string) != nullptr;
+    }
+
+    void SetUp() override {
+        DawnTest::SetUp();
+        // TODO: remove this check if possible. Without this check these tests
+        // all fail linux AMD using these arguments
+        // dawn_end2end_tests --backend=opengles --use-angle=opengles "--gtest_filter=EGLImage*"
+        // with:
+        //   INFO: EGL ERROR: eglCreateImage: KHR_gl_texture_2D_image not supported.
+        //      src/dawn/tests/white_box/EGLImageWrappingTests.cpp:152: Failure
+        //   Expected: (nullptr) != (eglImage), actual: (nullptr) vs NULL
+        //   1164111 segmentation fault  DISPLAY=:0 ./out/Debug/dawn_end2end_tests --backend=opengles
+        DAWN_TEST_UNSUPPORTED_IF(!HasExtension("KHR_gl_texture_2D_image"));
     }
 
   public:
