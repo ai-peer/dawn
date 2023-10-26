@@ -106,6 +106,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9f05f70f_18b871fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T13:48:16Z",
+      "side": 1,
+      "message": "Question: We\u0027re removing the requirement for the experimental `enable`. Are we confident that this is handled correctly by all the backends? How well tested is this? Do we have sufficient CTS and end-to-end testing?",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30d04ce8_a8e6e553",
         "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 5
