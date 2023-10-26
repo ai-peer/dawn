@@ -46,6 +46,30 @@
       },
       "revId": "5b9aea2e2b9607d1f069cfe3b1566e4130e5a722",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17f6e99a_210e3d16",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4609,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T17:56:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f7336759_fba06d6d",
+      "range": {
+        "startLine": 4609,
+        "startChar": 40,
+        "endLine": 4609,
+        "endChar": 41
+      },
+      "revId": "5b9aea2e2b9607d1f069cfe3b1566e4130e5a722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
