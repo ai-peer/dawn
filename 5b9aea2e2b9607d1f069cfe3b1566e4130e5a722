@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6668cbf5_d791c26a",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 4609,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T16:51:21Z",
+      "side": 1,
+      "message": "Why `0`? That\u0027s going to force a heap allocation for the initializer.",
+      "range": {
+        "startLine": 4609,
+        "startChar": 40,
+        "endLine": 4609,
+        "endChar": 41
+      },
+      "revId": "5b9aea2e2b9607d1f069cfe3b1566e4130e5a722",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
