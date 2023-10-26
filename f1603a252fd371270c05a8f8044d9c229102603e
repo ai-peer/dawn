@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c77a5821_c8802527",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 307,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-26T19:28:06Z",
+      "side": 1,
+      "message": "Could you split out the SingleEntryPoint change into its own CL and land it separately?",
+      "revId": "f1603a252fd371270c05a8f8044d9c229102603e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
