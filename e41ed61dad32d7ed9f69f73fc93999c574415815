@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d12d2492_f046c02a",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T18:26:25Z",
+      "side": 1,
+      "message": "That sounds good. I filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d2081 for it.",
+      "parentUuid": "6af93234_4109402c",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23483e7c_0bcf7349",
         "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
         "patchSetId": 5
