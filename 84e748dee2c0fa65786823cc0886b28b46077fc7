@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6602514e_417f2754",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T13:35:59Z",
+      "side": 1,
+      "message": "Looks great. Just a few minor comments and nits.",
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efdc61cb_c44a0df4",
+        "filename": "src/tint/utils/rtti/ignore.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T13:35:59Z",
+      "side": 1,
+      "message": "I was surprised to see a specialization of a type_trait, as I thought this was never supposed to be done. But then I read https://en.cppreference.com/w/cpp/types/common_type where under `Specializations`, they say a user can specialize this for a user-defined type. Apparently, this trait, and `std::basic_common_reference` are the only two traits that can be specialized.",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 86
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4617eab_8bc75ad9",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T13:35:59Z",
+      "side": 1,
+      "message": "Missing the rest?",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 7
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc6054cc_3a51c4eb",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T13:35:59Z",
+      "side": 1,
+      "message": "nullptr? This should never happen, right?",
+      "range": {
+        "startLine": 58,
+        "startChar": 23,
+        "endLine": 58,
+        "endChar": 34
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c140d4_21bc1d01",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T13:35:59Z",
+      "side": 1,
+      "message": "Consider placing these in an `impl` or `detail` namespace. Helps to not pollute the global namespace (helpful for auto-complete in IDEs, for example).",
+      "range": {
+        "startLine": 183,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 28
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1553820_a27e5e1a",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T13:35:59Z",
+      "side": 1,
+      "message": "Suggest renaming to `kHasMustMatchCase` for symmetry with `kHasDefaultCase`",
+      "range": {
+        "startLine": 258,
+        "startChar": 26,
+        "endLine": 258,
+        "endChar": 41
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26bafde3_dfc210d8",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T13:35:59Z",
+      "side": 1,
+      "message": "Suggest `SwitchMustMatchCase` instead of `auto` for clarity.",
+      "range": {
+        "startLine": 282,
+        "startChar": 18,
+        "endLine": 282,
+        "endChar": 22
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
