@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6af93234_4109402c",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T16:21:36Z",
+      "side": 1,
+      "message": "\u003e We need a mechanism to either have Tint report that the module used RW/RO storage textures so that Dawn can validate that, or a flag passed to the wgsl reader to tell it we\u0027re in unsafe vs. safe mode. (or something else, Ben can you advise?)\n\nThe former is the pattern we have been using, but its the far less-safe option. We\u0027ve had half-baked experimental-extension guarded features added to Tint, where mid-end and backends don\u0027t correctly handle the feature. This can cause security risks of the half-implemented feature triggers bugs before Dawn can validate and reject the program. For this reason, I think we should move away from this and have Tint error out if a disabled feature is used. This could be done in the WGSL frontend, or the Resolver. The Resolver might make more sense, as we can use the same mechanism to reject SPIR-V shaders that use features the developer cannot target. @jrprice@google.com did some work to reject SPIR-V shaders that use unsupported extensions. Perhaps we can unify all this.",
+      "parentUuid": "130e3cde_cf8b332f",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23483e7c_0bcf7349",
         "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
         "patchSetId": 5
