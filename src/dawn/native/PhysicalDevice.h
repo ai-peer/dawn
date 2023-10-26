@@ -16,6 +16,7 @@
 #define SRC_DAWN_NATIVE_PHYSICALDEVICE_H_
 
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "dawn/native/DawnNative.h"
@@ -33,6 +34,8 @@
 namespace dawn::native {
 
 class DeviceBase;
+
+using FeatureValidateFailure = std::pair<bool /*isFailed*/, std::string /*message*/>;
 
 class PhysicalDeviceBase : public RefCounted {
   public:
@@ -80,8 +83,8 @@ class PhysicalDeviceBase : public RefCounted {
     virtual void SetupBackendDeviceToggles(TogglesState* deviceToggles) const = 0;
 
     // Check if a feature os supported by this adapter AND suitable with given toggles.
-    MaybeError ValidateFeatureSupportedWithToggles(wgpu::FeatureName feature,
-                                                   const TogglesState& toggles) const;
+    FeatureValidateFailure ValidateFeatureSupportedWithToggles(wgpu::FeatureName feature,
+                                                               const TogglesState& toggles) const;
 
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
@@ -119,7 +122,7 @@ class PhysicalDeviceBase : public RefCounted {
 
     virtual void InitializeVendorArchitectureImpl();
 
-    virtual MaybeError ValidateFeatureSupportedWithTogglesImpl(
+    virtual FeatureValidateFailure ValidateFeatureSupportedWithTogglesImpl(
         wgpu::FeatureName feature,
         const TogglesState& toggles) const = 0;
 

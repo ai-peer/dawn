@@ -204,7 +204,9 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
     // disabled AllowUnsafeAPIS.
     for (uint32_t i = 0; i < descriptor->requiredFeatureCount; ++i) {
         wgpu::FeatureName feature = descriptor->requiredFeatures[i];
-        DAWN_TRY(mPhysicalDevice->ValidateFeatureSupportedWithToggles(feature, deviceToggles));
+        FeatureValidateFailure failure =
+            mPhysicalDevice->ValidateFeatureSupportedWithToggles(feature, deviceToggles);
+        DAWN_INVALID_IF(failure.first, "Invalid feature required: %s", failure.second.c_str());
     }
 
     if (descriptor->requiredLimits != nullptr) {
