@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eaaf5044_c2bcbabb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-26T20:56:37Z",
+      "side": 1,
+      "message": "Split from https://dawn-review.googlesource.com/c/dawn/+/157063",
+      "revId": "574d12011687f364865be0d5c8a17366bbd82fff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
