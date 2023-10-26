@@ -39,9 +39,13 @@ add_subdirectory(glfw)
 add_subdirectory(tests/benchmarks)
 
 if (DAWN_BUILD_SAMPLES)
-    #TODO(dawn:269): Add this once implementation-based swapchains are removed.
-    #add_subdirectory(src/utils)
-    add_subdirectory(samples)
+#TODO(dawn:269): Add this once implementation-based swapchains are removed.
+#add_subdirectory(src/utils)
+add_subdirectory(samples)
+endif()
+
+if (DAWN_BUILD_TESTS)
+add_subdirectory(tests/end2end)
 endif()
 
 if (DAWN_BUILD_NODE_BINDINGS)

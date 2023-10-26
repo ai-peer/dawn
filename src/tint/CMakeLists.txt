@@ -89,6 +89,7 @@ function(tint_default_compile_options TARGET)
     -Wno-undefined-var-template
     -Wno-unsafe-buffer-usage
     -Wno-used-but-marked-unused
+    -Wno-shorten-64-to-32
     -Weverything
   )
 

@@ -95,6 +95,27 @@ Result<Output> Generate(const Program& program, const Options& options) {
 #else
         return Failure{"use_tint_ir requires building with TINT_BUILD_WGSL_READER"};
 #endif
+
+        {
+            FILE* f = fopen("/data/local/tmp/ir.spv", "wb");
+            if (f) {
+                fwrite(output.spirv.data(), 4, output.spirv.size(), f);
+                fclose(f);
+            }
+        }
+
+        // {
+        //     FILE* f = fopen("/data/local/tmp/ir.spv", "rb");
+        //     if (f) {
+        //         output.spirv.clear();
+        //         fseek(f, 0, SEEK_END);
+        //         auto size = static_cast<size_t>(ftell(f));
+        //         output.spirv.resize(size / 4, 0u);
+        //         fseek(f, 0, SEEK_SET);
+        //         fread(output.spirv.data(), 4, output.spirv.size(), f);
+        //         fclose(f);
+        //     }
+        // }
     } else {
         // Sanitize the program.
         auto sanitized_result = Sanitize(program, options);
@@ -110,6 +131,12 @@ Result<Output> Generate(const Program& program, const Options& options) {
             return Failure{impl->Diagnostics()};
         }
         output.spirv = std::move(impl->Result());
+
+        FILE* f = fopen("/data/local/tmp/ast.spv", "wb");
+        if (f) {
+            fwrite(output.spirv.data(), 4, output.spirv.size(), f);
+            fclose(f);
+        }
     }
 
     return output;

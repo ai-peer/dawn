@@ -140,6 +140,7 @@ set(USE_X11 OFF)
 set(USE_WINDOWS_UI OFF)
 set(BUILD_SAMPLES OFF)
 set(TARGET_MACOS OFF)
+set(BUILD_TESTS OFF)
 if (WIN32)
     set(ENABLE_D3D11 ON)
     set(USE_WINDOWS_UI ON)
@@ -201,6 +202,7 @@ option_if_not_defined(DAWN_BUILD_SAMPLES "Enables building Dawn's samples" ${BUI
 option_if_not_defined(DAWN_BUILD_NODE_BINDINGS "Enables building Dawn's NodeJS bindings" OFF)
 option_if_not_defined(DAWN_ENABLE_SWIFTSHADER "Enables building Swiftshader as part of the build and Vulkan adapter discovery" OFF)
 option_if_not_defined(DAWN_BUILD_BENCHMARKS "Build Dawn benchmarks" OFF)
+option_if_not_defined(DAWN_BUILD_TESTS "Enables building Dawn's tests" ${BUILD_TESTS})
 
 option_if_not_defined(DAWN_ENABLE_PIC "Build with Position-Independent-Code enabled" OFF)
 
@@ -335,6 +337,7 @@ message(STATUS "Dawn build samples: ${DAWN_BUILD_SAMPLES}")
 message(STATUS "Dawn build Node bindings: ${DAWN_BUILD_NODE_BINDINGS}")
 message(STATUS "Dawn build Swiftshader: ${DAWN_ENABLE_SWIFTSHADER}")
 message(STATUS "Dawn build benchmarks: ${DAWN_BUILD_BENCHMARKS}")
+message(STATUS "Dawn build tests: ${DAWN_BUILD_TESTS}")
 
 message(STATUS "Dawn build PIC: ${DAWN_ENABLE_PIC}")
 
