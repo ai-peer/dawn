@@ -16,6 +16,24 @@
       "message": "`Options` already contains the `zero_init_workgroup_memory` flag, so this is now kinda weird.\n\nNow that you\u0027ve changed the unit tests for types and constants to emit full IR modules, I think we might as well just make all tests use the top level `Generate()` function instead of manually running `Raise()` and `Print()` separately. We don\u0027t really need `DumpTypes()`, so we can also get rid of `PrintModule()`.\n\nI\u0027m happy to do all of this as a follow-up though.",
       "revId": "935d550ff9e97555cb858f6703528571a4f005d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5ae7e49_059848b8",
+        "filename": "src/tint/lang/spirv/writer/common/helper_test.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T14:07:14Z",
+      "side": 1,
+      "message": "\u003e `Options` already contains the `zero_init_workgroup_memory` flag, so this is now kinda weird.\n\nI looked through the options, but I didn\u0027t see anything that exactly matched. Maybe I was just being blind / misunderstanding slightly different names.\n\n\u003e Now that you\u0027ve changed the unit tests for types and constants to emit full IR modules, I think we might as well just make all tests use the top level `Generate()` function instead of manually running `Raise()` and `Print()` separately. \n\nYou have no desire to create unit tests that use the SPIR-V dialect IR?\n\n\u003e We don\u0027t really need `DumpTypes()`, so we can also get rid of `PrintModule()`.\n\nSGTM\n\n\u003e I\u0027m happy to do all of this as a follow-up though.\n\nI don\u0027t expect you to have to take this all on. I\u0027m happy to chip in where / when I can.",
+      "parentUuid": "8449ea57_50a11a4d",
+      "revId": "935d550ff9e97555cb858f6703528571a4f005d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
