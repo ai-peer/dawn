@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29dcc50f_0845f0bf",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4571,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T00:14:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ddb54597_95122e1f",
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "645bdb31_bbb76192",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-10-23T18:11:56Z",
       "side": 1,
       "message": "Is it just structures you have to peek inside? What about arrays? An additional e2d test would be reassuring.",
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f0c2770_22fca782",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4575,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T00:14:58Z",
+      "side": 1,
+      "message": "Spent more time investigating, and it\u0027s structs or arrays, recursively, of matrices that breaks DXC. In fact, now that I\u0027ve investigated the DXC code, I know this to be the case, as arrays and matrices use generic list initialization syntax in HLSL. I\u0027ve updated the code to work with both, and have updated both the tint unittests, and the 2058.wgsl e2e with many more cases.",
+      "parentUuid": "645bdb31_bbb76192",
       "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf2b3d0f_922f0a50",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4576,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T00:14:58Z",
+      "side": 1,
+      "message": "Reworked this code.",
+      "parentUuid": "533ecd52_9dcb14f3",
+      "range": {
+        "startLine": 4576,
+        "startChar": 20,
+        "endLine": 4576,
+        "endChar": 25
+      },
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2bd7f609_738f0248",
@@ -71,6 +131,30 @@
       "writtenOn": "2023-10-23T18:11:56Z",
       "side": 1,
       "message": "This would be cleaner if you used `Hashmap.GetOrCreate`",
+      "range": {
+        "startLine": 4584,
+        "startChar": 0,
+        "endLine": 4594,
+        "endChar": 18
+      },
+      "revId": "29ae1c0c2aa8fcf63a250a1a473f27be17c5dd7c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "323a5589_f5916887",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 4594,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-26T00:14:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2bd7f609_738f0248",
       "range": {
         "startLine": 4584,
         "startChar": 0,
