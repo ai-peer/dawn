@@ -16,6 +16,23 @@
       "message": "PTAL. Hopefully this gets passed the bots ...",
       "revId": "549deb092b884900d8a54de885010a303248e663",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "997838fc_9bf3d3e4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-26T19:50:22Z",
+      "side": 1,
+      "message": "Change LGTM but we should probably add the test case from the bug to Tint\u0027s E2E tests?",
+      "revId": "549deb092b884900d8a54de885010a303248e663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
