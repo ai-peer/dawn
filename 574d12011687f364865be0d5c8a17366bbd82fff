@@ -16,6 +16,23 @@
       "message": "Split from https://dawn-review.googlesource.com/c/dawn/+/157063",
       "revId": "574d12011687f364865be0d5c8a17366bbd82fff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21b1eb83_7ad717c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-26T21:32:33Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "574d12011687f364865be0d5c8a17366bbd82fff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
