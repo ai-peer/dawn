@@ -399,7 +399,7 @@ bool PhysicalDevice::SupportsFeatureLevel(FeatureLevel featureLevel) const {
     return featureLevel == FeatureLevel::Compatibility;
 }
 
-MaybeError PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
+FeatureValidateFailure PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     wgpu::FeatureName feature,
     const TogglesState& toggles) const {
     return {};
