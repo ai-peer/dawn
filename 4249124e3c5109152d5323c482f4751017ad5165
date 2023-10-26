@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac835c2f_9a2f006b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T15:02:23Z",
+      "side": 1,
+      "message": "I thought of an edge-case that _might_ require some additional fixes: crbug.com/tint/2080",
+      "revId": "4249124e3c5109152d5323c482f4751017ad5165",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
