@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9e9d1c_6906638d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T13:42:55Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "10e7eb61cab9a58e9734412fe2e9c97a0166fbf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dcfeb5aa_ebeee5e5",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T13:42:55Z",
+      "side": 1,
+      "message": "nit: if we give it a name then it might as well be a structure ^^, and we can even have constructors!\n\n```\nstruct FeatureValidationResult {\n  FeatureValidationResult() : success(true) {} // implementation in the .cpp\n  FeatureValidationResult(std::string errorMessage) : success(false), errorMessage(std::move(errorMessage)) {}\n\n  bool success;\n  std::string errorMessage;\n};\n```",
+      "revId": "10e7eb61cab9a58e9734412fe2e9c97a0166fbf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
