@@ -33,6 +33,23 @@
       "message": "Change LGTM but we should probably add the test case from the bug to Tint\u0027s E2E tests?",
       "revId": "549deb092b884900d8a54de885010a303248e663",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f443968f_5f552d81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-26T19:50:34Z",
+      "side": 1,
+      "message": "Note, this fixes the ICE, but converts it into a correctly returned error:\n\n```\nFailed to generate: error: found duplicate WGSL binding point: [group: 0, binding: 1]\nnote: when processing external_texture\n```\n\nSo, we need to decide what we want to do here. Any multi-entrypoint can have duplicate values, which means the validation .... is impossible? Or has to take entry points into account? Seems like a bigger issue after we figure out how we want to handle it. If this CL seem sufficient I\u0027ll file a bug so we don\u0027t lose track.",
+      "revId": "549deb092b884900d8a54de885010a303248e663",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
