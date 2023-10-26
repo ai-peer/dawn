@@ -1,6 +1,52 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "97337f73_19efd58f",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T12:08:28Z",
+      "side": 1,
+      "message": "nit: `write`",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2238e97a_c79387a8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T12:08:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure it\u0027s really necessary. I see no usages of this internally or [in the chromium source tree](https://source.chromium.org/search?q\u003dchromium_experimental_read_write_storage_texture%20-third_party%2Fdawn).",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3c30c305_717ff51b",
@@ -14,6 +60,46 @@
       "writtenOn": "2023-10-26T08:54:02Z",
       "side": 1,
       "message": "PTAL, thanks!",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "074b5f52_ed6facf9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T12:08:28Z",
+      "side": 1,
+      "message": "LGTM. Adding James as a secondary tint reviewer.",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23483e7c_0bcf7349",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T12:08:28Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 614,
+        "endChar": 30
+      },
       "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
