@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8449ea57_50a11a4d",
+        "filename": "src/tint/lang/spirv/writer/common/helper_test.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 117,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-26T13:47:31Z",
+      "side": 1,
+      "message": "`Options` already contains the `zero_init_workgroup_memory` flag, so this is now kinda weird.\n\nNow that you\u0027ve changed the unit tests for types and constants to emit full IR modules, I think we might as well just make all tests use the top level `Generate()` function instead of manually running `Raise()` and `Print()` separately. We don\u0027t really need `DumpTypes()`, so we can also get rid of `PrintModule()`.\n\nI\u0027m happy to do all of this as a follow-up though.",
+      "revId": "935d550ff9e97555cb858f6703528571a4f005d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
