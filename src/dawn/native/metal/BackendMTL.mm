@@ -818,8 +818,9 @@ class PhysicalDevice : public PhysicalDeviceBase {
         return {};
     }
 
-    MaybeError ValidateFeatureSupportedWithTogglesImpl(wgpu::FeatureName feature,
-                                                       const TogglesState& toggles) const override {
+    FeatureValidationResult ValidateFeatureSupportedWithTogglesImpl(
+        wgpu::FeatureName feature,
+        const TogglesState& toggles) const override {
         return {};
     }
 
