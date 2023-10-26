@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6cc179b_4233c9d6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-26T16:15:46Z",
+      "side": 1,
+      "message": "AFAIK, there\u0027s nothing in the GLES backend that uses that extension per se.  EGL_GL_TEXTURE_2D_KHR became EGL_GL_TEXTURE_2D in EGL 1.5. Does your driver not support EGL 1.5? Could we do the check against 1.5 instead?\n\n(For reference, the GLES backend does the check here: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/opengl/ContextEGL.cpp;l\u003d52)",
+      "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
