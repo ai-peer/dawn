@@ -70,6 +70,24 @@
       "parentUuid": "cfb2fb19_f4d194f0",
       "revId": "6aaa8fc7a72ff4878e89021cfc0e306f887ee219",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "37e048a3_d6ffe9aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-26T01:27:29Z",
+      "side": 1,
+      "message": "the odd thing is a local roll worked just fine. maybe the upload into the bucket is silently failing on the bot. we can do a `gsutil ls` to double check it is actually there or something",
+      "parentUuid": "035dab1b_85a799ad",
+      "revId": "6aaa8fc7a72ff4878e89021cfc0e306f887ee219",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
