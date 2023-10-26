@@ -1606,6 +1606,84 @@ fn main() {
     EXPECT_BUFFER_FLOAT_RANGE_EQ(expected.data(), buffer, 0, expected.size());
 }
 
+TEST_P(ShaderTests, Robustness_Mat4x3) {
+    std::vector<float> inputs{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0,
+                              0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0};
+    std::vector<uint32_t> outputs{0xDEADBEEFu};
+    uint64_t bufferSize = static_cast<uint64_t>(inputs.size() * sizeof(float));
+    wgpu::Buffer buffer =
+        utils::CreateBufferFromData(device, inputs.data(), bufferSize, wgpu::BufferUsage::Uniform);
+    wgpu::Buffer output = utils::CreateBufferFromData(
+        device, outputs.data(), 4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::CopySrc);
+
+    std::string shader = R"(
+    struct Result {
+      value: u32
+    };
+    @group(0) @binding(1) var<storage, read_write> result: Result;
+
+    struct TestData {
+      data: mat4x3<f32>,
+    };
+    @group(0) @binding(0) var<uniform> s: TestData;
+
+    fn runTest() -> u32 {
+      {
+        let index = (0u);
+        if (any(s.data[index] != vec3<f32>())) { return 0x1001u; }
+      }
+      {
+        let index = (4u - 1u);
+        if (any(s.data[index] != vec3<f32>())) { return 0x1002u; }
+      }
+      {
+        let index = (4u);
+        if (any(s.data[index] != vec3<f32>())) { return 0x1003u; }
+      }
+      {
+        let index = (1000000u);
+        if (any(s.data[index] != vec3<f32>())) { return 0x1004u; }
+      }
+      {
+        let index = (4294967295u);
+        if (any(s.data[index] != vec3<f32>())) { return 0x1005u; }
+      }
+      {
+        let index = (2147483647u);
+        if (any(s.data[index] != vec3<f32>())) { return 0x1006u; }
+      }
+      return 0u;
+    }
+
+    @compute @workgroup_size(1)
+    fn main() {
+      result.value = runTest();
+    }
+)";
+
+    wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main");
+
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0), {{0, buffer}, {1, output}});
+
+    wgpu::CommandBuffer commands;
+    {
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+        pass.SetPipeline(pipeline);
+        pass.SetBindGroup(0, bindGroup);
+        pass.DispatchWorkgroups(1);
+        pass.End();
+
+        commands = encoder.Finish();
+    }
+
+    queue.Submit(1, &commands);
+
+    outputs[0] = 0u;
+    EXPECT_BUFFER_U32_RANGE_EQ(outputs.data(), output, 0, outputs.size());
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D11Backend(),
                       D3D12Backend(),
