@@ -26,6 +26,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da79052f_7e16e1c1",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T13:44:12Z",
+      "side": 1,
+      "message": "typo: write",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2238e97a_c79387a8",
         "filename": "/COMMIT_MSG",
         "patchSetId": 5
@@ -77,6 +100,46 @@
       "writtenOn": "2023-10-26T12:08:28Z",
       "side": 1,
       "message": "LGTM. Adding James as a secondary tint reviewer.",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30d04ce8_a8e6e553",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T13:44:12Z",
+      "side": 1,
+      "message": "We shouldn\u0027t need this, IIRC all tests run with UnsafeAPIs by default. However we should have a test in UnsafeAPIsTests.cpp (I think that\u0027s the name?) that checks in \"safe api mode\" we don\u0027t expose RW / RO storage textures.\n\nAh you have it in the StorageTextureValidationTests.cpp. That works too, especially since we want to reuse some helper functions.",
+      "range": {
+        "startLine": 1329,
+        "startChar": 0,
+        "endLine": 1335,
+        "endChar": 0
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "130e3cde_cf8b332f",
+        "filename": "src/dawn/tests/unittests/validation/StorageTextureValidationTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1194,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T13:44:12Z",
+      "side": 1,
+      "message": "We should just test shader module compilation, not pipeline compilation: right now the test fails because the creation of the default bind group layout ends up running into the unsafe validation. But the shadermodule is created successfully, which means this CL enables RW/RO storage textures in WGSL without any flag.\n\nWe need a mechanism to either have Tint report that the module used RW/RO storage textures so that Dawn can validate that, or a flag passed to the wgsl reader to tell it we\u0027re in unsafe vs. safe mode. (or something else, Ben can you advise?)\n\nAlso we\u0027re going to need to figure out how to implement https://gpuweb.github.io/gpuweb/wgsl/#language-extension but since everything is behind unsafe api we don\u0027t need to do it in this CL immediately.",
       "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
