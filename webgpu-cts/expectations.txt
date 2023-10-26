@@ -189,8 +189,8 @@ crbug.com/tint/1753 [ target-cpu-32 webgpu-dxc-disabled win10 ] webgpu:shader,ex
 # but often fail without validation and on Intel as well
 # KEEP
 ################################################################################
-crbug.com/dawn/0000 [ dawn-backend-validation no-asan no-clang-coverage release-x64 target-cpu-64 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:* [ Failure ]
-crbug.com/dawn/0000 [ dawn-backend-validation no-asan no-clang-coverage release-x64 target-cpu-64 webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:* [ Failure ]
+crbug.com/dawn/0000 [ webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_2D_Canvas:* [ Failure ]
+crbug.com/dawn/0000 [ webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageBitmap:copy_subrect_from_ImageData:* [ Failure ]
 crbug.com/dawn/0000 [ webgpu-adapter-default win10 ] webgpu:web_platform,copyToTexture,ImageData:copy_subrect_from_ImageData:* [ Failure ]
 
 ################################################################################
