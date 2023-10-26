@@ -16,6 +16,23 @@
       "message": "Corentin@\n\nPTAL thank you",
       "revId": "59ed52804ef46746fa08071728d7c5ef0384f367",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7924b97_d30f0b6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T17:09:25Z",
+      "side": 1,
+      "message": "Thank you for the fix!",
+      "revId": "59ed52804ef46746fa08071728d7c5ef0384f367",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
