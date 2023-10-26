@@ -26,6 +26,10 @@
 
 namespace dawn::native {
 
+FeatureValidateResult::FeatureValidateResult() : success(true) {}
+FeatureValidateResult::FeatureValidateResult(std::string errorMsg)
+    : success(false), errorMessage(errorMsg) {}
+
 PhysicalDeviceBase::PhysicalDeviceBase(InstanceBase* instance, wgpu::BackendType backend)
     : mInstance(instance), mBackend(backend) {}
 
@@ -105,13 +109,7 @@ InstanceBase* PhysicalDeviceBase::GetInstance() const {
 
 bool PhysicalDeviceBase::IsFeatureSupportedWithToggles(wgpu::FeatureName feature,
                                                        const TogglesState& toggles) const {
-    MaybeError validateResult = ValidateFeatureSupportedWithToggles(feature, toggles);
-    if (validateResult.IsError()) {
-        validateResult.AcquireError();
-        return false;
-    } else {
-        return true;
-    }
+    return ValidateFeatureSupportedWithToggles(feature, toggles).success;
 }
 
 void PhysicalDeviceBase::GetDefaultLimitsForSupportedFeatureLevel(Limits* limits) const {
@@ -152,19 +150,27 @@ void PhysicalDeviceBase::EnableFeature(Feature feature) {
     mSupportedFeatures.EnableFeature(feature);
 }
 
-MaybeError PhysicalDeviceBase::ValidateFeatureSupportedWithToggles(
+FeatureValidateResult PhysicalDeviceBase::ValidateFeatureSupportedWithToggles(
     wgpu::FeatureName feature,
     const TogglesState& toggles) const {
-    DAWN_TRY(ValidateFeatureName(feature));
-    DAWN_INVALID_IF(!mSupportedFeatures.IsEnabled(feature),
-                    "Requested feature %s is not supported.", feature);
+    auto validateNameResult = ValidateFeatureName(feature);
+    if (validateNameResult.IsError()) {
+        return FeatureValidateResult(validateNameResult.AcquireError()->GetMessage());
+    }
+
+    if (!mSupportedFeatures.IsEnabled(feature)) {
+        return FeatureValidateResult(
+            absl::StrFormat("Requested feature %s is not supported.", feature));
+    }
 
     const FeatureInfo* featureInfo = GetInstance()->GetFeatureInfo(feature);
     // Experimental features are guarded by the AllowUnsafeAPIs toggle.
     if (featureInfo->featureState == FeatureInfo::FeatureState::Experimental) {
         // AllowUnsafeAPIs toggle is by default disabled if not explicitly enabled.
-        DAWN_INVALID_IF(!toggles.IsEnabled(Toggle::AllowUnsafeAPIs),
-                        "Feature %s is guarded by toggle allow_unsafe_apis.", featureInfo->name);
+        if (!toggles.IsEnabled(Toggle::AllowUnsafeAPIs)) {
+            return FeatureValidateResult(absl::StrFormat(
+                "Feature %s is guarded by toggle allow_unsafe_apis.", featureInfo->name));
+        }
     }
 
     // Do backend-specific validation.
