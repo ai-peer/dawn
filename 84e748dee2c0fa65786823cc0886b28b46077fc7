@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42ad5add_4408f7c5",
+        "filename": "src/tint/utils/rtti/ignore.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T13:45:05Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "efdc61cb_c44a0df4",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 42,
+        "endChar": 86
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e4617eab_8bc75ad9",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-26T13:35:59Z",
       "side": 1,
       "message": "Missing the rest?",
+      "range": {
+        "startLine": 55,
+        "startChar": 4,
+        "endLine": 55,
+        "endChar": 7
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f1d1bc8_0eb2314a",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T13:45:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4617eab_8bc75ad9",
       "range": {
         "startLine": 55,
         "startChar": 4,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5f9201c_274dc4a2",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T13:45:05Z",
+      "side": 1,
+      "message": "Nothing prevents you from using this class instead of the macro (like the unittests). There\u0027s no cost for having the default initializer if it\u0027s explicitly set in the struct initializer. Better safe than sorry.",
+      "parentUuid": "fc6054cc_3a51c4eb",
+      "range": {
+        "startLine": 58,
+        "startChar": 23,
+        "endLine": 58,
+        "endChar": 34
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "20c140d4_21bc1d01",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-10-26T13:35:59Z",
       "side": 1,
       "message": "Consider placing these in an `impl` or `detail` namespace. Helps to not pollute the global namespace (helpful for auto-complete in IDEs, for example).",
+      "range": {
+        "startLine": 183,
+        "startChar": 4,
+        "endLine": 183,
+        "endChar": 28
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5bf94e7_cd252fc2",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T13:45:05Z",
+      "side": 1,
+      "message": "They are in a detail namespace.",
+      "parentUuid": "20c140d4_21bc1d01",
       "range": {
         "startLine": 183,
         "startChar": 4,
@@ -135,6 +231,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90a6ee9f_9a86301c",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T13:45:05Z",
+      "side": 1,
+      "message": "Depends on your perspective a bit. Yes, it has a `SwitchMustMatchCase`, but that is a flag to say we `must match a case`. That\u0027s what the bool flag is named.",
+      "parentUuid": "a1553820_a27e5e1a",
+      "range": {
+        "startLine": 258,
+        "startChar": 26,
+        "endLine": 258,
+        "endChar": 41
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "26bafde3_dfc210d8",
         "filename": "src/tint/utils/rtti/switch.h",
         "patchSetId": 11
@@ -146,6 +266,30 @@
       "writtenOn": "2023-10-26T13:35:59Z",
       "side": 1,
       "message": "Suggest `SwitchMustMatchCase` instead of `auto` for clarity.",
+      "range": {
+        "startLine": 282,
+        "startChar": 18,
+        "endLine": 282,
+        "endChar": 22
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fba5c19_6423d4ea",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T13:45:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "26bafde3_dfc210d8",
       "range": {
         "startLine": 282,
         "startChar": 18,
