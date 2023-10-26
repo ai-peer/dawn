@@ -277,6 +277,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a687ea7d_e7188b81",
+        "filename": "src/tint/utils/rtti/switch.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-26T14:09:49Z",
+      "side": 1,
+      "message": "I had a slight readability preference for the former, but I think you have stronger feelings than I do, so done.",
+      "parentUuid": "11f32d9a_c10c873d",
+      "range": {
+        "startLine": 258,
+        "startChar": 26,
+        "endLine": 258,
+        "endChar": 41
+      },
+      "revId": "84e748dee2c0fa65786823cc0886b28b46077fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "26bafde3_dfc210d8",
