@@ -52,39 +52,37 @@ Bindings GenerateBindings(const Program& program) {
 
     std::unordered_set<tint::BindingPoint> seen_binding_points;
 
-    // Collect next valid binding number per group
-    Hashmap<uint32_t, uint32_t, 4> group_to_next_binding_number;
+    // This is a bit of a hack. The binding points must be unique over all the `binding`
+    // entries. But, this is looking at _all_ entry points where bindings can overlap.
+    // In the case where both entry points used the same type (uniform, sampler, etc)
+    // then it would be fine as it just overwrites with itself. But, if the two entries
+    // have different types, this can lead to missing bindings.
+    //
+    // To work around this, all duplicate bindings are remapped. This has the downside
+    // that multiple entry points in a single file, the later entry points will have
+    // all their bindings changed. Using the SingleEntryPoint transform would be
+    // the way around this, there is only a single entry point so it will keep its
+    // bindings intact.
+    auto find_bind_point = [&](uint32_t group, uint32_t binding) -> binding::BindingInfo {
+        tint::BindingPoint bp{group, binding};
+        while (seen_binding_points.find(bp) != seen_binding_points.end()) {
+            bp.binding += 1;
+        }
+        seen_binding_points.emplace(bp);
+        return binding::BindingInfo{bp.group, bp.binding};
+    };
+
     Vector<tint::BindingPoint, 4> ext_tex_bps;
     for (auto* var : program.AST().GlobalVariables()) {
         if (auto* sem_var = program.Sem().Get(var)->As<sem::GlobalVariable>()) {
             if (auto bp = sem_var->BindingPoint()) {
-                // This is a bit of a hack. The binding points must be unique over all the `binding`
-                // entries. But, this is looking at _all_ entry points where bindings can overlap.
-                // In the case where both entry points used the same type (uniform, sampler, etc)
-                // then it would be fine as it just overwrites with itself. But, if one entry point
-                // has a uniform and the other a sampler at the same (group,binding) pair then we'll
-                // get a validation error due to duplicate WGSL bindings.
-                //
-                // For generating bindings we don't really care as we always map to itself, so if it
-                // exists anywhere, we just pretend that's the only one.
-                if (seen_binding_points.find(*bp) != seen_binding_points.end()) {
-                    continue;
-                }
-                seen_binding_points.emplace(*bp);
-
-                if (auto val = group_to_next_binding_number.Find(bp->group)) {
-                    *val = std::max(*val, bp->binding + 1);
-                } else {
-                    group_to_next_binding_number.Add(bp->group, bp->binding + 1);
-                }
-
                 // Store up the external textures, we'll add them in the next step
                 if (sem_var->Type()->UnwrapRef()->Is<core::type::ExternalTexture>()) {
                     ext_tex_bps.Push(*bp);
                     continue;
                 }
 
-                binding::BindingInfo info{bp->group, bp->binding};
+                binding::BindingInfo info = find_bind_point(bp->group, bp->binding);
                 switch (sem_var->AddressSpace()) {
                     case core::AddressSpace::kHandle:
                         Switch(
@@ -121,14 +119,9 @@ Bindings GenerateBindings(const Program& program) {
     }
 
     for (auto bp : ext_tex_bps) {
-        uint32_t g = bp.group;
-        uint32_t next_num = *(group_to_next_binding_number.GetOrZero(g));
-
-        binding::BindingInfo plane0{bp.group, bp.binding};
-        binding::BindingInfo plane1{g, next_num++};
-        binding::BindingInfo metadata{g, next_num++};
-
-        group_to_next_binding_number.Replace(g, next_num);
+        binding::BindingInfo plane0 = find_bind_point(bp.group, bp.binding);
+        binding::BindingInfo plane1 = find_bind_point(bp.group, bp.binding);
+        binding::BindingInfo metadata = find_bind_point(bp.group, bp.binding);
 
         bindings.external_texture.emplace(bp, binding::ExternalTexture{metadata, plane0, plane1});
     }
