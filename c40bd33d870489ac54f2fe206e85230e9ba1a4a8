@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d53dd03b_7af09f37",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-26T17:10:07Z",
+      "side": 1,
+      "message": "Loko PTAL again! I fixed the dawn_end2end_tests failure from PS1",
+      "revId": "c40bd33d870489ac54f2fe206e85230e9ba1a4a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
