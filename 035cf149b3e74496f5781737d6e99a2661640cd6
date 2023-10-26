@@ -160,6 +160,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e098a76_744a773d",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-26T20:44:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7d87fb7_90e1f5bd",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b69e947a_4504049e",
@@ -227,6 +245,24 @@
       "side": 1,
       "message": "Also what Austin suggested in the other comment thread, we could also do the ID3D11Multithread::Enter/Leave in the same ScopedDeviceContext RAII helper.",
       "parentUuid": "c07bb40e_d683623b",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "736edc01_f97f4f10",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-26T20:44:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd7e0fce_dbcb2f17",
       "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
