@@ -67,7 +67,7 @@ func BuildCache(ctx context.Context, ctsDir, nodePath, npmPath string, authFlags
 		return "", err
 	}
 
-	client, err := storage.NewClient(ctx, option.WithTokenSource(ts))
+	client, err := storage.NewClient(ctx, option.WithTokenSource(ts), option.WithScopes(storage.ScopeReadWrite))
 	if err != nil {
 		return "", fmt.Errorf("failed to create google cloud storage client: %w", err)
 	}
@@ -131,7 +131,7 @@ func BuildCache(ctx context.Context, ctsDir, nodePath, npmPath string, authFlags
 		return "", err
 	}
 
-	files, err := glob.Glob(filepath.Join(cacheDir, "**.json"))
+	files, err := glob.Glob(filepath.Join(cacheDir, "**.bin"))
 	if err != nil {
 		return "", fmt.Errorf("failed to glob cached files: %w", err)
 	}
