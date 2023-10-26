@@ -27,6 +27,8 @@
 
 #include "dawn/native/opengl/SamplerGL.h"
 
+#include <algorithm>
+
 #include "dawn/common/Assert.h"
 #include "dawn/native/opengl/DeviceGL.h"
 #include "dawn/native/opengl/UtilsGL.h"
@@ -126,7 +128,8 @@ void Sampler::SetupGLSampler(GLuint sampler,
     }
 
     if (gl.IsAtLeastGL(4, 6) || gl.IsGLExtensionSupported("GL_EXT_texture_filter_anisotropic")) {
-        gl.SamplerParameterf(sampler, GL_TEXTURE_MAX_ANISOTROPY, GetMaxAnisotropy());
+        uint16_t value = std::min<uint16_t>(GetMaxAnisotropy(), 16u);
+        gl.SamplerParameteri(sampler, GL_TEXTURE_MAX_ANISOTROPY, value);
     }
 }
 
