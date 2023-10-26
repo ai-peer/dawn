@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7d87fb7_90e1f5bd",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 122,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-26T02:31:02Z",
+      "side": 1,
+      "message": "agree with passing this at EnumerateAdapters time.\n\nWe\u0027re telling Dawn, please give me an adapter using *this* device that I\u0027ve already made\n\nsecondly:\n - does this mean we no longer need the feature D3D11MultithreadProtected? Instead, Dawn can validate that the device you pass it has multithread protected enabled on it (otherwise it will be racy to swap the device context state)\n - we should also make sure we do  mD3D11Multithread-\u003eEnter(); and Leave while we have the device context state swapped",
+      "parentUuid": "31a8aed1_2f43c8f6",
+      "revId": "035cf149b3e74496f5781737d6e99a2661640cd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b69e947a_4504049e",
         "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
         "patchSetId": 2
