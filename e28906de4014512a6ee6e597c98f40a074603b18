@@ -39,6 +39,24 @@
       "message": "`cmd` is checked immediately below for `nil`",
       "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64b2d7ef_00ec63a9",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T20:58:23Z",
+      "side": 1,
+      "message": "Right, so if it comes back valid, we end up doing a redundant findCmd on line 143?",
+      "parentUuid": "e9522316_4003aab3",
+      "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
