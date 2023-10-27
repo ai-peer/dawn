@@ -16,6 +16,144 @@
       "message": "PTAL! Asking for a review while tests are running on the CQ for the first time because 1) they pass locally on an M1 machine which is the only kind that supports the new tests and 2) to be able to make progress on review comments next Monday.",
       "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b91fe2b_cd2b6db4",
+        "filename": "src/dawn/native/AttachmentState.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-27T23:23:48Z",
+      "side": 1,
+      "message": "Hmm, I do feel like instead of `mStorageAttackmentSlots` being a `std::vector\u003cwgpu::TextureFormat\u003e`, it could just be a `std::unordered_map\u003cColorAttachmentIndex, wgpu::TextureFormat\u003e`. That also makes the processing loop in `CommandBufferMTL.mm`/`RenderPipelineMTL.mm1 a lot easier to keep track of the variables (and less confusing names).",
+      "range": {
+        "startLine": 285,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 43
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13108b86_9926b4a6",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-27T23:23:48Z",
+      "side": 1,
+      "message": "nit. this naming is a bit confusing since `storageAttachmentSlots` !\u003d the result of `GetStorageAttachmentSlots()`",
+      "range": {
+        "startLine": 332,
+        "startChar": 8,
+        "endLine": 335,
+        "endChar": 93
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bdd2b89_006f4584",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-27T23:23:48Z",
+      "side": 1,
+      "message": "nit. Same comment as above.",
+      "range": {
+        "startLine": 413,
+        "startChar": 12,
+        "endLine": 416,
+        "endChar": 90
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efdc97b4_64d544d0",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-27T23:23:48Z",
+      "side": 1,
+      "message": "nit. This is a bit odd cause we could also just use `storageAttachmentSlots.size()` instead?\n\nI assume the two are expected to be equal but it\u0027s a bit weird to use the size of the other one for iterating?\n\n(Probably irrelevant comment if we do the map thing though)",
+      "range": {
+        "startLine": 200,
+        "startChar": 31,
+        "endLine": 200,
+        "endChar": 55
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d517066_0dd98d08",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-27T23:23:48Z",
+      "side": 1,
+      "message": "nit. New license (I think?)",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d71aa86_19cd4e0b",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-27T23:23:48Z",
+      "side": 1,
+      "message": "nit. stale?",
+      "range": {
+        "startLine": 508,
+        "startChar": 4,
+        "endLine": 513,
+        "endChar": 9
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
