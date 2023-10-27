@@ -523,6 +523,12 @@ config("common_config") {
       "/Zc:__cplusplus",
       "/Zc:sizedDealloc-",  # Disable sized allocation
     ]
+    if (!is_clang) {
+      cflags_cc += [
+        "/Zc:twoPhase-",  # DXC source relies on MSVC's non-conforming
+                          # two-phase lookup
+      ]
+    }
 
     cflags_c += [
       "/EHsc",  # DXC uses exceptions
