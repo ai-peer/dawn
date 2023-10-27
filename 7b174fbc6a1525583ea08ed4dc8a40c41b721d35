@@ -52,6 +52,24 @@
       "parentUuid": "14760baf_420c86b3",
       "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4b5bef0_11e5950c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T18:54:12Z",
+      "side": 1,
+      "message": "I take it back - there\u0027s a hack in the roller that\u0027s causing this:https://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/cmd/cts/config.json#62\n\nI\u0027ll investigate why this was added.",
+      "parentUuid": "6e7bbb2d_81654947",
+      "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
