@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9d5c0d0_1274b951",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-27T15:26:58Z",
+      "side": 1,
+      "message": "PTAL! Asking for a review while tests are running on the CQ for the first time because 1) they pass locally on an M1 machine which is the only kind that supports the new tests and 2) to be able to make progress on review comments next Monday.",
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
