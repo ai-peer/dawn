@@ -18,6 +18,91 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a9f35eb9_877c4f1e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-27T21:06:06Z",
+      "side": 1,
+      "message": "d",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "674353db_d5cee262",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-27T21:06:06Z",
+      "side": 1,
+      "message": "would it be possible to use non-zero values to be more sure it is correct? IIUC, the transform uses an array of vectors, so accesses should get clamped. that means the out of bound access should access the first/last vector here. but in this test, we can\u0027t distinguish that?",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fbd7dc9_74ab7032",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1611,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-27T21:06:06Z",
+      "side": 1,
+      "message": "but: dawn usually uses camcelCase",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66959c8d_20837117",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1663,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-27T21:06:06Z",
+      "side": 1,
+      "message": "could you comment about why you\u0027re testing the various cases?\nfor example, I\u0027m not sure why 0u + 0u would be different from testing 0u.",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8258be7_8ddc110f",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1811,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-27T21:06:06Z",
+      "side": 1,
+      "message": "why must it be statically accessed versus accessed in the branches of runTest?",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "217f8c6a_2f21628d",
