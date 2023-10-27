@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf7bbd3d_ccf97d81",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-27T18:47:07Z",
+      "side": 1,
+      "message": "Sad there\u0027s no other way to fill-init this array. Manual filling works but is really error-prone, and I\u0027d worry we have other bugs like this. I wonder why this isn\u0027t caught by ASAN?",
+      "revId": "c3c91d5019a80534eb5010a611250d6e09c67ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c0ced8d8_947516cb",
         "filename": "src/dawn/native/d3d12/RenderPassBuilderD3D12.cpp",
         "patchSetId": 1
@@ -14,6 +31,24 @@
       "writtenOn": "2023-10-27T18:34:37Z",
       "side": 1,
       "message": "Note that another way to fix this would be to set this field explicitly to `D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_DISCARD` (which is the 0th value).",
+      "revId": "c3c91d5019a80534eb5010a611250d6e09c67ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ac0aed5_de70371d",
+        "filename": "src/dawn/native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-10-27T18:47:07Z",
+      "side": 1,
+      "message": "Assert is good since it can be skipped in release. No strong opinion about how you name the 0 value, but I guess another option would be `(D3D12_RENDER_PASS_BEGINNING_ACCESS{}).Type`",
+      "parentUuid": "c0ced8d8_947516cb",
       "revId": "c3c91d5019a80534eb5010a611250d6e09c67ad1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
