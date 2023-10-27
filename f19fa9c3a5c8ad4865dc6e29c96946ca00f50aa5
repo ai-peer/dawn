@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "88c50fa2_b6328a59",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "ANGLE and Graphite are on the same thread. SO we don\u0027t need thread protection for this case. However media may use the same d3d11 device context for media decoding. So I think it is not necessary to check thread protection for all the cases.\n\nWe will remove it if using the same d3d11 device can improve graphite performance and stability.",
+      "parentUuid": "47e9e1f0_fbc51c32",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -31,6 +49,30 @@
       "writtenOn": "2023-10-27T02:36:39Z",
       "side": 1,
       "message": "do we need to store the bool as a member variable? we can swap in the constructor if true. Then we can swap back if mPreviousState is not null. Don\u0027t need to store the bool I think",
+      "range": {
+        "startLine": 58,
+        "startChar": 8,
+        "endLine": 58,
+        "endChar": 25
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0122bd5c_1f68ae36",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b39d5fc_6c3278c4",
       "range": {
         "startLine": 58,
         "startChar": 8,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e03a02_7af68e27",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7fcf581b_42fcaa68",
+      "range": {
+        "startLine": 59,
+        "startChar": 18,
+        "endLine": 59,
+        "endChar": 88
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc34d016_0f4c7ea0",
@@ -81,6 +147,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f6dcfdf_5c5f9407",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "This method has been removed.",
+      "parentUuid": "cc34d016_0f4c7ea0",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edbc5e4d_5ccc13df",
@@ -94,6 +178,30 @@
       "writtenOn": "2023-10-27T02:36:39Z",
       "side": 1,
       "message": "could we pass D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED since we manage our state behind a lock?",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a8828d25_f0bc0cc7",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "The dawn lock can only protect device context used within dawn. ANGLE and media code can still use the context with holding the lock in dawn.",
+      "parentUuid": "edbc5e4d_5ccc13df",
       "range": {
         "startLine": 137,
         "startChar": 16,
@@ -129,6 +237,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2007fc33_4ee8215e",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "It is hard to do that. the d3d11 backend needs access ID3D11DeviceContext to either update resource content or modify context state. We cannot only allow updating resources but not modifying context state.",
+      "parentUuid": "32bed658_aacf5127",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 86
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b007efa6_193ea05d",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 9
@@ -140,6 +272,30 @@
       "writtenOn": "2023-10-27T02:36:39Z",
       "side": 1,
       "message": "could it be NonMovable? what do you need these for?",
+      "range": {
+        "startLine": 49,
+        "startChar": 0,
+        "endLine": 49,
+        "endChar": 56
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6d0b15ab_6f063f4c",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b007efa6_193ea05d",
       "range": {
         "startLine": 49,
         "startChar": 0,
@@ -167,6 +323,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b9a4a5f_fd6d1cbd",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "Really? Can linker inline a method defined in .cpp file but used in other .cpp file? I thought the linker can only inline a method defined and used in the same .cpp file.\n\nDone",
+      "parentUuid": "5f9f19fa_e7fe4884",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cb6e16af_d86f3454",
@@ -180,6 +354,30 @@
       "writtenOn": "2023-10-27T02:36:39Z",
       "side": 1,
       "message": "nit: casing as \"D3D11Device\" to match",
+      "range": {
+        "startLine": 56,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 69
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7962481b_576a3735",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-27T14:28:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cb6e16af_d86f3454",
       "range": {
         "startLine": 56,
         "startChar": 0,
