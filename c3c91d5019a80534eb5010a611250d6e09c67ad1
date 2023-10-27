@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0ced8d8_947516cb",
+        "filename": "src/dawn/native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T18:34:37Z",
+      "side": 1,
+      "message": "Note that another way to fix this would be to set this field explicitly to `D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE_DISCARD` (which is the 0th value).",
+      "revId": "c3c91d5019a80534eb5010a611250d6e09c67ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
