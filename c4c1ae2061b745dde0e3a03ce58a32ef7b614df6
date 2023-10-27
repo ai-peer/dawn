@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1db69caf_1c8f9abd",
+        "filename": "tools/src/cmd/run-cts/chrome/cmd.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T21:40:23Z",
+      "side": 1,
+      "message": "Thanking you!",
+      "parentUuid": "7723786c_e9a584c1",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 14
+      },
+      "revId": "c4c1ae2061b745dde0e3a03ce58a32ef7b614df6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "31806347_272003d4",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-27T21:03:03Z",
       "side": 1,
       "message": "Also super cool!",
+      "range": {
+        "startLine": 254,
+        "startChar": 2,
+        "endLine": 255,
+        "endChar": 74
+      },
+      "revId": "c4c1ae2061b745dde0e3a03ce58a32ef7b614df6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dbb84251_a8738f4a",
+        "filename": "tools/src/cmd/run-cts/chrome/cmd.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T21:40:23Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "31806347_272003d4",
       "range": {
         "startLine": 254,
         "startChar": 2,
