@@ -34,6 +34,24 @@
       "parentUuid": "e6cc179b_4233c9d6",
       "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59ff4ce2_2dbf05f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-27T02:49:42Z",
+      "side": 1,
+      "message": "That\u0027s the error I get when I run\n\n[ RUN      ] EGLImageValidationTests.Success/OpenGLES_ANGLE__AMD__AMD_Radeon_Pro_WX_3200_Series__polaris12_LLVM_15_0_6___OpenGL_4_6__Core_Profile__Mesa_22_3_6__compat\nINFO: EGL ERROR: eglCreateImage: KHR_gl_texture_2D_image not supported.\n../../src/dawn/tests/white_box/EGLImageWrappingTests.cpp:152: Failure\nExpected: (nullptr) !\u003d (eglImage), actual: (nullptr) vs NULL\n\nI tried adding the check you suggested checking for EGL 1.5. I still get the same error with the egl version check but without the check I added.",
+      "parentUuid": "33d51087_64a1b24d",
+      "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
