@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8e40210c_59ab0ad5",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1609,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-27T21:27:28Z",
+      "side": 1,
+      "message": "I just tried this but unfortunately the original bug disappears when you use non-zero values (which doesn\u0027t make any sense, but neither does the bug).",
+      "parentUuid": "674353db_d5cee262",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3fbd7dc9_74ab7032",
         "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
         "patchSetId": 3
@@ -65,6 +83,24 @@
       "writtenOn": "2023-10-27T21:06:06Z",
       "side": 1,
       "message": "but: dawn usually uses camcelCase",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecfb354e_16b963aa",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1611,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-27T21:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3fbd7dc9_74ab7032",
       "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e707b20e_127aaabc",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1663,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-27T21:27:28Z",
+      "side": 1,
+      "message": "This shader was lifted verbatim from CTS, which is why some parts look a bit weird (e.g. `0 + 0`). The bug is a miscompile that stops happening if you start deleting too many things that are unrelated to the place where it breaks (which is the second case tested). So I was reluctant to try and simplify it too much.\n\nI\u0027ve added a comment above the shader to capture this.",
+      "parentUuid": "66959c8d_20837117",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f8258be7_8ddc110f",
         "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
         "patchSetId": 3
@@ -99,6 +153,24 @@
       "writtenOn": "2023-10-27T21:06:06Z",
       "side": 1,
       "message": "why must it be statically accessed versus accessed in the branches of runTest?",
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10f687ed_9f0c4614",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1811,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-27T21:27:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8258be7_8ddc110f",
       "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
