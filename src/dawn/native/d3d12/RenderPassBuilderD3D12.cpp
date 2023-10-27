@@ -116,6 +116,12 @@ RenderPassBuilder::RenderPassBuilder(bool hasUAV) {
     if (hasUAV) {
         mRenderPassFlags = D3D12_RENDER_PASS_FLAG_ALLOW_UAV_WRITES;
     }
+    // Init arrays to default values
+    std::fill(mRenderPassRenderTargetDescriptors.begin(), mRenderPassRenderTargetDescriptors.end(),
+              D3D12_RENDER_PASS_RENDER_TARGET_DESC{});
+    std::fill(mRenderTargetViews.begin(), mRenderTargetViews.end(), D3D12_CPU_DESCRIPTOR_HANDLE{});
+    std::fill(mSubresourceParams.begin(), mSubresourceParams.end(),
+              D3D12_RENDER_PASS_ENDING_ACCESS_RESOLVE_SUBRESOURCE_PARAMETERS{});
 }
 
 void RenderPassBuilder::SetRenderTargetView(ColorAttachmentIndex attachmentIndex,
@@ -127,6 +133,10 @@ void RenderPassBuilder::SetRenderTargetView(ColorAttachmentIndex attachmentIndex
         mHighestColorAttachmentIndexPlusOne = std::max(
             mHighestColorAttachmentIndexPlusOne,
             ColorAttachmentIndex{static_cast<uint8_t>(static_cast<uint8_t>(attachmentIndex) + 1u)});
+    } else {
+        // Null views cannot be cleared. BeginningAccess.Type should still be at default value.
+        DAWN_ASSERT(mRenderPassRenderTargetDescriptors[attachmentIndex].BeginningAccess.Type ==
+                    static_cast<D3D12_RENDER_PASS_BEGINNING_ACCESS_TYPE>(0));
     }
 }
 
