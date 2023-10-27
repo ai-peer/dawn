@@ -34,6 +34,24 @@
       "parentUuid": "9abe11ba_e217336c",
       "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e7bbb2d_81654947",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T18:47:20Z",
+      "side": 1,
+      "message": "\u003e What are \"result tags\"?\n\nTags applied to the results of a test run.\n\n\u003e Can you please make the roller recognize all the tags in\n\nNo, because there\u0027s not enough information provided in the results. This expectation is explicitly saying that it applies to `release-x64`. But no results have the `release-x64` tag. Something is broken.",
+      "parentUuid": "14760baf_420c86b3",
+      "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
