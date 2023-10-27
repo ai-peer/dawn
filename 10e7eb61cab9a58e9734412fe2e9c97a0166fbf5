@@ -33,6 +33,24 @@
       "message": "nit: if we give it a name then it might as well be a structure ^^, and we can even have constructors!\n\n```\nstruct FeatureValidationResult {\n  FeatureValidationResult() : success(true) {} // implementation in the .cpp\n  FeatureValidationResult(std::string errorMessage) : success(false), errorMessage(std::move(errorMessage)) {}\n\n  bool success;\n  std::string errorMessage;\n};\n```",
       "revId": "10e7eb61cab9a58e9734412fe2e9c97a0166fbf5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c820224a_2ee4c88a",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-10-27T09:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dcfeb5aa_ebeee5e5",
+      "revId": "10e7eb61cab9a58e9734412fe2e9c97a0166fbf5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
