@@ -16,6 +16,29 @@
       "message": "PTAL! I had missed this in my previous CL.",
       "revId": "9f9efb1815b5e53326ef1ac767464b58172b57a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93647dfb_cb0266bc",
+        "filename": "src/dawn/tests/unittests/validation/PipelineAndPassCompatibilityTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-10-27T18:58:21Z",
+      "side": 1,
+      "message": "nit. stencilReadOnly",
+      "range": {
+        "startLine": 219,
+        "startChar": 8,
+        "endLine": 219,
+        "endChar": 21
+      },
+      "revId": "9f9efb1815b5e53326ef1ac767464b58172b57a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
