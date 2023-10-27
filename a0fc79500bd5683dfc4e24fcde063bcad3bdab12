@@ -87,6 +87,30 @@
       },
       "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad5adc2_96635345",
+        "filename": "src/tint/lang/core/ir/transform/std140.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-27T21:01:42Z",
+      "side": 1,
+      "message": "It needs to be decomposed because of the Std140 layout rules. It won\u0027t get past `spirv-val` if we don\u0027t decompose it, so I can\u0027t really check if the same QC bug exists for f16 too.",
+      "parentUuid": "7f19a6ff_c9a6d7fd",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 83
+      },
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
