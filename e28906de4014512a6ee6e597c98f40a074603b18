@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74d22db7_d3cc6867",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T20:50:07Z",
+      "side": 1,
+      "message": "I think we can delete this line? Line 143 will do the same find.",
+      "range": {
+        "startLine": 137,
+        "startChar": 3,
+        "endLine": 137,
+        "endChar": 31
+      },
+      "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
