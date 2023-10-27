@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a35004cc_ae9765fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T19:56:11Z",
+      "side": 1,
+      "message": "I had some vague memory that it could not be done on std::array(-like) data members, but I was wrong. Fixed it to `{}` the 3 arrays where we declare them.",
+      "parentUuid": "bf7bbd3d_ccf97d81",
+      "revId": "c3c91d5019a80534eb5010a611250d6e09c67ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c0ced8d8_947516cb",
@@ -49,6 +67,24 @@
       "side": 1,
       "message": "Assert is good since it can be skipped in release. No strong opinion about how you name the 0 value, but I guess another option would be `(D3D12_RENDER_PASS_BEGINNING_ACCESS{}).Type`",
       "parentUuid": "c0ced8d8_947516cb",
+      "revId": "c3c91d5019a80534eb5010a611250d6e09c67ad1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59c5905d_43c0ed94",
+        "filename": "src/dawn/native/d3d12/RenderPassBuilderD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T19:56:11Z",
+      "side": 1,
+      "message": "Got rid of the assert.",
+      "parentUuid": "3ac0aed5_de70371d",
       "revId": "c3c91d5019a80534eb5010a611250d6e09c67ad1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
