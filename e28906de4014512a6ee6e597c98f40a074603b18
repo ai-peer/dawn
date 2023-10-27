@@ -135,6 +135,24 @@
       "parentUuid": "72901c15_fcd31219",
       "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "999c8072_4072c64a",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T21:11:06Z",
+      "side": 1,
+      "message": "Haha, my brain is fried too, so it\u0027s a crapshoot who\u0027s right ;)",
+      "parentUuid": "cbe5bac2_c4c4b06f",
+      "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
