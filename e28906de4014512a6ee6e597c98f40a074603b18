@@ -117,6 +117,24 @@
       },
       "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbe5bac2_c4c4b06f",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T21:09:49Z",
+      "side": 1,
+      "message": "Removed the line. I think you\u0027re right, although I had to manually test it to be sure. My brain is fried. Heavy week.",
+      "parentUuid": "72901c15_fcd31219",
+      "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
