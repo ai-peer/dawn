@@ -106,6 +106,24 @@
       "parentUuid": "6972bc25_f322ee0c",
       "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fe56640_7ed0b5f5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T19:16:45Z",
+      "side": 1,
+      "message": "https://dawn-review.googlesource.com/c/dawn/+/158402",
+      "parentUuid": "d695c087_dc0532f2",
+      "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
