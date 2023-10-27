@@ -70,6 +70,24 @@
       "parentUuid": "6e7bbb2d_81654947",
       "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6972bc25_f322ee0c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T19:01:29Z",
+      "side": 1,
+      "message": "Right, all the history is in https://bugs.chromium.org/p/dawn/issues/detail?id\u003d1401. `release-x64` has been a major pain for us, and all workarounds have resulted in some other bug cropping up. It would be *really* nice if UPF did not produce this tag.",
+      "parentUuid": "f4b5bef0_11e5950c",
+      "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
