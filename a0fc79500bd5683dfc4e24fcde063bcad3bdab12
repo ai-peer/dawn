@@ -63,6 +63,30 @@
       },
       "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f19a6ff_c9a6d7fd",
+        "filename": "src/tint/lang/core/ir/transform/std140.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T20:49:25Z",
+      "side": 1,
+      "message": "Right, sorry, does it _need_ to be decomposed?",
+      "parentUuid": "e157d461_f652a158",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 83
+      },
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
