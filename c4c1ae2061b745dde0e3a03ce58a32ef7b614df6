@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7723786c_e9a584c1",
+        "filename": "tools/src/cmd/run-cts/chrome/cmd.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T21:03:03Z",
+      "side": 1,
+      "message": "Super cool!",
+      "range": {
+        "startLine": 191,
+        "startChar": 0,
+        "endLine": 218,
+        "endChar": 14
+      },
+      "revId": "c4c1ae2061b745dde0e3a03ce58a32ef7b614df6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31806347_272003d4",
+        "filename": "tools/src/cmd/run-cts/chrome/cmd.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-10-27T21:03:03Z",
+      "side": 1,
+      "message": "Also super cool!",
+      "range": {
+        "startLine": 254,
+        "startChar": 2,
+        "endLine": 255,
+        "endChar": 74
+      },
+      "revId": "c4c1ae2061b745dde0e3a03ce58a32ef7b614df6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
