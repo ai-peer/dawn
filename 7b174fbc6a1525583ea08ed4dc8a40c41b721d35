@@ -16,6 +16,24 @@
       "message": "`release-x64` is not part of any result tags, so the roller believes this expectation matches no tests variants.",
       "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14760baf_420c86b3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-10-27T18:21:49Z",
+      "side": 1,
+      "message": "What are \"result tags\"?\n`release-x64` comes from:\n```\nThe following expectations condition tags were generated [\u0027webgpu-adapter-default\u0027, \u0027angle-d3d11\u0027, \u0027no-asan\u0027, \u0027no-clang-coverage\u0027, \u0027nvidia\u0027, \u0027win\u0027, \u0027oop-c\u0027, \u0027release\u0027, \u0027passthrough\u0027, \u0027webgpu-dxc-disabled\u0027, \u0027desktop\u0027, \u0027nvidia-0x2184\u0027, \u0027target-cpu-64\u0027, \u0027release-x64\u0027, \u0027unknown-gpu-0x8c\u0027, \u0027win10\u0027, \u0027webgpu-not-compat\u0027, \u0027unknown-gpu\u0027, \u0027graphite-disabled\u0027, \u0027renderer-skia-gl\u0027, \u0027dawn-no-backend-validation\u0027]\n```\nin https://chromium-swarm.appspot.com/task?id\u003d6589fe95985f4d10 for example.\n\nIf I remember correctly, UPF (in order to make an expectation match only the relevant bots) adds one value from each group on top of this file, this why it added both `release-x64` and `target-cpu-64`.\n\nCan you please make the roller recognize all the tags in https://source.chromium.org/chromium/chromium/src/+/main:content/test/gpu/validate_tag_consistency.py?",
+      "parentUuid": "9abe11ba_e217336c",
+      "revId": "7b174fbc6a1525583ea08ed4dc8a40c41b721d35",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
