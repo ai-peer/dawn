@@ -39,6 +39,30 @@
       },
       "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e157d461_f652a158",
+        "filename": "src/tint/lang/core/ir/transform/std140.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-10-27T18:47:26Z",
+      "side": 1,
+      "message": "All f16 matrices are already decomposed as even a `mat4x4\u003cf16\u003e` only has a column stride of 8 bytes.",
+      "parentUuid": "217f8c6a_2f21628d",
+      "range": {
+        "startLine": 119,
+        "startChar": 0,
+        "endLine": 120,
+        "endChar": 83
+      },
+      "revId": "a0fc79500bd5683dfc4e24fcde063bcad3bdab12",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
