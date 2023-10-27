@@ -57,6 +57,24 @@
       "parentUuid": "e9522316_4003aab3",
       "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "326cc757_c68aa87b",
+        "filename": "tools/src/subcmd/subcmd.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-27T20:59:58Z",
+      "side": 1,
+      "message": "And if it doesn\u0027t?",
+      "parentUuid": "64b2d7ef_00ec63a9",
+      "revId": "e28906de4014512a6ee6e597c98f40a074603b18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
