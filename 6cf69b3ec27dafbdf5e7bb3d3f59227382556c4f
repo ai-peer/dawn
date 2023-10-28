@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9dfd125a_bdf0d74b",
+        "filename": "tools/src/cmd/cts/common/config.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-28T01:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1dac0a79_c0a28833",
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "df0545f7_7c09c31c",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-10-23T17:49:03Z",
       "side": 1,
       "message": "übernit: Given that you have `resultsByTestName`, I\u0027d probably just keep this `results`.",
+      "range": {
+        "startLine": 223,
+        "startChar": 2,
+        "endLine": 223,
+        "endChar": 12
+      },
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6f3a6bd_37f8faf3",
+        "filename": "tools/src/cmd/cts/common/results.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-28T01:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "df0545f7_7c09c31c",
       "range": {
         "startLine": 223,
         "startChar": 2,
@@ -111,6 +153,72 @@
       "writtenOn": "2023-10-23T17:49:03Z",
       "side": 1,
       "message": "Whatever you call the term, it might be good to make a new type for it so that:\n(a) It\u0027s self documenting\n(b) you don\u0027t accidentally mix up some other string for a \u003cthing\u003e.\n\n```\n// \u003cthing\u003e represents the execution mode for a test\ntype \u003cthing\u003e string\n```\n\nWith that it\u0027s a compile time error to use a string in the place of a `\u003cthing\u003e` without first casting.",
+      "range": {
+        "startLine": 182,
+        "startChar": 27,
+        "endLine": 182,
+        "endChar": 33
+      },
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95a92809_f8a1a74d",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-28T01:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "deba8dee_88494406",
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a6a0e5f_bcaf6fe7",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-28T01:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e6a86cd6_5fc13a9e",
+      "range": {
+        "startLine": 182,
+        "startChar": 14,
+        "endLine": 182,
+        "endChar": 22
+      },
+      "revId": "6cf69b3ec27dafbdf5e7bb3d3f59227382556c4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1ae0845_ef594ba4",
+        "filename": "tools/src/cts/result/result.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-10-28T01:32:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31fe2b25_e2f19760",
       "range": {
         "startLine": 182,
         "startChar": 27,
