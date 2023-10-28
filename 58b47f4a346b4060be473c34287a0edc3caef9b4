@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ff241c8_296f8319",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35263252_b5ceec92",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: all 23 tests now pass",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99eb28ae_fddd9931",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 240,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64e8645e_a7a9d19c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dafe9905_87d3f39c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0b684c0_ad4a7fff",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d6f5a0e8_17133668",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af6fe403_41e71652",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02141739_cc54f816",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c1092c3_62110451",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f5aeef0_449907bb",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-10-28T08:33:39Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "58b47f4a346b4060be473c34287a0edc3caef9b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
