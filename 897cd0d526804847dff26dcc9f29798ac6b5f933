@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e28aaa02_abe102b3",
+        "filename": "src/dawn/native/AttachmentState.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-29T16:03:39Z",
+      "side": 1,
+      "message": "I agree it\u0027s a bit weird but it is really a packed vector of slots for pixel local storage, some of which can be bound to storage attachments with a specific format, and some of which are just implicit. So I don\u0027t think we can do a map.\n\nIt could be std::vector\u003cstd::optional\u003cwgpu::TextureFormat\u003e\u003e but that seems a bit verbose when we have wgpu::TextureFormat::Undefined.",
+      "parentUuid": "8b91fe2b_cd2b6db4",
+      "range": {
+        "startLine": 285,
+        "startChar": 4,
+        "endLine": 287,
+        "endChar": 43
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "13108b86_9926b4a6",
         "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
         "patchSetId": 17
@@ -54,6 +78,30 @@
       "writtenOn": "2023-10-27T23:23:48Z",
       "side": 1,
       "message": "nit. this naming is a bit confusing since `storageAttachmentSlots` !\u003d the result of `GetStorageAttachmentSlots()`",
+      "range": {
+        "startLine": 332,
+        "startChar": 8,
+        "endLine": 335,
+        "endChar": 93
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9567794_040d2d5a",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 335,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-29T16:03:39Z",
+      "side": 1,
+      "message": "Renamed a bit.",
+      "parentUuid": "13108b86_9926b4a6",
       "range": {
         "startLine": 332,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "11fac2c6_ab4424fe",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-29T16:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3bdd2b89_006f4584",
+      "range": {
+        "startLine": 413,
+        "startChar": 12,
+        "endLine": 416,
+        "endChar": 90
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "efdc97b4_64d544d0",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-10-27T23:23:48Z",
       "side": 1,
       "message": "nit. This is a bit odd cause we could also just use `storageAttachmentSlots.size()` instead?\n\nI assume the two are expected to be equal but it\u0027s a bit weird to use the size of the other one for iterating?\n\n(Probably irrelevant comment if we do the map thing though)",
+      "range": {
+        "startLine": 200,
+        "startChar": 31,
+        "endLine": 200,
+        "endChar": 55
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "760c0d17_00314eb0",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 17
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-29T16:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "efdc97b4_64d544d0",
       "range": {
         "startLine": 200,
         "startChar": 31,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d71fea13_bd978e00",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-29T16:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d517066_0dd98d08",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d71aa86_19cd4e0b",
@@ -146,6 +266,30 @@
       "writtenOn": "2023-10-27T23:23:48Z",
       "side": 1,
       "message": "nit. stale?",
+      "range": {
+        "startLine": 508,
+        "startChar": 4,
+        "endLine": 513,
+        "endChar": 9
+      },
+      "revId": "897cd0d526804847dff26dcc9f29798ac6b5f933",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32ba0fd_110ae7ce",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 513,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-29T16:03:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7d71aa86_19cd4e0b",
       "range": {
         "startLine": 508,
         "startChar": 4,
