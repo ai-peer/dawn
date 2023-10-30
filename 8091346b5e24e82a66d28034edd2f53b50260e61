@@ -16,6 +16,23 @@
       "message": "Rebased to fix merge conflicts.",
       "revId": "8091346b5e24e82a66d28034edd2f53b50260e61",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6515ba28_b111caf7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T22:34:08Z",
+      "side": 1,
+      "message": "still LGTM; Corentin could you review again?",
+      "revId": "8091346b5e24e82a66d28034edd2f53b50260e61",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
