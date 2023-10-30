@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92838252_d7a3b9ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-30T17:05:18Z",
+      "side": 1,
+      "message": "Looks like the maxSampledTexturesPerShaderStage CTS tests are still failing:\n\nhttps://ci.chromium.org/ui/p/chromium/builders/ci/Dawn%20Linux%20x64%20Release%20(NVIDIA)/121262/overview\n\nI\u0027ve re-enabled them here: \nhttps://dawn-review.googlesource.com/c/dawn/+/158262",
+      "revId": "f2f24be92712c8b759119b785bc24cdab19cf23a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
