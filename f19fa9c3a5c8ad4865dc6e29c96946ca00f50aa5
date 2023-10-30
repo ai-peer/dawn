@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a5beab5b_51b6fc4e",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T22:52:11Z",
+      "side": 1,
+      "message": "so I\u0027m understanding, you\u0027re saying there are always two separate devices?\n - shared between Graphite-Dawn and ANGLE: does not need multithread protection\n - shared between Graphite-Dawn and media: needs multithread protection\n\n?",
+      "parentUuid": "88c50fa2_b6328a59",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -214,6 +232,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9733b2b8_0b1944fb",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T22:52:11Z",
+      "side": 1,
+      "message": "when we are creating the context state here, isn\u0027t it used exclusively by Dawn, and not shared with ANGLE/media? The context itself yes is shared, but when Dawn is using the context, we lock it and swap in our own single-threaded state.",
+      "parentUuid": "a8828d25_f0bc0cc7",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32bed658_aacf5127",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 9
@@ -249,6 +291,30 @@
       "side": 1,
       "message": "It is hard to do that. the d3d11 backend needs access ID3D11DeviceContext to either update resource content or modify context state. We cannot only allow updating resources but not modifying context state.",
       "parentUuid": "32bed658_aacf5127",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 86
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50830be1_f215f11c",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T22:52:11Z",
+      "side": 1,
+      "message": "Can we add helper methods to proxy the UpdateSubresource calls, etc. to the context state?\n\nRight now, the burden is on the developer to not use certain functions if they pass `false` for swapContextState. This seems like a fragile solution. You might get the scoped context and pass it into a function where it\u0027s hard to tell whether the context has a swapped state or not. If we could have a proxy which only allows certain methods to be called when the context state is not swapped, then it would be a lot safer. We can more carefully review when proxy methods are added to be sure they are actually OK thread-safe.\nAlternatively - we could always swap the state - but I imagine the performance of this would not be desirable.",
+      "parentUuid": "2007fc33_4ee8215e",
       "range": {
         "startLine": 46,
         "startChar": 0,
