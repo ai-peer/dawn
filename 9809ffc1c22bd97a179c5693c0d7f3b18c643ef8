@@ -52,6 +52,24 @@
       "parentUuid": "33d51087_64a1b24d",
       "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1df285_2d5a734f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-30T22:20:29Z",
+      "side": 1,
+      "message": "Hmm. I eglCreateImage() is returning null. Perhaps AMD devices don\u0027t support EGLImage on some particular texture formats.\n\nFor now, could you change that assert to:\n\n        DAWN_SKIP_TEST_IF(eglImage \u003d\u003d nullptr);\n        \n?",
+      "parentUuid": "59ff4ce2_2dbf05f0",
+      "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
