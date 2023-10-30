@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5dc9ca1_fc2245ae",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T22:30:48Z",
+      "side": 1,
+      "message": "wondering if this is wrong for indirect dispatch as well; can we have a test for that too?",
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a0f690d5_a1861122",
         "filename": "src/dawn/tests/end2end/DrawIndirectTests.cpp",
         "patchSetId": 1
@@ -19,6 +36,29 @@
         "startChar": 4,
         "endLine": 155,
         "endChar": 11
+      },
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c3aec28_cf664203",
+        "filename": "src/dawn/tests/end2end/DrawIndirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T22:30:48Z",
+      "side": 1,
+      "message": "nit: you could inline GeneralSetup here, then below define it as\n```\nvoid DrawIndirectUsingInstanceIndexTest::SetUp() override {\n  DrawIndirectUsingFirstVertexTest::SetUp();\n  DAWN_TEST_UNSUPPORTED_IF(....);\n}\n```",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 5
       },
       "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
