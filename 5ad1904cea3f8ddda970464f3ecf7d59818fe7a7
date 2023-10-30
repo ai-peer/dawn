@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01171ed2_4de68540",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-10-30T16:35:05Z",
+      "side": 1,
+      "message": "I believe these were new files in review when the relicensing landed.",
+      "revId": "5ad1904cea3f8ddda970464f3ecf7d59818fe7a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
