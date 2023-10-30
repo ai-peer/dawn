@@ -1,0 +1,182 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b5ad834_98e3d519",
+        "filename": "src/dawn/native/AttachmentState.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 294,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "nit: we could add more comments here that we\u0027re finding unset bits in `mColorAttachmentsSet`",
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a806195a_43653b55",
+        "filename": "src/dawn/native/CommandBuffer.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "nit: const\u0026 because it is several bytes large?",
+      "range": {
+        "startLine": 238,
+        "startChar": 12,
+        "endLine": 238,
+        "endChar": 28
+      },
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f1b014_8d5cc37b",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "nit: const\u0026",
+      "range": {
+        "startLine": 332,
+        "startChar": 8,
+        "endLine": 332,
+        "endChar": 41
+      },
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b56c70b1_3bfcdd32",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 354,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "will metal be grumpy if this format doesn\u0027t match the pipeline? could be a constant",
+      "range": {
+        "startLine": 354,
+        "startChar": 63,
+        "endLine": 354,
+        "endChar": 91
+      },
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c67a896c_9d2680fa",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "nit: const\u0026",
+      "range": {
+        "startLine": 413,
+        "startChar": 12,
+        "endLine": 413,
+        "endChar": 44
+      },
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d290a5e3_048016e1",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "for naming consistency with other code\n\n\n```suggestion\n        const std::vector\u003cwgpu::TextureFormat\u003e\u0026 storageAttachmentSlots \u003d\n```",
+      "range": {
+        "startLine": 195,
+        "startChar": 0,
+        "endLine": 195,
+        "endChar": 67
+      },
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1b2f618_35826949",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "for consistency with other code\n\n```suggestion\n        std::vector\u003cColorAttachmentIndex\u003e storageAttachmentPacking \u003d\n```",
+      "range": {
+        "startLine": 197,
+        "startChar": 42,
+        "endLine": 197,
+        "endChar": 64
+      },
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ca1d5e7_f02fe82d",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 20
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-30T23:59:00Z",
+      "side": 1,
+      "message": "nit: include a comment here or on the fixture describing what the generated shader is supposed to do",
+      "range": {
+        "startLine": 81,
+        "startChar": 0,
+        "endLine": 81,
+        "endChar": 66
+      },
+      "revId": "94c81ce89e88aa4ba386a44480dd259fe3b1067e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
