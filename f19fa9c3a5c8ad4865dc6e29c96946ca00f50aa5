@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c0a8d8db_e6999032",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-31T20:11:53Z",
+      "side": 1,
+      "message": "I\u0027m confused; because they all share the same device, I would think thread protection **should** be required since Media is operating on a separate thread.\n\nFrom the Dawn point of view, I think it would be better if we could **always** require thread protection to be enabled if you\u0027re passing in an ID3D11Device. Dawn has no idea what else the application is going to do with the device, and we cannot enforce how it is used. Thus, isn\u0027t it better if shared devices require multithread protection?",
+      "parentUuid": "42f48477_32daab89",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -286,6 +304,30 @@
       "side": 1,
       "message": "But the media code is not protected with the lock in dawn. and the media code could use the ID3D11DeviceContext which has been swapped with the context state in dawn.",
       "parentUuid": "9733b2b8_0b1944fb",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b33c3aa_8be6bfe3",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-10-31T20:11:53Z",
+      "side": 1,
+      "message": "isn\u0027t this type of race guarded by mMultithread-\u003eEnter/Leave ?",
+      "parentUuid": "bd0880ff_4c68cd7c",
       "range": {
         "startLine": 137,
         "startChar": 16,
