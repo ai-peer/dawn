@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "13a64074_96c864c3",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-10-31T21:50:17Z",
+      "side": 1,
+      "message": "I don\u0027t have a strong opinion either way, but wanted to list the alternatives:\n\n1) Dawn doesn\u0027t validate multi-thread protected about the passed in D3D11 device and it is up to the client to set the correct state.\n\n2) Same as above, but we allow the existing D3D11MultithreadProtected feature to set the multithread protected state even for the passed in device.\n\n3) Dawn requires that the passed in device already has multithread protected set. This has the drawback of disallowing purely single threaded mode of operation which doesn\u0027t need thread protection.\n\n4) Same as above, but only if the D3D11MultithreadProtected feature is requested - so maybe this feature should be handled at the adapter layer?\n\nIn any of these options, Dawn can retrieve the multithread protection state via GetMultithreadProtected and call Enter/Leave based on that if that wasn\u0027t passed in explicitly by the client.\n\nAlso, a small correction to an earlier comment - we do need multithread protection for Graphite even in the absence of HW video decoding since the viz thread needs it for mapping buffers.",
+      "parentUuid": "e18be15e_840bfa43",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -370,6 +388,30 @@
       "side": 1,
       "message": "I am not sure. Both [1] and [2] don\u0027t mention this use case. I feel if a single threaded context state is used, probably thread protection will be disabled immediately. And calling D3D11 API from other thread will not be guarded.\n\n[1] https://learn.microsoft.com/en-us/windows/win32/api/d3d11_4/nf-d3d11_4-id3d11multithread-enter\n[2] https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_1_create_device_context_state_flag",
       "parentUuid": "8b33c3aa_8be6bfe3",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7e30bcc_b60762ed",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-10-31T21:50:17Z",
+      "side": 1,
+      "message": "It\u0027s unclear what the meaning of this flag is. D3D11 default behavior is that resource creation methods (on ID3D11Device) are reentrant thread-safe whereas immediate context operations require synchronization. On top of this we get some flexibility:\n\n1) You can promise to call all methods (incl. resource creation) from the same thread when creating the device (D3D11_CREATE_DEVICE_SINGLETHREADED).\n\n2) You can make the immediate context operations thread-safe via ID3D11MultithreadProtected.\n\nMy reading of the above docs is that you have to use D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED only if your device was also created with D3D11_CREATE_DEVICE_SINGLETHREADED. Some points supporting this interpretation:\n\n1) D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED was added in D3D 11.1 at which time ID3D11MultithreadProtected didn\u0027t exist (until 11.4) so immediate context operations always required external synchronization at that time. It doesn\u0027t make sense to have a special single-threaded mode if that\u0027s already the default behavior.\n\n2) D3D11_CREATE_DEVICE_SINGLETHREADED likely removes all locks from the ID3D11Device even for internal usage via the immediate context. Setting D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED is probably needed to have the same behavior when using the immediate context with a custom context state object.\n\n3) The references to D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED usually also talk about D3D11_CREATE_DEVICE_SINGLETHREADED. The suffix \"SINGLETHREADED\" is also the same - just a heuristic which suggests they were meant to be used together :-)",
+      "parentUuid": "6e2307fc_be6dd149",
       "range": {
         "startLine": 137,
         "startChar": 16,

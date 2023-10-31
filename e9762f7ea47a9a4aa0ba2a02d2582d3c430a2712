@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67385007_706290b7",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 3281,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-10-31T21:50:17Z",
+      "side": 1,
+      "message": "Should we add this to the 10xx series of structs so 1018 since it seems the intention is to reserve the 11xx and 12xx ids for the shared texture memory and fence structs?",
+      "range": {
+        "startLine": 3281,
+        "startChar": 12,
+        "endLine": 3281,
+        "endChar": 103
+      },
+      "revId": "e9762f7ea47a9a4aa0ba2a02d2582d3c430a2712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4da3fc5f_15a04d05",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-10-31T21:50:17Z",
+      "side": 1,
+      "message": "Can you add a comment about this to adapter_options.md - it seems all the other request adapter extension structs are already documented there.",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 50,
+        "endChar": 49
+      },
+      "revId": "e9762f7ea47a9a4aa0ba2a02d2582d3c430a2712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
