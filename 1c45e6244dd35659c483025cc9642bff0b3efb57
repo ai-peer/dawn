@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e46f340a_81953ac6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-31T17:14:02Z",
+      "side": 1,
+      "message": "Will followup DispatchIndirect in a new CL. Looking for land this CL first.",
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d5dc9ca1_fc2245ae",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-10-30T22:30:48Z",
       "side": 1,
       "message": "wondering if this is wrong for indirect dispatch as well; can we have a test for that too?",
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddcfc85b_b53114b6",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 415,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-31T17:14:02Z",
+      "side": 1,
+      "message": "In `ComputePassEncoder::TransformIndirectDispatchBuffer` there\u0027s a `shouldDuplicateNumWorkgroups` and a validation pipeline that could possibly messed up with indirectOffset.\n\nFiled at https://crbug.com/dawn/2201. Will follow up in a new CL",
+      "parentUuid": "d5dc9ca1_fc2245ae",
       "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -41,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36c7ea81_b820d76e",
+        "filename": "src/dawn/tests/end2end/DrawIndirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 155,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-31T17:14:02Z",
+      "side": 1,
+      "message": "Compiler is unhappy if I override without virtual. Maybe some extra compiler flag enforce that.",
+      "parentUuid": "a0f690d5_a1861122",
+      "range": {
+        "startLine": 155,
+        "startChar": 4,
+        "endLine": 155,
+        "endChar": 11
+      },
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c3aec28_cf664203",
@@ -54,6 +113,30 @@
       "writtenOn": "2023-10-30T22:30:48Z",
       "side": 1,
       "message": "nit: you could inline GeneralSetup here, then below define it as\n```\nvoid DrawIndirectUsingInstanceIndexTest::SetUp() override {\n  DrawIndirectUsingFirstVertexTest::SetUp();\n  DAWN_TEST_UNSUPPORTED_IF(....);\n}\n```",
+      "range": {
+        "startLine": 228,
+        "startChar": 4,
+        "endLine": 231,
+        "endChar": 5
+      },
+      "revId": "1c45e6244dd35659c483025cc9642bff0b3efb57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3eef029_5dc59abe",
+        "filename": "src/dawn/tests/end2end/DrawIndirectTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-10-31T17:14:02Z",
+      "side": 1,
+      "message": "This will createRenderPipeline before checking if feature is supported, and D3D11 seems to fail. Keep as is.",
+      "parentUuid": "7c3aec28_cf664203",
       "range": {
         "startLine": 228,
         "startChar": 4,
