@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42f48477_32daab89",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-31T19:43:24Z",
+      "side": 1,
+      "message": "ANGLE, Graphite-Dawn and Media will use the same device. So the thread protection is needed for chrome. However it is the implementation detail of chrome. But from dawn point of view, the assumption is not necessary. Dawn doesn\u0027t need to know all those implementation detail. So I think validating multithread protection is not really necessary in dawn.\n\nFor example, if hardware accelerated decoding is not supported, then multithread protection is not necessary.",
+      "parentUuid": "a5beab5b_51b6fc4e",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -256,6 +274,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd0880ff_4c68cd7c",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-31T19:43:24Z",
+      "side": 1,
+      "message": "But the media code is not protected with the lock in dawn. and the media code could use the ID3D11DeviceContext which has been swapped with the context state in dawn.",
+      "parentUuid": "9733b2b8_0b1944fb",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32bed658_aacf5127",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 9
@@ -315,6 +357,30 @@
       "side": 1,
       "message": "Can we add helper methods to proxy the UpdateSubresource calls, etc. to the context state?\n\nRight now, the burden is on the developer to not use certain functions if they pass `false` for swapContextState. This seems like a fragile solution. You might get the scoped context and pass it into a function where it\u0027s hard to tell whether the context has a swapped state or not. If we could have a proxy which only allows certain methods to be called when the context state is not swapped, then it would be a lot safer. We can more carefully review when proxy methods are added to be sure they are actually OK thread-safe.\nAlternatively - we could always swap the state - but I imagine the performance of this would not be desirable.",
       "parentUuid": "2007fc33_4ee8215e",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 86
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94fb3308_ef6393d8",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-31T19:43:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "50830be1_f215f11c",
       "range": {
         "startLine": 46,
         "startChar": 0,
