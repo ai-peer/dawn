@@ -47,6 +47,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe5dbc3_a286e8a0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-31T06:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da79052f_7e16e1c1",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1705aad_4d543d35",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-31T06:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97337f73_19efd58f",
+      "range": {
+        "startLine": 9,
+        "startChar": 36,
+        "endLine": 9,
+        "endChar": 40
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2238e97a_c79387a8",
@@ -60,6 +108,30 @@
       "writtenOn": "2023-10-26T12:08:28Z",
       "side": 1,
       "message": "I\u0027m not sure it\u0027s really necessary. I see no usages of this internally or [in the chromium source tree](https://source.chromium.org/search?q\u003dchromium_experimental_read_write_storage_texture%20-third_party%2Fdawn).",
+      "range": {
+        "startLine": 10,
+        "startChar": 3,
+        "endLine": 11,
+        "endChar": 62
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e345d64_4e9c8881",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-31T06:25:22Z",
+      "side": 1,
+      "message": "I recall once @cwallez@chromium.org told me that this extension was being used by Unity, so I decide not to remove it immediately.",
+      "parentUuid": "2238e97a_c79387a8",
       "range": {
         "startLine": 10,
         "startChar": 3,
@@ -123,6 +195,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0bed4d6e_ac8c9a35",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-31T06:25:22Z",
+      "side": 1,
+      "message": "I think although the extension is removed, all the related features are behind \"allow-unsafe-apis\" so it is safe right now?\n\nWhen implementing the extension I think I have added enough tests for the correctness, and my original thought was adding enough CTS tests after merging this CL, thus I could test what I wrote in Chromium. Do you prefer writing CTS first then merging this CL?",
+      "parentUuid": "9f05f70f_18b871fd",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30d04ce8_a8e6e553",
         "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 5
@@ -134,6 +224,30 @@
       "writtenOn": "2023-10-26T13:44:12Z",
       "side": 1,
       "message": "We shouldn\u0027t need this, IIRC all tests run with UnsafeAPIs by default. However we should have a test in UnsafeAPIsTests.cpp (I think that\u0027s the name?) that checks in \"safe api mode\" we don\u0027t expose RW / RO storage textures.\n\nAh you have it in the StorageTextureValidationTests.cpp. That works too, especially since we want to reuse some helper functions.",
+      "range": {
+        "startLine": 1329,
+        "startChar": 0,
+        "endLine": 1335,
+        "endChar": 0
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e036de8b_660ade9d",
+        "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1335,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-31T06:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30d04ce8_a8e6e553",
       "range": {
         "startLine": 1329,
         "startChar": 0,
@@ -210,6 +324,30 @@
       "writtenOn": "2023-10-26T12:08:28Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 613,
+        "startChar": 0,
+        "endLine": 614,
+        "endChar": 30
+      },
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f611b432_9f37bb73",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 614,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-10-31T06:25:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23483e7c_0bcf7349",
       "range": {
         "startLine": 613,
         "startChar": 0,
