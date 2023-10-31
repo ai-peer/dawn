@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e18be15e_840bfa43",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-31T20:51:37Z",
+      "side": 1,
+      "message": "FYI, We enable thread protection at [1].  Dawn doesn\u0027t need the external d3d11 device be thread safe. Dawn will make it thread safe, if the Feature::D3D11MultithreadProtected is requested. However even if we validate the external d3d11 device, the application can still reset the d3d11 device back to non-thread-safe. So I think the validation is not really necessary or important.\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp;l\u003d65;drc\u003d9fc872d7a2507b4685051bd6a0d93349f668e6f8",
+      "parentUuid": "42f48477_32daab89",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -328,6 +346,30 @@
       "side": 1,
       "message": "isn\u0027t this type of race guarded by mMultithread-\u003eEnter/Leave ?",
       "parentUuid": "bd0880ff_4c68cd7c",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e2307fc_be6dd149",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-10-31T20:51:37Z",
+      "side": 1,
+      "message": "I am not sure. Both [1] and [2] don\u0027t mention this use case. I feel if a single threaded context state is used, probably thread protection will be disabled immediately. And calling D3D11 API from other thread will not be guarded.\n\n[1] https://learn.microsoft.com/en-us/windows/win32/api/d3d11_4/nf-d3d11_4-id3d11multithread-enter\n[2] https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/ne-d3d11_1-d3d11_1_create_device_context_state_flag",
+      "parentUuid": "8b33c3aa_8be6bfe3",
       "range": {
         "startLine": 137,
         "startChar": 16,
