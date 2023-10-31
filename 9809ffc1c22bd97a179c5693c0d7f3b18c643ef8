@@ -88,6 +88,24 @@
       "parentUuid": "ea1df285_2d5a734f",
       "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd876515_dba5f685",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-10-31T22:19:47Z",
+      "side": 1,
+      "message": "Hmm, yeah, you\u0027re right.\n\nCould you use DAWN_SUPPRESS_TEST_IF(IsAMD()) for now? You could override SetUp() and put it there, if you don\u0027t want to put it in all the tests individually.\n\nOn the other hand, if only some tests are failing, putting it in all the tests individually might be better. Up to you.",
+      "parentUuid": "cb58cb42_f5015d9c",
+      "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
