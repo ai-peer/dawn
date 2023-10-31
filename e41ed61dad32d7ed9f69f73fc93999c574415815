@@ -213,6 +213,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ef560b74_df32c98d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-10-31T11:25:39Z",
+      "side": 1,
+      "message": "Ben\u0027s concern is also about all the steps in Tint that do validation because they must be safe in the face of this feature being used. (so it\u0027s not possible to send bad WGSL using RO/RW storage textures to Tint to cause it to crash in the parser or resolver). I believe we should already have good enough testing to go forward with this so you can test in Chromium yes.",
+      "parentUuid": "0bed4d6e_ac8c9a35",
+      "revId": "e41ed61dad32d7ed9f69f73fc93999c574415815",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "30d04ce8_a8e6e553",
         "filename": "src/dawn/tests/end2end/StorageTextureTests.cpp",
         "patchSetId": 5
