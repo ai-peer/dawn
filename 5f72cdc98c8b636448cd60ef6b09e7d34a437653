@@ -16,6 +16,23 @@
       "message": "Bump",
       "revId": "5f72cdc98c8b636448cd60ef6b09e7d34a437653",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4865fc27_b26f74fc",
+        "filename": "src/tint/lang/wgsl/inspector/entry_point.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-10-31T17:26:53Z",
+      "side": 1,
+      "message": "nit: \n```suggestion\n    /// Name of the variable itself. (e.g. \u0027var\u0027)\n```",
+      "revId": "5f72cdc98c8b636448cd60ef6b09e7d34a437653",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
