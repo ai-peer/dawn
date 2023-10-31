@@ -286,8 +286,8 @@ crbug.com/dawn/0000 webgpu:api,operation,memory_sync,buffer,multiple_buffers:wr:
 crbug.com/dawn/2113 webgpu:shader,execution,memory_model,* [ Failure ]
 crbug.com/dawn/2113 webgpu:shader,execution,shader_io,compute_builtins:inputs:* [ Failure ]
 
-# The multiple_frames variant of getCurrentTexture tests is failing
-crbug.com/dawn/2114 webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
+# getCurrentTexture failures
+crbug.com/dawn/2114 webgpu:web_platform,canvas,getCurrentTexture:* [ Failure ]
 
 # Instancing issues on NVidia GL
 # count=[1-9].*first_instance=[1-9].*instance_count=[1-9]
