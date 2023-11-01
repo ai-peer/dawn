@@ -32,11 +32,13 @@ import (
 	"context"
 	"fmt"
 
+	"cloud.google.com/go/bigquery"
 	"dawn.googlesource.com/dawn/tools/src/buildbucket"
 	"go.chromium.org/luci/auth"
 	"go.chromium.org/luci/grpc/prpc"
 	"go.chromium.org/luci/hardcoded/chromeinfra"
 	rdbpb "go.chromium.org/luci/resultdb/proto/v1"
+	"google.golang.org/api/iterator"
 	"google.golang.org/protobuf/types/known/fieldmaskpb"
 )
 
@@ -107,4 +109,53 @@ func (r *ResultsDB) QueryTestResults(
 	}
 
 	return nil
+}
+
+// QueryTestResultsBigQuery fetches the test results for the given builds.
+// f is called once per page of test variants.
+func (r *ResultsDB) QueryTestResultsBigQuery(
+	ctx context.Context,
+	changeID, patchset int,
+	f func(*rdbpb.TestResult) error) error {
+
+	const projectID = "chrome-luci-data"
+	client, err := bigquery.NewClient(ctx, projectID)
+	if err != nil {
+		// TODO: Handle error.
+	}
+
+	query := client.Query(fmt.Sprintf(`
+  SELECT
+	r.status,
+	duration,
+	tags,
+  FROM
+	"luci-analysis.chromium.test_verdicts" v
+  CROSS JOIN
+	UNNEST(results) r
+  CROSS JOIN
+	UNNEST(sources.changelists) c
+  WHERE
+	AND test_id LIKE 'ninja://chrome/test:telemetry_gpu_integration_test%%'
+	AND c.host = 'chromium-review.googlesource.com'
+	AND c.change = %v
+	AND c.patchset = %v`, changeID, patchset))
+
+	it, err := query.Read(ctx)
+	if err != nil {
+		panic(err)
+	}
+
+	for {
+		var row map[string]bigquery.Value
+		err := it.Next(&row)
+		switch err {
+		case nil:
+			panic(fmt.Sprintf("%+v", row)) // TEMP: Dump the first row
+		case iterator.Done:
+			break
+		default:
+			return err
+		}
+	}
 }
