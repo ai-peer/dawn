@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "769af529_7e00d166",
+        "filename": "src/tint/lang/wgsl/ast/requires.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-01T20:32:33Z",
+      "side": 1,
+      "message": "`wgsl::LanguageFeatures` ?",
+      "range": {
+        "startLine": 66,
+        "startChar": 10,
+        "endLine": 66,
+        "endChar": 48
+      },
+      "revId": "4b3707221e1d63b349c67e3c3d5b3f0ce318cefc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
