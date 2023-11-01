@@ -22,6 +22,30 @@
       },
       "revId": "4b3707221e1d63b349c67e3c3d5b3f0ce318cefc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "70eb50e8_33d4379a",
+        "filename": "src/tint/lang/wgsl/ast/requires.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-01T21:11:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "769af529_7e00d166",
+      "range": {
+        "startLine": 66,
+        "startChar": 10,
+        "endLine": 66,
+        "endChar": 48
+      },
+      "revId": "4b3707221e1d63b349c67e3c3d5b3f0ce318cefc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
