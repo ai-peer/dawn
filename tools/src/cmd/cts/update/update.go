@@ -52,6 +52,7 @@ type cmd struct {
 		results      common.ResultSource
 		expectations string
 		auth         authcli.Flags
+		verbose      bool
 	}
 }
 
@@ -67,6 +68,7 @@ func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, e
 	defaultExpectations := common.DefaultExpectationsPath()
 	c.flags.results.RegisterFlags(cfg)
 	c.flags.auth.Register(flag.CommandLine, auth.DefaultAuthOptions( /* needsCloudScopes */ false))
+	flag.BoolVar(&c.flags.verbose, "verbose", false, "emit additional logging")
 	flag.StringVar(&c.flags.expectations, "expectations", defaultExpectations, "path to CTS expectations file to update")
 	return nil, nil
 }
@@ -123,7 +125,7 @@ func (c *cmd) Run(ctx context.Context, cfg common.Config) error {
 
 	// Update the expectations file with the results
 	log.Println("updating expectations...")
-	diag, err := ex.Update(results, testlist)
+	diag, err := ex.Update(results, testlist, c.flags.verbose)
 	if err != nil {
 		return err
 	}
