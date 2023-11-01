@@ -114,10 +114,10 @@ func TestMinimalVariantTags(t *testing.T) {
 		},
 	} {
 		preReduce := fmt.Sprint(test.results)
-		got := test.results.MinimalVariantTags([]result.Tags{
-			T("a0", "a1", "a2"),
-			T("b0", "b1", "b2"),
-			T("c0", "c1", "c2"),
+		got := test.results.MinimalVariantTags([]string{
+			"a0", "a1", "a2",
+			"b0", "b1", "b2",
+			"c0", "c1", "c2",
 		})
 		postReduce := fmt.Sprint(test.results)
 		if diff := cmp.Diff(got, test.expect); diff != "" {
