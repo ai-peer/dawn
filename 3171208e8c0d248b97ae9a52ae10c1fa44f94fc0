@@ -33,6 +33,23 @@
       "message": "Passed\n\nhttps://dawn-review.googlesource.com/c/dawn/+/158780",
       "revId": "3171208e8c0d248b97ae9a52ae10c1fa44f94fc0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ec6ca15_23ef522a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-01T11:14:26Z",
+      "side": 1,
+      "message": "LGTM! Landing so I can try a roll.",
+      "revId": "3171208e8c0d248b97ae9a52ae10c1fa44f94fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
