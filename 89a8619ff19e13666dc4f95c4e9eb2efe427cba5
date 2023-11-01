@@ -16,6 +16,24 @@
       "message": "+2, but again, should probably come before the parser change",
       "revId": "89a8619ff19e13666dc4f95c4e9eb2efe427cba5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e570f3f_eeb1fd3d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-01T21:12:46Z",
+      "side": 1,
+      "message": "Was originally, but this needs to come after SingleEntryPoint (for GLSL), which has a test that requires the parser to be done first.\n\nI\u0027ll land the whole stack together anyways.",
+      "parentUuid": "59893a12_817352a6",
+      "revId": "89a8619ff19e13666dc4f95c4e9eb2efe427cba5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
