@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2338c78d_06469195",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-01T15:40:15Z",
+      "side": 1,
+      "message": "I think dawn shouldn\u0027t assume how an application use the API and the shared d3d11 device. (An application could be just use the dawn and the shared d3d11 device in one thread.), It is better to use Feature::D3D11MultithreadProtected to tell dawn about the application\u0027s behavior.  And will chrome be the only client of the dawn d3d11 backend? Should we consider other third party applications? If not, probably making assumption and adding the validation is fine.",
+      "parentUuid": "9531f892_b3e81c6b",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9

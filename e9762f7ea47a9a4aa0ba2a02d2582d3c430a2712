@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4afa4c3e_194373f2",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 3281,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-01T15:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67385007_706290b7",
+      "range": {
+        "startLine": 3281,
+        "startChar": 12,
+        "endLine": 3281,
+        "endChar": 103
+      },
+      "revId": "e9762f7ea47a9a4aa0ba2a02d2582d3c430a2712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4da3fc5f_15a04d05",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-10-31T21:50:17Z",
       "side": 1,
       "message": "Can you add a comment about this to adapter_options.md - it seems all the other request adapter extension structs are already documented there.",
+      "range": {
+        "startLine": 50,
+        "startChar": 17,
+        "endLine": 50,
+        "endChar": 49
+      },
+      "revId": "e9762f7ea47a9a4aa0ba2a02d2582d3c430a2712",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f179cb7_a059c276",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-01T15:40:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4da3fc5f_15a04d05",
       "range": {
         "startLine": 50,
         "startChar": 17,
