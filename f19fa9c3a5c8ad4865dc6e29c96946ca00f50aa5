@@ -526,6 +526,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a308d10a_75306d32",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-11-01T21:24:58Z",
+      "side": 1,
+      "message": "D3D context state objects also let you have mismatched feature levels from the host. If ANGLE (or whatever) creates a D3D11 device of feature level 10_1, Dawn can make a device context state object on that device with feature level 11_1 and use compute shaders.",
+      "parentUuid": "159f13b9_893f5f2e",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32bed658_aacf5127",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 9
