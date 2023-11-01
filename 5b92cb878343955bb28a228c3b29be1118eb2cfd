@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c197d5a0_aedfebef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-01T20:43:37Z",
+      "side": 1,
+      "message": "Note to self: I don\u0027t actually think the blit is working. 😞 The CTS tests are simply passing because they\u0027re validation tests, and I\u0027ve removed the backend validation error. The end2end tests I\u0027ve enabled don\u0027t actually exercise the blit, and pass/fail the same as without it.\n\nTests which actually do exercise the blit, such as CopyToDepthStencilTextureAfterDestroyingBigBufferTests.DoTest, do not pass.",
+      "revId": "5b92cb878343955bb28a228c3b29be1118eb2cfd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
