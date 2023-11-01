@@ -16,6 +16,23 @@
       "message": "I think this is ready but I never seen a successful run. It takes 2-3 hours per iteration every time there are different failures. I still get the permission error\n\nfailed to generate third_party/gn/webgpu-cts/cache_list.txt: failed to close the bucket object: googleapi: Error 403: gman@google.com does not have storage.objects.delete access to the Google Cloud Storage object., forbidden",
       "revId": "3171208e8c0d248b97ae9a52ae10c1fa44f94fc0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2bb85c5_d14c2d70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-01T04:26:48Z",
+      "side": 1,
+      "message": "Passed\n\nhttps://dawn-review.googlesource.com/c/dawn/+/158780",
+      "revId": "3171208e8c0d248b97ae9a52ae10c1fa44f94fc0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
