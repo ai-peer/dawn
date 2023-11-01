@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1119e971_87299f6e",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-11-01T21:14:31Z",
+      "side": 1,
+      "message": "Regarding the below:\n\u003e Presumably once we\u0027ve called Enter, disabling multithread mode will block until Dawn calls ID3D11Multithread::Leave.\n\nYes, this is correct.\n\nDoes Dawn, itself, need the D3D11 device to be multi-thread protected in order to do its job? If not, seems fine to me to have it accept devices which are not multi-thread protected. If it DOES need it to do its job, then Dawn should call `SetMultithreadProtected` right when it receives the device from Chromium. \n\nAs with any global state, there needs to be sanity amongst components to prevent one from disabling required features out from under the other one.",
+      "parentUuid": "2338c78d_06469195",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -472,6 +490,30 @@
       "side": 1,
       "message": "I\u0027ve emailed folks at Microsoft asking about this.",
       "parentUuid": "f7e30bcc_b60762ed",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "159f13b9_893f5f2e",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-11-01T21:14:31Z",
+      "side": 1,
+      "message": "Per the documentation in https://learn.microsoft.com/en-us/windows/win32/api/d3d11_1/nf-d3d11_1-id3d11device1-createdevicecontextstate, you must create device context state objects with the `D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED` flag if the device was created with the `D3D11_CREATE_DEVICE_SINGLETHREADED` flag. You can query an existing device for its creation flags by calling `ID3D11Device::GetCreationFlags`.\n\nIf you use `D3D11_CREATE_DEVICE_SINGLETHREADED` that means you can only use the device from one thread at a time. Up to you to make that happen. If you leave it off, then only certain resource creation API calls (like CreateTexture) are thread safe. \n\nCalling `SetMultithreadProtected` additionally guarantees two threads won\u0027t race within an API call on the immediate context. It\u0027s best used for submitting video work on background threads which doesn\u0027t really use the set+submit pattern. \n\nThe purpose of D3D11 device context state objects is to keep state from different components nicely separated from each other. Direct2D, for instance, uses them to keep its own D3D immediate context state separate from the D3D immediate context state the application uses for its own purposes. It fits nicely in Chromium when multiple components in different repositories are partying on the same D3D11 device context. \n\n(I spent some time discussing the overall plan with my D3D contact)\n\nUnfortunately, D3D11 is not very parallelizable like D3D12 is. If multiple threads are doing mostly D3D work, you\u0027re better off serializing that work on one thread and use the immediate context. If multiple threads are mostly doing non-D3D work with some D3D work sprinkled in, deferred contexts is an option. They\u0027re about parallelizing _your own code_, not D3D. Deferred contexts are not widely used but they exist and work. There are limitations around resource upload and mapping things to keep in mind.\n\nDawn is unique in that it performs its OWN command list serialization which (I believe??) is mandatory. In that case, deferred contexts may not provide much value since they\u0027re effectively doing the same thing Dawn already does. \n\nDoes converting Dawn command lists to D3D calls happen as a relatively atomic operation, or is it interleaved with other command list generating work like Skia?  If the former, replaying them to the immediate context (with a device context state object like we\u0027re doing here) seems like the best approach.",
+      "parentUuid": "ffdef130_d3c2caff",
       "range": {
         "startLine": 137,
         "startChar": 16,

@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "976cac9f_975ccc0e",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-11-01T21:14:31Z",
+      "side": 1,
+      "message": "I\u0027m unclear why passing both a D3D device and DXGI adapter here is necessary. \n\nFrom `ID3D11Device`, you can `QueryInterface` for `IDXGIDevice`. From `IDXGIDevice` you can call `GetAdapter` to get `IDXGIAdapter`.\n\nIf you want to share a D3D11 device between Dawn and Chromium, then we should simply pass `ID3D11Device` here and let Dawn retrieve the `IDXGIAdpater` from it.",
+      "range": {
+        "startLine": 55,
+        "startChar": 64,
+        "endLine": 55,
+        "endChar": 96
+      },
+      "revId": "399469be73d9b7bbbe400d7c178a99960875f8c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
