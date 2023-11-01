@@ -33,18 +33,17 @@ import (
 	"dawn.googlesource.com/dawn/tools/src/cts/query"
 )
 
-// MinimalVariantTags accepts a list of tag-sets (e.g GPU tags, OS tags, etc),
+// MinimalVariantTags accepts a list of tags (e.g GPU tags, OS tags, etc),
 // and returns an optimized list of variants, folding together variants that
 // have identical result query-to-status mappings, and removing redundant tags.
 //
 // MinimalVariantTags will attempt to remove variant tags starting with the
-// first set of tags in tagSets, then second, and so on. If a tag-set cannot
-// be removed, then the tags of the set are left alone, and the algorithm will
-// progress to the next tag-set.
+// first tag in allTags, then second, and so on. If a tag cannot be removed,
+// then the tag is preserved, and the algorithm will progress to the next tag.
 //
 // MinimalVariantTags assumes that there are no duplicate results (same query,
 // same tags) in l.
-func (l List) MinimalVariantTags(tagSets []Tags) []Variant {
+func (l List) MinimalVariantTags(allTags []string) []Variant {
 	type VariantData struct {
 		// The variant tags
 		tags Variant
@@ -94,16 +93,16 @@ func (l List) MinimalVariantTags(tagSets []Tags) []Variant {
 		return true
 	}
 
-	// tryToRemoveTags will remove all the tags in 'tags' from all variants
-	// iff doing so does not affect the set of results filtered by each variant.
-	// If it was possible to remove the tags, then variants that now have the
+	// tryToRemoveTag will remove the tag from all variants iff doing so does
+	// not affect the set of results filtered by each variant.
+	// If it was possible to remove the tag, then variants that now have the
 	// same tags may be folded together, reducing the total number of variants.
-	tryToRemoveTags := func(tags Tags) {
+	tryToRemoveTag := func(tag string) {
 		newVariants := make([]VariantData, 0, len(variants))
 
 		for _, v := range variants {
-			// Does the variant even contain these tags?
-			if !v.tags.ContainsAny(tags) {
+			// Does the variant even contain this tag?
+			if !v.tags.Contains(tag) {
 				// Nope. Skip the canReduce() call, and keep the variant.
 				newVariants = append(newVariants, v)
 				continue
@@ -111,7 +110,7 @@ func (l List) MinimalVariantTags(tagSets []Tags) []Variant {
 
 			// Build the new set of tags with 'tags' removed.
 			newTags := v.tags.Clone()
-			newTags.RemoveAll(tags)
+			newTags.Remove(tag)
 
 			// Check wether removal of these tags affected the outcome.
 			if !canReduce(v, newTags) {
@@ -145,9 +144,9 @@ func (l List) MinimalVariantTags(tagSets []Tags) []Variant {
 		}
 	}
 
-	// Attempt to remove the tag sets from the variants, one by one.
-	for _, tags := range tagSets {
-		tryToRemoveTags(tags)
+	// Attempt to remove the tags, one by one
+	for _, tag := range allTags {
+		tryToRemoveTag(tag)
 	}
 
 	// Return the final set of unique variants

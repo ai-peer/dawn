@@ -32,6 +32,7 @@ import (
 	"fmt"
 	"log"
 	"os"
+	"sort"
 	"strings"
 
 	"dawn.googlesource.com/dawn/tools/src/container"
@@ -57,25 +58,43 @@ import (
 // Note: Validate() should be called before attempting to update the
 // expectations. If Validate() returns errors, then Update() behaviour is
 // undefined.
-func (c *Content) Update(results result.List, testlist []query.Query) (Diagnostics, error) {
+func (c *Content) Update(results result.List, testlist []query.Query, verbose bool) (Diagnostics, error) {
 	// Make a copy of the results. This code mutates the list.
 	results = append(result.List{}, results...)
 
 	// Replace statuses that the CTS runner doesn't recognize with 'Failure'
 	simplifyStatuses(results)
 
-	// Produce a list of tag sets.
+	// Calculate all the tags of all tag-sets..
+	allTags := []string{}
+	for _, tagSet := range c.Tags.Sets {
+		tags := make([]string, 0, len(tagSet.Tags))
+		for tag := range tagSet.Tags {
+			tags = append(tags, tag)
+		}
+		sort.Slice(tags, func(i, j int) bool {
+			return c.Tags.ByName[tags[i]].Priority > c.Tags.ByName[tags[j]].Priority
+		})
+		allTags = append(allTags, tags...)
+	}
 	// We reverse the declared order, as webgpu-cts/expectations.txt lists the
 	// most important first (OS, GPU, etc), and result.MinimalVariantTags will
-	// prioritize folding away the earlier tag-sets.
-	tagSets := make([]result.Tags, len(c.Tags.Sets))
-	for i, s := range c.Tags.Sets {
-		tagSets[len(tagSets)-i-1] = s.Tags
+	// prioritize removing the earlier tags.
+	for i, n := 0, len(allTags)/2; i < n; i++ {
+		j := len(allTags) - 1 - i
+		allTags[i], allTags[j] = allTags[j], allTags[i]
 	}
 
 	// Scan the full result list to obtain all the test variants
 	// (unique tag combinations).
 	variants := results.Variants()
+
+	if verbose {
+		fmt.Println("result variants:")
+		for i, tags := range variants {
+			fmt.Printf(" (%.2d) %v\n", i, tags.List())
+		}
+	}
 
 	// Add 'consumed' results for tests that were skipped.
 	// This ensures that skipped results are not included in reduced trees.
@@ -92,7 +111,7 @@ func (c *Content) Update(results result.List, testlist []query.Query) (Diagnosti
 		out:      Content{},
 		qt:       newQueryTree(results),
 		variants: variants,
-		tagSets:  tagSets,
+		allTags:  allTags,
 		pb:       pb,
 	}
 
@@ -116,7 +135,7 @@ type updater struct {
 	qt       queryTree // the query tree
 	variants []container.Set[string]
 	diags    []Diagnostic             // diagnostics raised during update
-	tagSets  []result.Tags            // reverse-ordered tag-sets of 'in'
+	allTags  []string                 // reverse-ordered tags of 'in'
 	pb       *progressbar.ProgressBar // Progress bar, may be nil
 }
 
@@ -514,7 +533,8 @@ func (u *updater) addNewExpectations() error {
 		}
 
 		// Build a tree from the results matching the given variant.
-		tree, err := u.qt.results.FilterByVariant(variant).StatusTree()
+		filtered := u.qt.results.FilterByVariant(variant)
+		tree, err := filtered.StatusTree()
 		if err != nil {
 			return fmt.Errorf("while building tree for tags '%v': %w", variant, err)
 		}
@@ -522,8 +542,10 @@ func (u *updater) addNewExpectations() error {
 		tree.Reduce(treeReducer)
 		// Add all the reduced leaf nodes to 'roots'.
 		for _, qd := range tree.List() {
-			// Use Split() to ensure that only the leaves have data (true) in the tree
-			roots.Split(qd.Query, true)
+			if qd.Data != result.Pass {
+				// Use Split() to ensure that only the leaves have data (true) in the tree
+				roots.Split(qd.Query, true)
+			}
 		}
 	}
 
@@ -598,7 +620,7 @@ func (u *updater) expectationsForRoot(
 	// variants (tags) that uniquely classify the results with differing status.
 	minimalVariants := u.
 		cleanupTags(results).
-		MinimalVariantTags(u.tagSets)
+		MinimalVariantTags(u.allTags)
 
 	// For each minimized variant...
 	reduced := result.List{}
@@ -669,32 +691,17 @@ func (u *updater) resultsToExpectations(results result.List, bug, comment string
 	return out
 }
 
-// cleanupTags returns a copy of the provided results with:
-//   - All tags not found in the expectations list removed
-//   - All but the highest priority tag for any tag-set.
-//     The tag sets are defined by the `BEGIN TAG HEADER` / `END TAG HEADER`
-//     section at the top of the expectations file.
+// cleanupTags returns a copy of the provided results with all tags not found
+// in the expectations list removed
 func (u *updater) cleanupTags(results result.List) result.List {
 	return results.TransformTags(func(t result.Tags) result.Tags {
-		type HighestPrioritySetTag struct {
-			tag      string
-			priority int
-		}
-		// Set name to highest priority tag for that set
-		best := map[string]HighestPrioritySetTag{}
+		filtered := result.NewTags()
 		for tag := range t {
-			sp, ok := u.in.Tags.ByName[tag]
-			if ok {
-				if set := best[sp.Set]; sp.Priority >= set.priority {
-					best[sp.Set] = HighestPrioritySetTag{tag, sp.Priority}
-				}
+			if _, ok := u.in.Tags.ByName[tag]; ok {
+				filtered.Add(tag)
 			}
 		}
-		t = result.NewTags()
-		for _, ts := range best {
-			t.Add(ts.tag)
-		}
-		return t
+		return filtered
 	})
 }
 

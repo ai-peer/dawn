@@ -91,6 +91,7 @@ type rollerFlags struct {
 	rebuild             bool // Rebuild the expectations file from scratch
 	preserve            bool // If false, abandon past roll changes
 	sendToGardener      bool // If true, automatically send to the gardener for review
+	verbose             bool
 	parentSwarmingRunID string
 	maxAttempts         int
 }
@@ -119,6 +120,7 @@ func (c *cmd) RegisterFlags(ctx context.Context, cfg common.Config) ([]string, e
 	flag.BoolVar(&c.flags.rebuild, "rebuild", false, "rebuild the expectation file from scratch")
 	flag.BoolVar(&c.flags.preserve, "preserve", false, "do not abandon existing rolls")
 	flag.BoolVar(&c.flags.sendToGardener, "send-to-gardener", false, "send the CL to the WebGPU gardener for review")
+	flag.BoolVar(&c.flags.verbose, "verbose", false, "emit additional logging")
 	flag.StringVar(&c.flags.parentSwarmingRunID, "parent-swarming-run-id", "", "parent swarming run id. All triggered tasks will be children of this task and will be canceled if the parent is canceled.")
 	flag.IntVar(&c.flags.maxAttempts, "max-attempts", 3, "number of update attempts before giving up")
 	return nil, nil
@@ -382,7 +384,7 @@ func (r *roller) roll(ctx context.Context) error {
 		// Note: The new expectations are not used if the last attempt didn't
 		// fail, but we always want to post the diagnostics
 		newExpectations := ex.Clone()
-		diags, err := newExpectations.Update(results, testlist)
+		diags, err := newExpectations.Update(results, testlist, r.flags.verbose)
 		if err != nil {
 			return err
 		}
