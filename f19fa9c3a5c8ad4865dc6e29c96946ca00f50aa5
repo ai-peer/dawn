@@ -550,6 +550,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5c9a946_3bb5a8bf",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-11-01T23:24:29Z",
+      "side": 1,
+      "message": "\u003e Does converting Dawn command lists to D3D calls happen as a relatively atomic operation, or is it interleaved with other command list generating work like Skia? If the former, replaying them to the immediate context (with a device context state object like we\u0027re doing here) seems like the best approach.\n\nMostly yes - the only immediate context operation which happens out of band with Graphite is buffer mapping on the viz thread. Everything else is serialized internally in Graphite recordings which playback Dawn commands on the GPU process main thread and the Dawn commands get transformed to D3D11 commands in Dawn queue submit.",
+      "parentUuid": "a308d10a_75306d32",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32bed658_aacf5127",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 9
