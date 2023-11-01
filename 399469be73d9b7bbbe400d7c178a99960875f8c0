@@ -22,6 +22,30 @@
       },
       "revId": "399469be73d9b7bbbe400d7c178a99960875f8c0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de29b2b_ae331d6f",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-01T22:58:29Z",
+      "side": 1,
+      "message": "Chrome only needs pass in d3d11 device. But dawn will query the IDXGIAdapter interface and call this method with it. See[1]\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/157960/14/include/dawn/native/D3D11Backend.h",
+      "parentUuid": "976cac9f_975ccc0e",
+      "range": {
+        "startLine": 55,
+        "startChar": 64,
+        "endLine": 55,
+        "endChar": 96
+      },
+      "revId": "399469be73d9b7bbbe400d7c178a99960875f8c0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
