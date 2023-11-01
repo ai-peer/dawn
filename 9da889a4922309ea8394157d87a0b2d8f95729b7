@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9c86cbb_affb0e6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-01T18:49:00Z",
+      "side": 1,
+      "message": "PTAL. I abandoned the original CL as I think this is a better approach.",
+      "revId": "9da889a4922309ea8394157d87a0b2d8f95729b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
