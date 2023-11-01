@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca2868fe_fa84b2c5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-01T22:28:42Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "b82f788f9d8dfc3f7c35723f0a9a1a36ff8fe97f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
