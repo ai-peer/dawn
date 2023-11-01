@@ -16,6 +16,24 @@
       "message": "+2, but this should probably be reordered before the parser?",
       "revId": "1ab5a89eddddf116ccbf1ab42a232b7ff397975c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dcda2280_ebd4d153",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-01T21:12:10Z",
+      "side": 1,
+      "message": "Was originally, but the unittest here requires the parser to be done first.",
+      "parentUuid": "239844ac_f45a9d07",
+      "revId": "1ab5a89eddddf116ccbf1ab42a232b7ff397975c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
