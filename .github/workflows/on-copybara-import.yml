@@ -1,0 +1,16 @@
+name: On copybara import
+
+on:
+  status
+
+jobs:
+  comment:
+    name: comment
+    if: github.event.state == 'success' && github.event.context == 'import/copybara'
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/github-script@v6
+      name: Comment on PR
+      with:
+        script: |
+          console.log(github.event)
