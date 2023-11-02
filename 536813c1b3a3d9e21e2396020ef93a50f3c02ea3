@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a744b8f_80cb7e26",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-02T22:52:27Z",
+      "side": 1,
+      "message": "Tint LGTM, but you should probably get someone from Dawn to review those changes",
+      "revId": "536813c1b3a3d9e21e2396020ef93a50f3c02ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cf92c35_52aed232",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-11-02T21:52:42Z",
       "side": 1,
       "message": "Would be nice if we could do this automatically. Maybe we could generate this file via intrinsics.def, or add `kFirst`/`kLast` entries to the generated enums so that we can use loops?",
+      "revId": "536813c1b3a3d9e21e2396020ef93a50f3c02ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6b89f57_acd6697f",
+        "filename": "src/tint/lang/wgsl/common/allowed_features.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-02T22:52:27Z",
+      "side": 1,
+      "message": "Should be fairly easy to do. Created crbug.com/tint/2090 to track this.",
+      "parentUuid": "8cf92c35_52aed232",
       "revId": "536813c1b3a3d9e21e2396020ef93a50f3c02ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
