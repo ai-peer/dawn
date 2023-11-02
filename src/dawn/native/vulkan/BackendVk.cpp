@@ -184,6 +184,21 @@ bool ShouldReportDebugMessage(const char* messageId, const char* message) {
     return true;
 }
 
+void LogCallbackData(LogSeverity severity,
+                     const VkDebugUtilsMessengerCallbackDataEXT* pCallbackData) {
+    LogMessage log = LogMessage(severity);
+
+    // pMessageIdName may be NULL, according to the Vulkan spec. Passing NULL into an ostream is
+    // undefined behavior, so we'll handle that scenario separately.
+    if (pCallbackData->pMessageIdName != nullptr) {
+        log << pCallbackData->pMessageIdName;
+    } else {
+        log << "nullptr";
+    }
+
+    log << ": " << pCallbackData->pMessage;
+}
+
 VKAPI_ATTR VkBool32 VKAPI_CALL
 OnDebugUtilsCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
                      VkDebugUtilsMessageTypeFlagsEXT /* messageTypes */,
@@ -194,7 +209,7 @@ OnDebugUtilsCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
     }
 
     if (!(messageSeverity & VK_DEBUG_UTILS_MESSAGE_SEVERITY_ERROR_BIT_EXT)) {
-        dawn::WarningLog() << pCallbackData->pMessageIdName << ": " << pCallbackData->pMessage;
+        LogCallbackData(LogSeverity::Warning, pCallbackData);
         return VK_FALSE;
     }
 
@@ -220,7 +235,7 @@ OnDebugUtilsCallback(VkDebugUtilsMessageSeverityFlagBitsEXT messageSeverity,
 
     // We get to this line if no device was associated with the message. Crash so that the failure
     // is loud and makes tests fail in Debug.
-    dawn::ErrorLog() << pCallbackData->pMessageIdName << ": " << pCallbackData->pMessage;
+    LogCallbackData(LogSeverity::Error, pCallbackData);
     DAWN_ASSERT(false);
 
     return VK_FALSE;
