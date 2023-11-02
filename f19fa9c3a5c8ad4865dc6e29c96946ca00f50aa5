@@ -254,6 +254,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c6c65568_8a3021b7",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-02T16:16:37Z",
+      "side": 1,
+      "message": "Yes - I think we should validate thread protection is enabled",
+      "parentUuid": "4f069de5_9869187a",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
