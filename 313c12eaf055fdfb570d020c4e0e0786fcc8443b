@@ -39,6 +39,30 @@
       },
       "revId": "313c12eaf055fdfb570d020c4e0e0786fcc8443b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d96ff3ae_01c1991f",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-11-02T17:45:12Z",
+      "side": 1,
+      "message": "Because this returns `true` it indicates that the debug message SHOULD be reported, which means we\u0027re explicitly allowing the null case to pass through to the logging functions.\n\n(The reason we return true here is because if we don\u0027t have a `pMessageIdName` we can\u0027t compare against our message suppression list and so we conservatively allow it through to ensure that important messages don\u0027t get dropped.)\n\n`pMessage`, according to the Vulkan spec, MUST be non-null.",
+      "parentUuid": "71204c9a_17850f06",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 0
+      },
+      "revId": "313c12eaf055fdfb570d020c4e0e0786fcc8443b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
