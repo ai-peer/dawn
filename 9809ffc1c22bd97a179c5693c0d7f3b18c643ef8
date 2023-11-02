@@ -124,6 +124,41 @@
       "parentUuid": "dd876515_dba5f685",
       "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed15d7b6_de6416bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-02T13:41:42Z",
+      "side": 1,
+      "message": "OK, sorry. I didn\u0027t realize. I\u0027m not happy adding a dependency on an extension we don\u0027t actually use, but I don\u0027t want you to be blocked either.\n\nPlease add a TODO to come back to this later and figure it out.",
+      "parentUuid": "157e8a04_5b1c2123",
+      "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d41077d0_958ccc5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-02T13:41:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
