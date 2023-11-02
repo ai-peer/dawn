@@ -3,6 +3,397 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "44bfc91e_856dd4c5",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,operation,sampling,anisotropy:anisotropic_filter_checkerboard:*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb31ba5_50cb3a86",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,fract:f32:inputSource\u003d\"const\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "74171e38_51f1b3b8",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,ldexp:f32:inputSource\u003d\"const\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1f2b412_831921e6",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"underDefault\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c70ce012_7d65502e",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"underDefault\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9b2b7bd1_a81868de",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 245,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atDefault\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6e95f1a_8098051b",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 246,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atDefault\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "403d93ec_b0e0607b",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"betweenDefaultAndMaximum\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c51aa96a_9c8c9e1c",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"betweenDefaultAndMaximum\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c02602e9_5e5bd371",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "05b62a0a_94673d0e",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "004dcb84_7480260d",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"underDefault\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8fa0ecda_0e9ccfb3",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"underDefault\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4571221f_6a87a921",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 253,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atDefault\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bc28ca6_cae959d9",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atDefault\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b89b77e4_0109471f",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 255,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"betweenDefaultAndMaximum\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07b2abee_a2943148",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"betweenDefaultAndMaximum\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caefcbee_471728b3",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21aca1f3_d5c357af",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 258,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxSampledTexturesPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "192478fd_cd6fbe84",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b4afc5c_b713f474",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dfalse;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7f7d2dc_a065bbc6",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleFragmentStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1536f94c_87dd62f8",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-02T06:38:17Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,capability_checks,limits,maxStorageBuffersPerShaderStage:createPipeline,at_over:limitTest\u003d\"atMaximum\";testValueName\u003d\"atLimit\";async\u003dtrue;bindingCombination\u003d\"vertexAndFragmentWithPossibleVertexStageOverflow\"*\u0027 with tags [angle-opengl]",
+      "revId": "8d5c7953376556f7eb07901ed8c4920ec8b21542",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "61e28f7d_ca8ff17b",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 2
