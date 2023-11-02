@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4f069de5_9869187a",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-02T16:15:30Z",
+      "side": 1,
+      "message": "Do you mean wgpu::Queue will be thread safe by default in future? If that is the case, we should always validate thread protection is enabled, or allow passing in a d3d11 device without thread protection but dawn will always enable the thread protection in dawn by default.",
+      "parentUuid": "3c778cce_1126f1ad",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
