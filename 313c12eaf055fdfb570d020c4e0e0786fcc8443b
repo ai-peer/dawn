@@ -87,6 +87,30 @@
       },
       "revId": "313c12eaf055fdfb570d020c4e0e0786fcc8443b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ccb0a4e6_8d46217b",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-11-02T18:09:01Z",
+      "side": 1,
+      "message": "Good point! I\u0027ve updated the `ShouldReportDebugMessage()` method to discard messages where `pMessage` is NULL, since that\u0027s not valid and who knows what else might be wrong in that case. I\u0027ve also reorganized the method a little bit to filter messages better and improved the comments to help clear up misunderstandings like your previous comment.",
+      "parentUuid": "8ae6e562_0862c90a",
+      "range": {
+        "startLine": 163,
+        "startChar": 4,
+        "endLine": 168,
+        "endChar": 0
+      },
+      "revId": "313c12eaf055fdfb570d020c4e0e0786fcc8443b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
