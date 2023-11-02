@@ -1837,6 +1837,43 @@ TEST_P(ShaderTests, Robustness_Uniform_Mat4x3) {
     EXPECT_BUFFER_U32_RANGE_EQ(outputs.data(), output, 0, outputs.size());
 }
 
+TEST_P(ShaderTests, StructNameCollide) {
+    wgpu::ShaderModule vsModule = utils::CreateShaderModule(device, R"(
+        @group(2) @binding(2) var<storage> u0_2: f32;
+        @group(1) @binding(1) var<storage> u0_1: f32;
+        @group(0) @binding(0) var<storage> u0_0: f32;
+
+        @vertex fn vertex() -> @builtin(position) vec4f {
+          _ = u0_0;
+          _ = u0_1;
+          _ = u0_2;
+          return vec4f(0);
+        }
+    )");
+    wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
+        @group(0) @binding(3) var<storage> u0_2: f32;
+        @group(2) @binding(2) var<storage> u0_1: f32;
+        @group(1) @binding(1) var<storage> u0_0: f32;
+        @group(0) @binding(0) var<storage> u1_3: f32;
+
+        @fragment fn fragment() -> @location(0) vec4f {
+          _ = u0_0;
+          _ = u0_1;
+          _ = u0_2;
+          _ = u1_3;
+          return vec4f(0);
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor desc;
+    desc.vertex.module = vsModule;
+    desc.vertex.entryPoint = "vertex";
+    desc.cFragment.module = fsModule;
+    desc.cFragment.entryPoint = "fragment";
+
+    device.CreateRenderPipeline(&desc);
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D11Backend(),
                       D3D12Backend(),
