@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3c778cce_1126f1ad",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-02T15:56:14Z",
+      "side": 1,
+      "message": "We are in the process of implementing this, but yes. Every operation on the queue must be internally synchronized by Dawn. The application expects to be able to do two queue.Submits racing on multiple threads without issue.\n\nThis means that Dawn either:\n - brings its own locks\n - uses multithread protected\n \nIn practice, we will need a combination of the two because there are other state bits that need synchronization.",
+      "parentUuid": "10ea0d5a_0fa8782d",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
