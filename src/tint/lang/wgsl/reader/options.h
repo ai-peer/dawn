@@ -1,4 +1,4 @@
-// Copyright 2021 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,15 +25,23 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/wgsl/resolver/resolver_helper_test.h"
+#ifndef SRC_TINT_LANG_WGSL_READER_OPTIONS_H_
+#define SRC_TINT_LANG_WGSL_READER_OPTIONS_H_
 
-#include <memory>
+#include "src/tint/lang/wgsl/common/allowed_features.h"
+#include "src/tint/utils/reflection/reflection.h"
 
-namespace tint::resolver {
+namespace tint::wgsl::reader {
 
-TestHelper::TestHelper()
-    : resolver_(std::make_unique<Resolver>(this, wgsl::AllowedFeatures::Everything())) {}
+/// Configuration options used for reading WGSL.
+struct Options {
+    /// The extensions and language features that are allowed to be used.
+    AllowedFeatures allowed_features{};
 
-TestHelper::~TestHelper() = default;
+    /// Reflect the fields of this class so that it can be used by tint::ForeachField().
+    TINT_REFLECT(allowed_features);
+};
 
-}  // namespace tint::resolver
+}  // namespace tint::wgsl::reader
+
+#endif  // SRC_TINT_LANG_WGSL_READER_OPTIONS_H_

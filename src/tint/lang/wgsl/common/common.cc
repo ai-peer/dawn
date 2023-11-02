@@ -1,4 +1,4 @@
-// Copyright 2021 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,15 +25,9 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/wgsl/resolver/resolver_helper_test.h"
+#if defined(__clang__)
+#pragma clang diagnostic ignored "-Wmissing-variable-declarations"
+#endif
 
-#include <memory>
-
-namespace tint::resolver {
-
-TestHelper::TestHelper()
-    : resolver_(std::make_unique<Resolver>(this, wgsl::AllowedFeatures::Everything())) {}
-
-TestHelper::~TestHelper() = default;
-
-}  // namespace tint::resolver
+// A placeholder symbol used to emit a symbol for this lib target.
+int tint_lang_wgsl_common_symbol = 1;

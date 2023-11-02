@@ -42,11 +42,10 @@ cc_library(
     "common.cc",
   ],
   hdrs = [
-    "options.h",
+    "allowed_features.h",
   ],
   deps = [
     "//src/tint/lang/wgsl",
-    "//src/tint/lang/wgsl/common",
     "//src/tint/utils/containers",
     "//src/tint/utils/ice",
     "//src/tint/utils/macros",
