@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63a3d543_6bd55d53",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-02T15:39:45Z",
+      "side": 1,
+      "message": "Dawn doesn\u0027t require the D3D11 device to be multithreaded in normal operation because we (will) have our own locks to guard things.\n\nDawn does require the D3D11 device to be multithreaded if you\u0027re sharing that d3d11 device externally because our own locks can\u0027t synchronize with external ones (though there is opportunity for optimization to merge them into one lock).\n\nAgree about global state and sanity; that\u0027s why I think we should remove FeatureName::D3D11MultithreadProtected to minimize the number of things used to toggle the multithreading state. Chrome can turn this on itself.\n\nLastly, I still believe we should validate the d3d11 device passed in has MultithreadProtected enabled. It is easy to loosen validation in the future. It is difficult to remove features that developers are already using. It would be better to make it strict and add in more ways to control the behavior later if other developers really need it.",
+      "parentUuid": "2338c78d_06469195",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
@@ -562,6 +580,30 @@
       "side": 1,
       "message": "\u003e Does converting Dawn command lists to D3D calls happen as a relatively atomic operation, or is it interleaved with other command list generating work like Skia? If the former, replaying them to the immediate context (with a device context state object like we\u0027re doing here) seems like the best approach.\n\nMostly yes - the only immediate context operation which happens out of band with Graphite is buffer mapping on the viz thread. Everything else is serialized internally in Graphite recordings which playback Dawn commands on the GPU process main thread and the Dawn commands get transformed to D3D11 commands in Dawn queue submit.",
       "parentUuid": "a308d10a_75306d32",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6bf60354_b5ef69f8",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-02T15:39:45Z",
+      "side": 1,
+      "message": "Thank you for the feedback Rafael, the context is helpful!\n\nOne follow-on question then:\n - if I make a device *without* D3D11_CREATE_DEVICE_SINGLETHREADED\n - and use a device context with SetMultithreadProtected(true)\n - is there any point in then using a device context state *with*  D3D11_1_CREATE_DEVICE_CONTEXT_STATE_SINGLETHREADED ?",
+      "parentUuid": "d5c9a946_3bb5a8bf",
       "range": {
         "startLine": 137,
         "startChar": 16,
