@@ -158,6 +158,20 @@ void InstanceBase::WillDropLastExternalRef() {
     // Stop tracking events. See comment on ShutDown.
     mEventManager.ShutDown();
 
+    // Flush all remaining callback tasks on all devices and on the instance.
+    mDevicesList.Use([&](auto deviceList) {
+        for (auto device : *deviceList) {
+            device->GetCallbackTaskManager()->HandleShutDown();
+            do {
+                device->GetCallbackTaskManager()->Flush();
+            } while (!device->GetCallbackTaskManager()->IsEmpty());
+        }
+    });
+    mCallbackTaskManager->HandleShutDown();
+    do {
+        mCallbackTaskManager->Flush();
+    } while (!mCallbackTaskManager->IsEmpty());
+
     // InstanceBase holds backends which hold Refs to PhysicalDeviceBases discovered, which hold
     // Refs back to the InstanceBase.
     // In order to break this cycle and prevent leaks, when the application drops the last external
@@ -451,28 +465,24 @@ BlobCache* InstanceBase::GetBlobCache(bool enabled) {
 }
 
 uint64_t InstanceBase::GetDeviceCountForTesting() const {
-    std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    return mDevicesList.size();
+    return mDevicesList.Use([](const auto deviceList) { return deviceList->size(); });
 }
 
 void InstanceBase::AddDevice(DeviceBase* device) {
-    std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    mDevicesList.insert(device);
+    mDevicesList.Use([&](auto deviceList) { deviceList->insert(device); });
 }
 
 void InstanceBase::RemoveDevice(DeviceBase* device) {
-    std::lock_guard<std::mutex> lg(mDevicesListMutex);
-    mDevicesList.erase(device);
+    mDevicesList.Use([&](auto deviceList) { deviceList->erase(device); });
 }
 
 void InstanceBase::APIProcessEvents() {
     std::vector<Ref<DeviceBase>> devices;
-    {
-        std::lock_guard<std::mutex> lg(mDevicesListMutex);
-        for (auto device : mDevicesList) {
+    mDevicesList.Use([&](const auto deviceList) {
+        for (auto device : *deviceList) {
             devices.push_back(device);
         }
-    }
+    });
 
     for (auto device : devices) {
         device->APITick();
