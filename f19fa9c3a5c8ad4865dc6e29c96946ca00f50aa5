@@ -200,6 +200,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10ea0d5a_0fa8782d",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-02T15:53:46Z",
+      "side": 1,
+      "message": "Does dawn itself really need the the ID3D11DeviceContext to be thread safe? I though it is only needed, if dawn is used in multithread application like graphite.",
+      "parentUuid": "63a3d543_6bd55d53",
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5b39d5fc_6c3278c4",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
         "patchSetId": 9
