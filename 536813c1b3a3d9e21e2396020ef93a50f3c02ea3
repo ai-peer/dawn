@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cf92c35_52aed232",
+        "filename": "src/tint/lang/wgsl/common/allowed_features.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-02T21:52:42Z",
+      "side": 1,
+      "message": "Would be nice if we could do this automatically. Maybe we could generate this file via intrinsics.def, or add `kFirst`/`kLast` entries to the generated enums so that we can use loops?",
+      "revId": "536813c1b3a3d9e21e2396020ef93a50f3c02ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
