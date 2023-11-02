@@ -1,14 +1,16 @@
 name: On copybara import
 
 on:
-  status
+  status:
+  push:
+    branches: [ "status-check" ]
 
 jobs:
   debug:
     name: debug
     runs-on: ubuntu-latest
     steps:
-      name: Dump Github Context
+    - name: Dump Github Context
       run: echo '${{ toJSON(github) }}'
 
   comment:
