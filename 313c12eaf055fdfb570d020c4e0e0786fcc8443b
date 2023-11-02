@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "49d40458_813f1f39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-11-02T17:29:47Z",
+      "side": 1,
+      "message": "PTAL! Can\u0027t verify because I haven\u0027t been able to repro the failure, but I highly suspect this will resolve the crash that we\u0027re seeing in the linked issue.",
+      "revId": "313c12eaf055fdfb570d020c4e0e0786fcc8443b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
