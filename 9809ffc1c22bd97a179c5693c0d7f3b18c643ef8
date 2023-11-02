@@ -106,6 +106,24 @@
       "parentUuid": "cb58cb42_f5015d9c",
       "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "157e8a04_5b1c2123",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-02T00:49:31Z",
+      "side": 1,
+      "message": "That doesn\u0027t work\n\nHere are the IDs\n\nSystem adapters:\n - \"AMD Radeon Pro WX 3200 Series (RADV POLARIS12)\" - \"radv: Mesa 22.3.6\"\n   type: Discrete GPU, backend: Vulkan, compatibilityMode: false\n   vendorId: 0x1002, deviceId: 0x6981\n   vendorName: amd, architecture: gcn-4\n - \"llvmpipe (LLVM 15.0.6, 256 bits)\" - \"llvmpipe: Mesa 22.3.6 (LLVM 15.0.6) 0.0.1\"\n   type: CPU, backend: Vulkan, compatibilityMode: false\n   vendorId: 0x10005, deviceId: 0x0000\n   vendorName: mesa, architecture: software\n - \"SwiftShader Device (Subzero)\" - \"SwiftShader driver 5.0.0\"\n   type: CPU, backend: Vulkan, compatibilityMode: false\n   vendorId: 0x1AE0, deviceId: 0xC0DE\n   vendorName: google, architecture: swiftshader\n - \"Null backend\" - \"\"\n   type: CPU, backend: Null, compatibilityMode: false\n   vendorId: 0x0000, deviceId: 0x0000\n - \"ANGLE (AMD, AMD Radeon Pro WX 3200 Series (polaris12 LLVM 15.0.6), OpenGL 4.6 (Core Profile) Mesa 22.3.6)\" - \"OpenGL version OpenGL ES 3.1.0 (ANGLE 2.1.22119 git hash: 368ddf22e4d4) [Selected]\"\n   type: Unknown, backend: OpenGLES, compatibilityMode: true\n   vendorId: 0x0000, deviceId: 0x0000\n\n\nIt\u0027s choosing that last ID which is \"vendorID: 0x0000\". And then IsAMD() returns false\n\nAny chance you can approve this CL as is and then go change it how you want later? I\u0027ve been blocked on 2 other CLs waiting for this CL for a week now 😭🎻😛",
+      "parentUuid": "dd876515_dba5f685",
+      "revId": "9809ffc1c22bd97a179c5693c0d7f3b18c643ef8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
