@@ -33,10 +33,17 @@
 #include <mutex>
 #include <vector>
 
+#include "dawn/common/MutexProtected.h"
 #include "dawn/common/RefCounted.h"
 #include "dawn/common/TypeTraits.h"
 
 namespace dawn::native {
+
+enum class CallbackState {
+    Normal,
+    ShutDown,
+    DeviceLoss,
+};
 
 struct CallbackTask {
   public:
@@ -52,13 +59,7 @@ struct CallbackTask {
     virtual void HandleDeviceLossImpl() = 0;
 
   private:
-    enum class State {
-        Normal,
-        HandleShutDown,
-        HandleDeviceLoss,
-    };
-
-    State mState = State::Normal;
+    CallbackState mState = CallbackState::Normal;
 };
 
 class CallbackTaskManager : public RefCounted {
@@ -80,8 +81,10 @@ class CallbackTaskManager : public RefCounted {
     void Flush();
 
   private:
-    std::mutex mCallbackTaskQueueMutex;
-    std::vector<std::unique_ptr<CallbackTask>> mCallbackTaskQueue;
+    MutexProtected<std::vector<std::unique_ptr<CallbackTask>>> mCallbackTaskQueue;
+    // Note that shutdown state is implicitly synchronized because it only changes in scopes where
+    // we are holding the task queue lock.
+    CallbackState mState = CallbackState::Normal;
 };
 
 }  // namespace dawn::native
