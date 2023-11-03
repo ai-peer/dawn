@@ -396,7 +396,7 @@ struct UBO {
   vec4 coord;
 };
 
-layout(binding = 0, std140) uniform UBO_ubo {
+layout(binding = 0, std140) uniform UBO_ubo_0 {
   vec4 coord;
 } ubo;
 
@@ -437,7 +437,7 @@ struct Uniforms {
   vec4 coord;
 };
 
-layout(binding = 0, std140) uniform Uniforms_ubo {
+layout(binding = 0, std140) uniform Uniforms_ubo_0 {
   vec4 coord;
 } uniforms;
 
@@ -479,7 +479,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_ssbo_0 {
   Data inner;
 } coord;
 
@@ -527,7 +527,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_ssbo_0 {
   Data inner;
 } coord;
 
@@ -572,7 +572,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_ssbo_0 {
   Data inner;
 } coord;
 
@@ -617,7 +617,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_ssbo_0 {
   Data inner;
 } coord;
 
@@ -663,7 +663,7 @@ struct S {
   float x;
 };
 
-layout(binding = 0, std140) uniform S_ubo {
+layout(binding = 0, std140) uniform S_ubo_0 {
   float x;
 } coord;
 
@@ -710,7 +710,7 @@ struct S {
   float x;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_ssbo_0 {
   S inner;
 } coord;
 
@@ -933,7 +933,7 @@ struct Data {
   float d;
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
