@@ -81,6 +81,24 @@
       "parentUuid": "934b33df_14aafe67",
       "revId": "55aec215d1c7d29dbb7100971be7399b7fff1ca0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a02e42d_57ecef4a",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-03T18:29:28Z",
+      "side": 1,
+      "message": "We talked on chat about this. Turns out it is fine either way, as there\u0027s a special case for this:\nhttps://source.chromium.org/chromium/infra/infra/+/main:go/src/go.chromium.org/luci/lucicfg/doc/README.md;l\u003d2442;drc\u003d2f0a08ad8457a28185c2f2d756fb0e2e40cab661\nhttps://source.chromium.org/chromium/infra/infra/+/main:go/src/go.chromium.org/luci/cv/internal/tryjob/requirement/location.go;l\u003d74;drc\u003dff9a17a92509d8b654b6bac4c175b23fb735a044\n\nhttps://source.chromium.org/chromium/infra/infra/+/main:recipes-py/recipe_proto/go.chromium.org/luci/cv/api/config/v2/config.proto;l\u003d622;drc\u003da0b2af1af311c1eecddfb788fec66751477aeb98\nThis sentence a few paragraphs down was a little misleading:\n\n      // If location_filters is non-empty, and no file in a CL is included by\n      // location_filters, then this builder will not be triggered.",
+      "parentUuid": "ffa1ff7a_72d6b1c6",
+      "revId": "55aec215d1c7d29dbb7100971be7399b7fff1ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
