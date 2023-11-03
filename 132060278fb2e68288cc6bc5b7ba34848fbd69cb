@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5145511_5ec9ad2d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T23:51:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b0251471_cfd128ca",
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6573695d_9593bceb",
@@ -73,6 +91,30 @@
       "side": 1,
       "message": "hmm ok I made it:\n\n1. partition\n2. if shouldPoll, Poll(), return\n3. wait\n4. poll",
       "parentUuid": "6573695d_9593bceb",
+      "range": {
+        "startLine": 2163,
+        "startChar": 4,
+        "endLine": 2163,
+        "endChar": 33
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b054be2c_c57f6d20",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T23:51:03Z",
+      "side": 1,
+      "message": "Hmm WDYT about moving the Case 2 as the first one instead? i.e.:\n\n```\nif (eventReceiverCount \u003d\u003d 0) {\n    // Case 2: There are no system events to wait on; wait directly on the queue.\n    DAWN_TRY_ASSIGN(anyCompleted,\n        GetQueue()-\u003eWaitForQueueSerial(lowestWaitSerial, timeout));\n} else {\n    // Case 1:...\n}\n```\n\nWe should be able to remove the `else if` because we already check that `futureCount !\u003d 0` at the beginning and IIUC, `futureCount \u003d eventReceiverCount + queueFutureCount`.\n\nIt\u0027ll be a bit easier to follow since Case 2 is significantly smaller and easier to understand than Case 1 which has another nested block.",
+      "parentUuid": "1c8ded83_c1925ff6",
       "range": {
         "startLine": 2163,
         "startChar": 4,
@@ -167,6 +209,30 @@
       "side": 1,
       "message": "Same problem you have with the buffer map wait status. We need the queue inside Complete. Complete isn\u0027t called until you call the callback.\n\nThe application could make the event, then drop everything, and then call instanceProcessEvents",
       "parentUuid": "881d13de_038ee734",
+      "range": {
+        "startLine": 249,
+        "startChar": 4,
+        "endLine": 249,
+        "endChar": 26
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feb8091b_860691c2",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T23:51:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e02d02d4_23e09544",
       "range": {
         "startLine": 249,
         "startChar": 4,
