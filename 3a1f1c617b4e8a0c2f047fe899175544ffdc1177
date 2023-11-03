@@ -16,6 +16,125 @@
       "message": "Fixed merge conflict.",
       "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "72580a6f_ba60d103",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T00:17:57Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f8344843_41766b42",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T00:17:57Z",
+      "side": 1,
+      "message": "```suggestion\n            // waited, there is no need for fragment to wait. Add the fragment usage so we know to wait for it before the next write.\n```",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5bbcc9e_756d144d",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T00:17:57Z",
+      "side": 1,
+      "message": "Isn\u0027t that initialState -\u003e read dependency?",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e448ef2_7ff39e6f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T00:17:57Z",
+      "side": 1,
+      "message": "I\u0027m wondering if we could just never add MapRead in the first place. It seems like it would be slightly simpler than special casing here.",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec293555_68e29d6e",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T00:17:57Z",
+      "side": 1,
+      "message": "nit: .Get is not 100% cheap, we could call it only once.",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e9ec6d17_594a4d44",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T00:17:57Z",
+      "side": 1,
+      "message": "Maybe we can rename New vs. Last? ditto below",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1439d286_b68d64c4",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T00:17:57Z",
+      "side": 1,
+      "message": "This is hard to understand why this is needed and sufficient. We can only aggregate stages on textures when readonly and with the same usage, otherwise the layout may be different. Maybe inverting the way the condition is done could help:\n\n```\n// Only aggregate stages if we can reuse the same layout.\nif (!(usage \u003d\u003d lastSyncInfo-\u003eusage \u0026\u0026 isReadOnly)) {\n\n}\n```\n\nDitto for the Merge above.",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
