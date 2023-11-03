@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55717b2a_e26c0768",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T06:36:27Z",
+      "side": 1,
+      "message": "ah, good catch",
+      "parentUuid": "340b11d4_513737b7",
+      "range": {
+        "startLine": 391,
+        "startChar": 35,
+        "endLine": 391,
+        "endChar": 36
+      },
+      "revId": "55aec215d1c7d29dbb7100971be7399b7fff1ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "934b33df_14aafe67",
@@ -37,6 +61,24 @@
       "writtenOn": "2023-11-03T05:36:44Z",
       "side": 1,
       "message": "Does this mean \"don\u0027t run if there are any changes in .github\" or \"don\u0027t run if *all* of the changes are in .github\"?\nI assume we want the latter; I don\u0027t know how to read this.",
+      "revId": "55aec215d1c7d29dbb7100971be7399b7fff1ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffa1ff7a_72d6b1c6",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T06:36:27Z",
+      "side": 1,
+      "message": "good point raising this; I\u0027ve now checked the docs and realized it was wrong before. if location_filters is non-empty, then it applies them in order\n\nso we first need to match against .*, then exclude \\\\.github",
+      "parentUuid": "934b33df_14aafe67",
       "revId": "55aec215d1c7d29dbb7100971be7399b7fff1ca0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
