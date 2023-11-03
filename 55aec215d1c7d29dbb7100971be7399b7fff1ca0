@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "340b11d4_513737b7",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 391,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-03T05:36:44Z",
+      "side": 1,
+      "message": "Need to escape this dot?",
+      "range": {
+        "startLine": 391,
+        "startChar": 35,
+        "endLine": 391,
+        "endChar": 36
+      },
+      "revId": "55aec215d1c7d29dbb7100971be7399b7fff1ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "934b33df_14aafe67",
+        "filename": "infra/config/global/main.star",
+        "patchSetId": 3
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-03T05:36:44Z",
+      "side": 1,
+      "message": "Does this mean \"don\u0027t run if there are any changes in .github\" or \"don\u0027t run if *all* of the changes are in .github\"?\nI assume we want the latter; I don\u0027t know how to read this.",
+      "revId": "55aec215d1c7d29dbb7100971be7399b7fff1ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
