@@ -307,7 +307,7 @@ struct Data {
   mat2x3 b;
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -360,7 +360,7 @@ struct Data {
   mat4x3 a;
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -405,7 +405,7 @@ struct Data {
   int a[5];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -453,7 +453,7 @@ struct Data {
   int a[5];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -500,7 +500,7 @@ struct Data {
   int a[5];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -559,7 +559,7 @@ struct Data {
   Inner c[4];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -620,7 +620,7 @@ struct Data {
   Inner c[4];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -682,7 +682,7 @@ struct Data {
   Inner c[4];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -743,7 +743,7 @@ struct Data {
   Inner c[4];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -803,7 +803,7 @@ struct Data {
   Inner c[4];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
@@ -864,7 +864,7 @@ struct Data {
   Inner c[4];
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_ssbo_0 {
   Data inner;
 } data;
 
