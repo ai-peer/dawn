@@ -102,11 +102,6 @@ crbug.com/dawn/2079 [ angle-opengl ] webgpu:api,operation,resource_init,texture_
 crbug.com/dawn/2079 [ angle-opengl ] webgpu:util,texture,texel_data:ufloat_texel_data_in_shader:format="rgb9e5ufloat" [ Failure ]
 crbug.com/dawn/2079 [ angle-opengl ] webgpu:util,texture,texel_data:ufloat_texel_data_in_shader:* [ Failure ]
 
-# 2 incompatible texture views issue
-crbug.com/dawn/2080 [ angle-opengl ] webgpu:api,validation,resource_usages,texture,in_render_common:subresources,color_attachment_and_bind_group:* [ Failure ]
-crbug.com/dawn/2080 [ angle-opengl ] webgpu:api,validation,resource_usages,texture,in_render_common:subresources,multiple_bind_groups:* [ Failure ]
-crbug.com/dawn/2080 [ angle-opengl ] webgpu:api,validation,resource_usages,texture,in_render_misc:subresources,set_bind_group_on_same_index_color_texture:useDifferentTextureAsTexture2=false;baseLayer2=1;view2Binding="storage";* [ Failure ]
-
 # Video test failing due to mismatched interstage variables
 crbug.com/dawn/2196 [ angle-opengl ] webgpu:web_platform,copyToTexture,video:copy_from_video:* [ Failure ]
 
