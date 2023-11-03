@@ -598,6 +598,8 @@ class TimestampExpectation : public detail::Expectation {
   public:
     ~TimestampExpectation() override = default;
 
+    explicit TimestampExpectation(bool checkIncrease = false) { mCheckIncrease = checkIncrease; }
+
     // Expect the timestamp results are greater than 0.
     testing::AssertionResult Check(const void* data, size_t size) override {
         DAWN_ASSERT(size % sizeof(uint64_t) == 0);
@@ -607,10 +609,20 @@ class TimestampExpectation : public detail::Expectation {
                 return testing::AssertionFailure()
                        << "Expected data[" << i << "] to be greater than 0." << std::endl;
             }
+
+            // Check the timestamps should be increasing
+            if (mCheckIncrease && i > 0 && timestamps[i] < timestamps[i - 1]) {
+                return testing::AssertionFailure()
+                       << "Expected data[" << i << "] to be not less than data[" << i - 1 << "]."
+                       << std::endl;
+            }
         }
 
         return testing::AssertionSuccess();
     }
+
+  private:
+    bool mCheckIncrease;
 };
 
 class TimestampQueryTests : public QueryTests {
@@ -1151,6 +1163,36 @@ TEST_P(TimestampQueryTests, ManyWriteTimestampDistinctQuerySets) {
     }
 }
 
+// Test timestamp query calls could be executed in expected order in command encoder and
+// render/compute pass encoders. See crbug.com/dawn/1598
+TEST_P(TimestampQueryTests, CheckSequenceOnDifferentEncoders) {
+    constexpr uint32_t kQueryCount = 6;
+
+    wgpu::QuerySet querySet = CreateQuerySetForTimestamp(kQueryCount);
+    wgpu::Buffer destination = CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    // Write timestamp to index 0 before passes
+    encoder.WriteTimestamp(querySet, 0);
+
+    // Write timestamps to index 1 and 2 at the beginning and end of render pass
+    EncodeRenderTimestampWrites(encoder, {querySet, 1, 2});
+
+    // Write timestamps to index 3 and 4 at the beginning and end of compute pass
+    EncodeComputeTimestampWrites(encoder, {querySet, 3, 4});
+
+    // Write timestamp to index 5 after passes
+    encoder.WriteTimestamp(querySet, 5);
+
+    encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    // Expect the timestamp values should be increasing.
+    EXPECT_BUFFER(destination, 0, kQueryCount * sizeof(uint64_t), new TimestampExpectation(true));
+}
+
 class TimestampQueryInsidePassesTests : public TimestampQueryTests {
   protected:
     void SetUp() override {
@@ -1294,11 +1336,14 @@ DAWN_INSTANTIATE_TEST(OcclusionQueryTests,
                       VulkanBackend());
 DAWN_INSTANTIATE_TEST(TimestampQueryTests,
                       D3D11Backend(),
-                      D3D12Backend(),
-                      MetalBackend(),
+                      D3D12Backend({"timestamp_quantization"}),
+                      D3D12Backend({}, {"timestamp_quantization"}),
+                      MetalBackend({"timestamp_quantization"}),
+                      MetalBackend({}, {"timestamp_quantization"}),
                       OpenGLBackend(),
                       OpenGLESBackend(),
-                      VulkanBackend());
+                      VulkanBackend({"timestamp_quantization"}),
+                      VulkanBackend({}, {"timestamp_quantization"}));
 DAWN_INSTANTIATE_TEST(TimestampQueryInsidePassesTests,
                       D3D11Backend(),
                       D3D12Backend(),
