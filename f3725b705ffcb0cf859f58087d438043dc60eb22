@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "364c4593_11300746",
+        "filename": "src/dawn/tests/end2end/ComputeDispatchTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T23:33:12Z",
+      "side": 1,
+      "message": "nit. Maybe we can specify the 256 as a variable, say `kDynamicOffsetReq`, and also maybe a `kElementOffset \u003d kDynamicOffsetReq / sizeof(uint32_t)` sort of thing? That way below we can have less magic looking numbers?",
+      "range": {
+        "startLine": 426,
+        "startChar": 36,
+        "endLine": 426,
+        "endChar": 39
+      },
+      "revId": "f3725b705ffcb0cf859f58087d438043dc60eb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cf718c4_8a84764e",
+        "filename": "src/dawn/tests/end2end/ComputeDispatchTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T23:33:12Z",
+      "side": 1,
+      "message": "Hmm, when do these cases happen? It looks like the data never specifies dimes that large?",
+      "range": {
+        "startLine": 506,
+        "startChar": 16,
+        "endLine": 508,
+        "endChar": 88
+      },
+      "revId": "f3725b705ffcb0cf859f58087d438043dc60eb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
