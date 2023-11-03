@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a3e0eb0_75315300",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-03T05:42:41Z",
+      "side": 1,
+      "message": "Could we trigger on `push` to `main` instead..?",
+      "revId": "be12ce838476056d19c76cae8184857472f3c8f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd5e3960_bc334961",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-03T05:42:41Z",
+      "side": 1,
+      "message": "this is complicated. Didn\u0027t understand it super closely but if it works it seems OK. One question",
+      "revId": "be12ce838476056d19c76cae8184857472f3c8f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
