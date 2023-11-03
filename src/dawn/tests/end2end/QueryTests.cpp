@@ -839,6 +839,24 @@ class TimestampQueryTests : public QueryTests {
         }
     }
 
+    void MapAsyncAndWait(const wgpu::Buffer& buffer,
+                         wgpu::MapMode mode,
+                         size_t offset,
+                         size_t size) {
+        bool done = false;
+        buffer.MapAsync(
+            mode, offset, size,
+            [](WGPUBufferMapAsyncStatus status, void* userdata) {
+                ASSERT_EQ(WGPUBufferMapAsyncStatus_Success, status);
+                *static_cast<bool*>(userdata) = true;
+            },
+            &done);
+
+        while (!done) {
+            WaitABit();
+        }
+    }
+
   private:
     wgpu::ComputePipeline computePipeline;
 };
@@ -1157,6 +1175,65 @@ TEST_P(TimestampQueryTests, ManyWriteTimestampDistinctQuerySets) {
     }
 }
 
+// Test timestamp query calls could be executed in expected order in command encoder and
+// render/compute pass encoders. See crbug.com/dawn/1598
+TEST_P(TimestampQueryTests, TimestampOrderOnDifferentEncoders) {
+    auto RunTest = [this]() -> testing::AssertionResult {
+        constexpr uint32_t kQueryCount = 6;
+
+        wgpu::QuerySet querySet = this->CreateQuerySetForTimestamp(kQueryCount);
+        wgpu::Buffer destination = this->CreateResolveBuffer(kQueryCount * sizeof(uint64_t));
+
+        wgpu::BufferDescriptor descriptor;
+        descriptor.size = kQueryCount * sizeof(uint64_t);
+        descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+        wgpu::Buffer readbuffer = this->device.CreateBuffer(&descriptor);
+
+        wgpu::CommandEncoder encoder = this->device.CreateCommandEncoder();
+        // Write timestamp to index 0 before passes
+        encoder.WriteTimestamp(querySet, 0);
+        // Write timestamps to index 1 and 2 at the beginning and end of render pass
+        EncodeRenderTimestampWrites(encoder, {querySet, 1, 2});
+        // Write timestamps to index 3 and 4 at the beginning and end of compute pass
+        EncodeComputeTimestampWrites(encoder, {querySet, 3, 4});
+        // Write timestamp to index 5 after passes
+        encoder.WriteTimestamp(querySet, 5);
+
+        encoder.ResolveQuerySet(querySet, 0, kQueryCount, destination, 0);
+        encoder.CopyBufferToBuffer(destination, 0, readbuffer, 0, kQueryCount * sizeof(uint64_t));
+
+        wgpu::CommandBuffer commands = encoder.Finish();
+        this->queue.Submit(1, &commands);
+
+        // Check the timestamp values should be non-zero and not less than previous one.
+        MapAsyncAndWait(readbuffer, wgpu::MapMode::Read, 0, descriptor.size);
+        const uint64_t* results = static_cast<const uint64_t*>(readbuffer.GetConstMappedRange());
+        for (size_t i = 0; i < kQueryCount; i++) {
+            if (results[i] == 0) {
+                return testing::AssertionFailure()
+                       << "Expected data[" << i << "] to be greater than 0.";
+            }
+            if (i > 0 && results[i] < results[i - 1]) {
+                return testing::AssertionFailure()
+                       << "Expected data[" << i << "](" << results[i]
+                       << ") to be not less than data[" << i - 1 << "](" << results[i - 1] << ").";
+            }
+        }
+
+        readbuffer.Unmap();
+
+        return testing::AssertionSuccess();
+    };
+
+    // Timestamp reset may occur with a very small probability, which will make the order checking
+    // failed. To eliminate this interference, we will run the test again if it fails the first
+    // time.
+    if (!RunTest()) {
+        // Assert fatal failure for the test if it still fails.
+        ASSERT_TRUE(RunTest());
+    }
+}
+
 class TimestampQueryInsidePassesTests : public TimestampQueryTests {
   protected:
     void SetUp() override {
@@ -1302,11 +1379,14 @@ DAWN_INSTANTIATE_TEST(OcclusionQueryTests,
                       VulkanBackend());
 DAWN_INSTANTIATE_TEST(TimestampQueryTests,
                       D3D11Backend(),
-                      D3D12Backend(),
-                      MetalBackend(),
+                      D3D12Backend({"timestamp_quantization"}),
+                      D3D12Backend({}, {"timestamp_quantization"}),
+                      MetalBackend({"timestamp_quantization"}),
+                      MetalBackend({}, {"timestamp_quantization"}),
                       OpenGLBackend(),
                       OpenGLESBackend(),
-                      VulkanBackend());
+                      VulkanBackend({"timestamp_quantization"}),
+                      VulkanBackend({}, {"timestamp_quantization"}));
 DAWN_INSTANTIATE_TEST(TimestampQueryInsidePassesTests,
                       D3D11Backend(),
                       D3D12Backend(),
