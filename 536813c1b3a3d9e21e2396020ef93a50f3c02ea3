@@ -51,6 +51,24 @@
       "parentUuid": "8cf92c35_52aed232",
       "revId": "536813c1b3a3d9e21e2396020ef93a50f3c02ea3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a74f085_26b685fd",
+        "filename": "src/tint/lang/wgsl/common/allowed_features.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-03T14:35:17Z",
+      "side": 1,
+      "message": "Thanks!",
+      "parentUuid": "a6b89f57_acd6697f",
+      "revId": "536813c1b3a3d9e21e2396020ef93a50f3c02ea3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

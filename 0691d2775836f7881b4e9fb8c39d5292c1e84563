@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eacaae5b_93f7e41d",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-03T14:35:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "019ec8de_7cbea5d2",
+      "range": {
+        "startLine": 337,
+        "startChar": 74,
+        "endLine": 337,
+        "endChar": 90
+      },
+      "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ce2eba0e_575402b9",
@@ -71,6 +95,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca21145_53c882ca",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-03T14:35:17Z",
+      "side": 1,
+      "message": "Good suggestion, done.",
+      "parentUuid": "4be25da7_afe24f7c",
+      "range": {
+        "startLine": 971,
+        "startChar": 35,
+        "endLine": 972,
+        "endChar": 76
+      },
+      "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a390f64_7d3f96ab",
@@ -90,6 +138,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "44d10532_5ae730c5",
+        "filename": "src/tint/lang/wgsl/common/allowed_features.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-03T14:35:17Z",
+      "side": 1,
+      "message": "Could be, but our auto-generated enums aren\u0027t set up for `std::bitset` and I don\u0027t think we\u0027d want to use Tint\u0027s `EnumSet` here.",
+      "parentUuid": "8a390f64_7d3f96ab",
+      "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "16f66791_fd0be50d",
         "filename": "src/tint/lang/wgsl/common/allowed_features.h",
         "patchSetId": 4
@@ -101,6 +167,24 @@
       "writtenOn": "2023-11-03T13:50:50Z",
       "side": 1,
       "message": "Note that eventually I think we\u0027ll support the language features unconditionally and we can remove the wgsl::LanguageFeature from Tint so we don\u0027t need to keep validation code paths forever.",
+      "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2d9ae0e_fb9206a2",
+        "filename": "src/tint/lang/wgsl/common/allowed_features.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-03T14:35:17Z",
+      "side": 1,
+      "message": "Agree that Dawn will support this and other features unconditionally, but I\u0027m not sure that we\u0027d want to remove the validation from Tint. Somebody using Tint to convert SPIR-V to WGSL may want to control whether or not a feature is allowed because maybe other browsers don\u0027t support it yet.",
+      "parentUuid": "16f66791_fd0be50d",
       "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
