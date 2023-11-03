@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ae22cdd_f288bbe7",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T22:00:42Z",
+      "side": 1,
+      "message": "Ack! Created a bug for it for now.",
+      "parentUuid": "e07312f1_2dd649f8",
+      "revId": "3ddee3cf2771a16b4d8b6b064544335ffbcb3736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "27f0a07c_8ba36bd9",
@@ -41,6 +59,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "410a1961_5d26d56d",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 790,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T22:00:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27f0a07c_8ba36bd9",
+      "range": {
+        "startLine": 789,
+        "startChar": 6,
+        "endLine": 790,
+        "endChar": 76
+      },
+      "revId": "3ddee3cf2771a16b4d8b6b064544335ffbcb3736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "05bf7d04_655f031e",
@@ -54,6 +96,24 @@
       "writtenOn": "2023-11-01T23:59:53Z",
       "side": 1,
       "message": "ditto - check state inside callback",
+      "revId": "3ddee3cf2771a16b4d8b6b064544335ffbcb3736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c68c4d1e_bb9e4f1d",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 825,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-03T22:00:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "05bf7d04_655f031e",
       "revId": "3ddee3cf2771a16b4d8b6b064544335ffbcb3736",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
