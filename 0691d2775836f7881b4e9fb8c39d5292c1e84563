@@ -69,6 +69,40 @@
       },
       "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a390f64_7d3f96ab",
+        "filename": "src/tint/lang/wgsl/common/allowed_features.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T13:50:50Z",
+      "side": 1,
+      "message": "u-nit: This looks like it could almost be a bitset.",
+      "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16f66791_fd0be50d",
+        "filename": "src/tint/lang/wgsl/common/allowed_features.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T13:50:50Z",
+      "side": 1,
+      "message": "Note that eventually I think we\u0027ll support the language features unconditionally and we can remove the wgsl::LanguageFeature from Tint so we don\u0027t need to keep validation code paths forever.",
+      "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
