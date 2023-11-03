@@ -706,6 +706,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dab0b089_99efe417",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2023-11-03T20:40:44Z",
+      "side": 1,
+      "message": "@Austin, per D3D dev\u0027s recollection, the locks are temporarily disabled when you do as you describe. But it\u0027s delving into \"esoteric territory.\"",
+      "parentUuid": "6bf60354_b5ef69f8",
+      "range": {
+        "startLine": 137,
+        "startChar": 16,
+        "endLine": 137,
+        "endChar": 28
+      },
+      "revId": "f19fa9c3a5c8ad4865dc6e29c96946ca00f50aa5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "32bed658_aacf5127",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 9
