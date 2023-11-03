@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-11-02 06:42:34PM
+# Last rolled: 2023-11-03 04:12:55PM
 
 # snorm / stencil8 issues
 crbug.com/dawn/2080 [ angle-opengl ] webgpu:api,operation,resource_init,texture_zero:uninitialized_texture_is_zero:dimension="2d";readMethod="CopyToBuffer";format="stencil8" [ Failure ]
