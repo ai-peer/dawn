@@ -45,6 +45,30 @@
       },
       "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4be25da7_afe24f7c",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 972,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-03T12:59:28Z",
+      "side": 1,
+      "message": "We usually try to avoid exposing the tint containers, for this hypothetical day where we have a Public API. I\u0027m not convinced an STL interface is all that much more stable, so no opinions on exposing the `tint::Vector` directly.",
+      "parentUuid": "ce2eba0e_575402b9",
+      "range": {
+        "startLine": 971,
+        "startChar": 35,
+        "endLine": 972,
+        "endChar": 76
+      },
+      "revId": "0691d2775836f7881b4e9fb8c39d5292c1e84563",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
