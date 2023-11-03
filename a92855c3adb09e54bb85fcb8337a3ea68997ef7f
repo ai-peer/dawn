@@ -22,6 +22,30 @@
       },
       "revId": "a92855c3adb09e54bb85fcb8337a3ea68997ef7f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5655eb8a_75b0f3cf",
+        "filename": "tools/src/cts/expectations/tags_test.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-03T23:52:35Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "51dcf219_5e855998",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "a92855c3adb09e54bb85fcb8337a3ea68997ef7f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
