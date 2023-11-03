@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "d523b0ad_ff593ad9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 9
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T17:42:47Z",
+      "side": 1,
+      "message": "pushes on main only happen when something lands upstream in googlesource. that seems like then PRs won\u0027t get checked at the right time.\n\nwe could try to make it happen when PRs are opened or when they get new commits, but that also doesn\u0027t work well because we need to wait for the import/copybara check to *finish* - and that doesn\u0027t happen immediately after the PR is updated\n\nI\u0027ll land this for now but we can see if there are other ways to make it more efficient",
+      "parentUuid": "0a3e0eb0_75315300",
+      "revId": "be12ce838476056d19c76cae8184857472f3c8f7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dd5e3960_bc334961",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 9
