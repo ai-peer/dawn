@@ -33,6 +33,24 @@
       "message": "nit: const\u0026 given this is a big object. Although we end up copying anyway.",
       "revId": "3779924585866b21c85e6d4d41957116a89730d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7862d2f5_387a5b84",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-03T14:44:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3de3c5e_f5df91be",
+      "revId": "3779924585866b21c85e6d4d41957116a89730d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
