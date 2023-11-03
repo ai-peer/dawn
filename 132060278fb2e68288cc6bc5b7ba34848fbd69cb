@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b0251471_cfd128ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "CHECK(false) is for reachable, but not valid and we want to prevent further execution.\n\nunreachable is for actually unreachable code",
+      "parentUuid": "3104cf9c_b845ee6a",
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6573695d_9593bceb",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 7
@@ -31,6 +49,30 @@
       "writtenOn": "2023-10-20T20:40:07Z",
       "side": 1,
       "message": "I think these if blocks can be simplified a bit to make it a little easier to follow with less nested blocks:\n\n```\nif (isPoll) {\n    return WaitAnyPollOnly(futures);\n}\n\nStackVector/optional\u003cTrackedFutureWaitInfo\u003e saved;\nif (hasSystemEvents \u0026\u0026 hasQueueEvents) {\n    // Convert queue events to system events.\n}\n\nbool anyCompleted \u003d false;\nif (hasSystemEvents) {\n    anyCompleted \u003d WaitAnySystemEvents();\n} else {\n    DAWN_TRY_ASSIGN(anyCompleted, WaitForQueueSerial());\n}\n\n// Restore any saved stuff here...\n\nif (anyCompleted) {\n    WaitAnyPollOnly(futures);\n}\nreturn anyCompleted;\n\n```",
+      "range": {
+        "startLine": 2163,
+        "startChar": 4,
+        "endLine": 2163,
+        "endChar": 33
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1c8ded83_c1925ff6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "hmm ok I made it:\n\n1. partition\n2. if shouldPoll, Poll(), return\n3. wait\n4. poll",
+      "parentUuid": "6573695d_9593bceb",
       "range": {
         "startLine": 2163,
         "startChar": 4,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "282dc8f6_cb87919c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 2176,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "af30166e_a5c46b70",
+      "range": {
+        "startLine": 2176,
+        "startChar": 8,
+        "endLine": 2176,
+        "endChar": 66
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "881d13de_038ee734",
@@ -77,6 +143,30 @@
       "writtenOn": "2023-10-20T20:40:07Z",
       "side": 1,
       "message": "IIUC, this is only a `WeakRef` because a raw pointer isn\u0027t as nice? It looks like it\u0027s impossible for the `Queue` to not exist if the event still exists. Maybe we can add a comment about the lifetime here.\n\nThis kinda usage of the `WeakRef` makes the `Promote` lock much more glaring and ugly 😞",
+      "range": {
+        "startLine": 249,
+        "startChar": 4,
+        "endLine": 249,
+        "endChar": 26
+      },
+      "revId": "132060278fb2e68288cc6bc5b7ba34848fbd69cb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e02d02d4_23e09544",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 7
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "Same problem you have with the buffer map wait status. We need the queue inside Complete. Complete isn\u0027t called until you call the callback.\n\nThe application could make the event, then drop everything, and then call instanceProcessEvents",
+      "parentUuid": "881d13de_038ee734",
       "range": {
         "startLine": 249,
         "startChar": 4,

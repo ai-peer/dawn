@@ -71,6 +71,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60d61fcb_ec0b1d52",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2139,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "80d39a69_d5153357",
+      "range": {
+        "startLine": 2139,
+        "startChar": 39,
+        "endLine": 2139,
+        "endChar": 66
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "62e6db3b_6fb85bc1",
@@ -165,6 +189,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f8e004f9_abc15f1e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2190,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d09d433e_1c02156b",
+      "range": {
+        "startLine": 2190,
+        "startChar": 12,
+        "endLine": 2190,
+        "endChar": 24
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61959445_635a6225",
@@ -212,6 +260,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd42f36c_7fb15485",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2206,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "loko had the same concern; let\u0027s move discussion to https://dawn-review.googlesource.com/c/dawn/+/156301/comment/6573695d_9593bceb/. I changed things a bit to try to address this.",
+      "parentUuid": "1501ebee_89796348",
+      "range": {
+        "startLine": 2155,
+        "startChar": 0,
+        "endLine": 2206,
+        "endChar": 5
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1afbc646_a45b04b5",
@@ -225,6 +297,30 @@
       "writtenOn": "2023-10-19T01:32:31Z",
       "side": 1,
       "message": "This would be like, an error from vkWaitForFences? Does that lose the device? (If so, mention that here as an explanation for why we\u0027re marking all futures as ready.)",
+      "range": {
+        "startLine": 81,
+        "startChar": 23,
+        "endLine": 81,
+        "endChar": 41
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a7b5f8c_1ba2e345",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1afbc646_a45b04b5",
       "range": {
         "startLine": 81,
         "startChar": 23,
@@ -258,6 +354,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "26953b0f_e384073d",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 199,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72f4af75_05373e80",
+      "range": {
+        "startLine": 199,
+        "startChar": 43,
+        "endLine": 199,
+        "endChar": 45
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2d9d58b9_3f369730",
@@ -271,6 +391,24 @@
       "writtenOn": "2023-10-19T01:32:31Z",
       "side": 1,
       "message": "nit: kBeginningOfGPUTime",
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de046294_e4da3101",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2d9d58b9_3f369730",
       "revId": "5674b5300082499a3ab949d25187b957752667ca",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

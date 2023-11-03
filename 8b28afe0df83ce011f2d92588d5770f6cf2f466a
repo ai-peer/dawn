@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b9a4b3b_6237875c",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-03T02:06:04Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "4ecb5c0b_949ebccf",
+      "range": {
+        "startLine": 41,
+        "startChar": 5,
+        "endLine": 41,
+        "endChar": 19
+      },
+      "revId": "8b28afe0df83ce011f2d92588d5770f6cf2f466a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6eb8b211_68b6aa3d",
