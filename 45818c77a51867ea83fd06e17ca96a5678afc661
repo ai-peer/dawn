@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4c5521ea_7c2c10f9",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-03T01:41:45Z",
+      "side": 1,
+      "message": "Do you mean the index should be the acutal index set in colorAttachments/storageAttachments?",
+      "parentUuid": "ddef4478_a04dc5bb",
+      "revId": "45818c77a51867ea83fd06e17ca96a5678afc661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffa5a866_98a7b4d0",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 9
@@ -65,6 +83,29 @@
       "writtenOn": "2023-11-02T14:33:50Z",
       "side": 1,
       "message": "Both ValidateAttachmentSize and ValidateColorAttachmentSampleCount are called around AddAttachment, they could be moved to be inside AddAttachment itself. (there would be a second entrypoint for adding a resolve target most likely, and an internal function that takes a boolean resolveTarget vs. not, something like that)",
+      "revId": "45818c77a51867ea83fd06e17ca96a5678afc661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73eb6f77_55f919da",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-03T01:41:45Z",
+      "side": 1,
+      "message": "We can use `!validationState.HasAttachment()` instead.",
+      "range": {
+        "startLine": 698,
+        "startChar": 0,
+        "endLine": 700,
+        "endChar": 55
+      },
       "revId": "45818c77a51867ea83fd06e17ca96a5678afc661",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
