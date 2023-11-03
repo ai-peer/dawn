@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1027439_a492a8cc",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-03T15:53:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58f21000_435a1768",
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c5349f3c_b5c4b4b9",
@@ -109,6 +127,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98bd7b14_561324db",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-03T15:53:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "322f05b9_a51da9c2",
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a95e10e8_929895c0",
@@ -122,6 +158,24 @@
       "writtenOn": "2023-11-03T15:16:24Z",
       "side": 1,
       "message": "nit: unused?",
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2494dd8d_b8f5f351",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-03T15:53:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a95e10e8_929895c0",
       "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

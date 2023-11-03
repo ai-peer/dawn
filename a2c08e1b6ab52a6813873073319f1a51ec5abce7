@@ -16,6 +16,24 @@
       "message": "nit: dawn:",
       "revId": "a2c08e1b6ab52a6813873073319f1a51ec5abce7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf273787_ee68218d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-03T15:53:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2364f390_fbc7a621",
+      "revId": "a2c08e1b6ab52a6813873073319f1a51ec5abce7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
