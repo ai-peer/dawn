@@ -33,6 +33,97 @@
       "message": "Corentin, do you have any comments? thanks",
       "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "940cc1a4_0301d828",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T15:16:24Z",
+      "side": 1,
+      "message": "LGTM too with the open thread about singlethreaded.",
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58f21000_435a1768",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T15:16:24Z",
+      "side": 1,
+      "message": "nit: we could avoid the need for this by not nesting the Scoped... inside CommandRecordingContext and instead having them be directly in dawn::native::d3d11. Ditto in QuerySet, RenderPipeline, Texture, ComputePipeline, Buffer, CommandBuffer.",
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5349f3c_b5c4b4b9",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 187,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T15:16:24Z",
+      "side": 1,
+      "message": "nit: Initialize",
+      "range": {
+        "startLine": 187,
+        "startChar": 36,
+        "endLine": 187,
+        "endChar": 45
+      },
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "322f05b9_a51da9c2",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T15:16:24Z",
+      "side": 1,
+      "message": "Some comments explaining why these are useful, when to use them etc would be good to keep as a reference when we look at this code again in 3 years.",
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a95e10e8_929895c0",
+        "filename": "src/dawn/native/d3d11/QueueD3D11.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 33,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T15:16:24Z",
+      "side": 1,
+      "message": "nit: unused?",
+      "revId": "1a6d3fce795562ce27a505a49f41250c683d48a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
