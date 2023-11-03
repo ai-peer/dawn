@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa991fcf_848de432",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-03T23:02:00Z",
+      "side": 1,
+      "message": "Ran webgpu_compat_cts locally with no unexpected failures.",
+      "revId": "d3d66f998250abecf80a87a194071975846d59b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
