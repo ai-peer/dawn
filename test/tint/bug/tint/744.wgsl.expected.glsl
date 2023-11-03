@@ -8,7 +8,7 @@ struct Uniforms {
   uint pad_1;
 };
 
-layout(binding = 0, std430) buffer Matrix_ssbo {
+layout(binding = 0, std430) buffer Matrix_ssbo_0 {
   uint numbers[];
 } firstMatrix;
 
@@ -20,7 +20,7 @@ layout(binding = 2, std430) buffer Matrix_ssbo_2 {
   uint numbers[];
 } resultMatrix;
 
-layout(binding = 3, std140) uniform uniforms_block_ubo {
+layout(binding = 3, std140) uniform uniforms_block_ubo_3 {
   Uniforms inner;
 } uniforms;
 

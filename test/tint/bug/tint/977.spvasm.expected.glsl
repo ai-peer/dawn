@@ -7,7 +7,7 @@ struct Uniforms {
 };
 
 uvec3 tint_symbol = uvec3(0u, 0u, 0u);
-layout(binding = 2, std430) buffer ResultMatrix_ssbo {
+layout(binding = 2, std430) buffer ResultMatrix_ssbo_2 {
   float numbers[];
 } resultMatrix;
 

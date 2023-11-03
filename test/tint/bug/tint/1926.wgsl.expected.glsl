@@ -8,7 +8,7 @@ uint tint_workgroupUniformLoad_sh_atomic_failed() {
   return result;
 }
 
-layout(binding = 4, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 4, std430) buffer tint_symbol_block_ssbo_4 {
   uint inner;
 } tint_symbol;
 

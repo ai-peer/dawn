@@ -42,7 +42,7 @@ struct Outer_std140 {
   Inner_std140 a[4];
 };
 
-layout(binding = 0, std140) uniform a_block_std140_ubo {
+layout(binding = 0, std140) uniform a_block_std140_ubo_0 {
   Outer_std140 inner[4];
 } a;
 

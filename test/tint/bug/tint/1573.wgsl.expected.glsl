@@ -6,7 +6,7 @@ struct atomic_compare_exchange_result_u32 {
 };
 
 
-layout(binding = 0, std430) buffer a_block_ssbo {
+layout(binding = 0, std430) buffer a_block_ssbo_0 {
   uint inner;
 } a;
 

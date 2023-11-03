@@ -90,15 +90,15 @@ struct Particles {
   Particle particles[5];
 };
 
-layout(binding = 0, std140) uniform params_block_ubo {
+layout(binding = 0, std140) uniform params_block_ubo_0 {
   SimParams inner;
 } params;
 
-layout(binding = 1, std430) buffer particlesA_block_ssbo {
+layout(binding = 1, std430) buffer particlesA_block_ssbo_1 {
   Particles inner;
 } particlesA;
 
-layout(binding = 2, std430) buffer particlesA_block_ssbo_1 {
+layout(binding = 2, std430) buffer particlesA_block_ssbo_2 {
   Particles inner;
 } particlesB;
 

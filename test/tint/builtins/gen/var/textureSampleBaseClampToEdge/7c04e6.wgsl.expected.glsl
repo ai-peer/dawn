@@ -46,7 +46,7 @@ struct ExternalTextureParams_std140 {
   uint pad_3;
 };
 
-layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo {
+layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo_3 {
   ExternalTextureParams_std140 inner;
 } ext_tex_params;
 
@@ -86,7 +86,7 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
   return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -158,7 +158,7 @@ struct ExternalTextureParams_std140 {
   uint pad_3;
 };
 
-layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo {
+layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo_3 {
   ExternalTextureParams_std140 inner;
 } ext_tex_params;
 
@@ -198,7 +198,7 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
   return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -264,7 +264,7 @@ struct ExternalTextureParams_std140 {
   uint pad_3;
 };
 
-layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo {
+layout(binding = 3, std140) uniform ext_tex_params_block_std140_ubo_3 {
   ExternalTextureParams_std140 inner;
 } ext_tex_params;
 
@@ -304,7 +304,7 @@ ExternalTextureParams conv_ExternalTextureParams(ExternalTextureParams_std140 va
   return ExternalTextureParams(val.numPlanes, val.doYuvToRgbConversionOnly, val.pad, val.pad_1, val.yuvToRgbConversionMatrix, val.gammaDecodeParams, val.gammaEncodeParams, val.gamutConversionMatrix, mat3x2(val.coordTransformationMatrix_0, val.coordTransformationMatrix_1, val.coordTransformationMatrix_2), val.pad_2, val.pad_3);
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 

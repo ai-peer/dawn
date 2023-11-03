@@ -1,7 +1,7 @@
 #version 310 es
 
 uniform highp isampler2DMS arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   ivec4 inner;
 } prevent_dce;
 
@@ -29,7 +29,7 @@ void main() {
 precision highp float;
 
 uniform highp isampler2DMS arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   ivec4 inner;
 } prevent_dce;
 
@@ -51,7 +51,7 @@ void main() {
 #version 310 es
 
 uniform highp isampler2DMS arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   ivec4 inner;
 } prevent_dce;
 

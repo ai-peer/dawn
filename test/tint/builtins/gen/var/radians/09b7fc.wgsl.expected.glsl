@@ -5,7 +5,7 @@ vec4 tint_radians(vec4 param_0) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -36,7 +36,7 @@ vec4 tint_radians(vec4 param_0) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -61,7 +61,7 @@ vec4 tint_radians(vec4 param_0) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 

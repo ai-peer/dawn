@@ -11,7 +11,7 @@ struct S {
   uint i;
 };
 
-layout(binding = 0, std430) buffer io_block_ssbo {
+layout(binding = 0, std430) buffer io_block_ssbo_0 {
   S inner;
 } io;
 

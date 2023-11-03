@@ -6,7 +6,7 @@ struct LightData {
   float radius;
 };
 
-layout(binding = 0, std430) buffer LightsBuffer_ssbo {
+layout(binding = 0, std430) buffer LightsBuffer_ssbo_0 {
   LightData lights[];
 } lightsBuffer;
 
@@ -19,7 +19,7 @@ struct Tiles {
   TileLightIdData data[4];
 };
 
-layout(binding = 0, std430) buffer tileLightId_block_ssbo {
+layout(binding = 0, std430) buffer tileLightId_block_ssbo_0 {
   Tiles inner;
 } tileLightId;
 
@@ -34,7 +34,7 @@ struct Config {
   uint pad_1;
 };
 
-layout(binding = 0, std140) uniform config_block_ubo {
+layout(binding = 0, std140) uniform config_block_ubo_0 {
   Config inner;
 } config;
 
@@ -46,7 +46,7 @@ struct Uniforms {
   vec4 fullScreenSize;
 };
 
-layout(binding = 0, std140) uniform uniforms_block_ubo {
+layout(binding = 0, std140) uniform uniforms_block_ubo_0 {
   Uniforms inner;
 } uniforms;
 

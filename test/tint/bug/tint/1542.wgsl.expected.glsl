@@ -5,7 +5,7 @@ struct UniformBuffer {
   uint pad;
 };
 
-layout(binding = 0, std140) uniform u_input_block_ubo {
+layout(binding = 0, std140) uniform u_input_block_ubo_0 {
   UniformBuffer inner;
 } u_input;
 

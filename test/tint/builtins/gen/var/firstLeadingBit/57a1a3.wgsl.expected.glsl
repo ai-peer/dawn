@@ -15,7 +15,7 @@ int tint_first_leading_bit(int v) {
   return int((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   int inner;
 } prevent_dce;
 
@@ -56,7 +56,7 @@ int tint_first_leading_bit(int v) {
   return int((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   int inner;
 } prevent_dce;
 
@@ -91,7 +91,7 @@ int tint_first_leading_bit(int v) {
   return int((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   int inner;
 } prevent_dce;
 

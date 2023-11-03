@@ -18,11 +18,11 @@ struct Particle {
   uint pad_6;
 };
 
-layout(binding = 3, std430) buffer Particles_ssbo {
+layout(binding = 3, std430) buffer Particles_ssbo_3 {
   Particle p[];
 } particles;
 
-layout(binding = 4, std140) uniform sim_block_ubo {
+layout(binding = 4, std140) uniform sim_block_ubo_4 {
   Simulation inner;
 } sim;
 

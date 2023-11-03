@@ -72,7 +72,7 @@ struct Nephews {
   float louie;
 };
 
-layout(binding = 0, std430) buffer Nephews_ssbo {
+layout(binding = 0, std430) buffer Nephews_ssbo_0 {
   float huey;
   float dewey;
   float louie;
@@ -95,7 +95,7 @@ struct Nephews {
   float louie;
 };
 
-layout(binding = 0, std430) buffer Nephews_ssbo {
+layout(binding = 0, std430) buffer Nephews_ssbo_0 {
   float huey;
   float dewey;
   float louie;

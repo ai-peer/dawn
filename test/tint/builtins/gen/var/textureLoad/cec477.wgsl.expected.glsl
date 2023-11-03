@@ -1,7 +1,7 @@
 #version 310 es
 
 layout(r32i) uniform highp iimage3D arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   ivec4 inner;
 } prevent_dce;
 
@@ -28,7 +28,7 @@ void main() {
 precision highp float;
 
 layout(r32i) uniform highp iimage3D arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   ivec4 inner;
 } prevent_dce;
 
@@ -49,7 +49,7 @@ void main() {
 #version 310 es
 
 layout(r32i) uniform highp iimage3D arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   ivec4 inner;
 } prevent_dce;
 

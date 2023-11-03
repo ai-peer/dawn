@@ -13,11 +13,11 @@ struct S_std140 {
   vec2 m_1;
 };
 
-layout(binding = 0, std430) buffer SSBO_block_ssbo {
+layout(binding = 0, std430) buffer SSBO_block_ssbo_0 {
   S inner;
 } SSBO;
 
-layout(binding = 0, std140) uniform SSBO_block_std140_ubo {
+layout(binding = 0, std140) uniform SSBO_block_std140_ubo_0 {
   S_std140 inner;
 } UBO;
 

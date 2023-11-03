@@ -144,7 +144,7 @@ struct S_std140 {
   Inner_std140 arr[8];
 };
 
-layout(binding = 0, std140) uniform ub_block_std140_ubo {
+layout(binding = 0, std140) uniform ub_block_std140_ubo_0 {
   S_std140 inner;
 } ub;
 

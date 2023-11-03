@@ -53,7 +53,7 @@ struct Inner {
   f16mat4x2 arr2_mat4x2_f16[2];
 };
 
-layout(binding = 0, std430) buffer S_ssbo {
+layout(binding = 0, std430) buffer S_ssbo_0 {
   Inner arr[];
 } sb;
 

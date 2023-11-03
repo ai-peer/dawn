@@ -87,7 +87,7 @@ struct S_std140 {
   Inner array_struct_inner[4];
 };
 
-layout(binding = 0, std140) uniform ub_block_std140_ubo {
+layout(binding = 0, std140) uniform ub_block_std140_ubo_0 {
   S_std140 inner;
 } ub;
 

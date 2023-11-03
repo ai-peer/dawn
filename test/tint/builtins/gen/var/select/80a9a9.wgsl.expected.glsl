@@ -5,7 +5,7 @@ bvec3 tint_select(bvec3 param_0, bvec3 param_1, bvec3 param_2) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   int inner;
 } prevent_dce;
 
@@ -38,7 +38,7 @@ bvec3 tint_select(bvec3 param_0, bvec3 param_1, bvec3 param_2) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   int inner;
 } prevent_dce;
 
@@ -65,7 +65,7 @@ bvec3 tint_select(bvec3 param_0, bvec3 param_1, bvec3 param_2) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   int inner;
 } prevent_dce;
 

@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0, std430) buffer s_block_ssbo {
+layout(binding = 0, std430) buffer s_block_ssbo_0 {
   ivec3 inner;
 } s;
 

@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 1, std430) buffer Result_ssbo {
+layout(binding = 1, std430) buffer Result_ssbo_1 {
   float values[];
 } result;
 

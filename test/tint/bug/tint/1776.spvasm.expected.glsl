@@ -8,7 +8,7 @@ struct S {
   uint pad_2;
 };
 
-layout(binding = 0, std430) buffer sb_block_ssbo {
+layout(binding = 0, std430) buffer sb_block_ssbo_0 {
   S inner[];
 } sb;
 

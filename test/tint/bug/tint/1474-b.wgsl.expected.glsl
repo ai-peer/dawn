@@ -4,7 +4,7 @@ bug/tint/1474-b.wgsl:7:5 warning: code is unreachable
 
 #version 310 es
 
-layout(binding = 0, std430) buffer non_uniform_value_block_ssbo {
+layout(binding = 0, std430) buffer non_uniform_value_block_ssbo_0 {
   int inner;
 } non_uniform_value;
 

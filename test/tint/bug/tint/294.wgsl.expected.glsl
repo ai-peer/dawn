@@ -11,7 +11,7 @@ struct Light {
   uint pad_1;
 };
 
-layout(binding = 1, std430) buffer Lights_ssbo {
+layout(binding = 1, std430) buffer Lights_ssbo_1 {
   Light light[];
 } lights;
 

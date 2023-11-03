@@ -19,7 +19,7 @@ struct S_std140 {
   uint pad_1;
 };
 
-layout(binding = 0, std140) uniform data_block_std140_ubo {
+layout(binding = 0, std140) uniform data_block_std140_ubo_0 {
   S_std140 inner;
 } data;
 

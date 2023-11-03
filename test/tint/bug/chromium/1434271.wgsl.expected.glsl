@@ -187,7 +187,7 @@ struct RenderParams {
   uint pad_1;
 };
 
-layout(binding = 5, std140) uniform render_params_block_ubo {
+layout(binding = 5, std140) uniform render_params_block_ubo_5 {
   RenderParams inner;
 } render_params;
 
@@ -283,11 +283,11 @@ struct Particle {
   uint pad_4;
 };
 
-layout(binding = 0, std140) uniform sim_params_block_ubo {
+layout(binding = 0, std140) uniform sim_params_block_ubo_0 {
   SimulationParams inner;
 } sim_params;
 
-layout(binding = 1, std430) buffer Particles_ssbo {
+layout(binding = 1, std430) buffer Particles_ssbo_1 {
   Particle particles[];
 } data;
 
@@ -364,15 +364,15 @@ struct UBO {
   uint pad_2;
 };
 
-layout(binding = 3, std140) uniform ubo_block_ubo {
+layout(binding = 3, std140) uniform ubo_block_ubo_3 {
   UBO inner;
 } ubo;
 
-layout(binding = 4, std430) buffer Buffer_ssbo {
+layout(binding = 4, std430) buffer Buffer_ssbo_4 {
   float weights[];
 } buf_in;
 
-layout(binding = 5, std430) buffer Buffer_ssbo_1 {
+layout(binding = 5, std430) buffer Buffer_ssbo_5 {
   float weights[];
 } buf_out;
 

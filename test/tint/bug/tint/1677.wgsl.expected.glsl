@@ -5,7 +5,7 @@ struct Input {
   uint pad;
 };
 
-layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 0, std430) buffer tint_symbol_block_ssbo_0 {
   Input inner;
 } tint_symbol;
 

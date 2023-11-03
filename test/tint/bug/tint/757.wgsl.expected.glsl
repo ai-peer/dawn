@@ -4,7 +4,7 @@ struct Constants {
   int level;
 };
 
-layout(binding = 3, std430) buffer Result_ssbo {
+layout(binding = 3, std430) buffer Result_ssbo_3 {
   float values[];
 } result;
 

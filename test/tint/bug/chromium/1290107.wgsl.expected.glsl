@@ -4,7 +4,7 @@ struct S {
   float f;
 };
 
-layout(binding = 0, std430) buffer arr_block_ssbo {
+layout(binding = 0, std430) buffer arr_block_ssbo_0 {
   S inner[];
 } arr;
 

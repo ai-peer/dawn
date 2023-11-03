@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0, std430) buffer S_ssbo {
+layout(binding = 0, std430) buffer S_ssbo_0 {
   int arr[];
 } s;
 

@@ -22,15 +22,15 @@ shared uint x_35;
 shared uint x_36;
 shared uint x_37;
 uvec3 x_3 = uvec3(0u, 0u, 0u);
-layout(binding = 1, std140) uniform x_6_block_ubo {
+layout(binding = 1, std140) uniform x_6_block_ubo_1 {
   S_2 inner;
 } x_6;
 
-layout(binding = 2, std430) buffer S_3_ssbo {
+layout(binding = 2, std430) buffer S_3_ssbo_2 {
   vec4 field0[];
 } x_9;
 
-layout(binding = 3, std430) buffer S_4_ssbo {
+layout(binding = 3, std430) buffer S_4_ssbo_3 {
   vec4 field0[];
 } x_12;
 

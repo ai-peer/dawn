@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   mat4x3 inner;
 } prevent_dce;
 
@@ -33,7 +33,7 @@ void main() {
 #version 310 es
 precision highp float;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   mat4x3 inner;
 } prevent_dce;
 
@@ -60,7 +60,7 @@ void main() {
 }
 #version 310 es
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   mat4x3 inner;
 } prevent_dce;
 

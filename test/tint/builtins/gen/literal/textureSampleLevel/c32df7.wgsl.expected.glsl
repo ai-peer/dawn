@@ -2,7 +2,7 @@
 
 uniform highp samplerCube arg_0_arg_1;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -29,7 +29,7 @@ precision highp float;
 
 uniform highp samplerCube arg_0_arg_1;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -50,7 +50,7 @@ void main() {
 
 uniform highp samplerCube arg_0_arg_1;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 

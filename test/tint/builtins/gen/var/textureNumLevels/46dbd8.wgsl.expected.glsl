@@ -4,11 +4,11 @@ struct tint_symbol {
   uint texture_builtin_value_0;
 };
 
-layout(binding = 0, std140) uniform tint_symbol_1_block_ubo {
+layout(binding = 0, std140) uniform tint_symbol_1_block_ubo_0 {
   tint_symbol inner;
 } tint_symbol_1;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 
@@ -37,11 +37,11 @@ struct tint_symbol {
   uint texture_builtin_value_0;
 };
 
-layout(binding = 0, std140) uniform tint_symbol_1_block_ubo {
+layout(binding = 0, std140) uniform tint_symbol_1_block_ubo_0 {
   tint_symbol inner;
 } tint_symbol_1;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 
@@ -64,11 +64,11 @@ struct tint_symbol {
   uint texture_builtin_value_0;
 };
 
-layout(binding = 0, std140) uniform tint_symbol_1_block_ubo {
+layout(binding = 0, std140) uniform tint_symbol_1_block_ubo_0 {
   tint_symbol inner;
 } tint_symbol_1;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 

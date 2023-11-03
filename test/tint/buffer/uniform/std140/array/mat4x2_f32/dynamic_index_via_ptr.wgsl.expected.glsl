@@ -7,7 +7,7 @@ struct mat4x2_f32 {
   vec2 col3;
 };
 
-layout(binding = 0, std140) uniform a_block_std140_ubo {
+layout(binding = 0, std140) uniform a_block_std140_ubo_0 {
   mat4x2_f32 inner[4];
 } a;
 

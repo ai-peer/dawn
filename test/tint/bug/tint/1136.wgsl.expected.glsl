@@ -8,7 +8,7 @@ struct Buffer {
   uint data;
 };
 
-layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 0, std430) buffer tint_symbol_block_ssbo_0 {
   Buffer inner;
 } tint_symbol;
 
