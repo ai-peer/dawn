@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a29a4bdd_53f1021b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 424,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-11-03T14:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f8344843_41766b42",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5bbcc9e_756d144d",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-11-03T00:17:57Z",
       "side": 1,
       "message": "Isn\u0027t that initialState -\u003e read dependency?",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e520c485_ec4002aa",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-11-03T14:30:07Z",
+      "side": 1,
+      "message": "Either initial state or there have been previous reads (but no writes). In practice I believe only possible for the first use to be a read either with host mapped pointer or if the `LazyClearResourceOnFirstUse` toggle has been disabled (otherwise if the first use was a read we would have inserted a clear before it). I changed the comment to clarify.\n\nNote that this is not merely an optimization but necessary for correctness, as otherwise we could end up with a barrier with `srcStages \u003d 0`.",
+      "parentUuid": "f5bbcc9e_756d144d",
       "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f661073c_1d122f61",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-11-03T14:30:07Z",
+      "side": 1,
+      "message": "Avoiding writing `MapRead` would work but would negatively impact latency when mapping for reading.\n\nAfter writing data to the buffer on the GPU, we need a barrier to make the write visible, even for `HOST_COHERENT` memory (that just avoids the need for `vkInvalidateMappedMemoryRanges`). Inserting this barrier when calling `MapAsyncImpl` means we need to wait for the command to finish executing before we can call the callback (we bump the last usage serial by calling `MarkUsedInPendingCommands`).\n\nTo reduce the latency we transition the buffer eagerly at the end of any command buffer in which it is written to. That means we don\u0027t need to insert a barrier in `MapAsyncImpl` (`TransitionUsageNow` will return `false` as `mReadUsage` already contains `MapRead`).\n\nIf we avoid writing the `MapRead` we will need a barrier when we call `TransitionUsageNow` in `MapAsyncImpl`. So we will insert a barrier, have to wait for it to complete, and increase the latency.",
+      "parentUuid": "4e448ef2_7ff39e6f",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ec293555_68e29d6e",
@@ -99,6 +153,24 @@
       "writtenOn": "2023-11-03T00:17:57Z",
       "side": 1,
       "message": "nit: .Get is not 100% cheap, we could call it only once.",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9170b2da_8647f79f",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1016,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-11-03T14:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ec293555_68e29d6e",
       "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f4ea4d3_5bef8ced",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1329,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-11-03T14:30:07Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e9ec6d17_594a4d44",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1439d286_b68d64c4",
@@ -133,6 +223,24 @@
       "writtenOn": "2023-11-03T00:17:57Z",
       "side": 1,
       "message": "This is hard to understand why this is needed and sufficient. We can only aggregate stages on textures when readonly and with the same usage, otherwise the layout may be different. Maybe inverting the way the condition is done could help:\n\n```\n// Only aggregate stages if we can reuse the same layout.\nif (!(usage \u003d\u003d lastSyncInfo-\u003eusage \u0026\u0026 isReadOnly)) {\n\n}\n```\n\nDitto for the Merge above.",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "197dc810_ab05c538",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-11-03T14:30:07Z",
+      "side": 1,
+      "message": "I think the new version should be clearer.",
+      "parentUuid": "1439d286_b68d64c4",
       "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
