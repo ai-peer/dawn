@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "61387cce_666a5ec8",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T13:45:33Z",
+      "side": 1,
+      "message": "or DepthStencil, yeah here the index doesn\u0027t relate directly to the thing in the render pass descriptor so it will be hard for developers to figure out what the exact issue is. But let\u0027s do that as a follow-up.",
+      "parentUuid": "4c5521ea_7c2c10f9",
+      "revId": "45818c77a51867ea83fd06e17ca96a5678afc661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ffa5a866_98a7b4d0",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 9
