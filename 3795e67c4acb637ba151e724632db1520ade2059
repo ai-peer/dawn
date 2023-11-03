@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dba7b724_1eb79ddf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T14:50:18Z",
+      "side": 1,
+      "message": "LGTM! There\u0027s one tiny request for change and feel free to CQ after! This is a great (if totally mind bending for the buffer case) optimization. Thank you again for your patience pushing this forward.",
+      "revId": "3795e67c4acb637ba151e724632db1520ade2059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b0ccf11_d57656e6",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1347,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T14:50:18Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "3795e67c4acb637ba151e724632db1520ade2059",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41701641_d9b2bb1d",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T14:50:18Z",
+      "side": 1,
+      "message": "Ack!",
+      "parentUuid": "e520c485_ec4002aa",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e448ef2_7ff39e6f",
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Avoiding writing `MapRead` would work but would negatively impact latency when mapping for reading.\n\nAfter writing data to the buffer on the GPU, we need a barrier to make the write visible, even for `HOST_COHERENT` memory (that just avoids the need for `vkInvalidateMappedMemoryRanges`). Inserting this barrier when calling `MapAsyncImpl` means we need to wait for the command to finish executing before we can call the callback (we bump the last usage serial by calling `MarkUsedInPendingCommands`).\n\nTo reduce the latency we transition the buffer eagerly at the end of any command buffer in which it is written to. That means we don\u0027t need to insert a barrier in `MapAsyncImpl` (`TransitionUsageNow` will return `false` as `mReadUsage` already contains `MapRead`).\n\nIf we avoid writing the `MapRead` we will need a barrier when we call `TransitionUsageNow` in `MapAsyncImpl`. So we will insert a barrier, have to wait for it to complete, and increase the latency.",
       "parentUuid": "4e448ef2_7ff39e6f",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f84177f_0acdac20",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T14:50:18Z",
+      "side": 1,
+      "message": "Ah thanks, that makes sense!",
+      "parentUuid": "f661073c_1d122f61",
       "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -241,6 +277,24 @@
       "side": 1,
       "message": "I think the new version should be clearer.",
       "parentUuid": "1439d286_b68d64c4",
+      "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9a8d819_119aa916",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 1433,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-03T14:50:18Z",
+      "side": 1,
+      "message": "LGTM can we have the same at [1]",
+      "parentUuid": "197dc810_ab05c538",
       "revId": "3a1f1c617b4e8a0c2f047fe899175544ffdc1177",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
