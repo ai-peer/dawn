@@ -1,10 +1,10 @@
 #version 310 es
 
-layout(binding = 0, std430) buffer SB_RW_ssbo {
+layout(binding = 0, std430) buffer SB_RW_ssbo_0 {
   int arg_0[];
 } sb_rw;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 
@@ -29,11 +29,11 @@ void main() {
 #version 310 es
 precision highp float;
 
-layout(binding = 0, std430) buffer SB_RW_ssbo {
+layout(binding = 0, std430) buffer SB_RW_ssbo_0 {
   int arg_0[];
 } sb_rw;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 
@@ -52,11 +52,11 @@ void main() {
 }
 #version 310 es
 
-layout(binding = 0, std430) buffer SB_RW_ssbo {
+layout(binding = 0, std430) buffer SB_RW_ssbo_0 {
   int arg_0[];
 } sb_rw;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 

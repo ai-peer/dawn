@@ -20,7 +20,7 @@ uvec2 tint_count_trailing_zeros(uvec2 v) {
   return uvec2((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 
@@ -66,7 +66,7 @@ uvec2 tint_count_trailing_zeros(uvec2 v) {
   return uvec2((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 
@@ -106,7 +106,7 @@ uvec2 tint_count_trailing_zeros(uvec2 v) {
   return uvec2((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 

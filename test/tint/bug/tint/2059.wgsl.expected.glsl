@@ -16,35 +16,35 @@ struct S4 {
   S s[1];
 };
 
-layout(binding = 0, std430) buffer buffer0_block_ssbo {
+layout(binding = 0, std430) buffer buffer0_block_ssbo_0 {
   mat3 inner;
 } buffer0;
 
-layout(binding = 1, std430) buffer buffer1_block_ssbo {
+layout(binding = 1, std430) buffer buffer1_block_ssbo_1 {
   S inner;
 } buffer1;
 
-layout(binding = 2, std430) buffer buffer2_block_ssbo {
+layout(binding = 2, std430) buffer buffer2_block_ssbo_2 {
   S2 inner;
 } buffer2;
 
-layout(binding = 3, std430) buffer buffer3_block_ssbo {
+layout(binding = 3, std430) buffer buffer3_block_ssbo_3 {
   S3 inner;
 } buffer3;
 
-layout(binding = 4, std430) buffer buffer4_block_ssbo {
+layout(binding = 4, std430) buffer buffer4_block_ssbo_4 {
   S4 inner;
 } buffer4;
 
-layout(binding = 5, std430) buffer buffer5_block_ssbo {
+layout(binding = 5, std430) buffer buffer5_block_ssbo_5 {
   mat3 inner[1];
 } buffer5;
 
-layout(binding = 6, std430) buffer buffer6_block_ssbo {
+layout(binding = 6, std430) buffer buffer6_block_ssbo_6 {
   S inner[1];
 } buffer6;
 
-layout(binding = 7, std430) buffer buffer7_block_ssbo {
+layout(binding = 7, std430) buffer buffer7_block_ssbo_7 {
   S2 inner[1];
 } buffer7;
 

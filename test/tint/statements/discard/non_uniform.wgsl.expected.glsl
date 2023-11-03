@@ -2,11 +2,11 @@
 precision highp float;
 
 bool tint_discarded = false;
-layout(binding = 0, std430) buffer non_uniform_global_block_ssbo {
+layout(binding = 0, std430) buffer non_uniform_global_block_ssbo_0 {
   int inner;
 } non_uniform_global;
 
-layout(binding = 1, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 1, std430) buffer tint_symbol_block_ssbo_1 {
   float inner;
 } tint_symbol;
 

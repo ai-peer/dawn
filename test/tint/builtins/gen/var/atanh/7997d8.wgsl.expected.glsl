@@ -4,7 +4,7 @@ float tint_atanh(float x) {
   return ((x >= 1.0f) ? 0.0f : atanh(x));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   float inner;
 } prevent_dce;
 
@@ -34,7 +34,7 @@ float tint_atanh(float x) {
   return ((x >= 1.0f) ? 0.0f : atanh(x));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   float inner;
 } prevent_dce;
 
@@ -58,7 +58,7 @@ float tint_atanh(float x) {
   return ((x >= 1.0f) ? 0.0f : atanh(x));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   float inner;
 } prevent_dce;
 

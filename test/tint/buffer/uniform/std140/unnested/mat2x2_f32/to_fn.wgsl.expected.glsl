@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0, std140) uniform u_block_std140_ubo {
+layout(binding = 0, std140) uniform u_block_std140_ubo_0 {
   vec2 inner_0;
   vec2 inner_1;
 } u;

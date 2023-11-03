@@ -4,7 +4,7 @@ struct tint_symbol_3 {
   uint texture_builtin_value_0;
 };
 
-layout(binding = 0, std140) uniform tint_symbol_4_block_ubo {
+layout(binding = 0, std140) uniform tint_symbol_4_block_ubo_0 {
   tint_symbol_3 inner;
 } tint_symbol_4;
 
@@ -51,7 +51,7 @@ struct tint_symbol {
   uint texture_builtin_value_0;
 };
 
-layout(binding = 0, std140) uniform tint_symbol_1_block_ubo {
+layout(binding = 0, std140) uniform tint_symbol_1_block_ubo_0 {
   tint_symbol inner;
 } tint_symbol_1;
 
@@ -84,7 +84,7 @@ struct tint_symbol {
   uint texture_builtin_value_0;
 };
 
-layout(binding = 0, std140) uniform tint_symbol_1_block_ubo {
+layout(binding = 0, std140) uniform tint_symbol_1_block_ubo_0 {
   tint_symbol inner;
 } tint_symbol_1;
 

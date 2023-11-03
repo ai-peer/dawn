@@ -4,7 +4,7 @@ vec2 tint_saturate(vec2 v) {
   return clamp(v, vec2(0.0f), vec2(1.0f));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec2 inner;
 } prevent_dce;
 
@@ -34,7 +34,7 @@ vec2 tint_saturate(vec2 v) {
   return clamp(v, vec2(0.0f), vec2(1.0f));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec2 inner;
 } prevent_dce;
 
@@ -58,7 +58,7 @@ vec2 tint_saturate(vec2 v) {
   return clamp(v, vec2(0.0f), vec2(1.0f));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec2 inner;
 } prevent_dce;
 

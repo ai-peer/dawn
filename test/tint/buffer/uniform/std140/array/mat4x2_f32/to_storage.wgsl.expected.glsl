@@ -7,11 +7,11 @@ struct mat4x2_f32 {
   vec2 col3;
 };
 
-layout(binding = 0, std140) uniform u_block_std140_ubo {
+layout(binding = 0, std140) uniform u_block_std140_ubo_0 {
   mat4x2_f32 inner[4];
 } u;
 
-layout(binding = 1, std430) buffer u_block_ssbo {
+layout(binding = 1, std430) buffer u_block_ssbo_1 {
   mat4x2 inner[4];
 } s;
 

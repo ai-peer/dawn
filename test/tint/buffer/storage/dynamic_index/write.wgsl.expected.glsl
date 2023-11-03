@@ -33,7 +33,7 @@ struct Inner {
   vec3 arr2_vec3_f32[2];
 };
 
-layout(binding = 0, std430) buffer S_ssbo {
+layout(binding = 0, std430) buffer S_ssbo_0 {
   Inner arr[];
 } sb;
 

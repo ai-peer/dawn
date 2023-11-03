@@ -20,7 +20,7 @@ struct tint_symbol {
   bool exchanged;
 };
 
-layout(binding = 0, std430) buffer sb_rw_block_ssbo {
+layout(binding = 0, std430) buffer sb_rw_block_ssbo_0 {
   SB_RW_atomic inner;
 } sb_rw;
 
@@ -77,7 +77,7 @@ struct tint_symbol {
   bool exchanged;
 };
 
-layout(binding = 0, std430) buffer sb_rw_block_ssbo {
+layout(binding = 0, std430) buffer sb_rw_block_ssbo_0 {
   SB_RW_atomic inner;
 } sb_rw;
 

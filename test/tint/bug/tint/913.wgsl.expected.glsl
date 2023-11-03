@@ -8,11 +8,11 @@ struct Uniforms {
   uvec2 copySize;
 };
 
-layout(binding = 2, std430) buffer OutputBuf_ssbo {
+layout(binding = 2, std430) buffer OutputBuf_ssbo_2 {
   uint result[];
 } tint_symbol;
 
-layout(binding = 3, std140) uniform uniforms_block_ubo {
+layout(binding = 3, std140) uniform uniforms_block_ubo_3 {
   Uniforms inner;
 } uniforms;
 

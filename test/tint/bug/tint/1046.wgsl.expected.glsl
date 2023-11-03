@@ -20,11 +20,11 @@ struct Uniforms {
   vec4 color;
 };
 
-layout(binding = 0, std140) uniform uniforms_block_ubo {
+layout(binding = 0, std140) uniform uniforms_block_ubo_0 {
   Uniforms inner;
 } uniforms;
 
-layout(binding = 1, std430) buffer PointLights_ssbo {
+layout(binding = 1, std430) buffer PointLights_ssbo_1 {
   PointLight values[];
 } pointLights;
 

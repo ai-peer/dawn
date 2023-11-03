@@ -10,7 +10,7 @@ struct SSBO {
   strided_arr m[2];
 };
 
-layout(binding = 0, std430) buffer ssbo_block_ssbo {
+layout(binding = 0, std430) buffer ssbo_block_ssbo_0 {
   SSBO inner;
 } ssbo;
 

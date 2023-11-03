@@ -41,12 +41,12 @@ struct ExternalTextureParams_std140 {
   uint pad_3;
 };
 
-layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
+layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo_2 {
   ExternalTextureParams_std140 inner;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 
@@ -112,12 +112,12 @@ struct ExternalTextureParams_std140 {
   uint pad_3;
 };
 
-layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
+layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo_2 {
   ExternalTextureParams_std140 inner;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 
@@ -177,12 +177,12 @@ struct ExternalTextureParams_std140 {
   uint pad_3;
 };
 
-layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo {
+layout(binding = 2, std140) uniform ext_tex_params_block_std140_ubo_2 {
   ExternalTextureParams_std140 inner;
 } ext_tex_params;
 
 uniform highp sampler2D arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 

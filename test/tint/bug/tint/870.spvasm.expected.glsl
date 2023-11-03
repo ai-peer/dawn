@@ -13,7 +13,7 @@ struct x_B4_BuildInformation {
   sspp962805860buildInformationS passthru;
 };
 
-layout(binding = 2, std430) buffer sspp962805860buildInformation_block_ssbo {
+layout(binding = 2, std430) buffer sspp962805860buildInformation_block_ssbo_2 {
   x_B4_BuildInformation inner;
 } sspp962805860buildInformation;
 

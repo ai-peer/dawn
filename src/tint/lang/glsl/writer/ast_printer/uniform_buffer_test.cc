@@ -51,7 +51,7 @@ struct Simple {
   float member;
 };
 
-layout(binding = 0, std140) uniform Simple_ubo {
+layout(binding = 0, std140) uniform Simple_ubo_0 {
   float member;
 } simple;
 
@@ -71,7 +71,7 @@ struct Simple {
   float member;
 };
 
-layout(binding = 0, std140) uniform Simple_ubo {
+layout(binding = 0, std140) uniform Simple_ubo_0 {
   float member;
 } simple;
 

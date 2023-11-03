@@ -6,7 +6,7 @@ float16_t tint_degrees(float16_t param_0) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   float16_t inner;
 } prevent_dce;
 
@@ -38,7 +38,7 @@ float16_t tint_degrees(float16_t param_0) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   float16_t inner;
 } prevent_dce;
 
@@ -64,7 +64,7 @@ float16_t tint_degrees(float16_t param_0) {
 }
 
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   float16_t inner;
 } prevent_dce;
 

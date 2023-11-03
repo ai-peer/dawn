@@ -5,7 +5,7 @@ void unused_entry_point() {
   return;
 }
 vec4 my_global = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-layout(binding = 0, std140) uniform my_uniform_block_ubo {
+layout(binding = 0, std140) uniform my_uniform_block_ubo_0 {
   float inner;
 } my_uniform;
 

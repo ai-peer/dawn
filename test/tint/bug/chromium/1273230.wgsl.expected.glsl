@@ -35,27 +35,27 @@ struct Dbg {
   float value_f32_3;
 };
 
-layout(binding = 0, std140) uniform uniforms_block_ubo {
+layout(binding = 0, std140) uniform uniforms_block_ubo_0 {
   Uniforms inner;
 } uniforms;
 
-layout(binding = 10, std430) buffer U32s_ssbo {
+layout(binding = 10, std430) buffer U32s_ssbo_10 {
   uint values[];
 } indices;
 
-layout(binding = 11, std430) buffer F32s_ssbo {
+layout(binding = 11, std430) buffer F32s_ssbo_11 {
   float values[];
 } positions;
 
-layout(binding = 20, std430) buffer AU32s_ssbo {
+layout(binding = 20, std430) buffer AU32s_ssbo_20 {
   uint values[];
 } counters;
 
-layout(binding = 21, std430) buffer AI32s_ssbo {
+layout(binding = 21, std430) buffer AI32s_ssbo_21 {
   int values[];
 } LUT;
 
-layout(binding = 50, std430) buffer dbg_block_ssbo {
+layout(binding = 50, std430) buffer dbg_block_ssbo_50 {
   Dbg inner;
 } dbg;
 

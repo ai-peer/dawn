@@ -40,7 +40,7 @@ struct Light0 {
 float u_Float = 0.0f;
 vec3 u_Color = vec3(0.0f, 0.0f, 0.0f);
 vec2 vMainuv = vec2(0.0f, 0.0f);
-layout(binding = 6, std140) uniform x_269_block_ubo {
+layout(binding = 6, std140) uniform x_269_block_ubo_6 {
   LeftOver inner;
 } x_269;
 
@@ -48,7 +48,7 @@ vec4 v_output1 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
 bool tint_symbol = false;
 vec2 v_uv = vec2(0.0f, 0.0f);
 vec4 v_output2 = vec4(0.0f, 0.0f, 0.0f, 0.0f);
-layout(binding = 5, std140) uniform light0_block_ubo {
+layout(binding = 5, std140) uniform light0_block_ubo_5 {
   Light0 inner;
 } light0;
 

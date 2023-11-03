@@ -1933,7 +1933,9 @@ void ASTPrinter::EmitUniformVariable(const ast::Var* var, const sem::Variable* s
     {
         auto out = Line();
         out << "layout(binding = " << bp.binding << ", std140";
-        out << ") uniform " << UniqueIdentifier(StructName(str) + "_ubo") << " {";
+        // Append the binding to the identifier to guarantee stable naming across stages
+        out << ") uniform "
+            << UniqueIdentifier(StructName(str) + "_ubo_" + std::to_string(bp.binding)) << " {";
     }
     EmitStructMembers(current_buffer_, str);
     auto name = var->name->symbol.Name();
@@ -1949,8 +1951,10 @@ void ASTPrinter::EmitStorageVariable(const ast::Var* var, const sem::Variable* s
         return;
     }
     auto bp = *sem->As<sem::GlobalVariable>()->Attributes().binding_point;
-    Line() << "layout(binding = " << bp.binding << ", std430) buffer "
-           << UniqueIdentifier(StructName(str) + "_ssbo") << " {";
+    Line() << "layout(binding = " << bp.binding
+           << ", std430) buffer "
+           // Append the binding to the identifier to guarantee stable naming across stages
+           << UniqueIdentifier(StructName(str) + "_ssbo_" + std::to_string(bp.binding)) << " {";
     EmitStructMembers(current_buffer_, str);
     auto name = var->name->symbol.Name();
     Line() << "} " << name << ";";

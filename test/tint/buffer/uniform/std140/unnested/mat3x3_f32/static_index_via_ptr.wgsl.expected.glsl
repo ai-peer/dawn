@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0, std140) uniform m_block_ubo {
+layout(binding = 0, std140) uniform m_block_ubo_0 {
   mat3 inner;
 } m;
 

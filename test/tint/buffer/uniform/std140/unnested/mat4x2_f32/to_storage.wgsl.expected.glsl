@@ -1,13 +1,13 @@
 #version 310 es
 
-layout(binding = 0, std140) uniform u_block_std140_ubo {
+layout(binding = 0, std140) uniform u_block_std140_ubo_0 {
   vec2 inner_0;
   vec2 inner_1;
   vec2 inner_2;
   vec2 inner_3;
 } u;
 
-layout(binding = 1, std430) buffer u_block_ssbo {
+layout(binding = 1, std430) buffer u_block_ssbo_1 {
   mat4x2 inner;
 } s;
 

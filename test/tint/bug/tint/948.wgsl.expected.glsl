@@ -28,7 +28,7 @@ struct LeftOver {
   uint pad_2;
 };
 
-layout(binding = 9, std140) uniform x_20_block_ubo {
+layout(binding = 9, std140) uniform x_20_block_ubo_9 {
   LeftOver inner;
 } x_20;
 

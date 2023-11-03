@@ -9,7 +9,7 @@ struct S {
   f16vec3 v;
 };
 
-layout(binding = 0, std430) buffer U_block_ssbo {
+layout(binding = 0, std430) buffer U_block_ssbo_0 {
   S inner;
 } U;
 

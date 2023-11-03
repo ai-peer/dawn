@@ -2,7 +2,7 @@
 #extension GL_AMD_gpu_shader_half_float : require
 
 f16mat3 m = f16mat3(f16vec3(0.0hf, 1.0hf, 2.0hf), f16vec3(3.0hf, 4.0hf, 5.0hf), f16vec3(6.0hf, 7.0hf, 8.0hf));
-layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 0, std430) buffer tint_symbol_block_ssbo_0 {
   f16mat3 inner;
 } tint_symbol;
 

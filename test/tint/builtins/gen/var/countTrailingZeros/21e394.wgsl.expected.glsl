@@ -15,7 +15,7 @@ uint tint_count_trailing_zeros(uint v) {
   return uint((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 
@@ -56,7 +56,7 @@ uint tint_count_trailing_zeros(uint v) {
   return uint((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 
@@ -91,7 +91,7 @@ uint tint_count_trailing_zeros(uint v) {
   return uint((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uint inner;
 } prevent_dce;
 

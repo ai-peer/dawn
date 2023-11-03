@@ -1,7 +1,7 @@
 #version 310 es
 
 uniform highp usampler3D arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec3 inner;
 } prevent_dce;
 
@@ -28,7 +28,7 @@ void main() {
 precision highp float;
 
 uniform highp usampler3D arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec3 inner;
 } prevent_dce;
 
@@ -49,7 +49,7 @@ void main() {
 #version 310 es
 
 uniform highp usampler3D arg_0_1;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec3 inner;
 } prevent_dce;
 

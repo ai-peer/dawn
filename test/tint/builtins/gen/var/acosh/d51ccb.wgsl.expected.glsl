@@ -9,7 +9,7 @@ vec4 tint_acosh(vec4 x) {
   return tint_select(acosh(x), vec4(0.0f), lessThan(x, vec4(1.0f)));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -44,7 +44,7 @@ vec4 tint_acosh(vec4 x) {
   return tint_select(acosh(x), vec4(0.0f), lessThan(x, vec4(1.0f)));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -73,7 +73,7 @@ vec4 tint_acosh(vec4 x) {
   return tint_select(acosh(x), vec4(0.0f), lessThan(x, vec4(1.0f)));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 

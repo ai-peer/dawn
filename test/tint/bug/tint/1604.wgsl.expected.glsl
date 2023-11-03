@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0, std140) uniform x_block_ubo {
+layout(binding = 0, std140) uniform x_block_ubo_0 {
   int inner;
 } x;
 

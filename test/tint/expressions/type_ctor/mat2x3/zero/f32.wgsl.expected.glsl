@@ -1,7 +1,7 @@
 #version 310 es
 
 mat2x3 m = mat2x3(vec3(0.0f), vec3(0.0f));
-layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 0, std430) buffer tint_symbol_block_ssbo_0 {
   mat2x3 inner;
 } tint_symbol;
 

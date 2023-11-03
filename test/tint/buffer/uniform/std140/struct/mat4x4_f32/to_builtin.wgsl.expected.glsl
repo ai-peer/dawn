@@ -36,7 +36,7 @@ struct S {
   uint pad_29;
 };
 
-layout(binding = 0, std140) uniform u_block_ubo {
+layout(binding = 0, std140) uniform u_block_ubo_0 {
   S inner[4];
 } u;
 

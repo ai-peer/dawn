@@ -8,7 +8,7 @@ struct S {
   vec4 a;
 };
 
-layout(binding = 0, std430) buffer v_block_ssbo {
+layout(binding = 0, std430) buffer v_block_ssbo_0 {
   S inner;
 } v;
 

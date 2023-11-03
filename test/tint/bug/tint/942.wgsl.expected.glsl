@@ -7,7 +7,7 @@ struct Params {
   uint pad_1;
 };
 
-layout(binding = 1, std140) uniform params_block_ubo {
+layout(binding = 1, std140) uniform params_block_ubo_1 {
   Params inner;
 } params;
 
@@ -19,7 +19,7 @@ struct Flip {
   uint pad_4;
 };
 
-layout(binding = 3, std140) uniform flip_block_ubo {
+layout(binding = 3, std140) uniform flip_block_ubo_3 {
   Flip inner;
 } flip;
 

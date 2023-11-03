@@ -6,7 +6,7 @@ uvec2 tint_insert_bits(uvec2 v, uvec2 n, uint offset, uint count) {
   return bitfieldInsert(v, n, int(s), int((e - s)));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 
@@ -41,7 +41,7 @@ uvec2 tint_insert_bits(uvec2 v, uvec2 n, uint offset, uint count) {
   return bitfieldInsert(v, n, int(s), int((e - s)));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 
@@ -70,7 +70,7 @@ uvec2 tint_insert_bits(uvec2 v, uvec2 n, uint offset, uint count) {
   return bitfieldInsert(v, n, int(s), int((e - s)));
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   uvec2 inner;
 } prevent_dce;
 

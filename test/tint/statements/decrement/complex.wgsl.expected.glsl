@@ -8,7 +8,7 @@ struct S {
   ivec4 a[4];
 };
 
-layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 0, std430) buffer tint_symbol_block_ssbo_0 {
   S inner[];
 } tint_symbol;
 

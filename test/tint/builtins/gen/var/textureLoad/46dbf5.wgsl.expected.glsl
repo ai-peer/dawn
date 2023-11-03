@@ -1,7 +1,7 @@
 #version 310 es
 
 layout(rgba8) uniform highp readonly image3D arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -28,7 +28,7 @@ void main() {
 precision highp float;
 
 layout(rgba8) uniform highp readonly image3D arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 
@@ -49,7 +49,7 @@ void main() {
 #version 310 es
 
 layout(rgba8) uniform highp readonly image3D arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_ssbo_0 {
   vec4 inner;
 } prevent_dce;
 

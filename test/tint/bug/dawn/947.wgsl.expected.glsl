@@ -6,7 +6,7 @@ struct Uniforms {
   vec2 u_offset;
 };
 
-layout(binding = 0, std140) uniform uniforms_block_ubo {
+layout(binding = 0, std140) uniform uniforms_block_ubo_0 {
   Uniforms inner;
 } uniforms;
 

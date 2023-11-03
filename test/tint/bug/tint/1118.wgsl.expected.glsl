@@ -26,15 +26,15 @@ struct Mesh {
 
 float fClipDistance3 = 0.0f;
 float fClipDistance4 = 0.0f;
-layout(binding = 0, std140) uniform x_29_block_ubo {
+layout(binding = 0, std140) uniform x_29_block_ubo_0 {
   Scene inner;
 } x_29;
 
-layout(binding = 1, std140) uniform x_49_block_ubo {
+layout(binding = 1, std140) uniform x_49_block_ubo_1 {
   Material inner;
 } x_49;
 
-layout(binding = 2, std140) uniform x_137_block_ubo {
+layout(binding = 2, std140) uniform x_137_block_ubo_2 {
   Mesh inner;
 } x_137;
 

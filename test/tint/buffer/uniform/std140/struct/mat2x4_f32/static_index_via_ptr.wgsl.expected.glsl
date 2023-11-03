@@ -16,7 +16,7 @@ struct Outer {
   Inner a[4];
 };
 
-layout(binding = 0, std140) uniform a_block_ubo {
+layout(binding = 0, std140) uniform a_block_ubo_0 {
   Outer inner[4];
 } a;
 
