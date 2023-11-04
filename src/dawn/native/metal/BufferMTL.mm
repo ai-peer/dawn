@@ -125,8 +125,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     }
     SetLabelImpl();
 
-    // The buffers with mappedAtCreation == true will be initialized in
-    // BufferBase::MapAtCreation().
+    // The buffers with mappedAtCreation == true will be initialized in BufferBase::MapAtCreation().
     if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
         CommandRecordingContext* commandContext =
@@ -135,7 +134,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     }
 
     // Initialize the padding bytes to zero.
-    if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) && !mappedAtCreation) {
+    if (NeedsInitialization() && !mappedAtCreation) {
         uint32_t paddingBytes = GetAllocatedSize() - GetSize();
         if (paddingBytes > 0) {
             uint32_t clearSize = Align(paddingBytes, 4);
