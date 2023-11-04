@@ -244,15 +244,14 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
                                     mMemoryAllocation.GetOffset()),
         "vkBindBufferMemory"));
 
-    // The buffers with mappedAtCreation == true will be initialized in
-    // BufferBase::MapAtCreation().
+    // The buffers with mappedAtCreation == true will be initialized in BufferBase::MapAtCreation().
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
         ClearBuffer(device->GetPendingRecordingContext(), 0x01010101);
     }
 
     // Initialize the padding bytes to zero.
-    if (device->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) && !mappedAtCreation) {
+    if (NeedsInitialization() && !mappedAtCreation) {
         uint32_t paddingBytes = GetAllocatedSize() - GetSize();
         if (paddingBytes > 0) {
             uint32_t clearSize = Align(paddingBytes, 4);
