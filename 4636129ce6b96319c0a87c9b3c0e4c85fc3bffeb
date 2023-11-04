@@ -1,0 +1,279 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c8ac84c_8fc4cda4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "I didn\u0027t realllllly read the tests that closely, but the comments seem right and overall they look alright",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd952ca9_e3578dbe",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "Does the behavior of the current MapAsync (non \"F\") change? Should we keep a copy of the old tests (before this change) until we remove it?",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b060742_39183d19",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "nit: exercise",
+      "range": {
+        "startLine": 210,
+        "startChar": 15,
+        "endLine": 210,
+        "endChar": 24
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b924d2cc_550de22a",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "I initially found this to be an odd usage of a FutureID, but then realized this is almost exactly the same as what the spec says to do (\"If this.[[pending_map]] !\u003d p\") except it happens on completion instead of on ready. So that\u0027s nice.\n\nThis also made me think through a useful point regarding why the state should change at completion instead of ready: if it changed at ready, then you would be able to unmap it before the callback runs, and then the callback could be outdated already when it runs. Useful to do it all \"atomically\".",
+      "range": {
+        "startLine": 80,
+        "startChar": 45,
+        "endLine": 80,
+        "endChar": 96
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "781e1ada_7e726ea3",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "This return value doesn\u0027t seem to be used?",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 4
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "445f04cd_e3a01d77",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "This return value doesn\u0027t seem to be used?",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 4
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea559438_e6a2ebd2",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "Out of curiosity do you know why we actually need to return bool here? It seems to just report back to the wire client when there\u0027s an error, but it\u0027s hard to find if it actually does anything with it.",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 4
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a19913ef_cb4414a7",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "Old code but do we actually lose the device when this happens, or just report DeviceLost as the status? Does returning false trigger device loss?",
+      "range": {
+        "startLine": 311,
+        "startChar": 24,
+        "endLine": 311,
+        "endChar": 59
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48bd5a66_ecaf28d2",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "nit: This part of the comment should be on MapStateData.pendingRequest",
+      "range": {
+        "startLine": 109,
+        "startChar": 7,
+        "endLine": 109,
+        "endChar": 86
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4060647d_f8f85229",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "(non-blocking comment)\n\nI hoped SetReady could be guaranteed to happen only once - or more specifically, that ReadyHook would only be called once so we don\u0027t have to worry about what happens if it gets called more than once with different args.\n\nIIUC the reason we need this here is if the map becomes ready, but then we unmap before completing it. I might prefer to handle this slightly differently: instead of calling ReadyHook and SetReady multiple times, just set ready once without a MapAsyncStatus, then compute the MapAsyncStatus in CompleteImpl. I think we have enough information there to do that. It might also have the bonus effect of making CompleteImpl look more like the WebGPU spec.\n\nWe would still need to SetFutureReady multiple times, but now idempotently (EnsureFutureReady). This could guard ReadyHook and SetReady from being called more than once. This is probably incompatible with how we\u0027re already using SetFutureReady elsewhere, though, so if we want to try to change this, it\u0027ll be a follow-up.",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f506923c_f89272ed",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "Is this comment saying that eventsToCompleteNow will have the same order it had in mTrackedEvents (which is by FutureID I guess), and therefore completions will happen in that order? If so maybe it makes sense to move down next to the for-each loop.",
+      "range": {
+        "startLine": 105,
+        "startChar": 63,
+        "endLine": 105,
+        "endChar": 67
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4edb4e2_598e726e",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "`std::vector\u003cstd::pair\u003cFutureID, std::unique_ptr\u003cTrackedEvent\u003e\u003e\u003e` probably makes more sense for how this is used (though it\u0027s very verbose)",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8760de93_fd65976a",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-04T01:56:37Z",
+      "side": 1,
+      "message": "IIUC you could just pass `futureID` here",
+      "range": {
+        "startLine": 143,
+        "startChar": 39,
+        "endLine": 143,
+        "endChar": 63
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
