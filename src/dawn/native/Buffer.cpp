@@ -343,7 +343,7 @@ MaybeError BufferBase::MapAtCreation() {
     }
 
     DeviceBase* device = GetDevice();
-    if (device->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+    if (NeedsInitialization()) {
         memset(ptr, uint8_t(0u), size);
         SetIsDataInitialized();
         device->IncrementLazyClearCountForTesting();
@@ -692,7 +692,9 @@ void BufferBase::CallbackOnMapRequestCompleted(MapRequestID mapID,
 }
 
 bool BufferBase::NeedsInitialization() const {
-    return !mIsDataInitialized && GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse);
+    return !mIsDataInitialized &&
+           GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse) &&
+           !GetDevice()->IsToggleEnabled(Toggle::DisableLazyClearBufferOnFirstUse);
 }
 
 bool BufferBase::IsDataInitialized() const {

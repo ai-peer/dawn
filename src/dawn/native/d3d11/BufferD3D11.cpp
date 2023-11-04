@@ -215,13 +215,14 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
 
     SetLabelImpl();
 
+    // The buffers with mappedAtCreation == true will be initialized in BufferBase::MapAtCreation().
     if (!mappedAtCreation) {
         if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
             DAWN_TRY(ClearInternal(ToBackend(GetDevice())->GetPendingCommandContext(), 1u));
         }
 
         // Initialize the padding bytes to zero.
-        if (GetDevice()->IsToggleEnabled(Toggle::LazyClearResourceOnFirstUse)) {
+        if (NeedsInitialization()) {
             uint32_t paddingBytes = GetAllocatedSize() - GetSize();
             if (paddingBytes > 0) {
                 uint32_t clearSize = paddingBytes;
