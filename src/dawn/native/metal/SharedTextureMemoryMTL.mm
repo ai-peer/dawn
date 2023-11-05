@@ -28,6 +28,7 @@
 #include "dawn/native/metal/SharedTextureMemoryMTL.h"
 
 #include <CoreVideo/CVPixelBuffer.h>
+#include <CoreVideo/CoreVideo.h>
 
 #include "dawn/native/metal/CommandRecordingContext.h"
 #include "dawn/native/metal/DeviceMTL.h"
@@ -62,7 +63,10 @@ ResultOrError<wgpu::TextureFormat> GetFormatEquivalentToIOSurfaceFormat(uint32_t
             return wgpu::TextureFormat::R16Unorm;
         case kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange:
             return wgpu::TextureFormat::R8BG8Biplanar420Unorm;
-        // TODO(dawn:551): Add R10X6BG10X6Biplanar420Unorm support.
+        case kCVPixelFormatType_420YpCbCr10BiPlanarVideoRange:
+            return wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm;
+        case kCVPixelFormatType_420YpCbCr8VideoRange_8A_TriPlanar:
+            return wgpu::TextureFormat::R8BG8A8Triplanar420Unorm;
         default:
             return DAWN_VALIDATION_ERROR("Unsupported IOSurface format (%x).", format);
     }
