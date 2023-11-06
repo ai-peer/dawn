@@ -46,6 +46,30 @@
       },
       "revId": "80e4d406a2915cf1b5c3e46c2f72ec1f97519b64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef127711_18184ca6",
+        "filename": "src/dawn/native/metal/RenderPipelineMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-06T19:40:50Z",
+      "side": 1,
+      "message": "I see.",
+      "parentUuid": "af1c48b3_c4998b18",
+      "range": {
+        "startLine": 463,
+        "startChar": 33,
+        "endLine": 463,
+        "endChar": 69
+      },
+      "revId": "80e4d406a2915cf1b5c3e46c2f72ec1f97519b64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
