@@ -52,6 +52,24 @@
       "parentUuid": "02d0001e_38d71f14",
       "revId": "c508acaf8507934208bf0cdf07227599b9b86a5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a895f64c_5dce63c0",
+        "filename": "third_party/gn/dxc/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-06T19:36:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6697e2e1_53863d89",
+      "revId": "c508acaf8507934208bf0cdf07227599b9b86a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
