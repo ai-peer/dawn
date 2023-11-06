@@ -51,6 +51,70 @@
       "parentUuid": "48c7d383_48ff3c81",
       "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2da1714_58b2d9ae",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-06T20:31:20Z",
+      "side": 1,
+      "message": "see my above comment that the state and queue should be together in a struct then.\nyou could shape it like this though to avoid OnShutDown while holding the lock.\n\nIt is probably a good idea to do this as it will be safer; but OK to file a bug about the problem and follow-up since it is a pre-existing issue.\n\n```\nauto state \u003d mQueueAndState.Use([\u0026](auto queueAndState) {\n  auto state \u003d queueAndState-\u003estate;\n  if (state \u003d\u003d CallbackState::Normal) {\n    queueAndState-\u003equeue-\u003epush_back(std::move(callbackTask));\n  }\n  return state;\n});\n\nswitch (state) {\n  case CallbackState::ShutDown:\n    callbackTask-\u003eOnShutDown();\n    break;\n  case CallbackState::DeviceLoss:\n    callbackTask-\u003eOnDeviceLoss();\n    break;\n  case CallbackState::Normal:\n    break;\n }\n```",
+      "parentUuid": "8c4de5e6_6c999a4a",
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a01447d3_7e8e70b1",
+        "filename": "src/dawn/native/CallbackTaskManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-06T20:31:20Z",
+      "side": 1,
+      "message": "I think we should put it inside the same MutexProtected then - and have MutexProtected wrap a struct of the state and vector.",
+      "range": {
+        "startLine": 85,
+        "startChar": 17,
+        "endLine": 85,
+        "endChar": 58
+      },
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f57970d_b9923c19",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-06T20:31:20Z",
+      "side": 1,
+      "message": "add a comment that reentrancy here is not possible because all object references have been dropped entirely.\n\nSo device-\u003eGetCallbackTaskManager()-\u003eFlush() is not going to call a callback which then creates a new device (which would deadlock mDevicesLists).\n\nAlternatively you could structure it to extract the device list, process it without the mutex, and keep doing that while the not empty.",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 7
+      },
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
