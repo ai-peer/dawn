@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "23f00944_94ecda90",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T22:54:30Z",
+      "side": 1,
+      "message": "I think I will try to modify the `ReadyHook` abstraction to force it to be only callable once in a follow up. So leaving it as if for this for now.",
+      "parentUuid": "abb45edc_b19e17a0",
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7288fcd_3de79d0b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-06T21:41:21Z",
       "side": 1,
       "message": "Explain why this isn\u0027t needed if there wasn\u0027t an error?",
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd78f945_934bf7c4",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T22:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7288fcd_3de79d0b",
       "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98df1b4d_602a832a",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T22:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5649af4b_c77f2332",
+      "range": {
+        "startLine": 91,
+        "startChar": 34,
+        "endLine": 91,
+        "endChar": 40
+      },
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4caef36f_1805b0c9",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-11-06T21:41:21Z",
       "side": 1,
       "message": "Having a raw pointer member here is scary. I don\u0027t think this is refcountable but can we at least comment what guarantees it stays alive?",
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8d2eb450_7f8302bf",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T22:54:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4caef36f_1805b0c9",
       "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
