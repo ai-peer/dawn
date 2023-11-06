@@ -1432,8 +1432,7 @@ bool Converter::Convert(wgpu::FeatureName& out, interop::GPUFeatureName in) {
             return true;
         case interop::GPUFeatureName::kTimestampQuery:
             out = wgpu::FeatureName::TimestampQuery;
-            // TODO(dawn:1800): Reenable once Dawn's interface is updated.
-            return false;
+            return true;
         case interop::GPUFeatureName::kDepth32FloatStencil8:
             out = wgpu::FeatureName::Depth32FloatStencil8;
             return true;
