@@ -94,6 +94,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "247cafd9_9bf55891",
+        "filename": "src/dawn/native/CallbackTaskManager.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T21:48:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a01447d3_7e8e70b1",
+      "range": {
+        "startLine": 85,
+        "startChar": 17,
+        "endLine": 85,
+        "endChar": 58
+      },
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f57970d_b9923c19",
@@ -107,6 +131,54 @@
       "writtenOn": "2023-11-06T20:31:20Z",
       "side": 1,
       "message": "add a comment that reentrancy here is not possible because all object references have been dropped entirely.\n\nSo device-\u003eGetCallbackTaskManager()-\u003eFlush() is not going to call a callback which then creates a new device (which would deadlock mDevicesLists).\n\nAlternatively you could structure it to extract the device list, process it without the mutex, and keep doing that while the not empty.",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 7
+      },
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2089a9fd_7661b5b8",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T21:48:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f57970d_b9923c19",
+      "range": {
+        "startLine": 157,
+        "startChar": 4,
+        "endLine": 164,
+        "endChar": 7
+      },
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c771714_958ee836",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T21:48:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0f57970d_b9923c19",
       "range": {
         "startLine": 157,
         "startChar": 4,
