@@ -748,14 +748,14 @@ using DawnTest = DawnTestWithParams<>;
         , testName,                                                                     \
         testing::ValuesIn(::dawn::detail::GetAvailableAdapterTestParamsForBackends(     \
             testName##params, sizeof(testName##params) / sizeof(testName##params[0]))), \
-        DawnTestBase::PrintToStringParamName(#testName));                               \
-    GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(testName)
+        DawnTestBase::PrintToStringParamName(#testName))
 
 #define DAWN_INSTANTIATE_PREFIXED_TEST_P(prefix, testName, ...)                    \
     INSTANTIATE_TEST_SUITE_P(                                                      \
         prefix, testName,                                                          \
         ::testing::ValuesIn(MakeParamGenerator<testName::ParamType>(__VA_ARGS__)), \
-        DawnTestBase::PrintToStringParamName(#testName))
+        DawnTestBase::PrintToStringParamName(#testName));                          \
+    GTEST_ALLOW_UNINSTANTIATED_PARAMETERIZED_TEST(prefix##testName)
 
 // Instantiate the test once for each backend provided in the first param list.
 // The test will be parameterized over the following param lists.
