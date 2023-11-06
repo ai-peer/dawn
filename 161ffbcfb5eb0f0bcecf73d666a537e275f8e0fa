@@ -63,6 +63,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "742d41a6_bf28c30e",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-06T20:48:45Z",
+      "side": 1,
+      "message": "Yeah Stephen asked about this in bug. I tried and seemed that opengl didn\u0027t complain. But looking closer at the GLSL, the mismatch of block name is present though, with the case Ben suggested.\n\nWGSL input\n```\n@group(0) @binding(0) var\u003cuniform\u003e tint_symbol_ubo_0: f32;\n        @group(0) @binding(1) var\u003cuniform\u003e tint_symbol_ubo_1: u32;\n\n        @vertex fn vertex() -\u003e @builtin(position) vec4f {\n          _ \u003d tint_symbol_ubo_0;\n          _ \u003d tint_symbol_ubo_1;\n          return vec4f(tint_symbol_ubo_0) + vec4f(f32(tint_symbol_ubo_1));\n        }\n\n        @fragment fn fragment() -\u003e @location(0) vec4f {\n          _ \u003d tint_symbol_ubo_1;\n          return vec4f(f32(tint_symbol_ubo_1));\n        }\n```\n\n```\nInfo: /* Dumped generated GLSL Vertex */\n#version 320 es\n\nlayout(binding \u003d 0, std140) uniform tint_symbol_block_ubo_0 {\n  float inner;\n} tint_symbol;\n\nlayout(binding \u003d 1, std140) uniform tint_symbol_1_block_ubo_1 {\n  uint inner;\n} tint_symbol_1;\n\nvec4 tint_symbol_2() {\n  return (vec4(tint_symbol.inner) + vec4(float(tint_symbol_1.inner)));\n}\n\nvoid main() {\n  gl_PointSize \u003d 1.0;\n  vec4 inner_result \u003d tint_symbol_2();\n  gl_Position \u003d inner_result;\n  gl_Position.y \u003d -(gl_Position.y);\n  gl_Position.z \u003d ((2.0f * gl_Position.z) - gl_Position.w);\n  return;\n}\n\nInfo: /* Dumped generated GLSL Fragment */\n#version 320 es\nprecision highp float;\n\nlayout(location \u003d 0) out vec4 value;\nlayout(binding \u003d 1, std140) uniform tint_symbol_block_ubo_1 {\n  uint inner;\n} tint_symbol;\n\nvec4 tint_symbol_1() {\n  return vec4(float(tint_symbol.inner));\n}\n\nvoid main() {\n  vec4 inner_result \u003d tint_symbol_1();\n  value \u003d inner_result;\n  return;\n}\n\n```\n\nNote `\"tint_symbol_1_block_ubo_1\" !\u003d \"tint_symbol_block_ubo_1\"`\n\nBut glLinkProgram didn\u0027t complain about it. Weird.\n\n\nWhat Stephen suggests: with the Renamer transform now takes extra input of remappings of assigned name, in dawn we can tell tint that these binding variable names have their custom remappings, e.g.:\n\n\"@group(0) @binding(0) var\u003cuniform\u003e blah_ubo_0\" -\u003e \"dawn_binding_0_0\"\n\"@group(0) @binding(1) var\u003cuniform\u003e blah_ubo_1\" -\u003e \"dawn_binding_0_1\"\n\nThis is not directly assign block name, but the name of the variable. Tint now deducts the block name from the variable name. I feel this is not 100% stable, e.g. if Tint changes internal renaming rules of these blocks, mismatch can still happen.\n\nBut would like to hear your thoughts.",
+      "parentUuid": "91ae2139_25732b2c",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
