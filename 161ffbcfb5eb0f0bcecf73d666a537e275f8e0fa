@@ -87,6 +87,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28139447_bf406bf2",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-06T21:10:13Z",
+      "side": 1,
+      "message": "\u003e Tint now deducts the block name from the variable name.\n\nAnything that does this suffers the same collision issue. I still think the most stable option is to create a new transform that generates these buffer object structures early in the transform list. It doesn\u0027t matter what you name these (`b.Symbols().New()` is sufficient), so long as the symbol is consistent for each entry point.\n\nTo do this though, you might have to wrap the variable type in a new, unique structure, and fix up the accesses to go via a member access. Without nesting, you\u0027ll get a type mismatch when attempting to between uniform / storage vars and another variable of the same type.",
+      "parentUuid": "742d41a6_bf28c30e",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
