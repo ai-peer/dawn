@@ -39,6 +39,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91ae2139_25732b2c",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-06T18:38:45Z",
+      "side": 1,
+      "message": "That\u0027s what I was trying to get at (probably badly) with my question in the bug.\n\nWhat if we simply skipped the UniqueIdentifier call, and modified the renamer (for GLSL) to rename anything of the form `*_ubo_*` and `*_ssbo_*`. Would that work?",
+      "parentUuid": "d2b211f7_44802706",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
