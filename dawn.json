@@ -3353,7 +3353,8 @@
             {"value": 1, "name": "stencil only"},
             {"value": 2, "name": "depth only"},
             {"value": 3, "name": "plane 0 only", "tags": ["dawn"]},
-            {"value": 4, "name": "plane 1 only", "tags": ["dawn"]}
+            {"value": 4, "name": "plane 1 only", "tags": ["dawn"]},
+            {"value": 5, "name": "plane 2 only", "tags": ["dawn"]}
         ]
     },
     "texture data layout": {
@@ -3505,7 +3506,8 @@
             {"value": 101, "name": "RGBA16 snorm", "tags": ["dawn"]},
 
             {"value": 102, "name": "R8 BG8 Biplanar 420 unorm", "tags": ["dawn"]},
-            {"value": 103, "name": "R10X6 BG10X6 Biplanar 420 unorm", "tags": ["dawn"]}
+            {"value": 103, "name": "R10X6 BG10X6 Biplanar 420 unorm", "tags": ["dawn"]},
+            {"value": 104, "name": "R8 BG8 A8 Triplanar 420 unorm", "tags": ["dawn"]}
         ]
     },
     "texture usage": {
