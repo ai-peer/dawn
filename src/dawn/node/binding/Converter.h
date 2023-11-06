@@ -439,6 +439,10 @@ class Converter {
         return Convert(out_els, out_count, in.value());
     }
 
+    // JS strings can contain the null character, replace it with some other invalid character
+    // to preserve the creation of errors in this case.
+    char* ConvertStringReplacingNull(const std::string& in);
+
     Napi::Env env;
     wgpu::Device device = nullptr;
 
