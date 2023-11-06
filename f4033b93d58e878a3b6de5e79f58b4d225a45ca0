@@ -16,6 +16,52 @@
       "message": "PTAL!",
       "revId": "f4033b93d58e878a3b6de5e79f58b4d225a45ca0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aa1dfa7_67ef6e68",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1642,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-06T16:47:56Z",
+      "side": 1,
+      "message": "Question: Would it be possible to just throw an exception here instead?\nWhile very minor, diagnostics might be confusing if the printed error contained strings that weren\u0027t what the user provided.",
+      "range": {
+        "startLine": 1631,
+        "startChar": 0,
+        "endLine": 1642,
+        "endChar": 15
+      },
+      "revId": "f4033b93d58e878a3b6de5e79f58b4d225a45ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b510f0b8_37f7ef89",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-06T16:47:56Z",
+      "side": 1,
+      "message": "nit: use a `std::string_view` to avoid the possibility of a temporary copy if the argument isn\u0027t a `std::string`?",
+      "range": {
+        "startLine": 444,
+        "startChar": 37,
+        "endLine": 444,
+        "endChar": 55
+      },
+      "revId": "f4033b93d58e878a3b6de5e79f58b4d225a45ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
