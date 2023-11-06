@@ -16,6 +16,23 @@
       "message": "Fixed the assert in `DepthStencilLoadOpTests.ClearMip0`. This was caused by me incorrectly resolving the merge conflict with https://dawn-review.googlesource.com/c/dawn/+/155441 . That commit introduces a separate path in `TransitionUsageForPass` for combined depth-stencil textures. My initial resolution only merged the usages, but not the shader stages.",
       "revId": "a1992ab9359a7b203580704f7a66732c33d73c1e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b1694cb_4f10229a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-06T14:46:01Z",
+      "side": 1,
+      "message": "Still LGTM!",
+      "revId": "a1992ab9359a7b203580704f7a66732c33d73c1e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
