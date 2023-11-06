@@ -33,6 +33,24 @@
       "message": "I think we shouldn\u0027t be calling tasks while holding the mutex because there could be reentrant calls that would also want to take the mutex.\n\nThis CL also makes it so some callbacks are called immediately, so we might need to be careful to always post tasks in a context where it is ok to be reentrant (but can be left for a follow-up or a TODO much later)",
       "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c4de5e6_6c999a4a",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T19:18:12Z",
+      "side": 1,
+      "message": "So I think we actually need to hold the mutex here because `mState` is actually synchronized via the mutex. Also, `OnShutDown()` and `OnDeviceLoss()` does not actually call any callbacks. They just set a state so I **think** it shouldn\u0027t be a problem.",
+      "parentUuid": "48c7d383_48ff3c81",
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
