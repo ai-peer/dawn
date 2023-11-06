@@ -101,6 +101,10 @@ class BufferBase : public ApiObjectBase {
                      size_t size,
                      WGPUBufferMapCallback callback,
                      void* userdata);
+    Future APIMapAsyncF(wgpu::MapMode mode,
+                        size_t offset,
+                        size_t size,
+                        const BufferMapCallbackInfo& callbackInfo);
     void* APIGetMappedRange(size_t offset, size_t size);
     const void* APIGetConstMappedRange(size_t offset, size_t size);
     void APIUnmap();
@@ -161,6 +165,9 @@ class BufferBase : public ApiObjectBase {
     wgpu::MapMode mMapMode = wgpu::MapMode::None;
     size_t mMapOffset = 0;
     size_t mMapSize = 0;
+
+    struct MapAsyncEvent;
+    Ref<MapAsyncEvent> mPendingMapEvent;
 };
 
 }  // namespace dawn::native
