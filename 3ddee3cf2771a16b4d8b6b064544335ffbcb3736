@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bd8e8c2_5260d2b0",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 495,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13891588_f9301f39",
+      "revId": "3ddee3cf2771a16b4d8b6b064544335ffbcb3736",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e07312f1_2dd649f8",

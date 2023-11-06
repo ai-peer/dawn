@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "46e6c30b_017a1a4e",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "The current `MapAsync` does not change, and the tests are still actually testing the old path as well. If I did everything right, the tests should now be a superset of the previous tests so we shouldn\u0027t lose any existing coverage.",
+      "parentUuid": "bd952ca9_e3578dbe",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b060742_39183d19",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-11-04T01:56:37Z",
       "side": 1,
       "message": "nit: exercise",
+      "range": {
+        "startLine": 210,
+        "startChar": 15,
+        "endLine": 210,
+        "endChar": 24
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b645665e_3223c7c2",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 210,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5b060742_39183d19",
       "range": {
         "startLine": 210,
         "startChar": 15,
@@ -104,6 +146,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "74a901bc_6889dea5",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 219,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "This is used once so keeping for now.",
+      "parentUuid": "781e1ada_7e726ea3",
+      "range": {
+        "startLine": 219,
+        "startChar": 0,
+        "endLine": 219,
+        "endChar": 4
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "445f04cd_e3a01d77",
@@ -117,6 +183,30 @@
       "writtenOn": "2023-11-04T01:56:37Z",
       "side": 1,
       "message": "This return value doesn\u0027t seem to be used?",
+      "range": {
+        "startLine": 225,
+        "startChar": 0,
+        "endLine": 225,
+        "endChar": 4
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3b378f4_2a7c6b77",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "445f04cd_e3a01d77",
       "range": {
         "startLine": 225,
         "startChar": 0,
@@ -150,6 +240,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7eed1ef_39cf6468",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Right now I think it causes a `CHECK(false)` up the stack in Chromium here: https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/client/webgpu_implementation.cc;l\u003d318-322;drc\u003d7fa0c25da15ae39bbd2fd720832ec4df4fee705a;bpv\u003d1;bpt\u003d1\n\nSo I guess it just crashes atm?",
+      "parentUuid": "ea559438_e6a2ebd2",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 4
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a19913ef_cb4414a7",
@@ -163,6 +277,30 @@
       "writtenOn": "2023-11-04T01:56:37Z",
       "side": 1,
       "message": "Old code but do we actually lose the device when this happens, or just report DeviceLost as the status? Does returning false trigger device loss?",
+      "range": {
+        "startLine": 311,
+        "startChar": 24,
+        "endLine": 311,
+        "endChar": 59
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b332751_d59b8d8f",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "See comment above, but basically I think it crashes.",
+      "parentUuid": "a19913ef_cb4414a7",
       "range": {
         "startLine": 311,
         "startChar": 24,
@@ -196,6 +334,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "88e99803_fed65be3",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48bd5a66_ecaf28d2",
+      "range": {
+        "startLine": 109,
+        "startChar": 7,
+        "endLine": 109,
+        "endChar": 86
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4060647d_f8f85229",
@@ -209,6 +371,24 @@
       "writtenOn": "2023-11-04T01:56:37Z",
       "side": 1,
       "message": "(non-blocking comment)\n\nI hoped SetReady could be guaranteed to happen only once - or more specifically, that ReadyHook would only be called once so we don\u0027t have to worry about what happens if it gets called more than once with different args.\n\nIIUC the reason we need this here is if the map becomes ready, but then we unmap before completing it. I might prefer to handle this slightly differently: instead of calling ReadyHook and SetReady multiple times, just set ready once without a MapAsyncStatus, then compute the MapAsyncStatus in CompleteImpl. I think we have enough information there to do that. It might also have the bonus effect of making CompleteImpl look more like the WebGPU spec.\n\nWe would still need to SetFutureReady multiple times, but now idempotently (EnsureFutureReady). This could guard ReadyHook and SetReady from being called more than once. This is probably incompatible with how we\u0027re already using SetFutureReady elsewhere, though, so if we want to try to change this, it\u0027ll be a follow-up.",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc6657a8_b7b79375",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Ack, will address this separately.",
+      "parentUuid": "4060647d_f8f85229",
       "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +416,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05d90663_28458205",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f506923c_f89272ed",
+      "range": {
+        "startLine": 105,
+        "startChar": 63,
+        "endLine": 105,
+        "endChar": 67
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c4edb4e2_598e726e",
@@ -253,6 +457,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2dab959_f1ec87d2",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c4edb4e2_598e726e",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8760de93_fd65976a",
@@ -266,6 +488,30 @@
       "writtenOn": "2023-11-04T01:56:37Z",
       "side": 1,
       "message": "IIUC you could just pass `futureID` here",
+      "range": {
+        "startLine": 143,
+        "startChar": 39,
+        "endLine": 143,
+        "endChar": 63
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2512798e_d74610f2",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-06T20:29:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8760de93_fd65976a",
       "range": {
         "startLine": 143,
         "startChar": 39,
