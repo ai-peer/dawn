@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73cb3763_e2d53bba",
+        "filename": "third_party/gn/dxc/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-06T19:30:54Z",
+      "side": 1,
+      "message": "nit: it\u0027s usually a good idea to have more than one OWNER.",
+      "revId": "c508acaf8507934208bf0cdf07227599b9b86a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
