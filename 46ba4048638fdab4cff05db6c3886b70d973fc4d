@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abb45edc_b19e17a0",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-06T21:41:21Z",
+      "side": 1,
+      "message": "Might be able to assert that this ReadyHooks is called only once?",
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7288fcd_3de79d0b",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-06T21:41:21Z",
+      "side": 1,
+      "message": "Explain why this isn\u0027t needed if there wasn\u0027t an error?",
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5649af4b_c77f2332",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-06T21:41:21Z",
+      "side": 1,
+      "message": "nit: empty",
+      "range": {
+        "startLine": 91,
+        "startChar": 34,
+        "endLine": 91,
+        "endChar": 40
+      },
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4caef36f_1805b0c9",
+        "filename": "src/dawn/wire/client/Instance.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-06T21:41:21Z",
+      "side": 1,
+      "message": "Having a raw pointer member here is scary. I don\u0027t think this is refcountable but can we at least comment what guarantees it stays alive?",
+      "revId": "46ba4048638fdab4cff05db6c3886b70d973fc4d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
