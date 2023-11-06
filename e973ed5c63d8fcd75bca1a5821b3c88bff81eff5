@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf6975ee_cc670efe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-06T09:34:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48c7d383_48ff3c81",
+        "filename": "src/dawn/native/CallbackTaskManager.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-06T09:34:46Z",
+      "side": 1,
+      "message": "I think we shouldn\u0027t be calling tasks while holding the mutex because there could be reentrant calls that would also want to take the mutex.\n\nThis CL also makes it so some callbacks are called immediately, so we might need to be careful to always post tasks in a context where it is ok to be reentrant (but can be left for a follow-up or a TODO much later)",
+      "revId": "e973ed5c63d8fcd75bca1a5821b3c88bff81eff5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
