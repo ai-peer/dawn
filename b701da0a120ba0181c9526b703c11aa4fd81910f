@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "efedc769_763557de",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-06T19:47:17Z",
+      "side": 1,
+      "message": "These MessageIDs are static, I assume? (from VVL)\n(If not it\u0027s fine - we can fix it in another CL)",
+      "range": {
+        "startLine": 148,
+        "startChar": 18,
+        "endLine": 148,
+        "endChar": 28
+      },
+      "revId": "b701da0a120ba0181c9526b703c11aa4fd81910f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
