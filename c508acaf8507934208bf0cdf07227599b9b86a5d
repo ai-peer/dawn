@@ -34,6 +34,24 @@
       "parentUuid": "73cb3763_e2d53bba",
       "revId": "c508acaf8507934208bf0cdf07227599b9b86a5d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6697e2e1_53863d89",
+        "filename": "third_party/gn/dxc/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 2,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-06T19:33:00Z",
+      "side": 1,
+      "message": "Sure thing",
+      "parentUuid": "02d0001e_38d71f14",
+      "revId": "c508acaf8507934208bf0cdf07227599b9b86a5d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
