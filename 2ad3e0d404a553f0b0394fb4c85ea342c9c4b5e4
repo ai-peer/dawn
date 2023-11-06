@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "78d553e6_45fed91b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-06T09:37:23Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "688771a2_d5cdd26c",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-06T09:37:23Z",
+      "side": 1,
+      "message": "Technically timestamps are allowed to wrap around, but I guess it should never happen in practice so this test won\u0027t be flaky? But if turns out to be flaky we\u0027ll have to remove it.",
+      "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
