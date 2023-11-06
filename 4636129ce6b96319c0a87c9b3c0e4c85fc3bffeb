@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4951ee9a_a674a892",
+        "filename": "src/dawn/tests/unittests/wire/WireBufferMappingTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-06T21:08:15Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "46e6c30b_017a1a4e",
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b060742_39183d19",
@@ -254,6 +272,30 @@
       "side": 1,
       "message": "Right now I think it causes a `CHECK(false)` up the stack in Chromium here: https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/client/webgpu_implementation.cc;l\u003d318-322;drc\u003d7fa0c25da15ae39bbd2fd720832ec4df4fee705a;bpv\u003d1;bpt\u003d1\n\nSo I guess it just crashes atm?",
       "parentUuid": "ea559438_e6a2ebd2",
+      "range": {
+        "startLine": 296,
+        "startChar": 0,
+        "endLine": 296,
+        "endChar": 4
+      },
+      "revId": "4636129ce6b96319c0a87c9b3c0e4c85fc3bffeb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "764ba8a8_0986c619",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 296,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-06T21:08:15Z",
+      "side": 1,
+      "message": "Ahh, got it, couldn\u0027t find that. Seems good then.",
+      "parentUuid": "a7eed1ef_39cf6468",
       "range": {
         "startLine": 296,
         "startChar": 0,
