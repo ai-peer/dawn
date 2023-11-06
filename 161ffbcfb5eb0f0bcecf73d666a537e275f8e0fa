@@ -111,6 +111,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "881b178d_dd86acd5",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-06T22:40:22Z",
+      "side": 1,
+      "message": "Feels like the new transform approach will be another bigger change so let me I just try to push forward this smaller glsl emiiter change a little bit more if possible. (Looks like it has to change a bunch of glsl expected tests unfortunately)\n\nTrying to interpret the spec language from opengl es 3.1 again and I think I know why the test mentioned above pass:\n\u003e When a named uniform block is declared by multiple shaders in a program, it\nmust be declared identically in each shader. The uniforms within the block must be\ndeclared with the same names, types, and layout qualifiers, in the same order. If a\nprogram contains multiple shaders with different declarations for the same named\nuniform block, the program will fail to link\n\n- `layout(binding \u003d 0, std140) uniform tint_symbol_block_ubo {` in vs and `layout(binding \u003d 1, std140) uniform tint_symbol_block_ubo {` in fs is bad. They are different blocks with the same name (diff inlayout qualifer)\n\n- `layout(binding \u003d 1 std140) uniform tint_symbol_1_block_ubo_1 {` in vs and `layout(binding \u003d 1, std140) uniform tint_symbol_block_ubo_1 {` in fs is ok. They are the same block. The only difference is the block struct name. \"The uniforms **within** the block: names, types and the layout qualifiers\" are the same.\n\nSo what our fix needs to do is to make sure different block have different names, which can be guaranteed by appending the binding number. And it is okay for the same block to have different names as long as their inner variables and layout qualifier are the same.\n\nAnd the current emitter change seems satisfy this need.\n\nLet me know if you still think an early block-renamer transform is needed in this case.",
+      "parentUuid": "28139447_bf406bf2",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
