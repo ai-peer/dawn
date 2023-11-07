@@ -175,6 +175,24 @@
       "parentUuid": "b3a3af46_891efbb0",
       "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3beab970_e165d51f",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-07T21:54:00Z",
+      "side": 1,
+      "message": "I think the explicit name would just make it easier to know if it\u0027s right. This also would also help for Get/Detach, not just Acquire/Duplicate like the template thing (the template thing is good though).\n\nThis is assuming we only support one handle type on any given OS (no POSIX on Windows for example), but this whole abstraction assumes that already.\n\nI\u0027m having a hard time thinking through whether this really helps though, so LGTM regardless.",
+      "parentUuid": "1ac4c525_8190b973",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
