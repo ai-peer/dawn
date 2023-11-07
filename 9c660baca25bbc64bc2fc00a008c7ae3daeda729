@@ -103,6 +103,24 @@
       "parentUuid": "2a7bc906_73e04504",
       "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b3a3af46_891efbb0",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-07T03:50:31Z",
+      "side": 1,
+      "message": "I had a thought for Get() that could solve this too - what if we give each one a different name? E.g.\nAcquireFd, DuplicateFd, GetFd, DetachFd\nAcquireHANDLE, DuplicateHANDLE, GetHANDLE, DetachHANDLE\n\nor\nAcquirePOSIX, ...\nAcquireWin32, ...",
+      "parentUuid": "52b0fe9e_2a78928e",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
