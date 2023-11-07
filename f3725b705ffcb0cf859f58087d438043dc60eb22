@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "705dec28_cf7b9697",
+        "filename": "src/dawn/tests/end2end/ComputeDispatchTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-07T00:41:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "364c4593_11300746",
+      "range": {
+        "startLine": 426,
+        "startChar": 36,
+        "endLine": 426,
+        "endChar": 39
+      },
+      "revId": "f3725b705ffcb0cf859f58087d438043dc60eb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cf718c4_8a84764e",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-03T23:33:12Z",
       "side": 1,
       "message": "Hmm, when do these cases happen? It looks like the data never specifies dimes that large?",
+      "range": {
+        "startLine": 506,
+        "startChar": 16,
+        "endLine": 508,
+        "endChar": 88
+      },
+      "revId": "f3725b705ffcb0cf859f58087d438043dc60eb22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cb472e1_79b4b059",
+        "filename": "src/dawn/tests/end2end/ComputeDispatchTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 508,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-07T00:41:30Z",
+      "side": 1,
+      "message": "Add a max+1 no-op test case",
+      "parentUuid": "2cf718c4_8a84764e",
       "range": {
         "startLine": 506,
         "startChar": 16,
