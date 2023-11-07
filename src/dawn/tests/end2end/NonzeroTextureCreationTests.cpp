@@ -121,12 +121,6 @@ class NonzeroTextureCreationTests : public DawnTestWithParams<Params> {
         DAWN_TEST_UNSUPPORTED_IF(utils::IsCompressedTextureFormat(GetParam().mFormat) &&
                                  IsCompatibilityMode());
 
-        // TODO(crbug.com/dawn/2182): dawn/native needs to make compat compatible texture views when
-        // using a compute shader to blit.
-        DAWN_TEST_UNSUPPORTED_IF((GetParam().mFormat == wgpu::TextureFormat::Stencil8 ||
-                                  GetParam().mFormat == wgpu::TextureFormat::Depth32Float) &&
-                                 IsCompatibilityMode());
-
         // TODO(crbug.com/dawn/1637): Failures with ANGLE only with some format/aspect
         DAWN_SUPPRESS_TEST_IF(IsWindows() && IsANGLE() &&
                               GetParam().mAspect == wgpu::TextureAspect::All &&

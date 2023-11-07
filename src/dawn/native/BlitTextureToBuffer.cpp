@@ -567,22 +567,27 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
                                const Extent3D& copyExtent) {
     wgpu::TextureViewDimension textureViewDimension;
     {
-        wgpu::TextureDimension dimension = src.texture->GetDimension();
-        switch (dimension) {
-            case wgpu::TextureDimension::e1D:
-                textureViewDimension = wgpu::TextureViewDimension::e1D;
-                break;
-            case wgpu::TextureDimension::e2D:
-                if (src.texture->GetArrayLayers() > 1) {
-                    textureViewDimension = wgpu::TextureViewDimension::e2DArray;
-                } else {
-                    textureViewDimension = wgpu::TextureViewDimension::e2D;
-                }
-                break;
-            case wgpu::TextureDimension::e3D:
-                textureViewDimension = wgpu::TextureViewDimension::e3D;
-                break;
+        if (device->IsCompatibilityMode()) {
+            textureViewDimension = src.texture->GetCompatibilityTextureBindingViewDimension();
+        } else {
+            wgpu::TextureDimension dimension = src.texture->GetDimension();
+            switch (dimension) {
+                case wgpu::TextureDimension::e1D:
+                    textureViewDimension = wgpu::TextureViewDimension::e1D;
+                    break;
+                case wgpu::TextureDimension::e2D:
+                    if (src.texture->GetArrayLayers() > 1) {
+                        textureViewDimension = wgpu::TextureViewDimension::e2DArray;
+                    } else {
+                        textureViewDimension = wgpu::TextureViewDimension::e2D;
+                    }
+                    break;
+                case wgpu::TextureDimension::e3D:
+                    textureViewDimension = wgpu::TextureViewDimension::e3D;
+                    break;
+            }
         }
+        // TODO: cube array
     }
 
     Ref<ComputePipelineBase> pipeline;
