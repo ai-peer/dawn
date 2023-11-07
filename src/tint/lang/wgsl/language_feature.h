@@ -70,6 +70,11 @@ constexpr const char* kLanguageFeatureStrings[] = {
     "readonly_and_readwrite_storage_textures",
 };
 
+/// All features
+static constexpr LanguageFeature kAllLanguageFeatures[] = {
+    LanguageFeature::kReadonlyAndReadwriteStorageTextures,
+};
+
 // A unique vector of language features
 using LanguageFeatures = UniqueVector<LanguageFeature, 4>;
 

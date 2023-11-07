@@ -24,6 +24,13 @@ namespace tint::wgsl {
 /// @see src/tint/lang/wgsl/intrinsics.def for language feature descriptions
 {{ Eval "DeclareEnum" $enum}}
 
+/// All features
+static constexpr LanguageFeature kAllLanguageFeatures[] = {
+{{-   range $entry := $enum.Entries }}
+    LanguageFeature::k{{PascalCase $entry.Name}},
+{{-   end }}
+};
+
 // A unique vector of language features
 using LanguageFeatures = UniqueVector<LanguageFeature, 4>;
 
