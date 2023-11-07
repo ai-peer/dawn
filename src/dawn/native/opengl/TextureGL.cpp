@@ -592,6 +592,7 @@ TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* desc
             // Simulate glTextureView() with texture-to-texture copies.
             mUseCopy = true;
             mHandle = 0;
+            // DAWN_UNREACHABLE();
         }
     }
 }
