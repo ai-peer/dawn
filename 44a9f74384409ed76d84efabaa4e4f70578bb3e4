@@ -34,6 +34,24 @@
       "parentUuid": "ef57d5b6_81d55c55",
       "revId": "44a9f74384409ed76d84efabaa4e4f70578bb3e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ffd8fd2_3ffd7fa4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-07T14:43:15Z",
+      "side": 1,
+      "message": "Oh good catch, did you file issues about these formats so the Graphite team is aware?\n\nOf course ExternalTexture support would be another CL, but feel free to push back and someone on the Dawn team will take care of it!",
+      "parentUuid": "e4953bce_cb1c23f6",
+      "revId": "44a9f74384409ed76d84efabaa4e4f70578bb3e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
