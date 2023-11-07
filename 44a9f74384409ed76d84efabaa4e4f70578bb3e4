@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef57d5b6_81d55c55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-07T12:55:13Z",
+      "side": 1,
+      "message": "This is a very impressive first contribution! LGTM\n\nNote however that for full support of this format we\u0027ll also need to update ExternalTexture to support getting an additional third plane for the alpha. See https://developer.chrome.com/blog/new-in-webgpu-116/#webcodecs-integration\n\nRelevant files are third_party/dawn/src/dawn/native/ExternalTexture.cpp third_party/dawn/src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.cc and third_party/dawn/src/tint/lang/core/ir/transform/multiplanar_external_texture.cc (we are in the middle of the AST -\u003e IR transition so there is some duplication)",
+      "revId": "44a9f74384409ed76d84efabaa4e4f70578bb3e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
