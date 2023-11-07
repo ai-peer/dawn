@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cc43e8d_a827ed7f",
+        "filename": "src/dawn/node/binding/Converter.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1642,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-07T18:47:41Z",
+      "side": 1,
+      "message": "No, the WebGPU API requests that this be a validation error.",
+      "parentUuid": "8aa1dfa7_67ef6e68",
+      "range": {
+        "startLine": 1631,
+        "startChar": 0,
+        "endLine": 1642,
+        "endChar": 15
+      },
+      "revId": "f4033b93d58e878a3b6de5e79f58b4d225a45ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b510f0b8_37f7ef89",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-06T16:47:56Z",
       "side": 1,
       "message": "nit: use a `std::string_view` to avoid the possibility of a temporary copy if the argument isn\u0027t a `std::string`?",
+      "range": {
+        "startLine": 444,
+        "startChar": 37,
+        "endLine": 444,
+        "endChar": 55
+      },
+      "revId": "f4033b93d58e878a3b6de5e79f58b4d225a45ca0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "36abdae1_f59fb8a2",
+        "filename": "src/dawn/node/binding/Converter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 444,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-07T18:47:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b510f0b8_37f7ef89",
       "range": {
         "startLine": 444,
         "startChar": 37,
