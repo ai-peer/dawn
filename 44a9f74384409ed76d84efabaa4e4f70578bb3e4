@@ -52,6 +52,24 @@
       "parentUuid": "e4953bce_cb1c23f6",
       "revId": "44a9f74384409ed76d84efabaa4e4f70578bb3e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f978ea76_9501f4aa",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2023-11-07T14:59:21Z",
+      "side": 1,
+      "message": "I don’t have a sample to reproduce but sincd that dawn only support two multi-plane format (nv12, p010), it has a high chance to cause problem.\n\nIt seems that:\n\nYV12: https://source.chromium.org/chromium/chromium/src/+/main:components/exo/buffer.cc;l\u003d107\n\nI420/I420A/I444: https://source.chromium.org/chromium/chromium/src/+/main:third_party/blink/renderer/modules/webcodecs/fuzzer_inputs.proto;l\u003d48\n\nall these four formats and some other 420/422/444 format are missing.",
+      "parentUuid": "2ffd8fd2_3ffd7fa4",
+      "revId": "44a9f74384409ed76d84efabaa4e4f70578bb3e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
