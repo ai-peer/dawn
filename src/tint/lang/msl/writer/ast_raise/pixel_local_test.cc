@@ -117,7 +117,7 @@ fn F(pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -170,7 +170,7 @@ fn F(pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -230,11 +230,11 @@ fn F(pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
-  @internal(attachment(0)) @internal(disable_validation__entry_point_parameter)
+  @color(0u) @internal(disable_validation__entry_point_parameter)
   b : i32,
-  @internal(attachment(10)) @internal(disable_validation__entry_point_parameter)
+  @color(10u) @internal(disable_validation__entry_point_parameter)
   c : f32,
 }
 
@@ -284,7 +284,7 @@ fn F(@builtin(position) pos : vec4f, pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -333,7 +333,7 @@ fn F(@invariant @builtin(position) pos : vec4f, pixel_local_1 : PixelLocal) -> F
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -386,7 +386,7 @@ fn F(in : In, pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -444,7 +444,7 @@ fn F(in : In, pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -498,7 +498,7 @@ fn F(@location(0) a : vec4f, @interpolate(flat) @location(1) b : vec4f, pixel_lo
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -552,7 +552,7 @@ fn F(in : In, pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -608,7 +608,7 @@ fn F(@builtin(position) pos : vec4f, @location(0) uv : vec4f, pixel_local_1 : Pi
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -662,7 +662,7 @@ fn F(in : In, pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -721,7 +721,7 @@ fn F(pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
 }
 
@@ -784,9 +784,9 @@ fn F(pixel_local_1 : PixelLocal) -> F_res {
 }
 
 struct PixelLocal {
-  @internal(attachment(1)) @internal(disable_validation__entry_point_parameter)
+  @color(1u) @internal(disable_validation__entry_point_parameter)
   a : u32,
-  @internal(attachment(5)) @internal(disable_validation__entry_point_parameter)
+  @color(5u) @internal(disable_validation__entry_point_parameter)
   b : u32,
 }
 
