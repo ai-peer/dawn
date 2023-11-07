@@ -141,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab80860f_e0aafa3a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004586
+      },
+      "writtenOn": "2023-11-07T12:08:17Z",
+      "side": 1,
+      "message": "\u003e validation test it is invalid to use the feature without explicitly enabling it\n\u003e validation test that it is then valid to use the feature when explicitly enabled\n\nI think the current test could cover this already, if the feature is enabled, we test NV12/P010/NV12A, if the feature is disabled, we test NV12/P010 and skip NV12A.",
+      "parentUuid": "24aa9c59_cafbb3c4",
+      "revId": "199dba2233b3fb238e0e14c85d1a519a79894e95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2cb60af_715c8d2c",
