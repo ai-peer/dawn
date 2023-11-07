@@ -22,6 +22,30 @@
       },
       "revId": "b701da0a120ba0181c9526b703c11aa4fd81910f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9426efda_5604b200",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-11-07T18:21:06Z",
+      "side": 1,
+      "message": "I don\u0027t actually know where these come from.\nSeems to work here https://chromium-review.googlesource.com/c/chromium/src/+/5010479\nBut here it fails and I don\u0027t understand why https://chromium-review.googlesource.com/c/chromium/src/+/5008892\nI\u0027ll figure out once the roll above lands and there are less CLs to bisect",
+      "parentUuid": "efedc769_763557de",
+      "range": {
+        "startLine": 148,
+        "startChar": 18,
+        "endLine": 148,
+        "endChar": 28
+      },
+      "revId": "b701da0a120ba0181c9526b703c11aa4fd81910f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
