@@ -606,9 +606,10 @@ void Inspector::AddEntryPointInOutVariables(std::string name,
     std::tie(stage_variable.component_type, stage_variable.composition_type) =
         CalculateComponentAndComposition(type);
 
-    TINT_ASSERT(location.has_value());
-    stage_variable.has_location_attribute = true;
-    stage_variable.location_attribute = location.value();
+    if (location.has_value()) {
+        stage_variable.has_location_attribute = true;
+        stage_variable.location_attribute = location.value();
+    }
 
     std::tie(stage_variable.interpolation_type, stage_variable.interpolation_sampling) =
         CalculateInterpolationData(type, attributes);

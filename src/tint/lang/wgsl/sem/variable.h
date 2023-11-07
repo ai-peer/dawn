@@ -183,6 +183,14 @@ class GlobalVariable final : public Castable<GlobalVariable, Variable> {
     /// @returns the location value for the parameter, if set
     std::optional<uint32_t> Location() const { return location_; }
 
+    /// @param color the color value for the parameter, if set
+    /// @note a GlobalVariable generally doesn't have a `color` in WGSL, as it isn't allowed by
+    /// the spec. The color maybe attached by transforms such as CanonicalizeEntryPointIO.
+    void SetColor(std::optional<uint32_t> color) { color_ = color; }
+
+    /// @returns the color value for the parameter, if set
+    std::optional<uint32_t> Color() const { return color_; }
+
     /// @param index the index value for the parameter, if set
     void SetIndex(std::optional<uint32_t> index) { index_ = index; }
 
@@ -202,6 +210,7 @@ class GlobalVariable final : public Castable<GlobalVariable, Variable> {
     std::optional<tint::BindingPoint> binding_point_;
     tint::OverrideId override_id_;
     std::optional<uint32_t> location_;
+    std::optional<uint32_t> color_;
     std::optional<uint32_t> index_;
     UniqueVector<const GlobalVariable*, 4> transitively_referenced_overrides_;
 };
@@ -266,6 +275,12 @@ class Parameter final : public Castable<Parameter, Variable> {
     /// @returns the location value for the parameter, if set
     std::optional<uint32_t> Location() const { return location_; }
 
+    /// @param color the color value for the parameter, if set
+    void SetColor(std::optional<uint32_t> color) { color_ = color; }
+
+    /// @returns the color value for the parameter, if set
+    std::optional<uint32_t> Color() const { return color_; }
+
   private:
     uint32_t index_ = 0;
     core::ParameterUsage usage_ = core::ParameterUsage::kNone;
@@ -273,6 +288,7 @@ class Parameter final : public Castable<Parameter, Variable> {
     const CastableBase* shadows_ = nullptr;
     std::optional<tint::BindingPoint> binding_point_;
     std::optional<uint32_t> location_;
+    std::optional<uint32_t> color_;
 };
 
 /// VariableUser holds the semantic information for an identifier expression
