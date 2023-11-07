@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3843ced6_61a3f092",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-11-07T15:02:29Z",
+      "side": 1,
+      "message": "Rebased and fixed two issues causing test failures:\n1. I had not considered the use case of binding a resource which isn\u0027t actually used. (Pointless but technically valid so needs to be handled correctly).\n2. I had an optimization which removes barriers for buffers which can\u0027t be written to by the GPU (based on usage flags). Writes on the host are covered by `vkQueueSubmit`. The purpose of this optimization is to optimize user scratch buffers for when the user isn\u0027t using `queue.writeBuffer` but instead manually uploading data to scratch buffers (`MAP_WRITE | COPY_SRC`) and copying to the destination buffer. Internal scratch buffers already skip barriers by not calling `TransitionUsage`. However, the way I was checking if a buffer can\u0027t be written to wasn\u0027t valid as there can be internal GPU writes despite no matching usage flag. For now, I have removed the optimization. We may want to revisit it in the future if we can find a way to do it.",
+      "revId": "8a2f0c6ca2a0b8781c49b8c8d9d812e5f9d2f6f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
