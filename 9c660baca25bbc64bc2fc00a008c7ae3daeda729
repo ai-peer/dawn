@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8982fb80_1a2216c3",
+        "filename": "src/dawn/native/SystemHandle.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-07T16:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5c3dfce_0ea5c192",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e10e64cc_64468113",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-10-25T21:57:22Z",
       "side": 1,
       "message": "nit: #else #error maybe.",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df5a4513_0c8c0654",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-07T16:52:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e10e64cc_64468113",
       "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -119,6 +155,24 @@
       "side": 1,
       "message": "I had a thought for Get() that could solve this too - what if we give each one a different name? E.g.\nAcquireFd, DuplicateFd, GetFd, DetachFd\nAcquireHANDLE, DuplicateHANDLE, GetHANDLE, DetachHANDLE\n\nor\nAcquirePOSIX, ...\nAcquireWin32, ...",
       "parentUuid": "52b0fe9e_2a78928e",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ac4c525_8190b973",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-07T16:52:16Z",
+      "side": 1,
+      "message": "(changed it to a static assert)\n\nhmm.. how do the names help the implict conversions? I would think you need to have both Acquire(unsigned int) and Acquire(int) to prevent an unexpected conversion.\nIf you have AcquireZircon(unsigned int) and AcquirePOSIX(int) - you can still have conversions if you call the wrong one.",
+      "parentUuid": "b3a3af46_891efbb0",
       "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
