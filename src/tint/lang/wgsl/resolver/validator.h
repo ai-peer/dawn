@@ -332,17 +332,30 @@ class Validator {
     bool LocalVariable(const sem::Variable* v) const;
 
     /// Validates a location attribute
-    /// @param loc_attr the location attribute to validate
+    /// @param attr the location attribute to validate
     /// @param type the variable type
     /// @param stage the current pipeline stage
     /// @param source the source of the attribute
     /// @param is_input true if this is an input variable
     /// @returns true on success, false otherwise.
-    bool LocationAttribute(const ast::LocationAttribute* loc_attr,
+    bool LocationAttribute(const ast::LocationAttribute* attr,
                            const core::type::Type* type,
                            ast::PipelineStage stage,
                            const Source& source,
                            const bool is_input = false) const;
+
+    /// Validates a color attribute
+    /// @param attr the color attribute to validate
+    /// @param type the variable type
+    /// @param stage the current pipeline stage
+    /// @param source the source of the attribute
+    /// @param is_input true if this is an input variable
+    /// @returns true on success, false otherwise.
+    bool ColorAttribute(const ast::ColorAttribute* attr,
+                        const core::type::Type* type,
+                        ast::PipelineStage stage,
+                        const Source& source,
+                        const bool is_input = false) const;
 
     /// Validates a index attribute
     /// @param index_attr the index attribute to validate

@@ -137,10 +137,7 @@ bool IsValidStorageTextureTexelFormat(core::TexelFormat format) {
 
 // Helper to stringify a pipeline IO attribute.
 std::string AttrToStr(const ast::Attribute* attr) {
-    return Switch(
-        attr,  //
-        [&](const ast::BuiltinAttribute*) { return "@builtin"; },
-        [&](const ast::LocationAttribute*) { return "@location"; });
+    return "@" + attr->Name();
 }
 
 template <typename CALLBACK>
@@ -1116,78 +1113,113 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                                                      ParamOrRetType param_or_ret,
                                                      bool is_struct_member,
                                                      std::optional<uint32_t> location,
+                                                     std::optional<uint32_t> color,
                                                      std::optional<uint32_t> index) {
         // Scan attributes for pipeline IO attributes.
         // Check for overlap with attributes that have been seen previously.
         const ast::Attribute* pipeline_io_attribute = nullptr;
         const ast::LocationAttribute* location_attribute = nullptr;
+        const ast::ColorAttribute* color_attribute = nullptr;
         const ast::IndexAttribute* index_attribute = nullptr;
         const ast::InterpolateAttribute* interpolate_attribute = nullptr;
         const ast::InvariantAttribute* invariant_attribute = nullptr;
         for (auto* attr : attrs) {
             auto is_invalid_compute_shader_attribute = false;
 
-            if (auto* builtin_attr = attr->As<ast::BuiltinAttribute>()) {
-                auto builtin = sem_.Get(builtin_attr)->Value();
+            bool ok = Switch(
+                attr,  //
+                [&](const ast::BuiltinAttribute* builtin_attr) {
+                    auto builtin = sem_.Get(builtin_attr)->Value();
 
-                if (pipeline_io_attribute) {
-                    AddError("multiple entry point IO attributes", attr->source);
-                    AddNote("previously consumed " + AttrToStr(pipeline_io_attribute),
-                            pipeline_io_attribute->source);
-                    return false;
-                }
-                pipeline_io_attribute = attr;
+                    if (pipeline_io_attribute) {
+                        AddError("multiple entry point IO attributes", attr->source);
+                        AddNote("previously consumed " + AttrToStr(pipeline_io_attribute),
+                                pipeline_io_attribute->source);
+                        return false;
+                    }
+                    pipeline_io_attribute = attr;
 
-                if (builtins.Contains(builtin)) {
-                    StringStream err;
-                    err << "@builtin(" << builtin << ") appears multiple times as pipeline "
-                        << (param_or_ret == ParamOrRetType::kParameter ? "input" : "output");
-                    AddError(err.str(), decl->source);
-                    return false;
-                }
+                    if (builtins.Contains(builtin)) {
+                        StringStream err;
+                        err << "@builtin(" << builtin << ") appears multiple times as pipeline "
+                            << (param_or_ret == ParamOrRetType::kParameter ? "input" : "output");
+                        AddError(err.str(), decl->source);
+                        return false;
+                    }
 
-                if (!BuiltinAttribute(builtin_attr, ty, stage,
-                                      /* is_input */ param_or_ret == ParamOrRetType::kParameter)) {
-                    return false;
-                }
-                builtins.Add(builtin);
-            } else if (auto* loc_attr = attr->As<ast::LocationAttribute>()) {
-                location_attribute = loc_attr;
-                if (pipeline_io_attribute) {
-                    AddError("multiple entry point IO attributes", attr->source);
-                    AddNote("previously consumed " + AttrToStr(pipeline_io_attribute),
-                            pipeline_io_attribute->source);
-                    return false;
-                }
-                pipeline_io_attribute = attr;
+                    if (!BuiltinAttribute(
+                            builtin_attr, ty, stage,
+                            /* is_input */ param_or_ret == ParamOrRetType::kParameter)) {
+                        return false;
+                    }
+                    builtins.Add(builtin);
+                    return true;
+                },
+                [&](const ast::LocationAttribute* loc_attr) {
+                    location_attribute = loc_attr;
+                    if (pipeline_io_attribute) {
+                        AddError("multiple entry point IO attributes", attr->source);
+                        AddNote("previously consumed " + AttrToStr(pipeline_io_attribute),
+                                pipeline_io_attribute->source);
+                        return false;
+                    }
+                    pipeline_io_attribute = attr;
 
-                bool is_input = param_or_ret == ParamOrRetType::kParameter;
+                    bool is_input = param_or_ret == ParamOrRetType::kParameter;
 
-                if (TINT_UNLIKELY(!location.has_value())) {
-                    TINT_ICE() << "Location has no value";
-                    return false;
-                }
+                    if (TINT_UNLIKELY(!location.has_value())) {
+                        TINT_ICE() << "@location has no value";
+                        return false;
+                    }
 
-                if (!LocationAttribute(loc_attr, ty, stage, source, is_input)) {
-                    return false;
-                }
-            } else if (auto* index_attr = attr->As<ast::IndexAttribute>()) {
-                index_attribute = index_attr;
-                return IndexAttribute(index_attr, stage);
-            } else if (auto* interpolate = attr->As<ast::InterpolateAttribute>()) {
-                if (decl->PipelineStage() == ast::PipelineStage::kCompute) {
-                    is_invalid_compute_shader_attribute = true;
-                } else if (!InterpolateAttribute(interpolate, ty)) {
-                    return false;
-                }
-                interpolate_attribute = interpolate;
-            } else if (auto* invariant = attr->As<ast::InvariantAttribute>()) {
-                if (decl->PipelineStage() == ast::PipelineStage::kCompute) {
-                    is_invalid_compute_shader_attribute = true;
-                }
-                invariant_attribute = invariant;
+                    return LocationAttribute(loc_attr, ty, stage, source, is_input);
+                },
+                [&](const ast::ColorAttribute* col_attr) {
+                    color_attribute = col_attr;
+                    if (pipeline_io_attribute) {
+                        AddError("multiple entry point IO attributes", attr->source);
+                        AddNote("previously consumed " + AttrToStr(pipeline_io_attribute),
+                                pipeline_io_attribute->source);
+                        return false;
+                    }
+                    pipeline_io_attribute = attr;
+
+                    bool is_input = param_or_ret == ParamOrRetType::kParameter;
+
+                    if (TINT_UNLIKELY(!color.has_value())) {
+                        TINT_ICE() << "@color has no value";
+                        return false;
+                    }
+
+                    return ColorAttribute(col_attr, ty, stage, source, is_input);
+                },
+                [&](const ast::IndexAttribute* index_attr) {
+                    index_attribute = index_attr;
+                    return IndexAttribute(index_attr, stage);
+                },
+                [&](const ast::InterpolateAttribute* interpolate) {
+                    if (decl->PipelineStage() == ast::PipelineStage::kCompute) {
+                        is_invalid_compute_shader_attribute = true;
+                    } else if (!InterpolateAttribute(interpolate, ty)) {
+                        return false;
+                    }
+                    interpolate_attribute = interpolate;
+                    return true;
+                },
+                [&](const ast::InvariantAttribute* invariant) {
+                    if (decl->PipelineStage() == ast::PipelineStage::kCompute) {
+                        is_invalid_compute_shader_attribute = true;
+                    }
+                    invariant_attribute = invariant;
+                    return true;
+                },
+                [&](Default) { return true; });
+
+            if (!ok) {
+                return false;
             }
-            if (is_invalid_compute_shader_attribute) {
+
+            if (TINT_UNLIKELY(is_invalid_compute_shader_attribute)) {
                 std::string input_or_output =
                     param_or_ret == ParamOrRetType::kParameter ? "inputs" : "output";
                 AddError("@" + attr->Name() + " is not valid for compute shader " + input_or_output,
@@ -1298,38 +1330,38 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     };
 
     // Outer lambda for validating the entry point attributes for a type.
-    auto validate_entry_point_attributes = [&](VectorRef<const ast::Attribute*> attrs,
-                                               const core::type::Type* ty, Source source,
-                                               ParamOrRetType param_or_ret,
-                                               std::optional<uint32_t> location,
-                                               std::optional<uint32_t> index) {
-        if (!validate_entry_point_attributes_inner(attrs, ty, source, param_or_ret,
-                                                   /*is_struct_member*/ false, location, index)) {
-            return false;
-        }
+    auto validate_entry_point_attributes =
+        [&](VectorRef<const ast::Attribute*> attrs, const core::type::Type* ty, Source source,
+            ParamOrRetType param_or_ret, std::optional<uint32_t> location,
+            std::optional<uint32_t> color, std::optional<uint32_t> index) {
+            if (!validate_entry_point_attributes_inner(attrs, ty, source, param_or_ret,
+                                                       /*is_struct_member*/ false, location, color,
+                                                       index)) {
+                return false;
+            }
 
-        if (auto* str = ty->As<sem::Struct>()) {
-            for (auto* member : str->Members()) {
-                if (!validate_entry_point_attributes_inner(
-                        member->Declaration()->attributes, member->Type(),
-                        member->Declaration()->source, param_or_ret,
-                        /*is_struct_member*/ true, member->Attributes().location,
-                        member->Attributes().index)) {
-                    AddNote("while analyzing entry point '" + decl->name->symbol.Name() + "'",
-                            decl->source);
-                    return false;
+            if (auto* str = ty->As<sem::Struct>()) {
+                for (auto* member : str->Members()) {
+                    if (!validate_entry_point_attributes_inner(
+                            member->Declaration()->attributes, member->Type(),
+                            member->Declaration()->source, param_or_ret,
+                            /*is_struct_member*/ true, member->Attributes().location,
+                            member->Attributes().color, member->Attributes().index)) {
+                        AddNote("while analyzing entry point '" + decl->name->symbol.Name() + "'",
+                                decl->source);
+                        return false;
+                    }
                 }
             }
-        }
 
-        return true;
-    };
+            return true;
+        };
 
     for (auto* param : func->Parameters()) {
         auto* param_decl = param->Declaration();
         if (!validate_entry_point_attributes(param_decl->attributes, param->Type(),
                                              param_decl->source, ParamOrRetType::kParameter,
-                                             param->Location(), std::nullopt)) {
+                                             param->Location(), param->Color(), std::nullopt)) {
             return false;
         }
     }
@@ -1342,7 +1374,8 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     if (!func->ReturnType()->Is<core::type::Void>()) {
         if (!validate_entry_point_attributes(decl->return_type_attributes, func->ReturnType(),
                                              decl->source, ParamOrRetType::kReturnType,
-                                             func->ReturnLocation(), func->ReturnIndex())) {
+                                             func->ReturnLocation(), /* color */ {},
+                                             func->ReturnIndex())) {
             return false;
         }
     }
@@ -2313,6 +2346,28 @@ bool Validator::LocationAttribute(const ast::LocationAttribute* loc_attr,
             "@location must only be applied to declarations of numeric scalar or numeric vector "
             "type",
             loc_attr->source);
+        return false;
+    }
+
+    return true;
+}
+
+bool Validator::ColorAttribute(const ast::ColorAttribute* col_attr,
+                               const core::type::Type* type,
+                               ast::PipelineStage stage,
+                               const Source& source,
+                               const bool is_input) const {
+    if (stage != ast::PipelineStage::kFragment || !is_input) {
+        AddError("@color can only be used as fragment input", col_attr->source);
+        return false;
+    }
+
+    if (!type->is_numeric_scalar_or_vector()) {
+        std::string invalid_type = sem_.TypeNameOf(type);
+        AddError("cannot apply @color to declaration of type '" + invalid_type + "'", source);
+        AddNote(
+            "@color must only be applied to declarations of numeric scalar or numeric vector type",
+            col_attr->source);
         return false;
     }
 

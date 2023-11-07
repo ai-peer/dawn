@@ -723,6 +723,14 @@ sem::Parameter* Resolver::Parameter(const ast::Parameter* param,
                     sem->SetLocation(value.Get());
                     return true;
                 },
+                [&](const ast::ColorAttribute* attr) {
+                    auto value = ColorAttribute(attr);
+                    if (TINT_UNLIKELY(!value)) {
+                        return false;
+                    }
+                    sem->SetColor(value.Get());
+                    return true;
+                },
                 [&](const ast::BuiltinAttribute* attr) -> bool { return BuiltinAttribute(attr); },
                 [&](const ast::InvariantAttribute* attr) -> bool {
                     return InvariantAttribute(attr);
@@ -3709,6 +3717,29 @@ tint::Result<uint32_t> Resolver::LocationAttribute(const ast::LocationAttribute*
     return static_cast<uint32_t>(value);
 }
 
+tint::Result<uint32_t> Resolver::ColorAttribute(const ast::ColorAttribute* attr) {
+    ExprEvalStageConstraint constraint{core::EvaluationStage::kConstant, "@color value"};
+    TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
+
+    auto* materialized = Materialize(ValueExpression(attr->expr));
+    if (!materialized) {
+        return Failure{};
+    }
+
+    if (!materialized->Type()->IsAnyOf<core::type::I32, core::type::U32>()) {
+        AddError("@color must be an i32 or u32 value", attr->source);
+        return Failure{};
+    }
+
+    auto const_value = materialized->ConstantValue();
+    auto value = const_value->ValueAs<AInt>();
+    if (value < 0) {
+        AddError("@color value must be non-negative", attr->source);
+        return Failure{};
+    }
+
+    return static_cast<uint32_t>(value);
+}
 tint::Result<uint32_t> Resolver::IndexAttribute(const ast::IndexAttribute* attr) {
     ExprEvalStageConstraint constraint{core::EvaluationStage::kConstant, "@index value"};
     TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);

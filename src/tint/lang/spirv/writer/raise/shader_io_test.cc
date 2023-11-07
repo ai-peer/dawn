@@ -151,27 +151,54 @@ TEST_F(SpirvWriter_ShaderIOTest, Parameters_Struct) {
                                  {
                                      mod.symbols.New("front_facing"),
                                      ty.bool_(),
-                                     {{}, {}, core::BuiltinValue::kFrontFacing, {}, false},
+                                     {
+                                         /* location */ {},
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kFrontFacing,
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("position"),
                                      ty.vec4<f32>(),
-                                     {{}, {}, core::BuiltinValue::kPosition, {}, true},
+                                     {
+                                         /* location */ {},
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kPosition,
+                                         /* interpolation */ {},
+                                         /* invariant */ true,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("color1"),
                                      ty.f32(),
-                                     {0u, {}, {}, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("color2"),
                                      ty.f32(),
-                                     {1u,
-                                      {},
-                                      {},
-                                      core::Interpolation{core::InterpolationType::kLinear,
-                                                          core::InterpolationSampling::kSample},
-                                      false},
+                                     {
+                                         /* location */ 1u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */
+                                         core::Interpolation{
+                                             core::InterpolationType::kLinear,
+                                             core::InterpolationSampling::kSample,
+                                         },
+                                         /* invariant */ false,
+                                     },
                                  },
                              });
 
@@ -276,12 +303,26 @@ TEST_F(SpirvWriter_ShaderIOTest, Parameters_Mixed) {
                                  {
                                      mod.symbols.New("position"),
                                      ty.vec4<f32>(),
-                                     {{}, {}, core::BuiltinValue::kPosition, {}, true},
+                                     {
+                                         /* location */ {},
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kPosition,
+                                         /* interpolation */ {},
+                                         /* invariant */ true,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("color1"),
                                      ty.f32(),
-                                     {0u, {}, {}, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                              });
 
@@ -476,22 +517,42 @@ TEST_F(SpirvWriter_ShaderIOTest, ReturnValue_Struct) {
                                  {
                                      mod.symbols.New("position"),
                                      ty.vec4<f32>(),
-                                     {{}, {}, core::BuiltinValue::kPosition, {}, true},
+                                     {
+                                         /* location */ {},
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kPosition,
+                                         /* interpolation */ {},
+                                         /* invariant */ true,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("color1"),
                                      ty.f32(),
-                                     {0u, {}, {}, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("color2"),
                                      ty.f32(),
-                                     {1u,
-                                      {},
-                                      {},
-                                      core::Interpolation{core::InterpolationType::kLinear,
-                                                          core::InterpolationSampling::kSample},
-                                      false},
+                                     {
+                                         /* location */ 1u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */
+                                         core::Interpolation{
+                                             core::InterpolationType::kLinear,
+                                             core::InterpolationSampling::kSample,
+                                         },
+                                         /* invariant */ false,
+                                     },
                                  },
                              });
 
@@ -565,12 +626,26 @@ TEST_F(SpirvWriter_ShaderIOTest, ReturnValue_DualSourceBlending) {
                                                             {
                                                                 mod.symbols.New("color1"),
                                                                 ty.f32(),
-                                                                {0u, 0u, {}, {}, false},
+                                                                {
+                                                                    /* location */ 0u,
+                                                                    /* color */ 0u,
+                                                                    /* index */ {},
+                                                                    /* builtin */ {},
+                                                                    /* interpolation */ {},
+                                                                    /* invariant */ false,
+                                                                },
                                                             },
                                                             {
                                                                 mod.symbols.New("color2"),
                                                                 ty.f32(),
-                                                                {0u, 1u, {}, {}, false},
+                                                                {
+                                                                    /* location */ 0u,
+                                                                    /* color */ 1u,
+                                                                    /* index */ {},
+                                                                    /* builtin */ {},
+                                                                    /* interpolation */ {},
+                                                                    /* invariant */ false,
+                                                                },
                                                             },
                                                         });
 
@@ -639,12 +714,26 @@ TEST_F(SpirvWriter_ShaderIOTest, Struct_SharedByVertexAndFragment) {
                                  {
                                      mod.symbols.New("position"),
                                      vec4f,
-                                     {{}, {}, core::BuiltinValue::kPosition, {}, false},
+                                     {
+                                         /* location */ {},
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kPosition,
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("color"),
                                      vec4f,
-                                     {0u, {}, {}, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                              });
 
@@ -766,12 +855,26 @@ TEST_F(SpirvWriter_ShaderIOTest, Struct_SharedWithBuffer) {
                                  {
                                      mod.symbols.New("position"),
                                      vec4f,
-                                     {{}, {}, core::BuiltinValue::kPosition, {}, false},
+                                     {
+                                         /* location */ {},
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kPosition,
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("color"),
                                      vec4f,
-                                     {0u, {}, {}, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                              });
 
@@ -847,12 +950,26 @@ TEST_F(SpirvWriter_ShaderIOTest, SampleMask) {
                                  {
                                      mod.symbols.New("color"),
                                      ty.f32(),
-                                     {0u, {}, {}, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("mask"),
                                      ty.u32(),
-                                     {{}, {}, core::BuiltinValue::kSampleMask, {}, false},
+                                     {
+                                         /* location */ {},
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kSampleMask,
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                              });
 
@@ -924,19 +1041,25 @@ Outputs = struct @align(4) {
 
 // Test that interpolation attributes are stripped from vertex inputs and fragment outputs.
 TEST_F(SpirvWriter_ShaderIOTest, InterpolationOnVertexInputOrFragmentOutput) {
-    auto* str_ty = ty.Struct(mod.symbols.New("MyStruct"),
-                             {
-                                 {
-                                     mod.symbols.New("color"),
-                                     ty.f32(),
-                                     {1u,
-                                      {},
-                                      {},
-                                      core::Interpolation{core::InterpolationType::kLinear,
-                                                          core::InterpolationSampling::kSample},
-                                      false},
-                                 },
-                             });
+    auto* str_ty =
+        ty.Struct(mod.symbols.New("MyStruct"), {
+                                                   {
+                                                       mod.symbols.New("color"),
+                                                       ty.f32(),
+                                                       {
+                                                           /* location */ 1u,
+                                                           /* color */ {},
+                                                           /* index */ {},
+                                                           /* builtin */ {},
+                                                           /* interpolation */
+                                                           core::Interpolation{
+                                                               core::InterpolationType::kLinear,
+                                                               core::InterpolationSampling::kSample,
+                                                           },
+                                                           /* invariant */ false,
+                                                       },
+                                                   },
+                                               });
 
     // Vertex shader.
     {
@@ -1071,12 +1194,26 @@ TEST_F(SpirvWriter_ShaderIOTest, ClampFragDepth) {
                                  {
                                      mod.symbols.New("color"),
                                      ty.f32(),
-                                     {0u, {}, {}, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ {},
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                                  {
                                      mod.symbols.New("depth"),
                                      ty.f32(),
-                                     {{}, {}, core::BuiltinValue::kFragDepth, {}, false},
+                                     {
+                                         /* location */ 0u,
+                                         /* color */ {},
+                                         /* index */ {},
+                                         /* builtin */ core::BuiltinValue::kFragDepth,
+                                         /* interpolation */ {},
+                                         /* invariant */ false,
+                                     },
                                  },
                              });
 
