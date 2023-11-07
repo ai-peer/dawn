@@ -1128,11 +1128,13 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
                                                      ParamOrRetType param_or_ret,
                                                      bool is_struct_member,
                                                      std::optional<uint32_t> location,
+                                                     std::optional<uint32_t> color,
                                                      std::optional<uint32_t> index) {
         // Scan attributes for pipeline IO attributes.
         // Check for overlap with attributes that have been seen previously.
         const ast::Attribute* pipeline_io_attribute = nullptr;
         const ast::LocationAttribute* location_attribute = nullptr;
+        const ast::ColorAttribute* color_attribute = nullptr;
         const ast::IndexAttribute* index_attribute = nullptr;
         const ast::InterpolateAttribute* interpolate_attribute = nullptr;
         const ast::InvariantAttribute* invariant_attribute = nullptr;
@@ -1183,16 +1185,28 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
 
                     return LocationAttribute(loc_attr, ty, stage, source);
                 },
-                [&](const ast::IndexAttribute* index_attr) {
-                    bool is_input = param_or_ret == ParamOrRetType::kParameter;
-                    index_attribute = index_attr;
+                [&](const ast::ColorAttribute* col_attr) {
+                    color_attribute = col_attr;
+                    if (pipeline_io_attribute) {
+                        AddError("multiple entry point IO attributes", attr->source);
+                        AddNote("previously consumed " + AttrToStr(pipeline_io_attribute),
+                                pipeline_io_attribute->source);
+                        return false;
+                    }
+                    pipeline_io_attribute = attr;
 
-                    if (TINT_UNLIKELY(!index.has_value())) {
-                        TINT_ICE() << "@index has no value";
+                    bool is_input = param_or_ret == ParamOrRetType::kParameter;
+
+                    if (TINT_UNLIKELY(!color.has_value())) {
+                        TINT_ICE() << "@color has no value";
                         return false;
                     }
 
-                    return IndexAttribute(index_attr, stage, is_input);
+                    return ColorAttribute(col_attr, ty, stage, source, is_input);
+                },
+                [&](const ast::IndexAttribute* index_attr) {
+                    index_attribute = index_attr;
+                    return IndexAttribute(index_attr, stage);
                 },
                 [&](const ast::InterpolateAttribute* interpolate) {
                     interpolate_attribute = interpolate;
@@ -1304,38 +1318,38 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     };
 
     // Outer lambda for validating the entry point attributes for a type.
-    auto validate_entry_point_attributes = [&](VectorRef<const ast::Attribute*> attrs,
-                                               const core::type::Type* ty, Source source,
-                                               ParamOrRetType param_or_ret,
-                                               std::optional<uint32_t> location,
-                                               std::optional<uint32_t> index) {
-        if (!validate_entry_point_attributes_inner(attrs, ty, source, param_or_ret,
-                                                   /*is_struct_member*/ false, location, index)) {
-            return false;
-        }
+    auto validate_entry_point_attributes =
+        [&](VectorRef<const ast::Attribute*> attrs, const core::type::Type* ty, Source source,
+            ParamOrRetType param_or_ret, std::optional<uint32_t> location,
+            std::optional<uint32_t> color, std::optional<uint32_t> index) {
+            if (!validate_entry_point_attributes_inner(attrs, ty, source, param_or_ret,
+                                                       /*is_struct_member*/ false, location, color,
+                                                       index)) {
+                return false;
+            }
 
-        if (auto* str = ty->As<sem::Struct>()) {
-            for (auto* member : str->Members()) {
-                if (!validate_entry_point_attributes_inner(
-                        member->Declaration()->attributes, member->Type(),
-                        member->Declaration()->source, param_or_ret,
-                        /*is_struct_member*/ true, member->Attributes().location,
-                        member->Attributes().index)) {
-                    AddNote("while analyzing entry point '" + decl->name->symbol.Name() + "'",
-                            decl->source);
-                    return false;
+            if (auto* str = ty->As<sem::Struct>()) {
+                for (auto* member : str->Members()) {
+                    if (!validate_entry_point_attributes_inner(
+                            member->Declaration()->attributes, member->Type(),
+                            member->Declaration()->source, param_or_ret,
+                            /*is_struct_member*/ true, member->Attributes().location,
+                            member->Attributes().color, member->Attributes().index)) {
+                        AddNote("while analyzing entry point '" + decl->name->symbol.Name() + "'",
+                                decl->source);
+                        return false;
+                    }
                 }
             }
-        }
 
-        return true;
-    };
+            return true;
+        };
 
     for (auto* param : func->Parameters()) {
         auto* param_decl = param->Declaration();
         if (!validate_entry_point_attributes(param_decl->attributes, param->Type(),
                                              param_decl->source, ParamOrRetType::kParameter,
-                                             param->Location(), std::nullopt)) {
+                                             param->Location(), param->Color(), std::nullopt)) {
             return false;
         }
     }
@@ -1348,7 +1362,8 @@ bool Validator::EntryPoint(const sem::Function* func, ast::PipelineStage stage) 
     if (!func->ReturnType()->Is<core::type::Void>()) {
         if (!validate_entry_point_attributes(decl->return_type_attributes, func->ReturnType(),
                                              decl->source, ParamOrRetType::kReturnType,
-                                             func->ReturnLocation(), func->ReturnIndex())) {
+                                             func->ReturnLocation(), /* color */ {},
+                                             func->ReturnIndex())) {
             return false;
         }
     }
@@ -2302,6 +2317,28 @@ bool Validator::LocationAttribute(const ast::LocationAttribute* attr,
             "@location must only be applied to declarations of numeric scalar or numeric vector "
             "type",
             attr->source);
+        return false;
+    }
+
+    return true;
+}
+
+bool Validator::ColorAttribute(const ast::ColorAttribute* col_attr,
+                               const core::type::Type* type,
+                               ast::PipelineStage stage,
+                               const Source& source,
+                               const bool is_input) const {
+    if (stage != ast::PipelineStage::kFragment || !is_input) {
+        AddError("@color can only be used as fragment input", col_attr->source);
+        return false;
+    }
+
+    if (!type->is_numeric_scalar_or_vector()) {
+        std::string invalid_type = sem_.TypeNameOf(type);
+        AddError("cannot apply @color to declaration of type '" + invalid_type + "'", source);
+        AddNote(
+            "@color must only be applied to declarations of numeric scalar or numeric vector type",
+            col_attr->source);
         return false;
     }
 

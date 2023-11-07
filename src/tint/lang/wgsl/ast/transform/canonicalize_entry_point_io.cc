@@ -62,6 +62,8 @@ struct MemberInfo {
     const StructMember* member;
     /// The struct member location if provided
     std::optional<uint32_t> location;
+    /// The struct member color if provided
+    std::optional<uint32_t> color;
     /// The struct member index if provided
     std::optional<uint32_t> index;
 };
@@ -105,7 +107,7 @@ uint32_t BuiltinOrder(core::BuiltinValue builtin) {
 // Returns true if `attr` is a shader IO attribute.
 bool IsShaderIOAttribute(const Attribute* attr) {
     return attr->IsAnyOf<BuiltinAttribute, InterpolateAttribute, InvariantAttribute,
-                         LocationAttribute, IndexAttribute>();
+                         LocationAttribute, ColorAttribute, IndexAttribute>();
 }
 
 }  // namespace
@@ -284,11 +286,13 @@ struct CanonicalizeEntryPointIO::State {
     /// @param name the name of the shader input
     /// @param type the type of the shader input
     /// @param location the location if provided
+    /// @param color the color if provided
     /// @param attrs the attributes to apply to the shader input
     /// @returns an expression which evaluates to the value of the shader input
     const Expression* AddInput(std::string name,
                                const core::type::Type* type,
                                std::optional<uint32_t> location,
+                               std::optional<uint32_t> color,
                                tint::Vector<const Attribute*, 8> attrs) {
         auto ast_type = CreateASTTypeFor(ctx, type);
 
@@ -347,8 +351,12 @@ struct CanonicalizeEntryPointIO::State {
             // Otherwise, move it to the new structure member list.
             Symbol symbol = input_names.emplace(name).second ? b.Symbols().Register(name)
                                                              : b.Symbols().New(name);
-            wrapper_struct_param_members.Push(
-                {b.Member(symbol, ast_type, std::move(attrs)), location, std::nullopt});
+            wrapper_struct_param_members.Push({
+                /* member */ b.Member(symbol, ast_type, std::move(attrs)),
+                /* location */ location,
+                /* color */ color,
+                /* index */ std::nullopt,
+            });
             return b.MemberAccessor(InputStructSymbol(), symbol);
         }
     }
@@ -428,7 +436,8 @@ struct CanonicalizeEntryPointIO::State {
         }
 
         auto name = param->Declaration()->name->symbol.Name();
-        auto* input_expr = AddInput(name, param->Type(), param->Location(), std::move(attributes));
+        auto* input_expr =
+            AddInput(name, param->Type(), param->Location(), param->Color(), std::move(attributes));
         inner_call_parameters.Push(input_expr);
     }
 
@@ -462,7 +471,7 @@ struct CanonicalizeEntryPointIO::State {
             auto attributes =
                 CloneShaderIOAttributes(member->Declaration()->attributes, do_interpolate);
             auto* input_expr = AddInput(name, member->Type(), member->Attributes().location,
-                                        std::move(attributes));
+                                        member->Attributes().color, std::move(attributes));
             inner_struct_values.Push(input_expr);
         }
 
@@ -551,28 +560,40 @@ struct CanonicalizeEntryPointIO::State {
     /// @param y another struct member
     /// @returns true if a comes before b
     bool StructMemberComparator(const MemberInfo& x, const MemberInfo& y) {
-        auto* x_loc = GetAttribute<LocationAttribute>(x.member->attributes);
-        auto* y_loc = GetAttribute<LocationAttribute>(y.member->attributes);
-        auto* x_blt = GetAttribute<BuiltinAttribute>(x.member->attributes);
-        auto* y_blt = GetAttribute<BuiltinAttribute>(y.member->attributes);
-        if (x_loc) {
-            if (!y_loc) {
-                // `a` has location attribute and `b` does not: `a` goes first.
+        if (x.location.has_value()) {
+            if (!y.location.has_value()) {
+                // `x` has location attribute and `y` does not: `x` goes first.
                 return true;
             }
             // Both have location attributes: smallest goes first.
-            return x.location < y.location;
-        } else {
-            if (y_loc) {
-                // `b` has location attribute and `a` does not: `b` goes first.
-                return false;
-            }
-            // Both are builtins: order matters for FXC.
-            auto builtin_a = BuiltinOf(x_blt);
-            auto builtin_b = BuiltinOf(y_blt);
-            return BuiltinOrder(builtin_a) < BuiltinOrder(builtin_b);
+            return x.location.value() < y.location.value();
         }
+        if (x.color.has_value()) {
+            if (!y.color.has_value()) {
+                // `x` has color attribute and `y` does not: `x` goes first.
+                return true;
+            }
+            // Both have color attributes: smallest goes first.
+            return x.color.value() < y.color.value();
+        }
+        {
+            auto* x_blt = GetAttribute<BuiltinAttribute>(x.member->attributes);
+            auto* y_blt = GetAttribute<BuiltinAttribute>(y.member->attributes);
+            if (x_blt) {
+                if (!y_blt) {
+                    // `x` has builtin attribute and `y` does not: `x` goes first.
+                    return false;
+                }
+                // Both are builtins: order matters for FXC.
+                auto builtin_a = BuiltinOf(x_blt);
+                auto builtin_b = BuiltinOf(y_blt);
+                return BuiltinOrder(builtin_a) < BuiltinOrder(builtin_b);
+            }
+        }
+        TINT_UNREACHABLE();
+        return false;
     }
+
     /// Create the wrapper function's struct parameter and type objects.
     void CreateInputStruct() {
         // Sort the struct members to satisfy HLSL interfacing matching rules.
@@ -613,9 +634,12 @@ struct CanonicalizeEntryPointIO::State {
             }
             member_names.insert(name.Name());
 
-            wrapper_struct_output_members.Push(
-                {b.Member(name, outval.type, std::move(outval.attributes)), outval.location,
-                 std::nullopt});
+            wrapper_struct_output_members.Push({
+                /* member */ b.Member(name, outval.type, std::move(outval.attributes)),
+                /* location */ outval.location,
+                /* color */ std::nullopt,
+                /* index */ std::nullopt,
+            });
             assignments.Push(b.Assign(b.MemberAccessor(wrapper_result, name), outval.value));
         }
 
