@@ -16,6 +16,402 @@
       "message": "PTAL, thanks!",
       "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3712789b_5b3a0467",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Looking good! A bunch of style nits, and requests for additional tests.",
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "638f22c9_b59ea632",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "You have this in more than one method. Move to a member.",
+      "range": {
+        "startLine": 67,
+        "startChar": 8,
+        "endLine": 67,
+        "endChar": 30
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbe41694_41893ec1",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "You don\u0027t need the `.Name()` for the builder methods.",
+      "range": {
+        "startLine": 189,
+        "startChar": 52,
+        "endLine": 189,
+        "endChar": 59
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "704fa849_ca1c9218",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Remove the `.Name()`, here and below.",
+      "range": {
+        "startLine": 251,
+        "startChar": 57,
+        "endLine": 251,
+        "endChar": 64
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6db36a8_00d59474",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Use `Symbol`s instead of `std::string`?",
+      "range": {
+        "startLine": 276,
+        "startChar": 42,
+        "endLine": 278,
+        "endChar": 86
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09a4ba24_4049405d",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "nit: could use a `string_view` here to avoid a heap allocation. Same with `pixelType`",
+      "range": {
+        "startLine": 280,
+        "startChar": 13,
+        "endLine": 280,
+        "endChar": 19
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d10b801_80811186",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Can be reduced to:\n\n```\nVector load_parameters{b.Param(load_store_input_name, b.ty.vec4\u003cf32\u003e())};\nVector store_parameters{b.Param(load_store_input_name, b.ty.vec4\u003cf32\u003e())};\n```\n\nRequires: `using namespace tint::core::fluent_types;  // NOLINT` above `namespace tint::hlsl::writer {`",
+      "range": {
+        "startLine": 281,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 70
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50a65d95_17b8b358",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "snake_case. Same with `pixelType`, `rovType`, `rovSymbolName`",
+      "range": {
+        "startLine": 300,
+        "startChar": 30,
+        "endLine": 300,
+        "endChar": 39
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c000f9ed_977414e6",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "More efficient, and will trigger an ICE if the type is not f32, i32 or u32:\n```\nauto [rovFormat, pixelType] \u003d Switch(\n    member-\u003eType(),  //\n    [\u0026](const core::type::F32*) {\n        return std::make_pair(core::TexelFormat::kR32Float, \"vec4f\");\n    },\n    [\u0026](const core::type::I32*) {\n        return std::make_pair(core::TexelFormat::kR32Sint, \"vec4i\");\n    },\n    [\u0026](const core::type::U32*) {\n        return std::make_pair(core::TexelFormat::kR32Uint, \"vec4u\");\n    },\n    TINT_ICE_ON_NO_MATCH);\n```",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 311,
+        "endChar": 13
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5160f66b_604dfeea",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 319,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Slightly more efficient:\n\n```\nb.GlobalVar(rovSymbolName.Name(), rovType, tint::Vector{\n    b.Binding(core::AInt(RegisterIndex(member-\u003eIndex()))),\n    b.Group(core::AInt(cfg.rovGroupIndex)),\n    RasterizerOrderedView(),\n});\n```",
+      "range": {
+        "startLine": 319,
+        "startChar": 55,
+        "endLine": 319,
+        "endChar": 65
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fdc6d7e1_33432411",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 324,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Remove. Here and below",
+      "range": {
+        "startLine": 324,
+        "startChar": 74,
+        "endLine": 324,
+        "endChar": 81
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3eee2949_e5829cc2",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Please document that this is appended to",
+      "range": {
+        "startLine": 345,
+        "startChar": 48,
+        "endLine": 345,
+        "endChar": 70
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "668f8a6e_1d541680",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 345,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "use a reference, if the argument is never null (different coding pattern from dawn)",
+      "range": {
+        "startLine": 345,
+        "startChar": 46,
+        "endLine": 345,
+        "endChar": 47
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "facecb6b_a85b9765",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 380,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Just `f32` with `fluent_types`",
+      "range": {
+        "startLine": 380,
+        "startChar": 74,
+        "endLine": 380,
+        "endChar": 83
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "152faee1_ebfc3d8c",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "Tint uses `snake_case`. Variable name is also pretty long. How about `pls_member_to_rov_reg` ?",
+      "range": {
+        "startLine": 52,
+        "startChar": 39,
+        "endLine": 52,
+        "endChar": 82
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41146f15_e6c221ac",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "`rov_group_index`",
+      "range": {
+        "startLine": 55,
+        "startChar": 17,
+        "endLine": 55,
+        "endChar": 30
+      },
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8dcbee7_bf9a3a6b",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "There\u0027s a bunch of e2e tests in `test/tint/extensions/pixel_local` which should now pass. Please can you enable them and add them to this CL?",
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4c921ec9_fba8a04e",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-07T11:47:29Z",
+      "side": 1,
+      "message": "There\u0027s a bunch of hairy edge cases around attributes on the entry point. Please can you add some tests that use `@interpolate`, `@invariant`, etc. See `src/tint/lang/msl/writer/ast_raise/pixel_local_test.cc`, for examples.",
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
