@@ -1,0 +1,112 @@
+# Workflow to build Dawn using CMake
+name: CMake
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:
+      # Set fail-fast to false to ensure that feedback is delivered for all matrix combinations. Consider changing this to true when your workflow is stable.
+      fail-fast: false
+
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+        build_type: [Debug, Release]
+        c_compiler: [clang, cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+          - os: macos-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+        exclude:
+          - os: windows-latest
+            c_compiler: clang
+          - os: windows-latest
+            c_compiler: cl
+            build_type: Debug
+          - os: ubuntu-latest
+            c_compiler: cl
+          - os: macos-latest
+            c_compiler: cl
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: Set reusable strings
+      # Turn repeated input strings (such as the build output directory) into step outputs. These step outputs can be used throughout the workflow file.
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+        echo "build-key=${{ runner.os }}-${{github.workflow}}-${{ matrix.build_type }}-${{ matrix.c_compiler }}" >> "$GITHUB_OUTPUT"
+
+    # Only download workspace artifacts on pull requests. CI builds should start from a fresh state.
+    - uses: actions/download-artifact@v3
+      if: ${{ github.event_name == 'pull_request' }}
+      continue-on-error: true
+      with:
+        name: workspace-${{ steps.strings.outputs.build-key }}
+        path: ${{ github.workspace }}
+
+    - name: Install Ubuntu build dependencies
+      if: matrix.os == 'ubuntu-latest'
+      run: |
+        sudo apt update
+        sudo apt install libgl-dev libx11-xcb-dev libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev wayland-protocols libwayland-dev libxkbcommon-dev
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: 3.11
+
+    - name: Fetch dependencies
+      run: python ./tools/fetch_dawn_dependencies.py --use-test-deps --shallow
+
+    - name: Set up Ninja
+      uses: seanmiddleditch/gha-setup-ninja@master
+
+    - name: Set up Visual Studio environment
+      if: matrix.os == 'windows-latest'
+      uses: seanmiddleditch/gha-setup-vsdevenv@master
+
+    - name: Set up sccache
+      uses: mozilla-actions/sccache-action@v0.0.3
+
+    - name: Configure CMake
+      run: >
+        cmake -G Ninja -B ${{ steps.strings.outputs.build-output-dir }}
+        -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+        -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+        -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+        -DCMAKE_C_COMPILER_LAUNCHER=sccache
+        -DCMAKE_CXX_COMPILER_LAUNCHER=sccache
+        -S ${{ github.workspace }}
+      env:
+        SCCACHE_GHA_ENABLED: "true"
+
+    - name: Build
+      run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+      env:
+        SCCACHE_GHA_ENABLED: "true"
+
+    # Always upload workspace artifacts. Eventually only do this for pushes to main.
+    - uses: actions/upload-artifact@v3
+      with:
+        name: workspace-${{ steps.strings.outputs.build-key }}
+        path: ${{ github.workspace }}
+        retention-days: 7
