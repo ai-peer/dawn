@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "073e5cb6b74af9c2734119e4cb0cb6a6e39a238b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27147353_400c2999",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 863,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-08T17:15:10Z",
+      "side": 1,
+      "message": "ah - good fix",
+      "revId": "073e5cb6b74af9c2734119e4cb0cb6a6e39a238b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
