@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8061dd10_221be1a5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-11-08T03:09:14Z",
+      "side": 1,
+      "message": "Austin - PTAL\nQuyen - FYI",
+      "revId": "f6e96d393b2fbd4dc089e98958fbfde7b75342dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
