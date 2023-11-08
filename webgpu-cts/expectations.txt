@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-11-04 05:02:39AM
+# Last rolled: 2023-11-08 05:02:24AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -649,7 +649,6 @@ crbug.com/dawn/1956 [ android-r dawn-no-backend-validation ] webgpu:api,validati
 crbug.com/dawn/1968 webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
 crbug.com/dawn/1968 webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
 crbug.com/dawn/1968 webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
-
 
 ################################################################################
 # Out-of-Memory error scope tests fail on linux
