@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae42a03d_d774d391",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-08T01:04:52Z",
+      "side": 1,
+      "message": "This issue failing on android vulkan is also seen failing on my glinux with opengl compat. So just resolve it to make it cleaner when running end2end_tests by using a set of known good bytes to initialize the test texture.",
+      "revId": "f485fcc9150af7b353bf9d66d18a920d4ce73180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
