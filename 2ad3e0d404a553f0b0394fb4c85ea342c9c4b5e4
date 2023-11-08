@@ -68,6 +68,24 @@
       "message": "Technically timestamps are allowed to wrap around, but I guess it should never happen in practice so this test won\u0027t be flaky? But if turns out to be flaky we\u0027ll have to remove it.",
       "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5e95e7ac_f6959629",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-08T17:35:56Z",
+      "side": 1,
+      "message": "how about we modify it to expect at most 1 reset since the duration of the whole test should definitely be less than the reset period",
+      "parentUuid": "688771a2_d5cdd26c",
+      "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
