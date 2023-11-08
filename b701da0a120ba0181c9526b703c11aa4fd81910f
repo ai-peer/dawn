@@ -46,6 +46,30 @@
       },
       "revId": "b701da0a120ba0181c9526b703c11aa4fd81910f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77b097a7_2fd8f6ea",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-08T15:04:09Z",
+      "side": 1,
+      "message": "I think I know why it failed on that second build, Yuly. Looking at the [gclient config](https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8765138986832308161/+/u/gclient_config/config) for that build, we can see which version of chromium/src it\u0027s checking out:\n```\n\"revisions\": {\n    \"src\": \"907cb54ef0780b55bfe4c6c065db58c4f0c914cc\"\n  },\n```\n\nLooking at the [DEPS file](https://chromium.googlesource.com/chromium/src/+/907cb54ef0780b55bfe4c6c065db58c4f0c914cc/DEPS) of that version, the [Dawn revision](https://chromium.googlesource.com/chromium/src/+/907cb54ef0780b55bfe4c6c065db58c4f0c914cc/DEPS#443) is `e2cd8aade99ffd2d2b97fe87fd43b08f22002692`, which is before your patch to suppress those VUIDs:\n\n```\n| * eca0ab4663 Suppress VUIDs added in VVL roll\n| * 9be703c801 (HEAD) Add amaiorano@ and bclayton@ to OWNERS of third_party/gn/dxc\n| * 44878dd5f8 dawn.node: Enable timestamp query feature conversion\n| * e2cd8aade9 Roll vulkan-deps from 71551b6ce699 to 04fa23909932 (5 revisions)\n| * 0dd1ab5db4 Compat: refine compat-expectations.\n| * 78da664435 Pass feature allowlist from Dawn to Tint\n| * 031a18a31a Compat: add suppressions for newly-failing tests.\n| * 3ec333906a Roll ANGLE from ae3af8ee0c58 to 0e42512eed5a (1 revision)\n|/  \n| * e2cd8aade9 Roll vulkan-deps from 71551b6ce699 to 04fa23909932 (5 revisions)\n```",
+      "parentUuid": "9426efda_5604b200",
+      "range": {
+        "startLine": 148,
+        "startChar": 18,
+        "endLine": 148,
+        "endChar": 28
+      },
+      "revId": "b701da0a120ba0181c9526b703c11aa4fd81910f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
