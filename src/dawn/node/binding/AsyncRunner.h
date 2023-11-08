@@ -33,6 +33,7 @@
 #include <utility>
 
 #include "dawn/webgpu_cpp.h"
+#include "src/dawn/node/interop/Core.h"
 #include "src/dawn/node/interop/NodeAPI.h"
 
 namespace wgpu::binding {
@@ -53,6 +54,8 @@ class AsyncRunner {
     // End() should be called once the asynchronous task has finished.
     // Every call to Begin() should eventually result in a call to End().
     void End();
+
+    void Reject(interop::Promise<void> promise, Napi::Error error);
 
   private:
     void QueueTick();
