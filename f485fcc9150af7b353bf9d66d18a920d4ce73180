@@ -33,6 +33,24 @@
       "message": "LGTM but this approach could end up being fragile depending on what GPUs we\u0027re running on. If that becomes a problem in the future, we can consider just testing this in the CTS where we have better comparison utilities.",
       "revId": "f485fcc9150af7b353bf9d66d18a920d4ce73180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7694405_30874f77",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-08T18:07:36Z",
+      "side": 1,
+      "message": "Hopefully not. The bytes have problem round tripping are NaN for 16 float.",
+      "parentUuid": "038c7bac_25440107",
+      "revId": "f485fcc9150af7b353bf9d66d18a920d4ce73180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
