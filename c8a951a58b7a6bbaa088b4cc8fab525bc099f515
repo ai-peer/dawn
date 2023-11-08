@@ -22,6 +22,30 @@
       },
       "revId": "c8a951a58b7a6bbaa088b4cc8fab525bc099f515",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ced93a2_32e9389d",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-08T16:55:38Z",
+      "side": 1,
+      "message": "Given that we suspect these to be false positives at the moment, we should keep it specific for now. Otherwise, we may hide true positives.",
+      "parentUuid": "becfd3d4_9e08853f",
+      "range": {
+        "startLine": 147,
+        "startChar": 33,
+        "endLine": 148,
+        "endChar": 14
+      },
+      "revId": "c8a951a58b7a6bbaa088b4cc8fab525bc099f515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
