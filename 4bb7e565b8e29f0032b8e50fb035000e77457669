@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8bdd9a_70ab4af9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-08T18:11:28Z",
+      "side": 1,
+      "message": "I\u0027m not entirely sold on this part.\n\n\"@interpolate must be used with @location\"\nreads to me like we\u0027re saying \"if you use @location, you @must use @interpolate\".\n\nMaybe `s/must only/can only/` helps with the original wording?\n\"@interpolate can only be used with @location\"",
+      "revId": "4bb7e565b8e29f0032b8e50fb035000e77457669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
