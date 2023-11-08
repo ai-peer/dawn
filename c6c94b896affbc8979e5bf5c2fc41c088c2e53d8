@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98b68d0c_16910ab8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 28
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-08T00:39:56Z",
+      "side": 1,
+      "message": "we also have kokoro for cmake builds on Gerrit - so what\u0027s the need for github actions? (Not that they\u0027re not nice to have)",
+      "revId": "c6c94b896affbc8979e5bf5c2fc41c088c2e53d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
