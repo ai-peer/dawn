@@ -193,6 +193,24 @@
       "parentUuid": "1ac4c525_8190b973",
       "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3617a81_db226b54",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-08T00:17:03Z",
+      "side": 1,
+      "message": "ok - fwiw I think I might end up looking at this again in the future\n\nI think I want to make it so I can write the code handling Windows-only extension structs without putting #ifdef all over. In which case, I may adopt the more clear names, but make it fine-to-compile (no static assert) if you\u0027re doing the Windows thing on Linux - since that extension struct is not supposed to be available anyway, and in reality will be unreachable.",
+      "parentUuid": "3beab970_e165d51f",
+      "revId": "9c660baca25bbc64bc2fc00a008c7ae3daeda729",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
