@@ -16,6 +16,24 @@
       "message": "we also have kokoro for cmake builds on Gerrit - so what\u0027s the need for github actions? (Not that they\u0027re not nice to have)",
       "revId": "c6c94b896affbc8979e5bf5c2fc41c088c2e53d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90c05a32_74a71bc0",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 28
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-08T00:44:25Z",
+      "side": 1,
+      "message": "one of the builds I\u0027m going to set up to publish packaged prebuilts",
+      "parentUuid": "98b68d0c_16910ab8",
+      "revId": "c6c94b896affbc8979e5bf5c2fc41c088c2e53d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
