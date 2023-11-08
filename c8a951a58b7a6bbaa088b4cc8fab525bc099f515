@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "becfd3d4_9e08853f",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-11-08T16:44:14Z",
+      "side": 1,
+      "message": "I think omitting these is fine, too.\nDoesn\u0027t look informative. And there is a concern that MessageID would change and the suppression would stop working.\nI\u0027ve added it just because of [0] in the end originally, but probably it wasn\u0027t worth it.",
+      "range": {
+        "startLine": 147,
+        "startChar": 33,
+        "endLine": 148,
+        "endChar": 14
+      },
+      "revId": "c8a951a58b7a6bbaa088b4cc8fab525bc099f515",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
