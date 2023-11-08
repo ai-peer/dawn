@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b45633c7_32436c14",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-08T17:34:44Z",
+      "side": 1,
+      "message": "Looks very good!",
+      "revId": "e272f4b86c2c9dd6c438807d2d57347dbc98c8f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "824186c2_ed9e48ee",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-08T17:34:44Z",
+      "side": 1,
+      "message": "nit: @location I assume?",
+      "revId": "e272f4b86c2c9dd6c438807d2d57347dbc98c8f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "801150ee_5bc93048",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-08T17:34:44Z",
+      "side": 1,
+      "message": "I think that for the Dawn side we\u0027d like to know the types beforehand so that the ROVs are bound only once with the same format at the start of the pass.\n\nThis means that Dawn must pass the format of the ROVs to Tint, because otherwise two pipelines that use a non-storage slot could view it as two different types, which would be a problem (since the ROV would be one type or the other only). We could just add a bitcast here?",
+      "revId": "e272f4b86c2c9dd6c438807d2d57347dbc98c8f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0ed42e6_d61dcd0e",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-08T17:34:44Z",
+      "side": 1,
+      "message": "need format?",
+      "revId": "e272f4b86c2c9dd6c438807d2d57347dbc98c8f9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
