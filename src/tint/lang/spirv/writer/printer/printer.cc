@@ -1270,9 +1270,17 @@ class Printer {
             case spirv::BuiltinFn::kImageDrefGather:
                 op = spv::Op::OpImageDrefGather;
                 break;
-            case spirv::BuiltinFn::kImageFetch:
+            case spirv::BuiltinFn::kImageFetch: {
                 op = spv::Op::OpImageFetch;
+
+                auto* tex = builtin->Args()[0];
+                auto* sampled = tex->Type()->As<core::type::SampledTexture>();
+                if (sampled && sampled->type()->is_float_scalar_or_vector()) {
+                    module_.PushAnnot(spv::Op::OpDecorate, {id, SpvDecorationRelaxedPrecision});
+                }
+
                 break;
+            }
             case spirv::BuiltinFn::kImageGather:
                 op = spv::Op::OpImageGather;
                 break;
@@ -2111,6 +2119,12 @@ class Printer {
                                           {id, U32Operand(SpvDecorationNonReadable)});
                     }
                 }
+
+                auto* sampled = store_ty->As<core::type::SampledTexture>();
+                if (sampled && sampled->type()->is_float_scalar_or_vector()) {
+                    module_.PushAnnot(spv::Op::OpDecorate, {id, SpvDecorationRelaxedPrecision});
+                }
+
                 break;
             }
             case core::AddressSpace::kWorkgroup: {

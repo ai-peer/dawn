@@ -749,6 +749,12 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
 
     module_.PushDebug(spv::Op::OpName, {Operand(var_id), Operand(v->name->symbol.Name())});
 
+    auto* sampled = type->As<core::type::SampledTexture>();
+    if (sampled && sampled->type()->is_float_scalar_or_vector()) {
+        module_.PushAnnot(spv::Op::OpDecorate,
+                          {Operand(var_id), U32Operand(SpvDecorationRelaxedPrecision)});
+    }
+
     OperandList ops = {Operand(type_id), result, U32Operand(ConvertAddressSpace(sc))};
 
     if (v->initializer) {
@@ -2867,6 +2873,12 @@ bool Builder::GenerateTextureBuiltin(const sem::Call* call,
             spirv_params.emplace_back(gen_arg(Usage::kTexture));
             if (!append_coords_to_spirv_params()) {
                 return false;
+            }
+
+            auto* sampled = texture_type->As<core::type::SampledTexture>();
+            if (sampled && sampled->type()->is_float_scalar_or_vector()) {
+                module_.PushAnnot(spv::Op::OpDecorate,
+                                  {spirv_params[1], U32Operand(spv::Decoration::RelaxedPrecision)});
             }
 
             if (auto* level = arg(Usage::kLevel)) {
