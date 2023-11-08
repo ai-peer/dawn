@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "af83a6e1_1026f4b1",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-08T23:43:05Z",
+      "side": 1,
+      "message": "DeviceLost is defined to be an OperationError now. I thought we tested this?\n\nMaybe this code isn\u0027t reached because DetachMappings gets to it first.",
+      "revId": "b07b61ca735f43fd389db5d96cee6240982c1c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e04c56aa_456aa21e",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-08T23:43:05Z",
+      "side": 1,
+      "message": "This looks like it will return kMapped if it was *created* with mappedAtCreation, not if it is *currently* mapped?",
+      "revId": "b07b61ca735f43fd389db5d96cee6240982c1c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
