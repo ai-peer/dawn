@@ -74,6 +74,11 @@ MaybeError InitializeDebugLayerFilters(ComPtr<ID3D11Device> d3d11Device) {
                         "D3D11 InfoQueue pushing storage filter");
 }
 
+bool IsDebugLayerEnabled(const ComPtr<ID3D11Device>& d3d11Device) {
+    ComPtr<ID3D11Debug> d3d11Debug;
+    return SUCCEEDED(d3d11Device.As(&d3d11Debug));
+}
+
 }  // namespace
 
 PhysicalDevice::PhysicalDevice(Backend* backend,
@@ -105,11 +110,26 @@ const DeviceInfo& PhysicalDevice::GetDeviceInfo() const {
     return mDeviceInfo;
 }
 
-ResultOrError<ComPtr<ID3D11Device>> PhysicalDevice::CreateD3D11Device() {
-    ComPtr<ID3D11Device> device = mD3D11Device;
+ResultOrError<ComPtr<ID3D11Device>> PhysicalDevice::CreateD3D11Device(bool needsValidation) {
+    if (mIsSharedD3D11Device) {
+        bool isDebugLayerEnabled = IsDebugLayerEnabled(mD3D11Device);
+        DAWN_INVALID_IF(needsValidation &&
+                            GetInstance()->IsBackendValidationEnabled() != isDebugLayerEnabled,
+                        "Create device failed: backend validation level doesn't match");
 
-    if (!mIsSharedD3D11Device) {
-        mD3D11Device = nullptr;
+        if (GetInstance()->IsBackendValidationEnabled()) {
+            DAWN_TRY(InitializeDebugLayerFilters(mD3D11Device));
+        }
+        return ComPtr<ID3D11Device>(mD3D11Device);
+    }
+
+    ComPtr<ID3D11Device> device = std::move(mD3D11Device);
+    if (device) {
+        bool isDebugLayerEnabled = IsDebugLayerEnabled(device);
+        // Backend validation level doesn't match, have to recreate the d3d11 device.
+        if (GetInstance()->IsBackendValidationEnabled() != isDebugLayerEnabled) {
+            device = nullptr;
+        }
     }
 
     if (!device) {
@@ -141,7 +161,7 @@ MaybeError PhysicalDevice::InitializeImpl() {
     // D3D11 cannot check for feature support without a device.
     // Create the device to populate the adapter properties then reuse it when needed for actual
     // rendering.
-    DAWN_TRY_ASSIGN(mD3D11Device, CreateD3D11Device());
+    DAWN_TRY_ASSIGN(mD3D11Device, CreateD3D11Device(/*needsValidation=*/false));
 
     mFeatureLevel = mD3D11Device->GetFeatureLevel();
     DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(mD3D11Device));
