@@ -51,6 +51,23 @@
       "parentUuid": "038c7bac_25440107",
       "revId": "f485fcc9150af7b353bf9d66d18a920d4ce73180",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50a96af6_66d4eef9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-11-09T19:07:43Z",
+      "side": 1,
+      "message": "LGTM, and thank you! I\u0027m glad we\u0027ll be getting this test coverage on Android now.",
+      "revId": "f485fcc9150af7b353bf9d66d18a920d4ce73180",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
