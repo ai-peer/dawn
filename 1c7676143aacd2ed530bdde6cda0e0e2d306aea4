@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fefb0688_30b357c6",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-09T16:48:12Z",
+      "side": 1,
+      "message": "Can we have a TODO to optimize this in the future by inserting the load as late as possible and the store as early as possible? Right now the critical section is the whole pixel shader, which means that the HW will not be able to run the pixel shaders in parallel at all!",
+      "revId": "1c7676143aacd2ed530bdde6cda0e0e2d306aea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
