@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e15d881c_f9c37b4a",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-09T21:48:10Z",
+      "side": 1,
+      "message": "I am going to land a chrome side CL. It tries enabling dawn backend validation layer for dcheck build. And it will detect if the backend validation layer is supported by checking if adapter.CreateDevice() is succeeded. and log the validation level as a crash key. So we can easily find crashes with debug layer. Hope it can help us diagnose device lost issues.\n\n[1] https://chromium-review.googlesource.com/c/chromium/src/+/5018217/6/gpu/command_buffer/service/dawn_context_provider.cc",
+      "parentUuid": "0fcb0a6c_bce8c2f2",
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "030e0995_5c479bbc",
         "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
         "patchSetId": 2
@@ -31,6 +49,30 @@
       "writtenOn": "2023-11-09T21:34:44Z",
       "side": 1,
       "message": "does Chrome enable debug layers with any filters?\n\nthis is interesting because the debug layer filter state is global. will this cause unexpected changes to the global state?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "626eeeff_60a3bf0c",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-09T21:48:10Z",
+      "side": 1,
+      "message": "ANGLE enables debug layer if dcheck is on and the system has dxsdk installed, and I don\u0027t see ANGLE set any filter.",
+      "parentUuid": "030e0995_5c479bbc",
       "range": {
         "startLine": 121,
         "startChar": 0,
