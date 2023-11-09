@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9b887db_865d97a5",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-09T16:34:27Z",
+      "side": 1,
+      "message": "NVM you\u0027re right.",
+      "parentUuid": "492f6c35_ddde639b",
+      "revId": "b07b61ca735f43fd389db5d96cee6240982c1c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "cd3f698b_f90683aa",
