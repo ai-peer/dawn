@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a928113_a88ac1f8",
+        "filename": "src/tint/cmd/info/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-09T21:51:19Z",
+      "side": 1,
+      "message": "Shouldn\u0027t these still be emitted only if `location` was present?\n\nAlso could add `@color` here too?",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 31
+      },
+      "revId": "e69c63b55b5960e1131ec3cd9458b74aadebe15d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
