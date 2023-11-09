@@ -23,12 +23,18 @@
 
 # This is the default build configuration when building PartitionAlloc
 # as a standalone library.
-use_partition_alloc_as_malloc_default = false
-use_allocator_shim_default = false
-enable_backup_ref_ptr_support_default = false
+
+# Outside of the raw_ptr definition, PartitionAlloc do not support MSVC cl.exe
+# compiler. This condition below is the one used by PartitionAlloc and Chrome to
+# discriminate it.
+_is_clang_or_gcc = is_clang || !is_win
+
+use_partition_alloc_as_malloc_default = _is_clang_or_gcc
+use_allocator_shim_default = _is_clang_or_gcc
+enable_backup_ref_ptr_support_default = _is_clang_or_gcc
 put_ref_count_in_previous_slot_default = true
 enable_backup_ref_ptr_slow_checks_default = false
-enable_dangling_raw_ptr_checks_default = false
+enable_dangling_raw_ptr_checks_default = _is_clang_or_gcc
 
 # This is the default build configuration for pointers/raw_ptr*.
 raw_ptr_zero_on_construct_default = true
