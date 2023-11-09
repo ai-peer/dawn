@@ -40,3 +40,7 @@ dictionary GPURequestAdapterOptions {
 interface GPUAdapter {
     readonly attribute boolean isCompatibilityMode;
 };
+
+dictionary GPUTextureDescriptor {
+    GPUTextureViewDimension textureBindingViewDimension;
+}
