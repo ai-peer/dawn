@@ -22,6 +22,30 @@
       },
       "revId": "e69c63b55b5960e1131ec3cd9458b74aadebe15d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25757e9e_eb942598",
+        "filename": "src/tint/cmd/info/main.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-09T21:55:18Z",
+      "side": 1,
+      "message": "\u003e Shouldn\u0027t these still be emitted only if `location` was present?\n\nIt\u0027s an odd mix. `component_type` and `composition_type` are not associated with `location`. But yes, `interpolation` and `sampling` probably should be dependent on `location`.\n\n\u003e Also could add `@color` here too?\n\nWill do.",
+      "parentUuid": "1a928113_a88ac1f8",
+      "range": {
+        "startLine": 115,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 31
+      },
+      "revId": "e69c63b55b5960e1131ec3cd9458b74aadebe15d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
