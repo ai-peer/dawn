@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ba1bc159_c8622dcb",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-09T22:22:23Z",
+      "side": 1,
+      "message": "I see - could we instead simply ask to enable validation, and then query whether it was enabled? I\u0027d rather not introduce new ways for device creation to fail.\n\nI would be surprised if you were able to successfully make a device with Partial validation, but not Full. Both should be present in the sdk.",
+      "parentUuid": "e15d881c_f9c37b4a",
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "030e0995_5c479bbc",
         "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
         "patchSetId": 2
