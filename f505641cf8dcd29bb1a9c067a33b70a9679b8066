@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9761ce88_59362a6c",
+        "filename": "src/dawn/tests/end2end/ComputeDispatchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 540,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-09T00:00:49Z",
+      "side": 0,
+      "message": "Turns out I didn\u0027t put this suppression in the ExceedsMaxWorkgroupsWithOffsetNoop.",
+      "revId": "f505641cf8dcd29bb1a9c067a33b70a9679b8066",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
