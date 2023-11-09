@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fcb0a6c_bce8c2f2",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-09T21:34:44Z",
+      "side": 1,
+      "message": "how important do you think it is to validate it matches? maybe we should simply inherit the debug state of the shared device instead of validating it matches the instance - not sure what the use cases and considerations are",
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "030e0995_5c479bbc",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-09T21:34:44Z",
+      "side": 1,
+      "message": "does Chrome enable debug layers with any filters?\n\nthis is interesting because the debug layer filter state is global. will this cause unexpected changes to the global state?",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
