@@ -73,6 +73,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "40638d93_bf65d634",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-09T21:22:57Z",
+      "side": 1,
+      "message": "Ah I missed that, but yes this new change is clearer, thanks",
+      "parentUuid": "d9b887db_865d97a5",
+      "revId": "b07b61ca735f43fd389db5d96cee6240982c1c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "cd3f698b_f90683aa",
         "filename": "src/dawn/node/binding/GPUBuffer.cpp",
         "patchSetId": 4
