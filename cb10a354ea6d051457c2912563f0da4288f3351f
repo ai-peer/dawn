@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d8606ba9_93df1b49",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-09T13:06:17Z",
+      "side": 0,
+      "message": "Could you leave the CTS expectations unomdified for the moment? Without trybots, it\u0027s difficult to ensure correctness, and sometimes results differ between AMD, Intel and NVidia.",
+      "range": {
+        "startLine": 89,
+        "startChar": 0,
+        "endLine": 89,
+        "endChar": 5
+      },
+      "revId": "cb10a354ea6d051457c2912563f0da4288f3351f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
