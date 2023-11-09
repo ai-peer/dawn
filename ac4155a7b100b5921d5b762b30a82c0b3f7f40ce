@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e8411b4_a072cadc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-09T18:13:14Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "ac4155a7b100b5921d5b762b30a82c0b3f7f40ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fe48154_15f86418",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-09T18:13:14Z",
+      "side": 1,
+      "message": "u-u-nit: we could early continue instead of indenting everything.",
+      "revId": "ac4155a7b100b5921d5b762b30a82c0b3f7f40ce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
