@@ -33,6 +33,41 @@
       "message": "This looks like it will return kMapped if it was *created* with mappedAtCreation, not if it is *currently* mapped?",
       "revId": "b07b61ca735f43fd389db5d96cee6240982c1c20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "492f6c35_ddde639b",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-09T12:00:17Z",
+      "side": 1,
+      "message": "mappedAtCreation gets reset on destroy() and unmap() at [1].",
+      "parentUuid": "e04c56aa_456aa21e",
+      "revId": "b07b61ca735f43fd389db5d96cee6240982c1c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cd3f698b_f90683aa",
+        "filename": "src/dawn/node/binding/GPUBuffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-09T12:00:17Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "b07b61ca735f43fd389db5d96cee6240982c1c20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

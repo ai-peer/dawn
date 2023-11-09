@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07569860_b35e204f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-09T12:00:17Z",
+      "side": 1,
+      "message": "Ben PTAL the 3 dawn.node CLs!",
+      "revId": "d83f3e81da8c65b3ca46111ed16a24e23990dbd2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
