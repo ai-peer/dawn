@@ -135,6 +135,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cf8cb7f_f11df94e",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-09T14:30:12Z",
+      "side": 1,
+      "message": "The spec is pretty clear, IMHO: the name of a uniform or storage block binding must match across fragment \u0026 vert shaders. I think the issue is that only some vendor\u0027s drivers (in particular, NVidia\u0027s) actually generate a compilation error on mismatched names.\n\nI\u0027m going to check with the ANGLE team to see if this error can/should be added, so that it\u0027s at least common across all devices under ANGLE.",
+      "parentUuid": "881b178d_dd86acd5",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
