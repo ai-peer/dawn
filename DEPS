@@ -287,7 +287,7 @@ deps = {
   # Dependencies for PartitionAlloc.
   # Doc: https://docs.google.com/document/d/1wz45t0alQthsIU9P7_rQcfQyqnrBMXzrOjSzdQo-V-A
   'third_party/partition_alloc': {
-    'url': '{chromium_git}/chromium/src/base/allocator/partition_allocator.git@ed0eea25ea60b0ebbee85e91022554d6f2d3dd79',
+    'url': '{chromium_git}/chromium/src/base/allocator/partition_allocator.git@a0c535e5f489f1e61a0022a313b9472dbfe59aee',
     'condition': 'dawn_standalone',
   },
 }
