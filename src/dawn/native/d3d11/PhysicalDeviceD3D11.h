@@ -50,7 +50,7 @@ class PhysicalDevice : public d3d::PhysicalDevice {
     bool SupportsFeatureLevel(FeatureLevel featureLevel) const override;
 
     const DeviceInfo& GetDeviceInfo() const;
-    ResultOrError<ComPtr<ID3D11Device>> CreateD3D11Device();
+    ResultOrError<ComPtr<ID3D11Device>> CreateD3D11Device(bool needsValidation);
 
     uint32_t GetUAVSlotCount() const { return mUAVSlotCount; }
     bool IsSharedD3D11Device() const { return mIsSharedD3D11Device; }
