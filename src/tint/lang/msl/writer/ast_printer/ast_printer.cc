@@ -2839,6 +2839,10 @@ bool ASTPrinter::EmitStructType(TextBuffer* b, const core::type::Struct* str) {
             }
         }
 
+        if (auto color = attributes.color) {
+            out << " [[color(" + std::to_string(color.value()) + ")]]";
+        }
+
         if (auto interpolation = attributes.interpolation) {
             auto name = InterpolationToAttribute(interpolation->type, interpolation->sampling);
             if (name.empty()) {
