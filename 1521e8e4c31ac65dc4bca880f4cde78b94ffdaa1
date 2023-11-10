@@ -200,6 +200,30 @@
       },
       "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f5099d32_37918e6e",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:16:26Z",
+      "side": 1,
+      "message": "Created crbug.com/tint/2098",
+      "parentUuid": "0b274755_6fb7572a",
+      "range": {
+        "startLine": 432,
+        "startChar": 16,
+        "endLine": 435,
+        "endChar": 60
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
