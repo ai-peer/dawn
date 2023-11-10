@@ -159,6 +159,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241c31cc_cfa90ad3",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:29:10Z",
+      "side": 1,
+      "message": "I\u0027m trying my best to understand the discussion in this thread. I think Shrek was saying that the block names don\u0027t need to match, and Stephen is saying they do.\n\nI\u0027m holding off review until this is resolved. Assuming the block names must match, I\u0027m still of the opinion that a new, earlier transform is the right fix here.",
+      "parentUuid": "4cf8cb7f_f11df94e",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
