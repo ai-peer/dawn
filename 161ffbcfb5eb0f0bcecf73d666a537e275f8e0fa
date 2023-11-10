@@ -183,6 +183,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b59fff2_aebca1f4",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-10T14:19:49Z",
+      "side": 1,
+      "message": "Thanks, Ben. I did some investigation, and I think I understand the issue better now.\n\n1) If the block names match between vert \u0026 frag shader, then all of the contents must match: member names, types.\n\n2) If the block names don\u0027t match (even when the binding location does), then you\u0027re in \"cowboy mode\": the members can have any name and any type. Essentially you\u0027re \"reinterpret_cast\"ing the data differently in each shader.\n\nSo either option is possible as a solution:\n\n1) Always name the block at the same binding location the same between vert \u0026 frag shader. This would require ensuring that the generated names don\u0027t collide with other symbols in the shader.\n\n2) Always rename all blocks differently between vert \u0026 frag shader. This would require some input from Dawn to avoid collisions between the different stages.\n\n(The error in the current state is that we sometimes rename *different* blocks the same name in vert \u0026 frag shaders, which causes errors since the binding location and contents may be different.)",
+      "parentUuid": "241c31cc_cfa90ad3",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
