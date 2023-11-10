@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bdead45b_47dd1e39",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T09:52:32Z",
+      "side": 1,
+      "message": "+2 with a request for a method comment",
+      "revId": "c913c76d2c996365762013af2d6703f95ee0028c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f1d72d7_b7824252",
+        "filename": "src/dawn/node/binding/AsyncRunner.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T09:52:32Z",
+      "side": 1,
+      "message": "Comment please. Things that would be good to state:\n* Does it need to be called between `Begin()` and `End()`?\n* Can it be called more than once?\n* That it rejects the promise with a `setImmediate` callback - and why.",
+      "revId": "c913c76d2c996365762013af2d6703f95ee0028c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
