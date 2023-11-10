@@ -207,6 +207,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4dd7e4c_8d70289d",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-10T14:34:44Z",
+      "side": 1,
+      "message": "Shrek\u0027s current solution is #2, and I believe avoids collisions since all *other* symbols in the shader have been previously renamed to tint_symbol_X, so they can\u0027t collide with tint_symbol_X_ubo_Y (Shrek, correct me if I\u0027m wrong).\n\nNot new to this patch, but I find this heavy-handed renaming a bit unfortunate, to be honest. My preference would be #1, with the additional constraint that the name includes the original WGSL name in some form. This would make it clearer that they originated as the same structure, and would make problems with the resulting GLSL shader easier to diagnose.\n\nBut I also don\u0027t want to impose the work of yet another transform, especially an AST-based one as we\u0027re moving to IR-based transforms anyway. So I\u0027m fine with the current patch, as long as it does in fact avoid all possible naming conflicts.",
+      "parentUuid": "7b59fff2_aebca1f4",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
