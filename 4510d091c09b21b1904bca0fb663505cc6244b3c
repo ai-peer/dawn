@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d747d9b_e19f9ce2",
+        "filename": "src/dawn/tests/end2end/ComputeDispatchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 571,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-10T00:21:35Z",
+      "side": 1,
+      "message": "In the original CL I missed adding the 32_BIT suppression when adding this new test.\n\nRan against `dawn-try-win10-x86-rel` and seems fine now.",
+      "revId": "4510d091c09b21b1904bca0fb663505cc6244b3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
