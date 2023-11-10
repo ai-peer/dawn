@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "191aec7d_c90da87c",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-10T16:41:14Z",
+      "side": 1,
+      "message": "For Vulkan/Metal/D3D12 - we try to enable the debug layers, but if we can\u0027t we don\u0027t fail creation.\n\nI think we should do the same for d3d11 and make it so it does not fail if the debug layers are absent\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d12/BackendD3D12.cpp;l\u003d51?q\u003dEnableDebugLayer%20f:dawn%20f:native\u0026ss\u003dchromium%2Fchromium%2Fsrc\n\nD3D12 does:\n\n        if (SUCCEEDED(functions-\u003ed3d12GetDebugInterface(IID_PPV_ARGS(\u0026debugController)))) {\n            DAWN_ASSERT(debugController !\u003d nullptr);\n            debugController-\u003eEnableDebugLayer();\n            if (instance-\u003eGetBackendValidationLevel() \u003d\u003d BackendValidationLevel::Full) {\n                debugController-\u003eSetEnableGPUBasedValidation(true);\n            }\n        }",
+      "parentUuid": "bcb1b70b_08463e8b",
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "030e0995_5c479bbc",
         "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
         "patchSetId": 2
