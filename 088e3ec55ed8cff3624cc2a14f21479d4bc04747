@@ -153,6 +153,30 @@
       },
       "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "125ac01c_7160abba",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-10T21:32:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "626eeeff_60a3bf0c",
+      "range": {
+        "startLine": 121,
+        "startChar": 0,
+        "endLine": 121,
+        "endChar": 64
+      },
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

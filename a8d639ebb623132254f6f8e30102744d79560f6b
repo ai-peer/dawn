@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f3f81369_e8afe420",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-10T21:32:42Z",
+      "side": 1,
+      "message": "IMO recreating is not that necessary and now mIsSharedD3D11Device doesn\u0027t reflect the true state\n\nWhy is this needed?",
+      "revId": "a8d639ebb623132254f6f8e30102744d79560f6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
