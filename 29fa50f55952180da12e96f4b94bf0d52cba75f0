@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d67905b3_b074738d",
+        "filename": "test/tint/builtins/gen/literal/textureBarrier/3d0f7e.wgsl.expected.fxc.hlsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-10T14:37:24Z",
+      "side": 0,
+      "message": "I\u0027m not sure why this was failing, but it may have been due to flaky timeouts. To make sure, please revert this change (it\u0027s not affected by your CL).",
+      "revId": "29fa50f55952180da12e96f4b94bf0d52cba75f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
