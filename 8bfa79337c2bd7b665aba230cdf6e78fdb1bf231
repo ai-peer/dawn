@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "8bfa79337c2bd7b665aba230cdf6e78fdb1bf231",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff5fc52_c4304761",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:20:55Z",
+      "side": 1,
+      "message": "LGTM, but I\u0027d like @amaiorano@google.com to review",
+      "revId": "8bfa79337c2bd7b665aba230cdf6e78fdb1bf231",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
