@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ae5e2811_e259c6f5",
+        "filename": ".github/workflows/ci.yml",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-10T02:41:33Z",
+      "side": 1,
+      "message": "FYI I just decided I should finally get around to doing cancel-in-progress for CTS, since I\u0027ve been doing build stuff lately, and found this documentation: http://go/github-actions#gha-bestpractices\nI copied that config for CTS, based on my understanding it should do what I want (only one build at a time on main, only one build at a time per (source branch of a) PR).",
+      "revId": "165c1c05ffb5c38cda56c5fafc3951cc57b1210c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
