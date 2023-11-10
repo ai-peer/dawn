@@ -3,6 +3,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cf226503_3bca4d9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-10T02:39:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "4510d091c09b21b1904bca0fb663505cc6244b3c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9d747d9b_e19f9ce2",
         "filename": "src/dawn/tests/end2end/ComputeDispatchTests.cpp",
         "patchSetId": 2
