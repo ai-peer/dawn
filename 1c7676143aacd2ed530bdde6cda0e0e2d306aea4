@@ -16,6 +16,24 @@
       "message": "Can we have a TODO to optimize this in the future by inserting the load as late as possible and the store as early as possible? Right now the critical section is the whole pixel shader, which means that the HW will not be able to run the pixel shaders in parallel at all!",
       "revId": "1c7676143aacd2ed530bdde6cda0e0e2d306aea4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "153ce148_560450e2",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-10T01:57:36Z",
+      "side": 1,
+      "message": "Done\n\nI think such change can be much easier after we support IR in HLSL backend.",
+      "parentUuid": "fefb0688_30b357c6",
+      "revId": "1c7676143aacd2ed530bdde6cda0e0e2d306aea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
