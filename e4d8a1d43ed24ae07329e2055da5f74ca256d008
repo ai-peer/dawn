@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d126376a_3989facc",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T10:45:11Z",
+      "side": 1,
+      "message": "`to reject`",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0360cb79_90cf0627",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T10:45:11Z",
+      "side": 1,
+      "message": "Would it be cleaner to change `Promise` to not derive from `detail::PromiseBase`, and instead hold a `std::optional\u003cdetail::PromiseBase\u003e`, which is only set with the other constructor? You\u0027d then instead crash if the promise is used.",
+      "range": {
+        "startLine": 275,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 61
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cad86bcf_7a9985e6",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T10:45:11Z",
+      "side": 1,
+      "message": "Document please.",
+      "range": {
+        "startLine": 784,
+        "startChar": 12,
+        "endLine": 784,
+        "endChar": 37
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "649d2fd4_66a58f44",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T10:45:11Z",
+      "side": 1,
+      "message": "I\u0027m a bit confused by the return signatures here. Must `f()` return a promise? If so, can we change the return type to statically enforce this?\nIf not, doesn\u0027t that mean the function might sometimes return a non-promise, and when erroring, return a promise?",
+      "range": {
+        "startLine": 785,
+        "startChar": 4,
+        "endLine": 785,
+        "endChar": 29
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
