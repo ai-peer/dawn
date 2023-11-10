@@ -775,6 +775,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2839f639_00ef796b",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "Oh, that\u0027s fine. So long as they get enabled when the printer is done - no worries.",
+      "parentUuid": "e7fce921_6ba8871f",
+      "revId": "243c8415a1188ec5ddba66bc27e1cfac9dd7d885",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4c921ec9_fba8a04e",

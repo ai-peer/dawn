@@ -1,0 +1,205 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb250cfc_dea823fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "me()",
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06571386_14a012d5",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "nit: This is almost always called `sem` in other transforms. Consistency would be nice.",
+      "range": {
+        "startLine": 57,
+        "startChar": 21,
+        "endLine": 57,
+        "endChar": 28
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d953457d_0c575df9",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "nit: put a `//` here to force a line break",
+      "range": {
+        "startLine": 311,
+        "startChar": 31,
+        "endLine": 311,
+        "endChar": 32
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b21d1697_67fbeb52",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "nit: `//`",
+      "range": {
+        "startLine": 337,
+        "startChar": 35,
+        "endLine": 337,
+        "endChar": 36
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad070c8a_2ab4d252",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "nit: `//`",
+      "range": {
+        "startLine": 339,
+        "startChar": 71,
+        "endLine": 339,
+        "endChar": 72
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5e33d62_a9e3a80e",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "`member_index` - although you don\u0027t actually use this aside from indexing, so just: `for (auto* member : struct_type-\u003eMembers())`",
+      "range": {
+        "startLine": 417,
+        "startChar": 28,
+        "endLine": 417,
+        "endChar": 39
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "238d411c_9e8dc35e",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "This can be reduced to:\n\n`if (member-\u003eAttributes().builtin \u003d\u003d core::BuiltinValue::kPosition) {`",
+      "range": {
+        "startLine": 420,
+        "startChar": 20,
+        "endLine": 423,
+        "endChar": 71
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a324eea_fc66b4ae",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "remove",
+      "range": {
+        "startLine": 426,
+        "startChar": 79,
+        "endLine": 426,
+        "endChar": 86
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b274755_6fb7572a",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 435,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-10T11:15:01Z",
+      "side": 1,
+      "message": "Annoyingly we don\u0027t have `builtin` in `ParameterAttributes`",
+      "range": {
+        "startLine": 432,
+        "startChar": 16,
+        "endLine": 435,
+        "endChar": 60
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
