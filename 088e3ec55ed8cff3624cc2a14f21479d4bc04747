@@ -56,6 +56,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcb1b70b_08463e8b",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-10T02:58:12Z",
+      "side": 1,
+      "message": "Without shared d3d11 device, `Adapter::CreateDevice()` will fail, if sdk is not installed, but client enables backend validation. So I feel it makes sense, `Adapter::CreateDevice()` also fails with shared d3d11 device, if it cannot create `wgpu::Device` with requested backend validation level.\n\nBTW, even it doesn\u0027t fail, we still need call `InitializeDebugLayerFilters()` if the debug layer is enabled with the shared d3d11 device, otherwise dawn will report some errors which should be ignored.",
+      "parentUuid": "ba1bc159_c8622dcb",
+      "revId": "088e3ec55ed8cff3624cc2a14f21479d4bc04747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "030e0995_5c479bbc",
         "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
         "patchSetId": 2
