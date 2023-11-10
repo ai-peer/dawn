@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d1ad34e_c2cd1eae",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 12
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-11-10T15:16:40Z",
+      "side": 1,
+      "message": "`raw_ptr` is used from a header file. So, the public interface of this target require dependant to be able to find `raw_ptr` as well.\n\nSee GN doc explaining this:\nhttps://gn.googlesource.com/gn/+/master/docs/reference.md#discussion\n\nNote: Unfortunately, this is still not yet enforced by GN automatically:\n- https://bugs.chromium.org/p/gn/issues/detail?id\u003d49\n- https://bugs.chromium.org/p/gn/issues/detail?id\u003d287",
+      "parentUuid": "66118886_874634d4",
+      "revId": "f5351c26bc02058fde7739a674f90db297dc3dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7557b115_89fa74aa",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-11-10T13:55:32Z",
       "side": 1,
       "message": "Why the addition in this file specifically?",
+      "revId": "f5351c26bc02058fde7739a674f90db297dc3dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0566cc15_e083a19e",
+        "filename": "src/dawn/native/PipelineLayout.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-11-10T15:16:40Z",
+      "side": 1,
+      "message": "Mostly random. I took something that looked important.",
+      "parentUuid": "7557b115_89fa74aa",
       "revId": "f5351c26bc02058fde7739a674f90db297dc3dce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
