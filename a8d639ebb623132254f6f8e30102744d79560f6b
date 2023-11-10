@@ -16,6 +16,24 @@
       "message": "IMO recreating is not that necessary and now mIsSharedD3D11Device doesn\u0027t reflect the true state\n\nWhy is this needed?",
       "revId": "a8d639ebb623132254f6f8e30102744d79560f6b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ded819_a8604fa6",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-10T21:42:38Z",
+      "side": 1,
+      "message": "If `mIsSharedD3D11Device \u003d\u003d false`, `PhysicalDevice` will create a d3d11 device to correct some information. We will store it to avoid recreating it for the first Adapter.createDevice() call. But client may change backend validation layer setting between discovering  adapters and wgpu::Device. In that case, we will need recreate the d3d11 device with correct setting. I thin in most cases, developer will only set the validation level once and only while debugging. So it shouldn\u0027t affect end users.",
+      "parentUuid": "f3f81369_e8afe420",
+      "revId": "a8d639ebb623132254f6f8e30102744d79560f6b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
