@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-11-15 05:08:54AM
+# Last rolled: 2023-11-16 10:20:22AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -877,3 +877,4 @@ crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-backend-validati
 crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-no-backend-validation ventura webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,* [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x3e9b ventura webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,* [ Failure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation intel-0x3e9b ventura webgpu-adapter-swiftshader ] webgpu:web_platform,external_texture,* [ Failure ]
+crbug.com/dawn/0000 webgpu:api,validation,capability_checks,features,query_types:timestamp:* [ Failure ]
