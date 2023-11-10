@@ -222,7 +222,9 @@ async function runCtsTest(queryString, use_worker) {
     endHeartbeatScope();
 
     sendMessageTestStatus(res.status, res.timems);
-    sendMessageTestLog(res.logs);
+    if (res.logs.length > 0){
+      sendMessageTestLog(res.logs);
+    }
     sendMessageTestFinished();
   };
   await wpt_fn();
