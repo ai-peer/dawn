@@ -82,7 +82,7 @@ func (c *cmd) runTestCaseWithCmdline(ctx context.Context, testCase common.TestCa
 	defer cancel()
 
 	args := []string{
-		"-e", c.state.CTS.Eval("cmdline"), // Evaluate 'eval'.
+		"-e", "require('./common/runtime/cmdline.js');",
 		"--",
 		// src/common/runtime/helper/sys.ts expects 'node file.js <args>'
 		// and slices away the first two arguments. When running with '-e', args
@@ -114,7 +114,7 @@ func (c *cmd) runTestCaseWithCmdline(ctx context.Context, testCase common.TestCa
 	args = append(args, string(testCase))
 
 	cmd := exec.CommandContext(ctx, c.flags.Node, args...)
-	cmd.Dir = c.flags.CTS
+	cmd.Dir = c.state.CTS.Node.Out
 
 	var buf bytes.Buffer
 	cmd.Stdout = &buf
