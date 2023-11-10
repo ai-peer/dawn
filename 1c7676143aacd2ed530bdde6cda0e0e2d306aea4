@@ -34,6 +34,24 @@
       "parentUuid": "fefb0688_30b357c6",
       "revId": "1c7676143aacd2ed530bdde6cda0e0e2d306aea4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3aede31_3d0e52fc",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-10T09:37:59Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "153ce148_560450e2",
+      "revId": "1c7676143aacd2ed530bdde6cda0e0e2d306aea4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
