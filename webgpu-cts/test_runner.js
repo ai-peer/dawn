@@ -27,6 +27,7 @@
 
 import { globalTestConfig } from '../third_party/webgpu-cts/src/common/framework/test_config.js';
 import { dataCache } from '../third_party/webgpu-cts/src/common/framework/data_cache.js';
+import { getResourcePath } from '../third_party/webgpu-cts/src/common/framework/resources.js';
 import { DefaultTestFileLoader } from '../third_party/webgpu-cts/src/common/internal/file_loader.js';
 import { prettyPrintLog } from '../third_party/webgpu-cts/src/common/internal/logging/log_message.js';
 import { Logger } from '../third_party/webgpu-cts/src/common/internal/logging/logger.js';
@@ -119,12 +120,18 @@ async function runCtsTestViaSocket(event) {
 
 dataCache.setStore({
   load: async (path) => {
-    if (path.endsWith('.json')) {
-      // TODO(bclayton): Remove this once https://github.com/gpuweb/cts/pull/3094 lands and rolls.
-      return await (await fetch(`/third_party/webgpu-cts/cache/data/${path}`)).text();
-    } else {
-      const response = await fetch(`/third_party/webgpu-cts/cache/data/${path}`);
+    const fullPath = getResourcePath(`cache/${path}`);
+    const errFailedToLoadCache = `failed to load cache file: ${fullPath}`;
+    try {
+      const response = await fetch(fullPath);
+      if (!response.ok) {
+        sendMessageTestLogString(errFailedToLoadCache)
+        return Promise.reject(response.statusText);
+      }
       return new Uint8Array(await response.arrayBuffer());
+    } catch (err) {
+      sendMessageTestLogString(errFailedToLoadCache)
+      return Promise.reject(err);
     }
   }
 });
@@ -278,6 +285,13 @@ function sendMessageTestLog(logs) {
         'log': piece
       }));
     });
+}
+
+function sendMessageTestLogString(msg) {
+  socket.send(JSON.stringify({
+    'type': 'TEST_LOG',
+    'log': msg+"\n"
+  }));
 }
 
 function sendMessageTestFinished() {

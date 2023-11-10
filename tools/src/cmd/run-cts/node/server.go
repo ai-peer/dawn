@@ -97,7 +97,7 @@ func (c *cmd) runServer(
 	stopServer := func() {}
 	startServer := func() error {
 		args := []string{
-			"-e", c.state.CTS.Eval("server"), // Evaluate 'eval'.
+			"-e", "require('./common/runtime/server.js');",
 			"--",
 			// src/common/runtime/helper/sys.ts expects 'node file.js <args>'
 			// and slices away the first two arguments. When running with '-e', args
@@ -105,7 +105,6 @@ func (c *cmd) runServer(
 			"placeholder-arg",
 			// Actual arguments begin here
 			"--gpu-provider", filepath.Join(c.flags.bin, "cts.js"),
-			"--data", filepath.Join(c.flags.CTS, "out-node", "data"),
 		}
 		if c.flags.Colors {
 			args = append(args, "--colors")
@@ -141,7 +140,7 @@ func (c *cmd) runServer(
 
 		pl := newPortListener(writer)
 
-		cmd.Dir = c.flags.CTS
+		cmd.Dir = c.state.CTS.Node.Out
 		cmd.Stdout = &pl
 		cmd.Stderr = &pl
 
