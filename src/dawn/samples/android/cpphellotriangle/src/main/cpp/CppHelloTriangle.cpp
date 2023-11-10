@@ -12,10 +12,10 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include <game-activity/GameActivity.cpp>
-#include "Renderer.h"
+#include "dawn/samples/android/cpphelloTriangle/main/cpp/Renderer.h"
 
 extern "C" {
-#include <game-activity/native_app_glue/android_native_app_glue.c>
+#include <game-activity/native_app_glue/android_native_app_glue.c>  // NOLINT
 
 void handle_cmd(android_app* pApp, int32_t cmd) {
     switch (cmd) {
@@ -43,7 +43,7 @@ void android_main(android_app* pApp) {
     android_poll_source* pSource;
 
     do {
-        if (ALooper_pollAll(0, nullptr, &events, (void**)&pSource) >= 0) {
+        if (ALooper_pollAll(0, nullptr, &events, reinterpret_cast<void**>(&pSource)) >= 0) {
             if (pSource) {
                 pSource->process(pApp, pSource);
             }

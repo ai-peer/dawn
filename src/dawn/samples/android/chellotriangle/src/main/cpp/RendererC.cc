@@ -12,7 +12,7 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 #include "RendererC.h"
-#include "dawn/common/Log.h"
+#include "dawn/common/Log.h"  // NOLINT
 
 void RendererC::Init() {
     device = CreateCppDawnDeviceForAndroid(androidDesc).MoveToCHandle();

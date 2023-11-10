@@ -12,66 +12,33 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-add_library(dawn_sample_utils STATIC ${DAWN_PLACEHOLDER_FILE})
-common_compile_options(dawn_sample_utils)
-target_sources(dawn_sample_utils PRIVATE
-    "SampleUtils.cpp"
-    "SampleUtils.h"
-)
+add_subdirectory(utils)
 
-if (BUILD_ANDROID_SAMPLES)
-  add_subdirectory(android/chellotriangle/src/main/cpp)
-  add_subdirectory(android/cpphellotriangle/src/main/cpp)
-
-  find_package(game-activity REQUIRED CONFIG)
-
-  target_link_libraries(dawn_sample_utils PUBLIC
-    dawn_internal_config
-    dawncpp
-    dawn_proc
-    dawn_common
-    dawn_native
-    dawn_wire
-    dawn_utils
-    jnigraphics
-    game-activity::game-activity_static
-    android
-  )
+if (DAWN_BUILD_ANDROID_SAMPLES)
+  add_subdirectory(android/chellotriangle)
+  add_subdirectory(android/cpphellotriangle)
 
 else()
 
-target_link_libraries(dawn_sample_utils PUBLIC
-    dawn_internal_config
-    dawncpp
-    dawn_proc
-    dawn_common
-    dawn_native
-    dawn_wire
-    dawn_utils
-    dawn_sample_utils
-    dawn_glfw
-    glfw
-  )
-
 add_executable(CppHelloTriangle "CppHelloTriangle.cpp")
 common_compile_options(CppHelloTriangle)
-target_link_libraries(CppHelloTriangle)
+target_link_libraries(CppHelloTriangle dawn_sample_utils)
 
 add_executable(CHelloTriangle "CHelloTriangle.cpp")
 common_compile_options(CHelloTriangle)
-target_link_libraries(CHelloTriangle)
+target_link_libraries(CHelloTriangle dawn_sample_utils)
 
 add_executable(ComputeBoids "ComputeBoids.cpp")
 common_compile_options(ComputeBoids)
-target_link_libraries(ComputeBoids)
+target_link_libraries(ComputeBoids dawn_sample_utils)
 
 add_executable(Animometer "Animometer.cpp")
 common_compile_options(Animometer)
-target_link_libraries(Animometer)
+target_link_libraries(Animometer dawn_sample_utils)
 
 add_executable(DawnInfo "DawnInfo.cpp")
 common_compile_options(DawnInfo)
-target_link_libraries(DawnInfo)
+target_link_libraries(DawnInfo dawn_sample_utils)
 
 endif()
 
