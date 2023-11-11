@@ -77,6 +77,10 @@ SystemEventReceiver SystemEventReceiver::CreateAlreadySignaled() {
     return receiver;
 }
 
+bool SystemEventReceiver::IsValid() const {
+    return mPrimitive.IsValid();
+}
+
 // SystemEventPipeSender
 
 SystemEventPipeSender::~SystemEventPipeSender() {

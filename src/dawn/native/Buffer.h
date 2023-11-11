@@ -31,9 +31,11 @@
 #include <functional>
 #include <memory>
 
+#include "dawn/common/FutureUtils.h"
 #include "dawn/common/NonCopyable.h"
 
 #include "dawn/native/Error.h"
+#include "dawn/native/EventManager.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/ObjectBase.h"
@@ -88,7 +90,9 @@ class BufferBase : public ApiObjectBase {
     wgpu::BufferUsage GetUsageExternalOnly() const;
 
     MaybeError MapAtCreation();
-    void CallbackOnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status);
+    void CallbackOnMapRequestCompleted(MapRequestID mapID, wgpu::BufferMapAsyncStatus status);
+    wgpu::BufferMapAsyncStatus OnMapAsyncEventComplete(EventCompletionType completionType,
+                                                       MapRequestID mapID);
 
     MaybeError ValidateCanUseOnQueueNow() const;
 
@@ -136,7 +140,7 @@ class BufferBase : public ApiObjectBase {
 
   private:
     std::function<void()> PrepareMappingCallback(MapRequestID mapID,
-                                                 WGPUBufferMapAsyncStatus status);
+                                                 wgpu::BufferMapAsyncStatus status);
 
     virtual MaybeError MapAtCreationImpl() = 0;
     virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
@@ -148,10 +152,15 @@ class BufferBase : public ApiObjectBase {
     MaybeError ValidateMapAsync(wgpu::MapMode mode,
                                 size_t offset,
                                 size_t size,
-                                WGPUBufferMapAsyncStatus* status) const;
+                                wgpu::BufferMapAsyncStatus* status) const;
     MaybeError ValidateUnmap() const;
     bool CanGetMappedRange(bool writable, size_t offset, size_t size) const;
-    void UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus);
+    void UnmapInternal(wgpu::BufferMapAsyncStatus callbackStatus);
+
+    Ref<EventManager::TrackedEvent> CreateMapAsyncEvent(wgpu::MapMode mode,
+                                                        size_t offset,
+                                                        size_t size,
+                                                        const BufferMapCallbackInfo& callbackInfo);
 
     uint64_t mSize = 0;
     wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;

@@ -264,14 +264,18 @@ wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nano
 
 EventManager::TrackedEvent::TrackedEvent(DeviceBase* device,
                                          wgpu::CallbackMode callbackMode,
-                                         SystemEventReceiver&& receiver)
+                                         SystemEventReceiver receiver)
     : mDevice(device), mCallbackMode(callbackMode), mReceiver(std::move(receiver)) {}
 
 EventManager::TrackedEvent::~TrackedEvent() {
     DAWN_ASSERT(mCompleted);
 }
 
-const SystemEventReceiver& EventManager::TrackedEvent::GetReceiver() const {
+const SystemEventReceiver& EventManager::TrackedEvent::GetReceiver() {
+    if (mReceiver.IsValid()) {
+        return mReceiver;
+    }
+    mReceiver = CreateReceiverLazy();
     return mReceiver;
 }
 

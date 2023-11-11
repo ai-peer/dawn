@@ -109,7 +109,7 @@ class EventManager::TrackedEvent : public RefCounted {
     // RequestDevice complete immediately in dawn native, so should never need to be tracked.
     TrackedEvent(DeviceBase* device,
                  wgpu::CallbackMode callbackMode,
-                 SystemEventReceiver&& receiver);
+                 SystemEventReceiver receiver = SystemEventReceiver());
 
   public:
     // Subclasses must implement this to complete the event (if not completed) with
@@ -118,7 +118,7 @@ class EventManager::TrackedEvent : public RefCounted {
 
     class WaitRef;
 
-    const SystemEventReceiver& GetReceiver() const;
+    const SystemEventReceiver& GetReceiver();
     DeviceBase* GetWaitDevice() const;
 
   protected:
@@ -129,6 +129,7 @@ class EventManager::TrackedEvent : public RefCounted {
     // False if it can be waited using OS-level wait primitives (WaitAnySystemEvent).
     virtual bool MustWaitUsingDevice() const = 0;
     virtual void Complete(EventCompletionType) = 0;
+    virtual SystemEventReceiver CreateReceiverLazy() = 0;
 
     // This creates a temporary ref cycle (Device->Instance->EventManager->TrackedEvent).
     // This is OK because the instance will clear out the EventManager on shutdown.

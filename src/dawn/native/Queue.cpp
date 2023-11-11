@@ -193,14 +193,16 @@ class ErrorQueue : public QueueBase {
 
 struct WorkDoneEvent final : public EventManager::TrackedEvent {
     std::optional<wgpu::QueueWorkDoneStatus> mEarlyStatus;
+    ExecutionSerial mSerial{0};
     WGPUQueueWorkDoneCallback mCallback;
     void* mUserdata;
 
     // Create an event backed by the given SystemEventReceiver.
     WorkDoneEvent(DeviceBase* device,
                   const QueueWorkDoneCallbackInfo& callbackInfo,
-                  SystemEventReceiver&& receiver)
-        : TrackedEvent(device, callbackInfo.mode, std::move(receiver)),
+                  ExecutionSerial serial)
+        : TrackedEvent(device, callbackInfo.mode),
+          mSerial(serial),
           mCallback(callbackInfo.callback),
           mUserdata(callbackInfo.userdata) {}
 
@@ -208,7 +210,7 @@ struct WorkDoneEvent final : public EventManager::TrackedEvent {
     WorkDoneEvent(DeviceBase* device,
                   const QueueWorkDoneCallbackInfo& callbackInfo,
                   wgpu::QueueWorkDoneStatus earlyStatus)
-        : TrackedEvent(device, callbackInfo.mode, SystemEventReceiver::CreateAlreadySignaled()),
+        : TrackedEvent(device, callbackInfo.mode),
           mEarlyStatus(earlyStatus),
           mCallback(callbackInfo.callback),
           mUserdata(callbackInfo.userdata) {
@@ -231,6 +233,13 @@ struct WorkDoneEvent final : public EventManager::TrackedEvent {
         }
 
         mCallback(ToAPI(status), mUserdata);
+    }
+
+    SystemEventReceiver CreateReceiverLazy() override {
+        if (mEarlyStatus.has_value()) {
+            return SystemEventReceiver::CreateAlreadySignaled();
+        }
+        return mDevice->GetQueue()->InsertWorkDoneEvent(mSerial);
     }
 };
 
@@ -321,7 +330,8 @@ Future QueueBase::APIOnSubmittedWorkDoneF(const QueueWorkDoneCallbackInfo& callb
         // Note: if the callback is spontaneous, it'll get called in here.
         event = AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, validationEarlyStatus));
     } else {
-        event = AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, InsertWorkDoneEvent()));
+        event =
+            AcquireRef(new WorkDoneEvent(GetDevice(), callbackInfo, GetScheduledWorkDoneSerial()));
     }
 
     FutureID futureID =
@@ -330,7 +340,20 @@ Future QueueBase::APIOnSubmittedWorkDoneF(const QueueWorkDoneCallbackInfo& callb
     return {futureID};
 }
 
+SystemEventReceiver QueueBase::InsertWorkDoneEvent(ExecutionSerial serial) {
+    // If the task depends on a serial which is not submitted yet, force a flush.
+    if (serial > GetLastSubmittedCommandSerial()) {
+        ForceEventualFlushOfCommands();
+    }
+    DAWN_ASSERT(serial <= GetScheduledWorkDoneSerial());
+    return InsertWorkDoneEventImpl(serial);
+}
+
 SystemEventReceiver QueueBase::InsertWorkDoneEvent() {
+    return InsertWorkDoneEvent(GetScheduledWorkDoneSerial());
+}
+
+SystemEventReceiver QueueBase::InsertWorkDoneEventImpl(ExecutionSerial serial) {
     // TODO(crbug.com/dawn/2058): Implement this in all backends and remove this default impl
     DAWN_CHECK(false);
 }

@@ -42,6 +42,7 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/DynamicUploader.h"
 #include "dawn/native/ErrorData.h"
+#include "dawn/native/Instance.h"
 #include "dawn/native/ObjectType_autogen.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/Queue.h"
@@ -67,17 +68,74 @@ struct MapRequestTask : TrackTaskCallback {
             TRACE_EVENT1(mPlatform, General, "Buffer::TaskInFlight::Finished", "serial",
                          uint64_t(mSerial));
         }
-        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
+        buffer->CallbackOnMapRequestCompleted(id, wgpu::BufferMapAsyncStatus::Success);
     }
     void HandleDeviceLossImpl() override {
-        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
+        buffer->CallbackOnMapRequestCompleted(id, wgpu::BufferMapAsyncStatus::DeviceLost);
     }
     void HandleShutDownImpl() override {
-        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
+        buffer->CallbackOnMapRequestCompleted(id,
+                                              wgpu::BufferMapAsyncStatus::DestroyedBeforeCallback);
     }
 
     Ref<BufferBase> buffer;
     MapRequestID id;
+};
+
+struct MapAsyncEvent final : public EventManager::TrackedEvent {
+    Ref<BufferBase> mBuffer;
+    std::optional<wgpu::BufferMapAsyncStatus> mEarlyStatus;
+    ExecutionSerial mSerial{0};
+    MapRequestID mMapID{0};
+    WGPUBufferMapCallback mCallback;
+    void* mUserdata;
+
+    // Create an event backed by the given SystemEventReceiver.
+    MapAsyncEvent(Ref<BufferBase> buffer,
+                  const BufferMapCallbackInfo& callbackInfo,
+                  ExecutionSerial serial,
+                  MapRequestID mapID)
+        : TrackedEvent(buffer->GetDevice(), callbackInfo.mode),
+          mBuffer(std::move(buffer)),
+          mSerial(serial),
+          mMapID(mapID),
+          mCallback(callbackInfo.callback),
+          mUserdata(callbackInfo.userdata) {}
+
+    // Create an event that's ready at creation e.g. if serial has already passed or errors.
+    MapAsyncEvent(Ref<BufferBase> buffer,
+                  const BufferMapCallbackInfo& callbackInfo,
+                  wgpu::BufferMapAsyncStatus earlyStatus)
+        : TrackedEvent(buffer->GetDevice(), callbackInfo.mode),
+          mBuffer(std::move(buffer)),
+          mEarlyStatus(earlyStatus),
+          mCallback(callbackInfo.callback),
+          mUserdata(callbackInfo.userdata) {
+        CompleteIfSpontaneous();
+    }
+
+    ~MapAsyncEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
+
+    // TODO(crbug.com/dawn/2062): When adding support for mixed sources, return false here when
+    // the device has the mixed sources feature enabled, and so can expose the fence as an OS event.
+    bool MustWaitUsingDevice() const override { return true; }
+
+    void Complete(EventCompletionType completionType) override {
+        wgpu::BufferMapAsyncStatus status;
+        if (mEarlyStatus.has_value()) {
+            status = mEarlyStatus.value();
+        } else {
+            status = mBuffer->OnMapAsyncEventComplete(completionType, mMapID);
+        }
+        mCallback(ToAPI(status), mUserdata);
+    }
+
+    SystemEventReceiver CreateReceiverLazy() override {
+        if (mEarlyStatus.has_value()) {
+            return SystemEventReceiver::CreateAlreadySignaled();
+        }
+        return mDevice->GetQueue()->InsertWorkDoneEvent(mSerial);
+    }
 };
 
 class ErrorBuffer final : public BufferBase {
@@ -260,12 +318,12 @@ void BufferBase::DestroyImpl() {
     //   is implicitly destroyed. This case is thread-safe because there are no
     //   other threads using the buffer since there are no other live refs.
     if (mState == BufferState::Mapped || mState == BufferState::PendingMap) {
-        UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
+        UnmapInternal(wgpu::BufferMapAsyncStatus::DestroyedBeforeCallback);
     } else if (mState == BufferState::MappedAtCreation) {
         if (mStagingBuffer != nullptr) {
             mStagingBuffer = nullptr;
         } else if (mSize != 0) {
-            UnmapInternal(WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
+            UnmapInternal(wgpu::BufferMapAsyncStatus::DestroyedBeforeCallback);
         }
     }
 
@@ -413,15 +471,16 @@ MaybeError BufferBase::ValidateCanUseOnQueueNow() const {
 }
 
 std::function<void()> BufferBase::PrepareMappingCallback(MapRequestID mapID,
-                                                         WGPUBufferMapAsyncStatus status) {
+                                                         wgpu::BufferMapAsyncStatus status) {
     DAWN_ASSERT(!IsError());
 
     if (mMapCallback != nullptr && mapID == mLastMapID) {
         auto callback = std::move(mMapCallback);
         auto userdata = std::move(mMapUserdata);
-        WGPUBufferMapAsyncStatus actualStatus;
+
+        wgpu::BufferMapAsyncStatus actualStatus;
         if (GetDevice()->IsLost()) {
-            actualStatus = WGPUBufferMapAsyncStatus_DeviceLost;
+            actualStatus = wgpu::BufferMapAsyncStatus::DeviceLost;
         } else {
             actualStatus = status;
         }
@@ -431,7 +490,7 @@ std::function<void()> BufferBase::PrepareMappingCallback(MapRequestID mapID,
         mMapCallback = nullptr;
         mMapUserdata = nullptr;
 
-        return std::bind(callback, actualStatus, userdata);
+        return std::bind(callback, ToAPI(actualStatus), userdata);
     }
 
     return [] {};
@@ -459,12 +518,13 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
         size = mSize - offset;
     }
 
-    WGPUBufferMapAsyncStatus status;
+    wgpu::BufferMapAsyncStatus status;
     if (GetDevice()->ConsumedError(ValidateMapAsync(mode, offset, size, &status),
                                    "calling %s.MapAsync(%s, %u, %u, ...).", this, mode, offset,
                                    size)) {
         if (callback) {
-            GetDevice()->GetCallbackTaskManager()->AddCallbackTask(callback, status, userdata);
+            GetDevice()->GetCallbackTaskManager()->AddCallbackTask(callback, ToAPI(status),
+                                                                   userdata);
         }
         return;
     }
@@ -480,7 +540,7 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
 
     if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size))) {
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(
-            PrepareMappingCallback(mLastMapID, WGPUBufferMapAsyncStatus_DeviceLost));
+            PrepareMappingCallback(mLastMapID, wgpu::BufferMapAsyncStatus::DeviceLost));
         return;
     }
     std::unique_ptr<MapRequestTask> request =
@@ -494,8 +554,62 @@ Future BufferBase::APIMapAsyncF(wgpu::MapMode mode,
                                 size_t offset,
                                 size_t size,
                                 const BufferMapCallbackInfo& callbackInfo) {
-    // TODO(dawn:1987) Implement this.
-    DAWN_CHECK(false);
+    return Future{GetInstance()->GetEventManager()->TrackEvent(
+        callbackInfo.mode, CreateMapAsyncEvent(mode, offset, size, callbackInfo))};
+}
+
+Ref<EventManager::TrackedEvent> BufferBase::CreateMapAsyncEvent(
+    wgpu::MapMode mode,
+    size_t offset,
+    size_t size,
+    const BufferMapCallbackInfo& callbackInfo) {
+    // TODO(crbug.com/dawn/2052): Once we always return a future, change this to log to the instance
+    // (note, not raise a validation error to the device) and return the null future.
+    DAWN_ASSERT(callbackInfo.nextInChain == nullptr);
+
+    // Check for an existing pending map first because it just rejects the callback and doesn't
+    // produce a validation error.
+    if (mState == BufferState::PendingMap) {
+        return AcquireRef(new MapAsyncEvent(this, callbackInfo,
+                                            wgpu::BufferMapAsyncStatus::MappingAlreadyPending));
+    }
+
+    // Handle the defaulting of size required by WebGPU, even if in webgpu_cpp.h it is not
+    // possible to default the function argument (because there is the callback later in the
+    // argument list)
+    if ((size == wgpu::kWholeMapSize) && (offset <= mSize)) {
+        size = mSize - offset;
+    }
+
+    wgpu::BufferMapAsyncStatus status;
+    if (GetDevice()->ConsumedError(ValidateMapAsync(mode, offset, size, &status),
+                                   "calling %s.MapAsync(%s, %u, %u, ...).", this, mode, offset,
+                                   size)) {
+        return AcquireRef(new MapAsyncEvent(this, callbackInfo, status));
+    }
+    DAWN_ASSERT(!IsError());
+
+    if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size))) {
+        return AcquireRef(
+            new MapAsyncEvent(this, callbackInfo, wgpu::BufferMapAsyncStatus::DeviceLost));
+    }
+
+    mLastMapID++;
+    mMapMode = mode;
+    mMapOffset = offset;
+    mMapSize = size;
+
+    QueueBase* queue = GetDevice()->GetQueue();
+    if (queue->GetCompletedCommandSerial() >= mLastUsageSerial) {
+        mState = BufferState::Mapped;
+        return AcquireRef(
+            new MapAsyncEvent(this, callbackInfo, wgpu::BufferMapAsyncStatus::Success));
+    }
+
+    TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Buffer::APIMapAsyncF", "serial",
+                 uint64_t(mLastUsageSerial));
+    mState = BufferState::PendingMap;
+    return AcquireRef(new MapAsyncEvent(this, callbackInfo, mLastUsageSerial, mLastMapID));
 }
 
 void* BufferBase::APIGetMappedRange(size_t offset, size_t size) {
@@ -557,15 +671,17 @@ MaybeError BufferBase::Unmap() {
     if (mState == BufferState::MappedAtCreation && mStagingBuffer != nullptr) {
         DAWN_TRY(CopyFromStagingBuffer());
     }
-    UnmapInternal(WGPUBufferMapAsyncStatus_UnmappedBeforeCallback);
+    UnmapInternal(wgpu::BufferMapAsyncStatus::UnmappedBeforeCallback);
     return {};
 }
 
-void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
+void BufferBase::UnmapInternal(wgpu::BufferMapAsyncStatus callbackStatus) {
     // Unmaps resources on the backend.
     if (mState == BufferState::PendingMap) {
-        GetDevice()->GetCallbackTaskManager()->AddCallbackTask(
-            PrepareMappingCallback(mLastMapID, callbackStatus));
+        if (mMapCallback) {
+            GetDevice()->GetCallbackTaskManager()->AddCallbackTask(
+                PrepareMappingCallback(mLastMapID, callbackStatus));
+        }
         UnmapImpl();
     } else if (mState == BufferState::Mapped) {
         UnmapImpl();
@@ -581,11 +697,11 @@ void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
 MaybeError BufferBase::ValidateMapAsync(wgpu::MapMode mode,
                                         size_t offset,
                                         size_t size,
-                                        WGPUBufferMapAsyncStatus* status) const {
-    *status = WGPUBufferMapAsyncStatus_DeviceLost;
+                                        wgpu::BufferMapAsyncStatus* status) const {
+    *status = wgpu::BufferMapAsyncStatus::DeviceLost;
     DAWN_TRY(GetDevice()->ValidateIsAlive());
 
-    *status = WGPUBufferMapAsyncStatus_ValidationError;
+    *status = wgpu::BufferMapAsyncStatus::ValidationError;
     DAWN_TRY(GetDevice()->ValidateObject(this));
 
     DAWN_INVALID_IF(uint64_t(offset) > mSize,
@@ -628,7 +744,7 @@ MaybeError BufferBase::ValidateMapAsync(wgpu::MapMode mode,
                         wgpu::BufferUsage::MapWrite);
     }
 
-    *status = WGPUBufferMapAsyncStatus_Success;
+    *status = wgpu::BufferMapAsyncStatus::Success;
     return {};
 }
 
@@ -686,13 +802,44 @@ MaybeError BufferBase::ValidateUnmap() const {
     return {};
 }
 
+wgpu::BufferMapAsyncStatus BufferBase::OnMapAsyncEventComplete(EventCompletionType completionType,
+                                                               MapRequestID mapID) {
+    // This is called from a callback, and no lock will be held by default. Hence, we need to lock
+    // the mutex now because this will modify the buffer's states.
+    auto deviceLock(GetDevice()->GetScopedLock());
+
+    wgpu::BufferMapAsyncStatus status;
+    if (GetDevice()->IsLost()) {
+        status = wgpu::BufferMapAsyncStatus::DeviceLost;
+    } else if (!IsAlive()) {
+        status = wgpu::BufferMapAsyncStatus::DestroyedBeforeCallback;
+    } else if (mLastMapID != mapID) {
+        status = wgpu::BufferMapAsyncStatus::UnmappedBeforeCallback;
+    } else {
+        switch (completionType) {
+            case EventCompletionType::Shutdown:
+                status = wgpu::BufferMapAsyncStatus::DestroyedBeforeCallback;
+                break;
+            case EventCompletionType::Ready:
+                status = wgpu::BufferMapAsyncStatus::Success;
+                break;
+        }
+    }
+
+    if (status == wgpu::BufferMapAsyncStatus::Success && mState == BufferState::PendingMap) {
+        mState = BufferState::Mapped;
+    }
+
+    return status;
+}
+
 void BufferBase::CallbackOnMapRequestCompleted(MapRequestID mapID,
-                                               WGPUBufferMapAsyncStatus status) {
+                                               wgpu::BufferMapAsyncStatus status) {
     {
         // This is called from a callback, and no lock will be held by default. Hence, we need to
         // lock the mutex now because this will modify the buffer's states.
         auto deviceLock(GetDevice()->GetScopedLock());
-        if (mapID == mLastMapID && status == WGPUBufferMapAsyncStatus_Success &&
+        if (mapID == mLastMapID && status == wgpu::BufferMapAsyncStatus::Success &&
             mState == BufferState::PendingMap) {
             mState = BufferState::Mapped;
         }

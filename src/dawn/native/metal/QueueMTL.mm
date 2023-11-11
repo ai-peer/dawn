@@ -90,9 +90,7 @@ void Queue::UpdateWaitingEvents(ExecutionSerial completedSerial) {
     });
 }
 
-SystemEventReceiver Queue::InsertWorkDoneEvent() {
-    ExecutionSerial serial = GetScheduledWorkDoneSerial();
-
+SystemEventReceiver Queue::InsertWorkDoneEventImpl(ExecutionSerial serial) {
     // TODO(crbug.com/dawn/2051): Optimize to not create a pipe for every WorkDone/MapAsync event.
     // Possible ways to do this:
     // - Don't create the pipe until needed (see the todo on TrackedEvent::mReceiver).

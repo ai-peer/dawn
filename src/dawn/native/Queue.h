@@ -104,6 +104,12 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     // of completion.
     void TrackPendingTask(std::unique_ptr<TrackTaskCallback> task);
 
+    // Retrieve a SystemEventReceiver corresponding to provided serial.
+    SystemEventReceiver InsertWorkDoneEvent(ExecutionSerial serial);
+
+    // Same as above but uses the GetScheduledWorkDoneSerial instead.
+    SystemEventReceiver InsertWorkDoneEvent();
+
     void Tick(ExecutionSerial finishedSerial);
     void HandleDeviceLoss();
 
@@ -111,8 +117,9 @@ class QueueBase : public ApiObjectBase, public ExecutionQueueBase {
     QueueBase(DeviceBase* device, const QueueDescriptor* descriptor);
     QueueBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);
 
+    virtual SystemEventReceiver InsertWorkDoneEventImpl(ExecutionSerial serial);
+
     void DestroyImpl() override;
-    virtual SystemEventReceiver InsertWorkDoneEvent();
 
   private:
     MaybeError WriteTextureInternal(const ImageCopyTexture* destination,

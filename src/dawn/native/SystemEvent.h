@@ -56,6 +56,8 @@ class SystemEventReceiver final : NonCopyable {
     SystemEventReceiver(SystemEventReceiver&&) = default;
     SystemEventReceiver& operator=(SystemEventReceiver&&) = default;
 
+    bool IsValid() const;
+
   private:
     friend bool WaitAnySystemEvent(size_t, TrackedFutureWaitInfo*, Nanoseconds);
     friend std::pair<SystemEventPipeSender, SystemEventReceiver> CreateSystemEventPipe();

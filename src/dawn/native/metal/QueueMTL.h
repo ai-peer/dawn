@@ -57,7 +57,7 @@ class Queue final : public QueueBase {
     MaybeError Initialize();
     void UpdateWaitingEvents(ExecutionSerial completedSerial);
 
-    SystemEventReceiver InsertWorkDoneEvent() override;
+    SystemEventReceiver InsertWorkDoneEventImpl(ExecutionSerial serial) override;
     MaybeError SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) override;
     bool HasPendingCommands() const override;
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
