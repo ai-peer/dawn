@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93bfd02e_8eccbf0a",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-11T18:31:54Z",
+      "side": 1,
+      "message": "IIUC `ExperimentalPixelLocal` should not longer be supported by the printer? If the extension hasn\u0027t been replaced then something has gone wrong and we shouldn\u0027t try to print.",
+      "revId": "ad07cfa13760f1b414b6f763b1a8ed54842f4dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3688fd93_aab4e933",
+        "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 15
+      },
+      "lineNbr": 581,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-11T18:31:54Z",
+      "side": 1,
+      "message": "Nit: Could just `TINT_ASSERT_OR_RETURN()` this (and remove the `nullptr` checks)? Unless I\u0027m missing something they should always both be builtins if we\u0027ve got here.",
+      "revId": "ad07cfa13760f1b414b6f763b1a8ed54842f4dae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
