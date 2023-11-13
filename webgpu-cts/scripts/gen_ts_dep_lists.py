@@ -59,8 +59,8 @@ def get_ts_sources():
 
 def get_resource_files():
     dir = os.path.join(webgpu_cts_root_dir, 'src', 'resources')
-    all = glob.iglob('**', root_dir=dir, recursive=True)
-    files = [f for f in all if os.path.isfile(os.path.join(dir, f))]
+    all = glob.iglob(os.path.join(dir, '**'), recursive=True)
+    files = [os.path.relpath(f, dir) for f in all if os.path.isfile(f)]
     files.sort()
     return files
 
