@@ -99,8 +99,10 @@ class MslPrinterTestHelperBase : public BASE {
     std::string MetalArray() const { return kMetalArray; }
 };
 
+/// Printer tests
 using MslPrinterTest = MslPrinterTestHelperBase<testing::Test>;
 
+/// Printer param tests
 template <typename T>
 using MslPrinterTestWithParam = MslPrinterTestHelperBase<testing::TestWithParam<T>>;
 
