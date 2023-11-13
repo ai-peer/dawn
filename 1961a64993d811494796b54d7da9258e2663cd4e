@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceaa017f_a4d57e70",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Hi Ben and Corentin,\n\nThe latest patch set lost your +1 and +2. PTAL again, thanks!",
+      "revId": "1961a64993d811494796b54d7da9258e2663cd4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

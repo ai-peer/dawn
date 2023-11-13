@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff58a07f_c8021310",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06571386_14a012d5",
+      "range": {
+        "startLine": 57,
+        "startChar": 21,
+        "endLine": 57,
+        "endChar": 28
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d953457d_0c575df9",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-11-10T11:15:01Z",
       "side": 1,
       "message": "nit: put a `//` here to force a line break",
+      "range": {
+        "startLine": 311,
+        "startChar": 31,
+        "endLine": 311,
+        "endChar": 32
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b733785_8a8a234a",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d953457d_0c575df9",
       "range": {
         "startLine": 311,
         "startChar": 31,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abf283e1_c73a86c0",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 337,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b21d1697_67fbeb52",
+      "range": {
+        "startLine": 337,
+        "startChar": 35,
+        "endLine": 337,
+        "endChar": 36
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad070c8a_2ab4d252",
@@ -117,6 +189,30 @@
       "writtenOn": "2023-11-10T11:15:01Z",
       "side": 1,
       "message": "nit: `//`",
+      "range": {
+        "startLine": 339,
+        "startChar": 71,
+        "endLine": 339,
+        "endChar": 72
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa156cf8_5124aa62",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 339,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad070c8a_2ab4d252",
       "range": {
         "startLine": 339,
         "startChar": 71,
@@ -150,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dd859f0_888a0758",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f5e33d62_a9e3a80e",
+      "range": {
+        "startLine": 417,
+        "startChar": 28,
+        "endLine": 417,
+        "endChar": 39
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "238d411c_9e8dc35e",
@@ -173,6 +293,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a4d1fa0_c37b00e1",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 423,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "238d411c_9e8dc35e",
+      "range": {
+        "startLine": 420,
+        "startChar": 20,
+        "endLine": 423,
+        "endChar": 71
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a324eea_fc66b4ae",
@@ -186,6 +330,30 @@
       "writtenOn": "2023-11-10T11:15:01Z",
       "side": 1,
       "message": "remove",
+      "range": {
+        "startLine": 426,
+        "startChar": 79,
+        "endLine": 426,
+        "endChar": 86
+      },
+      "revId": "1521e8e4c31ac65dc4bca880f4cde78b94ffdaa1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c97bac6_a01f56df",
+        "filename": "src/tint/lang/hlsl/writer/ast_raise/pixel_local.cc",
+        "patchSetId": 10
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:57:11Z",
+      "side": 1,
+      "message": "Oh this cannot be removed because in the dst AST we cannot use the symbol defined in the src AST. We have to create a new symbol with same name as the old symbol (member-\u003eName()).",
+      "parentUuid": "8a324eea_fc66b4ae",
       "range": {
         "startLine": 426,
         "startChar": 79,
