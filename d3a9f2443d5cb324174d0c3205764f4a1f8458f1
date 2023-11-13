@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "406bb746_71e5b6f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-13T05:56:32Z",
+      "side": 1,
+      "message": "Hi Antonio and Ben,\n\nPTAL again as I lost your +1 and +2. Thanks!",
+      "revId": "d3a9f2443d5cb324174d0c3205764f4a1f8458f1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
