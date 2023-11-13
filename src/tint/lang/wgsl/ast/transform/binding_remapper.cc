@@ -134,6 +134,11 @@ Transform::ApplyResult BindingRemapper::Apply(const Program& src,
                 ctx.Replace(old_binding, new_binding);
                 bp = to;
             }
+            // Add `DisableValidationAttribute`s if required
+            if (remappings->allow_collisions) {
+                auto* attribute = b.Disable(DisabledValidation::kBindingPointCollision);
+                ctx.InsertBefore(var->attributes, *var->attributes.begin(), attribute);
+            }
 
             // Replace any access controls.
             auto ac_it = remappings->access_controls.find(from);
@@ -165,12 +170,6 @@ Transform::ApplyResult BindingRemapper::Apply(const Program& src,
                                   ctx.Clone(var->initializer),             // initializer
                                   ctx.Clone(var->attributes));             // attributes
                 ctx.Replace(var, new_var);
-            }
-
-            // Add `DisableValidationAttribute`s if required
-            if (add_collision_attr.count(bp)) {
-                auto* attribute = b.Disable(DisabledValidation::kBindingPointCollision);
-                ctx.InsertBefore(var->attributes, *var->attributes.begin(), attribute);
             }
         }
     }
