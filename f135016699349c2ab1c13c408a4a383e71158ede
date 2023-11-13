@@ -16,6 +16,24 @@
       "message": "Hey folks,\n\nI\u0027ve been looking into Graphite performance bottlenecks and one thing that stands out is the cost related to Buffer MapAsync and the associated device ticking needed to run its callback. This cost is mostly due to submitting pending command buffers even though for Graphite we know that the buffer is ready to be used as we only map after the previous GPU work for the buffer is done.\n\nI played around with prototyping a synchronous buffer mapping extension which seemed to fix the problem, but upon discussing that with Austin, it was clear that the upcoming future-returing variant (MapAsyncF) could also solve the problem.\n\nConcretely, Motionmark Canvas Lines gets a score of ~32k with device ticking and ~40k after optimizing buffer mapping either with the previous synchronous map prototype or this MapAsyncF prototype.\n\nSo here\u0027s a prototype for MapAsyncF and observations I made along the way:\n\n1) Because MapAsyncF can be called with both spontaneous and non-spontaneous modes, we need to be particularly careful about locks - since spontaneous completion can happen in the same call stack as MapAsyncF, it must not acquire locks whereas any event completions that happen later must acquire locks if they\u0027re mutating the buffer e.g. we must acquire the lock when the buffer last usage serial is completed asynchronously and we need to mark the buffer as mapped, but not when the buffer is ready to mapped in the MapAsyncF call. See BufferBase::OnMapAsyncEventComplete() and MapAsyncEvent::Complete().\n\n2) Creating a SystemEventReceiver/Sender (pipe on macOS) is really bad - this causes the pipe() syscall to quickly start failing running Motionmark on my system. To get around this, I made the SystemEventReceiver in the TrackedEvent optional at creation time. If the receiver isn\u0027t provided, it\u0027s created lazily via a virtual CreateReceiverLazy() method. For the two implementations - MapAsyncF and OnSubmittedWorkDoneF - we use Queue::InsertWorkDoneEvent(serial) which is a generalization of the existing InsertWorkDoneEvent() to handle arbitrary serials. The serial is stored in the event on creation - for MapAsyncF it\u0027s the Buffer\u0027s mLastUsageSerial and for OnSubmittedWorkDoneF it\u0027s the GetScheduledWorkDoneSerial().\n\n3) As a side-effect of making the SystemEventReceiver creation lazy, both MapAsyncF and OnSubmittedWorkDoneF can be used on all backends in AllowSpontaneous and AllowProcessEvents modes. However, only the Metal backend supports WaitAny at the moment.\n\nI\u0027m not sure how much time I\u0027ll have in the next few weeks to work on this, so feel free to ~steal~ take inspiration from any parts of it, and let me know what you think of the overall approach.",
       "revId": "f135016699349c2ab1c13c408a4a383e71158ede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dfe73cbb_d7998bce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-13T18:00:25Z",
+      "side": 1,
+      "message": "thanks sunny - I didn\u0027t realize you were working on this\nI was also working MapAsyncF [here](https://dawn-review.googlesource.com/c/dawn/+/159031) but was addressing a lot of the lazy creation and thread safety things in an [earlier refactor](https://dawn-review.googlesource.com/c/dawn/+/156301). I\u0027ll take a look at what you have here as well",
+      "parentUuid": "b19444b2_0fad8dba",
+      "revId": "f135016699349c2ab1c13c408a4a383e71158ede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
