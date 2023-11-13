@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75b4b5f5_f275f57d",
+        "filename": "src/tint/lang/wgsl/ast/transform/single_entry_point_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 700,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-13T15:53:49Z",
+      "side": 1,
+      "message": "Still module-scope.",
+      "revId": "2cf599a82e1da7fe5a3691fd69f0cfa06e9de2fc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
