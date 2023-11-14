@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9782920_549c90d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T10:43:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "126dd010_e74b587b",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3417,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T10:43:46Z",
+      "side": 1,
+      "message": "nit: It might be worth asserting this is a single-sampled 2D storage texture.",
+      "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
