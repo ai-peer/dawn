@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8df0d7b4_d4fd5d10",
+        "filename": "src/dawn/samples/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "535092b9_969696da",
+      "range": {
+        "startLine": 23,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 57
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fc533ed_2bb9e22c",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-09-19T12:50:53Z",
       "side": 1,
       "message": "Should be indented.",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 43,
+        "endChar": 21
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8aad89e_5bda0957",
+        "filename": "src/dawn/samples/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5fc533ed_2bb9e22c",
       "range": {
         "startLine": 43,
         "startChar": 0,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3605bb89_d1173c6d",
+        "filename": "src/dawn/samples/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:07:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd8c936f_3d762287",
+      "range": {
+        "startLine": 51,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 21
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1da6eb59_c7c0a8e2",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-09-19T12:50:53Z",
       "side": 1,
       "message": "Why did you need to change these?",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 58,
+        "endChar": 21
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "314145ad_3e9f6b71",
+        "filename": "src/dawn/samples/CMakeLists.txt",
+        "patchSetId": 5
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:07:10Z",
+      "side": 1,
+      "message": "Wasn\u0027t intended. Changed it back.",
+      "parentUuid": "1da6eb59_c7c0a8e2",
       "range": {
         "startLine": 58,
         "startChar": 0,
@@ -169,6 +265,24 @@
       "writtenOn": "2023-09-19T12:50:53Z",
       "side": 1,
       "message": "Are all the files under res really needed?",
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2875c76_3e08ef34",
+        "filename": "src/dawn/samples/android/common/src/main/res/drawable-v24/ic_launcher_foreground.xml",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:07:10Z",
+      "side": 1,
+      "message": "They come with game activity and pops up when the app launches. It would be nice to have them especially when it goes in Jetpack as most of the apps have that (IIRC).",
+      "parentUuid": "911fd449_6692e7e7",
       "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

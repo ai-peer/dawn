@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c53b2398_733e999f",
+        "filename": "src/dawn/samples/android/chellotriangle/src/main/cpp/CHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:07:10Z",
+      "side": 1,
+      "message": "@melihyalcin@google.com This won\u0027t work. Replace it with \"RendererC.h\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "3252fb47ede8f9110202b7e03b831afc1a46c8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07a7bf95_43f05d0c",
+        "filename": "src/dawn/samples/android/cpphellotriangle/src/main/cpp/CppHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:07:10Z",
+      "side": 1,
+      "message": "Same for this. This won\u0027t work. Replace it with \"Renderer.h\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 67
+      },
+      "revId": "3252fb47ede8f9110202b7e03b831afc1a46c8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
