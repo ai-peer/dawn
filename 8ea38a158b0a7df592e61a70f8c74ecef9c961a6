@@ -320,6 +320,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f3b2635e_85f617b0",
+        "filename": "src/dawn/samples/SampleUtils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:16:03Z",
+      "side": 1,
+      "message": "Will update this.",
+      "parentUuid": "358357ed_df6c0834",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "911fd449_6692e7e7",
         "filename": "src/dawn/samples/android/common/src/main/res/drawable-v24/ic_launcher_foreground.xml",
         "patchSetId": 5
