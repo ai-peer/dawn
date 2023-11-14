@@ -24,10 +24,10 @@ vars = {
   'dawn_ninja_version': 'version:2@1.11.1.chromium.6',
   'dawn_go_version': 'version:2@1.21.3',
 
-  'node_darwin_arm64_sha': '31859fc1fa0994a95f44f09c367d6ff63607cfde',
-  'node_darwin_x64_sha': '16dfd094763b71988933a31735f9dea966f9abd6',
-  'node_linux_x64_sha': 'ab9544e24e752d3d17f335fb7b2055062e582d11',
-  'node_win_x64_sha': '5ef847033c517c499f56f9d136d159b663bab717',
+  'node_darwin_arm64_sha': '523ee26632045e664cd0ddd5aef31a378a563025',
+  'node_darwin_x64_sha': 'b930bbfa9f232fe12d5fcf39b38614ae4be99e1a',
+  'node_linux_x64_sha': '179cfb7d2a0d90bbd72271481fd0bda2b297eaa9',
+  'node_win_x64_sha': '9bfd52de11d5bf9645bdabc469bded1da0bf12e7',
 
   # GN variable required by //testing that will be output in the gclient_args.gni
   'generate_location_tags': False,
@@ -172,17 +172,17 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@1819b4495440562d1517906c78391b73f4496bbe',
+    'url': '{chromium_git}/angle/angle@b12d4867b1fb90ea5856d8a1374d21bf0952df76',
     'condition': 'dawn_standalone',
   },
 
   'third_party/swiftshader': {
-    'url': '{swiftshader_git}/SwiftShader@4a62a93e27d97c8ada63aa193c5d071acd5b9645',
+    'url': '{swiftshader_git}/SwiftShader@50dbfc35468c1ffa037e3e90bc71327d16a5e0cc',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@855191177ccd075c472214822f193d45250aee07',
+    'url': '{chromium_git}/vulkan-deps@c9031880b75b9b1b0df2be1c12f4eb7145947699',
     'condition': 'dawn_standalone',
   },
 
@@ -197,7 +197,7 @@ deps = {
   },
 
   'third_party/dxc': {
-    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@3fdcaf9688d5af7c1366ecc5c205cde083cb2854',
+    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@ba90e249dfd6af7137da3d1aba856255bf3183c8',
   },
 
   'third_party/dxheaders': {
@@ -216,7 +216,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@7ca54d7b3387009ec5bd72f4b121db19ba1cefb6',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@0e06340de1e50169093ea5951d55a4dce983f719',
     'condition': 'build_with_chromium',
   },
 
@@ -475,7 +475,7 @@ hooks = [
                 '--no_resume',
                 '--extract',
                 '--no_auth',
-                '--bucket', 'chromium-nodejs/16.13.0',
+                '--bucket', 'chromium-nodejs/20.9.0',
                 Var('node_linux_x64_sha'),
                 '-o', 'third_party/node/node-linux-x64.tar.gz',
     ],
@@ -488,7 +488,7 @@ hooks = [
                 '--no_resume',
                 '--extract',
                 '--no_auth',
-                '--bucket', 'chromium-nodejs/16.13.0',
+                '--bucket', 'chromium-nodejs/20.9.0',
                 Var('node_darwin_x64_sha'),
                 '-o', 'third_party/node/node-darwin-x64.tar.gz',
     ],
@@ -501,7 +501,7 @@ hooks = [
                 '--no_resume',
                 '--extract',
                 '--no_auth',
-                '--bucket', 'chromium-nodejs/16.13.0',
+                '--bucket', 'chromium-nodejs/20.9.0',
                 Var('node_darwin_arm64_sha'),
                 '-o', 'third_party/node/node-darwin-arm64.tar.gz',
     ],
@@ -513,7 +513,7 @@ hooks = [
     'action': [ 'download_from_google_storage',
                 '--no_resume',
                 '--no_auth',
-                '--bucket', 'chromium-nodejs/16.13.0',
+                '--bucket', 'chromium-nodejs/20.9.0',
                 Var('node_win_x64_sha'),
                 '-o', 'third_party/node/node.exe',
     ],
