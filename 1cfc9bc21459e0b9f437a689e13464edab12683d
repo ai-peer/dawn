@@ -312,6 +312,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ba855c2_6600b266",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T22:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89802f28_521148a9",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7df4928_df78cf05",
@@ -460,6 +478,42 @@
       "side": 1,
       "message": "TODO: I still need to add a comment explaining why we do this",
       "parentUuid": "65551a2d_c616aca1",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "beadc7d6_3ba6da9f",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T22:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6569dc63_46eae310",
+      "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a59102e_82c792d8",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T22:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6569dc63_46eae310",
       "revId": "1cfc9bc21459e0b9f437a689e13464edab12683d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

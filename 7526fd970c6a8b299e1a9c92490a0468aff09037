@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "424ee6f8_68bb59f9",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T22:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58c9decc_68195468",
+      "revId": "7526fd970c6a8b299e1a9c92490a0468aff09037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "37613486_e60f9f66",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-10-25T22:05:03Z",
       "side": 1,
       "message": "nit: device",
+      "range": {
+        "startLine": 1251,
+        "startChar": 28,
+        "endLine": 1251,
+        "endChar": 33
+      },
+      "revId": "7526fd970c6a8b299e1a9c92490a0468aff09037",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a56484a_3e20f18f",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 29
+      },
+      "lineNbr": 1251,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T22:53:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "37613486_e60f9f66",
       "range": {
         "startLine": 1251,
         "startChar": 28,
