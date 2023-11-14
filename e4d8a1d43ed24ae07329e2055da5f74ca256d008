@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc05202a_6129b83a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T13:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d126376a_3989facc",
+      "range": {
+        "startLine": 7,
+        "startChar": 34,
+        "endLine": 7,
+        "endChar": 39
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0360cb79_90cf0627",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-10T10:45:11Z",
       "side": 1,
       "message": "Would it be cleaner to change `Promise` to not derive from `detail::PromiseBase`, and instead hold a `std::optional\u003cdetail::PromiseBase\u003e`, which is only set with the other constructor? You\u0027d then instead crash if the promise is used.",
+      "range": {
+        "startLine": 275,
+        "startChar": 8,
+        "endLine": 275,
+        "endChar": 61
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6c60f2_335cf3ce",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T13:19:21Z",
+      "side": 1,
+      "message": "WDYT of adding a PromiseBase constructor with a tag to make it empty, with not even a state_ (set it to null), then the same for the other promises, and finally a EmptyPromise() class that has conversion operators for the various Promise\u003cT\u003e that uses this constructor?\n\nThis way the code looks like:\n\n```\nConverter conv(env);\n\nif (!conv(a, b) || !conv(c, d)) {\n  return EmptyPromise(); // Or UnusedPromise().\n}\n```",
+      "parentUuid": "0360cb79_90cf0627",
       "range": {
         "startLine": 275,
         "startChar": 8,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf075556_f7e7371d",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 784,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T13:19:21Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cad86bcf_7a9985e6",
+      "range": {
+        "startLine": 784,
+        "startChar": 12,
+        "endLine": 784,
+        "endChar": 37
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "649d2fd4_66a58f44",
@@ -83,6 +155,30 @@
       "writtenOn": "2023-11-10T10:45:11Z",
       "side": 1,
       "message": "I\u0027m a bit confused by the return signatures here. Must `f()` return a promise? If so, can we change the return type to statically enforce this?\nIf not, doesn\u0027t that mean the function might sometimes return a non-promise, and when erroring, return a promise?",
+      "range": {
+        "startLine": 785,
+        "startChar": 4,
+        "endLine": 785,
+        "endChar": 29
+      },
+      "revId": "e4d8a1d43ed24ae07329e2055da5f74ca256d008",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1edc9283_9605002e",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 785,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T13:19:21Z",
+      "side": 1,
+      "message": "F must return a promise yes, but that\u0027s difficult to check due to how FooInner returns a Napi::Value at [1]. I\u0027ll add an assert though.",
+      "parentUuid": "649d2fd4_66a58f44",
       "range": {
         "startLine": 785,
         "startChar": 4,
