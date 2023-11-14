@@ -273,6 +273,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "809fb885_db24825d",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004576
+      },
+      "writtenOn": "2023-11-14T17:51:57Z",
+      "side": 1,
+      "message": "maybe another approach can be `#ifdef ANDROID` I saw that has been used in other places as well if I remember correctly.",
+      "parentUuid": "eccdbac2_33c6bfbb",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "391899da_33cdacec",
         "filename": "src/dawn/samples/SampleUtils.h",
         "patchSetId": 5

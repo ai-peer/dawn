@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "90d026b5_827986b3",
+        "filename": "src/dawn/samples/android/chellotriangle/src/main/cpp/CHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004576
+      },
+      "writtenOn": "2023-11-14T17:51:57Z",
+      "side": 1,
+      "message": "So I may not be able to fix this. \n\nThe issue is, there is a presubmit that fails because it cannot find that include. I don\u0027t know how to fix exactly but all the other header files in dawn repo has a path stemming from \"dawn/\". So it might be a universal thing for repo.\n\nI will look into it if I can fix that presubmit problem but maybe we can ask dawn people.",
+      "parentUuid": "c53b2398_733e999f",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "3252fb47ede8f9110202b7e03b831afc1a46c8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07a7bf95_43f05d0c",
         "filename": "src/dawn/samples/android/cpphellotriangle/src/main/cpp/CppHelloTriangle.cpp",
         "patchSetId": 7
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-14T17:07:10Z",
       "side": 1,
       "message": "Same for this. This won\u0027t work. Replace it with \"Renderer.h\"",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 67
+      },
+      "revId": "3252fb47ede8f9110202b7e03b831afc1a46c8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5528f919_f41a9b48",
+        "filename": "src/dawn/samples/android/cpphellotriangle/src/main/cpp/CppHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004576
+      },
+      "writtenOn": "2023-11-14T17:51:57Z",
+      "side": 1,
+      "message": "Same with other comment",
+      "parentUuid": "07a7bf95_43f05d0c",
       "range": {
         "startLine": 15,
         "startChar": 11,
