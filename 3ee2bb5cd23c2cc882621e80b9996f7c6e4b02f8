@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2e2d664_07859f17",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1350,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-14T20:44:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ae87f2d_29b41db1",
+      "range": {
+        "startLine": 1350,
+        "startChar": 0,
+        "endLine": 1350,
+        "endChar": 46
+      },
+      "revId": "3ee2bb5cd23c2cc882621e80b9996f7c6e4b02f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86b75667_6afce649",
@@ -71,6 +95,30 @@
       "writtenOn": "2023-11-14T19:18:41Z",
       "side": 1,
       "message": "is it OK to call DeleteQueries if it was created with zero queries? in this case mQueries will be empty.\n\n(my check of the spec says yes, this is allowed)",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 46,
+        "endChar": 55
+      },
+      "revId": "3ee2bb5cd23c2cc882621e80b9996f7c6e4b02f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e4358bc2_5e34e992",
+        "filename": "src/dawn/native/opengl/QuerySetGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-14T20:44:55Z",
+      "side": 1,
+      "message": "Good catch. Modified to skip the delete call just in case.",
+      "parentUuid": "86b75667_6afce649",
       "range": {
         "startLine": 46,
         "startChar": 4,
