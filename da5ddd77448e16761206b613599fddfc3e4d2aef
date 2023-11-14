@@ -37,6 +37,52 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a703b9f7_807310f5",
+        "filename": "src/tint/api/options/pixel_local.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-14T14:10:06Z",
+      "side": 1,
+      "message": "Please add doxygen comments",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64f14b3c_45eba743",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-14T14:10:06Z",
+      "side": 1,
+      "message": "`ValueOption\u003cuint32_t\u003e`\n\nSee https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/utils/cli/cli_test.cc for usage examples",
+      "range": {
+        "startLine": 387,
+        "startChar": 48,
+        "endLine": 387,
+        "endChar": 60
+      },
+      "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "126dd010_e74b587b",
         "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
         "patchSetId": 1
