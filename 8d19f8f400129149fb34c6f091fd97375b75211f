@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1599e3c_fc5d512b",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T12:58:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0989582_0b56bc25",
+      "range": {
+        "startLine": 262,
+        "startChar": 7,
+        "endLine": 262,
+        "endChar": 13
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6582f51d_00223ae7",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-14T02:15:46Z",
       "side": 1,
       "message": "existing consistency nit:\n```suggestion\n                        \"Color blending srcFactor (%s) or dstFactor (%s) is reading alpha \"\n```",
+      "range": {
+        "startLine": 468,
+        "startChar": 40,
+        "endLine": 468,
+        "endChar": 49
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92d991c0_9dc621e5",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T12:58:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6582f51d_00223ae7",
       "range": {
         "startLine": 468,
         "startChar": 40,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e25c6c9_ae66f148",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T12:58:47Z",
+      "side": 1,
+      "message": "Good call, done.",
+      "parentUuid": "e22a7705_03166fe7",
+      "range": {
+        "startLine": 481,
+        "startChar": 4,
+        "endLine": 484,
+        "endChar": 0
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fe170b0b_5b13945b",
@@ -100,6 +172,30 @@
       "writtenOn": "2023-11-14T02:15:46Z",
       "side": 1,
       "message": "incomplete comment",
+      "range": {
+        "startLine": 2547,
+        "startChar": 0,
+        "endLine": 2547,
+        "endChar": 59
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b025ced_c730076a",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2547,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-14T12:58:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fe170b0b_5b13945b",
       "range": {
         "startLine": 2547,
         "startChar": 0,
