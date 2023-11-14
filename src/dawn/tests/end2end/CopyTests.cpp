@@ -2160,6 +2160,20 @@ TEST_P(CopyTests_T2T, Texture) {
     DoTest(textureSpec, textureSpec, {kWidth, kHeight, 1});
 }
 
+TEST_P(CopyTests_T2T, NonPowerOfTwo) {
+    // constexpr uint32_t kWidth = 31;
+    // constexpr uint32_t kHeight = 33;
+    constexpr uint32_t kWidth = 3;
+    constexpr uint32_t kHeight = 3;
+
+    TextureSpec srcSpec;
+    srcSpec.textureSize = {kWidth, kHeight, 1};
+
+    TextureSpec dstSpec = srcSpec;
+
+    DoTest(srcSpec, dstSpec, {kWidth, kHeight, 1});
+}
+
 // Test noop copies.
 TEST_P(CopyTests_T2T, ZeroSizedCopy) {
     constexpr uint32_t kWidth = 256;
