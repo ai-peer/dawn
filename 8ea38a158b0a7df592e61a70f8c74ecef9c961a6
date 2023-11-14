@@ -249,6 +249,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eccdbac2_33c6bfbb",
+        "filename": "src/dawn/samples/SampleUtils.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 34,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:15:32Z",
+      "side": 1,
+      "message": "Yes, Android gets defined as 1. But this can be replaced by a flag. Will get that done.",
+      "parentUuid": "a726af46_d15213b6",
+      "range": {
+        "startLine": 34,
+        "startChar": 0,
+        "endLine": 34,
+        "endChar": 14
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "391899da_33cdacec",
         "filename": "src/dawn/samples/SampleUtils.h",
         "patchSetId": 5
@@ -260,6 +284,30 @@
       "writtenOn": "2023-09-19T12:50:53Z",
       "side": 1,
       "message": "I think this should be done with an #ifdef instead\n\n#ifdef ANDROID // Or whatever the define is\n  wgpu::Device CreateCppDawnDevice(\n    wgpu::SurfaceDescriptorFromAndroidNativeWindow androidDesc);\n#else\n  wgpu::Device CreateCppDawnDevice();\n#endif",
+      "range": {
+        "startLine": 27,
+        "startChar": 0,
+        "endLine": 29,
+        "endChar": 35
+      },
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "358357ed_df6c0834",
+        "filename": "src/dawn/samples/SampleUtils.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:15:32Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "391899da_33cdacec",
       "range": {
         "startLine": 27,
         "startChar": 0,
