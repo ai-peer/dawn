@@ -39,8 +39,18 @@ struct PixelLocalOptions {
     /// Index of pixel_local structure member index to attachment index
     std::unordered_map<uint32_t, uint32_t> attachments;
 
+    enum class TexelFormat : uint8_t {
+        kR32Sint,
+        kR32Uint,
+        kR32Float,
+        kUndefined,
+    };
+    std::unordered_map<uint32_t, TexelFormat> attachment_formats;
+
+    uint32_t pixel_local_group_index;
+
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
-    TINT_REFLECT(attachments);
+    TINT_REFLECT(attachments, attachment_formats, pixel_local_group_index);
 };
 
 }  // namespace tint
