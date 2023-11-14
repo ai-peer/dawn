@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d161dd5d_a593f75a",
+        "filename": "src/dawn/native/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 939,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T02:21:06Z",
+      "side": 1,
+      "message": "since we factored this out, does it need a dep on the headers now?\nnot sure why else the build might be failing",
+      "revId": "c6fcd9b118c16a5e9857192c8371999974b46281",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
