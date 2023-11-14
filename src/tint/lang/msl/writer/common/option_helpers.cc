@@ -27,11 +27,15 @@
 
 #include "src/tint/lang/msl/writer/common/option_helpers.h"
 
+#include <utility>
+
 #include "src/tint/utils/containers/hashset.h"
 
 namespace tint::msl::writer {
 
-bool ValidateBindingOptions(const Options& options, diag::List& diagnostics) {
+Result<SuccessType> ValidateBindingOptions(const Options& options) {
+    diag::List diagnostics;
+
     tint::Hashmap<tint::BindingPoint, binding::BindingInfo, 8> seen_wgsl_bindings{};
     tint::Hashmap<binding::BindingInfo, tint::BindingPoint, 8> seen_msl_bindings{};
 
@@ -87,23 +91,23 @@ bool ValidateBindingOptions(const Options& options, diag::List& diagnostics) {
 
     if (!valid(options.bindings.uniform)) {
         diagnostics.add_note(diag::System::Writer, "when processing uniform", {});
-        return false;
+        return Failure{std::move(diagnostics)};
     }
     if (!valid(options.bindings.storage)) {
         diagnostics.add_note(diag::System::Writer, "when processing storage", {});
-        return false;
+        return Failure{std::move(diagnostics)};
     }
     if (!valid(options.bindings.texture)) {
         diagnostics.add_note(diag::System::Writer, "when processing texture", {});
-        return false;
+        return Failure{std::move(diagnostics)};
     }
     if (!valid(options.bindings.storage_texture)) {
         diagnostics.add_note(diag::System::Writer, "when processing storage_texture", {});
-        return false;
+        return Failure{std::move(diagnostics)};
     }
     if (!valid(options.bindings.sampler)) {
         diagnostics.add_note(diag::System::Writer, "when processing sampler", {});
-        return false;
+        return Failure{std::move(diagnostics)};
     }
 
     for (const auto& it : options.bindings.external_texture) {
@@ -115,24 +119,24 @@ bool ValidateBindingOptions(const Options& options, diag::List& diagnostics) {
         // Validate with the actual source regardless of what the remapper will do
         if (wgsl_seen(src_binding, plane0)) {
             diagnostics.add_note(diag::System::Writer, "when processing external_texture", {});
-            return false;
+            return Failure{std::move(diagnostics)};
         }
 
         if (msl_seen(plane0, src_binding)) {
             diagnostics.add_note(diag::System::Writer, "when processing external_texture", {});
-            return false;
+            return Failure{std::move(diagnostics)};
         }
         if (msl_seen(plane1, src_binding)) {
             diagnostics.add_note(diag::System::Writer, "when processing external_texture", {});
-            return false;
+            return Failure{std::move(diagnostics)};
         }
         if (msl_seen(metadata, src_binding)) {
             diagnostics.add_note(diag::System::Writer, "when processing external_texture", {});
-            return false;
+            return Failure{std::move(diagnostics)};
         }
     }
 
-    return true;
+    return Success;
 }
 
 // The remapped binding data and external texture data need to coordinate in order to put things in
