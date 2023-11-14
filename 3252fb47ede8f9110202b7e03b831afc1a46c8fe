@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1180d6ec_e190449a",
+        "filename": "src/dawn/samples/android/chellotriangle/src/main/cpp/CHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004576
+      },
+      "writtenOn": "2023-11-14T18:55:25Z",
+      "side": 1,
+      "message": "I ignored the lint",
+      "parentUuid": "90d026b5_827986b3",
+      "range": {
+        "startLine": 15,
+        "startChar": 10,
+        "endLine": 15,
+        "endChar": 66
+      },
+      "revId": "3252fb47ede8f9110202b7e03b831afc1a46c8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "07a7bf95_43f05d0c",
@@ -85,6 +109,30 @@
       "side": 1,
       "message": "Same with other comment",
       "parentUuid": "07a7bf95_43f05d0c",
+      "range": {
+        "startLine": 15,
+        "startChar": 11,
+        "endLine": 15,
+        "endChar": 67
+      },
+      "revId": "3252fb47ede8f9110202b7e03b831afc1a46c8fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60b95695_f9692c20",
+        "filename": "src/dawn/samples/android/cpphellotriangle/src/main/cpp/CppHelloTriangle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1004576
+      },
+      "writtenOn": "2023-11-14T18:55:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5528f919_f41a9b48",
       "range": {
         "startLine": 15,
         "startChar": 11,
