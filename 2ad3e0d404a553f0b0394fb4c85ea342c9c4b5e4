@@ -104,6 +104,24 @@
       "parentUuid": "5e95e7ac_f6959629",
       "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aff329e9_84e51720",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T06:14:45Z",
+      "side": 1,
+      "message": "here\u0027s an idea: can we retry manually in the test? this way the flakes don\u0027t impact developers. id rather not add in a known source of flakiness if we can prevent it",
+      "parentUuid": "64b87abf_cf94d9ba",
+      "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
