@@ -122,6 +122,24 @@
       "parentUuid": "64b87abf_cf94d9ba",
       "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a17518a5_66ab427d",
+        "filename": "src/dawn/tests/end2end/QueryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1166,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-14T07:42:02Z",
+      "side": 1,
+      "message": "We can have a try in this test.",
+      "parentUuid": "aff329e9_84e51720",
+      "revId": "2ad3e0d404a553f0b0394fb4c85ea342c9c4b5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
