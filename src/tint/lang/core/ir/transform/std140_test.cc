@@ -1483,6 +1483,166 @@ MyStruct_std140 = struct @align(16), @block {
     EXPECT_EQ(expect, str());
 }
 
+TEST_F(IR_Std140Test, NotAllMatricesDecomposed) {
+    auto* mat4x4 = ty.mat4x4<f32>();
+    auto* mat3x2 = ty.mat3x2<f32>();
+    auto* structure = ty.Struct(mod.symbols.New("MyStruct"), {
+                                                                 {mod.symbols.New("a"), mat4x4},
+                                                                 {mod.symbols.New("b"), mat3x2},
+                                                             });
+    structure->SetStructFlag(core::type::kBlock);
+
+    auto* buffer = b.Var("buffer", ty.ptr(uniform, structure));
+    buffer->SetBindingPoint(0, 0);
+    mod.root_block->Append(buffer);
+
+    {
+        auto* func = b.Function("load_struct", mat4x4);
+        b.Append(func->Block(), [&] {
+            auto* load_struct = b.Load(buffer);
+            auto* extract_mat = b.Access(mat4x4, load_struct, 0_u);
+            b.Return(func, extract_mat);
+        });
+    }
+
+    {
+        auto* func = b.Function("load_mat", ty.vec4<f32>());
+        b.Append(func->Block(), [&] {
+            auto* access_mat = b.Access(ty.ptr(uniform, mat4x4), buffer, 0_u);
+            auto* load_mat = b.Load(access_mat);
+            auto* extract_vec = b.Access(ty.vec4<f32>(), load_mat, 0_u);
+            b.Return(func, extract_vec);
+        });
+    }
+
+    {
+        auto* func = b.Function("load_vec", ty.f32());
+        b.Append(func->Block(), [&] {
+            auto* access_vec = b.Access(ty.ptr(uniform, mat4x4->ColumnType()), buffer, 0_u, 1_u);
+            auto* load_vec = b.Load(access_vec);
+            auto* extract_el = b.Access(ty.f32(), load_vec, 1_u);
+            b.Return(func, extract_el);
+        });
+    }
+
+    {
+        auto* func = b.Function("lve", ty.f32());
+        b.Append(func->Block(), [&] {
+            auto* access_vec = b.Access(ty.ptr(uniform, mat4x4->ColumnType()), buffer, 0_u, 1_u);
+            auto* lve = b.LoadVectorElement(access_vec, 1_u);
+            b.Return(func, lve);
+        });
+    }
+
+    auto* src = R"(
+MyStruct = struct @align(16), @block {
+  a:mat4x4<f32> @offset(0)
+  b:mat3x2<f32> @offset(64)
+}
+
+%b1 = block {  # root
+  %buffer:ptr<uniform, MyStruct, read_write> = var @binding_point(0, 0)
+}
+
+%load_struct = func():mat4x4<f32> -> %b2 {
+  %b2 = block {
+    %3:MyStruct = load %buffer
+    %4:mat4x4<f32> = access %3, 0u
+    ret %4
+  }
+}
+%load_mat = func():vec4<f32> -> %b3 {
+  %b3 = block {
+    %6:ptr<uniform, mat4x4<f32>, read_write> = access %buffer, 0u
+    %7:mat4x4<f32> = load %6
+    %8:vec4<f32> = access %7, 0u
+    ret %8
+  }
+}
+%load_vec = func():f32 -> %b4 {
+  %b4 = block {
+    %10:ptr<uniform, vec4<f32>, read_write> = access %buffer, 0u, 1u
+    %11:vec4<f32> = load %10
+    %12:f32 = access %11, 1u
+    ret %12
+  }
+}
+%lve = func():f32 -> %b5 {
+  %b5 = block {
+    %14:ptr<uniform, vec4<f32>, read_write> = access %buffer, 0u, 1u
+    %15:f32 = load_vector_element %14, 1u
+    ret %15
+  }
+}
+)";
+    EXPECT_EQ(src, str());
+
+    auto* expect = R"(
+MyStruct = struct @align(16), @block {
+  a:mat4x4<f32> @offset(0)
+  b:mat3x2<f32> @offset(64)
+}
+
+MyStruct_std140 = struct @align(16), @block {
+  a:mat4x4<f32> @offset(0)
+  b_col0:vec2<f32> @offset(64)
+  b_col1:vec2<f32> @offset(72)
+  b_col2:vec2<f32> @offset(80)
+}
+
+%b1 = block {  # root
+  %buffer:ptr<uniform, MyStruct_std140, read_write> = var @binding_point(0, 0)
+}
+
+%load_struct = func():mat4x4<f32> -> %b2 {
+  %b2 = block {
+    %3:MyStruct_std140 = load %buffer
+    %4:MyStruct = call %convert_MyStruct, %3
+    %6:mat4x4<f32> = access %4, 0u
+    ret %6
+  }
+}
+%load_mat = func():vec4<f32> -> %b3 {
+  %b3 = block {
+    %8:ptr<uniform, mat4x4<f32>, read_write> = access %buffer, 0u
+    %9:mat4x4<f32> = load %8
+    %10:vec4<f32> = access %9, 0u
+    ret %10
+  }
+}
+%load_vec = func():f32 -> %b4 {
+  %b4 = block {
+    %12:ptr<uniform, vec4<f32>, read_write> = access %buffer, 0u, 1u
+    %13:vec4<f32> = load %12
+    %14:f32 = access %13, 1u
+    ret %14
+  }
+}
+%lve = func():f32 -> %b5 {
+  %b5 = block {
+    %16:ptr<uniform, vec4<f32>, read_write> = access %buffer, 0u, 1u
+    %17:f32 = load_vector_element %16, 1u
+    ret %17
+  }
+}
+%convert_MyStruct = func(%input:MyStruct_std140):MyStruct -> %b6 {
+  %b6 = block {
+    %19:mat4x4<f32> = access %input, 0u
+    %20:vec2<f32> = access %input, 1u
+    %21:vec2<f32> = access %input, 2u
+    %22:vec2<f32> = access %input, 3u
+    %23:mat3x2<f32> = construct %20, %21, %22
+    %24:MyStruct = construct %19, %23
+    ret %24
+  }
+}
+)";
+
+    Run(Std140);
+
+    EXPECT_EQ(expect, str());
+}
+
 TEST_F(IR_Std140Test, F16) {
     auto* structure =
         ty.Struct(mod.symbols.New("MyStruct"), {
