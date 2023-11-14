@@ -16,6 +16,98 @@
       "message": "PTAL! If the code move changes to RenderPipeline.cpp are too much I can separate them.",
       "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0989582_0b56bc25",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T02:15:46Z",
+      "side": 1,
+      "message": "```suggestion\n     {\"Support loading the current framebuffer value in fragment shaders.\",\n```",
+      "range": {
+        "startLine": 262,
+        "startChar": 7,
+        "endLine": 262,
+        "endChar": 13
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6582f51d_00223ae7",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T02:15:46Z",
+      "side": 1,
+      "message": "existing consistency nit:\n```suggestion\n                        \"Color blending srcFactor (%s) or dstFactor (%s) is reading alpha \"\n```",
+      "range": {
+        "startLine": 468,
+        "startChar": 40,
+        "endLine": 468,
+        "endChar": 49
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e22a7705_03166fe7",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 484,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T02:15:46Z",
+      "side": 1,
+      "message": "nit: I think it might be more clear to move this to the caller. as it is now, there\u0027s not enough context to understand why we don\u0027t care about this case.\n\nit\u0027s also confusing that we\u0027re inside a function to validate the input when it\u0027s not in the input mask",
+      "range": {
+        "startLine": 481,
+        "startChar": 4,
+        "endLine": 484,
+        "endChar": 0
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe170b0b_5b13945b",
+        "filename": "src/dawn/tests/unittests/validation/RenderPipelineValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2547,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-14T02:15:46Z",
+      "side": 1,
+      "message": "incomplete comment",
+      "range": {
+        "startLine": 2547,
+        "startChar": 0,
+        "endLine": 2547,
+        "endChar": 59
+      },
+      "revId": "8d19f8f400129149fb34c6f091fd97375b75211f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
