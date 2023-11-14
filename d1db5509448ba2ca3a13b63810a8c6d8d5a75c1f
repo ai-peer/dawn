@@ -182,6 +182,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2fbbe30_3a06dd65",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-14T20:25:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "341b174c_deb44caa",
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d373629_e486f092",
@@ -219,6 +237,30 @@
       "side": 1,
       "message": "Will do as part of the followup",
       "parentUuid": "7d373629_e486f092",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 4
+      },
+      "revId": "d1db5509448ba2ca3a13b63810a8c6d8d5a75c1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aadebb55_d4f591f3",
+        "filename": "src/tint/lang/msl/writer/common/option_builder.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-14T20:25:43Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e4d0d3bc_67cf08de",
       "range": {
         "startLine": 46,
         "startChar": 0,
