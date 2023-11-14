@@ -1291,6 +1291,8 @@ DAWN_INSTANTIATE_TEST(OcclusionQueryTests,
                       D3D12Backend(),
                       MetalBackend(),
                       MetalBackend({"metal_fill_empty_occlusion_queries_with_zero"}),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
                       VulkanBackend());
 DAWN_INSTANTIATE_TEST(TimestampQueryTests,
                       D3D11Backend(),
