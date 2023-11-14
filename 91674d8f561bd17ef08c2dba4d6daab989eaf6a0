@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5f07fdd_e4777ab0",
+        "filename": "docs/tint/extensions/chromium_experimental_framebuffer_fetch.md",
+        "patchSetId": 3
+      },
+      "lineNbr": 15,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-14T14:45:19Z",
+      "side": 1,
+      "message": "```suggestion\nThis adds a new builtin attribute `@color` which takes a `u32` argument and is only allowed on `@fragment` entry point scalar / vector inputs.\n```",
+      "revId": "91674d8f561bd17ef08c2dba4d6daab989eaf6a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
