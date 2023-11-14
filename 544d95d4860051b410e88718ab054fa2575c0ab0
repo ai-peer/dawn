@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f68c217_bd4ae184",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2023-11-14T17:19:29Z",
+      "side": 1,
+      "message": "The compile errors *should* be solved by adding a dep on \":headers\" to the new source_set target - let\u0027s see if that was it.",
+      "revId": "544d95d4860051b410e88718ab054fa2575c0ab0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
