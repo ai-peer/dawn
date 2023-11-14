@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "784c711a_ac7968d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-14T17:14:13Z",
+      "side": 1,
+      "message": "Ack. \nThis is getting cleaned up. And the doc is in progress - go/dawn-on-android-samples.",
+      "parentUuid": "5816e170_77af8fd4",
+      "revId": "8ea38a158b0a7df592e61a70f8c74ecef9c961a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "535092b9_969696da",
