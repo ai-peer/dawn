@@ -55,16 +55,7 @@ class Instruction : public Castable<Instruction> {
     virtual void SetOperand(size_t index, ir::Value* value) = 0;
 
     /// @returns the operands of the instruction
-    virtual VectorRef<ir::Value*> Operands() = 0;
-
-    /// @returns true if the instruction has result values
-    virtual bool HasResults() { return false; }
-    /// @returns true if the instruction has multiple values
-    virtual bool HasMultiResults() { return false; }
-
-    /// @returns the first result. Returns `nullptr` if there are no results, or if ther are
-    /// multi-results
-    virtual InstructionResult* Result() { return nullptr; }
+    virtual VectorRef<ir::Value*> Operands() { return tint::Empty; }
 
     /// @returns the result values for this instruction
     virtual VectorRef<InstructionResult*> Results() { return tint::Empty; }
@@ -106,10 +97,18 @@ class Instruction : public Castable<Instruction> {
     /// Removes this instruction from the owning block
     void Remove();
 
+    /// @param idx the index of the operand
+    /// @returns the operand with index @p idx, or `nullptr` if there are no operands or the index
+    /// is out of bounds.
+    Value* Operand(size_t idx = 0) {
+        auto res = Operands();
+        return idx < res.Length() ? res[idx] : nullptr;
+    }
+
     /// @param idx the index of the result
     /// @returns the result with index @p idx, or `nullptr` if there are no results or the index is
     /// out of bounds.
-    Value* Result(size_t idx) {
+    Value* Result(size_t idx = 0) {
         auto res = Results();
         return idx < res.Length() ? res[idx] : nullptr;
     }

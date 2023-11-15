@@ -42,7 +42,9 @@ Module::~Module() = default;
 Module& Module::operator=(Module&&) = default;
 
 Symbol Module::NameOf(Instruction* inst) {
-    TINT_ASSERT(inst->HasResults() && !inst->HasMultiResults());
+    if (inst->Results().Length() != 1) {
+        return Symbol{};
+    }
     return NameOf(inst->Result());
 }
 
@@ -51,7 +53,7 @@ Symbol Module::NameOf(Value* value) {
 }
 
 void Module::SetName(Instruction* inst, std::string_view name) {
-    TINT_ASSERT(inst->HasResults() && !inst->HasMultiResults());
+    TINT_ASSERT(inst->Results().Length() == 1);
     return SetName(inst->Result(), name);
 }
 

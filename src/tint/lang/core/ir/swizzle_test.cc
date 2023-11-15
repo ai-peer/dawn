@@ -49,8 +49,7 @@ TEST_F(IR_SwizzleTest, Results) {
     auto* var = b.Var(ty.ptr<function, i32>());
     auto* a = b.Swizzle(mod.Types().i32(), var, {1u});
 
-    EXPECT_TRUE(a->HasResults());
-    EXPECT_FALSE(a->HasMultiResults());
+    EXPECT_EQ(a->Results().Length(), 1u);
     EXPECT_TRUE(a->Result()->Is<InstructionResult>());
     EXPECT_EQ(a->Result()->Source(), a);
 }

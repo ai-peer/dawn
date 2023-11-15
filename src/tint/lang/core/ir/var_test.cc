@@ -53,8 +53,7 @@ TEST_F(IR_VarTest, Fail_NullType) {
 
 TEST_F(IR_VarTest, Results) {
     auto* var = b.Var(ty.ptr<function, f32>());
-    EXPECT_TRUE(var->HasResults());
-    EXPECT_FALSE(var->HasMultiResults());
+    EXPECT_EQ(var->Results().Length(), 1u);
     EXPECT_TRUE(var->Result()->Is<InstructionResult>());
     EXPECT_EQ(var->Result()->Source(), var);
 }

@@ -75,8 +75,7 @@ TEST_F(IR_StoreVectorElementTest, Result) {
     auto* to = b.Var(ty.ptr<private_, vec3<i32>>());
     auto* inst = b.StoreVectorElement(to, 2_i, 4_i);
 
-    EXPECT_FALSE(inst->HasResults());
-    EXPECT_FALSE(inst->HasMultiResults());
+    EXPECT_TRUE(inst->Results().IsEmpty());
 }
 
 TEST_F(IR_StoreVectorElementTest, Clone) {

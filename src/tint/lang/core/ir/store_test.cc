@@ -67,8 +67,7 @@ TEST_F(IR_StoreTest, Result) {
     auto* to = b.Var(ty.ptr<private_, i32>());
     auto* inst = b.Store(to, 4_i);
 
-    EXPECT_FALSE(inst->HasResults());
-    EXPECT_FALSE(inst->HasMultiResults());
+    EXPECT_TRUE(inst->Results().IsEmpty());
 }
 
 TEST_F(IR_StoreTest, Clone) {

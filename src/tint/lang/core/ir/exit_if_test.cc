@@ -53,8 +53,7 @@ TEST_F(IR_ExitIfTest, Result) {
     auto* if_ = b.If(true);
     auto* e = b.ExitIf(if_, arg1, arg2);
 
-    EXPECT_FALSE(e->HasResults());
-    EXPECT_FALSE(e->HasMultiResults());
+    EXPECT_TRUE(e->Results().IsEmpty());
 }
 
 TEST_F(IR_ExitIfTest, Destroy) {
