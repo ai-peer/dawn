@@ -126,7 +126,7 @@ TEST_F(IR_ValidatorTest, Function) {
 TEST_F(IR_ValidatorTest, Function_Duplicate) {
     auto* f = b.Function("my_func", ty.void_());
     // Function would auto-push by the builder, so this adds a duplicate
-    mod.functions.Push(f);
+    mod.Functions().Push(f);
 
     f->SetParams({b.FunctionParam(ty.i32()), b.FunctionParam(ty.f32())});
     f->Block()->Append(b.Return(f));
@@ -152,7 +152,7 @@ note: # Disassembly
 TEST_F(IR_ValidatorTest, CallToFunctionOutsideModule) {
     auto* f = b.Function("f", ty.void_());
     auto* g = b.Function("g", ty.void_());
-    mod.functions.Pop();  // Remove g
+    mod.Functions().Pop();  // Remove g
 
     b.Append(f->Block(), [&] {
         b.Call(g);
