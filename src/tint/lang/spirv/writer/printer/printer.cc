@@ -261,13 +261,13 @@ class Printer {
     Hashmap<const core::type::Type*, uint32_t, 4> undef_values_;
 
     /// The map of non-constant values to their result IDs.
-    Hashmap<core::ir::Value*, uint32_t, 8> values_;
+    Hashmap<const core::ir::Value*, uint32_t, 8> values_;
 
     /// The map of blocks to the IDs of their label instructions.
-    Hashmap<core::ir::Block*, uint32_t, 8> block_labels_;
+    Hashmap<const core::ir::Block*, uint32_t, 8> block_labels_;
 
     /// The map of control instructions to the IDs of the label of their SPIR-V merge blocks.
-    Hashmap<core::ir::ControlInstruction*, uint32_t, 8> merge_block_labels_;
+    Hashmap<const core::ir::ControlInstruction*, uint32_t, 8> merge_block_labels_;
 
     /// The map of extended instruction set names to their result IDs.
     Hashmap<std::string_view, uint32_t, 2> imports_;
@@ -555,7 +555,7 @@ class Printer {
     /// Get the ID of the label for `block`.
     /// @param block the block to get the label ID for
     /// @returns the ID of the block's label
-    uint32_t Label(core::ir::Block* block) {
+    uint32_t Label(const core::ir::Block* block) {
         return block_labels_.GetOrCreate(block, [&] { return module_.NextId(); });
     }
 
@@ -1885,7 +1885,7 @@ class Printer {
         for (auto& c : swtch->Cases()) {
             for (auto& sel : c.selectors) {
                 if (sel.IsDefault()) {
-                    default_label = Label(c.Block());
+                    default_label = Label(c.block);
                 }
             }
         }
@@ -1894,7 +1894,7 @@ class Printer {
         // Build the operands to the OpSwitch instruction.
         OperandList switch_operands = {Value(swtch->Condition()), default_label};
         for (auto& c : swtch->Cases()) {
-            auto label = Label(c.Block());
+            auto label = Label(c.block);
             for (auto& sel : c.selectors) {
                 if (sel.IsDefault()) {
                     continue;
@@ -1914,7 +1914,7 @@ class Printer {
 
         // Emit the cases.
         for (auto& c : swtch->Cases()) {
-            EmitBlock(c.Block());
+            EmitBlock(c.block);
         }
 
         // Emit the switch merge block.
