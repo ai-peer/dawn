@@ -89,6 +89,7 @@
 
 #if TINT_BUILD_HLSL_WRITER
 #include "src/tint/lang/hlsl/validate/validate.h"
+#include "src/tint/lang/hlsl/writer/helpers/generate_bindings.h"
 #include "src/tint/lang/hlsl/writer/writer.h"
 #endif  // TINT_BUILD_HLSL_WRITER
 
@@ -779,8 +780,7 @@ bool GenerateHlsl(const tint::Program& program, const Options& options) {
     tint::hlsl::writer::Options gen_options;
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
-    gen_options.external_texture_options.bindings_map =
-        tint::cmd::GenerateExternalTextureBindings(program);
+    gen_options.bindings = tint::hlsl::writer::GenerateBindings(*input_program);
     gen_options.root_constant_binding_point = options.hlsl_root_constant_binding_point;
     auto result = tint::hlsl::writer::Generate(program, gen_options);
     if (!result) {

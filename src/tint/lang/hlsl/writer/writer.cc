@@ -31,12 +31,20 @@
 #include <utility>
 
 #include "src/tint/lang/hlsl/writer/ast_printer/ast_printer.h"
+#include "src/tint/lang/hlsl/writer/common/option_helpers.h"
 
 namespace tint::hlsl::writer {
 
 Result<Output> Generate(const Program& program, const Options& options) {
     if (!program.IsValid()) {
         return Failure{program.Diagnostics()};
+    }
+
+    {
+        auto res = ValidateBindingOptions(options);
+        if (!res) {
+            return res.Failure();
+        }
     }
 
     // Sanitize the program.
