@@ -167,11 +167,6 @@ SanitizedResult Sanitize(const Program& in,
         manager.Add<ast::transform::Robustness>();
     }
 
-    // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
-    data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
-        options.external_texture_options.bindings_map);
-    manager.Add<ast::transform::MultiplanarExternalTexture>();
-
     {  // Builtin polyfills
         ast::transform::BuiltinPolyfill::Builtins polyfills;
         polyfills.acosh = ast::transform::BuiltinPolyfill::Level::kRangeCheck;
@@ -224,10 +219,15 @@ SanitizedResult Sanitize(const Program& in,
     data.Add<CombineSamplers::BindingInfo>(options.binding_map, options.placeholder_binding_point);
     manager.Add<CombineSamplers>();
 
+    // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
+    data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
+        options.external_texture_options.bindings_map);
+    manager.Add<ast::transform::MultiplanarExternalTexture>();
+
     data.Add<ast::transform::BindingRemapper::Remappings>(
         options.binding_remapper_options.binding_points,
         std::unordered_map<BindingPoint, core::Access>{},
-        /* allow_collisions */ true);
+        /* allow_collisions */ false);
     manager.Add<ast::transform::BindingRemapper>();
 
     manager.Add<ast::transform::PromoteInitializersToLet>();
