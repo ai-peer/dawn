@@ -16,6 +16,46 @@
       "message": "Corentin or Ben, PTAL.",
       "revId": "dac63f71f060ab4611d19c30aaca0499ee6aec1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3607a5f0_bfb2c619",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T09:10:41Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "dac63f71f060ab4611d19c30aaca0499ee6aec1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e1ccedfa_c68605cc",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T09:10:41Z",
+      "side": 1,
+      "message": "IMHO we could suppress for all sizes so we could remove the memory type index and the allocationSize that\u0027s in parenthesis.",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 69
+      },
+      "revId": "dac63f71f060ab4611d19c30aaca0499ee6aec1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
