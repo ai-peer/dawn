@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a9a7dd1_160f169f",
+        "filename": "src/tint/lang/core/ir/transform/std140_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-15T15:18:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c0e78ffa_0c8f776d",
+      "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1274ff57_860d9d62",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-15T09:06:34Z",
       "side": 1,
       "message": "Aren\u0027t we missing the all important `test/tint/bug/tint/2100.wgsl.expected.ir.spvasm` ?",
+      "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "561e8786_079a8d22",
+        "filename": "test/tint/bug/tint/2100.wgsl.expected.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-15T15:18:10Z",
+      "side": 1,
+      "message": "We haven\u0027t actually checked in any expectations for the IR writer yet (only SKIP files). Was going to do this when we switch over to IR by default but could do it now (as a separate CL) if preferred.",
+      "parentUuid": "1274ff57_860d9d62",
       "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
