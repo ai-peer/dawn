@@ -75,8 +75,7 @@ TEST_F(IR_UnaryTest, Usage) {
 
 TEST_F(IR_UnaryTest, Result) {
     auto* inst = b.Negation(mod.Types().i32(), 4_i);
-    EXPECT_TRUE(inst->HasResults());
-    EXPECT_FALSE(inst->HasMultiResults());
+    EXPECT_EQ(inst->Results().Length(), 1u);
     EXPECT_TRUE(inst->Result()->Is<InstructionResult>());
     EXPECT_EQ(inst->Result()->Source(), inst);
 }

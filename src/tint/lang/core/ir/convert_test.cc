@@ -48,8 +48,7 @@ TEST_F(IR_ConvertTest, Fail_NullToType) {
 TEST_F(IR_ConvertTest, Results) {
     auto* c = b.Convert(mod.Types().i32(), 1_u);
 
-    EXPECT_TRUE(c->HasResults());
-    EXPECT_FALSE(c->HasMultiResults());
+    EXPECT_EQ(c->Results().Length(), 1u);
     EXPECT_TRUE(c->Result()->Is<InstructionResult>());
     EXPECT_EQ(c->Result()->Source(), c);
 }

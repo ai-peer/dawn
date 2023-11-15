@@ -67,8 +67,7 @@ TEST_F(IR_LoadVectorElementTest, Result) {
     auto* from = b.Var(ty.ptr<private_, vec3<i32>>());
     auto* inst = b.LoadVectorElement(from, 2_i);
 
-    EXPECT_TRUE(inst->HasResults());
-    EXPECT_FALSE(inst->HasMultiResults());
+    EXPECT_EQ(inst->Results().Length(), 1u);
 }
 
 TEST_F(IR_LoadVectorElementTest, Clone) {

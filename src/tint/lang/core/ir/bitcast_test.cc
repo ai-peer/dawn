@@ -58,8 +58,7 @@ TEST_F(IR_BitcastTest, Bitcast) {
 TEST_F(IR_BitcastTest, Result) {
     auto* a = b.Bitcast(mod.Types().i32(), 4_i);
 
-    EXPECT_TRUE(a->HasResults());
-    EXPECT_FALSE(a->HasMultiResults());
+    EXPECT_EQ(a->Results().Length(), 1u);
     EXPECT_TRUE(a->Result()->Is<InstructionResult>());
     EXPECT_EQ(a, a->Result()->Source());
 }

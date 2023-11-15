@@ -53,8 +53,7 @@ TEST_F(IR_UserCallTest, Results) {
     auto* arg2 = b.Constant(2_u);
     auto* e = b.Call(mod.Types().void_(), func, Vector{arg1, arg2});
 
-    EXPECT_TRUE(e->HasResults());
-    EXPECT_FALSE(e->HasMultiResults());
+    EXPECT_EQ(e->Results().Length(), 1u);
     EXPECT_TRUE(e->Result()->Is<InstructionResult>());
     EXPECT_EQ(e->Result()->Source(), e);
 }
