@@ -32,6 +32,7 @@
 #include <utility>
 
 #include "src/tint/lang/core/ir/control_instruction.h"
+#include "src/tint/utils/containers/cp_ptr.h"
 
 // Forward declarations
 namespace tint::core::ir {
@@ -68,7 +69,7 @@ class Switch final : public Castable<Switch, ControlInstruction> {
         bool IsDefault() const { return val == nullptr; }
 
         /// The selector value, or nullptr if this is the default selector
-        Constant* val = nullptr;
+        CPPtr<Constant> val;
     };
 
     /// A case label in the struct
@@ -77,7 +78,7 @@ class Switch final : public Castable<Switch, ControlInstruction> {
         Vector<CaseSelector, 4> selectors;
 
         /// The case block.
-        ir::Block* block = nullptr;
+        CPPtr<ir::Block> block;
     };
 
     /// Constructor

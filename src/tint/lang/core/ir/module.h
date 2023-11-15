@@ -38,6 +38,7 @@
 #include "src/tint/lang/core/ir/instruction.h"
 #include "src/tint/lang/core/ir/value.h"
 #include "src/tint/lang/core/type/manager.h"
+#include "src/tint/utils/containers/cp_ptr.h"
 #include "src/tint/utils/containers/vector.h"
 #include "src/tint/utils/diagnostic/source.h"
 #include "src/tint/utils/id/generation_id.h"
@@ -97,6 +98,12 @@ class Module {
     /// @return the type manager for the module
     const core::type::Manager& Types() const { return constant_values.types; }
 
+    /// @return the list of functions used by the module
+    Vector<Function*, 8>& Functions() { return functions_; }
+
+    /// @return the list of functions used by the module
+    VectorRef<const Function*> Functions() const { return functions_; }
+
     /// The block allocator
     BlockAllocator<Block> blocks;
 
@@ -109,17 +116,18 @@ class Module {
     /// The value allocator
     BlockAllocator<Value> values;
 
-    /// List of functions in the program
-    Vector<Function*, 8> functions;
-
     /// The block containing module level declarations, if any exist.
-    Block* root_block = nullptr;
+    CPPtr<Block> root_block;
 
     /// The symbol table for the module
     SymbolTable symbols{prog_id_};
 
     /// The map of core::constant::Value to their ir::Constant.
     Hashmap<const core::constant::Value*, ir::Constant*, 16> constants;
+
+  private:
+    /// List of functions in the program
+    Vector<Function*, 8> functions_;
 };
 
 }  // namespace tint::core::ir
