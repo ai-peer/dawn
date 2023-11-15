@@ -66,8 +66,7 @@ TEST_F(IR_LoadTest, Results) {
     auto* var = b.Var(ty.ptr<function, i32>());
     auto* inst = b.Load(var);
 
-    EXPECT_TRUE(inst->HasResults());
-    EXPECT_FALSE(inst->HasMultiResults());
+    EXPECT_EQ(inst->Results().Length(), 1u);
     EXPECT_TRUE(inst->Result()->Is<InstructionResult>());
     EXPECT_EQ(inst->Result()->Source(), inst);
 }

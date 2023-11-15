@@ -476,21 +476,19 @@ void Validator::CheckInstruction(Instruction* inst) {
         AddError(inst, InstError(inst, "destroyed instruction found in instruction list"));
         return;
     }
-    if (inst->HasResults()) {
-        auto results = inst->Results();
-        for (size_t i = 0; i < results.Length(); ++i) {
-            auto* res = results[i];
-            if (!res) {
-                AddResultError(inst, i, InstError(inst, "instruction result is undefined"));
-                continue;
-            }
+    auto results = inst->Results();
+    for (size_t i = 0; i < results.Length(); ++i) {
+        auto* res = results[i];
+        if (!res) {
+            AddResultError(inst, i, InstError(inst, "instruction result is undefined"));
+            continue;
+        }
 
-            if (res->Source() == nullptr) {
-                AddResultError(inst, i, InstError(inst, "instruction result source is undefined"));
-            } else if (res->Source() != inst) {
-                AddResultError(inst, i,
-                               InstError(inst, "instruction result source has wrong instruction"));
-            }
+        if (res->Source() == nullptr) {
+            AddResultError(inst, i, InstError(inst, "instruction result source is undefined"));
+        } else if (res->Source() != inst) {
+            AddResultError(inst, i,
+                           InstError(inst, "instruction result source has wrong instruction"));
         }
     }
 

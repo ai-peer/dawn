@@ -50,8 +50,7 @@ TEST_F(IR_CoreBuiltinCallTest, Result) {
     auto* arg2 = b.Constant(2_u);
     auto* builtin = b.Call(mod.Types().f32(), core::BuiltinFn::kAbs, arg1, arg2);
 
-    EXPECT_TRUE(builtin->HasResults());
-    EXPECT_FALSE(builtin->HasMultiResults());
+    EXPECT_EQ(builtin->Results().Length(), 1u);
     EXPECT_TRUE(builtin->Result()->Is<InstructionResult>());
     EXPECT_EQ(builtin->Result()->Source(), builtin);
 }

@@ -398,7 +398,7 @@ class State {
             for (auto* inst : *l->Body()) {
                 if (body_stmts.IsEmpty()) {
                     if (auto* if_ = inst->As<core::ir::If>()) {
-                        if (!if_->HasResults() &&                                //
+                        if (if_->Results().IsEmpty() &&                          //
                             if_->True()->Length() == 1 &&                        //
                             if_->False()->Length() == 1 &&                       //
                             tint::Is<core::ir::ExitIf>(if_->True()->Front()) &&  //
@@ -590,7 +590,7 @@ class State {
                     }
                 }
                 auto* expr = b.Call(NameFor(c->Target()), std::move(args));
-                if (!call->HasResults() || call->Result()->Usages().IsEmpty()) {
+                if (call->Results().IsEmpty() || call->Result()->Usages().IsEmpty()) {
                     Append(b.CallStmt(expr));
                     return;
                 }
@@ -614,7 +614,7 @@ class State {
                 }
 
                 auto* expr = b.Call(c->Func(), std::move(args));
-                if (!call->HasResults() || call->Result()->Type()->Is<core::type::Void>()) {
+                if (call->Results().IsEmpty() || call->Result()->Type()->Is<core::type::Void>()) {
                     Append(b.CallStmt(expr));
                     return;
                 }
@@ -1082,7 +1082,7 @@ class State {
     bool AsShortCircuit(core::ir::If* i,
                         const StatementList& true_stmts,
                         const StatementList& false_stmts) {
-        if (!i->HasResults()) {
+        if (i->Results().IsEmpty()) {
             return false;
         }
         auto* result = i->Result();

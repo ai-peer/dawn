@@ -55,8 +55,7 @@ TEST_F(IR_AccessTest, Result) {
     auto* idx = b.Constant(u32(1));
     auto* a = b.Access(ty.i32(), var, idx);
 
-    EXPECT_TRUE(a->HasResults());
-    EXPECT_FALSE(a->HasMultiResults());
+    EXPECT_EQ(a->Results().Length(), 1u);
 
     EXPECT_TRUE(a->Result()->Is<InstructionResult>());
     EXPECT_EQ(a, a->Result()->Source());
