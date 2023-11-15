@@ -46,6 +46,7 @@ libtint_source_set("containers") {
   sources = [
     "bitset.h",
     "containers.cc",
+    "cp_ptr.h",
     "enum_set.h",
     "hashmap.h",
     "hashmap_base.h",
