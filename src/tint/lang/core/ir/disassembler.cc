@@ -174,7 +174,7 @@ std::string Disassembler::Disassemble() {
         EmitLine();
     }
 
-    for (auto* func : mod_.functions) {
+    for (auto* func : mod_.Functions()) {
         EmitFunction(func);
     }
     return out_.str();
