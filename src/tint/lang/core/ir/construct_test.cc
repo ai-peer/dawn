@@ -51,8 +51,7 @@ TEST_F(IR_ConstructTest, Result) {
     auto* arg2 = b.Constant(false);
     auto* c = b.Construct(mod.Types().f32(), arg1, arg2);
 
-    EXPECT_TRUE(c->HasResults());
-    EXPECT_FALSE(c->HasMultiResults());
+    EXPECT_EQ(c->Results().Length(), 1u);
     EXPECT_TRUE(c->Result()->Is<InstructionResult>());
     EXPECT_EQ(c, c->Result()->Source());
 }

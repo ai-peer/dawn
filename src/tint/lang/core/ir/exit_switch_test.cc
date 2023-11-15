@@ -53,8 +53,7 @@ TEST_F(IR_ExitSwitchTest, Result) {
     auto* switch_ = b.Switch(true);
     auto* e = b.ExitSwitch(switch_, arg1, arg2);
 
-    EXPECT_FALSE(e->HasResults());
-    EXPECT_FALSE(e->HasMultiResults());
+    EXPECT_TRUE(e->Results().IsEmpty());
 }
 
 TEST_F(IR_ExitSwitchTest, Destroy) {

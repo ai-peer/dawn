@@ -55,8 +55,7 @@ TEST_F(IR_LetTest, Fail_NullValue) {
 TEST_F(IR_LetTest, Results) {
     auto* value = b.Constant(1_f);
     auto* let = b.Let("l", value);
-    EXPECT_TRUE(let->HasResults());
-    EXPECT_FALSE(let->HasMultiResults());
+    EXPECT_EQ(let->Results().Length(), 1u);
     EXPECT_TRUE(let->Result()->Is<InstructionResult>());
     EXPECT_EQ(let->Result()->Source(), let);
     EXPECT_EQ(let->Result()->Type(), value->Type());

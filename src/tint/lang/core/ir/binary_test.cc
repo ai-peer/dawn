@@ -53,8 +53,7 @@ TEST_F(IR_BinaryTest, Fail_NullType) {
 TEST_F(IR_BinaryTest, Result) {
     auto* a = b.Add(mod.Types().i32(), 4_i, 2_i);
 
-    EXPECT_TRUE(a->HasResults());
-    EXPECT_FALSE(a->HasMultiResults());
+    EXPECT_EQ(a->Results().Length(), 1u);
     EXPECT_TRUE(a->Result()->Is<InstructionResult>());
     EXPECT_EQ(a, a->Result()->Source());
 }
