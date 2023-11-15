@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a60be3a_641c288b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-15T19:31:51Z",
+      "side": 1,
+      "message": "Local cts run. Regressed tests are previously seen and not related.",
+      "revId": "373544fa8af36496c5d238e64831abb2ec590d30",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
