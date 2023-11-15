@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0e78ffa_0c8f776d",
+        "filename": "src/tint/lang/core/ir/transform/std140_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1577,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-15T09:06:34Z",
+      "side": 1,
+      "message": "nit: Would be nice to see that accesses on `MyStruct.b` also work as expected, when mixing a decomposed matrix with a non-decomposed matrix.",
+      "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1274ff57_860d9d62",
+        "filename": "test/tint/bug/tint/2100.wgsl.expected.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-15T09:06:34Z",
+      "side": 1,
+      "message": "Aren\u0027t we missing the all important `test/tint/bug/tint/2100.wgsl.expected.ir.spvasm` ?",
+      "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
