@@ -69,6 +69,24 @@
       "parentUuid": "1274ff57_860d9d62",
       "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27c6001_5816994a",
+        "filename": "test/tint/bug/tint/2100.wgsl.expected.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-15T15:19:14Z",
+      "side": 1,
+      "message": "To be clear: Kokoro is still testing that the IR writer produces valid SPIR-V for these tests, it just doesn\u0027t care what that SPIR-V is.",
+      "parentUuid": "561e8786_079a8d22",
+      "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
