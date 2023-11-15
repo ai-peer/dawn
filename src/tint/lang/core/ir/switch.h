@@ -29,6 +29,7 @@
 #define SRC_TINT_LANG_CORE_IR_SWITCH_H_
 
 #include <string>
+#include <utility>
 
 #include "src/tint/lang/core/ir/control_instruction.h"
 
@@ -64,7 +65,7 @@ class Switch final : public Castable<Switch, ControlInstruction> {
     /// A case selector
     struct CaseSelector {
         /// @returns true if this is a default selector
-        bool IsDefault() { return val == nullptr; }
+        bool IsDefault() const { return val == nullptr; }
 
         /// The selector value, or nullptr if this is the default selector
         Constant* val = nullptr;
@@ -74,11 +75,9 @@ class Switch final : public Castable<Switch, ControlInstruction> {
     struct Case {
         /// The case selector for this node
         Vector<CaseSelector, 4> selectors;
+
         /// The case block.
         ir::Block* block = nullptr;
-
-        /// @returns the case block
-        ir::Block* Block() { return block; }
     };
 
     /// Constructor
@@ -92,8 +91,29 @@ class Switch final : public Castable<Switch, ControlInstruction> {
     /// @copydoc ControlInstruction::ForeachBlock
     void ForeachBlock(const std::function<void(ir::Block*)>& cb) override;
 
+    /// Add the Case to the Switch
+    /// @param block the case block
+    /// @param values the case selector values
+    void AddCase(ir::Block* block, VectorRef<Constant*> values) {
+        Case c;
+        c.block = block;
+        for (auto* value : values) {
+            c.selectors.Push(CaseSelector{value});
+        }
+        cases_.Push(std::move(c));
+    }
+
+    /// Add the default Case to the Switch
+    /// @param block the case block
+    void AddDefaultCase(ir::Block* block) {
+        Case c;
+        c.block = block;
+        c.selectors.Push(CaseSelector{nullptr});
+        cases_.Push(std::move(c));
+    }
+
     /// @returns the switch cases
-    Vector<Case, 4>& Cases() { return cases_; }
+    Slice<Case> Cases() { return cases_.Slice(); }
 
     /// @returns the condition
     Value* Condition() { return operands_[kConditionOperandOffset]; }
