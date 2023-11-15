@@ -56,6 +56,30 @@
       },
       "revId": "dac63f71f060ab4611d19c30aaca0499ee6aec1b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "227113f7_00ac7cc8",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 154,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-11-15T10:25:48Z",
+      "side": 1,
+      "message": "I think if I don\u0027t make it too broad, it will fail again for Dawn CLs and will be an incentive for folks to fix it 😜",
+      "parentUuid": "e1ccedfa_c68605cc",
+      "range": {
+        "startLine": 147,
+        "startChar": 0,
+        "endLine": 154,
+        "endChar": 69
+      },
+      "revId": "dac63f71f060ab4611d19c30aaca0499ee6aec1b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
