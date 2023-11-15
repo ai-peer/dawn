@@ -239,7 +239,7 @@ struct State {
     /// Process the module.
     void Process() {
         // Make a copy of all the functions in the IR module.
-        auto input_fns = ir.functions;
+        auto input_fns = ir.Functions();
 
         // Populate #need_forking
         GatherFnsThatNeedForking();
@@ -251,14 +251,14 @@ struct State {
         // Build variants of the functions in #need_forking.
         BuildFnVariants();
 
-        // Rebuild ir.functions.
+        // Rebuild ir.Functions().
         EmitFunctions(input_fns);
     }
 
     /// Populates #need_forking with all the functions that have pointer parameters which need
     /// transforming. These functions will be replaced with variants based on the access shapes.
     void GatherFnsThatNeedForking() {
-        for (auto* fn : ir.functions) {
+        for (auto* fn : ir.Functions()) {
             for (auto* param : fn->Params()) {
                 if (ParamNeedsTransforming(param)) {
                     need_forking.Add(fn, fn_info_allocator.Create());
@@ -271,7 +271,7 @@ struct State {
     /// Adjusts the calls of all the functions that make calls to #need_forking, which aren't in
     /// #need_forking themselves. This populates #variants_to_build with the called functions.
     void BuildRootFns() {
-        for (auto* fn : ir.functions) {
+        for (auto* fn : ir.Functions()) {
             if (!need_forking.Contains(fn)) {
                 TransformCalls(fn);
             }
@@ -573,15 +573,15 @@ struct State {
     /// variants.
     /// @param input_fns the content of #ir.functions before transformation began.
     void EmitFunctions(VectorRef<Function*> input_fns) {
-        ir.functions.Clear();
+        ir.Functions().Clear();
         for (auto* fn : input_fns) {
             if (auto info = need_forking.Get(fn)) {
                 fn->Destroy();
                 for (auto variant : (*info)->ordered_variants) {
-                    ir.functions.Push(variant);
+                    ir.Functions().Push(variant);
                 }
             } else {
-                ir.functions.Push(fn);
+                ir.Functions().Push(fn);
             }
         }
     }

@@ -74,7 +74,7 @@ struct State {
         }
 
         // Process the functions
-        for (auto* fn : ir->functions) {
+        for (auto* fn : ir->Functions()) {
             scopes.Push(Scope{});
             TINT_DEFER(scopes.Pop());
             for (auto* param : fn->Params()) {
@@ -121,7 +121,7 @@ struct State {
         }
 
         // Declare all the functions
-        for (auto* fn : ir->functions) {
+        for (auto* fn : ir->Functions()) {
             if (auto symbol = ir->NameOf(fn); symbol.IsValid()) {
                 Declare(scopes.Back(), fn, symbol.NameView());
             }
