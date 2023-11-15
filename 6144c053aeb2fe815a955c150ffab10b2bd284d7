@@ -18,6 +18,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e388ce3a_fa80fce6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 31
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "451e9d29_8c80e0c1",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "Maybe this could be in the semaphore service to avoid platform specific code here in the middle of Queue::SubmitPendingCommands.",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c64713f_09a0fedc",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "Is there a way to re-use the logic from SystemHandle::IsValid? Ah it\u0027s not the same types?",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "54b6ca07_0c792ce1",
@@ -37,6 +88,91 @@
         "endLine": 31,
         "endChar": 17
       },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c36f33ac_16910b06",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "u-nit: Maybe declare right before use",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be7ec3f1_e216d50b",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "Woa that\u0027s a lot!",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d4a3b65_1d818978",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "Why is this hardcoded to UNDEFINED and GENERAL? Looking at the comments in VulkanBackend.h it seems that might break sometimes because our queue transfer barrier will not match the queue transfer barrier from the sender.",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7772817_b76aded8",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "Likewise these are not exported, which is weird considering we do it in the old path.",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fac2a1ef_0e888459",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "The fuchsia path doesn\u0027t return. I believe this should be outside of the #ifs.",
       "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -66,6 +202,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4a2317be_1a24bf85",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "nit: Maybe we could try one type of handle then the other instead of hardcoding the default handle type.",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a3492de_51ff5985",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "resets.",
+      "range": {
+        "startLine": 109,
+        "startChar": 27,
+        "endLine": 109,
+        "endChar": 32
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ee25d33c_f7382c50",
         "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
         "patchSetId": 31
@@ -83,6 +259,46 @@
         "endLine": 110,
         "endChar": 15
       },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a9df169_125be5df",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "U-nit: these two sentences are a bit duplicates of each other.",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 0
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77c0bc6c_e6c1cc2d",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-15T13:24:44Z",
+      "side": 1,
+      "message": "Maybe explain that sync fd only support this, because the semantic of sync FDs in Linux are that they can only transition from unsignaled to signaled but not the other direction, which matches the semantics of temporary where the payload is signaled once and then is detached so it cannot be reset?",
       "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
