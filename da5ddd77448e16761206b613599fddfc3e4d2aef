@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f303509f_c6b214f7",
+        "filename": "src/tint/api/options/pixel_local.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-15T05:45:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a703b9f7_807310f5",
+      "range": {
+        "startLine": 41,
+        "startChar": 0,
+        "endLine": 48,
+        "endChar": 65
+      },
+      "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64f14b3c_45eba743",
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f552747_ccc3397c",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 387,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-15T05:45:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64f14b3c_45eba743",
+      "range": {
+        "startLine": 387,
+        "startChar": 48,
+        "endLine": 387,
+        "endChar": 60
+      },
+      "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "126dd010_e74b587b",
@@ -94,6 +142,24 @@
       "writtenOn": "2023-11-14T10:43:46Z",
       "side": 1,
       "message": "nit: It might be worth asserting this is a single-sampled 2D storage texture.",
+      "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7125156f_d036bdef",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3417,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-15T05:45:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "126dd010_e74b587b",
       "revId": "da5ddd77448e16761206b613599fddfc3e4d2aef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
