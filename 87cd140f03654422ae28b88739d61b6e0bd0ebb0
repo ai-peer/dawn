@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "87cd140f03654422ae28b88739d61b6e0bd0ebb0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5d65e4d_7d5c7435",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 247,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-15T21:07:35Z",
+      "side": 1,
+      "message": "Was this declared in another CL, or is there a file missing from this CL?",
+      "range": {
+        "startLine": 247,
+        "startChar": 25,
+        "endLine": 247,
+        "endChar": 36
+      },
+      "revId": "87cd140f03654422ae28b88739d61b6e0bd0ebb0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
