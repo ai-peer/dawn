@@ -52,15 +52,14 @@ TEST_F(IR_SwitchTest, Results) {
 
 TEST_F(IR_SwitchTest, Parent) {
     auto* switch_ = b.Switch(1_i);
-    b.Case(switch_, {Switch::CaseSelector{nullptr}});
-    EXPECT_THAT(switch_->Cases().Front().Block()->Parent(), switch_);
+    b.DefaultCase(switch_);
+    EXPECT_THAT(switch_->Cases().Front().block->Parent(), switch_);
 }
 
 TEST_F(IR_SwitchTest, Clone) {
     auto* switch_ = b.Switch(1_i);
-    switch_->Cases().Push(
-        Switch::Case{{Switch::CaseSelector{}, Switch::CaseSelector{b.Constant(2_i)}}, b.Block()});
-    switch_->Cases().Push(Switch::Case{{Switch::CaseSelector{b.Constant(3_i)}}, b.Block()});
+    switch_->AddCase(b.Block(), Vector{nullptr, b.Constant(2_i)});
+    switch_->AddCase(b.Block(), Vector{b.Constant(3_i)});
 
     auto* new_switch = clone_ctx.Clone(switch_);
 
@@ -70,7 +69,7 @@ TEST_F(IR_SwitchTest, Clone) {
     ASSERT_TRUE(new_cond->Is<core::constant::Scalar<i32>>());
     EXPECT_EQ(1_i, new_cond->As<core::constant::Scalar<i32>>()->ValueAs<i32>());
 
-    auto& cases = new_switch->Cases();
+    auto cases = new_switch->Cases();
     ASSERT_EQ(2u, cases.Length());
 
     {
@@ -104,7 +103,7 @@ TEST_F(IR_SwitchTest, CloneWithExits) {
 
         auto* blk = b.Block();
         b.Append(blk, [&] { b.ExitSwitch(switch_); });
-        switch_->Cases().Push(Switch::Case{{Switch::CaseSelector{b.Constant(3_i)}}, blk});
+        switch_->AddCase(blk, Vector{b.Constant(3_i)});
         new_switch = clone_ctx.Clone(switch_);
     }
 
@@ -123,7 +122,7 @@ TEST_F(IR_SwitchTest, CloneWithResults) {
 
         auto* blk = b.Block();
         b.Append(blk, [&] { b.ExitSwitch(switch_, b.Constant(42_i), b.Constant(42_f)); });
-        switch_->Cases().Push(Switch::Case{{Switch::CaseSelector{b.Constant(3_i)}}, blk});
+        switch_->AddCase(blk, Vector{b.Constant(3_i)});
         new_switch = clone_ctx.Clone(switch_);
     }
 

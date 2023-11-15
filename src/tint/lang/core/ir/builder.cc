@@ -66,15 +66,19 @@ ir::Loop* Builder::Loop() {
     return Append(ir.instructions.Create<ir::Loop>(Block(), MultiInBlock(), MultiInBlock()));
 }
 
-Block* Builder::Case(ir::Switch* s, VectorRef<Switch::CaseSelector> selectors) {
+Block* Builder::Case(ir::Switch* s, VectorRef<ir::Constant*> selectors) {
     auto* block = Block();
-    s->Cases().Push(Switch::Case{std::move(selectors), block});
+    s->AddCase(block, std::move(selectors));
     block->SetParent(s);
     return block;
 }
 
-Block* Builder::Case(ir::Switch* s, std::initializer_list<Switch::CaseSelector> selectors) {
-    return Case(s, Vector<Switch::CaseSelector, 4>(selectors));
+Block* Builder::DefaultCase(ir::Switch* s) {
+    return Case(s, Vector<ir::Constant*, 1>{nullptr});
+}
+
+Block* Builder::Case(ir::Switch* s, std::initializer_list<ir::Constant*> selectors) {
+    return Case(s, Vector<ir::Constant*, 4>(selectors));
 }
 
 ir::Discard* Builder::Discard() {
