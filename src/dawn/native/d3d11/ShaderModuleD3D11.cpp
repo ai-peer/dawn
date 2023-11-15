@@ -90,13 +90,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     req.tracePlatform = UnsafeUnkeyedValue(device->GetPlatform());
     req.hlsl.shaderModel = 50;
     req.hlsl.disableSymbolRenaming = device->IsToggleEnabled(Toggle::DisableSymbolRenaming);
-    req.hlsl.isRobustnessEnabled = device->IsRobustnessEnabled();
-    req.hlsl.disableWorkgroupInit = device->IsToggleEnabled(Toggle::DisableWorkgroupInit);
     req.hlsl.dumpShaders = device->IsToggleEnabled(Toggle::DumpShaders);
-
-    if (usedInterstageVariables.has_value()) {
-        req.hlsl.interstageLocations = *usedInterstageVariables;
-    }
 
     req.bytecode.hasShaderF16Feature = false;
     req.bytecode.compileFlags = compileFlags;
@@ -181,22 +175,46 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
         bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
     }
 
-    req.hlsl.usesNumWorkgroups = entryPoint.usesNumWorkgroups;
-    // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the numWorkgroups in the default
-    // space(0)
-    req.hlsl.numWorkgroupsRegisterSpace = 0;
-    req.hlsl.numWorkgroupsShaderRegister = PipelineLayout::kNumWorkgroupsConstantBufferSlot;
-
-    req.hlsl.bindingRemapper = std::move(bindingRemapper);
-
-    req.hlsl.externalTextureOptions = BuildExternalTextureTransformBindings(layout);
     req.hlsl.substituteOverrideConfig = std::move(substituteOverrideConfig);
-
-    // TODO(dawn:1705): do we need to support it?
-    req.hlsl.polyfillReflectVec2F32 = false;
 
     const CombinedLimits& limits = device->GetLimits();
     req.hlsl.limits = LimitsForCompilationRequest::Create(limits.v1);
+
+    req.hlsl.tintOptions.disable_robustness = !device->IsRobustnessEnabled();
+    req.hlsl.tintOptions.disable_workgroup_init =
+        device->IsToggleEnabled(Toggle::DisableWorkgroupInit);
+    req.hlsl.tintOptions.bindingRemapper = std::move(bindingRemapper);
+    req.hlsl.tintOptions.access_controls = false;
+    req.hlsl.tintOptions.external_texture_options = BuildExternalTextureTransformBindings(layout);
+
+    if (entryPoint.usesNumWorkgroups) {
+        // D3D11 (HLSL SM5.0) doesn't support spaces, so we have to put the numWorkgroups in the
+        // default space(0)
+        req.hlsl.tintOptions.root_constant_binding_point =
+            tint::BindingPoint{0, PipelineLayout::kNumWorkgroupsConstantBufferSlot};
+    }
+
+    // TODO(dawn:549): HLSL generation outputs the indices into the
+    // array_length_from_uniform buffer that were actually used. When the blob cache can
+    // store more than compiled shaders, we should reflect these used indices and store
+    // them as well. This would allow us to only upload root constants that are actually
+    // read by the shader.
+    req.hlsl.tintOptions.array_length_from_uniform = {}
+
+    if (stage == SingleShaderStage::Vertex) {
+        // Now that only vertex shader can have interstage outputs.
+        // Pass in the actually used interstage locations for tint to potentially truncate unused
+        // outputs.
+        if (usedInterstageVariables.has_value()) {
+            req.hlsl.tintOptions.interstage_locations = *usedInterstageVariables;
+        }
+        req.hlsl.tintOptions.truncate_interstage_variables = true;
+    }
+
+    // TODO(dawn:1705): do we need to support it?
+    req.hlsl.tintOptions.polyfill_reflect_vec2_f32 = false;
+
+    req.hlsl.tintOptions.binding_points_ignored_in_robustness_transform = {};
 
     CacheResult<d3d::CompiledShader> compiledShader;
     MaybeError compileError = [&]() -> MaybeError {
