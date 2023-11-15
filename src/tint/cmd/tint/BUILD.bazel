@@ -61,7 +61,6 @@ cc_binary(
     "//src/tint/lang/wgsl/program",
     "//src/tint/lang/wgsl/sem",
     "//src/tint/utils/cli",
-    "//src/tint/utils/command",
     "//src/tint/utils/containers",
     "//src/tint/utils/diagnostic",
     "//src/tint/utils/ice",
@@ -99,11 +98,6 @@ cc_binary(
       "//src/tint/lang/msl/writer",
       "//src/tint/lang/msl/writer/common",
       "//src/tint/lang/msl/writer/helpers",
-    ],
-    "//conditions:default": [],
-  }) + select({
-    ":tint_build_spv_reader": [
-      "//src/tint/lang/spirv/reader",
     ],
     "//conditions:default": [],
   }) + select({
