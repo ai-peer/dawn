@@ -31,6 +31,7 @@
 #include <string>
 
 #include "src/tint/lang/core/ir/control_instruction.h"
+#include "src/tint/utils/containers/cp_ptr.h"
 
 // Forward declarations
 namespace tint::core::ir {
@@ -95,8 +96,8 @@ class If final : public Castable<If, ControlInstruction> {
     std::string FriendlyName() const override { return "if"; }
 
   private:
-    ir::Block* true_ = nullptr;
-    ir::Block* false_ = nullptr;
+    CPPtr<ir::Block> true_;
+    CPPtr<ir::Block> false_;
 };
 
 }  // namespace tint::core::ir
