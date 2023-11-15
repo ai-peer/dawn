@@ -62,6 +62,52 @@
       },
       "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee25d33c_f7382c50",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-15T03:12:25Z",
+      "side": 1,
+      "message": "Nits: Dup of same \u0027gets\u0027.",
+      "range": {
+        "startLine": 110,
+        "startChar": 11,
+        "endLine": 110,
+        "endChar": 15
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3664b450_99f8075e",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-15T03:12:25Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 16
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
