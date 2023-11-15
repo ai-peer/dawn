@@ -96,8 +96,8 @@ struct State {
         }
 
         // Find function parameters that need to be replaced.
-        auto functions = ir.functions;
-        for (auto* func : functions) {
+        auto functions = ir.Functions();
+        for (auto& func : functions) {
             for (uint32_t index = 0; index < func->Params().Length(); index++) {
                 auto* param = func->Params()[index];
                 if (param->Type()->Is<core::type::ExternalTexture>()) {
