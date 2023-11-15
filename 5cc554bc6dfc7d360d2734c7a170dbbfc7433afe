@@ -16,6 +16,52 @@
       "message": "PTAL.",
       "revId": "5cc554bc6dfc7d360d2734c7a170dbbfc7433afe",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "581eb3a7_b85cb544",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-15T13:37:21Z",
+      "side": 1,
+      "message": "Why? The scoping on this was tight and clearly depends on things that access the `cli` declarations.",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 34
+      },
+      "revId": "5cc554bc6dfc7d360d2734c7a170dbbfc7433afe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8be2f325_c1406cf6",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-15T13:37:21Z",
+      "side": 1,
+      "message": "I don\u0027t really mind these changes, but it would be good to say why in the CL description",
+      "range": {
+        "startLine": 620,
+        "startChar": 89,
+        "endLine": 620,
+        "endChar": 93
+      },
+      "revId": "5cc554bc6dfc7d360d2734c7a170dbbfc7433afe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
