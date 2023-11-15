@@ -115,11 +115,17 @@ class Switch final : public Castable<Switch, ControlInstruction> {
     /// @returns the switch cases
     Slice<Case> Cases() { return cases_.Slice(); }
 
+    /// @returns the switch cases
+    Slice<const Case> Cases() const { return cases_.Slice(); }
+
     /// @returns the condition
     Value* Condition() { return operands_[kConditionOperandOffset]; }
 
+    /// @returns the condition
+    const Value* Condition() const { return operands_[kConditionOperandOffset]; }
+
     /// @returns the friendly name for the instruction
-    std::string FriendlyName() override { return "switch"; }
+    std::string FriendlyName() const override { return "switch"; }
 
   private:
     Vector<Case, 4> cases_;
