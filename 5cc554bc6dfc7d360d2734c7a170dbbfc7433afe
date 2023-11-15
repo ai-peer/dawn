@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d5c33d91_416386fb",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-15T14:35:12Z",
+      "side": 1,
+      "message": "I\u0027d clean towards keeping as it was, given the tight scoping. I wouldn\u0027t have commented on this one, except I know there\u0027s another CL in flight that this will probably break.",
+      "parentUuid": "2ad3b2dd_bbb6b37f",
+      "range": {
+        "startLine": 224,
+        "startChar": 0,
+        "endLine": 232,
+        "endChar": 34
+      },
+      "revId": "5cc554bc6dfc7d360d2734c7a170dbbfc7433afe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8be2f325_c1406cf6",
         "filename": "src/tint/cmd/tint/main.cc",
         "patchSetId": 1
