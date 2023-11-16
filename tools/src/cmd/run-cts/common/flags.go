@@ -32,7 +32,6 @@ import (
 	"fmt"
 	"io"
 	"os"
-	"os/exec"
 	"path/filepath"
 	"runtime"
 
@@ -63,7 +62,7 @@ func (f *Flags) Register() {
 	flag.StringVar(&f.ExpectationsPath, "expect", "", "path to expectations file")
 	flag.StringVar(&f.CTS, "cts", defaultCtsPath(), "root directory of WebGPU CTS")
 	flag.StringVar(&f.Node, "node", fileutils.NodePath(), "path to node executable")
-	flag.StringVar(&f.Npx, "npx", defaultNpxPath(), "path to npx executable")
+	flag.StringVar(&f.Npx, "npx", fileutils.NPXPath(), "path to npx executable")
 }
 
 // Process processes the flags, returning a State.
@@ -156,14 +155,6 @@ func defaultCtsPath() string {
 		if info, err := os.Stat(cts); err == nil && info.IsDir() {
 			return cts
 		}
-	}
-	return ""
-}
-
-// defaultNpxPath looks for the npx executable on PATH
-func defaultNpxPath() string {
-	if p, err := exec.LookPath("npx"); err == nil {
-		return p
 	}
 	return ""
 }

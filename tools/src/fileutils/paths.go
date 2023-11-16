@@ -107,13 +107,69 @@ func NodePath() string {
 			case "windows/amd64":
 				path = filepath.Join(node, "node.exe")
 			}
-			if _, err := os.Stat(path); err == nil {
+			if IsExe(path) {
 				return path
 			}
 		}
 	}
 
 	if path, err := exec.LookPath("node"); err == nil {
+		return path
+	}
+
+	return ""
+}
+
+// NPMPath looks for the npm binary, first in dawn's third_party directory,
+// falling back to PATH.
+func NPMPath() string {
+	if dawnRoot := DawnRoot(); dawnRoot != "" {
+		node := filepath.Join(dawnRoot, "third_party/node")
+		if info, err := os.Stat(node); err == nil && info.IsDir() {
+			path := ""
+			switch fmt.Sprintf("%v/%v", runtime.GOOS, runtime.GOARCH) { // See `go tool dist list`
+			case "darwin/amd64":
+				path = filepath.Join(node, "node-darwin-x64/lib/node_modules/npm/bin/npm")
+			case "darwin/arm64":
+				path = filepath.Join(node, "node-darwin-arm64/lib/node_modules/npm/bin/npm")
+			case "linux/amd64":
+				path = filepath.Join(node, "node-linux-x64/lib/node_modules/npm/bin/npm")
+			}
+			if IsExe(path) {
+				return path
+			}
+		}
+	}
+
+	if path, err := exec.LookPath("npm"); err == nil {
+		return path
+	}
+
+	return ""
+}
+
+// NPXPath looks for the npx binary, first in dawn's third_party directory,
+// falling back to PATH.
+func NPXPath() string {
+	if dawnRoot := DawnRoot(); dawnRoot != "" {
+		node := filepath.Join(dawnRoot, "third_party/node")
+		if info, err := os.Stat(node); err == nil && info.IsDir() {
+			path := ""
+			switch fmt.Sprintf("%v/%v", runtime.GOOS, runtime.GOARCH) { // See `go tool dist list`
+			case "darwin/amd64":
+				path = filepath.Join(node, "node-darwin-x64/lib/node_modules/npm/bin/npx")
+			case "darwin/arm64":
+				path = filepath.Join(node, "node-darwin-arm64/lib/node_modules/npm/bin/npx")
+			case "linux/amd64":
+				path = filepath.Join(node, "node-linux-x64/lib/node_modules/npm/bin/npx")
+			}
+			if IsExe(path) {
+				return path
+			}
+		}
+	}
+
+	if path, err := exec.LookPath("npx"); err == nil {
 		return path
 	}
 

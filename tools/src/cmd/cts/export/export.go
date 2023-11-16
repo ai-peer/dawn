@@ -306,10 +306,7 @@ func countUnimplementedTests(cfg common.Config, ctsHash string) (int, error) {
 		}
 	}
 	{
-		npx, err := exec.LookPath("npx")
-		if err != nil {
-			return 0, fmt.Errorf("failed to find npx on PATH: %w", err)
-		}
+		npx := fileutils.NPXPath()
 		cmd := exec.Command(npx, "grunt", "run:build-out-node")
 		cmd.Dir = dir
 		if out, err := cmd.CombinedOutput(); err != nil {
@@ -317,11 +314,8 @@ func countUnimplementedTests(cfg common.Config, ctsHash string) (int, error) {
 		}
 	}
 	{
-		sh, err := exec.LookPath("node")
-		if err != nil {
-			return 0, fmt.Errorf("failed to find sh on PATH: %w", err)
-		}
-		cmd := exec.Command(sh, "./tools/run_node", "--list-unimplemented", "webgpu:*")
+		node := fileutils.NodePath()
+		cmd := exec.Command(node, "./tools/run_node", "--list-unimplemented", "webgpu:*")
 		cmd.Dir = dir
 		out, err := cmd.CombinedOutput()
 		if err != nil {
