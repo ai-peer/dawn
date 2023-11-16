@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "cdac3f28_29d8c5f9",
+        "filename": "src/tint/lang/core/ir/break_if.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T18:22:47Z",
+      "side": 1,
+      "message": "Will do",
+      "parentUuid": "cc8eb96a_0233eb3c",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0ed91c78_3b761c4e",
         "filename": "src/tint/lang/core/ir/instruction.h",
         "patchSetId": 3
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-16T16:10:30Z",
       "side": 1,
       "message": "Why was this changed from pure virtual? I don\u0027t see any overrides it actually cleansup. (It\u0027s also nice, even if there are empty operands in an instruction to make it explicit in the instruction itself)",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "184d5a36_f1a4b3ed",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T18:22:47Z",
+      "side": 1,
+      "message": "For keeping symmetry with `Results()`. If you want explicit, I\u0027ll make both pure virtual.",
+      "parentUuid": "0ed91c78_3b761c4e",
       "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -54,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d846cdd6_a0f390d2",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T18:22:47Z",
+      "side": 1,
+      "message": "Again, I can drop the default argument for both this and `Result()`, and make both explicit - if that\u0027s what you want.",
+      "parentUuid": "fa385ae3_9c4f2596",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "46d30c5d_785e8cd6",
         "filename": "src/tint/lang/core/ir/instruction.h",
         "patchSetId": 3
@@ -65,6 +119,24 @@
       "writtenOn": "2023-11-16T16:10:30Z",
       "side": 1,
       "message": "This is different from the old `Result()` call which would also return `nullptr` on multiresults.",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "da155db5_c831351d",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T18:22:47Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "46d30c5d_785e8cd6",
       "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +160,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "58fea24f_97c76226",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T18:22:47Z",
+      "side": 1,
+      "message": "Really? Isn\u0027t **number of results equals 1** about as explicit as you could possibly be?",
+      "parentUuid": "07ded2eb_f390ee66",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27bfb90a_a16d3286",
         "filename": "src/tint/lang/core/ir/operand_instruction.h",
         "patchSetId": 3
@@ -99,6 +189,24 @@
       "writtenOn": "2023-11-16T16:10:30Z",
       "side": 1,
       "message": "This also changes what `Result()` meant for multi-result.",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "add3918b_ab97df72",
+        "filename": "src/tint/lang/core/ir/operand_instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T18:22:47Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "27bfb90a_a16d3286",
       "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
