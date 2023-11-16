@@ -221,6 +221,11 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     return wgpu::TextureUsage::RenderAttachment;
 }
 
+size_t Device::QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const {
+    // Null backend has no memory heaps. We could fake it but it's not useful now.
+    return 0;
+}
+
 void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
     // TODO(crbug.com/dawn/831): DestroyImpl is called from two places.

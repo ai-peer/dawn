@@ -97,6 +97,8 @@ class Device final : public d3d::Device {
     ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> CreateExternalImageDXGIImplImpl(
         const ExternalImageDescriptor* descriptor) override;
 
+    size_t QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const override;
+
     uint32_t GetUAVSlotCount() const;
 
     // TODO(dawn:1413) move these methods to the d3d11::Queue.

@@ -38,6 +38,7 @@ class PhysicalDevice;
 
 struct D3D12DeviceInfo {
     bool isUMA;
+    bool isCacheCoherentUMA;
     uint32_t resourceHeapTier;
     bool supportsRenderPass;
     bool supportsShaderF16;
