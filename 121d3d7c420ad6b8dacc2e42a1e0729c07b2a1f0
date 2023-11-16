@@ -22,6 +22,30 @@
       },
       "revId": "121d3d7c420ad6b8dacc2e42a1e0729c07b2a1f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "803e62c9_8e8092f0",
+        "filename": "src/tint/utils/containers/vector.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T15:49:27Z",
+      "side": 1,
+      "message": "It should be fine. If `other.impl_.CanMove()` returns `true`, then it has already spilled to a heap allocation, and moving the slice is always going to be faster than moving N elements.",
+      "parentUuid": "481d4d45_bf43d37b",
+      "range": {
+        "startLine": 861,
+        "startChar": 8,
+        "endLine": 861,
+        "endChar": 45
+      },
+      "revId": "121d3d7c420ad6b8dacc2e42a1e0729c07b2a1f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

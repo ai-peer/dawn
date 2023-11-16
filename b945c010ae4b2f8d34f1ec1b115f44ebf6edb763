@@ -22,6 +22,30 @@
       },
       "revId": "b945c010ae4b2f8d34f1ec1b115f44ebf6edb763",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd459d5a_aff5da49",
+        "filename": "src/tint/utils/containers/vector.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T15:49:27Z",
+      "side": 1,
+      "message": "True, but `other` has just been moved. I\u0027d assume it\u0027s unlikely to be reused.\nMind if I experiment with a follow-up change to try `Clear` instead, would be interested in seeing what perfmon makes of it (probably nothing)?",
+      "parentUuid": "be76985d_dce5dce6",
+      "range": {
+        "startLine": 893,
+        "startChar": 8,
+        "endLine": 893,
+        "endChar": 29
+      },
+      "revId": "b945c010ae4b2f8d34f1ec1b115f44ebf6edb763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
