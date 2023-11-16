@@ -517,6 +517,40 @@ ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
     }
 }
 
+size_t Device::QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const {
+    DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
+    DAWN_CHECK(GetPhysicalDevice()->GetHardwareAdapter()->QueryVideoMemoryInfo(
+                   0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo) == S_OK);
+
+    const auto& info = device->GetDeviceInfo();
+    if (info.isUMA) {
+        if (info.isCacheCoherentUMA) {
+            info[0].heapProperties =
+                wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+                wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
+            info[0].recommendedMaxSize = videoMemoryInfo.Budget;
+        } else {
+            info[0].heapProperties = wgpu::HeapProperty::DeviceLocal |
+                                     wgpu::HeapProperty::HostVisible |
+                                     wgpu::HeapProperty::HostCached;
+        }
+
+        return 1;
+    } else {
+        auto properties = mD3d12Device->GetCustomHeapProperties(0, D3D12_HEAP_TYPE_DEFAULT);
+        info[0].heapProperties = wgpu::HeapProperty::DeviceLocal;
+        info[0].recommendedMaxSize = videoMemoryInfo.Budget;
+
+        DAWN_CHECK(GetPhysicalDevice()->GetHardwareAdapter()->QueryVideoMemoryInfo(
+                       0, DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL, &videoMemoryInfo) == S_OK);
+        info[1].heapProperties =
+            wgpu::HeapProperty::HostVisible | wgpu::HeapProperty::HostCoherent |
+            wgpu::HeapProperty::HostCached info[1].recommendedMaxSize = videoMemoryInfo.Budget;
+
+        return 2;
+    }
+}
+
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,

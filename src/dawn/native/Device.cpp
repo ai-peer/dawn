@@ -1277,6 +1277,20 @@ wgpu::TextureUsage DeviceBase::APIGetSupportedSurfaceUsage(Surface* surface) {
     return result;
 }
 
+size_t DeviceBase::APIQueryMemoryHeapInfo(MemoryHeapInfo* info) {
+    if (ConsumedError(
+            [this]() -> MaybeError {
+                DAWN_TRY(ValidateIsAlive());
+                DAWN_INVALID_IF(!HasFeature(Feature::MemoryHeapInfo), "%s is not enabled.",
+                                wgpu::FeatureName::MemoryHeapInfo);
+                return {};
+            }(),
+            "calling %s.QueryMemoryHeapInfo", this)) {
+        return 0;
+    }
+    return QueryMemoryHeapInfoImpl(info);
+}
+
 // For Dawn Wire
 
 BufferBase* DeviceBase::APICreateErrorBuffer(const BufferDescriptor* desc) {

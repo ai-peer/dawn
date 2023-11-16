@@ -191,6 +191,30 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     return SwapChain::GetSupportedSurfaceUsage(this, surface);
 }
 
+size_t Device::QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const {
+    size_t count = mDeviceInfo.memoryTypes.size();
+    if (info == nullptr) {
+        return count;
+    }
+    for (size_t i = 0; i < count; ++i) {
+        info[i].recommendedMaxSize = mDeviceInfo.memoryHeaps[i].size;
+        info[i].heapProperties = {};
+        if (mDeviceInfo.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_DEVICE_LOCAL_BIT) {
+            info[i].heapProperties |= wgpu::HeapProperty::DeviceLocal;
+        }
+        if (mDeviceInfo.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) {
+            info[i].heapProperties |= wgpu::HeapProperty::HostVisible;
+        }
+        if (mDeviceInfo.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) {
+            info[i].heapProperties |= wgpu::HeapProperty::HostCoherent;
+        }
+        if (mDeviceInfo.memoryTypes[i].propertyFlags & VK_MEMORY_PROPERTY_HOST_CACHED_BIT) {
+            info[i].heapProperties |= wgpu::HeapProperty::HostCached;
+        }
+    }
+    return count;
+}
+
 MaybeError Device::TickImpl() {
     Queue* queue = ToBackend(GetQueue());
 
