@@ -16,6 +16,24 @@
       "message": "You nerd-sniped me: https://stackoverflow.com/questions/20439442/unary-plus-against-literal-string",
       "revId": "429e97b6d3f8caddd198154d0ad63c7ed5e96615",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a14ffb0_1dbe438b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-16T15:36:03Z",
+      "side": 1,
+      "message": "I definitely ran into this once in my career, but it has been a while. C/C++ is a fantastic langauge :p",
+      "parentUuid": "d122c319_f3cb7b1b",
+      "revId": "429e97b6d3f8caddd198154d0ad63c7ed5e96615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
