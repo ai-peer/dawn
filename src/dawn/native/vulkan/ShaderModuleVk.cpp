@@ -191,7 +191,8 @@ ShaderModule::~ShaderModule() = default;
     X(bool, disableSymbolRenaming)                                                               \
     X(tint::spirv::writer::Options, tintOptions)                                                 \
     X(bool, use_tint_ir)                                                                         \
-    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)
+    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)                         \
+    X(std::optional<uint32_t>, maxSubgroupSizeForFullSubgroups)
 
 DAWN_MAKE_CACHE_REQUEST(SpirvCompilationRequest, SPIRV_COMPILATION_REQUEST_MEMBERS);
 #undef SPIRV_COMPILATION_REQUEST_MEMBERS
@@ -202,7 +203,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     SingleShaderStage stage,
     const ProgrammableStage& programmableStage,
     const PipelineLayout* layout,
-    bool clampFragDepth) {
+    bool clampFragDepth,
+    std::optional<uint32_t> maxSubgroupSizeForFullSubgroups) {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleVk::GetHandleAndSpirv");
 
     // If the shader was destroyed, we should never call this function.
@@ -310,6 +312,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     req.disableSymbolRenaming = GetDevice()->IsToggleEnabled(Toggle::DisableSymbolRenaming);
     req.platform = UnsafeUnkeyedValue(GetDevice()->GetPlatform());
     req.substituteOverrideConfig = std::move(substituteOverrideConfig);
+    req.maxSubgroupSizeForFullSubgroups = maxSubgroupSizeForFullSubgroups;
 
     req.tintOptions.clamp_frag_depth = clampFragDepth;
     req.tintOptions.disable_robustness = !GetDevice()->IsRobustnessEnabled();
@@ -397,7 +400,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             if (r.stage == SingleShaderStage::Compute) {
                 Extent3D _;
                 DAWN_TRY_ASSIGN(_, ValidateComputeStageWorkgroupSize(
-                                       program, remappedEntryPoint.c_str(), r.limits));
+                                       program, remappedEntryPoint.c_str(), r.limits,
+                                       r.maxSubgroupSizeForFullSubgroups));
             }
 
             TRACE_EVENT0(r.platform.UnsafeGetValue(), General, "tint::spirv::writer::Generate()");
