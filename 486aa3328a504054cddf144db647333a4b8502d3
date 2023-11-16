@@ -52,6 +52,24 @@
       "parentUuid": "9d052a08_375a9be7",
       "revId": "486aa3328a504054cddf144db647333a4b8502d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbb825e0_19e23f4b",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T19:24:53Z",
+      "side": 0,
+      "message": "But they call a virtual. Maybe I\u0027m not making my argument clear. Having these methods encourage logic like:\n\n```\nif (blah-\u003eHasResults()) {      // \u003c- virtual call\n  auto* res \u003d blah-\u003eResult(0); // \u003c- virtual call\n}\n```\n\ninstead of:\n\n\n```\nif (auto results \u003d blah-\u003eResults(); !results.IsEmpty()) { // \u003c- virtual call\n  auto* res \u003d results[0]; // \u003c- no virtual call\n}\n```",
+      "parentUuid": "2fecf403_0d734e98",
+      "revId": "486aa3328a504054cddf144db647333a4b8502d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
