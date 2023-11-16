@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d122c319_f3cb7b1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-16T15:33:50Z",
+      "side": 1,
+      "message": "You nerd-sniped me: https://stackoverflow.com/questions/20439442/unary-plus-against-literal-string",
+      "revId": "429e97b6d3f8caddd198154d0ad63c7ed5e96615",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
