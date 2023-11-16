@@ -1,0 +1,106 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc8eb96a_0233eb3c",
+        "filename": "src/tint/lang/core/ir/break_if.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:10:30Z",
+      "side": 1,
+      "message": "Can you mention the change to Args in the Cl description?",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0ed91c78_3b761c4e",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:10:30Z",
+      "side": 1,
+      "message": "Why was this changed from pure virtual? I don\u0027t see any overrides it actually cleansup. (It\u0027s also nice, even if there are empty operands in an instruction to make it explicit in the instruction itself)",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fa385ae3_9c4f2596",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:10:30Z",
+      "side": 1,
+      "message": "Not a huge fan of this one, it just obscures the fact that you\u0027re getting the first operand by defaulting the index.",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d30c5d_785e8cd6",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:10:30Z",
+      "side": 1,
+      "message": "This is different from the old `Result()` call which would also return `nullptr` on multiresults.",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "07ded2eb_f390ee66",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:10:30Z",
+      "side": 1,
+      "message": "I think the intent here was clearer as `HasResults() \u0026\u0026 !HasMultiResults()`",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27bfb90a_a16d3286",
+        "filename": "src/tint/lang/core/ir/operand_instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:10:30Z",
+      "side": 1,
+      "message": "This also changes what `Result()` meant for multi-result.",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

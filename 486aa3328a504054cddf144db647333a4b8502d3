@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67e7b2e3_c02f2a57",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:10:30Z",
+      "side": 0,
+      "message": "Instead of removing, why not just drop the `virtual` and define them in terms of the results size: \n\n```\nHasResults() { return !Results().IsEmpty(); }\nHasMultiResults() { return Results().Length() \u003e 1; }\n```\n\nMakes the usage sites clearer as to what is intended.",
+      "revId": "486aa3328a504054cddf144db647333a4b8502d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
