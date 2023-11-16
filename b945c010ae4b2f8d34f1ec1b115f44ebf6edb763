@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "be76985d_dce5dce6",
+        "filename": "src/tint/utils/containers/vector.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-16T15:24:48Z",
+      "side": 1,
+      "message": "Is freeing required on `other`? Isn\u0027t it possible that `other`\u0027s slice alloc can be reused if assigned to?",
+      "range": {
+        "startLine": 893,
+        "startChar": 8,
+        "endLine": 893,
+        "endChar": 29
+      },
+      "revId": "b945c010ae4b2f8d34f1ec1b115f44ebf6edb763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

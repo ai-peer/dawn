@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "481d4d45_bf43d37b",
+        "filename": "src/tint/utils/containers/vector.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 861,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-16T15:24:48Z",
+      "side": 1,
+      "message": "Don\u0027t we also need to make sure that N \u003d\u003d N2? Is it okay to steal the slice of a Vector with different static size?",
+      "range": {
+        "startLine": 861,
+        "startChar": 8,
+        "endLine": 861,
+        "endChar": 45
+      },
+      "revId": "121d3d7c420ad6b8dacc2e42a1e0729c07b2a1f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
