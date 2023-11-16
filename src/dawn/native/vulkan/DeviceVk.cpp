@@ -191,6 +191,34 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     return SwapChain::GetSupportedSurfaceUsage(this, surface);
 }
 
+size_t Device::QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const {
+    size_t count = mDeviceInfo.memoryHeaps.size();
+    if (info == nullptr) {
+        return count;
+    }
+    for (size_t i = 0; i < count; ++i) {
+        info[i].recommendedMaxSize = mDeviceInfo.memoryHeaps[i].size;
+        info[i].heapProperties = {};
+        if (mDeviceInfo.memoryHeaps[i].flags & VK_MEMORY_HEAP_DEVICE_LOCAL_BIT) {
+            info[i].heapProperties |= wgpu::HeapProperty::DeviceLocal;
+        }
+    }
+    for (const auto& memoryType : mDeviceInfo.memoryTypes) {
+        if (memoryType.propertyFlags & VK_MEMORY_PROPERTY_HOST_VISIBLE_BIT) {
+            info[memoryType.heapIndex].heapProperties |= wgpu::HeapProperty::HostVisible;
+        }
+        if (memoryType.propertyFlags & VK_MEMORY_PROPERTY_HOST_COHERENT_BIT) {
+            info[memoryType.heapIndex].heapProperties |= wgpu::HeapProperty::HostCoherent;
+        }
+        if (memoryType.propertyFlags & VK_MEMORY_PROPERTY_HOST_CACHED_BIT) {
+            info[memoryType.heapIndex].heapProperties |= wgpu::HeapProperty::HostCached;
+        } else {
+            info[memoryType.heapIndex].heapProperties |= wgpu::HeapProperty::HostUncached;
+        }
+    }
+    return count;
+}
+
 MaybeError Device::TickImpl() {
     Queue* queue = ToBackend(GetQueue());
 
