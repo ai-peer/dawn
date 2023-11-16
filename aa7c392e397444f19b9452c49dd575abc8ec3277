@@ -16,6 +16,23 @@
       "message": "I had to pull a change down the stack, and lost my +2. PTAnotherL, thank you!",
       "revId": "aa7c392e397444f19b9452c49dd575abc8ec3277",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc05826_7ff5e017",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T12:37:02Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "aa7c392e397444f19b9452c49dd575abc8ec3277",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
