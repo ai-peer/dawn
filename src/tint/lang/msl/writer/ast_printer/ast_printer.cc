@@ -204,7 +204,7 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
     // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
     // MultiplanarExternalTexture must come after BindingRemapper
     data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
-        external_texture_options.bindings_map, /* allow_collisions */ true);
+        external_texture_options.bindings_map);
     manager.Add<ast::transform::MultiplanarExternalTexture>();
 
     if (!options.disable_workgroup_init) {

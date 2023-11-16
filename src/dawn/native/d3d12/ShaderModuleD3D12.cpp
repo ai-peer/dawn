@@ -285,9 +285,8 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     req.hlsl.tintOptions.disable_robustness = !device->IsRobustnessEnabled();
     req.hlsl.tintOptions.disable_workgroup_init =
         device->IsToggleEnabled(Toggle::DisableWorkgroupInit);
-    req.hlsl.tintOptions.binding_remapper_options = std::move(bindingRemapper);
     req.hlsl.tintOptions.access_controls = std::move(accessControls);
-    req.hlsl.tintOptions.external_texture_options = BuildExternalTextureTransformBindings(layout);
+    req.hlsl.tintOptions.bindings = std::move(bindings);
 
     if (entryPoint.usesNumWorkgroups) {
         req.hlsl.tintOptions.root_constant_binding_point = tint::BindingPoint{

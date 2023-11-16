@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,34 +25,20 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <string>
+#ifndef SRC_TINT_LANG_HLSL_WRITER_HELPERS_GENERATE_BINDINGS_H_
+#define SRC_TINT_LANG_HLSL_WRITER_HELPERS_GENERATE_BINDINGS_H_
 
-#include "src/tint/cmd/bench/bench.h"
-#include "src/tint/lang/hlsl/writer/helpers/generate_bindings.h"
-#include "src/tint/lang/hlsl/writer/writer.h"
+#include "src/tint/lang/hlsl/writer/common/options.h"
 
-namespace tint::hlsl::writer {
-namespace {
-
-void GenerateHLSL(benchmark::State& state, std::string input_name) {
-    auto res = bench::LoadProgram(input_name);
-    if (!res) {
-        state.SkipWithError(res.Failure().reason.str());
-        return;
-    }
-
-    tint::hlsl::writer::Options gen_options{};
-    gen_options.bindings = tint::hlsl::writer::GenerateBindings(res->program);
-
-    for (auto _ : state) {
-        auto gen_res = Generate(res->program, gen_options);
-        if (!gen_res) {
-            state.SkipWithError(gen_res.Failure().reason.str());
-        }
-    }
+// Forward declarations
+namespace tint {
+class Program;
 }
 
-TINT_BENCHMARK_PROGRAMS(GenerateHLSL);
+namespace tint::hlsl::writer {
 
-}  // namespace
+Bindings GenerateBindings(const Program& program);
+
 }  // namespace tint::hlsl::writer
+
+#endif  // SRC_TINT_LANG_HLSL_WRITER_HELPERS_GENERATE_BINDINGS_H_
