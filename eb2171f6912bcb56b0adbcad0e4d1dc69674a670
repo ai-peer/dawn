@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1636d8d_72aefe14",
+        "filename": "src/tint/lang/core/ir/switch.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:18:51Z",
+      "side": 1,
+      "message": "Why remove the `const`s?",
+      "revId": "eb2171f6912bcb56b0adbcad0e4d1dc69674a670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "619aea93_db847f2b",
+        "filename": "src/tint/lang/core/ir/switch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:18:51Z",
+      "side": 1,
+      "message": "These are both better handled by the builder (they both forget to set the blocks parent pointer to the switch)",
+      "revId": "eb2171f6912bcb56b0adbcad0e4d1dc69674a670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
