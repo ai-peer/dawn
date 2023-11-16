@@ -79,6 +79,20 @@ MaybeError ComputePipeline::Initialize() {
                                                     ToBackend(GetLayout()), compileFlags));
     d3dDesc.CS = {compiledShader.shaderBlob.Data(), compiledShader.shaderBlob.Size()};
 
+    // Validate full subgroup if required.
+    if (IsExperimentalRequireFullSubgroupsRequired()) {
+        DAWN_INVALID_IF(
+            !device->HasFeature(Feature::ChromiumExperimentalSubgroups),
+            "device must enable ChromiumExperimentalSubgroups feature to require full subgroups");
+        // Currently waveLaneCountMax in D3D12 is not reliable, assuming the max subgroup size being
+        // the maximium 128. Since all possible subgroup sizes are factor of 128, all workgroup
+        // sizes that fulfill the subgroups of size 128 fulfill every possible subgroup size.
+        DAWN_INVALID_IF(compiledShader.workgroupSize.width % 128 != 0,
+                        "the X dimension of the workgroup size (%d) must be a multiple of "
+                        "maxSubgroupSize (128) if full subgroups required in compute pipeline",
+                        compiledShader.workgroupSize.width);
+    }
+
     StreamIn(&mCacheKey, d3dDesc, ToBackend(GetLayout())->GetRootSignatureBlob());
 
     // Try to see if we have anything in the blob cache.
