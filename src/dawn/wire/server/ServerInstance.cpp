@@ -87,7 +87,19 @@ void Server::OnRequestAdapterCallback(RequestAdapterUserdata* data,
 
     // Query and report the adapter properties.
     WGPUAdapterProperties properties = {};
+
+    WGPUAdapterPropertiesMemoryHeaps memoryHeapProperties = {};
+    memoryHeapProperties.chain.sType = WGPUSType_AdapterPropertiesMemoryHeaps;
+    if (mProcs.adapterHasFeature(adapter, WGPUFeatureName_AdapterPropertiesMemoryHeaps)) {
+        properties.nextInChain = &memoryHeapProperties.chain;
+    }
+
+    printf("<server>\n");
     mProcs.adapterGetProperties(adapter, &properties);
+    for (size_t i = 0; i < memoryHeapProperties.heapCount; ++i) {
+        printf("%d\n", memoryHeapProperties.heapInfo[i].properties);
+    }
+    printf("</server>\n");
     cmd.properties = &properties;
 
     // Query and report the adapter limits, including DawnExperimentalSubgroupLimits.
@@ -102,6 +114,7 @@ void Server::OnRequestAdapterCallback(RequestAdapterUserdata* data,
 
     SerializeCommand(cmd);
     mProcs.adapterPropertiesFreeMembers(properties);
+    mProcs.adapterPropertiesMemoryHeapsFreeMembers(memoryHeapProperties);
 }
 
 }  // namespace dawn::wire::server

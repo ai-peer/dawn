@@ -423,4 +423,10 @@ FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     const TogglesState& toggles) const {
     return {};
 }
+
+void PhysicalDevice::PopulateMemoryHeapInfo(
+    AdapterPropertiesMemoryHeaps* memoryHeapProperties) const {
+    DAWN_UNREACHABLE();
+}
+
 }  // namespace dawn::native::opengl
