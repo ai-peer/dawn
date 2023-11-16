@@ -78,7 +78,8 @@ class ShaderModule final : public ShaderModuleBase {
     ResultOrError<ModuleAndSpirv> GetHandleAndSpirv(SingleShaderStage stage,
                                                     const ProgrammableStage& programmableStage,
                                                     const PipelineLayout* layout,
-                                                    bool clampFragDepth);
+                                                    bool clampFragDepth,
+                                                    FullSubgroupsValidationInfo fullSubgroups);
 
   private:
     ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);

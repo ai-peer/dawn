@@ -930,10 +930,16 @@ MaybeError ReflectShaderUsingTint(const DeviceBase* device,
 }
 }  // anonymous namespace
 
+// Allowing FullSubgroupsValidationInfo to be used in cache key.
+void StreamIn(stream::Sink* s, const FullSubgroupsValidationInfo& fullSubgroups) {
+    StreamIn(s, fullSubgroups.FullSubgroupsRequired, fullSubgroups.MaxSubgroupSize);
+}
+
 ResultOrError<Extent3D> ValidateComputeStageWorkgroupSize(
     const tint::Program& program,
     const char* entryPointName,
-    const LimitsForCompilationRequest& limits) {
+    const LimitsForCompilationRequest& limits,
+    FullSubgroupsValidationInfo fullSubgroups) {
     tint::inspector::Inspector inspector(program);
     // At this point the entry point must exist and must have workgroup size values.
     tint::inspector::EntryPoint entryPoint = inspector.GetEntryPoint(entryPointName);
@@ -966,6 +972,14 @@ ResultOrError<Extent3D> ValidateComputeStageWorkgroupSize(
                     "The total use of workgroup storage (%u bytes) is larger than "
                     "the maximum allowed (%u bytes).",
                     workgroupStorageSize, limits.maxComputeWorkgroupStorageSize);
+
+    // Validate workgroup_size.x is a multiple of fullSubgroups.MaxSubgroupSize if
+    // fullSubgroups.FullSubgroupsRequired is true.
+    DAWN_INVALID_IF(fullSubgroups.FullSubgroupsRequired &&
+                        (workgroup_size.x % fullSubgroups.MaxSubgroupSize != 0),
+                    "the X dimension of the workgroup size (%d) must be a multiple of "
+                    "maxSubgroupSize (%d) if full subgroups required in compute pipeline",
+                    workgroup_size.x, fullSubgroups.MaxSubgroupSize);
 
     return Extent3D{workgroup_size.x, workgroup_size.y, workgroup_size.z};
 }

@@ -128,12 +128,22 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
                                                    const EntryPointMetadata& entryPoint,
                                                    const PipelineLayoutBase* layout);
 
+struct FullSubgroupsValidationInfo {
+    bool FullSubgroupsRequired;
+    uint32_t MaxSubgroupSize;
+};
+
+// Allowing FullSubgroupsValidationInfo to be used in cache key.
+void StreamIn(stream::Sink* s, const FullSubgroupsValidationInfo& fullSubgroups);
+
 // Return extent3D with workgroup size dimension info if it is valid
-// width = x, height = y, depthOrArrayLength = z
+// width = x, height = y, depthOrArrayLength = z. Also validate workgroup_size.x is a multiple of
+// fullSubgroups.MaxSubgroupSize if fullSubgroups.FullSubgroupsRequired is true.
 ResultOrError<Extent3D> ValidateComputeStageWorkgroupSize(
     const tint::Program& program,
     const char* entryPointName,
-    const LimitsForCompilationRequest& limits);
+    const LimitsForCompilationRequest& limits,
+    FullSubgroupsValidationInfo fullSubgroups);
 
 RequiredBufferSizes ComputeRequiredBufferSizesForLayout(const EntryPointMetadata& entryPoint,
                                                         const PipelineLayoutBase* layout);
