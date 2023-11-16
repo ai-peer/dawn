@@ -70,6 +70,18 @@ MaybeError ComputePipeline::Initialize() {
     descriptor.computeFunction = computeData.function.Get();
     descriptor.label = label.Get();
 
+    if (IsFullSubgroupsRequired()) {
+        DAWN_INVALID_IF(
+            !GetDevice()->HasFeature(Feature::ChromiumExperimentalSubgroups),
+            "device must enable ChromiumExperimentalSubgroups feature to require full subgroups");
+        uint32_t maxSubgroupSize = device->GetLimits().experimentalSubgroupLimits.maxSubgroupSize;
+        DAWN_INVALID_IF(computeData.localWorkgroupSize.width % maxSubgroupSize != 0,
+                        "the X dimension of the workgroup size (%d) must be a multiple of "
+                        "maxSubgroupSize (%d) if full subgroups required in compute pipeline",
+                        computeData.localWorkgroupSize.width, maxSubgroupSize);
+        descriptor.threadGroupSizeIsMultipleOfThreadExecutionWidth = true;
+    }
+
     platform::metrics::DawnHistogramTimer timer(GetDevice()->GetPlatform());
     mMtlComputePipelineState.Acquire([mtlDevice
         newComputePipelineStateWithDescriptor:descriptor
