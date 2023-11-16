@@ -53,9 +53,10 @@
 
 namespace dawn::native::vulkan {
 
-#define COMPILED_SPIRV_MEMBERS(X)   \
-    X(std::vector<uint32_t>, spirv) \
-    X(std::string, remappedEntryPoint)
+#define COMPILED_SPIRV_MEMBERS(X)      \
+    X(std::vector<uint32_t>, spirv)    \
+    X(std::string, remappedEntryPoint) \
+    X(Extent3D, workgroupSize)
 
 // Represents the result and metadata for a SPIR-V compilation.
 DAWN_SERIALIZABLE(struct, CompiledSpirv, COMPILED_SPIRV_MEMBERS){};
@@ -115,7 +116,7 @@ class ShaderModule::ConcurrentTransformedShaderModuleCache {
             bool added = false;
             std::tie(iter, added) = mTransformedShaderModuleCache.emplace(
                 key, Entry{module, std::move(compilation.spirv),
-                           std::move(compilation.remappedEntryPoint)});
+                           std::move(compilation.remappedEntryPoint), compilation.workgroupSize});
             DAWN_ASSERT(added);
         } else {
             // No need to use FencedDeleter since this shader module was just created and does
@@ -131,13 +132,11 @@ class ShaderModule::ConcurrentTransformedShaderModuleCache {
         VkShaderModule vkModule;
         std::vector<uint32_t> spirv;
         std::string remappedEntryPoint;
+        Extent3D workgroupSize;
 
         ModuleAndSpirv AsRefs() const {
             return {
-                vkModule,
-                spirv.data(),
-                spirv.size(),
-                remappedEntryPoint.c_str(),
+                vkModule, spirv.data(), spirv.size(), remappedEntryPoint.c_str(), workgroupSize,
             };
         }
     };
@@ -392,11 +391,14 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             }
             DAWN_ASSERT(remappedEntryPoint != "");
 
-            // Validate workgroup size after program runs transforms.
+            CompiledSpirv result;
+
+            // Validate workgroup size after program runs transforms, and store it to result.
+            result.workgroupSize = {0, 0, 0};
             if (r.stage == SingleShaderStage::Compute) {
-                Extent3D _;
-                DAWN_TRY_ASSIGN(_, ValidateComputeStageWorkgroupSize(
-                                       program, remappedEntryPoint.c_str(), r.limits));
+                DAWN_TRY_ASSIGN(result.workgroupSize,
+                                ValidateComputeStageWorkgroupSize(
+                                    program, remappedEntryPoint.c_str(), r.limits));
             }
 
             TRACE_EVENT0(r.platform.UnsafeGetValue(), General, "tint::spirv::writer::Generate()");
@@ -404,7 +406,6 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             DAWN_INVALID_IF(!tintResult, "An error occurred while generating SPIR-V\n%s",
                             tintResult.Failure().reason.str());
 
-            CompiledSpirv result;
             result.spirv = std::move(tintResult.Get().spirv);
             result.remappedEntryPoint = remappedEntryPoint;
             return result;
