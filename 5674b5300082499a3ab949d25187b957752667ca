@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7fb8aacf_afd3d676",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2136,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-16T16:10:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "687d5e14_7c48ead9",
+      "range": {
+        "startLine": 2136,
+        "startChar": 41,
+        "endLine": 2136,
+        "endChar": 73
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "80d39a69_d5153357",
@@ -156,6 +180,30 @@
       "side": 1,
       "message": "everywhere except Vulkan pretty much",
       "parentUuid": "62e6db3b_6fb85bc1",
+      "range": {
+        "startLine": 2157,
+        "startChar": 79,
+        "endLine": 2158,
+        "endChar": 24
+      },
+      "revId": "5674b5300082499a3ab949d25187b957752667ca",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c6b5897_88bd3616",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 2158,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-16T16:10:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e85c15bd_a6b1d1a4",
       "range": {
         "startLine": 2157,
         "startChar": 79,
