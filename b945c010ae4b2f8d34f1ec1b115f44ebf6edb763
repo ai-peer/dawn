@@ -46,6 +46,30 @@
       },
       "revId": "b945c010ae4b2f8d34f1ec1b115f44ebf6edb763",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49d434e1_b624229a",
+        "filename": "src/tint/utils/containers/vector.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 893,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-16T15:51:34Z",
+      "side": 1,
+      "message": "Sure, but even if perfmon says nothing, this seems like a premature pessimization. It\u0027s going to free the memory when the object is destroyed, or possibly reassigned to.",
+      "parentUuid": "cd459d5a_aff5da49",
+      "range": {
+        "startLine": 893,
+        "startChar": 8,
+        "endLine": 893,
+        "endChar": 29
+      },
+      "revId": "b945c010ae4b2f8d34f1ec1b115f44ebf6edb763",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
