@@ -67,7 +67,8 @@ class ShaderModule final : public ShaderModuleBase {
                               const PipelineLayout* layout,
                               MetalFunctionData* out,
                               uint32_t sampleMask = 0xFFFFFFFF,
-                              const RenderPipeline* renderPipeline = nullptr);
+                              const RenderPipeline* renderPipeline = nullptr,
+                              FullSubgroupsValidationInfo fullSubgroups = {});
 
   private:
     ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);

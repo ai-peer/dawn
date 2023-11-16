@@ -91,7 +91,8 @@ using InterStageShaderVariablesMask = std::bitset<tint::hlsl::writer::kMaxInterS
     X(bool, disableWorkgroupInit)                                                                \
     X(bool, polyfillReflectVec2F32)                                                              \
     X(bool, dumpShaders)                                                                         \
-    X(std::vector<tint::BindingPoint>, bindingPointsIgnoredInRobustnessTransform)
+    X(std::vector<tint::BindingPoint>, bindingPointsIgnoredInRobustnessTransform)                \
+    X(FullSubgroupsValidationInfo, fullSubgroups)
 
 #define D3D_BYTECODE_COMPILATION_REQUEST_MEMBERS(X) \
     X(bool, hasShaderF16Feature)                    \

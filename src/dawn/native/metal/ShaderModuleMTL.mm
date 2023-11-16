@@ -60,7 +60,8 @@ using OptionalVertexPullingTransformConfig =
     X(std::string, entryPointName)                                                               \
     X(bool, disableSymbolRenaming)                                                               \
     X(tint::msl::writer::Options, tintOptions)                                                   \
-    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)
+    X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)                         \
+    X(FullSubgroupsValidationInfo, fullSubgroups)
 
 DAWN_MAKE_CACHE_REQUEST(MslCompilationRequest, MSL_COMPILATION_REQUEST_MEMBERS);
 #undef MSL_COMPILATION_REQUEST_MEMBERS
@@ -114,7 +115,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     const PipelineLayout* layout,
     ShaderModule::MetalFunctionData* out,
     uint32_t sampleMask,
-    const RenderPipeline* renderPipeline) {
+    const RenderPipeline* renderPipeline,
+    FullSubgroupsValidationInfo fullSubgroups) {
     ScopedTintICEHandler scopedICEHandler(device);
 
     std::ostringstream errorStream;
@@ -210,6 +212,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     req.entryPointName = programmableStage.entryPoint.c_str();
     req.disableSymbolRenaming = device->IsToggleEnabled(Toggle::DisableSymbolRenaming);
     req.platform = UnsafeUnkeyedValue(device->GetPlatform());
+    req.fullSubgroups = fullSubgroups;
 
     req.tintOptions.disable_robustness = !device->IsRobustnessEnabled();
     req.tintOptions.buffer_size_ubo_index = kBufferLengthBufferSlot;
@@ -290,7 +293,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             if (r.stage == SingleShaderStage::Compute) {
                 // Validate workgroup size after program runs transforms.
                 DAWN_TRY_ASSIGN(localSize, ValidateComputeStageWorkgroupSize(
-                                               program, remappedEntryPointName.data(), r.limits));
+                                               program, remappedEntryPointName.data(), r.limits,
+                                               r.fullSubgroups));
             }
 
             TRACE_EVENT0(r.platform.UnsafeGetValue(), General, "tint::msl::writer::Generate");
@@ -338,7 +342,8 @@ MaybeError ShaderModule::CreateFunction(SingleShaderStage stage,
                                         const PipelineLayout* layout,
                                         ShaderModule::MetalFunctionData* out,
                                         uint32_t sampleMask,
-                                        const RenderPipeline* renderPipeline) {
+                                        const RenderPipeline* renderPipeline,
+                                        FullSubgroupsValidationInfo fullSubgroups) {
     TRACE_EVENT0(GetDevice()->GetPlatform(), General, "ShaderModuleMTL::CreateFunction");
 
     DAWN_ASSERT(!IsError());
@@ -353,7 +358,7 @@ MaybeError ShaderModule::CreateFunction(SingleShaderStage stage,
 
     CacheResult<MslCompilation> mslCompilation;
     DAWN_TRY_ASSIGN(mslCompilation, TranslateToMSL(GetDevice(), programmableStage, stage, layout,
-                                                   out, sampleMask, renderPipeline));
+                                                   out, sampleMask, renderPipeline, fullSubgroups));
     out->needsStorageBufferLength = mslCompilation->needsStorageBufferLength;
     out->workgroupAllocations = std::move(mslCompilation->workgroupAllocations);
     out->localWorkgroupSize = MTLSizeMake(mslCompilation->localWorkgroupSize.width,
