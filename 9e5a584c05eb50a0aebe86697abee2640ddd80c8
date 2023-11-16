@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c68740f7_45bb3f60",
+        "filename": "src/tint/lang/core/ir/constant.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:25:05Z",
+      "side": 1,
+      "message": "Why does this now require a const cast?",
+      "revId": "9e5a584c05eb50a0aebe86697abee2640ddd80c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "570c88f0_94667b9c",
+        "filename": "src/tint/lang/core/ir/value.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T16:25:05Z",
+      "side": 1,
+      "message": "None of these seem to be used?",
+      "revId": "9e5a584c05eb50a0aebe86697abee2640ddd80c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
