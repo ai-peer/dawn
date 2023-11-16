@@ -1,0 +1,107 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6eea71a9_0fd3c1bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-16T16:57:39Z",
+      "side": 1,
+      "message": "LGTM, couple of comments",
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8d1e090_7978c3f4",
+        "filename": "third_party/gn/webgpu-cts/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-16T16:57:39Z",
+      "side": 1,
+      "message": "could explain in a comment why we have this versus the builtin GN copy thing?",
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5400d5c9_73828727",
+        "filename": "tools/src/cmd/run-cts/chrome/cmd.go",
+        "patchSetId": 18
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-16T16:57:39Z",
+      "side": 1,
+      "message": "stale comment?",
+      "range": {
+        "startLine": 262,
+        "startChar": 3,
+        "endLine": 262,
+        "endChar": 26
+      },
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "067069bb_29fd9a84",
+        "filename": "tools/src/cmd/run-cts/common/builder.go",
+        "patchSetId": 18
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-16T16:57:39Z",
+      "side": 1,
+      "message": "if it is nil (no error) and `verbose` is true. should we log the `out` as well?",
+      "range": {
+        "startLine": 124,
+        "startChar": 2,
+        "endLine": 124,
+        "endChar": 15
+      },
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf02b24a_7d548e5c",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-16T16:57:39Z",
+      "side": 1,
+      "message": "I don\u0027t think the protocol will be happy with you sending a log like this here because it\u0027s strict about the ordering (unless you loosened it?)\n\nCould you instead Promise.reject(yourMessage + response.statusText) ?\nit will still (eventually) end up in the existing logs",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 72
+      },
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
