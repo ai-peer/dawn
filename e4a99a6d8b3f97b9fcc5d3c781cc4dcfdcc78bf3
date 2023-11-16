@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fee4194_3f98e4ee",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T19:38:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "573bdcd1_997a1e44",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fa385ae3_9c4f2596",
@@ -142,6 +160,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "059176f7_8453acc6",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T19:38:03Z",
+      "side": 1,
+      "message": "Done (was a lot of changes!)",
+      "parentUuid": "fda5667b_229fa918",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46d30c5d_785e8cd6",
@@ -191,6 +227,24 @@
       "side": 1,
       "message": "Did you check the various callers that they won\u0027t do something different with this change?",
       "parentUuid": "da155db5_c831351d",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a9bc85c_b58add04",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T19:38:03Z",
+      "side": 1,
+      "message": "I looked over the changes, and the only place I believed needing fixing was [a caller of this](https://dawn-review.googlesource.com/c/dawn/+/161005/comment/07ded2eb_f390ee66/). Rather than changing the caller\u0027s logic (which read nicely with the new semantics), I made the `NameOf` a return an invalid symbol instead of asserting.",
+      "parentUuid": "0e76b545_3de09244",
       "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
