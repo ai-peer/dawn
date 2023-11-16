@@ -139,6 +139,7 @@ class Device final : public DeviceBase {
 
     ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsageImpl(
         const Surface* surface) const override;
+    size_t QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const override;
 
     ResultOrError<Ref<SharedTextureMemoryBase>> ImportSharedTextureMemoryImpl(
         const SharedTextureMemoryDescriptor* descriptor) override;

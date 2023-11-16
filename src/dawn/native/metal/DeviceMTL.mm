@@ -255,6 +255,35 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     return usages;
 }
 
+size_t Device::QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const {
+    if ([*mMtlDevice hasUnifiedMemory]) {
+        if (info != nullptr) {
+            info[0].heapProperties =
+                wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+                wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
+            info[0].recommendedMaxSize = [*mMtlDevice recommendedMaxWorkingSetSize];
+        }
+        return 1;
+    } else {
+        if (info != nullptr) {
+            info[0].heapProperties = wgpu::HeapProperty::DeviceLocal;
+            info[0].recommendedMaxSize = [*mMtlDevice recommendedMaxWorkingSetSize];
+
+            mach_msg_type_number_t hostBasicInfoMsg = HOST_BASIC_INFO_COUNT;
+            host_basic_info_data_t hostInfo{};
+            DAWN_CHECK(host_info(mach_host_self(), HOST_BASIC_INFO,
+                                 reinterpret_cast<host_info_t>(&hostInfo),
+                                 &hostBasicInfoMsg) == KERN_SUCCESS);
+
+            info[1].heapProperties = wgpu::HeapProperty::HostVisible |
+                                     wgpu::HeapProperty::HostCoherent |
+                                     wgpu::HeapProperty::HostCached;
+            info[1].recommendedMaxSize = hostInfo.max_mem;
+        }
+        return 2;
+    }
+}
+
 ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
     const SharedTextureMemoryDescriptor* baseDescriptor) {
     DAWN_TRY(ValidateSingleSType(baseDescriptor->nextInChain,
