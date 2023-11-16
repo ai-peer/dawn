@@ -59,7 +59,8 @@ class ShaderModule final : public ShaderModuleBase {
         const PipelineLayout* layout,
         uint32_t compileFlags,
         const std::optional<dawn::native::d3d::InterStageShaderVariablesMask>&
-            usedInterstageVariables = {});
+            usedInterstageVariables = {},
+        FullSubgroupsValidationInfo fullSubgroups = {});
 
   private:
     ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
