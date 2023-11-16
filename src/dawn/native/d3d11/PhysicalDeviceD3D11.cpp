@@ -171,7 +171,7 @@ MaybeError PhysicalDevice::InitializeImpl() {
     }
 
     mFeatureLevel = mD3D11Device->GetFeatureLevel();
-    DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(mD3D11Device));
+    DAWN_TRY_ASSIGN(mDeviceInfo, GatherDeviceInfo(GetHardwareAdapter(), mD3D11Device));
 
     // Base::InitializeImpl() cannot distinguish between discrete and integrated GPUs, so we need to
     // overwrite it.
@@ -191,6 +191,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::MSAARenderToSingleSampled);
     EnableFeature(Feature::DualSourceBlending);
     EnableFeature(Feature::Norm16TextureFormats);
+    EnableFeature(Feature::AdapterPropertiesMemoryHeaps);
 
     // To import multi planar textures, we need to at least tier 2 support.
     if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
@@ -316,6 +317,35 @@ MaybeError PhysicalDevice::ResetInternalDeviceForTestingImpl() {
     DAWN_TRY(Initialize());
 
     return {};
+}
+
+void PhysicalDevice::PopulateMemoryHeapInfo(
+    AdapterPropertiesMemoryHeaps* memoryHeapProperties) const {
+    // https://microsoft.github.io/DirectX-Specs/d3d/D3D12GPUUploadHeaps.html describes
+    // the properties of D3D12 Default/Upload/Readback heaps. The assumption is that these are
+    // roughly how D3D11 allocates memory has well.
+    if (mDeviceInfo.isUMA) {
+        auto* heapInfo = new MemoryHeapInfo[1];
+        memoryHeapProperties->heapCount = 1;
+        memoryHeapProperties->heapInfo = heapInfo;
+
+        heapInfo[0].size = mDeviceInfo.dedicatedVideoMemory || mDeviceInfo.sharedSystemMemory;
+        heapInfo[0].heapProperties =
+            wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+            wgpu::HeapProperty::HostUncached | wgpu::HeapProperty::HostCached;
+    } else {
+        auto* heapInfo = new MemoryHeapInfo[2];
+        memoryHeapProperties->heapCount = 2;
+        memoryHeapProperties->heapInfo = heapInfo;
+
+        heapInfo[0].size = mDeviceInfo.dedicatedVideoMemory;
+        heapInfo[0].heapProperties = wgpu::HeapProperty::DeviceLocal;
+
+        heapInfo[1].size = mDeviceInfo.sharedSystemMemory;
+        heapInfo[1].heapProperties =
+            wgpu::HeapProperty::HostVisible | wgpu::HeapProperty::HostCoherent |
+            wgpu::HeapProperty::HostUncached | wgpu::HeapProperty::HostCached;
+    }
 }
 
 }  // namespace dawn::native::d3d11

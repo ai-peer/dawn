@@ -70,6 +70,7 @@ class Adapter final : public ObjectBase {
   private:
     LimitsAndFeatures mLimitsAndFeatures;
     WGPUAdapterProperties mProperties;
+    std::vector<WGPUMemoryHeapInfo> mMemoryHeapInfo;
 
     struct RequestDeviceData {
         WGPURequestDeviceCallback callback = nullptr;
@@ -80,6 +81,7 @@ class Adapter final : public ObjectBase {
 };
 
 void ClientAdapterPropertiesFreeMembers(WGPUAdapterProperties);
+void ClientAdapterPropertiesMemoryHeapsFreeMembers(WGPUAdapterPropertiesMemoryHeaps);
 
 }  // namespace dawn::wire::client
 
