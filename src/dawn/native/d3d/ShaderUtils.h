@@ -45,7 +45,8 @@ class Device;
     X(Blob, shaderBlob)            \
     X(std::string, hlslSource)     \
     X(bool, usesVertexIndex)       \
-    X(bool, usesInstanceIndex)
+    X(bool, usesInstanceIndex)     \
+    X(Extent3D, workgroupSize) /* Store the finalized workgroup size, if any */
 
 // `CompiledShader` holds a ref to one of the various representations of shader blobs and
 // information used to emulate vertex/instance index starts. It also holds the `hlslSource` for the
