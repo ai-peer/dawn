@@ -25,6 +25,9 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <string>
+#include <vector>
+
 #include "dawn/common/Constants.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "dawn/utils/WGPUHelpers.h"
@@ -32,10 +35,111 @@
 namespace dawn {
 namespace {
 
+class ComputePipelineValidationTest : public ValidationTest {
+  protected:
+    // Helper function that create a shader module with compute entry point named main and
+    // workgroup size of (1, 1, 1).
+    wgpu::ShaderModule CreateShaderModule() {
+        return utils::CreateShaderModule(device, R"(
+@compute @workgroup_size(1)
+fn main() {
+})");
+    }
+};
+
+// Test that creating a compute pipeline with basic shader module and pipeline layout succeeds.
+TEST_F(ComputePipelineValidationTest, Success) {
+    auto computeModule = CreateShaderModule();
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = computeModule;
+    csDesc.compute.entryPoint = "main";
+    device.CreateComputePipeline(&csDesc);
+}
+
+// Test that creating a compute pipeline with mismatched entry point name fails.
+TEST_F(ComputePipelineValidationTest, Entry_Point_Mismatched) {
+    auto computeModule = CreateShaderModule();
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = computeModule;
+    csDesc.compute.entryPoint = "main0";
+    ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&csDesc));
+}
+
+// Test that creating a compute pipeline with chained DawnComputePipelineFullSubgroups on a device
+// that don't enable ChromiumExperimentalSubgroups feature fails.
+TEST_F(ComputePipelineValidationTest, Unexpected_DawnComputePipelineFullSubgroups) {
+    auto computeModule = CreateShaderModule();
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = computeModule;
+    csDesc.compute.entryPoint = "main";
+
+    wgpu::DawnComputePipelineFullSubgroups subgroupOptions;
+    subgroupOptions.requiresFullSubgroups = false;
+    csDesc.nextInChain = &subgroupOptions;
+
+    ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&csDesc));
+}
+
+class ComputePipelineValidationTestWithSubgroupFeaturesEnabled
+    : public ComputePipelineValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        std::vector<wgpu::FeatureName> requiredFeatures = {
+            wgpu::FeatureName::ChromiumExperimentalSubgroups};
+        descriptor.requiredFeatures = requiredFeatures.data();
+        descriptor.requiredFeatureCount = requiredFeatures.size();
+
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+};
+
+// Test that creating a compute pipeline with basic shader module and pipeline layout and chained
+// DawnComputePipelineFullSubgroups succeeds.
+TEST_F(ComputePipelineValidationTestWithSubgroupFeaturesEnabled,
+       Options_No_Requiring_Full_Subgroup_Success) {
+    auto computeModule = CreateShaderModule();
+
+    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, nullptr);
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.layout = pl;
+    csDesc.compute.module = computeModule;
+    csDesc.compute.entryPoint = "main";
+
+    wgpu::DawnComputePipelineFullSubgroups subgroupOptions;
+    subgroupOptions.requiresFullSubgroups = false;
+    csDesc.nextInChain = &subgroupOptions;
+
+    device.CreateComputePipeline(&csDesc);
+}
+
+// Test that creating a compute pipeline with basic shader module and pipeline layout and chained
+// DawnComputePipelineFullSubgroups succeeds.
+// Note that ValidationTest use Null backend, which will not actually validate the subgroup size.
+// The actual workgroup size validation is tested in End2End test for specific backend.
+TEST_F(ComputePipelineValidationTestWithSubgroupFeaturesEnabled,
+       Options_Requiring_Full_Subgroup_Success) {
+    auto computeModule = CreateShaderModule();
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.compute.module = computeModule;
+    csDesc.compute.entryPoint = "main";
+
+    wgpu::DawnComputePipelineFullSubgroups subgroupOptions;
+    subgroupOptions.requiresFullSubgroups = true;
+    csDesc.nextInChain = &subgroupOptions;
+
+    device.CreateComputePipeline(&csDesc);
+}
+
 // TODO(cwallez@chromium.org): Add a regression test for Disptach validation trying to acces the
 // input state.
 
-class ComputeValidationTest : public ValidationTest {
+class ComputeDispatchValidationTest : public ValidationTest {
   protected:
     void SetUp() override {
         ValidationTest::SetUp();
@@ -67,36 +171,36 @@ class ComputeValidationTest : public ValidationTest {
 };
 
 // Check that 1x1x1 dispatch is OK.
-TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_SmallestValid) {
+TEST_F(ComputeDispatchValidationTest, PerDimensionDispatchSizeLimits_SmallestValid) {
     TestDispatch(1, 1, 1);
 }
 
 // Check that the largest allowed dispatch is OK.
-TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_LargestValid) {
+TEST_F(ComputeDispatchValidationTest, PerDimensionDispatchSizeLimits_LargestValid) {
     const uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
     TestDispatch(max, max, max);
 }
 
 // Check that exceeding the maximum on the X dimension results in validation failure.
-TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_InvalidX) {
+TEST_F(ComputeDispatchValidationTest, PerDimensionDispatchSizeLimits_InvalidX) {
     const uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
     ASSERT_DEVICE_ERROR(TestDispatch(max + 1, 1, 1));
 }
 
 // Check that exceeding the maximum on the Y dimension results in validation failure.
-TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_InvalidY) {
+TEST_F(ComputeDispatchValidationTest, PerDimensionDispatchSizeLimits_InvalidY) {
     const uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
     ASSERT_DEVICE_ERROR(TestDispatch(1, max + 1, 1));
 }
 
 // Check that exceeding the maximum on the Z dimension results in validation failure.
-TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_InvalidZ) {
+TEST_F(ComputeDispatchValidationTest, PerDimensionDispatchSizeLimits_InvalidZ) {
     const uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
     ASSERT_DEVICE_ERROR(TestDispatch(1, 1, max + 1));
 }
 
 // Check that exceeding the maximum on all dimensions results in validation failure.
-TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_InvalidAll) {
+TEST_F(ComputeDispatchValidationTest, PerDimensionDispatchSizeLimits_InvalidAll) {
     const uint32_t max = GetSupportedLimits().limits.maxComputeWorkgroupsPerDimension;
     ASSERT_DEVICE_ERROR(TestDispatch(max + 1, max + 1, max + 1));
 }
