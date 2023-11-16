@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8011fb7_ec0c42d2",
+        "filename": "third_party/gn/webgpu-cts/BUILD.gn",
+        "patchSetId": 18
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T17:15:56Z",
+      "side": 1,
+      "message": "[Done](https://dawn-review.googlesource.com/c/dawn/+/161017)",
+      "parentUuid": "c8d1e090_7978c3f4",
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5400d5c9_73828727",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-11-16T16:57:39Z",
       "side": 1,
       "message": "stale comment?",
+      "range": {
+        "startLine": 262,
+        "startChar": 3,
+        "endLine": 262,
+        "endChar": 26
+      },
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d0f24c8c_603a49a2",
+        "filename": "tools/src/cmd/run-cts/chrome/cmd.go",
+        "patchSetId": 18
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T17:15:56Z",
+      "side": 1,
+      "message": "[Done](https://dawn-review.googlesource.com/c/dawn/+/161017)",
+      "parentUuid": "5400d5c9_73828727",
       "range": {
         "startLine": 262,
         "startChar": 3,
@@ -81,6 +123,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "62e3f1fc_25c1752e",
+        "filename": "tools/src/cmd/run-cts/common/builder.go",
+        "patchSetId": 18
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T17:15:56Z",
+      "side": 1,
+      "message": "[Done](https://dawn-review.googlesource.com/c/dawn/+/161017)",
+      "parentUuid": "067069bb_29fd9a84",
+      "range": {
+        "startLine": 124,
+        "startChar": 2,
+        "endLine": 124,
+        "endChar": 15
+      },
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cf02b24a_7d548e5c",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-11-16T16:57:39Z",
       "side": 1,
       "message": "I don\u0027t think the protocol will be happy with you sending a log like this here because it\u0027s strict about the ordering (unless you loosened it?)\n\nCould you instead Promise.reject(yourMessage + response.statusText) ?\nit will still (eventually) end up in the existing logs",
+      "range": {
+        "startLine": 126,
+        "startChar": 0,
+        "endLine": 126,
+        "endChar": 72
+      },
+      "revId": "fa8e88663e378665f992d4d1c798fcc98f7db553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d50ecd25_c950e9e7",
+        "filename": "webgpu-cts/test_runner.js",
+        "patchSetId": 18
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-16T17:15:56Z",
+      "side": 1,
+      "message": "[Done](https://dawn-review.googlesource.com/c/dawn/+/161017)",
+      "parentUuid": "cf02b24a_7d548e5c",
       "range": {
         "startLine": 126,
         "startChar": 0,
