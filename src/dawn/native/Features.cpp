@@ -263,6 +263,11 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "framebuffer_fetch.md",
       FeatureInfo::FeatureState::Experimental}},
+    {Feature::MemoryHeapInfo,
+     {"Support querying memory heap info from the device.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "memory_heap_info.md",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace

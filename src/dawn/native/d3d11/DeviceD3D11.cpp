@@ -566,6 +566,10 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
                                                         textureDescriptor);
 }
 
+size_t Device::QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const {
+    DAWN_UNREACHABLE();
+}
+
 bool Device::MayRequireDuplicationOfIndirectParameters() const {
     return true;
 }

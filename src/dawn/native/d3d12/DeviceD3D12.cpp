@@ -517,6 +517,53 @@ ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
     }
 }
 
+size_t Device::QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const {
+    const auto& deviceInfo = GetDeviceInfo();
+    if (info == nullptr) {
+        if (deviceInfo.isUMA) {
+            return 1;
+        } else {
+            return 2;
+        }
+    }
+
+    DXGI_QUERY_VIDEO_MEMORY_INFO videoMemoryInfo;
+    DAWN_CHECK(ToBackend(GetPhysicalDevice())
+                   ->GetHardwareAdapter()
+                   ->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_LOCAL, &videoMemoryInfo) ==
+               S_OK);
+
+    // https://microsoft.github.io/DirectX-Specs/d3d/D3D12GPUUploadHeaps.html describes
+    // the properties of D3D12 Default/Upload/Readback heaps.
+    if (deviceInfo.isUMA) {
+        if (deviceInfo.isCacheCoherentUMA) {
+            info[0].heapProperties =
+                wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+                wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
+            info[0].recommendedMaxSize = videoMemoryInfo.Budget;
+        } else {
+            info[0].heapProperties =
+                wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+                wgpu::HeapProperty::HostUncached | wgpu::HeapProperty::HostCached;
+        }
+        return 1;
+    } else {
+        info[0].heapProperties = wgpu::HeapProperty::DeviceLocal;
+        info[0].recommendedMaxSize = videoMemoryInfo.Budget;
+
+        DAWN_CHECK(ToBackend(GetPhysicalDevice())
+                       ->GetHardwareAdapter()
+                       ->QueryVideoMemoryInfo(0, DXGI_MEMORY_SEGMENT_GROUP_NON_LOCAL,
+                                              &videoMemoryInfo) == S_OK);
+        info[1].heapProperties = wgpu::HeapProperty::HostVisible |
+                                 wgpu::HeapProperty::HostCoherent |
+                                 wgpu::HeapProperty::HostUncached | wgpu::HeapProperty::HostCached;
+        info[1].recommendedMaxSize = videoMemoryInfo.Budget;
+
+        return 2;
+    }
+}
+
 MaybeError Device::CopyFromStagingToBufferImpl(BufferBase* source,
                                                uint64_t sourceOffset,
                                                BufferBase* destination,

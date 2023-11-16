@@ -546,6 +546,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
             EnableFeature(Feature::Depth32FloatStencil8);
         }
 
+        if (@available(macOS 10.12, iOS 16.0, *)) {
+            EnableFeature(Feature::MemoryHeapInfo);
+        }
+
         // Uses newTextureWithDescriptor::iosurface::plane which is available
         // on ios 11.0+ and macOS 11.0+
         if (@available(macOS 10.11, iOS 11.0, *)) {
