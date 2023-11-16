@@ -136,6 +136,7 @@ class Device final : public DeviceBase {
 
     ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsageImpl(
         const Surface* surface) const override;
+    size_t QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const override;
 
     GLenum GetBGRAInternalFormat(const OpenGLFunctions& gl) const;
     void DestroyImpl() override;

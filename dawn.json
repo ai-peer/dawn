@@ -1346,6 +1346,14 @@
                 "args": [
                     {"name": "surface", "type": "surface"}
                 ]
+            },
+            {
+                "name": "query memory heap info",
+                "tags": ["dawn", "native"],
+                "returns": "size_t",
+                "args": [
+                    {"name": "memory heap info", "type": "memory heap info", "annotation": "*"}
+                ]
             }
         ]
     },
@@ -1547,6 +1555,26 @@
                 "length": 9},
             {"name": "flip y", "type": "bool", "default": "false"},
             {"name": "rotation", "type": "external texture rotation", "default": "rotate 0 degrees"}
+        ]
+    },
+    "heap property": {
+        "category": "bitmask",
+        "tags": ["dawn", "native"],
+        "values": [
+            {"value": 0, "name": "undefined", "valid": false},
+            {"value": 1, "name": "device local"},
+            {"value": 2, "name": "host visible"},
+            {"value": 4, "name": "host coherent"},
+            {"value": 8, "name": "host cached"}
+        ]
+    },
+    "memory heap info": {
+        "category": "structure",
+        "extensible": "out",
+        "tags": ["dawn", "native"],
+        "members": [
+            {"name": "heap properties", "type": "heap property"},
+            {"name": "recommended max size", "type": "uint64_t"}
         ]
     },
     "shared texture memory": {
@@ -1920,6 +1948,7 @@
             {"value": 1023, "name": "multi planar render targets", "tags": ["dawn"]},
             {"value": 1024, "name": "multi planar format nv12a", "tags": ["dawn"]},
             {"value": 1025, "name": "framebuffer fetch", "tags": ["dawn"]},
+            {"value": 1026, "name": "memory heap info", "tags": ["dawn"]},
 
             {"value": 1100, "name": "shared texture memory vk dedicated allocation", "tags": ["dawn", "native"]},
             {"value": 1101, "name": "shared texture memory a hardware buffer", "tags": ["dawn", "native"]},
