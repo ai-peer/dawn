@@ -70,6 +70,24 @@
       "parentUuid": "2fecf403_0d734e98",
       "revId": "486aa3328a504054cddf144db647333a4b8502d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd5a20f4_43e6f052",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T19:58:29Z",
+      "side": 0,
+      "message": "Sure, I also find the first version of that a _lot_ more readable then the second version. Given the perfmon results are all over the map, do we have any evidence that makes a differnet? (perfmon goes from -15% to +12% so I don\u0027t know if it\u0027s just being wonky, or if it\u0027s really changing results all over the place)",
+      "parentUuid": "dbb825e0_19e23f4b",
+      "revId": "486aa3328a504054cddf144db647333a4b8502d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
