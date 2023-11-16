@@ -301,6 +301,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     TextureBase* APICreateTexture(const TextureDescriptor* descriptor);
 
     wgpu::TextureUsage APIGetSupportedSurfaceUsage(Surface* surface);
+    size_t APIQueryMemoryHeapInfo(MemoryHeapInfo* info);
 
     InternalPipelineStore* GetInternalPipelineStore();
 
@@ -522,6 +523,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     virtual ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsageImpl(
         const Surface* surface) const = 0;
+    virtual size_t QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const = 0;
 
     virtual MaybeError TickImpl() = 0;
     void FlushCallbackTaskQueue();
