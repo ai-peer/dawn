@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "573bdcd1_997a1e44",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T18:42:13Z",
+      "side": 1,
+      "message": "Both pure virtual seems good then.",
+      "parentUuid": "184d5a36_f1a4b3ed",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fa385ae3_9c4f2596",
         "filename": "src/tint/lang/core/ir/instruction.h",
         "patchSetId": 3
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Again, I can drop the default argument for both this and `Result()`, and make both explicit - if that\u0027s what you want.",
       "parentUuid": "fa385ae3_9c4f2596",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fda5667b_229fa918",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T18:42:13Z",
+      "side": 1,
+      "message": "Sure",
+      "parentUuid": "d846cdd6_a0f390d2",
       "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e76b545_3de09244",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T18:42:13Z",
+      "side": 1,
+      "message": "Did you check the various callers that they won\u0027t do something different with this change?",
+      "parentUuid": "da155db5_c831351d",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07ded2eb_f390ee66",
         "filename": "src/tint/lang/core/ir/module.cc",
         "patchSetId": 3
@@ -172,6 +226,24 @@
       "side": 1,
       "message": "Really? Isn\u0027t **number of results equals 1** about as explicit as you could possibly be?",
       "parentUuid": "07ded2eb_f390ee66",
+      "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "286dc9e3_2cf24e11",
+        "filename": "src/tint/lang/core/ir/module.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T18:42:13Z",
+      "side": 1,
+      "message": "the condition is `number of results _NOT_ equal to 1` so given you got it backewards, no it could be more explicit, heh.",
+      "parentUuid": "58fea24f_97c76226",
       "revId": "e4a99a6d8b3f97b9fcc5d3c781cc4dcfdcc78bf3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

@@ -34,6 +34,24 @@
       "parentUuid": "67e7b2e3_c02f2a57",
       "revId": "486aa3328a504054cddf144db647333a4b8502d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fecf403_0d734e98",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-16T18:42:13Z",
+      "side": 0,
+      "message": "But in the above, they don\u0027t need to be virtual anymore, there is one in the base class.",
+      "parentUuid": "9d052a08_375a9be7",
+      "revId": "486aa3328a504054cddf144db647333a4b8502d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
