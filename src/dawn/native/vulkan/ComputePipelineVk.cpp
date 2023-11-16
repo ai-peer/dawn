@@ -81,13 +81,31 @@ MaybeError ComputePipeline::Initialize() {
     createInfo.stage.module = moduleAndSpirv.module;
     createInfo.stage.pName = moduleAndSpirv.remappedEntryPoint;
 
+    if (IsFullSubgroupsRequired()) {
+        DAWN_INVALID_IF(
+            !device->HasFeature(Feature::ChromiumExperimentalSubgroups),
+            "device must enable ChromiumExperimentalSubgroups feature to require full subgroups");
+        uint32_t maxSubgroupSize = device->GetLimits().experimentalSubgroupLimits.maxSubgroupSize;
+        DAWN_INVALID_IF(moduleAndSpirv.workgroupSize.width % maxSubgroupSize != 0,
+                        "the X dimension of the workgroup size (%d) must be a multiple of "
+                        "maxSubgroupSize (%d) if full subgroups required in compute pipeline",
+                        moduleAndSpirv.workgroupSize.width, maxSubgroupSize);
+        // Vulkan device that support ChromiumExperimentalSubgroups must support
+        // computeFullSubgroups.
+        DAWN_ASSERT(device->GetDeviceInfo().subgroupSizeControlFeatures.computeFullSubgroups);
+        createInfo.stage.flags |= VK_PIPELINE_SHADER_STAGE_CREATE_REQUIRE_FULL_SUBGROUPS_BIT |
+                                  VK_PIPELINE_SHADER_STAGE_CREATE_ALLOW_VARYING_SUBGROUP_SIZE_BIT;
+    }
+
     createInfo.stage.pSpecializationInfo = nullptr;
 
     PNextChainBuilder stageExtChain(&createInfo.stage);
 
     VkPipelineShaderStageRequiredSubgroupSizeCreateInfoEXT subgroupSizeInfo = {};
     uint32_t computeSubgroupSize = device->GetComputeSubgroupSize();
-    if (computeSubgroupSize != 0u) {
+    // If experimental full subgroups is required, pipeline is created with varying subgroup size
+    // enabled, and thus do not use explicit subgroup size control.
+    if (computeSubgroupSize != 0u && !IsFullSubgroupsRequired()) {
         DAWN_ASSERT(device->GetDeviceInfo().HasExt(DeviceExt::SubgroupSizeControl));
         subgroupSizeInfo.requiredSubgroupSize = computeSubgroupSize;
         stageExtChain.Add(

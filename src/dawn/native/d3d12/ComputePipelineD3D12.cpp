@@ -79,6 +79,18 @@ MaybeError ComputePipeline::Initialize() {
                                                     ToBackend(GetLayout()), compileFlags));
     d3dDesc.CS = {compiledShader.shaderBlob.Data(), compiledShader.shaderBlob.Size()};
 
+    // Validate full subgroup if required.
+    if (IsFullSubgroupsRequired()) {
+        DAWN_INVALID_IF(
+            !device->HasFeature(Feature::ChromiumExperimentalSubgroups),
+            "device must enable ChromiumExperimentalSubgroups feature to require full subgroups");
+        uint32_t maxSubgroupSize = device->GetLimits().experimentalSubgroupLimits.maxSubgroupSize;
+        DAWN_INVALID_IF(compiledShader.workgroupSize.width % maxSubgroupSize != 0,
+                        "the X dimension of the workgroup size (%d) must be a multiple of "
+                        "maxSubgroupSize (%d) if full subgroups required in compute pipeline",
+                        compiledShader.workgroupSize.width, maxSubgroupSize);
+    }
+
     StreamIn(&mCacheKey, d3dDesc, ToBackend(GetLayout())->GetRootSignatureBlob());
 
     // Try to see if we have anything in the blob cache.
