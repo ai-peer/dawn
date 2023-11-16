@@ -136,6 +136,7 @@ class DeviceMock : public DeviceBase {
                 GetSupportedSurfaceUsageImpl,
                 (const Surface*),
                 (const, override));
+    MOCK_METHOD(size_t, QueryMemoryHeapInfoImpl, (MemoryHeapInfo*));
 
     MOCK_METHOD(MaybeError, TickImpl, (), (override));
 
