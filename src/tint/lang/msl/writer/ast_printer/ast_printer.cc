@@ -279,7 +279,6 @@ bool ASTPrinter::Generate() {
                 wgsl::Extension::kChromiumDisableUniformityAnalysis,
                 wgsl::Extension::kChromiumExperimentalDp4A,
                 wgsl::Extension::kChromiumExperimentalFullPtrParameters,
-                wgsl::Extension::kChromiumExperimentalReadWriteStorageTexture,
                 wgsl::Extension::kChromiumExperimentalSubgroups,
                 wgsl::Extension::kChromiumExperimentalFramebufferFetch,
                 wgsl::Extension::kChromiumInternalDualSourceBlending,
