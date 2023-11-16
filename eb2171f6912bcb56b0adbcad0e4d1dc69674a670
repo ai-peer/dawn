@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b64d341_89afd087",
+        "filename": "src/tint/lang/core/ir/switch.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T19:41:59Z",
+      "side": 1,
+      "message": "They need to be removed for the CPPtr change. Reverted in this change.",
+      "parentUuid": "f1636d8d_72aefe14",
+      "revId": "eb2171f6912bcb56b0adbcad0e4d1dc69674a670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "619aea93_db847f2b",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-16T16:18:51Z",
       "side": 1,
       "message": "These are both better handled by the builder (they both forget to set the blocks parent pointer to the switch)",
+      "revId": "eb2171f6912bcb56b0adbcad0e4d1dc69674a670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a03061bc_7e593a18",
+        "filename": "src/tint/lang/core/ir/switch.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-16T19:41:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "619aea93_db847f2b",
       "revId": "eb2171f6912bcb56b0adbcad0e4d1dc69674a670",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
