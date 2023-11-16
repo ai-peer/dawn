@@ -234,6 +234,8 @@ class Device final : public d3d::Device {
     ResultOrError<Ref<SharedFenceBase>> ImportSharedFenceImpl(
         const SharedFenceDescriptor* descriptor) override;
 
+    size_t QueryMemoryHeapInfoImpl(MemoryHeapInfo* info) const override;
+
     void DestroyImpl() override;
 
     MaybeError CheckDebugLayerAndGenerateErrors();
