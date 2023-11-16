@@ -27,6 +27,7 @@
 
 #include "dawn/native/ComputePipeline.h"
 
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/ObjectType_autogen.h"
@@ -35,8 +36,15 @@ namespace dawn::native {
 
 MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
                                              const ComputePipelineDescriptor* descriptor) {
-    if (descriptor->nextInChain != nullptr) {
-        return DAWN_VALIDATION_ERROR("nextInChain must be nullptr.");
+    UnpackedComputePipelineDescriptorChain unpackedChain;
+    DAWN_TRY_ASSIGN(unpackedChain, ValidateAndUnpackChain(descriptor));
+    auto& experimentalSubgroupOptions =
+        std::get<const DawnComputePipelineDescriptorExperimentalSubgroupOptions*>(unpackedChain);
+    if (experimentalSubgroupOptions &&
+        !device->HasFeature(Feature::ChromiumExperimentalSubgroups)) {
+        return DAWN_VALIDATION_ERROR(
+            "using DawnComputePipelineDescriptorExperimentalSubgroupOptions require enabling "
+            "feature ChromiumExperimentalSubgroups.");
     }
 
     if (descriptor->layout != nullptr) {
@@ -61,12 +69,26 @@ ComputePipelineBase::ComputePipelineBase(DeviceBase* device,
           descriptor->layout,
           descriptor->label,
           {{SingleShaderStage::Compute, descriptor->compute.module, descriptor->compute.entryPoint,
-            descriptor->compute.constantCount, descriptor->compute.constants}}) {
+            descriptor->compute.constantCount, descriptor->compute.constants}}),
+      mExperimentalRequireFullSubgroups(false) {
     SetContentHash(ComputeContentHash());
     GetObjectTrackingList()->Track(this);
 
+    auto unpackedChainOrError = ValidateAndUnpackChain(descriptor);
+    // The compute pipeline descriptor chain should have been validated in
+    // ValidateComputePipelineDescriptor.
+    DAWN_ASSERT(unpackedChainOrError.IsSuccess());
+    UnpackedComputePipelineDescriptorChain unpackedChain = unpackedChainOrError.AcquireSuccess();
+
+    auto& experimentalSubgroupOptions =
+        std::get<const DawnComputePipelineDescriptorExperimentalSubgroupOptions*>(unpackedChain);
+    if (experimentalSubgroupOptions) {
+        mExperimentalRequireFullSubgroups = experimentalSubgroupOptions->requireFullSubgroups;
+    }
+
     // Initialize the cache key to include the cache type and device information.
-    StreamIn(&mCacheKey, CacheKey::Type::ComputePipeline, device->GetCacheKey());
+    StreamIn(&mCacheKey, CacheKey::Type::ComputePipeline, mExperimentalRequireFullSubgroups,
+             device->GetCacheKey());
 }
 
 ComputePipelineBase::ComputePipelineBase(DeviceBase* device,
@@ -78,6 +100,10 @@ ComputePipelineBase::~ComputePipelineBase() = default;
 
 void ComputePipelineBase::DestroyImpl() {
     Uncache();
+}
+
+bool ComputePipelineBase::IsExperimentalRequireFullSubgroupsRequired() const {
+    return mExperimentalRequireFullSubgroups;
 }
 
 // static
@@ -102,7 +128,8 @@ ObjectType ComputePipelineBase::GetType() const {
 
 bool ComputePipelineBase::EqualityFunc::operator()(const ComputePipelineBase* a,
                                                    const ComputePipelineBase* b) const {
-    return PipelineBase::EqualForCache(a, b);
+    return PipelineBase::EqualForCache(a, b) && (a->IsExperimentalRequireFullSubgroupsRequired() ==
+                                                 b->IsExperimentalRequireFullSubgroupsRequired());
 }
 
 }  // namespace dawn::native
