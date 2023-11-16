@@ -25,31 +25,45 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D11_DEVICEINFOD3D11_H_
-#define SRC_DAWN_NATIVE_D3D11_DEVICEINFOD3D11_H_
+#include <vector>
 
-#include "dawn/native/Error.h"
-#include "dawn/native/PerStage.h"
-#include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/tests/DawnTest.h"
 
-namespace dawn::native::d3d11 {
+namespace dawn {
+namespace {
 
-class PhysicalDevice;
+class MemoryHeapPropertiesTest : public DawnTest {};
 
-struct DeviceInfo {
-    bool isUMA;
+// Test that it is possible to query the memory, and it is populated with valid enums.
+TEST_P(MemoryHeapPropertiesTest, GetMemoryHeapProperties) {
+    DAWN_TEST_UNSUPPORTED_IF(!adapter.HasFeature(wgpu::FeatureName::AdapterPropertiesMemoryHeaps));
 
-    // shaderModel indicates the maximum supported shader model, for example, the value 62
-    // indicates that current driver supports the maximum shader model is shader model 6.2.
-    uint32_t shaderModel;
-    PerStage<std::wstring> shaderProfiles;
-    bool supportsSharedResourceCapabilityTier2;
-    size_t dedicatedVideoMemory;
-    size_t sharedSystemMemory;
-};
+    wgpu::AdapterProperties properties;
+    wgpu::AdapterPropertiesMemoryHeaps memoryHeapProperties;
+    properties.nextInChain = &memoryHeapProperties;
 
-ResultOrError<DeviceInfo> GatherDeviceInfo(IDXGIAdapter3* adapter,
-                                           const ComPtr<ID3D11Device>& device);
-}  // namespace dawn::native::d3d11
+    adapter.GetProperties(&properties);
 
-#endif  // SRC_DAWN_NATIVE_D3D11_DEVICEINFOD3D11_H_
+    EXPECT_GT(memoryHeapProperties.heapCount, 0u);
+    for (size_t i = 0; i < memoryHeapProperties.heapCount; ++i) {
+        EXPECT_GT(memoryHeapProperties.heapInfo[i].size, 0ull);
+
+        constexpr wgpu::HeapProperty kValidProps =
+            wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+            wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostUncached |
+            wgpu::HeapProperty::HostCached;
+
+        EXPECT_EQ(memoryHeapProperties.heapInfo[i].properties & ~kValidProps, 0u);
+    }
+}
+
+DAWN_INSTANTIATE_TEST(MemoryHeapPropertiesTest,
+                      D3D11Backend(),
+                      D3D12Backend(),
+                      MetalBackend(),
+                      OpenGLBackend(),
+                      OpenGLESBackend(),
+                      VulkanBackend());
+
+}  // anonymous namespace
+}  // namespace dawn

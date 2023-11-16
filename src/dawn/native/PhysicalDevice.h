@@ -106,6 +106,9 @@ class PhysicalDeviceBase : public RefCounted {
     FeatureValidationResult ValidateFeatureSupportedWithToggles(wgpu::FeatureName feature,
                                                                 const TogglesState& toggles) const;
 
+    virtual void PopulateMemoryHeapInfo(
+        AdapterPropertiesMemoryHeaps* memoryHeapProperties) const = 0;
+
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
     std::string mVendorName;
