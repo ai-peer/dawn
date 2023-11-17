@@ -263,6 +263,11 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "framebuffer_fetch.md",
       FeatureInfo::FeatureState::Experimental}},
+    {Feature::BufferMappableTier2,
+     {"Support mapping all kind of buffers.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "buffer_mappable_tiers.md",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace
