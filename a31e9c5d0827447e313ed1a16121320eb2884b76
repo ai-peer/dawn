@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ca70a2_c2fa0dff",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T15:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d69ab101_02cec5b5",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 4
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d3848656_f51219fd",
@@ -71,6 +95,24 @@
       "writtenOn": "2023-11-17T03:45:45Z",
       "side": 1,
       "message": "this if() seems to always be true since `!passed`",
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ae32c0f9_a9f25fe4",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T15:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d3848656_f51219fd",
       "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -94,6 +136,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4567638e_2192aae9",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T15:55:28Z",
+      "side": 1,
+      "message": "maybe, but I don\u0027t want overrides of WaitForQueueSerial to be required to call CheckPassedSerials inside. I feel like implementing the interface shouldn\u0027t require you to call back into the interface you\u0027re implementing. Could make a wrapper function but seems not worth it since this is the only caller (currently)\n\nI ended up restructuring the conditions slightly so it should be simpler now",
+      "parentUuid": "fb7ae63d_e4343b3b",
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "71a972a4_cf1d5a2b",
         "filename": "src/dawn/native/EventManager.cpp",
         "patchSetId": 15
@@ -105,6 +165,24 @@
       "writtenOn": "2023-11-17T03:45:45Z",
       "side": 1,
       "message": "nit: const, I think",
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "912d59a9_fcbcd3e9",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T15:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "71a972a4_cf1d5a2b",
       "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -122,6 +200,30 @@
       "writtenOn": "2023-11-17T03:45:45Z",
       "side": 1,
       "message": "The \"completion\" wording is a little confusing since a Future is Ready when its CompletionSystemEvent is Complete.\n\nThis is consistent with \"completionSerial\" though so let\u0027s keep this and maybe file a bug to come up with a new word for future \"completion\"?",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff284540_a1b18640",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T15:55:28Z",
+      "side": 1,
+      "message": "I realized we don\u0027t have a `SystemEvent` class yet so I renamed it to that and moved it to SystemEvent.h/cpp. Seems good for now since this is the whole event which encapsulates both the sender/receiver. With some extra details that we make stuff lazily and its refcounted.",
+      "parentUuid": "5590f06b_009dcc3c",
       "range": {
         "startLine": 103,
         "startChar": 11,
@@ -155,6 +257,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ba6753f_b5272e56",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T15:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3766d85d_a21f22de",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 92
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d1e189e7_a375d9f7",
@@ -168,6 +294,30 @@
       "writtenOn": "2023-11-17T03:45:45Z",
       "side": 1,
       "message": "nit: could this comment be a static_assert instead?",
+      "range": {
+        "startLine": 67,
+        "startChar": 59,
+        "endLine": 68,
+        "endChar": 69
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b857648f_beb7c8fb",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T15:55:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1e189e7_a375d9f7",
       "range": {
         "startLine": 67,
         "startChar": 59,
