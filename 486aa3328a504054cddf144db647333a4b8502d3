@@ -88,6 +88,24 @@
       "parentUuid": "dbb825e0_19e23f4b",
       "revId": "486aa3328a504054cddf144db647333a4b8502d3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b2b3c55_e39af322",
+        "filename": "src/tint/lang/core/ir/instruction.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-17T10:25:42Z",
+      "side": 0,
+      "message": "I gave perfmon a good updating. The numbers are still noisy, but all the IR benchmarks appear to be showing a positive performance gain.",
+      "parentUuid": "bd5a20f4_43e6f052",
+      "revId": "486aa3328a504054cddf144db647333a4b8502d3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
