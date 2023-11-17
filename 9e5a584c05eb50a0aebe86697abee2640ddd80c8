@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f63ebd37_54b4085b",
+        "filename": "src/tint/lang/core/ir/constant.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-17T20:16:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c68740f7_45bb3f60",
+      "revId": "9e5a584c05eb50a0aebe86697abee2640ddd80c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "570c88f0_94667b9c",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-16T16:25:05Z",
       "side": 1,
       "message": "None of these seem to be used?",
+      "revId": "9e5a584c05eb50a0aebe86697abee2640ddd80c8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce20027a_209c195b",
+        "filename": "src/tint/lang/core/ir/value.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-17T20:16:47Z",
+      "side": 1,
+      "message": "They\u0027re used in a later CL.",
+      "parentUuid": "570c88f0_94667b9c",
       "revId": "9e5a584c05eb50a0aebe86697abee2640ddd80c8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
