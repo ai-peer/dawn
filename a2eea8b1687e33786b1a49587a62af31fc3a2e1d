@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "886fe448_c1c19bdc",
+        "filename": "src/dawn/samples/android/common/build.gradle",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-17T19:37:18Z",
+      "side": 1,
+      "message": "I don\u0027t think this is needed. The build time will stay less irrespective of this as you have linked it to Dawn\u0027s root Cmake (lIne 48). Dawn library gets built only when common gets built, hence reducing the build time.",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "a2eea8b1687e33786b1a49587a62af31fc3a2e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
