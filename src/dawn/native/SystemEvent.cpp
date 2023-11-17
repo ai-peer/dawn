@@ -69,8 +69,7 @@ bool SystemEventPipeSender::IsValid() const {
 void SystemEventPipeSender::Signal() && {
     DAWN_ASSERT(mPrimitive.IsValid());
 #if DAWN_PLATFORM_IS(WINDOWS)
-    // This is not needed on Windows yet. It's implementable using SetEvent().
-    DAWN_UNREACHABLE();
+    DAWN_CHECK(SetEvent(AsHANDLE(mPrimitive)));
 #elif DAWN_PLATFORM_IS(POSIX)
     // Send one byte to signal the receiver
     char zero[1] = {0};
@@ -86,8 +85,21 @@ void SystemEventPipeSender::Signal() && {
 
 std::pair<SystemEventPipeSender, SystemEventReceiver> CreateSystemEventPipe() {
 #if DAWN_PLATFORM_IS(WINDOWS)
-    // This is not needed on Windows yet. It's implementable using CreateEvent().
-    DAWN_UNREACHABLE();
+    HANDLE eventDup;
+    HANDLE event = CreateEvent(nullptr, /*bManualReset=*/true, /*bInitialState=*/false, nullptr);
+
+    DAWN_CHECK(event != nullptr);
+    DAWN_CHECK(DuplicateHandle(GetCurrentProcess(), event, GetCurrentProcess(), &eventDup, 0, FALSE,
+                               DUPLICATE_SAME_ACCESS));
+    DAWN_CHECK(eventDup != nullptr);
+
+    SystemEventReceiver receiver;
+    receiver.mPrimitive = SystemEventPrimitive{event};
+
+    SystemEventPipeSender sender;
+    sender.mPrimitive = SystemEventPrimitive{eventDup};
+
+    return std::make_pair(std::move(sender), std::move(receiver));
 #elif DAWN_PLATFORM_IS(POSIX)
     int pipeFds[2];
     int status = pipe(pipeFds);

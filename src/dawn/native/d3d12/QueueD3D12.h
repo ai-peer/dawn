@@ -28,8 +28,10 @@
 #ifndef SRC_DAWN_NATIVE_D3D12_QUEUED3D12_H_
 #define SRC_DAWN_NATIVE_D3D12_QUEUED3D12_H_
 
+#include "dawn/common/MutexProtected.h"
+#include "dawn/common/SerialMap.h"
 #include "dawn/native/Queue.h"
-
+#include "dawn/native/SystemEvent.h"
 #include "dawn/native/d3d12/CommandRecordingContext.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
@@ -52,8 +54,12 @@ class Queue final : public QueueBase {
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
 
+    ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override;
+
     // Dawn API
     void SetLabelImpl() override;
+
+    MutexProtected<SerialMap<ExecutionSerial, SystemEventReceiver>> mSystemEventReceivers;
 };
 
 }  // namespace dawn::native::d3d12
