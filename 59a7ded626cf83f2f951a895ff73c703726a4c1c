@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d83d4b1b_996ec51d",
+        "filename": "src/tint/lang/spirv/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-17T10:19:30Z",
+      "side": 1,
+      "message": "Note, this will collide with https://dawn-review.googlesource.com/c/dawn/+/161005",
+      "range": {
+        "startLine": 840,
+        "startChar": 33,
+        "endLine": 840,
+        "endChar": 43
+      },
+      "revId": "59a7ded626cf83f2f951a895ff73c703726a4c1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
