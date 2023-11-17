@@ -664,7 +664,7 @@ DAWN_INSTANTIATE_PREFIXED_TEST_P(Legacy,
 
 DAWN_INSTANTIATE_PREFIXED_TEST_P(Future,
                                  BufferMappingTests,
-                                 {MetalBackend(), VulkanBackend()},
+                                 {D3D11Backend(), D3D12Backend(), MetalBackend(), VulkanBackend()},
                                  std::initializer_list<std::optional<wgpu::CallbackMode>>{
                                      std::nullopt, wgpu::CallbackMode::WaitAnyOnly,
                                      wgpu::CallbackMode::AllowProcessEvents,
@@ -876,7 +876,7 @@ DAWN_INSTANTIATE_PREFIXED_TEST_P(Legacy,
 
 DAWN_INSTANTIATE_PREFIXED_TEST_P(Future,
                                  BufferMappingCallbackTests,
-                                 {MetalBackend(), VulkanBackend()},
+                                 {D3D11Backend(), D3D12Backend(), MetalBackend(), VulkanBackend()},
                                  std::initializer_list<std::optional<wgpu::CallbackMode>>{
                                      std::nullopt, wgpu::CallbackMode::WaitAnyOnly,
                                      wgpu::CallbackMode::AllowProcessEvents,
