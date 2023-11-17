@@ -16,6 +16,149 @@
       "message": "I\u0027ve reworked this quite a bit - PTAL!",
       "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d69ab101_02cec5b5",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 1,
+      "message": "nit: Comment what this bool means (especially what its value will be when there\u0027s a timeout)",
+      "range": {
+        "startLine": 98,
+        "startChar": 0,
+        "endLine": 98,
+        "endChar": 4
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3848656_f51219fd",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 118,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 1,
+      "message": "this if() seems to always be true since `!passed`",
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb7ae63d_e4343b3b",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 1,
+      "message": "Should WaitForQueueSerial do this implicitly? This would change the logic to:\n\n```\nif (completedSerial \u003c waitSerial) {\n  if (timeout \u003e 0) {\n    WaitForQueueSerial\n  } else {\n    CheckPassedSerials\n  }\n}\n```",
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "71a972a4_cf1d5a2b",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 1,
+      "message": "nit: const, I think",
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5590f06b_009dcc3c",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 1,
+      "message": "The \"completion\" wording is a little confusing since a Future is Ready when its CompletionSystemEvent is Complete.\n\nThis is consistent with \"completionSerial\" though so let\u0027s keep this and maybe file a bug to come up with a new word for future \"completion\"?",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 19
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3766d85d_a21f22de",
+        "filename": "src/dawn/native/EventManager.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 1,
+      "message": "nit: maybe this could be optional\u003cpair\u003e instead of pair\u003coptional, optional\u003e. When the sender is signalled (early or not), this sender can just be default-initialized (giving it an invalid handle, making it not signalable).\n\nThere are only 3 possible states IIUC:\n( nullopt, nullopt )\n( nullopt, nondefault )\n( nondefault, nondefault )\nand this would reduce the number of representable states from 9:\n( nullopt or default or nondefault , nullopt or default or nondefault )\nto 5:\nnullopt or ( default or nondefault , default or nondefault )",
+      "range": {
+        "startLine": 113,
+        "startChar": 8,
+        "endLine": 113,
+        "endChar": 92
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1e189e7_a375d9f7",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 1,
+      "message": "nit: could this comment be a static_assert instead?",
+      "range": {
+        "startLine": 67,
+        "startChar": 59,
+        "endLine": 68,
+        "endChar": 69
+      },
+      "revId": "a31e9c5d0827447e313ed1a16121320eb2884b76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

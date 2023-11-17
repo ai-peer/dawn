@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "406af37f_a6d0fcb1",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 15
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-17T03:45:45Z",
+      "side": 0,
+      "message": "This may still be needed. IIRC I needed it because the Metal backend\u0027s mCompletedSerial doesn\u0027t get flushed to kMaxExecutionSerial on device loss?",
+      "range": {
+        "startLine": 107,
+        "startChar": 11,
+        "endLine": 109,
+        "endChar": 36
+      },
+      "revId": "442f3d006264d18688e166612aad9a2a5b210685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
