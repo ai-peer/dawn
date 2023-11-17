@@ -70,6 +70,30 @@
       },
       "revId": "b701da0a120ba0181c9526b703c11aa4fd81910f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a1dfb49_cff94b27",
+        "filename": "src/dawn/native/vulkan/BackendVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-11-17T18:41:56Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "77b097a7_2fd8f6ea",
+      "range": {
+        "startLine": 148,
+        "startChar": 18,
+        "endLine": 148,
+        "endChar": 28
+      },
+      "revId": "b701da0a120ba0181c9526b703c11aa4fd81910f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
