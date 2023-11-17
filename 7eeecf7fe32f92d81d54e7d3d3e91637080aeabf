@@ -105,6 +105,24 @@
       "parentUuid": "a27c6001_5816994a",
       "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "248cab50_3cb3cf9c",
+        "filename": "test/tint/bug/tint/2100.wgsl.expected.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-17T10:16:56Z",
+      "side": 1,
+      "message": "Let\u0027s just replace them with the IR versions when the trial is over.",
+      "parentUuid": "378b495d_ee4c438b",
+      "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
