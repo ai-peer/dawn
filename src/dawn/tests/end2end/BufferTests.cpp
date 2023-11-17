@@ -1170,5 +1170,78 @@ DAWN_INSTANTIATE_TEST(BufferNoSuballocationTests,
                       OpenGLESBackend({"disable_resource_suballocation"}),
                       VulkanBackend({"disable_resource_suballocation"}));
 
+class BufferMappableTier2Tests : public BufferMappingTests {
+  protected:
+    void SetUp() override {
+        BufferMappingTests::SetUp();
+
+        DAWN_TEST_UNSUPPORTED_IF(UsesWire());
+        // Skip all tests if the BufferMappableTier2 feature is not supported.
+        DAWN_TEST_UNSUPPORTED_IF(!SupportsFeatures({wgpu::FeatureName::BufferMappableTier2}));
+    }
+
+    std::vector<wgpu::FeatureName> GetRequiredFeatures() override {
+        std::vector<wgpu::FeatureName> requiredFeatures = {};
+        if (!UsesWire() && SupportsFeatures({wgpu::FeatureName::BufferMappableTier2})) {
+            requiredFeatures.push_back(wgpu::FeatureName::BufferMappableTier2);
+        }
+        return requiredFeatures;
+    }
+
+    static constexpr wgpu::BufferUsage kUsages[] = {
+        wgpu::BufferUsage::CopySrc,  wgpu::BufferUsage::CopyDst,      wgpu::BufferUsage::Index,
+        wgpu::BufferUsage::Vertex,   wgpu::BufferUsage::Uniform,      wgpu::BufferUsage::Storage,
+        wgpu::BufferUsage::Indirect, wgpu::BufferUsage::QueryResolve,
+    };
+};
+
+// Test that the map read for any kind of buffer works
+TEST_P(BufferMappableTier2Tests, MapReadWithAnyUsage) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+
+    for (const auto otherUsage : kUsages) {
+        descriptor.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst | otherUsage;
+        wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+        uint32_t myData = 0x01020304;
+        constexpr size_t kSize = sizeof(myData);
+        queue.WriteBuffer(buffer, 0, &myData, kSize);
+
+        MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 4);
+        CheckMapping(buffer.GetConstMappedRange(), &myData, kSize);
+        CheckMapping(buffer.GetConstMappedRange(0, kSize), &myData, kSize);
+        buffer.Unmap();
+    }
+}
+
+// Test that the map write for any kind of buffer works
+TEST_P(BufferMappableTier2Tests, MapWriteWithAnyUsage) {
+    wgpu::BufferDescriptor descriptor;
+    descriptor.size = 4;
+
+    for (const auto otherUsage : kUsages) {
+        descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc | otherUsage;
+        wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
+
+        uint32_t myData = 2934875;
+        MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 4);
+        ASSERT_NE(nullptr, buffer.GetMappedRange());
+        ASSERT_NE(nullptr, buffer.GetConstMappedRange());
+        memcpy(buffer.GetMappedRange(), &myData, sizeof(myData));
+        buffer.Unmap();
+
+        EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
+    }
+}
+
+DAWN_INSTANTIATE_TEST(BufferMappableTier2Tests,
+                      D3D11Backend({"disable_resource_suballocation"}),
+                      D3D12Backend({"disable_resource_suballocation"}),
+                      MetalBackend({"disable_resource_suballocation"}),
+                      OpenGLBackend({"disable_resource_suballocation"}),
+                      OpenGLESBackend({"disable_resource_suballocation"}),
+                      VulkanBackend({"disable_resource_suballocation"}));
+
 }  // anonymous namespace
 }  // namespace dawn

@@ -54,6 +54,7 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_SharedFenceVkSemaphoreZirconHandle:
         case WGPUFeatureName_SharedFenceDXGISharedHandle:
         case WGPUFeatureName_SharedFenceMTLSharedEvent:
+        case WGPUFeatureName_BufferMappableTier2:
             return false;
         case WGPUFeatureName_Depth32FloatStencil8:
         case WGPUFeatureName_TimestampQuery:
@@ -85,6 +86,7 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_PixelLocalStorageNonCoherent:
         case WGPUFeatureName_Norm16TextureFormats:
         case WGPUFeatureName_FramebufferFetch:
+        case WGPUFeatureName_BufferMappableTier1:
             return true;
     }
 
