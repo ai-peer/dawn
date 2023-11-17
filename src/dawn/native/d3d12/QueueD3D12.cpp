@@ -27,6 +27,8 @@
 
 #include "dawn/native/d3d12/QueueD3D12.h"
 
+#include <utility>
+
 #include "dawn/common/Math.h"
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
@@ -88,6 +90,41 @@ void Queue::ForceEventualFlushOfCommands() {
 
 MaybeError Queue::WaitForIdleForDestruction() {
     return ToBackend(GetDevice())->WaitForIdleForDestruction();
+}
+
+ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    ExecutionSerial completedSerial = GetDevice()->GetCompletedCommandSerial();
+    if (serial <= completedSerial) {
+        return true;
+    }
+
+    auto receiver = mSystemEventReceivers->TakeOne(serial);
+    if (!receiver) {
+        // Anytime we may create an event, clear out any completed receivers so the list doesn't
+        // grow forever.
+        mSystemEventReceivers->ClearUpTo(serial);
+
+        HANDLE fenceEvent =
+            ::CreateEvent(nullptr, /*bManualReset=*/true, /*bInitialState=*/false, nullptr);
+        DAWN_INVALID_IF(fenceEvent == nullptr, "CreateEvent failed");
+
+        ToBackend(GetDevice())
+            ->GetD3D12Fence()
+            ->SetEventOnCompletion(static_cast<uint64_t>(serial), fenceEvent);
+
+        *receiver = SystemEventReceiver{SystemEventPrimitive{event}};
+    }
+
+    bool ready = false;
+    std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
+        {{*receiver, &ready}}};
+    bool didComplete = WaitAnySystemEvent(events.begin(), events.end(), timeout);
+    if (!didComplete) {
+        // Return the SystemEventReceiver to the pool of receivers so it can be re-waited in the
+        // future.
+        mSystemEventReceivers->Enqueue(std::move(*receiver), serial);
+    }
+    return didComplete;
 }
 
 void Queue::SetLabelImpl() {
