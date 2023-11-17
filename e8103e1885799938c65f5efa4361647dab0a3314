@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e88b2d2_468cfda7",
+        "filename": "src/dawn/samples/android/chellotriangle/build.gradle",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-17T19:38:13Z",
+      "side": 1,
+      "message": "Resolved by Melih in the next patch. Closing this now.",
+      "parentUuid": "86cf826e_4f3db840",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 5
+      },
+      "revId": "e8103e1885799938c65f5efa4361647dab0a3314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5b0e1eac_69ed860c",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-15T10:52:47Z",
       "side": 1,
       "message": "Same for this? Seems like Line 18 and Line 46 serve the same purpose?",
+      "range": {
+        "startLine": 46,
+        "startChar": 4,
+        "endLine": 51,
+        "endChar": 5
+      },
+      "revId": "e8103e1885799938c65f5efa4361647dab0a3314",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbdf5057_dd7f4d73",
+        "filename": "src/dawn/samples/android/cpphellotriangle/build.gradle",
+        "patchSetId": 9
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-17T19:38:13Z",
+      "side": 1,
+      "message": "Resolved by Melih in the next patch. Closing this now.",
+      "parentUuid": "5b0e1eac_69ed860c",
       "range": {
         "startLine": 46,
         "startChar": 4,
