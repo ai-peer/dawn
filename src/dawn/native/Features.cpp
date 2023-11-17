@@ -263,6 +263,18 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "framebuffer_fetch.md",
       FeatureInfo::FeatureState::Experimental}},
+    {Feature::BufferMapTier1,
+     {"Support creating all kinds of buffers except index buffers with MapRead or MapWrite usage. "
+      "MapRead and MapWrite usages are not allowed to be included together.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "buffer_map_tiers.md",
+      FeatureInfo::FeatureState::Experimental}},
+    {Feature::BufferMapTier2,
+     {"Support creating all kinds of buffers with MapRead or MapWrite usage. MapRead and MapWrite "
+      "usages are not allowed to be included together.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
+      "buffer_map_tiers.md",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace

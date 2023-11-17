@@ -608,6 +608,16 @@ class PhysicalDevice : public PhysicalDeviceBase {
         EnableFeature(Feature::Norm16TextureFormats);
 
         EnableFeature(Feature::HostMappedPointer);
+
+#if DAWN_PLATFORM_IS(IOS)
+        EnableFeature(Feature::BufferMapTier2);
+#else
+        if (@available(macOS 10.15, iOS 13.0, *)) {
+            if ([*mDevice hasUnifiedMemory]) {
+                EnableFeature(Feature::BufferMapTier2);
+            }
+        }
+#endif
     }
 
     void InitializeVendorArchitectureImpl() override {
