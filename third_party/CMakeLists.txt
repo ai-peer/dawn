@@ -146,3 +146,79 @@ if (NOT TARGET gmock AND ${TINT_BUILD_TESTS})
     set(gtest_force_shared_crt ON CACHE BOOL "Controls whether a shared run-time library should be used even when Google Test is built as static library" FORCE)
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/googletest EXCLUDE_FROM_ALL)
 endif()
+
+function(AddSubdirectoryDXC)
+    # We use a CMake function so that all these (non-cache) variables are scoped
+    # only to this function.
+    set(HLSL_OPTIONAL_PROJS_IN_DEFAULT OFF)
+    set(HLSL_ENABLE_ANALYZE OFF)
+    set(HLSL_OFFICIAL_BUILD OFF)
+    set(HLSL_ENABLE_FIXED_VER OFF)
+    set(HLSL_BUILD_DXILCONV OFF)
+    set(HLSL_INCLUDE_TESTS OFF)
+
+    set(ENABLE_SPIRV_CODEGEN OFF)
+    set(SPIRV_BUILD_TESTS OFF)
+    
+    set(LLVM_BUILD_RUNTIME ON)
+    set(LLVM_BUILD_EXAMPLES OFF)
+    set(LLVM_BUILD_TESTS OFF)
+    set(LLVM_INCLUDE_TESTS OFF)
+    set(LLVM_INCLUDE_DOCS OFF)
+    set(LLVM_INCLUDE_EXAMPLES OFF)
+    set(LLVM_OPTIMIZED_TABLEGEN OFF)
+    set(LLVM_APPEND_VC_REV OFF)
+    # Enable exception handling (requires RTTI)
+    set(LLVM_ENABLE_RTTI ON)
+    set(LLVM_ENABLE_EH ON)
+    set(CLANG_CL OFF)
+
+    # Cache variables -- these are *not* scoped to this function
+    set(LLVM_TARGETS_TO_BUILD "None" CACHE STRING "" FORCE)
+    set(LLVM_DEFAULT_TARGET_TRIPLE "dxil-ms-dx" CACHE STRING "" FORCE)
+    set(CLANG_ENABLE_STATIC_ANALYZER OFF CACHE BOOL "" FORCE)
+    set(CLANG_ENABLE_ARCMT OFF CACHE BOOL "" FORCE)
+    set(CLANG_BUILD_EXAMPLES OFF CACHE BOOL "" FORCE)
+    set(CLANG_INCLUDE_TESTS OFF CACHE BOOL "" FORCE)
+
+    # DXC uses clang-format to format generated files, but this fails when it finds and uses
+    # depot_tools/clang-format, so disable searching in PATH for it. 
+    set(CMAKE_FIND_USE_SYSTEM_ENVIRONMENT_PATH FALSE)
+
+    message(STATUS "\nAdding DXC to build:\n")
+    add_subdirectory(dxc 
+        # Disable all targets by default, and enable only the dxc and dxcompiler targets (below)
+        EXCLUDE_FROM_ALL
+    )
+    set_target_properties(dxc PROPERTIES EXCLUDE_FROM_ALL FALSE)
+    set_target_properties(dxcompiler PROPERTIES EXCLUDE_FROM_ALL FALSE)
+
+    # Override output dir for both targets so that they end up in the same place
+    # as the rest of our binaries.
+    set_target_properties(dxc dxcompiler PROPERTIES
+        "RUNTIME_OUTPUT_DIRECTORY" "${CMAKE_BINARY_DIR}"
+        "RUNTIME_OUTPUT_DIRECTORY_DEBUG" "${CMAKE_BINARY_DIR}/$<CONFIG>"
+        "RUNTIME_OUTPUT_DIRECTORY_RELEASE" "${CMAKE_BINARY_DIR}/$<CONFIG>"
+    )
+
+    # Create a target that copies dxil.dll from the platform SDK
+    # There's no easy way to get the Windows SDK path in CMake; however, conveniently, DXC
+    # contains a FindD3D12.cmake file that returns WIN10_SDK_PATH and WIN10_SDK_VERSION,
+    # so let's use that.
+    if (WIN32)
+        set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_SOURCE_DIR}/dxc/cmake/modules;${CMAKE_MODULE_PATH}")
+        find_package(D3D12)
+        set(DXIL_DLL_PATH "${WIN10_SDK_PATH}/bin/${WIN10_SDK_VERSION}/x64/dxil.dll")
+        add_custom_target(copy_dxil_dll)
+        add_custom_command(
+            TARGET copy_dxil_dll
+            COMMAND ${CMAKE_COMMAND} -E copy_if_different ${DXIL_DLL_PATH} $<TARGET_FILE_DIR:dxcompiler>
+            COMMENT "Copying ${DXIL_DLL_PATH} to $<TARGET_FILE_DIR:dxcompiler>")
+        # Make dxc target depend on copy_dxil_dll
+        add_dependencies(dxc copy_dxil_dll)
+    endif()
+endfunction()
+
+if (DAWN_USE_BUILT_DXC)
+    AddSubdirectoryDXC()
+endif()
