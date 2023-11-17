@@ -1,0 +1,216 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe715e5_4c9be602",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "nit: maybe \"BufferMapTier2\" is clear enough of a name?",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0350861b_440f3411",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31c9513f_a64a8acf",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1924,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "probably don\u0027t need the \"native\" tag.",
+      "range": {
+        "startLine": 1924,
+        "startChar": 0,
+        "endLine": 1924,
+        "endChar": 90
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8960496e_c9be05cc",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "ah this is interesting. maybe that can be tier 3 but no need to do it now",
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "892b9cb1_f8c9dd8a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "```suggestion\n                        \"Buffer usages (%s) is invalid. A buffer usage can contain either %s \"\n```",
+      "range": {
+        "startLine": 164,
+        "startChar": 65,
+        "endLine": 164,
+        "endChar": 94
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6d2ff15_e1e137d0",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "mention the map read+write restriction",
+      "range": {
+        "startLine": 267,
+        "startChar": 63,
+        "endLine": 267,
+        "endChar": 64
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "45760044_ada8213f",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "mention the map read+write restriction",
+      "range": {
+        "startLine": 272,
+        "startChar": 43,
+        "endLine": 272,
+        "endChar": 44
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd81b7b9_2e949d4f",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "nit: maybe we can always enable on iOS OS will be unified memory (right?)\n\ni.e. do something like #if DAWN_PLATFORM_IS(IOS) EnableFeature(...) ?",
+      "range": {
+        "startLine": 612,
+        "startChar": 36,
+        "endLine": 612,
+        "endChar": 44
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac58cb05_8f2976a1",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "we should eventually add more tests that the writes from the shader are visible in the mapping. or the writes to the mapping are visible to the shader, etc.\n\nit would be great to add now, but can be a TODO if we\u0027re in a hurry to use this",
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f213f24d_a9b1bd51",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-17T22:59:22Z",
+      "side": 1,
+      "message": "no need for the disable_resource_suballocation toggles",
+      "range": {
+        "startLine": 1239,
+        "startChar": 37,
+        "endLine": 1239,
+        "endChar": 67
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
