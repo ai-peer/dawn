@@ -90,12 +90,17 @@ OwnedCompilationMessages::OwnedCompilationMessages() {
 
 OwnedCompilationMessages::~OwnedCompilationMessages() = default;
 
-void OwnedCompilationMessages::AddMessage(std::string message,
-                                          wgpu::CompilationMessageType type,
-                                          uint64_t lineNum,
-                                          uint64_t linePos,
-                                          uint64_t offset,
-                                          uint64_t length) {
+void OwnedCompilationMessages::AddUnanchoredMessage(std::string message,
+                                                    wgpu::CompilationMessageType type) {
+    AddMessageForTesting(message, type, 0, 0, 0, 0);
+}
+
+void OwnedCompilationMessages::AddMessageForTesting(std::string message,
+                                                    wgpu::CompilationMessageType type,
+                                                    uint64_t lineNum,
+                                                    uint64_t linePos,
+                                                    uint64_t offset,
+                                                    uint64_t length) {
     // Cannot add messages after GetCompilationInfo has been called.
     DAWN_ASSERT(mCompilationInfo.messages == nullptr);
 
