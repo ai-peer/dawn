@@ -155,21 +155,31 @@ MaybeError ValidateBufferDescriptor(DeviceBase* device, const BufferDescriptor* 
 
     DAWN_INVALID_IF(usage == wgpu::BufferUsage::None, "Buffer usages must not be 0.");
 
-    const wgpu::BufferUsage kMapWriteAllowedUsages =
-        wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-    DAWN_INVALID_IF(
-        usage & wgpu::BufferUsage::MapWrite && !IsSubset(usage, kMapWriteAllowedUsages),
-        "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other allowed "
-        "usage is %s.",
-        usage, wgpu::BufferUsage::MapWrite, wgpu::BufferUsage::CopySrc);
+    if (device->HasFeature(Feature::BufferMappableTier2)) {
+        // Note with mappable tier 2, we only restrict that MapRead & MapWrite cannot be combined
+        // together. This makes it easier to optimize the storage in the backends. For example,
+        // D3D11 has specialized resource usage for GPU write-only or CPU write-only buffers.
+        DAWN_INVALID_IF(
+            IsSubset(kMappableBufferUsages, usage),
+            "Buffer usages (%s) is invalid. A buffer usage can only contain either %s or %s.",
+            usage, wgpu::BufferUsage::MapWrite, wgpu::BufferUsage::MapRead);
+    } else {
+        const wgpu::BufferUsage kMapWriteAllowedUsages =
+            wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+        DAWN_INVALID_IF(
+            usage & wgpu::BufferUsage::MapWrite && !IsSubset(usage, kMapWriteAllowedUsages),
+            "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other allowed "
+            "usage is %s.",
+            usage, wgpu::BufferUsage::MapWrite, wgpu::BufferUsage::CopySrc);
 
-    const wgpu::BufferUsage kMapReadAllowedUsages =
-        wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
-    DAWN_INVALID_IF(
-        usage & wgpu::BufferUsage::MapRead && !IsSubset(usage, kMapReadAllowedUsages),
-        "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other allowed "
-        "usage is %s.",
-        usage, wgpu::BufferUsage::MapRead, wgpu::BufferUsage::CopyDst);
+        const wgpu::BufferUsage kMapReadAllowedUsages =
+            wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
+        DAWN_INVALID_IF(
+            usage & wgpu::BufferUsage::MapRead && !IsSubset(usage, kMapReadAllowedUsages),
+            "Buffer usages (%s) is invalid. If a buffer usage contains %s the only other allowed "
+            "usage is %s.",
+            usage, wgpu::BufferUsage::MapRead, wgpu::BufferUsage::CopyDst);
+    }
 
     DAWN_INVALID_IF(descriptor->mappedAtCreation && descriptor->size % 4 != 0,
                     "Buffer is mapped at creation but its size (%u) is not a multiple of 4.",
