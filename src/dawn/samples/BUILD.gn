@@ -93,3 +93,12 @@ sample("ManualSwapChainTest") {
 sample("DawnInfo") {
   sources = [ "DawnInfo.cpp" ]
 }
+
+executable("ShaderBench") {
+  deps = [
+    "${dawn_root}/src/dawn:cpp",
+    "${dawn_root}/src/dawn:proc",
+    "${dawn_root}/src/dawn/native",
+  ]
+  sources = [ "ShaderBench.cpp" ]
+}
