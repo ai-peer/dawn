@@ -87,6 +87,24 @@
       "parentUuid": "561e8786_079a8d22",
       "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "378b495d_ee4c438b",
+        "filename": "test/tint/bug/tint/2100.wgsl.expected.spvasm",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-17T10:16:20Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a27c6001_5816994a",
+      "revId": "7eeecf7fe32f92d81d54e7d3d3e91637080aeabf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
