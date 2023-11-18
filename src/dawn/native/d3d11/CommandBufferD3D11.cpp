@@ -485,10 +485,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(
     // Hold ID3D11RenderTargetView ComPtr to make attachments alive.
     ityp::array<ColorAttachmentIndex, ID3D11RenderTargetView*, kMaxColorAttachments>
         d3d11RenderTargetViews = {};
-    ColorAttachmentIndex attachmentCount(uint8_t(0));
+    ColorAttachmentIndex attachmentCount{};
     // TODO(dawn:1815): Shrink the sparse attachments to accommodate more UAVs.
-    for (ColorAttachmentIndex i :
-         IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
+    for (auto i : IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
         TextureView* colorTextureView = ToBackend(renderPass->colorAttachments[i].view.Get());
         DAWN_TRY_ASSIGN(d3d11RenderTargetViews[i],
                         colorTextureView->GetOrCreateD3D11RenderTargetView());
@@ -497,8 +496,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                 ConvertToFloatColor(renderPass->colorAttachments[i].clearColor);
             d3d11DeviceContext->ClearRenderTargetView(d3d11RenderTargetViews[i], clearColor.data());
         }
-        attachmentCount = i;
-        attachmentCount++;
+        attachmentCount = ityp::PlusOne(i);
     }
 
     ID3D11DepthStencilView* d3d11DepthStencilView = nullptr;
@@ -705,7 +703,7 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                 }
 
                 // Resolve multisampled textures.
-                for (ColorAttachmentIndex i :
+                for (auto i :
                      IterateBitSet(renderPass->attachmentState->GetColorAttachmentsMask())) {
                     const auto& attachment = renderPass->colorAttachments[i];
                     if (!attachment.resolveTarget.Get()) {
