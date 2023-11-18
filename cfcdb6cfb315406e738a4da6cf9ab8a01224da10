@@ -22,6 +22,30 @@
       },
       "revId": "cfcdb6cfb315406e738a4da6cf9ab8a01224da10",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a295448_d5fd6d9b",
+        "filename": "src/tint/lang/core/ir/value.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-18T09:43:57Z",
+      "side": 1,
+      "message": "Dan had exactly the same question: https://dawn-review.googlesource.com/c/dawn/+/161010/comment/570c88f0_94667b9c/\n\nThere\u0027s a later CL that uses them. Unfortunately, there\u0027s no easy way to return a read-only hashmap that only gives out const pointers.",
+      "parentUuid": "b1358b67_b2cac792",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 5
+      },
+      "revId": "cfcdb6cfb315406e738a4da6cf9ab8a01224da10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
