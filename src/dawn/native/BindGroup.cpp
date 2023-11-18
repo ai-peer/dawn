@@ -30,6 +30,7 @@
 #include "dawn/common/Assert.h"
 #include "dawn/common/Math.h"
 #include "dawn/common/ityp_bitset.h"
+#include "dawn/common/Enumerate.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/ChainUtils.h"
@@ -285,9 +286,9 @@ MaybeError ValidateExternalTextureBinding(
 template <typename F>
 void ForEachUnverifiedBufferBindingIndexImpl(const BindGroupLayoutInternalBase* bgl, F&& f) {
     uint32_t packedIndex = 0;
-    for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBufferCount(); ++bindingIndex) {
-        if (bgl->GetBindingInfo(bindingIndex).buffer.minBindingSize == 0) {
-            f(bindingIndex, packedIndex++);
+    for (auto i : Range(bgl->GetBufferCount())) {
+        if (bgl->GetBindingInfo(i).buffer.minBindingSize == 0) {
+            f(i, packedIndex++);
         }
     }
 }
@@ -403,7 +404,7 @@ BindGroupBase::BindGroupBase(DeviceBase* device,
       mBindingData(GetLayout()->ComputeBindingDataPointers(bindingDataStart)) {
     BindGroupLayoutInternalBase* layout = GetLayout();
 
-    for (BindingIndex i{0}; i < layout->GetBindingCount(); ++i) {
+    for (auto i : Range(layout->GetBindingCount())) {
         // TODO(enga): Shouldn't be needed when bindings are tightly packed.
         // This is to fill Ref<ObjectBase> holes with nullptrs.
         new (&mBindingData.bindings[i]) Ref<ObjectBase>();
@@ -495,7 +496,7 @@ BindGroupBase::~BindGroupBase() = default;
 void BindGroupBase::DestroyImpl() {
     if (mLayout != nullptr) {
         DAWN_ASSERT(!IsError());
-        for (BindingIndex i{0}; i < GetLayout()->GetBindingCount(); ++i) {
+        for (auto i : Range(GetLayout()->GetBindingCount())) {
             mBindingData.bindings[i].~Ref<ObjectBase>();
         }
     }
