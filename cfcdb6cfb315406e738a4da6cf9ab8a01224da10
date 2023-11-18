@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1358b67_b2cac792",
+        "filename": "src/tint/lang/core/ir/value.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-18T00:23:39Z",
+      "side": 1,
+      "message": "These three methods seem unrelated to this change, and don\u0027t seem to be used in this CL?",
+      "range": {
+        "startLine": 93,
+        "startChar": 0,
+        "endLine": 104,
+        "endChar": 5
+      },
+      "revId": "cfcdb6cfb315406e738a4da6cf9ab8a01224da10",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
