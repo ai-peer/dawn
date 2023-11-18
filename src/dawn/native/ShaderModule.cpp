@@ -31,6 +31,7 @@
 #include <sstream>
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Enumerate.h"
 #include "dawn/common/Constants.h"
 #include "dawn/native/BindGroupLayoutInternal.h"
 #include "dawn/native/ChainUtils.h"
@@ -381,7 +382,7 @@ std::vector<uint64_t> GetBindGroupMinBufferSizes(const BindingGroupInfoMap& shad
     std::vector<uint64_t> requiredBufferSizes(layout->GetUnverifiedBufferCount());
     uint32_t packedIdx = 0;
 
-    for (BindingIndex bindingIndex{0}; bindingIndex < layout->GetBufferCount(); ++bindingIndex) {
+    for (auto bindingIndex : Range(layout->GetBufferCount())) {
         const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
         if (bindingInfo.buffer.minBindingSize != 0) {
             // Skip bindings that have minimum buffer size set in the layout
