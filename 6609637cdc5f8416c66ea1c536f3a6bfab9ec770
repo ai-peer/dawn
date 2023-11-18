@@ -1,0 +1,378 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "686f43a8_c37d0164",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟦 note: all 126 tests now pass",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f05b3adf_fb991a35",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟦 note: all 126 tests now pass",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6ac03a23_8c0859a8",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟦 note: all 21 tests now pass",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2aebe66_522f815d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"f16\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0b4d1e0_2425a35e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 220,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"f32\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b73a19a_41192eb9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"vec2%3Cf16%3E\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "530fb354_7ffe0e37",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"vec2%3Cf32%3E\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e44ac71d_6e084f74",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"vec3%3Cf16%3E\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac2af16c_deff90cc",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 232,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"vec3%3Cf32%3E\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c352b517_d0c3adf1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"vec4%3Cf16%3E\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df10c896_2e8403b8",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,modf:values:stage\u003d\"override\";type\u003d\"vec4%3Cf32%3E\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, target-cpu-64, ventura, webgpu-adapter-default]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced0c4e7_f9088b3f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8997bcd_f935a9b3",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,video:copy_from_video:*\u0027 with tags [apple-angle-metal-renderer:-apple-m2, dawn-backend-validation, ventura, webgpu-adapter-swiftshader]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e86b9955_380b2c13",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,video:copy_from_video:*\u0027 with tags [apple-angle-metal-renderer:-apple-m2, dawn-no-backend-validation, ventura, webgpu-adapter-swiftshader]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "033de63f_18f4ebbd",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 270,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,createView:format:textureFormatFeature\u003d\"texture-compression-etc2\";viewFormatFeature\u003d\"texture-compression-etc2\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, dawn-backend-validation]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc26cead_c7d1fbe4",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,operation,rendering,depth_clip_clamp:depth_clamp_and_clip:format\u003d\"depth16unorm\";unclippedDepth\u003d\"_undef_\";writeDepth\u003dfalse;multisampled\u003dfalse\u0027 with tags [apple-angle-metal-renderer:-apple-m2]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75404f3b_cc20c261",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 276,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,operation,rendering,depth_clip_clamp:depth_clamp_and_clip:format\u003d\"depth16unorm\";unclippedDepth\u003d\"_undef_\";writeDepth\u003dfalse;multisampled\u003dtrue\u0027 with tags [apple-angle-metal-renderer:-apple-m2]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55b80895_ff3860f1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,operation,rendering,depth_clip_clamp:depth_clamp_and_clip:format\u003d\"depth16unorm\";unclippedDepth\u003dfalse;writeDepth\u003dfalse;multisampled\u003dfalse\u0027 with tags [apple-angle-metal-renderer:-apple-m2]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "545514a4_5c964c51",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,operation,rendering,depth_clip_clamp:depth_clamp_and_clip:format\u003d\"depth16unorm\";unclippedDepth\u003dfalse;writeDepth\u003dfalse;multisampled\u003dtrue\u0027 with tags [apple-angle-metal-renderer:-apple-m2]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "699330d2_fd34affc",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 409,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,readbackFromWebGPUCanvas:offscreenCanvas,snapshot:format\u003d\"rgba16float\";alphaMode\u003d\"premultiplied\";colorSpace\u003d\"srgb\";snapshotType\u003d\"transferToImageBitmap\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, ventura]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a148549_4ea8cef7",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 420,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,readbackFromWebGPUCanvas:offscreenCanvas,snapshot:format\u003d\"rgba16float\";alphaMode\u003d\"premultiplied\";colorSpace\u003d\"srgb\";snapshotType\u003d\"imageBitmap\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, ventura]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62f864d3_b691d919",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 426,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T07:06:15Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:format\u003d\"rgba16float\";alphaMode\u003d\"premultiplied\";colorSpace\u003d\"srgb\";snapshotType\u003d\"imageBitmap\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, ventura]",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
