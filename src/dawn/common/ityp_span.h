@@ -95,6 +95,11 @@ class span {
     Index mSize;
 };
 
+template <typename Index, typename Value>
+span<Index, Value> SpanFromUntyped(Value* data, size_t size) {
+    return {data, Index{static_cast<UnderlyingType<Index>>(size)}};
+}
+
 }  // namespace dawn::ityp
 
 #endif  // SRC_DAWN_COMMON_ITYP_SPAN_H_
