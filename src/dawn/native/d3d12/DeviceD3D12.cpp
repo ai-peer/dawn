@@ -225,6 +225,26 @@ ID3D12SharingContract* Device::GetSharingContract() const {
     return mD3d12SharingContract.Get();
 }
 
+ComPtr<ID3D11On12Device> Device::GetOrCreateD3D11on12Device() {
+    if (mD3d11On12Device == nullptr) {
+        ComPtr<ID3D11Device> d3d11Device;
+        D3D_FEATURE_LEVEL d3dFeatureLevel;
+        IUnknown* const iUnknownQueue = mCommandQueue.Get();
+        if (FAILED(GetFunctions()->d3d11on12CreateDevice(mD3d12Device.Get(), 0, nullptr, 0,
+                                                         &iUnknownQueue, 1, 1, &d3d11Device,
+                                                         nullptr, &d3dFeatureLevel))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D11On12Device> d3d11on12Device;
+        HRESULT hr = d3d11Device.As(&d3d11on12Device);
+        DAWN_ASSERT(SUCCEEDED(hr));
+
+        mD3d11On12Device = std::move(d3d11on12Device);
+    }
+    return mD3d11On12Device;
+}
+
 ComPtr<ID3D12CommandSignature> Device::GetDispatchIndirectSignature() const {
     return mDispatchIndirectSignature;
 }
@@ -640,20 +660,39 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
             this, d3d::DXGITextureFormat(textureDescriptor->format)));
     }
 
-    return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d12Resource),
-                                                        textureDescriptor);
+    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+    if (sharedHandleDescriptor->useKeyedMutex) {
+        // Since D3D12 does not directly support keyed mutexes, we need to wrap the D3D12 resource
+        // using 11on12 and QueryInterface the D3D11 representation for the keyed mutex.
+        ComPtr<ID3D11Texture2D> d3d11Texture;
+        D3D11_RESOURCE_FLAGS resourceFlags;
+        resourceFlags.BindFlags = 0;
+        resourceFlags.MiscFlags = D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
+        resourceFlags.CPUAccessFlags = 0;
+        resourceFlags.StructureByteStride = 0;
+        DAWN_TRY(CheckHRESULT(GetOrCreateD3D11on12Device()->CreateWrappedResource(
+                                  d3d12Resource.Get(), &resourceFlags, D3D12_RESOURCE_STATE_COMMON,
+                                  D3D12_RESOURCE_STATE_COMMON, IID_PPV_ARGS(&d3d11Texture)),
+                              "Failed to create wrapped D3D11on12 resource"));
+        d3d11Texture.As(&dxgiKeyedMutex);
+        DAWN_INVALID_IF(!dxgiKeyedMutex, "Failed to retrieve DXGI keyed mutex when expected");
+    }
+
+    return std::make_unique<d3d::ExternalImageDXGIImpl>(
+        this, std::move(d3d12Resource), std::move(dxgiKeyedMutex), textureDescriptor);
 }
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const TextureDescriptor* descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
+                                                  Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                                   std::vector<Ref<d3d::Fence>> waitFences,
                                                   bool isSwapChainTexture,
                                                   bool isInitialized) {
     Ref<Texture> dawnTexture;
-    if (ConsumedError(
-            Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
-                                         std::move(waitFences), isSwapChainTexture, isInitialized),
-            &dawnTexture)) {
+    if (ConsumedError(Texture::CreateExternalImage(
+                          this, descriptor, std::move(d3dTexture), std::move(keyedMutexHelper),
+                          std::move(waitFences), isSwapChainTexture, isInitialized),
+                      &dawnTexture)) {
         return nullptr;
     }
     return {dawnTexture};

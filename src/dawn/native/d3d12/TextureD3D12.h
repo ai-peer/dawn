@@ -37,6 +37,7 @@
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/PassResourceUsage.h"
+#include "dawn/native/d3d/KeyedMutexHelper.h"
 #include "dawn/native/d3d12/FenceD3D12.h"
 #include "dawn/native/d3d12/IntegerTypes.h"
 #include "dawn/native/d3d12/ResourceHeapAllocationD3D12.h"
@@ -55,12 +56,14 @@ MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFo
 class Texture final : public d3d::Texture {
   public:
     static ResultOrError<Ref<Texture>> Create(Device* device, const TextureDescriptor* descriptor);
-    static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
-                                                           const TextureDescriptor* descriptor,
-                                                           ComPtr<IUnknown> d3dTexture,
-                                                           std::vector<Ref<d3d::Fence>> waitFences,
-                                                           bool isSwapChainTexture,
-                                                           bool isInitialized);
+    static ResultOrError<Ref<Texture>> CreateExternalImage(
+        Device* device,
+        const TextureDescriptor* descriptor,
+        ComPtr<IUnknown> d3dTexture,
+        Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
+        std::vector<Ref<d3d::Fence>> waitFences,
+        bool isSwapChainTexture,
+        bool isInitialized);
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D12Resource> d3d12Texture);
@@ -119,6 +122,7 @@ class Texture final : public d3d::Texture {
 
     MaybeError InitializeAsInternalTexture();
     MaybeError InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
+                                           Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                            std::vector<Ref<d3d::Fence>> waitFences,
                                            bool isSwapChainTexture);
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
@@ -159,6 +163,9 @@ class Texture final : public d3d::Texture {
     ResourceHeapAllocation mResourceAllocation;
 
     // TODO(dawn:1460): Encapsulate imported image fields e.g. std::unique_ptr<ExternalImportInfo>.
+    Ref<d3d::KeyedMutexHelper> mKeyedMutexHelper;
+    std::optional<d3d::KeyedMutexGuard> mKeyedMutexGuard;
+
     std::vector<Ref<d3d::Fence>> mWaitFences;
     std::optional<ExecutionSerial> mSignalFenceValue;
     bool mSwapChainTexture = false;

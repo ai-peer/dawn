@@ -57,6 +57,9 @@ struct DAWN_NATIVE_EXPORT ExternalImageDescriptorDXGISharedHandle : ExternalImag
 
     // Note: SharedHandle must be a handle to a texture object.
     HANDLE sharedHandle = nullptr;
+
+    // Whether a keyed mutex is present and should be used for synchronization;
+    bool useKeyedMutex = false;
 };
 
 struct DAWN_NATIVE_EXPORT ExternalImageDescriptorD3D11Texture : ExternalImageDescriptor {

@@ -43,6 +43,7 @@ struct CopyTextureToTextureCmd;
 
 namespace dawn::native::d3d {
 class Fence;
+class KeyedMutexHelper;
 }  // namespace dawn::native::d3d
 
 namespace dawn::native::d3d11 {
@@ -62,12 +63,14 @@ class Texture final : public d3d::Texture {
     static ResultOrError<Ref<Texture>> Create(Device* device,
                                               const TextureDescriptor* descriptor,
                                               ComPtr<ID3D11Resource> d3d11Texture);
-    static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
-                                                           const TextureDescriptor* descriptor,
-                                                           ComPtr<IUnknown> d3dTexture,
-                                                           std::vector<Ref<d3d::Fence>> waitFences,
-                                                           bool isSwapChainTexture,
-                                                           bool isInitialized);
+    static ResultOrError<Ref<Texture>> CreateExternalImage(
+        Device* device,
+        const TextureDescriptor* descriptor,
+        ComPtr<IUnknown> d3dTexture,
+        Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
+        std::vector<Ref<d3d::Fence>> waitFences,
+        bool isSwapChainTexture,
+        bool isInitialized);
     static ResultOrError<Ref<Texture>> CreateFromSharedTextureMemory(
         SharedTextureMemory* memory,
         const TextureDescriptor* descriptor);
@@ -104,6 +107,8 @@ class Texture final : public d3d::Texture {
 
     ResultOrError<ExecutionSerial> EndAccess() override;
 
+    MaybeError SynchronizeTextureBeforeUse(ScopedCommandRecordingContext* commandContext);
+
     // As D3D11 SRV doesn't support 'Shader4ComponentMapping' for depth-stencil textures, we can't
     // sample the stencil component directly. As a workaround we create an internal R8Uint texture,
     // holding the copy of its stencil data, and use the internal texture's SRV instead.
@@ -135,6 +140,7 @@ class Texture final : public d3d::Texture {
     MaybeError InitializeAsInternalTexture();
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D11Resource> d3d11Texture);
     MaybeError InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
+                                           Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                            std::vector<Ref<d3d::Fence>> waitFences,
                                            bool isSwapChainTexture);
     void SetLabelHelper(const char* prefix);
@@ -189,6 +195,8 @@ class Texture final : public d3d::Texture {
 
     const Kind mKind = Kind::Normal;
     ComPtr<ID3D11Resource> mD3d11Resource;
+    Ref<d3d::KeyedMutexHelper> mKeyedMutexHelper;
+    std::vector<Ref<d3d::Fence>> mWaitFences;
     // The internal 'R8Uint' texture for sampling stencil from depth-stencil textures.
     Ref<Texture> mTextureForStencilSampling;
 };
