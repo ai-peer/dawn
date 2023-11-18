@@ -79,6 +79,7 @@ class BindGroupLayoutInternalBase : public ApiObjectBase,
     using BindingMap = std::map<BindingNumber, BindingIndex>;
 
     const BindingInfo& GetBindingInfo(BindingIndex bindingIndex) const;
+    const ityp::vector<BindingIndex, BindingInfo>& GetBindingsInfo() const;
     const BindingMap& GetBindingMap() const;
     bool HasBinding(BindingNumber bindingNumber) const;
     BindingIndex GetBindingIndex(BindingNumber bindingNumber) const;

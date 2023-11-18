@@ -37,6 +37,7 @@
 
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Enumerator.h"
+#include "dawn/common/Range.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectBase.h"
@@ -584,6 +585,11 @@ const BindingInfo& BindGroupLayoutInternalBase::GetBindingInfo(BindingIndex bind
     return mBindingInfo[bindingIndex];
 }
 
+const ityp::vector<BindingIndex, BindingInfo>& BindGroupLayoutInternalBase::GetBindingsInfo()
+    const {
+    return mBindingInfo;
+}
+
 const BindGroupLayoutInternalBase::BindingMap& BindGroupLayoutInternalBase::GetBindingMap() const {
     DAWN_ASSERT(!IsError());
     return mBindingMap;
@@ -665,7 +671,7 @@ bool BindGroupLayoutInternalBase::IsLayoutEqual(const BindGroupLayoutInternalBas
     if (GetBindingCount() != other->GetBindingCount()) {
         return false;
     }
-    for (BindingIndex i{0}; i < GetBindingCount(); ++i) {
+    for (auto i : Range(GetBindingCount())) {
         if (mBindingInfo[i] != other->mBindingInfo[i]) {
             return false;
         }
