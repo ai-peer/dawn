@@ -29,6 +29,7 @@
 
 #include <utility>
 
+#include "dawn/common/Enumerate.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/EnumMaskIterator.h"
@@ -120,10 +121,7 @@ void SyncScopeUsageTracker::AddRenderBundleTextureUsage(
 }
 
 void SyncScopeUsageTracker::AddBindGroup(BindGroupBase* group) {
-    for (BindingIndex bindingIndex{0}; bindingIndex < group->GetLayout()->GetBindingCount();
-         ++bindingIndex) {
-        const BindingInfo& bindingInfo = group->GetLayout()->GetBindingInfo(bindingIndex);
-
+    for (auto [bindingIndex, bindingInfo] : Enumerate(group->GetLayout()->GetBindingsInfo())) {
         switch (bindingInfo.bindingType) {
             case BindingInfoType::Buffer: {
                 BufferBase* buffer = group->GetBindingAsBufferBinding(bindingIndex).buffer;
@@ -235,9 +233,7 @@ void ComputePassResourceUsageTracker::AddReferencedBuffer(BufferBase* buffer) {
 }
 
 void ComputePassResourceUsageTracker::AddResourcesReferencedByBindGroup(BindGroupBase* group) {
-    for (BindingIndex index{0}; index < group->GetLayout()->GetBindingCount(); ++index) {
-        const BindingInfo& bindingInfo = group->GetLayout()->GetBindingInfo(index);
-
+    for (auto [index, bindingInfo] : Enumerate(group->GetLayout()->GetBindingsInfo())) {
         switch (bindingInfo.bindingType) {
             case BindingInfoType::Buffer: {
                 mUsage.referencedBuffers.insert(group->GetBindingAsBufferBinding(index).buffer);

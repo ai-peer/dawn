@@ -35,6 +35,7 @@
 #include <variant>
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/Enumerate.h"
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/StackContainer.h"
 #include "dawn/native/BindGroup.h"
@@ -122,7 +123,7 @@ Return FindStorageBufferBindingAliasing(
     for (BindGroupIndex groupIndex : IterateBitSet(pipelineLayout->GetBindGroupLayoutsMask())) {
         BindGroupLayoutInternalBase* bgl = bindGroups[groupIndex]->GetLayout();
 
-        for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBufferCount(); ++bindingIndex) {
+        for (auto bindingIndex : Range(bgl->GetBufferCount())) {
             const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
             // Buffer bindings are sorted to have smallest of bindingIndex.
             DAWN_ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
@@ -159,8 +160,7 @@ Return FindStorageBufferBindingAliasing(
         }
 
         // TODO(dawn:1642): optimize: precompute start/end range of storage textures bindings.
-        for (BindingIndex bindingIndex{bgl->GetBufferCount()};
-             bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {
+        for (auto bindingIndex : Range(bgl->GetBufferCount(), bgl->GetBindingCount())) {
             const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
 
             if (bindingInfo.bindingType != BindingInfoType::StorageTexture) {
@@ -358,8 +358,7 @@ MaybeError CommandBufferStateTracker::ValidateNoDifferentTextureViewsOnSameTextu
         BindGroupBase* bindGroup = mBindgroups[groupIndex];
         BindGroupLayoutInternalBase* bgl = bindGroup->GetLayout();
 
-        for (BindingIndex bindingIndex{0}; bindingIndex < bgl->GetBindingCount(); ++bindingIndex) {
-            const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
+        for (auto [bindingIndex, bindingInfo] : Enumerate(bgl->GetBindingsInfo())) {
             if (bindingInfo.bindingType != BindingInfoType::Texture &&
                 bindingInfo.bindingType != BindingInfoType::StorageTexture) {
                 continue;
