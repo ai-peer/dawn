@@ -373,6 +373,74 @@
       "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:format\u003d\"rgba16float\";alphaMode\u003d\"premultiplied\";colorSpace\u003d\"srgb\";snapshotType\u003d\"imageBitmap\"\u0027 with tags [apple-angle-metal-renderer:-apple-m2, ventura]",
       "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ca83ba7_75bc768a",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T10:06:54Z",
+      "side": 0,
+      "message": "🟦 note: all 138 tests now pass",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "310c855a_be4f7916",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T10:06:54Z",
+      "side": 0,
+      "message": "🟦 note: all 138 tests now pass",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d862d181_04470084",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T10:06:54Z",
+      "side": 0,
+      "message": "🟦 note: all 23 tests now pass",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "348ce964_a534eb2b",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-18T10:06:54Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "6609637cdc5f8416c66ea1c536f3a6bfab9ec770",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
