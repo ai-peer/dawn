@@ -28,6 +28,7 @@
 #include "dawn/native/vulkan/RenderPassCache.h"
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Enumerate.h"
 #include "dawn/common/HashUtils.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
@@ -138,7 +139,7 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
         resolveAttachmentRefs;
     VkAttachmentReference depthStencilAttachmentRef;
 
-    for (ColorAttachmentIndex i(uint8_t(0)); i < kMaxColorAttachmentsTyped; i++) {
+    for (auto i : Range(kMaxColorAttachmentsTyped)) {
         colorAttachmentRefs[i].attachment = VK_ATTACHMENT_UNUSED;
         resolveAttachmentRefs[i].attachment = VK_ATTACHMENT_UNUSED;
         // The Khronos Vulkan validation layer will complain if not set
@@ -155,7 +156,7 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
 
     uint32_t attachmentCount = 0;
     ColorAttachmentIndex highestColorAttachmentIndexPlusOne(static_cast<uint8_t>(0));
-    for (ColorAttachmentIndex i : IterateBitSet(query.colorMask)) {
+    for (auto i : IterateBitSet(query.colorMask)) {
         auto& attachmentRef = colorAttachmentRefs[i];
         auto& attachmentDesc = attachmentDescs[attachmentCount];
 
@@ -204,7 +205,7 @@ ResultOrError<VkRenderPass> RenderPassCache::CreateRenderPassForQuery(
     }
 
     uint32_t resolveAttachmentCount = 0;
-    for (ColorAttachmentIndex i : IterateBitSet(query.resolveTargetMask)) {
+    for (auto i : IterateBitSet(query.resolveTargetMask)) {
         auto& attachmentRef = resolveAttachmentRefs[i];
         auto& attachmentDesc = attachmentDescs[attachmentCount];
 
@@ -273,7 +274,7 @@ size_t RenderPassCache::CacheFuncs::operator()(const RenderPassCacheQuery& query
 
     HashCombine(&hash, Hash(query.resolveTargetMask));
 
-    for (ColorAttachmentIndex i : IterateBitSet(query.colorMask)) {
+    for (auto i : IterateBitSet(query.colorMask)) {
         HashCombine(&hash, query.colorFormats[i], query.colorLoadOp[i], query.colorStoreOp[i]);
     }
 
@@ -303,7 +304,7 @@ bool RenderPassCache::CacheFuncs::operator()(const RenderPassCacheQuery& a,
         return false;
     }
 
-    for (ColorAttachmentIndex i : IterateBitSet(a.colorMask)) {
+    for (auto i : IterateBitSet(a.colorMask)) {
         if ((a.colorFormats[i] != b.colorFormats[i]) || (a.colorLoadOp[i] != b.colorLoadOp[i]) ||
             (a.colorStoreOp[i] != b.colorStoreOp[i])) {
             return false;
