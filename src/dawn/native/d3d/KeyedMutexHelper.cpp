@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,12 +25,47 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
-#define SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
+#include "dawn/native/d3d/KeyedMutexHelper.h"
 
-#include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/native/D3DBackend.h"
+#include "dawn/native/d3d/D3DError.h"
 
-#include <d3d11on12.h>  // NOLINT(build/include_order)
-#include <d3d12.h>      // NOLINT(build/include_order)
+namespace dawn::native::d3d {
+KeyedMutexGuard::KeyedMutexGuard() = default;
+KeyedMutexGuard::KeyedMutexGuard(KeyedMutexGuard&&) = default;
+KeyedMutexGuard& KeyedMutexGuard::operator=(KeyedMutexGuard&&) = default;
 
-#endif  // SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
+KeyedMutexGuard::KeyedMutexGuard(KeyedMutexHelper* keyedMutexHelper)
+    : mKeyedMutexHelper(keyedMutexHelper) {}
+
+KeyedMutexGuard::~KeyedMutexGuard() {
+    if (mKeyedMutexHelper != nullptr) {
+        mKeyedMutexHelper->ReleaseKeyedMutex();
+    }
+}
+
+KeyedMutexHelper::KeyedMutexHelper(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex)
+    : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)) {
+    DAWN_CHECK(mDXGIKeyedMutex);
+}
+
+KeyedMutexHelper::~KeyedMutexHelper() {
+    DAWN_CHECK(mAccessCount == 0);
+}
+
+ResultOrError<KeyedMutexGuard> KeyedMutexHelper::AcquireKeyedMutex() {
+    if (mAccessCount == 0) {
+        DAWN_TRY(CheckHRESULT(mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireKey, INFINITE),
+                              "Failed to acquire keyed mutex for external image"));
+    }
+    mAccessCount++;
+    return KeyedMutexGuard(this);
+}
+
+void KeyedMutexHelper::ReleaseKeyedMutex() {
+    mAccessCount--;
+    if (mAccessCount == 0) {
+        mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
+    }
+}
+}  // namespace dawn::native::d3d
