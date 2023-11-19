@@ -1,4 +1,4 @@
-// Copyright 2017 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,12 +25,52 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
-#define SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
+#ifndef SRC_DAWN_NATIVE_D3D_KEYED_MUTEX_HELPER_H_
+#define SRC_DAWN_NATIVE_D3D_KEYED_MUTEX_HELPER_H_
 
+#include <wrl/client.h>
+
+#include "dawn/common/NonCopyable.h"
+#include "dawn/common/Ref.h"
+#include "dawn/common/RefCounted.h"
+#include "dawn/native/DawnNative.h"
+#include "dawn/native/Error.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
-#include <d3d11on12.h>  // NOLINT(build/include_order)
-#include <d3d12.h>      // NOLINT(build/include_order)
+namespace dawn::native::d3d {
 
-#endif  // SRC_DAWN_NATIVE_D3D12_D3D12_PLATFORM_H_
+class KeyedMutexGuard : public NonCopyable {
+  public:
+    KeyedMutexGuard();
+    KeyedMutexGuard(KeyedMutexGuard&&);
+    KeyedMutexGuard& operator=(KeyedMutexGuard&&);
+    ~KeyedMutexGuard();
+
+  private:
+    friend class KeyedMutexHelper;
+
+    explicit KeyedMutexGuard(KeyedMutexHelper* keyedMutexHelper);
+
+    Ref<KeyedMutexHelper> mKeyedMutexHelper;
+};
+
+class KeyedMutexHelper : public RefCounted {
+  public:
+    explicit KeyedMutexHelper(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
+
+    ResultOrError<KeyedMutexGuard> AcquireKeyedMutex();
+
+  private:
+    friend class KeyedMutexGuard;
+
+    ~KeyedMutexHelper() override;
+
+    void ReleaseKeyedMutex();
+
+    ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+    uint32_t mAccessCount = 0;
+};
+
+}  // namespace dawn::native::d3d
+
+#endif  // SRC_DAWN_NATIVE_D3D_KEYED_MUTEX_HELPER_H_

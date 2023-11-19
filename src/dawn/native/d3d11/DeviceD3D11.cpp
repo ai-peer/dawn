@@ -562,8 +562,12 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
             this, d3d::DXGITextureFormat(textureDescriptor->format)));
     }
 
-    return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d11Resource),
-                                                        textureDescriptor);
+    // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
+    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+    d3d11Resource.As(&dxgiKeyedMutex);
+
+    return std::make_unique<d3d::ExternalImageDXGIImpl>(
+        this, std::move(d3d11Resource), std::move(dxgiKeyedMutex), textureDescriptor);
 }
 
 bool Device::MayRequireDuplicationOfIndirectParameters() const {
@@ -580,17 +584,23 @@ bool Device::IsResolveTextureBlitWithDrawSupported() const {
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const TextureDescriptor* descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
+                                                  Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                                   std::vector<Ref<d3d::Fence>> waitFences,
                                                   bool isSwapChainTexture,
                                                   bool isInitialized) {
     Ref<Texture> dawnTexture;
-    if (ConsumedError(
-            Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
-                                         std::move(waitFences), isSwapChainTexture, isInitialized),
-            &dawnTexture)) {
+    if (ConsumedError(Texture::CreateExternalImage(
+                          this, descriptor, std::move(d3dTexture), std::move(keyedMutexHelper),
+                          std::move(waitFences), isSwapChainTexture, isInitialized),
+                      &dawnTexture)) {
         return nullptr;
     }
     return {dawnTexture};
+}
+
+void Device::DisposeExternalImageResources(ComPtr<IUnknown> d3dTexture,
+                                           Ref<d3d::KeyedMutexHelper> keyedMutexHelper) {
+    // Do nothing - the smart pointers will release their resources when they go out of scope.
 }
 
 uint32_t Device::GetUAVSlotCount() const {
