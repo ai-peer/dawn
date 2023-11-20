@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "2e4048b848adbdc6e502066269e236070d290476",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28496c05_85f66e5f",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-20T14:45:32Z",
+      "side": 1,
+      "message": "Why not just `EmitAddressSpace()`? Or even just `EmitPointerType()` for the whole type, which adds `const` if needed too?",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 9
+      },
+      "revId": "2e4048b848adbdc6e502066269e236070d290476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
