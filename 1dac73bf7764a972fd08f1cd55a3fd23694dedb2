@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bb236f81_4d405a34",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:50:07Z",
+      "side": 1,
+      "message": "Francois suggested that we could use this to surface the data through WebGPUDeveloperFeatures and this would be much easier if this were an adapter property!",
+      "revId": "1dac73bf7764a972fd08f1cd55a3fd23694dedb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
