@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76e304b5_1d9c8cf8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-20T10:57:39Z",
+      "side": 1,
+      "message": "Would prefer a name like `ConstCopyingPtr` to be more explicit if possible.",
+      "revId": "c3535b7bb5cafc8fb75df3ad4ff512c388ce7041",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
