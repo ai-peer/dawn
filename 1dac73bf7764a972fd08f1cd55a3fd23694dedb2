@@ -70,6 +70,24 @@
       "parentUuid": "f0a1c505_dfbe5e6b",
       "revId": "1dac73bf7764a972fd08f1cd55a3fd23694dedb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "acd69618_7e64a0db",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-20T17:15:11Z",
+      "side": 1,
+      "message": "existence of [RegisterVideoMemoryBudgetChangeNotificationEvent](https://learn.microsoft.com/en-us/windows/win32/api/dxgi1_4/nf-dxgi1_4-idxgiadapter3-registervideomemorybudgetchangenotificationevent) seems to imply the Budget can change",
+      "parentUuid": "f24638de_3272536b",
+      "revId": "1dac73bf7764a972fd08f1cd55a3fd23694dedb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
