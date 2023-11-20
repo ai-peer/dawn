@@ -60,6 +60,7 @@ tint_target_add_dependencies(tint_cmd_tint_cmd cmd
   tint_lang_wgsl_helpers
   tint_lang_wgsl_inspector
   tint_lang_wgsl_program
+  tint_lang_wgsl_reader_lower
   tint_lang_wgsl_sem
   tint_utils_cli
   tint_utils_command

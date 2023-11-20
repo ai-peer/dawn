@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,38 +25,16 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_MSL_WRITER_WRITER_H_
-#define SRC_TINT_LANG_MSL_WRITER_WRITER_H_
+#include "src/tint/lang/spirv/writer/output.h"
 
-#include <string>
+namespace tint::spirv::writer {
 
-#include "src/tint/lang/core/ir/module.h"
-#include "src/tint/lang/msl/writer/common/options.h"
-#include "src/tint/lang/msl/writer/output.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/result/result.h"
+Output::Output() = default;
 
-// Forward declarations
-namespace tint {
-class Program;
-}  // namespace tint
+Output::~Output() = default;
 
-namespace tint::msl::writer {
+Output::Output(const Output&) = default;
 
-/// Generate MSL for a program, according to a set of configuration options.
-/// The result will contain the MSL and supplementary information, or failure.
-/// @param ir the IR module to translate to MSL
-/// @param options the configuration options to use when generating MSL
-/// @returns the resulting MSL and supplementary information, or failure
-Result<Output> Generate(core::ir::Module& ir, const Options& options);
+Output& Output::operator=(const Output&) = default;
 
-/// Generate MSL for a program, according to a set of configuration options.
-/// The result will contain the MSL and supplementary information, or failure.
-/// @param program the program to translate to MSL
-/// @param options the configuration options to use when generating MSL
-/// @returns the resulting MSL and supplementary information, or failure
-Result<Output> Generate(const Program& program, const Options& options);
-
-}  // namespace tint::msl::writer
-
-#endif  // SRC_TINT_LANG_MSL_WRITER_WRITER_H_
+}  // namespace tint::spirv::writer
