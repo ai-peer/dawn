@@ -255,6 +255,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "873a2a37_ab97cda7",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-20T20:41:38Z",
+      "side": 1,
+      "message": "So the target is to keep change out of printer.\n\nI think this plan would do the job with less work \u0026 fix issues:\n- I will abandon this CL.\n- I will file a bug in tint to track the implementation of the transform to achieve \"1) Always name the block at the same binding location the same between vert \u0026 frag shader\". Likely we can implement this transform after IR switch in GL backend as well.\n- I will make a CL using another solution to achieve \"2) Always rename all blocks differently between vert \u0026 frag shader.\"for now, by appending \"f_\" suffix to all binding location variables, which can be done by adding to `Renamer::Config::requested_names` on dawn ShaderModuleGL, keeping tint implementation unchanged.\n\nThis way we can fix the issues exposed by enabling robustness on GL backend soon. And avoid the duplication of implementation of the bigger transform to align block names in both ast and IR for glsl",
+      "parentUuid": "e49be89e_3b0d096f",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
