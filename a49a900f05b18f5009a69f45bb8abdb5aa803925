@@ -33,6 +33,23 @@
       "message": "PTAL!",
       "revId": "a49a900f05b18f5009a69f45bb8abdb5aa803925",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5aaaa44_3b334ff8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-11-20T17:22:51Z",
+      "side": 1,
+      "message": "This is a really nice ergonomic improvement, thanks!",
+      "revId": "a49a900f05b18f5009a69f45bb8abdb5aa803925",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
