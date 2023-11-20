@@ -46,6 +46,30 @@
       },
       "revId": "85a91d7ef48fcde98c435f964d733e706a4478dc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f60c552_65d8dd3a",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-20T11:00:06Z",
+      "side": 0,
+      "message": "Acknowledged",
+      "parentUuid": "c0eb11c5_f3909df8",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 68,
+        "endChar": 32
+      },
+      "revId": "85a91d7ef48fcde98c435f964d733e706a4478dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
