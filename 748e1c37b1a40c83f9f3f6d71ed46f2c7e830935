@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b384a24f_f0c032bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-20T17:23:17Z",
+      "side": 1,
+      "message": "PTAL.",
+      "revId": "748e1c37b1a40c83f9f3f6d71ed46f2c7e830935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc7b0463_f3c9f8fe",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 445,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-20T17:23:17Z",
+      "side": 1,
+      "message": "I could guard these too and ice if we\u0027re not in emitting the root block.",
+      "revId": "748e1c37b1a40c83f9f3f6d71ed46f2c7e830935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
