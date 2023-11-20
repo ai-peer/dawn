@@ -39,6 +39,30 @@
       },
       "revId": "2e4048b848adbdc6e502066269e236070d290476",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "240b92fe_305649f6",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 342,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-20T15:55:26Z",
+      "side": 1,
+      "message": "Good point. The fun of writing things in stages months apart. Will fix when I fixup the tests. Thanks.",
+      "parentUuid": "28496c05_85f66e5f",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 342,
+        "endChar": 9
+      },
+      "revId": "2e4048b848adbdc6e502066269e236070d290476",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
