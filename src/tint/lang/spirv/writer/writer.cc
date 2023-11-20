@@ -45,9 +45,38 @@
 
 namespace tint::spirv::writer {
 
-Output::Output() = default;
-Output::~Output() = default;
-Output::Output(const Output&) = default;
+Result<Output> Generate(core::ir::Module& ir, const Options& options) {
+    bool zero_initialize_workgroup_memory =
+        !options.disable_workgroup_init && options.use_zero_initialize_workgroup_memory_extension;
+
+    {
+        auto res = ValidateBindingOptions(options);
+        if (!res) {
+            return res.Failure();
+        }
+    }
+
+    Output output;
+
+    // Lower from WGSL-dialect to core-dialect
+    if (auto res = wgsl::reader::Lower(ir); !res) {
+        return res.Failure();
+    }
+
+    // Raise from core-dialect to SPIR-V-dialect.
+    if (auto res = raise::Raise(ir, options); !res) {
+        return std::move(res.Failure());
+    }
+
+    // Generate the SPIR-V code.
+    auto spirv = Print(ir, zero_initialize_workgroup_memory);
+    if (!spirv) {
+        return std::move(spirv.Failure());
+    }
+    output.spirv = std::move(spirv.Get());
+
+    return output;
+}
 
 Result<Output> Generate(const Program& program, const Options& options) {
     if (!program.IsValid()) {
@@ -66,51 +95,20 @@ Result<Output> Generate(const Program& program, const Options& options) {
 
     Output output;
 
-    if (options.use_tint_ir) {
-#if TINT_BUILD_WGSL_READER
-        // Convert the AST program to an IR module.
-        auto converted = wgsl::reader::ProgramToIR(program);
-        if (!converted) {
-            return converted.Failure();
-        }
-
-        auto ir = converted.Move();
-
-        // Lower from WGSL-dialect to core-dialect
-        if (auto res = wgsl::reader::Lower(ir); !res) {
-            return res.Failure();
-        }
-
-        // Raise from core-dialect to SPIR-V-dialect.
-        if (auto res = raise::Raise(ir, options); !res) {
-            return std::move(res.Failure());
-        }
-
-        // Generate the SPIR-V code.
-        auto spirv = Print(ir, zero_initialize_workgroup_memory);
-        if (!spirv) {
-            return std::move(spirv.Failure());
-        }
-        output.spirv = std::move(spirv.Get());
-#else
-        return Failure{"use_tint_ir requires building with TINT_BUILD_WGSL_READER"};
-#endif
-    } else {
-        // Sanitize the program.
-        auto sanitized_result = Sanitize(program, options);
-        if (!sanitized_result.program.IsValid()) {
-            return Failure{sanitized_result.program.Diagnostics()};
-        }
-
-        // Generate the SPIR-V code.
-        auto impl = std::make_unique<ASTPrinter>(
-            sanitized_result.program, zero_initialize_workgroup_memory,
-            options.experimental_require_subgroup_uniform_control_flow);
-        if (!impl->Generate()) {
-            return Failure{impl->Diagnostics()};
-        }
-        output.spirv = std::move(impl->Result());
+    // Sanitize the program.
+    auto sanitized_result = Sanitize(program, options);
+    if (!sanitized_result.program.IsValid()) {
+        return Failure{sanitized_result.program.Diagnostics()};
     }
+
+    // Generate the SPIR-V code.
+    auto impl =
+        std::make_unique<ASTPrinter>(sanitized_result.program, zero_initialize_workgroup_memory,
+                                     options.experimental_require_subgroup_uniform_control_flow);
+    if (!impl->Generate()) {
+        return Failure{impl->Diagnostics()};
+    }
+    output.spirv = std::move(impl->Result());
 
     return output;
 }
