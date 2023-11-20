@@ -44,6 +44,7 @@ struct DeviceInfo {
     uint32_t shaderModel;
     PerStage<std::wstring> shaderProfiles;
     bool supportsSharedResourceCapabilityTier2;
+    bool supportsROV;
 };
 
 ResultOrError<DeviceInfo> GatherDeviceInfo(const ComPtr<ID3D11Device>& device);
