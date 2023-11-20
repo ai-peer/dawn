@@ -47,6 +47,9 @@ struct Output {
     /// Copy constructor
     Output(const Output&);
 
+    /// Copy assignment
+    Output& operator=(const Output&);
+
     /// The generated MSL.
     std::string msl = "";
 
