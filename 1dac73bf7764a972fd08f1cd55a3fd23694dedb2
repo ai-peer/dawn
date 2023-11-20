@@ -52,6 +52,24 @@
       "parentUuid": "e493503d_4fcfa929",
       "revId": "1dac73bf7764a972fd08f1cd55a3fd23694dedb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f24638de_3272536b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-20T17:12:27Z",
+      "side": 1,
+      "message": "yea actually let me check and ask him. running a bunch of dawn_end2end_tests in the background, and querying the value it seems to stay the same at around 50% of virtual memory. so maybe it is actually constant\n\nbut I only have WARP right now so idk",
+      "parentUuid": "f0a1c505_dfbe5e6b",
+      "revId": "1dac73bf7764a972fd08f1cd55a3fd23694dedb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
