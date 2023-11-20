@@ -30,6 +30,7 @@
 
 #include <string>
 
+#include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/glsl/writer/common/options.h"
 #include "src/tint/lang/glsl/writer/output.h"
 #include "src/tint/utils/diagnostic/diagnostic.h"
@@ -41,6 +42,17 @@ class Program;
 }  // namespace tint
 
 namespace tint::glsl::writer {
+
+/// Generate GLSL for a program, according to a set of configuration options.
+/// The result will contain the GLSL and supplementary information, or failure.
+/// information.
+/// @param ir the IR module to translate to GLSL
+/// @param options the configuration options to use when generating GLSL
+/// @param entry_point the entry point to generate GLSL for
+/// @returns the resulting GLSL and supplementary information, or failure
+Result<Output> Generate(core::ir::Module& ir,
+                        const Options& options,
+                        const std::string& entry_point);
 
 /// Generate GLSL for a program, according to a set of configuration options.
 /// The result will contain the GLSL and supplementary information, or failure.
