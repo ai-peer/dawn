@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f66e0f9a_982fce92",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 8
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6fe715e5_4c9be602",
+      "range": {
+        "startLine": 7,
+        "startChar": 17,
+        "endLine": 7,
+        "endChar": 36
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0350861b_440f3411",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 8
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-17T22:59:22Z",
       "side": 1,
       "message": "probably don\u0027t need the \"native\" tag.",
+      "range": {
+        "startLine": 1924,
+        "startChar": 0,
+        "endLine": 1924,
+        "endChar": 90
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8e74a8f_56fa5f2e",
+        "filename": "dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1924,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31c9513f_a64a8acf",
       "range": {
         "startLine": 1924,
         "startChar": 0,
@@ -104,6 +152,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "132f1c99_9332c42a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "892b9cb1_f8c9dd8a",
+      "range": {
+        "startLine": 164,
+        "startChar": 65,
+        "endLine": 164,
+        "endChar": 94
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6d2ff15_e1e137d0",
@@ -117,6 +189,30 @@
       "writtenOn": "2023-11-17T22:59:22Z",
       "side": 1,
       "message": "mention the map read+write restriction",
+      "range": {
+        "startLine": 267,
+        "startChar": 63,
+        "endLine": 267,
+        "endChar": 64
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84846a7f_8f773a49",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6d2ff15_e1e137d0",
       "range": {
         "startLine": 267,
         "startChar": 63,
@@ -150,6 +246,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8021468b_496758a3",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 272,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "45760044_ada8213f",
+      "range": {
+        "startLine": 272,
+        "startChar": 43,
+        "endLine": 272,
+        "endChar": 44
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd81b7b9_2e949d4f",
@@ -163,6 +283,30 @@
       "writtenOn": "2023-11-17T22:59:22Z",
       "side": 1,
       "message": "nit: maybe we can always enable on iOS OS will be unified memory (right?)\n\ni.e. do something like #if DAWN_PLATFORM_IS(IOS) EnableFeature(...) ?",
+      "range": {
+        "startLine": 612,
+        "startChar": 36,
+        "endLine": 612,
+        "endChar": 44
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bde22afe_38ce9434",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd81b7b9_2e949d4f",
       "range": {
         "startLine": 612,
         "startChar": 36,
@@ -190,6 +334,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29b412dc_54bd910b",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1236,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done. Added the tests.",
+      "parentUuid": "ac58cb05_8f2976a1",
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f213f24d_a9b1bd51",
@@ -203,6 +365,30 @@
       "writtenOn": "2023-11-17T22:59:22Z",
       "side": 1,
       "message": "no need for the disable_resource_suballocation toggles",
+      "range": {
+        "startLine": 1239,
+        "startChar": 37,
+        "endLine": 1239,
+        "endChar": 67
+      },
+      "revId": "19089fa472d40ff260709e5b090f22affd61911c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44cdb485_998dc4a4",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1239,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T06:21:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f213f24d_a9b1bd51",
       "range": {
         "startLine": 1239,
         "startChar": 37,
