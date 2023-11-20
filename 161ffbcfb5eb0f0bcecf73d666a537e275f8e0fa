@@ -231,6 +231,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e49be89e_3b0d096f",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-20T12:09:53Z",
+      "side": 1,
+      "message": "I\u0027d prefer if we could do this before getting into the printer. With the move to IR, this will all get re-implemented and less that we do here the better. If we did this as a transform before calling into the writer then it would be guaranteed to work with the new IR backend.",
+      "parentUuid": "a4dd7e4c_8d70289d",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
