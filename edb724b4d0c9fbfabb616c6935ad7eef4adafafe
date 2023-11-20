@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "562977b0_5b2c9b1b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:45:41Z",
+      "side": 1,
+      "message": "WDYT of this, and maybe renaming `IterateBitset` to `Iterate`? Does it make the code actually more readable?",
+      "revId": "edb724b4d0c9fbfabb616c6935ad7eef4adafafe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
