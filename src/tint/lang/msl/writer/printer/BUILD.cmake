@@ -82,6 +82,7 @@ if(TINT_BUILD_MSL_WRITER)
 ################################################################################
 tint_add_target(tint_lang_msl_writer_printer_test test
   lang/msl/writer/printer/binary_test.cc
+  lang/msl/writer/printer/bitcast_test.cc
   lang/msl/writer/printer/constant_test.cc
   lang/msl/writer/printer/discard_test.cc
   lang/msl/writer/printer/function_test.cc
