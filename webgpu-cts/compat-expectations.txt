@@ -215,19 +215,6 @@ crbug.com/dawn/2168 webgpu:api,validation,error_scope:simple:errorType="out-of-m
 crbug.com/dawn/2168 webgpu:api,validation,error_scope:simple:errorType="out-of-memory";errorFilter="out-of-memory" [ Failure ]
 crbug.com/dawn/2168 webgpu:api,validation,error_scope:simple:errorType="out-of-memory";errorFilter="validation" [ Failure ]
 
-# Uploads and writes to stencil textures are failing on the OpenGL backend
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_related:bytes_per_row_alignment:method="CopyB2T";format="stencil8";dimension="2d" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_offset:format="depth24plus-stencil8";aspect="stencil-only";copyType="CopyB2T" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_offset:format="depth24plus-stencil8";aspect="stencil-only";copyType="WriteTexture" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_offset:format="stencil8";aspect="stencil-only";copyType="CopyB2T" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_offset:format="stencil8";aspect="stencil-only";copyType="WriteTexture" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_size:format="depth24plus-stencil8";aspect="stencil-only";copyType="CopyB2T" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_size:format="depth24plus-stencil8";aspect="stencil-only";copyType="WriteTexture" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_size:format="stencil8";aspect="stencil-only";copyType="CopyB2T" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_buffer_size:format="stencil8";aspect="stencil-only";copyType="WriteTexture" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_usage_and_aspect:format="depth24plus-stencil8" [ Failure ]
-crbug.com/dawn/2170 webgpu:api,validation,image_copy,buffer_texture_copies:depth_stencil_format,copy_usage_and_aspect:format="stencil8" [ Failure ]
-
 # Shader issues
 crbug.com/dawn/2077 webgpu:shader,execution,expression,binary,f32_matrix_matrix_multiplication:matrix_matrix:inputSource="const";common_dim=4;x_rows=4;y_cols=2 [ Failure ]
 crbug.com/dawn/2077 webgpu:shader,execution,expression,binary,f32_matrix_matrix_multiplication:matrix_matrix:inputSource="const";common_dim=4;x_rows=4;y_cols=3 [ Failure ]
