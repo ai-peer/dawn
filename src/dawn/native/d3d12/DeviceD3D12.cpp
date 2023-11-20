@@ -67,7 +67,7 @@
 #include "dawn/platform/tracing/TraceEvent.h"
 
 namespace dawn::native::d3d12 {
-
+namespace {
 // TODO(dawn:155): Figure out these values.
 static constexpr uint16_t kShaderVisibleDescriptorHeapSize = 1024;
 static constexpr uint8_t kAttachmentDescriptorHeapSize = 64;
@@ -76,6 +76,29 @@ static constexpr uint8_t kAttachmentDescriptorHeapSize = 64;
 static constexpr uint64_t kZeroBufferSize = 1024 * 1024 * 4;  // 4 Mb
 
 static constexpr uint64_t kMaxDebugMessagesToPrint = 5;
+
+void Flush11On12DeviceToAvoidLeaks(ComPtr<ID3D11On12Device> d3d11on12Device) {
+    DAWN_ASSERT(d3d11on12Device);
+
+    ComPtr<ID3D11Device> d3d11Device;
+    d3d11on12Device.As(&d3d11Device);
+    DAWN_ASSERT(d3d11Device);
+
+    ComPtr<ID3D11DeviceContext> d3d11DeviceContext;
+    d3d11Device->GetImmediateContext(&d3d11DeviceContext);
+    DAWN_ASSERT(d3d11DeviceContext);
+
+    // 11on12 has a bug where D3D12 resources used only for keyed shared mutexes are not released
+    // until work is submitted to the device context and flushed. The most minimal work we can get
+    // away with is issuing a TiledResourceBarrier.
+    ComPtr<ID3D11DeviceContext2> d3d11DeviceContext2;
+    d3d11DeviceContext.As(&d3d11DeviceContext2);
+    DAWN_ASSERT(d3d11DeviceContext2);
+
+    d3d11DeviceContext2->TiledResourceBarrier(nullptr, nullptr);
+    d3d11DeviceContext2->Flush();
+}
+}  // namespace
 
 // static
 ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
@@ -223,6 +246,26 @@ ComPtr<ID3D12CommandQueue> Device::GetCommandQueue() const {
 
 ID3D12SharingContract* Device::GetSharingContract() const {
     return mD3d12SharingContract.Get();
+}
+
+ComPtr<ID3D11On12Device> Device::GetOrCreateD3D11on12Device() {
+    if (mD3d11On12Device == nullptr) {
+        ComPtr<ID3D11Device> d3d11Device;
+        D3D_FEATURE_LEVEL d3dFeatureLevel;
+        IUnknown* const iUnknownQueue = mCommandQueue.Get();
+        if (FAILED(GetFunctions()->d3d11on12CreateDevice(mD3d12Device.Get(), 0, nullptr, 0,
+                                                         &iUnknownQueue, 1, 1, &d3d11Device,
+                                                         nullptr, &d3dFeatureLevel))) {
+            return nullptr;
+        }
+
+        ComPtr<ID3D11On12Device> d3d11on12Device;
+        d3d11Device.As(&d3d11on12Device);
+        DAWN_ASSERT(d3d11on12Device);
+
+        mD3d11On12Device = std::move(d3d11on12Device);
+    }
+    return mD3d11On12Device;
 }
 
 ComPtr<ID3D12CommandSignature> Device::GetDispatchIndirectSignature() const {
@@ -640,23 +683,53 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
             this, d3d::DXGITextureFormat(textureDescriptor->format)));
     }
 
-    return std::make_unique<d3d::ExternalImageDXGIImpl>(this, std::move(d3d12Resource),
-                                                        textureDescriptor);
+    ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex;
+    if (sharedHandleDescriptor->useKeyedMutex) {
+        // Since D3D12 does not directly support keyed mutexes, we need to wrap the D3D12 resource
+        // using 11on12 and QueryInterface the D3D11 representation for the keyed mutex.
+        ComPtr<ID3D11Texture2D> d3d11Texture;
+        D3D11_RESOURCE_FLAGS resourceFlags;
+        resourceFlags.BindFlags = 0;
+        resourceFlags.MiscFlags = D3D11_RESOURCE_MISC_SHARED_KEYEDMUTEX;
+        resourceFlags.CPUAccessFlags = 0;
+        resourceFlags.StructureByteStride = 0;
+        DAWN_TRY(CheckHRESULT(GetOrCreateD3D11on12Device()->CreateWrappedResource(
+                                  d3d12Resource.Get(), &resourceFlags, D3D12_RESOURCE_STATE_COMMON,
+                                  D3D12_RESOURCE_STATE_COMMON, IID_PPV_ARGS(&d3d11Texture)),
+                              "Failed to create wrapped D3D11on12 resource"));
+        d3d11Texture.As(&dxgiKeyedMutex);
+        DAWN_INVALID_IF(!dxgiKeyedMutex, "Failed to retrieve DXGI keyed mutex when expected");
+    }
+
+    return std::make_unique<d3d::ExternalImageDXGIImpl>(
+        this, std::move(d3d12Resource), std::move(dxgiKeyedMutex), textureDescriptor);
 }
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const TextureDescriptor* descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
+                                                  Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                                   std::vector<Ref<d3d::Fence>> waitFences,
                                                   bool isSwapChainTexture,
                                                   bool isInitialized) {
     Ref<Texture> dawnTexture;
-    if (ConsumedError(
-            Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
-                                         std::move(waitFences), isSwapChainTexture, isInitialized),
-            &dawnTexture)) {
+    if (ConsumedError(Texture::CreateExternalImage(
+                          this, descriptor, std::move(d3dTexture), std::move(keyedMutexHelper),
+                          std::move(waitFences), isSwapChainTexture, isInitialized),
+                      &dawnTexture)) {
         return nullptr;
     }
     return {dawnTexture};
+}
+
+void Device::DisposeExternalImageResources(ComPtr<IUnknown> d3dTexture,
+                                           Ref<d3d::KeyedMutexHelper> keyedMutexHelper) {
+    if (keyedMutexHelper != nullptr) {
+        // If a keyed mutex is present, then we wrapped the texture as a 11on12 texture only to get
+        // the keyed mutex, and the 11on12 device has to be flushed to avoid resource leaks.
+        // See also comments in Flush11on12DeviceToAvoidLeaks().
+        Flush11On12DeviceToAvoidLeaks(mD3d11On12Device);
+    }
+    // Do nothing - the smart pointers will release their resources when they go out of scope.
 }
 
 const D3D12DeviceInfo& Device::GetDeviceInfo() const {

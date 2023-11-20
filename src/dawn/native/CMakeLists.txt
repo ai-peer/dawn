@@ -302,6 +302,8 @@ if (DAWN_ENABLE_D3D11 OR DAWN_ENABLE_D3D12)
         "d3d/Fence.cpp"
         "d3d/Fence.h"
         "d3d/Forward.h"
+        "d3d/KeyedMutexHelper.cpp"
+        "d3d/KeyedMutexHelper.h"
         "d3d/PhysicalDeviceD3D.cpp"
         "d3d/PhysicalDeviceD3D.h"
         "d3d/PlatformFunctions.cpp"

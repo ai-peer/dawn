@@ -157,9 +157,13 @@ class Device final : public d3d::Device {
 
     Ref<TextureBase> CreateD3DExternalTexture(const TextureDescriptor* descriptor,
                                               ComPtr<IUnknown> d3dTexture,
+                                              Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                               std::vector<Ref<d3d::Fence>> waitFences,
                                               bool isSwapChainTexture,
                                               bool isInitialized) override;
+
+    void DisposeExternalImageResources(ComPtr<IUnknown> d3dTexture,
+                                       Ref<d3d::KeyedMutexHelper> keyedMutexHelper) override;
 
     uint32_t GetOptimalBytesPerRowAlignment() const override;
     uint64_t GetOptimalBufferToTextureCopyOffsetAlignment() const override;
@@ -240,6 +244,8 @@ class Device final : public d3d::Device {
     void AppendDebugLayerMessages(ErrorData* error) override;
     void AppendDeviceLostMessage(ErrorData* error) override;
 
+    ComPtr<ID3D11On12Device> GetOrCreateD3D11on12Device();
+
     MaybeError EnsureDXCIfRequired();
 
     MaybeError CreateZeroBuffer();
@@ -250,6 +256,9 @@ class Device final : public d3d::Device {
     ComPtr<ID3D12Device> mD3d12Device;  // Device is owned by adapter and will not be outlived.
     ComPtr<ID3D12CommandQueue> mCommandQueue;
     ComPtr<ID3D12SharingContract> mD3d12SharingContract;
+
+    // 11on12 device corresponding to mCommandQueue
+    ComPtr<ID3D11On12Device> mD3d11On12Device;
 
     ComPtr<ID3D12CommandSignature> mDispatchIndirectSignature;
     ComPtr<ID3D12CommandSignature> mDrawIndirectSignature;
