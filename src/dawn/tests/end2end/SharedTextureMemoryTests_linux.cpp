@@ -36,6 +36,28 @@
 #include "dawn/tests/end2end/SharedTextureMemoryTests.h"
 #include "dawn/webgpu_cpp.h"
 
+#include <dirent.h>
+#include <stddef.h>
+#include <sys/types.h>
+
+int count_open_fds(void) {
+    DIR* dp = opendir("/proc/self/fd");
+    struct dirent* de;
+    int count = -3;  // '.', '..', dp
+
+    if (dp == NULL) {
+        return -1;
+    }
+
+    while ((de = readdir(dp)) != NULL) {
+        count++;
+    }
+
+    (void)closedir(dp);
+
+    return count;
+}
+
 namespace dawn {
 namespace {
 
@@ -217,6 +239,7 @@ class Backend : public SharedTextureMemoryTestBackend {
 
   private:
     void SetUp() override {
+        fprintf(stderr, "SetUp: fd count: %d\n", count_open_fds());
         // Render nodes [1] are the primary interface for communicating with the GPU on
         // devices that support DRM. The actual filename of the render node is
         // implementation-specific, so we must scan through all possible filenames to find
@@ -259,6 +282,7 @@ class Backend : public SharedTextureMemoryTestBackend {
         if (mRenderNodeFd >= 0) {
             close(mRenderNodeFd);
         }
+        fprintf(stderr, "TearDown: fd count: %d\n", count_open_fds());
     }
 
     int mRenderNodeFd = -1;
