@@ -16,6 +16,250 @@
       "message": "PTAL, thanks!",
       "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45f756a5_876b5936",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "Nice work getting this working on D3D11! I think there could be a bunch of simplifications though.",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a13c3496_6aafd14e",
+        "filename": "src/dawn/native/d3d/D3DCompilationRequest.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "nit: tintOptions is now passed directly in the compilation request so we can edit it there! https://dawn-review.googlesource.com/c/dawn/+/160920",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd9cd34a_15677240",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "Why can\u0027t this always be 0?",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40f73090_71340636",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "Can\u0027t we apply the fixed UAVs once at the state tracker creation (or in a method called early in the render pass) to simplify the code? It would also get rid of the need for [1] I think it would work if we also update GetUAVSlotCount to take into storage attachments (which conveniently are in PipelineLayoutBase).\n\nWe should maybe comment that OMSetRenderTargetsAndUnorderedAccessViews will keep all the bound UAVs prior to `uavSlotCount - d3d11UAVs.size()` so we only need to rebind UAVs for bindgroups that are not inherited. BindGroupTrackerBase makes sure that non-inherited bindgroups are marked as dirty so we\u0027re good.\n\nCan we have a test for PLS + UAV (buffer?) to check this logic is at least semi-correct?",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d93bf55_9e114dcf",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "nit: Maybe document what these fixedUAV parameters do?",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b14a76be_9cef3e45",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 538,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "nit: Some block comments and empty lines would help separate the code a bit better :) Also maybe mention that we create temporary textures for the implicit PLS and TODO could later optimize it by creating a single 2D array texture, and reusing it across different render passes potentially.",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9f66de6_a698d8ac",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 541,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d1f3a8c_f712a900",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 562,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "nit: AddTemporaryTextureView so we don\u0027t need to expose the whole vector mutably?",
+      "range": {
+        "startLine": 562,
+        "startChar": 32,
+        "endLine": 562,
+        "endChar": 54
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "445eb88a_a76b1405",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 620,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb6c82a9_cee49b8d",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "402b9db0_085ae463",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b9648ba_7c82f174",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "TODO pack in color attachments?",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43cf1f00_7fba0064",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "u-nit: this could be a helper function that static_asserts RenderPipelineBase::kImplicitPLSSlotFormat is R32Uint.",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c89d3ec_163d2d7c",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 204,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T16:18:49Z",
+      "side": 1,
+      "message": "TODO maybe nicer?",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
