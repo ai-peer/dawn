@@ -279,6 +279,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93840973_d5a5787d",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-20T23:00:34Z",
+      "side": 1,
+      "message": "Turns out the other \"shortcut\" I proposed (appending \"f_\" suffix to fragment shader buffer bindings variable) require variable name of resource binding, which is not immediately accessible from current code. I think I will go for transform directly then.",
+      "parentUuid": "873a2a37_ab97cda7",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
