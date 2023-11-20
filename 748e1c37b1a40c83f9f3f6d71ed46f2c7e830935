@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c97ca228_0d17788c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-20T18:37:52Z",
+      "side": 1,
+      "message": "This seems wrong. MSL doesn\u0027t support any of these address spaces at module-scope, so we\u0027ll never emit them in the root block. We\u0027ll need a transform to move them to entry point parameters / function-scope var declarations.",
+      "revId": "748e1c37b1a40c83f9f3f6d71ed46f2c7e830935",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dc7b0463_f3c9f8fe",
