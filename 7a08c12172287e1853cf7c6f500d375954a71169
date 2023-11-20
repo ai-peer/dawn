@@ -33,6 +33,432 @@
       "message": "Please take a look, thanks",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d594e4_31fbbdcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "Zhaoming or Alan do you have a link to what this extension is needed for?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e7c7703_cb8d69b0",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 3297,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: descriptor can be removed. Maybe \"dawn compute pipeline full subgroups\"?",
+      "range": {
+        "startLine": 3297,
+        "startChar": 59,
+        "endLine": 3297,
+        "endChar": 69
+      },
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0aafd14d_d5540223",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: We could use FindInChain here.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9614bab1_7dc7e36c",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: IMHO experimental is an extension thing, but the member and getters could be requireSFullSubgroups (with the s in requires)",
+      "range": {
+        "startLine": 106,
+        "startChar": 11,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97952676_76d17f2d",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "ditto, same as the Vulkan backend.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2281050d_01490b19",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "this validation could be moved in the frontend. Ditto for all the backends.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "978cdc0a_ca4b145e",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: I don\u0027t think we need to initialize this at it should be overwritten (and in the error case we don\u0027t return `result`)",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "17470a92_e1aa7071",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "We can just DAWN_TEST_UNSUPPORTED_IF in `SetUp` in this case. We have validation tests for the enable being possible only with the extension in https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp;l\u003d799?q\u003dShaderModuleValidation",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a31323c4_4cea51c1",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "Isn\u0027t subgroups nots supported in this case on the adapter? So that we don\u0027t need to mess with the dxc toggles etc?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f74e7c24_a879c091",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "188ca952_925631d8",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: unused",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b7cceb3_74d2e8b5",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "Why skip on the wire?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a9f19d_4eecbc38",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "That\u0027s already done by the DawnTest fixture, no need to manually check error scopes.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f276fb_1c94d877",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: For \"alignment\" style constraints we use the limit/2. So here cases could be:\n\n```\n {limit, 1, 1},\n {limit * 2, 1, 1}\n {limit, 2, 1},\n {limit, 1, 2},\n {limit / 2, 2, 1},\n ```",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0a4c7b9_2946572f",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "That can be done with ASSERT_DEVICE_ERROR around the computePipeline creation.\n\nDitto for the other test lambda.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4960bff_71b126c0",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: no need to check this. ditt ofor the other lambda.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a2e3405_2f00f7b7",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "IMHO we could split this into two different tests, most of the code isn\u0027t shared.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bcdaf64_0f200bf8",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "Could the case list be built with the limits instead of hardcoded?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "155f17d9_a8b0caa0",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "Can\u0027t `ComputePipelineFullSubgroupValidationTest` inherit from `ComputePipelineValidationTest` and overload `CreateTestDevice`?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2734ae3_88dd7fec",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "When is this argument not \"main\"?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55634573_53d6a282",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "\"can success\" -\u003e \"succeeds\" or \"is valid\"",
+      "range": {
+        "startLine": 90,
+        "startChar": 74,
+        "endLine": 90,
+        "endChar": 81
+      },
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bdb7da7_92beeaf5",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "nit: no need for a PL, ditto in a bunch of other cases.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0575bd6_e4aad2a3",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "Isn\u0027t that the same tests as `TEST_F(ComputePipelineValidationTest, Success) {` ?\n\nAlso slight preference for grouping the fullSubgroups tests together, even if they come from different fixtures.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cbf879de_e0fb009c",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T15:41:40Z",
+      "side": 1,
+      "message": "This validation could be moved to the frontend and CreateShaderModule would get an optional argument to specify the workgroup size maybe?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
