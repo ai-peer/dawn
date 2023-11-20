@@ -1,0 +1,129 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4364e93b_0a85b1e0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:48:35Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bafa6377_0a92b700",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:48:35Z",
+      "side": 1,
+      "message": "nit: GetUsage()?",
+      "range": {
+        "startLine": 185,
+        "startChar": 21,
+        "endLine": 185,
+        "endChar": 32
+      },
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "567813a6_4e14448c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 191,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:48:35Z",
+      "side": 1,
+      "message": "This doesn\u0027t work for attachments that are both render and storage attachment but that\u0027s minor.. We could fix this later with the TODO at [1].",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ef0254d_8a17b108",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:48:35Z",
+      "side": 1,
+      "message": "nit: UNREACHABLE()?",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6cf344a9_9e19f5e4",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:48:35Z",
+      "side": 1,
+      "message": "The spec isn\u0027t super clear as to what attachments are considered [here](https://gpuweb.github.io/gpuweb/#dom-gpucommandencoder-beginrenderpass:~:text\u003dThe%20set%20of%20attachments%20in%20descriptor.colorAttachments%20must%20be%20pairwise%20disjoint.%20That%20is%2C%20no%20two%20attachments%20may%20refer%20to%20the%20same%20region%2C%20as%20defined%20by%20the%20view%27s%20texture%20subresource%20range%20and%20(for%20%223d%22%20attachments)%20the%20attachment%E2%80%99s%20depthSlice.), can you open an issue? But I think we should consider `resolveTarget` as part of it because previously we would validate this in [2].\n\nSo we need to call AddAttachment for `resolveTarget`, which also lets us simplify `ValidateResolveTarget` a bit. We need to let `AddAttachment` know that this is a resolve target so we can skip the sampleCount validation. Also passing an `AttachmentType` enum that\u0027s `RenderAttachment|StorageAttachment|ResolveTarget|DepthStencilAttachment` lets us simplify GetAttachmentTypeStr.\n\nCan we also have a ResourceUsageValidationTest that would have found this issue? (it would need two resolve targets that are the same subresource in a BeginRenderPass)",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93d02a11_75a14374",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:48:35Z",
+      "side": 1,
+      "message": "nit: commented out code? I think it can be removed.",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "befe835d_27c1bbee",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1130,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T13:48:35Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
