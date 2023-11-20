@@ -98,8 +98,10 @@ class Printer : public tint::TextGenerator {
         }
 
         // Emit module-scope declarations.
-        EmitBlockInstructions(ir_.root_block);
-
+        {
+            TINT_SCOPED_ASSIGNMENT(emitting_root_block_, true);
+            EmitBlockInstructions(ir_.root_block);
+        }
         // Emit functions.
         for (auto* func : ir_.functions) {
             EmitFunction(func);
@@ -133,6 +135,9 @@ class Printer : public tint::TextGenerator {
     /// Unique name of the tint_array<T, N> template.
     /// Non-empty only if the template has been generated.
     std::string array_template_name_;
+
+    /// Is the module currently emitting the root block
+    bool emitting_root_block_ = false;
 
     /// The representation for an IR pointer type
     enum class PtrKind {
@@ -320,32 +325,20 @@ class Printer : public tint::TextGenerator {
         auto* ptr = v->Result()->Type()->As<core::type::Pointer>();
         TINT_ASSERT_OR_RETURN(ptr);
 
-        auto space = ptr->AddressSpace();
-        switch (space) {
-            case core::AddressSpace::kFunction:
-            case core::AddressSpace::kHandle:
-                break;
-            case core::AddressSpace::kPrivate:
-                out << "thread ";
-                break;
-            case core::AddressSpace::kWorkgroup:
-                out << "threadgroup ";
-                break;
-            default:
-                TINT_ICE() << "unhandled variable address space";
-                return;
-        }
-
         auto name = ir_.NameOf(v);
 
+        // Note, this does not emit the pointer type because we don't want to add the `*` of the
+        // pointer. Everything in an IR var is a pointer but maybe a non-pointer thing in MSL.
+        EmitAddressSpace(out, ptr->AddressSpace());
         EmitType(out, ptr->UnwrapPtr());
+
         out << " " << name.Name();
 
         if (v->Initializer()) {
             out << " = " << Expr(v->Initializer());
-        } else if (space == core::AddressSpace::kPrivate ||
-                   space == core::AddressSpace::kFunction ||
-                   space == core::AddressSpace::kUndefined) {
+        } else if (ptr->AddressSpace() == core::AddressSpace::kPrivate ||
+                   ptr->AddressSpace() == core::AddressSpace::kFunction ||
+                   ptr->AddressSpace() == core::AddressSpace::kUndefined) {
             out << " = ";
             EmitZeroValue(out, ptr->UnwrapPtr());
         }
@@ -437,18 +430,22 @@ class Printer : public tint::TextGenerator {
     void EmitAddressSpace(StringStream& out, core::AddressSpace sc) {
         switch (sc) {
             case core::AddressSpace::kFunction:
-            case core::AddressSpace::kPrivate:
             case core::AddressSpace::kHandle:
-                out << "thread";
+                if (emitting_root_block_) {
+                    out << "thread ";
+                }
+                break;
+            case core::AddressSpace::kPrivate:
+                out << "thread ";
                 break;
             case core::AddressSpace::kWorkgroup:
-                out << "threadgroup";
+                out << "threadgroup ";
                 break;
             case core::AddressSpace::kStorage:
-                out << "device";
+                out << "device ";
                 break;
             case core::AddressSpace::kUniform:
-                out << "constant";
+                out << "constant ";
                 break;
             default:
                 TINT_ICE() << "unhandled address space: " << sc;
@@ -492,7 +489,6 @@ class Printer : public tint::TextGenerator {
             out << "const ";
         }
         EmitAddressSpace(out, ptr->AddressSpace());
-        out << " ";
         EmitType(out, ptr->StoreType());
         out << "*";
     }
