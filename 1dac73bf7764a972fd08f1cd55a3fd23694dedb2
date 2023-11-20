@@ -88,6 +88,24 @@
       "parentUuid": "f24638de_3272536b",
       "revId": "1dac73bf7764a972fd08f1cd55a3fd23694dedb2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c037981_fc81add1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-20T17:23:15Z",
+      "side": 1,
+      "message": "aha. I found out where D3D tells you the actual max. it\u0027s on the adapter descriptor. so I can indeed move this to the adapter\n\nhttps://learn.microsoft.com/en-us/windows/win32/api/dxgi/ns-dxgi-dxgi_adapter_desc",
+      "parentUuid": "acd69618_7e64a0db",
+      "revId": "1dac73bf7764a972fd08f1cd55a3fd23694dedb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
