@@ -71,6 +71,75 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3286e6d9_6e805f89",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: remove `\u0026`, so we can use rvalue in call site.",
+      "range": {
+        "startLine": 136,
+        "startChar": 80,
+        "endLine": 136,
+        "endChar": 81
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac5ed738_674000e5",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 242,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: `views(uavsInBindGroup.size());`?",
+      "range": {
+        "startLine": 242,
+        "startChar": 56,
+        "endLine": 242,
+        "endChar": 61
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9625cac7_db91c85b",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "Will it overwrite mFixedUAVs in views? could you please explain it?",
+      "range": {
+        "startLine": 259,
+        "startChar": 20,
+        "endLine": 259,
+        "endChar": 25
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "40f73090_71340636",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
         "patchSetId": 2
@@ -88,6 +157,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "787ae077_56898709",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: how do we arrange UAVs and RTVs in a pipeline? could you please add a comment here or at BindGroupTrackerD3D11.cpp:238? thanks",
+      "range": {
+        "startLine": 42,
+        "startChar": 6,
+        "endLine": 42,
+        "endChar": 22
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3d93bf55_9e114dcf",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
         "patchSetId": 2
@@ -99,6 +191,52 @@
       "writtenOn": "2023-11-20T16:18:49Z",
       "side": 1,
       "message": "nit: Maybe document what these fixedUAV parameters do?",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9bb8462e_5fc6ae31",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: the meaning of those two params are not clear. Could you please add comments in code?",
+      "range": {
+        "startLine": 46,
+        "startChar": 0,
+        "endLine": 47,
+        "endChar": 82
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e2e2b2d_ed83e2df",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: add comment here too.",
+      "range": {
+        "startLine": 58,
+        "startChar": 0,
+        "endLine": 59,
+        "endChar": 61
+      },
       "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +298,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "83365a07_74111dbc",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 563,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: `commandContext-\u003eAddTempTextureView(implicitPixelLocalStorageTextureView);`?",
+      "range": {
+        "startLine": 562,
+        "startChar": 16,
+        "endLine": 563,
+        "endChar": 58
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "445eb88a_a76b1405",
@@ -173,6 +334,29 @@
       "writtenOn": "2023-11-20T16:18:49Z",
       "side": 1,
       "message": "[1]",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "935d6282_d544f4e1",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: change tracker ctor signature and use `std::move(pixelLocalStorageROVPtrs)` to avoid unnecessary heap allocation.\n\nAnd I think it is better to pass `pixelLocalStorageROVs` instead of `pixelLocalStorageROVPtrs`? I guess d3d11device context will keep views in `pixelLocalStorageROVPtrs` alive, but it depends on d3d11 implementation detail.",
+      "range": {
+        "startLine": 652,
+        "startChar": 74,
+        "endLine": 652,
+        "endChar": 98
+      },
       "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -207,6 +391,52 @@
       "writtenOn": "2023-11-20T16:18:49Z",
       "side": 1,
       "message": "nit: unused",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7486d65_bb6816ab",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "nit: What is it for? Please add comment about it.",
+      "range": {
+        "startLine": 77,
+        "startChar": 38,
+        "endLine": 77,
+        "endChar": 55
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f55493_9399833d",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 141,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-20T16:19:56Z",
+      "side": 1,
+      "message": "Do we allow caller modify the vector? If not, please use `const std::vector\u003cRef\u003cTextureViewBase\u003e\u003e\u0026`.",
+      "range": {
+        "startLine": 141,
+        "startChar": 4,
+        "endLine": 141,
+        "endChar": 38
+      },
       "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
