@@ -462,13 +462,48 @@ MaybeError RenderPipeline::InitializeShaders() {
         mUsesInstanceIndex = compiledShader[SingleShaderStage::Vertex].usesInstanceIndex;
     }
 
+    std::optional<tint::PixelLocalOptions> pixelLocalOptions;
     if (GetStageMask() & wgpu::ShaderStage::Fragment) {
+        pixelLocalOptions = tint::PixelLocalOptions();
+        // HLSL SM5.0 doesn't support groups, so we set group index to 0.
+        pixelLocalOptions->pixel_local_group_index = 0;
+
+        uint32_t basePixelLocalAttachmentIndex =
+            static_cast<uint8_t>(GetHighestBitIndexPlusOne(GetColorAttachmentsMask()));
+        if (GetAttachmentState()->HasPixelLocalStorage()) {
+            const std::vector<wgpu::TextureFormat>& storageAttachmentSlots =
+                GetAttachmentState()->GetStorageAttachmentSlots();
+            for (size_t i = 0; i < storageAttachmentSlots.size(); i++) {
+                pixelLocalOptions->attachments[i] = basePixelLocalAttachmentIndex + i;
+
+                switch (storageAttachmentSlots[i]) {
+                        // We use R32Uint as default pixel local storage attachment format
+                    case wgpu::TextureFormat::Undefined:
+                    case wgpu::TextureFormat::R32Uint:
+                        pixelLocalOptions->attachment_formats[i] =
+                            tint::PixelLocalOptions::TexelFormat::kR32Uint;
+                        break;
+                    case wgpu::TextureFormat::R32Sint:
+                        pixelLocalOptions->attachment_formats[i] =
+                            tint::PixelLocalOptions::TexelFormat::kR32Sint;
+                        break;
+                    case wgpu::TextureFormat::R32Float:
+                        pixelLocalOptions->attachment_formats[i] =
+                            tint::PixelLocalOptions::TexelFormat::kR32Float;
+                        break;
+                    default:
+                        DAWN_UNREACHABLE();
+                        break;
+                }
+            }
+        }
+
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Fragment);
         DAWN_TRY_ASSIGN(
             compiledShader[SingleShaderStage::Fragment],
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Fragment, ToBackend(GetLayout()),
-                          compileFlags, usedInterstageVariables));
+                          compileFlags, usedInterstageVariables, pixelLocalOptions));
         DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreatePixelShader(
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Data(),
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Size(),

@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <array>
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "dawn/common/WindowsUtils.h"
@@ -141,12 +142,16 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
         for (size_t i = 0; i < scope.textures.size(); i++) {
             Texture* texture = ToBackend(scope.textures[i]);
 
-            // Clear subresources that are not render attachments. Render attachments will be
-            // cleared in RecordBeginRenderPass by setting the loadop to clear when the texture
-            // subresource has not been initialized before the render pass.
+            // Clear subresources that are not render attachments or storage attachment. Render
+            // attachments will be cleared in RecordBeginRenderPass by setting the loadop to clear
+            // when the texture subresource has not been initialized before the render pass. Storage
+            // attachments will also be cleared in RecordBeginRenderPass by
+            // ClearUnorderedAccessView*() when the texture subresource has not been initialized
+            // before the render pass.
             DAWN_TRY(scope.textureSyncInfos[i].Iterate([&](const SubresourceRange& range,
                                                            TextureSyncInfo syncInfo) -> MaybeError {
-                if (syncInfo.usage & ~wgpu::TextureUsage::RenderAttachment) {
+                if (syncInfo.usage & ~(wgpu::TextureUsage::RenderAttachment |
+                                       wgpu::TextureUsage::StorageAttachment)) {
                     DAWN_TRY(texture->EnsureSubresourceContentInitialized(commandContext, range));
                 }
                 return {};
@@ -527,8 +532,102 @@ MaybeError CommandBuffer::ExecuteRenderPass(
                                                   attachmentInfo->clearStencil);
     }
 
-    d3d11DeviceContext->OMSetRenderTargets(static_cast<uint8_t>(attachmentCount),
-                                           d3d11RenderTargetViews.data(), d3d11DepthStencilView);
+    uint32_t pixelLocalStorageBaseRegisterIndex = static_cast<uint8_t>(attachmentCount);
+    std::vector<ID3D11UnorderedAccessView*> pixelLocalStorageROVPtrs;
+    std::vector<ComPtr<ID3D11UnorderedAccessView>> pixelLocalStorageROVs;
+    if (renderPass->attachmentState->HasPixelLocalStorage()) {
+        const std::vector<wgpu::TextureFormat>& storageAttachmentSlots =
+            renderPass->attachmentState->GetStorageAttachmentSlots();
+        std::vector<ColorAttachmentIndex> storageAttachmentPacking =
+            renderPass->attachmentState->ComputeStorageAttachmentPackingInColorAttachments();
+        for (size_t attachment = 0; attachment < storageAttachmentSlots.size(); attachment++) {
+            TextureViewBase* pixelLocalStorageTextureView = nullptr;
+            wgpu::LoadOp pixelLocalStorageLoadOp;
+            Color pixelLocalStorageClearColor;
+
+            if (storageAttachmentSlots[attachment] == wgpu::TextureFormat::Undefined) {
+                TextureDescriptor pixelLocalStorageTextureDescriptor;
+                pixelLocalStorageTextureDescriptor.dimension = wgpu::TextureDimension::e2D;
+                pixelLocalStorageTextureDescriptor.format =
+                    RenderPipelineBase::kImplicitPLSSlotFormat;
+                pixelLocalStorageTextureDescriptor.usage = wgpu::TextureUsage::StorageAttachment;
+                pixelLocalStorageTextureDescriptor.size = {renderPass->width, renderPass->height,
+                                                           1};
+                Ref<TextureBase> implicitPixelLocalStorageTexture;
+                DAWN_TRY_ASSIGN(implicitPixelLocalStorageTexture,
+                                GetDevice()->CreateTexture(&pixelLocalStorageTextureDescriptor));
+                Ref<TextureViewBase> implicitPixelLocalStorageTextureView;
+                DAWN_TRY_ASSIGN(implicitPixelLocalStorageTextureView,
+                                implicitPixelLocalStorageTexture->CreateView());
+                commandContext->GetAllTempTextureViews()->emplace_back(
+                    implicitPixelLocalStorageTextureView);
+
+                pixelLocalStorageTextureView = implicitPixelLocalStorageTextureView.Get();
+                pixelLocalStorageLoadOp = wgpu::LoadOp::Clear;
+                pixelLocalStorageClearColor = {};
+            } else {
+                auto& attachmentInfo = renderPass->storageAttachments[attachment];
+                pixelLocalStorageTextureView = attachmentInfo.storage.Get();
+                pixelLocalStorageLoadOp = attachmentInfo.loadOp;
+                pixelLocalStorageClearColor = attachmentInfo.clearColor;
+            }
+
+            ComPtr<ID3D11UnorderedAccessView> pixelLocalStorageUAV;
+            DAWN_TRY_ASSIGN(
+                pixelLocalStorageUAV,
+                ToBackend(pixelLocalStorageTextureView)->GetOrCreateD3D11UnorderedAccessView());
+
+            switch (pixelLocalStorageLoadOp) {
+                case wgpu::LoadOp::Clear: {
+                    switch (pixelLocalStorageTextureView->GetFormat().format) {
+                        case wgpu::TextureFormat::R32Float: {
+                            float clearValue[4] = {
+                                static_cast<float>(pixelLocalStorageClearColor.r), 0, 0, 0};
+                            d3d11DeviceContext->ClearUnorderedAccessViewFloat(
+                                pixelLocalStorageUAV.Get(), clearValue);
+                            break;
+                        }
+                        case wgpu::TextureFormat::R32Sint:
+                        case wgpu::TextureFormat::R32Uint: {
+                            uint32_t clearValue[4] = {
+                                static_cast<uint32_t>(pixelLocalStorageClearColor.r), 0, 0, 0};
+                            d3d11DeviceContext->ClearUnorderedAccessViewUint(
+                                pixelLocalStorageUAV.Get(), clearValue);
+                            break;
+                        }
+                        default:
+                            DAWN_UNREACHABLE();
+                            break;
+                    }
+                    break;
+                }
+
+                case wgpu::LoadOp::Load:
+                    break;
+
+                case wgpu::LoadOp::Undefined:
+                    DAWN_UNREACHABLE();
+                    break;
+            }
+
+            pixelLocalStorageROVs.push_back(std::move(pixelLocalStorageUAV));
+        }
+        uint8_t rtvCount = static_cast<uint8_t>(attachmentCount);
+
+        for (auto& uav : pixelLocalStorageROVs) {
+            pixelLocalStorageROVPtrs.push_back(uav.Get());
+        }
+        uint8_t firstUAVRegister = rtvCount;
+        d3d11DeviceContext->OMSetRenderTargetsAndUnorderedAccessViews(
+            rtvCount, d3d11RenderTargetViews.data(), d3d11DepthStencilView, firstUAVRegister,
+            static_cast<uint32_t>(pixelLocalStorageROVPtrs.size()), pixelLocalStorageROVPtrs.data(),
+            nullptr);
+
+    } else {
+        d3d11DeviceContext->OMSetRenderTargets(static_cast<uint8_t>(attachmentCount),
+                                               d3d11RenderTargetViews.data(),
+                                               d3d11DepthStencilView);
+    }
 
     // Set viewport
     D3D11_VIEWPORT defautViewport;
@@ -549,7 +648,8 @@ MaybeError CommandBuffer::ExecuteRenderPass(
     d3d11DeviceContext->RSSetScissorRects(1, &scissor);
 
     RenderPipeline* lastPipeline = nullptr;
-    BindGroupTracker bindGroupTracker(commandContext, /*isRenderPass=*/true);
+    BindGroupTracker bindGroupTracker(commandContext, /*isRenderPass=*/true,
+                                      pixelLocalStorageBaseRegisterIndex, pixelLocalStorageROVPtrs);
     VertexBufferTracker vertexBufferTracker(commandContext);
     std::array<float, 4> blendColor = {0.0f, 0.0f, 0.0f, 0.0f};
     uint32_t stencilReference = 0;

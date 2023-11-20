@@ -29,6 +29,7 @@
 
 #include <string>
 #include <utility>
+#include <vector>
 
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
@@ -36,6 +37,7 @@
 #include "dawn/native/d3d11/Forward.h"
 #include "dawn/native/d3d11/PhysicalDeviceD3D11.h"
 #include "dawn/native/d3d11/PipelineLayoutD3D11.h"
+#include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
 
@@ -179,6 +181,11 @@ Buffer* ScopedSwapStateCommandRecordingContext::GetUniformBuffer() const {
     return mCommandContext->mUniformBuffer.Get();
 }
 
+std::vector<Ref<TextureViewBase>>* ScopedSwapStateCommandRecordingContext::GetAllTempTextureViews()
+    const {
+    return &mCommandContext->mTempTextureViews;
+}
+
 MaybeError CommandRecordingContext::Intialize(Device* device) {
     DAWN_ASSERT(!IsOpen());
     DAWN_ASSERT(device);
@@ -246,6 +253,7 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
 MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
     // Consider using deferred DeviceContext.
     mNeedsSubmit = false;
+    mTempTextureViews.clear();
     return {};
 }
 
