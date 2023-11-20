@@ -16,6 +16,23 @@
       "message": "For Kokoro",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "31ce9535_9fbd01e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-20T09:24:33Z",
+      "side": 1,
+      "message": "Please take a look, thanks",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
