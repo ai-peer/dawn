@@ -217,7 +217,7 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
      {"Support importing DXGISharedHandle as shared texture memory.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "shared_texture_memory.md",
-      FeatureInfo::FeatureState::Experimental}},
+      FeatureInfo::FeatureState::Stable}},
     {Feature::SharedTextureMemoryD3D11Texture2D,
      {"Support importing D3D11Texture2D as shared texture memory.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
@@ -227,7 +227,7 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
      {"Support importing IOSurface as shared texture memory.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "shared_texture_memory.md",
-      FeatureInfo::FeatureState::Experimental}},
+      FeatureInfo::FeatureState::Stable}},
     {Feature::SharedTextureMemoryEGLImage,
      {"Support importing EGLImage as shared texture memory.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
