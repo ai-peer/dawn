@@ -324,9 +324,14 @@ class Printer : public tint::TextGenerator {
         switch (space) {
             case core::AddressSpace::kFunction:
             case core::AddressSpace::kHandle:
-                break;
             case core::AddressSpace::kPrivate:
                 out << "thread ";
+                break;
+            case core::AddressSpace::kStorage:
+                out << "device";
+                break;
+            case core::AddressSpace::kUniform:
+                out << "constant";
                 break;
             case core::AddressSpace::kWorkgroup:
                 out << "threadgroup ";
