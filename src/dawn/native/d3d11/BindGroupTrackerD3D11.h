@@ -28,7 +28,10 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_BINDGROUPTRACKERD3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_BINDGROUPTRACKERD3D11_H_
 
+#include <vector>
+
 #include "dawn/native/BindGroupTracker.h"
+
 #include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d11 {
@@ -40,7 +43,9 @@ class ScopedSwapStateCommandRecordingContext;
 class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/true, uint64_t> {
   public:
     BindGroupTracker(const ScopedSwapStateCommandRecordingContext* commandContext,
-                     bool isRenderPass);
+                     bool isRenderPass,
+                     uint32_t fixedUAVBaseRegisterIndex = 0,
+                     const std::vector<ID3D11UnorderedAccessView*>& fixedUAVs = {});
     ~BindGroupTracker();
     MaybeError Apply();
 
@@ -51,6 +56,8 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/tr
     const ScopedSwapStateCommandRecordingContext* mCommandContext;
     const bool mIsRenderPass;
     const wgpu::ShaderStage mVisibleStages;
+    const uint32_t mFixedUAVBaseRegisterIndex;
+    const std::vector<ID3D11UnorderedAccessView*> mFixedUAVs;
 };
 
 }  // namespace dawn::native::d3d11

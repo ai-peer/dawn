@@ -234,6 +234,8 @@ MaybeError TranslateToHLSL(d3d::HlslCompilationRequest r,
         } else {
             return DAWN_VALIDATION_ERROR("Transform output missing first index offset data.");
         }
+    } else if (r.stage == SingleShaderStage::Fragment) {
+        r.tintOptions.pixel_local_options = r.pixelLocalOptions;
     }
 
     TRACE_EVENT0(tracePlatform.UnsafeGetValue(), General, "tint::hlsl::writer::Generate");
