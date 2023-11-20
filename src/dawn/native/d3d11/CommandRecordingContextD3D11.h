@@ -28,10 +28,16 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include <vector>
+
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/d3d/d3d_platform.h"
+
+namespace dawn::native {
+class TextureViewBase;
+}
 
 namespace dawn::native::d3d11 {
 class CommandAllocatorManager;
@@ -67,6 +73,10 @@ class CommandRecordingContext {
     Ref<Buffer> mUniformBuffer;
     std::array<uint32_t, kMaxNumBuiltinElements> mUniformBufferData;
     bool mUniformBufferDirty = true;
+
+    // All the temporary texture views used in current command recording context, which will always
+    // be cleared after ExecuteCommandList().
+    std::vector<Ref<TextureViewBase>> mTempTextureViews;
 
     Ref<Device> mDevice;
 };
@@ -130,6 +140,7 @@ class ScopedSwapStateCommandRecordingContext : public ScopedCommandRecordingCont
     ID3D11DeviceContext4* GetD3D11DeviceContext4() const;
     ID3DUserDefinedAnnotation* GetD3DUserDefinedAnnotation() const;
     Buffer* GetUniformBuffer() const;
+    void AddToTempTextureViews(Ref<TextureViewBase> tempTexture) const;
 
   private:
     const bool mSwapContextState;

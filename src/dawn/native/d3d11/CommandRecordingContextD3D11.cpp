@@ -179,6 +179,11 @@ Buffer* ScopedSwapStateCommandRecordingContext::GetUniformBuffer() const {
     return mCommandContext->mUniformBuffer.Get();
 }
 
+void ScopedSwapStateCommandRecordingContext::AddToTempTextureViews(
+    Ref<TextureViewBase> tempTexture) const {
+    mCommandContext->mTempTextureViews.emplace_back(std::move(tempTexture));
+}
+
 MaybeError CommandRecordingContext::Intialize(Device* device) {
     DAWN_ASSERT(!IsOpen());
     DAWN_ASSERT(device);
@@ -246,6 +251,7 @@ MaybeError CommandRecordingContext::Intialize(Device* device) {
 MaybeError CommandRecordingContext::ExecuteCommandList(Device* device) {
     // Consider using deferred DeviceContext.
     mNeedsSubmit = false;
+    mTempTextureViews.clear();
     return {};
 }
 
