@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e188299b_ceec6534",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T10:32:02Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "c295b98f51662370b8c24a81bdcecc8ac7204f20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a800c950_67dc705b",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-11-20T09:28:45Z",
       "side": 1,
       "message": "Is there a reason to not mark the other ones as stable as well, or perhaps at least for D3D11Texture2D?\n\nIf we *don\u0027t* mark all the other ones as stable at this time, how would you recommend updating shared_memory_texture.md (which currently lists (Experimental!) at the top)?",
+      "revId": "c295b98f51662370b8c24a81bdcecc8ac7204f20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc0d2527_694407b4",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-20T10:32:02Z",
+      "side": 1,
+      "message": "I think it\u0027s ok to mark as stable and remove the Experimental in the .md",
+      "parentUuid": "a800c950_67dc705b",
       "revId": "c295b98f51662370b8c24a81bdcecc8ac7204f20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
