@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d95ae98_1f7af4f1",
+        "filename": "docs/dawn/features/buffer_map_tiers.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T17:04:28Z",
+      "side": 1,
+      "message": "I think tiered names make it possible to have more than 2 related features in future.\nFor example, in future we could add a tier3 feature that allows MapRead \u0026 MapWrite to be combined. Though I don\u0027t see any immediate use cases for that yet.\n\nTiers also mimic Metal\u0027s convention of argument buffers\u0027 support\u0027s tiers.",
+      "parentUuid": "8d1d9ab9_be16e84f",
+      "revId": "d7e1752173c63589660af7f5152a30b2a87f2f2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9eaf2963_9f280f1c",
         "filename": "src/dawn/native/Buffer.cpp",
         "patchSetId": 13
@@ -48,6 +66,30 @@
       "writtenOn": "2023-11-20T14:40:31Z",
       "side": 1,
       "message": "nit: Maybe !HasZeroOrOneBit(usage \u0026 kMappableBufferUsages)) so that the validation works if we add another mappable usage in the future. (like MapWriteGPULocal)",
+      "range": {
+        "startLine": 163,
+        "startChar": 24,
+        "endLine": 163,
+        "endChar": 61
+      },
+      "revId": "d7e1752173c63589660af7f5152a30b2a87f2f2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61868e0a_620970d0",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T17:04:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9eaf2963_9f280f1c",
       "range": {
         "startLine": 163,
         "startChar": 24,
@@ -71,6 +113,30 @@
       "writtenOn": "2023-11-20T14:40:31Z",
       "side": 1,
       "message": "u-nit: kNonMapUsages?",
+      "range": {
+        "startLine": 1383,
+        "startChar": 32,
+        "endLine": 1383,
+        "endChar": 39
+      },
+      "revId": "d7e1752173c63589660af7f5152a30b2a87f2f2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6704a015_6237da96",
+        "filename": "src/dawn/tests/unittests/validation/BufferValidationTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1383,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-20T17:04:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "69eeccf9_8f9510ac",
       "range": {
         "startLine": 1383,
         "startChar": 32,
