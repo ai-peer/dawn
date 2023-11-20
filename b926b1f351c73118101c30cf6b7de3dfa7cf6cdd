@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e383b26_4c06877c",
+        "filename": "src/tint/lang/wgsl/language_feature.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-11-20T23:09:55Z",
+      "side": 1,
+      "message": "Is this used?\nIf not, it should be removed.",
+      "revId": "b926b1f351c73118101c30cf6b7de3dfa7cf6cdd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
