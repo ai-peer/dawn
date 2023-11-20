@@ -22,6 +22,30 @@
       },
       "revId": "a2eea8b1687e33786b1a49587a62af31fc3a2e1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8fd07f32_7523c918",
+        "filename": "src/dawn/samples/android/common/build.gradle",
+        "patchSetId": 11
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1004576
+      },
+      "writtenOn": "2023-11-20T11:02:28Z",
+      "side": 1,
+      "message": "I suspect if you don\u0027t add this, it may build additional stuff. because I am not sure without this gradle can understand what the sample is depending on therefore probably try to build everything.",
+      "parentUuid": "886fe448_c1c19bdc",
+      "range": {
+        "startLine": 16,
+        "startChar": 8,
+        "endLine": 24,
+        "endChar": 9
+      },
+      "revId": "a2eea8b1687e33786b1a49587a62af31fc3a2e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
