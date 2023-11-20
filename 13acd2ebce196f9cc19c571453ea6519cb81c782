@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a7a210ac_293c42b7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-20T07:15:45Z",
+      "side": 1,
+      "message": "Sorry, I uploaded the PS32 by mistake. PS33 should revert that.",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
