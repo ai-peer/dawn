@@ -28,10 +28,16 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include <vector>
+
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/d3d/d3d_platform.h"
+
+namespace dawn::native {
+class TextureViewBase;
+}
 
 namespace dawn::native::d3d11 {
 class CommandAllocatorManager;
