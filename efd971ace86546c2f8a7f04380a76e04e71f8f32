@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "efd971ace86546c2f8a7f04380a76e04e71f8f32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "feb75586_be3b1953",
+        "filename": "docs/dawn/features/multi_planar_formats.md",
+        "patchSetId": 1
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-20T16:46:17Z",
+      "side": 1,
+      "message": "RGBA8Unorm, because we don\u0027t have formats without alpha",
+      "range": {
+        "startLine": 4,
+        "startChar": 363,
+        "endLine": 4,
+        "endChar": 372
+      },
+      "revId": "efd971ace86546c2f8a7f04380a76e04e71f8f32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
