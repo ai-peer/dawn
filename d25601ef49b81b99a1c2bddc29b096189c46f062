@@ -72,6 +72,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b56a1727_df28dfd0",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T21:57:44Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "fa3a3b9f_6115a819",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 92
+      },
+      "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2ddf43a_6a53c7a8",
@@ -109,6 +133,30 @@
       "side": 1,
       "message": "I think the tricky bit is that Signal only acquires the lock the first time when it transitions from false to true. After that, it doesn\u0027t - which I think is reason enough to encapsulate this.\n\nAlso we will use SystemEvent again in the future to implement async pipeline creation.",
       "parentUuid": "e2ddf43a_6a53c7a8",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 95
+      },
+      "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7f4c65f_a134e98e",
+        "filename": "src/dawn/native/SystemEvent.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T21:57:44Z",
+      "side": 1,
+      "message": "Hmm I guess the question in that case is how often `Signal` would be called? I was under the impression that it should only really be called once? In which case there\u0027s no reason to bother optimizing for multiple `Signal` calls?",
+      "parentUuid": "c0cf660e_6a791327",
       "range": {
         "startLine": 114,
         "startChar": 4,
