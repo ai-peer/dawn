@@ -189,6 +189,30 @@
       },
       "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a629dfd9_2df63c9c",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T23:55:52Z",
+      "side": 1,
+      "message": "ohh I see I see.\n\nwhat kind of failure would we be trying to report?\nI think I agree with Loko that the assert may not be needed at all",
+      "parentUuid": "9c528b6c_fcb69100",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
