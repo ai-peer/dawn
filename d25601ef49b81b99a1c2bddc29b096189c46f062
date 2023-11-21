@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26882d09_b2375f23",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T21:20:26Z",
+      "side": 1,
+      "message": "nit. based on the waiting device and type of wait required.\n\n(The partition on device comment from before is lost otherwise, and it was not immediately obvious that that\u0027s what this was doing.)\n\nBut also, IIUC, this is now a O(n^2) operation since we might run `std::partition` n times, whereas the previous sort/splice version was O((n log n) + n) only. Maybe not a huge deal, but I\u0027m not sure why it was necessary to change that.",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 92
+      },
+      "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e2ddf43a_6a53c7a8",
+        "filename": "src/dawn/native/SystemEvent.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T21:20:26Z",
+      "side": 1,
+      "message": "nit. I\u0027m wondering whether this should just be something like:\n\n```\nstruct SystemEventImpl {\n  bool mSignaled \u003d false;\n  std::optional\u003cstd::pair\u003cSender, Receiver\u003e\u003e mPipe;\n};\n\nMutexProtected\u003cSystemEventImpl\u003e impl;\n```\n\nThis might be more explicit about the locking since either way we need to acquire the lock when modifying the bool.",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 95
+      },
+      "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
