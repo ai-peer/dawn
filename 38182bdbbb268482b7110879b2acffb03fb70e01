@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "792ec943_f4c2c500",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T21:48:18Z",
+      "side": 1,
+      "message": "nit. completes",
+      "range": {
+        "startLine": 129,
+        "startChar": 45,
+        "endLine": 129,
+        "endChar": 54
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "640a7920_0f31153d",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T21:48:18Z",
+      "side": 1,
+      "message": "I think it\u0027s possible to hit this `ASSERT` in `UnmapEarly` if we race at the moment. Maybe we should remove this `ASSERT` for now until we fix the race?",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
