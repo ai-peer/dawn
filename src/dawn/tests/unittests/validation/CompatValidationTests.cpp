@@ -1102,6 +1102,104 @@ class CompatCompressedCopyT2BAndCopyT2TValidationTests : public CompatValidation
     };
 };
 
+class CompatCubeCopyT2BValidationTests : public CompatValidationTest {
+  protected:
+    WGPUDevice CreateTestDevice(native::Adapter dawnAdapter,
+                                wgpu::DeviceDescriptor descriptor) override {
+        std::vector<const char*> enabledToggles;
+        enabledToggles.push_back("use_blit_for_depth16unorm_texture_to_buffer_copy");
+        enabledToggles.push_back("use_blit_for_depth32float_texture_to_buffer_copy");
+        enabledToggles.push_back("use_blit_for_stencil_texture_to_buffer_copy");
+        enabledToggles.push_back("use_blit_for_snorm_texture_to_buffer_copy");
+        enabledToggles.push_back("use_blit_for_bgra8unorm_texture_to_buffer_copy");
+        enabledToggles.push_back("use_blit_for_rgb9e5ufloat_texture_copy");
+
+        wgpu::DawnTogglesDescriptor deviceTogglesDesc;
+        deviceTogglesDesc.enabledToggles = enabledToggles.data();
+        deviceTogglesDesc.enabledToggleCount = enabledToggles.size();
+
+        descriptor.nextInChain = &deviceTogglesDesc;
+        return dawnAdapter.CreateDevice(&descriptor);
+    }
+    struct TextureInfo {
+        bool useBlit;
+        wgpu::TextureAspect aspect;
+        wgpu::TextureFormat format;
+    };
+    static constexpr TextureInfo textureInfos[] = {
+        {
+            false,
+            wgpu::TextureAspect::All,
+            wgpu::TextureFormat::RGBA8Unorm,
+        },
+        {
+            true,
+            wgpu::TextureAspect::All,
+            wgpu::TextureFormat::RGBA8Snorm,
+        },
+        {
+            true,
+            wgpu::TextureAspect::All,
+            wgpu::TextureFormat::BGRA8Unorm,
+        },
+        {
+            true,
+            wgpu::TextureAspect::All,
+            wgpu::TextureFormat::RGB9E5Ufloat,
+        },
+        {
+            true,
+            wgpu::TextureAspect::DepthOnly,
+            wgpu::TextureFormat::Depth16Unorm,
+        },
+        {
+            true,
+            wgpu::TextureAspect::DepthOnly,
+            wgpu::TextureFormat::Depth32Float,
+        },
+        {
+            true,
+            wgpu::TextureAspect::StencilOnly,
+            wgpu::TextureFormat::Stencil8,
+        },
+    };
+};
+
+TEST_F(CompatCubeCopyT2BValidationTests, CanNotCopyCubeBindingViewTextureToBuffer) {
+    for (TextureInfo textureInfo : textureInfos) {
+        wgpu::TextureDescriptor descriptor;
+        descriptor.size = {4, 4, 6};
+        descriptor.dimension = wgpu::TextureDimension::e2D;
+        descriptor.format = textureInfo.format;
+        descriptor.usage = wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::CopySrc;
+
+        wgpu::TextureBindingViewDimensionDescriptor textureBindingViewDimensionDesc;
+        descriptor.nextInChain = &textureBindingViewDimensionDesc;
+        textureBindingViewDimensionDesc.textureBindingViewDimension =
+            wgpu::TextureViewDimension::Cube;
+        wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+        wgpu::BufferDescriptor bufferDescriptor;
+        bufferDescriptor.size = 256 * 4 * 6;
+        bufferDescriptor.usage = wgpu::BufferUsage::CopyDst;
+        wgpu::Buffer buffer = device.CreateBuffer(&bufferDescriptor);
+
+        wgpu::ImageCopyTexture source =
+            utils::CreateImageCopyTexture(texture, 0, {0, 0, 0}, textureInfo.aspect);
+        wgpu::ImageCopyBuffer destination = utils::CreateImageCopyBuffer(buffer, 0, 256, 4);
+
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        encoder.CopyTextureToBuffer(&source, &destination, &descriptor.size);
+        if (textureInfo.useBlit) {
+            ASSERT_DEVICE_ERROR(encoder.Finish(),
+                                testing::HasSubstr("cannot be used as the source in a texture to "
+                                                   "buffer copy in compatibility mode."));
+        } else {
+            encoder.Finish();
+        }
+    }
+}
+
 TEST_F(CompatCompressedCopyT2BAndCopyT2TValidationTests, CanNotCopyCompressedTextureToBuffer) {
     for (TextureInfo textureInfo : textureInfos) {
         if (!device.HasFeature(textureInfo.feature)) {
