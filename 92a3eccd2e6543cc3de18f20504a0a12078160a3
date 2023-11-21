@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebf7c087_95048d10",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-21T21:47:14Z",
+      "side": 1,
+      "message": "This change depends on us landing the commits from my upstream DXC change: https://github.com/microsoft/DirectXShaderCompiler/pull/6050\n\nI figure we can start the review process before then. I\u0027ve tested this on Windows, Linux, and Mac. After landing this, I would like to enable the option for Kokoro builds, and make use the compiled DXC for running end2end tests.",
+      "revId": "92a3eccd2e6543cc3de18f20504a0a12078160a3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
