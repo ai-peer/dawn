@@ -1264,6 +1264,28 @@ bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint) const {
     return mEntryPoints.count(entryPoint) > 0;
 }
 
+size_t ShaderModuleBase::GetEntryPointForShaderStage(const char* entryPointName,
+                                                     SingleShaderStage stage,
+                                                     ShaderModuleEntryPoint* entryPoint) const {
+    if (entryPointName) {
+        if (!HasEntryPoint(entryPointName)) {
+            return 0;
+        }
+        entryPoint->isDefault = false;
+        entryPoint->name = entryPointName;
+        return 1;
+    }
+    size_t entryPointsFound = 0;
+    for (auto& [name, metadata] : mEntryPoints) {
+        if (metadata->stage == stage) {
+            entryPointsFound++;
+            entryPoint->isDefault = true;
+            entryPoint->name = name;
+        }
+    }
+    return entryPointsFound;
+}
+
 const EntryPointMetadata& ShaderModuleBase::GetEntryPoint(const std::string& entryPoint) const {
     DAWN_ASSERT(HasEntryPoint(entryPoint));
     return *mEntryPoints.at(entryPoint);
