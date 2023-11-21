@@ -117,6 +117,30 @@
       },
       "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb4b8785_25b7a525",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T22:53:02Z",
+      "side": 1,
+      "message": "It\u0027s to guard against a problem where we try to report a failure, but then can\u0027t because the future has already completed.\n\nIn this particular case CompleteIfSpontaneous is called from UnmapEarly and I think I agree it can race. Maybe this just needs another instance of that TODO about mapping not being thread safe.",
+      "parentUuid": "28d91dbf_8395f449",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
