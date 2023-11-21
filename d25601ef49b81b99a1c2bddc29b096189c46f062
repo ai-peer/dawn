@@ -213,6 +213,30 @@
       },
       "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7153a2_45622e31",
+        "filename": "src/dawn/native/SystemEvent.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T22:46:36Z",
+      "side": 1,
+      "message": "Ok, added a comment. Also realized it\u0027s good to poll mSignaled without acquiring a lock in ProcessEvents and WaitAny(0). This is probably the more useful thing about keeping it separate",
+      "parentUuid": "c6ebfbd0_fc5b9cd2",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 95
+      },
+      "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
