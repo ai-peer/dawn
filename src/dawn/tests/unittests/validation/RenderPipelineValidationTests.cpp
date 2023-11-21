@@ -1416,6 +1416,98 @@ TEST_F(RenderPipelineValidationTest, EntryPointNameValidation) {
     }
 }
 
+// TODO
+TEST_F(RenderPipelineValidationTest, EntryPointNameOptional) {
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        @vertex fn vertex_main() -> @builtin(position) vec4f {
+            return vec4f(0.0, 0.0, 0.0, 1.0);
+        }
+
+        @fragment fn fragment_main() -> @location(0) vec4f {
+            return vec4f(1.0, 0.0, 0.0, 1.0);
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.vertex.module = module;
+    descriptor.cFragment.module = module;
+
+    // Success case.
+    device.CreateRenderPipeline(&descriptor);
+}
+
+// TODO
+TEST_F(RenderPipelineValidationTest, EntryPointNameOptionalWithManyEntryPoints) {
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        @vertex fn vertex1() -> @builtin(position) vec4f {
+            return vec4f(0.0, 0.0, 0.0, 1.0);
+        }
+
+        @vertex fn vertex2() -> @builtin(position) vec4f {
+            return vec4f(0.0, 0.0, 0.0, 1.0);
+        }
+
+        @fragment fn fragment1() -> @location(0) vec4f {
+            return vec4f(1.0, 0.0, 0.0, 1.0);
+        }
+
+        @fragment fn fragment2() -> @location(0) vec4f {
+            return vec4f(1.0, 0.0, 0.0, 1.0);
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor descriptor;
+    descriptor.vertex.module = module;
+    descriptor.cFragment.module = module;
+
+    {
+        // The vertex stage has more than one entryPoint.
+        descriptor.vertex.entryPoint = nullptr;
+        descriptor.cFragment.entryPoint = "fragment1";
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    {
+        // The fragment stage has more than one entryPoint.
+        descriptor.vertex.entryPoint = "vertex1";
+        descriptor.cFragment.entryPoint = nullptr;
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
+
+// TODO
+TEST_F(RenderPipelineValidationTest, EntryPointNameOptionalWithNoEntryPoints) {
+    {
+        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+            @fragment fn fragment_main() -> @location(0) vec4f {
+                return vec4f(1.0, 0.0, 0.0, 1.0);
+            }
+        )");
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = module;
+        descriptor.cFragment.module = module;
+
+        // The vertex stage has no entryPoint.
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+
+    {
+        wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+            @vertex fn vertex_main() -> @builtin(position) vec4f {
+                return vec4f(0.0, 0.0, 0.0, 1.0);
+            }
+        )");
+
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = module;
+        descriptor.cFragment.module = module;
+
+        // The fragment stage has no entryPoint.
+        ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor));
+    }
+}
+
 // Test that vertex attrib validation is for the correct entryPoint
 TEST_F(RenderPipelineValidationTest, VertexAttribCorrectEntryPoint) {
     wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(

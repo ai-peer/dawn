@@ -101,5 +101,22 @@ TEST_F(ComputeValidationTest, PerDimensionDispatchSizeLimits_InvalidAll) {
     ASSERT_DEVICE_ERROR(TestDispatch(max + 1, max + 1, max + 1));
 }
 
+// TODO
+TEST_F(ComputeValidationTest, EntryPointNameOptional) {
+    wgpu::ShaderModule computeModule = utils::CreateShaderModule(device, R"(
+            @compute @workgroup_size(1) fn main() {
+            })");
+
+    // Set up compute pipeline
+    wgpu::PipelineLayout pl = utils::MakeBasicPipelineLayout(device, nullptr);
+
+    wgpu::ComputePipelineDescriptor csDesc;
+    csDesc.layout = pl;
+    csDesc.compute.module = computeModule;
+    csDesc.compute.entryPoint = nullptr;
+
+    device.CreateComputePipeline(&csDesc);
+}
+
 }  // anonymous namespace
 }  // namespace dawn
