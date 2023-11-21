@@ -43,5 +43,5 @@ libtint_source_set("spirv") {
     "builtin_fn.cc",
     "builtin_fn.h",
   ]
-  deps = [ "${tint_src_dir}/utils/traits" ]
+  public_deps = [ "${tint_src_dir}/utils/traits" ]
 }

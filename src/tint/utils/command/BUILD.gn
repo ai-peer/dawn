@@ -44,7 +44,7 @@ if (tint_build_unittests || tint_build_benchmarks) {
 
 libtint_source_set("command") {
   sources = [ "command.h" ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/utils/macros",
     "${tint_src_dir}/utils/text",
   ]
@@ -64,7 +64,7 @@ libtint_source_set("command") {
 if (tint_build_unittests) {
   tint_unittests_source_set("unittests") {
     sources = [ "command_test.cc" ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/utils/command",
     ]

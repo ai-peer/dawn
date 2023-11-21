@@ -43,7 +43,7 @@ libtint_source_set("api") {
     "tint.cc",
     "tint.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core",
@@ -73,39 +73,39 @@ libtint_source_set("api") {
   ]
 
   if (tint_build_glsl_writer) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/lang/glsl/writer",
       "${tint_src_dir}/lang/glsl/writer/common",
     ]
   }
 
   if (tint_build_hlsl_writer) {
-    deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
+    public_deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
   }
 
   if (tint_build_msl_writer) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/lang/msl/writer",
       "${tint_src_dir}/lang/msl/writer/common",
     ]
   }
 
   if (tint_build_spv_reader) {
-    deps += [ "${tint_src_dir}/lang/spirv/reader" ]
+    public_deps += [ "${tint_src_dir}/lang/spirv/reader" ]
   }
 
   if (tint_build_spv_writer) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/lang/spirv/writer",
       "${tint_src_dir}/lang/spirv/writer/common",
     ]
   }
 
   if (tint_build_wgsl_reader) {
-    deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
   }
 
   if (tint_build_wgsl_writer) {
-    deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
   }
 }

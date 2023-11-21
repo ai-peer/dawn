@@ -43,7 +43,7 @@ if (tint_build_glsl_validator) {
       "validate.cc",
       "validate.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/lang/wgsl/ast",
       "${tint_src_dir}/utils/containers",
       "${tint_src_dir}/utils/diagnostic",
@@ -58,7 +58,7 @@ if (tint_build_glsl_validator) {
     ]
 
     if (tint_build_glsl_validator) {
-      deps += [
+      public_deps += [
         "${tint_glslang_dir}:glslang_default_resource_limits_sources",
         "${tint_glslang_dir}:glslang_lib_sources",
       ]

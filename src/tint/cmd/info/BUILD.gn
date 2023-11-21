@@ -41,7 +41,7 @@ import("${tint_src_dir}/tint.gni")
 tint_executable("info") {
   output_name = "tint_info"
   sources = [ "main.cc" ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/cmd/common",
     "${tint_src_dir}/lang/core",
@@ -71,7 +71,7 @@ tint_executable("info") {
   ]
 
   if (tint_build_spv_reader || tint_build_spv_writer) {
-    deps += [
+    public_deps += [
       "${tint_spirv_tools_dir}:spvtools_headers",
       "${tint_spirv_tools_dir}:spvtools_val",
     ]

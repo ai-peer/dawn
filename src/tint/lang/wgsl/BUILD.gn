@@ -55,7 +55,7 @@ libtint_source_set("wgsl") {
     "language_feature.cc",
     "language_feature.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/diagnostic",
     "${tint_src_dir}/utils/ice",
@@ -76,7 +76,7 @@ if (tint_build_unittests) {
       "language_feature_test.cc",
       "wgsl_test.cc",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
@@ -108,7 +108,7 @@ if (tint_build_unittests) {
     ]
 
     if (tint_build_wgsl_reader) {
-      deps += [
+      public_deps += [
         "${tint_src_dir}/lang/wgsl/reader",
         "${tint_src_dir}/lang/wgsl/reader/program_to_ir",
       ]
@@ -119,7 +119,7 @@ if (tint_build_unittests) {
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
     }
   }
 }
@@ -130,7 +130,7 @@ if (tint_build_benchmarks) {
       "diagnostic_severity_bench.cc",
       "extension_bench.cc",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:google_benchmark",
       "${tint_src_dir}/lang/wgsl",
       "${tint_src_dir}/utils/containers",
@@ -148,7 +148,7 @@ if (tint_build_benchmarks) {
 
 tint_fuzz_source_set("fuzz") {
   sources = []
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
@@ -180,7 +180,7 @@ tint_fuzz_source_set("fuzz") {
   ]
 
   if (tint_build_wgsl_reader) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/cmd/fuzz/wgsl:fuzz",
       "${tint_src_dir}/lang/wgsl/reader/parser",
       "${tint_src_dir}/lang/wgsl/reader/program_to_ir",
@@ -192,6 +192,6 @@ tint_fuzz_source_set("fuzz") {
   }
 
   if (tint_build_wgsl_writer) {
-    deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
   }
 }

@@ -43,7 +43,7 @@ if (tint_build_wgsl_reader) {
       "wgsl_fuzz.cc",
       "wgsl_fuzz.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:thread",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
@@ -71,7 +71,7 @@ if (tint_build_wgsl_reader) {
     ]
 
     if (tint_build_wgsl_reader) {
-      deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
     }
   }
 }
@@ -79,7 +79,7 @@ if (tint_build_wgsl_reader) {
   tint_fuzzer_test("wgsl") {
     output_name = "tint_wgsl_fuzzer"
     sources = [ "main_fuzz.cc" ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",
@@ -106,14 +106,14 @@ if (tint_build_wgsl_reader) {
     ]
 
     if (tint_build_wgsl_reader) {
-      deps += [
+      public_deps += [
         "${tint_src_dir}/cmd/fuzz/wgsl:fuzz",
         "${tint_src_dir}/lang/wgsl/ast/transform:fuzz",
       ]
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ "${tint_src_dir}/lang/wgsl/writer/ast_printer:fuzz" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/writer/ast_printer:fuzz" ]
     }
   }
 }

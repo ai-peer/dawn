@@ -48,7 +48,7 @@ if (tint_build_wgsl_reader) {
       "reader.cc",
       "reader.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -77,7 +77,7 @@ if (tint_build_wgsl_reader) {
     ]
 
     if (tint_build_wgsl_reader) {
-      deps += [
+      public_deps += [
         "${tint_src_dir}/lang/wgsl/reader/parser",
         "${tint_src_dir}/lang/wgsl/reader/program_to_ir",
       ]
@@ -88,7 +88,7 @@ if (tint_build_benchmarks) {
   if (tint_build_wgsl_reader) {
     tint_unittests_source_set("bench") {
       sources = [ "reader_bench.cc" ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:google_benchmark",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/cmd/bench:bench",
@@ -117,7 +117,7 @@ if (tint_build_benchmarks) {
       ]
 
       if (tint_build_wgsl_reader) {
-        deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
       }
     }
   }

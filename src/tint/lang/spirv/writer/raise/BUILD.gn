@@ -61,7 +61,7 @@ if (tint_build_spv_writer) {
       "var_for_dynamic_index.cc",
       "var_for_dynamic_index.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
@@ -90,11 +90,11 @@ if (tint_build_spv_writer) {
     ]
 
     if (tint_build_spv_reader || tint_build_spv_writer) {
-      deps += [ "${tint_spirv_headers_dir}:spv_headers" ]
+      public_deps += [ "${tint_spirv_headers_dir}:spv_headers" ]
     }
 
     if (tint_build_spv_writer) {
-      deps += [ "${tint_src_dir}/lang/spirv/writer/common" ]
+      public_deps += [ "${tint_src_dir}/lang/spirv/writer/common" ]
     }
   }
 }
@@ -110,7 +110,7 @@ if (tint_build_unittests) {
         "shader_io_test.cc",
         "var_for_dynamic_index_test.cc",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -135,7 +135,7 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_spv_writer) {
-        deps += [ "${tint_src_dir}/lang/spirv/writer/raise" ]
+        public_deps += [ "${tint_src_dir}/lang/spirv/writer/raise" ]
       }
     }
   }

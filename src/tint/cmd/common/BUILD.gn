@@ -49,7 +49,7 @@ libtint_source_set("common") {
     "helper.cc",
     "helper.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core",
@@ -79,28 +79,28 @@ libtint_source_set("common") {
   ]
 
   if (tint_build_spv_reader) {
-    deps += [ "${tint_src_dir}/lang/spirv/reader" ]
+    public_deps += [ "${tint_src_dir}/lang/spirv/reader" ]
   }
 
   if (tint_build_spv_reader || tint_build_spv_writer) {
-    deps += [
+    public_deps += [
       "${tint_spirv_tools_dir}:spvtools_headers",
       "${tint_spirv_tools_dir}:spvtools_val",
     ]
   }
 
   if (tint_build_wgsl_reader) {
-    deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
   }
 
   if (tint_build_wgsl_writer) {
-    deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
   }
 }
 if (tint_build_unittests) {
   tint_unittests_source_set("unittests") {
     sources = [ "generate_external_texture_bindings_test.cc" ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",

@@ -49,7 +49,7 @@ if (tint_build_glsl_writer) {
       "writer.cc",
       "writer.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
@@ -60,7 +60,6 @@ if (tint_build_glsl_writer) {
       "${tint_src_dir}/lang/wgsl",
       "${tint_src_dir}/lang/wgsl/ast",
       "${tint_src_dir}/lang/wgsl/program",
-      "${tint_src_dir}/lang/wgsl/reader/lower",
       "${tint_src_dir}/lang/wgsl/sem",
       "${tint_src_dir}/utils/containers",
       "${tint_src_dir}/utils/diagnostic",
@@ -79,15 +78,11 @@ if (tint_build_glsl_writer) {
     ]
 
     if (tint_build_glsl_writer) {
-      deps += [
+      public_deps += [
         "${tint_src_dir}/lang/glsl/writer/ast_printer",
         "${tint_src_dir}/lang/glsl/writer/common",
         "${tint_src_dir}/lang/glsl/writer/printer",
       ]
-    }
-
-    if (tint_build_wgsl_reader) {
-      deps += [ "${tint_src_dir}/lang/wgsl/reader/program_to_ir" ]
     }
   }
 }
@@ -95,13 +90,14 @@ if (tint_build_benchmarks) {
   if (tint_build_glsl_writer) {
     tint_unittests_source_set("bench") {
       sources = [ "writer_bench.cc" ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:google_benchmark",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/api/options",
         "${tint_src_dir}/cmd/bench:bench",
         "${tint_src_dir}/lang/core",
         "${tint_src_dir}/lang/core/constant",
+        "${tint_src_dir}/lang/core/ir",
         "${tint_src_dir}/lang/core/type",
         "${tint_src_dir}/lang/wgsl",
         "${tint_src_dir}/lang/wgsl/ast",
@@ -123,7 +119,7 @@ if (tint_build_benchmarks) {
       ]
 
       if (tint_build_glsl_writer) {
-        deps += [
+        public_deps += [
           "${tint_src_dir}/lang/glsl/writer",
           "${tint_src_dir}/lang/glsl/writer/common",
         ]

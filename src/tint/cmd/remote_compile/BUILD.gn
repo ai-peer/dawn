@@ -41,7 +41,7 @@ import("${tint_src_dir}/tint.gni")
 tint_executable("remote_compile") {
   output_name = "tint_remote_compile"
   sources = [ "main.cc" ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}:thread",
     "${tint_src_dir}/lang/wgsl/ast",
     "${tint_src_dir}/utils/macros",
@@ -51,6 +51,6 @@ tint_executable("remote_compile") {
   ]
 
   if (tint_build_msl_writer) {
-    deps += [ "${tint_src_dir}/lang/msl/validate" ]
+    public_deps += [ "${tint_src_dir}/lang/msl/validate" ]
   }
 }

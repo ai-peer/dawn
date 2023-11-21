@@ -79,7 +79,7 @@ libtint_source_set("transform") {
     "zero_init_workgroup_memory.cc",
     "zero_init_workgroup_memory.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/api/options",
     "${tint_src_dir}/lang/core",
@@ -123,7 +123,7 @@ if (tint_build_unittests) {
       "vectorize_scalar_matrix_constructors_test.cc",
       "zero_init_workgroup_memory_test.cc",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",
@@ -155,7 +155,7 @@ if (tint_build_unittests) {
     ]
 
     if (tint_build_wgsl_reader) {
-      deps += [
+      public_deps += [
         "${tint_src_dir}/lang/wgsl/reader",
         "${tint_src_dir}/lang/wgsl/reader/program_to_ir",
       ]
@@ -166,7 +166,7 @@ if (tint_build_unittests) {
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
     }
   }
 }

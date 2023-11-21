@@ -43,5 +43,5 @@ libtint_source_set("debug") {
     "debugger.cc",
     "debugger.h",
   ]
-  deps = []
+  public_deps = []
 }

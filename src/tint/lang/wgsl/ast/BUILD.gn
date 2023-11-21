@@ -205,7 +205,7 @@ libtint_source_set("ast") {
     "workgroup_attribute.cc",
     "workgroup_attribute.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
@@ -294,7 +294,7 @@ if (tint_build_unittests) {
       "while_statement_test.cc",
       "workgroup_attribute_test.cc",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
@@ -324,7 +324,7 @@ if (tint_build_unittests) {
     ]
 
     if (tint_build_wgsl_reader) {
-      deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
     }
 
     if (tint_build_wgsl_reader && tint_build_wgsl_writer) {
@@ -332,7 +332,7 @@ if (tint_build_unittests) {
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
     }
   }
 }

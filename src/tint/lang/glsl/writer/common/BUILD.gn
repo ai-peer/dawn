@@ -46,7 +46,7 @@ if (tint_build_glsl_writer) {
       "printer_support.h",
       "version.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",

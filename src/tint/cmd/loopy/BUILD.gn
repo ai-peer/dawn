@@ -41,7 +41,7 @@ import("${tint_src_dir}/tint.gni")
 tint_executable("loopy") {
   output_name = "tint_loopy"
   sources = [ "main.cc" ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api",
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/api/options",
@@ -75,18 +75,18 @@ tint_executable("loopy") {
   ]
 
   if (tint_build_glsl_writer) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/lang/glsl/writer",
       "${tint_src_dir}/lang/glsl/writer/common",
     ]
   }
 
   if (tint_build_hlsl_writer) {
-    deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
+    public_deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
   }
 
   if (tint_build_msl_writer) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/lang/msl/writer",
       "${tint_src_dir}/lang/msl/writer/common",
       "${tint_src_dir}/lang/msl/writer/helpers",
@@ -94,11 +94,11 @@ tint_executable("loopy") {
   }
 
   if (tint_build_spv_reader) {
-    deps += [ "${tint_src_dir}/lang/spirv/reader" ]
+    public_deps += [ "${tint_src_dir}/lang/spirv/reader" ]
   }
 
   if (tint_build_spv_writer) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/lang/spirv/writer",
       "${tint_src_dir}/lang/spirv/writer/common",
       "${tint_src_dir}/lang/spirv/writer/helpers",
@@ -106,13 +106,13 @@ tint_executable("loopy") {
   }
 
   if (tint_build_wgsl_reader) {
-    deps += [
+    public_deps += [
       "${tint_src_dir}/lang/wgsl/reader",
       "${tint_src_dir}/lang/wgsl/reader/program_to_ir",
     ]
   }
 
   if (tint_build_wgsl_writer) {
-    deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+    public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
   }
 }

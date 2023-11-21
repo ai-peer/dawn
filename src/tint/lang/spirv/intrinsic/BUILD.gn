@@ -44,7 +44,7 @@ libtint_source_set("intrinsic") {
     "dialect.h",
     "type_matchers.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/intrinsic",

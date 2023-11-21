@@ -43,7 +43,7 @@ libtint_source_set("ir") {
     "builtin_call.cc",
     "builtin_call.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",

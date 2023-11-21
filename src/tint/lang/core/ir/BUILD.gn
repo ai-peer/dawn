@@ -143,7 +143,7 @@ libtint_source_set("ir") {
     "var.cc",
     "var.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
@@ -210,7 +210,7 @@ if (tint_build_unittests) {
       "value_test.cc",
       "var_test.cc",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",

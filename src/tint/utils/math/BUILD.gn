@@ -49,7 +49,7 @@ libtint_source_set("math") {
     "math.cc",
     "math.h",
   ]
-  deps = []
+  public_deps = []
 }
 if (tint_build_unittests) {
   tint_unittests_source_set("unittests") {
@@ -58,7 +58,7 @@ if (tint_build_unittests) {
       "hash_test.cc",
       "math_test.cc",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/utils/containers",
       "${tint_src_dir}/utils/ice",

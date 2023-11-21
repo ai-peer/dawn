@@ -114,7 +114,7 @@ libtint_source_set("type") {
     "void.cc",
     "void.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/diagnostic",
@@ -158,7 +158,7 @@ if (tint_build_unittests) {
       "u32_test.cc",
       "vector_test.cc",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",

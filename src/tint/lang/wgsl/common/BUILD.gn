@@ -43,7 +43,7 @@ libtint_source_set("common") {
     "allowed_features.h",
     "common.cc",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/lang/wgsl",
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/ice",

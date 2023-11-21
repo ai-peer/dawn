@@ -85,7 +85,7 @@ tint_fuzzer_test("{{$.Directory.Name}}") {
     "{{TrimPrefix $File.Name $.Directory.Path}}",
 {{- end}}
   ]
-  deps = [
+  public_deps = [
 
 {{- /* Emit unconditional internal dependencies */}}
 {{- range $Dep := $.Dependencies.UnconditionalInternal}}
@@ -110,7 +110,7 @@ tint_fuzzer_test("{{$.Directory.Name}}") {
     ]
 {{-     end}}
 {{-     if or $Cond.InternalDependencies $Cond.ExternalDependencies}}
-    deps += [
+    public_deps += [
 {{-       range $Dep := $Cond.InternalDependencies}}
       "{{Eval "Dependency" $Dep}}",
 {{-       end}}

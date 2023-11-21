@@ -45,7 +45,7 @@ libtint_source_set("intrinsic") {
     "data.cc",
     "dialect.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
     "${tint_src_dir}/lang/core/intrinsic",

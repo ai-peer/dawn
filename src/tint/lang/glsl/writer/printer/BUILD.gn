@@ -47,7 +47,7 @@ if (tint_build_glsl_writer) {
       "printer.cc",
       "printer.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -70,7 +70,7 @@ if (tint_build_glsl_writer) {
     ]
 
     if (tint_build_glsl_writer) {
-      deps += [ "${tint_src_dir}/lang/glsl/writer/common" ]
+      public_deps += [ "${tint_src_dir}/lang/glsl/writer/common" ]
     }
   }
 }
@@ -82,7 +82,7 @@ if (tint_build_unittests) {
         "function_test.cc",
         "helper_test.h",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -107,7 +107,7 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_glsl_writer) {
-        deps += [
+        public_deps += [
           "${tint_src_dir}/lang/glsl/writer/common",
           "${tint_src_dir}/lang/glsl/writer/printer",
         ]

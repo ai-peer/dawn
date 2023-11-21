@@ -57,7 +57,7 @@ if (tint_build_spv_writer) {
       "while_to_loop.cc",
       "while_to_loop.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -97,7 +97,7 @@ if (tint_build_unittests) {
         "vectorize_matrix_conversions_test.cc",
         "while_to_loop_test.cc",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -126,19 +126,19 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_spv_writer) {
-        deps += [ "${tint_src_dir}/lang/spirv/writer/ast_raise" ]
+        public_deps += [ "${tint_src_dir}/lang/spirv/writer/ast_raise" ]
       }
 
       if (tint_build_wgsl_reader) {
-        deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
       }
 
       if (tint_build_wgsl_reader && tint_build_wgsl_writer) {
-        deps += [ "${tint_src_dir}/lang/wgsl/ast/transform:unittests" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/ast/transform:unittests" ]
       }
 
       if (tint_build_wgsl_writer) {
-        deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
       }
     }
   }

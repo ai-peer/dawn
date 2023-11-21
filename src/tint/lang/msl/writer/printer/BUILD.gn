@@ -47,7 +47,7 @@ if (tint_build_msl_writer) {
       "printer.cc",
       "printer.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -70,7 +70,7 @@ if (tint_build_msl_writer) {
     ]
 
     if (tint_build_msl_writer) {
-      deps += [ "${tint_src_dir}/lang/msl/writer/common" ]
+      public_deps += [ "${tint_src_dir}/lang/msl/writer/common" ]
     }
   }
 }
@@ -89,7 +89,7 @@ if (tint_build_unittests) {
         "type_test.cc",
         "var_test.cc",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -114,7 +114,7 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_msl_writer) {
-        deps += [ "${tint_src_dir}/lang/msl/writer/printer" ]
+        public_deps += [ "${tint_src_dir}/lang/msl/writer/printer" ]
       }
     }
   }

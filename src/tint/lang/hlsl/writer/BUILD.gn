@@ -49,7 +49,7 @@ if (tint_build_hlsl_writer) {
       "writer.cc",
       "writer.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
@@ -78,7 +78,7 @@ if (tint_build_hlsl_writer) {
     ]
 
     if (tint_build_hlsl_writer) {
-      deps += [
+      public_deps += [
         "${tint_src_dir}/lang/hlsl/writer/ast_printer",
         "${tint_src_dir}/lang/hlsl/writer/ast_raise",
       ]
@@ -89,7 +89,7 @@ if (tint_build_benchmarks) {
   if (tint_build_hlsl_writer) {
     tint_unittests_source_set("bench") {
       sources = [ "writer_bench.cc" ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:google_benchmark",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/api/options",
@@ -118,7 +118,7 @@ if (tint_build_benchmarks) {
       ]
 
       if (tint_build_hlsl_writer) {
-        deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
+        public_deps += [ "${tint_src_dir}/lang/hlsl/writer" ]
       }
     }
   }

@@ -47,7 +47,7 @@ if (tint_build_benchmarks) {
       "bench.cc",
       "bench.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:google_benchmark",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
@@ -76,15 +76,15 @@ if (tint_build_benchmarks) {
     ]
 
     if (tint_build_spv_reader) {
-      deps += [ "${tint_src_dir}/lang/spirv/reader" ]
+      public_deps += [ "${tint_src_dir}/lang/spirv/reader" ]
     }
 
     if (tint_build_wgsl_reader) {
-      deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
     }
   }
 }
@@ -93,7 +93,7 @@ if (tint_build_benchmarks) {
     testonly = true
     output_name = "tint_benchmark"
     sources = [ "main_bench.cc" ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:google_benchmark",
       "${tint_src_dir}/cmd/bench:bench",
       "${tint_src_dir}/lang/core",
@@ -121,27 +121,27 @@ if (tint_build_benchmarks) {
     ]
 
     if (tint_build_glsl_writer) {
-      deps += [ "${tint_src_dir}/lang/glsl/writer:bench" ]
+      public_deps += [ "${tint_src_dir}/lang/glsl/writer:bench" ]
     }
 
     if (tint_build_hlsl_writer) {
-      deps += [ "${tint_src_dir}/lang/hlsl/writer:bench" ]
+      public_deps += [ "${tint_src_dir}/lang/hlsl/writer:bench" ]
     }
 
     if (tint_build_msl_writer) {
-      deps += [ "${tint_src_dir}/lang/msl/writer:bench" ]
+      public_deps += [ "${tint_src_dir}/lang/msl/writer:bench" ]
     }
 
     if (tint_build_spv_writer) {
-      deps += [ "${tint_src_dir}/lang/spirv/writer:bench" ]
+      public_deps += [ "${tint_src_dir}/lang/spirv/writer:bench" ]
     }
 
     if (tint_build_wgsl_reader) {
-      deps += [ "${tint_src_dir}/lang/wgsl/reader:bench" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/reader:bench" ]
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ "${tint_src_dir}/lang/wgsl/writer:bench" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/writer:bench" ]
     }
   }
 }

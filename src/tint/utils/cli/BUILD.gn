@@ -47,7 +47,7 @@ libtint_source_set("cli") {
     "cli.cc",
     "cli.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/diagnostic",
     "${tint_src_dir}/utils/ice",
@@ -64,7 +64,7 @@ libtint_source_set("cli") {
 if (tint_build_unittests) {
   tint_unittests_source_set("unittests") {
     sources = [ "cli_test.cc" ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/utils/cli",
       "${tint_src_dir}/utils/containers",

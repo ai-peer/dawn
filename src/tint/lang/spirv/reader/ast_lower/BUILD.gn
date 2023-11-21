@@ -53,7 +53,7 @@ if (tint_build_spv_reader) {
       "fold_trivial_lets.cc",
       "fold_trivial_lets.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -91,7 +91,7 @@ if (tint_build_unittests) {
         "decompose_strided_matrix_test.cc",
         "fold_trivial_lets_test.cc",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -121,22 +121,22 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_spv_reader) {
-        deps += [ "${tint_src_dir}/lang/spirv/reader/ast_lower" ]
+        public_deps += [ "${tint_src_dir}/lang/spirv/reader/ast_lower" ]
       }
 
       if (tint_build_wgsl_reader) {
-        deps += [
+        public_deps += [
           "${tint_src_dir}/lang/wgsl/reader",
           "${tint_src_dir}/lang/wgsl/reader/parser",
         ]
       }
 
       if (tint_build_wgsl_reader && tint_build_wgsl_writer) {
-        deps += [ "${tint_src_dir}/lang/wgsl/ast/transform:unittests" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/ast/transform:unittests" ]
       }
 
       if (tint_build_wgsl_writer) {
-        deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
       }
     }
   }

@@ -43,7 +43,7 @@ libtint_source_set("id") {
     "generation_id.cc",
     "generation_id.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/utils/ice",
     "${tint_src_dir}/utils/macros",
     "${tint_src_dir}/utils/text",

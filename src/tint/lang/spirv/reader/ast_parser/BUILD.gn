@@ -65,7 +65,7 @@ if (tint_build_spv_reader) {
       "usage.cc",
       "usage.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -94,11 +94,11 @@ if (tint_build_spv_reader) {
     ]
 
     if (tint_build_spv_reader) {
-      deps += [ "${tint_src_dir}/lang/spirv/reader/ast_lower" ]
+      public_deps += [ "${tint_src_dir}/lang/spirv/reader/ast_lower" ]
     }
 
     if (tint_build_spv_reader || tint_build_spv_writer) {
-      deps += [
+      public_deps += [
         "${tint_spirv_headers_dir}:spv_headers",
         "${tint_spirv_tools_dir}:spvtools",
         "${tint_spirv_tools_dir}:spvtools_opt",
@@ -147,7 +147,7 @@ if (tint_build_unittests) {
         "usage_test.cc",
         "user_name_test.cc",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -176,11 +176,11 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_spv_reader) {
-        deps += [ "${tint_src_dir}/lang/spirv/reader/ast_parser" ]
+        public_deps += [ "${tint_src_dir}/lang/spirv/reader/ast_parser" ]
       }
 
       if (tint_build_spv_reader || tint_build_spv_writer) {
-        deps += [
+        public_deps += [
           "${tint_spirv_headers_dir}:spv_headers",
           "${tint_spirv_tools_dir}:spvtools",
           "${tint_spirv_tools_dir}:spvtools_headers",
@@ -191,7 +191,7 @@ if (tint_build_unittests) {
       }
 
       if (tint_build_wgsl_writer) {
-        deps += [ "${tint_src_dir}/lang/wgsl/writer/ast_printer" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/writer/ast_printer" ]
       }
       public_configs = [ "${tint_spirv_tools_dir}/:spvtools_internal_config" ]
     }

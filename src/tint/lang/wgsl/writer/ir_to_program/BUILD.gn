@@ -47,7 +47,7 @@ libtint_source_set("ir_to_program") {
     "ir_to_program.cc",
     "ir_to_program.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}/api/common",
     "${tint_src_dir}/lang/core",
     "${tint_src_dir}/lang/core/constant",
@@ -80,7 +80,7 @@ libtint_source_set("ir_to_program") {
 if (tint_build_unittests) {
   tint_unittests_source_set("unittests") {
     sources = [ "ir_to_program_test.h" ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
@@ -116,7 +116,7 @@ if (tint_build_unittests) {
         "inlining_test.cc",
         "ir_to_program_test.cc",
       ]
-      deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+      public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
     }
   }
 }

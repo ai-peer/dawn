@@ -43,7 +43,7 @@ if (tint_build_msl_writer) {
       "generate_bindings.cc",
       "generate_bindings.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
@@ -69,7 +69,7 @@ if (tint_build_msl_writer) {
     ]
 
     if (tint_build_msl_writer) {
-      deps += [ "${tint_src_dir}/lang/msl/writer/common" ]
+      public_deps += [ "${tint_src_dir}/lang/msl/writer/common" ]
     }
   }
 }

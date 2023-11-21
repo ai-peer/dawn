@@ -54,7 +54,7 @@ if (tint_build_wgsl_reader) {
       "token.cc",
       "token.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -154,7 +154,7 @@ if (tint_build_unittests) {
         "variable_stmt_test.cc",
         "while_stmt_test.cc",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -183,7 +183,7 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_wgsl_reader) {
-        deps += [ "${tint_src_dir}/lang/wgsl/reader/parser" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/reader/parser" ]
       }
     }
   }

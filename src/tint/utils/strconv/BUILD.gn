@@ -49,7 +49,7 @@ libtint_source_set("strconv") {
     "parse_num.cc",
     "parse_num.h",
   ]
-  deps = [
+  public_deps = [
     "${tint_src_dir}:abseil",
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/diagnostic",
@@ -66,7 +66,7 @@ libtint_source_set("strconv") {
 if (tint_build_unittests) {
   tint_unittests_source_set("unittests") {
     sources = [ "float_to_string_test.cc" ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}:gmock_and_gtest",
       "${tint_src_dir}/utils/memory",
       "${tint_src_dir}/utils/strconv",

@@ -59,7 +59,7 @@ if (tint_build_hlsl_writer) {
       "truncate_interstage_variables.cc",
       "truncate_interstage_variables.h",
     ]
-    deps = [
+    public_deps = [
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -100,7 +100,7 @@ if (tint_build_unittests) {
         "remove_continue_in_switch_test.cc",
         "truncate_interstage_variables_test.cc",
       ]
-      deps = [
+      public_deps = [
         "${tint_src_dir}:gmock_and_gtest",
         "${tint_src_dir}/api/common",
         "${tint_src_dir}/lang/core",
@@ -129,19 +129,19 @@ if (tint_build_unittests) {
       ]
 
       if (tint_build_hlsl_writer) {
-        deps += [ "${tint_src_dir}/lang/hlsl/writer/ast_raise" ]
+        public_deps += [ "${tint_src_dir}/lang/hlsl/writer/ast_raise" ]
       }
 
       if (tint_build_wgsl_reader) {
-        deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/reader" ]
       }
 
       if (tint_build_wgsl_reader && tint_build_wgsl_writer) {
-        deps += [ "${tint_src_dir}/lang/wgsl/ast/transform:unittests" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/ast/transform:unittests" ]
       }
 
       if (tint_build_wgsl_writer) {
-        deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
+        public_deps += [ "${tint_src_dir}/lang/wgsl/writer" ]
       }
     }
   }
