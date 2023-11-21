@@ -107,6 +107,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14ce7376_f1e5001e",
+        "filename": "docs/dawn/features/buffer_map_tiers.md",
+        "patchSetId": 13
+      },
+      "lineNbr": 4,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:11:14Z",
+      "side": 1,
+      "message": "That looks great! Thank you for this change, naming is hard.",
+      "parentUuid": "476fd6e8_9044c821",
+      "revId": "d7e1752173c63589660af7f5152a30b2a87f2f2f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9eaf2963_9f280f1c",
