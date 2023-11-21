@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d89ce6c3_8c0f1610",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:09:08Z",
+      "side": 1,
+      "message": "[1]\n\n```\n// Handle is acquired from the texture so we need to make sure to close it.\n// TODO(dawn:1745): Consider using one event per submit that is tracked by the\n// CommandRecordingContext so that we don\u0027t need to create one handle per texture,\n// and so we don\u0027t need to acquire it here to close it.\nSystemHandle scopedHandle \u003d SystemHandle::Acquire(handle);\n```",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "65ed0419_be5cb38e",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 33
@@ -67,6 +84,24 @@
       "side": 1,
       "message": "You are right. As `SharedFence::Create` duplicates the fd from `handle`. The `handle` exported from the `texture` is leaked here, as texture exporting assumes to transfer the ownership of the `handle` to its clients.",
       "parentUuid": "7f7142c9_8e9268c0",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "296be87a_6d4884ca",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:09:08Z",
+      "side": 1,
+      "message": "Thanks, that makes sense, and a great investigation! What happens is that the texture transfers its handle in EndAccess so we could use that handle directly when creating the fence (without dup-ing?)\n\nOr for now while we work on this path we can do what you suggested and just forget the native handle by adding [1]",
+      "parentUuid": "833e7464_8872da6d",
       "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
