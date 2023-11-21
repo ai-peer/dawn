@@ -82,6 +82,16 @@ fn textureLoadGeneral(tex: texture_3d<f32>, coords: vec3u, level: u32) -> vec4<f
 @group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
 )";
 
+constexpr std::string_view kFloatTextureCube = R"(
+@group(1) @binding(0) var default_sampler : sampler;
+fn textureLoadGeneral(tex: texture_cube<f32>, coords: vec3u, level: u32) -> vec4<f32> {
+    return textureSample(tex, default_sampler, vec3f(coords) / vec3f(params.levelSize));
+
+}
+@group(0) @binding(0) var src_tex : texture_cube<f32>;
+@group(0) @binding(1) var<storage, read_write> dst_buf : array<u32>;
+)";
+
 constexpr std::string_view kStencilTexture = R"(
 fn textureLoadGeneral(tex: texture_2d<u32>, coords: vec3u, level: u32) -> vec4<u32> {
     return textureLoad(tex, coords.xy, level);
@@ -144,6 +154,10 @@ struct Params {
     indicesPerRow: u32,
     rowsPerImage: u32,
     indicesOffset: u32,
+    pad0: u32,
+    // Used for cube sample
+    levelSize: vec3u,
+    pad1: u32,
 };
 
 @group(0) @binding(2) var<uniform> params : Params;
@@ -390,6 +404,9 @@ ResultOrError<Ref<ComputePipelineBase>> GetOrCreateTextureToBufferPipeline(
                 break;
             case wgpu::TextureViewDimension::e3D:
                 shader += kFloatTexture3D;
+                break;
+            case wgpu::TextureViewDimension::Cube:
+                shader += kFloatTextureCube;
                 break;
             default:
                 DAWN_UNREACHABLE();
@@ -647,7 +664,7 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
     {
         BufferDescriptor bufferDesc = {};
         // Uniform buffer size needs to be multiple of 16 bytes
-        bufferDesc.size = sizeof(uint32_t) * 12;
+        bufferDesc.size = sizeof(uint32_t) * 16;
         bufferDesc.usage = wgpu::BufferUsage::Uniform;
         bufferDesc.mappedAtCreation = true;
         DAWN_TRY_ASSIGN(uniformBuffer, device->CreateBuffer(&bufferDesc));
@@ -673,6 +690,19 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
         params[8] = dst.bytesPerRow / 4;
         params[9] = dst.rowsPerImage;
         params[10] = dst.offset / 4;
+
+        // params[11]: pad0
+
+        if (textureViewDimension == wgpu::TextureViewDimension::Cube) {
+            // cube need texture size to convert texel coord to sample location
+            auto levelSize =
+                src.texture->GetMipLevelSingleSubresourceVirtualSize(src.mipLevel, Aspect::Color);
+            params[12] = levelSize.width;
+            params[13] = levelSize.height;
+            params[14] = levelSize.depthOrArrayLayers;
+        }
+
+        // params[15]: pad1
 
         DAWN_TRY(uniformBuffer->Unmap());
     }
