@@ -1,0 +1,72 @@
+SKIP: FAILED
+
+#include <metal_stdlib>
+using namespace metal;
+
+texture2d<float, access::write> t_rgba8unorm;
+texture2d<float, access::write> t_rgba8snorm;
+texture2d<uint, access::write> t_rgba8uint;
+texture2d<int, access::write> t_rgba8sint;
+texture2d<uint, access::write> t_rgba16uint;
+texture2d<int, access::write> t_rgba16sint;
+texture2d<float, access::write> t_rgba16float;
+texture2d<uint, access::write> t_r32uint;
+texture2d<int, access::write> t_r32sint;
+texture2d<float, access::write> t_r32float;
+texture2d<uint, access::write> t_rg32uint;
+texture2d<int, access::write> t_rg32sint;
+texture2d<float, access::write> t_rg32float;
+texture2d<uint, access::write> t_rgba32uint;
+texture2d<int, access::write> t_rgba32sint;
+texture2d<float, access::write> t_rgba32float;
+void tint_symbol() {
+}
+program_source:4:33: error: program scope variable must reside in constant address space
+texture2d<float, access::write> t_rgba8unorm;
+                                ^
+program_source:5:33: error: program scope variable must reside in constant address space
+texture2d<float, access::write> t_rgba8snorm;
+                                ^
+program_source:6:32: error: program scope variable must reside in constant address space
+texture2d<uint, access::write> t_rgba8uint;
+                               ^
+program_source:7:31: error: program scope variable must reside in constant address space
+texture2d<int, access::write> t_rgba8sint;
+                              ^
+program_source:8:32: error: program scope variable must reside in constant address space
+texture2d<uint, access::write> t_rgba16uint;
+                               ^
+program_source:9:31: error: program scope variable must reside in constant address space
+texture2d<int, access::write> t_rgba16sint;
+                              ^
+program_source:10:33: error: program scope variable must reside in constant address space
+texture2d<float, access::write> t_rgba16float;
+                                ^
+program_source:11:32: error: program scope variable must reside in constant address space
+texture2d<uint, access::write> t_r32uint;
+                               ^
+program_source:12:31: error: program scope variable must reside in constant address space
+texture2d<int, access::write> t_r32sint;
+                              ^
+program_source:13:33: error: program scope variable must reside in constant address space
+texture2d<float, access::write> t_r32float;
+                                ^
+program_source:14:32: error: program scope variable must reside in constant address space
+texture2d<uint, access::write> t_rg32uint;
+                               ^
+program_source:15:31: error: program scope variable must reside in constant address space
+texture2d<int, access::write> t_rg32sint;
+                              ^
+program_source:16:33: error: program scope variable must reside in constant address space
+texture2d<float, access::write> t_rg32float;
+                                ^
+program_source:17:32: error: program scope variable must reside in constant address space
+texture2d<uint, access::write> t_rgba32uint;
+                               ^
+program_source:18:31: error: program scope variable must reside in constant address space
+texture2d<int, access::write> t_rgba32sint;
+                              ^
+program_source:19:33: error: program scope variable must reside in constant address space
+texture2d<float, access::write> t_rgba32float;
+                                ^
+

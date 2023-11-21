@@ -1,0 +1,20 @@
+SKIP: FAILED
+
+#include <metal_stdlib>
+using namespace metal;
+
+texture3d<float, access::sample> t_f;
+texture3d<int, access::sample> t_i;
+texture3d<uint, access::sample> t_u;
+void tint_symbol() {
+}
+program_source:4:34: error: program scope variable must reside in constant address space
+texture3d<float, access::sample> t_f;
+                                 ^
+program_source:5:32: error: program scope variable must reside in constant address space
+texture3d<int, access::sample> t_i;
+                               ^
+program_source:6:33: error: program scope variable must reside in constant address space
+texture3d<uint, access::sample> t_u;
+                                ^
+

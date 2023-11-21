@@ -1,0 +1,12 @@
+SKIP: FAILED
+
+#include <metal_stdlib>
+using namespace metal;
+
+depthcube<float, access::sample> t_f;
+void tint_symbol() {
+}
+program_source:4:34: error: program scope variable must reside in constant address space
+depthcube<float, access::sample> t_f;
+                                 ^
+

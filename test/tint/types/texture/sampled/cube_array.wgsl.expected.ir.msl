@@ -1,0 +1,20 @@
+SKIP: FAILED
+
+#include <metal_stdlib>
+using namespace metal;
+
+texturecube_array<float, access::sample> t_f;
+texturecube_array<int, access::sample> t_i;
+texturecube_array<uint, access::sample> t_u;
+void tint_symbol() {
+}
+program_source:4:42: error: program scope variable must reside in constant address space
+texturecube_array<float, access::sample> t_f;
+                                         ^
+program_source:5:40: error: program scope variable must reside in constant address space
+texturecube_array<int, access::sample> t_i;
+                                       ^
+program_source:6:41: error: program scope variable must reside in constant address space
+texturecube_array<uint, access::sample> t_u;
+                                        ^
+
