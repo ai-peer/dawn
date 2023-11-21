@@ -31,6 +31,7 @@
 #include <unordered_set>
 #include <utility>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectBase.h"
@@ -49,31 +50,36 @@ bool IsDoubleValueRepresentableAsF16(double value) {
 namespace dawn::native {
 MaybeError ValidateProgrammableStage(DeviceBase* device,
                                      const ShaderModuleBase* module,
-                                     const std::string& entryPoint,
+                                     const char* entryPointName,
                                      uint32_t constantCount,
                                      const ConstantEntry* constants,
                                      const PipelineLayoutBase* layout,
-                                     SingleShaderStage stage) {
+                                     SingleShaderStage stage,
+                                     ShaderModuleEntryPoint* entryPoint) {
     DAWN_TRY(device->ValidateObject(module));
 
-    DAWN_INVALID_IF(!module->HasEntryPoint(entryPoint),
-                    "Entry point \"%s\" doesn't exist in the shader module %s.", entryPoint,
+    DAWN_TRY_ASSIGN(*entryPoint, module->GetEntryPointForShaderStage(entryPointName, stage));
+    DAWN_DEBUG() << "entryPoint->name: " << entryPoint->name;
+    DAWN_DEBUG() << "entryPoint->isDefault: " << entryPoint->isDefault;
+
+    DAWN_INVALID_IF(!module->HasEntryPoint(entryPoint->name),
+                    "Entry point \"%s\" doesn't exist in the shader module %s.", entryPoint->name,
                     module);
 
-    const EntryPointMetadata& metadata = module->GetEntryPoint(entryPoint);
+    const EntryPointMetadata& metadata = module->GetEntryPoint(entryPoint->name);
 
     if (!metadata.infringedLimitErrors.empty()) {
         std::ostringstream limitList;
         for (const std::string& limit : metadata.infringedLimitErrors) {
             limitList << " - " << limit << "\n";
         }
-        return DAWN_VALIDATION_ERROR("Entry point \"%s\" infringes limits:\n%s", entryPoint,
+        return DAWN_VALIDATION_ERROR("Entry point \"%s\" infringes limits:\n%s", entryPoint->name,
                                      limitList.str());
     }
 
     DAWN_INVALID_IF(metadata.stage != stage,
                     "The stage (%s) of the entry point \"%s\" isn't the expected one (%s).",
-                    metadata.stage, entryPoint, stage);
+                    metadata.stage, entryPoint->name, stage);
 
     if (layout != nullptr) {
         DAWN_TRY(ValidateCompatibilityWithPipelineLayout(device, metadata, layout));

@@ -32,6 +32,7 @@
 
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Constants.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/BindGroupLayoutInternal.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/CompilationMessages.h"
@@ -1264,7 +1265,31 @@ bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint) const {
     return mEntryPoints.count(entryPoint) > 0;
 }
 
+ResultOrError<ShaderModuleEntryPoint> ShaderModuleBase::GetEntryPointForShaderStage(
+    const char* entryPointName,
+    SingleShaderStage stage) const {
+    ShaderModuleEntryPoint result;
+    if (entryPointName) {
+        result.isDefault = false;
+        result.name = entryPointName;
+        DAWN_DEBUG() << __func__ << " entryPointName exists ";
+        return std::move(result);
+    }
+    for (auto& [name, metadata] : mEntryPoints) {
+        if (metadata->stage == stage) {
+            DAWN_DEBUG() << __func__ << " name: " << name;
+
+            result.isDefault = true;
+            result.name = name;
+            return std::move(result);
+        }
+    }
+    return DAWN_VALIDATION_ERROR("No entry point for stage");
+}
+
 const EntryPointMetadata& ShaderModuleBase::GetEntryPoint(const std::string& entryPoint) const {
+    DAWN_DEBUG() << __func__ << " entryPoint: " << entryPoint;
+
     DAWN_ASSERT(HasEntryPoint(entryPoint));
     return *mEntryPoints.at(entryPoint);
 }

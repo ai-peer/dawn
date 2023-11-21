@@ -42,13 +42,13 @@ MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
     if (descriptor->layout != nullptr) {
         DAWN_TRY(device->ValidateObject(descriptor->layout));
     }
-
+    ShaderModuleEntryPoint entryPoint;
     DAWN_TRY_CONTEXT(ValidateProgrammableStage(
                          device, descriptor->compute.module, descriptor->compute.entryPoint,
                          descriptor->compute.constantCount, descriptor->compute.constants,
-                         descriptor->layout, SingleShaderStage::Compute),
+                         descriptor->layout, SingleShaderStage::Compute, &entryPoint),
                      "validating compute stage (%s, entryPoint: %s).", descriptor->compute.module,
-                     descriptor->compute.entryPoint);
+                     entryPoint.name);
     return {};
 }
 

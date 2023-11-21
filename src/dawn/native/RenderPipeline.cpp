@@ -31,6 +31,7 @@
 #include <cmath>
 
 #include "dawn/common/BitSetIterator.h"
+#include "dawn/common/Log.h"
 #include "dawn/common/ityp_span.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/CommandValidation.h"
@@ -176,7 +177,8 @@ MaybeError ValidateVertexBufferLayout(
 MaybeError ValidateVertexState(DeviceBase* device,
                                const VertexState* descriptor,
                                const PipelineLayoutBase* layout,
-                               wgpu::PrimitiveTopology primitiveTopology) {
+                               wgpu::PrimitiveTopology primitiveTopology,
+                               ShaderModuleEntryPoint* entryPoint) {
     DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr.");
 
     const CombinedLimits& limits = device->GetLimits();
@@ -185,13 +187,14 @@ MaybeError ValidateVertexState(DeviceBase* device,
                     "Vertex buffer count (%u) exceeds the maximum number of vertex buffers (%u).",
                     descriptor->bufferCount, limits.v1.maxVertexBuffers);
 
+    DAWN_DEBUG() << __func__ << " 0";
+
     DAWN_TRY_CONTEXT(ValidateProgrammableStage(device, descriptor->module, descriptor->entryPoint,
                                                descriptor->constantCount, descriptor->constants,
-                                               layout, SingleShaderStage::Vertex),
+                                               layout, SingleShaderStage::Vertex, entryPoint),
                      "validating vertex stage (%s, entryPoint: %s).", descriptor->module,
-                     descriptor->entryPoint);
-    const EntryPointMetadata& vertexMetadata =
-        descriptor->module->GetEntryPoint(descriptor->entryPoint);
+                     "descriptor->entryPoint");
+    const EntryPointMetadata& vertexMetadata = descriptor->module->GetEntryPoint(entryPoint->name);
     if (primitiveTopology == wgpu::PrimitiveTopology::PointList) {
         DAWN_INVALID_IF(
             vertexMetadata.totalInterStageShaderComponents + 1 >
@@ -547,31 +550,32 @@ MaybeError ValidateFragmentState(DeviceBase* device,
                                  const FragmentState* descriptor,
                                  const PipelineLayoutBase* layout,
                                  const DepthStencilState* depthStencil,
-                                 const MultisampleState& multisample) {
+                                 const MultisampleState& multisample,
+                                 ShaderModuleEntryPoint* entryPoint) {
     DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr.");
 
     DAWN_TRY_CONTEXT(ValidateProgrammableStage(device, descriptor->module, descriptor->entryPoint,
                                                descriptor->constantCount, descriptor->constants,
-                                               layout, SingleShaderStage::Fragment),
+                                               layout, SingleShaderStage::Fragment, entryPoint),
                      "validating fragment stage (%s, entryPoint: %s).", descriptor->module,
-                     descriptor->entryPoint);
+                     "descriptor->entryPoint");
 
     const EntryPointMetadata& fragmentMetadata =
-        descriptor->module->GetEntryPoint(descriptor->entryPoint);
+        descriptor->module->GetEntryPoint(entryPoint->name);
 
     if (fragmentMetadata.usesFragDepth) {
         DAWN_INVALID_IF(
             depthStencil == nullptr,
             "Depth stencil state is not present when fragment stage (%s, entryPoint: %s) is "
             "writing to frag_depth.",
-            descriptor->module, descriptor->entryPoint);
+            descriptor->module, entryPoint->name);
         const Format* depthStencilFormat;
         DAWN_TRY_ASSIGN(depthStencilFormat, device->GetInternalFormat(depthStencil->format));
         DAWN_INVALID_IF(!depthStencilFormat->HasDepth(),
                         "Depth stencil state format (%s) has no depth aspect when fragment stage "
                         "(%s, entryPoint: %s) is "
                         "writing to frag_depth.",
-                        depthStencil->format, descriptor->module, descriptor->entryPoint);
+                        depthStencil->format, descriptor->module, entryPoint->name);
     }
 
     uint32_t maxColorAttachments = device->GetLimits().v1.maxColorAttachments;
@@ -643,7 +647,7 @@ MaybeError ValidateFragmentState(DeviceBase* device,
             fragmentMetadata.usesSampleMaskOutput,
             "sample_mask is not supported in compatibility mode in the fragment stage (%s, "
             "entryPoint: %s)",
-            descriptor->module, descriptor->entryPoint);
+            descriptor->module, entryPoint->name);
 
         // Check that all the color target states match.
         ColorAttachmentIndex firstColorTargetIndex{};
@@ -667,11 +671,13 @@ MaybeError ValidateFragmentState(DeviceBase* device,
 
 MaybeError ValidateInterStageMatching(DeviceBase* device,
                                       const VertexState& vertexState,
-                                      const FragmentState& fragmentState) {
+                                      const ShaderModuleEntryPoint vertexStateEntryPoint,
+                                      const FragmentState& fragmentState,
+                                      const ShaderModuleEntryPoint fragmentStateEntryPoint) {
     const EntryPointMetadata& vertexMetadata =
-        vertexState.module->GetEntryPoint(vertexState.entryPoint);
+        vertexState.module->GetEntryPoint(vertexStateEntryPoint.name);
     const EntryPointMetadata& fragmentMetadata =
-        fragmentState.module->GetEntryPoint(fragmentState.entryPoint);
+        fragmentState.module->GetEntryPoint(fragmentStateEntryPoint.name);
 
     size_t maxInterStageShaderVariables = device->GetLimits().v1.maxInterStageShaderVariables;
     DAWN_ASSERT(vertexMetadata.usedInterStageVariables.size() == maxInterStageShaderVariables);
@@ -747,8 +753,9 @@ MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
         DAWN_TRY(device->ValidateObject(descriptor->layout));
     }
 
+    ShaderModuleEntryPoint vertexStateEntryPoint;
     DAWN_TRY_CONTEXT(ValidateVertexState(device, &descriptor->vertex, descriptor->layout,
-                                         descriptor->primitive.topology),
+                                         descriptor->primitive.topology, &vertexStateEntryPoint),
                      "validating vertex state.");
 
     DAWN_TRY_CONTEXT(ValidatePrimitiveState(device, &descriptor->primitive),
@@ -767,8 +774,10 @@ MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
         "alphaToCoverageEnabled is true when fragment state is not present.");
 
     if (descriptor->fragment != nullptr) {
+        ShaderModuleEntryPoint fragmentStateEntryPoint;
         DAWN_TRY_CONTEXT(ValidateFragmentState(device, descriptor->fragment, descriptor->layout,
-                                               descriptor->depthStencil, descriptor->multisample),
+                                               descriptor->depthStencil, descriptor->multisample,
+                                               &fragmentStateEntryPoint),
                          "validating fragment state.");
 
         bool hasStorageAttachments =
@@ -777,7 +786,8 @@ MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                             !hasStorageAttachments,
                         "No attachment was specified (color, depth-stencil or other).");
 
-        DAWN_TRY(ValidateInterStageMatching(device, descriptor->vertex, *(descriptor->fragment)));
+        DAWN_TRY(ValidateInterStageMatching(device, descriptor->vertex, vertexStateEntryPoint,
+                                            *(descriptor->fragment), fragmentStateEntryPoint));
     }
 
     return {};
@@ -786,13 +796,20 @@ MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
 std::vector<StageAndDescriptor> GetRenderStagesAndSetPlaceholderShader(
     DeviceBase* device,
     const RenderPipelineDescriptor* descriptor) {
+    ShaderModuleEntryPoint vertexStateEntryPoint;
+    DAWN_TRY_ASSIGN(vertexStateEntryPoint,
+                    descriptor->vertex.module->GetEntryPointForShaderStage(descriptor->vertex.entryPoint,
+                                                        SingleShaderStage::Vertex));
     std::vector<StageAndDescriptor> stages;
-    stages.push_back({SingleShaderStage::Vertex, descriptor->vertex.module,
-                      descriptor->vertex.entryPoint, descriptor->vertex.constantCount,
-                      descriptor->vertex.constants});
+    stages.push_back({SingleShaderStage::Vertex, descriptor->vertex.module, vertexStateEntryPoint,
+                      descriptor->vertex.constantCount, descriptor->vertex.constants});
     if (descriptor->fragment != nullptr) {
+        ShaderModuleEntryPoint fragmentStateEntryPoint;
+        DAWN_TRY_ASSIGN(fragmentStateEntryPoint,
+                        descriptor->fragment->module->GetEntryPointForShaderStage(descriptor->fragment.entryPoint,
+                                                            SingleShaderStage::Fragment));
         stages.push_back({SingleShaderStage::Fragment, descriptor->fragment->module,
-                          descriptor->fragment->entryPoint, descriptor->fragment->constantCount,
+                          fragmentStateEntryPoint, descriptor->fragment->constantCount,
                           descriptor->fragment->constants});
     } else if (device->IsToggleEnabled(Toggle::UsePlaceholderFragmentInVertexOnlyPipeline)) {
         InternalPipelineStore* store = device->GetInternalPipelineStore();

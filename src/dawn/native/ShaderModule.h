@@ -120,6 +120,11 @@ struct ShaderModuleParseResult {
     std::unique_ptr<TintSource> tintSource;
 };
 
+struct ShaderModuleEntryPoint {
+    bool isDefault;
+    std::string name;
+};
+
 MaybeError ValidateAndParseShaderModule(DeviceBase* device,
                                         const ShaderModuleDescriptor* descriptor,
                                         ShaderModuleParseResult* parseResult,
@@ -297,6 +302,11 @@ class ShaderModuleBase : public ApiObjectBase,
 
     // Return true iff the program has an entrypoint called `entryPoint`.
     bool HasEntryPoint(const std::string& entryPoint) const;
+
+    // TODO.
+    ResultOrError<ShaderModuleEntryPoint> GetEntryPointForShaderStage(
+        const char* entryPointName,
+        SingleShaderStage stage) const;
 
     // Return the metadata for the given `entryPoint`. HasEntryPoint with the same argument
     // must be true.
