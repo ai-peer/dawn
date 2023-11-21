@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "78132dc4_6ca1c7a3",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T18:14:05Z",
+      "side": 1,
+      "message": "putting the test in SharedTextureMemoryTests.cpp sounds good. You may be able to remove some of the GetExpected* virtual methods because the test can ask what the format is and also check device features.\n\n```\nwgpu::TextureUsage expectedUsages \u003d GetExpectedUsage(...);\nif (utils::IsMultiPlanarFormat(properties.format)) {\n  if (!device.HasFeature(MultiplanarFormatsExtendedUsage)) {\n    expectedUsage \u0026\u003d ...; // remove unsupported usages\n  }\n  if (!device.HasFeature(MultiPlanarRenderTargets)) {\n    expectedUsage \u0026\u003d ~RenderAttachment; // remove unsupported usages\n  }\n}\n```",
+      "parentUuid": "c2b0ecda_9a7f6dec",
+      "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8360f2a0_991f8648",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-21T16:36:27Z",
       "side": 1,
       "message": "Is there a way to verify whether the format supports storage usage and is renderable? cf. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/SharedTextureMemoryMTL.mm;l\u003d110-113?q\u003dSharedTextureMemoryMTL\u0026ss\u003dchromium\n\nThis works locally, but from looking at how `supportsStorageUsage` and `isRenderable` are computed it\u0027s not obvious to me exactly how they relate to the actual format.",
+      "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5662e5c4_cb6bd5f8",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T18:14:05Z",
+      "side": 1,
+      "message": "right, they are computed based on folks looking at the specs and deciding when a format has a capability - either core or based on extensions.\n\nThere\u0027s an unfortunate level of duplication between computing those in Format.cpp and the queries provided by src/dawn/utils/TextureUtils.cpp. But until we factor out the format capabilities into something useable in tests, you can probably rely on TextureUtils.cpp.",
+      "parentUuid": "8360f2a0_991f8648",
       "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
