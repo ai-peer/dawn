@@ -16,6 +16,23 @@
       "message": "Sorry, I uploaded the PS32 by mistake. PS33 should revert that.",
       "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65ed0419_be5cb38e",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T02:46:00Z",
+      "side": 1,
+      "message": "Here is the leak of FD. Adding the line below can fix it.\nSystemHandle::Acquire(handle);",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
