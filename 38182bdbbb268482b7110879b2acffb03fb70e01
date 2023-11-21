@@ -93,6 +93,30 @@
       },
       "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57916b35_c9a04479",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T22:47:23Z",
+      "side": 1,
+      "message": "yea, that would be a problem, but at least right now I don\u0027t think it happens.\nwe could either remove the ASSERT in the future since I think it\u0027s fine - or if we need it for some reason we can pass an enum in like AlreadyComplete::Ok / AlreadyComplete::NotOk",
+      "parentUuid": "28d91dbf_8395f449",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
