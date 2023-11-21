@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4062f91d_3b4f0c06",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 33
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T11:19:09Z",
+      "side": 1,
+      "message": "lgtm",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d89ce6c3_8c0f1610",
@@ -31,6 +48,24 @@
       "writtenOn": "2023-11-21T09:09:08Z",
       "side": 1,
       "message": "[1]\n\n```\n// Handle is acquired from the texture so we need to make sure to close it.\n// TODO(dawn:1745): Consider using one event per submit that is tracked by the\n// CommandRecordingContext so that we don\u0027t need to create one handle per texture,\n// and so we don\u0027t need to acquire it here to close it.\nSystemHandle scopedHandle \u003d SystemHandle::Acquire(handle);\n```",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90f4c406_dcb559be",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T11:19:09Z",
+      "side": 1,
+      "message": "Looks good!",
+      "parentUuid": "d89ce6c3_8c0f1610",
       "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
