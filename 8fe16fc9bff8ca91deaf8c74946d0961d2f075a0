@@ -33,6 +33,24 @@
       "message": "Add a comment that this creates first due to the non-order in IR but we need the function to exist if we call it.",
       "revId": "8fe16fc9bff8ca91deaf8c74946d0961d2f075a0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1647c41a_234546e3",
+        "filename": "src/tint/lang/core/ir/binary/decode.cc",
+        "patchSetId": 25
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-21T12:21:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7a11b6e_b33e6f4f",
+      "revId": "8fe16fc9bff8ca91deaf8c74946d0961d2f075a0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
