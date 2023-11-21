@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "72d8afb9_dde1b8dc",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "the allocation we\u0027re populating is owned by the caller, so even if we did it on initialization, we would need to realloc and then copy. Seems simpler and cold enough code that we just alloc and populate in place.\n\nadded a comment about the ownership",
+      "parentUuid": "7f894fb3_8ff0a257",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02bf4c7a_95453d77",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-11-21T08:43:22Z",
       "side": 1,
       "message": "I wonder maybe we could pre-populate the heap info when PhysicalDevice is first created. Then APIGetProperties() will just point the user\u0027s struct\u0027s pointers to the pre-populated struct\u0027s members. Doing so would avoid the need for user to explicitly free the struct?",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b646e5a5_7159ed61",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "this is against the webgpu.h (to be written) specification which will say that the caller owns these allocations. We need to make a new allocation because it can outlive the device/adapter",
+      "parentUuid": "02bf4c7a_95453d77",
       "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec450921_516ecad3",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bfa38d2_eab8369c",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6a9aa1e4_bd521e5b",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-11-21T09:34:35Z",
       "side": 1,
       "message": "ditto",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "904eebf1_67c698ab",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6a9aa1e4_bd521e5b",
       "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7ee1cd76_7c60ae3b",
+        "filename": "src/dawn/tests/end2end/MemoryHeapPropertiesTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "no, because we don\u0027t correctly implement that part of webgpu.h, I left a TODO with the bug for it",
+      "parentUuid": "418611c5_51187fe9",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90a8d06a_6a4537e3",
@@ -133,6 +223,24 @@
       "writtenOn": "2023-11-21T09:34:35Z",
       "side": 1,
       "message": "nit: And maybe check at least one flag is set.",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3961e2b8_c5b1563f",
+        "filename": "src/dawn/tests/end2end/MemoryHeapPropertiesTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "90a8d06a_6a4537e3",
       "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -154,6 +262,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3dcaee9_08cdef97",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "great idea!",
+      "parentUuid": "a967c904_ae71d9bf",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b064080_eabcf0ca",
@@ -167,6 +293,24 @@
       "writtenOn": "2023-11-21T09:34:35Z",
       "side": 1,
       "message": "Here and in other places (like backends etc.) I feel that some more block comments could make the code just slightly more readable.",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f42c775_aa94330b",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "Done, I think",
+      "parentUuid": "4b064080_eabcf0ca",
       "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -188,6 +332,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e77e380_410adb97",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "098f12b5_84d6a794",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3fdf82d2_64b31473",
@@ -201,6 +363,24 @@
       "writtenOn": "2023-11-21T09:34:35Z",
       "side": 1,
       "message": "nit: leftover debug? :) (also DAWN_DEBUG() is very useful!)",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a71f5455_caed2e9f",
+        "filename": "src/dawn/wire/server/ServerInstance.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T21:52:29Z",
+      "side": 1,
+      "message": "DAWN_DEBUG requires me to do an #include which is more effort and scrolling than just printf usually - maybe there\u0027s a way we can have debug builds auto insert the include..?",
+      "parentUuid": "3fdf82d2_64b31473",
       "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
