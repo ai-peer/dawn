@@ -79,6 +79,26 @@ class Backend : public SharedTextureMemoryTestBackend {
         return device.ImportSharedTextureMemory(&desc);
     }
 
+    // Create a multiplanar shared texture memory.
+    wgpu::SharedTextureMemory CreateMultiplanarSharedTextureMemory(wgpu::Device& device) {
+        auto dict = AcquireCFRef(CFDictionaryCreateMutable(kCFAllocatorDefault, 0,
+                                                           &kCFTypeDictionaryKeyCallBacks,
+                                                           &kCFTypeDictionaryValueCallBacks));
+        AddIntegerValue(dict.Get(), kIOSurfaceWidth, 16);
+        AddIntegerValue(dict.Get(), kIOSurfaceHeight, 16);
+        AddIntegerValue(dict.Get(), kIOSurfacePixelFormat,
+                        kCVPixelFormatType_420YpCbCr8BiPlanarVideoRange);
+        AddIntegerValue(dict.Get(), kIOSurfaceBytesPerElement, 4);
+
+        wgpu::SharedTextureMemoryIOSurfaceDescriptor ioSurfaceDesc;
+        ioSurfaceDesc.ioSurface = IOSurfaceCreate(dict.Get());
+
+        wgpu::SharedTextureMemoryDescriptor desc;
+        desc.nextInChain = &ioSurfaceDesc;
+
+        return device.ImportSharedTextureMemory(&desc);
+    }
+
     std::vector<std::vector<wgpu::SharedTextureMemory>> CreatePerDeviceSharedTextureMemories(
         const std::vector<wgpu::Device>& devices) override {
         std::vector<std::vector<wgpu::SharedTextureMemory>> memories;
@@ -147,6 +167,31 @@ class Backend : public SharedTextureMemoryTestBackend {
         return importingDevice.ImportSharedFence(&fenceDesc);
     }
 };
+
+TEST_P(SharedTextureMemoryTests, TextureUsagesForSingelPlanarTexture) {
+    wgpu::SharedTextureMemory memory = Backend::GetInstance()->CreateSharedTextureMemory(device);
+    wgpu::SharedTextureMemoryProperties properties;
+    memory.GetProperties(&properties);
+
+    wgpu::TextureUsage expected_usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                                        wgpu::TextureUsage::TextureBinding |
+                                        wgpu::TextureUsage::StorageBinding |
+                                        wgpu::TextureUsage::RenderAttachment;
+
+    EXPECT_EQ(properties.usage, expected_usage);
+}
+
+TEST_P(SharedTextureMemoryTests, TextureUsagesForMultiplanarTexture) {
+    wgpu::SharedTextureMemory memory =
+        Backend::GetInstance()->CreateMultiplanarSharedTextureMemory(device);
+    wgpu::SharedTextureMemoryProperties properties;
+    memory.GetProperties(&properties);
+
+    wgpu::TextureUsage expected_usage =
+        wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding;
+
+    EXPECT_EQ(properties.usage, expected_usage);
+}
 
 // Test that a shared event can be imported, and then exported.
 TEST_P(SharedTextureMemoryTests, SharedFenceSuccessfulImportExport) {
