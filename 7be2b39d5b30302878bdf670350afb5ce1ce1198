@@ -1,0 +1,147 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a63c0646_06c6f605",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T08:29:04Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73bb4a2a_ed6e3e8c",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T08:29:04Z",
+      "side": 1,
+      "message": "This seemed concerning to me at first - what if dawn realizes it needs to SetEarlyStatus after the event completes? But then I realized SetEarlyStatus is user-initiated - only happens if the user calls Unmap or Destroy.\n\nTo clarify this, comment here when this actually happens - and maybe consider renaming SetEarlyStatus to UnmapEarly?",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 77
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01352dce_0adac132",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T08:29:04Z",
+      "side": 1,
+      "message": "Worth a comment that if unmap races with completion, this early status will be dropped on the floor - but that\u0027s OK because we\u0027ll still go and unmap the buffer. Scenario:\n- UnmapInternal sees the map is PendingMap and mPendingMapEvent is non-null\n- The buffer becomes ready and is moved into the Mapped state\n- UnmapInternal calls SetEarlyStatus but the early status ends up being dropped on the floor\n- UnmapInternal calls UnmapImpl\n- UnmapInternal sets the state to Unmapped",
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52c6b533_dab1adfe",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T08:29:04Z",
+      "side": 1,
+      "message": "I think mPendingMapEvent can be set to null (by std::move() in Complete()) in between these two lines. Need to save it off into a local Ref\u003c\u003e before checking it.",
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c91c882_1ef3c7c9",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T08:29:04Z",
+      "side": 1,
+      "message": "nit: call it `readyEnd` here as well (or maybe `endOfReady` would be clearer)",
+      "range": {
+        "startLine": 235,
+        "startChar": 9,
+        "endLine": 235,
+        "endChar": 11
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d160e20d_0ace327c",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T08:29:04Z",
+      "side": 1,
+      "message": "IIUC this case will already be tested by the Future-prefixed version, doesn\u0027t really need to be here.\n\nAlternatively you could remove std::nullopt from the parameter list of the Future-prefixed one.",
+      "range": {
+        "startLine": 661,
+        "startChar": 66,
+        "endLine": 661,
+        "endChar": 80
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d201055e_868b9984",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T08:29:04Z",
+      "side": 1,
+      "message": "same",
+      "range": {
+        "startLine": 874,
+        "startChar": 66,
+        "endLine": 874,
+        "endChar": 80
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
