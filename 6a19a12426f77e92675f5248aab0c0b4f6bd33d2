@@ -16,6 +16,74 @@
       "message": "PTAL! This is dumb, but I\u0027ve confirmed it fixes the problem on 6 different devices.",
       "revId": "6a19a12426f77e92675f5248aab0c0b4f6bd33d2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "393d18ed_6e03cd0f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T23:31:11Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6a19a12426f77e92675f5248aab0c0b4f6bd33d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b743565_e7020705",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T23:31:11Z",
+      "side": 1,
+      "message": "Examples online seem to use TOP_OF_PIPE and BOTTOM_OF_PIPE in this way, but I want to understand what they actually do. Looking at vkCmdWriteTimestamp:\n\n\u003e The first synchronization scope includes all commands that occur earlier in submission order. The synchronization scope is limited to operations on the pipeline stage specified by pipelineStage.\n\u003e \n\u003e The second synchronization scope includes only the timestamp write operation.\n\nThis says pipelineStage is only used for the first synchronization scope (before the barrier). We have no control over the second synchronization scope (after the barrier), as all it does is write the timestamp.\n\nThe meaning of pipelineStage in the first synchronization scope is as follows:\n\n\u003e VK_PIPELINE_STAGE_TOP_OF_PIPE_BIT (...) specifies no stage of execution when specified in the first scope.\n\nSo I\u0027m pretty sure TOP_OF_PIPE actually does nothing here, and is equivalent to NONE (though NONE isn\u0027t allowed without `synchronization2`). Put another way, IIUC, this blocks on all commands prior to vkCmdWriteTimestamp *entering* the pipe (being scheduled).\n\nOf course this isn\u0027t _really_ what we want, but Vulkan doesn\u0027t let us say what we want. But it seems like it works fine in practice as long as things never get scheduled significantly before they start running. For all I know, somewhere in the Vulkan spec says this \"should\" be the case.\n\n\u003e VK_PIPELINE_STAGE_BOTTOM_OF_PIPE_BIT is equivalent to VK_PIPELINE_STAGE_ALL_COMMANDS_BIT with VkAccessFlags set to 0 when specified in the first synchronization scope (...)\n\nConversely, BOTTOM_OF_PIPE is actually equal to ALL_COMMANDS. BOTTOM_OF_PIPE blocks on all commands prior to vkCmdWriteTimestamp *exiting* the pipe (completing). I guess calling it ALL_COMMANDS here would be slightly clearer because you don\u0027t have to go digging into what BOTTOM_OF_PIPE actually means? But better for it to match TOP_OF_PIPE as long as we\u0027re using that (and I think we have to).\n\n---\n\nI think it would be worth including most of this information in comments.",
+      "revId": "6a19a12426f77e92675f5248aab0c0b4f6bd33d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2345178e_137ce21a",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1128,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T23:31:11Z",
+      "side": 1,
+      "message": "iiuc - note in this comment that this is only anecdotal/observed behavior.",
+      "revId": "6a19a12426f77e92675f5248aab0c0b4f6bd33d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d13c8d9_060b8419",
+        "filename": "src/dawn/native/vulkan/CommandBufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1345,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T23:31:11Z",
+      "side": 1,
+      "message": "same",
+      "revId": "6a19a12426f77e92675f5248aab0c0b4f6bd33d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
