@@ -69,6 +69,30 @@
       },
       "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28d91dbf_8395f449",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T22:37:20Z",
+      "side": 1,
+      "message": "Hmm, I could be considering an impossible scenario, but was imagining a case where the map spontaneously completes while an `Unmap` is called. If the spontaneous complete goes first, I think that the bool will be set to true already and hit the assert?",
+      "parentUuid": "ee5d57dc_4b47c422",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
