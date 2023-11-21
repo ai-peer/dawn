@@ -33,6 +33,24 @@
       "message": "Here is the leak of FD. Adding the line below can fix it.\nSystemHandle::Acquire(handle);",
       "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f7142c9_8e9268c0",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T08:37:37Z",
+      "side": 1,
+      "message": "The line you wrote seems like it would just close the handle? Can you detail your understanding of the leak a bit more? I don\u0027t see it.",
+      "parentUuid": "65ed0419_be5cb38e",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
