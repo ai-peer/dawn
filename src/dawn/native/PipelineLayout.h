@@ -42,6 +42,7 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
+#include "dawn/native/ShaderModule.h"
 
 #include "dawn/native/dawn_platform.h"
 
@@ -56,6 +57,17 @@ using BindGroupLayoutArray = ityp::array<BindGroupIndex, Ref<BindGroupLayoutBase
 using BindGroupLayoutMask = ityp::bitset<BindGroupIndex, kMaxBindGroups>;
 
 struct StageAndDescriptor {
+    StageAndDescriptor(SingleShaderStage shaderStage,
+                       ShaderModuleBase* module,
+                       const char* entryPoint,
+                       size_t constantCount,
+                       ConstantEntry const* constants)
+        : shaderStage(shaderStage),
+          module(module),
+          entryPoint(module->ReifyEntryPointName(entryPoint, shaderStage).name),
+          constantCount(constantCount),
+          constants(constants) {}
+
     SingleShaderStage shaderStage;
     ShaderModuleBase* module;
     std::string entryPoint;
