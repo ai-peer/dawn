@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "30d790d0_c0c82ba7",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T17:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "73bb4a2a_ed6e3e8c",
+      "range": {
+        "startLine": 182,
+        "startChar": 43,
+        "endLine": 182,
+        "endChar": 77
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "01352dce_0adac132",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-11-21T08:29:04Z",
       "side": 1,
       "message": "Worth a comment that if unmap races with completion, this early status will be dropped on the floor - but that\u0027s OK because we\u0027ll still go and unmap the buffer. Scenario:\n- UnmapInternal sees the map is PendingMap and mPendingMapEvent is non-null\n- The buffer becomes ready and is moved into the Mapped state\n- UnmapInternal calls SetEarlyStatus but the early status ends up being dropped on the floor\n- UnmapInternal calls UnmapImpl\n- UnmapInternal sets the state to Unmapped",
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "724118fd_1d1a401a",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T17:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "01352dce_0adac132",
       "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f27eea17_c9cd65d6",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T17:19:47Z",
+      "side": 1,
+      "message": "Done. although what we need to do eventually is make that ref atomic.but unmap in general is not threadsafe yet. Put a comment about it with TODO",
+      "parentUuid": "52c6b533_dab1adfe",
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c91c882_1ef3c7c9",
@@ -88,6 +148,30 @@
       "writtenOn": "2023-11-21T08:29:04Z",
       "side": 1,
       "message": "nit: call it `readyEnd` here as well (or maybe `endOfReady` would be clearer)",
+      "range": {
+        "startLine": 235,
+        "startChar": 9,
+        "endLine": 235,
+        "endChar": 11
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c2d46a7_51374fed",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T17:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7c91c882_1ef3c7c9",
       "range": {
         "startLine": 235,
         "startChar": 9,
@@ -121,6 +205,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "412c0f70_d7b95c8d",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 661,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T17:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d160e20d_0ace327c",
+      "range": {
+        "startLine": 661,
+        "startChar": 66,
+        "endLine": 661,
+        "endChar": 80
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d201055e_868b9984",
@@ -134,6 +242,30 @@
       "writtenOn": "2023-11-21T08:29:04Z",
       "side": 1,
       "message": "same",
+      "range": {
+        "startLine": 874,
+        "startChar": 66,
+        "endLine": 874,
+        "endChar": 80
+      },
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "115de4af_589d92ce",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 874,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T17:19:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d201055e_868b9984",
       "range": {
         "startLine": 874,
         "startChar": 66,
