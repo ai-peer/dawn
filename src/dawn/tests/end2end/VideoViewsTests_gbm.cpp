@@ -84,7 +84,10 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
         mGbmDevice = CreateGbmDevice();
     }
 
-    void OnTearDown() override { gbm_device_destroy(mGbmDevice); }
+    void OnTearDown() override {
+        gbm_device_destroy(mGbmDevice);
+        close(mRenderNodeFd);
+    }
 
   private:
     gbm_device* CreateGbmDevice() {
@@ -100,17 +103,17 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
         const uint32_t kRenderNodeEnd = kRenderNodeStart + 16;
         const std::string kRenderNodeTemplate = "/dev/dri/renderD";
 
-        int renderNodeFd = -1;
+        mRenderNodeFd = -1;
         for (uint32_t i = kRenderNodeStart; i < kRenderNodeEnd; i++) {
             std::string renderNode = kRenderNodeTemplate + std::to_string(i);
-            renderNodeFd = open(renderNode.c_str(), O_RDWR);
-            if (renderNodeFd >= 0) {
+            mRenderNodeFd = open(renderNode.c_str(), O_RDWR);
+            if (mRenderNodeFd >= 0) {
                 break;
             }
         }
-        DAWN_ASSERT(renderNodeFd > 0);
+        DAWN_ASSERT(mRenderNodeFd > 0);
 
-        gbm_device* gbmDevice = gbm_create_device(renderNodeFd);
+        gbm_device* gbmDevice = gbm_create_device(mRenderNodeFd);
         DAWN_ASSERT(gbmDevice != nullptr);
         return gbmDevice;
     }
@@ -229,6 +232,7 @@ class VideoViewsTestBackendGbm : public VideoViewsTestBackend {
 
     WGPUDevice mWGPUDevice = nullptr;
     gbm_device* mGbmDevice = nullptr;
+    int mRenderNodeFd = -1;
 };
 
 }  // anonymous namespace

@@ -606,6 +606,9 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
     const std::vector<ExternalSemaphoreHandle>& waitHandles) {
     const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
+    // Take the ownership of FD.
+    SystemHandle handle = SystemHandle::Acquire(memoryHandle);
+
     // Initial validation
     if (ConsumedError(ValidateIsAlive())) {
         return nullptr;
@@ -643,6 +646,8 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
         ConsumedError(result->BindExternalMemory(descriptor, allocation, waitSemaphores))) {
         // Delete the Texture if it was created
         if (result != nullptr) {
+            // The ownership of the FD was transferred to the Vulkan.
+            handle.Detach();
             result->Release();
         }
 
@@ -655,7 +660,8 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
         }
         return nullptr;
     }
-
+    // The ownership of the FD was transferred to the Vulkan.
+    handle.Detach();
     return result;
 }
 
