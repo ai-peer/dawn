@@ -98,15 +98,6 @@ MaybeError ValidateLinearTextureCopyOffset(const TextureDataLayout& layout,
     return {};
 }
 
-MaybeError ValidateTextureFormatForTextureToBufferCopyInCompatibilityMode(
-    const TextureBase* texture) {
-    DAWN_INVALID_IF(texture->GetFormat().isCompressed,
-                    "%s with format %s cannot be used as the source in a texture to buffer copy in "
-                    "compatibility mode.",
-                    texture, texture->GetFormat().format);
-    return {};
-}
-
 MaybeError ValidateSourceTextureFormatForTextureToTextureCopyInCompatibilityMode(
     const TextureBase* texture) {
     DAWN_INVALID_IF(
@@ -808,6 +799,28 @@ bool ShouldUseTextureToBufferBlit(const DeviceBase* device,
         return true;
     }
     return false;
+}
+
+MaybeError ValidateTextureForTextureToBufferCopyInCompatibilityMode(const DeviceBase* device,
+                                                                    const TextureBase* texture,
+                                                                    wgpu::TextureAspect aspect) {
+    auto format = texture->GetFormat();
+    DAWN_INVALID_IF(texture->GetFormat().isCompressed,
+                    "%s with format %s cannot be used as the source in a texture to buffer copy in "
+                    "compatibility mode.",
+                    texture, format.format);
+
+    auto convertedAspect = ConvertAspect(format, aspect);
+    if (ShouldUseTextureToBufferBlit(device, format, convertedAspect)) {
+        DAWN_INVALID_IF(texture->GetCompatibilityTextureBindingViewDimension() ==
+                            wgpu::TextureViewDimension::Cube,
+                        "%s with format %s and compatibility texture binding view dimension %s "
+                        "cannot be used as the source in a texture to buffer copy in "
+                        "compatibility mode.",
+                        texture, format.format,
+                        texture->GetCompatibilityTextureBindingViewDimension());
+    }
+    return {};
 }
 
 }  // namespace
@@ -1616,8 +1629,8 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
                 DAWN_TRY(ValidateTextureCopyRange(GetDevice(), *source, *copySize));
 
                 if (GetDevice()->IsCompatibilityMode()) {
-                    DAWN_TRY(ValidateTextureFormatForTextureToBufferCopyInCompatibilityMode(
-                        source->texture));
+                    DAWN_TRY(ValidateTextureForTextureToBufferCopyInCompatibilityMode(
+                        GetDevice(), source->texture, source->aspect));
                 }
             }
             const TexelBlockInfo& blockInfo =
