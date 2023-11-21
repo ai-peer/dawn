@@ -268,11 +268,6 @@ class CopyTests_T2B : public CopyTests, public DawnTestWithParams<CopyTextureFor
         DAWN_SUPPRESS_TEST_IF((GetParam().mTextureFormat == wgpu::TextureFormat::RGB9E5Ufloat) &&
                               IsANGLED3D11() && IsWindows());
 
-        // TODO(dawn:1877): blit texture to copy path failing some tests on ANGLE Swiftshader
-        DAWN_SUPPRESS_TEST_IF((IsSnorm(GetParam().mTextureFormat) ||
-                               GetParam().mTextureFormat == wgpu::TextureFormat::RGB9E5Ufloat) &&
-                              IsANGLESwiftShader());
-
         // TODO(dawn:1913): Many float formats tests failing for Metal backend on Mac Intel.
         DAWN_SUPPRESS_TEST_IF((GetParam().mTextureFormat == wgpu::TextureFormat::R32Float ||
                                GetParam().mTextureFormat == wgpu::TextureFormat::RG32Float ||
@@ -2429,12 +2424,6 @@ TEST_P(CopyTests_T2T, CopyFromNonZeroMipLevelWithTexelBlockSizeLessThan4Bytes) {
     constexpr std::array<uint32_t, 3> kTestTextureLayer = {1u, 3u, 5u};
 
     for (wgpu::TextureFormat format : kFormats) {
-        // TODO(dawn:1877): Snorm copy failing ANGLE Swiftshader, need further investigation.
-        if (IsANGLESwiftShader() &&
-            (format == wgpu::TextureFormat::RG8Snorm || format == wgpu::TextureFormat::R8Snorm)) {
-            continue;
-        }
-
         for (uint32_t textureLayer : kTestTextureLayer) {
             const wgpu::Extent3D kUploadSize = {4u, 4u, textureLayer};
 
