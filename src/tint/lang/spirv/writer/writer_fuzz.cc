@@ -25,45 +25,18 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// GEN_BUILD:CONDITION(tint_build_wgsl_reader && tint_build_wgsl_writer)
-
-#include <iostream>
+#include "src/tint/lang/spirv/writer/writer.h"
 
 #include "src/tint/cmd/fuzz/ir/ir_fuzz.h"
-#include "src/tint/lang/core/ir/disassembler.h"
-#include "src/tint/lang/wgsl/reader/lower/lower.h"
-#include "src/tint/lang/wgsl/reader/parser/parser.h"
-#include "src/tint/lang/wgsl/reader/program_to_ir/program_to_ir.h"
-#include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.h"
-#include "src/tint/lang/wgsl/writer/raise/raise.h"
-#include "src/tint/lang/wgsl/writer/writer.h"
 
-namespace tint::wgsl {
+namespace tint::spirv::writer {
+namespace {
 
-void IRRoundtripFuzzer(core::ir::Module& ir) {
-    if (auto res = tint::wgsl::reader::Lower(ir); !res) {
-        TINT_ICE() << res.Failure();
-        return;
-    }
-
-    if (auto res = tint::wgsl::writer::Raise(ir); !res) {
-        TINT_ICE() << res.Failure();
-        return;
-    }
-
-    auto dst = tint::wgsl::writer::IRToProgram(ir);
-    if (!dst.IsValid()) {
-        std::cerr << "IR:\n" << core::ir::Disassemble(ir) << std::endl;
-        if (auto result = tint::wgsl::writer::Generate(dst, {}); result) {
-            std::cerr << "WGSL:\n" << result->wgsl << std::endl << std::endl;
-        }
-        TINT_ICE() << dst.Diagnostics();
-        return;
-    }
-
-    return;
+void IRPrinterFuzzer(core::ir::Module& module, const Options& options) {
+    std::ignore = Generate(module, options);
 }
 
-}  // namespace tint::wgsl
+}  // namespace
+}  // namespace tint::spirv::writer
 
-TINT_IR_MODULE_FUZZER(tint::wgsl::IRRoundtripFuzzer);
+TINT_IR_MODULE_FUZZER(tint::spirv::writer::IRPrinterFuzzer);

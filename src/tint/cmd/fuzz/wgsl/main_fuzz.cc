@@ -29,17 +29,58 @@
 
 #include "src/tint/cmd/fuzz/wgsl/wgsl_fuzz.h"
 #include "src/tint/utils/cli/cli.h"
+#include "src/tint/utils/macros/defer.h"
+#include "src/tint/utils/text/base64.h"
 
 namespace {
 
 tint::fuzz::wgsl::Options options;
 
+void ParseComments(std::string_view wgsl, tint::Vector<std::byte, 64>& out) {
+    size_t block_nesting = 0;
+    bool line_comment = false;
+    for (size_t i = 0, n = wgsl.length(); i < n; i++) {
+        char curr = wgsl[i];
+        if (curr == '\n') {
+            if (line_comment) {
+                line_comment = false;
+            }
+            continue;
+        }
+
+        char next = (i + 1) < n ? wgsl[i + 1] : 0;
+        if (curr == '/' && next == '*') {
+            block_nesting++;
+            i++;  // skip '*'
+            continue;
+        }
+        if (curr == '*' && next == '/') {
+            block_nesting--;
+            i++;  // skip '/'
+            continue;
+        }
+        if (curr == '/' && next == '/') {
+            line_comment = true;
+            i++;  // skip '/'
+            continue;
+        }
+
+        if (block_nesting > 0 || line_comment) {
+            if (auto v = tint::DecodeBase64(curr)) {
+                out.Push(std::byte{*v});
+            }
+        }
+    }
 }
 
-extern "C" int LLVMFuzzerTestOneInput(const uint8_t* data, size_t size) {
+}  // namespace
+
+extern "C" int LLVMFuzzerTestOneInput(const uint8_t* input, size_t size) {
     if (size > 0) {
-        std::string_view wgsl(reinterpret_cast<const char*>(data), size);
-        tint::fuzz::wgsl::Run(wgsl, options);
+        std::string_view wgsl(reinterpret_cast<const char*>(input), size);
+        tint::Vector<std::byte, 64> data;
+        ParseComments(wgsl, data);
+        tint::fuzz::wgsl::Run(wgsl, data.Slice(), options);
     }
     return 0;
 }

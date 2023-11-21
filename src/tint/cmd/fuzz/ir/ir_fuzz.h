@@ -25,39 +25,42 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_CMD_FUZZ_WGSL_WGSL_FUZZ_H_
-#define SRC_TINT_CMD_FUZZ_WGSL_WGSL_FUZZ_H_
+#ifndef SRC_TINT_CMD_FUZZ_IR_IR_FUZZ_H_
+#define SRC_TINT_CMD_FUZZ_IR_IR_FUZZ_H_
 
+#include <functional>
 #include <string>
 
-#include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/utils/bytes/decoder.h"
 #include "src/tint/utils/containers/slice.h"
 #include "src/tint/utils/macros/static_init.h"
-#include "src/tint/utils/reflection/reflection.h"
 
-namespace tint::fuzz::wgsl {
+namespace tint::core::ir {
+class Module;
+}
 
-/// ProgramFuzzer describes a fuzzer function that takes a WGSL program as input
-struct ProgramFuzzer {
+namespace tint::fuzz::ir {
+
+/// IRFuzzer describes a fuzzer function that takes a IR module as input
+struct IRFuzzer {
     template <typename... ARGS>
-    static ProgramFuzzer Create(std::string_view name, void (*fn)(const Program&, ARGS...)) {
+    static IRFuzzer Create(std::string_view name, void (*fn)(core::ir::Module&, ARGS...)) {
         if constexpr (sizeof...(ARGS) > 0) {
-            return ProgramFuzzer{
+            return IRFuzzer{
                 name,
-                [fn](const Program& program, Slice<const std::byte> data) {
+                [fn](core::ir::Module& module, Slice<const std::byte> data) {
                     bytes::Reader reader{data};
                     if (auto data_args = bytes::Decode<std::tuple<std::decay_t<ARGS>...>>(reader)) {
                         auto all_args =
-                            std::tuple_cat(std::tuple<const Program&>{program}, data_args.Get());
+                            std::tuple_cat(std::tuple<core::ir::Module&>{module}, data_args.Get());
                         std::apply(*fn, all_args);
                     }
                 },
             };
         } else {
-            return ProgramFuzzer{
+            return IRFuzzer{
                 name,
-                [fn](const Program& program, Slice<const std::byte>) { fn(program); },
+                [fn](core::ir::Module& module, Slice<const std::byte>) { fn(module); },
             };
         }
     }
@@ -65,30 +68,18 @@ struct ProgramFuzzer {
     /// Name of the fuzzer function
     std::string_view name;
     /// The fuzzer function
-    std::function<void(const Program&, Slice<const std::byte> data)> fn;
+    std::function<void(core::ir::Module&, Slice<const std::byte> data)> fn;
 };
 
-/// Options for Run()
-struct Options {
-    /// If true, the fuzzers will be run concurrently on separate threads.
-    bool run_concurrently = false;
-};
-
-/// Runs all the registered WGSL fuzzers with the supplied WGSL
-/// @param wgsl the input WGSL
-/// @param data additional data used for fuzzing
-/// @param options the options for running the fuzzers
-void Run(std::string_view wgsl, Slice<const std::byte> data, const Options& options);
-
-/// Registers the fuzzer function with the WGSL fuzzer executable.
+/// Registers the fuzzer function with the IR fuzzer executable.
 /// @param fuzzer the fuzzer
-void Register(const ProgramFuzzer& fuzzer);
+void Register(const IRFuzzer& fuzzer);
 
-/// TINT_WGSL_PROGRAM_FUZZER registers the fuzzer function to run as part of `tint_wgsl_fuzzer`
-#define TINT_WGSL_PROGRAM_FUZZER(FUNCTION)         \
-    TINT_STATIC_INIT(::tint::fuzz::wgsl::Register( \
-        ::tint::fuzz::wgsl::ProgramFuzzer::Create(#FUNCTION, FUNCTION)))
+/// TINT_IR_MODULE_FUZZER registers the fuzzer function.
+#define TINT_IR_MODULE_FUZZER(FUNCTION) \
+    TINT_STATIC_INIT(                   \
+        ::tint::fuzz::ir::Register(::tint::fuzz::ir::IRFuzzer::Create(#FUNCTION, FUNCTION)))
 
-}  // namespace tint::fuzz::wgsl
+}  // namespace tint::fuzz::ir
 
-#endif  // SRC_TINT_CMD_FUZZ_WGSL_WGSL_FUZZ_H_
+#endif  // SRC_TINT_CMD_FUZZ_IR_IR_FUZZ_H_
