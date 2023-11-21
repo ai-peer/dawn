@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02bf4c7a_95453d77",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 328,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-21T08:43:22Z",
+      "side": 1,
+      "message": "I wonder maybe we could pre-populate the heap info when PhysicalDevice is first created. Then APIGetProperties() will just point the user\u0027s struct\u0027s pointers to the pre-populated struct\u0027s members. Doing so would avoid the need for user to explicitly free the struct?",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
