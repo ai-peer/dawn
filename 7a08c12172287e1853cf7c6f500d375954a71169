@@ -199,6 +199,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d06817_297719c8",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7b908d8_4786a830",
+      "range": {
+        "startLine": 106,
+        "startChar": 11,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97952676_76d17f2d",
@@ -253,6 +277,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c29d17ef_43598803",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "We already have validation like this in ValidateComputeStageWorkgroupSize so we could rename it to ValidateComputeStageAfterOverridableConstants and stick the additional validation for full subgroups in there. Am I missing something?\n\nAnd the DAWN_INVALID_IF(!device-\u003eHasFeature(Feature::ChromiumExperimentalSubgroups), is already covered by the validation at [1].",
+      "parentUuid": "b25238b0_4f84b2e1",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "978cdc0a_ca4b145e",
         "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 6
@@ -282,6 +324,24 @@
       "side": 1,
       "message": "If we don\u0027t initialize it, trash data will be kept for render pipeline.",
       "parentUuid": "978cdc0a_ca4b145e",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fb09ef1d_c44058ff",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "35cd4b8e_4eec3fb3",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -509,6 +569,24 @@
       "side": 1,
       "message": "Done, and add some more.",
       "parentUuid": "f7f276fb_1c94d877",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f98de01_ea8bcd00",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bec87393_86592d5b",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -836,6 +914,24 @@
       "side": 1,
       "message": "Removed, the only different is that this test works on a device that enable `ChromiumExperimentalSubgroups` feature.\n\nHow to group `fullSubgroups` test together, move them into one file having both unittest and E2E tests?",
       "parentUuid": "d0575bd6_e4aad2a3",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2436436_fa0b0861",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "Ah sorry I didn\u0027t mean validation vs end2end, but validation-with-feature-disabled and validation-with-feature-enabled.",
+      "parentUuid": "e6454385_a98929ff",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

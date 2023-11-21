@@ -16,6 +16,148 @@
       "message": "Please take a look, thanks",
       "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82447e1f_78a14b73",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb43776c_9cd6ce5a",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "nit: I didn\u0027t see it earlier, but we should use DAWN_INVALID_IF() and use a %s for the feature and pass the Feature::Chromium ... so it gets corectly formatted.\n\nAlso the error message conventions are that we\u0027d say \"DawnCompute ... is used without %s enabled.\"",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db757225_99dc7666",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "We have an IsPowerOfTwo helper :D",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50cec09e_927d9037",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "That\u0027s always guaranteed to be at least 4 AFAIK",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f82cabc9_6267ce3d",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "This is a frontend validation check, and is covered by the validation tests at [2]. We could remove all these checks, and the PARAMs struct.",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f640fb25_74dda16e",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "We don\u0027t need to actually send commands, if compiling the pipeline succeeds, then we\u0027re good to go. We can remove all this and the submit. Ditto below.",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea5680e7_93ba8eec",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "```suggestion\n            @compute @workgroup_size(1)\n            fn main() {\n         })\");\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 5
+      },
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfc78f60_6581c043",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T10:16:51Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
