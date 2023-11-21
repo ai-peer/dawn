@@ -27,6 +27,8 @@
 
 #include "dawn/native/ComputePipeline.h"
 
+#include <vector>
+
 #include "dawn/native/Device.h"
 #include "dawn/native/ObjectContentHasher.h"
 #include "dawn/native/ObjectType_autogen.h"
@@ -43,25 +45,35 @@ MaybeError ValidateComputePipelineDescriptor(DeviceBase* device,
         DAWN_TRY(device->ValidateObject(descriptor->layout));
     }
 
-    DAWN_TRY_CONTEXT(ValidateProgrammableStage(
-                         device, descriptor->compute.module, descriptor->compute.entryPoint,
-                         descriptor->compute.constantCount, descriptor->compute.constants,
-                         descriptor->layout, SingleShaderStage::Compute),
-                     "validating compute stage (%s, entryPoint: %s).", descriptor->compute.module,
-                     descriptor->compute.entryPoint);
+    ShaderModuleEntryPoint entryPoint;
+    DAWN_TRY_ASSIGN_CONTEXT(entryPoint,
+                            ValidateProgrammableStage(
+                                device, descriptor->compute.module, descriptor->compute.entryPoint,
+                                descriptor->compute.constantCount, descriptor->compute.constants,
+                                descriptor->layout, SingleShaderStage::Compute),
+                            "validating compute stage (%s, entryPoint: %s).",
+                            descriptor->compute.module, descriptor->compute.entryPoint);
     return {};
+}
+
+std::vector<StageAndDescriptor> GetComputeStage(DeviceBase* device,
+                                                const ComputePipelineDescriptor* descriptor) {
+    ShaderModuleEntryPoint entryPoint = descriptor->compute.module->ReifyEntryPointName(
+        descriptor->compute.entryPoint, SingleShaderStage::Compute);
+    std::vector<StageAndDescriptor> stages;
+    stages.push_back({SingleShaderStage::Compute, descriptor->compute.module, entryPoint.name,
+                      descriptor->compute.constantCount, descriptor->compute.constants});
+    return stages;
 }
 
 // ComputePipelineBase
 
 ComputePipelineBase::ComputePipelineBase(DeviceBase* device,
                                          const ComputePipelineDescriptor* descriptor)
-    : PipelineBase(
-          device,
-          descriptor->layout,
-          descriptor->label,
-          {{SingleShaderStage::Compute, descriptor->compute.module, descriptor->compute.entryPoint,
-            descriptor->compute.constantCount, descriptor->compute.constants}}) {
+    : PipelineBase(device,
+                   descriptor->layout,
+                   descriptor->label,
+                   GetComputeStage(device, descriptor)) {
     SetContentHash(ComputeContentHash());
     GetObjectTrackingList()->Track(this);
 
