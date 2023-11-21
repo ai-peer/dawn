@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b0ecda_9a7f6dec",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-21T16:36:27Z",
+      "side": 1,
+      "message": "From looking at the structure of the test setup here, would a better organization of the new tests be to put them in SharedTextureMemoryTests.cpp and add the following virtual methods to be overridden by the backends:\n\n- CreateMultiplanarSharedTextureMemory(device)\n- GetExpectedSinglePlanarTextureUsages(device)\n- GetExpectedMultiplanarTextureUsages(device)\n\n?",
+      "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8360f2a0_991f8648",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-21T16:36:27Z",
+      "side": 1,
+      "message": "Is there a way to verify whether the format supports storage usage and is renderable? cf. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/SharedTextureMemoryMTL.mm;l\u003d110-113?q\u003dSharedTextureMemoryMTL\u0026ss\u003dchromium\n\nThis works locally, but from looking at how `supportsStorageUsage` and `isRenderable` are computed it\u0027s not obvious to me exactly how they relate to the actual format.",
+      "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
