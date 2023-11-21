@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "02d724c0_b46aad45",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f894fb3_8ff0a257",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "Why is this done via a virtual method instead of done once in the backend physical device initialization (like PCI ids)? Is it to avoid startup costs?",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "02bf4c7a_95453d77",
@@ -14,6 +48,159 @@
       "writtenOn": "2023-11-21T08:43:22Z",
       "side": 1,
       "message": "I wonder maybe we could pre-populate the heap info when PhysicalDevice is first created. Then APIGetProperties() will just point the user\u0027s struct\u0027s pointers to the pre-populated struct\u0027s members. Doing so would avoid the need for user to explicitly free the struct?",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bfa38d2_eab8369c",
+        "filename": "src/dawn/native/d3d11/PhysicalDeviceD3D11.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 332,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "This works in C++?? Is it equivalent to the following?\n\n```\n  dedicateVideoMemory !\u003d 0 ? dedicateVideoMemory : sharedSystemMemory\n```\n\nIMHO we could use an `std::max`.",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a9aa1e4_bd521e5b",
+        "filename": "src/dawn/native/d3d12/PhysicalDeviceD3D12.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 723,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "501791fb_214efee7",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 781,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "Interestingly we could end up with a `Cached|Uncached` heap, not that it is an issue, just a weird thing that we should document... and you did 😊",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "418611c5_51187fe9",
+        "filename": "src/dawn/tests/end2end/MemoryHeapPropertiesTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "Is there any way to test the validation that this cannot be queried without the extension being present?",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a8d06a_6a4537e3",
+        "filename": "src/dawn/tests/end2end/MemoryHeapPropertiesTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "nit: And maybe check at least one flag is set.",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a967c904_ae71d9bf",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 321,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "I wonder if we should WillRepeatedly(Return(false)) for all features, so we\u0027re doing slightly less change detecting mocks.",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b064080_eabcf0ca",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "Here and in other places (like backends etc.) I feel that some more block comments could make the code just slightly more readable.",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "098f12b5_84d6a794",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fdf82d2_64b31473",
+        "filename": "src/dawn/wire/server/ServerInstance.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:34:35Z",
+      "side": 1,
+      "message": "nit: leftover debug? :) (also DAWN_DEBUG() is very useful!)",
       "revId": "373d026e5c0ce4f569f3ff0feaab291708e2987f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
