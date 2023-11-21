@@ -772,7 +772,7 @@ bool Converter::Convert(wgpu::ProgrammableStageDescriptor& out,
 
     // Replace nulls in the entryPoint name with another character that's disallowed in WGSL
     // identifiers. This is so that using "main\0" doesn't match an entryPoint named "main".
-    out.entryPoint = ConvertStringReplacingNull(in.entryPoint);
+    out.entryPoint = in.entryPoint ? ConvertStringReplacingNull(in.entryPoint) : nullptr;
 
     return Convert(out.constants, out.constantCount, in.constants);
 }
