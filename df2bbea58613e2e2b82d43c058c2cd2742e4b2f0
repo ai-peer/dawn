@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "79ccd7b3_7dde4217",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:47:40Z",
+      "side": 1,
+      "message": "Thanks, I had skipped over that part of the D3D11 doc \n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews#:~:text\u003dFor%20pixel%20shaders%2C%20the%20render%20targets%20and%20unordered%2Daccess%20views%20share%20the%20same%20resource%20slots%20when%20being%20written%20out.%20This%20means%20that%20UAVs%20must%20be%20given%20an%20offset%20so%20that%20they%20are%20placed%20in%20the%20slots%20after%20the%20render%20target%20views%20that%20are%20being%20bound.",
+      "parentUuid": "2b988fce_3ebaecf9",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3286e6d9_6e805f89",
@@ -277,6 +295,24 @@
       "side": 1,
       "message": "\u003e Can\u0027t we apply the fixed UAVs once at the state tracker creation (or in a method called early in the render pass) to simplify the code?\n\nNo because OMSetRenderTargetsAndUnorderedAccessViews() will unbind all the other UAVs as long as the `NumUAVs` is not `D3D11_KEEP_UNORDERED_ACCESS_VIEWS`, se we have to always set the pixel local storage UAVs together with all the other UAVs in bind groups.\n\nhttps://microsoft.github.io/DirectX-Specs/d3d/archive/D3D11_3_FunctionalSpec.htm, \"5.3.9.3 Binding an Unordered Access View at the DDI\":\n```\nUINT, // number of UAVs being set (all others unbound)\n```\n\n\u003e Can we have a test for PLS + UAV (buffer?) to check this logic is at least semi-correct?\n\nIn fact the `PLS + UAV` pass is being tested when the check method is `CheckMethod::StorageBuffer` in PixelLocalStorageTests.cpp.",
       "parentUuid": "40f73090_71340636",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5251b515_3d46ad75",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:47:40Z",
+      "side": 1,
+      "message": "\u003e No because OMSetRenderTargetsAndUnorderedAccessViews() will unbind all the other UAVs as long as the NumUAVs is not D3D11_KEEP_UNORDERED_ACCESS_VIEWS, se we have to always set the pixel local storage UAVs together with all the other UAVs in bind groups.\n\nThat contradicts the D3D11 documentation for the D3D11_KEEP_RENDER_TARGETS_AND_DEPTH_STENCIL case:\n\nhttps://learn.microsoft.com/en-us/windows/win32/api/d3d11/nf-d3d11-id3d11devicecontext-omsetrendertargetsandunorderedaccessviews#:~:text\u003dOMSetRenderTargetsAndUnorderedAccessViews%20unbinds%20the,in%20slots%20%3E%3D%20UAVStartSlot\n\nI think the D3D11 frontend should be handling the conversion from the semantic of D3D11 to the semantics of the DDI so I believe the suggestion could still work?\n\nHaha I should have remembered I made a storage test ^^ sounds good!",
+      "parentUuid": "8741867d_bb0a86fe",
       "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

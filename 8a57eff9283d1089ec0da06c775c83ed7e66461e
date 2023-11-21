@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b1b55fa7_9e1e4e11",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:47:40Z",
+      "side": 1,
+      "message": "u-nit: just \"desc\" since it\u0027s clear what we are doing here? It\u0027s to reduce the clutter when looking at the function.",
+      "range": {
+        "startLine": 136,
+        "startChar": 22,
+        "endLine": 136,
+        "endChar": 56
+      },
+      "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16e06a6e_c29c72dc",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-21T09:47:40Z",
+      "side": 1,
+      "message": "u-u-nit: Maybe at least an empty line here and before the return?",
+      "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
