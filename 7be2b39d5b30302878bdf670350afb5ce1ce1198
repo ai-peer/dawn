@@ -135,6 +135,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c64f6b8d_d0a78f78",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 688,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T21:18:33Z",
+      "side": 1,
+      "message": "Oh, true. Yeah, this would also just be much easier to reason about if the lock always covered this state.",
+      "parentUuid": "f27eea17_c9cd65d6",
+      "revId": "7be2b39d5b30302878bdf670350afb5ce1ce1198",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c91c882_1ef3c7c9",
