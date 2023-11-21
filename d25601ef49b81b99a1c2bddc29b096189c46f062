@@ -189,6 +189,30 @@
       },
       "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6ebfbd0_fc5b9cd2",
+        "filename": "src/dawn/native/SystemEvent.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-21T22:09:07Z",
+      "side": 1,
+      "message": "Hmm, ok I\u0027m fine with it either way, but the additional synchronization between the bool and the pipe just makes more overhead for maintenance and understanding what\u0027s happening, especially if the frequency of the path is small and locking doesn\u0027t incur too much additional performance cost.\n\nOtherwise, if leaving as is, I would suggest to add a comment above the members to document a bit why they are separated but are actually used with one another in some cases.",
+      "parentUuid": "5f6619b6_bed9afcf",
+      "range": {
+        "startLine": 114,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 95
+      },
+      "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
