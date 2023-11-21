@@ -141,6 +141,30 @@
       },
       "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06104470_b566ffd5",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T22:54:43Z",
+      "side": 1,
+      "message": "race with what? CompleteIfSpontaneous isn\u0027t called anywhere *except* UnmapEarly - or is this just hypothetically when we call CompleteIfSpontaneous from more places?",
+      "parentUuid": "fb4b8785_25b7a525",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
