@@ -51,6 +51,24 @@
       "parentUuid": "65ed0419_be5cb38e",
       "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "833e7464_8872da6d",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 33
+      },
+      "lineNbr": 505,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-21T08:51:35Z",
+      "side": 1,
+      "message": "You are right. As `SharedFence::Create` duplicates the fd from `handle`. The `handle` exported from the `texture` is leaked here, as texture exporting assumes to transfer the ownership of the `handle` to its clients.",
+      "parentUuid": "7f7142c9_8e9268c0",
+      "revId": "13acd2ebce196f9cc19c571453ea6519cb81c782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
