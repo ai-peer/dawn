@@ -16,6 +16,75 @@
       "message": "PTAL.",
       "revId": "a895241c0b4a1660e019815eae26c93eaab3ae80",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c022db14_7708566b",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 251,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-21T12:16:35Z",
+      "side": 1,
+      "message": "`EmitValue` (IR terminology) or `EmitExpression` (MSL terminology)",
+      "range": {
+        "startLine": 251,
+        "startChar": 9,
+        "endLine": 251,
+        "endChar": 22
+      },
+      "revId": "a895241c0b4a1660e019815eae26c93eaab3ae80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23698dcd_d73e937b",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 262,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-21T12:16:35Z",
+      "side": 1,
+      "message": "For now, I\u0027d probably just `TINT_ASSERT(name.IsValid())` in `EmitLet`. It\u0027s weird enough to have a let without a name, but if this is something we want, we can use a transform to name unnamed lets.",
+      "range": {
+        "startLine": 262,
+        "startChar": 28,
+        "endLine": 262,
+        "endChar": 42
+      },
+      "revId": "a895241c0b4a1660e019815eae26c93eaab3ae80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9580dda5_6058269a",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-21T12:16:35Z",
+      "side": 1,
+      "message": "Inlining lets seems broken. Consider:\n\n```\nlet unnamed \u003d FnCallThatMustHappenOnce();\nreturn unnamed + unnamed;\n```",
+      "range": {
+        "startLine": 265,
+        "startChar": 28,
+        "endLine": 265,
+        "endChar": 59
+      },
+      "revId": "a895241c0b4a1660e019815eae26c93eaab3ae80",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
