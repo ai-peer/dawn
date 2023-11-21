@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "896ee7d9_4260a01c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "I only have the Experimental Subgroups Investigation document https://docs.google.com/document/d/1cQ4J30Lr0KxYwh8IeRG9Py2JbpeeZXzRkYWEKy_A67k/",
+      "parentUuid": "02d594e4_31fbbdcf",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0e7c7703_cb8d69b0",
@@ -65,6 +83,30 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "nit: descriptor can be removed. Maybe \"dawn compute pipeline full subgroups\"?",
+      "range": {
+        "startLine": 3297,
+        "startChar": 59,
+        "endLine": 3297,
+        "endChar": 69
+      },
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba993a0_3fbc24d5",
+        "filename": "dawn.json",
+        "patchSetId": 6
+      },
+      "lineNbr": 3297,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0e7c7703_cb8d69b0",
       "range": {
         "startLine": 3297,
         "startChar": 59,
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a47c4265_2bad53b4",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0aafd14d_d5540223",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9614bab1_7dc7e36c",
@@ -105,6 +165,30 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "nit: IMHO experimental is an extension thing, but the member and getters could be requireSFullSubgroups (with the s in requires)",
+      "range": {
+        "startLine": 106,
+        "startChar": 11,
+        "endLine": 106,
+        "endChar": 44
+      },
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7b908d8_4786a830",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done, make them `mRequiresFullSubgroups` and `IsFullSubgroupsRequired`.",
+      "parentUuid": "9614bab1_7dc7e36c",
       "range": {
         "startLine": 106,
         "startChar": 11,
@@ -151,6 +235,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b25238b0_4f84b2e1",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "I think we have to do this validation after the shader is actually compiled in backend when initializing pipeline, so that we can get the exact workgroup size in case of using override constants in it.\n\nThe override constants are decided when creating each pipeline instead of creating shader modules, and each backend handle the override constants separately when generating backend shader code right before calling the backend compiling. So this D3D12 validation have to check `compiledShader.workgroupSize`, which is a (new added) member of the return struct of `module-\u003eCompile` above.",
+      "parentUuid": "2281050d_01490b19",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "978cdc0a_ca4b145e",
         "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
         "patchSetId": 6
@@ -162,6 +264,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "nit: I don\u0027t think we need to initialize this at it should be overwritten (and in the error case we don\u0027t return `result`)",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "35cd4b8e_4eec3fb3",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "If we don\u0027t initialize it, trash data will be kept for render pipeline.",
+      "parentUuid": "978cdc0a_ca4b145e",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -200,6 +320,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39955f72_f1185430",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Removed. Yes, I copy these codes from other tests that was written before we have adapter toggles etc.",
+      "parentUuid": "a31323c4_4cea51c1",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f74e7c24_a879c091",
@@ -217,6 +355,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e9a060f_0bcd291d",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f74e7c24_a879c091",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "188ca952_925631d8",
@@ -230,6 +386,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "nit: unused",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2418a6bf_ed58f732",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "188ca952_925631d8",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -253,6 +427,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "25be325a_cbe19336",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Removed. Because unexpected error \"Device destroyed before callback\" occurs with wire when I messing up with error scopes in the test...",
+      "parentUuid": "0b7cceb3_74d2e8b5",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b5a9f19d_4eecbc38",
         "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
         "patchSetId": 6
@@ -264,6 +456,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "That\u0027s already done by the DawnTest fixture, no need to manually check error scopes.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1501b0fa_8c59489a",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5a9f19d_4eecbc38",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -287,6 +497,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bec87393_86592d5b",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 195,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done, and add some more.",
+      "parentUuid": "f7f276fb_1c94d877",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e0a4c7b9_2946572f",
         "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
         "patchSetId": 6
@@ -298,6 +526,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "That can be done with ASSERT_DEVICE_ERROR around the computePipeline creation.\n\nDitto for the other test lambda.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c595d2d_db51c69a",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0a4c7b9_2946572f",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -319,6 +565,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6c3d5ae2_435de996",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 268,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4960bff_71b126c0",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0a2e3405_2f00f7b7",
@@ -332,6 +596,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "IMHO we could split this into two different tests, most of the code isn\u0027t shared.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd284cfa_7020e2b0",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a2e3405_2f00f7b7",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -353,6 +635,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76de41db_6da6b528",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 280,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9bcdaf64_0f200bf8",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "155f17d9_a8b0caa0",
@@ -370,6 +670,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9095eba_0b383a55",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "155f17d9_a8b0caa0",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e2734ae3_88dd7fec",
@@ -383,6 +701,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "When is this argument not \"main\"?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40ab18a8_6584d21d",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done, always use \"main\" as entry point name in the shader.",
+      "parentUuid": "e2734ae3_88dd7fec",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -410,6 +746,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc104e86_ce1afc65",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "55634573_53d6a282",
+      "range": {
+        "startLine": 90,
+        "startChar": 74,
+        "endLine": 90,
+        "endChar": 81
+      },
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bdb7da7_92beeaf5",
@@ -423,6 +783,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "nit: no need for a PL, ditto in a bunch of other cases.",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b882b6e_c941e654",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bdb7da7_92beeaf5",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -446,6 +824,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e6454385_a98929ff",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Removed, the only different is that this test works on a device that enable `ChromiumExperimentalSubgroups` feature.\n\nHow to group `fullSubgroups` test together, move them into one file having both unittest and E2E tests?",
+      "parentUuid": "d0575bd6_e4aad2a3",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cbf879de_e0fb009c",
         "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
         "patchSetId": 6
@@ -457,6 +853,24 @@
       "writtenOn": "2023-11-20T15:41:40Z",
       "side": 1,
       "message": "This validation could be moved to the frontend and CreateShaderModule would get an optional argument to specify the workgroup size maybe?",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b192e4_26056d16",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-21T09:59:09Z",
+      "side": 1,
+      "message": "Workgroup size may use override constants, which are determined when actually creating compute pipeline.",
+      "parentUuid": "cbf879de_e0fb009c",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
