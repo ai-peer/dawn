@@ -421,6 +421,10 @@ bool Queue::HasPendingCommands() const {
     return false;
 }
 
+ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    return true;
+}
+
 MaybeError Queue::WaitForIdleForDestruction() {
     ToBackend(GetDevice())->ForgetPendingOperations();
     return {};
