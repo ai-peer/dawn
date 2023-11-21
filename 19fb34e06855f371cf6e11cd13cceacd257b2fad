@@ -16,6 +16,24 @@
       "message": "I\u0027m guessing this is the wrong way to do this, but in order to use the \u0027wgsl/reader/reader.h\u0027 from dawn it needs to be either in the deps in the dawn/native/BUILD.gn (which doesn\u0027t contain anything outside of tint:api at the moment) or the `tint/api` build needs to use `public_deps` so they\u0027re visible to on the dawn side.\n\n(`deps` is not inherited, whereas `public_deps` are). \n\n\nI don\u0027t know if there is a way with the new generator to just change the single build.gn file as this change does all of them ....",
       "revId": "19fb34e06855f371cf6e11cd13cceacd257b2fad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3c63c06_9735f530",
+        "filename": "tools/src/cmd/gen/build/BUILD.gn.tmpl",
+        "patchSetId": 9
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-21T09:43:12Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "b0f87cc0_e308c522",
+      "revId": "19fb34e06855f371cf6e11cd13cceacd257b2fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
