@@ -48,7 +48,7 @@ MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* co
         DAWN_TRY(ToBackend(commands[i])->Execute());
     }
     TRACE_EVENT_END0(GetDevice()->GetPlatform(), Recording, "CommandBufferGL::Execute");
-
+    SetHasPendingCommands();
     return {};
 }
 
@@ -63,6 +63,7 @@ MaybeError Queue::WriteBufferImpl(BufferBase* buffer,
     gl.BindBuffer(GL_ARRAY_BUFFER, ToBackend(buffer)->GetHandle());
     gl.BufferSubData(GL_ARRAY_BUFFER, bufferOffset, size, data);
     buffer->MarkUsedInPendingCommands();
+    SetHasPendingCommands();
     return {};
 }
 
@@ -85,10 +86,47 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
     }
     DoTexSubImage(ToBackend(GetDevice())->GetGL(), textureCopy, data, dataLayout, writeSizePixel);
     ToBackend(destination.texture)->Touch();
+    SetHasPendingCommands();
     return {};
 }
 
-void Queue::OnGLUsed() {
+ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    // Search from the back for the most recent fence >= serial.
+    GLsync waitSync = 0;
+    for (auto it = mFencesInFlight.rbegin(); it != mFencesInFlight.rend(); ++it) {
+        if (it->second >= serial) {
+            waitSync = it->first;
+            break;
+        }
+    }
+    if (waitSync == 0) {
+        // Fence sync not found. This serial must have already completed.
+        // Return a success status.
+        DAWN_ASSERT(serial <= GetCompletedCommandSerial());
+        return true;
+    }
+
+    const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
+    // TODO(crbug.com/dawn/633): Remove this workaround after the deadlock issue is fixed.
+    if (GetDevice()->IsToggleEnabled(Toggle::FlushBeforeClientWaitSync)) {
+        gl.Flush();
+    }
+    // Wait for the fence sync.
+    GLenum result = gl.ClientWaitSync(waitSync, GL_SYNC_FLUSH_COMMANDS_BIT, uint64_t(timeout));
+    switch (result) {
+        case GL_TIMEOUT_EXPIRED:
+            return false;
+        case GL_CONDITION_SATISFIED:
+        case GL_ALREADY_SIGNALED:
+            return true;
+        case GL_WAIT_FAILED:
+            return DAWN_INTERNAL_ERROR("glClientWaitSync failed");
+        default:
+            DAWN_UNREACHABLE();
+    }
+}
+
+void Queue::SetHasPendingCommands() {
     mHasPendingCommands = true;
 }
 
@@ -100,7 +138,7 @@ void Queue::SubmitFenceSync() {
     const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
     GLsync sync = gl.FenceSync(GL_SYNC_GPU_COMMANDS_COMPLETE, 0);
     IncrementLastSubmittedCommandSerial();
-    mFencesInFlight.emplace(sync, GetLastSubmittedCommandSerial());
+    mFencesInFlight.emplace_back(sync, GetLastSubmittedCommandSerial());
     mHasPendingCommands = false;
 }
 
@@ -132,7 +170,7 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
 
         gl.DeleteSync(sync);
 
-        mFencesInFlight.pop();
+        mFencesInFlight.pop_front();
 
         DAWN_ASSERT(fenceSerial > GetCompletedCommandSerial());
     }

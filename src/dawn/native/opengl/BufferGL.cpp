@@ -33,6 +33,7 @@
 
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/opengl/DeviceGL.h"
+#include "dawn/native/opengl/QueueGL.h"
 
 namespace dawn::native::opengl {
 
@@ -85,6 +86,11 @@ Buffer::~Buffer() = default;
 
 GLuint Buffer::GetHandle() const {
     return mBuffer;
+}
+
+void Buffer::TrackUsage() {
+    MarkUsedInPendingCommands();
+    ToBackend(GetDevice()->GetQueue())->SetHasPendingCommands();
 }
 
 bool Buffer::EnsureDataInitialized() {
