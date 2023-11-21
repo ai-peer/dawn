@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fa3a3b9f_6115a819",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-21T21:49:40Z",
+      "side": 1,
+      "message": "Even with multi-queue I think k is going to be the number of \"sources\" (devices, plus 1 for OS events), not queues. On Vulkan, this would usually be 1, and very rarely more than 2.\n\nOn Mac and Windows, everything is an OS event, so k can always be 1, although I don\u0027t think we\u0027re optimizing to take advantage of that yet.",
+      "parentUuid": "26882d09_b2375f23",
+      "range": {
+        "startLine": 153,
+        "startChar": 4,
+        "endLine": 153,
+        "endChar": 92
+      },
+      "revId": "d25601ef49b81b99a1c2bddc29b096189c46f062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e2ddf43a_6a53c7a8",
         "filename": "src/dawn/native/SystemEvent.h",
         "patchSetId": 19
