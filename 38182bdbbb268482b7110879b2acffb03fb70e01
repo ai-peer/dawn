@@ -45,6 +45,30 @@
       },
       "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee5d57dc_4b47c422",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T22:14:21Z",
+      "side": 1,
+      "message": "can it? I don\u0027t see CompleteIfSpontaneous called anywhere else except the constructor of the event.\n\n@kainino@chromium.org what was the original reason for this assert?\n\nIn general though, it seems valid for two threads to race calling CompleteIfSpontaneous if they both determine an event is done.",
+      "parentUuid": "640a7920_0f31153d",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
