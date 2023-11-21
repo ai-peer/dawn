@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "adebc504_b3a959ad",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-11-21T21:49:08Z",
+      "side": 1,
+      "message": "PTAL! This is dumb, but I\u0027ve confirmed it fixes the problem on 6 different devices.",
+      "revId": "6a19a12426f77e92675f5248aab0c0b4f6bd33d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
