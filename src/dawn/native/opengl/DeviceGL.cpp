@@ -412,7 +412,6 @@ float Device::GetTimestampPeriodInNS() const {
 
 const OpenGLFunctions& Device::GetGL() const {
     mContext->MakeCurrent();
-    ToBackend(GetQueue())->OnGLUsed();
     return mGL;
 }
 
