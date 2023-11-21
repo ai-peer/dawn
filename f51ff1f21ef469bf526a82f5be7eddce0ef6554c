@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf981562_47aee67d",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T22:02:44Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 86,
+        "startChar": 0,
+        "endLine": 86,
+        "endChar": 35
+      },
+      "revId": "f51ff1f21ef469bf526a82f5be7eddce0ef6554c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad3bd093_0db285ce",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 20
+      },
+      "lineNbr": 254,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-21T22:02:44Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 254,
+        "startChar": 0,
+        "endLine": 254,
+        "endChar": 38
+      },
+      "revId": "f51ff1f21ef469bf526a82f5be7eddce0ef6554c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
