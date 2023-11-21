@@ -1,0 +1,12 @@
+SKIP: FAILED
+
+#include <metal_stdlib>
+using namespace metal;
+
+threadgroup int3 v;
+void tint_symbol() {
+}
+program_source:4:18: error: program scope variable must reside in constant address space
+threadgroup int3 v;
+                 ^
+

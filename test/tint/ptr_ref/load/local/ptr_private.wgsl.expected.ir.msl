@@ -1,0 +1,16 @@
+SKIP: FAILED
+
+#include <metal_stdlib>
+using namespace metal;
+
+thread int i = 123;
+void tint_symbol() {
+  thread int* const p = i;
+}
+program_source:4:12: error: program scope variable must reside in constant address space
+thread int i = 123;
+           ^
+program_source:6:21: warning: unused variable 'p' [-Wunused-variable]
+  thread int* const p = i;
+                    ^
+

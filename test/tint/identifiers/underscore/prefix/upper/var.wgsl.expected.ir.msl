@@ -1,0 +1,24 @@
+SKIP: FAILED
+
+#include <metal_stdlib>
+using namespace metal;
+
+thread int A = 1;
+thread int _A = 2;
+void f() {
+  int B = A;
+  int _B = _A;
+}
+program_source:4:12: error: program scope variable must reside in constant address space
+thread int A = 1;
+           ^
+program_source:5:12: error: program scope variable must reside in constant address space
+thread int _A = 2;
+           ^
+program_source:7:7: warning: unused variable 'B' [-Wunused-variable]
+  int B = A;
+      ^
+program_source:8:7: warning: unused variable '_B' [-Wunused-variable]
+  int _B = _A;
+      ^
+
