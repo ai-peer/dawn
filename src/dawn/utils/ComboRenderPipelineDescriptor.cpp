@@ -63,7 +63,7 @@ ComboRenderPipelineDescriptor::ComboRenderPipelineDescriptor() {
     {
         wgpu::VertexState* vertex = &descriptor->vertex;
         vertex->module = nullptr;
-        vertex->entryPoint = "main";
+        vertex->entryPoint = nullptr;
         vertex->bufferCount = 0;
 
         // Fill the default values for vertexBuffers and vertexAttributes in buffers.
@@ -127,7 +127,7 @@ ComboRenderPipelineDescriptor::ComboRenderPipelineDescriptor() {
     // Set the defaults for the fragment state
     {
         cFragment.module = nullptr;
-        cFragment.entryPoint = "main";
+        cFragment.entryPoint = nullptr;
         cFragment.targetCount = 1;
         cFragment.targets = &cTargets[0];
         descriptor->fragment = &cFragment;
