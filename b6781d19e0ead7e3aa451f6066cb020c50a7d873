@@ -22,6 +22,30 @@
       },
       "revId": "b6781d19e0ead7e3aa451f6066cb020c50a7d873",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eade68c4_358a5954",
+        "filename": "src/dawn/native/vulkan/QueueVk.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-22T17:49:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "345ae4e9_c48d7595",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 37
+      },
+      "revId": "b6781d19e0ead7e3aa451f6066cb020c50a7d873",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
