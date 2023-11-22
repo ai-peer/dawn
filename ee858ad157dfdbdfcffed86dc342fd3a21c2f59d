@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c16cd3eb_ccf0adee",
+        "filename": "src/tint/utils/text/base64.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-22T13:19:48Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2023 The Dawn \u0026 Tint Authors\n```",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "ee858ad157dfdbdfcffed86dc342fd3a21c2f59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
