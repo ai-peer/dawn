@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ac3091a_60024138",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 512,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-22T16:18:00Z",
+      "side": 1,
+      "message": "The IR should fail validation if this were to trigger. I\u0027d recommend removing, and crashing with nullptr deref if this really is broken.",
+      "range": {
+        "startLine": 510,
+        "startChar": 20,
+        "endLine": 512,
+        "endChar": 21
+      },
+      "revId": "7092bbb4264e6212657349033e406eaabbd2cd54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa6d277_13a92b48",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 517,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-22T16:18:00Z",
+      "side": 1,
+      "message": "You need to update `current_type` in this code path too. The typical way we do this is to return the new type from `Switch`. Something like:\n\n```\n            current_type \u003d Switch(\n                current_type,  //\n                [\u0026](const core::type::Struct* s) {\n                    auto* c \u003d index-\u003eAs\u003ccore::ir::Constant\u003e();\n                    auto* member \u003d s-\u003eMembers()[c-\u003eValue()-\u003eValueAs\u003cuint32_t\u003e()];\n                    out \u003c\u003c \".\" \u003c\u003c member-\u003eName().Name();\n                    return member-\u003eType();\n                },\n                [\u0026](Default) {\n                    out \u003c\u003c \"[\";\n                    EmitValue(out, index);\n                    out \u003c\u003c \"]\";\n                    return current_type-\u003eElements().type;\n                });\n```\n\nWould be good to have a test for this?",
+      "range": {
+        "startLine": 515,
+        "startChar": 0,
+        "endLine": 517,
+        "endChar": 31
+      },
+      "revId": "7092bbb4264e6212657349033e406eaabbd2cd54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
