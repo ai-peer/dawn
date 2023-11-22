@@ -22,6 +22,30 @@
       },
       "revId": "0090b61576bfc2a492c6b27baa33eccbe4cd5d34",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cddd57f5_a8561892",
+        "filename": "src/tint/cmd/fuzz/wgsl/fuzz.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-22T22:14:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0425bd2f_a2f2f304",
+      "range": {
+        "startLine": 47,
+        "startChar": 17,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "0090b61576bfc2a492c6b27baa33eccbe4cd5d34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
