@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e13cbce_14ba92c8",
+        "filename": "src/tint/utils/bytes/endianness.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 23,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-22T12:41:19Z",
+      "side": 1,
+      "message": "```suggestion\nenum class Endianness : uint8_t { kBig, kLittle };\n```",
+      "revId": "6b53b90897ad17bf5d36351733edf01fad092182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b94be9b_618ed902",
+        "filename": "src/tint/utils/bytes/reader_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-22T12:41:19Z",
+      "side": 1,
+      "message": "Wrong copyright",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 13,
+        "endChar": 33
+      },
+      "revId": "6b53b90897ad17bf5d36351733edf01fad092182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6201537f_9dfb3a20",
+        "filename": "src/tint/utils/bytes/swap.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-22T12:41:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "6b53b90897ad17bf5d36351733edf01fad092182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ecf83f2d_484c312b",
+        "filename": "src/tint/utils/bytes/swap_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-22T12:41:19Z",
+      "side": 1,
+      "message": "ditto",
+      "range": {
+        "startLine": 1,
+        "startChar": 0,
+        "endLine": 1,
+        "endChar": 35
+      },
+      "revId": "6b53b90897ad17bf5d36351733edf01fad092182",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
