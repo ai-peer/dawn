@@ -16,6 +16,57 @@
       "message": "Thanks, PTAL!",
       "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "234a020b_9dee876c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T15:16:08Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7871cd9c_beb78670",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T15:16:08Z",
+      "side": 1,
+      "message": "nit: Please associate TODOs with an issue and not a person, the code is a shared artifact and you don\u0027t need to be the PoC or the one responsible for fixing this.",
+      "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cda88130_652c98c1",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T15:16:08Z",
+      "side": 1,
+      "message": "I don\u0027t think that\u0027s correct for D3D12? What about querying the adapter properties to know whether we are in compatibility mode?",
+      "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
