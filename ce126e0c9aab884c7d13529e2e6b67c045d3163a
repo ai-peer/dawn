@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0710273e_1d5ac833",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-22T17:32:34Z",
+      "side": 1,
+      "message": "Hi Austin,\n\nThis is still WIP but I had a question for you about the tests. Thanks!",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "195cc51e_50cc693d",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-22T17:32:34Z",
+      "side": 1,
+      "message": "Am I correct in assuming that we shouldn\u0027t execute the below code for multiplanar formats regardless of whether they\u0027re renderable (on this test and at least one other test)? This test crashes on multiplanar formats if UseInRenderPass() is called - first because of [1], but if I relax that, the test still crashes, just without a stacktrace.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/TextureMTL.mm;l\u003d1012-1014?q\u003dTextureMTL.mm\u0026ss\u003dchromium",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
