@@ -498,8 +498,11 @@ class Printer : public tint::TextGenerator {
     void EmitAccess(StringStream& out, const core::ir::Access* a) {
         EmitValue(out, a->Object());
 
-        auto* current_type = a->Result()->Type();
+        auto* current_type = a->Object()->Type();
         for (auto* index : a->Indices()) {
+            TINT_ASSERT(current_type);
+
+            current_type = current_type->UnwrapPtr();
             Switch(
                 current_type,  //
                 [&](const core::type::Struct* s) {
@@ -515,6 +518,7 @@ class Printer : public tint::TextGenerator {
                     out << "[";
                     EmitValue(out, index);
                     out << "]";
+                    current_type = current_type->Element(0);
                 });
         }
     }
