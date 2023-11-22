@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c24086cf_97232161",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-22T15:37:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "792ec943_f4c2c500",
+      "range": {
+        "startLine": 129,
+        "startChar": 45,
+        "endLine": 129,
+        "endChar": 54
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "640a7920_0f31153d",
@@ -229,6 +253,30 @@
       "side": 1,
       "message": "It\u0027s not that we want to report a failure - it\u0027s that no failure should be happening. I think once it\u0027s thread-safe, there won\u0027t be a possibility of failure here.\n\nFor now, I think the ASSERT will only be hit if the application tries to use this multi-threaded without external locking. It seems OK to keep.\n\nAlso FWIW I\u0027m not even totally sure if we ever actually want to make Unmap thread-safe in this way, because of the problem of WASM mappings being tied to a particular thread. https://github.com/webgpu-native/webgpu-headers/issues/248",
       "parentUuid": "a629dfd9_2df63c9c",
+      "range": {
+        "startLine": 455,
+        "startChar": 8,
+        "endLine": 455,
+        "endChar": 38
+      },
+      "revId": "38182bdbbb268482b7110879b2acffb03fb70e01",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51c0e4b3_5419c83b",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 18
+      },
+      "lineNbr": 455,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-22T15:37:53Z",
+      "side": 1,
+      "message": "ok I\u0027m going to submit and follow up on this because CQ is slowwwww",
+      "parentUuid": "cdcc77bc_c1b23cfc",
       "range": {
         "startLine": 455,
         "startChar": 8,
