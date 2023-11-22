@@ -76,6 +76,8 @@ class Backend : public SharedTextureMemoryTestBackend {
 
     bool UseSameDevice() const override { return mMode == Mode::D3D11Texture2D; }
     bool SupportsConcurrentRead() const override { return !mUseKeyedMutex; }
+    // This backend creates D3D11 textures, which requires compatibility mode.
+    bool IsCompatibilityMode() const override { return true; }
 
     std::vector<wgpu::FeatureName> RequiredFeatures() const override {
         switch (mMode) {

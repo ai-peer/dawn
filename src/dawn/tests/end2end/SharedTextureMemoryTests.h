@@ -78,6 +78,9 @@ class SharedTextureMemoryTestBackend {
     // so it is concurrent reads across disjoint Dawn devices - not concurrent
     // reads on the same Dawn device.
     virtual bool SupportsConcurrentRead() const { return true; }
+
+    // Whether this backend requires operating in compatibility mode.
+    virtual bool IsCompatibilityMode() const { return false; }
 };
 
 inline std::ostream& operator<<(std::ostream& o, SharedTextureMemoryTestBackend* backend) {
