@@ -54,6 +54,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0459784_8e39b655",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-22T17:36:19Z",
+      "side": 1,
+      "message": "nit: throughout, Dawn generally uses camelCase",
+      "range": {
+        "startLine": 405,
+        "startChar": 27,
+        "endLine": 405,
+        "endChar": 41
+      },
+      "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cda88130_652c98c1",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
         "patchSetId": 7
@@ -65,6 +88,24 @@
       "writtenOn": "2023-11-22T15:16:08Z",
       "side": 1,
       "message": "I don\u0027t think that\u0027s correct for D3D12? What about querying the adapter properties to know whether we are in compatibility mode?",
+      "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "52ed630a_f28e400c",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-22T17:36:19Z",
+      "side": 1,
+      "message": "there is also DawnTestBase::IsCompatibilityMode()",
+      "parentUuid": "cda88130_652c98c1",
       "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
