@@ -264,6 +264,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ecba5e9_e6706c0a",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-22T13:19:16Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2e514434_48c67d8e",
+      "range": {
+        "startLine": 259,
+        "startChar": 20,
+        "endLine": 259,
+        "endChar": 25
+      },
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40f73090_71340636",
