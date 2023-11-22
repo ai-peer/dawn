@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7864f7ec_ecf16b96",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-22T10:51:56Z",
+      "side": 1,
+      "message": "Thanks! Did this, leaving the tests of the multiplanar optional usages for the next CL where I\u0027ll add those usages in the backends.",
+      "parentUuid": "78132dc4_6ca1c7a3",
+      "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8360f2a0_991f8648",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
         "patchSetId": 2
@@ -67,6 +85,24 @@
       "side": 1,
       "message": "right, they are computed based on folks looking at the specs and deciding when a format has a capability - either core or based on extensions.\n\nThere\u0027s an unfortunate level of duplication between computing those in Format.cpp and the queries provided by src/dawn/utils/TextureUtils.cpp. But until we factor out the format capabilities into something useable in tests, you can probably rely on TextureUtils.cpp.",
       "parentUuid": "8360f2a0_991f8648",
+      "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "856eea23_1b5d9299",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-22T10:51:56Z",
+      "side": 1,
+      "message": "Thanks for the pointer! Done.",
+      "parentUuid": "5662e5c4_cb6bd5f8",
       "revId": "21d2cac9862b1909b0e8629344aaacdd6134a265",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
