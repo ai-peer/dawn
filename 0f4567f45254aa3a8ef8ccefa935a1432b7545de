@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e4e11ce6_aca931fa",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T09:46:20Z",
+      "side": 1,
+      "message": "nit: instead of std::string, can we use std::string_view or const char* to avoid allocating in the success case?",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 124,
+        "endChar": 38
+      },
+      "revId": "0f4567f45254aa3a8ef8ccefa935a1432b7545de",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

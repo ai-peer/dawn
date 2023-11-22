@@ -208,6 +208,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "ecb076f8_61299c05",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T09:46:20Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t follow everything, but the test you added in the latest patchset looks good.",
+      "parentUuid": "636361cd_de34263b",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93d02a11_75a14374",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 11
