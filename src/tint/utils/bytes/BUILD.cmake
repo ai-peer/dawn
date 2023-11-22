@@ -39,6 +39,7 @@
 # Kind:      lib
 ################################################################################
 tint_add_target(tint_utils_bytes lib
+  utils/bytes/decoder.h
   utils/bytes/endianness.h
   utils/bytes/reader.h
   utils/bytes/swap.h
@@ -46,12 +47,15 @@ tint_add_target(tint_utils_bytes lib
 
 tint_target_add_dependencies(tint_utils_bytes lib
   tint_utils_containers
+  tint_utils_diagnostic
   tint_utils_ice
   tint_utils_macros
   tint_utils_math
   tint_utils_memory
   tint_utils_reflection
+  tint_utils_result
   tint_utils_rtti
+  tint_utils_text
   tint_utils_traits
 )
 
@@ -60,6 +64,7 @@ tint_target_add_dependencies(tint_utils_bytes lib
 # Kind:      test
 ################################################################################
 tint_add_target(tint_utils_bytes_test test
+  utils/bytes/decoder_test.cc
   utils/bytes/reader_test.cc
   utils/bytes/swap_test.cc
 )
@@ -67,12 +72,15 @@ tint_add_target(tint_utils_bytes_test test
 tint_target_add_dependencies(tint_utils_bytes_test test
   tint_utils_bytes
   tint_utils_containers
+  tint_utils_diagnostic
   tint_utils_ice
   tint_utils_macros
   tint_utils_math
   tint_utils_memory
   tint_utils_reflection
+  tint_utils_result
   tint_utils_rtti
+  tint_utils_text
   tint_utils_traits
 )
 
