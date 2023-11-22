@@ -1001,7 +1001,7 @@ void Texture::SetLabelImpl() {
 id<MTLTexture> Texture::GetMTLTexture(Aspect aspect) const {
     switch (aspect) {
         case Aspect::Plane0:
-            DAWN_ASSERT(mMtlPlaneTextures->size() > 1);
+            // DAWN_ASSERT(GetFormat().IsMultiPlanar());
             return mMtlPlaneTextures[0].Get();
         case Aspect::Plane1:
             DAWN_ASSERT(mMtlPlaneTextures->size() > 1);
@@ -1319,6 +1319,12 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
     }
 
     Aspect aspect = SelectFormatAspects(texture->GetFormat(), descriptor->aspect);
+
+    if (texture->GetFormat().IsMultiPlanar() && aspect != Aspect::Plane1 &&
+        aspect != Aspect::Plane2) {
+        aspect = Aspect::Plane0;
+    }
+
     id<MTLTexture> mtlTexture = texture->GetMTLTexture(aspect);
 
     bool needsNewView = RequiresCreatingNewTextureView(texture, descriptor);
