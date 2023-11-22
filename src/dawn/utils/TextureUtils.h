@@ -283,6 +283,7 @@ bool IsMultiPlanarFormat(wgpu::TextureFormat textureFormat);
 
 bool TextureFormatSupportsMultisampling(const wgpu::Device& device,
                                         wgpu::TextureFormat textureFormat);
+bool TextureFormatIsRenderable(const wgpu::Device& device, wgpu::TextureFormat textureFormat);
 bool TextureFormatSupportsResolveTarget(const wgpu::Device& device,
                                         wgpu::TextureFormat textureFormat);
 
