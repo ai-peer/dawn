@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77f7d077_f7c68f7e",
+        "filename": "src/tint/lang/spirv/writer/writer_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-22T15:30:38Z",
+      "side": 1,
+      "message": "Again, I think we should be validating the generated SPIR-V here.",
+      "revId": "06264d7aa0ce79cfd95cb5d3a447f989e857fbb5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
