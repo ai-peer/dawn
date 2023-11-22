@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fae0c3c_c74f6542",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-22T19:45:07Z",
+      "side": 1,
+      "message": "It works locally.",
+      "parentUuid": "bccf1814_e23c72f6",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "1655088b9296cd595040ad9828a1dd0747467bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4cb0fd3f_ec4e324d",
         "filename": "src/dawn/native/ComputePipeline.cpp",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-22T18:45:41Z",
       "side": 1,
       "message": "This could be moved in PipelineBase. Where your TODO is",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 68
+      },
+      "revId": "1655088b9296cd595040ad9828a1dd0747467bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3cfbdc9_30783858",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-22T19:45:07Z",
+      "side": 1,
+      "message": "The problem is that StageAndDescriptor currently  expect \"std::string entryPoint;\". Shall I update it?\n\nMoreover PipelineBase::PipelineBase is already called with \"std::vector\u003cStageAndDescriptor\u003e stages\". My TODO comes after it.",
+      "parentUuid": "4cb0fd3f_ec4e324d",
       "range": {
         "startLine": 59,
         "startChar": 4,
