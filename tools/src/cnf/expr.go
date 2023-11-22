@@ -27,7 +27,9 @@
 
 package cnf
 
-import "dawn.googlesource.com/dawn/tools/src/container"
+import (
+	"dawn.googlesource.com/dawn/tools/src/container"
+)
 
 // Expr is a boolean expression, expressed in a Conjunctive Normal Form.
 // Expr is an alias to Ands, which represent all the OR expressions that are
@@ -54,17 +56,28 @@ type Unary struct {
 	Var string
 }
 
-// Remove returns a new expression with all the And expressions of o removed from e
-func (e Expr) Remove(o Expr) Expr {
-	set := container.NewSet[Key]()
-	for _, expr := range o {
-		set.Add(expr.Key())
-	}
-	out := Expr{}
-	for _, expr := range e {
-		if !set.Contains(expr.Key()) {
-			out = append(out, expr)
+// AssumeTrue returns a new simplified expression if o evaluates to true
+func (e Expr) AssumeTrue(o Expr) Expr {
+	isTrue := container.NewSet[Key]()
+	for _, ors := range o {
+		isTrue.Add(ors.Key())
+		if len(ors) == 1 { // No ors, so the unary must be try
+			isTrue.Add(ors[0].Key())
 		}
+	}
+
+	out := Expr{}
+nextAnd:
+	for _, ors := range e {
+		for _, unary := range ors {
+			if isTrue.Contains(unary.Key()) {
+				continue nextAnd // At least one of the OR expressions is true
+			}
+		}
+		if isTrue.Contains(ors.Key()) {
+			continue // Whole OR expression is true
+		}
+		out = append(out, ors)
 	}
 	return out
 }
