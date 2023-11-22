@@ -16,6 +16,24 @@
       "message": "This fails because this function does not expect to fail with DAWN ERRORs I believe:\n\n```\n\nFAILED: 73915602-b8ef-4b1b-9838-a0fe75292e86 CXX obj/third_party/dawn/src/dawn/native/sources/RenderPipeline.o\nstderr:\n../../third_party/dawn/src/dawn/native/RenderPipeline.cpp:800:5: error: no viable conversion from returned value of type \u0027__libcpp_remove_reference_t\u003cunique_ptr\u003cErrorData, default_delete\u003cErrorData\u003e\u003e \u0026\u003e\u0027 (aka \u0027std::unique_ptr\u003cdawn::native::ErrorData\u003e\u0027) to function return type \u0027std::vector\u003cStageAndDescriptor\u003e\u0027\n  800 |     DAWN_TRY_ASSIGN(vertexStateEntryPoint,\n      |     ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  801 |                     descriptor-\u003evertex.module-\u003eGetEntryPointForShaderStage(descriptor-\u003evertex.entryPoint,\n      |                     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  802 |                                                         SingleShaderStage::Vertex));\n      |                                                         ~~~~~~~~~~~~~~~~~~~~~~~~~~~\n../../third_party/dawn/src/dawn/native/Error.h:182:36: note: expanded from macro \u0027DAWN_TRY_ASSIGN\u0027\n  182 | #define DAWN_TRY_ASSIGN(VAR, EXPR) DAWN_TRY_ASSIGN_WITH_CLEANUP(VAR, EXPR, {})\n      |                                    ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n../../third_party/dawn/src/dawn/native/Error.h:219:30: note: expanded from macro \u0027DAWN_TRY_ASSIGN_WITH_CLEANUP\u0027\n  218 |     DAWN_ERROR_GET_5TH_ARG_((__VA_ARGS__, DAWN_TRY_ASSIGN_WITH_CLEANUP_IMPL_4_, \\\n      |     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  219 |                              DAWN_TRY_ASSIGN_WITH_CLEANUP_IMPL_3_,              \\\n      |                              ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  220 |                              DAWN_ERROR_UNIMPLEMENTED_MACRO_))                  \\\n      |                              ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n  221 |     (__VA_ARGS__)\n\n```",
       "revId": "1c6376b6a89f07e66f70b4cf4a346a710be65bdd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "47de4a14_fbc66e93",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 800,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-22T14:21:46Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "7ef2206f_bbd9ecba",
+      "revId": "1c6376b6a89f07e66f70b4cf4a346a710be65bdd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
