@@ -112,6 +112,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b8887c86_8adef9f7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-22T08:51:59Z",
+      "side": 1,
+      "message": "\u003e Can we also have a ResourceUsageValidationTest that would have found this issue? (it would need two resolve targets that are the same subresource in a BeginRenderPass) \n\nWe validate them in RenderPassDescriptor, so I think we should add tests for resolve target to MSAARenderToSingleSampledRenderPassDescriptorValidationTest.\n\nAnd we should move the tests for same attachments used twice in ResourceUsageTrackingTest.TextureWithMultipleRenderAttachmentUsage to RenderPassDescriptorValidationTest, because we\u0027d removed the validation from PassResourceUsageTracker. \n\nResourceUsageTrackingTest.TextureWithMultipleRenderAttachmentUsage need to be updated to test a check point in compatible usage list (https://gpuweb.github.io/gpuweb/#compatible-usage-list):\n`U contains exactly one element: attachment.`\n\nCurrently we have StorageAttachment and RenderAttachment for testing. But a question here, if a subresource is used as both stroage and render in a pass, it will be validated in beginRenderPass(), it won\u0027t reach to usage compatible validation in Finish(). Do we still need the rule in compatible usage list.",
+      "parentUuid": "3255f396_edf14838",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93d02a11_75a14374",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 11
