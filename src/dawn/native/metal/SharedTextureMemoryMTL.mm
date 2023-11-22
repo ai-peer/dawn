@@ -101,17 +101,23 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
                     limits.v1.maxTextureDimension2D);
 
     SharedTextureMemoryProperties properties;
+    properties.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
+                       wgpu::TextureUsage::TextureBinding |
+                       (internalFormat->supportsStorageUsage ? wgpu::TextureUsage::StorageBinding
+                                                             : wgpu::TextureUsage::None) |
+                       (internalFormat->isRenderable ? wgpu::TextureUsage::RenderAttachment
+                                                     : wgpu::TextureUsage::None);
     if (internalFormat->IsMultiPlanar()) {
-        properties.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding;
-    } else {
-        properties.usage =
-            wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |
-            wgpu::TextureUsage::TextureBinding |
-            (internalFormat->supportsStorageUsage ? wgpu::TextureUsage::StorageBinding
-                                                  : wgpu::TextureUsage::None) |
-            (internalFormat->isRenderable ? wgpu::TextureUsage::RenderAttachment
-                                          : wgpu::TextureUsage::None);
+        // Remove usages that are supported only for single-planer textures.
+        properties.usage &= ~wgpu::TextureUsage::StorageBinding;
+        if (!device->HasFeature(Feature::MultiPlanarRenderTargets)) {
+            properties.usage &= ~wgpu::TextureUsage::RenderAttachment;
+        }
+        if (!device->HasFeature(Feature::MultiPlanarFormatExtendedUsages)) {
+            properties.usage |= ~wgpu::TextureUsage::CopyDst;
+        }
     }
+
     properties.format = format;
     properties.size = {static_cast<uint32_t>(width), static_cast<uint32_t>(height), 1};
 
