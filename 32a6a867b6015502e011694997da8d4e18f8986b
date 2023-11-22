@@ -94,6 +94,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3255f396_edf14838",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-22T02:37:02Z",
+      "side": 1,
+      "message": "Sure, I\u0027m still considerring how to add the render target to mRecords and return its type string in GetAttachmentTypeStr, so I didn\u0027t reply the comments and send for review.",
+      "parentUuid": "6cf344a9_9e19f5e4",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93d02a11_75a14374",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 11
@@ -105,6 +123,24 @@
       "writtenOn": "2023-11-20T13:48:35Z",
       "side": 1,
       "message": "nit: commented out code? I think it can be removed.",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d473f4_3bcab30c",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-22T02:37:02Z",
+      "side": 1,
+      "message": "It need to be removed, missed that.",
+      "parentUuid": "93d02a11_75a14374",
       "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
