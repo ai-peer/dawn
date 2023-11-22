@@ -16,6 +16,23 @@
       "message": "Should we validate the IR here and exit (without failing) on IR validation failures?",
       "revId": "c0ced8d0edf4801bdbee6b16af79aa14534d56ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0db3c2cd_32a32b6f",
+        "filename": "src/tint/lang/wgsl/ir_roundtrip_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-22T16:03:55Z",
+      "side": 1,
+      "message": "I think this sould `Raise` and then `Lower`",
+      "revId": "c0ced8d0edf4801bdbee6b16af79aa14534d56ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
