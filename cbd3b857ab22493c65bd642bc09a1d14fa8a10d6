@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6d03c2_f37dbdda",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T18:45:41Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "6c5ec5e0_c6ab23ca",
+      "range": {
+        "startLine": 61,
+        "startChar": 78,
+        "endLine": 61,
+        "endChar": 93
+      },
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "76fc08b8_ae1f4ed1",
