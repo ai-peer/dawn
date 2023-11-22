@@ -93,7 +93,7 @@ class ErrorBuffer final : public BufferBase {
 
             if (isValidSize) {
                 mFakeMappedData =
-                    std::unique_ptr<uint8_t[]>(AllocNoThrow<uint8_t>(descriptor->size));
+                    AlignedByteArray<kGuaranteedMapAlignment>(descriptor->size, std::nothrow);
             }
             // Since error buffers in this case may allocate memory, we need to track them
             // for destruction on the device.
@@ -110,15 +110,19 @@ class ErrorBuffer final : public BufferBase {
         DAWN_UNREACHABLE();
     }
 
-    void* GetMappedPointer() override { return mFakeMappedData.get(); }
+    void* GetMappedPointer() override {
+        // TODO(dawn:2246): Once we return nullptr from CreateBuffer(mappedAtCreation) when
+        // it OOMs, this check shouldn't be needed anymore.
+        return mFakeMappedData ? mFakeMappedData.get() : nullptr;
+    }
 
     void UnmapImpl() override { mFakeMappedData.reset(); }
 
-    std::unique_ptr<uint8_t[]> mFakeMappedData;
+    AlignedByteArray<kGuaranteedMapAlignment> mFakeMappedData;
 };
 
 // GetMappedRange on a zero-sized buffer returns a pointer to this value.
-static uint32_t sZeroSizedMappingData = 0xCAFED00D;
+alignas(kGuaranteedMapAlignment) static uint32_t sZeroSizedMappingData = 0xCAFED00D;
 
 }  // anonymous namespace
 
@@ -523,14 +527,26 @@ void* BufferBase::GetMappedRange(size_t offset, size_t size, bool writable) {
         return nullptr;
     }
 
-    if (mStagingBuffer != nullptr) {
-        return static_cast<uint8_t*>(mStagingBuffer->GetMappedPointer()) + offset;
-    }
+    // Pointer to the start of the resource (note, not the start of the MapAsync range).
+    void* start;
     if (mSize == 0) {
-        return &sZeroSizedMappingData;
+        start = &sZeroSizedMappingData;
+        DAWN_ASSERT(offset == 0);
+    } else if (mStagingBuffer != nullptr) {
+        start = mStagingBuffer->GetMappedPointer();
+    } else {
+        start = this->GetMappedPointer();
+        // TODO(dawn:2246): Once we return nullptr from CreateBuffer(mappedAtCreation) when
+        // it OOMs, this check may not be needed anymore.
+        if (start == nullptr) {
+            return nullptr;
+        }
     }
-    uint8_t* start = static_cast<uint8_t*>(GetMappedPointer());
-    return start == nullptr ? nullptr : start + offset;
+
+    DAWN_ASSERT(start != nullptr);
+    // The address of the start of the resource is supposed to be aligned.
+    DAWN_ASSERT(reinterpret_cast<size_t>(start) % kGuaranteedMapAlignment == 0);
+    return static_cast<uint8_t*>(start) + offset;
 }
 
 void BufferBase::APIDestroy() {

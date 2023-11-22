@@ -28,6 +28,7 @@
 #include <limits>
 #include <memory>
 
+#include "dawn/common/Constants.h"
 #include "dawn/common/Platform.h"
 #include "dawn/tests/unittests/validation/ValidationTest.h"
 #include "gmock/gmock.h"
@@ -1016,8 +1017,10 @@ TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer) {
         ASSERT_DEVICE_ERROR(buffer = BufferMappedAtCreation(
                                 0, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
-        ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
-        ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
+        const void* ptr = buffer.GetConstMappedRange();
+        ASSERT_NE(ptr, nullptr);
+        ASSERT_EQ(ptr, buffer.GetMappedRange());
+        ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
     }
 
     // GetMappedRange after mappedAtCreation non-OOM returns a non-nullptr.
@@ -1026,8 +1029,10 @@ TEST_F(BufferValidationTest, GetMappedRange_OnErrorBuffer) {
         ASSERT_DEVICE_ERROR(buffer = BufferMappedAtCreation(
                                 4, wgpu::BufferUsage::Storage | wgpu::BufferUsage::MapRead));
 
-        ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
-        ASSERT_EQ(buffer.GetConstMappedRange(), buffer.GetMappedRange());
+        const void* ptr = buffer.GetConstMappedRange();
+        ASSERT_NE(ptr, nullptr);
+        ASSERT_EQ(ptr, buffer.GetMappedRange());
+        ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
     }
 }
 
@@ -1081,12 +1086,24 @@ TEST_F(BufferValidationTest, GetMappedRange_OffsetSizeOOB) {
         EXPECT_NE(buffer.GetMappedRange(0, wgpu::kWholeMapSize), nullptr);
     }
 
+    // Valid case: MapAsync empty range is ok
+    {
+        wgpu::Buffer buffer = CreateMapWriteBuffer(8);
+        buffer.MapAsync(wgpu::MapMode::Write, 0, 0, nullptr, nullptr);
+        WaitForAllOperations(device);
+        void* ptr = buffer.GetMappedRange(0, 0);
+        EXPECT_NE(ptr, nullptr);
+        EXPECT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
+    }
+
     // Valid case: empty range at the end is ok
     {
         wgpu::Buffer buffer = CreateMapWriteBuffer(8);
         buffer.MapAsync(wgpu::MapMode::Write, 0, 8, nullptr, nullptr);
         WaitForAllOperations(device);
-        EXPECT_NE(buffer.GetMappedRange(8, 0), nullptr);
+        void* ptr = buffer.GetMappedRange(8, 0);
+        EXPECT_NE(ptr, nullptr);
+        EXPECT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 8u);
     }
 
     // Valid case: range in the middle is ok.

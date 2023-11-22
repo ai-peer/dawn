@@ -31,6 +31,7 @@
 
 #include "dawn/common/Alloc.h"
 #include "dawn/common/Assert.h"
+#include "dawn/common/Constants.h"
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/client/Client.h"
 
@@ -39,7 +40,8 @@ namespace dawn::wire::client {
 class InlineMemoryTransferService : public MemoryTransferService {
     class ReadHandleImpl : public ReadHandle {
       public:
-        explicit ReadHandleImpl(std::unique_ptr<uint8_t[]> stagingData, size_t size)
+        explicit ReadHandleImpl(AlignedByteArray<kGuaranteedMapAlignment>&& stagingData,
+                                size_t size)
             : mStagingData(std::move(stagingData)), mSize(size) {}
 
         ~ReadHandleImpl() override = default;
@@ -68,13 +70,14 @@ class InlineMemoryTransferService : public MemoryTransferService {
         }
 
       private:
-        std::unique_ptr<uint8_t[]> mStagingData;
+        AlignedByteArray<kGuaranteedMapAlignment> mStagingData;
         size_t mSize;
     };
 
     class WriteHandleImpl : public WriteHandle {
       public:
-        explicit WriteHandleImpl(std::unique_ptr<uint8_t[]> stagingData, size_t size)
+        explicit WriteHandleImpl(AlignedByteArray<kGuaranteedMapAlignment>&& stagingData,
+                                 size_t size)
             : mStagingData(std::move(stagingData)), mSize(size) {}
 
         ~WriteHandleImpl() override = default;
@@ -92,7 +95,7 @@ class InlineMemoryTransferService : public MemoryTransferService {
         }
 
         void SerializeDataUpdate(void* serializePointer, size_t offset, size_t size) override {
-            DAWN_ASSERT(mStagingData != nullptr);
+            DAWN_ASSERT(mStagingData);
             DAWN_ASSERT(serializePointer != nullptr);
             DAWN_ASSERT(offset <= mSize);
             DAWN_ASSERT(size <= mSize - offset);
@@ -100,7 +103,7 @@ class InlineMemoryTransferService : public MemoryTransferService {
         }
 
       private:
-        std::unique_ptr<uint8_t[]> mStagingData;
+        AlignedByteArray<kGuaranteedMapAlignment> mStagingData;
         size_t mSize;
     };
 
@@ -109,7 +112,7 @@ class InlineMemoryTransferService : public MemoryTransferService {
     ~InlineMemoryTransferService() override = default;
 
     ReadHandle* CreateReadHandle(size_t size) override {
-        auto stagingData = std::unique_ptr<uint8_t[]>(AllocNoThrow<uint8_t>(size));
+        AlignedByteArray<kGuaranteedMapAlignment> stagingData{size, std::nothrow};
         if (stagingData) {
             return new ReadHandleImpl(std::move(stagingData), size);
         }
@@ -117,7 +120,7 @@ class InlineMemoryTransferService : public MemoryTransferService {
     }
 
     WriteHandle* CreateWriteHandle(size_t size) override {
-        auto stagingData = std::unique_ptr<uint8_t[]>(AllocNoThrow<uint8_t>(size));
+        AlignedByteArray<kGuaranteedMapAlignment> stagingData{size, std::nothrow};
         if (stagingData) {
             memset(stagingData.get(), 0, size);
             return new WriteHandleImpl(std::move(stagingData), size);

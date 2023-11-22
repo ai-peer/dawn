@@ -30,20 +30,81 @@
 
 #include <cstddef>
 #include <new>
+#include <utility>
+
+#include "dawn/common/Assert.h"
+#include "dawn/common/NonCopyable.h"
 
 namespace dawn {
 
-template <typename T>
-T* AllocNoThrow(size_t count) {
+namespace detail {
+
+static inline bool NothrowAllocationTooLarge(size_t size) {
 #if defined(ADDRESS_SANITIZER) || defined(MEMORY_SANITIZER)
-    if (count * sizeof(T) >= 0x70000000) {
-        // std::nothrow isn't implemented in sanitizers and they often have a 2GB allocation limit.
-        // Catch large allocations and error out so fuzzers make progress.
-        return nullptr;
+    if (size >= 0x70000000) {
+        // std::nothrow isn't implemented in sanitizers and they often have a 2GB allocation
+        // limit. Catch large allocations and error out so fuzzers make progress.
+        return true;
     }
 #endif
+    return false;
+}
+
+}  // namespace detail
+
+template <typename T>
+T* AllocNoThrow(size_t count) {
+    if (detail::NothrowAllocationTooLarge(count * sizeof(T))) {
+        return nullptr;
+    }
     return new (std::nothrow) T[count];
 }
+
+template <size_t Alignment>
+class AlignedByteArray : NonCopyable {
+  public:
+    AlignedByteArray() = default;
+
+    AlignedByteArray(AlignedByteArray&& rhs) {
+        mData = rhs.mData;
+        rhs.mData = nullptr;
+    }
+
+    AlignedByteArray& operator=(AlignedByteArray&& rhs) {
+        if (this != &rhs) {
+            std::swap(mData, rhs.mData);
+        }
+        return *this;
+    }
+
+    explicit AlignedByteArray(size_t size)
+        : mData(new(std::align_val_t(Alignment)) uint8_t[size]) {}
+    AlignedByteArray(size_t size, std::nothrow_t) {
+        if (detail::NothrowAllocationTooLarge(size)) {
+            return;
+        }
+        mData = new (std::align_val_t(Alignment), std::nothrow) uint8_t[size];
+    }
+
+    ~AlignedByteArray() { reset(); }
+
+    operator bool() { return mData != nullptr; }
+
+    uint8_t* get() {
+        DAWN_ASSERT(mData != nullptr);
+        return mData;
+    }
+
+    void reset() {
+        if (mData != nullptr) {
+            ::operator delete[](mData, std::align_val_t(Alignment));
+            mData = nullptr;
+        }
+    }
+
+  private:
+    uint8_t* mData = nullptr;
+};
 
 }  // namespace dawn
 

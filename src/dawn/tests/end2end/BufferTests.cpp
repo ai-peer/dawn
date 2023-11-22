@@ -32,6 +32,7 @@
 #include <string>
 #include <vector>
 
+#include "dawn/common/Constants.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
@@ -100,7 +101,20 @@ TEST_P(BufferMappingTests, MapRead_ZeroSized) {
     wgpu::Buffer buffer = CreateMapReadBuffer(0);
 
     MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, wgpu::kWholeMapSize);
-    ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
+    const void* ptr = buffer.GetConstMappedRange();
+    ASSERT_NE(ptr, nullptr);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
+    buffer.Unmap();
+}
+
+// Test map-reading with an empty MapAsync range
+TEST_P(BufferMappingTests, MapRead_EmptyMapAsync) {
+    wgpu::Buffer buffer = CreateMapReadBuffer(4);
+
+    MapAsyncAndWait(buffer, wgpu::MapMode::Read, 0, 0);
+    const void* ptr = buffer.GetConstMappedRange(0, 0);
+    ASSERT_NE(ptr, nullptr);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
     buffer.Unmap();
 }
 
@@ -112,7 +126,9 @@ TEST_P(BufferMappingTests, MapRead_NonZeroOffset) {
     queue.WriteBuffer(buffer, 0, &myData, sizeof(myData));
 
     MapAsyncAndWait(buffer, wgpu::MapMode::Read, 8, 4);
-    ASSERT_EQ(myData[2], *static_cast<const uint32_t*>(buffer.GetConstMappedRange(8)));
+    const void* ptr = buffer.GetConstMappedRange(8);
+    ASSERT_EQ(myData[2], *static_cast<const uint32_t*>(ptr));
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 8u);
     buffer.Unmap();
 }
 
@@ -253,13 +269,27 @@ TEST_P(BufferMappingTests, MapWrite_BasicRange) {
     EXPECT_BUFFER_U32_EQ(myData, buffer, 0);
 }
 
+// Test map-writing an empty MapAsync range
+TEST_P(BufferMappingTests, MapWrite_EmptyMapAsync) {
+    wgpu::Buffer buffer = CreateMapWriteBuffer(4);
+
+    MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, 0);
+    const void* ptr = buffer.GetConstMappedRange(0, 0);
+    ASSERT_NE(ptr, nullptr);
+    ASSERT_EQ(ptr, buffer.GetMappedRange());
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
+    buffer.Unmap();
+}
+
 // Test map-writing a zero-sized buffer.
 TEST_P(BufferMappingTests, MapWrite_ZeroSized) {
     wgpu::Buffer buffer = CreateMapWriteBuffer(0);
 
     MapAsyncAndWait(buffer, wgpu::MapMode::Write, 0, wgpu::kWholeMapSize);
-    ASSERT_NE(buffer.GetConstMappedRange(), nullptr);
-    ASSERT_NE(buffer.GetMappedRange(), nullptr);
+    const void* ptr = buffer.GetConstMappedRange();
+    ASSERT_NE(ptr, nullptr);
+    ASSERT_EQ(ptr, buffer.GetMappedRange());
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
     buffer.Unmap();
 }
 
@@ -269,7 +299,9 @@ TEST_P(BufferMappingTests, MapWrite_NonZeroOffset) {
 
     uint32_t myData = 2934875;
     MapAsyncAndWait(buffer, wgpu::MapMode::Write, 8, 4);
-    memcpy(buffer.GetMappedRange(8), &myData, sizeof(myData));
+    void* ptr = buffer.GetMappedRange(8);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 8u);
+    memcpy(ptr, &myData, sizeof(myData));
     buffer.Unmap();
 
     EXPECT_BUFFER_U32_EQ(myData, buffer, 8);
@@ -922,7 +954,9 @@ TEST_P(BufferMappedAtCreationTests, ZeroSized) {
     descriptor.mappedAtCreation = true;
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
-    ASSERT_NE(nullptr, buffer.GetMappedRange());
+    void* ptr = buffer.GetMappedRange();
+    ASSERT_NE(nullptr, ptr);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
 
     // Check that unmapping the buffer works too.
     UnmapBuffer(buffer);
@@ -936,7 +970,9 @@ TEST_P(BufferMappedAtCreationTests, ZeroSizedMappableBuffer) {
     descriptor.mappedAtCreation = true;
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
-    ASSERT_NE(nullptr, buffer.GetMappedRange());
+    void* ptr = buffer.GetMappedRange();
+    ASSERT_NE(nullptr, ptr);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
 
     // Check that unmapping the buffer works too.
     UnmapBuffer(buffer);
@@ -953,7 +989,9 @@ TEST_P(BufferMappedAtCreationTests, ZeroSizedErrorBuffer) {
     wgpu::Buffer buffer;
     ASSERT_DEVICE_ERROR(buffer = device.CreateBuffer(&descriptor));
 
-    ASSERT_NE(nullptr, buffer.GetMappedRange());
+    void* ptr = buffer.GetMappedRange();
+    ASSERT_NE(nullptr, ptr);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
 }
 
 // Test the result of GetMappedRange when mapped at creation.
@@ -964,8 +1002,10 @@ TEST_P(BufferMappedAtCreationTests, GetMappedRange) {
     descriptor.mappedAtCreation = true;
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
-    ASSERT_EQ(buffer.GetMappedRange(), buffer.GetConstMappedRange());
-    ASSERT_NE(buffer.GetMappedRange(), nullptr);
+    void* ptr = buffer.GetMappedRange();
+    ASSERT_EQ(ptr, buffer.GetConstMappedRange());
+    ASSERT_NE(ptr, nullptr);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
     buffer.Unmap();
 }
 
@@ -977,8 +1017,10 @@ TEST_P(BufferMappedAtCreationTests, GetMappedRangeZeroSized) {
     descriptor.mappedAtCreation = true;
     wgpu::Buffer buffer = device.CreateBuffer(&descriptor);
 
-    ASSERT_EQ(buffer.GetMappedRange(), buffer.GetConstMappedRange());
-    ASSERT_NE(buffer.GetMappedRange(), nullptr);
+    void* ptr = buffer.GetMappedRange();
+    ASSERT_EQ(ptr, buffer.GetConstMappedRange());
+    ASSERT_NE(ptr, nullptr);
+    ASSERT_EQ(reinterpret_cast<size_t>(ptr) % dawn::kGuaranteedMapAlignment, 0u);
     buffer.Unmap();
 }
 
