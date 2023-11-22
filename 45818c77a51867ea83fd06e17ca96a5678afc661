@@ -241,6 +241,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6b587cc_bf6df264",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-22T09:37:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffa5a866_98a7b4d0",
+      "revId": "45818c77a51867ea83fd06e17ca96a5678afc661",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73eb6f77_55f919da",
