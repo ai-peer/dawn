@@ -189,6 +189,39 @@ bool IsMultiPlanarFormat(wgpu::TextureFormat textureFormat) {
     }
 }
 
+bool IsRenderableFormat(const wgpu::Device& device, wgpu::TextureFormat textureFormat) {
+    if (IsBCTextureFormat(textureFormat) || IsETC2TextureFormat(textureFormat) ||
+        IsASTCTextureFormat(textureFormat)) {
+        return false;
+    }
+
+    if (IsNorm16TextureFormat(textureFormat)) {
+        return device.HasFeature(wgpu::FeatureName::Norm16TextureFormats);
+    }
+
+    switch (textureFormat) {
+        case wgpu::TextureFormat::R32Uint:
+        case wgpu::TextureFormat::R32Sint:
+        case wgpu::TextureFormat::RG32Uint:
+        case wgpu::TextureFormat::RG32Sint:
+        case wgpu::TextureFormat::RG32Float:
+        case wgpu::TextureFormat::RGBA32Uint:
+        case wgpu::TextureFormat::RGBA32Sint:
+        case wgpu::TextureFormat::RGBA32Float:
+        case wgpu::TextureFormat::RGB9E5Ufloat:
+        case wgpu::TextureFormat::R8Snorm:
+        case wgpu::TextureFormat::RG8Snorm:
+        case wgpu::TextureFormat::RGBA8Snorm:
+            return false;
+
+        case wgpu::TextureFormat::RG11B10Ufloat:
+            return device.HasFeature(wgpu::FeatureName::RG11B10UfloatRenderable);
+
+        default:
+            return true;
+    }
+}
+
 bool TextureFormatSupportsMultisampling(const wgpu::Device& device,
                                         wgpu::TextureFormat textureFormat) {
     if (IsBCTextureFormat(textureFormat) || IsETC2TextureFormat(textureFormat) ||
