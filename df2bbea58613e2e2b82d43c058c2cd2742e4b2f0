@@ -335,6 +335,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2456f69_1dbb4f23",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T08:49:01Z",
+      "side": 1,
+      "message": "Ok that\u0027s unfortunate. But the improvements you made to the code make it much more clear so we don\u0027t need to dig more.",
+      "parentUuid": "32aef172_1f622b09",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "787ae077_56898709",
