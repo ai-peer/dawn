@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bdc1c92_dd05b7c3",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb43776c_9cd6ce5a",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db757225_99dc7666",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-11-21T10:16:51Z",
       "side": 1,
       "message": "We have an IsPowerOfTwo helper :D",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80592d64_3e34739c",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db757225_99dc7666",
       "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -88,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8ebd5b9c_8fda0009",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Vulkan roadmap 2022 requires a minimum subgroup size of 4, but due to current Vulkan spec 1.3 maxSubgroupSize could be 1 if I get it right.\nChange the `if` to an expectation that `maxSubgroupSize \u003e\u003d 4` here.",
+      "parentUuid": "50cec09e_927d9037",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f82cabc9_6267ce3d",
         "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
         "patchSetId": 10
@@ -99,6 +153,24 @@
       "writtenOn": "2023-11-21T10:16:51Z",
       "side": 1,
       "message": "This is a frontend validation check, and is covered by the validation tests at [2]. We could remove all these checks, and the PARAMs struct.",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1e008a6_e751a8e3",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f82cabc9_6267ce3d",
       "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a296db4_bfd99202",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 190,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f640fb25_74dda16e",
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea5680e7_93ba8eec",
@@ -133,6 +223,30 @@
       "writtenOn": "2023-11-21T10:16:51Z",
       "side": 1,
       "message": "```suggestion\n            @compute @workgroup_size(1)\n            fn main() {\n         })\");\n```",
+      "range": {
+        "startLine": 44,
+        "startChar": 0,
+        "endLine": 46,
+        "endChar": 5
+      },
+      "revId": "89cdd135558ec0b35d1aec3563eccac1e95c461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ec5c61_3705a404",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea5680e7_93ba8eec",
       "range": {
         "startLine": 44,
         "startChar": 0,

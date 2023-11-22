@@ -240,6 +240,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f858f579_031d0495",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 222,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97952676_76d17f2d",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2281050d_01490b19",
@@ -289,6 +307,24 @@
       "side": 1,
       "message": "We already have validation like this in ValidateComputeStageWorkgroupSize so we could rename it to ValidateComputeStageAfterOverridableConstants and stick the additional validation for full subgroups in there. Am I missing something?\n\nAnd the DAWN_INVALID_IF(!device-\u003eHasFeature(Feature::ChromiumExperimentalSubgroups), is already covered by the validation at [1].",
       "parentUuid": "b25238b0_4f84b2e1",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e7a95b2_0e262614",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done.\n\n`fullSubgroups` is set per compute pipeline, and the `ValidateComputeStageWorkgroupSize` is implemented for shader module, so we need to pass the `fullSubgroups` flag all the way down from compute pipeline to shader module.",
+      "parentUuid": "c29d17ef_43598803",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -499,6 +535,24 @@
       "side": 1,
       "message": "Removed. Because unexpected error \"Device destroyed before callback\" occurs with wire when I messing up with error scopes in the test...",
       "parentUuid": "0b7cceb3_74d2e8b5",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fbb6a9ad_3bfb33ed",
+        "filename": "src/dawn/tests/end2end/ExperimentalSubgroupsTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 150,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-22T18:40:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "25be325a_cbe19336",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
