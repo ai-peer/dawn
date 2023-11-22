@@ -44,9 +44,18 @@ std::vector<wgpu::FeatureName> SharedTextureMemoryTests::GetRequiredFeatures() {
     if (!SupportsFeatures(features)) {
         return {};
     }
-    if (SupportsFeatures({wgpu::FeatureName::TransientAttachments})) {
-        features.push_back(wgpu::FeatureName::TransientAttachments);
+
+    const wgpu::FeatureName kOptionalFeatures[] = {
+        wgpu::FeatureName::MultiPlanarFormatExtendedUsages,
+        wgpu::FeatureName::MultiPlanarRenderTargets,
+        wgpu::FeatureName::TransientAttachments,
+    };
+    for (auto feature : kOptionalFeatures) {
+        if (SupportsFeatures({feature})) {
+            features.push_back(feature);
+        }
     }
+
     return features;
 }
 
@@ -405,29 +414,32 @@ TEST_P(SharedTextureMemoryTests, TextureUsages) {
         wgpu::TextureUsage expected_usage =
             wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding;
 
-        // Additional usages are potentially supported for single-planar
-        // formats.
-        if (!utils::IsMultiPlanarFormat(properties.format)) {
+        bool is_single_planar = !utils::IsMultiPlanarFormat(properties.format);
+
+        if (is_single_planar ||
+            device.HasFeature(wgpu::FeatureName::MultiPlanarFormatExtendedUsages)) {
             expected_usage |= wgpu::TextureUsage::CopyDst;
+        }
 
             // TODO(blundell): RenderAttachment support on D3D11/D3D12 is
             // additionally dependent on the flags passed to the underlying
             // texture (the relevant flag is currently always passed in the test
             // context). Add tests where the D3D texture is not created with the
             // relevant flag.
-            if (utils::IsRenderableFormat(device, properties.format)) {
-                expected_usage |= wgpu::TextureUsage::RenderAttachment;
-            }
+        if ((is_single_planar || device.HasFeature(wgpu::FeatureName::MultiPlanarRenderTargets)) &&
+            utils::IsRenderableFormat(device, properties.format)) {
+            expected_usage |= wgpu::TextureUsage::RenderAttachment;
+        }
 
             // TODO(blundell): StorageBinding support on D3D11/D3D12 is
             // additionally dependent on the flags passed to the underlying
             // texture (the relevant flag is currently always passed in the test
             // context). Add tests where the D3D texture is not created with the
             // relevant flag.
-            if (utils::TextureFormatSupportsStorageTexture(
-                    properties.format, GetParam().mBackend->IsCompatibilityMode())) {
-                expected_usage |= wgpu::TextureUsage::StorageBinding;
-            }
+        if (is_single_planar &&
+            utils::TextureFormatSupportsStorageTexture(
+                properties.format, GetParam().mBackend->IsCompatibilityMode())) {
+            expected_usage |= wgpu::TextureUsage::StorageBinding;
         }
 
         EXPECT_EQ(properties.usage, expected_usage) << properties.format;
@@ -719,12 +731,14 @@ TEST_P(SharedTextureMemoryTests, TextureAccessOutlivesMemory) {
         memory.BeginAccess(texture, &beginDesc);
         memory = nullptr;
 
+        if (utils::IsMultiPlanarFormat(properties.format)) {
+            continue;
+        }
+
         // Use the texture on the GPU; it should not crash.
         if (properties.usage & wgpu::TextureUsage::RenderAttachment) {
             UseInRenderPass(device, texture);
-        } else if (properties.format != wgpu::TextureFormat::R8BG8Biplanar420Unorm &&
-                   properties.format != wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm &&
-                   properties.format != wgpu::TextureFormat::R8BG8A8Triplanar420Unorm) {
+        } else {
             DAWN_ASSERT(properties.usage & wgpu::TextureUsage::CopySrc);
             UseInCopy(device, texture);
         }
