@@ -241,6 +241,7 @@ class BindGroupLayout final : public BindGroupLayoutInternalBase {
 class Buffer final : public BufferBase {
   public:
     Buffer(Device* device, const BufferDescriptor* descriptor);
+    ~Buffer() override;
 
     void CopyFromStaging(BufferBase* staging,
                          uint64_t sourceOffset,
@@ -257,7 +258,8 @@ class Buffer final : public BufferBase {
     MaybeError MapAtCreationImpl() override;
     void* GetMappedPointer() override;
 
-    std::unique_ptr<uint8_t[]> mBackingData;
+    // This is manually allocated using new/delete so we can overalign it.
+    uint8_t* mBackingData = nullptr;
 };
 
 class CommandBuffer final : public CommandBufferBase {

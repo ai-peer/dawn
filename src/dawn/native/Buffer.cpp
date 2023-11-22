@@ -523,14 +523,13 @@ void* BufferBase::GetMappedRange(size_t offset, size_t size, bool writable) {
         return nullptr;
     }
 
-    if (mStagingBuffer != nullptr) {
-        return static_cast<uint8_t*>(mStagingBuffer->GetMappedPointer()) + offset;
-    }
     if (mSize == 0) {
         return &sZeroSizedMappingData;
     }
-    uint8_t* start = static_cast<uint8_t*>(GetMappedPointer());
-    return start == nullptr ? nullptr : start + offset;
+    void* start =
+        mStagingBuffer != nullptr ? mStagingBuffer->GetMappedPointer() : this->GetMappedPointer();
+    DAWN_ASSERT(reinterpret_cast<size_t>(start) % kGuaranteedMapAlignment == 0);
+    return start == nullptr ? nullptr : static_cast<uint8_t*>(start) + offset;
 }
 
 void BufferBase::APIDestroy() {

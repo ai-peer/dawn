@@ -28,6 +28,7 @@
 #include "dawn/native/null/DeviceNull.h"
 
 #include <limits>
+#include <new>
 #include <utility>
 
 #include "dawn/native/BackendConnection.h"
@@ -329,8 +330,12 @@ BindGroupLayout::BindGroupLayout(DeviceBase* device, const BindGroupLayoutDescri
 
 Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
     : BufferBase(device, descriptor) {
-    mBackingData = std::unique_ptr<uint8_t[]>(new uint8_t[GetSize()]);
+    mBackingData = new (std::align_val_t(kGuaranteedMapAlignment)) uint8_t[GetSize()];
     mAllocatedSize = GetSize();
+}
+
+Buffer::~Buffer() {
+    ::operator delete[](mBackingData, std::align_val_t(kGuaranteedMapAlignment));
 }
 
 bool Buffer::IsCPUWritableAtCreation() const {
@@ -348,13 +353,13 @@ void Buffer::CopyFromStaging(BufferBase* staging,
                              uint64_t destinationOffset,
                              uint64_t size) {
     uint8_t* ptr = reinterpret_cast<uint8_t*>(staging->GetMappedPointer());
-    memcpy(mBackingData.get() + destinationOffset, ptr + sourceOffset, size);
+    memcpy(mBackingData + destinationOffset, ptr + sourceOffset, size);
 }
 
 void Buffer::DoWriteBuffer(uint64_t bufferOffset, const void* data, size_t size) {
     DAWN_ASSERT(bufferOffset + size <= GetSize());
     DAWN_ASSERT(mBackingData);
-    memcpy(mBackingData.get() + bufferOffset, data, size);
+    memcpy(mBackingData + bufferOffset, data, size);
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
@@ -362,7 +367,7 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
 }
 
 void* Buffer::GetMappedPointer() {
-    return mBackingData.get();
+    return mBackingData;
 }
 
 void Buffer::UnmapImpl() {}

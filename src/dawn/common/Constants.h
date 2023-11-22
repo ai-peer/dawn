@@ -85,6 +85,10 @@ static constexpr uint8_t kMaxPLSSize = kMaxPLSSlots * kPLSSlotByteSize;
 // Wire buffer alignments.
 static constexpr size_t kWireBufferAlignment = 8u;
 
+// Guaranteed minimum alignment of buffer mappings.
+// https://github.com/webgpu-native/webgpu-headers/issues/180
+static constexpr size_t kGuaranteedMapAlignment = 16u;
+
 // Timestamp query quantization mask to perform a granularity of ~0.1ms.
 static constexpr uint32_t kTimestampQuantizationMask = 0xFFFF0000;
 
