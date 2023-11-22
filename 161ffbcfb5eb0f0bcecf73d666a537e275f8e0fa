@@ -303,6 +303,30 @@
       },
       "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43b1c34e_1ff37c53",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1938,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-22T21:16:18Z",
+      "side": 1,
+      "message": "Filed https://crbug.com/tint/2103 to track transform approach. Abandon this.",
+      "parentUuid": "93840973_d5a5787d",
+      "range": {
+        "startLine": 1938,
+        "startChar": 15,
+        "endLine": 1938,
+        "endChar": 47
+      },
+      "revId": "161ffbcfb5eb0f0bcecf73d666a537e275f8e0fa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
