@@ -226,6 +226,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fe92f2b5_b682dfe0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-22T15:16:47Z",
+      "side": 1,
+      "message": "In short, I want to move the test at https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/validation/ResourceUsageTrackingTests.cpp;l\u003d1077;bpv\u003d0;bpt\u003d1 to RenderPassDescriptorValidationTest.\n\nAnd, we also need to add a test in ResourceUsageTrackingTests to cover a subresource is used as both render attachment and storage attachment. But it seems to already exist at https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/unittests/validation/PixelLocalStorageTests.cpp;l\u003d716?q\u003dStorageAtt\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fdawn%2Fsrc%2Fdawn%2F",
+      "parentUuid": "ecb076f8_61299c05",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "93d02a11_75a14374",
         "filename": "src/dawn/native/CommandEncoder.cpp",
         "patchSetId": 11
