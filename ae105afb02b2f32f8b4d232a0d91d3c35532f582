@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4ca4075_aa71347f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-22T16:33:43Z",
+      "side": 1,
+      "message": "As discussed on https://crbug.com/dawn/2182, I\u0027d like to see if we can find another way to emulate this.",
+      "revId": "ae105afb02b2f32f8b4d232a0d91d3c35532f582",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
