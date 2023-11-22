@@ -530,6 +530,7 @@ void* BufferBase::GetMappedRange(size_t offset, size_t size, bool writable) {
         return &sZeroSizedMappingData;
     }
     uint8_t* start = static_cast<uint8_t*>(GetMappedPointer());
+    DAWN_ASSERT(reinterpret_cast<size_t>(start) % kGuaranteedMapAlignment == 0);
     return start == nullptr ? nullptr : start + offset;
 }
 

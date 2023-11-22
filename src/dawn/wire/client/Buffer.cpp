@@ -356,6 +356,7 @@ void* Buffer::GetMappedRange(size_t offset, size_t size) {
     if (!IsMappedForWriting() || !CheckGetMappedRangeOffsetSize(offset, size)) {
         return nullptr;
     }
+    DAWN_ASSERT(reinterpret_cast<size_t>(mMappedData) % kGuaranteedMapAlignment == 0);
     return static_cast<uint8_t*>(mMappedData) + offset;
 }
 
@@ -364,6 +365,7 @@ const void* Buffer::GetConstMappedRange(size_t offset, size_t size) {
         !CheckGetMappedRangeOffsetSize(offset, size)) {
         return nullptr;
     }
+    DAWN_ASSERT(reinterpret_cast<size_t>(mMappedData) % kGuaranteedMapAlignment == 0);
     return static_cast<uint8_t*>(mMappedData) + offset;
 }
 
