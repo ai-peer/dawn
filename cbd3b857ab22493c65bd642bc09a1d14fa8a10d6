@@ -1,0 +1,158 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c5ec5e0_c6ab23ca",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "IMHO this should take a ShaderModuleEntryPoint, reuse it\u0027s stage that we are adding in another comment instead of the SingleshaderStage on this line, and this way we can further show the whether the entrypoint was defaulted in other error messages.",
+      "range": {
+        "startLine": 61,
+        "startChar": 78,
+        "endLine": 61,
+        "endChar": 93
+      },
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76fc08b8_ae1f4ed1",
+        "filename": "src/dawn/native/Pipeline.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "nit: Maybe this could return a ResultOrError\u003cShaderModuleEntryPoint\u003e ?",
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09904cce_5b5912f2",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "ditto, and same for FragmentState",
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1aea7b9a_a317e162",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 667,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "nit: const \u0026 for both to avoid copying, and just vertex/fragmentEntryPoint?",
+      "range": {
+        "startLine": 667,
+        "startChar": 44,
+        "endLine": 667,
+        "endChar": 66
+      },
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a009473_17ab6f5b",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 793,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "Code in DAWN_ASSERT gets removed in Release so this won\u0027t work.",
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d89c857_73eb160c",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "I\u0027d be nice to precompute this as much as possible. At the end of shader module initialization, after reflecting all the entrypoints we can iterate over them and have PerStage\u003c\u003e mEntryPointsPerStage and PerStage\u003c\u003e mDefaultedEntryPoints with getters. Then we can move the validation in ValidateProgrammableStage and ASSERT in GetEntryPointWithDefaulting(name, stage) that we get one.",
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d99ca78c_f7664e7c",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "nit: defaulted maybe? There isn\u0027t a single \"default\".",
+      "range": {
+        "startLine": 124,
+        "startChar": 9,
+        "endLine": 124,
+        "endChar": 18
+      },
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b3341d7_0413290f",
+        "filename": "src/dawn/native/webgpu_absl_format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-22T14:40:18Z",
+      "side": 1,
+      "message": "nit: defaulted for a stage maybe? We\u0027d need to put the stage in the ShaderModuleEntryPoint too.",
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
