@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "65fe62e3_3a097d3e",
+        "filename": "src/tint/lang/spirv/writer/ast_writer_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-22T15:26:10Z",
+      "side": 1,
+      "message": "So this is just checking for no ICEs? Shouldn\u0027t we also be making sure the output is also valid SPIR-V?",
+      "revId": "dca1b496a827f5a4e806059360ab7c033b378e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
