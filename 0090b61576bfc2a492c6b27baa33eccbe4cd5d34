@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0425bd2f_a2f2f304",
+        "filename": "src/tint/cmd/fuzz/wgsl/fuzz.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-22T15:26:01Z",
+      "side": 1,
+      "message": "a",
+      "range": {
+        "startLine": 47,
+        "startChar": 17,
+        "endLine": 47,
+        "endChar": 19
+      },
+      "revId": "0090b61576bfc2a492c6b27baa33eccbe4cd5d34",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
