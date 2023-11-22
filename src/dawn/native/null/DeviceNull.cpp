@@ -28,6 +28,7 @@
 #include "dawn/native/null/DeviceNull.h"
 
 #include <limits>
+#include <new>
 #include <utility>
 
 #include "dawn/native/BackendConnection.h"
@@ -328,8 +329,7 @@ BindGroupLayout::BindGroupLayout(DeviceBase* device, const BindGroupLayoutDescri
 // Buffer
 
 Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
-    : BufferBase(device, descriptor) {
-    mBackingData = std::unique_ptr<uint8_t[]>(new uint8_t[GetSize()]);
+    : BufferBase(device, descriptor), mBackingData(GetSize()) {
     mAllocatedSize = GetSize();
 }
 

@@ -86,6 +86,7 @@ class Buffer final : public ObjectBase {
                          const WGPUBufferMapCallbackInfo& callbackInfo);
     void* GetMappedRange(size_t offset, size_t size);
     const void* GetConstMappedRange(size_t offset, size_t size);
+    void* GetMappedRangeImpl(size_t offset, size_t size);
     void Unmap();
 
     void Destroy();
