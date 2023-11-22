@@ -319,6 +319,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32aef172_1f622b09",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-22T06:10:22Z",
+      "side": 1,
+      "message": "\u003e I think the D3D11 frontend should be handling the conversion from the semantic of D3D11 to the semantics of the DDI so I believe the suggestion could still work?\n\nNo it cannot work. For example when we skip setting UAV slots for PLS in BindGroupTrackerD3D11, all the tests with storage buffer will fail on both Intel and Nvidia GPUs:\n- PixelLocalStorageTests.ImplicitSlot\n- PixelLocalStorageTests.MultipleImplicitSlot\n- PixelLocalStorageTests.MixedImplicitExplicit",
+      "parentUuid": "5251b515_3d46ad75",
+      "revId": "df2bbea58613e2e2b82d43c058c2cd2742e4b2f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "787ae077_56898709",
         "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.h",
         "patchSetId": 2

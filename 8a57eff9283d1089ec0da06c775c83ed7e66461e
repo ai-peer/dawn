@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "93186c68_4d0ff94e",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-22T06:10:22Z",
+      "side": 1,
+      "message": "Done\n\nNow it looks much better. Thanks for your suggestion!",
+      "parentUuid": "a3707d6c_453b82b0",
+      "range": {
+        "startLine": 263,
+        "startChar": 26,
+        "endLine": 263,
+        "endChar": 62
+      },
+      "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b1b55fa7_9e1e4e11",
@@ -71,6 +95,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "facf267c_9eabc9c3",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-22T06:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc654546_93987898",
+      "range": {
+        "startLine": 136,
+        "startChar": 22,
+        "endLine": 136,
+        "endChar": 56
+      },
+      "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16e06a6e_c29c72dc",
@@ -84,6 +132,24 @@
       "writtenOn": "2023-11-21T09:47:40Z",
       "side": 1,
       "message": "u-u-nit: Maybe at least an empty line here and before the return?",
+      "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e91d5fc0_98665db5",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-22T06:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16e06a6e_c29c72dc",
       "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -111,6 +177,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3980f645_c2a0fc11",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 637,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-22T06:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ee601ca_21544a6d",
+      "range": {
+        "startLine": 637,
+        "startChar": 13,
+        "endLine": 637,
+        "endChar": 48
+      },
+      "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e26587d_08a9caa7",
@@ -124,6 +214,30 @@
       "writtenOn": "2023-11-21T16:59:38Z",
       "side": 1,
       "message": "Looks like those temporary resources just need alive in `CommandBuffer::ExecuteRenderPass` scope, right? So keeping them at here and clearing after `ExecuteCommandList()` will increase the peek memory usage unnecessarily. Consider just using local variables in `CommandBuffer::ExecuteRenderPass` for this purpose.",
+      "range": {
+        "startLine": 77,
+        "startChar": 15,
+        "endLine": 77,
+        "endChar": 25
+      },
+      "revId": "8a57eff9283d1089ec0da06c775c83ed7e66461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "419254dc_1a9473c8",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 77,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-22T06:10:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e26587d_08a9caa7",
       "range": {
         "startLine": 77,
         "startChar": 15,
