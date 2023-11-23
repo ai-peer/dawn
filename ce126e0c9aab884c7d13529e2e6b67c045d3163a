@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9924d769_3a3caafe",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T16:09:18Z",
+      "side": 1,
+      "message": "Done (in predecessor)",
+      "parentUuid": "51739281_b674dd96",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "59eec92d_67aff407",
@@ -82,6 +100,24 @@
       "writtenOn": "2023-11-23T14:06:23Z",
       "side": 1,
       "message": "That seems like it would never be added since `internalFormat` wouldn\u0027t `supportsStorageUsage`.",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7abd4472_cdac4a45",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T16:09:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "59eec92d_67aff407",
       "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -139,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "55bf351a_c903167c",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T16:09:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a69d115_171a35c6",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "523b8e7e_c0345a27",
@@ -152,6 +206,30 @@
       "writtenOn": "2023-11-23T14:06:23Z",
       "side": 1,
       "message": "u-nit: isSinglePlanar",
+      "range": {
+        "startLine": 417,
+        "startChar": 13,
+        "endLine": 417,
+        "endChar": 29
+      },
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4d8c53d2_46263d4e",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T16:09:18Z",
+      "side": 1,
+      "message": "I\u0027ll internalize this in another year or so ;). Done.",
+      "parentUuid": "523b8e7e_c0345a27",
       "range": {
         "startLine": 417,
         "startChar": 13,
@@ -265,6 +343,24 @@
       "side": 1,
       "message": "@lehoangquyen@chromium.org: Do you see what would be going wrong in the IOSurface creation for multiplanar formats in [1]?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm;l\u003d96-98?q\u003dSharedTextureMemoryTests_app\u0026ss\u003dchromium",
       "parentUuid": "d373bbb7_7b4135de",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ace27be_9c09bf6c",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T16:09:18Z",
+      "side": 1,
+      "message": "To separate these concerns, I changed these tests to run only for single-planar formats and filed a bug/TODO.",
+      "parentUuid": "954fe5c7_aecfe555",
       "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
