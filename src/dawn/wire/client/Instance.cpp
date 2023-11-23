@@ -121,6 +121,11 @@ WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {
 
 // Instance
 
+WireResult Instance::Initialize() {
+    GatherWGSLFeatures();
+    return WireResult::Success;
+}
+
 void Instance::RequestAdapter(const WGPURequestAdapterOptions* options,
                               WGPURequestAdapterCallback callback,
                               void* userdata) {
@@ -208,6 +213,24 @@ WGPUWaitStatus Instance::WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64
     // But it's hard to get from an object to its Instance right now, so we can
     // store it on the Client.
     return GetClient()->GetEventManager()->WaitAny(count, infos, timeoutNS);
+}
+
+void Instance::GatherWGSLFeatures() {
+    // XXX
+}
+
+bool Instance::HasWGSLLanguageFeature(WGPUWGSLFeatureName feature) const {
+    return mWGSLFeatures.count(feature) != 0;
+}
+
+size_t Instance::EnumerateWGSLLanguageFeatures(WGPUWGSLFeatureName* features) const {
+    if (features != nullptr) {
+        for (WGPUWGSLFeatureName f : mWGSLFeatures) {
+            *features = f;
+            ++features;
+        }
+    }
+    return mWGSLFeatures.size();
 }
 
 }  // namespace dawn::wire::client
