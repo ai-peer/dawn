@@ -54,6 +54,80 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "51739281_b674dd96",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T14:06:23Z",
+      "side": 1,
+      "message": "nit: Maybe comment that IOSurfaces always support all the usages? Or maybe even:\n\n```\n// IO surfaces always support the following usages.\nkIOSurfaceSupportedUsages \u003d ...;\n\nproperties.usage \u003d kIOSurfaceSupportedUsages;\n```\n\nAnd let the frontend gate on what the format in Dawn actually supports?",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "59eec92d_67aff407",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T14:06:23Z",
+      "side": 1,
+      "message": "That seems like it would never be added since `internalFormat` wouldn\u0027t `supportsStorageUsage`.",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eaff6c4_1a69fea8",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T14:06:23Z",
+      "side": 1,
+      "message": "Would there be a way to make these restrictions part of the frontend instead of having to duplicate it in each backend?",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "523b8e7e_c0345a27",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T14:06:23Z",
+      "side": 1,
+      "message": "u-nit: isSinglePlanar",
+      "range": {
+        "startLine": 417,
+        "startChar": 13,
+        "endLine": 417,
+        "endChar": 29
+      },
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "195cc51e_50cc693d",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
         "patchSetId": 3
