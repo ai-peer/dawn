@@ -326,15 +326,15 @@ class Printer : public tint::TextGenerator {
     // If the instruction is named, we need to emit it. If it is un-named, then we'll use it
     // and inline it later.
     void MaybeEmitInstruction(const core::ir::Instruction* inst) {
-        auto name = ir_.NameOf(inst->Result());
+        auto name = ir_.NameOf(inst->Result(0));
         if (!name.IsValid()) {
             return;
         }
 
         auto out = Line();
-        EmitType(out, inst->Result()->Type());
+        EmitType(out, inst->Result(0)->Type());
         out << " const " << name.Name() << " = ";
-        EmitValue(out, inst->Result());
+        EmitValue(out, inst->Result(0));
         out << ";";
     }
 
@@ -342,7 +342,6 @@ class Printer : public tint::TextGenerator {
         Switch(
             v,                                                           //
             [&](const core::ir::Constant* c) { EmitConstant(out, c); },  //
-            // [&](core::ir::FunctionParam* fp) {},                   //
             [&](const core::ir::InstructionResult* r) {
                 Switch(
                     r->Instruction(),                                        //
