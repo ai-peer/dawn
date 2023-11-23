@@ -165,6 +165,30 @@
       },
       "revId": "1655088b9296cd595040ad9828a1dd0747467bf8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bdab7fb2_44b8df50",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T09:37:24Z",
+      "side": 1,
+      "message": "We discussed this offline, we could add a template constructor to StageAndDescriptor that unpacks the various wgpu:: types and does the defaulting. Otherwise we need to have conditional code here to default to an empty string or something like that, and that defeats the purpose of moving the defaulting in StageAndDescriptor. This could be done as a follow-up that contains a test for the issue it will uncover in pipeline layout defaulting.",
+      "parentUuid": "e3cfbdc9_30783858",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 60,
+        "endChar": 68
+      },
+      "revId": "1655088b9296cd595040ad9828a1dd0747467bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
