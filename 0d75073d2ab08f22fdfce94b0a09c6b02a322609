@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "0d75073d2ab08f22fdfce94b0a09c6b02a322609",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5427ea0_740c97d5",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 649,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-11-23T15:11:14Z",
+      "side": 1,
+      "message": "One question. Do we really need to set plsUAVs here? I though they will be always set later in BindGroupTracker::Apply() before draws, right?\n\nSorry. I didn\u0027t catch this in last run.",
+      "range": {
+        "startLine": 647,
+        "startChar": 35,
+        "endLine": 649,
+        "endChar": 18
+      },
+      "revId": "0d75073d2ab08f22fdfce94b0a09c6b02a322609",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
