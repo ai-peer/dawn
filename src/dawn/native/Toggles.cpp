@@ -502,6 +502,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Using D3D12_BLEND_DEST_ALPHA as source blend factor for both color and alpha blending "
       "doesn't work correctly on the D3D12 backend using Intel Gen9 or Gen9.5 GPUs.",
       "https://crbug.com/dawn/1579", ToggleStage::Device}},
+    {Toggle::ExposeWGSLTestingFeatures,
+     {"expose_wgsl_testing_features",
+      "Make the Instance expose the ChromiumExperimental* features for testing of "
+      "wgslLanguageFeatures functionality.",
+      "https://crbug.com/dawn/2260", ToggleStage::Instance}},
     // Comment to separate the }} so it is clearer what to copy-paste to add a toggle.
 }};
 }  // anonymous namespace
