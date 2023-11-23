@@ -260,6 +260,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60968e7e_a068f7e7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-11-23T06:53:58Z",
+      "side": 1,
+      "message": "Filed an issue for which attachment should be in the set of attachments: https://github.com/gpuweb/gpuweb/issues/4390",
+      "parentUuid": "e9c676ca_31c71ad1",
+      "revId": "32a6a867b6015502e011694997da8d4e18f8986b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "93d02a11_75a14374",
