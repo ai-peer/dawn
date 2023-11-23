@@ -85,6 +85,24 @@
       "parentUuid": "9ee1ec4c_bd68c24e",
       "revId": "593f59f0a13b5bfd7961c5d44787a97fbc5ba86f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5613ff03_20d2da82",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T16:09:26Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c55f6364_61c5c048",
+      "revId": "593f59f0a13b5bfd7961c5d44787a97fbc5ba86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
