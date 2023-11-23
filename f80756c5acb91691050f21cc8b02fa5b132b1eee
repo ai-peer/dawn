@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "03d63787_892db65f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-11-23T19:31:18Z",
+      "side": 1,
+      "message": "I verified that this now regenerates the workgroupUniformLoad end2end tests as needed.",
+      "revId": "f80756c5acb91691050f21cc8b02fa5b132b1eee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
