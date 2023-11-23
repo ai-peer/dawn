@@ -123,6 +123,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8a69d115_171a35c6",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T14:26:00Z",
+      "side": 1,
+      "message": "Yep it would be where these asserts are. IMHO 1) is better since it is both more consistent and less code when adding subsequent backends.",
+      "parentUuid": "d82615f3_ac43ff07",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "523b8e7e_c0345a27",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
         "patchSetId": 3
