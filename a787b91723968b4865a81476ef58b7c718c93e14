@@ -168,6 +168,24 @@
       "parentUuid": "52ed630a_f28e400c",
       "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07600d5e_85ff4f9a",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests_win.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T09:48:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0827cbe8_ab8b770a",
+      "revId": "a787b91723968b4865a81476ef58b7c718c93e14",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
