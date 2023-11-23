@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c34366fc_7fe53ad8",
+        "filename": "src/tint/lang/spirv/validate/validate.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-23T10:48:40Z",
+      "side": 1,
+      "message": "Is this depending on the spirv `Disassemble` to call the validator? This seems like it would be better to call the validator directly and only disassemble on validation failure?",
+      "revId": "efd81224e4291cb927d3ade008916d63042b5b38",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
