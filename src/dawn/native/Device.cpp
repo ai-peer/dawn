@@ -1464,10 +1464,6 @@ void DeviceBase::SetWGSLExtensionAllowList() {
     if (IsToggleEnabled(Toggle::AllowUnsafeAPIs)) {
         mWGSLAllowedFeatures.extensions.insert(
             tint::wgsl::Extension::kChromiumDisableUniformityAnalysis);
-
-        // Allow language features that are still under development.
-        mWGSLAllowedFeatures.features.insert(
-            tint::wgsl::LanguageFeature::kReadonlyAndReadwriteStorageTextures);
     }
     if (mEnabledFeatures.IsEnabled(Feature::DualSourceBlending)) {
         mWGSLAllowedFeatures.extensions.insert(
@@ -1482,6 +1478,9 @@ void DeviceBase::SetWGSLExtensionAllowList() {
         mWGSLAllowedFeatures.extensions.insert(
             tint::wgsl::Extension::kChromiumExperimentalFramebufferFetch);
     }
+
+    // Language features are enabled instance-wide.
+    mWGSLAllowedFeatures.features = GetInstance()->GetAllowedWGSLLanguageFeatures();
 }
 
 const tint::wgsl::AllowedFeatures& DeviceBase::GetWGSLAllowedFeatures() const {

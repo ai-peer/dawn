@@ -25,29 +25,16 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-// An IDL file that adds support for Dawn extensions that are not part of the
-// upstream webgpu.idl.
+#ifndef SRC_DAWN_COMMON_WGSLFEATUREMAPPING_H_
+#define SRC_DAWN_COMMON_WGSLFEATUREMAPPING_H_
 
-enum GPUFeatureName {
-    "chromium-experimental-subgroups",
-    "chromium-experimental-subgroup-uniform-control-flow",
-};
+#define DAWN_FOREACH_WGSL_FEATURE(X)                                               \
+    X(kUndefined, Undefined)                                                       \
+    X(kReadonlyAndReadwriteStorageTextures, ReadonlyAndReadwriteStorageTextures)   \
+    X(kChromiumTestingUnimplemented, ChromiumTestingUnimplemented)                 \
+    X(kChromiumTestingUnsafeExperimental, ChromiumTestingUnsafeExperimental)       \
+    X(kChromiumTestingExperimental, ChromiumTestingExperimental)                   \
+    X(kChromiumTestingShippedWithKillswitch, ChromiumTestingShippedWithKillswitch) \
+    X(kChromiumTestingShipped, ChromiumTestingShipped)
 
-dictionary GPURequestAdapterOptions {
-    boolean compatibilityMode = false;
-};
-
-interface GPUAdapter {
-    readonly attribute boolean isCompatibilityMode;
-};
-
-interface GPUCommandEncoder {
-    undefined writeTimestamp(GPUQuerySet querySet, GPUSize32 queryIndex);
-};
-
-enum WGSLFeatureName {
-    "readonly_and_readwrite_storage_textures",
-    "packed_4x8_integer_dot_product",
-    "unrestricted_pointer_parameters",
-    "pointer_composite_access",
-};
+#endif  // SRC_DAWN_COMMON_WGSLFEATUREMAPPING_H_
