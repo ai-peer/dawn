@@ -109,6 +109,9 @@ status "Fetching dependencies"
 cp scripts/standalone-with-node.gclient .gclient
 with_retry gclient sync
 
+status "Adding the Ninja from DEPS to the PATH"
+export PATH=${SRC_DIR}/third_party/ninja:${PATH}
+
 status "Linting"
 ./tools/lint
 
@@ -132,6 +135,7 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
     using cmake-3.17.2
 
     COMMON_CMAKE_FLAGS=""
+    COMMON_CMAKE_FLAGS+=" -GNinja"
     COMMON_CMAKE_FLAGS+=" -DCMAKE_BUILD_TYPE=${BUILD_TYPE}"
     COMMON_CMAKE_FLAGS+=" -DTINT_DOCS_WARN_AS_ERROR=1"
     COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_BENCHMARKS=1"
