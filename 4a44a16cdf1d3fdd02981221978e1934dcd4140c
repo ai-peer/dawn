@@ -16,6 +16,24 @@
       "message": "This is just for testing. Still waiting to land these changes upstream: https://github.com/microsoft/DirectXShaderCompiler/pull/6050",
       "revId": "4a44a16cdf1d3fdd02981221978e1934dcd4140c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b71f6ef_8a5fd07b",
+        "filename": "DEPS",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-23T15:18:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c016aaf1_064df792",
+      "revId": "4a44a16cdf1d3fdd02981221978e1934dcd4140c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
