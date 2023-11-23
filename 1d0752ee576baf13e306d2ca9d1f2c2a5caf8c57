@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc94d5e2_5c5f682b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-11-23T15:45:44Z",
+      "side": 1,
+      "message": "thanks for taking this!",
+      "revId": "1d0752ee576baf13e306d2ca9d1f2c2a5caf8c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49765a43_809044c5",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-11-23T15:45:44Z",
+      "side": 1,
+      "message": "This should be wgslLanguageFeatures, ICYMI",
+      "range": {
+        "startLine": 266,
+        "startChar": 55,
+        "endLine": 266,
+        "endChar": 59
+      },
+      "revId": "1d0752ee576baf13e306d2ca9d1f2c2a5caf8c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
