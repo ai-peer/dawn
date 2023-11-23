@@ -25,43 +25,29 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_CORE_IR_LET_H_
-#define SRC_TINT_LANG_CORE_IR_LET_H_
+#ifndef SRC_TINT_LANG_CORE_IR_TRANSFORM_VALUE_TO_LET_H_
+#define SRC_TINT_LANG_CORE_IR_TRANSFORM_VALUE_TO_LET_H_
 
-#include <string>
+#include "src/tint/utils/result/result.h"
 
-#include "src/tint/lang/core/ir/operand_instruction.h"
-
+// Forward declarations.
 namespace tint::core::ir {
+class Module;
+}
 
-/// A no-op instruction in the IR, used to position and name a value
-class Let final : public Castable<Let, OperandInstruction<1, 1>> {
-  public:
-    /// The offset in Operands() for the value
-    static constexpr size_t kValueOperandOffset = 0;
+namespace tint::core::ir::transform {
 
-    /// Constructor
-    /// @param result the result value
-    /// @param value the let's value
-    Let(InstructionResult* result, Value* value);
-    ~Let() override;
+/// ValueToLet is a transform that moves "non-inlinable" instruction values to let instructions.
+/// An expression is considered "non-inlinable" if any of the the following are true:
+/// * The value has multiple uses.
+/// * The value is sequenced, and another sequenced instruction sits between the value's instruction
+///   and its usage.
+/// * The value is used in a block different to the value's instruction.
+///
+/// @param module the module to transform
+/// @returns error diagnostics on failure
+Result<SuccessType> ValueToLet(Module& module);
 
-    /// @copydoc Instruction::Clone()
-    Let* Clone(CloneContext& ctx) override;
+}  // namespace tint::core::ir::transform
 
-    /// @param value the new let value
-    void SetValue(ir::Value* value) { SetOperand(kValueOperandOffset, value); }
-
-    /// @returns the value
-    ir::Value* Value() { return operands_[kValueOperandOffset]; }
-
-    /// @returns the value
-    const ir::Value* Value() const { return operands_[kValueOperandOffset]; }
-
-    /// @returns the friendly name for the instruction
-    std::string FriendlyName() const override { return "let"; }
-};
-
-}  // namespace tint::core::ir
-
-#endif  // SRC_TINT_LANG_CORE_IR_LET_H_
+#endif  // SRC_TINT_LANG_CORE_IR_TRANSFORM_VALUE_TO_LET_H_
