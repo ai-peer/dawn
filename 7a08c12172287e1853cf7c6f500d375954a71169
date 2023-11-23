@@ -1041,6 +1041,24 @@
       "parentUuid": "cbf879de_e0fb009c",
       "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1f54c74_035e0345",
+        "filename": "src/dawn/tests/unittests/validation/ComputeValidationTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T09:45:47Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "24b192e4_26056d16",
+      "revId": "7a08c12172287e1853cf7c6f500d375954a71169",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
