@@ -46,6 +46,29 @@
       },
       "revId": "a2eea8b1687e33786b1a49587a62af31fc3a2e1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5370c807_c0cd0700",
+        "filename": "src/dawn/samples/utils/CMakeLists.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1004081
+      },
+      "writtenOn": "2023-11-23T20:26:04Z",
+      "side": 1,
+      "message": "you missed dawn_glfw",
+      "range": {
+        "startLine": 41,
+        "startChar": 49,
+        "endLine": 41,
+        "endChar": 53
+      },
+      "revId": "a2eea8b1687e33786b1a49587a62af31fc3a2e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
