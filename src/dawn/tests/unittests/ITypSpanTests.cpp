@@ -96,5 +96,38 @@ TEST_F(ITypSpanTest, BeginEndFrontBackData) {
     ASSERT_EQ(constSpan.data(), &constSpan[Key(0)]);
 }
 
+// Test the utility SpanFromUntyped
+TEST_F(ITypSpanTest, SpanFromUntyped) {
+    // Test creating an empty span from nullptr.
+    {
+        Val* values = nullptr;
+        Span span = ityp::SpanFromUntyped<Key>(values, 0);
+        ASSERT_EQ(nullptr, span.data());
+        ASSERT_EQ(Key(0), span.size());
+    }
+    // Test creating an empty span from a garbage pointer.
+    {
+        Val value(25);
+        Span span = ityp::SpanFromUntyped<Key>(&value, 0);
+        ASSERT_NE(nullptr, span.data());
+        ASSERT_EQ(Key(0), span.size());
+    }
+    // Test creating a one element span.
+    {
+        Val value = Val(25);
+        Span span = ityp::SpanFromUntyped<Key>(&value, 1);
+        ASSERT_EQ(&value, span.data());
+        ASSERT_EQ(Key(1), span.size());
+        ASSERT_EQ(value, span[Key(0)]);
+    }
+    // Test creating a multi-element span.
+    {
+        std::array<Val, 10> arr = {};
+        Span span = ityp::SpanFromUntyped<Key>(arr.data(), arr.size());
+        ASSERT_EQ(arr.data(), span.data());
+        ASSERT_EQ(arr.size(), static_cast<size_t>(span.size()));
+    }
+}
+
 }  // anonymous namespace
 }  // namespace dawn
