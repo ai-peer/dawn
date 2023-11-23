@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "728678ee_24a94dcc",
+        "filename": "infra/kokoro/linux/docker.sh",
+        "patchSetId": 1
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-23T20:19:44Z",
+      "side": 1,
+      "message": "First patchset doesn\u0027t enable Ninja yet to provide a timing baseline. Will push a second patchset after Kokoro builds this.",
+      "revId": "ecb70dc38c7cd55fdcdab37baf84d94f8078c70c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
