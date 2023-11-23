@@ -89,6 +89,14 @@ SharedTextureMemoryBase::SharedTextureMemoryBase(DeviceBase* device,
     if (!internalFormat.isRenderable) {
         DAWN_ASSERT(!(mProperties.usage & wgpu::TextureUsage::RenderAttachment));
     }
+    if (internalFormat.IsMultiPlanar()) {
+        if (!device->HasFeature(Feature::MultiPlanarRenderTargets)) {
+            DAWN_ASSERT(!(mProperties.usage & wgpu::TextureUsage::RenderAttachment));
+        }
+        if (!device->HasFeature(Feature::MultiPlanarFormatExtendedUsages)) {
+            DAWN_ASSERT(!(mProperties.usage & wgpu::TextureUsage::CopyDst));
+        }
+    }
     GetObjectTrackingList()->Track(this);
 }
 
