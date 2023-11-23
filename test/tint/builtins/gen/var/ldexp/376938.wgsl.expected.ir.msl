@@ -1,9 +1,32 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::CoreBuiltinCall
-********************************************************************
-*  The tint shader compiler has encountered an unexpected error.   *
-*                                                                  *
-*  Please help us fix this issue by submitting a bug report at     *
-*  crbug.com/tint with the source program that triggered the bug.  *
-********************************************************************
+#include <metal_stdlib>
+using namespace metal;
+
+void ldexp_376938() {
+  int4 arg_1 = int4(1);
+  float4 res = ldexpfloat4(1.0f), arg_1);
+}
+vertex float4 vertex_main() {
+  ldexp_376938();
+  return float4(0.0f);
+}
+fragment void fragment_main() {
+  ldexp_376938();
+}
+kernel void compute_main() {
+  ldexp_376938();
+}
+program_source:6:16: error: use of undeclared identifier 'ldexpfloat4'
+  float4 res = ldexpfloat4(1.0f), arg_1);
+               ^
+program_source:6:35: error: redefinition of 'arg_1' with a different type: 'float4' (vector of 4 'float' values) vs 'int4' (vector of 4 'int' values)
+  float4 res = ldexpfloat4(1.0f), arg_1);
+                                  ^
+program_source:5:8: note: previous definition is here
+  int4 arg_1 = int4(1);
+       ^
+program_source:6:40: error: extraneous ')' before ';'
+  float4 res = ldexpfloat4(1.0f), arg_1);
+                                       ^
+

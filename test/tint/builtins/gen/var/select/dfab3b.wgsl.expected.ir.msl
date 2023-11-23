@@ -1,9 +1,32 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::CoreBuiltinCall
-********************************************************************
-*  The tint shader compiler has encountered an unexpected error.   *
-*                                                                  *
-*  Please help us fix this issue by submitting a bug report at     *
-*  crbug.com/tint with the source program that triggered the bug.  *
-********************************************************************
+#include <metal_stdlib>
+using namespace metal;
+
+void select_dfab3b() {
+  bool arg_2 = true;
+  int3 res = selectint3(1), int3(1), arg_2);
+}
+vertex float4 vertex_main() {
+  select_dfab3b();
+  return float4(0.0f);
+}
+fragment void fragment_main() {
+  select_dfab3b();
+}
+kernel void compute_main() {
+  select_dfab3b();
+}
+program_source:6:14: error: use of undeclared identifier 'selectint3'
+  int3 res = selectint3(1), int3(1), arg_2);
+             ^
+program_source:6:38: error: redefinition of 'arg_2' with a different type: 'int3' (vector of 3 'int' values) vs 'bool'
+  int3 res = selectint3(1), int3(1), arg_2);
+                                     ^
+program_source:5:8: note: previous definition is here
+  bool arg_2 = true;
+       ^
+program_source:6:43: error: extraneous ')' before ';'
+  int3 res = selectint3(1), int3(1), arg_2);
+                                          ^
+
