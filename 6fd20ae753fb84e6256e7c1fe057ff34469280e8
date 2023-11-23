@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e99fc4c_cbda6ddd",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-23T11:39:53Z",
+      "side": 1,
+      "message": "Can you expand `CNF` as I don\u0027t know what it stands for.",
+      "revId": "6fd20ae753fb84e6256e7c1fe057ff34469280e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "27334e2a_c10b5213",
+        "filename": "tools/src/cnf/expr.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-23T11:39:53Z",
+      "side": 1,
+      "message": "```suggestion\n// AssumeTrue returns a new simplified expression as if o evaluates to true\n```",
+      "revId": "6fd20ae753fb84e6256e7c1fe057ff34469280e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
