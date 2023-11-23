@@ -210,4 +210,20 @@ WGPUWaitStatus Instance::WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64
     return GetClient()->GetEventManager()->WaitAny(count, infos, timeoutNS);
 }
 
+bool Instance::HasWGSLLanguageFeature(WGPUWGSLFeatureName feature) {
+    // TODO
+    return false;
+}
+
+size_t Instance::EnumerateWGSLLanguageFeatures(WGPUWGSLFeatureName* features) const {
+    // TODO
+    std::array<WGPUWGSLFeatureName, 1> kWGSLFeatures = {{}};
+    if (features != nullptr) {
+        for (size_t i = 0; i < kWGSLFeatures.size(); i++) {
+            features[i] = kWGSLFeatures[i];
+        }
+    }
+    return kWGSLFeatures.size();
+}
+
 }  // namespace dawn::wire::client

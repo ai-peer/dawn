@@ -548,4 +548,20 @@ Surface* InstanceBase::APICreateSurface(const SurfaceDescriptor* descriptor) {
     return new Surface(this, descriptor);
 }
 
+bool InstanceBase::APIHasWGSLLanguageFeature(wgpu::WGSLFeatureName feature) {
+    // TODO
+    return false;
+}
+
+size_t InstanceBase::APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* features) const {
+    // TODO
+    std::array<wgpu::WGSLFeatureName, 1> kWGSLFeatures = {{}};
+    if (features != nullptr) {
+        for (size_t i = 0; i < kWGSLFeatures.size(); i++) {
+            features[i] = kWGSLFeatures[i];
+        }
+    }
+    return kWGSLFeatures.size();
+}
+
 }  // namespace dawn::native

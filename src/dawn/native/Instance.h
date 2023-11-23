@@ -162,6 +162,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     [[nodiscard]] wgpu::WaitStatus APIWaitAny(size_t count,
                                               FutureWaitInfo* futures,
                                               uint64_t timeoutNS);
+    bool APIHasWGSLLanguageFeature(wgpu::WGSLFeatureName feature);
+    size_t APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* features) const;
 
   private:
     explicit InstanceBase(const TogglesState& instanceToggles);

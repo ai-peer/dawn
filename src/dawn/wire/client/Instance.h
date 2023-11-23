@@ -58,6 +58,9 @@ class Instance final : public ObjectBase {
 
     void ProcessEvents();
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
+
+    bool HasWGSLLanguageFeature(WGPUWGSLFeatureName feature);
+    size_t EnumerateWGSLLanguageFeatures(WGPUWGSLFeatureName* features) const;
 };
 
 }  // namespace dawn::wire::client
