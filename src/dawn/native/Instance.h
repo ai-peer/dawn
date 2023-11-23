@@ -48,6 +48,7 @@
 #include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/dawn_platform.h"
+#include "tint/lang/wgsl/features/language_feature.h"
 
 namespace dawn::platform {
 class Platform;
@@ -114,6 +115,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     }
 
     const TogglesState& GetTogglesState() const;
+    const std::unordered_set<tint::wgsl::LanguageFeature>& GetAllowedWGSLLanguageFeatures() const;
 
     // Used to query the details of a toggle. Return nullptr if toggleName is not a valid name
     // of a toggle supported in Dawn.
@@ -162,6 +164,8 @@ class InstanceBase final : public RefCountedWithExternalCount {
     [[nodiscard]] wgpu::WaitStatus APIWaitAny(size_t count,
                                               FutureWaitInfo* futures,
                                               uint64_t timeoutNS);
+    bool APIHasWGSLLanguageFeature(wgpu::WGSLFeatureName feature) const;
+    size_t APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* features) const;
 
   private:
     explicit InstanceBase(const TogglesState& instanceToggles);
@@ -191,6 +195,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
                                    const DawnTogglesDescriptor* requiredAdapterToggles,
                                    wgpu::PowerPreference powerPreference) const;
 
+    void GatherWGSLFeatures();
     void ConsumeError(std::unique_ptr<ErrorData> error);
 
     std::unordered_set<std::string> warningMessages;
@@ -211,6 +216,9 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     TogglesState mToggles;
     TogglesInfo mTogglesInfo;
+
+    std::unordered_set<wgpu::WGSLFeatureName> mWGSLFeatures;
+    std::unordered_set<tint::wgsl::LanguageFeature> mTintLanguageFeatures;
 
 #if defined(DAWN_USE_X11)
     std::unique_ptr<X11Functions> mX11Functions;
