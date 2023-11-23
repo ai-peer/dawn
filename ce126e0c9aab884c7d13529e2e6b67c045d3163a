@@ -103,6 +103,24 @@
       "parentUuid": "a5cfd3ff_80ef943f",
       "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea39d5a9_f55a7429",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-23T14:03:38Z",
+      "side": 1,
+      "message": "I think you can assert here [1] or return an error if the number of planes in the IOSurface is not enough for the multiplanar format. Maybe make this function [2] public in IOSurfaceUtils.h.\n\nDoing so will need to fix the remaining tests in the SharedTextureMemoryTests to properly allocate correct number of planes in the IOSurface. Alternatively just skip the tests if multiplanar format is encountered. The relevant multiplanar tests are already covered in VideoViewTests.cpp\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/TextureMTL.mm;drc\u003d1d819e16050c87b3af9402c67d357520798d286a;l\u003d894\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/IOSurfaceUtils.cpp;drc\u003d1d819e16050c87b3af9402c67d357520798d286a;l\u003d59",
+      "parentUuid": "eb42e5d2_02dd74e3",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
