@@ -16,6 +16,23 @@
       "message": "Thanks! Corentin, can you restamp?",
       "revId": "58e4351e269ca108ce0e044bd89c90980781412f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "35248980_f67c8ee5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T10:28:24Z",
+      "side": 1,
+      "message": "Thanks for the reviews!",
+      "revId": "58e4351e269ca108ce0e044bd89c90980781412f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
