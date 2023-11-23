@@ -2031,6 +2031,20 @@
                     {"name": "options", "type": "request adapter options", "annotation": "const*", "optional": true, "no_default": true},
                     {"name": "callback info", "type": "request adapter callback info"}
                 ]
+            },
+            {
+                "name": "has WGSL language feature",
+                "returns": "bool",
+                "args": [
+                    {"name": "feature", "type": "WGSL feature name"}
+                ]
+            },
+            {
+                "name": "enumerate WGSL language features",
+                "returns": "size_t",
+                "args": [
+                    {"name": "features", "type": "WGSL feature name", "annotation": "*"}
+                ]
             }
         ]
     },
@@ -3640,6 +3654,15 @@
             {"value": 29, "name": "sint32x3"},
             {"value": 30, "name": "sint32x4"},
             {"value": 31, "name": "unorm 10_10_10_2", "jsrepr": "'unorm10-10-10-2'"}
+        ]
+    },
+    "WGSL feature name": {
+        "category": "enum",
+        "values": [
+            {"value": 0, "name": "undefined", "valid": false, "jsrepr": "undefined"},
+            {"value": 1, "name": "readonly and readwrite storage textures"},
+            {"value": 2, "name": "packed 4x8 integer dot product"},
+            {"value": 3, "name": "unrestricted pointer parameters"}
         ]
     },
     "whole size" : {
