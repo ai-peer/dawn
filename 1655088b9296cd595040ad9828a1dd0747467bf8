@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b054209_84daa0c6",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-23T06:22:02Z",
+      "side": 1,
+      "message": "Here\u0027s an error message when passing null entryPoint for instance:\n\n```\nGot unexpected device error: Multiple entry points for stage (Compute) exist in the shader module [ShaderModule].\n - While validating compute stage ([ShaderModule], [EntryPoint \"\"]).\n - While calling [Device].CreateComputePipeline([ComputePipelineDescriptor]).\n```",
+      "parentUuid": "2fae0c3c_c74f6542",
+      "range": {
+        "startLine": 53,
+        "startChar": 28,
+        "endLine": 53,
+        "endChar": 40
+      },
+      "revId": "1655088b9296cd595040ad9828a1dd0747467bf8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4cb0fd3f_ec4e324d",
         "filename": "src/dawn/native/ComputePipeline.cpp",
         "patchSetId": 4
