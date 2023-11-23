@@ -105,6 +105,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d82615f3_ac43ff07",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T14:14:42Z",
+      "side": 1,
+      "message": "We could totally do that - I think that we would do it where I added the asserts in SharedTextureMemory.cpp, right? I was actually looking to make that change and then I saw that the place that I found to do it in SharedTextureMemory.cpp doesn\u0027t have a pattern of doing that - e.g., it could already do that for RenderAttachment rather than asserting that RenderAttachment isn\u0027t set if the format isn\u0027t renderable? It seems like for consistency we should either (1) add all the usages that the backend supports in the backend and then strip out the ones that don\u0027t work in this particular dynamic circumstance in the frontend or (2) do all the work in the backend, as is being done now. WDYT?",
+      "parentUuid": "7eaff6c4_1a69fea8",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "523b8e7e_c0345a27",
         "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
         "patchSetId": 3
@@ -193,6 +211,24 @@
       "side": 1,
       "message": "I think you can assert here [1] or return an error if the number of planes in the IOSurface is not enough for the multiplanar format. Maybe make this function [2] public in IOSurfaceUtils.h.\n\nDoing so will need to fix the remaining tests in the SharedTextureMemoryTests to properly allocate correct number of planes in the IOSurface. Alternatively just skip the tests if multiplanar format is encountered. The relevant multiplanar tests are already covered in VideoViewTests.cpp\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/TextureMTL.mm;drc\u003d1d819e16050c87b3af9402c67d357520798d286a;l\u003d894\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/IOSurfaceUtils.cpp;drc\u003d1d819e16050c87b3af9402c67d357520798d286a;l\u003d59",
       "parentUuid": "eb42e5d2_02dd74e3",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d373bbb7_7b4135de",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T14:14:42Z",
+      "side": 1,
+      "message": "Asserting in [1] makes sense to me, but as you say, would require fixing the creation of the IOSurfaces that I linked to in my [2] above. I don\u0027t know offhand what\u0027s going wrong there. If that\u0027s not trivial to track down, I can file a bug/TODO and in the meantime skip the tests here that create a TextureView when in multiplanar format to keep going on this CL.",
+      "parentUuid": "ea39d5a9_f55a7429",
       "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
