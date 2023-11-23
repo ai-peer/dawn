@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aae40ea0_af051ce1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T16:07:44Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "593f59f0a13b5bfd7961c5d44787a97fbc5ba86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9ee1ec4c_bd68c24e",
@@ -48,6 +65,24 @@
       "writtenOn": "2023-11-23T16:04:08Z",
       "side": 1,
       "message": "Shouldn\u0027t the multiplanar parts be gated on the features being present or not?",
+      "revId": "593f59f0a13b5bfd7961c5d44787a97fbc5ba86f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c55f6364_61c5c048",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T16:07:44Z",
+      "side": 1,
+      "message": "This I\u0027m doing as a pure refactoring of the existing logic. Changing the logic is the next CL.",
+      "parentUuid": "9ee1ec4c_bd68c24e",
       "revId": "593f59f0a13b5bfd7961c5d44787a97fbc5ba86f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
