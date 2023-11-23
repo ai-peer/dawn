@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f975f3f2_8a593df5",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-23T13:39:58Z",
+      "side": 1,
+      "message": "The code being modified `tools/src/cnf/*` [has a golang package description](https://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/cnf/cnf.go) describing what CNF means. I don\u0027t think it\u0027s unreasonable to use an acronym in the CL description that matches the same name as the package being modified.",
+      "parentUuid": "2e99fc4c_cbda6ddd",
+      "revId": "6fd20ae753fb84e6256e7c1fe057ff34469280e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "27334e2a_c10b5213",
         "filename": "tools/src/cnf/expr.go",
         "patchSetId": 2
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-23T11:39:53Z",
       "side": 1,
       "message": "```suggestion\n// AssumeTrue returns a new simplified expression as if o evaluates to true\n```",
+      "revId": "6fd20ae753fb84e6256e7c1fe057ff34469280e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71cdeaab_02f96f2d",
+        "filename": "tools/src/cnf/expr.go",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-23T13:39:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "27334e2a_c10b5213",
       "revId": "6fd20ae753fb84e6256e7c1fe057ff34469280e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
