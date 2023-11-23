@@ -187,6 +187,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::MSAARenderToSingleSampled);
     EnableFeature(Feature::DualSourceBlending);
     EnableFeature(Feature::Norm16TextureFormats);
+    EnableFeature(Feature::ChromiumExperimentalDp4a);
 
     // To import multi planar textures, we need to at least tier 2 support.
     if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
