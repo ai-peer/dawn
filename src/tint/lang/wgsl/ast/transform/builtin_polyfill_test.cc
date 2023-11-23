@@ -4063,6 +4063,101 @@ fn f() {
 }
 
 ////////////////////////////////////////////////////////////////////////////////
+// Built-in functions in packed_4x8_integer_dot_product
+////////////////////////////////////////////////////////////////////////////////
+DataMap polyfillPacked4x8IntegerDotProduct() {
+    BuiltinPolyfill::Builtins builtins;
+    builtins.dot_4x8_packed = true;
+    DataMap data;
+    data.Add<BuiltinPolyfill::Config>(builtins);
+    return data;
+}
+
+TEST_F(BuiltinPolyfillTest, Dot4I8Packed) {
+    auto* src = R"(
+enable chromium_experimental_dp4a;
+
+fn f() {
+  let v1 = 0x01020304u;
+  let v2 = 0xF1F2F3F4u;
+  _ = dot4I8Packed(v1, v2);
+}
+)";
+
+    auto* expect = R"(
+enable chromium_experimental_dp4a;
+
+fn tint_dot4_i8_packed(v1 : u32, v2 : u32) -> i32 {
+  let v10_bits = i32((v1 & 255u));
+  let v10 = select(v10_bits, (v10_bits - 256i), (v10_bits > 127i));
+  let v20_bits = i32((v2 & 255u));
+  let v20 = select(v20_bits, (v20_bits - 256i), (v20_bits > 127i));
+  let v11_bits = i32(((v1 & 65280u) >> 8u));
+  let v11 = select(v11_bits, (v11_bits - 256i), (v11_bits > 127i));
+  let v21_bits = i32(((v2 & 65280u) >> 8u));
+  let v21 = select(v21_bits, (v21_bits - 256i), (v21_bits > 127i));
+  let v12_bits = i32(((v1 & 16711680u) >> 16u));
+  let v12 = select(v12_bits, (v12_bits - 256i), (v12_bits > 127i));
+  let v22_bits = i32(((v2 & 16711680u) >> 16u));
+  let v22 = select(v22_bits, (v22_bits - 256i), (v22_bits > 127i));
+  let v13_bits = i32(((v1 & 4278190080u) >> 24u));
+  let v13 = select(v13_bits, (v13_bits - 256i), (v13_bits > 127i));
+  let v23_bits = i32(((v2 & 4278190080u) >> 24u));
+  let v23 = select(v23_bits, (v23_bits - 256i), (v23_bits > 127i));
+  return ((((v10 * v20) + (v11 * v21)) + (v12 * v22)) + (v13 * v23));
+}
+
+fn f() {
+  let v1 = 16909060u;
+  let v2 = 4059231220u;
+  _ = tint_dot4_i8_packed(v1, v2);
+}
+)";
+
+    auto got = Run<BuiltinPolyfill>(src, polyfillPacked4x8IntegerDotProduct());
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(BuiltinPolyfillTest, Dot4U8Packed) {
+    auto* src = R"(
+enable chromium_experimental_dp4a;
+
+fn f() {
+  let v1 = 0x01020304u;
+  let v2 = 0xF1F2F3F4u;
+  _ = dot4U8Packed(v1, v2);
+}
+)";
+
+    auto* expect = R"(
+enable chromium_experimental_dp4a;
+
+fn tint_dot4_u8_packed(v1 : u32, v2 : u32) -> u32 {
+  let v10 = (v1 & 255u);
+  let v20 = (v2 & 255u);
+  let v11 = ((v1 & 65280u) >> 8u);
+  let v21 = ((v2 & 65280u) >> 8u);
+  let v12 = ((v1 & 16711680u) >> 16u);
+  let v22 = ((v2 & 16711680u) >> 16u);
+  let v13 = ((v1 & 4278190080u) >> 24u);
+  let v23 = ((v2 & 4278190080u) >> 24u);
+  return ((((v10 * v20) + (v11 * v21)) + (v12 * v22)) + (v13 * v23));
+}
+
+fn f() {
+  let v1 = 16909060u;
+  let v2 = 4059231220u;
+  _ = tint_dot4_u8_packed(v1, v2);
+}
+)";
+
+    auto got = Run<BuiltinPolyfill>(src, polyfillPacked4x8IntegerDotProduct());
+
+    EXPECT_EQ(expect, str(got));
+}
+
+////////////////////////////////////////////////////////////////////////////////
 // Polyfill combinations
 ////////////////////////////////////////////////////////////////////////////////
 
