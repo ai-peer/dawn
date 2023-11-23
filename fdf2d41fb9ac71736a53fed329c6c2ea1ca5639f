@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec6d28b8_7aed30ed",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 12
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-23T09:39:58Z",
+      "side": 1,
+      "message": "Done, change to \n```\ntemplate\u003c\u003e\nvoid stream::Stream\u003cstruct dawn::native::FullSubgroupsValidationInfo, void\u003e::Write {\n    ...\n}\n```",
+      "parentUuid": "1ae5cb5c_737b8d75",
+      "revId": "fdf2d41fb9ac71736a53fed329c6c2ea1ca5639f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5f5ac9bf_73517500",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-11-22T18:51:17Z",
       "side": 1,
       "message": "DeviceNull supports all extensions so I think we should implement this.",
+      "revId": "fdf2d41fb9ac71736a53fed329c6c2ea1ca5639f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5f1acb17_2caf1e69",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-23T09:39:58Z",
+      "side": 1,
+      "message": "Done, but this validation is now backend-related.",
+      "parentUuid": "5f5ac9bf_73517500",
       "revId": "fdf2d41fb9ac71736a53fed329c6c2ea1ca5639f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
