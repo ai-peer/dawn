@@ -297,6 +297,24 @@
       "message": "nit: defaulted for a stage maybe? We\u0027d need to put the stage in the ShaderModuleEntryPoint too.",
       "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "51cfac0f_db9ea87b",
+        "filename": "src/dawn/native/webgpu_absl_format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-23T09:54:38Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2b3341d7_0413290f",
+      "revId": "cbd3b857ab22493c65bd642bc09a1d14fa8a10d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

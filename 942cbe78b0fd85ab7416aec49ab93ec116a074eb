@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c411aee_d7e2acae",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-23T09:54:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a1d7087c_c413fde0",
+      "range": {
+        "startLine": 76,
+        "startChar": 48,
+        "endLine": 76,
+        "endChar": 75
+      },
+      "revId": "942cbe78b0fd85ab7416aec49ab93ec116a074eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a091f822_dd961cc8",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8dd579d_1bcbaa3a",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 1362,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-23T09:54:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a091f822_dd961cc8",
+      "revId": "942cbe78b0fd85ab7416aec49ab93ec116a074eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b77aedbf_197a1454",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-11-23T09:37:24Z",
       "side": 1,
       "message": "nit: not needed.",
+      "range": {
+        "startLine": 311,
+        "startChar": 4,
+        "endLine": 311,
+        "endChar": 9
+      },
+      "revId": "942cbe78b0fd85ab7416aec49ab93ec116a074eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4191c4b2_6b1e1fdf",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 311,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2023-11-23T09:54:38Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b77aedbf_197a1454",
       "range": {
         "startLine": 311,
         "startChar": 4,
