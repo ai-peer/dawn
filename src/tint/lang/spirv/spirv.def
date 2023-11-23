@@ -288,6 +288,8 @@ fn image_write<C: iu32, D: iu32>(texture_storage_3d<f32_texel_format, writable>,
 fn image_write<C: iu32, D: iu32>(texture_storage_3d<i32_texel_format, writable>, vec3<C>, vec4<i32>, D)
 fn image_write<C: iu32, D: iu32>(texture_storage_3d<u32_texel_format, writable>, vec3<C>, vec4<u32>, D)
 
+fn logical_not(bool) -> bool
+
 fn matrix_times_matrix<T: f32_f16, K: num, C: num, R: num>(mat<K, R, T>, mat<C, K, T>) -> mat<C, R, T>
 fn matrix_times_scalar<T: f32_f16, N: num, M: num>(mat<N, M, T>, T) -> mat<N, M, T>
 fn matrix_times_vector<T: f32_f16, N: num, M: num>(mat<N, M, T>, vec<N, T>) -> vec<M, T>

@@ -49,6 +49,8 @@ tint_add_target(tint_lang_spirv_writer_raise lib
   lang/spirv/writer/raise/handle_matrix_arithmetic.h
   lang/spirv/writer/raise/merge_return.cc
   lang/spirv/writer/raise/merge_return.h
+  lang/spirv/writer/raise/negate_branch_conditions.cc
+  lang/spirv/writer/raise/negate_branch_conditions.h
   lang/spirv/writer/raise/pass_matrix_by_pointer.cc
   lang/spirv/writer/raise/pass_matrix_by_pointer.h
   lang/spirv/writer/raise/raise.cc
@@ -111,6 +113,7 @@ tint_add_target(tint_lang_spirv_writer_raise_test test
   lang/spirv/writer/raise/expand_implicit_splats_test.cc
   lang/spirv/writer/raise/handle_matrix_arithmetic_test.cc
   lang/spirv/writer/raise/merge_return_test.cc
+  lang/spirv/writer/raise/negate_branch_conditions_test.cc
   lang/spirv/writer/raise/pass_matrix_by_pointer_test.cc
   lang/spirv/writer/raise/shader_io_test.cc
   lang/spirv/writer/raise/var_for_dynamic_index_test.cc

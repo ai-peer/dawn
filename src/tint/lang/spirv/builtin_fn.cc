@@ -94,6 +94,8 @@ const char* str(BuiltinFn i) {
             return "image_sample_dref_explicit_lod";
         case BuiltinFn::kImageWrite:
             return "image_write";
+        case BuiltinFn::kLogicalNot:
+            return "logical_not";
         case BuiltinFn::kMatrixTimesMatrix:
             return "matrix_times_matrix";
         case BuiltinFn::kMatrixTimesScalar:

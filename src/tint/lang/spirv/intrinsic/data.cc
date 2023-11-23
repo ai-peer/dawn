@@ -5395,6 +5395,19 @@ constexpr OverloadInfo kOverloads[] = {
   {
     /* [154] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
+    /* num_parameters */ 1,
+    /* num_template_types */ 0,
+    /* num_template_numbers */ 0,
+    /* template_types */ TemplateTypeIndex(/* invalid */),
+    /* template_numbers */ TemplateNumberIndex(/* invalid */),
+    /* parameters */ ParameterIndex(275),
+    /* return_type_matcher_indices */ TypeMatcherIndicesIndex(70),
+    /* return_number_matcher_indices */ NumberMatcherIndicesIndex(/* invalid */),
+    /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
+  },
+  {
+    /* [155] */
+    /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
     /* num_template_types */ 1,
     /* num_template_numbers */ 3,
@@ -5406,7 +5419,7 @@ constexpr OverloadInfo kOverloads[] = {
     /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
   },
   {
-    /* [155] */
+    /* [156] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
     /* num_template_types */ 1,
@@ -5419,7 +5432,7 @@ constexpr OverloadInfo kOverloads[] = {
     /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
   },
   {
-    /* [156] */
+    /* [157] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
     /* num_template_types */ 1,
@@ -5432,7 +5445,7 @@ constexpr OverloadInfo kOverloads[] = {
     /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
   },
   {
-    /* [157] */
+    /* [158] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
     /* num_template_types */ 1,
@@ -5445,7 +5458,7 @@ constexpr OverloadInfo kOverloads[] = {
     /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
   },
   {
-    /* [158] */
+    /* [159] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 2,
     /* num_template_types */ 1,
@@ -5458,7 +5471,7 @@ constexpr OverloadInfo kOverloads[] = {
     /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
   },
   {
-    /* [159] */
+    /* [160] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
     /* num_template_types */ 0,
@@ -5471,7 +5484,7 @@ constexpr OverloadInfo kOverloads[] = {
     /* const_eval_fn */ ConstEvalFunctionIndex(/* invalid */),
   },
   {
-    /* [160] */
+    /* [161] */
     /* flags */ OverloadFlags(OverloadFlag::kIsBuiltin, OverloadFlag::kSupportsVertexPipeline, OverloadFlag::kSupportsFragmentPipeline, OverloadFlag::kSupportsComputePipeline),
     /* num_parameters */ 3,
     /* num_template_types */ 0,
@@ -5772,24 +5785,30 @@ constexpr IntrinsicInfo kBuiltins[] = {
   },
   {
     /* [26] */
-    /* fn matrix_times_matrix<T : f32_f16, K : num, C : num, R : num>(mat<K, R, T>, mat<C, K, T>) -> mat<C, R, T> */
+    /* fn logical_not(bool) -> bool */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(154),
   },
   {
     /* [27] */
-    /* fn matrix_times_scalar<T : f32_f16, N : num, M : num>(mat<N, M, T>, T) -> mat<N, M, T> */
+    /* fn matrix_times_matrix<T : f32_f16, K : num, C : num, R : num>(mat<K, R, T>, mat<C, K, T>) -> mat<C, R, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(155),
   },
   {
     /* [28] */
-    /* fn matrix_times_vector<T : f32_f16, N : num, M : num>(mat<N, M, T>, vec<N, T>) -> vec<M, T> */
+    /* fn matrix_times_scalar<T : f32_f16, N : num, M : num>(mat<N, M, T>, T) -> mat<N, M, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(156),
   },
   {
     /* [29] */
+    /* fn matrix_times_vector<T : f32_f16, N : num, M : num>(mat<N, M, T>, vec<N, T>) -> vec<M, T> */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(157),
+  },
+  {
+    /* [30] */
     /* fn sampled_image<T : fiu32, S : samplers>(texture_1d<T>, S) -> sampled_image<texture_1d<T>> */
     /* fn sampled_image<T : fiu32, S : samplers>(texture_2d<T>, S) -> sampled_image<texture_2d<T>> */
     /* fn sampled_image<T : fiu32, S : samplers>(texture_2d_array<T>, S) -> sampled_image<texture_2d_array<T>> */
@@ -5804,35 +5823,35 @@ constexpr IntrinsicInfo kBuiltins[] = {
     /* overloads */ OverloadIndex(110),
   },
   {
-    /* [30] */
+    /* [31] */
     /* fn select<T : scalar>(bool, T, T) -> T */
     /* fn select<N : num, T : scalar>(vec<N, bool>, vec<N, T>, vec<N, T>) -> vec<N, T> */
     /* num overloads */ 2,
     /* overloads */ OverloadIndex(146),
   },
   {
-    /* [31] */
-    /* fn vector_times_matrix<T : f32_f16, N : num, M : num>(vec<N, T>, mat<M, N, T>) -> vec<M, T> */
-    /* num overloads */ 1,
-    /* overloads */ OverloadIndex(157),
-  },
-  {
     /* [32] */
-    /* fn vector_times_scalar<T : f32_f16, N : num>(vec<N, T>, T) -> vec<N, T> */
+    /* fn vector_times_matrix<T : f32_f16, N : num, M : num>(vec<N, T>, mat<M, N, T>) -> vec<M, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(158),
   },
   {
     /* [33] */
-    /* fn sdot(u32, u32, u32) -> i32 */
+    /* fn vector_times_scalar<T : f32_f16, N : num>(vec<N, T>, T) -> vec<N, T> */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(159),
   },
   {
     /* [34] */
-    /* fn udot(u32, u32, u32) -> u32 */
+    /* fn sdot(u32, u32, u32) -> i32 */
     /* num overloads */ 1,
     /* overloads */ OverloadIndex(160),
+  },
+  {
+    /* [35] */
+    /* fn udot(u32, u32, u32) -> u32 */
+    /* num overloads */ 1,
+    /* overloads */ OverloadIndex(161),
   },
 };
 

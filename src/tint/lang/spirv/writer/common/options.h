@@ -138,6 +138,9 @@ struct Options {
     /// Set to `true` to always pass matrices to user functions by pointer instead of by value.
     bool pass_matrix_by_pointer = false;
 
+    /// Set to `true` to negate all condition values used for branches.
+    bool negate_branch_conditions = false;
+
     /// Set to `true` to require `SPV_KHR_subgroup_uniform_control_flow` extension and
     /// `SubgroupUniformControlFlowKHR` execution mode for compute stage entry points in generated
     /// SPIRV module. Issue: dawn:464

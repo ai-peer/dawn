@@ -50,6 +50,7 @@
 #include "src/tint/lang/spirv/writer/raise/expand_implicit_splats.h"
 #include "src/tint/lang/spirv/writer/raise/handle_matrix_arithmetic.h"
 #include "src/tint/lang/spirv/writer/raise/merge_return.h"
+#include "src/tint/lang/spirv/writer/raise/negate_branch_conditions.h"
 #include "src/tint/lang/spirv/writer/raise/pass_matrix_by_pointer.h"
 #include "src/tint/lang/spirv/writer/raise/shader_io.h"
 #include "src/tint/lang/spirv/writer/raise/var_for_dynamic_index.h"
@@ -135,6 +136,10 @@ Result<SuccessType> Raise(core::ir::Module& module, const Options& options) {
 
     // DemoteToHelper must come before any transform that introduces non-core instructions.
     RUN_TRANSFORM(core::ir::transform::DemoteToHelper, module);
+
+    if (options.negate_branch_conditions) {
+        RUN_TRANSFORM(NegateBranchConditions, module);
+    }
 
     RUN_TRANSFORM(BuiltinPolyfill, module);
     RUN_TRANSFORM(ExpandImplicitSplats, module);
