@@ -109,6 +109,9 @@ status "Fetching dependencies"
 cp scripts/standalone-with-node.gclient .gclient
 with_retry gclient sync
 
+status "Adding the Ninja from DEPS to the PATH"
+export PATH=${SRC_DIR}/third_party/ninja:${PATH}
+
 status "Linting"
 ./tools/lint
 
@@ -132,6 +135,7 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
     using cmake-3.17.2
 
     COMMON_CMAKE_FLAGS=""
+    COMMON_CMAKE_FLAGS+=" -GNinja"
     COMMON_CMAKE_FLAGS+=" -DCMAKE_BUILD_TYPE=${BUILD_TYPE}"
     COMMON_CMAKE_FLAGS+=" -DTINT_DOCS_WARN_AS_ERROR=1"
     COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_BENCHMARKS=1"
@@ -182,13 +186,13 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
     status "Building dawn in '${BUILD_DIR}'"
     show_cmds
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS}
-        cmake --build . -- --jobs=$(nproc)
+        cmake --build .
     hide_cmds
 
     status "Re-building dawn in '${BUILD_DIR}' with dawn/node enabled"
     show_cmds
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} -DDAWN_BUILD_NODE_BINDINGS=1 -DDAWN_ENABLE_PIC=1 -DDAWN_USE_X11=OFF
-        cmake --build . -- --jobs=$(nproc)
+        cmake --build .
     hide_cmds
 
     status "Running tint_unittests"
@@ -223,7 +227,7 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
     status "Checking _other.cc files also build"
     show_cmds
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} -DTINT_BUILD_AS_OTHER_OS=ON
-        cmake --build . -- --jobs=$(nproc)
+        cmake --build .
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} -DTINT_BUILD_AS_OTHER_OS=OFF
     hide_cmds
 
@@ -239,7 +243,7 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
             -DTINT_BUILD_GLSL_WRITER=OFF \
             -DTINT_BUILD_GLSL_VALIDATOR=OFF \
             -DTINT_BUILD_BENCHMARKS=OFF
-        cmake --build . -- tint --jobs=$(nproc)
+        cmake --build . --target tint
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} \
             -DTINT_BUILD_SPV_READER=ON \
             -DTINT_BUILD_SPV_WRITER=ON \
