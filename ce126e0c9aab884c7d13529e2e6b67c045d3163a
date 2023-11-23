@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f7ffa0b_95668a17",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T10:12:15Z",
+      "side": 1,
+      "message": "Thanks! +Corentin for input as Austin is now OOO",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "195cc51e_50cc693d",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "you\u0027re correct that both UseInRenderPass and UseInCopy aren\u0027t written to actually support multiplanar formats. It could be done by passing in a TextureAspect through to the view created for the render pass, or the ImageCopyTexture source.\n\nI think it\u0027s probably fine to skip and not add that kind of support because we do / should have other tests that test copying/rendering to a specific texture aspect.\nand we probably have sufficient coverage for the intent of this test from single-planar formats.",
       "parentUuid": "195cc51e_50cc693d",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb42e5d2_02dd74e3",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 734,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T10:12:15Z",
+      "side": 1,
+      "message": "Thanks! I dug further into the crash post-relaxing [1], as it occurs in other tests as well. The issue turns out to be that the IOSurface created by the tests for at least one multiplanar format has 0 planes, so accessing plane 0 causes a crash. A number of tests hit this now since multiplanar formats are now renderable. I can change all those tests to run only for single-planar formats, but I have a couple questions before doing that:\n\n* Is it expected that the IOSurfaces that the test creates for multiplanar formats have 0 planes (I assume that this is some kind of failure mode of CreateIOSurface())? e.g., is this comment [2] related?\n* Is it surprising that the only point that this results in a failure at is when actually trying to create a TextureView from the Texture? Naively, I would expect that we would have hit a failure when actually creating the IOSurface and/or creating SharedTextureMemory from it and/or creating the Texture from the SharedTextureMemory, as this seems like an error case?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/TextureMTL.mm;l\u003d1012-1014?q\u003dTextureMTL.mm\u0026ss\u003dchromium\n[2] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/SharedTextureMemoryTests_apple.mm;l\u003d96-98?q\u003dSharedTextureMemoryTests_app\u0026ss\u003dchromium",
+      "parentUuid": "a5cfd3ff_80ef943f",
       "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
