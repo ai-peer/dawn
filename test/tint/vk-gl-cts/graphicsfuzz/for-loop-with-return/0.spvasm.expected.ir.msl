@@ -1,6 +1,51 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Loop
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%mand_ = func():vec3<f32> -> %b2 {
+  %b2 = block {
+    loop [b: %b3, c: %b4] {  # loop_1
+      %b3 = block {  # body
+        ret vec3<f32>(1.0f)
+      }
+      %b4 = block {  # continuing
+        next_iteration %b3
+      }
+    }
+    unreachable
+  }
+}
+%main_1 = func():void -> %b5 {
+  %b5 = block {
+    %x_17:vec3<f32> = call %mand_
+    loop [b: %b6, c: %b7] {  # loop_2
+      %b6 = block {  # body
+        store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+        ret
+      }
+      %b7 = block {  # continuing
+        next_iteration %b6
+      }
+    }
+    unreachable
+  }
+}
+%tint_symbol = @fragment func():main_out -> %b8 {
+  %b8 = block {
+    %6:void = call %main_1
+    %7:vec4<f32> = load %x_GLF_color
+    %8:main_out = construct %7
+    ret %8
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

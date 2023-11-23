@@ -1,6 +1,177 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Store
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %x_36:ptr<function, bool, read_write> = var, false
+    %x_37:ptr<function, vec3<f32>, read_write> = var
+    %x_6:ptr<function, i32, read_write> = var
+    %x_38:ptr<function, vec3<f32>, read_write> = var
+    %x_51:ptr<function, vec3<f32>, read_write> = var
+    %x_54:ptr<function, vec3<f32>, read_write> = var
+    %x_40_phi:ptr<function, bool, read_write> = var
+    %x_55_phi:ptr<function, vec3<f32>, read_write> = var
+    store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+    store %x_36, false
+    store %x_40_phi, false
+    loop [b: %b3, c: %b4] {  # loop_1
+      %b3 = block {  # body
+        %x_45:ptr<function, bool, read_write> = var
+        %x_45_phi:ptr<function, bool, read_write> = var
+        %x_7_phi:ptr<function, i32, read_write> = var
+        %x_51_phi:ptr<function, vec3<f32>, read_write> = var
+        %x_52_phi:ptr<function, bool, read_write> = var
+        %x_40:bool = load %x_40_phi
+        store %x_6, 0i
+        store %x_45_phi, %x_40
+        store %x_7_phi, 0i
+        loop [b: %b5, c: %b6] {  # loop_2
+          %b5 = block {  # body
+            %17:bool = load %x_45_phi
+            store %x_45, %17
+            %x_7:i32 = load %x_7_phi
+            store %x_51_phi, vec3<f32>(0.0f)
+            %19:bool = load %x_45
+            store %x_52_phi, %19
+            %20:bool = lt %x_7, 0i
+            if %20 [t: %b7, f: %b8] {  # if_1
+              %b7 = block {  # true
+                exit_if  # if_1
+              }
+              %b8 = block {  # false
+                exit_loop  # loop_2
+              }
+            }
+            store %x_36, true
+            store %x_37, vec3<f32>(1.0f)
+            store %x_51_phi, vec3<f32>(1.0f)
+            store %x_52_phi, true
+            exit_loop  # loop_2
+          }
+          %b6 = block {  # continuing
+            store %x_45_phi, false
+            store %x_7_phi, 0i
+            next_iteration %b5
+          }
+        }
+        %21:vec3<f32> = load %x_51_phi
+        store %x_51, %21
+        %x_52:bool = load %x_52_phi
+        %23:vec3<f32> = load %x_51
+        store %x_55_phi, %23
+        if %x_52 [t: %b9] {  # if_2
+          %b9 = block {  # true
+            exit_loop  # loop_1
+          }
+        }
+        store %x_54, vec3<f32>(0.0f)
+        store %x_36, true
+        %24:vec3<f32> = load %x_54
+        store %x_55_phi, %24
+        exit_loop  # loop_1
+      }
+      %b4 = block {  # continuing
+        store %x_40_phi, false
+        next_iteration %b3
+      }
+    }
+    %x_55:vec3<f32> = load %x_55_phi
+    store %x_38, %x_55
+    ret
+  }
+}
+%tint_symbol = @fragment func():main_out -> %b10 {
+  %b10 = block {
+    %27:void = call %main_1
+    %28:vec4<f32> = load %x_GLF_color
+    %29:main_out = construct %28
+    ret %29
+  }
+}
+%GLF_live4drawShape_ = func():vec3<f32> -> %b11 {
+  %b11 = block {
+    %x_57:ptr<function, bool, read_write> = var, false
+    %x_58:ptr<function, vec3<f32>, read_write> = var
+    %i:ptr<function, i32, read_write> = var
+    %x_71:ptr<function, vec3<f32>, read_write> = var
+    %x_74:ptr<function, vec3<f32>, read_write> = var
+    %x_60_phi:ptr<function, bool, read_write> = var
+    %x_75_phi:ptr<function, vec3<f32>, read_write> = var
+    store %x_60_phi, false
+    loop [b: %b12, c: %b13] {  # loop_3
+      %b12 = block {  # body
+        %x_65:ptr<function, bool, read_write> = var
+        %x_65_phi:ptr<function, bool, read_write> = var
+        %x_8_phi:ptr<function, i32, read_write> = var
+        %x_71_phi:ptr<function, vec3<f32>, read_write> = var
+        %x_72_phi:ptr<function, bool, read_write> = var
+        %x_60:bool = load %x_60_phi
+        store %i, 0i
+        store %x_65_phi, %x_60
+        store %x_8_phi, 0i
+        loop [b: %b14, c: %b15] {  # loop_4
+          %b14 = block {  # body
+            %44:bool = load %x_65_phi
+            store %x_65, %44
+            %x_8:i32 = load %x_8_phi
+            store %x_71_phi, vec3<f32>(0.0f)
+            %46:bool = load %x_65
+            store %x_72_phi, %46
+            %47:bool = lt %x_8, 0i
+            if %47 [t: %b16, f: %b17] {  # if_3
+              %b16 = block {  # true
+                exit_if  # if_3
+              }
+              %b17 = block {  # false
+                exit_loop  # loop_4
+              }
+            }
+            store %x_57, true
+            store %x_58, vec3<f32>(1.0f)
+            store %x_71_phi, vec3<f32>(1.0f)
+            store %x_72_phi, true
+            exit_loop  # loop_4
+          }
+          %b15 = block {  # continuing
+            store %x_65_phi, false
+            store %x_8_phi, 0i
+            next_iteration %b14
+          }
+        }
+        %48:vec3<f32> = load %x_71_phi
+        store %x_71, %48
+        %x_72:bool = load %x_72_phi
+        %50:vec3<f32> = load %x_71
+        store %x_75_phi, %50
+        if %x_72 [t: %b18] {  # if_4
+          %b18 = block {  # true
+            exit_loop  # loop_3
+          }
+        }
+        store %x_74, vec3<f32>(0.0f)
+        store %x_57, true
+        %51:vec3<f32> = load %x_74
+        store %x_75_phi, %51
+        exit_loop  # loop_3
+      }
+      %b13 = block {  # continuing
+        store %x_60_phi, false
+        next_iteration %b12
+      }
+    }
+    %x_75:vec3<f32> = load %x_75_phi
+    ret %x_75
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

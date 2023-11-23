@@ -6,5 +6,15 @@ using namespace metal;
 texture2d_array<float, access::sample> t_f;
 texture2d_array<int, access::sample> t_i;
 texture2d_array<uint, access::sample> t_u;
-void tint_symbol() {
+kernel void tint_symbol() {
 }
+program_source:4:40: error: program scope variable must reside in constant address space
+texture2d_array<float, access::sample> t_f;
+                                       ^
+program_source:5:38: error: program scope variable must reside in constant address space
+texture2d_array<int, access::sample> t_i;
+                                     ^
+program_source:6:39: error: program scope variable must reside in constant address space
+texture2d_array<uint, access::sample> t_u;
+                                      ^
+

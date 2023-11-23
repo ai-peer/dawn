@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: Tables = struct @align(4) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: Tables = struct @align(4) {
   edges:array<u32, 256> @offset(0)
   tris:array<i32, 4096> @offset(1024)
 }

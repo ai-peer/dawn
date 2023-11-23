@@ -5,5 +5,14 @@ using namespace metal;
 
 sampler s;
 sampler sc;
-void tint_symbol() {
+kernel void tint_symbol() {
 }
+program_source:4:1: error: constant sampler must be declared constexpr
+sampler s;
+^
+constexpr 
+program_source:5:1: error: constant sampler must be declared constexpr
+sampler sc;
+^
+constexpr 
+

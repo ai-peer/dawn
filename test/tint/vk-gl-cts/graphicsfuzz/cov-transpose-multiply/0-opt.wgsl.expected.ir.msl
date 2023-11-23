@@ -1,6 +1,58 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Store
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %m:ptr<function, mat2x2<f32>, read_write> = var
+    store %m, mat2x2<f32>(vec2<f32>(1.0f, 2.0f), vec2<f32>(3.0f, 4.0f))
+    %x_26:mat2x2<f32> = load %m
+    %x_28:mat2x2<f32> = load %m
+    %6:mat2x2<f32> = transpose %x_26
+    %7:mat2x2<f32> = transpose %x_28
+    %x_30:mat2x2<f32> = mul %6, %7
+    %x_31:mat2x2<f32> = load %m
+    %x_32:mat2x2<f32> = load %m
+    %11:mat2x2<f32> = mul %x_31, %x_32
+    %x_34:mat2x2<f32> = transpose %11
+    %13:vec2<f32> = access %x_30, 0u
+    %14:vec2<f32> = access %x_34, 0u
+    %15:vec2<bool> = eq %13, %14
+    %16:bool = all %15
+    %17:vec2<f32> = access %x_30, 1u
+    %18:vec2<f32> = access %x_34, 1u
+    %19:vec2<bool> = eq %17, %18
+    %20:bool = all %19
+    %21:bool = and %16, %20
+    if %21 [t: %b3, f: %b4] {  # if_1
+      %b3 = block {  # true
+        store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+        exit_if  # if_1
+      }
+      %b4 = block {  # false
+        store %x_GLF_color, vec4<f32>(0.0f)
+        exit_if  # if_1
+      }
+    }
+    ret
+  }
+}
+%tint_symbol = @fragment func():main_out -> %b5 {
+  %b5 = block {
+    %23:void = call %main_1
+    %24:vec4<f32> = load %x_GLF_color
+    %25:main_out = construct %24
+    ret %25
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

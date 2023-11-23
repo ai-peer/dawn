@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: struct_base = struct @align(4) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: struct_base = struct @align(4) {
   data:i32 @offset(0)
   leftIndex:i32 @offset(4)
   rightIndex:i32 @offset(8)

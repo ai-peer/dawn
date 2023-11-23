@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: buf1 = struct @align(8) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: buf1 = struct @align(8) {
   injectionSwitch:vec2<f32> @offset(0)
 }
 

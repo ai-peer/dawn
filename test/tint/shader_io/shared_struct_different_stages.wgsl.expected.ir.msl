@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:775 internal compiler error: Interface = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: Interface = struct @align(16) {
   col1:f32 @offset(0), @location(1)
   col2:f32 @offset(4), @location(2)
   pos:vec4<f32> @offset(16), @builtin(position)

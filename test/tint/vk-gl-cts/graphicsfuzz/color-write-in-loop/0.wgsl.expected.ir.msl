@@ -1,6 +1,125 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Loop
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: S = struct @align(16) {
+  f0:i32 @offset(0)
+  f1:mat4x3<f32> @offset(16)
+}
+
+main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %gl_FragCoord:ptr<private, vec4<f32>, read_write> = var
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %x_51:ptr<function, i32, read_write> = var
+    %x_12_phi:ptr<function, i32, read_write> = var
+    loop [b: %b3, c: %b4] {  # loop_1
+      %b3 = block {  # body
+        %x_45:ptr<function, S, read_write> = var
+        %x_45_phi:ptr<function, S, read_write> = var
+        %x_11_phi:ptr<function, i32, read_write> = var
+        store %x_45_phi, S(0i, mat4x3<f32>(vec3<f32>(1.0f, 0.0f, 0.0f), vec3<f32>(0.0f, 1.0f, 0.0f), vec3<f32>(0.0f, 0.0f, 1.0f), vec3<f32>(0.0f)))
+        store %x_11_phi, 0i
+        loop [b: %b5, c: %b6] {  # loop_2
+          %b5 = block {  # body
+            %x_46:ptr<function, S, read_write> = var
+            %x_9:ptr<function, i32, read_write> = var
+            %11:S = load %x_45_phi
+            store %x_45, %11
+            %x_11:i32 = load %x_11_phi
+            %x_49:f32 = load_vector_element %gl_FragCoord, 0u
+            %14:bool = eq %x_49, 0.0f
+            %15:i32 = select 2i, 1i, %14
+            store %x_51, %15
+            %16:i32 = load %x_51
+            %17:bool = lt %x_11, %16
+            if %17 [t: %b7, f: %b8] {  # if_1
+              %b7 = block {  # true
+                exit_if  # if_1
+              }
+              %b8 = block {  # false
+                exit_loop  # loop_2
+              }
+            }
+            continue %b6
+          }
+          %b6 = block {  # continuing
+            store %x_GLF_color, vec4<f32>(1.0f)
+            %18:S = load %x_45
+            store %x_46, %18
+            %19:ptr<function, i32, read_write> = access %x_46, 0u
+            %20:ptr<function, i32, read_write> = access %x_45, 0u
+            %21:i32 = load %20
+            %22:i32 = add %21, 1i
+            store %19, %22
+            %23:i32 = add %x_11, 1i
+            store %x_9, %23
+            %24:S = load %x_46
+            store %x_45_phi, %24
+            %25:i32 = load %x_9
+            store %x_11_phi, %25
+            next_iteration %b5
+          }
+        }
+        %26:ptr<function, i32, read_write> = access %x_45, 0u
+        %27:i32 = load %26
+        %28:bool = lt %27, 1000i
+        if %28 [t: %b9] {  # if_2
+          %b9 = block {  # true
+            exit_loop  # loop_1
+          }
+        }
+        exit_loop  # loop_1
+      }
+      %b4 = block {  # continuing
+        next_iteration %b3
+      }
+    }
+    store %x_12_phi, 0i
+    loop [b: %b10, c: %b11] {  # loop_3
+      %b10 = block {  # body
+        %x_6:ptr<function, i32, read_write> = var
+        %x_12:i32 = load %x_12_phi
+        %31:i32 = load %x_51
+        %32:bool = lt %x_12, %31
+        if %32 [t: %b12, f: %b13] {  # if_3
+          %b12 = block {  # true
+            exit_if  # if_3
+          }
+          %b13 = block {  # false
+            exit_loop  # loop_3
+          }
+        }
+        continue %b11
+      }
+      %b11 = block {  # continuing
+        store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+        %33:i32 = add %x_12, 1i
+        store %x_6, %33
+        %34:i32 = load %x_6
+        store %x_12_phi, %34
+        next_iteration %b10
+      }
+    }
+    ret
+  }
+}
+%tint_symbol = @fragment func(%gl_FragCoord_param:vec4<f32> [@position]):main_out -> %b14 {
+  %b14 = block {
+    store %gl_FragCoord, %gl_FragCoord_param
+    %37:void = call %main_1
+    %38:vec4<f32> = load %x_GLF_color
+    %39:main_out = construct %38
+    ret %39
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

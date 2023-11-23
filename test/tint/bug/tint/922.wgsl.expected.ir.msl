@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: Mat4x4_ = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: Mat4x4_ = struct @align(16) {
   mx:vec4<f32> @offset(0)
   my:vec4<f32> @offset(16)
   mz:vec4<f32> @offset(32)

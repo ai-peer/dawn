@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: ComputeInputs = struct @align(4) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: ComputeInputs = struct @align(4) {
   subgroup_invocation_id:u32 @offset(0), @builtin(subgroup_invocation_id)
   subgroup_size:u32 @offset(4), @builtin(subgroup_size)
 }

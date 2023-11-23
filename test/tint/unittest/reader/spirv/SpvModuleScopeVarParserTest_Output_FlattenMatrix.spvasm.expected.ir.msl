@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:775 internal compiler error: main_out = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
   x_1_1:vec4<f32> @offset(0), @location(9)
   x_1_2:vec4<f32> @offset(16), @location(10)
   x_2_1:vec4<f32> @offset(32), @builtin(position)

@@ -1,6 +1,85 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Store
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%func_ = func():f32 -> %b2 {
+  %b2 = block {
+    %i:ptr<function, i32, read_write> = var
+    store %i, 0i
+    loop [b: %b3, c: %b4] {  # loop_1
+      %b3 = block {  # body
+        %x_35:i32 = load %i
+        %5:bool = lt %x_35, 10i
+        if %5 [t: %b5, f: %b6] {  # if_1
+          %b5 = block {  # true
+            exit_if  # if_1
+          }
+          %b6 = block {  # false
+            exit_loop  # loop_1
+          }
+        }
+        %x_38:i32 = load %i
+        %7:bool = gt %x_38, 5i
+        if %7 [t: %b7] {  # if_2
+          %b7 = block {  # true
+            %x_42:i32 = load %i
+            %9:i32 = add %x_42, 1i
+            store %i, %9
+            exit_if  # if_2
+          }
+        }
+        %x_44:i32 = load %i
+        %11:bool = gt %x_44, 8i
+        if %11 [t: %b8] {  # if_3
+          %b8 = block {  # true
+            ret 0.0f
+          }
+        }
+        continue %b4
+      }
+      %b4 = block {  # continuing
+        %x_48:i32 = load %i
+        %13:i32 = add %x_48, 1i
+        store %i, %13
+        next_iteration %b3
+      }
+    }
+    ret 1.0f
+  }
+}
+%main_1 = func():void -> %b9 {
+  %b9 = block {
+    if false [t: %b10, f: %b11] {  # if_4
+      %b10 = block {  # true
+        %x_28:f32 = call %func_
+        %16:vec4<f32> = construct %x_28, %x_28, %x_28, %x_28
+        store %x_GLF_color, %16
+        exit_if  # if_4
+      }
+      %b11 = block {  # false
+        store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+        exit_if  # if_4
+      }
+    }
+    ret
+  }
+}
+%tint_symbol = @fragment func():main_out -> %b12 {
+  %b12 = block {
+    %18:void = call %main_1
+    %19:vec4<f32> = load %x_GLF_color
+    %20:main_out = construct %19
+    ret %20
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

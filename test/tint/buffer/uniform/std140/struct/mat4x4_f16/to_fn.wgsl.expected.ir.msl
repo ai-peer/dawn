@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: S = struct @align(64) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: S = struct @align(64) {
   before:i32 @offset(0)
   m:mat4x4<f16> @offset(8)
   after:i32 @offset(64)

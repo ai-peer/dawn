@@ -4,5 +4,9 @@ SKIP: FAILED
 using namespace metal;
 
 depthcube_array<float, access::sample> t_f;
-void tint_symbol() {
+kernel void tint_symbol() {
 }
+program_source:4:40: error: program scope variable must reside in constant address space
+depthcube_array<float, access::sample> t_f;
+                                       ^
+

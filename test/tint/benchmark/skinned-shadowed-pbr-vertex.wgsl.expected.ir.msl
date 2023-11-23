@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: Camera = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: Camera = struct @align(16) {
   projection:mat4x4<f32> @offset(0)
   inverseProjection:mat4x4<f32> @offset(64)
   view:mat4x4<f32> @offset(128)

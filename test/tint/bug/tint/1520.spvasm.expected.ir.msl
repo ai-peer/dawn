@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: UniformBuffer = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: UniformBuffer = struct @align(16) {
   unknownInput_S1_c0:f32 @offset(16)
   ucolorRed_S1_c0:vec4<f32> @offset(32)
   ucolorGreen_S1_c0:vec4<f32> @offset(48)

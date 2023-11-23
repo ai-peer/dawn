@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: strided_arr = struct @align(4) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: strided_arr = struct @align(4) {
   el:f32 @offset(0)
 }
 
@@ -32,7 +32,7 @@ main_out = struct @align(16) {
     %6:ptr<uniform, f32, read> = access %x_6, 0u, 0i, 0u
     %x_33:f32 = load %6
     %8:vec4<f32> = construct %x_33, %x_33, %x_33, %x_33
-    %9:vec4<f32> = clamp vec4<f32>(1.54308056831359863281f), %8, vec4<f32>(1.0f)
+    %9:vec4<f32> = clamp vec4<f32>(1.54308068752288818359f), %8, vec4<f32>(1.0f)
     store %v, %9
     %x_38:f32 = load_vector_element %v, 0u
     %11:ptr<uniform, i32, read> = access %x_8, 0u, 0i, 0u

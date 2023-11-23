@@ -1,9 +1,12 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Access
-********************************************************************
-*  The tint shader compiler has encountered an unexpected error.   *
-*                                                                  *
-*  Please help us fix this issue by submitting a bug report at     *
-*  crbug.com/tint with the source program that triggered the bug.  *
-********************************************************************
+#include <metal_stdlib>
+using namespace metal;
+
+kernel void f(uint3 v) {
+  uint const l = (v[0u] << (v[1u] % 1u));
+}
+program_source:4:15: error: invalid type 'uint3' (vector of 3 'unsigned int' values) for input declaration in a kernel function
+kernel void f(uint3 v) {
+              ^~~~~~~
+

@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: Uniforms = struct @align(8) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: Uniforms = struct @align(8) {
   u_scale:vec2<f32> @offset(0)
   u_offset:vec2<f32> @offset(8)
 }

@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: Inner = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: Inner = struct @align(16) {
   scalar_f32:f32 @offset(0)
   scalar_i32:i32 @offset(4)
   scalar_u32:u32 @offset(8)

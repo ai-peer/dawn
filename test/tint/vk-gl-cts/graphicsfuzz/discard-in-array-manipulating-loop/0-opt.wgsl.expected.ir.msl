@@ -1,6 +1,72 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Store
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %gl_FragCoord:ptr<private, vec4<f32>, read_write> = var
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %data:ptr<function, array<f32, 10>, read_write> = var
+    %i:ptr<function, i32, read_write> = var
+    store %data, array<f32, 10>(0.10000000149011611938f, 0.20000000298023223877f, 0.30000001192092895508f, 0.40000000596046447754f, 0.5f, 0.60000002384185791016f, 0.69999998807907104492f, 0.80000001192092895508f, 0.89999997615814208984f, 1.0f)
+    store %i, 0i
+    loop [b: %b3, c: %b4] {  # loop_1
+      %b3 = block {  # body
+        %x_7:i32 = load %i
+        %7:bool = lt %x_7, 10i
+        if %7 [t: %b5, f: %b6] {  # if_1
+          %b5 = block {  # true
+            exit_if  # if_1
+          }
+          %b6 = block {  # false
+            exit_loop  # loop_1
+          }
+        }
+        %x_50:f32 = load_vector_element %gl_FragCoord, 0u
+        %9:bool = lt %x_50, 0.0f
+        if %9 [t: %b7] {  # if_2
+          %b7 = block {  # true
+            discard
+            exit_if  # if_2
+          }
+        }
+        %x_8:i32 = load %i
+        %11:ptr<function, f32, read_write> = access %data, %x_8
+        %x_55:f32 = load %11
+        %13:ptr<function, f32, read_write> = access %data, 0i
+        store %13, %x_55
+        continue %b4
+      }
+      %b4 = block {  # continuing
+        %x_9:i32 = load %i
+        %15:i32 = add %x_9, 1i
+        store %i, %15
+        next_iteration %b3
+      }
+    }
+    %16:ptr<function, f32, read_write> = access %data, 0i
+    %x_58:f32 = load %16
+    %18:vec4<f32> = construct %x_58, 0.0f, 0.0f, 1.0f
+    store %x_GLF_color, %18
+    ret
+  }
+}
+%tint_symbol = @fragment func(%gl_FragCoord_param:vec4<f32> [@position]):main_out -> %b8 {
+  %b8 = block {
+    store %gl_FragCoord, %gl_FragCoord_param
+    %21:void = call %main_1
+    %22:vec4<f32> = load %x_GLF_color
+    %23:main_out = construct %22
+    ret %23
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

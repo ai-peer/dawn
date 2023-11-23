@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: RenderParams = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: RenderParams = struct @align(16) {
   modelViewProjectionMatrix:mat4x4<f32> @offset(0)
   right:vec3<f32> @offset(64)
   up:vec3<f32> @offset(80)

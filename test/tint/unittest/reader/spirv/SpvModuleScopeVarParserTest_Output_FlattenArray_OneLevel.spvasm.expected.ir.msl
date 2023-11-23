@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:775 internal compiler error: main_out = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
   x_1_1:f32 @offset(0), @location(4)
   x_1_2:f32 @offset(4), @location(5)
   x_1_3:f32 @offset(8), @location(6)

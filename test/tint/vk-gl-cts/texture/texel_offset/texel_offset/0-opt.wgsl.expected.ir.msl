@@ -1,6 +1,38 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::LoadVectorElement
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  result_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %result:ptr<private, vec4<f32>, read_write> = var
+  %gl_FragCoord:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %x_19:f32 = load_vector_element %gl_FragCoord, 0u
+    %x_23:f32 = load_vector_element %gl_FragCoord, 1u
+    %6:f32 = floor %x_19
+    %7:f32 = div %6, 255.0f
+    %8:f32 = floor %x_23
+    %9:f32 = div %8, 255.0f
+    %10:vec4<f32> = construct %7, %9, 0.0f, 0.0f
+    store %result, %10
+    ret
+  }
+}
+%tint_symbol = @fragment func(%gl_FragCoord_param:vec4<f32> [@position]):main_out -> %b3 {
+  %b3 = block {
+    store %gl_FragCoord, %gl_FragCoord_param
+    %13:void = call %main_1
+    %14:vec4<f32> = load %result
+    %15:main_out = construct %14
+    ret %15
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

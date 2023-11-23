@@ -16,6 +16,13 @@ struct tint_array {
 
 
 threadgroup tint_array<tint_array<int, 3>, 2> zero;
-void tint_symbol() {
+kernel void tint_symbol() {
   tint_array<tint_array<int, 3>, 2> v = zero;
 }
+program_source:16:47: error: program scope variable must reside in constant address space
+threadgroup tint_array<tint_array<int, 3>, 2> zero;
+                                              ^
+program_source:18:37: warning: unused variable 'v' [-Wunused-variable]
+  tint_array<tint_array<int, 3>, 2> v = zero;
+                                    ^
+

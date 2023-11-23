@@ -1,9 +1,30 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:270 internal compiler error: Switch() matched no cases. Type: tint::core::ir::FunctionParam
-********************************************************************
-*  The tint shader compiler has encountered an unexpected error.   *
-*                                                                  *
-*  Please help us fix this issue by submitting a bug report at     *
-*  crbug.com/tint with the source program that triggered the bug.  *
-********************************************************************
+#include <metal_stdlib>
+using namespace metal;
+
+fragment void tint_symbol(float4 position, bool front_facing, uint sample_index, uint sample_mask) {
+  if (front_facing) {
+    float4 const foo = position;
+    uint const bar = (sample_index + sample_mask);
+  }
+}
+program_source:4:27: error: invalid type 'float4' (vector of 4 'float' values) for input declaration in a fragment function
+fragment void tint_symbol(float4 position, bool front_facing, uint sample_index, uint sample_mask) {
+                          ^~~~~~~~~~~~~~~
+program_source:4:44: error: invalid type 'bool' for input declaration in a fragment function
+fragment void tint_symbol(float4 position, bool front_facing, uint sample_index, uint sample_mask) {
+                                           ^~~~~~~~~~~~~~~~~
+program_source:4:63: error: invalid type 'uint' (aka 'unsigned int') for input declaration in a fragment function
+fragment void tint_symbol(float4 position, bool front_facing, uint sample_index, uint sample_mask) {
+                                                              ^~~~~~~~~~~~~~~~~
+program_source:4:82: error: invalid type 'uint' (aka 'unsigned int') for input declaration in a fragment function
+fragment void tint_symbol(float4 position, bool front_facing, uint sample_index, uint sample_mask) {
+                                                                                 ^~~~~~~~~~~~~~~~
+program_source:6:18: warning: unused variable 'foo' [-Wunused-variable]
+    float4 const foo = position;
+                 ^
+program_source:7:16: warning: unused variable 'bar' [-Wunused-variable]
+    uint const bar = (sample_index + sample_mask);
+               ^
+

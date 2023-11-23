@@ -1,6 +1,1054 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Store
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %x_GLF_global_loop_count:ptr<private, i32, read_write> = var
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %m23:ptr<function, mat2x3<f32>, read_write> = var
+    %m24:ptr<function, mat2x4<f32>, read_write> = var
+    %m32:ptr<function, mat3x2<f32>, read_write> = var
+    %m33:ptr<function, mat3x3<f32>, read_write> = var
+    %m34:ptr<function, mat3x4<f32>, read_write> = var
+    %m42:ptr<function, mat4x2<f32>, read_write> = var
+    %m43:ptr<function, mat4x3<f32>, read_write> = var
+    %m44:ptr<function, mat4x4<f32>, read_write> = var
+    %i:ptr<function, i32, read_write> = var
+    %i_1:ptr<function, i32, read_write> = var
+    %i_2:ptr<function, i32, read_write> = var
+    %i_3:ptr<function, i32, read_write> = var
+    %i_4:ptr<function, i32, read_write> = var
+    %i_5:ptr<function, i32, read_write> = var
+    %i_6:ptr<function, i32, read_write> = var
+    %i_7:ptr<function, i32, read_write> = var
+    %i_8:ptr<function, i32, read_write> = var
+    %i_9:ptr<function, i32, read_write> = var
+    %i_10:ptr<function, i32, read_write> = var
+    %i_11:ptr<function, i32, read_write> = var
+    %i_12:ptr<function, i32, read_write> = var
+    %i_13:ptr<function, i32, read_write> = var
+    %i_14:ptr<function, i32, read_write> = var
+    %i_15:ptr<function, i32, read_write> = var
+    %i_16:ptr<function, i32, read_write> = var
+    %i_17:ptr<function, i32, read_write> = var
+    %i_18:ptr<function, i32, read_write> = var
+    %i_19:ptr<function, i32, read_write> = var
+    %i_20:ptr<function, i32, read_write> = var
+    %i_21:ptr<function, i32, read_write> = var
+    %i_22:ptr<function, i32, read_write> = var
+    %i_23:ptr<function, i32, read_write> = var
+    %i_24:ptr<function, i32, read_write> = var
+    %i_25:ptr<function, i32, read_write> = var
+    %i_26:ptr<function, i32, read_write> = var
+    %i_27:ptr<function, i32, read_write> = var
+    %i_28:ptr<function, i32, read_write> = var
+    %i_29:ptr<function, i32, read_write> = var
+    %i_30:ptr<function, i32, read_write> = var
+    %i_31:ptr<function, i32, read_write> = var
+    %i_32:ptr<function, i32, read_write> = var
+    %i_33:ptr<function, i32, read_write> = var
+    %i_34:ptr<function, i32, read_write> = var
+    %i_35:ptr<function, i32, read_write> = var
+    %i_36:ptr<function, i32, read_write> = var
+    %i_37:ptr<function, i32, read_write> = var
+    %sum:ptr<function, f32, read_write> = var
+    %r:ptr<function, i32, read_write> = var
+    store %x_GLF_global_loop_count, 0i
+    store %m23, mat2x3<f32>(vec3<f32>(0.0f))
+    store %m24, mat2x4<f32>(vec4<f32>(0.0f))
+    store %m32, mat3x2<f32>(vec2<f32>(0.0f))
+    store %m33, mat3x3<f32>(vec3<f32>(0.0f))
+    store %m34, mat3x4<f32>(vec4<f32>(0.0f))
+    store %m42, mat4x2<f32>(vec2<f32>(0.0f))
+    store %m43, mat4x3<f32>(vec3<f32>(0.0f))
+    store %m44, mat4x4<f32>(vec4<f32>(0.0f))
+    store %i, 0i
+    loop [b: %b3, c: %b4] {  # loop_1
+      %b3 = block {  # body
+        %x_105:i32 = load %i
+        %53:bool = lt %x_105, 1i
+        if %53 [t: %b5, f: %b6] {  # if_1
+          %b5 = block {  # true
+            exit_if  # if_1
+          }
+          %b6 = block {  # false
+            exit_loop  # loop_1
+          }
+        }
+        store %i_1, 0i
+        loop [b: %b7, c: %b8] {  # loop_2
+          %b7 = block {  # body
+            %x_112:i32 = load %i_1
+            %55:bool = lt %x_112, 1i
+            if %55 [t: %b9, f: %b10] {  # if_2
+              %b9 = block {  # true
+                exit_if  # if_2
+              }
+              %b10 = block {  # false
+                exit_loop  # loop_2
+              }
+            }
+            store %i_2, 0i
+            loop [b: %b11, c: %b12] {  # loop_3
+              %b11 = block {  # body
+                %x_119:i32 = load %i_2
+                %57:bool = lt %x_119, 1i
+                if %57 [t: %b13, f: %b14] {  # if_3
+                  %b13 = block {  # true
+                    exit_if  # if_3
+                  }
+                  %b14 = block {  # false
+                    exit_loop  # loop_3
+                  }
+                }
+                store %i_3, 0i
+                loop [b: %b15, c: %b16] {  # loop_4
+                  %b15 = block {  # body
+                    %x_126:i32 = load %i_3
+                    %59:bool = lt %x_126, 1i
+                    if %59 [t: %b17, f: %b18] {  # if_4
+                      %b17 = block {  # true
+                        exit_if  # if_4
+                      }
+                      %b18 = block {  # false
+                        exit_loop  # loop_4
+                      }
+                    }
+                    store %i_4, 0i
+                    loop [b: %b19, c: %b20] {  # loop_5
+                      %b19 = block {  # body
+                        %x_133:i32 = load %i_4
+                        %61:bool = lt %x_133, 1i
+                        if %61 [t: %b21, f: %b22] {  # if_5
+                          %b21 = block {  # true
+                            exit_if  # if_5
+                          }
+                          %b22 = block {  # false
+                            exit_loop  # loop_5
+                          }
+                        }
+                        store %i_5, 0i
+                        loop [b: %b23, c: %b24] {  # loop_6
+                          %b23 = block {  # body
+                            %x_140:i32 = load %i_5
+                            %63:bool = lt %x_140, 1i
+                            if %63 [t: %b25, f: %b26] {  # if_6
+                              %b25 = block {  # true
+                                exit_if  # if_6
+                              }
+                              %b26 = block {  # false
+                                exit_loop  # loop_6
+                              }
+                            }
+                            store %i_6, 0i
+                            loop [b: %b27, c: %b28] {  # loop_7
+                              %b27 = block {  # body
+                                %x_147:i32 = load %i_6
+                                %65:bool = lt %x_147, 1i
+                                if %65 [t: %b29, f: %b30] {  # if_7
+                                  %b29 = block {  # true
+                                    exit_if  # if_7
+                                  }
+                                  %b30 = block {  # false
+                                    exit_loop  # loop_7
+                                  }
+                                }
+                                store %i_7, 0i
+                                loop [b: %b31, c: %b32] {  # loop_8
+                                  %b31 = block {  # body
+                                    %x_154:i32 = load %i_7
+                                    %67:bool = lt %x_154, 1i
+                                    if %67 [t: %b33, f: %b34] {  # if_8
+                                      %b33 = block {  # true
+                                        exit_if  # if_8
+                                      }
+                                      %b34 = block {  # false
+                                        exit_loop  # loop_8
+                                      }
+                                    }
+                                    store %i_8, 0i
+                                    loop [b: %b35, c: %b36] {  # loop_9
+                                      %b35 = block {  # body
+                                        %x_161:i32 = load %i_8
+                                        %69:bool = lt %x_161, 1i
+                                        if %69 [t: %b37, f: %b38] {  # if_9
+                                          %b37 = block {  # true
+                                            exit_if  # if_9
+                                          }
+                                          %b38 = block {  # false
+                                            exit_loop  # loop_9
+                                          }
+                                        }
+                                        store %i_9, 0i
+                                        loop [b: %b39, c: %b40] {  # loop_10
+                                          %b39 = block {  # body
+                                            %x_168:i32 = load %i_9
+                                            %71:bool = lt %x_168, 1i
+                                            if %71 [t: %b41, f: %b42] {  # if_10
+                                              %b41 = block {  # true
+                                                exit_if  # if_10
+                                              }
+                                              %b42 = block {  # false
+                                                exit_loop  # loop_10
+                                              }
+                                            }
+                                            store %i_10, 0i
+                                            loop [b: %b43, c: %b44] {  # loop_11
+                                              %b43 = block {  # body
+                                                %x_175:i32 = load %i_10
+                                                %73:bool = lt %x_175, 1i
+                                                if %73 [t: %b45, f: %b46] {  # if_11
+                                                  %b45 = block {  # true
+                                                    exit_if  # if_11
+                                                  }
+                                                  %b46 = block {  # false
+                                                    exit_loop  # loop_11
+                                                  }
+                                                }
+                                                store %i_11, 0i
+                                                loop [b: %b47, c: %b48] {  # loop_12
+                                                  %b47 = block {  # body
+                                                    %x_182:i32 = load %i_11
+                                                    %75:bool = lt %x_182, 1i
+                                                    if %75 [t: %b49, f: %b50] {  # if_12
+                                                      %b49 = block {  # true
+                                                        exit_if  # if_12
+                                                      }
+                                                      %b50 = block {  # false
+                                                        exit_loop  # loop_12
+                                                      }
+                                                    }
+                                                    store %i_12, 0i
+                                                    loop [b: %b51, c: %b52] {  # loop_13
+                                                      %b51 = block {  # body
+                                                        %x_189:i32 = load %i_12
+                                                        %77:bool = lt %x_189, 1i
+                                                        if %77 [t: %b53, f: %b54] {  # if_13
+                                                          %b53 = block {  # true
+                                                            exit_if  # if_13
+                                                          }
+                                                          %b54 = block {  # false
+                                                            exit_loop  # loop_13
+                                                          }
+                                                        }
+                                                        store %i_13, 0i
+                                                        loop [b: %b55, c: %b56] {  # loop_14
+                                                          %b55 = block {  # body
+                                                            %x_196:i32 = load %i_13
+                                                            %79:bool = lt %x_196, 1i
+                                                            if %79 [t: %b57, f: %b58] {  # if_14
+                                                              %b57 = block {  # true
+                                                                exit_if  # if_14
+                                                              }
+                                                              %b58 = block {  # false
+                                                                exit_loop  # loop_14
+                                                              }
+                                                            }
+                                                            store %i_14, 0i
+                                                            loop [b: %b59, c: %b60] {  # loop_15
+                                                              %b59 = block {  # body
+                                                                %x_203:i32 = load %i_14
+                                                                %81:bool = lt %x_203, 1i
+                                                                if %81 [t: %b61, f: %b62] {  # if_15
+                                                                  %b61 = block {  # true
+                                                                    exit_if  # if_15
+                                                                  }
+                                                                  %b62 = block {  # false
+                                                                    exit_loop  # loop_15
+                                                                  }
+                                                                }
+                                                                store %i_15, 0i
+                                                                loop [b: %b63, c: %b64] {  # loop_16
+                                                                  %b63 = block {  # body
+                                                                    %x_210:i32 = load %i_15
+                                                                    %83:bool = lt %x_210, 1i
+                                                                    if %83 [t: %b65, f: %b66] {  # if_16
+                                                                      %b65 = block {  # true
+                                                                        exit_if  # if_16
+                                                                      }
+                                                                      %b66 = block {  # false
+                                                                        exit_loop  # loop_16
+                                                                      }
+                                                                    }
+                                                                    store %i_16, 0i
+                                                                    loop [b: %b67, c: %b68] {  # loop_17
+                                                                      %b67 = block {  # body
+                                                                        %x_217:i32 = load %i_16
+                                                                        %85:bool = lt %x_217, 1i
+                                                                        if %85 [t: %b69, f: %b70] {  # if_17
+                                                                          %b69 = block {  # true
+                                                                            exit_if  # if_17
+                                                                          }
+                                                                          %b70 = block {  # false
+                                                                            exit_loop  # loop_17
+                                                                          }
+                                                                        }
+                                                                        store %i_17, 0i
+                                                                        loop [b: %b71, c: %b72] {  # loop_18
+                                                                          %b71 = block {  # body
+                                                                            %x_224:i32 = load %i_17
+                                                                            %87:bool = lt %x_224, 1i
+                                                                            if %87 [t: %b73, f: %b74] {  # if_18
+                                                                              %b73 = block {  # true
+                                                                                exit_if  # if_18
+                                                                              }
+                                                                              %b74 = block {  # false
+                                                                                exit_loop  # loop_18
+                                                                              }
+                                                                            }
+                                                                            store %i_18, 0i
+                                                                            loop [b: %b75, c: %b76] {  # loop_19
+                                                                              %b75 = block {  # body
+                                                                                %x_231:i32 = load %i_18
+                                                                                %89:bool = lt %x_231, 1i
+                                                                                if %89 [t: %b77, f: %b78] {  # if_19
+                                                                                  %b77 = block {  # true
+                                                                                    exit_if  # if_19
+                                                                                  }
+                                                                                  %b78 = block {  # false
+                                                                                    exit_loop  # loop_19
+                                                                                  }
+                                                                                }
+                                                                                store %i_19, 0i
+                                                                                loop [b: %b79, c: %b80] {  # loop_20
+                                                                                  %b79 = block {  # body
+                                                                                    %x_238:i32 = load %i_19
+                                                                                    %91:bool = lt %x_238, 1i
+                                                                                    if %91 [t: %b81, f: %b82] {  # if_20
+                                                                                      %b81 = block {  # true
+                                                                                        exit_if  # if_20
+                                                                                      }
+                                                                                      %b82 = block {  # false
+                                                                                        exit_loop  # loop_20
+                                                                                      }
+                                                                                    }
+                                                                                    store %i_20, 0i
+                                                                                    loop [b: %b83, c: %b84] {  # loop_21
+                                                                                      %b83 = block {  # body
+                                                                                        %x_245:i32 = load %i_20
+                                                                                        %93:bool = lt %x_245, 1i
+                                                                                        if %93 [t: %b85, f: %b86] {  # if_21
+                                                                                          %b85 = block {  # true
+                                                                                            exit_if  # if_21
+                                                                                          }
+                                                                                          %b86 = block {  # false
+                                                                                            exit_loop  # loop_21
+                                                                                          }
+                                                                                        }
+                                                                                        store %i_21, 0i
+                                                                                        loop [b: %b87, c: %b88] {  # loop_22
+                                                                                          %b87 = block {  # body
+                                                                                            %x_252:i32 = load %i_21
+                                                                                            %95:bool = lt %x_252, 1i
+                                                                                            if %95 [t: %b89, f: %b90] {  # if_22
+                                                                                              %b89 = block {  # true
+                                                                                                exit_if  # if_22
+                                                                                              }
+                                                                                              %b90 = block {  # false
+                                                                                                exit_loop  # loop_22
+                                                                                              }
+                                                                                            }
+                                                                                            store %i_22, 0i
+                                                                                            loop [b: %b91, c: %b92] {  # loop_23
+                                                                                              %b91 = block {  # body
+                                                                                                %x_259:i32 = load %i_22
+                                                                                                %97:bool = lt %x_259, 1i
+                                                                                                if %97 [t: %b93, f: %b94] {  # if_23
+                                                                                                  %b93 = block {  # true
+                                                                                                    exit_if  # if_23
+                                                                                                  }
+                                                                                                  %b94 = block {  # false
+                                                                                                    exit_loop  # loop_23
+                                                                                                  }
+                                                                                                }
+                                                                                                store %i_23, 0i
+                                                                                                loop [b: %b95, c: %b96] {  # loop_24
+                                                                                                  %b95 = block {  # body
+                                                                                                    %x_266:i32 = load %i_23
+                                                                                                    %99:bool = lt %x_266, 1i
+                                                                                                    if %99 [t: %b97, f: %b98] {  # if_24
+                                                                                                      %b97 = block {  # true
+                                                                                                        exit_if  # if_24
+                                                                                                      }
+                                                                                                      %b98 = block {  # false
+                                                                                                        exit_loop  # loop_24
+                                                                                                      }
+                                                                                                    }
+                                                                                                    store %i_24, 0i
+                                                                                                    loop [b: %b99, c: %b100] {  # loop_25
+                                                                                                      %b99 = block {  # body
+                                                                                                        %x_273:i32 = load %i_24
+                                                                                                        %101:bool = lt %x_273, 1i
+                                                                                                        if %101 [t: %b101, f: %b102] {  # if_25
+                                                                                                          %b101 = block {  # true
+                                                                                                            exit_if  # if_25
+                                                                                                          }
+                                                                                                          %b102 = block {  # false
+                                                                                                            exit_loop  # loop_25
+                                                                                                          }
+                                                                                                        }
+                                                                                                        store %i_25, 0i
+                                                                                                        loop [b: %b103, c: %b104] {  # loop_26
+                                                                                                          %b103 = block {  # body
+                                                                                                            %x_280:i32 = load %i_25
+                                                                                                            %103:bool = lt %x_280, 1i
+                                                                                                            if %103 [t: %b105, f: %b106] {  # if_26
+                                                                                                              %b105 = block {  # true
+                                                                                                                exit_if  # if_26
+                                                                                                              }
+                                                                                                              %b106 = block {  # false
+                                                                                                                exit_loop  # loop_26
+                                                                                                              }
+                                                                                                            }
+                                                                                                            store %i_26, 0i
+                                                                                                            loop [b: %b107, c: %b108] {  # loop_27
+                                                                                                              %b107 = block {  # body
+                                                                                                                %x_287:i32 = load %i_26
+                                                                                                                %105:bool = lt %x_287, 1i
+                                                                                                                if %105 [t: %b109, f: %b110] {  # if_27
+                                                                                                                  %b109 = block {  # true
+                                                                                                                    exit_if  # if_27
+                                                                                                                  }
+                                                                                                                  %b110 = block {  # false
+                                                                                                                    exit_loop  # loop_27
+                                                                                                                  }
+                                                                                                                }
+                                                                                                                store %i_27, 0i
+                                                                                                                loop [b: %b111, c: %b112] {  # loop_28
+                                                                                                                  %b111 = block {  # body
+                                                                                                                    %x_294:i32 = load %i_27
+                                                                                                                    %107:bool = lt %x_294, 1i
+                                                                                                                    if %107 [t: %b113, f: %b114] {  # if_28
+                                                                                                                      %b113 = block {  # true
+                                                                                                                        exit_if  # if_28
+                                                                                                                      }
+                                                                                                                      %b114 = block {  # false
+                                                                                                                        exit_loop  # loop_28
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                    store %i_28, 0i
+                                                                                                                    loop [b: %b115, c: %b116] {  # loop_29
+                                                                                                                      %b115 = block {  # body
+                                                                                                                        %x_301:i32 = load %i_28
+                                                                                                                        %109:bool = lt %x_301, 1i
+                                                                                                                        if %109 [t: %b117, f: %b118] {  # if_29
+                                                                                                                          %b117 = block {  # true
+                                                                                                                            exit_if  # if_29
+                                                                                                                          }
+                                                                                                                          %b118 = block {  # false
+                                                                                                                            exit_loop  # loop_29
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                        store %i_29, 0i
+                                                                                                                        loop [b: %b119, c: %b120] {  # loop_30
+                                                                                                                          %b119 = block {  # body
+                                                                                                                            %x_308:i32 = load %i_29
+                                                                                                                            %111:bool = lt %x_308, 1i
+                                                                                                                            if %111 [t: %b121, f: %b122] {  # if_30
+                                                                                                                              %b121 = block {  # true
+                                                                                                                                exit_if  # if_30
+                                                                                                                              }
+                                                                                                                              %b122 = block {  # false
+                                                                                                                                exit_loop  # loop_30
+                                                                                                                              }
+                                                                                                                            }
+                                                                                                                            store %i_30, 0i
+                                                                                                                            loop [b: %b123, c: %b124] {  # loop_31
+                                                                                                                              %b123 = block {  # body
+                                                                                                                                %x_315:i32 = load %i_30
+                                                                                                                                %113:bool = lt %x_315, 1i
+                                                                                                                                if %113 [t: %b125, f: %b126] {  # if_31
+                                                                                                                                  %b125 = block {  # true
+                                                                                                                                    exit_if  # if_31
+                                                                                                                                  }
+                                                                                                                                  %b126 = block {  # false
+                                                                                                                                    exit_loop  # loop_31
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                                store %i_31, 0i
+                                                                                                                                loop [b: %b127, c: %b128] {  # loop_32
+                                                                                                                                  %b127 = block {  # body
+                                                                                                                                    %x_322:i32 = load %i_31
+                                                                                                                                    %115:bool = lt %x_322, 1i
+                                                                                                                                    if %115 [t: %b129, f: %b130] {  # if_32
+                                                                                                                                      %b129 = block {  # true
+                                                                                                                                        exit_if  # if_32
+                                                                                                                                      }
+                                                                                                                                      %b130 = block {  # false
+                                                                                                                                        exit_loop  # loop_32
+                                                                                                                                      }
+                                                                                                                                    }
+                                                                                                                                    store %i_32, 0i
+                                                                                                                                    loop [b: %b131, c: %b132] {  # loop_33
+                                                                                                                                      %b131 = block {  # body
+                                                                                                                                        %x_329:i32 = load %i_32
+                                                                                                                                        %117:bool = lt %x_329, 1i
+                                                                                                                                        if %117 [t: %b133, f: %b134] {  # if_33
+                                                                                                                                          %b133 = block {  # true
+                                                                                                                                            exit_if  # if_33
+                                                                                                                                          }
+                                                                                                                                          %b134 = block {  # false
+                                                                                                                                            exit_loop  # loop_33
+                                                                                                                                          }
+                                                                                                                                        }
+                                                                                                                                        store %i_33, 0i
+                                                                                                                                        loop [b: %b135, c: %b136] {  # loop_34
+                                                                                                                                          %b135 = block {  # body
+                                                                                                                                            %x_336:i32 = load %i_33
+                                                                                                                                            %119:bool = lt %x_336, 1i
+                                                                                                                                            if %119 [t: %b137, f: %b138] {  # if_34
+                                                                                                                                              %b137 = block {  # true
+                                                                                                                                                exit_if  # if_34
+                                                                                                                                              }
+                                                                                                                                              %b138 = block {  # false
+                                                                                                                                                exit_loop  # loop_34
+                                                                                                                                              }
+                                                                                                                                            }
+                                                                                                                                            store %i_34, 0i
+                                                                                                                                            loop [b: %b139, c: %b140] {  # loop_35
+                                                                                                                                              %b139 = block {  # body
+                                                                                                                                                %x_343:i32 = load %i_34
+                                                                                                                                                %121:bool = lt %x_343, 1i
+                                                                                                                                                if %121 [t: %b141, f: %b142] {  # if_35
+                                                                                                                                                  %b141 = block {  # true
+                                                                                                                                                    exit_if  # if_35
+                                                                                                                                                  }
+                                                                                                                                                  %b142 = block {  # false
+                                                                                                                                                    exit_loop  # loop_35
+                                                                                                                                                  }
+                                                                                                                                                }
+                                                                                                                                                store %i_35, 0i
+                                                                                                                                                loop [b: %b143, c: %b144] {  # loop_36
+                                                                                                                                                  %b143 = block {  # body
+                                                                                                                                                    %x_350:i32 = load %i_35
+                                                                                                                                                    %123:bool = lt %x_350, 1i
+                                                                                                                                                    if %123 [t: %b145, f: %b146] {  # if_36
+                                                                                                                                                      %b145 = block {  # true
+                                                                                                                                                        exit_if  # if_36
+                                                                                                                                                      }
+                                                                                                                                                      %b146 = block {  # false
+                                                                                                                                                        exit_loop  # loop_36
+                                                                                                                                                      }
+                                                                                                                                                    }
+                                                                                                                                                    store %i_36, 0i
+                                                                                                                                                    loop [b: %b147, c: %b148] {  # loop_37
+                                                                                                                                                      %b147 = block {  # body
+                                                                                                                                                        %x_357:i32 = load %i_36
+                                                                                                                                                        %125:bool = lt %x_357, 1i
+                                                                                                                                                        if %125 [t: %b149, f: %b150] {  # if_37
+                                                                                                                                                          %b149 = block {  # true
+                                                                                                                                                            exit_if  # if_37
+                                                                                                                                                          }
+                                                                                                                                                          %b150 = block {  # false
+                                                                                                                                                            exit_loop  # loop_37
+                                                                                                                                                          }
+                                                                                                                                                        }
+                                                                                                                                                        store %i_37, 0i
+                                                                                                                                                        loop [b: %b151, c: %b152] {  # loop_38
+                                                                                                                                                          %b151 = block {  # body
+                                                                                                                                                            %x_364:i32 = load %i_37
+                                                                                                                                                            %127:bool = lt %x_364, 1i
+                                                                                                                                                            if %127 [t: %b153, f: %b154] {  # if_38
+                                                                                                                                                              %b153 = block {  # true
+                                                                                                                                                                exit_if  # if_38
+                                                                                                                                                              }
+                                                                                                                                                              %b154 = block {  # false
+                                                                                                                                                                exit_loop  # loop_38
+                                                                                                                                                              }
+                                                                                                                                                            }
+                                                                                                                                                            loop [b: %b155, c: %b156] {  # loop_39
+                                                                                                                                                              %b155 = block {  # body
+                                                                                                                                                                %x_371:i32 = load %x_GLF_global_loop_count
+                                                                                                                                                                %129:i32 = add %x_371, 1i
+                                                                                                                                                                store %x_GLF_global_loop_count, %129
+                                                                                                                                                                continue %b156
+                                                                                                                                                              }
+                                                                                                                                                              %b156 = block {  # continuing
+                                                                                                                                                                %x_373:i32 = load %x_GLF_global_loop_count
+                                                                                                                                                                %131:bool = lt %x_373, 98i
+                                                                                                                                                                %132:bool = eq %131, false
+                                                                                                                                                                break_if %132 %b155
+                                                                                                                                                              }
+                                                                                                                                                            }
+                                                                                                                                                            %x_375:i32 = load %i_37
+                                                                                                                                                            %x_376:i32 = load %i_37
+                                                                                                                                                            %135:ptr<function, vec3<f32>, read_write> = access %m23, %x_375
+                                                                                                                                                            store_vector_element %135, %x_376, 1.0f
+                                                                                                                                                            %x_378:i32 = load %i_37
+                                                                                                                                                            %x_379:i32 = load %i_37
+                                                                                                                                                            %138:ptr<function, vec4<f32>, read_write> = access %m24, %x_378
+                                                                                                                                                            store_vector_element %138, %x_379, 1.0f
+                                                                                                                                                            %x_381:i32 = load %i_37
+                                                                                                                                                            %x_382:i32 = load %i_37
+                                                                                                                                                            %141:ptr<function, vec2<f32>, read_write> = access %m32, %x_381
+                                                                                                                                                            store_vector_element %141, %x_382, 1.0f
+                                                                                                                                                            %x_384:i32 = load %i_37
+                                                                                                                                                            %x_385:i32 = load %i_37
+                                                                                                                                                            %144:ptr<function, vec3<f32>, read_write> = access %m33, %x_384
+                                                                                                                                                            store_vector_element %144, %x_385, 1.0f
+                                                                                                                                                            %x_387:i32 = load %i_37
+                                                                                                                                                            %x_388:i32 = load %i_37
+                                                                                                                                                            %147:ptr<function, vec4<f32>, read_write> = access %m34, %x_387
+                                                                                                                                                            store_vector_element %147, %x_388, 1.0f
+                                                                                                                                                            %x_390:i32 = load %i_37
+                                                                                                                                                            %x_391:i32 = load %i_37
+                                                                                                                                                            %150:ptr<function, vec2<f32>, read_write> = access %m42, %x_390
+                                                                                                                                                            store_vector_element %150, %x_391, 1.0f
+                                                                                                                                                            %x_393:i32 = load %i_37
+                                                                                                                                                            %x_394:i32 = load %i_37
+                                                                                                                                                            %153:ptr<function, vec3<f32>, read_write> = access %m43, %x_393
+                                                                                                                                                            store_vector_element %153, %x_394, 1.0f
+                                                                                                                                                            %x_396:i32 = load %i_37
+                                                                                                                                                            %x_397:i32 = load %i_37
+                                                                                                                                                            %156:ptr<function, vec4<f32>, read_write> = access %m44, %x_396
+                                                                                                                                                            store_vector_element %156, %x_397, 1.0f
+                                                                                                                                                            continue %b152
+                                                                                                                                                          }
+                                                                                                                                                          %b152 = block {  # continuing
+                                                                                                                                                            %x_399:i32 = load %i_37
+                                                                                                                                                            %158:i32 = add %x_399, 1i
+                                                                                                                                                            store %i_37, %158
+                                                                                                                                                            next_iteration %b151
+                                                                                                                                                          }
+                                                                                                                                                        }
+                                                                                                                                                        continue %b148
+                                                                                                                                                      }
+                                                                                                                                                      %b148 = block {  # continuing
+                                                                                                                                                        %x_401:i32 = load %i_36
+                                                                                                                                                        %160:i32 = add %x_401, 1i
+                                                                                                                                                        store %i_36, %160
+                                                                                                                                                        next_iteration %b147
+                                                                                                                                                      }
+                                                                                                                                                    }
+                                                                                                                                                    continue %b144
+                                                                                                                                                  }
+                                                                                                                                                  %b144 = block {  # continuing
+                                                                                                                                                    %x_403:i32 = load %i_35
+                                                                                                                                                    %162:i32 = add %x_403, 1i
+                                                                                                                                                    store %i_35, %162
+                                                                                                                                                    next_iteration %b143
+                                                                                                                                                  }
+                                                                                                                                                }
+                                                                                                                                                continue %b140
+                                                                                                                                              }
+                                                                                                                                              %b140 = block {  # continuing
+                                                                                                                                                %x_405:i32 = load %i_34
+                                                                                                                                                %164:i32 = add %x_405, 1i
+                                                                                                                                                store %i_34, %164
+                                                                                                                                                next_iteration %b139
+                                                                                                                                              }
+                                                                                                                                            }
+                                                                                                                                            continue %b136
+                                                                                                                                          }
+                                                                                                                                          %b136 = block {  # continuing
+                                                                                                                                            %x_407:i32 = load %i_33
+                                                                                                                                            %166:i32 = add %x_407, 1i
+                                                                                                                                            store %i_33, %166
+                                                                                                                                            next_iteration %b135
+                                                                                                                                          }
+                                                                                                                                        }
+                                                                                                                                        continue %b132
+                                                                                                                                      }
+                                                                                                                                      %b132 = block {  # continuing
+                                                                                                                                        %x_409:i32 = load %i_32
+                                                                                                                                        %168:i32 = add %x_409, 1i
+                                                                                                                                        store %i_32, %168
+                                                                                                                                        next_iteration %b131
+                                                                                                                                      }
+                                                                                                                                    }
+                                                                                                                                    continue %b128
+                                                                                                                                  }
+                                                                                                                                  %b128 = block {  # continuing
+                                                                                                                                    %x_411:i32 = load %i_31
+                                                                                                                                    %170:i32 = add %x_411, 1i
+                                                                                                                                    store %i_31, %170
+                                                                                                                                    next_iteration %b127
+                                                                                                                                  }
+                                                                                                                                }
+                                                                                                                                continue %b124
+                                                                                                                              }
+                                                                                                                              %b124 = block {  # continuing
+                                                                                                                                %x_413:i32 = load %i_30
+                                                                                                                                %172:i32 = add %x_413, 1i
+                                                                                                                                store %i_30, %172
+                                                                                                                                next_iteration %b123
+                                                                                                                              }
+                                                                                                                            }
+                                                                                                                            continue %b120
+                                                                                                                          }
+                                                                                                                          %b120 = block {  # continuing
+                                                                                                                            %x_415:i32 = load %i_29
+                                                                                                                            %174:i32 = add %x_415, 1i
+                                                                                                                            store %i_29, %174
+                                                                                                                            next_iteration %b119
+                                                                                                                          }
+                                                                                                                        }
+                                                                                                                        continue %b116
+                                                                                                                      }
+                                                                                                                      %b116 = block {  # continuing
+                                                                                                                        %x_417:i32 = load %i_28
+                                                                                                                        %176:i32 = add %x_417, 1i
+                                                                                                                        store %i_28, %176
+                                                                                                                        next_iteration %b115
+                                                                                                                      }
+                                                                                                                    }
+                                                                                                                    continue %b112
+                                                                                                                  }
+                                                                                                                  %b112 = block {  # continuing
+                                                                                                                    %x_419:i32 = load %i_27
+                                                                                                                    %178:i32 = add %x_419, 1i
+                                                                                                                    store %i_27, %178
+                                                                                                                    next_iteration %b111
+                                                                                                                  }
+                                                                                                                }
+                                                                                                                continue %b108
+                                                                                                              }
+                                                                                                              %b108 = block {  # continuing
+                                                                                                                %x_421:i32 = load %i_26
+                                                                                                                %180:i32 = add %x_421, 1i
+                                                                                                                store %i_26, %180
+                                                                                                                next_iteration %b107
+                                                                                                              }
+                                                                                                            }
+                                                                                                            continue %b104
+                                                                                                          }
+                                                                                                          %b104 = block {  # continuing
+                                                                                                            %x_423:i32 = load %i_25
+                                                                                                            %182:i32 = add %x_423, 1i
+                                                                                                            store %i_25, %182
+                                                                                                            next_iteration %b103
+                                                                                                          }
+                                                                                                        }
+                                                                                                        continue %b100
+                                                                                                      }
+                                                                                                      %b100 = block {  # continuing
+                                                                                                        %x_425:i32 = load %i_24
+                                                                                                        %184:i32 = add %x_425, 1i
+                                                                                                        store %i_24, %184
+                                                                                                        next_iteration %b99
+                                                                                                      }
+                                                                                                    }
+                                                                                                    continue %b96
+                                                                                                  }
+                                                                                                  %b96 = block {  # continuing
+                                                                                                    %x_427:i32 = load %i_23
+                                                                                                    %186:i32 = add %x_427, 1i
+                                                                                                    store %i_23, %186
+                                                                                                    next_iteration %b95
+                                                                                                  }
+                                                                                                }
+                                                                                                continue %b92
+                                                                                              }
+                                                                                              %b92 = block {  # continuing
+                                                                                                %x_429:i32 = load %i_22
+                                                                                                %188:i32 = add %x_429, 1i
+                                                                                                store %i_22, %188
+                                                                                                next_iteration %b91
+                                                                                              }
+                                                                                            }
+                                                                                            continue %b88
+                                                                                          }
+                                                                                          %b88 = block {  # continuing
+                                                                                            %x_431:i32 = load %i_21
+                                                                                            %190:i32 = add %x_431, 1i
+                                                                                            store %i_21, %190
+                                                                                            next_iteration %b87
+                                                                                          }
+                                                                                        }
+                                                                                        continue %b84
+                                                                                      }
+                                                                                      %b84 = block {  # continuing
+                                                                                        %x_433:i32 = load %i_20
+                                                                                        %192:i32 = add %x_433, 1i
+                                                                                        store %i_20, %192
+                                                                                        next_iteration %b83
+                                                                                      }
+                                                                                    }
+                                                                                    continue %b80
+                                                                                  }
+                                                                                  %b80 = block {  # continuing
+                                                                                    %x_435:i32 = load %i_19
+                                                                                    %194:i32 = add %x_435, 1i
+                                                                                    store %i_19, %194
+                                                                                    next_iteration %b79
+                                                                                  }
+                                                                                }
+                                                                                continue %b76
+                                                                              }
+                                                                              %b76 = block {  # continuing
+                                                                                %x_437:i32 = load %i_18
+                                                                                %196:i32 = add %x_437, 1i
+                                                                                store %i_18, %196
+                                                                                next_iteration %b75
+                                                                              }
+                                                                            }
+                                                                            continue %b72
+                                                                          }
+                                                                          %b72 = block {  # continuing
+                                                                            %x_439:i32 = load %i_17
+                                                                            %198:i32 = add %x_439, 1i
+                                                                            store %i_17, %198
+                                                                            next_iteration %b71
+                                                                          }
+                                                                        }
+                                                                        continue %b68
+                                                                      }
+                                                                      %b68 = block {  # continuing
+                                                                        %x_441:i32 = load %i_16
+                                                                        %200:i32 = add %x_441, 1i
+                                                                        store %i_16, %200
+                                                                        next_iteration %b67
+                                                                      }
+                                                                    }
+                                                                    continue %b64
+                                                                  }
+                                                                  %b64 = block {  # continuing
+                                                                    %x_443:i32 = load %i_15
+                                                                    %202:i32 = add %x_443, 1i
+                                                                    store %i_15, %202
+                                                                    next_iteration %b63
+                                                                  }
+                                                                }
+                                                                continue %b60
+                                                              }
+                                                              %b60 = block {  # continuing
+                                                                %x_445:i32 = load %i_14
+                                                                %204:i32 = add %x_445, 1i
+                                                                store %i_14, %204
+                                                                next_iteration %b59
+                                                              }
+                                                            }
+                                                            continue %b56
+                                                          }
+                                                          %b56 = block {  # continuing
+                                                            %x_447:i32 = load %i_13
+                                                            %206:i32 = add %x_447, 1i
+                                                            store %i_13, %206
+                                                            next_iteration %b55
+                                                          }
+                                                        }
+                                                        continue %b52
+                                                      }
+                                                      %b52 = block {  # continuing
+                                                        %x_449:i32 = load %i_12
+                                                        %208:i32 = add %x_449, 1i
+                                                        store %i_12, %208
+                                                        next_iteration %b51
+                                                      }
+                                                    }
+                                                    continue %b48
+                                                  }
+                                                  %b48 = block {  # continuing
+                                                    %x_451:i32 = load %i_11
+                                                    %210:i32 = add %x_451, 1i
+                                                    store %i_11, %210
+                                                    next_iteration %b47
+                                                  }
+                                                }
+                                                continue %b44
+                                              }
+                                              %b44 = block {  # continuing
+                                                %x_453:i32 = load %i_10
+                                                %212:i32 = add %x_453, 1i
+                                                store %i_10, %212
+                                                next_iteration %b43
+                                              }
+                                            }
+                                            continue %b40
+                                          }
+                                          %b40 = block {  # continuing
+                                            %x_455:i32 = load %i_9
+                                            %214:i32 = add %x_455, 1i
+                                            store %i_9, %214
+                                            next_iteration %b39
+                                          }
+                                        }
+                                        continue %b36
+                                      }
+                                      %b36 = block {  # continuing
+                                        %x_457:i32 = load %i_8
+                                        %216:i32 = add %x_457, 1i
+                                        store %i_8, %216
+                                        next_iteration %b35
+                                      }
+                                    }
+                                    continue %b32
+                                  }
+                                  %b32 = block {  # continuing
+                                    %x_459:i32 = load %i_7
+                                    %218:i32 = add %x_459, 1i
+                                    store %i_7, %218
+                                    next_iteration %b31
+                                  }
+                                }
+                                continue %b28
+                              }
+                              %b28 = block {  # continuing
+                                %x_461:i32 = load %i_6
+                                %220:i32 = add %x_461, 1i
+                                store %i_6, %220
+                                next_iteration %b27
+                              }
+                            }
+                            continue %b24
+                          }
+                          %b24 = block {  # continuing
+                            %x_463:i32 = load %i_5
+                            %222:i32 = add %x_463, 1i
+                            store %i_5, %222
+                            next_iteration %b23
+                          }
+                        }
+                        continue %b20
+                      }
+                      %b20 = block {  # continuing
+                        %x_465:i32 = load %i_4
+                        %224:i32 = add %x_465, 1i
+                        store %i_4, %224
+                        next_iteration %b19
+                      }
+                    }
+                    continue %b16
+                  }
+                  %b16 = block {  # continuing
+                    %x_467:i32 = load %i_3
+                    %226:i32 = add %x_467, 1i
+                    store %i_3, %226
+                    next_iteration %b15
+                  }
+                }
+                continue %b12
+              }
+              %b12 = block {  # continuing
+                %x_469:i32 = load %i_2
+                %228:i32 = add %x_469, 1i
+                store %i_2, %228
+                next_iteration %b11
+              }
+            }
+            continue %b8
+          }
+          %b8 = block {  # continuing
+            %x_471:i32 = load %i_1
+            %230:i32 = add %x_471, 1i
+            store %i_1, %230
+            next_iteration %b7
+          }
+        }
+        continue %b4
+      }
+      %b4 = block {  # continuing
+        %x_473:i32 = load %i
+        %232:i32 = add %x_473, 1i
+        store %i, %232
+        next_iteration %b3
+      }
+    }
+    store %sum, 0.0f
+    store %r, 0i
+    loop [b: %b157, c: %b158] {  # loop_40
+      %b157 = block {  # body
+        %x_479:i32 = load %x_GLF_global_loop_count
+        %234:bool = lt %x_479, 100i
+        if %234 [t: %b159, f: %b160] {  # if_39
+          %b159 = block {  # true
+            exit_if  # if_39
+          }
+          %b160 = block {  # false
+            exit_loop  # loop_40
+          }
+        }
+        %x_482:i32 = load %x_GLF_global_loop_count
+        %236:i32 = add %x_482, 1i
+        store %x_GLF_global_loop_count, %236
+        %x_484:i32 = load %r
+        %238:ptr<function, vec3<f32>, read_write> = access %m23, 0i
+        %x_486:f32 = load_vector_element %238, %x_484
+        %x_487:f32 = load %sum
+        %241:f32 = add %x_487, %x_486
+        store %sum, %241
+        %x_489:i32 = load %r
+        %243:ptr<function, vec4<f32>, read_write> = access %m24, 0i
+        %x_491:f32 = load_vector_element %243, %x_489
+        %x_492:f32 = load %sum
+        %246:f32 = add %x_492, %x_491
+        store %sum, %246
+        %x_494:i32 = load %r
+        %248:ptr<function, vec2<f32>, read_write> = access %m32, 0i
+        %x_496:f32 = load_vector_element %248, %x_494
+        %x_497:f32 = load %sum
+        %251:f32 = add %x_497, %x_496
+        store %sum, %251
+        %x_499:i32 = load %r
+        %253:ptr<function, vec3<f32>, read_write> = access %m33, 0i
+        %x_501:f32 = load_vector_element %253, %x_499
+        %x_502:f32 = load %sum
+        %256:f32 = add %x_502, %x_501
+        store %sum, %256
+        %x_504:i32 = load %r
+        %258:ptr<function, vec4<f32>, read_write> = access %m34, 0i
+        %x_506:f32 = load_vector_element %258, %x_504
+        %x_507:f32 = load %sum
+        %261:f32 = add %x_507, %x_506
+        store %sum, %261
+        %x_509:i32 = load %r
+        %263:ptr<function, vec2<f32>, read_write> = access %m42, 0i
+        %x_511:f32 = load_vector_element %263, %x_509
+        %x_512:f32 = load %sum
+        %266:f32 = add %x_512, %x_511
+        store %sum, %266
+        %x_514:i32 = load %r
+        %268:ptr<function, vec3<f32>, read_write> = access %m43, 0i
+        %x_516:f32 = load_vector_element %268, %x_514
+        %x_517:f32 = load %sum
+        %271:f32 = add %x_517, %x_516
+        store %sum, %271
+        %x_519:i32 = load %r
+        %273:ptr<function, vec4<f32>, read_write> = access %m44, 0i
+        %x_521:f32 = load_vector_element %273, %x_519
+        %x_522:f32 = load %sum
+        %276:f32 = add %x_522, %x_521
+        store %sum, %276
+        continue %b158
+      }
+      %b158 = block {  # continuing
+        %x_524:i32 = load %r
+        %278:i32 = add %x_524, 1i
+        store %r, %278
+        next_iteration %b157
+      }
+    }
+    %x_526:f32 = load %sum
+    %280:bool = eq %x_526, 8.0f
+    if %280 [t: %b161, f: %b162] {  # if_40
+      %b161 = block {  # true
+        store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+        exit_if  # if_40
+      }
+      %b162 = block {  # false
+        store %x_GLF_color, vec4<f32>(0.0f)
+        exit_if  # if_40
+      }
+    }
+    ret
+  }
+}
+%tint_symbol = @fragment func():main_out -> %b163 {
+  %b163 = block {
+    %282:void = call %main_1
+    %283:vec4<f32> = load %x_GLF_color
+    %284:main_out = construct %283
+    ret %284
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

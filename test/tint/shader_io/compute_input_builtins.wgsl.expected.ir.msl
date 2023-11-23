@@ -1,9 +1,24 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Access
-********************************************************************
-*  The tint shader compiler has encountered an unexpected error.   *
-*                                                                  *
-*  Please help us fix this issue by submitting a bug report at     *
-*  crbug.com/tint with the source program that triggered the bug.  *
-********************************************************************
+#include <metal_stdlib>
+using namespace metal;
+
+kernel void tint_symbol(uint3 local_invocation_id, uint local_invocation_index, uint3 global_invocation_id, uint3 workgroup_id, uint3 num_workgroups) {
+  uint const foo = ((((local_invocation_id[0u] + local_invocation_index) + global_invocation_id[0u]) + workgroup_id[0u]) + num_workgroups[0u]);
+}
+program_source:4:25: error: invalid type 'uint3' (vector of 3 'unsigned int' values) for input declaration in a kernel function
+kernel void tint_symbol(uint3 local_invocation_id, uint local_invocation_index, uint3 global_invocation_id, uint3 workgroup_id, uint3 num_workgroups) {
+                        ^~~~~~~~~~~~~~~~~~~~~~~~~
+program_source:4:52: error: invalid type 'uint' (aka 'unsigned int') for input declaration in a kernel function
+kernel void tint_symbol(uint3 local_invocation_id, uint local_invocation_index, uint3 global_invocation_id, uint3 workgroup_id, uint3 num_workgroups) {
+                                                   ^~~~~~~~~~~~~~~~~~~~~~~~~~~
+program_source:4:81: error: invalid type 'uint3' (vector of 3 'unsigned int' values) for input declaration in a kernel function
+kernel void tint_symbol(uint3 local_invocation_id, uint local_invocation_index, uint3 global_invocation_id, uint3 workgroup_id, uint3 num_workgroups) {
+                                                                                ^~~~~~~~~~~~~~~~~~~~~~~~~~
+program_source:4:109: error: invalid type 'uint3' (vector of 3 'unsigned int' values) for input declaration in a kernel function
+kernel void tint_symbol(uint3 local_invocation_id, uint local_invocation_index, uint3 global_invocation_id, uint3 workgroup_id, uint3 num_workgroups) {
+                                                                                                            ^~~~~~~~~~~~~~~~~~
+program_source:4:129: error: invalid type 'uint3' (vector of 3 'unsigned int' values) for input declaration in a kernel function
+kernel void tint_symbol(uint3 local_invocation_id, uint local_invocation_index, uint3 global_invocation_id, uint3 workgroup_id, uint3 num_workgroups) {
+                                                                                                                                ^~~~~~~~~~~~~~~~~~~~
+

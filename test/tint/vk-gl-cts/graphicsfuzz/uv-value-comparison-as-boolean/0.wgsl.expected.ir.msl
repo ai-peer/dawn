@@ -1,6 +1,72 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::LoadVectorElement
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %c1:ptr<function, bool, read_write> = var
+    %uv:ptr<function, vec2<f32>, read_write> = var
+    %i:ptr<function, i32, read_write> = var
+    %x_37:ptr<function, bool, read_write> = var
+    %x_37_phi:ptr<function, bool, read_write> = var
+    %x_9_phi:ptr<function, i32, read_write> = var
+    %x_34:f32 = load_vector_element %uv, 1u
+    %x_35:bool = lt %x_34, 0.25f
+    store %c1, %x_35
+    store %i, 0i
+    store %x_37_phi, %x_35
+    store %x_9_phi, 0i
+    loop [b: %b3, c: %b4] {  # loop_1
+      %b3 = block {  # body
+        %11:bool = load %x_37_phi
+        store %x_37, %11
+        %x_9:i32 = load %x_9_phi
+        %13:bool = lt %x_9, 1i
+        if %13 [t: %b5, f: %b6] {  # if_1
+          %b5 = block {  # true
+            exit_if  # if_1
+          }
+          %b6 = block {  # false
+            exit_loop  # loop_1
+          }
+        }
+        store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+        ret
+      }
+      %b4 = block {  # continuing
+        %x_7:i32 = load %i
+        %15:i32 = add %x_7, 1i
+        store %i, %15
+        store %x_37_phi, false
+        store %x_9_phi, 0i
+        next_iteration %b3
+      }
+    }
+    %16:bool = load %x_37
+    if %16 [t: %b7] {  # if_2
+      %b7 = block {  # true
+        ret
+      }
+    }
+    ret
+  }
+}
+%tint_symbol = @fragment func():main_out -> %b8 {
+  %b8 = block {
+    %18:void = call %main_1
+    %19:vec4<f32> = load %x_GLF_color
+    %20:main_out = construct %19
+    ret %20
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

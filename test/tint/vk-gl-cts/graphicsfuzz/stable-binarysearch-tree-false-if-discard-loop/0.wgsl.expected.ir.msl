@@ -1,6 +1,1065 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:247 internal compiler error: Switch() matched no cases. Type: tint::core::ir::Access
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:1206 internal compiler error: BST = struct @align(4) {
+  data:i32 @offset(0)
+  leftIndex:i32 @offset(4)
+  rightIndex:i32 @offset(8)
+}
+
+main_out = struct @align(16) {
+  x_GLF_color_1:vec4<f32> @offset(0), @location(0)
+}
+
+%b1 = block {  # root
+  %x_GLF_color:ptr<private, vec4<f32>, read_write> = var
+}
+
+%main_1 = func():void -> %b2 {
+  %b2 = block {
+    %tree:ptr<function, array<BST, 10>, read_write> = var
+    %x_356:ptr<function, i32, read_write> = var
+    %x_58_phi:ptr<function, i32, read_write> = var
+    %x_86_phi:ptr<function, bool, read_write> = var
+    %x_353_phi:ptr<function, i32, read_write> = var
+    %x_356_phi:ptr<function, i32, read_write> = var
+    %x_358_phi:ptr<function, i32, read_write> = var
+    %10:ptr<function, BST, read_write> = access %tree, 0i
+    store %10, BST(9i, -1i, -1i)
+    switch 0u [c: (default, %b3)] {  # switch_1
+      %b3 = block {  # case
+        store %x_58_phi, 0i
+        loop [b: %b4, c: %b5] {  # loop_1
+          %b4 = block {  # body
+            %x_84:ptr<function, i32, read_write> = var
+            %x_76:ptr<function, i32, read_write> = var
+            %x_59:ptr<function, i32, read_write> = var
+            %x_59_phi:ptr<function, i32, read_write> = var
+            %x_58:i32 = load %x_58_phi
+            store %x_86_phi, false
+            %16:bool = lte %x_58, 1i
+            if %16 [t: %b6, f: %b7] {  # if_1
+              %b6 = block {  # true
+                exit_if  # if_1
+              }
+              %b7 = block {  # false
+                exit_loop  # loop_1
+              }
+            }
+            %17:ptr<function, i32, read_write> = access %tree, %x_58, 0u
+            %x_65:i32 = load %17
+            %19:bool = lte 5i, %x_65
+            if %19 [t: %b8, f: %b9] {  # if_2
+              %b8 = block {  # true
+                %x_78_save:i32 = let %x_58
+                %21:ptr<function, i32, read_write> = access %tree, %x_78_save, 1u
+                %x_79:i32 = load %21
+                %23:bool = eq %x_79, -1i
+                if %23 [t: %b10, f: %b11] {  # if_3
+                  %b10 = block {  # true
+                    %24:ptr<function, i32, read_write> = access %tree, %x_78_save, 1u
+                    store %24, 1i
+                    %25:ptr<function, BST, read_write> = access %tree, 1i
+                    store %25, BST(5i, -1i, -1i)
+                    store %x_86_phi, true
+                    exit_loop  # loop_1
+                  }
+                  %b11 = block {  # false
+                    %26:ptr<function, i32, read_write> = access %tree, %x_78_save, 1u
+                    %27:i32 = load %26
+                    store %x_84, %27
+                    %28:i32 = load %x_84
+                    store %x_59_phi, %28
+                    continue %b5
+                  }
+                }
+                exit_if  # if_2
+              }
+              %b9 = block {  # false
+                %x_70_save:i32 = let %x_58
+                %30:ptr<function, i32, read_write> = access %tree, %x_70_save, 2u
+                %x_71:i32 = load %30
+                %32:bool = eq %x_71, -1i
+                if %32 [t: %b12, f: %b13] {  # if_4
+                  %b12 = block {  # true
+                    %33:ptr<function, i32, read_write> = access %tree, %x_70_save, 2u
+                    store %33, 1i
+                    %34:ptr<function, BST, read_write> = access %tree, 1i
+                    store %34, BST(5i, -1i, -1i)
+                    store %x_86_phi, true
+                    exit_loop  # loop_1
+                  }
+                  %b13 = block {  # false
+                    %35:ptr<function, i32, read_write> = access %tree, %x_70_save, 2u
+                    %36:i32 = load %35
+                    store %x_76, %36
+                    %37:i32 = load %x_76
+                    store %x_59_phi, %37
+                    continue %b5
+                  }
+                }
+                exit_if  # if_2
+              }
+            }
+            continue %b5
+          }
+          %b5 = block {  # continuing
+            %38:i32 = load %x_59_phi
+            store %x_59, %38
+            %39:i32 = load %x_59
+            store %x_58_phi, %39
+            next_iteration %b4
+          }
+        }
+        %x_86:bool = load %x_86_phi
+        if %x_86 [t: %b14] {  # if_5
+          %b14 = block {  # true
+            exit_switch  # switch_1
+          }
+        }
+        exit_switch  # switch_1
+      }
+    }
+    %x_91_phi:ptr<function, i32, read_write> = var
+    %x_119_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b15)] {  # switch_2
+      %b15 = block {  # case
+        store %x_91_phi, 0i
+        loop [b: %b16, c: %b17] {  # loop_2
+          %b16 = block {  # body
+            %x_117:ptr<function, i32, read_write> = var
+            %x_109:ptr<function, i32, read_write> = var
+            %x_92:ptr<function, i32, read_write> = var
+            %x_92_phi:ptr<function, i32, read_write> = var
+            %x_91:i32 = load %x_91_phi
+            store %x_119_phi, false
+            %48:bool = lte %x_91, 2i
+            if %48 [t: %b18, f: %b19] {  # if_6
+              %b18 = block {  # true
+                exit_if  # if_6
+              }
+              %b19 = block {  # false
+                exit_loop  # loop_2
+              }
+            }
+            %49:ptr<function, i32, read_write> = access %tree, %x_91, 0u
+            %x_98:i32 = load %49
+            %51:bool = lte 12i, %x_98
+            if %51 [t: %b20, f: %b21] {  # if_7
+              %b20 = block {  # true
+                %x_111_save:i32 = let %x_91
+                %53:ptr<function, i32, read_write> = access %tree, %x_111_save, 1u
+                %x_112:i32 = load %53
+                %55:bool = eq %x_112, -1i
+                if %55 [t: %b22, f: %b23] {  # if_8
+                  %b22 = block {  # true
+                    %56:ptr<function, i32, read_write> = access %tree, %x_111_save, 1u
+                    store %56, 2i
+                    %57:ptr<function, BST, read_write> = access %tree, 2i
+                    store %57, BST(12i, -1i, -1i)
+                    store %x_119_phi, true
+                    exit_loop  # loop_2
+                  }
+                  %b23 = block {  # false
+                    %58:ptr<function, i32, read_write> = access %tree, %x_111_save, 1u
+                    %59:i32 = load %58
+                    store %x_117, %59
+                    %60:i32 = load %x_117
+                    store %x_92_phi, %60
+                    continue %b17
+                  }
+                }
+                exit_if  # if_7
+              }
+              %b21 = block {  # false
+                %x_103_save:i32 = let %x_91
+                %62:ptr<function, i32, read_write> = access %tree, %x_103_save, 2u
+                %x_104:i32 = load %62
+                %64:bool = eq %x_104, -1i
+                if %64 [t: %b24, f: %b25] {  # if_9
+                  %b24 = block {  # true
+                    %65:ptr<function, i32, read_write> = access %tree, %x_103_save, 2u
+                    store %65, 2i
+                    %66:ptr<function, BST, read_write> = access %tree, 2i
+                    store %66, BST(12i, -1i, -1i)
+                    store %x_119_phi, true
+                    exit_loop  # loop_2
+                  }
+                  %b25 = block {  # false
+                    %67:ptr<function, i32, read_write> = access %tree, %x_103_save, 2u
+                    %68:i32 = load %67
+                    store %x_109, %68
+                    %69:i32 = load %x_109
+                    store %x_92_phi, %69
+                    continue %b17
+                  }
+                }
+                exit_if  # if_7
+              }
+            }
+            continue %b17
+          }
+          %b17 = block {  # continuing
+            %70:i32 = load %x_92_phi
+            store %x_92, %70
+            %71:i32 = load %x_92
+            store %x_91_phi, %71
+            next_iteration %b16
+          }
+        }
+        %x_119:bool = load %x_119_phi
+        if %x_119 [t: %b26] {  # if_10
+          %b26 = block {  # true
+            exit_switch  # switch_2
+          }
+        }
+        exit_switch  # switch_2
+      }
+    }
+    %x_124_phi:ptr<function, i32, read_write> = var
+    %x_152_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b27)] {  # switch_3
+      %b27 = block {  # case
+        store %x_124_phi, 0i
+        loop [b: %b28, c: %b29] {  # loop_3
+          %b28 = block {  # body
+            %x_150:ptr<function, i32, read_write> = var
+            %x_142:ptr<function, i32, read_write> = var
+            %x_125:ptr<function, i32, read_write> = var
+            %x_125_phi:ptr<function, i32, read_write> = var
+            %x_124:i32 = load %x_124_phi
+            store %x_152_phi, false
+            %80:bool = lte %x_124, 3i
+            if %80 [t: %b30, f: %b31] {  # if_11
+              %b30 = block {  # true
+                exit_if  # if_11
+              }
+              %b31 = block {  # false
+                exit_loop  # loop_3
+              }
+            }
+            %81:ptr<function, i32, read_write> = access %tree, %x_124, 0u
+            %x_131:i32 = load %81
+            %83:bool = lte 15i, %x_131
+            if %83 [t: %b32, f: %b33] {  # if_12
+              %b32 = block {  # true
+                %x_144_save:i32 = let %x_124
+                %85:ptr<function, i32, read_write> = access %tree, %x_144_save, 1u
+                %x_145:i32 = load %85
+                %87:bool = eq %x_145, -1i
+                if %87 [t: %b34, f: %b35] {  # if_13
+                  %b34 = block {  # true
+                    %88:ptr<function, i32, read_write> = access %tree, %x_144_save, 1u
+                    store %88, 3i
+                    %89:ptr<function, BST, read_write> = access %tree, 3i
+                    store %89, BST(15i, -1i, -1i)
+                    store %x_152_phi, true
+                    exit_loop  # loop_3
+                  }
+                  %b35 = block {  # false
+                    %90:ptr<function, i32, read_write> = access %tree, %x_144_save, 1u
+                    %91:i32 = load %90
+                    store %x_150, %91
+                    %92:i32 = load %x_150
+                    store %x_125_phi, %92
+                    continue %b29
+                  }
+                }
+                exit_if  # if_12
+              }
+              %b33 = block {  # false
+                %x_136_save:i32 = let %x_124
+                %94:ptr<function, i32, read_write> = access %tree, %x_136_save, 2u
+                %x_137:i32 = load %94
+                %96:bool = eq %x_137, -1i
+                if %96 [t: %b36, f: %b37] {  # if_14
+                  %b36 = block {  # true
+                    %97:ptr<function, i32, read_write> = access %tree, %x_136_save, 2u
+                    store %97, 3i
+                    %98:ptr<function, BST, read_write> = access %tree, 3i
+                    store %98, BST(15i, -1i, -1i)
+                    store %x_152_phi, true
+                    exit_loop  # loop_3
+                  }
+                  %b37 = block {  # false
+                    %99:ptr<function, i32, read_write> = access %tree, %x_136_save, 2u
+                    %100:i32 = load %99
+                    store %x_142, %100
+                    %101:i32 = load %x_142
+                    store %x_125_phi, %101
+                    continue %b29
+                  }
+                }
+                exit_if  # if_12
+              }
+            }
+            continue %b29
+          }
+          %b29 = block {  # continuing
+            %102:i32 = load %x_125_phi
+            store %x_125, %102
+            %103:i32 = load %x_125
+            store %x_124_phi, %103
+            next_iteration %b28
+          }
+        }
+        %x_152:bool = load %x_152_phi
+        if %x_152 [t: %b38] {  # if_15
+          %b38 = block {  # true
+            exit_switch  # switch_3
+          }
+        }
+        exit_switch  # switch_3
+      }
+    }
+    %x_157_phi:ptr<function, i32, read_write> = var
+    %x_185_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b39)] {  # switch_4
+      %b39 = block {  # case
+        store %x_157_phi, 0i
+        loop [b: %b40, c: %b41] {  # loop_4
+          %b40 = block {  # body
+            %x_183:ptr<function, i32, read_write> = var
+            %x_175:ptr<function, i32, read_write> = var
+            %x_158:ptr<function, i32, read_write> = var
+            %x_158_phi:ptr<function, i32, read_write> = var
+            %x_157:i32 = load %x_157_phi
+            store %x_185_phi, false
+            %112:bool = lte %x_157, 4i
+            if %112 [t: %b42, f: %b43] {  # if_16
+              %b42 = block {  # true
+                exit_if  # if_16
+              }
+              %b43 = block {  # false
+                exit_loop  # loop_4
+              }
+            }
+            %113:ptr<function, i32, read_write> = access %tree, %x_157, 0u
+            %x_164:i32 = load %113
+            %115:bool = lte 7i, %x_164
+            if %115 [t: %b44, f: %b45] {  # if_17
+              %b44 = block {  # true
+                %x_177_save:i32 = let %x_157
+                %117:ptr<function, i32, read_write> = access %tree, %x_177_save, 1u
+                %x_178:i32 = load %117
+                %119:bool = eq %x_178, -1i
+                if %119 [t: %b46, f: %b47] {  # if_18
+                  %b46 = block {  # true
+                    %120:ptr<function, i32, read_write> = access %tree, %x_177_save, 1u
+                    store %120, 4i
+                    %121:ptr<function, BST, read_write> = access %tree, 4i
+                    store %121, BST(7i, -1i, -1i)
+                    store %x_185_phi, true
+                    exit_loop  # loop_4
+                  }
+                  %b47 = block {  # false
+                    %122:ptr<function, i32, read_write> = access %tree, %x_177_save, 1u
+                    %123:i32 = load %122
+                    store %x_183, %123
+                    %124:i32 = load %x_183
+                    store %x_158_phi, %124
+                    continue %b41
+                  }
+                }
+                exit_if  # if_17
+              }
+              %b45 = block {  # false
+                %x_169_save:i32 = let %x_157
+                %126:ptr<function, i32, read_write> = access %tree, %x_169_save, 2u
+                %x_170:i32 = load %126
+                %128:bool = eq %x_170, -1i
+                if %128 [t: %b48, f: %b49] {  # if_19
+                  %b48 = block {  # true
+                    %129:ptr<function, i32, read_write> = access %tree, %x_169_save, 2u
+                    store %129, 4i
+                    %130:ptr<function, BST, read_write> = access %tree, 4i
+                    store %130, BST(7i, -1i, -1i)
+                    store %x_185_phi, true
+                    exit_loop  # loop_4
+                  }
+                  %b49 = block {  # false
+                    %131:ptr<function, i32, read_write> = access %tree, %x_169_save, 2u
+                    %132:i32 = load %131
+                    store %x_175, %132
+                    %133:i32 = load %x_175
+                    store %x_158_phi, %133
+                    continue %b41
+                  }
+                }
+                exit_if  # if_17
+              }
+            }
+            continue %b41
+          }
+          %b41 = block {  # continuing
+            %134:i32 = load %x_158_phi
+            store %x_158, %134
+            %135:i32 = load %x_158
+            store %x_157_phi, %135
+            next_iteration %b40
+          }
+        }
+        %x_185:bool = load %x_185_phi
+        if %x_185 [t: %b50] {  # if_20
+          %b50 = block {  # true
+            exit_switch  # switch_4
+          }
+        }
+        exit_switch  # switch_4
+      }
+    }
+    %x_190_phi:ptr<function, i32, read_write> = var
+    %x_218_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b51)] {  # switch_5
+      %b51 = block {  # case
+        store %x_190_phi, 0i
+        loop [b: %b52, c: %b53] {  # loop_5
+          %b52 = block {  # body
+            %x_216:ptr<function, i32, read_write> = var
+            %x_208:ptr<function, i32, read_write> = var
+            %x_191:ptr<function, i32, read_write> = var
+            %x_191_phi:ptr<function, i32, read_write> = var
+            %x_190:i32 = load %x_190_phi
+            store %x_218_phi, false
+            %144:bool = lte %x_190, 5i
+            if %144 [t: %b54, f: %b55] {  # if_21
+              %b54 = block {  # true
+                exit_if  # if_21
+              }
+              %b55 = block {  # false
+                exit_loop  # loop_5
+              }
+            }
+            %145:ptr<function, i32, read_write> = access %tree, %x_190, 0u
+            %x_197:i32 = load %145
+            %147:bool = lte 8i, %x_197
+            if %147 [t: %b56, f: %b57] {  # if_22
+              %b56 = block {  # true
+                %x_210_save:i32 = let %x_190
+                %149:ptr<function, i32, read_write> = access %tree, %x_210_save, 1u
+                %x_211:i32 = load %149
+                %151:bool = eq %x_211, -1i
+                if %151 [t: %b58, f: %b59] {  # if_23
+                  %b58 = block {  # true
+                    %152:ptr<function, i32, read_write> = access %tree, %x_210_save, 1u
+                    store %152, 5i
+                    %153:ptr<function, BST, read_write> = access %tree, 5i
+                    store %153, BST(8i, -1i, -1i)
+                    store %x_218_phi, true
+                    exit_loop  # loop_5
+                  }
+                  %b59 = block {  # false
+                    %154:ptr<function, i32, read_write> = access %tree, %x_210_save, 1u
+                    %155:i32 = load %154
+                    store %x_216, %155
+                    %156:i32 = load %x_216
+                    store %x_191_phi, %156
+                    continue %b53
+                  }
+                }
+                exit_if  # if_22
+              }
+              %b57 = block {  # false
+                %x_202_save:i32 = let %x_190
+                %158:ptr<function, i32, read_write> = access %tree, %x_202_save, 2u
+                %x_203:i32 = load %158
+                %160:bool = eq %x_203, -1i
+                if %160 [t: %b60, f: %b61] {  # if_24
+                  %b60 = block {  # true
+                    %161:ptr<function, i32, read_write> = access %tree, %x_202_save, 2u
+                    store %161, 5i
+                    %162:ptr<function, BST, read_write> = access %tree, 5i
+                    store %162, BST(8i, -1i, -1i)
+                    store %x_218_phi, true
+                    exit_loop  # loop_5
+                  }
+                  %b61 = block {  # false
+                    %163:ptr<function, i32, read_write> = access %tree, %x_202_save, 2u
+                    %164:i32 = load %163
+                    store %x_208, %164
+                    %165:i32 = load %x_208
+                    store %x_191_phi, %165
+                    continue %b53
+                  }
+                }
+                exit_if  # if_22
+              }
+            }
+            continue %b53
+          }
+          %b53 = block {  # continuing
+            %166:i32 = load %x_191_phi
+            store %x_191, %166
+            %167:i32 = load %x_191
+            store %x_190_phi, %167
+            next_iteration %b52
+          }
+        }
+        %x_218:bool = load %x_218_phi
+        if %x_218 [t: %b62] {  # if_25
+          %b62 = block {  # true
+            exit_switch  # switch_5
+          }
+        }
+        exit_switch  # switch_5
+      }
+    }
+    %x_223_phi:ptr<function, i32, read_write> = var
+    %x_251_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b63)] {  # switch_6
+      %b63 = block {  # case
+        store %x_223_phi, 0i
+        loop [b: %b64, c: %b65] {  # loop_6
+          %b64 = block {  # body
+            %x_249:ptr<function, i32, read_write> = var
+            %x_241:ptr<function, i32, read_write> = var
+            %x_224:ptr<function, i32, read_write> = var
+            %x_224_phi:ptr<function, i32, read_write> = var
+            %x_223:i32 = load %x_223_phi
+            store %x_251_phi, false
+            %176:bool = lte %x_223, 6i
+            if %176 [t: %b66, f: %b67] {  # if_26
+              %b66 = block {  # true
+                exit_if  # if_26
+              }
+              %b67 = block {  # false
+                exit_loop  # loop_6
+              }
+            }
+            %177:ptr<function, i32, read_write> = access %tree, %x_223, 0u
+            %x_230:i32 = load %177
+            %179:bool = lte 2i, %x_230
+            if %179 [t: %b68, f: %b69] {  # if_27
+              %b68 = block {  # true
+                %x_243_save:i32 = let %x_223
+                %181:ptr<function, i32, read_write> = access %tree, %x_243_save, 1u
+                %x_244:i32 = load %181
+                %183:bool = eq %x_244, -1i
+                if %183 [t: %b70, f: %b71] {  # if_28
+                  %b70 = block {  # true
+                    %184:ptr<function, i32, read_write> = access %tree, %x_243_save, 1u
+                    store %184, 6i
+                    %185:ptr<function, BST, read_write> = access %tree, 6i
+                    store %185, BST(2i, -1i, -1i)
+                    store %x_251_phi, true
+                    exit_loop  # loop_6
+                  }
+                  %b71 = block {  # false
+                    %186:ptr<function, i32, read_write> = access %tree, %x_243_save, 1u
+                    %187:i32 = load %186
+                    store %x_249, %187
+                    %188:i32 = load %x_249
+                    store %x_224_phi, %188
+                    continue %b65
+                  }
+                }
+                exit_if  # if_27
+              }
+              %b69 = block {  # false
+                %x_235_save:i32 = let %x_223
+                %190:ptr<function, i32, read_write> = access %tree, %x_235_save, 2u
+                %x_236:i32 = load %190
+                %192:bool = eq %x_236, -1i
+                if %192 [t: %b72, f: %b73] {  # if_29
+                  %b72 = block {  # true
+                    %193:ptr<function, i32, read_write> = access %tree, %x_235_save, 2u
+                    store %193, 6i
+                    %194:ptr<function, BST, read_write> = access %tree, 6i
+                    store %194, BST(2i, -1i, -1i)
+                    store %x_251_phi, true
+                    exit_loop  # loop_6
+                  }
+                  %b73 = block {  # false
+                    %195:ptr<function, i32, read_write> = access %tree, %x_235_save, 2u
+                    %196:i32 = load %195
+                    store %x_241, %196
+                    %197:i32 = load %x_241
+                    store %x_224_phi, %197
+                    continue %b65
+                  }
+                }
+                exit_if  # if_27
+              }
+            }
+            continue %b65
+          }
+          %b65 = block {  # continuing
+            %198:i32 = load %x_224_phi
+            store %x_224, %198
+            %199:i32 = load %x_224
+            store %x_223_phi, %199
+            next_iteration %b64
+          }
+        }
+        %x_251:bool = load %x_251_phi
+        if %x_251 [t: %b74] {  # if_30
+          %b74 = block {  # true
+            exit_switch  # switch_6
+          }
+        }
+        exit_switch  # switch_6
+      }
+    }
+    %x_256_phi:ptr<function, i32, read_write> = var
+    %x_284_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b75)] {  # switch_7
+      %b75 = block {  # case
+        store %x_256_phi, 0i
+        loop [b: %b76, c: %b77] {  # loop_7
+          %b76 = block {  # body
+            %x_282:ptr<function, i32, read_write> = var
+            %x_274:ptr<function, i32, read_write> = var
+            %x_257:ptr<function, i32, read_write> = var
+            %x_257_phi:ptr<function, i32, read_write> = var
+            %x_256:i32 = load %x_256_phi
+            store %x_284_phi, false
+            %208:bool = lte %x_256, 7i
+            if %208 [t: %b78, f: %b79] {  # if_31
+              %b78 = block {  # true
+                exit_if  # if_31
+              }
+              %b79 = block {  # false
+                exit_loop  # loop_7
+              }
+            }
+            %209:ptr<function, i32, read_write> = access %tree, %x_256, 0u
+            %x_263:i32 = load %209
+            %211:bool = lte 6i, %x_263
+            if %211 [t: %b80, f: %b81] {  # if_32
+              %b80 = block {  # true
+                %x_276_save:i32 = let %x_256
+                %213:ptr<function, i32, read_write> = access %tree, %x_276_save, 1u
+                %x_277:i32 = load %213
+                %215:bool = eq %x_277, -1i
+                if %215 [t: %b82, f: %b83] {  # if_33
+                  %b82 = block {  # true
+                    %216:ptr<function, i32, read_write> = access %tree, %x_276_save, 1u
+                    store %216, 7i
+                    %217:ptr<function, BST, read_write> = access %tree, 7i
+                    store %217, BST(6i, -1i, -1i)
+                    store %x_284_phi, true
+                    exit_loop  # loop_7
+                  }
+                  %b83 = block {  # false
+                    %218:ptr<function, i32, read_write> = access %tree, %x_276_save, 1u
+                    %219:i32 = load %218
+                    store %x_282, %219
+                    %220:i32 = load %x_282
+                    store %x_257_phi, %220
+                    continue %b77
+                  }
+                }
+                exit_if  # if_32
+              }
+              %b81 = block {  # false
+                %x_268_save:i32 = let %x_256
+                %222:ptr<function, i32, read_write> = access %tree, %x_268_save, 2u
+                %x_269:i32 = load %222
+                %224:bool = eq %x_269, -1i
+                if %224 [t: %b84, f: %b85] {  # if_34
+                  %b84 = block {  # true
+                    %225:ptr<function, i32, read_write> = access %tree, %x_268_save, 2u
+                    store %225, 7i
+                    %226:ptr<function, BST, read_write> = access %tree, 7i
+                    store %226, BST(6i, -1i, -1i)
+                    store %x_284_phi, true
+                    exit_loop  # loop_7
+                  }
+                  %b85 = block {  # false
+                    %227:ptr<function, i32, read_write> = access %tree, %x_268_save, 2u
+                    %228:i32 = load %227
+                    store %x_274, %228
+                    %229:i32 = load %x_274
+                    store %x_257_phi, %229
+                    continue %b77
+                  }
+                }
+                exit_if  # if_32
+              }
+            }
+            continue %b77
+          }
+          %b77 = block {  # continuing
+            %230:i32 = load %x_257_phi
+            store %x_257, %230
+            %231:i32 = load %x_257
+            store %x_256_phi, %231
+            next_iteration %b76
+          }
+        }
+        %x_284:bool = load %x_284_phi
+        if %x_284 [t: %b86] {  # if_35
+          %b86 = block {  # true
+            exit_switch  # switch_7
+          }
+        }
+        exit_switch  # switch_7
+      }
+    }
+    %x_289_phi:ptr<function, i32, read_write> = var
+    %x_317_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b87)] {  # switch_8
+      %b87 = block {  # case
+        store %x_289_phi, 0i
+        loop [b: %b88, c: %b89] {  # loop_8
+          %b88 = block {  # body
+            %x_315:ptr<function, i32, read_write> = var
+            %x_307:ptr<function, i32, read_write> = var
+            %x_290:ptr<function, i32, read_write> = var
+            %x_290_phi:ptr<function, i32, read_write> = var
+            %x_289:i32 = load %x_289_phi
+            store %x_317_phi, false
+            %240:bool = lte %x_289, 8i
+            if %240 [t: %b90, f: %b91] {  # if_36
+              %b90 = block {  # true
+                exit_if  # if_36
+              }
+              %b91 = block {  # false
+                exit_loop  # loop_8
+              }
+            }
+            %241:ptr<function, i32, read_write> = access %tree, %x_289, 0u
+            %x_296:i32 = load %241
+            %243:bool = lte 17i, %x_296
+            if %243 [t: %b92, f: %b93] {  # if_37
+              %b92 = block {  # true
+                %x_309_save:i32 = let %x_289
+                %245:ptr<function, i32, read_write> = access %tree, %x_309_save, 1u
+                %x_310:i32 = load %245
+                %247:bool = eq %x_310, -1i
+                if %247 [t: %b94, f: %b95] {  # if_38
+                  %b94 = block {  # true
+                    %248:ptr<function, i32, read_write> = access %tree, %x_309_save, 1u
+                    store %248, 8i
+                    %249:ptr<function, BST, read_write> = access %tree, 8i
+                    store %249, BST(17i, -1i, -1i)
+                    store %x_317_phi, true
+                    exit_loop  # loop_8
+                  }
+                  %b95 = block {  # false
+                    %250:ptr<function, i32, read_write> = access %tree, %x_309_save, 1u
+                    %251:i32 = load %250
+                    store %x_315, %251
+                    %252:i32 = load %x_315
+                    store %x_290_phi, %252
+                    continue %b89
+                  }
+                }
+                exit_if  # if_37
+              }
+              %b93 = block {  # false
+                %x_301_save:i32 = let %x_289
+                %254:ptr<function, i32, read_write> = access %tree, %x_301_save, 2u
+                %x_302:i32 = load %254
+                %256:bool = eq %x_302, -1i
+                if %256 [t: %b96, f: %b97] {  # if_39
+                  %b96 = block {  # true
+                    %257:ptr<function, i32, read_write> = access %tree, %x_301_save, 2u
+                    store %257, 8i
+                    %258:ptr<function, BST, read_write> = access %tree, 8i
+                    store %258, BST(17i, -1i, -1i)
+                    store %x_317_phi, true
+                    exit_loop  # loop_8
+                  }
+                  %b97 = block {  # false
+                    %259:ptr<function, i32, read_write> = access %tree, %x_301_save, 2u
+                    %260:i32 = load %259
+                    store %x_307, %260
+                    %261:i32 = load %x_307
+                    store %x_290_phi, %261
+                    continue %b89
+                  }
+                }
+                exit_if  # if_37
+              }
+            }
+            continue %b89
+          }
+          %b89 = block {  # continuing
+            %262:i32 = load %x_290_phi
+            store %x_290, %262
+            %263:i32 = load %x_290
+            store %x_289_phi, %263
+            next_iteration %b88
+          }
+        }
+        %x_317:bool = load %x_317_phi
+        if %x_317 [t: %b98] {  # if_40
+          %b98 = block {  # true
+            exit_switch  # switch_8
+          }
+        }
+        exit_switch  # switch_8
+      }
+    }
+    %x_322_phi:ptr<function, i32, read_write> = var
+    %x_350_phi:ptr<function, bool, read_write> = var
+    switch 0u [c: (default, %b99)] {  # switch_9
+      %b99 = block {  # case
+        store %x_322_phi, 0i
+        loop [b: %b100, c: %b101] {  # loop_9
+          %b100 = block {  # body
+            %x_348:ptr<function, i32, read_write> = var
+            %x_340:ptr<function, i32, read_write> = var
+            %x_323:ptr<function, i32, read_write> = var
+            %x_323_phi:ptr<function, i32, read_write> = var
+            %x_322:i32 = load %x_322_phi
+            store %x_350_phi, false
+            %272:bool = lte %x_322, 9i
+            if %272 [t: %b102, f: %b103] {  # if_41
+              %b102 = block {  # true
+                exit_if  # if_41
+              }
+              %b103 = block {  # false
+                exit_loop  # loop_9
+              }
+            }
+            %273:ptr<function, i32, read_write> = access %tree, %x_322, 0u
+            %x_329:i32 = load %273
+            %275:bool = lte 13i, %x_329
+            if %275 [t: %b104, f: %b105] {  # if_42
+              %b104 = block {  # true
+                %x_342_save:i32 = let %x_322
+                %277:ptr<function, i32, read_write> = access %tree, %x_342_save, 1u
+                %x_343:i32 = load %277
+                %279:bool = eq %x_343, -1i
+                if %279 [t: %b106, f: %b107] {  # if_43
+                  %b106 = block {  # true
+                    %280:ptr<function, i32, read_write> = access %tree, %x_342_save, 1u
+                    store %280, 9i
+                    %281:ptr<function, BST, read_write> = access %tree, 9i
+                    store %281, BST(13i, -1i, -1i)
+                    store %x_350_phi, true
+                    exit_loop  # loop_9
+                  }
+                  %b107 = block {  # false
+                    %282:ptr<function, i32, read_write> = access %tree, %x_342_save, 1u
+                    %283:i32 = load %282
+                    store %x_348, %283
+                    %284:i32 = load %x_348
+                    store %x_323_phi, %284
+                    continue %b101
+                  }
+                }
+                exit_if  # if_42
+              }
+              %b105 = block {  # false
+                %x_334_save:i32 = let %x_322
+                %286:ptr<function, i32, read_write> = access %tree, %x_334_save, 2u
+                %x_335:i32 = load %286
+                %288:bool = eq %x_335, -1i
+                if %288 [t: %b108, f: %b109] {  # if_44
+                  %b108 = block {  # true
+                    %289:ptr<function, i32, read_write> = access %tree, %x_334_save, 2u
+                    store %289, 9i
+                    %290:ptr<function, BST, read_write> = access %tree, 9i
+                    store %290, BST(13i, -1i, -1i)
+                    store %x_350_phi, true
+                    exit_loop  # loop_9
+                  }
+                  %b109 = block {  # false
+                    %291:ptr<function, i32, read_write> = access %tree, %x_334_save, 2u
+                    %292:i32 = load %291
+                    store %x_340, %292
+                    %293:i32 = load %x_340
+                    store %x_323_phi, %293
+                    continue %b101
+                  }
+                }
+                exit_if  # if_42
+              }
+            }
+            continue %b101
+          }
+          %b101 = block {  # continuing
+            %294:i32 = load %x_323_phi
+            store %x_323, %294
+            %295:i32 = load %x_323
+            store %x_322_phi, %295
+            next_iteration %b100
+          }
+        }
+        %x_350:bool = load %x_350_phi
+        if %x_350 [t: %b110] {  # if_45
+          %b110 = block {  # true
+            exit_switch  # switch_9
+          }
+        }
+        exit_switch  # switch_9
+      }
+    }
+    store %x_353_phi, 0i
+    store %x_356_phi, 0i
+    store %x_358_phi, 0i
+    loop [b: %b111, c: %b112] {  # loop_10
+      %b111 = block {  # body
+        %x_381:ptr<function, i32, read_write> = var
+        %x_391:ptr<function, i32, read_write> = var
+        %x_396:ptr<function, i32, read_write> = var
+        %x_359:ptr<function, i32, read_write> = var
+        %x_354_phi:ptr<function, i32, read_write> = var
+        %x_357_phi:ptr<function, i32, read_write> = var
+        %x_353:i32 = load %x_353_phi
+        %304:i32 = load %x_356_phi
+        store %x_356, %304
+        %x_358:i32 = load %x_358_phi
+        %306:bool = lt %x_358, 20i
+        if %306 [t: %b113, f: %b114] {  # if_46
+          %b113 = block {  # true
+            exit_if  # if_46
+          }
+          %b114 = block {  # false
+            exit_loop  # loop_10
+          }
+        }
+        %x_366_phi:ptr<function, i32, read_write> = var
+        %x_381_phi:ptr<function, i32, read_write> = var
+        %x_382_phi:ptr<function, bool, read_write> = var
+        switch 0u [c: (default, %b115)] {  # switch_10
+          %b115 = block {  # case
+            store %x_366_phi, 0i
+            loop [b: %b116, c: %b117] {  # loop_11
+              %b116 = block {  # body
+                %x_366:i32 = load %x_366_phi
+                store %x_381_phi, %x_353
+                store %x_382_phi, false
+                %311:bool = neq %x_366, -1i
+                if %311 [t: %b118, f: %b119] {  # if_47
+                  %b118 = block {  # true
+                    exit_if  # if_47
+                  }
+                  %b119 = block {  # false
+                    exit_loop  # loop_11
+                  }
+                }
+                %312:ptr<function, BST, read_write> = access %tree, %x_366
+                %x_373:BST = load %312
+                %x_374:i32 = access %x_373, 0u
+                %x_375:i32 = access %x_373, 1u
+                %x_376:i32 = access %x_373, 2u
+                %317:bool = eq %x_374, %x_358
+                if %317 [t: %b120] {  # if_48
+                  %b120 = block {  # true
+                    store %x_381_phi, %x_358
+                    store %x_382_phi, true
+                    exit_loop  # loop_11
+                  }
+                }
+                continue %b117
+              }
+              %b117 = block {  # continuing
+                %318:bool = gt %x_358, %x_374
+                %319:i32 = select %x_375, %x_376, %318
+                store %x_366_phi, %319
+                next_iteration %b116
+              }
+            }
+            %320:i32 = load %x_381_phi
+            store %x_381, %320
+            %x_382:bool = load %x_382_phi
+            %322:i32 = load %x_381
+            store %x_354_phi, %322
+            if %x_382 [t: %b121] {  # if_49
+              %b121 = block {  # true
+                exit_switch  # switch_10
+              }
+            }
+            store %x_354_phi, -1i
+            exit_switch  # switch_10
+          }
+        }
+        %x_354:ptr<function, i32, read_write> = var
+        %x_390:ptr<function, i32, read_write> = var
+        %x_395:ptr<function, i32, read_write> = var
+        %x_391_phi:ptr<function, i32, read_write> = var
+        %x_396_phi:ptr<function, i32, read_write> = var
+        %328:i32 = load %x_354_phi
+        store %x_354, %328
+        switch %x_358 [c: (2i 5i 6i 7i 8i 9i 12i 13i 15i 17i, %b122), c: (default, %b123)] {  # switch_11
+          %b122 = block {  # case
+            %329:i32 = load %x_356
+            store %x_391_phi, %329
+            %330:i32 = load %x_354
+            %331:i32 = bitcast %x_358
+            %332:bool = eq %330, %331
+            if %332 [t: %b124] {  # if_50
+              %b124 = block {  # true
+                %333:i32 = load %x_356
+                %334:i32 = add %333, 1i
+                %335:i32 = bitcast %334
+                store %x_390, %335
+                %336:i32 = load %x_390
+                store %x_391_phi, %336
+                exit_if  # if_50
+              }
+            }
+            %337:i32 = load %x_391_phi
+            store %x_391, %337
+            %338:i32 = load %x_391
+            store %x_357_phi, %338
+            exit_switch  # switch_11
+          }
+          %b123 = block {  # case
+            %339:i32 = load %x_356
+            store %x_396_phi, %339
+            %340:i32 = load %x_354
+            %341:bool = eq %340, -1i
+            if %341 [t: %b125] {  # if_51
+              %b125 = block {  # true
+                %342:i32 = load %x_356
+                %343:i32 = add %342, 1i
+                %344:i32 = bitcast %343
+                store %x_395, %344
+                %345:i32 = load %x_395
+                store %x_396_phi, %345
+                exit_if  # if_51
+              }
+            }
+            %346:i32 = load %x_396_phi
+            store %x_396, %346
+            %347:i32 = load %x_396
+            store %x_357_phi, %347
+            exit_switch  # switch_11
+          }
+        }
+        %x_357:i32 = load %x_357_phi
+        continue %b112
+      }
+      %b112 = block {  # continuing
+        %349:i32 = add %x_358, 1i
+        store %x_359, %349
+        %350:i32 = load %x_354
+        store %x_353_phi, %350
+        store %x_356_phi, %x_357
+        %351:i32 = load %x_359
+        store %x_358_phi, %351
+        next_iteration %b111
+      }
+    }
+    %352:i32 = load %x_356
+    %353:bool = eq %352, 20i
+    if %353 [t: %b126, f: %b127] {  # if_52
+      %b126 = block {  # true
+        store %x_GLF_color, vec4<f32>(1.0f, 0.0f, 0.0f, 1.0f)
+        exit_if  # if_52
+      }
+      %b127 = block {  # false
+        store %x_GLF_color, vec4<f32>(0.0f, 0.0f, 1.0f, 1.0f)
+        exit_if  # if_52
+      }
+    }
+    ret
+  }
+}
+%tint_symbol = @fragment func():main_out -> %b128 {
+  %b128 = block {
+    %355:void = call %main_1
+    %356:vec4<f32> = load %x_GLF_color
+    %357:main_out = construct %356
+    ret %357
+  }
+}
+
+invalid entry point IO struct uses
 ********************************************************************
 *  The tint shader compiler has encountered an unexpected error.   *
 *                                                                  *

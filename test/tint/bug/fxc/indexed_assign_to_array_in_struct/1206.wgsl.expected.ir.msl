@@ -1,6 +1,6 @@
 SKIP: FAILED
 
-<dawn>/src/tint/lang/msl/writer/printer/printer.cc:355 internal compiler error: Particle = struct @align(16) {
+<dawn>/src/tint/lang/msl/writer/printer/printer.cc:469 internal compiler error: Particle = struct @align(16) {
   position:array<vec3<f32>, 8> @offset(0)
   lifetime:f32 @offset(128)
   color:vec4<f32> @offset(144)
