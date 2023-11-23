@@ -28,6 +28,8 @@
 #ifndef SRC_DAWN_WIRE_CLIENT_INSTANCE_H_
 #define SRC_DAWN_WIRE_CLIENT_INSTANCE_H_
 
+#include <unordered_set>
+
 #include "dawn/webgpu.h"
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireCmd_autogen.h"
@@ -42,6 +44,8 @@ WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor);
 class Instance final : public ObjectBase {
   public:
     using ObjectBase::ObjectBase;
+
+    WireResult Initialize();
 
     void RequestAdapter(const WGPURequestAdapterOptions* options,
                         WGPURequestAdapterCallback callback,
@@ -58,6 +62,14 @@ class Instance final : public ObjectBase {
 
     void ProcessEvents();
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
+
+    bool HasWGSLLanguageFeature(WGPUWGSLFeatureName feature) const;
+    size_t EnumerateWGSLLanguageFeatures(WGPUWGSLFeatureName* features) const;
+
+  private:
+    void GatherWGSLFeatures();
+
+    std::unordered_set<WGPUWGSLFeatureName> mWGSLFeatures;
 };
 
 }  // namespace dawn::wire::client
