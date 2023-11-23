@@ -39,6 +39,30 @@
       },
       "revId": "1d0752ee576baf13e306d2ca9d1f2c2a5caf8c57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0248eef_09d8df7d",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-11-23T16:23:11Z",
+      "side": 1,
+      "message": "Heh. This worked fine on my draft CL for dp4a validation.\nSo what do I know,",
+      "parentUuid": "49765a43_809044c5",
+      "range": {
+        "startLine": 266,
+        "startChar": 55,
+        "endLine": 266,
+        "endChar": 59
+      },
+      "revId": "1d0752ee576baf13e306d2ca9d1f2c2a5caf8c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
