@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a3b452c_495b9a33",
+        "filename": "DEPS",
+        "patchSetId": 6
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-23T20:08:20Z",
+      "side": 1,
+      "message": "This is temporary until upstream PR lands: https://github.com/microsoft/DirectXShaderCompiler/pull/6060",
+      "revId": "c9d4997069a19c892cd76963a81b323913ed0018",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
