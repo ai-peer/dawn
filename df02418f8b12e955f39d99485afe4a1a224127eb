@@ -16,6 +16,23 @@
       "message": "Thanks, this CL should be good to go now!",
       "revId": "df02418f8b12e955f39d99485afe4a1a224127eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40dc7f06_7410f27f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-23T16:10:59Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "df02418f8b12e955f39d99485afe4a1a224127eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
