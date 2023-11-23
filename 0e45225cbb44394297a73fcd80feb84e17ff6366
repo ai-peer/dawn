@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec44637d_9b3c3834",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-23T04:20:32Z",
+      "side": 1,
+      "message": "I wanted to do the INIT structs before this because of this, but I also want to get this mostly out of the way. I\u0027m not sure how high the risk of breakage is.",
+      "revId": "0e45225cbb44394297a73fcd80feb84e17ff6366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
