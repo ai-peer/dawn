@@ -888,6 +888,109 @@ struct BuiltinPolyfill::State {
         return name;
     }
 
+    Symbol Dot4I8Packed() {
+        auto name = b.Symbols().New("tint_dot4_i8_packed");
+
+        auto body = tint::Vector{
+            // In v1 and v2, each 8-bit "item" represents a signed integer, so first we need to get
+            // the signed integer value of these "items" before computing dot products. Note that
+            // the first bit of the 8-bit "item" being 1 means it represents a negative integer.
+            // let v10_bits = i32(v1 & 0xff);
+            // let v10 = select(v10_bits, v10_bits - 256, v10_bits > 127);
+            // let v20_bits = i32(v2 & 0xff);
+            // let v20 = select(v20_bits, v20_bits - 256, v20_bits > 127);
+            b.Decl(b.Let("v10_bits", b.Call("i32", b.And("v1", u32(0xff))))),
+            b.Decl(b.Let("v10", b.Call("select", "v10_bits", b.Sub("v10_bits", i32(256)),
+                                       b.GreaterThan("v10_bits", i32(127))))),
+            b.Decl(b.Let("v20_bits", b.Call("i32", b.And("v2", u32(0xff))))),
+            b.Decl(b.Let("v20", b.Call("select", "v20_bits", b.Sub("v20_bits", i32(256)),
+                                       b.GreaterThan("v20_bits", i32(127))))),
+
+            // let v11_bits = i32(shr(v1 & 0xff00, 8));
+            // let v11 = select(v11_bits, v11_bits - 256, v11_bits > 127);
+            // let v21_bits = i32(shr(v2 & 0xff00, 8));
+            // let v21 = select(v21_bits, v21_bits - 256, v21_bits > 127);
+            b.Decl(b.Let("v11_bits", b.Call("i32", b.Shr(b.And("v1", u32(0xff00)), u32(8))))),
+            b.Decl(b.Let("v11", b.Call("select", "v11_bits", b.Sub("v11_bits", i32(256)),
+                                       b.GreaterThan("v11_bits", i32(127))))),
+            b.Decl(b.Let("v21_bits", b.Call("i32", b.Shr(b.And("v2", u32(0xff00)), u32(8))))),
+            b.Decl(b.Let("v21", b.Call("select", "v21_bits", b.Sub("v21_bits", i32(256)),
+                                       b.GreaterThan("v21_bits", i32(127))))),
+
+            // let v12_bits = i32(shr(v1 & 0xff0000, 16));
+            // let v12 = select(v12_bits, v12_bits - 256, v12_bits > 127);
+            // let v22_bits = i32(shr(v2 & 0xff0000, 16));
+            // let v22 = select(v22_bits, v22_bits - 256, v22_bits > 127);
+            b.Decl(b.Let("v12_bits", b.Call("i32", b.Shr(b.And("v1", u32(0xff0000)), u32(16))))),
+            b.Decl(b.Let("v12", b.Call("select", "v12_bits", b.Sub("v12_bits", i32(256)),
+                                       b.GreaterThan("v12_bits", i32(127))))),
+            b.Decl(b.Let("v22_bits", b.Call("i32", b.Shr(b.And("v2", u32(0xff0000)), u32(16))))),
+            b.Decl(b.Let("v22", b.Call("select", "v22_bits", b.Sub("v22_bits", i32(256)),
+                                       b.GreaterThan("v22_bits", i32(127))))),
+
+            // let v13_bits = i32(shr(v1 & 0xff000000, 24));
+            // let v13 = select(v13_bits, v13_bits - 256, v13_bits > 127);
+            // let v23_bits = i32(shr(v2 & 0xff000000, 24));
+            // let v23 = select(v23_bits, v23_bits - 256, v23_bits > 127);
+            b.Decl(b.Let("v13_bits", b.Call("i32", b.Shr(b.And("v1", u32(0xff000000)), u32(24))))),
+            b.Decl(b.Let("v13", b.Call("select", "v13_bits", b.Sub("v13_bits", i32(256)),
+                                       b.GreaterThan("v13_bits", i32(127))))),
+            b.Decl(b.Let("v23_bits", b.Call("i32", b.Shr(b.And("v2", u32(0xff000000)), u32(24))))),
+            b.Decl(b.Let("v23", b.Call("select", "v23_bits", b.Sub("v23_bits", i32(256)),
+                                       b.GreaterThan("v23_bits", i32(127))))),
+
+            // return v10 * v20 + v11 * v21 + v12 * v22 + v13 * v23;
+            b.Return(
+                b.Add(b.Add(b.Add(b.Mul("v10", "v20"), b.Mul("v11", "v21")), b.Mul("v12", "v22")),
+                      b.Mul("v13", "v23")))};
+        b.Func(name,
+               tint::Vector{
+                   b.Param("v1", b.ty.u32()),
+                   b.Param("v2", b.ty.u32()),
+               },
+               b.ty.i32(), body);
+
+        return name;
+    }
+
+    Symbol Dot4U8Packed() {
+        auto name = b.Symbols().New("tint_dot4_u8_packed");
+
+        auto body = tint::Vector{
+            // let v10 = v1 & 0xff;
+            // let v20 = v2 & 0xff;
+            b.Decl(b.Let("v10", b.And("v1", u32(0xff)))),
+            b.Decl(b.Let("v20", b.And("v2", u32(0xff)))),
+
+            // let v11 = shr(v1 & 0xff00, 8);
+            // let v21 = shr(v2 & 0xff00, 8);
+            b.Decl(b.Let("v11", b.Shr(b.And("v1", u32(0xff00)), u32(8)))),
+            b.Decl(b.Let("v21", b.Shr(b.And("v2", u32(0xff00)), u32(8)))),
+
+            // let v12 = shr(v1 & 0xff0000, 16);
+            // let v22 = shr(v2 & 0xff0000, 16);
+            b.Decl(b.Let("v12", b.Shr(b.And("v1", u32(0xff0000)), u32(16)))),
+            b.Decl(b.Let("v22", b.Shr(b.And("v2", u32(0xff0000)), u32(16)))),
+
+            // let v13 = shr(v1 & 0xff000000, 24);
+            // let v23 = shr(v2 & 0xff000000, 24);
+            b.Decl(b.Let("v13", b.Shr(b.And("v1", u32(0xff000000)), u32(24)))),
+            b.Decl(b.Let("v23", b.Shr(b.And("v2", u32(0xff000000)), u32(24)))),
+
+            // return v10 * v20 + v11 * v21 + v12 * v22 + v13 * v23;
+            b.Return(
+                b.Add(b.Add(b.Add(b.Mul("v10", "v20"), b.Mul("v11", "v21")), b.Mul("v12", "v22")),
+                      b.Mul("v13", "v23")))};
+        b.Func(name,
+               tint::Vector{
+                   b.Param("v1", b.ty.u32()),
+                   b.Param("v2", b.ty.u32()),
+               },
+               b.ty.u32(), body);
+
+        return name;
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     // Inline polyfills
     ////////////////////////////////////////////////////////////////////////////
@@ -1269,6 +1372,22 @@ struct BuiltinPolyfill::State {
                             });
                         }
                         return Symbol{};
+
+                    case wgsl::BuiltinFn::kDot4I8Packed: {
+                        if (cfg.builtins.dot_4x8_packed) {
+                            return builtin_polyfills.GetOrCreate(builtin,
+                                                                 [&] { return Dot4I8Packed(); });
+                        }
+                        return Symbol{};
+                    }
+
+                    case wgsl::BuiltinFn::kDot4U8Packed: {
+                        if (cfg.builtins.dot_4x8_packed) {
+                            return builtin_polyfills.GetOrCreate(builtin,
+                                                                 [&] { return Dot4U8Packed(); });
+                        }
+                        return Symbol{};
+                    }
 
                     default:
                         return Symbol{};
