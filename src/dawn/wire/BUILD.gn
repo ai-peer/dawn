@@ -67,6 +67,9 @@ dawn_component("wire") {
   deps = [
     ":gen",
     "${dawn_root}/src/dawn/common",
+
+    # Used for wgslLanguageFeatures
+    "${dawn_root}/src/tint/lang/wgsl/public",
   ]
 
   configs = [ "${dawn_root}/src/dawn/common:internal_config" ]

@@ -42,6 +42,7 @@
 #include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "tint/lang/wgsl/public/language_feature.h"
 
 // For SwiftShader fallback
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
@@ -221,6 +222,8 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     SetPlatform(dawnDesc != nullptr ? dawnDesc->platform : mDefaultPlatform.get());
 
     DAWN_TRY(mEventManager.Initialize(descriptor));
+
+    GatherWGSLFeatures();
 
     return {};
 }
@@ -546,6 +549,24 @@ Surface* InstanceBase::APICreateSurface(const SurfaceDescriptor* descriptor) {
     }
 
     return new Surface(this, descriptor);
+}
+
+void InstanceBase::GatherWGSLFeatures() {
+    // XXX
+}
+
+bool InstanceBase::APIHasWGSLLanguageFeature(wgpu::WGSLFeatureName feature) const {
+    return mWGSLFeatures.count(feature) != 0;
+}
+
+size_t InstanceBase::APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* features) const {
+    if (features != nullptr) {
+        for (wgpu::WGSLFeatureName f : mWGSLFeatures) {
+            *features = f;
+            ++features;
+        }
+    }
+    return mWGSLFeatures.size();
 }
 
 }  // namespace dawn::native
