@@ -50,6 +50,24 @@
       "message": "Do we need to gate this on mRenderNodeFd \u003e\u003d 0? Likewise for mGbmDevice !\u003d nullptr?",
       "revId": "496b8e713aeda537c632665fb2afbf17a4ba3886",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e56fddd9_d5807b4b",
+        "filename": "src/dawn/tests/end2end/VideoViewsTests_gbm.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-23T08:49:10Z",
+      "side": 1,
+      "message": "Sure, it\u0027s better. Done!",
+      "parentUuid": "a4810e9b_73488f0c",
+      "revId": "496b8e713aeda537c632665fb2afbf17a4ba3886",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
