@@ -285,6 +285,24 @@
       "message": "Add comments about this",
       "revId": "5324c6e6a71829b490c7afab42a0041ebb211288",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a60adae_b2e53d1c",
+        "filename": "src/dawn/native/d3d11/RenderPipelineD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 476,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-23T01:46:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a8eece7a_7507437e",
+      "revId": "5324c6e6a71829b490c7afab42a0041ebb211288",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
