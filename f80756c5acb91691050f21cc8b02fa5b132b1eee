@@ -16,6 +16,23 @@
       "message": "I verified that this now regenerates the workgroupUniformLoad end2end tests as needed.",
       "revId": "f80756c5acb91691050f21cc8b02fa5b132b1eee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ceafd204_07601b4d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-23T19:36:50Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "f80756c5acb91691050f21cc8b02fa5b132b1eee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
