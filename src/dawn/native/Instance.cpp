@@ -34,6 +34,7 @@
 #include "dawn/common/GPUInfo.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
+#include "dawn/common/WGSLFeatureMapping.h"
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
@@ -42,6 +43,8 @@
 #include "dawn/native/Toggles.h"
 #include "dawn/native/ValidationUtils_autogen.h"
 #include "dawn/platform/DawnPlatform.h"
+#include "tint/lang/wgsl/features/language_feature.h"
+#include "tint/lang/wgsl/features/status.h"
 
 // For SwiftShader fallback
 #if defined(DAWN_ENABLE_BACKEND_VULKAN)
@@ -106,6 +109,31 @@ dawn::platform::CachingInterface* GetCachingInterface(dawn::platform::Platform* 
     return nullptr;
 }
 
+wgpu::WGSLFeatureName ToWGPUFeature(tint::wgsl::LanguageFeature f) {
+    switch (f) {
+#define CASE(WgslName, WgpuName)                \
+    case tint::wgsl::LanguageFeature::WgslName: \
+        return wgpu::WGSLFeatureName::WgpuName;
+        DAWN_FOREACH_WGSL_FEATURE(CASE)
+#undef CASE
+    }
+}
+
+tint::wgsl::LanguageFeature ToWGSLFeature(wgpu::WGSLFeatureName f) {
+    switch (f) {
+#define CASE(WgslName, WgpuName)          \
+    case wgpu::WGSLFeatureName::WgpuName: \
+        return tint::wgsl::LanguageFeature::WgslName;
+        DAWN_FOREACH_WGSL_FEATURE(CASE)
+#undef CASE
+        case wgpu::WGSLFeatureName::Packed4x8IntegerDotProduct:
+        case wgpu::WGSLFeatureName::UnrestrictedPointerParameters:
+            return tint::wgsl::LanguageFeature::kUndefined;
+    }
+}
+
+DAWN_UNUSED_FUNC(ToWGPUFeature);
+DAWN_UNUSED_FUNC(ToWGSLFeature);
 }  // anonymous namespace
 
 wgpu::Bool APIGetInstanceFeatures(InstanceFeatures* features) {
@@ -221,6 +249,8 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     SetPlatform(dawnDesc != nullptr ? dawnDesc->platform : mDefaultPlatform.get());
 
     DAWN_TRY(mEventManager.Initialize(descriptor));
+
+    GatherWGSLFeatures();
 
     return {};
 }
@@ -546,6 +576,46 @@ Surface* InstanceBase::APICreateSurface(const SurfaceDescriptor* descriptor) {
     }
 
     return new Surface(this, descriptor);
+}
+
+void InstanceBase::GatherWGSLFeatures() {
+    for (auto wgslFeature : tint::wgsl::kAllLanguageFeatures) {
+        bool enable;
+        switch (tint::wgsl::GetLanguageFeatureStatus(wgslFeature)) {
+            case tint::wgsl::FeatureStatus::kUnknown:
+            case tint::wgsl::FeatureStatus::kUnimplemented:
+                enable = false;
+                break;
+
+            case tint::wgsl::FeatureStatus::kUnsafeExperimental:
+            case tint::wgsl::FeatureStatus::kExperimental:
+                enable = mToggles.IsEnabled(Toggle::AllowUnsafeAPIs);
+                break;
+
+            case tint::wgsl::FeatureStatus::kShippedWithKillswitch:
+            case tint::wgsl::FeatureStatus::kShipped:
+                enable = true;
+                break;
+        }
+
+        if (enable) {
+            mWGSLFeatures.emplace(ToWGPUFeature(wgslFeature));
+        }
+    }
+}
+
+bool InstanceBase::APIHasWGSLLanguageFeature(wgpu::WGSLFeatureName feature) const {
+    return mWGSLFeatures.count(feature) != 0;
+}
+
+size_t InstanceBase::APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* features) const {
+    if (features != nullptr) {
+        for (wgpu::WGSLFeatureName f : mWGSLFeatures) {
+            *features = f;
+            ++features;
+        }
+    }
+    return mWGSLFeatures.size();
 }
 
 }  // namespace dawn::native
