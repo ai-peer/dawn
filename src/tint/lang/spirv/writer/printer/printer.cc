@@ -1306,6 +1306,9 @@ class Printer {
             case spirv::BuiltinFn::kImageWrite:
                 op = spv::Op::OpImageWrite;
                 break;
+            case spirv::BuiltinFn::kLogicalNot:
+                op = spv::Op::OpLogicalNot;
+                break;
             case spirv::BuiltinFn::kMatrixTimesMatrix:
                 op = spv::Op::OpMatrixTimesMatrix;
                 break;

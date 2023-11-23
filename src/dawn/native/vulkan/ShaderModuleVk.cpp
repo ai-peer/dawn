@@ -339,6 +339,11 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
     if (ToBackend(GetDevice()->GetPhysicalDevice())->IsAndroidQualcomm()) {
         req.tintOptions.pass_matrix_by_pointer = true;
     }
+    // Negate branch conditions on Mali devices to workaround a known bug.
+    // See crbug.com/tint/2101.
+    if (ToBackend(GetDevice()->GetPhysicalDevice())->IsAndroidARM()) {
+        req.tintOptions.negate_branch_conditions = true;
+    }
 
     const CombinedLimits& limits = GetDevice()->GetLimits();
     req.limits = LimitsForCompilationRequest::Create(limits.v1);
