@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "83e2b495_70ef7f32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-11-23T10:14:20Z",
+      "side": 1,
+      "message": "Corentin, for context: This CL is still WIP, but I\u0027m looking for input on handling test crashes.",
+      "revId": "ce126e0c9aab884c7d13529e2e6b67c045d3163a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "195cc51e_50cc693d",
