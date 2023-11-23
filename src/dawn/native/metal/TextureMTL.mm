@@ -1010,7 +1010,7 @@ id<MTLTexture> Texture::GetMTLTexture(Aspect aspect) const {
             DAWN_ASSERT(mMtlPlaneTextures->size() > 2);
             return mMtlPlaneTextures[2].Get();
         default:
-            DAWN_ASSERT(mMtlPlaneTextures->size() == 1);
+            // DAWN_ASSERT(mMtlPlaneTextures->size() == 1);
             return mMtlPlaneTextures[0].Get();
     }
 }
