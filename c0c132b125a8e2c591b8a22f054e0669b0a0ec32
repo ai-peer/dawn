@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "277cff4d_e6d02fd0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-24T18:48:09Z",
+      "side": 1,
+      "message": "Unsurprisingly, fixing this has exposed build errors. See this bug I filed: https://bugs.chromium.org/p/tint/issues/detail?id\u003d2109",
+      "revId": "c0c132b125a8e2c591b8a22f054e0669b0a0ec32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
