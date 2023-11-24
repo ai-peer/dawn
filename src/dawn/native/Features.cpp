@@ -174,7 +174,12 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "blend factors along with @index WGSL output attribute.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "dual_source_blending.md",
-      FeatureInfo::FeatureState::Experimental}},
+#if DAWN_PLATFORM_IS(WINDOWS)
+      FeatureInfo::FeatureState::Stable
+#else
+      FeatureInfo::FeatureState::Experimental
+#endif
+     }},
     {Feature::D3D11MultithreadProtected,
      {"Enable ID3D11Multithread protection for interop with external users of the D3D11 device.",
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"

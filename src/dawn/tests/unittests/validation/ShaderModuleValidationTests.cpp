@@ -799,7 +799,11 @@ constexpr struct WGSLExtensionInfo kExtensions[] = {
     {"chromium_experimental_subgroups", true, "chromium-experimental-subgroups"},
     {"chromium_experimental_pixel_local", true, "pixel-local-storage-coherent"},
     {"chromium_disable_uniformity_analysis", true, nullptr},
+#if DAWN_PLATFORM_IS(WINDOWS)
+    {"chromium_internal_dual_source_blending", false, "dual-source-blending"},
+#else
     {"chromium_internal_dual_source_blending", true, "dual-source-blending"},
+#endif
     {"chromium_experimental_framebuffer_fetch", true, "framebuffer-fetch"},
 
     // Currently the following WGSL extensions are not enabled under any situation.
