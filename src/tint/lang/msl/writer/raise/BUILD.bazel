@@ -45,6 +45,7 @@ cc_library(
     "raise.h",
   ],
   deps = [
+    "//src/tint/lang/core/ir/transform",
     "//src/tint/utils/containers",
     "//src/tint/utils/diagnostic",
     "//src/tint/utils/ice",

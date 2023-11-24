@@ -27,19 +27,22 @@
 
 #include "src/tint/lang/msl/writer/raise/raise.h"
 
+#include "src/tint/lang/core/ir/transform/value_to_let.h"
+
 #include <utility>
+
+#define RUN_TRANSFORM(name)                              \
+    do {                                                 \
+        auto result = core::ir::transform::name(module); \
+        if (!result) {                                   \
+            return result;                               \
+        }                                                \
+    } while (false)
 
 namespace tint::msl::raise {
 
-Result<SuccessType> Raise(core::ir::Module&) {
-    // #define RUN_TRANSFORM(name)
-    //     do {
-    //         auto result = core::ir::transform::name(module);
-    //         if (!result) {
-    //             return result;
-    //         }
-    //     } while (false)
-
+Result<SuccessType> Raise(core::ir::Module& module) {
+    RUN_TRANSFORM(ValueToLet);
     return Success;
 }
 

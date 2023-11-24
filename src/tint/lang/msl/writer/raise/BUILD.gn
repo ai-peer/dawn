@@ -44,6 +44,7 @@ libtint_source_set("raise") {
     "raise.h",
   ]
   deps = [
+    "${tint_src_dir}/lang/core/ir/transform",
     "${tint_src_dir}/utils/containers",
     "${tint_src_dir}/utils/diagnostic",
     "${tint_src_dir}/utils/ice",
