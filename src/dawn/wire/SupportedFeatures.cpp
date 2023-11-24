@@ -40,6 +40,8 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_SurfaceCapabilities:
         case WGPUFeatureName_D3D11MultithreadProtected:
         case WGPUFeatureName_HostMappedPointer:
+        case WGPUFeatureName_BufferMapExtendedUsages:
+            return false;
         case WGPUFeatureName_SharedTextureMemoryVkDedicatedAllocation:
         case WGPUFeatureName_SharedTextureMemoryAHardwareBuffer:
         case WGPUFeatureName_SharedTextureMemoryDmaBuf:
@@ -54,8 +56,6 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_SharedFenceVkSemaphoreZirconHandle:
         case WGPUFeatureName_SharedFenceDXGISharedHandle:
         case WGPUFeatureName_SharedFenceMTLSharedEvent:
-        case WGPUFeatureName_BufferMapExtendedUsages:
-            return false;
         case WGPUFeatureName_Depth32FloatStencil8:
         case WGPUFeatureName_TimestampQuery:
         case WGPUFeatureName_ChromiumExperimentalTimestampQueryInsidePasses:
