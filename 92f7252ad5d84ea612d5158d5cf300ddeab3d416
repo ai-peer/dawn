@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "93576b59_1935eb01",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-24T07:06:54Z",
+      "side": 1,
+      "message": "The Dawn \u0027Experiment\u0027 features are guarded under \"--enable-dawn-features\u003dallow_unsafe_apis\". This moves DualSourceBlending to \u0027Stable\u0027 state, so that Graphite can by default use it on Win. The MotionMark1.2 score on Gen12 can surge from 660 to 1100 with it enabled. More details of perf data can be found [here](https://docs.google.com/spreadsheets/d/1q92nfMMLc9MUW976Y-Txk3tzNOdp9eY1MKhqbFarJpk/edit?resourcekey\u003d0-QurcuMefwg447hihiz1P7A#gid\u003d394645791).",
+      "revId": "92f7252ad5d84ea612d5158d5cf300ddeab3d416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
