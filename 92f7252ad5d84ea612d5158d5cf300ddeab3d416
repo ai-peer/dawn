@@ -16,6 +16,23 @@
       "message": "The Dawn \u0027Experiment\u0027 features are guarded under \"--enable-dawn-features\u003dallow_unsafe_apis\". This moves DualSourceBlending to \u0027Stable\u0027 state, so that Graphite can by default use it on Win. The MotionMark1.2 score on Gen12 can surge from 660 to 1100 with it enabled. More details of perf data can be found [here](https://docs.google.com/spreadsheets/d/1q92nfMMLc9MUW976Y-Txk3tzNOdp9eY1MKhqbFarJpk/edit?resourcekey\u003d0-QurcuMefwg447hihiz1P7A#gid\u003d394645791).",
       "revId": "92f7252ad5d84ea612d5158d5cf300ddeab3d416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3618abba_f6900940",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-24T09:11:02Z",
+      "side": 1,
+      "message": "Instead of this, can we make https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/dawn_context_provider.cc;l\u003d258-262?q\u003ddawn_context_provider.cc\u0026ss\u003dchromium not depend on the OS and always allow_unsafe_apis for graphite?",
+      "revId": "92f7252ad5d84ea612d5158d5cf300ddeab3d416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
