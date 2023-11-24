@@ -69,6 +69,30 @@
       },
       "revId": "a2eea8b1687e33786b1a49587a62af31fc3a2e1d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f68f7d0_8c5a7ef5",
+        "filename": "src/dawn/samples/utils/CMakeLists.txt",
+        "patchSetId": 11
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1004576
+      },
+      "writtenOn": "2023-11-24T13:21:30Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "5370c807_c0cd0700",
+      "range": {
+        "startLine": 41,
+        "startChar": 49,
+        "endLine": 41,
+        "endChar": 53
+      },
+      "revId": "a2eea8b1687e33786b1a49587a62af31fc3a2e1d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
