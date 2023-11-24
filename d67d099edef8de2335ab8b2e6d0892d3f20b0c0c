@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82370a0a_bcd1e4f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-24T11:06:06Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "d67d099edef8de2335ab8b2e6d0892d3f20b0c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20c10b4c_c20bcb1e",
+        "filename": "src/dawn/wire/SupportedFeatures.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-24T11:06:06Z",
+      "side": 1,
+      "message": "Maybe add a small comment explaining why it\u0027s ok to expose these through the wire?",
+      "revId": "d67d099edef8de2335ab8b2e6d0892d3f20b0c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
