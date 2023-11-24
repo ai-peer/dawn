@@ -16,6 +16,23 @@
       "message": "Thanks for your patience.\n\nI am done with making PartitionAlloc to support MSVC cl.exe compiler.\n\nThis is the exact same patch as the one Corentin reviewed. I only updated PartitionAlloc commit hash.\n\nThis is ready now \\o/",
       "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5720bb50_4ce4bebb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-24T09:06:41Z",
+      "side": 1,
+      "message": "Thank you for iterating on this! LGTM",
+      "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
