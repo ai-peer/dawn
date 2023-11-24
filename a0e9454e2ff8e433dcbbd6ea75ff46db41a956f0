@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e481997_f40c3178",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-11-24T17:53:42Z",
+      "side": 1,
+      "message": "The logic and code look good to me.\nOnly putting +1 because of the question Corentin asked.\nLeaving the +2 for Ben to decide.",
+      "revId": "a0e9454e2ff8e433dcbbd6ea75ff46db41a956f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc5b7d2d_535badd5",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-11-24T09:13:26Z",
       "side": 1,
       "message": "Since this is a language feature, I wonder if these options should be computed by Tint in the writer\u0027s part that adds transforms. Ben WDYT?",
+      "revId": "a0e9454e2ff8e433dcbbd6ea75ff46db41a956f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9aa6bb49_2938f790",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-11-24T17:53:42Z",
+      "side": 1,
+      "message": "I think Dawn has to tell Tint if the environment requires the polyfill. So I think this is right?  Later it can be refined for the case where the HLSL primitives are available.",
+      "parentUuid": "fc5b7d2d_535badd5",
       "revId": "a0e9454e2ff8e433dcbbd6ea75ff46db41a956f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
