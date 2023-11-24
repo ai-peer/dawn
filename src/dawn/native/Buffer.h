@@ -99,6 +99,8 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
     void MarkUsedInPendingCommands();
+    ExecutionSerial GetLastUsageSerial() const;
+    virtual MaybeError UploadData(uint64_t bufferOffset, const void* data, size_t size);
 
     virtual void* GetMappedPointer() = 0;
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
@@ -134,8 +136,6 @@ class BufferBase : public ApiObjectBase {
 
     uint64_t mAllocatedSize = 0;
 
-    ExecutionSerial mLastUsageSerial = ExecutionSerial(0);
-
   private:
     std::function<void()> PrepareMappingCallback(MapRequestID mapID,
                                                  WGPUBufferMapAsyncStatus status);
@@ -159,6 +159,7 @@ class BufferBase : public ApiObjectBase {
     wgpu::BufferUsage mUsage = wgpu::BufferUsage::None;
     BufferState mState;
     bool mIsDataInitialized = false;
+    ExecutionSerial mLastUsageSerial = ExecutionSerial(0);
 
     // mStagingBuffer is used to implement mappedAtCreation for
     // buffers with non-mappable usage. It is transiently allocated
