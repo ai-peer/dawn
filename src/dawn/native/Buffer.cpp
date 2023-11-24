@@ -862,6 +862,25 @@ void BufferBase::MarkUsedInPendingCommands() {
     mLastUsageSerial = serial;
 }
 
+MaybeError BufferBase::UploadData(uint64_t bufferOffset, const void* data, size_t size) {
+    if (size == 0) {
+        return {};
+    }
+
+    DeviceBase* device = GetDevice();
+
+    UploadHandle uploadHandle;
+    DAWN_TRY_ASSIGN(uploadHandle,
+                    device->GetDynamicUploader()->Allocate(size, device->GetPendingCommandSerial(),
+                                                           kCopyBufferToBufferOffsetAlignment));
+    DAWN_ASSERT(uploadHandle.mappedBuffer != nullptr);
+
+    memcpy(uploadHandle.mappedBuffer, data, size);
+
+    return device->CopyFromStagingToBuffer(uploadHandle.stagingBuffer, uploadHandle.startOffset,
+                                           this, bufferOffset, size);
+}
+
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
     return offset == 0 && size == GetSize();
 }

@@ -94,6 +94,7 @@ class Buffer final : public BufferBase {
     bool IsCPUWritableAtCreation() const override;
     MaybeError MapAtCreationImpl() override;
     void* GetMappedPointer() override;
+    MaybeError UploadData(uint64_t bufferOffset, const void* data, size_t size) override;
 
     VkBuffer mHandle = VK_NULL_HANDLE;
     ResourceMemoryAllocation mMemoryAllocation;
@@ -111,6 +112,9 @@ class Buffer final : public BufferBase {
     // Track which usages have read the buffer since the last write.
     wgpu::BufferUsage mReadUsage = wgpu::BufferUsage::None;
     wgpu::ShaderStage mReadShaderStages = wgpu::ShaderStage::None;
+
+    bool mIsCPUWritable = false;
+    bool mHasWriteTransitioned = false;
 };
 
 }  // namespace dawn::native::vulkan

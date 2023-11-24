@@ -155,7 +155,7 @@ ResultOrError<ResourceMemoryAllocation> ResourceMemoryAllocator::Allocate(
     const VkMemoryRequirements& requirements,
     MemoryKind kind,
     bool forceDisableSubAllocation) {
-    // The Vulkan spec guarantees at least on memory type is valid.
+    // The Vulkan spec guarantees at least one memory type is valid.
     int memoryType = FindBestTypeIndex(requirements, kind);
     DAWN_ASSERT(memoryType >= 0);
 
