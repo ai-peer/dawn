@@ -239,7 +239,7 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
             -DTINT_BUILD_GLSL_WRITER=OFF \
             -DTINT_BUILD_GLSL_VALIDATOR=OFF \
             -DTINT_BUILD_BENCHMARKS=OFF
-        cmake --build . -- tint --jobs=$(nproc)
+        cmake --build . -- --jobs=$(nproc)
         cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS} \
             -DTINT_BUILD_SPV_READER=ON \
             -DTINT_BUILD_SPV_WRITER=ON \
