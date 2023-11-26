@@ -16,6 +16,24 @@
       "message": "PTAL.\n\n@jrprice, these seem like they\u0027re used on the old SPIR-V AST printer, but aren\u0027t in the new SPIR-V AST printer. Is there a different way I should be polyfilling these in the MSL IR printer? Or, are they missing from the SPIR-V IR printer?",
       "revId": "9346112a929811e5990fc767af32237d319ce3cd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c365fff6_1e4cc39f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-26T20:19:29Z",
+      "side": 1,
+      "message": "I believe this polyfill became unnecessary with this WGSL spec change:\nhttps://github.com/gpuweb/gpuweb/pull/3585\n\nWe just never removed it from the AST path.",
+      "parentUuid": "986b7871_152f1b87",
+      "revId": "9346112a929811e5990fc767af32237d319ce3cd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
