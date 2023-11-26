@@ -1413,5 +1413,125 @@ TEST_F(IR_BuiltinPolyfillTest, TextureSampleBaseClampToEdge_2d_f32) {
     EXPECT_EQ(expect, str());
 }
 
+TEST_F(IR_BuiltinPolyfillTest, Acosh_ClampOrRange_f32) {
+    Build(core::BuiltinFn::kAcosh, ty.f32(), Vector{ty.f32()});
+    auto* src = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %result:f32 = acosh %arg
+    ret %result
+  }
+}
+)";
+
+    auto* expect = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %3:f32 = acosh %arg
+    %4:bool = lt %arg, 1.0f
+    %result:f32 = select %3, 0.0f, %4
+    ret %result
+  }
+}
+)";
+
+    EXPECT_EQ(src, str());
+
+    BuiltinPolyfillConfig config;
+    config.acosh = BuiltinPolyfillLevel::kClampOrRangeCheck;
+    Run(BuiltinPolyfill, config);
+    EXPECT_EQ(expect, str());
+}
+
+TEST_F(IR_BuiltinPolyfillTest, Acosh_ClampOrRange_vec3_f32) {
+    Build(core::BuiltinFn::kAcosh, ty.f32(), Vector{ty.f32()});
+    auto* src = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %result:f32 = acosh %arg
+    ret %result
+  }
+}
+)";
+
+    auto* expect = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %3:f32 = acosh %arg
+    %4:bool = lt %arg, 1.0f
+    %result:f32 = select %3, 0.0f, %4
+    ret %result
+  }
+}
+)";
+
+    EXPECT_EQ(src, str());
+
+    BuiltinPolyfillConfig config;
+    config.acosh = BuiltinPolyfillLevel::kClampOrRangeCheck;
+    Run(BuiltinPolyfill, config);
+    EXPECT_EQ(expect, str());
+}
+
+TEST_F(IR_BuiltinPolyfillTest, Atanh_ClampOrRange_f32) {
+    Build(core::BuiltinFn::kAtanh, ty.f32(), Vector{ty.f32()});
+    auto* src = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %result:f32 = atanh %arg
+    ret %result
+  }
+}
+)";
+
+    auto* expect = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %3:f32 = atanh %arg
+    %4:bool = gte %arg, 1.0f
+    %result:f32 = select %3, 0.0f, %4
+    ret %result
+  }
+}
+)";
+
+    EXPECT_EQ(src, str());
+
+    BuiltinPolyfillConfig config;
+    config.atanh = BuiltinPolyfillLevel::kClampOrRangeCheck;
+    Run(BuiltinPolyfill, config);
+    EXPECT_EQ(expect, str());
+}
+
+TEST_F(IR_BuiltinPolyfillTest, Atanh_ClampOrRange_vec3_f32) {
+    Build(core::BuiltinFn::kAtanh, ty.f32(), Vector{ty.f32()});
+    auto* src = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %result:f32 = atanh %arg
+    ret %result
+  }
+}
+)";
+
+    auto* expect = R"(
+%foo = func(%arg:f32):f32 -> %b1 {
+  %b1 = block {
+    %3:f32 = atanh %arg
+    %4:bool = gte %arg, 1.0f
+    %result:f32 = select %3, 0.0f, %4
+    ret %result
+  }
+}
+)";
+
+    EXPECT_EQ(src, str());
+
+    BuiltinPolyfillConfig config;
+    config.atanh = BuiltinPolyfillLevel::kClampOrRangeCheck;
+    Run(BuiltinPolyfill, config);
+    EXPECT_EQ(expect, str());
+}
+
 }  // namespace
 }  // namespace tint::core::ir::transform

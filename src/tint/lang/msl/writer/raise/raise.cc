@@ -66,6 +66,8 @@ Result<SuccessType> Raise(core::ir::Module& module, const Options& options) {
 
     {
         core::ir::transform::BuiltinPolyfillConfig core_polyfills{};
+        core_polyfills.acosh = core::ir::transform::BuiltinPolyfillLevel::kClampOrRangeCheck;
+        core_polyfills.atanh = core::ir::transform::BuiltinPolyfillLevel::kClampOrRangeCheck;
         core_polyfills.clamp_int = true;
         core_polyfills.extract_bits = core::ir::transform::BuiltinPolyfillLevel::kClampOrRangeCheck;
         core_polyfills.first_leading_bit = true;
@@ -74,8 +76,6 @@ Result<SuccessType> Raise(core::ir::Module& module, const Options& options) {
         core_polyfills.texture_sample_base_clamp_to_edge_2d_f32 = true;
         RUN_TRANSFORM(core::ir::transform::BuiltinPolyfill, module, core_polyfills);
     }
-    // polyfills.acosh = ast::transform::BuiltinPolyfill::Level::kRangeCheck;
-    // polyfills.atanh = ast::transform::BuiltinPolyfill::Level::kRangeCheck;
     // polyfills.sign_int = true;
     // polyfills.workgroup_uniform_load = true;
 

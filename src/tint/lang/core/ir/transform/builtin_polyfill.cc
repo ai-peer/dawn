@@ -68,6 +68,16 @@ struct State {
             }
             if (auto* builtin = inst->As<ir::CoreBuiltinCall>()) {
                 switch (builtin->Func()) {
+                    case core::BuiltinFn::kAcosh:
+                        if (config.acosh != BuiltinPolyfillLevel::kNone) {
+                            worklist.Push(builtin);
+                        }
+                        break;
+                    case core::BuiltinFn::kAtanh:
+                        if (config.atanh != BuiltinPolyfillLevel::kNone) {
+                            worklist.Push(builtin);
+                        }
+                        break;
                     case core::BuiltinFn::kClamp:
                         if (config.clamp_int &&
                             builtin->Result(0)->Type()->is_integer_scalar_or_vector()) {
@@ -129,6 +139,12 @@ struct State {
         for (auto* builtin : worklist) {
             ir::Value* replacement = nullptr;
             switch (builtin->Func()) {
+                case core::BuiltinFn::kAcosh:
+                    replacement = Acosh(builtin);
+                    break;
+                case core::BuiltinFn::kAtanh:
+                    replacement = Atanh(builtin);
+                    break;
                 case core::BuiltinFn::kClamp:
                     replacement = ClampInt(builtin);
                     break;
@@ -195,6 +211,81 @@ struct State {
             return b.Splat(MatchWidth(element->Type(), match), element, vec->Width());
         }
         return element;
+    }
+
+    /// Polyfill an `acosh()` builtin call.
+    /// @param call the builtin call instruction
+    /// @returns the replacement value
+    ir::Value* Acosh(ir::CoreBuiltinCall* call) {
+        auto* val = call->Args()[0];
+        auto* type = val->Type();
+
+        ir::Constant* zero = nullptr;
+        ir::Constant* one = nullptr;
+        if (type->Is<core::type::F32>()) {
+            zero = MatchWidth(b.Constant(0_f), type);
+            one = MatchWidth(b.Constant(1_f), type);
+        } else {
+            zero = MatchWidth(b.Constant(0_h), type);
+            one = MatchWidth(b.Constant(1_h), type);
+        }
+
+        Value* result = nullptr;
+        switch (config.acosh) {
+            case BuiltinPolyfillLevel::kClampOrRangeCheck: {
+                b.InsertBefore(call, [&] {
+                    // Replace:
+                    //    acosh(x)
+                    // With:
+                    //    select(acosh(x), 0, x < 1)
+                    auto* inner = b.Call(type, BuiltinFn::kAcosh, val);
+                    auto* lt = b.LessThan(ty.bool_(), val, one);
+                    result = b.Call(type, BuiltinFn::kSelect, inner, zero, lt)->Result(0);
+                });
+                break;
+            }
+            default:
+                TINT_UNIMPLEMENTED() << "acosh polyfill level";
+        }
+        return result;
+    }
+
+    /// Polyfill an `atanh()` builtin call.
+    /// @param call the builtin call instruction
+    /// @returns the replacement value
+    ir::Value* Atanh(ir::CoreBuiltinCall* call) {
+        auto* val = call->Args()[0];
+        auto* type = val->Type();
+
+        ir::Constant* zero = nullptr;
+        ir::Constant* one = nullptr;
+        if (type->Is<core::type::F32>()) {
+            one = MatchWidth(b.Constant(1_f), type);
+            zero = MatchWidth(b.Constant(0_f), type);
+        } else {
+            zero = MatchWidth(b.Constant(1_h), type);
+            zero = MatchWidth(b.Constant(0_h), type);
+        }
+
+        Value* result = nullptr;
+        switch (config.atanh) {
+            case BuiltinPolyfillLevel::kClampOrRangeCheck: {
+                b.InsertBefore(call, [&] {
+                    // Replace:
+                    //    atanh(x)
+                    // With:
+                    //    select(atanh(x), 0, x >= 1)
+                    // return select(atanh(x), 0, x >= 1);
+                    auto* inner = b.Call(type, BuiltinFn::kAtanh, val);
+                    auto* gte = b.GreaterThanEqual(ty.bool_(), val, one);
+                    result = b.Call(type, BuiltinFn::kSelect, inner, zero, gte)->Result(0);
+                });
+                break;
+            }
+            default:
+                TINT_UNIMPLEMENTED() << "atanh polyfill level";
+        }
+        return result;
     }
 
     /// Polyfill a `clamp()` builtin call for integers.

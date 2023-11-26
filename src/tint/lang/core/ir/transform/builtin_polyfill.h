@@ -51,6 +51,10 @@ enum class BuiltinPolyfillLevel {
 
 /// The set of polyfills that should be applied.
 struct BuiltinPolyfillConfig {
+    /// What level should `acosh` be polyfilled?
+    BuiltinPolyfillLevel acosh = BuiltinPolyfillLevel::kNone;
+    /// What level should `atanh` be polyfilled?
+    BuiltinPolyfillLevel atanh = BuiltinPolyfillLevel::kNone;
     /// Should `clamp()` be polyfilled for integer values?
     bool clamp_int = false;
     /// Should `countLeadingZeros()` be polyfilled?
