@@ -1164,7 +1164,7 @@ bool ASTPrinter::EmitFunctionCall(StringStream& out,
                 break;
             default:
                 TINT_UNREACHABLE() << "unsupported DecomposeMemoryAccess::Intrinsic address space:"
-                                   << intrinsic->address_space;
+                                   << ToString(intrinsic->address_space);
                 return false;
         }
     }
@@ -3343,7 +3343,7 @@ bool ASTPrinter::EmitGlobalVariable(const ast::Variable* global) {
                         "unhandled address space " + tint::ToString(sem->AddressSpace()));
                     return false;
                 default: {
-                    TINT_ICE() << "unhandled address space " << sem->AddressSpace();
+                    TINT_ICE() << "unhandled address space " << ToString(sem->AddressSpace());
                     return false;
                 }
             }
@@ -4401,7 +4401,7 @@ bool ASTPrinter::EmitType(StringStream& out,
                     out << "CubeArray";
                     break;
                 default:
-                    TINT_UNREACHABLE() << "unexpected TextureDimension " << tex->dim();
+                    TINT_UNREACHABLE() << "unexpected TextureDimension " << ToString(tex->dim());
                     return false;
             }
 

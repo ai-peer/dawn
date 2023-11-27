@@ -649,7 +649,7 @@ struct Robustness::State {
             default:
                 break;
         }
-        TINT_UNREACHABLE() << "unhandled address space" << address_space;
+        TINT_UNREACHABLE() << "unhandled address space" << ToString(address_space);
         return Action::kDefault;
     }
 

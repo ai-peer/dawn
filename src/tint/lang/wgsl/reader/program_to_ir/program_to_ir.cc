@@ -355,7 +355,7 @@ class Impl {
                                     break;
                                 default:
                                     TINT_ICE() << "Unknown builtin value in return attributes "
-                                               << ident_sem->Value();
+                                               << ToString(ident_sem->Value());
                                     return;
                             }
                         } else {
@@ -447,7 +447,7 @@ class Impl {
                                     break;
                                 default:
                                     TINT_ICE() << "Unknown builtin value in parameter attributes "
-                                               << ident_sem->Value();
+                                               << ToString(ident_sem->Value());
                                     return;
                             }
                         } else {

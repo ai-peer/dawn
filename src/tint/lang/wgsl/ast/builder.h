@@ -1156,7 +1156,7 @@ class Builder {
                 case core::type::SamplerKind::kComparisonSampler:
                     return (*this)(source, "sampler_comparison");
             }
-            TINT_ICE() << "invalid sampler kind " << kind;
+            TINT_ICE() << "invalid sampler kind " << ToString(kind);
             return ast::Type{};
         }
 
@@ -1182,7 +1182,7 @@ class Builder {
                 default:
                     break;
             }
-            TINT_ICE() << "invalid depth_texture dimensions: " << dims;
+            TINT_ICE() << "invalid depth_texture dimensions: " << ToString(dims);
             return ast::Type{};
         }
 
@@ -1200,7 +1200,7 @@ class Builder {
             if (dims == core::type::TextureDimension::k2d) {
                 return (*this)(source, "texture_depth_multisampled_2d");
             }
-            TINT_ICE() << "invalid depth_multisampled_texture dimensions: " << dims;
+            TINT_ICE() << "invalid depth_multisampled_texture dimensions: " << ToString(dims);
             return ast::Type{};
         }
 
@@ -1234,7 +1234,7 @@ class Builder {
                 default:
                     break;
             }
-            TINT_ICE() << "invalid sampled_texture dimensions: " << dims;
+            TINT_ICE() << "invalid sampled_texture dimensions: " << ToString(dims);
             return ast::Type{};
         }
 
@@ -1255,7 +1255,7 @@ class Builder {
             if (dims == core::type::TextureDimension::k2d) {
                 return (*this)(source, "texture_multisampled_2d", subtype);
             }
-            TINT_ICE() << "invalid multisampled_texture dimensions: " << dims;
+            TINT_ICE() << "invalid multisampled_texture dimensions: " << ToString(dims);
             return ast::Type{};
         }
 
@@ -1290,7 +1290,7 @@ class Builder {
                 default:
                     break;
             }
-            TINT_ICE() << "invalid storage_texture  dimensions: " << dims;
+            TINT_ICE() << "invalid storage_texture  dimensions: " << ToString(dims);
             return ast::Type{};
         }
 

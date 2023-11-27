@@ -77,14 +77,6 @@ enum class ParameterUsage : uint8_t {
 /// @returns the string for the given enum value
 std::string_view ToString(ParameterUsage value);
 
-/// @param out the stream to write to
-/// @param value the ParameterUsage
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, ParameterUsage value) {
-    return out << ToString(value);
-}
-
 }  // namespace tint::core
 
 #endif  // SRC_TINT_LANG_CORE_PARAMETER_USAGE_H_

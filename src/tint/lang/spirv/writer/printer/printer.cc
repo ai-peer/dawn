@@ -2129,7 +2129,8 @@ class Printer {
                 break;
             }
             default: {
-                TINT_ICE() << "unimplemented variable address space " << ptr->AddressSpace();
+                TINT_ICE() << "unimplemented variable address space "
+                           << ToString(ptr->AddressSpace());
             }
         }
 

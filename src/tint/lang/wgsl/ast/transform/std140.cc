@@ -581,7 +581,7 @@ struct Std140::State {
                                               return Action::kContinue;
                                           default:
                                               TINT_ICE() << "unhandled unary op for access chain: "
-                                                         << u->op;
+                                                         << ToString(u->op);
                                               return Action::kError;
                                       }
                                   });

@@ -72,14 +72,6 @@ enum class Attribute : uint8_t {
 /// @returns the string for the given enum value
 std::string_view ToString(Attribute value);
 
-/// @param out the stream to write to
-/// @param value the Attribute
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, Attribute value) {
-    return out << ToString(value);
-}
-
 /// ParseAttribute parses a Attribute from a string.
 /// @param str the string to parse
 /// @returns the parsed enum, or Attribute::kUndefined if the string could not be parsed.

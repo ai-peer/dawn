@@ -217,7 +217,7 @@ struct ModuleScopeVarToEntryPointParam::State {
             case core::AddressSpace::kPixelLocal:
                 break;  // Ignore
             default: {
-                TINT_ICE() << "unhandled module-scope address space (" << sc << ")";
+                TINT_ICE() << "unhandled module-scope address space (" << ToString(sc) << ")";
                 break;
             }
         }
@@ -252,7 +252,7 @@ struct ModuleScopeVarToEntryPointParam::State {
                 break;
             }
             default: {
-                TINT_ICE() << "unhandled module-scope address space (" << sc << ")";
+                TINT_ICE() << "unhandled module-scope address space (" << ToString(sc) << ")";
             }
         }
 

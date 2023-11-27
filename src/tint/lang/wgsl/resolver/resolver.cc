@@ -2318,7 +2318,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 return ty_init_or_conv(arr);
             }
             default: {
-                TINT_ICE() << "unhandled IncompleteType builtin: " << t->builtin;
+                TINT_ICE() << "unhandled IncompleteType builtin: " << ToString(t->builtin);
                 return nullptr;
             }
         }
@@ -3159,7 +3159,7 @@ sem::ValueExpression* Resolver::Literal(const ast::LiteralExpression* literal) {
                 case ast::IntLiteralExpression::Suffix::kU:
                     return b.create<core::type::U32>();
             }
-            TINT_UNREACHABLE() << "Unhandled integer literal suffix: " << i->suffix;
+            TINT_UNREACHABLE() << "Unhandled integer literal suffix: " << ToString(i->suffix);
             return nullptr;
         },
         [&](const ast::FloatLiteralExpression* f) -> core::type::Type* {
@@ -3172,7 +3172,7 @@ sem::ValueExpression* Resolver::Literal(const ast::LiteralExpression* literal) {
                     return validator_.CheckF16Enabled(literal->source) ? b.create<core::type::F16>()
                                                                        : nullptr;
             }
-            TINT_UNREACHABLE() << "Unhandled float literal suffix: " << f->suffix;
+            TINT_UNREACHABLE() << "Unhandled float literal suffix: " << ToString(f->suffix);
             return nullptr;
         },
         [&](const ast::BoolLiteralExpression*) { return b.create<core::type::Bool>(); },  //

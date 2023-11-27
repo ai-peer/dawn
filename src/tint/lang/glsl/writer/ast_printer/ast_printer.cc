@@ -596,7 +596,7 @@ void ASTPrinter::EmitBitwiseBoolOp(StringStream& out, const ast::BinaryExpressio
     } else if (TINT_LIKELY(expr->op == core::BinaryOp::kOr)) {
         out << " | ";
     } else {
-        TINT_ICE() << "unexpected binary op: " << expr->op;
+        TINT_ICE() << "unexpected binary op: " << ToString(expr->op);
         return;
     }
 
@@ -1903,7 +1903,7 @@ void ASTPrinter::EmitGlobalVariable(const ast::Variable* global) {
                         "unhandled address space " + tint::ToString(sem->AddressSpace()));
                     return;
                 default: {
-                    TINT_ICE() << "unhandled address space " << sem->AddressSpace();
+                    TINT_ICE() << "unhandled address space " << ToString(sem->AddressSpace());
                     break;
                 }
             }
@@ -2746,7 +2746,8 @@ void ASTPrinter::EmitType(StringStream& out,
                     }
                 } break;
                 default:
-                    TINT_UNREACHABLE() << "unexpected storage texture access " << storage->access();
+                    TINT_UNREACHABLE()
+                        << "unexpected storage texture access " << ToString(storage->access());
                     return;
             }
         }
@@ -2786,7 +2787,7 @@ void ASTPrinter::EmitType(StringStream& out,
                 out << "CubeArray";
                 break;
             default:
-                TINT_UNREACHABLE() << "unexpected TextureDimension " << tex->dim();
+                TINT_UNREACHABLE() << "unexpected TextureDimension " << ToString(tex->dim());
                 return;
         }
         if (tex->Is<core::type::DepthTexture>()) {

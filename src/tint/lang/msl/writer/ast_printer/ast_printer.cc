@@ -2728,7 +2728,7 @@ bool ASTPrinter::EmitAddressSpace(StringStream& out, core::AddressSpace sc) {
         default:
             break;
     }
-    TINT_ICE() << "unhandled address space: " << sc;
+    TINT_ICE() << "unhandled address space: " << ToString(sc);
     return false;
 }
 

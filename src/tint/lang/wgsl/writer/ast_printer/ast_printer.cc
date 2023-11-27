@@ -632,7 +632,7 @@ void ASTPrinter::EmitBinaryOp(StringStream& out, const core::BinaryOp op) {
             out << "%";
             return;
     }
-    TINT_ICE() << "invalid binary op " << op;
+    TINT_ICE() << "invalid binary op " << ToString(op);
 }
 
 void ASTPrinter::EmitUnaryOp(StringStream& out, const ast::UnaryOpExpression* expr) {

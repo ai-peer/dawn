@@ -993,7 +993,7 @@ class Printer : public tint::TextGenerator {
                 out << "constant";
                 break;
             default:
-                TINT_IR_ICE(ir_) << "unhandled address space: " << sc;
+                TINT_IR_ICE(ir_) << "unhandled address space: " << ToString(sc);
                 break;
         }
     }

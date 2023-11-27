@@ -37,8 +37,10 @@
 #ifndef SRC_TINT_LANG_WGSL_LANGUAGE_FEATURE_H_
 #define SRC_TINT_LANG_WGSL_LANGUAGE_FEATURE_H_
 
+#include <cstdint>
+#include <string>
+
 #include "src/tint/utils/containers/unique_vector.h"
-#include "src/tint/utils/traits/traits.h"
 
 namespace tint::wgsl {
 
@@ -52,14 +54,6 @@ enum class LanguageFeature : uint8_t {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(LanguageFeature value);
-
-/// @param out the stream to write to
-/// @param value the LanguageFeature
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, LanguageFeature value) {
-    return out << ToString(value);
-}
 
 /// ParseLanguageFeature parses a LanguageFeature from a string.
 /// @param str the string to parse

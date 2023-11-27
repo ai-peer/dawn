@@ -3087,7 +3087,7 @@ bool Builder::GenerateAtomicBuiltin(const sem::Call* call,
                 ScalarConstant::U32(static_cast<uint32_t>(spv::Scope::Device)));
             break;
         default:
-            TINT_UNREACHABLE() << "unhandled atomic address space " << address_space;
+            TINT_UNREACHABLE() << "unhandled atomic address space " << ToString(address_space);
             return false;
     }
     if (memory_id == 0) {
@@ -4012,7 +4012,7 @@ SpvStorageClass Builder::ConvertAddressSpace(core::AddressSpace address_space) c
         case core::AddressSpace::kUndefined:
             break;
     }
-    TINT_UNREACHABLE() << "unhandled address space '" << address_space << "'";
+    TINT_UNREACHABLE() << "unhandled address space '" << ToString(address_space) << "'";
     return SpvStorageClassMax;
 }
 

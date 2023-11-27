@@ -641,7 +641,7 @@ Result<Overload> LookupUnary(Context& context,
             intrinsic_name = "operator ! ";
             break;
         default:
-            TINT_UNREACHABLE() << "invalid unary op: " << op;
+            TINT_UNREACHABLE() << "invalid unary op: " << ToString(op);
             return Failure{};
     }
 

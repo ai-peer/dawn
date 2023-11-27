@@ -37,8 +37,10 @@
 #ifndef SRC_TINT_LANG_WGSL_EXTENSION_H_
 #define SRC_TINT_LANG_WGSL_EXTENSION_H_
 
+#include <cstdint>
+#include <string>
+
 #include "src/tint/utils/containers/unique_vector.h"
-#include "src/tint/utils/traits/traits.h"
 
 namespace tint::wgsl {
 
@@ -61,14 +63,6 @@ enum class Extension : uint8_t {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(Extension value);
-
-/// @param out the stream to write to
-/// @param value the Extension
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, Extension value) {
-    return out << ToString(value);
-}
 
 /// ParseExtension parses a Extension from a string.
 /// @param str the string to parse

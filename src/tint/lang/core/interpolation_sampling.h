@@ -40,8 +40,6 @@
 #include <cstdint>
 #include <string>
 
-#include "src/tint/utils/traits/traits.h"
-
 namespace tint::core {
 
 /// The interpolation sampling.
@@ -55,14 +53,6 @@ enum class InterpolationSampling : uint8_t {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(InterpolationSampling value);
-
-/// @param out the stream to write to
-/// @param value the InterpolationSampling
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, InterpolationSampling value) {
-    return out << ToString(value);
-}
 
 /// ParseInterpolationSampling parses a InterpolationSampling from a string.
 /// @param str the string to parse
