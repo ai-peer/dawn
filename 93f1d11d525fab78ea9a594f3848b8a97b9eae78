@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ffc2c62f_13e4f089",
+        "filename": "src/dawn/tests/end2end/FramebufferFetchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1004021
+      },
+      "writtenOn": "2023-11-27T17:09:31Z",
+      "side": 1,
+      "message": "Is this comment still needed?",
+      "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ec522e4_58871286",
+        "filename": "src/dawn/tests/end2end/FramebufferFetchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1004021
+      },
+      "writtenOn": "2023-11-27T17:09:31Z",
+      "side": 1,
+      "message": "1789?",
+      "range": {
+        "startLine": 302,
+        "startChar": 37,
+        "endLine": 302,
+        "endChar": 38
+      },
+      "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
