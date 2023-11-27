@@ -16,6 +16,24 @@
       "message": "PTAL, thanks!",
       "revId": "39ba445137edc7ba95dbd3495099eab06648dedb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "33e7217e_e33ee8f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-27T08:51:30Z",
+      "side": 1,
+      "message": "Oh sry it is not that easy to enable C++20 with CMake...",
+      "parentUuid": "93d264a8_234c0d4f",
+      "revId": "39ba445137edc7ba95dbd3495099eab06648dedb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
