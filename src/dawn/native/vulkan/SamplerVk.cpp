@@ -29,6 +29,7 @@
 
 #include <algorithm>
 
+#include "dawn/common/vk_google_filtering_precision.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/FencedDeleter.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
@@ -112,6 +113,14 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     } else {
         createInfo.anisotropyEnable = VK_FALSE;
         createInfo.maxAnisotropy = 1;
+    }
+
+    VkSamplerFilteringPrecisionGOOGLE filteringInfo = {};
+    if (device->GetDeviceInfo().extensions[DeviceExt::GoogleSamplerFilteringPrecision]) {
+        filteringInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_FILTERING_PRECISION_GOOGLE;
+        filteringInfo.samplerFilteringPrecisionMode =
+            VK_SAMPLER_FILTERING_PRECISION_MODE_HIGH_GOOGLE;
+        createInfo.pNext = &filteringInfo;
     }
 
     DAWN_TRY(CheckVkSuccess(
