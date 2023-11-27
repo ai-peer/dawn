@@ -45,9 +45,10 @@ TEST_F(MslPrinterTest, Discard) {
 
     ASSERT_TRUE(Generate()) << err_ << output_;
     EXPECT_EQ(output_, MetalHeader() + R"(
+thread bool continue_execution = true;
 void foo() {
   if (true) {
-    discard_fragment();
+    continue_execution = false;
   }
 }
 )");
