@@ -69,6 +69,24 @@
       "parentUuid": "9aa6bb49_2938f790",
       "revId": "a0e9454e2ff8e433dcbbd6ea75ff46db41a956f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "109c729e_e5548767",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T09:58:46Z",
+      "side": 1,
+      "message": "Agree this is fine.",
+      "parentUuid": "7ad67ef6_a81cad43",
+      "revId": "a0e9454e2ff8e433dcbbd6ea75ff46db41a956f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

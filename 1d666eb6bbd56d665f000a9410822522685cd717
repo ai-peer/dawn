@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "344509a8_c6cfc216",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 4
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T09:58:46Z",
+      "side": 1,
+      "message": "tint",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 9
+      },
+      "revId": "1d666eb6bbd56d665f000a9410822522685cd717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "80213dc4_422ca16a",
@@ -14,6 +37,52 @@
       "writtenOn": "2023-11-27T06:44:37Z",
       "side": 1,
       "message": "Hi Ben,\n\nCould you take a look at this CL?\n\nThanks!",
+      "revId": "1d666eb6bbd56d665f000a9410822522685cd717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d426d8a0_c2357d45",
+        "filename": "src/tint/lang/wgsl/ast/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T09:58:46Z",
+      "side": 1,
+      "message": "Maybe I\u0027m missing something, but this feels more complex than it needs to be. I haven\u0027t tested this, but wouldn\u0027t something like this work?\n\n```\n    Symbol Dot4I8Packed() {\n        using vec4i \u003d vec4\u003ci32\u003e;\n        using vec4u \u003d vec4\u003cu32\u003e;\n\n        auto name \u003d b.Symbols().New(\"tint_dot4_i8_packed\");\n\n        auto body \u003d tint::Vector{\n            // const n \u003d vec4u(24, 16, 8, 0);\n            // let a_i8 \u003d bitcast\u003cvec4i\u003e(vec4u(a) \u003c\u003c n) \u003e\u003e vec4u(24);\n            // let b_i8 \u003d bitcast\u003cvec4i\u003e(vec4u(b) \u003c\u003c n) \u003e\u003e vec4u(24);\n            // return dot(a_i8, b_i8);\n            b.Decl(b.Const(\"n\", b.Call\u003cvec4u\u003e(31_a, 31_a, 31_a, 31_a))),\n            b.Decl(b.Let(\"a_i8\", b.Shr(b.Bitcast\u003cvec4i\u003e(b.Shl(b.Call\u003cvec4u\u003e(\"a\"), \"n\")),\n                                       b.Call\u003cvec4u\u003e(24_a)))),\n            b.Decl(b.Let(\"b_i8\", b.Shr(b.Bitcast\u003cvec4i\u003e(b.Shl(b.Call\u003cvec4u\u003e(\"b\"), \"n\")),\n                                       b.Call\u003cvec4u\u003e(24_a)))),\n            b.Return(b.Call(core::BuiltinFn::kDot, \"a_i8\", \"b_i8\")),\n        };\n        b.Func(name,\n               tint::Vector{\n                   b.Param(\"a\", b.ty.u32()),\n                   b.Param(\"b\", b.ty.u32()),\n               },\n               b.ty.i32(), body);\n\n        return name;\n    }\n\n    Symbol Dot4U8Packed() {\n        using vec4u \u003d vec4\u003cu32\u003e;\n        auto name \u003d b.Symbols().New(\"tint_dot4_u8_packed\");\n\n        auto body \u003d tint::Vector{\n            // const n \u003d vec4u(24, 16, 8, 0);\n            // let a_u8 \u003d (vec4u(a) \u003e\u003e n) \u0026 vec4u(0xff);\n            // let b_u8 \u003d (vec4u(b) \u003e\u003e n) \u0026 vec4u(0xff);\n            // return dot(a_u8, b_u8);\n            b.Decl(b.Const(\"n\", b.Call\u003cvec4u\u003e(24_a, 16_a, 8_a, 0_a))),\n            b.Decl(b.Let(\"a_u8\", b.Shr(b.Shr(b.Call\u003cvec4u\u003e(\"a\"), \"n\"), b.Call\u003cvec4u\u003e(0xff_a)))),\n            b.Decl(b.Let(\"b_u8\", b.Shr(b.Shr(b.Call\u003cvec4u\u003e(\"b\"), \"n\"), b.Call\u003cvec4u\u003e(0xff_a)))),\n            b.Return(b.Call(core::BuiltinFn::kDot, \"a_u8\", \"b_u8\")),\n        };\n        b.Func(name,\n               tint::Vector{\n                   b.Param(\"a\", b.ty.u32()),\n                   b.Param(\"b\", b.ty.u32()),\n               },\n               b.ty.u32(), body);\n\n        return name;\n    }\n```",
+      "range": {
+        "startLine": 891,
+        "startChar": 4,
+        "endLine": 891,
+        "endChar": 27
+      },
+      "revId": "1d666eb6bbd56d665f000a9410822522685cd717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "798525cc_929b9d99",
+        "filename": "src/tint/lang/wgsl/ast/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T09:58:46Z",
+      "side": 1,
+      "message": "Might be a lot easier to follow if these were called `a` and `b` or `x` and `y`, then `v10_bits` would be `a0_bits`, and so on.",
+      "range": {
+        "startLine": 895,
+        "startChar": 18,
+        "endLine": 895,
+        "endChar": 20
+      },
       "revId": "1d666eb6bbd56d665f000a9410822522685cd717",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
