@@ -62,7 +62,7 @@ class ITypBitsetTest : public testing::Test {
         size_t mask = 0;
 
         for (size_t i = 0; i < bits.size(); ++i) {
-            if (indices.count(i) == 0) {
+            if (!indices.contains(i)) {
                 ASSERT_FALSE(bits[Key(i)]) << i;
                 ASSERT_FALSE(bits.test(Key(i))) << i;
             } else {
