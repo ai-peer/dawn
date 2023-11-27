@@ -270,7 +270,7 @@ MaybeError ValidateExternalTextureBinding(
         entry.sampler != nullptr || entry.textureView != nullptr || entry.buffer != nullptr,
         "Expected only external texture to be set for binding entry.");
 
-    DAWN_INVALID_IF(expansions.find(BindingNumber(entry.binding)) == expansions.end(),
+    DAWN_INVALID_IF(!expansions.contains(BindingNumber(entry.binding)),
                     "External texture binding entry %u is not present in the bind group layout.",
                     entry.binding);
 
