@@ -33,6 +33,46 @@
       "message": "LGTM",
       "revId": "0fe66e094e1b27deac86b9c02d95b0f0367115e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca12fcba_c0a367ca",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:06:06Z",
+      "side": 1,
+      "message": "```suggestion\n    const auto* fullSubgroupsOption \u003d std::get\u003cconst DawnComputePipelineFullSubgroups*\u003e(unpackedChain);\n```",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 10
+      },
+      "revId": "0fe66e094e1b27deac86b9c02d95b0f0367115e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "98a5bdce_440b8dd2",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:06:06Z",
+      "side": 1,
+      "message": "do we need this struct, or can it be std::optional\u003cuint32_t\u003e ?\nmaybe you plan to add more members to the struct like:\n```\nstruct FullSubgroupsValidationInfo {\n  uint32_t maxSubgroupSize;\n  uint32_t minSubgroupSize;\n};\n```\n?\n\nregardless, I think we can pass it as std::optional\u003cFullSubgroupsValidationInfo\u003e or just std::optional\u003cuint32_t\u003e and not have the FullSubgroupsRequired bool.",
+      "revId": "0fe66e094e1b27deac86b9c02d95b0f0367115e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
