@@ -34,6 +34,10 @@
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
 
+#if defined(DAWN_ENABLE_SWIFTSHADER)
+#include "third_party/swiftshader/include/vulkan/vk_google_filtering_precision.h"
+#endif
+
 namespace dawn::native::vulkan {
 
 namespace {
@@ -113,6 +117,18 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
         createInfo.anisotropyEnable = VK_FALSE;
         createInfo.maxAnisotropy = 1;
     }
+
+#if defined(DAWN_ENABLE_SWIFTSHADER)
+    VkSamplerFilteringPrecisionGOOGLE filteringInfo = {};
+    if (device->GetDeviceInfo().extensions[DeviceExt::GoogleSamplerFilteringPrecision]) {
+        // Always try to use high-precision filtering on Swiftshader to make web tests behave more
+        // consistently.
+        filteringInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_FILTERING_PRECISION_GOOGLE;
+        filteringInfo.samplerFilteringPrecisionMode =
+            VK_SAMPLER_FILTERING_PRECISION_MODE_HIGH_GOOGLE;
+        createInfo.pNext = &filteringInfo;
+    }
+#endif
 
     DAWN_TRY(CheckVkSuccess(
         device->fn.CreateSampler(device->GetVkDevice(), &createInfo, nullptr, &*mHandle),
