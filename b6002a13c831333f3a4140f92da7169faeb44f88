@@ -16,6 +16,46 @@
       "message": "PTAL the whole stack.",
       "revId": "b6002a13c831333f3a4140f92da7169faeb44f88",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6bfa26cc_41306506",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:11:19Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b6002a13c831333f3a4140f92da7169faeb44f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4d2fb52_cf0c3b20",
+        "filename": "src/dawn/tests/unittests/ITypSpanTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:11:19Z",
+      "side": 1,
+      "message": "nit: also test the non-null zero-length case which would be common if someone is computing slices of some range.",
+      "range": {
+        "startLine": 101,
+        "startChar": 3,
+        "endLine": 107,
+        "endChar": 5
+      },
+      "revId": "b6002a13c831333f3a4140f92da7169faeb44f88",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
