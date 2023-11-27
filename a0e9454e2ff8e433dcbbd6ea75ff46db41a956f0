@@ -51,6 +51,24 @@
       "parentUuid": "fc5b7d2d_535badd5",
       "revId": "a0e9454e2ff8e433dcbbd6ea75ff46db41a956f0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ad67ef6_a81cad43",
+        "filename": "src/dawn/native/d3d11/ShaderModuleD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-27T01:20:49Z",
+      "side": 1,
+      "message": "Yes whether the polyfills are used or not depends on whether the related DP4A instructions are directly supported on the native platform, while Tint can only get such information from Dawn.",
+      "parentUuid": "9aa6bb49_2938f790",
+      "revId": "a0e9454e2ff8e433dcbbd6ea75ff46db41a956f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
