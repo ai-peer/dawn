@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "054d0232_44ebd408",
+        "filename": "src/tint/lang/msl/writer/printer/discard_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-27T19:26:57Z",
+      "side": 0,
+      "message": "Good catch, as this actually comes through as `TerminateInvocation` and we don\u0027t care about the `Discard`.",
+      "parentUuid": "8579cae7_69d60420",
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "86cf3469_152ff1cb",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-27T16:51:52Z",
       "side": 0,
       "message": "Why is this removed?",
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d50f40e0_6726b1ab",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-27T19:26:57Z",
+      "side": 0,
+      "message": "Restored.",
+      "parentUuid": "86cf3469_152ff1cb",
       "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8e75f17f_b6a99fbc",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-27T19:26:57Z",
+      "side": 0,
+      "message": "Restored.",
+      "parentUuid": "d03a9bac_65d959f3",
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7bc0f69c_bd3c1840",
@@ -65,6 +119,30 @@
       "writtenOn": "2023-11-27T16:51:52Z",
       "side": 0,
       "message": "Ditto. The polyfill just clamps the arguments, but we still call `insert_bits()`.",
+      "range": {
+        "startLine": 857,
+        "startChar": 0,
+        "endLine": 859,
+        "endChar": 22
+      },
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73a77931_9807ecd5",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-27T19:26:57Z",
+      "side": 0,
+      "message": "Done",
+      "parentUuid": "7bc0f69c_bd3c1840",
       "range": {
         "startLine": 857,
         "startChar": 0,
