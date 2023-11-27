@@ -16,6 +16,74 @@
       "message": "PTAL!",
       "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cc2e9ac_0969874d",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-27T19:00:53Z",
+      "side": 1,
+      "message": "Assert we don\u0027t have more than 64 before calling WaitForMultipleObjects.",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f1b3310_2f491bcf",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-27T19:00:53Z",
+      "side": 1,
+      "message": "Backward?",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebdb767b_8124546b",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-27T19:00:53Z",
+      "side": 1,
+      "message": "Comment that this works because WaitForMultipleObjects always gives us the first index that completed.\n\nShould we do this though? It\u0027s not really necessary, we can just report the one event we already know about, instead of making a bunch more syscalls. The early-success wrapper should(?) prevent us from actually hitting this in a lot of cases.\n\n(I\u0027ll also note that we can see an event completion here that hadn\u0027t happened yet at WaitForMultipleObjects - but I\u0027m pretty sure this is fine.)",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de4e3df1_9ebee3b8",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-27T19:00:53Z",
+      "side": 1,
+      "message": "Clear to completedSerial? Or is the idea that if there is no receiver at this serial then we\u0027re not interested in any earlier ones for some reason? (comment why)",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
