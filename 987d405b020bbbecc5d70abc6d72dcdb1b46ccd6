@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3a246cf_837b3aa3",
+        "filename": "src/tint/lang/msl/writer/raise/raise.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-27T12:57:13Z",
+      "side": 1,
+      "message": "They are already two passes, this is how it was implemented for SPIR-V, I\u0027m just using the existing transforms.\n\n@jrprice could probably answer why they are two transforms now.",
+      "parentUuid": "e045e274_744fe466",
+      "range": {
+        "startLine": 60,
+        "startChar": 5,
+        "endLine": 68,
+        "endChar": 68
+      },
+      "revId": "987d405b020bbbecc5d70abc6d72dcdb1b46ccd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb58f8f6_5f60f4cb",
         "filename": "src/tint/lang/msl/writer/raise/raise.cc",
         "patchSetId": 4
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-27T09:00:04Z",
       "side": 1,
       "message": "Seems somewhat surprising that this is true, given that this is last.",
+      "range": {
+        "startLine": 105,
+        "startChar": 7,
+        "endLine": 105,
+        "endChar": 90
+      },
+      "revId": "987d405b020bbbecc5d70abc6d72dcdb1b46ccd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abebb149_f65fa0d1",
+        "filename": "src/tint/lang/msl/writer/raise/raise.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-27T12:57:13Z",
+      "side": 1,
+      "message": "It\u0027s the last of the transforms which already exist, but not last of the tranforms which will be created.",
+      "parentUuid": "eb58f8f6_5f60f4cb",
       "range": {
         "startLine": 105,
         "startChar": 7,
