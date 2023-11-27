@@ -16,6 +16,23 @@
       "message": "Instead of removing all the stringstream operator\u003c\u003c could we just move them to an alternate header that is included as needed? The call sites are nicer when you can just do a `\u003c\u003cop` instead of `\u003c\u003cToString(op)`.",
       "revId": "fa1210aa4b8ec53b01a35ab65a6b91932a49b0e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "163c2bb0_41d42407",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T19:07:50Z",
+      "side": 1,
+      "message": "One of the reasons I made this use a template is that it works with Tint\u0027s StringStream and ostream. The latter is important for gtest, and without these tracing failing parameterized cases is a nightmare.\n\nMaybe we can schedule some time to discuss the issues you\u0027re you\u0027re trying to solve here.",
+      "revId": "fa1210aa4b8ec53b01a35ab65a6b91932a49b0e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
