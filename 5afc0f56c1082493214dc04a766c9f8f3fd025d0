@@ -33,6 +33,24 @@
       "message": "LGTM! All comments are addressed so feel free to land",
       "revId": "5afc0f56c1082493214dc04a766c9f8f3fd025d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4e4caf0a_9185091d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2023-11-27T15:25:31Z",
+      "side": 1,
+      "message": "LGTM. Thanks for working on it.",
+      "parentUuid": "e91e5445_f2454367",
+      "revId": "5afc0f56c1082493214dc04a766c9f8f3fd025d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
