@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "882cc277_3ce3e7b4",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T17:33:56Z",
+      "side": 1,
+      "message": "could we rename this to \"dawn_tests_use_angle\" since that is what it controls now?",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "8a78d15ce8d108d304d27602c72e295c5cb92076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
