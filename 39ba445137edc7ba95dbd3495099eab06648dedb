@@ -34,6 +34,23 @@
       "parentUuid": "93d264a8_234c0d4f",
       "revId": "39ba445137edc7ba95dbd3495099eab06648dedb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b4ff9a9_0b98697d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-27T09:59:01Z",
+      "side": 1,
+      "message": "I don\u0027t know yet if we can use C++20 in Dawn because Skia\u0027s use of Dawn might still require C++17 (esp the stdlib) for a while. +CC Ben that discussed this for a while with Skia",
+      "revId": "39ba445137edc7ba95dbd3495099eab06648dedb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
