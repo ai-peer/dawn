@@ -33,6 +33,24 @@
       "message": "I\u0027m probably missing something, but it seems like fencesInFlight is always in non-decreasing order of serial? If that\u0027s the case, then waitFence is always going to end up being either the last item, or nothing, and we don\u0027t need the loop.",
       "revId": "c8c87fc0b3029d2538e9c42c4fe8b505a118dbed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5e42874b_1f7ee57e",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T22:56:33Z",
+      "side": 1,
+      "message": "oh whoops. change to search from the front.\nit should actually always be strictly increasing; should never have two equal serials.",
+      "parentUuid": "38069ba0_4eeca0e7",
+      "revId": "c8c87fc0b3029d2538e9c42c4fe8b505a118dbed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
