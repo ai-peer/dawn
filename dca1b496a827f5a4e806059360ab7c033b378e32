@@ -16,6 +16,24 @@
       "message": "So this is just checking for no ICEs? Shouldn\u0027t we also be making sure the output is also valid SPIR-V?",
       "revId": "dca1b496a827f5a4e806059360ab7c033b378e32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8f3a596_a801ba79",
+        "filename": "src/tint/lang/spirv/writer/ast_writer_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T21:38:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "65fe62e3_3a097d3e",
+      "revId": "dca1b496a827f5a4e806059360ab7c033b378e32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
