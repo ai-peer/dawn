@@ -16,6 +16,23 @@
       "message": "Hi Peng,\n\nI have updated this CL. PTAL, thanks!",
       "revId": "5afc0f56c1082493214dc04a766c9f8f3fd025d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4eb9d576_9b31cd7f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-27T10:05:25Z",
+      "side": 1,
+      "message": "LGTM! All comments are addressed so feel free to land",
+      "revId": "5afc0f56c1082493214dc04a766c9f8f3fd025d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
