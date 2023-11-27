@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37885c74_2dc5e086",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 66,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:21:05Z",
+      "side": 1,
+      "message": "it\u0027s interesting that the pointer is not mBegin + mSize\n\nwe could make it that, or you could comment that it is fine because the \u003d\u003d and !\u003d operators only check the index, not the pointer",
+      "range": {
+        "startLine": 66,
+        "startChar": 50,
+        "endLine": 66,
+        "endChar": 57
+      },
+      "revId": "5ea74877ccc10aba7bb4ca5ad621e9088ac195e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e910e0f6_50013570",
+        "filename": "src/dawn/tests/unittests/EnumeratorTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:21:05Z",
+      "side": 1,
+      "message": "why do we need to pass indices in? Can\u0027t we always test `ASSERT_EQ(index, Index(i))` ?",
+      "revId": "5ea74877ccc10aba7bb4ca5ad621e9088ac195e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edd1ff6d_7c90e039",
+        "filename": "src/dawn/tests/unittests/EnumeratorTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:21:05Z",
+      "side": 1,
+      "message": "wow we can use std::span now?",
+      "range": {
+        "startLine": 80,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 13
+      },
+      "revId": "5ea74877ccc10aba7bb4ca5ad621e9088ac195e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "09185eda_8060e9da",
+        "filename": "src/dawn/tests/unittests/EnumeratorTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:21:05Z",
+      "side": 1,
+      "message": "nit: test both the empty but non-null and the empty with null cases",
+      "revId": "5ea74877ccc10aba7bb4ca5ad621e9088ac195e0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
