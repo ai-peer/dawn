@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "195bcf0f_2ef1d1e6",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T23:28:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cc2e9ac_0969874d",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f1b3310_2f491bcf",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-11-27T19:00:53Z",
       "side": 1,
       "message": "Backward?",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "591be1a5_d8d1fb9f",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T23:28:04Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "1f1b3310_2f491bcf",
       "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "39fabec0_3b93e030",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T23:28:04Z",
+      "side": 1,
+      "message": "Hmm you\u0027re right we probably don\u0027t need it. and WaitQueueSerialsImpl will poll the rest after the wait anyway. Removed.",
+      "parentUuid": "ebdb767b_8124546b",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de4e3df1_9ebee3b8",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-11-27T19:00:53Z",
       "side": 1,
       "message": "Clear to completedSerial? Or is the idea that if there is no receiver at this serial then we\u0027re not interested in any earlier ones for some reason? (comment why)",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5ac9b8c_b77ba309",
+        "filename": "src/dawn/native/d3d/QueueD3D.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T23:28:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "de4e3df1_9ebee3b8",
       "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
