@@ -56,6 +56,30 @@
       },
       "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ee51977b_d0cee5cf",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2023-11-27T18:14:43Z",
+      "side": 1,
+      "message": "We are not pulling anything. This is a file generated from CMake on L199.\nWhenever I can, I would like to remove it.\n\nAbout kokoro, I \"believe\" I fixed the problem previously:\nhttps://dawn-review.googlesource.com/c/dawn/+/157860/17..18\nSince then, kokoro has not been able to change its vote. Do you know why?\n\nMaybe kokoro and patchset 19 race against each other and I need to submit a no-op change for the bot to wake up again? I will give it a try in patchset 20.",
+      "parentUuid": "baa4a6f6_3ddbb832",
+      "range": {
+        "startLine": 216,
+        "startChar": 53,
+        "endLine": 216,
+        "endChar": 74
+      },
+      "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
