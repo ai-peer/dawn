@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e045e274_744fe466",
+        "filename": "src/tint/lang/msl/writer/raise/raise.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T09:00:04Z",
+      "side": 1,
+      "message": "Please can do comment with why we need to split these into two passes?",
+      "range": {
+        "startLine": 60,
+        "startChar": 5,
+        "endLine": 68,
+        "endChar": 68
+      },
+      "revId": "987d405b020bbbecc5d70abc6d72dcdb1b46ccd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb58f8f6_5f60f4cb",
+        "filename": "src/tint/lang/msl/writer/raise/raise.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T09:00:04Z",
+      "side": 1,
+      "message": "Seems somewhat surprising that this is true, given that this is last.",
+      "range": {
+        "startLine": 105,
+        "startChar": 7,
+        "endLine": 105,
+        "endChar": 90
+      },
+      "revId": "987d405b020bbbecc5d70abc6d72dcdb1b46ccd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
