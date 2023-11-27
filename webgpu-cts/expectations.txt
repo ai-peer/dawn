@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-11-20 05:01:42AM
+# Last rolled: 2023-11-27 05:01:40AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -656,7 +656,6 @@ crbug.com/dawn/1960 [ android-r ] webgpu:api,validation,error_scope:parent_scope
 # Shader corr failing flakily on Android ARM (Pixel 6)
 ################################################################################
 crbug.com/dawn/1991 [ android-t ] webgpu:shader,execution,memory_model,coherence:corr:memType="atomic_storage";testType="inter_workgroup" [ RetryOnFailure ]
-
 
 ################################################################################
 # Tint unimplemented feature
