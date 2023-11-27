@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cc198ef_0a1af40b",
+        "filename": "src/dawn/common/Range.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T18:22:40Z",
+      "side": 1,
+      "message": "this name is funny. maybe.. `BeginEndRange` ?",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 16
+      },
+      "revId": "eeca345111073864f7a6aac263c6bba4df58d604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
