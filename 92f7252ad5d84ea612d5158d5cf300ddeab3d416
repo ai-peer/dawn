@@ -33,6 +33,24 @@
       "message": "Instead of this, can we make https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/dawn_context_provider.cc;l\u003d258-262?q\u003ddawn_context_provider.cc\u0026ss\u003dchromium not depend on the OS and always allow_unsafe_apis for graphite?",
       "revId": "92f7252ad5d84ea612d5158d5cf300ddeab3d416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff1cd041_5d222614",
+        "filename": "src/dawn/native/Features.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2023-11-27T12:40:24Z",
+      "side": 1,
+      "message": "I am okay either way. The CL in chromium uploaded: https://chromium-review.googlesource.com/c/chromium/src/+/5060498",
+      "parentUuid": "3618abba_f6900940",
+      "revId": "92f7252ad5d84ea612d5158d5cf300ddeab3d416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
