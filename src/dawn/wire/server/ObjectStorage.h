@@ -263,7 +263,7 @@ class KnownObjects<WGPUDevice> : public KnownObjectsBase<WGPUDevice> {
         KnownObjectsBase<WGPUDevice>::Free(id);
     }
 
-    bool IsKnown(WGPUDevice device) const { return mKnownSet.count(device) != 0; }
+    bool IsKnown(WGPUDevice device) const { return mKnownSet.contains(device); }
 
   private:
     void AddToKnownSet(Known<WGPUDevice> device) {

@@ -106,9 +106,8 @@ class EventManager final : NonMovable {
 #if DAWN_ENABLE_ASSERTS
             // Note we need to use an if clause here because otherwise the DAWN_ASSERT macro will
             // generate code that results in the lambda being in an unevaluated context.
-            DAWN_ASSERT(mTrackedEvents.Use([&](auto trackedEvents) {
-                return trackedEvents->find(futureID) == trackedEvents->end();
-            }));
+            DAWN_ASSERT(mTrackedEvents.Use(
+                [&](auto trackedEvents) { return !trackedEvents->contains(futureID); }));
 #endif
             return WireResult::Success;
         }

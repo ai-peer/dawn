@@ -525,7 +525,7 @@ void DawnTestEnvironment::SelectPreferredAdapterProperties(const native::Instanc
             // tests.
             const auto adapterTypeAndName = std::tuple(
                 properties.backendType, std::string(properties.name), properties.compatibilityMode);
-            if (adapterNameSet.find(adapterTypeAndName) == adapterNameSet.end()) {
+            if (!adapterNameSet.contains(adapterTypeAndName)) {
                 adapterNameSet.insert(adapterTypeAndName);
                 mAdapterProperties.emplace_back(properties, selected);
             }
