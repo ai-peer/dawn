@@ -28,12 +28,13 @@
 #ifndef SRC_TINT_LANG_CORE_BINARY_OP_H_
 #define SRC_TINT_LANG_CORE_BINARY_OP_H_
 
-#include "src/tint/utils/traits/traits.h"
+#include <cstdint>
+#include <string>
 
 namespace tint::core {
 
 /// An enumerator of binary operators.
-enum class BinaryOp {
+enum class BinaryOp : uint8_t {
     kAnd,  // &
     kOr,   // |
     kXor,
@@ -57,14 +58,6 @@ enum class BinaryOp {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(BinaryOp value);
-
-/// @param out the stream to write to
-/// @param value the BinaryOp
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, BinaryOp value) {
-    return out << ToString(value);
-}
 
 }  // namespace tint::core
 

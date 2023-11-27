@@ -43,7 +43,7 @@ namespace tint::core::ir {
 class FunctionParam : public Castable<FunctionParam, Value> {
   public:
     /// Builtin attribute
-    enum class Builtin {
+    enum class Builtin : uint8_t {
         /// Builtin Vertex index
         kVertexIndex,
         /// Builtin Instance index
@@ -129,14 +129,6 @@ class FunctionParam : public Castable<FunctionParam, Value> {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(enum FunctionParam::Builtin value);
-
-/// @param out the stream to write to
-/// @param value the FunctionParam::Builtin
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, enum FunctionParam::Builtin value) {
-    return out << ToString(value);
-}
 
 }  // namespace tint::core::ir
 

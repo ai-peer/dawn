@@ -501,7 +501,7 @@ void PrintOverload(StringStream& ss,
             ss << ", ";
         }
         if (parameter.usage != ParameterUsage::kNone) {
-            ss << ToString(parameter.usage) << ": ";
+            ss << parameter.usage << ": ";
         }
         auto* type_indices = context.data[parameter.type_matcher_indices];
         auto* number_indices = context.data[parameter.number_matcher_indices];

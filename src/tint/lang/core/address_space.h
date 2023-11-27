@@ -38,8 +38,7 @@
 #define SRC_TINT_LANG_CORE_ADDRESS_SPACE_H_
 
 #include <cstdint>
-
-#include "src/tint/utils/traits/traits.h"
+#include <string>
 
 namespace tint::core {
 
@@ -61,14 +60,6 @@ enum class AddressSpace : uint8_t {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(AddressSpace value);
-
-/// @param out the stream to write to
-/// @param value the AddressSpace
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, AddressSpace value) {
-    return out << ToString(value);
-}
 
 /// ParseAddressSpace parses a AddressSpace from a string.
 /// @param str the string to parse

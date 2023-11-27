@@ -36,7 +36,7 @@ namespace tint::ast {
 class IntLiteralExpression final : public Castable<IntLiteralExpression, LiteralExpression> {
   public:
     /// Literal suffix
-    enum class Suffix {
+    enum class Suffix : uint8_t {
         /// No suffix
         kNone,
         /// 'i' suffix (i32)
@@ -71,15 +71,6 @@ class IntLiteralExpression final : public Castable<IntLiteralExpression, Literal
 /// @param suffix the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(IntLiteralExpression::Suffix suffix);
-
-/// Writes the integer literal suffix to the stream.
-/// @param out the stream to write to
-/// @param suffix the suffix to write
-/// @returns out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, IntLiteralExpression::Suffix suffix) {
-    return out << ToString(suffix);
-}
 
 }  // namespace tint::ast
 

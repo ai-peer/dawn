@@ -36,7 +36,7 @@
 namespace tint::core::ir {
 
 /// A binary operator.
-enum class BinaryOp {
+enum class BinaryOp : uint8_t {
     kAdd,
     kSubtract,
     kMultiply,
@@ -103,12 +103,6 @@ class Binary final : public Castable<Binary, OperandInstruction<2, 1>> {
 /// @param kind the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(BinaryOp kind);
-
-/// Emits the name of the intrinsic type.
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, BinaryOp kind) {
-    return out << ToString(kind);
-}
 
 }  // namespace tint::core::ir
 

@@ -51,7 +51,7 @@ namespace tint::core::ir {
 class Function : public Castable<Function, Value> {
   public:
     /// The pipeline stage for an entry point
-    enum class PipelineStage {
+    enum class PipelineStage : uint8_t {
         /// Not a pipeline entry point
         kUndefined,
         /// Vertex
@@ -63,7 +63,7 @@ class Function : public Castable<Function, Value> {
     };
 
     /// Builtin attached to return types
-    enum class ReturnBuiltin {
+    enum class ReturnBuiltin : uint8_t {
         /// Builtin Position attribute
         kPosition,
         /// Builtin FragDepth attribute
@@ -183,25 +183,9 @@ class Function : public Castable<Function, Value> {
 /// @returns the string for the given enum value
 std::string_view ToString(Function::PipelineStage value);
 
-/// @param out the stream to write to
-/// @param value the Function::PipelineStage
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, Function::PipelineStage value) {
-    return out << ToString(value);
-}
-
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(enum Function::ReturnBuiltin value);
-
-/// @param out the stream to write to
-/// @param value the Function::ReturnBuiltin
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, enum Function::ReturnBuiltin value) {
-    return out << ToString(value);
-}
 
 }  // namespace tint::core::ir
 

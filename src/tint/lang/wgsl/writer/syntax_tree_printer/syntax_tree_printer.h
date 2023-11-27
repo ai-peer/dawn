@@ -33,7 +33,7 @@
 
 // Forward declarations
 namespace tint::core {
-enum class BinaryOp;
+enum class BinaryOp : uint8_t;
 }
 namespace tint::ast {
 class AssignmentStatement;

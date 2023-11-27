@@ -41,8 +41,6 @@
 #include <string>
 #include <variant>
 
-#include "src/tint/utils/traits/traits.h"
-
 namespace tint::wgsl {
 
 /// WGSL core diagnostic rules.
@@ -54,14 +52,6 @@ enum class CoreDiagnosticRule : uint8_t {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(CoreDiagnosticRule value);
-
-/// @param out the stream to write to
-/// @param value the CoreDiagnosticRule
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, CoreDiagnosticRule value) {
-    return out << ToString(value);
-}
 
 /// ParseCoreDiagnosticRule parses a CoreDiagnosticRule from a string.
 /// @param str the string to parse
@@ -81,14 +71,6 @@ enum class ChromiumDiagnosticRule : uint8_t {
 /// @param value the enum value
 /// @returns the string for the given enum value
 std::string_view ToString(ChromiumDiagnosticRule value);
-
-/// @param out the stream to write to
-/// @param value the ChromiumDiagnosticRule
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, ChromiumDiagnosticRule value) {
-    return out << ToString(value);
-}
 
 /// ParseChromiumDiagnosticRule parses a ChromiumDiagnosticRule from a string.
 /// @param str the string to parse

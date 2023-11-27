@@ -51,14 +51,6 @@ enum class {{$enum}} : uint8_t {
 /// @returns the string for the given enum value
 std::string_view ToString({{$enum}} value);
 
-/// @param out the stream to write to
-/// @param value the {{$enum}}
-/// @returns @p out so calls can be chained
-template <typename STREAM, typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, {{$enum}} value) {
-    return out << ToString(value);
-}
-
 /// Parse{{$enum}} parses a {{$enum}} from a string.
 /// @param str the string to parse
 /// @returns the parsed enum, or {{$enum}}::kUndefined if the string could not be parsed.

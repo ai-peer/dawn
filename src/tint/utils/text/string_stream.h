@@ -78,6 +78,17 @@ class StringStream {
         return EmitValue(std::forward<T>(value));
     }
 
+    /// Emit `value` to the stream - version that calls ToString(T) implicitly for enums.
+    /// @param value the value to emit
+    /// @returns a reference to this
+    template <typename T,
+              typename std::enable_if_t<
+                  std::is_enum_v<std::decay_t<T>> &&
+                      std::is_same_v<std::string_view, decltype(ToString(std::declval<T>()))>,
+                  bool> = true>
+    StringStream& operator<<(T&& value) {
+        return EmitValue(ToString(std::forward<T>(value)));
+    }
     /// Emit `value` to the stream
     /// @param value the value to emit
     /// @returns a reference to this

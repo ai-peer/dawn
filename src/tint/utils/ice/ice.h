@@ -52,12 +52,31 @@ class InternalCompilerError {
     /// calls the InternalCompilerErrorReporter if one is set.
     ~InternalCompilerError();
 
-    /// Appends `arg` to the ICE message.
+    /// Appends `arg` to the ICE message - version using SFINAE to only match types that can be used
+    /// with std::stringstream::operator<<
     /// @param arg the argument to append to the ICE message
     /// @returns this object so calls can be chained
-    template <typename T>
+    template <typename T,
+              typename std::enable_if_t<!std::is_same_v<decltype(std::declval<std::stringstream>()
+                                                                 << std::declval<T&&>()),
+                                                        void>,
+                                        bool> = true>
     InternalCompilerError& operator<<(T&& arg) {
         msg_ << std::forward<T>(arg);
+        return *this;
+    }
+
+    /// Appends `arg` to the ICE message - version using SFINAE to only match enums that can be
+    /// parameters to a ToString function.
+    /// @param arg the argument to append to the ICE message
+    /// @returns this object so calls can be chained
+    template <typename T,
+              typename std::enable_if_t<
+                  std::is_enum_v<std::decay_t<T>> &&
+                      std::is_same_v<std::string_view, decltype(ToString(std::declval<T>()))>,
+                  bool> = true>
+    InternalCompilerError& operator<<(T&& arg) {
+        msg_ << ToString(std::forward<T>(arg));
         return *this;
     }
 
