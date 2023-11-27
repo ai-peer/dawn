@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "844f9d27_7a3b8714",
+        "filename": "src/tint/lang/wgsl/ir_roundtrip_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T22:41:24Z",
+      "side": 1,
+      "message": "Agreed. Moved the validation to `src/tint/cmd/fuzz/ir/fuzz.cc`, as this doesn\u0027t need to be duplicated for each an every IR fuzzer. Change made to the parent CL.",
+      "parentUuid": "192db8a7_20492ffc",
+      "revId": "c0ced8d0edf4801bdbee6b16af79aa14534d56ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0db3c2cd_32a32b6f",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-11-22T16:03:55Z",
       "side": 1,
       "message": "I think this sould `Raise` and then `Lower`",
+      "revId": "c0ced8d0edf4801bdbee6b16af79aa14534d56ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9a9a1fa_4bd3020d",
+        "filename": "src/tint/lang/wgsl/ir_roundtrip_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T22:41:24Z",
+      "side": 1,
+      "message": "The input IR should be core dialect, so we shouldn\u0027t be lowering in here at all. Removed.",
+      "parentUuid": "0db3c2cd_32a32b6f",
       "revId": "c0ced8d0edf4801bdbee6b16af79aa14534d56ff",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
