@@ -318,7 +318,7 @@ MaybeError ValidateBindGroupLayoutDescriptor(DeviceBase* device,
         DAWN_INVALID_IF(bindingNumber >= kMaxBindingsPerBindGroupTyped,
                         "Binding number (%u) exceeds the maxBindingsPerBindGroup limit (%u).",
                         uint32_t(bindingNumber), kMaxBindingsPerBindGroup);
-        DAWN_INVALID_IF(bindingsSet.count(bindingNumber) != 0,
+        DAWN_INVALID_IF(bindingsSet.contains(bindingNumber),
                         "On entries[%u]: binding index (%u) was specified by a previous entry.", i,
                         entry.binding);
 
@@ -579,7 +579,7 @@ const BindGroupLayoutInternalBase::BindingMap& BindGroupLayoutInternalBase::GetB
 }
 
 bool BindGroupLayoutInternalBase::HasBinding(BindingNumber bindingNumber) const {
-    return mBindingMap.count(bindingNumber) != 0;
+    return mBindingMap.contains(bindingNumber);
 }
 
 BindingIndex BindGroupLayoutInternalBase::GetBindingIndex(BindingNumber bindingNumber) const {
