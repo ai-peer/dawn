@@ -63,6 +63,30 @@
       },
       "revId": "1d0752ee576baf13e306d2ca9d1f2c2a5caf8c57",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9daa79c_12978767",
+        "filename": "src/dawn/node/binding/GPU.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 266,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-27T16:37:25Z",
+      "side": 1,
+      "message": "This is a getter for a Javacript property so the node bindings generation adds code that call \"getStuff\" for accessing .stuff properties.",
+      "parentUuid": "f0248eef_09d8df7d",
+      "range": {
+        "startLine": 266,
+        "startChar": 55,
+        "endLine": 266,
+        "endChar": 59
+      },
+      "revId": "1d0752ee576baf13e306d2ca9d1f2c2a5caf8c57",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
