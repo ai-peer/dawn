@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1050524f_93ded6a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-11-27T18:35:57Z",
+      "side": 1,
+      "message": "Instead of removing all the stringstream operator\u003c\u003c could we just move them to an alternate header that is included as needed? The call sites are nicer when you can just do a `\u003c\u003cop` instead of `\u003c\u003cToString(op)`.",
+      "revId": "fa1210aa4b8ec53b01a35ab65a6b91932a49b0e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
