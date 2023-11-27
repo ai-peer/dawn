@@ -50,6 +50,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b5fdd6b_4fdbdcaf",
+        "filename": "src/tint/lang/msl/writer/raise/raise.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-27T16:51:52Z",
+      "side": 1,
+      "message": "It\u0027s not that we need to, it was just to keep IR transforms a little smaller (since the AST BuiltinPolyfill is rather large).",
+      "parentUuid": "a3a246cf_837b3aa3",
+      "range": {
+        "startLine": 60,
+        "startChar": 5,
+        "endLine": 68,
+        "endChar": 68
+      },
+      "revId": "987d405b020bbbecc5d70abc6d72dcdb1b46ccd6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eb58f8f6_5f60f4cb",
         "filename": "src/tint/lang/msl/writer/raise/raise.cc",
         "patchSetId": 4

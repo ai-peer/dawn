@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8579cae7_69d60420",
+        "filename": "src/tint/lang/msl/writer/printer/discard_test.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-27T16:51:52Z",
+      "side": 0,
+      "message": "Maybe worth adding an entry point that calls `foo`, so that we can see that we still generate a call to `discard_fragment()` in the entry point function.",
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86cf3469_152ff1cb",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 795,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-27T16:51:52Z",
+      "side": 0,
+      "message": "Why is this removed?",
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03a9bac_65d959f3",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 802,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-27T16:51:52Z",
+      "side": 0,
+      "message": "Ditto?",
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bc0f69c_bd3c1840",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-27T16:51:52Z",
+      "side": 0,
+      "message": "Ditto. The polyfill just clamps the arguments, but we still call `insert_bits()`.",
+      "range": {
+        "startLine": 857,
+        "startChar": 0,
+        "endLine": 859,
+        "endChar": 22
+      },
+      "revId": "2a21ac0c3b4f4b18afb69aefbf7a390915b13ef2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
