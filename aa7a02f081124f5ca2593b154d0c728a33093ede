@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbbedf23_78b7a795",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-27T19:34:53Z",
+      "side": 1,
+      "message": "Nit: Maybe just remove this so that we `TINT_ICE_ON_NO_MATCH`? Discard should never make it through to the printer.\n\nIn the future we might want to skip `DemoteToHelper` when targeting MSL 2.3 or newer (because MSL changed `discard_fragment()` semantics), and this might cause us to forget to add the emission of `discard_fragment()`.",
+      "revId": "aa7a02f081124f5ca2593b154d0c728a33093ede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
