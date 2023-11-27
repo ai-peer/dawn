@@ -429,10 +429,8 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
         // key in the ExternalTextureBindingExpansions map.
         ExternalTextureBindingExpansionMap expansions =
             layout->GetExternalTextureBindingExpansionMap();
-        std::map<BindingNumber, dawn::native::ExternalTextureBindingExpansion>::iterator it =
-            expansions.find(bindingNumber);
         // TODO(dawn:563): Provide info about the binding types.
-        DAWN_INVALID_IF(it == expansions.end(),
+        DAWN_INVALID_IF(!expansions.contains(bindingNumber),
                         "Binding type in the shader (texture_external) doesn't match the "
                         "type in the layout.");
 
@@ -450,7 +448,7 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
                     shaderInfo.bindingType, layoutInfo.bindingType);
 
     ExternalTextureBindingExpansionMap expansions = layout->GetExternalTextureBindingExpansionMap();
-    DAWN_INVALID_IF(expansions.find(bindingNumber) != expansions.end(),
+    DAWN_INVALID_IF(expansions.contains(bindingNumber),
                     "Binding type (buffer vs. texture vs. sampler vs. external) doesn't "
                     "match the type in the layout.");
 
@@ -1260,7 +1258,7 @@ ObjectType ShaderModuleBase::GetType() const {
 }
 
 bool ShaderModuleBase::HasEntryPoint(const std::string& entryPoint) const {
-    return mEntryPoints.count(entryPoint) > 0;
+    return mEntryPoints.contains(entryPoint);
 }
 
 ShaderModuleEntryPoint ShaderModuleBase::ReifyEntryPointName(const char* entryPointName,
