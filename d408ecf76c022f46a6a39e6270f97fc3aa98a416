@@ -33,6 +33,29 @@
       "message": "Thank you for iterating on this! LGTM",
       "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "baa4a6f6_3ddbb832",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T17:49:56Z",
+      "side": 1,
+      "message": "curious to know why we need to pull in chromecast build stuff.\n\nIt\u0027s also apparently the reason the MSVC Kokoro bots are failing:\n\n```\nCMake Error at third_party/CMakeLists.txt:210 (add_library):\n  Cannot find source file:\n\n    T:/tmp/dawn-temp/dawn-build/gen/include/partition_alloc/chromecast_buildflags.h\n\n  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h\n  .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc\n```",
+      "range": {
+        "startLine": 216,
+        "startChar": 53,
+        "endLine": 216,
+        "endChar": 74
+      },
+      "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
