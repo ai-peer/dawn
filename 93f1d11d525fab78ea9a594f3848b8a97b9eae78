@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7592e21_9047d7f7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T17:23:47Z",
+      "side": 1,
+      "message": "so much infra failure o_O",
+      "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ffc2c62f_13e4f089",
@@ -14,6 +31,29 @@
       "writtenOn": "2023-11-27T17:09:31Z",
       "side": 1,
       "message": "Is this comment still needed?",
+      "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3730d424_5a015ec9",
+        "filename": "src/dawn/tests/end2end/FramebufferFetchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-27T17:23:47Z",
+      "side": 1,
+      "message": "unit: gtest guide says not to use underscores (although we already violate this sometimes)\n\nTEST() arguments go from general to specific. The first argument is the name of the test suite, and the second argument is the test’s name within the test suite. Both names must be valid C++ identifiers, **and they should not contain any underscores (_)**. A test’s full name consists of its containing test suite and its individual name. Tests from different test suites can have the same individual name.\n\nhttps://google.github.io/googletest/primer.html#simple-tests",
+      "range": {
+        "startLine": 278,
+        "startChar": 30,
+        "endLine": 278,
+        "endChar": 73
+      },
       "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
