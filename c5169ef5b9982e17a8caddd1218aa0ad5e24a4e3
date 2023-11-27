@@ -51,6 +51,24 @@
       "parentUuid": "6cd8c8d4_c0705f6f",
       "revId": "c5169ef5b9982e17a8caddd1218aa0ad5e24a4e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef074253_bb5bfe43",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T18:32:55Z",
+      "side": 1,
+      "message": "This is _supposed_ to be a directive to Kokoro (one of the presubmit bots) to rerun, as the last run aborted (neither passed nor failed). I\u0027ll see if I can kick it manually.",
+      "parentUuid": "1cabad23_40f7012f",
+      "revId": "c5169ef5b9982e17a8caddd1218aa0ad5e24a4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
