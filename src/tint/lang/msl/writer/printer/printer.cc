@@ -792,14 +792,12 @@ class Printer : public tint::TextGenerator {
     void EmitCoreBuiltinName(StringStream& out, core::BuiltinFn func) {
         switch (func) {
             case core::BuiltinFn::kAcos:
-            case core::BuiltinFn::kAcosh:
             case core::BuiltinFn::kAll:
             case core::BuiltinFn::kAny:
             case core::BuiltinFn::kAsin:
             case core::BuiltinFn::kAsinh:
             case core::BuiltinFn::kAtan2:
             case core::BuiltinFn::kAtan:
-            case core::BuiltinFn::kAtanh:
             case core::BuiltinFn::kCeil:
             case core::BuiltinFn::kClamp:
             case core::BuiltinFn::kCos:
@@ -853,9 +851,6 @@ class Printer : public tint::TextGenerator {
                 break;
             case core::BuiltinFn::kExtractBits:
                 out << "extract_bits";
-                break;
-            case core::BuiltinFn::kInsertBits:
-                out << "insert_bits";
                 break;
             case core::BuiltinFn::kFwidth:
             case core::BuiltinFn::kFwidthCoarse:
