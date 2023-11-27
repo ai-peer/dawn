@@ -90,6 +90,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6870117c_74aa86f8",
+        "filename": "src/tint/lang/wgsl/ast/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T22:52:16Z",
+      "side": 1,
+      "message": "Just looked at this again, and `b.Call\u003cvec4u\u003e(31_a, 31_a, 31_a, 31_a)` should have been `b.Call\u003cvec4u\u003e(24_a, 16_a, 8_a, 0_a)`.\n\nAgain - untested. 😊",
+      "parentUuid": "3f8098ad_1579d38b",
+      "range": {
+        "startLine": 891,
+        "startChar": 4,
+        "endLine": 891,
+        "endChar": 27
+      },
+      "revId": "1d666eb6bbd56d665f000a9410822522685cd717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "798525cc_929b9d99",
         "filename": "src/tint/lang/wgsl/ast/transform/builtin_polyfill.cc",
         "patchSetId": 4
