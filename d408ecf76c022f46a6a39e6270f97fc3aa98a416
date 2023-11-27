@@ -80,6 +80,30 @@
       },
       "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab8affc4_889d1fcf",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 19
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-27T21:14:51Z",
+      "side": 1,
+      "message": "Same error again:\n\n```\nCMake Error at third_party/CMakeLists.txt:210 (add_library):\n  Cannot find source file:\n\n    T:/tmp/dawn-temp/dawn-build/gen/include/partition_alloc/chromecast_buildflags.h\n\n  Tried extensions .c .C .c++ .cc .cpp .cxx .cu .mpp .m .M .mm .ixx .cppm .h\n  .hh .h++ .hm .hpp .hxx .in .txx .f .F .for .f77 .f90 .f95 .f03 .hip .ispc\n\n```",
+      "parentUuid": "ee51977b_d0cee5cf",
+      "range": {
+        "startLine": 216,
+        "startChar": 53,
+        "endLine": 216,
+        "endChar": 74
+      },
+      "revId": "d408ecf76c022f46a6a39e6270f97fc3aa98a416",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
