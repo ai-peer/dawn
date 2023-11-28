@@ -16,6 +16,23 @@
       "message": "Can I have a +2 or would you like someone else to review as well?",
       "revId": "c4be6f35431086be883ef849dadd7125dc24fe90",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb0099d7_a06f42df",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T16:59:31Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "c4be6f35431086be883ef849dadd7125dc24fe90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
