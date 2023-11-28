@@ -408,7 +408,7 @@ bool RunServer(std::string port) {
     }
     std::cout << "Listening on port " << port.c_str() << "...\n";
     while (auto conn = server_socket->Accept()) {
-        std::thread([=] {
+        std::thread([=, this] {
             DEBUG("Client connected...");
             Stream stream{conn.get(), ""};
 

@@ -404,7 +404,7 @@ TEST_F(ASTCloneContextTestNodeTest, CloneWithReplaceFunction) {
     auto* replacement = a.Create<TestNode>(cloned.Symbols().New("replacement"));
 
     auto* cloned_root = CloneContext(&cloned, original.ID())
-                            .Replace(original_root->b, [=] { return replacement; })
+                            .Replace(original_root->b, [=, this] { return replacement; })
                             .Clone(original_root);
 
     EXPECT_NE(cloned_root->a, replacement);

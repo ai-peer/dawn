@@ -297,7 +297,7 @@ class CloneContext {
         }
         CloneableTransform transform;
         transform.typeinfo = &TypeInfo::Of<T>();
-        transform.function = [=](const ast::Node* in) { return replacer(in->As<T>()); };
+        transform.function = [=, this](const ast::Node* in) { return replacer(in->As<T>()); };
         transforms_.Push(std::move(transform));
         return *this;
     }

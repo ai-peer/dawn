@@ -2147,7 +2147,7 @@ class ResolverBuiltinTest_TextureOperation : public ResolverTestWithParam<Textur
             case core::type::TextureDimension::kCubeArray:
                 return ty.vec3(scalar);
             default:
-                [=] {
+                [=, this] {
                     StringStream str;
                     str << dim;
                     FAIL() << "Unsupported texture dimension: " << str.str();
