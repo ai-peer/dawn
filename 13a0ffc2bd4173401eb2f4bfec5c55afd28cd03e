@@ -96,6 +96,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "065c96c5_2a172af3",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T19:50:46Z",
+      "side": 1,
+      "message": "AFAIK it will be! (or we\u0027ll get a compile error when hitting that case)",
+      "parentUuid": "a56f83ca_78a7ca5d",
+      "range": {
+        "startLine": 58,
+        "startChar": 25,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12f5bb95_b3740431",
         "filename": "src/dawn/common/Enumerator.h",
         "patchSetId": 3
