@@ -42,6 +42,8 @@
 #if DAWN_PLATFORM_IS(MACOS)
 #import <IOKit/IOKitLib.h>
 #include "dawn/common/IOKitRef.h"
+#elif DAWN_PLATFORM_IS(IOS)
+#import <os/proc.h>
 #endif
 
 #include <string>
@@ -897,8 +899,26 @@ class PhysicalDevice : public PhysicalDeviceBase {
             heapInfo[0].properties =
                 wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
                 wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
-            heapInfo[0].size = [*mDevice recommendedMaxWorkingSetSize];
+            if (@available(macOS 10.12, iOS 16.0, *)) {
+                heapInfo[0].size = [*mDevice recommendedMaxWorkingSetSize];
+            } else {
+                // Since AdapterPropertiesMemoryHeaps is already gated on the
+                // availability above, we should never reach this case, however
+                // excluding the conditional causes build errors.
+                DAWN_UNREACHABLE();
+            }
         } else {
+#if DAWN_PLATFORM_IS(IOS)
+            DAWN_UNREACHABLE();
+            auto* heapInfo = new MemoryHeapInfo[1];
+            memoryHeapProperties->heapCount = 1;
+            memoryHeapProperties->heapInfo = heapInfo;
+
+            heapInfo[0].properties =
+                wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+                wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
+            heapInfo[0].size = os_proc_available_memory();
+#elif DAWN_PLATFORM_IS(MACOS)
             auto* heapInfo = new MemoryHeapInfo[2];
             memoryHeapProperties->heapCount = 2;
             memoryHeapProperties->heapInfo = heapInfo;
@@ -916,6 +936,9 @@ class PhysicalDevice : public PhysicalDeviceBase {
                                      wgpu::HeapProperty::HostCoherent |
                                      wgpu::HeapProperty::HostCached;
             heapInfo[1].size = hostInfo.max_mem;
+#else
+#error "Unsupported Apple platform."
+#endif
         }
     }
 
