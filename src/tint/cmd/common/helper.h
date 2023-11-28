@@ -165,7 +165,9 @@ bool ReadFile(const std::string& input_file, std::vector<T>* buffer) {
     fseek(file, 0, SEEK_SET);
 
     buffer->clear();
-    buffer->resize(file_size / sizeof(T));
+    if (file_size > 0) {
+        buffer->resize(file_size / sizeof(T));
+    }
 
     size_t bytes_read = fread(buffer->data(), 1, file_size, file);
     fclose(file);
