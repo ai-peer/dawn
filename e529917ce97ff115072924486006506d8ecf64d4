@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "962c6d85_b45ebeef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T10:56:39Z",
+      "side": 1,
+      "message": "nit: it\u0027s technically not required to run the web tests, but to pass a bunch of them.",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9d8b27a0_fc823ba1",
@@ -14,6 +31,57 @@
       "writtenOn": "2023-11-28T08:19:44Z",
       "side": 1,
       "message": "PTAL.\n\nAlthough Shahbaz Youssefi already made a patch in swiftshader to turn on high precision filtering by default, that patch is currently blocked from being rolled into chrome since it caused a lot of pixel/browser tests to fail. So it\u0027s likely that that patch would be merged anytime soon. It might even get reverted.",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f19c50d_7816923f",
+        "filename": "src/dawn/common/vk_google_filtering_precision.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T10:56:39Z",
+      "side": 1,
+      "message": "I think this license being Apache2 and not part of third_party might cause issues with all the tooling around open source licenses. Can\u0027t we get the header directly from the third_party/swiftshader directory?",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd36f940_2a9efc86",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T10:56:39Z",
+      "side": 1,
+      "message": "nit: Maybe add a block comment that we \"Always try to use high-precision filtering on Swiftshader to make it behave more like GPU hardware.\"",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "395426f4_7ff0d56b",
+        "filename": "src/dawn/native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T10:56:39Z",
+      "side": 1,
+      "message": "Don\u0027t we technically need to enable this extension when creating the VkDevice in DeviceVk.cpp?",
       "revId": "e529917ce97ff115072924486006506d8ecf64d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
