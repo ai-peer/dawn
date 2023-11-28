@@ -46,7 +46,6 @@
 #include "{{native_dir}}/{{namespace}}_structs_autogen.h"
 
 namespace {{native_namespace}} {
-
 namespace detail {
 
     // SType for implementation details. Kept inside the detail namespace for extensibility.
@@ -93,25 +92,6 @@ namespace detail {
     struct UnpackedChain<AdditionalExtensionsList<Additionals...>, Ts...> {
         using Type = std::tuple<Ts..., Additionals...>;
     };
-
-    // Template function that returns a string of the non-nullptr STypes from an unpacked chain.
-    template <typename Unpacked>
-    std::string UnpackedChainToString(const Unpacked& unpacked) {
-        std::string result = "( ";
-        std::apply(
-            [&](const auto*... args) {
-                (([&](const auto* arg) {
-                    if (arg != nullptr) {
-                        // reinterpret_cast because this chained struct might be forward-declared
-                        // without a definition. The definition may only be available on a
-                        // particular backend.
-                        const auto* chainedStruct = reinterpret_cast<const wgpu::ChainedStruct*>(arg);
-                        result += absl::StrFormat("%s, ", chainedStruct->sType);
-                    }
-                }(args)), ...);}, unpacked);
-        result += " )";
-        return result;
-    }
 
 }  // namespace detail
 
@@ -220,12 +200,6 @@ namespace detail {
         return ValidateSingleSTypeInner(chain, sType, sTypes...);
     }
 
-    // Template type to get root type from the unpacked chain and vice-versa.
-    template <typename Unpacked>
-    struct RootTypeFor;
-    template <typename Root>
-    struct UnpackedTypeFor;
-
 }  // namespace {{native_namespace}}
 
 // Include specializations before declaring types for ordering purposes.
@@ -233,23 +207,155 @@ namespace detail {
 
 namespace {{native_namespace}} {
 
+    template <typename T>
+    class Unpacked;
+    template <typename T>
+    class UnpackedOut;
+
+namespace detail {
+
+    // Template type to get the unpacked chain type from the root type.
+    template <typename Root>
+    struct UnpackedTypeFor;
+
+    // Template for extensible structures typing.
+    enum class Extensibility { In, Out };
+    template <typename T>
+    struct ExtensibilityFor;
+
     {% for type in by_category["structure"] %}
+        {% set T = as_cppType(type.name) %}
+        {% set unpackedChain = "Unpacked" + T + "Chain" %}
         {% if type.extensible == "in" %}
-            {% set unpackedChain = "Unpacked" + as_cppType(type.name) + "Chain" %}
-            using {{unpackedChain}} = detail::UnpackedChain<
-                detail::AdditionalExtensions<{{as_cppType(type.name)}}>::List{{ "," if len(type.extensions) != 0 else ""}}
+            using {{unpackedChain}} = UnpackedChain<
+                AdditionalExtensions<{{T}}>::List{{ "," if len(type.extensions) != 0 else ""}}
                 {% for extension in type.extensions %}
                     const {{as_cppType(extension.name)}}*{{ "," if not loop.last else "" }}
                 {% endfor %}
             >::Type;
             template <>
-            struct UnpackedTypeFor<{{as_cppType(type.name)}}> {
+            struct UnpackedTypeFor<{{T}}> {
                 using Type = {{unpackedChain}};
             };
-            ResultOrError<{{unpackedChain}}> ValidateAndUnpackChain(const {{as_cppType(type.name)}}* chain);
+            template <>
+            struct ExtensibilityFor<{{T}}> {
+                static constexpr Extensibility value = Extensibility::In;
+            };
+
+        {% elif type.extensible == "out" %}
+            using {{unpackedChain}} = UnpackedChain<
+                AdditionalExtensions<{{T}}>::List{{ "," if len(type.extensions) != 0 else ""}}
+                {% for extension in type.extensions %}
+                    {{as_cppType(extension.name)}}*{{ "," if not loop.last else "" }}
+                {% endfor %}
+            >::Type;
+            template <>
+            struct UnpackedTypeFor<{{T}}> {
+                using Type = {{unpackedChain}};
+            };
+            template <>
+            struct ExtensibilityFor<{{T}}> {
+                static constexpr Extensibility value = Extensibility::Out;
+            };
 
         {% endif %}
     {% endfor %}
+
+    // Template function that returns a string of the non-nullptr STypes from an unpacked chain.
+    template <typename T>
+    std::string UnpackedChainToString(const Unpacked<T>& unpacked) {
+        std::string result = "( ";
+        std::apply(
+            [&](const auto*... args) {
+                (([&](const auto* arg) {
+                    if (arg != nullptr) {
+                        // reinterpret_cast because this chained struct might be forward-declared
+                        // without a definition. The definition may only be available on a
+                        // particular backend.
+                        const auto* chainedStruct = reinterpret_cast<const wgpu::ChainedStruct*>(arg);
+                        result += absl::StrFormat("%s, ", chainedStruct->sType);
+                    }
+                }(args)), ...);}, unpacked.mUnpacked);
+        result += " )";
+        return result;
+    }
+
+    template <typename T>
+    std::string UnpackedChainToString(const UnpackedOut<T>& unpacked) {
+        std::string result = "( ";
+        std::apply(
+            [&](auto*... args) {
+                (([&](auto* arg) {
+                    if (arg != nullptr) {
+                        // reinterpret_cast because this chained struct might be forward-declared
+                        // without a definition. The definition may only be available on a
+                        // particular backend.
+                        const auto* chainedStruct = reinterpret_cast<wgpu::ChainedStructOut*>(arg);
+                        result += absl::StrFormat("%s, ", chainedStruct->sType);
+                    }
+                }(args)), ...);}, unpacked.mUnpacked);
+        result += " )";
+        return result;
+    }
+
+}  // namespace detail
+
+    template <typename T, typename Enable = std::enable_if_t<detail::ExtensibilityFor<T>::value == detail::Extensibility::In>>
+    ResultOrError<Unpacked<T>> ValidateAndUnpack(const T* chain);
+    template <typename T, typename Enable = std::enable_if_t<detail::ExtensibilityFor<T>::value == detail::Extensibility::Out>>
+    ResultOrError<UnpackedOut<T>> ValidateAndUnpackOut(T* chain);
+
+    template <typename T>
+    class Unpacked {
+      public:
+        using TupleType = typename detail::UnpackedTypeFor<T>::Type;
+
+        Unpacked() : mStruct(nullptr) {}
+        explicit Unpacked(const T* packed) : mStruct(packed) {}
+
+        const T* operator->() const { return mStruct; }
+        const T& operator*() const { return *mStruct; }
+
+        template <typename In>
+	    auto Get() const {
+	        return std::get<std::add_const_t<In>*>(mUnpacked);
+	    }
+
+        const TupleType& Tuple() const { return mUnpacked; }
+
+      private:
+        friend ResultOrError<Unpacked<T>> ValidateAndUnpack<T>(const T* chain);
+        friend std::string detail::UnpackedChainToString<T>(const Unpacked<T>& unpacked);
+
+        const T* mStruct = nullptr;
+        TupleType mUnpacked;
+    };
+
+    template <typename T>
+    class UnpackedOut {
+      public:
+        using TupleType = typename detail::UnpackedTypeFor<T>::Type;
+
+        UnpackedOut() : mStruct(nullptr) {}
+        explicit UnpackedOut(T* packed) : mStruct(packed) {}
+
+        T* operator->() const { return mStruct; }
+        T& operator*() const { return *mStruct; }
+
+        template <typename Out>
+	    auto Get() const {
+            return std::get<Out*>(mUnpacked);
+    	}
+
+        const TupleType& Tuple() const { return mUnpacked; }
+
+      private:
+        friend ResultOrError<UnpackedOut<T>> ValidateAndUnpackOut<T>(T* chain);
+        friend std::string detail::UnpackedChainToString<T>(const UnpackedOut<T>& unpacked);
+
+        T* mStruct = nullptr;
+        TupleType mUnpacked;
+    };
 
 }  // namespace {{native_namespace}}
 

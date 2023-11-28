@@ -107,6 +107,20 @@ bool UnpackExtension(Unpacked& unpacked, const ChainedStruct* chain, bool& dupli
     }
     return false;
 }
+template <typename Root, typename Unpacked, typename Ext>
+bool UnpackExtension(Unpacked& unpacked, ChainedStructOut* chain, bool& duplicate) {
+    DAWN_ASSERT(chain != nullptr);
+    if (chain->sType == STypeFor<Ext>) {
+        auto& member = std::get<Ext>(unpacked);
+        if (member != nullptr) {
+            duplicate = true;
+        } else {
+            member = reinterpret_cast<Ext>(chain);
+        }
+        return true;
+    }
+    return false;
+}
 
 // Tries to match all possible extensions, returning true iff one of the allowed extensions were
 // matched, false otherwise. If the SType was not already matched, sets the unpacked result
@@ -118,28 +132,34 @@ struct AdditionalExtensionUnpacker<Root, Unpacked, detail::AdditionalExtensionsL
     static bool Unpack(Unpacked& unpacked, const ChainedStruct* chain, bool& duplicate) {
         return ((UnpackExtension<Root, Unpacked, Exts>(unpacked, chain, duplicate)) || ...);
     }
+    static bool Unpack(Unpacked& unpacked, ChainedStructOut* chain, bool& duplicate) {
+        return ((UnpackExtension<Root, Unpacked, Exts>(unpacked, chain, duplicate)) || ...);
+    }
 };
 
 //
 // Unpacked chain helpers.
 //
 {% for type in by_category["structure"] %}
+    {% set T = as_cppType(type.name) %}
+    {% set unpackedChain = "Unpacked" + T + "Chain" %}
     {% if type.extensible == "in" %}
-        {% set unpackedChain = "Unpacked" + as_cppType(type.name) + "Chain" %}
-        ResultOrError<{{unpackedChain}}> ValidateAndUnpackChain(const {{as_cppType(type.name)}}* chain) {
+        template <>
+        ResultOrError<Unpacked<{{T}}>> ValidateAndUnpack<{{T}}>(const {{T}}* chain) {
             const ChainedStruct* next = chain->nextInChain;
-            {{unpackedChain}} result;
+            Unpacked<{{T}}> result(chain);
 
             for (; next != nullptr; next = next->nextInChain) {
                 bool duplicate = false;
                 switch (next->sType) {
                     {% for extension in type.extensions %}
-                        case STypeFor<{{as_cppType(extension.name)}}>: {
-                            auto& member = std::get<const {{as_cppType(extension.name)}}*>(result);
+                        {% set Ext = as_cppType(extension.name) %}
+                        case STypeFor<{{Ext}}>: {
+                            auto& member = std::get<const {{Ext}}*>(result.mUnpacked);
                             if (member != nullptr) {
                                 duplicate = true;
                             } else {
-                                member = static_cast<const {{as_cppType(extension.name)}}*>(next);
+                                member = static_cast<const {{Ext}}*>(next);
                             }
                             break;
                         }
@@ -147,13 +167,13 @@ struct AdditionalExtensionUnpacker<Root, Unpacked, detail::AdditionalExtensionsL
                     default: {
                         using Unpacker =
                             AdditionalExtensionUnpacker<
-                                {{as_cppType(type.name)}},
-                                {{unpackedChain}},
-                                detail::AdditionalExtensions<{{as_cppType(type.name)}}>::List>;
-                        if (!Unpacker::Unpack(result, next, duplicate)) {
+                                {{T}},
+                                detail::{{unpackedChain}},
+                                detail::AdditionalExtensions<{{T}}>::List>;
+                        if (!Unpacker::Unpack(result.mUnpacked, next, duplicate)) {
                             return DAWN_VALIDATION_ERROR(
                                 "Unexpected chained struct of type %s found on %s chain.",
-                                next->sType, "{{as_cppType(type.name)}}"
+                                next->sType, "{{T}}"
                             );
                         }
                         break;
@@ -162,14 +182,59 @@ struct AdditionalExtensionUnpacker<Root, Unpacked, detail::AdditionalExtensionsL
                 if (duplicate) {
                     return DAWN_VALIDATION_ERROR(
                         "Duplicate chained struct of type %s found on %s chain.",
-                        next->sType, "{{as_cppType(type.name)}}"
+                        next->sType, "{{T}}"
                     );
                 }
             }
             return result;
         }
+    {% elif type.extensible == "out" %}
+        template <>
+        ResultOrError<UnpackedOut<{{T}}>> ValidateAndUnpackOut<{{T}}>({{T}}* chain) {
+            ChainedStructOut* next = chain->nextInChain;
+            UnpackedOut<{{T}}> result(chain);
 
+            for (; next != nullptr; next = next->nextInChain) {
+                bool duplicate = false;
+                switch (next->sType) {
+                    {% for extension in type.extensions %}
+                        {% set Ext = as_cppType(extension.name) %}
+                        case STypeFor<{{Ext}}>: {
+                            auto& member = std::get<{{Ext}}*>(result.mUnpacked);
+                            if (member != nullptr) {
+                                duplicate = true;
+                            } else {
+                                member = static_cast<{{Ext}}*>(next);
+                            }
+                            break;
+                        }
+                    {% endfor %}
+                    default: {
+                        using Unpacker =
+                            AdditionalExtensionUnpacker<
+                                {{T}},
+                                detail::{{unpackedChain}},
+                                detail::AdditionalExtensions<{{T}}>::List>;
+                        if (!Unpacker::Unpack(result.mUnpacked, next, duplicate)) {
+                            return DAWN_VALIDATION_ERROR(
+                                "Unexpected chained struct of type %s found on %s chain.",
+                                next->sType, "{{T}}"
+                            );
+                        }
+                        break;
+                    }
+                }
+                if (duplicate) {
+                    return DAWN_VALIDATION_ERROR(
+                        "Duplicate chained struct of type %s found on %s chain.",
+                        next->sType, "{{T}}"
+                    );
+                }
+            }
+            return result;
+        }
     {% endif %}
+
 {% endfor %}
 
 }  // namespace {{native_namespace}}
