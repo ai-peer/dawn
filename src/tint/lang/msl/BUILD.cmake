@@ -34,5 +34,64 @@
 #                       Do not modify this file directly
 ################################################################################
 
+include(lang/msl/intrinsic/BUILD.cmake)
+include(lang/msl/ir/BUILD.cmake)
 include(lang/msl/validate/BUILD.cmake)
 include(lang/msl/writer/BUILD.cmake)
+
+################################################################################
+# Target:    tint_lang_msl
+# Kind:      lib
+################################################################################
+tint_add_target(tint_lang_msl lib
+  lang/msl/barrier_type.cc
+  lang/msl/barrier_type.h
+  lang/msl/builtin_fn.cc
+  lang/msl/builtin_fn.h
+)
+
+tint_target_add_dependencies(tint_lang_msl lib
+  tint_lang_spirv
+  tint_utils_traits
+)
+
+################################################################################
+# Target:    tint_lang_msl_test
+# Kind:      test
+################################################################################
+tint_add_target(tint_lang_msl_test test
+  lang/msl/barrier_type_test.cc
+)
+
+tint_target_add_dependencies(tint_lang_msl_test test
+  tint_lang_msl
+  tint_utils_containers
+  tint_utils_ice
+  tint_utils_macros
+  tint_utils_math
+  tint_utils_memory
+  tint_utils_rtti
+  tint_utils_text
+  tint_utils_traits
+)
+
+tint_target_add_external_dependencies(tint_lang_msl_test test
+  "gtest"
+)
+
+################################################################################
+# Target:    tint_lang_msl_bench
+# Kind:      bench
+################################################################################
+tint_add_target(tint_lang_msl_bench bench
+  lang/msl/barrier_type_bench.cc
+)
+
+tint_target_add_dependencies(tint_lang_msl_bench bench
+  tint_lang_msl
+  tint_utils_traits
+)
+
+tint_target_add_external_dependencies(tint_lang_msl_bench bench
+  "google-benchmark"
+)

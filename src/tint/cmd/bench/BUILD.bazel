@@ -99,6 +99,7 @@ cc_binary(
     "//src/tint/lang/core/constant",
     "//src/tint/lang/core/type",
     "//src/tint/lang/core:bench",
+    "//src/tint/lang/msl:bench",
     "//src/tint/lang/wgsl",
     "//src/tint/lang/wgsl/ast",
     "//src/tint/lang/wgsl/program",

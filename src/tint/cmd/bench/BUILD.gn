@@ -100,6 +100,7 @@ if (tint_build_benchmarks) {
       "${tint_src_dir}/lang/core:bench",
       "${tint_src_dir}/lang/core/constant",
       "${tint_src_dir}/lang/core/type",
+      "${tint_src_dir}/lang/msl:bench",
       "${tint_src_dir}/lang/wgsl",
       "${tint_src_dir}/lang/wgsl:bench",
       "${tint_src_dir}/lang/wgsl/ast",

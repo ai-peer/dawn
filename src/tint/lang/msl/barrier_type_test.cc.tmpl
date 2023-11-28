@@ -1,0 +1,32 @@
+{{- /*
+--------------------------------------------------------------------------------
+Template file for use with tools/src/cmd/gen to generate barrier_type_test.cc
+
+To update the generated file, run:
+    ./tools/run gen
+
+See:
+* tools/src/cmd/gen for structures used by this template
+* https://golang.org/pkg/text/template/ for documentation on the template syntax
+--------------------------------------------------------------------------------
+*/ -}}
+
+{{- $I := LoadIntrinsics "src/tint/lang/msl/msl.def" -}}
+{{- Import "src/tint/utils/templates/enums.tmpl.inc" -}}
+{{- $enum := ($I.Sem.Enum "barrier_type") -}}
+
+#include "src/tint/lang/msl/barrier_type.h"
+
+#include <gtest/gtest.h>
+
+#include <string>
+
+#include "src/tint/utils/text/string.h"
+
+namespace tint::msl {
+namespace {
+
+{{ Eval "TestParsePrintEnum" $enum}}
+
+}  // namespace
+}  // namespace tint::msl
