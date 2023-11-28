@@ -20,6 +20,46 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dafef352_082be157",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 908,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T15:53:01Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "def4d55b9d6b1c3fe4fc3673fd1d8cf5b0b5d600",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "637a0c72_34ff01ee",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 920,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T15:53:01Z",
+      "side": 1,
+      "message": "Ah after your chat comment I understood this, we could stick this #if iOS and call to `os_proc_available_memory` in [1]",
+      "range": {
+        "startLine": 912,
+        "startChar": 0,
+        "endLine": 920,
+        "endChar": 58
+      },
+      "revId": "def4d55b9d6b1c3fe4fc3673fd1d8cf5b0b5d600",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c4199e45_2d3e76a4",
         "filename": "src/dawn/native/metal/BackendMTL.mm",
         "patchSetId": 3
@@ -31,6 +71,30 @@
       "writtenOn": "2023-11-28T15:50:49Z",
       "side": 1,
       "message": "nit: we could do (moves iOS out of the reading path, and deletes code after the unreachable):\n\n```\n#if DAWN_PLATFORM_IS(MACOS)\n   all the code\n#elif DAWN_PLATFORM_IS(IOS)\n   DAWN_UNREACHABLE();\n#else\n   #error\n#endif\n```",
+      "range": {
+        "startLine": 911,
+        "startChar": 0,
+        "endLine": 921,
+        "endChar": 29
+      },
+      "revId": "def4d55b9d6b1c3fe4fc3673fd1d8cf5b0b5d600",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82149c9c_ad2af52f",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 921,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T15:53:01Z",
+      "side": 1,
+      "message": "Or\n\n```\n#if isMacOS\n // all the code\n#else\n UNREACHABLE()\n#endif\n```",
+      "parentUuid": "c4199e45_2d3e76a4",
       "range": {
         "startLine": 911,
         "startChar": 0,
