@@ -16,6 +16,23 @@
       "message": "Sorry about the Kokoro confusion. I thought it was previously passing the CQ.\n\nI fixed 2 things\nThe error was not being able to directly \"call\" python files on Windows. I had to call execute \"python\" instead.\n\nFixed in:\nhttps://dawn-review.googlesource.com/c/dawn/+/157860/21..22",
       "revId": "b007e77a96a971602ffcc13199ccb7882a95b0c5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c597da80_890eb915",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-11-28T16:09:32Z",
+      "side": 1,
+      "message": "Sorry about the Kokoro confusion. I thought it was previously passing the CQ.\n\nI fixed 2 things:\n### Calling \"python\"\n\nIndeed, on windows you can\u0027t execute the text file directly. You have to call python.\n\nFixed in:\nhttps://dawn-review.googlesource.com/c/dawn/+/157860/21..22\n\n### Turning the library from STATIC to INTERFACE\n\nI was getting:\n```\nfatal error LNK1104: cannot open file static lib partition_alloc.lib\n```\nIndeed, there was no \".cc\" files in the library. Within this configuration, this is a header only library. The static library was empty, and nothing was produced on Windows.\n\nI turned the static library into an interface.\n\nFixed in:\nhttps://dawn-review.googlesource.com/c/dawn/+/157860/23..24",
+      "revId": "b007e77a96a971602ffcc13199ccb7882a95b0c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
