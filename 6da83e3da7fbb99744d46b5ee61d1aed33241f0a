@@ -16,6 +16,23 @@
       "message": "Trying to trigger Kokoro",
       "revId": "6da83e3da7fbb99744d46b5ee61d1aed33241f0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30979328_3a8282ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-28T16:08:03Z",
+      "side": 1,
+      "message": "kokoro rerun",
+      "revId": "6da83e3da7fbb99744d46b5ee61d1aed33241f0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
