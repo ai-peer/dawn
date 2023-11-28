@@ -45,7 +45,7 @@ class Instance final : public ObjectBase {
   public:
     using ObjectBase::ObjectBase;
 
-    WireResult Initialize();
+    WireResult Initialize(const WGPUInstanceDescriptor* descriptor);
 
     void RequestAdapter(const WGPURequestAdapterOptions* options,
                         WGPURequestAdapterCallback callback,

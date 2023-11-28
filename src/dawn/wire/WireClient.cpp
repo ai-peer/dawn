@@ -55,7 +55,7 @@ ReservedDevice WireClient::ReserveDevice() {
     return mImpl->ReserveDevice();
 }
 
-ReservedInstance WireClient::ReserveInstance() {
+ReservedInstance WireClient::ReserveInstance(const WGPUInstanceDescriptor* descriptor) {
     return mImpl->ReserveInstance();
 }
 
