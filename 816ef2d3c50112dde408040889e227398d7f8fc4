@@ -34,6 +34,23 @@
       "parentUuid": "c32d68e6_50903d51",
       "revId": "816ef2d3c50112dde408040889e227398d7f8fc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40661d01_3524870c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-28T23:45:59Z",
+      "side": 1,
+      "message": "fyi: this change requires this CTS PR to land and roll \n\nhttps://github.com/gpuweb/cts/pull/3196",
+      "revId": "816ef2d3c50112dde408040889e227398d7f8fc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
