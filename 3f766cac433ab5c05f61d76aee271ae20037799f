@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16fc4dac_9abe8f0d",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-28T14:58:27Z",
+      "side": 1,
+      "message": "Instead of adding this, could we just switch to c++20 compilation?",
+      "revId": "3f766cac433ab5c05f61d76aee271ae20037799f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
