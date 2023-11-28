@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d3bc9a_2907f925",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-11-28T11:07:51Z",
+      "side": 1,
+      "message": "(Marking as Active for kokoro to wake up, feel free to ignore)",
+      "revId": "9586c48949346c6bf8aabec7caf2b2c070376852",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
