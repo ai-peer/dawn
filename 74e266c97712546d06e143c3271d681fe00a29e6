@@ -144,6 +144,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c114a2ac_21f44f5c",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-28T20:52:06Z",
+      "side": 1,
+      "message": "\u003e By \"removing the copy path\", I\u0027m talking about removing the texture copy path (in opengl::TextureView::CopyIfNeeded()) entirely and replacing it with an assert. \n\nYes. I am at the same page here. \"Removing the copy path\" also have the prerequisite that we fully implemented dawn:2131 (as we discussed in compat chat channel). By then a texture with \"cube\" bindingViewDimension will be created as GL_TEXTURE_CUBE target at first and no copy is needed. So RGB9E5Ufloat will pass automatically. (It won\u0027t hit the assert replacing copy path)",
+      "parentUuid": "83f4090f_42267ab6",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf03eecf_6a344f21",
         "filename": "src/dawn/tests/end2end/CopyTests.cpp",
         "patchSetId": 4
