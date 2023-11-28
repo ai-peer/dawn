@@ -106,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eba9fd61_cd6c9d71",
+        "filename": "src/dawn/common/Range.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-28T19:15:33Z",
+      "side": 1,
+      "message": "Ooo gotcha! Sorry I didn\u0027t know / never seen that notation before!",
+      "parentUuid": "3a355ba4_e41a06ef",
+      "range": {
+        "startLine": 39,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "c4be6f35431086be883ef849dadd7125dc24fe90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1baedb9_0b5393a9",
