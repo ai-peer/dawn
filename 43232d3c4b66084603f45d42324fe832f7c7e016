@@ -159,6 +159,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e89c6ed1_2df7e51d",
+        "filename": "src/dawn/native/WaitAnySystemEvent.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-28T01:36:01Z",
+      "side": 1,
+      "message": "\u003e and WaitQueueSerialsImpl will poll the rest after the wait anyway.\n\nThe thing where it compares the serials of all of the events? Good point, forgot about that. Even better.",
+      "parentUuid": "14a775ca_2d7815fb",
+      "revId": "43232d3c4b66084603f45d42324fe832f7c7e016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "de4e3df1_9ebee3b8",

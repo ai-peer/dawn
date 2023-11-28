@@ -16,6 +16,23 @@
       "message": "PTAL I updated some of the tests slightly because the D3D debug layers were grumpy that the Unsupported* tests were leaving objects alive at the end of the test",
       "revId": "6e7ef15f0cc266dcef297daa593bd7f4a31ed5c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9d8b0b_f59d4e13",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-28T01:36:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6e7ef15f0cc266dcef297daa593bd7f4a31ed5c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
