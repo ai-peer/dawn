@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a355ba4_e41a06ef",
+        "filename": "src/dawn/common/Range.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T17:33:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f50f4140_fba1134d",
+      "range": {
+        "startLine": 39,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "c4be6f35431086be883ef849dadd7125dc24fe90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f1baedb9_0b5393a9",
@@ -95,6 +119,30 @@
       "writtenOn": "2023-11-28T17:06:34Z",
       "side": 1,
       "message": "nit. end]\n\nSee previous comment also",
+      "range": {
+        "startLine": 43,
+        "startChar": 25,
+        "endLine": 43,
+        "endChar": 29
+      },
+      "revId": "c4be6f35431086be883ef849dadd7125dc24fe90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd218241_e6ce2430",
+        "filename": "src/dawn/common/Range.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T17:33:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1baedb9_0b5393a9",
       "range": {
         "startLine": 43,
         "startChar": 25,
