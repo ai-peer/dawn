@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "febf85f0_163b6f48",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-28T20:29:20Z",
+      "side": 1,
+      "message": "Looks like just wrong sampling value: https://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8763236376183958433/+/u/Run_the_Dawn_end2end_tests_with_ANGLE_SwiftShader/stdout\n\n```\n[ RUN      ] CopyTests_T2B_Compat.TextureCubeFull/OpenGLES_ANGLE__Google__Vulkan_1_3_0__SwiftShader_Device__Subzero___0x0000C0DE____SwiftShader_driver_5_0_0__TextureFormat_TextureFormat__R8Snorm_compat\n..\\..\\src\\dawn\\tests\\DawnTest.cpp(1721): error: Value of: result\n  Actual: false (Expected data[0] to be \u0001, actual $\n Expectation created at ..\\..\\src\\dawn\\tests\\end2end\\CopyTests.cpp:393\nTexture to Buffer copy failed copying region [(0, 0, 0), (32, 32, 6)) from 32 x 32 texture at mip level 0 layer 0 to 48928-byte buffer with offset 0 and bytes per row 256\n)\nExpected: true\n```\n\nUnfortunately I have no idea what is wrong. I can later file a bug if I can make a repro ANGLE test.",
+      "parentUuid": "96b2ff35_2542f747",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d996e29d_f4f92382",
         "filename": "src/dawn/tests/end2end/CopyTests.cpp",
         "patchSetId": 4
@@ -48,6 +66,24 @@
       "writtenOn": "2023-11-28T19:47:52Z",
       "side": 1,
       "message": "And what further work is required for this?",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a7842b0_d7209e68",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-28T20:29:20Z",
+      "side": 1,
+      "message": "When we fully removed texture copy path, we simply remove the suppression. Other format works now because they are supported by gl.BlitFrameBuffer. RGB9E5Ufloat is not.",
+      "parentUuid": "d996e29d_f4f92382",
       "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -65,6 +101,24 @@
       "writtenOn": "2023-11-28T19:47:52Z",
       "side": 1,
       "message": "Any reason not to enable on all backends? TextureBindingViewDimension should be safely ignored there, no?",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5bc249c_a0a6f0ec",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1681,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-28T20:29:20Z",
+      "side": 1,
+      "message": "Other backends don\u0027t care about TextureBindingViewDimension for texture copy. So these tests are identical to `CopyTests_T2B.Texture2DArray*` on other backend so they are already covered.",
+      "parentUuid": "bf03eecf_6a344f21",
       "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
