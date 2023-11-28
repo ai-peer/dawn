@@ -51,6 +51,24 @@
       "parentUuid": "38069ba0_4eeca0e7",
       "revId": "c8c87fc0b3029d2538e9c42c4fe8b505a118dbed",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "772600c5_8f65834b",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 506,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-28T01:20:44Z",
+      "side": 1,
+      "message": "Ah, makes sense now!",
+      "parentUuid": "5e42874b_1f7ee57e",
+      "revId": "c8c87fc0b3029d2538e9c42c4fe8b505a118dbed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
