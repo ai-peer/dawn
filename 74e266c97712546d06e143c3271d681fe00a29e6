@@ -126,6 +126,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "83f4090f_42267ab6",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-28T20:46:02Z",
+      "side": 1,
+      "message": "OK, I\u0027m confused. By \"removing the copy path\", I\u0027m talking about removing the texture copy path (in opengl::TextureView::CopyIfNeeded()) entirely and replacing it with an assert. At that point, if this test was relying on the copy path, it won\u0027t start passing, it will assert.\n\nUnless you meant something else by \"removing the copy path\"?",
+      "parentUuid": "3f90d70e_21f971af",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf03eecf_6a344f21",
         "filename": "src/dawn/tests/end2end/CopyTests.cpp",
         "patchSetId": 4
