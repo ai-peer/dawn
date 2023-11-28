@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "089c9d91_4225d81c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-28T02:19:38Z",
+      "side": 1,
+      "message": "and.. fixed the Kokoro build because I forgot to include the CMakeLists.txt change. needs review again",
+      "revId": "3ab1c248575f62e4a1c7a20e5a205414d2a5b642",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
