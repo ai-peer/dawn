@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "747ae6ba_57fb2b11",
+        "filename": "src/tint/lang/wgsl/ast/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 891,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-28T06:04:33Z",
+      "side": 1,
+      "message": "Done\n\nIt looks much much better. Thanks Ben!",
+      "parentUuid": "6870117c_74aa86f8",
+      "range": {
+        "startLine": 891,
+        "startChar": 4,
+        "endLine": 891,
+        "endChar": 27
+      },
+      "revId": "1d666eb6bbd56d665f000a9410822522685cd717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "798525cc_929b9d99",
@@ -125,6 +149,30 @@
       "writtenOn": "2023-11-27T09:58:46Z",
       "side": 1,
       "message": "Might be a lot easier to follow if these were called `a` and `b` or `x` and `y`, then `v10_bits` would be `a0_bits`, and so on.",
+      "range": {
+        "startLine": 895,
+        "startChar": 18,
+        "endLine": 895,
+        "endChar": 20
+      },
+      "revId": "1d666eb6bbd56d665f000a9410822522685cd717",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf4c2c3f_3c727665",
+        "filename": "src/tint/lang/wgsl/ast/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 895,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-28T06:04:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "798525cc_929b9d99",
       "range": {
         "startLine": 895,
         "startChar": 18,
