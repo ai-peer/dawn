@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ced4be4_b2ca15fa",
+        "filename": "src/dawn/tests/end2end/FramebufferFetchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T13:42:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ffc2c62f_13e4f089",
+      "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3730d424_5a015ec9",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fe1c9be3_2ade508c",
+        "filename": "src/dawn/tests/end2end/FramebufferFetchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T13:42:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3730d424_5a015ec9",
+      "range": {
+        "startLine": 278,
+        "startChar": 30,
+        "endLine": 278,
+        "endChar": 73
+      },
+      "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8ec522e4_58871286",
@@ -71,6 +113,30 @@
       "writtenOn": "2023-11-27T17:09:31Z",
       "side": 1,
       "message": "1789?",
+      "range": {
+        "startLine": 302,
+        "startChar": 37,
+        "endLine": 302,
+        "endChar": 38
+      },
+      "revId": "93f1d11d525fab78ea9a594f3848b8a97b9eae78",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "105f4454_e082b337",
+        "filename": "src/dawn/tests/end2end/FramebufferFetchTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T13:42:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8ec522e4_58871286",
       "range": {
         "startLine": 302,
         "startChar": 37,
