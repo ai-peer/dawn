@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "12f5bb95_b3740431",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-28T15:54:37Z",
+      "side": 1,
+      "message": "This of course means that something like:\n\n```\nEnumerate(spanA).begin() \u003d\u003d Enumerate(spanB).begin()\n```\n\nI\u0027m not sure if this would cause issues with any of the STL\u0027s algorithms.",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
