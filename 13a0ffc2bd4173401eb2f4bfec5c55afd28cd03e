@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "06167937_560008e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T19:48:50Z",
+      "side": 1,
+      "message": "There are a lot of use-cases, 6 for ColorAttachmentIndex alone so I\u0027d imagine ~100 overall in Dawn.",
+      "parentUuid": "ed28e5b7_d611d518",
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12f5bb95_b3740431",
         "filename": "src/dawn/common/Enumerator.h",
         "patchSetId": 3
