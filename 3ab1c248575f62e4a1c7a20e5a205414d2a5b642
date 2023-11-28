@@ -16,6 +16,29 @@
       "message": "and.. fixed the Kokoro build because I forgot to include the CMakeLists.txt change. needs review again",
       "revId": "3ab1c248575f62e4a1c7a20e5a205414d2a5b642",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11597c9b_43f6656f",
+        "filename": "src/dawn/common/SerialMap.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-28T05:44:18Z",
+      "side": 1,
+      "message": "MSVC unhappy because this is C++20.",
+      "range": {
+        "startLine": 97,
+        "startChar": 24,
+        "endLine": 97,
+        "endChar": 32
+      },
+      "revId": "3ab1c248575f62e4a1c7a20e5a205414d2a5b642",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
