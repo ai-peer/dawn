@@ -16,6 +16,23 @@
       "message": "Austin can I haz +2?",
       "revId": "c51c2c5d4cbb80c90d5b9228ff3140238c36a2f8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c110718_342c33d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T17:00:11Z",
+      "side": 1,
+      "message": "PTAL!",
+      "revId": "c51c2c5d4cbb80c90d5b9228ff3140238c36a2f8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
