@@ -143,7 +143,7 @@ if (NOT TARGET partition_alloc)
       # Generate the build flag header.
       execute_process(
         COMMAND
-          "${Dawn_SOURCE_DIR}/build/write_buildflag_header.py"
+          "${Dawn_SOURCE_DIR}/write_buildflag_header.py"
         ARGS
           "--definition" "${DAWN_BUILD_GEN_DIR}/include/partition_alloc/${ARGUMENT_OUTPUT}.definitions"
           "--rulename" "${ARGUMENT_OUTPUT}"
