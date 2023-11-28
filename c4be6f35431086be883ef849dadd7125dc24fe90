@@ -60,6 +60,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f50f4140_fba1134d",
+        "filename": "src/dawn/common/Range.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T17:28:56Z",
+      "side": 1,
+      "message": "Yes, end[ is french math notation for end) ^^ Ditto below. I\u0027ll fix",
+      "parentUuid": "09c9016b_07b2de0e",
+      "range": {
+        "startLine": 39,
+        "startChar": 20,
+        "endLine": 39,
+        "endChar": 25
+      },
+      "revId": "c4be6f35431086be883ef849dadd7125dc24fe90",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f1baedb9_0b5393a9",
         "filename": "src/dawn/common/Range.h",
         "patchSetId": 2
