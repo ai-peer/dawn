@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f90d70e_21f971af",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-28T20:37:05Z",
+      "side": 1,
+      "message": "1. list the format and skip now\n2. not listing the format, and add it when we remove copy path\n\nI think we should choose 1?",
+      "parentUuid": "4d00b220_5dfcde61",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf03eecf_6a344f21",
         "filename": "src/dawn/tests/end2end/CopyTests.cpp",
         "patchSetId": 4
@@ -154,6 +172,24 @@
       "writtenOn": "2023-11-28T20:34:42Z",
       "side": 1,
       "message": "(1)",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18c57941_f89f3435",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-11-28T20:37:05Z",
+      "side": 1,
+      "message": "I think we should add the format and skip now, instead of not listing the format, and add it when we remove copy path?",
+      "parentUuid": "0c8bf83f_cca7c568",
       "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
