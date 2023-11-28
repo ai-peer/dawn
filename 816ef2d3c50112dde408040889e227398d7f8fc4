@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c32d68e6_50903d51",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-28T22:23:11Z",
+      "side": 1,
+      "message": "So I didn\u0027t see any tests that would test this in dawn. I did see src/dawn/tests/unittests/validation/ShaderModuleValidationTests.cpp tests it but that doesn\u0027t run in compat mode. Locally I made it run in compat mode, saw it fail, fixed it to look up the limit and saw it pass.\n\nThe CTS will tests this so is it fine as is or do you want me to refactor that test to run in compat and non-compat?",
+      "revId": "816ef2d3c50112dde408040889e227398d7f8fc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
