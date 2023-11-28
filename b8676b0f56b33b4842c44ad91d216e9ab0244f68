@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "701d00bc_032002a2",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-28T17:33:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f1d44ea2_4f524841",
+      "revId": "b8676b0f56b33b4842c44ad91d216e9ab0244f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cfb9376_7a4048cf",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "05e39765_e1ea2e83",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-28T17:33:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4cfb9376_7a4048cf",
+      "revId": "b8676b0f56b33b4842c44ad91d216e9ab0244f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "67b321cb_067fc0fc",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-11-28T15:21:39Z",
       "side": 1,
       "message": "```suggestion\n            // If the operand is in the pending resolution, then we know it\u0027s single use and we will inline it here. But, in order to do that inlining we have to take the Kind of the operand into account and update the Kind of the instruction with that operands kind.\n            // It is safe to inline here because we would have already force multiple `call` instructions to lets and any alternating `load`, `store` would also have gone to lets previously.\n            for (auto* operand : inst-\u003eOperands()) {\n```\n\nOr something, this block is a bit hard to understand why it\u0027s safe, so words to describe would be useful.",
+      "revId": "b8676b0f56b33b4842c44ad91d216e9ab0244f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed042c07_4f870ecb",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-11-28T17:33:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "67b321cb_067fc0fc",
       "revId": "b8676b0f56b33b4842c44ad91d216e9ab0244f68",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
