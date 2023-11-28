@@ -118,21 +118,6 @@ wgpu::WGSLFeatureName ToWGPUFeature(tint::wgsl::LanguageFeature f) {
     }
 }
 
-tint::wgsl::LanguageFeature ToWGSLFeature(wgpu::WGSLFeatureName f) {
-    switch (f) {
-#define CASE(WgslName, WgpuName)          \
-    case wgpu::WGSLFeatureName::WgpuName: \
-        return tint::wgsl::LanguageFeature::WgslName;
-        DAWN_FOREACH_WGSL_FEATURE(CASE)
-#undef CASE
-        case wgpu::WGSLFeatureName::Packed4x8IntegerDotProduct:
-        case wgpu::WGSLFeatureName::UnrestrictedPointerParameters:
-        case wgpu::WGSLFeatureName::PointerCompositeAccess:
-            return tint::wgsl::LanguageFeature::kUndefined;
-    }
-}
-DAWN_UNUSED_FUNC(ToWGSLFeature);
-
 }  // anonymous namespace
 
 wgpu::Bool APIGetInstanceFeatures(InstanceFeatures* features) {
