@@ -22,6 +22,30 @@
       },
       "revId": "8a78d15ce8d108d304d27602c72e295c5cb92076",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "833da6bc_ebd3d021",
+        "filename": "scripts/dawn_features.gni",
+        "patchSetId": 4
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-28T17:30:20Z",
+      "side": 1,
+      "message": "Good idea. In fact, I\u0027ve moved the data_deps to the dawn_test template, so all tests will build it.",
+      "parentUuid": "882cc277_3ce3e7b4",
+      "range": {
+        "startLine": 50,
+        "startChar": 0,
+        "endLine": 50,
+        "endChar": 23
+      },
+      "revId": "8a78d15ce8d108d304d27602c72e295c5cb92076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
