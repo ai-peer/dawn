@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d00b220_5dfcde61",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-28T20:34:42Z",
+      "side": 1,
+      "message": "If we don\u0027t expect the test to ever pass, shouldn\u0027t we just avoid instantiating it with RGB9E5Ufloat at all? (1)",
+      "parentUuid": "7a7842b0_d7209e68",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bf03eecf_6a344f21",
         "filename": "src/dawn/tests/end2end/CopyTests.cpp",
         "patchSetId": 4
@@ -119,6 +137,23 @@
       "side": 1,
       "message": "Other backends don\u0027t care about TextureBindingViewDimension for texture copy. So these tests are identical to `CopyTests_T2B.Texture2DArray*` on other backend so they are already covered.",
       "parentUuid": "bf03eecf_6a344f21",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c8bf83f_cca7c568",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-28T20:34:42Z",
+      "side": 1,
+      "message": "(1)",
       "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
