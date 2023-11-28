@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "13b1541e_ec8dc5cf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-11-28T16:02:52Z",
+      "side": 1,
+      "message": "Sorry about the Kokoro confusion. I thought it was previously passing the CQ.\n\nI fixed 2 things\nThe error was not being able to directly \"call\" python files on Windows. I had to call execute \"python\" instead.\n\nFixed in:\nhttps://dawn-review.googlesource.com/c/dawn/+/157860/21..22",
+      "revId": "b007e77a96a971602ffcc13199ccb7882a95b0c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
