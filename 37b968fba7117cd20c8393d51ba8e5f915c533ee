@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7076eb_61f1a7d9",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T12:34:00Z",
+      "side": 1,
+      "message": "Can\u0027t most of this logic be moved to the frontend using `IsCPUWritableAtCreation` (renamed to) `IsCPUWritable`? It seems that all backends could take advantage of this.",
+      "revId": "37b968fba7117cd20c8393d51ba8e5f915c533ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36224449_88e357cf",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T12:34:00Z",
+      "side": 1,
+      "message": "nit: this member should probably be private to BufferBase with a Getter.",
+      "range": {
+        "startLine": 556,
+        "startChar": 25,
+        "endLine": 556,
+        "endChar": 41
+      },
+      "revId": "37b968fba7117cd20c8393d51ba8e5f915c533ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
