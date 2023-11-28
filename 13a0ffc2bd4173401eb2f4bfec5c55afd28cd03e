@@ -63,6 +63,30 @@
       },
       "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ebbc2b0_29c7094f",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-28T19:09:49Z",
+      "side": 1,
+      "message": "Note that returning `nullptr` in `mValue` also means that you\u0027d get a similar problem, even if you include mValue in the comparison:\n\n```\nEnumerate(spanA).end() \u003d\u003d Enumerate(spanB).end()\n```\n\nHowever, having said all that, in C++, comparing iterators from different containers is considered UB, so I\u0027m not sure how important it is to fix this.\n\nSee https://cplusplus.github.io/LWG/issue446 where it says:\n\nThe result of directly or indirectly evaluating any comparison function or the binary - operator with two iterator values as arguments that were obtained from two different ranges r1 and r2 (including their past-the-end values) which are not subranges of one common range is undefined, unless explicitly described otherwise.\n\nI think it\u0027s fine to leave this as is.",
+      "parentUuid": "33c1c36f_602c2ce0",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
