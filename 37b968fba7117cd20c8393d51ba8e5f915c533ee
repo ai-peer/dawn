@@ -3,6 +3,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c393bd14_c8da1238",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-28T23:18:33Z",
+      "side": 1,
+      "message": "I\u0027m not tremendously familiar about when we can/cannot expect coherent memory. If I understand correctly though, we can perform this optimization as well if the cache is non-coherent - we just need to call vkFlushMappedMemoryRanges. Does doing that not end up being any faster than the current approach?",
+      "range": {
+        "startLine": 274,
+        "startChar": 55,
+        "endLine": 274,
+        "endChar": 91
+      },
+      "revId": "37b968fba7117cd20c8393d51ba8e5f915c533ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "2e7076eb_61f1a7d9",
         "filename": "src/dawn/native/vulkan/BufferVk.cpp",
         "patchSetId": 1
