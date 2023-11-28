@@ -331,23 +331,23 @@ TEST(ChainUtilsTests, ValidateAndUnpackEmpty) {
         // TextureViewDescriptor (as of when this test was written) does not have any valid chains
         // in the JSON nor via additional extensions.
         TextureViewDescriptor desc;
-        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
-        static_assert(std::tuple_size_v<decltype(unpacked)> == 0);
+        auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
+        static_assert(std::tuple_size_v<decltype(unpacked)::TupleType> == 0);
         std::apply(
             [](const auto*... args) {
                 (([&](const auto* arg) { EXPECT_EQ(args, nullptr); }(args)), ...);
             },
-            unpacked);
+            unpacked.Tuple());
     }
     {
         // InstanceDescriptor has at least 1 valid chain extension.
         InstanceDescriptor desc;
-        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
         std::apply(
             [](const auto*... args) {
                 (([&](const auto* arg) { EXPECT_EQ(args, nullptr); }(args)), ...);
             },
-            unpacked);
+            unpacked.Tuple());
     }
 }
 
@@ -359,7 +359,7 @@ TEST(ChainUtilsTests, ValidateAndUnpackUnexpected) {
         TextureViewDescriptor desc;
         ChainedStruct chain;
         desc.nextInChain = &chain;
-        EXPECT_THAT(ValidateAndUnpackChain(&desc).AcquireError()->GetFormattedMessage(),
+        EXPECT_THAT(ValidateAndUnpack(&desc).AcquireError()->GetFormattedMessage(),
                     HasSubstr("Unexpected"));
     }
     {
@@ -367,7 +367,7 @@ TEST(ChainUtilsTests, ValidateAndUnpackUnexpected) {
         InstanceDescriptor desc;
         ChainedStruct chain;
         desc.nextInChain = &chain;
-        EXPECT_THAT(ValidateAndUnpackChain(&desc).AcquireError()->GetFormattedMessage(),
+        EXPECT_THAT(ValidateAndUnpack(&desc).AcquireError()->GetFormattedMessage(),
                     HasSubstr("Unexpected"));
     }
 }
@@ -378,8 +378,26 @@ TEST(ChainUtilsTests, ValidateAndUnpack) {
     InstanceDescriptor desc;
     DawnTogglesDescriptor chain;
     desc.nextInChain = &chain;
-    auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
-    EXPECT_EQ(std::get<const DawnTogglesDescriptor*>(unpacked), &chain);
+    auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
+    auto ext = unpacked.Get<DawnTogglesDescriptor>();
+    EXPECT_EQ(ext, &chain);
+
+    // For ChainedStructs, the resulting pointer from Get should be a const type.
+    static_assert(std::is_const_v<std::remove_reference_t<decltype(*ext)>>);
+}
+
+// Nominal unpacking valid descriptors should return the expected descriptors in the unpacked type.
+TEST(ChainUtilsTests, ValidateAndUnpackOut) {
+    // DawnAdapterPropertiesPowerPreference is a valid extension for AdapterProperties.
+    AdapterProperties properties;
+    DawnAdapterPropertiesPowerPreference chain;
+    properties.nextInChain = &chain;
+    auto unpacked = ValidateAndUnpackOut(&properties).AcquireSuccess();
+    auto ext = unpacked.Get<DawnAdapterPropertiesPowerPreference>();
+    EXPECT_EQ(ext, &chain);
+
+    // For ChainedStructOuts, the resulting pointer from Get should not be a const type.
+    static_assert(!std::is_const_v<std::remove_reference_t<decltype(*ext)>>);
 }
 
 // Duplicate valid extensions cause an error.
@@ -390,7 +408,19 @@ TEST(ChainUtilsTests, ValidateAndUnpackDuplicate) {
     DawnTogglesDescriptor chain2;
     desc.nextInChain = &chain1;
     chain1.nextInChain = &chain2;
-    EXPECT_THAT(ValidateAndUnpackChain(&desc).AcquireError()->GetFormattedMessage(),
+    EXPECT_THAT(ValidateAndUnpack(&desc).AcquireError()->GetFormattedMessage(),
+                HasSubstr("Duplicate"));
+}
+
+// Duplicate valid extensions cause an error.
+TEST(ChainUtilsTests, ValidateAndUnpackOutDuplicate) {
+    // DawnAdapterPropertiesPowerPreference is a valid extension for AdapterProperties.
+    AdapterProperties properties;
+    DawnAdapterPropertiesPowerPreference chain1;
+    DawnAdapterPropertiesPowerPreference chain2;
+    properties.nextInChain = &chain1;
+    chain1.nextInChain = &chain2;
+    EXPECT_THAT(ValidateAndUnpackOut(&properties).AcquireError()->GetFormattedMessage(),
                 HasSubstr("Duplicate"));
 }
 
@@ -401,8 +431,8 @@ TEST(ChainUtilsTests, ValidateAndUnpackAdditionalExtensions) {
     InstanceDescriptor desc;
     DawnInstanceDescriptor chain;
     desc.nextInChain = &chain;
-    auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
-    EXPECT_EQ(std::get<const DawnInstanceDescriptor*>(unpacked), &chain);
+    auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
+    EXPECT_EQ(unpacked.Get<DawnInstanceDescriptor>(), &chain);
 }
 
 // Duplicate additional extensions added via template specialization should cause an error.
@@ -413,7 +443,7 @@ TEST(ChainUtilsTests, ValidateAndUnpackDuplicateAdditionalExtensions) {
     DawnInstanceDescriptor chain2;
     desc.nextInChain = &chain1;
     chain1.nextInChain = &chain2;
-    EXPECT_THAT(ValidateAndUnpackChain(&desc).AcquireError()->GetFormattedMessage(),
+    EXPECT_THAT(ValidateAndUnpack(&desc).AcquireError()->GetFormattedMessage(),
                 HasSubstr("Duplicate"));
 }
 
@@ -430,14 +460,14 @@ TEST(ChainUtilsTests, ValidateBranchesOneValidBranch) {
     {
         ShaderModuleWGSLDescriptor chain;
         desc.nextInChain = &chain;
-        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
         EXPECT_EQ((ValidateBranches<NoExtensionBranches>(unpacked).AcquireSuccess()),
                   wgpu::SType::ShaderModuleWGSLDescriptor);
     }
     {
         ShaderModuleSPIRVDescriptor chain;
         desc.nextInChain = &chain;
-        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
         EXPECT_EQ((ValidateBranches<NoExtensionBranches>(unpacked).AcquireSuccess()),
                   wgpu::SType::ShaderModuleSPIRVDescriptor);
 
@@ -453,7 +483,7 @@ TEST(ChainUtilsTests, ValidateBranchesInvalidBranch) {
     ShaderModuleDescriptor desc;
     DawnShaderModuleSPIRVOptionsDescriptor chain;
     desc.nextInChain = &chain;
-    auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+    auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
     EXPECT_NE((ValidateBranches<NoExtensionBranches>(unpacked).AcquireError()), nullptr);
     EXPECT_NE((ValidateBranches<ExtensionBranches>(unpacked).AcquireError()), nullptr);
 }
@@ -466,7 +496,7 @@ TEST(ChainUtilsTests, ValidateBranchesInvalidExtension) {
         DawnShaderModuleSPIRVOptionsDescriptor chain2;
         desc.nextInChain = &chain1;
         chain1.nextInChain = &chain2;
-        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
         EXPECT_NE((ValidateBranches<NoExtensionBranches>(unpacked).AcquireError()), nullptr);
         EXPECT_NE((ValidateBranches<ExtensionBranches>(unpacked).AcquireError()), nullptr);
     }
@@ -475,7 +505,7 @@ TEST(ChainUtilsTests, ValidateBranchesInvalidExtension) {
         DawnShaderModuleSPIRVOptionsDescriptor chain2;
         desc.nextInChain = &chain1;
         chain1.nextInChain = &chain2;
-        auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+        auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
         EXPECT_NE((ValidateBranches<NoExtensionBranches>(unpacked).AcquireError()), nullptr);
     }
 }
@@ -487,9 +517,85 @@ TEST(ChainUtilsTests, ValidateBranchesAllowedExtensions) {
     DawnShaderModuleSPIRVOptionsDescriptor chain2;
     desc.nextInChain = &chain1;
     chain1.nextInChain = &chain2;
-    auto unpacked = ValidateAndUnpackChain(&desc).AcquireSuccess();
+    auto unpacked = ValidateAndUnpack(&desc).AcquireSuccess();
     EXPECT_EQ((ValidateBranches<ExtensionBranches>(unpacked).AcquireSuccess()),
               wgpu::SType::ShaderModuleSPIRVDescriptor);
+}
+
+// Unrealistic branching for ChainedStructOut testing. Note that this setup does not make sense.
+using NoExtensionBranchesOut = BranchList<Branch<SharedFenceVkSemaphoreOpaqueFDExportInfo>,
+                                          Branch<SharedFenceVkSemaphoreSyncFDExportInfo>>;
+using ExtensionBranchesOut = BranchList<
+    Branch<SharedFenceVkSemaphoreOpaqueFDExportInfo>,
+    Branch<SharedFenceVkSemaphoreSyncFDExportInfo, SharedFenceVkSemaphoreZirconHandleExportInfo>>;
+
+// Validates exacly 1 branch and ensures that there are no other extensions.
+TEST(ChainUtilsTests, ValidateBranchesOneValidBranchOut) {
+    SharedFenceExportInfo info;
+    // Either allowed branches should validate successfully and return the expected enum.
+    {
+        SharedFenceVkSemaphoreOpaqueFDExportInfo chain;
+        info.nextInChain = &chain;
+        auto unpacked = ValidateAndUnpackOut(&info).AcquireSuccess();
+        EXPECT_EQ((ValidateBranches<NoExtensionBranchesOut>(unpacked).AcquireSuccess()),
+                  wgpu::SType::SharedFenceVkSemaphoreOpaqueFDExportInfo);
+    }
+    {
+        SharedFenceVkSemaphoreSyncFDExportInfo chain;
+        info.nextInChain = &chain;
+        auto unpacked = ValidateAndUnpackOut(&info).AcquireSuccess();
+        EXPECT_EQ((ValidateBranches<NoExtensionBranchesOut>(unpacked).AcquireSuccess()),
+                  wgpu::SType::SharedFenceVkSemaphoreSyncFDExportInfo);
+
+        // Extensions are optional so validation should still pass when the extension is not
+        // provided.
+        EXPECT_EQ((ValidateBranches<ExtensionBranchesOut>(unpacked).AcquireSuccess()),
+                  wgpu::SType::SharedFenceVkSemaphoreSyncFDExportInfo);
+    }
+}
+
+// An allowed chain that is not one of the branches causes an error.
+TEST(ChainUtilsTests, ValidateBranchesInvalidBranchOut) {
+    SharedFenceExportInfo info;
+    SharedFenceDXGISharedHandleExportInfo chain;
+    info.nextInChain = &chain;
+    auto unpacked = ValidateAndUnpackOut(&info).AcquireSuccess();
+    EXPECT_NE((ValidateBranches<NoExtensionBranchesOut>(unpacked).AcquireError()), nullptr);
+    EXPECT_NE((ValidateBranches<ExtensionBranchesOut>(unpacked).AcquireError()), nullptr);
+}
+
+// Additional chains should cause an error when branches don't allow extensions.
+TEST(ChainUtilsTests, ValidateBranchesInvalidExtensionOut) {
+    SharedFenceExportInfo info;
+    {
+        SharedFenceVkSemaphoreOpaqueFDExportInfo chain1;
+        SharedFenceVkSemaphoreZirconHandleExportInfo chain2;
+        info.nextInChain = &chain1;
+        chain1.nextInChain = &chain2;
+        auto unpacked = ValidateAndUnpackOut(&info).AcquireSuccess();
+        EXPECT_NE((ValidateBranches<NoExtensionBranchesOut>(unpacked).AcquireError()), nullptr);
+        EXPECT_NE((ValidateBranches<ExtensionBranchesOut>(unpacked).AcquireError()), nullptr);
+    }
+    {
+        SharedFenceVkSemaphoreSyncFDExportInfo chain1;
+        SharedFenceVkSemaphoreZirconHandleExportInfo chain2;
+        info.nextInChain = &chain1;
+        chain1.nextInChain = &chain2;
+        auto unpacked = ValidateAndUnpackOut(&info).AcquireSuccess();
+        EXPECT_NE((ValidateBranches<NoExtensionBranchesOut>(unpacked).AcquireError()), nullptr);
+    }
+}
+
+// Branches that allow extensions pass successfully.
+TEST(ChainUtilsTests, ValidateBranchesAllowedExtensionsOut) {
+    SharedFenceExportInfo info;
+    SharedFenceVkSemaphoreSyncFDExportInfo chain1;
+    SharedFenceVkSemaphoreZirconHandleExportInfo chain2;
+    info.nextInChain = &chain1;
+    chain1.nextInChain = &chain2;
+    auto unpacked = ValidateAndUnpackOut(&info).AcquireSuccess();
+    EXPECT_EQ((ValidateBranches<ExtensionBranchesOut>(unpacked).AcquireSuccess()),
+              wgpu::SType::SharedFenceVkSemaphoreSyncFDExportInfo);
 }
 
 }  // anonymous namespace
