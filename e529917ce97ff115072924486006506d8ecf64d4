@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "af0fb30e_9dbb5ab9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-28T11:55:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "962c6d85_b45ebeef",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "9d8b27a0_fc823ba1",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e509a0ab_7ea39122",
+        "filename": "src/dawn/common/vk_google_filtering_precision.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-28T11:55:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7f19c50d_7816923f",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fd36f940_2a9efc86",
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f4ed8ad5_922c31be",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-28T11:55:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd36f940_2a9efc86",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "395426f4_7ff0d56b",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-11-28T10:56:39Z",
       "side": 1,
       "message": "Don\u0027t we technically need to enable this extension when creating the VkDevice in DeviceVk.cpp?",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a10344bb_bcfa6c2d",
+        "filename": "src/dawn/native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-28T11:55:42Z",
+      "side": 1,
+      "message": "AFAIK the process is automatic.\n\nPhysicalDevice checks if the extension is available [1].\nThen DeviceVk enables all available extensions upon creation [2].\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/VulkanInfo.cpp;drc\u003d8e78783dc1f7007bad46d657c9f332614e240fd8;l\u003d224\n[2]\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/vulkan/DeviceVk.cpp;drc\u003d2cd06ce1b33cc86e13e6df8dbcacc42bb8fe67ba;l\u003d258",
+      "parentUuid": "395426f4_7ff0d56b",
       "revId": "e529917ce97ff115072924486006506d8ecf64d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
