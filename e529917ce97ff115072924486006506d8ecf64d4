@@ -156,6 +156,24 @@
       "parentUuid": "395426f4_7ff0d56b",
       "revId": "e529917ce97ff115072924486006506d8ecf64d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2f410f38_339a6a64",
+        "filename": "src/dawn/native/vulkan/VulkanExtensions.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T12:02:45Z",
+      "side": 1,
+      "message": "Thanks for the clarification! Sounds good.",
+      "parentUuid": "a10344bb_bcfa6c2d",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
