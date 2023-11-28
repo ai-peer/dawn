@@ -68,6 +68,24 @@
       "message": "this branch pushes a ComPtr\u003cID3D11UnorderedAccessView\u003e and a ID3D11UnorderedAccessView*\n\nthe following branch pushes a ID3D11UnorderedAccessView*\n\nwhy not have them both push a ComPtr\u003c\u003e ? you already have it in the following branch from GetOrCreate. No need to use the raw pointers. Then we only need one output vector, not two",
       "revId": "5afc0f56c1082493214dc04a766c9f8f3fd025d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6894ada8_053379bc",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-11-28T02:09:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8624c175_95b76d70",
+      "revId": "5afc0f56c1082493214dc04a766c9f8f3fd025d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
