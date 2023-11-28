@@ -775,6 +775,25 @@ class Printer : public tint::TextGenerator {
     }
 
     void EmitCoreBuiltinCall(StringStream& out, const core::ir::CoreBuiltinCall* c) {
+        // Handle barriers first as they add params
+        switch (c->Func()) {
+            // TODO(crbug.com/tint/661): Combine sequential barriers to a single instruction.
+            case core::BuiltinFn::kStorageBarrier: {
+                out << "threadgroup_barrier(mem_flags::mem_device)";
+                return;
+            }
+            case core::BuiltinFn::kWorkgroupBarrier: {
+                out << "threadgroup_barrier(mem_flags::mem_threadgroup)";
+                return;
+            }
+            case core::BuiltinFn::kTextureBarrier: {
+                out << "threadgroup_barrier(mem_flags::mem_texture)";
+                return;
+            }
+            default:
+                break;
+        }
+
         EmitCoreBuiltinName(out, c->Func());
         out << "(";
 

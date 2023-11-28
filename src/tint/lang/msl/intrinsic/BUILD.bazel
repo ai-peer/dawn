@@ -37,52 +37,31 @@
 load("//src/tint:flags.bzl", "COPTS")
 load("@bazel_skylib//lib:selects.bzl", "selects")
 cc_library(
-  name = "msl",
+  name = "intrinsic",
   srcs = [
-    "barrier_type.cc",
-    "builtin_fn.cc",
+    "data.cc",
   ],
   hdrs = [
-    "barrier_type.h",
-    "builtin_fn.h",
+    "dialect.h",
   ],
   deps = [
-    "//src/tint/utils/traits",
-  ],
-  copts = COPTS,
-  visibility = ["//visibility:public"],
-)
-cc_library(
-  name = "test",
-  alwayslink = True,
-  srcs = [
-    "barrier_type_test.cc",
-  ],
-  deps = [
+    "//src/tint/lang/core",
+    "//src/tint/lang/core/constant",
+    "//src/tint/lang/core/intrinsic",
+    "//src/tint/lang/core/type",
     "//src/tint/lang/msl",
     "//src/tint/utils/containers",
+    "//src/tint/utils/diagnostic",
     "//src/tint/utils/ice",
+    "//src/tint/utils/id",
     "//src/tint/utils/macros",
     "//src/tint/utils/math",
     "//src/tint/utils/memory",
+    "//src/tint/utils/result",
     "//src/tint/utils/rtti",
+    "//src/tint/utils/symbol",
     "//src/tint/utils/text",
     "//src/tint/utils/traits",
-    "@gtest",
-  ],
-  copts = COPTS,
-  visibility = ["//visibility:public"],
-)
-cc_library(
-  name = "bench",
-  alwayslink = True,
-  srcs = [
-    "barrier_type_bench.cc",
-  ],
-  deps = [
-    "//src/tint/lang/msl",
-    "//src/tint/utils/traits",
-    "@benchmark",
   ],
   copts = COPTS,
   visibility = ["//visibility:public"],
