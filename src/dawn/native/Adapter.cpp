@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
@@ -132,6 +133,7 @@ void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
     AdapterPropertiesMemoryHeaps* memoryHeaps = nullptr;
     FindInChain(properties->nextInChain, &memoryHeaps);
 
+    DAWN_DEBUG() << "memoryHeaps: " << memoryHeaps;
     if (memoryHeaps != nullptr &&
         !mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterPropertiesMemoryHeaps)) {
         mPhysicalDevice->GetInstance()->ConsumedError(

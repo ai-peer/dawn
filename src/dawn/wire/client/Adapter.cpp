@@ -72,6 +72,7 @@ void Adapter::SetProperties(const WGPUAdapterProperties* properties) {
 
     // Loop through the chained struct.
     WGPUChainedStructOut* chain = properties->nextInChain;
+    DAWN_DEBUG() << "properties->nextInChain: " << properties->nextInChain;
     while (chain != nullptr) {
         switch (chain->sType) {
             case WGPUSType_AdapterPropertiesMemoryHeaps: {
@@ -88,10 +89,12 @@ void Adapter::SetProperties(const WGPUAdapterProperties* properties) {
                 break;
         }
         chain = chain->next;
+        DAWN_DEBUG() << "chain: " << chain;
     }
 }
 
 void Adapter::GetProperties(WGPUAdapterProperties* properties) const {
+    DAWN_DEBUG() << "properties->nextInChain: " << properties->nextInChain;
     // Loop through the chained struct.
     WGPUChainedStructOut* chain = properties->nextInChain;
     while (chain != nullptr) {
@@ -101,6 +104,8 @@ void Adapter::GetProperties(WGPUAdapterProperties* properties) const {
                 auto* memoryHeapProperties =
                     reinterpret_cast<WGPUAdapterPropertiesMemoryHeaps*>(chain);
                 size_t heapCount = mMemoryHeapInfo.size();
+                DAWN_DEBUG() << "heapCount: " << heapCount;
+
                 auto* heapInfo = new WGPUMemoryHeapInfo[heapCount];
                 memcpy(heapInfo, mMemoryHeapInfo.data(), sizeof(WGPUMemoryHeapInfo) * heapCount);
                 // Write out the pointer and count to the heap properties out-struct.

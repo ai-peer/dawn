@@ -28,6 +28,7 @@
 #include <algorithm>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/wire/SupportedFeatures.h"
 #include "dawn/wire/server/Server.h"
 
@@ -94,6 +95,7 @@ void Server::OnRequestAdapterCallback(RequestAdapterUserdata* data,
     if (mProcs.adapterHasFeature(adapter, WGPUFeatureName_AdapterPropertiesMemoryHeaps)) {
         properties.nextInChain = &memoryHeapProperties.chain;
     }
+    DAWN_DEBUG() << "properties.nextInChain: " << properties.nextInChain;
 
     mProcs.adapterGetProperties(adapter, &properties);
     cmd.properties = &properties;

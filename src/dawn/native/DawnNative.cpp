@@ -89,6 +89,7 @@ void Adapter::GetProperties(wgpu::AdapterProperties* properties) const {
 }
 
 void Adapter::GetProperties(WGPUAdapterProperties* properties) const {
+    DAWN_DEBUG() << "properties->nextInChain: " << properties->nextInChain;
     mImpl->APIGetProperties(FromAPI(properties));
 }
 

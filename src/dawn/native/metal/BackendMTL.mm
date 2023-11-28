@@ -548,6 +548,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
         if (@available(macOS 10.12, iOS 16.0, *)) {
             EnableFeature(Feature::AdapterPropertiesMemoryHeaps);
+            DAWN_DEBUG() << "EnableFeature(Feature::AdapterPropertiesMemoryHeaps)";
         }
 
         // Uses newTextureWithDescriptor::iosurface::plane which is available
@@ -890,6 +891,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     void PopulateMemoryHeapInfo(AdapterPropertiesMemoryHeaps* memoryHeapProperties) const override {
         if ([*mDevice hasUnifiedMemory]) {
+            DAWN_DEBUG() << __func__ << " hasUnifiedMemory\n";
             auto* heapInfo = new MemoryHeapInfo[1];
             memoryHeapProperties->heapCount = 1;
             memoryHeapProperties->heapInfo = heapInfo;
@@ -899,6 +901,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
                 wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
             heapInfo[0].size = [*mDevice recommendedMaxWorkingSetSize];
         } else {
+            DAWN_DEBUG() << __func__ << " !hasUnifiedMemory\n";
             auto* heapInfo = new MemoryHeapInfo[2];
             memoryHeapProperties->heapCount = 2;
             memoryHeapProperties->heapInfo = heapInfo;
