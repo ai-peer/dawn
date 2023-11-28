@@ -16,6 +16,24 @@
       "message": "Instead of adding this, could we just switch to c++20 compilation?",
       "revId": "3f766cac433ab5c05f61d76aee271ae20037799f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "88fc3f26_36448a2e",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-28T15:06:08Z",
+      "side": 1,
+      "message": "Sounds like a much bigger change with the potential for reverts.",
+      "parentUuid": "16fc4dac_9abe8f0d",
+      "revId": "3f766cac433ab5c05f61d76aee271ae20037799f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
