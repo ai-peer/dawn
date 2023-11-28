@@ -33,6 +33,24 @@
       "message": "One of the reasons I made this use a template is that it works with Tint\u0027s StringStream and ostream. The latter is important for gtest, and without these tracing failing parameterized cases is a nightmare.\n\nMaybe we can schedule some time to discuss the issues you\u0027re you\u0027re trying to solve here.",
       "revId": "fa1210aa4b8ec53b01a35ab65a6b91932a49b0e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4dac6cab_952967e3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T14:29:25Z",
+      "side": 1,
+      "message": "Done by adding slightly more template magic to ICE",
+      "parentUuid": "1050524f_93ded6a3",
+      "revId": "fa1210aa4b8ec53b01a35ab65a6b91932a49b0e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
