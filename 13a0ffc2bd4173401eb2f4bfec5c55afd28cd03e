@@ -120,6 +120,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5151d04f_4746a0fc",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-28T19:51:06Z",
+      "side": 1,
+      "message": "I think so by virtue of the fact that it\u0027s the type returned by calling `.data()` on it. Can you please add tests for const containers?",
+      "parentUuid": "a56f83ca_78a7ca5d",
+      "range": {
+        "startLine": 58,
+        "startChar": 25,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "12f5bb95_b3740431",
         "filename": "src/dawn/common/Enumerator.h",
         "patchSetId": 3
