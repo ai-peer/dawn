@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "95883721_c0b36413",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-28T09:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca12fcba_c0a367ca",
+      "range": {
+        "startLine": 41,
+        "startChar": 4,
+        "endLine": 41,
+        "endChar": 10
+      },
+      "revId": "0fe66e094e1b27deac86b9c02d95b0f0367115e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "98a5bdce_440b8dd2",
@@ -71,6 +95,24 @@
       "writtenOn": "2023-11-27T18:06:06Z",
       "side": 1,
       "message": "do we need this struct, or can it be std::optional\u003cuint32_t\u003e ?\nmaybe you plan to add more members to the struct like:\n```\nstruct FullSubgroupsValidationInfo {\n  uint32_t maxSubgroupSize;\n  uint32_t minSubgroupSize;\n};\n```\n?\n\nregardless, I think we can pass it as std::optional\u003cFullSubgroupsValidationInfo\u003e or just std::optional\u003cuint32_t\u003e and not have the FullSubgroupsRequired bool.",
+      "revId": "0fe66e094e1b27deac86b9c02d95b0f0367115e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3ee2159_d9668184",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-28T09:14:17Z",
+      "side": 1,
+      "message": "Done, make it `std::optional\u003cuint32_t\u003e`.",
+      "parentUuid": "98a5bdce_440b8dd2",
       "revId": "0fe66e094e1b27deac86b9c02d95b0f0367115e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
