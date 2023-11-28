@@ -121,8 +121,27 @@ WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {
 
 // Instance
 
-WireResult Instance::Initialize() {
+WireResult Instance::Initialize(const WGPUInstanceDescriptor* descriptor) {
     GatherWGSLFeatures();
+    if (descriptor == nullptr) {
+        return WireResult::Success;
+    }
+
+    if (descriptor.features.timedWaitAnyEnable) {
+        return false;
+    }
+    if (descriptor.features.timedWaitAnymaxCount > kTimedWaitAnyMaxCountDefault) {
+        return false;
+    }
+
+    auto chainStart = reinterpret_cast<WGPUChainedStruct*>(descriptor);
+    for (WGPUChainedStruct* chain = chainStart, chain != nullptr, chain = chain->nextInChain) {
+        switch (chain->sType) {
+            default:
+                return false;
+        }
+    }
+
     return WireResult::Success;
 }
 
