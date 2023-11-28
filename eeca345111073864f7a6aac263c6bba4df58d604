@@ -22,6 +22,30 @@
       },
       "revId": "eeca345111073864f7a6aac263c6bba4df58d604",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b2ca3ad_b59df30f",
+        "filename": "src/dawn/common/Range.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T14:08:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3cc198ef_0a1af40b",
+      "range": {
+        "startLine": 47,
+        "startChar": 6,
+        "endLine": 47,
+        "endChar": 16
+      },
+      "revId": "eeca345111073864f7a6aac263c6bba4df58d604",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
