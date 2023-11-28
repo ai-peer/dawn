@@ -899,6 +899,17 @@ class PhysicalDevice : public PhysicalDeviceBase {
                 wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
             heapInfo[0].size = [*mDevice recommendedMaxWorkingSetSize];
         } else {
+#if DAWN_PLATFORM_IS(IOS)
+            DAWN_UNREACHABLE();
+            auto* heapInfo = new MemoryHeapInfo[1];
+            memoryHeapProperties->heapCount = 1;
+            memoryHeapProperties->heapInfo = heapInfo;
+
+            heapInfo[0].properties =
+                wgpu::HeapProperty::DeviceLocal | wgpu::HeapProperty::HostVisible |
+                wgpu::HeapProperty::HostCoherent | wgpu::HeapProperty::HostCached;
+            heapInfo[0].size = os_proc_available_memory();
+#elif DAWN_PLATFORM_IS(MACOS)
             auto* heapInfo = new MemoryHeapInfo[2];
             memoryHeapProperties->heapCount = 2;
             memoryHeapProperties->heapInfo = heapInfo;
@@ -916,6 +927,9 @@ class PhysicalDevice : public PhysicalDeviceBase {
                                      wgpu::HeapProperty::HostCoherent |
                                      wgpu::HeapProperty::HostCached;
             heapInfo[1].size = hostInfo.max_mem;
+#else
+#error "Unsupported Apple platform."
+#endif
         }
     }
 
