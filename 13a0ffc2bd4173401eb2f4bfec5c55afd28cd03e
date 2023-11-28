@@ -87,6 +87,30 @@
       },
       "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b075fe75_476ac853",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-28T19:44:29Z",
+      "side": 1,
+      "message": "Tentatively leaving as is then! Thank you for the detailed reference 😄",
+      "parentUuid": "1ebbc2b0_29c7094f",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
