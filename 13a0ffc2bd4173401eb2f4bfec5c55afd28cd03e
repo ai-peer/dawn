@@ -39,6 +39,30 @@
       },
       "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33c1c36f_602c2ce0",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-28T17:11:16Z",
+      "side": 1,
+      "message": "Oof, probably best to just compare the internal iterator also then...",
+      "parentUuid": "12f5bb95_b3740431",
+      "range": {
+        "startLine": 66,
+        "startChar": 0,
+        "endLine": 67,
+        "endChar": 26
+      },
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
