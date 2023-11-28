@@ -62,7 +62,7 @@ class LockStep {
 
     void Wait(Step step) {
         std::unique_lock<std::mutex> lg(mMutex);
-        mCv.wait(lg, [=] { return mStep == step; });
+        mCv.wait(lg, [=, this] { return mStep == step; });
     }
 
   private:
@@ -1274,7 +1274,7 @@ TEST_P(MultithreadDrawIndexedIndirectTests, IndirectOffsetInParallel) {
     utils::RGBA8 filled(0, 255, 0, 255);
     utils::RGBA8 notFilled(0, 0, 0, 0);
 
-    utils::RunInParallel(10, [=](uint32_t) {
+    utils::RunInParallel(10, [=, this](uint32_t) {
         // Test an offset draw call, with indirect buffer containing 2 calls:
         // 1) first 3 indices of the second quad (top right triangle)
         // 2) last 3 indices of the second quad
