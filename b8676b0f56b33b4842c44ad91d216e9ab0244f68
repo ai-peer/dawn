@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1d44ea2_4f524841",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-28T15:21:39Z",
+      "side": 1,
+      "message": "```suggestion\nenum class Kind : uint8_t { kLoad, kStore };\n```",
+      "revId": "b8676b0f56b33b4842c44ad91d216e9ab0244f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfb9376_7a4048cf",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-28T15:21:39Z",
+      "side": 1,
+      "message": "You\u0027re iterating over a blocks instructions, this should never happen.",
+      "revId": "b8676b0f56b33b4842c44ad91d216e9ab0244f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67b321cb_067fc0fc",
+        "filename": "src/tint/lang/core/ir/transform/value_to_let.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-28T15:21:39Z",
+      "side": 1,
+      "message": "```suggestion\n            // If the operand is in the pending resolution, then we know it\u0027s single use and we will inline it here. But, in order to do that inlining we have to take the Kind of the operand into account and update the Kind of the instruction with that operands kind.\n            // It is safe to inline here because we would have already force multiple `call` instructions to lets and any alternating `load`, `store` would also have gone to lets previously.\n            for (auto* operand : inst-\u003eOperands()) {\n```\n\nOr something, this block is a bit hard to understand why it\u0027s safe, so words to describe would be useful.",
+      "revId": "b8676b0f56b33b4842c44ad91d216e9ab0244f68",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
