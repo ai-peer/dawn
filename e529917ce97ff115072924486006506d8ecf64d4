@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d8b27a0_fc823ba1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-11-28T08:19:44Z",
+      "side": 1,
+      "message": "PTAL.\n\nAlthough Shahbaz Youssefi already made a patch in swiftshader to turn on high precision filtering by default, that patch is currently blocked from being rolled into chrome since it caused a lot of pixel/browser tests to fail. So it\u0027s likely that that patch would be merged anytime soon. It might even get reverted.",
+      "revId": "e529917ce97ff115072924486006506d8ecf64d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
