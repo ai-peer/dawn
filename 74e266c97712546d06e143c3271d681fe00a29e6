@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47c23fa7_bd7c6d46",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1601,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-28T21:40:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "febf85f0_163b6f48",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d996e29d_f4f92382",
@@ -160,6 +178,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c65df553_9cf5e53a",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1604,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-28T21:40:42Z",
+      "side": 1,
+      "message": "Ahh, gotcha. I didn\u0027t realize we were in that state. Sounds like we can\u0027t actually use cubemaps at all, since it\u0027ll always be created a 2D array, then validation will prevent the copy workaround from treating them as cubemaps.\n\nI\u0027ll take a look at fixing the backend.",
+      "parentUuid": "c114a2ac_21f44f5c",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf03eecf_6a344f21",
@@ -226,6 +262,24 @@
       "side": 1,
       "message": "I think we should add the format and skip now, instead of not listing the format, and add it when we remove copy path?",
       "parentUuid": "0c8bf83f_cca7c568",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9e2db8_abe7d1e7",
+        "filename": "src/dawn/tests/end2end/CopyTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1697,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-11-28T21:40:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "18c57941_f89f3435",
       "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
