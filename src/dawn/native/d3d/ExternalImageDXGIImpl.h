@@ -51,7 +51,7 @@ struct ExternalImageDXGIBeginAccessDescriptor;
 struct ExternalImageDXGIFenceDescriptor;
 struct ExternalImageDescriptorDXGISharedHandle;
 
-MaybeError ValidateTextureDescriptorCanBeWrapped(const TextureDescriptor* descriptor);
+MaybeError ValidateTextureDescriptorCanBeWrapped(const Unpacked<TextureDescriptor>& descriptor);
 
 class ExternalImageDXGIImpl : public LinkNode<ExternalImageDXGIImpl> {
   public:

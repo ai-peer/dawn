@@ -35,6 +35,7 @@
 
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
+#include "dawn/native/Error.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/PhysicalDevice.h"
 
@@ -78,59 +79,44 @@ InstanceBase* AdapterBase::APIGetInstance() const {
 
 bool AdapterBase::APIGetLimits(SupportedLimits* limits) const {
     DAWN_ASSERT(limits != nullptr);
-    // TODO(dawn:1955): Revisit after deciding how to improve the validation for ChainedStructOut.
-    MaybeError result =
-        ValidateSTypes(limits->nextInChain, {{wgpu::SType::DawnExperimentalSubgroupLimits}});
-    if (mPhysicalDevice->GetInstance()->ConsumedError(std::move(result))) {
-        return false;
-    }
+    InstanceBase* instance = mPhysicalDevice->GetInstance();
+
+    UnpackedOut<SupportedLimits> unpacked;
+    DAWN_TRY_ASSIGN_WITH_CLEANUP(
+        unpacked, ValidateAndUnpack(limits),
+        { instance->ConsumedError(std::move(DAWN_LOCAL_VAR(Error))); }, false);
+
     if (mUseTieredLimits) {
         limits->limits = ApplyLimitTiers(mPhysicalDevice->GetLimits().v1);
     } else {
         limits->limits = mPhysicalDevice->GetLimits().v1;
     }
-    for (auto* chain = limits->nextInChain; chain; chain = chain->nextInChain) {
-        wgpu::ChainedStructOut originalChain = *chain;
-        switch (chain->sType) {
-            case (wgpu::SType::DawnExperimentalSubgroupLimits): {
-                DawnExperimentalSubgroupLimits* subgroupLimits =
-                    reinterpret_cast<DawnExperimentalSubgroupLimits*>(chain);
-                if (!mTogglesState.IsEnabled(Toggle::AllowUnsafeAPIs)) {
-                    // If AllowUnsafeAPIs is not enabled, return the default-initialized
-                    // DawnExperimentalSubgroupLimits object, where minSubgroupSize and
-                    // maxSubgroupSize are WGPU_LIMIT_U32_UNDEFINED.
-                    *subgroupLimits = DawnExperimentalSubgroupLimits{};
-                } else {
-                    *subgroupLimits = mPhysicalDevice->GetLimits().experimentalSubgroupLimits;
-                }
-                break;
-            }
-            default:
-                // ValidateSTypes ensures that all chained sTypes are known.
-                DAWN_UNREACHABLE();
+
+    auto subgroupLimits = unpacked.Get<DawnExperimentalSubgroupLimits>();
+    if (subgroupLimits) {
+        if (!mTogglesState.IsEnabled(Toggle::AllowUnsafeAPIs)) {
+            // If AllowUnsafeAPIs is not enabled, return the default-initialized
+            // DawnExperimentalSubgroupLimits object, where minSubgroupSize and
+            // maxSubgroupSize are WGPU_LIMIT_U32_UNDEFINED.
+            *subgroupLimits = DawnExperimentalSubgroupLimits{};
+        } else {
+            *subgroupLimits = mPhysicalDevice->GetLimits().experimentalSubgroupLimits;
         }
-        // Recover the original chain
-        *chain = originalChain;
     }
+
     return true;
 }
 
 void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
     DAWN_ASSERT(properties != nullptr);
+    InstanceBase* instance = mPhysicalDevice->GetInstance();
 
-    MaybeError result = ValidateSTypes(properties->nextInChain,
-                                       {{wgpu::SType::DawnAdapterPropertiesPowerPreference},
-                                        {wgpu::SType::AdapterPropertiesMemoryHeaps}});
-    if (result.IsError()) {
-        mPhysicalDevice->GetInstance()->ConsumedError(result.AcquireError());
-        return;
-    }
-
-    DawnAdapterPropertiesPowerPreference* powerPreferenceDesc = nullptr;
-    FindInChain(properties->nextInChain, &powerPreferenceDesc);
-
-    AdapterPropertiesMemoryHeaps* memoryHeaps = nullptr;
-    FindInChain(properties->nextInChain, &memoryHeaps);
+    UnpackedOut<AdapterProperties> unpacked;
+    DAWN_TRY_ASSIGN_WITH_CLEANUP(
+        unpacked, ValidateAndUnpack(properties),
+        { instance->ConsumedError(std::move(DAWN_LOCAL_VAR(Error))); }, (void)0);
+    auto powerPreferenceDesc = unpacked.Get<DawnAdapterPropertiesPowerPreference>();
+    auto memoryHeaps = unpacked.Get<AdapterPropertiesMemoryHeaps>();
 
     if (memoryHeaps != nullptr &&
         !mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterPropertiesMemoryHeaps)) {
