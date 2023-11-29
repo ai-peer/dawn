@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "082e71ea_ae752927",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-29T04:30:34Z",
+      "side": 1,
+      "message": "Amazing!",
+      "revId": "d6a1226b8ca7de360bb92c3371c1de2d04dabaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c66be5c3_a4a59cde",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-29T04:30:34Z",
+      "side": 1,
+      "message": "nit: use Nanoseconds here and only convert it in the GL call. Easier to see that the conversion is correct.",
+      "range": {
+        "startLine": 94,
+        "startChar": 42,
+        "endLine": 94,
+        "endChar": 50
+      },
+      "revId": "d6a1226b8ca7de360bb92c3371c1de2d04dabaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4badfc6e_71dc8ee2",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-29T04:30:34Z",
+      "side": 1,
+      "message": "I think GLsync is an opaque pointer. Use nullptr here",
+      "revId": "d6a1226b8ca7de360bb92c3371c1de2d04dabaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d14be9a_abdd876f",
+        "filename": "src/dawn/native/opengl/QueueGL.cpp",
+        "patchSetId": 16
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-29T04:30:34Z",
+      "side": 1,
+      "message": "and here",
+      "revId": "d6a1226b8ca7de360bb92c3371c1de2d04dabaab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
