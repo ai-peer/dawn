@@ -715,7 +715,8 @@ VkSampleCountFlagBits VulkanSampleCount(uint32_t sampleCount) {
     DAWN_UNREACHABLE();
 }
 
-MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase*, const TextureDescriptor* descriptor) {
+MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase*,
+                                           const Unpacked<TextureDescriptor>& descriptor) {
     DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
                     "Texture dimension (%s) is not %s.", descriptor->dimension,
                     wgpu::TextureDimension::e2D);
@@ -751,7 +752,7 @@ bool IsSampleCountSupported(const dawn::native::vulkan::Device* device,
 
 // static
 ResultOrError<Ref<Texture>> Texture::Create(Device* device,
-                                            const TextureDescriptor* descriptor,
+                                            const Unpacked<TextureDescriptor>& descriptor,
                                             VkImageUsageFlags extraUsages) {
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
     DAWN_TRY(texture->InitializeAsInternalTexture(extraUsages));
@@ -762,7 +763,7 @@ ResultOrError<Ref<Texture>> Texture::Create(Device* device,
 ResultOrError<Texture*> Texture::CreateFromExternal(
     Device* device,
     const ExternalImageDescriptorVk* descriptor,
-    const TextureDescriptor* textureDescriptor,
+    const Unpacked<TextureDescriptor>& textureDescriptor,
     external_memory::Service* externalMemoryService) {
     Ref<Texture> texture = AcquireRef(new Texture(device, textureDescriptor));
     DAWN_TRY(texture->InitializeFromExternal(descriptor, externalMemoryService));
@@ -772,7 +773,7 @@ ResultOrError<Texture*> Texture::CreateFromExternal(
 // static
 ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
     SharedTextureMemory* memory,
-    const TextureDescriptor* textureDescriptor) {
+    const Unpacked<TextureDescriptor>& textureDescriptor) {
     Ref<Texture> texture =
         AcquireRef(new Texture(ToBackend(memory->GetDevice()), textureDescriptor));
     texture->mSharedTextureMemoryContents = memory->GetContents();
@@ -785,14 +786,14 @@ ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
 
 // static
 Ref<Texture> Texture::CreateForSwapChain(Device* device,
-                                         const TextureDescriptor* descriptor,
+                                         const Unpacked<TextureDescriptor>& descriptor,
                                          VkImage nativeImage) {
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
     texture->InitializeForSwapChain(nativeImage);
     return texture;
 }
 
-Texture::Texture(Device* device, const TextureDescriptor* descriptor)
+Texture::Texture(Device* device, const Unpacked<TextureDescriptor>& descriptor)
     : TextureBase(device, descriptor),
       mCombinedAspect(ComputeCombinedAspect(device, GetFormat())),
       // A usage of none will make sure the texture is transitioned before its first use as
