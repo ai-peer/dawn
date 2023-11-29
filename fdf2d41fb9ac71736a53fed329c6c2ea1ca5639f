@@ -86,6 +86,24 @@
       "parentUuid": "5f5ac9bf_73517500",
       "revId": "fdf2d41fb9ac71736a53fed329c6c2ea1ca5639f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d635ff76_09460c0f",
+        "filename": "src/dawn/native/null/DeviceNull.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 456,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-29T12:54:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5f1acb17_2caf1e69",
+      "revId": "fdf2d41fb9ac71736a53fed329c6c2ea1ca5639f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "151ab54a_6510bdb0",
+        "filename": "src/dawn/native/ComputePipeline.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-29T12:54:35Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "3a23e908_a10d5697",
+      "range": {
+        "startLine": 84,
+        "startChar": 58,
+        "endLine": 84,
+        "endChar": 80
+      },
+      "revId": "9a46a544e0cada7914dbe8a0e805b683b0856697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d93dd3e1_32b14b04",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-28T21:14:04Z",
       "side": 1,
       "message": "[1] the necessary information about the subgroup size will impact the d3d::COmpiledShader. whose blob is part of the d3dDesc which is added to the cache key",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 32
+      },
+      "revId": "9a46a544e0cada7914dbe8a0e805b683b0856697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c292f65_f8fe4097",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-29T12:54:35Z",
+      "side": 1,
+      "message": "I am not sure if the cache key will be identical for two compute pipeline that only different in requiring full subgroups for D3D12, since in D3D12 backend the full subgroups is only a validation (now happens in TranslateToHLSL during the shader compiling) and no change will be made to hlsl source, compiled shader blob, or pipeline.\n\nAnyway, the compute pipeline cache is an unorder set and relay on not only the hash key but also the `EqualityFunc`, and the E2E tests (modified to test the cache) seems OK, so I remove this.",
+      "parentUuid": "d93dd3e1_32b14b04",
       "range": {
         "startLine": 84,
         "startChar": 12,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d01785b_e249ebac",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 97,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-29T12:54:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5107d76a_df7a7bdd",
+      "range": {
+        "startLine": 95,
+        "startChar": 8,
+        "endLine": 97,
+        "endChar": 5
+      },
+      "revId": "9a46a544e0cada7914dbe8a0e805b683b0856697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e34a03fd_3d0ad84c",
@@ -100,6 +172,24 @@
       "writtenOn": "2023-11-28T21:14:04Z",
       "side": 1,
       "message": "[3]",
+      "revId": "9a46a544e0cada7914dbe8a0e805b683b0856697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "01a9cf2f_3d38bdb1",
+        "filename": "src/dawn/native/vulkan/ComputePipelineVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-11-29T12:54:35Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "e34a03fd_3d0ad84c",
       "revId": "9a46a544e0cada7914dbe8a0e805b683b0856697",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
