@@ -95,6 +95,10 @@ class NonzeroTextureCreationTests : public DawnTestWithParams<Params> {
     }
 
     void Run() {
+        // TODO(dawn:2131): these tests assume they can create 2D array
+        // textures and bind them as texture_2d, which is forbidden in Compat.
+        DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode() && GetParam().mDepthOrArrayLayers > 1);
+
         DAWN_TEST_UNSUPPORTED_IF(GetParam().mFormat == wgpu::TextureFormat::BC1RGBAUnorm &&
                                  !SupportsFeatures({wgpu::FeatureName::TextureCompressionBC}));
 

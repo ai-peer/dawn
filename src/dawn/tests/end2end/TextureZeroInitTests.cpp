@@ -1530,6 +1530,8 @@ TEST_P(TextureZeroInitTest, PreservesInitializedMip) {
 // Test that if one layer of a texture is initialized and another is uninitialized, lazy clearing
 // the uninitialized layer does not clear the initialized layer.
 TEST_P(TextureZeroInitTest, PreservesInitializedArrayLayer) {
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+
     wgpu::TextureDescriptor sampleTextureDescriptor =
         CreateTextureDescriptor(1, 2,
                                 wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::CopyDst |

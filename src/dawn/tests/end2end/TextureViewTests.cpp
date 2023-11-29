@@ -415,6 +415,7 @@ TEST_P(TextureViewSamplingTest, Default2DArrayTexture) {
 
 // Test sampling from a 2D texture view created on a 2D array texture.
 TEST_P(TextureViewSamplingTest, Texture2DViewOn2DArrayTexture) {
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
     Texture2DViewTest(6, 1, 4, 0);
 }
 
@@ -457,6 +458,8 @@ TEST_P(TextureViewSamplingTest, Texture2DViewOnOneLevelOf2DTexture) {
 
 // Test sampling from a 2D texture view created on a mipmap level of a 2D array texture layer.
 TEST_P(TextureViewSamplingTest, Texture2DViewOnOneLevelOf2DArrayTexture) {
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+
     Texture2DViewTest(6, 6, 3, 4);
 }
 
@@ -559,12 +562,16 @@ TEST_P(TextureViewSamplingTest, SRGBReinterpretation) {
 
 // Test sampling from a cube map texture view that covers a whole 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapOnWholeTexture) {
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+
     constexpr uint32_t kTotalLayers = 6;
     TextureCubeMapTest(kTotalLayers, 0, kTotalLayers, false);
 }
 
 // Test sampling from a cube map texture view that covers a sub part of a 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapViewOnPartOfTexture) {
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+
     // TODO(dawn:1935): Total layers have to be at least 12 on Intel D3D11 Gen12.
     DAWN_SUPPRESS_TEST_IF(IsD3D11() && IsIntelGen12());
 
@@ -573,6 +580,8 @@ TEST_P(TextureViewSamplingTest, TextureCubeMapViewOnPartOfTexture) {
 
 // Test sampling from a cube map texture view that covers the last layer of a 2D array texture.
 TEST_P(TextureViewSamplingTest, TextureCubeMapViewCoveringLastLayer) {
+    DAWN_SUPPRESS_TEST_IF(IsCompatibilityMode());
+
     // TODO(dawn:1812): the test fails with DXGI_ERROR_DEVICE_HUNG on Intel D3D11 driver.
     DAWN_SUPPRESS_TEST_IF(IsD3D11() && IsIntel());
 
@@ -732,6 +741,8 @@ TEST_P(TextureViewRenderingTest, Texture2DViewOnALevelOfRectangular2DTextureAsCo
 
 // Test rendering into a 2D texture view created on a layer of a 2D array texture.
 TEST_P(TextureViewRenderingTest, Texture2DViewOnALayerOf2DArrayTextureAsColorAttachment) {
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+
     // TODO(dawn:1812): the test fails with DXGI_ERROR_DEVICE_HUNG on Intel D3D11 driver.
     DAWN_SUPPRESS_TEST_IF(IsD3D11() && IsIntel());
 
@@ -756,6 +767,8 @@ TEST_P(TextureViewRenderingTest, Texture2DViewOnALayerOf2DArrayTextureAsColorAtt
 
 // Test rendering into a 1-layer 2D array texture view created on a mipmap level of a 2D texture.
 TEST_P(TextureViewRenderingTest, Texture2DArrayViewOnALevelOf2DTextureAsColorAttachment) {
+    DAWN_TEST_UNSUPPORTED_IF(IsCompatibilityMode());
+
     constexpr uint32_t kLayers = 1;
     constexpr uint32_t kMipLevels = 4;
     constexpr uint32_t kBaseLayer = 0;

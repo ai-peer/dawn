@@ -43,27 +43,6 @@ namespace dawn::native::opengl {
 
 namespace {
 
-GLenum TargetForTexture(const TextureDescriptor* descriptor) {
-    switch (descriptor->dimension) {
-        case wgpu::TextureDimension::e1D:
-        case wgpu::TextureDimension::e2D:
-            if (descriptor->size.depthOrArrayLayers > 1) {
-                DAWN_ASSERT(descriptor->sampleCount == 1);
-                return GL_TEXTURE_2D_ARRAY;
-            } else {
-                if (descriptor->sampleCount > 1) {
-                    return GL_TEXTURE_2D_MULTISAMPLE;
-                } else {
-                    return GL_TEXTURE_2D;
-                }
-            }
-        case wgpu::TextureDimension::e3D:
-            DAWN_ASSERT(descriptor->sampleCount == 1);
-            return GL_TEXTURE_3D;
-    }
-    DAWN_UNREACHABLE();
-}
-
 GLenum TargetForTextureViewDimension(wgpu::TextureViewDimension dimension,
                                      uint32_t arrayLayerCount,
                                      uint32_t sampleCount) {
@@ -223,7 +202,8 @@ uint32_t Texture::GetGenID() const {
 
 Texture::Texture(Device* device, const TextureDescriptor* descriptor, GLuint handle)
     : TextureBase(device, descriptor), mHandle(handle) {
-    mTarget = TargetForTexture(descriptor);
+    auto dim = GetCompatibilityTextureBindingViewDimension();
+    mTarget = TargetForTextureViewDimension(dim, GetArrayLayers(), GetSampleCount());
 }
 
 Texture::~Texture() {}
