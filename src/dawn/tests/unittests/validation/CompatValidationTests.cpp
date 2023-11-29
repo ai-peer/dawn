@@ -70,6 +70,46 @@ TEST_F(CompatValidationTest, CanNotCreateCubeArrayTextureView) {
     cubeTexture.Destroy();
 }
 
+TEST_F(CompatValidationTest, CanNotCreateAlternateCompatibleViewFormatRGBA8Unorm) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.size = {1, 1, 1};
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+    descriptor.usage = wgpu::TextureUsage::TextureBinding;
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+    {
+        wgpu::TextureViewDescriptor viewDescriptor;
+        viewDescriptor.dimension = wgpu::TextureViewDimension::e2D;
+        viewDescriptor.format = wgpu::TextureFormat::RGBA8UnormSrgb;
+
+        ASSERT_DEVICE_ERROR(texture.CreateView(&viewDescriptor),
+                            testing::HasSubstr("must match format"));
+    }
+
+    texture.Destroy();
+}
+
+TEST_F(CompatValidationTest, CanNotCreateAlternateCompatibleViewFormatRGBA8UnormSrgb) {
+    wgpu::TextureDescriptor descriptor;
+    descriptor.size = {1, 1, 1};
+    descriptor.dimension = wgpu::TextureDimension::e2D;
+    descriptor.format = wgpu::TextureFormat::RGBA8UnormSrgb;
+    descriptor.usage = wgpu::TextureUsage::TextureBinding;
+    wgpu::Texture texture = device.CreateTexture(&descriptor);
+
+    {
+        wgpu::TextureViewDescriptor viewDescriptor;
+        viewDescriptor.dimension = wgpu::TextureViewDimension::e2D;
+        viewDescriptor.format = wgpu::TextureFormat::RGBA8Unorm;
+
+        ASSERT_DEVICE_ERROR(texture.CreateView(&viewDescriptor),
+                            testing::HasSubstr("must match format"));
+    }
+
+    texture.Destroy();
+}
+
 TEST_F(CompatValidationTest, CanNotCreatePipelineWithDifferentPerTargetBlendStateOrWriteMask) {
     wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
         @vertex fn vs() -> @builtin(position) vec4f {
