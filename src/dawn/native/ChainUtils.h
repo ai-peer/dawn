@@ -43,47 +43,29 @@ namespace dawn::native {
 template <typename B, typename... Exts>
 struct Branch;
 
-// Typelist type used to specify a list of acceptable Branches.
-template <typename... Branches>
-struct BranchList;
-
 namespace detail {
 
-// Helpers to get the index in an unpacked tuple type for a particular type.
-template <typename Unpacked, typename Ext>
-struct UnpackedIndexOf;
-template <typename Ext, typename... Exts>
-struct UnpackedIndexOf<std::tuple<const Ext*, Exts...>, Ext> {
-    static constexpr size_t value = 0;
-};
-template <typename Ext, typename... Exts>
-struct UnpackedIndexOf<std::tuple<Ext, Exts...>, Ext> {
-    static constexpr size_t value = 0;
-};
-template <typename Ext, typename Other, typename... Exts>
-struct UnpackedIndexOf<std::tuple<Other, Exts...>, Ext> {
-    static constexpr size_t value = 1 + UnpackedIndexOf<std::tuple<Exts...>, Ext>::value;
-};
-
-template <typename Unpacked, typename... Exts>
-struct UnpackedBitsetForExts {
+template <typename UnpackedTuple, typename... Exts>
+struct UnpackedTupleBitsetForExts {
     // Currently using an internal 64-bit unsigned int for internal representation. This is
     // necessary because std::bitset::operator| is not constexpr until C++23.
-    static constexpr auto value = std::bitset<std::tuple_size_v<Unpacked>>(
-        ((uint64_t(1) << UnpackedIndexOf<Unpacked, Exts>::value) | ...));
+    static constexpr auto value = std::bitset<std::tuple_size_v<UnpackedTuple>>(
+        ((uint64_t(1) << UnpackedTupleIndexOf<UnpackedTuple, Exts>::value) | ...));
 };
 
-template <typename Unpacked, typename...>
+template <typename UnpackedT, typename...>
 struct OneBranchValidator;
-template <typename Unpacked, typename B, typename... Exts>
-struct OneBranchValidator<Unpacked, Branch<B, Exts...>> {
-    static bool Validate(const Unpacked& unpacked,
-                         const std::bitset<std::tuple_size_v<Unpacked>>& actual,
+template <typename UnpackedT, typename B, typename... Exts>
+struct OneBranchValidator<UnpackedT, Branch<B, Exts...>> {
+    using UnpackedTuple = UnpackedT::TupleType;
+
+    static bool Validate(const UnpackedT& unpacked,
+                         const std::bitset<std::tuple_size_v<UnpackedTuple>>& actual,
                          wgpu::SType& match) {
         // Only check the full bitset when the main branch matches.
-        if (std::get<const B*>(unpacked) != nullptr) {
+        if (unpacked.template Get<B>() != nullptr) {
             // Allowed set of extensions includes the branch root as well.
-            constexpr auto allowed = UnpackedBitsetForExts<Unpacked, B, Exts...>::value;
+            constexpr auto allowed = UnpackedTupleBitsetForExts<UnpackedTuple, B, Exts...>::value;
 
             // The configuration is allowed if the actual available chains are a subset.
             if (IsSubset(actual, allowed)) {
@@ -104,44 +86,80 @@ struct OneBranchValidator<Unpacked, Branch<B, Exts...>> {
     }
 };
 
-template <typename Unpacked, typename List>
-struct BranchesValidator;
-template <typename Unpacked, typename... Branches>
-struct BranchesValidator<Unpacked, BranchList<Branches...>> {
-    static bool Validate(const Unpacked& unpacked, wgpu::SType& match) {
-        // Build a bitset based on which elements in the tuple are actually set. We are essentially
-        // just looping over every element in the unpacked tuple, computing the index of the element
-        // within the tuple, and setting the respective bit if the element is not nullptr.
-        std::bitset<std::tuple_size_v<Unpacked>> actual;
-        std::apply(
-            [&](const auto*... args) {
-                (actual.set(UnpackedIndexOf<Unpacked, decltype(args)>::value, args != nullptr),
-                 ...);
-            },
-            unpacked);
+template <typename UnpackedT, typename... Branches>
+struct BranchesValidator {
+    using UnpackedTuple = UnpackedT::TupleType;
 
-        return ((OneBranchValidator<Unpacked, Branches>::Validate(unpacked, actual, match)) || ...);
+    static bool Validate(const UnpackedT& unpacked, wgpu::SType& match) {
+        return ((OneBranchValidator<UnpackedT, Branches>::Validate(unpacked, unpacked.Bitset(),
+                                                                   match)) ||
+                ...);
     }
 
     static std::string ToString() {
-        return ((absl::StrFormat("  - %s\n", OneBranchValidator<Unpacked, Branches>::ToString())) +
+        return ((absl::StrFormat("  - %s\n", OneBranchValidator<UnpackedT, Branches>::ToString())) +
                 ...);
+    }
+};
+
+template <typename UnpackedT, typename...>
+struct SubsetValidator;
+template <typename T, typename... Allowed>
+struct SubsetValidator<Unpacked<T>, Allowed...> {
+    using UnpackedTuple = Unpacked<T>::TupleType;
+
+    static std::string ToString() {
+        return absl::StrFormat("[ %s ]", STypesToString<Allowed...>());
+    }
+
+    static MaybeError Validate(const Unpacked<T>& unpacked) {
+        // Allowed set of extensions includes the branch root as well.
+        constexpr auto allowed =
+            detail::UnpackedTupleBitsetForExts<UnpackedTuple, std::add_const_t<Allowed>*...>::value;
+        if (!IsSubset(unpacked.Bitset(), allowed)) {
+            return DAWN_VALIDATION_ERROR(
+                "Expected extension set to be a subset of:\n%sInstead found: %s", ToString(),
+                detail::UnpackedChainToString(unpacked));
+        }
+        return {};
+    }
+};
+template <typename T, typename... Allowed>
+struct SubsetValidator<UnpackedOut<T>, Allowed...> {
+    using UnpackedTuple = UnpackedOut<T>::TupleType;
+
+    static std::string ToString() {
+        return absl::StrFormat("[ %s ]", STypesToString<Allowed...>());
+    }
+
+    static MaybeError Validate(const UnpackedOut<T>& unpacked) {
+        // Allowed set of extensions includes the branch root as well.
+        constexpr auto allowed =
+            detail::UnpackedTupleBitsetForExts<UnpackedTuple, Allowed*...>::value;
+        if (!IsSubset(unpacked.Bitset(), allowed)) {
+            return DAWN_VALIDATION_ERROR(
+                "Expected extension set to be a subset of:\n%sInstead found: %s", ToString(),
+                detail::UnpackedChainToString(unpacked));
+        }
+        return {};
     }
 };
 
 }  // namespace detail
 
-// Helper to validate that an unpacked chain retrieved via ValidateAndUnpackChain matches a valid
-// "branch", where a "branch" is defined as a "root" extension and optional follow-up extensions.
+// Validates that an unpacked chain retrieved via ValidateAndUnpack matches a valid "branch",
+// where a "branch" is defined as a required "root" extension and optional follow-up
+// extensions.
+//
 // Returns the wgpu::SType associated with the "root" extension of a "branch" if matched, otherwise
 // returns an error.
 //
 // Example usage:
-//     UnpackedChain u;
-//     DAWN_TRY_ASSIGN(u, ValidateAndUnpackChain(desc));
+//     Unpacked<T> u;
+//     DAWN_TRY_ASSIGN(u, ValidateAndUnpack(desc));
 //     wgpu::SType rootType;
 //     DAWN_TRY_ASSIGN(rootType,
-//         ValidateBranches<BranchList<Branch<Root1>, Branch<Root2, R2Ext1>>>(u));
+//         ValidateBranches<Branch<Root1>, Branch<Root2, R2Ext1>>(u));
 //     switch (rootType) {
 //         case Root1: {
 //             <do something>
@@ -160,18 +178,25 @@ struct BranchesValidator<Unpacked, BranchList<Branches...>> {
 //     - only a Root1 extension
 //     - or a Root2 extension with an optional R2Ext1 extension
 // Any other configuration is deemed invalid.
-template <typename Branches, typename Unpacked>
-ResultOrError<wgpu::SType> ValidateBranches(const Unpacked& unpacked) {
-    using Validator = detail::BranchesValidator<Unpacked, Branches>;
+template <typename... Branches, typename UnpackedT>
+ResultOrError<wgpu::SType> ValidateUnpackedBranches(const UnpackedT& unpacked) {
+    using Validator = detail::BranchesValidator<UnpackedT, Branches...>;
 
     wgpu::SType match = wgpu::SType::Invalid;
     if (Validator::Validate(unpacked, match)) {
         return match;
     }
     return DAWN_VALIDATION_ERROR(
-        "Expected chain root to match one of the following branch types with optional extensions:\n"
-        "%sInstead found: %s",
+        "Expected chain root to match one of the following branch types with optional extensions:"
+        "\n%sInstead found: %s",
         Validator::ToString(), detail::UnpackedChainToString(unpacked));
+}
+
+// Validates that an unpacked chain retrieved via ValidateAndUnpack contains a subset of the
+// Allowed extensions. If there are any other extensions, returns an error.
+template <typename... Allowed, typename UnpackedT>
+MaybeError ValidateUnpackedSubset(const UnpackedT& unpacked) {
+    return detail::SubsetValidator<UnpackedT, Allowed...>::Validate(unpacked);
 }
 
 }  // namespace dawn::native
