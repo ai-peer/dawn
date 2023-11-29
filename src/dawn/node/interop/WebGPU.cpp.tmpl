@@ -165,7 +165,7 @@ Wrappers* Wrappers::instance = nullptr;
         InstanceMethod("keys", &W{{$.Name}}::keys),
 {{-  end}}
 {{-  range $m := $methods}}
-        InstanceMethod("{{$m.Name}}", &W{{$.Name}}::{{$m.Name}}),
+        InstanceMethod("{{$m.Name}}", &W{{$.Name}}::{{$m.Name}}, napi_writable),
 {{-  end}}
 {{-  range $a := $attributes}}
 {{-   if not (HasAnnotation $a "SameObject")}}
