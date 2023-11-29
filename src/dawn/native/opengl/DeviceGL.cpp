@@ -259,7 +259,8 @@ ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     const SwapChainDescriptor* descriptor) {
     return DAWN_VALIDATION_ERROR("New swapchains not implemented.");
 }
-ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
+ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
+    const Unpacked<TextureDescriptor>& descriptor) {
     return Texture::Create(this, descriptor);
 }
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
@@ -276,7 +277,7 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
     return usages;
 }
 
-MaybeError Device::ValidateTextureCanBeWrapped(const TextureDescriptor* descriptor) {
+MaybeError Device::ValidateTextureCanBeWrapped(const Unpacked<TextureDescriptor>& descriptor) {
     DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
                     "Texture dimension (%s) is not %s.", descriptor->dimension,
                     wgpu::TextureDimension::e2D);
@@ -300,9 +301,10 @@ MaybeError Device::ValidateTextureCanBeWrapped(const TextureDescriptor* descript
 TextureBase* Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor* descriptor,
                                                    ::EGLImage image) {
     const OpenGLFunctions& gl = GetGL();
-    const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
-    if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor))) {
+    Unpacked<TextureDescriptor> textureDescriptor;
+    if (ConsumedError(ValidateTextureDescriptor(this, FromAPI(descriptor->cTextureDescriptor)),
+                      &textureDescriptor)) {
         return nullptr;
     }
     if (ConsumedError(ValidateTextureCanBeWrapped(textureDescriptor))) {
@@ -340,13 +342,14 @@ TextureBase* Device::CreateTextureWrappingEGLImage(const ExternalImageDescriptor
 TextureBase* Device::CreateTextureWrappingGLTexture(const ExternalImageDescriptor* descriptor,
                                                     GLuint texture) {
     const OpenGLFunctions& gl = GetGL();
-    const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
 
-    if (!HasFeature(Feature::ANGLETextureSharing)) {
-        HandleError(DAWN_VALIDATION_ERROR("Device does not support ANGLE GL texture sharing."));
+    Unpacked<TextureDescriptor> textureDescriptor;
+    if (ConsumedError(ValidateTextureDescriptor(this, FromAPI(descriptor->cTextureDescriptor)),
+                      &textureDescriptor)) {
         return nullptr;
     }
-    if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor))) {
+    if (!HasFeature(Feature::ANGLETextureSharing)) {
+        HandleError(DAWN_VALIDATION_ERROR("Device does not support ANGLE GL texture sharing."));
         return nullptr;
     }
     if (ConsumedError(ValidateTextureCanBeWrapped(textureDescriptor))) {

@@ -197,7 +197,8 @@ ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     const SwapChainDescriptor* descriptor) {
     return SwapChain::Create(this, surface, previousSwapChain, descriptor);
 }
-ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
+ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
+    const Unpacked<TextureDescriptor>& descriptor) {
     return Texture::Create(this, descriptor);
 }
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
@@ -226,8 +227,8 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
 
 ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
     const SharedTextureMemoryDescriptor* descriptor) {
-    UnpackedSharedTextureMemoryDescriptorChain unpacked;
-    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
+    Unpacked<SharedTextureMemoryDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
 
     wgpu::SType type;
     DAWN_TRY_ASSIGN(
@@ -237,9 +238,8 @@ ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImp
         case wgpu::SType::SharedTextureMemoryDmaBufDescriptor:
             DAWN_INVALID_IF(!HasFeature(Feature::SharedTextureMemoryDmaBuf), "%s is not enabled.",
                             wgpu::FeatureName::SharedTextureMemoryDmaBuf);
-            return SharedTextureMemory::Create(
-                this, descriptor->label,
-                std::get<const SharedTextureMemoryDmaBufDescriptor*>(unpacked));
+            return SharedTextureMemory::Create(this, descriptor->label,
+                                               unpacked.Get<SharedTextureMemoryDmaBufDescriptor>());
         default:
             DAWN_UNREACHABLE();
     }
@@ -247,8 +247,8 @@ ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImp
 
 ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
     const SharedFenceDescriptor* descriptor) {
-    UnpackedSharedFenceDescriptorChain unpacked;
-    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
+    Unpacked<SharedFenceDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
 
     wgpu::SType type;
     DAWN_TRY_ASSIGN(
@@ -264,20 +264,18 @@ ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
                             wgpu::FeatureName::SharedFenceVkSemaphoreZirconHandle);
             return SharedFence::Create(
                 this, descriptor->label,
-                std::get<const SharedFenceVkSemaphoreZirconHandleDescriptor*>(unpacked));
+                unpacked.Get<SharedFenceVkSemaphoreZirconHandleDescriptor>());
         case wgpu::SType::SharedFenceVkSemaphoreSyncFDDescriptor:
             DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreSyncFD),
                             "%s is not enabled.", wgpu::FeatureName::SharedFenceVkSemaphoreSyncFD);
-            return SharedFence::Create(
-                this, descriptor->label,
-                std::get<const SharedFenceVkSemaphoreSyncFDDescriptor*>(unpacked));
+            return SharedFence::Create(this, descriptor->label,
+                                       unpacked.Get<SharedFenceVkSemaphoreSyncFDDescriptor>());
         case wgpu::SType::SharedFenceVkSemaphoreOpaqueFDDescriptor:
             DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceVkSemaphoreOpaqueFD),
                             "%s is not enabled.",
                             wgpu::FeatureName::SharedFenceVkSemaphoreOpaqueFD);
-            return SharedFence::Create(
-                this, descriptor->label,
-                std::get<const SharedFenceVkSemaphoreOpaqueFDDescriptor*>(unpacked));
+            return SharedFence::Create(this, descriptor->label,
+                                       unpacked.Get<SharedFenceVkSemaphoreOpaqueFDDescriptor>());
         default:
             DAWN_UNREACHABLE();
     }
@@ -703,19 +701,19 @@ TextureBase* Device::CreateTextureWrappingVulkanImage(
     const ExternalImageDescriptorVk* descriptor,
     ExternalMemoryHandle memoryHandle,
     const std::vector<ExternalSemaphoreHandle>& waitHandles) {
-    const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
-
     // Initial validation
     if (ConsumedError(ValidateIsAlive())) {
         return nullptr;
     }
-    if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor,
-                                                AllowMultiPlanarTextureFormat::Yes))) {
+    Unpacked<TextureDescriptor> textureDescriptor;
+    if (ConsumedError(ValidateTextureDescriptor(this, FromAPI(descriptor->cTextureDescriptor),
+                                                AllowMultiPlanarTextureFormat::Yes),
+                      &textureDescriptor)) {
         return nullptr;
     }
     if (ConsumedError(ValidateVulkanImageCanBeWrapped(this, textureDescriptor),
                       "validating that a Vulkan image can be wrapped with %s.",
-                      textureDescriptor)) {
+                      *textureDescriptor)) {
         return nullptr;
     }
     if (GetValidInternalFormat(textureDescriptor->format).IsMultiPlanar() &&

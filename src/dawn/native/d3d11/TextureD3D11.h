@@ -58,19 +58,21 @@ MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFo
 
 class Texture final : public d3d::Texture {
   public:
-    static ResultOrError<Ref<Texture>> Create(Device* device, const TextureDescriptor* descriptor);
     static ResultOrError<Ref<Texture>> Create(Device* device,
-                                              const TextureDescriptor* descriptor,
+                                              const Unpacked<TextureDescriptor>& descriptor);
+    static ResultOrError<Ref<Texture>> Create(Device* device,
+                                              const Unpacked<TextureDescriptor>& descriptor,
                                               ComPtr<ID3D11Resource> d3d11Texture);
-    static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
-                                                           const TextureDescriptor* descriptor,
-                                                           ComPtr<IUnknown> d3dTexture,
-                                                           std::vector<Ref<d3d::Fence>> waitFences,
-                                                           bool isSwapChainTexture,
-                                                           bool isInitialized);
+    static ResultOrError<Ref<Texture>> CreateExternalImage(
+        Device* device,
+        const Unpacked<TextureDescriptor>& descriptor,
+        ComPtr<IUnknown> d3dTexture,
+        std::vector<Ref<d3d::Fence>> waitFences,
+        bool isSwapChainTexture,
+        bool isInitialized);
     static ResultOrError<Ref<Texture>> CreateFromSharedTextureMemory(
         SharedTextureMemory* memory,
-        const TextureDescriptor* descriptor);
+        const Unpacked<TextureDescriptor>& descriptor);
     ID3D11Resource* GetD3D11Resource() const;
 
     ResultOrError<ComPtr<ID3D11RenderTargetView>> CreateD3D11RenderTargetView(
@@ -123,10 +125,10 @@ class Texture final : public d3d::Texture {
     };
 
     static ResultOrError<Ref<Texture>> CreateInternal(Device* device,
-                                                      const TextureDescriptor* descriptor,
+                                                      const Unpacked<TextureDescriptor>& descriptor,
                                                       Kind kind);
 
-    Texture(Device* device, const TextureDescriptor* descriptor, Kind kind);
+    Texture(Device* device, const Unpacked<TextureDescriptor>& descriptor, Kind kind);
     ~Texture() override;
 
     template <typename T>

@@ -64,7 +64,7 @@ MaybeError ValidateQueryIndexOverwrite(QuerySetBase* querySet,
 // BeginRenderPassCmd. If we had RenderPassEncoder responsible for recording the
 // command, then this wouldn't be necessary.
 RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
-                                     const RenderPassDescriptor* descriptor,
+                                     const Unpacked<RenderPassDescriptor>& descriptor,
                                      CommandEncoder* commandEncoder,
                                      EncodingContext* encodingContext,
                                      RenderPassResourceUsageTracker usageTracker,
@@ -86,8 +86,7 @@ RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
       mOcclusionQuerySet(descriptor->occlusionQuerySet),
       mEndCallback(std::move(endCallback)) {
     mUsageTracker = std::move(usageTracker);
-    const RenderPassDescriptorMaxDrawCount* maxDrawCountInfo = nullptr;
-    FindInChain(descriptor->nextInChain, &maxDrawCountInfo);
+    auto maxDrawCountInfo = descriptor.Get<RenderPassDescriptorMaxDrawCount>();
     if (maxDrawCountInfo) {
         mMaxDrawCount = maxDrawCountInfo->maxDrawCount;
     }
@@ -96,7 +95,7 @@ RenderPassEncoder::RenderPassEncoder(DeviceBase* device,
 
 // static
 Ref<RenderPassEncoder> RenderPassEncoder::Create(DeviceBase* device,
-                                                 const RenderPassDescriptor* descriptor,
+                                                 const Unpacked<RenderPassDescriptor>& descriptor,
                                                  CommandEncoder* commandEncoder,
                                                  EncodingContext* encodingContext,
                                                  RenderPassResourceUsageTracker usageTracker,
