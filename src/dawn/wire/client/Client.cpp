@@ -134,6 +134,11 @@ ReservedDevice Client::ReserveDevice() {
 ReservedInstance Client::ReserveInstance() {
     Instance* instance = Make<Instance>();
 
+    if (instance->Initialize() != WireResult::Success) {
+        Free(instance);
+        return {nullptr, 0, 0};
+    }
+
     ReservedInstance result;
     result.instance = ToAPI(instance);
     result.id = instance->GetWireId();
