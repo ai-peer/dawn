@@ -147,7 +147,8 @@ class NonzeroTextureCreationTests : public DawnTestWithParams<Params> {
             textureBindingViewDimensionDesc.textureBindingViewDimension =
                 descriptor.dimension == wgpu::TextureDimension::e3D
                     ? wgpu::TextureViewDimension::e3D
-                    : wgpu::TextureViewDimension::e2D;
+                : GetParam().mDepthOrArrayLayers == 1 ? wgpu::TextureViewDimension::e2D
+                                                      : wgpu::TextureViewDimension::e2DArray;
             descriptor.nextInChain = &textureBindingViewDimensionDesc;
         }
 
