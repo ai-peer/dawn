@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d27a1a_749597fe",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-29T22:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "91660a38_efd8cb4b",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 1
+      },
+      "revId": "5cd84cc25c7cd50eacf6979e02a9bfae16e962dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5a30d8b7_1b041be0",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-11-29T08:46:24Z",
       "side": 1,
       "message": "Could make this a `DAWN_TRY(IsTextureViewDimensionCompatibleWithTextureDimension(...))` if addressing the previous comment.",
+      "range": {
+        "startLine": 560,
+        "startChar": 8,
+        "endLine": 561,
+        "endChar": 94
+      },
+      "revId": "5cd84cc25c7cd50eacf6979e02a9bfae16e962dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9379e90f_ba0c0ced",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-29T22:43:05Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a30d8b7_1b041be0",
       "range": {
         "startLine": 560,
         "startChar": 8,
