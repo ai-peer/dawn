@@ -133,6 +133,19 @@ bool IsTextureViewDimensionCompatibleWithTextureDimension(
     DAWN_UNREACHABLE();
 }
 
+bool IsDepthOrArrayLayersCompatibleWithTextureBindingViewDimension(
+    wgpu::TextureViewDimension textureBindingViewDimension,
+    uint32_t depthOrArrayLayers) {
+    switch (textureBindingViewDimension) {
+        case wgpu::TextureViewDimension::e2D:
+            return depthOrArrayLayers == 1u;
+        case wgpu::TextureViewDimension::Cube:
+            return depthOrArrayLayers == 6u;
+        default:
+            return true;
+    }
+}
+
 bool IsArrayLayerValidForTextureViewDimension(wgpu::TextureViewDimension textureViewDimension,
                                               uint32_t textureViewArrayLayer) {
     switch (textureViewDimension) {
@@ -543,6 +556,12 @@ MaybeError ValidateTextureDescriptor(
                                                                   descriptor->dimension),
             "The textureBindingViewDimension (%s) is not compatible with the dimension (%s)",
             textureBindingViewDimension, descriptor->dimension);
+
+        DAWN_INVALID_IF(!IsDepthOrArrayLayersCompatibleWithTextureBindingViewDimension(
+                            textureBindingViewDimension, descriptor->size.depthOrArrayLayers),
+                        "The number of depthOrArrayLayers (%d) is not compatible with the "
+                        "textureBindingViewDimension (%s)",
+                        descriptor->size.depthOrArrayLayers, textureBindingViewDimension);
     }
     DAWN_TRY(ValidateSampleCount(descriptor, usage, format));
 
