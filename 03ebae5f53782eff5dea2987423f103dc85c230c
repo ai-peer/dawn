@@ -16,6 +16,29 @@
       "message": "Note: Will probably need a CTS roll to land this",
       "revId": "03ebae5f53782eff5dea2987423f103dc85c230c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61eb2412_cb805f47",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-29T08:38:06Z",
+      "side": 1,
+      "message": "nit. Maybe something like:\n\n\"View format (%s) must match texture format (%s) in compat mode.\"? The second \"format\" right now is a bit ambiguous.",
+      "range": {
+        "startLine": 587,
+        "startChar": 21,
+        "endLine": 587,
+        "endChar": 54
+      },
+      "revId": "03ebae5f53782eff5dea2987423f103dc85c230c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
