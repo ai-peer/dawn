@@ -142,6 +142,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2b09265_da976430",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-29T09:34:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5151d04f_4746a0fc",
+      "range": {
+        "startLine": 58,
+        "startChar": 25,
+        "endLine": 58,
+        "endChar": 31
+      },
+      "revId": "13a0ffc2bd4173401eb2f4bfec5c55afd28cd03e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "12f5bb95_b3740431",
