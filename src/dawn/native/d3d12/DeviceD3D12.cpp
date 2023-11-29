@@ -478,8 +478,8 @@ void Device::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> renderPip
 
 ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImpl(
     const SharedTextureMemoryDescriptor* descriptor) {
-    UnpackedSharedTextureMemoryDescriptorChain unpacked;
-    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
+    Unpacked<SharedTextureMemoryDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
 
     wgpu::SType type;
     DAWN_TRY_ASSIGN(
@@ -493,7 +493,7 @@ ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImp
                             wgpu::FeatureName::SharedTextureMemoryDXGISharedHandle);
             return SharedTextureMemory::Create(
                 this, descriptor->label,
-                std::get<const SharedTextureMemoryDXGISharedHandleDescriptor*>(unpacked));
+                unpacked.Get<SharedTextureMemoryDXGISharedHandleDescriptor>());
         default:
             DAWN_UNREACHABLE();
     }
@@ -501,8 +501,8 @@ ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImp
 
 ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
     const SharedFenceDescriptor* descriptor) {
-    UnpackedSharedFenceDescriptorChain unpacked;
-    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpackChain(descriptor));
+    Unpacked<SharedFenceDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
 
     wgpu::SType type;
     DAWN_TRY_ASSIGN(
@@ -513,9 +513,8 @@ ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
         case wgpu::SType::SharedFenceDXGISharedHandleDescriptor:
             DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceDXGISharedHandle), "%s is not enabled.",
                             wgpu::FeatureName::SharedFenceDXGISharedHandle);
-            return SharedFence::Create(
-                this, descriptor->label,
-                std::get<const SharedFenceDXGISharedHandleDescriptor*>(unpacked));
+            return SharedFence::Create(this, descriptor->label,
+                                       unpacked.Get<SharedFenceDXGISharedHandleDescriptor>());
         default:
             DAWN_UNREACHABLE();
     }
