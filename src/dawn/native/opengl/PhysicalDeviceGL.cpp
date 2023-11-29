@@ -236,6 +236,11 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (mFunctions.IsGLExtensionSupported("GL_EXT_texture_norm16")) {
         EnableFeature(Feature::Norm16TextureFormats);
     }
+
+    // ChromiumnExperimentalDp4a
+    // TODO(tint:1497): Remove the extension and support the language feature
+    // "packed_4x8_integer_dot_product" unconditionally.
+    EnableFeature(Feature::ChromiumExperimentalDp4a);
 }
 
 namespace {
