@@ -16,6 +16,52 @@
       "message": "Note: this might require CTS changes to land before committing but it should be ready to review.",
       "revId": "5cd84cc25c7cd50eacf6979e02a9bfae16e962dc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "91660a38_efd8cb4b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-29T08:46:24Z",
+      "side": 1,
+      "message": "I think it might be better to just make this return a `MaybeError`, and then for the different cases return a more specific error message instead of just the generic one.\n\nMaybe something like:\n\n```\nswitch (textureBindingViewDimension) {\n    case wgpu::TextureViewDimension::e2D:\n        return DAWN_VALIDATION_ERROR(\n            \"A resolved TextureViewDimension of e2D is only \"\n            \"compatible with depthOrArrayLayers \u003d\u003d 1.\");\n    case wgpu::TextureViewDimension::Cube:\n        return DAWN_VALIDATION_ERROR(\n            \"A resolved TextureViewDimension of Cube is only \"\n            \"compatible with depthOrArrayLayers \u003d\u003d 6.\");\n    default:\n        return {};\n}\n```",
+      "range": {
+        "startLine": 136,
+        "startChar": 0,
+        "endLine": 147,
+        "endChar": 1
+      },
+      "revId": "5cd84cc25c7cd50eacf6979e02a9bfae16e962dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a30d8b7_1b041be0",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 561,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-29T08:46:24Z",
+      "side": 1,
+      "message": "Could make this a `DAWN_TRY(IsTextureViewDimensionCompatibleWithTextureDimension(...))` if addressing the previous comment.",
+      "range": {
+        "startLine": 560,
+        "startChar": 8,
+        "endLine": 561,
+        "endChar": 94
+      },
+      "revId": "5cd84cc25c7cd50eacf6979e02a9bfae16e962dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
