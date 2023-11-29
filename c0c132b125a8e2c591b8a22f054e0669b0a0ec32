@@ -16,6 +16,24 @@
       "message": "Unsurprisingly, fixing this has exposed build errors. See this bug I filed: https://bugs.chromium.org/p/tint/issues/detail?id\u003d2109",
       "revId": "c0c132b125a8e2c591b8a22f054e0669b0a0ec32",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2d859f2e_f3051062",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-11-29T18:55:45Z",
+      "side": 1,
+      "message": "Am now specifying the target again, this time with it\u0027s new name `tint_cmd_tint_cmd`. This should pass Kokoro, but we should eventually try to address the Dawn build failures.",
+      "parentUuid": "277cff4d_e6d02fd0",
+      "revId": "c0c132b125a8e2c591b8a22f054e0669b0a0ec32",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
