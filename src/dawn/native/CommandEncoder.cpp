@@ -635,13 +635,9 @@ MaybeError ValidateRenderPassPLS(DeviceBase* device,
 }
 
 MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
-                                        const RenderPassDescriptor* descriptor,
+                                        const Unpacked<RenderPassDescriptor>& descriptor,
                                         UsageValidationMode usageValidationMode,
                                         RenderPassValidationState* validationState) {
-    DAWN_TRY(
-        ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::RenderPassDescriptorMaxDrawCount},
-                                                 {wgpu::SType::RenderPassPixelLocalStorage}}));
-
     uint32_t maxColorAttachments = device->GetLimits().v1.maxColorAttachments;
     DAWN_INVALID_IF(
         descriptor->colorAttachmentCount > maxColorAttachments,
@@ -689,8 +685,7 @@ MaybeError ValidateRenderPassDescriptor(DeviceBase* device,
     }
 
     // Validation for any pixel local storage.
-    const RenderPassPixelLocalStorage* pls = nullptr;
-    FindInChain(descriptor->nextInChain, &pls);
+    auto pls = descriptor.Get<RenderPassPixelLocalStorage>();
     if (pls != nullptr) {
         DAWN_TRY(ValidateRenderPassPLS(device, pls, usageValidationMode, validationState));
     }
@@ -1066,7 +1061,7 @@ RenderPassEncoder* CommandEncoder::APIBeginRenderPass(const RenderPassDescriptor
     return BeginRenderPass(descriptor).Detach();
 }
 
-Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescriptor* descriptor) {
+Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescriptor* rawDescriptor) {
     DeviceBase* device = GetDevice();
     DAWN_ASSERT(device->IsLockedByCurrentThreadIfNeeded());
 
@@ -1078,6 +1073,15 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
     RenderPassValidationState validationState;
 
     std::function<void()> passEndCallback = nullptr;
+
+    // Lazy make error function to be called if we error and need to return an error encoder.
+    auto makeError = [&]() {
+        return RenderPassEncoder::MakeError(device, this, &mEncodingContext,
+                                            rawDescriptor ? rawDescriptor->label : nullptr);
+    };
+
+    Unpacked<RenderPassDescriptor> descriptor;
+    DAWN_TRY_ASSIGN_WITH_CLEANUP(descriptor, ValidateAndUnpack(rawDescriptor), {}, makeError());
 
     bool success = mEncodingContext.TryEncode(
         this,
@@ -1092,7 +1096,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 allocator->Allocate<BeginRenderPassCmd>(Command::BeginRenderPass);
             cmd->label = std::string(descriptor->label ? descriptor->label : "");
 
-            cmd->attachmentState = device->GetOrCreateAttachmentState(descriptor);
+            cmd->attachmentState = device->GetOrCreateAttachmentState(*descriptor);
             attachmentState = cmd->attachmentState;
 
             auto descColorAttachments = ityp::SpanFromUntyped<ColorAttachmentIndex>(
@@ -1251,8 +1255,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
                 }
             }
 
-            const RenderPassPixelLocalStorage* pls = nullptr;
-            FindInChain(descriptor->nextInChain, &pls);
+            auto pls = descriptor.Get<RenderPassPixelLocalStorage>();
             if (pls != nullptr) {
                 for (size_t i = 0; i < pls->storageAttachmentCount; i++) {
                     const RenderPassStorageAttachment& apiAttachment = pls->storageAttachments[i];
@@ -1275,7 +1278,7 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
 
             return {};
         },
-        "encoding %s.BeginRenderPass(%s).", this, descriptor);
+        "encoding %s.BeginRenderPass(%s).", this, *descriptor);
 
     if (success) {
         Ref<RenderPassEncoder> passEncoder = RenderPassEncoder::Create(
@@ -1286,26 +1289,22 @@ Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescripto
         mEncodingContext.EnterPass(passEncoder.Get());
 
         MaybeError error;
-
         if (validationState.GetImplicitSampleCount() > 1) {
-            error = ApplyMSAARenderToSingleSampledLoadOp(device, passEncoder.Get(), descriptor,
+            error = ApplyMSAARenderToSingleSampledLoadOp(device, passEncoder.Get(), *descriptor,
                                                          validationState.GetImplicitSampleCount());
-        } else if (ShouldApplyClearBigIntegerColorValueWithDraw(device, descriptor)) {
+        } else if (ShouldApplyClearBigIntegerColorValueWithDraw(device, *descriptor)) {
             // This is skipped if implicitSampleCount > 1. Because implicitSampleCount > 1 is only
             // supported for non-integer textures.
-            error = ApplyClearBigIntegerColorValueWithDraw(passEncoder.Get(), descriptor);
+            error = ApplyClearBigIntegerColorValueWithDraw(passEncoder.Get(), *descriptor);
         }
-
         if (device->ConsumedError(std::move(error))) {
-            return RenderPassEncoder::MakeError(device, this, &mEncodingContext,
-                                                descriptor ? descriptor->label : nullptr);
+            return makeError();
         }
 
         return passEncoder;
     }
 
-    return RenderPassEncoder::MakeError(device, this, &mEncodingContext,
-                                        descriptor ? descriptor->label : nullptr);
+    return makeError();
 }
 
 // This function handles render pass workarounds. Because some cases may require

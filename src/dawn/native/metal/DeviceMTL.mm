@@ -229,7 +229,8 @@ ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     const SwapChainDescriptor* descriptor) {
     return SwapChain::Create(this, surface, previousSwapChain, descriptor);
 }
-ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
+ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
+    const Unpacked<TextureDescriptor>& descriptor) {
     return Texture::Create(this, descriptor);
 }
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
@@ -362,12 +363,13 @@ Ref<Texture> Device::CreateTextureWrappingIOSurface(
     const ExternalImageDescriptor* descriptor,
     IOSurfaceRef ioSurface,
     std::vector<MTLSharedEventAndSignalValue> waitEvents) {
-    const TextureDescriptor* textureDescriptor = FromAPI(descriptor->cTextureDescriptor);
+    Unpacked<TextureDescriptor> textureDescriptor;
     if (ConsumedError(ValidateIsAlive())) {
         return nullptr;
     }
-    if (ConsumedError(ValidateTextureDescriptor(this, textureDescriptor,
-                                                AllowMultiPlanarTextureFormat::Yes))) {
+    if (ConsumedError(ValidateTextureDescriptor(this, FromAPI(descriptor->cTextureDescriptor),
+                                                AllowMultiPlanarTextureFormat::Yes),
+                      &textureDescriptor)) {
         return nullptr;
     }
     if (ConsumedError(ValidateIOSurfaceCanBeWrapped(this, textureDescriptor, ioSurface))) {
@@ -383,9 +385,9 @@ Ref<Texture> Device::CreateTextureWrappingIOSurface(
     }
 
     Ref<Texture> result;
-    if (ConsumedError(
-            Texture::CreateFromIOSurface(this, descriptor, ioSurface, std::move(waitEvents)),
-            &result)) {
+    if (ConsumedError(Texture::CreateFromIOSurface(this, descriptor, textureDescriptor, ioSurface,
+                                                   std::move(waitEvents)),
+                      &result)) {
         return nullptr;
     }
     return result;
