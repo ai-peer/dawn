@@ -317,6 +317,7 @@ class Unpacked {
     Unpacked() : mStruct(nullptr) {}
     explicit Unpacked(const T* packed) : mStruct(packed) {}
 
+    operator bool() const { return mStruct != nullptr; }
     const T* operator->() const { return mStruct; }
     const T& operator*() const { return *mStruct; }
 
@@ -342,6 +343,7 @@ class UnpackedOut {
     UnpackedOut() : mStruct(nullptr) {}
     explicit UnpackedOut(T* packed) : mStruct(packed) {}
 
+    operator bool() const { return mStruct != nullptr; }
     T* operator->() const { return mStruct; }
     T& operator*() const { return *mStruct; }
 
