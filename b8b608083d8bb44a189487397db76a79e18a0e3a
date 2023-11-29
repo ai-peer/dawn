@@ -39,6 +39,30 @@
       },
       "revId": "b8b608083d8bb44a189487397db76a79e18a0e3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "049aaefe_a03d4840",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2023-11-29T15:32:23Z",
+      "side": 1,
+      "message": "This has the nice side effect that we can easily do the \"merge barriers\" from the comment in the old printer. We walk the instruction list, find the barriers which are beside each other, and just or the values together.",
+      "parentUuid": "2b37a4f2_9fb11491",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 13
+      },
+      "revId": "b8b608083d8bb44a189487397db76a79e18a0e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
