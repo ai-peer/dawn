@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2335a3cd_29dda5fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-29T17:58:10Z",
+      "side": 1,
+      "message": "fyi I used mb.py to verify that https://chromium-swarm.appspot.com/task?id\u003d66350b5cd6009510 before the fix fails and https://chromium-swarm.appspot.com/task?id\u003d66350ae9f53dee10 after the fix passes",
+      "revId": "ba52e470c70d7d6e268180f542c182a5ad1b6434",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
