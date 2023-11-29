@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9cda6b5_9927c44a",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 592,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-29T19:15:09Z",
+      "side": 1,
+      "message": "nit: std::array and use .data() and .size()",
+      "range": {
+        "startLine": 588,
+        "startChar": 8,
+        "endLine": 592,
+        "endChar": 59
+      },
+      "revId": "34d6babdd2635a0e4d3c9964f7d0e472fa7f22a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

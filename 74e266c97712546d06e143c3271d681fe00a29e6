@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d905b4d_50d80398",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-29T19:15:09Z",
+      "side": 1,
+      "message": "LGTM overall too; will let gregg take a review",
+      "parentUuid": "7527e77b_5d95eaaa",
+      "revId": "74e266c97712546d06e143c3271d681fe00a29e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "96b2ff35_2542f747",
