@@ -218,7 +218,8 @@ ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     const SwapChainDescriptor* descriptor) {
     return SwapChain::Create(this, surface, previousSwapChain, descriptor);
 }
-ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
+ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
+    const Unpacked<TextureDescriptor>& descriptor) {
     return AcquireRef(new Texture(this, descriptor));
 }
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
@@ -514,7 +515,7 @@ MaybeError SwapChain::PresentImpl() {
 
 ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
     TextureDescriptor textureDesc = GetSwapChainBaseTextureDescriptor(this);
-    mTexture = AcquireRef(new Texture(GetDevice(), &textureDesc));
+    mTexture = AcquireRef(new Texture(GetDevice(), Unpack(&textureDesc)));
     return mTexture;
 }
 
@@ -548,7 +549,7 @@ bool Device::IsResolveTextureBlitWithDrawSupported() const {
     return true;
 }
 
-Texture::Texture(DeviceBase* device, const TextureDescriptor* descriptor)
+Texture::Texture(DeviceBase* device, const Unpacked<TextureDescriptor>& descriptor)
     : TextureBase(device, descriptor) {}
 
 }  // namespace dawn::native::null

@@ -58,9 +58,10 @@ MaybeError ValidateVideoTextureCanBeShared(Device* device, DXGI_FORMAT textureFo
 
 class Texture final : public d3d::Texture {
   public:
-    static ResultOrError<Ref<Texture>> Create(Device* device, const TextureDescriptor* descriptor);
     static ResultOrError<Ref<Texture>> Create(Device* device,
-                                              const TextureDescriptor* descriptor,
+                                              const Unpacked<TextureDescriptor>& descriptor);
+    static ResultOrError<Ref<Texture>> Create(Device* device,
+                                              const Unpacked<TextureDescriptor>& descriptor,
                                               ComPtr<ID3D11Resource> d3d11Texture);
     static ResultOrError<Ref<Texture>> CreateExternalImage(Device* device,
                                                            const TextureDescriptor* descriptor,

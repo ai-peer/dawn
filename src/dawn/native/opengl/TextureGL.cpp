@@ -185,7 +185,8 @@ void AllocateTexture(const OpenGLFunctions& gl,
 // Texture
 
 // static
-ResultOrError<Ref<Texture>> Texture::Create(Device* device, const TextureDescriptor* descriptor) {
+ResultOrError<Ref<Texture>> Texture::Create(Device* device,
+                                            const Unpacked<TextureDescriptor>& descriptor) {
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
     if (device->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting)) {
         DAWN_TRY(
@@ -194,7 +195,7 @@ ResultOrError<Ref<Texture>> Texture::Create(Device* device, const TextureDescrip
     return std::move(texture);
 }
 
-Texture::Texture(Device* device, const TextureDescriptor* descriptor)
+Texture::Texture(Device* device, const Unpacked<TextureDescriptor>& descriptor)
     : Texture(device, descriptor, 0) {
     const OpenGLFunctions& gl = device->GetGL();
 
