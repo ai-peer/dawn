@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28d97ee5_2e0bf527",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-29T19:54:53Z",
+      "side": 1,
+      "message": "FYI, fetch_dawn_dependencies.py is still broken even after this change\n\nhttps://github.com/google/dawn/actions/runs/7034809858/job/19143713798",
+      "revId": "c5f72f7a85aeeb21d7a9a12f28918970def41880",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
