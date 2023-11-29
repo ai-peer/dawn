@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "b8b608083d8bb44a189487397db76a79e18a0e3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b37a4f2_9fb11491",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-29T15:30:39Z",
+      "side": 1,
+      "message": "Hmm. The main justification (I thought) for converting core builtins to dialect-specific ones in transforms was to keep the printer nice and simple. But this code is actually much more complicated than just doing the mapping in the printer (since you have to reverse the map here).\n\nDo we really want to be purist about this and convert *every* builtin?",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 13
+      },
+      "revId": "b8b608083d8bb44a189487397db76a79e18a0e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
