@@ -583,6 +583,10 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
     const Format* viewFormat;
     DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(descriptor->format));
 
+    DAWN_INVALID_IF(device->IsCompatibilityMode() && format.format != viewFormat->format,
+                    "viewFormat (%s) must match format (%s) in compatibility mode.",
+                    viewFormat->format, format.format);
+
     const auto aspect = SelectFormatAspects(format, descriptor->aspect);
     DAWN_INVALID_IF(aspect == Aspect::None,
                     "Texture format (%s) does not have the texture view's selected aspect (%s).",
