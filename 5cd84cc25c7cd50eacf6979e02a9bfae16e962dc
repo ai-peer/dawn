@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0b479e78_f8069f47",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-29T00:13:56Z",
+      "side": 1,
+      "message": "Note: this might require CTS changes to land before committing but it should be ready to review.",
+      "revId": "5cd84cc25c7cd50eacf6979e02a9bfae16e962dc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
