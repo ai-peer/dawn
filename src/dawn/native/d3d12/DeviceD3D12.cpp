@@ -457,7 +457,8 @@ ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     const SwapChainDescriptor* descriptor) {
     return SwapChain::Create(this, surface, previousSwapChain, descriptor);
 }
-ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(const TextureDescriptor* descriptor) {
+ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
+    const Unpacked<TextureDescriptor>& descriptor) {
     return Texture::Create(this, descriptor);
 }
 ResultOrError<Ref<TextureViewBase>> Device::CreateTextureViewImpl(
@@ -622,9 +623,9 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
                                                              IID_PPV_ARGS(&d3d12Resource)),
                           "D3D12 opening shared handle"));
 
-    const TextureDescriptor* textureDescriptor =
-        FromAPI(sharedHandleDescriptor->cTextureDescriptor);
-
+    Unpacked<TextureDescriptor> textureDescriptor;
+    DAWN_TRY_ASSIGN(textureDescriptor,
+                    ValidateAndUnpack(FromAPI(sharedHandleDescriptor->cTextureDescriptor)));
     DAWN_TRY(
         ValidateTextureDescriptor(this, textureDescriptor, AllowMultiPlanarTextureFormat::Yes));
 
@@ -646,7 +647,7 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
                                                         textureDescriptor);
 }
 
-Ref<TextureBase> Device::CreateD3DExternalTexture(const TextureDescriptor* descriptor,
+Ref<TextureBase> Device::CreateD3DExternalTexture(const Unpacked<TextureDescriptor>& descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
                                                   std::vector<Ref<d3d::Fence>> waitFences,
                                                   bool isSwapChainTexture,
