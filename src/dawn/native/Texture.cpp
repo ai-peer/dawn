@@ -453,15 +453,15 @@ bool CopySrcNeedsInternalTextureBindingUsage(const DeviceBase* device, const For
 
 wgpu::TextureViewDimension ResolveDefaultCompatiblityTextureBindingViewDimension(
     const DeviceBase* device,
-    const TextureDescriptor* descriptor) {
+    const Unpacked<TextureDescriptor>& descriptor) {
     // In non-compatibility mode this value is not used so return undefined so that it is not
     // used by mistake.
     if (!device->IsCompatibilityMode()) {
         return wgpu::TextureViewDimension::Undefined;
     }
 
-    const TextureBindingViewDimensionDescriptor* textureBindingViewDimensionDescriptor = nullptr;
-    FindInChain(descriptor->nextInChain, &textureBindingViewDimensionDescriptor);
+    auto textureBindingViewDimensionDescriptor =
+        descriptor.Get<TextureBindingViewDimensionDescriptor>();
     const auto textureBindingViewDimension =
         textureBindingViewDimensionDescriptor == nullptr
             ? wgpu::TextureViewDimension::Undefined
@@ -484,18 +484,15 @@ wgpu::TextureViewDimension ResolveDefaultCompatiblityTextureBindingViewDimension
 
 }  // anonymous namespace
 
-MaybeError ValidateTextureDescriptor(
+ResultOrError<Unpacked<TextureDescriptor>> ValidateTextureDescriptor(
     const DeviceBase* device,
-    const TextureDescriptor* descriptor,
+    const TextureDescriptor* rawDescriptor,
     AllowMultiPlanarTextureFormat allowMultiPlanar,
     std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage) {
-    DAWN_TRY(ValidateSTypes(descriptor->nextInChain,
-                            {{wgpu::SType::DawnTextureInternalUsageDescriptor,
-                              wgpu::SType::TextureBindingViewDimensionDescriptor}}));
+    Unpacked<TextureDescriptor> descriptor;
+    DAWN_TRY_ASSIGN(descriptor, ValidateAndUnpack(rawDescriptor));
 
-    const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &internalUsageDesc);
-
+    auto internalUsageDesc = descriptor.Get<DawnTextureInternalUsageDescriptor>();
     DAWN_INVALID_IF(
         internalUsageDesc != nullptr && !device->HasFeature(Feature::DawnInternalUsages),
         "The internalUsageDesc is not empty while the dawn-internal-usages feature is not "
@@ -531,7 +528,7 @@ MaybeError ValidateTextureDescriptor(
         usage |= internalUsageDesc->internalUsage;
     }
 
-    DAWN_TRY(ValidateTextureUsage(device, descriptor, usage, format,
+    DAWN_TRY(ValidateTextureUsage(device, *descriptor, usage, format,
                                   std::move(allowedSharedTextureMemoryUsage)));
     DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
     if (device->IsCompatibilityMode()) {
@@ -544,7 +541,7 @@ MaybeError ValidateTextureDescriptor(
             "The textureBindingViewDimension (%s) is not compatible with the dimension (%s)",
             textureBindingViewDimension, descriptor->dimension);
     }
-    DAWN_TRY(ValidateSampleCount(descriptor, usage, format));
+    DAWN_TRY(ValidateSampleCount(*descriptor, usage, format));
 
     DAWN_INVALID_IF(descriptor->size.width == 0 || descriptor->size.height == 0 ||
                         descriptor->size.depthOrArrayLayers == 0 || descriptor->mipLevelCount == 0,
@@ -562,8 +559,8 @@ MaybeError ValidateTextureDescriptor(
                     "The dimension (%s) of a texture with a depth/stencil format (%s) is not 2D.",
                     descriptor->dimension, format->format);
 
-    DAWN_TRY(ValidateTextureSize(device, descriptor, format));
-    return {};
+    DAWN_TRY(ValidateTextureSize(device, *descriptor, format));
+    return descriptor;
 }
 
 MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
@@ -702,7 +699,7 @@ bool IsValidSampleCount(uint32_t sampleCount) {
 
 TextureBase::TextureState::TextureState() : hasAccess(true), destroyed(false) {}
 
-TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor)
+TextureBase::TextureBase(DeviceBase* device, const Unpacked<TextureDescriptor>& descriptor)
     : ApiObjectBase(device, descriptor->label),
       mDimension(descriptor->dimension),
       mCompatibilityTextureBindingViewDimension(
@@ -726,8 +723,7 @@ TextureBase::TextureBase(DeviceBase* device, const TextureDescriptor* descriptor
         mViewFormats[device->GetValidInternalFormat(descriptor->viewFormats[i])] = true;
     }
 
-    const DawnTextureInternalUsageDescriptor* internalUsageDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &internalUsageDesc);
+    auto internalUsageDesc = descriptor.Get<DawnTextureInternalUsageDescriptor>();
     if (internalUsageDesc != nullptr) {
         mInternalUsage |= internalUsageDesc->internalUsage;
     }
@@ -769,7 +765,7 @@ TextureBase::TextureBase(DeviceBase* device,
     : ApiObjectBase(device, tag, descriptor->label),
       mDimension(descriptor->dimension),
       mCompatibilityTextureBindingViewDimension(
-          ResolveDefaultCompatiblityTextureBindingViewDimension(device, descriptor)),
+          ResolveDefaultCompatiblityTextureBindingViewDimension(device, Unpack(descriptor))),
       mFormat(kUnusedFormat),
       mBaseSize(descriptor->size),
       mMipLevelCount(descriptor->mipLevelCount),

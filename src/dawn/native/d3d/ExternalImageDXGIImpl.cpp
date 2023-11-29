@@ -166,7 +166,7 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
 
     Ref<TextureBase> texture =
         ToBackend(mBackendDevice.Get())
-            ->CreateD3DExternalTexture(&textureDescriptor, mD3DResource, std::move(waitFences),
+            ->CreateD3DExternalTexture(Unpack(&textureDescriptor), mD3DResource, std::move(waitFences),
                                        descriptor->isSwapChainTexture, descriptor->isInitialized);
 
     if (mDXGIKeyedMutex && mAccessCount == 0) {

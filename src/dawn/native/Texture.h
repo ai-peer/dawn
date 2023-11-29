@@ -33,6 +33,7 @@
 #include "dawn/common/WeakRef.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Format.h"
 #include "dawn/native/Forward.h"
@@ -49,9 +50,9 @@ enum class AllowMultiPlanarTextureFormat {
     Yes,
 };
 
-MaybeError ValidateTextureDescriptor(
+ResultOrError<Unpacked<TextureDescriptor>> ValidateTextureDescriptor(
     const DeviceBase* device,
-    const TextureDescriptor* descriptor,
+    const TextureDescriptor* rawDescriptor,
     AllowMultiPlanarTextureFormat allowMultiPlanar = AllowMultiPlanarTextureFormat::No,
     std::optional<wgpu::TextureUsage> allowedSharedTextureMemoryUsage = std::nullopt);
 MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
@@ -158,7 +159,7 @@ class TextureBase : public ApiObjectBase {
     wgpu::TextureUsage APIGetUsage() const;
 
   protected:
-    TextureBase(DeviceBase* device, const TextureDescriptor* descriptor);
+    TextureBase(DeviceBase* device, const Unpacked<TextureDescriptor>& descriptor);
     ~TextureBase() override;
 
     void DestroyImpl() override;
