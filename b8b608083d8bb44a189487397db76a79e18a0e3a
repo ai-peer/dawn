@@ -63,6 +63,30 @@
       },
       "revId": "b8b608083d8bb44a189487397db76a79e18a0e3a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b697591e_0e41c0ad",
+        "filename": "src/tint/lang/msl/writer/printer/printer.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 783,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-11-29T15:36:06Z",
+      "side": 1,
+      "message": "This also removes the weirdness from the printer in that these are argument-less in WGSL (workgroupBarrier) but argumented in MSL (threadgroupBarier(mem_blah)) which means the printer does a weird early exit when it emits these compared to the other builtins.",
+      "parentUuid": "049aaefe_a03d4840",
+      "range": {
+        "startLine": 761,
+        "startChar": 0,
+        "endLine": 783,
+        "endChar": 13
+      },
+      "revId": "b8b608083d8bb44a189487397db76a79e18a0e3a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
