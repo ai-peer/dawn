@@ -116,6 +116,7 @@ if(TINT_BUILD_MSL_WRITER)
     tint_lang_msl_writer_ast_printer_test
     tint_lang_msl_writer_common_test
     tint_lang_msl_writer_printer_test
+    tint_lang_msl_writer_raise_test
   )
 endif(TINT_BUILD_MSL_WRITER)
 

@@ -113,6 +113,7 @@ if (tint_build_unittests) {
         "${tint_src_dir}/lang/msl/writer/ast_printer:unittests",
         "${tint_src_dir}/lang/msl/writer/common:unittests",
         "${tint_src_dir}/lang/msl/writer/printer:unittests",
+        "${tint_src_dir}/lang/msl/writer/raise:unittests",
       ]
     }
 

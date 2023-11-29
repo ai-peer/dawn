@@ -106,6 +106,7 @@ cc_binary(
       "//src/tint/lang/msl/writer/ast_printer:test",
       "//src/tint/lang/msl/writer/common:test",
       "//src/tint/lang/msl/writer/printer:test",
+      "//src/tint/lang/msl/writer/raise:test",
     ],
     "//conditions:default": [],
   }) + select({
