@@ -236,6 +236,8 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (mFunctions.IsGLExtensionSupported("GL_EXT_texture_norm16")) {
         EnableFeature(Feature::Norm16TextureFormats);
     }
+
+    EnableFeature(Feature::ChromiumExperimentalDp4a);
 }
 
 namespace {
@@ -397,6 +399,10 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
 
     // Use a blit to emulate stencil-only buffer-to-texture copies.
     deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);
+
+    // Always enable the polyfill of dot4I8Packed() and dot4U8Packed() as DP4A instructions are not
+    // supported on OpenGL backends.
+    deviceToggles->ForceSet(Toggle::PolyFillPacked4x8DotProduct, true);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(AdapterBase* adapter,
