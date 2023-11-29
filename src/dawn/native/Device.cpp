@@ -1544,37 +1544,27 @@ void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
 
 bool DeviceBase::APIGetLimits(SupportedLimits* limits) const {
     DAWN_ASSERT(limits != nullptr);
-    // TODO(dawn:1955): Revisit after deciding how to improve the validation for ChainedStructOut.
-    MaybeError result =
-        ValidateSTypes(limits->nextInChain, {{wgpu::SType::DawnExperimentalSubgroupLimits}});
-    if (GetPhysicalDevice()->GetInstance()->ConsumedError(std::move(result))) {
-        return false;
-    }
+    InstanceBase* instance = GetPhysicalDevice()->GetInstance();
+
+    Unpacked<SupportedLimits> unpacked;
+    DAWN_TRY_ASSIGN_WITH_CLEANUP(
+        unpacked, ValidateAndUnpack(limits),
+        { instance->ConsumedError(std::move(DAWN_LOCAL_VAR(Error))); }, false);
 
     limits->limits = mLimits.v1;
 
-    for (auto* chain = limits->nextInChain; chain; chain = chain->nextInChain) {
-        wgpu::ChainedStructOut originalChain = *chain;
-        switch (chain->sType) {
-            case (wgpu::SType::DawnExperimentalSubgroupLimits): {
-                DawnExperimentalSubgroupLimits* subgroupLimits =
-                    reinterpret_cast<DawnExperimentalSubgroupLimits*>(chain);
-                if (!mToggles.IsEnabled(Toggle::AllowUnsafeAPIs)) {
-                    // If AllowUnsafeAPIs is not enabled, return the default-initialized
-                    // DawnExperimentalSubgroupLimits object, where minSubgroupSize and
-                    // maxSubgroupSize are WGPU_LIMIT_U32_UNDEFINED.
-                    *subgroupLimits = DawnExperimentalSubgroupLimits{};
-                } else {
-                    *subgroupLimits = mLimits.experimentalSubgroupLimits;
-                }
-                break;
-            }
-            default:
-                DAWN_UNREACHABLE();
+    auto subgroupLimits = unpacked.Get<DawnExperimentalSubgroupLimits>();
+    if (subgroupLimits) {
+        if (!mToggles.IsEnabled(Toggle::AllowUnsafeAPIs)) {
+            // If AllowUnsafeAPIs is not enabled, return the default-initialized
+            // DawnExperimentalSubgroupLimits object, where minSubgroupSize and
+            // maxSubgroupSize are WGPU_LIMIT_U32_UNDEFINED.
+            *subgroupLimits = DawnExperimentalSubgroupLimits{};
+        } else {
+            *subgroupLimits = mLimits.experimentalSubgroupLimits;
         }
-        // Recover the original chain
-        *chain = originalChain;
     }
+
     return true;
 }
 
@@ -1609,7 +1599,10 @@ void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* desc) {
     } else {
         allowMultiPlanar = AllowMultiPlanarTextureFormat::No;
     }
-    DAWN_UNUSED(ConsumedError(ValidateTextureDescriptor(this, desc, allowMultiPlanar)));
+    Unpacked<TextureDescriptor> unpacked;
+    if (!ConsumedError(ValidateAndUnpack(desc), &unpacked)) {
+        DAWN_UNUSED(ConsumedError(ValidateTextureDescriptor(this, unpacked, allowMultiPlanar)));
+    }
 }
 
 QueueBase* DeviceBase::GetQueue() const {
@@ -1887,8 +1880,9 @@ ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
     return newSwapChain;
 }
 
-ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* descriptor) {
+ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* rawDescriptor) {
     DAWN_TRY(ValidateIsAlive());
+    Unpacked<TextureDescriptor> descriptor;
     if (IsValidationEnabled()) {
         AllowMultiPlanarTextureFormat allowMultiPlanar;
         if (HasFeature(Feature::MultiPlanarFormatExtendedUsages)) {
@@ -1896,8 +1890,12 @@ ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescripto
         } else {
             allowMultiPlanar = AllowMultiPlanarTextureFormat::No;
         }
+        DAWN_TRY_ASSIGN_CONTEXT(descriptor, ValidateAndUnpack(rawDescriptor), "validating %s.",
+                                rawDescriptor);
         DAWN_TRY_CONTEXT(ValidateTextureDescriptor(this, descriptor, allowMultiPlanar),
-                         "validating %s.", descriptor);
+                         "validating %s.", rawDescriptor);
+    } else {
+        descriptor = Unpack(rawDescriptor);
     }
     return CreateTextureImpl(descriptor);
 }
