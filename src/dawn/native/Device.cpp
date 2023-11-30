@@ -2174,6 +2174,36 @@ bool DeviceBase::IsLockedByCurrentThreadIfNeeded() const {
     return mMutex == nullptr || mMutex->IsLockedByCurrentThread();
 }
 
+ResultOrError<TextureViewBase*> DeviceBase::GetOrCreateCachedImplicitPixelLocalStorageAttachment(
+    uint32_t width,
+    uint32_t height,
+    uint32_t nextImplicitAttachmentIndex) {
+    DAWN_ASSERT(nextImplicitAttachmentIndex <= kMaxPLSSlots);
+
+    TextureViewBase* currentAttachmentView =
+        mImplicitPixelLocalStorageAttachmentTextureViews[nextImplicitAttachmentIndex].Get();
+    if (currentAttachmentView == nullptr ||
+        currentAttachmentView->GetTexture()->GetWidth(Aspect::Color) < width ||
+        currentAttachmentView->GetTexture()->GetHeight(Aspect::Color) < height) {
+        // Create one 2D texture for each attachment. Note that currently on D3D11 backend we cannot
+        // create a Texture2D UAV on a 2D array texture with baseArrayLayer > 0 because D3D11
+        // requires the Unordered Access View dimension declared in the shader code must match the
+        // view type bound to the Pixel Shader unit, while TEXTURE2D doesn't match TEXTURE2DARRAY.
+        TextureDescriptor desc;
+        desc.dimension = wgpu::TextureDimension::e2D;
+        desc.format = RenderPipelineBase::kImplicitPLSSlotFormat;
+        desc.usage = wgpu::TextureUsage::StorageAttachment;
+        desc.size = {width, height, 1};
+
+        Ref<TextureBase> newAttachment;
+        DAWN_TRY_ASSIGN(newAttachment, CreateTexture(&desc));
+        DAWN_TRY_ASSIGN(
+            mImplicitPixelLocalStorageAttachmentTextureViews[nextImplicitAttachmentIndex],
+            newAttachment->CreateView());
+    }
+    return mImplicitPixelLocalStorageAttachmentTextureViews[nextImplicitAttachmentIndex].Get();
+}
+
 IgnoreLazyClearCountScope::IgnoreLazyClearCountScope(DeviceBase* device)
     : mDevice(device), mLazyClearCountForTesting(device->mLazyClearCountForTesting) {}
 

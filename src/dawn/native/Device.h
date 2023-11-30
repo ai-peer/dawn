@@ -467,6 +467,11 @@ class DeviceBase : public RefCountedWithExternalCount {
     ExecutionSerial GetLastSubmittedCommandSerial() const;
     ExecutionSerial GetPendingCommandSerial() const;
 
+    ResultOrError<TextureViewBase*> GetOrCreateCachedImplicitPixelLocalStorageAttachment(
+        uint32_t width,
+        uint32_t height,
+        uint32_t nextImplicitAttachmentIndex);
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
@@ -621,6 +626,8 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     // This pointer is non-null if Feature::ImplicitDeviceSynchronization is turned on.
     Ref<Mutex> mMutex = nullptr;
+
+    std::array<Ref<TextureViewBase>, kMaxPLSSlots> mImplicitPixelLocalStorageAttachmentTextureViews;
 };
 
 ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescriptorWithDefaults(
