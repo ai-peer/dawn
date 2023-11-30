@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "8345619bd24fe7ab6f3fdbfa1325547af72907bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5331c4a2_a052b4ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-30T13:19:04Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8345619bd24fe7ab6f3fdbfa1325547af72907bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d3e9a4a_1ad36421",
+        "filename": "src/dawn/tests/end2end/ExperimentalDP4aTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-30T13:19:04Z",
+      "side": 1,
+      "message": "BTW isn\u0027t this going to be a language feature eventually?\n\nhttps://dawn-review.googlesource.com/c/dawn/+/162500 for context",
+      "revId": "8345619bd24fe7ab6f3fdbfa1325547af72907bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
