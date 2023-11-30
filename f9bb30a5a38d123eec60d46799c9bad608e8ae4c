@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "f9bb30a5a38d123eec60d46799c9bad608e8ae4c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c2b5234e_76b4e353",
+        "filename": "test/tint/types/module_scope_private_initializers.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 6,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-11-30T21:31:02Z",
+      "side": 1,
+      "message": "As soon as we add a DCE transform this will get removed and will never hit the printers.\n\nNot going to block this CL, but I think going forward we should start making sure all new E2E tests will be robust in the presence of DCE/constant folding/etc.",
+      "revId": "f9bb30a5a38d123eec60d46799c9bad608e8ae4c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
