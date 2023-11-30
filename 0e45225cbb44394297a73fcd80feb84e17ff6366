@@ -16,6 +16,24 @@
       "message": "I wanted to do the INIT structs before this because of this, but I also want to get this mostly out of the way. I\u0027m not sure how high the risk of breakage is.",
       "revId": "0e45225cbb44394297a73fcd80feb84e17ff6366",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5aa7a9a_ef22e610",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 6
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-30T18:50:02Z",
+      "side": 1,
+      "message": "This should only be able to break rolls into projects that use the C API, as the C++ API still has the defaults. The main user of the C API is Blink, and it\u0027s unlikely to break because it has to explicitly set every field anyway (to the value we get from the bindings).",
+      "parentUuid": "ec44637d_9b3c3834",
+      "revId": "0e45225cbb44394297a73fcd80feb84e17ff6366",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

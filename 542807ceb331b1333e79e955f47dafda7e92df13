@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5743d172_99c208dc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-11-30T18:50:02Z",
+      "side": 1,
+      "message": "PTAL, should pass now\n\ndsinclair FYI as this has a chance to break rolls (see description/comment)",
+      "revId": "542807ceb331b1333e79e955f47dafda7e92df13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
