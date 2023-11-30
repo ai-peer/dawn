@@ -1,0 +1,101 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70e495d9_1e809b20",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 3667,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-30T10:32:17Z",
+      "side": 1,
+      "message": "Maybe shove another 0 in the middle of these numbers? Maybe I\u0027m delusional, but it doesn\u0027t seem impossible that these might touch, one day.",
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ebc8dcff_a4e4483c",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-30T10:32:17Z",
+      "side": 1,
+      "message": "`enable \u003d false`\n\nI wouldn\u0027t rely on compiler warnings to prevent uninitialized variable usages.",
+      "range": {
+        "startLine": 603,
+        "startChar": 13,
+        "endLine": 603,
+        "endChar": 19
+      },
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfa4b591_73b21158",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-30T10:32:17Z",
+      "side": 1,
+      "message": "While the call-twice pattern might be familiar by C programmers, it would still be good to document. That said, I personally feel that having a separate function for returning the number is a cleaner API.\n\nThe `strncpy` crowd would also argue it\u0027s safer for a function like this to take a max-count argument.",
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6659fee_d6ee1857",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-30T10:32:17Z",
+      "side": 1,
+      "message": "It\u0027s unclear to me whether all the members of these generated types are initialized or not. It _appears_ that this struct is fully zero initialized, but in the same file I see structs that are partially initialized:\n\n```\n    struct BindGroupLayoutDescriptor {\n        ChainedStruct const * nextInChain \u003d nullptr;\n        char const * label \u003d nullptr;\n        size_t entryCount;\n        BindGroupLayoutEntry const * entries;\n    };\n```\n\nIf the intention is that all these generated structs are zero initialized, then there\u0027s some work needed to fix these. Otherwise, please add a `{}` before the `;`",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 42
+      },
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16cbabc3_ea6d0340",
+        "filename": "src/dawn/wire/client/Instance.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-11-30T10:32:17Z",
+      "side": 1,
+      "message": "Same comments of `instance.h` apply here",
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
