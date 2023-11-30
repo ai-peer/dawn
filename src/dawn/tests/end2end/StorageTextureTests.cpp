@@ -877,6 +877,64 @@ TEST_P(StorageTextureTests, SampledAndWriteonlyStorageTexturePingPong) {
     EXPECT_BUFFER_U32_EQ(kFinalPixelValueInTexture1, resultBuffer, 0);
 }
 
+// Verify writing into a layer of 2D texture array works correctly.
+TEST_P(StorageTextureTests, WriteIntoOneTexture2DArrayLayer) {
+    constexpr wgpu::TextureFormat kTextureFormat = wgpu::TextureFormat::R32Uint;
+    wgpu::Texture storageTexture =
+        CreateTexture(kTextureFormat,
+                      wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::StorageBinding |
+                          wgpu::TextureUsage::CopySrc,
+                      {1u, 1u, 4u});
+
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+@group(0) @binding(0) var Dst : texture_storage_2d<r32uint, write>;
+@compute @workgroup_size(1) fn main() {
+  textureStore(Dst, vec2i(0, 0), vec4u(8u, 0, 0, 1u));
+}
+    )");
+
+    wgpu::ComputePipelineDescriptor pipelineDesc = {};
+    pipelineDesc.compute.module = module;
+    pipelineDesc.compute.entryPoint = "main";
+    wgpu::ComputePipeline pipeline = device.CreateComputePipeline(&pipelineDesc);
+
+    constexpr uint32_t kLayerToCopy = 2u;
+    wgpu::TextureViewDescriptor textureViewDescriptor;
+    textureViewDescriptor.dimension = wgpu::TextureViewDimension::e2D;
+    textureViewDescriptor.arrayLayerCount = 1;
+    textureViewDescriptor.baseArrayLayer = kLayerToCopy;
+    wgpu::BindGroup bindGroup =
+        utils::MakeBindGroup(device, pipeline.GetBindGroupLayout(0),
+                             {{0, storageTexture.CreateView(&textureViewDescriptor)}});
+
+    wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+    wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
+    pass.SetPipeline(pipeline);
+    pass.SetBindGroup(0, bindGroup);
+    pass.DispatchWorkgroups(1);
+    pass.End();
+
+    wgpu::BufferDescriptor bufferDescriptor;
+    bufferDescriptor.size = sizeof(uint32_t);
+    bufferDescriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+    wgpu::Buffer resultBuffer = device.CreateBuffer(&bufferDescriptor);
+
+    wgpu::ImageCopyTexture imageCopyTexture;
+    imageCopyTexture.texture = storageTexture;
+    imageCopyTexture.origin = {0, 0, kLayerToCopy};
+
+    wgpu::ImageCopyBuffer imageCopyBuffer =
+        utils::CreateImageCopyBuffer(resultBuffer, 0, kTextureBytesPerRowAlignment, 1);
+    wgpu::Extent3D extent3D = {1, 1, 1};
+    encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &extent3D);
+
+    wgpu::CommandBuffer commands = encoder.Finish();
+    queue.Submit(1, &commands);
+
+    constexpr uint32_t kFinalPixelValueInTexture1 = 8u;
+    EXPECT_BUFFER_U32_EQ(kFinalPixelValueInTexture1, resultBuffer, 0);
+}
+
 DAWN_INSTANTIATE_TEST(StorageTextureTests,
                       D3D11Backend(),
                       D3D12Backend(),
