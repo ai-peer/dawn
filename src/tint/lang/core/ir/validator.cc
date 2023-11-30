@@ -27,6 +27,7 @@
 
 #include "src/tint/lang/core/ir/validator.h"
 
+#include <iostream>
 #include <memory>
 #include <string>
 #include <utility>
@@ -601,7 +602,7 @@ void Validator::CheckAccess(const Access* a) {
     bool is_ptr = a->Object()->Type()->Is<core::type::Pointer>();
     auto* ty = a->Object()->Type()->UnwrapPtr();
 
-    auto current = [&] { return is_ptr ? "ptr<" + ty->FriendlyName() + ">" : ty->FriendlyName(); };
+    auto current = [&] { return ty->FriendlyName(); };
 
     for (size_t i = 0; i < a->Indices().Length(); i++) {
         auto err = [&](std::string msg) {
@@ -657,11 +658,15 @@ void Validator::CheckAccess(const Access* a) {
 
     auto* want_ty = a->Result(0)->Type()->UnwrapPtr();
     bool want_ptr = a->Result(0)->Type()->Is<core::type::Pointer>();
+
+    std::cerr << is_ptr << " " << want_ptr << " -- " << ty->FriendlyName() << " "
+              << want_ty->FriendlyName() << "\n";
+
+    // TODO(dsinclair): Remove this comment. Comment out below to generate MSL
     if (TINT_UNLIKELY(ty != want_ty || is_ptr != want_ptr)) {
-        std::string want =
-            want_ptr ? "ptr<" + want_ty->FriendlyName() + ">" : want_ty->FriendlyName();
         AddError(a, InstError(a, "result of access chain is type " + current() +
-                                     " but instruction type is " + want));
+                                     " but instruction type is " +
+                                     a->Result(0)->Type()->FriendlyName()));
         return;
     }
 }
