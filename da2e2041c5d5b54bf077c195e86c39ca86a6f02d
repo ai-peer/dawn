@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce66f049_7b414b71",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2023-11-30T15:21:31Z",
+      "side": 1,
+      "message": "typo?",
+      "range": {
+        "startLine": 17,
+        "startChar": 14,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "0948d123_36150aaf",
@@ -53,6 +76,52 @@
         "startChar": 13,
         "endLine": 2180,
         "endChar": 40
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d8fe458_45f23a3b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2202,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2023-11-30T15:21:31Z",
+      "side": 1,
+      "message": "This code may release the texture which returned with previous call. It is fine, because the call site keep a ref by using `ComPtr\u003cID3D11UnorderedAccessView\u003e`. But since this method is on `DeviceBase`, I guess you will use it for other backends, right? I don\u0027t think other backends may use ref counted objects like d3d11. How do we handle that?",
+      "range": {
+        "startLine": 2199,
+        "startChar": 0,
+        "endLine": 2202,
+        "endChar": 41
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72184377_feeadd7d",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2023-11-30T15:21:31Z",
+      "side": 1,
+      "message": "Question: do we need to clear the texture unconditionally every time? Is it for correctness reason or security reason? If the dawn client will never read the texture without writing data first, do we have a way to allow client skipping this unnecessary clear?",
+      "range": {
+        "startLine": 163,
+        "startChar": 32,
+        "endLine": 163,
+        "endChar": 60
       },
       "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
