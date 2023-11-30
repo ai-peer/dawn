@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "aab078b0_5850453a",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 733,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-11-30T12:28:54Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "d108bb45dc16115066555b090808ca2bc3193f6e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "f27444ef_f6e93dd9",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 2
