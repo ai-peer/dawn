@@ -30,6 +30,7 @@
 
 #include <limits>
 #include <memory>
+#include <vector>
 
 #include "dawn/native/Buffer.h"
 #include "dawn/native/d3d/d3d_platform.h"
@@ -115,6 +116,7 @@ class Buffer final : public BufferBase {
     };
 
   private:
+    friend class CommandBuffer;
     using BufferBase::BufferBase;
 
     ~Buffer() override;
@@ -155,6 +157,8 @@ class Buffer final : public BufferBase {
     ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
     bool mConstantBufferIsUpdated = true;
     uint8_t* mMappedData = nullptr;
+
+    std::vector<uint8_t> mBuffer;
 };
 
 }  // namespace dawn::native::d3d11

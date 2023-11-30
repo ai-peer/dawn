@@ -30,6 +30,8 @@
 #include <string>
 #include <utility>
 
+#include <iostream>
+
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
@@ -71,6 +73,13 @@ void ScopedCommandRecordingContext::UpdateSubresource(ID3D11Resource* pDstResour
                                                       const void* pSrcData,
                                                       UINT SrcRowPitch,
                                                       UINT SrcDepthPitch) const {
+    ID3D11Buffer* buffer = nullptr;
+    pDstResource->QueryInterface<ID3D11Buffer>(&buffer);
+    if (buffer) {
+        D3D11_BUFFER_DESC  desc;
+        buffer->GetDesc(&desc);
+        std::cerr << "desc.Usage=" << desc.Usage << std::endl;
+    }
     mCommandContext->mD3D11DeviceContext4->UpdateSubresource(pDstResource, DstSubresource, pDstBox,
                                                              pSrcData, SrcRowPitch, SrcDepthPitch);
 }
