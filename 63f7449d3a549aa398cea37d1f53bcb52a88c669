@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20579c8a_31208d00",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-30T21:42:57Z",
+      "side": 1,
+      "message": "nit. maybe for these short strings, we could forgo the `R\"()\"` syntax? It\u0027s a bit harder to read because of the extra ()s.",
+      "range": {
+        "startLine": 1358,
+        "startChar": 38,
+        "endLine": 1359,
+        "endChar": 12
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbe983a7_ea14e48a",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-30T21:42:57Z",
+      "side": 1,
+      "message": "nit. Might be a bit easier to read if we did something like:\n\n```\nstd::ostringstream shaderSource;\nshaderSource \u003c\u003c R\"(\n    @group(0) @binding(0) var\u003cstorage, read_write\u003e dstBuf : array\u003cu32\u003e;\n    @group(0) @binding(1) var tex1 : texture_2d_array\u003cf32\u003e;\n    // Use sparse binding to test impact of binding remapping\n    @group(0) @binding(4) var tex2 : texture_multisampled_2d\u003cf32\u003e;\n)\"\nshaderSource \u003c\u003c\n    \"@group(1) @binding(3) var tex3 : \" \u003c\u003c tex3Type \u003c\u003c \"\u003cf32\u003e\";\nshaderSource \u003c\u003c R\"(\n    @compute @workgroup_size(1, 1, 1) fn main() {\n        dstBuf[0] \u003d textureNumLayers(tex1); // control case\n        dstBuf[1] \u003d textureNumLevels(tex1);\n        dstBuf[2] \u003d textureNumSamples(tex2);\n        dstBuf[3] \u003d textureNumLevels(tex3);\n        }\n)\";\n```",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 11
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc92289f_a66408fc",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-30T21:42:57Z",
+      "side": 1,
+      "message": "nit. similar comment to above, keeping the `\u003cf32\u003e` in the same line makes it look less confusing to me.",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 41
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
