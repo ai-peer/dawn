@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebb3ce5a_dae9e0d8",
+        "filename": "src/dawn/native/vulkan/QueueVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "did an alternative that should be much cleaner",
+      "parentUuid": "451e9d29_8c80e0c1",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8c64713f_09a0fedc",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-11-15T13:24:44Z",
       "side": 1,
       "message": "Is there a way to re-use the logic from SystemHandle::IsValid? Ah it\u0027s not the same types?",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96541bfd_b41b5a44",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "yea, that\u0027s correct",
+      "parentUuid": "8c64713f_09a0fedc",
       "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +128,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a885c525_2eeefe63",
+        "filename": "src/dawn/native/vulkan/SharedFenceVk.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "54b6ca07_0c792ce1",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 17
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c36f33ac_16910b06",
@@ -105,6 +165,24 @@
       "writtenOn": "2023-11-15T13:24:44Z",
       "side": 1,
       "message": "u-nit: Maybe declare right before use",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5173b001_2b34e000",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c36f33ac_16910b06",
       "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +221,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "47140d31_010f0398",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 460,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "fixed! though it has made the tests more complicated now",
+      "parentUuid": "3d4a3b65_1d818978",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7772817_b76aded8",
@@ -156,6 +252,24 @@
       "writtenOn": "2023-11-15T13:24:44Z",
       "side": 1,
       "message": "Likewise these are not exported, which is weird considering we do it in the old path.",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "344338dd_51dfb14e",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 466,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "fixed! though it has made the tests more complicated now",
+      "parentUuid": "a7772817_b76aded8",
       "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +291,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "13fb5af7_8dec1add",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 507,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "added a return in the fuchsia path otherwise it will complain about an unreachable double return in the #else case",
+      "parentUuid": "fac2a1ef_0e888459",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1a1ea6f7_daa29e86",
@@ -190,6 +322,30 @@
       "writtenOn": "2023-11-14T22:53:32Z",
       "side": 1,
       "message": "not needed",
+      "range": {
+        "startLine": 31,
+        "startChar": 0,
+        "endLine": 31,
+        "endChar": 17
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "899f4aff_d9b5f7ac",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.h",
+        "patchSetId": 31
+      },
+      "lineNbr": 31,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1a1ea6f7_daa29e86",
       "range": {
         "startLine": 31,
         "startChar": 0,
@@ -219,6 +375,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6a8442e9_fd5542c1",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "this will be removed eventually - just preserving the existing functionality here where one of the handle types is used by default, depending on build flags",
+      "parentUuid": "4a2317be_1a24bf85",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4a3492de_51ff5985",
         "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
         "patchSetId": 31
@@ -230,6 +404,30 @@
       "writtenOn": "2023-11-15T13:24:44Z",
       "side": 1,
       "message": "resets.",
+      "range": {
+        "startLine": 109,
+        "startChar": 27,
+        "endLine": 109,
+        "endChar": 32
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ce3973e2_6b357bc8",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4a3492de_51ff5985",
       "range": {
         "startLine": 109,
         "startChar": 27,
@@ -253,6 +451,30 @@
       "writtenOn": "2023-11-15T03:12:25Z",
       "side": 1,
       "message": "Nits: Dup of same \u0027gets\u0027.",
+      "range": {
+        "startLine": 110,
+        "startChar": 11,
+        "endLine": 110,
+        "endChar": 15
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ed7a8dd_0752e9de",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee25d33c_f7382c50",
       "range": {
         "startLine": 110,
         "startChar": 11,
@@ -303,6 +525,48 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a10ec243_9758953c",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a9df169_125be5df",
+      "range": {
+        "startLine": 106,
+        "startChar": 0,
+        "endLine": 111,
+        "endChar": 0
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3272cfd9_eeb098e3",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationFD.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "77c0bc6c_e6c1cc2d",
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3664b450_99f8075e",
@@ -316,6 +580,30 @@
       "writtenOn": "2023-11-15T03:12:25Z",
       "side": 1,
       "message": "ditto",
+      "range": {
+        "startLine": 103,
+        "startChar": 11,
+        "endLine": 103,
+        "endChar": 16
+      },
+      "revId": "6144c053aeb2fe815a955c150ffab10b2bd284d7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8125d22_bb99046b",
+        "filename": "src/dawn/native/vulkan/external_semaphore/SemaphoreServiceImplementationZirconHandle.cpp",
+        "patchSetId": 31
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T04:25:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3664b450_99f8075e",
       "range": {
         "startLine": 103,
         "startChar": 11,
