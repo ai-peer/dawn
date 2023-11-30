@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bba91ddc_07af11e9",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T18:12:53Z",
+      "side": 1,
+      "message": "ToWGPUFeature appears to be statically used - do we need DAWN_UNUSED_FUNC?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 32
+      },
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ebc8dcff_a4e4483c",
         "filename": "src/dawn/native/Instance.cpp",
         "patchSetId": 13
