@@ -344,6 +344,7 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
 
                 Buffer* buffer = ToBackend(src.buffer.Get());
                 uint64_t bufferOffset = src.offset;
+#if 0
                 Ref<BufferBase> stagingBuffer;
                 // If the buffer is not mappable, we need to create a staging buffer and copy the
                 // data from the buffer to the staging buffer.
@@ -378,6 +379,14 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 const uint8_t* data = scopedMap.GetMappedData() + bufferOffset;
                 DAWN_TRY(texture->Write(commandContext, subresources, dst.origin, copy->copySize,
                                         data, src.bytesPerRow, src.rowsPerImage));
+#else
+                Texture* texture = ToBackend(dst.texture.Get());
+                DAWN_TRY(SynchronizeTextureBeforeUse(texture, commandContext));
+                SubresourceRange subresources = GetSubresourcesAffectedByCopy(dst, copy->copySize);
+                const uint8_t* data = buffer->mBuffer.data() + bufferOffset;
+                DAWN_TRY(texture->Write(commandContext, subresources, dst.origin, copy->copySize,
+                                        data, src.bytesPerRow, src.rowsPerImage));
+#endif
 
                 buffer->MarkUsedInPendingCommands();
                 break;

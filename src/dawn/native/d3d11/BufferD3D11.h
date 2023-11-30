@@ -30,6 +30,7 @@
 
 #include <limits>
 #include <memory>
+#include <vector>
 
 #include "dawn/native/Buffer.h"
 #include "dawn/native/d3d/d3d_platform.h"
@@ -43,7 +44,8 @@ class Buffer final : public BufferBase {
   public:
     static ResultOrError<Ref<Buffer>> Create(Device* device,
                                              const BufferDescriptor* descriptor,
-                                             const ScopedCommandRecordingContext* commandContext);
+                                             const ScopedCommandRecordingContext* commandContext,
+                                             bool isStaging = false);
 
     MaybeError EnsureDataInitialized(const ScopedCommandRecordingContext* commandContext);
     MaybeError EnsureDataInitializedAsDestination(
@@ -115,11 +117,13 @@ class Buffer final : public BufferBase {
     };
 
   private:
+    friend class CommandBuffer;
     using BufferBase::BufferBase;
 
     ~Buffer() override;
 
     MaybeError Initialize(bool mappedAtCreation,
+                          bool isStaging,
                           const ScopedCommandRecordingContext* commandContext);
     MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
     void UnmapImpl() override;
@@ -155,6 +159,8 @@ class Buffer final : public BufferBase {
     ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
     bool mConstantBufferIsUpdated = true;
     uint8_t* mMappedData = nullptr;
+
+    std::vector<uint8_t> mBuffer;
 };
 
 }  // namespace dawn::native::d3d11
