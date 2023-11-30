@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c541db83_cadac853",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1359,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-30T23:49:42Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "20579c8a_31208d00",
+      "range": {
+        "startLine": 1358,
+        "startChar": 38,
+        "endLine": 1359,
+        "endChar": 12
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbe983a7_ea14e48a",
@@ -49,6 +73,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e7b663d_8f79ae04",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-30T23:49:42Z",
+      "side": 1,
+      "message": "I don\u0027t mind changing it but is that easier to read? In the existing code there\u0027s what looks to me like a single templated string with a single variable inserted in the middle.\n\nIn the suggested code there\u0027s 3 separate statements breaking up the code and making it harder to read the shader. At least for me.\n\nI moved the \u003cf32\u003e to tex3Type and turned off auto-formatting.\n\nwdyt?",
+      "parentUuid": "fbe983a7_ea14e48a",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 11
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cc92289f_a66408fc",
         "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
         "patchSetId": 6
@@ -60,6 +108,30 @@
       "writtenOn": "2023-11-30T21:42:57Z",
       "side": 1,
       "message": "nit. similar comment to above, keeping the `\u003cf32\u003e` in the same line makes it look less confusing to me.",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 41
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f0aa493_42d3392e",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-11-30T23:49:42Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "cc92289f_a66408fc",
       "range": {
         "startLine": 416,
         "startChar": 0,
