@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b31f005_627fcd3d",
+        "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-30T21:28:29Z",
+      "side": 1,
+      "message": "nit. Probably should make these 1s instead now?",
+      "range": {
+        "startLine": 249,
+        "startChar": 12,
+        "endLine": 250,
+        "endChar": 63
+      },
+      "revId": "6a1a16f1dbfb6b636e3b4a8d39a3acad1a84cbb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80bfe2e0_cbd5cc27",
+        "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-11-30T21:28:29Z",
+      "side": 1,
+      "message": "Wow.. this is a bit jank to rely on the values of the enums... lol.",
+      "range": {
+        "startLine": 314,
+        "startChar": 20,
+        "endLine": 316,
+        "endChar": 36
+      },
+      "revId": "6a1a16f1dbfb6b636e3b4a8d39a3acad1a84cbb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
