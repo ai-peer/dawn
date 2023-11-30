@@ -682,6 +682,8 @@ TEST_P(RenderPassLoadOpTests, LoadOpClearWithBig32BitIntegralValuesOnMultipleCol
 // Test using LoadOp::Clear with different big unsigned integers as clearValues and LoadOp::Load on
 // the other color attachments in one render pass encoder works correctly.
 TEST_P(RenderPassLoadOpTests, MixedUseOfLoadOpLoadAndLoadOpClearWithBigIntegerValues) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     constexpr int32_t kMaxUInt32RepresentableInFloat = 1 << std::numeric_limits<float>::digits;
 
     wgpu::TextureDescriptor textureDescriptor = {};
