@@ -134,6 +134,10 @@ class Function : public Castable<Function, Value> {
     /// @returns the return invariant value
     bool ReturnInvariant() const { return return_.invariant; }
 
+    /// Adds the parameter to the function
+    /// @param p the param to add
+    void AddParam(FunctionParam* p) { params_.Push(p); }
+
     /// Sets the function parameters
     /// @param params the function parameters
     void SetParams(VectorRef<FunctionParam*> params);
