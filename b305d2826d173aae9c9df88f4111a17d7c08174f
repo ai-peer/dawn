@@ -33,6 +33,57 @@
       "message": "Tint side LGTM!",
       "revId": "b305d2826d173aae9c9df88f4111a17d7c08174f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b83d27a_47208261",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-30T13:20:48Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "b305d2826d173aae9c9df88f4111a17d7c08174f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4417a47_9ca08390",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-30T13:20:48Z",
+      "side": 1,
+      "message": "We do this but at the same time don\u0027t enable the polyfilling in ShaderModule. It\u0027s a bit weird that we care about the toggle in a backend that ends up not using it at all. (same comment for D3D11 in the previous CL).",
+      "revId": "b305d2826d173aae9c9df88f4111a17d7c08174f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cce4492_45d9cf10",
+        "filename": "src/dawn/tests/end2end/ExperimentalDP4aTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-11-30T13:20:48Z",
+      "side": 1,
+      "message": "Do we eventually want to use the toggle in the Vulkan backend as well?",
+      "revId": "b305d2826d173aae9c9df88f4111a17d7c08174f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
