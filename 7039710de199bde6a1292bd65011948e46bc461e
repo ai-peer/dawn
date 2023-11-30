@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "991b7b27_0eb9a18c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-11-30T09:02:18Z",
+      "side": 1,
+      "message": "Hello,\nCould you please take a look?\nI can\u0027t +2 myself.",
+      "revId": "7039710de199bde6a1292bd65011948e46bc461e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
