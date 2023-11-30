@@ -112,6 +112,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "506f9ead_6f587245",
+        "filename": "src/dawn/native/d3d12/ComputePipelineD3D12.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-11-30T18:03:17Z",
+      "side": 1,
+      "message": "still LGTM. this cache is for Dawn\u0027s blob cache of WGSL-\u003eHLSL mapping - which is different from the unordered_set that uses EqualityFunc. Hash/EqualityFunc is used for the frontend cache",
+      "parentUuid": "6c292f65_f8fe4097",
+      "range": {
+        "startLine": 84,
+        "startChar": 12,
+        "endLine": 86,
+        "endChar": 32
+      },
+      "revId": "9a46a544e0cada7914dbe8a0e805b683b0856697",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5107d76a_df7a7bdd",
