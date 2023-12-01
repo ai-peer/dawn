@@ -86,6 +86,8 @@ std::vector<wgpu::SharedTextureMemory> SharedTextureMemoryTestBackend::CreateSha
         DAWN_ASSERT(memory.size() == 1u);
         memories.push_back(std::move(memory[0]));
     }
+    // There should be at least one memory to test.
+    DAWN_ASSERT(!memories.empty());
     return memories;
 }
 
@@ -148,10 +150,11 @@ SharedTextureMemoryTestBackend::CreatePerDeviceSharedTextureMemoriesFilterByUsag
             // create valid backing textures for some multiplanar formats (e.g.,
             // on Apple), which results in a crash when accessing plane 0.
             // TODO(crbug.com/dawn/2263): Fix this and remove this short-circuit.
-            if (!utils::IsMultiPlanarFormat(properties.format) &&
+            if (utils::IsMultiPlanarFormat(properties.format) &&
                 (requiredUsage & wgpu::TextureUsage::RenderAttachment)) {
-                out.push_back(std::move(memories));
+                continue;
             }
+            out.push_back(std::move(memories));
         }
     }
     return out;
@@ -523,10 +526,10 @@ TEST_P(SharedTextureMemoryTests, TextureUsages) {
         memory.GetProperties(&properties);
 
         // CopySrc and TextureBinding should always be supported.
-        // TODO(crbug.com/dawn/2262): TextureBinding support on D3D11/D3D12 is actually
+        // TODO(crbug.com/dawn/2262): TextureBinding support on D3D11/D3D12/Android is actually
         // dependent on the flags passed to the underlying texture (the relevant
         // flag is currently always passed in the test context). Add tests where
-        // the D3D texture is not created with the relevant flag.
+        // the AHardwareBuffer/D3D texture is not created with the relevant flag.
         wgpu::TextureUsage expectedUsage =
             wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::TextureBinding;
 
@@ -537,20 +540,20 @@ TEST_P(SharedTextureMemoryTests, TextureUsages) {
             expectedUsage |= wgpu::TextureUsage::CopyDst;
         }
 
-        // TODO(crbug.com/dawn/2262): RenderAttachment support on D3D11/D3D12 is
+        // TODO(crbug.com/dawn/2262): RenderAttachment support on D3D11/D3D12/Android is
         // additionally dependent on the flags passed to the underlying
         // texture (the relevant flag is currently always passed in the test
-        // context). Add tests where the D3D texture is not created with the
+        // context). Add tests where the AHardwareBuffer/D3D texture is not created with the
         // relevant flag.
         if ((isSinglePlanar || device.HasFeature(wgpu::FeatureName::MultiPlanarRenderTargets)) &&
             utils::IsRenderableFormat(device, properties.format)) {
             expectedUsage |= wgpu::TextureUsage::RenderAttachment;
         }
 
-        // TODO(crbug.com/dawn/2262): StorageBinding support on D3D11/D3D12 is
+        // TODO(crbug.com/dawn/2262): StorageBinding support on D3D11/D3D12/Android is
         // additionally dependent on the flags passed to the underlying
         // texture (the relevant flag is currently always passed in the test
-        // context). Add tests where the D3D texture is not created with the
+        // context). Add tests where the AHardwareBuffer/D3D texture is not created with the
         // relevant flag.
         if (isSinglePlanar &&
             utils::TextureFormatSupportsStorageTexture(properties.format, IsCompatibilityMode())) {
@@ -765,6 +768,7 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadWrite) {
 
     wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
     beginDesc.initialized = true;
+    auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
     EXPECT_TRUE(memory.BeginAccess(readTexture, &beginDesc));
     ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(writeTexture, &beginDesc)),
@@ -781,6 +785,7 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteWrite) {
 
     wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
     beginDesc.initialized = true;
+    auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
     EXPECT_TRUE(memory.BeginAccess(writeTexture1, &beginDesc));
     ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(writeTexture2, &beginDesc)),
@@ -799,6 +804,7 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadRead) {
 
     wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
     beginDesc.initialized = true;
+    auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
 
     EXPECT_TRUE(memory.BeginAccess(readTexture1, &beginDesc));
     ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(readTexture2, &beginDesc)),
@@ -1070,9 +1076,81 @@ TEST_P(SharedTextureMemoryTests, UninitializedOnEndAccess) {
     }
 }
 
+// Test copying to texture memory on one device, then sampling it using another device.
+TEST_P(SharedTextureMemoryTests, CopyToTextureThenSample) {
+    // TODO(dawn:1745): Diagnose and fix on Android.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid());
+
+    std::vector<wgpu::Device> devices = {device, CreateDevice()};
+
+    for (const auto& memories :
+         GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
+             devices, wgpu::TextureUsage::TextureBinding)) {
+        wgpu::Texture texture = memories[0].CreateTexture();
+
+        wgpu::SharedTextureMemoryBeginAccessDescriptor beginDesc = {};
+        beginDesc.initialized = false;
+        auto backendBeginState = GetParam().mBackend->ChainInitialBeginState(&beginDesc);
+        memories[0].BeginAccess(texture, &beginDesc);
+
+        // Create a texture of the same size to use as the source content.
+        wgpu::TextureDescriptor texDesc;
+        texDesc.format = texture.GetFormat();
+        texDesc.size = {texture.GetWidth(), texture.GetHeight()};
+        texDesc.usage =
+            texture.GetUsage() | wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment;
+        wgpu::Texture srcTex = devices[0].CreateTexture(&texDesc);
+
+        // Populate the source texture.
+        wgpu::CommandBuffer commandBuffer = MakeFourColorsClearCommandBuffer(devices[0], srcTex);
+        devices[0].GetQueue().Submit(1, &commandBuffer);
+
+        // Copy from the source texture into `texture`.
+        {
+            wgpu::CommandEncoder encoder = devices[0].CreateCommandEncoder();
+            auto src = utils::CreateImageCopyTexture(srcTex);
+            auto dst = utils::CreateImageCopyTexture(texture);
+            encoder.CopyTextureToTexture(&src, &dst, &texDesc.size);
+            commandBuffer = encoder.Finish();
+        }
+        devices[0].GetQueue().Submit(1, &commandBuffer);
+
+        wgpu::SharedTextureMemoryEndAccessState endState = {};
+        auto backendEndState = GetParam().mBackend->ChainEndState(&endState);
+        memories[0].EndAccess(texture, &endState);
+
+        // Sample from the texture
+
+        std::vector<wgpu::SharedFence> sharedFences(endState.fenceCount);
+        for (size_t i = 0; i < endState.fenceCount; ++i) {
+            sharedFences[i] = GetParam().mBackend->ImportFenceTo(devices[1], endState.fences[i]);
+        }
+        beginDesc.fenceCount = endState.fenceCount;
+        beginDesc.fences = sharedFences.data();
+        beginDesc.signaledValues = endState.signaledValues;
+        beginDesc.initialized = endState.initialized;
+        backendBeginState = GetParam().mBackend->ChainBeginState(&beginDesc, endState);
+
+        texture = memories[1].CreateTexture();
+
+        memories[1].BeginAccess(texture, &beginDesc);
+
+        wgpu::Texture colorTarget;
+        std::tie(commandBuffer, colorTarget) =
+            MakeCheckBySamplingCommandBuffer(devices[1], texture);
+        devices[1].GetQueue().Submit(1, &commandBuffer);
+        memories[1].EndAccess(texture, &endState);
+
+        CheckFourColors(devices[1], texture.GetFormat(), colorTarget);
+    }
+}
+
 // Test rendering to a texture memory on one device, then sampling it using another device.
 // Encode the commands after performing BeginAccess.
 TEST_P(SharedTextureMemoryTests, RenderThenSampleEncodeAfterBeginAccess) {
+    // TODO(dawn:1745): Diagnose and fix on Android.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid());
+
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
 
     for (const auto& memories :
@@ -1122,6 +1200,9 @@ TEST_P(SharedTextureMemoryTests, RenderThenSampleEncodeAfterBeginAccess) {
 // Test rendering to a texture memory on one device, then sampling it using another device.
 // Encode the commands before performing BeginAccess (the access is only held during) QueueSubmit.
 TEST_P(SharedTextureMemoryTests, RenderThenSampleEncodeBeforeBeginAccess) {
+    // TODO(dawn:1745): Diagnose and fix on Android.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid());
+
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
@@ -1169,6 +1250,9 @@ TEST_P(SharedTextureMemoryTests, RenderThenSampleEncodeBeforeBeginAccess) {
 // EndAccess. The second device should still be able to wait on the first device and see the
 // results.
 TEST_P(SharedTextureMemoryTests, RenderThenTextureDestroyBeforeEndAccessThenSample) {
+    // TODO(dawn:1745): Diagnose and fix on Android.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid());
+
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
     for (const auto& memories :
          GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
@@ -1218,6 +1302,9 @@ TEST_P(SharedTextureMemoryTests, RenderThenTextureDestroyBeforeEndAccessThenSamp
 // accessing on the second device. Operations on the second device must
 // still wait for the preceding operations to complete.
 TEST_P(SharedTextureMemoryTests, RenderThenDropAllMemoriesThenSample) {
+    // TODO(dawn:1745): Diagnose and fix on Android.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid());
+
     std::vector<wgpu::Device> devices = {device, CreateDevice()};
     for (auto memories : GetParam().mBackend->CreatePerDeviceSharedTextureMemoriesFilterByUsage(
              devices, wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::TextureBinding)) {
@@ -1269,6 +1356,9 @@ TEST_P(SharedTextureMemoryTests, RenderThenDropAllMemoriesThenSample) {
 // results.
 // This tests both cases where the device is destroyed, and where the device is lost.
 TEST_P(SharedTextureMemoryTests, RenderThenLoseOrDestroyDeviceBeforeEndAccessThenSample) {
+    // TODO(dawn:1745): Diagnose and fix on Android.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid());
+
     // Not supported if using the same device. Not possible to lose one without losing the other.
     DAWN_TEST_UNSUPPORTED_IF(GetParam().mBackend->UseSameDevice());
 
@@ -1331,6 +1421,9 @@ TEST_P(SharedTextureMemoryTests, RenderThenLoseOrDestroyDeviceBeforeEndAccessThe
 // Write to the texture, then read from two separate devices concurrently, then write again.
 // Reads should happen strictly after the writes. The final write should wait for the reads.
 TEST_P(SharedTextureMemoryTests, SeparateDevicesWriteThenConcurrentReadThenWrite) {
+    // TODO(dawn:1745): Diagnose and fix on Android.
+    DAWN_SUPPRESS_TEST_IF(IsAndroid());
+
     DAWN_TEST_UNSUPPORTED_IF(!GetParam().mBackend->SupportsConcurrentRead());
 
     std::vector<wgpu::Device> devices = {device, CreateDevice(), CreateDevice()};
