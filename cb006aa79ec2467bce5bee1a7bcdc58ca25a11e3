@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d5692d4_e412e43f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T12:15:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "cb006aa79ec2467bce5bee1a7bcdc58ca25a11e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b292982e_e73c49c2",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 621,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T12:15:54Z",
+      "side": 1,
+      "message": "Eventually we could support 2D array storage textures in WGSL (for our own purpose) and switch to a 2D texture array here. Maybe we can have a TODO?",
+      "revId": "cb006aa79ec2467bce5bee1a7bcdc58ca25a11e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
