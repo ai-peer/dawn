@@ -69,6 +69,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "77369522_35add90d",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T01:59:23Z",
+      "side": 1,
+      "message": "Done\n\nI\u0027ve also removed that toggle on D3D11.",
+      "parentUuid": "d4417a47_9ca08390",
+      "revId": "b305d2826d173aae9c9df88f4111a17d7c08174f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2cce4492_45d9cf10",
@@ -82,6 +100,24 @@
       "writtenOn": "2023-11-30T13:20:48Z",
       "side": 1,
       "message": "Do we eventually want to use the toggle in the Vulkan backend as well?",
+      "revId": "b305d2826d173aae9c9df88f4111a17d7c08174f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f7beda1_e7694c6c",
+        "filename": "src/dawn/tests/end2end/ExperimentalDP4aTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 139,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T01:59:23Z",
+      "side": 1,
+      "message": "Yes. The patch will be similar to the one on D3D12, and then DP4A functions will be supported on all backends.",
+      "parentUuid": "2cce4492_45d9cf10",
       "revId": "b305d2826d173aae9c9df88f4111a17d7c08174f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
