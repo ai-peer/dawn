@@ -454,12 +454,8 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemory::CreateTextureImpl(
 }
 
 MaybeError SharedTextureMemory::BeginAccessImpl(TextureBase* texture,
-                                                const BeginAccessDescriptor* descriptor) {
-    DAWN_TRY(ValidateSTypes(descriptor->nextInChain,
-                            {{wgpu::SType::SharedTextureMemoryVkImageLayoutBeginState}}));
-
-    const SharedTextureMemoryVkImageLayoutBeginState* vkLayoutBeginState = nullptr;
-    FindInChain(descriptor->nextInChain, &vkLayoutBeginState);
+                                                const Unpacked<BeginAccessDescriptor>& descriptor) {
+    auto vkLayoutBeginState = descriptor.Get<SharedTextureMemoryVkImageLayoutBeginState>();
     DAWN_INVALID_IF(vkLayoutBeginState == nullptr,
                     "SharedTextureMemoryVkImageLayoutBeginState was not provided.");
 
