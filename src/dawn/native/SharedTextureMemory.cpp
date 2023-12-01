@@ -233,7 +233,10 @@ bool SharedTextureMemoryBase::APIIsDeviceLost() {
 }
 
 MaybeError SharedTextureMemoryBase::BeginAccess(TextureBase* texture,
-                                                const BeginAccessDescriptor* descriptor) {
+                                                const BeginAccessDescriptor* rawDescriptor) {
+    Unpacked<BeginAccessDescriptor> descriptor;
+    DAWN_TRY_ASSIGN(descriptor, ValidateAndUnpack(rawDescriptor));
+
     // Append begin fences first. Fences should be tracked regardless of whether later errors occur.
     for (size_t i = 0; i < descriptor->fenceCount; ++i) {
         mContents->mPendingFences->push_back(
