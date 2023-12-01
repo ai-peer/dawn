@@ -695,7 +695,10 @@ source_set("end2end_tests_sources") {
   }
 
   if (is_linux || is_chromeos) {
-    sources += [ "end2end/SharedTextureMemoryTests_linux.cpp" ]
+    sources += [ "end2end/SharedTextureMemoryTests_dmabuf.cpp" ]
+  }
+  if (is_android) {
+    sources += [ "end2end/SharedTextureMemoryTests_android.cpp" ]
   }
 }
 
@@ -731,6 +734,8 @@ source_set("white_box_tests_sources") {
         "white_box/VulkanImageWrappingTests_OpaqueFD.cpp",
         "white_box/VulkanImageWrappingTests_OpaqueFD.h",
       ]
+
+      sources += [ "end2end/SharedTextureMemoryTests_opaquefd.cpp" ]
     }
 
     if (dawn_enable_error_injection) {
