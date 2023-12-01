@@ -50,6 +50,24 @@
       "message": "BTW isn\u0027t this going to be a language feature eventually?\n\nhttps://dawn-review.googlesource.com/c/dawn/+/162500 for context",
       "revId": "8345619bd24fe7ab6f3fdbfa1325547af72907bb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6811e65_7dc1d663",
+        "filename": "src/dawn/tests/end2end/ExperimentalDP4aTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T01:13:43Z",
+      "side": 1,
+      "message": "Yes I plan to add the language feature and remove the extension after enabling the polyfill on all the backends.",
+      "parentUuid": "8d3e9a4a_1ad36421",
+      "revId": "8345619bd24fe7ab6f3fdbfa1325547af72907bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
