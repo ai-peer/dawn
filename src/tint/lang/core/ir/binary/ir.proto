@@ -125,4 +125,5 @@ enum InstructionKind {
     BinaryOp = 2;
     Builtin = 3;
     Constructor = 4;
+    Discard = 5;
 }
