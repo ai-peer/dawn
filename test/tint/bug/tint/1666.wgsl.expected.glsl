@@ -16,7 +16,7 @@ void fixed_size_array() {
   int x = arr[idx];
 }
 
-layout(binding = 0, std430) buffer rarr_block_ssbo {
+layout(binding = 0, std430) buffer rarr_block_0_0_ssbo {
   float inner[];
 } rarr;
 

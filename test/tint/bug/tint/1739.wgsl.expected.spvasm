@@ -10,8 +10,8 @@
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
                OpName %ext_tex_plane_1 "ext_tex_plane_1"
-               OpName %ext_tex_params_block_std140 "ext_tex_params_block_std140"
-               OpMemberName %ext_tex_params_block_std140 0 "inner"
+               OpName %ext_tex_params_block_0_3_std140 "ext_tex_params_block_0_3_std140"
+               OpMemberName %ext_tex_params_block_0_3_std140 0 "inner"
                OpName %ExternalTextureParams_std140 "ExternalTextureParams_std140"
                OpMemberName %ExternalTextureParams_std140 0 "numPlanes"
                OpMemberName %ExternalTextureParams_std140 1 "doYuvToRgbConversionOnly"
@@ -62,8 +62,8 @@
                OpName %green "green"
                OpDecorate %ext_tex_plane_1 DescriptorSet 0
                OpDecorate %ext_tex_plane_1 Binding 2
-               OpDecorate %ext_tex_params_block_std140 Block
-               OpMemberDecorate %ext_tex_params_block_std140 0 Offset 0
+               OpDecorate %ext_tex_params_block_0_3_std140 Block
+               OpMemberDecorate %ext_tex_params_block_0_3_std140 0 Offset 0
                OpMemberDecorate %ExternalTextureParams_std140 0 Offset 0
                OpMemberDecorate %ExternalTextureParams_std140 1 Offset 4
                OpMemberDecorate %ExternalTextureParams_std140 2 Offset 16
@@ -118,9 +118,9 @@
 %mat3v3float = OpTypeMatrix %v3float 3
     %v2float = OpTypeVector %float 2
 %ExternalTextureParams_std140 = OpTypeStruct %uint %uint %mat3v4float %GammaTransferParams %GammaTransferParams %mat3v3float %v2float %v2float %v2float
-%ext_tex_params_block_std140 = OpTypeStruct %ExternalTextureParams_std140
-%_ptr_Uniform_ext_tex_params_block_std140 = OpTypePointer Uniform %ext_tex_params_block_std140
-%ext_tex_params = OpVariable %_ptr_Uniform_ext_tex_params_block_std140 Uniform
+%ext_tex_params_block_0_3_std140 = OpTypeStruct %ExternalTextureParams_std140
+%_ptr_Uniform_ext_tex_params_block_0_3_std140 = OpTypePointer Uniform %ext_tex_params_block_0_3_std140
+%ext_tex_params = OpVariable %_ptr_Uniform_ext_tex_params_block_0_3_std140 Uniform
           %t = OpVariable %_ptr_UniformConstant_3 UniformConstant
          %19 = OpTypeImage %float 2D 0 0 0 2 Rgba8
 %_ptr_UniformConstant_19 = OpTypePointer UniformConstant %19

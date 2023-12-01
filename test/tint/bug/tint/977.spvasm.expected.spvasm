@@ -19,8 +19,8 @@
                OpName %SecondMatrix "SecondMatrix"
                OpMemberName %SecondMatrix 0 "numbers"
                OpName %secondMatrix "secondMatrix"
-               OpName %x_46_block "x_46_block"
-               OpMemberName %x_46_block 0 "inner"
+               OpName %x_46_block_0_3 "x_46_block_0_3"
+               OpMemberName %x_46_block_0_3 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "NAN"
                OpMemberName %Uniforms 1 "sizeA"
@@ -56,8 +56,8 @@
                OpDecorate %secondMatrix NonWritable
                OpDecorate %secondMatrix DescriptorSet 0
                OpDecorate %secondMatrix Binding 1
-               OpDecorate %x_46_block Block
-               OpMemberDecorate %x_46_block 0 Offset 0
+               OpDecorate %x_46_block_0_3 Block
+               OpMemberDecorate %x_46_block_0_3 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 1 Offset 4
                OpMemberDecorate %Uniforms 2 Offset 8
@@ -84,9 +84,9 @@
 %secondMatrix = OpVariable %_ptr_StorageBuffer_SecondMatrix StorageBuffer
         %int = OpTypeInt 32 1
    %Uniforms = OpTypeStruct %float %int %int
- %x_46_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_x_46_block = OpTypePointer Uniform %x_46_block
-       %x_46 = OpVariable %_ptr_Uniform_x_46_block Uniform
+%x_46_block_0_3 = OpTypeStruct %Uniforms
+%_ptr_Uniform_x_46_block_0_3 = OpTypePointer Uniform %x_46_block_0_3
+       %x_46 = OpVariable %_ptr_Uniform_x_46_block_0_3 Uniform
 %_ptr_Function_float = OpTypePointer Function %float
          %24 = OpTypeFunction %float %_ptr_Function_float %_ptr_Function_float
        %bool = OpTypeBool

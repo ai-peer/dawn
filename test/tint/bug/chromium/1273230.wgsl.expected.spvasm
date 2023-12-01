@@ -9,8 +9,8 @@
                OpEntryPoint GLCompute %main_count "main_count" %GlobalInvocationID_1
                OpExecutionMode %main_count LocalSize 128 1 1
                OpName %GlobalInvocationID_1 "GlobalInvocationID_1"
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_0_0 "uniforms_block_0_0"
+               OpMemberName %uniforms_block_0_0 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "numTriangles"
                OpMemberName %Uniforms 1 "gridSize"
@@ -31,8 +31,8 @@
                OpName %AI32s "AI32s"
                OpMemberName %AI32s 0 "values"
                OpName %LUT "LUT"
-               OpName %dbg_block "dbg_block"
-               OpMemberName %dbg_block 0 "inner"
+               OpName %dbg_block_0_50 "dbg_block_0_50"
+               OpMemberName %dbg_block_0_50 0 "inner"
                OpName %Dbg "Dbg"
                OpMemberName %Dbg 0 "offsetCounter"
                OpMemberName %Dbg 1 "pad0"
@@ -101,8 +101,8 @@
                OpName %triangleOffset "triangleOffset"
                OpName %main_count "main_count"
                OpDecorate %GlobalInvocationID_1 BuiltIn GlobalInvocationId
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_0_0 Block
+               OpMemberDecorate %uniforms_block_0_0 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 1 Offset 4
                OpMemberDecorate %Uniforms 2 Offset 8
@@ -132,8 +132,8 @@
                OpDecorate %_runtimearr_int ArrayStride 4
                OpDecorate %LUT Binding 21
                OpDecorate %LUT DescriptorSet 0
-               OpDecorate %dbg_block Block
-               OpMemberDecorate %dbg_block 0 Offset 0
+               OpDecorate %dbg_block_0_50 Block
+               OpMemberDecorate %dbg_block_0_50 0 Offset 0
                OpMemberDecorate %Dbg 0 Offset 0
                OpMemberDecorate %Dbg 1 Offset 4
                OpMemberDecorate %Dbg 2 Offset 8
@@ -155,9 +155,9 @@
       %float = OpTypeFloat 32
     %v3float = OpTypeVector %float 3
    %Uniforms = OpTypeStruct %uint %uint %uint %uint %v3float %v3float
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_0_0 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_0_0 = OpTypePointer Uniform %uniforms_block_0_0
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_0_0 Uniform
 %_runtimearr_uint = OpTypeRuntimeArray %uint
        %U32s = OpTypeStruct %_runtimearr_uint
 %_ptr_StorageBuffer_U32s = OpTypePointer StorageBuffer %U32s
@@ -176,9 +176,9 @@
 %_ptr_StorageBuffer_AI32s = OpTypePointer StorageBuffer %AI32s
         %LUT = OpVariable %_ptr_StorageBuffer_AI32s StorageBuffer
         %Dbg = OpTypeStruct %uint %uint %uint %uint %uint %uint %uint %uint %float %float %float %float
-  %dbg_block = OpTypeStruct %Dbg
-%_ptr_StorageBuffer_dbg_block = OpTypePointer StorageBuffer %dbg_block
-        %dbg = OpVariable %_ptr_StorageBuffer_dbg_block StorageBuffer
+%dbg_block_0_50 = OpTypeStruct %Dbg
+%_ptr_StorageBuffer_dbg_block_0_50 = OpTypePointer StorageBuffer %dbg_block_0_50
+        %dbg = OpVariable %_ptr_StorageBuffer_dbg_block_0_50 StorageBuffer
          %32 = OpTypeFunction %v3uint %v3float
 %float_4_29496704e_09 = OpConstant %float 4.29496704e+09
          %38 = OpConstantComposite %v3float %float_4_29496704e_09 %float_4_29496704e_09 %float_4_29496704e_09

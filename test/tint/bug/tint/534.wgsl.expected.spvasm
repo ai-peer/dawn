@@ -14,8 +14,8 @@
                OpName %OutputBuf "OutputBuf"
                OpMemberName %OutputBuf 0 "result"
                OpName %output "output"
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_0_3 "uniforms_block_0_3"
+               OpMemberName %uniforms_block_0_3 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "dstTextureFlipY"
                OpMemberName %Uniforms 1 "isFloat16"
@@ -49,8 +49,8 @@
                OpDecorate %_runtimearr_uint ArrayStride 4
                OpDecorate %output DescriptorSet 0
                OpDecorate %output Binding 2
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_0_3 Block
+               OpMemberDecorate %uniforms_block_0_3 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 1 Offset 4
                OpMemberDecorate %Uniforms 2 Offset 8
@@ -72,9 +72,9 @@
 %_ptr_StorageBuffer_OutputBuf = OpTypePointer StorageBuffer %OutputBuf
      %output = OpVariable %_ptr_StorageBuffer_OutputBuf StorageBuffer
    %Uniforms = OpTypeStruct %uint %uint %uint %uint
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_0_3 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_0_3 = OpTypePointer Uniform %uniforms_block_0_3
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_0_3 Uniform
      %v4uint = OpTypeVector %uint 4
     %v4float = OpTypeVector %float 4
          %18 = OpTypeFunction %v4uint %v4float

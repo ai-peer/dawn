@@ -9,7 +9,7 @@ float16_t tint_workgroupUniformLoad_arg_0() {
   return result;
 }
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_2_0_ssbo {
   float16_t inner;
 } prevent_dce;
 

@@ -9,14 +9,14 @@
                OpName %gl_VertexIndex_1 "gl_VertexIndex_1"
                OpName %value "value"
                OpName %vertex_point_size "vertex_point_size"
-               OpName %x_20_block_std140 "x_20_block_std140"
-               OpMemberName %x_20_block_std140 0 "inner"
+               OpName %x_20_block_0_0_std140 "x_20_block_0_0_std140"
+               OpMemberName %x_20_block_0_0_std140 0 "inner"
                OpName %vertexUniformBuffer1_std140 "vertexUniformBuffer1_std140"
                OpMemberName %vertexUniformBuffer1_std140 0 "transform1_0"
                OpMemberName %vertexUniformBuffer1_std140 1 "transform1_1"
                OpName %x_20 "x_20"
-               OpName %x_26_block_std140 "x_26_block_std140"
-               OpMemberName %x_26_block_std140 0 "inner"
+               OpName %x_26_block_1_0_std140 "x_26_block_1_0_std140"
+               OpMemberName %x_26_block_1_0_std140 0 "inner"
                OpName %vertexUniformBuffer2_std140 "vertexUniformBuffer2_std140"
                OpMemberName %vertexUniformBuffer2_std140 0 "transform2_0"
                OpMemberName %vertexUniformBuffer2_std140 1 "transform2_1"
@@ -30,15 +30,15 @@
                OpDecorate %gl_VertexIndex_1 BuiltIn VertexIndex
                OpDecorate %value BuiltIn Position
                OpDecorate %vertex_point_size BuiltIn PointSize
-               OpDecorate %x_20_block_std140 Block
-               OpMemberDecorate %x_20_block_std140 0 Offset 0
+               OpDecorate %x_20_block_0_0_std140 Block
+               OpMemberDecorate %x_20_block_0_0_std140 0 Offset 0
                OpMemberDecorate %vertexUniformBuffer1_std140 0 Offset 0
                OpMemberDecorate %vertexUniformBuffer1_std140 1 Offset 8
                OpDecorate %x_20 NonWritable
                OpDecorate %x_20 DescriptorSet 0
                OpDecorate %x_20 Binding 0
-               OpDecorate %x_26_block_std140 Block
-               OpMemberDecorate %x_26_block_std140 0 Offset 0
+               OpDecorate %x_26_block_1_0_std140 Block
+               OpMemberDecorate %x_26_block_1_0_std140 0 Offset 0
                OpMemberDecorate %vertexUniformBuffer2_std140 0 Offset 0
                OpMemberDecorate %vertexUniformBuffer2_std140 1 Offset 8
                OpDecorate %x_26 NonWritable
@@ -58,13 +58,13 @@
 %vertex_point_size = OpVariable %_ptr_Output_float Output %11
     %v2float = OpTypeVector %float 2
 %vertexUniformBuffer1_std140 = OpTypeStruct %v2float %v2float
-%x_20_block_std140 = OpTypeStruct %vertexUniformBuffer1_std140
-%_ptr_Uniform_x_20_block_std140 = OpTypePointer Uniform %x_20_block_std140
-       %x_20 = OpVariable %_ptr_Uniform_x_20_block_std140 Uniform
+%x_20_block_0_0_std140 = OpTypeStruct %vertexUniformBuffer1_std140
+%_ptr_Uniform_x_20_block_0_0_std140 = OpTypePointer Uniform %x_20_block_0_0_std140
+       %x_20 = OpVariable %_ptr_Uniform_x_20_block_0_0_std140 Uniform
 %vertexUniformBuffer2_std140 = OpTypeStruct %v2float %v2float
-%x_26_block_std140 = OpTypeStruct %vertexUniformBuffer2_std140
-%_ptr_Uniform_x_26_block_std140 = OpTypePointer Uniform %x_26_block_std140
-       %x_26 = OpVariable %_ptr_Uniform_x_26_block_std140 Uniform
+%x_26_block_1_0_std140 = OpTypeStruct %vertexUniformBuffer2_std140
+%_ptr_Uniform_x_26_block_1_0_std140 = OpTypePointer Uniform %x_26_block_1_0_std140
+       %x_26 = OpVariable %_ptr_Uniform_x_26_block_1_0_std140 Uniform
 %mat2v2float = OpTypeMatrix %v2float 2
          %21 = OpTypeFunction %mat2v2float
      %uint_0 = OpConstant %uint 0

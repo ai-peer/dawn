@@ -4,7 +4,7 @@ struct str {
   vec4 i;
 };
 
-layout(binding = 0, std140) uniform S_block_ubo {
+layout(binding = 0, std140) uniform S_block_0_0_ubo {
   str inner;
 } S;
 

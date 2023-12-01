@@ -18,8 +18,8 @@
                OpName %vertex_point_size "vertex_point_size"
                OpName %value_1 "value_1"
                OpName %gl_GlobalInvocationID_1 "gl_GlobalInvocationID_1"
-               OpName %params_block "params_block"
-               OpMemberName %params_block 0 "inner"
+               OpName %params_block_0_0 "params_block_0_0"
+               OpMemberName %params_block_0_0 0 "inner"
                OpName %SimParams "SimParams"
                OpMemberName %SimParams 0 "deltaT"
                OpMemberName %SimParams 1 "rule1Distance"
@@ -29,8 +29,8 @@
                OpMemberName %SimParams 5 "rule2Scale"
                OpMemberName %SimParams 6 "rule3Scale"
                OpName %params "params"
-               OpName %particlesA_block "particlesA_block"
-               OpMemberName %particlesA_block 0 "inner"
+               OpName %particlesA_block_0_1 "particlesA_block_0_1"
+               OpMemberName %particlesA_block_0_1 0 "inner"
                OpName %Particles "Particles"
                OpMemberName %Particles 0 "particles"
                OpName %Particle "Particle"
@@ -68,8 +68,8 @@
                OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %value_1 Location 0
                OpDecorate %gl_GlobalInvocationID_1 BuiltIn GlobalInvocationId
-               OpDecorate %params_block Block
-               OpMemberDecorate %params_block 0 Offset 0
+               OpDecorate %params_block_0_0 Block
+               OpMemberDecorate %params_block_0_0 0 Offset 0
                OpMemberDecorate %SimParams 0 Offset 0
                OpMemberDecorate %SimParams 1 Offset 4
                OpMemberDecorate %SimParams 2 Offset 8
@@ -80,8 +80,8 @@
                OpDecorate %params NonWritable
                OpDecorate %params Binding 0
                OpDecorate %params DescriptorSet 0
-               OpDecorate %particlesA_block Block
-               OpMemberDecorate %particlesA_block 0 Offset 0
+               OpDecorate %particlesA_block_0_1 Block
+               OpMemberDecorate %particlesA_block_0_1 0 Offset 0
                OpMemberDecorate %Particles 0 Offset 0
                OpMemberDecorate %Particle 0 Offset 0
                OpMemberDecorate %Particle 1 Offset 8
@@ -109,17 +109,17 @@
 %_ptr_Input_v3uint = OpTypePointer Input %v3uint
 %gl_GlobalInvocationID_1 = OpVariable %_ptr_Input_v3uint Input
   %SimParams = OpTypeStruct %float %float %float %float %float %float %float
-%params_block = OpTypeStruct %SimParams
-%_ptr_Uniform_params_block = OpTypePointer Uniform %params_block
-     %params = OpVariable %_ptr_Uniform_params_block Uniform
+%params_block_0_0 = OpTypeStruct %SimParams
+%_ptr_Uniform_params_block_0_0 = OpTypePointer Uniform %params_block_0_0
+     %params = OpVariable %_ptr_Uniform_params_block_0_0 Uniform
    %Particle = OpTypeStruct %v2float %v2float
      %uint_5 = OpConstant %uint 5
 %_arr_Particle_uint_5 = OpTypeArray %Particle %uint_5
   %Particles = OpTypeStruct %_arr_Particle_uint_5
-%particlesA_block = OpTypeStruct %Particles
-%_ptr_StorageBuffer_particlesA_block = OpTypePointer StorageBuffer %particlesA_block
- %particlesA = OpVariable %_ptr_StorageBuffer_particlesA_block StorageBuffer
- %particlesB = OpVariable %_ptr_StorageBuffer_particlesA_block StorageBuffer
+%particlesA_block_0_1 = OpTypeStruct %Particles
+%_ptr_StorageBuffer_particlesA_block_0_1 = OpTypePointer StorageBuffer %particlesA_block_0_1
+ %particlesA = OpVariable %_ptr_StorageBuffer_particlesA_block_0_1 StorageBuffer
+ %particlesB = OpVariable %_ptr_StorageBuffer_particlesA_block_0_1 StorageBuffer
          %31 = OpTypeFunction %v4float %v2float %v2float %v2float
 %_ptr_Function_float = OpTypePointer Function %float
 %_ptr_Function_v2float = OpTypePointer Function %v2float

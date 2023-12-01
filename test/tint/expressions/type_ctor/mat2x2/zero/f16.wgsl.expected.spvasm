@@ -12,14 +12,14 @@
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
                OpName %m "m"
-               OpName %out_block "out_block"
-               OpMemberName %out_block 0 "inner"
+               OpName %out_block_0_0 "out_block_0_0"
+               OpMemberName %out_block_0_0 0 "inner"
                OpName %out "out"
                OpName %f "f"
-               OpDecorate %out_block Block
-               OpMemberDecorate %out_block 0 Offset 0
-               OpMemberDecorate %out_block 0 ColMajor
-               OpMemberDecorate %out_block 0 MatrixStride 4
+               OpDecorate %out_block_0_0 Block
+               OpMemberDecorate %out_block_0_0 0 Offset 0
+               OpMemberDecorate %out_block_0_0 0 ColMajor
+               OpMemberDecorate %out_block_0_0 0 MatrixStride 4
                OpDecorate %out DescriptorSet 0
                OpDecorate %out Binding 0
        %half = OpTypeFloat 16
@@ -28,9 +28,9 @@
           %4 = OpConstantNull %mat2v2half
 %_ptr_Private_mat2v2half = OpTypePointer Private %mat2v2half
           %m = OpVariable %_ptr_Private_mat2v2half Private %4
-  %out_block = OpTypeStruct %mat2v2half
-%_ptr_StorageBuffer_out_block = OpTypePointer StorageBuffer %out_block
-        %out = OpVariable %_ptr_StorageBuffer_out_block StorageBuffer
+%out_block_0_0 = OpTypeStruct %mat2v2half
+%_ptr_StorageBuffer_out_block_0_0 = OpTypePointer StorageBuffer %out_block_0_0
+        %out = OpVariable %_ptr_StorageBuffer_out_block_0_0 StorageBuffer
        %void = OpTypeVoid
          %10 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

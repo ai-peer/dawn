@@ -8,8 +8,8 @@
                OpEntryPoint GLCompute %f "f" %local_invocation_index_1
                OpExecutionMode %f LocalSize 1 1 1
                OpName %local_invocation_index_1 "local_invocation_index_1"
-               OpName %u_block "u_block"
-               OpMemberName %u_block 0 "inner"
+               OpName %u_block_0_0 "u_block_0_0"
+               OpMemberName %u_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "before"
                OpMemberName %S 1 "m"
@@ -21,8 +21,8 @@
                OpName %idx "idx"
                OpName %f "f"
                OpDecorate %local_invocation_index_1 BuiltIn LocalInvocationIndex
-               OpDecorate %u_block Block
-               OpMemberDecorate %u_block 0 Offset 0
+               OpDecorate %u_block_0_0 Block
+               OpMemberDecorate %u_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 1 Offset 16
                OpMemberDecorate %S 1 ColMajor
@@ -42,9 +42,9 @@
           %S = OpTypeStruct %int %mat2v3float %int
      %uint_4 = OpConstant %uint 4
 %_arr_S_uint_4 = OpTypeArray %S %uint_4
-    %u_block = OpTypeStruct %_arr_S_uint_4
-%_ptr_Uniform_u_block = OpTypePointer Uniform %u_block
-          %u = OpVariable %_ptr_Uniform_u_block Uniform
+%u_block_0_0 = OpTypeStruct %_arr_S_uint_4
+%_ptr_Uniform_u_block_0_0 = OpTypePointer Uniform %u_block_0_0
+          %u = OpVariable %_ptr_Uniform_u_block_0_0 Uniform
 %_ptr_Workgroup__arr_S_uint_4 = OpTypePointer Workgroup %_arr_S_uint_4
           %w = OpVariable %_ptr_Workgroup__arr_S_uint_4 Workgroup
        %void = OpTypeVoid

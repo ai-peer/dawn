@@ -187,7 +187,7 @@ struct RenderParams {
   uint pad_1;
 };
 
-layout(binding = 5, std140) uniform render_params_block_ubo {
+layout(binding = 5, std140) uniform render_params_block_0_5_ubo {
   RenderParams inner;
 } render_params;
 
@@ -283,7 +283,7 @@ struct Particle {
   uint pad_4;
 };
 
-layout(binding = 0, std140) uniform sim_params_block_ubo {
+layout(binding = 0, std140) uniform sim_params_block_0_0_ubo {
   SimulationParams inner;
 } sim_params;
 
@@ -364,7 +364,7 @@ struct UBO {
   uint pad_2;
 };
 
-layout(binding = 3, std140) uniform ubo_block_ubo {
+layout(binding = 3, std140) uniform ubo_block_0_3_ubo {
   UBO inner;
 } ubo;
 

@@ -9,15 +9,15 @@
                OpExecutionMode %unused_entry_point LocalSize 1 1 1
                OpName %src_private "src_private"
                OpName %src_workgroup "src_workgroup"
-               OpName %src_uniform_block "src_uniform_block"
-               OpMemberName %src_uniform_block 0 "inner"
+               OpName %src_uniform_block_0_0 "src_uniform_block_0_0"
+               OpMemberName %src_uniform_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "arr"
                OpName %src_uniform "src_uniform"
                OpName %src_storage "src_storage"
                OpName %dst "dst"
-               OpName %dst_nested_block "dst_nested_block"
-               OpMemberName %dst_nested_block 0 "inner"
+               OpName %dst_nested_block_0_3 "dst_nested_block_0_3"
+               OpMemberName %dst_nested_block_0_3 0 "inner"
                OpName %S_nested "S_nested"
                OpMemberName %S_nested 0 "arr"
                OpName %dst_nested "dst_nested"
@@ -29,8 +29,8 @@
                OpName %src_function "src_function"
                OpName %src_nested "src_nested"
                OpDecorate %_arr_v4int_uint_4 ArrayStride 16
-               OpDecorate %src_uniform_block Block
-               OpMemberDecorate %src_uniform_block 0 Offset 0
+               OpDecorate %src_uniform_block_0_0 Block
+               OpMemberDecorate %src_uniform_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpDecorate %src_uniform NonWritable
                OpDecorate %src_uniform DescriptorSet 0
@@ -39,8 +39,8 @@
                OpDecorate %src_storage Binding 1
                OpDecorate %dst DescriptorSet 0
                OpDecorate %dst Binding 2
-               OpDecorate %dst_nested_block Block
-               OpMemberDecorate %dst_nested_block 0 Offset 0
+               OpDecorate %dst_nested_block_0_3 Block
+               OpMemberDecorate %dst_nested_block_0_3 0 Offset 0
                OpMemberDecorate %S_nested 0 Offset 0
                OpDecorate %_arr_int_uint_2 ArrayStride 4
                OpDecorate %_arr__arr_int_uint_2_uint_3 ArrayStride 8
@@ -58,21 +58,21 @@
 %_ptr_Workgroup__arr_v4int_uint_4 = OpTypePointer Workgroup %_arr_v4int_uint_4
 %src_workgroup = OpVariable %_ptr_Workgroup__arr_v4int_uint_4 Workgroup
           %S = OpTypeStruct %_arr_v4int_uint_4
-%src_uniform_block = OpTypeStruct %S
-%_ptr_Uniform_src_uniform_block = OpTypePointer Uniform %src_uniform_block
-%src_uniform = OpVariable %_ptr_Uniform_src_uniform_block Uniform
-%_ptr_StorageBuffer_src_uniform_block = OpTypePointer StorageBuffer %src_uniform_block
-%src_storage = OpVariable %_ptr_StorageBuffer_src_uniform_block StorageBuffer
-        %dst = OpVariable %_ptr_StorageBuffer_src_uniform_block StorageBuffer
+%src_uniform_block_0_0 = OpTypeStruct %S
+%_ptr_Uniform_src_uniform_block_0_0 = OpTypePointer Uniform %src_uniform_block_0_0
+%src_uniform = OpVariable %_ptr_Uniform_src_uniform_block_0_0 Uniform
+%_ptr_StorageBuffer_src_uniform_block_0_0 = OpTypePointer StorageBuffer %src_uniform_block_0_0
+%src_storage = OpVariable %_ptr_StorageBuffer_src_uniform_block_0_0 StorageBuffer
+        %dst = OpVariable %_ptr_StorageBuffer_src_uniform_block_0_0 StorageBuffer
      %uint_2 = OpConstant %uint 2
 %_arr_int_uint_2 = OpTypeArray %int %uint_2
      %uint_3 = OpConstant %uint 3
 %_arr__arr_int_uint_2_uint_3 = OpTypeArray %_arr_int_uint_2 %uint_3
 %_arr__arr__arr_int_uint_2_uint_3_uint_4 = OpTypeArray %_arr__arr_int_uint_2_uint_3 %uint_4
    %S_nested = OpTypeStruct %_arr__arr__arr_int_uint_2_uint_3_uint_4
-%dst_nested_block = OpTypeStruct %S_nested
-%_ptr_StorageBuffer_dst_nested_block = OpTypePointer StorageBuffer %dst_nested_block
- %dst_nested = OpVariable %_ptr_StorageBuffer_dst_nested_block StorageBuffer
+%dst_nested_block_0_3 = OpTypeStruct %S_nested
+%_ptr_StorageBuffer_dst_nested_block_0_3 = OpTypePointer StorageBuffer %dst_nested_block_0_3
+ %dst_nested = OpVariable %_ptr_StorageBuffer_dst_nested_block_0_3 StorageBuffer
        %void = OpTypeVoid
          %27 = OpTypeFunction %void
          %31 = OpTypeFunction %_arr_v4int_uint_4

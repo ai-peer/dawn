@@ -479,7 +479,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_1_0_ssbo {
   Data inner;
 } coord;
 
@@ -527,7 +527,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_1_0_ssbo {
   Data inner;
 } coord;
 
@@ -572,7 +572,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_1_0_ssbo {
   Data inner;
 } coord;
 
@@ -617,7 +617,7 @@ struct Data {
   float b;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_1_0_ssbo {
   Data inner;
 } coord;
 
@@ -710,7 +710,7 @@ struct S {
   float x;
 };
 
-layout(binding = 0, std430) buffer coord_block_ssbo {
+layout(binding = 0, std430) buffer coord_block_1_0_ssbo {
   S inner;
 } coord;
 
@@ -933,7 +933,7 @@ struct Data {
   float d;
 };
 
-layout(binding = 0, std430) buffer data_block_ssbo {
+layout(binding = 0, std430) buffer data_block_0_0_ssbo {
   Data inner;
 } data;
 

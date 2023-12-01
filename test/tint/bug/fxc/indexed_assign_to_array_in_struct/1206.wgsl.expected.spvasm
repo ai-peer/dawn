@@ -15,8 +15,8 @@
                OpMemberName %Particle 2 "color"
                OpMemberName %Particle 3 "velocity"
                OpName %particles "particles"
-               OpName %sim_block "sim_block"
-               OpMemberName %sim_block 0 "inner"
+               OpName %sim_block_1_4 "sim_block_1_4"
+               OpMemberName %sim_block_1_4 0 "inner"
                OpName %Simulation "Simulation"
                OpMemberName %Simulation 0 "i"
                OpName %sim "sim"
@@ -33,8 +33,8 @@
                OpDecorate %particles NonWritable
                OpDecorate %particles DescriptorSet 1
                OpDecorate %particles Binding 3
-               OpDecorate %sim_block Block
-               OpMemberDecorate %sim_block 0 Offset 0
+               OpDecorate %sim_block_1_4 Block
+               OpMemberDecorate %sim_block_1_4 0 Offset 0
                OpMemberDecorate %Simulation 0 Offset 0
                OpDecorate %sim NonWritable
                OpDecorate %sim DescriptorSet 1
@@ -51,9 +51,9 @@
 %_ptr_StorageBuffer_Particles = OpTypePointer StorageBuffer %Particles
   %particles = OpVariable %_ptr_StorageBuffer_Particles StorageBuffer
  %Simulation = OpTypeStruct %uint
-  %sim_block = OpTypeStruct %Simulation
-%_ptr_Uniform_sim_block = OpTypePointer Uniform %sim_block
-        %sim = OpVariable %_ptr_Uniform_sim_block Uniform
+%sim_block_1_4 = OpTypeStruct %Simulation
+%_ptr_Uniform_sim_block_1_4 = OpTypePointer Uniform %sim_block_1_4
+        %sim = OpVariable %_ptr_Uniform_sim_block_1_4 Uniform
        %void = OpTypeVoid
          %16 = OpTypeFunction %void
      %uint_0 = OpConstant %uint 0

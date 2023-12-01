@@ -26,7 +26,7 @@ struct UniformBuffer {
   mat3 umatrix_S1;
 };
 
-layout(binding = 0, std140) uniform x_4_block_ubo {
+layout(binding = 0, std140) uniform x_4_block_0_0_ubo {
   UniformBuffer inner;
 } x_4;
 

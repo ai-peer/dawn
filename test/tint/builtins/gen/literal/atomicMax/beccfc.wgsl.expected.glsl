@@ -1,7 +1,7 @@
 #version 310 es
 
 shared uint arg_0;
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_2_0_ssbo {
   uint inner;
 } prevent_dce;
 

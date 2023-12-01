@@ -7,7 +7,7 @@ struct DeclaredAfterUsage {
   uint pad_2;
 };
 
-layout(binding = 0, std140) uniform declared_after_usage_block_ubo {
+layout(binding = 0, std140) uniform declared_after_usage_block_0_0_ubo {
   DeclaredAfterUsage inner;
 } declared_after_usage;
 

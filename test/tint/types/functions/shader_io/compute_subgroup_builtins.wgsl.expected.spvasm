@@ -10,8 +10,8 @@
                OpExecutionMode %main LocalSize 1 1 1
                OpName %subgroup_invocation_id_1 "subgroup_invocation_id_1"
                OpName %subgroup_size_1 "subgroup_size_1"
-               OpName %output_block "output_block"
-               OpMemberName %output_block 0 "inner"
+               OpName %output_block_0_0 "output_block_0_0"
+               OpMemberName %output_block_0_0 0 "inner"
                OpName %output "output"
                OpName %main_inner "main_inner"
                OpName %subgroup_invocation_id "subgroup_invocation_id"
@@ -19,8 +19,8 @@
                OpName %main "main"
                OpDecorate %subgroup_invocation_id_1 BuiltIn SubgroupLocalInvocationId
                OpDecorate %subgroup_size_1 BuiltIn SubgroupSize
-               OpDecorate %output_block Block
-               OpMemberDecorate %output_block 0 Offset 0
+               OpDecorate %output_block_0_0 Block
+               OpMemberDecorate %output_block_0_0 0 Offset 0
                OpDecorate %_runtimearr_uint ArrayStride 4
                OpDecorate %output DescriptorSet 0
                OpDecorate %output Binding 0
@@ -29,9 +29,9 @@
 %subgroup_invocation_id_1 = OpVariable %_ptr_Input_uint Input
 %subgroup_size_1 = OpVariable %_ptr_Input_uint Input
 %_runtimearr_uint = OpTypeRuntimeArray %uint
-%output_block = OpTypeStruct %_runtimearr_uint
-%_ptr_StorageBuffer_output_block = OpTypePointer StorageBuffer %output_block
-     %output = OpVariable %_ptr_StorageBuffer_output_block StorageBuffer
+%output_block_0_0 = OpTypeStruct %_runtimearr_uint
+%_ptr_StorageBuffer_output_block_0_0 = OpTypePointer StorageBuffer %output_block_0_0
+     %output = OpVariable %_ptr_StorageBuffer_output_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %9 = OpTypeFunction %void %uint %uint
      %uint_0 = OpConstant %uint 0

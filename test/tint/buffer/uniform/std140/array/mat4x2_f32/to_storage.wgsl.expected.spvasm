@@ -7,16 +7,16 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %u_block_std140 "u_block_std140"
-               OpMemberName %u_block_std140 0 "inner"
+               OpName %u_block_0_0_std140 "u_block_0_0_std140"
+               OpMemberName %u_block_0_0_std140 0 "inner"
                OpName %mat4x2_f32 "mat4x2_f32"
                OpMemberName %mat4x2_f32 0 "col0"
                OpMemberName %mat4x2_f32 1 "col1"
                OpMemberName %mat4x2_f32 2 "col2"
                OpMemberName %mat4x2_f32 3 "col3"
                OpName %u "u"
-               OpName %u_block "u_block"
-               OpMemberName %u_block 0 "inner"
+               OpName %u_block_0_0 "u_block_0_0"
+               OpMemberName %u_block_0_0 0 "inner"
                OpName %s "s"
                OpName %conv_mat4x2_f32 "conv_mat4x2_f32"
                OpName %val "val"
@@ -26,8 +26,8 @@
                OpName %i "i"
                OpName %var_for_index "var_for_index"
                OpName %f "f"
-               OpDecorate %u_block_std140 Block
-               OpMemberDecorate %u_block_std140 0 Offset 0
+               OpDecorate %u_block_0_0_std140 Block
+               OpMemberDecorate %u_block_0_0_std140 0 Offset 0
                OpMemberDecorate %mat4x2_f32 0 Offset 0
                OpMemberDecorate %mat4x2_f32 1 Offset 8
                OpMemberDecorate %mat4x2_f32 2 Offset 16
@@ -36,10 +36,10 @@
                OpDecorate %u NonWritable
                OpDecorate %u DescriptorSet 0
                OpDecorate %u Binding 0
-               OpDecorate %u_block Block
-               OpMemberDecorate %u_block 0 Offset 0
-               OpMemberDecorate %u_block 0 ColMajor
-               OpMemberDecorate %u_block 0 MatrixStride 8
+               OpDecorate %u_block_0_0 Block
+               OpMemberDecorate %u_block_0_0 0 Offset 0
+               OpMemberDecorate %u_block_0_0 0 ColMajor
+               OpMemberDecorate %u_block_0_0 0 MatrixStride 8
                OpDecorate %_arr_mat4v2float_uint_4 ArrayStride 32
                OpDecorate %s DescriptorSet 0
                OpDecorate %s Binding 1
@@ -49,14 +49,14 @@
        %uint = OpTypeInt 32 0
      %uint_4 = OpConstant %uint 4
 %_arr_mat4x2_f32_uint_4 = OpTypeArray %mat4x2_f32 %uint_4
-%u_block_std140 = OpTypeStruct %_arr_mat4x2_f32_uint_4
-%_ptr_Uniform_u_block_std140 = OpTypePointer Uniform %u_block_std140
-          %u = OpVariable %_ptr_Uniform_u_block_std140 Uniform
+%u_block_0_0_std140 = OpTypeStruct %_arr_mat4x2_f32_uint_4
+%_ptr_Uniform_u_block_0_0_std140 = OpTypePointer Uniform %u_block_0_0_std140
+          %u = OpVariable %_ptr_Uniform_u_block_0_0_std140 Uniform
 %mat4v2float = OpTypeMatrix %v2float 4
 %_arr_mat4v2float_uint_4 = OpTypeArray %mat4v2float %uint_4
-    %u_block = OpTypeStruct %_arr_mat4v2float_uint_4
-%_ptr_StorageBuffer_u_block = OpTypePointer StorageBuffer %u_block
-          %s = OpVariable %_ptr_StorageBuffer_u_block StorageBuffer
+%u_block_0_0 = OpTypeStruct %_arr_mat4v2float_uint_4
+%_ptr_StorageBuffer_u_block_0_0 = OpTypePointer StorageBuffer %u_block_0_0
+          %s = OpVariable %_ptr_StorageBuffer_u_block_0_0 StorageBuffer
          %15 = OpTypeFunction %mat4v2float %mat4x2_f32
          %24 = OpTypeFunction %_arr_mat4v2float_uint_4 %_arr_mat4x2_f32_uint_4
 %_ptr_Function__arr_mat4v2float_uint_4 = OpTypePointer Function %_arr_mat4v2float_uint_4

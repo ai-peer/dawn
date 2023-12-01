@@ -7,13 +7,13 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %ubo_block "ubo_block"
-               OpMemberName %ubo_block 0 "inner"
+               OpName %ubo_block_0_0 "ubo_block_0_0"
+               OpMemberName %ubo_block_0_0 0 "inner"
                OpName %UBO "UBO"
                OpMemberName %UBO 0 "dynamic_idx"
                OpName %ubo "ubo"
-               OpName %result_block "result_block"
-               OpMemberName %result_block 0 "inner"
+               OpName %result_block_0_1 "result_block_0_1"
+               OpMemberName %result_block_0_1 0 "inner"
                OpName %Result "Result"
                OpMemberName %Result 0 "out"
                OpName %result "result"
@@ -23,14 +23,14 @@
                OpName %p "p"
                OpName %f "f"
                OpName %s "s"
-               OpDecorate %ubo_block Block
-               OpMemberDecorate %ubo_block 0 Offset 0
+               OpDecorate %ubo_block_0_0 Block
+               OpMemberDecorate %ubo_block_0_0 0 Offset 0
                OpMemberDecorate %UBO 0 Offset 0
                OpDecorate %ubo NonWritable
                OpDecorate %ubo DescriptorSet 0
                OpDecorate %ubo Binding 0
-               OpDecorate %result_block Block
-               OpMemberDecorate %result_block 0 Offset 0
+               OpDecorate %result_block_0_1 Block
+               OpMemberDecorate %result_block_0_1 0 Offset 0
                OpMemberDecorate %Result 0 Offset 0
                OpDecorate %result DescriptorSet 0
                OpDecorate %result Binding 1
@@ -38,13 +38,13 @@
                OpDecorate %_arr_int_uint_64 ArrayStride 4
         %int = OpTypeInt 32 1
         %UBO = OpTypeStruct %int
-  %ubo_block = OpTypeStruct %UBO
-%_ptr_Uniform_ubo_block = OpTypePointer Uniform %ubo_block
-        %ubo = OpVariable %_ptr_Uniform_ubo_block Uniform
+%ubo_block_0_0 = OpTypeStruct %UBO
+%_ptr_Uniform_ubo_block_0_0 = OpTypePointer Uniform %ubo_block_0_0
+        %ubo = OpVariable %_ptr_Uniform_ubo_block_0_0 Uniform
      %Result = OpTypeStruct %int
-%result_block = OpTypeStruct %Result
-%_ptr_StorageBuffer_result_block = OpTypePointer StorageBuffer %result_block
-     %result = OpVariable %_ptr_StorageBuffer_result_block StorageBuffer
+%result_block_0_1 = OpTypeStruct %Result
+%_ptr_StorageBuffer_result_block_0_1 = OpTypePointer StorageBuffer %result_block_0_1
+     %result = OpVariable %_ptr_StorageBuffer_result_block_0_1 StorageBuffer
        %void = OpTypeVoid
        %uint = OpTypeInt 32 0
     %uint_64 = OpConstant %uint 64

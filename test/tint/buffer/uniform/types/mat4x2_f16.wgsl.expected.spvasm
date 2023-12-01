@@ -11,27 +11,27 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %u_block_std140 "u_block_std140"
-               OpMemberName %u_block_std140 0 "inner_0"
-               OpMemberName %u_block_std140 1 "inner_1"
-               OpMemberName %u_block_std140 2 "inner_2"
-               OpMemberName %u_block_std140 3 "inner_3"
+               OpName %u_block_0_0_std140 "u_block_0_0_std140"
+               OpMemberName %u_block_0_0_std140 0 "inner_0"
+               OpMemberName %u_block_0_0_std140 1 "inner_1"
+               OpMemberName %u_block_0_0_std140 2 "inner_2"
+               OpMemberName %u_block_0_0_std140 3 "inner_3"
                OpName %u "u"
                OpName %load_u_inner "load_u_inner"
                OpName %main "main"
-               OpDecorate %u_block_std140 Block
-               OpMemberDecorate %u_block_std140 0 Offset 0
-               OpMemberDecorate %u_block_std140 1 Offset 4
-               OpMemberDecorate %u_block_std140 2 Offset 8
-               OpMemberDecorate %u_block_std140 3 Offset 12
+               OpDecorate %u_block_0_0_std140 Block
+               OpMemberDecorate %u_block_0_0_std140 0 Offset 0
+               OpMemberDecorate %u_block_0_0_std140 1 Offset 4
+               OpMemberDecorate %u_block_0_0_std140 2 Offset 8
+               OpMemberDecorate %u_block_0_0_std140 3 Offset 12
                OpDecorate %u NonWritable
                OpDecorate %u DescriptorSet 0
                OpDecorate %u Binding 0
        %half = OpTypeFloat 16
      %v2half = OpTypeVector %half 2
-%u_block_std140 = OpTypeStruct %v2half %v2half %v2half %v2half
-%_ptr_Uniform_u_block_std140 = OpTypePointer Uniform %u_block_std140
-          %u = OpVariable %_ptr_Uniform_u_block_std140 Uniform
+%u_block_0_0_std140 = OpTypeStruct %v2half %v2half %v2half %v2half
+%_ptr_Uniform_u_block_0_0_std140 = OpTypePointer Uniform %u_block_0_0_std140
+          %u = OpVariable %_ptr_Uniform_u_block_0_0_std140 Uniform
  %mat4v2half = OpTypeMatrix %v2half 4
           %6 = OpTypeFunction %mat4v2half
        %uint = OpTypeInt 32 0

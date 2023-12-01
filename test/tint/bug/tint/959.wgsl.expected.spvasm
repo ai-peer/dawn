@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint Fragment %main "main"
                OpExecutionMode %main OriginUpperLeft
-               OpName %b0_block "b0_block"
-               OpMemberName %b0_block 0 "inner"
+               OpName %b0_block_0_0 "b0_block_0_0"
+               OpMemberName %b0_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "a"
                OpName %b0 "b0"
@@ -60,8 +60,8 @@
                OpName %s14 "s14"
                OpName %s15 "s15"
                OpName %main "main"
-               OpDecorate %b0_block Block
-               OpMemberDecorate %b0_block 0 Offset 0
+               OpDecorate %b0_block_0_0 Block
+               OpMemberDecorate %b0_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpDecorate %b0 NonWritable
                OpDecorate %b0 DescriptorSet 0
@@ -177,25 +177,25 @@
                OpDecorate %s15 Binding 300
       %float = OpTypeFloat 32
           %S = OpTypeStruct %float
-   %b0_block = OpTypeStruct %S
-%_ptr_StorageBuffer_b0_block = OpTypePointer StorageBuffer %b0_block
-         %b0 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-         %b1 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-         %b2 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-         %b3 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-         %b4 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-         %b5 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-         %b6 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-         %b7 = OpVariable %_ptr_StorageBuffer_b0_block StorageBuffer
-%_ptr_Uniform_b0_block = OpTypePointer Uniform %b0_block
-         %b8 = OpVariable %_ptr_Uniform_b0_block Uniform
-         %b9 = OpVariable %_ptr_Uniform_b0_block Uniform
-        %b10 = OpVariable %_ptr_Uniform_b0_block Uniform
-        %b11 = OpVariable %_ptr_Uniform_b0_block Uniform
-        %b12 = OpVariable %_ptr_Uniform_b0_block Uniform
-        %b13 = OpVariable %_ptr_Uniform_b0_block Uniform
-        %b14 = OpVariable %_ptr_Uniform_b0_block Uniform
-        %b15 = OpVariable %_ptr_Uniform_b0_block Uniform
+%b0_block_0_0 = OpTypeStruct %S
+%_ptr_StorageBuffer_b0_block_0_0 = OpTypePointer StorageBuffer %b0_block_0_0
+         %b0 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+         %b1 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+         %b2 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+         %b3 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+         %b4 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+         %b5 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+         %b6 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+         %b7 = OpVariable %_ptr_StorageBuffer_b0_block_0_0 StorageBuffer
+%_ptr_Uniform_b0_block_0_0 = OpTypePointer Uniform %b0_block_0_0
+         %b8 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
+         %b9 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
+        %b10 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
+        %b11 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
+        %b12 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
+        %b13 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
+        %b14 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
+        %b15 = OpVariable %_ptr_Uniform_b0_block_0_0 Uniform
          %24 = OpTypeImage %float 2D 0 0 0 1 Unknown
 %_ptr_UniformConstant_24 = OpTypePointer UniformConstant %24
          %t0 = OpVariable %_ptr_UniformConstant_24 UniformConstant

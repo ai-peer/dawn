@@ -8,8 +8,8 @@
                OpEntryPoint GLCompute %main "main" %id_1
                OpExecutionMode %main LocalSize 1 1 1
                OpName %id_1 "id_1"
-               OpName %input_block "input_block"
-               OpMemberName %input_block 0 "inner"
+               OpName %input_block_0_0 "input_block_0_0"
+               OpMemberName %input_block_0_0 0 "inner"
                OpName %Input "Input"
                OpMemberName %Input 0 "position"
                OpName %input "input"
@@ -17,8 +17,8 @@
                OpName %id "id"
                OpName %main "main"
                OpDecorate %id_1 BuiltIn GlobalInvocationId
-               OpDecorate %input_block Block
-               OpMemberDecorate %input_block 0 Offset 0
+               OpDecorate %input_block_0_0 Block
+               OpMemberDecorate %input_block_0_0 0 Offset 0
                OpMemberDecorate %Input 0 Offset 0
                OpDecorate %input NonWritable
                OpDecorate %input DescriptorSet 0
@@ -30,9 +30,9 @@
         %int = OpTypeInt 32 1
       %v3int = OpTypeVector %int 3
       %Input = OpTypeStruct %v3int
-%input_block = OpTypeStruct %Input
-%_ptr_StorageBuffer_input_block = OpTypePointer StorageBuffer %input_block
-      %input = OpVariable %_ptr_StorageBuffer_input_block StorageBuffer
+%input_block_0_0 = OpTypeStruct %Input
+%_ptr_StorageBuffer_input_block_0_0 = OpTypePointer StorageBuffer %input_block_0_0
+      %input = OpVariable %_ptr_StorageBuffer_input_block_0_0 StorageBuffer
        %void = OpTypeVoid
          %11 = OpTypeFunction %void %v3uint
      %uint_0 = OpConstant %uint 0

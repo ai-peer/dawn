@@ -7,7 +7,7 @@ struct Constants {
   uint pad_2;
 };
 
-layout(binding = 0, std140) uniform constants_block_ubo {
+layout(binding = 0, std140) uniform constants_block_1_0_ubo {
   Constants inner;
 } constants;
 
@@ -15,7 +15,7 @@ struct Result {
   uint value;
 };
 
-layout(binding = 1, std430) buffer result_block_ssbo {
+layout(binding = 1, std430) buffer result_block_1_1_ssbo {
   Result inner;
 } result;
 
@@ -23,7 +23,7 @@ struct TestData {
   int data[3];
 };
 
-layout(binding = 0, std430) buffer s_block_ssbo {
+layout(binding = 0, std430) buffer s_block_0_0_ssbo {
   TestData inner;
 } s;
 

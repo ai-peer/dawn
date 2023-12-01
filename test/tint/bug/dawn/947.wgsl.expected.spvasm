@@ -16,8 +16,8 @@
                OpName %vertex_point_size "vertex_point_size"
                OpName %texcoord_1 "texcoord_1"
                OpName %value "value"
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_0_0 "uniforms_block_0_0"
+               OpMemberName %uniforms_block_0_0 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "u_scale"
                OpMemberName %Uniforms 1 "u_offset"
@@ -44,8 +44,8 @@
                OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %texcoord_1 Location 0
                OpDecorate %value Location 0
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_0_0 Block
+               OpMemberDecorate %uniforms_block_0_0 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 1 Offset 8
                OpDecorate %uniforms NonWritable
@@ -81,9 +81,9 @@
  %texcoord_1 = OpVariable %_ptr_Input_v2float Input
       %value = OpVariable %_ptr_Output_v4float Output %16
    %Uniforms = OpTypeStruct %v2float %v2float
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_0_0 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_0_0 = OpTypePointer Uniform %uniforms_block_0_0
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_0_0 Uniform
          %29 = OpTypeSampler
 %_ptr_UniformConstant_29 = OpTypePointer UniformConstant %29
   %mySampler = OpVariable %_ptr_UniformConstant_29 UniformConstant

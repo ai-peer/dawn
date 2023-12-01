@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 0, std140) uniform u_block_ubo {
+layout(binding = 0, std140) uniform u_block_0_0_ubo {
   ivec4 inner;
 } u;
 

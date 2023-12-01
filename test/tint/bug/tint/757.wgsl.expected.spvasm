@@ -8,8 +8,8 @@
                OpEntryPoint GLCompute %main "main" %GlobalInvocationID_1
                OpExecutionMode %main LocalSize 1 1 1
                OpName %GlobalInvocationID_1 "GlobalInvocationID_1"
-               OpName %constants_block "constants_block"
-               OpMemberName %constants_block 0 "inner"
+               OpName %constants_block_0_0 "constants_block_0_0"
+               OpMemberName %constants_block_0_0 0 "inner"
                OpName %Constants "Constants"
                OpMemberName %Constants 0 "level"
                OpName %constants "constants"
@@ -24,8 +24,8 @@
                OpName %i "i"
                OpName %main "main"
                OpDecorate %GlobalInvocationID_1 BuiltIn GlobalInvocationId
-               OpDecorate %constants_block Block
-               OpMemberDecorate %constants_block 0 Offset 0
+               OpDecorate %constants_block_0_0 Block
+               OpMemberDecorate %constants_block_0_0 0 Offset 0
                OpMemberDecorate %Constants 0 Offset 0
                OpDecorate %constants NonWritable
                OpDecorate %constants DescriptorSet 0
@@ -43,9 +43,9 @@
 %GlobalInvocationID_1 = OpVariable %_ptr_Input_v3uint Input
         %int = OpTypeInt 32 1
   %Constants = OpTypeStruct %int
-%constants_block = OpTypeStruct %Constants
-%_ptr_Uniform_constants_block = OpTypePointer Uniform %constants_block
-  %constants = OpVariable %_ptr_Uniform_constants_block Uniform
+%constants_block_0_0 = OpTypeStruct %Constants
+%_ptr_Uniform_constants_block_0_0 = OpTypePointer Uniform %constants_block_0_0
+  %constants = OpVariable %_ptr_Uniform_constants_block_0_0 Uniform
       %float = OpTypeFloat 32
          %12 = OpTypeImage %float 2D 0 1 0 1 Unknown
 %_ptr_UniformConstant_12 = OpTypePointer UniformConstant %12

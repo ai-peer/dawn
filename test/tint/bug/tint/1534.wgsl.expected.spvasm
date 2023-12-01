@@ -7,38 +7,38 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %i_block "i_block"
-               OpMemberName %i_block 0 "inner"
+               OpName %i_block_0_0 "i_block_0_0"
+               OpMemberName %i_block_0_0 0 "inner"
                OpName %g "g"
                OpMemberName %g 0 "a"
                OpName %i "i"
-               OpName %j_block "j_block"
-               OpMemberName %j_block 0 "inner"
+               OpName %j_block_0_1 "j_block_0_1"
+               OpMemberName %j_block_0_1 0 "inner"
                OpName %h "h"
                OpMemberName %h 0 "a"
                OpName %j "j"
                OpName %main "main"
-               OpDecorate %i_block Block
-               OpMemberDecorate %i_block 0 Offset 0
+               OpDecorate %i_block_0_0 Block
+               OpMemberDecorate %i_block_0_0 0 Offset 0
                OpMemberDecorate %g 0 Offset 0
                OpDecorate %i NonWritable
                OpDecorate %i DescriptorSet 0
                OpDecorate %i Binding 0
-               OpDecorate %j_block Block
-               OpMemberDecorate %j_block 0 Offset 0
+               OpDecorate %j_block_0_1 Block
+               OpMemberDecorate %j_block_0_1 0 Offset 0
                OpMemberDecorate %h 0 Offset 0
                OpDecorate %j DescriptorSet 0
                OpDecorate %j Binding 1
        %uint = OpTypeInt 32 0
      %v3uint = OpTypeVector %uint 3
           %g = OpTypeStruct %v3uint
-    %i_block = OpTypeStruct %g
-%_ptr_Uniform_i_block = OpTypePointer Uniform %i_block
-          %i = OpVariable %_ptr_Uniform_i_block Uniform
+%i_block_0_0 = OpTypeStruct %g
+%_ptr_Uniform_i_block_0_0 = OpTypePointer Uniform %i_block_0_0
+          %i = OpVariable %_ptr_Uniform_i_block_0_0 Uniform
           %h = OpTypeStruct %uint
-    %j_block = OpTypeStruct %h
-%_ptr_StorageBuffer_j_block = OpTypePointer StorageBuffer %j_block
-          %j = OpVariable %_ptr_StorageBuffer_j_block StorageBuffer
+%j_block_0_1 = OpTypeStruct %h
+%_ptr_StorageBuffer_j_block_0_1 = OpTypePointer StorageBuffer %j_block_0_1
+          %j = OpVariable %_ptr_StorageBuffer_j_block_0_1 StorageBuffer
        %void = OpTypeVoid
          %11 = OpTypeFunction %void
      %uint_0 = OpConstant %uint 0

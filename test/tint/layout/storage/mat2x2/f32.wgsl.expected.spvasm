@@ -7,14 +7,14 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %ssbo_block "ssbo_block"
-               OpMemberName %ssbo_block 0 "inner"
+               OpName %ssbo_block_0_0 "ssbo_block_0_0"
+               OpMemberName %ssbo_block_0_0 0 "inner"
                OpName %SSBO "SSBO"
                OpMemberName %SSBO 0 "m"
                OpName %ssbo "ssbo"
                OpName %f "f"
-               OpDecorate %ssbo_block Block
-               OpMemberDecorate %ssbo_block 0 Offset 0
+               OpDecorate %ssbo_block_0_0 Block
+               OpMemberDecorate %ssbo_block_0_0 0 Offset 0
                OpMemberDecorate %SSBO 0 Offset 0
                OpMemberDecorate %SSBO 0 ColMajor
                OpMemberDecorate %SSBO 0 MatrixStride 8
@@ -24,9 +24,9 @@
     %v2float = OpTypeVector %float 2
 %mat2v2float = OpTypeMatrix %v2float 2
        %SSBO = OpTypeStruct %mat2v2float
- %ssbo_block = OpTypeStruct %SSBO
-%_ptr_StorageBuffer_ssbo_block = OpTypePointer StorageBuffer %ssbo_block
-       %ssbo = OpVariable %_ptr_StorageBuffer_ssbo_block StorageBuffer
+%ssbo_block_0_0 = OpTypeStruct %SSBO
+%_ptr_StorageBuffer_ssbo_block_0_0 = OpTypePointer StorageBuffer %ssbo_block_0_0
+       %ssbo = OpVariable %_ptr_StorageBuffer_ssbo_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %8 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

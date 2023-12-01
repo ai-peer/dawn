@@ -245,7 +245,7 @@ OpEntryPoint GLCompute %8 "a"
 OpEntryPoint GLCompute %18 "b"
 OpExecutionMode %8 LocalSize 1 1 1
 OpExecutionMode %18 LocalSize 1 1 1
-OpName %3 "data_block"
+OpName %3 "data_block_0_0"
 OpMemberName %3 0 "inner"
 OpName %4 "Data"
 OpMemberName %4 0 "d"

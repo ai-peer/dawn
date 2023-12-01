@@ -10,8 +10,8 @@
                OpName %sk_Clockwise_param_1 "sk_Clockwise_param_1"
                OpName %vcolor_S0_param_1 "vcolor_S0_param_1"
                OpName %sk_FragColor_1_1 "sk_FragColor_1_1"
-               OpName %x_4_block "x_4_block"
-               OpMemberName %x_4_block 0 "inner"
+               OpName %x_4_block_0_0 "x_4_block_0_0"
+               OpMemberName %x_4_block_0_0 0 "inner"
                OpName %UniformBuffer "UniformBuffer"
                OpMemberName %UniformBuffer 0 "unknownInput_S1_c0"
                OpMemberName %UniformBuffer 1 "ucolorRed_S1_c0"
@@ -60,8 +60,8 @@
                OpDecorate %sk_Clockwise_param_1 BuiltIn FrontFacing
                OpDecorate %vcolor_S0_param_1 Location 0
                OpDecorate %sk_FragColor_1_1 Location 0
-               OpDecorate %x_4_block Block
-               OpMemberDecorate %x_4_block 0 Offset 0
+               OpDecorate %x_4_block_0_0 Block
+               OpMemberDecorate %x_4_block_0_0 0 Offset 0
                OpMemberDecorate %UniformBuffer 0 Offset 16
                OpMemberDecorate %UniformBuffer 1 Offset 32
                OpMemberDecorate %UniformBuffer 2 Offset 48
@@ -85,9 +85,9 @@
     %v3float = OpTypeVector %float 3
 %mat3v3float = OpTypeMatrix %v3float 3
 %UniformBuffer = OpTypeStruct %float %v4float %v4float %mat3v3float
-  %x_4_block = OpTypeStruct %UniformBuffer
-%_ptr_Uniform_x_4_block = OpTypePointer Uniform %x_4_block
-        %x_4 = OpVariable %_ptr_Uniform_x_4_block Uniform
+%x_4_block_0_0 = OpTypeStruct %UniformBuffer
+%_ptr_Uniform_x_4_block_0_0 = OpTypePointer Uniform %x_4_block_0_0
+        %x_4 = OpVariable %_ptr_Uniform_x_4_block_0_0 Uniform
 %_ptr_Private_v4float = OpTypePointer Private %v4float
 %sk_FragColor = OpVariable %_ptr_Private_v4float Private %10
 %_ptr_Private_bool = OpTypePointer Private %bool

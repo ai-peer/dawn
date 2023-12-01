@@ -7,7 +7,7 @@ struct S {
   uint pad_2;
 };
 
-layout(binding = 0, std140) uniform v_block_ubo {
+layout(binding = 0, std140) uniform v_block_0_0_ubo {
   S inner;
 } v;
 

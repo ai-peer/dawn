@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %s_block "s_block"
-               OpMemberName %s_block 0 "inner"
+               OpName %s_block_0_0 "s_block_0_0"
+               OpMemberName %s_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "a"
                OpName %strided_arr_1 "strided_arr_1"
@@ -38,8 +38,8 @@
                OpName %var_for_index_2 "var_for_index_2"
                OpName %f_1 "f_1"
                OpName %f "f"
-               OpDecorate %s_block Block
-               OpMemberDecorate %s_block 0 Offset 0
+               OpDecorate %s_block_0_0 Block
+               OpMemberDecorate %s_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %strided_arr_1 0 Offset 0
                OpMemberDecorate %strided_arr 0 Offset 0
@@ -62,9 +62,9 @@
      %uint_4 = OpConstant %uint 4
 %_arr_strided_arr_1_uint_4 = OpTypeArray %strided_arr_1 %uint_4
           %S = OpTypeStruct %_arr_strided_arr_1_uint_4
-    %s_block = OpTypeStruct %S
-%_ptr_StorageBuffer_s_block = OpTypePointer StorageBuffer %s_block
-          %s = OpVariable %_ptr_StorageBuffer_s_block StorageBuffer
+%s_block_0_0 = OpTypeStruct %S
+%_ptr_StorageBuffer_s_block_0_0 = OpTypePointer StorageBuffer %s_block_0_0
+          %s = OpVariable %_ptr_StorageBuffer_s_block_0_0 StorageBuffer
        %void = OpTypeVoid
 %_arr_uint_uint_3 = OpTypeArray %uint %uint_3
          %15 = OpTypeFunction %void %_arr_uint_uint_3 %strided_arr

@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %in_block "in_block"
-               OpMemberName %in_block 0 "inner"
+               OpName %in_block_0_0 "in_block_0_0"
+               OpMemberName %in_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "inner"
                OpName %Inner "Inner"
@@ -22,8 +22,8 @@
                OpName %assign_and_preserve_padding_out "assign_and_preserve_padding_out"
                OpName %value_0 "value"
                OpName %main "main"
-               OpDecorate %in_block Block
-               OpMemberDecorate %in_block 0 Offset 0
+               OpDecorate %in_block_0_0 Block
+               OpMemberDecorate %in_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %Inner 0 Offset 0
                OpMemberDecorate %Inner 1 Offset 16
@@ -41,10 +41,10 @@
 %mat2v4float = OpTypeMatrix %v4float 2
       %Inner = OpTypeStruct %float %v3float %mat2v4float
           %S = OpTypeStruct %Inner
-   %in_block = OpTypeStruct %S
-%_ptr_StorageBuffer_in_block = OpTypePointer StorageBuffer %in_block
-         %in = OpVariable %_ptr_StorageBuffer_in_block StorageBuffer
-        %out = OpVariable %_ptr_StorageBuffer_in_block StorageBuffer
+%in_block_0_0 = OpTypeStruct %S
+%_ptr_StorageBuffer_in_block_0_0 = OpTypePointer StorageBuffer %in_block_0_0
+         %in = OpVariable %_ptr_StorageBuffer_in_block_0_0 StorageBuffer
+        %out = OpVariable %_ptr_StorageBuffer_in_block_0_0 StorageBuffer
        %void = OpTypeVoid
          %11 = OpTypeFunction %void %Inner
        %uint = OpTypeInt 32 0

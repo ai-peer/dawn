@@ -7,23 +7,23 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %unused_entry_point "unused_entry_point"
                OpExecutionMode %unused_entry_point LocalSize 1 1 1
-               OpName %v_block "v_block"
-               OpMemberName %v_block 0 "inner"
+               OpName %v_block_0_0 "v_block_0_0"
+               OpMemberName %v_block_0_0 0 "inner"
                OpName %v "v"
-               OpName %b_block "b_block"
-               OpMemberName %b_block 0 "inner"
+               OpName %b_block_0_1 "b_block_0_1"
+               OpMemberName %b_block_0_1 0 "inner"
                OpName %A "A"
                OpMemberName %A 0 "a"
                OpName %b "b"
                OpName %unused_entry_point "unused_entry_point"
-               OpDecorate %v_block Block
-               OpMemberDecorate %v_block 0 Offset 0
+               OpDecorate %v_block_0_0 Block
+               OpMemberDecorate %v_block_0_0 0 Offset 0
                OpDecorate %_arr_int_uint_1000000 ArrayStride 4
                OpDecorate %v NonWritable
                OpDecorate %v DescriptorSet 0
                OpDecorate %v Binding 0
-               OpDecorate %b_block Block
-               OpMemberDecorate %b_block 0 Offset 0
+               OpDecorate %b_block_0_1 Block
+               OpMemberDecorate %b_block_0_1 0 Offset 0
                OpMemberDecorate %A 0 Offset 0
                OpDecorate %_arr_float_uint_1000000 ArrayStride 4
                OpDecorate %b NonWritable
@@ -33,15 +33,15 @@
        %uint = OpTypeInt 32 0
 %uint_1000000 = OpConstant %uint 1000000
 %_arr_int_uint_1000000 = OpTypeArray %int %uint_1000000
-    %v_block = OpTypeStruct %_arr_int_uint_1000000
-%_ptr_StorageBuffer_v_block = OpTypePointer StorageBuffer %v_block
-          %v = OpVariable %_ptr_StorageBuffer_v_block StorageBuffer
+%v_block_0_0 = OpTypeStruct %_arr_int_uint_1000000
+%_ptr_StorageBuffer_v_block_0_0 = OpTypePointer StorageBuffer %v_block_0_0
+          %v = OpVariable %_ptr_StorageBuffer_v_block_0_0 StorageBuffer
       %float = OpTypeFloat 32
 %_arr_float_uint_1000000 = OpTypeArray %float %uint_1000000
           %A = OpTypeStruct %_arr_float_uint_1000000
-    %b_block = OpTypeStruct %A
-%_ptr_StorageBuffer_b_block = OpTypePointer StorageBuffer %b_block
-          %b = OpVariable %_ptr_StorageBuffer_b_block StorageBuffer
+%b_block_0_1 = OpTypeStruct %A
+%_ptr_StorageBuffer_b_block_0_1 = OpTypePointer StorageBuffer %b_block_0_1
+          %b = OpVariable %_ptr_StorageBuffer_b_block_0_1 StorageBuffer
        %void = OpTypeVoid
          %14 = OpTypeFunction %void
 %unused_entry_point = OpFunction %void None %14

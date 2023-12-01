@@ -8,8 +8,8 @@
                OpEntryPoint Vertex %main "main" %value %vertex_point_size
                OpName %value "value"
                OpName %vertex_point_size "vertex_point_size"
-               OpName %buffer_block "buffer_block"
-               OpMemberName %buffer_block 0 "inner"
+               OpName %buffer_block_0_0 "buffer_block_0_0"
+               OpMemberName %buffer_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "matrix_view"
                OpMemberName %S 1 "matrix_normal"
@@ -18,8 +18,8 @@
                OpName %main "main"
                OpDecorate %value BuiltIn Position
                OpDecorate %vertex_point_size BuiltIn PointSize
-               OpDecorate %buffer_block Block
-               OpMemberDecorate %buffer_block 0 Offset 0
+               OpDecorate %buffer_block_0_0 Block
+               OpMemberDecorate %buffer_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 0 ColMajor
                OpMemberDecorate %S 0 MatrixStride 16
@@ -41,9 +41,9 @@
     %v3float = OpTypeVector %float 3
 %mat3v3float = OpTypeMatrix %v3float 3
           %S = OpTypeStruct %mat4v4float %mat3v3float
-%buffer_block = OpTypeStruct %S
-%_ptr_Uniform_buffer_block = OpTypePointer Uniform %buffer_block
-     %buffer = OpVariable %_ptr_Uniform_buffer_block Uniform
+%buffer_block_0_0 = OpTypeStruct %S
+%_ptr_Uniform_buffer_block_0_0 = OpTypePointer Uniform %buffer_block_0_0
+     %buffer = OpVariable %_ptr_Uniform_buffer_block_0_0 Uniform
          %16 = OpTypeFunction %v4float
        %uint = OpTypeInt 32 0
      %uint_0 = OpConstant %uint 0

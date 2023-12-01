@@ -14,8 +14,8 @@
                OpName %value "value"
                OpName %vertex_point_size "vertex_point_size"
                OpName %arg_0 "arg_0"
-               OpName %prevent_dce_block "prevent_dce_block"
-               OpMemberName %prevent_dce_block 0 "inner"
+               OpName %prevent_dce_block_2_0 "prevent_dce_block_2_0"
+               OpMemberName %prevent_dce_block_2_0 0 "inner"
                OpName %prevent_dce "prevent_dce"
                OpName %textureLoad_61e2e8 "textureLoad_61e2e8"
                OpName %arg_1 "arg_1"
@@ -28,8 +28,8 @@
                OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %arg_0 DescriptorSet 1
                OpDecorate %arg_0 Binding 0
-               OpDecorate %prevent_dce_block Block
-               OpMemberDecorate %prevent_dce_block 0 Offset 0
+               OpDecorate %prevent_dce_block_2_0 Block
+               OpMemberDecorate %prevent_dce_block_2_0 0 Offset 0
                OpDecorate %prevent_dce DescriptorSet 2
                OpDecorate %prevent_dce Binding 0
       %float = OpTypeFloat 32
@@ -45,9 +45,9 @@
 %_ptr_UniformConstant_11 = OpTypePointer UniformConstant %11
       %arg_0 = OpVariable %_ptr_UniformConstant_11 UniformConstant
       %v4int = OpTypeVector %int 4
-%prevent_dce_block = OpTypeStruct %v4int
-%_ptr_StorageBuffer_prevent_dce_block = OpTypePointer StorageBuffer %prevent_dce_block
-%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block StorageBuffer
+%prevent_dce_block_2_0 = OpTypeStruct %v4int
+%_ptr_StorageBuffer_prevent_dce_block_2_0 = OpTypePointer StorageBuffer %prevent_dce_block_2_0
+%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block_2_0 StorageBuffer
        %void = OpTypeVoid
          %17 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

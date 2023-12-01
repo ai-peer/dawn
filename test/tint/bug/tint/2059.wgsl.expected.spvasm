@@ -7,37 +7,37 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %buffer0_block "buffer0_block"
-               OpMemberName %buffer0_block 0 "inner"
+               OpName %buffer0_block_0_0 "buffer0_block_0_0"
+               OpMemberName %buffer0_block_0_0 0 "inner"
                OpName %buffer0 "buffer0"
-               OpName %buffer1_block "buffer1_block"
-               OpMemberName %buffer1_block 0 "inner"
+               OpName %buffer1_block_0_1 "buffer1_block_0_1"
+               OpMemberName %buffer1_block_0_1 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "m"
                OpName %buffer1 "buffer1"
-               OpName %buffer2_block "buffer2_block"
-               OpMemberName %buffer2_block 0 "inner"
+               OpName %buffer2_block_0_2 "buffer2_block_0_2"
+               OpMemberName %buffer2_block_0_2 0 "inner"
                OpName %S2 "S2"
                OpMemberName %S2 0 "m"
                OpName %buffer2 "buffer2"
-               OpName %buffer3_block "buffer3_block"
-               OpMemberName %buffer3_block 0 "inner"
+               OpName %buffer3_block_0_3 "buffer3_block_0_3"
+               OpMemberName %buffer3_block_0_3 0 "inner"
                OpName %S3 "S3"
                OpMemberName %S3 0 "s"
                OpName %buffer3 "buffer3"
-               OpName %buffer4_block "buffer4_block"
-               OpMemberName %buffer4_block 0 "inner"
+               OpName %buffer4_block_0_4 "buffer4_block_0_4"
+               OpMemberName %buffer4_block_0_4 0 "inner"
                OpName %S4 "S4"
                OpMemberName %S4 0 "s"
                OpName %buffer4 "buffer4"
-               OpName %buffer5_block "buffer5_block"
-               OpMemberName %buffer5_block 0 "inner"
+               OpName %buffer5_block_0_5 "buffer5_block_0_5"
+               OpMemberName %buffer5_block_0_5 0 "inner"
                OpName %buffer5 "buffer5"
-               OpName %buffer6_block "buffer6_block"
-               OpMemberName %buffer6_block 0 "inner"
+               OpName %buffer6_block_0_6 "buffer6_block_0_6"
+               OpMemberName %buffer6_block_0_6 0 "inner"
                OpName %buffer6 "buffer6"
-               OpName %buffer7_block "buffer7_block"
-               OpMemberName %buffer7_block 0 "inner"
+               OpName %buffer7_block_0_7 "buffer7_block_0_7"
+               OpMemberName %buffer7_block_0_7 0 "inner"
                OpName %buffer7 "buffer7"
                OpName %assign_and_preserve_padding_buffer0 "assign_and_preserve_padding_buffer0"
                OpName %value "value"
@@ -107,50 +107,50 @@
                OpName %main "main"
                OpName %m "m"
                OpName %c "c"
-               OpDecorate %buffer0_block Block
-               OpMemberDecorate %buffer0_block 0 Offset 0
-               OpMemberDecorate %buffer0_block 0 ColMajor
-               OpMemberDecorate %buffer0_block 0 MatrixStride 16
+               OpDecorate %buffer0_block_0_0 Block
+               OpMemberDecorate %buffer0_block_0_0 0 Offset 0
+               OpMemberDecorate %buffer0_block_0_0 0 ColMajor
+               OpMemberDecorate %buffer0_block_0_0 0 MatrixStride 16
                OpDecorate %buffer0 DescriptorSet 0
                OpDecorate %buffer0 Binding 0
-               OpDecorate %buffer1_block Block
-               OpMemberDecorate %buffer1_block 0 Offset 0
+               OpDecorate %buffer1_block_0_1 Block
+               OpMemberDecorate %buffer1_block_0_1 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 0 ColMajor
                OpMemberDecorate %S 0 MatrixStride 16
                OpDecorate %buffer1 DescriptorSet 0
                OpDecorate %buffer1 Binding 1
-               OpDecorate %buffer2_block Block
-               OpMemberDecorate %buffer2_block 0 Offset 0
+               OpDecorate %buffer2_block_0_2 Block
+               OpMemberDecorate %buffer2_block_0_2 0 Offset 0
                OpMemberDecorate %S2 0 Offset 0
                OpMemberDecorate %S2 0 ColMajor
                OpMemberDecorate %S2 0 MatrixStride 16
                OpDecorate %_arr_mat3v3float_uint_1 ArrayStride 48
                OpDecorate %buffer2 DescriptorSet 0
                OpDecorate %buffer2 Binding 2
-               OpDecorate %buffer3_block Block
-               OpMemberDecorate %buffer3_block 0 Offset 0
+               OpDecorate %buffer3_block_0_3 Block
+               OpMemberDecorate %buffer3_block_0_3 0 Offset 0
                OpMemberDecorate %S3 0 Offset 0
                OpDecorate %buffer3 DescriptorSet 0
                OpDecorate %buffer3 Binding 3
-               OpDecorate %buffer4_block Block
-               OpMemberDecorate %buffer4_block 0 Offset 0
+               OpDecorate %buffer4_block_0_4 Block
+               OpMemberDecorate %buffer4_block_0_4 0 Offset 0
                OpMemberDecorate %S4 0 Offset 0
                OpDecorate %_arr_S_uint_1 ArrayStride 48
                OpDecorate %buffer4 DescriptorSet 0
                OpDecorate %buffer4 Binding 4
-               OpDecorate %buffer5_block Block
-               OpMemberDecorate %buffer5_block 0 Offset 0
-               OpMemberDecorate %buffer5_block 0 ColMajor
-               OpMemberDecorate %buffer5_block 0 MatrixStride 16
+               OpDecorate %buffer5_block_0_5 Block
+               OpMemberDecorate %buffer5_block_0_5 0 Offset 0
+               OpMemberDecorate %buffer5_block_0_5 0 ColMajor
+               OpMemberDecorate %buffer5_block_0_5 0 MatrixStride 16
                OpDecorate %buffer5 DescriptorSet 0
                OpDecorate %buffer5 Binding 5
-               OpDecorate %buffer6_block Block
-               OpMemberDecorate %buffer6_block 0 Offset 0
+               OpDecorate %buffer6_block_0_6 Block
+               OpMemberDecorate %buffer6_block_0_6 0 Offset 0
                OpDecorate %buffer6 DescriptorSet 0
                OpDecorate %buffer6 Binding 6
-               OpDecorate %buffer7_block Block
-               OpMemberDecorate %buffer7_block 0 Offset 0
+               OpDecorate %buffer7_block_0_7 Block
+               OpMemberDecorate %buffer7_block_0_7 0 Offset 0
                OpDecorate %_arr_S2_uint_1 ArrayStride 48
                OpDecorate %buffer7 DescriptorSet 0
                OpDecorate %buffer7 Binding 7
@@ -159,39 +159,39 @@
       %float = OpTypeFloat 32
     %v3float = OpTypeVector %float 3
 %mat3v3float = OpTypeMatrix %v3float 3
-%buffer0_block = OpTypeStruct %mat3v3float
-%_ptr_StorageBuffer_buffer0_block = OpTypePointer StorageBuffer %buffer0_block
-    %buffer0 = OpVariable %_ptr_StorageBuffer_buffer0_block StorageBuffer
+%buffer0_block_0_0 = OpTypeStruct %mat3v3float
+%_ptr_StorageBuffer_buffer0_block_0_0 = OpTypePointer StorageBuffer %buffer0_block_0_0
+    %buffer0 = OpVariable %_ptr_StorageBuffer_buffer0_block_0_0 StorageBuffer
           %S = OpTypeStruct %mat3v3float
-%buffer1_block = OpTypeStruct %S
-%_ptr_StorageBuffer_buffer1_block = OpTypePointer StorageBuffer %buffer1_block
-    %buffer1 = OpVariable %_ptr_StorageBuffer_buffer1_block StorageBuffer
+%buffer1_block_0_1 = OpTypeStruct %S
+%_ptr_StorageBuffer_buffer1_block_0_1 = OpTypePointer StorageBuffer %buffer1_block_0_1
+    %buffer1 = OpVariable %_ptr_StorageBuffer_buffer1_block_0_1 StorageBuffer
        %uint = OpTypeInt 32 0
      %uint_1 = OpConstant %uint 1
 %_arr_mat3v3float_uint_1 = OpTypeArray %mat3v3float %uint_1
          %S2 = OpTypeStruct %_arr_mat3v3float_uint_1
-%buffer2_block = OpTypeStruct %S2
-%_ptr_StorageBuffer_buffer2_block = OpTypePointer StorageBuffer %buffer2_block
-    %buffer2 = OpVariable %_ptr_StorageBuffer_buffer2_block StorageBuffer
+%buffer2_block_0_2 = OpTypeStruct %S2
+%_ptr_StorageBuffer_buffer2_block_0_2 = OpTypePointer StorageBuffer %buffer2_block_0_2
+    %buffer2 = OpVariable %_ptr_StorageBuffer_buffer2_block_0_2 StorageBuffer
          %S3 = OpTypeStruct %S
-%buffer3_block = OpTypeStruct %S3
-%_ptr_StorageBuffer_buffer3_block = OpTypePointer StorageBuffer %buffer3_block
-    %buffer3 = OpVariable %_ptr_StorageBuffer_buffer3_block StorageBuffer
+%buffer3_block_0_3 = OpTypeStruct %S3
+%_ptr_StorageBuffer_buffer3_block_0_3 = OpTypePointer StorageBuffer %buffer3_block_0_3
+    %buffer3 = OpVariable %_ptr_StorageBuffer_buffer3_block_0_3 StorageBuffer
 %_arr_S_uint_1 = OpTypeArray %S %uint_1
          %S4 = OpTypeStruct %_arr_S_uint_1
-%buffer4_block = OpTypeStruct %S4
-%_ptr_StorageBuffer_buffer4_block = OpTypePointer StorageBuffer %buffer4_block
-    %buffer4 = OpVariable %_ptr_StorageBuffer_buffer4_block StorageBuffer
-%buffer5_block = OpTypeStruct %_arr_mat3v3float_uint_1
-%_ptr_StorageBuffer_buffer5_block = OpTypePointer StorageBuffer %buffer5_block
-    %buffer5 = OpVariable %_ptr_StorageBuffer_buffer5_block StorageBuffer
-%buffer6_block = OpTypeStruct %_arr_S_uint_1
-%_ptr_StorageBuffer_buffer6_block = OpTypePointer StorageBuffer %buffer6_block
-    %buffer6 = OpVariable %_ptr_StorageBuffer_buffer6_block StorageBuffer
+%buffer4_block_0_4 = OpTypeStruct %S4
+%_ptr_StorageBuffer_buffer4_block_0_4 = OpTypePointer StorageBuffer %buffer4_block_0_4
+    %buffer4 = OpVariable %_ptr_StorageBuffer_buffer4_block_0_4 StorageBuffer
+%buffer5_block_0_5 = OpTypeStruct %_arr_mat3v3float_uint_1
+%_ptr_StorageBuffer_buffer5_block_0_5 = OpTypePointer StorageBuffer %buffer5_block_0_5
+    %buffer5 = OpVariable %_ptr_StorageBuffer_buffer5_block_0_5 StorageBuffer
+%buffer6_block_0_6 = OpTypeStruct %_arr_S_uint_1
+%_ptr_StorageBuffer_buffer6_block_0_6 = OpTypePointer StorageBuffer %buffer6_block_0_6
+    %buffer6 = OpVariable %_ptr_StorageBuffer_buffer6_block_0_6 StorageBuffer
 %_arr_S2_uint_1 = OpTypeArray %S2 %uint_1
-%buffer7_block = OpTypeStruct %_arr_S2_uint_1
-%_ptr_StorageBuffer_buffer7_block = OpTypePointer StorageBuffer %buffer7_block
-    %buffer7 = OpVariable %_ptr_StorageBuffer_buffer7_block StorageBuffer
+%buffer7_block_0_7 = OpTypeStruct %_arr_S2_uint_1
+%_ptr_StorageBuffer_buffer7_block_0_7 = OpTypePointer StorageBuffer %buffer7_block_0_7
+    %buffer7 = OpVariable %_ptr_StorageBuffer_buffer7_block_0_7 StorageBuffer
        %void = OpTypeVoid
          %37 = OpTypeFunction %void %mat3v3float
      %uint_0 = OpConstant %uint 0

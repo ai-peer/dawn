@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint Fragment %main "main"
                OpExecutionMode %main OriginUpperLeft
-               OpName %sspp962805860buildInformation_block "sspp962805860buildInformation_block"
-               OpMemberName %sspp962805860buildInformation_block 0 "inner"
+               OpName %sspp962805860buildInformation_block_0_2 "sspp962805860buildInformation_block_0_2"
+               OpMemberName %sspp962805860buildInformation_block_0_2 0 "inner"
                OpName %x_B4_BuildInformation "x_B4_BuildInformation"
                OpMemberName %x_B4_BuildInformation 0 "passthru"
                OpName %sspp962805860buildInformationS "sspp962805860buildInformationS"
@@ -20,8 +20,8 @@
                OpName %main_1 "main_1"
                OpName %orientation "orientation"
                OpName %main "main"
-               OpDecorate %sspp962805860buildInformation_block Block
-               OpMemberDecorate %sspp962805860buildInformation_block 0 Offset 0
+               OpDecorate %sspp962805860buildInformation_block_0_2 Block
+               OpMemberDecorate %sspp962805860buildInformation_block_0_2 0 Offset 0
                OpMemberDecorate %x_B4_BuildInformation 0 Offset 0
                OpMemberDecorate %sspp962805860buildInformationS 0 Offset 0
                OpMemberDecorate %sspp962805860buildInformationS 1 Offset 16
@@ -39,9 +39,9 @@
 %_arr_int_uint_6 = OpTypeArray %int %uint_6
 %sspp962805860buildInformationS = OpTypeStruct %v4float %v4float %int %_arr_int_uint_6
 %x_B4_BuildInformation = OpTypeStruct %sspp962805860buildInformationS
-%sspp962805860buildInformation_block = OpTypeStruct %x_B4_BuildInformation
-%_ptr_StorageBuffer_sspp962805860buildInformation_block = OpTypePointer StorageBuffer %sspp962805860buildInformation_block
-%sspp962805860buildInformation = OpVariable %_ptr_StorageBuffer_sspp962805860buildInformation_block StorageBuffer
+%sspp962805860buildInformation_block_0_2 = OpTypeStruct %x_B4_BuildInformation
+%_ptr_StorageBuffer_sspp962805860buildInformation_block_0_2 = OpTypePointer StorageBuffer %sspp962805860buildInformation_block_0_2
+%sspp962805860buildInformation = OpVariable %_ptr_StorageBuffer_sspp962805860buildInformation_block_0_2 StorageBuffer
        %void = OpTypeVoid
          %12 = OpTypeFunction %void
 %_ptr_Function__arr_int_uint_6 = OpTypePointer Function %_arr_int_uint_6

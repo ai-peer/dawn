@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %ssbo_block "ssbo_block"
-               OpMemberName %ssbo_block 0 "inner"
+               OpName %ssbo_block_0_0 "ssbo_block_0_0"
+               OpMemberName %ssbo_block_0_0 0 "inner"
                OpName %SSBO "SSBO"
                OpMemberName %SSBO 0 "m"
                OpName %strided_arr "strided_arr"
@@ -27,8 +27,8 @@
                OpName %var_for_index "var_for_index"
                OpName %f_1 "f_1"
                OpName %f "f"
-               OpDecorate %ssbo_block Block
-               OpMemberDecorate %ssbo_block 0 Offset 0
+               OpDecorate %ssbo_block_0_0 Block
+               OpMemberDecorate %ssbo_block_0_0 0 Offset 0
                OpMemberDecorate %SSBO 0 Offset 0
                OpMemberDecorate %strided_arr 0 Offset 0
                OpDecorate %_arr_strided_arr_uint_2 ArrayStride 16
@@ -42,9 +42,9 @@
      %uint_2 = OpConstant %uint 2
 %_arr_strided_arr_uint_2 = OpTypeArray %strided_arr %uint_2
        %SSBO = OpTypeStruct %_arr_strided_arr_uint_2
- %ssbo_block = OpTypeStruct %SSBO
-%_ptr_StorageBuffer_ssbo_block = OpTypePointer StorageBuffer %ssbo_block
-       %ssbo = OpVariable %_ptr_StorageBuffer_ssbo_block StorageBuffer
+%ssbo_block_0_0 = OpTypeStruct %SSBO
+%_ptr_StorageBuffer_ssbo_block_0_0 = OpTypePointer StorageBuffer %ssbo_block_0_0
+       %ssbo = OpVariable %_ptr_StorageBuffer_ssbo_block_0_0 StorageBuffer
 %mat2v2float = OpTypeMatrix %v2float 2
          %11 = OpTypeFunction %_arr_strided_arr_uint_2 %mat2v2float
          %16 = OpConstantNull %uint

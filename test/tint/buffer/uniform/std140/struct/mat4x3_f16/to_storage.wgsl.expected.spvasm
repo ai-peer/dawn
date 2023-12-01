@@ -11,8 +11,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %u_block_std140 "u_block_std140"
-               OpMemberName %u_block_std140 0 "inner"
+               OpName %u_block_0_0_std140 "u_block_0_0_std140"
+               OpMemberName %u_block_0_0_std140 0 "inner"
                OpName %S_std140 "S_std140"
                OpMemberName %S_std140 0 "before"
                OpMemberName %S_std140 1 "m_0"
@@ -21,8 +21,8 @@
                OpMemberName %S_std140 4 "m_3"
                OpMemberName %S_std140 5 "after"
                OpName %u "u"
-               OpName %u_block "u_block"
-               OpMemberName %u_block 0 "inner"
+               OpName %u_block_0_0 "u_block_0_0"
+               OpMemberName %u_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "before"
                OpMemberName %S 1 "m"
@@ -47,8 +47,8 @@
                OpName %var_for_index_1 "var_for_index_1"
                OpName %load_u_inner_2_m "load_u_inner_2_m"
                OpName %f "f"
-               OpDecorate %u_block_std140 Block
-               OpMemberDecorate %u_block_std140 0 Offset 0
+               OpDecorate %u_block_0_0_std140 Block
+               OpMemberDecorate %u_block_0_0_std140 0 Offset 0
                OpMemberDecorate %S_std140 0 Offset 0
                OpMemberDecorate %S_std140 1 Offset 8
                OpMemberDecorate %S_std140 2 Offset 16
@@ -59,8 +59,8 @@
                OpDecorate %u NonWritable
                OpDecorate %u DescriptorSet 0
                OpDecorate %u Binding 0
-               OpDecorate %u_block Block
-               OpMemberDecorate %u_block 0 Offset 0
+               OpDecorate %u_block_0_0 Block
+               OpMemberDecorate %u_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 1 Offset 8
                OpMemberDecorate %S 1 ColMajor
@@ -77,15 +77,15 @@
        %uint = OpTypeInt 32 0
      %uint_4 = OpConstant %uint 4
 %_arr_S_std140_uint_4 = OpTypeArray %S_std140 %uint_4
-%u_block_std140 = OpTypeStruct %_arr_S_std140_uint_4
-%_ptr_Uniform_u_block_std140 = OpTypePointer Uniform %u_block_std140
-          %u = OpVariable %_ptr_Uniform_u_block_std140 Uniform
+%u_block_0_0_std140 = OpTypeStruct %_arr_S_std140_uint_4
+%_ptr_Uniform_u_block_0_0_std140 = OpTypePointer Uniform %u_block_0_0_std140
+          %u = OpVariable %_ptr_Uniform_u_block_0_0_std140 Uniform
  %mat4v3half = OpTypeMatrix %v3half 4
           %S = OpTypeStruct %int %mat4v3half %int
 %_arr_S_uint_4 = OpTypeArray %S %uint_4
-    %u_block = OpTypeStruct %_arr_S_uint_4
-%_ptr_StorageBuffer_u_block = OpTypePointer StorageBuffer %u_block
-          %s = OpVariable %_ptr_StorageBuffer_u_block StorageBuffer
+%u_block_0_0 = OpTypeStruct %_arr_S_uint_4
+%_ptr_StorageBuffer_u_block_0_0 = OpTypePointer StorageBuffer %u_block_0_0
+          %s = OpVariable %_ptr_StorageBuffer_u_block_0_0 StorageBuffer
        %void = OpTypeVoid
      %uint_1 = OpConstant %uint 1
 %_arr_uint_uint_1 = OpTypeArray %uint %uint_1

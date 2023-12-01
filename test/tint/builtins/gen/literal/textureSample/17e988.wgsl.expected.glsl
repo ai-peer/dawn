@@ -3,7 +3,7 @@ precision highp float;
 
 uniform highp sampler2DArray arg_0_arg_1;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_2_0_ssbo {
   vec4 inner;
 } prevent_dce;
 

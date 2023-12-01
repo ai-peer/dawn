@@ -14,8 +14,8 @@
                OpName %vUV_1_1 "vUV_1_1"
                OpName %vertex_point_size "vertex_point_size"
                OpName %position_1 "position_1"
-               OpName %x_14_block "x_14_block"
-               OpMemberName %x_14_block 0 "inner"
+               OpName %x_14_block_2_2 "x_14_block_2_2"
+               OpMemberName %x_14_block_2_2 0 "inner"
                OpName %LeftOver "LeftOver"
                OpMemberName %LeftOver 0 "worldViewProjection"
                OpMemberName %LeftOver 1 "time"
@@ -45,8 +45,8 @@
                OpDecorate %gl_Position_1 BuiltIn Position
                OpDecorate %vUV_1_1 Location 0
                OpDecorate %vertex_point_size BuiltIn PointSize
-               OpDecorate %x_14_block Block
-               OpMemberDecorate %x_14_block 0 Offset 0
+               OpDecorate %x_14_block_2_2 Block
+               OpMemberDecorate %x_14_block_2_2 0 Offset 0
                OpMemberDecorate %LeftOver 0 Offset 0
                OpMemberDecorate %LeftOver 0 ColMajor
                OpMemberDecorate %LeftOver 0 MatrixStride 16
@@ -92,9 +92,9 @@
      %uint_4 = OpConstant %uint 4
 %_arr_strided_arr_uint_4 = OpTypeArray %strided_arr %uint_4
    %LeftOver = OpTypeStruct %mat4v4float %float %_arr_mat4v4float_uint_2 %_arr_strided_arr_uint_4
- %x_14_block = OpTypeStruct %LeftOver
-%_ptr_Uniform_x_14_block = OpTypePointer Uniform %x_14_block
-       %x_14 = OpVariable %_ptr_Uniform_x_14_block Uniform
+%x_14_block_2_2 = OpTypeStruct %LeftOver
+%_ptr_Uniform_x_14_block_2_2 = OpTypePointer Uniform %x_14_block_2_2
+       %x_14 = OpVariable %_ptr_Uniform_x_14_block_2_2 Uniform
 %_ptr_Private_v2float = OpTypePointer Private %v2float
         %vUV = OpVariable %_ptr_Private_v2float Private %15
          %uv = OpVariable %_ptr_Private_v2float Private %15

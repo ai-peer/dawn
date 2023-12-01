@@ -7,24 +7,24 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %out_block "out_block"
-               OpMemberName %out_block 0 "inner"
+               OpName %out_block_0_0 "out_block_0_0"
+               OpMemberName %out_block_0_0 0 "inner"
                OpName %out "out"
                OpName %assign_and_preserve_padding_out "assign_and_preserve_padding_out"
                OpName %value "value"
                OpName %f "f"
-               OpDecorate %out_block Block
-               OpMemberDecorate %out_block 0 Offset 0
-               OpMemberDecorate %out_block 0 ColMajor
-               OpMemberDecorate %out_block 0 MatrixStride 16
+               OpDecorate %out_block_0_0 Block
+               OpMemberDecorate %out_block_0_0 0 Offset 0
+               OpMemberDecorate %out_block_0_0 0 ColMajor
+               OpMemberDecorate %out_block_0_0 0 MatrixStride 16
                OpDecorate %out DescriptorSet 0
                OpDecorate %out Binding 0
       %float = OpTypeFloat 32
     %v3float = OpTypeVector %float 3
 %mat3v3float = OpTypeMatrix %v3float 3
-  %out_block = OpTypeStruct %mat3v3float
-%_ptr_StorageBuffer_out_block = OpTypePointer StorageBuffer %out_block
-        %out = OpVariable %_ptr_StorageBuffer_out_block StorageBuffer
+%out_block_0_0 = OpTypeStruct %mat3v3float
+%_ptr_StorageBuffer_out_block_0_0 = OpTypePointer StorageBuffer %out_block_0_0
+        %out = OpVariable %_ptr_StorageBuffer_out_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %7 = OpTypeFunction %void %mat3v3float
        %uint = OpTypeInt 32 0

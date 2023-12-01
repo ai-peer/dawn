@@ -7,24 +7,24 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %unused_entry_point "unused_entry_point"
                OpExecutionMode %unused_entry_point LocalSize 1 1 1
-               OpName %U_block "U_block"
-               OpMemberName %U_block 0 "inner"
+               OpName %U_block_0_0 "U_block_0_0"
+               OpMemberName %U_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "v"
                OpName %U "U"
                OpName %unused_entry_point "unused_entry_point"
                OpName %f "f"
-               OpDecorate %U_block Block
-               OpMemberDecorate %U_block 0 Offset 0
+               OpDecorate %U_block_0_0 Block
+               OpMemberDecorate %U_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpDecorate %U DescriptorSet 0
                OpDecorate %U Binding 0
       %float = OpTypeFloat 32
     %v3float = OpTypeVector %float 3
           %S = OpTypeStruct %v3float
-    %U_block = OpTypeStruct %S
-%_ptr_StorageBuffer_U_block = OpTypePointer StorageBuffer %U_block
-          %U = OpVariable %_ptr_StorageBuffer_U_block StorageBuffer
+%U_block_0_0 = OpTypeStruct %S
+%_ptr_StorageBuffer_U_block_0_0 = OpTypePointer StorageBuffer %U_block_0_0
+          %U = OpVariable %_ptr_StorageBuffer_U_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %7 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

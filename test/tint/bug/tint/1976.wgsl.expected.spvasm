@@ -8,16 +8,16 @@
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
                OpName %texture0 "texture0"
-               OpName %results_block "results_block"
-               OpMemberName %results_block 0 "inner"
+               OpName %results_block_0_2 "results_block_0_2"
+               OpMemberName %results_block_0_2 0 "inner"
                OpName %Results "Results"
                OpMemberName %Results 0 "colorSamples"
                OpName %results "results"
                OpName %main "main"
                OpDecorate %texture0 DescriptorSet 0
                OpDecorate %texture0 Binding 0
-               OpDecorate %results_block Block
-               OpMemberDecorate %results_block 0 Offset 0
+               OpDecorate %results_block_0_2 Block
+               OpMemberDecorate %results_block_0_2 0 Offset 0
                OpMemberDecorate %Results 0 Offset 0
                OpDecorate %_arr_float_uint_4 ArrayStride 4
                OpDecorate %results DescriptorSet 0
@@ -30,9 +30,9 @@
      %uint_4 = OpConstant %uint 4
 %_arr_float_uint_4 = OpTypeArray %float %uint_4
     %Results = OpTypeStruct %_arr_float_uint_4
-%results_block = OpTypeStruct %Results
-%_ptr_StorageBuffer_results_block = OpTypePointer StorageBuffer %results_block
-    %results = OpVariable %_ptr_StorageBuffer_results_block StorageBuffer
+%results_block_0_2 = OpTypeStruct %Results
+%_ptr_StorageBuffer_results_block_0_2 = OpTypePointer StorageBuffer %results_block_0_2
+    %results = OpVariable %_ptr_StorageBuffer_results_block_0_2 StorageBuffer
        %void = OpTypeVoid
          %12 = OpTypeFunction %void
      %uint_0 = OpConstant %uint 0

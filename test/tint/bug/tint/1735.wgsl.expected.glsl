@@ -4,11 +4,11 @@ struct S {
   float f;
 };
 
-layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 0, std430) buffer tint_symbol_block_0_0_ssbo {
   S inner;
 } tint_symbol;
 
-layout(binding = 1, std430) buffer tint_symbol_block_ssbo_1 {
+layout(binding = 1, std430) buffer tint_symbol_block_0_0_ssbo_1 {
   S inner;
 } tint_symbol_1;
 

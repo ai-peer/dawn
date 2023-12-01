@@ -12,16 +12,16 @@
                OpName %LocalInvocationID_1 "LocalInvocationID_1"
                OpName %local_invocation_index_1 "local_invocation_index_1"
                OpName %samp "samp"
-               OpName %params_block "params_block"
-               OpMemberName %params_block 0 "inner"
+               OpName %params_block_0_1 "params_block_0_1"
+               OpMemberName %params_block_0_1 0 "inner"
                OpName %Params "Params"
                OpMemberName %Params 0 "filterDim"
                OpMemberName %Params 1 "blockDim"
                OpName %params "params"
                OpName %inputTex "inputTex"
                OpName %outputTex "outputTex"
-               OpName %flip_block "flip_block"
-               OpMemberName %flip_block 0 "inner"
+               OpName %flip_block_1_3 "flip_block_1_3"
+               OpMemberName %flip_block_1_3 0 "inner"
                OpName %Flip "Flip"
                OpMemberName %Flip 0 "value"
                OpName %flip "flip"
@@ -49,8 +49,8 @@
                OpDecorate %local_invocation_index_1 BuiltIn LocalInvocationIndex
                OpDecorate %samp DescriptorSet 0
                OpDecorate %samp Binding 0
-               OpDecorate %params_block Block
-               OpMemberDecorate %params_block 0 Offset 0
+               OpDecorate %params_block_0_1 Block
+               OpMemberDecorate %params_block_0_1 0 Offset 0
                OpMemberDecorate %Params 0 Offset 0
                OpMemberDecorate %Params 1 Offset 4
                OpDecorate %params NonWritable
@@ -61,8 +61,8 @@
                OpDecorate %outputTex NonReadable
                OpDecorate %outputTex DescriptorSet 1
                OpDecorate %outputTex Binding 2
-               OpDecorate %flip_block Block
-               OpMemberDecorate %flip_block 0 Offset 0
+               OpDecorate %flip_block_1_3 Block
+               OpMemberDecorate %flip_block_1_3 0 Offset 0
                OpMemberDecorate %Flip 0 Offset 0
                OpDecorate %flip NonWritable
                OpDecorate %flip DescriptorSet 1
@@ -80,9 +80,9 @@
 %_ptr_UniformConstant_10 = OpTypePointer UniformConstant %10
        %samp = OpVariable %_ptr_UniformConstant_10 UniformConstant
      %Params = OpTypeStruct %uint %uint
-%params_block = OpTypeStruct %Params
-%_ptr_Uniform_params_block = OpTypePointer Uniform %params_block
-     %params = OpVariable %_ptr_Uniform_params_block Uniform
+%params_block_0_1 = OpTypeStruct %Params
+%_ptr_Uniform_params_block_0_1 = OpTypePointer Uniform %params_block_0_1
+     %params = OpVariable %_ptr_Uniform_params_block_0_1 Uniform
       %float = OpTypeFloat 32
          %17 = OpTypeImage %float 2D 0 0 0 1 Unknown
 %_ptr_UniformConstant_17 = OpTypePointer UniformConstant %17
@@ -91,9 +91,9 @@
 %_ptr_UniformConstant_21 = OpTypePointer UniformConstant %21
   %outputTex = OpVariable %_ptr_UniformConstant_21 UniformConstant
        %Flip = OpTypeStruct %uint
- %flip_block = OpTypeStruct %Flip
-%_ptr_Uniform_flip_block = OpTypePointer Uniform %flip_block
-       %flip = OpVariable %_ptr_Uniform_flip_block Uniform
+%flip_block_1_3 = OpTypeStruct %Flip
+%_ptr_Uniform_flip_block_1_3 = OpTypePointer Uniform %flip_block_1_3
+       %flip = OpVariable %_ptr_Uniform_flip_block_1_3 Uniform
     %v3float = OpTypeVector %float 3
    %uint_256 = OpConstant %uint 256
 %_arr_v3float_uint_256 = OpTypeArray %v3float %uint_256

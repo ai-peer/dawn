@@ -20,7 +20,7 @@ layout(binding = 2, std430) buffer Matrix_ssbo_2 {
   uint numbers[];
 } resultMatrix;
 
-layout(binding = 3, std140) uniform uniforms_block_ubo {
+layout(binding = 3, std140) uniform uniforms_block_0_3_ubo {
   Uniforms inner;
 } uniforms;
 

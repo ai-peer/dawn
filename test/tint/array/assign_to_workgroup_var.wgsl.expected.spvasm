@@ -9,8 +9,8 @@
                OpExecutionMode %unused_entry_point LocalSize 1 1 1
                OpName %src_private "src_private"
                OpName %src_workgroup "src_workgroup"
-               OpName %src_uniform_block "src_uniform_block"
-               OpMemberName %src_uniform_block 0 "inner"
+               OpName %src_uniform_block_0_0 "src_uniform_block_0_0"
+               OpMemberName %src_uniform_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "arr"
                OpName %src_uniform "src_uniform"
@@ -25,8 +25,8 @@
                OpName %src_function "src_function"
                OpName %src_nested "src_nested"
                OpDecorate %_arr_v4int_uint_4 ArrayStride 16
-               OpDecorate %src_uniform_block Block
-               OpMemberDecorate %src_uniform_block 0 Offset 0
+               OpDecorate %src_uniform_block_0_0 Block
+               OpMemberDecorate %src_uniform_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpDecorate %src_uniform NonWritable
                OpDecorate %src_uniform DescriptorSet 0
@@ -47,11 +47,11 @@
 %_ptr_Workgroup__arr_v4int_uint_4 = OpTypePointer Workgroup %_arr_v4int_uint_4
 %src_workgroup = OpVariable %_ptr_Workgroup__arr_v4int_uint_4 Workgroup
           %S = OpTypeStruct %_arr_v4int_uint_4
-%src_uniform_block = OpTypeStruct %S
-%_ptr_Uniform_src_uniform_block = OpTypePointer Uniform %src_uniform_block
-%src_uniform = OpVariable %_ptr_Uniform_src_uniform_block Uniform
-%_ptr_StorageBuffer_src_uniform_block = OpTypePointer StorageBuffer %src_uniform_block
-%src_storage = OpVariable %_ptr_StorageBuffer_src_uniform_block StorageBuffer
+%src_uniform_block_0_0 = OpTypeStruct %S
+%_ptr_Uniform_src_uniform_block_0_0 = OpTypePointer Uniform %src_uniform_block_0_0
+%src_uniform = OpVariable %_ptr_Uniform_src_uniform_block_0_0 Uniform
+%_ptr_StorageBuffer_src_uniform_block_0_0 = OpTypePointer StorageBuffer %src_uniform_block_0_0
+%src_storage = OpVariable %_ptr_StorageBuffer_src_uniform_block_0_0 StorageBuffer
         %dst = OpVariable %_ptr_Workgroup__arr_v4int_uint_4 Workgroup
      %uint_2 = OpConstant %uint 2
 %_arr_int_uint_2 = OpTypeArray %int %uint_2

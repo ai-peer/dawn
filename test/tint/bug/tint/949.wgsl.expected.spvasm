@@ -19,8 +19,8 @@
                OpName %TextureSamplerTexture "TextureSamplerTexture"
                OpName %TextureSamplerSampler "TextureSamplerSampler"
                OpName %vMainuv "vMainuv"
-               OpName %x_269_block "x_269_block"
-               OpMemberName %x_269_block 0 "inner"
+               OpName %x_269_block_2_6 "x_269_block_2_6"
+               OpMemberName %x_269_block_2_6 0 "inner"
                OpName %LeftOver "LeftOver"
                OpMemberName %LeftOver 0 "u_World"
                OpMemberName %LeftOver 1 "u_ViewProjection"
@@ -38,8 +38,8 @@
                OpName %v_output2 "v_output2"
                OpName %TextureSampler1Texture "TextureSampler1Texture"
                OpName %TextureSampler1Sampler "TextureSampler1Sampler"
-               OpName %light0_block "light0_block"
-               OpMemberName %light0_block 0 "inner"
+               OpName %light0_block_0_5 "light0_block_0_5"
+               OpMemberName %light0_block_0_5 0 "inner"
                OpName %Light0 "Light0"
                OpMemberName %Light0 0 "vLightData"
                OpMemberName %Light0 1 "vLightDiffuse"
@@ -171,8 +171,8 @@
                OpDecorate %TextureSamplerTexture Binding 1
                OpDecorate %TextureSamplerSampler DescriptorSet 2
                OpDecorate %TextureSamplerSampler Binding 0
-               OpDecorate %x_269_block Block
-               OpMemberDecorate %x_269_block 0 Offset 0
+               OpDecorate %x_269_block_2_6 Block
+               OpMemberDecorate %x_269_block_2_6 0 Offset 0
                OpMemberDecorate %LeftOver 0 Offset 0
                OpMemberDecorate %LeftOver 0 ColMajor
                OpMemberDecorate %LeftOver 0 MatrixStride 16
@@ -193,8 +193,8 @@
                OpDecorate %TextureSampler1Texture Binding 3
                OpDecorate %TextureSampler1Sampler DescriptorSet 2
                OpDecorate %TextureSampler1Sampler Binding 2
-               OpDecorate %light0_block Block
-               OpMemberDecorate %light0_block 0 Offset 0
+               OpDecorate %light0_block_0_5 Block
+               OpMemberDecorate %light0_block_0_5 0 Offset 0
                OpMemberDecorate %Light0 0 Offset 0
                OpMemberDecorate %Light0 1 Offset 16
                OpMemberDecorate %Light0 2 Offset 32
@@ -246,9 +246,9 @@
 %mat4v4float = OpTypeMatrix %v4float 4
        %uint = OpTypeInt 32 0
    %LeftOver = OpTypeStruct %mat4v4float %mat4v4float %float %uint %v3float %float %float %uint %v2float
-%x_269_block = OpTypeStruct %LeftOver
-%_ptr_Uniform_x_269_block = OpTypePointer Uniform %x_269_block
-      %x_269 = OpVariable %_ptr_Uniform_x_269_block Uniform
+%x_269_block_2_6 = OpTypeStruct %LeftOver
+%_ptr_Uniform_x_269_block_2_6 = OpTypePointer Uniform %x_269_block_2_6
+      %x_269 = OpVariable %_ptr_Uniform_x_269_block_2_6 Uniform
 %_ptr_Private_v4float = OpTypePointer Private %v4float
   %v_output1 = OpVariable %_ptr_Private_v4float Private %15
 %_ptr_Private_bool = OpTypePointer Private %bool
@@ -259,9 +259,9 @@
 %TextureSampler1Texture = OpVariable %_ptr_UniformConstant_25 UniformConstant
 %TextureSampler1Sampler = OpVariable %_ptr_UniformConstant_28 UniformConstant
      %Light0 = OpTypeStruct %v4float %v4float %v4float %v3float %uint %v4float %v2float
-%light0_block = OpTypeStruct %Light0
-%_ptr_Uniform_light0_block = OpTypePointer Uniform %light0_block
-     %light0 = OpVariable %_ptr_Uniform_light0_block Uniform
+%light0_block_0_5 = OpTypeStruct %Light0
+%_ptr_Uniform_light0_block_0_5 = OpTypePointer Uniform %light0_block_0_5
+     %light0 = OpVariable %_ptr_Uniform_light0_block_0_5 Uniform
 %glFragColor = OpVariable %_ptr_Private_v4float Private %15
 %bumpSamplerSampler = OpVariable %_ptr_UniformConstant_28 UniformConstant
 %bumpSamplerTexture = OpVariable %_ptr_UniformConstant_25 UniformConstant

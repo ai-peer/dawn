@@ -8,8 +8,8 @@
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
                OpName %nextIndex "nextIndex"
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_1_4 "uniforms_block_1_4"
+               OpMemberName %uniforms_block_1_4 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "i"
                OpMemberName %Uniforms 1 "j"
@@ -24,8 +24,8 @@
                OpName %S1 "S1"
                OpMemberName %S1 0 "a2"
                OpName %s "s"
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_1_4 Block
+               OpMemberDecorate %uniforms_block_1_4 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 1 Offset 4
                OpDecorate %uniforms NonWritable
@@ -41,9 +41,9 @@
           %4 = OpConstantNull %uint
   %nextIndex = OpVariable %_ptr_Private_uint Private %4
    %Uniforms = OpTypeStruct %uint %uint
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_1_4 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_1_4 = OpTypePointer Uniform %uniforms_block_1_4
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_1_4 Uniform
           %9 = OpTypeFunction %uint
      %uint_1 = OpConstant %uint 1
        %void = OpTypeVoid

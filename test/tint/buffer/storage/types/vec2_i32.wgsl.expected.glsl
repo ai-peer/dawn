@@ -1,10 +1,10 @@
 #version 310 es
 
-layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
+layout(binding = 0, std430) buffer tint_symbol_block_0_0_ssbo {
   ivec2 inner;
 } tint_symbol;
 
-layout(binding = 1, std430) buffer tint_symbol_block_ssbo_1 {
+layout(binding = 1, std430) buffer tint_symbol_block_0_0_ssbo_1 {
   ivec2 inner;
 } tint_symbol_1;
 

@@ -8,12 +8,12 @@
                OpEntryPoint Fragment %main "main"
                OpExecutionMode %main OriginUpperLeft
                OpName %tint_discarded "tint_discarded"
-               OpName %non_uniform_global_block "non_uniform_global_block"
-               OpMemberName %non_uniform_global_block 0 "inner"
+               OpName %non_uniform_global_block_0_0 "non_uniform_global_block_0_0"
+               OpMemberName %non_uniform_global_block_0_0 0 "inner"
                OpName %non_uniform_global "non_uniform_global"
                OpName %main "main"
-               OpDecorate %non_uniform_global_block Block
-               OpMemberDecorate %non_uniform_global_block 0 Offset 0
+               OpDecorate %non_uniform_global_block_0_0 Block
+               OpMemberDecorate %non_uniform_global_block_0_0 0 Offset 0
                OpDecorate %non_uniform_global DescriptorSet 0
                OpDecorate %non_uniform_global Binding 0
        %bool = OpTypeBool
@@ -21,9 +21,9 @@
 %_ptr_Private_bool = OpTypePointer Private %bool
 %tint_discarded = OpVariable %_ptr_Private_bool Private %2
         %int = OpTypeInt 32 1
-%non_uniform_global_block = OpTypeStruct %int
-%_ptr_StorageBuffer_non_uniform_global_block = OpTypePointer StorageBuffer %non_uniform_global_block
-%non_uniform_global = OpVariable %_ptr_StorageBuffer_non_uniform_global_block StorageBuffer
+%non_uniform_global_block_0_0 = OpTypeStruct %int
+%_ptr_StorageBuffer_non_uniform_global_block_0_0 = OpTypePointer StorageBuffer %non_uniform_global_block_0_0
+%non_uniform_global = OpVariable %_ptr_StorageBuffer_non_uniform_global_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %9 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

@@ -7,14 +7,14 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %u_input_block "u_input_block"
-               OpMemberName %u_input_block 0 "inner"
+               OpName %u_input_block_0_0 "u_input_block_0_0"
+               OpMemberName %u_input_block_0_0 0 "inner"
                OpName %UniformBuffer "UniformBuffer"
                OpMemberName %UniformBuffer 0 "d"
                OpName %u_input "u_input"
                OpName %main "main"
-               OpDecorate %u_input_block Block
-               OpMemberDecorate %u_input_block 0 Offset 0
+               OpDecorate %u_input_block_0_0 Block
+               OpMemberDecorate %u_input_block_0_0 0 Offset 0
                OpMemberDecorate %UniformBuffer 0 Offset 0
                OpDecorate %u_input NonWritable
                OpDecorate %u_input DescriptorSet 0
@@ -22,9 +22,9 @@
         %int = OpTypeInt 32 1
       %v3int = OpTypeVector %int 3
 %UniformBuffer = OpTypeStruct %v3int
-%u_input_block = OpTypeStruct %UniformBuffer
-%_ptr_Uniform_u_input_block = OpTypePointer Uniform %u_input_block
-    %u_input = OpVariable %_ptr_Uniform_u_input_block Uniform
+%u_input_block_0_0 = OpTypeStruct %UniformBuffer
+%_ptr_Uniform_u_input_block_0_0 = OpTypePointer Uniform %u_input_block_0_0
+    %u_input = OpVariable %_ptr_Uniform_u_input_block_0_0 Uniform
        %void = OpTypeVoid
           %7 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

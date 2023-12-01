@@ -15,8 +15,8 @@
                OpName %vPosition_param_1 "vPosition_param_1"
                OpName %vUV_param_1 "vUV_param_1"
                OpName %glFragColor_1_1 "glFragColor_1_1"
-               OpName %x_20_block "x_20_block"
-               OpMemberName %x_20_block 0 "inner"
+               OpName %x_20_block_2_9 "x_20_block_2_9"
+               OpMemberName %x_20_block_2_9 0 "inner"
                OpName %LeftOver "LeftOver"
                OpMemberName %LeftOver 0 "time"
                OpMemberName %LeftOver 1 "padding"
@@ -84,8 +84,8 @@
                OpDecorate %vPosition_param_1 Location 0
                OpDecorate %vUV_param_1 Location 1
                OpDecorate %glFragColor_1_1 Location 0
-               OpDecorate %x_20_block Block
-               OpMemberDecorate %x_20_block 0 Offset 0
+               OpDecorate %x_20_block_2_9 Block
+               OpMemberDecorate %x_20_block_2_9 0 Offset 0
                OpMemberDecorate %LeftOver 0 Offset 0
                OpMemberDecorate %LeftOver 1 Offset 4
                OpMemberDecorate %LeftOver 2 Offset 16
@@ -137,9 +137,9 @@
        %uint = OpTypeInt 32 0
 %mat4v4float = OpTypeMatrix %v4float 4
    %LeftOver = OpTypeStruct %float %uint %mat4v4float %v2float %v2float %v2float %float %float %v3float
- %x_20_block = OpTypeStruct %LeftOver
-%_ptr_Uniform_x_20_block = OpTypePointer Uniform %x_20_block
-       %x_20 = OpVariable %_ptr_Uniform_x_20_block Uniform
+%x_20_block_2_9 = OpTypeStruct %LeftOver
+%_ptr_Uniform_x_20_block_2_9 = OpTypePointer Uniform %x_20_block_2_9
+       %x_20 = OpVariable %_ptr_Uniform_x_20_block_2_9 Uniform
          %24 = OpTypeImage %float 2D 0 0 0 1 Unknown
 %_ptr_UniformConstant_24 = OpTypePointer UniformConstant %24
 %frameMapTexture = OpVariable %_ptr_UniformConstant_24 UniformConstant

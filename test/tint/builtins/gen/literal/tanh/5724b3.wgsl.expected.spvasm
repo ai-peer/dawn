@@ -12,8 +12,8 @@
                OpExecutionMode %compute_main LocalSize 1 1 1
                OpName %value "value"
                OpName %vertex_point_size "vertex_point_size"
-               OpName %prevent_dce_block "prevent_dce_block"
-               OpMemberName %prevent_dce_block 0 "inner"
+               OpName %prevent_dce_block_2_0 "prevent_dce_block_2_0"
+               OpMemberName %prevent_dce_block_2_0 0 "inner"
                OpName %prevent_dce "prevent_dce"
                OpName %tanh_5724b3 "tanh_5724b3"
                OpName %res "res"
@@ -23,8 +23,8 @@
                OpName %compute_main "compute_main"
                OpDecorate %value BuiltIn Position
                OpDecorate %vertex_point_size BuiltIn PointSize
-               OpDecorate %prevent_dce_block Block
-               OpMemberDecorate %prevent_dce_block 0 Offset 0
+               OpDecorate %prevent_dce_block_2_0 Block
+               OpMemberDecorate %prevent_dce_block_2_0 0 Offset 0
                OpDecorate %prevent_dce DescriptorSet 2
                OpDecorate %prevent_dce Binding 0
       %float = OpTypeFloat 32
@@ -36,9 +36,9 @@
           %8 = OpConstantNull %float
 %vertex_point_size = OpVariable %_ptr_Output_float Output %8
     %v2float = OpTypeVector %float 2
-%prevent_dce_block = OpTypeStruct %v2float
-%_ptr_StorageBuffer_prevent_dce_block = OpTypePointer StorageBuffer %prevent_dce_block
-%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block StorageBuffer
+%prevent_dce_block_2_0 = OpTypeStruct %v2float
+%_ptr_StorageBuffer_prevent_dce_block_2_0 = OpTypePointer StorageBuffer %prevent_dce_block_2_0
+%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block_2_0 StorageBuffer
        %void = OpTypeVoid
          %13 = OpTypeFunction %void
 %float_0_761594176 = OpConstant %float 0.761594176

@@ -13,8 +13,8 @@
                OpName %value "value"
                OpName %t "t"
                OpName %s "s"
-               OpName %a_block "a_block"
-               OpMemberName %a_block 0 "inner"
+               OpName %a_block_0_2 "a_block_0_2"
+               OpMemberName %a_block_0_2 0 "inner"
                OpName %a "a"
                OpName %tint_ftoi "tint_ftoi"
                OpName %v "v"
@@ -32,8 +32,8 @@
                OpDecorate %t Binding 0
                OpDecorate %s DescriptorSet 0
                OpDecorate %s Binding 1
-               OpDecorate %a_block Block
-               OpMemberDecorate %a_block 0 Offset 0
+               OpDecorate %a_block_0_2 Block
+               OpMemberDecorate %a_block_0_2 0 Offset 0
                OpDecorate %a DescriptorSet 0
                OpDecorate %a Binding 2
        %bool = OpTypeBool
@@ -56,9 +56,9 @@
          %20 = OpTypeSampler
 %_ptr_UniformConstant_20 = OpTypePointer UniformConstant %20
           %s = OpVariable %_ptr_UniformConstant_20 UniformConstant
-    %a_block = OpTypeStruct %int
-%_ptr_StorageBuffer_a_block = OpTypePointer StorageBuffer %a_block
-          %a = OpVariable %_ptr_StorageBuffer_a_block StorageBuffer
+%a_block_0_2 = OpTypeStruct %int
+%_ptr_StorageBuffer_a_block_0_2 = OpTypePointer StorageBuffer %a_block_0_2
+          %a = OpVariable %_ptr_StorageBuffer_a_block_0_2 StorageBuffer
          %24 = OpTypeFunction %int %float
 %float_2_14748352e_09 = OpConstant %float 2.14748352e+09
 %float_n2_14748365e_09 = OpConstant %float -2.14748365e+09

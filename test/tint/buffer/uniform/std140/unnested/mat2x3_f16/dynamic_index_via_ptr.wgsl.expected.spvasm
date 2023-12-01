@@ -11,9 +11,9 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %m_block_std140 "m_block_std140"
-               OpMemberName %m_block_std140 0 "inner_0"
-               OpMemberName %m_block_std140 1 "inner_1"
+               OpName %m_block_0_0_std140 "m_block_0_0_std140"
+               OpMemberName %m_block_0_0_std140 0 "inner_0"
+               OpMemberName %m_block_0_0_std140 1 "inner_1"
                OpName %m "m"
                OpName %counter "counter"
                OpName %i "i"
@@ -21,17 +21,17 @@
                OpName %load_m_inner_p0 "load_m_inner_p0"
                OpName %p0 "p0"
                OpName %f "f"
-               OpDecorate %m_block_std140 Block
-               OpMemberDecorate %m_block_std140 0 Offset 0
-               OpMemberDecorate %m_block_std140 1 Offset 8
+               OpDecorate %m_block_0_0_std140 Block
+               OpMemberDecorate %m_block_0_0_std140 0 Offset 0
+               OpMemberDecorate %m_block_0_0_std140 1 Offset 8
                OpDecorate %m NonWritable
                OpDecorate %m DescriptorSet 0
                OpDecorate %m Binding 0
        %half = OpTypeFloat 16
      %v3half = OpTypeVector %half 3
-%m_block_std140 = OpTypeStruct %v3half %v3half
-%_ptr_Uniform_m_block_std140 = OpTypePointer Uniform %m_block_std140
-          %m = OpVariable %_ptr_Uniform_m_block_std140 Uniform
+%m_block_0_0_std140 = OpTypeStruct %v3half %v3half
+%_ptr_Uniform_m_block_0_0_std140 = OpTypePointer Uniform %m_block_0_0_std140
+          %m = OpVariable %_ptr_Uniform_m_block_0_0_std140 Uniform
         %int = OpTypeInt 32 1
           %7 = OpConstantNull %int
 %_ptr_Private_int = OpTypePointer Private %int

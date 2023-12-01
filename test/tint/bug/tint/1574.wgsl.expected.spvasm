@@ -8,11 +8,11 @@
                OpEntryPoint GLCompute %main "main" %local_invocation_index_1
                OpExecutionMode %main LocalSize 16 1 1
                OpName %local_invocation_index_1 "local_invocation_index_1"
-               OpName %a_u32_block "a_u32_block"
-               OpMemberName %a_u32_block 0 "inner"
+               OpName %a_u32_block_0_0 "a_u32_block_0_0"
+               OpMemberName %a_u32_block_0_0 0 "inner"
                OpName %a_u32 "a_u32"
-               OpName %a_i32_block "a_i32_block"
-               OpMemberName %a_i32_block 0 "inner"
+               OpName %a_i32_block_0_1 "a_i32_block_0_1"
+               OpMemberName %a_i32_block_0_1 0 "inner"
                OpName %a_i32 "a_i32"
                OpName %b_u32 "b_u32"
                OpName %b_i32 "b_i32"
@@ -30,12 +30,12 @@
                OpName %value_2 "value"
                OpName %main "main"
                OpDecorate %local_invocation_index_1 BuiltIn LocalInvocationIndex
-               OpDecorate %a_u32_block Block
-               OpMemberDecorate %a_u32_block 0 Offset 0
+               OpDecorate %a_u32_block_0_0 Block
+               OpMemberDecorate %a_u32_block_0_0 0 Offset 0
                OpDecorate %a_u32 DescriptorSet 0
                OpDecorate %a_u32 Binding 0
-               OpDecorate %a_i32_block Block
-               OpMemberDecorate %a_i32_block 0 Offset 0
+               OpDecorate %a_i32_block_0_1 Block
+               OpMemberDecorate %a_i32_block_0_1 0 Offset 0
                OpDecorate %a_i32 DescriptorSet 0
                OpDecorate %a_i32 Binding 1
                OpMemberDecorate %__atomic_compare_exchange_result_u32 0 Offset 0
@@ -45,13 +45,13 @@
        %uint = OpTypeInt 32 0
 %_ptr_Input_uint = OpTypePointer Input %uint
 %local_invocation_index_1 = OpVariable %_ptr_Input_uint Input
-%a_u32_block = OpTypeStruct %uint
-%_ptr_StorageBuffer_a_u32_block = OpTypePointer StorageBuffer %a_u32_block
-      %a_u32 = OpVariable %_ptr_StorageBuffer_a_u32_block StorageBuffer
+%a_u32_block_0_0 = OpTypeStruct %uint
+%_ptr_StorageBuffer_a_u32_block_0_0 = OpTypePointer StorageBuffer %a_u32_block_0_0
+      %a_u32 = OpVariable %_ptr_StorageBuffer_a_u32_block_0_0 StorageBuffer
         %int = OpTypeInt 32 1
-%a_i32_block = OpTypeStruct %int
-%_ptr_StorageBuffer_a_i32_block = OpTypePointer StorageBuffer %a_i32_block
-      %a_i32 = OpVariable %_ptr_StorageBuffer_a_i32_block StorageBuffer
+%a_i32_block_0_1 = OpTypeStruct %int
+%_ptr_StorageBuffer_a_i32_block_0_1 = OpTypePointer StorageBuffer %a_i32_block_0_1
+      %a_i32 = OpVariable %_ptr_StorageBuffer_a_i32_block_0_1 StorageBuffer
 %_ptr_Workgroup_uint = OpTypePointer Workgroup %uint
       %b_u32 = OpVariable %_ptr_Workgroup_uint Workgroup
 %_ptr_Workgroup_int = OpTypePointer Workgroup %int

@@ -342,7 +342,7 @@ OpDecorate %1 NonWritable
 OpDecorate %1 Binding 0
 OpDecorate %1 DescriptorSet 0
 )");
-    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block"
+    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block_0_0"
 OpMemberName %3 0 "inner"
 OpName %4 "A"
 OpMemberName %4 0 "a"
@@ -383,7 +383,7 @@ OpDecorate %1 NonWritable
 OpDecorate %1 Binding 0
 OpDecorate %1 DescriptorSet 0
 )");
-    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block"
+    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block_0_0"
 OpMemberName %3 0 "inner"
 OpName %4 "A"
 OpMemberName %4 0 "a"
@@ -423,7 +423,7 @@ OpDecorate %1 NonWritable
 OpDecorate %1 Binding 0
 OpDecorate %1 DescriptorSet 0
 )");
-    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block"
+    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block_0_0"
 OpMemberName %3 0 "inner"
 OpName %4 "A"
 OpMemberName %4 0 "a"
@@ -467,7 +467,7 @@ OpDecorate %1 Binding 0
 OpDecorate %6 DescriptorSet 1
 OpDecorate %6 Binding 0
 )");
-    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block"
+    EXPECT_EQ(DumpInstructions(b.Module().Debug()), R"(OpName %3 "b_block_0_0"
 OpMemberName %3 0 "inner"
 OpName %4 "A"
 OpMemberName %4 0 "a"

@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %ub_block_std140 "ub_block_std140"
-               OpMemberName %ub_block_std140 0 "inner"
+               OpName %ub_block_0_0_std140 "ub_block_0_0_std140"
+               OpMemberName %ub_block_0_0_std140 0 "inner"
                OpName %S_std140 "S_std140"
                OpMemberName %S_std140 0 "scalar_f32"
                OpMemberName %S_std140 1 "scalar_i32"
@@ -48,8 +48,8 @@
                OpName %load_ub_inner_mat3x2_f32 "load_ub_inner_mat3x2_f32"
                OpName %load_ub_inner_mat4x2_f32 "load_ub_inner_mat4x2_f32"
                OpName %main "main"
-               OpDecorate %ub_block_std140 Block
-               OpMemberDecorate %ub_block_std140 0 Offset 0
+               OpDecorate %ub_block_0_0_std140 Block
+               OpMemberDecorate %ub_block_0_0_std140 0 Offset 0
                OpMemberDecorate %S_std140 0 Offset 0
                OpMemberDecorate %S_std140 1 Offset 4
                OpMemberDecorate %S_std140 2 Offset 8
@@ -123,9 +123,9 @@
      %uint_4 = OpConstant %uint 4
 %_arr_Inner_uint_4 = OpTypeArray %Inner %uint_4
    %S_std140 = OpTypeStruct %float %int %uint %v2float %v2int %v2uint %v3float %v3int %v3uint %v4float %v4int %v4uint %v2float %v2float %mat2v3float %mat2v4float %v2float %v2float %v2float %mat3v3float %mat3v4float %v2float %v2float %v2float %v2float %mat4v3float %mat4v4float %_arr_v3float_uint_2 %Inner %_arr_Inner_uint_4
-%ub_block_std140 = OpTypeStruct %S_std140
-%_ptr_Uniform_ub_block_std140 = OpTypePointer Uniform %ub_block_std140
-         %ub = OpVariable %_ptr_Uniform_ub_block_std140 Uniform
+%ub_block_0_0_std140 = OpTypeStruct %S_std140
+%_ptr_Uniform_ub_block_0_0_std140 = OpTypePointer Uniform %ub_block_0_0_std140
+         %ub = OpVariable %_ptr_Uniform_ub_block_0_0_std140 Uniform
 %mat2v2float = OpTypeMatrix %v2float 2
          %28 = OpTypeFunction %mat2v2float
      %uint_0 = OpConstant %uint 0

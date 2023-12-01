@@ -5,7 +5,7 @@ struct S {
   mat3 matrix_normal;
 };
 
-layout(binding = 0, std140) uniform tint_symbol_block_ubo {
+layout(binding = 0, std140) uniform tint_symbol_block_0_0_ubo {
   S inner;
 } tint_symbol;
 

@@ -15,8 +15,8 @@
                OpName %firstMatrix "firstMatrix"
                OpName %secondMatrix "secondMatrix"
                OpName %resultMatrix "resultMatrix"
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_0_3 "uniforms_block_0_3"
+               OpMemberName %uniforms_block_0_3 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "dimAOuter"
                OpMemberName %Uniforms 1 "dimInner"
@@ -76,8 +76,8 @@
                OpDecorate %secondMatrix Binding 1
                OpDecorate %resultMatrix DescriptorSet 0
                OpDecorate %resultMatrix Binding 2
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_0_3 Block
+               OpMemberDecorate %uniforms_block_0_3 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 1 Offset 4
                OpMemberDecorate %Uniforms 2 Offset 8
@@ -103,9 +103,9 @@
 %secondMatrix = OpVariable %_ptr_StorageBuffer_Matrix StorageBuffer
 %resultMatrix = OpVariable %_ptr_StorageBuffer_Matrix StorageBuffer
    %Uniforms = OpTypeStruct %uint %uint %uint
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_0_3 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_0_3 = OpTypePointer Uniform %uniforms_block_0_3
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_0_3 Uniform
     %uint_64 = OpConstant %uint 64
 %_arr_float_uint_64 = OpTypeArray %float %uint_64
 %_arr__arr_float_uint_64_uint_64 = OpTypeArray %_arr_float_uint_64 %uint_64

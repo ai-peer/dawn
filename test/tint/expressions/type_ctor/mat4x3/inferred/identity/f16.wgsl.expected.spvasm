@@ -12,16 +12,16 @@
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
                OpName %m "m"
-               OpName %out_block "out_block"
-               OpMemberName %out_block 0 "inner"
+               OpName %out_block_0_0 "out_block_0_0"
+               OpMemberName %out_block_0_0 0 "inner"
                OpName %out "out"
                OpName %assign_and_preserve_padding_out "assign_and_preserve_padding_out"
                OpName %value "value"
                OpName %f "f"
-               OpDecorate %out_block Block
-               OpMemberDecorate %out_block 0 Offset 0
-               OpMemberDecorate %out_block 0 ColMajor
-               OpMemberDecorate %out_block 0 MatrixStride 8
+               OpDecorate %out_block_0_0 Block
+               OpMemberDecorate %out_block_0_0 0 Offset 0
+               OpMemberDecorate %out_block_0_0 0 ColMajor
+               OpMemberDecorate %out_block_0_0 0 MatrixStride 8
                OpDecorate %out DescriptorSet 0
                OpDecorate %out Binding 0
        %half = OpTypeFloat 16
@@ -46,9 +46,9 @@
          %20 = OpConstantComposite %mat4v3half %7 %11 %15 %19
 %_ptr_Private_mat4v3half = OpTypePointer Private %mat4v3half
           %m = OpVariable %_ptr_Private_mat4v3half Private %20
-  %out_block = OpTypeStruct %mat4v3half
-%_ptr_StorageBuffer_out_block = OpTypePointer StorageBuffer %out_block
-        %out = OpVariable %_ptr_StorageBuffer_out_block StorageBuffer
+%out_block_0_0 = OpTypeStruct %mat4v3half
+%_ptr_StorageBuffer_out_block_0_0 = OpTypePointer StorageBuffer %out_block_0_0
+        %out = OpVariable %_ptr_StorageBuffer_out_block_0_0 StorageBuffer
        %void = OpTypeVoid
          %26 = OpTypeFunction %void %mat4v3half
        %uint = OpTypeInt 32 0

@@ -8,8 +8,8 @@
                OpEntryPoint GLCompute %computeMain "computeMain" %global_id_1
                OpExecutionMode %computeMain LocalSize 1 1 1
                OpName %global_id_1 "global_id_1"
-               OpName %drawOut_block "drawOut_block"
-               OpMemberName %drawOut_block 0 "inner"
+               OpName %drawOut_block_0_5 "drawOut_block_0_5"
+               OpMemberName %drawOut_block_0_5 0 "inner"
                OpName %DrawIndirectArgs "DrawIndirectArgs"
                OpMemberName %DrawIndirectArgs 0 "vertexCount"
                OpName %drawOut "drawOut"
@@ -18,8 +18,8 @@
                OpName %global_id "global_id"
                OpName %computeMain "computeMain"
                OpDecorate %global_id_1 BuiltIn GlobalInvocationId
-               OpDecorate %drawOut_block Block
-               OpMemberDecorate %drawOut_block 0 Offset 0
+               OpDecorate %drawOut_block_0_5 Block
+               OpMemberDecorate %drawOut_block_0_5 0 Offset 0
                OpMemberDecorate %DrawIndirectArgs 0 Offset 0
                OpDecorate %drawOut DescriptorSet 0
                OpDecorate %drawOut Binding 5
@@ -28,9 +28,9 @@
 %_ptr_Input_v3uint = OpTypePointer Input %v3uint
 %global_id_1 = OpVariable %_ptr_Input_v3uint Input
 %DrawIndirectArgs = OpTypeStruct %uint
-%drawOut_block = OpTypeStruct %DrawIndirectArgs
-%_ptr_StorageBuffer_drawOut_block = OpTypePointer StorageBuffer %drawOut_block
-    %drawOut = OpVariable %_ptr_StorageBuffer_drawOut_block StorageBuffer
+%drawOut_block_0_5 = OpTypeStruct %DrawIndirectArgs
+%_ptr_StorageBuffer_drawOut_block_0_5 = OpTypePointer StorageBuffer %drawOut_block_0_5
+    %drawOut = OpVariable %_ptr_StorageBuffer_drawOut_block_0_5 StorageBuffer
           %9 = OpConstantNull %uint
 %_ptr_Private_uint = OpTypePointer Private %uint
   %cubeVerts = OpVariable %_ptr_Private_uint Private %9

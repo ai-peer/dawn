@@ -69,11 +69,11 @@ struct S_std140 {
   uint pad_26;
 };
 
-layout(binding = 0, std140) uniform u_block_std140_ubo {
+layout(binding = 0, std140) uniform u_block_0_0_std140_ubo {
   S_std140 inner[4];
 } u;
 
-layout(binding = 1, std430) buffer u_block_ssbo {
+layout(binding = 1, std430) buffer u_block_0_0_ssbo {
   S inner[4];
 } s;
 

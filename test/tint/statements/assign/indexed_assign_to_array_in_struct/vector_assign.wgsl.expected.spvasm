@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_1_4 "uniforms_block_1_4"
+               OpMemberName %uniforms_block_1_4 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "i"
                OpName %uniforms "uniforms"
@@ -19,8 +19,8 @@
                OpMemberName %OuterS 0 "a1"
                OpName %s1 "s1"
                OpName %v "v"
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_1_4 Block
+               OpMemberDecorate %uniforms_block_1_4 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpDecorate %uniforms NonWritable
                OpDecorate %uniforms DescriptorSet 1
@@ -29,9 +29,9 @@
                OpDecorate %_arr_uint_uint_8 ArrayStride 4
        %uint = OpTypeInt 32 0
    %Uniforms = OpTypeStruct %uint
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_1_4 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_1_4 = OpTypePointer Uniform %uniforms_block_1_4
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_1_4 Uniform
           %6 = OpTypeFunction %uint %uint
      %uint_1 = OpConstant %uint 1
        %void = OpTypeVoid

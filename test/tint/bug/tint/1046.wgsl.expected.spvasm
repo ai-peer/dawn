@@ -13,8 +13,8 @@
                OpName %uv_1 "uv_1"
                OpName %color_1 "color_1"
                OpName %color_2 "color_2"
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_0_0 "uniforms_block_0_0"
+               OpMemberName %uniforms_block_0_0 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "worldView"
                OpMemberName %Uniforms 1 "proj"
@@ -50,8 +50,8 @@
                OpDecorate %uv_1 Location 2
                OpDecorate %color_1 Location 3
                OpDecorate %color_2 Location 0
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_0_0 Block
+               OpMemberDecorate %uniforms_block_0_0 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 0 ColMajor
                OpMemberDecorate %Uniforms 0 MatrixStride 16
@@ -97,9 +97,9 @@
 %mat4v4float = OpTypeMatrix %v4float 4
        %uint = OpTypeInt 32 0
    %Uniforms = OpTypeStruct %mat4v4float %mat4v4float %uint %uint %v4float
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_0_0 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_0_0 = OpTypePointer Uniform %uniforms_block_0_0
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_0_0 Uniform
  %PointLight = OpTypeStruct %v4float
 %_runtimearr_PointLight = OpTypeRuntimeArray %PointLight
 %PointLights = OpTypeStruct %_runtimearr_PointLight

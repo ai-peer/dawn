@@ -7,27 +7,27 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %S_block_std140 "S_block_std140"
-               OpMemberName %S_block_std140 0 "inner_0"
-               OpMemberName %S_block_std140 1 "inner_1"
+               OpName %S_block_0_0_std140 "S_block_0_0_std140"
+               OpMemberName %S_block_0_0_std140 0 "inner_0"
+               OpMemberName %S_block_0_0_std140 1 "inner_1"
                OpName %S "S"
                OpName %load_S_inner_p0 "load_S_inner_p0"
                OpName %p0 "p0"
                OpName %func_S_X "func_S_X"
                OpName %pointer "pointer"
                OpName %main "main"
-               OpDecorate %S_block_std140 Block
-               OpMemberDecorate %S_block_std140 0 Offset 0
-               OpMemberDecorate %S_block_std140 1 Offset 8
+               OpDecorate %S_block_0_0_std140 Block
+               OpMemberDecorate %S_block_0_0_std140 0 Offset 0
+               OpMemberDecorate %S_block_0_0_std140 1 Offset 8
                OpDecorate %S NonWritable
                OpDecorate %S DescriptorSet 0
                OpDecorate %S Binding 0
                OpDecorate %_arr_uint_uint_1 ArrayStride 4
       %float = OpTypeFloat 32
     %v2float = OpTypeVector %float 2
-%S_block_std140 = OpTypeStruct %v2float %v2float
-%_ptr_Uniform_S_block_std140 = OpTypePointer Uniform %S_block_std140
-          %S = OpVariable %_ptr_Uniform_S_block_std140 Uniform
+%S_block_0_0_std140 = OpTypeStruct %v2float %v2float
+%_ptr_Uniform_S_block_0_0_std140 = OpTypePointer Uniform %S_block_0_0_std140
+          %S = OpVariable %_ptr_Uniform_S_block_0_0_std140 Uniform
        %uint = OpTypeInt 32 0
           %6 = OpTypeFunction %v2float %uint
      %uint_0 = OpConstant %uint 0

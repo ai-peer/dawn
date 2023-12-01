@@ -7,25 +7,25 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %S_block "S_block"
-               OpMemberName %S_block 0 "inner"
+               OpName %S_block_0_0 "S_block_0_0"
+               OpMemberName %S_block_0_0 0 "inner"
                OpName %S "S"
                OpName %func_S_X "func_S_X"
                OpName %pointer "pointer"
                OpName %main "main"
-               OpDecorate %S_block Block
-               OpMemberDecorate %S_block 0 Offset 0
-               OpMemberDecorate %S_block 0 ColMajor
-               OpMemberDecorate %S_block 0 MatrixStride 8
+               OpDecorate %S_block_0_0 Block
+               OpMemberDecorate %S_block_0_0 0 Offset 0
+               OpMemberDecorate %S_block_0_0 0 ColMajor
+               OpMemberDecorate %S_block_0_0 0 MatrixStride 8
                OpDecorate %S DescriptorSet 0
                OpDecorate %S Binding 0
                OpDecorate %_arr_uint_uint_1 ArrayStride 4
       %float = OpTypeFloat 32
     %v2float = OpTypeVector %float 2
 %mat2v2float = OpTypeMatrix %v2float 2
-    %S_block = OpTypeStruct %mat2v2float
-%_ptr_StorageBuffer_S_block = OpTypePointer StorageBuffer %S_block
-          %S = OpVariable %_ptr_StorageBuffer_S_block StorageBuffer
+%S_block_0_0 = OpTypeStruct %mat2v2float
+%_ptr_StorageBuffer_S_block_0_0 = OpTypePointer StorageBuffer %S_block_0_0
+          %S = OpVariable %_ptr_StorageBuffer_S_block_0_0 StorageBuffer
        %void = OpTypeVoid
        %uint = OpTypeInt 32 0
      %uint_1 = OpConstant %uint 1

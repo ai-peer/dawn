@@ -22,7 +22,7 @@ layout(binding = 3, std430) buffer Particles_ssbo {
   Particle p[];
 } particles;
 
-layout(binding = 4, std140) uniform sim_block_ubo {
+layout(binding = 4, std140) uniform sim_block_1_4_ubo {
   Simulation inner;
 } sim;
 

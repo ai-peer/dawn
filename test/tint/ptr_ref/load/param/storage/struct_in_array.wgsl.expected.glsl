@@ -4,7 +4,7 @@ struct str {
   int i;
 };
 
-layout(binding = 0, std430) buffer S_block_ssbo {
+layout(binding = 0, std430) buffer S_block_0_0_ssbo {
   str inner[4];
 } S;
 

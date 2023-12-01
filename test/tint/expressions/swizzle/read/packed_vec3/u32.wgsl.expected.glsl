@@ -9,7 +9,7 @@ struct S {
   uint pad;
 };
 
-layout(binding = 0, std140) uniform U_block_ubo {
+layout(binding = 0, std140) uniform U_block_0_0_ubo {
   S inner;
 } U;
 

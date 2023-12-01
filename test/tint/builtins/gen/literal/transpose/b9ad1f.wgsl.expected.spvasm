@@ -16,8 +16,8 @@
                OpExecutionMode %compute_main LocalSize 1 1 1
                OpName %value_1 "value_1"
                OpName %vertex_point_size "vertex_point_size"
-               OpName %prevent_dce_block "prevent_dce_block"
-               OpMemberName %prevent_dce_block 0 "inner"
+               OpName %prevent_dce_block_2_0 "prevent_dce_block_2_0"
+               OpMemberName %prevent_dce_block_2_0 0 "inner"
                OpName %prevent_dce "prevent_dce"
                OpName %assign_and_preserve_padding_prevent_dce "assign_and_preserve_padding_prevent_dce"
                OpName %value "value"
@@ -29,10 +29,10 @@
                OpName %compute_main "compute_main"
                OpDecorate %value_1 BuiltIn Position
                OpDecorate %vertex_point_size BuiltIn PointSize
-               OpDecorate %prevent_dce_block Block
-               OpMemberDecorate %prevent_dce_block 0 Offset 0
-               OpMemberDecorate %prevent_dce_block 0 ColMajor
-               OpMemberDecorate %prevent_dce_block 0 MatrixStride 8
+               OpDecorate %prevent_dce_block_2_0 Block
+               OpMemberDecorate %prevent_dce_block_2_0 0 Offset 0
+               OpMemberDecorate %prevent_dce_block_2_0 0 ColMajor
+               OpMemberDecorate %prevent_dce_block_2_0 0 MatrixStride 8
                OpDecorate %prevent_dce DescriptorSet 2
                OpDecorate %prevent_dce Binding 0
       %float = OpTypeFloat 32
@@ -46,9 +46,9 @@
        %half = OpTypeFloat 16
      %v3half = OpTypeVector %half 3
  %mat2v3half = OpTypeMatrix %v3half 2
-%prevent_dce_block = OpTypeStruct %mat2v3half
-%_ptr_StorageBuffer_prevent_dce_block = OpTypePointer StorageBuffer %prevent_dce_block
-%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block StorageBuffer
+%prevent_dce_block_2_0 = OpTypeStruct %mat2v3half
+%_ptr_StorageBuffer_prevent_dce_block_2_0 = OpTypePointer StorageBuffer %prevent_dce_block_2_0
+%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block_2_0 StorageBuffer
        %void = OpTypeVoid
          %15 = OpTypeFunction %void %mat2v3half
        %uint = OpTypeInt 32 0

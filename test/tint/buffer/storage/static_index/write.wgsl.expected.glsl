@@ -42,7 +42,7 @@ struct S {
   uint pad_9;
 };
 
-layout(binding = 0, std430) buffer sb_block_ssbo {
+layout(binding = 0, std430) buffer sb_block_0_0_ssbo {
   S inner;
 } sb;
 

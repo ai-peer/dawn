@@ -11,8 +11,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %sb_block "sb_block"
-               OpMemberName %sb_block 0 "inner"
+               OpName %sb_block_0_0 "sb_block_0_0"
+               OpMemberName %sb_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "scalar_f32"
                OpMemberName %S 1 "scalar_i32"
@@ -83,8 +83,8 @@
                OpName %i_0 "i"
                OpName %var_for_index_1 "var_for_index_1"
                OpName %main "main"
-               OpDecorate %sb_block Block
-               OpMemberDecorate %sb_block 0 Offset 0
+               OpDecorate %sb_block_0_0 Block
+               OpMemberDecorate %sb_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 1 Offset 4
                OpMemberDecorate %S 2 Offset 8
@@ -211,9 +211,9 @@
      %uint_4 = OpConstant %uint 4
 %_arr_Inner_uint_4 = OpTypeArray %Inner %uint_4
           %S = OpTypeStruct %float %int %uint %half %v2float %v2int %v2uint %v2half %v3float %v3int %v3uint %v3half %v4float %v4int %v4uint %v4half %mat2v2float %mat2v3float %mat2v4float %mat3v2float %mat3v3float %mat3v4float %mat4v2float %mat4v3float %mat4v4float %mat2v2half %mat2v3half %mat2v4half %mat3v2half %mat3v3half %mat3v4half %mat4v2half %mat4v3half %mat4v4half %_arr_v3float_uint_2 %_arr_mat4v2half_uint_2 %Inner %_arr_Inner_uint_4
-   %sb_block = OpTypeStruct %S
-%_ptr_StorageBuffer_sb_block = OpTypePointer StorageBuffer %sb_block
-         %sb = OpVariable %_ptr_StorageBuffer_sb_block StorageBuffer
+%sb_block_0_0 = OpTypeStruct %S
+%_ptr_StorageBuffer_sb_block_0_0 = OpTypePointer StorageBuffer %sb_block_0_0
+         %sb = OpVariable %_ptr_StorageBuffer_sb_block_0_0 StorageBuffer
        %void = OpTypeVoid
          %45 = OpTypeFunction %void %mat2v3float
      %uint_0 = OpConstant %uint 0

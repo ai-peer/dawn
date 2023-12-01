@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 1, std430) buffer data_block_ssbo {
+layout(binding = 1, std430) buffer data_block_0_1_ssbo {
   int inner[];
 } data;
 

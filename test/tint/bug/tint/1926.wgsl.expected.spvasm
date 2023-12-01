@@ -11,8 +11,8 @@
                OpName %local_id_1 "local_id_1"
                OpName %local_invocation_index_1 "local_invocation_index_1"
                OpName %sh_atomic_failed "sh_atomic_failed"
-               OpName %output_block "output_block"
-               OpMemberName %output_block 0 "inner"
+               OpName %output_block_0_4 "output_block_0_4"
+               OpMemberName %output_block_0_4 0 "inner"
                OpName %output "output"
                OpName %tint_workgroupUniformLoad_sh_atomic_failed "tint_workgroupUniformLoad_sh_atomic_failed"
                OpName %main_inner "main_inner"
@@ -23,8 +23,8 @@
                OpDecorate %global_id_1 BuiltIn GlobalInvocationId
                OpDecorate %local_id_1 BuiltIn LocalInvocationId
                OpDecorate %local_invocation_index_1 BuiltIn LocalInvocationIndex
-               OpDecorate %output_block Block
-               OpMemberDecorate %output_block 0 Offset 0
+               OpDecorate %output_block_0_4 Block
+               OpMemberDecorate %output_block_0_4 0 Offset 0
                OpDecorate %output DescriptorSet 0
                OpDecorate %output Binding 4
        %uint = OpTypeInt 32 0
@@ -36,9 +36,9 @@
 %local_invocation_index_1 = OpVariable %_ptr_Input_uint Input
 %_ptr_Workgroup_uint = OpTypePointer Workgroup %uint
 %sh_atomic_failed = OpVariable %_ptr_Workgroup_uint Workgroup
-%output_block = OpTypeStruct %uint
-%_ptr_StorageBuffer_output_block = OpTypePointer StorageBuffer %output_block
-     %output = OpVariable %_ptr_StorageBuffer_output_block StorageBuffer
+%output_block_0_4 = OpTypeStruct %uint
+%_ptr_StorageBuffer_output_block_0_4 = OpTypePointer StorageBuffer %output_block_0_4
+     %output = OpVariable %_ptr_StorageBuffer_output_block_0_4 StorageBuffer
          %13 = OpTypeFunction %uint
        %void = OpTypeVoid
      %uint_2 = OpConstant %uint 2

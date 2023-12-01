@@ -12,11 +12,11 @@
                OpEntryPoint GLCompute %f "f" %local_invocation_index_1
                OpExecutionMode %f LocalSize 1 1 1
                OpName %local_invocation_index_1 "local_invocation_index_1"
-               OpName %u_block_std140 "u_block_std140"
-               OpMemberName %u_block_std140 0 "inner_0"
-               OpMemberName %u_block_std140 1 "inner_1"
-               OpMemberName %u_block_std140 2 "inner_2"
-               OpMemberName %u_block_std140 3 "inner_3"
+               OpName %u_block_0_0_std140 "u_block_0_0_std140"
+               OpMemberName %u_block_0_0_std140 0 "inner_0"
+               OpMemberName %u_block_0_0_std140 1 "inner_1"
+               OpMemberName %u_block_0_0_std140 2 "inner_2"
+               OpMemberName %u_block_0_0_std140 3 "inner_3"
                OpName %u "u"
                OpName %w "w"
                OpName %load_u_inner "load_u_inner"
@@ -24,11 +24,11 @@
                OpName %local_invocation_index "local_invocation_index"
                OpName %f "f"
                OpDecorate %local_invocation_index_1 BuiltIn LocalInvocationIndex
-               OpDecorate %u_block_std140 Block
-               OpMemberDecorate %u_block_std140 0 Offset 0
-               OpMemberDecorate %u_block_std140 1 Offset 8
-               OpMemberDecorate %u_block_std140 2 Offset 16
-               OpMemberDecorate %u_block_std140 3 Offset 24
+               OpDecorate %u_block_0_0_std140 Block
+               OpMemberDecorate %u_block_0_0_std140 0 Offset 0
+               OpMemberDecorate %u_block_0_0_std140 1 Offset 8
+               OpMemberDecorate %u_block_0_0_std140 2 Offset 16
+               OpMemberDecorate %u_block_0_0_std140 3 Offset 24
                OpDecorate %u NonWritable
                OpDecorate %u DescriptorSet 0
                OpDecorate %u Binding 0
@@ -37,9 +37,9 @@
 %local_invocation_index_1 = OpVariable %_ptr_Input_uint Input
        %half = OpTypeFloat 16
      %v3half = OpTypeVector %half 3
-%u_block_std140 = OpTypeStruct %v3half %v3half %v3half %v3half
-%_ptr_Uniform_u_block_std140 = OpTypePointer Uniform %u_block_std140
-          %u = OpVariable %_ptr_Uniform_u_block_std140 Uniform
+%u_block_0_0_std140 = OpTypeStruct %v3half %v3half %v3half %v3half
+%_ptr_Uniform_u_block_0_0_std140 = OpTypePointer Uniform %u_block_0_0_std140
+          %u = OpVariable %_ptr_Uniform_u_block_0_0_std140 Uniform
  %mat4v3half = OpTypeMatrix %v3half 4
 %_ptr_Workgroup_mat4v3half = OpTypePointer Workgroup %mat4v3half
           %w = OpVariable %_ptr_Workgroup_mat4v3half Workgroup

@@ -48,15 +48,15 @@ struct VertexOutput {
   vec4 member;
 };
 
-layout(binding = 0, std140) uniform global_block_ubo {
+layout(binding = 0, std140) uniform global_block_0_0_ubo {
   ub_SceneParams inner;
 } global;
 
-layout(binding = 1, std140) uniform global1_block_ubo {
+layout(binding = 1, std140) uniform global1_block_0_1_ubo {
   ub_MaterialParams inner;
 } global1;
 
-layout(binding = 2, std140) uniform global2_block_ubo {
+layout(binding = 2, std140) uniform global2_block_0_2_ubo {
   ub_PacketParams inner;
 } global2;
 

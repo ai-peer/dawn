@@ -10,8 +10,8 @@
                OpName %f_1 "f_1"
                OpName %u_1 "u_1"
                OpName %v_1 "v_1"
-               OpName %output_block "output_block"
-               OpMemberName %output_block 0 "inner"
+               OpName %output_block_0_0 "output_block_0_0"
+               OpMemberName %output_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "f"
                OpMemberName %S 1 "u"
@@ -26,8 +26,8 @@
                OpDecorate %u_1 Location 1
                OpDecorate %u_1 Flat
                OpDecorate %v_1 BuiltIn FragCoord
-               OpDecorate %output_block Block
-               OpMemberDecorate %output_block 0 Offset 0
+               OpDecorate %output_block_0_0 Block
+               OpMemberDecorate %output_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 1 Offset 4
                OpMemberDecorate %S 2 Offset 128
@@ -43,9 +43,9 @@
 %_ptr_Input_v4float = OpTypePointer Input %v4float
         %v_1 = OpVariable %_ptr_Input_v4float Input
           %S = OpTypeStruct %float %uint %v4float
-%output_block = OpTypeStruct %S
-%_ptr_StorageBuffer_output_block = OpTypePointer StorageBuffer %output_block
-     %output = OpVariable %_ptr_StorageBuffer_output_block StorageBuffer
+%output_block_0_0 = OpTypeStruct %S
+%_ptr_StorageBuffer_output_block_0_0 = OpTypePointer StorageBuffer %output_block_0_0
+     %output = OpVariable %_ptr_StorageBuffer_output_block_0_0 StorageBuffer
        %void = OpTypeVoid
          %14 = OpTypeFunction %void %S
      %uint_0 = OpConstant %uint 0

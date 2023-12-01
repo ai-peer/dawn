@@ -7,14 +7,14 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %arr_block "arr_block"
-               OpMemberName %arr_block 0 "inner"
+               OpName %arr_block_0_0 "arr_block_0_0"
+               OpMemberName %arr_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "f"
                OpName %arr "arr"
                OpName %main "main"
-               OpDecorate %arr_block Block
-               OpMemberDecorate %arr_block 0 Offset 0
+               OpDecorate %arr_block_0_0 Block
+               OpMemberDecorate %arr_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpDecorate %_runtimearr_S ArrayStride 4
                OpDecorate %arr NonWritable
@@ -23,9 +23,9 @@
       %float = OpTypeFloat 32
           %S = OpTypeStruct %float
 %_runtimearr_S = OpTypeRuntimeArray %S
-  %arr_block = OpTypeStruct %_runtimearr_S
-%_ptr_StorageBuffer_arr_block = OpTypePointer StorageBuffer %arr_block
-        %arr = OpVariable %_ptr_StorageBuffer_arr_block StorageBuffer
+%arr_block_0_0 = OpTypeStruct %_runtimearr_S
+%_ptr_StorageBuffer_arr_block_0_0 = OpTypePointer StorageBuffer %arr_block_0_0
+        %arr = OpVariable %_ptr_StorageBuffer_arr_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %7 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

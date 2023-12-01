@@ -9,8 +9,8 @@
                OpEntryPoint GLCompute %main "main" %idx_1
                OpExecutionMode %main LocalSize 1 1 1
                OpName %idx_1 "idx_1"
-               OpName %io_block "io_block"
-               OpMemberName %io_block 0 "inner"
+               OpName %io_block_0_0 "io_block_0_0"
+               OpMemberName %io_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "v"
                OpMemberName %S 1 "i"
@@ -23,8 +23,8 @@
                OpName %idx "idx"
                OpName %main "main"
                OpDecorate %idx_1 BuiltIn LocalInvocationIndex
-               OpDecorate %io_block Block
-               OpMemberDecorate %io_block 0 Offset 0
+               OpDecorate %io_block_0_0 Block
+               OpMemberDecorate %io_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 1 Offset 12
                OpDecorate %io Binding 0
@@ -35,9 +35,9 @@
       %float = OpTypeFloat 32
     %v3float = OpTypeVector %float 3
           %S = OpTypeStruct %v3float %uint
-   %io_block = OpTypeStruct %S
-%_ptr_StorageBuffer_io_block = OpTypePointer StorageBuffer %io_block
-         %io = OpVariable %_ptr_StorageBuffer_io_block StorageBuffer
+%io_block_0_0 = OpTypeStruct %S
+%_ptr_StorageBuffer_io_block_0_0 = OpTypePointer StorageBuffer %io_block_0_0
+         %io = OpVariable %_ptr_StorageBuffer_io_block_0_0 StorageBuffer
          %10 = OpTypeFunction %v3float %uint %v3float
          %15 = OpConstantNull %v3float
 %_ptr_Function_v3float = OpTypePointer Function %v3float

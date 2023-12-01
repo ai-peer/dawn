@@ -12,23 +12,23 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %u_block_std140 "u_block_std140"
-               OpMemberName %u_block_std140 0 "inner_0"
-               OpMemberName %u_block_std140 1 "inner_1"
+               OpName %u_block_0_0_std140 "u_block_0_0_std140"
+               OpMemberName %u_block_0_0_std140 0 "inner_0"
+               OpMemberName %u_block_0_0_std140 1 "inner_1"
                OpName %u "u"
                OpName %load_u_inner "load_u_inner"
                OpName %f "f"
-               OpDecorate %u_block_std140 Block
-               OpMemberDecorate %u_block_std140 0 Offset 0
-               OpMemberDecorate %u_block_std140 1 Offset 4
+               OpDecorate %u_block_0_0_std140 Block
+               OpMemberDecorate %u_block_0_0_std140 0 Offset 0
+               OpMemberDecorate %u_block_0_0_std140 1 Offset 4
                OpDecorate %u NonWritable
                OpDecorate %u DescriptorSet 0
                OpDecorate %u Binding 0
        %half = OpTypeFloat 16
      %v2half = OpTypeVector %half 2
-%u_block_std140 = OpTypeStruct %v2half %v2half
-%_ptr_Uniform_u_block_std140 = OpTypePointer Uniform %u_block_std140
-          %u = OpVariable %_ptr_Uniform_u_block_std140 Uniform
+%u_block_0_0_std140 = OpTypeStruct %v2half %v2half
+%_ptr_Uniform_u_block_0_0_std140 = OpTypePointer Uniform %u_block_0_0_std140
+          %u = OpVariable %_ptr_Uniform_u_block_0_0_std140 Uniform
  %mat2v2half = OpTypeMatrix %v2half 2
           %6 = OpTypeFunction %mat2v2half
        %uint = OpTypeInt 32 0

@@ -15,8 +15,8 @@
                OpName %vertex_point_size "vertex_point_size"
                OpName %fragColor_1 "fragColor_1"
                OpName %value "value"
-               OpName %uniforms_block "uniforms_block"
-               OpMemberName %uniforms_block 0 "inner"
+               OpName %uniforms_block_0_0 "uniforms_block_0_0"
+               OpMemberName %uniforms_block_0_0 0 "inner"
                OpName %Uniforms "Uniforms"
                OpMemberName %Uniforms 0 "modelViewProjectionMatrix"
                OpName %uniforms "uniforms"
@@ -40,8 +40,8 @@
                OpDecorate %vertex_point_size BuiltIn PointSize
                OpDecorate %fragColor_1 Location 0
                OpDecorate %value Location 0
-               OpDecorate %uniforms_block Block
-               OpMemberDecorate %uniforms_block 0 Offset 0
+               OpDecorate %uniforms_block_0_0 Block
+               OpMemberDecorate %uniforms_block_0_0 0 Offset 0
                OpMemberDecorate %Uniforms 0 Offset 0
                OpMemberDecorate %Uniforms 0 ColMajor
                OpMemberDecorate %Uniforms 0 MatrixStride 16
@@ -68,9 +68,9 @@
       %value = OpVariable %_ptr_Output_v4float Output %8
 %mat4v4float = OpTypeMatrix %v4float 4
    %Uniforms = OpTypeStruct %mat4v4float
-%uniforms_block = OpTypeStruct %Uniforms
-%_ptr_Uniform_uniforms_block = OpTypePointer Uniform %uniforms_block
-   %uniforms = OpVariable %_ptr_Uniform_uniforms_block Uniform
+%uniforms_block_0_0 = OpTypeStruct %Uniforms
+%_ptr_Uniform_uniforms_block_0_0 = OpTypePointer Uniform %uniforms_block_0_0
+   %uniforms = OpVariable %_ptr_Uniform_uniforms_block_0_0 Uniform
 %VertexOutput = OpTypeStruct %v4float %v4float
 %VertexInput = OpTypeStruct %v4float %v4float
          %20 = OpTypeFunction %VertexOutput %VertexInput

@@ -7,24 +7,24 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 16 1 1
-               OpName %a_block "a_block"
-               OpMemberName %a_block 0 "inner"
+               OpName %a_block_0_0 "a_block_0_0"
+               OpMemberName %a_block_0_0 0 "inner"
                OpName %a "a"
                OpName %main "main"
                OpName %value "value"
                OpName %__atomic_compare_exchange_result_u32 "__atomic_compare_exchange_result_u32"
                OpMemberName %__atomic_compare_exchange_result_u32 0 "old_value"
                OpMemberName %__atomic_compare_exchange_result_u32 1 "exchanged"
-               OpDecorate %a_block Block
-               OpMemberDecorate %a_block 0 Offset 0
+               OpDecorate %a_block_0_0 Block
+               OpMemberDecorate %a_block_0_0 0 Offset 0
                OpDecorate %a DescriptorSet 0
                OpDecorate %a Binding 0
                OpMemberDecorate %__atomic_compare_exchange_result_u32 0 Offset 0
                OpMemberDecorate %__atomic_compare_exchange_result_u32 1 Offset 4
        %uint = OpTypeInt 32 0
-    %a_block = OpTypeStruct %uint
-%_ptr_StorageBuffer_a_block = OpTypePointer StorageBuffer %a_block
-          %a = OpVariable %_ptr_StorageBuffer_a_block StorageBuffer
+%a_block_0_0 = OpTypeStruct %uint
+%_ptr_StorageBuffer_a_block_0_0 = OpTypePointer StorageBuffer %a_block_0_0
+          %a = OpVariable %_ptr_StorageBuffer_a_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %5 = OpTypeFunction %void
     %uint_42 = OpConstant %uint 42

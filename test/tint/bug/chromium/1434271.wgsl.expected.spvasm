@@ -34,15 +34,15 @@
                OpName %GlobalInvocationID_1 "GlobalInvocationID_1"
                OpName %coord_1 "coord_1"
                OpName %rand_seed "rand_seed"
-               OpName %render_params_block "render_params_block"
-               OpMemberName %render_params_block 0 "inner"
+               OpName %render_params_block_0_5 "render_params_block_0_5"
+               OpMemberName %render_params_block_0_5 0 "inner"
                OpName %RenderParams "RenderParams"
                OpMemberName %RenderParams 0 "modelViewProjectionMatrix"
                OpMemberName %RenderParams 1 "right"
                OpMemberName %RenderParams 2 "up"
                OpName %render_params "render_params"
-               OpName %sim_params_block "sim_params_block"
-               OpMemberName %sim_params_block 0 "inner"
+               OpName %sim_params_block_0_0 "sim_params_block_0_0"
+               OpMemberName %sim_params_block_0_0 0 "inner"
                OpName %SimulationParams "SimulationParams"
                OpMemberName %SimulationParams 0 "deltaTime"
                OpMemberName %SimulationParams 1 "seed"
@@ -56,8 +56,8 @@
                OpMemberName %Particle 3 "velocity"
                OpName %data "data"
                OpName %texture "texture"
-               OpName %ubo_block "ubo_block"
-               OpMemberName %ubo_block 0 "inner"
+               OpName %ubo_block_0_3 "ubo_block_0_3"
+               OpMemberName %ubo_block_0_3 0 "inner"
                OpName %UBO "UBO"
                OpMemberName %UBO 0 "width"
                OpName %ubo "ubo"
@@ -109,8 +109,8 @@
                OpDecorate %vertex_point_size_1 BuiltIn PointSize
                OpDecorate %GlobalInvocationID_1 BuiltIn GlobalInvocationId
                OpDecorate %coord_1 BuiltIn GlobalInvocationId
-               OpDecorate %render_params_block Block
-               OpMemberDecorate %render_params_block 0 Offset 0
+               OpDecorate %render_params_block_0_5 Block
+               OpMemberDecorate %render_params_block_0_5 0 Offset 0
                OpMemberDecorate %RenderParams 0 Offset 0
                OpMemberDecorate %RenderParams 0 ColMajor
                OpMemberDecorate %RenderParams 0 MatrixStride 16
@@ -119,8 +119,8 @@
                OpDecorate %render_params NonWritable
                OpDecorate %render_params Binding 5
                OpDecorate %render_params DescriptorSet 0
-               OpDecorate %sim_params_block Block
-               OpMemberDecorate %sim_params_block 0 Offset 0
+               OpDecorate %sim_params_block_0_0 Block
+               OpMemberDecorate %sim_params_block_0_0 0 Offset 0
                OpMemberDecorate %SimulationParams 0 Offset 0
                OpMemberDecorate %SimulationParams 1 Offset 16
                OpDecorate %sim_params NonWritable
@@ -137,8 +137,8 @@
                OpDecorate %data DescriptorSet 0
                OpDecorate %texture Binding 2
                OpDecorate %texture DescriptorSet 0
-               OpDecorate %ubo_block Block
-               OpMemberDecorate %ubo_block 0 Offset 0
+               OpDecorate %ubo_block_0_3 Block
+               OpMemberDecorate %ubo_block_0_3 0 Offset 0
                OpMemberDecorate %UBO 0 Offset 0
                OpDecorate %ubo NonWritable
                OpDecorate %ubo Binding 3
@@ -194,13 +194,13 @@
   %rand_seed = OpVariable %_ptr_Private_v2float Private %21
 %mat4v4float = OpTypeMatrix %v4float 4
 %RenderParams = OpTypeStruct %mat4v4float %v3float %v3float
-%render_params_block = OpTypeStruct %RenderParams
-%_ptr_Uniform_render_params_block = OpTypePointer Uniform %render_params_block
-%render_params = OpVariable %_ptr_Uniform_render_params_block Uniform
+%render_params_block_0_5 = OpTypeStruct %RenderParams
+%_ptr_Uniform_render_params_block_0_5 = OpTypePointer Uniform %render_params_block_0_5
+%render_params = OpVariable %_ptr_Uniform_render_params_block_0_5 Uniform
 %SimulationParams = OpTypeStruct %float %v4float
-%sim_params_block = OpTypeStruct %SimulationParams
-%_ptr_Uniform_sim_params_block = OpTypePointer Uniform %sim_params_block
- %sim_params = OpVariable %_ptr_Uniform_sim_params_block Uniform
+%sim_params_block_0_0 = OpTypeStruct %SimulationParams
+%_ptr_Uniform_sim_params_block_0_0 = OpTypePointer Uniform %sim_params_block_0_0
+ %sim_params = OpVariable %_ptr_Uniform_sim_params_block_0_0 Uniform
    %Particle = OpTypeStruct %v3float %float %v4float %v2float
 %_runtimearr_Particle = OpTypeRuntimeArray %Particle
   %Particles = OpTypeStruct %_runtimearr_Particle
@@ -210,9 +210,9 @@
 %_ptr_UniformConstant_46 = OpTypePointer UniformConstant %46
     %texture = OpVariable %_ptr_UniformConstant_46 UniformConstant
         %UBO = OpTypeStruct %uint
-  %ubo_block = OpTypeStruct %UBO
-%_ptr_Uniform_ubo_block = OpTypePointer Uniform %ubo_block
-        %ubo = OpVariable %_ptr_Uniform_ubo_block Uniform
+%ubo_block_0_3 = OpTypeStruct %UBO
+%_ptr_Uniform_ubo_block_0_3 = OpTypePointer Uniform %ubo_block_0_3
+        %ubo = OpVariable %_ptr_Uniform_ubo_block_0_3 Uniform
 %_runtimearr_float = OpTypeRuntimeArray %float
      %Buffer = OpTypeStruct %_runtimearr_float
 %_ptr_StorageBuffer_Buffer = OpTypePointer StorageBuffer %Buffer

@@ -20,7 +20,7 @@ struct Uniforms {
   vec4 color;
 };
 
-layout(binding = 0, std140) uniform uniforms_block_ubo {
+layout(binding = 0, std140) uniform uniforms_block_0_0_ubo {
   Uniforms inner;
 } uniforms;
 

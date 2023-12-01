@@ -4,7 +4,7 @@ struct SSBO {
   mat2 m;
 };
 
-layout(binding = 0, std430) buffer ssbo_block_ssbo {
+layout(binding = 0, std430) buffer ssbo_block_0_0_ssbo {
   SSBO inner;
 } ssbo;
 

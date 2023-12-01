@@ -11,8 +11,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %u_block_std140 "u_block_std140"
-               OpMemberName %u_block_std140 0 "inner"
+               OpName %u_block_0_0_std140 "u_block_0_0_std140"
+               OpMemberName %u_block_0_0_std140 0 "inner"
                OpName %mat2x4_f16 "mat2x4_f16"
                OpMemberName %mat2x4_f16 0 "col0"
                OpMemberName %mat2x4_f16 1 "col1"
@@ -26,8 +26,8 @@
                OpName %i "i"
                OpName %var_for_index "var_for_index"
                OpName %f "f"
-               OpDecorate %u_block_std140 Block
-               OpMemberDecorate %u_block_std140 0 Offset 0
+               OpDecorate %u_block_0_0_std140 Block
+               OpMemberDecorate %u_block_0_0_std140 0 Offset 0
                OpMemberDecorate %mat2x4_f16 0 Offset 0
                OpMemberDecorate %mat2x4_f16 1 Offset 8
                OpDecorate %_arr_mat2x4_f16_uint_4 ArrayStride 16
@@ -41,9 +41,9 @@
        %uint = OpTypeInt 32 0
      %uint_4 = OpConstant %uint 4
 %_arr_mat2x4_f16_uint_4 = OpTypeArray %mat2x4_f16 %uint_4
-%u_block_std140 = OpTypeStruct %_arr_mat2x4_f16_uint_4
-%_ptr_Uniform_u_block_std140 = OpTypePointer Uniform %u_block_std140
-          %u = OpVariable %_ptr_Uniform_u_block_std140 Uniform
+%u_block_0_0_std140 = OpTypeStruct %_arr_mat2x4_f16_uint_4
+%_ptr_Uniform_u_block_0_0_std140 = OpTypePointer Uniform %u_block_0_0_std140
+          %u = OpVariable %_ptr_Uniform_u_block_0_0_std140 Uniform
  %mat2v4half = OpTypeMatrix %v4half 2
 %_arr_mat2v4half_uint_4 = OpTypeArray %mat2v4half %uint_4
 %_ptr_Private__arr_mat2v4half_uint_4 = OpTypePointer Private %_arr_mat2v4half_uint_4

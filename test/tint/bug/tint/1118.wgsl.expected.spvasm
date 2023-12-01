@@ -14,13 +14,13 @@
                OpName %glFragColor_1_1 "glFragColor_1_1"
                OpName %fClipDistance3 "fClipDistance3"
                OpName %fClipDistance4 "fClipDistance4"
-               OpName %x_29_block "x_29_block"
-               OpMemberName %x_29_block 0 "inner"
+               OpName %x_29_block_0_0 "x_29_block_0_0"
+               OpMemberName %x_29_block_0_0 0 "inner"
                OpName %Scene "Scene"
                OpMemberName %Scene 0 "vEyePosition"
                OpName %x_29 "x_29"
-               OpName %x_49_block "x_49_block"
-               OpMemberName %x_49_block 0 "inner"
+               OpName %x_49_block_0_1 "x_49_block_0_1"
+               OpMemberName %x_49_block_0_1 0 "inner"
                OpName %Material "Material"
                OpMemberName %Material 0 "vDiffuseColor"
                OpMemberName %Material 1 "vAmbientColor"
@@ -28,8 +28,8 @@
                OpMemberName %Material 3 "vEmissiveColor"
                OpMemberName %Material 4 "placeholder2"
                OpName %x_49 "x_49"
-               OpName %x_137_block "x_137_block"
-               OpMemberName %x_137_block 0 "inner"
+               OpName %x_137_block_0_2 "x_137_block_0_2"
+               OpMemberName %x_137_block_0_2 0 "inner"
                OpName %Mesh "Mesh"
                OpMemberName %Mesh 0 "visibility"
                OpName %x_137 "x_137"
@@ -60,14 +60,14 @@
                OpDecorate %fClipDistance3_param_1 Location 2
                OpDecorate %fClipDistance4_param_1 Location 3
                OpDecorate %glFragColor_1_1 Location 0
-               OpDecorate %x_29_block Block
-               OpMemberDecorate %x_29_block 0 Offset 0
+               OpDecorate %x_29_block_0_0 Block
+               OpMemberDecorate %x_29_block_0_0 0 Offset 0
                OpMemberDecorate %Scene 0 Offset 0
                OpDecorate %x_29 NonWritable
                OpDecorate %x_29 DescriptorSet 0
                OpDecorate %x_29 Binding 0
-               OpDecorate %x_49_block Block
-               OpMemberDecorate %x_49_block 0 Offset 0
+               OpDecorate %x_49_block_0_1 Block
+               OpMemberDecorate %x_49_block_0_1 0 Offset 0
                OpMemberDecorate %Material 0 Offset 0
                OpMemberDecorate %Material 1 Offset 16
                OpMemberDecorate %Material 2 Offset 28
@@ -76,8 +76,8 @@
                OpDecorate %x_49 NonWritable
                OpDecorate %x_49 DescriptorSet 0
                OpDecorate %x_49 Binding 1
-               OpDecorate %x_137_block Block
-               OpMemberDecorate %x_137_block 0 Offset 0
+               OpDecorate %x_137_block_0_2 Block
+               OpMemberDecorate %x_137_block_0_2 0 Offset 0
                OpMemberDecorate %Mesh 0 Offset 0
                OpDecorate %x_137 NonWritable
                OpDecorate %x_137 DescriptorSet 0
@@ -100,18 +100,18 @@
 %fClipDistance3 = OpVariable %_ptr_Private_float Private %15
 %fClipDistance4 = OpVariable %_ptr_Private_float Private %15
       %Scene = OpTypeStruct %v4float
- %x_29_block = OpTypeStruct %Scene
-%_ptr_Uniform_x_29_block = OpTypePointer Uniform %x_29_block
-       %x_29 = OpVariable %_ptr_Uniform_x_29_block Uniform
+%x_29_block_0_0 = OpTypeStruct %Scene
+%_ptr_Uniform_x_29_block_0_0 = OpTypePointer Uniform %x_29_block_0_0
+       %x_29 = OpVariable %_ptr_Uniform_x_29_block_0_0 Uniform
     %v3float = OpTypeVector %float 3
    %Material = OpTypeStruct %v4float %v3float %float %v3float %float
- %x_49_block = OpTypeStruct %Material
-%_ptr_Uniform_x_49_block = OpTypePointer Uniform %x_49_block
-       %x_49 = OpVariable %_ptr_Uniform_x_49_block Uniform
+%x_49_block_0_1 = OpTypeStruct %Material
+%_ptr_Uniform_x_49_block_0_1 = OpTypePointer Uniform %x_49_block_0_1
+       %x_49 = OpVariable %_ptr_Uniform_x_49_block_0_1 Uniform
        %Mesh = OpTypeStruct %float
-%x_137_block = OpTypeStruct %Mesh
-%_ptr_Uniform_x_137_block = OpTypePointer Uniform %x_137_block
-      %x_137 = OpVariable %_ptr_Uniform_x_137_block Uniform
+%x_137_block_0_2 = OpTypeStruct %Mesh
+%_ptr_Uniform_x_137_block_0_2 = OpTypePointer Uniform %x_137_block_0_2
+      %x_137 = OpVariable %_ptr_Uniform_x_137_block_0_2 Uniform
 %_ptr_Private_v4float = OpTypePointer Private %v4float
 %glFragColor = OpVariable %_ptr_Private_v4float Private %12
        %void = OpTypeVoid

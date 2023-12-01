@@ -16,8 +16,8 @@
                OpExecutionMode %compute_main LocalSize 1 1 1
                OpName %value "value"
                OpName %vertex_point_size "vertex_point_size"
-               OpName %prevent_dce_block "prevent_dce_block"
-               OpMemberName %prevent_dce_block 0 "inner"
+               OpName %prevent_dce_block_2_0 "prevent_dce_block_2_0"
+               OpMemberName %prevent_dce_block_2_0 0 "inner"
                OpName %prevent_dce "prevent_dce"
                OpName %transpose_d6faec "transpose_d6faec"
                OpName %arg_0 "arg_0"
@@ -28,10 +28,10 @@
                OpName %compute_main "compute_main"
                OpDecorate %value BuiltIn Position
                OpDecorate %vertex_point_size BuiltIn PointSize
-               OpDecorate %prevent_dce_block Block
-               OpMemberDecorate %prevent_dce_block 0 Offset 0
-               OpMemberDecorate %prevent_dce_block 0 ColMajor
-               OpMemberDecorate %prevent_dce_block 0 MatrixStride 4
+               OpDecorate %prevent_dce_block_2_0 Block
+               OpMemberDecorate %prevent_dce_block_2_0 0 Offset 0
+               OpMemberDecorate %prevent_dce_block_2_0 0 ColMajor
+               OpMemberDecorate %prevent_dce_block_2_0 0 MatrixStride 4
                OpDecorate %prevent_dce DescriptorSet 2
                OpDecorate %prevent_dce Binding 0
       %float = OpTypeFloat 32
@@ -45,9 +45,9 @@
        %half = OpTypeFloat 16
      %v2half = OpTypeVector %half 2
  %mat3v2half = OpTypeMatrix %v2half 3
-%prevent_dce_block = OpTypeStruct %mat3v2half
-%_ptr_StorageBuffer_prevent_dce_block = OpTypePointer StorageBuffer %prevent_dce_block
-%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block StorageBuffer
+%prevent_dce_block_2_0 = OpTypeStruct %mat3v2half
+%_ptr_StorageBuffer_prevent_dce_block_2_0 = OpTypePointer StorageBuffer %prevent_dce_block_2_0
+%prevent_dce = OpVariable %_ptr_StorageBuffer_prevent_dce_block_2_0 StorageBuffer
        %void = OpTypeVoid
          %15 = OpTypeFunction %void
      %v3half = OpTypeVector %half 3

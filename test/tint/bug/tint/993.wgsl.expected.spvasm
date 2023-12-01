@@ -7,56 +7,56 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %constants_block "constants_block"
-               OpMemberName %constants_block 0 "inner"
+               OpName %constants_block_1_0 "constants_block_1_0"
+               OpMemberName %constants_block_1_0 0 "inner"
                OpName %Constants "Constants"
                OpMemberName %Constants 0 "zero"
                OpName %constants "constants"
-               OpName %result_block "result_block"
-               OpMemberName %result_block 0 "inner"
+               OpName %result_block_1_1 "result_block_1_1"
+               OpMemberName %result_block_1_1 0 "inner"
                OpName %Result "Result"
                OpMemberName %Result 0 "value"
                OpName %result "result"
-               OpName %s_block "s_block"
-               OpMemberName %s_block 0 "inner"
+               OpName %s_block_0_0 "s_block_0_0"
+               OpMemberName %s_block_0_0 0 "inner"
                OpName %TestData "TestData"
                OpMemberName %TestData 0 "data"
                OpName %s "s"
                OpName %runTest "runTest"
                OpName %main "main"
-               OpDecorate %constants_block Block
-               OpMemberDecorate %constants_block 0 Offset 0
+               OpDecorate %constants_block_1_0 Block
+               OpMemberDecorate %constants_block_1_0 0 Offset 0
                OpMemberDecorate %Constants 0 Offset 0
                OpDecorate %constants NonWritable
                OpDecorate %constants DescriptorSet 1
                OpDecorate %constants Binding 0
-               OpDecorate %result_block Block
-               OpMemberDecorate %result_block 0 Offset 0
+               OpDecorate %result_block_1_1 Block
+               OpMemberDecorate %result_block_1_1 0 Offset 0
                OpMemberDecorate %Result 0 Offset 0
                OpDecorate %result DescriptorSet 1
                OpDecorate %result Binding 1
-               OpDecorate %s_block Block
-               OpMemberDecorate %s_block 0 Offset 0
+               OpDecorate %s_block_0_0 Block
+               OpMemberDecorate %s_block_0_0 0 Offset 0
                OpMemberDecorate %TestData 0 Offset 0
                OpDecorate %_arr_int_uint_3 ArrayStride 4
                OpDecorate %s DescriptorSet 0
                OpDecorate %s Binding 0
        %uint = OpTypeInt 32 0
   %Constants = OpTypeStruct %uint
-%constants_block = OpTypeStruct %Constants
-%_ptr_Uniform_constants_block = OpTypePointer Uniform %constants_block
-  %constants = OpVariable %_ptr_Uniform_constants_block Uniform
+%constants_block_1_0 = OpTypeStruct %Constants
+%_ptr_Uniform_constants_block_1_0 = OpTypePointer Uniform %constants_block_1_0
+  %constants = OpVariable %_ptr_Uniform_constants_block_1_0 Uniform
      %Result = OpTypeStruct %uint
-%result_block = OpTypeStruct %Result
-%_ptr_StorageBuffer_result_block = OpTypePointer StorageBuffer %result_block
-     %result = OpVariable %_ptr_StorageBuffer_result_block StorageBuffer
+%result_block_1_1 = OpTypeStruct %Result
+%_ptr_StorageBuffer_result_block_1_1 = OpTypePointer StorageBuffer %result_block_1_1
+     %result = OpVariable %_ptr_StorageBuffer_result_block_1_1 StorageBuffer
         %int = OpTypeInt 32 1
      %uint_3 = OpConstant %uint 3
 %_arr_int_uint_3 = OpTypeArray %int %uint_3
    %TestData = OpTypeStruct %_arr_int_uint_3
-    %s_block = OpTypeStruct %TestData
-%_ptr_StorageBuffer_s_block = OpTypePointer StorageBuffer %s_block
-          %s = OpVariable %_ptr_StorageBuffer_s_block StorageBuffer
+%s_block_0_0 = OpTypeStruct %TestData
+%_ptr_StorageBuffer_s_block_0_0 = OpTypePointer StorageBuffer %s_block_0_0
+          %s = OpVariable %_ptr_StorageBuffer_s_block_0_0 StorageBuffer
          %17 = OpTypeFunction %int
      %uint_1 = OpConstant %uint 1
      %uint_0 = OpConstant %uint 0

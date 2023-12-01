@@ -7,21 +7,21 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %G_block "G_block"
-               OpMemberName %G_block 0 "inner"
+               OpName %G_block_0_0 "G_block_0_0"
+               OpMemberName %G_block_0_0 0 "inner"
                OpName %G "G"
                OpName %main "main"
-               OpDecorate %G_block Block
-               OpMemberDecorate %G_block 0 Offset 0
+               OpDecorate %G_block_0_0 Block
+               OpMemberDecorate %G_block_0_0 0 Offset 0
                OpDecorate %_runtimearr_int ArrayStride 4
                OpDecorate %G NonWritable
                OpDecorate %G DescriptorSet 0
                OpDecorate %G Binding 0
         %int = OpTypeInt 32 1
 %_runtimearr_int = OpTypeRuntimeArray %int
-    %G_block = OpTypeStruct %_runtimearr_int
-%_ptr_StorageBuffer_G_block = OpTypePointer StorageBuffer %G_block
-          %G = OpVariable %_ptr_StorageBuffer_G_block StorageBuffer
+%G_block_0_0 = OpTypeStruct %_runtimearr_int
+%_ptr_StorageBuffer_G_block_0_0 = OpTypePointer StorageBuffer %G_block_0_0
+          %G = OpVariable %_ptr_StorageBuffer_G_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %6 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

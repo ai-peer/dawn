@@ -6,7 +6,7 @@ struct mat2x4_f16 {
   f16vec4 col1;
 };
 
-layout(binding = 0, std140) uniform u_block_std140_ubo {
+layout(binding = 0, std140) uniform u_block_0_0_std140_ubo {
   mat2x4_f16 inner[4];
 } u;
 

@@ -7,7 +7,7 @@ struct Constants {
   uint pad_2;
 };
 
-layout(binding = 0, std140) uniform constants_block_ubo {
+layout(binding = 0, std140) uniform constants_block_1_0_ubo {
   Constants inner;
 } constants;
 

@@ -5,7 +5,7 @@ struct Buf {
   uint data[50];
 };
 
-layout(binding = 0, std430) buffer b_block_ssbo {
+layout(binding = 0, std430) buffer b_block_0_0_ssbo {
   Buf inner;
 } b;
 

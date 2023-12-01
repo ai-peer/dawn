@@ -7,55 +7,55 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %ubo_block "ubo_block"
-               OpMemberName %ubo_block 0 "inner"
+               OpName %ubo_block_0_0 "ubo_block_0_0"
+               OpMemberName %ubo_block_0_0 0 "inner"
                OpName %UBO "UBO"
                OpMemberName %UBO 0 "dynamic_idx"
                OpName %ubo "ubo"
-               OpName %result_block "result_block"
-               OpMemberName %result_block 0 "inner"
+               OpName %result_block_0_2 "result_block_0_2"
+               OpMemberName %result_block_0_2 0 "inner"
                OpName %Result "Result"
                OpMemberName %Result 0 "out"
                OpName %result "result"
-               OpName %ssbo_block "ssbo_block"
-               OpMemberName %ssbo_block 0 "inner"
+               OpName %ssbo_block_0_1 "ssbo_block_0_1"
+               OpMemberName %ssbo_block_0_1 0 "inner"
                OpName %SSBO "SSBO"
                OpMemberName %SSBO 0 "data"
                OpName %ssbo "ssbo"
                OpName %f "f"
-               OpDecorate %ubo_block Block
-               OpMemberDecorate %ubo_block 0 Offset 0
+               OpDecorate %ubo_block_0_0 Block
+               OpMemberDecorate %ubo_block_0_0 0 Offset 0
                OpMemberDecorate %UBO 0 Offset 0
                OpDecorate %ubo NonWritable
                OpDecorate %ubo DescriptorSet 0
                OpDecorate %ubo Binding 0
-               OpDecorate %result_block Block
-               OpMemberDecorate %result_block 0 Offset 0
+               OpDecorate %result_block_0_2 Block
+               OpMemberDecorate %result_block_0_2 0 Offset 0
                OpMemberDecorate %Result 0 Offset 0
                OpDecorate %result DescriptorSet 0
                OpDecorate %result Binding 2
-               OpDecorate %ssbo_block Block
-               OpMemberDecorate %ssbo_block 0 Offset 0
+               OpDecorate %ssbo_block_0_1 Block
+               OpMemberDecorate %ssbo_block_0_1 0 Offset 0
                OpMemberDecorate %SSBO 0 Offset 0
                OpDecorate %_arr_int_uint_4 ArrayStride 4
                OpDecorate %ssbo DescriptorSet 0
                OpDecorate %ssbo Binding 1
         %int = OpTypeInt 32 1
         %UBO = OpTypeStruct %int
-  %ubo_block = OpTypeStruct %UBO
-%_ptr_Uniform_ubo_block = OpTypePointer Uniform %ubo_block
-        %ubo = OpVariable %_ptr_Uniform_ubo_block Uniform
+%ubo_block_0_0 = OpTypeStruct %UBO
+%_ptr_Uniform_ubo_block_0_0 = OpTypePointer Uniform %ubo_block_0_0
+        %ubo = OpVariable %_ptr_Uniform_ubo_block_0_0 Uniform
      %Result = OpTypeStruct %int
-%result_block = OpTypeStruct %Result
-%_ptr_StorageBuffer_result_block = OpTypePointer StorageBuffer %result_block
-     %result = OpVariable %_ptr_StorageBuffer_result_block StorageBuffer
+%result_block_0_2 = OpTypeStruct %Result
+%_ptr_StorageBuffer_result_block_0_2 = OpTypePointer StorageBuffer %result_block_0_2
+     %result = OpVariable %_ptr_StorageBuffer_result_block_0_2 StorageBuffer
        %uint = OpTypeInt 32 0
      %uint_4 = OpConstant %uint 4
 %_arr_int_uint_4 = OpTypeArray %int %uint_4
        %SSBO = OpTypeStruct %_arr_int_uint_4
- %ssbo_block = OpTypeStruct %SSBO
-%_ptr_StorageBuffer_ssbo_block = OpTypePointer StorageBuffer %ssbo_block
-       %ssbo = OpVariable %_ptr_StorageBuffer_ssbo_block StorageBuffer
+%ssbo_block_0_1 = OpTypeStruct %SSBO
+%_ptr_StorageBuffer_ssbo_block_0_1 = OpTypePointer StorageBuffer %ssbo_block_0_1
+       %ssbo = OpVariable %_ptr_StorageBuffer_ssbo_block_0_1 StorageBuffer
        %void = OpTypeVoid
          %17 = OpTypeFunction %void
      %uint_0 = OpConstant %uint 0

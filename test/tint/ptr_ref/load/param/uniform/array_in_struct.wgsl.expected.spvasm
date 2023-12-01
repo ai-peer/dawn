@@ -7,15 +7,15 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %S_block "S_block"
-               OpMemberName %S_block 0 "inner"
+               OpName %S_block_0_0 "S_block_0_0"
+               OpMemberName %S_block_0_0 0 "inner"
                OpName %str "str"
                OpMemberName %str 0 "arr"
                OpName %S "S"
                OpName %func_S_arr "func_S_arr"
                OpName %main "main"
-               OpDecorate %S_block Block
-               OpMemberDecorate %S_block 0 Offset 0
+               OpDecorate %S_block_0_0 Block
+               OpMemberDecorate %S_block_0_0 0 Offset 0
                OpMemberDecorate %str 0 Offset 0
                OpDecorate %_arr_v4int_uint_4 ArrayStride 16
                OpDecorate %S NonWritable
@@ -27,9 +27,9 @@
      %uint_4 = OpConstant %uint 4
 %_arr_v4int_uint_4 = OpTypeArray %v4int %uint_4
         %str = OpTypeStruct %_arr_v4int_uint_4
-    %S_block = OpTypeStruct %str
-%_ptr_Uniform_S_block = OpTypePointer Uniform %S_block
-          %S = OpVariable %_ptr_Uniform_S_block Uniform
+%S_block_0_0 = OpTypeStruct %str
+%_ptr_Uniform_S_block_0_0 = OpTypePointer Uniform %S_block_0_0
+          %S = OpVariable %_ptr_Uniform_S_block_0_0 Uniform
          %10 = OpTypeFunction %_arr_v4int_uint_4
      %uint_0 = OpConstant %uint 0
 %_ptr_Uniform__arr_v4int_uint_4 = OpTypePointer Uniform %_arr_v4int_uint_4

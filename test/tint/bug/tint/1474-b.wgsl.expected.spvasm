@@ -11,18 +11,18 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %main "main"
                OpExecutionMode %main LocalSize 1 1 1
-               OpName %non_uniform_value_block "non_uniform_value_block"
-               OpMemberName %non_uniform_value_block 0 "inner"
+               OpName %non_uniform_value_block_0_0 "non_uniform_value_block_0_0"
+               OpMemberName %non_uniform_value_block_0_0 0 "inner"
                OpName %non_uniform_value "non_uniform_value"
                OpName %main "main"
-               OpDecorate %non_uniform_value_block Block
-               OpMemberDecorate %non_uniform_value_block 0 Offset 0
+               OpDecorate %non_uniform_value_block_0_0 Block
+               OpMemberDecorate %non_uniform_value_block_0_0 0 Offset 0
                OpDecorate %non_uniform_value DescriptorSet 0
                OpDecorate %non_uniform_value Binding 0
         %int = OpTypeInt 32 1
-%non_uniform_value_block = OpTypeStruct %int
-%_ptr_StorageBuffer_non_uniform_value_block = OpTypePointer StorageBuffer %non_uniform_value_block
-%non_uniform_value = OpVariable %_ptr_StorageBuffer_non_uniform_value_block StorageBuffer
+%non_uniform_value_block_0_0 = OpTypeStruct %int
+%_ptr_StorageBuffer_non_uniform_value_block_0_0 = OpTypePointer StorageBuffer %non_uniform_value_block_0_0
+%non_uniform_value = OpVariable %_ptr_StorageBuffer_non_uniform_value_block_0_0 StorageBuffer
        %void = OpTypeVoid
           %5 = OpTypeFunction %void
        %main = OpFunction %void None %5

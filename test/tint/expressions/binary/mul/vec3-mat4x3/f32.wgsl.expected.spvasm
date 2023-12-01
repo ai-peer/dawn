@@ -7,15 +7,15 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint Fragment %main "main"
                OpExecutionMode %main OriginUpperLeft
-               OpName %data_block "data_block"
-               OpMemberName %data_block 0 "inner"
+               OpName %data_block_0_0 "data_block_0_0"
+               OpMemberName %data_block_0_0 0 "inner"
                OpName %S "S"
                OpMemberName %S 0 "matrix"
                OpMemberName %S 1 "vector"
                OpName %data "data"
                OpName %main "main"
-               OpDecorate %data_block Block
-               OpMemberDecorate %data_block 0 Offset 0
+               OpDecorate %data_block_0_0 Block
+               OpMemberDecorate %data_block_0_0 0 Offset 0
                OpMemberDecorate %S 0 Offset 0
                OpMemberDecorate %S 0 ColMajor
                OpMemberDecorate %S 0 MatrixStride 16
@@ -27,9 +27,9 @@
     %v3float = OpTypeVector %float 3
 %mat4v3float = OpTypeMatrix %v3float 4
           %S = OpTypeStruct %mat4v3float %v3float
- %data_block = OpTypeStruct %S
-%_ptr_Uniform_data_block = OpTypePointer Uniform %data_block
-       %data = OpVariable %_ptr_Uniform_data_block Uniform
+%data_block_0_0 = OpTypeStruct %S
+%_ptr_Uniform_data_block_0_0 = OpTypePointer Uniform %data_block_0_0
+       %data = OpVariable %_ptr_Uniform_data_block_0_0 Uniform
        %void = OpTypeVoid
           %8 = OpTypeFunction %void
        %uint = OpTypeInt 32 0

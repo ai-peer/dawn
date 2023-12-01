@@ -22,7 +22,7 @@ shared uint x_35;
 shared uint x_36;
 shared uint x_37;
 uvec3 x_3 = uvec3(0u, 0u, 0u);
-layout(binding = 1, std140) uniform x_6_block_ubo {
+layout(binding = 1, std140) uniform x_6_block_0_1_ubo {
   S_2 inner;
 } x_6;
 

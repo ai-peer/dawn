@@ -13,11 +13,11 @@ struct h {
   uint a;
 };
 
-layout(binding = 0, std140) uniform i_block_ubo {
+layout(binding = 0, std140) uniform i_block_0_0_ubo {
   g inner;
 } i;
 
-layout(binding = 1, std430) buffer j_block_ssbo {
+layout(binding = 1, std430) buffer j_block_0_1_ssbo {
   h inner;
 } j;
 

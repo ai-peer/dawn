@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint GLCompute %f "f"
                OpExecutionMode %f LocalSize 1 1 1
-               OpName %u_block "u_block"
-               OpMemberName %u_block 0 "inner"
+               OpName %u_block_0_0 "u_block_0_0"
+               OpMemberName %u_block_0_0 0 "inner"
                OpName %u "u"
                OpName %s "s"
                OpName %assign_and_preserve_padding_1_s_X "assign_and_preserve_padding_1_s_X"
@@ -19,10 +19,10 @@
                OpName %i "i"
                OpName %var_for_index "var_for_index"
                OpName %f "f"
-               OpDecorate %u_block Block
-               OpMemberDecorate %u_block 0 Offset 0
-               OpMemberDecorate %u_block 0 ColMajor
-               OpMemberDecorate %u_block 0 MatrixStride 16
+               OpDecorate %u_block_0_0 Block
+               OpMemberDecorate %u_block_0_0 0 Offset 0
+               OpMemberDecorate %u_block_0_0 0 ColMajor
+               OpMemberDecorate %u_block_0_0 0 MatrixStride 16
                OpDecorate %_arr_mat3v3float_uint_4 ArrayStride 48
                OpDecorate %u NonWritable
                OpDecorate %u DescriptorSet 0
@@ -36,11 +36,11 @@
        %uint = OpTypeInt 32 0
      %uint_4 = OpConstant %uint 4
 %_arr_mat3v3float_uint_4 = OpTypeArray %mat3v3float %uint_4
-    %u_block = OpTypeStruct %_arr_mat3v3float_uint_4
-%_ptr_Uniform_u_block = OpTypePointer Uniform %u_block
-          %u = OpVariable %_ptr_Uniform_u_block Uniform
-%_ptr_StorageBuffer_u_block = OpTypePointer StorageBuffer %u_block
-          %s = OpVariable %_ptr_StorageBuffer_u_block StorageBuffer
+%u_block_0_0 = OpTypeStruct %_arr_mat3v3float_uint_4
+%_ptr_Uniform_u_block_0_0 = OpTypePointer Uniform %u_block_0_0
+          %u = OpVariable %_ptr_Uniform_u_block_0_0 Uniform
+%_ptr_StorageBuffer_u_block_0_0 = OpTypePointer StorageBuffer %u_block_0_0
+          %s = OpVariable %_ptr_StorageBuffer_u_block_0_0 StorageBuffer
        %void = OpTypeVoid
      %uint_1 = OpConstant %uint 1
 %_arr_uint_uint_1 = OpTypeArray %uint %uint_1

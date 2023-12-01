@@ -7,8 +7,8 @@
                OpMemoryModel Logical GLSL450
                OpEntryPoint Fragment %main "main"
                OpExecutionMode %main OriginUpperLeft
-               OpName %data_block_std140 "data_block_std140"
-               OpMemberName %data_block_std140 0 "inner"
+               OpName %data_block_0_0_std140 "data_block_0_0_std140"
+               OpMemberName %data_block_0_0_std140 0 "inner"
                OpName %S_std140 "S_std140"
                OpMemberName %S_std140 0 "matrix_0"
                OpMemberName %S_std140 1 "matrix_1"
@@ -17,8 +17,8 @@
                OpName %data "data"
                OpName %load_data_inner_matrix "load_data_inner_matrix"
                OpName %main "main"
-               OpDecorate %data_block_std140 Block
-               OpMemberDecorate %data_block_std140 0 Offset 0
+               OpDecorate %data_block_0_0_std140 Block
+               OpMemberDecorate %data_block_0_0_std140 0 Offset 0
                OpMemberDecorate %S_std140 0 Offset 0
                OpMemberDecorate %S_std140 1 Offset 8
                OpMemberDecorate %S_std140 2 Offset 16
@@ -30,9 +30,9 @@
     %v2float = OpTypeVector %float 2
     %v3float = OpTypeVector %float 3
    %S_std140 = OpTypeStruct %v2float %v2float %v2float %v3float
-%data_block_std140 = OpTypeStruct %S_std140
-%_ptr_Uniform_data_block_std140 = OpTypePointer Uniform %data_block_std140
-       %data = OpVariable %_ptr_Uniform_data_block_std140 Uniform
+%data_block_0_0_std140 = OpTypeStruct %S_std140
+%_ptr_Uniform_data_block_0_0_std140 = OpTypePointer Uniform %data_block_0_0_std140
+       %data = OpVariable %_ptr_Uniform_data_block_0_0_std140 Uniform
 %mat3v2float = OpTypeMatrix %v2float 3
           %8 = OpTypeFunction %mat3v2float
        %uint = OpTypeInt 32 0

@@ -12,8 +12,8 @@
                OpEntryPoint GLCompute %f "f" %local_invocation_index_1
                OpExecutionMode %f LocalSize 1 1 1
                OpName %local_invocation_index_1 "local_invocation_index_1"
-               OpName %u_block_std140 "u_block_std140"
-               OpMemberName %u_block_std140 0 "inner"
+               OpName %u_block_0_0_std140 "u_block_0_0_std140"
+               OpMemberName %u_block_0_0_std140 0 "inner"
                OpName %S_std140 "S_std140"
                OpMemberName %S_std140 0 "before"
                OpMemberName %S_std140 1 "m_0"
@@ -40,8 +40,8 @@
                OpName %idx "idx"
                OpName %f "f"
                OpDecorate %local_invocation_index_1 BuiltIn LocalInvocationIndex
-               OpDecorate %u_block_std140 Block
-               OpMemberDecorate %u_block_std140 0 Offset 0
+               OpDecorate %u_block_0_0_std140 Block
+               OpMemberDecorate %u_block_0_0_std140 0 Offset 0
                OpMemberDecorate %S_std140 0 Offset 0
                OpMemberDecorate %S_std140 1 Offset 8
                OpMemberDecorate %S_std140 2 Offset 16
@@ -67,9 +67,9 @@
    %S_std140 = OpTypeStruct %int %v4half %v4half %v4half %v4half %int
      %uint_4 = OpConstant %uint 4
 %_arr_S_std140_uint_4 = OpTypeArray %S_std140 %uint_4
-%u_block_std140 = OpTypeStruct %_arr_S_std140_uint_4
-%_ptr_Uniform_u_block_std140 = OpTypePointer Uniform %u_block_std140
-          %u = OpVariable %_ptr_Uniform_u_block_std140 Uniform
+%u_block_0_0_std140 = OpTypeStruct %_arr_S_std140_uint_4
+%_ptr_Uniform_u_block_0_0_std140 = OpTypePointer Uniform %u_block_0_0_std140
+          %u = OpVariable %_ptr_Uniform_u_block_0_0_std140 Uniform
  %mat4v4half = OpTypeMatrix %v4half 4
           %S = OpTypeStruct %int %mat4v4half %int
 %_arr_S_uint_4 = OpTypeArray %S %uint_4

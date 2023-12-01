@@ -8,11 +8,11 @@ struct mat4x3_f16 {
   f16vec3 col3;
 };
 
-layout(binding = 0, std140) uniform u_block_std140_ubo {
+layout(binding = 0, std140) uniform u_block_0_0_std140_ubo {
   mat4x3_f16 inner[4];
 } u;
 
-layout(binding = 1, std430) buffer u_block_ssbo {
+layout(binding = 1, std430) buffer u_block_0_0_ssbo {
   f16mat4x3 inner[4];
 } s;
 

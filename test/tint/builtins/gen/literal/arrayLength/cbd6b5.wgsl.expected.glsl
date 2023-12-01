@@ -5,7 +5,7 @@ layout(binding = 0, std430) buffer SB_RW_ssbo {
   float16_t arg_0[];
 } sb_rw;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_2_0_ssbo {
   uint inner;
 } prevent_dce;
 
@@ -35,7 +35,7 @@ layout(binding = 0, std430) buffer SB_RW_ssbo {
   float16_t arg_0[];
 } sb_rw;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_2_0_ssbo {
   uint inner;
 } prevent_dce;
 
@@ -59,7 +59,7 @@ layout(binding = 0, std430) buffer SB_RW_ssbo {
   float16_t arg_0[];
 } sb_rw;
 
-layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
+layout(binding = 0, std430) buffer prevent_dce_block_2_0_ssbo {
   uint inner;
 } prevent_dce;
 

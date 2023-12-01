@@ -1,6 +1,6 @@
 #version 310 es
 
-layout(binding = 1, std430) buffer buf_block_ssbo {
+layout(binding = 1, std430) buffer buf_block_0_1_ssbo {
   uint inner[1];
 } buf;
 
