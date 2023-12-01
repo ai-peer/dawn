@@ -44,6 +44,11 @@ class SharedTextureMemory final : public SharedTextureMemoryBase {
         const char* label,
         const SharedTextureMemoryDmaBufDescriptor* descriptor);
 
+    static ResultOrError<Ref<SharedTextureMemory>> Create(
+        Device* device,
+        const char* label,
+        const SharedTextureMemoryAHardwareBufferDescriptor* descriptor);
+
     RefCountedVkHandle<VkDeviceMemory>* GetVkDeviceMemory() const;
     RefCountedVkHandle<VkImage>* GetVkImage() const;
     uint32_t GetQueueFamilyIndex() const;
