@@ -124,7 +124,7 @@ ResultOrError<Ref<SharedFenceBase>> SharedTextureMemory::CreateFenceImpl(
 }
 
 MaybeError SharedTextureMemory::BeginAccessImpl(TextureBase* texture,
-                                                const BeginAccessDescriptor* descriptor) {
+                                                const Unpacked<BeginAccessDescriptor>& descriptor) {
     DAWN_TRY(d3d::SharedTextureMemory::BeginAccessImpl(texture, descriptor));
     // Reset state to COMMON. BeginAccess contains a list of fences to wait on after
     // which the texture's usage will complete on the GPU.
