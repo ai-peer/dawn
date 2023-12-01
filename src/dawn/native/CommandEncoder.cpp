@@ -423,12 +423,11 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
         return {};
     }
 
-    DAWN_TRY(ValidateSingleSType(colorAttachment.nextInChain,
-                                 wgpu::SType::DawnRenderPassColorAttachmentRenderToSingleSampled));
+    Unpacked<RenderPassColorAttachment> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, &colorAttachment);
 
-    const DawnRenderPassColorAttachmentRenderToSingleSampled* msaaRenderToSingleSampledDesc =
-        nullptr;
-    FindInChain(colorAttachment.nextInChain, &msaaRenderToSingleSampledDesc);
+    const auto* msaaRenderToSingleSampledDesc =
+        unpacked.Get<DawnRenderPassColorAttachmentRenderToSingleSampled>();
     if (msaaRenderToSingleSampledDesc) {
         DAWN_TRY(ValidateColorAttachmentRenderToSingleSampled(device, colorAttachment,
                                                               msaaRenderToSingleSampledDesc));
