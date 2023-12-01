@@ -197,7 +197,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
                                    const DawnTogglesDescriptor* requiredAdapterToggles,
                                    wgpu::PowerPreference powerPreference) const;
 
-    void GatherWGSLFeatures();
+    void GatherWGSLFeatures(const InstanceDescriptor* desc);
     void ConsumeError(std::unique_ptr<ErrorData> error);
 
     std::unordered_set<std::string> warningMessages;

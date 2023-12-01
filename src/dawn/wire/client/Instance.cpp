@@ -147,18 +147,22 @@ WireResult Instance::Initialize(const WGPUInstanceDescriptor* descriptor) {
     }
 
     const WGPUDawnWireWGSLControl* wgslControl = nullptr;
+    const WGPUDawnWGSLBlocklist* wgslBlocklist = nullptr;
     for (const WGPUChainedStruct* chain = descriptor->nextInChain; chain != nullptr;
          chain = chain->next) {
         switch (chain->sType) {
             case WGPUSType_DawnWireWGSLControl:
                 wgslControl = reinterpret_cast<const WGPUDawnWireWGSLControl*>(chain);
                 break;
+            case WGPUSType_DawnWGSLBlocklist:
+                wgslBlocklist = reinterpret_cast<const WGPUDawnWGSLBlocklist*>(chain);
+                break;
             default:
                 return WireResult::FatalError;
         }
     }
 
-    GatherWGSLFeatures(wgslControl);
+    GatherWGSLFeatures(wgslControl, wgslBlocklist);
 
     return WireResult::Success;
 }
@@ -252,7 +256,8 @@ WGPUWaitStatus Instance::WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64
     return GetClient()->GetEventManager()->WaitAny(count, infos, timeoutNS);
 }
 
-void Instance::GatherWGSLFeatures(const WGPUDawnWireWGSLControl* wgslControl) {
+void Instance::GatherWGSLFeatures(const WGPUDawnWireWGSLControl* wgslControl,
+                                  const WGPUDawnWGSLBlocklist* wgslBlocklist) {
     WGPUDawnWireWGSLControl defaultWgslControl{};
     if (wgslControl == nullptr) {
         wgslControl = &defaultWgslControl;
@@ -296,6 +301,17 @@ void Instance::GatherWGSLFeatures(const WGPUDawnWireWGSLControl* wgslControl) {
 
         if (enable) {
             mWGSLFeatures.emplace(ToWGPUFeature(wgslFeature));
+        }
+    }
+
+    // Remove blocklisted features.
+    if (wgslBlocklist != nullptr) {
+        for (size_t i = 0; i < wgslBlocklist->blocklistedFeatureCount; i++) {
+            const char* name = wgslBlocklist->blocklistedFeatures[i];
+            tint::wgsl::LanguageFeature tintFeature = tint::wgsl::ParseLanguageFeature(name);
+            WGPUWGSLFeatureName feature = ToWGPUFeature(tintFeature);
+
+            mWGSLFeatures.erase(feature);
         }
     }
 }
