@@ -454,12 +454,14 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemory::CreateTextureImpl(
 }
 
 MaybeError SharedTextureMemory::BeginAccessImpl(TextureBase* texture,
-                                                const BeginAccessDescriptor* descriptor) {
-    DAWN_TRY(ValidateSTypes(descriptor->nextInChain,
-                            {{wgpu::SType::SharedTextureMemoryVkImageLayoutBeginState}}));
+                                                const Unpacked<BeginAccessDescriptor>& descriptor) {
+    wgpu::SType type;
+    DAWN_TRY_ASSIGN(
+        type, (ValidateBranches<BranchList<Branch<SharedTextureMemoryVkImageLayoutBeginState>>>(
+                  descriptor)));
+    DAWN_ASSERT(type == wgpu::SType::SharedTextureMemoryVkImageLayoutBeginState);
 
-    const SharedTextureMemoryVkImageLayoutBeginState* vkLayoutBeginState = nullptr;
-    FindInChain(descriptor->nextInChain, &vkLayoutBeginState);
+    auto vkLayoutBeginState = descriptor.Get<SharedTextureMemoryVkImageLayoutBeginState>();
     DAWN_INVALID_IF(vkLayoutBeginState == nullptr,
                     "SharedTextureMemoryVkImageLayoutBeginState was not provided.");
 
@@ -475,13 +477,16 @@ MaybeError SharedTextureMemory::BeginAccessImpl(TextureBase* texture,
 }
 
 #if DAWN_PLATFORM_IS(FUCHSIA) || DAWN_PLATFORM_IS(LINUX)
-ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(TextureBase* texture,
-                                                                      EndAccessState* state) {
-    DAWN_TRY(ValidateSTypes(state->nextInChain,
-                            {{wgpu::SType::SharedTextureMemoryVkImageLayoutEndState}}));
+ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
+    TextureBase* texture,
+    UnpackedOut<EndAccessState>& state) {
+    wgpu::SType type;
+    DAWN_TRY_ASSIGN(type,
+                    (ValidateBranches<BranchList<Branch<SharedTextureMemoryVkImageLayoutEndState>>>(
+                        descriptor)));
+    DAWN_ASSERT(type == wgpu::SType::SharedTextureMemoryVkImageLayoutEndState);
 
-    SharedTextureMemoryVkImageLayoutEndState* vkLayoutEndState = nullptr;
-    FindInChain(state->nextInChain, &vkLayoutEndState);
+    auto vkLayoutEndState = state.Get<SharedTextureMemoryVkImageLayoutEndState>;
     DAWN_INVALID_IF(vkLayoutEndState == nullptr,
                     "SharedTextureMemoryVkImageLayoutEndState was not provided.");
 
