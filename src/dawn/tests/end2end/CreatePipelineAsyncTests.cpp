@@ -878,6 +878,8 @@ TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineWithMultisampleState) {
 
 // Verify calling CreateRenderPipelineAsync() with valid BlendState works on all backends.
 TEST_P(CreatePipelineAsyncTest, CreateRenderPipelineAsyncWithBlendState) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_indexed_draw_buffers"));
 
     std::array<wgpu::Texture, 2> renderTargets;
