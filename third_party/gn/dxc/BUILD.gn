@@ -548,7 +548,6 @@ config("common_config") {
     "$dawn_dxc_dir/include",
     "$dawn_dxc_dir/tools/clang/include",
     "$dawn_dxc_dir/tools/clang/tools",
-    "$dawn_dxc_dir/include/llvm/llvm_assert",
     "${target_gen_dir}/include",  # Generated files
   ]
 
