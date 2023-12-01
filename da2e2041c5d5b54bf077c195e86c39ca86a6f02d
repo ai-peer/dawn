@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ba6f35a4_c8166c3d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T05:08:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ce66f049_7b414b71",
+      "range": {
+        "startLine": 17,
+        "startChar": 14,
+        "endLine": 17,
+        "endChar": 18
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "0948d123_36150aaf",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -81,6 +105,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e9f22682_ed94824f",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2180,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T05:08:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a193c8_16b6a063",
+      "range": {
+        "startLine": 2180,
+        "startChar": 13,
+        "endLine": 2180,
+        "endChar": 40
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d8fe458_45f23a3b",
@@ -94,6 +142,30 @@
       "writtenOn": "2023-11-30T15:21:31Z",
       "side": 1,
       "message": "This code may release the texture which returned with previous call. It is fine, because the call site keep a ref by using `ComPtr\u003cID3D11UnorderedAccessView\u003e`. But since this method is on `DeviceBase`, I guess you will use it for other backends, right? I don\u0027t think other backends may use ref counted objects like d3d11. How do we handle that?",
+      "range": {
+        "startLine": 2199,
+        "startChar": 0,
+        "endLine": 2202,
+        "endChar": 41
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f42ecdb9_9543a62b",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2202,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T05:08:15Z",
+      "side": 1,
+      "message": "A `Ref\u003cTextureBase\u003e` is kept in each `TextureViewBase`, so here `newAttachment` won\u0027t be released:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.h;l\u003d236\n\nI\u0027ve moved this function to DeviceD3D11. We can move it back to DeviceBase when we need PLS on other backends.",
+      "parentUuid": "9d8fe458_45f23a3b",
       "range": {
         "startLine": 2199,
         "startChar": 0,
@@ -129,6 +201,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "69539d41_24044496",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T05:08:15Z",
+      "side": 1,
+      "message": "Implicit PLS must be cleared at the beginning of each render pass. This is consistent with the behavior on Metal backend:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/CommandBufferMTL.mm;l\u003d359",
+      "parentUuid": "72184377_feeadd7d",
+      "range": {
+        "startLine": 163,
+        "startChar": 32,
+        "endLine": 163,
+        "endChar": 60
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "b47329dc_d27b9eca",
         "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
         "patchSetId": 1
@@ -140,6 +236,30 @@
       "writtenOn": "2023-11-30T13:29:32Z",
       "side": 1,
       "message": "nit: kBytesPerPLSSlot (or something like that from Constants.h)",
+      "range": {
+        "startLine": 683,
+        "startChar": 48,
+        "endLine": 683,
+        "endChar": 64
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e381865_45771938",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 683,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T05:08:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b47329dc_d27b9eca",
       "range": {
         "startLine": 683,
         "startChar": 48,
@@ -167,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7646a71_b333e7bb",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 685,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T05:08:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6113d899_0c384dc0",
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "44258603_027f52c8",
@@ -180,6 +318,24 @@
       "writtenOn": "2023-11-30T13:29:32Z",
       "side": 1,
       "message": "I believe we might have a EXPECT_TEXTURE_U32_EQ that we could use?",
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39d49fec_403dd30c",
+        "filename": "src/dawn/tests/end2end/PixelLocalStorageTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-01T05:08:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44258603_027f52c8",
       "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
