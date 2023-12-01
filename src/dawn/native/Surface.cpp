@@ -78,51 +78,44 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
 bool InheritsFromCAMetalLayer(void* obj);
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
-MaybeError ValidateSurfaceDescriptor(InstanceBase* instance, const SurfaceDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->nextInChain == nullptr,
-                    "Surface cannot be created with %s. nextInChain is not specified.", descriptor);
-
-    DAWN_TRY(ValidateSingleSType(
-        descriptor->nextInChain, wgpu::SType::SurfaceDescriptorFromAndroidNativeWindow,
-        wgpu::SType::SurfaceDescriptorFromMetalLayer, wgpu::SType::SurfaceDescriptorFromWindowsHWND,
-        wgpu::SType::SurfaceDescriptorFromWindowsCoreWindow,
-        wgpu::SType::SurfaceDescriptorFromWindowsSwapChainPanel,
-        wgpu::SType::SurfaceDescriptorFromXlibWindow,
-        wgpu::SType::SurfaceDescriptorFromWaylandSurface));
+ResultOrError<Unpacked<SurfaceDescriptor>> ValidateSurfaceDescriptor(
+    InstanceBase* instance,
+    const SurfaceDescriptor* rawDescriptor) {
+    DAWN_INVALID_IF(rawDescriptor->nextInChain == nullptr,
+                    "Surface cannot be created with %s. nextInChain is not specified.",
+                    rawDescriptor);
+    Unpacked<SurfaceDescriptor> descriptor;
+    DAWN_TRY_ASSIGN(descriptor, ValidateAndUnpack(rawDescriptor));
 
 #if defined(DAWN_ENABLE_BACKEND_METAL)
-    const SurfaceDescriptorFromMetalLayer* metalDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &metalDesc);
+    auto metalDesc = descriptor.Get<SurfaceDescriptorFromMetalLayer>();
     if (metalDesc) {
         // Check that the layer is a CAMetalLayer (or a derived class).
         DAWN_INVALID_IF(!InheritsFromCAMetalLayer(metalDesc->layer),
                         "Layer must be a CAMetalLayer");
-        return {};
+        return descriptor;
     }
 #endif  // defined(DAWN_ENABLE_BACKEND_METAL)
 
 #if DAWN_PLATFORM_IS(ANDROID)
-    const SurfaceDescriptorFromAndroidNativeWindow* androidDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &androidDesc);
+    auto androidDesc = descriptor.Get<SurfaceDescriptorFromAndroidNativeWindow>();
     // Currently the best validation we can do since it's not possible to check if the pointer
     // to a ANativeWindow is valid.
     if (androidDesc) {
         DAWN_INVALID_IF(androidDesc->window == nullptr, "Android window is not set.");
-        return {};
+        return descriptor;
     }
 #endif  // DAWN_PLATFORM_IS(ANDROID)
 
 #if DAWN_PLATFORM_IS(WIN32)
-    const SurfaceDescriptorFromWindowsHWND* hwndDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &hwndDesc);
+    auto hwndDesc = descriptor.Get<SurfaceDescriptorFromWindowsHWND>();
     if (hwndDesc) {
         DAWN_INVALID_IF(IsWindow(static_cast<HWND>(hwndDesc->hwnd)) == 0, "Invalid HWND");
-        return {};
+        return descriptor;
     }
 #endif  // DAWN_PLATFORM_IS(WIN32)
 #if defined(DAWN_USE_WINDOWS_UI)
-    const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &coreWindowDesc);
+    auto coreWindowDesc = descriptor.Get<SurfaceDescriptorFromWindowsCoreWindow>();
     if (coreWindowDesc) {
         // Validate the coreWindow by query for ICoreWindow interface
         ComPtr<ABI::Windows::UI::Core::ICoreWindow> coreWindow;
@@ -130,10 +123,9 @@ MaybeError ValidateSurfaceDescriptor(InstanceBase* instance, const SurfaceDescri
                             FAILED(static_cast<IUnknown*>(coreWindowDesc->coreWindow)
                                        ->QueryInterface(IID_PPV_ARGS(&coreWindow))),
                         "Invalid CoreWindow");
-        return {};
+        return descriptor;
     }
-    const SurfaceDescriptorFromWindowsSwapChainPanel* swapChainPanelDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &swapChainPanelDesc);
+    auto swapChainPanelDesc = descriptor.Get<SurfaceDescriptorFromWindowsSwapChainPanel>();
     if (swapChainPanelDesc) {
         // Validate the swapChainPanel by querying for ISwapChainPanel interface
         ComPtr<ABI::Windows::UI::Xaml::Controls::ISwapChainPanel> swapChainPanel;
@@ -141,25 +133,23 @@ MaybeError ValidateSurfaceDescriptor(InstanceBase* instance, const SurfaceDescri
                             FAILED(static_cast<IUnknown*>(swapChainPanelDesc->swapChainPanel)
                                        ->QueryInterface(IID_PPV_ARGS(&swapChainPanel))),
                         "Invalid SwapChainPanel");
-        return {};
+        return descriptor;
     }
 #endif  // defined(DAWN_USE_WINDOWS_UI)
 
 #if defined(DAWN_USE_WAYLAND)
-    const SurfaceDescriptorFromWaylandSurface* waylandDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &waylandDesc);
+    auto waylandDesc = descriptor.Get<SurfaceDescriptorFromWaylandSurface>();
     if (waylandDesc) {
         // Unfortunately we can't check the validity of wayland objects. Only that they
         // aren't nullptr.
         DAWN_INVALID_IF(waylandDesc->display == nullptr, "Wayland display is nullptr.");
         DAWN_INVALID_IF(waylandDesc->surface == nullptr, "Wayland surface is nullptr.");
-        return {};
+        return descriptor;
     }
 #endif  // defined(DAWN_USE_X11)
 
 #if defined(DAWN_USE_X11)
-    const SurfaceDescriptorFromXlibWindow* xDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &xDesc);
+    auto xDesc = descriptor.Get<SurfaceDescriptorFromXlibWindow>();
     if (xDesc) {
         // Check the validity of the window by calling a getter function on the window that
         // returns a status code. If the window is bad the call return a status of zero. We
@@ -176,7 +166,7 @@ MaybeError ValidateSurfaceDescriptor(InstanceBase* instance, const SurfaceDescri
         x11->xSetErrorHandler(oldErrorHandler);
 
         DAWN_INVALID_IF(status == 0, "Invalid X Window");
-        return {};
+        return descriptor;
     }
 #endif  // defined(DAWN_USE_X11)
 
@@ -190,23 +180,16 @@ Surface* Surface::MakeError(InstanceBase* instance) {
 
 Surface::Surface(InstanceBase* instance, ErrorTag tag) : ErrorMonad(tag), mInstance(instance) {}
 
-Surface::Surface(InstanceBase* instance, const SurfaceDescriptor* descriptor)
+Surface::Surface(InstanceBase* instance, const Unpacked<SurfaceDescriptor>& descriptor)
     : ErrorMonad(), mInstance(instance) {
     DAWN_ASSERT(descriptor->nextInChain != nullptr);
-    const SurfaceDescriptorFromAndroidNativeWindow* androidDesc = nullptr;
-    const SurfaceDescriptorFromMetalLayer* metalDesc = nullptr;
-    const SurfaceDescriptorFromWindowsHWND* hwndDesc = nullptr;
-    const SurfaceDescriptorFromWindowsCoreWindow* coreWindowDesc = nullptr;
-    const SurfaceDescriptorFromWindowsSwapChainPanel* swapChainPanelDesc = nullptr;
-    const SurfaceDescriptorFromWaylandSurface* waylandDesc = nullptr;
-    const SurfaceDescriptorFromXlibWindow* xDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &androidDesc);
-    FindInChain(descriptor->nextInChain, &metalDesc);
-    FindInChain(descriptor->nextInChain, &hwndDesc);
-    FindInChain(descriptor->nextInChain, &coreWindowDesc);
-    FindInChain(descriptor->nextInChain, &swapChainPanelDesc);
-    FindInChain(descriptor->nextInChain, &xDesc);
-    FindInChain(descriptor->nextInChain, &waylandDesc);
+    const auto* androidDesc = descriptor.Get<SurfaceDescriptorFromAndroidNativeWindow>();
+    const auto* metalDesc = descriptor.Get<SurfaceDescriptorFromMetalLayer>();
+    const auto* hwndDesc = descriptor.Get<SurfaceDescriptorFromWindowsHWND>();
+    const auto* coreWindowDesc = descriptor.Get<SurfaceDescriptorFromWindowsCoreWindow>();
+    const auto* swapChainPanelDesc = descriptor.Get<SurfaceDescriptorFromWindowsSwapChainPanel>();
+    const auto* waylandDesc = descriptor.Get<SurfaceDescriptorFromWaylandSurface>();
+    const auto* xDesc = descriptor.Get<SurfaceDescriptorFromXlibWindow>();
     if (metalDesc) {
         mType = Type::MetalLayer;
         mMetalLayer = metalDesc->layer;
