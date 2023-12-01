@@ -34,6 +34,12 @@
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/vulkan/VulkanInfo.h"
 
+namespace dawn::native {
+
+class AndroidFunctions;
+
+}  // namespace dawn::native
+
 namespace dawn::native::vulkan {
 
 class VulkanInstance;
@@ -61,6 +67,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     uint32_t GetDefaultComputeSubgroupSize() const;
 
+    const AndroidFunctions* GetOrLoadAndroidFunctions();
+
   private:
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
@@ -87,6 +95,10 @@ class PhysicalDevice : public PhysicalDeviceBase {
     VulkanDeviceInfo mDeviceInfo = {};
 
     uint32_t mDefaultComputeSubgroupSize = 0;
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    std::unique_ptr<AndroidFunctions> mAndroidFunctions;
+#endif
 };
 
 }  // namespace dawn::native::vulkan

@@ -391,6 +391,13 @@ source_set("sources") {
     "webgpu_absl_format.h",
   ]
 
+  if (is_android) {
+    sources += [
+      "AndroidFunctions.cpp",
+      "AndroidFunctions.h",
+    ]
+  }
+
   if (dawn_use_x11) {
     sources += [
       "X11Functions.cpp",

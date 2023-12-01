@@ -37,6 +37,10 @@
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/platform/DawnPlatform.h"
 
+#if DAWN_PLATFORM_IS(ANDROID)
+#include "dawn/native/AndroidFunctions.h"
+#endif
+
 namespace dawn::native::vulkan {
 
 namespace {
@@ -375,6 +379,14 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     if (mDeviceInfo.HasExt(DeviceExt::ExternalMemoryFD)) {
         EnableFeature(Feature::SharedTextureMemoryOpaqueFD);
     }
+
+#if DAWN_PLATFORM_IS(ANDROID)
+    if (mDeviceInfo.HasExt(DeviceExt::ExternalMemoryAndroidHardwareBuffer)) {
+        if (GetOrLoadAndroidFunctions()->IsLoaded()) {
+            EnableFeature(Feature::SharedTextureMemoryAHardwareBuffer);
+        }
+    }
+#endif
 
     if (CheckSemaphoreSupport(DeviceExt::ExternalSemaphoreZirconHandle,
                               VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA)) {
@@ -796,6 +808,17 @@ bool PhysicalDevice::CheckSemaphoreSupport(DeviceExt deviceExt,
 
 uint32_t PhysicalDevice::GetDefaultComputeSubgroupSize() const {
     return mDefaultComputeSubgroupSize;
+}
+
+const AndroidFunctions* PhysicalDevice::GetOrLoadAndroidFunctions() {
+#if DAWN_PLATFORM_IS(ANDROID)
+    if (mAndroidFunctions == nullptr) {
+        mAndroidFunctions = std::make_unique<AndroidFunctions>();
+    }
+    return mAndroidFunctions.get();
+#else
+    return nullptr;
+#endif
 }
 
 void PhysicalDevice::PopulateMemoryHeapInfo(
