@@ -247,6 +247,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "800c93a6_37ed8cb2",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2023-12-01T15:58:21Z",
+      "side": 1,
+      "message": "BTW, I just realized it will be a huge waste of power, especially if the size of the cached texture is much bigger than the render pass size. \n\nMaybe file an issue and add a TODO for it.",
+      "parentUuid": "782f0168_685ba781",
+      "range": {
+        "startLine": 163,
+        "startChar": 32,
+        "endLine": 163,
+        "endChar": 60
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b47329dc_d27b9eca",
