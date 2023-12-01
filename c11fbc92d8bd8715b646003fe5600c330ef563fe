@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c3c0f45_92f7d8cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T18:28:09Z",
+      "side": 1,
+      "message": "PTAL! These three CLs implemented all the functionality needed to expose wgslLanguageFeatures in a synchronized way between the renderer process and the GPU process, as well as support a blocklist as requested by David.",
+      "revId": "c11fbc92d8bd8715b646003fe5600c330ef563fe",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
