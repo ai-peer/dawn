@@ -555,11 +555,12 @@ const X11Functions* InstanceBase::GetOrLoadX11Functions() {
 }
 
 Surface* InstanceBase::APICreateSurface(const SurfaceDescriptor* descriptor) {
-    if (ConsumedError(ValidateSurfaceDescriptor(this, descriptor))) {
+    Unpacked<SurfaceDescriptor> unpacked;
+    if (ConsumedError(ValidateSurfaceDescriptor(this, descriptor), &unpacked)) {
         return Surface::MakeError(this);
     }
 
-    return new Surface(this, descriptor);
+    return new Surface(this, unpacked);
 }
 
 const std::unordered_set<tint::wgsl::LanguageFeature>&
