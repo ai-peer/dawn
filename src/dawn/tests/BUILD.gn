@@ -695,6 +695,9 @@ source_set("end2end_tests_sources") {
   if (is_linux || is_chromeos) {
     sources += [ "end2end/SharedTextureMemoryTests_linux.cpp" ]
   }
+  if (is_android) {
+    sources += [ "end2end/SharedTextureMemoryTests_android.cpp" ]
+  }
 }
 
 source_set("white_box_tests_sources") {
