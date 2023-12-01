@@ -33,7 +33,7 @@
 
 #include "dawn/common/CoreFoundationRef.h"
 #include "dawn/common/NSRef.h"
-#include "dawn/tests/end2end/SharedTextureMemoryTests.h"
+#include "dawn/tests/white_box/SharedTextureMemoryTests.h"
 #include "dawn/webgpu_cpp.h"
 
 namespace dawn {

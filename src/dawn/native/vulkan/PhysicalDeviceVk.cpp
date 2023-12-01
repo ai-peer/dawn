@@ -376,6 +376,10 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         EnableFeature(Feature::SharedTextureMemoryOpaqueFD);
     }
 
+    if (mDeviceInfo.HasExt(DeviceExt::ExternalMemoryAndroidHardwareBuffer)) {
+        EnableFeature(Feature::SharedTextureMemoryAHardwareBuffer);
+    }
+
     if (CheckSemaphoreSupport(DeviceExt::ExternalSemaphoreZirconHandle,
                               VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_ZIRCON_EVENT_BIT_FUCHSIA)) {
         EnableFeature(Feature::SharedFenceVkSemaphoreZirconHandle);
@@ -386,7 +390,12 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     }
     if (CheckSemaphoreSupport(DeviceExt::ExternalSemaphoreFD,
                               VK_EXTERNAL_SEMAPHORE_HANDLE_TYPE_OPAQUE_FD_BIT_KHR)) {
-        EnableFeature(Feature::SharedFenceVkSemaphoreOpaqueFD);
+        // Don't expose OpaqueFD fences on Swiftshader. Tests of concurrent read hang
+        // with Swiftshader, likely because VK_FENCE_IMPORT_TEMPORARY_BIT is
+        // implemented incorrectly.
+        if (!gpu_info::IsGoogleSwiftshader(GetVendorId(), GetDeviceId())) {
+            EnableFeature(Feature::SharedFenceVkSemaphoreOpaqueFD);
+        }
     }
 }
 

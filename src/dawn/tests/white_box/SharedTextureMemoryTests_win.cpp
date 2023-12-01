@@ -36,7 +36,7 @@
 
 #include "dawn/native/D3D11Backend.h"
 #include "dawn/native/D3DBackend.h"
-#include "dawn/tests/end2end/SharedTextureMemoryTests.h"
+#include "dawn/tests/white_box/SharedTextureMemoryTests.h"
 #include "dawn/webgpu_cpp.h"
 
 namespace dawn {
