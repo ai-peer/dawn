@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a958a46_be46f401",
+        "filename": "dawn.json",
+        "patchSetId": 13
+      },
+      "lineNbr": 3667,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T14:31:39Z",
+      "side": 1,
+      "message": "Will be fixed by https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2277",
+      "parentUuid": "70e495d9_1e809b20",
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bba91ddc_07af11e9",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-11-30T18:12:53Z",
       "side": 1,
       "message": "ToWGPUFeature appears to be statically used - do we need DAWN_UNUSED_FUNC?",
+      "range": {
+        "startLine": 135,
+        "startChar": 0,
+        "endLine": 135,
+        "endChar": 32
+      },
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f2c5c1a_15449c9e",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 135,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T14:31:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bba91ddc_07af11e9",
       "range": {
         "startLine": 135,
         "startChar": 0,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "75732e4f_3d350d8d",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T14:31:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ebc8dcff_a4e4483c",
+      "range": {
+        "startLine": 603,
+        "startChar": 13,
+        "endLine": 603,
+        "endChar": 19
+      },
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfa4b591_73b21158",
@@ -77,6 +143,24 @@
       "writtenOn": "2023-11-30T10:32:17Z",
       "side": 1,
       "message": "While the call-twice pattern might be familiar by C programmers, it would still be good to document. That said, I personally feel that having a separate function for returning the number is a cleaner API.\n\nThe `strncpy` crowd would also argue it\u0027s safer for a function like this to take a max-count argument.",
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "95f30404_30041983",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T14:31:39Z",
+      "side": 1,
+      "message": "Filed https://github.com/webgpu-native/webgpu-headers/issues/252, and also added a comment.",
+      "parentUuid": "bfa4b591_73b21158",
       "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -104,6 +188,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b218675_e21e13fc",
+        "filename": "src/dawn/tests/unittests/validation/ValidationTest.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 126,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T14:31:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6659fee_d6ee1857",
+      "range": {
+        "startLine": 126,
+        "startChar": 8,
+        "endLine": 126,
+        "endChar": 42
+      },
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "16cbabc3_ea6d0340",
@@ -117,6 +225,24 @@
       "writtenOn": "2023-11-30T10:32:17Z",
       "side": 1,
       "message": "Same comments of `instance.h` apply here",
+      "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a9f8d71_5702b12f",
+        "filename": "src/dawn/wire/client/Instance.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T14:31:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "16cbabc3_ea6d0340",
       "revId": "665b07522a9aaffe5c637ecc071c3f93e38fcef0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
