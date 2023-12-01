@@ -95,6 +95,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7b8c29_4974c669",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-01T00:05:31Z",
+      "side": 1,
+      "message": "This is fine also! The only other way that I think could satisfy both is probably to use absl::StrFormat, so something like:\n\n```\nauto shaderSource \u003d absl::StrFormat(R\"(\n    @group(0) @binding(0) var\u003cstorage, read_write\u003e dstBuf : array\u003cu32\u003e;\n    @group(0) @binding(1) var tex1 : texture_2d_array\u003cf32\u003e;\n    // Use sparse binding to test impact of binding remapping\n    @group(0) @binding(4) var tex2 : texture_multisampled_2d\u003cf32\u003e;\n    @group(1) @binding(3) var tex3 : %s;\n\n    @compute @workgroup_size(1, 1, 1) fn main() {\n        dstBuf[0] \u003d textureNumLayers(tex1); // control case\n        dstBuf[1] \u003d textureNumLevels(tex1);\n        dstBuf[2] \u003d textureNumSamples(tex2);\n        dstBuf[3] \u003d textureNumLevels(tex3);\n    }\n)\", tex3Type);\n```\n\nThe downside of this way though is the `tex3Type` is passed a lot later so it\u0027s not immediately obvious what\u0027s subbed, especially if there ends up being more than 1 thing subbed.\n\nFine to leave as is, or to use absl::StrFormat.",
+      "parentUuid": "4e7b663d_8f79ae04",
+      "range": {
+        "startLine": 159,
+        "startChar": 4,
+        "endLine": 173,
+        "endChar": 11
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cc92289f_a66408fc",
@@ -132,6 +156,30 @@
       "side": 1,
       "message": "same as above",
       "parentUuid": "cc92289f_a66408fc",
+      "range": {
+        "startLine": 416,
+        "startChar": 0,
+        "endLine": 417,
+        "endChar": 41
+      },
+      "revId": "63f7449d3a549aa398cea37d1f53bcb52a88c669",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a0fd2cd_75154af5",
+        "filename": "src/dawn/tests/end2end/TextureShaderBuiltinTests.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 417,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-01T00:05:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "0f0aa493_42d3392e",
       "range": {
         "startLine": 416,
         "startChar": 0,
