@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_SHAREDFENCE_H_
 #define SRC_DAWN_NATIVE_SHAREDFENCE_H_
 
+#include "dawn/native/ChainUtils.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/ObjectBase.h"
 
@@ -54,7 +55,7 @@ class SharedFenceBase : public ApiObjectBase {
 
   private:
     void DestroyImpl() override;
-    virtual MaybeError ExportInfoImpl(SharedFenceExportInfo* info) const = 0;
+    virtual MaybeError ExportInfoImpl(Unpacked<SharedFenceExportInfo>& info) const = 0;
 };
 
 struct FenceAndSignalValue {
