@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "eb206654_72acdd92",
+        "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-01T01:13:40Z",
+      "side": 1,
+      "message": "Good catch, used `static_cast\u003cuint32_t\u003e(wgpu::AlphaMode::Premultiplied)`.",
+      "parentUuid": "0b31f005_627fcd3d",
+      "range": {
+        "startLine": 249,
+        "startChar": 12,
+        "endLine": 250,
+        "endChar": 63
+      },
+      "revId": "6a1a16f1dbfb6b636e3b4a8d39a3acad1a84cbb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "80bfe2e0_cbd5cc27",
         "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
         "patchSetId": 9
@@ -37,6 +61,30 @@
       "writtenOn": "2023-11-30T21:28:29Z",
       "side": 1,
       "message": "Wow.. this is a bit jank to rely on the values of the enums... lol.",
+      "range": {
+        "startLine": 314,
+        "startChar": 20,
+        "endLine": 316,
+        "endChar": 36
+      },
+      "revId": "6a1a16f1dbfb6b636e3b4a8d39a3acad1a84cbb3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20c29cb3_a0cc5a98",
+        "filename": "src/dawn/tests/end2end/CopyTextureForBrowserTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 316,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-01T01:13:40Z",
+      "side": 1,
+      "message": "yeah. I tried to find a way to construct this string as constexpr but I couldn\u0027t find one. But since it\u0027s just a test I guess it (1) could just be done at runtime and (2) doesn\u0027t matter that much\n\nI\u0027ll fix this to do it at runtime though.",
+      "parentUuid": "80bfe2e0_cbd5cc27",
       "range": {
         "startLine": 314,
         "startChar": 20,
