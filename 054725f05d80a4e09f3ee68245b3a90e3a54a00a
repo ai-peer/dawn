@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7cdbf414_d2003d55",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T13:30:53Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "054725f05d80a4e09f3ee68245b3a90e3a54a00a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92c7d654_1712bec1",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1727,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T13:30:53Z",
+      "side": 1,
+      "message": "nit: this method can be const.",
+      "revId": "054725f05d80a4e09f3ee68245b3a90e3a54a00a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0afc05d_08520ad3",
+        "filename": "src/dawn/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-01T13:30:53Z",
+      "side": 1,
+      "message": "nit: we\u0027re rendering to both 0 and 1",
+      "range": {
+        "startLine": 234,
+        "startChar": 37,
+        "endLine": 234,
+        "endChar": 50
+      },
+      "revId": "054725f05d80a4e09f3ee68245b3a90e3a54a00a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
