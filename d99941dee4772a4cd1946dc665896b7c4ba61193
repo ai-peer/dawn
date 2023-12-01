@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c63c75b_d5d0d14d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 10
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-01T21:51:23Z",
+      "side": 1,
+      "message": "I tried this but there are a bunch of switches that need to be updated to do this. Added TODOs instead.",
+      "parentUuid": "dba8b61b_c5fe6bc8",
+      "revId": "d99941dee4772a4cd1946dc665896b7c4ba61193",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a417208d_2b9df21d",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-12-01T12:23:35Z",
       "side": 1,
       "message": "Erhm, it\u0027s be nice to not have to type 65536 manually. Also why isn\u0027t is 65536 instead of 65537? (we don\u0027t need to reserve undefined for enum namespaces)\n\n(of course a TODO is ok)",
+      "range": {
+        "startLine": 2118,
+        "startChar": 22,
+        "endLine": 2118,
+        "endChar": 27
+      },
+      "revId": "d99941dee4772a4cd1946dc665896b7c4ba61193",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ca841d7f_5aeaa501",
+        "filename": "dawn.json",
+        "patchSetId": 10
+      },
+      "lineNbr": 2118,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-01T21:51:23Z",
+      "side": 1,
+      "message": "No reason for 65537.\nThinking about this again I\u0027m not sure if this should actually be in the multi-implementation native namespace. It\u0027s fundamental to the C API, not a native extension. I\u0027m going to renumber it to 1.",
+      "parentUuid": "4c928aaa_64879833",
       "range": {
         "startLine": 2118,
         "startChar": 22,
