@@ -97,11 +97,11 @@ fn main() {
 )";
     auto* expect = R"(
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : f32,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 @fragment
 fn main() {
@@ -126,11 +126,11 @@ fn main() {
 )";
     auto* expect = R"(
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : array<vec4<f32>, 4u>,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 @fragment
 fn main() {
@@ -159,11 +159,11 @@ fn main() {
 alias Numbers = array<vec4<f32>, 4u>;
 
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : array<vec4<f32>, 4u>,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 @fragment
 fn main() {
@@ -196,11 +196,11 @@ struct S {
 }
 
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 @fragment
 fn main() {
@@ -233,11 +233,11 @@ struct S {
 }
 
 @internal(block)
-struct s_block {
+struct s_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<storage, read_write> s : s_block;
+@group(0) @binding(0) var<storage, read_write> s : s_block_0_0;
 
 @fragment
 fn main() {
@@ -273,13 +273,13 @@ struct S {
 }
 
 @internal(block)
-struct in_block {
+struct in_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<storage, read_write> in : in_block;
+@group(0) @binding(0) var<storage, read_write> in : in_block_0_0;
 
-@group(0) @binding(1) var<storage, read_write> out : in_block;
+@group(0) @binding(1) var<storage, read_write> out : in_block_0_0;
 
 @compute @workgroup_size(1)
 fn main() {
@@ -312,11 +312,11 @@ struct S {
 }
 
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 @fragment
 fn main() {
@@ -426,11 +426,11 @@ struct Outer {
 }
 
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : Outer,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 @fragment
 fn main() {
@@ -475,18 +475,18 @@ struct Outer {
 }
 
 @internal(block)
-struct u0_block {
+struct u0_block_0_0 {
   inner : Outer,
 }
 
-@group(0) @binding(0) var<uniform> u0 : u0_block;
+@group(0) @binding(0) var<uniform> u0 : u0_block_0_0;
 
 @internal(block)
-struct u1_block {
+struct u1_block_0_1 {
   inner : Inner,
 }
 
-@group(0) @binding(1) var<uniform> u1 : u1_block;
+@group(0) @binding(1) var<uniform> u1 : u1_block_0_1;
 
 @fragment
 fn main() {
@@ -533,11 +533,11 @@ struct Outer {
 var<private> p : Outer;
 
 @internal(block)
-struct u_block {
+struct u_block_0_1 {
   inner : Inner,
 }
 
-@group(0) @binding(1) var<uniform> u : u_block;
+@group(0) @binding(1) var<uniform> u : u_block_0_1;
 
 @fragment
 fn main() {
@@ -587,20 +587,20 @@ struct S {
 }
 
 @internal(block)
-struct u0_block {
+struct u0_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<uniform> u0 : u0_block;
+@group(0) @binding(0) var<uniform> u0 : u0_block_0_0;
 
 @internal(block)
-struct u1_block {
+struct u1_block_0_1 {
   inner : Inner,
 }
 
-@group(0) @binding(1) var<uniform> u1 : u1_block;
+@group(0) @binding(1) var<uniform> u1 : u1_block_0_1;
 
-@group(0) @binding(2) var<uniform> u2 : u1_block;
+@group(0) @binding(2) var<uniform> u2 : u1_block_0_1;
 
 @fragment
 fn main() {
@@ -636,11 +636,11 @@ struct S {
 }
 
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 @fragment
 fn main() {
@@ -679,13 +679,13 @@ struct S {
 }
 
 @internal(block)
-struct u0_block {
+struct u0_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<uniform> u0 : u0_block;
+@group(0) @binding(0) var<uniform> u0 : u0_block_0_0;
 
-@group(0) @binding(1) var<uniform> u1 : u0_block;
+@group(0) @binding(1) var<uniform> u1 : u0_block_0_0;
 
 @fragment
 fn main() {
@@ -740,18 +740,18 @@ struct Outer {
 alias MyOuter = Outer;
 
 @internal(block)
-struct u0_block {
+struct u0_block_0_0 {
   inner : Outer,
 }
 
-@group(0) @binding(0) var<uniform> u0 : u0_block;
+@group(0) @binding(0) var<uniform> u0 : u0_block_0_0;
 
 @internal(block)
-struct u1_block {
+struct u1_block_0_1 {
   inner : Inner,
 }
 
-@group(0) @binding(1) var<uniform> u1 : u1_block;
+@group(0) @binding(1) var<uniform> u1 : u1_block_0_1;
 
 @fragment
 fn main() {
@@ -799,20 +799,20 @@ fn main() {
 }
 
 @internal(block)
-struct u1_block {
+struct u1_block_0_1 {
   inner : Inner,
 }
 
-@group(0) @binding(1) var<uniform> u1 : u1_block;
+@group(0) @binding(1) var<uniform> u1 : u1_block_0_1;
 
 alias MyInner = Inner;
 
 @internal(block)
-struct u0_block {
+struct u0_block_0_0 {
   inner : Outer,
 }
 
-@group(0) @binding(0) var<uniform> u0 : u0_block;
+@group(0) @binding(0) var<uniform> u0 : u0_block_0_0;
 
 alias MyOuter = Outer;
 
@@ -851,11 +851,11 @@ struct S {
 }
 
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
 var<private> p : S;
 
@@ -893,11 +893,11 @@ struct S {
 }
 
 @internal(block)
-struct s_block {
+struct s_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<storage, read_write> s : s_block;
+@group(0) @binding(0) var<storage, read_write> s : s_block_0_0;
 
 var<private> p : S;
 
@@ -935,13 +935,13 @@ struct S {
 }
 
 @internal(block)
-struct u_block {
+struct u_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<uniform> u : u_block;
+@group(0) @binding(0) var<uniform> u : u_block_0_0;
 
-@group(0) @binding(1) var<storage, read_write> s : u_block;
+@group(0) @binding(1) var<storage, read_write> s : u_block_0_0;
 
 @fragment
 fn main() {
@@ -1012,11 +1012,11 @@ struct SWithArr {
 }
 
 @internal(block)
-struct in_1_block {
+struct in_1_block_0_0 {
   inner : S,
 }
 
-@group(0) @binding(0) var<storage, read> in_1 : in_1_block;
+@group(0) @binding(0) var<storage, read> in_1 : in_1_block_0_0;
 
 @group(0) @binding(1) var<storage, read> in_2 : SWithArr;
 

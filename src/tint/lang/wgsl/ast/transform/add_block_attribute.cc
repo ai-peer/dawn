@@ -86,6 +86,14 @@ Transform::ApplyResult AddBlockAttribute::Apply(const Program& src,
             auto* wrapper = wrapper_structs.GetOrCreate(ty, [&] {
                 auto* block = b.ASTNodes().Create<BlockAttribute>(b.ID(), b.AllocateNodeID());
                 auto wrapper_name = global->name->symbol.Name() + "_block";
+                auto* global_var = var->As<sem::GlobalVariable>();
+                auto binding_point = global_var->Attributes().binding_point;
+                if (binding_point.has_value()) {
+                    // Append the binding_point to struct name to avoid possible collision across
+                    // stages.
+                    wrapper_name += "_" + std::to_string(binding_point->group) + "_" +
+                                    std::to_string(binding_point->binding);
+                }
                 auto* ret =
                     b.create<Struct>(b.Ident(b.Symbols().New(wrapper_name)),
                                      tint::Vector{b.Member(kMemberName, CreateASTTypeFor(ctx, ty))},
