@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "7fa559c2_3c72808b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-12-01T14:04:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c119acfe_94e5c668",
+      "range": {
+        "startLine": 14,
+        "startChar": 5,
+        "endLine": 14,
+        "endChar": 9
+      },
+      "revId": "e6a6938650dc6dba10863ff01b2d544e65f7cc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "dc683ab6_ab7f0b9d",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
@@ -54,6 +78,24 @@
       "writtenOn": "2023-12-01T12:25:58Z",
       "side": 1,
       "message": "nit: we might not need to has `TextureBinding` for now, unless you are looking to add some readbacks from that texture in later CLs?",
+      "revId": "e6a6938650dc6dba10863ff01b2d544e65f7cc3d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45feddce_7867faf3",
+        "filename": "src/dawn/tests/end2end/SharedTextureMemoryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-12-01T14:04:03Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "15e32bad_f7d27653",
       "revId": "e6a6938650dc6dba10863ff01b2d544e65f7cc3d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
