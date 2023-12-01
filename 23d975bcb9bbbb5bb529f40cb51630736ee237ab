@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "228da7d3_dddd6819",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1080,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "440fd378_067d3af1",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3018637a_d1e1dcf6",
@@ -31,6 +49,30 @@
       "writtenOn": "2023-09-06T08:44:26Z",
       "side": 1,
       "message": "nit: this is always true because depthSlice is an unsigned integer.",
+      "range": {
+        "startLine": 1282,
+        "startChar": 11,
+        "endLine": 1282,
+        "endChar": 29
+      },
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "30ea88bd_e8d20466",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3018637a_d1e1dcf6",
       "range": {
         "startLine": 1282,
         "startChar": 11,
@@ -58,6 +100,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e46e946_f0cb8bfa",
+        "filename": "src/dawn/native/d3d12/CommandBufferD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1321,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "359482e5_977203fb",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "412e7e2b_cd23dcec",
@@ -71,6 +131,24 @@
       "writtenOn": "2023-09-06T08:44:26Z",
       "side": 1,
       "message": "nit: we can set this unconditionnally since it is validated to be 0 for 2D textures. Ditto in other backends we can in most cases skip the check for 3D textures and just pass the depthSlice or do baseArrayLayer + depthSlice.",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "91bab830_3448b562",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 205,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "We\u0027d changed depthSlice to be WGPU_DEPTH_SLICE_UNDEFINED for 2d textures in https://dawn-review.googlesource.com/c/dawn/+/155884, to void checking the dimension, I set depthSlice to 0 if it\u0027s undefined in command encoder, and we can use depthSlice directly in Metal, and use baseArrayLayer + depthSlice as baseSlice in other backends.",
+      "parentUuid": "412e7e2b_cd23dcec",
       "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -98,6 +176,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f8f5457_d54f6d2a",
+        "filename": "src/dawn/native/opengl/TextureGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 604,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4d886b72_748db565",
+      "range": {
+        "startLine": 604,
+        "startChar": 11,
+        "endLine": 604,
+        "endChar": 29
+      },
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "641955b6_e1708d9f",
@@ -111,6 +213,24 @@
       "writtenOn": "2023-09-06T08:44:26Z",
       "side": 1,
       "message": "Could we factor this code with the similar code in Initialize?",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d56f9c9_86821bb0",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1569,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "641955b6_e1708d9f",
       "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -132,6 +252,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b51df4c8_1ad1b9f2",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ddecc08_9343d08b",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e0d3be36_56874d59",
@@ -145,6 +283,24 @@
       "writtenOn": "2023-09-06T08:44:26Z",
       "side": 1,
       "message": "nit: small comment describing the test.",
+      "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58ca32b_892b4479",
+        "filename": "src/dawn/tests/end2end/Texture3DTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-01T12:27:46Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e0d3be36_56874d59",
       "revId": "23d975bcb9bbbb5bb529f40cb51630736ee237ab",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
