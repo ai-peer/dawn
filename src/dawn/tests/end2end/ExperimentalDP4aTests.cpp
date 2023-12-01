@@ -128,14 +128,9 @@ TEST_P(ExperimentalDP4aTests, BasicDP4aFeaturesTest) {
 
 // DawnTestBase::CreateDeviceImpl always enables allow_unsafe_apis toggle.
 DAWN_INSTANTIATE_TEST_P(ExperimentalDP4aTests,
-                        {
-                            D3D11Backend(),
-                            D3D12Backend(),
-                            D3D12Backend({}, {"use_dxc"}),
-                            D3D12Backend({"polyfill_packed_4x8_dot_product"}),
-                            MetalBackend(),
-                            VulkanBackend(),
-                        },
+                        {D3D11Backend(), D3D12Backend(), D3D12Backend({}, {"use_dxc"}),
+                         D3D12Backend({"polyfill_packed_4x8_dot_product"}), MetalBackend(),
+                         VulkanBackend(), VulkanBackend({"polyfill_packed_4x8_dot_product"})},
                         {true, false});
 
 }  // anonymous namespace
