@@ -799,6 +799,7 @@ TEST_P(ColorStateTest, ColorWriteMaskBlendingDisabled) {
 // Test that independent color states on render targets works
 TEST_P(ColorStateTest, IndependentColorState) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_indexed_draw_buffers"));
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
 
     std::array<wgpu::Texture, 4> renderTargets;
     std::array<wgpu::TextureView, 4> renderTargetViews;
@@ -1128,6 +1129,7 @@ TEST_P(ColorStateTest, ColorWriteMaskDoesNotAffectRenderPassLoadOpClear) {
 
 TEST_P(ColorStateTest, SparseAttachmentsDifferentColorMask) {
     DAWN_TEST_UNSUPPORTED_IF(HasToggleEnabled("disable_indexed_draw_buffers"));
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
 
     wgpu::ShaderModule fsModule = utils::CreateShaderModule(device, R"(
         struct Outputs {
