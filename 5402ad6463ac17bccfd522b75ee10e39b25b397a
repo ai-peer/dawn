@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "5402ad6463ac17bccfd522b75ee10e39b25b397a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9463a35_fed5a4f4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002536
+      },
+      "writtenOn": "2023-12-01T07:06:29Z",
+      "side": 1,
+      "message": "This CTS issue is blocking the linux-dawn-rel trybot. Thanks Jiawei for fixing this!\n\nWithout this CL, the trybot will fail with folowing message:\n```\nFound conflicts for pattern webgpu:api,operation,memory_sync,texture,same_subresource:ww:boundary\u003d\"command-buffer\";first\u003d{\"op\":\"storage\",\"in\":\"render-pass-encoder\"};second\u003d{\"op\":\"b2t-copy\",\"in\":\"command-encoder\"} in /b/s/w/ir/third_party/dawn/webgpu-cts/compat-expectations.txt:\n  line 499 conflicts with line 700\n\nFound conflicts for pattern webgpu:api,operation,memory_sync,texture,same_subresource:ww:boundary\u003d\"command-buffer\";first\u003d{\"op\":\"storage\",\"in\":\"render-pass-encoder\"};second\u003d{\"op\":\"t2t-copy\",\"in\":\"command-encoder\"} in /b/s/w/ir/third_party/dawn/webgpu-cts/compat-expectations.txt:\n  line 500 conflicts with line 701\n\nFound conflicts for pattern webgpu:api,operation,memory_sync,texture,same_subresource:ww:boundary\u003d\"command-buffer\";first\u003d{\"op\":\"storage\",\"in\":\"render-bundle-encoder\"};second\u003d{\"op\":\"b2t-copy\",\"in\":\"command-encoder\"} in /b/s/w/ir/third_party/dawn/webgpu-cts/compat-expectations.txt:\n  line 502 conflicts with line 699\n```",
+      "revId": "5402ad6463ac17bccfd522b75ee10e39b25b397a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
