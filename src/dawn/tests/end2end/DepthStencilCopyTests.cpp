@@ -1337,6 +1337,8 @@ TEST_P(DepthStencilCopyTests_RegressionDawn1083, Run) {
     DAWN_SUPPRESS_TEST_IF(IsApple() &&
                           GetParam().mTextureFormat == wgpu::TextureFormat::Depth16Unorm);
 
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     uint32_t mipLevelCount = 3;
     uint32_t arrayLayerCount = 3;
     wgpu::TextureDescriptor texDesc = {};
