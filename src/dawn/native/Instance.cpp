@@ -118,21 +118,6 @@ wgpu::WGSLFeatureName ToWGPUFeature(tint::wgsl::LanguageFeature f) {
     }
 }
 
-tint::wgsl::LanguageFeature ToWGSLFeature(wgpu::WGSLFeatureName f) {
-    switch (f) {
-#define CASE(WgslName, WgpuName)          \
-    case wgpu::WGSLFeatureName::WgpuName: \
-        return tint::wgsl::LanguageFeature::WgslName;
-        DAWN_FOREACH_WGSL_FEATURE(CASE)
-#undef CASE
-        case wgpu::WGSLFeatureName::Packed4x8IntegerDotProduct:
-        case wgpu::WGSLFeatureName::UnrestrictedPointerParameters:
-        case wgpu::WGSLFeatureName::PointerCompositeAccess:
-            return tint::wgsl::LanguageFeature::kUndefined;
-    }
-}
-DAWN_UNUSED_FUNC(ToWGSLFeature);
-
 }  // anonymous namespace
 
 wgpu::Bool APIGetInstanceFeatures(InstanceFeatures* features) {
@@ -222,7 +207,8 @@ void InstanceBase::WillDropLastExternalRef() {
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
 MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
     DAWN_TRY(ValidateSTypes(descriptor->nextInChain, {{wgpu::SType::DawnInstanceDescriptor},
-                                                      {wgpu::SType::DawnTogglesDescriptor}}));
+                                                      {wgpu::SType::DawnTogglesDescriptor},
+                                                      {wgpu::SType::DawnWGSLBlocklist}}));
 
     const DawnInstanceDescriptor* dawnDesc = nullptr;
     FindInChain(descriptor->nextInChain, &dawnDesc);
@@ -249,7 +235,7 @@ MaybeError InstanceBase::Initialize(const InstanceDescriptor* descriptor) {
 
     DAWN_TRY(mEventManager.Initialize(descriptor));
 
-    GatherWGSLFeatures();
+    GatherWGSLFeatures(descriptor);
 
     return {};
 }
@@ -582,7 +568,7 @@ InstanceBase::GetAllowedWGSLLanguageFeatures() const {
     return mTintLanguageFeatures;
 }
 
-void InstanceBase::GatherWGSLFeatures() {
+void InstanceBase::GatherWGSLFeatures(const InstanceDescriptor* desc) {
     for (auto wgslFeature : tint::wgsl::kAllLanguageFeatures) {
         // Skip over testing features if we don't have the toggle to expose them.
         if (!mToggles.IsEnabled(Toggle::ExposeWGSLTestingFeatures)) {
@@ -623,6 +609,20 @@ void InstanceBase::GatherWGSLFeatures() {
         if (enable) {
             mWGSLFeatures.emplace(ToWGPUFeature(wgslFeature));
             mTintLanguageFeatures.emplace(wgslFeature);
+        }
+    }
+
+    // Remove blocklisted features.
+    const DawnWGSLBlocklist* wgslBlocklist = nullptr;
+    FindInChain(desc->nextInChain, &wgslBlocklist);
+    if (wgslBlocklist != nullptr) {
+        for (size_t i = 0; i < wgslBlocklist->blocklistedFeatureCount; i++) {
+            const char* name = wgslBlocklist->blocklistedFeatures[i];
+            tint::wgsl::LanguageFeature tintFeature = tint::wgsl::ParseLanguageFeature(name);
+            wgpu::WGSLFeatureName feature = ToWGPUFeature(tintFeature);
+
+            mTintLanguageFeatures.erase(tintFeature);
+            mWGSLFeatures.erase(feature);
         }
     }
 }
