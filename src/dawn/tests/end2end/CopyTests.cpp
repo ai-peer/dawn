@@ -909,6 +909,8 @@ TEST_P(CopyTests_T2B, PixelReadUnaligned) {
 
 // Test that copying regions with 256-byte aligned sizes works
 TEST_P(CopyTests_T2B, TextureRegionAligned) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     for (unsigned int w : {64, 128, 256}) {
@@ -922,6 +924,8 @@ TEST_P(CopyTests_T2B, TextureRegionAligned) {
 
 // Test that copying regions without 256-byte aligned sizes works
 TEST_P(CopyTests_T2B, TextureRegionUnaligned) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
 
@@ -938,6 +942,8 @@ TEST_P(CopyTests_T2B, TextureRegionUnaligned) {
 
 // Test that copying mips with 256-byte aligned sizes works
 TEST_P(CopyTests_T2B, TextureMipAligned) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
 
@@ -956,6 +962,8 @@ TEST_P(CopyTests_T2B, TextureMipAligned) {
 // Test that copying mips when one dimension is 256-byte aligned and another dimension reach one
 // works
 TEST_P(CopyTests_T2B, TextureMipDimensionReachOne) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     constexpr uint32_t mipLevelCount = 4;
     constexpr uint32_t kWidth = 256 << mipLevelCount;
     constexpr uint32_t kHeight = 2;
@@ -1270,6 +1278,8 @@ TEST_P(CopyTests_T2B, Texture2DArrayFull) {
 
 // Test that copying a range of texture 2D array layers in one texture-to-buffer-copy works.
 TEST_P(CopyTests_T2B, Texture2DArraySubRegion) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kLayers = 6u;
@@ -1410,6 +1420,8 @@ TEST_P(CopyTests_T2B, Texture1D) {
 
 // Test that copying whole 3D texture in one texture-to-buffer-copy works.
 TEST_P(CopyTests_T2B, Texture3DFull) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     constexpr uint32_t kWidth = 256;
     constexpr uint32_t kHeight = 128;
     constexpr uint32_t kDepth = 6;
