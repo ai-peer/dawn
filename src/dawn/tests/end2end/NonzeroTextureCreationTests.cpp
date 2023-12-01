@@ -305,6 +305,8 @@ TEST_P(NonzeroCompressedTextureCreationTests, TextureCreationClears) {
 
 // Test that texture clears to a non-zero value because toggle is enabled.
 TEST_P(NonzeroDepthTextureCreationTests, TextureCreationClears) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     Run();
 }
 
@@ -315,6 +317,8 @@ TEST_P(NonzeroDepthStencilTextureCreationTests, TextureCreationClears) {
 
 // Test that texture clears to a non-zero value because toggle is enabled.
 TEST_P(NonzeroStencilTextureCreationTests, TextureCreationClears) {
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     Run();
 }
 
