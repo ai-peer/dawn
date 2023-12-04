@@ -103,6 +103,24 @@
       "parentUuid": "a21f52ed_1d2edd52",
       "revId": "886962869c3625061ca11389de242b2845fea36d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "748670d4_e97213d9",
+        "filename": "test/tint/array/assign_to_function_var.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-04T21:32:33Z",
+      "side": 1,
+      "message": "They are sharing the same struct only when their inner content is the same, and this won\u0027t fail the GLSL compiler/linker. (Failure case is two block with same name having different inner content)\n\nDo you think we need to explicitly declare these blocks with same inner content as different blocks in wgsl?",
+      "parentUuid": "208d1968_2b52f65c",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
