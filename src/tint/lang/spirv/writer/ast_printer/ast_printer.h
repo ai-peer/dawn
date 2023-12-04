@@ -64,8 +64,7 @@ class ASTPrinter {
     /// capabilities.
     ASTPrinter(const Program& program,
                bool zero_initialize_workgroup_memory,
-               bool experimental_require_subgroup_uniform_control_flow,
-               bool polyfill_dot_4x8_packed);
+               bool experimental_require_subgroup_uniform_control_flow);
 
     /// @returns true on successful generation; false otherwise
     bool Generate();
