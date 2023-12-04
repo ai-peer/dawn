@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d602177a_139a212f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-04T19:31:24Z",
+      "side": 1,
+      "message": "Can you add a TODO about when to clear this cache?",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 72
+      },
+      "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ba0d2dc_65f6aecd",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-04T19:31:24Z",
+      "side": 1,
+      "message": "std::move here doesn\u0027t seem right. We want to return a copy of the handle, not move it out, right?",
+      "range": {
+        "startLine": 1772,
+        "startChar": 0,
+        "endLine": 1772,
+        "endChar": 60
+      },
+      "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "93c28d89_96866099",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-04T19:31:24Z",
+      "side": 1,
+      "message": "Can you add a TODO about when to clear this cache?",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 51
+      },
+      "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
