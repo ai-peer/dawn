@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "692c0604_ac20da1f",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T16:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9ec30f2a_bf9eb228",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "600833ae_a4b0e7e1",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-12-04T16:15:12Z",
       "side": 1,
       "message": "nit: make this consistent with the wire. get the chain first then pass it into Gather",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2a100df0_f2ceef4a",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T16:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "600833ae_a4b0e7e1",
       "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62caf670_485ac1d0",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T16:51:56Z",
+      "side": 1,
+      "message": "I agree it\u0027s a bit odd and I went back and forth multiple times on this, and decided to make something specific to the wire with the DawnWireWGSLControl struct. dawn::native has a much more powerful configuration mechanism with toggles, one of which already controls WGSL a bit (allow_unsafe_apis) so I thought I\u0027d keep it. Otherwise both DawnWGSLControl and allow_unsafe_apis seem like they would control dawn::native::Instance::wgslLanguageFeatures.",
+      "parentUuid": "7e75c4eb_68921961",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22af4e21_e244e1e8",
         "filename": "src/dawn/native/Instance.cpp",
         "patchSetId": 2
@@ -82,6 +136,24 @@
       "writtenOn": "2023-12-04T16:15:12Z",
       "side": 1,
       "message": "nit: maybe comment about what happens when parse fails - like the enum is invalid but that\u0027s ok because we\u0027re erasing from the set. although.. maybe you want a `continue` instead?",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d75b408_d974847b",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T16:51:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22af4e21_e244e1e8",
       "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
