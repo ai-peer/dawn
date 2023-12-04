@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ef408f0_7f0c9ccd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-04T13:45:15Z",
+      "side": 1,
+      "message": "Tint side LGTM. Non-blocking comment for the core Tint team to discuss and act on.",
+      "revId": "8b9e27240555e1a195d037b48a87bde660003769",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "925bd7f2_d8728641",
@@ -65,6 +82,29 @@
       "writtenOn": "2023-12-04T13:34:33Z",
       "side": 1,
       "message": "Is that correct? I thought require statements were not necessary.",
+      "revId": "8b9e27240555e1a195d037b48a87bde660003769",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fd48c12e_1e9eec4e",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-04T13:45:15Z",
+      "side": 1,
+      "message": "I\u0027m not sure how we\u0027ve ended up in this situation, but one of the core goals with WGSL language features was that we _didn\u0027t_ need to keep conditionals like this for each and every new language feature that gets added. @jrprice@google.com I see we added the first feature validation checks in https://dawn-review.googlesource.com/c/dawn/+/159101. What\u0027s the motivation for checking for these features? Could we not keep them as extensions until it\u0027s a stable feature?",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 0
+      },
       "revId": "8b9e27240555e1a195d037b48a87bde660003769",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
