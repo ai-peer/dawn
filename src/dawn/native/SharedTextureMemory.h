@@ -30,6 +30,7 @@
 
 #include <map>
 #include <stack>
+#include <vector>
 
 #include "dawn/common/StackContainer.h"
 #include "dawn/common/WeakRef.h"
@@ -89,7 +90,10 @@ class SharedTextureMemoryBase : public ApiObjectBase,
 
     SharedTextureMemoryProperties mProperties;
 
-    Ref<TextureBase> mCurrentAccess;
+    Ref<TextureBase> mCurrentWriteAccess;
+    // TODO(blundell): This should be a set, but Ref doesn't support the
+    // necessary operators.
+    std::vector<Ref<TextureBase>> mCurrentReadAccesses;
 
   private:
     virtual Ref<SharedTextureMemoryContents> CreateContents();
@@ -99,6 +103,8 @@ class SharedTextureMemoryBase : public ApiObjectBase,
     MaybeError EndAccess(TextureBase* texture, EndAccessState* state);
     ResultOrError<FenceAndSignalValue> EndAccessInternal(TextureBase* texture,
                                                          EndAccessState* state);
+
+    virtual bool AreConcurrentReadsSupported() { return true; }
 
     virtual ResultOrError<Ref<TextureBase>> CreateTextureImpl(
         const TextureDescriptor* descriptor) = 0;

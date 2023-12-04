@@ -702,7 +702,7 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadWrite) {
 
     EXPECT_TRUE(memory.BeginAccess(readTexture, &beginDesc));
     ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(writeTexture, &beginDesc)),
-                            HasSubstr("Cannot begin access with"));
+                            HasSubstr("Cannot begin write access with"));
 }
 
 // Test that it is an error to call BeginAccess concurrently on two write textures on a single
@@ -721,10 +721,8 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesWriteWrite) {
                             HasSubstr("Cannot begin access with"));
 }
 
-// Test that it is an error to call BeginAccess concurrently on two read textures on a single
+// Test that it is valid to call BeginAccess concurrently on two read textures on a single
 // SharedTextureMemory.
-// TODO(crbug.com/dawn/2276): Support concurrent read access in
-// SharedTextureMemory and update this test.
 TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadRead) {
     wgpu::SharedTextureMemory memory = GetParam().mBackend->CreateSharedTextureMemory(device);
 
@@ -735,8 +733,7 @@ TEST_P(SharedTextureMemoryTests, DoubleBeginAccessSeparateTexturesReadRead) {
     beginDesc.initialized = true;
 
     EXPECT_TRUE(memory.BeginAccess(readTexture1, &beginDesc));
-    ASSERT_DEVICE_ERROR_MSG(EXPECT_FALSE(memory.BeginAccess(readTexture2, &beginDesc)),
-                            HasSubstr("Cannot begin access with"));
+    EXPECT_TRUE(memory.BeginAccess(readTexture2, &beginDesc));
 }
 
 // Test that it is an error to call EndAccess twice in a row on the same memory.

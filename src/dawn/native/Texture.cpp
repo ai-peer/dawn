@@ -1000,6 +1000,10 @@ bool TextureBase::IsMultisampledTexture() const {
     return mSampleCount > 1;
 }
 
+bool TextureBase::IsReadOnly() const {
+    return (mUsage | kReadOnlyTextureUsages) == kReadOnlyTextureUsages;
+}
+
 bool TextureBase::CoversFullSubresource(uint32_t mipLevel,
                                         Aspect aspect,
                                         const Extent3D& size) const {

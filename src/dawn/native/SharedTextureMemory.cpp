@@ -211,10 +211,30 @@ bool SharedTextureMemoryBase::APIBeginAccess(TextureBase* texture,
             // Validate there is not another ongoing access and then set the current access.
             // This is done first because BeginAccess should acquire access regardless of whether or
             // not the internals generate an error.
-            DAWN_INVALID_IF(mCurrentAccess != nullptr,
-                            "Cannot begin access with %s on %s which is currently accessed by %s.",
-                            texture, this, mCurrentAccess.Get());
-            mCurrentAccess = texture;
+            bool isWrite = !texture->IsReadOnly();
+            DAWN_INVALID_IF(
+                mCurrentWriteAccess != nullptr,
+                "Cannot begin access with %s on %s which is currently accessed by %s for writing.",
+                texture, this, mCurrentWriteAccess.Get());
+            DAWN_INVALID_IF(isWrite && !mCurrentReadAccesses.empty(),
+                            "Cannot begin write access with %s on %s as there are ongoing read "
+                            "accesses (one element: %s).",
+                            texture, this, mCurrentReadAccesses[0].Get());
+            bool hasTexture = false;
+            for (auto textureRef : mCurrentReadAccesses) {
+                if (textureRef.Get() == texture) {
+                    hasTexture = true;
+                }
+            }
+            DAWN_INVALID_IF(hasTexture,
+                            "Cannot begin access with %s on %s as it already has ongoing access of "
+                            "this texture.",
+                            texture, this);
+            if (isWrite) {
+                mCurrentWriteAccess = texture;
+            } else {
+                mCurrentReadAccesses.push_back(texture);
+            }
             didBegin = true;
 
             return BeginAccess(texture, descriptor);
@@ -256,10 +276,23 @@ bool SharedTextureMemoryBase::APIEndAccess(TextureBase* texture, EndAccessState*
     bool didEnd = false;
     DAWN_UNUSED(GetDevice()->ConsumedError(
         [&]() -> MaybeError {
-            DAWN_INVALID_IF(mCurrentAccess != texture,
-                            "Cannot end access with %s on %s which is currently accessed by %s.",
-                            texture, this, mCurrentAccess.Get());
-            mCurrentAccess = nullptr;
+            bool hasTexture = false;
+            for (auto textureRef : mCurrentReadAccesses) {
+                if (textureRef.Get() == texture) {
+                    hasTexture = true;
+                }
+            }
+            DAWN_INVALID_IF(mCurrentWriteAccess != texture && !hasTexture,
+                            "Cannot end access with %s on %s, as %s is not currently accessing %s.",
+                            texture, this, this, texture);
+            mCurrentWriteAccess = nullptr;
+            for (auto iter = mCurrentReadAccesses.begin(); iter != mCurrentReadAccesses.end();
+                 iter++) {
+                if (iter->Get() == texture) {
+                    mCurrentReadAccesses.erase(iter);
+                    break;
+                }
+            }
             didEnd = true;
 
             return EndAccess(texture, state);

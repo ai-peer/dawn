@@ -118,6 +118,7 @@ class TextureBase : public ApiObjectBase {
     MaybeError ValidateCanUseInSubmitNow() const;
 
     bool IsMultisampledTexture() const;
+    bool IsReadOnly() const;
 
     // Returns true if the size covers the whole subresource.
     bool CoversFullSubresource(uint32_t mipLevel, Aspect aspect, const Extent3D& size) const;
