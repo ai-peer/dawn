@@ -16,6 +16,24 @@
       "message": "LGTM but if we have the killswitch in the next CL, do we really need this toggle as well? seems like allow unsafe APIs could control both Dawn and WGSL features",
       "revId": "d46d21926c093da0b0a605681d69b71b2bba64d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a807e69_574b7fe0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T16:33:28Z",
+      "side": 1,
+      "message": "It\u0027s to make the difference between unsafe experimental extensions (that require --enable-unsafe-webgpu) and safe ones (that requires --enable-webgpu-developer-features).",
+      "parentUuid": "13d11585_10c222ad",
+      "revId": "d46d21926c093da0b0a605681d69b71b2bba64d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
