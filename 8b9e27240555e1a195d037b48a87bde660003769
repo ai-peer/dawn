@@ -107,6 +107,30 @@
       },
       "revId": "8b9e27240555e1a195d037b48a87bde660003769",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9895e212_63b743e8",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-04T21:00:36Z",
+      "side": 1,
+      "message": "We want to be able to write CTS tests (and ideally land them) before we ship the feature, so we want to be able to use the feature as a WGSL language feature before it has shipped for real.\n\nIt also makes the transition easier for users that experiment with the pre-release feature.",
+      "parentUuid": "fd48c12e_1e9eec4e",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 0
+      },
+      "revId": "8b9e27240555e1a195d037b48a87bde660003769",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
