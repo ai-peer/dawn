@@ -16,6 +16,74 @@
       "message": "PTAL",
       "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9ec30f2a_bf9eb228",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-04T16:15:12Z",
+      "side": 1,
+      "message": "can we use ValidateAndUnpackChain here?",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "600833ae_a4b0e7e1",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-04T16:15:12Z",
+      "side": 1,
+      "message": "nit: make this consistent with the wire. get the chain first then pass it into Gather",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e75c4eb_68921961",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 574,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-04T16:15:12Z",
+      "side": 1,
+      "message": "mmm... should this use the WGSL control chained struct as well? it\u0027s odd that you control it with the struct in the wire, and with toggles here",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22af4e21_e244e1e8",
+        "filename": "src/dawn/native/Instance.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-04T16:15:12Z",
+      "side": 1,
+      "message": "nit: maybe comment about what happens when parse fails - like the enum is invalid but that\u0027s ok because we\u0027re erasing from the set. although.. maybe you want a `continue` instead?",
+      "revId": "08bb4ed00a991cee63e94c2ac411859cea99cd83",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
