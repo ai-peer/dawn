@@ -126,7 +126,7 @@ class Printer : public tint::TextGenerator {
         }
 
         StringStream ss;
-        ss << preamble_buffer_.String() << std::endl << main_buffer_.String();
+        ss << preamble_buffer_.String() << "\n" << main_buffer_.String();
         return ss.str();
     }
 
@@ -158,7 +158,7 @@ class Printer : public tint::TextGenerator {
     std::string array_template_name_;
 
     /// The representation for an IR pointer type
-    enum class PtrKind {
+    enum class PtrKind : uint8_t {
         kPtr,  // IR pointer is represented in a pointer
         kRef,  // IR pointer is represented in a reference
     };
@@ -369,7 +369,7 @@ class Printer : public tint::TextGenerator {
                     [&](const core::ir::Binary* b) { EmitBinary(out, b); },                    //
                     [&](const core::ir::Convert* b) { EmitConvert(out, b); },                  //
                     [&](const core::ir::Let* l) { out << NameOf(l->Result(0)); },              //
-                    [&](const core::ir::Load* l) { EmitValue(out, l->From()); },               //
+                    [&](const core::ir::Load* l) { EmitLoad(out, l); },                        //
                     [&](const core::ir::Construct* c) { EmitConstruct(out, c); },              //
                     [&](const core::ir::Var* var) { out << NameOf(var->Result(0)); },          //
                     [&](const core::ir::Bitcast* b) { EmitBitcast(out, b); },                  //
@@ -385,6 +385,19 @@ class Printer : public tint::TextGenerator {
             },                                                            //
             [&](const core::ir::FunctionParam* p) { out << NameOf(p); },  //
             TINT_ICE_ON_NO_MATCH);
+    }
+
+    void EmitLoad(StringStream& out, const core::ir::Load* l) {
+        std::string suffix = "";
+        auto* from = l->From();
+        if (!from->Is<core::ir::InstructionResult>() ||
+            (!from->As<core::ir::InstructionResult>()->Instruction()->Is<core::ir::Access>() &&
+             l->From()->Type()->Is<core::type::Pointer>())) {
+            out << "*(";
+            suffix = ")";
+        }
+        EmitValue(out, l->From());
+        out << suffix;
     }
 
     void EmitUnary(StringStream& out, const core::ir::Unary* u) {
@@ -724,7 +737,13 @@ class Printer : public tint::TextGenerator {
 
     /// Emit an accessor
     void EmitAccess(StringStream& out, const core::ir::Access* a) {
+        std::string suffix = "";
+        if (a->Object()->Type()->Is<core::type::Pointer>()) {
+            out << "*(";
+            suffix = ")";
+        }
         EmitValue(out, a->Object());
+        out << suffix;
 
         auto* current_type = a->Object()->Type();
         for (auto* index : a->Indices()) {
