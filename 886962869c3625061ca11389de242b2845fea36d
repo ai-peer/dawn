@@ -1,6 +1,40 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "21d70d63_5f1e0456",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-04T21:04:03Z",
+      "side": 1,
+      "message": "`[1]`",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c89427a8_25f3f967",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 86,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-04T21:04:03Z",
+      "side": 1,
+      "message": "Comment removed by: Ben Clayton; Reason: double comment.",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "3678ed26_5d5116d9",
@@ -49,6 +83,24 @@
       "side": 1,
       "message": "Hmm.... This feels like sharing same block definition similar to [1]? The block name is `src_uniform_block_0_0` for both\n\nBut looks like glsl ast_printer has something wrong when doing wgsl-\u003eglsl, it simply append `_ubo` and `_ssbo`",
       "parentUuid": "f911f926_ef3c7173",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "208d1968_2b52f65c",
+        "filename": "test/tint/array/assign_to_function_var.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-04T21:04:03Z",
+      "side": 1,
+      "message": "It is because the same structure `S` is used by two different binding points and `wrapper_structs.GetOrCreate` (`[1]`) will only call the lambda on the first time the map entry is created.\n\nBecause of this, I\u0027m unconvinced this CL is fixing the issue it is trying to.",
+      "parentUuid": "a21f52ed_1d2edd52",
       "revId": "886962869c3625061ca11389de242b2845fea36d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
