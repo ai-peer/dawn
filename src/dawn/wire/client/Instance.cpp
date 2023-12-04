@@ -212,12 +212,15 @@ WGPUWaitStatus Instance::WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64
 
 bool Instance::HasWGSLLanguageFeature(WGPUWGSLFeatureName feature) const {
     // TODO(dawn:2260): Implemented wgslLanguageFeatures on the wire.
-    return false;
+    return feature == WGPUWGSLFeatureName_Packed4x8IntegerDotProduct;
 }
 
 size_t Instance::EnumerateWGSLLanguageFeatures(WGPUWGSLFeatureName* features) const {
     // TODO(dawn:2260): Implemented wgslLanguageFeatures on the wire.
-    return 0;
+    if (features != nullptr) {
+        *features = WGPUWGSLFeatureName_Packed4x8IntegerDotProduct;
+    }
+    return 1u;
 }
 
 }  // namespace dawn::wire::client
