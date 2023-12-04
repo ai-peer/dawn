@@ -33,6 +33,24 @@
       "message": "nit: Maybe explain that Tint\u0027s root_dir is \"../..\", or the root of the Dawn repo?",
       "revId": "324cb735f8eff6c36fe5147351470e2572e41a03",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d8c99d6_d471b6f5",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-04T13:53:11Z",
+      "side": 1,
+      "message": "I thought this was implied by the comment, as `tint_root_dir` is some build configurable variable.\nWill land to unblock the roller, and we can nitpick with followups",
+      "parentUuid": "7bc43796_6293da3b",
+      "revId": "324cb735f8eff6c36fe5147351470e2572e41a03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
