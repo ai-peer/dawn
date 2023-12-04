@@ -155,6 +155,30 @@
       },
       "revId": "8b9e27240555e1a195d037b48a87bde660003769",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b09444e_ccec67fd",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T22:22:51Z",
+      "side": 1,
+      "message": "X months after it is ShippedWithKillswitch (X \u003d 6?) so we are more confident we don\u0027t need the conditional for the killswitch?",
+      "parentUuid": "61e7115c_1958fca9",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 0
+      },
+      "revId": "8b9e27240555e1a195d037b48a87bde660003769",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
