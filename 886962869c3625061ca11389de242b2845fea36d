@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3678ed26_5d5116d9",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 282,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-04T20:58:45Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f911f926_ef3c7173",
@@ -14,6 +31,24 @@
       "writtenOn": "2023-12-04T20:50:13Z",
       "side": 1,
       "message": "Shouldn\u0027t this be `0_1` instead of `0_0`?",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a21f52ed_1d2edd52",
+        "filename": "test/tint/array/assign_to_function_var.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-04T20:58:45Z",
+      "side": 1,
+      "message": "Hmm.... This feels like sharing same block definition similar to [1]? The block name is `src_uniform_block_0_0` for both\n\nBut looks like glsl ast_printer has something wrong when doing wgsl-\u003eglsl, it simply append `_ubo` and `_ssbo`",
+      "parentUuid": "f911f926_ef3c7173",
       "revId": "886962869c3625061ca11389de242b2845fea36d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
