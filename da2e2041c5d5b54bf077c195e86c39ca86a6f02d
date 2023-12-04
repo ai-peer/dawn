@@ -176,6 +176,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1eb084a_33984161",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 2202,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-04T00:57:03Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f42ecdb9_9543a62b",
+      "range": {
+        "startLine": 2199,
+        "startChar": 0,
+        "endLine": 2202,
+        "endChar": 41
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72184377_feeadd7d",
@@ -261,6 +285,30 @@
       "side": 1,
       "message": "BTW, I just realized it will be a huge waste of power, especially if the size of the cached texture is much bigger than the render pass size. \n\nMaybe file an issue and add a TODO for it.",
       "parentUuid": "782f0168_685ba781",
+      "range": {
+        "startLine": 163,
+        "startChar": 32,
+        "endLine": 163,
+        "endChar": 60
+      },
+      "revId": "da2e2041c5d5b54bf077c195e86c39ca86a6f02d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "978e163b_1bacb261",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-04T00:57:03Z",
+      "side": 1,
+      "message": "Done\n\nNow that PLS is only intended for Skia (Graphite?), we can just pay attention on the use cases in Skia and do optimizations on them.",
+      "parentUuid": "800c93a6_37ed8cb2",
       "range": {
         "startLine": 163,
         "startChar": 32,
