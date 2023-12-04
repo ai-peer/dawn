@@ -16,6 +16,24 @@
       "message": "It seems that Chromium failed to roll Dawn because of the protobuf-related building issue?\n\nThe message says:\n```\nStep _compile (with patch)_ failed. Error logs are shown below:\n[1116/7761] CXX obj/third_party/dawn/src/tint/lang/core/ir/binary/binary/encode.obj\nFAILED: obj/third_party/dawn/src/tint/lang/core/ir/binary/binary/encode.obj\n..\\..\\buildtools\\reclient\\rewrapper -cfg\u003d..\\..\\buildtools\\reclient_cfgs\\chromium-browser-clang\\rewra...(too long)\n../../third_party/dawn/src/tint/lang/core/ir/binary/encode.cc(42,10): fatal error: \u0027src/tint/lang/core/ir/binary/ir.pb.h\u0027 file not found\n42 | #include \"src/tint/lang/core/ir/binary/ir.pb.h\"\n|          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n1 error generated.\n[1117/7761] CXX obj/third_party/dawn/src/tint/lang/core/ir/binary/binary/decode.obj\nFAILED: obj/third_party/dawn/src/tint/lang/core/ir/binary/binary/decode.obj\n...The message was too long...\n```\n\nPlease see https://chromium-review.googlesource.com/c/chromium/src/+/5081213?checksRunsSelected\u003dlinux-rel,win_chromium_compile_dbg_ng\u0026tab\u003dchecks.",
       "revId": "90c7cc2304a6b629e5c5fdef18b4e1a1b3a2fbaa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e501ccd_9662a8ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 35
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-04T11:48:07Z",
+      "side": 1,
+      "message": "Investigating. Thanks for the heads up.",
+      "parentUuid": "1587a4b8_96c973d8",
+      "revId": "90c7cc2304a6b629e5c5fdef18b4e1a1b3a2fbaa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
