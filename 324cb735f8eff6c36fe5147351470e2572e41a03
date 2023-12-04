@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c9f6a11_dd9c5db1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T13:49:07Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "324cb735f8eff6c36fe5147351470e2572e41a03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7bc43796_6293da3b",
+        "filename": "src/tint/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-04T13:49:07Z",
+      "side": 1,
+      "message": "nit: Maybe explain that Tint\u0027s root_dir is \"../..\", or the root of the Dawn repo?",
+      "revId": "324cb735f8eff6c36fe5147351470e2572e41a03",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
