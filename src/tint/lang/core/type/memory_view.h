@@ -1,4 +1,4 @@
-// Copyright 2022 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,48 +25,47 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/core/type/pointer.h"
+#ifndef SRC_TINT_LANG_CORE_TYPE_MEMORY_VIEW_H_
+#define SRC_TINT_LANG_CORE_TYPE_MEMORY_VIEW_H_
 
-#include "src/tint/lang/core/type/manager.h"
-#include "src/tint/lang/core/type/reference.h"
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/ice/ice.h"
-#include "src/tint/utils/math/hash.h"
-#include "src/tint/utils/text/string_stream.h"
+#include <string>
 
-TINT_INSTANTIATE_TYPEINFO(tint::core::type::Pointer);
+#include "src/tint/lang/core/access.h"
+#include "src/tint/lang/core/address_space.h"
+#include "src/tint/lang/core/type/type.h"
 
 namespace tint::core::type {
 
-Pointer::Pointer(core::AddressSpace address_space, const Type* store_type, core::Access access)
-    : Base(Hash(tint::TypeInfo::Of<Pointer>().full_hashcode), address_space, store_type, access) {
-    TINT_ASSERT(!store_type->Is<Reference>());
-}
+/// Base class for memory view types: pointers and references
+class MemoryView : public Castable<MemoryView, Type> {
+  public:
+    /// Constructor
+    /// @param hash the unique hash of the node
+    /// @param address_space the address space of the memory view
+    /// @param store_type the store type
+    /// @param access the resolved access control of the reference
+    MemoryView(size_t hash, core::AddressSpace address_space, const Type* store_type, core::Access access);
 
-bool Pointer::Equals(const UniqueNode& other) const {
-    if (auto* o = other.As<Pointer>()) {
-        return o->AddressSpace() == AddressSpace() && o->StoreType() == StoreType() &&
-               o->Access() == Access();
-    }
-    return false;
-}
+    /// Destructor
+    ~MemoryView() override;
 
-std::string Pointer::FriendlyName() const {
-    StringStream out;
-    out << "ptr<";
-    if (AddressSpace() != core::AddressSpace::kUndefined) {
-        out << AddressSpace() << ", ";
-    }
-    out << StoreType()->FriendlyName() << ", " << Access();
-    out << ">";
-    return out.str();
-}
+    /// @returns the store type of the memory view
+    const Type* StoreType() const { return store_type_; }
 
-Pointer::~Pointer() = default;
+    /// @returns the address space of the memory view
+    core::AddressSpace AddressSpace() const { return address_space_; }
 
-Pointer* Pointer::Clone(CloneContext& ctx) const {
-    auto* ty = StoreType()->Clone(ctx);
-    return ctx.dst.mgr->Get<Pointer>(AddressSpace(), ty, Access());
-}
+    /// @returns the access control of the memory view
+    core::Access Access() const { return access_; }
+
+  private:
+    Type const* const store_type_;
+    core::AddressSpace const address_space_;
+    core::Access const access_;
+};
 
 }  // namespace tint::core::type
+
+
+#endif // SRC_TINT_LANG_CORE_TYPE_MEMORY_VIEW_H_
+
