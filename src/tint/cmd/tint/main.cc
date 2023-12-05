@@ -87,6 +87,7 @@
 #endif  // TINT_BUILD_HLSL_WRITER
 
 #if TINT_BUILD_GLSL_WRITER
+#include "src/tint/lang/glsl/writer/helpers/generate_bindings.h"
 #include "src/tint/lang/glsl/writer/writer.h"
 #endif  // TINT_BUILD_GLSL_WRITER
 
@@ -985,8 +986,8 @@ bool GenerateGlsl([[maybe_unused]] const tint::Program& program,
     auto generate = [&](const tint::Program& prg, const std::string entry_point_name) -> bool {
         tint::glsl::writer::Options gen_options;
         gen_options.disable_robustness = !options.enable_robustness;
-        gen_options.external_texture_options.bindings_map =
-            tint::cmd::GenerateExternalTextureBindings(prg);
+        gen_options.bindings = tint::glsl::writer::GenerateBindings(prg);
+
         tint::TextureBuiltinsFromUniformOptions textureBuiltinsFromUniform;
         constexpr uint32_t kMaxBindGroups = 4u;
         textureBuiltinsFromUniform.ubo_binding = {kMaxBindGroups, 0u};

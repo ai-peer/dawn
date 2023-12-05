@@ -50,6 +50,7 @@
 #include "src/tint/lang/glsl/writer/ast_raise/pad_structs.h"
 #include "src/tint/lang/glsl/writer/ast_raise/texture_1d_to_2d.h"
 #include "src/tint/lang/glsl/writer/ast_raise/texture_builtins_from_uniform.h"
+#include "src/tint/lang/glsl/writer/common/option_helpers.h"
 #include "src/tint/lang/glsl/writer/common/options.h"
 #include "src/tint/lang/glsl/writer/common/printer_support.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
@@ -167,11 +168,6 @@ SanitizedResult Sanitize(const Program& in,
         manager.Add<ast::transform::Robustness>();
     }
 
-    // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
-    data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
-        options.external_texture_options.bindings_map);
-    manager.Add<ast::transform::MultiplanarExternalTexture>();
-
     {  // Builtin polyfills
         ast::transform::BuiltinPolyfill::Builtins polyfills;
         polyfills.acosh = ast::transform::BuiltinPolyfill::Level::kRangeCheck;
@@ -225,11 +221,20 @@ SanitizedResult Sanitize(const Program& in,
     data.Add<CombineSamplers::BindingInfo>(options.binding_map, options.placeholder_binding_point);
     manager.Add<CombineSamplers>();
 
+    ExternalTextureOptions external_texture_options{};
+    RemapperData remapper_data{};
+    PopuplateRemapperAndMultiplanarOptions(options, remapper_data, external_texture_options);
+
     data.Add<ast::transform::BindingRemapper::Remappings>(
-        options.binding_remapper_options.binding_points,
-        std::unordered_map<BindingPoint, core::Access>{},
+        remappr_data, std::unordered_map<BindingPoint, core::Access>{},
         /* allow_collisions */ true);
     manager.Add<ast::transform::BindingRemapper>();
+
+    // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
+    // MultiplanarExternalTexture must come after BindingRemapper
+    data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
+        external_texture_options.bindings_map);
+    manager.Add<ast::transform::MultiplanarExternalTexture>();
 
     manager.Add<ast::transform::PromoteInitializersToLet>();
     manager.Add<ast::transform::AddEmptyEntryPoint>();

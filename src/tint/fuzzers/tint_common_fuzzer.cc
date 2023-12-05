@@ -62,6 +62,10 @@
 #include "src/tint/lang/msl/writer/helpers/generate_bindings.h"
 #endif  // TINT_BUILD_MSL_WRITER
 
+#if TINT_BUILD_GLSL_WRITER
+#include "src/tint/lang/glsl/writer/helpers/generate_bindings.h"
+#endif  // TINT_BUILD_GLSL_WRITER
+
 namespace tint::fuzzers {
 
 namespace {
@@ -271,6 +275,11 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
             options_msl_.bindings = tint::msl::writer::GenerateBindings(program);
 #endif  // TINT_BUILD_MSL_WRITER
             break;
+        case OutputFormat::kGLSL:
+#if TINT_BUILD_GLSL_WRITER
+            options_glsl_.bindings = tint::glsl::writer::GenerateBindings(program);
+#endif  // TINT_BUILD_GLSL_WRITER
+            break;
         case OutputFormat::kHLSL:
             break;
         case OutputFormat::kSpv:
@@ -312,14 +321,8 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
         }
 
         switch (output_) {
-            case OutputFormat::kMSL: {
-                break;
-            }
             case OutputFormat::kHLSL: {
                 options_hlsl_.external_texture_options.bindings_map = new_bindings_map;
-                break;
-            }
-            case OutputFormat::kSpv: {
                 break;
             }
             default:
