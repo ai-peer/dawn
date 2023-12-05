@@ -157,6 +157,24 @@
       "parentUuid": "ec266244_1c4fdffd",
       "revId": "886962869c3625061ca11389de242b2845fea36d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c856c7b4_5207b1e5",
+        "filename": "test/tint/array/assign_to_function_var.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-05T21:54:48Z",
+      "side": 1,
+      "message": "I\u0027m able to better organize my question/confusion\n\n- Does WebGPU/WGSL allows different block content for the sample binding point at different stages?\n\nThis looks like a yes. I don\u0027t find related validation at https://gpuweb.github.io/gpuweb/#ref-for-abstract-opdef-validating-inter-stage-interfaces in the spec. And running the example in other backend with backend validation seems fine.\n\nThe meaning of this is we can have different byte interpretation for the same buffer binding at different stages. e.g. interpret the bytes as float in vertex, while interpret the same byte as uint in fragment.\n\n\n- Does OpenGL/GLSL allows this?\n\nI\u0027m getting this program link error:\n```\n\"Program link failed:\nStructure names of uniform block \u0027xxx\u0027 member \u0027yyy.inner\u0027 differ between VERTEX and FRAGMENT shaders.\\n\\n - While calling [Device].CreateRenderPipeline([RenderPipelineDescriptor]).\\n\"\n```\n\nwhich is a different error msg from the naming bug we are trying to fix:\n```\nProgram link failed:\nLayout qualifiers of shader storage block \u0027xxx\u0027 differ between VERTEX and FRAGMENT shaders.\n```\n\nWhile the naming bug is just a WGSL-\u003eGLSL bug, the different buffer content(different interpretation of the same buffer) is a WebGPU feature unavailable in OpenGL backend, which seems need compat feature discussion (either disable it for compat, or other solution)\n\nI will raise it in the original dawn bug ticket with dawn compat folks.",
+      "parentUuid": "d75fcaac_e3d80c05",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
