@@ -68,6 +68,30 @@
       },
       "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c75dd753_b46775a2",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-05T08:36:26Z",
+      "side": 1,
+      "message": "mHandlesFor2DViewOn3D had been cleared in DestroyImpl in Vulkan, I just missed it in D3D11, and will clear it.",
+      "parentUuid": "93c28d89_96866099",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 51
+      },
+      "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
