@@ -1,0 +1,89 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ee4a3b7_7ae4a946",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-05T21:44:10Z",
+      "side": 1,
+      "message": "can this be negative? (Dont\u0027t know go processes command lines, but if I did `j\u003d-1` ?",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d0dbf852_5086c104",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-05T21:44:10Z",
+      "side": 1,
+      "message": "Does this mean if we have the fuzzer create a temp directory that any crashes or slow test data will get removed at the end of the run? That seems like it would be surprising?",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10effc37_f6642923",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-05T21:44:10Z",
+      "side": 1,
+      "message": "What, how does this work if we have more then one fuzzer? We only have one `t` so does that mean this has to change if there is ever more then one fuzzer?",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a94e522e_c5a07bdd",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-05T21:44:10Z",
+      "side": 1,
+      "message": "This isn\u0027t really `wgslFuzzer` is it, it\u0027s just the path to the fuzzer being executed, not `wgsl` specific?",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7f40ed14_f777cc13",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-05T21:44:10Z",
+      "side": 1,
+      "message": "What happens at the point where num fuzzers \u003e num processes? Does it only run some of them? (This question probably doesnt\u0027 make sense, asked about multiple fuzzers above ....)",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
