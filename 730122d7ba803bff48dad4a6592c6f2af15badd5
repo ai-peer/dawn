@@ -16,6 +16,47 @@
       "message": "This is super-rough and incomplete, but I\u0027d like your feedback on the best way to proceed wrt the data structure to hold the reads. I\u0027ll finalize the rest once I\u0027ve got that in place and get it ready for full review. Thanks!",
       "revId": "730122d7ba803bff48dad4a6592c6f2af15badd5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61f591e4_2735aba8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-05T01:47:01Z",
+      "side": 1,
+      "message": "probably we can use `std::unordered_set\u003cRef\u003cT\u003e. HashRefPtr\u003e` and define `HashRefPtr` to return the hash of the pointer contained in the Ref",
+      "parentUuid": "7e314e4b_2ba5f9c7",
+      "revId": "730122d7ba803bff48dad4a6592c6f2af15badd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "092df910_9c39d34c",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 1004,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-05T01:47:01Z",
+      "side": 1,
+      "message": "nit: we have an IsSubset helper",
+      "range": {
+        "startLine": 1004,
+        "startChar": 0,
+        "endLine": 1004,
+        "endChar": 71
+      },
+      "revId": "730122d7ba803bff48dad4a6592c6f2af15badd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
