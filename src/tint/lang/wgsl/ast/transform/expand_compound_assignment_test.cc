@@ -222,6 +222,73 @@ fn main() {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(ExpandCompoundAssignmentTest, LhsArrayOfVectorComponent_MemberAccessor_ViaArrayIndex) {
+    auto* src = R"(
+fn main() {
+  var v : array<vec4<i32>, 3>;
+  v[0].y += 1;
+}
+)";
+
+    auto* expect = R"(
+fn main() {
+  var v : array<vec4<i32>, 3>;
+  let tint_symbol = &(v[0]);
+  (*(tint_symbol)).y = ((*(tint_symbol)).y + 1);
+}
+)";
+
+    auto got = Run<ExpandCompoundAssignment>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(ExpandCompoundAssignmentTest, LhsVectorComponent_MemberAccessor_ViaPointerDeref) {
+    auto* src = R"(
+fn main() {
+  var v : vec4<i32>;
+  let p = &v;
+  (*p).y += 1;
+}
+)";
+
+    // TODO(crbug.com/tint/2115): we currently needlessly hoist pointer-deref to another pointer.
+    auto* expect = R"(
+fn main() {
+  var v : vec4<i32>;
+  let p = &(v);
+  let tint_symbol = &(*(p));
+  (*(tint_symbol)).y = ((*(tint_symbol)).y + 1);
+}
+)";
+
+    auto got = Run<ExpandCompoundAssignment>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(ExpandCompoundAssignmentTest, LhsVectorComponent_MemberAccessor_ViaPointerDot) {
+    auto* src = R"(
+fn main() {
+  var v : vec4<i32>;
+  let p = &v;
+  p.y += 1;
+}
+)";
+
+    auto* expect = R"(
+fn main() {
+  var v : vec4<i32>;
+  let p = &(v);
+  p.y = (p.y + 1);
+}
+)";
+
+    auto got = Run<ExpandCompoundAssignment>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 TEST_F(ExpandCompoundAssignmentTest, LhsMatrixColumn) {
     auto* src = R"(
 var<private> m : mat4x4<f32>;
