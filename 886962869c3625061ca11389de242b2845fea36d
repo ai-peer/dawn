@@ -139,6 +139,24 @@
       "parentUuid": "748670d4_e97213d9",
       "revId": "886962869c3625061ca11389de242b2845fea36d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d75fcaac_e3d80c05",
+        "filename": "test/tint/array/assign_to_function_var.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-05T18:31:41Z",
+      "side": 1,
+      "message": "question: can you have two blocks with the same binding point across stages but are not shared? If two different blocks bind to the same 0, 0 bindpoint, would bindgrouplayout of the shader fails that? (Or this is dawn concept, tint standalone should accept this?)",
+      "parentUuid": "ec266244_1c4fdffd",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
