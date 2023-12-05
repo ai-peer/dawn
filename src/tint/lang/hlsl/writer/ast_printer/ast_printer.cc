@@ -651,7 +651,7 @@ bool ASTPrinter::EmitDynamicMatrixScalarAssignment(const ast::AssignmentStatemen
                                     break;
                                 default: {
                                     auto* vec = TypeOf(lhs_row_access->object)
-                                                    ->UnwrapRef()
+                                                    ->UnwrapPtrOrRef()
                                                     ->As<core::type::Vector>();
                                     TINT_UNREACHABLE() << "invalid vector size " << vec->Width();
                                     break;
