@@ -361,7 +361,7 @@ TEST_F(ResolverIndexAccessorTest, Expr_Deref_FuncBadParent) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: cannot index type 'ptr<function, vec4<f32>, read_write>'");
+              "12:34 error: cannot dereference expression of type 'f32'");
 }
 
 TEST_F(ResolverIndexAccessorTest, Exr_Deref_BadParent) {
@@ -377,7 +377,7 @@ TEST_F(ResolverIndexAccessorTest, Exr_Deref_BadParent) {
 
     EXPECT_FALSE(r()->Resolve());
     EXPECT_EQ(r()->error(),
-              "12:34 error: cannot index type 'ptr<function, vec4<f32>, read_write>'");
+              "12:34 error: cannot dereference expression of type 'f32'");
 }
 
 }  // namespace
