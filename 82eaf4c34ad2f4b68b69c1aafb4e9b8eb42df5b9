@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "07c52d34_6d3432d3",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-05T21:55:09Z",
+      "side": 1,
+      "message": "Fixed.",
+      "parentUuid": "7ee4a3b7_7ae4a946",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d0dbf852_5086c104",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-05T21:44:10Z",
       "side": 1,
       "message": "Does this mean if we have the fuzzer create a temp directory that any crashes or slow test data will get removed at the end of the run? That seems like it would be surprising?",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a90234f_72870892",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-05T21:55:09Z",
+      "side": 1,
+      "message": "Crashes are emitted into the CWD. I don\u0027t think slow tests cause failures without additional arguments, which we don\u0027t provide.",
+      "parentUuid": "d0dbf852_5086c104",
       "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f49cacd_759d1f04",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-05T21:55:09Z",
+      "side": 1,
+      "message": "We will have a field per fuzzer. There\u0027s currently only one I\u0027m executing.",
+      "parentUuid": "10effc37_f6642923",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a94e522e_c5a07bdd",
@@ -69,6 +123,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8549be81_364e9bb8",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 132,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-05T21:55:09Z",
+      "side": 1,
+      "message": "It\u0027s the path to the wgsl specific fuzzer - `tint_wgsl_fuzzer`.\nWe will eventually also have `tint_spirv_fuzzer` and `tint_ir_fuzzer`.",
+      "parentUuid": "a94e522e_c5a07bdd",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7f40ed14_f777cc13",
@@ -82,6 +154,24 @@
       "writtenOn": "2023-12-05T21:44:10Z",
       "side": 1,
       "message": "What happens at the point where num fuzzers \u003e num processes? Does it only run some of them? (This question probably doesnt\u0027 make sense, asked about multiple fuzzers above ....)",
+      "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "795528fe_5ba835d6",
+        "filename": "tools/src/cmd/fuzz/main.go",
+        "patchSetId": 6
+      },
+      "lineNbr": 192,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-05T21:55:09Z",
+      "side": 1,
+      "message": "I haven\u0027t decided how to handle this yet. A minor thing to solve in the future, when we have more fuzzer executables.",
+      "parentUuid": "7f40ed14_f777cc13",
       "revId": "82eaf4c34ad2f4b68b69c1aafb4e9b8eb42df5b9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
