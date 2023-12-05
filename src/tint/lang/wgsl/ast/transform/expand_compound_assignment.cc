@@ -116,9 +116,11 @@ struct ExpandCompoundAssignment::State {
         auto* member_accessor = lhs->As<MemberAccessorExpression>();
         if (lhs->Is<IdentifierExpression>() ||
             (member_accessor && member_accessor->object->Is<IdentifierExpression>())) {
-            // This is the simple case with no side effects, so we can just use the
-            // original LHS expression directly.
-            // Before:
+            // TODO(crbug.com/tint/2115): This branch should also handle (recursive) deref'd
+            // identifiers (e.g. (*p).bar += rhs)).
+
+            // This is the simple case with no side effects, so we can just use
+            // the original LHS expression directly. Before:
             //     foo.bar += rhs;
             // After:
             //     foo.bar = foo.bar + rhs;
