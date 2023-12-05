@@ -36,6 +36,8 @@ TINT_INSTANTIATE_TYPEINFO(tint::core::ir::Access);
 
 namespace tint::core::ir {
 
+Access::Access() = default;
+
 //! @cond Doxygen_Suppress
 Access::Access(InstructionResult* result, Value* object, VectorRef<Value*> indices) {
     AddOperand(Access::kObjectOperandOffset, object);
