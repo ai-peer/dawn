@@ -1397,6 +1397,9 @@ class UniformityGraph {
         return false;
     }
 
+    // bool IsDerefOfPartialPointer(const ast::UnaryOpExpression* u) {
+    // }
+
     /// LValue holds the Nodes returned by ProcessLValueExpression()
     struct LValue {
         /// The control-flow node for an LValue expression
@@ -1445,14 +1448,77 @@ class UniformityGraph {
             },
 
             [&](const ast::IndexAccessorExpression* i) {
-                auto [cf1, l1, root_ident] =
-                    ProcessLValueExpression(cf, i->object, /*is_partial_reference*/ true);
+                auto* sem_object = sem_.GetVal(i->object);
+
+                LValue object_result;
+                if (sem_object->Type()->Is<core::type::Pointer>()) {
+                    // Sugared pointer indexing, treat as indirection
+                    auto* root_ident = sem_object->RootIdentifier();
+                    auto* deref = CreateNode({ NameFor(root_ident), "_deref" });
+
+                    if (auto* old_value = current_function_->variables.Get(root_ident)) {
+                        // TODO(amaiorano): Move this to function (overload of IsDerefOfPartialPointer)
+                        auto is_deref_of_partial_pointer = [this](const sem::ValueExpression* e) {
+                            if (auto* var_user = e->As<sem::VariableUser>()) {
+                                if (current_function_->partial_ptrs.Contains(
+                                    var_user->Variable())) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                            };
+
+                        // If dereferencing a partial reference or partial pointer, we link back to
+                        // the variable's previous value. If the previous value was non-uniform, a
+                        // partial assignment will not make it uniform.
+                        if (is_partial_reference || is_deref_of_partial_pointer(sem_object)) {
+                            deref->AddEdge(old_value);
+                        }
+                    }
+                    object_result = LValue{ cf, deref, root_ident };
+                }
+                else {
+                    object_result = ProcessLValueExpression(cf, i->object, /*is_partial_reference*/ true);
+                }
+
+                //auto [cf1, l1, root_ident] =
+                //    ProcessLValueExpression(cf, i->object, /*is_partial_reference*/ true);
+                auto [cf1, l1, root_ident] = object_result;
+
                 auto [cf2, v2] = ProcessExpression(cf1, i->index);
                 l1->AddEdge(v2);
                 return LValue{cf2, l1, root_ident};
             },
 
             [&](const ast::MemberAccessorExpression* m) {
+                auto* sem_object = sem_.GetVal(m->object);
+                if (sem_object->Type()->Is<core::type::Pointer>()) {
+                    // Sugared pointer indexing, treat as indirection
+                    auto* root_ident = sem_object->RootIdentifier();
+                    auto* deref = CreateNode({NameFor(root_ident), "_deref"});
+
+                    if (auto* old_value = current_function_->variables.Get(root_ident)) {
+                        // TODO(amaiorano): Move this to function (overload of IsDerefOfPartialPointer)
+                        auto is_deref_of_partial_pointer = [this](const sem::ValueExpression* e) {
+                            if (auto* var_user = e->As<sem::VariableUser>()) {
+                                if (current_function_->partial_ptrs.Contains(
+                                        var_user->Variable())) {
+                                    return true;
+                                }
+                            }
+                            return false;
+                        };
+
+                        // If dereferencing a partial reference or partial pointer, we link back to
+                        // the variable's previous value. If the previous value was non-uniform, a
+                        // partial assignment will not make it uniform.
+                        if (is_partial_reference || is_deref_of_partial_pointer(sem_object)) {
+                            deref->AddEdge(old_value);
+                        }
+                    }
+                    return LValue{cf, deref, root_ident};
+                }
+
                 return ProcessLValueExpression(cf, m->object, /*is_partial_reference*/ true);
             },
 

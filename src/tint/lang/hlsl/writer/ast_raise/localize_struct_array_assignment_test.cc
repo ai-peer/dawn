@@ -699,6 +699,67 @@ fn main() {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(LocalizeStructArrayAssignmentTest, ViaPointerArg_PointerDot) {
+    auto* src = R"(
+struct Uniforms {
+  i : u32,
+};
+struct InnerS {
+  v : i32,
+};
+struct OuterS {
+  a1 : array<InnerS, 8>,
+};
+@group(1) @binding(4) var<uniform> uniforms : Uniforms;
+
+fn f(p : ptr<function, OuterS>) {
+  var v : InnerS;
+  p.a1[uniforms.i] = v;
+}
+
+@compute @workgroup_size(1)
+fn main() {
+  var s1 : OuterS;
+  f(&s1);
+}
+)";
+
+    auto* expect = R"(
+struct Uniforms {
+  i : u32,
+}
+
+struct InnerS {
+  v : i32,
+}
+
+struct OuterS {
+  a1 : array<InnerS, 8>,
+}
+
+@group(1) @binding(4) var<uniform> uniforms : Uniforms;
+
+fn f(p : ptr<function, OuterS>) {
+  var v : InnerS;
+  {
+    let tint_symbol = &((*(p)).a1);
+    var tint_symbol_1 = *(tint_symbol);
+    tint_symbol_1[uniforms.i] = v;
+    *(tint_symbol) = tint_symbol_1;
+  }
+}
+
+@compute @workgroup_size(1)
+fn main() {
+  var s1 : OuterS;
+  f(&(s1));
+}
+)";
+
+    auto got = Run<Unshadow, SimplifyPointers, LocalizeStructArrayAssignment>(src);
+    EXPECT_EQ(expect, str(got));
+}
+
 TEST_F(LocalizeStructArrayAssignmentTest, ViaPointerArg_OutOfOrder) {
     auto* src = R"(
 @compute @workgroup_size(1)
