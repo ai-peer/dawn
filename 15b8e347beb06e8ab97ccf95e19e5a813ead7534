@@ -117,6 +117,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "32805b1e_f592695b",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-05T21:36:33Z",
+      "side": 1,
+      "message": "this would be similar to STypeForImpl I believe",
+      "parentUuid": "5720b128_5c5b0ec7",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ea1f64bd_1685d2cd",
         "filename": "generator/templates/dawn/native/ChainUtils.h",
         "patchSetId": 11
@@ -128,6 +146,23 @@
       "writtenOn": "2023-12-05T09:35:29Z",
       "side": 1,
       "message": "I believe the handling of the comma could be simplified with:\n\n```\nusing Type \u003d UnpackedChain\u003c\n    AdditionalExtensions\u003c{{T}}\u003e::List\n    {% for extension in type.extensions %}\n         , const {{as_cppType(extension.name)}}*\n    {% endfor %}\n\u003e::Type;\n```",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "219425cc_7d37542d",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-05T21:36:33Z",
+      "side": 1,
+      "message": "do we really need different function names for Unpack vs UnpackOut ? it seems like we could infer which one it is supposed to be based on const-ness of T* ?\n\nalso this could mean we don\u0027t actually need the ExtensibilityFor template - since it would be implicit based on whether you pass a const or non-const pointer to Unpack",
       "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
