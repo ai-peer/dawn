@@ -175,6 +175,24 @@
       "parentUuid": "d75fcaac_e3d80c05",
       "revId": "886962869c3625061ca11389de242b2845fea36d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "44680d46_78b6378a",
+        "filename": "test/tint/array/assign_to_function_var.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-05T22:25:03Z",
+      "side": 1,
+      "message": "Sorry I was so confused. The goal is to name these two block differently. This can be forced in dawn to append a \"v_\"/\"f_\" suffix",
+      "parentUuid": "c856c7b4_5207b1e5",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
