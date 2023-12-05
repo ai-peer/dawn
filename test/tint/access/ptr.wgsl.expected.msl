@@ -1,0 +1,65 @@
+#include <metal_stdlib>
+
+using namespace metal;
+int tint_ftoi(float v) {
+  return select(2147483647, select(int(v), (-2147483647 - 1), (v < -2147483648.0f)), (v < 2147483520.0f));
+}
+
+int d(int val) {
+  return val;
+}
+
+int c(thread int* const val) {
+  int const tint_symbol_1 = *(val);
+  int const tint_symbol_2 = d(*(val));
+  return as_type<int>((as_type<uint>(tint_symbol_1) + as_type<uint>(tint_symbol_2)));
+}
+
+int a(thread int* const val) {
+  int const tint_symbol_3 = *(val);
+  int const tint_symbol_4 = c(val);
+  return as_type<int>((as_type<uint>(tint_symbol_3) + as_type<uint>(tint_symbol_4)));
+}
+
+int z(threadgroup atomic_int* const tint_symbol_11) {
+  return atomic_load_explicit(tint_symbol_11, memory_order_relaxed);
+}
+
+int y(thread float3* const v1) {
+  (*(v1))[0] = cross(*(v1), *(v1))[0];
+  return tint_ftoi((*(v1))[0]);
+}
+
+struct S {
+  int a;
+  int b;
+};
+
+int b(thread S* const val) {
+  return as_type<int>((as_type<uint>((*(val)).a) + as_type<uint>((*(val)).b)));
+}
+
+void tint_symbol_inner(uint local_invocation_index, threadgroup atomic_int* const tint_symbol_12, device int* const tint_symbol_13) {
+  {
+    atomic_store_explicit(tint_symbol_12, 0, memory_order_relaxed);
+  }
+  threadgroup_barrier(mem_flags::mem_threadgroup);
+  int v1 = 0;
+  S v2 = S{};
+  float3 v4 = float3(0.0f);
+  int const t1 = atomic_load_explicit(tint_symbol_12, memory_order_relaxed);
+  int const tint_symbol_5 = a(&(v1));
+  int const tint_symbol_6 = b(&(v2));
+  int const tint_symbol_7 = b(&(v2));
+  int const tint_symbol_8 = z(tint_symbol_12);
+  int const tint_symbol_9 = t1;
+  int const tint_symbol_10 = y(&(v4));
+  *(tint_symbol_13) = as_type<int>((as_type<uint>(as_type<int>((as_type<uint>(as_type<int>((as_type<uint>(as_type<int>((as_type<uint>(as_type<int>((as_type<uint>(tint_symbol_5) + as_type<uint>(tint_symbol_6)))) + as_type<uint>(tint_symbol_7)))) + as_type<uint>(tint_symbol_8)))) + as_type<uint>(tint_symbol_9)))) + as_type<uint>(tint_symbol_10)));
+}
+
+kernel void tint_symbol(device int* tint_symbol_15 [[buffer(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  threadgroup atomic_int tint_symbol_14;
+  tint_symbol_inner(local_invocation_index, &(tint_symbol_14), tint_symbol_15);
+  return;
+}
+
