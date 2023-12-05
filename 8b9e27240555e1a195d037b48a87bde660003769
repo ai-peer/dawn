@@ -197,6 +197,30 @@
       },
       "revId": "8b9e27240555e1a195d037b48a87bde660003769",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89629473_cc3ad87d",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-05T01:33:20Z",
+      "side": 1,
+      "message": "Which conditionals are you talking about? This validation is just a loop over the set of enums passed in the allow list. It\u0027d actually be more effort to start unconditionally allowing some features.",
+      "parentUuid": "0b09444e_ccec67fd",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 0
+      },
+      "revId": "8b9e27240555e1a195d037b48a87bde660003769",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
