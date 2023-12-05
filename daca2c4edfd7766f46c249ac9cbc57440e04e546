@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b115068_ec9d27e1",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-05T02:54:06Z",
+      "side": 1,
+      "message": "Yep! The goal is to unify them all into the Unpacked\u003c\u003e and friends with some of the follow up CLs that replace older usages and ultimately remove the other helpers entirely.",
+      "parentUuid": "e83b8aa2_c9953999",
+      "revId": "daca2c4edfd7766f46c249ac9cbc57440e04e546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00ab33d4_b0412082",
@@ -35,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e0d4179e_48200c87",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 347,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-05T02:54:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "00ab33d4_b0412082",
+      "revId": "daca2c4edfd7766f46c249ac9cbc57440e04e546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "29352d43_41875d20",
@@ -48,6 +84,24 @@
       "writtenOn": "2023-12-04T17:32:13Z",
       "side": 1,
       "message": "Could this potentially be on Unpacked\u003c\u003e directly, so it would go:\n\nDAWN_TRY(unpacked.ValidateIsSubset\u003cFoo, Bar\u003e());",
+      "revId": "daca2c4edfd7766f46c249ac9cbc57440e04e546",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "467fe20f_74bfd612",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 9
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-05T02:54:06Z",
+      "side": 1,
+      "message": "Done, also moved `ValidateBranches` into the class.",
+      "parentUuid": "29352d43_41875d20",
       "revId": "daca2c4edfd7766f46c249ac9cbc57440e04e546",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
