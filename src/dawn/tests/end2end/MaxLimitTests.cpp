@@ -270,6 +270,8 @@ TEST_P(MaxLimitTests, MaxDynamicBuffers) {
     // TODO(https://anglebug.com/8177) Causes assertion failure in ANGLE.
     DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
 
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
     wgpu::Limits limits = GetSupportedLimits().limits;
 
     std::vector<wgpu::BindGroupLayoutEntry> bglEntries;
@@ -422,6 +424,8 @@ TEST_P(MaxLimitTests, MaxDynamicBuffers) {
 TEST_P(MaxLimitTests, MaxStorageBuffersPerShaderStage) {
     // TODO(dawn:2162): Triage this failure.
     DAWN_SUPPRESS_TEST_IF(IsANGLE() && IsWindows());
+
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
 
     wgpu::Limits limits = GetSupportedLimits().limits;
 
