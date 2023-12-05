@@ -878,7 +878,7 @@ bool Builder::GenerateIndexAccessor(const ast::IndexAccessorExpression* expr, Ac
     // If the source is a reference, we access chain into it.
     // In the future, pointers may support access-chaining.
     // See https://github.com/gpuweb/gpuweb/pull/1580
-    if (info->source_type->Is<core::type::Reference>()) {
+    if (info->source_type->Is<core::type::MemoryView>()) {
         info->access_chain_indices.push_back(idx_id);
         info->source_type = builder_.Sem().Get(expr)->UnwrapLoad()->Type();
         return true;

@@ -138,6 +138,84 @@ OpReturn
     Validate(b);
 }
 
+TEST_F(SpirvASTPrinterTest, Runtime_IndexAccessor_Vector_ViaDerefPointerIndex) {
+    // var ary : vec3<u32>;
+    // let p = &ary;
+    // var x = (*p)[1i];
+
+    auto* ary = Var("ary", ty.vec3<u32>());
+    auto* p = Let("p", AddressOf("ary"));
+    auto* x = Var("x", IndexAccessor(Deref(p), 1_i));
+    WrapInFunction(ary, p, x);
+
+    Builder& b = SanitizeAndBuild();
+
+    ASSERT_TRUE(b.Build()) << b.Diagnostics();
+
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeVoid
+%1 = OpTypeFunction %2
+%8 = OpTypeInt 32 0
+%7 = OpTypeVector %8 3
+%6 = OpTypePointer Function %7
+%9 = OpConstantNull %7
+%10 = OpTypeInt 32 1
+%11 = OpConstant %10 1
+%12 = OpTypePointer Function %8
+%16 = OpConstantNull %8
+)");
+    EXPECT_EQ(DumpInstructions(b.Module().Functions()[0].variables()),
+        R"(%5 = OpVariable %6 Function %9
+%15 = OpVariable %12 Function %16
+)");
+    EXPECT_EQ(DumpInstructions(b.Module().Functions()[0].instructions()),
+        R"(%13 = OpAccessChain %12 %5 %11
+%14 = OpLoad %8 %13
+OpStore %15 %14
+OpReturn
+)");
+
+    Validate(b);
+}
+
+TEST_F(SpirvASTPrinterTest, Runtime_IndexAccessor_Vector_ViaPointerIndex) {
+    // var ary : vec3<u32>;
+    // let p = &ary;
+    // var x = p[1i];
+
+    auto* ary = Var("ary", ty.vec3<u32>());
+    auto* p = Let("p", AddressOf("ary"));
+    auto* x = Var("x", IndexAccessor(p, 1_i));
+    WrapInFunction(ary, p, x);
+
+    Builder& b = SanitizeAndBuild();
+
+    ASSERT_TRUE(b.Build()) << b.Diagnostics();
+
+    EXPECT_EQ(DumpInstructions(b.Module().Types()), R"(%2 = OpTypeVoid
+%1 = OpTypeFunction %2
+%8 = OpTypeInt 32 0
+%7 = OpTypeVector %8 3
+%6 = OpTypePointer Function %7
+%9 = OpConstantNull %7
+%10 = OpTypeInt 32 1
+%11 = OpConstant %10 1
+%12 = OpTypePointer Function %8
+%16 = OpConstantNull %8
+)");
+    EXPECT_EQ(DumpInstructions(b.Module().Functions()[0].variables()),
+        R"(%5 = OpVariable %6 Function %9
+%15 = OpVariable %12 Function %16
+)");
+    EXPECT_EQ(DumpInstructions(b.Module().Functions()[0].instructions()),
+        R"(%13 = OpAccessChain %12 %5 %11
+%14 = OpLoad %8 %13
+OpStore %15 %14
+OpReturn
+)");
+
+    Validate(b);
+}
+
 TEST_F(SpirvASTPrinterTest, Dynamic_IndexAccessor_Vector) {
     // var ary : vec3<f32>;
     // var idx : i32;
