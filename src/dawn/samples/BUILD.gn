@@ -93,3 +93,15 @@ sample("ManualSwapChainTest") {
 sample("DawnInfo") {
   sources = [ "DawnInfo.cpp" ]
 }
+
+executable("WaitAny") {
+  sources = [ "WaitAny.cpp" ]
+  deps = [
+    "${dawn_root}/src/dawn:cpp",
+    "${dawn_root}/src/dawn:proc_shared",
+    "${dawn_root}/src/dawn/common",
+    "${dawn_root}/src/dawn/native",
+    "${dawn_root}/src/dawn/utils",
+  ]
+  public_configs = [ "${dawn_root}/src/dawn/common:internal_config" ]
+}
