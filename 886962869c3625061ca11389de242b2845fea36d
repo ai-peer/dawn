@@ -121,6 +121,24 @@
       "parentUuid": "208d1968_2b52f65c",
       "revId": "886962869c3625061ca11389de242b2845fea36d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ec266244_1c4fdffd",
+        "filename": "test/tint/array/assign_to_function_var.wgsl.expected.glsl",
+        "patchSetId": 2
+      },
+      "lineNbr": 17,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-05T14:50:40Z",
+      "side": 1,
+      "message": "```\nstruct X { x : vec4f }\nstruct Y { y : vec4i }\n\n@group(0) @binding(0) var\u003cuniform\u003e ð : X;\n@group(0) @binding(0) var\u003cuniform\u003e ñ : Y;\n\n@vertex fn V() -\u003e @builtin(position) vec4f {\n  _ \u003d ð;\n  return vec4f();\n}\n\n@fragment fn F() {\n  _ \u003d ñ;\n}\n```\n\n`ð` and `ñ` are unicode, which get renamed to `tint_symbol` (with a suffix if that\u0027s already taken).\nGiven that the [`Renamer` transform](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/glsl/writer/ast_printer/ast_printer.cc#154) comes after the [`SingleEntryPoint` transform](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/glsl/writer/ast_printer/ast_printer.cc#150), I\u0027d expect this to produce the two shaders:\n\n```\n#version 310 es\n\nlayout(binding \u003d 0, std140) uniform tint_symbol_block_0_0_ubo {\n  vec4 inner;\n} tint_symbol;\n\nvec4 V() {\n  return vec4(0.0f);\n}\n\nvoid main() {\n  gl_PointSize \u003d 1.0;\n  vec4 inner_result \u003d V();\n  gl_Position \u003d inner_result;\n  gl_Position.y \u003d -(gl_Position.y);\n  gl_Position.z \u003d ((2.0f * gl_Position.z) - gl_Position.w);\n  return;\n}\n```\n\nand \n\n```\n#version 310 es\nprecision highp float;\n\nlayout(binding \u003d 0, std140) uniform tint_symbol_block_0_0_ubo {\n  ivec4 inner;\n} tint_symbol;\n\nvoid F() {\n}\n\nvoid main() {\n  F();\n  return;\n}\n```\n\nWhich I believe violatess the `Failure case is two block with same name having different inner content` rule.\n\nHowever, using the `tint` command line, I saw that it had renamed the second block to `tint_symbol_1_block_0_0_ubo`. This is unfortunately [a different bug we need to fix](https://bugs.chromium.org/p/tint/issues/detail?id\u003d2112).\n\nI think this issue is real.\n\nWith all that said - `two block with same name having different inner content` seems like it\u0027s easily done by simply using a vertex and fragment shader compiled from two separate WGSL shaders, where both shaders use a different type for the same binding location + name? In which case, it seems like Dawn needs to provide a unique name for these.",
+      "parentUuid": "748670d4_e97213d9",
+      "revId": "886962869c3625061ca11389de242b2845fea36d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
