@@ -103,6 +103,11 @@ struct ExpandCompoundAssignment::State {
         // Helper function that returns `true` if the type of `expr` is a vector.
         auto is_vec = [&](const Expression* expr) {
             if (auto* val_expr = ctx.src->Sem().GetVal(expr)) {
+                if (TINT_UNLIKELY(val_expr->Type()->Is<core::type::Pointer>())) {
+                    TINT_ICE() << "vector expression should not be a pointer. Pointers should be "
+                                  "handled as regular identifiers";
+                    return false;
+                }
                 return val_expr->Type()->UnwrapRef()->Is<core::type::Vector>();
             }
             return false;
@@ -116,9 +121,11 @@ struct ExpandCompoundAssignment::State {
         auto* member_accessor = lhs->As<MemberAccessorExpression>();
         if (lhs->Is<IdentifierExpression>() ||
             (member_accessor && member_accessor->object->Is<IdentifierExpression>())) {
-            // This is the simple case with no side effects, so we can just use the
-            // original LHS expression directly.
-            // Before:
+            // TODO(crbug.com/tint/2115): This branch should also handle (recursive) deref'd
+            // identifiers (e.g. (*p).bar += rhs)).
+
+            // This is the simple case with no side effects, so we can just use
+            // the original LHS expression directly. Before:
             //     foo.bar += rhs;
             // After:
             //     foo.bar = foo.bar + rhs;

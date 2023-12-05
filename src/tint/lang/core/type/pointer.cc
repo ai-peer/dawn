@@ -38,20 +38,15 @@ TINT_INSTANTIATE_TYPEINFO(tint::core::type::Pointer);
 
 namespace tint::core::type {
 
-Pointer::Pointer(core::AddressSpace address_space, const Type* subtype, core::Access access)
-    : Base(Hash(tint::TypeInfo::Of<Pointer>().full_hashcode, address_space, subtype, access),
-           core::type::Flags{}),
-      subtype_(subtype),
-      address_space_(address_space),
-      access_(access) {
-    TINT_ASSERT(!subtype->Is<Reference>());
-    TINT_ASSERT(access != core::Access::kUndefined);
+Pointer::Pointer(core::AddressSpace address_space, const Type* store_type, core::Access access)
+    : Base(Hash(tint::TypeInfo::Of<Pointer>().full_hashcode), address_space, store_type, access) {
+    TINT_ASSERT(!store_type->Is<Reference>());
 }
 
 bool Pointer::Equals(const UniqueNode& other) const {
     if (auto* o = other.As<Pointer>()) {
-        return o->address_space_ == address_space_ && o->subtype_ == subtype_ &&
-               o->access_ == access_;
+        return o->AddressSpace() == AddressSpace() && o->StoreType() == StoreType() &&
+               o->Access() == Access();
     }
     return false;
 }
@@ -59,10 +54,10 @@ bool Pointer::Equals(const UniqueNode& other) const {
 std::string Pointer::FriendlyName() const {
     StringStream out;
     out << "ptr<";
-    if (address_space_ != core::AddressSpace::kUndefined) {
-        out << address_space_ << ", ";
+    if (AddressSpace() != core::AddressSpace::kUndefined) {
+        out << AddressSpace() << ", ";
     }
-    out << subtype_->FriendlyName() << ", " << access_;
+    out << StoreType()->FriendlyName() << ", " << Access();
     out << ">";
     return out.str();
 }
@@ -70,8 +65,8 @@ std::string Pointer::FriendlyName() const {
 Pointer::~Pointer() = default;
 
 Pointer* Pointer::Clone(CloneContext& ctx) const {
-    auto* ty = subtype_->Clone(ctx);
-    return ctx.dst.mgr->Get<Pointer>(address_space_, ty, access_);
+    auto* ty = StoreType()->Clone(ctx);
+    return ctx.dst.mgr->Get<Pointer>(AddressSpace(), ty, Access());
 }
 
 }  // namespace tint::core::type
