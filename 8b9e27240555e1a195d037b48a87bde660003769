@@ -221,6 +221,30 @@
       },
       "revId": "8b9e27240555e1a195d037b48a87bde660003769",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "10d77c13_86b8befa",
+        "filename": "src/tint/lang/wgsl/resolver/builtin_validation_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-05T13:47:29Z",
+      "side": 1,
+      "message": "\u003e This validation is just a loop over the set of enums passed in the allow list. \n\nI\u0027m referring to the accumulation of feature validation logic over time ([1](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/wgsl/resolver/validator.cc#369), [2](https://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/wgsl/sem/builtin_fn.cc#118)), which will spread across the codebase.\nI didn\u0027t want to end up in a world where the compiler needs to support all the 2ⁿ modes of operation for language features that we\u0027re never going to be able to remove once they ship. While the couple of features we currently have are independent of one another, I fear complexity might skyrocket the moment one feature is dependent on another. \n\nThe model I thought we had agreed to was:\n* At a minimum, a compiler would maintain a static list of features it implements, and any `requires` directive that has a feature outside of that list was an error.\n* We **weren\u0027t** going to have a list of \"feature-enables\" that we\u0027d need to check for. I understand that this is useful for roll-out of an experimental feature, but this certainly wasn\u0027t something I thought we\u0027d keep for each and every feature.\n\n\u003e It\u0027d actually be more effort to start unconditionally allowing some features.\n\nHow so?",
+      "parentUuid": "89629473_cc3ad87d",
+      "range": {
+        "startLine": 563,
+        "startChar": 0,
+        "endLine": 578,
+        "endChar": 0
+      },
+      "revId": "8b9e27240555e1a195d037b48a87bde660003769",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
