@@ -1,0 +1,169 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246ff025_ff3ea0a7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "nit: utilities",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "67a635df_67a27eb6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "995ebf36_857364f5",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "nit: duplicated.",
+      "range": {
+        "startLine": 133,
+        "startChar": 38,
+        "endLine": 133,
+        "endChar": 48
+      },
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5849e6db_ade2632a",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "nit: I think traditionally when iterating over linked lists, next is declared in the for loop initializer. Ditto below.",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "002fb377_28942fba",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "Maybe in a follow-up but it seems that this could instead be a template type alias. Ditto for AdditionalExtensionsList.",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5720b128_5c5b0ec7",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "Isn\u0027t there a way to make templated variables in C++14 and above? So we don\u0027t need to introduce a struct every time?",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea1f64bd_1685d2cd",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "I believe the handling of the comma could be simplified with:\n\n```\nusing Type \u003d UnpackedChain\u003c\n    AdditionalExtensions\u003c{{T}}\u003e::List\n    {% for extension in type.extensions %}\n         , const {{as_cppType(extension.name)}}*\n    {% endfor %}\n\u003e::Type;\n```",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc8ed919_33554a65",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "Is the only difference between Unpacked and UnpackedOut the constness of the pointer? It seems like we have a lot of duplication just to support that, there could be `UnpackedBase\u003cTPtr, T\u003e` with `Unpacked\u003cT\u003e` being an alias for `UnpackedBase\u003cconst T*, T\u003e` and `UnpackedOut\u003cT\u003e` being an alias for `UnpackedBase\u003cT*, T\u003e`.\n\nBecause of this I only reviewed the Unpacked part of this CL and not the UnpackedOut.",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cca13008_cbb7a1eb",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-05T09:35:29Z",
+      "side": 1,
+      "message": "Can\u0027t we just return mBitset.empty()? We don\u0027t assert consistency, but that seems fine?",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
