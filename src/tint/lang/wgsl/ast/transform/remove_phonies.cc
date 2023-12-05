@@ -72,7 +72,7 @@ Transform::ApplyResult RemovePhonies::Apply(const Program& src, const DataMap&, 
                 if (stmt->lhs->Is<PhonyExpression>()) {
                     made_changes = true;
 
-                    std::vector<const Expression*> side_effects;
+                    std::vector<const CallExpression*> side_effects;
                     if (!TraverseExpressions(stmt->rhs, [&](const CallExpression* expr) {
                             // CallExpression may map to a function or builtin call
                             // (both may have side-effects), or a value constructor or value
@@ -102,24 +102,23 @@ Transform::ApplyResult RemovePhonies::Apply(const Program& src, const DataMap&, 
                     }
 
                     if (side_effects.size() == 1) {
-                        if (auto* call_expr = side_effects[0]->As<CallExpression>()) {
-                            // Phony assignment with single call side effect.
-                            auto* call = sem.Get(call_expr)->Unwrap()->As<sem::Call>();
-                            if (call->Target()->MustUse()) {
-                                // Replace phony assignment assignment to uniquely named let.
-                                ctx.Replace<Statement>(stmt, [&, call_expr] {  //
-                                    auto name = b.Symbols().New("tint_phony");
-                                    auto* rhs = ctx.Clone(call_expr);
-                                    return b.Decl(b.Let(name, rhs));
-                                });
-                            } else {
-                                // Replace phony assignment with call statement.
-                                ctx.Replace(stmt, [&, call_expr] {  //
-                                    return b.CallStmt(ctx.Clone(call_expr));
-                                });
-                            }
-                            return;
+                        auto* call_expr = side_effects[0];
+                        // Phony assignment with single call side effect.
+                        auto* call = sem.Get(call_expr)->Unwrap()->As<sem::Call>();
+                        if (call->Target()->MustUse()) {
+                            // Replace phony assignment assignment to uniquely named let.
+                            ctx.Replace<Statement>(stmt, [&, call_expr] {  //
+                                auto name = b.Symbols().New("tint_phony");
+                                auto* rhs = ctx.Clone(call_expr);
+                                return b.Decl(b.Let(name, rhs));
+                            });
+                        } else {
+                            // Replace phony assignment with call statement.
+                            ctx.Replace(stmt, [&, call_expr] {  //
+                                return b.CallStmt(ctx.Clone(call_expr));
+                            });
                         }
+                        return;
                     }
 
                     // Phony assignment with multiple side effects.
@@ -128,7 +127,7 @@ Transform::ApplyResult RemovePhonies::Apply(const Program& src, const DataMap&, 
                     ctx.Replace(stmt, [&, side_effects] {
                         SinkSignature sig;
                         for (auto* arg : side_effects) {
-                            sig.push_back(sem.GetVal(arg)->Type()->UnwrapRef());
+                            sig.push_back(sem.Get(arg)->Type()->UnwrapRef());
                         }
                         auto sink = sinks.GetOrCreate(sig, [&] {
                             auto name = b.Symbols().New("phony_sink");
