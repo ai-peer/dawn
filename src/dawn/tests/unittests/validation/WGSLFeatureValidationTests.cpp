@@ -97,8 +97,11 @@ class WGSLFeatureValidationTest : public ValidationTest {
 
         // Get the device
         wgpu::Device device;
+        wgpu::DeviceDescriptor deviceDesc = {};
+        deviceDesc.uncapturedErrorCallback = ValidationTest::OnDeviceError;
+        deviceDesc.uncapturedErrorUserdata = this;
         adapter.RequestDevice(
-            nullptr,
+            &deviceDesc,
             [](WGPURequestDeviceStatus status, WGPUDevice d, const char* message, void* userdata) {
                 ASSERT_EQ(status, WGPURequestDeviceStatus_Success);
                 ASSERT_NE(d, nullptr);
@@ -110,8 +113,6 @@ class WGSLFeatureValidationTest : public ValidationTest {
             FlushWire();
         }
         EXPECT_NE(nullptr, device.Get());
-
-        device.SetUncapturedErrorCallback(ValidationTest::OnDeviceError, this);
         return device;
     }
 };

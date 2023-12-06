@@ -1074,7 +1074,12 @@ WGPUDevice DawnTestBase::CreateDeviceImpl(std::string isolationKey,
     deviceDescriptor.requiredLimits = &requiredLimits;
     deviceDescriptor.requiredFeatures = requiredFeatures.data();
     deviceDescriptor.requiredFeatureCount = requiredFeatures.size();
-
+    if (UsesWire()) {
+        // Clear out callbacks. Otherwise they will be called twice.
+        // Both on the client and the server.
+        deviceDescriptor.uncapturedErrorCallback = [](WGPUErrorType, const char*, void*) {};
+        deviceDescriptor.deviceLostCallback = [](WGPUDeviceLostReason, const char*, void*) {};
+    }
     wgpu::DawnCacheDeviceDescriptor cacheDesc = {};
     deviceDescriptor.nextInChain = &cacheDesc;
     cacheDesc.isolationKey = isolationKey.c_str();
@@ -1094,15 +1099,44 @@ wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
     // to CreateDeviceImpl.
     mNextIsolationKeyQueue.push(std::move(isolationKey));
 
-    // RequestDevice is overriden by CreateDeviceImpl and device descriptor is ignored by it.
-    // Give an empty descriptor.
-    // TODO(dawn:1684): Replace empty DeviceDescriptor with nullptr after Dawn wire support it.
+    // Note: descriptor passed to RequestDevice is modified by CreateDeviceImpl.
     wgpu::DeviceDescriptor deviceDesc = {};
 
-    // Set up the mocks for device loss.
+    // Set up the callbacks for errors and device loss.
     void* deviceUserdata = GetUniqueUserdata();
-    deviceDesc.deviceLostCallback = mDeviceLostCallback.Callback();
-    deviceDesc.deviceLostUserdata = mDeviceLostCallback.MakeUserdata(deviceUserdata);
+
+    struct UserdataWrapper {
+        WGPUDeviceLostCallback lostCallback;
+        void* lostCallbackUserdata;
+        WGPUErrorCallback uncapturedErrorCallback;
+        void* uncapturedErrorCallbackUserdata;
+    };
+
+    UserdataWrapper* wrapper = new UserdataWrapper{
+        mDeviceLostCallback.Callback(),
+        mDeviceLostCallback.MakeUserdata(deviceUserdata),
+        mDeviceErrorCallback.Callback(),
+        // This userdata is populated later, immediately after we have the device.
+        // It allows tests to conveniently use the device they are expecting errors on as the
+        // userdata.
+        nullptr,
+    };
+
+    deviceDesc.deviceLostCallback = [](WGPUDeviceLostReason reason, const char* message,
+                                       void* userdata) {
+        auto* wrapper = static_cast<UserdataWrapper*>(userdata);
+        wrapper->lostCallback(reason, message, wrapper->lostCallbackUserdata);
+        // Free the wrapper. No device callbacks should be called after the lost callback.
+        delete wrapper;
+    };
+    deviceDesc.deviceLostUserdata = wrapper;
+
+    deviceDesc.uncapturedErrorCallback = [](WGPUErrorType type, const char* message,
+                                            void* userdata) {
+        auto* wrapper = static_cast<UserdataWrapper*>(userdata);
+        wrapper->uncapturedErrorCallback(type, message, wrapper->uncapturedErrorCallbackUserdata);
+    };
+    deviceDesc.uncapturedErrorUserdata = wrapper;
 
     adapter.RequestDevice(
         &deviceDesc,
@@ -1113,9 +1147,9 @@ wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
     FlushWire();
     DAWN_ASSERT(apiDevice);
 
-    // Set up the mocks for uncaptured errors.
-    apiDevice.SetUncapturedErrorCallback(mDeviceErrorCallback.Callback(),
-                                         mDeviceErrorCallback.MakeUserdata(apiDevice.Get()));
+    // Error expectations use the device as the userdata so we can expect errors per device.
+    // Save the pointer here so we can forward it to the mock callback.
+    wrapper->uncapturedErrorCallbackUserdata = mDeviceErrorCallback.MakeUserdata(apiDevice.Get());
 
     // The loss of the device is expected to happen at the end of the test so at it directly.
     EXPECT_CALL(mDeviceLostCallback,

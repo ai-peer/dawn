@@ -48,11 +48,6 @@ Server::Server(const DawnProcTable& procs,
 }
 
 Server::~Server() {
-    // Un-set the error and lost callbacks since we cannot forward them
-    // after the server has been destroyed.
-    for (WGPUDevice device : DeviceObjects().GetAllHandles()) {
-        ClearDeviceCallbacks(device);
-    }
     DestroyAllObjects(mProcs);
 }
 
@@ -108,26 +103,6 @@ WireResult Server::InjectSwapChain(WGPUSwapChain swapchain,
     return WireResult::Success;
 }
 
-WireResult Server::InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation) {
-    DAWN_ASSERT(device != nullptr);
-    Known<WGPUDevice> data;
-    WIRE_TRY(DeviceObjects().Allocate(&data, ObjectHandle{id, generation}));
-
-    data->handle = device;
-    data->generation = generation;
-    data->state = AllocationState::Allocated;
-    data->info->server = this;
-    data->info->self = data.AsHandle();
-
-    // The device is externally owned so it shouldn't be destroyed when we receive a destroy
-    // message from the client. Add a reference to counterbalance the eventual release.
-    mProcs.deviceReference(device);
-
-    // Set callbacks to forward errors to the client.
-    SetForwardingDeviceCallbacks(data);
-    return WireResult::Success;
-}
-
 WireResult Server::InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generation) {
     DAWN_ASSERT(instance != nullptr);
     Known<WGPUInstance> data;
@@ -155,47 +130,6 @@ WGPUDevice Server::GetDevice(uint32_t id, uint32_t generation) {
 
 bool Server::IsDeviceKnown(WGPUDevice device) const {
     return DeviceObjects().IsKnown(device);
-}
-
-void Server::SetForwardingDeviceCallbacks(Known<WGPUDevice> device) {
-    // Note: these callbacks are manually inlined here since they do not acquire and
-    // free their userdata. Also unlike other callbacks, these are cleared and unset when
-    // the server is destroyed, so we don't need to check if the server is still alive
-    // inside them.
-    // Also, the device is special-cased in Server::DoDestroyObject to call
-    // ClearDeviceCallbacks. This ensures that callbacks will not fire after |deviceObject|
-    // is freed.
-    mProcs.deviceSetUncapturedErrorCallback(
-        device->handle,
-        [](WGPUErrorType type, const char* message, void* userdata) {
-            DeviceInfo* info = static_cast<DeviceInfo*>(userdata);
-            info->server->OnUncapturedError(info->self, type, message);
-        },
-        device->info.get());
-    // Set callback to post warning and other infomation to client.
-    // Almost the same with UncapturedError.
-    mProcs.deviceSetLoggingCallback(
-        device->handle,
-        [](WGPULoggingType type, const char* message, void* userdata) {
-            DeviceInfo* info = static_cast<DeviceInfo*>(userdata);
-            info->server->OnLogging(info->self, type, message);
-        },
-        device->info.get());
-    mProcs.deviceSetDeviceLostCallback(
-        device->handle,
-        [](WGPUDeviceLostReason reason, const char* message, void* userdata) {
-            DeviceInfo* info = static_cast<DeviceInfo*>(userdata);
-            info->server->OnDeviceLost(info->self, reason, message);
-        },
-        device->info.get());
-}
-
-void Server::ClearDeviceCallbacks(WGPUDevice device) {
-    // Un-set the error and lost callbacks since we cannot forward them
-    // after the server has been destroyed.
-    mProcs.deviceSetUncapturedErrorCallback(device, nullptr, nullptr);
-    mProcs.deviceSetLoggingCallback(device, nullptr, nullptr);
-    mProcs.deviceSetDeviceLostCallback(device, nullptr, nullptr);
 }
 
 }  // namespace dawn::wire::server

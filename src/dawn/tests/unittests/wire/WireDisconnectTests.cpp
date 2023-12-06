@@ -174,15 +174,8 @@ TEST_F(WireDisconnectTests, DeleteClientDestroysObjects) {
     // should be deleted first because it may free its reference to the default queue
     // on deletion.
     Sequence s1, s2, s3;
-    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
-        .Times(1)
-        .InSequence(s1, s2);
-    EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr))
-        .Times(1)
-        .InSequence(s1, s2);
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
-        .Times(1)
-        .InSequence(s1, s2);
+    EXPECT_CALL(api, InstanceRelease(apiInstance)).Times(1);
+    EXPECT_CALL(api, AdapterRelease(apiAdapter)).Times(1);
     EXPECT_CALL(api, DeviceRelease(apiDevice)).Times(1).InSequence(s1, s2, s3);
     EXPECT_CALL(api, QueueRelease(apiQueue)).Times(1).InSequence(s1);
     EXPECT_CALL(api, CommandEncoderRelease(apiCommandEncoder)).Times(1).InSequence(s2);

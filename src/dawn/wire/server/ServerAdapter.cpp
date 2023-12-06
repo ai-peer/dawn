@@ -25,6 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include <memory>
 #include <vector>
 
 #include "dawn/wire/SupportedFeatures.h"
@@ -32,21 +33,70 @@
 
 namespace dawn::wire::server {
 
+struct DeviceUserdata : CallbackUserdata {
+    using CallbackUserdata::CallbackUserdata;
+
+    ObjectHandle device;
+    WGPUErrorCallback uncapturedErrorCallback;
+    void* uncapturedErrorUserdata;
+    WGPUDeviceLostCallback deviceLostCallback;
+    void* deviceLostUserdata;
+};
+
 WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
                                           uint64_t requestSerial,
                                           ObjectHandle deviceHandle,
-                                          const WGPUDeviceDescriptor* descriptor) {
+                                          const WGPUDeviceDescriptor* originalDescriptor) {
     Known<WGPUDevice> device;
     WIRE_TRY(DeviceObjects().Allocate(&device, deviceHandle, AllocationState::Reserved));
 
-    auto userdata = MakeUserdata<RequestDeviceUserdata>();
-    userdata->adapter = adapter.AsHandle();
-    userdata->requestSerial = requestSerial;
-    userdata->deviceObjectId = device.id;
+    // Save the original callback/userdata.
+    auto userdata = MakeUserdata<DeviceUserdata>();
+    userdata->device = device.AsHandle();
+    userdata->uncapturedErrorCallback = originalDescriptor->uncapturedErrorCallback;
+    userdata->uncapturedErrorUserdata = originalDescriptor->uncapturedErrorUserdata;
+    userdata->deviceLostCallback = originalDescriptor->deviceLostCallback;
+    userdata->deviceLostUserdata = originalDescriptor->deviceLostUserdata;
 
-    mProcs.adapterRequestDevice(adapter->handle, descriptor,
+    // Copy the descriptor and change callbacks so they both forward to the client, and call
+    // the original callback, if any.
+    WGPUDeviceDescriptor deviceDesc = *originalDescriptor;
+    deviceDesc.uncapturedErrorCallback = [](WGPUErrorType type, const char* message,
+                                            void* userdata) {
+        auto* data = static_cast<DeviceUserdata*>(userdata);
+        if (!data->serverIsAlive.expired()) {
+            data->server->OnUncapturedError(data->device, type, message);
+        }
+        if (data->uncapturedErrorCallback != nullptr) {
+            data->uncapturedErrorCallback(type, message, data->uncapturedErrorUserdata);
+        }
+    };
+    deviceDesc.uncapturedErrorUserdata = userdata.get();
+
+    deviceDesc.deviceLostCallback = [](WGPUDeviceLostReason reason, const char* message,
+                                       void* userdata) {
+        auto data = std::unique_ptr<DeviceUserdata>(static_cast<DeviceUserdata*>(userdata));
+        if (!data->serverIsAlive.expired()) {
+            data->server->OnDeviceLost(data->device, reason, message);
+        }
+        if (data->deviceLostCallback != nullptr) {
+            data->deviceLostCallback(reason, message, data->deviceLostUserdata);
+        }
+    };
+    deviceDesc.deviceLostUserdata = userdata.get();
+
+    auto requestDeviceUserdata = MakeUserdata<RequestDeviceUserdata>();
+    requestDeviceUserdata->adapter = adapter.AsHandle();
+    requestDeviceUserdata->requestSerial = requestSerial;
+    requestDeviceUserdata->deviceObjectId = device.id;
+    requestDeviceUserdata->deviceUserdata = userdata.get();
+
+    // Release the userdata. It will be freed when the lost callback runs.
+    userdata.release();
+
+    mProcs.adapterRequestDevice(adapter->handle, &deviceDesc,
                                 ForwardToServer<&Server::OnRequestDeviceCallback>,
-                                userdata.release());
+                                requestDeviceUserdata.release());
     return WireResult::Success;
 }
 
@@ -59,6 +109,24 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
     cmd.requestSerial = data->requestSerial;
     cmd.status = status;
     cmd.message = message;
+
+    if (device == nullptr) {
+        // No device. The lost callback will never be run. Free the userdata.
+        delete data->deviceUserdata;
+    } else {
+        // Set up forwarding of the logging callback.
+        // TODO(crbug.com/dawn/2279): Remove this after moving it to the device descriptor
+        // with the other device callbacks.
+        mProcs.deviceSetLoggingCallback(
+            device,
+            [](WGPULoggingType type, const char* message, void* userdata) {
+                auto* data = static_cast<DeviceUserdata*>(userdata);
+                if (!data->serverIsAlive.expired()) {
+                    data->server->OnLogging(data->device, type, message);
+                }
+            },
+            data->deviceUserdata);
+    }
 
     if (status != WGPURequestDeviceStatus_Success) {
         // Free the ObjectId which will make it unusable.
@@ -106,9 +174,6 @@ void Server::OnRequestDeviceCallback(RequestDeviceUserdata* data,
     // Assign the handle and allocated status if the device is created successfully.
     Known<WGPUDevice> reservation = DeviceObjects().FillReservation(data->deviceObjectId, device);
     DAWN_ASSERT(reservation.data != nullptr);
-    reservation->info->server = this;
-    reservation->info->self = reservation.AsHandle();
-    SetForwardingDeviceCallbacks(reservation);
 
     SerializeCommand(cmd);
 }

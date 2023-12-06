@@ -148,12 +148,15 @@ struct RequestAdapterUserdata : CallbackUserdata {
     ObjectId adapterObjectId;
 };
 
+struct DeviceUserdata;
+
 struct RequestDeviceUserdata : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
     ObjectHandle adapter;
     uint64_t requestSerial;
     ObjectId deviceObjectId;
+    DeviceUserdata* deviceUserdata;
 };
 
 class Server : public ServerBase {
@@ -177,8 +180,6 @@ class Server : public ServerBase {
                                uint32_t generation,
                                uint32_t deviceId,
                                uint32_t deviceGeneration);
-
-    WireResult InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation);
 
     WireResult InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generation);
 

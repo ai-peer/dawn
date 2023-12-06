@@ -145,8 +145,12 @@ class WireTest : public testing::Test {
     void DefaultApiDeviceWasReleased();
 
     testing::StrictMock<MockProcTable> api;
+    WGPUInstance apiInstance;
+    WGPUAdapter apiAdapter;
     WGPUDevice apiDevice;
     WGPUQueue apiQueue;
+    WGPUInstance instance;
+    WGPUAdapter adapter;
     WGPUDevice device;
     WGPUQueue queue;
 

@@ -116,14 +116,14 @@ void KHRONOS_APIENTRY OnGLDebugMessage(GLenum source,
 namespace dawn::native::opengl {
 
 // static
-ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
-                                          const DeviceDescriptor* descriptor,
-                                          const OpenGLFunctions& functions,
-                                          std::unique_ptr<Context> context,
-                                          const TogglesState& deviceToggles) {
+Ref<Device> Device::Create(AdapterBase* adapter,
+                           const DeviceDescriptor* descriptor,
+                           const OpenGLFunctions& functions,
+                           std::unique_ptr<Context> context,
+                           const TogglesState& deviceToggles) {
     Ref<Device> device =
         AcquireRef(new Device(adapter, descriptor, functions, std::move(context), deviceToggles));
-    DAWN_TRY(device->Initialize(descriptor));
+    DAWN_UNUSED(device->ConsumedError(device->Initialize(descriptor)));
     return device;
 }
 

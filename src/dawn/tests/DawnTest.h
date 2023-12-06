@@ -609,7 +609,7 @@ class DawnTestBase {
     AdapterTestParam mParam;
     std::unique_ptr<utils::WireHelper> mWireHelper;
 
-    // Helps generate unique userdata values passed to deviceLostUserdata.
+    // Helps generate unique userdata values passed as device callback userdata.
     std::atomic<uintptr_t> mNextUniqueUserdata = 0;
 
     // Isolation keys are not exposed to the wire client. Device creation in the tests from
