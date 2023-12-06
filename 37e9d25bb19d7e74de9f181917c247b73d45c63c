@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure on the `\u0027s` here. It\u0027s the InstructionResult, so `instruction result` seems like it makes sense even if it\u0027s trage to read? Maybe we should use a `-`? So, use `instruction-result` in the cases where it\u0027s a `Result()` from the instruction?",
       "revId": "37e9d25bb19d7e74de9f181917c247b73d45c63c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "634e0a4e_20cfcba1",
+        "filename": "src/tint/lang/core/ir/validator.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 493,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-06T17:27:28Z",
+      "side": 1,
+      "message": "Reworded. Removed redundant text to simplify things for my simple brain.",
+      "parentUuid": "aacd4791_4ae6e8d0",
+      "revId": "37e9d25bb19d7e74de9f181917c247b73d45c63c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
