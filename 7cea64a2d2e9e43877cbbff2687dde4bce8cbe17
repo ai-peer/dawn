@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02635204_410b1787",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-12-06T21:34:50Z",
+      "side": 1,
+      "message": "fyi: this CL needs https://github.com/gpuweb/cts/pull/3213 to roll",
+      "revId": "7cea64a2d2e9e43877cbbff2687dde4bce8cbe17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
