@@ -182,14 +182,14 @@ TEST_F(GlslSanitizerTest, PromoteArrayInitializerToConstVar) {
     auto* expect = R"(#version 310 es
 precision highp float;
 
-void tint_symbol() {
+void main() {
   int idx = 3;
-  int tint_symbol_1[4] = int[4](1, 2, 3, 4);
-  int pos = tint_symbol_1[idx];
+  int tint_symbol[4] = int[4](1, 2, 3, 4);
+  int pos = tint_symbol[idx];
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -230,14 +230,14 @@ struct S {
   int c;
 };
 
-void tint_symbol() {
+void main() {
   float runtime_value = 3.0f;
-  S tint_symbol_1 = S(1, vec3(2.0f, runtime_value, 4.0f), 4);
-  vec3 pos = tint_symbol_1.b;
+  S tint_symbol = S(1, vec3(2.0f, runtime_value, 4.0f), 4);
+  vec3 pos = tint_symbol.b;
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -270,13 +270,13 @@ TEST_F(GlslSanitizerTest, SimplifyPointersBasic) {
     auto* expect = R"(#version 310 es
 precision highp float;
 
-void tint_symbol() {
+void main() {
   int v = 0;
   int x = v;
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -315,13 +315,13 @@ TEST_F(GlslSanitizerTest, SimplifyPointersComplexChain) {
     auto* expect = R"(#version 310 es
 precision highp float;
 
-void tint_symbol() {
+void main() {
   mat4 a[4] = mat4[4](mat4(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), mat4(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), mat4(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f), mat4(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f));
   vec4 v = a[3][2];
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";

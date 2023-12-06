@@ -316,12 +316,12 @@ void assign_and_preserve_padding_data_b(mat2x3 value) {
   data.inner.b[1] = value[1u];
 }
 
-void tint_symbol() {
+void main() {
   assign_and_preserve_padding_data_b(mat2x3(vec3(0.0f), vec3(0.0f)));
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -364,12 +364,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   float x = data.inner.a[2][1];
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -409,12 +409,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   int x = data.inner.a[2];
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -457,15 +457,15 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   int a = 2;
   int b = 4;
   int c = 3;
   int x = data.inner.a[((a + b) - c)];
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -504,12 +504,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   data.inner.a[2] = 2;
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -563,12 +563,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   vec3 x = data.inner.c[2].b;
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -624,12 +624,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   vec2 x = data.inner.c[2].b.xy;
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -686,12 +686,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   float x = data.inner.c[2].b.g;
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -747,12 +747,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   float x = data.inner.c[2].b[1];
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -807,12 +807,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   data.inner.c[2].b = vec3(1.0f, 2.0f, 3.0f);
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
@@ -868,12 +868,12 @@ layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
 
-void tint_symbol() {
+void main() {
   data.inner.c[2].b.y = 1.0f;
 }
 
-void main() {
-  tint_symbol();
+void main_1() {
+  main();
   return;
 }
 )";
