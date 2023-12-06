@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2559f61d_75d67bca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-06T00:23:50Z",
+      "side": 1,
+      "message": "Hi all,\n\nWhat else can I do to push this CL forward?",
+      "revId": "7cc6088e71c10c748c79766b866c376e24aa9b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
