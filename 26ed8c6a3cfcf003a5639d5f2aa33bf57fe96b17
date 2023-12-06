@@ -37,6 +37,23 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "337dfc16_0fe98972",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-06T17:09:22Z",
+      "side": 1,
+      "message": "LGTM with Corentin\u0027s feedback addressed.",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "76f97b56_75a2111e",
         "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
         "patchSetId": 14
@@ -48,6 +65,24 @@
       "writtenOn": "2023-12-06T14:05:51Z",
       "side": 1,
       "message": "OMG Vulkan why so verbose \u003e_\u003e",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b85ec24_5bec9b9f",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-06T17:09:22Z",
+      "side": 1,
+      "message": "https://docs.google.com/presentation/d/1Fa8l4D4NJovXUgbqKWW-sw-T7WopnGmOfgXlOnHIcq0/edit#slide\u003did.g15f3283f06f_0_33",
+      "parentUuid": "76f97b56_75a2111e",
       "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -162,6 +197,23 @@
       "writtenOn": "2023-12-06T14:05:51Z",
       "side": 1,
       "message": "```suggestion\n                    \"descriptor-\u003evkImageCreateInfo.sType was not VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO.\");\n```",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8aa08622_fd435fff",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-06T17:09:22Z",
+      "side": 1,
+      "message": "Wording of error is a bit awkward. Perhaps change the second \u0027when\u0027 to an \u0027and\u0027?\n\n\"VkImageCreateInfo flags did not have VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT when usage has VK_IMAGE_USAGE_STORAGE_BIT *and* format is VK_FORMAT_B8G8R8A8_UNORM\"",
       "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
