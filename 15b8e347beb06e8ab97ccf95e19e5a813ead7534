@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "beaab684_4f47b23d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 11
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "246ff025_ff3ea0a7",
+      "range": {
+        "startLine": 7,
+        "startChar": 14,
+        "endLine": 7,
+        "endChar": 22
+      },
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "67a635df_67a27eb6",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 11
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "085544ba_a2f12675",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "995ebf36_857364f5",
+      "range": {
+        "startLine": 133,
+        "startChar": 38,
+        "endLine": 133,
+        "endChar": 48
+      },
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5849e6db_ade2632a",
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a3b2d832_68625861",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5849e6db_ade2632a",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "002fb377_28942fba",
@@ -94,6 +160,24 @@
       "writtenOn": "2023-12-05T09:35:29Z",
       "side": 1,
       "message": "Maybe in a follow-up but it seems that this could instead be a template type alias. Ditto for AdditionalExtensionsList.",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2e80d24_ba9e773d",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Hmm I\u0027m not sure if it\u0027s possible for these because we need template specialization for them, and according to C++ reference (https://en.cppreference.com/w/cpp/language/type_alias) you can\u0027t specialize aliases.",
+      "parentUuid": "002fb377_28942fba",
       "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -133,6 +217,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcb14f90_20f01d82",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "32805b1e_f592695b",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea1f64bd_1685d2cd",
@@ -146,6 +248,24 @@
       "writtenOn": "2023-12-05T09:35:29Z",
       "side": 1,
       "message": "I believe the handling of the comma could be simplified with:\n\n```\nusing Type \u003d UnpackedChain\u003c\n    AdditionalExtensions\u003c{{T}}\u003e::List\n    {% for extension in type.extensions %}\n         , const {{as_cppType(extension.name)}}*\n    {% endfor %}\n\u003e::Type;\n```",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdaa9c5_63e589f9",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 226,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ea1f64bd_1685d2cd",
       "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b622ace7_6b438019",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "So I tried this, but I ended up needing the `ExtensibilityFor` template because otherwise I ran into issues when passing in a non-const `ChainedStruct` (i.e. in testing) where without a template-level way to disable the other one, it tries to resolve it unpacking it as an `UnpackedOut` and then fails to compile. I figure it\u0027s better for it to be able to resolve itself without users needing to explicitly make the pointer const when passing into the `ValidateAndUnpack` or `Unpack`.",
+      "parentUuid": "219425cc_7d37542d",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc8ed919_33554a65",
@@ -184,6 +322,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "751fa843_70e58b59",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc8ed919_33554a65",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cca13008_cbb7a1eb",
@@ -197,6 +353,24 @@
       "writtenOn": "2023-12-05T09:35:29Z",
       "side": 1,
       "message": "Can\u0027t we just return mBitset.empty()? We don\u0027t assert consistency, but that seems fine?",
+      "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79430e6a_ddebbe72",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 293,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-06T01:05:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cca13008_cbb7a1eb",
       "revId": "15b8e347beb06e8ab97ccf95e19e5a813ead7534",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
