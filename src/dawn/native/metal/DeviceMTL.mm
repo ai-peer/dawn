@@ -121,14 +121,14 @@ void API_AVAILABLE(macos(10.15), ios(14)) UpdateTimestampPeriod(id<MTLDevice> de
 }  // namespace
 
 // static
-ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
-                                          NSPRef<id<MTLDevice>> mtlDevice,
-                                          const DeviceDescriptor* descriptor,
-                                          const TogglesState& deviceToggles) {
+Ref<Device> Device::Create(AdapterBase* adapter,
+                           NSPRef<id<MTLDevice>> mtlDevice,
+                           const DeviceDescriptor* descriptor,
+                           const TogglesState& deviceToggles) {
     @autoreleasepool {
         Ref<Device> device =
             AcquireRef(new Device(adapter, std::move(mtlDevice), descriptor, deviceToggles));
-        DAWN_TRY(device->Initialize(descriptor));
+        DAWN_UNUSED(device->ConsumedError(device->Initialize(descriptor)));
         return device;
     }
 }

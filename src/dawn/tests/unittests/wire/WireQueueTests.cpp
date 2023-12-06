@@ -172,10 +172,6 @@ TEST_F(WireQueueTests, DefaultQueueThenDeviceReleased) {
 
     EXPECT_CALL(api, QueueRelease(apiQueue));
     EXPECT_CALL(api, DeviceRelease(apiDevice));
-    // These set X callback methods are called before the device is released.
-    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr)).Times(1);
-    EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(1);
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr)).Times(1);
     FlushClient();
 
     // Indicate to the fixture that the device was already released.
@@ -194,10 +190,6 @@ TEST_F(WireQueueTests, DeviceThenDefaultQueueReleased) {
     wgpuDeviceRelease(device);
 
     EXPECT_CALL(api, DeviceRelease(apiDevice));
-    // These set X callback methods are called before the device is released.
-    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr)).Times(1);
-    EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(1);
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr)).Times(1);
     FlushClient();
 
     // Release the external queue reference. The queue should be released.

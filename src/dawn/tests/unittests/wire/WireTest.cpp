@@ -28,6 +28,7 @@
 #include "dawn/tests/unittests/wire/WireTest.h"
 
 #include "dawn/dawn_proc.h"
+#include "dawn/tests/MockCallback.h"
 #include "dawn/utils/TerribleCommandBuffer.h"
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireServer.h"
@@ -35,8 +36,14 @@
 using testing::_;
 using testing::AnyNumber;
 using testing::Exactly;
+using testing::Invoke;
+using testing::InvokeWithoutArgs;
 using testing::Mock;
+using testing::MockCallback;
+using testing::NotNull;
 using testing::Return;
+using testing::SaveArg;
+using testing::WithArg;
 
 WireTest::WireTest() {}
 
@@ -53,12 +60,6 @@ dawn::wire::server::MemoryTransferService* WireTest::GetServerMemoryTransferServ
 void WireTest::SetUp() {
     DawnProcTable mockProcs;
     api.GetProcTable(&mockProcs);
-    WGPUDevice mockDevice = api.GetNewDevice();
-
-    // This SetCallback call cannot be ignored because it is done as soon as we start the server
-    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(_, _, _)).Times(Exactly(1));
-    EXPECT_CALL(api, OnDeviceSetLoggingCallback(_, _, _)).Times(Exactly(1));
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(_, _, _)).Times(Exactly(1));
     SetupIgnoredCallExpectations();
 
     mS2cBuf = std::make_unique<dawn::utils::TerribleCommandBuffer>();
@@ -81,12 +82,96 @@ void WireTest::SetUp() {
 
     dawnProcSetProcs(&dawn::wire::client::GetProcs());
 
-    auto deviceReservation = mWireClient->ReserveDevice();
-    EXPECT_CALL(api, DeviceReference(mockDevice));
-    mWireServer->InjectDevice(mockDevice, deviceReservation.id, deviceReservation.generation);
+    auto reservation = GetWireClient()->ReserveInstance();
+    instance = reservation.instance;
 
-    device = deviceReservation.device;
-    apiDevice = mockDevice;
+    apiInstance = api.GetNewInstance();
+    EXPECT_CALL(api, InstanceReference(apiInstance));
+    EXPECT_TRUE(
+        GetWireServer()->InjectInstance(apiInstance, reservation.id, reservation.generation));
+
+    WGPURequestAdapterOptions options = {};
+    MockCallback<WGPURequestAdapterCallback> cb;
+    auto* userdata = cb.MakeUserdata(this);
+    wgpuInstanceRequestAdapter(instance, &options, cb.Callback(), userdata);
+
+    // Expect the server to receive the message. Then, mock a reply.
+    apiAdapter = api.GetNewAdapter();
+    EXPECT_CALL(api, OnInstanceRequestAdapter(apiInstance, NotNull(), NotNull(), NotNull()))
+        .WillOnce(InvokeWithoutArgs([&] {
+            EXPECT_CALL(api, AdapterHasFeature(apiAdapter, _)).WillRepeatedly(Return(false));
+
+            EXPECT_CALL(api, AdapterGetProperties(apiAdapter, NotNull()))
+                .WillOnce(WithArg<1>(Invoke([&](WGPUAdapterProperties* properties) {
+                    *properties = {};
+                    properties->vendorName = "";
+                    properties->architecture = "";
+                    properties->name = "";
+                    properties->driverDescription = "";
+                })));
+
+            EXPECT_CALL(api, AdapterGetLimits(apiAdapter, NotNull()))
+                .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
+                    *limits = {};
+                    return true;
+                })));
+
+            EXPECT_CALL(api, AdapterEnumerateFeatures(apiAdapter, nullptr))
+                .WillOnce(Return(0))
+                .WillOnce(Return(0));
+            api.CallInstanceRequestAdapterCallback(apiInstance, WGPURequestAdapterStatus_Success,
+                                                   apiAdapter, nullptr);
+        }));
+    FlushClient();
+
+    // Expect the callback in the client.
+    EXPECT_CALL(cb, Call(WGPURequestAdapterStatus_Success, NotNull(), nullptr, this))
+        .WillOnce(SaveArg<1>(&adapter));
+    FlushServer();
+
+    MockCallback<WGPURequestDeviceCallback> requestDeviceCb;
+
+    WGPUDeviceDescriptor deviceDesc = {};
+    wgpuAdapterRequestDevice(adapter, &deviceDesc, requestDeviceCb.Callback(),
+                             requestDeviceCb.MakeUserdata(this));
+
+    apiDevice = api.GetNewDevice();
+    EXPECT_CALL(api, OnAdapterRequestDevice(apiAdapter, NotNull(), NotNull(), NotNull()))
+        .WillOnce(Invoke(WithArg<1>([&](const auto* deviceDesc) {
+            // Forward the callbacks to the mock callback storage.
+            EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, _, _));
+            EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, _, _));
+            mockProcs.deviceSetUncapturedErrorCallback(apiDevice,
+                                                       deviceDesc->uncapturedErrorCallback,
+                                                       deviceDesc->uncapturedErrorUserdata);
+            mockProcs.deviceSetDeviceLostCallback(apiDevice, deviceDesc->deviceLostCallback,
+                                                  deviceDesc->deviceLostUserdata);
+
+            EXPECT_CALL(api, DeviceGetLimits(apiDevice, NotNull()))
+                .WillOnce(WithArg<1>(Invoke([&](WGPUSupportedLimits* limits) {
+                    *limits = {};
+                    return true;
+                })));
+
+            EXPECT_CALL(api, DeviceEnumerateFeatures(apiDevice, nullptr))
+                .WillOnce(Return(0))
+                .WillOnce(Return(0));
+
+            api.CallAdapterRequestDeviceCallback(apiAdapter, WGPURequestDeviceStatus_Success,
+                                                 apiDevice, nullptr);
+        })));
+    FlushClient();
+
+    // Expect the callback in the client.
+    EXPECT_CALL(requestDeviceCb, Call(WGPURequestDeviceStatus_Success, NotNull(), nullptr, this))
+        .WillOnce(SaveArg<1>(&device));
+    FlushServer();
+
+    // auto deviceReservation = mWireClient->ReserveDevice();
+    // EXPECT_CALL(api, DeviceReference(apiDevice));
+
+    // device = deviceReservation.device;
+    // apiDevice = api.GetNewDevice();
 
     // The GetQueue is done on WireClient startup so we expect it now.
     queue = wgpuDeviceGetQueue(device);
@@ -104,21 +189,11 @@ void WireTest::TearDown() {
     // cannot be null.
     api.IgnoreAllReleaseCalls();
     mWireClient = nullptr;
-
-    if (mWireServer && apiDevice) {
-        // These are called on server destruction to clear the callbacks. They must not be
-        // called after the server is destroyed.
-        EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
-        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(Exactly(1));
-        EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
-    }
     mWireServer = nullptr;
 }
 
 // This should be called if |apiDevice| is no longer exists on the wire.
-// This signals that expectations in |TearDowb| shouldn't be added.
+// This signals that expectations in |TearDown| shouldn't be added.
 void WireTest::DefaultApiDeviceWasReleased() {
     apiDevice = nullptr;
 }
@@ -145,16 +220,8 @@ dawn::wire::WireClient* WireTest::GetWireClient() {
 void WireTest::DeleteServer() {
     EXPECT_CALL(api, QueueRelease(apiQueue)).Times(1);
     EXPECT_CALL(api, DeviceRelease(apiDevice)).Times(1);
-
-    if (mWireServer) {
-        // These are called on server destruction to clear the callbacks. They must not be
-        // called after the server is destroyed.
-        EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
-        EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(Exactly(1));
-        EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr))
-            .Times(Exactly(1));
-    }
+    EXPECT_CALL(api, AdapterRelease(apiAdapter)).Times(1);
+    EXPECT_CALL(api, InstanceRelease(apiInstance)).Times(1);
     mWireServer = nullptr;
 }
 
@@ -165,4 +232,9 @@ void WireTest::DeleteClient() {
 void WireTest::SetupIgnoredCallExpectations() {
     EXPECT_CALL(api, InstanceProcessEvents(_)).Times(AnyNumber());
     EXPECT_CALL(api, DeviceTick(_)).Times(AnyNumber());
+
+    // The wire sets the device logging callback for forwarding it on device creation.
+    // TODO(crbug.com/dawn/2279): Remove this after moving it to the device descriptor
+    // with the other device callbacks.
+    EXPECT_CALL(api, OnDeviceSetLoggingCallback(_, _, _)).Times(AnyNumber());
 }

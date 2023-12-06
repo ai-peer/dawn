@@ -414,7 +414,7 @@ TEST_F(CommandBufferValidationTest, DestroyEncoder) {
 TEST_F(CommandBufferValidationTest, EncodeAfterDeviceDestroyed) {
     PlaceholderRenderPass placeholderRenderPass(device);
 
-    // Device destroyed before encoding.
+    // Device destroyed after creating encoder.
     {
         wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         ExpectDeviceDestruction();
@@ -423,20 +423,22 @@ TEST_F(CommandBufferValidationTest, EncodeAfterDeviceDestroyed) {
         // encoding.
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&placeholderRenderPass);
         pass.End();
-        ASSERT_DEVICE_ERROR(encoder.Finish(), HasSubstr("Destroyed encoder cannot be finished."));
+        // This is an error, but errors are no longer surfaced after device lost.
+        encoder.Finish();
     }
 
-    // Device destroyed after encoding.
+    // Device destroyed before creating encoder.
     {
         ExpectDeviceDestruction();
         device.Destroy();
-        ASSERT_DEVICE_ERROR(wgpu::CommandEncoder encoder = device.CreateCommandEncoder(),
-                            HasSubstr("[Device] is lost"));
+        // This is an error, but errors are no longer surfaced after device lost.
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
         // The encoder should not accessing any device info if device is destroyed when try
         // encoding.
         wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&placeholderRenderPass);
         pass.End();
-        ASSERT_DEVICE_ERROR(encoder.Finish(), HasSubstr("[Invalid CommandEncoder] is invalid."));
+        // This is an error, but errors are no longer surfaced after device lost.
+        encoder.Finish();
     }
 }
 

@@ -59,6 +59,12 @@ void NullDeviceBenchmarkFixture::SetUp(const benchmark::State& state) {
 
             // Create the device.
             wgpu::DeviceDescriptor desc = GetDeviceDescriptor();
+            desc.uncapturedErrorCallback = [](WGPUErrorType, char const* message, void* userdata) {
+                dawn::ErrorLog() << message;
+                DAWN_UNREACHABLE();
+            };
+            desc.uncapturedErrorCallbackMode = wgpu::CallbackMode::AllowSpontaneous;
+
             adapter.RequestDevice(
                 &desc,
                 [](WGPURequestDeviceStatus status, WGPUDevice cDevice, char const* message,
@@ -70,13 +76,6 @@ void NullDeviceBenchmarkFixture::SetUp(const benchmark::State& state) {
             while (!device) {
                 wgpuInstanceProcessEvents(nativeInstance->Get());
             }
-
-            device.SetUncapturedErrorCallback(
-                [](WGPUErrorType, char const* message, void* userdata) {
-                    dawn::ErrorLog() << message;
-                    DAWN_UNREACHABLE();
-                },
-                nullptr);
 
             device.SetDeviceLostCallback(
                 [](WGPUDeviceLostReason reason, char const* message, void* userdata) {
