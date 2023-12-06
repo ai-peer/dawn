@@ -16,6 +16,211 @@
       "message": "ugh vulkan so verbose D:",
       "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d233b74a_daca5adb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "76f97b56_75a2111e",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "OMG Vulkan why so verbose \u003e_\u003e",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7dbe9dff_4107f8b9",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "AHB",
+      "range": {
+        "startLine": 509,
+        "startChar": 47,
+        "endLine": 509,
+        "endChar": 55
+      },
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a7f1098_f4059152",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "This seems to be the only piece of code that changes between the different import paths for this block of code. Could it be factored? There\u0027s a lot of duplication right now.",
+      "range": {
+        "startLine": 521,
+        "startChar": 12,
+        "endLine": 521,
+        "endChar": 78
+      },
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd6c5938_de1be696",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "This could be made to be:\n\n`SharedTextureMemory::Create(device, label, properties, VK_QUEUE_FAMILY_FOREIGN_EXT)`",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b023814_a6e2f6f0",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "Ditto, this seems like it could be shared somewhat easily between import paths.",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b64869d_b94a9afa",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "Ditto, passing the structure that should be used as pNext in the memoryAllocateInfoChain",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "97ccecb4_37c7512f",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"descriptor-\u003evkImageCreateInfo.sType was not VK_STRUCTURE_TYPE_IMAGE_CREATE_INFO.\");\n```",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de6b7d59_dcdeeffc",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "nit: this is always device.ImportSharedTextureMemory so can\u0027t we pass a device and call device.ImportSharedTextureMemory inside here?",
+      "range": {
+        "startLine": 88,
+        "startChar": 71,
+        "endLine": 88,
+        "endChar": 79
+      },
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d284094a_c8481f4a",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "nit: Maybe make the R and G channels different so we don\u0027t run into BGRA vs. RGBA problems.",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46d22c68_89ed5c24",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_opaquefd.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-06T14:05:51Z",
+      "side": 1,
+      "message": "This seems somewhat generic between test backends, is there a way to put all of it in SharedTextureMemoryTests.cpp somehow?",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
