@@ -16,6 +16,23 @@
       "message": "Hi all,\n\nWhat else can I do to push this CL forward?",
       "revId": "7cc6088e71c10c748c79766b866c376e24aa9b06",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f2d429f0_eb517d62",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-06T01:02:14Z",
+      "side": 1,
+      "message": "Tint side LGTM.",
+      "revId": "7cc6088e71c10c748c79766b866c376e24aa9b06",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
