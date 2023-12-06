@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b55f3f04_c0afed9c",
+        "filename": "src/tint/lang/core/ir/binary/encode.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-06T17:27:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7e159d0a_88ed2faf",
+      "revId": "8bbc11805310a13954db6637461e643910bd45d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c16305ae_f539ac62",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-06T15:00:19Z",
       "side": 1,
       "message": "Nit: delete \"control\"",
+      "revId": "8bbc11805310a13954db6637461e643910bd45d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f9b38c4a_2fecb96f",
+        "filename": "src/tint/lang/core/ir/operand_instruction.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2023-12-06T17:27:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c16305ae_f539ac62",
       "revId": "8bbc11805310a13954db6637461e643910bd45d1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
