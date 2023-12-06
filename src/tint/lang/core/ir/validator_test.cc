@@ -833,7 +833,7 @@ TEST_F(IR_ValidatorTest, If_NullResult) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: if: instruction result is undefined
+    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: if: instruction's result is undefined
     undef = if true [t: %b2, f: %b3] {  # if_1
     ^^^^^
 
@@ -905,7 +905,7 @@ TEST_F(IR_ValidatorTest, Var_RootBlock_NullResult) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().reason.str(), R"(:2:3 error: var: instruction result is undefined
+    EXPECT_EQ(res.Failure().reason.str(), R"(:2:3 error: var: instruction's result is undefined
   undef = var
   ^^^^^
 
@@ -932,7 +932,7 @@ TEST_F(IR_ValidatorTest, Var_Function_NullResult) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: var: instruction result is undefined
+    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: var: instruction's result is undefined
     undef = var
     ^^^^^
 
@@ -991,7 +991,7 @@ TEST_F(IR_ValidatorTest, Let_NullResult) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: let: instruction result is undefined
+    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: let: instruction's result is undefined
     undef = let 1i
     ^^^^^
 
@@ -1105,7 +1105,7 @@ note: # Disassembly
     EXPECT_EQ(res.Failure().reason.str(), expected);
 }
 
-TEST_F(IR_ValidatorTest, Instruction_NullSource) {
+TEST_F(IR_ValidatorTest, Instruction_NullInstruction) {
     auto* f = b.Function("my_func", ty.void_());
 
     auto sb = b.Append(f->Block());
@@ -1116,7 +1116,8 @@ TEST_F(IR_ValidatorTest, Instruction_NullSource) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: var: instruction result source is undefined
+    EXPECT_EQ(res.Failure().reason.str(),
+              R"(:3:5 error: var: instruction's result instruction is undefined
     %2:ptr<function, f32, read_write> = var
     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -1285,7 +1286,7 @@ TEST_F(IR_ValidatorTest, Binary_Result_Nullptr) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: binary: instruction result is undefined
+    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: binary: instruction's result is undefined
     undef = add 3i, 2i
     ^^^^^
 
@@ -1342,7 +1343,7 @@ TEST_F(IR_ValidatorTest, Unary_Result_Nullptr) {
 
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
-    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: unary: instruction result is undefined
+    EXPECT_EQ(res.Failure().reason.str(), R"(:3:5 error: unary: instruction's result is undefined
     undef = negation 2i
     ^^^^^
 
@@ -1452,7 +1453,7 @@ TEST_F(IR_ValidatorTest, ExitIf_LessOperandsThenIfParams) {
     ASSERT_FALSE(res);
     EXPECT_EQ(
         res.Failure().reason.str(),
-        R"(:5:9 error: exit_if: args count (1) does not match control instruction result count (2)
+        R"(:5:9 error: exit_if: args count (1) does not match control instruction's result count (2)
         exit_if 1i  # if_1
         ^^^^^^^^^^
 
@@ -1496,7 +1497,7 @@ TEST_F(IR_ValidatorTest, ExitIf_MoreOperandsThenIfParams) {
     ASSERT_FALSE(res);
     EXPECT_EQ(
         res.Failure().reason.str(),
-        R"(:5:9 error: exit_if: args count (3) does not match control instruction result count (2)
+        R"(:5:9 error: exit_if: args count (3) does not match control instruction's result count (2)
         exit_if 1i, 2.0f, 3i  # if_1
         ^^^^^^^^^^^^^^^^^^^^
 
@@ -1846,7 +1847,7 @@ TEST_F(IR_ValidatorTest, ExitSwitch_LessOperandsThenSwitchParams) {
     ASSERT_FALSE(res);
     EXPECT_EQ(
         res.Failure().reason.str(),
-        R"(:5:9 error: exit_switch: args count (1) does not match control instruction result count (2)
+        R"(:5:9 error: exit_switch: args count (1) does not match control instruction's result count (2)
         exit_switch 1i  # switch_1
         ^^^^^^^^^^^^^^
 
@@ -1890,7 +1891,7 @@ TEST_F(IR_ValidatorTest, ExitSwitch_MoreOperandsThenSwitchParams) {
     ASSERT_FALSE(res);
     EXPECT_EQ(
         res.Failure().reason.str(),
-        R"(:5:9 error: exit_switch: args count (3) does not match control instruction result count (2)
+        R"(:5:9 error: exit_switch: args count (3) does not match control instruction's result count (2)
         exit_switch 1i, 2.0f, 3i  # switch_1
         ^^^^^^^^^^^^^^^^^^^^^^^^
 
@@ -2230,7 +2231,7 @@ TEST_F(IR_ValidatorTest, ExitLoop_LessOperandsThenLoopParams) {
     ASSERT_FALSE(res);
     EXPECT_EQ(
         res.Failure().reason.str(),
-        R"(:5:9 error: exit_loop: args count (1) does not match control instruction result count (2)
+        R"(:5:9 error: exit_loop: args count (1) does not match control instruction's result count (2)
         exit_loop 1i  # loop_1
         ^^^^^^^^^^^^
 
@@ -2277,7 +2278,7 @@ TEST_F(IR_ValidatorTest, ExitLoop_MoreOperandsThenLoopParams) {
     ASSERT_FALSE(res);
     EXPECT_EQ(
         res.Failure().reason.str(),
-        R"(:5:9 error: exit_loop: args count (3) does not match control instruction result count (2)
+        R"(:5:9 error: exit_loop: args count (3) does not match control instruction's result count (2)
         exit_loop 1i, 2.0f, 3i  # loop_1
         ^^^^^^^^^^^^^^^^^^^^^^
 
@@ -2985,7 +2986,7 @@ TEST_F(IR_ValidatorTest, LoadVectorElement_NullResult) {
     auto res = ir::Validate(mod);
     ASSERT_FALSE(res);
     EXPECT_EQ(res.Failure().reason.str(),
-              R"(:4:5 error: load_vector_element: instruction result is undefined
+              R"(:4:5 error: load_vector_element: instruction's result is undefined
     undef = load_vector_element %2, 1i
     ^^^^^
 

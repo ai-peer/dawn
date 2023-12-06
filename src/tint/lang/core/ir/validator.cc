@@ -484,15 +484,16 @@ void Validator::CheckInstruction(const Instruction* inst) {
     for (size_t i = 0; i < results.Length(); ++i) {
         auto* res = results[i];
         if (!res) {
-            AddResultError(inst, i, InstError(inst, "instruction result is undefined"));
+            AddResultError(inst, i, InstError(inst, "instruction's result is undefined"));
             continue;
         }
 
         if (res->Instruction() == nullptr) {
-            AddResultError(inst, i, InstError(inst, "instruction result source is undefined"));
-        } else if (res->Instruction() != inst) {
             AddResultError(inst, i,
-                           InstError(inst, "instruction result source has wrong instruction"));
+                           InstError(inst, "instruction's result instruction is undefined"));
+        } else if (res->Instruction() != inst) {
+            AddResultError(
+                inst, i, InstError(inst, "instruction's result instruction has wrong instruction"));
         }
     }
 
@@ -751,7 +752,7 @@ void Validator::CheckExit(const Exit* e) {
     auto args = e->Args();
     if (results.Length() != args.Length()) {
         AddError(e, InstError(e, std::string("args count (") + std::to_string(args.Length()) +
-                                     ") does not match control instruction result count (" +
+                                     ") does not match control instruction's result count (" +
                                      std::to_string(results.Length()) + ")"));
         AddNote(e->ControlInstruction(), "control instruction");
         return;
