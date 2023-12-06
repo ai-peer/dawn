@@ -39,6 +39,30 @@
       },
       "revId": "03ebae5f53782eff5dea2987423f103dc85c230c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8dfd4253_d6ba889d",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 587,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-12-06T18:33:16Z",
+      "side": 1,
+      "message": "I put this validation in the wrong place. Here it was in texture.createView but I moved it to device.createTexture on the viewFormats. I left the message the same because the full message ends up being\n\n   viewFormat(rgba8unorm-srgb) must match format (rgba8unorm) in compatibility mode\n   while validating viewFormats[0]\n   while validating GPUTextuteDescriptor\n   while calling createTexture\n\nor something to that effect.",
+      "parentUuid": "61eb2412_cb805f47",
+      "range": {
+        "startLine": 587,
+        "startChar": 21,
+        "endLine": 587,
+        "endChar": 54
+      },
+      "revId": "03ebae5f53782eff5dea2987423f103dc85c230c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
