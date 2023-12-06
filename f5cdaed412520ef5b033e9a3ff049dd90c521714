@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6408eaee_889a97aa",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-06T01:51:44Z",
+      "side": 1,
+      "message": "nit: I think this version of UnpackExtension could be deduped if we make the type of ChainedStructOut a template arg. Then it can be either Out or In.",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 63
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d97ef7e_835da88e",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-06T01:51:44Z",
+      "side": 1,
+      "message": "ditto: `unpackedChain` unused",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 54
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "582ef96d_422e7a2d",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-06T01:51:44Z",
+      "side": 1,
+      "message": "I think this function could be deduped with the out one if we look at ExtensibilityFor in order to determine if we are working with `const ChainedStruct*` or `ChainedStructOut*`.\n\ncould be a little tricky so I\u0027m OK attempting this in a follow-up",
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e5b5627_3d2af7cd",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-06T01:51:44Z",
+      "side": 1,
+      "message": "whitespace",
+      "range": {
+        "startLine": 248,
+        "startChar": 32,
+        "endLine": 248,
+        "endChar": 34
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d1b632a0_dd940e57",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-06T01:51:44Z",
+      "side": 1,
+      "message": "nit: I think this `unpackedChain` is unused",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 54
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6c4bef_2d44627c",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-06T01:51:44Z",
+      "side": 1,
+      "message": "nit: swap %s and \\n ?",
+      "range": {
+        "startLine": 224,
+        "startChar": 59,
+        "endLine": 224,
+        "endChar": 69
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
