@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7e159d0a_88ed2faf",
+        "filename": "src/tint/lang/core/ir/binary/encode.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-06T15:00:19Z",
+      "side": 1,
+      "message": "Nit: s/Paramater/Parameter/",
+      "revId": "8bbc11805310a13954db6637461e643910bd45d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c16305ae_f539ac62",
+        "filename": "src/tint/lang/core/ir/operand_instruction.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-06T15:00:19Z",
+      "side": 1,
+      "message": "Nit: delete \"control\"",
+      "revId": "8bbc11805310a13954db6637461e643910bd45d1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
