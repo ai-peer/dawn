@@ -16,6 +16,23 @@
       "message": "PTAL.",
       "revId": "5f05f393a52c48ca8b35dce3556d1bd2ac675639",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6cb6b4d_2afdbc3e",
+        "filename": "test/tint/buffer/uniform/std140/array/mat2x2_f32/dynamic_index_via_ptr.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-06T21:28:28Z",
+      "side": 1,
+      "message": "Doesn\u0027t look like `l_a` or `l_a_i` have any uses? Maybe need multiple storage buffer outputs on these ones.",
+      "revId": "5f05f393a52c48ca8b35dce3556d1bd2ac675639",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
