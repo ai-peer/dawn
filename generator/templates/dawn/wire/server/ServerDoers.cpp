@@ -90,14 +90,6 @@ namespace dawn::wire::server {
                             {{type.name.CamelCase()}}ObjectIdTable().Remove(data->handle);
                         {% endif %}
 
-                        {% if type.name.get() == "device" %}
-                            if (obj->handle != nullptr) {
-                                //* Deregisters uncaptured error and device lost callbacks since
-                                //* they should not be forwarded if the device no longer exists on the wire.
-                                ClearDeviceCallbacks(obj->handle);
-                            }
-                        {% endif %}
-
                         mProcs.{{as_varName(type.name, Name("release"))}}(obj->handle);
                     }
                     {{type.name.CamelCase()}}Objects().Free(objectId);

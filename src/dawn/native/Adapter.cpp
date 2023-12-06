@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
@@ -211,6 +212,15 @@ DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
 
 ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor* descriptor) {
     DAWN_ASSERT(descriptor != nullptr);
+
+    if (descriptor->deviceLostCallbackMode == wgpu::CallbackMode::WaitAnyOnly) {
+        dawn::ErrorLog()
+            << "deviceLostCallbackMode must not be WaitAnyOnly. This will be an error soon.";
+    }
+    if (descriptor->uncapturedErrorCallbackMode == wgpu::CallbackMode::WaitAnyOnly) {
+        dawn::ErrorLog()
+            << "uncapturedErrorCallbackMode must not be WaitAnyOnly. This will be an error soon.";
+    }
 
     // Create device toggles state from required toggles descriptor and inherited adapter toggles
     // state.

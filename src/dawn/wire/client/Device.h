@@ -100,11 +100,11 @@ class Device final : public ObjectBase {
     };
     RequestTracker<CreatePipelineAsyncRequest> mCreatePipelineAsyncRequests;
 
-    WGPUErrorCallback mErrorCallback = nullptr;
+    WGPUErrorCallback mUncapturedErrorCallback = nullptr;
     WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
     WGPULoggingCallback mLoggingCallback = nullptr;
     bool mDidRunLostCallback = false;
-    void* mErrorUserdata = nullptr;
+    void* mUncapturedErrorUserdata = nullptr;
     void* mDeviceLostUserdata = nullptr;
     void* mLoggingUserdata = nullptr;
 

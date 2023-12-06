@@ -173,6 +173,8 @@ void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
         wireDescriptor = *descriptor;
         wireDescriptor.deviceLostCallback = nullptr;
         wireDescriptor.deviceLostUserdata = nullptr;
+        wireDescriptor.uncapturedErrorCallback = nullptr;
+        wireDescriptor.uncapturedErrorUserdata = nullptr;
     }
 
     AdapterRequestDeviceCmd cmd;
