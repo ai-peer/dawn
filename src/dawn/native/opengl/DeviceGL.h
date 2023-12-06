@@ -51,11 +51,11 @@ namespace dawn::native::opengl {
 class Device final : public DeviceBase {
   public:
     class Context;
-    static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
-                                             const DeviceDescriptor* descriptor,
-                                             const OpenGLFunctions& functions,
-                                             std::unique_ptr<Context> context,
-                                             const TogglesState& deviceToggles);
+    static Ref<Device> Create(AdapterBase* adapter,
+                              const DeviceDescriptor* descriptor,
+                              const OpenGLFunctions& functions,
+                              std::unique_ptr<Context> context,
+                              const TogglesState& deviceToggles);
     ~Device() override;
 
     MaybeError Initialize(const DeviceDescriptor* descriptor);

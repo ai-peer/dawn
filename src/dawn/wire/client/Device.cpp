@@ -38,30 +38,36 @@ namespace dawn::wire::client {
 
 Device::Device(const ObjectBaseParams& params, const WGPUDeviceDescriptor* descriptor)
     : ObjectBase(params), mIsAlive(std::make_shared<bool>()) {
-    if (descriptor && descriptor->deviceLostCallback) {
+    if (descriptor) {
         mDeviceLostCallback = descriptor->deviceLostCallback;
         mDeviceLostUserdata = descriptor->deviceLostUserdata;
+        mUncapturedErrorCallback = descriptor->uncapturedErrorCallback;
+        mUncapturedErrorUserdata = descriptor->uncapturedErrorUserdata;
     }
 
 #if defined(DAWN_ENABLE_ASSERTS)
-    mErrorCallback = [](WGPUErrorType, char const*, void*) {
-        static bool calledOnce = false;
-        if (!calledOnce) {
-            calledOnce = true;
-            dawn::WarningLog() << "No Dawn device uncaptured error callback was set. This is "
-                                  "probably not intended. If you really want to ignore errors "
-                                  "and suppress this message, set the callback to null.";
-        }
-    };
+    if (!mUncapturedErrorCallback) {
+        mUncapturedErrorCallback = [](WGPUErrorType, char const*, void*) {
+            static bool calledOnce = false;
+            if (!calledOnce) {
+                calledOnce = true;
+                dawn::WarningLog()
+                    << "No Dawn device uncaptured error callback was set. This is "
+                       "probably not intended. If you really want to ignore errors "
+                       "and suppress this message, set the callback to an empty function.";
+            }
+        };
+    }
 
     if (!mDeviceLostCallback) {
         mDeviceLostCallback = [](WGPUDeviceLostReason, char const*, void*) {
             static bool calledOnce = false;
             if (!calledOnce) {
                 calledOnce = true;
-                dawn::WarningLog() << "No Dawn device lost callback was set. This is probably not "
-                                      "intended. If you really want to ignore device lost "
-                                      "and suppress this message, set the callback to null.";
+                dawn::WarningLog()
+                    << "No Dawn device lost callback was set. This is probably not "
+                       "intended. If you really want to ignore device lost "
+                       "and suppress this message, set the callback to an empty function.";
             }
         };
     }
@@ -115,8 +121,8 @@ void Device::SetFeatures(const WGPUFeatureName* features, uint32_t featuresCount
 }
 
 void Device::HandleError(WGPUErrorType errorType, const char* message) {
-    if (mErrorCallback) {
-        mErrorCallback(errorType, message, mErrorUserdata);
+    if (mUncapturedErrorCallback) {
+        mUncapturedErrorCallback(errorType, message, mUncapturedErrorUserdata);
     }
 }
 
@@ -160,8 +166,8 @@ std::weak_ptr<bool> Device::GetAliveWeakPtr() {
 }
 
 void Device::SetUncapturedErrorCallback(WGPUErrorCallback errorCallback, void* errorUserdata) {
-    mErrorCallback = errorCallback;
-    mErrorUserdata = errorUserdata;
+    mUncapturedErrorCallback = errorCallback;
+    mUncapturedErrorUserdata = errorUserdata;
 }
 
 void Device::SetLoggingCallback(WGPULoggingCallback callback, void* userdata) {

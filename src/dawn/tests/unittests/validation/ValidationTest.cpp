@@ -166,11 +166,11 @@ void ValidationTest::SetUp() {
     wgpu::DeviceDescriptor deviceDescriptor = {};
     deviceDescriptor.deviceLostCallback = ValidationTest::OnDeviceLost;
     deviceDescriptor.deviceLostUserdata = this;
+    deviceDescriptor.uncapturedErrorCallback = ValidationTest::OnDeviceError;
+    deviceDescriptor.uncapturedErrorUserdata = this;
 
     device = RequestDeviceSync(deviceDescriptor);
     backendDevice = mLastCreatedBackendDevice;
-
-    device.SetUncapturedErrorCallback(ValidationTest::OnDeviceError, this);
 }
 
 ValidationTest::~ValidationTest() {

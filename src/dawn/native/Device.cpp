@@ -211,8 +211,15 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
     : mAdapter(adapter), mToggles(deviceToggles), mNextPipelineCompatibilityToken(1) {
     DAWN_ASSERT(descriptor != nullptr);
 
-    mDeviceLostCallback = descriptor->deviceLostCallback;
-    mDeviceLostUserdata = descriptor->deviceLostUserdata;
+    mDeviceCallbacks = DeviceCallbacks{};
+
+    mDeviceCallbacks->deviceLostCallbackMode = descriptor->deviceLostCallbackMode;
+    mDeviceCallbacks->deviceLostCallback = descriptor->deviceLostCallback;
+    mDeviceCallbacks->deviceLostUserdata = descriptor->deviceLostUserdata;
+
+    mDeviceCallbacks->uncapturedErrorCallbackMode = descriptor->uncapturedErrorCallbackMode;
+    mDeviceCallbacks->uncapturedErrorCallback = descriptor->uncapturedErrorCallback;
+    mDeviceCallbacks->uncapturedErrorUserdata = descriptor->uncapturedErrorUserdata;
 
     AdapterProperties adapterProperties;
     adapter->APIGetProperties(&adapterProperties);
@@ -252,6 +259,7 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 DeviceBase::DeviceBase() : mState(State::Alive), mToggles(ToggleStage::Device) {
     GetDefaultLimits(&mLimits.v1, FeatureLevel::Core);
     mFormatTable = BuildFormatTable(this);
+    mDeviceCallbacks = DeviceCallbacks{};
 }
 
 DeviceBase::~DeviceBase() {
@@ -266,26 +274,33 @@ MaybeError DeviceBase::Initialize(Ref<QueueBase> defaultQueue) {
     SetWGSLExtensionAllowList();
 
 #if defined(DAWN_ENABLE_ASSERTS)
-    mUncapturedErrorCallback = [](WGPUErrorType, char const*, void*) {
-        static bool calledOnce = false;
-        if (!calledOnce) {
-            calledOnce = true;
-            dawn::WarningLog() << "No Dawn device uncaptured error callback was set. This is "
-                                  "probably not intended. If you really want to ignore errors "
-                                  "and suppress this message, set the callback to null.";
-        }
-    };
-
-    if (!mDeviceLostCallback) {
-        mDeviceLostCallback = [](WGPUDeviceLostReason, char const*, void*) {
+    if (!mDeviceCallbacks->uncapturedErrorCallback) {
+        // Set the callback mode to spontaneous so that the application is more likely to get this
+        // message.
+        mDeviceCallbacks->uncapturedErrorCallbackMode = wgpu::CallbackMode::AllowSpontaneous;
+        mDeviceCallbacks->uncapturedErrorCallback = [](WGPUErrorType, char const*, void*) {
             static bool calledOnce = false;
             if (!calledOnce) {
                 calledOnce = true;
-                dawn::WarningLog() << "No Dawn device lost callback was set. This is probably not "
-                                      "intended. If you really want to ignore device lost "
-                                      "and suppress this message, set the callback to null.";
+                dawn::WarningLog()
+                    << "No Dawn device uncaptured error callback was set. This is "
+                       "probably not intended. If you really want to ignore errors "
+                       "and suppress this message, set the callback to an empty function.";
             }
         };
+    }
+
+    if (!mDeviceCallbacks->deviceLostCallback) {
+        // Set the callback mode to spontaneous so that the application is more likely to get this
+        // message.
+        mDeviceCallbacks->deviceLostCallbackMode = wgpu::CallbackMode::AllowSpontaneous;
+        mDeviceCallbacks->deviceLostCallback =
+            [](WGPUDeviceLostReason, char const*, void*) {
+                dawn::WarningLog()
+                    << "No Dawn device lost callback was set. This is probably not "
+                       "intended. If you really want to ignore device lost "
+                       "and suppress this message, set the callback to an empty function.";
+            };
     }
 #endif  // DAWN_ENABLE_ASSERTS
 
@@ -374,18 +389,6 @@ void DeviceBase::WillDropLastExternalRef() {
     // references, they can no longer get the queue from APIGetQueue().
     mQueue = nullptr;
 
-    // Reset callbacks since after dropping the last external reference, the application may have
-    // freed any device-scope memory needed to run the callback.
-    mUncapturedErrorCallback = [](WGPUErrorType, char const* message, void*) {
-        dawn::WarningLog() << "Uncaptured error after last external device reference dropped.\n"
-                           << message;
-    };
-
-    mDeviceLostCallback = [](WGPUDeviceLostReason, char const* message, void*) {
-        dawn::WarningLog() << "Device lost after last external device reference dropped.\n"
-                           << message;
-    };
-
     // mAdapter is not set for mock test devices.
     // TODO(crbug.com/dawn/1702): using a mock adapter could avoid the null checking.
     if (mAdapter != nullptr) {
@@ -458,11 +461,20 @@ void DeviceBase::Destroy() {
     // Skip handling device facilities if they haven't even been created (or failed doing so)
     if (mState != State::BeingCreated) {
         // The device is being destroyed so it will be lost, call the application callback.
-        if (mDeviceLostCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask(
-                std::bind(mDeviceLostCallback, WGPUDeviceLostReason_Destroyed,
-                          "Device was destroyed.", mDeviceLostUserdata));
-            mDeviceLostCallback = nullptr;
+        if (mDeviceCallbacks) {
+            auto callbacks = std::move(mDeviceCallbacks);
+            mDeviceCallbacks.reset();
+            if (callbacks->deviceLostCallback) {
+                auto f = [callback = callbacks->deviceLostCallback,
+                          userdata = callbacks->deviceLostUserdata] {
+                    callback(WGPUDeviceLostReason_Destroyed, "Device was destroyed.", userdata);
+                };
+                if (callbacks->deviceLostCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
+                    f();
+                } else {
+                    mCallbackTaskManager->AddCallbackTask(std::move(f));
+                }
+            }
         }
 
         // Call all the callbacks immediately as the device is about to shut down.
@@ -603,12 +615,20 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         // The device was lost, schedule the application callback's executation.
         // Note: we don't invoke the callbacks directly here because it could cause re-entrances ->
         // possible deadlock.
-        if (mDeviceLostCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mDeviceLostCallback, lost_reason,
-                                                   messageStr, userdata = mDeviceLostUserdata] {
-                callback(lost_reason, messageStr.c_str(), userdata);
-            });
-            mDeviceLostCallback = nullptr;
+        if (mDeviceCallbacks) {
+            auto callbacks = std::move(mDeviceCallbacks);
+            mDeviceCallbacks.reset();
+            if (callbacks->deviceLostCallback) {
+                auto f = [callback = callbacks->deviceLostCallback, lost_reason, messageStr,
+                          userdata = callbacks->deviceLostUserdata] {
+                    callback(lost_reason, messageStr.c_str(), userdata);
+                };
+                if (callbacks->deviceLostCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
+                    f();
+                } else {
+                    mCallbackTaskManager->AddCallbackTask(std::move(f));
+                }
+            }
         }
 
         mQueue->HandleDeviceLoss();
@@ -624,13 +644,19 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         // if it isn't handled. DeviceLost is not handled here because it should be
         // handled by the lost callback.
         bool captured = mErrorScopeStack->HandleError(ToWGPUErrorType(type), messageStr.c_str());
-        if (!captured && mUncapturedErrorCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mUncapturedErrorCallback, type,
-                                                   messageStr,
-                                                   userdata = mUncapturedErrorUserdata] {
+        if (!captured && mDeviceCallbacks && mDeviceCallbacks->uncapturedErrorCallback) {
+            auto f = [callback = mDeviceCallbacks->uncapturedErrorCallback, type, messageStr,
+                      userdata = mDeviceCallbacks->uncapturedErrorUserdata] {
                 callback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)), messageStr.c_str(),
                          userdata);
-            });
+            };
+
+            if (mDeviceCallbacks->uncapturedErrorCallbackMode ==
+                wgpu::CallbackMode::AllowSpontaneous) {
+                f();
+            } else {
+                mCallbackTaskManager->AddCallbackTask(std::move(f));
+            }
         }
     }
 }
@@ -652,11 +678,15 @@ void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* use
     if (IsLost()) {
         return;
     }
-    mLoggingCallback = callback;
-    mLoggingUserdata = userdata;
+    mDeviceCallbacks->loggingCallback = callback;
+    mDeviceCallbacks->loggingUserdata = userdata;
 }
 
 void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, void* userdata) {
+    EmitDeprecationWarning(
+        "SetUncapturedErrorCallback is deprecated. Pass the callback in the device descriptor "
+        "instead.");
+
     // The registered callback function and userdata pointer are stored and used by deferred
     // callback tasks, and after setting a different callback (especially in the case of
     // resetting) the resources pointed by such pointer may be freed. Flush all deferred
@@ -667,12 +697,13 @@ void DeviceBase::APISetUncapturedErrorCallback(wgpu::ErrorCallback callback, voi
     if (IsLost()) {
         return;
     }
-    mUncapturedErrorCallback = callback;
-    mUncapturedErrorUserdata = userdata;
+    mDeviceCallbacks->uncapturedErrorCallback = callback;
+    mDeviceCallbacks->uncapturedErrorUserdata = userdata;
 }
 
 void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, void* userdata) {
-    // TODO(chromium:1234617): Add a deprecation warning.
+    EmitDeprecationWarning(
+        "SetDeviceLostCallback is deprecated. Pass the callback in the device descriptor instead.");
 
     // The registered callback function and userdata pointer are stored and used by deferred
     // callback tasks, and after setting a different callback (especially in the case of
@@ -684,8 +715,8 @@ void DeviceBase::APISetDeviceLostCallback(wgpu::DeviceLostCallback callback, voi
     if (IsLost()) {
         return;
     }
-    mDeviceLostCallback = callback;
-    mDeviceLostUserdata = userdata;
+    mDeviceCallbacks->deviceLostCallback = callback;
+    mDeviceCallbacks->deviceLostUserdata = userdata;
 }
 
 void DeviceBase::APIPushErrorScope(wgpu::ErrorFilter filter) {
@@ -1534,10 +1565,11 @@ void DeviceBase::EmitLog(const char* message) {
 }
 
 void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
-    if (mLoggingCallback != nullptr) {
+    if (mDeviceCallbacks && mDeviceCallbacks->loggingCallback != nullptr) {
         // Use the thread-safe CallbackTaskManager routine
-        std::unique_ptr<LoggingCallbackTask> callbackTask = std::make_unique<LoggingCallbackTask>(
-            mLoggingCallback, loggingType, message, mLoggingUserdata);
+        std::unique_ptr<LoggingCallbackTask> callbackTask =
+            std::make_unique<LoggingCallbackTask>(mDeviceCallbacks->loggingCallback, loggingType,
+                                                  message, mDeviceCallbacks->loggingUserdata);
         mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
     }
 }

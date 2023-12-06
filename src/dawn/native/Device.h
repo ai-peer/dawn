@@ -563,14 +563,21 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                     const TextureCopy& dst,
                                                     const Extent3D& copySizePixels) = 0;
 
-    wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
-    void* mUncapturedErrorUserdata = nullptr;
+    struct DeviceCallbacks {
+        wgpu::CallbackMode uncapturedErrorCallbackMode;
+        wgpu::ErrorCallback uncapturedErrorCallback = nullptr;
+        void* uncapturedErrorUserdata = nullptr;
 
-    wgpu::LoggingCallback mLoggingCallback = nullptr;
-    void* mLoggingUserdata = nullptr;
+        wgpu::LoggingCallback loggingCallback = nullptr;
+        void* loggingUserdata = nullptr;
 
-    wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
-    void* mDeviceLostUserdata = nullptr;
+        wgpu::CallbackMode deviceLostCallbackMode;
+        wgpu::DeviceLostCallback deviceLostCallback = nullptr;
+        void* deviceLostUserdata = nullptr;
+    };
+    // Bundle all the device callbacks together. None of them should be
+    // called after the lost callback is called once.
+    std::optional<DeviceCallbacks> mDeviceCallbacks;
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 

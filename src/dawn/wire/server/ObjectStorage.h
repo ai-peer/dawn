@@ -79,13 +79,6 @@ struct DeviceInfo {
     ObjectHandle self;
 };
 
-template <>
-struct ObjectData<WGPUDevice> : public ObjectDataBase<WGPUDevice> {
-    // Store |info| as a separate allocation so that its address does not move.
-    // The pointer to |info| is used as the userdata to device callback.
-    std::unique_ptr<DeviceInfo> info = std::make_unique<DeviceInfo>();
-};
-
 // Information of both an ID and an object data for use as a shorthand in doers.
 template <typename T>
 struct Known {

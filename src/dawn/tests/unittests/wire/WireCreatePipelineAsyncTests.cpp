@@ -382,10 +382,6 @@ TEST_F(WireCreatePipelineAsyncTest, DeviceDeletedBeforeCallback) {
         .Times(1);
 
     wgpuDeviceRelease(device);
-
-    EXPECT_CALL(api, OnDeviceSetUncapturedErrorCallback(apiDevice, nullptr, nullptr)).Times(1);
-    EXPECT_CALL(api, OnDeviceSetLoggingCallback(apiDevice, nullptr, nullptr)).Times(1);
-    EXPECT_CALL(api, OnDeviceSetDeviceLostCallback(apiDevice, nullptr, nullptr)).Times(1);
     EXPECT_CALL(api, DeviceRelease(apiDevice)).Times(1);
 
     FlushClient();
@@ -438,6 +434,8 @@ TEST(WireCreatePipelineAsyncTestNullBackend, ServerDeletedBeforeCallback) {
     ASSERT_TRUE(s2cBuf->Flush());
 
     WGPUDeviceDescriptor deviceDesc = {};
+    deviceDesc.uncapturedErrorCallbackMode = WGPUCallbackMode_AllowProcessEvents;
+    deviceDesc.deviceLostCallbackMode = WGPUCallbackMode_AllowProcessEvents;
     WGPUDevice device;
     wgpuAdapterRequestDevice(
         adapter, &deviceDesc,

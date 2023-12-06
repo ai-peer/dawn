@@ -65,7 +65,6 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
 
     {% for type in by_category["structure"] if type.has_free_members_function %}
         table->{{as_varName(type.name, Name("free members"))}} = []({{as_cType(type.name)}} {{as_varName(type.name)}}) {
-            dawn::WarningLog() << "No mock available for {{as_varName(type.name, Name('free members'))}}";
         };
     {% endfor %}
 }
@@ -83,8 +82,8 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
             ProcTableAsClass::Object* object = reinterpret_cast<ProcTableAsClass::Object*>({{as_varName(type.name)}});
             {% for callback_arg in method.arguments if callback_arg.type.category == 'function pointer' %}
                 object->m{{as_MethodSuffix(type.name, method.name)}}Callback = {{as_varName(callback_arg.name)}};
+                object->userdatas[reinterpret_cast<void*>({{as_varName(callback_arg.name)}})] = userdata;
             {% endfor %}
-            object->userdata = userdata;
             return On{{as_MethodSuffix(type.name, method.name)}}(
                 {{-as_varName(type.name)}}
                 {%- for arg in method.arguments -%}
@@ -105,7 +104,7 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
                     {%- for arg in callback_arg.type.arguments -%}
                         {%- if not loop.last -%}{{as_varName(arg.name)}}, {% endif -%}
                     {%- endfor -%}
-                    object->userdata);
+                    object->userdatas[reinterpret_cast<void*>(object->m{{Suffix}}Callback)]);
             }
         {% endfor %}
     {% endfor %}
