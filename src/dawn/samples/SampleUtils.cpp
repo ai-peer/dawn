@@ -110,7 +110,8 @@ static std::vector<std::string> enableToggles;
 static std::vector<std::string> disableToggles;
 
 static CmdBufType cmdBufType = CmdBufType::Terrible;
-static std::unique_ptr<dawn::native::Instance> instance;
+static std::unique_ptr<dawn::native::Instance> nativeInstance;
+static wgpu::Instance instance;
 static wgpu::SwapChain swapChain;
 
 static GLFWwindow* window = nullptr;
@@ -143,82 +144,92 @@ wgpu::Device CreateCppDawnDevice() {
     }
 
     WGPUInstanceDescriptor instanceDescriptor{};
-    instanceDescriptor.features.timedWaitAnyEnable = true;
-    instance = std::make_unique<dawn::native::Instance>(&instanceDescriptor);
+    instanceDescriptor.features.timedWaitAnyEnable = cmdBufType == CmdBufType::None;
+    nativeInstance = std::make_unique<dawn::native::Instance>(&instanceDescriptor);
 
-    wgpu::RequestAdapterOptions options = {};
-    options.backendType = backendType;
-
-    // Get an adapter for the backend to use, and create the device.
-    auto adapters = instance->EnumerateAdapters(&options);
-    wgpu::DawnAdapterPropertiesPowerPreference power_props{};
-    wgpu::AdapterProperties adapterProperties{};
-    adapterProperties.nextInChain = &power_props;
-    // Find the first adapter which satisfies the adapterType requirement.
-    auto isAdapterType = [&adapterProperties](const auto& adapter) -> bool {
-        // picks the first adapter when adapterType is unknown.
-        if (adapterType == wgpu::AdapterType::Unknown) {
-            return true;
-        }
-        adapter.GetProperties(&adapterProperties);
-        return adapterProperties.adapterType == adapterType;
-    };
-    auto preferredAdapter = std::find_if(adapters.begin(), adapters.end(), isAdapterType);
-    if (preferredAdapter == adapters.end()) {
-        fprintf(stderr, "Failed to find an adapter! Please try another adapter type.\n");
-        return wgpu::Device();
-    }
-
-    std::vector<const char*> enableToggleNames;
-    std::vector<const char*> disabledToggleNames;
-    for (const std::string& toggle : enableToggles) {
-        enableToggleNames.push_back(toggle.c_str());
-    }
-
-    for (const std::string& toggle : disableToggles) {
-        disabledToggleNames.push_back(toggle.c_str());
-    }
-    WGPUDawnTogglesDescriptor toggles;
-    toggles.chain.sType = WGPUSType_DawnTogglesDescriptor;
-    toggles.chain.next = nullptr;
-    toggles.enabledToggles = enableToggleNames.data();
-    toggles.enabledToggleCount = enableToggleNames.size();
-    toggles.disabledToggles = disabledToggleNames.data();
-    toggles.disabledToggleCount = disabledToggleNames.size();
-
-    WGPUDeviceDescriptor deviceDesc = {};
-    deviceDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(&toggles);
-
-    WGPUDevice backendDevice = preferredAdapter->CreateDevice(&deviceDesc);
     DawnProcTable backendProcs = dawn::native::GetProcs();
 
-    // Create the swapchain
-    auto surfaceChainedDesc = wgpu::glfw::SetupWindowAndGetSurfaceDescriptor(window);
-    WGPUSurfaceDescriptor surfaceDesc;
-    surfaceDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(surfaceChainedDesc.get());
-    WGPUSurface surface = backendProcs.instanceCreateSurface(instance->Get(), &surfaceDesc);
+    // Override instanceRequestAdapter to also search by adapter type.
+    backendProcs.instanceRequestAdapter = [](WGPUInstance, const WGPURequestAdapterOptions* options,
+                                             WGPURequestAdapterCallback callback, void* userdata) {
+        auto adapters = nativeInstance->EnumerateAdapters(options);
 
-    WGPUSwapChainDescriptor swapChainDesc = {};
-    swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
-    swapChainDesc.format = static_cast<WGPUTextureFormat>(GetPreferredSwapChainTextureFormat());
-    swapChainDesc.width = kWidth;
-    swapChainDesc.height = kHeight;
-    swapChainDesc.presentMode = WGPUPresentMode_Mailbox;
-    WGPUSwapChain backendSwapChain =
-        backendProcs.deviceCreateSwapChain(backendDevice, surface, &swapChainDesc);
+        wgpu::AdapterProperties adapterProperties{};
+        // Find the first adapter which satisfies the adapterType requirement.
+        auto isAdapterType = [&adapterProperties](const auto& adapter) -> bool {
+            // picks the first adapter when adapterType is unknown.
+            if (adapterType == wgpu::AdapterType::Unknown) {
+                return true;
+            }
+            adapter.GetProperties(&adapterProperties);
+            return adapterProperties.adapterType == adapterType;
+        };
 
-    // Choose whether to use the backend procs and devices/swapchains directly, or set up the wire.
-    WGPUDevice cDevice = nullptr;
-    DawnProcTable procs;
+        auto preferredAdapter = std::find_if(adapters.begin(), adapters.end(), isAdapterType);
+        if (preferredAdapter == adapters.end()) {
+            fprintf(stderr, "Failed to find an adapter! Please try another adapter type.\n");
+            callback(WGPURequestAdapterStatus_Unavailable, nullptr,
+                     "Failed to find an adapter! Please try another adapter type.\n", userdata);
+            return;
+        }
+        dawn::native::GetProcs().adapterReference(preferredAdapter->Get());
+        callback(WGPURequestAdapterStatus_Success, preferredAdapter->Get(), "", userdata);
+    };
 
+    static WGPUDevice sBackendDevice;
+    // Override adapterRequestDevice to add toggles and save the device in `sBackendDevice`.
+    // sBackendDevice is used temporarily in this function to create the swapchain.
+    backendProcs.adapterRequestDevice = [](WGPUAdapter adapter,
+                                           const WGPUDeviceDescriptor* deviceDesc,
+                                           WGPURequestDeviceCallback callback, void* userdata) {
+        std::vector<const char*> enableToggleNames;
+        std::vector<const char*> disabledToggleNames;
+        for (const std::string& toggle : enableToggles) {
+            enableToggleNames.push_back(toggle.c_str());
+        }
+
+        for (const std::string& toggle : disableToggles) {
+            disabledToggleNames.push_back(toggle.c_str());
+        }
+        WGPUDawnTogglesDescriptor toggles;
+        toggles.chain.sType = WGPUSType_DawnTogglesDescriptor;
+        toggles.chain.next = nullptr;
+        toggles.enabledToggles = enableToggleNames.data();
+        toggles.enabledToggleCount = enableToggleNames.size();
+        toggles.disabledToggles = disabledToggleNames.data();
+        toggles.disabledToggleCount = disabledToggleNames.size();
+
+        WGPUDeviceDescriptor deviceDescCopy = *deviceDesc;
+        deviceDescCopy.nextInChain = &toggles.chain;
+
+        struct CallbackAndUserdata {
+            WGPURequestDeviceCallback callback;
+            void* userdata;
+        };
+        auto* wrapper = new CallbackAndUserdata{callback, userdata};
+
+        dawn::native::GetProcs().adapterRequestDevice(
+            adapter, &deviceDescCopy,
+            [](WGPURequestDeviceStatus status, WGPUDevice device, const char* message,
+               void* rawUserdata) {
+                // Save the backend device.
+                sBackendDevice = device;
+
+                // Forward to the original callback.
+                auto* wrapper = static_cast<CallbackAndUserdata*>(rawUserdata);
+                wrapper->callback(status, device, message, wrapper->userdata);
+                delete wrapper;
+            },
+            wrapper);
+    };
+
+    // Set the procs based on the command buffer type, creating wire facilities as needed.
     switch (cmdBufType) {
         case CmdBufType::None:
-            procs = backendProcs;
-            cDevice = backendDevice;
-            swapChain = wgpu::SwapChain::Acquire(backendSwapChain);
+            instance = wgpu::Instance(nativeInstance->Get());
+            dawnProcSetProcs(&backendProcs);
             break;
-
-        case CmdBufType::Terrible: {
+        case CmdBufType::Terrible:
             c2sBuf = new dawn::utils::TerribleCommandBuffer();
             s2cBuf = new dawn::utils::TerribleCommandBuffer();
 
@@ -233,27 +244,80 @@ wgpu::Device CreateCppDawnDevice() {
             clientDesc.serializer = c2sBuf;
 
             wireClient = new dawn::wire::WireClient(clientDesc);
-            procs = dawn::wire::client::GetProcs();
+            dawnProcSetProcs(&dawn::wire::client::GetProcs());
             s2cBuf->SetHandler(wireClient);
 
-            auto deviceReservation = wireClient->ReserveDevice();
-            wireServer->InjectDevice(backendDevice, deviceReservation.id,
-                                     deviceReservation.generation);
-            cDevice = deviceReservation.device;
-
-            auto swapChainReservation = wireClient->ReserveSwapChain(cDevice, &swapChainDesc);
-            wireServer->InjectSwapChain(backendSwapChain, swapChainReservation.id,
-                                        swapChainReservation.generation, deviceReservation.id,
-                                        deviceReservation.generation);
-            swapChain = wgpu::SwapChain::Acquire(swapChainReservation.swapchain);
-        } break;
+            auto instanceReservation = wireClient->ReserveInstance();
+            wireServer->InjectInstance(nativeInstance->Get(), instanceReservation.id,
+                                       instanceReservation.generation);
+            instance = wgpu::Instance::Acquire(instanceReservation.instance);
     }
 
-    dawnProcSetProcs(&procs);
-    procs.deviceSetUncapturedErrorCallback(cDevice, PrintDeviceError, nullptr);
-    procs.deviceSetDeviceLostCallback(cDevice, DeviceLostCallback, nullptr);
-    procs.deviceSetLoggingCallback(cDevice, DeviceLogCallback, nullptr);
-    return wgpu::Device::Acquire(cDevice);
+    // Request the adapter
+
+    wgpu::RequestAdapterOptions options = {};
+    options.backendType = backendType;
+    wgpu::Adapter adapter;
+    instance.RequestAdapter(
+        &options,
+        [](WGPURequestAdapterStatus, WGPUAdapter cAdapter, const char*, void* userdata) {
+            *static_cast<wgpu::Adapter*>(userdata) = wgpu::Adapter::Acquire(cAdapter);
+        },
+        &adapter);
+    instance.ProcessEvents();
+    DoFlush();
+    if (!adapter) {
+        fprintf(stderr, "Failed to find an adapter! Please try another adapter type.\n");
+        return nullptr;
+    }
+
+    // Request the device
+
+    wgpu::DeviceDescriptor deviceDesc = {};
+    deviceDesc.uncapturedErrorCallback = PrintDeviceError;
+    deviceDesc.deviceLostCallback = DeviceLostCallback;
+
+    wgpu::Device device;
+    adapter.RequestDevice(
+        &deviceDesc,
+        [](WGPURequestDeviceStatus, WGPUDevice cDevice, const char*, void* userdata) {
+            *static_cast<wgpu::Device*>(userdata) = wgpu::Device::Acquire(cDevice);
+        },
+        &device);
+    instance.ProcessEvents();
+    DoFlush();
+    if (!device) {
+        fprintf(stderr, "Failed to create device!\n");
+        return nullptr;
+    }
+    device.SetLoggingCallback(DeviceLogCallback, nullptr);
+
+    // Create the swapchain from the backend device.
+    auto surfaceChainedDesc = wgpu::glfw::SetupWindowAndGetSurfaceDescriptor(window);
+    WGPUSurfaceDescriptor surfaceDesc;
+    surfaceDesc.nextInChain = reinterpret_cast<WGPUChainedStruct*>(surfaceChainedDesc.get());
+    WGPUSurface surface = backendProcs.instanceCreateSurface(nativeInstance->Get(), &surfaceDesc);
+
+    WGPUSwapChainDescriptor swapChainDesc = {};
+    swapChainDesc.usage = WGPUTextureUsage_RenderAttachment;
+    swapChainDesc.format = static_cast<WGPUTextureFormat>(GetPreferredSwapChainTextureFormat());
+    swapChainDesc.width = kWidth;
+    swapChainDesc.height = kHeight;
+    swapChainDesc.presentMode = WGPUPresentMode_Mailbox;
+    WGPUSwapChain backendSwapChain =
+        backendProcs.deviceCreateSwapChain(sBackendDevice, surface, &swapChainDesc);
+
+    if (cmdBufType == CmdBufType::Terrible) {
+        // Inject the swapchain when using the wire.
+        auto swapChainReservation = wireClient->ReserveSwapChain(device.Get(), &swapChainDesc);
+        wireServer->InjectSwapChain(backendSwapChain, swapChainReservation.id,
+                                    swapChainReservation.generation, swapChainReservation.deviceId,
+                                    swapChainReservation.deviceGeneration);
+        swapChain = wgpu::SwapChain::Acquire(swapChainReservation.swapchain);
+    } else {
+        swapChain = wgpu::SwapChain::Acquire(backendSwapChain);
+    }
+    return device;
 }
 
 wgpu::TextureFormat GetPreferredSwapChainTextureFormat() {
@@ -439,5 +503,5 @@ GLFWwindow* GetGLFWWindow() {
 }
 
 void ProcessEvents() {
-    dawn::native::InstanceProcessEvents(instance->Get());
+    instance.ProcessEvents();
 }

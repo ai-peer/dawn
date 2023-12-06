@@ -37,6 +37,7 @@
 #include <gmock/gmock.h>
 
 #include <memory>
+#include <unordered_map>
 
 // An abstract base class representing a proc table so that API calls can be mocked. Most API calls
 // are directly represented by a delete virtual method but others need minimal state tracking to be
@@ -107,7 +108,7 @@ class ProcTableAsClass {
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
-            void* userdata = 0;
+            std::unordered_map<void*, void*> userdatas;
         };
 
     private:

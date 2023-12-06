@@ -316,5 +316,121 @@ TEST_F(DeviceCreationTest, RequestDeviceFailure) {
     adapter.RequestDevice(&desc, cb.Callback(), cb.MakeUserdata(this));
 }
 
+// Test creating a device with Spontaneous uncaptured error callback.
+TEST_F(DeviceCreationTest, SpontaneousUncapturedErrorCallback) {
+    auto errorCb = std::make_unique<MockCallback<WGPUErrorCallback>>();
+
+    WGPUDevice cDevice;
+    {
+        MockCallback<WGPURequestDeviceCallback> requestDeviceCb;
+        EXPECT_CALL(requestDeviceCb,
+                    Call(WGPURequestDeviceStatus_Success, NotNull(), nullptr, this))
+            .WillOnce(SaveArg<1>(&cDevice));
+
+        wgpu::DeviceDescriptor desc = {};
+        desc.uncapturedErrorCallbackMode = wgpu::CallbackMode::AllowSpontaneous;
+        desc.uncapturedErrorCallback = errorCb->Callback();
+        desc.uncapturedErrorUserdata = errorCb->MakeUserdata(this);
+        adapter.RequestDevice(&desc, requestDeviceCb.Callback(),
+                              requestDeviceCb.MakeUserdata(this));
+    }
+
+    wgpu::Device device = wgpu::Device::Acquire(cDevice);
+    EXPECT_NE(device, nullptr);
+
+    // Do something invalid. Expect the error callback to be called immediately.
+    EXPECT_CALL(*errorCb, Call(WGPUErrorType_Validation, testing::_, this)).Times(1);
+    wgpu::BufferDescriptor bufferDesc{};
+    device.CreateBuffer(&bufferDesc);
+    errorCb = nullptr;
+}
+
+// Test creating a device with Spontaneous lost callback.
+TEST_F(DeviceCreationTest, SpontaneousDeviceLostCallback) {
+    auto lostCb = std::make_unique<MockCallback<WGPUDeviceLostCallback>>();
+
+    WGPUDevice cDevice;
+    {
+        MockCallback<WGPURequestDeviceCallback> requestDeviceCb;
+        EXPECT_CALL(requestDeviceCb,
+                    Call(WGPURequestDeviceStatus_Success, NotNull(), nullptr, this))
+            .WillOnce(SaveArg<1>(&cDevice));
+
+        wgpu::DeviceDescriptor desc = {};
+        desc.deviceLostCallbackMode = wgpu::CallbackMode::AllowSpontaneous;
+        desc.deviceLostCallback = lostCb->Callback();
+        desc.deviceLostUserdata = lostCb->MakeUserdata(this);
+        adapter.RequestDevice(&desc, requestDeviceCb.Callback(),
+                              requestDeviceCb.MakeUserdata(this));
+    }
+    wgpu::Device device = wgpu::Device::Acquire(cDevice);
+    EXPECT_NE(device, nullptr);
+
+    // Destroy the device. Expect the error callback to be called immediately.
+    EXPECT_CALL(*lostCb, Call(WGPUDeviceLostReason_Destroyed, testing::_, this)).Times(1);
+    device.Destroy();
+    lostCb = nullptr;
+}
+
+// Test creating a device with ProcessEvents uncaptured error callback.
+TEST_F(DeviceCreationTest, ProcessEventsUncapturedErrorCallback) {
+    auto errorCb = std::make_unique<MockCallback<WGPUErrorCallback>>();
+
+    WGPUDevice cDevice;
+    {
+        MockCallback<WGPURequestDeviceCallback> requestDeviceCb;
+        EXPECT_CALL(requestDeviceCb,
+                    Call(WGPURequestDeviceStatus_Success, NotNull(), nullptr, this))
+            .WillOnce(SaveArg<1>(&cDevice));
+
+        wgpu::DeviceDescriptor desc = {};
+        desc.uncapturedErrorCallbackMode = wgpu::CallbackMode::AllowProcessEvents;
+        desc.uncapturedErrorCallback = errorCb->Callback();
+        desc.uncapturedErrorUserdata = errorCb->MakeUserdata(this);
+        adapter.RequestDevice(&desc, requestDeviceCb.Callback(),
+                              requestDeviceCb.MakeUserdata(this));
+    }
+
+    wgpu::Device device = wgpu::Device::Acquire(cDevice);
+    EXPECT_NE(device, nullptr);
+
+    // Do something invalid. Expect the error callback to be called after ProcessEvents.
+    wgpu::BufferDescriptor bufferDesc{};
+    device.CreateBuffer(&bufferDesc);
+
+    EXPECT_CALL(*errorCb, Call(WGPUErrorType_Validation, testing::_, this)).Times(1);
+    wgpu::Instance(instance->Get()).ProcessEvents();
+    errorCb = nullptr;
+}
+
+// Test creating a device with ProcessEvents lost callback.
+TEST_F(DeviceCreationTest, ProcessEventsDeviceLostCallback) {
+    auto lostCb = std::make_unique<MockCallback<WGPUDeviceLostCallback>>();
+
+    WGPUDevice cDevice;
+    {
+        MockCallback<WGPURequestDeviceCallback> requestDeviceCb;
+        EXPECT_CALL(requestDeviceCb,
+                    Call(WGPURequestDeviceStatus_Success, NotNull(), nullptr, this))
+            .WillOnce(SaveArg<1>(&cDevice));
+
+        wgpu::DeviceDescriptor desc = {};
+        desc.deviceLostCallbackMode = wgpu::CallbackMode::AllowProcessEvents;
+        desc.deviceLostCallback = lostCb->Callback();
+        desc.deviceLostUserdata = lostCb->MakeUserdata(this);
+        adapter.RequestDevice(&desc, requestDeviceCb.Callback(),
+                              requestDeviceCb.MakeUserdata(this));
+    }
+    wgpu::Device device = wgpu::Device::Acquire(cDevice);
+    EXPECT_NE(device, nullptr);
+
+    // Destroy the device. Expect the error callback to be called after ProcessEvents.
+    device.Destroy();
+
+    EXPECT_CALL(*lostCb, Call(WGPUDeviceLostReason_Destroyed, testing::_, this)).Times(1);
+    wgpu::Instance(instance->Get()).ProcessEvents();
+    lostCb = nullptr;
+}
+
 }  // anonymous namespace
 }  // namespace dawn::native

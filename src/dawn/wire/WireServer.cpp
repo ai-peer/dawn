@@ -61,10 +61,6 @@ bool WireServer::InjectSwapChain(WGPUSwapChain swapchain,
            WireResult::Success;
 }
 
-bool WireServer::InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation) {
-    return mImpl->InjectDevice(device, id, generation) == WireResult::Success;
-}
-
 bool WireServer::InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generation) {
     return mImpl->InjectInstance(instance, id, generation) == WireResult::Success;
 }

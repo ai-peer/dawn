@@ -65,8 +65,6 @@ class DAWN_WIRE_EXPORT WireServer : public CommandHandler {
                          uint32_t deviceId,
                          uint32_t deviceGeneration);
 
-    bool InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation);
-
     bool InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generation);
 
     // Look up a device by (id, generation) pair. Returns nullptr if the generation
