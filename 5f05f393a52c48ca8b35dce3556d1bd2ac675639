@@ -51,6 +51,24 @@
       "parentUuid": "f6cb6b4d_2afdbc3e",
       "revId": "5f05f393a52c48ca8b35dce3556d1bd2ac675639",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c0b79e3_ce0b1481",
+        "filename": "test/tint/buffer/uniform/std140/array/mat2x2_f32/dynamic_index_via_ptr.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-07T15:50:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b98f153_af7d0ce5",
+      "revId": "5f05f393a52c48ca8b35dce3556d1bd2ac675639",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
