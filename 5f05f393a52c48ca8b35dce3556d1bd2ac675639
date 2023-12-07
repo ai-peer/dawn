@@ -33,6 +33,24 @@
       "message": "Doesn\u0027t look like `l_a` or `l_a_i` have any uses? Maybe need multiple storage buffer outputs on these ones.",
       "revId": "5f05f393a52c48ca8b35dce3556d1bd2ac675639",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b98f153_af7d0ce5",
+        "filename": "test/tint/buffer/uniform/std140/array/mat2x2_f32/dynamic_index_via_ptr.wgsl",
+        "patchSetId": 1
+      },
+      "lineNbr": 14,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-07T15:05:49Z",
+      "side": 1,
+      "message": "Doh, I got tricked. I read through the `p` ones and saw it was used down the list and assumed the `l` ones worked the same way. Will fix. Good catch.",
+      "parentUuid": "f6cb6b4d_2afdbc3e",
+      "revId": "5f05f393a52c48ca8b35dce3556d1bd2ac675639",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
