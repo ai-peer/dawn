@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f7bd6d4_4535b5bc",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-07T08:41:05Z",
+      "side": 1,
+      "message": "We probably need to land this before landing the CL that adds the support for depthSlice !\u003d0.\n\nAlso can add a basic test in UnsafeAPITests.cpp?",
+      "revId": "c2c587334af75fc3cddcc1e51884f8d7e308cedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
