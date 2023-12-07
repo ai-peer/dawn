@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5b63f27_c8f651d0",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-07T21:31:35Z",
+      "side": 1,
+      "message": "Aw... it was supposed to link directly to the slide with the \"Vulkan as a Star Destroyer\" gif. 😄",
+      "parentUuid": "f48a8cc0_253e0e74",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dbe9dff_4107f8b9",
@@ -429,6 +447,30 @@
       "side": 1,
       "message": "wow.. it *shouldn\u0027t* simply be calling device.ImportSharedTextureMemory.\n\nThis was the reason the tests were failing on Android!! I was making a new STM AHardwareBuffer backing per device.... and wondering why everything was black and STMs weren\u0027t seeing the same backing contents 😭😄\n\nbut hey it works now!! 🎉🎉🎉\n\nedit: argh... just one failure on Android Qualcomm nvm",
       "parentUuid": "de6b7d59_dcdeeffc",
+      "range": {
+        "startLine": 88,
+        "startChar": 71,
+        "endLine": 88,
+        "endChar": 79
+      },
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60c7dd4a_3dbd3cec",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-07T21:31:35Z",
+      "side": 1,
+      "message": "\u003e \"failure on Android Qualcomm nvm\"\n\nIt would be more surprising if you DIDN\u0027T hit a failure on Qualcomm, to be honest. 😜",
+      "parentUuid": "a675e51b_b5927585",
       "range": {
         "startLine": 88,
         "startChar": 71,
