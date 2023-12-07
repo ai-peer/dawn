@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d1cf8ea_4938d031",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 216,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-07T07:18:41Z",
+      "side": 1,
+      "message": "Implemented DestroyImpl to clear it. PTAL again, thanks!",
+      "parentUuid": "d602177a_139a212f",
+      "range": {
+        "startLine": 216,
+        "startChar": 0,
+        "endLine": 216,
+        "endChar": 72
+      },
+      "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ba0d2dc_65f6aecd",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-04T19:31:24Z",
       "side": 1,
       "message": "std::move here doesn\u0027t seem right. We want to return a copy of the handle, not move it out, right?",
+      "range": {
+        "startLine": 1772,
+        "startChar": 0,
+        "endLine": 1772,
+        "endChar": 60
+      },
+      "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e7c54b89_e3e88c9c",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1772,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-07T07:18:41Z",
+      "side": 1,
+      "message": "Sure, we should not move it.",
+      "parentUuid": "1ba0d2dc_65f6aecd",
       "range": {
         "startLine": 1772,
         "startChar": 0,
@@ -84,6 +132,30 @@
       "side": 1,
       "message": "mHandlesFor2DViewOn3D had been cleared in DestroyImpl in Vulkan, I just missed it in D3D11, and will clear it.",
       "parentUuid": "93c28d89_96866099",
+      "range": {
+        "startLine": 238,
+        "startChar": 0,
+        "endLine": 238,
+        "endChar": 51
+      },
+      "revId": "6e79ef6256559822b303fb273dfc4029eca1b378",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f71a3350_69a76bdb",
+        "filename": "src/dawn/native/vulkan/TextureVk.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-07T07:18:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c75dd753_b46775a2",
       "range": {
         "startLine": 238,
         "startChar": 0,
