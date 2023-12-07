@@ -465,8 +465,10 @@ MaybeError ValidateColorTargetState(
                     "(%s) component count (%u).",
                     fragmentOutputVariable.componentCount, format->format, format->componentCount);
 
-    if (descriptor.blend && fragmentOutputVariable.componentCount < 4u) {
-        // No alpha channel output, make sure there's no alpha involved in the blending operation.
+    if (descriptor.blend && fragmentOutputVariable.componentCount < 4u &&
+        descriptor.writeMask != wgpu::ColorWriteMask::None) {
+        // No alpha channel output, make sure there's no alpha involved in the blending operation,
+        // or the writeMask is exactly 0.
         DAWN_INVALID_IF(BlendFactorContainsSrcAlpha(descriptor.blend->color.srcFactor) ||
                             BlendFactorContainsSrcAlpha(descriptor.blend->color.dstFactor),
                         "Color blending srcFactor (%s) or dstFactor (%s) is reading alpha "
