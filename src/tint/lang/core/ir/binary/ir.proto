@@ -48,7 +48,8 @@ message Type {
         TypeMatrix matrix = 3;
         TypeArray array = 4;
         TypePointer pointer = 5;
-        uint32 atomic = 6;  // Module.types
+        TypeStruct struct = 6;
+        uint32 atomic = 7;  // Module.types
         // TODO: textures, samplers
     }
 }
@@ -84,6 +85,16 @@ message TypePointer {
     AddressSpace address_space = 1;
     uint32 store_type = 2;  // Module.types
     AccessControl access = 3;
+}
+
+message TypeStruct {
+    repeated TypeStructMember member = 1;
+    optional string name = 2;
+}
+
+message TypeStructMember {
+    uint32 type = 1;
+    optional string name = 2;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
