@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70d998c0_e037a172",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6408eaee_889a97aa",
+      "range": {
+        "startLine": 116,
+        "startChar": 0,
+        "endLine": 116,
+        "endChar": 63
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9d97ef7e_835da88e",
@@ -54,6 +78,30 @@
       "writtenOn": "2023-12-06T01:51:44Z",
       "side": 1,
       "message": "ditto: `unpackedChain` unused",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 54
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eabfb3cd_712f2fa0",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d97ef7e_835da88e",
       "range": {
         "startLine": 159,
         "startChar": 0,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c73beea3_81955018",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Took some work... but got something working-ish, lmk what you think. In the header, I still need to include the `enable_if` clauses to handle the cases described in https://dawn-review.googlesource.com/c/dawn/+/163600/comment/219425cc_7d37542d/.",
+      "parentUuid": "582ef96d_422e7a2d",
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e5b5627_3d2af7cd",
@@ -94,6 +160,30 @@
       "writtenOn": "2023-12-06T01:51:44Z",
       "side": 1,
       "message": "whitespace",
+      "range": {
+        "startLine": 248,
+        "startChar": 32,
+        "endLine": 248,
+        "endChar": 34
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "02a2437b_1401692c",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e5b5627_3d2af7cd",
       "range": {
         "startLine": 248,
         "startChar": 32,
@@ -127,6 +217,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecbcc61a_dcc66333",
+        "filename": "generator/templates/dawn/native/ChainUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d1b632a0_dd940e57",
+      "range": {
+        "startLine": 215,
+        "startChar": 0,
+        "endLine": 215,
+        "endChar": 54
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0f7f11f9_03a387b9",
@@ -140,6 +254,24 @@
       "writtenOn": "2023-12-06T14:13:13Z",
       "side": 1,
       "message": "nit: this could be passed as a template argument to UnpackedBase?",
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eb11dd94_e6b7216a",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Not sure if this is what you meant, but I reworked this a bit and entirely got rid of the `UnpackedOut` type now. Instead we just have one `Unpacked` type that figures out the correct chain type.",
+      "parentUuid": "0f7f11f9_03a387b9",
       "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +299,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d048ee5d_069efd34",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Can\u0027t here, `R` is not the same type as the the `T` in `UnpackedT` since `R` is the type of the root extension in the branch.",
+      "parentUuid": "58e6e447_0d14d10f",
+      "range": {
+        "startLine": 172,
+        "startChar": 49,
+        "endLine": 172,
+        "endChar": 97
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6c4bef_2d44627c",
@@ -180,6 +336,30 @@
       "writtenOn": "2023-12-06T01:51:44Z",
       "side": 1,
       "message": "nit: swap %s and \\n ?",
+      "range": {
+        "startLine": 224,
+        "startChar": 59,
+        "endLine": 224,
+        "endChar": 69
+      },
+      "revId": "f5cdaed412520ef5b033e9a3ff049dd90c521714",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7a518fe_580ebdfa",
+        "filename": "src/dawn/native/ChainUtils.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 224,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-07T00:29:57Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e6c4bef_2d44627c",
       "range": {
         "startLine": 224,
         "startChar": 59,
