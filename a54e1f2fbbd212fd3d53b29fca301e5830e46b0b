@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "571394f5_4e9fab40",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-07T21:18:11Z",
+      "side": 1,
+      "message": "Looking good so far!",
+      "revId": "a54e1f2fbbd212fd3d53b29fca301e5830e46b0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "28c6a79b_d52d82d6",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1988,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-07T21:18:11Z",
+      "side": 1,
+      "message": "```suggestion\n    const core::type::Type* storage_ty \u003d object_ty;\n    if (memory_view) {\n        storage_ty \u003d memory_view-\u003eStoreType();\n    }\n```",
+      "range": {
+        "startLine": 1983,
+        "startChar": 0,
+        "endLine": 1988,
+        "endChar": 5
+      },
+      "revId": "a54e1f2fbbd212fd3d53b29fca301e5830e46b0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2c982615_a0c19ad4",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3409,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-07T21:18:11Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a54e1f2fbbd212fd3d53b29fca301e5830e46b0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
