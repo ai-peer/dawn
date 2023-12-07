@@ -29,6 +29,8 @@
 
 #include <utility>
 
+#include "src/tint/lang/core/builtin_fn.h"
+#include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/core/constant/composite.h"
 #include "src/tint/lang/core/constant/scalar.h"
 #include "src/tint/lang/core/constant/splat.h"
@@ -240,6 +242,7 @@ struct Encoder {
                 [&](const core::type::Vector* v) { TypeVector(*type_out.mutable_vector(), v); },
                 [&](const core::type::Matrix* m) { TypeMatrix(*type_out.mutable_matrix(), m); },
                 [&](const core::type::Pointer* m) { TypePointer(*type_out.mutable_pointer(), m); },
+                [&](const core::type::Struct* s) { TypeStruct(*type_out.mutable_struct_(), s); },
                 [&](const core::type::Array* m) { TypeArray(*type_out.mutable_array(), m); },
                 TINT_ICE_ON_NO_MATCH);
 
@@ -263,6 +266,39 @@ struct Encoder {
         pointer_out.set_address_space(AddressSpace(pointer_in->AddressSpace()));
         pointer_out.set_store_type(Type(pointer_in->StoreType()));
         pointer_out.set_access(Access(pointer_in->Access()));
+    }
+
+    void TypeStruct(pb::TypeStruct& struct_out, const core::type::Struct* struct_in) {
+        struct_out.set_name(struct_in->Name().Name());
+        for (auto* member_in : struct_in->Members()) {
+            auto& member_out = *struct_out.add_member();
+            member_out.set_name(member_in->Name().Name());
+            member_out.set_type(Type(member_in->Type()));
+            member_out.set_size(member_in->Size());
+            member_out.set_align(member_in->Align());
+
+            auto& attrs_in = member_in->Attributes();
+            if (attrs_in.location) {
+                member_out.mutable_attributes()->set_location(*attrs_in.location);
+            }
+            if (attrs_in.index) {
+                member_out.mutable_attributes()->set_index(*attrs_in.index);
+            }
+            if (attrs_in.color) {
+                member_out.mutable_attributes()->set_color(*attrs_in.color);
+            }
+            if (attrs_in.builtin) {
+                member_out.mutable_attributes()->set_builtin(BuiltinValue(*attrs_in.builtin));
+            }
+            if (auto& interpolation_in = attrs_in.interpolation) {
+                auto& interpolation_out = *member_out.mutable_attributes()->mutable_interpolation();
+                interpolation_out.set_type(InterpolationType(interpolation_in->type));
+                interpolation_out.set_sampling(InterpolationSampling(interpolation_in->sampling));
+            }
+            if (attrs_in.invariant) {
+                member_out.mutable_attributes()->set_invariant(true);
+            }
+        }
     }
 
     void TypeArray(pb::TypeArray& array_out, const core::type::Array* array_in) {
@@ -457,6 +493,314 @@ struct Encoder {
 
         TINT_ICE() << "invalid BinaryOp: " << in;
         return pb::BinaryOp::add_;
+    }
+
+    pb::InterpolationType InterpolationType(core::InterpolationType in) {
+        switch (in) {
+            case core::InterpolationType::kFlat:
+                return pb::InterpolationType::flat;
+            case core::InterpolationType::kLinear:
+                return pb::InterpolationType::linear;
+            case core::InterpolationType::kPerspective:
+                return pb::InterpolationType::perspective;
+            default:
+                break;
+        }
+        TINT_ICE() << "invalid InterpolationType: " << in;
+        return pb::InterpolationType::flat;
+    }
+
+    pb::InterpolationSampling InterpolationSampling(core::InterpolationSampling in) {
+        switch (in) {
+            case core::InterpolationSampling::kCenter:
+                return pb::InterpolationSampling::center;
+            case core::InterpolationSampling::kCentroid:
+                return pb::InterpolationSampling::centroid;
+            case core::InterpolationSampling::kSample:
+                return pb::InterpolationSampling::sample;
+            default:
+                break;
+        }
+        TINT_ICE() << "invalid InterpolationSampling: " << in;
+        return pb::InterpolationSampling::center;
+    }
+
+    pb::BuiltinValue BuiltinValue(core::BuiltinValue in) {
+        switch (in) {
+            case core::BuiltinValue::kPointSize:
+                return pb::BuiltinValue::point_size;
+            case core::BuiltinValue::kFragDepth:
+                return pb::BuiltinValue::frag_depth;
+            case core::BuiltinValue::kFrontFacing:
+                return pb::BuiltinValue::front_facing;
+            case core::BuiltinValue::kGlobalInvocationId:
+                return pb::BuiltinValue::global_invocation_id;
+            case core::BuiltinValue::kInstanceIndex:
+                return pb::BuiltinValue::instance_index;
+            case core::BuiltinValue::kLocalInvocationId:
+                return pb::BuiltinValue::local_invocation_id;
+            case core::BuiltinValue::kLocalInvocationIndex:
+                return pb::BuiltinValue::local_invocation_index;
+            case core::BuiltinValue::kNumWorkgroups:
+                return pb::BuiltinValue::num_workgroups;
+            case core::BuiltinValue::kPosition:
+                return pb::BuiltinValue::position;
+            case core::BuiltinValue::kSampleIndex:
+                return pb::BuiltinValue::sample_index;
+            case core::BuiltinValue::kSampleMask:
+                return pb::BuiltinValue::sample_mask;
+            case core::BuiltinValue::kSubgroupInvocationId:
+                return pb::BuiltinValue::subgroup_invocation_id;
+            case core::BuiltinValue::kSubgroupSize:
+                return pb::BuiltinValue::subgroup_size;
+            case core::BuiltinValue::kVertexIndex:
+                return pb::BuiltinValue::vertex_index;
+            case core::BuiltinValue::kWorkgroupId:
+                return pb::BuiltinValue::workgroup_id;
+            default:
+                break;
+        }
+        TINT_ICE() << "invalid BuiltinValue: " << in;
+        return pb::BuiltinValue::point_size;
+    }
+
+    pb::BuiltinFn BuiltinFn(core::BuiltinFn in) {
+        switch (in) {
+            case core::BuiltinFn::kAbs:
+                return pb::BuiltinFn::abs;
+            case core::BuiltinFn::kAcos:
+                return pb::BuiltinFn::acos;
+            case core::BuiltinFn::kAcosh:
+                return pb::BuiltinFn::acosh;
+            case core::BuiltinFn::kAll:
+                return pb::BuiltinFn::all;
+            case core::BuiltinFn::kAny:
+                return pb::BuiltinFn::any;
+            case core::BuiltinFn::kArrayLength:
+                return pb::BuiltinFn::array_length;
+            case core::BuiltinFn::kAsin:
+                return pb::BuiltinFn::asin;
+            case core::BuiltinFn::kAsinh:
+                return pb::BuiltinFn::asinh;
+            case core::BuiltinFn::kAtan:
+                return pb::BuiltinFn::atan;
+            case core::BuiltinFn::kAtan2:
+                return pb::BuiltinFn::atan2;
+            case core::BuiltinFn::kAtanh:
+                return pb::BuiltinFn::atanh;
+            case core::BuiltinFn::kCeil:
+                return pb::BuiltinFn::ceil;
+            case core::BuiltinFn::kClamp:
+                return pb::BuiltinFn::clamp;
+            case core::BuiltinFn::kCos:
+                return pb::BuiltinFn::cos;
+            case core::BuiltinFn::kCosh:
+                return pb::BuiltinFn::cosh;
+            case core::BuiltinFn::kCountLeadingZeros:
+                return pb::BuiltinFn::count_leading_zeros;
+            case core::BuiltinFn::kCountOneBits:
+                return pb::BuiltinFn::count_one_bits;
+            case core::BuiltinFn::kCountTrailingZeros:
+                return pb::BuiltinFn::count_trailing_zeros;
+            case core::BuiltinFn::kCross:
+                return pb::BuiltinFn::cross;
+            case core::BuiltinFn::kDegrees:
+                return pb::BuiltinFn::degrees;
+            case core::BuiltinFn::kDeterminant:
+                return pb::BuiltinFn::determinant;
+            case core::BuiltinFn::kDistance:
+                return pb::BuiltinFn::distance;
+            case core::BuiltinFn::kDot:
+                return pb::BuiltinFn::dot;
+            case core::BuiltinFn::kDot4I8Packed:
+                return pb::BuiltinFn::dot4i8_packed;
+            case core::BuiltinFn::kDot4U8Packed:
+                return pb::BuiltinFn::dot4u8_packed;
+            case core::BuiltinFn::kDpdx:
+                return pb::BuiltinFn::dpdx;
+            case core::BuiltinFn::kDpdxCoarse:
+                return pb::BuiltinFn::dpdx_coarse;
+            case core::BuiltinFn::kDpdxFine:
+                return pb::BuiltinFn::dpdx_fine;
+            case core::BuiltinFn::kDpdy:
+                return pb::BuiltinFn::dpdy;
+            case core::BuiltinFn::kDpdyCoarse:
+                return pb::BuiltinFn::dpdy_coarse;
+            case core::BuiltinFn::kDpdyFine:
+                return pb::BuiltinFn::dpdy_fine;
+            case core::BuiltinFn::kExp:
+                return pb::BuiltinFn::exp;
+            case core::BuiltinFn::kExp2:
+                return pb::BuiltinFn::exp2;
+            case core::BuiltinFn::kExtractBits:
+                return pb::BuiltinFn::extract_bits;
+            case core::BuiltinFn::kFaceForward:
+                return pb::BuiltinFn::face_forward;
+            case core::BuiltinFn::kFirstLeadingBit:
+                return pb::BuiltinFn::first_leading_bit;
+            case core::BuiltinFn::kFirstTrailingBit:
+                return pb::BuiltinFn::first_trailing_bit;
+            case core::BuiltinFn::kFloor:
+                return pb::BuiltinFn::floor;
+            case core::BuiltinFn::kFma:
+                return pb::BuiltinFn::fma;
+            case core::BuiltinFn::kFract:
+                return pb::BuiltinFn::fract;
+            case core::BuiltinFn::kFrexp:
+                return pb::BuiltinFn::frexp;
+            case core::BuiltinFn::kFwidth:
+                return pb::BuiltinFn::fwidth;
+            case core::BuiltinFn::kFwidthCoarse:
+                return pb::BuiltinFn::fwidth_coarse;
+            case core::BuiltinFn::kFwidthFine:
+                return pb::BuiltinFn::fwidth_fine;
+            case core::BuiltinFn::kInsertBits:
+                return pb::BuiltinFn::insert_bits;
+            case core::BuiltinFn::kInverseSqrt:
+                return pb::BuiltinFn::inverse_sqrt;
+            case core::BuiltinFn::kLdexp:
+                return pb::BuiltinFn::ldexp;
+            case core::BuiltinFn::kLength:
+                return pb::BuiltinFn::length;
+            case core::BuiltinFn::kLog:
+                return pb::BuiltinFn::log;
+            case core::BuiltinFn::kLog2:
+                return pb::BuiltinFn::log2;
+            case core::BuiltinFn::kMax:
+                return pb::BuiltinFn::max;
+            case core::BuiltinFn::kMin:
+                return pb::BuiltinFn::min;
+            case core::BuiltinFn::kMix:
+                return pb::BuiltinFn::mix;
+            case core::BuiltinFn::kModf:
+                return pb::BuiltinFn::modf;
+            case core::BuiltinFn::kNormalize:
+                return pb::BuiltinFn::normalize;
+            case core::BuiltinFn::kPack2X16Float:
+                return pb::BuiltinFn::pack2x16_float;
+            case core::BuiltinFn::kPack2X16Snorm:
+                return pb::BuiltinFn::pack2x16_snorm;
+            case core::BuiltinFn::kPack2X16Unorm:
+                return pb::BuiltinFn::pack2x16_unorm;
+            case core::BuiltinFn::kPack4X8Snorm:
+                return pb::BuiltinFn::pack4x8_snorm;
+            case core::BuiltinFn::kPack4X8Unorm:
+                return pb::BuiltinFn::pack4x8_unorm;
+            case core::BuiltinFn::kPow:
+                return pb::BuiltinFn::pow;
+            case core::BuiltinFn::kQuantizeToF16:
+                return pb::BuiltinFn::quantize_to_f16;
+            case core::BuiltinFn::kRadians:
+                return pb::BuiltinFn::radians;
+            case core::BuiltinFn::kReflect:
+                return pb::BuiltinFn::reflect;
+            case core::BuiltinFn::kRefract:
+                return pb::BuiltinFn::refract;
+            case core::BuiltinFn::kReverseBits:
+                return pb::BuiltinFn::reverse_bits;
+            case core::BuiltinFn::kRound:
+                return pb::BuiltinFn::round;
+            case core::BuiltinFn::kSaturate:
+                return pb::BuiltinFn::saturate;
+            case core::BuiltinFn::kSelect:
+                return pb::BuiltinFn::select;
+            case core::BuiltinFn::kSign:
+                return pb::BuiltinFn::sign;
+            case core::BuiltinFn::kSin:
+                return pb::BuiltinFn::sin;
+            case core::BuiltinFn::kSinh:
+                return pb::BuiltinFn::sinh;
+            case core::BuiltinFn::kSmoothstep:
+                return pb::BuiltinFn::smoothstep;
+            case core::BuiltinFn::kSqrt:
+                return pb::BuiltinFn::sqrt;
+            case core::BuiltinFn::kStep:
+                return pb::BuiltinFn::step;
+            case core::BuiltinFn::kStorageBarrier:
+                return pb::BuiltinFn::storage_barrier;
+            case core::BuiltinFn::kTan:
+                return pb::BuiltinFn::tan;
+            case core::BuiltinFn::kTanh:
+                return pb::BuiltinFn::tanh;
+            case core::BuiltinFn::kTranspose:
+                return pb::BuiltinFn::transpose;
+            case core::BuiltinFn::kTrunc:
+                return pb::BuiltinFn::trunc;
+            case core::BuiltinFn::kUnpack2X16Float:
+                return pb::BuiltinFn::unpack2x16_float;
+            case core::BuiltinFn::kUnpack2X16Snorm:
+                return pb::BuiltinFn::unpack2x16_snorm;
+            case core::BuiltinFn::kUnpack2X16Unorm:
+                return pb::BuiltinFn::unpack2x16_unorm;
+            case core::BuiltinFn::kUnpack4X8Snorm:
+                return pb::BuiltinFn::unpack4x8_snorm;
+            case core::BuiltinFn::kUnpack4X8Unorm:
+                return pb::BuiltinFn::unpack4x8_unorm;
+            case core::BuiltinFn::kWorkgroupBarrier:
+                return pb::BuiltinFn::workgroup_barrier;
+            case core::BuiltinFn::kTextureBarrier:
+                return pb::BuiltinFn::texture_barrier;
+            case core::BuiltinFn::kTextureDimensions:
+                return pb::BuiltinFn::texture_dimensions;
+            case core::BuiltinFn::kTextureGather:
+                return pb::BuiltinFn::texture_gather;
+            case core::BuiltinFn::kTextureGatherCompare:
+                return pb::BuiltinFn::texture_gather_compare;
+            case core::BuiltinFn::kTextureNumLayers:
+                return pb::BuiltinFn::texture_num_layers;
+            case core::BuiltinFn::kTextureNumLevels:
+                return pb::BuiltinFn::texture_num_levels;
+            case core::BuiltinFn::kTextureNumSamples:
+                return pb::BuiltinFn::texture_num_samples;
+            case core::BuiltinFn::kTextureSample:
+                return pb::BuiltinFn::texture_sample;
+            case core::BuiltinFn::kTextureSampleBias:
+                return pb::BuiltinFn::texture_sample_bias;
+            case core::BuiltinFn::kTextureSampleCompare:
+                return pb::BuiltinFn::texture_sample_compare;
+            case core::BuiltinFn::kTextureSampleCompareLevel:
+                return pb::BuiltinFn::texture_sample_compare_level;
+            case core::BuiltinFn::kTextureSampleGrad:
+                return pb::BuiltinFn::texture_sample_grad;
+            case core::BuiltinFn::kTextureSampleLevel:
+                return pb::BuiltinFn::texture_sample_level;
+            case core::BuiltinFn::kTextureSampleBaseClampToEdge:
+                return pb::BuiltinFn::texture_sample_base_clamp_to_edge;
+            case core::BuiltinFn::kTextureStore:
+                return pb::BuiltinFn::texture_store;
+            case core::BuiltinFn::kTextureLoad:
+                return pb::BuiltinFn::texture_load;
+            case core::BuiltinFn::kAtomicLoad:
+                return pb::BuiltinFn::atomic_load;
+            case core::BuiltinFn::kAtomicStore:
+                return pb::BuiltinFn::atomic_store;
+            case core::BuiltinFn::kAtomicAdd:
+                return pb::BuiltinFn::atomic_add;
+            case core::BuiltinFn::kAtomicSub:
+                return pb::BuiltinFn::atomic_sub;
+            case core::BuiltinFn::kAtomicMax:
+                return pb::BuiltinFn::atomic_max;
+            case core::BuiltinFn::kAtomicMin:
+                return pb::BuiltinFn::atomic_min;
+            case core::BuiltinFn::kAtomicAnd:
+                return pb::BuiltinFn::atomic_and;
+            case core::BuiltinFn::kAtomicOr:
+                return pb::BuiltinFn::atomic_or;
+            case core::BuiltinFn::kAtomicXor:
+                return pb::BuiltinFn::atomic_xor;
+            case core::BuiltinFn::kAtomicExchange:
+                return pb::BuiltinFn::atomic_exchange;
+            case core::BuiltinFn::kAtomicCompareExchangeWeak:
+                return pb::BuiltinFn::atomic_compare_exchange_weak;
+            case core::BuiltinFn::kSubgroupBallot:
+                return pb::BuiltinFn::subgroup_ballot;
+            case core::BuiltinFn::kSubgroupBroadcast:
+                return pb::BuiltinFn::subgroup_broadcast;
+            default:
+                break;
+        }
+        TINT_ICE() << "invalid BuiltinFn: " << in;
+        return pb::BuiltinFn::abs;
     }
 };
 
