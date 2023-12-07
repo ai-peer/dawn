@@ -34,6 +34,24 @@
       "parentUuid": "4e3da309_3a7f7968",
       "revId": "3b4a2a650d0b61e8f8f47573c0bc51b5eb579c69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d01dd522_b9d54b63",
+        "filename": "src/tint/lang/core/ir/user_call.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-07T11:06:55Z",
+      "side": 1,
+      "message": "Good catch. Done.",
+      "parentUuid": "a8cc35ae_1e99691f",
+      "revId": "3b4a2a650d0b61e8f8f47573c0bc51b5eb579c69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
