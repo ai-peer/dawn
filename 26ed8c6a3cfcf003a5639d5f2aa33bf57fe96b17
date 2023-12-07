@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f48a8cc0_253e0e74",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "wow, WebGPU sounds like an amazing API!!!!",
+      "parentUuid": "5b85ec24_5bec9b9f",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7dbe9dff_4107f8b9",
@@ -100,6 +118,30 @@
       "writtenOn": "2023-12-06T14:05:51Z",
       "side": 1,
       "message": "AHB",
+      "range": {
+        "startLine": 509,
+        "startChar": 47,
+        "endLine": 509,
+        "endChar": 55
+      },
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cac314fc_6ba13360",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 509,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7dbe9dff_4107f8b9",
       "range": {
         "startLine": 509,
         "startChar": 47,
@@ -133,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f9d7710_5ef430db",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 521,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a7f1098_f4059152",
+      "range": {
+        "startLine": 521,
+        "startChar": 12,
+        "endLine": 521,
+        "endChar": 78
+      },
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bd6c5938_de1be696",
@@ -146,6 +212,24 @@
       "writtenOn": "2023-12-06T14:05:51Z",
       "side": 1,
       "message": "This could be made to be:\n\n`SharedTextureMemory::Create(device, label, properties, VK_QUEUE_FAMILY_FOREIGN_EXT)`",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5b69a1_2c1f91c3",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 570,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bd6c5938_de1be696",
       "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -167,6 +251,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed1de583_3183c6a2",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 578,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7b023814_a6e2f6f0",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b64869d_b94a9afa",
@@ -180,6 +282,42 @@
       "writtenOn": "2023-12-06T14:05:51Z",
       "side": 1,
       "message": "Ditto, passing the structure that should be used as pNext in the memoryAllocateInfoChain",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42c82644_d91438c9",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b64869d_b94a9afa",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "096a34c0_e230c489",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 613,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b64869d_b94a9afa",
       "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -201,6 +339,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "646811af_d16746a1",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "97ccecb4_37c7512f",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8aa08622_fd435fff",
@@ -214,6 +370,24 @@
       "writtenOn": "2023-12-06T17:09:22Z",
       "side": 1,
       "message": "Wording of error is a bit awkward. Perhaps change the second \u0027when\u0027 to an \u0027and\u0027?\n\n\"VkImageCreateInfo flags did not have VK_IMAGE_CREATE_MUTABLE_FORMAT_BIT when usage has VK_IMAGE_USAGE_STORAGE_BIT *and* format is VK_FORMAT_B8G8R8A8_UNORM\"",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ebdcff24_1cfa59cc",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 737,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8aa08622_fd435fff",
       "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -241,6 +415,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a675e51b_b5927585",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "wow.. it *shouldn\u0027t* simply be calling device.ImportSharedTextureMemory.\n\nThis was the reason the tests were failing on Android!! I was making a new STM AHardwareBuffer backing per device.... and wondering why everything was black and STMs weren\u0027t seeing the same backing contents 😭😄\n\nbut hey it works now!! 🎉🎉🎉\n\nedit: argh... just one failure on Android Qualcomm nvm",
+      "parentUuid": "de6b7d59_dcdeeffc",
+      "range": {
+        "startLine": 88,
+        "startChar": 71,
+        "endLine": 88,
+        "endChar": 79
+      },
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d284094a_c8481f4a",
@@ -258,6 +456,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "789acf96_6ca7ef45",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_android.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d284094a_c8481f4a",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "46d22c68_89ed5c24",
@@ -271,6 +487,24 @@
       "writtenOn": "2023-12-06T14:05:51Z",
       "side": 1,
       "message": "This seems somewhat generic between test backends, is there a way to put all of it in SharedTextureMemoryTests.cpp somehow?",
+      "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deebf21e_3a43e69d",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_opaquefd.cpp",
+        "patchSetId": 14
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-07T01:57:10Z",
+      "side": 1,
+      "message": "great observation; done!",
+      "parentUuid": "46d22c68_89ed5c24",
       "revId": "26ed8c6a3cfcf003a5639d5f2aa33bf57fe96b17",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
