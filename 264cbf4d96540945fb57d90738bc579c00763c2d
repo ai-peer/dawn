@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea10f40_aa2bc7e3",
+        "filename": "src/tint/lang/core/ir/binary.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 106,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-07T15:13:49Z",
+      "side": 1,
+      "message": "This should have a default value set.",
+      "revId": "264cbf4d96540945fb57d90738bc579c00763c2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "26a36d35_6afe84b4",
+        "filename": "src/tint/lang/core/ir/binary/decode.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 228,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-07T15:13:49Z",
+      "side": 1,
+      "message": "Does this ever get created with immediately setting the `op`? If not, should we just make that a single arg that\u0027s always required?",
+      "revId": "264cbf4d96540945fb57d90738bc579c00763c2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20b82f38_003cfa27",
+        "filename": "src/tint/lang/core/ir/binary/decode.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-07T15:13:49Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "264cbf4d96540945fb57d90738bc579c00763c2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0b1bde9_5effe70c",
+        "filename": "src/tint/lang/core/ir/unary.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2023-12-07T15:13:49Z",
+      "side": 1,
+      "message": "Same init question",
+      "revId": "264cbf4d96540945fb57d90738bc579c00763c2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
