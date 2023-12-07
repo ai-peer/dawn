@@ -33,6 +33,24 @@
       "message": "Should `count` be optional for runtime-sized arrays?",
       "revId": "f64f55300b31095e7f451ef3eff5e96f05d27057",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "27d81d87_4b803dbe",
+        "filename": "src/tint/lang/core/ir/binary/ir.proto",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-07T10:19:55Z",
+      "side": 1,
+      "message": "I was going to use `0` as runtime sized. Either way, only fixed-size is supported right now.",
+      "parentUuid": "1bffa7ac_89d21788",
+      "revId": "f64f55300b31095e7f451ef3eff5e96f05d27057",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
