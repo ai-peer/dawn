@@ -348,8 +348,10 @@ MaybeError ValidateDepthStencilState(const DeviceBase* device,
 }
 
 MaybeError ValidateMultisampleState(const DeviceBase* device, const MultisampleState* descriptor) {
-    const DawnMultisampleStateRenderToSingleSampled* msaaRenderToSingleSampledDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &msaaRenderToSingleSampledDesc);
+    Unpacked<MultisampleState> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
+    const auto* msaaRenderToSingleSampledDesc =
+        unpacked.Get<DawnMultisampleStateRenderToSingleSampled>();
     if (msaaRenderToSingleSampledDesc != nullptr) {
         DAWN_INVALID_IF(!device->HasFeature(Feature::MSAARenderToSingleSampled),
                         "The msaaRenderToSingleSampledDesc is not empty while the "
