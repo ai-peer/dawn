@@ -353,7 +353,8 @@ MaybeError ValidateResolveTarget(const DeviceBase* device,
     return {};
 }
 
-MaybeError ValidateColorAttachmentDepthSlice(const TextureViewBase* attachment,
+MaybeError ValidateColorAttachmentDepthSlice(const DeviceBase* device,
+                                             const TextureViewBase* attachment,
                                              uint32_t depthSlice) {
     if (attachment->GetDimension() != wgpu::TextureViewDimension::e3D) {
         // TODO(dawn:1020): Validate depthSlice must not set for non-3d attachments. The depthSlice
@@ -361,6 +362,9 @@ MaybeError ValidateColorAttachmentDepthSlice(const TextureViewBase* attachment,
         // initialize it in Blink first, otherwise it will always be validated as set.
         return {};
     }
+
+    DAWN_INVALID_IF(!device->IsToggleEnabled(Toggle::AllowUnsafeAPIs),
+                    "Rendering to 3D texture slices is guarded by toggle allow_unsafe_apis.");
 
     DAWN_INVALID_IF(depthSlice == WGPU_DEPTH_SLICE_UNDEFINED,
                     "depthSlice (%u) must be set and must not be undefined value (%u) for a 3D "
@@ -472,7 +476,7 @@ MaybeError ValidateRenderPassColorAttachment(DeviceBase* device,
                         "Color clear value (%s) contains a NaN.", &clearValue);
     }
 
-    DAWN_TRY(ValidateColorAttachmentDepthSlice(attachment, colorAttachment.depthSlice));
+    DAWN_TRY(ValidateColorAttachmentDepthSlice(device, attachment, colorAttachment.depthSlice));
     DAWN_TRY(ValidateAttachmentArrayLayersAndLevelCount(attachment));
 
     DAWN_TRY(validationState->AddAttachment(attachment, AttachmentType::ColorAttachment,
