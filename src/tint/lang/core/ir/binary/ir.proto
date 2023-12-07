@@ -112,7 +112,8 @@ message Value {
         uint32 function = 1;  // Module.functions
         InstructionResult instruction_result = 2;
         FunctionParameter function_parameter = 3;
-        uint32 constant = 4;  // Module.constant_values
+        BlockParameter block_parameter = 4;
+        uint32 constant = 5;  // Module.constant_values
     }
 }
 
@@ -122,6 +123,11 @@ message InstructionResult {
 }
 
 message FunctionParameter {
+    uint32 type = 1;  // Module.types
+    optional string name = 2;
+}
+
+message BlockParameter {
     uint32 type = 1;  // Module.types
     optional string name = 2;
 }
@@ -188,6 +194,7 @@ message WorkgroupSize {
 message Block {
     repeated uint32 parameters = 1;  // Module.values
     repeated Instruction instructions = 2;
+    bool is_multi_in = 3;
 }
 
 ////////////////////////////////////////////////////////////////////////////////
@@ -214,6 +221,15 @@ message Instruction {
         InstructionLoadVectorElement load_vector_element = 17;
         InstructionStoreVectorElement store_vector_element = 18;
         InstructionSwizzle swizzle = 19;
+        InstructionIf if = 20;
+        InstructionSwitch switch = 21;
+        InstructionLoop loop = 22;
+        InstructionExitIf exit_if = 23;
+        InstructionExitSwitch exit_switch = 24;
+        InstructionExitLoop exit_loop = 25;
+        InstructionNextIteration next_iteration = 26;
+        InstructionContinue continue = 27;
+        InstructionBreakIf break_if = 28;
     }
 }
 
@@ -263,10 +279,43 @@ message InstructionSwizzle {
     repeated uint32 indices = 1;
 }
 
+message InstructionIf {
+    optional uint32 true = 1;   // Module.blocks
+    optional uint32 false = 2;  // Module.blocks
+}
+
+message InstructionSwitch {
+    repeated SwitchCase cases = 1;  // Module.blocks
+}
+
+message InstructionLoop {
+    optional uint32 initalizer = 1;  // Module.blocks
+    optional uint32 body = 2;        // Module.blocks
+    optional uint32 continuing = 3;  // Module.blocks
+}
+
+message InstructionExitIf {}
+
+message InstructionExitSwitch {}
+
+message InstructionExitLoop {}
+
+message SwitchCase {
+    uint32 block = 1;               // Module.blocks
+    repeated uint32 selectors = 2;  // Module.constant_values
+    bool is_default = 3;
+}
+
 message BindingPoint {
     uint32 group = 1;
     uint32 binding = 2;
 }
+
+message InstructionNextIteration {}
+
+message InstructionContinue {}
+
+message InstructionBreakIf {}
 
 ////////////////////////////////////////////////////////////////////////////////
 // Attributes
@@ -277,7 +326,7 @@ message AttributesStructMember {
     optional uint32 color = 3;
     optional BuiltinValue builtin = 4;
     optional AttributesInterpolation interpolation = 5;
-    optional bool invariant = 6;
+    bool invariant = 6;
 }
 
 message AttributesInterpolation {

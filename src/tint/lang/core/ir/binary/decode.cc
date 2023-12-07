@@ -52,6 +52,13 @@ struct Decoder {
     Vector<ir::Value*, 32> values_{};
     Builder b{mod_out_};
 
+    Vector<ir::ExitIf*, 32> exit_ifs_{};
+    Vector<ir::ExitLoop*, 32> exit_loops_{};
+    Vector<ir::ExitSwitch*, 32> exit_switches_{};
+    Vector<ir::NextIteration*, 32> next_iterations_{};
+    Vector<ir::BreakIf*, 32> break_ifs_{};
+    Vector<ir::Continue*, 32> continues_{};
+
     void Decode() {
         {
             const size_t n = static_cast<size_t>(mod_in_.types().size());
@@ -99,6 +106,40 @@ struct Decoder {
         }
         for (size_t i = 0, n = static_cast<size_t>(mod_in_.blocks().size()); i < n; i++) {
             PopulateBlock(blocks_[i], mod_in_.blocks()[static_cast<int>(i)]);
+        }
+
+        for (auto* exit : exit_ifs_) {
+            InferControlInstruction(exit, &ExitIf::SetIf);
+        }
+        for (auto* exit : exit_loops_) {
+            InferControlInstruction(exit, &ExitLoop::SetLoop);
+        }
+        for (auto* exit : exit_switches_) {
+            InferControlInstruction(exit, &ExitSwitch::SetSwitch);
+        }
+        for (auto* break_ifs : break_ifs_) {
+            InferControlInstruction(break_ifs, &BreakIf::SetLoop);
+        }
+        for (auto* next_iters : next_iterations_) {
+            InferControlInstruction(next_iters, &NextIteration::SetLoop);
+        }
+        for (auto* cont : continues_) {
+            InferControlInstruction(cont, &Continue::SetLoop);
+        }
+    }
+
+    template <typename EXIT, typename CTRL_INST>
+    void InferControlInstruction(EXIT* exit, void (EXIT::*set)(CTRL_INST*)) {
+        for (auto* block = exit->Block(); block;) {
+            auto* parent = block->Parent();
+            if (!parent) {
+                break;
+            }
+            if (auto* ctrl_inst = parent->template As<CTRL_INST>()) {
+                (exit->*set)(ctrl_inst);
+                break;
+            }
+            block = parent->Block();
         }
     }
 
@@ -149,16 +190,35 @@ struct Decoder {
     ////////////////////////////////////////////////////////////////////////////
     // Blocks
     ////////////////////////////////////////////////////////////////////////////
-    ir::Block* CreateBlock(const pb::Block&) { return b.Block(); }
+    ir::Block* CreateBlock(const pb::Block& block_in) {
+        return block_in.is_multi_in() ? b.MultiInBlock() : b.Block();
+    }
 
-    ir::Block* PopulateBlock(ir::Block* block_out, const pb::Block& block_in) {
+    void PopulateBlock(ir::Block* block_out, const pb::Block& block_in) {
+        if (block_in.is_multi_in()) {
+            Vector<ir::BlockParam*, 8> params;
+            for (auto param : block_in.parameters()) {
+                params.Push(ValueAs<BlockParam>(param));
+            }
+            block_out->As<ir::MultiInBlock>()->SetParams(std::move(params));
+        }
         for (auto& inst : block_in.instructions()) {
             block_out->Append(Instruction(inst));
         }
-        return block_out;
     }
 
     ir::Block* Block(uint32_t id) { return id > 0 ? blocks_[id - 1] : nullptr; }
+
+    template <typename T>
+    T* BlockAs(uint32_t id) {
+        auto* block = Block(id);
+        if (auto cast = block->As<T>(); TINT_LIKELY(cast)) {
+            return cast;
+        }
+        TINT_ICE() << "block " << id << " is " << (block ? block->TypeInfo().name : "<null>")
+                   << " expected " << TypeInfo::Of<T>().name;
+        return nullptr;
+    }
 
     ////////////////////////////////////////////////////////////////////////////
     // Instructions
@@ -172,17 +232,35 @@ struct Decoder {
             case pb::Instruction::KindCase::kBinary:
                 inst_out = CreateInstructionBinary(inst_in.binary());
                 break;
+            case pb::Instruction::KindCase::kBreakIf:
+                inst_out = CreateInstructionBreakIf(inst_in.break_if());
+                break;
             case pb::Instruction::KindCase::kBuiltinCall:
                 inst_out = CreateInstructionBuiltinCall(inst_in.builtin_call());
                 break;
             case pb::Instruction::KindCase::kConstruct:
                 inst_out = CreateInstructionConstruct(inst_in.construct());
                 break;
+            case pb::Instruction::KindCase::kContinue:
+                inst_out = CreateInstructionContinue(inst_in.continue_());
+                break;
             case pb::Instruction::KindCase::kConvert:
                 inst_out = CreateInstructionConvert(inst_in.convert());
                 break;
+            case pb::Instruction::KindCase::kExitIf:
+                inst_out = CreateInstructionExitIf(inst_in.exit_if());
+                break;
+            case pb::Instruction::KindCase::kExitLoop:
+                inst_out = CreateInstructionExitLoop(inst_in.exit_loop());
+                break;
+            case pb::Instruction::KindCase::kExitSwitch:
+                inst_out = CreateInstructionExitSwitch(inst_in.exit_switch());
+                break;
             case pb::Instruction::KindCase::kDiscard:
                 inst_out = CreateInstructionDiscard(inst_in.discard());
+                break;
+            case pb::Instruction::KindCase::kIf:
+                inst_out = CreateInstructionIf(inst_in.if_());
                 break;
             case pb::Instruction::KindCase::kLet:
                 inst_out = CreateInstructionLet(inst_in.let());
@@ -192,6 +270,12 @@ struct Decoder {
                 break;
             case pb::Instruction::KindCase::kLoadVectorElement:
                 inst_out = CreateInstructionLoadVectorElement(inst_in.load_vector_element());
+                break;
+            case pb::Instruction::KindCase::kLoop:
+                inst_out = CreateInstructionLoop(inst_in.loop());
+                break;
+            case pb::Instruction::KindCase::kNextIteration:
+                inst_out = CreateInstructionNextIteration(inst_in.next_iteration());
                 break;
             case pb::Instruction::KindCase::kReturn:
                 inst_out = CreateInstructionReturn(inst_in.return_());
@@ -204,6 +288,9 @@ struct Decoder {
                 break;
             case pb::Instruction::KindCase::kSwizzle:
                 inst_out = CreateInstructionSwizzle(inst_in.swizzle());
+                break;
+            case pb::Instruction::KindCase::kSwitch:
+                inst_out = CreateInstructionSwitch(inst_in.switch_());
                 break;
             case pb::Instruction::KindCase::kUnary:
                 inst_out = CreateInstructionUnary(inst_in.unary());
@@ -245,6 +332,12 @@ struct Decoder {
         return binary_out;
     }
 
+    ir::BreakIf* CreateInstructionBreakIf(const pb::InstructionBreakIf& break_if_in) {
+        auto* break_if_out = mod_out_.instructions.Create<ir::BreakIf>();
+        break_ifs_.Push(break_if_out);
+        return break_if_out;
+    }
+
     ir::CoreBuiltinCall* CreateInstructionBuiltinCall(const pb::InstructionBuiltinCall& call_in) {
         auto* call_out = mod_out_.instructions.Create<ir::CoreBuiltinCall>();
         call_out->SetFunc(BuiltinFn(call_in.builtin()));
@@ -255,12 +348,47 @@ struct Decoder {
         return mod_out_.instructions.Create<ir::Construct>();
     }
 
+    ir::Continue* CreateInstructionContinue(const pb::InstructionContinue&) {
+        auto* continue_ = mod_out_.instructions.Create<ir::Continue>();
+        continues_.Push(continue_);
+        return continue_;
+    }
+
     ir::Convert* CreateInstructionConvert(const pb::InstructionConvert&) {
         return mod_out_.instructions.Create<ir::Convert>();
     }
 
+    ir::ExitIf* CreateInstructionExitIf(const pb::InstructionExitIf&) {
+        auto* exit_out = mod_out_.instructions.Create<ir::ExitIf>();
+        exit_ifs_.Push(exit_out);
+        return exit_out;
+    }
+
+    ir::ExitLoop* CreateInstructionExitLoop(const pb::InstructionExitLoop&) {
+        auto* exit_out = mod_out_.instructions.Create<ir::ExitLoop>();
+        exit_loops_.Push(exit_out);
+        return exit_out;
+    }
+
+    ir::ExitSwitch* CreateInstructionExitSwitch(const pb::InstructionExitSwitch&) {
+        auto* exit_out = mod_out_.instructions.Create<ir::ExitSwitch>();
+        exit_switches_.Push(exit_out);
+        return exit_out;
+    }
+
     ir::Discard* CreateInstructionDiscard(const pb::InstructionDiscard&) {
         return mod_out_.instructions.Create<ir::Discard>();
+    }
+
+    ir::If* CreateInstructionIf(const pb::InstructionIf& if_in) {
+        auto* if_out = mod_out_.instructions.Create<ir::If>();
+        if (if_in.has_true_()) {
+            if_out->SetTrue(Block(if_in.true_()));
+        }
+        if (if_in.has_false_()) {
+            if_out->SetFalse(Block(if_in.false_()));
+        }
+        return if_out;
     }
 
     ir::Let* CreateInstructionLet(const pb::InstructionLet&) {
@@ -274,6 +402,28 @@ struct Decoder {
     ir::LoadVectorElement* CreateInstructionLoadVectorElement(
         const pb::InstructionLoadVectorElement&) {
         return mod_out_.instructions.Create<ir::LoadVectorElement>();
+    }
+
+    ir::Loop* CreateInstructionLoop(const pb::InstructionLoop& loop_in) {
+        auto* loop_out = mod_out_.instructions.Create<ir::Loop>();
+        if (loop_in.has_initalizer()) {
+            loop_out->SetInitializer(Block(loop_in.initalizer()));
+        } else {
+            loop_out->SetInitializer(mod_out_.blocks.Create());
+        }
+        loop_out->SetBody(BlockAs<ir::MultiInBlock>(loop_in.body()));
+        if (loop_in.has_continuing()) {
+            loop_out->SetContinuing(BlockAs<ir::MultiInBlock>(loop_in.continuing()));
+        } else {
+            loop_out->SetContinuing(mod_out_.blocks.Create<ir::MultiInBlock>());
+        }
+        return loop_out;
+    }
+
+    ir::NextIteration* CreateInstructionNextIteration(const pb::InstructionNextIteration&) {
+        auto* next_it_out = mod_out_.instructions.Create<ir::NextIteration>();
+        next_iterations_.Push(next_it_out);
+        return next_it_out;
     }
 
     ir::Return* CreateInstructionReturn(const pb::InstructionReturn&) {
@@ -297,6 +447,26 @@ struct Decoder {
         }
         swizzle_out->SetIndices(indices);
         return swizzle_out;
+    }
+
+    ir::Switch* CreateInstructionSwitch(const pb::InstructionSwitch& switch_in) {
+        auto* switch_out = mod_out_.instructions.Create<ir::Switch>();
+        for (auto& case_in : switch_in.cases()) {
+            ir::Switch::Case case_out{};
+            case_out.block = Block(case_in.block());
+            case_out.block->SetParent(switch_out);
+            for (auto selector_in : case_in.selectors()) {
+                ir::Switch::CaseSelector selector_out{};
+                selector_out.val = b.Constant(ConstantValue(selector_in));
+                case_out.selectors.Push(std::move(selector_out));
+            }
+            if (case_in.is_default()) {
+                ir::Switch::CaseSelector selector_out{};
+                case_out.selectors.Push(std::move(selector_out));
+            }
+            switch_out->Cases().Push(std::move(case_out));
+        }
+        return switch_out;
     }
 
     ir::Unary* CreateInstructionUnary(const pb::InstructionUnary& unary_in) {
@@ -413,9 +583,7 @@ struct Decoder {
                         InterpolationSampling(interpolation_in.sampling()),
                     };
                 }
-                if (attributes_in.has_invariant()) {
-                    attributes_out.invariant = attributes_in.invariant();
-                }
+                attributes_out.invariant = attributes_in.invariant();
             }
             offset = RoundUp(align, offset);
             auto* member_out = mod_out_.Types().Get<core::type::StructMember>(
@@ -463,6 +631,15 @@ struct Decoder {
                 auto& param_in = value_in.function_parameter();
                 auto* type = Type(param_in.type());
                 value_out = b.FunctionParam(type);
+                if (param_in.has_name()) {
+                    mod_out_.SetName(value_out, param_in.name());
+                }
+                break;
+            }
+            case pb::Value::KindCase::kBlockParameter: {
+                auto& param_in = value_in.block_parameter();
+                auto* type = Type(param_in.type());
+                value_out = b.BlockParam(type);
                 if (param_in.has_name()) {
                     mod_out_.SetName(value_out, param_in.name());
                 }

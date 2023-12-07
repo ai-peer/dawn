@@ -409,7 +409,7 @@ TEST_F(IRBinaryRoundtripTest, StoreVectorElement) {
 }
 
 TEST_F(IRBinaryRoundtripTest, UnaryOp) {
-    auto x = b.FunctionParam<bool>("x");
+    auto* x = b.FunctionParam<bool>("x");
     auto* fn = b.Function("Function", ty.bool_());
     fn->SetParams({x});
     b.Append(fn->Block(), [&] { b.Return(fn, b.Not<bool>(x)); });
@@ -417,8 +417,8 @@ TEST_F(IRBinaryRoundtripTest, UnaryOp) {
 }
 
 TEST_F(IRBinaryRoundtripTest, BinaryOp) {
-    auto x = b.FunctionParam<f32>("x");
-    auto y = b.FunctionParam<f32>("y");
+    auto* x = b.FunctionParam<f32>("x");
+    auto* y = b.FunctionParam<f32>("y");
     auto* fn = b.Function("Function", ty.f32());
     fn->SetParams({x, y});
     b.Append(fn->Block(), [&] { b.Return(fn, b.Add<f32>(x, y)); });
@@ -426,7 +426,7 @@ TEST_F(IRBinaryRoundtripTest, BinaryOp) {
 }
 
 TEST_F(IRBinaryRoundtripTest, Swizzle) {
-    auto x = b.FunctionParam<vec4<f32>>("x");
+    auto* x = b.FunctionParam<vec4<f32>>("x");
     auto* fn = b.Function("Function", ty.vec3<f32>());
     fn->SetParams({x});
     b.Append(fn->Block(), [&] {
@@ -436,12 +436,164 @@ TEST_F(IRBinaryRoundtripTest, Swizzle) {
 }
 
 TEST_F(IRBinaryRoundtripTest, Convert) {
-    auto x = b.FunctionParam<vec4<f32>>("x");
+    auto* x = b.FunctionParam<vec4<f32>>("x");
     auto* fn = b.Function("Function", ty.vec4<u32>());
     fn->SetParams({x});
     b.Append(fn->Block(), [&] { b.Return(fn, b.Convert<vec4<u32>>(x)); });
     RUN_TEST();
 }
 
+TEST_F(IRBinaryRoundtripTest, IfTrue) {
+    auto* cond = b.FunctionParam<bool>("cond");
+    auto* x = b.FunctionParam<i32>("x");
+    auto* fn = b.Function("Function", ty.i32());
+    fn->SetParams({cond, x});
+    b.Append(fn->Block(), [&] {
+        auto* if_ = b.If(cond);
+        b.Append(if_->True(), [&] { b.Return(fn, x); });
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, IfFalse) {
+    auto* cond = b.FunctionParam<bool>("cond");
+    auto* x = b.FunctionParam<i32>("x");
+    auto* fn = b.Function("Function", ty.i32());
+    fn->SetParams({cond, x});
+    b.Append(fn->Block(), [&] {
+        auto* if_ = b.If(cond);
+        b.Append(if_->False(), [&] { b.Return(fn, x); });
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, IfTrueFalse) {
+    auto* cond = b.FunctionParam<bool>("cond");
+    auto* x = b.FunctionParam<i32>("x");
+    auto* y = b.FunctionParam<i32>("y");
+    auto* fn = b.Function("Function", ty.i32());
+    fn->SetParams({cond, x, y});
+    b.Append(fn->Block(), [&] {
+        auto* if_ = b.If(cond);
+        b.Append(if_->True(), [&] { b.Return(fn, x); });
+        b.Append(if_->False(), [&] { b.Return(fn, y); });
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, IfResults) {
+    auto* cond = b.FunctionParam<bool>("cond");
+    auto* fn = b.Function("Function", ty.i32());
+    fn->SetParams({cond});
+    b.Append(fn->Block(), [&] {
+        auto* if_ = b.If(cond);
+        auto* res_a = b.InstructionResult<i32>();
+        auto* res_b = b.InstructionResult<f32>();
+        if_->SetResults(Vector{res_a, res_b});
+        b.Append(if_->True(), [&] { b.ExitIf(if_, 1_i, 2_f); });
+        b.Append(if_->False(), [&] { b.ExitIf(if_, 3_i, 4_f); });
+        b.Return(fn, res_a);
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, Switch) {
+    auto* x = b.FunctionParam<i32>("x");
+    auto* fn = b.Function("Function", ty.i32());
+    fn->SetParams({x});
+    b.Append(fn->Block(), [&] {
+        auto* switch_ = b.Switch(x);
+        b.Append(b.Case(switch_, {b.Constant(1_i)}), [&] { b.Return(fn, 1_i); });
+        b.Append(b.Case(switch_, {b.Constant(2_i), b.Constant(3_i)}), [&] { b.Return(fn, 2_i); });
+        b.Append(b.Case(switch_, {nullptr}), [&] { b.Return(fn, 3_i); });
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, SwitchResults) {
+    auto* x = b.FunctionParam<i32>("x");
+    auto* fn = b.Function("Function", ty.i32());
+    fn->SetParams({x});
+    b.Append(fn->Block(), [&] {
+        auto* switch_ = b.Switch(x);
+        auto* res = b.InstructionResult<i32>();
+        switch_->SetResults(Vector{res});
+        b.Append(b.Case(switch_, {b.Constant(1_i)}), [&] { b.ExitSwitch(switch_, 1_i); });
+        b.Append(b.Case(switch_, {b.Constant(2_i), b.Constant(3_i)}),
+                 [&] { b.ExitSwitch(switch_, 2_i); });
+        b.Append(b.Case(switch_, {nullptr}), [&] { b.ExitSwitch(switch_, 3_i); });
+        b.Return(fn, res);
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, LoopBody) {
+    auto* fn = b.Function("Function", ty.i32());
+    b.Append(fn->Block(), [&] {
+        auto* loop = b.Loop();
+        b.Append(loop->Body(), [&] { b.Return(fn, 1_i); });
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, LoopInitBody) {
+    auto* fn = b.Function("Function", ty.i32());
+    b.Append(fn->Block(), [&] {
+        auto* loop = b.Loop();
+        b.Append(loop->Initializer(), [&] {
+            b.Let("L", 1_i);
+            b.NextIteration(loop);
+        });
+        b.Append(loop->Body(), [&] { b.Return(fn, 2_i); });
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, LoopInitBodyCont) {
+    auto* fn = b.Function("Function", ty.i32());
+    b.Append(fn->Block(), [&] {
+        auto* loop = b.Loop();
+        b.Append(loop->Initializer(), [&] {
+            b.Let("L", 1_i);
+            b.NextIteration(loop);
+        });
+        b.Append(loop->Body(), [&] { b.Continue(loop); });
+        b.Append(loop->Continuing(), [&] { b.BreakIf(loop, false); });
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, LoopResults) {
+    auto* fn = b.Function("Function", ty.i32());
+    b.Append(fn->Block(), [&] {
+        auto* loop = b.Loop();
+        auto* res = b.InstructionResult<i32>();
+        loop->SetResults(Vector{res});
+        b.Append(loop->Body(), [&] { b.ExitLoop(loop, 1_i); });
+        b.Return(fn, res);
+    });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, LoopBlockParams) {
+    auto* fn = b.Function("Function", ty.void_());
+    b.Append(fn->Block(), [&] {
+        auto* loop = b.Loop();
+        b.Append(loop->Initializer(), [&] {
+            b.Let("L", 1_i);
+            b.NextIteration(loop);
+        });
+        auto* x = b.BlockParam<i32>("x");
+        auto* y = b.BlockParam<f32>("y");
+        loop->Body()->SetParams({x, y});
+        b.Append(loop->Body(), [&] { b.Continue(loop, 1_u, true); });
+        auto* z = b.BlockParam<u32>("z");
+        auto* w = b.BlockParam<bool>("w");
+        loop->Continuing()->SetParams({z, w});
+        b.Append(loop->Continuing(), [&] { b.BreakIf(loop, false, 3_i, 4_f); });
+        b.Return(fn);
+    });
+    RUN_TEST();
+}
 }  // namespace
 }  // namespace tint::core::ir::binary

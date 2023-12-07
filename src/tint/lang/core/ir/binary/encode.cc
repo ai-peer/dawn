@@ -36,18 +36,28 @@
 #include "src/tint/lang/core/constant/splat.h"
 #include "src/tint/lang/core/ir/access.h"
 #include "src/tint/lang/core/ir/binary.h"
+#include "src/tint/lang/core/ir/break_if.h"
 #include "src/tint/lang/core/ir/construct.h"
+#include "src/tint/lang/core/ir/continue.h"
 #include "src/tint/lang/core/ir/convert.h"
 #include "src/tint/lang/core/ir/core_builtin_call.h"
 #include "src/tint/lang/core/ir/discard.h"
+#include "src/tint/lang/core/ir/exit_if.h"
+#include "src/tint/lang/core/ir/exit_loop.h"
+#include "src/tint/lang/core/ir/exit_switch.h"
 #include "src/tint/lang/core/ir/function_param.h"
+#include "src/tint/lang/core/ir/if.h"
 #include "src/tint/lang/core/ir/let.h"
 #include "src/tint/lang/core/ir/load.h"
 #include "src/tint/lang/core/ir/load_vector_element.h"
+#include "src/tint/lang/core/ir/loop.h"
 #include "src/tint/lang/core/ir/module.h"
+#include "src/tint/lang/core/ir/multi_in_block.h"
+#include "src/tint/lang/core/ir/next_iteration.h"
 #include "src/tint/lang/core/ir/return.h"
 #include "src/tint/lang/core/ir/store.h"
 #include "src/tint/lang/core/ir/store_vector_element.h"
+#include "src/tint/lang/core/ir/switch.h"
 #include "src/tint/lang/core/ir/swizzle.h"
 #include "src/tint/lang/core/ir/unary.h"
 #include "src/tint/lang/core/ir/user_call.h"
@@ -140,10 +150,17 @@ struct Encoder {
         }
         return blocks_.GetOrCreate(block_in, [&]() -> uint32_t {
             auto& block_out = *mod_out_.add_blocks();
+            auto id = static_cast<uint32_t>(blocks_.Count());
             for (auto* inst : *block_in) {
                 Instruction(*block_out.add_instructions(), inst);
             }
-            return static_cast<uint32_t>(blocks_.Count());
+            if (auto* mib = block_in->As<ir::MultiInBlock>()) {
+                block_out.set_is_multi_in(true);
+                for (auto* param : mib->Params()) {
+                    block_out.add_parameters(Value(param));
+                }
+            }
+            return id;
         });
     }
 
@@ -151,26 +168,39 @@ struct Encoder {
     // Instructions
     ////////////////////////////////////////////////////////////////////////////
     void Instruction(pb::Instruction& inst_out, const ir::Instruction* inst_in) {
-        Switch(
+        tint::Switch(
             inst_in,  //
             [&](const ir::Access* i) { InstructionAccess(*inst_out.mutable_access(), i); },
             [&](const ir::Binary* i) { InstructionBinary(*inst_out.mutable_binary(), i); },
+            [&](const ir::BreakIf* i) { InstructionBreakIf(*inst_out.mutable_break_if(), i); },
             [&](const ir::CoreBuiltinCall* i) {
                 InstructionBuiltinCall(*inst_out.mutable_builtin_call(), i);
             },
             [&](const ir::Construct* i) { InstructionConstruct(*inst_out.mutable_construct(), i); },
+            [&](const ir::Continue* i) { InstructionContinue(*inst_out.mutable_continue_(), i); },
             [&](const ir::Convert* i) { InstructionConvert(*inst_out.mutable_convert(), i); },
             [&](const ir::Discard* i) { InstructionDiscard(*inst_out.mutable_discard(), i); },
+            [&](const ir::ExitIf* i) { InstructionExitIf(*inst_out.mutable_exit_if(), i); },
+            [&](const ir::ExitLoop* i) { InstructionExitLoop(*inst_out.mutable_exit_loop(), i); },
+            [&](const ir::ExitSwitch* i) {
+                InstructionExitSwitch(*inst_out.mutable_exit_switch(), i);
+            },
+            [&](const ir::If* i) { InstructionIf(*inst_out.mutable_if_(), i); },
             [&](const ir::Let* i) { InstructionLet(*inst_out.mutable_let(), i); },
             [&](const ir::Load* i) { InstructionLoad(*inst_out.mutable_load(), i); },
             [&](const ir::LoadVectorElement* i) {
                 InstructionLoadVectorElement(*inst_out.mutable_load_vector_element(), i);
+            },
+            [&](const ir::Loop* i) { InstructionLoop(*inst_out.mutable_loop(), i); },
+            [&](const ir::NextIteration* i) {
+                InstructionNextIteration(*inst_out.mutable_next_iteration(), i);
             },
             [&](const ir::Return* i) { InstructionReturn(*inst_out.mutable_return_(), i); },
             [&](const ir::Store* i) { InstructionStore(*inst_out.mutable_store(), i); },
             [&](const ir::StoreVectorElement* i) {
                 InstructionStoreVectorElement(*inst_out.mutable_store_vector_element(), i);
             },
+            [&](const ir::Switch* i) { InstructionSwitch(*inst_out.mutable_switch_(), i); },
             [&](const ir::Swizzle* i) { InstructionSwizzle(*inst_out.mutable_swizzle(), i); },
             [&](const ir::Unary* i) { InstructionUnary(*inst_out.mutable_unary(), i); },
             [&](const ir::UserCall* i) { InstructionUserCall(*inst_out.mutable_user_call(), i); },
@@ -190,6 +220,8 @@ struct Encoder {
         binary_out.set_op(BinaryOp(binary_in->Op()));
     }
 
+    void InstructionBreakIf(pb::InstructionBreakIf& break_if_out, const ir::BreakIf* break_if_in) {}
+
     void InstructionBuiltinCall(pb::InstructionBuiltinCall& call_out,
                                 const ir::CoreBuiltinCall* call_in) {
         call_out.set_builtin(BuiltinFn(call_in->Func()));
@@ -197,9 +229,26 @@ struct Encoder {
 
     void InstructionConstruct(pb::InstructionConstruct&, const ir::Construct*) {}
 
+    void InstructionContinue(pb::InstructionContinue&, const ir::Continue*) {}
+
     void InstructionConvert(pb::InstructionConvert&, const ir::Convert*) {}
 
+    void InstructionIf(pb::InstructionIf& if_out, const ir::If* if_in) {
+        if (auto* block = if_in->True()) {
+            if_out.set_true_(Block(block));
+        }
+        if (auto* block = if_in->False()) {
+            if_out.set_false_(Block(block));
+        }
+    }
+
     void InstructionDiscard(pb::InstructionDiscard&, const ir::Discard*) {}
+
+    void InstructionExitIf(pb::InstructionExitIf&, const ir::ExitIf*) {}
+
+    void InstructionExitLoop(pb::InstructionExitLoop&, const ir::ExitLoop*) {}
+
+    void InstructionExitSwitch(pb::InstructionExitSwitch&, const ir::ExitSwitch*) {}
 
     void InstructionLet(pb::InstructionLet&, const ir::Let*) {}
 
@@ -207,6 +256,18 @@ struct Encoder {
 
     void InstructionLoadVectorElement(pb::InstructionLoadVectorElement&,
                                       const ir::LoadVectorElement*) {}
+
+    void InstructionLoop(pb::InstructionLoop& loop_out, const ir::Loop* loop_in) {
+        if (loop_in->HasInitializer()) {
+            loop_out.set_initalizer(Block(loop_in->Initializer()));
+        }
+        loop_out.set_body(Block(loop_in->Body()));
+        if (loop_in->HasContinuing()) {
+            loop_out.set_continuing(Block(loop_in->Continuing()));
+        }
+    }
+
+    void InstructionNextIteration(pb::InstructionNextIteration&, const ir::NextIteration*) {}
 
     void InstructionReturn(pb::InstructionReturn&, const ir::Return*) {}
 
@@ -218,6 +279,20 @@ struct Encoder {
     void InstructionSwizzle(pb::InstructionSwizzle& swizzle_out, const ir::Swizzle* swizzle_in) {
         for (auto idx : swizzle_in->Indices()) {
             swizzle_out.add_indices(idx);
+        }
+    }
+
+    void InstructionSwitch(pb::InstructionSwitch& switch_out, const ir::Switch* switch_in) {
+        for (auto& case_in : switch_in->Cases()) {
+            auto& case_out = *switch_out.add_cases();
+            case_out.set_block(Block(case_in.block));
+            for (auto& selector_in : case_in.selectors) {
+                if (selector_in.IsDefault()) {
+                    case_out.set_is_default(true);
+                } else {
+                    case_out.add_selectors(ConstantValue(selector_in.val->Value()));
+                }
+            }
         }
     }
 
@@ -244,7 +319,7 @@ struct Encoder {
         }
         return types_.GetOrCreate(type_in, [&]() -> uint32_t {
             pb::Type type_out;
-            Switch(
+            tint::Switch(
                 type_in,  //
                 [&](const core::type::Void*) { type_out.set_basic(pb::TypeBasic::void_); },
                 [&](const core::type::Bool*) { type_out.set_basic(pb::TypeBasic::bool_); },
@@ -322,7 +397,7 @@ struct Encoder {
     void TypeArray(pb::TypeArray& array_out, const core::type::Array* array_in) {
         array_out.set_element(Type(array_in->ElemType()));
         array_out.set_stride(array_in->Stride());
-        Switch(
+        tint::Switch(
             array_in->Count(),  //
             [&](const core::type::ConstantArrayCount* c) { array_out.set_count(c->value); },
             TINT_ICE_ON_NO_MATCH);
@@ -337,7 +412,9 @@ struct Encoder {
         }
         return values_.GetOrCreate(value_in, [&] {
             auto& value_out = *mod_out_.add_values();
-            Switch(
+            auto id = static_cast<uint32_t>(mod_out_.values().size());
+
+            tint::Switch(
                 value_in,
                 [&](const ir::InstructionResult* v) {
                     InstructionResult(*value_out.mutable_instruction_result(), v);
@@ -345,11 +422,14 @@ struct Encoder {
                 [&](const ir::FunctionParam* v) {
                     FunctionParameter(*value_out.mutable_function_parameter(), v);
                 },
+                [&](const ir::BlockParam* v) {
+                    BlockParameter(*value_out.mutable_block_parameter(), v);
+                },
                 [&](const ir::Function* v) { value_out.set_function(Function(v)); },
                 [&](const ir::Constant* v) { value_out.set_constant(ConstantValue(v->Value())); },
                 TINT_ICE_ON_NO_MATCH);
 
-            return static_cast<uint32_t>(mod_out_.values().size());
+            return id;
         });
     }
 
@@ -367,6 +447,13 @@ struct Encoder {
         }
     }
 
+    void BlockParameter(pb::BlockParameter& param_out, const ir::BlockParam* param_in) {
+        param_out.set_type(Type(param_in->Type()));
+        if (auto name = mod_in_.NameOf(param_in); name.IsValid()) {
+            param_out.set_name(name.Name());
+        }
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     // ConstantValues
     ////////////////////////////////////////////////////////////////////////////
@@ -376,7 +463,7 @@ struct Encoder {
         }
         return constant_values_.GetOrCreate(constant_in, [&] {
             pb::ConstantValue constant_out;
-            Switch(
+            tint::Switch(
                 constant_in,  //
                 [&](const core::constant::Scalar<bool>* b) {
                     constant_out.mutable_scalar()->set_bool_(b->value);

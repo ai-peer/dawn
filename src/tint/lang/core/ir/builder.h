@@ -1257,6 +1257,16 @@ class Builder {
     /// @returns the value
     ir::BlockParam* BlockParam(std::string_view name, const core::type::Type* type);
 
+    /// Creates a new `BlockParam` with a name.
+    /// @tparam TYPE the parameter type
+    /// @param name the parameter name
+    /// @returns the value
+    template <typename TYPE>
+    ir::BlockParam* BlockParam(std::string_view name) {
+        auto* type = ir.Types().Get<TYPE>();
+        return BlockParam(name, type);
+    }
+
     /// Creates a new `FunctionParam`
     /// @param type the parameter type
     /// @returns the value
@@ -1362,6 +1372,15 @@ class Builder {
     /// @returns the value
     ir::InstructionResult* InstructionResult(const core::type::Type* type) {
         return ir.values.Create<ir::InstructionResult>(type);
+    }
+
+    /// Creates a new runtime value
+    /// @tparam TYPE the return type
+    /// @returns the value
+    template <typename TYPE>
+    ir::InstructionResult* InstructionResult() {
+        auto* type = ir.Types().Get<TYPE>();
+        return InstructionResult(type);
     }
 
     /// Create a ranged loop with a callback to build the loop body.
