@@ -94,6 +94,7 @@ using InterstageLocationAndName = std::pair<uint32_t, std::string>;
     X(LimitsForCompilationRequest, limits)                                                       \
     X(bool, disableSymbolRenaming)                                                               \
     X(std::vector<InterstageLocationAndName>, interstageVariables)                               \
+    X(std::vector<std::string>, bufferBindingVariables)                                          \
     X(tint::glsl::writer::Options, tintOptions)                                                  \
     X(CacheKey::UnsafeUnkeyedValue<dawn::platform::Platform*>, platform)
 
@@ -180,6 +181,8 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
 
     const OpenGLVersion& version = ToBackend(GetDevice())->GetGL().GetVersion();
 
+    GLSLCompilationRequest req = {};
+
     using tint::BindingPoint;
     // Since (non-Vulkan) GLSL does not support descriptor sets, generate a
     // mapping from the original group/binding pair to a binding-only
@@ -201,6 +204,13 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
             BindingPoint dstBindingPoint{0, shaderIndex};
             if (srcBindingPoint != dstBindingPoint) {
                 glBindings.emplace(srcBindingPoint, dstBindingPoint);
+            }
+
+            // For buffer binding that can be sharable across stages, we need to rename them to
+            // avoid GL program link failures due to block naming issues.
+            if (bindingInfo.bindingType == BindingInfoType::Buffer &&
+                stage != SingleShaderStage::Compute) {
+                req.bufferBindingVariables.emplace_back(bindingInfo.name);
             }
         }
 
@@ -231,7 +241,6 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
 
     const CombinedLimits& limits = GetDevice()->GetLimits();
 
-    GLSLCompilationRequest req = {};
     req.inputProgram = GetTintProgram();
     req.stage = stage;
     req.entryPointName = programmableStage.entryPoint;
@@ -308,12 +317,22 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
             transformInputs.Add<tint::ast::transform::SingleEntryPoint::Config>(r.entryPointName);
 
             {
+                tint::ast::transform::Renamer::Remappings assigned_renamings = {};
+
                 // Give explicit renaming mappings for interstage variables
                 // Because GLSL requires interstage IO names to match.
-                tint::ast::transform::Renamer::Remappings interstage_renamings = {};
                 for (const auto& it : r.interstageVariables) {
-                    interstage_renamings.emplace(
+                    assigned_renamings.emplace(
                         it.second, "dawn_interstage_location_" + std::to_string(it.first));
+                }
+
+                // Give explicit renaming mappings for buffer bindings to avoid shared block naming
+                // issues. AddBlockAttribute transform in Tint GLSL printer will always generate
+                // wrapper structs of such binding and their names are based on the variable names.
+                for (const auto& variableName : r.bufferBindingVariables) {
+                    assigned_renamings.emplace(
+                        variableName,
+                        (r.stage == SingleShaderStage::Vertex ? "v_" : "f_") + variableName);
                 }
 
                 // Needs to run early so that they can use builtin names safely.
@@ -322,7 +341,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                 transformInputs.Add<tint::ast::transform::Renamer::Config>(
                     r.disableSymbolRenaming ? tint::ast::transform::Renamer::Target::kGlslKeywords
                                             : tint::ast::transform::Renamer::Target::kAll,
-                    false, std::move(interstage_renamings));
+                    false, std::move(assigned_renamings));
             }
 
             if (r.substituteOverrideConfig) {
