@@ -53,6 +53,27 @@ class UnsafeAPIValidationTest : public ValidationTest {
         deviceTogglesDesc.disabledToggleCount = 1;
         return dawnAdapter.CreateDevice(&descriptor);
     }
+
+    wgpu::Texture CreateTexture(wgpu::TextureDimension dimension,
+                                wgpu::TextureFormat format,
+                                uint32_t width,
+                                uint32_t height,
+                                uint32_t arrayLayerCount,
+                                uint32_t mipLevelCount,
+                                uint32_t sampleCount = 1,
+                                wgpu::TextureUsage usage = wgpu::TextureUsage::RenderAttachment) {
+        wgpu::TextureDescriptor descriptor;
+        descriptor.dimension = dimension;
+        descriptor.size.width = width;
+        descriptor.size.height = height;
+        descriptor.size.depthOrArrayLayers = arrayLayerCount;
+        descriptor.sampleCount = sampleCount;
+        descriptor.format = format;
+        descriptor.mipLevelCount = mipLevelCount;
+        descriptor.usage = usage;
+
+        return device.CreateTexture(&descriptor);
+    }
 };
 
 // Check chromium_disable_uniformity_analysis is an unsafe API.
@@ -72,11 +93,8 @@ TEST_F(UnsafeAPIValidationTest, chromium_disable_uniformity_analysis) {
 
 // Check that separate depth-stencil readonlyness is validated as unsafe for render passes.
 TEST_F(UnsafeAPIValidationTest, SeparateRenderPassDepthStencilReadOnlyness) {
-    wgpu::TextureDescriptor tDesc;
-    tDesc.size = {1, 1};
-    tDesc.format = wgpu::TextureFormat::Depth24PlusStencil8;
-    tDesc.usage = wgpu::TextureUsage::RenderAttachment;
-    wgpu::Texture t = device.CreateTexture(&tDesc);
+    wgpu::Texture t = CreateTexture(wgpu::TextureDimension::e2D,
+                                    wgpu::TextureFormat::Depth24PlusStencil8, 1, 1, 1, 1);
 
     // Control case: both readonly is valid.
     {
@@ -133,6 +151,12 @@ TEST_F(UnsafeAPIValidationTest, SeparateRenderBundleDepthStencilReadOnlyness) {
         desc.stencilReadOnly = false;
         ASSERT_DEVICE_ERROR(device.CreateRenderBundleEncoder(&desc));
     }
+}
+
+// Check that create 3D texture for the render attachment is validated as unsafe.
+TEST_F(UnsafeAPIValidationTest, Create3DTextureForRenderAttachment) {
+    ASSERT_DEVICE_ERROR(
+        CreateTexture(wgpu::TextureDimension::e3D, wgpu::TextureFormat::RGBA8Unorm, 1, 1, 1, 1));
 }
 
 class TimestampQueryUnsafeAPIValidationTest : public ValidationTest {
