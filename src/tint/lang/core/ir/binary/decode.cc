@@ -172,6 +172,9 @@ struct Decoder {
             case pb::Instruction::KindCase::kBinary:
                 inst_out = CreateInstructionBinary(inst_in.binary());
                 break;
+            case pb::Instruction::KindCase::kBuiltinCall:
+                inst_out = CreateInstructionBuiltinCall(inst_in.builtin_call());
+                break;
             case pb::Instruction::KindCase::kConstruct:
                 inst_out = CreateInstructionConstruct(inst_in.construct());
                 break;
@@ -237,6 +240,12 @@ struct Decoder {
         auto* binary_out = mod_out_.instructions.Create<ir::Binary>();
         binary_out->SetOp(BinaryOp(binary_in.op()));
         return binary_out;
+    }
+
+    ir::CoreBuiltinCall* CreateInstructionBuiltinCall(const pb::InstructionBuiltinCall& call_in) {
+        auto* call_out = mod_out_.instructions.Create<ir::CoreBuiltinCall>();
+        call_out->SetFunc(BuiltinFn(call_in.builtin()));
+        return call_out;
     }
 
     ir::Construct* CreateInstructionConstruct(const pb::InstructionConstruct&) {

@@ -37,6 +37,7 @@
 #include "src/tint/lang/core/ir/access.h"
 #include "src/tint/lang/core/ir/binary.h"
 #include "src/tint/lang/core/ir/construct.h"
+#include "src/tint/lang/core/ir/core_builtin_call.h"
 #include "src/tint/lang/core/ir/discard.h"
 #include "src/tint/lang/core/ir/function_param.h"
 #include "src/tint/lang/core/ir/let.h"
@@ -153,6 +154,9 @@ struct Encoder {
             inst_in,  //
             [&](const ir::Access* i) { InstructionAccess(*inst_out.mutable_access(), i); },
             [&](const ir::Binary* i) { InstructionBinary(*inst_out.mutable_binary(), i); },
+            [&](const ir::CoreBuiltinCall* i) {
+                InstructionBuiltinCall(*inst_out.mutable_builtin_call(), i);
+            },
             [&](const ir::Construct* i) { InstructionConstruct(*inst_out.mutable_construct(), i); },
             [&](const ir::Discard* i) { InstructionDiscard(*inst_out.mutable_discard(), i); },
             [&](const ir::Let* i) { InstructionLet(*inst_out.mutable_let(), i); },
@@ -182,6 +186,11 @@ struct Encoder {
 
     void InstructionBinary(pb::InstructionBinary& binary_out, const ir::Binary* binary_in) {
         binary_out.set_op(BinaryOp(binary_in->Op()));
+    }
+
+    void InstructionBuiltinCall(pb::InstructionBuiltinCall& call_out,
+                                const ir::CoreBuiltinCall* call_in) {
+        call_out.set_builtin(BuiltinFn(call_in->Func()));
     }
 
     void InstructionConstruct(pb::InstructionConstruct&, const ir::Construct*) {}
