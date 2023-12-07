@@ -16,6 +16,23 @@
       "message": "Brian, Austin, PTAL.\nI\u0027m not sure about the change to branch builders, I don\u0027t see it affected anything?",
       "revId": "ad8315bd0d5f2280bcb6a20c41805c226c6920c9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b8e5c87_58b9f952",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2023-12-07T19:37:32Z",
+      "side": 1,
+      "message": "Thanks!\nHopefully the branch builder changes are OK, I don\u0027t know how to verify them.\nWill they apply only after the branch?",
+      "revId": "ad8315bd0d5f2280bcb6a20c41805c226c6920c9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
