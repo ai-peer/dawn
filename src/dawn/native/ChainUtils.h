@@ -158,6 +158,9 @@ constexpr inline size_t UnpackedIndexOf<Unpacked<T>, Ext> =
 template <typename UnpackedT, typename... Exts>
 constexpr inline auto UnpackedBitsetForExts =
     typename UnpackedT::BitsetType(((uint64_t(1) << UnpackedIndexOf<UnpackedT, Exts>) | ...));
+template <typename UnpackedT>
+constexpr inline UnpackedT::BitsetType UnpackedBitsetForExts<UnpackedT> =
+    typename UnpackedT::BitsetType(0);
 
 template <typename UnpackedT, typename...>
 struct OneBranchValidator;
@@ -212,7 +215,11 @@ struct SubsetValidator {
     using BitsetType = typename UnpackedT::BitsetType;
 
     static std::string ToString() {
-        return absl::StrFormat("[ %s ]", STypesToString<Allowed...>());
+        if constexpr (sizeof...(Allowed)) {
+            return absl::StrFormat("[ %s ]", STypesToString<Allowed...>());
+        } else {
+            return "[]";
+        }
     }
 
     static MaybeError Validate(const UnpackedT& unpacked, const BitsetType& bitset) {
