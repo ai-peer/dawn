@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf52b1a2_7f067ad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-07T08:02:27Z",
+      "side": 1,
+      "message": "Still LGTM!",
+      "revId": "58b71ea9f83ffabf15d978acf040f2855ca59727",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85311bfb_096aba21",
+        "filename": "src/dawn/tests/DawnTest.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-07T08:02:27Z",
+      "side": 1,
+      "message": "nit: Maybe add a small comment as to why we need to do this?",
+      "revId": "58b71ea9f83ffabf15d978acf040f2855ca59727",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
