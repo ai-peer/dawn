@@ -16,6 +16,24 @@
       "message": "We probably need to land this before landing the CL that adds the support for depthSlice !\u003d0.\n\nAlso can add a basic test in UnsafeAPITests.cpp?",
       "revId": "c2c587334af75fc3cddcc1e51884f8d7e308cedf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1603a3ab_ef7c6547",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-08T02:31:40Z",
+      "side": 1,
+      "message": "I forgot that we had validated creating 3d texture for render attachment as unsafe api at https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Texture.cpp;l\u003d343.\n\nThis CL just need to add validation test for that.",
+      "parentUuid": "1f7bd6d4_4535b5bc",
+      "revId": "c2c587334af75fc3cddcc1e51884f8d7e308cedf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
