@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "545889c9_5955d7ce",
+        "filename": "src/dawn/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T02:47:45Z",
+      "side": 1,
+      "message": "I think it was better to not add the CreateTexture helper.\n\nIt\u0027s super not obvious that this test is using RenderAttachment since it\u0027s hidden as the default arg",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 97
+      },
+      "revId": "318b46d105d096033a8ab656912ef7b9d14cdede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
