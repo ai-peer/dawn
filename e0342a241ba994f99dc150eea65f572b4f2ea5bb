@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "170c2761_60cd7007",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-08T01:35:15Z",
+      "side": 1,
+      "message": "Per discussion on CTS change Likely we are abandoning this. But let me rethink a bit and do that tomorrow. My brain is kind of unreliable for now.",
+      "revId": "e0342a241ba994f99dc150eea65f572b4f2ea5bb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
