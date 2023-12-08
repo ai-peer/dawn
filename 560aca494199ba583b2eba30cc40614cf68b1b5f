@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "311d7364_7663b96b",
+        "filename": "src/dawn/partition_alloc/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-08T18:36:16Z",
+      "side": 1,
+      "message": "We are generating a file on line 54.\n\nThat\u0027s a bit wasteful for a single define that is not going to change.\nIf you want, I can copy-paste the generate file and remove the include_dir.\nWhat do you think?",
+      "parentUuid": "1320e53c_e5702a3d",
+      "revId": "560aca494199ba583b2eba30cc40614cf68b1b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c7f5652_94116ffa",
         "filename": "src/dawn/tests/PartitionAllocSupport.cpp",
         "patchSetId": 10
@@ -48,6 +66,24 @@
       "writtenOn": "2023-12-08T16:21:25Z",
       "side": 1,
       "message": "I\u0027d assume ErrorLog does memory allocations though 😊",
+      "revId": "560aca494199ba583b2eba30cc40614cf68b1b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b2c7a0e_6ddda261",
+        "filename": "src/dawn/tests/PartitionAllocSupport.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-08T18:36:16Z",
+      "side": 1,
+      "message": "Yeah, It depends on the standard library implementation.\nThe allocator has some reentrancy guard. They are not reached. So in practise this is not reentrant.\n\nNevertheless, I agree this should be fixed.\nI will take a look.",
+      "parentUuid": "3c7f5652_94116ffa",
       "revId": "560aca494199ba583b2eba30cc40614cf68b1b5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
