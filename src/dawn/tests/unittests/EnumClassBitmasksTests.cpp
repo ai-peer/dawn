@@ -27,9 +27,11 @@
 
 #include "gtest/gtest.h"
 
-#include "dawn/EnumClassBitmasks.h"
+#include "webgpu/webgpu_enum_class_bitmasks.h"
 
-namespace dawn {
+namespace my_namespace {
+
+WGPU_IMPORT_BITMASK_OPERATORS
 
 enum class Color : uint32_t {
     R = 1,
@@ -38,10 +40,14 @@ enum class Color : uint32_t {
     A = 8,
 };
 
+}  // namespace my_namespace
+
 template <>
-struct IsDawnBitmask<Color> {
+struct wgpu::IsWGPUBitmask<my_namespace::Color> {
     static constexpr bool enable = true;
 };
+
+namespace my_namespace {
 
 TEST(BitmaskTests, BasicOperations) {
     Color test1 = Color::R | Color::G;
@@ -103,4 +109,4 @@ TEST(BitmaskTests, ZeroOrOneBits) {
     ASSERT_FALSE(HasZeroOrOneBits(static_cast<Color>(Color::B | Color::A)));
 }
 
-}  // namespace dawn
+}  // namespace my_namespace
