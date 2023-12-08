@@ -35,6 +35,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d74d1c5_ecb41946",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2023-12-08T16:14:45Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "849eed1a_373f6deb",
@@ -48,6 +65,24 @@
       "writtenOn": "2023-12-08T15:41:59Z",
       "side": 1,
       "message": "Maybe we could use that for the DeviceBase* pointer in ObjectBase (or ApiObjectBase) so that most headers transitevely include that file.",
+      "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "92b75e23_b1fb8b40",
+        "filename": "src/dawn/native/PipelineLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2023-12-08T16:14:45Z",
+      "side": 1,
+      "message": "What would be the goal?\n\nThe raw_ptr/raw_ref rewriter will add the #include it needs. In general, it is best to avoid transitive #include. This avoids issues where refactored headers cause compilation issues when they no longer require particular headers themselves. \n\nBut, maybe you are thinking about some other benefits?",
+      "parentUuid": "849eed1a_373f6deb",
       "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
