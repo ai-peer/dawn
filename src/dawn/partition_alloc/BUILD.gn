@@ -1,0 +1,16 @@
+import("//build_overrides/dawn.gni")
+
+if (defined(dawn_partition_alloc_dir)) {
+  group("raw_ptr") {
+    public_deps = [ "${dawn_partition_alloc_dir}:raw_ptr" ]
+  }
+} else {
+  config("public_headers") {
+    include_dirs = [ "." ]
+  }
+
+  static_library("raw_ptr") {
+    public_config = [ "public_headers" ]
+    public = [ "partition_alloc/pointers/raw_ptr.h" ]
+  }
+}
