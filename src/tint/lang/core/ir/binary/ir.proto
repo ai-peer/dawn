@@ -53,7 +53,8 @@ message Type {
         TypeDepthTexture depth_texture = 8;
         TypeSampledTexture sampled_texture = 9;
         TypeStorageTexture storage_texture = 10;
-        TypeSampler sampler = 11;
+        TypeExternalTexture external_texture = 11;
+        TypeSampler sampler = 12;
     }
 }
 
@@ -120,6 +121,9 @@ message TypeStorageTexture {
     TextureDimension dimension = 1;
     TexelFormat texel_format = 2;
     AccessControl access = 3;
+}
+
+message TypeExternalTexture {
 }
 
 message TypeSampler {
