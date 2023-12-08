@@ -16,6 +16,24 @@
       "message": "Structs also have flags too (currently just used for block decoration in SPIR-V/GLSL). Should those be serialized as well, or does serialization only deal with core IR?",
       "revId": "fa28d63a60c2dda9682a24d1024e89c1ae9816ea",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42561ff1_55c87e79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-08T20:15:29Z",
+      "side": 1,
+      "message": "Just the core IR dialect. We can\u0027t support arbitrary additional dialects, without a proto per dialect.",
+      "parentUuid": "830ba64e_e06d7852",
+      "revId": "fa28d63a60c2dda9682a24d1024e89c1ae9816ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
