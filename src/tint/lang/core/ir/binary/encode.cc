@@ -70,6 +70,7 @@
 #include "src/tint/lang/core/type/i32.h"
 #include "src/tint/lang/core/type/matrix.h"
 #include "src/tint/lang/core/type/pointer.h"
+#include "src/tint/lang/core/type/sampled_texture.h"
 #include "src/tint/lang/core/type/sampler.h"
 #include "src/tint/lang/core/type/u32.h"
 #include "src/tint/lang/core/type/void.h"
@@ -345,6 +346,9 @@ struct Encoder {
                 [&](const core::type::DepthTexture* t) {
                     TypeDepthTexture(*type_out.mutable_depth_texture(), t);
                 },
+                [&](const core::type::SampledTexture* t) {
+                    TypeSampledTexture(*type_out.mutable_sampled_texture(), t);
+                },
                 [&](const core::type::Sampler* s) { TypeSampler(*type_out.mutable_sampler(), s); },
                 TINT_ICE_ON_NO_MATCH);
 
@@ -420,6 +424,12 @@ struct Encoder {
     void TypeDepthTexture(pb::TypeDepthTexture& texture_out,
                           const core::type::DepthTexture* texture_in) {
         texture_out.set_dimension(TextureDimension(texture_in->dim()));
+    }
+
+    void TypeSampledTexture(pb::TypeSampledTexture& texture_out,
+                            const core::type::SampledTexture* texture_in) {
+        texture_out.set_dimension(TextureDimension(texture_in->dim()));
+        texture_out.set_sub_type(Type(texture_in->type()));
     }
 
     void TypeSampler(pb::TypeSampler& sampler_out, const core::type::Sampler* sampler_in) {

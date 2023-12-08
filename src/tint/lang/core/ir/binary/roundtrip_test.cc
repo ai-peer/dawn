@@ -31,6 +31,7 @@
 #include "src/tint/lang/core/ir/binary/encode.h"
 #include "src/tint/lang/core/ir/disassembler.h"
 #include "src/tint/lang/core/type/depth_texture.h"
+#include "src/tint/lang/core/type/sampled_texture.h"
 
 namespace tint::core::ir::binary {
 namespace {
@@ -250,6 +251,12 @@ TEST_F(IRBinaryRoundtripTest, atomic_i32) {
 
 TEST_F(IRBinaryRoundtripTest, depth_texture) {
     auto* tex = ty.Get<core::type::DepthTexture>(core::type::TextureDimension::k2d);
+    b.Append(b.ir.root_block, [&] { b.Var(ty.ptr(handle, tex, read)); });
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, sampled_texture) {
+    auto* tex = ty.Get<core::type::SampledTexture>(core::type::TextureDimension::k3d, ty.i32());
     b.Append(b.ir.root_block, [&] { b.Var(ty.ptr(handle, tex, read)); });
     RUN_TEST();
 }

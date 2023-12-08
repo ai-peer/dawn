@@ -32,6 +32,7 @@
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/core/type/depth_texture.h"
+#include "src/tint/lang/core/type/sampled_texture.h"
 #include "src/tint/utils/containers/transform.h"
 #include "src/tint/utils/macros/compiler.h"
 
@@ -510,6 +511,8 @@ struct Decoder {
                 return CreateTypeArray(type_in.array());
             case pb::Type::KindCase::kDepthTexture:
                 return CreateTypeDepthTexture(type_in.depth_texture());
+            case pb::Type::KindCase::kSampledTexture:
+                return CreateTypeSampledTexture(type_in.sampled_texture());
             case pb::Type::KindCase::kSampler:
                 return CreateTypeSampler(type_in.sampler());
             default:
@@ -615,6 +618,12 @@ struct Decoder {
     const type::DepthTexture* CreateTypeDepthTexture(const pb::TypeDepthTexture& texture_in) {
         auto dimension = TextureDimension(texture_in.dimension());
         return mod_out_.Types().Get<type::DepthTexture>(dimension);
+    }
+
+    const type::SampledTexture* CreateTypeSampledTexture(const pb::TypeSampledTexture& texture_in) {
+        auto dimension = TextureDimension(texture_in.dimension());
+        auto sub_type = Type(texture_in.sub_type());
+        return mod_out_.Types().Get<type::SampledTexture>(dimension, sub_type);
     }
 
     const type::Sampler* CreateTypeSampler(const pb::TypeSampler& sampler_in) {

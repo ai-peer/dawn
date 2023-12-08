@@ -51,7 +51,8 @@ message Type {
         TypeStruct struct = 6;
         TypeAtomic atomic = 7;
         TypeDepthTexture depth_texture = 8;
-        TypeSampler sampler = 9;
+        TypeSampledTexture sampled_texture = 9;
+        TypeSampler sampler = 10;
     }
 }
 
@@ -107,6 +108,11 @@ message TypeAtomic {
 
 message TypeDepthTexture {
     TextureDimension dimension = 1;
+}
+
+message TypeSampledTexture {
+    TextureDimension dimension = 1;
+    uint32 sub_type = 2;  // Module.types
 }
 
 message TypeSampler {
