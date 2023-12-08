@@ -16,6 +16,23 @@
       "message": "PTAL at the reland! [diff patchsets 1..3](https://dawn-review.googlesource.com/c/dawn/+/164863/1..3) to see the changes\n\nVerified that this fixes the compile failure with this [test cl](https://chromium-review.googlesource.com/c/chromium/src/+/5105280)\n\nmoving cwallez to CC since he reviewed the original CL and it is now outside working hours",
       "revId": "86f7bcf5017b789b51645b5604a74f0c661331a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98a2c036_7f80a9e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-08T21:43:21Z",
+      "side": 1,
+      "message": "Ah, makes sense. Thanks for highlighting the changes. AHardwareBuffer function changes LGTM!",
+      "revId": "86f7bcf5017b789b51645b5604a74f0c661331a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
