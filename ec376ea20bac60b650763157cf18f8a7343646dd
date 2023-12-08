@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caaf5126_59faac38",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-08T13:48:16Z",
+      "side": 1,
+      "message": "Hi Corentin and Ben,\n\nCould you please take a look?",
+      "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
