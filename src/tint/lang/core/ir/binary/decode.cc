@@ -169,6 +169,15 @@ struct Decoder {
         for (auto param_in : fn_in.parameters()) {
             params_out.Push(ValueAs<ir::FunctionParam>(param_in));
         }
+        if (fn_in.has_return_location()) {
+            auto& ret_loc_in = fn_in.return_location();
+            core::ir::Location ret_loc_out{};
+            ret_loc_out.value = ret_loc_in.value();
+            if (ret_loc_in.has_interpolation()) {
+                ret_loc_out.interpolation = Interpolation(ret_loc_in.interpolation());
+            }
+            fn_out->SetReturnLocation(ret_loc_out.value, std::move(ret_loc_out.interpolation));
+        }
         fn_out->SetParams(std::move(params_out));
         fn_out->SetBlock(Block(fn_in.block()));
     }
@@ -586,10 +595,7 @@ struct Decoder {
                 }
                 if (attributes_in.has_interpolation()) {
                     auto& interpolation_in = attributes_in.interpolation();
-                    attributes_out.interpolation = core::Interpolation{
-                        InterpolationType(interpolation_in.type()),
-                        InterpolationSampling(interpolation_in.sampling()),
-                    };
+                    attributes_out.interpolation = Interpolation(interpolation_in);
                 }
                 attributes_out.invariant = attributes_in.invariant();
             }
@@ -747,6 +753,16 @@ struct Decoder {
 
     const core::constant::Value* ConstantValue(uint32_t id) {
         return id > 0 ? constant_values_[id - 1] : nullptr;
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Attributes
+    ////////////////////////////////////////////////////////////////////////////
+    core::Interpolation Interpolation(const pb::Interpolation& interpolation_in) {
+        return core::Interpolation{
+            InterpolationType(interpolation_in.type()),
+            InterpolationSampling(interpolation_in.sampling()),
+        };
     }
 
     ////////////////////////////////////////////////////////////////////////////

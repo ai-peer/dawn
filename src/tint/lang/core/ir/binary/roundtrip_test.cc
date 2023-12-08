@@ -125,6 +125,23 @@ TEST_F(IRBinaryRoundtripTest, Fn_Parameters) {
     RUN_TEST();
 }
 
+TEST_F(IRBinaryRoundtripTest, Fn_ReturnLocation) {
+    auto* fn = b.Function("Function", ty.void_());
+    fn->SetReturnLocation(42, std::nullopt);
+    b.ir.SetName(fn, "Function");
+    RUN_TEST();
+}
+
+TEST_F(IRBinaryRoundtripTest, Fn_ReturnLocation_Interpolation) {
+    auto* fn = b.Function("Function", ty.void_());
+    fn->SetReturnLocation(0, core::Interpolation{
+                                 core::InterpolationType::kPerspective,
+                                 core::InterpolationSampling::kCentroid,
+                             });
+    b.ir.SetName(fn, "Function");
+    RUN_TEST();
+}
+
 ////////////////////////////////////////////////////////////////////////////////
 // Types
 ////////////////////////////////////////////////////////////////////////////////
