@@ -18,6 +18,63 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc26f1b7_83090c3f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-08T16:18:35Z",
+      "side": 1,
+      "message": "Nice work!",
+      "revId": "c66c35f8cd1fa4e8ea81fb048f06320156c29a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e29e1af9_a733d437",
+        "filename": "src/tint/lang/spirv/reader/ast_lower/pass_workgroup_id_as_argument.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-08T16:18:35Z",
+      "side": 1,
+      "message": "TIL!\nI never thought of using non-constant data (the pointers) in a default member initialization.  That\u0027s a nice cleanup!  I always do the wordy thing in the surrounding class\u0027s constructor.",
+      "range": {
+        "startLine": 52,
+        "startChar": 32,
+        "endLine": 52,
+        "endChar": 74
+      },
+      "revId": "c66c35f8cd1fa4e8ea81fb048f06320156c29a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c0b9994_483acab2",
+        "filename": "src/tint/lang/spirv/reader/ast_lower/pass_workgroup_id_as_argument.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 144,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-08T16:18:35Z",
+      "side": 1,
+      "message": "There is a jewel-like beauty to the fact that the recursion bottoms out because of the unique\u0027ing done by the GetOrCreate on line 136.",
+      "revId": "c66c35f8cd1fa4e8ea81fb048f06320156c29a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b06e0b9_1112d82e",
@@ -61,6 +118,23 @@
         "endLine": 53,
         "endChar": 1
       },
+      "revId": "c66c35f8cd1fa4e8ea81fb048f06320156c29a20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ca5ccc6_e8aff678",
+        "filename": "src/tint/lang/spirv/reader/ast_parser/parse.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-08T16:18:35Z",
+      "side": 1,
+      "message": "nit: I\u0027d skip the assessment/judgement \"Trivial\" and just say what it does.\n\"Removes the enable directive that disables uniformity analysis\"",
       "revId": "c66c35f8cd1fa4e8ea81fb048f06320156c29a20",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
