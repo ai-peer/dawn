@@ -30,18 +30,20 @@
 #include "dawn/EnumClassBitmasks.h"
 
 namespace dawn {
-
 enum class Color : uint32_t {
     R = 1,
     G = 2,
     B = 4,
     A = 8,
 };
+}  // namespace dawn
 
 template <>
-struct IsDawnBitmask<Color> {
+struct wgpu::IsWGPUBitmask<dawn::Color> {
     static constexpr bool enable = true;
 };
+
+namespace dawn {
 
 TEST(BitmaskTests, BasicOperations) {
     Color test1 = Color::R | Color::G;

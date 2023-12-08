@@ -32,9 +32,9 @@
 
 namespace dawn::native {
 
-// EnumClassBitmmasks is a helper in the dawn:: namespace.
-// Re-export it in the dawn_native namespace.
-DAWN_IMPORT_BITMASK_OPERATORS
+// The operators of webgpu_enum_class_bitmasks.h are in the wgpu:: namespace,
+// and need to be imported into this namespace for Argument Dependent Lookup.
+WGPU_IMPORT_BITMASK_OPERATORS
 
 // Specify this for usage with EnumMaskIterator
 template <typename T>

@@ -110,6 +110,7 @@ add_library(dawncpp_headers STATIC ${DAWN_PLACEHOLDER_FILE})
 common_compile_options(dawncpp_headers)
 target_sources(dawncpp_headers INTERFACE
     "${DAWN_INCLUDE_DIR}/webgpu/webgpu_cpp.h"
+    "${DAWN_INCLUDE_DIR}/webgpu/webgpu_enum_class_bitmasks.h"
     "${DAWN_INCLUDE_DIR}/dawn/EnumClassBitmasks.h"
     PRIVATE
     ${DAWNCPP_HEADERS_GEN_SOURCES}
