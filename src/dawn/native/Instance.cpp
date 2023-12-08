@@ -210,7 +210,7 @@ void InstanceBase::WillDropLastExternalRef() {
 }
 
 // TODO(crbug.com/dawn/832): make the platform an initialization parameter of the instance.
-MaybeError InstanceBase::Initialize(const Unpacked<InstanceDescriptor> descriptor) {
+MaybeError InstanceBase::Initialize(const Unpacked<InstanceDescriptor>& descriptor) {
     // Initialize the platform to the default for now.
     mDefaultPlatform = std::make_unique<dawn::platform::Platform>();
     SetPlatform(mDefaultPlatform.get());
