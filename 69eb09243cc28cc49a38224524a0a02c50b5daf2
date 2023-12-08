@@ -3,6 +3,108 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "caccd161_b70690a7",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-08T08:01:38Z",
+      "side": 0,
+      "message": "🟦 note: all 2 tests now pass",
+      "revId": "69eb09243cc28cc49a38224524a0a02c50b5daf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1261db1_060aea0c",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-08T08:01:38Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "69eb09243cc28cc49a38224524a0a02c50b5daf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e656240_4229b637",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 392,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-08T08:01:38Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,resource_usages,texture,in_render_misc:subresources,texture_usages_in_copy_and_render_pass:usage0\u003d\"copy-dst\";usage1\u003d\"texture\"\u0027",
+      "revId": "69eb09243cc28cc49a38224524a0a02c50b5daf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e40309e_bd0d14b2",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 393,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-08T08:01:38Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,resource_usages,texture,in_render_misc:subresources,texture_usages_in_copy_and_render_pass:usage0\u003d\"copy-src\";usage1\u003d\"texture\"\u0027",
+      "revId": "69eb09243cc28cc49a38224524a0a02c50b5daf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc79e2c5_b5610ea2",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 394,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-08T08:01:38Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,resource_usages,texture,in_render_misc:subresources,texture_usages_in_copy_and_render_pass:usage0\u003d\"texture\";usage1\u003d\"copy-dst\"\u0027",
+      "revId": "69eb09243cc28cc49a38224524a0a02c50b5daf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "519ca61b_8060fbdc",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 395,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-08T08:01:38Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,resource_usages,texture,in_render_misc:subresources,texture_usages_in_copy_and_render_pass:usage0\u003d\"texture\";usage1\u003d\"copy-src\"\u0027",
+      "revId": "69eb09243cc28cc49a38224524a0a02c50b5daf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "866bb2a5_84606fdb",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 2
