@@ -1,0 +1,282 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e7c76c_f211551c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "LGTM too!",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46948c41_4fe1d3ee",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21e67f41_b24120b6",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 121,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto maybe?",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50905fca_b11811ba",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99649ab5_7c898187",
+        "filename": "src/dawn/native/BindGroup.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 340,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a014761b_babfd107",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 694,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2998a914_eb8292d4",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "nit: MakeError",
+      "range": {
+        "startLine": 1083,
+        "startChar": 9,
+        "endLine": 1083,
+        "endChar": 18
+      },
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b93fccf_2a8a1d8b",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d88c399_f1c398f7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1285,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "Maybe we should have an overload for Unpacked\u003cT\u003e",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7ce4e4e_82dcc6e4",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1557,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "37ad98a7_4b107f58",
+        "filename": "src/dawn/native/RenderPassEncoder.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dee9189c_36ec9710",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 489,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "These uses could be \n\n```\nauto textureBindingViewDimension \u003d wgpu::TextureViewDimension::Undefined;\nif (auto subDesc \u003d descriptor.Get\u003cTextureBindingViewDimensionDescriptor\u003e()) {\n     textureBindingViewDimension \u003d subDesc-\u003etextureBindingViewDimension;\n}\n```",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdc6c733_76031e80",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "Ditto we could regroup both parts that use internalUsageDesc at [1] with:\n\n```\n    wgpu::TextureUsage usage \u003d descriptor-\u003eusage;\n    if (const auto* internalUsageDesc \u003d descriptor.Get\u003cDawnTextureInternalUsageDescriptor\u003e()) {\n           DAWN_INVALID_IF(!device-\u003eHasFeature(Feature::DawnInternalUsages),\n        \"The internalUsageDesc is not empty while the dawn-internal-usages feature is not \"\n        \"enabled\");\n        usage |\u003d internalUsageDesc-\u003einternalUsage;\n    }\n```",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e873d190_39eb6c79",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 548,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46f37d86_fac66786",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "ditto to use the if (const auto* \u003d) form",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd189b14_949ac77d",
+        "filename": "src/dawn/native/d3d/ExternalImageDXGIImpl.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 41,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:05:38Z",
+      "side": 1,
+      "message": "Since this is always a const \u0026 I wonder if we could add it to Forward.h so we don\u0027t have to always include ChainUtils, which is a pretty big header.",
+      "revId": "c5a863b82a7b402d0183b364a43f48cffeb418ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
