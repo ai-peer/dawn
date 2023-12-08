@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a27064b_6e2a300c",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-08T08:47:34Z",
+      "side": 1,
+      "message": "I think this does something a little strange:\ndawn/webgpu_cpp.h includes\nwebgpu/webgpu.h includes\ndawn/webgpu.h\n\nBut this is needed for emscripten-bits to actually generate the right thing. Maybe there is a better fix.",
+      "revId": "0452418627a5dfa798a2add4ce11418272f2fb70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
