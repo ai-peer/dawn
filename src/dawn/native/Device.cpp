@@ -1546,7 +1546,7 @@ bool DeviceBase::APIGetLimits(SupportedLimits* limits) const {
     DAWN_ASSERT(limits != nullptr);
     InstanceBase* instance = GetPhysicalDevice()->GetInstance();
 
-    Unpacked<SupportedLimits> unpacked;
+    UnpackedPtr<SupportedLimits> unpacked;
     if (instance->ConsumedError(ValidateAndUnpack(limits), &unpacked)) {
         return false;
     }
@@ -1598,7 +1598,7 @@ void DeviceBase::APIValidateTextureDescriptor(const TextureDescriptor* desc) {
     } else {
         allowMultiPlanar = AllowMultiPlanarTextureFormat::No;
     }
-    Unpacked<TextureDescriptor> unpacked;
+    UnpackedPtr<TextureDescriptor> unpacked;
     if (!ConsumedError(ValidateAndUnpack(desc), &unpacked)) {
         DAWN_UNUSED(ConsumedError(ValidateTextureDescriptor(this, unpacked, allowMultiPlanar)));
     }
@@ -1881,7 +1881,7 @@ ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
 
 ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* rawDescriptor) {
     DAWN_TRY(ValidateIsAlive());
-    Unpacked<TextureDescriptor> descriptor;
+    UnpackedPtr<TextureDescriptor> descriptor;
     if (IsValidationEnabled()) {
         AllowMultiPlanarTextureFormat allowMultiPlanar;
         if (HasFeature(Feature::MultiPlanarFormatExtendedUsages)) {
