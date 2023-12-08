@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41672f05_7ece1717",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-08T20:13:53Z",
+      "side": 1,
+      "message": "I think there\u0027s at least one compiler out there that will warn if you try to undef something that isn\u0027t defined, but I\u0027m happy to fix that if / when we see that",
+      "revId": "c68887158eabf5778db357b638671125b846b101",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
