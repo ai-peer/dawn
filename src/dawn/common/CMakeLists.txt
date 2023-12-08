@@ -124,5 +124,9 @@ endif()
 
 target_link_libraries(dawn_common PUBLIC dawncpp_headers PRIVATE dawn_internal_config)
 
+add_library(dawn_partition_alloc INTERFACE)
+target_include_directories(dawn_partition_alloc
+    INTERFACE ${CMAKE_CURRENT_SOURCE_DIR}/partition_alloc/)
+
 # TODO Android Log support
 # TODO Vulkan headers support

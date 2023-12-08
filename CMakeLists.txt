@@ -448,6 +448,7 @@ target_include_directories(dawn_public_config INTERFACE
 add_library(dawn_internal_config INTERFACE)
 target_include_directories(dawn_internal_config INTERFACE
     "${DAWN_SRC_DIR}"
+    "${DAWN_SRC_DIR}/partition_alloc_noop_shim/"
     "${DAWN_BUILD_GEN_DIR}/src"
 )
 target_link_libraries(dawn_internal_config INTERFACE dawn_public_config)
