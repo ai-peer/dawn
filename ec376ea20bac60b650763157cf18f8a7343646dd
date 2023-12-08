@@ -16,6 +16,40 @@
       "message": "Hi Corentin and Ben,\n\nCould you please take a look?",
       "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b6c2b71a_ca10b229",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T15:41:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "849eed1a_373f6deb",
+        "filename": "src/dawn/native/PipelineLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T15:41:59Z",
+      "side": 1,
+      "message": "Maybe we could use that for the DeviceBase* pointer in ObjectBase (or ApiObjectBase) so that most headers transitevely include that file.",
+      "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
