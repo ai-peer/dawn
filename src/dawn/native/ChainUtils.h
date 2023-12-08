@@ -49,15 +49,20 @@ struct ChainTypeFor {
 };
 }  // namespace detail
 
-template <typename T, typename ChainType>
+template <typename T, typename ChainT>
 class UnpackedBase;
 template <typename T>
-using Unpacked = UnpackedBase<T, typename detail::ChainTypeFor<T>::Type>;
+class Unpacked;
 
 namespace detail {
 // Converts to the expected pointer types depending on the extensibility of the structure.
 template <typename UnpackedT, typename U>
 struct PtrTypeFor;
+template <typename T, typename U>
+struct PtrTypeFor<UnpackedBase<T, typename detail::ChainTypeFor<T>::Type>, U> {
+    using Type =
+        typename std::conditional_t<ExtensibilityFor<T> == Extensibility::In, const U*, U*>;
+};
 template <typename T, typename U>
 struct PtrTypeFor<Unpacked<T>, U> {
     using Type =
@@ -116,15 +121,29 @@ class UnpackedBase {
     template <typename... Allowed>
     MaybeError ValidateSubset() const;
 
-  private:
-    friend UnpackedBase<T, ChainType> Unpack<T>(PtrType chain);
-    friend ResultOrError<UnpackedBase<T, ChainType>> ValidateAndUnpack<T>(PtrType chain);
-
+  protected:
     explicit UnpackedBase(PtrType packed) : mStruct(packed) {}
+
+  private:
+    friend Unpacked<T> Unpack<T>(PtrType chain);
+    friend ResultOrError<Unpacked<T>> ValidateAndUnpack<T>(PtrType chain);
 
     PtrType mStruct = nullptr;
     TupleType mUnpacked;
     BitsetType mBitset;
+};
+
+template <typename T>
+class Unpacked : public UnpackedBase<T, typename detail::ChainTypeFor<T>::Type> {
+  public:
+    using Base = UnpackedBase<T, typename detail::ChainTypeFor<T>::Type>;
+    Unpacked() : Base(nullptr) {}
+
+  private:
+    friend Unpacked<T> Unpack<T>(Base::PtrType chain);
+    friend ResultOrError<Unpacked<T>> ValidateAndUnpack<T>(Base::PtrType chain);
+
+    explicit Unpacked(Base::PtrType packed) : Base(packed) {}
 };
 
 // Tuple type of a Branch and an optional list of corresponding Extensions.
@@ -149,9 +168,12 @@ constexpr inline size_t UnpackedTupleIndexOf<std::tuple<Other, Exts...>, Ext> =
 template <typename UnpackedT, typename Ext>
 inline size_t UnpackedIndexOf;
 template <typename T, typename Ext>
-constexpr inline size_t UnpackedIndexOf<Unpacked<T>, Ext> =
-    UnpackedTupleIndexOf<typename Unpacked<T>::TupleType,
-                         typename PtrTypeFor<Unpacked<T>, std::remove_pointer_t<Ext>>::Type>;
+constexpr inline size_t
+    UnpackedIndexOf<UnpackedBase<T, typename detail::ChainTypeFor<T>::Type>, Ext> =
+        UnpackedTupleIndexOf<
+            typename UnpackedBase<T, typename detail::ChainTypeFor<T>::Type>::TupleType,
+            typename PtrTypeFor<UnpackedBase<T, typename detail::ChainTypeFor<T>::Type>,
+                                std::remove_pointer_t<Ext>>::Type>;
 
 // Currently using an internal 64-bit unsigned int for internal representation. This is necessary
 // because std::bitset::operator| is not constexpr until C++23.
