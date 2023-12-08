@@ -492,7 +492,10 @@ source_set("test_infra_sources") {
     "${dawn_root}/src/dawn/wire",
   ]
 
-  public_deps = [ ":gmock_and_gtest" ]
+  public_deps = [
+    ":gmock_and_gtest",
+    "${dawn_root}/src/dawn/partition_alloc:raw_ptr",
+  ]
 
   if (dawn_supports_glfw_for_windowing) {
     public_deps += [ "${dawn_root}/src/dawn/glfw" ]

@@ -50,6 +50,7 @@
 #include "dawn/native/Texture.h"
 #include "dawn/native/ToBackend.h"
 #include "dawn/native/dawn_platform.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::null {
 
@@ -219,7 +220,7 @@ class BindGroupDataHolder {
     explicit BindGroupDataHolder(size_t size);
     ~BindGroupDataHolder();
 
-    void* mBindingDataAllocation;
+    raw_ptr<void> mBindingDataAllocation;
 };
 
 // We don't have the complexity of placement-allocation of bind group data in

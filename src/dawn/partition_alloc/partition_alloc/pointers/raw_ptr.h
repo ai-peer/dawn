@@ -38,10 +38,15 @@
 // TODO(arthursonzogni): https://crbug.com/1464560, Complete the "no-op"
 // implementation.
 
+namespace partition_alloc::internal {
+using RawPtrTraits = int;
+}
+
 constexpr int DanglingUntriaged = 0;
 constexpr int DisableDanglingPtrDetection = 0;
+constexpr int AllowPtrArithmetic = 0;
 
-template <typename T, int Traits = 0>
+template <typename T, RawPtrTraits Traits = 0>
 using raw_ptr = T*;
 
 #endif  // SRC_DAWN_PARTITION_ALLOC_PARTITION_ALLOC_POINTERS_RAW_PTR_H_

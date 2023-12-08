@@ -36,6 +36,7 @@
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 
@@ -102,10 +103,10 @@ class CommandBufferStateTracker {
     wgpu::IndexFormat mIndexFormat;
     uint64_t mIndexBufferSize = 0;
 
-    PipelineLayoutBase* mLastPipelineLayout = nullptr;
-    PipelineBase* mLastPipeline = nullptr;
+    raw_ptr<PipelineLayoutBase> mLastPipelineLayout = nullptr;
+    raw_ptr<PipelineBase> mLastPipeline = nullptr;
 
-    const RequiredBufferSizes* mMinBufferSizes = nullptr;
+    raw_ptr<const RequiredBufferSizes> mMinBufferSizes = nullptr;
 };
 
 }  // namespace dawn::native

@@ -36,6 +36,7 @@
 #include "dawn/tests/white_box/VulkanImageWrappingTests_OpaqueFD.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::vulkan {
 
@@ -186,7 +187,7 @@ class VulkanImageWrappingTestBase : public DawnTestWithParams<ImageWrappingParam
 
     wgpu::TextureDescriptor defaultDescriptor;
     std::array<std::unique_ptr<ExternalTexture>, kTestTexturesCount> testTextures;
-    ExternalTexture* defaultTexture;
+    raw_ptr<ExternalTexture> defaultTexture;
 };
 
 using VulkanImageWrappingValidationTests = VulkanImageWrappingTestBase;
@@ -319,12 +320,12 @@ class VulkanImageWrappingUsageTests : public VulkanImageWrappingTestBase {
     }
 
   protected:
-    native::AdapterBase* adapterBase;
+    raw_ptr<native::AdapterBase> adapterBase;
     native::DeviceDescriptor deviceDescriptor;
     native::DawnTogglesDescriptor deviceTogglesDesc;
 
     wgpu::Device secondDevice;
-    native::vulkan::Device* secondDeviceVk;
+    raw_ptr<native::vulkan::Device> secondDeviceVk;
 
     // Clear a texture on a given device
     void ClearImage(wgpu::Device dawnDevice, wgpu::Texture wrappedTexture, wgpu::Color clearColor) {

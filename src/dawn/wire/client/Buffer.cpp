@@ -36,6 +36,7 @@
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/Device.h"
 #include "dawn/wire/client/EventManager.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::wire::client {
 namespace {
@@ -98,7 +99,7 @@ class MapAsyncEvent : public TrackedEvent {
     }
 
     WGPUBufferMapCallback mCallback;
-    void* mUserdata;
+    raw_ptr<void> mUserdata;
 
     std::optional<WGPUBufferMapAsyncStatus> mStatus;
 
