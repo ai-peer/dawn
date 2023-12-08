@@ -31,6 +31,7 @@
 #include <memory>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/PhysicalDevice.h"
@@ -61,7 +62,7 @@ class BackendConnection : NonMovable {
     virtual size_t GetPhysicalDeviceCountForTesting() const = 0;
 
   private:
-    InstanceBase* mInstance = nullptr;
+    raw_ptr<InstanceBase> mInstance = nullptr;
     wgpu::BackendType mType;
 };
 

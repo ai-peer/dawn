@@ -33,6 +33,7 @@
 #include <mutex>
 #include <unordered_map>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
@@ -108,7 +109,7 @@ class RenderPassCache {
     };
     using Cache = std::unordered_map<RenderPassCacheQuery, VkRenderPass, CacheFuncs, CacheFuncs>;
 
-    Device* mDevice = nullptr;
+    raw_ptr<Device> mDevice = nullptr;
 
     std::mutex mMutex;
     Cache mCache;

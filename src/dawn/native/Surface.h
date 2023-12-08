@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_SURFACE_H_
 #define SRC_DAWN_NATIVE_SURFACE_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
@@ -111,18 +112,18 @@ class Surface final : public ErrorMonad {
     Ref<SwapChainBase> mSwapChain;
 
     // MetalLayer
-    void* mMetalLayer = nullptr;
+    raw_ptr<void> mMetalLayer = nullptr;
 
     // ANativeWindow
-    void* mAndroidNativeWindow = nullptr;
+    raw_ptr<void> mAndroidNativeWindow = nullptr;
 
     // Wayland
-    void* mWaylandDisplay = nullptr;
-    void* mWaylandSurface = nullptr;
+    raw_ptr<void> mWaylandDisplay = nullptr;
+    raw_ptr<void> mWaylandSurface = nullptr;
 
     // WindowsHwnd
-    void* mHInstance = nullptr;
-    void* mHWND = nullptr;
+    raw_ptr<void> mHInstance = nullptr;
+    raw_ptr<void> mHWND = nullptr;
 
 #if defined(DAWN_USE_WINDOWS_UI)
     // WindowsCoreWindow
@@ -133,7 +134,7 @@ class Surface final : public ErrorMonad {
 #endif  // defined(DAWN_USE_WINDOWS_UI)
 
     // Xlib
-    void* mXDisplay = nullptr;
+    raw_ptr<void> mXDisplay = nullptr;
     uint32_t mXWindow = 0;
 };
 

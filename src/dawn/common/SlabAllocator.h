@@ -32,6 +32,7 @@
 #include <type_traits>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Numeric.h"
 #include "dawn/common/PlacementAllocated.h"
 
@@ -98,10 +99,10 @@ class SlabAllocatorImpl {
 
         void Splice();
 
-        char* allocation;
-        IndexLinkNode* freeList;
-        Slab* prev;
-        Slab* next;
+        raw_ptr<char> allocation;
+        raw_ptr<IndexLinkNode> freeList;
+        raw_ptr<Slab> prev;
+        raw_ptr<Slab> next;
         Index blocksInUse;
     };
 

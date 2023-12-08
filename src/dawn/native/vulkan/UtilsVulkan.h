@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/dawn_platform.h"
@@ -102,7 +103,7 @@ struct PNextChainBuilder {
     }
 
   private:
-    VkBaseOutStructure* mCurrent;
+    raw_ptr<VkBaseOutStructure> mCurrent;
 };
 
 VkCompareOp ToVulkanCompareOp(wgpu::CompareFunction op);

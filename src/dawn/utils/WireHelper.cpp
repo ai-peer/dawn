@@ -33,6 +33,7 @@
 #include <sstream>
 #include <string>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/SystemUtils.h"
@@ -85,7 +86,7 @@ class WireServerTraceLayer : public dawn::wire::CommandHandler {
 
   private:
     std::string mDir;
-    dawn::wire::CommandHandler* mHandler;
+    raw_ptr<dawn::wire::CommandHandler> mHandler;
     std::ofstream mFile;
 };
 

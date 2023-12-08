@@ -33,6 +33,7 @@
 #include <string>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Alloc.h"
 #include "dawn/common/Assert.h"
 #include "dawn/native/Adapter.h"
@@ -136,7 +137,7 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
     MutexProtected<std::variant<BufferBase*, wgpu::BufferMapAsyncStatus>> mBufferOrEarlyStatus;
 
     WGPUBufferMapCallback mCallback;
-    void* mUserdata;
+    raw_ptr<void> mUserdata;
 
     // Create an event backed by the given queue execution serial.
     MapAsyncEvent(DeviceBase* device,

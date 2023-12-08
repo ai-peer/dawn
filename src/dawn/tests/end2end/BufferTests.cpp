@@ -33,6 +33,7 @@
 #include <string>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
@@ -61,7 +62,7 @@ class BufferMappingTests : public DawnTestWithParams<BufferMappingTestParams> {
                          void* ud = nullptr) {
         struct Userdata {
             wgpu::BufferMapCallback cb;
-            void* ud;
+            raw_ptr<void> ud;
             bool done = false;
         };
         Userdata userdata = Userdata{cb, ud};
@@ -243,7 +244,7 @@ TEST_P(BufferMappingTests, MapRead_InCallback) {
 
     struct UserData {
         wgpu::Buffer buffer;
-        void* expected;
+        raw_ptr<void> expected;
     };
     UserData user{buffer, &myData};
 

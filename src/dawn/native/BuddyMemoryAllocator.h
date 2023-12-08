@@ -31,6 +31,7 @@
 #include <memory>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/BuddyAllocator.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/ResourceMemoryAllocation.h"
@@ -71,7 +72,7 @@ class BuddyMemoryAllocator {
     uint64_t mMemoryBlockSize = 0;
 
     BuddyAllocator mBuddyBlockAllocator;
-    ResourceHeapAllocator* mHeapAllocator;
+    raw_ptr<ResourceHeapAllocator> mHeapAllocator;
 
     struct TrackedSubAllocations {
         size_t refcount = 0;

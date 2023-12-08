@@ -30,6 +30,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/utils/WGPUHelpers.h"
 #include "dawn/tests/DawnNativeTest.h"
@@ -89,7 +90,7 @@ class ScopedRawPtrExpectation {
     ~ScopedRawPtrExpectation() { Mock::VerifyAndClearExpectations(mPtr); }
 
   private:
-    void* mPtr = nullptr;
+    raw_ptr<void> mPtr = nullptr;
 };
 
 class DestroyObjectTests : public DawnMockTest {

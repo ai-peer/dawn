@@ -34,6 +34,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Buffer.h"
@@ -60,7 +61,7 @@ class IndirectDrawMetadata : public NonCopyable {
         // This is a pointer to the command that should be populated with the validated
         // indirect scratch buffer. It is only valid up until the encoded command buffer
         // is submitted.
-        DrawIndirectCmd* cmd;
+        raw_ptr<DrawIndirectCmd> cmd;
     };
 
     struct IndirectValidationBatch {
@@ -110,7 +111,7 @@ class IndirectDrawMetadata : public NonCopyable {
         Indexed,
     };
     struct IndexedIndirectConfig {
-        BufferBase* inputIndirectBuffer;
+        raw_ptr<BufferBase> inputIndirectBuffer;
         uint64_t numIndexBufferElements;
         bool duplicateBaseVertexInstance;
         DrawType drawType;

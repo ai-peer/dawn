@@ -36,6 +36,7 @@
 #include <unordered_set>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/ityp_array.h"
@@ -208,7 +209,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     bool mEnableAdapterBlocklist = false;
     BackendValidationLevel mBackendValidationLevel = BackendValidationLevel::Disabled;
 
-    dawn::platform::Platform* mPlatform = nullptr;
+    raw_ptr<dawn::platform::Platform> mPlatform = nullptr;
     std::unique_ptr<dawn::platform::Platform> mDefaultPlatform;
     std::unique_ptr<BlobCache> mBlobCache;
     BlobCache mPassthroughBlobCache;

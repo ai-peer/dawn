@@ -30,6 +30,7 @@
 
 #include <set>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Buffer.h"
 
 #include "dawn/common/SerialQueue.h"
@@ -102,7 +103,7 @@ class Buffer final : public BufferBase {
     VkDeviceMemory mDedicatedDeviceMemory = VK_NULL_HANDLE;
 
     wgpu::Callback mHostMappedDisposeCallback = nullptr;
-    void* mHostMappedDisposeUserdata = nullptr;
+    raw_ptr<void> mHostMappedDisposeUserdata = nullptr;
 
     // Track which usage was the last to write to the buffer.
     wgpu::BufferUsage mLastWriteUsage = wgpu::BufferUsage::None;

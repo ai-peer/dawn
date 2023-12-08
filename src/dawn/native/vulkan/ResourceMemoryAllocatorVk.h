@@ -31,6 +31,7 @@
 #include <memory>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
@@ -69,7 +70,7 @@ class ResourceMemoryAllocator {
     int FindBestTypeIndex(VkMemoryRequirements requirements, MemoryKind kind);
 
   private:
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
 
     class SingleTypeAllocator;
     std::vector<std::unique_ptr<SingleTypeAllocator>> mAllocatorsPerType;

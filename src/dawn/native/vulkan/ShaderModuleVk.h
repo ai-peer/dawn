@@ -35,6 +35,7 @@
 #include <unordered_map>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/HashUtils.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
@@ -47,7 +48,7 @@ struct ProgrammableStage;
 namespace vulkan {
 
 struct TransformedShaderModuleCacheKey {
-    const PipelineLayoutBase* layout;
+    raw_ptr<const PipelineLayoutBase> layout;
     std::string entryPoint;
     PipelineConstantEntries constants;
     std::optional<uint32_t> maxSubgroupSizeForFullSubgroups;

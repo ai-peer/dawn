@@ -25,6 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/tests/DawnTest.h"
 
 #include "dawn/common/Math.h"
@@ -47,7 +48,7 @@ class VulkanErrorInjectorTests : public DawnTest {
     }
 
   protected:
-    native::vulkan::Device* mDeviceVk;
+    raw_ptr<native::vulkan::Device> mDeviceVk;
 };
 
 TEST_P(VulkanErrorInjectorTests, InjectErrorOnCreateBuffer) {

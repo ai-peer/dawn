@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_UTILS_TERRIBLECOMMANDBUFFER_H_
 #define SRC_DAWN_UTILS_TERRIBLECOMMANDBUFFER_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/wire/Wire.h"
 
 namespace dawn::utils {
@@ -45,7 +46,7 @@ class TerribleCommandBuffer : public dawn::wire::CommandSerializer {
     bool Flush() override;
 
   private:
-    dawn::wire::CommandHandler* mHandler = nullptr;
+    raw_ptr<dawn::wire::CommandHandler> mHandler = nullptr;
     size_t mOffset = 0;
     char mBuffer[1000000];
 };

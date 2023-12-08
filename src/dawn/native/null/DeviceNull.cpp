@@ -30,6 +30,7 @@
 #include <limits>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/BackendConnection.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/ErrorData.h"
@@ -146,7 +147,7 @@ struct CopyFromStagingToBufferOperation : PendingOperation {
         destination->CopyFromStaging(staging, sourceOffset, destinationOffset, size);
     }
 
-    BufferBase* staging;
+    raw_ptr<BufferBase> staging;
     Ref<Buffer> destination;
     uint64_t sourceOffset;
     uint64_t destinationOffset;

@@ -33,6 +33,7 @@
 #include <mutex>
 #include <unordered_map>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 
@@ -65,7 +66,7 @@ class AsyncTaskManager {
         ~WaitableTask() override;
 
         AsyncTask asyncTask;
-        AsyncTaskManager* taskManager;
+        raw_ptr<AsyncTaskManager> taskManager;
         std::unique_ptr<dawn::platform::WaitableEvent> waitableEvent;
     };
 
@@ -74,7 +75,7 @@ class AsyncTaskManager {
 
     std::mutex mPendingTasksMutex;
     std::unordered_map<WaitableTask*, Ref<WaitableTask>> mPendingTasks;
-    dawn::platform::WorkerTaskPool* mWorkerTaskPool;
+    raw_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
 };
 
 }  // namespace dawn::native

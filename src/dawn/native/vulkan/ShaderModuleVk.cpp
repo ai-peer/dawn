@@ -31,6 +31,7 @@
 #include <string>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/Serializable.h"
@@ -145,7 +146,7 @@ class ShaderModule::ConcurrentTransformedShaderModuleCache {
         }
     };
 
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
     std::mutex mMutex;
     std::unordered_map<TransformedShaderModuleCacheKey,
                        Entry,

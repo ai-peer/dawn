@@ -34,6 +34,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/BindGroup.h"
@@ -260,7 +261,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
     DAWN_TRY(device->ValidateIsAlive());
 
     struct Batch {
-        const IndirectDrawMetadata::IndirectValidationBatch* metadata;
+        raw_ptr<const IndirectDrawMetadata::IndirectValidationBatch> metadata;
         uint64_t numIndexBufferElements;
         uint64_t dataBufferOffset;
         uint64_t dataSize;
@@ -268,12 +269,12 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
         uint64_t inputIndirectSize;
         uint64_t outputParamsOffset;
         uint64_t outputParamsSize;
-        BatchInfo* batchInfo;
+        raw_ptr<BatchInfo> batchInfo;
     };
 
     struct Pass {
         uint32_t flags;
-        BufferBase* inputIndirectBuffer;
+        raw_ptr<BufferBase> inputIndirectBuffer;
         IndirectDrawMetadata::DrawType drawType;
         uint64_t outputParamsSize = 0;
         uint64_t batchDataSize = 0;

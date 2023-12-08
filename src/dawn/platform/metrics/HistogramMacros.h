@@ -32,6 +32,7 @@
 #ifndef SRC_DAWN_PLATFORM_METRICS_HISTOGRAM_MACROS_H_
 #define SRC_DAWN_PLATFORM_METRICS_HISTOGRAM_MACROS_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/dawn_platform_export.h"
 
@@ -226,7 +227,7 @@ class DAWN_PLATFORM_EXPORT DawnHistogramTimer {
     void Reset();
 
   private:
-    dawn::platform::Platform* const mPlatform;
+    const raw_ptr<dawn::platform::Platform> mPlatform;
     double mConstructed;
 };
 

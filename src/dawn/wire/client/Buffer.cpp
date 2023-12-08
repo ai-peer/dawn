@@ -32,6 +32,7 @@
 #include <utility>
 
 #include "dawn/wire/BufferConsumer_impl.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/wire/WireCmd_autogen.h"
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/Device.h"
@@ -98,7 +99,7 @@ class MapAsyncEvent : public TrackedEvent {
     }
 
     WGPUBufferMapCallback mCallback;
-    void* mUserdata;
+    raw_ptr<void> mUserdata;
 
     std::optional<WGPUBufferMapAsyncStatus> mStatus;
 

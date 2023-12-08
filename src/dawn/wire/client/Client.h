@@ -31,6 +31,7 @@
 #include <memory>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/LinkedList.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/webgpu.h"
@@ -119,7 +120,7 @@ class Client : public ClientBase {
     ChunkedCommandSerializer mSerializer;
     WireDeserializeAllocator mWireCommandAllocator;
     PerObjectType<ObjectStore> mObjectStores;
-    MemoryTransferService* mMemoryTransferService = nullptr;
+    raw_ptr<MemoryTransferService> mMemoryTransferService = nullptr;
     std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
     PerObjectType<LinkedList<ObjectBase>> mObjects;
     // TODO(crbug.com/dawn/2061) Eventually we want an EventManager per instance not per client.

@@ -27,6 +27,7 @@
 
 #include "dawn/native/vulkan/QueueVk.h"
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/CommandValidation.h"
@@ -64,7 +65,7 @@ class ScopedSignalSemaphore : public NonCopyable {
     VkSemaphore* InitializeInto() { return &mSemaphore; }
 
   private:
-    Device* mDevice = nullptr;
+    raw_ptr<Device> mDevice = nullptr;
     VkSemaphore mSemaphore = VK_NULL_HANDLE;
 };
 

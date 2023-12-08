@@ -30,6 +30,7 @@
 
 #include <cstddef>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
 #include "dawn/wire/WireResult.h"
@@ -73,7 +74,7 @@ class BufferConsumer {
     WireResult Peek(T** data);
 
   private:
-    BufferT* mBuffer;
+    raw_ptr<BufferT, AllowPtrArithmetic> mBuffer;
     size_t mSize;
 };
 

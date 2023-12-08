@@ -34,6 +34,7 @@
 #include <string>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/CachedObject.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
@@ -60,7 +61,7 @@ struct ProgrammableStage {
     std::string entryPoint;
 
     // The metadata lives as long as module, that's ref-ed in the same structure.
-    const EntryPointMetadata* metadata = nullptr;
+    raw_ptr<const EntryPointMetadata> metadata = nullptr;
 
     PipelineConstantEntries constants;
 };

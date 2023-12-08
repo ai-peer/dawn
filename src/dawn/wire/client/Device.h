@@ -30,6 +30,7 @@
 
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/LinkedList.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/WireCmd_autogen.h"
@@ -88,14 +89,14 @@ class Device final : public ObjectBase {
     LimitsAndFeatures mLimitsAndFeatures;
     struct ErrorScopeData {
         WGPUErrorCallback callback = nullptr;
-        void* userdata = nullptr;
+        raw_ptr<void> userdata = nullptr;
     };
     RequestTracker<ErrorScopeData> mErrorScopes;
 
     struct CreatePipelineAsyncRequest {
         WGPUCreateComputePipelineAsyncCallback createComputePipelineAsyncCallback = nullptr;
         WGPUCreateRenderPipelineAsyncCallback createRenderPipelineAsyncCallback = nullptr;
-        void* userdata = nullptr;
+        raw_ptr<void> userdata = nullptr;
         ObjectId pipelineObjectID;
     };
     RequestTracker<CreatePipelineAsyncRequest> mCreatePipelineAsyncRequests;
@@ -104,11 +105,11 @@ class Device final : public ObjectBase {
     WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
     WGPULoggingCallback mLoggingCallback = nullptr;
     bool mDidRunLostCallback = false;
-    void* mErrorUserdata = nullptr;
-    void* mDeviceLostUserdata = nullptr;
-    void* mLoggingUserdata = nullptr;
+    raw_ptr<void> mErrorUserdata = nullptr;
+    raw_ptr<void> mDeviceLostUserdata = nullptr;
+    raw_ptr<void> mLoggingUserdata = nullptr;
 
-    Queue* mQueue = nullptr;
+    raw_ptr<Queue> mQueue = nullptr;
 
     std::shared_ptr<bool> mIsAlive;
 };

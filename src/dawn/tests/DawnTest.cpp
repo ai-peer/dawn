@@ -38,6 +38,7 @@
 #include <unordered_map>
 #include <unordered_set>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/GPUInfo.h"
 #include "dawn/common/Log.h"
@@ -67,7 +68,7 @@ namespace dawn {
 namespace {
 
 struct MapReadUserdata {
-    DawnTestBase* test;
+    raw_ptr<DawnTestBase> test;
     size_t slot;
 };
 

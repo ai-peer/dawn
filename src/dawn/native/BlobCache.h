@@ -30,6 +30,7 @@
 
 #include <mutex>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Platform.h"
 #include "dawn/native/Blob.h"
 #include "dawn/native/CacheResult.h"
@@ -77,7 +78,7 @@ class BlobCache {
 
     // Protects thread safety of access to mCache.
     std::mutex mMutex;
-    dawn::platform::CachingInterface* mCache;
+    raw_ptr<dawn::platform::CachingInterface> mCache;
 };
 
 }  // namespace dawn::native

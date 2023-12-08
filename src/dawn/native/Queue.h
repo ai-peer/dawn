@@ -30,6 +30,7 @@
 
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/SerialMap.h"
 #include "dawn/native/CallbackTaskManager.h"
@@ -56,7 +57,7 @@ struct TrackTaskCallback : CallbackTask {
     ~TrackTaskCallback() override = default;
 
   protected:
-    dawn::platform::Platform* mPlatform = nullptr;
+    raw_ptr<dawn::platform::Platform> mPlatform = nullptr;
     // The serial by which time the callback can be fired.
     ExecutionSerial mSerial = kMaxExecutionSerial;
 };

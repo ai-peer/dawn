@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SEMAPHORESERVICEIMPLEMENTATION_H_
 #define SRC_DAWN_NATIVE_VULKAN_EXTERNAL_SEMAPHORE_SEMAPHORESERVICEIMPLEMENTATION_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/vulkan/ExternalHandle.h"
 
@@ -61,7 +62,7 @@ class ServiceImplementation {
     virtual void CloseHandle(ExternalSemaphoreHandle handle) = 0;
 
   protected:
-    Device* mDevice = nullptr;
+    raw_ptr<Device> mDevice = nullptr;
 };
 
 }  // namespace dawn::native::vulkan::external_semaphore

@@ -32,6 +32,7 @@
 #include <array>
 #include <bitset>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Constants.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/Pipeline.h"
@@ -125,8 +126,8 @@ class BindGroupTrackerBase {
     // |mPipelineLayout| is the current pipeline layout set on the command buffer.
     // |mLastAppliedPipelineLayout| is the last pipeline layout for which we applied changes
     // to the bind group bindings.
-    PipelineLayoutBase* mPipelineLayout = nullptr;
-    PipelineLayoutBase* mLastAppliedPipelineLayout = nullptr;
+    raw_ptr<PipelineLayoutBase> mPipelineLayout = nullptr;
+    raw_ptr<PipelineLayoutBase> mLastAppliedPipelineLayout = nullptr;
 };
 
 }  // namespace dawn::native

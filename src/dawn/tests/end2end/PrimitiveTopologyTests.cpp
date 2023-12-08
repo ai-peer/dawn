@@ -27,6 +27,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
@@ -186,7 +187,7 @@ class PrimitiveTopologyTest : public DawnTest {
     }
 
     struct LocationSpec {
-        const TestLocation* locations;
+        raw_ptr<const TestLocation> locations;
         size_t count;
         bool include;
     };

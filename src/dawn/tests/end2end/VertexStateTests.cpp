@@ -27,6 +27,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Math.h"
 #include "dawn/tests/DawnTest.h"
@@ -216,7 +217,7 @@ class VertexStateTest : public DawnTest {
 
     struct DrawVertexBuffer {
         uint32_t location;
-        wgpu::Buffer* buffer;
+        raw_ptr<wgpu::Buffer> buffer;
     };
     void DoTestDraw(const wgpu::RenderPipeline& pipeline,
                     unsigned int triangles,

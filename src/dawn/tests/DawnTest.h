@@ -36,6 +36,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/Mutex.h"
 #include "dawn/common/Platform.h"
@@ -646,7 +647,7 @@ class DawnTestBase {
         wgpu::Device device;
         wgpu::Buffer buffer;
         uint64_t bufferSize;
-        const void* mappedData = nullptr;
+        raw_ptr<const void> mappedData = nullptr;
     };
     std::vector<ReadbackSlot> mReadbackSlots;
 

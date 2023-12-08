@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/wire/WireCmd_autogen.h"
 
 namespace dawn::wire {
@@ -47,7 +48,7 @@ class WireDeserializeAllocator : public DeserializeAllocator {
 
   private:
     size_t mRemainingSize = 0;
-    char* mCurrentBuffer = nullptr;
+    raw_ptr<char, AllowPtrArithmetic> mCurrentBuffer = nullptr;
     char mStaticBuffer[2048];
     std::vector<char*> mAllocations;
 };

@@ -33,6 +33,7 @@
 #include <string>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/ContentLessObjectCacheable.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
@@ -63,7 +64,7 @@ struct StageAndDescriptor {
     raw_ptr<ShaderModuleBase> module;
     std::string entryPoint;
     size_t constantCount = 0u;
-    ConstantEntry const* constants = nullptr;
+    raw_ptr<const ConstantEntry> constants = nullptr;
 };
 
 class PipelineLayoutBase : public ApiObjectBase,

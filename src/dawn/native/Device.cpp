@@ -32,6 +32,7 @@
 #include <mutex>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/Version_autogen.h"
 #include "dawn/native/AsyncTask.h"
@@ -158,7 +159,7 @@ struct LoggingCallbackTask : CallbackTask {
     wgpu::LoggingCallback mCallback;
     WGPULoggingType mLoggingType;
     std::string mMessage;
-    void* mUserdata;
+    raw_ptr<void> mUserdata;
 };
 }  // anonymous namespace
 

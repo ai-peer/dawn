@@ -8,6 +8,7 @@
 #include <cstddef>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 #include "dawn/common/StackContainer.h"
@@ -23,7 +24,7 @@ class Placeholder : public RefCounted {
   private:
     ~Placeholder() override { --*mAlive; }
 
-    int* const mAlive;
+    const raw_ptr<int> mAlive;
 };
 
 TEST(StackContainer, Vector) {

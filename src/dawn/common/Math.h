@@ -37,6 +37,7 @@
 #include <type_traits>
 
 #include "dawn/common/Assert.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn {
 
@@ -106,12 +107,28 @@ DAWN_FORCE_INLINE T* AlignPtr(T* ptr, size_t alignment) {
 }
 
 template <typename T>
+DAWN_FORCE_INLINE T* AlignPtr(raw_ptr<T, AllowPtrArithmetic> ptr, size_t alignment) {
+    DAWN_ASSERT(IsPowerOfTwo(alignment));
+    DAWN_ASSERT(alignment != 0);
+    return reinterpret_cast<T*>((reinterpret_cast<size_t>(ptr.get()) + (alignment - 1)) &
+                                ~(alignment - 1));
+}
+
+template <typename T>
 DAWN_FORCE_INLINE const T* AlignPtr(const T* ptr, size_t alignment) {
     DAWN_ASSERT(IsPowerOfTwo(alignment));
     DAWN_ASSERT(alignment != 0);
     return reinterpret_cast<const T*>((reinterpret_cast<size_t>(ptr) + (alignment - 1)) &
                                       ~(alignment - 1));
 }
+
+//template <typename T>
+//DAWN_FORCE_INLINE const T* AlignPtr(const raw_ptr<T, AllowPtrArithmetic> ptr, size_t alignment) {
+    //DAWN_ASSERT(IsPowerOfTwo(alignment));
+    //DAWN_ASSERT(alignment != 0);
+    //return reinterpret_cast<const T*>((reinterpret_cast<size_t>(ptr.get()) + (alignment - 1)) &
+                                      //~(alignment - 1));
+//}
 
 template <typename destType, typename sourceType>
 destType BitCast(const sourceType& source) {

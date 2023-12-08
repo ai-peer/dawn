@@ -27,6 +27,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
@@ -93,7 +94,7 @@ class DepthClippingTest : public DawnTest {
     }
 
     struct TestSpec {
-        wgpu::PrimitiveDepthClipControl* depthClipControl;
+        raw_ptr<wgpu::PrimitiveDepthClipControl> depthClipControl;
         utils::RGBA8 color;
         float depth;
     };

@@ -31,6 +31,7 @@
 #include <cstdint>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 
 namespace dawn {
@@ -62,7 +63,7 @@ class SerialStorage {
         // Special case the mSerialIterator when it should be equal to mStorageIterator.begin()
         // otherwise we could ask mStorageIterator.begin() when mStorageIterator is mStorage.end()
         // which is invalid. mStorageIterator.begin() is tagged with a nullptr.
-        Value* mSerialIterator;
+        raw_ptr<Value, AllowPtrArithmetic> mSerialIterator;
     };
 
     class ConstIterator {
@@ -76,7 +77,7 @@ class SerialStorage {
 
       private:
         ConstStorageIterator mStorageIterator;
-        const Value* mSerialIterator;
+        raw_ptr<const Value, AllowPtrArithmetic> mSerialIterator;
     };
 
     class BeginEnd {

@@ -28,6 +28,7 @@
 #include <cstdlib>
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Log.h"
 #include "dawn/common/Platform.h"
 #include "dawn/dawn_proc.h"
@@ -92,7 +93,7 @@ class WindowSurfaceInstanceTests : public testing::Test {
 
   private:
     wgpu::Instance mInstance;
-    GLFWwindow* mWindow = nullptr;
+    raw_ptr<GLFWwindow> mWindow = nullptr;
 };
 
 // Test that a valid chained descriptor works (and that GLFWUtils creates a valid chained

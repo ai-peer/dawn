@@ -31,6 +31,7 @@
 #include <map>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
@@ -62,7 +63,7 @@ class DescriptorSetAllocator : public ObjectBase {
 
     MaybeError AllocateDescriptorPool();
 
-    const BindGroupLayout* mLayout;
+    raw_ptr<const BindGroupLayout> mLayout;
 
     std::vector<VkDescriptorPoolSize> mPoolSizes;
     SetIndex mMaxSets;

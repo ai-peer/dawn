@@ -34,6 +34,7 @@
 #include <memory>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Alloc.h"
 #include "dawn/common/Compiler.h"
 #include "dawn/common/Constants.h"
@@ -143,7 +144,7 @@ class ChunkedCommandSerializer {
 
     void SerializeChunkedCommand(const char* allocatedBuffer, size_t remainingSize);
 
-    CommandSerializer* mSerializer;
+    raw_ptr<CommandSerializer> mSerializer;
     size_t mMaxAllocationSize;
 };
 

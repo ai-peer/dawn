@@ -28,6 +28,7 @@
 #include <thread>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 #include "gtest/gtest.h"
@@ -52,7 +53,7 @@ class RCTest : public RefCounted {
     RCTest* GetThis() { return this; }
 
   private:
-    bool* mDeleted = nullptr;
+    raw_ptr<bool> mDeleted = nullptr;
 };
 
 struct RCTestDerived : public RCTest {

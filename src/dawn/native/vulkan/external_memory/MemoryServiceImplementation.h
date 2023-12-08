@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_VULKAN_EXTERNAL_MEMORY_SERVICEIMPLEMENTATION_H_
 #define SRC_DAWN_NATIVE_VULKAN_EXTERNAL_MEMORY_SERVICEIMPLEMENTATION_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/vulkan_platform.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/VulkanBackend.h"
@@ -83,7 +84,7 @@ class ServiceImplementation {
     bool RequiresDedicatedAllocation(const ExternalImageDescriptorVk* descriptor,
                                      VkImage image) const;
 
-    Device* mDevice = nullptr;
+    raw_ptr<Device> mDevice = nullptr;
 };
 
 }  // namespace dawn::native::vulkan::external_memory

@@ -31,6 +31,7 @@
 #include <memory>
 #include <optional>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/FutureUtils.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
@@ -122,7 +123,7 @@ class Buffer final : public ObjectBase {
     std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
     bool mDestructWriteHandleOnUnmap = false;
 
-    void* mMappedData = nullptr;
+    raw_ptr<void> mMappedData = nullptr;
     size_t mMapOffset = 0;
     size_t mMapSize = 0;
 };

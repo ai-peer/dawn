@@ -32,6 +32,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BindGroupTracker.h"
 #include "dawn/native/CommandEncoder.h"
@@ -224,13 +225,13 @@ class VertexStateBufferBindingTracker {
 
   private:
     bool mIndexBufferDirty = false;
-    Buffer* mIndexBuffer = nullptr;
+    raw_ptr<Buffer> mIndexBuffer = nullptr;
 
     VertexBufferMask mDirtyVertexBuffers;
     PerVertexBuffer<Buffer*> mVertexBuffers;
     PerVertexBuffer<uint64_t> mVertexBufferOffsets;
 
-    RenderPipelineBase* mLastPipeline = nullptr;
+    raw_ptr<RenderPipelineBase> mLastPipeline = nullptr;
 };
 
 class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
@@ -474,7 +475,7 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
         ResetInternalUniformDataDirtyRange();
     }
 
-    PipelineGL* mPipeline = nullptr;
+    raw_ptr<PipelineGL> mPipeline = nullptr;
 
     // The data used for mPipeline's internal uniform buffer from current bind group.
     // Expecting no more than 4 texture bindings called as textureNumLevels/textureNumSamples

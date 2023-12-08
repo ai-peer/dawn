@@ -35,6 +35,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/tests/white_box/VulkanImageWrappingTests_DmaBuf.h"
 
@@ -79,7 +80,7 @@ class ExternalTextureDmaBuf : public VulkanImageWrappingTestBackend::ExternalTex
     int Dup() const { return dup(mFd); }
 
   private:
-    gbm_bo* mGbmBo = nullptr;
+    raw_ptr<gbm_bo> mGbmBo = nullptr;
     int mFd = -1;
 
   public:
@@ -210,8 +211,8 @@ class VulkanImageWrappingTestBackendDmaBuf : public VulkanImageWrappingTestBacke
         return gbmBo;
     }
 
-    gbm_device* mGbmDevice = nullptr;
-    native::vulkan::Device* mDeviceVk;
+    raw_ptr<gbm_device> mGbmDevice = nullptr;
+    raw_ptr<native::vulkan::Device> mDeviceVk;
 };
 
 std::unique_ptr<VulkanImageWrappingTestBackend> CreateDMABufBackend(const wgpu::Device& device) {

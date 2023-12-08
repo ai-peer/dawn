@@ -34,6 +34,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/GPUInfo.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/CommandBuffer.h"
@@ -572,7 +573,7 @@ void Buffer::DestroyImpl() {
             void HandleShutDownImpl() override { callback(userdata); }
 
             wgpu::Callback callback;
-            void* userdata;
+            raw_ptr<void> userdata;
         };
         std::unique_ptr<DisposeTask> request =
             std::make_unique<DisposeTask>(mHostMappedDisposeCallback, mHostMappedDisposeUserdata);

@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_COMMON_WEAKREFSUPPORT_H_
 #define SRC_DAWN_COMMON_WEAKREFSUPPORT_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Compiler.h"
 #include "dawn/common/Ref.h"
 
@@ -54,7 +55,7 @@ class WeakRefData : public RefCounted {
 
   private:
     std::mutex mMutex;
-    RefCounted* mValue = nullptr;
+    raw_ptr<RefCounted> mValue = nullptr;
 };
 
 // Interface base class used to enable compile-time verification of WeakRefSupport functions.

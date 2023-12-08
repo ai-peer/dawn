@@ -27,6 +27,7 @@
 
 #include <gtest/gtest.h>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/tests/unittests/native/mocks/DeviceMock.h"
 #include "dawn/webgpu_cpp.h"
 
@@ -38,7 +39,7 @@ class DawnMockTest : public ::testing::Test {
     ~DawnMockTest() override;
 
   protected:
-    ::testing::NiceMock<DeviceMock>* mDeviceMock;
+    raw_ptr<::testing::NiceMock<DeviceMock>> mDeviceMock;
     wgpu::Device device;
 };
 

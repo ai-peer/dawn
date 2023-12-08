@@ -30,6 +30,7 @@
 #include <memory>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/EventManager.h"
 
@@ -60,7 +61,7 @@ class WorkDoneEvent : public TrackedEvent {
     }
 
     WGPUQueueWorkDoneCallback mCallback;
-    void* mUserdata;
+    raw_ptr<void> mUserdata;
 
     WGPUQueueWorkDoneStatus mStatus = WGPUQueueWorkDoneStatus_Success;
 };

@@ -31,6 +31,7 @@
 #include <memory>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/BindGroup.h"
 #include "dawn/native/BindGroupLayoutInternal.h"
 #include "dawn/native/Buffer.h"
@@ -219,7 +220,7 @@ class BindGroupDataHolder {
     explicit BindGroupDataHolder(size_t size);
     ~BindGroupDataHolder();
 
-    void* mBindingDataAllocation;
+    raw_ptr<void> mBindingDataAllocation;
 };
 
 // We don't have the complexity of placement-allocation of bind group data in

@@ -31,6 +31,7 @@
 #include <set>
 #include <string>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/dawn_platform.h"
 
 #include "dawn/native/EncodingContext.h"
@@ -126,7 +127,7 @@ class CommandEncoder final : public ApiObjectBase {
         friend class CommandEncoder;
         InternalUsageScope(CommandEncoder* encoder);
 
-        CommandEncoder* mEncoder;
+        raw_ptr<CommandEncoder> mEncoder;
         UsageValidationMode mUsageValidationMode;
     };
 

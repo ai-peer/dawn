@@ -27,6 +27,7 @@
 
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/platform/metrics/HistogramMacros.h"
 #include "dawn/tests/DawnTest.h"
 
@@ -76,7 +77,7 @@ class HistogramTests : public DawnTest {
         return p;
     }
 
-    NiceMock<DawnHistogramMockPlatform>* mMockPlatform;
+    raw_ptr<NiceMock<DawnHistogramMockPlatform>> mMockPlatform;
 };
 
 TEST_P(HistogramTests, Times) {

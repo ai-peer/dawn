@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Math.h"
 #include "dawn/native/BuddyMemoryAllocator.h"
 #include "dawn/native/ResourceHeapAllocator.h"
@@ -130,7 +131,7 @@ class ResourceMemoryAllocator::SingleTypeAllocator : public ResourceHeapAllocato
     }
 
   private:
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
     size_t mMemoryTypeIndex;
     VkDeviceSize mMemoryHeapSize;
     PooledResourceMemoryAllocator mPooledMemoryAllocator;

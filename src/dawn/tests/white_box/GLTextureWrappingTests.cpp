@@ -28,6 +28,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/DynamicLib.h"
 #include "dawn/native/OpenGLBackend.h"
 #include "dawn/native/opengl/DeviceGL.h"
@@ -116,7 +117,7 @@ class GLTextureTestBase : public DawnTest {
     }
 
   protected:
-    native::opengl::Device* mSecondDeviceGL;
+    raw_ptr<native::opengl::Device> mSecondDeviceGL;
     wgpu::Device mSecondDevice;
 };
 

@@ -35,6 +35,7 @@
 #include <unordered_map>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/TypedInteger.h"
 
 #define EXPECT_CACHE_HIT(cache, N, statement) \
@@ -102,7 +103,7 @@ class DawnCachingMockPlatform : public dawn::platform::Platform {
     dawn::platform::CachingInterface* GetCachingInterface() override;
 
   private:
-    dawn::platform::CachingInterface* mCachingInterface = nullptr;
+    raw_ptr<dawn::platform::CachingInterface> mCachingInterface = nullptr;
 };
 
 #endif  // SRC_DAWN_TESTS_MOCKS_PLATFORM_CACHINGINTERFACEMOCK_H_

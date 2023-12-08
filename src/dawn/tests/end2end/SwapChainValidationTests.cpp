@@ -25,6 +25,7 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/tests/DawnTest.h"
 
 #include "dawn/common/Constants.h"
@@ -77,7 +78,7 @@ class SwapChainValidationTests : public DawnTest {
     }
 
   protected:
-    GLFWwindow* window = nullptr;
+    raw_ptr<GLFWwindow> window = nullptr;
     wgpu::Surface surface;
     wgpu::SwapChainDescriptor goodDescriptor;
     wgpu::SwapChainDescriptor badDescriptor;

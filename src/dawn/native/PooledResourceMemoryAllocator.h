@@ -31,6 +31,7 @@
 #include <deque>
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/native/ResourceHeapAllocator.h"
 
@@ -56,7 +57,7 @@ class PooledResourceMemoryAllocator : public ResourceHeapAllocator {
     uint64_t GetPoolSizeForTesting() const;
 
   private:
-    ResourceHeapAllocator* mHeapAllocator = nullptr;
+    raw_ptr<ResourceHeapAllocator> mHeapAllocator = nullptr;
 
     std::deque<std::unique_ptr<ResourceHeapBase>> mPool;
 };

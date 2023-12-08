@@ -34,6 +34,7 @@
 #include <memory>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/FutureUtils.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonCopyable.h"
@@ -150,7 +151,7 @@ class EventManager final : NonMovable {
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
   private:
-    Client* mClient;
+    raw_ptr<Client> mClient;
     bool mIsShutdown = false;
 
     // Tracks all kinds of events (for both WaitAny and ProcessEvents). We use an ordered map so

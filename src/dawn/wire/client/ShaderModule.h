@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_WIRE_CLIENT_SHADERMODULE_H_
 #define SRC_DAWN_WIRE_CLIENT_SHADERMODULE_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/webgpu.h"
 
 #include "dawn/wire/client/ObjectBase.h"
@@ -51,7 +52,7 @@ class ShaderModule final : public ObjectBase {
 
     struct CompilationInfoRequest {
         WGPUCompilationInfoCallback callback = nullptr;
-        void* userdata = nullptr;
+        raw_ptr<void> userdata = nullptr;
     };
     RequestTracker<CompilationInfoRequest> mCompilationInfoRequests;
 };

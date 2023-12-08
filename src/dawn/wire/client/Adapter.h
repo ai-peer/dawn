@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/WireClient.h"
 #include "dawn/wire/WireCmd_autogen.h"
@@ -76,7 +77,7 @@ class Adapter final : public ObjectBase {
     struct RequestDeviceData {
         WGPURequestDeviceCallback callback = nullptr;
         ObjectId deviceObjectId;
-        void* userdata = nullptr;
+        raw_ptr<void> userdata = nullptr;
     };
     RequestTracker<RequestDeviceData> mRequestDeviceRequests;
 };

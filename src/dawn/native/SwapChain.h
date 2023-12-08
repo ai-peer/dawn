@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_SWAPCHAIN_H_
 #define SRC_DAWN_NATIVE_SWAPCHAIN_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
@@ -110,7 +111,7 @@ class SwapChainBase : public ApiObjectBase {
 
     // This is a weak reference to the surface. If the surface is destroyed it will call
     // DetachFromSurface and mSurface will be updated to nullptr.
-    Surface* mSurface = nullptr;
+    raw_ptr<Surface> mSurface = nullptr;
     Ref<TextureBase> mCurrentTexture;
 
     MaybeError ValidatePresent() const;

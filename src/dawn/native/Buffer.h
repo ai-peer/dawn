@@ -31,6 +31,7 @@
 #include <functional>
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/NonCopyable.h"
 
 #include "dawn/native/Error.h"
@@ -167,7 +168,7 @@ class BufferBase : public ApiObjectBase {
     Ref<BufferBase> mStagingBuffer;
 
     WGPUBufferMapCallback mMapCallback = nullptr;
-    void* mMapUserdata = nullptr;
+    raw_ptr<void> mMapUserdata = nullptr;
     MapRequestID mLastMapID = MapRequestID(0);
     wgpu::MapMode mMapMode = wgpu::MapMode::None;
     size_t mMapOffset = 0;

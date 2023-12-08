@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/common/ityp_bitset.h"
@@ -102,10 +103,10 @@ class CommandBufferStateTracker {
     wgpu::IndexFormat mIndexFormat;
     uint64_t mIndexBufferSize = 0;
 
-    PipelineLayoutBase* mLastPipelineLayout = nullptr;
-    PipelineBase* mLastPipeline = nullptr;
+    raw_ptr<PipelineLayoutBase> mLastPipelineLayout = nullptr;
+    raw_ptr<PipelineBase> mLastPipeline = nullptr;
 
-    const RequiredBufferSizes* mMinBufferSizes = nullptr;
+    raw_ptr<const RequiredBufferSizes> mMinBufferSizes = nullptr;
 };
 
 }  // namespace dawn::native
