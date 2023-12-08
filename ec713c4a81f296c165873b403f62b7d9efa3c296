@@ -1,0 +1,159 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5bccf1a0_17958e86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:10:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48f4f322_3eacf431",
+        "filename": "src/dawn/native/Adapter.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:10:54Z",
+      "side": 1,
+      "message": "let\u0027s not do the DAWN_LOCAL_VAR macro thing. can\u0027t we use:\n\n\n```\n   if (instance-\u003eConsumedError(ValidateAndUnpack(...), \u0026unpacked)) {\n     return false;\n   }\n```\n\n?\n\nditto in other places",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 87,
+        "endChar": 79
+      },
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f2c8911_c4377bdf",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:10:54Z",
+      "side": 1,
+      "message": "should this be passed by value? I think it could be const\u0026",
+      "range": {
+        "startLine": 274,
+        "startChar": 36,
+        "endLine": 274,
+        "endChar": 81
+      },
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f42ef8d_d174fb71",
+        "filename": "src/dawn/native/Instance.h",
+        "patchSetId": 17
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:10:54Z",
+      "side": 1,
+      "message": "ditto: const\u0026",
+      "range": {
+        "startLine": 183,
+        "startChar": 26,
+        "endLine": 183,
+        "endChar": 61
+      },
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ac615031_50ccf55b",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 487,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:10:54Z",
+      "side": 1,
+      "message": "nit: auto* instead of just auto",
+      "range": {
+        "startLine": 487,
+        "startChar": 4,
+        "endLine": 487,
+        "endChar": 8
+      },
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "53f19221_1e1eaada",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 516,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:10:54Z",
+      "side": 1,
+      "message": "nit: auto* instead of just auto",
+      "range": {
+        "startLine": 516,
+        "startChar": 4,
+        "endLine": 516,
+        "endChar": 8
+      },
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b8ed5e2_c4b14255",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 750,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:10:54Z",
+      "side": 1,
+      "message": "nit: auto* instead of just auto",
+      "range": {
+        "startLine": 750,
+        "startChar": 8,
+        "endLine": 750,
+        "endChar": 9
+      },
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
