@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba3d1699_131dae0d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-08T18:19:07Z",
+      "side": 1,
+      "message": "oops, my bad.  it\u0027s all good",
+      "revId": "43ca20ad851b23e8e89e39eacd3b2dab3100e585",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "093600b2_1c15aae1",
@@ -14,6 +31,30 @@
       "writtenOn": "2023-12-08T17:10:42Z",
       "side": 1,
       "message": "message number can\u0027t be 0 ?\n\nhttps://protobuf.dev/programming-guides/proto3/#assigning",
+      "range": {
+        "startLine": 58,
+        "startChar": 1,
+        "endLine": 58,
+        "endChar": 13
+      },
+      "revId": "43ca20ad851b23e8e89e39eacd3b2dab3100e585",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8377191_6a64c888",
+        "filename": "src/tint/lang/core/ir/binary/ir.proto",
+        "patchSetId": 6
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-08T18:19:07Z",
+      "side": 1,
+      "message": "James pointed out this is an enum, not a message.  !",
+      "parentUuid": "093600b2_1c15aae1",
       "range": {
         "startLine": 58,
         "startChar": 1,
