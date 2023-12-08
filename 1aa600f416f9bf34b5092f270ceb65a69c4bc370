@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b98bb821_d325a7ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-08T14:24:33Z",
+      "side": 1,
+      "message": "I\u0027m speculating that this CL is blocking the Dawn roll: https://chromium-review.googlesource.com/c/chromium/src/+/5102829",
+      "revId": "1aa600f416f9bf34b5092f270ceb65a69c4bc370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
