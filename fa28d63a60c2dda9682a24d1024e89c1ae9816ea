@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "830ba64e_e06d7852",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-08T16:04:51Z",
+      "side": 1,
+      "message": "Structs also have flags too (currently just used for block decoration in SPIR-V/GLSL). Should those be serialized as well, or does serialization only deal with core IR?",
+      "revId": "fa28d63a60c2dda9682a24d1024e89c1ae9816ea",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
