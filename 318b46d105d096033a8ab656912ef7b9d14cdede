@@ -22,6 +22,30 @@
       },
       "revId": "318b46d105d096033a8ab656912ef7b9d14cdede",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "10ae70d9_47793cab",
+        "filename": "src/dawn/tests/unittests/validation/UnsafeAPIValidationTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-08T03:34:48Z",
+      "side": 1,
+      "message": "Removed the helper.",
+      "parentUuid": "545889c9_5955d7ce",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 159,
+        "endChar": 97
+      },
+      "revId": "318b46d105d096033a8ab656912ef7b9d14cdede",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
