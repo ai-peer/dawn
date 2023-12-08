@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6eca7af1_6caf1b1f",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 22
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:12:28Z",
+      "side": 0,
+      "message": "Shouldn\u0027t this be Undefined? Ditto in the other file.",
+      "revId": "5e5fb8f0b52159826120ec2807b969e22998c590",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

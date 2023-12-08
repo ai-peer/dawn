@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a7704b2_74585c23",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 22
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:12:28Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "a5b16c670558105fcc095e3c3495a22378cfb905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1203b4c2_241b5e3e",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:12:28Z",
+      "side": 1,
+      "message": "Ok ditto here and everywhere in the other CLs :) Also IMHO we can use if (auto foo \u003d bar, no need for the const auto*.",
+      "revId": "a5b16c670558105fcc095e3c3495a22378cfb905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94f2719_83c1f3c8",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:12:28Z",
+      "side": 1,
+      "message": "I think we lost the validation that there is a single structure chained.",
+      "revId": "a5b16c670558105fcc095e3c3495a22378cfb905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
