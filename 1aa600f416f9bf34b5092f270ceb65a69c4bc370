@@ -16,6 +16,23 @@
       "message": "I\u0027m speculating that this CL is blocking the Dawn roll: https://chromium-review.googlesource.com/c/chromium/src/+/5102829",
       "revId": "1aa600f416f9bf34b5092f270ceb65a69c4bc370",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4801100c_c7185072",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001961
+      },
+      "writtenOn": "2023-12-08T16:35:12Z",
+      "side": 1,
+      "message": "Link failure on android_compile_dbg, here: https://ci.chromium.org/ui/p/chromium/builders/try/android_compile_dbg/1745465/overview",
+      "revId": "1aa600f416f9bf34b5092f270ceb65a69c4bc370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
