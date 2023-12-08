@@ -16,6 +16,24 @@
       "message": "LGTM\n\nwhat does the message say when we are checking subset against an empty set of allowed types?\n\nwe might want to specialize it to be more clear instead of saying something like \"subset of []\"",
       "revId": "829ca643f1e73e9efcaa49a93cdfe63ca4435016",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58f1369c_75a70709",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-08T02:42:59Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "1b784262_b6e5f9e7",
+      "revId": "829ca643f1e73e9efcaa49a93cdfe63ca4435016",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
