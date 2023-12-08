@@ -85,6 +85,24 @@
       "parentUuid": "849eed1a_373f6deb",
       "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90452a6a_bbe3df3d",
+        "filename": "src/dawn/native/PipelineLayout.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-08T16:16:21Z",
+      "side": 1,
+      "message": "I was thinking of more automatically doing things, but that\u0027d be fine especially if the rewriter does it for us.",
+      "parentUuid": "92b75e23_b1fb8b40",
+      "revId": "ec376ea20bac60b650763157cf18f8a7343646dd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
