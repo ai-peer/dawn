@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7b9e744c_d897da29",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T22:46:08Z",
+      "side": 1,
+      "message": "I think I had suggested doing `const auto*` because I had seen this in a style guide somewhere. But, I can\u0027t seem to find it and may have hallucinated it, so SGTM.",
+      "parentUuid": "1203b4c2_241b5e3e",
+      "revId": "a5b16c670558105fcc095e3c3495a22378cfb905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "e94f2719_83c1f3c8",
         "filename": "src/dawn/native/Surface.cpp",
         "patchSetId": 22
