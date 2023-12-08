@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd7c7cea_bdf619af",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 431,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-08T23:58:43Z",
+      "side": 1,
+      "message": "I\u0027ve been using `auto*` in the other changes now as a compromise of the two suggestions lol.",
+      "parentUuid": "7b9e744c_d897da29",
+      "revId": "a5b16c670558105fcc095e3c3495a22378cfb905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e94f2719_83c1f3c8",
