@@ -29,6 +29,7 @@
 
 #include "dawn/tests/unittests/native/mocks/DeviceMock.h"
 #include "dawn/webgpu_cpp.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 
@@ -38,7 +39,7 @@ class DawnMockTest : public ::testing::Test {
     ~DawnMockTest() override;
 
   protected:
-    ::testing::NiceMock<DeviceMock>* mDeviceMock;
+    raw_ptr<::testing::NiceMock<DeviceMock>, DanglingUntriaged> mDeviceMock;
     wgpu::Device device;
 };
 

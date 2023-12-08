@@ -1,4 +1,4 @@
-// Copyright 2021 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,38 +25,19 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_WIRE_CLIENT_SHADERMODULE_H_
-#define SRC_DAWN_WIRE_CLIENT_SHADERMODULE_H_
+#ifndef SRC_DAWN_PARTITION_ALLOC_PARTITION_ALLOC_POINTERS_RAW_PTR_EXCLUSION_H_
+#define SRC_DAWN_PARTITION_ALLOC_PARTITION_ALLOC_POINTERS_RAW_PTR_EXCLUSION_H_
 
-#include "dawn/webgpu.h"
-#include "partition_alloc/pointers/raw_ptr.h"
+// Marks a field as excluded from the `raw_ptr<T>` usage enforcement via
+// Chromium Clang plugin.
+//
+// Example:
+//     RAW_PTR_EXCLUSION Foo* foo_;
+//
+// `RAW_PTR_EXCLUSION` should be avoided, as exclusions makes it significantly
+// easier for any bug involving the pointer to become a security vulnerability.
+// For additional guidance please see the "When to use raw_ptr<T>" section of
+// `//base/memory/raw_ptr.md`.
+#define RAW_PTR_EXCLUSION
 
-#include "dawn/wire/client/ObjectBase.h"
-#include "dawn/wire/client/RequestTracker.h"
-
-namespace dawn::wire::client {
-
-class ShaderModule final : public ObjectBase {
-  public:
-    using ObjectBase::ObjectBase;
-    ~ShaderModule() override;
-
-    void GetCompilationInfo(WGPUCompilationInfoCallback callback, void* userdata);
-    bool GetCompilationInfoCallback(uint64_t requestSerial,
-                                    WGPUCompilationInfoRequestStatus status,
-                                    const WGPUCompilationInfo* info);
-
-  private:
-    void CancelCallbacksForDisconnect() override;
-    void ClearAllCallbacks(WGPUCompilationInfoRequestStatus status);
-
-    struct CompilationInfoRequest {
-        WGPUCompilationInfoCallback callback = nullptr;
-        raw_ptr<void> userdata = nullptr;
-    };
-    RequestTracker<CompilationInfoRequest> mCompilationInfoRequests;
-};
-
-}  // namespace dawn::wire::client
-
-#endif  // SRC_DAWN_WIRE_CLIENT_SHADERMODULE_H_
+#endif  // SRC_DAWN_PARTITION_ALLOC_PARTITION_ALLOC_POINTERS_RAW_PTR_EXCLUSION_H_

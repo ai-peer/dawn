@@ -35,6 +35,7 @@
 #include "dawn/native/CallbackTaskManager.h"
 #include "dawn/native/Error.h"
 #include "dawn/webgpu.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 
@@ -61,7 +62,7 @@ class CreateComputePipelineAsyncTask {
   private:
     Ref<ComputePipelineBase> mComputePipeline;
     WGPUCreateComputePipelineAsyncCallback mCallback;
-    void* mUserdata;
+    raw_ptr<void> mUserdata;
 };
 
 // CreateRenderPipelineAsyncTask defines all the inputs and outputs of
@@ -80,7 +81,7 @@ class CreateRenderPipelineAsyncTask {
   private:
     Ref<RenderPipelineBase> mRenderPipeline;
     WGPUCreateRenderPipelineAsyncCallback mCallback;
-    void* mUserdata;
+    raw_ptr<void> mUserdata;
 };
 
 }  // namespace dawn::native

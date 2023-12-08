@@ -71,6 +71,10 @@ void InitializeDanglingPointerDetectorForTesting() {
     //
     // We decided to crash when a dangling raw_ptr<T> get released. Finding the raw_ptr<T> is
     // usually more difficult than finding where the associated memory was released.
+    partition_alloc::SetDanglingRawPtrDetectedFn([](uintptr_t ptr) {
+        // ErrorLog() << "DanglingPointerDetector: A pointer become dangling!";
+        // DAWN_CHECK(false);
+    });
     partition_alloc::SetDanglingRawPtrReleasedFn([](uintptr_t ptr) {
         ErrorLog() << "DanglingPointerDetector: A pointer was dangling!";
         DAWN_CHECK(false);
