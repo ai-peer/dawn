@@ -66,6 +66,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3a057830_ba80ec7e",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 275,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-08T01:16:18Z",
+      "side": 1,
+      "message": "hmm... it occurs to me that now that Unpacked\u003c\u003e is a value here, or perhaps a const\u0026, it doesn\u0027t occur to the programmer that they should check whether it is non-null. A value/reference type looks like it is already a non-null thing.\n\nMaybe we can rename to UnpackedPtr\u003cT\u003e so it looks more clear that the base thing you have may actually be null.",
+      "range": {
+        "startLine": 275,
+        "startChar": 0,
+        "endLine": 275,
+        "endChar": 21
+      },
+      "revId": "ec713c4a81f296c165873b403f62b7d9efa3c296",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4f42ef8d_d174fb71",
         "filename": "src/dawn/native/Instance.h",
         "patchSetId": 17
