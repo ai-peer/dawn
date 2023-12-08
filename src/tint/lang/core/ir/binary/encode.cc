@@ -132,6 +132,14 @@ struct Encoder {
         for (auto* param_in : fn_in->Params()) {
             fn_out->add_parameters(Value(param_in));
         }
+        if (auto ret_loc_in = fn_in->ReturnLocation()) {
+            auto& ret_loc_out = *fn_out->mutable_return_location();
+            if (auto interpolation_in = ret_loc_in->interpolation) {
+                auto& interpolation_out = *ret_loc_out.mutable_interpolation();
+                Interpolation(interpolation_out, *interpolation_in);
+            }
+            ret_loc_out.set_value(ret_loc_in->value);
+        }
         fn_out->set_block(Block(fn_in->Block()));
     }
 
@@ -398,8 +406,7 @@ struct Encoder {
             }
             if (auto& interpolation_in = attrs_in.interpolation) {
                 auto& interpolation_out = *member_out.mutable_attributes()->mutable_interpolation();
-                interpolation_out.set_type(InterpolationType(interpolation_in->type));
-                interpolation_out.set_sampling(InterpolationSampling(interpolation_in->sampling));
+                Interpolation(interpolation_out, *interpolation_in);
             }
             if (attrs_in.invariant) {
                 member_out.mutable_attributes()->set_invariant(true);
@@ -539,6 +546,15 @@ struct Encoder {
         splat_out.set_type(Type(splat_in->type));
         splat_out.set_elements(ConstantValue(splat_in->el));
         splat_out.set_count(static_cast<uint32_t>(splat_in->count));
+    }
+
+    ////////////////////////////////////////////////////////////////////////////
+    // Attributes
+    ////////////////////////////////////////////////////////////////////////////
+    void Interpolation(pb::Interpolation& interpolation_out,
+                       const core::Interpolation& interpolation_in) {
+        interpolation_out.set_type(InterpolationType(interpolation_in.type));
+        interpolation_out.set_sampling(InterpolationSampling(interpolation_in.sampling));
     }
 
     ////////////////////////////////////////////////////////////////////////////
