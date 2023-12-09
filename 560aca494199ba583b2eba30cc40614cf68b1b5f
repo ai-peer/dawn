@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0853ba7a_25e18fa1",
+        "filename": "src/dawn/partition_alloc/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-09T11:18:22Z",
+      "side": 1,
+      "message": "Thanks for the explanation. Either adding a comment (with explanation that we want to keep the include path as partition_alloc/...) or checking in the file would work.",
+      "parentUuid": "311d7364_7663b96b",
+      "revId": "560aca494199ba583b2eba30cc40614cf68b1b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3c7f5652_94116ffa",
         "filename": "src/dawn/tests/PartitionAllocSupport.cpp",
         "patchSetId": 10
