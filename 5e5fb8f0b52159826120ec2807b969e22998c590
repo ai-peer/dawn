@@ -16,6 +16,24 @@
       "message": "Shouldn\u0027t this be Undefined? Ditto in the other file.",
       "revId": "5e5fb8f0b52159826120ec2807b969e22998c590",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7673f3df_6b0f6156",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests_apple.mm",
+        "patchSetId": 22
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-09T07:29:36Z",
+      "side": 0,
+      "message": "I talked to Austin about this offline and decided that the only thing we really want to assert is that a device error occurs. Checking that the type is set or not is not important in this type of failure case.",
+      "parentUuid": "6eca7af1_6caf1b1f",
+      "revId": "5e5fb8f0b52159826120ec2807b969e22998c590",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

@@ -86,6 +86,24 @@
       "message": "I think we lost the validation that there is a single structure chained.",
       "revId": "a5b16c670558105fcc095e3c3495a22378cfb905",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f9593e9_164dfc54",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-09T07:29:36Z",
+      "side": 1,
+      "message": "Oops! Good catch! Re-worked all of this a bit now.",
+      "parentUuid": "e94f2719_83c1f3c8",
+      "revId": "a5b16c670558105fcc095e3c3495a22378cfb905",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
