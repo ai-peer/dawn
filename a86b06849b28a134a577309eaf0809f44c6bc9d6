@@ -50,6 +50,24 @@
       "message": "end2end tests need updating",
       "revId": "a86b06849b28a134a577309eaf0809f44c6bc9d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da6f099_ac149310",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-11T23:04:33Z",
+      "side": 1,
+      "message": "Regenerate only the related tests with these command lines, from the dawn root directory:\n\n ./tools/run tests --generate-expected test/tint/builtins/gen/var/dot4I8Packed\n ./tools/run tests --generate-expected test/tint/builtins/gen/var/dot4U8Packed\n ./tools/run tests --generate-expected test/tint/builtins/gen/literal/dot4I8Packed\n ./tools/run tests --generate-expected test/tint/builtins/gen/literal/dot4U8Packed\n \n \n \n But I\u0027m getting failures in the MSL backend with the \u0027var\u0027 variants, somehow.",
+      "parentUuid": "28eefae4_18526570",
+      "revId": "a86b06849b28a134a577309eaf0809f44c6bc9d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
