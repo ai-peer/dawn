@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "44d21831_8e93eec9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-11T18:45:24Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "e4c27b6f1f69f3289416d608c52fe3e27aa2b681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ec040a6_6b5daa36",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/helper_test.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-11T18:45:24Z",
+      "side": 1,
+      "message": "Nit: \"Run the glsl keyword renamer before all other transforms\".",
+      "revId": "e4c27b6f1f69f3289416d608c52fe3e27aa2b681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
