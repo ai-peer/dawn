@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "a86b06849b28a134a577309eaf0809f44c6bc9d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e91c5fe_07b731ef",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-11T08:07:29Z",
+      "side": 1,
+      "message": "LGTM though I\u0027d like at least one of the Tint folks to also review this CL.",
+      "revId": "a86b06849b28a134a577309eaf0809f44c6bc9d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
