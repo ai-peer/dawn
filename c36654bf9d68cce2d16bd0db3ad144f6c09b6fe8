@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bacd1fff_b387a4d8",
+        "filename": "src/tint/cmd/remote_compile/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-11T14:36:45Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "b3296670_b2b4a5db",
+      "range": {
+        "startLine": 312,
+        "startChar": 19,
+        "endLine": 312,
+        "endChar": 23
+      },
+      "revId": "c36654bf9d68cce2d16bd0db3ad144f6c09b6fe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "09a1ff81_1f452afe",
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-11T14:28:24Z",
       "side": 1,
       "message": "Note that using `std::endl` would force a flush, in case that\u0027s what you want.",
+      "range": {
+        "startLine": 414,
+        "startChar": 57,
+        "endLine": 414,
+        "endChar": 59
+      },
+      "revId": "c36654bf9d68cce2d16bd0db3ad144f6c09b6fe8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2cd481e_64e2be1a",
+        "filename": "src/tint/cmd/remote_compile/main.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 414,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-11T14:36:45Z",
+      "side": 1,
+      "message": "Ack. I haven\u0027t seen any tearing so far, but will change if I see it.",
+      "parentUuid": "09a1ff81_1f452afe",
       "range": {
         "startLine": 414,
         "startChar": 57,
