@@ -1,4 +1,4 @@
-// Copyright 2020 The Dawn & Tint Authors
+// Copyright 2023 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,29 +25,50 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/spirv/reader/reader.h"
+#include "src/tint/lang/spirv/reader/parser/parser.h"
 
 #include <utility>
+#include <vector>
 
+#include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
-#include "src/tint/lang/spirv/reader/ast_parser/parse.h"
-#include "src/tint/lang/spirv/reader/parser/parser.h"
+#include "src/tint/lang/spirv/validate/validate.h"
 
 namespace tint::spirv::reader {
 
-Result<core::ir::Module> ReadIR(const std::vector<uint32_t>& input) {
-    auto mod = Parse(input);
-    if (!mod) {
-        return mod.Failure();
+namespace {
+
+/// PIMPL class for SPIR-V parser.
+class Parser {
+  public:
+    /// Constructor
+    /// @param spirv the SPIR-V binary data
+    explicit Parser(const std::vector<uint32_t>& spirv) : spirv_(spirv) {}
+
+    /// @returns the generated SPIR-V IR module on success, or failure
+    Result<core::ir::Module> Run() {
+        // Validate the incoming SPIR-V binary.
+        auto result = validate::Validate(Slice{spirv_.data(), spirv_.size()});
+        if (!result) {
+            return result.Failure();
+        }
+
+        // TODO(crbug.com/tint/1907): Parse the module.
+
+        return std::move(ir_);
     }
 
-    // TODO(crbug.com/tint/1907): Lower the module to core dialect.
+  private:
+    const std::vector<uint32_t>& spirv_;
+    core::ir::Module ir_;
+    core::ir::Builder b_{ir_};
+    core::type::Manager& ty_{ir_.Types()};
+};
 
-    return mod;
-}
+}  // namespace
 
-Program Read(const std::vector<uint32_t>& input, const Options& options) {
-    return ast_parser::Parse(input, options);
+Result<core::ir::Module> Parse(const std::vector<uint32_t>& spirv) {
+    return Parser{spirv}.Run();
 }
 
 }  // namespace tint::spirv::reader
