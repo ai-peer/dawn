@@ -33,6 +33,23 @@
       "message": "(Will add some bug IDs for the failures before landing.)",
       "revId": "99d733011453a93deefeb332e237cee5822eb634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac2deeba_2a90809e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-11T16:22:22Z",
+      "side": 1,
+      "message": "Timing out while searching for crash symbols, maybe? +bsheedy in case this is a Telemetry issue.",
+      "revId": "99d733011453a93deefeb332e237cee5822eb634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
