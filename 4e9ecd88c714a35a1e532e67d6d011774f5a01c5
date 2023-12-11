@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "410a99d5_e32bee26",
+        "filename": "src/tint/lang/spirv/reader/reader.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-11T20:47:46Z",
+      "side": 1,
+      "message": "nit: The underscore is a bit unconventional. Functions are `PascalCase`, so `ReadIR`?",
+      "range": {
+        "startLine": 48,
+        "startChar": 25,
+        "endLine": 48,
+        "endChar": 32
+      },
+      "revId": "4e9ecd88c714a35a1e532e67d6d011774f5a01c5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
