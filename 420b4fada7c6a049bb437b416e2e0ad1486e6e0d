@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "86d392b0_dc612f32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-11T17:37:17Z",
+      "side": 1,
+      "message": "Too bad, it fails the second CQ (?) after submitting:\nhttps://logs.chromium.org/logs/dawn/buildbucket/cr-buildbucket/8761989224187308833/+/u/compile_default_targets_with_ninja/stdout?format\u003draw\n\nIt looks like MSVC compiler doesn\u0027t like some operator override, that were expected to resolve thanks to ADL, defined from a macro, from a template ;-)\n\nWe don\u0027t really care about MSVC at the moment. I excluded MSVC from using PartitionAlloc at the moment:\nhttps://dawn-review.googlesource.com/c/dawn/+/164894/3..4",
+      "revId": "420b4fada7c6a049bb437b416e2e0ad1486e6e0d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
