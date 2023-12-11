@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "28161adf_985f9012",
+        "filename": "src/dawn/partition_alloc/BUILD.gn",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-11T12:22:54Z",
+      "side": 1,
+      "message": "I checked in the generated file.",
+      "parentUuid": "0853ba7a_25e18fa1",
+      "revId": "560aca494199ba583b2eba30cc40614cf68b1b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3c7f5652_94116ffa",
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Yeah, It depends on the standard library implementation.\nThe allocator has some reentrancy guard. They are not reached. So in practise this is not reentrant.\n\nNevertheless, I agree this should be fixed.\nI will take a look.",
       "parentUuid": "3c7f5652_94116ffa",
+      "revId": "560aca494199ba583b2eba30cc40614cf68b1b5f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3cad3f09_25242440",
+        "filename": "src/dawn/tests/PartitionAllocSupport.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-11T12:22:54Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b2c7a0e_6ddda261",
       "revId": "560aca494199ba583b2eba30cc40614cf68b1b5f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
