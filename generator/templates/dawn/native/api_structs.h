@@ -96,6 +96,10 @@ namespace {{native_namespace}} {
                 {% endif %}
             {% endfor %}
 
+            // Replace "undefined" values with their "default" value. Modifies the struct in place;
+            // the caller should make a copy first, if needed, and re-point pointers as necessary.
+            void ApplyFrontendDefaults();
+
             // Equality operators, mostly for testing. Note that this tests
             // strict pointer-pointer equality if the struct contains member pointers.
             bool operator==(const {{as_cppType(type.name)}}& rhs) const;

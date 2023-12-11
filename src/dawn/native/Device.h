@@ -625,10 +625,9 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescri
     const ComputePipelineDescriptor& descriptor,
     ComputePipelineDescriptor* outDescriptor);
 
-ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
+ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndApplyRenderPipelineDescriptorDefaults(
     DeviceBase* device,
-    const RenderPipelineDescriptor& descriptor,
-    RenderPipelineDescriptor* outDescriptor);
+    RenderPipelineDescriptor* descriptor);
 
 class IgnoreLazyClearCountScope : public NonMovable {
   public:

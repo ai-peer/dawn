@@ -867,7 +867,8 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
             case wgpu::VertexStepMode::Instance:
                 mVertexBuffersUsedAsInstanceBuffer.set(slot);
                 break;
-            default:
+            case wgpu::VertexStepMode::VertexBufferNotUsed:
+            case wgpu::VertexStepMode::Undefined:
                 DAWN_UNREACHABLE();
         }
 

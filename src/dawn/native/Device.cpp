@@ -184,20 +184,18 @@ ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetComputePipelineDescri
     return layoutRef;
 }
 
-ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
+ResultOrError<Ref<PipelineLayoutBase>> ValidateLayoutAndApplyRenderPipelineDescriptorDefaults(
     DeviceBase* device,
-    const RenderPipelineDescriptor& descriptor,
-    RenderPipelineDescriptor* outDescriptor) {
+    RenderPipelineDescriptor* descriptor) {
     Ref<PipelineLayoutBase> layoutRef;
-    *outDescriptor = descriptor;
 
-    if (descriptor.layout == nullptr) {
+    if (descriptor->layout == nullptr) {
         // Ref will keep the pipeline layout alive until the end of the function where
         // the pipeline will take another reference.
         DAWN_TRY_ASSIGN(layoutRef,
                         PipelineLayoutBase::CreateDefault(
-                            device, GetRenderStagesAndSetPlaceholderShader(device, &descriptor)));
-        outDescriptor->layout = layoutRef.Get();
+                            device, GetRenderStagesAndSetPlaceholderShader(device, descriptor)));
+        descriptor->layout = layoutRef.Get();
     }
 
     return layoutRef;
@@ -1801,10 +1799,21 @@ ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipeline(
 }
 
 ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateUninitializedRenderPipeline(
-    const RenderPipelineDescriptor* descriptor) {
+    const RenderPipelineDescriptor* descriptorOrig) {
     DAWN_TRY(ValidateIsAlive());
+
+    DepthStencilState depthStencil = {};
+    RenderPipelineDescriptor descriptor = *descriptorOrig;
+    descriptor.primitive.ApplyFrontendDefaults();
+    if (descriptorOrig->depthStencil) {
+        depthStencil = *descriptorOrig->depthStencil;
+        depthStencil.stencilFront.ApplyFrontendDefaults();
+        depthStencil.stencilBack.ApplyFrontendDefaults();
+        descriptor.depthStencil = &depthStencil;
+    }
+
     if (IsValidationEnabled()) {
-        DAWN_TRY(ValidateRenderPipelineDescriptor(this, descriptor));
+        DAWN_TRY(ValidateRenderPipelineDescriptor(this, &descriptor));
 
         // Validation for kMaxBindGroupsPlusVertexBuffers is skipped because it is not necessary so
         // far.
@@ -1814,21 +1823,25 @@ ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateUninitializedRenderPipe
     // Ref will keep the pipeline layout alive until the end of the function where
     // the pipeline will take another reference.
     Ref<PipelineLayoutBase> layoutRef;
-    RenderPipelineDescriptor appliedDescriptor;
-    DAWN_TRY_ASSIGN(layoutRef, ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
-                                   this, *descriptor, &appliedDescriptor));
+    DAWN_TRY_ASSIGN(layoutRef,
+                    ValidateLayoutAndApplyRenderPipelineDescriptorDefaults(this, &descriptor));
 
-    return CreateUninitializedRenderPipelineImpl(Unpack(&appliedDescriptor));
+    return CreateUninitializedRenderPipelineImpl(Unpack(&descriptor));
 }
 
-ResultOrError<Ref<SamplerBase>> DeviceBase::CreateSampler(const SamplerDescriptor* descriptor) {
-    const SamplerDescriptor defaultDescriptor = {};
+ResultOrError<Ref<SamplerBase>> DeviceBase::CreateSampler(const SamplerDescriptor* descriptorOrig) {
     DAWN_TRY(ValidateIsAlive());
-    descriptor = descriptor != nullptr ? descriptor : &defaultDescriptor;
-    if (IsValidationEnabled()) {
-        DAWN_TRY_CONTEXT(ValidateSamplerDescriptor(this, descriptor), "validating %s", descriptor);
+    SamplerDescriptor descriptor = {};
+    if (descriptorOrig) {
+        descriptor = *descriptorOrig;
     }
-    return GetOrCreateSampler(descriptor);
+    descriptor.ApplyFrontendDefaults();
+
+    if (IsValidationEnabled()) {
+        DAWN_TRY_CONTEXT(ValidateSamplerDescriptor(this, &descriptor), "validating %s",
+                         &descriptor);
+    }
+    return GetOrCreateSampler(&descriptor);
 }
 
 ResultOrError<Ref<ShaderModuleBase>> DeviceBase::CreateShaderModule(
@@ -1880,8 +1893,11 @@ ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
     return newSwapChain;
 }
 
-ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* rawDescriptor) {
+ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* descriptorOrig) {
     DAWN_TRY(ValidateIsAlive());
+    TextureDescriptor rawDescriptor = *descriptorOrig;
+    rawDescriptor.ApplyFrontendDefaults();
+
     UnpackedPtr<TextureDescriptor> descriptor;
     if (IsValidationEnabled()) {
         AllowMultiPlanarTextureFormat allowMultiPlanar;
@@ -1890,12 +1906,12 @@ ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescripto
         } else {
             allowMultiPlanar = AllowMultiPlanarTextureFormat::No;
         }
-        DAWN_TRY_ASSIGN_CONTEXT(descriptor, ValidateAndUnpack(rawDescriptor), "validating %s.",
-                                rawDescriptor);
+        DAWN_TRY_ASSIGN_CONTEXT(descriptor, ValidateAndUnpack(&rawDescriptor), "validating %s.",
+                                &rawDescriptor);
         DAWN_TRY_CONTEXT(ValidateTextureDescriptor(this, descriptor, allowMultiPlanar),
                          "validating %s.", descriptor);
     } else {
-        descriptor = Unpack(rawDescriptor);
+        descriptor = Unpack(&rawDescriptor);
     }
     return CreateTextureImpl(descriptor);
 }
