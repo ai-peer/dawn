@@ -712,6 +712,8 @@ TEST_P(QueueWriteTextureTests, WriteStencilAspectWithSourceOffsetUnalignedTo4) {
             utils::CreateTextureDataLayout(kDataOffset1, kBytesPerRowForWriteTexture);
         wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(
             dstTexture1, 0, {0, 0, 0}, wgpu::TextureAspect::StencilOnly);
+        // (Off-topic) spot-test for defaulting of .aspect.
+        imageCopyTexture.aspect = wgpu::TextureAspect::Undefined;
         queue.WriteTexture(&imageCopyTexture, kData, sizeof(kData), &textureDataLayout,
                            &kWriteSize);
 

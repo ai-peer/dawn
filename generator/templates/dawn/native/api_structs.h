@@ -96,6 +96,9 @@ namespace {{native_namespace}} {
                 {% endif %}
             {% endfor %}
 
+            {% if type.any_member_requires_struct_defaulting %}
+                void ApplyTrivialFrontendDefaults();
+            {% endif %}
             // Equality operators, mostly for testing. Note that this tests
             // strict pointer-pointer equality if the struct contains member pointers.
             bool operator==(const {{as_cppType(type.name)}}& rhs) const;
