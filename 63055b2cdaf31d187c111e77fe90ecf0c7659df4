@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6529577f_b46ef1ff",
+        "filename": "src/tint/cmd/common/helper.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-11T20:51:39Z",
+      "side": 1,
+      "message": "nit: add `\\n\\n` before printing a list of diagnostics.",
+      "range": {
+        "startLine": 130,
+        "startChar": 54,
+        "endLine": 130,
+        "endChar": 55
+      },
+      "revId": "63055b2cdaf31d187c111e77fe90ecf0c7659df4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
