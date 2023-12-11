@@ -25,29 +25,53 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/spirv/writer/writer.h"
+#include "src/tint/lang/spirv/reader/parser/parser.h"
 
-#include "src/tint/cmd/fuzz/ir/fuzz.h"
+#include <utility>
+#include <vector>
+
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/spirv/validate/validate.h"
-#include "src/tint/lang/spirv/writer/helpers/generate_bindings.h"
 
-namespace tint::spirv::writer {
+namespace tint::spirv::reader {
+
 namespace {
 
-void IRPrinterFuzzer(core::ir::Module& module, Options options) {
-    options.bindings = GenerateBindings(module);
-    auto output = Generate(module, options);
-    if (!output) {
-        return;
+/// The SPIR-V environment that we validate against.
+constexpr auto kTargetEnv = SPV_ENV_VULKAN_1_1;
+
+/// PIMPL class for SPIR-V parser.
+class Parser {
+  public:
+    /// Constructor
+    /// @param spirv the SPIR-V binary data
+    explicit Parser(const std::vector<uint32_t>& spirv) : spirv_(spirv) {}
+
+    /// @returns the generated SPIR-V IR module on success, or failure
+    Result<core::ir::Module> Run() {
+        // Validate the incoming SPIR-V binary.
+        auto result = validate::Validate(Slice{spirv_.data(), spirv_.size()}, kTargetEnv);
+        if (!result) {
+            return result.Failure();
+        }
+
+        // TODO(crbug.com/tint/1907): Parse the module.
+
+        return std::move(ir_);
     }
-    auto& spirv = output->spirv;
-    if (auto res = validate::Validate(Slice(spirv.data(), spirv.size()), SPV_ENV_VULKAN_1_3)) {
-        TINT_ICE() << "Output of SPIR-V writer failed to validate with SPIR-V Tools\n"
-                   << res.Failure();
-    }
-}
+
+  private:
+    const std::vector<uint32_t>& spirv_;
+    core::ir::Module ir_;
+    core::ir::Builder b_{ir_};
+    core::type::Manager& ty_{ir_.Types()};
+};
 
 }  // namespace
-}  // namespace tint::spirv::writer
 
-TINT_IR_MODULE_FUZZER(tint::spirv::writer::IRPrinterFuzzer);
+Result<core::ir::Module> Parse(const std::vector<uint32_t>& spirv) {
+    return Parser{spirv}.Run();
+}
+
+}  // namespace tint::spirv::reader
