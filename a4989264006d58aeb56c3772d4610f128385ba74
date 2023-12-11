@@ -39,6 +39,30 @@
       },
       "revId": "a4989264006d58aeb56c3772d4610f128385ba74",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9530332_10fdfdda",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-11T13:27:38Z",
+      "side": 1,
+      "message": "Here is the corresponding comment in the [GN documentation](https://gn.googlesource.com/gn/+/main/docs/reference.md#func_import)\n\n```\n  Variables and templates beginning with an underscore \u0027_\u0027 are considered\n  private and will not be imported. Imported files can use such variables for\n  internal computation without affecting other files.\n```",
+      "parentUuid": "dae70150_22237393",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "a4989264006d58aeb56c3772d4610f128385ba74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
