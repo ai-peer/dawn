@@ -192,7 +192,7 @@ deps = {
   },
 
   'third_party/abseil-cpp': {
-    'url': '{chromium_git}/chromium/src/third_party/abseil-cpp@4ef9b33175828ea46d091e7e5ec28259d39a8ba5',
+    'url': '{chromium_git}/chromium/src/third_party/abseil-cpp@15a737bc5caae78b8568a886a7b18bd7adf5bd8a',
     'condition': 'dawn_standalone',
   },
 
