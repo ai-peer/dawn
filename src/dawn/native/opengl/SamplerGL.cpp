@@ -40,6 +40,8 @@ GLenum MagFilterMode(wgpu::FilterMode filter) {
             return GL_NEAREST;
         case wgpu::FilterMode::Linear:
             return GL_LINEAR;
+        case wgpu::FilterMode::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -52,6 +54,8 @@ GLenum MinFilterMode(wgpu::FilterMode minFilter, wgpu::MipmapFilterMode mipMapFi
                     return GL_NEAREST_MIPMAP_NEAREST;
                 case wgpu::MipmapFilterMode::Linear:
                     return GL_NEAREST_MIPMAP_LINEAR;
+                case wgpu::MipmapFilterMode::Undefined:
+                    DAWN_UNREACHABLE();
             }
         case wgpu::FilterMode::Linear:
             switch (mipMapFilter) {
@@ -59,7 +63,11 @@ GLenum MinFilterMode(wgpu::FilterMode minFilter, wgpu::MipmapFilterMode mipMapFi
                     return GL_LINEAR_MIPMAP_NEAREST;
                 case wgpu::MipmapFilterMode::Linear:
                     return GL_LINEAR_MIPMAP_LINEAR;
+                case wgpu::MipmapFilterMode::Undefined:
+                    DAWN_UNREACHABLE();
             }
+        case wgpu::FilterMode::Undefined:
+            DAWN_UNREACHABLE();
     }
     DAWN_UNREACHABLE();
 }
@@ -72,6 +80,8 @@ GLenum WrapMode(wgpu::AddressMode mode) {
             return GL_MIRRORED_REPEAT;
         case wgpu::AddressMode::ClampToEdge:
             return GL_CLAMP_TO_EDGE;
+        case wgpu::AddressMode::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -108,13 +118,14 @@ void Sampler::SetupGLSampler(GLuint sampler,
         gl.SamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
         gl.SamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER, GL_NEAREST_MIPMAP_NEAREST);
     } else {
-        gl.SamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER, MagFilterMode(descriptor->magFilter));
+        gl.SamplerParameteri(sampler, GL_TEXTURE_MAG_FILTER,
+                             MagFilterMode(descriptor->magFilter()));
         gl.SamplerParameteri(sampler, GL_TEXTURE_MIN_FILTER,
-                             MinFilterMode(descriptor->minFilter, descriptor->mipmapFilter));
+                             MinFilterMode(descriptor->minFilter(), descriptor->mipmapFilter()));
     }
-    gl.SamplerParameteri(sampler, GL_TEXTURE_WRAP_R, WrapMode(descriptor->addressModeW));
-    gl.SamplerParameteri(sampler, GL_TEXTURE_WRAP_S, WrapMode(descriptor->addressModeU));
-    gl.SamplerParameteri(sampler, GL_TEXTURE_WRAP_T, WrapMode(descriptor->addressModeV));
+    gl.SamplerParameteri(sampler, GL_TEXTURE_WRAP_R, WrapMode(descriptor->addressModeW()));
+    gl.SamplerParameteri(sampler, GL_TEXTURE_WRAP_S, WrapMode(descriptor->addressModeU()));
+    gl.SamplerParameteri(sampler, GL_TEXTURE_WRAP_T, WrapMode(descriptor->addressModeV()));
 
     gl.SamplerParameterf(sampler, GL_TEXTURE_MIN_LOD, descriptor->lodMinClamp);
     gl.SamplerParameterf(sampler, GL_TEXTURE_MAX_LOD, descriptor->lodMaxClamp);

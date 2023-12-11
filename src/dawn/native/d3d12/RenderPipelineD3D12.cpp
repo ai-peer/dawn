@@ -55,8 +55,10 @@ D3D12_INPUT_CLASSIFICATION VertexStepModeFunction(wgpu::VertexStepMode mode) {
         case wgpu::VertexStepMode::Instance:
             return D3D12_INPUT_CLASSIFICATION_PER_INSTANCE_DATA;
         case wgpu::VertexStepMode::VertexBufferNotUsed:
-            DAWN_UNREACHABLE();
+        case wgpu::VertexStepMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 D3D12_PRIMITIVE_TOPOLOGY D3D12PrimitiveTopology(wgpu::PrimitiveTopology primitiveTopology) {
@@ -71,7 +73,10 @@ D3D12_PRIMITIVE_TOPOLOGY D3D12PrimitiveTopology(wgpu::PrimitiveTopology primitiv
             return D3D_PRIMITIVE_TOPOLOGY_TRIANGLELIST;
         case wgpu::PrimitiveTopology::TriangleStrip:
             return D3D_PRIMITIVE_TOPOLOGY_TRIANGLESTRIP;
+        case wgpu::PrimitiveTopology::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 D3D12_PRIMITIVE_TOPOLOGY_TYPE D3D12PrimitiveTopologyType(
@@ -85,7 +90,10 @@ D3D12_PRIMITIVE_TOPOLOGY_TYPE D3D12PrimitiveTopologyType(
         case wgpu::PrimitiveTopology::TriangleList:
         case wgpu::PrimitiveTopology::TriangleStrip:
             return D3D12_PRIMITIVE_TOPOLOGY_TYPE_TRIANGLE;
+        case wgpu::PrimitiveTopology::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 D3D12_CULL_MODE D3D12CullMode(wgpu::CullMode mode) {
@@ -96,7 +104,10 @@ D3D12_CULL_MODE D3D12CullMode(wgpu::CullMode mode) {
             return D3D12_CULL_MODE_FRONT;
         case wgpu::CullMode::Back:
             return D3D12_CULL_MODE_BACK;
+        case wgpu::CullMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 D3D12_BLEND D3D12Blend(wgpu::BlendFactor factor) {
@@ -135,7 +146,10 @@ D3D12_BLEND D3D12Blend(wgpu::BlendFactor factor) {
             return D3D12_BLEND_SRC1_ALPHA;
         case wgpu::BlendFactor::OneMinusSrc1Alpha:
             return D3D12_BLEND_INV_SRC1_ALPHA;
+        case wgpu::BlendFactor::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 // When a blend factor is defined for the alpha channel, any of the factors that don't
@@ -174,7 +188,10 @@ D3D12_BLEND_OP D3D12BlendOperation(wgpu::BlendOperation operation) {
             return D3D12_BLEND_OP_MIN;
         case wgpu::BlendOperation::Max:
             return D3D12_BLEND_OP_MAX;
+        case wgpu::BlendOperation::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 uint8_t D3D12RenderTargetWriteMask(wgpu::ColorWriteMask writeMask) {
@@ -198,7 +215,7 @@ D3D12_RENDER_TARGET_BLEND_DESC ComputeColorDesc(const DeviceBase* device,
     D3D12_RENDER_TARGET_BLEND_DESC blendDesc = {};
     blendDesc.BlendEnable = state->blend != nullptr;
     if (blendDesc.BlendEnable) {
-        blendDesc.SrcBlend = D3D12Blend(state->blend->color.srcFactor);
+        blendDesc.SrcBlend = D3D12Blend(state->blend->color.srcFactor());
         if (device->GetValidInternalFormat(state->format).componentCount < 4 &&
             blendDesc.SrcBlend == D3D12_BLEND_DEST_ALPHA) {
             // According to the D3D SPEC, the default value for missing components in an element
@@ -211,11 +228,11 @@ D3D12_RENDER_TARGET_BLEND_DESC ComputeColorDesc(const DeviceBase* device,
             blendDesc.SrcBlend = D3D12_BLEND_ONE;
         }
 
-        blendDesc.DestBlend = D3D12Blend(state->blend->color.dstFactor);
-        blendDesc.BlendOp = D3D12BlendOperation(state->blend->color.operation);
-        blendDesc.SrcBlendAlpha = D3D12AlphaBlend(state->blend->alpha.srcFactor);
-        blendDesc.DestBlendAlpha = D3D12AlphaBlend(state->blend->alpha.dstFactor);
-        blendDesc.BlendOpAlpha = D3D12BlendOperation(state->blend->alpha.operation);
+        blendDesc.DestBlend = D3D12Blend(state->blend->color.dstFactor());
+        blendDesc.BlendOp = D3D12BlendOperation(state->blend->color.operation());
+        blendDesc.SrcBlendAlpha = D3D12AlphaBlend(state->blend->alpha.srcFactor());
+        blendDesc.DestBlendAlpha = D3D12AlphaBlend(state->blend->alpha.dstFactor());
+        blendDesc.BlendOpAlpha = D3D12BlendOperation(state->blend->alpha.operation());
 
         if (device->IsToggleEnabled(
                 Toggle::D3D12ReplaceAddWithMinusWhenDstFactorIsZeroAndSrcFactorIsDstAlpha) &&
@@ -253,16 +270,19 @@ D3D12_STENCIL_OP StencilOp(wgpu::StencilOperation op) {
             return D3D12_STENCIL_OP_INCR;
         case wgpu::StencilOperation::DecrementWrap:
             return D3D12_STENCIL_OP_DECR;
+        case wgpu::StencilOperation::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 D3D12_DEPTH_STENCILOP_DESC StencilOpDesc(const StencilFaceState& descriptor) {
     D3D12_DEPTH_STENCILOP_DESC desc = {};
 
-    desc.StencilFailOp = StencilOp(descriptor.failOp);
-    desc.StencilDepthFailOp = StencilOp(descriptor.depthFailOp);
-    desc.StencilPassOp = StencilOp(descriptor.passOp);
-    desc.StencilFunc = ToD3D12ComparisonFunc(descriptor.compare);
+    desc.StencilFailOp = StencilOp(descriptor.failOp());
+    desc.StencilDepthFailOp = StencilOp(descriptor.depthFailOp());
+    desc.StencilPassOp = StencilOp(descriptor.passOp());
+    desc.StencilFunc = ToD3D12ComparisonFunc(descriptor.compare());
 
     return desc;
 }
@@ -523,7 +543,7 @@ D3D12_INPUT_LAYOUT_DESC RenderPipeline::ComputeInputLayout(
         const VertexBufferInfo& input = GetVertexBuffer(attribute.vertexBufferSlot);
 
         inputElementDescriptor.AlignedByteOffset = attribute.offset;
-        inputElementDescriptor.InputSlotClass = VertexStepModeFunction(input.stepMode);
+        inputElementDescriptor.InputSlotClass = VertexStepModeFunction(input.stepMode());
         if (inputElementDescriptor.InputSlotClass == D3D12_INPUT_CLASSIFICATION_PER_VERTEX_DATA) {
             inputElementDescriptor.InstanceDataStepRate = 0;
         } else {

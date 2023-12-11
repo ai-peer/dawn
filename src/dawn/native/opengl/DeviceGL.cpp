@@ -280,8 +280,8 @@ ResultOrError<wgpu::TextureUsage> Device::GetSupportedSurfaceUsageImpl(
 }
 
 MaybeError Device::ValidateTextureCanBeWrapped(const UnpackedPtr<TextureDescriptor>& descriptor) {
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
-                    "Texture dimension (%s) is not %s.", descriptor->dimension,
+    DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D,
+                    "Texture dimension (%s) is not %s.", descriptor->dimension(),
                     wgpu::TextureDimension::e2D);
 
     DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",

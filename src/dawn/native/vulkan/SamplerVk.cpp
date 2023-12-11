@@ -45,6 +45,8 @@ VkSamplerAddressMode VulkanSamplerAddressMode(wgpu::AddressMode mode) {
             return VK_SAMPLER_ADDRESS_MODE_MIRRORED_REPEAT;
         case wgpu::AddressMode::ClampToEdge:
             return VK_SAMPLER_ADDRESS_MODE_CLAMP_TO_EDGE;
+        case wgpu::AddressMode::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -55,6 +57,8 @@ VkFilter VulkanSamplerFilter(wgpu::FilterMode filter) {
             return VK_FILTER_LINEAR;
         case wgpu::FilterMode::Nearest:
             return VK_FILTER_NEAREST;
+        case wgpu::FilterMode::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -65,6 +69,8 @@ VkSamplerMipmapMode VulkanMipMapMode(wgpu::MipmapFilterMode filter) {
             return VK_SAMPLER_MIPMAP_MODE_LINEAR;
         case wgpu::MipmapFilterMode::Nearest:
             return VK_SAMPLER_MIPMAP_MODE_NEAREST;
+        case wgpu::MipmapFilterMode::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -82,12 +88,12 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     createInfo.sType = VK_STRUCTURE_TYPE_SAMPLER_CREATE_INFO;
     createInfo.pNext = nullptr;
     createInfo.flags = 0;
-    createInfo.magFilter = VulkanSamplerFilter(descriptor->magFilter);
-    createInfo.minFilter = VulkanSamplerFilter(descriptor->minFilter);
-    createInfo.mipmapMode = VulkanMipMapMode(descriptor->mipmapFilter);
-    createInfo.addressModeU = VulkanSamplerAddressMode(descriptor->addressModeU);
-    createInfo.addressModeV = VulkanSamplerAddressMode(descriptor->addressModeV);
-    createInfo.addressModeW = VulkanSamplerAddressMode(descriptor->addressModeW);
+    createInfo.magFilter = VulkanSamplerFilter(descriptor->magFilter());
+    createInfo.minFilter = VulkanSamplerFilter(descriptor->minFilter());
+    createInfo.mipmapMode = VulkanMipMapMode(descriptor->mipmapFilter());
+    createInfo.addressModeU = VulkanSamplerAddressMode(descriptor->addressModeU());
+    createInfo.addressModeV = VulkanSamplerAddressMode(descriptor->addressModeV());
+    createInfo.addressModeW = VulkanSamplerAddressMode(descriptor->addressModeW());
     createInfo.mipLodBias = 0.0f;
     if (descriptor->compare != wgpu::CompareFunction::Undefined) {
         createInfo.compareOp = ToVulkanCompareOp(descriptor->compare);

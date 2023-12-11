@@ -313,6 +313,8 @@ MaybeError Texture::InitializeAsInternalTexture() {
     }
 
     switch (GetDimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D: {
             D3D11_TEXTURE1D_DESC desc = GetD3D11TextureDesc<D3D11_TEXTURE1D_DESC>();
             ComPtr<ID3D11Texture1D> d3d11Texture1D;
@@ -416,6 +418,8 @@ ResultOrError<ComPtr<ID3D11RenderTargetView>> Texture::CreateD3D11RenderTargetVi
         rtvDesc.ViewDimension = D3D11_RTV_DIMENSION_TEXTURE2DMS;
     } else {
         switch (GetDimension()) {
+            case wgpu::TextureDimension::Undefined:
+                DAWN_UNREACHABLE();
             case wgpu::TextureDimension::e2D:
                 // Currently we always use D3D11_TEX2D_ARRAY_RTV because we cannot specify base
                 // array layer and layer count in D3D11_TEX2D_RTV. For 2D texture views, we treat
@@ -618,8 +622,8 @@ MaybeError Texture::ClearCompressed(const ScopedCommandRecordingContext* command
     // Create an interim texture of renderable format for reinterpretation conversion.
     TextureDescriptor desc = {};
     desc.label = "CopyUncompressedTextureToCompressedTexureInterim";
-    desc.dimension = GetDimension();
-    DAWN_ASSERT(desc.dimension == wgpu::TextureDimension::e2D);
+    desc.dimension_undefaulted = GetDimension();
+    DAWN_ASSERT(desc.dimension() == wgpu::TextureDimension::e2D);
     desc.size = {GetWidth(Aspect::Color), GetHeight(Aspect::Color), 1};
     desc.format = UncompressedTextureFormat(GetFormat().format);
     desc.mipLevelCount = 1;
@@ -791,7 +795,7 @@ MaybeError Texture::WriteDepthStencilInternal(const ScopedCommandRecordingContex
                                               uint32_t rowsPerImage) {
     TextureDescriptor desc = {};
     desc.label = "WriteStencilTextureStaging";
-    desc.dimension = GetDimension();
+    desc.dimension_undefaulted = GetDimension();
     desc.size = size;
     desc.format = GetFormat().format;
     desc.mipLevelCount = 1;
@@ -986,7 +990,7 @@ MaybeError Texture::Read(const ScopedCommandRecordingContext* commandContext,
     DAWN_TRY(EnsureSubresourceContentInitialized(commandContext, subresources));
     TextureDescriptor desc = {};
     desc.label = "CopyTextureToBufferStaging";
-    desc.dimension = GetDimension();
+    desc.dimension_undefaulted = GetDimension();
     desc.size = size;
     desc.format = GetFormat().format;
     desc.mipLevelCount = subresources.levelCount;
@@ -1066,6 +1070,8 @@ MaybeError Texture::CopyInternal(const ScopedCommandRecordingContext* commandCon
     srcBox.top = src.origin.y;
     srcBox.bottom = src.origin.y + copy->copySize.height;
     switch (src.texture->GetDimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
         case wgpu::TextureDimension::e2D:
             srcBox.front = 0;
@@ -1075,8 +1081,6 @@ MaybeError Texture::CopyInternal(const ScopedCommandRecordingContext* commandCon
             srcBox.front = src.origin.z;
             srcBox.back = src.origin.z + copy->copySize.depthOrArrayLayers;
             break;
-        default:
-            DAWN_UNREACHABLE();
     }
 
     bool isWholeSubresource =
@@ -1116,7 +1120,7 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(
         // Create an interim texture of R8Uint format.
         TextureDescriptor desc = {};
         desc.label = "InterimStencilTexture";
-        desc.dimension = GetDimension();
+        desc.dimension_undefaulted = GetDimension();
         desc.size = GetSize(Aspect::Stencil);
         desc.format = wgpu::TextureFormat::R8Uint;
         desc.mipLevelCount = GetNumMipLevels();
@@ -1169,7 +1173,7 @@ ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(
     TextureViewDescriptor viewDesc = {};
     viewDesc.label = "InterimStencilTextureView";
     viewDesc.format = wgpu::TextureFormat::R8Uint;
-    viewDesc.dimension = view->GetDimension();
+    viewDesc.dimension_undefaulted = view->GetDimension();
     viewDesc.baseArrayLayer = view->GetBaseArrayLayer();
     viewDesc.arrayLayerCount = view->GetLayerCount();
     viewDesc.baseMipLevel = view->GetBaseMipLevel();

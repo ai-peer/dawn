@@ -48,6 +48,8 @@ GLenum GLPrimitiveTopology(wgpu::PrimitiveTopology primitiveTopology) {
             return GL_TRIANGLES;
         case wgpu::PrimitiveTopology::TriangleStrip:
             return GL_TRIANGLE_STRIP;
+        case wgpu::PrimitiveTopology::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -106,7 +108,8 @@ GLenum GLBlendFactor(wgpu::BlendFactor factor, bool alpha) {
             return GL_SRC1_ALPHA;
         case wgpu::BlendFactor::OneMinusSrc1Alpha:
             return GL_ONE_MINUS_SRC1_ALPHA;
-            DAWN_UNREACHABLE();
+        case wgpu::BlendFactor::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -123,6 +126,8 @@ GLenum GLBlendMode(wgpu::BlendOperation operation) {
             return GL_MIN;
         case wgpu::BlendOperation::Max:
             return GL_MAX;
+        case wgpu::BlendOperation::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -133,12 +138,12 @@ void ApplyColorState(const OpenGLFunctions& gl,
     GLuint colorBuffer = static_cast<GLuint>(static_cast<uint8_t>(attachment));
     if (state->blend != nullptr) {
         gl.Enablei(GL_BLEND, colorBuffer);
-        gl.BlendEquationSeparatei(colorBuffer, GLBlendMode(state->blend->color.operation),
-                                  GLBlendMode(state->blend->alpha.operation));
-        gl.BlendFuncSeparatei(colorBuffer, GLBlendFactor(state->blend->color.srcFactor, false),
-                              GLBlendFactor(state->blend->color.dstFactor, false),
-                              GLBlendFactor(state->blend->alpha.srcFactor, true),
-                              GLBlendFactor(state->blend->alpha.dstFactor, true));
+        gl.BlendEquationSeparatei(colorBuffer, GLBlendMode(state->blend->color.operation()),
+                                  GLBlendMode(state->blend->alpha.operation()));
+        gl.BlendFuncSeparatei(colorBuffer, GLBlendFactor(state->blend->color.srcFactor(), false),
+                              GLBlendFactor(state->blend->color.dstFactor(), false),
+                              GLBlendFactor(state->blend->alpha.srcFactor(), true),
+                              GLBlendFactor(state->blend->alpha.dstFactor(), true));
     } else {
         gl.Disablei(GL_BLEND, colorBuffer);
     }
@@ -151,12 +156,12 @@ void ApplyColorState(const OpenGLFunctions& gl,
 void ApplyColorState(const OpenGLFunctions& gl, const ColorTargetState* state) {
     if (state->blend != nullptr) {
         gl.Enable(GL_BLEND);
-        gl.BlendEquationSeparate(GLBlendMode(state->blend->color.operation),
-                                 GLBlendMode(state->blend->alpha.operation));
-        gl.BlendFuncSeparate(GLBlendFactor(state->blend->color.srcFactor, false),
-                             GLBlendFactor(state->blend->color.dstFactor, false),
-                             GLBlendFactor(state->blend->alpha.srcFactor, true),
-                             GLBlendFactor(state->blend->alpha.dstFactor, true));
+        gl.BlendEquationSeparate(GLBlendMode(state->blend->color.operation()),
+                                 GLBlendMode(state->blend->alpha.operation()));
+        gl.BlendFuncSeparate(GLBlendFactor(state->blend->color.srcFactor(), false),
+                             GLBlendFactor(state->blend->color.dstFactor(), false),
+                             GLBlendFactor(state->blend->alpha.srcFactor(), true),
+                             GLBlendFactor(state->blend->alpha.dstFactor(), true));
     } else {
         gl.Disable(GL_BLEND);
     }
@@ -167,8 +172,8 @@ void ApplyColorState(const OpenGLFunctions& gl, const ColorTargetState* state) {
 }
 
 bool Equal(const BlendComponent& lhs, const BlendComponent& rhs) {
-    return lhs.operation == rhs.operation && lhs.srcFactor == rhs.srcFactor &&
-           lhs.dstFactor == rhs.dstFactor;
+    return lhs.operation() == rhs.operation() && lhs.srcFactor() == rhs.srcFactor() &&
+           lhs.dstFactor() == rhs.dstFactor();
 }
 
 GLuint OpenGLStencilOperation(wgpu::StencilOperation stencilOperation) {
@@ -189,6 +194,8 @@ GLuint OpenGLStencilOperation(wgpu::StencilOperation stencilOperation) {
             return GL_INCR_WRAP;
         case wgpu::StencilOperation::DecrementWrap:
             return GL_DECR_WRAP;
+        case wgpu::StencilOperation::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -218,17 +225,17 @@ void ApplyDepthStencilState(const OpenGLFunctions& gl,
         gl.Disable(GL_STENCIL_TEST);
     }
 
-    GLenum backCompareFunction = ToOpenGLCompareFunction(descriptor->stencilBack.compare);
-    GLenum frontCompareFunction = ToOpenGLCompareFunction(descriptor->stencilFront.compare);
+    GLenum backCompareFunction = ToOpenGLCompareFunction(descriptor->stencilBack.compare());
+    GLenum frontCompareFunction = ToOpenGLCompareFunction(descriptor->stencilFront.compare());
     persistentPipelineState->SetStencilFuncsAndMask(gl, backCompareFunction, frontCompareFunction,
                                                     descriptor->stencilReadMask);
 
-    gl.StencilOpSeparate(GL_BACK, OpenGLStencilOperation(descriptor->stencilBack.failOp),
-                         OpenGLStencilOperation(descriptor->stencilBack.depthFailOp),
-                         OpenGLStencilOperation(descriptor->stencilBack.passOp));
-    gl.StencilOpSeparate(GL_FRONT, OpenGLStencilOperation(descriptor->stencilFront.failOp),
-                         OpenGLStencilOperation(descriptor->stencilFront.depthFailOp),
-                         OpenGLStencilOperation(descriptor->stencilFront.passOp));
+    gl.StencilOpSeparate(GL_BACK, OpenGLStencilOperation(descriptor->stencilBack.failOp()),
+                         OpenGLStencilOperation(descriptor->stencilBack.depthFailOp()),
+                         OpenGLStencilOperation(descriptor->stencilBack.passOp()));
+    gl.StencilOpSeparate(GL_FRONT, OpenGLStencilOperation(descriptor->stencilFront.failOp()),
+                         OpenGLStencilOperation(descriptor->stencilFront.depthFailOp()),
+                         OpenGLStencilOperation(descriptor->stencilFront.passOp()));
 
     gl.StencilMask(descriptor->stencilWriteMask);
 }
@@ -300,6 +307,7 @@ void RenderPipeline::CreateVAOForVertexState() {
                     gl.VertexAttribDivisor(glAttrib, 1);
                     break;
                 case wgpu::VertexStepMode::VertexBufferNotUsed:
+                case wgpu::VertexStepMode::Undefined:
                     DAWN_UNREACHABLE();
             }
         }

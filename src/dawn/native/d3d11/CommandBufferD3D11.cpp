@@ -333,7 +333,7 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 // data from the buffer to the staging buffer.
                 if (!(buffer->GetUsage() & kMappableBufferUsages)) {
                     const TexelBlockInfo& blockInfo =
-                        ToBackend(dst.texture)->GetFormat().GetAspectInfo(dst.aspect).block;
+                        ToBackend(dst.texture)->GetFormat().GetAspectInfo(dst.aspect()).block;
                     // TODO(dawn:1768): use compute shader to copy data from buffer to texture.
                     BufferDescriptor desc;
                     DAWN_TRY_ASSIGN(desc.size,
