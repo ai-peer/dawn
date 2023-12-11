@@ -332,6 +332,7 @@ ResultOrError<Ref<RenderPipelineBase>> CreateCopyForBrowserPipeline(
 
     // Create RenderPipeline.
     RenderPipelineDescriptor renderPipelineDesc = {};
+    renderPipelineDesc.label = "internal!CopyTextureForBrowser";
 
     // Generate the layout based on shader modules.
     renderPipelineDesc.layout = nullptr;
@@ -339,7 +340,7 @@ ResultOrError<Ref<RenderPipelineBase>> CreateCopyForBrowserPipeline(
     renderPipelineDesc.vertex = vertex;
     renderPipelineDesc.fragment = &fragment;
 
-    renderPipelineDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+    renderPipelineDesc.primitive.topology_undefaulted = wgpu::PrimitiveTopology::TriangleList;
 
     fragment.targetCount = 1;
     fragment.targets = &target;
@@ -632,9 +633,9 @@ MaybeError ValidateCopyForBrowserDestination(DeviceBase* device,
 
     // The valid destination formats are all color formats.
     DAWN_INVALID_IF(
-        destination.aspect != wgpu::TextureAspect::All,
+        destination.aspect() != wgpu::TextureAspect::All,
         "Destination %s aspect (%s) doesn't select all the aspects of the destination format.",
-        destination.texture, destination.aspect);
+        destination.texture, destination.aspect());
 
     return {};
 }
@@ -760,7 +761,7 @@ MaybeError DoCopyTextureForBrowser(DeviceBase* device,
                                    const CopyTextureForBrowserOptions* options) {
     TextureInfo info;
     info.origin = source->origin;
-    info.size = source->texture->GetSize(source->aspect);
+    info.size = source->texture->GetSize(source->aspect());
 
     Ref<TextureViewBase> srcTextureView = nullptr;
     TextureViewDescriptor srcTextureViewDesc = {};

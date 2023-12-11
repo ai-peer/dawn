@@ -456,7 +456,7 @@ MaybeError QueueBase::WriteTextureInternal(const ImageCopyTexture* destination,
     }
 
     const TexelBlockInfo& blockInfo =
-        destination->texture->GetFormat().GetAspectInfo(destination->aspect).block;
+        destination->texture->GetFormat().GetAspectInfo(destination->aspect()).block;
     TextureDataLayout layout = dataLayout;
     ApplyDefaultTextureDataLayoutOptions(&layout, blockInfo, *writeSize);
     return WriteTextureImpl(*destination, data, layout, *writeSize);
@@ -467,7 +467,7 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
                                        const TextureDataLayout& dataLayout,
                                        const Extent3D& writeSizePixel) {
     const Format& format = destination.texture->GetFormat();
-    const TexelBlockInfo& blockInfo = format.GetAspectInfo(destination.aspect).block;
+    const TexelBlockInfo& blockInfo = format.GetAspectInfo(destination.aspect()).block;
 
     // We are only copying the part of the data that will appear in the texture.
     // Note that validating texture copy range ensures that writeSizePixel->width and
@@ -495,7 +495,7 @@ MaybeError QueueBase::WriteTextureImpl(const ImageCopyTexture& destination,
     textureCopy.texture = destination.texture;
     textureCopy.mipLevel = destination.mipLevel;
     textureCopy.origin = destination.origin;
-    textureCopy.aspect = ConvertAspect(format, destination.aspect);
+    textureCopy.aspect = ConvertAspect(format, destination.aspect());
 
     DeviceBase* device = GetDevice();
 
@@ -639,7 +639,7 @@ MaybeError QueueBase::ValidateWriteTexture(const ImageCopyTexture* destination,
     DAWN_TRY(ValidateTextureCopyRange(GetDevice(), *destination, *writeSize));
 
     const TexelBlockInfo& blockInfo =
-        destination->texture->GetFormat().GetAspectInfo(destination->aspect).block;
+        destination->texture->GetFormat().GetAspectInfo(destination->aspect()).block;
 
     DAWN_TRY(ValidateLinearTextureData(dataLayout, dataSize, blockInfo, *writeSize));
 

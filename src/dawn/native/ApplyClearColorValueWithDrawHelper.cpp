@@ -169,7 +169,7 @@ ResultOrError<RenderPipelineBase*> GetOrCreateApplyClearValueWithDrawPipeline(
 
     renderPipelineDesc.vertex = vertex;
     renderPipelineDesc.fragment = &fragment;
-    renderPipelineDesc.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+    renderPipelineDesc.primitive.topology_undefaulted = wgpu::PrimitiveTopology::TriangleList;
     fragment.targetCount = key.colorAttachmentCount;
     fragment.targets = colorTargets.data();
 

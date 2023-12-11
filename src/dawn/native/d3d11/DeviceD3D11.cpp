@@ -520,7 +520,7 @@ ResultOrError<TextureViewBase*> Device::GetOrCreateCachedImplicitPixelLocalStora
         // TODO(dawn:1703): support 2D array storage textures as implicit pixel local storage
         // attachments in WGSL.
         TextureDescriptor desc;
-        desc.dimension = wgpu::TextureDimension::e2D;
+        desc.dimension_undefaulted = wgpu::TextureDimension::e2D;
         desc.format = RenderPipelineBase::kImplicitPLSSlotFormat;
         desc.usage = wgpu::TextureUsage::StorageAttachment;
         desc.size = {width, height, 1};

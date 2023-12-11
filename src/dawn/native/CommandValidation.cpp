@@ -349,12 +349,12 @@ MaybeError ValidateImageCopyTexture(DeviceBase const* device,
                     "MipLevel (%u) is greater than the number of mip levels (%u) in %s.",
                     textureCopy.mipLevel, texture->GetNumMipLevels(), texture);
 
-    DAWN_TRY(ValidateTextureAspect(textureCopy.aspect));
+    DAWN_TRY(ValidateTextureAspect(textureCopy.aspect()));
 
-    const auto aspect = SelectFormatAspects(texture->GetFormat(), textureCopy.aspect);
+    const auto aspect = SelectFormatAspects(texture->GetFormat(), textureCopy.aspect());
     DAWN_INVALID_IF(aspect == Aspect::None,
                     "%s format (%s) does not have the selected aspect (%s).", texture,
-                    texture->GetFormat().format, textureCopy.aspect);
+                    texture->GetFormat().format, textureCopy.aspect());
 
     if (texture->GetSampleCount() > 1 || texture->GetFormat().HasDepthOrStencil()) {
         Extent3D subresourceSize =
@@ -379,7 +379,7 @@ MaybeError ValidateTextureCopyRange(DeviceBase const* device,
                                     const Extent3D& copySize) {
     const TextureBase* texture = textureCopy.texture;
     const Format& format = textureCopy.texture->GetFormat();
-    const Aspect aspect = ConvertAspect(format, textureCopy.aspect);
+    const Aspect aspect = ConvertAspect(format, textureCopy.aspect());
 
     DAWN_ASSERT(!format.IsMultiPlanar() || HasOneBit(aspect));
 
@@ -407,7 +407,7 @@ MaybeError ValidateTextureCopyRange(DeviceBase const* device,
 
     // Validation for the texel block alignments:
     if (format.isCompressed) {
-        const TexelBlockInfo& blockInfo = format.GetAspectInfo(textureCopy.aspect).block;
+        const TexelBlockInfo& blockInfo = format.GetAspectInfo(textureCopy.aspect()).block;
         DAWN_INVALID_IF(
             textureCopy.origin.x % blockInfo.width != 0,
             "Texture copy origin.x (%u) is not a multiple of compressed texture format block "
@@ -436,13 +436,13 @@ MaybeError ValidateTextureCopyRange(DeviceBase const* device,
 // formats).
 ResultOrError<Aspect> SingleAspectUsedByImageCopyTexture(const ImageCopyTexture& view) {
     const Format& format = view.texture->GetFormat();
-    switch (view.aspect) {
+    switch (view.aspect()) {
         case wgpu::TextureAspect::All: {
             DAWN_INVALID_IF(
                 !HasOneBit(format.aspects),
                 "More than a single aspect (%s) is selected for multi-planar format (%s) in "
                 "%s <-> linear data copy.",
-                view.aspect, format.format, view.texture);
+                view.aspect(), format.format, view.texture);
 
             Aspect single = format.aspects;
             return single;
@@ -459,6 +459,8 @@ ResultOrError<Aspect> SingleAspectUsedByImageCopyTexture(const ImageCopyTexture&
             return Aspect::Plane1;
         case wgpu::TextureAspect::Plane2Only:
             return Aspect::Plane2;
+        case wgpu::TextureAspect::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -495,18 +497,21 @@ MaybeError ValidateTextureToTextureCopyCommonRestrictions(const ImageCopyTexture
     // Metal cannot select a single aspect for texture-to-texture copies.
     const Format& format = src.texture->GetFormat();
     DAWN_INVALID_IF(
-        SelectFormatAspects(format, src.aspect) != format.aspects,
+        SelectFormatAspects(format, src.aspect()) != format.aspects,
         "Source %s aspect (%s) doesn't select all the aspects of the source format (%s).",
-        src.texture, src.aspect, format.format);
+        src.texture, src.aspect(), format.format);
 
     DAWN_INVALID_IF(
-        SelectFormatAspects(format, dst.aspect) != format.aspects,
+        SelectFormatAspects(format, dst.aspect()) != format.aspects,
         "Destination %s aspect (%s) doesn't select all the aspects of the destination format "
         "(%s).",
-        dst.texture, dst.aspect, format.format);
+        dst.texture, dst.aspect(), format.format);
 
     if (src.texture == dst.texture) {
         switch (src.texture->GetDimension()) {
+            case wgpu::TextureDimension::Undefined:
+                DAWN_UNREACHABLE();
+
             case wgpu::TextureDimension::e1D:
                 DAWN_ASSERT(src.mipLevel == 0);
                 return DAWN_VALIDATION_ERROR("Copy is from %s to itself.", src.texture);
