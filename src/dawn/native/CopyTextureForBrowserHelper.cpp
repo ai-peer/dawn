@@ -332,6 +332,7 @@ ResultOrError<Ref<RenderPipelineBase>> CreateCopyForBrowserPipeline(
 
     // Create RenderPipeline.
     RenderPipelineDescriptor renderPipelineDesc = {};
+    renderPipelineDesc.label = "internal!CopyTextureForBrowser";
 
     // Generate the layout based on shader modules.
     renderPipelineDesc.layout = nullptr;

@@ -117,17 +117,21 @@ class EnumType(Type):
         Type.__init__(self, name, json_data)
 
         self.values = []
+        self.zeroValueName = None
         self.contiguousFromZero = True
         lastValue = -1
         for m in self.json_data['values']:
             if not is_enabled(m):
                 continue
             value = m['value']
+            name = m['name']
+            if value == 0:
+                self.zeroValueName = name
             if value != lastValue + 1:
                 self.contiguousFromZero = False
             lastValue = value
             self.values.append(
-                EnumValue(Name(m['name']), value, m.get('valid', True), m))
+                EnumValue(Name(name), value, m.get('valid', True), m))
 
         # Assert that all values are unique in enums
         all_values = set()

@@ -68,6 +68,16 @@ namespace {{native_namespace}} {
                          "offsetof mismatch for {{CppType}}::{{memberName}}");
         {% endfor %}
 
+        void {{CppType}}::ApplyFrontendDefaults() {
+            {% for member in type.members if member.default_value != None and
+                    member.type.category == "enum" and member.annotation == "value" and
+                    member.type.zeroValueName != None and member.default_value != member.type.zeroValueName %}
+                if ({{as_varName(member.name)}} == {{namespace}}::{{as_cppType(member.type.name)}}::{{as_cppEnum(Name(member.type.zeroValueName))}}) {
+                    {{as_varName(member.name)}} = {{namespace}}::{{as_cppType(member.type.name)}}::{{as_cppEnum(Name(member.default_value))}};
+                }
+            {% endfor %}
+        }
+
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
             return {% if type.extensible or type.chained -%}
                 (nextInChain == rhs.nextInChain) &&
