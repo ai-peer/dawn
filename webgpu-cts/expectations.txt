@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2023-12-08 08:01:39AM
+# Last rolled: 2023-12-11 10:16:33PM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -151,7 +151,6 @@ crbug.com/dawn/1903 [ qualcomm ] webgpu:api,operation,render_pipeline,sample_mas
 ################################################################################
 crbug.com/1469851 [ mac ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:drawTo2DCanvas:* [ Failure ]
 crbug.com/1469851 [ win ] webgpu:web_platform,canvas,readbackFromWebGPUCanvas:drawTo2DCanvas:* [ Failure ]
-
 
 ################################################################################
 # Android failures
