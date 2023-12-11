@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76f39ea3_8588a88f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-12-11T14:19:50Z",
+      "side": 1,
+      "message": "I\u0027ve implemented it for non-coherent memory now. In addition to `vkFlushMappedMemoryRanges` we also need `vkInvalidateMappedMemoryRanges` to make any available GPU writes visible.\n\nFor non-coherent memory we need to synchronize not just the memory range mapped, but an extended range according to `nonCoherentAtomSize`. To deal with this I\u0027ve adjusted the alignment requirements in `ResourceMemoryAllocatorVk`. We only need to consider `nonCoherentAtomSize` when dealing with non-coherent memory that may be mapped so I\u0027m only applying that alignment to host visible, non-coherent memory.\n\nI\u0027ve tested it on a Mali-G78 device by hacking `FindBestTypeIndex` to prioritize non-coherent memory (otherwise, Dawn would choose the host coherent memory type).",
+      "parentUuid": "c393bd14_c8da1238",
+      "range": {
+        "startLine": 274,
+        "startChar": 55,
+        "endLine": 274,
+        "endChar": 91
+      },
+      "revId": "37b968fba7117cd20c8393d51ba8e5f915c533ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e7076eb_61f1a7d9",
@@ -41,6 +65,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "54762901_fdc77a7b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-12-11T14:19:50Z",
+      "side": 1,
+      "message": "I was initially hoping to make the optimization universal, but the memory doesn\u0027t just need to be CPU writable, we also need to take care of the synchronization and potential cache flushing/invalidation. I didn\u0027t see a way to make everything API-agnostic but I\u0027m way more knowledgable about Vulkan than DX12/Metal. Perhaps someone more familiar with DX12 and Metal can make an attempt at that.\n\nWe can\u0027t use `IsCPUWritableAtCreation` directly, as mappable buffers are handled differently (persistently mapped). `IsCPUWritableAtCreation` checks if the buffer is mapped, whereas `mIsCPUWritable` checks whether the memory *can* be mapped. Changing the meaning of `IsCPUWritableAtCreation` wouldn\u0027t work for `mappedAtCreation`. We also can\u0027t make non-mappable buffers persistently mapped (non-mappable buffers are suballocated), but have to map and then unmap them.\n\nHowever, the `mappedAtCreation` implementation can also be optimized to skip the scratch buffer for `HOST_VISIBLE` buffers in a similar way to this patch (again, not sure how to make that universal across APIs). After that, it might be possible to unify the `writeBuffer` and `mappedAtCreation` approaches. But I think that should be a separate commit.",
+      "parentUuid": "2e7076eb_61f1a7d9",
+      "revId": "37b968fba7117cd20c8393d51ba8e5f915c533ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36224449_88e357cf",
@@ -54,6 +96,30 @@
       "writtenOn": "2023-11-28T12:34:00Z",
       "side": 1,
       "message": "nit: this member should probably be private to BufferBase with a Getter.",
+      "range": {
+        "startLine": 556,
+        "startChar": 25,
+        "endLine": 556,
+        "endChar": 41
+      },
+      "revId": "37b968fba7117cd20c8393d51ba8e5f915c533ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3601038f_9d468675",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 556,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2023-12-11T14:19:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36224449_88e357cf",
       "range": {
         "startLine": 556,
         "startChar": 25,
