@@ -25,25 +25,53 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_SPIRV_VALIDATE_VALIDATE_H_
-#define SRC_TINT_LANG_SPIRV_VALIDATE_VALIDATE_H_
+#include "src/tint/lang/spirv/reader/parser/parser.h"
 
-#include "spirv-tools/libspirv.hpp"
-#include "src/tint/utils/result/result.h"
+#include <utility>
+#include <vector>
 
-// Forward declarations
-namespace tint {
-class Program;
-}  // namespace tint
+#include "src/tint/lang/core/ir/builder.h"
+#include "src/tint/lang/core/ir/module.h"
+#include "src/tint/lang/spirv/validate/validate.h"
 
-namespace tint::spirv::validate {
+namespace tint::spirv::reader {
 
-/// Validate checks that the provided SPIR-V passes validation.
-/// @param spirv the SPIR-V binary data
-/// @param target_env the target environment to validate against
-/// @return success or failure(s)
-Result<SuccessType> Validate(Slice<const uint32_t> spirv, spv_target_env target_env);
+namespace {
 
-}  // namespace tint::spirv::validate
+/// The SPIR-V environment that we validate against.
+constexpr auto kTargetEnv = SPV_ENV_VULKAN_1_1;
 
-#endif  // SRC_TINT_LANG_SPIRV_VALIDATE_VALIDATE_H_
+/// PIMPL class for SPIR-V parser.
+class Parser {
+  public:
+    /// Constructor
+    /// @param spirv the SPIR-V binary data
+    explicit Parser(const std::vector<uint32_t>& spirv) : spirv_(spirv) {}
+
+    /// @returns the generated SPIR-V IR module on success, or failure
+    Result<core::ir::Module> Run() {
+        // Validate the incoming SPIR-V binary.
+        auto result = validate::Validate(Slice{spirv_.data(), spirv_.size()}, kTargetEnv);
+        if (!result) {
+            return result.Failure();
+        }
+
+        // TODO(crbug.com/tint/1907): Parse the module.
+
+        return std::move(ir_);
+    }
+
+  private:
+    const std::vector<uint32_t>& spirv_;
+    core::ir::Module ir_;
+    core::ir::Builder b_{ir_};
+    core::type::Manager& ty_{ir_.Types()};
+};
+
+}  // namespace
+
+Result<core::ir::Module> Parse(const std::vector<uint32_t>& spirv) {
+    return Parser{spirv}.Run();
+}
+
+}  // namespace tint::spirv::reader

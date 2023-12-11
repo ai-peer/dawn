@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2020 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,25 +25,25 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_SPIRV_VALIDATE_VALIDATE_H_
-#define SRC_TINT_LANG_SPIRV_VALIDATE_VALIDATE_H_
+#ifndef SRC_TINT_LANG_SPIRV_READER_PARSER_PARSER_H_
+#define SRC_TINT_LANG_SPIRV_READER_PARSER_PARSER_H_
 
-#include "spirv-tools/libspirv.hpp"
+#include <vector>
+
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations
-namespace tint {
-class Program;
-}  // namespace tint
+namespace tint::core::ir {
+class Module;
+}  // namespace tint::core::ir
 
-namespace tint::spirv::validate {
+namespace tint::spirv::reader {
 
-/// Validate checks that the provided SPIR-V passes validation.
+/// Parse a SPIR-V binary to produce a SPIR-V IR module.
 /// @param spirv the SPIR-V binary data
-/// @param target_env the target environment to validate against
-/// @return success or failure(s)
-Result<SuccessType> Validate(Slice<const uint32_t> spirv, spv_target_env target_env);
+/// @returns the SPIR-V IR module on success, or failure
+Result<core::ir::Module> Parse(const std::vector<uint32_t>& spirv);
 
-}  // namespace tint::spirv::validate
+}  // namespace tint::spirv::reader
 
-#endif  // SRC_TINT_LANG_SPIRV_VALIDATE_VALIDATE_H_
+#endif  // SRC_TINT_LANG_SPIRV_READER_PARSER_PARSER_H_

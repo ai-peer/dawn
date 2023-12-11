@@ -31,12 +31,19 @@
 
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/spirv/reader/ast_parser/parse.h"
+#include "src/tint/lang/spirv/reader/parser/parser.h"
 
 namespace tint::spirv::reader {
 
 Result<core::ir::Module> ReadIR(const std::vector<uint32_t>& input) {
-    (void)input;
-    return Failure("SPIR-V to IR reader is unimplemented");
+    auto mod = Parse(input);
+    if (!mod) {
+        return mod.Failure();
+    }
+
+    // TODO(crbug.com/tint/1907): Lower the module to core dialect.
+
+    return mod;
 }
 
 Program Read(const std::vector<uint32_t>& input, const Options& options) {
