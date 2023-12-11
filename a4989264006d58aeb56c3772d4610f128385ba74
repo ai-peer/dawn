@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dae70150_22237393",
+        "filename": "build_overrides/partition_alloc.gni",
+        "patchSetId": 12
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-11T12:34:37Z",
+      "side": 1,
+      "message": "Is the leading underscore there to try and make this a file-scoped private variable? I wasn\u0027t aware of this, and tried looking up the GN documentation, [but I don\u0027t see anything](https://chromium.googlesource.com/chromium/src/tools/gn/+/48062805e19b4697c5fbd926dc649c78b6aaa138/docs/language.md#Scoping-and-execution) that suggests this.\n\nIf this is actually polluting the global scope, I suggest prefixing with a partition alloc prefix. `pa_` would suffice.",
+      "range": {
+        "startLine": 24,
+        "startChar": 0,
+        "endLine": 24,
+        "endChar": 19
+      },
+      "revId": "a4989264006d58aeb56c3772d4610f128385ba74",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
