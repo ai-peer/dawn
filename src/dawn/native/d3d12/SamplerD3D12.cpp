@@ -43,7 +43,10 @@ D3D12_TEXTURE_ADDRESS_MODE AddressMode(wgpu::AddressMode mode) {
             return D3D12_TEXTURE_ADDRESS_MODE_MIRROR;
         case wgpu::AddressMode::ClampToEdge:
             return D3D12_TEXTURE_ADDRESS_MODE_CLAMP;
+        case wgpu::AddressMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 }  // namespace
 
@@ -55,38 +58,45 @@ Ref<Sampler> Sampler::Create(Device* device, const SamplerDescriptor* descriptor
 Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
     : SamplerBase(device, descriptor) {
     D3D12_FILTER_TYPE minFilter;
-    switch (descriptor->minFilter) {
+    switch (descriptor->minFilter()) {
         case wgpu::FilterMode::Nearest:
             minFilter = D3D12_FILTER_TYPE_POINT;
             break;
         case wgpu::FilterMode::Linear:
             minFilter = D3D12_FILTER_TYPE_LINEAR;
             break;
+        case wgpu::FilterMode::Undefined:
+            DAWN_UNREACHABLE();
     }
 
     D3D12_FILTER_TYPE magFilter;
-    switch (descriptor->magFilter) {
+    switch (descriptor->magFilter()) {
         case wgpu::FilterMode::Nearest:
             magFilter = D3D12_FILTER_TYPE_POINT;
             break;
         case wgpu::FilterMode::Linear:
             magFilter = D3D12_FILTER_TYPE_LINEAR;
             break;
+        case wgpu::FilterMode::Undefined:
+            DAWN_UNREACHABLE();
     }
 
     D3D12_FILTER_TYPE mipmapFilter;
-    switch (descriptor->mipmapFilter) {
+    switch (descriptor->mipmapFilter()) {
         case wgpu::MipmapFilterMode::Nearest:
             mipmapFilter = D3D12_FILTER_TYPE_POINT;
             break;
         case wgpu::MipmapFilterMode::Linear:
             mipmapFilter = D3D12_FILTER_TYPE_LINEAR;
             break;
+        case wgpu::MipmapFilterMode::Undefined:
+            DAWN_UNREACHABLE();
     }
 
-    D3D12_FILTER_REDUCTION_TYPE reduction = descriptor->compare == wgpu::CompareFunction::Undefined
-                                                ? D3D12_FILTER_REDUCTION_TYPE_STANDARD
-                                                : D3D12_FILTER_REDUCTION_TYPE_COMPARISON;
+    D3D12_FILTER_REDUCTION_TYPE reduction =
+        descriptor->compare() == wgpu::CompareFunction::Undefined
+            ? D3D12_FILTER_REDUCTION_TYPE_STANDARD
+            : D3D12_FILTER_REDUCTION_TYPE_COMPARISON;
 
     // https://docs.microsoft.com/en-us/windows/win32/api/d3d12/ns-d3d12-d3d12_sampler_desc
     mSamplerDesc.MaxAnisotropy = std::min<uint16_t>(GetMaxAnisotropy(), 16u);
@@ -98,13 +108,13 @@ Sampler::Sampler(Device* device, const SamplerDescriptor* descriptor)
             D3D12_ENCODE_BASIC_FILTER(minFilter, magFilter, mipmapFilter, reduction);
     }
 
-    mSamplerDesc.AddressU = AddressMode(descriptor->addressModeU);
-    mSamplerDesc.AddressV = AddressMode(descriptor->addressModeV);
-    mSamplerDesc.AddressW = AddressMode(descriptor->addressModeW);
+    mSamplerDesc.AddressU = AddressMode(descriptor->addressModeU());
+    mSamplerDesc.AddressV = AddressMode(descriptor->addressModeV());
+    mSamplerDesc.AddressW = AddressMode(descriptor->addressModeW());
     mSamplerDesc.MipLODBias = 0.f;
 
-    if (descriptor->compare != wgpu::CompareFunction::Undefined) {
-        mSamplerDesc.ComparisonFunc = ToD3D12ComparisonFunc(descriptor->compare);
+    if (descriptor->compare() != wgpu::CompareFunction::Undefined) {
+        mSamplerDesc.ComparisonFunc = ToD3D12ComparisonFunc(descriptor->compare());
     } else {
         // Still set the function so it's not garbage.
         mSamplerDesc.ComparisonFunc = D3D12_COMPARISON_FUNC_NEVER;

@@ -45,7 +45,9 @@ namespace dawn::native::opengl {
 namespace {
 
 GLenum TargetForTexture(const UnpackedPtr<TextureDescriptor>& descriptor) {
-    switch (descriptor->dimension) {
+    switch (descriptor->dimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
         case wgpu::TextureDimension::e2D:
             if (descriptor->size.depthOrArrayLayers > 1) {
@@ -134,7 +136,7 @@ bool RequiresCreatingNewTextureView(const TextureBase* texture,
 
     if (ToBackend(texture)->GetGLFormat().format == GL_DEPTH_STENCIL &&
         (texture->GetUsage() & wgpu::TextureUsage::TextureBinding) != 0 &&
-        textureViewDescriptor->aspect == wgpu::TextureAspect::StencilOnly) {
+        textureViewDescriptor->aspect() == wgpu::TextureAspect::StencilOnly) {
         // We need a separate view for one of the depth or stencil planes
         // because each glTextureView needs it's own handle to set
         // GL_DEPTH_STENCIL_TEXTURE_MODE. Choose the stencil aspect for the
@@ -356,6 +358,7 @@ MaybeError Texture::ClearTexture(const SubresourceRange& range,
                         break;
 
                     case wgpu::TextureDimension::e3D:
+                    case wgpu::TextureDimension::Undefined:
                         DAWN_UNREACHABLE();
                 }
             }
@@ -451,6 +454,8 @@ MaybeError Texture::ClearTexture(const SubresourceRange& range,
 
                     if (GetArrayLayers() == 1) {
                         switch (GetDimension()) {
+                            case wgpu::TextureDimension::Undefined:
+                                DAWN_UNREACHABLE();
                             case wgpu::TextureDimension::e1D:
                             case wgpu::TextureDimension::e2D:
                                 gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment,

@@ -197,9 +197,9 @@ MaybeError ValidateSampleCount(const TextureDescriptor* descriptor,
         // Multisampled 1D and 3D textures are not supported in D3D12/Metal/Vulkan.
         // Multisampled 2D array texture is not supported because on Metal it requires the
         // version of macOS be greater than 10.14.
-        DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
+        DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D,
                         "The dimension (%s) of a multisampled texture is not 2D.",
-                        descriptor->dimension);
+                        descriptor->dimension());
 
         DAWN_INVALID_IF(descriptor->size.depthOrArrayLayers > 1,
                         "The depthOrArrayLayers (%u) of a multisampled texture is not 1.",
@@ -251,12 +251,12 @@ MaybeError ValidateTextureViewDimensionCompatibility(const DeviceBase* device,
         case wgpu::TextureViewDimension::Cube:
         case wgpu::TextureViewDimension::CubeArray:
             DAWN_INVALID_IF(
-                texture->GetSize(descriptor->aspect).width !=
-                    texture->GetSize(descriptor->aspect).height,
+                texture->GetSize(descriptor->aspect()).width !=
+                    texture->GetSize(descriptor->aspect()).height,
                 "A %s texture view is not compatible with %s because the texture's width "
                 "(%u) and height (%u) are not equal.",
-                descriptor->dimension, texture, texture->GetSize(descriptor->aspect).width,
-                texture->GetSize(descriptor->aspect).height);
+                descriptor->dimension, texture, texture->GetSize(descriptor->aspect()).width,
+                texture->GetSize(descriptor->aspect()).height);
             DAWN_INVALID_IF(descriptor->dimension == wgpu::TextureViewDimension::CubeArray &&
                                 device->IsCompatibilityMode(),
                             "A %s texture view for %s is not supported in compatibility mode",
@@ -282,7 +282,9 @@ MaybeError ValidateTextureSize(const DeviceBase* device,
                 descriptor->size.depthOrArrayLayers != 0);
     const CombinedLimits& limits = device->GetLimits();
     Extent3D maxExtent;
-    switch (descriptor->dimension) {
+    switch (descriptor->dimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
             maxExtent = {limits.v1.maxTextureDimension1D, 1, 1};
             break;
@@ -300,7 +302,9 @@ MaybeError ValidateTextureSize(const DeviceBase* device,
             descriptor->size.depthOrArrayLayers > maxExtent.depthOrArrayLayers,
         "Texture size (%s) exceeded maximum texture size (%s).", &descriptor->size, &maxExtent);
 
-    switch (descriptor->dimension) {
+    switch (descriptor->dimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
             DAWN_INVALID_IF(descriptor->mipLevelCount != 1,
                             "Texture mip level count (%u) is more than 1 when its dimension is %s.",
@@ -362,14 +366,14 @@ MaybeError ValidateTextureUsage(const DeviceBase* device,
         "format (%s).",
         usage, wgpu::TextureUsage::RenderAttachment, format->format);
 
-    DAWN_INVALID_IF(descriptor->dimension == wgpu::TextureDimension::e1D &&
+    DAWN_INVALID_IF(descriptor->dimension() == wgpu::TextureDimension::e1D &&
                         (usage & wgpu::TextureUsage::RenderAttachment),
                     "The texture usage (%s) includes %s, which is incompatible with the texture "
                     "dimension (%s).",
-                    usage, wgpu::TextureUsage::RenderAttachment, descriptor->dimension);
+                    usage, wgpu::TextureUsage::RenderAttachment, descriptor->dimension());
 
     DAWN_INVALID_IF(!device->IsToggleEnabled(Toggle::AllowUnsafeAPIs) &&
-                        descriptor->dimension == wgpu::TextureDimension::e3D &&
+                        descriptor->dimension() == wgpu::TextureDimension::e3D &&
                         (usage & wgpu::TextureUsage::RenderAttachment),
                     "The texture dimension must not be %s for a render attachment if "
                     "allow_unsafe_apis is not enabled. See crbug.com/dawn/1020.",
@@ -496,7 +500,9 @@ wgpu::TextureViewDimension ResolveDefaultCompatiblityTextureBindingViewDimension
         return textureBindingViewDimension;
     }
 
-    switch (descriptor->dimension) {
+    switch (descriptor->dimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
             return wgpu::TextureViewDimension::e1D;
         case wgpu::TextureDimension::e2D:
@@ -529,7 +535,7 @@ MaybeError ValidateTextureDescriptor(
     if (format->IsMultiPlanar()) {
         switch (allowMultiPlanar) {
             case AllowMultiPlanarTextureFormat::Yes:
-                DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D ||
+                DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D ||
                                     descriptor->mipLevelCount != 1 ||
                                     descriptor->size.depthOrArrayLayers != 1,
                                 "Multiplanar texture must be non-mipmapped & 2D in order to be "
@@ -550,16 +556,16 @@ MaybeError ValidateTextureDescriptor(
 
     DAWN_TRY(ValidateTextureUsage(device, *descriptor, usage, format,
                                   std::move(allowedSharedTextureMemoryUsage)));
-    DAWN_TRY(ValidateTextureDimension(descriptor->dimension));
+    DAWN_TRY(ValidateTextureDimension(descriptor->dimension()));
     if (device->IsCompatibilityMode()) {
         const auto textureBindingViewDimension =
             ResolveDefaultCompatiblityTextureBindingViewDimension(device, descriptor);
 
         DAWN_INVALID_IF(
             !IsTextureViewDimensionCompatibleWithTextureDimension(textureBindingViewDimension,
-                                                                  descriptor->dimension),
+                                                                  descriptor->dimension()),
             "The textureBindingViewDimension (%s) is not compatible with the dimension (%s)",
-            textureBindingViewDimension, descriptor->dimension);
+            textureBindingViewDimension, descriptor->dimension());
 
         DAWN_TRY(ValidateDepthOrArrayLayersIsCompatibleWithTextureBindingViewDimension(
             textureBindingViewDimension, descriptor->size.depthOrArrayLayers));
@@ -571,16 +577,16 @@ MaybeError ValidateTextureDescriptor(
                     "The texture size (%s) or mipLevelCount (%u) is empty.", &descriptor->size,
                     descriptor->mipLevelCount);
 
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D && format->isCompressed,
+    DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D && format->isCompressed,
                     "The dimension (%s) of a texture with a compressed format (%s) is not 2D.",
-                    descriptor->dimension, format->format);
+                    descriptor->dimension(), format->format);
 
     // Depth/stencil formats are valid for 2D textures only. Metal has this limit. And D3D12
     // doesn't support depth/stencil formats on 3D textures.
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D &&
+    DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D &&
                         (format->aspects & (Aspect::Depth | Aspect::Stencil)),
                     "The dimension (%s) of a texture with a depth/stencil format (%s) is not 2D.",
-                    descriptor->dimension, format->format);
+                    descriptor->dimension(), format->format);
 
     DAWN_TRY(ValidateTextureSize(device, *descriptor, format));
     return {};
@@ -597,16 +603,16 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
 
     DAWN_TRY(ValidateTextureViewDimension(descriptor->dimension));
     DAWN_TRY(ValidateTextureFormat(descriptor->format));
-    DAWN_TRY(ValidateTextureAspect(descriptor->aspect));
+    DAWN_TRY(ValidateTextureAspect(descriptor->aspect()));
 
     const Format& format = texture->GetFormat();
     const Format* viewFormat;
     DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(descriptor->format));
 
-    const auto aspect = SelectFormatAspects(format, descriptor->aspect);
+    const auto aspect = SelectFormatAspects(format, descriptor->aspect());
     DAWN_INVALID_IF(aspect == Aspect::None,
                     "Texture format (%s) does not have the texture view's selected aspect (%s).",
-                    format.format, descriptor->aspect);
+                    format.format, descriptor->aspect());
 
     DAWN_INVALID_IF(descriptor->arrayLayerCount == 0 || descriptor->mipLevelCount == 0,
                     "The texture view's arrayLayerCount (%u) or mipLevelCount (%u) is zero.",
@@ -626,7 +632,7 @@ MaybeError ValidateTextureViewDescriptor(const DeviceBase* device,
         "texture's mip level count (%u).",
         descriptor->baseMipLevel, descriptor->mipLevelCount, texture->GetNumMipLevels());
 
-    DAWN_TRY(ValidateCanViewTextureAs(device, texture, *viewFormat, descriptor->aspect));
+    DAWN_TRY(ValidateCanViewTextureAs(device, texture, *viewFormat, descriptor->aspect()));
     DAWN_TRY(ValidateTextureViewDimensionCompatibility(device, texture, descriptor));
 
     return {};
@@ -646,6 +652,9 @@ ResultOrError<TextureViewDescriptor> GetTextureViewDescriptorWithDefaults(
     // special case for 2DArray being chosen if texture is 2D but has more than one array layer.
     if (desc.dimension == wgpu::TextureViewDimension::Undefined) {
         switch (texture->GetDimension()) {
+            case wgpu::TextureDimension::Undefined:
+                DAWN_UNREACHABLE();
+
             case wgpu::TextureDimension::e1D:
                 desc.dimension = wgpu::TextureViewDimension::e1D;
                 break;
@@ -669,9 +678,9 @@ ResultOrError<TextureViewDescriptor> GetTextureViewDescriptorWithDefaults(
 
         // Check the aspect since |SelectFormatAspects| assumes a valid aspect.
         // Creation would have failed validation later since the aspect is invalid.
-        DAWN_TRY(ValidateTextureAspect(desc.aspect));
+        DAWN_TRY(ValidateTextureAspect(desc.aspect()));
 
-        Aspect aspects = SelectFormatAspects(format, desc.aspect);
+        Aspect aspects = SelectFormatAspects(format, desc.aspect());
         if (HasOneBit(aspects)) {
             desc.format = format.GetAspectInfo(aspects).format;
         } else {
@@ -724,7 +733,7 @@ TextureBase::TextureState::TextureState() : hasAccess(true), destroyed(false) {}
 
 TextureBase::TextureBase(DeviceBase* device, const UnpackedPtr<TextureDescriptor>& descriptor)
     : ApiObjectBase(device, descriptor->label),
-      mDimension(descriptor->dimension),
+      mDimension(descriptor->dimension()),
       mCompatibilityTextureBindingViewDimension(
           ResolveDefaultCompatiblityTextureBindingViewDimension(device, descriptor)),
       mFormat(device->GetValidInternalFormat(descriptor->format)),
@@ -785,7 +794,7 @@ TextureBase::TextureBase(DeviceBase* device,
                          const TextureDescriptor* descriptor,
                          ObjectBase::ErrorTag tag)
     : ApiObjectBase(device, tag, descriptor->label),
-      mDimension(descriptor->dimension),
+      mDimension(descriptor->dimension()),
       mCompatibilityTextureBindingViewDimension(
           ResolveDefaultCompatiblityTextureBindingViewDimension(device, Unpack(descriptor))),
       mFormat(kUnusedFormat),
@@ -1023,6 +1032,8 @@ bool TextureBase::CoversFullSubresource(uint32_t mipLevel,
                                         const Extent3D& size) const {
     Extent3D levelSize = GetMipLevelSingleSubresourcePhysicalSize(mipLevel, aspect);
     switch (GetDimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
             return size.width == levelSize.width;
         case wgpu::TextureDimension::e2D:
@@ -1162,7 +1173,7 @@ TextureViewBase::TextureViewBase(TextureBase* texture, const TextureViewDescript
       mTexture(texture),
       mFormat(GetDevice()->GetValidInternalFormat(descriptor->format)),
       mDimension(descriptor->dimension),
-      mRange({ConvertViewAspect(mFormat, descriptor->aspect),
+      mRange({ConvertViewAspect(mFormat, descriptor->aspect()),
               {descriptor->baseArrayLayer, descriptor->arrayLayerCount},
               {descriptor->baseMipLevel, descriptor->mipLevelCount}}) {
     GetObjectTrackingList()->Track(this);

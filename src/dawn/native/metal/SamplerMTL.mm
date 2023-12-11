@@ -39,7 +39,10 @@ MTLSamplerMinMagFilter FilterModeToMinMagFilter(wgpu::FilterMode mode) {
             return MTLSamplerMinMagFilterNearest;
         case wgpu::FilterMode::Linear:
             return MTLSamplerMinMagFilterLinear;
+        case wgpu::FilterMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 MTLSamplerMipFilter FilterModeToMipFilter(wgpu::MipmapFilterMode mode) {
@@ -48,7 +51,10 @@ MTLSamplerMipFilter FilterModeToMipFilter(wgpu::MipmapFilterMode mode) {
             return MTLSamplerMipFilterNearest;
         case wgpu::MipmapFilterMode::Linear:
             return MTLSamplerMipFilterLinear;
+        case wgpu::MipmapFilterMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 MTLSamplerAddressMode AddressMode(wgpu::AddressMode mode) {
@@ -59,7 +65,10 @@ MTLSamplerAddressMode AddressMode(wgpu::AddressMode mode) {
             return MTLSamplerAddressModeMirrorRepeat;
         case wgpu::AddressMode::ClampToEdge:
             return MTLSamplerAddressModeClampToEdge;
+        case wgpu::AddressMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 }  // namespace
 
@@ -88,13 +97,13 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     NSRef<NSString> label = MakeDebugName(GetDevice(), "Dawn_Sampler", GetLabel());
     mtlDesc.label = label.Get();
 
-    mtlDesc.minFilter = FilterModeToMinMagFilter(descriptor->minFilter);
-    mtlDesc.magFilter = FilterModeToMinMagFilter(descriptor->magFilter);
-    mtlDesc.mipFilter = FilterModeToMipFilter(descriptor->mipmapFilter);
+    mtlDesc.minFilter = FilterModeToMinMagFilter(descriptor->minFilter());
+    mtlDesc.magFilter = FilterModeToMinMagFilter(descriptor->magFilter());
+    mtlDesc.mipFilter = FilterModeToMipFilter(descriptor->mipmapFilter());
 
-    mtlDesc.sAddressMode = AddressMode(descriptor->addressModeU);
-    mtlDesc.tAddressMode = AddressMode(descriptor->addressModeV);
-    mtlDesc.rAddressMode = AddressMode(descriptor->addressModeW);
+    mtlDesc.sAddressMode = AddressMode(descriptor->addressModeU());
+    mtlDesc.tAddressMode = AddressMode(descriptor->addressModeV());
+    mtlDesc.rAddressMode = AddressMode(descriptor->addressModeW());
 
     mtlDesc.lodMinClamp = descriptor->lodMinClamp;
     mtlDesc.lodMaxClamp = descriptor->lodMaxClamp;

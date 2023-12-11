@@ -136,6 +136,8 @@ class CopyExternalTextureForBrowserTests : public Parent {
             this->device.CreateTexture(&externalTexturePlane1Desc);
 
         wgpu::ImageCopyTexture plane1 = {};
+        // (Off-topic) spot-test for defaulting of .aspect.
+        plane1.aspect = wgpu::TextureAspect::Undefined;
         plane1.texture = externalTexturePlane1;
         std::array<uint8_t, 8> uvPlaneData = {
             128, 128, 106, 255, 36, 4, 255, 126,

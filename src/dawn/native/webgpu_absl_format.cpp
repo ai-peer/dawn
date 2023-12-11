@@ -148,7 +148,7 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
     }
     s->Append(
         absl::StrFormat("[ImageCopyTexture texture: %s, mipLevel: %u, origin: %s, aspect: %s]",
-                        value->texture, value->mipLevel, &value->origin, value->aspect));
+                        value->texture, value->mipLevel, &value->origin, value->aspect()));
     return {true};
 }
 

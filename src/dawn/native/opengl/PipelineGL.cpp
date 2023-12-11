@@ -80,9 +80,9 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
 
     if (needsPlaceholderSampler) {
         SamplerDescriptor desc = {};
-        DAWN_ASSERT(desc.minFilter == wgpu::FilterMode::Nearest);
-        DAWN_ASSERT(desc.magFilter == wgpu::FilterMode::Nearest);
-        DAWN_ASSERT(desc.mipmapFilter == wgpu::MipmapFilterMode::Nearest);
+        DAWN_ASSERT(desc.minFilter() == wgpu::FilterMode::Nearest);
+        DAWN_ASSERT(desc.magFilter() == wgpu::FilterMode::Nearest);
+        DAWN_ASSERT(desc.mipmapFilter() == wgpu::MipmapFilterMode::Nearest);
         Ref<SamplerBase> sampler;
         DAWN_TRY_ASSIGN(sampler, layout->GetDevice()->GetOrCreateSampler(&desc));
         mPlaceholderSampler = ToBackend(std::move(sampler));

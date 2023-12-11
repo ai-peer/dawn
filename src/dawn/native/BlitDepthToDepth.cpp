@@ -144,7 +144,7 @@ MaybeError BlitDepthToDepth(DeviceBase* device,
         if (layer == 0u) {
             // The zero'th slice. We can use the original texture.
             TextureViewDescriptor viewDesc = {};
-            viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
+            viewDesc.aspect_undefaulted = wgpu::TextureAspect::DepthOnly;
             viewDesc.dimension = wgpu::TextureViewDimension::e2D;
             viewDesc.baseMipLevel = src.mipLevel;
             viewDesc.mipLevelCount = 1u;
@@ -166,13 +166,13 @@ MaybeError BlitDepthToDepth(DeviceBase* device,
                 intermediateSrc.texture = src.texture.Get();
                 intermediateSrc.mipLevel = src.mipLevel;
                 intermediateSrc.origin = {0, 0, layer};
-                intermediateSrc.aspect = wgpu::TextureAspect::All;
+                intermediateSrc.aspect_undefaulted = wgpu::TextureAspect::All;
 
                 ImageCopyTexture intermediateDst;
                 intermediateDst.texture = intermediateTexture.Get();
                 intermediateDst.mipLevel = 0u;
                 intermediateDst.origin = {0, 0, 0};
-                intermediateDst.aspect = wgpu::TextureAspect::All;
+                intermediateDst.aspect_undefaulted = wgpu::TextureAspect::All;
 
                 // Note: This does not recurse infinitely because the workaround to
                 // blit depth is not needed if the destination level and layer is 0,
@@ -183,7 +183,7 @@ MaybeError BlitDepthToDepth(DeviceBase* device,
 
             // Create a texture view pointing to the intermediate texture.
             TextureViewDescriptor viewDesc = {};
-            viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
+            viewDesc.aspect_undefaulted = wgpu::TextureAspect::DepthOnly;
             DAWN_TRY_ASSIGN(srcView, intermediateTexture->CreateView(&viewDesc));
         }
         srcViews.push_back(std::move(srcView));

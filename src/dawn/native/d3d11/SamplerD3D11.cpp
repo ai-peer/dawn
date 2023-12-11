@@ -45,7 +45,10 @@ D3D11_TEXTURE_ADDRESS_MODE D3D11TextureAddressMode(wgpu::AddressMode mode) {
             return D3D11_TEXTURE_ADDRESS_MIRROR;
         case wgpu::AddressMode::ClampToEdge:
             return D3D11_TEXTURE_ADDRESS_CLAMP;
+        case wgpu::AddressMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 D3D11_FILTER_TYPE D3D11FilterType(wgpu::FilterMode mode) {
@@ -54,7 +57,10 @@ D3D11_FILTER_TYPE D3D11FilterType(wgpu::FilterMode mode) {
             return D3D11_FILTER_TYPE_POINT;
         case wgpu::FilterMode::Linear:
             return D3D11_FILTER_TYPE_LINEAR;
+        case wgpu::FilterMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 D3D11_FILTER_TYPE D3D11MipmapFilterType(wgpu::MipmapFilterMode mode) {
@@ -63,7 +69,10 @@ D3D11_FILTER_TYPE D3D11MipmapFilterType(wgpu::MipmapFilterMode mode) {
             return D3D11_FILTER_TYPE_POINT;
         case wgpu::MipmapFilterMode::Linear:
             return D3D11_FILTER_TYPE_LINEAR;
+        case wgpu::MipmapFilterMode::Undefined:
+            break;
     }
+    DAWN_UNREACHABLE();
 }
 
 }  // namespace
@@ -77,9 +86,9 @@ ResultOrError<Ref<Sampler>> Sampler::Create(Device* device, const SamplerDescrip
 
 MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
     D3D11_SAMPLER_DESC samplerDesc = {};
-    D3D11_FILTER_TYPE minFilter = D3D11FilterType(descriptor->minFilter);
-    D3D11_FILTER_TYPE magFilter = D3D11FilterType(descriptor->magFilter);
-    D3D11_FILTER_TYPE mipmapFilter = D3D11MipmapFilterType(descriptor->mipmapFilter);
+    D3D11_FILTER_TYPE minFilter = D3D11FilterType(descriptor->minFilter());
+    D3D11_FILTER_TYPE magFilter = D3D11FilterType(descriptor->magFilter());
+    D3D11_FILTER_TYPE mipmapFilter = D3D11MipmapFilterType(descriptor->mipmapFilter());
 
     D3D11_FILTER_REDUCTION_TYPE reduction = descriptor->compare == wgpu::CompareFunction::Undefined
                                                 ? D3D11_FILTER_REDUCTION_TYPE_STANDARD
@@ -95,13 +104,13 @@ MaybeError Sampler::Initialize(const SamplerDescriptor* descriptor) {
             D3D11_ENCODE_BASIC_FILTER(minFilter, magFilter, mipmapFilter, reduction);
     }
 
-    samplerDesc.AddressU = D3D11TextureAddressMode(descriptor->addressModeU);
-    samplerDesc.AddressV = D3D11TextureAddressMode(descriptor->addressModeV);
-    samplerDesc.AddressW = D3D11TextureAddressMode(descriptor->addressModeW);
+    samplerDesc.AddressU = D3D11TextureAddressMode(descriptor->addressModeU());
+    samplerDesc.AddressV = D3D11TextureAddressMode(descriptor->addressModeV());
+    samplerDesc.AddressW = D3D11TextureAddressMode(descriptor->addressModeW());
     samplerDesc.MipLODBias = 0.f;
 
-    if (descriptor->compare != wgpu::CompareFunction::Undefined) {
-        samplerDesc.ComparisonFunc = ToD3D11ComparisonFunc(descriptor->compare);
+    if (descriptor->compare() != wgpu::CompareFunction::Undefined) {
+        samplerDesc.ComparisonFunc = ToD3D11ComparisonFunc(descriptor->compare());
     } else {
         // Still set the function so it's not garbage.
         samplerDesc.ComparisonFunc = D3D11_COMPARISON_NEVER;
