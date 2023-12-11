@@ -86,7 +86,7 @@ namespace {{native_namespace}} {
                 {{chainedStructType}} * nextInChain = nullptr;
             {% endif %}
             {% for member in type.members %}
-                {% set member_declaration = as_annotated_frontendType(member) + render_cpp_default_value(member) %}
+                {% set member_declaration = as_annotated_frontendType(member) + ("_undefaulted" if member.requires_struct_defaulting else "") + render_cpp_default_value(member) %}
                 {% if type.chained and loop.first %}
                     //* Align the first member after ChainedStruct to match the C struct layout.
                     //* It has to be aligned both to its natural and ChainedStruct's alignment.
@@ -96,6 +96,12 @@ namespace {{native_namespace}} {
                 {% endif %}
             {% endfor %}
 
+            {% for member in type.members %}
+                {% if member.requires_struct_defaulting %}
+                    {{as_frontendType(member.type)}} {{as_varName(member.name)}}() const;
+                    {{as_frontendType(member.type)}}& {{as_varName(member.name)}}();
+                {% endif %}
+            {% endfor %}
             // Equality operators, mostly for testing. Note that this tests
             // strict pointer-pointer equality if the struct contains member pointers.
             bool operator==(const {{as_cppType(type.name)}}& rhs) const;

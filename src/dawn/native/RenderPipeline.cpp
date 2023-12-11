@@ -150,7 +150,7 @@ MaybeError ValidateVertexBufferLayout(DeviceBase* device,
                                       const VertexBufferLayout* buffer,
                                       const EntryPointMetadata& metadata,
                                       VertexAttributeMask* attributesSetMask) {
-    DAWN_TRY(ValidateVertexStepMode(buffer->stepMode));
+    DAWN_TRY(ValidateVertexStepMode(buffer->stepMode()));
     DAWN_INVALID_IF(buffer->arrayStride > kMaxVertexBufferArrayStride,
                     "Vertex buffer arrayStride (%u) is larger than the maximum array stride (%u).",
                     buffer->arrayStride, kMaxVertexBufferArrayStride);
@@ -158,10 +158,10 @@ MaybeError ValidateVertexBufferLayout(DeviceBase* device,
     DAWN_INVALID_IF(buffer->arrayStride % 4 != 0,
                     "Vertex buffer arrayStride (%u) is not a multiple of 4.", buffer->arrayStride);
 
-    DAWN_INVALID_IF(
-        buffer->stepMode == wgpu::VertexStepMode::VertexBufferNotUsed && buffer->attributeCount > 0,
-        "attributeCount (%u) is not zero although vertex buffer stepMode is %s.",
-        buffer->attributeCount, wgpu::VertexStepMode::VertexBufferNotUsed);
+    DAWN_INVALID_IF(buffer->stepMode() == wgpu::VertexStepMode::VertexBufferNotUsed &&
+                        buffer->attributeCount > 0,
+                    "attributeCount (%u) is not zero although vertex buffer stepMode is %s.",
+                    buffer->attributeCount, wgpu::VertexStepMode::VertexBufferNotUsed);
 
     for (uint32_t i = 0; i < buffer->attributeCount; ++i) {
         DAWN_TRY_CONTEXT(ValidateVertexAttribute(device, &buffer->attributes[i], metadata,
@@ -255,18 +255,18 @@ MaybeError ValidatePrimitiveState(const DeviceBase* device, const PrimitiveState
     const auto* depthClipControl = descriptor.Get<PrimitiveDepthClipControl>();
     DAWN_INVALID_IF(depthClipControl && !device->HasFeature(Feature::DepthClipControl),
                     "%s is not supported", wgpu::FeatureName::DepthClipControl);
-    DAWN_TRY(ValidatePrimitiveTopology(descriptor->topology));
+    DAWN_TRY(ValidatePrimitiveTopology(descriptor->topology()));
     DAWN_TRY(ValidateIndexFormat(descriptor->stripIndexFormat));
-    DAWN_TRY(ValidateFrontFace(descriptor->frontFace));
-    DAWN_TRY(ValidateCullMode(descriptor->cullMode));
+    DAWN_TRY(ValidateFrontFace(descriptor->frontFace()));
+    DAWN_TRY(ValidateCullMode(descriptor->cullMode()));
 
     // Pipeline descriptors must have stripIndexFormat == undefined if they are using
     // non-strip topologies.
-    if (!IsStripPrimitiveTopology(descriptor->topology)) {
+    if (!IsStripPrimitiveTopology(descriptor->topology())) {
         DAWN_INVALID_IF(descriptor->stripIndexFormat != wgpu::IndexFormat::Undefined,
                         "StripIndexFormat (%s) is not undefined when using a non-strip primitive "
                         "topology (%s).",
-                        descriptor->stripIndexFormat, descriptor->topology);
+                        descriptor->stripIndexFormat, descriptor->topology());
     }
 
     return {};
@@ -278,21 +278,21 @@ MaybeError ValidateDepthStencilState(const DeviceBase* device,
         DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->depthCompare),
                          "validating depth compare function");
     }
-    DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->stencilFront.compare),
+    DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->stencilFront.compare()),
                      "validating stencil front compare function");
-    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilFront.failOp),
+    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilFront.failOp()),
                      "validating stencil front fail operation");
-    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilFront.depthFailOp),
+    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilFront.depthFailOp()),
                      "validating stencil front depth fail operation");
-    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilFront.passOp),
+    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilFront.passOp()),
                      "validating stencil front pass operation");
-    DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->stencilBack.compare),
+    DAWN_TRY_CONTEXT(ValidateCompareFunction(descriptor->stencilBack.compare()),
                      "validating stencil back compare function");
-    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilBack.failOp),
+    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilBack.failOp()),
                      "validating stencil back fail operation");
-    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilBack.depthFailOp),
+    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilBack.depthFailOp()),
                      "validating stencil back depth fail operation");
-    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilBack.passOp),
+    DAWN_TRY_CONTEXT(ValidateStencilOperation(descriptor->stencilBack.passOp()),
                      "validating stencil back pass operation");
 
     const Format* format;
@@ -309,13 +309,13 @@ MaybeError ValidateDepthStencilState(const DeviceBase* device,
     DAWN_INVALID_IF(
         format->HasDepth() && descriptor->depthCompare == wgpu::CompareFunction::Undefined &&
             (descriptor->depthWriteEnabled ||
-             descriptor->stencilFront.depthFailOp != wgpu::StencilOperation::Keep ||
-             descriptor->stencilBack.depthFailOp != wgpu::StencilOperation::Keep),
+             descriptor->stencilFront.depthFailOp() != wgpu::StencilOperation::Keep ||
+             descriptor->stencilBack.depthFailOp() != wgpu::StencilOperation::Keep),
         "Depth stencil format (%s) has a depth aspect and depthCompare is %s while it's actually "
         "used by depthWriteEnabled (%u), or stencil front depth fail operation (%s), or "
         "stencil back depth fail operation (%s).",
         descriptor->format, wgpu::CompareFunction::Undefined, descriptor->depthWriteEnabled,
-        descriptor->stencilFront.depthFailOp, descriptor->stencilBack.depthFailOp);
+        descriptor->stencilFront.depthFailOp(), descriptor->stencilBack.depthFailOp());
 
     UnpackedPtr<DepthStencilState> unpacked;
     DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
@@ -374,39 +374,39 @@ MaybeError ValidateMultisampleState(const DeviceBase* device, const MultisampleS
 
 MaybeError ValidateBlendComponent(BlendComponent blendComponent, bool dualSourceBlendingEnabled) {
     if (!dualSourceBlendingEnabled) {
-        DAWN_INVALID_IF(blendComponent.srcFactor == wgpu::BlendFactor::Src1 ||
-                            blendComponent.srcFactor == wgpu::BlendFactor::OneMinusSrc1 ||
-                            blendComponent.srcFactor == wgpu::BlendFactor::Src1Alpha ||
-                            blendComponent.srcFactor == wgpu::BlendFactor::OneMinusSrc1Alpha,
+        DAWN_INVALID_IF(blendComponent.srcFactor() == wgpu::BlendFactor::Src1 ||
+                            blendComponent.srcFactor() == wgpu::BlendFactor::OneMinusSrc1 ||
+                            blendComponent.srcFactor() == wgpu::BlendFactor::Src1Alpha ||
+                            blendComponent.srcFactor() == wgpu::BlendFactor::OneMinusSrc1Alpha,
                         "Source blend factor is %s while dualSourceBlending is not enabled.",
-                        blendComponent.srcFactor);
+                        blendComponent.srcFactor());
 
-        DAWN_INVALID_IF(blendComponent.dstFactor == wgpu::BlendFactor::Src1 ||
-                            blendComponent.dstFactor == wgpu::BlendFactor::OneMinusSrc1 ||
-                            blendComponent.dstFactor == wgpu::BlendFactor::Src1Alpha ||
-                            blendComponent.dstFactor == wgpu::BlendFactor::OneMinusSrc1Alpha,
+        DAWN_INVALID_IF(blendComponent.dstFactor() == wgpu::BlendFactor::Src1 ||
+                            blendComponent.dstFactor() == wgpu::BlendFactor::OneMinusSrc1 ||
+                            blendComponent.dstFactor() == wgpu::BlendFactor::Src1Alpha ||
+                            blendComponent.dstFactor() == wgpu::BlendFactor::OneMinusSrc1Alpha,
                         "Destination blend factor is %s while dualSourceBlending is not enabled.",
-                        blendComponent.dstFactor);
+                        blendComponent.dstFactor());
     }
 
-    if (blendComponent.operation == wgpu::BlendOperation::Min ||
-        blendComponent.operation == wgpu::BlendOperation::Max) {
-        DAWN_INVALID_IF(blendComponent.srcFactor != wgpu::BlendFactor::One ||
-                            blendComponent.dstFactor != wgpu::BlendFactor::One,
+    if (blendComponent.operation() == wgpu::BlendOperation::Min ||
+        blendComponent.operation() == wgpu::BlendOperation::Max) {
+        DAWN_INVALID_IF(blendComponent.srcFactor() != wgpu::BlendFactor::One ||
+                            blendComponent.dstFactor() != wgpu::BlendFactor::One,
                         "Blend factor is not %s when blend operation is %s.",
-                        wgpu::BlendFactor::One, blendComponent.operation);
+                        wgpu::BlendFactor::One, blendComponent.operation());
     }
 
     return {};
 }
 
 MaybeError ValidateBlendState(DeviceBase* device, const BlendState* descriptor) {
-    DAWN_TRY(ValidateBlendOperation(descriptor->alpha.operation));
-    DAWN_TRY(ValidateBlendFactor(descriptor->alpha.srcFactor));
-    DAWN_TRY(ValidateBlendFactor(descriptor->alpha.dstFactor));
-    DAWN_TRY(ValidateBlendOperation(descriptor->color.operation));
-    DAWN_TRY(ValidateBlendFactor(descriptor->color.srcFactor));
-    DAWN_TRY(ValidateBlendFactor(descriptor->color.dstFactor));
+    DAWN_TRY(ValidateBlendOperation(descriptor->alpha.operation()));
+    DAWN_TRY(ValidateBlendFactor(descriptor->alpha.srcFactor()));
+    DAWN_TRY(ValidateBlendFactor(descriptor->alpha.dstFactor()));
+    DAWN_TRY(ValidateBlendOperation(descriptor->color.operation()));
+    DAWN_TRY(ValidateBlendFactor(descriptor->color.srcFactor()));
+    DAWN_TRY(ValidateBlendFactor(descriptor->color.dstFactor()));
 
     bool dualSourceBlendingEnabled = device->HasFeature(Feature::DualSourceBlending);
     DAWN_TRY(ValidateBlendComponent(descriptor->alpha, dualSourceBlendingEnabled));
@@ -465,11 +465,11 @@ MaybeError ValidateColorTargetState(
 
     if (descriptor.blend && fragmentOutputVariable.componentCount < 4u) {
         // No alpha channel output, make sure there's no alpha involved in the blending operation.
-        DAWN_INVALID_IF(BlendFactorContainsSrcAlpha(descriptor.blend->color.srcFactor) ||
-                            BlendFactorContainsSrcAlpha(descriptor.blend->color.dstFactor),
+        DAWN_INVALID_IF(BlendFactorContainsSrcAlpha(descriptor.blend->color.srcFactor()) ||
+                            BlendFactorContainsSrcAlpha(descriptor.blend->color.dstFactor()),
                         "Color blending srcFactor (%s) or dstFactor (%s) is reading alpha "
                         "but it is missing from fragment output.",
-                        descriptor.blend->color.srcFactor, descriptor.blend->color.dstFactor);
+                        descriptor.blend->color.srcFactor(), descriptor.blend->color.dstFactor());
     }
 
     return {};
@@ -512,35 +512,35 @@ MaybeError ValidateColorTargetStatesMatch(ColorAttachmentIndex firstColorTargetI
         const BlendState& firstBlendState = *firstColorTargetState->blend;
 
         DAWN_INVALID_IF(
-            firstBlendState.color.operation != currBlendState.color.operation,
+            firstBlendState.color.operation() != currBlendState.color.operation(),
             "targets[%u].color.operation (%s) does not match targets[%u].color.operation (%s).",
-            firstColorTargetIndex, firstBlendState.color.operation, targetIndex,
-            currBlendState.color.operation);
+            firstColorTargetIndex, firstBlendState.color.operation(), targetIndex,
+            currBlendState.color.operation());
         DAWN_INVALID_IF(
-            firstBlendState.color.srcFactor != currBlendState.color.srcFactor,
+            firstBlendState.color.srcFactor() != currBlendState.color.srcFactor(),
             "targets[%u].color.srcFactor (%s) does not match targets[%u].color.srcFactor (%s).",
-            firstColorTargetIndex, firstBlendState.color.srcFactor, targetIndex,
-            currBlendState.color.srcFactor);
+            firstColorTargetIndex, firstBlendState.color.srcFactor(), targetIndex,
+            currBlendState.color.srcFactor());
         DAWN_INVALID_IF(
-            firstBlendState.color.dstFactor != currBlendState.color.dstFactor,
+            firstBlendState.color.dstFactor() != currBlendState.color.dstFactor(),
             "targets[%u].color.dstFactor (%s) does not match targets[%u].color.dstFactor (%s).",
-            firstColorTargetIndex, firstBlendState.color.dstFactor, targetIndex,
-            currBlendState.color.dstFactor);
+            firstColorTargetIndex, firstBlendState.color.dstFactor(), targetIndex,
+            currBlendState.color.dstFactor());
         DAWN_INVALID_IF(
-            firstBlendState.alpha.operation != currBlendState.alpha.operation,
+            firstBlendState.alpha.operation() != currBlendState.alpha.operation(),
             "targets[%u].alpha.operation (%s) does not match targets[%u].alpha.operation (%s).",
-            firstColorTargetIndex, firstBlendState.alpha.operation, targetIndex,
-            currBlendState.alpha.operation);
+            firstColorTargetIndex, firstBlendState.alpha.operation(), targetIndex,
+            currBlendState.alpha.operation());
         DAWN_INVALID_IF(
-            firstBlendState.alpha.srcFactor != currBlendState.alpha.srcFactor,
+            firstBlendState.alpha.srcFactor() != currBlendState.alpha.srcFactor(),
             "targets[%u].alpha.srcFactor (%s) does not match targets[%u].alpha.srcFactor (%s).",
-            firstColorTargetIndex, firstBlendState.alpha.srcFactor, targetIndex,
-            currBlendState.alpha.srcFactor);
+            firstColorTargetIndex, firstBlendState.alpha.srcFactor(), targetIndex,
+            currBlendState.alpha.srcFactor());
         DAWN_INVALID_IF(
-            firstBlendState.alpha.dstFactor != currBlendState.alpha.dstFactor,
+            firstBlendState.alpha.dstFactor() != currBlendState.alpha.dstFactor(),
             "targets[%u].alpha.dstFactor (%s) does not match targets[%u].alpha.dstFactor (%s).",
-            firstColorTargetIndex, firstBlendState.alpha.dstFactor, targetIndex,
-            currBlendState.alpha.dstFactor);
+            firstColorTargetIndex, firstBlendState.alpha.dstFactor(), targetIndex,
+            currBlendState.alpha.dstFactor());
     }
     return {};
 }
@@ -764,7 +764,7 @@ MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
     ShaderModuleEntryPoint vertexEntryPoint;
     DAWN_TRY_ASSIGN_CONTEXT(vertexEntryPoint,
                             ValidateVertexState(device, &descriptor->vertex, descriptor->layout,
-                                                descriptor->primitive.topology),
+                                                descriptor->primitive.topology()),
                             "validating vertex state.");
 
     DAWN_TRY_CONTEXT(ValidatePrimitiveState(device, &descriptor->primitive),
@@ -826,14 +826,14 @@ std::vector<StageAndDescriptor> GetRenderStagesAndSetPlaceholderShader(
 }
 
 bool StencilTestEnabled(const DepthStencilState* depthStencil) {
-    return depthStencil->stencilBack.compare != wgpu::CompareFunction::Always ||
-           depthStencil->stencilBack.failOp != wgpu::StencilOperation::Keep ||
-           depthStencil->stencilBack.depthFailOp != wgpu::StencilOperation::Keep ||
-           depthStencil->stencilBack.passOp != wgpu::StencilOperation::Keep ||
-           depthStencil->stencilFront.compare != wgpu::CompareFunction::Always ||
-           depthStencil->stencilFront.failOp != wgpu::StencilOperation::Keep ||
-           depthStencil->stencilFront.depthFailOp != wgpu::StencilOperation::Keep ||
-           depthStencil->stencilFront.passOp != wgpu::StencilOperation::Keep;
+    return depthStencil->stencilBack.compare() != wgpu::CompareFunction::Always ||
+           depthStencil->stencilBack.failOp() != wgpu::StencilOperation::Keep ||
+           depthStencil->stencilBack.depthFailOp() != wgpu::StencilOperation::Keep ||
+           depthStencil->stencilBack.passOp() != wgpu::StencilOperation::Keep ||
+           depthStencil->stencilFront.compare() != wgpu::CompareFunction::Always ||
+           depthStencil->stencilFront.failOp() != wgpu::StencilOperation::Keep ||
+           depthStencil->stencilFront.depthFailOp() != wgpu::StencilOperation::Keep ||
+           depthStencil->stencilFront.passOp() != wgpu::StencilOperation::Keep;
 }
 
 // RenderPipelineBase
@@ -851,23 +851,24 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
         ityp::SpanFromUntyped<VertexBufferSlot>(descriptor->vertex.buffers, mVertexBufferCount);
     for (auto [slot, buffer] : Enumerate(buffers)) {
         // Skip unused slots
-        if (buffer.stepMode == wgpu::VertexStepMode::VertexBufferNotUsed) {
+        if (buffer.stepMode() == wgpu::VertexStepMode::VertexBufferNotUsed) {
             continue;
         }
 
         mVertexBuffersUsed.set(slot);
         mVertexBufferInfos[slot].arrayStride = buffer.arrayStride;
-        mVertexBufferInfos[slot].stepMode = buffer.stepMode;
+        mVertexBufferInfos[slot].stepMode = buffer.stepMode();
         mVertexBufferInfos[slot].usedBytesInStride = 0;
         mVertexBufferInfos[slot].lastStride = 0;
-        switch (buffer.stepMode) {
+        switch (buffer.stepMode()) {
             case wgpu::VertexStepMode::Vertex:
                 mVertexBuffersUsedAsVertexBuffer.set(slot);
                 break;
             case wgpu::VertexStepMode::Instance:
                 mVertexBuffersUsedAsInstanceBuffer.set(slot);
                 break;
-            default:
+            case wgpu::VertexStepMode::VertexBufferNotUsed:
+            case wgpu::VertexStepMode::Undefined:
                 DAWN_UNREACHABLE();
         }
 
@@ -915,20 +916,20 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
         }
         if (format.HasDepth() && mDepthStencil.depthCompare == wgpu::CompareFunction::Undefined &&
             !mDepthStencil.depthWriteEnabled &&
-            mDepthStencil.stencilFront.depthFailOp == wgpu::StencilOperation::Keep &&
-            mDepthStencil.stencilBack.depthFailOp == wgpu::StencilOperation::Keep) {
+            mDepthStencil.stencilFront.depthFailOp() == wgpu::StencilOperation::Keep &&
+            mDepthStencil.stencilBack.depthFailOp() == wgpu::StencilOperation::Keep) {
             mDepthStencil.depthCompare = wgpu::CompareFunction::Always;
         }
         mWritesDepth = mDepthStencil.depthWriteEnabled;
         if (mDepthStencil.stencilWriteMask) {
-            if ((mPrimitive.cullMode != wgpu::CullMode::Front &&
-                 (mDepthStencil.stencilFront.failOp != wgpu::StencilOperation::Keep ||
-                  mDepthStencil.stencilFront.depthFailOp != wgpu::StencilOperation::Keep ||
-                  mDepthStencil.stencilFront.passOp != wgpu::StencilOperation::Keep)) ||
-                (mPrimitive.cullMode != wgpu::CullMode::Back &&
-                 (mDepthStencil.stencilBack.failOp != wgpu::StencilOperation::Keep ||
-                  mDepthStencil.stencilBack.depthFailOp != wgpu::StencilOperation::Keep ||
-                  mDepthStencil.stencilBack.passOp != wgpu::StencilOperation::Keep))) {
+            if ((mPrimitive.cullMode() != wgpu::CullMode::Front &&
+                 (mDepthStencil.stencilFront.failOp() != wgpu::StencilOperation::Keep ||
+                  mDepthStencil.stencilFront.depthFailOp() != wgpu::StencilOperation::Keep ||
+                  mDepthStencil.stencilFront.passOp() != wgpu::StencilOperation::Keep)) ||
+                (mPrimitive.cullMode() != wgpu::CullMode::Back &&
+                 (mDepthStencil.stencilBack.failOp() != wgpu::StencilOperation::Keep ||
+                  mDepthStencil.stencilBack.depthFailOp() != wgpu::StencilOperation::Keep ||
+                  mDepthStencil.stencilBack.passOp() != wgpu::StencilOperation::Keep))) {
                 mWritesStencil = true;
             }
         }
@@ -940,14 +941,14 @@ RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
         mDepthStencil.format = wgpu::TextureFormat::Undefined;
         mDepthStencil.depthWriteEnabled = false;
         mDepthStencil.depthCompare = wgpu::CompareFunction::Always;
-        mDepthStencil.stencilBack.compare = wgpu::CompareFunction::Always;
-        mDepthStencil.stencilBack.failOp = wgpu::StencilOperation::Keep;
-        mDepthStencil.stencilBack.depthFailOp = wgpu::StencilOperation::Keep;
-        mDepthStencil.stencilBack.passOp = wgpu::StencilOperation::Keep;
-        mDepthStencil.stencilFront.compare = wgpu::CompareFunction::Always;
-        mDepthStencil.stencilFront.failOp = wgpu::StencilOperation::Keep;
-        mDepthStencil.stencilFront.depthFailOp = wgpu::StencilOperation::Keep;
-        mDepthStencil.stencilFront.passOp = wgpu::StencilOperation::Keep;
+        mDepthStencil.stencilBack.compare() = wgpu::CompareFunction::Always;
+        mDepthStencil.stencilBack.failOp() = wgpu::StencilOperation::Keep;
+        mDepthStencil.stencilBack.depthFailOp() = wgpu::StencilOperation::Keep;
+        mDepthStencil.stencilBack.passOp() = wgpu::StencilOperation::Keep;
+        mDepthStencil.stencilFront.compare() = wgpu::CompareFunction::Always;
+        mDepthStencil.stencilFront.failOp() = wgpu::StencilOperation::Keep;
+        mDepthStencil.stencilFront.depthFailOp() = wgpu::StencilOperation::Keep;
+        mDepthStencil.stencilFront.passOp() = wgpu::StencilOperation::Keep;
         mDepthStencil.stencilReadMask = 0xff;
         mDepthStencil.stencilWriteMask = 0xff;
         mDepthStencil.depthBias = 0;
@@ -1066,7 +1067,7 @@ const DepthStencilState* RenderPipelineBase::GetDepthStencilState() const {
 
 wgpu::PrimitiveTopology RenderPipelineBase::GetPrimitiveTopology() const {
     DAWN_ASSERT(!IsError());
-    return mPrimitive.topology;
+    return mPrimitive.topology();
 }
 
 wgpu::IndexFormat RenderPipelineBase::GetStripIndexFormat() const {
@@ -1076,12 +1077,12 @@ wgpu::IndexFormat RenderPipelineBase::GetStripIndexFormat() const {
 
 wgpu::CullMode RenderPipelineBase::GetCullMode() const {
     DAWN_ASSERT(!IsError());
-    return mPrimitive.cullMode;
+    return mPrimitive.cullMode();
 }
 
 wgpu::FrontFace RenderPipelineBase::GetFrontFace() const {
     DAWN_ASSERT(!IsError());
-    return mPrimitive.frontFace;
+    return mPrimitive.frontFace();
 }
 
 bool RenderPipelineBase::IsDepthBiasEnabled() const {
@@ -1181,10 +1182,10 @@ size_t RenderPipelineBase::ComputeContentHash() {
         const ColorTargetState& desc = *GetColorTargetState(i);
         recorder.Record(desc.writeMask);
         if (desc.blend != nullptr) {
-            recorder.Record(desc.blend->color.operation, desc.blend->color.srcFactor,
-                            desc.blend->color.dstFactor);
-            recorder.Record(desc.blend->alpha.operation, desc.blend->alpha.srcFactor,
-                            desc.blend->alpha.dstFactor);
+            recorder.Record(desc.blend->color.operation(), desc.blend->color.srcFactor(),
+                            desc.blend->color.dstFactor());
+            recorder.Record(desc.blend->alpha.operation(), desc.blend->alpha.srcFactor(),
+                            desc.blend->alpha.dstFactor());
         }
     }
 
@@ -1192,10 +1193,10 @@ size_t RenderPipelineBase::ComputeContentHash() {
         const DepthStencilState& desc = mDepthStencil;
         recorder.Record(desc.depthWriteEnabled, desc.depthCompare);
         recorder.Record(desc.stencilReadMask, desc.stencilWriteMask);
-        recorder.Record(desc.stencilFront.compare, desc.stencilFront.failOp,
-                        desc.stencilFront.depthFailOp, desc.stencilFront.passOp);
-        recorder.Record(desc.stencilBack.compare, desc.stencilBack.failOp,
-                        desc.stencilBack.depthFailOp, desc.stencilBack.passOp);
+        recorder.Record(desc.stencilFront.compare(), desc.stencilFront.failOp(),
+                        desc.stencilFront.depthFailOp(), desc.stencilFront.passOp());
+        recorder.Record(desc.stencilBack.compare(), desc.stencilBack.failOp(),
+                        desc.stencilBack.depthFailOp(), desc.stencilBack.passOp());
         recorder.Record(desc.depthBias, desc.depthBiasSlopeScale, desc.depthBiasClamp);
     }
 
@@ -1213,8 +1214,8 @@ size_t RenderPipelineBase::ComputeContentHash() {
     }
 
     // Record primitive state
-    recorder.Record(mPrimitive.topology, mPrimitive.stripIndexFormat, mPrimitive.frontFace,
-                    mPrimitive.cullMode, mUnclippedDepth);
+    recorder.Record(mPrimitive.topology(), mPrimitive.stripIndexFormat, mPrimitive.frontFace(),
+                    mPrimitive.cullMode(), mUnclippedDepth);
 
     // Record multisample state
     // Sample count hashed as part of the attachment state
@@ -1247,14 +1248,14 @@ bool RenderPipelineBase::EqualityFunc::operator()(const RenderPipelineBase* a,
                 return false;
             }
             if (descA.blend != nullptr) {
-                if (descA.blend->color.operation != descB.blend->color.operation ||
-                    descA.blend->color.srcFactor != descB.blend->color.srcFactor ||
-                    descA.blend->color.dstFactor != descB.blend->color.dstFactor) {
+                if (descA.blend->color.operation() != descB.blend->color.operation() ||
+                    descA.blend->color.srcFactor() != descB.blend->color.srcFactor() ||
+                    descA.blend->color.dstFactor() != descB.blend->color.dstFactor()) {
                     return false;
                 }
-                if (descA.blend->alpha.operation != descB.blend->alpha.operation ||
-                    descA.blend->alpha.srcFactor != descB.blend->alpha.srcFactor ||
-                    descA.blend->alpha.dstFactor != descB.blend->alpha.dstFactor) {
+                if (descA.blend->alpha.operation() != descB.blend->alpha.operation() ||
+                    descA.blend->alpha.srcFactor() != descB.blend->alpha.srcFactor() ||
+                    descA.blend->alpha.dstFactor() != descB.blend->alpha.dstFactor()) {
                     return false;
                 }
             }
@@ -1277,16 +1278,16 @@ bool RenderPipelineBase::EqualityFunc::operator()(const RenderPipelineBase* a,
                 stateA.depthBiasClamp != stateB.depthBiasClamp) {
                 return false;
             }
-            if (stateA.stencilFront.compare != stateB.stencilFront.compare ||
-                stateA.stencilFront.failOp != stateB.stencilFront.failOp ||
-                stateA.stencilFront.depthFailOp != stateB.stencilFront.depthFailOp ||
-                stateA.stencilFront.passOp != stateB.stencilFront.passOp) {
+            if (stateA.stencilFront.compare() != stateB.stencilFront.compare() ||
+                stateA.stencilFront.failOp() != stateB.stencilFront.failOp() ||
+                stateA.stencilFront.depthFailOp() != stateB.stencilFront.depthFailOp() ||
+                stateA.stencilFront.passOp() != stateB.stencilFront.passOp()) {
                 return false;
             }
-            if (stateA.stencilBack.compare != stateB.stencilBack.compare ||
-                stateA.stencilBack.failOp != stateB.stencilBack.failOp ||
-                stateA.stencilBack.depthFailOp != stateB.stencilBack.depthFailOp ||
-                stateA.stencilBack.passOp != stateB.stencilBack.passOp) {
+            if (stateA.stencilBack.compare() != stateB.stencilBack.compare() ||
+                stateA.stencilBack.failOp() != stateB.stencilBack.failOp() ||
+                stateA.stencilBack.depthFailOp() != stateB.stencilBack.depthFailOp() ||
+                stateA.stencilBack.passOp() != stateB.stencilBack.passOp()) {
                 return false;
             }
             if (stateA.stencilReadMask != stateB.stencilReadMask ||
@@ -1327,9 +1328,9 @@ bool RenderPipelineBase::EqualityFunc::operator()(const RenderPipelineBase* a,
     {
         const PrimitiveState& stateA = a->mPrimitive;
         const PrimitiveState& stateB = b->mPrimitive;
-        if (stateA.topology != stateB.topology ||
+        if (stateA.topology() != stateB.topology() ||
             stateA.stripIndexFormat != stateB.stripIndexFormat ||
-            stateA.frontFace != stateB.frontFace || stateA.cullMode != stateB.cullMode ||
+            stateA.frontFace() != stateB.frontFace() || stateA.cullMode() != stateB.cullMode() ||
             a->mUnclippedDepth != b->mUnclippedDepth) {
             return false;
         }

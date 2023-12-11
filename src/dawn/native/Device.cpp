@@ -911,7 +911,7 @@ ResultOrError<Ref<TextureViewBase>> DeviceBase::CreateImplicitMSAARenderTextureV
     DAWN_ASSERT(IsLockedByCurrentThreadIfNeeded());
 
     TextureDescriptor desc = {};
-    desc.dimension = wgpu::TextureDimension::e2D;
+    desc.dimension() = wgpu::TextureDimension::e2D;
     desc.format = singleSampledTextureView->GetFormat().format;
     desc.size = {singleSampledTextureView->GetSingleSubresourceVirtualSize().width,
                  singleSampledTextureView->GetSingleSubresourceVirtualSize().height, 1};
@@ -936,7 +936,7 @@ DeviceBase::GetOrCreatePlaceholderTextureViewForExternalTexture() {
     if (!mExternalTexturePlaceholderView.Get()) {
         Ref<TextureBase> externalTexturePlaceholder;
         TextureDescriptor textureDesc;
-        textureDesc.dimension = wgpu::TextureDimension::e2D;
+        textureDesc.dimension() = wgpu::TextureDimension::e2D;
         textureDesc.format = wgpu::TextureFormat::RGBA8Unorm;
         textureDesc.label = "Dawn_External_Texture_Placeholder_Texture";
         textureDesc.size = {1, 1, 1};
@@ -946,7 +946,7 @@ DeviceBase::GetOrCreatePlaceholderTextureViewForExternalTexture() {
 
         TextureViewDescriptor textureViewDesc;
         textureViewDesc.arrayLayerCount = 1;
-        textureViewDesc.aspect = wgpu::TextureAspect::All;
+        textureViewDesc.aspect() = wgpu::TextureAspect::All;
         textureViewDesc.baseArrayLayer = 0;
         textureViewDesc.dimension = wgpu::TextureViewDimension::e2D;
         textureViewDesc.format = wgpu::TextureFormat::RGBA8Unorm;

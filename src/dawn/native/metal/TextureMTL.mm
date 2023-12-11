@@ -661,8 +661,8 @@ MTLPixelFormat MetalPixelFormat(const DeviceBase* device, wgpu::TextureFormat fo
 MaybeError ValidateIOSurfaceCanBeWrapped(const DeviceBase*,
                                          const UnpackedPtr<TextureDescriptor>& descriptor,
                                          IOSurfaceRef ioSurface) {
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
-                    "Texture dimension (%s) is not %s.", descriptor->dimension,
+    DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D,
+                    "Texture dimension (%s) is not %s.", descriptor->dimension(),
                     wgpu::TextureDimension::e2D);
 
     DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",
@@ -726,6 +726,9 @@ NSRef<MTLTextureDescriptor> Texture::CreateMetalTextureDescriptor() const {
     // Choose the correct MTLTextureType and paper over differences in how the array layer count
     // is specified.
     switch (GetDimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
+
         case wgpu::TextureDimension::e1D:
             mtlDesc.arrayLength = 1;
             mtlDesc.depth = 1;
@@ -769,7 +772,7 @@ ResultOrError<Ref<Texture>> Texture::Create(Device* device,
         ExternalImageDescriptorIOSurface ioSurfaceImageDesc;
         ioSurfaceImageDesc.isInitialized = false;
 
-        DAWN_ASSERT(descriptor->dimension == wgpu::TextureDimension::e2D &&
+        DAWN_ASSERT(descriptor->dimension() == wgpu::TextureDimension::e2D &&
                     descriptor->mipLevelCount == 1 && descriptor->size.depthOrArrayLayers == 1);
 
         IOSurfaceRef iosurface = CreateMultiPlanarIOSurface(
@@ -1320,7 +1323,7 @@ MaybeError TextureView::Initialize(const TextureViewDescriptor* descriptor) {
         return {};
     }
 
-    Aspect aspect = SelectFormatAspects(texture->GetFormat(), descriptor->aspect);
+    Aspect aspect = SelectFormatAspects(texture->GetFormat(), descriptor->aspect());
     id<MTLTexture> mtlTexture = texture->GetMTLTexture(aspect);
 
     bool needsNewView = RequiresCreatingNewTextureView(texture, descriptor);

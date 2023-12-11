@@ -277,6 +277,9 @@ void FillVulkanCreateInfoSizesAndType(const Texture& texture, VkImageCreateInfo*
     // Fill in the image type, and paper over differences in how the array layer count is
     // specified between WebGPU and Vulkan.
     switch (texture.GetDimension()) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
+
         case wgpu::TextureDimension::e1D:
             info->imageType = VK_IMAGE_TYPE_1D;
             info->extent = {size.width, 1, 1};
@@ -655,8 +658,8 @@ VkSampleCountFlagBits VulkanSampleCount(uint32_t sampleCount) {
 
 MaybeError ValidateVulkanImageCanBeWrapped(const DeviceBase*,
                                            const UnpackedPtr<TextureDescriptor>& descriptor) {
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
-                    "Texture dimension (%s) is not %s.", descriptor->dimension,
+    DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D,
+                    "Texture dimension (%s) is not %s.", descriptor->dimension(),
                     wgpu::TextureDimension::e2D);
 
     DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",

@@ -201,7 +201,7 @@ ResultOrError<InternalPipelineStore::BlitR8ToStencilPipelines> GetOrCreateR8ToSt
     dsState.format = format;
     dsState.depthWriteEnabled = false;
     dsState.depthCompare = wgpu::CompareFunction::Always;
-    dsState.stencilFront.passOp = wgpu::StencilOperation::Replace;
+    dsState.stencilFront.passOp() = wgpu::StencilOperation::Replace;
 
     RenderPipelineDescriptor renderPipelineDesc = {};
     renderPipelineDesc.layout = pipelineLayout.Get();

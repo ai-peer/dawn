@@ -34,12 +34,18 @@
 namespace dawn::native {
 
 Aspect ConvertSingleAspect(const Format& format, wgpu::TextureAspect aspect) {
+    if (aspect == wgpu::TextureAspect::Undefined) {
+        aspect = wgpu::TextureAspect::All;
+    }
     Aspect aspectMask = ConvertAspect(format, aspect);
     DAWN_ASSERT(HasOneBit(aspectMask));
     return aspectMask;
 }
 
 Aspect ConvertAspect(const Format& format, wgpu::TextureAspect aspect) {
+    if (aspect == wgpu::TextureAspect::Undefined) {
+        aspect = wgpu::TextureAspect::All;
+    }
     Aspect aspectMask = SelectFormatAspects(format, aspect);
     DAWN_ASSERT(aspectMask != Aspect::None);
     return aspectMask;
@@ -95,6 +101,8 @@ Aspect SelectFormatAspects(const Format& format, wgpu::TextureAspect aspect) {
             return format.aspects & Aspect::Plane1;
         case wgpu::TextureAspect::Plane2Only:
             return format.aspects & Aspect::Plane2;
+        case wgpu::TextureAspect::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }

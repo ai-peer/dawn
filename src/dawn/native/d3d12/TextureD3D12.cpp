@@ -118,6 +118,8 @@ D3D12_RESOURCE_FLAGS D3D12ResourceFlags(wgpu::TextureUsage usage, const Format& 
 
 D3D12_RESOURCE_DIMENSION D3D12TextureDimension(wgpu::TextureDimension dimension) {
     switch (dimension) {
+        case wgpu::TextureDimension::Undefined:
+            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
             return D3D12_RESOURCE_DIMENSION_TEXTURE1D;
         case wgpu::TextureDimension::e2D:
@@ -708,6 +710,7 @@ D3D12_RENDER_TARGET_VIEW_DESC Texture::GetRTVDescriptor(const Format& format,
             rtvDesc.Texture3D.WSize = sliceCount;
             break;
         case wgpu::TextureDimension::e1D:
+        case wgpu::TextureDimension::Undefined:
             DAWN_UNREACHABLE();
             break;
     }
@@ -951,7 +954,7 @@ TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* desc
                 mSrvDesc.Format = DXGI_FORMAT_R16_UNORM;
                 break;
             case wgpu::TextureFormat::Stencil8: {
-                Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect);
+                Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect());
                 DAWN_ASSERT(aspects != Aspect::None);
                 if (!HasZeroOrOneBits(aspects)) {
                     // A single aspect is not selected. The texture view must not be
@@ -983,7 +986,7 @@ TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* desc
             }
             case wgpu::TextureFormat::Depth24PlusStencil8:
             case wgpu::TextureFormat::Depth32FloatStencil8: {
-                Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect);
+                Aspect aspects = SelectFormatAspects(textureFormat, descriptor->aspect());
                 DAWN_ASSERT(aspects != Aspect::None);
                 if (!HasZeroOrOneBits(aspects)) {
                     // A single aspect is not selected. The texture view must not be
@@ -1022,7 +1025,7 @@ TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* desc
     // Per plane view formats must have the plane slice number be the index of the plane in the
     // array of textures.
     if (texture->GetFormat().IsMultiPlanar()) {
-        const Aspect planeAspect = ConvertViewAspect(GetFormat(), descriptor->aspect);
+        const Aspect planeAspect = ConvertViewAspect(GetFormat(), descriptor->aspect());
         planeSlice = GetAspectIndex(planeAspect);
         mSrvDesc.Format =
             d3d::DXGITextureFormat(texture->GetFormat().GetAspectInfo(planeAspect).format);
@@ -1036,7 +1039,7 @@ TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* desc
     // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_srv
     // https://docs.microsoft.com/en-us/windows/desktop/api/d3d12/ns-d3d12-d3d12_tex2d_array_srv
     if (GetTexture()->IsMultisampledTexture()) {
-        switch (descriptor->dimension) {
+        switch (descriptor->dimension()) {
             case wgpu::TextureViewDimension::e2DArray:
                 DAWN_ASSERT(texture->GetArrayLayers() == 1);
                 [[fallthrough]];
@@ -1049,7 +1052,7 @@ TextureView::TextureView(TextureBase* texture, const TextureViewDescriptor* desc
                 DAWN_UNREACHABLE();
         }
     } else {
-        switch (descriptor->dimension) {
+        switch (descriptor->dimension()) {
             case wgpu::TextureViewDimension::e1D:
                 mSrvDesc.ViewDimension = D3D12_SRV_DIMENSION_TEXTURE1D;
                 mSrvDesc.Texture1D.MipLevels = descriptor->mipLevelCount;

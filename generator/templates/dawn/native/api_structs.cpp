@@ -63,22 +63,33 @@ namespace {{native_namespace}} {
                     "offsetof mismatch for {{CppType}}::nextInChain");
         {% endif %}
         {% for member in type.members %}
-            {% set memberName = member.name.camelCase() %}
-            static_assert(offsetof({{CppType}}, {{memberName}}) == offsetof({{CType}}, {{memberName}}),
+            {% set memberName = member.name.camelCase() + ("_undefaulted" if member.requires_struct_defaulting else "") %}
+            static_assert(offsetof({{CppType}}, {{memberName}}) == offsetof({{CType}}, {{member.name.camelCase()}}),
                          "offsetof mismatch for {{CppType}}::{{memberName}}");
         {% endfor %}
 
+        {% for member in type.members %}
+            {% if member.requires_struct_defaulting %}
+                {% set memberName = member.name.camelCase() + "_undefaulted" %}
+                {{as_frontendType(member.type)}} {{CppType}}::{{as_varName(member.name)}}() const {
+                    return {{memberName}} == {{namespace}}::{{as_cppType(member.type.name)}}::{{as_cppEnum(Name(member.type.zeroValueName))}} ? {{namespace}}::{{as_cppType(member.type.name)}}::{{as_cppEnum(Name(member.default_value))}} : {{memberName}};
+                }
+                {{as_frontendType(member.type)}}& {{CppType}}::{{as_varName(member.name)}}() {
+                    return {{memberName}};
+                }
+            {% endif %}
+        {% endfor %}
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
             return {% if type.extensible or type.chained -%}
                 (nextInChain == rhs.nextInChain) &&
             {%- endif %} std::tie(
                 {% for member in type.members %}
-                    {{member.name.camelCase()-}}
+                    {{member.name.camelCase() + ("_undefaulted" if member.requires_struct_defaulting else "")-}}
                     {{ "," if not loop.last else "" }}
                 {% endfor %}
             ) == std::tie(
                 {% for member in type.members %}
-                    rhs.{{member.name.camelCase()-}}
+                    rhs.{{member.name.camelCase() + ("_undefaulted" if member.requires_struct_defaulting else "")-}}
                     {{ "," if not loop.last else "" }}
                 {% endfor %}
             );

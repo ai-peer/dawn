@@ -51,24 +51,25 @@ MaybeError ValidateSamplerDescriptor(DeviceBase*, const SamplerDescriptor* descr
                     descriptor->lodMinClamp, descriptor->lodMaxClamp);
 
     if (descriptor->maxAnisotropy > 1) {
-        DAWN_INVALID_IF(descriptor->minFilter != wgpu::FilterMode::Linear ||
-                            descriptor->magFilter != wgpu::FilterMode::Linear ||
-                            descriptor->mipmapFilter != wgpu::MipmapFilterMode::Linear,
+        DAWN_INVALID_IF(descriptor->minFilter() != wgpu::FilterMode::Linear ||
+                            descriptor->magFilter() != wgpu::FilterMode::Linear ||
+                            descriptor->mipmapFilter() != wgpu::MipmapFilterMode::Linear,
                         "One of minFilter (%s), magFilter (%s) or mipmapFilter (%s) is not %s "
                         "while using anisotropic filter (maxAnisotropy is %f)",
-                        descriptor->magFilter, descriptor->minFilter, descriptor->mipmapFilter,
-                        wgpu::FilterMode::Linear, descriptor->maxAnisotropy);
+                        descriptor->magFilter(), descriptor->minFilter(),
+                        descriptor->mipmapFilter(), wgpu::FilterMode::Linear,
+                        descriptor->maxAnisotropy);
     } else if (descriptor->maxAnisotropy == 0u) {
         return DAWN_VALIDATION_ERROR("Max anisotropy (%f) is less than 1.",
                                      descriptor->maxAnisotropy);
     }
 
-    DAWN_TRY(ValidateFilterMode(descriptor->minFilter));
-    DAWN_TRY(ValidateFilterMode(descriptor->magFilter));
-    DAWN_TRY(ValidateMipmapFilterMode(descriptor->mipmapFilter));
-    DAWN_TRY(ValidateAddressMode(descriptor->addressModeU));
-    DAWN_TRY(ValidateAddressMode(descriptor->addressModeV));
-    DAWN_TRY(ValidateAddressMode(descriptor->addressModeW));
+    DAWN_TRY(ValidateFilterMode(descriptor->minFilter()));
+    DAWN_TRY(ValidateFilterMode(descriptor->magFilter()));
+    DAWN_TRY(ValidateMipmapFilterMode(descriptor->mipmapFilter()));
+    DAWN_TRY(ValidateAddressMode(descriptor->addressModeU()));
+    DAWN_TRY(ValidateAddressMode(descriptor->addressModeV()));
+    DAWN_TRY(ValidateAddressMode(descriptor->addressModeW()));
 
     // CompareFunction::Undefined is tagged as invalid because it can't be used, except for the
     // SamplerDescriptor where it is a special value that means the sampler is not a
@@ -86,12 +87,12 @@ SamplerBase::SamplerBase(DeviceBase* device,
                          const SamplerDescriptor* descriptor,
                          ApiObjectBase::UntrackedByDeviceTag tag)
     : ApiObjectBase(device, descriptor->label),
-      mAddressModeU(descriptor->addressModeU),
-      mAddressModeV(descriptor->addressModeV),
-      mAddressModeW(descriptor->addressModeW),
-      mMagFilter(descriptor->magFilter),
-      mMinFilter(descriptor->minFilter),
-      mMipmapFilter(descriptor->mipmapFilter),
+      mAddressModeU(descriptor->addressModeU()),
+      mAddressModeV(descriptor->addressModeV()),
+      mAddressModeW(descriptor->addressModeW()),
+      mMagFilter(descriptor->magFilter()),
+      mMinFilter(descriptor->minFilter()),
+      mMipmapFilter(descriptor->mipmapFilter()),
       mLodMinClamp(descriptor->lodMinClamp),
       mLodMaxClamp(descriptor->lodMaxClamp),
       mCompareFunction(descriptor->compare),

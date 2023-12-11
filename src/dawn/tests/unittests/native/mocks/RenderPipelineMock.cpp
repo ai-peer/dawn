@@ -45,12 +45,12 @@ RenderPipelineMock::~RenderPipelineMock() = default;
 // static
 Ref<RenderPipelineMock> RenderPipelineMock::Create(
     DeviceMock* device,
-    const UnpackedPtr<RenderPipelineDescriptor>& descriptor) {
-    RenderPipelineDescriptor appliedDescriptor;
-    Ref<PipelineLayoutBase> layoutRef = ValidateLayoutAndGetRenderPipelineDescriptorWithDefaults(
-                                            device, **descriptor, &appliedDescriptor)
-                                            .AcquireSuccess();
-    return AcquireRef(new NiceMock<RenderPipelineMock>(device, Unpack(&appliedDescriptor)));
+    const UnpackedPtr<RenderPipelineDescriptor>& descriptorOrig) {
+    RenderPipelineDescriptor descriptor = **descriptorOrig;
+    Ref<PipelineLayoutBase> layoutRef =
+        ValidateLayoutAndApplyRenderPipelineDescriptorDefaults(device, &descriptor)
+            .AcquireSuccess();
+    return AcquireRef(new NiceMock<RenderPipelineMock>(device, Unpack(&descriptor)));
 }
 
 // static

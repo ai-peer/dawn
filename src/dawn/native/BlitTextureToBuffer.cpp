@@ -599,6 +599,8 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
         } else {
             wgpu::TextureDimension dimension = src.texture->GetDimension();
             switch (dimension) {
+                case wgpu::TextureDimension::Undefined:
+                    DAWN_UNREACHABLE();
                 case wgpu::TextureDimension::e1D:
                     textureViewDimension = wgpu::TextureViewDimension::e1D;
                     break;
@@ -720,13 +722,13 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
     TextureViewDescriptor viewDesc = {};
     switch (src.aspect) {
         case Aspect::Color:
-            viewDesc.aspect = wgpu::TextureAspect::All;
+            viewDesc.aspect() = wgpu::TextureAspect::All;
             break;
         case Aspect::Depth:
-            viewDesc.aspect = wgpu::TextureAspect::DepthOnly;
+            viewDesc.aspect() = wgpu::TextureAspect::DepthOnly;
             break;
         case Aspect::Stencil:
-            viewDesc.aspect = wgpu::TextureAspect::StencilOnly;
+            viewDesc.aspect() = wgpu::TextureAspect::StencilOnly;
             break;
         default:
             DAWN_UNREACHABLE();

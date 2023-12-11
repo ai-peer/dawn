@@ -42,8 +42,8 @@
 namespace dawn::native::d3d {
 
 MaybeError ValidateTextureDescriptorCanBeWrapped(const UnpackedPtr<TextureDescriptor>& descriptor) {
-    DAWN_INVALID_IF(descriptor->dimension != wgpu::TextureDimension::e2D,
-                    "Texture dimension (%s) is not %s.", descriptor->dimension,
+    DAWN_INVALID_IF(descriptor->dimension() != wgpu::TextureDimension::e2D,
+                    "Texture dimension (%s) is not %s.", descriptor->dimension(),
                     wgpu::TextureDimension::e2D);
 
     DAWN_INVALID_IF(descriptor->mipLevelCount != 1, "Mip level count (%u) is not 1.",
@@ -65,7 +65,7 @@ ExternalImageDXGIImpl::ExternalImageDXGIImpl(
     : mBackendDevice(backendDevice),
       mD3DResource(std::move(d3dResource)),
       mUsage(textureDescriptor->usage),
-      mDimension(textureDescriptor->dimension),
+      mDimension(textureDescriptor->dimension()),
       mSize(textureDescriptor->size),
       mFormat(textureDescriptor->format),
       mMipLevelCount(textureDescriptor->mipLevelCount),

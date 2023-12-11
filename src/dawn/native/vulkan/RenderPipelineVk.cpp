@@ -54,6 +54,7 @@ VkVertexInputRate VulkanInputRate(wgpu::VertexStepMode stepMode) {
         case wgpu::VertexStepMode::Instance:
             return VK_VERTEX_INPUT_RATE_INSTANCE;
         case wgpu::VertexStepMode::VertexBufferNotUsed:
+        case wgpu::VertexStepMode::Undefined:
             break;
     }
     DAWN_UNREACHABLE();
@@ -140,6 +141,8 @@ VkPrimitiveTopology VulkanPrimitiveTopology(wgpu::PrimitiveTopology topology) {
             return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_LIST;
         case wgpu::PrimitiveTopology::TriangleStrip:
             return VK_PRIMITIVE_TOPOLOGY_TRIANGLE_STRIP;
+        case wgpu::PrimitiveTopology::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -155,6 +158,8 @@ bool ShouldEnablePrimitiveRestart(wgpu::PrimitiveTopology topology) {
         case wgpu::PrimitiveTopology::LineStrip:
         case wgpu::PrimitiveTopology::TriangleStrip:
             return true;
+        case wgpu::PrimitiveTopology::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -165,6 +170,8 @@ VkFrontFace VulkanFrontFace(wgpu::FrontFace face) {
             return VK_FRONT_FACE_COUNTER_CLOCKWISE;
         case wgpu::FrontFace::CW:
             return VK_FRONT_FACE_CLOCKWISE;
+        case wgpu::FrontFace::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -177,6 +184,8 @@ VkCullModeFlagBits VulkanCullMode(wgpu::CullMode mode) {
             return VK_CULL_MODE_FRONT_BIT;
         case wgpu::CullMode::Back:
             return VK_CULL_MODE_BACK_BIT;
+        case wgpu::CullMode::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -217,6 +226,8 @@ VkBlendFactor VulkanBlendFactor(wgpu::BlendFactor factor) {
             return VK_BLEND_FACTOR_SRC1_ALPHA;
         case wgpu::BlendFactor::OneMinusSrc1Alpha:
             return VK_BLEND_FACTOR_ONE_MINUS_SRC1_ALPHA;
+        case wgpu::BlendFactor::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -233,6 +244,8 @@ VkBlendOp VulkanBlendOperation(wgpu::BlendOperation operation) {
             return VK_BLEND_OP_MIN;
         case wgpu::BlendOperation::Max:
             return VK_BLEND_OP_MAX;
+        case wgpu::BlendOperation::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -262,12 +275,12 @@ VkPipelineColorBlendAttachmentState ComputeColorDesc(const ColorTargetState* sta
     VkPipelineColorBlendAttachmentState attachment;
     attachment.blendEnable = state->blend != nullptr ? VK_TRUE : VK_FALSE;
     if (attachment.blendEnable) {
-        attachment.srcColorBlendFactor = VulkanBlendFactor(state->blend->color.srcFactor);
-        attachment.dstColorBlendFactor = VulkanBlendFactor(state->blend->color.dstFactor);
-        attachment.colorBlendOp = VulkanBlendOperation(state->blend->color.operation);
-        attachment.srcAlphaBlendFactor = VulkanBlendFactor(state->blend->alpha.srcFactor);
-        attachment.dstAlphaBlendFactor = VulkanBlendFactor(state->blend->alpha.dstFactor);
-        attachment.alphaBlendOp = VulkanBlendOperation(state->blend->alpha.operation);
+        attachment.srcColorBlendFactor = VulkanBlendFactor(state->blend->color.srcFactor());
+        attachment.dstColorBlendFactor = VulkanBlendFactor(state->blend->color.dstFactor());
+        attachment.colorBlendOp = VulkanBlendOperation(state->blend->color.operation());
+        attachment.srcAlphaBlendFactor = VulkanBlendFactor(state->blend->alpha.srcFactor());
+        attachment.dstAlphaBlendFactor = VulkanBlendFactor(state->blend->alpha.dstFactor());
+        attachment.alphaBlendOp = VulkanBlendOperation(state->blend->alpha.operation());
     } else {
         // Swiftshader's Vulkan implementation appears to expect these values to be valid
         // even when blending is not enabled.
@@ -300,6 +313,8 @@ VkStencilOp VulkanStencilOp(wgpu::StencilOperation op) {
             return VK_STENCIL_OP_INCREMENT_AND_WRAP;
         case wgpu::StencilOperation::DecrementWrap:
             return VK_STENCIL_OP_DECREMENT_AND_WRAP;
+        case wgpu::StencilOperation::Undefined:
+            break;
     }
     DAWN_UNREACHABLE();
 }
@@ -324,15 +339,15 @@ VkPipelineDepthStencilStateCreateInfo ComputeDepthStencilDesc(const DepthStencil
 
     depthStencilState.stencilTestEnable = StencilTestEnabled(descriptor) ? VK_TRUE : VK_FALSE;
 
-    depthStencilState.front.failOp = VulkanStencilOp(descriptor->stencilFront.failOp);
-    depthStencilState.front.passOp = VulkanStencilOp(descriptor->stencilFront.passOp);
-    depthStencilState.front.depthFailOp = VulkanStencilOp(descriptor->stencilFront.depthFailOp);
-    depthStencilState.front.compareOp = ToVulkanCompareOp(descriptor->stencilFront.compare);
+    depthStencilState.front.failOp = VulkanStencilOp(descriptor->stencilFront.failOp());
+    depthStencilState.front.passOp = VulkanStencilOp(descriptor->stencilFront.passOp());
+    depthStencilState.front.depthFailOp = VulkanStencilOp(descriptor->stencilFront.depthFailOp());
+    depthStencilState.front.compareOp = ToVulkanCompareOp(descriptor->stencilFront.compare());
 
-    depthStencilState.back.failOp = VulkanStencilOp(descriptor->stencilBack.failOp);
-    depthStencilState.back.passOp = VulkanStencilOp(descriptor->stencilBack.passOp);
-    depthStencilState.back.depthFailOp = VulkanStencilOp(descriptor->stencilBack.depthFailOp);
-    depthStencilState.back.compareOp = ToVulkanCompareOp(descriptor->stencilBack.compare);
+    depthStencilState.back.failOp = VulkanStencilOp(descriptor->stencilBack.failOp());
+    depthStencilState.back.passOp = VulkanStencilOp(descriptor->stencilBack.passOp());
+    depthStencilState.back.depthFailOp = VulkanStencilOp(descriptor->stencilBack.depthFailOp());
+    depthStencilState.back.compareOp = ToVulkanCompareOp(descriptor->stencilBack.compare());
 
     // Dawn doesn't have separate front and back stencil masks.
     depthStencilState.front.compareMask = descriptor->stencilReadMask;

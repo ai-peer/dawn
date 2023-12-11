@@ -1411,7 +1411,7 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                     wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc;
                 descriptor.format = resolveTarget->GetFormat().format;
                 descriptor.size = resolveTarget->GetSingleSubresourceVirtualSize();
-                descriptor.dimension = wgpu::TextureDimension::e2D;
+                descriptor.dimension() = wgpu::TextureDimension::e2D;
                 descriptor.mipLevelCount = 1;
 
                 // We are creating new resources. Device must already be locked via
@@ -1455,13 +1455,13 @@ ResultOrError<std::function<void()>> CommandEncoder::ApplyRenderPassWorkarounds(
                     for (auto& copyTarget : temporaryResolveAttachments) {
                         ImageCopyTexture srcImageCopyTexture = {};
                         srcImageCopyTexture.texture = copyTarget.copySrc->GetTexture();
-                        srcImageCopyTexture.aspect = wgpu::TextureAspect::All;
+                        srcImageCopyTexture.aspect() = wgpu::TextureAspect::All;
                         srcImageCopyTexture.mipLevel = 0;
                         srcImageCopyTexture.origin = {0, 0, 0};
 
                         ImageCopyTexture dstImageCopyTexture = {};
                         dstImageCopyTexture.texture = copyTarget.copyDst->GetTexture();
-                        dstImageCopyTexture.aspect = wgpu::TextureAspect::All;
+                        dstImageCopyTexture.aspect() = wgpu::TextureAspect::All;
                         dstImageCopyTexture.mipLevel = copyTarget.copyDst->GetBaseMipLevel();
                         dstImageCopyTexture.origin = {0, 0,
                                                       copyTarget.copyDst->GetBaseArrayLayer()};
@@ -1602,7 +1602,7 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
                 DAWN_TRY(ValidateTextureCopyRange(GetDevice(), *destination, *copySize));
             }
             const TexelBlockInfo& blockInfo =
-                destination->texture->GetFormat().GetAspectInfo(destination->aspect).block;
+                destination->texture->GetFormat().GetAspectInfo(destination->aspect()).block;
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateLinearTextureCopyOffset(
                     source->layout, blockInfo,
@@ -1621,7 +1621,7 @@ void CommandEncoder::APICopyBufferToTexture(const ImageCopyBuffer* source,
             dst.texture = destination->texture;
             dst.origin = destination->origin;
             dst.mipLevel = destination->mipLevel;
-            dst.aspect = ConvertAspect(destination->texture->GetFormat(), destination->aspect);
+            dst.aspect = ConvertAspect(destination->texture->GetFormat(), destination->aspect());
 
             if (dst.aspect == Aspect::Depth &&
                 GetDevice()->IsToggleEnabled(Toggle::UseBlitForBufferToDepthTextureCopy)) {
@@ -1694,7 +1694,7 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
                 }
             }
             const TexelBlockInfo& blockInfo =
-                source->texture->GetFormat().GetAspectInfo(source->aspect).block;
+                source->texture->GetFormat().GetAspectInfo(source->aspect()).block;
             if (GetDevice()->IsValidationEnabled()) {
                 DAWN_TRY(ValidateLinearTextureCopyOffset(
                     destination->layout, blockInfo,
@@ -1716,7 +1716,7 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
             }
 
             auto format = source->texture->GetFormat();
-            auto aspect = ConvertAspect(format, source->aspect);
+            auto aspect = ConvertAspect(format, source->aspect());
 
             // Workaround to use compute pass to emulate texture to buffer copy
             if (ShouldUseTextureToBufferBlit(GetDevice(), format, aspect)) {
@@ -1748,7 +1748,7 @@ void CommandEncoder::APICopyTextureToBuffer(const ImageCopyTexture* source,
             t2b->source.texture = source->texture;
             t2b->source.origin = source->origin;
             t2b->source.mipLevel = source->mipLevel;
-            t2b->source.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+            t2b->source.aspect = ConvertAspect(source->texture->GetFormat(), source->aspect());
             t2b->destination.buffer = destination->buffer;
             t2b->destination.offset = dstLayout.offset;
             t2b->destination.bytesPerRow = dstLayout.bytesPerRow;
@@ -1802,9 +1802,9 @@ void CommandEncoder::APICopyTextureToTexture(const ImageCopyTexture* source,
             mTopLevelTextures.insert(source->texture);
             mTopLevelTextures.insert(destination->texture);
 
-            Aspect aspect = ConvertAspect(source->texture->GetFormat(), source->aspect);
+            Aspect aspect = ConvertAspect(source->texture->GetFormat(), source->aspect());
             DAWN_ASSERT(aspect ==
-                        ConvertAspect(destination->texture->GetFormat(), destination->aspect));
+                        ConvertAspect(destination->texture->GetFormat(), destination->aspect()));
 
             TextureCopy src;
             src.texture = source->texture;

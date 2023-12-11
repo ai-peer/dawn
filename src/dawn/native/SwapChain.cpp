@@ -104,7 +104,7 @@ MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
 TextureDescriptor GetSwapChainBaseTextureDescriptor(SwapChainBase* swapChain) {
     TextureDescriptor desc;
     desc.usage = swapChain->GetUsage();
-    desc.dimension = wgpu::TextureDimension::e2D;
+    desc.dimension() = wgpu::TextureDimension::e2D;
     desc.size = {swapChain->GetWidth(), swapChain->GetHeight(), 1};
     desc.format = swapChain->GetFormat();
     desc.mipLevelCount = 1;
