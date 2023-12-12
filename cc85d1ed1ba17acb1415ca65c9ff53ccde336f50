@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7eeae636_5e0b4458",
+        "filename": "src/tint/lang/wgsl/wgsl.def",
+        "patchSetId": 3
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-12T11:23:55Z",
+      "side": 1,
+      "message": "You can use the `@test_value` attribute to make the end2end tests a bit more interesting. You have good unit tests, so this is optional.",
+      "revId": "cc85d1ed1ba17acb1415ca65c9ff53ccde336f50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
