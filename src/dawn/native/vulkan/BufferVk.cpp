@@ -45,6 +45,7 @@
 #include "dawn/native/vulkan/ResourceMemoryAllocatorVk.h"
 #include "dawn/native/vulkan/UtilsVulkan.h"
 #include "dawn/native/vulkan/VulkanError.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::vulkan {
 
@@ -570,7 +571,7 @@ void Buffer::DestroyImpl() {
             void HandleShutDownImpl() override { callback(userdata); }
 
             wgpu::Callback callback;
-            void* userdata;
+            raw_ptr<void> userdata;
         };
         std::unique_ptr<DisposeTask> request =
             std::make_unique<DisposeTask>(mHostMappedDisposeCallback, mHostMappedDisposeUserdata);
