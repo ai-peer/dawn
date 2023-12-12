@@ -70,8 +70,8 @@ class Parser {
 
         EmitFunctions();
 
-        // TODO(crbug.com/tint/1907): Handle entry point declarations and execution modes.
-        // TODO(crbug.com/tint/1907): Handle entry point declarations and execution modes.
+        EmitEntryPoints();
+
         // TODO(crbug.com/tint/1907): Handle annotation instructions.
         // TODO(crbug.com/tint/1907): Handle names.
 
@@ -102,7 +102,47 @@ class Parser {
             // TODO(crbug.com/tint/1907): Emit function parameters as well.
             current_function = b_.Function(
                 Type(func.type_id()), core::ir::Function::PipelineStage::kUndefined, std::nullopt);
+            functions_.Add(func.result_id(), current_function);
             EmitBlock(current_function->Block(), *func.entry());
+        }
+    }
+
+    /// Emit entry point attributes.
+    void EmitEntryPoints() {
+        // Handle OpEntryPoint declarations.
+        for (auto& entry_point : spirv_context_->module()->entry_points()) {
+            auto model = entry_point.GetSingleWordInOperand(0);
+            auto* func = functions_.Get(entry_point.GetSingleWordInOperand(1)).value_or(nullptr);
+            TINT_ASSERT_OR_RETURN(func);
+
+            // Set the pipeline stage.
+            switch (spv::ExecutionModel(model)) {
+                case spv::ExecutionModel::GLCompute:
+                    func->SetStage(core::ir::Function::PipelineStage::kCompute);
+                    break;
+                default:
+                    TINT_UNIMPLEMENTED() << "unhandled execution model: " << model;
+            }
+
+            // Set the entry point name.
+            ir_.SetName(func, entry_point.GetOperand(2).AsString());
+        }
+
+        // Handle OpExecutionMode declarations.
+        for (auto& execution_mode : spirv_context_->module()->execution_modes()) {
+            auto* func = functions_.Get(execution_mode.GetSingleWordInOperand(0)).value_or(nullptr);
+            auto mode = execution_mode.GetSingleWordInOperand(1);
+            TINT_ASSERT_OR_RETURN(func);
+
+            switch (spv::ExecutionMode(mode)) {
+                case spv::ExecutionMode::LocalSize:
+                    func->SetWorkgroupSize(execution_mode.GetSingleWordInOperand(2),
+                                           execution_mode.GetSingleWordInOperand(3),
+                                           execution_mode.GetSingleWordInOperand(4));
+                    break;
+                default:
+                    TINT_UNIMPLEMENTED() << "unhandled execution mode: " << mode;
+            }
         }
     }
 
@@ -129,6 +169,7 @@ class Parser {
     core::type::Manager& ty_{ir_.Types()};
 
     core::ir::Function* current_function = nullptr;
+    Hashmap<uint32_t, core::ir::Function*, 8> functions_;
 
     std::unique_ptr<spvtools::opt::IRContext> spirv_context_;
 };
