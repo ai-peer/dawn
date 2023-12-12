@@ -45,8 +45,8 @@ size_t Hash(const T& value) {
     return std::hash<T>()(value);
 }
 
-template <typename T>
-size_t Hash(const raw_ptr<T>& value) {
+template <typename T, partition_alloc::internal::RawPtrTraits Traits>
+size_t Hash(const raw_ptr<T, Traits>& value) {
     return Hash(value.get());
 }
 
