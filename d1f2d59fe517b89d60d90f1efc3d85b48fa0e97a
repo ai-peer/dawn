@@ -1,0 +1,174 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af834106_75c12496",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a574d2e_100f3289",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Nit: binding -\u003e bindings",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a4c48af5_4982b710",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Nit: \"In order to avoid collisions in renamed interface blocks, prepend v_ or f_ to buffer binding variable names. The AddBlockAttribute transform in the Tint GLSL printer will always generate wrapper structs from such bindings.\"",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5705add2_bad30f91",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1840,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Nit: SSBOs declared with the same name in multiple shader stages contain the same members.",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99182cef_701ec6e1",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Nit: UBO -\u003e UBOs (or \"a UBO\", \"remains\")",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a84a127c_bee105e7",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Nit: Deliberately mismatch an SSBO block name at the same binding point",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b6654b48_29891056",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2032,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Nit: UBO -\u003e UBOs (or \"a UBO\", \"remains\").",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ecf8bd2_037b78c4",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2061,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5e4eb67_27c107b5",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Ibid.",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "907e8610_22b764ff",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-12T15:43:01Z",
+      "side": 1,
+      "message": "Nit: Deliberately mismatch a UBO name at the same binding point",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
