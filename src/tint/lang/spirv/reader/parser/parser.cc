@@ -27,9 +27,11 @@
 
 #include "src/tint/lang/spirv/reader/parser/parser.h"
 
+#include <memory>
 #include <utility>
 #include <vector>
 
+#include "source/opt/build_module.h"
 #include "src/tint/lang/core/ir/builder.h"
 #include "src/tint/lang/core/ir/module.h"
 #include "src/tint/lang/spirv/validate/validate.h"
@@ -56,9 +58,68 @@ class Parser {
             return result.Failure();
         }
 
-        // TODO(crbug.com/tint/1907): Parse the module.
+        // Build the SPIR-V tools internal representation of the SPIR-V module.
+        spvtools::Context context(kTargetEnv);
+        spirv_context_ = spvtools::BuildModule(kTargetEnv, context.CContext()->consumer,
+                                               spirv_.data(), spirv_.size());
+        if (!spirv_context_) {
+            return Failure("failed to build the internal representation of the module");
+        }
+
+        // TODO(crbug.com/tint/1907): Emit module-scope variables.
+
+        EmitFunctions();
+
+        // TODO(crbug.com/tint/1907): Handle entry point declarations and execution modes.
+        // TODO(crbug.com/tint/1907): Handle entry point declarations and execution modes.
+        // TODO(crbug.com/tint/1907): Handle annotation instructions.
+        // TODO(crbug.com/tint/1907): Handle names.
 
         return std::move(ir_);
+    }
+
+    /// @param type a SPIR-V type object
+    /// @returns a Tint type object
+    const core::type::Type* Type(const spvtools::opt::analysis::Type* type) {
+        switch (type->kind()) {
+            case spvtools::opt::analysis::Type::kVoid:
+                return ty_.void_();
+            default:
+                TINT_UNIMPLEMENTED() << "unhandled SPIR-V type: " << type->str();
+                return ty_.void_();
+        }
+    }
+
+    /// @param id a SPIR-V result ID for a type declaration instruction
+    /// @returns a Tint type object
+    const core::type::Type* Type(uint32_t id) {
+        return Type(spirv_context_->get_type_mgr()->GetType(id));
+    }
+
+    /// Emit the functions.
+    void EmitFunctions() {
+        for (auto& func : *spirv_context_->module()) {
+            // TODO(crbug.com/tint/1907): Emit function parameters as well.
+            current_function_ = b_.Function(
+                Type(func.type_id()), core::ir::Function::PipelineStage::kUndefined, std::nullopt);
+            EmitBlock(current_function_->Block(), *func.entry());
+        }
+    }
+
+    /// Emit the contents of SPIR-V block @p src into Tint IR block @p dst.
+    /// @param dst the Tint IR block to append to
+    /// @param src the SPIR-V block to emit
+    void EmitBlock(core::ir::Block* dst, const spvtools::opt::BasicBlock& src) {
+        for (auto& inst : src) {
+            switch (inst.opcode()) {
+                case spv::Op::OpReturn:
+                    dst->Append(b_.Return(current_function_));
+                    break;
+                default:
+                    TINT_UNIMPLEMENTED()
+                        << "unhandled SPIR-V instruction: " << static_cast<uint32_t>(inst.opcode());
+            }
+        }
     }
 
   private:
@@ -66,6 +127,10 @@ class Parser {
     core::ir::Module ir_;
     core::ir::Builder b_{ir_};
     core::type::Manager& ty_{ir_.Types()};
+
+    core::ir::Function* current_function_ = nullptr;
+
+    std::unique_ptr<spvtools::opt::IRContext> spirv_context_;
 };
 
 }  // namespace
