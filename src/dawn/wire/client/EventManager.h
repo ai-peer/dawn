@@ -39,6 +39,7 @@
 #include "dawn/common/NonCopyable.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/WireResult.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::wire::client {
 
@@ -150,7 +151,7 @@ class EventManager final : NonMovable {
     WGPUWaitStatus WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS);
 
   private:
-    Client* mClient;
+    raw_ptr<Client> mClient;
     bool mIsShutdown = false;
 
     // Tracks all kinds of events (for both WaitAny and ProcessEvents). We use an ordered map so
