@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d29a0fc1_d7a33f7d",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-12T23:44:29Z",
+      "side": 1,
+      "message": "Instead of returning nullptr, what do you think about returning `ty_.i32()`, or better yet, a new error type deriving from `type::Type`?\nSimilarly we could emit placeholder IR values / instrucitons, instead of null, on error.\nWhen we error, we can append to `diag::List` which we can check for and return at the end of the `Run()`.\n\nThis would avoid having nullptr checks on all the callers, which we inevitably will fail to check, and will cause crashes. It also means the reader could progress beyond the first error, and provide an IR disassembly. Both of which would really helpful to know just how much work we need to do to support some failing SPIR-V shader.",
+      "range": {
+        "startLine": 89,
+        "startChar": 23,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "598f919d4ead34fd3103eb428aa317c5c501ac3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca4a0ea3_70b9b721",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-12T23:44:29Z",
+      "side": 1,
+      "message": "`current_function_` ?",
+      "range": {
+        "startLine": 131,
+        "startChar": 24,
+        "endLine": 131,
+        "endChar": 40
+      },
+      "revId": "598f919d4ead34fd3103eb428aa317c5c501ac3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
