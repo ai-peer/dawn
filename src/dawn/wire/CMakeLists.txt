@@ -108,6 +108,7 @@ target_sources(dawn_wire PRIVATE
 )
 target_link_libraries(dawn_wire
     PUBLIC dawn_headers
+           partition_alloc
     PRIVATE dawn_common dawn_internal_config
 )
 

@@ -177,7 +177,7 @@ enum class ScopedHistogramTiming { kMicrosecondTimes, kMediumTimes, kLongTimes }
 
 // This is a helper macro used by other macros and shouldn't be used directly.
 #define SCOPED_DAWN_HISTOGRAM_TIMER_UNIQUE(platform, name, timing, key)                     \
-    using PlatformType##key = std::decay_t<std::remove_pointer_t<decltype(platform)>>;      \
+    using PlatformType##key = std::decay_t<std::remove_pointer_t<decltype(&*platform)>>;    \
     class [[nodiscard]] ScopedHistogramTimer##key {                                         \
       public:                                                                               \
         using Platform = PlatformType##key;                                                 \
