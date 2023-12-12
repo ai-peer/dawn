@@ -32,6 +32,7 @@
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "webgpu/webgpu_glfw.h"
 
 #include "GLFW/glfw3.h"
@@ -96,7 +97,7 @@ class SwapChainTests : public DawnTest {
     }
 
   protected:
-    GLFWwindow* window = nullptr;
+    raw_ptr<GLFWwindow, DanglingUntriaged> window = nullptr;
     wgpu::Surface surface;
 
     wgpu::SwapChainDescriptor baseDescriptor;
