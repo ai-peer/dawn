@@ -44,12 +44,11 @@ namespace dawn::native::metal {
 static constexpr uint32_t kMinUniformOrStorageBufferAlignment = 16u;
 
 // static
-ResultOrError<Ref<Buffer>> Buffer::Create(Device* device, const BufferDescriptor* descriptor) {
+ResultOrError<Ref<Buffer>> Buffer::Create(Device* device,
+                                          const UnpackedPtr<BufferDescriptor>& descriptor) {
     Ref<Buffer> buffer = AcquireRef(new Buffer(device, descriptor));
 
-    const BufferHostMappedPointer* hostMappedDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &hostMappedDesc);
-
+    auto* hostMappedDesc = descriptor.Get<BufferHostMappedPointer>();
     if (hostMappedDesc != nullptr) {
         DAWN_TRY(buffer->InitializeHostMapped(hostMappedDesc));
     } else {
@@ -67,7 +66,8 @@ uint64_t Buffer::QueryMaxBufferLength(id<MTLDevice> mtlDevice) {
     return 256 * 1024 * 1024;
 }
 
-Buffer::Buffer(DeviceBase* dev, const BufferDescriptor* desc) : BufferBase(dev, desc) {}
+Buffer::Buffer(DeviceBase* dev, const UnpackedPtr<BufferDescriptor>& desc)
+    : BufferBase(dev, desc) {}
 
 MaybeError Buffer::Initialize(bool mappedAtCreation) {
     MTLResourceOptions storageMode;
