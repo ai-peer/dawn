@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e58fefc_5710222c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-12T23:01:09Z",
+      "side": 1,
+      "message": "would it suffice to `#define WGPU_FUNCTION_ATTRIBUTE __attribute__((no_sanitize(\"cfi-icall\")))` ?\n\nthen the suppression could be made more local to your library",
+      "revId": "960abb19d359263e27e2412c444123bc3f5a325c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
