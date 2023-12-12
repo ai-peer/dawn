@@ -60,12 +60,12 @@ AttachmentState::AttachmentState(DeviceBase* device,
 }
 
 AttachmentState::AttachmentState(DeviceBase* device,
-                                 const RenderPipelineDescriptor* descriptor,
+                                 const UnpackedPtr<RenderPipelineDescriptor>& descriptor,
                                  const PipelineLayoutBase* layout)
     : ObjectBase(device), mSampleCount(descriptor->multisample.count) {
-    const DawnMultisampleStateRenderToSingleSampled* msaaRenderToSingleSampledDesc = nullptr;
-    FindInChain(descriptor->multisample.nextInChain, &msaaRenderToSingleSampledDesc);
-    if (msaaRenderToSingleSampledDesc != nullptr) {
+    UnpackedPtr<MultisampleState> unpackedMultisampleState = Unpack(&descriptor->multisample);
+    if (auto* msaaRenderToSingleSampledDesc =
+            unpackedMultisampleState.Get<DawnMultisampleStateRenderToSingleSampled>()) {
         mIsMSAARenderToSingleSampledEnabled = msaaRenderToSingleSampledDesc->enabled;
     }
 
