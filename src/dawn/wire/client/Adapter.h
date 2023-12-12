@@ -36,6 +36,7 @@
 #include "dawn/wire/client/LimitsAndFeatures.h"
 #include "dawn/wire/client/ObjectBase.h"
 #include "dawn/wire/client/RequestTracker.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::wire::client {
 
@@ -76,7 +77,7 @@ class Adapter final : public ObjectWithEventsBase {
     struct RequestDeviceData {
         WGPURequestDeviceCallback callback = nullptr;
         ObjectId deviceObjectId;
-        void* userdata = nullptr;
+        raw_ptr<void> userdata = nullptr;
     };
     RequestTracker<RequestDeviceData> mRequestDeviceRequests;
 };
