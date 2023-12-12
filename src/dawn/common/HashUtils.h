@@ -34,6 +34,7 @@
 #include "dawn/common/Platform.h"
 #include "dawn/common/TypedInteger.h"
 #include "dawn/common/ityp_bitset.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn {
 
@@ -42,6 +43,11 @@ namespace dawn {
 template <typename T>
 size_t Hash(const T& value) {
     return std::hash<T>()(value);
+}
+
+template <typename T>
+size_t Hash(const raw_ptr<T>& value) {
+    return Hash(value.get());
 }
 
 // Add hashing of TypedIntegers
