@@ -26,6 +26,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "dawn/tests/DawnTest.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 #include "dawn/common/Constants.h"
 #include "dawn/common/Log.h"
@@ -77,7 +78,7 @@ class SwapChainValidationTests : public DawnTest {
     }
 
   protected:
-    GLFWwindow* window = nullptr;
+    raw_ptr<GLFWwindow> window = nullptr;
     wgpu::Surface surface;
     wgpu::SwapChainDescriptor goodDescriptor;
     wgpu::SwapChainDescriptor badDescriptor;
