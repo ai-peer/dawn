@@ -40,8 +40,6 @@
 #include <functional>
 #include <type_traits>
 #include <utility>
-#include "build/build_config.h"
-#include "build/buildflag.h"
 #include "dawn/common/Compiler.h"
 #include "partition_alloc/pointers/raw_ptr_exclusion.h"
 
@@ -350,6 +348,7 @@ using partition_alloc::internal::raw_ptr;
 using partition_alloc::internal::RawPtrTraits;
 constexpr RawPtrTraits DisableDanglingPtrDetection = 0;
 constexpr RawPtrTraits DanglingUntriaged = 0;
+constexpr RawPtrTraits LeakedDanglingUntriaged = 0;
 constexpr RawPtrTraits AllowPtrArithmetic = 0;
 
 namespace std {
