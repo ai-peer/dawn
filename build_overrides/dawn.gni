@@ -56,7 +56,7 @@ dawn_dxheaders_dir = "//third_party/dxheaders"
 # PartitionAlloc is an optional dependency.
 # It does not fully support the MSVC compiler at the moment.
 if (is_clang || !is_win) {
-  dawn_partition_alloc_dir = "//third_party/partition_alloc/"
+  #dawn_partition_alloc_dir = "//third_party/partition_alloc/"
 }
 
 # Optional path to a one-liner version file. Default is empty path indicating
