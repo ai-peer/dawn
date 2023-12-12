@@ -348,8 +348,10 @@ MaybeError ValidateDepthStencilState(const DeviceBase* device,
 }
 
 MaybeError ValidateMultisampleState(const DeviceBase* device, const MultisampleState* descriptor) {
-    const DawnMultisampleStateRenderToSingleSampled* msaaRenderToSingleSampledDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &msaaRenderToSingleSampledDesc);
+    UnpackedPtr<MultisampleState> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
+    const auto* msaaRenderToSingleSampledDesc =
+        unpacked.Get<DawnMultisampleStateRenderToSingleSampled>();
     if (msaaRenderToSingleSampledDesc != nullptr) {
         DAWN_INVALID_IF(!device->HasFeature(Feature::MSAARenderToSingleSampled),
                         "The msaaRenderToSingleSampledDesc is not empty while the "
@@ -741,7 +743,8 @@ bool IsStripPrimitiveTopology(wgpu::PrimitiveTopology primitiveTopology) {
 
 MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                             const RenderPipelineDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr.");
+    UnpackedPtr<RenderPipelineDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
 
     if (descriptor->layout != nullptr) {
         DAWN_TRY(device->ValidateObject(descriptor->layout));
@@ -825,11 +828,11 @@ bool StencilTestEnabled(const DepthStencilState* depthStencil) {
 // RenderPipelineBase
 
 RenderPipelineBase::RenderPipelineBase(DeviceBase* device,
-                                       const RenderPipelineDescriptor* descriptor)
+                                       const UnpackedPtr<RenderPipelineDescriptor>& descriptor)
     : PipelineBase(device,
                    descriptor->layout,
                    descriptor->label,
-                   GetRenderStagesAndSetPlaceholderShader(device, descriptor)),
+                   GetRenderStagesAndSetPlaceholderShader(device, *descriptor)),
       mAttachmentState(device->GetOrCreateAttachmentState(descriptor, GetLayout())) {
     mVertexBufferCount = descriptor->vertex.bufferCount;
 

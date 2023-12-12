@@ -151,7 +151,7 @@ size_t D3D11BufferSizeAlignment(wgpu::BufferUsage usage) {
 
 // static
 ResultOrError<Ref<Buffer>> Buffer::Create(Device* device,
-                                          const BufferDescriptor* descriptor,
+                                          const UnpackedPtr<BufferDescriptor>& descriptor,
                                           const ScopedCommandRecordingContext* commandContext) {
     Ref<Buffer> buffer = AcquireRef(new Buffer(device, descriptor));
     DAWN_TRY(buffer->Initialize(descriptor->mappedAtCreation, commandContext));

@@ -52,13 +52,13 @@ class Device final : public DeviceBase {
   public:
     class Context;
     static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
-                                             const DeviceDescriptor* descriptor,
+                                             const UnpackedPtr<DeviceDescriptor>& descriptor,
                                              const OpenGLFunctions& functions,
                                              std::unique_ptr<Context> context,
                                              const TogglesState& deviceToggles);
     ~Device() override;
 
-    MaybeError Initialize(const DeviceDescriptor* descriptor);
+    MaybeError Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor);
 
     // Returns all the OpenGL entry points and ensures that the associated
     // Context is current.
@@ -111,7 +111,8 @@ class Device final : public DeviceBase {
         const BindGroupDescriptor* descriptor) override;
     ResultOrError<Ref<BindGroupLayoutInternalBase>> CreateBindGroupLayoutImpl(
         const BindGroupLayoutDescriptor* descriptor) override;
-    ResultOrError<Ref<BufferBase>> CreateBufferImpl(const BufferDescriptor* descriptor) override;
+    ResultOrError<Ref<BufferBase>> CreateBufferImpl(
+        const UnpackedPtr<BufferDescriptor>& descriptor) override;
     ResultOrError<Ref<PipelineLayoutBase>> CreatePipelineLayoutImpl(
         const PipelineLayoutDescriptor* descriptor) override;
     ResultOrError<Ref<QuerySetBase>> CreateQuerySetImpl(

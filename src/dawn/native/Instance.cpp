@@ -309,8 +309,8 @@ std::vector<Ref<AdapterBase>> InstanceBase::EnumerateAdapters(
         return EnumerateAdapters(&defaultOptions);
     }
 
-    const DawnTogglesDescriptor* togglesDesc = nullptr;
-    FindInChain(options->nextInChain, &togglesDesc);
+    UnpackedPtr<RequestAdapterOptions> unpacked = Unpack(options);
+    auto* togglesDesc = unpacked.Get<DawnTogglesDescriptor>();
 
     FeatureLevel featureLevel =
         options->compatibilityMode ? FeatureLevel::Compatibility : FeatureLevel::Core;

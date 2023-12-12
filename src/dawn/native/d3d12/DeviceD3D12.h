@@ -63,11 +63,11 @@ class StagingDescriptorAllocator;
 class Device final : public d3d::Device {
   public:
     static ResultOrError<Ref<Device>> Create(AdapterBase* adapter,
-                                             const DeviceDescriptor* descriptor,
+                                             const UnpackedPtr<DeviceDescriptor>& descriptor,
                                              const TogglesState& deviceToggles);
     ~Device() override;
 
-    MaybeError Initialize(const DeviceDescriptor* descriptor);
+    MaybeError Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor);
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,
@@ -194,7 +194,7 @@ class Device final : public d3d::Device {
     using Base = d3d::Device;
 
     Device(AdapterBase* adapter,
-           const DeviceDescriptor* descriptor,
+           const UnpackedPtr<DeviceDescriptor>& descriptor,
            const TogglesState& deviceToggles);
 
     ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
