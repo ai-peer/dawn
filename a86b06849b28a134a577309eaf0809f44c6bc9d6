@@ -85,6 +85,42 @@
       "message": "With ./tools/run tests --generate-expected test/tint/builtins/gen/var/dot4I8Packed \nI get this failure:\n\n\nhlsl-dxc validation DISABLED\nhlsl-fxc validation DISABLED\nmsl      validation ENABLED (/usr/bin/xcrun)\n\n\n                     ┃  wgsl  │ spvasm │  msl   │ hlsl-dxc │ hlsl-fxc │  glsl  │ \n━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━┿━━━━━━━━┿━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━┿━\n...acked/881e62.wgsl ┃  PASS  │  PASS  │  FAIL  │   PASS   │   PASS   │  PASS  │ \n━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━┿━━━━━━━━┿━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━┿━\n                     ┃  wgsl  │ spvasm │  msl   │ hlsl-dxc │ hlsl-fxc │  glsl  │ \n━━━━━━━━━━━━━━━━━━━━━╋━━━━━━━━┿━━━━━━━━┿━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━━━┿━━━━━━━━┿━\n                PASS ┃ 1      │ 1      │ 0      │ 1        │ 1        │ 1      │ \n                     ┃ 100.0% │ 100.0% │   0.0% │   100.0% │   100.0% │ 100.0% │ \n                FAIL ┃ 0      │ 0      │ 1      │ 0        │ 0        │ 0      │ \n                     ┃   0.0% │   0.0% │ 100.0% │     0.0% │     0.0% │   0.0% │ \n                TIME ┃        │        │        │          │          │        │ \ndot4I8Packed/881e62.wgsl msl FAIL\n    #include \u003cmetal_stdlib\u003e\n    \n    using namespace metal;\n    \n    int tint_dot4I8Packed(uint param_0, uint param_1) {\n      packed_char4 vec1 \u003d as_type\u003cpacked_char4\u003e(param_0);\n      packed_char4 vec2 \u003d as_type\u003cpacked_char4\u003e(param_1);\n      return vec1[0] * vec2[0] + vec1[1] * vec2[1] + vec1[2] * vec2[2] + vec1[3] * vec2[3];\n    }\n    \n    void dot4I8Packed_881e62(device int* const tint_symbol_1) {\n      uint arg_0 \u003d 1u;\n      uint arg_1 \u003d 1u;\n      int res \u003d tint_dot4I8Packed(arg_0, arg_1);\n      *(tint_symbol_1) \u003d res;\n    }\n    \n    struct tint_symbol {\n      float4 value [[position]];\n    };\n    \n    float4 vertex_main_inner(device int* const tint_symbol_2) {\n      dot4I8Packed_881e62(tint_symbol_2);\n      return float4(0.0f);\n    }\n    \n    vertex tint_symbol vertex_main(device int* tint_symbol_3 [[buffer(0)]]) {\n      float4 const inner_result \u003d vertex_main_inner(tint_symbol_3);\n      tint_symbol wrapper_result \u003d {};\n      wrapper_result.value \u003d inner_result;\n      return wrapper_result;\n    }\n    \n    fragment void fragment_main(device int* tint_symbol_4 [[buffer(0)]]) {\n      dot4I8Packed_881e62(tint_symbol_4);\n      return;\n    }\n    \n    kernel void compute_main(device int* tint_symbol_5 [[buffer(0)]]) {\n      dot4I8Packed_881e62(tint_symbol_5);\n      return;\n    }\n    \n    program_source:6:23: error: as_type cast from \u0027uint\u0027 (aka \u0027unsigned int\u0027) to \u0027packed_char4\u0027 (packed vector of 4 \u0027char\u0027 values) is not allowed\n      packed_char4 vec1 \u003d as_type\u003cpacked_char4\u003e(param_0);\n                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    program_source:7:23: error: as_type cast from \u0027uint\u0027 (aka \u0027unsigned int\u0027) to \u0027packed_char4\u0027 (packed vector of 4 \u0027char\u0027 values) is not allowed\n      packed_char4 vec2 \u003d as_type\u003cpacked_char4\u003e(param_1);\n                          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n    program_source:27:20: warning: writable resources in non-void vertex function\n    vertex tint_symbol vertex_main(device int* tint_symbol_3 [[buffer(0)]]) {\n                       ^\n    program_source:27:44: note: writable buffer defined here\n    vertex tint_symbol vertex_main(device int* tint_symbol_3 [[buffer(0)]]) {\n                                               ^\n    \n    \n\n6 tests run, 5 tests pass, 0 tests skipped, 1 tests failed\n\n1 tests failed",
       "revId": "a86b06849b28a134a577309eaf0809f44c6bc9d6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f73fb4b_51f864be",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-12T07:38:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2da6f099_ac149310",
+      "revId": "a86b06849b28a134a577309eaf0809f44c6bc9d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9624cf6b_85162876",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-12T07:38:26Z",
+      "side": 1,
+      "message": "Hi David,\n\nhttps://dawn-review.googlesource.com/c/dawn/+/165382 will fix this issue.\n\nPTAL, thanks!",
+      "parentUuid": "6de1de0c_61d3f226",
+      "revId": "a86b06849b28a134a577309eaf0809f44c6bc9d6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
