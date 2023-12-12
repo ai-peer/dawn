@@ -33,6 +33,24 @@
       "message": "Nit: \"Run the glsl keyword renamer before all other transforms\".",
       "revId": "e4c27b6f1f69f3289416d608c52fe3e27aa2b681",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2bb9860d_029e94c4",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/helper_test.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T17:12:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ec040a6_6b5daa36",
+      "revId": "e4c27b6f1f69f3289416d608c52fe3e27aa2b681",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
