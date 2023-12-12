@@ -16,6 +16,23 @@
       "message": "something nice...",
       "revId": "9b435cd8dcfb7bb101f7254ac60b6bd7b3495a52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26d8fd67_6ada1ce0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-12T23:28:47Z",
+      "side": 1,
+      "message": "LGTM and all that.",
+      "revId": "9b435cd8dcfb7bb101f7254ac60b6bd7b3495a52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
