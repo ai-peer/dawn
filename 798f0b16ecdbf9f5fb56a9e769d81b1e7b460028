@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e00aa4e1_cae2473e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-12T23:32:57Z",
+      "side": 1,
+      "message": "My new fuzzer checker takes objection to this change.",
+      "revId": "798f0b16ecdbf9f5fb56a9e769d81b1e7b460028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24b77dbd_bb037023",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-12T23:32:57Z",
+      "side": 1,
+      "message": "Suggest using a `Slice\u003cconst uint32_t\u003e`. That would support vector sources, as well as any other container.",
+      "revId": "798f0b16ecdbf9f5fb56a9e769d81b1e7b460028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
