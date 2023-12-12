@@ -42,6 +42,7 @@
 #include "dawn/wire/client/ClientBase_autogen.h"
 #include "dawn/wire/client/EventManager.h"
 #include "dawn/wire/client/ObjectStore.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::wire::client {
 
@@ -119,7 +120,7 @@ class Client : public ClientBase {
     ChunkedCommandSerializer mSerializer;
     WireDeserializeAllocator mWireCommandAllocator;
     PerObjectType<ObjectStore> mObjectStores;
-    MemoryTransferService* mMemoryTransferService = nullptr;
+    raw_ptr<MemoryTransferService, DanglingUntriaged> mMemoryTransferService = nullptr;
     std::unique_ptr<MemoryTransferService> mOwnedMemoryTransferService = nullptr;
     PerObjectType<LinkedList<ObjectBase>> mObjects;
     // TODO(crbug.com/dawn/2061) Eventually we want an EventManager per instance not per client.
