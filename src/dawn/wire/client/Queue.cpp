@@ -32,6 +32,7 @@
 
 #include "dawn/wire/client/Client.h"
 #include "dawn/wire/client/EventManager.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::wire::client {
 namespace {
@@ -60,7 +61,7 @@ class WorkDoneEvent : public TrackedEvent {
     }
 
     WGPUQueueWorkDoneCallback mCallback;
-    void* mUserdata;
+    raw_ptr<void, DanglingUntriaged> mUserdata;
 
     WGPUQueueWorkDoneStatus mStatus = WGPUQueueWorkDoneStatus_Success;
 };
