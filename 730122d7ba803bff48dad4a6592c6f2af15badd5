@@ -38,6 +38,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "63a81d72_3c3a30ed",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-12-12T10:02:37Z",
+      "side": 1,
+      "message": "Thanks! BTW, I still have this on my radar - I put it on the back burner for now as I\u0027m first focusing on working out caching *within* the representation, for which concurrent access isn\u0027t an issue.",
+      "parentUuid": "61f591e4_2735aba8",
+      "revId": "730122d7ba803bff48dad4a6592c6f2af15badd5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "092df910_9c39d34c",
         "filename": "src/dawn/native/Texture.cpp",
         "patchSetId": 1
