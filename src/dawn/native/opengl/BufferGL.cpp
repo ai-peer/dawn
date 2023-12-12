@@ -50,7 +50,7 @@ ResultOrError<Ref<Buffer>> Buffer::CreateInternalBuffer(Device* device,
     return std::move(buffer);
 }
 
-Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
+Buffer::Buffer(Device* device, const UnpackedPtr<BufferDescriptor>& descriptor)
     : BufferBase(device, descriptor) {
     const OpenGLFunctions& gl = device->GetGL();
     // Allocate at least 4 bytes so clamped accesses are always in bounds.
@@ -75,7 +75,7 @@ Buffer::Buffer(Device* device, const BufferDescriptor* descriptor)
 }
 
 Buffer::Buffer(Device* device, const BufferDescriptor* descriptor, bool shouldLazyClear)
-    : Buffer(device, descriptor) {
+    : Buffer(device, Unpack(descriptor)) {
     if (!shouldLazyClear) {
         SetIsDataInitialized();
     }

@@ -348,8 +348,10 @@ MaybeError ValidateDepthStencilState(const DeviceBase* device,
 }
 
 MaybeError ValidateMultisampleState(const DeviceBase* device, const MultisampleState* descriptor) {
-    const DawnMultisampleStateRenderToSingleSampled* msaaRenderToSingleSampledDesc = nullptr;
-    FindInChain(descriptor->nextInChain, &msaaRenderToSingleSampledDesc);
+    UnpackedPtr<MultisampleState> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
+    const auto* msaaRenderToSingleSampledDesc =
+        unpacked.Get<DawnMultisampleStateRenderToSingleSampled>();
     if (msaaRenderToSingleSampledDesc != nullptr) {
         DAWN_INVALID_IF(!device->HasFeature(Feature::MSAARenderToSingleSampled),
                         "The msaaRenderToSingleSampledDesc is not empty while the "
@@ -741,7 +743,8 @@ bool IsStripPrimitiveTopology(wgpu::PrimitiveTopology primitiveTopology) {
 
 MaybeError ValidateRenderPipelineDescriptor(DeviceBase* device,
                                             const RenderPipelineDescriptor* descriptor) {
-    DAWN_INVALID_IF(descriptor->nextInChain != nullptr, "nextInChain must be nullptr.");
+    UnpackedPtr<RenderPipelineDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
 
     if (descriptor->layout != nullptr) {
         DAWN_TRY(device->ValidateObject(descriptor->layout));

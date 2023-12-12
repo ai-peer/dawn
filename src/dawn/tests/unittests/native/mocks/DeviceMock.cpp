@@ -62,10 +62,10 @@ DeviceMock::DeviceMock() {
             return AcquireRef(new NiceMock<BindGroupLayoutMock>(this, descriptor));
         }));
     ON_CALL(*this, CreateBufferImpl)
-        .WillByDefault(WithArgs<0>(
-            [this](const BufferDescriptor* descriptor) -> ResultOrError<Ref<BufferBase>> {
-                return AcquireRef(new NiceMock<BufferMock>(this, descriptor));
-            }));
+        .WillByDefault(WithArgs<0>([this](const UnpackedPtr<BufferDescriptor>& descriptor)
+                                       -> ResultOrError<Ref<BufferBase>> {
+            return AcquireRef(new NiceMock<BufferMock>(this, descriptor));
+        }));
     ON_CALL(*this, CreateCommandBuffer)
         .WillByDefault(WithArgs<0, 1>(
             [this](CommandEncoder* encoder, const CommandBufferDescriptor* descriptor)

@@ -87,7 +87,7 @@ class DeviceMock : public DeviceBase {
                 (override));
     MOCK_METHOD(ResultOrError<Ref<BufferBase>>,
                 CreateBufferImpl,
-                (const BufferDescriptor*),
+                (const UnpackedPtr<BufferDescriptor>&),
                 (override));
     MOCK_METHOD(Ref<ComputePipelineBase>,
                 CreateUninitializedComputePipelineImpl,
