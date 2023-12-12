@@ -40,7 +40,7 @@ class Device;
 class RenderPipeline final : public RenderPipelineBase {
   public:
     static Ref<RenderPipeline> CreateUninitialized(Device* device,
-                                                   const RenderPipelineDescriptor* descriptor);
+                                                   const UnpackedPtr<RenderPipelineDescriptor>& descriptor);
     static void InitializeAsync(Ref<RenderPipelineBase> renderPipeline,
                                 WGPUCreateRenderPipelineAsyncCallback callback,
                                 void* userdata);

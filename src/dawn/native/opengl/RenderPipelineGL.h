@@ -43,7 +43,7 @@ class PersistentPipelineState;
 class RenderPipeline final : public RenderPipelineBase, public PipelineGL {
   public:
     static Ref<RenderPipeline> CreateUninitialized(Device* device,
-                                                   const RenderPipelineDescriptor* descriptor);
+                                                   const UnpackedPtr<RenderPipelineDescriptor>& descriptor);
 
     GLenum GetGLPrimitiveTopology() const;
     VertexAttributeMask GetAttributesUsingVertexBuffer(VertexBufferSlot slot) const;
@@ -53,7 +53,7 @@ class RenderPipeline final : public RenderPipelineBase, public PipelineGL {
     MaybeError Initialize() override;
 
   private:
-    RenderPipeline(Device* device, const RenderPipelineDescriptor* descriptor);
+    RenderPipeline(Device* device, const UnpackedPtr<RenderPipelineDescriptor>& descriptor);
     ~RenderPipeline() override;
     void DestroyImpl() override;
 

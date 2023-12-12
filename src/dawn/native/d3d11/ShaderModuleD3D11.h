@@ -49,7 +49,7 @@ class PipelineLayout;
 class ShaderModule final : public ShaderModuleBase {
   public:
     static ResultOrError<Ref<ShaderModule>> Create(Device* device,
-                                                   const ShaderModuleDescriptor* descriptor,
+                                                   const UnpackedPtr<ShaderModuleDescriptor>& descriptor,
                                                    ShaderModuleParseResult* parseResult,
                                                    OwnedCompilationMessages* compilationMessages);
 
@@ -63,7 +63,7 @@ class ShaderModule final : public ShaderModuleBase {
         const std::optional<tint::PixelLocalOptions>& pixelLocalOptions = {});
 
   private:
-    ShaderModule(Device* device, const ShaderModuleDescriptor* descriptor);
+    ShaderModule(Device* device, const UnpackedPtr<ShaderModuleDescriptor>& descriptor);
     ~ShaderModule() override = default;
     MaybeError Initialize(ShaderModuleParseResult* parseResult,
                           OwnedCompilationMessages* compilationMessages);
