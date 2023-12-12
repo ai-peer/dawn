@@ -46,7 +46,7 @@
 
 namespace dawn::native {
 
-MaybeError ValidatePipelineLayoutDescriptor(
+ResultOrError<UnpackedPtr<PipelineLayoutDescriptor>> ValidatePipelineLayoutDescriptor(
     DeviceBase*,
     const PipelineLayoutDescriptor* descriptor,
     PipelineCompatibilityToken pipelineCompatibilityToken = PipelineCompatibilityToken(0));
@@ -70,9 +70,9 @@ class PipelineLayoutBase : public ApiObjectBase,
                            public ContentLessObjectCacheable<PipelineLayoutBase> {
   public:
     PipelineLayoutBase(DeviceBase* device,
-                       const PipelineLayoutDescriptor* descriptor,
+                       const UnpackedPtr<PipelineLayoutDescriptor>& descriptor,
                        ApiObjectBase::UntrackedByDeviceTag tag);
-    PipelineLayoutBase(DeviceBase* device, const PipelineLayoutDescriptor* descriptor);
+    PipelineLayoutBase(DeviceBase* device, const UnpackedPtr<PipelineLayoutDescriptor>& descriptor);
     ~PipelineLayoutBase() override;
 
     static PipelineLayoutBase* MakeError(DeviceBase* device, const char* label);

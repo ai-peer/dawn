@@ -53,7 +53,7 @@ class AttachmentState final : public ObjectBase,
     // Note: Descriptors must be validated before the AttachmentState is constructed.
     explicit AttachmentState(DeviceBase* device, const RenderBundleEncoderDescriptor* descriptor);
     explicit AttachmentState(DeviceBase* device,
-                             const RenderPipelineDescriptor* descriptor,
+                             const UnpackedPtr<RenderPipelineDescriptor>& descriptor,
                              const PipelineLayoutBase* layout);
     explicit AttachmentState(DeviceBase* device, const RenderPassDescriptor* descriptor);
 
