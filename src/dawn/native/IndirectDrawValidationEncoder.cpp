@@ -45,6 +45,7 @@
 #include "dawn/native/InternalPipelineStore.h"
 #include "dawn/native/Queue.h"
 #include "dawn/native/utils/WGPUHelpers.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 
@@ -260,7 +261,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
     DAWN_TRY(device->ValidateIsAlive());
 
     struct Batch {
-        const IndirectDrawMetadata::IndirectValidationBatch* metadata;
+        raw_ptr<const IndirectDrawMetadata::IndirectValidationBatch> metadata;
         uint64_t numIndexBufferElements;
         uint64_t dataBufferOffset;
         uint64_t dataSize;
@@ -268,12 +269,12 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
         uint64_t inputIndirectSize;
         uint64_t outputParamsOffset;
         uint64_t outputParamsSize;
-        BatchInfo* batchInfo;
+        raw_ptr<BatchInfo, AllowPtrArithmetic> batchInfo;
     };
 
     struct Pass {
         uint32_t flags;
-        BufferBase* inputIndirectBuffer;
+        raw_ptr<BufferBase> inputIndirectBuffer;
         IndirectDrawMetadata::DrawType drawType;
         uint64_t outputParamsSize = 0;
         uint64_t batchDataSize = 0;
@@ -348,7 +349,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             newBatch.dataBufferOffset = 0;
 
             Pass newPass{};
-            newPass.inputIndirectBuffer = config.inputIndirectBuffer;
+            newPass.inputIndirectBuffer = config.inputIndirectBuffer.get();
             newPass.drawType = config.drawType;
             newPass.batchDataSize = newBatch.dataSize;
             newPass.batches.push_back(newBatch);
@@ -395,7 +396,7 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
             batch.batchInfo->numDraws = static_cast<uint32_t>(batch.metadata->draws.size());
             batch.batchInfo->flags = pass.flags;
 
-            uint32_t* indirectOffsets = reinterpret_cast<uint32_t*>(batch.batchInfo + 1);
+            uint32_t* indirectOffsets = reinterpret_cast<uint32_t*>(batch.batchInfo.get() + 1);
             uint64_t outputParamsOffset = batch.outputParamsOffset;
             for (auto& draw : batch.metadata->draws) {
                 // The shader uses this to index an array of u32, hence the division by 4 bytes.
