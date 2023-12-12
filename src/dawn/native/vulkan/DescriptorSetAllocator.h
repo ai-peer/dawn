@@ -37,6 +37,7 @@
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/vulkan/DescriptorSetAllocation.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::vulkan {
 
@@ -62,7 +63,7 @@ class DescriptorSetAllocator : public ObjectBase {
 
     MaybeError AllocateDescriptorPool();
 
-    const BindGroupLayout* mLayout;
+    raw_ptr<const BindGroupLayout, DanglingUntriaged> mLayout;
 
     std::vector<VkDescriptorPoolSize> mPoolSizes;
     SetIndex mMaxSets;
