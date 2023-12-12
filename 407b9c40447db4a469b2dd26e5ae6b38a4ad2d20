@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f724f56_c43b5355",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-12T13:23:12Z",
+      "side": 1,
+      "message": "In the latest patchset, I turned the static_library into a source_set.\nIndeed, this is a header only library. This causes issues on Windows, because no object is produced.\n\nSee https://groups.google.com/a/chromium.org/g/gn-dev/c/Jn4TbhOtB9k\n```\n  * Source sets can have no sources, while static libraries will give strange\n    platform-specific errors if they have no sources. If a target has only\n    headers (for include checking purposes) or conditionally has no sources on\n    sone platforms, use a source set.\n```",
+      "revId": "407b9c40447db4a469b2dd26e5ae6b38a4ad2d20",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
