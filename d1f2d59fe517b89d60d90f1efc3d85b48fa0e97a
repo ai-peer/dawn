@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8f47701a_a92db94b",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0a574d2e_100f3289",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a4c48af5_4982b710",
@@ -48,6 +66,24 @@
       "writtenOn": "2023-12-12T15:43:01Z",
       "side": 1,
       "message": "Nit: \"In order to avoid collisions in renamed interface blocks, prepend v_ or f_ to buffer binding variable names. The AddBlockAttribute transform in the Tint GLSL printer will always generate wrapper structs from such bindings.\"",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e71ac62d_83263562",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 330,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done. (With minor changes)",
+      "parentUuid": "a4c48af5_4982b710",
       "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "42eaac2f_53449e1c",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1840,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done (Add a \"must\" and \"in GLSL\")\nAdd more descriptions.",
+      "parentUuid": "5705add2_bad30f91",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99182cef_701ec6e1",
@@ -82,6 +136,24 @@
       "writtenOn": "2023-12-12T15:43:01Z",
       "side": 1,
       "message": "Nit: UBO -\u003e UBOs (or \"a UBO\", \"remains\")",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f12f556f_c6b903e8",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1877,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done (Replaced with the upper change directly. This one should be SSBO BTW, my mistake)",
+      "parentUuid": "99182cef_701ec6e1",
       "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -103,6 +175,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a004ff0_f5959ed2",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1947,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done (with minor changes)",
+      "parentUuid": "a84a127c_bee105e7",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b6654b48_29891056",
@@ -116,6 +206,24 @@
       "writtenOn": "2023-12-12T15:43:01Z",
       "side": 1,
       "message": "Nit: UBO -\u003e UBOs (or \"a UBO\", \"remains\").",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3711645_5da0ccb6",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2032,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b6654b48_29891056",
       "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ab899261_a2426176",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2061,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ecf8bd2_037b78c4",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e5e4eb67_27c107b5",
@@ -154,6 +280,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c51b472_9377568b",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2093,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e5e4eb67_27c107b5",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "907e8610_22b764ff",
@@ -167,6 +311,24 @@
       "writtenOn": "2023-12-12T15:43:01Z",
       "side": 1,
       "message": "Nit: Deliberately mismatch a UBO name at the same binding point",
+      "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ddb31f1e_04e64ff8",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 2123,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-12T21:14:17Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "907e8610_22b764ff",
       "revId": "d1f2d59fe517b89d60d90f1efc3d85b48fa0e97a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
