@@ -53,6 +53,7 @@
 #include "mocks/ShaderModuleMock.h"
 #include "mocks/SwapChainMock.h"
 #include "mocks/TextureMock.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
 namespace {
@@ -90,7 +91,7 @@ class ScopedRawPtrExpectation {
     ~ScopedRawPtrExpectation() { Mock::VerifyAndClearExpectations(mPtr); }
 
   private:
-    void* mPtr = nullptr;
+    raw_ptr<void, DanglingUntriaged> mPtr = nullptr;
 };
 
 class DestroyObjectTests : public DawnMockTest {

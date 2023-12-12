@@ -34,6 +34,7 @@
 #include "dawn/native/DawnNative.h"
 #include "dawn/tests/DawnTest.h"
 #include "gtest/gtest.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "webgpu/webgpu_glfw.h"
 
 // Include windows.h before GLFW so GLFW's APIENTRY macro doesn't conflict with windows.h's.
@@ -92,7 +93,7 @@ class WindowSurfaceInstanceTests : public testing::Test {
 
   private:
     wgpu::Instance mInstance;
-    GLFWwindow* mWindow = nullptr;
+    raw_ptr<GLFWwindow> mWindow = nullptr;
 };
 
 // Test that a valid chained descriptor works (and that GLFWUtils creates a valid chained
