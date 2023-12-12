@@ -16,6 +16,23 @@
       "message": "would it suffice to `#define WGPU_FUNCTION_ATTRIBUTE __attribute__((no_sanitize(\"cfi-icall\")))` ?\n\nthen the suppression could be made more local to your library",
       "revId": "960abb19d359263e27e2412c444123bc3f5a325c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea085477_b503f4fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-12T23:42:26Z",
+      "side": 1,
+      "message": "LGTM - can you comment in the template that we\u0027re disabling the sanitizer for calls to procs.fooBar since that\u0027s the part that may be dynamically loaded?",
+      "revId": "960abb19d359263e27e2412c444123bc3f5a325c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
