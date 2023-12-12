@@ -49,6 +49,7 @@
 #include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/dawn_platform.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "tint/lang/wgsl/features/language_feature.h"
 
 namespace dawn::platform {
@@ -208,7 +209,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     bool mEnableAdapterBlocklist = false;
     BackendValidationLevel mBackendValidationLevel = BackendValidationLevel::Disabled;
 
-    dawn::platform::Platform* mPlatform = nullptr;
+    raw_ptr<dawn::platform::Platform, DanglingUntriaged> mPlatform = nullptr;
     std::unique_ptr<dawn::platform::Platform> mDefaultPlatform;
     std::unique_ptr<BlobCache> mBlobCache;
     BlobCache mPassthroughBlobCache;

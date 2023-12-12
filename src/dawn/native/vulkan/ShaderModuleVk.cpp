@@ -46,6 +46,7 @@
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/metrics/HistogramMacros.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "tint/tint.h"
 
 #ifdef DAWN_ENABLE_SPIRV_VALIDATION
@@ -146,7 +147,7 @@ class ShaderModule::ConcurrentTransformedShaderModuleCache {
         }
     };
 
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
     std::mutex mMutex;
     absl::flat_hash_map<TransformedShaderModuleCacheKey,
                         Entry,
