@@ -63,6 +63,7 @@ struct ReservedDevice {
     WGPUDevice device;
     uint32_t id;
     uint32_t generation;
+    WGPUFuture deviceLostFuture;
 };
 
 struct ReservedInstance {

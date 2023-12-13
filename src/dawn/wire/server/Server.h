@@ -159,6 +159,14 @@ struct RequestDeviceUserdata : CallbackUserdata {
     ObjectHandle eventManager;
     WGPUFuture future;
     ObjectId deviceObjectId;
+    WGPUFuture deviceLostFuture;
+};
+
+struct DeviceLostUserdata : CallbackUserdata {
+    using CallbackUserdata::CallbackUserdata;
+
+    ObjectHandle eventManager;
+    WGPUFuture future;
 };
 
 class Server : public ServerBase {
@@ -183,7 +191,7 @@ class Server : public ServerBase {
                                uint32_t deviceId,
                                uint32_t deviceGeneration);
 
-    WireResult InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation);
+    WireResult InjectDevice(WGPUDevice device, uint32_t id, uint32_t generation, );
 
     WireResult InjectInstance(WGPUInstance instance, uint32_t id, uint32_t generation);
 
@@ -212,8 +220,12 @@ class Server : public ServerBase {
 
     // Error callbacks
     void OnUncapturedError(ObjectHandle device, WGPUErrorType type, const char* message);
-    void OnDeviceLost(ObjectHandle device, WGPUDeviceLostReason reason, const char* message);
     void OnLogging(ObjectHandle device, WGPULoggingType type, const char* message);
+
+    // Async event callbacks
+    void OnDeviceLost(DeviceLostUserdata* userdata,
+                      WGPUDeviceLostReason reason,
+                      const char* message);
     void OnDevicePopErrorScope(ErrorScopeUserdata* userdata,
                                WGPUErrorType type,
                                const char* message);
