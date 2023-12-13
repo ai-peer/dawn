@@ -29,12 +29,14 @@
 #define SRC_DAWN_NATIVE_ADAPTER_H_
 
 #include <string>
+#include <utility>
 #include <vector>
 
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 #include "dawn/common/WeakRefSupport.h"
 #include "dawn/native/DawnNative.h"
+#include "dawn/native/Device.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/dawn_platform.h"
 
@@ -64,7 +66,6 @@ class AdapterBase : public RefCounted, public WeakRefSupport<AdapterBase> {
     Future APIRequestDeviceF(const DeviceDescriptor* descriptor,
                              const RequestDeviceCallbackInfo& callbackInfo);
     DeviceBase* APICreateDevice(const DeviceDescriptor* descriptor = nullptr);
-    ResultOrError<Ref<DeviceBase>> CreateDevice(const DeviceDescriptor* rawDescriptor);
     bool APIGetFormatCapabilities(wgpu::TextureFormat format, FormatCapabilities* capabilities);
 
     void SetUseTieredLimits(bool useTieredLimits);
@@ -84,6 +85,11 @@ class AdapterBase : public RefCounted, public WeakRefSupport<AdapterBase> {
     const std::string& GetName() const;
 
   private:
+    std::pair<Ref<DeviceBase::DeviceLostEvent>, ResultOrError<Ref<DeviceBase>>> CreateDevice(
+        const DeviceDescriptor* rawDescriptor);
+    ResultOrError<Ref<DeviceBase>> CreateDeviceInternal(const DeviceDescriptor* rawDescriptor,
+                                                        Ref<DeviceBase::DeviceLostEvent> lostEvent);
+
     Ref<PhysicalDeviceBase> mPhysicalDevice;
     FeatureLevel mFeatureLevel;
     bool mUseTieredLimits = false;
