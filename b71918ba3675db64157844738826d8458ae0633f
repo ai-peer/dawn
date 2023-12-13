@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "02908f5b_5ea987a8",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 143,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T21:41:28Z",
+      "side": 1,
+      "message": "The fact that this is a loop is not covered by tests.\nPlease add a test that exercises 2 or more parameters.",
+      "revId": "b71918ba3675db64157844738826d8458ae0633f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
