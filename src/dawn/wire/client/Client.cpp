@@ -60,6 +60,11 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 }
 
 Client::~Client() {
+    // Transition all event managers to ClientDropped state.
+    for (auto& [_, eventManager] : mEventManagers) {
+        eventManager->TransitionTo(EventManager::State::ClientDropped);
+    }
+
     DestroyAllObjects();
 }
 
@@ -126,6 +131,7 @@ ReservedDevice Client::ReserveDevice(WGPUInstance instance) {
     result.device = ToAPI(device);
     result.reservation.id = device->GetWireId();
     result.reservation.generation = device->GetWireGeneration();
+    result.reservation.deviceLostFuture = device->GetDeviceLostFuture();
     return result;
 }
 
@@ -174,6 +180,11 @@ void Client::Disconnect() {
     mDisconnected = true;
     mSerializer = ChunkedCommandSerializer(NoopCommandSerializer::GetInstance());
 
+    // Transition all event managers to ClientDropped state.
+    for (auto& [_, eventManager] : mEventManagers) {
+        eventManager->TransitionTo(EventManager::State::ClientDropped);
+    }
+
     auto& deviceList = mObjects[ObjectType::Device];
     {
         for (LinkNode<ObjectBase>* device = deviceList.head(); device != deviceList.end();
@@ -187,11 +198,6 @@ void Client::Disconnect() {
              object = object->next()) {
             object->value()->CancelCallbacksForDisconnect();
         }
-    }
-
-    // Transition all event managers to ClientDropped state.
-    for (auto& [_, eventManager] : mEventManagers) {
-        eventManager->TransitionTo(EventManager::State::ClientDropped);
     }
 }
 
