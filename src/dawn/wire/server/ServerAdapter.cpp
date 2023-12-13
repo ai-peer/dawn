@@ -36,6 +36,7 @@ WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
                                           ObjectHandle eventManager,
                                           WGPUFuture future,
                                           ObjectHandle deviceHandle,
+                                          WGPUFuture deviceLostFuture,
                                           const WGPUDeviceDescriptor* descriptor) {
     Known<WGPUDevice> device;
     WIRE_TRY(DeviceObjects().Allocate(&device, deviceHandle, AllocationState::Reserved));
@@ -44,8 +45,19 @@ WireResult Server::DoAdapterRequestDevice(Known<WGPUAdapter> adapter,
     userdata->eventManager = eventManager;
     userdata->future = future;
     userdata->deviceObjectId = device.id;
+    userdata->deviceLostFuture = deviceLostFuture;
 
-    mProcs.adapterRequestDevice(adapter->handle, descriptor,
+    // Update the descriptor with the device lost callback associated with this request.
+    auto deviceLostUserdata = MakeUserdata<DeviceLostUserdata>();
+    deviceLostUserdata->eventManager = eventManager;
+    deviceLostUserdata->future = deviceLostFuture;
+
+    WGPUDeviceDescriptor desc = *descriptor;
+    desc.deviceLostCallbackInfo.mode = WGPUCallbackMode_AllowProcessEvents;
+    desc.deviceLostCallbackInfo.callback = ForwardToServer<&Server::OnDeviceLost>;
+    desc.deviceLostCallbackInfo.userdata = deviceLostUserdata.release();
+
+    mProcs.adapterRequestDevice(adapter->handle, &desc,
                                 ForwardToServer<&Server::OnRequestDeviceCallback>,
                                 userdata.release());
     return WireResult::Success;

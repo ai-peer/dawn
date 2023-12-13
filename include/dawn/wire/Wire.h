@@ -31,6 +31,7 @@
 #include <cstdint>
 #include <limits>
 
+#include "dawn/common/FutureUtils.h"
 #include "dawn/webgpu.h"
 #include "dawn/wire/dawn_wire_export.h"
 
@@ -81,6 +82,7 @@ struct SwapChainReservation {
 struct DeviceReservation {
     uint32_t id;
     uint32_t generation;
+    WGPUFuture deviceLostFuture = {kNullFutureID};
 };
 
 struct InstanceReservation {
