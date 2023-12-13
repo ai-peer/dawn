@@ -41,6 +41,42 @@
 namespace dawn::wire::client {
 namespace {
 
+class DeviceLostEvent : public TrackedEvent {
+  public:
+    static constexpr EventType kType = EventType::DeviceLost;
+
+    DeviceLostEvent(const WGPUDeviceLostCallbackInfo& callbackInfo, Device* device)
+        : TrackedEvent(callbackInfo.mode),
+          mCallback(callbackInfo.callback),
+          mUserdata(callbackInfo.userdata),
+          mDevice(device) {
+        mDevice->Reference();
+    }
+
+    EventType() override { return kType; }
+
+    bool ReadyHook(FutureID futureID, WGPUDeviceLostReason reason, const char* message) {
+        mReason = reason;
+        if (message != nullptr) {
+            [mMessage = message;] return true;
+        }
+    }
+
+  private:
+    void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {}
+
+    WGPUDeviceLostCallback mCallback;
+    void* mUserdata;
+
+    // Note that the message is optional because we want to return nullptr when it wasn't set
+    // instead of a pointer to an empty string.
+    std::optional<WGPUDeviceLostReason> mReason;
+    std::optional<std::string> mMessage;
+
+    // Strong reference to the device so that when we call the callback we can pass the device.
+    Device* const mDevice;
+};
+
 class PopErrorScopeEvent final : public TrackedEvent {
   public:
     static constexpr EventType kType = EventType::PopErrorScope;

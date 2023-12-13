@@ -574,9 +574,21 @@ class DeviceBase : public RefCountedWithExternalCount {
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
     raw_ptr<void, DanglingUntriaged> mLoggingUserdata = nullptr;
 
-    wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
+    struct DeviceLostEvent final : public EventManager::TrackedEvent {
+        wgpu::DeviceLostReason mReason;
+        std::string mMessage;
+
+        wgpu::DeviceLostCallback mCallback;
+        void* mUserdata;
+        Ref<DeviceBase> mDevice;
+
+        DeviceLostEvent(DeviceBase* device, const DeviceLostCallbackInfo& callbackInfo);
+        ~DeviceLostEvent() override;
+
+        void Complete(EventCompletionType completionType) override;
+    };
+    Ref<DeviceLostEvent> mDeviceLostEvent = nullptr;
+    FutureID mDeviceLostFutureID;
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 
