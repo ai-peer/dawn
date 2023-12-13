@@ -126,20 +126,18 @@ class ProcTableAsClass {
             ProcTableAsClass* procs = nullptr;
             {% for type in by_category["object"] %}
                 {% for method in type.methods if has_callback_info(method) or method.name.get() in LegacyCallbackFunctions %}
+                    void* m{{as_CppMethodSuffix(type.name, method.name)}}Userdata = 0;
                     {% for arg in method.arguments %}
                         {% if arg.name.get() == 'callback info' %}
-                            void* m{{as_CppMethodSuffix(type.name, method.name)}}Userdata = 0;
                             {% for callback in types[arg.type.name.get()].members if callback.type.category == 'function pointer' %}
                                 {{as_cType(callback.type.name)}} m{{as_CppMethodSuffix(type.name, method.name)}}{{callback.name.CamelCase()}} = nullptr;
                             {% endfor %}
                         {% elif arg.type.category == 'function pointer' %}
-                            void* m{{as_CppMethodSuffix(type.name, method.name)}}Userdata = 0;
                             {{as_cType(arg.type.name)}} m{{as_CppMethodSuffix(type.name, method.name)}}{{arg.name.CamelCase()}} = nullptr;
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
-            void* userdata = 0;
         };
 
     private:
