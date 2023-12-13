@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b5a0fe9b_fd89825b",
+        "filename": "src/tint/lang/core/ir/binary/decode.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-13T15:53:02Z",
+      "side": 1,
+      "message": "I\u0027m guessing there was some sort of rebase weirdness, as it looks like this and a bunch of other related changes in this CL do not belong here.\n\n+2 anyway because these changes look fine too, but perhaps consider splitting them back out.",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 9
+      },
+      "revId": "76bdf5c28770daa8fd9cb580716948a2cb7cf36b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
