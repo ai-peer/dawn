@@ -32,6 +32,7 @@
 
 #include "dawn/common/BitSetIterator.h"
 #include "dawn/common/Constants.h"
+#include "dawn/common/Log.h"
 #include "dawn/native/BindGroupLayoutInternal.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/CompilationMessages.h"
@@ -41,6 +42,8 @@
 #include "dawn/native/PipelineLayout.h"
 #include "dawn/native/RenderPipeline.h"
 #include "dawn/native/TintUtils.h"
+#include "tint/lang/core/ir/disassembler.h"
+#include "tint/lang/wgsl/writer/ir_to_program/ir_to_program.h"
 
 #ifdef DAWN_ENABLE_SPIRV_VALIDATION
 #include "dawn/native/SpirvValidation.h"
@@ -1078,6 +1081,35 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
     tint::Program program;
     DAWN_TRY_ASSIGN(program,
                     ParseWGSL(&tintSource->file, device->GetWGSLAllowedFeatures(), outMessages));
+
+    // Convert the AST program to an IR module.
+    auto ir_from_wgsl = tint::wgsl::reader::ProgramToLoweredIR(program);
+    DAWN_INVALID_IF(ir_from_wgsl != tint::Success,
+                    "An error occurred while generating Tint IR from WGSL\n%s",
+                    ir_from_wgsl.Failure().reason.str());
+    // Convert the IR module to SPIR-V.
+    auto spirvResult = tint::spirv::writer::Generate(ir_from_wgsl.Get(), {});
+    DAWN_INVALID_IF(spirvResult != tint::Success, "An error occurred while generating SPIR-V\n%s",
+                    spirvResult.Failure().reason.str());
+
+    // Convert the SPIR-V program to an IR module.
+    auto ir_from_spirv = tint::spirv::reader::ReadIR(spirvResult->spirv);
+    DAWN_INVALID_IF(ir_from_spirv != tint::Success,
+                    "An error occurred while generating Tint IR from SPIR-V\n%s",
+                    ir_from_spirv.Failure().reason.str());
+
+    if (device->IsLost()) {
+        DAWN_TRY(ValidateSpirv(device, spirvResult->spirv.data(), spirvResult->spirv.size(), true));
+        dawn::ErrorLog() << "Tint IR dump:\n\n" << tint::core::ir::Disassemble(ir_from_spirv.Get());
+        return DAWN_INTERNAL_ERROR("SPIR-V roundtrip failed");
+    }
+
+    // Convert the IR module to WGSL.
+    auto wgslResult = tint::wgsl::writer::IRToProgram(ir_from_spirv.Get(), {});
+    DAWN_INVALID_IF(!wgslResult.IsValid(), "An error occurred while generating WGSL from IR\n%s",
+                    wgslResult.Diagnostics().str());
+    program = std::move(wgslResult);
+
     parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
     parseResult->tintSource = std::move(tintSource);
 
