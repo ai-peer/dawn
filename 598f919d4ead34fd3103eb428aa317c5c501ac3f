@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1dd0d7cd_7a89c192",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-13T01:27:52Z",
+      "side": 1,
+      "message": "I changed it to use `ty.void_()`, which I think it a slightly more appropriate placeholder.\n\nI was still planning on using `nullptr` for placeholder IR values though, since we use that for `undef` and the first IR validation pass should reject it instead of crashing somewhere else.",
+      "parentUuid": "d29a0fc1_d7a33f7d",
+      "range": {
+        "startLine": 89,
+        "startChar": 23,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "598f919d4ead34fd3103eb428aa317c5c501ac3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca4a0ea3_70b9b721",
         "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
         "patchSetId": 2
@@ -37,6 +61,30 @@
       "writtenOn": "2023-12-12T23:44:29Z",
       "side": 1,
       "message": "`current_function_` ?",
+      "range": {
+        "startLine": 131,
+        "startChar": 24,
+        "endLine": 131,
+        "endChar": 40
+      },
+      "revId": "598f919d4ead34fd3103eb428aa317c5c501ac3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18f0f5b2_37506de3",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-13T01:27:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca4a0ea3_70b9b721",
       "range": {
         "startLine": 131,
         "startChar": 24,
