@@ -81,8 +81,12 @@ namespace dawn::wire::server {
         switch(objectType) {
             {% for type in by_category["object"] %}
                 case ObjectType::{{type.name.CamelCase()}}: {
+                    // If the requested object doesn't exist, ignore the object since the client may
+                    // eagerly allocate handles that don't correlate with a backend object.
                     Known<WGPU{{type.name.CamelCase()}}> obj;
-                    WIRE_TRY({{type.name.CamelCase()}}Objects().Get(objectId, &obj));
+                    if ({{type.name.CamelCase()}}Objects().Get(objectId, &obj) == WireResult::FatalError) {
+                        return WireResult::Success;
+                    }
 
                     if (obj->state == AllocationState::Allocated) {
                         DAWN_ASSERT(obj->handle != nullptr);

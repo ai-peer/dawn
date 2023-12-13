@@ -345,9 +345,11 @@ bool EventManager::IsShutDown() const {
 
 FutureID EventManager::TrackEvent(Ref<TrackedEvent>&& event) {
     FutureID futureID = mNextFutureID++;
-    return mEvents.Use([&](auto events) {
+
+    Ref<TrackedEvent> spontaneousEvent;
+    mEvents.Use([&](auto events) {
         if (!events->has_value()) {
-            return futureID;
+            return;
         }
 
         if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
@@ -362,14 +364,19 @@ FutureID EventManager::TrackEvent(Ref<TrackedEvent>&& event) {
                           queueAndSerial.queue->GetCompletedCommandSerial();
             }
             if (isReady) {
-                event->EnsureComplete(EventCompletionType::Ready);
-                return futureID;
+                spontaneousEvent = std::move(event);
             }
         }
-
-        (*events)->emplace(futureID, std::move(event));
-        return futureID;
+        if (!spontaneousEvent) {
+            (*events)->emplace(futureID, std::move(event));
+        }
     });
+
+    // Handle spontaneous completion now.
+    if (spontaneousEvent) {
+        spontaneousEvent->EnsureComplete(EventCompletionType::Ready);
+    }
+    return futureID;
 }
 
 void EventManager::SetFutureReady(FutureID futureID) {
@@ -429,8 +436,11 @@ bool EventManager::ProcessPollEvents() {
 
         waitStatus = WaitImpl(futures, Nanoseconds(0));
         if (waitStatus == wgpu::WaitStatus::TimedOut) {
-            // Return the beginning to indicate that nothing completed.
-            return true;
+            // If we time out, the means that no callbacks are ready to be completed for now so
+            // return false. Note that this does not mean there is no work left to be done as with
+            // the to-be-deprecated Device.Tick. The reason we return false here is to ensure that
+            // we don't end up polling forever on long-lasting events such as device lost.
+            return false;
         }
         DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
 
