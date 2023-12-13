@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90690b25_25ccc3f9",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T19:12:51Z",
+      "side": 1,
+      "message": "At first I was worried about an order dependency between creating regular functions and entry points. That\u0027s because the builder\u0027s Function creation method takes stage and workgroup size params. But that\u0027s ok because in this reader those will be set after the function object is created.\n\nIf the other clients of the IR builder don\u0027t rely on those params to the Function method then we have an opportunity to remove them.\n\nHeh.  I only found one use of it, in src/tint/lang/core/ir/transform/add_empty_entry_point.cc \n\nI filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d2117 for followup cleanup",
+      "revId": "6ad32a942d54ac3c07fd99e9c0a5f1dabac88de0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
