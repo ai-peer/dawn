@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc21a799_d15b498b",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T21:45:11Z",
+      "side": 1,
+      "message": "nit: would be nice to see the width in the message.",
+      "range": {
+        "startLine": 114,
+        "startChar": 77,
+        "endLine": 114,
+        "endChar": 82
+      },
+      "revId": "000bf64b84544e9ac43b4e62c08ef0835f0a0206",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
