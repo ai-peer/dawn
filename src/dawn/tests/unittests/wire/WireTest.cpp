@@ -90,7 +90,7 @@ void WireTest::SetUp() {
     device = reservedDevice.device;
     apiDevice = api.GetNewDevice();
     EXPECT_CALL(api, DeviceReference(apiDevice));
-    mWireServer->InjectDevice(apiDevice, reservedDevice.reservation);
+    EXPECT_TRUE(GetWireServer()->InjectDevice(apiDevice, reservedDevice.reservation));
 
     // The GetQueue is done on WireClient startup so we expect it now.
     queue = wgpuDeviceGetQueue(device);
