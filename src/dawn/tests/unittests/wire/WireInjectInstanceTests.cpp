@@ -103,11 +103,11 @@ TEST_F(WireInjectInstanceTests, InjectedInstanceLifetime) {
 // Test that a device reservation can be reclaimed. This is necessary to
 // avoid leaking ObjectIDs for reservations that are never injected.
 TEST_F(WireInjectInstanceTests, ReclaimInstanceReservation) {
-    // Test that doing a reservation and full release is an error.
+    // Test that doing a reservation and full release is not an error.
     {
         auto reserved = GetWireClient()->ReserveInstance();
         wgpuInstanceRelease(reserved.instance);
-        FlushClient(false);
+        FlushClient();
     }
 
     // Test that doing a reservation and then reclaiming it recycles the ID.
