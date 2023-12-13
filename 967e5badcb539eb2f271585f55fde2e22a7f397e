@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73dac3ab_6f12c554",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T16:08:13Z",
+      "side": 1,
+      "message": "nit: these aren\u0027t used yet. Better to introduce them when they\u0027re used.",
+      "revId": "967e5badcb539eb2f271585f55fde2e22a7f397e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7e1c98d_b87d6270",
+        "filename": "src/tint/lang/spirv/validate/validate_test.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T16:08:13Z",
+      "side": 1,
+      "message": "This is fine.  This is testing the validation call.\n\nAs discussed offline, originally the input to spir-v reader is assumed to be roughly Vulkan 1.1 SPIR-V 1.0 (with flexibility about storage buffer storage class).\n\nI\u0027ll note that the SPIR-V versionof this module and in the next test is SPIR-V 1.6.  \nThat\u0027s why you need to validate against Vulkan 1.3, as it\u0027s the first version of Vulkan that supports SPIR-V 1.6.",
+      "revId": "967e5badcb539eb2f271585f55fde2e22a7f397e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4073803e_059dfec5",
+        "filename": "src/tint/lang/spirv/writer/writer_fuzz.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T16:08:13Z",
+      "side": 1,
+      "message": "Most of our targets are not running Vulkan 1.3\n\nMany Android targets today will be running Vulkan 1.1.\nhttps://source.android.com/docs/core/graphics/implement-vulkan#versions \n\nWebGPU targets roughly Vulkan 1.0\nhttps://github.com/gpuweb/gpuweb/issues/1069 \nBut we haven\u0027t put in a lot of detail about SPIR-V capabilities.",
+      "range": {
+        "startLine": 44,
+        "startChar": 72,
+        "endLine": 44,
+        "endChar": 91
+      },
+      "revId": "967e5badcb539eb2f271585f55fde2e22a7f397e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
