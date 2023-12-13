@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "026d45f6_7f69f9fb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-13T18:41:46Z",
+      "side": 1,
+      "message": "Thanks for the review. I should have copy the previous attempt CL here as well. It tries to fix by modifying AddBlockAttribute transform. But this won\u0027t work for the case where same binding point is used in different stages with different content. https://dawn-review.googlesource.com/c/dawn/+/163901?forceReload\u003dtrue",
+      "parentUuid": "5d6fd67b_71dfcb7e",
+      "revId": "ecc71254b6ced91b3a6ca4f5ee1b1b8955eedcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b95d938f_57aef7f6",
