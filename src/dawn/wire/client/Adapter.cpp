@@ -63,24 +63,30 @@ class RequestDeviceEvent : public TrackedEvent {
         if (status == WGPURequestDeviceStatus_Success) {
             mDevice->SetLimits(limits);
             mDevice->SetFeatures(features, featuresCount);
+        } else {
+            mDevice->SetLost();
         }
         return WireResult::Success;
     }
 
   private:
     void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
+        Device* device = mDevice;
         if (completionType == EventCompletionType::Shutdown) {
             mStatus = WGPURequestDeviceStatus_InstanceDropped;
             mMessage = "A valid external Instance reference no longer exists.";
         }
+        if (mStatus != WGPURequestDeviceStatus_Success) {
+            device = nullptr;
+        }
+        if (mCallback) {
+            mCallback(mStatus, ToAPI(device), mMessage ? mMessage->c_str() : nullptr, mUserdata);
+        }
         if (mStatus != WGPURequestDeviceStatus_Success && mDevice != nullptr) {
             // If there was an error, we may need to reclaim the device allocation, otherwise the
             // device is returned to the user who owns it.
-            mDevice->GetClient()->Free(mDevice.get());
+            mDevice->Release();
             mDevice = nullptr;
-        }
-        if (mCallback) {
-            mCallback(mStatus, ToAPI(mDevice), mMessage ? mMessage->c_str() : nullptr, mUserdata);
         }
     }
 
@@ -257,13 +263,17 @@ WGPUFuture Adapter::RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
         return {futureIDInternal};
     }
 
-    // Ensure the device lost callback isn't serialized as part of the command, as it cannot be
-    // passed between processes.
+    // Ensure callbacks are not serialized as part of the command, as they cannot be passed between
+    // processes.
     WGPUDeviceDescriptor wireDescriptor = {};
     if (descriptor) {
         wireDescriptor = *descriptor;
         wireDescriptor.deviceLostCallback = nullptr;
         wireDescriptor.deviceLostUserdata = nullptr;
+        wireDescriptor.deviceLostCallbackInfo.callback = nullptr;
+        wireDescriptor.deviceLostCallbackInfo.userdata = nullptr;
+        wireDescriptor.uncapturedErrorCallbackInfo.callback = nullptr;
+        wireDescriptor.uncapturedErrorCallbackInfo.userdata = nullptr;
     }
 
     AdapterRequestDeviceCmd cmd;
@@ -271,6 +281,7 @@ WGPUFuture Adapter::RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
     cmd.eventManagerHandle = GetEventManagerHandle();
     cmd.future = {futureIDInternal};
     cmd.deviceObjectHandle = device->GetWireHandle();
+    cmd.deviceLostFuture = device->GetDeviceLostFuture();
     cmd.descriptor = &wireDescriptor;
 
     client->SerializeCommand(cmd);
