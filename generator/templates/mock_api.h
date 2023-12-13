@@ -104,10 +104,10 @@ class ProcTableAsClass {
                 {% for method in type.methods if has_callback_arguments(method) %}
                     {% for callback_arg in method.arguments if callback_arg.type.category == 'function pointer' %}
                         {{as_cType(callback_arg.type.name)}} m{{as_MethodSuffix(type.name, method.name)}}Callback = nullptr;
+                        void* m{{as_MethodSuffix(type.name, method.name)}}Userdata = 0;
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
-            void* userdata = 0;
         };
 
     private:
