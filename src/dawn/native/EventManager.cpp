@@ -75,6 +75,8 @@ class EventManager::TrackedEvent::WaitRef : dawn::NonCopyable {
     TrackedEvent* operator->() { return mRef.Get(); }
     const TrackedEvent* operator->() const { return mRef.Get(); }
 
+    Ref<TrackedEvent> Get() { return mRef; }
+
   private:
     Ref<TrackedEvent> mRef;
 };
@@ -263,7 +265,7 @@ wgpu::WaitStatus WaitImpl(std::vector<TrackedFutureWaitInfo>& futures, Nanosecon
             } else {
                 // Poll the completion events.
                 success = false;
-                for (auto it = begin; it != end; ++it) {
+                for (auto it = begin; it != mid; ++it) {
                     if (std::get<Ref<SystemEvent>>(it->event->GetCompletionData())->IsSignaled()) {
                         it->ready = true;
                         success = true;
@@ -407,12 +409,13 @@ void EventManager::SetFutureReady(FutureID futureID) {
 bool EventManager::ProcessPollEvents() {
     DAWN_ASSERT(!IsShutDown());
 
-    std::vector<TrackedFutureWaitInfo> futures;
+    std::vector<Ref<TrackedEvent>> completeable;
     wgpu::WaitStatus waitStatus;
-    auto readyEnd = mEvents.Use([&](auto events) {
+    auto result = mEvents.Use([&](auto events) {
         // Iterate all events and record poll events and spontaneous events since they are both
         // allowed to be completed in the ProcessPoll call. Note that spontaneous events are allowed
         // to trigger anywhere which is why we include them in the call.
+        std::vector<TrackedFutureWaitInfo> futures;
         futures.reserve((*events)->size());
         for (auto& [futureID, event] : **events) {
             if (event->mCallbackMode != wgpu::CallbackMode::WaitAnyOnly) {
@@ -423,13 +426,13 @@ bool EventManager::ProcessPollEvents() {
 
         // If there wasn't anything to wait on, we can skip the wait and just return the end.
         if (futures.size() == 0) {
-            return futures.end();
+            return false;
         }
 
         waitStatus = WaitImpl(futures, Nanoseconds(0));
         if (waitStatus == wgpu::WaitStatus::TimedOut) {
             // Return the beginning to indicate that nothing completed.
-            return futures.begin();
+            return true;
         }
         DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
 
@@ -439,15 +442,16 @@ bool EventManager::ProcessPollEvents() {
         // For all the futures we are about to complete, first ensure they're untracked.
         for (auto it = futures.begin(); it != readyEnd; ++it) {
             (*events)->erase(it->futureID);
+            completeable.emplace_back(it->event.Get());
         }
-        return readyEnd;
+        return readyEnd != futures.end();
     });
 
     // Finally, call callbacks.
-    for (auto it = futures.begin(); it != readyEnd; ++it) {
-        it->event->EnsureComplete(EventCompletionType::Ready);
+    for (auto& event : completeable) {
+        event->EnsureComplete(EventCompletionType::Ready);
     }
-    return readyEnd != futures.end();
+    return result;
 }
 
 wgpu::WaitStatus EventManager::WaitAny(size_t count, FutureWaitInfo* infos, Nanoseconds timeout) {
