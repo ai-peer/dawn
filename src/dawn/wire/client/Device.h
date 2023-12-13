@@ -52,6 +52,9 @@ class Device final : public ObjectWithEventsBase {
 
     ObjectType GetObjectType() const override;
 
+    // Override the default Release implementation to handle the device lost event.
+    uint32_t Release();
+
     void SetUncapturedErrorCallback(WGPUErrorCallback errorCallback, void* errorUserdata);
     void SetLoggingCallback(WGPULoggingCallback errorCallback, void* errorUserdata);
     void SetDeviceLostCallback(WGPUDeviceLostCallback errorCallback, void* errorUserdata);
@@ -74,7 +77,14 @@ class Device final : public ObjectWithEventsBase {
 
     void HandleError(WGPUErrorType errorType, const char* message);
     void HandleLogging(WGPULoggingType loggingType, const char* message);
-    void HandleDeviceLost(WGPUDeviceLostReason reason, const char* message);
+
+    // Depending on whether the device was successfully created on the server, we need to handle the
+    // device loss differently. When there is a backing Device on the server, we should release it
+    // normally, otherwise, we should just reclaim the client-side allocation directly without
+    // calling the server.
+    void HandleDeviceLost(WGPUDeviceLostReason reason,
+                          const char* message,
+                          bool createdDevice = true);
 
     bool GetLimits(WGPUSupportedLimits* limits) const;
     bool HasFeature(WGPUFeatureName feature) const;
@@ -83,8 +93,11 @@ class Device final : public ObjectWithEventsBase {
     void SetFeatures(const WGPUFeatureName* features, uint32_t featuresCount);
 
     WGPUQueue GetQueue();
+    WGPUFuture GetDeviceLostFuture();
 
     std::weak_ptr<bool> GetAliveWeakPtr();
+
+    class DeviceLostEvent;
 
   private:
     template <typename Event,
@@ -95,14 +108,21 @@ class Device final : public ObjectWithEventsBase {
 
     LimitsAndFeatures mLimitsAndFeatures;
 
-    WGPUErrorCallback mErrorCallback = nullptr;
-    WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
+    // TODO(crbug.com/dawn/2465): This can probably just be the future id once SetDeviceLostCallback
+    // is deprecated, and the callback and userdata moved into the DeviceLostEvent.
+    struct DeviceLostInfo {
+        FutureID futureID = kNullFutureID;
+        std::unique_ptr<TrackedEvent> event = nullptr;
+        WGPUDeviceLostCallbackNew callback = nullptr;
+        WGPUDeviceLostCallback oldCallback = nullptr;
+        // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
+        raw_ptr<void, DanglingUntriaged> userdata = nullptr;
+    };
+    DeviceLostInfo mDeviceLostInfo;
+
+    WGPUUncapturedErrorCallbackInfo mUncapturedErrorCallbackInfo;
     WGPULoggingCallback mLoggingCallback = nullptr;
-    bool mDidRunLostCallback = false;
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
-    raw_ptr<void, DanglingUntriaged> mErrorUserdata = nullptr;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
-    raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
     raw_ptr<void> mLoggingUserdata = nullptr;
 
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
