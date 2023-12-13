@@ -179,7 +179,8 @@ class Buffer::MapAsyncEvent : public TrackedEvent {
         }
 
         if (status == WGPUBufferMapAsyncStatus_Success) {
-            if (mBuffer->mIsDeviceAlive.expired()) {
+            if (auto isDeviceAlive = mBuffer->mIsDeviceAlive.lock();
+                isDeviceAlive == nullptr || !*isDeviceAlive) {
                 // If the device lost its last ref before this callback was resolved, we want to
                 // overwrite the status. This is necessary because otherwise dropping the last
                 // device reference could race w.r.t what this callback would see.
