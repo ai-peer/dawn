@@ -252,23 +252,9 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
                                    WGPURequestDeviceCallback callback,
                                    void* userdata) {
-    constexpr DeviceDescriptor kDefaultDescriptor = {};
-    if (descriptor == nullptr) {
-        descriptor = &kDefaultDescriptor;
-    }
-    auto result = CreateDevice(descriptor);
-    if (result.IsError()) {
-        std::unique_ptr<ErrorData> errorData = result.AcquireError();
-        // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-        callback(WGPURequestDeviceStatus_Error, nullptr, errorData->GetFormattedMessage().c_str(),
-                 userdata);
-        return;
-    }
-    Ref<DeviceBase> device = result.AcquireSuccess();
-    WGPURequestDeviceStatus status =
-        device == nullptr ? WGPURequestDeviceStatus_Unknown : WGPURequestDeviceStatus_Success;
-    // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-    callback(status, ToAPI(ReturnToAPI(std::move(device))), nullptr, userdata);
+    // Default legacy callback mode for RequestDevice is spontaneous.
+    APIRequestDeviceF(descriptor,
+                      {nullptr, wgpu::CallbackMode::AllowSpontaneous, callback, userdata});
 }
 
 Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
