@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
@@ -193,7 +194,8 @@ DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
         descriptor = &kDefaultDesc;
     }
 
-    auto result = CreateDevice(descriptor);
+    auto [event, result] = CreateDevice(descriptor);
+    mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(std::move(event));
     if (result.IsError()) {
         mPhysicalDevice->GetInstance()->ConsumedError(result.AcquireError());
         return nullptr;
@@ -201,9 +203,8 @@ DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
     return ReturnToAPI(result.AcquireSuccess());
 }
 
-ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor* rawDescriptor) {
-    DAWN_ASSERT(rawDescriptor != nullptr);
-
+ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDeviceInternal(
+    const DeviceDescriptor* rawDescriptor) {
     // Create device toggles state from required toggles descriptor and inherited adapter toggles
     // state.
     UnpackedPtr<DeviceDescriptor> descriptor;
@@ -255,26 +256,65 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
     return mPhysicalDevice->CreateDevice(this, descriptor, deviceToggles);
 }
 
+std::pair<Ref<DeviceBase::DeviceLostEvent>, ResultOrError<Ref<DeviceBase>>>
+AdapterBase::CreateDevice(const DeviceDescriptor* descriptor) {
+    DAWN_ASSERT(descriptor != nullptr);
+
+    Ref<DeviceBase> device = nullptr;
+    auto result = CreateDeviceInternal(descriptor);
+    if (result.IsSuccess()) {
+        device = result.AcquireSuccess();
+    }
+
+#if defined(DAWN_ENABLE_ASSERTS)
+    static constexpr DeviceLostCallbackInfo kDefaultDeviceLostCallbackInfo = {
+        nullptr, wgpu::CallbackMode::AllowProcessEvents,
+        [](WGPUDevice const*, WGPUDeviceLostReason, char const*, void*) {
+            static bool calledOnce = false;
+            if (!calledOnce) {
+                calledOnce = true;
+                dawn::WarningLog() << "No Dawn device lost callback was set. This is probably not "
+                                      "intended. If you really want to ignore device lost and "
+                                      "suppress this message, set the callback explicitly.";
+            }
+        },
+        nullptr};
+#else
+    static constexpr DeviceLostCallbackInfo kDefaultDeviceLostCallbackInfo = {
+        nullptr, wgpu::CallbackMode::AllowProcessEvents, nullptr, nullptr};
+#endif  // DAWN_ENABLE_ASSERTS
+
+    Ref<DeviceBase::DeviceLostEvent> deviceLostEvent;
+    if (descriptor->deviceLostCallback != nullptr) {
+        dawn::WarningLog()
+            << "DeviceDescriptor.deviceLostCallback and DeviceDescriptor.deviceLostUserdata are "
+               "deprecated. Use DeviceDescriptor.deviceLostCallbackInfo instead.";
+        deviceLostEvent = AcquireRef(new DeviceBase::DeviceLostEvent(
+            device.Get(), descriptor->deviceLostCallback, descriptor->deviceLostUserdata));
+    } else {
+        DeviceLostCallbackInfo deviceLostCallbackInfo = kDefaultDeviceLostCallbackInfo;
+        if (descriptor->deviceLostCallbackInfo.callback != nullptr) {
+            deviceLostCallbackInfo = descriptor->deviceLostCallbackInfo;
+            if (deviceLostCallbackInfo.mode != wgpu::CallbackMode::AllowSpontaneous) {
+                // TODO(dawn:2458) Currently we default the callback mode to ProcessEvents if not
+                // passed for backwards compatibility. We should add warning logging for it though
+                // when available.
+                deviceLostCallbackInfo.mode = wgpu::CallbackMode::AllowProcessEvents;
+            }
+        }
+        deviceLostEvent =
+            AcquireRef(new DeviceBase::DeviceLostEvent(device.Get(), deviceLostCallbackInfo));
+    }
+
+    return {deviceLostEvent, device ? device : std::move(result)};
+}
+
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
                                    WGPURequestDeviceCallback callback,
                                    void* userdata) {
-    constexpr DeviceDescriptor kDefaultDescriptor = {};
-    if (descriptor == nullptr) {
-        descriptor = &kDefaultDescriptor;
-    }
-    auto result = CreateDevice(descriptor);
-    if (result.IsError()) {
-        std::unique_ptr<ErrorData> errorData = result.AcquireError();
-        // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-        callback(WGPURequestDeviceStatus_Error, nullptr, errorData->GetFormattedMessage().c_str(),
-                 userdata);
-        return;
-    }
-    Ref<DeviceBase> device = result.AcquireSuccess();
-    WGPURequestDeviceStatus status =
-        device == nullptr ? WGPURequestDeviceStatus_Unknown : WGPURequestDeviceStatus_Success;
-    // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-    callback(status, ToAPI(ReturnToAPI(std::move(device))), nullptr, userdata);
+    // Default legacy callback mode for RequestDevice is spontaneous.
+    APIRequestDeviceF(descriptor,
+                      {nullptr, wgpu::CallbackMode::AllowSpontaneous, callback, userdata});
 }
 
 Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
@@ -320,8 +360,10 @@ Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
         descriptor = &kDefaultDescriptor;
     }
 
+    auto [event, result] = CreateDevice(descriptor);
     FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
-        AcquireRef(new RequestDeviceEvent(callbackInfo, CreateDevice(descriptor))));
+        AcquireRef(new RequestDeviceEvent(callbackInfo, std::move(result))));
+    mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(std::move(event));
     return {futureID};
 }
 

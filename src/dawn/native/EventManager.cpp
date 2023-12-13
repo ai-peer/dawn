@@ -345,62 +345,56 @@ bool EventManager::IsShutDown() const {
 
 FutureID EventManager::TrackEvent(Ref<TrackedEvent>&& event) {
     FutureID futureID = mNextFutureID++;
-    return mEvents.Use([&](auto events) {
-        if (!events->has_value()) {
+    event->mFutureID = futureID;
+
+    // Handle the event now if its spontaneous and ready.
+    if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
+        bool isReady = false;
+        auto completionData = event->GetCompletionData();
+        if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
+            isReady = std::get<Ref<SystemEvent>>(completionData)->IsSignaled();
+        }
+        if (std::holds_alternative<QueueAndSerial>(completionData)) {
+            auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
+            isReady = queueAndSerial.completionSerial <=
+                      queueAndSerial.queue->GetCompletedCommandSerial();
+        }
+        if (isReady) {
+            event->EnsureComplete(EventCompletionType::Ready);
             return futureID;
         }
+    }
 
-        if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
-            bool isReady = false;
-            auto completionData = event->GetCompletionData();
-            if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
-                isReady = std::get<Ref<SystemEvent>>(completionData)->IsSignaled();
-            }
-            if (std::holds_alternative<QueueAndSerial>(completionData)) {
-                auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
-                isReady = queueAndSerial.completionSerial <=
-                          queueAndSerial.queue->GetCompletedCommandSerial();
-            }
-            if (isReady) {
-                event->EnsureComplete(EventCompletionType::Ready);
-                return futureID;
-            }
-        }
-
-        (*events)->emplace(futureID, std::move(event));
-        return futureID;
-    });
-}
-
-void EventManager::SetFutureReady(FutureID futureID) {
-    Ref<TrackedEvent> spontaneousEvent;
     mEvents.Use([&](auto events) {
         if (!events->has_value()) {
             return;
         }
-
-        if (auto it = (*events)->find(futureID); it != (*events)->end()) {
-            auto& event = it->second;
-
-            auto completionData = event->GetCompletionData();
-            if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
-                std::get<Ref<SystemEvent>>(event->GetCompletionData())->Signal();
-            }
-            if (std::holds_alternative<QueueAndSerial>(completionData)) {
-                auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
-                queueAndSerial.completionSerial = queueAndSerial.queue->GetCompletedCommandSerial();
-            }
-
-            if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
-                spontaneousEvent = std::move(event);
-                (*events)->erase(futureID);
-            }
-        }
+        (*events)->emplace(futureID, std::move(event));
     });
+    return futureID;
+}
+
+void EventManager::SetFutureReady(const Ref<TrackedEvent>& event) {
+    DAWN_ASSERT(event->mFutureID != kNullFutureID);
+
+    auto completionData = event->GetCompletionData();
+    if (std::holds_alternative<Ref<SystemEvent>>(completionData)) {
+        std::get<Ref<SystemEvent>>(event->GetCompletionData())->Signal();
+    }
+    if (std::holds_alternative<QueueAndSerial>(completionData)) {
+        auto& queueAndSerial = std::get<QueueAndSerial>(completionData);
+        queueAndSerial.completionSerial = queueAndSerial.queue->GetCompletedCommandSerial();
+    }
 
     // Handle spontaneous completion now.
-    if (spontaneousEvent) {
-        spontaneousEvent->EnsureComplete(EventCompletionType::Ready);
+    if (event->mCallbackMode == wgpu::CallbackMode::AllowSpontaneous) {
+        mEvents.Use([&](auto events) {
+            if (!events->has_value()) {
+                return;
+            }
+            (*events)->erase(event->mFutureID);
+        });
+        event->EnsureComplete(EventCompletionType::Ready);
     }
 }
 
@@ -429,8 +423,11 @@ bool EventManager::ProcessPollEvents() {
 
         waitStatus = WaitImpl(futures, Nanoseconds(0));
         if (waitStatus == wgpu::WaitStatus::TimedOut) {
-            // Return the beginning to indicate that nothing completed.
-            return true;
+            // If we time out, the means that no callbacks are ready to be completed for now so
+            // return false. Note that this does not mean there is no work left to be done as with
+            // the to-be-deprecated Device.Tick. The reason we return false here is to ensure that
+            // we don't end up polling forever on long-lasting events such as device lost.
+            return false;
         }
         DAWN_ASSERT(waitStatus == wgpu::WaitStatus::Success);
 
@@ -548,6 +545,7 @@ EventManager::TrackedEvent::TrackedEvent(wgpu::CallbackMode callbackMode, Comple
     : TrackedEvent(callbackMode, SystemEvent::CreateSignaled()) {}
 
 EventManager::TrackedEvent::~TrackedEvent() {
+    DAWN_ASSERT(mFutureID != kNullFutureID);
     DAWN_ASSERT(mCompleted);
 }
 

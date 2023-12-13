@@ -123,6 +123,7 @@ DeviceMock::DeviceMock() {
     ON_CALL(*this, TickImpl).WillByDefault([]() -> MaybeError { return {}; });
 
     // Initialize the device.
+    GetInstance()->GetEventManager()->TrackEvent(mDeviceLostEvent);
     QueueDescriptor desc = {};
     EXPECT_FALSE(Initialize(AcquireRef(new NiceMock<QueueMock>(this, &desc))).IsError());
 }
@@ -135,6 +136,10 @@ dawn::platform::Platform* DeviceMock::GetPlatform() const {
 
 QueueMock* DeviceMock::GetQueueMock() {
     return reinterpret_cast<QueueMock*>(GetQueue());
+}
+
+InstanceBase* DeviceMock::GetInstance() const {
+    return mInstance.Get();
 }
 
 }  // namespace dawn::native
