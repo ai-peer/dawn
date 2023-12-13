@@ -186,8 +186,8 @@ TEST_F(WireAdapterTests, RequestDeviceAssertsOnLostCallbackPointer) {
     auto* userdata = cb.MakeUserdata(this);
 
     wgpu::DeviceDescriptor desc = {};
-    desc.deviceLostCallback = DeviceLostCallback;
-    desc.deviceLostUserdata = userdata;
+    desc.deviceLostCallbackInfo.callback = DeviceLostCallback;
+    desc.deviceLostCallbackInfo.userdata = userdata;
 
     adapter.RequestDevice(&desc, cb.Callback(), userdata);
 
@@ -196,8 +196,8 @@ TEST_F(WireAdapterTests, RequestDeviceAssertsOnLostCallbackPointer) {
             EXPECT_STREQ(apiDesc->label, desc.label);
 
             // The callback should not be passed through to the server.
-            ASSERT_EQ(apiDesc->deviceLostCallback, nullptr);
-            ASSERT_EQ(apiDesc->deviceLostUserdata, nullptr);
+            ASSERT_EQ(apiDesc->deviceLostCallbackInfo.callback, nullptr);
+            ASSERT_EQ(apiDesc->deviceLostCallbackInfo.userdata, nullptr);
         })));
     FlushClient();
 

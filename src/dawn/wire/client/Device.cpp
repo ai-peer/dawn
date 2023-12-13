@@ -38,9 +38,9 @@ namespace dawn::wire::client {
 
 Device::Device(const ObjectBaseParams& params, const WGPUDeviceDescriptor* descriptor)
     : ObjectBase(params), mIsAlive(std::make_shared<bool>()) {
-    if (descriptor && descriptor->deviceLostCallback) {
-        mDeviceLostCallback = descriptor->deviceLostCallback;
-        mDeviceLostUserdata = descriptor->deviceLostUserdata;
+    if (descriptor && descriptor->deviceLostCallbackInfo.callback) {
+        mDeviceLostCallback = descriptor->deviceLostCallbackInfo.callback;
+        mDeviceLostUserdata = descriptor->deviceLostCallbackInfo.userdata;
     }
 
 #if defined(DAWN_ENABLE_ASSERTS)

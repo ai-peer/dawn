@@ -211,8 +211,8 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
     : mAdapter(adapter), mToggles(deviceToggles), mNextPipelineCompatibilityToken(1) {
     DAWN_ASSERT(descriptor != nullptr);
 
-    mDeviceLostCallback = descriptor->deviceLostCallback;
-    mDeviceLostUserdata = descriptor->deviceLostUserdata;
+    mDeviceLostCallback = descriptor->deviceLostCallbackInfo.callback;
+    mDeviceLostUserdata = descriptor->deviceLostCallbackInfo.userdata;
 
     AdapterProperties adapterProperties;
     adapter->APIGetProperties(&adapterProperties);
