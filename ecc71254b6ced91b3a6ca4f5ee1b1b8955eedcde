@@ -33,6 +33,46 @@
       "message": "Add Austin for reviewing ShaderModule.h/ShaderModule.cpp (small change: just passing in the name for binding info)",
       "revId": "ecc71254b6ced91b3a6ca4f5ee1b1b8955eedcde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85416bbf_778afcb1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-13T18:40:54Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ecc71254b6ced91b3a6ca4f5ee1b1b8955eedcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b95d938f_57aef7f6",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-13T18:40:54Z",
+      "side": 1,
+      "message": "nit: camelCase",
+      "range": {
+        "startLine": 320,
+        "startChar": 58,
+        "endLine": 320,
+        "endChar": 76
+      },
+      "revId": "ecc71254b6ced91b3a6ca4f5ee1b1b8955eedcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
