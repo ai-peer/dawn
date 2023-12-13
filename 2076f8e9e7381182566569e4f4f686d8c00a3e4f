@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4cf3cc29_c98d22e6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-12-13T02:11:41Z",
+      "side": 1,
+      "message": "would you prefer I add another bool to the texture flags for whether or not a texture work as a storage texture in compat?",
+      "revId": "2076f8e9e7381182566569e4f4f686d8c00a3e4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
