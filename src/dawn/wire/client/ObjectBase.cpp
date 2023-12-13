@@ -61,9 +61,15 @@ void ObjectBase::Reference() {
 
 void ObjectBase::Release() {
     DAWN_ASSERT(mRefcount != 0);
-    mRefcount--;
 
-    if (mRefcount == 0) {
+    // Since some ReleaseImpl's may result in a re-entrant call to Release, we need to read the ref
+    // count to ensure that only the last Release call performs the command serialization and memory
+    // freeing operations.
+    uint32_t refCount = --mRefcount;
+
+    ReleaseImpl();
+
+    if (refCount == 0) {
         DestroyObjectCmd cmd;
         cmd.objectType = GetObjectType();
         cmd.objectId = GetWireId();
@@ -73,6 +79,8 @@ void ObjectBase::Release() {
         client->Free(this, GetObjectType());
     }
 }
+
+void ObjectBase::ReleaseImpl() {}
 
 ObjectWithEventsBase::ObjectWithEventsBase(const ObjectBaseParams& params,
                                            const ObjectHandle& eventManagerHandle)
