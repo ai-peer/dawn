@@ -60,6 +60,11 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 }
 
 Client::~Client() {
+    // Transition all event managers to ClientDropped state.
+    for (auto& [_, eventManager] : mEventManagers) {
+        eventManager->TransitionTo(EventManager::State::ClientDropped);
+    }
+
     DestroyAllObjects();
 }
 
@@ -124,7 +129,7 @@ ReservedInstance Client::ReserveInstance(const WGPUInstanceDescriptor* descripto
     }
 
     // Reserve an EventManager for the given instance and make the association in the map.
-    mEventManagers.emplace(ObjectHandle(instance->GetWireId(), instance->GetWireGeneration()),
+    mEventManagers.emplace(instance->GetWireHandle()),
                            std::make_unique<EventManager>());
 
     ReservedInstance result;
@@ -159,6 +164,11 @@ void Client::Disconnect() {
     mDisconnected = true;
     mSerializer = ChunkedCommandSerializer(NoopCommandSerializer::GetInstance());
 
+    // Transition all event managers to ClientDropped state.
+    for (auto& [_, eventManager] : mEventManagers) {
+        eventManager->TransitionTo(EventManager::State::ClientDropped);
+    }
+
     auto& deviceList = mObjects[ObjectType::Device];
     {
         for (LinkNode<ObjectBase>* device = deviceList.head(); device != deviceList.end();
@@ -172,11 +182,6 @@ void Client::Disconnect() {
              object = object->next()) {
             object->value()->CancelCallbacksForDisconnect();
         }
-    }
-
-    // Transition all event managers to ClientDropped state.
-    for (auto& [_, eventManager] : mEventManagers) {
-        eventManager->TransitionTo(EventManager::State::ClientDropped);
     }
 }
 

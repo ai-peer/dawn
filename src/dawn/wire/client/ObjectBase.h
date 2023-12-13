@@ -69,6 +69,10 @@ class ObjectBase : public LinkNode<ObjectBase> {
   protected:
     uint32_t GetRefcount() const { return mRefcount; }
 
+    // Allows child classes to do additional refcount checking and bookkeeping on release when
+    // necessary.
+    virtual void ReleaseImpl();
+
   private:
     const raw_ptr<Client> mClient;
     const ObjectHandle mHandle;
