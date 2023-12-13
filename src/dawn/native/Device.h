@@ -167,7 +167,9 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     MaybeError ValidateObject(const ApiObjectBase* object) const;
 
-    InstanceBase* GetInstance() const;
+    // TODO(dawn:1702) Remove virtual when we mock the adapter.
+    virtual InstanceBase* GetInstance() const;
+
     AdapterBase* GetAdapter() const;
     PhysicalDeviceBase* GetPhysicalDevice() const;
     virtual dawn::platform::Platform* GetPlatform() const;
@@ -478,6 +480,38 @@ class DeviceBase : public RefCountedWithExternalCount {
     // DAWN_ASSERT(device.IsLockedByCurrentThread())
     bool IsLockedByCurrentThreadIfNeeded() const;
 
+    struct DeviceLostEvent final : public EventManager::TrackedEvent {
+      public:
+        // TODO(https://crbug.com/dawn/2465): Pass just the DeviceLostCallbackInfo when setters are
+        // deprecated. Creates and sets the device lost event for the given device if applicable. If
+        // the device is nullptr, an event is still created, but the caller owns the last ref of the
+        // event. When passing a device, note that device construction can be successful but fail
+        // later at initialization, and this should only be called with the device if initialization
+        // was successful.
+        static Ref<DeviceLostEvent> Create(DeviceBase* device, const DeviceDescriptor* descriptor);
+
+        // Event result fields need to be public so that they can easily be updated prior to
+        // completing the event.
+        wgpu::DeviceLostReason mReason;
+        std::string mMessage;
+
+        // TODO(https://crbug.com/dawn/2465): Remove old callback when setters are deprecated, and
+        // move userdata into private.
+        wgpu::DeviceLostCallback mOldCallback = nullptr;
+        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
+        raw_ptr<void, DanglingUntriaged> mUserdata;
+
+      private:
+        DeviceLostEvent(DeviceBase* device, const DeviceLostCallbackInfo& callbackInfo);
+        DeviceLostEvent(DeviceBase* device, wgpu::DeviceLostCallback oldCallback, void* userdata);
+        ~DeviceLostEvent() override;
+
+        void Complete(EventCompletionType completionType) override;
+
+        wgpu::DeviceLostCallbackNew mCallback = nullptr;
+        Ref<DeviceBase> mDevice;
+    };
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
@@ -487,6 +521,12 @@ class DeviceBase : public RefCountedWithExternalCount {
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
     void Destroy();
+
+    // This is set via DeviceBase::DeviceLostEvent::Create.
+    // Device lost event needs to be protected for now because mock device needs it.
+    // TODO(dawn:1702) Make this private and move the class in the implementation file when we mock
+    // the adapter.
+    Ref<DeviceLostEvent> mDeviceLostEvent = nullptr;
 
   private:
     void WillDropLastExternalRef() override;
@@ -579,18 +619,12 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                     const TextureCopy& dst,
                                                     const Extent3D& copySizePixels) = 0;
 
-    wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<void, DanglingUntriaged> mUncapturedErrorUserdata = nullptr;
+    UncapturedErrorCallbackInfo mUncapturedErrorCallbackInfo;
 
     std::shared_mutex mLoggingMutex;
     wgpu::LoggingCallback mLoggingCallback = nullptr;
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
     raw_ptr<void, DanglingUntriaged> mLoggingUserdata = nullptr;
-
-    wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 

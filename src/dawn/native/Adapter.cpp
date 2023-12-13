@@ -29,10 +29,12 @@
 
 #include <algorithm>
 #include <memory>
+#include <string>
 #include <tuple>
 #include <utility>
 #include <vector>
 
+#include "dawn/common/Log.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
@@ -40,6 +42,9 @@
 #include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native {
+namespace {
+static constexpr DeviceDescriptor kDefaultDeviceDesc = {};
+}  // anonymous namespace
 
 AdapterBase::AdapterBase(Ref<PhysicalDeviceBase> physicalDevice,
                          FeatureLevel featureLevel,
@@ -192,17 +197,22 @@ size_t AdapterBase::APIEnumerateFeatures(wgpu::FeatureName* features) const {
 }
 
 DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
-    constexpr DeviceDescriptor kDefaultDesc = {};
     if (descriptor == nullptr) {
-        descriptor = &kDefaultDesc;
+        descriptor = &kDefaultDeviceDesc;
     }
 
     auto result = CreateDevice(descriptor);
-    if (result.IsError()) {
+
+    Ref<DeviceBase> device = nullptr;
+    if (result.IsSuccess()) {
+        device = result.AcquireSuccess();
+    } else {
         mPhysicalDevice->GetInstance()->ConsumedError(result.AcquireError());
-        return nullptr;
     }
-    return ReturnToAPI(result.AcquireSuccess());
+
+    mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
+        DeviceBase::DeviceLostEvent::Create(device.Get(), descriptor));
+    return ReturnToAPI(std::move(device));
 }
 
 ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor* rawDescriptor) {
@@ -262,23 +272,9 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
 void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
                                    WGPURequestDeviceCallback callback,
                                    void* userdata) {
-    constexpr DeviceDescriptor kDefaultDescriptor = {};
-    if (descriptor == nullptr) {
-        descriptor = &kDefaultDescriptor;
-    }
-    auto result = CreateDevice(descriptor);
-    if (result.IsError()) {
-        std::unique_ptr<ErrorData> errorData = result.AcquireError();
-        // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-        callback(WGPURequestDeviceStatus_Error, nullptr, errorData->GetFormattedMessage().c_str(),
-                 userdata);
-        return;
-    }
-    Ref<DeviceBase> device = result.AcquireSuccess();
-    WGPURequestDeviceStatus status =
-        device == nullptr ? WGPURequestDeviceStatus_Unknown : WGPURequestDeviceStatus_Success;
-    // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-    callback(status, ToAPI(ReturnToAPI(std::move(device))), nullptr, userdata);
+    // Default legacy callback mode for RequestDevice is spontaneous.
+    APIRequestDeviceF(descriptor,
+                      {nullptr, wgpu::CallbackMode::AllowSpontaneous, callback, userdata});
 }
 
 Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
@@ -287,46 +283,82 @@ Future AdapterBase::APIRequestDeviceF(const DeviceDescriptor* descriptor,
         WGPURequestDeviceCallback mCallback;
         // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
         raw_ptr<void, DanglingUntriaged> mUserdata;
+
+        Ref<PhysicalDeviceBase> mPhysicalDevice;
+        Ref<DeviceBase::DeviceLostEvent> mDeviceLostEvent;
         ResultOrError<Ref<DeviceBase>> mDeviceOrError;
 
         RequestDeviceEvent(const RequestDeviceCallbackInfo& callbackInfo,
+                           Ref<PhysicalDeviceBase> physicalDevice,
+                           Ref<DeviceBase::DeviceLostEvent>&& deviceLostEvent,
                            ResultOrError<Ref<DeviceBase>> deviceOrError)
             : TrackedEvent(callbackInfo.mode, TrackedEvent::Completed{}),
               mCallback(callbackInfo.callback),
               mUserdata(callbackInfo.userdata),
+              mPhysicalDevice(std::move(physicalDevice)),
+              mDeviceLostEvent(std::move(deviceLostEvent)),
               mDeviceOrError(std::move(deviceOrError)) {}
 
         ~RequestDeviceEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
 
         void Complete(EventCompletionType completionType) override {
+            // Track the device lost callback now before any callbacks because the callback could
+            // drop the last reference to the newly created device causing the device lost to
+            // trigger.
+            EventManager* eventManager = mPhysicalDevice->GetInstance()->GetEventManager();
+            eventManager->TrackEvent(mDeviceLostEvent);
+
             WGPURequestDeviceStatus status;
-            Ref<DeviceBase> device;
+            WGPUDeviceImpl* device;
+            std::string message;
 
             if (completionType == EventCompletionType::Shutdown) {
                 status = WGPURequestDeviceStatus_InstanceDropped;
+                device = nullptr;
+                message = "A valid external Instance reference no longer exists.";
+                return Callback();
+            } else if (mDeviceOrError.IsError()) {
+                std::unique_ptr<ErrorData> errorData = mDeviceOrError.AcquireError();
+                status = WGPURequestDeviceStatus_Error;
+                device = nullptr;
+                message = errorData->GetFormattedMessage();
+                return Callback();
             } else {
-                if (mDeviceOrError.IsError()) {
-                    std::unique_ptr<ErrorData> errorData = mDeviceOrError.AcquireError();
-                    mCallback(WGPURequestDeviceStatus_Error, nullptr,
-                              errorData->GetFormattedMessage().c_str(), mUserdata);
-                    return;
-                }
-                device = mDeviceOrError.AcquireSuccess();
-                status = device == nullptr ? WGPURequestDeviceStatus_Unknown
+                auto result = mDeviceOrError.AcquireSuccess();
+                status = result == nullptr ? WGPURequestDeviceStatus_Unknown
                                            : WGPURequestDeviceStatus_Success;
+                device = result == nullptr ? nullptr : ToAPI(ReturnToAPI(std::move(result)));
             }
-            mCallback(status, ToAPI(ReturnToAPI(std::move(device))), nullptr, mUserdata);
+
+            mCallback(status, device, message.empty() ? nullptr : message.c_str(), mUserdata);
+            // If the device was null, then we need to call the device lost callback now too.
+            if (device == nullptr) {
+                mDeviceLostEvent->mReason = wgpu::DeviceLostReason::FailedCreation;
+                mDeviceLostEvent->mMessage = "Failed to create device.";
+                eventManager->SetFutureReady(mDeviceLostEvent.Get());
+            }
         }
     };
 
-    constexpr DeviceDescriptor kDefaultDescriptor = {};
     if (descriptor == nullptr) {
-        descriptor = &kDefaultDescriptor;
+        descriptor = &kDefaultDeviceDesc;
     }
 
-    FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
-        AcquireRef(new RequestDeviceEvent(callbackInfo, CreateDevice(descriptor))));
-    return {futureID};
+    auto result = CreateDevice(descriptor);
+    if (result.IsSuccess()) {
+        Ref<DeviceBase> device = result.AcquireSuccess();
+        FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
+            AcquireRef(new RequestDeviceEvent(
+                callbackInfo, mPhysicalDevice,
+                DeviceBase::DeviceLostEvent::Create(device.Get(), descriptor), std::move(device))));
+        return {futureID};
+    } else {
+        FutureID futureID = mPhysicalDevice->GetInstance()->GetEventManager()->TrackEvent(
+            AcquireRef(new RequestDeviceEvent(
+                callbackInfo, mPhysicalDevice,
+                DeviceBase::DeviceLostEvent::Create(nullptr, descriptor), std::move(result))));
+        return {futureID};
+    }
 }
 
 bool AdapterBase::APIGetFormatCapabilities(wgpu::TextureFormat format,
