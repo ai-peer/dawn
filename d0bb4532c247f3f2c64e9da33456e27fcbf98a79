@@ -22,6 +22,30 @@
       },
       "revId": "d0bb4532c247f3f2c64e9da33456e27fcbf98a79",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c3e0eb7d_20d9d9c5",
+        "filename": "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 286,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-13T00:59:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b5e6add2_9901c7ca",
+      "range": {
+        "startLine": 286,
+        "startChar": 43,
+        "endLine": 286,
+        "endChar": 49
+      },
+      "revId": "d0bb4532c247f3f2c64e9da33456e27fcbf98a79",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
