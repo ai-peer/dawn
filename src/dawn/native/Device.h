@@ -572,8 +572,21 @@ class DeviceBase : public RefCountedWithExternalCount {
     wgpu::LoggingCallback mLoggingCallback = nullptr;
     void* mLoggingUserdata = nullptr;
 
-    wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
-    void* mDeviceLostUserdata = nullptr;
+    struct DeviceLostEvent final : public EventManager::TrackedEvent {
+        wgpu::DeviceLostReason mReason;
+        std::string mMessage;
+
+        wgpu::DeviceLostCallback mCallback;
+        void* mUserdata;
+        Ref<DeviceBase> mDevice;
+
+        DeviceLostEvent(DeviceBase* device, const DeviceLostCallbackInfo& callbackInfo);
+        ~DeviceLostEvent() override;
+
+        void Complete(EventCompletionType completionType) override;
+    };
+    Ref<DeviceLostEvent> mDeviceLostEvent = nullptr;
+    FutureID mDeviceLostFutureID;
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 
