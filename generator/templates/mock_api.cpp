@@ -88,7 +88,7 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
             {% for callback_arg in method.arguments if callback_arg.type.category == 'function pointer' %}
                 object->m{{as_MethodSuffix(type.name, method.name)}}Callback = {{as_varName(callback_arg.name)}};
             {% endfor %}
-            object->userdata = userdata;
+            object->m{{as_MethodSuffix(type.name, method.name)}}Userdata = userdata;
             return On{{as_MethodSuffix(type.name, method.name)}}(
                 {{-as_varName(type.name)}}
                 {%- for arg in method.arguments -%}
@@ -109,7 +109,7 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
                     {%- for arg in callback_arg.type.arguments -%}
                         {%- if not loop.last -%}{{as_varName(arg.name)}}, {% endif -%}
                     {%- endfor -%}
-                    object->userdata);
+                    object->m{{Suffix}}Userdata);
             }
         {% endfor %}
     {% endfor %}

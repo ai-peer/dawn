@@ -1105,8 +1105,8 @@ wgpu::Device DawnTestBase::CreateDevice(std::string isolationKey) {
 
     // Set up the mocks for device loss.
     void* deviceUserdata = GetUniqueUserdata();
-    deviceDesc.deviceLostCallback = mDeviceLostCallback.Callback();
-    deviceDesc.deviceLostUserdata = mDeviceLostCallback.MakeUserdata(deviceUserdata);
+    deviceDesc.deviceLostCallbackInfo.callback = mDeviceLostCallback.Callback();
+    deviceDesc.deviceLostCallbackInfo.userdata = mDeviceLostCallback.MakeUserdata(deviceUserdata);
 
     adapter.RequestDevice(
         &deviceDesc,
