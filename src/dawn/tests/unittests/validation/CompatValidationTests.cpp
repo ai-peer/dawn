@@ -234,6 +234,61 @@ TEST_F(CompatValidationTest, CanNotUseFragmentShaderWithSampleMask) {
     }
 }
 
+TEST_F(CompatValidationTest, CanNotCreateRGxxxStorageTextureBindGroupLayout) {
+    const wgpu::TextureFormat formats[] = {
+        wgpu::TextureFormat::RGBA8Unorm,  // pass check
+        wgpu::TextureFormat::RG32Sint,
+        wgpu::TextureFormat::RG32Uint,
+        wgpu::TextureFormat::RG32Float,
+    };
+    for (auto format : formats) {
+        wgpu::BindGroupLayoutEntry binding = {};
+        binding.binding = 0;
+        binding.visibility = wgpu::ShaderStage::Compute;
+        binding.storageTexture.access = wgpu::StorageTextureAccess::WriteOnly;
+        binding.storageTexture.format = format;
+
+        wgpu::BindGroupLayoutDescriptor desc = {};
+        desc.entryCount = 1;
+        desc.entries = &binding;
+
+        if (format == wgpu::TextureFormat::RGBA8Unorm) {
+            device.CreateBindGroupLayout(&desc);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateBindGroupLayout(&desc));
+        }
+    }
+}
+
+TEST_F(CompatValidationTest, CanNotCreateRGxxxStorageTextureBindGroupLayoutViaPipelineAutoLayout) {
+    const char* formats[] = {
+        "rgba8unorm",  // pass check
+        "rg32sint",
+        "rg32uint",
+        "rg32float",
+    };
+    for (auto format : formats) {
+        auto wgsl = absl::StrFormat(R"(
+            @group(0) @binding(0) var t: texture_storage_2d<%s, write>;
+            @compute @workgroup_size(1) fn cs() {
+                _ = t;
+            }
+        )",
+                                    format);
+        wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, wgsl.c_str());
+
+        wgpu::ComputePipelineDescriptor pDesc;
+        pDesc.compute.module = shaderModule;
+        pDesc.compute.entryPoint = "cs";
+
+        if (format == formats[0]) {
+            device.CreateComputePipeline(&pDesc);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateComputePipeline(&pDesc));
+        }
+    }
+}
+
 constexpr const char* kRenderTwoTexturesOneBindgroupWGSL = R"(
     @vertex
     fn vs(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {

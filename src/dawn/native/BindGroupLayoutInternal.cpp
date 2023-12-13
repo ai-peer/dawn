@@ -47,6 +47,18 @@
 namespace dawn::native {
 
 namespace {
+
+bool IsFormatNotSupportedAsStorageTextureInCompatibilityMode(wgpu::TextureFormat format) {
+    switch (format) {
+        case wgpu::TextureFormat::RG32Sint:
+        case wgpu::TextureFormat::RG32Uint:
+        case wgpu::TextureFormat::RG32Float:
+            return true;
+        default:
+            return false;
+    }
+}
+
 MaybeError ValidateStorageTextureFormat(DeviceBase* device,
                                         wgpu::TextureFormat storageTextureFormat) {
     const Format* format = nullptr;
@@ -55,6 +67,12 @@ MaybeError ValidateStorageTextureFormat(DeviceBase* device,
     DAWN_ASSERT(format != nullptr);
     DAWN_INVALID_IF(!format->supportsStorageUsage,
                     "Texture format (%s) does not support storage textures.", storageTextureFormat);
+
+    DAWN_INVALID_IF(
+        device->IsCompatibilityMode() &&
+            IsFormatNotSupportedAsStorageTextureInCompatibilityMode(storageTextureFormat),
+        "Texture format (%s) does not support storage textures in compatibility mode",
+        storageTextureFormat);
 
     return {};
 }
