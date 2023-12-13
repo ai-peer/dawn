@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d6fd67b_71dfcb7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-13T02:43:24Z",
+      "side": 1,
+      "message": "I haven\u0027t been following this issue closely but the changes here LGTM w.r.t the proposed solution that I see in the linked issues.\n\nStill needs code owner approval for some of the Dawn changes.",
+      "revId": "ecc71254b6ced91b3a6ca4f5ee1b1b8955eedcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
