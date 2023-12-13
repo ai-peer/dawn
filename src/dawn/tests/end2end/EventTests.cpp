@@ -152,7 +152,7 @@ class EventCompletionTests : public DawnTestWithParams<EventCompletionTestParams
 
     void LoseTestDevice() {
         EXPECT_CALL(mDeviceLostCallback,
-                    Call(WGPUDeviceLostReason_Undefined, testing::_, testing::_))
+                    Call(testing::_, WGPUDeviceLostReason_Undefined, testing::_, testing::_))
             .Times(1);
         testDevice.ForceLoss(wgpu::DeviceLostReason::Undefined, "Device lost for testing");
         testInstance.ProcessEvents();
