@@ -164,34 +164,107 @@ using CreateRenderPipelineEvent =
 
 }  // namespace
 
+class Device::DeviceLostEvent : public TrackedEvent {
+  public:
+    static constexpr EventType kType = EventType::DeviceLost;
+
+    DeviceLostEvent(const WGPUDeviceLostCallbackInfo& callbackInfo, Device* device)
+        : TrackedEvent(callbackInfo.mode), mDevice(device) {
+        DAWN_ASSERT(device != nullptr);
+        mDevice->Reference();
+    }
+
+    ~DeviceLostEvent() override { mDevice->Release(); }
+
+    EventType GetType() override { return kType; }
+
+    WireResult ReadyHook(FutureID futureID, WGPUDeviceLostReason reason, const char* message) {
+        mReason = reason;
+        if (message != nullptr) {
+            mMessage = message;
+        }
+        return WireResult::Success;
+    }
+
+  private:
+    void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
+        if (completionType == EventCompletionType::Shutdown) {
+            mReason = WGPUDeviceLostReason_Undefined;
+            mMessage = "A valid external Instance reference no longer exists.";
+        }
+        if (mDevice->mDeviceLostInfo.callback != nullptr) {
+            mDevice->mDeviceLostInfo.callback(mReason, mMessage ? mMessage->c_str() : nullptr,
+                                              mDevice->mDeviceLostInfo.userdata);
+        }
+        mDevice->mDeviceLostInfo.futureID = kNullFutureID;
+    }
+
+    // Note that the message is optional because we want to return nullptr when it wasn't set
+    // instead of a pointer to an empty string.
+    WGPUDeviceLostReason mReason;
+    std::optional<std::string> mMessage;
+
+    // Strong reference to the device so that when we call the callback we can pass the device.
+    Device* const mDevice;
+};
+
 Device::Device(const ObjectBaseParams& params,
                const ObjectHandle& eventManagerHandle,
                const WGPUDeviceDescriptor* descriptor)
     : ObjectWithEventsBase(params, eventManagerHandle), mIsAlive(std::make_shared<bool>()) {
-    if (descriptor && descriptor->deviceLostCallback) {
-        mDeviceLostCallback = descriptor->deviceLostCallback;
-        mDeviceLostUserdata = descriptor->deviceLostUserdata;
-    }
-
+    // TODO(dawn:1987) Currently we default the callback mode to Spontaneous if not passed
+    // for backwards compatibility. We should add warning logging for it though when available.
+    static WGPUDeviceLostCallbackInfo kDefaultCallbackInfo = {
+        nullptr,
+        WGPUCallbackMode_AllowSpontaneous,
 #if defined(DAWN_ENABLE_ASSERTS)
-    mErrorCallback = [](WGPUErrorType, char const*, void*) {
-        static bool calledOnce = false;
-        if (!calledOnce) {
-            calledOnce = true;
-            dawn::WarningLog() << "No Dawn device uncaptured error callback was set. This is "
-                                  "probably not intended. If you really want to ignore errors "
-                                  "and suppress this message, set the callback to null.";
-        }
-    };
-
-    if (!mDeviceLostCallback) {
-        mDeviceLostCallback = [](WGPUDeviceLostReason, char const*, void*) {
+        [](WGPUDeviceLostReason, char const*, void*) {
             static bool calledOnce = false;
             if (!calledOnce) {
                 calledOnce = true;
                 dawn::WarningLog() << "No Dawn device lost callback was set. This is probably not "
                                       "intended. If you really want to ignore device lost "
-                                      "and suppress this message, set the callback to null.";
+                                      "and suppress this message, set the callback explicitly.";
+            }
+        },
+#else
+        nullptr,
+#endif  // DAWN_ENABLE_ASSERTS
+        nullptr
+    };
+
+    WGPUDeviceLostCallbackInfo deviceLostCallbackInfo = kDefaultCallbackInfo;
+    if (descriptor) {
+        deviceLostCallbackInfo = descriptor->deviceLostCallbackInfo;
+        if (deviceLostCallbackInfo.mode == WGPUCallbackMode_WaitAnyOnly) {
+            // TODO(dawn:1987) Update this when we have WGPUCallbackMode_Undefined.
+            deviceLostCallbackInfo.mode = WGPUCallbackMode_AllowSpontaneous;
+        }
+        if (deviceLostCallbackInfo.callback == nullptr) {
+            deviceLostCallbackInfo.callback = kDefaultCallbackInfo.callback;
+        }
+        mErrorCallback = descriptor->uncapturedErrorCallback;
+        mErrorUserdata = descriptor->uncapturedErrorUserdata;
+    }
+
+    auto [deviceLostFutureIDInternal, tracked] = GetEventManager().TrackEvent(
+        std::make_unique<DeviceLostEvent>(deviceLostCallbackInfo, this));
+    if (tracked) {
+        mDeviceLostInfo.futureID = deviceLostFutureIDInternal;
+    }
+
+    mDeviceLostInfo.callback = deviceLostCallbackInfo.callback;
+    mDeviceLostInfo.userdata = deviceLostCallbackInfo.userdata;
+
+#if defined(DAWN_ENABLE_ASSERTS)
+    if (mErrorCallback == nullptr) {
+        mErrorCallback = [](WGPUErrorType, char const*, void*) {
+            static bool calledOnce = false;
+            if (!calledOnce) {
+                calledOnce = true;
+                dawn::WarningLog() << "No Dawn device uncaptured error callback was set. This is "
+                                      "probably not intended. If you really want to ignore errors "
+                                      "and suppress this message, set the callback explicitly.";
             }
         };
     }
@@ -200,12 +273,21 @@ Device::Device(const ObjectBaseParams& params,
 
 Device::~Device() {
     if (mQueue != nullptr) {
-        GetProcs().queueRelease(ToAPI(mQueue));
+        mQueue->Release();
     }
 }
 
 ObjectType Device::GetObjectType() const {
     return ObjectType::Device;
+}
+
+void Device::ReleaseImpl() {
+    // The device always has a reference in it's DeviceLossEvent which is created at construction,
+    // so when we drop to 1, we want to set the event so that the device can be loss according to
+    // the callback mode.
+    if (GetRefcount() == 1) {
+        HandleDeviceLost(WGPUDeviceLostReason_Destroyed, "Device was destroyed.");
+    }
 }
 
 bool Device::GetLimits(WGPUSupportedLimits* limits) const {
@@ -242,10 +324,14 @@ void Device::HandleLogging(WGPULoggingType loggingType, const char* message) {
 }
 
 void Device::HandleDeviceLost(WGPUDeviceLostReason reason, const char* message) {
-    if (mDeviceLostCallback && !mDidRunLostCallback) {
-        mDidRunLostCallback = true;
-        mDeviceLostCallback(reason, message, mDeviceLostUserdata);
+    if (mDeviceLostInfo.futureID != kNullFutureID) {
+        DAWN_CHECK(GetEventManager().SetFutureReady<DeviceLostEvent>(
+                       mDeviceLostInfo.futureID, reason, message) == WireResult::Success);
     }
+}
+
+WGPUFuture Device::GetDeviceLostFuture() const {
+    return {mDeviceLostInfo.futureID};
 }
 
 std::weak_ptr<bool> Device::GetAliveWeakPtr() {
@@ -263,8 +349,16 @@ void Device::SetLoggingCallback(WGPULoggingCallback callback, void* userdata) {
 }
 
 void Device::SetDeviceLostCallback(WGPUDeviceLostCallback callback, void* userdata) {
-    mDeviceLostCallback = callback;
-    mDeviceLostUserdata = userdata;
+    mDeviceLostInfo.callback = callback;
+    mDeviceLostInfo.userdata = userdata;
+}
+
+WireResult Client::DoDeviceLostCallback(ObjectHandle eventManager,
+                                        WGPUFuture future,
+                                        WGPUDeviceLostReason reason,
+                                        char const* message) {
+    return GetEventManager(eventManager)
+        .SetFutureReady<Device::DeviceLostEvent>(future.id, reason, message);
 }
 
 void Device::PopErrorScope(WGPUErrorCallback callback, void* userdata) {

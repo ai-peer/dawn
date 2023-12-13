@@ -63,6 +63,8 @@ void ObjectBase::Release() {
     DAWN_ASSERT(mRefcount != 0);
     mRefcount--;
 
+    ReleaseImpl();
+
     if (mRefcount == 0) {
         DestroyObjectCmd cmd;
         cmd.objectType = GetObjectType();
@@ -73,6 +75,8 @@ void ObjectBase::Release() {
         client->Free(this, GetObjectType());
     }
 }
+
+void ObjectBase::ReleaseImpl() {}
 
 ObjectWithEventsBase::ObjectWithEventsBase(const ObjectBaseParams& params,
                                            const ObjectHandle& eventManagerHandle)
