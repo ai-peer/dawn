@@ -76,7 +76,7 @@ class RequestDeviceEvent : public TrackedEvent {
         if (mStatus != WGPURequestDeviceStatus_Success && mDevice != nullptr) {
             // If there was an error, we may need to reclaim the device allocation, otherwise the
             // device is returned to the user who owns it.
-            mDevice->GetClient()->Free(mDevice.get());
+            mDevice->Release();
             mDevice = nullptr;
         }
         if (mCallback) {
@@ -243,13 +243,15 @@ WGPUFuture Adapter::RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
         return {futureIDInternal};
     }
 
-    // Ensure the device lost callback isn't serialized as part of the command, as it cannot be
-    // passed between processes.
+    // Ensure callbackd are not serialized as part of the command, as they cannot be passed between
+    // processes.
     WGPUDeviceDescriptor wireDescriptor = {};
     if (descriptor) {
         wireDescriptor = *descriptor;
-        wireDescriptor.deviceLostCallback = nullptr;
-        wireDescriptor.deviceLostUserdata = nullptr;
+        wireDescriptor.deviceLostCallbackInfo.callback = nullptr;
+        wireDescriptor.deviceLostCallbackInfo.userdata = nullptr;
+        wireDescriptor.uncapturedErrorCallback = nullptr;
+        wireDescriptor.uncapturedErrorUserdata = nullptr;
     }
 
     AdapterRequestDeviceCmd cmd;
@@ -257,6 +259,7 @@ WGPUFuture Adapter::RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
     cmd.eventManagerHandle = GetEventManagerHandle();
     cmd.future = {futureIDInternal};
     cmd.deviceObjectHandle = device->GetWireHandle();
+    cmd.deviceLostFuture = device->GetDeviceLostFuture();
     cmd.descriptor = &wireDescriptor;
 
     client->SerializeCommand(cmd);
