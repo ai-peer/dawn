@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4755ff00_d2e98091",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004421
+      },
+      "writtenOn": "2023-12-13T04:04:30Z",
+      "side": 1,
+      "message": "PTAL, had to add a fix for the cmake build.",
+      "revId": "e329e0c4467444e88f4b91fa4228c259f13dfef5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
