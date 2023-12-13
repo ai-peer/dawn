@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9472908e_9c29d18f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-13T11:36:21Z",
+      "side": 1,
+      "message": "It looks like I still have additional warning to enforce in Chrome for this patch to be merged:\nWIP: https://chromium-review.googlesource.com/c/chromium/src/+/5062750",
+      "revId": "80c8dccb6d8e81301d1118c1264bfda9b5b44325",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
