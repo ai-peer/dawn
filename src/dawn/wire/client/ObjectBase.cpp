@@ -59,11 +59,15 @@ void ObjectBase::Reference() {
     mRefcount++;
 }
 
-void ObjectBase::Release() {
+uint32_t ObjectBase::Release() {
     DAWN_ASSERT(mRefcount != 0);
-    mRefcount--;
 
-    if (mRefcount == 0) {
+    // Since some objects may override Release and internally call this function, we need to read
+    // the ref count to ensure that only the last Release call performs the command serialization
+    // and memory freeing operations.
+    uint32_t refCount = --mRefcount;
+
+    if (refCount == 0) {
         DestroyObjectCmd cmd;
         cmd.objectType = GetObjectType();
         cmd.objectId = GetWireId();
@@ -72,6 +76,8 @@ void ObjectBase::Release() {
         client->SerializeCommand(cmd);
         client->Free(this, GetObjectType());
     }
+
+    return refCount;
 }
 
 ObjectWithEventsBase::ObjectWithEventsBase(const ObjectBaseParams& params,
