@@ -91,6 +91,30 @@
       },
       "revId": "ecc71254b6ced91b3a6ca4f5ee1b1b8955eedcde",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15156259_53dc020c",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2023-12-13T18:49:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b95d938f_57aef7f6",
+      "range": {
+        "startLine": 320,
+        "startChar": 58,
+        "endLine": 320,
+        "endChar": 76
+      },
+      "revId": "ecc71254b6ced91b3a6ca4f5ee1b1b8955eedcde",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
