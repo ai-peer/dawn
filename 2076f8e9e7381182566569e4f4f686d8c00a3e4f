@@ -34,6 +34,24 @@
       "parentUuid": "4cf3cc29_c98d22e6",
       "revId": "2076f8e9e7381182566569e4f4f686d8c00a3e4f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5662848_ef7564da",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2023-12-13T18:45:36Z",
+      "side": 1,
+      "message": "Sorry, that was a bad CL. Updated",
+      "parentUuid": "bf554d5e_c26f777b",
+      "revId": "2076f8e9e7381182566569e4f4f686d8c00a3e4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
