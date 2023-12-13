@@ -88,22 +88,32 @@ class Device final : public ObjectWithEventsBase {
     std::weak_ptr<bool> GetAliveWeakPtr();
 
   private:
+    class DeviceLostEvent;
+
     template <typename Event,
               typename Cmd,
               typename CallbackInfo = typename Event::CallbackInfo,
               typename Descriptor = decltype(std::declval<Cmd>().descriptor)>
     WGPUFuture CreatePipelineAsyncF(Descriptor const* descriptor, const CallbackInfo& callbackInfo);
 
+    void ReleaseImpl() override;
+
     LimitsAndFeatures mLimitsAndFeatures;
 
+    // This can probably just be the future id once SetDeviceLostCallback is deprecated, and the
+    // callback and userdata moved into the DeviceLostEvent.
+    struct DeviceLostInfo {
+        FutureID futureID = kNullFutureID;
+        WGPUDeviceLostCallback callback = nullptr;
+        // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
+        raw_ptr<void, DanglingUntriaged> userdata = nullptr;
+    };
+    DeviceLostInfo mDeviceLostInfo;
+
     WGPUErrorCallback mErrorCallback = nullptr;
-    WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
     WGPULoggingCallback mLoggingCallback = nullptr;
-    bool mDidRunLostCallback = false;
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
     raw_ptr<void, DanglingUntriaged> mErrorUserdata = nullptr;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
-    raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
     raw_ptr<void> mLoggingUserdata = nullptr;
 
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
