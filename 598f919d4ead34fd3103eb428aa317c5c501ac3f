@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "daeedb35_06dab5cc",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T18:51:30Z",
+      "side": 1,
+      "message": "I consider this resolved.  Also ben is OOO now, so I\u0027m taking over this review.",
+      "parentUuid": "1dd0d7cd_7a89c192",
+      "range": {
+        "startLine": 89,
+        "startChar": 23,
+        "endLine": 89,
+        "endChar": 30
+      },
+      "revId": "598f919d4ead34fd3103eb428aa317c5c501ac3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca4a0ea3_70b9b721",
