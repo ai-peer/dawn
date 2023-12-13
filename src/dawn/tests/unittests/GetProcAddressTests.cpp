@@ -92,7 +92,8 @@ class GetProcAddressTests : public testing::TestWithParam<DawnFlavor> {
                 mWireClient = std::make_unique<wire::WireClient>(clientDesc);
 
                 mDevice = wgpu::Device::Acquire(
-                    mWireClient->ReserveDevice(ToAPI(mNativeInstance.Get())).device);
+                    mWireClient->ReserveDevice(mWireClient->ReserveInstance(nullptr).instance)
+                        .device);
                 mProcs = wire::client::GetProcs();
                 break;
             }

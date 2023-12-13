@@ -60,6 +60,11 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 }
 
 Client::~Client() {
+    // Transition all event managers to ClientDropped state.
+    for (auto& [_, eventManager] : mEventManagers) {
+        eventManager->TransitionTo(EventManager::State::ClientDropped);
+    }
+
     DestroyAllObjects();
 }
 
@@ -116,11 +121,17 @@ ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device,
 }
 
 ReservedDevice Client::ReserveDevice(WGPUInstance instance) {
-    Device* device = Make<Device>(FromAPI(instance)->GetEventManagerHandle(), nullptr);
+    auto eventManager = FromAPI(instance)->GetEventManagerHandle();
+
+    Device* device = Make<Device>(eventManager, nullptr);
 
     ReservedDevice result;
     result.device = ToAPI(device);
-    result.handle = device->GetWireHandle();
+    result.handle.id = device->GetWireId();
+    result.handle.generation = device->GetWireGeneration();
+    result.handle.deviceLostFuture = device->GetDeviceLostFuture();
+    result.handle.eventManagerId = eventManager.id;
+    result.handle.eventManagerGeneration = eventManager.generation;
     return result;
 }
 
@@ -133,7 +144,7 @@ ReservedInstance Client::ReserveInstance(const WGPUInstanceDescriptor* descripto
     }
 
     // Reserve an EventManager for the given instance and make the association in the map.
-    mEventManagers.emplace(ObjectHandle(instance->GetWireId(), instance->GetWireGeneration()),
+    mEventManagers.emplace(instance->GetWireHandle()),
                            std::make_unique<EventManager>());
 
     ReservedInstance result;
@@ -168,6 +179,11 @@ void Client::Disconnect() {
     mDisconnected = true;
     mSerializer = ChunkedCommandSerializer(NoopCommandSerializer::GetInstance());
 
+    // Transition all event managers to ClientDropped state.
+    for (auto& [_, eventManager] : mEventManagers) {
+        eventManager->TransitionTo(EventManager::State::ClientDropped);
+    }
+
     auto& deviceList = mObjects[ObjectType::Device];
     {
         for (LinkNode<ObjectBase>* device = deviceList.head(); device != deviceList.end();
@@ -181,11 +197,6 @@ void Client::Disconnect() {
              object = object->next()) {
             object->value()->CancelCallbacksForDisconnect();
         }
-    }
-
-    // Transition all event managers to ClientDropped state.
-    for (auto& [_, eventManager] : mEventManagers) {
-        eventManager->TransitionTo(EventManager::State::ClientDropped);
     }
 }
 
