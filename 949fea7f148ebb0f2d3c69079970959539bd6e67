@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5b9b6e36_80149482",
+        "filename": "generator/templates/dawn/native/ChainUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-13T02:18:59Z",
+      "side": 0,
+      "message": "possible to remove unordered_set?",
+      "revId": "949fea7f148ebb0f2d3c69079970959539bd6e67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
