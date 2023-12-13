@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab7abf25_3ceccc03",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T16:29:47Z",
+      "side": 1,
+      "message": "This returns null if the ID is not the ID of a type.\n\nThat begs the question: Does this whole class assume the SPIR-V module (would) pass validation?  That should be stated at the top of the class.",
+      "range": {
+        "startLine": 102,
+        "startChar": 52,
+        "endLine": 102,
+        "endChar": 63
+      },
+      "revId": "16fbf9152bed49f4dea06c640a9c400959f07395",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
