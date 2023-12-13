@@ -16,6 +16,24 @@
       "message": "would you prefer I add another bool to the texture flags for whether or not a texture work as a storage texture in compat?",
       "revId": "2076f8e9e7381182566569e4f4f686d8c00a3e4f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf554d5e_c26f777b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-13T02:26:37Z",
+      "side": 1,
+      "message": "yes, that would be preferable. you\u0027ll have to change it slightly as well to make the error message nice though.",
+      "parentUuid": "4cf3cc29_c98d22e6",
+      "revId": "2076f8e9e7381182566569e4f4f686d8c00a3e4f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
