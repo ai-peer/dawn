@@ -47,6 +47,7 @@ class Client;
 enum class EventType {
     CreateComputePipeline,
     CreateRenderPipeline,
+    DeviceLost,
     MapAsync,
     PopErrorScope,
     RequestAdapter,
