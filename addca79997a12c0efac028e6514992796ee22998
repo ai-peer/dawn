@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b8d4936_327d4fbb",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-13T18:48:07Z",
+      "side": 1,
+      "message": "I filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2289 to clarify Dawn\u0027s requirements.\nStrictly speaking, right now Dawn allows a Vulkan 1.0 device. I would guess that we will bump the requirement to Vulkan 1.1.\n\nMarking as resolved since there\u0027s an issue to follow up.",
+      "range": {
+        "startLine": 42,
+        "startChar": 28,
+        "endLine": 42,
+        "endChar": 47
+      },
+      "revId": "addca79997a12c0efac028e6514992796ee22998",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
