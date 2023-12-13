@@ -130,14 +130,15 @@ class ProcTableAsClass {
                         {% if arg.name.get() == 'callback info' %}
                             {% for callback in types[arg.type.name.get()].members if callback.type.category == 'function pointer' %}
                                 {{as_cType(callback.type.name)}} m{{as_CppMethodSuffix(type.name, method.name)}}{{callback.name.CamelCase()}} = nullptr;
+                                void* m{{as_CppMethodSuffix(type.name, method.name)}}Userdata = 0;
                             {% endfor %}
                         {% elif arg.type.category == 'function pointer' %}
                             {{as_cType(arg.type.name)}} m{{as_CppMethodSuffix(type.name, method.name)}}{{arg.name.CamelCase()}} = nullptr;
+                            void* m{{as_CppMethodSuffix(type.name, method.name)}}Userdata = 0;
                         {% endif %}
                     {% endfor %}
                 {% endfor %}
             {% endfor %}
-            void* userdata = 0;
         };
 
     private:

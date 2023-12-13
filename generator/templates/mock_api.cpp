@@ -95,7 +95,7 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
                 {% for arg in method.arguments %}
                     {% if arg.type.category == 'function pointer' %}
                         object->m{{Suffix + arg.name.CamelCase()}} = {{as_varName(arg.name)}};
-                        object->userdata = userdata;
+                        object->m{{Suffix + arg.name.CamelCase()}}Userdata = userdata;
                     {% endif %}
                 {% endfor %}
 
@@ -118,7 +118,7 @@ void ProcTableAsClass::GetProcTable({{Prefix}}ProcTable* table) {
                     {% if arg.name.get() == 'callback info' %}
                         {% for callback in types[arg.type.name.get()].members if callback.type.category == 'function pointer' %}
                             object->m{{Suffix + callback.name.CamelCase()}} = {{as_varName(arg.name)}}.{{as_varName(callback.name)}};
-                            object->userdata = {{as_varName(arg.name)}}.userdata;
+                            object->m{{Suffix + arg.name.CamelCase()}}Userdata = {{as_varName(arg.name)}}.userdata;
                         {% endfor %}
                     {% endif %}
                 {% endfor %}
