@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4965bf5f_d178e1c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-13T01:25:43Z",
+      "side": 1,
+      "message": "Ah yes, apparently `true` !\u003d `false`. Fixed.",
+      "parentUuid": "e00aa4e1_cae2473e",
+      "revId": "798f0b16ecdbf9f5fb56a9e769d81b1e7b460028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "24b77dbd_bb037023",
@@ -31,6 +49,24 @@
       "writtenOn": "2023-12-12T23:32:57Z",
       "side": 1,
       "message": "Suggest using a `Slice\u003cconst uint32_t\u003e`. That would support vector sources, as well as any other container.",
+      "revId": "798f0b16ecdbf9f5fb56a9e769d81b1e7b460028",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b556cd26_e69ca1a5",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-13T01:25:43Z",
+      "side": 1,
+      "message": "Done. Also stopped capturing the binary data as a member, since we only need it in one place.",
+      "parentUuid": "24b77dbd_bb037023",
       "revId": "798f0b16ecdbf9f5fb56a9e769d81b1e7b460028",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
