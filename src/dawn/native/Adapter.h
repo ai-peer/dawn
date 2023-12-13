@@ -28,17 +28,18 @@
 #ifndef SRC_DAWN_NATIVE_ADAPTER_H_
 #define SRC_DAWN_NATIVE_ADAPTER_H_
 
+#include <utility>
 #include <vector>
 
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 #include "dawn/native/DawnNative.h"
+#include "dawn/native/Device.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/dawn_platform.h"
 
 namespace dawn::native {
 
-class DeviceBase;
 class TogglesState;
 struct SupportedLimits;
 
@@ -62,8 +63,10 @@ class AdapterBase : public RefCounted {
     Future APIRequestDeviceF(const DeviceDescriptor* descriptor,
                              const RequestDeviceCallbackInfo& callbackInfo);
     DeviceBase* APICreateDevice(const DeviceDescriptor* descriptor = nullptr);
-    ResultOrError<Ref<DeviceBase>> CreateDevice(const DeviceDescriptor* rawDescriptor);
     bool APIGetFormatCapabilities(wgpu::TextureFormat format, FormatCapabilities* capabilities);
+
+    std::pair<Ref<DeviceBase::DeviceLostEvent>, ResultOrError<Ref<DeviceBase>>> CreateDevice(
+        const DeviceDescriptor* rawDescriptor);
 
     void SetUseTieredLimits(bool useTieredLimits);
 
@@ -78,6 +81,8 @@ class AdapterBase : public RefCounted {
     FeatureLevel GetFeatureLevel() const;
 
   private:
+    ResultOrError<Ref<DeviceBase>> CreateDeviceInternal(const DeviceDescriptor* rawDescriptor);
+
     Ref<PhysicalDeviceBase> mPhysicalDevice;
     FeatureLevel mFeatureLevel;
     bool mUseTieredLimits = false;

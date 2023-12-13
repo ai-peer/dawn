@@ -29,6 +29,7 @@
 #define SRC_DAWN_WIRE_CLIENT_DEVICE_H_
 
 #include <memory>
+#include <variant>
 
 #include "dawn/common/LinkedList.h"
 #include "dawn/webgpu.h"
@@ -83,8 +84,11 @@ class Device final : public ObjectWithEventsBase {
     void SetFeatures(const WGPUFeatureName* features, uint32_t featuresCount);
 
     WGPUQueue GetQueue();
+    WGPUFuture GetDeviceLostFuture();
 
     std::weak_ptr<bool> GetAliveWeakPtr();
+
+    class DeviceLostEvent;
 
   private:
     template <typename Event,
@@ -93,16 +97,25 @@ class Device final : public ObjectWithEventsBase {
               typename Descriptor = decltype(std::declval<Cmd>().descriptor)>
     WGPUFuture CreatePipelineAsyncF(Descriptor const* descriptor, const CallbackInfo& callbackInfo);
 
+    void ReleaseImpl() override;
+
     LimitsAndFeatures mLimitsAndFeatures;
 
-    WGPUErrorCallback mErrorCallback = nullptr;
-    WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
+    // TODO(crbug.com/dawn/2465): This can probably just be the future id once SetDeviceLostCallback
+    // is deprecated, and the callback and userdata moved into the DeviceLostEvent.
+    struct DeviceLostInfo {
+        FutureID futureID = kNullFutureID;
+        std::unique_ptr<TrackedEvent> event = nullptr;
+        WGPUDeviceLostCallbackNew callback = nullptr;
+        WGPUDeviceLostCallback oldCallback = nullptr;
+        // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
+        raw_ptr<void, DanglingUntriaged> userdata = nullptr;
+    };
+    DeviceLostInfo mDeviceLostInfo;
+
+    WGPUUncapturedErrorCallbackInfo mUncapturedErrorCallbackInfo;
     WGPULoggingCallback mLoggingCallback = nullptr;
-    bool mDidRunLostCallback = false;
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
-    raw_ptr<void, DanglingUntriaged> mErrorUserdata = nullptr;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
-    raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
     raw_ptr<void> mLoggingUserdata = nullptr;
 
     // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire:
