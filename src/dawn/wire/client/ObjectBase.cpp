@@ -59,7 +59,7 @@ void ObjectBase::Reference() {
     mRefcount++;
 }
 
-void ObjectBase::Release() {
+uint32_t ObjectBase::Release() {
     DAWN_ASSERT(mRefcount != 0);
     mRefcount--;
 
@@ -72,6 +72,8 @@ void ObjectBase::Release() {
         client->SerializeCommand(cmd);
         client->Free(this, GetObjectType());
     }
+
+    return mRefcount;
 }
 
 ObjectWithEventsBase::ObjectWithEventsBase(const ObjectBaseParams& params,
