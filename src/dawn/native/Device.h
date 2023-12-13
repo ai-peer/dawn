@@ -462,6 +462,23 @@ class DeviceBase : public RefCountedWithExternalCount {
         Ref<ComputePipelineBase> computePipeline);
     Ref<RenderPipelineBase> AddOrGetCachedRenderPipeline(Ref<RenderPipelineBase> renderPipeline);
 
+    struct DeviceLostEvent final : public EventManager::TrackedEvent {
+        wgpu::DeviceLostReason mReason;
+        std::string mMessage;
+
+        wgpu::DeviceLostCallbackNew mCallback = nullptr;
+        wgpu::DeviceLostCallback mOldCallback = nullptr;
+        // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
+        raw_ptr<void, DanglingUntriaged> mUserdata;
+        Ref<DeviceBase> mDevice;
+
+        DeviceLostEvent(DeviceBase* device, const DeviceLostCallbackInfo& callbackInfo);
+        DeviceLostEvent(DeviceBase* device, wgpu::DeviceLostCallback oldCallback, void* userdata);
+        ~DeviceLostEvent() override;
+
+        void Complete(EventCompletionType completionType) override;
+    };
+
   protected:
     // Constructor used only for mocking and testing.
     DeviceBase();
@@ -471,6 +488,10 @@ class DeviceBase : public RefCountedWithExternalCount {
     MaybeError Initialize(Ref<QueueBase> defaultQueue);
     void DestroyObjects();
     void Destroy();
+
+    // Device lost event needs to be protected for now because mock device needs it.
+    // TODO(dawn:1702) Make this private when we mock the adapter.
+    Ref<DeviceLostEvent> mDeviceLostEvent = nullptr;
 
   private:
     void WillDropLastExternalRef() override;
@@ -560,18 +581,12 @@ class DeviceBase : public RefCountedWithExternalCount {
                                                     const TextureCopy& dst,
                                                     const Extent3D& copySizePixels) = 0;
 
-    wgpu::ErrorCallback mUncapturedErrorCallback = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<void, DanglingUntriaged> mUncapturedErrorUserdata = nullptr;
+    UncapturedErrorCallbackInfo mUncapturedErrorCallbackInfo;
 
     std::shared_mutex mLoggingMutex;
     wgpu::LoggingCallback mLoggingCallback = nullptr;
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
     raw_ptr<void, DanglingUntriaged> mLoggingUserdata = nullptr;
-
-    wgpu::DeviceLostCallback mDeviceLostCallback = nullptr;
-    // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
-    raw_ptr<void, DanglingUntriaged> mDeviceLostUserdata = nullptr;
 
     std::unique_ptr<ErrorScopeStack> mErrorScopeStack;
 

@@ -72,8 +72,8 @@ class EventManager final : NonMovable {
 
     class TrackedEvent;
     // Track a TrackedEvent and give it a FutureID.
-    [[nodiscard]] FutureID TrackEvent(Ref<TrackedEvent>&&);
-    void SetFutureReady(FutureID futureID);
+    FutureID TrackEvent(Ref<TrackedEvent>&&);
+    void SetFutureReady(const Ref<TrackedEvent>& event);
 
     // Returns true if future ProcessEvents is needed.
     bool ProcessPollEvents();

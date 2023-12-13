@@ -144,7 +144,7 @@ void CreatePipelineAsyncEvent<PipelineType, CreatePipelineAsyncCallbackInfo>::In
 
     // TODO(dawn:2451): API re-entrant callbacks in spontaneous mode that use the device could
     // deadlock itself.
-    device->GetInstance()->GetEventManager()->SetFutureReady(mFutureID);
+    device->GetInstance()->GetEventManager()->SetFutureReady(this);
 }
 
 template <typename PipelineType, typename CreatePipelineAsyncCallbackInfo>

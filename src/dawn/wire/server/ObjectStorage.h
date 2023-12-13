@@ -146,7 +146,7 @@ class KnownObjectsBase {
         }
 
         Data* data = &mKnown[id];
-        if (data->state != AllocationState::Allocated) {
+        if (data->state == AllocationState::Free) {
             return WireResult::FatalError;
         }
 
