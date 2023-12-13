@@ -168,8 +168,8 @@ void ValidationTest::SetUp() {
     DAWN_ASSERT(adapter);
 
     wgpu::DeviceDescriptor deviceDescriptor = {};
-    deviceDescriptor.deviceLostCallback = ValidationTest::OnDeviceLost;
-    deviceDescriptor.deviceLostUserdata = this;
+    deviceDescriptor.deviceLostCallbackInfo.callback = ValidationTest::OnDeviceLost;
+    deviceDescriptor.deviceLostCallbackInfo.userdata = this;
 
     device = RequestDeviceSync(deviceDescriptor);
     backendDevice = mLastCreatedBackendDevice;
