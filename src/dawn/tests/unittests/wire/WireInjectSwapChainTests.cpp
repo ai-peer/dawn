@@ -112,11 +112,11 @@ TEST_F(WireInjectSwapChainTests, InjectedSwapChainLifetime) {
 // Test that a swapchain reservation can be reclaimed. This is necessary to
 // avoid leaking ObjectIDs for reservations that are never injected.
 TEST_F(WireInjectSwapChainTests, ReclaimSwapChainReservation) {
-    // Test that doing a reservation and full release is an error.
+    // Test that doing a reservation and full release is not an error.
     {
         auto reserved = GetWireClient()->ReserveSwapChain(device, &swapChainDesc);
         wgpuSwapChainRelease(reserved.swapchain);
-        FlushClient(false);
+        FlushClient();
     }
 
     // Test that doing a reservation and then reclaiming it recycles the ID.

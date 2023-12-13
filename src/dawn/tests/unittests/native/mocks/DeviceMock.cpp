@@ -137,4 +137,8 @@ QueueMock* DeviceMock::GetQueueMock() {
     return reinterpret_cast<QueueMock*>(GetQueue());
 }
 
+InstanceBase* DeviceMock::GetInstance() const {
+    return mInstance.Get();
+}
+
 }  // namespace dawn::native
