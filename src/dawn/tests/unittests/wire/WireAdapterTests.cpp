@@ -176,8 +176,8 @@ static void DeviceLostCallback(WGPUDeviceLostReason reason, const char* message,
 TEST_P(WireAdapterTests, RequestDeviceAssertsOnLostCallbackPointer) {
     int userdata = 1337;
     wgpu::DeviceDescriptor desc = {};
-    desc.deviceLostCallback = DeviceLostCallback;
-    desc.deviceLostUserdata = &userdata;
+    desc.deviceLostCallbackInfo.callback = DeviceLostCallback;
+    desc.deviceLostCallbackInfo.userdata = &userdata;
 
     AdapterRequestDevice(adapter, &desc);
 
@@ -186,12 +186,8 @@ TEST_P(WireAdapterTests, RequestDeviceAssertsOnLostCallbackPointer) {
             EXPECT_STREQ(apiDesc->label, desc.label);
 
             // The callback should not be passed through to the server.
-            ASSERT_EQ(apiDesc->deviceLostCallback, nullptr);
-            ASSERT_EQ(apiDesc->deviceLostUserdata, nullptr);
-
-            // Call the callback so the test doesn't wait indefinitely.
-            api.CallAdapterRequestDeviceCallback(apiAdapter, WGPURequestDeviceStatus_Error, nullptr,
-                                                 nullptr);
+            ASSERT_EQ(apiDesc->deviceLostCallbackInfo.callback, nullptr);
+            ASSERT_EQ(apiDesc->deviceLostCallbackInfo.userdata, nullptr);
         })));
     FlushClient();
     FlushFutures();
