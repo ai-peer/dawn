@@ -1,0 +1,163 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4444de3_9370d24c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "LGTM with nits.",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "998c1507_570ef8f1",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "This isn\u0027t great because it\u0027s not clear that sortedBindings has pointers to additionalBindings. Maybe this call could return a struct with two vectors?",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 529,
+        "endChar": 0
+      },
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "30e23c13_45998cdf",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "In a follow up WDYT of updating all of these to use UnpackPtr? It will likely need to happen at some point anyway. But also it\u0027s really a lot of work :/",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d7f2a7c8_cc677ed0",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7568a774_0c40d78e",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "nit: if (auto* luidOptions \u003d ...) {DAWN_INVALID_IF(memcmp...)}",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d9d7ae5_e43ac19a",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "nit: if (auto* ...)",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7215d4e_dacd9945",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b0eed3d8_d42ba5c5",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "246044dc_cf506872",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T20:22:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
