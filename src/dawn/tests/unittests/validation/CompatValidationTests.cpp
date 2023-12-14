@@ -234,6 +234,56 @@ TEST_F(CompatValidationTest, CanNotUseFragmentShaderWithSampleMask) {
     }
 }
 
+TEST_F(CompatValidationTest, CanNotUseShaderWithInterpolateTypeLinear) {
+    wgpu::ShaderModule moduleInterpolationLinear = utils::CreateShaderModule(device, R"(
+        struct Vertex {
+            @builtin(position) pos: vec4f,
+            @location(0) @interpolate(linear) color : vec4f,
+        };
+        @vertex fn vs() -> Vertex {
+            var v: Vertex;
+            v.pos = vec4f(1);
+            v.color = vec4f(1);
+            return v;
+        }
+        @fragment fn fsWithoutInterpolationLinearUsage() -> @location(0) vec4f {
+            return vec4f(1);
+        }
+        @fragment fn fsWithInterpolationLinearUsage1(v: Vertex) -> @location(0) vec4f {
+            return vec4f(1);
+        }
+        @fragment fn fsWithInterpolationLinearUsage2(v: Vertex) -> @location(0) vec4f {
+            return v.pos;
+        }
+        @fragment fn fsWithInterpolationLinearUsage3(v: Vertex) -> @location(0) vec4f {
+            return v.color;
+        }
+    )");
+
+    static const char* entryPoints[] = {
+        "fsWithoutInterpolationLinearUsage",
+        "fsWithInterpolationLinearUsage1",
+        "fsWithInterpolationLinearUsage2",
+        "fsWithInterpolationLinearUsage3",
+    };
+    for (auto entryPoint : entryPoints) {
+        utils::ComboRenderPipelineDescriptor descriptor;
+        descriptor.vertex.module = moduleInterpolationLinear;
+        descriptor.vertex.entryPoint = "vs";
+        descriptor.cFragment.module = moduleInterpolationLinear;
+        descriptor.cFragment.entryPoint = entryPoint;
+
+        bool shouldSucceed = entryPoint == entryPoints[0];
+
+        if (shouldSucceed) {
+            device.CreateRenderPipeline(&descriptor);
+        } else {
+            ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&descriptor),
+                                testing::HasSubstr("in compatibility mode"));
+        }
+    }
+}
+
 constexpr const char* kRenderTwoTexturesOneBindgroupWGSL = R"(
     @vertex
     fn vs(@builtin(vertex_index) VertexIndex : u32) -> @builtin(position) vec4f {
