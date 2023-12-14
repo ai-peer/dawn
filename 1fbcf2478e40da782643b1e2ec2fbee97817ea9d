@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db1cd635_0d236e1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-14T17:34:02Z",
+      "side": 1,
+      "message": "LGTM.",
+      "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7fd73d5_37edb762",
@@ -50,6 +67,24 @@
       "side": 1,
       "message": "Acknowledged",
       "parentUuid": "c4e80722_848503a2",
+      "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea3d4fc1_555b06cb",
+        "filename": "src/dawn/native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2023-12-14T17:34:02Z",
+      "side": 1,
+      "message": "Thanks for clarifying! I didn\u0027t realize Chrome required 1.1.",
+      "parentUuid": "d32fdfbf_813b0ad1",
       "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
