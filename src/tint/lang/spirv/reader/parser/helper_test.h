@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_SPIRV_READER_PARSER_HELPER_TEST_H_
 #define SRC_TINT_LANG_SPIRV_READER_PARSER_HELPER_TEST_H_
 
+#include <iostream>
 #include <string>
 #include <vector>
 
@@ -53,10 +54,19 @@ namespace tint::spirv::reader {
 template <typename BASE>
 class SpirvParserTestHelperBase : public BASE {
   protected:
+    /// Helper to catch ICEs expected by death tests.
+    /// @param err the error
+    [[noreturn]] static void IceReporter(const tint::InternalCompilerError& err) {
+        std::cerr << err.Error() << std::endl;
+        __builtin_trap();
+    }
+
     /// Run the parser on a SPIR-V module and return the Tint IR or an error string.
     /// @param spirv_asm the SPIR-V assembly to parse
     /// @returns the disassembled Tint IR
     std::string Run(std::string spirv_asm) {
+        tint::SetInternalCompilerErrorReporter(IceReporter);
+
         // Assemble the SPIR-V input.
         StringStream err;
         std::vector<uint32_t> binary;
