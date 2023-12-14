@@ -16,6 +16,24 @@
       "message": "Are we losing a lot of devices by doing this?",
       "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4e80722_848503a2",
+        "filename": "src/dawn/native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-14T16:32:13Z",
+      "side": 1,
+      "message": "I didn\u0027t see specific data in the issue, but it seems bad that we might be emitting totally wrong code given Tint\u0027s SPIRV requires Vulkan 1.1.\n\nChrome itself already [requires Vulkan 1.1](https://source.chromium.org/chromium/chromium/src/+/main:gpu/vulkan/vulkan_function_pointers.h;l\u003d52;drc\u003d8e78783dc1f7007bad46d657c9f332614e240fd8;bpv\u003d1;bpt\u003d1)",
+      "parentUuid": "c7fd73d5_37edb762",
+      "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
