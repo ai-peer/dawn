@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf0263c0_abe00e62",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 241,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T18:40:44Z",
+      "side": 1,
+      "message": "Should we have a test for `sample` as well?",
+      "range": {
+        "startLine": 241,
+        "startChar": 25,
+        "endLine": 241,
+        "endChar": 45
+      },
+      "revId": "9334b0676cb58a9323fac1b7aa1375a34230526b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
