@@ -34,6 +34,24 @@
       "parentUuid": "c7fd73d5_37edb762",
       "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d32fdfbf_813b0ad1",
+        "filename": "src/dawn/native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T16:34:42Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c4e80722_848503a2",
+      "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
