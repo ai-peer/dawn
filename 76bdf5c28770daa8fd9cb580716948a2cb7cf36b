@@ -22,6 +22,30 @@
       },
       "revId": "76bdf5c28770daa8fd9cb580716948a2cb7cf36b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "40d79af7_445c676e",
+        "filename": "src/tint/lang/core/ir/binary/decode.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2023-12-14T13:27:29Z",
+      "side": 1,
+      "message": "Correct. Looks like I accidentally squashed another commit in. For the sake of avoiding another half day rebasing, I\u0027ve updated the CL message to include this.",
+      "parentUuid": "b5a0fe9b_fd89825b",
+      "range": {
+        "startLine": 172,
+        "startChar": 0,
+        "endLine": 180,
+        "endChar": 9
+      },
+      "revId": "76bdf5c28770daa8fd9cb580716948a2cb7cf36b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
