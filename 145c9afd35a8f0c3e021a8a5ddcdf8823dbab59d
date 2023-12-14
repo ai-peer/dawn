@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e3591923_0ac20e5c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-14T16:16:25Z",
+      "side": 1,
+      "message": "note to self: seems like there\u0027s more discussion on the github issue https://github.com/gpuweb/gpuweb/issues/3838",
+      "revId": "145c9afd35a8f0c3e021a8a5ddcdf8823dbab59d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
