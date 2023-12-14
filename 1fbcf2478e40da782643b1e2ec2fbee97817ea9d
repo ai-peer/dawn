@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7fd73d5_37edb762",
+        "filename": "src/dawn/native/vulkan/VulkanInfo.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-14T16:24:14Z",
+      "side": 1,
+      "message": "Are we losing a lot of devices by doing this?",
+      "revId": "1fbcf2478e40da782643b1e2ec2fbee97817ea9d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
