@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd6000c2_ca9f94dc",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 529,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "998c1507_570ef8f1",
+      "range": {
+        "startLine": 526,
+        "startChar": 0,
+        "endLine": 529,
+        "endChar": 0
+      },
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "30e23c13_45998cdf",
@@ -54,6 +78,24 @@
       "writtenOn": "2023-12-14T20:22:19Z",
       "side": 1,
       "message": "In a follow up WDYT of updating all of these to use UnpackPtr? It will likely need to happen at some point anyway. But also it\u0027s really a lot of work :/",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4a8653d_388f651e",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 479,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Yea that\u0027s the eventual goal! Will make progress towards that separate of these initial refactorings.",
+      "parentUuid": "30e23c13_45998cdf",
       "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6239a197_bed11715",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 355,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d7f2a7c8_cc677ed0",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7568a774_0c40d78e",
@@ -88,6 +148,24 @@
       "writtenOn": "2023-12-14T20:22:19Z",
       "side": 1,
       "message": "nit: if (auto* luidOptions \u003d ...) {DAWN_INVALID_IF(memcmp...)}",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6dd2d31_7fe20e68",
+        "filename": "src/dawn/native/d3d11/BackendD3D11.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7568a774_0c40d78e",
       "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -109,6 +187,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a209358e_49013b61",
+        "filename": "src/dawn/native/d3d12/BufferD3D12.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9d9d7ae5_e43ac19a",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c7215d4e_dacd9945",
@@ -122,6 +218,24 @@
       "writtenOn": "2023-12-14T20:22:19Z",
       "side": 1,
       "message": "ditto",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd9dcdce_c8cfb9b6",
+        "filename": "src/dawn/native/metal/BufferMTL.mm",
+        "patchSetId": 8
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c7215d4e_dacd9945",
       "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +257,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "725ae1df_bae85929",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b0eed3d8_d42ba5c5",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "246044dc_cf506872",
@@ -156,6 +288,24 @@
       "writtenOn": "2023-12-14T20:22:19Z",
       "side": 1,
       "message": "ditto",
+      "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16437370_b030d8fe",
+        "filename": "src/dawn/native/vulkan/DeviceVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-14T22:41:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "246044dc_cf506872",
       "revId": "b7c485e4541af54c6b5c6e0aeedfdcfdd215f3eb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
