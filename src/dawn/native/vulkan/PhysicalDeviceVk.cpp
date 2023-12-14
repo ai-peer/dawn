@@ -202,6 +202,9 @@ MaybeError PhysicalDevice::InitializeImpl() {
     if (!mDeviceInfo.features.sampleRateShading) {
         return DAWN_INTERNAL_ERROR("Vulkan sampleRateShading feature required.");
     }
+    if (!mDeviceInfo.features.shaderStorageImageExtendedFormats) {
+        return DAWN_INTERNAL_ERROR("Vulkan shaderStorageImageExtendedFormats feature required.");
+    }
 
     return {};
 }
