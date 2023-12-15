@@ -30,11 +30,11 @@
 
 #include <vector>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/d3d12/CPUDescriptorHeapAllocationD3D12.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 // |StagingDescriptorAllocator| allocates a fixed-size block of descriptors from a CPU
 // descriptor heap pool.

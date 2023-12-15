@@ -30,10 +30,10 @@
 
 #include <memory>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/D3D12Backend.h"
 #include "dawn/native/ResourceHeapAllocator.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d12 {
 

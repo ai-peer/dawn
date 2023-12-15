@@ -29,7 +29,6 @@
 #include <set>
 #include <vector>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/d3d12/BindGroupLayoutD3D12.h"
@@ -40,6 +39,7 @@
 #include "dawn/tests/DawnTest.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/WGPUHelpers.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d12 {
 namespace {

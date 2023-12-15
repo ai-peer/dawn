@@ -33,7 +33,6 @@
 #include <utility>
 #include <vector>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/WindowsUtils.h"
 #include "dawn/native/CommandEncoder.h"
 #include "dawn/native/CommandValidation.h"
@@ -53,6 +52,7 @@
 #include "dawn/native/d3d11/SharedFenceD3D11.h"
 #include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/native/d3d11/UtilsD3D11.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d11 {
 namespace {

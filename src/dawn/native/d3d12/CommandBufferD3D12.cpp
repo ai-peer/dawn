@@ -31,8 +31,6 @@
 #include <utility>
 #include <vector>
 
-#include "partition_alloc/pointers/raw_ptr.h"
-#include "partition_alloc/pointers/raw_ref.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/Range.h"
 #include "dawn/native/BindGroupTracker.h"
@@ -52,6 +50,8 @@
 #include "dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
+#include "partition_alloc/pointers/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ref.h"
 
 namespace dawn::native::d3d12 {
 

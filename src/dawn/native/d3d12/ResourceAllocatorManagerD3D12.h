@@ -31,13 +31,13 @@
 #include <array>
 #include <memory>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/native/BuddyMemoryAllocator.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/PooledResourceMemoryAllocator.h"
 #include "dawn/native/d3d12/HeapAllocatorD3D12.h"
 #include "dawn/native/d3d12/ResourceHeapAllocationD3D12.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d12 {
 

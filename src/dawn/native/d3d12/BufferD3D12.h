@@ -31,8 +31,8 @@
 #include <limits>
 #include <memory>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Buffer.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 #include "dawn/native/d3d12/ResourceHeapAllocationD3D12.h"
 #include "dawn/native/d3d12/d3d12_platform.h"

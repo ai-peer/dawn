@@ -31,9 +31,9 @@
 #include <limits>
 #include <memory>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Buffer.h"
 #include "dawn/native/d3d/d3d_platform.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d11 {
 

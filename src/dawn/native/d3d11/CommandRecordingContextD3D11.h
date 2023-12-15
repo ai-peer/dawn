@@ -28,11 +28,11 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/d3d/d3d_platform.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d11 {
 class CommandAllocatorManager;

@@ -30,7 +30,6 @@
 #include <algorithm>
 #include <utility>
 
-#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
@@ -46,6 +45,7 @@
 #include "dawn/native/d3d12/UtilsD3D12.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d12 {
 
