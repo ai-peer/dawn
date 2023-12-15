@@ -32,6 +32,7 @@
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/d3d/d3d_platform.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d11 {
 class CommandAllocatorManager;
@@ -115,7 +116,7 @@ class ScopedCommandRecordingContext : NonMovable {
     MaybeError FlushUniformBuffer() const;
 
   protected:
-    CommandRecordingContext* const mCommandContext;
+    const raw_ptr<CommandRecordingContext> mCommandContext;
     ComPtr<ID3D11Multithread> mD3D11Multithread;
 };
 
