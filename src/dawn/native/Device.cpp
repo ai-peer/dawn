@@ -1128,7 +1128,7 @@ void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* 
     if (cachedComputePipeline.Get() != nullptr) {
         mCallbackTaskManager->AddCallbackTask(
             std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
-                      ToAPI(cachedComputePipeline.Detach()), "", userdata));
+                      ToAPI(cachedComputePipeline.Detach()), nullptr, userdata));
     } else {
         // Otherwise we will create the pipeline object in InitializeComputePipelineAsyncImpl(),
         // where the pipeline object may be initialized asynchronously and the result will be
@@ -1136,6 +1136,12 @@ void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* 
         InitializeComputePipelineAsyncImpl(std::move(uninitializedComputePipeline), callback,
                                            userdata);
     }
+}
+Future DeviceBase::APICreateComputePipelineAsyncF(
+    const ComputePipelineDescriptor* descriptor,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
+    // TODO(dawn:1987) Implement this.
+    DAWN_UNREACHABLE();
 }
 PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
     const PipelineLayoutDescriptor* descriptor) {
@@ -1186,7 +1192,7 @@ void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* de
     if (cachedRenderPipeline != nullptr) {
         mCallbackTaskManager->AddCallbackTask(
             std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
-                      ToAPI(cachedRenderPipeline.Detach()), "", userdata));
+                      ToAPI(cachedRenderPipeline.Detach()), nullptr, userdata));
     } else {
         // Otherwise we will create the pipeline object in InitializeRenderPipelineAsyncImpl(),
         // where the pipeline object may be initialized asynchronously and the result will be
@@ -1195,7 +1201,12 @@ void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* de
                                           userdata);
     }
 }
-
+Future DeviceBase::APICreateRenderPipelineAsyncF(
+    const RenderPipelineDescriptor* descriptor,
+    const CreateRenderPipelineAsyncCallbackInfo& callbackInfo) {
+    // TODO(dawn:1987) Implement this.
+    DAWN_UNREACHABLE();
+}
 RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
     const RenderBundleEncoderDescriptor* descriptor) {
     Ref<RenderBundleEncoder> result;
@@ -2023,7 +2034,8 @@ void DeviceBase::AddComputePipelineAsyncCallbackTask(
                         pipeline->GetDevice()->AddOrGetCachedComputePipeline(std::move(pipeline));
                 }
             }
-            callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline.Detach()), "", userdata);
+            callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline.Detach()), nullptr,
+                     userdata);
         });
 }
 
@@ -2036,7 +2048,7 @@ void DeviceBase::AddRenderPipelineAsyncCallbackTask(std::unique_ptr<ErrorData> e
         // Call the callback with an error pipeline.
         return mCallbackTaskManager->AddCallbackTask(
             [callback, pipeline = RenderPipelineBase::MakeError(this, label), userdata]() {
-                callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline), "", userdata);
+                callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline), nullptr, userdata);
             });
     }
 
