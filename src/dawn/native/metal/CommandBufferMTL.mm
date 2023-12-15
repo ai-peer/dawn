@@ -27,6 +27,7 @@
 
 #include "dawn/native/metal/CommandBufferMTL.h"
 
+#include "base/memory/raw_ptr.h"
 #include "dawn/native/BindGroupTracker.h"
 #include "dawn/native/CommandEncoder.h"
 #include "dawn/native/Commands.h"
@@ -656,7 +657,7 @@ class BindGroupTracker : public BindGroupTrackerBase<true, uint64_t> {
         ApplyBindGroupImpl(nullptr, encoder, std::forward<Args&&>(args)...);
     }
 
-    StorageBufferLengthTracker* mLengthTracker;
+    raw_ptr<StorageBufferLengthTracker> mLengthTracker;
 };
 
 // Keeps track of the dirty vertex buffer values so they can be lazily applied when we know
@@ -718,7 +719,7 @@ class VertexBufferTracker {
     PerVertexBuffer<NSUInteger> mVertexBufferOffsets;
     PerVertexBuffer<uint32_t> mVertexBufferBindingSizes;
 
-    StorageBufferLengthTracker* mLengthTracker;
+    raw_ptr<StorageBufferLengthTracker> mLengthTracker;
 };
 
 }  // anonymous namespace
