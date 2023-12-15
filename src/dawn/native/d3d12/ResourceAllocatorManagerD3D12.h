@@ -31,6 +31,7 @@
 #include <array>
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/SerialQueue.h"
 #include "dawn/native/BuddyMemoryAllocator.h"
 #include "dawn/native/IntegerTypes.h"
@@ -102,7 +103,7 @@ class ResourceAllocatorManager {
 
     void DestroyPool();
 
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
     uint32_t mResourceHeapTier;
 
     static constexpr uint64_t kMaxHeapSize = 32ll * 1024ll * 1024ll * 1024ll;  // 32GB

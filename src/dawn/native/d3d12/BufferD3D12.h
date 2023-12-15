@@ -31,6 +31,7 @@
 #include <limits>
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Buffer.h"
 
 #include "dawn/native/d3d12/ResourceHeapAllocationD3D12.h"
@@ -98,7 +99,7 @@ class Buffer final : public BufferBase {
 
     std::unique_ptr<Heap> mHostMappedHeap;
     wgpu::Callback mHostMappedDisposeCallback = nullptr;
-    void* mHostMappedDisposeUserdata = nullptr;
+    raw_ptr<void> mHostMappedDisposeUserdata = nullptr;
 };
 
 }  // namespace dawn::native::d3d12

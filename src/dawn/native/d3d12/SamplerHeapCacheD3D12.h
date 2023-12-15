@@ -31,6 +31,8 @@
 #include <unordered_set>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ref.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
@@ -91,8 +93,8 @@ class SamplerHeapCacheEntry : public RefCounted {
     // by the device and will already be unique.
     std::vector<Sampler*> mSamplers;
 
-    MutexProtected<StagingDescriptorAllocator>& mAllocator;
-    SamplerHeapCache* mCache = nullptr;
+    const raw_ref<MutexProtected<StagingDescriptorAllocator>> mAllocator;
+    raw_ptr<SamplerHeapCache> mCache = nullptr;
 };
 
 // Cache descriptor heap allocations so that we don't create duplicate ones for every
@@ -109,7 +111,7 @@ class SamplerHeapCache {
     void RemoveCacheEntry(SamplerHeapCacheEntry* entry);
 
   private:
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
 
     using Cache = std::unordered_set<SamplerHeapCacheEntry*,
                                      SamplerHeapCacheEntry::HashFunc,

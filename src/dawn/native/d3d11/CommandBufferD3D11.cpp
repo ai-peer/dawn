@@ -33,6 +33,7 @@
 #include <utility>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/WindowsUtils.h"
 #include "dawn/native/CommandEncoder.h"
 #include "dawn/native/CommandValidation.h"
@@ -101,8 +102,8 @@ class VertexBufferTracker {
     }
 
   private:
-    const ScopedSwapStateCommandRecordingContext* mCommandContext;
-    const RenderPipeline* mLastAppliedRenderPipeline = nullptr;
+    raw_ptr<const ScopedSwapStateCommandRecordingContext> mCommandContext;
+    raw_ptr<const RenderPipeline> mLastAppliedRenderPipeline = nullptr;
     PerVertexBuffer<ID3D11Buffer*> mD3D11Buffers = {};
     PerVertexBuffer<UINT> mStrides = {};
     PerVertexBuffer<UINT> mOffsets = {};

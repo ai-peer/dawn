@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
@@ -115,7 +116,7 @@ class ScopedCommandRecordingContext : NonMovable {
     MaybeError FlushUniformBuffer() const;
 
   protected:
-    CommandRecordingContext* const mCommandContext;
+    const raw_ptr<CommandRecordingContext> mCommandContext;
     ComPtr<ID3D11Multithread> mD3D11Multithread;
 };
 

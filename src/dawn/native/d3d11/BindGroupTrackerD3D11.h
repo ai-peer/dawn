@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/BindGroupTracker.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
@@ -55,7 +56,7 @@ class BindGroupTracker : public BindGroupTrackerBase</*CanInheritBindGroups=*/tr
     MaybeError ApplyBindGroup(BindGroupIndex index);
     void UnApplyBindGroup(BindGroupIndex index);
 
-    const ScopedSwapStateCommandRecordingContext* mCommandContext;
+    raw_ptr<const ScopedSwapStateCommandRecordingContext> mCommandContext;
     const bool mIsRenderPass;
     const wgpu::ShaderStage mVisibleStages;
     // All the pixel local storage UAVs

@@ -27,6 +27,7 @@
 
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 #include "dawn/native/d3d12/QueueD3D12.h"
 #include "dawn/tests/white_box/GPUTimestampCalibrationTests.h"
@@ -50,8 +51,8 @@ class GPUTimestampCalibrationTestsD3D12 : public GPUTimestampCalibrationTestBack
     float GetTimestampPeriod() const override { return mBackendDevice->GetTimestampPeriodInNS(); }
 
   private:
-    native::d3d12::Device* mBackendDevice;
-    native::d3d12::Queue* mBackendQueue;
+    raw_ptr<native::d3d12::Device> mBackendDevice;
+    raw_ptr<native::d3d12::Queue> mBackendQueue;
 };
 
 }  // anonymous namespace

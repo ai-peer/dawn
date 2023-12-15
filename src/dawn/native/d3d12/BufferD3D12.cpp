@@ -30,6 +30,7 @@
 #include <algorithm>
 #include <utility>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/Assert.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/Math.h"
@@ -513,7 +514,7 @@ void Buffer::DestroyImpl() {
 
             std::unique_ptr<Heap> heap;
             wgpu::Callback callback;
-            void* userdata;
+            raw_ptr<void> userdata;
         };
         std::unique_ptr<DisposeTask> request = std::make_unique<DisposeTask>(
             std::move(mHostMappedHeap), mHostMappedDisposeCallback, mHostMappedDisposeUserdata);

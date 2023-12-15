@@ -30,6 +30,7 @@
 
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/SlabAllocator.h"
 #include "dawn/common/ityp_stack_vec.h"
@@ -96,8 +97,8 @@ class BindGroupLayout final : public BindGroupLayoutInternalBase {
 
     MutexProtected<SlabAllocator<BindGroup>> mBindGroupAllocator;
 
-    MutexProtected<StagingDescriptorAllocator>* mSamplerAllocator = nullptr;
-    MutexProtected<StagingDescriptorAllocator>* mViewAllocator = nullptr;
+    raw_ptr<MutexProtected<StagingDescriptorAllocator>> mSamplerAllocator = nullptr;
+    raw_ptr<MutexProtected<StagingDescriptorAllocator>> mViewAllocator = nullptr;
 };
 
 }  // namespace dawn::native::d3d12

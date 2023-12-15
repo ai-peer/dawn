@@ -31,6 +31,7 @@
 #include <list>
 #include <memory>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/native/Error.h"
 #include "dawn/native/RingBufferAllocator.h"
@@ -101,7 +102,7 @@ class ShaderVisibleDescriptorAllocator {
     std::list<SerialDescriptorHeap> mPool;
     D3D12_DESCRIPTOR_HEAP_TYPE mHeapType;
 
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
 
     // The serial value of 0 means the shader-visible heaps have not been allocated.
     // This value is never returned in the GPUDescriptorHeapAllocation after

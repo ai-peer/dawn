@@ -29,6 +29,7 @@
 #include <set>
 #include <vector>
 
+#include "partition_alloc/pointers/raw_ptr.h"
 #include "dawn/native/Device.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/d3d12/BindGroupLayoutD3D12.h"
@@ -114,8 +115,8 @@ class D3D12DescriptorHeapTests : public DawnTest {
         return {r, g, b, 1};
     }
 
-    Device* mD3DDevice = nullptr;
-    Queue* mD3DQueue = nullptr;
+    raw_ptr<Device> mD3DDevice = nullptr;
+    raw_ptr<Queue> mD3DQueue = nullptr;
 
     wgpu::ShaderModule mSimpleVSModule;
     wgpu::ShaderModule mSimpleFSModule;
