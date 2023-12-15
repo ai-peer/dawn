@@ -138,7 +138,7 @@ struct CreatePipelineAsyncUserData : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
     ObjectHandle device;
-    uint64_t requestSerial;
+    WGPUFuture future;
     ObjectId pipelineObjectID;
 };
 

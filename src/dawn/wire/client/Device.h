@@ -59,18 +59,24 @@ class Device final : public ObjectWithEventsBase {
     void CreateComputePipelineAsync(WGPUComputePipelineDescriptor const* descriptor,
                                     WGPUCreateComputePipelineAsyncCallback callback,
                                     void* userdata);
+    WGPUFuture CreateComputePipelineAsyncF(
+        WGPUComputePipelineDescriptor const* descriptor,
+        const WGPUCreateComputePipelineAsyncCallbackInfo& callbackInfo);
     void CreateRenderPipelineAsync(WGPURenderPipelineDescriptor const* descriptor,
                                    WGPUCreateRenderPipelineAsyncCallback callback,
                                    void* userdata);
+    WGPUFuture CreateRenderPipelineAsyncF(
+        WGPURenderPipelineDescriptor const* descriptor,
+        const WGPUCreateRenderPipelineAsyncCallbackInfo& callbackInfo);
 
     void HandleError(WGPUErrorType errorType, const char* message);
     void HandleLogging(WGPULoggingType loggingType, const char* message);
     void HandleDeviceLost(WGPUDeviceLostReason reason, const char* message);
     bool OnPopErrorScopeCallback(uint64_t requestSerial, WGPUErrorType type, const char* message);
-    bool OnCreateComputePipelineAsyncCallback(uint64_t requestSerial,
+    bool OnCreateComputePipelineAsyncCallback(WGPUFuture future,
                                               WGPUCreatePipelineAsyncStatus status,
                                               const char* message);
-    bool OnCreateRenderPipelineAsyncCallback(uint64_t requestSerial,
+    bool OnCreateRenderPipelineAsyncCallback(WGPUFuture future,
                                              WGPUCreatePipelineAsyncStatus status,
                                              const char* message);
 
@@ -87,20 +93,19 @@ class Device final : public ObjectWithEventsBase {
     std::weak_ptr<bool> GetAliveWeakPtr();
 
   private:
+    template <typename Event,
+              typename Cmd,
+              typename Pipeline = typename Event::Pipeline,
+              typename CallbackInfo = typename Event::CallbackInfo,
+              typename Descriptor = decltype(std::declval<Cmd>().descriptor)>
+    WGPUFuture CreatePipelineAsyncF(Descriptor const* descriptor, const CallbackInfo& callbackInfo);
+
     LimitsAndFeatures mLimitsAndFeatures;
     struct ErrorScopeData {
         WGPUErrorCallback callback = nullptr;
         void* userdata = nullptr;
     };
     RequestTracker<ErrorScopeData> mErrorScopes;
-
-    struct CreatePipelineAsyncRequest {
-        WGPUCreateComputePipelineAsyncCallback createComputePipelineAsyncCallback = nullptr;
-        WGPUCreateRenderPipelineAsyncCallback createRenderPipelineAsyncCallback = nullptr;
-        void* userdata = nullptr;
-        ObjectId pipelineObjectID;
-    };
-    RequestTracker<CreatePipelineAsyncRequest> mCreatePipelineAsyncRequests;
 
     WGPUErrorCallback mErrorCallback = nullptr;
     WGPUDeviceLostCallback mDeviceLostCallback = nullptr;
