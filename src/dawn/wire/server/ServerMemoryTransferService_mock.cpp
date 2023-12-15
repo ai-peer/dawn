@@ -58,7 +58,8 @@ MockMemoryTransferService::MockWriteHandle::~MockWriteHandle() {
 }
 
 const uint32_t* MockMemoryTransferService::MockWriteHandle::GetData() const {
-    return reinterpret_cast<const uint32_t*>(mTargetData);
+    const void* targetData = mTargetData;
+    return reinterpret_cast<const uint32_t*>(targetData);
 }
 
 bool MockMemoryTransferService::MockWriteHandle::DeserializeDataUpdate(
