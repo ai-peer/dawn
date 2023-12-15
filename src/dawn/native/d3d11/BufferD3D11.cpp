@@ -709,7 +709,7 @@ void Buffer::ScopedMap::Reset() {
 }
 
 uint8_t* Buffer::ScopedMap::GetMappedData() const {
-    return mBuffer ? mBuffer->mMappedData : nullptr;
+    return mBuffer ? mBuffer->mMappedData.get() : nullptr;
 }
 
 }  // namespace dawn::native::d3d11

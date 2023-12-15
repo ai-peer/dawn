@@ -50,6 +50,8 @@
 #include "dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
+#include "partition_alloc/pointers/raw_ptr.h"
+#include "partition_alloc/pointers/raw_ref.h"
 
 namespace dawn::native::d3d12 {
 
@@ -428,8 +430,8 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
         bool didCreateBindGroupSamplers = true;
         for (BindGroupIndex index : IterateBitSet(mDirtyBindGroups)) {
             BindGroup* group = ToBackend(mBindGroups[index]);
-            didCreateBindGroupViews = group->PopulateViews(mViewAllocator);
-            didCreateBindGroupSamplers = group->PopulateSamplers(mDevice, mSamplerAllocator);
+            didCreateBindGroupViews = group->PopulateViews(*mViewAllocator);
+            didCreateBindGroupSamplers = group->PopulateSamplers(mDevice, *mSamplerAllocator);
             if (!didCreateBindGroupViews && !didCreateBindGroupSamplers) {
                 break;
             }
@@ -437,11 +439,11 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
 
         if (!didCreateBindGroupViews || !didCreateBindGroupSamplers) {
             if (!didCreateBindGroupViews) {
-                DAWN_TRY(mViewAllocator->AllocateAndSwitchShaderVisibleHeap());
+                DAWN_TRY((*mViewAllocator)->AllocateAndSwitchShaderVisibleHeap());
             }
 
             if (!didCreateBindGroupSamplers) {
-                DAWN_TRY(mSamplerAllocator->AllocateAndSwitchShaderVisibleHeap());
+                DAWN_TRY((*mSamplerAllocator)->AllocateAndSwitchShaderVisibleHeap());
             }
 
             mDirtyBindGroupsObjectChangedOrIsDynamic |= mBindGroupLayoutsMask;
@@ -452,8 +454,8 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
 
             for (BindGroupIndex index : IterateBitSet(mBindGroupLayoutsMask)) {
                 BindGroup* group = ToBackend(mBindGroups[index]);
-                didCreateBindGroupViews = group->PopulateViews(mViewAllocator);
-                didCreateBindGroupSamplers = group->PopulateSamplers(mDevice, mSamplerAllocator);
+                didCreateBindGroupViews = group->PopulateViews(*mViewAllocator);
+                didCreateBindGroupSamplers = group->PopulateSamplers(mDevice, *mSamplerAllocator);
                 DAWN_ASSERT(didCreateBindGroupViews);
                 DAWN_ASSERT(didCreateBindGroupSamplers);
             }
@@ -611,15 +613,15 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
         }
     }
 
-    Device* mDevice;
-    DescriptorHeapState* mHeapState;
+    raw_ptr<Device> mDevice;
+    raw_ptr<DescriptorHeapState> mHeapState;
 
     bool mInCompute = false;
 
     PerBindGroup<D3D12_GPU_DESCRIPTOR_HANDLE> mBoundRootSamplerTables = {};
 
-    MutexProtected<ShaderVisibleDescriptorAllocator>& mViewAllocator;
-    MutexProtected<ShaderVisibleDescriptorAllocator>& mSamplerAllocator;
+    const raw_ref<MutexProtected<ShaderVisibleDescriptorAllocator>> mViewAllocator;
+    const raw_ref<MutexProtected<ShaderVisibleDescriptorAllocator>> mSamplerAllocator;
 };
 
 class DescriptorHeapState {
@@ -650,7 +652,7 @@ class DescriptorHeapState {
     BindGroupStateTracker* GetGraphicsBindingTracker() { return &mGraphicsBindingTracker; }
 
   private:
-    Device* mDevice;
+    raw_ptr<Device> mDevice;
     BindGroupStateTracker mComputeBindingTracker;
     BindGroupStateTracker mGraphicsBindingTracker;
 };
@@ -713,7 +715,7 @@ class VertexBufferTracker {
     // If there are multiple calls to SetVertexBuffer, the start and end
     // represent the union of the dirty ranges (the union may have non-dirty
     // data in the middle of the range).
-    const RenderPipeline* mLastAppliedRenderPipeline = nullptr;
+    raw_ptr<const RenderPipeline> mLastAppliedRenderPipeline = nullptr;
     VertexBufferSlot mStartSlot{kMaxVertexBuffers};
     VertexBufferSlot mEndSlot{};
     PerVertexBuffer<D3D12_VERTEX_BUFFER_VIEW> mD3D12BufferViews = {};
