@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96a54e7c_7d25b866",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2023-12-15T11:24:32Z",
+      "side": 1,
+      "message": "Hi Corentin,\nCould you please take a look?\n\nThe CQ is blocked on enforcing additional warning in PartitionAlloc:\n- https://chromium-review.googlesource.com/c/chromium/src/+/5062750\n- https://chromium-review.googlesource.com/c/chromium/src/+/5071153\nbut I do not expect this patch to change after getting a new partition_alloc version. So it is probably worth starting a review.\n\nIn the branch, you will see what the rewrite (on linux) looks like.",
+      "revId": "6e5eedc2e44fe5f289ef471e7f1fb01d1ace3439",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
