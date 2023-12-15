@@ -67,7 +67,7 @@ SamplerHeapCacheEntry::~SamplerHeapCacheEntry() {
     // If this is a blueprint then the CPU allocation cannot exist and has no entry to remove.
     if (mCPUAllocation.IsValid()) {
         mCache->RemoveCacheEntry(this);
-        mAllocator->Deallocate(&mCPUAllocation);
+        (*mAllocator)->Deallocate(&mCPUAllocation);
     }
 
     DAWN_ASSERT(!mCPUAllocation.IsValid());
