@@ -1150,6 +1150,12 @@ void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* 
                                            userdata);
     }
 }
+Future DeviceBase::APICreateComputePipelineAsyncF(
+    const ComputePipelineDescriptor* descriptor,
+    const CreateComputePipelineAsyncCallbackInfo& callbackInfo) {
+    // TODO(dawn:1987) Implement this.
+    DAWN_UNREACHABLE();
+}
 PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
     const PipelineLayoutDescriptor* descriptor) {
     Ref<PipelineLayoutBase> result;
@@ -1208,7 +1214,12 @@ void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* de
                                           userdata);
     }
 }
-
+Future DeviceBase::APICreateRenderPipelineAsyncF(
+    const RenderPipelineDescriptor* descriptor,
+    const CreateRenderPipelineAsyncCallbackInfo& callbackInfo) {
+    // TODO(dawn:1987) Implement this.
+    DAWN_UNREACHABLE();
+}
 RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
     const RenderBundleEncoderDescriptor* descriptor) {
     Ref<RenderBundleEncoder> result;
