@@ -98,7 +98,7 @@ void Server::OnDevicePopErrorScope(ErrorScopeUserdata* userdata,
 
 WireResult Server::DoDeviceCreateComputePipelineAsync(
     Known<WGPUDevice> device,
-    uint64_t requestSerial,
+    WGPUFuture future,
     ObjectHandle pipelineObjectHandle,
     const WGPUComputePipelineDescriptor* descriptor) {
     Known<WGPUComputePipeline> pipeline;
@@ -107,7 +107,7 @@ WireResult Server::DoDeviceCreateComputePipelineAsync(
 
     auto userdata = MakeUserdata<CreatePipelineAsyncUserData>();
     userdata->device = device.AsHandle();
-    userdata->requestSerial = requestSerial;
+    userdata->future = future;
     userdata->pipelineObjectID = pipeline.id;
 
     mProcs.deviceCreateComputePipelineAsync(
@@ -126,7 +126,7 @@ void Server::OnCreateComputePipelineAsyncCallback(CreatePipelineAsyncUserData* d
     ReturnDeviceCreateComputePipelineAsyncCallbackCmd cmd;
     cmd.device = data->device;
     cmd.status = status;
-    cmd.requestSerial = data->requestSerial;
+    cmd.future = data->future;
     cmd.message = message;
 
     SerializeCommand(cmd);
@@ -134,7 +134,7 @@ void Server::OnCreateComputePipelineAsyncCallback(CreatePipelineAsyncUserData* d
 
 WireResult Server::DoDeviceCreateRenderPipelineAsync(
     Known<WGPUDevice> device,
-    uint64_t requestSerial,
+    WGPUFuture future,
     ObjectHandle pipelineObjectHandle,
     const WGPURenderPipelineDescriptor* descriptor) {
     Known<WGPURenderPipeline> pipeline;
@@ -143,7 +143,7 @@ WireResult Server::DoDeviceCreateRenderPipelineAsync(
 
     auto userdata = MakeUserdata<CreatePipelineAsyncUserData>();
     userdata->device = device.AsHandle();
-    userdata->requestSerial = requestSerial;
+    userdata->future = future;
     userdata->pipelineObjectID = pipeline.id;
 
     mProcs.deviceCreateRenderPipelineAsync(
@@ -162,7 +162,7 @@ void Server::OnCreateRenderPipelineAsyncCallback(CreatePipelineAsyncUserData* da
     ReturnDeviceCreateRenderPipelineAsyncCallbackCmd cmd;
     cmd.device = data->device;
     cmd.status = status;
-    cmd.requestSerial = data->requestSerial;
+    cmd.future = data->future;
     cmd.message = message;
 
     SerializeCommand(cmd);
