@@ -89,25 +89,25 @@ bool Client::DoDevicePopErrorScopeCallback(Device* device,
 }
 
 bool Client::DoDeviceCreateComputePipelineAsyncCallback(Device* device,
-                                                        uint64_t requestSerial,
+                                                        WGPUFuture future,
                                                         WGPUCreatePipelineAsyncStatus status,
                                                         const char* message) {
     // The device might have been deleted or recreated so this isn't an error.
     if (device == nullptr) {
         return true;
     }
-    return device->OnCreateComputePipelineAsyncCallback(requestSerial, status, message);
+    return device->OnCreateComputePipelineAsyncCallback(future, status, message);
 }
 
 bool Client::DoDeviceCreateRenderPipelineAsyncCallback(Device* device,
-                                                       uint64_t requestSerial,
+                                                       WGPUFuture future,
                                                        WGPUCreatePipelineAsyncStatus status,
                                                        const char* message) {
     // The device might have been deleted or recreated so this isn't an error.
     if (device == nullptr) {
         return true;
     }
-    return device->OnCreateRenderPipelineAsyncCallback(requestSerial, status, message);
+    return device->OnCreateRenderPipelineAsyncCallback(future, status, message);
 }
 
 bool Client::DoShaderModuleGetCompilationInfoCallback(ShaderModule* shaderModule,
