@@ -36,6 +36,7 @@
 #include "dawn/native/BindGroupLayoutInternal.h"
 #include "dawn/native/d3d12/BindGroupD3D12.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::native::d3d12 {
 
@@ -96,8 +97,8 @@ class BindGroupLayout final : public BindGroupLayoutInternalBase {
 
     MutexProtected<SlabAllocator<BindGroup>> mBindGroupAllocator;
 
-    MutexProtected<StagingDescriptorAllocator>* mSamplerAllocator = nullptr;
-    MutexProtected<StagingDescriptorAllocator>* mViewAllocator = nullptr;
+    raw_ptr<MutexProtected<StagingDescriptorAllocator>> mSamplerAllocator = nullptr;
+    raw_ptr<MutexProtected<StagingDescriptorAllocator>> mViewAllocator = nullptr;
 };
 
 }  // namespace dawn::native::d3d12
