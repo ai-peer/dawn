@@ -182,7 +182,7 @@ deps = {
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@4382b905737af4ddbb2011112a2078a6f421353a',
+    'url': '{chromium_git}/vulkan-deps@59974bc6d304d086ab35fb352f0010894f2e6aac',
     'condition': 'dawn_standalone',
   },
 
@@ -216,7 +216,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@dac947fdd70cf6ec088e1c621f58eaf99430175f',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@eb1892c3e4ab734a135e8752f5442e270a4738d1',
     'condition': 'build_with_chromium',
   },
 
