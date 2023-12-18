@@ -104,15 +104,24 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
         textureDesc.nextInChain = &internalDesc;
 
+        /*
         native::metal::ExternalImageDescriptorIOSurface descriptor = {};
         descriptor.cTextureDescriptor =
             reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
         descriptor.isInitialized = initialized;
         descriptor.ioSurface = surface;
 
+        return nullptr;
+        */
+        wgpu::SharedTextureMemoryIOSurfaceDescriptor ioSurfaceDesc;
+        ioSurfaceDesc.ioSurface = surface;
+
+        wgpu::SharedTextureMemoryDescriptor desc;
+        desc.nextInChain = &ioSurfaceDesc;
+
+        auto sharedTextureMemory = wgpu::Device(mWGPUDevice).ImportSharedTextureMemory(&desc);
         return std::make_unique<PlatformTextureIOSurface>(
-            wgpu::Texture::Acquire(native::metal::WrapIOSurface(mWGPUDevice, &descriptor)),
-            surface);
+            sharedTextureMemory.CreateTexture(&textureDesc), surface);
     }
 
     void DestroyVideoTextureForTest(
