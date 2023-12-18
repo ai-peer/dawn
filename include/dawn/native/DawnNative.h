@@ -168,7 +168,6 @@ class DAWN_NATIVE_EXPORT Instance {
         const wgpu::RequestAdapterOptions* options = nullptr) const;
 
     const ToggleInfo* GetToggleInfo(const char* toggleName);
-    const FeatureInfo* GetFeatureInfo(WGPUFeatureName feature);
 
     uint64_t GetDeviceCountForTesting() const;
 
