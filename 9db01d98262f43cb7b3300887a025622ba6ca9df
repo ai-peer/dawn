@@ -16,6 +16,24 @@
       "message": "Vector, array, and struct types are not handled yet.  \nWhen they are, be sure to add OpConstantNull support for them too.",
       "revId": "9db01d98262f43cb7b3300887a025622ba6ca9df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62cb2481_82a61b29",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-18T22:15:54Z",
+      "side": 1,
+      "message": "I filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d2123 to follow up",
+      "parentUuid": "ba675ee1_1f1b91f6",
+      "revId": "9db01d98262f43cb7b3300887a025622ba6ca9df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
