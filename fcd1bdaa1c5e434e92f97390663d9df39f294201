@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "238f65eb_88998944",
+        "filename": "src/dawn/native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-18T19:06:21Z",
+      "side": 0,
+      "message": "maybe it be better to keep the order here and use LastSubmittedSerial instead?\nit\u0027s:\n 1. present\n 2. increment + signal\n 3. last used is ^^ that signal value\n \nyour new code looks correct, but the ordering is harder to think about\n 1. present\n 2. mark used in the future\n 3. increment to ^^that serial + signal",
+      "revId": "fcd1bdaa1c5e434e92f97390663d9df39f294201",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
