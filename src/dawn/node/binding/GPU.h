@@ -50,7 +50,7 @@ class GPU final : public interop::GPU {
 
   private:
     const Flags flags_;
-    dawn::native::Instance instance_;
+    std::unique_ptr<dawn::native::Instance> instance_;
 };
 
 }  // namespace wgpu::binding
