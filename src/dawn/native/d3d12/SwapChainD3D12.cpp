@@ -97,8 +97,8 @@ MaybeError SwapChain::PresentImpl() {
     DAWN_TRY(PresentDXGISwapChain());
 
     // Record that "new" is the last time the buffer has been used.
-    DAWN_TRY(queue->NextSerial());
     mBufferLastUsedSerials[mCurrentBuffer] = queue->GetPendingCommandSerial();
+    DAWN_TRY(queue->NextSerial());
 
     mApiTexture->APIDestroy();
     mApiTexture = nullptr;
