@@ -184,6 +184,12 @@ void Adapter::RequestDevice(const WGPUDeviceDescriptor* descriptor,
     client->SerializeCommand(cmd);
 }
 
+WGPUFuture Adapter::RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
+                                   const WGPURequestDeviceCallbackInfo& callbackInfo) {
+    // TODO(): Implement in the wire.
+    DAWN_UNREACHABLE();
+}
+
 bool Client::DoAdapterRequestDeviceCallback(Adapter* adapter,
                                             uint64_t requestSerial,
                                             WGPURequestDeviceStatus status,
