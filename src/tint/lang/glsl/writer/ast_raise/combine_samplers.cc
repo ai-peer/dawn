@@ -358,20 +358,8 @@ struct CombineSamplers::State {
                 }
                 // Replace all function calls.
                 if (auto* callee = call->Target()->As<sem::Function>()) {
-                    for (auto pair : callee->TextureSamplerPairs()) {
-                        // Global pairs used by the callee do not require a function
-                        // parameter at the call site.
-                        if (IsGlobal(pair)) {
-                            continue;
-                        }
-                        // Texture-only pairs do not require a function parameter if they've been
-                        // replaced by a real pair.
-                        if (!pair.second && FindFullTextureSamplerPair(pair.first, callee)) {
-                            continue;
-                        }
-
-                        const sem::Variable* texture_var = pair.first;
-                        const sem::Variable* sampler_var = pair.second;
+                    auto make_arg = [&](const sem::Variable* texture_var,
+                                        const sem::Variable* sampler_var) {
                         if (auto* param = texture_var->As<sem::Parameter>()) {
                             const sem::ValueExpression* texture = call->Arguments()[param->Index()];
                             texture_var =
@@ -394,8 +382,37 @@ struct CombineSamplers::State {
                                 ? global_combined_texture_samplers_[new_pair]
                                 : function_combined_texture_samplers_[call->Stmt()->Function()]
                                                                      [new_pair];
-                        auto* arg = ctx.dst->Expr(var->name->symbol);
-                        args.Push(arg);
+                        return ctx.dst->Expr(var->name->symbol);
+                    };
+
+                    for (auto pair : callee->TextureSamplerPairs()) {
+                        if (!pair.second) {
+                            continue;
+                        }
+                        // Global pairs used by the callee do not require a function
+                        // parameter at the call site.
+                        if (IsGlobal(pair)) {
+                            continue;
+                        }
+
+                        args.Push(make_arg(pair.first, pair.second));
+                    }
+                    for (auto pair : callee->TextureSamplerPairs()) {
+                        if (pair.second) {
+                            continue;
+                        }
+                        // Global pairs used by the callee do not require a function
+                        // parameter at the call site.
+                        if (IsGlobal(pair)) {
+                            continue;
+                        }
+                        // Texture-only pairs do not require a function parameter if they've been
+                        // replaced by a real pair.
+                        if (FindFullTextureSamplerPair(pair.first, callee)) {
+                            continue;
+                        }
+
+                        args.Push(make_arg(pair.first, nullptr));
                     }
                     // Append all of the remaining non-texture and non-sampler
                     // parameters.
