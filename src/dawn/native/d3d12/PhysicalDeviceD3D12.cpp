@@ -382,8 +382,8 @@ FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     // The feature `shader-f16` requires DXC 1.4 or higher. Note that DXC version is checked in
     // InitializeSupportedFeaturesImpl.
     if (feature == wgpu::FeatureName::ShaderF16 && !toggles.IsEnabled(Toggle::UseDXC)) {
-        return FeatureValidationResult(absl::StrFormat(
-            "Feature %s requires DXC for D3D12.", GetInstance()->GetFeatureInfo(feature)->name));
+        return FeatureValidationResult(
+            absl::StrFormat("Feature %s requires DXC for D3D12.", ToAPI(feature)));
     }
     return {};
 }
