@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50175d06_4791526c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-18T14:40:43Z",
+      "side": 1,
+      "message": "Saved 30kb on Android https://chromium-review.googlesource.com/c/chromium/src/+/5123948?tab\u003dchecks",
+      "revId": "35a0cbf95bb8839064a3b0a1d53250fd733046a4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
