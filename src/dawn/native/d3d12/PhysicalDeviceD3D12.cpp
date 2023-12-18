@@ -381,7 +381,7 @@ FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     // InitializeSupportedFeaturesImpl.
     if (feature == wgpu::FeatureName::ShaderF16 && !toggles.IsEnabled(Toggle::UseDXC)) {
         return FeatureValidationResult(absl::StrFormat(
-            "Feature %s requires DXC for D3D12.", GetInstance()->GetFeatureInfo(feature)->name));
+            "Feature %s requires DXC for D3D12.", ToAPI(feature));
     }
     return {};
 }

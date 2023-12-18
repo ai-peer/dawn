@@ -189,10 +189,6 @@ const ToggleInfo* Instance::GetToggleInfo(const char* toggleName) {
     return mImpl->GetToggleInfo(toggleName);
 }
 
-const FeatureInfo* Instance::GetFeatureInfo(WGPUFeatureName feature) {
-    return mImpl->GetFeatureInfo(static_cast<wgpu::FeatureName>(feature));
-}
-
 uint64_t Instance::GetDeviceCountForTesting() const {
     return mImpl->GetDeviceCountForTesting();
 }
