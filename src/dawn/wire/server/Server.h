@@ -145,7 +145,6 @@ struct CreatePipelineAsyncUserData : CallbackUserdata {
 struct RequestAdapterUserdata : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
-    ObjectHandle instance;
     ObjectHandle eventManager;
     WGPUFuture future;
     ObjectId adapterObjectId;
@@ -154,8 +153,8 @@ struct RequestAdapterUserdata : CallbackUserdata {
 struct RequestDeviceUserdata : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
-    ObjectHandle adapter;
-    uint64_t requestSerial;
+    ObjectHandle eventManager;
+    WGPUFuture future;
     ObjectId deviceObjectId;
 };
 

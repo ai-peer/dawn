@@ -47,6 +47,7 @@ class Client;
 enum class EventType {
     MapAsync,
     RequestAdapter,
+    RequestDevice,
     WorkDone,
 };
 
