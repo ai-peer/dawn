@@ -940,6 +940,49 @@ struct BuiltinPolyfill::State {
         return name;
     }
 
+    Symbol Pack4xI8() {
+        using vec4i = vec4<i32>;
+        using vec4u = vec4<u32>;
+
+        auto name = b.Symbols().New("tint_pack_4xi8");
+
+        auto body = tint::Vector{
+            b.Decl(b.Const("n", b.Call<vec4u>(0_a, 8_a, 16_a, 24_a))),
+            b.Decl(b.Let("a_i8", b.Call<vec4u>(b.Shl(b.And("a", b.Call<vec4i>(0xff_a)), "n")))),
+            b.Return(b.Or(b.IndexAccessor("a_i8", 0_a),
+                          b.Or(b.IndexAccessor("a_i8", 1_a),
+                               b.Or(b.IndexAccessor("a_i8", 2_a), b.IndexAccessor("a_i8", 3_a))))),
+        };
+        b.Func(name,
+               tint::Vector{
+                   b.Param("a", b.ty.vec4<i32>()),
+               },
+               b.ty.u32(), body);
+
+        return name;
+    }
+
+    Symbol Pack4xU8() {
+        using vec4u = vec4<u32>;
+
+        auto name = b.Symbols().New("tint_pack_4xu8");
+
+        auto body = tint::Vector{
+            b.Decl(b.Const("n", b.Call<vec4u>(0_a, 8_a, 16_a, 24_a))),
+            b.Decl(b.Let("a_u8", b.Call<vec4u>(b.Shl(b.And("a", b.Call<vec4u>(0xff_a)), "n")))),
+            b.Return(b.Or(b.IndexAccessor("a_u8", 0_a),
+                          b.Or(b.IndexAccessor("a_u8", 1_a),
+                               b.Or(b.IndexAccessor("a_u8", 2_a), b.IndexAccessor("a_u8", 3_a))))),
+        };
+        b.Func(name,
+               tint::Vector{
+                   b.Param("a", b.ty.vec4<u32>()),
+               },
+               b.ty.u32(), body);
+
+        return name;
+    }
+
     ////////////////////////////////////////////////////////////////////////////
     // Inline polyfills
     ////////////////////////////////////////////////////////////////////////////
@@ -1334,6 +1377,22 @@ struct BuiltinPolyfill::State {
                         if (cfg.builtins.dot_4x8_packed) {
                             return builtin_polyfills.GetOrCreate(builtin,
                                                                  [&] { return Dot4U8Packed(); });
+                        }
+                        return Symbol{};
+                    }
+
+                    case wgsl::BuiltinFn::kPack4XI8: {
+                        if (cfg.builtins.pack_unpack_4x8) {
+                            return builtin_polyfills.GetOrCreate(builtin,
+                                                                 [&] { return Pack4xI8(); });
+                        }
+                        return Symbol{};
+                    }
+
+                    case wgsl::BuiltinFn::kPack4XU8: {
+                        if (cfg.builtins.pack_unpack_4x8) {
+                            return builtin_polyfills.GetOrCreate(builtin,
+                                                                 [&] { return Pack4xU8(); });
                         }
                         return Symbol{};
                     }
