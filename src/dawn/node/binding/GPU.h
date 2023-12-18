@@ -28,6 +28,8 @@
 #ifndef SRC_DAWN_NODE_BINDING_GPU_H_
 #define SRC_DAWN_NODE_BINDING_GPU_H_
 
+#include <memory>
+
 #include "dawn/native/DawnNative.h"
 #include "dawn/webgpu_cpp.h"
 
