@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "51b78075_5625a56a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-18T04:04:56Z",
+      "side": 1,
+      "message": "This seems to be fixed now. Thanks Brian and Yuly!",
+      "parentUuid": "4a7e7752_f899917f",
+      "revId": "99d733011453a93deefeb332e237cee5822eb634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "91dcb153_dac5c655",
@@ -136,6 +154,24 @@
       "side": 1,
       "message": "Will do (see above comment). Just looking for help with the timeout issue.\n\nLooks like it runs a group of tests in 1-2sec, then spends 30-60 sec looking for crashes. Lather, rinse, repeat until 30 min timeout for the step. AFAICT.",
       "parentUuid": "91dcb153_dac5c655",
+      "revId": "99d733011453a93deefeb332e237cee5822eb634",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f8d0db9_53e124bb",
+        "filename": "src/dawn/tests/end2end/BufferZeroInitTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 942,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-18T04:04:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8f1ee104_6667e873",
       "revId": "99d733011453a93deefeb332e237cee5822eb634",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
