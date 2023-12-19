@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2165418e_15c12b8a",
+        "filename": "tools/src/cmd/tests/main.go",
+        "patchSetId": 1
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-12-19T22:33:50Z",
+      "side": 1,
+      "message": "I\u0027m quite sure this is wrong. In debugging, I found out that `flag.Parse()` will actually expand globs for you, so if you pass in `test/tint/**/*.wgsl`, then `flag.Args()` will be a big array of all results that match that glob. However, the code in here looks like it doesn\u0027t expect this behaviour, as it wants to expand the globs itself.\n\nEffectively, what I\u0027m seeing is that in the loop below, `globs` is always empty.",
+      "revId": "f79b37f3f7e4fc9334c7762a0812b2e2e5230e64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
