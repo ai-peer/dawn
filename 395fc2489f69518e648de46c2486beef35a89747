@@ -35,6 +35,57 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "142a28e1_c9442107",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-19T19:16:07Z",
+      "side": 1,
+      "message": "Thank you!",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f774530_b31f2a3d",
+        "filename": "src/tint/lang/core/constant/eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2980,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-19T19:16:07Z",
+      "side": 1,
+      "message": "This is little-endian, and that\u0027s right.\nI noticed that the WGSL spec does not spell that out. It should, similar to the pack4x8unorm builtin.  I filed a spec issue to track that.\nhttps://github.com/gpuweb/gpuweb/issues/4422",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a961d229_af932aad",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-19T19:16:07Z",
+      "side": 1,
+      "message": "Alternately, can you do:\n\n  %result \u003d dot( %x_18, vec4u(1))\n  \nBut maybe that\u0027s more work in the IR.?",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75ffeb59_23cc2b00",
@@ -48,6 +99,41 @@
       "writtenOn": "2023-12-19T10:53:10Z",
       "side": 1,
       "message": "I assume that the \"unpack\" is because eventually there will be unpacking builtins as well?",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d3586df8_960e93da",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-19T19:16:07Z",
+      "side": 1,
+      "message": "I assume so. I\u0027m fine to leave this as-is.",
+      "parentUuid": "75ffeb59_23cc2b00",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4e67b50_b4647d7c",
+        "filename": "src/tint/lang/wgsl/ast/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 958,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-19T19:16:07Z",
+      "side": 1,
+      "message": "Alternately,  return dot(a_i8, vec4i(1))",
       "revId": "395fc2489f69518e648de46c2486beef35a89747",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
