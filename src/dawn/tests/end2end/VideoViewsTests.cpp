@@ -62,6 +62,14 @@ std::vector<wgpu::FeatureName> VideoViewsTestsBase::GetRequiredFeatures() {
     if (mIsMultiPlanarFormatsSupported) {
         requiredFeatures.push_back(wgpu::FeatureName::DawnMultiPlanarFormats);
     }
+
+    // Required for the Mac tests.
+    if (SupportsFeatures({wgpu::FeatureName::SharedTextureMemoryIOSurface,
+                          wgpu::FeatureName::SharedFenceMTLSharedEvent})) {
+        requiredFeatures.push_back(wgpu::FeatureName::SharedTextureMemoryIOSurface);
+        requiredFeatures.push_back(wgpu::FeatureName::SharedFenceMTLSharedEvent);
+    }
+
     mIsMultiPlanarFormatP010Supported =
         SupportsFeatures({wgpu::FeatureName::MultiPlanarFormatP010});
     if (mIsMultiPlanarFormatP010Supported) {

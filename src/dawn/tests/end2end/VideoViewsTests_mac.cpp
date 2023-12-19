@@ -41,13 +41,19 @@ namespace {
 
 class PlatformTextureIOSurface : public VideoViewsTestBackend::PlatformTexture {
   public:
-    PlatformTextureIOSurface(wgpu::Texture&& texture, IOSurfaceRef iosurface)
-        : PlatformTexture(std::move(texture)) {
+    PlatformTextureIOSurface(wgpu::Texture&& texture,
+                             IOSurfaceRef iosurface,
+                             wgpu::SharedTextureMemory&& sharedTextureMemory)
+        : PlatformTexture(std::move(texture)),
+          mSharedTextureMemory(std::move(sharedTextureMemory)) {
         mIOSurface = AcquireCFRef<IOSurfaceRef>(iosurface);
     }
     ~PlatformTextureIOSurface() override { mIOSurface = nullptr; }
 
     bool CanWrapAsWGPUTexture() override { return true; }
+
+  public:
+    wgpu::SharedTextureMemory mSharedTextureMemory;
 
   private:
     CFRef<IOSurfaceRef> mIOSurface = nullptr;
@@ -104,19 +110,40 @@ class VideoViewsTestBackendIOSurface : public VideoViewsTestBackend {
         internalDesc.internalUsage = wgpu::TextureUsage::CopySrc;
         textureDesc.nextInChain = &internalDesc;
 
-        native::metal::ExternalImageDescriptorIOSurface descriptor = {};
-        descriptor.cTextureDescriptor =
-            reinterpret_cast<const WGPUTextureDescriptor*>(&textureDesc);
-        descriptor.isInitialized = initialized;
-        descriptor.ioSurface = surface;
+        wgpu::SharedTextureMemoryIOSurfaceDescriptor ioSurfaceDesc;
+        ioSurfaceDesc.ioSurface = surface;
 
-        return std::make_unique<PlatformTextureIOSurface>(
-            wgpu::Texture::Acquire(native::metal::WrapIOSurface(mWGPUDevice, &descriptor)),
-            surface);
+        wgpu::SharedTextureMemoryDescriptor desc;
+        desc.nextInChain = &ioSurfaceDesc;
+
+        auto device = wgpu::Device(mWGPUDevice);
+        auto sharedTextureMemory = device.ImportSharedTextureMemory(&desc);
+
+        device.PushErrorScope(wgpu::ErrorFilter::Validation);
+        auto texture = sharedTextureMemory.CreateTexture(&textureDesc);
+        device.PopErrorScope([](WGPUErrorType type, const char*, void* userdataPtr) {}, nullptr);
+
+        wgpu::SharedTextureMemoryBeginAccessDescriptor beginAccessDesc;
+        beginAccessDesc.initialized = initialized;
+        beginAccessDesc.fenceCount = 0;
+        sharedTextureMemory.BeginAccess(texture, &beginAccessDesc);
+
+        return std::make_unique<PlatformTextureIOSurface>(std::move(texture), surface,
+                                                          std::move(sharedTextureMemory));
     }
 
     void DestroyVideoTextureForTest(
-        std::unique_ptr<VideoViewsTestBackend::PlatformTexture>&& platformTexture) override {}
+        std::unique_ptr<VideoViewsTestBackend::PlatformTexture>&& platformTexture) override {
+        auto device = wgpu::Device(mWGPUDevice);
+        device.PushErrorScope(wgpu::ErrorFilter::Validation);
+
+        wgpu::SharedTextureMemoryEndAccessState endAccessState;
+        auto platformTextureIOSurface =
+            static_cast<PlatformTextureIOSurface*>(platformTexture.get());
+        platformTextureIOSurface->mSharedTextureMemory.EndAccess(platformTexture->wgpuTexture,
+                                                                 &endAccessState);
+        device.PopErrorScope([](WGPUErrorType type, const char*, void* userdataPtr) {}, nullptr);
+    }
 
     WGPUDevice mWGPUDevice = nullptr;
 };
