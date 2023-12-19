@@ -298,7 +298,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     // PhysicalDeviceBase Implementation
     bool SupportsExternalImages() const override {
-        // Via dawn::native::metal::WrapIOSurface
+        // Via SharedTextureMemory
         return true;
     }
 
