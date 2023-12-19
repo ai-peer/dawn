@@ -16,6 +16,23 @@
       "message": "James: PTAL. Thanks!",
       "revId": "1a81bd12a7b1b2cb473dade2c2caa4dcdb56e4e3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d0094c3_d7a4d639",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-19T16:40:08Z",
+      "side": 1,
+      "message": "LGTM but still needs OWNERS approval.",
+      "revId": "1a81bd12a7b1b2cb473dade2c2caa4dcdb56e4e3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
