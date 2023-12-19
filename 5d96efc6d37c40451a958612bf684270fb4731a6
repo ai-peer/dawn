@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d085b1a2_930d2fad",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 302,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-12-19T16:10:09Z",
+      "side": 1,
+      "message": "I converted Chromium away from checking this on Mac here:\n\nhttps://chromium-review.googlesource.com/c/chromium/src/+/5134846",
+      "revId": "5d96efc6d37c40451a958612bf684270fb4731a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
