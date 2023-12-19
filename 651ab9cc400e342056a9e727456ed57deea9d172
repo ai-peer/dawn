@@ -16,6 +16,24 @@
       "message": "tint::sem::Function::TextureSamplerPairs is called in the inspector.\nThat assumes the entry components are sem::GlobalVariables\nIt will crash otherwise.\n\nSee\nhttps://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/wgsl/inspector/inspector.cc#537",
       "revId": "651ab9cc400e342056a9e727456ed57deea9d172",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0de3fda_68102830",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-19T17:48:13Z",
+      "side": 1,
+      "message": "It\u0027s only called in the Inspector for entry point functions (there\u0027s a check at the top of the function you linked to which makes sure of that). For an entry point function, the entries will still always be `sem::GlobalVariable` with this change.\n\nWe were already adding `sem::Parameter` entries to `TextureSamplerPairs` for non-entry-point functions before this change, it\u0027s just that sometimes they were the /wrong/ `sem::Parameter`. This change fixes that.",
+      "parentUuid": "c9c06d83_3e5ec0bd",
+      "revId": "651ab9cc400e342056a9e727456ed57deea9d172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
