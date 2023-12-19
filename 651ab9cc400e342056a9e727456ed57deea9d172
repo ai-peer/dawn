@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9c06d83_3e5ec0bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-19T17:36:46Z",
+      "side": 1,
+      "message": "tint::sem::Function::TextureSamplerPairs is called in the inspector.\nThat assumes the entry components are sem::GlobalVariables\nIt will crash otherwise.\n\nSee\nhttps://dawn.googlesource.com/dawn/+/refs/heads/main/src/tint/lang/wgsl/inspector/inspector.cc#537",
+      "revId": "651ab9cc400e342056a9e727456ed57deea9d172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
