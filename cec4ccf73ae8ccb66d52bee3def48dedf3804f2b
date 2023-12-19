@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b2447d0_40c64eac",
+        "filename": "src/dawn/native/CommandValidation.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-19T16:37:38Z",
+      "side": 0,
+      "message": "lol, this prior thing was so verbose and long. good thing we added pretty printing for the enums",
+      "range": {
+        "startLine": 104,
+        "startChar": 8,
+        "endLine": 104,
+        "endChar": 96
+      },
+      "revId": "cec4ccf73ae8ccb66d52bee3def48dedf3804f2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
