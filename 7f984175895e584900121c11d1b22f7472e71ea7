@@ -51,6 +51,24 @@
       "parentUuid": "8f822d7e_84442e88",
       "revId": "7f984175895e584900121c11d1b22f7472e71ea7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7da82968_639f5e53",
+        "filename": "src/dawn/native/opengl/OpenGLFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 38,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2023-12-19T21:25:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38507a35_7c5789ac",
+      "revId": "7f984175895e584900121c11d1b22f7472e71ea7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
