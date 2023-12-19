@@ -34,6 +34,24 @@
       "parentUuid": "c9c06d83_3e5ec0bd",
       "revId": "651ab9cc400e342056a9e727456ed57deea9d172",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e01d5267_f026433f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-19T18:15:35Z",
+      "side": 1,
+      "message": "Acknowledged.\n\nI guess I didn\u0027t read far enough in that context.  Would have been nice to have had a comment there, and an assert.",
+      "parentUuid": "c0de3fda_68102830",
+      "revId": "651ab9cc400e342056a9e727456ed57deea9d172",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
