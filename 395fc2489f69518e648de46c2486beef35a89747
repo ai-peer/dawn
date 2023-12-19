@@ -16,6 +16,40 @@
       "message": "PTAL, thanks!",
       "revId": "395fc2489f69518e648de46c2486beef35a89747",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1564daef_9534b931",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-19T10:53:10Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75ffeb59_23cc2b00",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-19T10:53:10Z",
+      "side": 1,
+      "message": "I assume that the \"unpack\" is because eventually there will be unpacking builtins as well?",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
