@@ -459,6 +459,13 @@ class Converter<uint64_t> {
 };
 
 template <>
+class Converter<size_t> {
+  public:
+    static Result FromJS(Napi::Env, Napi::Value, size_t&);
+    static Napi::Value ToJS(Napi::Env, size_t);
+};
+
+template <>
 class Converter<float> {
   public:
     static Result FromJS(Napi::Env, Napi::Value, float&);
