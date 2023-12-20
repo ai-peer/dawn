@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f62e7e4_e6500275",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-20T19:58:54Z",
+      "side": 1,
+      "message": "No worries, the work was really just the generator and then inserting parentheses on every error.\n\nI didn\u0027t think of using the defaulting only in validation and constructor. This makes sense. I will try these!\n\nFor any leftovers I think it will be fine to do defaulting on a copy. I started trying this and it wasn\u0027t that bad.",
+      "parentUuid": "cc5b8d19_a163fe76",
+      "revId": "34c460ba7ca15226f59faecc3a28385a79556c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bc13c5c_31198c60",
