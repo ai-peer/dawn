@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc5b8d19_a163fe76",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-20T15:19:54Z",
+      "side": 1,
+      "message": "I see that a lot of work went into this, but I don\u0027t know that the gains justify the additional noise and complexity:\n\n - RenderPipeline stuff can be done just in the frontend, once in validation and once in the constructor.\n - Sampler stuff could be moved to be in the frontend.\n - aspects() seems to be the only annoying one. Maybe we can do the defaulting on the encoder/device/queue top level methods and copy on the stack for the defaulting if need be.\n\n(to de-risk it would be possible to split in different CLs too)",
+      "revId": "34c460ba7ca15226f59faecc3a28385a79556c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3bc13c5c_31198c60",
+        "filename": "src/dawn/native/opengl/RenderPipelineGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 101,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-20T15:19:54Z",
+      "side": 1,
+      "message": "All of the defaulting for the RenderPipeline could be done in the frontend so changes would only be potentially be needed in ValidateRenderPipelineDescriptor and in RenderPipelineBase::RenderPipelineBase. IMHO it doesn\u0027t look too onerous to do that.",
+      "revId": "34c460ba7ca15226f59faecc3a28385a79556c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b9f42b33_1258e140",
+        "filename": "src/dawn/native/vulkan/SamplerVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-20T15:19:54Z",
+      "side": 1,
+      "message": "Maybe we could change SamplerBase to store all of these if it doesn\u0027t already, then the backends to use the getters (that will have the already defaulted values).",
+      "revId": "34c460ba7ca15226f59faecc3a28385a79556c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f44ada_d7c8534e",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-20T15:19:54Z",
+      "side": 1,
+      "message": "We could require the dimension to be specified for something low level like this IMHO.\n\nWith this set of comments, the changes in the Vulkan backend don\u0027t require the defaulting-getters at all!",
+      "revId": "34c460ba7ca15226f59faecc3a28385a79556c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
