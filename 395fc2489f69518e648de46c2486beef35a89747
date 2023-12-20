@@ -71,6 +71,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8dcda127_6e14f4f8",
+        "filename": "src/tint/lang/core/constant/eval_builtin_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 2980,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-20T08:15:48Z",
+      "side": 1,
+      "message": "Ack\n\nYes here little-endian also follows the HLSL Pack/Unpack intrinsics.",
+      "parentUuid": "7f774530_b31f2a3d",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a961d229_af932aad",
         "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
         "patchSetId": 4
@@ -82,6 +100,24 @@
       "writtenOn": "2023-12-19T19:16:07Z",
       "side": 1,
       "message": "Alternately, can you do:\n\n  %result \u003d dot( %x_18, vec4u(1))\n  \nBut maybe that\u0027s more work in the IR.?",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ecb5b3f_1f2a571f",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 612,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-20T08:15:48Z",
+      "side": 1,
+      "message": "I\u0027ve written https://dawn-review.googlesource.com/c/dawn/+/166386 to fix this. PTAL, thanks!",
+      "parentUuid": "a961d229_af932aad",
       "revId": "395fc2489f69518e648de46c2486beef35a89747",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -117,6 +153,24 @@
       "side": 1,
       "message": "I assume so. I\u0027m fine to leave this as-is.",
       "parentUuid": "75ffeb59_23cc2b00",
+      "revId": "395fc2489f69518e648de46c2486beef35a89747",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5d4870e9_0c1af250",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 72,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-20T08:15:48Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "d3586df8_960e93da",
       "revId": "395fc2489f69518e648de46c2486beef35a89747",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
