@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b97e1eb8_a8e36288",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-20T19:18:01Z",
+      "side": 1,
+      "message": "In a side discussion we agreed not to land this.  It\u0027s not a WGSL limitation.",
+      "revId": "024c5021e28fc73df71536cdf31a58db343d35c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
