@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e981403e_a53c5386",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-20T22:53:20Z",
+      "side": 1,
+      "message": "I also tested the new E2E test on `win-dawn-rel` without the fix to make sure it fails:\nhttps://ci.chromium.org/ui/p/chromium/builders/try/win-dawn-rel/29498/overview",
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
