@@ -30,6 +30,7 @@
 
 #include <array>
 #include <variant>
+#include <vector>
 
 #include "dawn/native/dawn_platform.h"
 
@@ -158,6 +159,11 @@ struct Format {
     // If two formats has the same baseFormat, they could copy to and be viewed as the other
     // format. Currently two formats have the same baseFormat if they differ only in sRGB-ness.
     wgpu::TextureFormat baseFormat = wgpu::TextureFormat::Undefined;
+    // Additional view formats a base format is compatible with. Only populated for true base
+    // formats. So, to query all compatible view formats, use
+    // formatTable[format.baseFormat].baseViewFormats. Only contains formats that are not equal to
+    // `baseFormat` to save space in the common case when there are no additional view formats.
+    std::vector<wgpu::TextureFormat> baseViewFormats;
 
     // Returns true if the formats are copy compatible.
     // Currently means they differ only in sRGB-ness.

@@ -28,6 +28,8 @@
 #include "dawn/native/Format.h"
 
 #include <bitset>
+#include <unordered_map>
+#include <utility>
 
 #include "dawn/common/TypedInteger.h"
 #include "dawn/native/Device.h"
@@ -583,6 +585,18 @@ FormatTable BuildFormatTable(const DeviceBase* device) {
     // been added or removed recently, check that kKnownFormatCount has been updated.
     DAWN_ASSERT(formatsSet.all());
 
+    std::unordered_map<wgpu::TextureFormat, std::vector<wgpu::TextureFormat>> viewFormatMap;
+    for (const Format& f : table) {
+        if (f.format != f.baseFormat) {
+            viewFormatMap[f.baseFormat].push_back(f.format);
+        }
+    }
+    for (auto& [baseFormat, viewFormats] : viewFormatMap) {
+        // Currently, Dawn only supports sRGB reinterpretation, so there should only be one
+        // view format.
+        DAWN_ASSERT(viewFormats.size() == 1u);
+        table[ComputeFormatIndex(baseFormat)].baseViewFormats = std::move(viewFormats);
+    }
     return table;
 }
 
