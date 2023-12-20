@@ -117,6 +117,7 @@ void frame() {
     WGPURenderPassColorAttachment colorAttachment = {};
     {
         colorAttachment.view = backbufferView;
+        colorAttachment.depthSlice = wgpu::kDepthSliceUndefined;
         colorAttachment.resolveTarget = nullptr;
         colorAttachment.clearValue = {0.0f, 0.0f, 0.0f, 0.0f};
         colorAttachment.loadOp = WGPULoadOp_Clear;
