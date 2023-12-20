@@ -16,6 +16,24 @@
       "message": "```suggestion\n    if ((GetInternalUsage() \u0026 wgpu::TextureUsage::RenderAttachment) \u0026\u0026 GetFormat().IsColor() \u0026\u0026\n```",
       "revId": "a053fde8e616f40c95e3c7509af4da80d092781b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bd75798c_d4072ba7",
+        "filename": "src/dawn/native/vulkan/TextureVk.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 1457,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-20T19:54:10Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "27ab2be9_d6f6463b",
+      "revId": "a053fde8e616f40c95e3c7509af4da80d092781b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
