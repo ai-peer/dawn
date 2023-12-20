@@ -88,6 +88,68 @@ TEST_P(BasicTests, GetInstanceFeatures) {
     EXPECT_FALSE(success);
 }
 
+TEST_P(BasicTests, Lol) {
+    wgpu::TextureDescriptor tDesc;
+    tDesc.format = wgpu::TextureFormat::R8Uint;
+    tDesc.size = {32, 16, 1};
+    tDesc.usage = wgpu::TextureUsage::CopySrc | wgpu::TextureUsage::RenderAttachment;
+    auto t = device.CreateTexture(&tDesc);
+
+    {
+        wgpu::RenderPassColorAttachment aDesc;
+        aDesc.view = t.CreateView();
+        aDesc.loadOp = wgpu::LoadOp::Clear;
+        aDesc.storeOp = wgpu::StoreOp::Store;
+        aDesc.clearValue = {1, 0, 0, 0};
+
+        wgpu::RenderPassDescriptor rpDesc;
+        rpDesc.colorAttachments = &aDesc;
+        rpDesc.colorAttachmentCount = 1;
+
+        auto encoder = device.CreateCommandEncoder();
+        auto pass = encoder.BeginRenderPass(&rpDesc);
+        pass.End();
+        auto commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    wgpu::BufferDescriptor bDesc;
+    bDesc.size = 256 * 15 + 32;
+    bDesc.usage = wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::CopySrc;
+    auto b = device.CreateBuffer(&bDesc);
+
+    {
+        wgpu::ImageCopyTexture src = utils::CreateImageCopyTexture(t);
+        wgpu::ImageCopyBuffer dst = utils::CreateImageCopyBuffer(b, 0, 256);
+
+        auto encoder = device.CreateCommandEncoder();
+        encoder.CopyTextureToBuffer(&src, &dst, &tDesc.size);
+        auto commands = encoder.Finish();
+        queue.Submit(1, &commands);
+    }
+
+    // Gets 0xFFFFFFFF ??? expectations fail
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 0);
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 4);
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 8);
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 12);
+    // Correctly cleared.
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 16);
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 20);
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 24);
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 28);
+    // Lazy cleared.
+    EXPECT_BUFFER_U32_EQ(0, b, 32);
+    EXPECT_BUFFER_U32_EQ(0, b, 36);
+    EXPECT_BUFFER_U32_EQ(0, b, 40);
+    EXPECT_BUFFER_U32_EQ(0, b, 44);
+
+    // Fails
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 256);
+    // Works
+    EXPECT_BUFFER_U32_EQ(0x01010101, b, 256 + 16);
+}
+
 DAWN_INSTANTIATE_TEST(BasicTests,
                       D3D11Backend(),
                       D3D12Backend(),
