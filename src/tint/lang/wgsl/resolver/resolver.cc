@@ -3729,6 +3729,14 @@ tint::Result<uint32_t> Resolver::LocationAttribute(const ast::LocationAttribute*
         return Failure{};
     }
 
+    if (value > 255) {
+        AddError(
+            "@location value is too large, expected at most 255, but the API may enforce a lower "
+            "limit",
+            attr->source);
+        return Failure{};
+    }
+
     return static_cast<uint32_t>(value);
 }
 

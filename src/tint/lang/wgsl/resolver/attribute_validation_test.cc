@@ -2810,6 +2810,19 @@ TEST_P(LocationTest, AFloat) {
     EXPECT_EQ(r()->error(), R"(12:34 error: @location must be an i32 or u32 value)");
 }
 
+TEST_P(LocationTest, NotTooLarge) {
+    Build(Expr(255_a));
+    EXPECT_TRUE(r()->Resolve()) << r()->error();
+}
+
+TEST_P(LocationTest, TooLarge) {
+    Build(Expr(256_a));
+    EXPECT_FALSE(r()->Resolve());
+    EXPECT_EQ(
+        r()->error(),
+        R"(12:34 error: @location value is too large, expected at most 255, but the API may enforce a lower limit)");
+}
+
 INSTANTIATE_TEST_SUITE_P(LocationTest,
                          LocationTest,
                          testing::Values(LocationAttributeType::kEntryPointParameter,
