@@ -36,6 +36,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3266108_6cec55bb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-20T20:01:20Z",
+      "side": 1,
+      "message": "fyi I was curious so I ran the binary size trybot:\n\nhttps://chrome-supersize.firebaseapp.com/viewer.html?load_url\u003dhttps://storage.googleapis.com/chromium-binary-size-trybot-results/android-binary-size/2023/12/20/1730671/supersize_diff.sizediff",
+      "revId": "34c460ba7ca15226f59faecc3a28385a79556c0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3bc13c5c_31198c60",
