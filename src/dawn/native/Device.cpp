@@ -833,6 +833,16 @@ const Format& DeviceBase::GetValidInternalFormat(FormatIndex index) const {
     return mFormatTable[index];
 }
 
+std::vector<const Format*> DeviceBase::GetCompatibleViewFormats(const Format& format) const {
+    const auto& viewFormat = format.format == format.baseFormat
+                                 ? mFormatTable[ComputeFormatIndex(format.baseViewFormat)]
+                                 : mFormatTable[ComputeFormatIndex(format.baseFormat)];
+    if (viewFormat.IsSupported()) {
+        return {&viewFormat};
+    }
+    return {};
+}
+
 ResultOrError<Ref<BindGroupLayoutBase>> DeviceBase::GetOrCreateBindGroupLayout(
     const BindGroupLayoutDescriptor* descriptor,
     PipelineCompatibilityToken pipelineCompatibilityToken) {
