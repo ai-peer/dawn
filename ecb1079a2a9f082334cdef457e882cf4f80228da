@@ -16,6 +16,29 @@
       "message": "I also tested the new E2E test on `win-dawn-rel` without the fix to make sure it fails:\nhttps://ci.chromium.org/ui/p/chromium/builders/try/win-dawn-rel/29498/overview",
       "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5950dfdc_df976673",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T04:54:40Z",
+      "side": 1,
+      "message": "I\u0027m not sure I\u0027m reading this right.  Does this take into account the normalized device coordinates?  (That is the frag coord .x and .y   are the vertex shader pos.xy / .w\n\nSo the third triangle has coordinates at (0, -1/8), (1/16, 0), (1/8, -1/8)\nand in framebuffer coordinates    (32, 32-8)\u003d(32,24) (32+64/16, 32)\u003d(36,32)  (32+64/8, 32-64/8)\u003d(40,24).  So that last triangle doesn\u0027t cover  position (32,16) ?\n\nI\u0027d like to think this through and see a dump of the image.",
+      "range": {
+        "startLine": 2265,
+        "startChar": 75,
+        "endLine": 2265,
+        "endChar": 81
+      },
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
