@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbceca42_b40054bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-21T20:11:00Z",
+      "side": 1,
+      "message": "LGTM but unfortunately failing. FYI rubber-stamper can approve expectations changes (I think this is working again with various new strengthened policies)",
+      "revId": "d7f867f16a924e6ad3c226fb9ee0caeb4d59c76f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
