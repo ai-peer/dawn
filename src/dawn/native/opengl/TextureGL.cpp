@@ -128,10 +128,6 @@ bool RequiresCreatingNewTextureView(const TextureBase* texture,
         return true;
     }
 
-    if (texture->GetNumMipLevels() != textureViewDescriptor->mipLevelCount) {
-        return true;
-    }
-
     if (ToBackend(texture)->GetGLFormat().format == GL_DEPTH_STENCIL &&
         (texture->GetUsage() & wgpu::TextureUsage::TextureBinding) != 0 &&
         textureViewDescriptor->aspect == wgpu::TextureAspect::StencilOnly) {
