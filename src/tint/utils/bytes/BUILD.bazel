@@ -41,12 +41,14 @@ cc_library(
   srcs = [
     "bytes.cc",
     "reader.cc",
+    "writer.cc",
   ],
   hdrs = [
     "decoder.h",
     "endianness.h",
     "reader.h",
     "swap.h",
+    "writer.h",
   ],
   deps = [
     "//src/tint/utils/containers",
