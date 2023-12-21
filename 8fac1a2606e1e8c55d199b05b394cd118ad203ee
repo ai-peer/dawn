@@ -72,6 +72,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3f80d6e0_31547785",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T16:59:20Z",
+      "side": 1,
+      "message": "I think?? it should be OK since .001 *should* force it to be 0x80 instead of 0x7F, and it\u0027s not enough to push it over to 0x81",
+      "parentUuid": "77cc4905_16ba8d61",
+      "range": {
+        "startLine": 413,
+        "startChar": 76,
+        "endLine": 413,
+        "endChar": 81
+      },
+      "revId": "8fac1a2606e1e8c55d199b05b394cd118ad203ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bfb60d7f_1afaffcc",
         "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
         "patchSetId": 2
