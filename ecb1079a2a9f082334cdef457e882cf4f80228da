@@ -135,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b29f683_543d07ba",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-21T17:49:49Z",
+      "side": 1,
+      "message": "Done.",
+      "parentUuid": "bf84b683_4a0e7d65",
+      "range": {
+        "startLine": 2265,
+        "startChar": 39,
+        "endLine": 2265,
+        "endChar": 41
+      },
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5050ec8e_1d09a716",
