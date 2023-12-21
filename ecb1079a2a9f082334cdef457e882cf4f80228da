@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "86642e62_dad4a38b",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-21T14:18:29Z",
+      "side": 1,
+      "message": "The third triangle\u0027s coordinates are:\n```\nvec4f(-0.5,  0.0, 0.0, 8.1),\nvec4f( 0.0,  1.0, 0.0, 8.1),\nvec4f( 0.5,  0.0, 0.0, 8.1),\n```\nNote that I multiply the `xy` components by `pos.w` before returning them, so that the implicit division by `pos.w` produces the same `xy` values that are stored in the array.\n\nSo for that triangle, those three NDCs should produce the following framebuffer coordinates:\n```\n(-0.5*32 + 32, -0.0*32 + 32) \u003d (16, 32)\n( 0.0*32 + 32, -1.0*32 + 32) \u003d (32,  0)\n( 0.5*32 + 32, -0.0*32 + 32) \u003d (48, 32)\n```\nNote that the `y` components are negated here because framebuffer coordinates have the y-axis flipped compared to NDC.\n\nHope that helps?",
+      "parentUuid": "5950dfdc_df976673",
+      "range": {
+        "startLine": 2265,
+        "startChar": 75,
+        "endLine": 2265,
+        "endChar": 81
+      },
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5050ec8e_1d09a716",
         "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.cc",
         "patchSetId": 3
