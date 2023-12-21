@@ -16,6 +16,86 @@
       "message": "Finally able to get back to this after being sick for a while.",
       "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9475e6d4_708953b8",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T01:14:59Z",
+      "side": 1,
+      "message": "here, we should also set the mHostVisible, mHostCoherent, and mHasWriteTransitioned bits",
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "564fedac_ab4a9f3b",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T01:14:59Z",
+      "side": 1,
+      "message": "nit: would it be better to make this range more constrained to \noffset: `mMemoryAllocation.GetOffset() + bufferOffset`\nsize: `size`\n\n?",
+      "range": {
+        "startLine": 572,
+        "startChar": 57,
+        "endLine": 573,
+        "endChar": 71
+      },
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a7b949_2a19f35f",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T01:14:59Z",
+      "side": 1,
+      "message": "device-\u003eIncrementLazyClearCountForTesting(); \n\n?",
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea092dc8_84e0bccb",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T01:14:59Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand this optimization.\n\nif you do sequential writes, the latter ones will take the fast path I think only for buffers that were just created.\nIf you writeBuffer to a uniform buffer, then use the uniform buffer in a shader, Dawn doesn\u0027t eagerly transition it back to MapWrite\n\nsecondly, `TransitionUsageNow` will enqueue the barrier, but it won\u0027t actually submit it - do we need to ensure it is submitted somewhere?",
+      "range": {
+        "startLine": 615,
+        "startChar": 4,
+        "endLine": 623,
+        "endChar": 5
+      },
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
