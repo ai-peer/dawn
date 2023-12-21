@@ -33,6 +33,57 @@
       "message": "LGTM",
       "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8da4a8a_20543976",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T22:58:57Z",
+      "side": 1,
+      "message": "I ran out of time to review this but I do have a suggestion to start.",
+      "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2eb13586_1400bd6c",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3305,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T22:58:57Z",
+      "side": 1,
+      "message": "We can do this with less code (and fewer actual instructions maybe) by using the vector forms of Clamp and shift.\n\nlet clamped_shifted \u003d vec4u(Clamp(args[0], vec4i(-128), vec4i(127)) \u003c\u003c vec4u(0, 8, 16, 24));\nreturn dot(vec4u(1),clamped_shifted);",
+      "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "071c1c79_7744f227",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3318,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T22:58:57Z",
+      "side": 1,
+      "message": "Similarly here:\n\nWe can do this with less code (and fewer actual instructions maybe) by using the vector forms of Clamp and shift.\n\nlet clamped_shifted \u003d Clamp(args[0], vec4u(0), vec4u(255)) \u003c\u003c vec4u(0, 8, 16, 24));\nreturn dot(vec4u(1), clamped_shifted);",
+      "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
