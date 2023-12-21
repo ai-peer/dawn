@@ -33,6 +33,23 @@
       "message": "This mirrors the code in the CreateInputStruct function.",
       "revId": "c4f054589aff3f73c4620c56a78bf64beca0fbf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3f5e9e79_48e05b15",
+        "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2023-12-21T16:19:25Z",
+      "side": 1,
+      "message": "Am confused by the commit comment:\n\n\u003e Use tint::Transform to guarantee ordering.\n\nI don\u0027t see how this guarantees ordering any more than the code that was there before.",
+      "revId": "c4f054589aff3f73c4620c56a78bf64beca0fbf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
