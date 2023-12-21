@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "022a90b2_fc1c1eac",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T15:28:38Z",
+      "side": 1,
+      "message": "we could, but I thought the API would be nicer if we didn\u0027t have view formats in two places, where one is the real view formats, and the other is just for validation. \nAnd, in practice, Chromium would need to add all the view formats anyway to support WebGPU....\n\nalthough now I\u0027ve realized that in WebGPU we already *do* have view formats duplicated on GPUCanvasConfiguration - so Chromium *could* specify them only when necessary\n\nstill, I think it\u0027s unfortunate to add the view format list to STM when it\u0027s only a thing for Vulkan, and in practice this sRGB reinterpretation should be free.\n\nI think there is a way in the future (if/when we add more view formats) to have STM always create the base texture with only sRGB reinterpretation - and then if the client wants to CreateTexture with other view formats, make new textures for that. So STM could eventually hold multiple VkImages (maybe we can even bind to the same VkDeviceMemory; not sure). Similar to how Colin will be making STM hold multiple MTLTexture.\n\nBack to the original point though. Yes, we could add new validation in STM.CreateTexture that would only be relevant for the OpaqueFD backing. This would be OK. No need to add chained structs to STMDescriptor because for now, we can just say the other backings support everything, and OpaqueFD inherits it from the VkImageCreateInfo chain.\n\nWDYT?",
+      "parentUuid": "cc76262c_75ff1ee7",
+      "revId": "8c0b20e1376d020d1875208ff87c50c82f521dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "779ca9c9_546f898e",
         "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
         "patchSetId": 1
