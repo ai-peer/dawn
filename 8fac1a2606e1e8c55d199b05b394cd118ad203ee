@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50af5877_60aa959f",
+        "filename": "src/dawn/native/Format.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 599,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-21T16:56:59Z",
+      "side": 1,
+      "message": "Can\u0027t this be done in just one loop? Something like:\n\n```suggestion\n    for (const Format\u0026 f : table) {\n        if (f.format !\u003d f.baseFormat) {\n            auto\u0026 baseViewFormats \u003d\n                table[ComputeFormatIndex(f.baseFormat)].baseViewFormats;\n            baseViewFormats.push_back(f.format);\n            DAWN_ASSERT(baseViewFormats.size() \u003d\u003d 1u);\n        }\n    }\n```",
+      "range": {
+        "startLine": 588,
+        "startChar": 4,
+        "endLine": 599,
+        "endChar": 5
+      },
+      "revId": "8fac1a2606e1e8c55d199b05b394cd118ad203ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1e703c11_4ff60500",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 310,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-21T16:56:59Z",
+      "side": 1,
+      "message": "nit. unnecessarily",
+      "range": {
+        "startLine": 310,
+        "startChar": 78,
+        "endLine": 310,
+        "endChar": 90
+      },
+      "revId": "8fac1a2606e1e8c55d199b05b394cd118ad203ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "77cc4905_16ba8d61",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 413,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-21T16:56:59Z",
+      "side": 1,
+      "message": "Hmm is this going to be flaky occasionally depending on the hardware? Should we just loosen the sample expectations a little on the alpha, i.e. use `EXPECT_PIXEL_RGBA8_BETWEEN` or something at [1] instead?",
+      "range": {
+        "startLine": 413,
+        "startChar": 76,
+        "endLine": 413,
+        "endChar": 81
+      },
+      "revId": "8fac1a2606e1e8c55d199b05b394cd118ad203ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfb60d7f_1afaffcc",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 564,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2023-12-21T16:56:59Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 561,
+        "startChar": 4,
+        "endLine": 564,
+        "endChar": 78
+      },
+      "revId": "8fac1a2606e1e8c55d199b05b394cd118ad203ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
