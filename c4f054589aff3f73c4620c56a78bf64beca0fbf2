@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f3cbec0d_e4c3e55e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T04:32:33Z",
+      "side": 1,
+      "message": "Weird, but this seems to be needed a well to pass tests when running on google3.",
+      "revId": "c4f054589aff3f73c4620c56a78bf64beca0fbf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
