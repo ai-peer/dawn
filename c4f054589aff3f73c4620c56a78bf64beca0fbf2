@@ -68,6 +68,24 @@
       "parentUuid": "3f5e9e79_48e05b15",
       "revId": "c4f054589aff3f73c4620c56a78bf64beca0fbf2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e41fd1ff_f880828a",
+        "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 659,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T18:00:41Z",
+      "side": 1,
+      "message": "Yes I\u0027m surprised by this too.\n\nWe\u0027ve been discussing and experimenting and things look fishy. This may not be the right thing to do.",
+      "parentUuid": "3f5e9e79_48e05b15",
+      "revId": "c4f054589aff3f73c4620c56a78bf64beca0fbf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
