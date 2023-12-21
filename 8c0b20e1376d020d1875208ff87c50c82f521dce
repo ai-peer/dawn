@@ -16,6 +16,57 @@
       "message": "Vulkan is gross... but I wasn\u0027t expecting this to have new failures on Apple GPUs o_O will have to suppress for now",
       "revId": "8c0b20e1376d020d1875208ff87c50c82f521dce",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bc7a0a49_1eec0a8c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-21T13:01:17Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8c0b20e1376d020d1875208ff87c50c82f521dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc76262c_75ff1ee7",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-21T13:01:17Z",
+      "side": 1,
+      "message": "I\u0027m not sure that I understand why we validate all this. Couldn\u0027t we decide which view formats are allowed for STM.CreateTexture based on the image format list provided by the STMDescriptor\u0027s chained structs?",
+      "revId": "8c0b20e1376d020d1875208ff87c50c82f521dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "779ca9c9_546f898e",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 727,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-21T13:01:17Z",
+      "side": 1,
+      "message": "Maybe the utility should be changed to take in the device and do the BGRA8UnormStorage check?",
+      "revId": "8c0b20e1376d020d1875208ff87c50c82f521dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
