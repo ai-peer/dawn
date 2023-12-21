@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff23e513_8cab8dd8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T01:19:42Z",
+      "side": 1,
+      "message": "Vulkan is gross... but I wasn\u0027t expecting this to have new failures on Apple GPUs o_O will have to suppress for now",
+      "revId": "8c0b20e1376d020d1875208ff87c50c82f521dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
