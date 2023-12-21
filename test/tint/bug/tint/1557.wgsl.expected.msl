@@ -8,6 +8,7 @@ int f() {
 void g() {
   int j = 0;
   while (true) {
+    volatile asm("");
     if ((j >= 1)) {
       break;
     }

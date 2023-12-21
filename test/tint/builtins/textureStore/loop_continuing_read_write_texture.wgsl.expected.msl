@@ -5,6 +5,7 @@ void foo(texture2d<int, access::read_write> tint_symbol) {
   {
     int i = 0;
     while (true) {
+      volatile asm("");
       if (!((i < 3))) {
         break;
       }

@@ -4,6 +4,7 @@ using namespace metal;
 int f() {
   int i = 0;
   while (true) {
+    volatile asm("");
     if ((i > 4)) {
       return i;
     }
