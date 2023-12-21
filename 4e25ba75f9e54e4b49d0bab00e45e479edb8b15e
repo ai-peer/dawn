@@ -70,6 +70,30 @@
       },
       "revId": "4e25ba75f9e54e4b49d0bab00e45e479edb8b15e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "267cd85b_b2d05139",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1003501
+      },
+      "writtenOn": "2023-12-21T08:56:11Z",
+      "side": 0,
+      "message": "Ack. I think filing a separate bug is OK.",
+      "parentUuid": "5d4906d3_c9ad6c35",
+      "range": {
+        "startLine": 695,
+        "startChar": 22,
+        "endLine": 695,
+        "endChar": 65
+      },
+      "revId": "4e25ba75f9e54e4b49d0bab00e45e479edb8b15e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
