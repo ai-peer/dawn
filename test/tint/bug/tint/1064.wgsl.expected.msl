@@ -3,6 +3,7 @@
 using namespace metal;
 fragment void tint_symbol() {
   while (true) {
+    volatile asm("");
     if (false) {
     } else {
       break;

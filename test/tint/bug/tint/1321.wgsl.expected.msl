@@ -24,6 +24,7 @@ fragment void tint_symbol() {
     int const tint_symbol_1 = foo();
     int const a_save = tint_symbol_1;
     while (true) {
+      volatile asm("");
       {
         float const x = arr[a_save];
         break;

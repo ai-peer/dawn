@@ -50,6 +50,7 @@ TEST_F(MslASTPrinterTest, Emit_Loop) {
 
     ASSERT_TRUE(gen.EmitStatement(l)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while (true) {
+    volatile asm("");
     break;
   }
 )");
@@ -70,6 +71,7 @@ TEST_F(MslASTPrinterTest, Emit_LoopWithContinuing) {
 
     ASSERT_TRUE(gen.EmitStatement(l)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while (true) {
+    volatile asm("");
     break;
     {
       a_statement();
@@ -93,6 +95,7 @@ TEST_F(MslASTPrinterTest, Emit_LoopWithContinuing_BreakIf) {
 
     ASSERT_TRUE(gen.EmitStatement(l)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while (true) {
+    volatile asm("");
     break;
     {
       a_statement();
@@ -126,7 +129,9 @@ TEST_F(MslASTPrinterTest, Emit_LoopNestedWithContinuing) {
 
     ASSERT_TRUE(gen.EmitStatement(outer)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while (true) {
+    volatile asm("");
     while (true) {
+      volatile asm("");
       break;
       {
         a_statement();
@@ -166,6 +171,7 @@ TEST_F(MslASTPrinterTest, Emit_LoopWithVarUsedInContinuing) {
 
     ASSERT_TRUE(gen.EmitStatement(outer)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while (true) {
+    volatile asm("");
     float lhs = 2.5f;
     float other = 0.0f;
     break;
@@ -191,6 +197,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoop) {
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  for(; ; ) {
+    volatile asm("");
     return;
   }
 )");
@@ -211,6 +218,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleInit) {
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  for(int i = 0; ; ) {
+    volatile asm("");
     return;
   }
 )");
@@ -244,6 +252,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithMultiStmtInit) {
       f(2);
     }
     for(; ; ) {
+      volatile asm("");
       return;
     }
   }
@@ -265,6 +274,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleCond) {
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  for(; true; ) {
+    volatile asm("");
     return;
   }
 )");
@@ -287,6 +297,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleCont) {
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(),
               R"(  for(; ; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
+    volatile asm("");
     return;
   }
 )");
@@ -315,6 +326,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithMultiStmtCont) {
 
     ASSERT_TRUE(gen.EmitStatement(loop)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while (true) {
+    volatile asm("");
     return;
     {
       f(1);
@@ -342,6 +354,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleInitCondCont) {
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(),
               R"(  for(int i = 0; true; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
+    volatile asm("");
     a_statement();
   }
 )");
@@ -376,6 +389,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithMultiStmtInitCondCont) {
       f(2);
     }
     while (true) {
+      volatile asm("");
       if (!(true)) { break; }
       return;
       {
@@ -401,6 +415,7 @@ TEST_F(MslASTPrinterTest, Emit_While) {
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while(true) {
+    volatile asm("");
     return;
   }
 )");
@@ -420,6 +435,7 @@ TEST_F(MslASTPrinterTest, Emit_While_WithContinue) {
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while(true) {
+    volatile asm("");
     continue;
   }
 )");
@@ -442,6 +458,7 @@ TEST_F(MslASTPrinterTest, Emit_WhileWithMultiCond) {
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
     EXPECT_EQ(gen.Result(), R"(  while((t && false)) {
+    volatile asm("");
     return;
   }
 )");
