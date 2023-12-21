@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b2a0489_55ab043f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-21T12:32:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "94e32607a0674b2c9b308a685adb09f5523b5b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ddb7ecb_f7544af0",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-21T12:32:03Z",
+      "side": 1,
+      "message": "```suggestion\n                        \"depthSlice (%u) is defined for a non-3D attachment (%s).\", depthSlice,\n```",
+      "revId": "94e32607a0674b2c9b308a685adb09f5523b5b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cae3cb89_73db68c7",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2023-12-21T12:32:03Z",
+      "side": 1,
+      "message": "```suggestion\n                    \"depthSlice (%u) for a 3D attachment (%s) is undefined.\"\n```",
+      "revId": "94e32607a0674b2c9b308a685adb09f5523b5b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
