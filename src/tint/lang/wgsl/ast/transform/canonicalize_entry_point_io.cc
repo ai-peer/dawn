@@ -102,6 +102,7 @@ uint32_t BuiltinOrder(core::BuiltinValue builtin) {
         default:
             break;
     }
+    TINT_UNREACHABLE();
     return 0;
 }
 
@@ -354,18 +355,7 @@ struct CanonicalizeEntryPointIO::State {
                                                              : b.Symbols().New(name);
             wrapper_struct_param_members.Push({b.Member(symbol, ast_type, std::move(attrs)),
                                                location, /* index */ std::nullopt, color});
-            const Expression* expr = b.MemberAccessor(InputStructSymbol(), symbol);
-
-            // If this is a fragment position builtin and we're targeting D3D, we need to invert the
-            // 'w' component of the vector.
-            if (cfg.shader_style == ShaderStyle::kHlsl &&
-                builtin_attr == core::BuiltinValue::kPosition) {
-                auto* xyz = b.MemberAccessor(expr, "xyz");
-                auto* w = b.MemberAccessor(b.MemberAccessor(InputStructSymbol(), symbol), "w");
-                expr = b.Call<vec4<f32>>(xyz, b.Div(1_a, w));
-            }
-
-            return expr;
+            return b.MemberAccessor(InputStructSymbol(), symbol);
         }
     }
 
@@ -569,29 +559,27 @@ struct CanonicalizeEntryPointIO::State {
     /// @param y another struct member
     /// @returns true if a comes before b
     bool StructMemberComparator(const MemberInfo& x, const MemberInfo& y) {
-        if (x.color.has_value() && y.color.has_value()) {
-            // Both have color attributes: smallest goes first.
-            return x.color < y.color;
-        }
-        if (x.color.has_value() != y.color.has_value()) {
+      if (x.color.has_value() && y.color.has_value() && x.color != y.color) {
+        // Both have color attributes: smallest goes first.
+        return x.color < y.color;
+      } else if (x.color.has_value() != y.color.has_value()) {
             // The member with the color goes first
             return x.color.has_value();
         }
 
-        if (x.location.has_value() && y.location.has_value()) {
-            // Both have location attributes: smallest goes first.
-            return x.location < y.location;
-        }
-        if (x.location.has_value() != y.location.has_value()) {
+        if (x.location.has_value() && y.location.has_value() &&
+            x.location != y.location) {
+          // Both have location attributes: smallest goes first.
+          return x.location < y.location;
+        } else if (x.location.has_value() != y.location.has_value()) {
             // The member with the location goes first
             return x.location.has_value();
         }
 
-        if (x.index.has_value() && y.index.has_value()) {
-            // Both have index attributes: smallest goes first.
-            return x.index < y.index;
-        }
-        if (x.index.has_value() != y.index.has_value()) {
+        if (x.index.has_value() && y.index.has_value() && x.index != y.index) {
+          // Both have index attributes: smallest goes first.
+          return x.index < y.index;
+        } else if (x.index.has_value() != y.index.has_value()) {
             // The member with the index goes first
             return x.index.has_value();
         }
@@ -603,23 +591,29 @@ struct CanonicalizeEntryPointIO::State {
                 // Both are builtins: order matters for FXC.
                 auto builtin_a = BuiltinOf(x_blt);
                 auto builtin_b = BuiltinOf(y_blt);
-                return BuiltinOrder(builtin_a) < BuiltinOrder(builtin_b);
-            }
-            if ((x_blt != nullptr) != (y_blt != nullptr)) {
+                auto order_a = BuiltinOrder(builtin_a);
+                auto order_b = BuiltinOrder(builtin_b);
+                if (order_a != order_b) {
+                  return order_a < order_b;
+                }
+            } else if ((x_blt != nullptr) != (y_blt != nullptr)) {
                 // The member with the builtin goes first
                 return x_blt != nullptr;
             }
         }
 
-        TINT_UNREACHABLE();
+        // Control flow reaches here if x is the same as y.
+        // Sort algorithms sometimes do that.
         return false;
     }
 
     /// Create the wrapper function's struct parameter and type objects.
     void CreateInputStruct() {
         // Sort the struct members to satisfy HLSL interfacing matching rules.
-        std::sort(wrapper_struct_param_members.begin(), wrapper_struct_param_members.end(),
-                  [&](auto& x, auto& y) { return StructMemberComparator(x, y); });
+        std::stable_sort(
+            wrapper_struct_param_members.begin(),
+            wrapper_struct_param_members.end(),
+            [&](auto& x, auto& y) { return StructMemberComparator(x, y); });
 
         auto members =
             tint::Transform(wrapper_struct_param_members, [](auto& info) { return info.member; });
@@ -668,7 +662,7 @@ struct CanonicalizeEntryPointIO::State {
 
         tint::Vector<const StructMember*, 8> members;
         for (auto& mem : wrapper_struct_output_members) {
-            members.Push(mem.member);
+          members.Push(mem.member);
         }
 
         // Create the new struct type.
