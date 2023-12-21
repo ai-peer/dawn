@@ -18,6 +18,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b69e552e_d7ead2f3",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2225,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T16:04:22Z",
+      "side": 1,
+      "message": "It\u0027s not clear what purpose adding these small epsilons serve.\nAre they needed to bias just a bit to hit the integer target in the expected results?\n\nIf that\u0027s the case, then it\u0027s better to test against ranges of the result. See below.\n\nOr, if you want no-integer values for floats, I always suggest using epsilons that are exactly representable in floating point, e.g.     inverses of powers of two or small  multiples of them.\n\nE.g.   2.5,  4.25, 8.125  \n\nWhat you have is ok.  But this is a habit of mine that I think/hope keeps me out of trouble.",
+      "range": {
+        "startLine": 2225,
+        "startChar": 29,
+        "endLine": 2225,
+        "endChar": 32
+      },
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5950dfdc_df976673",
@@ -65,6 +88,53 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "52149486_516635df",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T16:04:22Z",
+      "side": 1,
+      "message": "Heh. I made three errors:\n- I missed that multiply by .w\n- I had the NDC upside down\n- I drew the second triangle upside down, w.r.t. that second error.\n\nMuch clearer now.",
+      "parentUuid": "86642e62_dad4a38b",
+      "range": {
+        "startLine": 2265,
+        "startChar": 75,
+        "endLine": 2265,
+        "endChar": 81
+      },
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf84b683_4a0e7d65",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 2265,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T16:04:22Z",
+      "side": 1,
+      "message": "I\u0027m concerned about non-portability of the float divide.\nI suggest using EXPECT_PIXEL_RGBA8_BETWEEN  with decent ranges around the expected red value e.g.     [124,127],  [60,66], [28,34]",
+      "range": {
+        "startLine": 2265,
+        "startChar": 39,
+        "endLine": 2265,
+        "endChar": 41
+      },
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5050ec8e_1d09a716",
@@ -78,6 +148,24 @@
       "writtenOn": "2023-12-21T04:57:07Z",
       "side": 1,
       "message": "All this is so much nicer than I expected, because it\u0027s in the sweet spot.",
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8120e3_f9b4c3e4",
+        "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T16:04:22Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5050ec8e_1d09a716",
       "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
