@@ -655,10 +655,8 @@ struct CanonicalizeEntryPointIO::State {
         std::sort(wrapper_struct_output_members.begin(), wrapper_struct_output_members.end(),
                   [&](auto& x, auto& y) { return StructMemberComparator(x, y); });
 
-        tint::Vector<const StructMember*, 8> members;
-        for (auto& mem : wrapper_struct_output_members) {
-            members.Push(mem.member);
-        }
+        auto members =
+            tint::Transform(wrapper_struct_output_members, [](auto& info) { return info.member; });
 
         // Create the new struct type.
         auto* out_struct = b.create<Struct>(b.Ident(b.Sym()), std::move(members), Empty);
