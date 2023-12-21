@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bda6369b_5eca6226",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-21T07:06:51Z",
+      "side": 1,
+      "message": "Dry running a new attempt but FYI I plan to split this into 2 or 3 CLs before submitting it.",
+      "revId": "82388829cf9096d39063238b9a145c844b121062",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
