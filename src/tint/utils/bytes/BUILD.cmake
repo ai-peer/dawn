@@ -45,6 +45,8 @@ tint_add_target(tint_utils_bytes lib
   utils/bytes/reader.cc
   utils/bytes/reader.h
   utils/bytes/swap.h
+  utils/bytes/writer.cc
+  utils/bytes/writer.h
 )
 
 tint_target_add_dependencies(tint_utils_bytes lib
