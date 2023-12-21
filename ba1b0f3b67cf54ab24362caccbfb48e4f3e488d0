@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06850d93_a8284271",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-21T21:43:38Z",
+      "side": 1,
+      "message": "Not a full review yet, but we need to add a WGSL language feature for `pointer_composite_access`, mark it as \"experimental\" in `status.cc`, and detect uses of the feature in the Resolver. Otherwise this syntax will just start working before we\u0027ve shipped it for real.",
+      "revId": "ba1b0f3b67cf54ab24362caccbfb48e4f3e488d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
