@@ -39,6 +39,23 @@
       },
       "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5050ec8e_1d09a716",
+        "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 359,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-21T04:57:07Z",
+      "side": 1,
+      "message": "All this is so much nicer than I expected, because it\u0027s in the sweet spot.",
+      "revId": "ecb1079a2a9f082334cdef457e882cf4f80228da",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
