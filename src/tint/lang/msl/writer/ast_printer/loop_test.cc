@@ -49,7 +49,7 @@ TEST_F(MslASTPrinterTest, Emit_Loop) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(l)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while (true) {
+    EXPECT_EQ(gen.Result(), R"(  while (true) { volatile asm("");
     break;
   }
 )");
@@ -69,7 +69,7 @@ TEST_F(MslASTPrinterTest, Emit_LoopWithContinuing) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(l)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while (true) {
+    EXPECT_EQ(gen.Result(), R"(  while (true) { volatile asm("");
     break;
     {
       a_statement();
@@ -92,7 +92,7 @@ TEST_F(MslASTPrinterTest, Emit_LoopWithContinuing_BreakIf) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(l)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while (true) {
+    EXPECT_EQ(gen.Result(), R"(  while (true) { volatile asm("");
     break;
     {
       a_statement();
@@ -125,8 +125,8 @@ TEST_F(MslASTPrinterTest, Emit_LoopNestedWithContinuing) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(outer)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while (true) {
-    while (true) {
+    EXPECT_EQ(gen.Result(), R"(  while (true) { volatile asm("");
+    while (true) { volatile asm("");
       break;
       {
         a_statement();
@@ -165,7 +165,7 @@ TEST_F(MslASTPrinterTest, Emit_LoopWithVarUsedInContinuing) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(outer)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while (true) {
+    EXPECT_EQ(gen.Result(), R"(  while (true) { volatile asm("");
     float lhs = 2.5f;
     float other = 0.0f;
     break;
@@ -190,7 +190,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoop) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  for(; ; ) {
+    EXPECT_EQ(gen.Result(), R"(  for(; ; ) { volatile asm("");
     return;
   }
 )");
@@ -210,7 +210,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleInit) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  for(int i = 0; ; ) {
+    EXPECT_EQ(gen.Result(), R"(  for(int i = 0; ; ) { volatile asm("");
     return;
   }
 )");
@@ -243,7 +243,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithMultiStmtInit) {
       f(1);
       f(2);
     }
-    for(; ; ) {
+    for(; ; ) { volatile asm("");
       return;
     }
   }
@@ -264,7 +264,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleCond) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  for(; true; ) {
+    EXPECT_EQ(gen.Result(), R"(  for(; true; ) { volatile asm("");
     return;
   }
 )");
@@ -285,8 +285,9 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleCont) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(),
-              R"(  for(; ; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
+    EXPECT_EQ(
+        gen.Result(),
+        R"(  for(; ; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) { volatile asm("");
     return;
   }
 )");
@@ -314,7 +315,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithMultiStmtCont) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(loop)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while (true) {
+    EXPECT_EQ(gen.Result(), R"(  while (true) { volatile asm("");
     return;
     {
       f(1);
@@ -340,8 +341,9 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithSimpleInitCondCont) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(),
-              R"(  for(int i = 0; true; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
+    EXPECT_EQ(
+        gen.Result(),
+        R"(  for(int i = 0; true; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) { volatile asm("");
     a_statement();
   }
 )");
@@ -375,7 +377,7 @@ TEST_F(MslASTPrinterTest, Emit_ForLoopWithMultiStmtInitCondCont) {
       f(1);
       f(2);
     }
-    while (true) {
+    while (true) { volatile asm("");
       if (!(true)) { break; }
       return;
       {
@@ -400,7 +402,7 @@ TEST_F(MslASTPrinterTest, Emit_While) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while(true) {
+    EXPECT_EQ(gen.Result(), R"(  while(true) { volatile asm("");
     return;
   }
 )");
@@ -419,7 +421,7 @@ TEST_F(MslASTPrinterTest, Emit_While_WithContinue) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while(true) {
+    EXPECT_EQ(gen.Result(), R"(  while(true) { volatile asm("");
     continue;
   }
 )");
@@ -441,7 +443,7 @@ TEST_F(MslASTPrinterTest, Emit_WhileWithMultiCond) {
     gen.IncrementIndent();
 
     ASSERT_TRUE(gen.EmitStatement(f)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while((t && false)) {
+    EXPECT_EQ(gen.Result(), R"(  while((t && false)) { volatile asm("");
     return;
   }
 )");

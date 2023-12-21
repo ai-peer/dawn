@@ -109,6 +109,8 @@ using namespace tint::core::fluent_types;  // NOLINT
 namespace tint::msl::writer {
 namespace {
 
+constexpr auto kLoopAnchor = R"(volatile asm("");)";
+
 bool last_is_break(const ast::BlockStatement* stmts) {
     return tint::IsAnyOf<ast::BreakStatement>(stmts->Last());
 }
@@ -2122,7 +2124,7 @@ bool ASTPrinter::EmitLoop(const ast::LoopStatement* stmt) {
     };
 
     TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-    Line() << "while (true) {";
+    Line() << "while (true) { " << kLoopAnchor;
     {
         ScopedIndent si(this);
         if (!EmitStatements(stmt->body->statements)) {
@@ -2192,7 +2194,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
         };
 
         TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-        Line() << "while (true) {";
+        Line() << "while (true) { " << kLoopAnchor;
         IncrementIndent();
         TINT_DEFER({
             DecrementIndent();
@@ -2231,7 +2233,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
                     out << tint::TrimSuffix(cont_buf.lines[0].content, ";");
                 }
             }
-            out << " {";
+            out << " { " << kLoopAnchor;
         }
         {
             auto emit_continuing = [] { return true; };
@@ -2265,7 +2267,7 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
     // as a regular while in MSL. Instead we need to generate a `while(true)` loop.
     bool emit_as_loop = cond_pre.lines.size() > 0;
     if (emit_as_loop) {
-        Line() << "while (true) {";
+        Line() << "while (true) { " << kLoopAnchor;
         IncrementIndent();
         TINT_DEFER({
             DecrementIndent();
@@ -2286,7 +2288,7 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
                 ScopedParen sp(out);
                 out << cond_buf.str();
             }
-            out << " {";
+            out << " { " << kLoopAnchor;
         }
         if (!EmitStatementsWithIndent(stmt->body->statements)) {
             return false;
