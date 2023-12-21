@@ -46,6 +46,30 @@
       },
       "revId": "4e25ba75f9e54e4b49d0bab00e45e479edb8b15e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d4906d3_c9ad6c35",
+        "filename": "src/dawn/tests/end2end/IOSurfaceWrappingTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 695,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2023-12-21T08:19:28Z",
+      "side": 0,
+      "message": "Hi Quyen,\n\nFriendly ping on the above question, thanks!",
+      "parentUuid": "c2eb613b_360ac697",
+      "range": {
+        "startLine": 695,
+        "startChar": 22,
+        "endLine": 695,
+        "endChar": 65
+      },
+      "revId": "4e25ba75f9e54e4b49d0bab00e45e479edb8b15e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
