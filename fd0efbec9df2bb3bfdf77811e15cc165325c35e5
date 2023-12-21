@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "531c16c5_9cac313d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2023-12-21T00:34:18Z",
+      "side": 1,
+      "message": "if this works, I\u0027ll probably revert the other workaround I did so long as this covers all those cases as well",
+      "revId": "fd0efbec9df2bb3bfdf77811e15cc165325c35e5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
