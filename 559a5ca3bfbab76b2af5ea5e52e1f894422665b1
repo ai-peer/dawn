@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4cb778e2_4f1fe572",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3305,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-22T06:14:36Z",
+      "side": 1,
+      "message": "Here we are doing the constant value evaluation on CPU, so it seems we don\u0027t need to use such vectorized expressions here?\n\nI am trying to use such GPU vectorized expressions in the polyfills in core/ir/transform/builtin_polyfill.cc and wgsl/ast/transform/builtin_polyfills.cc. PTAL, thanks!",
+      "parentUuid": "2eb13586_1400bd6c",
+      "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "071c1c79_7744f227",
         "filename": "src/tint/lang/core/constant/eval.cc",
         "patchSetId": 2
@@ -82,6 +100,24 @@
       "writtenOn": "2023-12-21T22:58:57Z",
       "side": 1,
       "message": "Similarly here:\n\nWe can do this with less code (and fewer actual instructions maybe) by using the vector forms of Clamp and shift.\n\nlet clamped_shifted \u003d Clamp(args[0], vec4u(0), vec4u(255)) \u003c\u003c vec4u(0, 8, 16, 24));\nreturn dot(vec4u(1), clamped_shifted);",
+      "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7f0f4a0_b20155f8",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3318,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2023-12-22T06:14:36Z",
+      "side": 1,
+      "message": "Here we are doing the constant value evaluation on CPU, so it seems we don\u0027t need to use such vectorized expressions here?",
+      "parentUuid": "071c1c79_7744f227",
       "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
