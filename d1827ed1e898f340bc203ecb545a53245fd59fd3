@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7ca23ef5_11e8bbdc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2023-12-22T00:03:04Z",
+      "side": 1,
+      "message": "It\u0027d be great if we could try to write a Dawn E2E test (and maybe eventually a CTS test) that exercises the issue.\n\nOtherwise it\u0027d be easy to accidentally drop this during a refactor without noticing (e.g. when switching to the new MSL backend).",
+      "revId": "d1827ed1e898f340bc203ecb545a53245fd59fd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d455ad8_bceabbe3",
         "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
         "patchSetId": 1
