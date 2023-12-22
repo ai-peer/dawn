@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d144ac37_60d6b4f3",
+        "filename": "generator/templates/api_cpp.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-22T01:04:05Z",
+      "side": 1,
+      "message": "SGTM, will leave that for future work.",
+      "parentUuid": "6e64a45f_ab05ee03",
+      "revId": "0452418627a5dfa798a2add4ce11418272f2fb70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "99a4b4c3_557fab24",
@@ -66,6 +84,24 @@
       "writtenOn": "2023-12-08T15:47:24Z",
       "side": 1,
       "message": "Where is this file still used?",
+      "revId": "0452418627a5dfa798a2add4ce11418272f2fb70",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "568d5703_73b6fc80",
+        "filename": "include/dawn/EnumClassBitmasks.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-22T01:04:05Z",
+      "side": 1,
+      "message": "I thought it was transitively used via `dawn/native/EnumClassBitmasks.h` but it turns out only the test used it. Done.",
+      "parentUuid": "99a4b4c3_557fab24",
       "revId": "0452418627a5dfa798a2add4ce11418272f2fb70",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
