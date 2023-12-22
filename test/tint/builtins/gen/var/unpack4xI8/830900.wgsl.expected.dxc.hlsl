@@ -1,14 +1,10 @@
-int4 tint_unpack_4xi8(uint a) {
-  const uint4 a_vec4u = uint4((a).xxxx);
-  const int4 a_vec4i = asint((a_vec4u << uint4(24u, 16u, 8u, 0u)));
-  return (a_vec4i >> (24u).xxxx);
-}
+SKIP: FAILED
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void unpack4xI8_830900() {
   uint arg_0 = 1u;
-  int4 res = tint_unpack_4xi8(arg_0);
+  int4 res = unpack_s8s32(int8_t4_packed(arg_0));
   prevent_dce.Store4(0u, asuint(res));
 }
 
@@ -38,3 +34,25 @@ void compute_main() {
   unpack4xI8_830900();
   return;
 }
+DXC validation failure:
+error: validation errors
+shader.hlsl:5:14: error: Opcode Unpack4x8 not valid in shader model vs_6_0.
+note: at '%2 = call %dx.types.fouri32 @dx.op.unpack4x8.i32(i32 219, i8 1, i32 1)' in block '#0' of function 'vertex_main'.
+Validation failed.
+
+
+
+error: validation errors
+shader.hlsl:5:14: error: Opcode Unpack4x8 not valid in shader model ps_6_0.
+note: at '%2 = call %dx.types.fouri32 @dx.op.unpack4x8.i32(i32 219, i8 1, i32 1)' in block '#0' of function 'fragment_main'.
+Validation failed.
+
+
+
+error: validation errors
+shader.hlsl:5:14: error: Opcode Unpack4x8 not valid in shader model cs_6_0.
+note: at '%2 = call %dx.types.fouri32 @dx.op.unpack4x8.i32(i32 219, i8 1, i32 1)' in block '#0' of function 'compute_main'.
+Validation failed.
+
+
+

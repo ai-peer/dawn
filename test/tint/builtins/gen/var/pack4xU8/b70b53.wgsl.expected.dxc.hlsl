@@ -1,13 +1,10 @@
-uint tint_pack_4xu8(uint4 a) {
-  const uint4 a_u8 = ((a & (255u).xxxx) << uint4(0u, 8u, 16u, 24u));
-  return dot(a_u8, (1u).xxxx);
-}
+SKIP: FAILED
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void pack4xU8_b70b53() {
   uint4 arg_0 = (1u).xxxx;
-  uint res = tint_pack_4xu8(arg_0);
+  uint res = uint(pack_u8(arg_0));
   prevent_dce.Store(0u, asuint(res));
 }
 
@@ -37,3 +34,25 @@ void compute_main() {
   pack4xU8_b70b53();
   return;
 }
+DXC validation failure:
+error: validation errors
+shader.hlsl:5:19: error: Opcode Pack4x8 not valid in shader model vs_6_0.
+note: at '%2 = call i32 @dx.op.pack4x8.i32(i32 220, i8 0, i32 1, i32 1, i32 1, i32 1)' in block '#0' of function 'vertex_main'.
+Validation failed.
+
+
+
+error: validation errors
+shader.hlsl:5:19: error: Opcode Pack4x8 not valid in shader model ps_6_0.
+note: at '%2 = call i32 @dx.op.pack4x8.i32(i32 220, i8 0, i32 1, i32 1, i32 1, i32 1)' in block '#0' of function 'fragment_main'.
+Validation failed.
+
+
+
+error: validation errors
+shader.hlsl:5:19: error: Opcode Pack4x8 not valid in shader model cs_6_0.
+note: at '%2 = call i32 @dx.op.pack4x8.i32(i32 220, i8 0, i32 1, i32 1, i32 1, i32 1)' in block '#0' of function 'compute_main'.
+Validation failed.
+
+
+
