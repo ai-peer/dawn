@@ -1,14 +1,10 @@
-int4 tint_unpack_4xi8(uint a) {
-  const uint4 a_vec4u = uint4((a).xxxx);
-  const int4 a_vec4i = asint((a_vec4u << uint4(24u, 16u, 8u, 0u)));
-  return (a_vec4i >> (24u).xxxx);
-}
+SKIP: FAILED
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void unpack4xI8_830900() {
   uint arg_0 = 1u;
-  int4 res = tint_unpack_4xi8(arg_0);
+  int4 res = unpack_s8s32(int8_t4_packed(arg_0));
   prevent_dce.Store4(0u, asuint(res));
 }
 
@@ -38,3 +34,6 @@ void compute_main() {
   unpack4xI8_830900();
   return;
 }
+FXC validation failure:
+D:\workspace\dawn\Shader@0x00000229008174C0(5,27-47): error X3004: undeclared identifier 'int8_t4_packed'
+

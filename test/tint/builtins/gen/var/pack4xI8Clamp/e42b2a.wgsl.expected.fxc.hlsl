@@ -1,15 +1,10 @@
-uint tint_pack_4xi8_clamp(int4 a) {
-  const int4 a_clamp = clamp(a, (-128).xxxx, (127).xxxx);
-  const uint4 a_u32 = asuint(a_clamp);
-  const uint4 a_u8 = ((a_u32 & (255u).xxxx) << uint4(0u, 8u, 16u, 24u));
-  return dot(a_u8, (1u).xxxx);
-}
+SKIP: FAILED
 
 RWByteAddressBuffer prevent_dce : register(u0, space2);
 
 void pack4xI8Clamp_e42b2a() {
   int4 arg_0 = (1).xxxx;
-  uint res = tint_pack_4xi8_clamp(arg_0);
+  uint res = uint(pack_clamp_s8(arg_0));
   prevent_dce.Store(0u, asuint(res));
 }
 
@@ -39,3 +34,6 @@ void compute_main() {
   pack4xI8Clamp_e42b2a();
   return;
 }
+FXC validation failure:
+D:\workspace\dawn\Shader@0x00000212DBBB7100(5,19-38): error X3004: undeclared identifier 'pack_clamp_s8'
+

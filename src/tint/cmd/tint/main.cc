@@ -143,7 +143,7 @@ enum class Format : uint8_t {
 };
 
 constexpr uint32_t kMinShaderModelForDXC = 60u;
-constexpr uint32_t kMaxSupportedShaderModelForDXC = 64u;
+constexpr uint32_t kMaxSupportedShaderModelForDXC = 66u;
 
 struct Options {
     bool verbose = false;
