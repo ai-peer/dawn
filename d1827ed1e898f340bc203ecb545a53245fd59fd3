@@ -71,6 +71,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ea83254_631f9fe9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-22T05:24:14Z",
+      "side": 1,
+      "message": "Yes, that would be nice.\nCorrect execution amounts to hanging the GPU, and normally that would kill the process due to the OS-level watchdog timer.  We can cut a corner by using a watcher thread and a worker thread. The worker signals it\u0027s alive, then queues the infinite workload, and schedules a signal that it\u0027s complete. The watcher launches the worker, yields, spins to observes the alive signal, waits ~100ms before killing the worker thread, and observes it hasn\u0027t seen the completion signal.\nWe can have an initial \"benchmark\" run that avoids the infinite loop, to measure the latency of running the pipeline, and tune the second delay to be similar to that plus a few milliseconds.",
+      "parentUuid": "7ca23ef5_11e8bbdc",
+      "revId": "d1827ed1e898f340bc203ecb545a53245fd59fd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "9d455ad8_bceabbe3",
         "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
         "patchSetId": 1
