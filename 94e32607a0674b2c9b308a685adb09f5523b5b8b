@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "360b93bb_3de9ef2e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-22T05:55:47Z",
+      "side": 1,
+      "message": "Yes, trybot failures had been fixed in Chromium by https://chromium-review.googlesource.com/c/chromium/src/+/5142439.",
+      "parentUuid": "61df5988_72156ee2",
+      "revId": "94e32607a0674b2c9b308a685adb09f5523b5b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1ddb7ecb_f7544af0",
