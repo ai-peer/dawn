@@ -94,6 +94,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b7065f33_f3906123",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 112,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-22T05:16:44Z",
+      "side": 1,
+      "message": "Made a function to do this instead; it was a cleaner way to handle the indentation a well.\nEmitLoopPreserver();",
+      "parentUuid": "9d455ad8_bceabbe3",
+      "range": {
+        "startLine": 112,
+        "startChar": 15,
+        "endLine": 112,
+        "endChar": 26
+      },
+      "revId": "d1827ed1e898f340bc203ecb545a53245fd59fd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5dee3821_acb0cec1",
         "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
         "patchSetId": 1
@@ -105,6 +129,30 @@
       "writtenOn": "2023-12-22T00:00:21Z",
       "side": 1,
       "message": "nit: Emit this on a new line (after indentation).",
+      "range": {
+        "startLine": 2127,
+        "startChar": 32,
+        "endLine": 2127,
+        "endChar": 46
+      },
+      "revId": "d1827ed1e898f340bc203ecb545a53245fd59fd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f060a5c9_2b72ee9b",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 2127,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-22T05:16:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5dee3821_acb0cec1",
       "range": {
         "startLine": 2127,
         "startChar": 32,
