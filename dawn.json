@@ -2093,11 +2093,10 @@
     "callback mode": {
         "category": "enum",
         "emscripten_no_enum_table": true,
-        "_comment": "TODO(crbug.com/dawn/2224): Should this be renumbered to reserve 0?",
         "values": [
-            {"value": 0, "name": "wait any only"},
-            {"value": 1, "name": "allow process events"},
-            {"value": 2, "name": "allow spontaneous"}
+            {"value": 1, "name": "wait any only"},
+            {"value": 2, "name": "allow process events"},
+            {"value": 3, "name": "allow spontaneous"}
         ]
     },
     "future": {
