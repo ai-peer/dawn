@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e1a67658_ff033da2",
+        "filename": "src/dawn/native/Sampler.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 78,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2023-12-22T00:31:12Z",
+      "side": 0,
+      "message": "ValidateCompareFunction now allows Undefined so the if() isn\u0027t needed. (Also defaulting happens before this point so it no longer matters anyway.)",
+      "revId": "7d09d55cee2e840eebd0c45af3d25c8df885eefa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
