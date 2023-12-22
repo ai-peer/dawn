@@ -40,6 +40,7 @@ struct ExternalImageDescriptorDXGISharedHandle;
 struct ExternalImageDXGIFenceDescriptor;
 class ExternalImageDXGIImpl;
 class Fence;
+class KeyedMutexHelper;
 class PlatformFunctions;
 
 class Device : public DeviceBase {
@@ -65,9 +66,12 @@ class Device : public DeviceBase {
     virtual Ref<TextureBase> CreateD3DExternalTexture(
         const UnpackedPtr<TextureDescriptor>& descriptor,
         ComPtr<IUnknown> d3dTexture,
+        Ref<KeyedMutexHelper> keyedMutexHelper,
         std::vector<Ref<Fence>> waitFences,
         bool isSwapChainTexture,
         bool isInitialized) = 0;
+    virtual void DisposeExternalImageResources(ComPtr<IUnknown> d3dTexture,
+                                               Ref<d3d::KeyedMutexHelper> keyedMutexHelper) = 0;
 
   protected:
     void DestroyImpl() override;

@@ -28,9 +28,12 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include <vector>
+
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
+#include "dawn/native/d3d/KeyedMutexHelper.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d11 {
@@ -114,9 +117,12 @@ class ScopedCommandRecordingContext : NonMovable {
     void WriteUniformBuffer(uint32_t offset, uint32_t element) const;
     MaybeError FlushUniformBuffer() const;
 
+    void AddKeyedMutexGuard(d3d::KeyedMutexGuard&& keyedMutexGuard);
+
   protected:
     CommandRecordingContext* const mCommandContext;
     ComPtr<ID3D11Multithread> mD3D11Multithread;
+    std::vector<d3d::KeyedMutexGuard> mKeyedMutexGuards;
 };
 
 // For using ID3D11DeviceContext directly. It swaps and resets ID3DDeviceContextState of

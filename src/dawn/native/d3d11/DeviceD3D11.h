@@ -39,8 +39,6 @@
 
 namespace dawn::native::d3d11 {
 
-class Fence;
-
 // Definition of backend types
 class Device final : public d3d::Device {
   public:
@@ -64,9 +62,12 @@ class Device final : public d3d::Device {
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
     Ref<TextureBase> CreateD3DExternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor,
                                               ComPtr<IUnknown> d3dTexture,
+                                              Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                               std::vector<Ref<d3d::Fence>> waitFences,
                                               bool isSwapChainTexture,
                                               bool isInitialized) override;
+    void DisposeExternalImageResources(ComPtr<IUnknown> d3dTexture,
+                                       Ref<d3d::KeyedMutexHelper> keyedMutexHelper) override;
 
     ResultOrError<Ref<CommandBufferBase>> CreateCommandBuffer(
         CommandEncoder* encoder,

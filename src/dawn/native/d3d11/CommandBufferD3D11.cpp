@@ -109,26 +109,6 @@ class VertexBufferTracker {
     PerVertexBuffer<UINT> mOffsets = {};
 };
 
-MaybeError SynchronizeTextureBeforeUse(
-    Texture* texture,
-    const ScopedSwapStateCommandRecordingContext* commandContext) {
-    SharedTextureMemoryBase::PendingFenceList fences;
-    SharedTextureMemoryContents* contents = texture->GetSharedTextureMemoryContents();
-    if (contents == nullptr) {
-        return {};
-    }
-
-    contents->AcquirePendingFences(&fences);
-    contents->SetLastUsageSerial(texture->GetDevice()->GetPendingCommandSerial());
-
-    for (auto& fence : fences) {
-        DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Wait(
-                                  ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
-                              "ID3D11DeviceContext4::Wait"));
-    }
-    return {};
-}
-
 // Handle pixel local storage attachments and return a vector of all pixel local storage UAVs.
 // - For implicit attachments, create the texture and clear it to 0.
 // - For explicit attachments, clear them to the specified clear color if their load operation is
@@ -223,7 +203,7 @@ Ref<CommandBuffer> CommandBuffer::Create(CommandEncoder* encoder,
     return AcquireRef(new CommandBuffer(encoder, descriptor));
 }
 
-MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* commandContext) {
+MaybeError CommandBuffer::Execute(ScopedSwapStateCommandRecordingContext* commandContext) {
     auto LazyClearSyncScope = [&commandContext](const SyncScopeResourceUsage& scope) -> MaybeError {
         for (size_t i = 0; i < scope.textures.size(); i++) {
             Texture* texture = ToBackend(scope.textures[i]);
@@ -261,7 +241,7 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 mCommands.NextCommand<BeginComputePassCmd>();
                 for (TextureBase* texture :
                      GetResourceUsages().computePasses[nextComputePassNumber].referencedTextures) {
-                    DAWN_TRY(SynchronizeTextureBeforeUse(ToBackend(texture), commandContext));
+                    DAWN_TRY(ToBackend(texture)->SynchronizeTextureBeforeUse(commandContext));
                 }
                 for (const SyncScopeResourceUsage& scope :
                      GetResourceUsages().computePasses[nextComputePassNumber].dispatchUsages) {
@@ -277,14 +257,14 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 auto* cmd = mCommands.NextCommand<BeginRenderPassCmd>();
                 for (TextureBase* texture :
                      GetResourceUsages().renderPasses[nextRenderPassNumber].textures) {
-                    DAWN_TRY(SynchronizeTextureBeforeUse(ToBackend(texture), commandContext));
+                    DAWN_TRY(ToBackend(texture)->SynchronizeTextureBeforeUse(commandContext));
                 }
                 for (ExternalTextureBase* externalTexture :
                      GetResourceUsages().renderPasses[nextRenderPassNumber].externalTextures) {
                     for (auto& view : externalTexture->GetTextureViews()) {
                         if (view.Get()) {
-                            DAWN_TRY(SynchronizeTextureBeforeUse(ToBackend(view->GetTexture()),
-                                                                 commandContext));
+                            DAWN_TRY(ToBackend(view->GetTexture())
+                                         ->SynchronizeTextureBeforeUse(commandContext));
                         }
                     }
                 }
@@ -355,7 +335,7 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
                 Texture* texture = ToBackend(dst.texture.Get());
-                DAWN_TRY(SynchronizeTextureBeforeUse(texture, commandContext));
+                DAWN_TRY(texture->SynchronizeTextureBeforeUse(commandContext));
                 SubresourceRange subresources = GetSubresourcesAffectedByCopy(dst, copy->copySize);
 
                 DAWN_ASSERT(scopedMap.GetMappedData());
@@ -380,7 +360,7 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
 
                 SubresourceRange subresources = GetSubresourcesAffectedByCopy(src, copy->copySize);
                 Texture* texture = ToBackend(src.texture.Get());
-                DAWN_TRY(SynchronizeTextureBeforeUse(texture, commandContext));
+                DAWN_TRY(texture->SynchronizeTextureBeforeUse(commandContext));
                 DAWN_TRY(
                     texture->EnsureSubresourceContentInitialized(commandContext, subresources));
 
@@ -413,10 +393,10 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                     continue;
                 }
 
-                DAWN_TRY(SynchronizeTextureBeforeUse(ToBackend(copy->source.texture.Get()),
-                                                     commandContext));
-                DAWN_TRY(SynchronizeTextureBeforeUse(ToBackend(copy->destination.texture.Get()),
-                                                     commandContext));
+                DAWN_TRY(ToBackend(copy->source.texture.Get())
+                             ->SynchronizeTextureBeforeUse(commandContext));
+                DAWN_TRY(ToBackend(copy->source.texture.Get())
+                             ->SynchronizeTextureBeforeUse(commandContext));
                 DAWN_TRY(Texture::Copy(commandContext, copy));
                 break;
             }

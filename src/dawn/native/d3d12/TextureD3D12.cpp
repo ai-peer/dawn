@@ -194,12 +194,14 @@ ResultOrError<Ref<Texture>> Texture::CreateExternalImage(
     Device* device,
     const UnpackedPtr<TextureDescriptor>& descriptor,
     ComPtr<IUnknown> d3dTexture,
+    Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
     std::vector<Ref<d3d::Fence>> waitFences,
     bool isSwapChainTexture,
     bool isInitialized) {
     Ref<Texture> dawnTexture = AcquireRef(new Texture(device, descriptor));
-    DAWN_TRY(dawnTexture->InitializeAsExternalTexture(std::move(d3dTexture), std::move(waitFences),
-                                                      isSwapChainTexture));
+    DAWN_TRY(dawnTexture->InitializeAsExternalTexture(std::move(d3dTexture),
+                                                      std::move(keyedMutexHelper),
+                                                      std::move(waitFences), isSwapChainTexture));
 
     // Importing a multi-planar format must be initialized. This is required because
     // a shared multi-planar format cannot be initialized by Dawn.
@@ -228,12 +230,13 @@ ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
     const UnpackedPtr<TextureDescriptor>& descriptor) {
     Device* device = ToBackend(memory->GetDevice());
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
-    DAWN_TRY(texture->InitializeAsExternalTexture(memory->GetD3DResource(), {}, false));
+    DAWN_TRY(texture->InitializeAsExternalTexture(memory->GetD3DResource(), nullptr, {}, false));
     texture->mSharedTextureMemoryContents = memory->GetContents();
     return texture;
 }
 
 MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
+                                                Ref<d3d::KeyedMutexHelper> keyedMutexHelper,
                                                 std::vector<Ref<d3d::Fence>> waitFences,
                                                 bool isSwapChainTexture) {
     ComPtr<ID3D12Resource> d3d12Texture;
@@ -250,6 +253,7 @@ MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
     // memory management.
     mResourceAllocation = {info, 0, std::move(d3d12Texture), nullptr};
 
+    mKeyedMutexHelper = std::move(keyedMutexHelper);
     mWaitFences = std::move(waitFences);
     mSwapChainTexture = isSwapChainTexture;
 
@@ -422,6 +426,12 @@ DXGI_FORMAT Texture::GetD3D12CopyableSubresourceFormat(Aspect aspect) const {
 MaybeError Texture::SynchronizeImportedTextureBeforeUse() {
     // Perform the wait only on the first call.
     Device* device = ToBackend(GetDevice());
+
+    if (mKeyedMutexHelper != nullptr) {
+        DAWN_ASSERT(!mKeyedMutexGuard.has_value());
+        DAWN_TRY_ASSIGN(mKeyedMutexGuard, mKeyedMutexHelper->AcquireKeyedMutex());
+    }
+
     ID3D12CommandQueue* commandQueue = ToBackend(device->GetQueue())->GetCommandQueue();
 
     for (Ref<d3d::Fence>& fence : mWaitFences) {
@@ -464,6 +474,7 @@ MaybeError Texture::SynchronizeImportedTextureAfterUse() {
             d3dSharingContract->Present(mResourceAllocation.GetD3D12Resource(), 0, 0);
         }
     }
+    mKeyedMutexGuard.reset();
     // NextSerial() will be called after this - this is also checked in EndAccess().
     mSignalFenceValue = queue->GetPendingCommandSerial();
     return {};

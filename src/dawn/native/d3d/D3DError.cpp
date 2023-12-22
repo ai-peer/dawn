@@ -41,6 +41,8 @@ const char* HRESULTAsString(HRESULT result) {
             return "S_OK";
         case S_FALSE:
             return "S_FALSE";
+        case WAIT_TIMEOUT:
+            return "WAIT_TIMEOUT";
 
         // Generic errors:
         case E_FAIL:
@@ -96,7 +98,8 @@ const char* HRESULTAsString(HRESULT result) {
 }
 
 MaybeError CheckHRESULTImpl(HRESULT result, const char* context) {
-    if (DAWN_LIKELY(SUCCEEDED(result))) {
+    // Explicitly check for S_OK instead of SUCCEEDED() to catch "success" codes like WAIT_TIMEOUT.
+    if (DAWN_LIKELY(result == S_OK)) {
         return {};
     }
 

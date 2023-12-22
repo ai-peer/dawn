@@ -56,6 +56,8 @@ ScopedCommandRecordingContext::~ScopedCommandRecordingContext() {
     DAWN_ASSERT(mCommandContext->mScopedAccessed);
     mCommandContext->mScopedAccessed = false;
 
+    mKeyedMutexGuards.clear();
+
     if (mD3D11Multithread) {
         mD3D11Multithread->Leave();
     }
@@ -142,6 +144,10 @@ MaybeError ScopedCommandRecordingContext::FlushUniformBuffer() const {
         mCommandContext->mUniformBufferDirty = false;
     }
     return {};
+}
+
+void ScopedCommandRecordingContext::AddKeyedMutexGuard(d3d::KeyedMutexGuard&& keyedMutexGuard) {
+    mKeyedMutexGuards.emplace_back(std::move(keyedMutexGuard));
 }
 
 ScopedSwapStateCommandRecordingContext::ScopedSwapStateCommandRecordingContext(
