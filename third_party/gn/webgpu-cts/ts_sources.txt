@@ -348,8 +348,9 @@ src/webgpu/compat/api/validation/render_pipeline/shader_module.spec.ts
 src/webgpu/compat/api/validation/render_pipeline/vertex_state.spec.ts
 src/webgpu/compat/api/validation/texture/createTexture.spec.ts
 src/webgpu/compat/api/validation/texture/cubeArray.spec.ts
-src/webgpu/idl/exposed.html.ts
 src/webgpu/idl/idl_test.ts
+src/webgpu/idl/constructable.spec.ts
+src/webgpu/idl/exposed.html.ts
 src/webgpu/idl/constants/flags.spec.ts
 src/webgpu/shader/types.ts
 src/webgpu/shader/values.ts
