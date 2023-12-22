@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "523006a5_80004745",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-22T03:17:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1ddb7ecb_f7544af0",
+      "revId": "94e32607a0674b2c9b308a685adb09f5523b5b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cae3cb89_73db68c7",
@@ -65,6 +83,24 @@
       "writtenOn": "2023-12-21T12:32:03Z",
       "side": 1,
       "message": "```suggestion\n                    \"depthSlice (%u) for a 3D attachment (%s) is undefined.\"\n```",
+      "revId": "94e32607a0674b2c9b308a685adb09f5523b5b8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d2b51176_4f50c124",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 364,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2023-12-22T03:17:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cae3cb89_73db68c7",
       "revId": "94e32607a0674b2c9b308a685adb09f5523b5b8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
