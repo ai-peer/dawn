@@ -87,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1da0b08f_3e5ebc1d",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3305,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-23T04:20:40Z",
+      "side": 1,
+      "message": "Of course, my mistake!  :-)",
+      "parentUuid": "4cb778e2_4f1fe572",
+      "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "071c1c79_7744f227",
@@ -118,6 +136,24 @@
       "side": 1,
       "message": "Here we are doing the constant value evaluation on CPU, so it seems we don\u0027t need to use such vectorized expressions here?",
       "parentUuid": "071c1c79_7744f227",
+      "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "84dba6ee_3221bc25",
+        "filename": "src/tint/lang/core/constant/eval.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3318,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2023-12-23T04:20:40Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "f7f0f4a0_b20155f8",
       "revId": "559a5ca3bfbab76b2af5ea5e52e1f894422665b1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
