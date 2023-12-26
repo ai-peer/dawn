@@ -591,19 +591,20 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
 
     // If the mD3d11NonConstantBuffer is null, we have to create a staging buffer for transfer the
     // data to mD3d11ConstantBuffer.
-    BufferDescriptor descriptor;
-    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-    descriptor.size = Align(size, D3D11BufferSizeAlignment(descriptor.usage));
-    descriptor.mappedAtCreation = false;
-    descriptor.label = "DawnWriteStagingBuffer";
-    Ref<BufferBase> stagingBuffer;
-    DAWN_TRY_ASSIGN(stagingBuffer,
-                    Buffer::Create(ToBackend(GetDevice()), Unpack(&descriptor), commandContext));
-
-    DAWN_TRY(ToBackend(stagingBuffer)->WriteInternal(commandContext, 0, data, size));
-
-    return Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()), /*sourceOffset=*/0,
-                                /*size=*/size, this, offset);
+    UploadHandle uploadHandle;
+    const size_t alignment =
+        D3D11BufferSizeAlignment(wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc);
+    DAWN_TRY_ASSIGN(uploadHandle, GetDevice()->GetDynamicUploader()->Allocate(
+                                      size, GetDevice()->GetPendingCommandSerial(), alignment));
+    DAWN_ASSERT(uploadHandle.mappedBuffer != nullptr);
+    memcpy(uploadHandle.mappedBuffer, data, size);
+    // D3D11 buffers have to be unmapped before being submitted to GPU.
+    ToBackend(uploadHandle.stagingBuffer)->UnmapInternal(commandContext);
+    DAWN_TRY(Buffer::CopyInternal(commandContext, ToBackend(uploadHandle.stagingBuffer),
+                                  /*sourceOffset=*/uploadHandle.startOffset,
+                                  /*size=*/size, this, offset));
+    // Re-map the buffer as DynamicUploader expects.
+    return ToBackend(uploadHandle.stagingBuffer)->MapInternal(commandContext);
 }
 
 // static
