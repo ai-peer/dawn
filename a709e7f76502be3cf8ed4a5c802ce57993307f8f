@@ -50,6 +50,23 @@
       "message": "🟦 note: test now passes",
       "revId": "a709e7f76502be3cf8ed4a5c802ce57993307f8f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16415ce1_af5a4e57",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 235,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-26T09:48:24Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "a709e7f76502be3cf8ed4a5c802ce57993307f8f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
