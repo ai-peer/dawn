@@ -720,7 +720,6 @@ const ToggleInfo* TogglesInfo::GetToggleInfo(const char* toggleName) {
     DAWN_ASSERT(toggleName);
 
     EnsureToggleNameToEnumMapInitialized();
-
     const auto& iter = mToggleNameToEnumMap.find(toggleName);
     if (iter != mToggleNameToEnumMap.cend()) {
         return &kToggleNameAndInfoList[static_cast<size_t>(iter->second)].info;

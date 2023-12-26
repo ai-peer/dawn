@@ -30,7 +30,6 @@
 
 #include <memory>
 #include <string>
-#include <unordered_set>
 #include <utility>
 #include <vector>
 
@@ -53,6 +52,8 @@
 
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/dawn_platform.h"
+
+#include "absl/container/flat_hash_set.h"
 
 namespace dawn::platform {
 class WorkerTaskPool;
@@ -592,7 +593,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     struct DeprecationWarnings;
     std::unique_ptr<DeprecationWarnings> mDeprecationWarnings;
 
-    std::unordered_set<std::string> mWarnings;
+    absl::flat_hash_set<std::string> mWarnings;
 
     State mState = State::BeingCreated;
 
