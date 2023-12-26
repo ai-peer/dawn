@@ -101,6 +101,13 @@ class Device final : public d3d::Device {
         uint32_t height,
         uint32_t implicitAttachmentIndex);
 
+    // Grab a stagging buffer, the size of which is no less than 'size'.
+    // Note: We assume only 1 stagging buffer is active, so the client should release it as soon as
+    // possbile once the buffer usage is done.
+    ResultOrError<Ref<BufferBase>> GetStaggingBuffer(
+        const ScopedCommandRecordingContext* commandContext,
+        uint64_t size);
+
   private:
     using Base = d3d::Device;
     using Base::Base;
@@ -157,6 +164,9 @@ class Device final : public d3d::Device {
 
     // TODO(dawn:1704): decide when to clear the cached implicit pixel local storage attachments.
     std::array<Ref<TextureViewBase>, kMaxPLSSlots> mImplicitPixelLocalStorageAttachmentTextureViews;
+
+    // The cached stagging buffer.
+    Ref<BufferBase> mStaggingBuffer;
 };
 
 }  // namespace dawn::native::d3d11
