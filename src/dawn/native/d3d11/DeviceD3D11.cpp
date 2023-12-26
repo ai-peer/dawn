@@ -138,6 +138,7 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
     DAWN_TRY(queue->InitializePendingContext());
 
     SetLabelImpl();
+    mInitialized = true;
 
     return {};
 }

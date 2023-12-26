@@ -50,6 +50,7 @@ class Device final : public d3d::Device {
     ~Device() override;
 
     MaybeError Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor);
+    bool Initialized() const { return mInitialized; }
 
     ID3D11Device* GetD3D11Device() const;
     ID3D11Device5* GetD3D11Device5() const;
@@ -157,6 +158,8 @@ class Device final : public d3d::Device {
 
     // TODO(dawn:1704): decide when to clear the cached implicit pixel local storage attachments.
     std::array<Ref<TextureViewBase>, kMaxPLSSlots> mImplicitPixelLocalStorageAttachmentTextureViews;
+
+    bool mInitialized = false;
 };
 
 }  // namespace dawn::native::d3d11
