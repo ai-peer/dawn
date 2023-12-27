@@ -435,7 +435,7 @@ bool InstanceBase::ConsumedErrorAndWarnOnce(MaybeError maybeErr) {
         return false;
     }
     std::string message = maybeErr.AcquireError()->GetFormattedMessage();
-    if (warningMessages.insert(message).second) {
+    if (mWarningMessages.insert(message).second) {
         dawn::WarningLog() << message;
     }
     return true;
@@ -643,7 +643,7 @@ void InstanceBase::GatherWGSLFeatures(const DawnWGSLBlocklist* wgslBlocklist) {
 }
 
 bool InstanceBase::APIHasWGSLLanguageFeature(wgpu::WGSLFeatureName feature) const {
-    return mWGSLFeatures.count(feature) != 0;
+    return mWGSLFeatures.contains(feature);
 }
 
 size_t InstanceBase::APIEnumerateWGSLLanguageFeatures(wgpu::WGSLFeatureName* features) const {
