@@ -122,7 +122,7 @@ elseif(APPLE)
     )
 endif()
 
-target_link_libraries(dawn_common PUBLIC dawncpp_headers PRIVATE dawn_internal_config)
+target_link_libraries(dawn_common PUBLIC dawncpp_headers PRIVATE dawn_internal_config absl_flat_hash_set)
 
 # TODO Android Log support
 # TODO Vulkan headers support

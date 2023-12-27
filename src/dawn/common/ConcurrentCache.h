@@ -29,9 +29,9 @@
 #define SRC_DAWN_COMMON_CONCURRENTCACHE_H_
 
 #include <mutex>
-#include <unordered_set>
 #include <utility>
 
+#include "absl/container/flat_hash_set.h"
 #include "dawn/common/NonCopyable.h"
 
 namespace dawn {
@@ -63,7 +63,7 @@ class ConcurrentCache : public NonMovable {
 
   private:
     std::mutex mMutex;
-    std::unordered_set<T*, typename T::HashFunc, typename T::EqualityFunc> mCache;
+    absl::flat_hash_set<T*, typename T::HashFunc, typename T::EqualityFunc> mCache;
 };
 
 }  // namespace dawn
