@@ -122,7 +122,7 @@ auto GetOrCreate(ContentLessObjectCache<RefCountedT>& cache,
 }
 
 struct DeviceBase::DeprecationWarnings {
-    std::unordered_set<std::string> emitted;
+    absl::flat_hash_set<std::string> emitted;
     size_t count = 0;
 };
 
