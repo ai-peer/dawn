@@ -265,14 +265,34 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
         0, 1, 0,  //
     };
 
+    // Calculate scale factors and offsets from the specified visibleSize.
+    DAWN_ASSERT(descriptor->visibleSize.width > 0);
+    DAWN_ASSERT(descriptor->visibleSize.height > 0);
+    uint32_t frameWidth = descriptor->plane0->GetSingleSubresourceVirtualSize().width;
+    uint32_t frameHeight = descriptor->plane0->GetSingleSubresourceVirtualSize().height;
+
+    const bool hasFlippedSize =
+        descriptor->rotation == wgpu::ExternalTextureRotation::Rotate90Degrees ||
+        descriptor->rotation == wgpu::ExternalTextureRotation::Rotate270Degrees;
+
+    uint32_t rotatedFrameWidth = hasFlippedSize ? frameHeight : frameWidth;
+    uint32_t rotatedFrameHeight = hasFlippedSize ? frameWidth : frameHeight;
+
+    float rotatedXScale =
+        static_cast<float>(descriptor->visibleSize.width) / static_cast<float>(rotatedFrameWidth);
+    float rotatedYScale =
+        static_cast<float>(descriptor->visibleSize.height) / static_cast<float>(rotatedFrameHeight);
+    float xOffset =
+        static_cast<float>(descriptor->visibleOrigin.x) / static_cast<float>(rotatedFrameWidth);
+    float yOffset =
+        static_cast<float>(descriptor->visibleOrigin.y) / static_cast<float>(rotatedFrameHeight);
+
+    float rotatedXOffset = xOffset;
+    float rotatedYOffset = yOffset;
+
     // Offset the coordinates so the center texel is at the origin, so we can apply rotations and
     // y-flips. After translation, coordinates range from [-0.5 .. +0.5] in both U and V.
     coordTransformMatrix = Translate(coordTransformMatrix, -0.5, -0.5);
-
-    // If the texture needs flipping, mirror in Y.
-    if (descriptor->flipY) {
-        coordTransformMatrix = Scale(coordTransformMatrix, 1, -1);
-    }
 
     // Apply rotations as needed.
     switch (descriptor->rotation) {
@@ -282,40 +302,38 @@ MaybeError ExternalTextureBase::Initialize(DeviceBase* device,
             coordTransformMatrix = Mul(mat2x3{0, -1, 0,   // x' = -y
                                               +1, 0, 0},  // y' = x
                                        coordTransformMatrix);
+            rotatedXOffset = -yOffset;
+            rotatedYOffset = xOffset;
             break;
         case wgpu::ExternalTextureRotation::Rotate180Degrees:
             coordTransformMatrix = Mul(mat2x3{-1, 0, 0,   // x' = -x
                                               0, -1, 0},  // y' = -y
                                        coordTransformMatrix);
+            rotatedXOffset = -xOffset;
+            rotatedYOffset = -yOffset;
             break;
         case wgpu::ExternalTextureRotation::Rotate270Degrees:
             coordTransformMatrix = Mul(mat2x3{0, +1, 0,   // x' = y
                                               -1, 0, 0},  // y' = -x
                                        coordTransformMatrix);
+            rotatedXOffset = yOffset;
+            rotatedYOffset = -xOffset;
             break;
+    }
+
+    // If the texture needs flipping, mirror in Y.
+    if (descriptor->flipY) {
+        coordTransformMatrix = Scale(coordTransformMatrix, 1, -1);
+        rotatedYOffset = 1 - rotatedYOffset;
     }
 
     // Offset the coordinates so the bottom-left texel is at origin.
     // After translation, coordinates range from [0 .. 1] in both U and V.
     coordTransformMatrix = Translate(coordTransformMatrix, 0.5, 0.5);
 
-    // Calculate scale factors and offsets from the specified visibleSize.
-    DAWN_ASSERT(descriptor->visibleSize.width > 0);
-    DAWN_ASSERT(descriptor->visibleSize.height > 0);
-    uint32_t frameWidth = descriptor->plane0->GetSingleSubresourceVirtualSize().width;
-    uint32_t frameHeight = descriptor->plane0->GetSingleSubresourceVirtualSize().height;
-    float xScale =
-        static_cast<float>(descriptor->visibleSize.width) / static_cast<float>(frameWidth);
-    float yScale =
-        static_cast<float>(descriptor->visibleSize.height) / static_cast<float>(frameHeight);
-    float xOffset =
-        static_cast<float>(descriptor->visibleOrigin.x) / static_cast<float>(frameWidth);
-    float yOffset =
-        static_cast<float>(descriptor->visibleOrigin.y) / static_cast<float>(frameHeight);
-
     // Finally, scale and translate based on the visible rect. This applies cropping.
-    coordTransformMatrix = Scale(coordTransformMatrix, xScale, yScale);
-    coordTransformMatrix = Translate(coordTransformMatrix, xOffset, yOffset);
+    coordTransformMatrix = Scale(coordTransformMatrix, rotatedXScale, rotatedYScale);
+    coordTransformMatrix = Translate(coordTransformMatrix, rotatedXOffset, rotatedYOffset);
 
     // Transpose the mat2x3 into column vectors for use by WGSL.
     params.coordTransformMatrix[0] = coordTransformMatrix[0];
