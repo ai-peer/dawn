@@ -16,6 +16,23 @@
       "message": "🟦 note: test now passes",
       "revId": "c0b509d4c9296d3425bc1693ccad9079ad0182b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7d078423_ad3e78bb",
+        "filename": "webgpu-cts/compat-expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2023-12-30T09:05:18Z",
+      "side": 0,
+      "message": "🟦 note: test now passes",
+      "revId": "c0b509d4c9296d3425bc1693ccad9079ad0182b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
