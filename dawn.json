@@ -3171,7 +3171,6 @@
             {
                 "name": "get preferred format",
                 "returns": "texture format",
-                "tags": ["upstream", "emscripten"],
                 "args": [
                     {"name": "adapter", "type": "adapter"}
                 ]
