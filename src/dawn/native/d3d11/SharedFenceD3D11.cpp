@@ -44,18 +44,28 @@ ResultOrError<Ref<SharedFence>> SharedFence::Create(
     SystemHandle ownedHandle;
     DAWN_TRY_ASSIGN(ownedHandle, SystemHandle::Duplicate(descriptor->handle));
 
-    Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, std::move(ownedHandle)));
-    DAWN_TRY(CheckHRESULT(device->GetD3D11Device5()->OpenSharedFence(descriptor->handle,
-                                                                     IID_PPV_ARGS(&fence->mFence)),
-                          "D3D11 fence open shared handle"));
-    return fence;
+    return AcquireRef(new SharedFence(device, label, std::move(ownedHandle)));
+}
+
+// static
+ResultOrError<Ref<SharedFence>> SharedFence::Wrap(Device* device,
+                                                  const char* label,
+                                                  HANDLE unownedHandle) {
+    DAWN_INVALID_IF(unownedHandle == nullptr, "shared HANDLE is missing.");
+    return AcquireRef(new SharedFence(device, label, unownedHandle));
 }
 
 void SharedFence::DestroyImpl() {
     mFence = nullptr;
 }
 
-ID3D11Fence* SharedFence::GetD3DFence() const {
+ResultOrError<ID3D11Fence*> SharedFence::GetD3DFence() {
+    if (mFence == nullptr) {
+        DAWN_TRY(CheckHRESULT(ToBackend(GetDevice())
+                                  ->GetD3D11Device5()
+                                  ->OpenSharedFence(mHandle, IID_PPV_ARGS(&mFence)),
+                              "D3D11 fence open shared handle"));
+    }
     return mFence.Get();
 }
 

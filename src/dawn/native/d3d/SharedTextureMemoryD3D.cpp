@@ -86,11 +86,8 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
         mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
     }
 
-    SharedFenceDXGISharedHandleDescriptor desc;
-    desc.handle = ToBackend(GetDevice())->GetFenceHandle();
-
     Ref<SharedFenceBase> fence;
-    DAWN_TRY_ASSIGN(fence, CreateFenceImpl(&desc));
+    DAWN_TRY_ASSIGN(fence, CreateFenceImpl(ToBackend(GetDevice())->GetFenceHandle()));
 
     return FenceAndSignalValue{
         std::move(fence),

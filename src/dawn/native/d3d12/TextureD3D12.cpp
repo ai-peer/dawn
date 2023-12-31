@@ -441,11 +441,12 @@ MaybeError Texture::SynchronizeImportedTextureBeforeUse() {
     }
 
     for (const auto& fence : fences) {
-        DAWN_TRY(CheckHRESULT(
-            commandQueue->Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
-            "D3D12 fence wait"));
+        ID3D12Fence* d3d12Fence = nullptr;
+        DAWN_TRY_ASSIGN(d3d12Fence, ToBackend(fence.object)->GetD3DFence());
+        DAWN_TRY(
+            CheckHRESULT(commandQueue->Wait(d3d12Fence, fence.signaledValue), "D3D12 fence wait"));
         // Keep D3D12 fence alive until commands complete.
-        device->ReferenceUntilUnused(ToBackend(fence.object)->GetD3DFence());
+        device->ReferenceUntilUnused(d3d12Fence);
     }
     return {};
 }

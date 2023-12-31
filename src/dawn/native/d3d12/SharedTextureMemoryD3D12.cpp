@@ -119,9 +119,8 @@ ResultOrError<Ref<TextureBase>> SharedTextureMemory::CreateTextureImpl(
     return Texture::CreateFromSharedTextureMemory(this, descriptor);
 }
 
-ResultOrError<Ref<SharedFenceBase>> SharedTextureMemory::CreateFenceImpl(
-    const SharedFenceDXGISharedHandleDescriptor* desc) {
-    return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", desc);
+ResultOrError<Ref<SharedFenceBase>> SharedTextureMemory::CreateFenceImpl(HANDLE handle) {
+    return SharedFence::Wrap(ToBackend(GetDevice()), "Internal shared DXGI fence", handle);
 }
 
 MaybeError SharedTextureMemory::BeginAccessImpl(
