@@ -62,8 +62,7 @@ class SharedTextureMemory final : public d3d::SharedTextureMemory {
     ResultOrError<Ref<TextureBase>> CreateTextureImpl(
         const UnpackedPtr<TextureDescriptor>& descriptor) override;
 
-    ResultOrError<Ref<SharedFenceBase>> CreateFenceImpl(
-        const SharedFenceDXGISharedHandleDescriptor* desc) override;
+    ResultOrError<Ref<SharedFenceBase>> CreateFenceImpl(HANDLE handle) override;
 
     ComPtr<ID3D11Resource> mResource;
 };

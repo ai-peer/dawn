@@ -35,7 +35,12 @@
 namespace dawn::native::d3d {
 
 SharedFence::SharedFence(Device* device, const char* label, SystemHandle ownedHandle)
-    : SharedFenceBase(device, label), mHandle(std::move(ownedHandle)) {}
+    : SharedFenceBase(device, label),
+      mOwnedHandle(std::move(ownedHandle)),
+      mHandle(mOwnedHandle.Get()) {}
+
+SharedFence::SharedFence(Device* device, const char* label, HANDLE unownedHandle)
+    : SharedFenceBase(device, label), mHandle(unownedHandle) {}
 
 MaybeError SharedFence::ExportInfoImpl(UnpackedPtr<SharedFenceExportInfo>& info) const {
     info->type = wgpu::SharedFenceType::DXGISharedHandle;
@@ -43,7 +48,7 @@ MaybeError SharedFence::ExportInfoImpl(UnpackedPtr<SharedFenceExportInfo>& info)
     DAWN_TRY(info.ValidateSubset<SharedFenceDXGISharedHandleExportInfo>());
     auto* exportInfo = info.Get<SharedFenceDXGISharedHandleExportInfo>();
     if (exportInfo != nullptr) {
-        exportInfo->handle = mHandle.Get();
+        exportInfo->handle = mHandle;
     }
     return {};
 }

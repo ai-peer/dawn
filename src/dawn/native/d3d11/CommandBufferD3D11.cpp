@@ -122,9 +122,11 @@ MaybeError SynchronizeTextureBeforeUse(
     contents->SetLastUsageSerial(texture->GetDevice()->GetPendingCommandSerial());
 
     for (auto& fence : fences) {
-        DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Wait(
-                                  ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
-                              "ID3D11DeviceContext4::Wait"));
+        ID3D11Fence* d3d11Fence = nullptr;
+        DAWN_TRY_ASSIGN(d3d11Fence, ToBackend(fence.object)->GetD3DFence());
+        DAWN_TRY(CheckHRESULT(
+            commandContext->GetD3D11DeviceContext4()->Wait(d3d11Fence, fence.signaledValue),
+            "ID3D11DeviceContext4::Wait"));
     }
     return {};
 }
