@@ -370,6 +370,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     bool IsValidationEnabled() const;
     bool IsRobustnessEnabled() const;
     bool IsCompatibilityMode() const;
+    bool IsImmediateErrorHandlingEnabled() const;
 
     size_t GetLazyClearCountForTesting();
     void IncrementLazyClearCountForTesting();
@@ -615,6 +616,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
     CacheKey mDeviceCacheKey;
+
+    // We cache this toggle so that we can check it without locking the device.
+    bool mIsImmediateErrorHandlingEnabled = false;
 
     // This pointer is non-null if Feature::ImplicitDeviceSynchronization is turned on.
     Ref<Mutex> mMutex = nullptr;
