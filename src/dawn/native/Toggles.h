@@ -121,6 +121,7 @@ enum class Toggle {
     D3D12DontUseNotZeroedHeapFlagOnTexturesAsCommitedResources,
     UseTintIR,
     D3DDisableIEEEStrictness,
+    EnableImmediateErrorHandling,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
