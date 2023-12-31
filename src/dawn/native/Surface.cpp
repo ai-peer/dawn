@@ -348,4 +348,9 @@ uint32_t Surface::GetXWindow() const {
     return mXWindow;
 }
 
+wgpu::TextureFormat Surface::APIGetPreferredFormat(AdapterBase* adapter) const {
+    // This is the only supported format in native mode.
+    return wgpu::TextureFormat::BGRA8Unorm;
+}
+
 }  // namespace dawn::native

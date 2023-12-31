@@ -227,6 +227,7 @@
             "QueueOnSubmittedWorkDoneF",
             "QueueWriteBuffer",
             "QueueWriteTexture",
+            "SurfaceGetPreferredFormat",
             "TextureGetWidth",
             "TextureGetHeight",
             "TextureGetDepthOrArrayLayers",
