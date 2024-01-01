@@ -41,6 +41,7 @@
 #include "dawn/native/Features.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/Limits.h"
+#include "dawn/native/CachedSurfaceCapabilities.h"
 #include "dawn/native/Toggles.h"
 #include "dawn/native/dawn_platform.h"
 
@@ -111,6 +112,8 @@ class PhysicalDeviceBase : public RefCounted {
     // `memoryHeapProperties` are owned by the caller.
     virtual void PopulateMemoryHeapInfo(
         AdapterPropertiesMemoryHeaps* memoryHeapProperties) const = 0;
+
+    virtual ResultOrError<CachedSurfaceCapabilities> GetSurfaceCapabilities(const Surface* surface) const = 0;
 
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;

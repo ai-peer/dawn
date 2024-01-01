@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,37 +25,24 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
-#define SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
+#include "dawn/wire/client/Surface.h"
 
-#include "dawn/native/PhysicalDevice.h"
+#include "dawn/common/Platform.h"
 
-#include "dawn/native/d3d/d3d_platform.h"
+namespace dawn::wire::client {
 
-namespace dawn::native::d3d {
+Surface::Surface(const ObjectBaseParams& params)
+    : ObjectBase(params) {}
 
-class Backend;
+Surface::~Surface() = default;
 
-class PhysicalDevice : public PhysicalDeviceBase {
-  public:
-    PhysicalDevice(Backend* backend,
-                   ComPtr<IDXGIAdapter3> hardwareAdapter,
-                   wgpu::BackendType backendType);
-    ~PhysicalDevice() override;
+WGPUTextureFormat Surface::GetPreferredFormat([[maybe_unused]] WGPUAdapter adapter) const {
+    // This is the only supported format in native mode (see crbug.com/dawn/160).
+#if DAWN_PLATFORM_IS(ANDROID)
+    return WGPUTextureFormat_RGBA8Unorm;
+#else
+    return WGPUTextureFormat_BGRA8Unorm;
+#endif  // !DAWN_PLATFORM_IS(ANDROID)
+}
 
-    IDXGIAdapter3* GetHardwareAdapter() const;
-    Backend* GetBackend() const;
-
-    ResultOrError<CachedSurfaceCapabilities> GetSurfaceCapabilities(const Surface* surface) const override;
-
-  protected:
-    MaybeError InitializeImpl() override;
-
-  private:
-    ComPtr<IDXGIAdapter3> mHardwareAdapter;
-    Backend* mBackend;
-};
-
-}  // namespace dawn::native::d3d
-
-#endif  // SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
+}  // namespace dawn::wire::client
