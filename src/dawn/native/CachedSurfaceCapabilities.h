@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2020 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,37 +25,21 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
-#define SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
+#ifndef SRC_DAWN_NATIVE_SURFACE_CAPABILITIES_H_
+#define SRC_DAWN_NATIVE_SURFACE_CAPABILITIES_H_
 
-#include "dawn/native/PhysicalDevice.h"
+#include "dawn/webgpu_cpp.h"
+#include <vector>
 
-#include "dawn/native/d3d/d3d_platform.h"
+namespace dawn::native {
 
-namespace dawn::native::d3d {
-
-class Backend;
-
-class PhysicalDevice : public PhysicalDeviceBase {
-  public:
-    PhysicalDevice(Backend* backend,
-                   ComPtr<IDXGIAdapter3> hardwareAdapter,
-                   wgpu::BackendType backendType);
-    ~PhysicalDevice() override;
-
-    IDXGIAdapter3* GetHardwareAdapter() const;
-    Backend* GetBackend() const;
-
-    ResultOrError<CachedSurfaceCapabilities> GetSurfaceCapabilities(const Surface* surface) const override;
-
-  protected:
-    MaybeError InitializeImpl() override;
-
-  private:
-    ComPtr<IDXGIAdapter3> mHardwareAdapter;
-    Backend* mBackend;
+// Structure that holds cached surface capabilities, also returned by the physical device
+struct CachedSurfaceCapabilities {
+    std::vector<wgpu::TextureFormat> formats;
+    std::vector<wgpu::PresentMode> presentModes;
+    std::vector<wgpu::CompositeAlphaMode> alphaModes;
 };
 
-}  // namespace dawn::native::d3d
+}  // namespace dawn::native
 
-#endif  // SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
+#endif  // SRC_DAWN_NATIVE_SURFACE_CAPABILITIES_H_
