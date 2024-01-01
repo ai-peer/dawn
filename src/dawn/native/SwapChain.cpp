@@ -45,7 +45,7 @@ class ErrorSwapChain final : public SwapChainBase {
         : SwapChainBase(device, desc, ObjectBase::kError) {}
 
   private:
-    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() override { DAWN_UNREACHABLE(); }
+    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl(SwapChainTextureInfo*) override { DAWN_UNREACHABLE(); }
     MaybeError PresentImpl() override { DAWN_UNREACHABLE(); }
     void DetachFromSurfaceImpl() override { DAWN_UNREACHABLE(); }
 };
@@ -107,6 +107,8 @@ TextureDescriptor GetSwapChainBaseTextureDescriptor(SwapChainBase* swapChain) {
     desc.dimension = wgpu::TextureDimension::e2D;
     desc.size = {swapChain->GetWidth(), swapChain->GetHeight(), 1};
     desc.format = swapChain->GetFormat();
+    desc.viewFormatCount = swapChain->GetViewFormats().size();
+    desc.viewFormats = swapChain->GetViewFormats().data();
     desc.mipLevelCount = 1;
     desc.sampleCount = 1;
 
@@ -122,8 +124,10 @@ SwapChainBase::SwapChainBase(DeviceBase* device,
       mFormat(descriptor->format),
       mUsage(descriptor->usage),
       mPresentMode(descriptor->presentMode),
+      mAlphaMode(descriptor->alphaMode),
       mSurface(surface) {
     GetObjectTrackingList()->Track(this);
+    SetViewFormats(device, descriptor);
 }
 
 SwapChainBase::~SwapChainBase() {
@@ -142,7 +146,21 @@ SwapChainBase::SwapChainBase(DeviceBase* device,
       mHeight(descriptor->height),
       mFormat(descriptor->format),
       mUsage(descriptor->usage),
-      mPresentMode(descriptor->presentMode) {}
+      mPresentMode(descriptor->presentMode),
+      mAlphaMode(descriptor->alphaMode) {
+    SetViewFormats(device, descriptor);
+}
+
+void SwapChainBase::SetViewFormats(DeviceBase* device, const SwapChainDescriptor* descriptor) {
+    for (uint32_t i = 0; i < descriptor->viewFormatCount; ++i) {
+        if (descriptor->viewFormats[i] == descriptor->format) {
+            // Skip our own format, like texture creations does.
+            continue;
+        }
+        mViewFormatSet[device->GetValidInternalFormat(descriptor->viewFormats[i])] = true;
+        mViewFormats.push_back(descriptor->viewFormats[i]);
+    }
+}
 
 // static
 SwapChainBase* SwapChainBase::MakeError(DeviceBase* device, const SwapChainDescriptor* desc) {
@@ -177,7 +195,8 @@ void SwapChainBase::APIConfigure(wgpu::TextureFormat format,
 
 TextureBase* SwapChainBase::APIGetCurrentTexture() {
     Ref<TextureBase> result;
-    if (GetDevice()->ConsumedError(GetCurrentTexture(), &result, "calling %s.GetCurrentTexture()",
+    SwapChainTextureInfo info;
+    if (GetDevice()->ConsumedError(GetCurrentTexture(&info), &result, "calling %s.GetCurrentTexture()",
                                    this)) {
         TextureDescriptor desc = GetSwapChainBaseTextureDescriptor(this);
         TextureBase* errorTexture = TextureBase::MakeError(GetDevice(), &desc);
@@ -198,15 +217,16 @@ TextureViewBase* SwapChainBase::APIGetCurrentTextureView() {
     return result.Detach();
 }
 
-ResultOrError<Ref<TextureBase>> SwapChainBase::GetCurrentTexture() {
+ResultOrError<Ref<TextureBase>> SwapChainBase::GetCurrentTexture(SwapChainTextureInfo* info) {
     DAWN_TRY(ValidateGetCurrentTexture());
 
     if (mCurrentTexture != nullptr) {
         // Calling GetCurrentTexture always returns a new reference.
+        *info = mCurrentTextureInfo;
         return mCurrentTexture;
     }
 
-    DAWN_TRY_ASSIGN(mCurrentTexture, GetCurrentTextureImpl());
+    DAWN_TRY_ASSIGN(mCurrentTexture, GetCurrentTextureImpl(&mCurrentTextureInfo));
     SetChildLabel(mCurrentTexture.Get());
 
     // Check that the return texture matches exactly what was given for this descriptor.
@@ -217,13 +237,16 @@ ResultOrError<Ref<TextureBase>> SwapChainBase::GetCurrentTexture() {
     DAWN_ASSERT(mCurrentTexture->GetHeight(Aspect::Color) == mHeight);
     DAWN_ASSERT(mCurrentTexture->GetNumMipLevels() == 1);
     DAWN_ASSERT(mCurrentTexture->GetArrayLayers() == 1);
+    DAWN_ASSERT(mCurrentTexture->GetViewFormats() == mViewFormatSet);
 
+    *info = mCurrentTextureInfo;
     return mCurrentTexture;
 }
 
 ResultOrError<Ref<TextureViewBase>> SwapChainBase::GetCurrentTextureView() {
     Ref<TextureBase> currentTexture;
-    DAWN_TRY_ASSIGN(currentTexture, GetCurrentTexture());
+    SwapChainTextureInfo info;
+    DAWN_TRY_ASSIGN(currentTexture, GetCurrentTexture(&info));
     return currentTexture->CreateView();
 }
 
@@ -252,12 +275,20 @@ wgpu::TextureFormat SwapChainBase::GetFormat() const {
     return mFormat;
 }
 
+const std::vector<wgpu::TextureFormat>& SwapChainBase::GetViewFormats() const {
+    return mViewFormats;
+}
+
 wgpu::TextureUsage SwapChainBase::GetUsage() const {
     return mUsage;
 }
 
 wgpu::PresentMode SwapChainBase::GetPresentMode() const {
     return mPresentMode;
+}
+
+wgpu::CompositeAlphaMode SwapChainBase::GetAlphaMode() const {
+    return mAlphaMode;
 }
 
 Surface* SwapChainBase::GetSurface() const {

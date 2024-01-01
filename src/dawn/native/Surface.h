@@ -62,9 +62,6 @@ class Surface final : public ErrorMonad {
 
     Surface(InstanceBase* instance, const UnpackedPtr<SurfaceDescriptor>& descriptor);
 
-    void SetAttachedSwapChain(SwapChainBase* swapChain);
-    SwapChainBase* GetAttachedSwapChain();
-
     // These are valid to call on all Surfaces.
     enum class Type {
         AndroidWindow,
@@ -77,6 +74,7 @@ class Surface final : public ErrorMonad {
     };
     Type GetType() const;
     InstanceBase* GetInstance() const;
+    DeviceBase* GetDevice() const;
 
     // Valid to call if the type is MetalLayer
     void* GetMetalLayer() const;
@@ -102,14 +100,32 @@ class Surface final : public ErrorMonad {
     void* GetXDisplay() const;
     uint32_t GetXWindow() const;
 
+    MaybeError Configure(const SurfaceConfiguration* config);
+    MaybeError Unconfigure();
+
+    MaybeError GetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const;
+    MaybeError GetCurrentTexture(SurfaceTexture* surfaceTexture) const;
+    MaybeError Present();
+
+    // Dawn API
+    void APIConfigure(const SurfaceConfiguration* config);
+    void APIGetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const;
+    void APIGetCurrentTexture(SurfaceTexture* surfaceTexture) const;
+    wgpu::TextureFormat APIGetPreferredFormat(AdapterBase* adapter) const;
+    void APIPresent();
+    void APIUnconfigure();
+
   private:
     Surface(InstanceBase* instance, ErrorMonad::ErrorTag tag);
     ~Surface() override;
 
+    std::vector<wgpu::CompositeAlphaMode> GetSupportedAlphaModes() const;
+
     Ref<InstanceBase> mInstance;
+    Ref<DeviceBase> mDevice;
     Type mType;
 
-    // The swapchain will set this to null when it is destroyed.
+    // The swapchain is created when configuring the surface.
     Ref<SwapChainBase> mSwapChain;
 
     // MetalLayer

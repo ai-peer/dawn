@@ -72,6 +72,11 @@ MaybeError SwapChain::Initialize(SwapChainBase* previousSwapChain) {
 
     mLayer = static_cast<CAMetalLayer*>(GetSurface()->GetMetalLayer());
     DAWN_ASSERT(mLayer != nullptr);
+    if (GetAlphaMode() == wgpu::CompositeAlphaMode::Premultiplied) {
+        mLayer->isOpaque = false;
+    } else {
+        mLayer->isOpaque = true;
+    }
 
     CGSize size = {};
     size.width = GetWidth();
@@ -103,7 +108,7 @@ MaybeError SwapChain::PresentImpl() {
     return {};
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
+ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl(SwapChainTextureInfo* info) {
     @autoreleasepool {
         DAWN_ASSERT(mCurrentDrawable == nullptr);
         mCurrentDrawable = [*mLayer nextDrawable];
@@ -112,6 +117,8 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
 
         mTexture = Texture::CreateWrapping(ToBackend(GetDevice()), Unpack(&textureDesc),
                                            NSPRef<id<MTLTexture>>([*mCurrentDrawable texture]));
+        info->status = wgpu::SurfaceGetCurrentTextureStatus::Success;
+        info->suboptimal = false;
         return mTexture;
     }
 }

@@ -66,6 +66,8 @@ class AdapterBase : public RefCounted {
 
     FeaturesSet GetSupportedFeatures() const;
 
+    std::vector<wgpu::CompositeAlphaMode> GetSupportedAlphaModes(AdapterBase* adapter) const;
+
     // Return the underlying PhysicalDevice.
     PhysicalDeviceBase* GetPhysicalDevice();
 

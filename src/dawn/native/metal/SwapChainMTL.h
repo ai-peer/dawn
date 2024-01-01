@@ -62,7 +62,7 @@ class SwapChain final : public SwapChainBase {
     Ref<Texture> mTexture;
 
     MaybeError PresentImpl() override;
-    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() override;
+    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl(SwapChainTextureInfo* info) override;
     void DetachFromSurfaceImpl() override;
 };
 

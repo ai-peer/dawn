@@ -112,6 +112,8 @@ class PhysicalDeviceBase : public RefCounted {
     virtual void PopulateMemoryHeapInfo(
         AdapterPropertiesMemoryHeaps* memoryHeapProperties) const = 0;
 
+    virtual ResultOrError<std::vector<wgpu::CompositeAlphaMode>> GetSupportedAlphaModes(const Surface* surface) const = 0;
+
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
     std::string mVendorName;

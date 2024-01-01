@@ -304,6 +304,14 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     bool SupportsFeatureLevel(FeatureLevel) const override { return true; }
 
+    ResultOrError<std::vector<wgpu::CompositeAlphaMode>> GetSupportedAlphaModes(const Surface*) const override {
+        return {
+            wgpu::CompositeAlphaMode::Opaque,
+            wgpu::CompositeAlphaMode::Premultiplied,
+            wgpu::CompositeAlphaMode::Auto,
+        };
+    }
+
   private:
     ResultOrError<Ref<DeviceBase>> CreateDeviceImpl(AdapterBase* adapter,
                                                     const UnpackedPtr<DeviceDescriptor>& descriptor,

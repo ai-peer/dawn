@@ -106,7 +106,7 @@ MaybeError SwapChain::PresentImpl() {
     return {};
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
+ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl(SwapChainTextureInfo* info) {
     Queue* queue = ToBackend(GetDevice()->GetQueue());
 
     // Synchronously wait until previous operations on the next swapchain buffer are finished.
@@ -120,6 +120,8 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
     TextureDescriptor descriptor = GetSwapChainBaseTextureDescriptor(this);
     DAWN_TRY_ASSIGN(mApiTexture, Texture::Create(ToBackend(GetDevice()), Unpack(&descriptor),
                                                  mBuffers[mCurrentBuffer]));
+    info->status = wgpu::SurfaceGetCurrentTextureStatus::Success;
+    info->suboptimal = false;
     return mApiTexture;
 }
 

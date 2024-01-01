@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_SWAPCHAIN_H_
 
 #include "dawn/native/Error.h"
+#include "dawn/native/Format.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/dawn_platform.h"
@@ -40,6 +41,15 @@ MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
                                        const SwapChainDescriptor* descriptor);
 
 TextureDescriptor GetSwapChainBaseTextureDescriptor(SwapChainBase* swapChain);
+
+// I could not find a way to use the API-exposed SurfaceTexture struct directly
+// without messing with the Ref<Texture> used to store the current texture here in the
+// SwapChain, so this extra struct is passed as a mutable argument to GetCurrentTexture
+// and its backend implementation.
+struct SwapChainTextureInfo {
+    wgpu::Bool suboptimal;
+    wgpu::SurfaceGetCurrentTextureStatus status;
+};
 
 class SwapChainBase : public ApiObjectBase {
   public:
@@ -87,11 +97,16 @@ class SwapChainBase : public ApiObjectBase {
     uint32_t GetWidth() const;
     uint32_t GetHeight() const;
     wgpu::TextureFormat GetFormat() const;
+    const std::vector<wgpu::TextureFormat>& GetViewFormats() const;
     wgpu::TextureUsage GetUsage() const;
     wgpu::PresentMode GetPresentMode() const;
+    wgpu::CompositeAlphaMode GetAlphaMode() const;
     Surface* GetSurface() const;
     bool IsAttached() const;
     wgpu::BackendType GetBackendType() const;
+
+    // The returned texture must match the swapchain descriptor exactly.
+    ResultOrError<Ref<TextureBase>> GetCurrentTexture(SwapChainTextureInfo* info);
 
   protected:
     SwapChainBase(DeviceBase* device, const SwapChainDescriptor* desc, ObjectBase::ErrorTag tag);
@@ -100,6 +115,7 @@ class SwapChainBase : public ApiObjectBase {
 
   private:
     void SetChildLabel(ApiObjectBase* child) const;
+    void SetViewFormats(DeviceBase* device, const SwapChainDescriptor* descriptor);
 
     bool mAttached = false;
     uint32_t mWidth;
@@ -107,11 +123,19 @@ class SwapChainBase : public ApiObjectBase {
     wgpu::TextureFormat mFormat;
     wgpu::TextureUsage mUsage;
     wgpu::PresentMode mPresentMode;
+    // This is not stored as a FormatSet so that it can hold the data pointed to by the
+    // descriptor returned by GetSwapChainBaseTextureDescriptor():
+    std::vector<wgpu::TextureFormat> mViewFormats;
+    // We still store the same info as a format set to ease validation of the returned
+    // current texture:
+    FormatSet mViewFormatSet;
+    wgpu::CompositeAlphaMode mAlphaMode;
 
     // This is a weak reference to the surface. If the surface is destroyed it will call
     // DetachFromSurface and mSurface will be updated to nullptr.
     Surface* mSurface = nullptr;
     Ref<TextureBase> mCurrentTexture;
+    SwapChainTextureInfo mCurrentTextureInfo;
 
     MaybeError ValidatePresent() const;
     MaybeError ValidateGetCurrentTexture() const;
@@ -119,9 +143,7 @@ class SwapChainBase : public ApiObjectBase {
     // GetCurrentTextureImpl and PresentImpl are guaranteed to be called in an interleaved manner,
     // starting with GetCurrentTextureImpl.
 
-    // The returned texture must match the swapchain descriptor exactly.
-    ResultOrError<Ref<TextureBase>> GetCurrentTexture();
-    virtual ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() = 0;
+    virtual ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl(SwapChainTextureInfo* info) = 0;
 
     ResultOrError<Ref<TextureViewBase>> GetCurrentTextureView();
 

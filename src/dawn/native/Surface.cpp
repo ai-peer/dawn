@@ -30,7 +30,9 @@
 #include "dawn/common/Platform.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Device.h"
 #include "dawn/native/SwapChain.h"
+#include "dawn/native/ValidationUtils_autogen.h"
 
 #if defined(DAWN_USE_WINDOWS_UI)
 #include <windows.ui.core.h>
@@ -259,24 +261,15 @@ Surface::Surface(InstanceBase* instance, const UnpackedPtr<SurfaceDescriptor>& d
 }
 
 Surface::~Surface() {
-    if (mSwapChain != nullptr) {
-        mSwapChain->DetachFromSurface();
-        mSwapChain = nullptr;
-    }
-}
-
-SwapChainBase* Surface::GetAttachedSwapChain() {
-    DAWN_ASSERT(!IsError());
-    return mSwapChain.Get();
-}
-
-void Surface::SetAttachedSwapChain(SwapChainBase* swapChain) {
-    DAWN_ASSERT(!IsError());
-    mSwapChain = swapChain;
+    DAWN_ASSERT(Unconfigure().IsSuccess());
 }
 
 InstanceBase* Surface::GetInstance() const {
     return mInstance.Get();
+}
+
+DeviceBase* Surface::GetDevice() const {
+    return mDevice.Get();
 }
 
 Surface::Type Surface::GetType() const {
@@ -346,6 +339,201 @@ uint32_t Surface::GetXWindow() const {
     DAWN_ASSERT(!IsError());
     DAWN_ASSERT(mType == Type::XlibWindow);
     return mXWindow;
+}
+
+MaybeError ValidateSurfaceConfiguration(DeviceBase* device, const SurfaceConfiguration* config) {
+    UnpackedPtr<SurfaceConfiguration> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(config));
+
+    const Format* format;
+    DAWN_TRY_ASSIGN(format, device->GetInternalFormat(config->format));
+#if DAWN_PLATFORM_IS(ANDROID)
+    constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::RGBA8Unorm;
+#else
+    constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::BGRA8Unorm;
+#endif  // !DAWN_PLATFORM_IS(ANDROID)
+    DAWN_INVALID_IF(config->format != kRequireSwapChainFormat,
+        "Format (%s) is not %s, which is (currently) the only accepted format.",
+        config->format, kRequireSwapChainFormat);
+
+    for (size_t i = 0; i < config->viewFormatCount; ++i) {
+        const Format* viewFormat;
+        DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(config->viewFormats[i]));
+    }
+
+    DAWN_TRY(ValidatePresentMode(config->presentMode));
+
+    return {};
+}
+
+MaybeError Surface::Configure(const SurfaceConfiguration* config) {
+    DAWN_INVALID_IF(IsError(), "[Surface] is invalid.");
+
+    mDevice = config->device;
+
+    DAWN_TRY(ValidateSurfaceConfiguration(GetDevice(), config));
+
+    SwapChainBase* previousSwapChain = mSwapChain.Get();
+
+    // The SwapChainDescriptor is now the very same thing as the SurfaceConfiguration,
+    // should we directly use the latter as the argument of a SwapChain's constructor?
+    SwapChainDescriptor descriptor;
+    descriptor.nextInChain = nullptr;
+    descriptor.label = "surface"; // Should I store the label from the surface descriptor?
+    descriptor.usage = config->usage;
+    descriptor.format = config->format;
+    descriptor.width = config->width;
+    descriptor.height = config->height;
+    descriptor.presentMode = config->presentMode;
+    descriptor.viewFormatCount = config->viewFormatCount;
+    descriptor.viewFormats = config->viewFormats;
+    descriptor.alphaMode = config->alphaMode;
+
+    ResultOrError<Ref<SwapChainBase>> maybeNewSwapChain =
+        GetDevice()->CreateSwapChain(this, previousSwapChain, &descriptor);
+
+    if (previousSwapChain != nullptr) {
+        previousSwapChain->DetachFromSurface();
+        previousSwapChain->APIRelease();
+    }
+
+    DAWN_TRY_ASSIGN(mSwapChain, std::move(maybeNewSwapChain));
+
+    mSwapChain->SetIsAttached();
+
+    return {};
+}
+
+MaybeError Surface::Unconfigure() {
+    DAWN_INVALID_IF(!mSwapChain.Get(), "[Surface] is not configured.");
+
+    if (mSwapChain != nullptr) {
+        mSwapChain->DetachFromSurface();
+        mSwapChain->APIRelease();
+        mSwapChain = nullptr;
+    }
+
+    return {};
+}
+
+MaybeError Surface::GetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const {
+    // This is the only supported format in native mode (see crbug.com/dawn/160).
+#if DAWN_PLATFORM_IS(ANDROID)
+    static std::array<wgpu::TextureFormat, 1> supportedFormats = {
+        wgpu::TextureFormat::RGBA8Unorm,
+    };
+#else
+    static std::array<wgpu::TextureFormat, 1> supportedFormats = {
+        wgpu::TextureFormat::BGRA8Unorm,
+    };
+#endif  // !DAWN_PLATFORM_IS(ANDROID)
+    
+    // Is there a way to auto-generate this?
+    static std::array<wgpu::PresentMode, 3> supportedPresentMode = {
+        wgpu::PresentMode::Fifo,
+        wgpu::PresentMode::Immediate,
+        wgpu::PresentMode::Mailbox,
+    };
+
+    PhysicalDeviceBase* physicalDevice = adapter->GetPhysicalDevice();
+    DAWN_INVALID_IF(!physicalDevice, "[Adapter] has no physical device.");
+    std::vector<wgpu::CompositeAlphaMode> supportedAlphaModes;
+    DAWN_TRY_ASSIGN(supportedAlphaModes, physicalDevice->GetSupportedAlphaModes(this));
+
+    wgpu::CompositeAlphaMode* alphaModes = new wgpu::CompositeAlphaMode[supportedAlphaModes.size()];
+    memcpy(alphaModes, supportedAlphaModes.data(), sizeof(wgpu::CompositeAlphaMode) * supportedAlphaModes.size());
+
+    capabilities->nextInChain = nullptr;
+    capabilities->formatCount = supportedFormats.size();
+    capabilities->formats = supportedFormats.data();
+    capabilities->presentModeCount = supportedPresentMode.size();
+    capabilities->presentModes = supportedPresentMode.data();
+    capabilities->alphaModeCount = supportedAlphaModes.size();
+    capabilities->alphaModes = alphaModes;
+
+    return {};
+}
+
+void APISurfaceCapabilitiesFreeMembers(WGPUSurfaceCapabilities capabilities) {
+    // No need to delete formats and presentModes because they are a static variable
+    if (capabilities.alphaModes) {
+        delete[] capabilities.alphaModes;
+    }
+}
+
+MaybeError Surface::GetCurrentTexture(SurfaceTexture* surfaceTexture) const {
+    DAWN_INVALID_IF(!mSwapChain.Get(), "[Surface] is not configured.");
+
+    SwapChainTextureInfo swapChainTextureInfo;
+    Ref<TextureBase> texture;
+    DAWN_TRY_ASSIGN(texture, mSwapChain->GetCurrentTexture(&swapChainTextureInfo));
+    
+    surfaceTexture->status = swapChainTextureInfo.status;
+    surfaceTexture->suboptimal = swapChainTextureInfo.suboptimal;
+    surfaceTexture->texture = texture.Detach();
+
+    return {};
+}
+
+MaybeError Surface::Present() {
+    DAWN_INVALID_IF(!mSwapChain.Get(), "[Surface] is not configured.");
+    mSwapChain->APIPresent();
+    return {};
+}
+
+void Surface::APIConfigure(const SurfaceConfiguration* config) {
+    if (GetDevice()->ConsumedError(Configure(config))) {
+        return;
+    }
+}
+
+void Surface::APIGetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const {
+    if (!GetDevice()) {
+        // How should we handle this case? Raise the instance's lost device callback?
+        return;
+    }
+    if (GetDevice()->ConsumedError(GetCapabilities(adapter, capabilities))) {
+        return;
+    }
+}
+
+void Surface::APIGetCurrentTexture(SurfaceTexture* surfaceTexture) const {
+    if (!GetDevice()) {
+        // How should we handle this case? Raise the instance's lost device callback?
+        return;
+    }
+    if (GetDevice()->ConsumedError(GetCurrentTexture(surfaceTexture))) {
+        return;
+    }
+}
+
+wgpu::TextureFormat Surface::APIGetPreferredFormat([[maybe_unused]] AdapterBase* adapter) const {
+    // This is the only supported format in native mode (see crbug.com/dawn/160).
+#if DAWN_PLATFORM_IS(ANDROID)
+    return wgpu::TextureFormat::RGBA8Unorm;
+#else
+    return wgpu::TextureFormat::BGRA8Unorm;
+#endif  // !DAWN_PLATFORM_IS(ANDROID)
+}
+
+void Surface::APIPresent() {
+    if (!GetDevice()) {
+        // How should we handle this case? Raise the instance's lost device callback?
+        return;
+    }
+    if (GetDevice()->ConsumedError(Present())) {
+        return;
+    }
+}
+
+void Surface::APIUnconfigure() {
+    if (!GetDevice()) {
+        // How should we handle this case? Raise the instance's lost device callback?
+        return;
+    }
+    if (GetDevice()->ConsumedError(Unconfigure())) {
+        return;
+    }
 }
 
 }  // namespace dawn::native

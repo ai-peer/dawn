@@ -52,6 +52,14 @@ Backend* PhysicalDevice::GetBackend() const {
     return mBackend;
 }
 
+ResultOrError<std::vector<wgpu::CompositeAlphaMode>> PhysicalDevice::GetSupportedAlphaModes([[maybe_unused]] const Surface* surface) const {
+    return {
+        wgpu::CompositeAlphaMode::Opaque,
+        wgpu::CompositeAlphaMode::Premultiplied,
+        wgpu::CompositeAlphaMode::Auto,
+    };
+}
+
 MaybeError PhysicalDevice::InitializeImpl() {
     DXGI_ADAPTER_DESC1 adapterDesc;
     GetHardwareAdapter()->GetDesc1(&adapterDesc);

@@ -1250,15 +1250,6 @@ ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescr
 
     return result.Detach();
 }
-SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
-                                              const SwapChainDescriptor* descriptor) {
-    Ref<SwapChainBase> result;
-    if (ConsumedError(CreateSwapChain(surface, descriptor), &result,
-                      "calling %s.CreateSwapChain(%s).", this, descriptor)) {
-        return SwapChainBase::MakeError(this, descriptor);
-    }
-    return result.Detach();
-}
 TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
     Ref<TextureBase> result;
     if (ConsumedError(CreateTexture(descriptor), &result, InternalErrorType::OutOfMemory,
@@ -1857,27 +1848,16 @@ ResultOrError<Ref<ShaderModuleBase>> DeviceBase::CreateShaderModule(
 
 ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
     Surface* surface,
+    SwapChainBase* previousSwapChain,
     const SwapChainDescriptor* descriptor) {
     DAWN_TRY(ValidateIsAlive());
+    
     if (IsValidationEnabled()) {
         DAWN_TRY_CONTEXT(ValidateSwapChainDescriptor(this, surface, descriptor), "validating %s",
-                         descriptor);
+            &descriptor);
     }
 
-    SwapChainBase* previousSwapChain = surface->GetAttachedSwapChain();
-    ResultOrError<Ref<SwapChainBase>> maybeNewSwapChain =
-        CreateSwapChainImpl(surface, previousSwapChain, descriptor);
-
-    if (previousSwapChain != nullptr) {
-        previousSwapChain->DetachFromSurface();
-    }
-
-    Ref<SwapChainBase> newSwapChain;
-    DAWN_TRY_ASSIGN(newSwapChain, std::move(maybeNewSwapChain));
-
-    newSwapChain->SetIsAttached();
-    surface->SetAttachedSwapChain(newSwapChain.Get());
-    return newSwapChain;
+    return CreateSwapChainImpl(surface, previousSwapChain, descriptor);
 }
 
 ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* rawDescriptor) {

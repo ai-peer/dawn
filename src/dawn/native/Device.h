@@ -260,7 +260,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     ResultOrError<Ref<ShaderModuleBase>> CreateShaderModule(
         const ShaderModuleDescriptor* descriptor,
         OwnedCompilationMessages* compilationMessages = nullptr);
+    // NB: This is no longer exposed to the API, only called by the surface's configure function
     ResultOrError<Ref<SwapChainBase>> CreateSwapChain(Surface* surface,
+                                                      SwapChainBase* previousSwapChain,
                                                       const SwapChainDescriptor* descriptor);
     ResultOrError<Ref<TextureBase>> CreateTexture(const TextureDescriptor* rawDescriptor);
     ResultOrError<Ref<TextureViewBase>> CreateTextureView(TextureBase* texture,
@@ -293,7 +295,6 @@ class DeviceBase : public RefCountedWithExternalCount {
     ShaderModuleBase* APICreateShaderModule(const ShaderModuleDescriptor* descriptor);
     ShaderModuleBase* APICreateErrorShaderModule(const ShaderModuleDescriptor* descriptor,
                                                  const char* errorMessage);
-    SwapChainBase* APICreateSwapChain(Surface* surface, const SwapChainDescriptor* descriptor);
     TextureBase* APICreateTexture(const TextureDescriptor* descriptor);
 
     wgpu::TextureUsage APIGetSupportedSurfaceUsage(Surface* surface);

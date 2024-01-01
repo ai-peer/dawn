@@ -193,6 +193,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     bool SupportsFeatureLevel(FeatureLevel featureLevel) const override;
 
+    ResultOrError<std::vector<wgpu::CompositeAlphaMode>> GetSupportedAlphaModes(const Surface* surface) const override;
+
     // Used for the tests that intend to use an adapter without all features enabled.
     using PhysicalDeviceBase::SetSupportedFeaturesForTesting;
 
@@ -329,7 +331,7 @@ class SwapChain final : public SwapChainBase {
     Ref<Texture> mTexture;
 
     MaybeError PresentImpl() override;
-    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() override;
+    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl(SwapChainTextureInfo* info) override;
     void DetachFromSurfaceImpl() override;
 };
 

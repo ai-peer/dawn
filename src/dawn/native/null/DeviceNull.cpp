@@ -65,6 +65,10 @@ bool PhysicalDevice::SupportsFeatureLevel(FeatureLevel) const {
     return true;
 }
 
+ResultOrError<std::vector<wgpu::CompositeAlphaMode>> PhysicalDevice::GetSupportedAlphaModes([[maybe_unused]] const Surface* surface) const {
+    return { wgpu::CompositeAlphaMode::Auto };
+}
+
 MaybeError PhysicalDevice::InitializeImpl() {
     return {};
 }
@@ -524,9 +528,11 @@ MaybeError SwapChain::PresentImpl() {
     return {};
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
+ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl(SwapChainTextureInfo* info) {
     TextureDescriptor textureDesc = GetSwapChainBaseTextureDescriptor(this);
     mTexture = AcquireRef(new Texture(GetDevice(), Unpack(&textureDesc)));
+    info->status = wgpu::SurfaceGetCurrentTextureStatus::Success;
+    info->suboptimal = false;
     return mTexture;
 }
 

@@ -46,6 +46,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
     IDXGIAdapter3* GetHardwareAdapter() const;
     Backend* GetBackend() const;
 
+    ResultOrError<std::vector<wgpu::CompositeAlphaMode>> GetSupportedAlphaModes(const Surface* surface) const override;
+
   protected:
     MaybeError InitializeImpl() override;
 

@@ -54,7 +54,7 @@ class SwapChain final : public d3d::SwapChain {
 
     // SwapChainBase implementation
     MaybeError PresentImpl() override;
-    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() override;
+    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl(SwapChainTextureInfo* info) override;
     void DetachFromSurfaceImpl() override;
 
     // d3d::SwapChain implementation

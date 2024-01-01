@@ -423,6 +423,13 @@ bool PhysicalDevice::SupportsFeatureLevel(FeatureLevel featureLevel) const {
     return featureLevel == FeatureLevel::Compatibility;
 }
 
+ResultOrError<std::vector<wgpu::CompositeAlphaMode>> PhysicalDevice::GetSupportedAlphaModes([[maybe_unsused]] const Surface* surface) const {
+    return {
+        wgpu::CompositeAlphaMode::Opaque,
+        wgpu::CompositeAlphaMode::Auto,
+    };
+}
+
 FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     wgpu::FeatureName feature,
     const TogglesState& toggles) const {

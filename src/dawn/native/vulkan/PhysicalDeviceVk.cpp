@@ -36,6 +36,8 @@
 #include "dawn/native/Limits.h"
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/SwapChainVk.h"
+#include "dawn/native/vulkan/VulkanError.h"
 #include "dawn/platform/DawnPlatform.h"
 
 #if DAWN_PLATFORM_IS(ANDROID)
@@ -72,6 +74,20 @@ gpu_info::DriverVersion DecodeVulkanDriverVersion(uint32_t vendorID, uint32_t ve
     }
 
     return driverVersion;
+}
+
+wgpu::CompositeAlphaMode FromVulkanAlphaMode(VkCompositeAlphaFlagBitsKHR mode) {
+    switch (mode) {
+    case VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR:
+        return wgpu::CompositeAlphaMode::Opaque;
+    case VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR:
+        return wgpu::CompositeAlphaMode::Premultiplied;
+    case VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR:
+        return wgpu::CompositeAlphaMode::Unpremultiplied;
+    case VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR:
+        return wgpu::CompositeAlphaMode::Inherit;
+    }
+    DAWN_UNREACHABLE();
 }
 
 }  // anonymous namespace
@@ -810,6 +826,41 @@ bool PhysicalDevice::CheckSemaphoreSupport(DeviceExt deviceExt,
 
 uint32_t PhysicalDevice::GetDefaultComputeSubgroupSize() const {
     return mDefaultComputeSubgroupSize;
+}
+
+ResultOrError<std::vector<wgpu::CompositeAlphaMode>> PhysicalDevice::GetSupportedAlphaModes(const Surface* surface) const {
+    std::vector<wgpu::CompositeAlphaMode> supportedAlphaModes;
+#if !DAWN_PLATFORM_IS(ANDROID)
+    supportedAlphaModes.push_back(wgpu::CompositeAlphaMode::Opaque);
+#else
+    VkSurfaceKHR mVkSurface;
+    DAWN_TRY_ASSIGN(mVkSurface, SwapChain::CreateVulkanSurface(this, surface));
+    
+    VkPhysicalDevice vkPhysicalDevice = GetVkPhysicalDevice();
+    const VulkanFunctions& vkFunctions = GetVulkanInstance()->GetFunctions();
+
+    // Get the surface capabilities
+    VkSurfaceCapabilitiesKHR capabilities;
+    DAWN_TRY(CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfaceCapabilitiesKHR(
+                            vkPhysicalDevice, mVkSurface, &capabilities),
+                            "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"));
+
+    // TODO(dawn:286): investigate composite alpha for WebGPU native
+    VkCompositeAlphaFlagBitsKHR compositeAlphaFlags[4] = {
+        VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR,
+        VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR,
+        VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR,
+        VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR,
+    };
+
+    for (uint32_t i = 0; i < 4; i++) {
+        if (capabilities.supportedCompositeAlpha & compositeAlphaFlags[i]) {
+            supportedAlphaModes.push_back(FromVulkanAlphaMode(compositeAlphaFlags[i]));
+        }
+    }
+#endif  // #if !DAWN_PLATFORM_IS(ANDROID)
+    supportedAlphaModes.push_back(wgpu::CompositeAlphaMode::Auto);
+    return supportedAlphaModes;
 }
 
 void PhysicalDevice::PopulateMemoryHeapInfo(

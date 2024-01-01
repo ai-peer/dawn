@@ -351,7 +351,6 @@
     },
     "surface capabilities": {
         "category": "structure",
-        "tags": ["upstream"],
         "extensible": "out",
         "members": [
             {"name": "format count", "type": "size_t"},
@@ -371,7 +370,6 @@
     },
     "surface configuration": {
         "category": "structure",
-        "tags": ["upstream"],
         "extensible": "in",
         "members": [
             {"name": "device", "type": "device"},
@@ -964,7 +962,6 @@
     },
     "composite alpha mode": {
         "category": "enum",
-        "tags": ["upstream"],
         "values": [
             {"value": 0, "name": "auto"},
             {"value": 1, "name": "opaque"},
@@ -1209,15 +1206,6 @@
                 "args": [
                     {"name": "descriptor", "type": "shader module descriptor", "annotation": "const*"},
                     {"name": "error message", "type": "char", "annotation": "const*", "length": "strlen"}
-                ]
-            },
-            {
-                "name": "create swap chain",
-                "tags": ["dawn", "emscripten"],
-                "returns": "swap chain",
-                "args": [
-                    {"name": "surface", "type": "surface"},
-                    {"name": "descriptor", "type": "swap chain descriptor", "annotation": "const*"}
                 ]
             },
             {
@@ -3146,7 +3134,6 @@
             {
                 "name": "configure",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "config", "type": "surface configuration", "annotation": "const*"}
                 ]
@@ -3154,7 +3141,6 @@
             {
                 "name": "get capabilities",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "adapter", "type": "adapter"},
                     {"name": "capabilities", "type": "surface capabilities", "annotation": "*"}
@@ -3163,7 +3149,6 @@
             {
                 "name": "get current texture",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "surface texture", "type": "surface texture", "annotation": "*"}
                 ]
@@ -3171,7 +3156,6 @@
             {
                 "name": "get preferred format",
                 "returns": "texture format",
-                "tags": ["upstream", "emscripten"],
                 "args": [
                     {"name": "adapter", "type": "adapter"}
                 ]
@@ -3179,13 +3163,11 @@
             {
                 "name": "present",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": []
             },
             {
                 "name": "unconfigure",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": []
             }
         ]
@@ -3300,12 +3282,14 @@
             {"name": "format", "type": "texture format"},
             {"name": "width", "type": "uint32_t"},
             {"name": "height", "type": "uint32_t"},
-            {"name": "present mode", "type": "present mode"}
+            {"name": "present mode", "type": "present mode"},
+            {"name": "view format count", "type": "size_t"},
+            {"name": "view formats", "type": "texture format", "annotation": "const*"},
+            {"name": "alpha mode", "type": "composite alpha mode"}
         ]
     },
     "surface texture": {
         "category": "structure",
-        "tags": ["upstream"],
         "members": [
             {"name": "texture", "type": "texture"},
             {"name": "suboptimal", "type": "bool"},
@@ -3438,7 +3422,6 @@
     },
     "surface get current texture status": {
         "category": "enum",
-        "tags": ["upstream"],
         "values": [
             {"value": 0, "name": "success"},
             {"value": 1, "name": "timeout"},
