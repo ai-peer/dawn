@@ -30,7 +30,9 @@
 #include "dawn/common/Platform.h"
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/Instance.h"
+#include "dawn/native/Device.h"
 #include "dawn/native/SwapChain.h"
+#include "dawn/native/ValidationUtils_autogen.h"
 
 #if defined(DAWN_USE_WINDOWS_UI)
 #include <windows.ui.core.h>
@@ -186,6 +188,49 @@ ResultOrError<UnpackedPtr<SurfaceDescriptor>> ValidateSurfaceDescriptor(
     }
 }
 
+// TODO(dawn:2320) We should pass in the surface, or at least its capabilities cache,
+// then validate against the capabilities returned by the adapter.
+MaybeError ValidateSurfaceConfiguration(DeviceBase* device, const SurfaceConfiguration* config) {
+    UnpackedPtr<SurfaceConfiguration> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(config));
+
+    const Format* format;
+    DAWN_TRY_ASSIGN(format, device->GetInternalFormat(config->format));
+
+    // TODO(crbug.com/dawn/160): Lift this restriction once wgpu::Instance::GetPreferredSurfaceFormat is
+    // implemented.
+    // TODO(dawn:286):
+#if DAWN_PLATFORM_IS(ANDROID)
+    constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::RGBA8Unorm;
+#else
+    constexpr wgpu::TextureFormat kRequireSwapChainFormat = wgpu::TextureFormat::BGRA8Unorm;
+#endif  // !DAWN_PLATFORM_IS(ANDROID)
+    DAWN_INVALID_IF(config->format != kRequireSwapChainFormat,
+        "Format (%s) is not %s, which is (currently) the only accepted format.",
+        config->format, kRequireSwapChainFormat);
+
+    for (size_t i = 0; i < config->viewFormatCount; ++i) {
+        const Format* viewFormat;
+        DAWN_TRY_ASSIGN(viewFormat, device->GetInternalFormat(config->viewFormats[i]));
+    }
+
+    DAWN_TRY(ValidatePresentMode(config->presentMode));
+
+    DAWN_INVALID_IF(config->width == 0 || config->height == 0,
+        "Surface configuration size (width: %u, height: %u) is empty.", config->width,
+        config->height);
+
+    DAWN_INVALID_IF(
+        config->width > device->GetLimits().v1.maxTextureDimension2D ||
+        config->height > device->GetLimits().v1.maxTextureDimension2D,
+        "Surface configuration size (width: %u, height: %u) is greater than the maximum 2D texture "
+        "size (width: %u, height: %u).",
+        config->width, config->height, device->GetLimits().v1.maxTextureDimension2D,
+        device->GetLimits().v1.maxTextureDimension2D);
+
+    return {};
+}
+
 // static
 Surface* Surface::MakeError(InstanceBase* instance) {
     return new Surface(instance, ErrorMonad::kError);
@@ -195,6 +240,10 @@ Surface::Surface(InstanceBase* instance, ErrorTag tag) : ErrorMonad(tag), mInsta
 
 Surface::Surface(InstanceBase* instance, const UnpackedPtr<SurfaceDescriptor>& descriptor)
     : ErrorMonad(), mInstance(instance) {
+    if (descriptor->label != nullptr && strlen(descriptor->label) != 0) {
+        mLabel = descriptor->label;
+    }
+
     // Type is validated in validation, otherwise this may crash with an assert failure.
     wgpu::SType type = descriptor
                            .ValidateBranches<Branch<SurfaceDescriptorFromAndroidNativeWindow>,
@@ -259,24 +308,27 @@ Surface::Surface(InstanceBase* instance, const UnpackedPtr<SurfaceDescriptor>& d
 }
 
 Surface::~Surface() {
-    if (mSwapChain != nullptr) {
-        mSwapChain->DetachFromSurface();
-        mSwapChain = nullptr;
-    }
+    MaybeError result = Unconfigure();
+    DAWN_ASSERT(result.IsSuccess());
 }
 
 SwapChainBase* Surface::GetAttachedSwapChain() {
     DAWN_ASSERT(!IsError());
+    DAWN_ASSERT(!mIsSwapChainManagedBySurface);
     return mSwapChain.Get();
 }
-
 void Surface::SetAttachedSwapChain(SwapChainBase* swapChain) {
     DAWN_ASSERT(!IsError());
     mSwapChain = swapChain;
+    mIsSwapChainManagedBySurface = false;
 }
 
 InstanceBase* Surface::GetInstance() const {
     return mInstance.Get();
+}
+
+DeviceBase* Surface::GetCurrentDevice() const {
+    return mCurrentDevice.Get();
 }
 
 Surface::Type Surface::GetType() const {
@@ -346,6 +398,155 @@ uint32_t Surface::GetXWindow() const {
     DAWN_ASSERT(!IsError());
     DAWN_ASSERT(mType == Type::XlibWindow);
     return mXWindow;
+}
+
+MaybeError Surface::Configure(const SurfaceConfiguration* config) {
+    DAWN_INVALID_IF(IsError(), "%s is invalid.", this);
+
+    mCurrentDevice = config->device;
+
+    DAWN_TRY(ValidateSurfaceConfiguration(GetCurrentDevice(), config));
+
+    SwapChainBase* previousSwapChain = mSwapChain.Get();
+
+    ResultOrError<Ref<SwapChainBase>> maybeNewSwapChain =
+        GetCurrentDevice()->CreateSwapChain(this, previousSwapChain, config);
+
+    DAWN_TRY_ASSIGN(mSwapChain, std::move(maybeNewSwapChain));
+
+    // NB: There must be no DAWN_TRY beyond this point, to ensure that if the
+    // configuration failed, the previous swap chain remains valid.
+
+    if (previousSwapChain != nullptr) {
+        previousSwapChain->DetachFromSurface();
+        previousSwapChain->APIRelease();
+    }
+
+    mSwapChain->SetIsAttached();
+
+    return {};
+}
+
+MaybeError Surface::Unconfigure() {
+    DAWN_INVALID_IF(IsError(), "%s is invalid.", this);
+    DAWN_INVALID_IF(!mSwapChain.Get(), "%s is not configured.", this);
+
+    if (mSwapChain != nullptr) {
+        mSwapChain->DetachFromSurface();
+        if (mIsSwapChainManagedBySurface) {
+            mSwapChain->APIRelease();
+        }
+        mSwapChain = nullptr;
+    }
+
+    return {};
+}
+
+MaybeError Surface::GetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const {
+    DAWN_INVALID_IF(IsError(), "%s is invalid.", this);
+
+    if (mCachedCapabilitiesAdapter != adapter) {
+        PhysicalDeviceBase* physicalDevice = adapter->GetPhysicalDevice();
+        DAWN_TRY_ASSIGN(mCachedCapabilities, physicalDevice->GetSurfaceCapabilities(this));
+        mCachedCapabilitiesAdapter = adapter;
+    }
+
+    capabilities->nextInChain = nullptr;
+    capabilities->formatCount = mCachedCapabilities.formats.size();
+    capabilities->formats = mCachedCapabilities.formats.data();
+    capabilities->presentModeCount = mCachedCapabilities.presentModes.size();
+    capabilities->presentModes = mCachedCapabilities.presentModes.data();
+    capabilities->alphaModeCount = mCachedCapabilities.alphaModes.size();
+    capabilities->alphaModes = mCachedCapabilities.alphaModes.data();
+    return {};
+}
+
+void APISurfaceCapabilitiesFreeMembers([[maybe_unused]] WGPUSurfaceCapabilities capabilities) {
+    // Automatically managed by the cached SurfaceCapabilities
+}
+
+MaybeError Surface::GetCurrentTexture(SurfaceTexture* surfaceTexture) const {
+    DAWN_INVALID_IF(IsError(), "%s is invalid.", this);
+    DAWN_INVALID_IF(!mSwapChain.Get(), "%s is not configured.", this);
+
+    DAWN_TRY_ASSIGN(*surfaceTexture, mSwapChain->GetCurrentTexture());
+
+    return {};
+}
+
+MaybeError Surface::Present() {
+    DAWN_INVALID_IF(IsError(), "%s is invalid.", this);
+    DAWN_INVALID_IF(!mSwapChain.Get(), "%s is not configured.", this);
+    mSwapChain->APIPresent();
+    return {};
+}
+
+const std::string& Surface::GetLabel() const {
+    return mLabel;
+}
+
+void Surface::APIConfigure(const SurfaceConfiguration* config) {
+    if (GetCurrentDevice()->ConsumedError(Configure(config))) {
+        return;
+    }
+}
+
+void Surface::APIGetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const {
+    if (!GetCurrentDevice()) {
+        // How should we handle this case? Raise the instance's lost device callback?
+        return;
+    }
+    if (GetCurrentDevice()->ConsumedError(GetCapabilities(adapter, capabilities))) {
+        return;
+    }
+}
+
+void Surface::APIGetCurrentTexture(SurfaceTexture* surfaceTexture) const {
+    if (!GetCurrentDevice()) {
+        // This is the closest status to "surface was not configured so there is no associated device"
+        // but is only half satisfying (I'll report upstream).
+        surfaceTexture->status = wgpu::SurfaceGetCurrentTextureStatus::DeviceLost;
+        surfaceTexture->suboptimal = true;
+        surfaceTexture->texture = nullptr;
+        return;
+    }
+    if (GetCurrentDevice()->ConsumedError(GetCurrentTexture(surfaceTexture))) {
+        return;
+    }
+}
+
+wgpu::TextureFormat Surface::APIGetPreferredFormat([[maybe_unused]] AdapterBase* adapter) const {
+    // TODO(dawn:2320) We should use the cached capabilities to query the adapter's preferred format.
+    // This is the only supported format in native mode (see crbug.com/dawn/160).
+#if DAWN_PLATFORM_IS(ANDROID)
+    return wgpu::TextureFormat::RGBA8Unorm;
+#else
+    return wgpu::TextureFormat::BGRA8Unorm;
+#endif  // !DAWN_PLATFORM_IS(ANDROID)
+}
+
+void Surface::APIPresent() {
+    if (!GetCurrentDevice()) {
+        // How should we handle this case? Raise the instance's lost device callback?
+        return;
+    }
+    if (GetCurrentDevice()->ConsumedError(Present())) {
+        return;
+    }
+}
+
+void Surface::APIUnconfigure() {
+    if (!GetCurrentDevice()) {
+        // How should we handle this case? Raise the instance's lost device callback?
+        return;
+    }
+    if (GetCurrentDevice()->ConsumedError(Unconfigure())) {
+        return;
+    }
+}
+
+void Surface::APISetLabel(const char* label) {
+    mLabel = label;
 }
 
 }  // namespace dawn::native
