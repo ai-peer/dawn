@@ -51,19 +51,21 @@ ResultOrError<UnpackedPtr<SurfaceDescriptor>> ValidateSurfaceDescriptor(
     InstanceBase* instance,
     const SurfaceDescriptor* rawDescriptor);
 
+MaybeError ValidateSurfaceConfiguration(
+    DeviceBase* device,
+    const SurfaceConfiguration* config);
+
 // A surface is a sum types of all the kind of windows Dawn supports. The OS-specific types
 // aren't used because they would cause compilation errors on other OSes (or require
 // ObjectiveC).
 // The surface is also used to store the current swapchain so that we can detach it when it is
 // replaced.
+// Shouldn't this inherit from ApiObjectBase?
 class Surface final : public ErrorMonad {
   public:
     static Surface* MakeError(InstanceBase* instance);
 
     Surface(InstanceBase* instance, const UnpackedPtr<SurfaceDescriptor>& descriptor);
-
-    void SetAttachedSwapChain(SwapChainBase* swapChain);
-    SwapChainBase* GetAttachedSwapChain();
 
     // These are valid to call on all Surfaces.
     enum class Type {
@@ -77,6 +79,7 @@ class Surface final : public ErrorMonad {
     };
     Type GetType() const;
     InstanceBase* GetInstance() const;
+    DeviceBase* GetDevice() const;
 
     // Valid to call if the type is MetalLayer
     void* GetMetalLayer() const;
@@ -102,15 +105,44 @@ class Surface final : public ErrorMonad {
     void* GetXDisplay() const;
     uint32_t GetXWindow() const;
 
+    // Deprecated: Remove these 2 accessors once Device::APICreateSwapChain gets dropped
+    SwapChainBase* GetAttachedSwapChain();
+    void SetAttachedSwapChain(SwapChainBase* swapChain);
+
+    MaybeError Configure(const SurfaceConfiguration* config);
+    MaybeError Unconfigure();
+
+    MaybeError GetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const;
+    MaybeError GetCurrentTexture(SurfaceTexture* surfaceTexture) const;
+    MaybeError Present();
+
+    const std::string& GetLabel() const;
+
+    // Dawn API
+    void APIConfigure(const SurfaceConfiguration* config);
+    void APIGetCapabilities(AdapterBase* adapter, SurfaceCapabilities* capabilities) const;
+    void APIGetCurrentTexture(SurfaceTexture* surfaceTexture) const;
+    wgpu::TextureFormat APIGetPreferredFormat(AdapterBase* adapter) const;
+    void APIPresent();
+    void APIUnconfigure();
+    void APISetLabel(const char* label);
+
   private:
     Surface(InstanceBase* instance, ErrorMonad::ErrorTag tag);
     ~Surface() override;
 
-    Ref<InstanceBase> mInstance;
-    Type mType;
+    std::vector<wgpu::CompositeAlphaMode> GetSupportedAlphaModes() const;
 
-    // The swapchain will set this to null when it is destroyed.
+    Ref<InstanceBase> mInstance;
+    Ref<DeviceBase> mDevice;
+    Type mType;
+    std::string mLabel;
+
+    // The swapchain is created when configuring the surface.
     Ref<SwapChainBase> mSwapChain;
+
+    // Deprecated: Remove and consider it is always true once Device::APICreateSwapChain gets dropped
+    bool mIsSwapChainManagedBySurface = true;
 
     // MetalLayer
     void* mMetalLayer = nullptr;

@@ -61,6 +61,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     uint32_t GetDefaultComputeSubgroupSize() const;
 
+    ResultOrError<std::vector<wgpu::CompositeAlphaMode>> GetSupportedAlphaModes(const Surface* surface) const override;
+
   private:
     MaybeError InitializeImpl() override;
     void InitializeSupportedFeaturesImpl() override;
