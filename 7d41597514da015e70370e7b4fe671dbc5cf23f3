@@ -1,0 +1,140 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d6ce7bc_48d999ed",
+        "filename": "src/tint/utils/bytes/writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a3ad9864_6a2f1d0f",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3b43403_403fbbd7",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "```suggestion\n    /// @param count the number of bytes to write. Must be greater than 0\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e92e6a8_f1073eed",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "If true, it writes 0 and false writes 1? That seems, backwards?",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f2353ba_ba7f6fbb",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "```suggestion\n    /// Writes a string of @p len bytes to the stream.\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "760c4e2e_1e3c7059",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "```suggestion\n/// BufferWriter is an implementation of the Writer interface backed by a buffer.\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0959e4e8_dae38a5d",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "This feels like it should be in a separate `buffer_writer.h` file instead of stuck on the bottom of writer.h",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e03449e_b2db65c7",
+        "filename": "src/tint/utils/bytes/writer_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T18:43:15Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
