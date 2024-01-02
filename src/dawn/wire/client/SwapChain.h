@@ -39,6 +39,7 @@ class Device;
 class SwapChain final : public ObjectBase {
   public:
     SwapChain(const ObjectBaseParams& params,
+              const ObjectHandle& instance,
               WGPUSurface surface,
               const WGPUSwapChainDescriptor* descriptor);
     ~SwapChain() override;

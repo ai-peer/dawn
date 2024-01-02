@@ -159,7 +159,7 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
     // Create the buffer and send the creation command.
     // This must happen after any potential error buffer creation
     // as server expects allocating ids to be monotonically increasing
-    Buffer* buffer = wireClient->Make<Buffer>(descriptor);
+    Buffer* buffer = wireClient->Make<Buffer>(device->GetInstanceHandle(), descriptor);
     buffer->mDestructWriteHandleOnUnmap = false;
 
     if (descriptor->mappedAtCreation) {
@@ -205,8 +205,10 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
     return ToAPI(buffer);
 }
 
-Buffer::Buffer(const ObjectBaseParams& params, const WGPUBufferDescriptor* descriptor)
-    : ObjectBase(params),
+Buffer::Buffer(const ObjectBaseParams& params,
+               const ObjectHandle& instance,
+               const WGPUBufferDescriptor* descriptor)
+    : ObjectBase(params, instance),
       mMapStateData(AcquireRef(new MapStateData{})),
       mSize(descriptor->size),
       mUsage(static_cast<WGPUBufferUsage>(descriptor->usage)) {}

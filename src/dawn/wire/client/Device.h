@@ -45,7 +45,9 @@ class Queue;
 
 class Device final : public ObjectBase {
   public:
-    explicit Device(const ObjectBaseParams& params, const WGPUDeviceDescriptor* descriptor);
+    explicit Device(const ObjectBaseParams& params,
+                    const ObjectHandle& instance,
+                    const WGPUDeviceDescriptor* descriptor);
     ~Device() override;
 
     void SetUncapturedErrorCallback(WGPUErrorCallback errorCallback, void* errorUserdata);

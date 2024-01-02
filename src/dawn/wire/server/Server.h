@@ -129,6 +129,7 @@ struct QueueWorkDoneUserdata : CallbackUserdata {
     using CallbackUserdata::CallbackUserdata;
 
     ObjectHandle queue;
+    ObjectHandle instance;
     WGPUFuture future;
 };
 

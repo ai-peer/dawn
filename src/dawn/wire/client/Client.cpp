@@ -52,7 +52,7 @@ class NoopCommandSerializer final : public CommandSerializer {
 
 Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTransferService)
     : ClientBase(), mSerializer(serializer), mMemoryTransferService(memoryTransferService) {
-    mEventManager = std::make_unique<EventManager>(this);
+    mEventManager = std::make_unique<EventManager>();
     if (mMemoryTransferService == nullptr) {
         // If a MemoryTransferService is not provided, fall back to inline memory.
         mOwnedMemoryTransferService = CreateInlineMemoryTransferService();
@@ -61,7 +61,6 @@ Client::Client(CommandSerializer* serializer, MemoryTransferService* memoryTrans
 }
 
 Client::~Client() {
-    mEventManager->ShutDown();
     DestroyAllObjects();
 }
 
@@ -97,7 +96,7 @@ void Client::DestroyAllObjects() {
 }
 
 ReservedTexture Client::ReserveTexture(WGPUDevice device, const WGPUTextureDescriptor* descriptor) {
-    Texture* texture = Make<Texture>(descriptor);
+    Texture* texture = Make<Texture>(FromAPI(device)->GetInstanceHandle(), descriptor);
 
     ReservedTexture result;
     result.texture = ToAPI(texture);
@@ -110,7 +109,8 @@ ReservedTexture Client::ReserveTexture(WGPUDevice device, const WGPUTextureDescr
 
 ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device,
                                            const WGPUSwapChainDescriptor* descriptor) {
-    SwapChain* swapChain = Make<SwapChain>(nullptr, descriptor);
+    SwapChain* swapChain =
+        Make<SwapChain>(FromAPI(device)->GetInstanceHandle(), nullptr, descriptor);
 
     ReservedSwapChain result;
     result.swapchain = ToAPI(swapChain);
@@ -121,8 +121,8 @@ ReservedSwapChain Client::ReserveSwapChain(WGPUDevice device,
     return result;
 }
 
-ReservedDevice Client::ReserveDevice() {
-    Device* device = Make<Device>(nullptr);
+ReservedDevice Client::ReserveDevice(WGPUInstance instance) {
+    Device* device = Make<Device>(FromAPI(instance)->GetInstanceHandle(), nullptr);
 
     ReservedDevice result;
     result.device = ToAPI(device);
@@ -138,6 +138,10 @@ ReservedInstance Client::ReserveInstance(const WGPUInstanceDescriptor* descripto
         Free(instance);
         return {nullptr, 0, 0};
     }
+
+    // Reserve an EventManager for the given instance and make the association in the map.
+    mEventManagers[ObjectHandle(instance->GetWireId(), instance->GetWireGeneration())] =
+        std::make_unique<EventManager>();
 
     ReservedInstance result;
     result.instance = ToAPI(instance);
@@ -166,6 +170,12 @@ EventManager* Client::GetEventManager() {
     return mEventManager.get();
 }
 
+EventManager& Client::GetEventManager(const ObjectHandle& instance) {
+    auto it = mEventManagers.find(instance);
+    DAWN_ASSERT(it != mEventManagers.end());
+    return *it->second;
+}
+
 void Client::Disconnect() {
     mDisconnected = true;
     mSerializer = ChunkedCommandSerializer(NoopCommandSerializer::GetInstance());
@@ -184,7 +194,11 @@ void Client::Disconnect() {
             object->value()->CancelCallbacksForDisconnect();
         }
     }
-    mEventManager->ShutDown();
+
+    // Transition all event managers to ClientDropped state.
+    for (auto& [_, eventManager] : mEventManagers) {
+        eventManager->TransitionTo(EventManager::State::ClientDropped);
+    }
 }
 
 bool Client::IsDisconnected() const {

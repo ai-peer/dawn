@@ -41,8 +41,6 @@ class Queue final : public ObjectBase {
     using ObjectBase::ObjectBase;
     ~Queue() override;
 
-    bool OnWorkDoneCallback(WGPUFuture future, WGPUQueueWorkDoneStatus status);
-
     // Dawn API
     void OnSubmittedWorkDone(WGPUQueueWorkDoneCallback callback, void* userdata);
     WGPUFuture OnSubmittedWorkDoneF(const WGPUQueueWorkDoneCallbackInfo& callbackInfo);

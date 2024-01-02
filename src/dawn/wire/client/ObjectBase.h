@@ -32,6 +32,7 @@
 
 #include "dawn/common/LinkedList.h"
 #include "dawn/wire/ObjectHandle.h"
+#include "dawn/wire/client/EventManager.h"
 
 namespace dawn::wire::client {
 
@@ -49,7 +50,7 @@ struct ObjectBaseParams {
 //  - A next/prev pointer. They are part of a linked list of objects of the same type.
 class ObjectBase : public LinkNode<ObjectBase> {
   public:
-    explicit ObjectBase(const ObjectBaseParams& params);
+    ObjectBase(const ObjectBaseParams& params, const ObjectHandle& instance);
     virtual ~ObjectBase();
 
     virtual void CancelCallbacksForDisconnect() {}
@@ -58,6 +59,7 @@ class ObjectBase : public LinkNode<ObjectBase> {
     ObjectId GetWireId() const;
     ObjectGeneration GetWireGeneration() const;
     Client* GetClient() const;
+    const ObjectHandle& GetInstanceHandle() const;
 
     void Reference();
     // Returns true if it was the last reference, indicating that the caller must destroy the
@@ -70,6 +72,7 @@ class ObjectBase : public LinkNode<ObjectBase> {
   private:
     Client* const mClient;
     const ObjectHandle mHandle;
+    const ObjectHandle mInstance;
     uint32_t mRefcount;
 };
 

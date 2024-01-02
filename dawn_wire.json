@@ -76,6 +76,7 @@
         ],
         "queue on submitted work done": [
             { "name": "queue id", "type": "ObjectId", "id_type": "queue" },
+            { "name": "instance handle", "type": "ObjectHandle" },
             { "name": "future", "type": "future" }
         ],
         "queue write buffer": [
@@ -153,7 +154,8 @@
         ],
         "queue work done callback": [
             { "name": "queue", "type": "ObjectHandle", "handle_type": "queue" },
-	    { "name": "future", "type": "future" },
+            { "name": "instance", "type": "ObjectHandle" },
+	        { "name": "future", "type": "future" },
             { "name": "status", "type": "queue work done status" }
         ],
         "shader module get compilation info callback": [

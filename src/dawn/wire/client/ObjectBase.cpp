@@ -31,8 +31,8 @@
 
 namespace dawn::wire::client {
 
-ObjectBase::ObjectBase(const ObjectBaseParams& params)
-    : mClient(params.client), mHandle(params.handle), mRefcount(1) {}
+ObjectBase::ObjectBase(const ObjectBaseParams& params, const ObjectHandle& instance)
+    : mClient(params.client), mHandle(params.handle), mInstance(instance), mRefcount(1) {}
 
 ObjectBase::~ObjectBase() {
     RemoveFromList();
@@ -52,6 +52,10 @@ ObjectGeneration ObjectBase::GetWireGeneration() const {
 
 Client* ObjectBase::GetClient() const {
     return mClient;
+}
+
+const ObjectHandle& ObjectBase::GetInstanceHandle() const {
+    return mInstance;
 }
 
 void ObjectBase::Reference() {

@@ -38,7 +38,9 @@ class Device;
 
 class Texture final : public ObjectBase {
   public:
-    Texture(const ObjectBaseParams& params, const WGPUTextureDescriptor* descriptor);
+    Texture(const ObjectBaseParams& params,
+            const ObjectHandle& instance,
+            const WGPUTextureDescriptor* descriptor);
     ~Texture() override;
 
     // Note that these values can be arbitrary since they aren't validated in the wire client.

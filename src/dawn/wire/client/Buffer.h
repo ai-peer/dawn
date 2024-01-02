@@ -68,7 +68,9 @@ class Buffer final : public ObjectBase {
   public:
     static WGPUBuffer Create(Device* device, const WGPUBufferDescriptor* descriptor);
 
-    Buffer(const ObjectBaseParams& params, const WGPUBufferDescriptor* descriptor);
+    Buffer(const ObjectBaseParams& params,
+           const ObjectHandle& instance,
+           const WGPUBufferDescriptor* descriptor);
     ~Buffer() override;
 
     bool OnMapAsyncCallback(WGPUFuture future,

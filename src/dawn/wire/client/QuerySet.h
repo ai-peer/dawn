@@ -38,7 +38,9 @@ class Device;
 
 class QuerySet final : public ObjectBase {
   public:
-    QuerySet(const ObjectBaseParams& params, const WGPUQuerySetDescriptor* descriptor);
+    QuerySet(const ObjectBaseParams& params,
+             const ObjectHandle& instance,
+             const WGPUQuerySetDescriptor* descriptor);
     ~QuerySet() override;
 
     // Note that these values can be arbitrary since they aren't validated in the wire client.

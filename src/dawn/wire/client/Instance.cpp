@@ -134,6 +134,8 @@ WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor) {
 
 // Instance
 
+Instance::Instance(const ObjectBaseParams& params) : ObjectBase(params, params.handle) {}
+
 WireResult Instance::Initialize(const WGPUInstanceDescriptor* descriptor) {
     if (descriptor == nullptr) {
         return WireResult::Success;
@@ -185,7 +187,7 @@ void Instance::RequestAdapter(const WGPURequestAdapterOptions* options,
 WGPUFuture Instance::RequestAdapterF(const WGPURequestAdapterOptions* options,
                                      const WGPURequestAdapterCallbackInfo& callbackInfo) {
     Client* client = GetClient();
-    Adapter* adapter = client->Make<Adapter>();
+    Adapter* adapter = client->Make<Adapter>(GetInstanceHandle());
     auto [futureIDInternal, tracked] = client->GetEventManager()->TrackEvent(
         std::make_unique<RequestAdapterEvent>(callbackInfo, adapter));
     if (!tracked) {
@@ -231,9 +233,7 @@ bool Instance::OnRequestAdapterCallback(WGPUFuture future,
 }
 
 void Instance::ProcessEvents() {
-    // TODO(crbug.com/dawn/2061): This should only process events for this Instance, not others
-    // on the same client. When EventManager is moved to Instance, this can be fixed.
-    GetClient()->GetEventManager()->ProcessPollEvents();
+    GetClient()->GetEventManager(GetWireHandle()).ProcessPollEvents();
 
     // TODO(crbug.com/dawn/1987): The responsibility of ProcessEvents here is a bit mixed. It both
     // processes events coming in from the server, and also prompts the server to check for and
@@ -255,10 +255,7 @@ void Instance::ProcessEvents() {
 }
 
 WGPUWaitStatus Instance::WaitAny(size_t count, WGPUFutureWaitInfo* infos, uint64_t timeoutNS) {
-    // In principle the EventManager should be on the Instance, not the Client.
-    // But it's hard to get from an object to its Instance right now, so we can
-    // store it on the Client.
-    return GetClient()->GetEventManager()->WaitAny(count, infos, timeoutNS);
+    return GetClient()->GetEventManager(GetWireHandle()).WaitAny(count, infos, timeoutNS);
 }
 
 void Instance::GatherWGSLFeatures(const WGPUDawnWireWGSLControl* wgslControl,

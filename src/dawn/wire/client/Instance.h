@@ -43,7 +43,7 @@ WGPUInstance ClientCreateInstance(WGPUInstanceDescriptor const* descriptor);
 
 class Instance final : public ObjectBase {
   public:
-    using ObjectBase::ObjectBase;
+    explicit Instance(const ObjectBaseParams& params);
 
     WireResult Initialize(const WGPUInstanceDescriptor* descriptor);
 

@@ -32,8 +32,10 @@
 
 namespace dawn::wire::client {
 
-Texture::Texture(const ObjectBaseParams& params, const WGPUTextureDescriptor* descriptor)
-    : ObjectBase(params),
+Texture::Texture(const ObjectBaseParams& params,
+                 const ObjectHandle& instance,
+                 const WGPUTextureDescriptor* descriptor)
+    : ObjectBase(params, instance),
       mSize(descriptor->size),
       mMipLevelCount(descriptor->mipLevelCount),
       mSampleCount(descriptor->sampleCount),

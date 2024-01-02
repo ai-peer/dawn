@@ -32,8 +32,10 @@
 
 namespace dawn::wire::client {
 
-QuerySet::QuerySet(const ObjectBaseParams& params, const WGPUQuerySetDescriptor* descriptor)
-    : ObjectBase(params), mType(descriptor->type), mCount(descriptor->count) {}
+QuerySet::QuerySet(const ObjectBaseParams& params,
+                   const ObjectHandle& instance,
+                   const WGPUQuerySetDescriptor* descriptor)
+    : ObjectBase(params, instance), mType(descriptor->type), mCount(descriptor->count) {}
 
 QuerySet::~QuerySet() = default;
 

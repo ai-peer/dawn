@@ -76,18 +76,18 @@ namespace dawn::wire::client {
 
                         {{ReturnObj}}* returnObject;
                         if constexpr (std::is_constructible_v<
-                            {{- ReturnObj}}, const ObjectBaseParams&
+                            {{- ReturnObj}}, const ObjectBaseParams&, const ObjectHandle&
                             {%- for arg in method.arguments -%}
                                 , decltype({{as_varName(arg.name)}})
                             {%- endfor -%}
                         >) {
-                            returnObject = self->GetClient()->Make<{{ReturnObj}}>(
+                            returnObject = self->GetClient()->Make<{{ReturnObj}}>(self->GetInstanceHandle()
                                 {%- for arg in method.arguments -%}
-                                    {% if not loop.first %}, {% endif %}{{as_varName(arg.name)}}
+                                    , {{as_varName(arg.name)}}
                                 {%- endfor -%}
                             );
                         } else {
-                            returnObject = self->GetClient()->Make<{{ReturnObj}}>();
+                            returnObject = self->GetClient()->Make<{{ReturnObj}}>(self->GetInstanceHandle());
                         }
                         cmd.result = returnObject->GetWireHandle();
                     {% endif %}

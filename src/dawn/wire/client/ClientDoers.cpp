@@ -100,16 +100,6 @@ bool Client::DoBufferMapAsyncCallback(Buffer* buffer,
     return buffer->OnMapAsyncCallback(future, status, readDataUpdateInfoLength, readDataUpdateInfo);
 }
 
-bool Client::DoQueueWorkDoneCallback(Queue* queue,
-                                     WGPUFuture future,
-                                     WGPUQueueWorkDoneStatus status) {
-    // The queue might have been deleted or recreated so this isn't an error.
-    if (queue == nullptr) {
-        return true;
-    }
-    return queue->OnWorkDoneCallback(future, status);
-}
-
 bool Client::DoDeviceCreateComputePipelineAsyncCallback(Device* device,
                                                         uint64_t requestSerial,
                                                         WGPUCreatePipelineAsyncStatus status,

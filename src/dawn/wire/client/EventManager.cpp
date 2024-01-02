@@ -65,14 +65,27 @@ void TrackedEvent::Complete(FutureID futureID, EventCompletionType type) {
 
 // EventManager
 
-EventManager::EventManager(Client* client) : mClient(client) {}
+EventManager::~EventManager() {
+    TransitionTo(State::ClientDropped);
+}
 
 std::pair<FutureID, bool> EventManager::TrackEvent(std::unique_ptr<TrackedEvent> event) {
     FutureID futureID = mNextFutureID++;
 
-    if (mClient->IsDisconnected()) {
-        event->Complete(futureID, EventCompletionType::Shutdown);
-        return {futureID, false};
+    switch (mState) {
+        case State::InstanceDropped: {
+            if (event->GetCallbackMode() != WGPUCallbackMode_AllowSpontaneous) {
+                event->Complete(futureID, EventCompletionType::Shutdown);
+                return {futureID, false};
+            }
+            break;
+        }
+        case State::ClientDropped: {
+            event->Complete(futureID, EventCompletionType::Shutdown);
+            return {futureID, false};
+        }
+        default:
+            break;
     }
 
     mTrackedEvents.Use([&](auto trackedEvents) {
@@ -83,22 +96,59 @@ std::pair<FutureID, bool> EventManager::TrackEvent(std::unique_ptr<TrackedEvent>
     return {futureID, true};
 }
 
-void EventManager::ShutDown() {
-    // Call any outstanding callbacks before destruction.
-    while (true) {
-        std::map<FutureID, std::unique_ptr<TrackedEvent>> events;
-        mTrackedEvents.Use([&](auto trackedEvents) { events = std::move(*trackedEvents); });
+void EventManager::TransitionTo(EventManager::State state) {
+    // If the client is disconnected, this becomes a no-op.
+    if (mState == State::ClientDropped) {
+        return;
+    }
 
-        if (events.empty()) {
+    // Only forward state transitions are allowed.
+    DAWN_ASSERT(state > mState);
+    switch (state) {
+        case State::InstanceDropped: {
+            mState = State::InstanceDropped;
+            // Call all outstanding non-spontaneous events.
+            while (true) {
+                std::vector<std::pair<FutureID, std::unique_ptr<TrackedEvent>>> eventsToCompleteNow;
+                mTrackedEvents.Use([&](auto trackedEvents) {
+                    for (auto it = trackedEvents->begin(); it != trackedEvents->end();) {
+                        auto& event = it->second;
+                        if (event->GetCallbackMode() != WGPUCallbackMode_AllowSpontaneous) {
+                            eventsToCompleteNow.emplace_back(it->first, std::move(event));
+                            it = trackedEvents->erase(it);
+                        }
+                    }
+                });
+                if (eventsToCompleteNow.empty()) {
+                    break;
+                }
+                // Since events were initially stored and iterated from an ordered map, they must be
+                // ordered.
+                for (auto& [futureID, event] : eventsToCompleteNow) {
+                    event->Complete(futureID, EventCompletionType::Shutdown);
+                }
+            }
             break;
         }
-
-        // Ordering guaranteed because we are using a sorted map.
-        for (auto& [futureID, event] : events) {
-            event->Complete(futureID, EventCompletionType::Shutdown);
+        case State::ClientDropped: {
+            // Call any outstanding callbacks.
+            mState = State::ClientDropped;
+            while (true) {
+                std::map<FutureID, std::unique_ptr<TrackedEvent>> events;
+                mTrackedEvents.Use([&](auto trackedEvents) { events = std::move(*trackedEvents); });
+                if (events.empty()) {
+                    break;
+                }
+                // Ordering guaranteed because we are using a sorted map.
+                for (auto& [futureID, event] : events) {
+                    event->Complete(futureID, EventCompletionType::Shutdown);
+                }
+            }
+            break;
         }
+        default:
+            DAWN_UNREACHABLE();
     }
-    mIsShutdown = true;
 }
 
 void EventManager::ProcessPollEvents() {

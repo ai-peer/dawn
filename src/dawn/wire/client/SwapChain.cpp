@@ -34,9 +34,10 @@
 namespace dawn::wire::client {
 
 SwapChain::SwapChain(const ObjectBaseParams& params,
+                     const ObjectHandle& instance,
                      WGPUSurface,
                      const WGPUSwapChainDescriptor* descriptor)
-    : ObjectBase(params) {
+    : ObjectBase(params, instance) {
     mTextureDescriptor = {};
     mTextureDescriptor.size = {descriptor->width, descriptor->height, 1};
     mTextureDescriptor.format = descriptor->format;
@@ -50,7 +51,7 @@ SwapChain::~SwapChain() = default;
 
 WGPUTexture SwapChain::GetCurrentTexture() {
     Client* wireClient = GetClient();
-    Texture* texture = wireClient->Make<Texture>(&mTextureDescriptor);
+    Texture* texture = wireClient->Make<Texture>(GetInstanceHandle(), &mTextureDescriptor);
 
     SwapChainGetCurrentTextureCmd cmd;
     cmd.self = ToAPI(this);

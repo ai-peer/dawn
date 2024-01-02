@@ -36,8 +36,10 @@
 
 namespace dawn::wire::client {
 
-Device::Device(const ObjectBaseParams& params, const WGPUDeviceDescriptor* descriptor)
-    : ObjectBase(params), mIsAlive(std::make_shared<bool>()) {
+Device::Device(const ObjectBaseParams& params,
+               const ObjectHandle& instance,
+               const WGPUDeviceDescriptor* descriptor)
+    : ObjectBase(params, instance), mIsAlive(std::make_shared<bool>()) {
     if (descriptor && descriptor->deviceLostCallback) {
         mDeviceLostCallback = descriptor->deviceLostCallback;
         mDeviceLostUserdata = descriptor->deviceLostUserdata;
@@ -232,7 +234,7 @@ WGPUQueue Device::GetQueue() {
     if (mQueue == nullptr) {
         // Get the primary queue for this device.
         Client* client = GetClient();
-        mQueue = client->Make<Queue>();
+        mQueue = client->Make<Queue>(GetInstanceHandle());
 
         DeviceGetQueueCmd cmd;
         cmd.self = ToAPI(this);
@@ -249,7 +251,7 @@ void Device::CreateComputePipelineAsync(WGPUComputePipelineDescriptor const* des
                                         WGPUCreateComputePipelineAsyncCallback callback,
                                         void* userdata) {
     Client* client = GetClient();
-    ComputePipeline* pipeline = client->Make<ComputePipeline>();
+    ComputePipeline* pipeline = client->Make<ComputePipeline>(GetInstanceHandle());
 
     if (client->IsDisconnected()) {
         return callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline), "", userdata);
@@ -298,7 +300,7 @@ void Device::CreateRenderPipelineAsync(WGPURenderPipelineDescriptor const* descr
                                        WGPUCreateRenderPipelineAsyncCallback callback,
                                        void* userdata) {
     Client* client = GetClient();
-    RenderPipeline* pipeline = client->Make<RenderPipeline>();
+    RenderPipeline* pipeline = client->Make<RenderPipeline>(GetInstanceHandle());
 
     if (client->IsDisconnected()) {
         return callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(pipeline), "", userdata);
