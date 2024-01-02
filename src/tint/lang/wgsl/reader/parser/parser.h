@@ -588,7 +588,8 @@ class Parser {
     /// @param lhs the left side of the expression
     /// @returns the parsed expression or nullptr
     Maybe<const ast::Expression*> bitwise_expression_post_unary_expression(
-        const ast::Expression* lhs);
+        const ast::Expression* lhs,
+        const Source& lhs_source);
     /// Parse the `multiplicative_operator` grammar element
     /// @returns the parsed operator if successful
     Maybe<core::BinaryOp> multiplicative_operator();
@@ -596,17 +597,20 @@ class Parser {
     /// @param lhs the left side of the expression
     /// @returns the parsed expression or `lhs` if no match
     Expect<const ast::Expression*> expect_multiplicative_expression_post_unary_expression(
-        const ast::Expression* lhs);
+        const ast::Expression* lhs,
+        const Source& lhs_source);
     /// Parses additive elements
     /// @param lhs the left side of the expression
     /// @returns the parsed expression or `lhs` if no match
     Expect<const ast::Expression*> expect_additive_expression_post_unary_expression(
-        const ast::Expression* lhs);
+        const ast::Expression* lhs,
+        const Source& lhs_source);
     /// Parses math elements
     /// @param lhs the left side of the expression
     /// @returns the parsed expression or `lhs` if no match
     Expect<const ast::Expression*> expect_math_expression_post_unary_expression(
-        const ast::Expression* lhs);
+        const ast::Expression* lhs,
+        const Source& lhs_source);
     /// Parses a `unary_expression shift.post.unary_expression`
     /// @returns the parsed expression or nullptr
     Maybe<const ast::Expression*> shift_expression();
@@ -614,7 +618,8 @@ class Parser {
     /// @param lhs the left side of the expression
     /// @returns the parsed expression or `lhs` if no match
     Expect<const ast::Expression*> expect_shift_expression_post_unary_expression(
-        const ast::Expression* lhs);
+        const ast::Expression* lhs,
+        const Source& lhs_source);
     /// Parses a `unary_expression relational_expression.post.unary_expression`
     /// @returns the parsed expression or nullptr
     Maybe<const ast::Expression*> relational_expression();
@@ -622,7 +627,8 @@ class Parser {
     /// @param lhs the left side of the expression
     /// @returns the parsed expression or `lhs` if no match
     Expect<const ast::Expression*> expect_relational_expression_post_unary_expression(
-        const ast::Expression* lhs);
+        const ast::Expression* lhs,
+        const Source& lhs_source);
     /// Parse the `additive_operator` grammar element
     /// @returns the parsed operator if successful
     Maybe<core::BinaryOp> additive_operator();
@@ -881,8 +887,6 @@ class Parser {
     Maybe<const ast::Statement*> for_header_continuing();
 
     class MultiTokenSource;
-    MultiTokenSource make_source_range();
-    MultiTokenSource make_source_range_from(const Source& start);
 
     /// Creates a new `ast::Node` owned by the Module. When the Module is
     /// destructed, the `ast::Node` will also be destructed.
