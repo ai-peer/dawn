@@ -233,7 +233,7 @@ TEST_F(WGSLParserTest, Attribute_Align_ExpressionInvalid) {
     EXPECT_EQ(attr.value, nullptr);
     EXPECT_TRUE(p->has_error());
 
-    EXPECT_EQ(p->error(), "1:9: mixing '+' and '<<' requires parenthesis");
+    EXPECT_EQ(p->error(), "1:7: mixing '+' and '<<' requires parenthesis");
 }
 
 TEST_F(WGSLParserTest, Attribute_Index) {
