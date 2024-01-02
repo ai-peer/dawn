@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7627c007_c62f820a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 11
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:20:40Z",
+      "side": 1,
+      "message": "LGTM! Thanks for the iteration.",
+      "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a8bf208_dab2a53e",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:20:40Z",
+      "side": 1,
+      "message": "nit: we could compute it in the constructor.",
+      "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf8d42c7_0891b981",
+        "filename": "generator/templates/dawn/native/api_structs.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:20:40Z",
+      "side": 1,
+      "message": "nit: Maybe this can just be `Undefined`? Also we could break up the line with braces on the if.",
+      "range": {
+        "startLine": 75,
+        "startChar": 91,
+        "endLine": 75,
+        "endChar": 138
+      },
+      "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f4040f9e_610e3e03",
+        "filename": "generator/templates/dawn/native/api_structs.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:20:40Z",
+      "side": 1,
+      "message": "nit: Maybe we could have small doc",
+      "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
