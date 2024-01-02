@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "468afecb_3a7f0dcf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T22:07:43Z",
+      "side": 1,
+      "message": "PTAL. I believe these are all the files related to the AST writers.",
+      "revId": "2d048df1118422124c5036f8d7fb3d383c12d711",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
