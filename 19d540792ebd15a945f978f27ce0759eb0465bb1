@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "471fbd38_06a7a6cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-02T22:54:14Z",
+      "side": 1,
+      "message": "This isn\u0027t entirely ready yet, and I only implemented the functionality for this for work done atm. Wanted to get an initial review pass to see what you guys think about doing it this way.\n\nImportant things to look at:\n- Adding the instance handle to all objects\n- Passing the instance handle on relevant async commands (only the work done ones atm)\n- Long-lived map of instance handle to event manager on the client\n- Right now the instance handle is passed by copy in quite a few places. Maybe this is fine, but maybe we could also pass as const\u0026?\n\nThings that I would also do if this looks ok:\n- Add `~Instance()` that transitions the relevant `EventManager` to `InstanceDropped`.\n- Implement the changes for the other existing future-ized functions.",
+      "revId": "19d540792ebd15a945f978f27ce0759eb0465bb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
