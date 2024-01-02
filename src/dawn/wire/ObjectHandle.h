@@ -28,6 +28,7 @@
 #ifndef DAWN_WIRE_OBJECTHANDLE_H_
 #define DAWN_WIRE_OBJECTHANDLE_H_
 
+#include <cstddef>
 #include <cstdint>
 
 namespace dawn::wire {
@@ -59,7 +60,13 @@ struct ObjectHandle {
     ObjectHandle& AssignFrom(const ObjectHandle& rhs);
     ObjectHandle& AssignFrom(const volatile ObjectHandle& rhs);
 
+    bool operator==(const ObjectHandle& other) const;
+
     bool IsValid() const;
+};
+
+struct ObjectHandleHash {
+    size_t operator()(const ObjectHandle& handle) const;
 };
 
 }  // namespace dawn::wire

@@ -28,6 +28,7 @@
 #include "dawn/wire/ObjectHandle.h"
 
 #include "dawn/common/Assert.h"
+#include "dawn/common/HashUtils.h"
 
 namespace dawn::wire {
 
@@ -59,8 +60,18 @@ ObjectHandle& ObjectHandle::AssignFrom(const volatile ObjectHandle& rhs) {
     return *this;
 }
 
+bool ObjectHandle::operator==(const ObjectHandle& other) const {
+    return id == other.id && generation == other.generation;
+}
+
 bool ObjectHandle::IsValid() const {
     return id > 0;
+}
+
+size_t ObjectHandleHash::operator()(const ObjectHandle& handle) const {
+    size_t hash = Hash(handle.id);
+    HashCombine(&hash, handle.generation);
+    return hash;
 }
 
 }  // namespace dawn::wire
