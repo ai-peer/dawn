@@ -16,6 +16,57 @@
       "message": "PTAL (no rush of course)",
       "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7b0596b_8c42cad5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:11:01Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "04f7cada_00279de5",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:11:01Z",
+      "side": 1,
+      "message": "nit: unrelated? But also why is it needed?",
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "778f26dd_fc073ae0",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:11:01Z",
+      "side": 1,
+      "message": "Error.h makes this outside of any namespace by prefixing the IsWGPUBitmask with wgpu::",
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
