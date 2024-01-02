@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0680f195_771b33a7",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T12:26:30Z",
+      "side": 1,
+      "message": "I assume these where copied / adapted from the Chromium files?",
+      "revId": "85be30cbce56fe783da97440527eff2c2944a583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
