@@ -16,6 +16,24 @@
       "message": "I assume these where copied / adapted from the Chromium files?",
       "revId": "85be30cbce56fe783da97440527eff2c2944a583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f6213c51_9b3b9ed0",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-01-02T18:22:29Z",
+      "side": 1,
+      "message": "Does this represent just the dependencies needed for flat_hash_set (and presumably flat_hash_map), or is it just pulling in anything that was missing relative to the Chromium files? Thus far we\u0027ve kept dawn\u0027s dependencies on absl to only what was necessary, though that was really just to reduce maintenance burden.\n\nI wouldn\u0027t consider it a blocker either way.",
+      "parentUuid": "0680f195_771b33a7",
+      "revId": "85be30cbce56fe783da97440527eff2c2944a583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
