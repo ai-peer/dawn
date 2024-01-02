@@ -1,0 +1,254 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8cd0df82_2973d143",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "Thank you for starting to look at this! In general it is a great direction with the following additional topics:\n\n - It would be really great to support both code paths at the same time for a small amount of time, with a deprecation warning. Note that we don\u0027t necessarily need to support mixed usage on the same surface.\n - Please make sure that ManualSwapChainTests and its test plan pass, at least on your device. We can look at other OSes after a first version is ready (we can even land tests just on Vulkan at first then do the other backends).\n  - It would be ideal to have tests for this. They could be mostly copy-pasted from the various SwapChain tests in Dawn.\n  \nNote that this is exactly how we thought we\u0027d implement this 😊",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75f4f905_64b8887c",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3286,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "nit: default to 0.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4a79841_a292769f",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3287,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "nit: optional: true I guess?",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "99680d81_5cfb972d",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "nit: default to auto",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "241806a8_13f68b58",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "nit: unimplemented?",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f783894f_488fe10b",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "We could get the capabilities from the device\u0027s adapter and then use that. Maybe with a TODO(...) cache the configuration for the last used adapter since that\u0027s the most likely case, and capabilities shouldn\u0027t change.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8a099218_2f6f5797",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "Wouldn\u0027t this depend on the backend? For example Vulkan doesn\u0027t necessarily support all present modes. IMHO this method could be mostly a:\n\n```\nDAWN_TRY_ASSIGN(*capabilities, adapter-\u003eFillSurfaceCapabilities(this));\n```\n\nOr an internal Dawn structure returned with bitmasks instead of vectors and conversion in this function.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1ce2f118_14a525e5",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "nit: this never happens. An Adapter always have a pointer to a PhysicalDevice.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "020dea82_dcf8044a",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "IMHO we could require that this never returns an error, and even return an internal bitmask of the allowed enums to avoid allocating a vector.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6db479cd_ef1a290f",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "nit: the [Surface] is a thing that\u0027s done automatically but can contain a label when the surface has one. So instead you can do `%s` and add this at the end of the argument list. Ditto everywhere else.",
+      "range": {
+        "startLine": 465,
+        "startChar": 40,
+        "endLine": 465,
+        "endChar": 49
+      },
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "960c2638_c0d7a929",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "Couldn\u0027t the GetCurrentTexture return a ResultOrError\u003cSurfaceTexture\u003e value?",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0fa6817e_3ec0e785",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "nit: `git cl format` :)",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2438fc64_242db2cc",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "Probably something to raise upstream.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2fa785d4_28df7431",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-02T13:43:02Z",
+      "side": 1,
+      "message": "I wonder if this should be renamed to info-\u003eoptimal upstream to avoid double negation.",
+      "range": {
+        "startLine": 93,
+        "startChar": 10,
+        "endLine": 93,
+        "endChar": 20
+      },
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
