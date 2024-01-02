@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cef4b5f8_56a75456",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-02T16:51:30Z",
+      "side": 1,
+      "message": "The changes in bytes/ should move to a new cl, otherwise, lgtm.",
+      "revId": "109f3682941a985a4d434c6c45c237f686e1b5d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
