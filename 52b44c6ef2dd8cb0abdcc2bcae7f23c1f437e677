@@ -16,6 +16,24 @@
       "message": "For info, the error from Kokoro is:\n```\n/dawn/build/gen/src/dawn/wire/client/ApiProcs_autogen.cpp:2535:22: error: no member named \u0027GetPreferredFormat\u0027 in \u0027dawn::wire::client::Surface\u0027\n        return self-\u003eGetPreferredFormat( adapter);\n               ~~~~  ^\n```",
       "revId": "52b44c6ef2dd8cb0abdcc2bcae7f23c1f437e677",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b28ede0_7af64b69",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:34:40Z",
+      "side": 1,
+      "message": "Thx, I indeed don\u0027t have access to Kokoro\u0027s log! TBH I\u0027m not 100% sure of what the \"wire\" part of the API is about, could this mean that I specified somthing incorrectly in dawn.json? I see that in ApiObjects_autogen.h it is defined as \"struct Surface final : ObjectBase\" rather than a fwd declaration like \"class SwapChain;\"",
+      "parentUuid": "5f9ddacd_b0cb6d0f",
+      "revId": "52b44c6ef2dd8cb0abdcc2bcae7f23c1f437e677",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
