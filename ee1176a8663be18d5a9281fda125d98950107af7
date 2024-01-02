@@ -16,6 +16,46 @@
       "message": "PTAL, thanks!",
       "revId": "ee1176a8663be18d5a9281fda125d98950107af7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "824eece8_d134733c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-02T12:06:48Z",
+      "side": 1,
+      "message": "Good stuff!",
+      "revId": "ee1176a8663be18d5a9281fda125d98950107af7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab5b4b1_8bf6198a",
+        "filename": "src/tint/lang/core/ir/transform/builtin_polyfill.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 663,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-02T12:06:48Z",
+      "side": 1,
+      "message": "Somewhat minor, but I\u0027d recommend masking and shifting after bitcasting `vec4i` to `vec4u`.\nI\u0027ve seen some interesting compiler bugs with shifts and sign extensions, and I\u0027d feel it\u0027s generally safer to do this stuff with unsigned integers when possible.",
+      "range": {
+        "startLine": 663,
+        "startChar": 28,
+        "endLine": 663,
+        "endChar": 64
+      },
+      "revId": "ee1176a8663be18d5a9281fda125d98950107af7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
