@@ -2543,9 +2543,9 @@ fn main() {
     workgroupBarrier();
     ^^^^^^^^^^^^^^^^
 
-test:7:34 note: control flow depends on possibly non-uniform value
+test:7:7 note: control flow depends on possibly non-uniform value
   if ((non_uniform_global == 42) && false) {
-                                 ^^
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 test:7:8 note: reading from read_write storage buffer 'non_uniform_global' may result in a non-uniform value
   if ((non_uniform_global == 42) && false) {
@@ -2601,9 +2601,9 @@ fn main() {
     workgroupBarrier();
     ^^^^^^^^^^^^^^^^
 
-test:7:34 note: control flow depends on possibly non-uniform value
+test:7:7 note: control flow depends on possibly non-uniform value
   if ((non_uniform_global == 42) || true) {
-                                 ^^
+      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 test:7:8 note: reading from read_write storage buffer 'non_uniform_global' may result in a non-uniform value
   if ((non_uniform_global == 42) || true) {
@@ -3750,7 +3750,7 @@ test:5:8 note: parameter 'p' of 'bar' may be non-uniform
 
 test:12:7 note: possibly non-uniform value passed via pointer here
   bar(&v);
-      ^
+      ^^
 
 test:11:11 note: reading from read_write storage buffer 'non_uniform' may result in a non-uniform value
   var v = non_uniform;
@@ -3817,7 +3817,7 @@ test:5:8 note: parameter 'p' of 'bar' may be non-uniform
 
 test:11:7 note: possibly non-uniform value passed via pointer here
   bar(&non_uniform);
-      ^
+      ^^^^^^^^^^^^
 
 test:2:48 note: reading from read_write storage buffer 'non_uniform' may result in a non-uniform value
 @group(0) @binding(0) var<storage, read_write> non_uniform : i32;
@@ -3889,7 +3889,7 @@ test:5:8 note: parameter 'p' of 'bar' may be non-uniform
 
 test:13:7 note: possibly non-uniform value passed via pointer here
   bar(&v);
-      ^
+      ^^
 
 test:12:11 note: reading from read_write storage buffer 'non_uniform' may result in a non-uniform value
   var v = non_uniform;
@@ -3930,7 +3930,7 @@ test:5:8 note: parameter 'p' of 'bar' may be non-uniform
 
 test:12:7 note: possibly non-uniform value passed via pointer here
   bar(&v);
-      ^
+      ^^
 
 test:11:11 note: reading from read_write storage buffer 'non_uniform' may result in a non-uniform value
   var v = non_uniform;
@@ -4429,7 +4429,7 @@ test:11:3 note: control flow depends on possibly non-uniform value
 
 test:10:7 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&v);
-      ^
+      ^^
 )");
 }
 
@@ -4693,7 +4693,7 @@ test:17:3 note: control flow depends on possibly non-uniform value
 
 test:16:7 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&v);
-      ^
+      ^^
 )");
 }
 
@@ -4730,7 +4730,7 @@ test:15:3 note: control flow depends on possibly non-uniform value
 
 test:14:7 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&v);
-      ^
+      ^^
 )");
 }
 
@@ -4767,7 +4767,7 @@ test:15:3 note: control flow depends on possibly non-uniform value
 
 test:14:7 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&v);
-      ^
+      ^^
 )");
 }
 
@@ -4812,7 +4812,7 @@ test:23:3 note: control flow depends on possibly non-uniform value
 
 test:22:7 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&v);
-      ^
+      ^^
 )");
 }
 
@@ -4851,7 +4851,7 @@ test:17:3 note: control flow depends on possibly non-uniform value
 
 test:16:7 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&v);
-      ^
+      ^^
 )");
 }
 
@@ -5154,7 +5154,7 @@ test:13:3 note: control flow depends on possibly non-uniform value
 
 test:12:11 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&a, &b);
-          ^
+          ^^
 )");
 }
 
@@ -5247,7 +5247,7 @@ test:13:3 note: control flow depends on possibly non-uniform value
 
 test:12:11 note: contents of pointer may become non-uniform after calling 'bar'
   bar(&a, &b);
-          ^
+          ^^
 )");
 }
 
@@ -7718,7 +7718,7 @@ test:7:8 note: parameter 'p' of 'bar' may be non-uniform
 
 test:15:9 note: possibly non-uniform value passed via pointer here
   v[bar(&f)] += 1;
-        ^
+        ^^
 
 test:14:11 note: reading from read_write storage buffer 'rw' may result in a non-uniform value
   var f = rw;
@@ -7794,7 +7794,7 @@ test:7:8 note: parameter 'p' of 'bar' may be non-uniform
 
 test:15:9 note: possibly non-uniform value passed via pointer here
   v[bar(&f)]++;
-        ^
+        ^^
 
 test:14:11 note: reading from read_write storage buffer 'rw' may result in a non-uniform value
   var f = rw;
@@ -7867,11 +7867,11 @@ test:10:8 note: parameter 'p' of 'b' may be non-uniform
 
 test:19:22 note: possibly non-uniform value passed via pointer here
   arr[a(&i)] = arr[b(&i)];
-                     ^
+                     ^^
 
 test:19:9 note: contents of pointer may become non-uniform after calling 'a'
   arr[a(&i)] = arr[b(&i)];
-        ^
+        ^^
 )");
 }
 
@@ -7940,11 +7940,11 @@ test:10:8 note: parameter 'p' of 'b' may be non-uniform
 
 test:19:23 note: possibly non-uniform value passed via pointer here
   arr[a(&i)] += arr[b(&i)];
-                      ^
+                      ^^
 
 test:19:9 note: contents of pointer may become non-uniform after calling 'a'
   arr[a(&i)] += arr[b(&i)];
-        ^
+        ^^
 )");
 }
 
@@ -8078,9 +8078,9 @@ fn main() {
   let b = (non_uniform_global == 0) && (dpdx(1.0) == 0.0);
                                         ^^^^^^^^^
 
-test:5:37 note: control flow depends on possibly non-uniform value
+test:5:11 note: control flow depends on possibly non-uniform value
   let b = (non_uniform_global == 0) && (dpdx(1.0) == 0.0);
-                                    ^^
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 test:5:12 note: reading from read_write storage buffer 'non_uniform_global' may result in a non-uniform value
   let b = (non_uniform_global == 0) && (dpdx(1.0) == 0.0);
@@ -8385,7 +8385,7 @@ fn main(@builtin(local_invocation_index) idx : u32) {
     EXPECT_EQ(error_,
               R"(test:8:28 error: possibly non-uniform value passed here
   if (workgroupUniformLoad(&data[idx]) > 0) {
-                           ^
+                           ^^^^^^^^^^
 
 test:8:34 note: builtin 'idx' of 'main' may be non-uniform
   if (workgroupUniformLoad(&data[idx]) > 0) {
@@ -8423,7 +8423,7 @@ test:6:31 note: parameter 'p' of 'foo' may be non-uniform
 
 test:12:11 note: possibly non-uniform value passed here
   if (foo(&data[idx]) > 0) {
-          ^
+          ^^^^^^^^^^
 
 test:12:17 note: builtin 'idx' of 'main' may be non-uniform
   if (foo(&data[idx]) > 0) {
