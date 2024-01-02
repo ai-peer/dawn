@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4c1035f_eb0793d4",
+        "filename": "src/tint/lang/spirv/writer/writer_ast_fuzz.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-02T21:59:51Z",
+      "side": 0,
+      "message": "So before, we were fuzzing all the reflected `Options`, but this has now been dropped.",
+      "range": {
+        "startLine": 37,
+        "startChar": 47,
+        "endLine": 37,
+        "endChar": 62
+      },
+      "revId": "c1b5d219cb80cfa9e5ab6eee31015df9dccb28e6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
