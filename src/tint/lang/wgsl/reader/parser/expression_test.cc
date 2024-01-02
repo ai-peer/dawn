@@ -50,9 +50,9 @@ TEST_F(WGSLParserTest, Expression_Or_Parses) {
     ASSERT_NE(e.value, nullptr);
 
     EXPECT_EQ(e->source.range.begin.line, 1u);
-    EXPECT_EQ(e->source.range.begin.column, 3u);
+    EXPECT_EQ(e->source.range.begin.column, 1u);
     EXPECT_EQ(e->source.range.end.line, 1u);
-    EXPECT_EQ(e->source.range.end.column, 5u);
+    EXPECT_EQ(e->source.range.end.column, 10u);
 
     ASSERT_TRUE(e->Is<ast::BinaryExpression>());
     auto* rel = e->As<ast::BinaryExpression>();
@@ -117,9 +117,9 @@ TEST_F(WGSLParserTest, Expression_And_Parses) {
     ASSERT_NE(e.value, nullptr);
 
     EXPECT_EQ(e->source.range.begin.line, 1u);
-    EXPECT_EQ(e->source.range.begin.column, 3u);
+    EXPECT_EQ(e->source.range.begin.column, 1u);
     EXPECT_EQ(e->source.range.end.line, 1u);
-    EXPECT_EQ(e->source.range.end.column, 5u);
+    EXPECT_EQ(e->source.range.end.column, 10u);
 
     ASSERT_TRUE(e->Is<ast::BinaryExpression>());
     auto* rel = e->As<ast::BinaryExpression>();
@@ -180,7 +180,7 @@ TEST_F(WGSLParserTest, Expression_Mixing_OrWithAnd) {
     EXPECT_TRUE(e.errored);
     EXPECT_EQ(e.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:3: mixing '&&' and '||' requires parenthesis");
+    EXPECT_EQ(p->error(), "1:1: mixing '&&' and '||' requires parenthesis");
 }
 
 TEST_F(WGSLParserTest, Expression_Mixing_AndWithOr) {
@@ -190,7 +190,7 @@ TEST_F(WGSLParserTest, Expression_Mixing_AndWithOr) {
     EXPECT_TRUE(e.errored);
     EXPECT_EQ(e.value, nullptr);
     EXPECT_TRUE(p->has_error());
-    EXPECT_EQ(p->error(), "1:3: mixing '||' and '&&' requires parenthesis");
+    EXPECT_EQ(p->error(), "1:1: mixing '||' and '&&' requires parenthesis");
 }
 
 TEST_F(WGSLParserTest, Expression_Bitwise) {
@@ -281,7 +281,7 @@ TEST_F(WGSLParserTest, Expression_InvalidAssociativity) {
     EXPECT_TRUE(e.errored);
     EXPECT_TRUE(p->has_error());
     EXPECT_EQ(e.value, nullptr);
-    EXPECT_EQ(p->error(), R"(1:7: mixing '&&' and '||' requires parenthesis)");
+    EXPECT_EQ(p->error(), R"(1:1: mixing '&&' and '||' requires parenthesis)");
 }
 
 TEST_F(WGSLParserTest, Expression_SubtractionNoSpace) {
@@ -514,7 +514,7 @@ TEST_P(ParserImplMixedBinaryOpTest, Test) {
         EXPECT_EQ(e.value, nullptr);
         EXPECT_TRUE(p->has_error());
         StringStream expected;
-        expected << "1:3: mixing '" << GetParam().lhs_op.symbol << "' and '"
+        expected << "1:1: mixing '" << GetParam().lhs_op.symbol << "' and '"
                  << GetParam().rhs_op.symbol << "' requires parenthesis";
         EXPECT_EQ(p->error(), expected.str());
     }
