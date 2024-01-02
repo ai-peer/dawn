@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "803833cb_be831bc9",
+        "filename": "src/tint/utils/bytes/writer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d6ce7bc_48d999ed",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a3ad9864_6a2f1d0f",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-02T18:43:15Z",
       "side": 1,
       "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6e54108f_bc268291",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a3ad9864_6a2f1d0f",
       "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -52,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f678319f_276c098e",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c3b43403_403fbbd7",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e92e6a8_f1073eed",
@@ -65,6 +119,24 @@
       "writtenOn": "2024-01-02T18:43:15Z",
       "side": 1,
       "message": "If true, it writes 0 and false writes 1? That seems, backwards?",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0ff9c7b_bb1a5f5a",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 81,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e92e6a8_f1073eed",
       "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2add78b_358e3c74",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 85,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f2353ba_ba7f6fbb",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "760c4e2e_1e3c7059",
@@ -99,6 +189,24 @@
       "writtenOn": "2024-01-02T18:43:15Z",
       "side": 1,
       "message": "```suggestion\n/// BufferWriter is an implementation of the Writer interface backed by a buffer.\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3dfb3013_44d897a7",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "760c4e2e_1e3c7059",
       "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +228,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7114798_3d702b6f",
+        "filename": "src/tint/utils/bytes/writer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 96,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0959e4e8_dae38a5d",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2e03449e_b2db65c7",
@@ -133,6 +259,24 @@
       "writtenOn": "2024-01-02T18:43:15Z",
       "side": 1,
       "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "99a05e21_372d38cf",
+        "filename": "src/tint/utils/bytes/writer_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-02T19:15:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2e03449e_b2db65c7",
       "revId": "7d41597514da015e70370e7b4fe671dbc5cf23f3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
