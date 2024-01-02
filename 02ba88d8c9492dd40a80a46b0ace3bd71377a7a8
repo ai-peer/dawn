@@ -16,6 +16,24 @@
       "message": "Ideally we can keep the two APIs in parallel with a deprecation warning for the CreateSwapChain call.",
       "revId": "02ba88d8c9492dd40a80a46b0ace3bd71377a7a8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac800f1_a575a14e",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 1215,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 0,
+      "message": "Okey!",
+      "parentUuid": "2356951c_8856d881",
+      "revId": "02ba88d8c9492dd40a80a46b0ace3bd71377a7a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

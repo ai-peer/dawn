@@ -18,6 +18,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e85a49b5_dfa4cd9e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "Thanks for the feedback, I started taking it into account and will continue some time in the next days!",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b168e6a9_a7cc09f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "I reverted the legacy swap chain, and will look into proper testing!",
+      "parentUuid": "8cd0df82_2973d143",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "75f4f905_64b8887c",
@@ -35,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ffba84b_af866c94",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3286,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "75f4f905_64b8887c",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d4a79841_a292769f",
@@ -48,6 +101,24 @@
       "writtenOn": "2024-01-02T13:43:02Z",
       "side": 1,
       "message": "nit: optional: true I guess?",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d1e3ca9b_00745a3a",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3287,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "I\u0027ll remove these from teh public SwapChainDescriptor if it remains exposed, and overload internally with a CreateSwapChain that takes the SurfaceConfiguration as argument.",
+      "parentUuid": "d4a79841_a292769f",
       "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "66696624_d25b6f16",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3288,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "Mmh there is no \"auto\" mode for present mode afaik",
+      "parentUuid": "99680d81_5cfb972d",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "241806a8_13f68b58",
         "filename": "src/dawn/native/Adapter.h",
         "patchSetId": 1
@@ -82,6 +171,24 @@
       "writtenOn": "2024-01-02T13:43:02Z",
       "side": 1,
       "message": "nit: unimplemented?",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "def3fe00_af02e74b",
+        "filename": "src/dawn/native/Adapter.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "My bad, leftover from a previous test (took me some time to figure out where exactly this function should end up)",
+      "parentUuid": "241806a8_13f68b58",
       "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -137,6 +244,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "38036bc1_9610093a",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1ce2f118_14a525e5",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "020dea82_dcf8044a",
@@ -150,6 +275,24 @@
       "writtenOn": "2024-01-02T13:43:02Z",
       "side": 1,
       "message": "IMHO we could require that this never returns an error, and even return an internal bitmask of the allowed enums to avoid allocating a vector.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8612b749_4d39eec6",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "I needed to add the error case for the Vulkan Android implem because I could not find another way than creating a Vk surface just to check its capabilities (that may be my lack of Vulkan experience talking here)",
+      "parentUuid": "020dea82_dcf8044a",
       "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -177,6 +320,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a286630e_d5e98f76",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 465,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6db479cd_ef1a290f",
+      "range": {
+        "startLine": 465,
+        "startChar": 40,
+        "endLine": 465,
+        "endChar": 49
+      },
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "960c2638_c0d7a929",
@@ -194,6 +361,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec796ed8_51e53740",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 469,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "I wanted to at first, but ran into trouble with Ref\u003cTextureBase\u003e which I\u0027m not 100% sure how to deal with so I could not have GetCurrentTextureImpl return a SurfaceTexture, then I decided to have GetCurrentTexture mimick the signature of GetCurrentTextureImpl but in fact you\u0027re right this should remain an Impl detail and GetCurrentTexture can return a SurfaceTexture",
+      "parentUuid": "960c2638_c0d7a929",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0fa6817e_3ec0e785",
@@ -207,6 +392,24 @@
       "writtenOn": "2024-01-02T13:43:02Z",
       "side": 1,
       "message": "nit: `git cl format` :)",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d49b08c_1a6d071f",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "Yeah I should give a new shot at installing git cl ^^\u0027 (failed last time I don\u0027t recall why)",
+      "parentUuid": "0fa6817e_3ec0e785",
       "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -241,6 +444,30 @@
       "writtenOn": "2024-01-02T13:43:02Z",
       "side": 1,
       "message": "I wonder if this should be renamed to info-\u003eoptimal upstream to avoid double negation.",
+      "range": {
+        "startLine": 93,
+        "startChar": 10,
+        "endLine": 93,
+        "endChar": 20
+      },
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2530029a_73b326a5",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-02T23:24:39Z",
+      "side": 1,
+      "message": "Agreed, but I\u0027ll stick with the standard for now ;)",
+      "parentUuid": "2fa785d4_28df7431",
       "range": {
         "startLine": 93,
         "startChar": 10,
