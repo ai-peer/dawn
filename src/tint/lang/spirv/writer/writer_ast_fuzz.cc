@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,30 +25,33 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/spirv/writer/writer.h"
+// GEN_BUILD:CONDITION(tint_build_wgsl_reader)
 
-#include "src/tint/cmd/fuzz/ir/fuzz.h"
-#include "src/tint/lang/spirv/validate/validate.h"
-#include "src/tint/lang/spirv/writer/helpers/generate_bindings.h"
+#include "src/tint/cmd/fuzz/wgsl/fuzz.h"
+#include "src/tint/lang/spirv/writer/writer.h"
+#include "src/tint/lang/wgsl/ast/transform/manager.h"
+#include "src/tint/lang/wgsl/ast/transform/substitute_override.h"
 
 namespace tint::spirv::writer {
 namespace {
 
-void IRPrinterFuzzer(core::ir::Module& module, Options options) {
-    options.bindings = GenerateBindings(module);
-    auto output = Generate(module, options);
-    if (!output) {
-        return;
-    }
-    auto& spirv = output->spirv;
-    if (auto res = validate::Validate(Slice(spirv.data(), spirv.size()), SPV_ENV_VULKAN_1_1);
-        !res) {
-        TINT_ICE() << "Output of SPIR-V writer failed to validate with SPIR-V Tools\n"
-                   << res.Failure();
-    }
+void WriterASTFuzzer(const tint::Program& program) {
+    tint::ast::transform::Manager transform_manager;
+    tint::ast::transform::DataMap transform_inputs;
+
+    // Substitute overrides
+    tint::ast::transform::SubstituteOverride::Config cfg{};
+    transform_inputs.Add<tint::ast::transform::SubstituteOverride::Config>(cfg);
+    transform_manager.Add<tint::ast::transform::SubstituteOverride>();
+
+    tint::ast::transform::DataMap outputs;
+
+    // If the result is invalid, the generate call will log an error.
+    auto result = transform_manager.Run(program, std::move(transform_inputs), outputs);
+    [[maybe_unused]] auto res = tint::spirv::writer::Generate(result, {});
 }
 
 }  // namespace
 }  // namespace tint::spirv::writer
 
-TINT_IR_MODULE_FUZZER(tint::spirv::writer::IRPrinterFuzzer);
+TINT_WGSL_PROGRAM_FUZZER(tint::spirv::writer::WriterASTFuzzer);
