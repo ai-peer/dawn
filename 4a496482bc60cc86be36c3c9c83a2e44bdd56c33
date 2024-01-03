@@ -16,6 +16,24 @@
       "message": "CMake build has been broken with the latest SPIR-V Tools roll:\n\n```CMake Error at third_party/vulkan-deps/spirv-tools/src/external/CMakeLists.txt:30 (add_subdirectory):\n  add_subdirectory not given a binary directory but the given source\n  directory \"/dawn/src/third_party/vulkan-deps/spirv-headers/src\" is not a\n  subdirectory of\n  \"/dawn/src/third_party/vulkan-deps/spirv-tools/src/external\".  When\n  specifying an out-of-tree source a binary directory must be explicitly\n  specified.\n```\n\nhttps://github.com/KhronosGroup/SPIRV-Tools/pull/5422\n\nI\u0027ll try to revert the roll.",
       "revId": "4a496482bc60cc86be36c3c9c83a2e44bdd56c33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c280bfb6_0d806f6f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-03T11:15:47Z",
+      "side": 1,
+      "message": "Roll reverted, and roller stopped for now. Please try rebasing.",
+      "parentUuid": "8562e1d5_9a917ae6",
+      "revId": "4a496482bc60cc86be36c3c9c83a2e44bdd56c33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
