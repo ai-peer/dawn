@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef1c3be1_50702b37",
+        "filename": "src/dawn/wire/client/Client.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T23:30:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7bba1423_7b13ef39",
+      "range": {
+        "startLine": 127,
+        "startChar": 4,
+        "endLine": 128,
+        "endChar": 58
+      },
+      "revId": "19d540792ebd15a945f978f27ce0759eb0465bb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "da1452ec_44ad48d1",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-03T17:15:57Z",
       "side": 1,
       "message": "I think we can avoid adding this member for most..? objects. we only need it for objects that have methods that return a future.\n\nI think we can have:\n - if it makes it simpler, ObjectBase can still optionally take in the instance as a constructor arg, to make the generator simple. but it won\u0027t store it, and it won\u0027t have the GetInstanceHandle() getter.\n\n - manually defined objects - Buffer/Adapter/Device/Instance extend some other class like ObjectBaseWithInstanceHandle (ugh.. naming..) store the handle, and provide the getter.",
+      "range": {
+        "startLine": 75,
+        "startChar": 0,
+        "endLine": 75,
+        "endChar": 33
+      },
+      "revId": "19d540792ebd15a945f978f27ce0759eb0465bb1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6841c058_732885f8",
+        "filename": "src/dawn/wire/client/ObjectBase.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T23:30:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "da1452ec_44ad48d1",
       "range": {
         "startLine": 75,
         "startChar": 0,
