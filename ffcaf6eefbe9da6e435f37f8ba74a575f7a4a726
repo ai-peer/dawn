@@ -210,6 +210,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1b57e832_6c035a8b",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 344,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T08:43:19Z",
+      "side": 1,
+      "message": "I added the caching mechanism, though not sure where to put this CachedSurfaceCapabilities that I introduced, that is also returned by the physical device",
+      "parentUuid": "f783894f_488fe10b",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a099218_2f6f5797",
@@ -223,6 +241,24 @@
       "writtenOn": "2024-01-02T13:43:02Z",
       "side": 1,
       "message": "Wouldn\u0027t this depend on the backend? For example Vulkan doesn\u0027t necessarily support all present modes. IMHO this method could be mostly a:\n\n```\nDAWN_TRY_ASSIGN(*capabilities, adapter-\u003eFillSurfaceCapabilities(this));\n```\n\nOr an internal Dawn structure returned with bitmasks instead of vectors and conversion in this function.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa777c7_5fdbba4c",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 432,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T08:43:19Z",
+      "side": 1,
+      "message": "I implemented GetSurfaceCapabilities in the physical device rather than the Adapter because the Adapter has no backend-specific implementation. Since vectors are cached, it is ok to allocate them then I guess rather than spending time and LoC converting from bitfield to webgpu.h compliant pointers",
+      "parentUuid": "8a099218_2f6f5797",
       "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -427,6 +463,24 @@
       "writtenOn": "2024-01-02T13:43:02Z",
       "side": 1,
       "message": "Probably something to raise upstream.",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c48cc94_fe780a5d",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 491,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T08:43:19Z",
+      "side": 1,
+      "message": "Filled: https://github.com/webgpu-native/webgpu-headers/issues/255",
+      "parentUuid": "2438fc64_242db2cc",
       "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
