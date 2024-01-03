@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "44726d49_3ee64c12",
+        "filename": "src/tint/lang/msl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T15:00:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c80e52e0_525ca8ab",
+      "revId": "4abb8a73dd18e8afb15268b9de4f9748c01cac58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "13d6a7ed_e6d72943",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-02T22:05:12Z",
       "side": 1,
       "message": "Rename to `tint::msl::writer::ASTFuzzer` the `Writer` is redundant.",
+      "revId": "4abb8a73dd18e8afb15268b9de4f9748c01cac58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a2aef125_0cadadb9",
+        "filename": "src/tint/lang/msl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T15:00:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "13d6a7ed_e6d72943",
       "revId": "4abb8a73dd18e8afb15268b9de4f9748c01cac58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
