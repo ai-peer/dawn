@@ -68,6 +68,24 @@
       "parentUuid": "8524ca95_f07baa52",
       "revId": "69ecca2d08326d210d45b209a8537b369e456ab9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adbef08e_7ff411db",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T19:31:01Z",
+      "side": 0,
+      "message": "Got it, I will look into this with my pass over the expectations then - I think I also need to add a bunch of flake expectations because CI is quite red right now. Maybe I can modify the \"please triage\" comment to try to explain this behavior. Thanks!",
+      "parentUuid": "4b499f61_57f0a826",
+      "revId": "69ecca2d08326d210d45b209a8537b369e456ab9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
