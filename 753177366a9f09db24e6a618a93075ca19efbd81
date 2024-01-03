@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86024675_e06f907f",
+        "filename": "src/tint/lang/core/ir/binary/roundtrip_fuzz.cc",
+        "patchSetId": 30
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T20:12:37Z",
+      "side": 1,
+      "message": "```suggestion\n// Copyright 2024 The Dawn \u0026 Tint Authors\n```",
+      "revId": "753177366a9f09db24e6a618a93075ca19efbd81",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
