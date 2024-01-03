@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "be9236eb_b84d98ab",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-03T16:52:25Z",
+      "side": 1,
+      "message": "LGTM; FYI the uncapturedErrorCallback is going to be changed at some point to always behave this way",
+      "revId": "ae6774720444cb6f940bd6649c923aa96c757049",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
