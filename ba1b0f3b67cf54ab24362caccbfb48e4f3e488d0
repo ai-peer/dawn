@@ -16,6 +16,23 @@
       "message": "Not a full review yet, but we need to add a WGSL language feature for `pointer_composite_access`, mark it as \"experimental\" in `status.cc`, and detect uses of the feature in the Resolver. Otherwise this syntax will just start working before we\u0027ve shipped it for real.",
       "revId": "ba1b0f3b67cf54ab24362caccbfb48e4f3e488d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "922229de_51057568",
+        "filename": "src/tint/lang/core/type/type.cc",
+        "patchSetId": 16
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-03T17:48:44Z",
+      "side": 1,
+      "message": "This is fine.\nAlternate: return UnwrapRef(UnwrapPtr());\n\nBut that would be wrong if/when we get pointers to pointers, for example.",
+      "revId": "ba1b0f3b67cf54ab24362caccbfb48e4f3e488d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
