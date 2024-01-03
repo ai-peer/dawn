@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "0b122c2fc7849c9ffc9b0bd1daa6a265ffedff25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "661b62d5_8184c113",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:46:05Z",
+      "side": 1,
+      "message": "Hmm again not sure if it\u0027d be possible to make this recurse, fine otherwise.",
+      "range": {
+        "startLine": 404,
+        "startChar": 8,
+        "endLine": 404,
+        "endChar": 59
+      },
+      "revId": "0b122c2fc7849c9ffc9b0bd1daa6a265ffedff25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
