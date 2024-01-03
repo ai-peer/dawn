@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f88f51a2_3af20459",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 11
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T08:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5a8bf208_dab2a53e",
+      "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf8d42c7_0891b981",
@@ -58,6 +76,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f862ec23_cd4711a7",
+        "filename": "generator/templates/dawn/native/api_structs.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T08:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf8d42c7_0891b981",
+      "range": {
+        "startLine": 75,
+        "startChar": 91,
+        "endLine": 75,
+        "endChar": 138
+      },
+      "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f4040f9e_610e3e03",
@@ -71,6 +113,24 @@
       "writtenOn": "2024-01-02T12:20:40Z",
       "side": 1,
       "message": "nit: Maybe we could have small doc",
+      "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3aff155a_7a59638b",
+        "filename": "generator/templates/dawn/native/api_structs.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T08:42:12Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f4040f9e_610e3e03",
       "revId": "525c5f0598ea57e59943c984a5b2672f11fd38ae",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
