@@ -16,6 +16,24 @@
       "message": "I\u0027m hoping this won\u0027t be deleted by the autoroller. Do you know?\n\nOWNERS docs seem to say I shouldn\u0027t add `per-file webtests\u003d*` in the parent directory but I\u0027m not sure if I\u0027m reading it right.",
       "revId": "c2c90753c5da386f0f4bdebc060219a633830c9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7fd244_9a2356cd",
+        "filename": "webgpu-cts/webtests/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-03T11:18:55Z",
+      "side": 1,
+      "message": "Looks like it would only remove `.html` files: https://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/cmd/cts/roll/roll.go#310",
+      "parentUuid": "abe8b733_a2ca56cc",
+      "revId": "c2c90753c5da386f0f4bdebc060219a633830c9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
