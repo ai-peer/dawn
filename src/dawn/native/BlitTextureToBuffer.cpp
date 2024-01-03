@@ -151,10 +151,15 @@ struct Params {
     srcExtent: vec3u,
     mipLevel: u32,
     // GPUImageDataLayout
-    indicesPerRow: u32,
+    bytesPerRow: u32,
     rowsPerImage: u32,
-    indicesOffset: u32,
-    pad0: u32,
+    offset: u32,
+
+    // pad0: u32
+
+    // 0,1,2,3;  0,1;
+    shift: u32,
+
     // Used for cube sample
     levelSize: vec3u,
     pad1: u32,
@@ -171,13 +176,40 @@ override workgroupSizeY: u32;
 (@builtin(global_invocation_id) id : vec3u) {
     let srcBoundary = params.srcOrigin + params.srcExtent;
 
-    let coord0 = vec3u(id.x * params.packTexelCount, id.y, id.z) + params.srcOrigin;
+    // let coord0 = vec3u(id.x * params.packTexelCount, id.y, id.z) + params.srcOrigin;
+    var coord0 = vec3u(id.x * params.packTexelCount, id.y, id.z) + params.srcOrigin;
+    
+    let indicesPerRow = params.bytesPerRow / 4;
+    let indicesOffset = (params.offset + 4 - 1) / 4;
+    var dstOffset = indicesOffset + id.x + id.y * indicesPerRow + id.z * indicesPerRow * params.rowsPerImage;
 
     if (any(coord0 >= srcBoundary)) {
         return;
     }
 
-    let dstOffset = params.indicesOffset + id.x + id.y * params.indicesPerRow + id.z * params.indicesPerRow * params.rowsPerImage;
+    if (params.shift > 0u) {
+        coord0.x += params.shift;
+        // if (coord0.x >= srcBoundary.x) {
+        //     coord0.x -= srcBoundary.x;
+        //     coord0.y += 1u;
+        // }
+        // if (coord0.y >= srcBoundary.y) {
+        //     coord0.y = 0u;
+        //     coord0.z += 1u;
+        // }
+        // if (coord0.z >= srcBoundary.z) {
+        //     coord0.z = 0u;
+        //     dstOffset = indicesOffset - 1u;
+        // }
+
+        // if (any(coord0 >= srcBoundary) && coord0.x > srcBoundary.x) {
+        //     return;
+        // }
+    }
+
+    // if (any(coord0 >= srcBoundary)) {
+    //     return;
+    // }
 )";
 
 constexpr std::string_view kCommonEnd = R"(
@@ -253,11 +285,40 @@ constexpr std::string_view kPackRG8SnormToU32 = R"(
     // Storing snorm8 texel values
     // later called by pack4x8snorm to convert to u32.
     var v: vec4<f32>;
+
+    let coord1 = coord0 + vec3u(1, 0, 0);
+    if (coord0.x >= srcBoundary.x) {
+        // offset % 4 > 0, dangling head
+        coord0.x -= params.srcExtent.x;
+
+        let texelFirst = textureLoadGeneral(src_tex, coord0, params.mipLevel).rg;
+        v[2] = texelFirst.r;
+        v[3] = texelFirst.g;
+        let firstOffset = params.offset / 4;
+        var original = dst_buf[firstOffset];
+        var mask: u32 = 0x0000ffffu;
+        dst_buf[firstOffset] = (original & mask) | (pack4x8snorm(v) & ~mask);
+
+        if (coord1.x < srcBoundary.x) {
+            // Also has dangling tail
+            let texelLast = textureLoadGeneral(src_tex, coord1, params.mipLevel).rg;
+            original = dst_buf[dstOffset];
+            mask = 0xffff0000u;
+            v[0] = texelLast.r;
+            v[1] = texelLast.g;
+            v[2] = 0.;
+            v[3] = 0.;
+            dst_buf[dstOffset] = (original & mask) | (pack4x8snorm(v) & ~mask);
+        }
+
+        return;
+    }
+
     let texel0 = textureLoadGeneral(src_tex, coord0, params.mipLevel).rg;
     v[0] = texel0.r;
     v[1] = texel0.g;
 
-    let coord1 = coord0 + vec3u(1, 0, 0);
+    // let coord1 = coord0 + vec3u(1, 0, 0);
     if (coord1.x < srcBoundary.x) {
         // Make sure coord1 is still within the copy boundary.
         let texel1 = textureLoadGeneral(src_tex, coord1, params.mipLevel).rg;
@@ -687,7 +748,8 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
         params[2] = src.origin.z;
 
         // packTexelCount: number of texel values (1, 2, or 4) one thread packs into the dst buffer
-        params[3] = 4 / texelFormatByteSize;
+        const uint32_t numTexelsPerByte = 4 / texelFormatByteSize;
+        params[3] = numTexelsPerByte;
         // srcExtent: vec3u
         params[4] = copyExtent.width;
         params[5] = copyExtent.height;
@@ -695,13 +757,33 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
 
         params[7] = src.mipLevel;
 
-        // Turn bytesPerRow, (bytes)offset to use array index as unit
-        // We pack values into array<u32> or array<f32>
-        params[8] = dst.bytesPerRow / 4;
-        params[9] = dst.rowsPerImage;
-        params[10] = dst.offset / 4;
+        // // Turn bytesPerRow, (bytes)offset to use array index as unit
+        // // We pack values into array<u32> or array<f32>
+        // params[8] = dst.bytesPerRow / 4;
+        // params[9] = dst.rowsPerImage;
+        // params[10] = dst.offset / 4;
 
-        // params[11]: pad0
+        // // params[11]: pad0
+
+        params[8] = dst.bytesPerRow;
+        params[9] = dst.rowsPerImage;
+        params[10] = dst.offset;
+
+        // params[11] = (4 - (dst.offset % 4)) / texelFormatByteSize;
+
+        // dst buffer texel idx offset
+        uint32_t dstBufTexelIdxOffset = (dst.offset % 4) / texelFormatByteSize;
+
+        // shift = dst buf array<u32> idx shift
+        // shift = coord0.x shift
+        // 0, 1, 2, 3 for texelFormatByteSize = 1
+        // 0, 1 for texelFormatByteSize = 2
+        // 0 for texelFormatByteSize = 4
+        uint32_t shift = numTexelsPerByte - dstBufTexelIdxOffset;
+
+        params[11] = shift;
+        printf("\n\n\n!!!!! %u\n\n\n", shift);
+        // params[15] = shift;
 
         if (textureViewDimension == wgpu::TextureViewDimension::Cube) {
             // cube need texture size to convert texel coord to sample location
