@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "19bbfa71_5a5500e1",
+        "filename": "src/tint/lang/core/type/reference.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T21:14:32Z",
+      "side": 1,
+      "message": "Both Pointer and Ref have this same check, so should it be moved up or modified?",
+      "revId": "74970cd9f21f2d256c3c7113ff395244a84cfc4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
