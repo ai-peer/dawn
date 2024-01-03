@@ -16,6 +16,24 @@
       "message": "Dawn can already be used from a subdirectory using cmake. See https://github.com/dj2/Dusk/blob/main/third_party/CMakeLists.txt which has dawn in third_party/dawn.\n\nWhat is the issue that is being encountered?",
       "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b96a17b8_14560501",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-01-03T19:38:40Z",
+      "side": 1,
+      "message": "Although it might work for specific cases, for general use case scenario, PROJECT_SOURCE_DIR is the better option. In our case, as mentioned in the issue, some of the files are not found, and this patch fixes it. \n\nA similar issue has already been raised and fixed here: \nhttps://dawn-review.googlesource.com/c/dawn/+/148800",
+      "parentUuid": "1494b5b9_32761f78",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
