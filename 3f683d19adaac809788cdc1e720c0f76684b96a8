@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6006dc6a_0a3ca6bd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T20:13:44Z",
+      "side": 1,
+      "message": "Hrm, I think the failures are new tests (a merge conflict).",
+      "revId": "3f683d19adaac809788cdc1e720c0f76684b96a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfe42aea_4eca37ca",
@@ -14,6 +31,30 @@
       "writtenOn": "2024-01-03T19:34:53Z",
       "side": 1,
       "message": "Hmm, was looking at some of the follow ups and was thinking maybe this could actually return a new struct with the defaults applied? It seems like in most cases the copy would be needed anyways?",
+      "range": {
+        "startLine": 103,
+        "startChar": 16,
+        "endLine": 103,
+        "endChar": 52
+      },
+      "revId": "3f683d19adaac809788cdc1e720c0f76684b96a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d13d039_44f17344",
+        "filename": "generator/templates/dawn/native/api_structs.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T20:13:44Z",
+      "side": 1,
+      "message": "I considered this but decided not to, mostly because it feels a bit dangerous to copy any pointers to other structs, though in practice this is probably fine because they\u0027re const pointers to something owned outside the calling function. (There were other reasons I did this originally too, but I think they\u0027re obsolete.)\n\nI\u0027ll consider this again after the end of the patch stack I think. I would need to prototype it out to be sure, plus it\u0027s a pain to distribute the change out through the patch stack.",
+      "parentUuid": "bfe42aea_4eca37ca",
       "range": {
         "startLine": 103,
         "startChar": 16,
