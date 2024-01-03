@@ -54,6 +54,7 @@ if (tint_build_wgsl_reader) {
       "${tint_src_dir}/lang/wgsl/ast",
       "${tint_src_dir}/lang/wgsl/common",
       "${tint_src_dir}/lang/wgsl/features",
+      "${tint_src_dir}/lang/wgsl/inspector",
       "${tint_src_dir}/lang/wgsl/program",
       "${tint_src_dir}/lang/wgsl/sem",
       "${tint_src_dir}/utils/bytes",
@@ -82,6 +83,7 @@ if (tint_build_wgsl_reader) {
     output_name = "tint_wgsl_fuzzer"
     sources = [ "main_fuzz.cc" ]
     deps = [
+      "${tint_src_dir}/api/common",
       "${tint_src_dir}/cmd/fuzz/ir:fuzz",
       "${tint_src_dir}/lang/core",
       "${tint_src_dir}/lang/core/constant",
@@ -89,6 +91,7 @@ if (tint_build_wgsl_reader) {
       "${tint_src_dir}/lang/wgsl",
       "${tint_src_dir}/lang/wgsl:fuzz",
       "${tint_src_dir}/lang/wgsl/ast",
+      "${tint_src_dir}/lang/wgsl/inspector",
       "${tint_src_dir}/lang/wgsl/program",
       "${tint_src_dir}/lang/wgsl/program:fuzz",
       "${tint_src_dir}/lang/wgsl/sem",

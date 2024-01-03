@@ -237,6 +237,7 @@ tint_add_target(tint_lang_wgsl_ast_transform_fuzz fuzz
 )
 
 tint_target_add_dependencies(tint_lang_wgsl_ast_transform_fuzz fuzz
+  tint_api_common
   tint_lang_core
   tint_lang_core_constant
   tint_lang_core_type
@@ -244,6 +245,7 @@ tint_target_add_dependencies(tint_lang_wgsl_ast_transform_fuzz fuzz
   tint_lang_wgsl_ast
   tint_lang_wgsl_ast_transform
   tint_lang_wgsl_features
+  tint_lang_wgsl_inspector
   tint_lang_wgsl_program
   tint_lang_wgsl_sem
   tint_utils_bytes

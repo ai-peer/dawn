@@ -32,6 +32,7 @@
 #include <tuple>
 #include <utility>
 
+#include "src/tint/lang/wgsl/inspector/inspector.h"
 #include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/utils/bytes/decoder.h"
 #include "src/tint/utils/containers/slice.h"
@@ -48,8 +49,21 @@ struct ProgramFuzzer {
     /// additional arguments which are deserialized from the fuzzer input.
     template <typename... ARGS>
     static ProgramFuzzer Create(std::string_view name, void (*fn)(const Program&, ARGS...)) {
+        auto prog_useable = [](const Program& program) -> bool {
+            auto inspector = tint::inspector::Inspector(program);
+
+            // Override is not handled by the fuzzer. We'll find the alternate representation and it
+            // would have been filtered out by dawn anyway.
+            return inspector.GetOverrideDefaultValues().empty();
+        };
+
         if constexpr (sizeof...(ARGS) > 0) {
-            auto fn_with_decode = [fn](const Program& program, Slice<const std::byte> data) {
+            auto fn_with_decode = [fn, prog_useable](const Program& program,
+                                                     Slice<const std::byte> data) {
+                if (!prog_useable(program)) {
+                    return;
+                }
+
                 if (!data.data) {
                     return;
                 }
@@ -65,7 +79,13 @@ struct ProgramFuzzer {
         } else {
             return ProgramFuzzer{
                 name,
-                [fn](const Program& program, Slice<const std::byte>) { fn(program); },
+                [fn, prog_useable](const Program& program, Slice<const std::byte>) {
+                    if (!prog_useable(program)) {
+                        return;
+                    }
+
+                    fn(program);
+                },
             };
         }
     }
