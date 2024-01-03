@@ -22,6 +22,30 @@
       },
       "revId": "572a4bed2626f94bb2d30e46a23a9e362340d351",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6f69cb1_abf2254b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 13,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-03T22:57:16Z",
+      "side": 1,
+      "message": "Thanks for the correction - I\u0027ve changed things so that the SharedFenceD3D always owns its handle, but still avoid unnecessary handle duplication and opening by having the DeviceD3D have a Ref\u003cSharedFenceD3D\u003e which is what both SharedTextureMemoryD3D and ExternalImageDXGIImpl export.",
+      "parentUuid": "a1a1e373_95e9e95c",
+      "range": {
+        "startLine": 11,
+        "startChar": 37,
+        "endLine": 13,
+        "endChar": 43
+      },
+      "revId": "572a4bed2626f94bb2d30e46a23a9e362340d351",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

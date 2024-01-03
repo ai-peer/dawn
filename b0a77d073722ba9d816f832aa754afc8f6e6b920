@@ -26,6 +26,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "97db60d0_24ed58d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-03T22:57:16Z",
+      "side": 1,
+      "message": "That\u0027s a good point - I\u0027ve inverted things around so that the DeviceD3D holds a Ref\u003cSharedFenceD3D\u003e. That way there\u0027s no need to have an unowned handle mode for the fence.",
+      "parentUuid": "ae4db934_7d2b99a4",
+      "range": {
+        "startLine": 12,
+        "startChar": 0,
+        "endLine": 12,
+        "endChar": 19
+      },
+      "revId": "b0a77d073722ba9d816f832aa754afc8f6e6b920",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "62a9229d_8022cf21",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 2
