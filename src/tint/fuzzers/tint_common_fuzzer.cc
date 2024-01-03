@@ -312,14 +312,8 @@ int CommonFuzzer::Run(const uint8_t* data, size_t size) {
         }
 
         switch (output_) {
-            case OutputFormat::kMSL: {
-                break;
-            }
             case OutputFormat::kHLSL: {
                 options_hlsl_.external_texture_options.bindings_map = new_bindings_map;
-                break;
-            }
-            case OutputFormat::kSpv: {
                 break;
             }
             default:
