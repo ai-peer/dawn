@@ -18,6 +18,41 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e9a5dbd_c8fea1ef",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Openned dawn:2320 for the occasion!",
+      "parentUuid": "f0a528cb_48a4a18d",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac1d2ac2_59307b86",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Still WIP!",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b44b54d_0cef88ed",
@@ -31,6 +66,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "I think this should be `\"length\": \"view format count\"` as well for consistency.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1a364ce5_b6124bd7",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b44b54d_0cef88ed",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2b4b4787_81fd7953",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "DestroyImpl is defined in ApiObjectBase, so Surface is not concerned I believe. I\u0027ll fix the ASSERT indeed",
+      "parentUuid": "4f7923e7_9fd304c4",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3e36d9cc_55cd5874",
         "filename": "src/dawn/native/Surface.cpp",
         "patchSetId": 3
@@ -103,6 +174,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9741eb0d_7155889c",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b8df101d_95ccb2f2",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d6d6c722_4fec6e79",
@@ -120,6 +209,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0e2d3628_43ce2ffd",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "These steps are almost a direct copy paste of Device::CreateSwapChain, I did not want to simplify it at the risk of breaking something!",
+      "parentUuid": "d6d6c722_4fec6e79",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8008a840_099d63be",
@@ -133,6 +240,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "We don\u0027t usually check for this. Passing non-null arguments is the responsibility of the application.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dc91510_f09850e5",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8008a840_099d63be",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -156,6 +281,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57a8f1b6_bd301ab6",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Fair enough, I\u0027ll work on this!",
+      "parentUuid": "03a8487c_2d715ab4",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "6d60b3ce_e01928b2",
         "filename": "src/dawn/native/Surface.cpp",
         "patchSetId": 3
@@ -167,6 +310,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "That\u0027s not great because the lifetime of the pointers returned to the application are outside of its control. We should do new allocations and copy the data over.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eed5e00f_821839bc",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "The only way for the user to manipulate these pointers is by calling APISurfaceCapabilitiesFreeMembers. Since the user does not know how it was allocated exactly, it cannot do anything else, and should not. Let\u0027s discuss this on the upstream issue rather than here though!",
+      "parentUuid": "6d60b3ce_e01928b2",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -184,6 +345,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "Should this detach the current swapchain and attach a new invalid one?",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "309acd2b_40640510",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Unclear from the spec, I reordered the lines of Configure and added a comment to make sure that if the configuration fails, the previous swap chain remains valid (if there was any).",
+      "parentUuid": "b295a725_69174fdf",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -239,6 +418,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "32fe89a4_c075ab85",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "947a0611_1613c1f0",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f835f131_0fd805b3",
@@ -252,6 +449,30 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "nit: Maybe GetCurrentDevice?",
+      "range": {
+        "startLine": 83,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 25
+      },
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "810d4f4d_cab91643",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Good idea! I\u0027ll also rename mDevice to mCurrentDevice",
+      "parentUuid": "f835f131_0fd805b3",
       "range": {
         "startLine": 83,
         "startChar": 16,
@@ -285,6 +506,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ef7c0f63_c217c29a",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "883c8291_56bff002",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c19b5ab_fece4287",
@@ -298,6 +543,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "In the error case I don\u0027t think we ever use the view formats because that\u0027s not part of reflection. Maybe we could add a ASSERT(!IsError()) to GetViewFormats() and inline SetViewformats in the other constructor.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f43048a1_4a9bedfc",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c19b5ab_fece4287",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -327,6 +590,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f05f6335_d000fb88",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "That was like this before I intervened so I left it, but reading the spec I don\u0027t see why. I agree it should be \u003d\u003d imho.",
+      "parentUuid": "667c5d0c_e58d490d",
+      "range": {
+        "startLine": 229,
+        "startChar": 20,
+        "endLine": 229,
+        "endChar": 28
+      },
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "90a81ac7_8c189bf1",
         "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
         "patchSetId": 3
@@ -338,6 +625,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "The platform is never Android for D3D backends.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "11013308_a46b340f",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "All right, and I guess the same goes for the Metal backend btw!",
+      "parentUuid": "90a81ac7_8c189bf1",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -359,6 +664,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b74c1a5_5208d2dd",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Added TODO(dawn:2320) for D3D and Metal backends",
+      "parentUuid": "128e694c_d76418f9",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "391e2be4_4e66eca2",
@@ -376,6 +699,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea56c5a2_e29866f9",
+        "filename": "src/dawn/native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "391e2be4_4e66eca2",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "87c4327d_8213c9f7",
@@ -389,6 +730,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "The platform is never Android for this backend 😊",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "52a708ea_3a70c5d0",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-03T23:08:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "87c4327d_8213c9f7",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
