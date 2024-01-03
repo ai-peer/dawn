@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "595a6da5_a162a8d3",
+        "filename": "src/tint/api/options/pixel_local.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T17:48:02Z",
+      "side": 1,
+      "message": "Needs comment or doxygen gets sad.\n\n`src/tint/api/options/pixel_local.h:60: warning: Member TINT_REFLECT_ENUM_RANGE(PixelLocalOptions::TexelFormat, kR32Sint, kR32Float) (function) of namespace tint is not documented.`",
+      "revId": "55e785aca9bd27210b94bd3ff907c9f4926a5148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
