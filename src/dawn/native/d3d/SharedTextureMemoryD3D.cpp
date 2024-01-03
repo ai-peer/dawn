@@ -33,6 +33,7 @@
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d/DeviceD3D.h"
 #include "dawn/native/d3d/Forward.h"
+#include "dawn/native/d3d/SharedFenceD3D.h"
 
 namespace dawn::native::d3d {
 
@@ -86,14 +87,8 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
         mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
     }
 
-    SharedFenceDXGISharedHandleDescriptor desc;
-    desc.handle = ToBackend(GetDevice())->GetFenceHandle();
-
-    Ref<SharedFenceBase> fence;
-    DAWN_TRY_ASSIGN(fence, CreateFenceImpl(&desc));
-
     return FenceAndSignalValue{
-        std::move(fence),
+        ToBackend(GetDevice())->GetSharedFence(),
         static_cast<uint64_t>(texture->GetSharedTextureMemoryContents()->GetLastUsageSerial())};
 }
 
