@@ -1,0 +1,430 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0a528cb_48a4a18d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 24,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "nit: Especially since there are going to be several CLs, we should associate the CL with a bug. For example `Bug: dawn:269` or a new issue created for the merging of the SwapChain interface in Surface.\n\nTODOs would then be spelled `TODO(dawn:269)` to say the context is in that issue.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3b44b54d_0cef88ed",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 379,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "I think this should be `\"length\": \"view format count\"` as well for consistency.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dda664c1_0b7dd475",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "Here I think we should pass in the surface, or at least its capabilities cache, then validate against the capabilities returned by the adapter.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f7923e7_9fd304c4",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 309,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "This should be done in DestroyImpl() for consistency. And the ASSERT turns into nothing in Release so we should not do the Unconfigure inside it.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e36d9cc_55cd5874",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "nit: Maybe mSurfaceState should be (ManagesSwapChain::{Yes, No, Unknown}) so we can check that we only transition from Unknown to Yes/No once.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b8df101d_95ccb2f2",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 401,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "We should probably have this check in all methods.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6d6c722_4fec6e79",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 405,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "I feel that this method is a bit complicated and with a lot of state, but we can see how to simplify it when the deprecated path is removed.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8008a840_099d63be",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 439,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "We don\u0027t usually check for this. Passing non-null arguments is the responsibility of the application.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03a8487c_2d715ab4",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "IMHO we should have a strong interface to access the caching of data with the adapter. How about:\n\n```\n// In Adapter.h, removed from being its own file.\nstruct AdapterSurfaceCapabilities {\n  //\n};\n\n// In this file, and forward declared in Surface.h, stored as a unique_ptr to break dependency maybe?\nclass AdapterSurfaceCapCache {\n  public:\n    template\u003ctypename F\u003e\n    MaybeError WithAdapterCapabilities(adapter, F f) {\n       // Logic to do the caching\n    }\n    \n  private:\n    adapter it\u0027s cached for\n    cached data\n    \n}\n\n// When using it\n\nDAWN_TRY(mCapabilityCache-\u003eWithAdapterCapabilities(adapter,\n    [\u0026](const AdapterSurfaceCapabilities\u0026 caps) -\u003e MaybeError {\n         DAWN_INVALID_IF(not the present mode in caps.presentModes);\n         // ...\n    }\n));\n```",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6d60b3ce_e01928b2",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "That\u0027s not great because the lifetime of the pointers returned to the application are outside of its control. We should do new allocations and copy the data over.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b295a725_69174fdf",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 480,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "Should this detach the current swapchain and attach a new invalid one?",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a4f42a1_53455322",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "IMHO this should return an error texture to be consistent with other APIs. But IDK what webgpu.h discussions decided. Kai do you remember?",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0422f5d2_b49b588f",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "We should use the cached capabilities to query the adapter\u0027s preferred format.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "947a0611_1613c1f0",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "Not really because the Surface can switch which Device it is associated with. ApiObjectBase is for all the child objects of devices. Though the label stuff could be split off to a LabeledObject class if needed so Adapter/Device and even Instance can use it.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f835f131_0fd805b3",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 83,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "nit: Maybe GetCurrentDevice?",
+      "range": {
+        "startLine": 83,
+        "startChar": 16,
+        "endLine": 83,
+        "endChar": 25
+      },
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "883c8291_56bff002",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 119,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "nit: I believe these could be private.",
+      "range": {
+        "startLine": 113,
+        "startChar": 0,
+        "endLine": 119,
+        "endChar": 0
+      },
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c19b5ab_fece4287",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "In the error case I don\u0027t think we ever use the view formats because that\u0027s not part of reflection. Maybe we could add a ASSERT(!IsError()) to GetViewFormats() and inline SetViewformats in the other constructor.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "667c5d0c_e58d490d",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "I\u0027m not sure why this isn\u0027t \u003d\u003d. Is it because GetUsage() also has Present?",
+      "range": {
+        "startLine": 229,
+        "startChar": 20,
+        "endLine": 229,
+        "endChar": 28
+      },
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "90a81ac7_8c189bf1",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "The platform is never Android for D3D backends.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "128e694c_d76418f9",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "Maybe we should have TODOs to actually check if this is optimal, for example that the size matches the HWIN\u0027s (or similar, but that can be a follow-up or TODO)",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "391e2be4_4e66eca2",
+        "filename": "src/dawn/native/d3d12/SwapChainD3D12.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 124,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "87c4327d_8213c9f7",
+        "filename": "src/dawn/native/metal/BackendMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 313,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "The platform is never Android for this backend 😊",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fede43f4_9f771f35",
+        "filename": "src/dawn/native/metal/SwapChainMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "Can we have a TODO / follow-up to add testing of this in ManualSwapChainTests so that we can check that CompositeAlphaMode actually behaves as it should?",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8c527ef_23f5f408",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "nit: we could have another array for the matching WebGPU mode, or an array of struct {vkMode, wgpuMode} so we don\u0027t need to have a switch between the two.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -158,6 +158,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa7c2a69_2d414c72",
+        "filename": "dawn.json",
+        "patchSetId": 1
+      },
+      "lineNbr": 3288,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "66696624_d25b6f16",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "241806a8_13f68b58",
@@ -450,6 +468,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "328f54a0_cb9f62ef",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 470,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "That\u0027s just in depot_tools and should work magically if you add depot_tools to the PATH (if only temporarily).",
+      "parentUuid": "4d49b08c_1a6d071f",
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2438fc64_242db2cc",
@@ -522,6 +558,30 @@
       "side": 1,
       "message": "Agreed, but I\u0027ll stick with the standard for now ;)",
       "parentUuid": "2fa785d4_28df7431",
+      "range": {
+        "startLine": 93,
+        "startChar": 10,
+        "endLine": 93,
+        "endChar": 20
+      },
+      "revId": "ffcaf6eefbe9da6e435f37f8ba74a575f7a4a726",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bbc9f488_10f74b02",
+        "filename": "src/dawn/native/d3d11/SwapChainD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:11:06Z",
+      "side": 1,
+      "message": "Sounds good. Created https://github.com/webgpu-native/webgpu-headers/issues/257 for that.",
+      "parentUuid": "2530029a_73b326a5",
       "range": {
         "startLine": 93,
         "startChar": 10,
