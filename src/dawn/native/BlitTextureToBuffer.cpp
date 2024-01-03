@@ -151,9 +151,9 @@ struct Params {
     srcExtent: vec3u,
     mipLevel: u32,
     // GPUImageDataLayout
-    indicesPerRow: u32,
+    bytesPerRow: u32,
     rowsPerImage: u32,
-    indicesOffset: u32,
+    offset: u32,
     pad0: u32,
     // Used for cube sample
     levelSize: vec3u,
@@ -177,7 +177,9 @@ override workgroupSizeY: u32;
         return;
     }
 
-    let dstOffset = params.indicesOffset + id.x + id.y * params.indicesPerRow + id.z * params.indicesPerRow * params.rowsPerImage;
+    let indicesPerRow = params.bytesPerRow / 4;
+    let indicesOffset = params.offset / 4;
+    let dstOffset = indicesOffset + id.x + id.y * indicesPerRow + id.z * indicesPerRow * rowsPerImage;
 )";
 
 constexpr std::string_view kCommonEnd = R"(
@@ -213,37 +215,192 @@ constexpr std::string_view kPackStencil8ToU32 = R"(
     }
 )";
 
+// Color format T2B copy doesn't require offset to be multiple of 4 bytes.
+constexpr std::string_view kCommonColor = R"(
+struct Params {
+    // copyExtent
+    srcOrigin: vec3u,
+    // How many texel values one thread needs to pack (1, 2, or 4)
+    packTexelCount: u32,
+    srcExtent: vec3u,
+    mipLevel: u32,
+    // GPUImageDataLayout
+    bytesPerRow: u32,
+    rowsPerImage: u32,
+    offset: u32,
+    numU32PerRowNeedsWriting: u32,
+    // Used for cube sample
+    levelSize: vec3u,
+    hasOverlapInBetween: u32,
+};
+
+@group(0) @binding(2) var<uniform> params : Params;
+
+override workgroupSizeX: u32;
+override workgroupSizeY: u32;
+
+// Load the texel value and write to storage buffer.
+// Each thread is responsible for reading (packTexelCount) byte and packing them into a 4-byte u32.
+@compute @workgroup_size(workgroupSizeX, workgroupSizeY, 1) fn main
+(@builtin(global_invocation_id) id : vec3u) {
+    let texelSize = 4 / params.packTexelCount;
+
+    let isCompactRow: bool = params.hasOverlapInBetween == 1;
+    let isCompactImage: bool = params.rowsPerImage == params.srcExtent.y;
+
+    let shift = (params.offset % 4) / texelSize;
+
+    if (isCompactRow && isCompactImage && id.z == params.srcExtent.z - 1) {
+        // one more thread at end of buffer
+        if (any(id >= vec3u(params.numU32PerRowNeedsWriting + 1, params.srcExtent.y, params.srcExtent.z))) {
+            return;
+        }
+    } else {
+        if (any(id >= vec3u(params.numU32PerRowNeedsWriting, params.srcExtent.y, params.srcExtent.z))) {
+            return;
+        }
+    }
+
+    let byteOffset = params.offset + id.x * 4
+        + id.y * params.bytesPerRow
+        + id.z * params.bytesPerRow * params.rowsPerImage;
+    let dstOffset = byteOffset / 4;
+
+    let srcBoundary = params.srcOrigin + params.srcExtent;
+
+
+    // Start coord, End coord
+    var coordS = vec3u(id.x * params.packTexelCount, id.y, id.z) + params.srcOrigin;
+    var coordE = coordS;
+    // var coordS: vec3i = vec3i(vec3u(id.x * params.packTexelCount, id.y, id.z) + params.srcOrigin);
+    // var coordE: vec3i = coordS;
+    coordE.x += params.packTexelCount - 1;
+
+    var readDstBufAtStart: bool = false;
+    var readDstBufAtEnd: bool = false;
+
+    if (shift > 0) {
+        // Adjust coordS
+        if (id.x == 0) {
+            // Front of a row
+            if (isCompactRow) {
+                // Needs reading from previous row
+                coordS.x += params.srcExtent.x;
+                coordS.x -= shift;
+                if (id.y == 0) {
+                    // Front of a layer
+                    if (isCompactImage) {
+                        // Needs reading from previous layer
+                        coordS.y += params.srcExtent.y;
+
+                        if (id.z == 0) {
+                            // Front of the buffer
+                            readDstBufAtStart = true;
+                        } else {
+                            coordS.z -= 1;
+                        }
+                    }
+                } else {
+                    coordS.y -= 1;
+                }
+            } else {
+                readDstBufAtStart = true;
+            }
+        } else {
+            coordS.x -= shift;
+        }
+        coordE.x -= shift;
+    }
+)";
+
 constexpr std::string_view kPackR8SnormToU32 = R"(
     // Result bits to store into dst_buf
     var result: u32 = 0u;
     // Storing snorm8 texel values
     // later called by pack4x8snorm to convert to u32.
     var v: vec4<f32>;
-    v[0] = textureLoadGeneral(src_tex, coord0, params.mipLevel).r;
 
-    if (coord0.x + 4u <= srcBoundary.x) {
-        // All 4 texels for this thread are within texture bounds.
-        for (var i = 1u; i < 4u; i += 1u) {
-            let coordi = coord0 + vec3u(i, 0, 0);
-            v[i] = textureLoadGeneral(src_tex, coordi, params.mipLevel).r;
-        }
-        result = pack4x8snorm(v);
+    // dstBuf value is used for starting part.
+    var mask: u32 = 0xffffffffu;
+    if (!readDstBufAtStart) {
+        // coordS is used
+        mask = 0xffffff00u;
+        v[0] = textureLoadGeneral(src_tex, coordS, params.mipLevel).r;
     } else {
-        // Otherwise, srcExtent.x is not a multiple of 4 and this thread is at right edge of the texture
-        // To preserve the original buffer content, we need to read from the buffer and pack it together with other values.
-        let original: u32 = dst_buf[dstOffset];
-
-        var i = 1u;
-        for (; i < 4u; i += 1u) {
-            let coordi = coord0 + vec3u(i, 0, 0);
-            if (coordi.x >= srcBoundary.x) {
-                break;
-            }
-            v[i] = textureLoadGeneral(src_tex, coordi, params.mipLevel).r;
+        // start of buffer, boundary check
+        if (coordE.x >= 1) {
+            mask &= 0xff00ffffu;
+            v[2] = textureLoadGeneral(src_tex, coordE - vec3u(1, 0, 0), params.mipLevel).r;
         }
-        let mask: u32 = 0xffffffffu << (i * 8u);
+        if (coordE.x >= 2) {
+            mask &= 0xffff00ffu;
+            v[1] = textureLoadGeneral(src_tex, coordE - vec3u(2, 0, 0), params.mipLevel).r;
+        }
+    }
 
+    if (coordE.x < srcBoundary.x) {
+        mask &= 0x00ffffffffu;
+        v[3] = textureLoadGeneral(src_tex, coordE, params.mipLevel).r;
+    } else {
+        // end of row (non-compact) or end of buffer
+        // coordE is not used
+        // dstBuf value is used for later part.
+        readDstBufAtEnd = true;
+
+        if (!isCompactRow || !isCompactImage || (id.x == params.numU32PerRowNeedsWriting - 1
+            && id.y == params.srcExtent.y - 1
+            && id.z == params.srcExtent.z - 1)) {
+            // end of buffer, boundary check
+            if (coordS.x + 2 < params.srcExtent.x) {
+                mask &= 0xff00ffffu;
+                v[2] = textureLoadGeneral(src_tex, coordS + vec3u(2, 0, 0), params.mipLevel).r;
+            }
+            if (coordS.x + 1 < params.srcExtent.x) {
+                mask &= 0xffff00ffu;
+                v[1] = textureLoadGeneral(src_tex, coordS + vec3u(1, 0, 0), params.mipLevel).r;
+            }
+        }
+    }
+
+    if (readDstBufAtStart || readDstBufAtEnd) {
+        let original: u32 = dst_buf[dstOffset];
         result = (original & mask) | (pack4x8snorm(v) & ~mask);
+    } else {
+        mask &= 0xff0000ffu;
+        var coord1: vec3u;
+        var coord2: vec3u;
+        if (coordS.x < coordE.x) {
+            // middle of row
+            coord1 = coordE - vec3u(2, 0, 0);
+            coord2 = coordE - vec3u(1, 0, 0);
+        } else {
+            // start of row
+            switch shift {
+                case 0: {
+                    coord1 = coordS + vec3u(1, 0, 0);
+                    coord2 = coordS + vec3u(2, 0, 0);
+                }
+                case 1: {
+                    coord1 = coordS + vec3u(1, 0, 0);
+                    coord2 = coordS + vec3u(2, 0, 0);
+                }
+                case 2: {
+                    coord1 = coordS + vec3u(1, 0, 0);
+                    coord2 = coordE - vec3u(1, 0, 0); 
+                }
+                case 3: {
+                    coord1 = coordE - vec3u(2, 0, 0);
+                    coord2 = coordE - vec3u(1, 0, 0);
+                }
+                default: {
+                    return; // unreachable when shift == 0
+                }
+            }
+        }
+        v[1] = textureLoadGeneral(src_tex, coord1, params.mipLevel).r;
+        v[2] = textureLoadGeneral(src_tex, coord2, params.mipLevel).r;
+
+        result = pack4x8snorm(v);
     }
 )";
 
@@ -253,23 +410,34 @@ constexpr std::string_view kPackRG8SnormToU32 = R"(
     // Storing snorm8 texel values
     // later called by pack4x8snorm to convert to u32.
     var v: vec4<f32>;
-    let texel0 = textureLoadGeneral(src_tex, coord0, params.mipLevel).rg;
-    v[0] = texel0.r;
-    v[1] = texel0.g;
 
-    let coord1 = coord0 + vec3u(1, 0, 0);
-    if (coord1.x < srcBoundary.x) {
-        // Make sure coord1 is still within the copy boundary.
-        let texel1 = textureLoadGeneral(src_tex, coord1, params.mipLevel).rg;
+    // dstBuf value is used for starting part.
+    var mask: u32 = 0x0000ffffu;
+    if (!readDstBufAtStart) {
+        // coordS is used
+        let texel0 = textureLoadGeneral(src_tex, coordS, params.mipLevel).rg;
+        v[0] = texel0.r;
+        v[1] = texel0.g;
+    }
+
+    if (coordE.x >= srcBoundary.x) {
+        // End of buffer
+        // coordE is not used
+        // dstBuf value is used for later part.
+        mask = 0xffff0000u;
+        readDstBufAtEnd = true;
+    } else {
+        // coordE is used
+        let texel1 = textureLoadGeneral(src_tex, coordE, params.mipLevel).rg;
         v[2] = texel1.r;
         v[3] = texel1.g;
-        result = pack4x8snorm(v);
-    } else {
-        // Otherwise, srcExtent.x is not a multiple of 2 and this thread is at right edge of the texture
-        // To preserve the original buffer content, we need to read from the buffer and pack it together with other values.
+    }
+
+    if (readDstBufAtStart || readDstBufAtEnd) {
         let original: u32 = dst_buf[dstOffset];
-        let mask = 0xffff0000u;
         result = (original & mask) | (pack4x8snorm(v) & ~mask);
+    } else {
+        result = pack4x8snorm(v);
     }
 )";
 
@@ -434,7 +602,7 @@ ResultOrError<Ref<ComputePipelineBase>> GetOrCreateTextureToBufferPipeline(
         case wgpu::TextureFormat::R8Snorm:
             AppendFloatTextureHead();
             shader += kDstBufferU32;
-            shader += kCommon;
+            shader += kCommonColor;
             shader += kPackR8SnormToU32;
             shader += kCommonEnd;
             textureSampleType = wgpu::TextureSampleType::Float;
@@ -442,7 +610,7 @@ ResultOrError<Ref<ComputePipelineBase>> GetOrCreateTextureToBufferPipeline(
         case wgpu::TextureFormat::RG8Snorm:
             AppendFloatTextureHead();
             shader += kDstBufferU32;
-            shader += kCommon;
+            shader += kCommonColor;
             shader += kPackRG8SnormToU32;
             shader += kCommonEnd;
             textureSampleType = wgpu::TextureSampleType::Float;
@@ -630,20 +798,57 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
                                    ? 1
                                    : (copyExtent.height + kWorkgroupSizeY - 1) / kWorkgroupSizeY;
     uint32_t workgroupCountZ = copyExtent.depthOrArrayLayers;
-    switch (texelFormatByteSize) {
-        case 1:
-            // One thread is responsible for writing four texel values (x, y) ~ (x+3, y).
-            workgroupCountX = (copyExtent.width + 4 * kWorkgroupSizeX - 1) / (4 * kWorkgroupSizeX);
-            break;
-        case 2:
-            // One thread is responsible for writing two texel values (x, y) and (x+1, y).
-            workgroupCountX = (copyExtent.width + 2 * kWorkgroupSizeX - 1) / (2 * kWorkgroupSizeX);
-            break;
-        case 4:
-            workgroupCountX = (copyExtent.width + kWorkgroupSizeX - 1) / kWorkgroupSizeX;
-            break;
-        default:
-            DAWN_UNREACHABLE();
+
+    uint32_t numU32PerRowNeedsWriting = 0;
+    bool hasOverlapInBetween = false;
+    if (format.format == wgpu::TextureFormat::R8Snorm ||
+        format.format == wgpu::TextureFormat::RG8Snorm) {
+        // number of u32 needs writing
+        // uint32_t extra = (dst.offset % 4 > 0) ? 1 : 0;
+        uint32_t extraBytes = dst.offset % 4;
+
+        // Between rows and image (whether thread at end of each row needs read start of next row)
+        hasOverlapInBetween =
+            (copyExtent.width * texelFormatByteSize) + extraBytes > dst.bytesPerRow;
+
+        uint extraBytesAtEnd = 0;
+        if (hasOverlapInBetween) {
+            extraBytes = 0;
+            extraBytesAtEnd = 1;  // only 1 thread at end
+        }
+
+        // = Tw/4 ?+1
+        numU32PerRowNeedsWriting = (texelFormatByteSize * copyExtent.width + extraBytes + 3) / 4;
+
+        // uint32_t totalU32 =
+        //     extraBytesAtEnd +
+        //     numU32PerRowNeedsWriting * copyExtent.height * copyExtent.depthOrArrayLayers;
+
+        // ?
+        workgroupCountX = numU32PerRowNeedsWriting + extraBytesAtEnd;
+
+        printf("\n\n\n!!!!!!!  offset = %lu, %u, %u, %u\n\n", dst.offset, numU32PerRowNeedsWriting,
+               workgroupCountX, extraBytes);
+
+        // workgroupCountX = (totalU32 + kWorkgroupSizeX - 1) / kWorkgroupSizeX;
+    } else {
+        switch (texelFormatByteSize) {
+            case 1:
+                // One thread is responsible for writing four texel values (x, y) ~ (x+3, y).
+                workgroupCountX =
+                    (copyExtent.width + 4 * kWorkgroupSizeX - 1) / (4 * kWorkgroupSizeX);
+                break;
+            case 2:
+                // One thread is responsible for writing two texel values (x, y) and (x+1, y).
+                workgroupCountX =
+                    (copyExtent.width + 2 * kWorkgroupSizeX - 1) / (2 * kWorkgroupSizeX);
+                break;
+            case 4:
+                workgroupCountX = (copyExtent.width + kWorkgroupSizeX - 1) / kWorkgroupSizeX;
+                break;
+            default:
+                DAWN_UNREACHABLE();
+        }
     }
 
     Ref<BufferBase> destinationBuffer = dst.buffer;
@@ -695,13 +900,19 @@ MaybeError BlitTextureToBuffer(DeviceBase* device,
 
         params[7] = src.mipLevel;
 
-        // Turn bytesPerRow, (bytes)offset to use array index as unit
-        // We pack values into array<u32> or array<f32>
-        params[8] = dst.bytesPerRow / 4;
-        params[9] = dst.rowsPerImage;
-        params[10] = dst.offset / 4;
+        // // Turn bytesPerRow, (bytes)offset to use array index as unit
+        // // We pack values into array<u32> or array<f32>
+        // params[8] = dst.bytesPerRow / 4;
+        // params[9] = dst.rowsPerImage;
+        // params[10] = dst.offset / 4;
 
         // params[11]: pad0
+
+        params[8] = dst.bytesPerRow;
+        params[9] = dst.rowsPerImage;
+        params[10] = dst.offset;
+        params[11] = numU32PerRowNeedsWriting;
+        params[15] = hasOverlapInBetween ? 1 : 0;
 
         if (textureViewDimension == wgpu::TextureViewDimension::Cube) {
             // cube need texture size to convert texel coord to sample location

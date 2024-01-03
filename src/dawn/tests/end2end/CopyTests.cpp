@@ -352,6 +352,10 @@ class CopyTests_T2B : public CopyTests, public DawnTestWithParams<CopyTextureFor
                 texture, textureSpec.copyLevel, textureSpec.copyOrigin);
             wgpu::ImageCopyBuffer imageCopyBuffer = utils::CreateImageCopyBuffer(
                 buffer, bufferSpec.offset, bufferSpec.bytesPerRow, bufferSpec.rowsPerImage);
+            printf(
+                "\n\n\n!!!! %u %lu\n\n\n", imageCopyTexture.origin.x, imageCopyBuffer.layout.offset
+
+            );
             encoder.CopyTextureToBuffer(&imageCopyTexture, &imageCopyBuffer, &copySize);
         }
 
@@ -1071,6 +1075,36 @@ TEST_P(CopyTests_T2B, OffsetBufferUnaligned) {
         bufferSpec.offset = Align(bufferSpec.offset, 4);
         DoTest(textureSpec, bufferSpec, {kWidth, kHeight, 1});
     }
+}
+
+// Test that copying without a 512-byte aligned buffer offset works
+TEST_P(CopyTests_T2B, OffsetBufferUnalignedFix) {
+    // TODO(crbug.com/dawn/2294): diagnose T2B failures on Pixel 4 OpenGLES
+    DAWN_SUPPRESS_TEST_IF(IsOpenGLES() && IsAndroid() && IsQualcomm());
+
+    constexpr uint32_t kWidth = 4;
+    constexpr uint32_t kHeight = 1;
+
+    TextureSpec textureSpec;
+    textureSpec.textureSize = {kWidth, kHeight, 1};
+
+    // const uint32_t bytesPerTexel = utils::GetTexelBlockSizeInBytes(textureSpec.format);
+
+    // for (uint32_t i = bytesPerTexel; i < 512; i += bytesPerTexel * 9) {
+    //     BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kHeight);
+    //     bufferSpec.size += i;
+    //     bufferSpec.offset += i;
+    //     bufferSpec.size = Align(bufferSpec.size, 4);
+    //     bufferSpec.offset = Align(bufferSpec.offset, 4);
+    //     DoTest(textureSpec, bufferSpec, {kWidth, kHeight, 1});
+    // }
+
+    BufferSpec bufferSpec = MinimumBufferSpec(kWidth, kHeight);
+    bufferSpec.offset = 1;
+
+    // bufferSpec.size = Align(bufferSpec.size, 4);
+    // bufferSpec.offset = Align(bufferSpec.offset, 4);
+    DoTest(textureSpec, bufferSpec, {kWidth - 1, kHeight, 1});
 }
 
 // Test that copying without a 512-byte aligned buffer offset that is greater than the bytes per row
