@@ -70,6 +70,24 @@
       "parentUuid": "1a901a46_3149e56d",
       "revId": "85be30cbce56fe783da97440527eff2c2944a583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "58152c2e_7f010254",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-01-03T21:27:41Z",
+      "side": 1,
+      "message": "Jiawei\u0027s answer indicates that it\u0027s scoped to just the hash set dependencies. I\u0027m mildly surprised there\u0027s so many, but I guess that\u0027s just the nature of libraries like abseil.\n\nThanks for clarifying!",
+      "parentUuid": "f742a00b_3f612b62",
+      "revId": "85be30cbce56fe783da97440527eff2c2944a583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
