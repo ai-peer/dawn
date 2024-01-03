@@ -130,9 +130,14 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
 
     Ref<Queue> queue;
     DAWN_TRY_ASSIGN(queue, Queue::Create(this, &descriptor->defaultQueue));
+
+    SystemHandle fenceHandle;
     DAWN_TRY(CheckHRESULT(
-        queue->GetFence()->CreateSharedHandle(nullptr, GENERIC_ALL, nullptr, &mFenceHandle),
+        queue->GetFence()->CreateSharedHandle(nullptr, GENERIC_ALL, nullptr, fenceHandle.GetMut()),
         "D3D11: creating fence shared handle"));
+    DAWN_ASSERT(fenceHandle.IsValid());
+    DAWN_TRY_ASSIGN(mSharedFence, SharedFence::Create(this, "Internal shared DXGI fence",
+                                                      std::move(fenceHandle), queue->GetFence()));
 
     DAWN_TRY(DeviceBase::Initialize(queue));
     DAWN_TRY(queue->InitializePendingContext());
