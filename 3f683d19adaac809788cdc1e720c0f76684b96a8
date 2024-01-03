@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bfe42aea_4eca37ca",
+        "filename": "generator/templates/dawn/native/api_structs.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 103,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:34:53Z",
+      "side": 1,
+      "message": "Hmm, was looking at some of the follow ups and was thinking maybe this could actually return a new struct with the defaults applied? It seems like in most cases the copy would be needed anyways?",
+      "range": {
+        "startLine": 103,
+        "startChar": 16,
+        "endLine": 103,
+        "endChar": 52
+      },
+      "revId": "3f683d19adaac809788cdc1e720c0f76684b96a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3da97781_f6441fe8",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1831,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:34:53Z",
+      "side": 1,
+      "message": "If we change the signature of `ApplyTrivialFrontendDefaults` to return a copy, this could be:\n\n```\n\nSamplerDescriptor descriptor \u003d {};\nif (descriptorOrig) {\n    descriptorOrig-\u003eApplyTrivialFrontendDefaults();\n}\n```",
+      "range": {
+        "startLine": 1827,
+        "startChar": 4,
+        "endLine": 1831,
+        "endChar": 46
+      },
+      "revId": "3f683d19adaac809788cdc1e720c0f76684b96a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
