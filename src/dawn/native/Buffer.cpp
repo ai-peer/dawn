@@ -493,6 +493,10 @@ MaybeError BufferBase::MapAtCreationInternal() {
 MaybeError BufferBase::ValidateCanUseOnQueueNow() const {
     DAWN_ASSERT(!IsError());
 
+    if (mSharedBufferMemoryContents != nullptr && !mSharedMemoryHasAccess) {
+        return DAWN_VALIDATION_ERROR("%s used in submit without shared memory access.", this);
+    }
+
     switch (mState) {
         case BufferState::Destroyed:
             return DAWN_VALIDATION_ERROR("%s used in submit while destroyed.", this);
@@ -698,6 +702,10 @@ MaybeError BufferBase::Unmap() {
     return {};
 }
 
+SharedBufferMemoryContents* BufferBase::GetSharedBufferMemoryContents() const {
+    return mSharedBufferMemoryContents.Get();
+}
+
 void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
     // Unmaps resources on the backend.
     if (mState == BufferState::PendingMap) {
@@ -856,6 +864,11 @@ bool BufferBase::IsDataInitialized() const {
 
 void BufferBase::SetIsDataInitialized() {
     mIsDataInitialized = true;
+}
+
+void BufferBase::SetHasAccess(bool hasAccess) {
+    DAWN_ASSERT(!IsError());
+    mSharedMemoryHasAccess = hasAccess;
 }
 
 void BufferBase::MarkUsedInPendingCommands() {

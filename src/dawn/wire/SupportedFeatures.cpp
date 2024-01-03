@@ -62,7 +62,9 @@ bool IsFeatureSupported(WGPUFeatureName feature) {
         case WGPUFeatureName_SharedFenceVkSemaphoreSyncFD:
         case WGPUFeatureName_SharedFenceVkSemaphoreZirconHandle:
         case WGPUFeatureName_SharedFenceDXGISharedHandle:
+        case WGPUFeatureName_SharedFenceD3D12Fence:
         case WGPUFeatureName_SharedFenceMTLSharedEvent:
+        case WGPUFeatureName_SharedBufferMemoryD3D12Resource:
 
         case WGPUFeatureName_Depth32FloatStencil8:
         case WGPUFeatureName_TimestampQuery:

@@ -36,6 +36,7 @@
 #include "dawn/native/D3DBackend.h"
 
 struct ID3D12Device;
+struct ID3D12Fence;
 struct ID3D12Resource;
 
 namespace dawn::native::d3d12 {
@@ -52,6 +53,39 @@ DAWN_NATIVE_EXPORT Microsoft::WRL::ComPtr<ID3D12Device> GetD3D12Device(WGPUDevic
 DAWN_NATIVE_EXPORT uint64_t SetExternalMemoryReservation(WGPUDevice device,
                                                          uint64_t requestedReservationSize,
                                                          MemorySegment memorySegment);
+
+// May be chained on SharedBufferMemoryDescriptor
+struct DAWN_NATIVE_EXPORT SharedBufferMemoryD3D12ResourceDescriptor : wgpu::ChainedStruct {
+    SharedBufferMemoryD3D12ResourceDescriptor() {
+        sType = static_cast<wgpu::SType>(WGPUSType_SharedBufferMemoryD3D12ResourceDescriptor);
+    }
+
+    // This ID3D12Resource object must be created from the same ID3D12Device used in the
+    // WGPUDevice.
+    Microsoft::WRL::ComPtr<ID3D12Resource> resource;
+};
+
+// May be chained on SharedFenceDescriptor
+struct DAWN_NATIVE_EXPORT SharedFenceD3D12FenceDescriptor : wgpu::ChainedStruct {
+    SharedFenceD3D12FenceDescriptor() {
+        sType = static_cast<wgpu::SType>(WGPUSType_SharedFenceD3D12FenceDescriptor);
+    }
+
+    // This ID3D12Fence object must be created from the same ID3D12Device used in the
+    // WGPUDevice.
+    Microsoft::WRL::ComPtr<ID3D12Fence> fence;
+};
+
+// May be chained on SharedFenceExportInfo
+struct DAWN_NATIVE_EXPORT SharedFenceD3D12FenceExportInfo : wgpu::ChainedStruct {
+    SharedFenceD3D12FenceExportInfo() {
+        sType = static_cast<wgpu::SType>(WGPUSType_SharedFenceD3D12FenceExportInfo);
+    }
+
+    // This ID3D12Fence object must be used on the same ID3D12Device used in the
+    // WGPUDevice.
+    Microsoft::WRL::ComPtr<ID3D12Fence> fence;
+};
 
 }  // namespace dawn::native::d3d12
 

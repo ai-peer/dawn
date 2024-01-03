@@ -53,6 +53,7 @@ class Queue final : public d3d::Queue {
     ID3D12CommandQueue* GetCommandQueue() const;
     ID3D12SharingContract* GetSharingContract() const;
     MaybeError SubmitPendingCommands();
+    ResultOrError<Ref<d3d12::SharedFence>> GetOrCreateSharedFenceD3D12Fence();
 
   private:
     using d3d::Queue::Queue;

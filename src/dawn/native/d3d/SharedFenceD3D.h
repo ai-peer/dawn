@@ -43,11 +43,12 @@ class SharedFence : public SharedFenceBase {
 
   protected:
     SharedFence(Device* device, const char* label, SystemHandle ownedHandle);
+    SharedFence(Device* device, const char* label);
+
+    SystemHandle mHandle;
 
   private:
     MaybeError ExportInfoImpl(UnpackedPtr<SharedFenceExportInfo>& info) const override;
-
-    SystemHandle mHandle;
 };
 
 }  // namespace dawn::native::d3d

@@ -295,6 +295,14 @@ static constexpr FeatureEnumAndInfo kFeatureInfo[] = {
       "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/"
       "adapter_properties.md",
       FeatureInfo::FeatureState::Stable}},
+    {Feature::SharedBufferMemoryD3D12Resource,
+     {"Support importing ID3D12Resource as shared buffer memory.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/shared_buffer.md",
+      FeatureInfo::FeatureState::Experimental}},
+    {Feature::SharedFenceD3D12Fence,
+     {"Support for importing and exporting DXGISharedHandle used for GPU synchronization.",
+      "https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/features/shared_fence.md",
+      FeatureInfo::FeatureState::Experimental}},
 };
 
 }  // anonymous namespace

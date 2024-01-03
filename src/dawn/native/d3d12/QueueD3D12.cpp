@@ -75,8 +75,9 @@ MaybeError Queue::Initialize() {
     mFenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
     DAWN_ASSERT(mFenceEvent != nullptr);
 
-    DAWN_TRY_ASSIGN(mSharedFence, SharedFence::Create(ToBackend(GetDevice()),
-                                                      "Internal shared DXGI fence", mFence));
+    DAWN_TRY_ASSIGN(mSharedFence,
+                    SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence",
+                                        mFence, wgpu::SharedFenceType::DXGISharedHandle));
 
     // TODO(dawn:1413): Consider folding the command allocator manager in this class.
     mCommandAllocatorManager = std::make_unique<CommandAllocatorManager>(this);
@@ -104,7 +105,17 @@ void Queue::DestroyImpl() {
 ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
     if (mSharedFence == nullptr) {
         DAWN_ASSERT(!IsAlive());
-        return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence);
+        return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence,
+                                   wgpu::SharedFenceType::DXGISharedHandle);
+    }
+    return mSharedFence;
+}
+
+ResultOrError<Ref<d3d12::SharedFence>> Queue::GetOrCreateSharedFenceD3D12Fence() {
+    if (mSharedFence == nullptr) {
+        DAWN_ASSERT(!IsAlive());
+        return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence,
+                                   wgpu::SharedFenceType::D3D12Fence);
     }
     return mSharedFence;
 }

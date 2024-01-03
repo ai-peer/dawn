@@ -29,10 +29,14 @@
 
 #include <utility>
 
+#include "dawn/native/ChainUtils.h"
+#include "dawn/native/D3D12Backend.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
 
 namespace dawn::native::d3d12 {
+SharedFence::SharedFence(Device* device, const char* label, ComPtr<ID3D12Fence> fence)
+    : d3d::SharedFence(device, label), mFence(std::move(fence)) {}
 
 // static
 ResultOrError<Ref<SharedFence>> SharedFence::Create(
@@ -48,22 +52,57 @@ ResultOrError<Ref<SharedFence>> SharedFence::Create(
     DAWN_TRY(CheckHRESULT(device->GetD3D12Device()->OpenSharedHandle(descriptor->handle,
                                                                      IID_PPV_ARGS(&fence->mFence)),
                           "D3D12 fence open shared handle"));
-
+    fence->mType = wgpu::SharedFenceType::DXGISharedHandle;
     return fence;
 }
 
 // static
 ResultOrError<Ref<SharedFence>> SharedFence::Create(Device* device,
                                                     const char* label,
-                                                    ComPtr<ID3D12Fence> d3d12Fence) {
-    SystemHandle ownedHandle;
-    DAWN_TRY(
-        CheckHRESULT(device->GetD3D12Device()->CreateSharedHandle(
-                         d3d12Fence.Get(), nullptr, GENERIC_ALL, nullptr, ownedHandle.GetMut()),
-                     "D3D12 create fence handle"));
-    DAWN_ASSERT(ownedHandle.IsValid());
-    Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, std::move(ownedHandle)));
-    fence->mFence = std::move(d3d12Fence);
+                                                    ComPtr<ID3D12Fence> d3d12Fence,
+                                                    wgpu::SharedFenceType type) {
+    Ref<SharedFence> fence;
+    switch (type) {
+        case wgpu::SharedFenceType::DXGISharedHandle: {
+            SystemHandle ownedHandle;
+            DAWN_TRY(CheckHRESULT(
+                device->GetD3D12Device()->CreateSharedHandle(d3d12Fence.Get(), nullptr, GENERIC_ALL,
+                                                             nullptr, ownedHandle.GetMut()),
+                "D3D12 create fence handle"));
+            DAWN_ASSERT(ownedHandle.IsValid());
+            fence = AcquireRef(new SharedFence(device, label, std::move(ownedHandle)));
+            fence->mFence = std::move(d3d12Fence);
+            fence->mType = wgpu::SharedFenceType::DXGISharedHandle;
+        } break;
+        case wgpu::SharedFenceType::D3D12Fence: {
+            fence = AcquireRef(new SharedFence(device, label, std::move(d3d12Fence)));
+            fence->mType = wgpu::SharedFenceType::D3D12Fence;
+        } break;
+        default:
+            DAWN_UNREACHABLE();
+    }
+
+    return fence;
+}
+
+// static
+ResultOrError<Ref<SharedFence>> SharedFence::Create(
+    Device* device,
+    const char* label,
+    const SharedFenceD3D12FenceDescriptor* descriptor) {
+    DAWN_INVALID_IF(descriptor->fence == nullptr, "shared D3D12Fence is missing.");
+
+    ComPtr<ID3D12Fence> d3d12Fence = descriptor->fence;
+
+    ID3D12Device* resourceDevice = nullptr;
+    d3d12Fence->GetDevice(__uuidof(*resourceDevice), reinterpret_cast<void**>(&resourceDevice));
+    DAWN_INVALID_IF(resourceDevice != device->GetD3D12Device(),
+                    "The D3D12 device of the fence and the D3D12 device of %s must be same.",
+                    device);
+    resourceDevice->Release();
+
+    Ref<SharedFence> fence = AcquireRef(new SharedFence(device, label, std::move(d3d12Fence)));
+    fence->mType = wgpu::SharedFenceType::D3D12Fence;
     return fence;
 }
 
@@ -74,6 +113,36 @@ void SharedFence::DestroyImpl() {
 
 ID3D12Fence* SharedFence::GetD3DFence() const {
     return mFence.Get();
+}
+
+MaybeError SharedFence::ExportInfoImpl(UnpackedPtr<SharedFenceExportInfo>& info) const {
+    info->type = mType;
+
+    switch (mType) {
+        case wgpu::SharedFenceType::DXGISharedHandle:
+            DAWN_TRY(info.ValidateSubset<SharedFenceDXGISharedHandleExportInfo>());
+            {
+                auto* exportInfo = info.Get<SharedFenceDXGISharedHandleExportInfo>();
+                if (exportInfo != nullptr) {
+                    exportInfo->handle = mHandle.Get();
+                }
+            }
+
+            break;
+        case wgpu::SharedFenceType::D3D12Fence:
+            DAWN_TRY(info.ValidateSubset<SharedFenceD3D12FenceExportInfo>());
+            {
+                auto* exportInfo = info.Get<SharedFenceD3D12FenceExportInfo>();
+                if (exportInfo != nullptr) {
+                    exportInfo->fence = mFence.Get();
+                }
+            }
+            break;
+        default:
+            DAWN_UNREACHABLE();
+    }
+
+    return {};
 }
 
 }  // namespace dawn::native::d3d12

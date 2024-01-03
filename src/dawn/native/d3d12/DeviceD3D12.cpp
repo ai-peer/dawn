@@ -57,6 +57,7 @@
 #include "dawn/native/d3d12/SamplerHeapCacheD3D12.h"
 #include "dawn/native/d3d12/ShaderModuleD3D12.h"
 #include "dawn/native/d3d12/ShaderVisibleDescriptorAllocatorD3D12.h"
+#include "dawn/native/d3d12/SharedBufferMemoryD3D12.h"
 #include "dawn/native/d3d12/SharedFenceD3D12.h"
 #include "dawn/native/d3d12/SharedTextureMemoryD3D12.h"
 #include "dawn/native/d3d12/StagingDescriptorAllocatorD3D12.h"
@@ -386,14 +387,38 @@ ResultOrError<Ref<SharedTextureMemoryBase>> Device::ImportSharedTextureMemoryImp
     }
 }
 
+ResultOrError<Ref<SharedBufferMemoryBase>> Device::ImportSharedBufferMemoryImpl(
+    const SharedBufferMemoryDescriptor* descriptor) {
+    UnpackedPtr<SharedBufferMemoryDescriptor> unpacked;
+    DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
+
+    wgpu::SType type;
+    DAWN_TRY_ASSIGN(
+        type, (unpacked.ValidateBranches<Branch<SharedBufferMemoryD3D12ResourceDescriptor>>()));
+
+    switch (type) {
+        case wgpu::SType::SharedBufferMemoryD3D12ResourceDescriptor:
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedBufferMemoryD3D12Resource),
+                            "%s is not enabled.",
+                            wgpu::FeatureName::SharedBufferMemoryD3D12Resource);
+            return SharedBufferMemory::Create(
+                this, descriptor->label, unpacked.Get<SharedBufferMemoryD3D12ResourceDescriptor>());
+        default:
+            DAWN_UNREACHABLE();
+    }
+
+    return SharedBufferMemory::Create(this, descriptor->label,
+                                      unpacked.Get<SharedBufferMemoryD3D12ResourceDescriptor>());
+}
+
 ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
     const SharedFenceDescriptor* descriptor) {
     UnpackedPtr<SharedFenceDescriptor> unpacked;
     DAWN_TRY_ASSIGN(unpacked, ValidateAndUnpack(descriptor));
 
     wgpu::SType type;
-    DAWN_TRY_ASSIGN(type,
-                    (unpacked.ValidateBranches<Branch<SharedFenceDXGISharedHandleDescriptor>>()));
+    DAWN_TRY_ASSIGN(type, (unpacked.ValidateBranches<Branch<SharedFenceDXGISharedHandleDescriptor>,
+                                                     Branch<SharedFenceD3D12FenceDescriptor>>()));
 
     switch (type) {
         case wgpu::SType::SharedFenceDXGISharedHandleDescriptor:
@@ -401,6 +426,11 @@ ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
                             wgpu::FeatureName::SharedFenceDXGISharedHandle);
             return SharedFence::Create(this, descriptor->label,
                                        unpacked.Get<SharedFenceDXGISharedHandleDescriptor>());
+        case wgpu::SType::SharedFenceD3D12FenceDescriptor:
+            DAWN_INVALID_IF(!HasFeature(Feature::SharedFenceD3D12Fence), "%s is not enabled.",
+                            wgpu::FeatureName::SharedFenceD3D12Fence);
+            return SharedFence::Create(this, descriptor->label,
+                                       unpacked.Get<SharedFenceD3D12FenceDescriptor>());
         default:
             DAWN_UNREACHABLE();
     }
