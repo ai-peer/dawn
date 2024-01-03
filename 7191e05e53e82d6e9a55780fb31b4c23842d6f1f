@@ -33,6 +33,75 @@
       "message": "I\u0027m mildly suprised that no validation changes are necessary, but maybe everything just happens to work!",
       "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6f5f93fd_a1926c8a",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 859,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:45:08Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 858,
+        "startChar": 8,
+        "endLine": 859,
+        "endChar": 46
+      },
+      "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74f8b7eb_045734ec",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 905,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:45:08Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 904,
+        "startChar": 4,
+        "endLine": 905,
+        "endChar": 46
+      },
+      "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0410309b_f2dcefa1",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:45:08Z",
+      "side": 1,
+      "message": "Hmm is it possible to make the `ApplyTrivialFrontendDefaults` function recursive on children structs? Would be nice to make this just:\n\n`mDepthStencil \u003d *descriptor-\u003eApplyTrivialFrontendDefaults()`",
+      "range": {
+        "startLine": 914,
+        "startChar": 8,
+        "endLine": 916,
+        "endChar": 65
+      },
+      "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
