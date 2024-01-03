@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccac0edb_f02fea3e",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-03T21:00:45Z",
+      "side": 1,
+      "message": "bitset\n```suggestion\n    /// Decode decodes the bitset from @p reader.\n```",
+      "range": {
+        "startLine": 182,
+        "startChar": 27,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "2d0dd4be290f596f2983bf9244753f5f3333891a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "282adc31_36aed37c",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-03T21:00:45Z",
+      "side": 1,
+      "message": "bitset\n```suggestion\n    /// @returns the decoded bitset, or an error if the stream is too short.\n```",
+      "range": {
+        "startLine": 184,
+        "startChar": 29,
+        "endLine": 184,
+        "endChar": 37
+      },
+      "revId": "2d0dd4be290f596f2983bf9244753f5f3333891a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
