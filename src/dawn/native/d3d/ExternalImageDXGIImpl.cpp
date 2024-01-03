@@ -37,6 +37,7 @@
 #include "dawn/native/d3d/DeviceD3D.h"
 #include "dawn/native/d3d/Fence.h"
 #include "dawn/native/d3d/Forward.h"
+#include "dawn/native/d3d/SharedFenceD3D.h"
 #include "dawn/native/d3d/TextureD3D.h"
 
 namespace dawn::native::d3d {
@@ -205,7 +206,7 @@ void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
         dawn::ErrorLog() << "D3D fence end access failed";
         return;
     }
-    signalFence->fenceHandle = ToBackend(mBackendDevice.Get())->GetFenceHandle();
+    signalFence->fenceHandle = ToBackend(mBackendDevice.Get())->GetSharedFence()->GetFenceHandle();
     signalFence->fenceValue = static_cast<uint64_t>(fenceValue);
 
     --mAccessCount;

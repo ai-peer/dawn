@@ -108,10 +108,13 @@ MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
         mTimestampPeriod = static_cast<float>(1e9) / frequency;
     }
 
+    SystemHandle fenceHandle;
     DAWN_TRY(CheckHRESULT(mD3d12Device->CreateSharedHandle(queue->GetFence(), nullptr, GENERIC_ALL,
-                                                           nullptr, &mFenceHandle),
+                                                           nullptr, fenceHandle.GetMut()),
                           "D3D12 create fence handle"));
-    DAWN_ASSERT(mFenceHandle != nullptr);
+    DAWN_ASSERT(fenceHandle.IsValid());
+    DAWN_TRY_ASSIGN(mSharedFence, SharedFence::Create(this, "Internal shared DXGI fence",
+                                                      std::move(fenceHandle), queue->GetFence()));
 
     // Initialize backend services
 
