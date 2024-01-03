@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "361c6f22_55831b50",
+        "filename": "src/dawn/native/vulkan/SharedTextureMemoryVk.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 844,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T16:00:56Z",
+      "side": 1,
+      "message": "Ok sounds good, thank you for the explanation. I agree that with dma-buf becoming more and more of a thing, optimizing for the",
+      "parentUuid": "06651017_f9605279",
+      "revId": "8c0b20e1376d020d1875208ff87c50c82f521dce",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "779ca9c9_546f898e",
         "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
         "patchSetId": 1
