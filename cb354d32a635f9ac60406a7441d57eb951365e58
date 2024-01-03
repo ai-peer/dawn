@@ -16,6 +16,167 @@
       "message": "LGTM",
       "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cc24206c_e5dc1409",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1581,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:38:25Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 1580,
+        "startChar": 4,
+        "endLine": 1581,
+        "endChar": 47
+      },
+      "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7244c94b_01337313",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1671,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:38:25Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 1670,
+        "startChar": 4,
+        "endLine": 1671,
+        "endChar": 42
+      },
+      "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a6a5fbc_aa58048d",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1773,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:38:25Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 1770,
+        "startChar": 4,
+        "endLine": 1773,
+        "endChar": 47
+      },
+      "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c58cf0e_ad80a6c7",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1895,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:38:25Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 1893,
+        "startChar": 4,
+        "endLine": 1895,
+        "endChar": 0
+      },
+      "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9c9e449_2c6588c7",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 453,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:38:25Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 452,
+        "startChar": 4,
+        "endLine": 453,
+        "endChar": 47
+      },
+      "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e590424_50a02455",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:38:25Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 529,
+        "startChar": 4,
+        "endLine": 532,
+        "endChar": 47
+      },
+      "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "579cee54_21cf61dc",
+        "filename": "src/dawn/native/Queue.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-03T19:38:25Z",
+      "side": 1,
+      "message": "See comment about `ApplyTrivialFrontendDefaults` in previous CL.",
+      "range": {
+        "startLine": 548,
+        "startChar": 4,
+        "endLine": 549,
+        "endChar": 47
+      },
+      "revId": "cb354d32a635f9ac60406a7441d57eb951365e58",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
