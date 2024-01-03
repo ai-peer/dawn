@@ -88,6 +88,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "7c32de22_ec48f2af",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-03T17:28:20Z",
+      "side": 1,
+      "message": "it could be as simple as a heap of (Buffer, ExecutionSerial) pairs. and we reuse a Buffer after its ExecutionSerial has passed",
+      "parentUuid": "fc5d0661_4c885d3b",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d7b7a8b_395bb89e",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 5
