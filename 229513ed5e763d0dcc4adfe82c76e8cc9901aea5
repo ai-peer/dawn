@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15dc8223_e8cf0f5e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-03T11:09:46Z",
+      "side": 1,
+      "message": "Offending change: https://github.com/KhronosGroup/SPIRV-Tools/pull/5422",
+      "revId": "229513ed5e763d0dcc4adfe82c76e8cc9901aea5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
