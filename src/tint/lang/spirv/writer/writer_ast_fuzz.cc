@@ -27,18 +27,35 @@
 
 // GEN_BUILD:CONDITION(tint_build_wgsl_reader)
 
-#include "src/tint/lang/hlsl/writer/writer.h"
-
 #include "src/tint/cmd/fuzz/wgsl/fuzz.h"
+#include "src/tint/lang/spirv/writer/helpers/ast_generate_bindings.h"
+#include "src/tint/lang/spirv/writer/writer.h"
+#include "src/tint/lang/wgsl/ast/transform/manager.h"
+#include "src/tint/lang/wgsl/ast/transform/substitute_override.h"
 
-namespace tint::hlsl::writer {
+namespace tint::spirv::writer {
 namespace {
 
 void ASTFuzzer(const tint::Program& program, Options options) {
-    [[maybe_unused]] auto res = tint::hlsl::writer::Generate(program, options);
+    options.bindings = GenerateBindings(program);
+
+    tint::ast::transform::Manager transform_manager;
+    tint::ast::transform::DataMap transform_inputs;
+
+    // Substitute overrides
+    tint::ast::transform::SubstituteOverride::Config cfg{};
+    transform_inputs.Add<tint::ast::transform::SubstituteOverride::Config>(cfg);
+    transform_manager.Add<tint::ast::transform::SubstituteOverride>();
+
+    tint::ast::transform::DataMap outputs;
+
+    // If the result is invalid, the generate call will log an error.
+    auto result = transform_manager.Run(program, std::move(transform_inputs), outputs);
+
+    [[maybe_unused]] auto res = tint::spirv::writer::Generate(result, options);
 }
 
 }  // namespace
-}  // namespace tint::hlsl::writer
+}  // namespace tint::spirv::writer
 
-TINT_WGSL_PROGRAM_FUZZER(tint::hlsl::writer::ASTFuzzer);
+TINT_WGSL_PROGRAM_FUZZER(tint::spirv::writer::ASTFuzzer);

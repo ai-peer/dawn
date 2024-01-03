@@ -34,7 +34,7 @@
 namespace tint::spirv::writer {
 namespace {
 
-void IRPrinterFuzzer(core::ir::Module& module, Options options) {
+void IRFuzzer(core::ir::Module& module, Options options) {
     options.bindings = GenerateBindings(module);
     auto output = Generate(module, options);
     if (!output) {
@@ -51,4 +51,4 @@ void IRPrinterFuzzer(core::ir::Module& module, Options options) {
 }  // namespace
 }  // namespace tint::spirv::writer
 
-TINT_IR_MODULE_FUZZER(tint::spirv::writer::IRPrinterFuzzer);
+TINT_IR_MODULE_FUZZER(tint::spirv::writer::IRFuzzer);
