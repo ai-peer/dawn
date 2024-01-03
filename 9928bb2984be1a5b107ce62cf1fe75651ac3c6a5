@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8dea2059_3b5f19f5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T23:37:54Z",
+      "side": 1,
+      "message": "Loko PTAL one last time (hopefully)",
+      "revId": "9928bb2984be1a5b107ce62cf1fe75651ac3c6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
