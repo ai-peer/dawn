@@ -52,6 +52,75 @@
       "parentUuid": "b96a17b8_14560501",
       "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0f76b2a8_37c4b527",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T19:51:12Z",
+      "side": 1,
+      "message": "Sigh, I seem to have had PROJECT_SOURCE_DIR and CMAKE_SOURCE_DIR backwards in my head. Made a couple of alternate comments above.",
+      "parentUuid": "50dfa529_d5472e18",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2d92a8b4_343ec612",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T19:51:12Z",
+      "side": 1,
+      "message": "We use `Dawn_SOURCE_DIR` in the top level Cmakefile, would it make sense to use that here as it\u0027s referring into that specifically.",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f721297d_70a908cc",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T19:51:12Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "818bc7b4_e4b5262b",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 181,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-03T19:51:12Z",
+      "side": 1,
+      "message": "This one actually seems wrong in general (before the change even) it should be using something like `DAWN_THIRD_PARY_DIR`, or better setting a `DAWN_DXHEADERS_DIR` in the top level Cmakefile which is `DAWN_THIRD_PARTY_DIR/dxheaders`. Then the whole folder change be overriden like thee rest of the third party entries.",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
