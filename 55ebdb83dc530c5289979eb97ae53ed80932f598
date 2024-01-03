@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "69ab29de_29bfee2a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:36:38Z",
+      "side": 1,
+      "message": "nit: staging.",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e4d5763e_84c10f68",
@@ -31,6 +48,40 @@
       "writtenOn": "2024-01-03T14:46:48Z",
       "side": 1,
       "message": "lgtm with nits.",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3775e4d4_c2ef3813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:36:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc5d0661_4c885d3b",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:36:38Z",
+      "side": 1,
+      "message": "This means that we\u0027ll repeatedly use the same buffer for write-\u003ecopyInternal, forcing the driver to either stall, or create shadow copies for the buffer each time. It could be fine for now, but in the future I think we\u0027ll really want some kind of staging manager, like the other backends use (or even something better)",
       "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -76,6 +127,29 @@
         "startChar": 26,
         "endLine": 549,
         "endChar": 36
+      },
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eacdcabd_1de697f5",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T15:36:38Z",
+      "side": 1,
+      "message": "nit: GetStaging, ditto in the comment.",
+      "range": {
+        "startLine": 107,
+        "startChar": 35,
+        "endLine": 107,
+        "endChar": 52
       },
       "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
