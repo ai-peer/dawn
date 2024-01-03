@@ -16,6 +16,24 @@
       "message": "Both Pointer and Ref have this same check, so should it be moved up or modified?",
       "revId": "74970cd9f21f2d256c3c7113ff395244a84cfc4e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0ca124dc_27e3095c",
+        "filename": "src/tint/lang/core/type/reference.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-03T21:18:55Z",
+      "side": 1,
+      "message": "I tried moving it up, and changing to check for not being a `MemoryView`, but then found a bunch of resolver validation tests that test for pointer-of-pointer.\n\nI can\u0027t justify the assertion asymmetry here, so I\u0027ve just removed the assert.",
+      "parentUuid": "19bbfa71_5a5500e1",
+      "revId": "74970cd9f21f2d256c3c7113ff395244a84cfc4e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
