@@ -48,16 +48,16 @@ MaybeError Backend::Initialize() {
 
     // Enable the debug layer (requires the Graphics Tools "optional feature").
     const auto instance = GetInstance();
-    if (instance->GetBackendValidationLevel() != BackendValidationLevel::Disabled) {
-        ComPtr<ID3D12Debug3> debugController;
-        if (SUCCEEDED(functions->d3d12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
-            DAWN_ASSERT(debugController != nullptr);
-            debugController->EnableDebugLayer();
-            if (instance->GetBackendValidationLevel() == BackendValidationLevel::Full) {
-                debugController->SetEnableGPUBasedValidation(true);
-            }
+    // if (instance->GetBackendValidationLevel() != BackendValidationLevel::Disabled) {
+    ComPtr<ID3D12Debug3> debugController;
+    if (SUCCEEDED(functions->d3d12GetDebugInterface(IID_PPV_ARGS(&debugController)))) {
+        DAWN_ASSERT(debugController != nullptr);
+        debugController->EnableDebugLayer();
+        if (instance->GetBackendValidationLevel() == BackendValidationLevel::Full) {
+            debugController->SetEnableGPUBasedValidation(true);
         }
     }
+    //}
 
     if (instance->IsBeginCaptureOnStartupEnabled()) {
         ComPtr<IDXGraphicsAnalysis> graphicsAnalysis;

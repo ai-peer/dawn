@@ -299,6 +299,7 @@ ResultOrError<Ref<SharedFenceBase>> Device::ImportSharedFenceImpl(
                             wgpu::FeatureName::SharedFenceDXGISharedHandle);
             return SharedFence::Create(this, descriptor->label,
                                        unpacked.Get<SharedFenceDXGISharedHandleDescriptor>());
+        case wgpu::SType::SharedFenceD3D12FenceDescriptor:
         default:
             DAWN_UNREACHABLE();
     }
