@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "822e92dd_4303fd9e",
+        "filename": "dawn.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 1933,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T23:31:55Z",
+      "side": 1,
+      "message": "It\u0027s needed because otherwise it generates as `float32filterable` instead of `float32-filterable` in `library_webgpu_enum_tables.js`.\n\nNot technically related, but we do need it at some point to be able to cleanly roll forward into Emscripten. Doesn\u0027t hurt to split it out though.",
+      "parentUuid": "04f7cada_00279de5",
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "778f26dd_fc073ae0",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "223d45fc_e2877d7f",
+        "filename": "src/dawn/native/Format.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T23:31:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "778f26dd_fc073ae0",
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5002c3e_cd9c1a8e",
@@ -82,6 +118,30 @@
       "writtenOn": "2024-01-02T18:12:45Z",
       "side": 1,
       "message": "nit. Why can\u0027t this be `namespace dawn` anymore?",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b5e4c14_d3de0142",
+        "filename": "src/dawn/tests/unittests/EnumClassBitmasksTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T23:31:55Z",
+      "side": 1,
+      "message": "It\u0027s just to make it clear that the `dawn` namespace has nothing to do with the test, and also avoids accidentally picking up `namespace dawn { WGPU_IMPORT_BITMASK_OPERATORS }` from some other included file. Better to have it explicit since it is part of the test.",
+      "parentUuid": "a5002c3e_cd9c1a8e",
       "range": {
         "startLine": 32,
         "startChar": 10,
