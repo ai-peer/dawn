@@ -41,6 +41,7 @@ struct ExternalImageDXGIFenceDescriptor;
 class ExternalImageDXGIImpl;
 class Fence;
 class PlatformFunctions;
+class SharedFence;
 
 class Device : public DeviceBase {
   public:
@@ -55,7 +56,7 @@ class Device : public DeviceBase {
     const PlatformFunctions* GetFunctions() const;
     ComPtr<IDXGIFactory4> GetFactory() const;
 
-    HANDLE GetFenceHandle() const;
+    Ref<SharedFence> GetSharedFence() const;
 
     std::unique_ptr<ExternalImageDXGIImpl> CreateExternalImageDXGIImpl(
         const ExternalImageDescriptor* descriptor);
@@ -75,7 +76,7 @@ class Device : public DeviceBase {
     virtual ResultOrError<std::unique_ptr<ExternalImageDXGIImpl>> CreateExternalImageDXGIImplImpl(
         const ExternalImageDescriptor* descriptor) = 0;
 
-    HANDLE mFenceHandle = nullptr;
+    Ref<SharedFence> mSharedFence;
 
   private:
     // List of external image resources opened using this device.
