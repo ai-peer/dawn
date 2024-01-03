@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,12 +25,9 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
-#define SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
+#ifndef SRC_TINT_LANG_WGSL_WRITER_RAISE_PTR_TO_REF_H_
+#define SRC_TINT_LANG_WGSL_WRITER_RAISE_PTR_TO_REF_H_
 
-#include <string>
-
-#include "src/tint/utils/diagnostic/diagnostic.h"
 #include "src/tint/utils/result/result.h"
 
 // Forward declarations.
@@ -40,13 +37,12 @@ class Module;
 
 namespace tint::wgsl::writer::raise {
 
-/// RenameConflicts is a transform that renames declarations which prevent identifiers from
-/// resolving to the correct declaration, and those with identical identifiers declared in the same
-/// scope.
+/// PtrToRef is a transform that modifies values and instructions to convert from pointer types to
+/// reference types.
 /// @param module the module to transform
 /// @returns success or failure
-Result<SuccessType> RenameConflicts(core::ir::Module& module);
+Result<SuccessType> PtrToRef(core::ir::Module& module);
 
 }  // namespace tint::wgsl::writer::raise
 
-#endif  // SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
+#endif  // SRC_TINT_LANG_WGSL_WRITER_RAISE_PTR_TO_REF_H_

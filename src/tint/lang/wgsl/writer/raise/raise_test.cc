@@ -99,7 +99,7 @@ TEST_F(WgslWriter_RaiseTest, WorkgroupBarrier) {
 
     auto* expect = R"(
 %b1 = block {  # root
-  %W:ptr<workgroup, i32, read_write> = var
+  %W:ref<workgroup, i32, read_write> = var
 }
 
 %f = func():i32 -> %b2 {
@@ -146,7 +146,7 @@ TEST_F(WgslWriter_RaiseTest, WorkgroupBarrier_NoMatch) {
 
     auto* expect = R"(
 %b1 = block {  # root
-  %W:ptr<workgroup, i32, read_write> = var
+  %W:ref<workgroup, i32, read_write> = var
 }
 
 %f = func():i32 -> %b2 {

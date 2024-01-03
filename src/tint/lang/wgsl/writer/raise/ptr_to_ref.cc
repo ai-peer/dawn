@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,28 +25,25 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
-#define SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
-
-#include <string>
-
-#include "src/tint/utils/diagnostic/diagnostic.h"
-#include "src/tint/utils/result/result.h"
-
-// Forward declarations.
-namespace tint::core::ir {
-class Module;
-}
+#include "src/tint/lang/wgsl/writer/raise/ptr_to_ref.h"
+#include "src/tint/lang/core/ir/module.h"
+#include "src/tint/lang/core/ir/var.h"
+#include "src/tint/lang/core/type/pointer.h"
+#include "src/tint/lang/core/type/reference.h"
 
 namespace tint::wgsl::writer::raise {
 
-/// RenameConflicts is a transform that renames declarations which prevent identifiers from
-/// resolving to the correct declaration, and those with identical identifiers declared in the same
-/// scope.
-/// @param module the module to transform
-/// @returns success or failure
-Result<SuccessType> RenameConflicts(core::ir::Module& module);
+Result<SuccessType> PtrToRef(core::ir::Module& mod) {
+    for (auto* inst : mod.instructions.Objects()) {
+        if (auto* var = inst->As<core::ir::Var>()) {
+            auto* res = var->Result(0);
+            auto* ptr = res->Type()->As<core::type::Pointer>();
+            auto* ref = mod.Types().Get<core::type::Reference>(ptr->AddressSpace(),
+                                                               ptr->StoreType(), ptr->Access());
+            res->SetType(ref);
+        }
+    }
+    return Success;
+}
 
 }  // namespace tint::wgsl::writer::raise
-
-#endif  // SRC_TINT_LANG_WGSL_WRITER_RAISE_RENAME_CONFLICTS_H_
