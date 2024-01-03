@@ -629,6 +629,7 @@ source_set("end2end_tests_sources") {
     libs += [
       "d3d11.lib",
       "dxgi.lib",
+      "d3d12.lib",
     ]
 
     sources += [
@@ -701,6 +702,7 @@ source_set("white_box_tests_sources") {
   ]
 
   sources = [
+    "white_box/SharedBufferMemoryTests.cpp",
     "white_box/SharedTextureMemoryTests.cpp",
     "white_box/SharedTextureMemoryTests.h",
   ]
