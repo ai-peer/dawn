@@ -34,6 +34,24 @@
       "parentUuid": "5f9ddacd_b0cb6d0f",
       "revId": "52b44c6ef2dd8cb0abdcc2bcae7f23c1f437e677",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f577f66f_c0dd419f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-01-03T08:10:14Z",
+      "side": 1,
+      "message": "I think* you need to add `Surface::GetPreferredFormat()`  in new third_party/dawn/src/dawn/wire/client/Surface.{cpp.h} files like `SwapChain::GetCurrentTexture()` in third_party/dawn/src/dawn/wire/client/SwapChain.{cpp.h}",
+      "parentUuid": "5b28ede0_7af64b69",
+      "revId": "52b44c6ef2dd8cb0abdcc2bcae7f23c1f437e677",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
