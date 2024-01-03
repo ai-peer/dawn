@@ -34,6 +34,24 @@
       "parentUuid": "1494b5b9_32761f78",
       "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50dfa529_d5472e18",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-01-03T19:40:17Z",
+      "side": 1,
+      "message": "I didn\u0027t mean to resolve the comment!",
+      "parentUuid": "b96a17b8_14560501",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
