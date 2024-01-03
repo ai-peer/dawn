@@ -43,6 +43,7 @@
 #include "dawn/native/d3d12/HeapD3D12.h"
 #include "dawn/native/d3d12/QueueD3D12.h"
 #include "dawn/native/d3d12/ResidencyManagerD3D12.h"
+#include "dawn/native/d3d12/SharedBufferMemoryD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
@@ -128,6 +129,30 @@ ResultOrError<Ref<Buffer>> Buffer::Create(Device* device,
         DAWN_TRY(buffer->Initialize(descriptor->mappedAtCreation));
     }
     return buffer;
+}
+
+// static
+ResultOrError<Ref<Buffer>> Buffer::CreateFromSharedBufferMemory(
+    SharedBufferMemory* memory,
+    const UnpackedPtr<BufferDescriptor>& descriptor) {
+    Device* device = ToBackend(memory->GetDevice());
+    Ref<Buffer> buffer = AcquireRef(new Buffer(device, descriptor));
+    DAWN_TRY(buffer->InitializeAsExternalBuffer(memory->GetD3DResource(), descriptor));
+    buffer->mSharedBufferMemoryContents = memory->GetContents();
+    return buffer;
+}
+
+MaybeError Buffer::InitializeAsExternalBuffer(ComPtr<IUnknown> d3dBuffer,
+                                              const UnpackedPtr<BufferDescriptor>& descriptor) {
+    ComPtr<ID3D12Resource> d3d12Buffer;
+    DAWN_TRY(CheckHRESULT(d3dBuffer.As(&d3d12Buffer), "buffer is not a valid ID3D12Resource"));
+
+    AllocationInfo info;
+    info.mMethod = AllocationMethod::kExternal;
+    mResourceAllocation = {info, 0, std::move(d3d12Buffer), nullptr};
+    mAllocatedSize = descriptor->size;
+    SetIsDataInitialized();
+    return {};
 }
 
 Buffer::Buffer(Device* device, const UnpackedPtr<BufferDescriptor>& descriptor)

@@ -39,6 +39,7 @@
 
 namespace dawn::native::d3d12 {
 
+class SharedBufferMemory;
 class CommandRecordingContext;
 class Device;
 
@@ -46,6 +47,10 @@ class Buffer final : public BufferBase {
   public:
     static ResultOrError<Ref<Buffer>> Create(Device* device,
                                              const UnpackedPtr<BufferDescriptor>& descriptor);
+
+    static ResultOrError<Ref<Buffer>> CreateFromSharedBufferMemory(
+        SharedBufferMemory* memory,
+        const UnpackedPtr<BufferDescriptor>& descriptor);
 
     ID3D12Resource* GetD3D12Resource() const;
     D3D12_GPU_VIRTUAL_ADDRESS GetVA() const;
@@ -65,6 +70,9 @@ class Buffer final : public BufferBase {
                                                            uint64_t size);
     MaybeError EnsureDataInitializedAsDestination(CommandRecordingContext* commandContext,
                                                   const CopyTextureToBufferCmd* copy);
+
+    MaybeError InitializeAsExternalBuffer(ComPtr<IUnknown> d3dBuffer,
+                                          const UnpackedPtr<BufferDescriptor>& descriptor);
 
     // Dawn API
     void SetLabelImpl() override;

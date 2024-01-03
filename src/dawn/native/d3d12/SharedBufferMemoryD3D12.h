@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,45 +25,55 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D12_SHARED_FENCE_D3D12_H_
-#define SRC_DAWN_NATIVE_D3D12_SHARED_FENCE_D3D12_H_
+#ifndef SRC_DAWN_NATIVE_D3D12_SHARED_BUFFER_MEMORY_D3D12_H_
+#define SRC_DAWN_NATIVE_D3D12_SHARED_BUFFER_MEMORY_D3D12_H_
 
-#include "dawn/native/d3d/SharedFenceD3D.h"
+#include "dawn/native/D3D12Backend.h"
+#include "dawn/native/Error.h"
+#include "dawn/native/SharedBufferMemory.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
 
 class Device;
-struct SharedFenceD3D12FenceDescriptor;
 
-class SharedFence : public d3d::SharedFence {
+class SharedBufferMemory final : public SharedBufferMemoryBase {
   public:
-    SharedFence(Device* device, const char* label, ComPtr<ID3D12Fence> fence);
-
-    static ResultOrError<Ref<SharedFence>> Create(
+    static ResultOrError<Ref<SharedBufferMemory>> Create(
         Device* device,
         const char* label,
-        const SharedFenceDXGISharedHandleDescriptor* descriptor);
+        const SharedBufferMemoryD3D12ResourceDescriptor* descriptor);
 
-    static ResultOrError<Ref<SharedFence>> Create(Device* device,
-                                                  const char* label,
-                                                  ComPtr<ID3D12Fence> d3d12Fence,
-                                                  wgpu::SharedFenceType type);
-
-    static ResultOrError<Ref<SharedFence>>
-    Create(Device* device, const char* label, const SharedFenceD3D12FenceDescriptor* descriptor);
-    ID3D12Fence* GetD3DFence() const;
+    ID3D12Resource* GetD3DResource() const;
+    ResultOrError<FenceAndSignalValue> EndAccessImpl(BufferBase* buffer,
+                                                     UnpackedPtr<EndAccessState>& state) override;
 
   private:
-    using d3d::SharedFence::SharedFence;
+    SharedBufferMemory(Device* device,
+                       const char* label,
+                       SharedBufferMemoryProperties properties,
+                       ComPtr<ID3D12Resource> resource);
+
     void DestroyImpl() override;
 
-    MaybeError ExportInfoImpl(UnpackedPtr<SharedFenceExportInfo>& info) const override;
+    ResultOrError<Ref<BufferBase>> CreateBufferImpl(
+        const UnpackedPtr<BufferDescriptor>& descriptor) override;
 
-    wgpu::SharedFenceType mType;
-    ComPtr<ID3D12Fence> mFence;
+    ResultOrError<Ref<SharedFenceBase>> CreateFenceImpl(
+        const SharedFenceDXGISharedHandleDescriptor* desc);
+
+    MaybeError BeginAccessImpl(BufferBase* buffer,
+                               const UnpackedPtr<BeginAccessDescriptor>& descriptor) override;
+
+    ComPtr<ID3D12Resource> mResource;
+
+    // If the resource has IDXGIKeyedMutex interface, it will be used for synchronization.
+    // TODO(dawn:1906): remove the mDXGIKeyedMutex when it is not used in chrome.
+    ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+    // Chrome uses 0 as acquire key.
+    static constexpr UINT64 kDXGIKeyedMutexAcquireKey = 0;
 };
 
 }  // namespace dawn::native::d3d12
 
-#endif  // SRC_DAWN_NATIVE_D3D12_SHARED_FENCE_D3D12_H_
+#endif  // SRC_DAWN_NATIVE_D3D12_SHARED_BUFFER_MEMORY_D3D12_H_

@@ -698,6 +698,10 @@ MaybeError BufferBase::Unmap() {
     return {};
 }
 
+SharedBufferMemoryContents* BufferBase::GetSharedBufferMemoryContents() const {
+    return mSharedBufferMemoryContents.Get();
+}
+
 void BufferBase::UnmapInternal(WGPUBufferMapAsyncStatus callbackStatus) {
     // Unmaps resources on the backend.
     if (mState == BufferState::PendingMap) {
@@ -856,6 +860,11 @@ bool BufferBase::IsDataInitialized() const {
 
 void BufferBase::SetIsDataInitialized() {
     mIsDataInitialized = true;
+}
+
+void BufferBase::SetHasAccess(bool hasAccess) {
+    DAWN_ASSERT(!IsError());
+    // mState.hasAccess = hasAccess;
 }
 
 void BufferBase::MarkUsedInPendingCommands() {

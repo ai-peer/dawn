@@ -295,6 +295,8 @@ class DeviceBase : public RefCountedWithExternalCount {
         const RenderBundleEncoderDescriptor* descriptor);
     RenderPipelineBase* APICreateRenderPipeline(const RenderPipelineDescriptor* descriptor);
     ExternalTextureBase* APICreateExternalTexture(const ExternalTextureDescriptor* descriptor);
+    SharedBufferMemoryBase* APIImportSharedBufferMemory(
+        const SharedBufferMemoryDescriptor* descriptor);
     SharedTextureMemoryBase* APIImportSharedTextureMemory(
         const SharedTextureMemoryDescriptor* descriptor);
     SharedFenceBase* APIImportSharedFence(const SharedFenceDescriptor* descriptor);
@@ -513,6 +515,8 @@ class DeviceBase : public RefCountedWithExternalCount {
         const UnpackedPtr<RenderPipelineDescriptor>& descriptor) = 0;
     virtual ResultOrError<Ref<SharedTextureMemoryBase>> ImportSharedTextureMemoryImpl(
         const SharedTextureMemoryDescriptor* descriptor);
+    virtual ResultOrError<Ref<SharedBufferMemoryBase>> ImportSharedBufferMemoryImpl(
+        const SharedBufferMemoryDescriptor* descriptor);
     virtual ResultOrError<Ref<SharedFenceBase>> ImportSharedFenceImpl(
         const SharedFenceDescriptor* descriptor);
     virtual void SetLabelImpl();
