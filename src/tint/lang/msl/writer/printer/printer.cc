@@ -389,11 +389,14 @@ class Printer : public tint::TextGenerator {
 
     void EmitUnary(StringStream& out, const core::ir::Unary* u) {
         switch (u->Op()) {
-            case core::ir::UnaryOp::kNegation:
+            case core::UnaryOp::kNegation:
                 out << "-";
                 break;
-            case core::ir::UnaryOp::kComplement:
+            case core::UnaryOp::kComplement:
                 out << "~";
+                break;
+            default:
+                TINT_UNIMPLEMENTED() << u->Op();
                 break;
         }
         out << "(";

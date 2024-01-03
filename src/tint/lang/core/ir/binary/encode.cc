@@ -675,12 +675,18 @@ struct Encoder {
         }
     }
 
-    pb::UnaryOp UnaryOp(core::ir::UnaryOp in) {
+    pb::UnaryOp UnaryOp(core::UnaryOp in) {
         switch (in) {
-            case core::ir::UnaryOp::kComplement:
+            case core::UnaryOp::kComplement:
                 return pb::UnaryOp::complement;
-            case core::ir::UnaryOp::kNegation:
+            case core::UnaryOp::kNegation:
                 return pb::UnaryOp::negation;
+            case core::UnaryOp::kAddressOf:
+                return pb::UnaryOp::address_of;
+            case core::UnaryOp::kIndirection:
+                return pb::UnaryOp::indirection;
+            case core::UnaryOp::kNot:
+                return pb::UnaryOp::not_;
         }
         TINT_ICE() << "invalid UnaryOp: " << in;
         return pb::UnaryOp::complement;

@@ -1966,15 +1966,18 @@ class Printer {
         auto* ty = unary->Result(0)->Type();
         spv::Op op = spv::Op::Max;
         switch (unary->Op()) {
-            case core::ir::UnaryOp::kComplement:
+            case core::UnaryOp::kComplement:
                 op = spv::Op::OpNot;
                 break;
-            case core::ir::UnaryOp::kNegation:
+            case core::UnaryOp::kNegation:
                 if (ty->is_float_scalar_or_vector()) {
                     op = spv::Op::OpFNegate;
                 } else if (ty->is_signed_integer_scalar_or_vector()) {
                     op = spv::Op::OpSNegate;
                 }
+                break;
+            default:
+                TINT_UNIMPLEMENTED() << unary->Op();
                 break;
         }
         current_function_.push_inst(op, {Type(ty), id, Value(unary->Val())});

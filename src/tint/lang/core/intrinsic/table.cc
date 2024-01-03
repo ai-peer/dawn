@@ -198,7 +198,7 @@ std::string CallSignature(std::string_view intrinsic_name,
                 ss << ", ";
             }
             first = false;
-            ss << arg->UnwrapRef()->FriendlyName();
+            ss << arg->FriendlyName();
         }
     }
     ss << ")";
@@ -321,7 +321,7 @@ Candidate ScoreOverload(Context& context,
         auto* type_indices = context.data[parameter.type_matcher_indices];
         auto* number_indices = context.data[parameter.number_matcher_indices];
         if (!Match(context, templates, overload, type_indices, number_indices, earliest_eval_stage)
-                 .Type(args[p]->UnwrapRef())) {
+                 .Type(args[p])) {
             score += kMismatchedParamTypePenalty;
         }
     }
@@ -380,7 +380,7 @@ Candidate ScoreOverload(Context& context,
             auto* number_indices = context.data[parameter.number_matcher_indices];
             auto* ty = Match(context, templates, overload, type_indices, number_indices,
                              earliest_eval_stage)
-                           .Type(args[p]->UnwrapRef());
+                           .Type(args[p]);
             parameters.Emplace(ty, parameter.usage);
         }
     }
@@ -636,13 +636,18 @@ Result<Overload> LookupUnary(Context& context,
             intrinsic_info = &context.data.unary_minus;
             intrinsic_name = "operator - ";
             break;
+        case core::UnaryOp::kAddressOf:
+            intrinsic_info = &context.data.unary_and;
+            intrinsic_name = "operator & ";
+            break;
+        case core::UnaryOp::kIndirection:
+            intrinsic_info = &context.data.unary_star;
+            intrinsic_name = "operator * ";
+            break;
         case core::UnaryOp::kNot:
             intrinsic_info = &context.data.unary_not;
             intrinsic_name = "operator ! ";
             break;
-        default:
-            TINT_UNREACHABLE() << "invalid unary op: " << op;
-            return Failure{};
     }
 
     Vector args{arg};
