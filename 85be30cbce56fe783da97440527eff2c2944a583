@@ -52,6 +52,24 @@
       "parentUuid": "f6213c51_9b3b9ed0",
       "revId": "85be30cbce56fe783da97440527eff2c2944a583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f742a00b_3f612b62",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T09:39:39Z",
+      "side": 1,
+      "message": "And to answer Brandon\u0027s question, I assume they cover all of abseil and not just what\u0027s needed for flat maps.",
+      "parentUuid": "1a901a46_3149e56d",
+      "revId": "85be30cbce56fe783da97440527eff2c2944a583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
