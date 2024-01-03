@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "667eb9a4_196177a3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 15
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T20:17:49Z",
+      "side": 1,
+      "message": "No, I just messed something up so the middle of my patch stack is invalid.",
+      "parentUuid": "6006dc6a_0a3ca6bd",
+      "revId": "3f683d19adaac809788cdc1e720c0f76684b96a8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bfe42aea_4eca37ca",
