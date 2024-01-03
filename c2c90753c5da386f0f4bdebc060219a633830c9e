@@ -34,6 +34,24 @@
       "parentUuid": "abe8b733_a2ca56cc",
       "revId": "c2c90753c5da386f0f4bdebc060219a633830c9e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0537c967_e9e4051b",
+        "filename": "webgpu-cts/webtests/OWNERS",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T19:17:14Z",
+      "side": 1,
+      "message": "Great!",
+      "parentUuid": "4c7fd244_9a2356cd",
+      "revId": "c2c90753c5da386f0f4bdebc060219a633830c9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
