@@ -34,6 +34,24 @@
       "parentUuid": "0680f195_771b33a7",
       "revId": "85be30cbce56fe783da97440527eff2c2944a583",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1a901a46_3149e56d",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 4
+      },
+      "lineNbr": 27,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-03T00:51:57Z",
+      "side": 1,
+      "message": "\u003e Does this represent just the dependencies needed for flat_hash_set (and presumably flat_hash_map), or is it just pulling in anything that was missing relative to the Chromium files?\n\nYes these dependencies come from the BUILD.gn file for flat_hash_set in Abseil library:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/third_party/abseil-cpp/absl/container/BUILD.gn;l\u003d91",
+      "parentUuid": "f6213c51_9b3b9ed0",
+      "revId": "85be30cbce56fe783da97440527eff2c2944a583",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
