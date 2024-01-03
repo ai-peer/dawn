@@ -16,6 +16,69 @@
       "message": "PTAL",
       "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "209d8ed8_9a7b4e44",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-03T14:46:48Z",
+      "side": 1,
+      "message": "lgtm with nits.",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d7b7a8b_395bb89e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-03T14:46:48Z",
+      "side": 1,
+      "message": "Looks like you can use `Log2()` to compute bufferSize. BTW, is it really necessary to always roundup size to closest `2^x`? Maybe roundup bufferSize to `Align(size, 4*1024)` is good enough. and it can avoid wasting too much memory.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Math.h;l\u003d46;bpv\u003d1;bpt\u003d1",
+      "range": {
+        "startLine": 545,
+        "startChar": 0,
+        "endLine": 546,
+        "endChar": 9
+      },
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb7248db_30d91e62",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-03T14:46:48Z",
+      "side": 1,
+      "message": "`descriptor.size \u003d bufferSize \u003e kMaxSize ? size : bufferSize;`\n\nto avoid allocating buffer with unnecessary padding, if the size is greater than kMaxSize",
+      "range": {
+        "startLine": 549,
+        "startChar": 26,
+        "endLine": 549,
+        "endChar": 36
+      },
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
