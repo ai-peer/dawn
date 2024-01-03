@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f79046eb_08739ba0",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-03T21:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ccac0edb_f02fea3e",
+      "range": {
+        "startLine": 182,
+        "startChar": 27,
+        "endLine": 182,
+        "endChar": 35
+      },
+      "revId": "2d0dd4be290f596f2983bf9244753f5f3333891a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "282adc31_36aed37c",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-03T21:00:45Z",
       "side": 1,
       "message": "bitset\n```suggestion\n    /// @returns the decoded bitset, or an error if the stream is too short.\n```",
+      "range": {
+        "startLine": 184,
+        "startChar": 29,
+        "endLine": 184,
+        "endChar": 37
+      },
+      "revId": "2d0dd4be290f596f2983bf9244753f5f3333891a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f84c0cbf_bb81314d",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 184,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-03T21:02:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "282adc31_36aed37c",
       "range": {
         "startLine": 184,
         "startChar": 29,
