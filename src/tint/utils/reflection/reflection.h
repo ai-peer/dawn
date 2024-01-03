@@ -76,6 +76,18 @@ void ForeachField(OBJECT&& object, CB&& callback) {
         }                                                          \
     }
 
+/// A template that can be specialized to reflect the valid range of an enum
+/// Use TINT_REFLECT_ENUM_RANGE to specialize this class
+template <typename T>
+struct EnumRange;
+
+#define TINT_REFLECT_ENUM_RANGE(ENUM, MIN, MAX) \
+    template <>                                 \
+    struct ::tint::EnumRange<ENUM> {            \
+        static constexpr ENUM kMin = ENUM::MIN; \
+        static constexpr ENUM kMax = ENUM::MAX; \
+    }
+
 }  // namespace tint
 
 #endif  // SRC_TINT_UTILS_REFLECTION_REFLECTION_H_
