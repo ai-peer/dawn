@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a7cc449_1c0d2b6a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T09:35:49Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "624bfc76_844888f3",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-03T09:35:49Z",
+      "side": 1,
+      "message": "I\u0027m mildly suprised that no validation changes are necessary, but maybe everything just happens to work!",
+      "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
