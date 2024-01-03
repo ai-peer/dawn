@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "63923545_f8455010",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T02:55:58Z",
+      "side": 1,
+      "message": "There are also a lot of what appear to be spurious expectations added. This one seems to come from here which looks(?) like a one-off failure given I don\u0027t think this roll touched it:\nhttps://ci.chromium.org/ui/p/chromium/builders/try/linux-dawn-rel/29451/test-results?q\u003dExactID%3Aninja%3A%2F%2Fchrome%2Ftest%3Atelemetry_gpu_integration_test%2Fgpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu%3Aapi%2Coperation%2Ccommand_buffer%2Cimage_copy%3Amip_levels%3AinitMethod%3D%22WriteTexture%22%3BcheckMethod%3D%22FullCopyT2B%22%3Bformat%3D%22astc-8x6-unorm-srgb%22%3Bdimension%3D%222d%22+VHash%3A087f2e276273f1a0\n\nI\u0027m guessing there\u0027s no easy fix for this and we want the automated expectation remover to work this out for us since it\u0027s more robust to flakes.\n(Would be nice if it weren\u0027t flaky!)",
+      "revId": "d9cbc5af6f99f057599be60b7e1e166b3a1bcee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2c2086c_51f397bb",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 780,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T02:55:58Z",
+      "side": 1,
+      "message": "Similarly looks like a one-off:\nhttps://ci.chromium.org/ui/p/chromium/builders/try/win-dawn-rel/29632/test-results?q\u003dExactID%3Aninja%3A%2F%2Fchrome%2Ftest%3Atelemetry_gpu_integration_test%2Fgpu_tests.webgpu_cts_integration_test.WebGpuCtsIntegrationTest.webgpu%3Aapi%2Cvalidation%2Ccapability_checks%2Climits%2CmaxColorAttachmentBytesPerSample%3AcreateRenderPipeline%2Cat_over%3AlimitTest%3D%22underDefault%22%3BtestValueName%3D%22overLimit%22%3Basync%3Dfalse%3BsampleCount%3D4%3BinterleaveFormat%3D%22rg16float%22+VHash%3A8004b93d07603bab",
+      "revId": "d9cbc5af6f99f057599be60b7e1e166b3a1bcee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

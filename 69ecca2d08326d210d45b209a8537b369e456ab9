@@ -33,6 +33,23 @@
       "message": "🟦 note: test now passes",
       "revId": "69ecca2d08326d210d45b209a8537b369e456ab9",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8524ca95_f07baa52",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 736,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-03T02:55:58Z",
+      "side": 0,
+      "message": "@bclayton@google.com Apologies as I\u0027ve forgotten the answer to this _again_, but under what circumstances will the roller remove RetryOnFailure expectations? Does it happen if they didn\u0027t run at all?\n\nThe automated expectation remover \"pared down\" these lines by adding extra tags. I am wondering if that behavior is colliding with some behavior of this roller.",
+      "revId": "69ecca2d08326d210d45b209a8537b369e456ab9",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
