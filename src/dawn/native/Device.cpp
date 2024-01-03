@@ -1826,9 +1826,8 @@ ResultOrError<Ref<SamplerBase>> DeviceBase::CreateSampler(const SamplerDescripto
 
     SamplerDescriptor descriptor = {};
     if (descriptorOrig) {
-        descriptor = *descriptorOrig;
+        descriptor = descriptorOrig->WithTrivialFrontendDefaults();
     }
-    descriptor.ApplyTrivialFrontendDefaults();
 
     if (IsValidationEnabled()) {
         DAWN_TRY_CONTEXT(ValidateSamplerDescriptor(this, &descriptor), "validating %s",
@@ -1890,8 +1889,7 @@ ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
 ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* descriptorOrig) {
     DAWN_TRY(ValidateIsAlive());
 
-    TextureDescriptor rawDescriptor = *descriptorOrig;
-    rawDescriptor.ApplyTrivialFrontendDefaults();
+    TextureDescriptor rawDescriptor = descriptorOrig->WithTrivialFrontendDefaults();
 
     UnpackedPtr<TextureDescriptor> descriptor;
     if (IsValidationEnabled()) {

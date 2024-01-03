@@ -69,13 +69,21 @@ namespace {{native_namespace}} {
         {% endfor %}
 
         {% if type.any_member_requires_struct_defaulting %}
-            void {{CppType}}::ApplyTrivialFrontendDefaults() {
+            {{CppType}} {{CppType}}::WithTrivialFrontendDefaults() const {
+                auto copy = *this;
                 {% for member in type.members if member.requires_struct_defaulting %}
                     {% set memberName = member.name.camelCase() %}
-                    if ({{memberName}} == {{namespace}}::{{as_cppType(member.type.name)}}::Undefined) {
-                        {{memberName}} = {{namespace}}::{{as_cppType(member.type.name)}}::{{as_cppEnum(Name(member.default_value))}};
-                    }
+                    {% if member.type.category == "structure" %}
+                        copy.{{memberName}} = {{memberName}}.WithTrivialFrontendDefaults();
+                    {% elif member.type.category == "enum" %}
+                        if ({{memberName}} == {{namespace}}::{{as_cppType(member.type.name)}}::Undefined) {
+                            copy.{{memberName}} = {{namespace}}::{{as_cppType(member.type.name)}}::{{as_cppEnum(Name(member.default_value))}};
+                        }
+                    {% else %}
+                        static_assert(false, "unimplemented defaulting for {{memberName}}");
+                    {% endif %}
                 {% endfor %}
+                return copy;
             }
         {% endif %}
         bool {{CppType}}::operator==(const {{as_cppType(type.name)}}& rhs) const {
