@@ -66,6 +66,7 @@
 #include "src/tint/lang/core/ir/var.h"
 #include "src/tint/lang/core/type/bool.h"
 #include "src/tint/lang/core/type/pointer.h"
+#include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/core/type/vector.h"
 #include "src/tint/lang/core/type/void.h"
 #include "src/tint/utils/containers/reverse.h"
@@ -536,7 +537,7 @@ void Validator::CheckInstruction(const Instruction* inst) {
 
 void Validator::CheckVar(const Var* var) {
     if (var->Result(0) && var->Initializer()) {
-        if (var->Initializer()->Type() != var->Result(0)->Type()->UnwrapPtr()) {
+        if (var->Initializer()->Type() != var->Result(0)->Type()->UnwrapPtrOrRef()) {
             AddError(var, InstError(var, "initializer has incorrect type"));
         }
     }
@@ -615,10 +616,26 @@ void Validator::CheckUserCall(const UserCall* call) {
 }
 
 void Validator::CheckAccess(const Access* a) {
-    bool is_ptr = a->Object()->Type()->Is<core::type::Pointer>();
-    auto* ty = a->Object()->Type()->UnwrapPtr();
-
-    auto current = [&] { return is_ptr ? "ptr<" + ty->FriendlyName() + ">" : ty->FriendlyName(); };
+    enum Kind { kPtr, kRef, kValue };
+    auto kind_of = [&](const core::type::Type* ty) {
+        return tint::Switch(
+            ty,                                                  //
+            [&](const core::type::Pointer*) { return kPtr; },    //
+            [&](const core::type::Reference*) { return kRef; },  //
+            [&](Default) { return kValue; });
+    };
+    auto desc_of = [&](Kind kind, const core::type::Type* ty) {
+        switch (kind) {
+            case kPtr:
+                return "ptr<" + ty->FriendlyName() + ">";
+            case kRef:
+                return "ref<" + ty->FriendlyName() + ">";
+            default:
+                return ty->FriendlyName();
+        }
+    };
+    const Kind in_kind = kind_of(a->Object()->Type());
+    auto* ty = a->Object()->Type()->UnwrapPtrOrRef();
 
     for (size_t i = 0; i < a->Indices().Length(); i++) {
         auto err = [&](std::string msg) {
@@ -632,7 +649,7 @@ void Validator::CheckAccess(const Access* a) {
             return;
         }
 
-        if (is_ptr && ty->Is<core::type::Vector>()) {
+        if (in_kind != kValue && ty->Is<core::type::Vector>()) {
             err("cannot obtain address of vector element");
             return;
         }
@@ -654,31 +671,29 @@ void Validator::CheckAccess(const Access* a) {
             if (TINT_UNLIKELY(!el)) {
                 // Is index in bounds?
                 if (auto el_count = ty->Elements().count; el_count != 0 && idx >= el_count) {
-                    err("index out of bounds for type " + current());
+                    err("index out of bounds for type " + desc_of(in_kind, ty));
                     note("acceptable range: [0.." + std::to_string(el_count - 1) + "]");
                     return;
                 }
-                err("type " + current() + " cannot be indexed");
+                err("type " + desc_of(in_kind, ty) + " cannot be indexed");
                 return;
             }
             ty = el;
         } else {
             auto* el = ty->Elements().type;
             if (TINT_UNLIKELY(!el)) {
-                err("type " + current() + " cannot be dynamically indexed");
+                err("type " + desc_of(in_kind, ty) + " cannot be dynamically indexed");
                 return;
             }
             ty = el;
         }
     }
 
-    auto* want_ty = a->Result(0)->Type()->UnwrapPtr();
-    bool want_ptr = a->Result(0)->Type()->Is<core::type::Pointer>();
-    if (TINT_UNLIKELY(ty != want_ty || is_ptr != want_ptr)) {
-        std::string want =
-            want_ptr ? "ptr<" + want_ty->FriendlyName() + ">" : want_ty->FriendlyName();
-        AddError(a, InstError(a, "result of access chain is type " + current() +
-                                     " but instruction type is " + want));
+    auto* want_ty = a->Result(0)->Type()->UnwrapPtrOrRef();
+    auto want_kind = kind_of(a->Result(0)->Type());
+    if (TINT_UNLIKELY(ty != want_ty || in_kind != want_kind)) {
+        AddError(a, InstError(a, "result of access chain is type " + desc_of(in_kind, ty) +
+                                     " but instruction type is " + desc_of(want_kind, want_ty)));
         return;
     }
 }
@@ -973,9 +988,9 @@ const core::type::Type* Validator::GetVectorPtrElementType(const Instruction* in
         return nullptr;
     }
 
-    auto* vec_ptr_ty = type->As<core::type::Pointer>();
-    if (TINT_LIKELY(vec_ptr_ty)) {
-        auto* vec_ty = vec_ptr_ty->StoreType()->As<core::type::Vector>();
+    auto* memory_view_ty = type->As<core::type::MemoryView>();
+    if (TINT_LIKELY(memory_view_ty)) {
+        auto* vec_ty = memory_view_ty->StoreType()->As<core::type::Vector>();
         if (TINT_LIKELY(vec_ty)) {
             return vec_ty->type();
         }

@@ -31,6 +31,7 @@
 #include <string>
 
 #include "src/tint/lang/core/ir/disassembler.h"
+#include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/core/type/storage_texture.h"
 #include "src/tint/lang/wgsl/ir/builtin_call.h"
 #include "src/tint/lang/wgsl/writer/ir_to_program/ir_to_program.h"
@@ -561,7 +562,9 @@ TEST_F(IRToProgramTest, TypeConstruct_i32) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<i32>(i));
+        auto* init = b.Construct<i32>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -578,7 +581,9 @@ TEST_F(IRToProgramTest, TypeConstruct_u32) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<u32>(i));
+        auto* init = b.Construct<u32>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -595,7 +600,9 @@ TEST_F(IRToProgramTest, TypeConstruct_f32) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<f32>(i));
+        auto* init = b.Construct<f32>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -612,7 +619,9 @@ TEST_F(IRToProgramTest, TypeConstruct_bool) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<bool>(i));
+        auto* init = b.Construct<bool>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -637,7 +646,9 @@ TEST_F(IRToProgramTest, TypeConstruct_struct) {
     fn->SetParams({x, y, z});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct(S, x, y, z));
+        auto* init = b.Construct(S, x, y, z);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -660,7 +671,9 @@ TEST_F(IRToProgramTest, TypeConstruct_array) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<array<i32, 3u>>(i, i, i));
+        auto* init = b.Construct<array<i32, 3u>>(i, i, i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -677,7 +690,9 @@ TEST_F(IRToProgramTest, TypeConstruct_vec3i_Splat) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<vec3<i32>>(i));
+        auto* init = b.Construct<vec3<i32>>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -694,7 +709,9 @@ TEST_F(IRToProgramTest, TypeConstruct_vec3i_Scalars) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<vec3<i32>>(i, i, i));
+        auto* init = b.Construct<vec3<i32>>(i, i, i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -711,7 +728,9 @@ TEST_F(IRToProgramTest, TypeConstruct_mat2x3f_Scalars) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Construct<mat2x3<f32>>(i, i, i, i, i, i));
+        auto* init = b.Construct<mat2x3<f32>>(i, i, i, i, i, i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -730,7 +749,9 @@ TEST_F(IRToProgramTest, TypeConstruct_mat2x3f_Columns) {
     b.Append(fn->Block(), [&] {
         auto* col_0 = b.Construct<vec3<f32>>(i, i, i);
         auto* col_1 = b.Construct<vec3<f32>>(i, i, i);
-        b.Var("v", b.Construct<mat2x3<f32>>(col_0, col_1));
+        auto* init = b.Construct<mat2x3<f32>>(col_0, col_1);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -758,7 +779,9 @@ TEST_F(IRToProgramTest, TypeConstruct_Inlining) {
         auto* f0 = b.Construct<f32>(i0);
         auto* f2 = b.Construct<f32>(i2);
         auto* f1 = b.Construct<f32>(i1);
-        b.Var("v", b.Construct<mat2x3<f32>>(f0, f1, f2, f3, f4, f5));
+        auto* init = b.Construct<mat2x3<f32>>(f0, f1, f2, f3, f4, f5);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -778,7 +801,9 @@ TEST_F(IRToProgramTest, TypeConvert_i32_to_u32) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Convert<u32>(i));
+        auto* init = b.Convert<u32>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -795,7 +820,9 @@ TEST_F(IRToProgramTest, TypeConvert_u32_to_f32) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Convert<f32>(i));
+        auto* init = b.Convert<f32>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -812,7 +839,9 @@ TEST_F(IRToProgramTest, TypeConvert_f32_to_i32) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Convert<i32>(i));
+        auto* init = b.Convert<i32>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -829,7 +858,9 @@ TEST_F(IRToProgramTest, TypeConvert_bool_to_u32) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Convert<u32>(i));
+        auto* init = b.Convert<u32>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -846,7 +877,9 @@ TEST_F(IRToProgramTest, TypeConvert_vec3i_to_vec3u) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Convert<vec3<u32>>(i));
+        auto* init = b.Convert<vec3<u32>>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -863,7 +896,9 @@ TEST_F(IRToProgramTest, TypeConvert_vec3u_to_vec3f) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Convert<vec3<f32>>(i));
+        auto* init = b.Convert<vec3<f32>>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -880,7 +915,9 @@ TEST_F(IRToProgramTest, TypeConvert_mat2x3f_to_mat2x3h) {
     fn->SetParams({i});
 
     b.Append(fn->Block(), [&] {
-        b.Var("v", b.Convert<mat2x3<f16>>(i));
+        auto* init = b.Convert<mat2x3<f16>>(i);
+        b.Var("v", ty.ref<function, read_write>(init->Result(0)->Type()))
+            ->SetInitializer(init->Result(0));
         b.Return(fn);
     });
 
@@ -1813,7 +1850,7 @@ TEST_F(IRToProgramTest, CompoundAssign_Increment) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         b.Store(v, b.Add(ty.i32(), b.Load(v), 1_i));
 
         b.Return(fn);
@@ -1831,7 +1868,7 @@ TEST_F(IRToProgramTest, CompoundAssign_Decrement) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         b.Store(v, b.Subtract(ty.i32(), b.Load(v), 1_i));
 
         b.Return(fn);
@@ -1849,7 +1886,7 @@ TEST_F(IRToProgramTest, CompoundAssign_Add) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         b.Store(v, b.Add(ty.i32(), b.Load(v), 8_i));
 
         b.Return(fn);
@@ -1867,7 +1904,7 @@ TEST_F(IRToProgramTest, CompoundAssign_Subtract) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         b.Store(v, b.Subtract(ty.i32(), b.Load(v), 8_i));
 
         b.Return(fn);
@@ -1885,7 +1922,7 @@ TEST_F(IRToProgramTest, CompoundAssign_Multiply) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         b.Store(v, b.Multiply(ty.i32(), b.Load(v), 8_i));
 
         b.Return(fn);
@@ -1903,7 +1940,7 @@ TEST_F(IRToProgramTest, CompoundAssign_Divide) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         b.Store(v, b.Divide(ty.i32(), b.Load(v), 8_i));
 
         b.Return(fn);
@@ -1921,7 +1958,7 @@ TEST_F(IRToProgramTest, CompoundAssign_Xor) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         b.Store(v, b.Xor(ty.i32(), b.Load(v), 8_i));
 
         b.Return(fn);
@@ -1983,7 +2020,7 @@ TEST_F(IRToProgramTest, FunctionScopeVar_i32) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {  //
-        b.Var("i", ty.ptr<function, i32>());
+        b.Var("i", ty.ref<function, i32>());
 
         b.Return(fn);
     });
@@ -1999,7 +2036,7 @@ TEST_F(IRToProgramTest, FunctionScopeVar_i32_InitLiteral) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* i = b.Var("i", ty.ptr<function, i32>());
+        auto* i = b.Var("i", ty.ref<function, i32>());
         i->SetInitializer(b.Constant(42_i));
 
         b.Return(fn);
@@ -2016,15 +2053,15 @@ TEST_F(IRToProgramTest, FunctionScopeVar_Chained) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* va = b.Var("a", ty.ptr<function, i32>());
+        auto* va = b.Var("a", ty.ref<function, i32>());
         va->SetInitializer(b.Constant(42_i));
 
         auto* la = b.Load(va)->Result(0);
-        auto* vb = b.Var("b", ty.ptr<function, i32>());
+        auto* vb = b.Var("b", ty.ref<function, i32>());
         vb->SetInitializer(la);
 
         auto* lb = b.Load(vb)->Result(0);
-        auto* vc = b.Var("c", ty.ptr<function, i32>());
+        auto* vc = b.Var("c", ty.ref<function, i32>());
         vc->SetInitializer(lb);
 
         b.Return(fn);
@@ -2097,7 +2134,7 @@ TEST_F(IRToProgramTest, If_Return_i32) {
     auto* fn = b.Function("f", ty.i32());
 
     b.Append(fn->Block(), [&] {
-        auto* cond = b.Var("cond", ty.ptr<function, bool>());
+        auto* cond = b.Var("cond", ty.ref<function, bool>());
         cond->SetInitializer(b.Constant(true));
         auto if_ = b.If(b.Load(cond));
         b.Append(if_->True(), [&] { b.Return(fn, 42_i); });
@@ -2162,7 +2199,7 @@ TEST_F(IRToProgramTest, If_Return_f32_Else_Return_f32) {
     auto* fn = b.Function("f", ty.f32());
 
     b.Append(fn->Block(), [&] {
-        auto* cond = b.Var("cond", ty.ptr<function, bool>());
+        auto* cond = b.Var("cond", ty.ref<function, bool>());
         cond->SetInitializer(b.Constant(true));
         auto if_ = b.If(b.Load(cond));
         b.Append(if_->True(), [&] { b.Return(fn, 1.0_f); });
@@ -2193,7 +2230,7 @@ TEST_F(IRToProgramTest, If_Return_u32_Else_CallFn) {
     auto* fn = b.Function("f", ty.u32());
 
     b.Append(fn->Block(), [&] {
-        auto* cond = b.Var("cond", ty.ptr<function, bool>());
+        auto* cond = b.Var("cond", ty.ref<function, bool>());
         cond->SetInitializer(b.Constant(true));
         auto if_ = b.If(b.Load(cond));
         b.Append(if_->True(), [&] { b.Return(fn, 1_u); });
@@ -2238,7 +2275,7 @@ TEST_F(IRToProgramTest, If_CallFn_ElseIf_CallFn) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* cond = b.Var("cond", ty.ptr<function, bool>());
+        auto* cond = b.Var("cond", ty.ref<function, bool>());
         cond->SetInitializer(b.Constant(true));
         auto if1 = b.If(b.Load(cond));
         b.Append(if1->True(), [&] {
@@ -2351,7 +2388,7 @@ TEST_F(IRToProgramTest, Switch_Default) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         v->SetInitializer(b.Constant(42_i));
 
         auto s = b.Switch(b.Load(v));
@@ -2391,7 +2428,7 @@ TEST_F(IRToProgramTest, Switch_3_Cases) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         v->SetInitializer(b.Constant(42_i));
 
         auto s = b.Switch(b.Load(v));
@@ -2445,7 +2482,7 @@ TEST_F(IRToProgramTest, Switch_3_Cases_AllReturn) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* v = b.Var("v", ty.ptr<function, i32>());
+        auto* v = b.Var("v", ty.ref<function, i32>());
         v->SetInitializer(b.Constant(42_i));
 
         auto s = b.Switch(b.Load(v));
@@ -2491,10 +2528,10 @@ TEST_F(IRToProgramTest, Switch_Nested) {
 
     auto* fn = b.Function("f", ty.void_());
     b.Append(fn->Block(), [&] {
-        auto* v1 = b.Var("v1", ty.ptr<function, i32>());
+        auto* v1 = b.Var("v1", ty.ref<function, i32>());
         v1->SetInitializer(b.Constant(42_i));
 
-        auto* v2 = b.Var("v2", ty.ptr<function, i32>());
+        auto* v2 = b.Var("v2", ty.ref<function, i32>());
         v2->SetInitializer(b.Constant(24_i));
 
         auto s1 = b.Switch(b.Load(v1));
@@ -2560,7 +2597,7 @@ TEST_F(IRToProgramTest, For_Empty) {
         auto* loop = b.Loop();
 
         b.Append(loop->Initializer(), [&] {
-            auto* i = b.Var("i", ty.ptr<function, i32>());
+            auto* i = b.Var("i", ty.ref<function, i32>());
             i->SetInitializer(b.Constant(0_i));
             b.NextIteration(loop);
 
@@ -2592,7 +2629,7 @@ TEST_F(IRToProgramTest, For_Empty_NoInit) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* i = b.Var("i", ty.ptr<function, i32>());
+        auto* i = b.Var("i", ty.ref<function, i32>());
         i->SetInitializer(b.Constant(0_i));
 
         auto* loop = b.Loop();
@@ -2628,7 +2665,7 @@ TEST_F(IRToProgramTest, For_Empty_NoCont) {
         auto* loop = b.Loop();
 
         b.Append(loop->Initializer(), [&] {
-            auto* i = b.Var("i", ty.ptr<function, i32>());
+            auto* i = b.Var("i", ty.ref<function, i32>());
             i->SetInitializer(b.Constant(0_i));
             b.NextIteration(loop);
 
@@ -2663,7 +2700,7 @@ TEST_F(IRToProgramTest, For_ComplexBody) {
         auto* loop = b.Loop();
 
         b.Append(loop->Initializer(), [&] {
-            auto* i = b.Var("i", ty.ptr<function, i32>());
+            auto* i = b.Var("i", ty.ref<function, i32>());
             i->SetInitializer(b.Constant(0_i));
             b.NextIteration(loop);
 
@@ -2714,7 +2751,7 @@ TEST_F(IRToProgramTest, For_ComplexBody_NoInit) {
     auto* fn = b.Function("f", ty.i32());
 
     b.Append(fn->Block(), [&] {
-        auto* i = b.Var("i", ty.ptr<function, i32>());
+        auto* i = b.Var("i", ty.ref<function, i32>());
         i->SetInitializer(b.Constant(0_i));
 
         auto* loop = b.Loop();
@@ -2770,7 +2807,7 @@ TEST_F(IRToProgramTest, For_ComplexBody_NoCont) {
         auto* loop = b.Loop();
 
         b.Append(loop->Initializer(), [&] {
-            auto* i = b.Var("i", ty.ptr<function, i32>());
+            auto* i = b.Var("i", ty.ref<function, i32>());
             i->SetInitializer(b.Constant(0_i));
             b.NextIteration(loop);
 
@@ -2821,7 +2858,7 @@ TEST_F(IRToProgramTest, For_CallInInitCondCont) {
 
         b.Append(loop->Initializer(), [&] {
             auto* n_0 = b.Call(ty.i32(), fn_n, 0_i)->Result(0);
-            auto* i = b.Var("i", ty.ptr<function, i32>());
+            auto* i = b.Var("i", ty.ref<function, i32>());
             i->SetInitializer(n_0);
             b.NextIteration(loop);
 
@@ -2889,7 +2926,7 @@ TEST_F(IRToProgramTest, For_IncInInit_Cmp) {
     // }
 
     b.Append(mod.root_block, [&] {
-        auto* i = b.Var(ty.ptr<storage, u32, read_write>());
+        auto* i = b.Var(ty.ref<storage, u32, read_write>());
         i->SetBindingPoint(0, 0);
 
         auto* fn_f = b.Function("f", ty.void_());
@@ -3156,7 +3193,7 @@ TEST_F(IRToProgramTest, Loop_IfContinuing) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* cond = b.Var("cond", ty.ptr<function, bool>());
+        auto* cond = b.Var("cond", ty.ref<function, bool>());
         cond->SetInitializer(b.Constant(false));
 
         auto* loop = b.Loop();
@@ -3194,13 +3231,13 @@ TEST_F(IRToProgramTest, Loop_VarsDeclaredOutsideAndInside) {
     auto* fn = b.Function("f", ty.void_());
 
     b.Append(fn->Block(), [&] {
-        auto* var_b = b.Var("b", ty.ptr<function, i32>());
+        auto* var_b = b.Var("b", ty.ref<function, i32>());
         var_b->SetInitializer(b.Constant(1_i));
 
         auto* loop = b.Loop();
 
         b.Append(loop->Body(), [&] {
-            auto* var_a = b.Var("a", ty.ptr<function, i32>());
+            auto* var_a = b.Var("a", ty.ref<function, i32>());
             var_a->SetInitializer(b.Constant(2_i));
 
             auto* body_load_a = b.Load(var_a);
@@ -3290,8 +3327,8 @@ TEST_F(IRToProgramTest, Enable_ChromiumExperimentalFullPtrParameters_SubObjectPt
 
     auto* y = b.Function("y", ty.void_());
     b.Append(y->Block(), [&] {
-        auto* m = b.Var<function, mat3x3<f32>>();
-        auto* v = b.Access(ty.ptr<function, vec3<f32>>(), m, 1_i);
+        auto* m = b.Var(ty.ref<function, mat3x3<f32>, read_write>());
+        auto* v = b.Access(ty.ref<function, vec3<f32>>(), m, 1_i);
         b.Call(ty.void_(), x, v);
         b.Return(y);
     });
@@ -3316,8 +3353,8 @@ TEST_F(IRToProgramTest, Enable_ChromiumExperimentalFullPtrParameters_SubObjectPt
 
     auto* y = b.Function("y", ty.void_());
     b.Append(y->Block(), [&] {
-        auto* m = b.Var<function, mat3x3<f32>>();
-        auto* v = b.Access(ty.ptr<function, vec3<f32>>(), m, 1_i);
+        auto* m = b.Var(ty.ref<function, mat3x3<f32>>());
+        auto* v = b.Access(ty.ref<function, vec3<f32>>(), m, 1_i);
         auto* l = b.Let("l", v);
         b.Call(ty.void_(), x, l);
         b.Return(y);
