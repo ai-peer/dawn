@@ -247,15 +247,6 @@ if (tint_has_fuzzers) {
       seed_corpus = fuzzer_corpus_wgsl_dir
       seed_corpus_deps = [ ":tint_generate_wgsl_corpus" ]
     }
-
-    fuzzer_test("tint_wgsl_reader_spv_writer_fuzzer") {
-      sources = [ "tint_wgsl_reader_spv_writer_fuzzer.cc" ]
-      deps = [ ":tint_fuzzer_common_with_init_src" ]
-      dict = "dictionary.txt"
-      libfuzzer_options = tint_fuzzer_common_libfuzzer_options
-      seed_corpus = fuzzer_corpus_wgsl_dir
-      seed_corpus_deps = [ ":tint_generate_wgsl_corpus" ]
-    }
   }
 
   if (tint_build_wgsl_reader && tint_build_hlsl_writer) {
@@ -276,15 +267,6 @@ if (tint_has_fuzzers) {
       seed_corpus = fuzzer_corpus_wgsl_dir
       seed_corpus_deps = [ ":tint_generate_wgsl_corpus" ]
     }
-
-    fuzzer_test("tint_wgsl_reader_hlsl_writer_fuzzer") {
-      sources = [ "tint_wgsl_reader_hlsl_writer_fuzzer.cc" ]
-      deps = [ ":tint_fuzzer_common_with_init_src" ]
-      dict = "dictionary.txt"
-      libfuzzer_options = tint_fuzzer_common_libfuzzer_options
-      seed_corpus = fuzzer_corpus_wgsl_dir
-      seed_corpus_deps = [ ":tint_generate_wgsl_corpus" ]
-    }
   }
 
   if (tint_build_wgsl_reader && tint_build_msl_writer) {
@@ -302,15 +284,6 @@ if (tint_has_fuzzers) {
       sources = [ "tint_regex_fuzzer/tint_regex_msl_writer_fuzzer.cc" ]
       deps = [ "tint_regex_fuzzer:tint_regex_fuzzer" ]
       libfuzzer_options = tint_regex_fuzzer_common_libfuzzer_options
-      seed_corpus = fuzzer_corpus_wgsl_dir
-      seed_corpus_deps = [ ":tint_generate_wgsl_corpus" ]
-    }
-
-    fuzzer_test("tint_wgsl_reader_msl_writer_fuzzer") {
-      sources = [ "tint_wgsl_reader_msl_writer_fuzzer.cc" ]
-      deps = [ ":tint_fuzzer_common_with_init_src" ]
-      dict = "dictionary.txt"
-      libfuzzer_options = tint_fuzzer_common_libfuzzer_options
       seed_corpus = fuzzer_corpus_wgsl_dir
       seed_corpus_deps = [ ":tint_generate_wgsl_corpus" ]
     }
@@ -336,26 +309,19 @@ if (tint_has_fuzzers) {
         ":tint_robustness_fuzzer",
         ":tint_single_entry_point_fuzzer",
         ":tint_vertex_pulling_fuzzer",
-        ":tint_wgsl_reader_spv_writer_fuzzer",
       ]
       if (build_with_chromium) {
         deps += [ ":tint_ast_spv_writer_fuzzer" ]
       }
     }
     if (tint_build_wgsl_reader && tint_build_hlsl_writer) {
-      deps += [
-        ":tint_regex_hlsl_writer_fuzzer",
-        ":tint_wgsl_reader_hlsl_writer_fuzzer",
-      ]
+      deps += [ ":tint_regex_hlsl_writer_fuzzer" ]
       if (build_with_chromium) {
         deps += [ ":tint_ast_hlsl_writer_fuzzer" ]
       }
     }
     if (tint_build_wgsl_reader && tint_build_msl_writer) {
-      deps += [
-        ":tint_regex_msl_writer_fuzzer",
-        ":tint_wgsl_reader_msl_writer_fuzzer",
-      ]
+      deps += [ ":tint_regex_msl_writer_fuzzer" ]
       if (build_with_chromium) {
         deps += [ ":tint_ast_msl_writer_fuzzer" ]
       }
