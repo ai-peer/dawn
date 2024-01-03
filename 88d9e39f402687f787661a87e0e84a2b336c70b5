@@ -109,6 +109,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4752c72b_66c86b6a",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-03T19:56:29Z",
+      "side": 1,
+      "message": "We don\u0027t really want to depend on `Dawn` in the tint subdirectory, due to https://dawn.googlesource.com/tint. I\u0027d recommend `TINT_ROOT_SOURCE_DIR`. Here and below.",
+      "parentUuid": "2d92a8b4_343ec612",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f721297d_70a908cc",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 1
