@@ -50,6 +50,11 @@ declare_args() {
     tint_root_dir = "//"
   }
 
+  # Path to dxc gn dir
+  if (!defined(tint_dxc_gn_dir)) {
+    tint_dxc_gn_dir = "//third_party/gn/dxc"
+  }
+
   # Path to spirv-tools checkout
   if (!defined(tint_spirv_tools_dir)) {
     tint_spirv_tools_dir = "//third_party/vulkan-deps/spirv-tools/src"

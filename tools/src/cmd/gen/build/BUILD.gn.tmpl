@@ -164,7 +164,11 @@ tint_fuzzer_test("{{$.Directory.Name}}") {
 --------------------------------------------------------------------------------
 */ -}}
 {{- define "ExternalDependencyTargets"}}
-{{-        if eq $.Name "abseil"             -}}"${tint_src_dir}:abseil",
+{{-        if false                          -}}
+{{-   else if eq $.Name "abseil"             -}}"${tint_src_dir}:abseil",
+{{-   else if eq $.Name "dxc-dxil"           -}}"${tint_dxc_gn_dir}:lib_dxilrootsignature",
+{{-   else if eq $.Name "dxc-hlsl"           -}}"${tint_dxc_gn_dir}:lib_hlsl",
+{{-   else if eq $.Name "dxc-ir"             -}}"${tint_dxc_gn_dir}:lib_ir",
 {{-   else if eq $.Name "glslang-res-limits" -}}"${tint_glslang_dir}:glslang_default_resource_limits_sources",
 {{-   else if eq $.Name "glslang"            -}}"${tint_glslang_dir}:glslang_lib_sources",
 {{-   else if eq $.Name "google-benchmark"   -}}"${tint_src_dir}:google_benchmark",

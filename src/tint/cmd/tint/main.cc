@@ -25,6 +25,8 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
+#define TINT_BUILD_DXIL_WRITER 1  // Move to build config
+
 #include <charconv>
 #include <cstdio>
 #include <iostream>
@@ -94,6 +96,10 @@
 #include "src/tint/lang/glsl/validate/validate.h"
 #endif  // TINT_BUILD_GLSL_VALIDATOR
 
+#if TINT_BUILD_DXIL_WRITER
+#include "src/tint/lang/dxil/writer/writer.h"
+#endif
+
 #if TINT_BUILD_SPV_WRITER
 #define SPV_WRITER_ONLY(x) x
 #else
@@ -118,6 +124,12 @@
 #define HLSL_WRITER_ONLY(x)
 #endif
 
+#if TINT_BUILD_DXIL_WRITER
+#define DXIL_WRITER_ONLY(x) x
+#else
+#define DXIL_WRITER_ONLY(x)
+#endif
+
 #if TINT_BUILD_GLSL_WRITER
 #define GLSL_WRITER_ONLY(x) x
 #else
@@ -139,6 +151,7 @@ enum class Format : uint8_t {
     kWgsl,
     kMsl,
     kHlsl,
+    kDxil,
     kGlsl,
 };
 
@@ -218,6 +231,12 @@ Format infer_format(const std::string& filename) {
     }
 #endif  // TINT_BUILD_HLSL_WRITER
 
+#if TINT_BUILD_DXIL_WRITER
+    if (tint::HasSuffix(filename, ".dxil")) {
+        return Format::kDxil;
+    }
+#endif  // TINT_BUILD_HLSL_WRITER
+
     return Format::kUnknown;
 }
 
@@ -235,6 +254,7 @@ bool ParseArgs(tint::VectorRef<std::string_view> arguments,
     WGSL_WRITER_ONLY(format_enum_names.Emplace(Format::kWgsl, "wgsl"));
     MSL_WRITER_ONLY(format_enum_names.Emplace(Format::kMsl, "msl"));
     HLSL_WRITER_ONLY(format_enum_names.Emplace(Format::kHlsl, "hlsl"));
+    DXIL_WRITER_ONLY(format_enum_names.Emplace(Format::kDxil, "dxil"));
     GLSL_WRITER_ONLY(format_enum_names.Emplace(Format::kGlsl, "glsl"));
 
     OptionSet options;
@@ -977,6 +997,35 @@ bool GenerateHlsl(const tint::Program& program, const Options& options) {
 #endif  // TINT_BUILD_HLSL_WRITER
 }
 
+/// Generate DXIL code for a program.
+/// @param program the program to generate
+/// @param options the options that Tint was invoked with
+/// @returns true on success
+bool GenerateDxil(const tint::Program& program, const Options& options) {
+#if TINT_BUILD_DXIL_WRITER
+    // Convert the AST program to an IR module.
+    auto ir = tint::wgsl::reader::ProgramToLoweredIR(program);
+    if (ir != tint::Success) {
+        std::cerr << "Failed to generate IR: " << ir << "\n";
+        return false;
+    }
+
+    tint::dxil::writer::Options gen_options;
+    auto result = tint::dxil::writer::Generate(ir.Get(), gen_options);
+    if (result != tint::Success) {
+        tint::cmd::PrintWGSL(std::cerr, program);
+        std::cerr << "Failed to generate: " << result.Failure() << std::endl;
+        return false;
+    }
+#else
+    (void)program;
+    (void)options;
+    std::cerr << "DXIL writer not enabled in tint build\n";
+    return false;
+#endif
+    return true;
+}
+
 /// Generate GLSL code for a program.
 /// @param program the program to generate
 /// @param options the options that Tint was invoked with
@@ -1294,6 +1343,9 @@ int main(int argc, const char** argv) {
             break;
         case Format::kHlsl:
             success = GenerateHlsl(program, options);
+            break;
+        case Format::kDxil:
+            success = GenerateDxil(program, options);
             break;
         case Format::kGlsl:
             success = GenerateGlsl(program, options);

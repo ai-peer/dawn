@@ -1,4 +1,4 @@
-# Copyright 2023 The Dawn & Tint Authors
+# Copyright 2024 The Dawn & Tint Authors
 #
 # Redistribution and use in source and binary forms, with or without
 # modification, are permitted provided that the following conditions are met:
@@ -34,10 +34,38 @@
 #                       Do not modify this file directly
 ################################################################################
 
-include(lang/core/BUILD.cmake)
-include(lang/dxil/BUILD.cmake)
-include(lang/glsl/BUILD.cmake)
-include(lang/hlsl/BUILD.cmake)
-include(lang/msl/BUILD.cmake)
-include(lang/spirv/BUILD.cmake)
-include(lang/wgsl/BUILD.cmake)
+################################################################################
+# Target:    tint_lang_dxil_writer
+# Kind:      lib
+################################################################################
+tint_add_target(tint_lang_dxil_writer lib
+  lang/dxil/writer/writer.cc
+  lang/dxil/writer/writer.h
+)
+
+tint_target_add_dependencies(tint_lang_dxil_writer lib
+  tint_api_common
+  tint_lang_core
+  tint_lang_core_constant
+  tint_lang_core_ir
+  tint_lang_core_type
+  tint_utils_containers
+  tint_utils_diagnostic
+  tint_utils_ice
+  tint_utils_id
+  tint_utils_macros
+  tint_utils_math
+  tint_utils_memory
+  tint_utils_reflection
+  tint_utils_result
+  tint_utils_rtti
+  tint_utils_symbol
+  tint_utils_text
+  tint_utils_traits
+)
+
+tint_target_add_external_dependencies(tint_lang_dxil_writer lib
+  "dxc-dxil"
+  "dxc-hlsl"
+  "dxc-ir"
+)

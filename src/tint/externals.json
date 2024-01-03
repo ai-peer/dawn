@@ -8,6 +8,21 @@
             "absl/**"
         ],
     },
+    "dxc-dxil": {
+        "IncludePatterns": [
+            "dxc/DXIL/**"
+        ],
+    },
+    "dxc-hlsl": {
+        "IncludePatterns": [
+            "dxc/HLSL/**"
+        ],
+    },
+    "dxc-ir": {
+        "IncludePatterns": [
+            "llvm/IR/**"
+        ],
+    },
     "google-benchmark": {
         "IncludePatterns": [
             "benchmark/benchmark.h"
