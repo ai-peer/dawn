@@ -1,4 +1,4 @@
-// Copyright 2021 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,28 +25,36 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_SWAPCHAINMOCK_H_
-#define SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_SWAPCHAINMOCK_H_
+#ifndef SRC_DAWN_WIRE_CLIENT_SURFACE_H_
+#define SRC_DAWN_WIRE_CLIENT_SURFACE_H_
 
-#include "gmock/gmock.h"
+#include "dawn/webgpu.h"
 
-#include "dawn/native/Device.h"
-#include "dawn/native/SwapChain.h"
+#include "dawn/wire/client/ObjectBase.h"
 
-namespace dawn::native {
+namespace dawn::wire::client {
 
-class SwapChainMock : public SwapChainBase {
+class Device;
+
+class Surface final : public ObjectBase {
   public:
-    SwapChainMock(DeviceBase* device, Surface* surface, const SurfaceConfiguration* config);
-    ~SwapChainMock() override;
+    Surface(const ObjectBaseParams& params);
+    ~Surface() override;
 
-    MOCK_METHOD(void, DestroyImpl, (), (override));
+    void Configure(WGPUSurfaceConfiguration const* config);
 
-    MOCK_METHOD(ResultOrError<Ref<TextureBase>>, GetCurrentTextureImpl, (SwapChainTextureInfo*), (override));
-    MOCK_METHOD(MaybeError, PresentImpl, (), (override));
-    MOCK_METHOD(void, DetachFromSurfaceImpl, (), (override));
+    WGPUTextureFormat GetPreferredFormat(WGPUAdapter adapter) const;
+
+    void GetCapabilities(WGPUAdapter adapter, WGPUSurfaceCapabilities* capabilities) const;
+
+    void GetCurrentTexture(WGPUSurfaceTexture* surfaceTexture);
+
+private:
+    WGPUTextureDescriptor mTextureDescriptor;
 };
 
-}  // namespace dawn::native
+void ClientSurfaceCapabilitiesFreeMembers(WGPUSurfaceCapabilities capabilities);
 
-#endif  // SRC_DAWN_TESTS_UNITTESTS_NATIVE_MOCKS_SWAPCHAINMOCK_H_
+}  // namespace dawn::wire::client
+
+#endif  // SRC_DAWN_WIRE_CLIENT_SURFACE_H_
