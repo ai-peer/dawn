@@ -69,7 +69,8 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
         }
     }
 
-    if (mDXGIKeyedMutex) {
+    // Acquire keyed mutex for the first access.
+    if (mDXGIKeyedMutex && (GetReadAccessCount() == 1 || HasWriteAccess())) {
         DAWN_TRY(CheckHRESULT(mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireKey, INFINITE),
                               "Acquire keyed mutex"));
     }
@@ -84,7 +85,8 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
                     "Required feature (%s) is missing.",
                     wgpu::FeatureName::SharedFenceDXGISharedHandle);
 
-    if (mDXGIKeyedMutex) {
+    // Release keyed mutex for the last access.
+    if (mDXGIKeyedMutex && GetReadAccessCount() == 0 && HasWriteAccess()) {
         mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
     }
 
