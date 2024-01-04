@@ -55,15 +55,19 @@ class CommandRecordingContextGuard : public ::dawn::detail::Guard<Ctx, Traits> {
 
     CommandRecordingContextGuard(CommandRecordingContextGuard&& rhs) = default;
     CommandRecordingContextGuard(Ctx* ctx, typename Traits::MutexType& mutex) : Base(ctx, mutex) {
-        if (this->Get()->mD3D11Multithread) {
+        if (this->Get() && this->Get()->mD3D11Multithread) {
             this->Get()->mD3D11Multithread->Enter();
         }
     }
     ~CommandRecordingContextGuard() {
-        if (this->Get()->mD3D11Multithread) {
+        if (this->Get() && this->Get()->mD3D11Multithread) {
             this->Get()->mD3D11Multithread->Leave();
         }
     }
+
+    CommandRecordingContextGuard(const CommandRecordingContextGuard& other) = delete;
+    CommandRecordingContextGuard& operator=(const CommandRecordingContextGuard& other) = delete;
+    CommandRecordingContextGuard& operator=(CommandRecordingContextGuard&& other) = delete;
 };
 
 class CommandRecordingContext {
@@ -111,12 +115,13 @@ class ScopedCommandRecordingContext : public CommandRecordingContext::Guard {
     Device* GetDevice() const;
 
     // Wrapper method which don't depend on context state.
-    void UpdateSubresource(ID3D11Resource* pDstResource,
-                           UINT DstSubresource,
-                           const D3D11_BOX* pDstBox,
-                           const void* pSrcData,
-                           UINT SrcRowPitch,
-                           UINT SrcDepthPitch) const;
+    void UpdateSubresource1(ID3D11Resource* pDstResource,
+                            UINT DstSubresource,
+                            const D3D11_BOX* pDstBox,
+                            const void* pSrcData,
+                            UINT SrcRowPitch,
+                            UINT SrcDepthPitch,
+                            UINT CopyFlags) const;
     void CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource) const;
     void CopySubresourceRegion(ID3D11Resource* pDstResource,
                                UINT DstSubresource,

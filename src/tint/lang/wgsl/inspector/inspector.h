@@ -62,9 +62,9 @@ class Inspector {
     ~Inspector();
 
     /// @returns error messages from the Inspector
-    std::string error() { return diagnostics_.str(); }
+    std::string error() { return diagnostics_.Str(); }
     /// @returns true if an error was encountered
-    bool has_error() const { return diagnostics_.contains_errors(); }
+    bool has_error() const { return diagnostics_.ContainsErrors(); }
 
     /// @returns vector of entry point information
     std::vector<EntryPoint> GetEntryPoints();
@@ -263,6 +263,10 @@ class Inspector {
     /// @param func the root function of the callgraph to consider for the computation.
     /// @returns the total size in bytes of all Workgroup storage-class storage accessed via func.
     uint32_t ComputeWorkgroupStorageSize(const ast::Function* func) const;
+
+    /// @param func the root function of the callgraph to consider for the computation.
+    /// @returns the total size in bytes of all push_constant variables accessed via func.
+    uint32_t ComputePushConstantSize(const ast::Function* func) const;
 
     /// @param func the root function of the callgraph to consider for the computation
     /// @returns the list of member types for the `pixel_local` variable accessed via func, if any.

@@ -350,7 +350,6 @@ bool Builder::GenerateExtension(wgsl::Extension extension) {
             module_.PushCapability(SpvCapabilityFloat16);
             module_.PushCapability(SpvCapabilityUniformAndStorageBuffer16BitAccess);
             module_.PushCapability(SpvCapabilityStorageBuffer16BitAccess);
-            module_.PushCapability(SpvCapabilityStorageInputOutput16);
             break;
         default:
             return false;
@@ -622,7 +621,7 @@ bool Builder::GenerateFunction(const ast::Function* func_ast) {
 }
 
 uint32_t Builder::GenerateFunctionTypeIfNeeded(const sem::Function* func) {
-    return tint::GetOrCreate(func_sig_to_id_, func->Signature(), [&]() -> uint32_t {
+    return func_sig_to_id_.GetOrAdd(func->Signature(), [&]() -> uint32_t {
         auto func_op = result_op();
         auto func_type_id = std::get<uint32_t>(func_op);
 
@@ -739,6 +738,13 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
         return false;
     }
 
+    // Emit the StorageInputOutput16 capability if needed.
+    if (sc == core::AddressSpace::kIn || sc == core::AddressSpace::kOut) {
+        if (type->DeepestElement()->Is<core::type::F16>()) {
+            module_.PushCapability(SpvCapabilityStorageInputOutput16);
+        }
+    }
+
     module_.PushDebug(spv::Op::OpName, {Operand(var_id), Operand(v->name->symbol.Name())});
 
     OperandList ops = {Operand(type_id), result, U32Operand(ConvertAddressSpace(sc))};
@@ -801,7 +807,7 @@ bool Builder::GenerateGlobalVariable(const ast::Variable* v) {
                                    Operand(sem->Attributes().location.value())});
                 return true;
             },
-            [&](const ast::IndexAttribute*) {
+            [&](const ast::BlendSrcAttribute*) {
                 module_.PushAnnot(spv::Op::OpDecorate,
                                   {Operand(var_id), U32Operand(SpvDecorationIndex),
                                    Operand(sem->Attributes().index.value())});
@@ -1400,7 +1406,7 @@ uint32_t Builder::GenerateValueConstructorOrConversion(const sem::Call* call,
                       ? scope_stack_[0]       // Global scope
                       : scope_stack_.back();  // Lexical scope
 
-    return tint::GetOrCreate(stack.type_init_to_id_, OperandListKey{ops}, [&]() -> uint32_t {
+    return tint::GetOrAdd(stack.type_init_to_id_, OperandListKey{ops}, [&]() -> uint32_t {
         auto result = result_op();
         ops[kOpsResultIdx] = result;
 
@@ -1640,13 +1646,13 @@ uint32_t Builder::GenerateConstantIfNeeded(const core::constant::Value* constant
         }
 
         auto& global_scope = scope_stack_[0];
-        return tint::GetOrCreate(global_scope.type_init_to_id_, OperandListKey{ops},
-                                 [&]() -> uint32_t {
-                                     auto result = result_op();
-                                     ops[kOpsResultIdx] = result;
-                                     module_.PushType(spv::Op::OpConstantComposite, std::move(ops));
-                                     return std::get<uint32_t>(result);
-                                 });
+        return tint::GetOrAdd(global_scope.type_init_to_id_, OperandListKey{ops},
+                              [&]() -> uint32_t {
+                                  auto result = result_op();
+                                  ops[kOpsResultIdx] = result;
+                                  module_.PushType(spv::Op::OpConstantComposite, std::move(ops));
+                                  return std::get<uint32_t>(result);
+                              });
     };
 
     return Switch(
@@ -1765,7 +1771,7 @@ uint32_t Builder::GenerateConstantNullIfNeeded(const core::type::Type* type) {
         return 0;
     }
 
-    return tint::GetOrCreate(const_null_to_id_, type, [&] {
+    return tint::GetOrAdd(const_null_to_id_, type, [&] {
         auto result = result_op();
 
         module_.PushType(spv::Op::OpConstantNull, {Operand(type_id), result});
@@ -1782,7 +1788,7 @@ uint32_t Builder::GenerateConstantVectorSplatIfNeeded(const core::type::Vector* 
     }
 
     uint64_t key = (static_cast<uint64_t>(type->Width()) << 32) + value_id;
-    return tint::GetOrCreate(const_splat_to_id_, key, [&] {
+    return tint::GetOrAdd(const_splat_to_id_, key, [&] {
         auto result = result_op();
         auto result_id = std::get<uint32_t>(result);
 
@@ -3286,7 +3292,7 @@ uint32_t Builder::GenerateSampledImage(const core::type::Type* texture_type,
     }
 
     uint32_t sampled_image_type_id =
-        tint::GetOrCreate(texture_type_to_sampled_image_type_id_, texture_type, [&] {
+        tint::GetOrAdd(texture_type_to_sampled_image_type_id_, texture_type, [&] {
             // We need to create the sampled image type and cache the result.
             auto sampled_image_type = result_op();
             auto texture_type_id = GenerateTypeIfNeeded(texture_type);
@@ -3667,7 +3673,7 @@ uint32_t Builder::GenerateTypeIfNeeded(const core::type::Type* type) {
                                                     core::Access::kReadWrite);
     }
 
-    return tint::GetOrCreate(type_to_id_, type, [&]() -> uint32_t {
+    return tint::GetOrAdd(type_to_id_, type, [&]() -> uint32_t {
         auto result = result_op();
         auto id = std::get<uint32_t>(result);
         bool ok = Switch(

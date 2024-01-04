@@ -66,6 +66,7 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
 
     if (options.clamp_frag_depth) {
         manager.Add<ast::transform::ClampFragDepth>();
+        data.Add<ast::transform::ClampFragDepth::Config>(0, 4);
     }
 
     manager.Add<ast::transform::DisableUniformityAnalysis>();
@@ -109,10 +110,7 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
     RemapperData remapper_data{};
     PopulateRemapperAndMultiplanarOptions(options, remapper_data, external_texture_options);
 
-    // BindingRemapper must come before MultiplanarExternalTexture. Note, this is flipped to the
-    // other generators which run Multiplanar first and then binding remapper.
     manager.Add<ast::transform::BindingRemapper>();
-
     data.Add<ast::transform::BindingRemapper::Remappings>(
         remapper_data, std::unordered_map<BindingPoint, core::Access>{},
         /* allow_collisions */ false);
@@ -191,7 +189,7 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
     data.Add<ast::transform::CanonicalizeEntryPointIO::Config>(
         ast::transform::CanonicalizeEntryPointIO::Config(
             ast::transform::CanonicalizeEntryPointIO::ShaderStyle::kSpirv, 0xFFFFFFFF,
-            options.emit_vertex_point_size));
+            options.emit_vertex_point_size, !options.use_storage_input_output_16));
 
     SanitizedResult result;
     ast::transform::DataMap outputs;

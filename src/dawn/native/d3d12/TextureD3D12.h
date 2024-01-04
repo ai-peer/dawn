@@ -81,7 +81,8 @@ class Texture final : public d3d::Texture {
     D3D12_RENDER_TARGET_VIEW_DESC GetRTVDescriptor(const Format& format,
                                                    uint32_t mipLevel,
                                                    uint32_t baseSlice,
-                                                   uint32_t sliceCount) const;
+                                                   uint32_t sliceCount,
+                                                   uint32_t planeSlice) const;
     D3D12_DEPTH_STENCIL_VIEW_DESC GetDSVDescriptor(uint32_t mipLevel,
                                                    uint32_t baseArrayLayer,
                                                    uint32_t layerCount,
@@ -92,8 +93,9 @@ class Texture final : public d3d::Texture {
     MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                    const SubresourceRange& range);
 
-    MaybeError SynchronizeImportedTextureBeforeUse();
-    MaybeError SynchronizeImportedTextureAfterUse();
+    MaybeError SynchronizeTextureBeforeUse();
+
+    void NotifySwapChainPresentToPIX();
 
     void TrackUsageAndGetResourceBarrierForPass(CommandRecordingContext* commandContext,
                                                 std::vector<D3D12_RESOURCE_BARRIER>* barrier,
@@ -159,9 +161,10 @@ class Texture final : public d3d::Texture {
     D3D12_RESOURCE_FLAGS mD3D12ResourceFlags;
     ResourceHeapAllocation mResourceAllocation;
 
-    // TODO(dawn:1460): Encapsulate imported image fields e.g. std::unique_ptr<ExternalImportInfo>.
+    // TODO(crbug.com/1515640): Remove these once Chromium has migrated to SharedTextureMemory.
     std::vector<FenceAndSignalValue> mWaitFences;
     std::optional<ExecutionSerial> mSignalFenceValue;
+
     bool mSwapChainTexture = false;
 
     SubresourceStorage<StateAndDecay> mSubresourceStateAndDecay;

@@ -224,7 +224,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "https://crbug.com/dawn/1016", ToggleStage::Device}},
     {Toggle::UseUserDefinedLabelsInBackend,
      {"use_user_defined_labels_in_backend",
-      "Enables calls to SetLabel to be forwarded to backend-specific APIs that label objects.",
+      "Enables setting labels on backend-specific APIs that label objects. The labels used will be "
+      "those of the corresponding frontend objects if non-empty and default labels otherwise. "
+      "Defaults to false. NOTE: On Vulkan, backend labels are currently always set (with default "
+      "labels if this toggle is not set). The reason is that Dawn currently uses backend "
+      "object labels on Vulkan to map errors back to the device with which the backend objects "
+      "included in the error are associated.",
       "https://crbug.com/dawn/840", ToggleStage::Device}},
     {Toggle::UsePlaceholderFragmentInVertexOnlyPipeline,
      {"use_placeholder_fragment_in_vertex_only_pipeline",
@@ -521,6 +526,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "waiting for the next Tick. This enables using the stack trace in which the uncaptured error "
       "occured when breaking into the uncaptured error callback.",
       "https://crbug.com/dawn/1789", ToggleStage::Device}},
+    {Toggle::VulkanUseStorageInputOutput16,
+     {"vulkan_use_storage_input_output_16",
+      "Use the StorageInputOutput16 SPIR-V capability for f16 shader IO types when the device "
+      "supports it.",
+      "https://crbug.com/tint/2161", ToggleStage::Device}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "

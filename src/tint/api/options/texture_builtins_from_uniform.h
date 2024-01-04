@@ -47,7 +47,7 @@ struct TextureBuiltinsFromUniformOptions {
     std::vector<BindingPoint> ubo_bindingpoint_ordering = {};
 
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
-    TINT_REFLECT(ubo_binding, ubo_bindingpoint_ordering);
+    TINT_REFLECT(TextureBuiltinsFromUniformOptions, ubo_binding, ubo_bindingpoint_ordering);
 };
 
 }  // namespace tint

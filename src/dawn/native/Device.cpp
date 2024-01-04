@@ -221,11 +221,42 @@ DeviceBase::DeviceBase(AdapterBase* adapter,
 
     ApplyFeatures(descriptor);
 
-    DawnCacheDeviceDescriptor defaultCacheDesc = {};
-    auto* cacheDesc = descriptor.Get<DawnCacheDeviceDescriptor>();
-    if (cacheDesc == nullptr) {
-        cacheDesc = &defaultCacheDesc;
+    DawnCacheDeviceDescriptor cacheDesc = {};
+    const auto* cacheDescIn = descriptor.Get<DawnCacheDeviceDescriptor>();
+    if (cacheDescIn != nullptr) {
+        cacheDesc = *cacheDescIn;
     }
+
+    if (cacheDesc.loadDataFunction == nullptr && cacheDesc.storeDataFunction == nullptr &&
+        cacheDesc.functionUserdata == nullptr && GetPlatform()->GetCachingInterface() != nullptr) {
+        // Populate cache functions and userdata from legacy cachingInterface.
+        cacheDesc.loadDataFunction = [](const void* key, size_t keySize, void* value,
+                                        size_t valueSize, void* userdata) {
+            auto* cachingInterface = static_cast<dawn::platform::CachingInterface*>(userdata);
+            return cachingInterface->LoadData(key, keySize, value, valueSize);
+        };
+        cacheDesc.storeDataFunction = [](const void* key, size_t keySize, const void* value,
+                                         size_t valueSize, void* userdata) {
+            auto* cachingInterface = static_cast<dawn::platform::CachingInterface*>(userdata);
+            return cachingInterface->StoreData(key, keySize, value, valueSize);
+        };
+        cacheDesc.functionUserdata = GetPlatform()->GetCachingInterface();
+    }
+
+    // Disable caching if the toggle is passed, or the WGSL writer is not enabled.
+    // TODO(crbug.com/dawn/1481): Shader caching currently has a dependency on the WGSL writer to
+    // generate cache keys. We can lift the dependency once we also cache frontend parsing,
+    // transformations, and reflection.
+#if TINT_BUILD_WGSL_WRITER
+    if (IsToggleEnabled(Toggle::DisableBlobCache)) {
+#else
+    {
+#endif
+        cacheDesc.loadDataFunction = nullptr;
+        cacheDesc.storeDataFunction = nullptr;
+        cacheDesc.functionUserdata = nullptr;
+    }
+    mBlobCache = std::make_unique<BlobCache>(cacheDesc);
 
     if (descriptor->requiredLimits != nullptr) {
         mLimits.v1 =
@@ -628,15 +659,8 @@ void DeviceBase::HandleError(std::unique_ptr<ErrorData> error,
         // handled by the lost callback.
         bool captured = mErrorScopeStack->HandleError(ToWGPUErrorType(type), messageStr.c_str());
         if (!captured && mUncapturedErrorCallback != nullptr) {
-            mCallbackTaskManager->AddCallbackTask([callback = mUncapturedErrorCallback, type,
-                                                   messageStr,
-                                                   userdata = mUncapturedErrorUserdata] {
-                callback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)), messageStr.c_str(),
-                         userdata);
-            });
-            if (IsImmediateErrorHandlingEnabled()) {
-                mCallbackTaskManager->Flush();
-            }
+            mUncapturedErrorCallback(static_cast<WGPUErrorType>(ToWGPUErrorType(type)),
+                                     messageStr.c_str(), mUncapturedErrorUserdata);
         }
     }
 }
@@ -648,16 +672,7 @@ void DeviceBase::ConsumeError(std::unique_ptr<ErrorData> error,
 }
 
 void DeviceBase::APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata) {
-    // The registered callback function and userdata pointer are stored and used by deferred
-    // callback tasks, and after setting a different callback (especially in the case of
-    // resetting) the resources pointed by such pointer may be freed. Flush all deferred
-    // callback tasks to guarantee we are never going to use the previous callback after
-    // this call.
-    FlushCallbackTaskQueue();
-    auto deviceLock(GetScopedLock());
-    if (IsLost()) {
-        return;
-    }
+    std::lock_guard lock(mLoggingMutex);
     mLoggingCallback = callback;
     mLoggingUserdata = userdata;
 }
@@ -702,37 +717,74 @@ void DeviceBase::APIPushErrorScope(wgpu::ErrorFilter filter) {
 }
 
 void DeviceBase::APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata) {
-    if (callback == nullptr) {
-        static wgpu::ErrorCallback defaultCallback = [](WGPUErrorType, char const*, void*) {};
-        callback = defaultCallback;
-    }
-    if (IsLost()) {
-        mCallbackTaskManager->AddCallbackTask(
-            std::bind(callback, WGPUErrorType_DeviceLost, "GPU device disconnected", userdata));
-        return;
-    }
-    if (mErrorScopeStack->Empty()) {
-        mCallbackTaskManager->AddCallbackTask(
-            std::bind(callback, WGPUErrorType_Unknown, "No error scopes to pop", userdata));
-        return;
-    }
-    ErrorScope scope = mErrorScopeStack->Pop();
-    mCallbackTaskManager->AddCallbackTask(
-        [callback, errorType = static_cast<WGPUErrorType>(scope.GetErrorType()),
-         message = scope.GetErrorMessage(),
-         userdata] { callback(errorType, message.c_str(), userdata); });
+    static wgpu::ErrorCallback kDefaultCallback = [](WGPUErrorType, char const*, void*) {};
+
+    PopErrorScopeCallbackInfo callbackInfo = {};
+    callbackInfo.mode = wgpu::CallbackMode::AllowProcessEvents;
+    callbackInfo.oldCallback = callback != nullptr ? callback : kDefaultCallback;
+    callbackInfo.userdata = userdata;
+    APIPopErrorScopeF(callbackInfo);
 }
 
-BlobCache* DeviceBase::GetBlobCache() {
-#if TINT_BUILD_WGSL_WRITER
-    // TODO(crbug.com/dawn/1481): Shader caching currently has a dependency on the WGSL writer to
-    // generate cache keys. We can lift the dependency once we also cache frontend parsing,
-    // transformations, and reflection.
-    return mAdapter->GetPhysicalDevice()->GetInstance()->GetBlobCache(
-        !IsToggleEnabled(Toggle::DisableBlobCache));
-#else
-    return mAdapter->GetPhysicalDevice()->GetInstance()->GetBlobCache(false);
-#endif
+Future DeviceBase::APIPopErrorScopeF(const PopErrorScopeCallbackInfo& callbackInfo) {
+    struct PopErrorScopeEvent final : public EventManager::TrackedEvent {
+        // TODO(crbug.com/dawn/2021) Remove the old callback type.
+        WGPUPopErrorScopeCallback mCallback;
+        WGPUErrorCallback mOldCallback;
+        void* mUserdata;
+        std::optional<ErrorScope> mScope;
+
+        PopErrorScopeEvent(const PopErrorScopeCallbackInfo& callbackInfo,
+                           std::optional<ErrorScope>&& scope)
+            : TrackedEvent(callbackInfo.mode, TrackedEvent::Completed{}),
+              mCallback(callbackInfo.callback),
+              mOldCallback(callbackInfo.oldCallback),
+              mUserdata(callbackInfo.userdata),
+              mScope(scope) {
+            // Exactly 1 callback should be set.
+            DAWN_ASSERT((mCallback != nullptr && mOldCallback == nullptr) ||
+                        (mCallback == nullptr && mOldCallback != nullptr));
+            CompleteIfSpontaneous();
+        }
+
+        ~PopErrorScopeEvent() override { EnsureComplete(EventCompletionType::Shutdown); }
+
+        void Complete(EventCompletionType completionType) override {
+            WGPUPopErrorScopeStatus status = completionType == EventCompletionType::Ready
+                                                 ? WGPUPopErrorScopeStatus_Success
+                                                 : WGPUPopErrorScopeStatus_InstanceDropped;
+            WGPUErrorType type;
+            const char* message;
+            if (mScope) {
+                type = static_cast<WGPUErrorType>(mScope->GetErrorType());
+                message = mScope->GetErrorMessage().c_str();
+            } else {
+                type = WGPUErrorType_Unknown;
+                message = "No error scopes to pop";
+            }
+
+            if (mCallback) {
+                mCallback(status, type, message, mUserdata);
+            } else {
+                mOldCallback(type, message, mUserdata);
+            }
+        }
+    };
+
+    std::optional<ErrorScope> scope;
+    if (IsLost()) {
+        scope = ErrorScope(wgpu::ErrorType::DeviceLost, "GPU device disconnected");
+    } else if (!mErrorScopeStack->Empty()) {
+        scope = mErrorScopeStack->Pop();
+    }
+
+    FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(
+        AcquireRef(new PopErrorScopeEvent(callbackInfo, std::move(scope))));
+    return {futureID};
+}
+
+BlobCache* DeviceBase::GetBlobCache() const {
+    return mBlobCache.get();
 }
 
 Blob DeviceBase::LoadCachedBlob(const CacheKey& key) {
@@ -913,14 +965,12 @@ Ref<RenderPipelineBase> DeviceBase::GetCachedRenderPipeline(
 
 Ref<ComputePipelineBase> DeviceBase::AddOrGetCachedComputePipeline(
     Ref<ComputePipelineBase> computePipeline) {
-    DAWN_ASSERT(IsLockedByCurrentThreadIfNeeded());
     auto [pipeline, _] = mCaches->computePipelines.Insert(computePipeline.Get());
     return std::move(pipeline);
 }
 
 Ref<RenderPipelineBase> DeviceBase::AddOrGetCachedRenderPipeline(
     Ref<RenderPipelineBase> renderPipeline) {
-    DAWN_ASSERT(IsLockedByCurrentThreadIfNeeded());
     auto [pipeline, _] = mCaches->renderPipelines.Insert(renderPipeline.Get());
     return std::move(pipeline);
 }
@@ -1261,12 +1311,15 @@ ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor
         DAWN_ASSERT(result == nullptr);
         result = ShaderModuleBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    // Move compilation messages into ShaderModuleBase and emit tint errors and warnings
-    // after all other operations are finished, even if any of them is failed and result
-    // is an error shader module.
+    // Emit Tint errors and warnings after all operations are finished even if any of them is a
+    // failure and result in an error shader module. Also move the compilation messages to the
+    // shader module so the application can later retrieve it with GetCompilationInfo.
     result->InjectCompilationMessages(std::move(compilationMessages));
+    EmitCompilationLog(result.Get());
+
     return ReturnToAPI(std::move(result));
 }
+
 ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescriptor* descriptor,
                                                          const char* errorMessage) {
     Ref<ShaderModuleBase> result =
@@ -1275,6 +1328,7 @@ ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescr
         std::make_unique<OwnedCompilationMessages>());
     compilationMessages->AddUnanchoredMessage(errorMessage, wgpu::CompilationMessageType::Error);
     result->InjectCompilationMessages(std::move(compilationMessages));
+    EmitCompilationLog(result.Get());
 
     std::unique_ptr<ErrorData> errorData =
         DAWN_VALIDATION_ERROR("Error in calling %s.CreateShaderModule(%s).", this, descriptor);
@@ -1287,7 +1341,18 @@ SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
     Ref<SwapChainBase> result;
     if (ConsumedError(CreateSwapChain(surface, descriptor), &result,
                       "calling %s.CreateSwapChain(%s).", this, descriptor)) {
-        result = SwapChainBase::MakeError(this, descriptor);
+        SurfaceConfiguration config;
+        config.nextInChain = descriptor->nextInChain;
+        config.device = this;
+        config.width = descriptor->width;
+        config.height = descriptor->height;
+        config.format = descriptor->format;
+        config.usage = descriptor->usage;
+        config.presentMode = descriptor->presentMode;
+        config.viewFormatCount = 0;
+        config.viewFormats = nullptr;
+        config.alphaMode = wgpu::CompositeAlphaMode::Opaque;
+        result = SwapChainBase::MakeError(this, &config);
     }
     return ReturnToAPI(std::move(result));
 }
@@ -1342,6 +1407,8 @@ TextureBase* DeviceBase::APICreateErrorTexture(const TextureDescriptor* desc) {
 
 // Returns true if future ticking is needed.
 bool DeviceBase::APITick() {
+    // TODO(dawn:1987) Add deprecation warning when Instance.ProcessEvents no longer calls this.
+
     // Tick may trigger callbacks which drop a ref to the device itself. Hold a Ref to ourselves
     // to avoid deleting |this| in the middle of this function call.
     Ref<DeviceBase> self(this);
@@ -1550,16 +1617,47 @@ void DeviceBase::EmitWarningOnce(const std::string& message) {
     }
 }
 
+void DeviceBase::EmitCompilationLog(const ShaderModuleBase* module) {
+    const OwnedCompilationMessages* messages = module->GetCompilationMessages();
+    if (!messages->HasWarningsOrErrors()) {
+        return;
+    }
+
+    // Limit the number of compilation error emitted to avoid spamming the devtools console hard.
+    constexpr uint32_t kCompilationLogSpamLimit = 20;
+    if (mEmittedCompilationLogCount > kCompilationLogSpamLimit) {
+        return;
+    }
+
+    mEmittedCompilationLogCount++;
+    if (mEmittedCompilationLogCount == kCompilationLogSpamLimit) {
+        return EmitLog(WGPULoggingType_Warning,
+                       "Reached the WGSL compilation log warning limit. To see all the compilation "
+                       "logs, query them directly on the ShaderModule objects.");
+    }
+
+    // Emit the formatted Tint errors and warnings.
+    std::ostringstream t;
+    t << absl::StrFormat("Compilation log for %s:", module);
+    for (const auto& pMessage : messages->GetFormattedTintMessages()) {
+        t << "\n" << pMessage;
+    }
+
+    EmitLog(WGPULoggingType_Warning, t.str().c_str());
+}
+
 void DeviceBase::EmitLog(const char* message) {
     this->EmitLog(WGPULoggingType_Info, message);
 }
 
 void DeviceBase::EmitLog(WGPULoggingType loggingType, const char* message) {
-    if (mLoggingCallback != nullptr) {
-        // Use the thread-safe CallbackTaskManager routine
-        std::unique_ptr<LoggingCallbackTask> callbackTask = std::make_unique<LoggingCallbackTask>(
-            mLoggingCallback, loggingType, message, mLoggingUserdata);
-        mCallbackTaskManager->AddCallbackTask(std::move(callbackTask));
+    // Acquire a shared lock. This allows multiple threads to emit logs,
+    // or even logs to be emitted re-entrantly. It will block if there is a call
+    // to SetLoggingCallback. Applications should not call SetLoggingCallback inside
+    // the logging callback or they will deadlock.
+    std::shared_lock lock(mLoggingMutex);
+    if (mLoggingCallback) {
+        mLoggingCallback(loggingType, message, mLoggingUserdata);
     }
 }
 
@@ -1750,7 +1848,8 @@ void DeviceBase::InitializeComputePipelineAsyncImpl(Ref<ComputePipelineBase> com
         AddComputePipelineAsyncCallbackTask(
             maybeError.AcquireError(), computePipeline->GetLabel().c_str(), callback, userdata);
     } else {
-        AddComputePipelineAsyncCallbackTask(std::move(computePipeline), callback, userdata);
+        AddComputePipelineAsyncCallbackTask(
+            AddOrGetCachedComputePipeline(std::move(computePipeline)), callback, userdata);
     }
 }
 
@@ -1770,7 +1869,8 @@ void DeviceBase::InitializeRenderPipelineAsyncImpl(Ref<RenderPipelineBase> rende
         AddRenderPipelineAsyncCallbackTask(maybeError.AcquireError(),
                                            renderPipeline->GetLabel().c_str(), callback, userdata);
     } else {
-        AddRenderPipelineAsyncCallbackTask(std::move(renderPipeline), callback, userdata);
+        AddRenderPipelineAsyncCallbackTask(AddOrGetCachedRenderPipeline(std::move(renderPipeline)),
+                                           callback, userdata);
     }
 }
 
@@ -1901,15 +2001,31 @@ ResultOrError<Ref<ShaderModuleBase>> DeviceBase::CreateShaderModule(
 ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
     Surface* surface,
     const SwapChainDescriptor* descriptor) {
+    EmitDeprecationWarning(
+        "The explicit creation of a SwapChain object is deprecated and should be replaced by "
+        "Surface configuration.");
+
     DAWN_TRY(ValidateIsAlive());
     if (IsValidationEnabled()) {
         DAWN_TRY_CONTEXT(ValidateSwapChainDescriptor(this, surface, descriptor), "validating %s",
                          descriptor);
     }
 
+    SurfaceConfiguration config;
+    config.nextInChain = descriptor->nextInChain;
+    config.device = this;
+    config.width = descriptor->width;
+    config.height = descriptor->height;
+    config.format = descriptor->format;
+    config.usage = descriptor->usage;
+    config.presentMode = descriptor->presentMode;
+    config.viewFormatCount = 0;
+    config.viewFormats = nullptr;
+    config.alphaMode = wgpu::CompositeAlphaMode::Opaque;
+
     SwapChainBase* previousSwapChain = surface->GetAttachedSwapChain();
     ResultOrError<Ref<SwapChainBase>> maybeNewSwapChain =
-        CreateSwapChainImpl(surface, previousSwapChain, descriptor);
+        CreateSwapChainImpl(surface, previousSwapChain, &config);
 
     if (previousSwapChain != nullptr) {
         previousSwapChain->DetachFromSurface();
@@ -1921,6 +2037,13 @@ ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(
     newSwapChain->SetIsAttached();
     surface->SetAttachedSwapChain(newSwapChain.Get());
     return newSwapChain;
+}
+
+ResultOrError<Ref<SwapChainBase>> DeviceBase::CreateSwapChain(Surface* surface,
+                                                              SwapChainBase* previousSwapChain,
+                                                              const SurfaceConfiguration* config) {
+    // Nothing to validate here as it is done in Surface::Configure
+    return CreateSwapChainImpl(surface, previousSwapChain, config);
 }
 
 ResultOrError<Ref<TextureBase>> DeviceBase::CreateTexture(const TextureDescriptor* descriptorOrig) {
@@ -2059,22 +2182,6 @@ void DeviceBase::AddComputePipelineAsyncCallbackTask(
     void* userdata) {
     mCallbackTaskManager->AddCallbackTask(
         [callback, pipeline = std::move(pipeline), userdata]() mutable {
-            // TODO(dawn:529): call AddOrGetCachedComputePipeline() asynchronously in
-            // CreateComputePipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
-            // thread-safe.
-            DAWN_ASSERT(pipeline != nullptr);
-            {
-                // This is called inside a callback, and no lock will be held by default so we
-                // have to lock now to protect the cache. Note: we don't lock inside
-                // AddOrGetCachedComputePipeline() to avoid deadlock because many places calling
-                // that method might already have the lock held. For example,
-                // APICreateComputePipeline()
-                auto deviceLock(pipeline->GetDevice()->GetScopedLock());
-                if (pipeline->GetDevice()->GetState() == State::Alive) {
-                    pipeline =
-                        pipeline->GetDevice()->AddOrGetCachedComputePipeline(std::move(pipeline));
-                }
-            }
             callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(ReturnToAPI(std::move(pipeline))),
                      "", userdata);
         });
@@ -2104,26 +2211,11 @@ void DeviceBase::AddRenderPipelineAsyncCallbackTask(std::unique_ptr<ErrorData> e
 void DeviceBase::AddRenderPipelineAsyncCallbackTask(Ref<RenderPipelineBase> pipeline,
                                                     WGPUCreateRenderPipelineAsyncCallback callback,
                                                     void* userdata) {
-    mCallbackTaskManager->AddCallbackTask([callback, pipeline = std::move(pipeline),
-                                           userdata]() mutable {
-        // TODO(dawn:529): call AddOrGetCachedRenderPipeline() asynchronously in
-        // CreateRenderPipelineAsyncTaskImpl::Run() when the front-end pipeline cache is
-        // thread-safe.
-        DAWN_ASSERT(pipeline != nullptr);
-        {
-            // This is called inside a callback, and no lock will be held by default so we have
-            // to lock now to protect the cache.
-            // Note: we don't lock inside AddOrGetCachedRenderPipeline() to avoid deadlock
-            // because many places calling that method might already have the lock held. For
-            // example, APICreateRenderPipeline()
-            auto deviceLock(pipeline->GetDevice()->GetScopedLock());
-            if (pipeline->GetDevice()->GetState() == State::Alive) {
-                pipeline = pipeline->GetDevice()->AddOrGetCachedRenderPipeline(std::move(pipeline));
-            }
-        }
-        callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(ReturnToAPI(std::move(pipeline))), "",
-                 userdata);
-    });
+    mCallbackTaskManager->AddCallbackTask(
+        [callback, pipeline = std::move(pipeline), userdata]() mutable {
+            callback(WGPUCreatePipelineAsyncStatus_Success, ToAPI(ReturnToAPI(std::move(pipeline))),
+                     "", userdata);
+        });
 }
 
 PipelineCompatibilityToken DeviceBase::GetNextPipelineCompatibilityToken() {

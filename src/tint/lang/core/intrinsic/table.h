@@ -106,6 +106,12 @@ struct Context {
     SymbolTable& symbols;
 };
 
+// Prints the overload for emitting diagnostics
+void PrintOverload(StringStream& ss,
+                   Context& context,
+                   const OverloadInfo& overload,
+                   std::string_view intrinsic_name);
+
 /// Lookup looks for the builtin overload with the given signature, raising an error diagnostic
 /// if the builtin was not found.
 /// @param context the intrinsic context
@@ -295,8 +301,8 @@ template <>
 struct Hasher<core::intrinsic::Overload> {
     /// @param i the core::intrinsic::Overload to create a hash for
     /// @return the hash value
-    inline std::size_t operator()(const core::intrinsic::Overload& i) const {
-        size_t hash = Hash(i.parameters.Length());
+    inline HashCode operator()(const core::intrinsic::Overload& i) const {
+        HashCode hash = Hash(i.parameters.Length());
         for (auto& p : i.parameters) {
             hash = HashCombine(hash, p.type, p.usage);
         }

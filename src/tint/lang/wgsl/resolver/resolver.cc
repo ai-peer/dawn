@@ -141,7 +141,7 @@ Resolver::Resolver(ProgramBuilder* builder, const wgsl::AllowedFeatures& allowed
 Resolver::~Resolver() = default;
 
 bool Resolver::Resolve() {
-    if (diagnostics_.contains_errors()) {
+    if (diagnostics_.ContainsErrors()) {
         return false;
     }
 
@@ -156,7 +156,7 @@ bool Resolver::Resolve() {
 
     bool result = ResolveInternal();
 
-    if (TINT_UNLIKELY(!result && !diagnostics_.contains_errors())) {
+    if (TINT_UNLIKELY(!result && !diagnostics_.ContainsErrors())) {
         AddICE("resolving failed, but no error was raised", {});
         return false;
     }
@@ -634,11 +634,11 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
                     global->Attributes().location = value.Get();
                     return kSuccess;
                 },
-                [&](const ast::IndexAttribute* attr) {
+                [&](const ast::BlendSrcAttribute* attr) {
                     if (!has_io_address_space) {
                         return kInvalid;
                     }
-                    auto value = IndexAttribute(attr);
+                    auto value = BlendSrcAttribute(attr);
                     if (value != Success) {
                         return kErrored;
                     }
@@ -911,7 +911,7 @@ bool Resolver::AllocateOverridableConstantIds() {
 }
 
 void Resolver::SetShadows() {
-    for (auto it : dependencies_.shadows) {
+    for (auto& it : dependencies_.shadows) {
         CastableBase* shadowed = sem_.Get(it.value);
         if (TINT_UNLIKELY(!shadowed)) {
             StringStream err;
@@ -921,7 +921,7 @@ void Resolver::SetShadows() {
         }
 
         Switch(
-            sem_.Get(it.key),  //
+            sem_.Get(it.key.Value()),  //
             [&](sem::LocalVariable* local) { local->SetShadows(shadowed); },
             [&](sem::Parameter* param) { param->SetShadows(shadowed); });
     }
@@ -1019,7 +1019,7 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
             if (auto added = parameter_names.Add(param->name->symbol, param->source); !added) {
                 auto name = param->name->symbol.Name();
                 AddError("redefinition of parameter '" + name + "'", param->source);
-                AddNote("previous definition is here", *added.value);
+                AddNote("previous definition is here", added.value);
                 return nullptr;
             }
         }
@@ -1080,8 +1080,8 @@ sem::Function* Resolver::Function(const ast::Function* decl) {
                     func->SetReturnLocation(value.Get());
                     return kSuccess;
                 },
-                [&](const ast::IndexAttribute* attr) {
-                    auto value = IndexAttribute(attr);
+                [&](const ast::BlendSrcAttribute* attr) {
+                    auto value = BlendSrcAttribute(attr);
                     if (value != Success) {
                         return kErrored;
                     }
@@ -1560,7 +1560,7 @@ sem::Expression* Resolver::Expression(const ast::Expression* root) {
         // If we just processed the lhs of a constexpr logical binary expression, mark the rhs for
         // short-circuiting.
         if (val && val->ConstantValue()) {
-            if (auto binary = logical_binary_lhs_to_parent_.Find(expr)) {
+            if (auto binary = logical_binary_lhs_to_parent_.Get(expr)) {
                 const bool lhs_is_true = val->ConstantValue()->ValueAs<bool>();
                 if (((*binary)->IsLogicalAnd() && !lhs_is_true) ||
                     ((*binary)->IsLogicalOr() && lhs_is_true)) {
@@ -2131,16 +2131,17 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
         // Is this overload a constructor or conversion?
         if (match->info->flags.Contains(OverloadFlag::kIsConstructor)) {
             // Type constructor
-            auto params = Transform(match->parameters, [&](auto& p, size_t i) {
-                return b.create<sem::Parameter>(nullptr, static_cast<uint32_t>(i), p.type, p.usage);
-            });
-            target_sem = constructors_.GetOrCreate(match.Get(), [&] {
+            target_sem = constructors_.GetOrAdd(match.Get(), [&] {
+                auto params = Transform(match->parameters, [&](auto& p, size_t i) {
+                    return b.create<sem::Parameter>(nullptr, static_cast<uint32_t>(i), p.type,
+                                                    p.usage);
+                });
                 return b.create<sem::ValueConstructor>(match->return_type, std::move(params),
                                                        overload_stage);
             });
         } else {
             // Type conversion
-            target_sem = converters_.GetOrCreate(match.Get(), [&] {
+            target_sem = converters_.GetOrAdd(match.Get(), [&] {
                 auto* param = b.create<sem::Parameter>(nullptr, 0u, match->parameters[0].type,
                                                        match->parameters[0].usage);
                 return b.create<sem::ValueConversion>(match->return_type, param, overload_stage);
@@ -2232,7 +2233,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                                     m->type());
             },
             [&](const sem::Array* arr) -> sem::Call* {
-                auto* call_target = array_ctors_.GetOrCreate(
+                auto* call_target = array_ctors_.GetOrAdd(
                     ArrayConstructorSig{{arr, args.Length(), args_stage}},
                     [&]() -> sem::ValueConstructor* {
                         auto params = tint::Transform(args, [&](auto, size_t i) {
@@ -2254,7 +2255,7 @@ sem::Call* Resolver::Call(const ast::CallExpression* expr) {
                 return arr_or_str_init(arr, call_target);
             },
             [&](const core::type::Struct* str) -> sem::Call* {
-                auto* call_target = struct_ctors_.GetOrCreate(
+                auto* call_target = struct_ctors_.GetOrAdd(
                     StructConstructorSig{{str, args.Length(), args_stage}},
                     [&]() -> sem::ValueConstructor* {
                         Vector<sem::Parameter*, 8> params;
@@ -2397,7 +2398,7 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
     }
 
     // De-duplicate builtins that are identical.
-    auto* target = builtins_.GetOrCreate(std::make_pair(overload.Get(), fn), [&] {
+    auto* target = builtins_.GetOrAdd(std::make_pair(overload.Get(), fn), [&] {
         auto params = Transform(overload->parameters, [&](auto& p, size_t i) {
             return b.create<sem::Parameter>(nullptr, static_cast<uint32_t>(i), p.type, p.usage);
         });
@@ -2414,9 +2415,8 @@ sem::Call* Resolver::BuiltinCall(const ast::CallExpression* expr,
         }
         auto eval_stage = overload->const_eval_fn ? core::EvaluationStage::kConstant
                                                   : core::EvaluationStage::kRuntime;
-        return b.create<sem::BuiltinFn>(
-            fn, overload->return_type, std::move(params), eval_stage, supported_stages,
-            flags.Contains(OverloadFlag::kIsDeprecated), flags.Contains(OverloadFlag::kMustUse));
+        return b.create<sem::BuiltinFn>(fn, overload->return_type, std::move(params), eval_stage,
+                                        supported_stages, *overload->info);
     });
 
     if (fn == wgsl::BuiltinFn::kTintMaterialize) {
@@ -3311,7 +3311,7 @@ sem::Expression* Resolver::Identifier(const ast::IdentifierExpression* expr) {
                             // If our identifier is in loop_block->decls, make sure its index is
                             // less than first_continue
                             auto symbol = ident->symbol;
-                            if (auto decl = loop_block->Decls().Find(symbol)) {
+                            if (auto decl = loop_block->Decls().Get(symbol)) {
                                 if (decl->order >= loop_block->NumDeclsAtFirstContinue()) {
                                     AddError("continue statement bypasses declaration of '" +
                                                  symbol.Name() + "'",
@@ -3526,8 +3526,9 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
                         swizzle.Push(3u);
                         break;
                     default:
-                        AddError("invalid vector swizzle character",
-                                 expr->member->source.Begin() + swizzle.Length());
+                        AddError(
+                            "invalid vector swizzle character",
+                            expr->member->source.Begin() + static_cast<uint32_t>(swizzle.Length()));
                         return nullptr;
                 }
 
@@ -3582,9 +3583,8 @@ sem::ValueExpression* Resolver::MemberAccessor(const ast::MemberAccessorExpressi
         },
 
         [&](Default) {
-            AddError("invalid member accessor expression. Expected vector or struct, got '" +
-                         sem_.TypeNameOf(storage_ty) + "'",
-                     expr->member->source);
+            AddError("cannot index into expression of type '" + sem_.TypeNameOf(storage_ty) + "'",
+                     expr->object->source);
             return nullptr;
         });
 }
@@ -3692,7 +3692,8 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
         case core::UnaryOp::kAddressOf:
             if (auto* ref = expr_ty->As<core::type::Reference>()) {
                 if (ref->StoreType()->UnwrapRef()->is_handle()) {
-                    AddError("cannot take the address of expression in handle address space",
+                    AddError("cannot take the address of " + sem_.Describe(expr) +
+                                 " in handle address space",
                              unary->expr->source);
                     return nullptr;
                 }
@@ -3711,7 +3712,7 @@ sem::ValueExpression* Resolver::UnaryOp(const ast::UnaryOpExpression* unary) {
 
                 root_ident = expr->RootIdentifier();
             } else {
-                AddError("cannot take the address of expression", unary->expr->source);
+                AddError("cannot take the address of " + sem_.Describe(expr), unary->expr->source);
                 return nullptr;
             }
             break;
@@ -3820,8 +3821,8 @@ tint::Result<uint32_t> Resolver::ColorAttribute(const ast::ColorAttribute* attr)
 
     return static_cast<uint32_t>(value);
 }
-tint::Result<uint32_t> Resolver::IndexAttribute(const ast::IndexAttribute* attr) {
-    ExprEvalStageConstraint constraint{core::EvaluationStage::kConstant, "@index value"};
+tint::Result<uint32_t> Resolver::BlendSrcAttribute(const ast::BlendSrcAttribute* attr) {
+    ExprEvalStageConstraint constraint{core::EvaluationStage::kConstant, "@blend_src value"};
     TINT_SCOPED_ASSIGNMENT(expr_eval_stage_constraint_, constraint);
 
     auto* materialized = Materialize(ValueExpression(attr->expr));
@@ -3837,7 +3838,7 @@ tint::Result<uint32_t> Resolver::IndexAttribute(const ast::IndexAttribute* attr)
     auto const_value = materialized->ConstantValue();
     auto value = const_value->ValueAs<AInt>();
     if (value != 0 && value != 1) {
-        AddError("@index value must be zero or one", attr->source);
+        AddError("@blend_src value must be zero or one", attr->source);
         return Failure{};
     }
 
@@ -4312,7 +4313,7 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
         Mark(member->name);
         if (auto added = member_map.Add(member->name->symbol, member); !added) {
             AddError("redefinition of '" + member->name->symbol.Name() + "'", member->source);
-            AddNote("previous definition is here", (*added.value)->source);
+            AddNote("previous definition is here", added.value->source);
             return nullptr;
         }
 
@@ -4446,12 +4447,12 @@ sem::Struct* Resolver::Structure(const ast::Struct* str) {
                     attributes.location = value.Get();
                     return true;
                 },
-                [&](const ast::IndexAttribute* attr) {
-                    auto value = IndexAttribute(attr);
+                [&](const ast::BlendSrcAttribute* attr) {
+                    auto value = BlendSrcAttribute(attr);
                     if (value != Success) {
                         return false;
                     }
-                    attributes.index = value.Get();
+                    attributes.blend_src = value.Get();
                     return true;
                 },
                 [&](const ast::ColorAttribute* attr) {
@@ -4878,7 +4879,7 @@ bool Resolver::ApplyAddressSpaceUsageToType(core::AddressSpace address_space,
     ty = const_cast<core::type::Type*>(ty->UnwrapRef());
 
     if (auto* str = ty->As<sem::Struct>()) {
-        if (str->AddressSpaceUsage().count(address_space)) {
+        if (str->AddressSpaceUsage().Contains(address_space)) {
             return true;  // Already applied
         }
 
@@ -5060,19 +5061,19 @@ void Resolver::AddICE(const std::string& msg, const Source& source) const {
     err.system = diag::System::Resolver;
     err.source = source;
     err.message = msg;
-    diagnostics_.add(std::move(err));
+    diagnostics_.Add(std::move(err));
 }
 
 void Resolver::AddError(const std::string& msg, const Source& source) const {
-    diagnostics_.add_error(diag::System::Resolver, msg, source);
+    diagnostics_.AddError(diag::System::Resolver, msg, source);
 }
 
 void Resolver::AddWarning(const std::string& msg, const Source& source) const {
-    diagnostics_.add_warning(diag::System::Resolver, msg, source);
+    diagnostics_.AddWarning(diag::System::Resolver, msg, source);
 }
 
 void Resolver::AddNote(const std::string& msg, const Source& source) const {
-    diagnostics_.add_note(diag::System::Resolver, msg, source);
+    diagnostics_.AddNote(diag::System::Resolver, msg, source);
 }
 
 }  // namespace tint::resolver

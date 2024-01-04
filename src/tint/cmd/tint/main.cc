@@ -83,6 +83,7 @@
 
 #if TINT_BUILD_HLSL_WRITER
 #include "src/tint/lang/hlsl/validate/validate.h"
+#include "src/tint/lang/hlsl/writer/helpers/generate_bindings.h"
 #include "src/tint/lang/hlsl/writer/writer.h"
 #endif  // TINT_BUILD_HLSL_WRITER
 
@@ -176,6 +177,10 @@ struct Options {
 #endif  // TINT_BUILD_SPV_READER
 
     tint::Vector<std::string, 4> transforms;
+
+#if TINT_BUILD_SPV_WRITER
+    bool use_storage_input_output_16 = true;
+#endif  // TINT_BULD_SPV_WRITER
 
 #if TINT_BUILD_HLSL_WRITER
     std::string fxc_path;
@@ -342,6 +347,13 @@ violations that may be produced)",
             opts->spirv_reader_options.allow_non_uniform_derivatives = true;
         }
     });
+#endif
+
+#if TINT_BUILD_SPV_WRITER
+    auto& use_storage_input_output_16 =
+        options.Add<BoolOption>("use-storage-input-output-16",
+                                "Use the StorageInputOutput16 SPIR-V capability", Default{true});
+    TINT_DEFER(opts->use_storage_input_output_16 = *use_storage_input_output_16.value);
 #endif
 
     auto& disable_wg_init = options.Add<BoolOption>(
@@ -686,6 +698,7 @@ bool GenerateSpirv(const tint::Program& program, const Options& options) {
     tint::spirv::writer::Options gen_options;
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
+    gen_options.use_storage_input_output_16 = options.use_storage_input_output_16;
     gen_options.bindings = tint::spirv::writer::GenerateBindings(program);
 
     tint::Result<tint::spirv::writer::Output> result;
@@ -776,9 +789,9 @@ bool GenerateWgsl([[maybe_unused]] const tint::Program& program,
         auto source = std::make_unique<tint::Source::File>(options.input_filename, result->wgsl);
         auto reparsed_program = tint::wgsl::reader::Parse(source.get(), parser_options);
         if (!reparsed_program.IsValid()) {
-            auto diag_printer = tint::diag::Printer::create(stderr, true);
+            auto diag_printer = tint::diag::Printer::Create(stderr, true);
             tint::diag::Formatter diag_formatter;
-            diag_formatter.format(reparsed_program.Diagnostics(), diag_printer.get());
+            diag_formatter.Format(reparsed_program.Diagnostics(), diag_printer.get());
             return false;
         }
     }
@@ -915,8 +928,7 @@ bool GenerateHlsl(const tint::Program& program, const Options& options) {
     tint::hlsl::writer::Options gen_options;
     gen_options.disable_robustness = !options.enable_robustness;
     gen_options.disable_workgroup_init = options.disable_workgroup_init;
-    gen_options.external_texture_options.bindings_map =
-        tint::cmd::GenerateExternalTextureBindings(program);
+    gen_options.bindings = tint::hlsl::writer::GenerateBindings(program);
     gen_options.root_constant_binding_point = options.hlsl_root_constant_binding_point;
     gen_options.pixel_local_options = options.pixel_local_options;
     gen_options.polyfill_dot_4x8_packed = options.hlsl_shader_model < kMinShaderModelForDP4aInHLSL;
@@ -1067,6 +1079,21 @@ bool GenerateGlsl([[maybe_unused]] const tint::Program& program,
 
         gen_options.texture_builtins_from_uniform = std::move(textureBuiltinsFromUniform);
 
+        auto entry_point = inspector.GetEntryPoint(entry_point_name);
+        uint32_t offset = entry_point.push_constant_size;
+
+        if (entry_point.instance_index_used) {
+            // Place the first_instance push constant member after user-defined push constants (if
+            // any).
+            gen_options.first_instance_offset = offset;
+            offset += 4;
+        }
+        if (entry_point.frag_depth_used) {
+            gen_options.min_depth_offset = offset + 0;
+            gen_options.max_depth_offset = offset + 4;
+            offset += 8;
+        }
+
         auto result = tint::glsl::writer::Generate(prg, gen_options, entry_point_name);
         if (result != tint::Success) {
             tint::cmd::PrintWGSL(std::cerr, prg);
@@ -1184,8 +1211,8 @@ int main(int argc, const char** argv) {
              std::unordered_map<tint::OverrideId, double> values;
              values.reserve(options.overrides.Count());
 
-             for (auto override : options.overrides) {
-                 const auto& name = override.key;
+             for (auto& override : options.overrides) {
+                 const auto& name = override.key.Value();
                  const auto& value = override.value;
                  if (name.empty()) {
                      std::cerr << "empty override name\n";

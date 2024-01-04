@@ -32,6 +32,7 @@
 
 #include "dawn/common/Log.h"
 #include "dawn/wire/client/Client.h"
+#include "partition_alloc/pointers/raw_ptr.h"
 
 namespace dawn::wire::client {
 namespace {
@@ -69,13 +70,13 @@ class RequestDeviceEvent : public TrackedEvent {
   private:
     void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
         if (completionType == EventCompletionType::Shutdown) {
-            mStatus = WGPURequestDeviceStatus_Unknown;
-            mMessage = "GPU connection lost";
+            mStatus = WGPURequestDeviceStatus_InstanceDropped;
+            mMessage = "A valid external Instance reference no longer exists.";
         }
         if (mStatus != WGPURequestDeviceStatus_Success && mDevice != nullptr) {
             // If there was an error, we may need to reclaim the device allocation, otherwise the
             // device is returned to the user who owns it.
-            mDevice->GetClient()->Free(mDevice);
+            mDevice->GetClient()->Free(mDevice.get());
             mDevice = nullptr;
         }
         if (mCallback) {
@@ -84,7 +85,8 @@ class RequestDeviceEvent : public TrackedEvent {
     }
 
     WGPURequestDeviceCallback mCallback;
-    void* mUserdata;
+    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
+    raw_ptr<void, DanglingUntriaged> mUserdata;
 
     // Note that the message is optional because we want to return nullptr when it wasn't set
     // instead of a pointer to an empty string.
@@ -95,7 +97,8 @@ class RequestDeviceEvent : public TrackedEvent {
     // throughout the duration of a RequestDeviceEvent because the Event essentially takes
     // ownership of it until either an error occurs at which point the Event cleans it up, or it
     // returns the device to the user who then takes ownership as the Event goes away.
-    Device* mDevice = nullptr;
+    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
+    raw_ptr<Device, DanglingUntriaged> mDevice = nullptr;
 };
 
 }  // anonymous namespace
@@ -112,6 +115,10 @@ void Adapter::CancelCallbacksForDisconnect() {
         request->callback(WGPURequestDeviceStatus_Unknown, nullptr, "GPU connection lost",
                           request->userdata);
     });
+}
+
+ObjectType Adapter::GetObjectType() const {
+    return ObjectType::Adapter;
 }
 
 bool Adapter::GetLimits(WGPUSupportedLimits* limits) const {
@@ -270,16 +277,16 @@ WGPUFuture Adapter::RequestDeviceF(const WGPUDeviceDescriptor* descriptor,
     return {futureIDInternal};
 }
 
-bool Client::DoAdapterRequestDeviceCallback(ObjectHandle eventManager,
-                                            WGPUFuture future,
-                                            WGPURequestDeviceStatus status,
-                                            const char* message,
-                                            const WGPUSupportedLimits* limits,
-                                            uint32_t featuresCount,
-                                            const WGPUFeatureName* features) {
+WireResult Client::DoAdapterRequestDeviceCallback(ObjectHandle eventManager,
+                                                  WGPUFuture future,
+                                                  WGPURequestDeviceStatus status,
+                                                  const char* message,
+                                                  const WGPUSupportedLimits* limits,
+                                                  uint32_t featuresCount,
+                                                  const WGPUFeatureName* features) {
     return GetEventManager(eventManager)
-               .SetFutureReady<RequestDeviceEvent>(future.id, status, message, limits,
-                                                   featuresCount, features) == WireResult::Success;
+        .SetFutureReady<RequestDeviceEvent>(future.id, status, message, limits, featuresCount,
+                                            features);
 }
 
 WGPUInstance Adapter::GetInstance() const {
