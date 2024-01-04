@@ -33,6 +33,23 @@
       "message": "Ahhh this lost Code-Owners too. Corentin PTAL, hopefully this will be the last of the reviews.\n\nIt feels like every time I do something in Dawn lately the overhead to get something landed is at least 4x what it used to be. I\u0027m heavily discouraged from addressing nits, adding comments, etc. because of the review burden. I thought the policy was supposed to be that OWNERS review would be sticky and the 2-committer requirement would not be (though I don\u0027t know how that would be implemented since it now clears the CR flags). I also don\u0027t understand why PS17 didn\u0027t clear Loko\u0027s CR...",
       "revId": "9928bb2984be1a5b107ce62cf1fe75651ac3c6a5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3135396a_16b98766",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 17
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-04T03:06:31Z",
+      "side": 1,
+      "message": "stamp",
+      "revId": "9928bb2984be1a5b107ce62cf1fe75651ac3c6a5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
