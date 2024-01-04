@@ -30,6 +30,7 @@
 #include <string>
 #include <vector>
 
+#include "dawn/native/Adapter.h"
 #include "dawn/native/AttachmentState.h"
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/Device.h"
@@ -186,6 +187,23 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
 //
 
 absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const AdapterBase* value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s) {
+    if (value == nullptr) {
+        s->Append("[null]");
+        return { true };
+    }
+    s->Append("[Adapter");
+    const std::string& label = value->GetLabel();
+    if (!label.empty()) {
+        s->Append(absl::StrFormat(" \"%s\"", label));
+    }
+    s->Append("]");
+    return { true };
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
     const DeviceBase* value,
     const absl::FormatConversionSpec& spec,
     absl::FormatSink* s) {
@@ -279,6 +297,23 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
 
     s->Append(" }");
 
+    return {true};
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const Surface* value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s) {
+    if (value == nullptr) {
+        s->Append("[null]");
+        return {true};
+    }
+    s->Append("[Surface");
+    const std::string& label = value->GetLabel();
+    if (!label.empty()) {
+        s->Append(absl::StrFormat(" \"%s\"", label));
+    }
+    s->Append("]");
     return {true};
 }
 
