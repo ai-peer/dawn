@@ -16,6 +16,23 @@
       "message": "Copying Kokoro+1 from patchset 3",
       "revId": "dd6e8372f56792a4717c179b401635acb9c17fad",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fac79f2_bb29a366",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-04T01:07:57Z",
+      "side": 1,
+      "message": "Argh, too flaky (on tests that I\u0027m pretty sure are unrelated to this roll). I need to add expectations to clean up some of these flakes but if I would really like to do it after this roll.",
+      "revId": "dd6e8372f56792a4717c179b401635acb9c17fad",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
