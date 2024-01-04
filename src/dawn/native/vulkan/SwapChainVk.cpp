@@ -51,8 +51,36 @@ namespace dawn::native::vulkan {
 
 namespace {
 
-ResultOrError<VkSurfaceKHR> CreateVulkanSurface(const PhysicalDevice* physicalDevice,
-                                                const Surface* surface) {
+VkPresentModeKHR ToVulkanPresentMode(wgpu::PresentMode mode) {
+    switch (mode) {
+        case wgpu::PresentMode::Fifo:
+            return VK_PRESENT_MODE_FIFO_KHR;
+        case wgpu::PresentMode::Immediate:
+            return VK_PRESENT_MODE_IMMEDIATE_KHR;
+        case wgpu::PresentMode::Mailbox:
+            return VK_PRESENT_MODE_MAILBOX_KHR;
+    }
+    DAWN_UNREACHABLE();
+}
+
+uint32_t MinImageCountForPresentMode(VkPresentModeKHR mode) {
+    switch (mode) {
+        case VK_PRESENT_MODE_FIFO_KHR:
+        case VK_PRESENT_MODE_IMMEDIATE_KHR:
+            return 2;
+        case VK_PRESENT_MODE_MAILBOX_KHR:
+            return 3;
+        default:
+            break;
+    }
+    DAWN_UNREACHABLE();
+}
+
+}  // anonymous namespace
+
+// static
+ResultOrError<VkSurfaceKHR> SwapChain::CreateVulkanSurface(const PhysicalDevice* physicalDevice,
+                                                           const Surface* surface) {
     const VulkanGlobalInfo& info = physicalDevice->GetVulkanInstance()->GetGlobalInfo();
     const VulkanFunctions& fn = physicalDevice->GetVulkanInstance()->GetFunctions();
     VkInstance instance = physicalDevice->GetVulkanInstance()->GetVkInstance();
@@ -194,33 +222,6 @@ ResultOrError<VkSurfaceKHR> CreateVulkanSurface(const PhysicalDevice* physicalDe
     return DAWN_VALIDATION_ERROR("Unsupported surface type (%s) for Vulkan.", surface->GetType());
 }
 
-VkPresentModeKHR ToVulkanPresentMode(wgpu::PresentMode mode) {
-    switch (mode) {
-        case wgpu::PresentMode::Fifo:
-            return VK_PRESENT_MODE_FIFO_KHR;
-        case wgpu::PresentMode::Immediate:
-            return VK_PRESENT_MODE_IMMEDIATE_KHR;
-        case wgpu::PresentMode::Mailbox:
-            return VK_PRESENT_MODE_MAILBOX_KHR;
-    }
-    DAWN_UNREACHABLE();
-}
-
-uint32_t MinImageCountForPresentMode(VkPresentModeKHR mode) {
-    switch (mode) {
-        case VK_PRESENT_MODE_FIFO_KHR:
-        case VK_PRESENT_MODE_IMMEDIATE_KHR:
-            return 2;
-        case VK_PRESENT_MODE_MAILBOX_KHR:
-            return 3;
-        default:
-            break;
-    }
-    DAWN_UNREACHABLE();
-}
-
-}  // anonymous namespace
-
 // static
 ResultOrError<wgpu::TextureUsage> SwapChain::GetSupportedSurfaceUsage(const Device* device,
                                                                       const Surface* surface) {
@@ -260,8 +261,8 @@ ResultOrError<wgpu::TextureUsage> SwapChain::GetSupportedSurfaceUsage(const Devi
 ResultOrError<Ref<SwapChain>> SwapChain::Create(Device* device,
                                                 Surface* surface,
                                                 SwapChainBase* previousSwapChain,
-                                                const SwapChainDescriptor* descriptor) {
-    Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, descriptor));
+                                                const SurfaceConfiguration* config) {
+    Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, config));
     DAWN_TRY(swapchain->Initialize(previousSwapChain));
     return swapchain;
 }
@@ -637,11 +638,12 @@ MaybeError SwapChain::PresentImpl() {
     }
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
-    return GetCurrentTextureInternal();
+ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl(SwapChainTextureInfo* info) {
+    return GetCurrentTextureInternal(info);
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReentrant) {
+ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(SwapChainTextureInfo* info,
+                                                                     bool isReentrant) {
     Device* device = ToBackend(GetDevice());
 
     // Transiently create a semaphore that will be signaled when the presentation engine is done
@@ -672,14 +674,16 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReen
         ToBackend(GetDevice())->GetFencedDeleter()->DeleteWhenUnused(semaphore);
     }
 
+    info->suboptimal = false;
     switch (result) {
-        // TODO(crbug.com/dawn/269): Introduce a mechanism to notify the application that
-        // the swapchain is in a suboptimal state?
         case VK_SUBOPTIMAL_KHR:
+            info->suboptimal = true;
         case VK_SUCCESS:
+            info->status = wgpu::SurfaceGetCurrentTextureStatus::Success;
             break;
 
         case VK_ERROR_OUT_OF_DATE_KHR: {
+            info->status = wgpu::SurfaceGetCurrentTextureStatus::Outdated;
             // Prevent infinite recursive calls to GetCurrentTextureViewInternal when the
             // swapchains always return that they are out of date.
             if (isReentrant) {
@@ -690,11 +694,12 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureInternal(bool isReen
 
             // Re-initialize the VkSwapchain and try getting the texture again.
             DAWN_TRY(Initialize(this));
-            return GetCurrentTextureInternal(true);
+            return GetCurrentTextureInternal(info, true);
         }
 
         // TODO(crbug.com/dawn/269): Allow losing the surface at Dawn's API level?
         case VK_ERROR_SURFACE_LOST_KHR:
+            info->status = wgpu::SurfaceGetCurrentTextureStatus::Lost;
         default:
             DAWN_TRY(CheckVkSuccess(::VkResult(result), "AcquireNextImage"));
     }
