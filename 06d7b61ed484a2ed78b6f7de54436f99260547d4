@@ -16,6 +16,23 @@
       "message": "PTAL. Mac-dawn-rel bot seems happy with this change.",
       "revId": "06d7b61ed484a2ed78b6f7de54436f99260547d4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac96417_0143bd2a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T16:53:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "06d7b61ed484a2ed78b6f7de54436f99260547d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
