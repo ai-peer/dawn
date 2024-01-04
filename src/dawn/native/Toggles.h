@@ -127,6 +127,7 @@ enum class Toggle {
     ExposeWGSLTestingFeatures,
     ExposeWGSLExperimentalFeatures,
     DisablePolyfillsOnIntegerDivisonAndModulo,
+    EnableImmediateErrorHandling,
 
     // Unresolved issues.
     NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
