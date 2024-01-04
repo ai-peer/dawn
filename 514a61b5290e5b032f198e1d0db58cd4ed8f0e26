@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "320fc77f_e6521391",
+        "filename": "src/dawn/native/SystemHandle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-04T18:38:36Z",
+      "side": 1,
+      "message": "I had thought this would happen when `rhs` gets ~SystemHandle()\nis it not the case?",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 9
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "78aa9376_1010bf96",
         "filename": "src/dawn/native/d3d/DeviceD3D.h",
         "patchSetId": 7
@@ -54,6 +77,53 @@
       "writtenOn": "2024-01-04T11:40:50Z",
       "side": 1,
       "message": "A suggestion: how about put this SharedFence in Queue and also add `d3d::SharedFence::Signal()`, `d3d::SharedFence::GetCompletedValue()`, `d3d::SharedFence::Wait(value)`, etc?",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8693ba44_b74c4668",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-04T18:38:36Z",
+      "side": 1,
+      "message": "now, you\u0027ve introduced a refcycle which is the reason `win-dawn-rel` is unhappy.\n\nTo break it, clear out `mSharedFence` in Device::DestroyImpl instead of ~Device (or Queue::Destroy if we use that fence there [1]). \n\nNote that after this point, it should still be valid to call GetSharedFence() because some code may do that *after* the device has been destroyed.\n\nSo, we should probably then make it GetOrCreateSharedFence().\n\nWhile the device is alive, it will always return mSharedFence.\n\nif mSharedFence is null, (device is destroyed), then we should return a new shared fence (and keep mSharedFence as null). This will have higher overhead for fence ops after the device is destroyed - but there should be relatively few of those.\n\n\n[1] looks like there is a separate bug. Queue::Destroy in d3d should be `DestroyImpl override`. I don\u0027t think it is ever called right now.",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "18dfbcaf_c6552b12",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-04T18:38:36Z",
+      "side": 1,
+      "message": "great point about putting it on the queue. We already have a d3d fence stored on the d3d queue.\n\nI\u0027m not sure we need to add the extra fence methods though",
+      "parentUuid": "2a88a98f_b23a305f",
       "range": {
         "startLine": 79,
         "startChar": 4,
