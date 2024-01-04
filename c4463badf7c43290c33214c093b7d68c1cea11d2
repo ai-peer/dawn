@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b63d0504_d23d0a41",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-04T05:31:15Z",
+      "side": 1,
+      "message": "TIL what \"allow rebase with conflicts\" does and that I don\u0027t want that.",
+      "revId": "c4463badf7c43290c33214c093b7d68c1cea11d2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
