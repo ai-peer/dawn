@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fffb5da9_d58f956b",
+        "filename": "dawn_wire.json",
+        "patchSetId": 3
+      },
+      "lineNbr": 250,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T08:10:49Z",
+      "side": 1,
+      "message": "Note that dawn.json and dawn_wire.json just moved to src/dawn.",
+      "revId": "8c3e0a85e1f17333e04942a8da3bf8a354cc2f8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e63e6ca_17af5859",
+        "filename": "src/dawn/wire/client/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T08:10:49Z",
+      "side": 1,
+      "message": "optional-nit: IMHO since this is the wire we can just do BGRA8Unorm.",
+      "revId": "8c3e0a85e1f17333e04942a8da3bf8a354cc2f8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78bd1ba9_4a7154cb",
+        "filename": "src/dawn/wire/client/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T08:10:49Z",
+      "side": 1,
+      "message": "These files will need to be added in src/dawn/wire/BUILD.gn as well.",
+      "revId": "8c3e0a85e1f17333e04942a8da3bf8a354cc2f8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "332ab766_f0621f28",
+        "filename": "src/dawn/wire/client/Surface.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T08:10:49Z",
+      "side": 1,
+      "message": "Happy new year!",
+      "range": {
+        "startLine": 1,
+        "startChar": 13,
+        "endLine": 1,
+        "endChar": 17
+      },
+      "revId": "8c3e0a85e1f17333e04942a8da3bf8a354cc2f8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
