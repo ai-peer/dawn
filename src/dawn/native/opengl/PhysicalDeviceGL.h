@@ -46,6 +46,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
     // PhysicalDeviceBase Implementation
     bool SupportsExternalImages() const override;
     bool SupportsFeatureLevel(FeatureLevel featureLevel) const override;
+    ResultOrError<AdapterSurfaceCapabilities> GetSurfaceCapabilities(const Surface* surface) const override;
 
   private:
     PhysicalDevice(InstanceBase* instance, wgpu::BackendType backendType, EGLDisplay display);
