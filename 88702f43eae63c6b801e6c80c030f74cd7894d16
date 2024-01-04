@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e93c3795_cf3e405e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-04T18:56:21Z",
+      "side": 1,
+      "message": "this does not return the refcount. it returns the \"payload\" inside the refcount.\n\nDawn uses a tagged refcount where the lower bits are a payload which specifies whether the object is an error or not.",
+      "range": {
+        "startLine": 558,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 59
+      },
+      "revId": "88702f43eae63c6b801e6c80c030f74cd7894d16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

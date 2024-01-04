@@ -142,6 +142,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "21f3c09b_6b56ecc5",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-04T18:56:21Z",
+      "side": 1,
+      "message": "also maybe we can use a dynamic buffer with map write discard.\n\nhttps://learn.microsoft.com/en-us/windows/win32/direct3d11/how-to--use-dynamic-resources\n\nanyway, the current cl is fine, and we can investigate this in the future",
+      "parentUuid": "87cd0c58_bd2c1387",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d7b7a8b_395bb89e",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 5
