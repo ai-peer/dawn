@@ -181,6 +181,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8f9b7121_37196b87",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-01-04T14:55:30Z",
+      "side": 1,
+      "message": "Sorry I didn\u0027t explain completely. \n\nThe scope of this ticket (https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2296) is specifically to replace the incorrect `CMAKE_SOURCE_DIR` with the correct `PROJECT_SOURCE_DIR`. \n\nWhat I mean is while using `TINT_ROOT_SOURCE_DIR` is definitely the correct way here, it can be submitted as another fix. However, I can change `PROJECT_SOURCE_DIR` to `TINT_ROOT_SOURCE_DIR` if you guys prefer.",
+      "parentUuid": "57f5a0a8_52129c2c",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f721297d_70a908cc",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 1
