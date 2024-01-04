@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_SWAPCHAIN_H_
 
 #include "dawn/native/Error.h"
+#include "dawn/native/Format.h"
 #include "dawn/native/Forward.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/dawn_platform.h"
@@ -36,17 +37,28 @@
 
 namespace dawn::native {
 
+// TODO(dawn:2320) Remove the SwapChainDescriptor once the deprectation period is finished and
+// APICreateSwapChain gets dropped
 MaybeError ValidateSwapChainDescriptor(const DeviceBase* device,
                                        const Surface* surface,
                                        const SwapChainDescriptor* descriptor);
 
 TextureDescriptor GetSwapChainBaseTextureDescriptor(SwapChainBase* swapChain);
 
+// I could not find a way to use the API-exposed SurfaceTexture struct directly
+// without messing with the Ref<Texture> used to store the current texture here in the
+// SwapChain, so this extra struct is passed as a mutable argument to GetCurrentTexture
+// and its backend implementation.
+struct SwapChainTextureInfo {
+    wgpu::Bool suboptimal;
+    wgpu::SurfaceGetCurrentTextureStatus status;
+};
+
 class SwapChainBase : public ApiObjectBase {
   public:
-    SwapChainBase(DeviceBase* device, Surface* surface, const SwapChainDescriptor* descriptor);
+    SwapChainBase(DeviceBase* device, Surface* surface, const SurfaceConfiguration* config);
 
-    static Ref<SwapChainBase> MakeError(DeviceBase* device, const SwapChainDescriptor* descriptor);
+    static Ref<SwapChainBase> MakeError(DeviceBase* device, const SurfaceConfiguration* config);
     ObjectType GetType() const override;
 
     // This is called when the swapchain is detached when one of the following happens:
@@ -88,14 +100,19 @@ class SwapChainBase : public ApiObjectBase {
     uint32_t GetWidth() const;
     uint32_t GetHeight() const;
     wgpu::TextureFormat GetFormat() const;
+    const std::vector<wgpu::TextureFormat>& GetViewFormats() const;
     wgpu::TextureUsage GetUsage() const;
     wgpu::PresentMode GetPresentMode() const;
+    wgpu::CompositeAlphaMode GetAlphaMode() const;
     Surface* GetSurface() const;
     bool IsAttached() const;
     wgpu::BackendType GetBackendType() const;
 
+    // The returned texture must match the swapchain descriptor exactly.
+    ResultOrError<SurfaceTexture> GetCurrentTexture();
+
   protected:
-    SwapChainBase(DeviceBase* device, const SwapChainDescriptor* desc, ObjectBase::ErrorTag tag);
+    SwapChainBase(DeviceBase* device, const SurfaceConfiguration* config, ObjectBase::ErrorTag tag);
     ~SwapChainBase() override;
     void DestroyImpl() override;
 
@@ -108,11 +125,19 @@ class SwapChainBase : public ApiObjectBase {
     wgpu::TextureFormat mFormat;
     wgpu::TextureUsage mUsage;
     wgpu::PresentMode mPresentMode;
+    // This is not stored as a FormatSet so that it can hold the data pointed to by the
+    // descriptor returned by GetSwapChainBaseTextureDescriptor():
+    std::vector<wgpu::TextureFormat> mViewFormats;
+    // We still store the same info as a format set to ease validation of the returned
+    // current texture:
+    FormatSet mViewFormatSet;
+    wgpu::CompositeAlphaMode mAlphaMode;
 
     // This is a weak reference to the surface. If the surface is destroyed it will call
     // DetachFromSurface and mSurface will be updated to nullptr.
     raw_ptr<Surface> mSurface = nullptr;
     Ref<TextureBase> mCurrentTexture;
+    SwapChainTextureInfo mCurrentTextureInfo;
 
     MaybeError ValidatePresent() const;
     MaybeError ValidateGetCurrentTexture() const;
@@ -120,9 +145,7 @@ class SwapChainBase : public ApiObjectBase {
     // GetCurrentTextureImpl and PresentImpl are guaranteed to be called in an interleaved manner,
     // starting with GetCurrentTextureImpl.
 
-    // The returned texture must match the swapchain descriptor exactly.
-    ResultOrError<Ref<TextureBase>> GetCurrentTexture();
-    virtual ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() = 0;
+    virtual ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl(SwapChainTextureInfo* info) = 0;
 
     ResultOrError<Ref<TextureViewBase>> GetCurrentTextureView();
 

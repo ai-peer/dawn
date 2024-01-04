@@ -41,8 +41,19 @@ class Surface final : public ObjectBase {
     explicit Surface(const ObjectBaseParams& params);
     ~Surface() override;
 
+    void Configure(WGPUSurfaceConfiguration const* config);
+
     WGPUTextureFormat GetPreferredFormat(WGPUAdapter adapter) const;
+
+    void GetCapabilities(WGPUAdapter adapter, WGPUSurfaceCapabilities* capabilities) const;
+
+    void GetCurrentTexture(WGPUSurfaceTexture* surfaceTexture);
+
+  private:
+    WGPUTextureDescriptor mTextureDescriptor;
 };
+
+void ClientSurfaceCapabilitiesFreeMembers(WGPUSurfaceCapabilities capabilities);
 
 }  // namespace dawn::wire::client
 
