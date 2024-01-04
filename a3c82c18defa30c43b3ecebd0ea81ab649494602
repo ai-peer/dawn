@@ -297,6 +297,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c0602c5a_2df4ce7f",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 441,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-04T09:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "57a8f1b6_bd301ab6",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6d60b3ce_e01928b2",
@@ -346,6 +364,24 @@
       "side": 1,
       "message": "My bad, the issue here is indeed if the end user wants these capabilities to outlive the surface\u0027s cache, which is indeed a problem.",
       "parentUuid": "eed5e00f_821839bc",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4d20c57_1c53f60a",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 458,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-04T09:05:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc60ef51_fff376d2",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
