@@ -37,7 +37,6 @@
 include(lang/msl/writer/ast_printer/BUILD.cmake)
 include(lang/msl/writer/ast_raise/BUILD.cmake)
 include(lang/msl/writer/common/BUILD.cmake)
-include(lang/msl/writer/helpers/BUILD.cmake)
 include(lang/msl/writer/printer/BUILD.cmake)
 include(lang/msl/writer/raise/BUILD.cmake)
 
@@ -142,7 +141,6 @@ if(TINT_BUILD_MSL_WRITER)
   tint_target_add_dependencies(tint_lang_msl_writer_bench bench
     tint_lang_msl_writer
     tint_lang_msl_writer_common
-    tint_lang_msl_writer_helpers
   )
 endif(TINT_BUILD_MSL_WRITER)
 
