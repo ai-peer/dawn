@@ -54,6 +54,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "1d6ff6d5_ce8799c7",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 754,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-04T05:10:21Z",
+      "side": 1,
+      "message": "Actually this one is consistent and just looked like a regression because of `Include-Ci-Only-Tests: true`.",
+      "parentUuid": "63923545_f8455010",
+      "revId": "d9cbc5af6f99f057599be60b7e1e166b3a1bcee6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e2c2086c_51f397bb",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 3
