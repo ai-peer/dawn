@@ -318,6 +318,10 @@ FeatureLevel AdapterBase::GetFeatureLevel() const {
     return mFeatureLevel;
 }
 
+const std::string& AdapterBase::GetLabel() const {
+    return mPhysicalDevice->GetName();
+}
+
 std::vector<Ref<AdapterBase>> SortAdapters(std::vector<Ref<AdapterBase>> adapters,
                                            const RequestAdapterOptions* options) {
     const bool highPerformance =

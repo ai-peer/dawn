@@ -38,6 +38,7 @@ namespace dawn::native::vulkan {
 
 class Device;
 class Texture;
+class PhysicalDevice;
 struct VulkanSurfaceInfo;
 
 class SwapChain : public SwapChainBase {
@@ -45,10 +46,13 @@ class SwapChain : public SwapChainBase {
     static ResultOrError<Ref<SwapChain>> Create(Device* device,
                                                 Surface* surface,
                                                 SwapChainBase* previousSwapChain,
-                                                const SwapChainDescriptor* descriptor);
+                                                const SurfaceConfiguration* config);
 
     static ResultOrError<wgpu::TextureUsage> GetSupportedSurfaceUsage(const Device* device,
                                                                       const Surface* surface);
+
+    static ResultOrError<VkSurfaceKHR> CreateVulkanSurface(const PhysicalDevice* physicalDevice,
+                                                           const Surface* surface);
 
     ~SwapChain() override;
 
@@ -77,11 +81,12 @@ class SwapChain : public SwapChainBase {
         bool needsBlit = false;
     };
     ResultOrError<Config> ChooseConfig(const VulkanSurfaceInfo& surfaceInfo) const;
-    ResultOrError<Ref<TextureBase>> GetCurrentTextureInternal(bool isReentrant = false);
+    ResultOrError<Ref<TextureBase>> GetCurrentTextureInternal(SwapChainTextureInfo* info,
+                                                              bool isReentrant = false);
 
     // SwapChainBase implementation
     MaybeError PresentImpl() override;
-    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl() override;
+    ResultOrError<Ref<TextureBase>> GetCurrentTextureImpl(SwapChainTextureInfo* info) override;
     void DetachFromSurfaceImpl() override;
 
     Config mConfig;

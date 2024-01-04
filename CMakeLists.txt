@@ -203,6 +203,7 @@ option_if_not_defined(DAWN_BUILD_SAMPLES "Enables building Dawn's samples" ${BUI
 option_if_not_defined(DAWN_BUILD_NODE_BINDINGS "Enables building Dawn's NodeJS bindings" OFF)
 option_if_not_defined(DAWN_ENABLE_SWIFTSHADER "Enables building Swiftshader as part of the build and Vulkan adapter discovery" OFF)
 option_if_not_defined(DAWN_BUILD_BENCHMARKS "Build Dawn benchmarks" OFF)
+option_if_not_defined(DAWN_BUILD_TESTS "Build Dawn tests" ON)
 
 option_if_not_defined(DAWN_ENABLE_PIC "Build with Position-Independent-Code enabled" OFF)
 

@@ -48,6 +48,16 @@ namespace dawn::native {
 
 class DeviceBase;
 
+// Structure that holds cached surface capabilities
+// TODO (dawn:2320) Shouldn't it be called PhysicalDeviceSurfaceCapabilities since it is
+// defined here? The Adapter ha no backend specific implementation so it is up to the
+// physical device to actually list capabilities.
+struct AdapterSurfaceCapabilities {
+    std::vector<wgpu::TextureFormat> formats;
+    std::vector<wgpu::PresentMode> presentModes;
+    std::vector<wgpu::CompositeAlphaMode> alphaModes;
+};
+
 struct FeatureValidationResult {
     // Constructor of successful result
     FeatureValidationResult();
@@ -109,6 +119,9 @@ class PhysicalDeviceBase : public RefCounted {
 
     // Populate backend properties. Ownership of allocations written are owned by the caller.
     virtual void PopulateBackendProperties(UnpackedPtr<AdapterProperties>& properties) const = 0;
+
+    virtual ResultOrError<AdapterSurfaceCapabilities> GetSurfaceCapabilities(
+        const Surface* surface) const = 0;
 
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
