@@ -163,6 +163,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "57f5a0a8_52129c2c",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-04T14:47:44Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand, using `TINT_ROOT_SOURCE_DIR` is the correct fix for these two lines, so it seems like it\u0027s in scope for this change?",
+      "parentUuid": "eecdc8f0_fb7106bc",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f721297d_70a908cc",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 1
