@@ -145,6 +145,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bb772eeb_71acd0cf",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-04T14:47:28Z",
+      "side": 1,
+      "message": "I\u0027m not sure I follow. `TINT_ROOT_SOURCE_DIR` already exists, and is used in this file. I\u0027m simply suggesting changing from `PROJECT_SOURCE_DIR` to `TINT_ROOT_SOURCE_DIR`.",
+      "parentUuid": "eecdc8f0_fb7106bc",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f721297d_70a908cc",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 1
