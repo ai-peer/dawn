@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0b5fe1e_1b47184f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-04T16:53:00Z",
+      "side": 1,
+      "message": "PTAL. Mac-dawn-rel bot seems happy with this change.",
+      "revId": "06d7b61ed484a2ed78b6f7de54436f99260547d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
