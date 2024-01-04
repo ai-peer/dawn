@@ -65,6 +65,22 @@ Device* ScopedCommandRecordingContext::GetDevice() const {
     return mCommandContext->mDevice.Get();
 }
 
+ID3D11Device* ScopedCommandRecordingContext::GetD3D11Device() const {
+    return mCommandContext->mD3D11Device.Get();
+}
+
+ID3D11DeviceContext4* ScopedCommandRecordingContext::GetD3D11DeviceContext4() const {
+    return mCommandContext->mD3D11DeviceContext4.Get();
+}
+
+ID3DUserDefinedAnnotation* ScopedCommandRecordingContext::GetD3DUserDefinedAnnotation() const {
+    return mCommandContext->mD3DUserDefinedAnnotation.Get();
+}
+
+Buffer* ScopedCommandRecordingContext::GetUniformBuffer() const {
+    return mCommandContext->mUniformBuffer.Get();
+}
+
 void ScopedCommandRecordingContext::UpdateSubresource(ID3D11Resource* pDstResource,
                                                       UINT DstSubresource,
                                                       const D3D11_BOX* pDstBox,
@@ -142,41 +158,6 @@ MaybeError ScopedCommandRecordingContext::FlushUniformBuffer() const {
         mCommandContext->mUniformBufferDirty = false;
     }
     return {};
-}
-
-ScopedSwapStateCommandRecordingContext::ScopedSwapStateCommandRecordingContext(
-    CommandRecordingContext* commandContext)
-    : ScopedCommandRecordingContext(commandContext),
-      mSwapContextState(
-          ToBackend(mCommandContext->mDevice->GetPhysicalDevice())->IsSharedD3D11Device()) {
-    if (mSwapContextState) {
-        mCommandContext->mD3D11DeviceContext4->SwapDeviceContextState(
-            mCommandContext->mD3D11DeviceContextState.Get(), &mPreviousState);
-    }
-}
-
-ScopedSwapStateCommandRecordingContext::~ScopedSwapStateCommandRecordingContext() {
-    if (mSwapContextState) {
-        mCommandContext->mD3D11DeviceContext4->SwapDeviceContextState(mPreviousState.Get(),
-                                                                      nullptr);
-    }
-}
-
-ID3D11Device* ScopedSwapStateCommandRecordingContext::GetD3D11Device() const {
-    return mCommandContext->mD3D11Device.Get();
-}
-
-ID3D11DeviceContext4* ScopedSwapStateCommandRecordingContext::GetD3D11DeviceContext4() const {
-    return mCommandContext->mD3D11DeviceContext4.Get();
-}
-
-ID3DUserDefinedAnnotation* ScopedSwapStateCommandRecordingContext::GetD3DUserDefinedAnnotation()
-    const {
-    return mCommandContext->mD3DUserDefinedAnnotation.Get();
-}
-
-Buffer* ScopedSwapStateCommandRecordingContext::GetUniformBuffer() const {
-    return mCommandContext->mUniformBuffer.Get();
 }
 
 MaybeError CommandRecordingContext::Initialize(Device* device) {
@@ -264,6 +245,24 @@ void CommandRecordingContext::Release() {
         mD3D11DeviceContextState = nullptr;
         mD3D11DeviceContext4 = nullptr;
         mD3D11Device = nullptr;
+    }
+}
+
+ScopedSwapStateCommandRecordingContext::ScopedSwapStateCommandRecordingContext(
+    CommandRecordingContext* commandContext)
+    : ScopedCommandRecordingContext(commandContext),
+      mSwapContextState(
+          ToBackend(mCommandContext->mDevice->GetPhysicalDevice())->IsSharedD3D11Device()) {
+    if (mSwapContextState) {
+        mCommandContext->mD3D11DeviceContext4->SwapDeviceContextState(
+            mCommandContext->mD3D11DeviceContextState.Get(), &mPreviousState);
+    }
+}
+
+ScopedSwapStateCommandRecordingContext::~ScopedSwapStateCommandRecordingContext() {
+    if (mSwapContextState) {
+        mCommandContext->mD3D11DeviceContext4->SwapDeviceContextState(mPreviousState.Get(),
+                                                                      nullptr);
     }
 }
 
