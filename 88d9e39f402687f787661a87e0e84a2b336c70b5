@@ -127,6 +127,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eecdc8f0_fb7106bc",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-01-04T14:41:46Z",
+      "side": 1,
+      "message": "@Ben: Although I agree with your recommendation, these changes would be beyond the scope of this ticket.",
+      "parentUuid": "4752c72b_66c86b6a",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f721297d_70a908cc",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 1
