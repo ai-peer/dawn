@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff377c8c_b117371e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-04T10:53:46Z",
+      "side": 1,
+      "message": "This change appears to be breaking `gn gen --check`:\n\n```\ngn gen --check out/tmp\n\nERROR at //src/dawn/native/Subresource.cpp:30:11: Can\u0027t include this header from here.\n#include \"absl/numeric/bits.h\"\n          ^------------------\nThe target:\n  //src/dawn/native:sources\nis including a file from the target:\n  //third_party/gn/abseil-cpp:bits\n\nIt\u0027s usually best to depend directly on the destination target.\nIn some cases, the destination target is considered a subcomponent\nof an intermediate target. In this case, the intermediate target\nshould depend publicly on the destination to forward the ability\nto include headers.\n\nDependency chain (there may also be others):\n  //src/dawn/native:sources --\u003e\n  //src/dawn/native:abseil --\u003e\n  //third_party/gn/abseil-cpp:flat_hash_set --[private]--\u003e\n  //third_party/gn/abseil-cpp:raw_hash_set --[private]--\u003e\n  //third_party/gn/abseil-cpp:bits\n\n```\n\nAnd many, many more errors",
+      "revId": "d8721c00552f18111e4fe69c1ee5dff1c7cbfa4b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
