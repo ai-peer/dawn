@@ -34,6 +34,24 @@
       "parentUuid": "8562e1d5_9a917ae6",
       "revId": "4a496482bc60cc86be36c3c9c83a2e44bdd56c33",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "17465987_e8fafb7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-04T02:48:34Z",
+      "side": 1,
+      "message": "Done\n\nNow I got Kokoro +1. PTAL, thanks!",
+      "parentUuid": "c280bfb6_0d806f6f",
+      "revId": "4a496482bc60cc86be36c3c9c83a2e44bdd56c33",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
