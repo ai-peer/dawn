@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "77cb44ed_53cec305",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 5
+      },
+      "lineNbr": 7,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-04T05:27:56Z",
+      "side": 1,
+      "message": "Done, thanks for the catching!",
+      "parentUuid": "69ab29de_29bfee2a",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "e4d5763e_84c10f68",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 5
@@ -106,6 +124,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "87cd0c58_bd2c1387",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 595,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-04T05:27:56Z",
+      "side": 1,
+      "message": "This is an interesting question. For D3D11 immediate context, we can can immediately reuse a buffer without waiting for the serial. Generally, a heap or queue of staging buffers should be better than a single staging buffer. Not sure how necessary it is for D3D11. There are other such same buffer usages like the [built-in uniform buffer](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/CommandRecordingContextD3D11.cpp;drc\u003dc696bee7fb87959b4db2dba8a85395439fd4110c;l\u003d233), and maybe more in skia-graphite. It\u0027s worth a further investigation sooner or later.",
+      "parentUuid": "7c32de22_ec48f2af",
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5d7b7a8b_395bb89e",
         "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
         "patchSetId": 5
@@ -117,6 +153,30 @@
       "writtenOn": "2024-01-03T14:46:48Z",
       "side": 1,
       "message": "Looks like you can use `Log2()` to compute bufferSize. BTW, is it really necessary to always roundup size to closest `2^x`? Maybe roundup bufferSize to `Align(size, 4*1024)` is good enough. and it can avoid wasting too much memory.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Math.h;l\u003d46;bpv\u003d1;bpt\u003d1",
+      "range": {
+        "startLine": 545,
+        "startChar": 0,
+        "endLine": 546,
+        "endChar": 9
+      },
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "210b3161_4ddfea82",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 546,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-04T05:27:56Z",
+      "side": 1,
+      "message": "Probably `2^x` is too greedy. Fine with `Align(size, 4*1024)`.",
+      "parentUuid": "5d7b7a8b_395bb89e",
       "range": {
         "startLine": 545,
         "startChar": 0,
@@ -150,6 +210,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "abe8cfd3_7cba1a33",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 549,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-04T05:27:56Z",
+      "side": 1,
+      "message": "With `Align(size, 4*1024)`, the padding is trivial now.",
+      "parentUuid": "cb7248db_30d91e62",
+      "range": {
+        "startLine": 549,
+        "startChar": 26,
+        "endLine": 549,
+        "endChar": 36
+      },
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eacdcabd_1de697f5",
@@ -163,6 +247,30 @@
       "writtenOn": "2024-01-03T15:36:38Z",
       "side": 1,
       "message": "nit: GetStaging, ditto in the comment.",
+      "range": {
+        "startLine": 107,
+        "startChar": 35,
+        "endLine": 107,
+        "endChar": 52
+      },
+      "revId": "55ebdb83dc530c5289979eb97ae53ed80932f598",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b2ef0c8_1f157ec3",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-04T05:27:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eacdcabd_1de697f5",
       "range": {
         "startLine": 107,
         "startChar": 35,
