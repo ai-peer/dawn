@@ -16,6 +16,29 @@
       "message": "PTAL!",
       "revId": "7a6e88513367227eaf504405870a34ae4f01a129",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "577cb044_a77119f1",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 528,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-04T09:21:17Z",
+      "side": 1,
+      "message": "Hopefully no compilers will take objection of the implicit cast of uint64_t to double.",
+      "range": {
+        "startLine": 528,
+        "startChar": 41,
+        "endLine": 528,
+        "endChar": 42
+      },
+      "revId": "7a6e88513367227eaf504405870a34ae4f01a129",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
