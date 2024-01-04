@@ -102,6 +102,30 @@
       },
       "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5882cbec_b78bd9c6",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 916,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-04T01:05:10Z",
+      "side": 1,
+      "message": "I was too lazy to do this before but it is probably a good idea. I will include this in a later CL along with making ApplyTrivialFrontendDefaults return a copy. I have tried both locally and they look like they will work fine.",
+      "parentUuid": "0410309b_f2dcefa1",
+      "range": {
+        "startLine": 914,
+        "startChar": 8,
+        "endLine": 916,
+        "endChar": 65
+      },
+      "revId": "7191e05e53e82d6e9a55780fb31b4c23842d6f1f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
