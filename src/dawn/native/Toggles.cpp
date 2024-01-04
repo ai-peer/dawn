@@ -500,6 +500,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "Make the Instance expose the experimental features but not the unsage ones, so that safe "
       "experimental features can be used without the need for allow_unsafe_apis",
       "https://crbug.com/dawn/2260", ToggleStage::Instance}},
+    {Toggle::EnableImmediateErrorHandling,
+     {"enable_immediate_error_handling",
+      "Have the uncaptured error callback invoked immediately when an error occurs, rather than "
+      "waiting for the next Tick. This enables using the stack trace in which the uncaptured error "
+      "occured when breaking into the uncaptured error callback.",
+      "https://crbug.com/dawn/1789", ToggleStage::Device}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "
