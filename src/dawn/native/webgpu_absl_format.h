@@ -122,6 +122,12 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
     const absl::FormatConversionSpec& spec,
     absl::FormatSink* s);
 
+class Surface;
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
+    const Surface* value,
+    const absl::FormatConversionSpec& spec,
+    absl::FormatSink* s);
+
 //
 // Enums
 //

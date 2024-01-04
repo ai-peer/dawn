@@ -46,8 +46,8 @@ namespace dawn::native::d3d12 {
 ResultOrError<Ref<SwapChain>> SwapChain::Create(Device* device,
                                                 Surface* surface,
                                                 SwapChainBase* previousSwapChain,
-                                                const SwapChainDescriptor* descriptor) {
-    Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, descriptor));
+                                                const SurfaceConfiguration* config) {
+    Ref<SwapChain> swapchain = AcquireRef(new SwapChain(device, surface, config));
     DAWN_TRY(swapchain->Initialize(previousSwapChain));
     return swapchain;
 }
@@ -106,7 +106,7 @@ MaybeError SwapChain::PresentImpl() {
     return {};
 }
 
-ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
+ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl(SwapChainTextureInfo* info) {
     Queue* queue = ToBackend(GetDevice()->GetQueue());
 
     // Synchronously wait until previous operations on the next swapchain buffer are finished.
@@ -120,6 +120,9 @@ ResultOrError<Ref<TextureBase>> SwapChain::GetCurrentTextureImpl() {
     TextureDescriptor descriptor = GetSwapChainBaseTextureDescriptor(this);
     DAWN_TRY_ASSIGN(mApiTexture, Texture::Create(ToBackend(GetDevice()), Unpack(&descriptor),
                                                  mBuffers[mCurrentBuffer]));
+    info->status = wgpu::SurfaceGetCurrentTextureStatus::Success;
+    // TODO(dawn:2320) Check for optimality
+    info->suboptimal = false;
     return mApiTexture;
 }
 
