@@ -175,7 +175,7 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
         }
 
         if (completionType == EventCompletionType::Shutdown) {
-            mCallback(ToAPI(wgpu::BufferMapAsyncStatus::Unknown), mUserdata);
+            mCallback(ToAPI(wgpu::BufferMapAsyncStatus::InstanceDropped), mUserdata);
             return;
         }
 
@@ -630,8 +630,7 @@ Future BufferBase::APIMapAsyncF(wgpu::MapMode mode,
         event = mPendingMapEvent;
     }
 
-    FutureID futureID =
-        GetInstance()->GetEventManager()->TrackEvent(callbackInfo.mode, std::move(event));
+    FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
     return {futureID};
 }
 

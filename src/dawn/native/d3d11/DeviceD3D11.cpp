@@ -211,11 +211,10 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     return ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
 }
 
-ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
-    Surface* surface,
-    SwapChainBase* previousSwapChain,
-    const SwapChainDescriptor* descriptor) {
-    return SwapChain::Create(this, surface, previousSwapChain, descriptor);
+ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(Surface* surface,
+                                                              SwapChainBase* previousSwapChain,
+                                                              const SurfaceConfiguration* config) {
+    return SwapChain::Create(this, surface, previousSwapChain, config);
 }
 
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
@@ -481,14 +480,15 @@ bool Device::IsResolveTextureBlitWithDrawSupported() const {
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
+                                                  ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                                   std::vector<FenceAndSignalValue> waitFences,
                                                   bool isSwapChainTexture,
                                                   bool isInitialized) {
     Ref<Texture> dawnTexture;
-    if (ConsumedError(
-            Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
-                                         std::move(waitFences), isSwapChainTexture, isInitialized),
-            &dawnTexture)) {
+    if (ConsumedError(Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),
+                                                   std::move(dxgiKeyedMutex), std::move(waitFences),
+                                                   isSwapChainTexture, isInitialized),
+                      &dawnTexture)) {
         return nullptr;
     }
     return {dawnTexture};

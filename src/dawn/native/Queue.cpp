@@ -189,6 +189,7 @@ class ErrorQueue : public QueueBase {
         DAWN_UNREACHABLE();
     }
     bool HasPendingCommands() const override { DAWN_UNREACHABLE(); }
+    MaybeError SubmitPendingCommands() override { DAWN_UNREACHABLE(); }
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override { DAWN_UNREACHABLE(); }
     void ForceEventualFlushOfCommands() override { DAWN_UNREACHABLE(); }
     ResultOrError<bool> WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) override {
@@ -228,7 +229,7 @@ struct WorkDoneEvent final : public EventManager::TrackedEvent {
         // WorkDoneEvent has no error cases other than the mEarlyStatus ones.
         wgpu::QueueWorkDoneStatus status = wgpu::QueueWorkDoneStatus::Success;
         if (completionType == EventCompletionType::Shutdown) {
-            status = wgpu::QueueWorkDoneStatus::Unknown;
+            status = wgpu::QueueWorkDoneStatus::InstanceDropped;
         } else if (mEarlyStatus) {
             status = mEarlyStatus.value();
         }
@@ -327,8 +328,7 @@ Future QueueBase::APIOnSubmittedWorkDoneF(const QueueWorkDoneCallbackInfo& callb
         event = AcquireRef(new WorkDoneEvent(callbackInfo, this, GetScheduledWorkDoneSerial()));
     }
 
-    FutureID futureID =
-        GetInstance()->GetEventManager()->TrackEvent(callbackInfo.mode, std::move(event));
+    FutureID futureID = GetInstance()->GetEventManager()->TrackEvent(std::move(event));
 
     return {futureID};
 }

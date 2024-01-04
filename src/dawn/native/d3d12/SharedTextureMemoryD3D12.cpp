@@ -101,8 +101,7 @@ SharedTextureMemory::SharedTextureMemory(Device* device,
                                          const char* label,
                                          SharedTextureMemoryProperties properties,
                                          ComPtr<ID3D12Resource> resource)
-    : d3d::SharedTextureMemory(device, label, properties, resource.Get()),
-      mResource(std::move(resource)) {}
+    : d3d::SharedTextureMemory(device, label, properties), mResource(std::move(resource)) {}
 
 void SharedTextureMemory::DestroyImpl() {
     ToBackend(GetDevice())->ReferenceUntilUnused(std::move(mResource));
@@ -133,6 +132,13 @@ MaybeError SharedTextureMemory::BeginAccessImpl(
     // https://learn.microsoft.com/en-us/windows/win32/direct3d12/using-resource-barriers-to-synchronize-resource-states-in-direct3d-12#state-decay-to-common
     ToBackend(texture)->ResetSubresourceStateAndDecayToCommon();
     return {};
+}
+
+ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
+    TextureBase* texture,
+    UnpackedPtr<EndAccessState>& state) {
+    ToBackend(texture)->NotifySwapChainPresentToPIX();
+    return d3d::SharedTextureMemory::EndAccessImpl(texture, state);
 }
 
 }  // namespace dawn::native::d3d12

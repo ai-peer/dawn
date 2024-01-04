@@ -95,9 +95,10 @@
         "emscripten_no_enum_table": true,
         "values": [
             {"value": 0, "name": "success"},
-            {"value": 1, "name": "unavailable"},
-            {"value": 2, "name": "error"},
-            {"value": 3, "name": "unknown"}
+            {"value": 1, "name": "instance dropped"},
+            {"value": 2, "name": "unavailable"},
+            {"value": 3, "name": "error"},
+            {"value": 4, "name": "unknown"}
         ]
     },
     "adapter": {
@@ -214,13 +215,39 @@
             {"name": "disabled toggles", "type": "char", "annotation": "const*const*", "length": "disabled toggle count"}
         ]
     },
+    "dawn load cache data function": {
+        "tags": ["dawn", "native"],
+        "category": "function pointer",
+        "returns": "size_t",
+        "args": [
+            {"name": "key", "type": "void const *"},
+            {"name": "key size", "type": "size_t"},
+            {"name": "value", "type": "void *"},
+            {"name": "value size", "type": "size_t"},
+            {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "dawn store cache data function": {
+        "tags": ["dawn", "native"],
+        "category": "function pointer",
+        "args": [
+            {"name": "key", "type": "void const *"},
+            {"name": "key size", "type": "size_t"},
+            {"name": "value", "type": "void const *"},
+            {"name": "value size", "type": "size_t"},
+            {"name": "userdata", "type": "void *"}
+        ]
+    },
     "dawn cache device descriptor" : {
         "tags": ["dawn", "native"],
         "category": "structure",
         "chained": "in",
         "chain roots": ["device descriptor"],
         "members": [
-            {"name": "isolation key", "type": "char", "annotation": "const*", "length": "strlen", "default": "\"\""}
+            {"name": "isolation key", "type": "char", "annotation": "const*", "length": "strlen", "default": "\"\""},
+            {"name": "load data function", "type": "dawn load cache data function", "default": "nullptr"},
+            {"name": "store data function", "type": "dawn store cache data function", "default": "nullptr"},
+            {"name": "function userdata", "type": "void *", "default": "nullptr"}
         ]
     },
     "dawn WGSL blocklist": {
@@ -362,15 +389,14 @@
     },
     "surface capabilities": {
         "category": "structure",
-        "tags": ["upstream"],
         "extensible": "out",
         "members": [
             {"name": "format count", "type": "size_t"},
-            {"name": "formats", "type": "texture format", "annotation": "*"},
+            {"name": "formats", "type": "texture format", "annotation": "const*"},
             {"name": "present mode count", "type": "size_t"},
-            {"name": "present modes", "type": "present mode", "annotation": "*"},
+            {"name": "present modes", "type": "present mode", "annotation": "const*"},
             {"name": "alpha mode count", "type": "size_t"},
-            {"name": "alpha modes", "type": "composite alpha mode", "annotation": "*"}
+            {"name": "alpha modes", "type": "composite alpha mode", "annotation": "const*"}
         ],
         "methods": [
             {
@@ -382,18 +408,17 @@
     },
     "surface configuration": {
         "category": "structure",
-        "tags": ["upstream"],
         "extensible": "in",
         "members": [
             {"name": "device", "type": "device"},
             {"name": "format", "type": "texture format"},
-            {"name": "usage", "type": "texture usage"},
-            {"name": "view format count", "type": "size_t"},
-            {"name": "view formats", "type": "texture format", "annotation": "const*"},
-            {"name": "alpha mode", "type": "composite alpha mode"},
+            {"name": "usage", "type": "texture usage", "default": "render attachment"},
+            {"name": "view format count", "type": "size_t", "default": 0},
+            {"name": "view formats", "type": "texture format", "annotation": "const*", "length": "view format count"},
+            {"name": "alpha mode", "type": "composite alpha mode", "default": "opaque"},
             {"name": "width", "type": "uint32_t"},
             {"name": "height", "type": "uint32_t"},
-            {"name": "present mode", "type": "present mode"}
+            {"name": "present mode", "type": "present mode", "default": "fifo"}
         ]
     },
     "external texture binding entry": {
@@ -618,14 +643,15 @@
         "emscripten_no_enum_table": true,
         "values": [
             {"value": 0, "name": "success"},
-            {"value": 1, "name": "validation error"},
-            {"value": 2, "name": "unknown"},
-            {"value": 3, "name": "device lost"},
-            {"value": 4, "name": "destroyed before callback"},
-            {"value": 5, "name": "unmapped before callback"},
-            {"value": 6, "name": "mapping already pending"},
-            {"value": 7, "name": "offset out of range"},
-            {"value": 8, "name": "size out of range"}
+            {"value": 1, "name": "instance dropped"},
+            {"value": 2, "name": "validation error"},
+            {"value": 3, "name": "unknown"},
+            {"value": 4, "name": "device lost"},
+            {"value": 5, "name": "destroyed before callback"},
+            {"value": 6, "name": "unmapped before callback"},
+            {"value": 7, "name": "mapping already pending"},
+            {"value": 8, "name": "offset out of range"},
+            {"value": 9, "name": "size out of range"}
         ]
     },
     "buffer map state": {
@@ -869,9 +895,10 @@
         "category": "enum",
         "values": [
             {"value": 0, "name": "success"},
-            {"value": 1, "name": "error"},
-            {"value": 2, "name": "device lost"},
-            {"value": 3, "name": "unknown"}
+            {"value": 1, "name": "instance dropped"},
+            {"value": 2, "name": "error"},
+            {"value": 3, "name": "device lost"},
+            {"value": 4, "name": "unknown"}
         ]
     },
     "compilation message": {
@@ -978,7 +1005,6 @@
     },
     "composite alpha mode": {
         "category": "enum",
-        "tags": ["upstream"],
         "values": [
             {"value": 0, "name": "auto"},
             {"value": 1, "name": "opaque"},
@@ -1082,11 +1108,12 @@
         "emscripten_no_enum_table": true,
         "values": [
             {"value": 0, "name": "success"},
-            {"value": 1, "name": "validation error"},
-            {"value": 2, "name": "internal error"},
-            {"value": 3, "name": "device lost"},
-            {"value": 4, "name": "device destroyed"},
-            {"value": 5, "name": "unknown"}
+            {"value": 1, "name": "instance dropped"},
+            {"value": 2, "name": "validation error"},
+            {"value": 3, "name": "internal error"},
+            {"value": 4, "name": "device lost"},
+            {"value": 5, "name": "device destroyed"},
+            {"value": 6, "name": "unknown"}
         ]
     },
     "create render pipeline async callback": {
@@ -1398,6 +1425,15 @@
                 ]
             },
             {
+                "name": "pop error scope f",
+                "_comment": "TODO(crbug.com/dawn/2021): This is dawn/emscripten-only until we rename it to replace the old API. See bug for details.",
+                "tags": ["dawn", "emscripten"],
+                "returns": "future",
+                "args": [
+                    {"name": "callback info", "type": "pop error scope callback info"}
+                ]
+            },
+            {
                 "name": "set label",
                 "returns": "void",
                 "args": [
@@ -1446,6 +1482,33 @@
             {"name": "type", "type": "error type"},
             {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"},
             {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "pop error scope status": {
+        "category": "enum",
+        "emscripten_no_enum_table": true,
+        "values": [
+            {"value": 0, "name": "success"},
+            {"value": 1, "name": "instance dropped"}
+        ]
+    },
+    "pop error scope callback": {
+        "category": "function pointer",
+        "args": [
+            {"name": "status", "type": "pop error scope status"},
+            {"name": "type", "type": "error type"},
+            {"name": "message", "type": "char", "annotation": "const*", "length": "strlen"},
+            {"name": "userdata", "type": "void *"}
+        ]
+    },
+    "pop error scope callback info": {
+        "category": "structure",
+        "extensible": "in",
+        "members": [
+            {"name": "mode", "type": "callback mode"},
+            {"name": "callback", "type": "pop error scope callback"},
+            {"name": "old callback", "type": "error callback", "_comment": "TODO(crbug.com/dawn/2021) Deprecate this field once we have moved callers to use the new callback signature."},
+            {"name": "userdata", "type": "void *", "default": "nullptr"}
         ]
     },
     "limits": {
@@ -1604,6 +1667,7 @@
         "category": "structure",
         "extensible": "in",
         "tags": ["dawn"],
+        "_comment": "TODO(crbug.com/1514732): deprecate flipY",
         "members": [
             {"name": "label", "type": "char", "annotation": "const*", "length": "strlen", "optional": true},
             {"name": "plane 0", "type": "texture view"},
@@ -1619,7 +1683,8 @@
                 "length": 7},
             {"name": "gamut conversion matrix", "type": "float", "annotation": "const*",
                 "length": 9},
-            {"name": "flip y", "type": "bool", "default": "false"},
+            {"name": "flip y", "type": "bool", "default": "false", "tags": ["deprecated"]},
+            {"name": "mirrored", "type": "bool", "default": "false"},
             {"name": "rotation", "type": "external texture rotation", "default": "rotate 0 degrees"}
         ]
     },
@@ -2520,9 +2585,10 @@
         "emscripten_no_enum_table": true,
         "values": [
             {"value": 0, "name": "success"},
-            {"value": 1, "name": "error"},
-            {"value": 2, "name": "unknown"},
-            {"value": 3, "name": "device lost"}
+            {"value": 1, "name": "instance dropped"},
+            {"value": 2, "name": "error"},
+            {"value": 3, "name": "unknown"},
+            {"value": 4, "name": "device lost"}
         ]
     },
 
@@ -2955,8 +3021,9 @@
         "emscripten_no_enum_table": true,
         "values": [
             {"value": 0, "name": "success"},
-            {"value": 1, "name": "error"},
-            {"value": 2, "name": "unknown"}
+            {"value": 1, "name": "instance dropped"},
+            {"value": 2, "name": "error"},
+            {"value": 3, "name": "unknown"}
         ]
     },
 
@@ -3216,7 +3283,6 @@
             {
                 "name": "configure",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "config", "type": "surface configuration", "annotation": "const*"}
                 ]
@@ -3224,7 +3290,6 @@
             {
                 "name": "get capabilities",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "adapter", "type": "adapter"},
                     {"name": "capabilities", "type": "surface capabilities", "annotation": "*"}
@@ -3233,7 +3298,6 @@
             {
                 "name": "get current texture",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": [
                     {"name": "surface texture", "type": "surface texture", "annotation": "*"}
                 ]
@@ -3248,14 +3312,20 @@
             {
                 "name": "present",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": []
             },
             {
                 "name": "unconfigure",
                 "returns": "void",
-                "tags": ["upstream"],
                 "args": []
+            },
+            {
+                "name": "set label",
+                "tags": ["dawn"],
+                "returns": "void",
+                "args": [
+                    {"name": "label", "type": "char", "annotation": "const*", "length": "strlen"}
+                ]
             }
         ]
     },
@@ -3374,7 +3444,6 @@
     },
     "surface texture": {
         "category": "structure",
-        "tags": ["upstream"],
         "members": [
             {"name": "texture", "type": "texture"},
             {"name": "suboptimal", "type": "bool"},
@@ -3516,7 +3585,6 @@
     },
     "surface get current texture status": {
         "category": "enum",
-        "tags": ["upstream"],
         "values": [
             {"value": 0, "name": "success"},
             {"value": 1, "name": "timeout"},

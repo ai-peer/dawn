@@ -57,6 +57,7 @@ class Device final : public d3d::Device {
     void ReferenceUntilUnused(ComPtr<IUnknown> object);
     Ref<TextureBase> CreateD3DExternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor,
                                               ComPtr<IUnknown> d3dTexture,
+                                              ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                               std::vector<FenceAndSignalValue> waitFences,
                                               bool isSwapChainTexture,
                                               bool isInitialized) override;
@@ -123,7 +124,7 @@ class Device final : public d3d::Device {
     ResultOrError<Ref<SwapChainBase>> CreateSwapChainImpl(
         Surface* surface,
         SwapChainBase* previousSwapChain,
-        const SwapChainDescriptor* descriptor) override;
+        const SurfaceConfiguration* config) override;
     ResultOrError<Ref<TextureBase>> CreateTextureImpl(
         const UnpackedPtr<TextureDescriptor>& descriptor) override;
     ResultOrError<Ref<TextureViewBase>> CreateTextureViewImpl(

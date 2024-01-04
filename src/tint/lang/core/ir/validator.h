@@ -59,7 +59,13 @@ Result<SuccessType> Validate(const Module& mod, EnumSet<Capability> capabilities
 /// @returns success or failure
 Result<SuccessType> ValidateAndDumpIfNeeded(const Module& ir,
                                             const char* msg,
-                                            EnumSet<Capability> capabilities = {});
+                                            EnumSet<Capability> capabilities);
+
+/// Validates the module @p ir and dumps its contents if required by the build configuration.
+/// @param ir the module to transform
+/// @param msg the msg to accompany the output
+/// @returns success or failure
+Result<SuccessType> ValidateAndDumpIfNeeded(const Module& ir, const char* msg);
 
 }  // namespace tint::core::ir
 

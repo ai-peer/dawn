@@ -28,6 +28,7 @@
 #ifndef SRC_TINT_LANG_WGSL_AST_TRANSFORM_CLAMP_FRAG_DEPTH_H_
 #define SRC_TINT_LANG_WGSL_AST_TRANSFORM_CLAMP_FRAG_DEPTH_H_
 
+#include "src/tint/api/options/depth_range_offsets.h"
 #include "src/tint/lang/wgsl/ast/transform/transform.h"
 
 namespace tint::ast::transform {
@@ -68,6 +69,19 @@ class ClampFragDepth final : public Castable<ClampFragDepth, ast::transform::Tra
     ClampFragDepth();
     /// Destructor
     ~ClampFragDepth() override;
+
+    /// Transform configuration options
+    struct Config final : public Castable<Config, ast::transform::Data> {
+        /// Constructor
+        /// @param off Offsets of the min_depth and max_depth push constants
+        explicit Config(std::optional<tint::DepthRangeOffsets> off);
+
+        /// Destructor
+        ~Config() override;
+
+        /// Offsets of the min_depth and max_depth push constants
+        std::optional<tint::DepthRangeOffsets> offsets;
+    };
 
     /// @copydoc ast::transform::Transform::Apply
     ApplyResult Apply(const Program& program,

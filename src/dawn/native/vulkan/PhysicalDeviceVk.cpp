@@ -36,6 +36,8 @@
 #include "dawn/native/Limits.h"
 #include "dawn/native/vulkan/BackendVk.h"
 #include "dawn/native/vulkan/DeviceVk.h"
+#include "dawn/native/vulkan/SwapChainVk.h"
+#include "dawn/native/vulkan/VulkanError.h"
 #include "dawn/platform/DawnPlatform.h"
 
 #if DAWN_PLATFORM_IS(ANDROID)
@@ -244,9 +246,11 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         mDeviceInfo.HasExt(DeviceExt::_16BitStorage) &&
         mDeviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.storageBuffer16BitAccess == VK_TRUE &&
-        mDeviceInfo._16BitStorageFeatures.storageInputOutput16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE) {
-        EnableFeature(Feature::ShaderF16);
+        // TODO(crbug.com/tint/2164): Investigate crashes in f16 CTS tests to enable on NVIDIA.
+        if (!gpu_info::IsNvidia(GetVendorId())) {
+            EnableFeature(Feature::ShaderF16);
+        }
     }
 
     // unclippedDepth=true translates to depthClamp=true, which implicitly disables clipping.
@@ -690,6 +694,14 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     // extension VK_KHR_zero_initialize_workgroup_memory.
     deviceToggles->Default(Toggle::VulkanUseZeroInitializeWorkgroupMemoryExtension, true);
 
+    // The environment can only request to use StorageInputOutput16 when the capability is
+    // available.
+    if (GetDeviceInfo()._16BitStorageFeatures.storageInputOutput16 == VK_FALSE) {
+        deviceToggles->ForceSet(Toggle::VulkanUseStorageInputOutput16, false);
+    }
+    // By default try to use the StorageInputOutput16 capability.
+    deviceToggles->Default(Toggle::VulkanUseStorageInputOutput16, true);
+
     // Inject fragment shaders in all vertex-only pipelines.
     // TODO(crbug.com/dawn/1698): relax this requirement where the Vulkan spec allows.
     // In particular, enable rasterizer discard if the depth-stencil stage is a no-op, and skip
@@ -813,6 +825,75 @@ bool PhysicalDevice::CheckSemaphoreSupport(DeviceExt deviceExt,
 
 uint32_t PhysicalDevice::GetDefaultComputeSubgroupSize() const {
     return mDefaultComputeSubgroupSize;
+}
+
+ResultOrError<PhysicalDeviceSurfaceCapabilities> PhysicalDevice::GetSurfaceCapabilities(
+    const Surface* surface) const {
+    PhysicalDeviceSurfaceCapabilities capabilities;
+
+    // Formats
+
+    // This is the only supported format in native mode (see crbug.com/dawn/160).
+#if DAWN_PLATFORM_IS(ANDROID)
+    capabilities.formats.push_back(wgpu::TextureFormat::RGBA8Unorm);
+#else
+    capabilities.formats.push_back(wgpu::TextureFormat::BGRA8Unorm);
+#endif  // !DAWN_PLATFORM_IS(ANDROID)
+
+    // Present Modes
+
+    capabilities.presentModes = {
+        wgpu::PresentMode::Fifo,
+        wgpu::PresentMode::Immediate,
+        wgpu::PresentMode::Mailbox,
+    };
+
+    // Alpha Modes
+
+#if !DAWN_PLATFORM_IS(ANDROID)
+    capabilities.alphaModes.push_back(wgpu::CompositeAlphaMode::Opaque);
+#else
+    VkSurfaceKHR vkSurface;
+    DAWN_TRY_ASSIGN(vkSurface, SwapChain::CreateVulkanSurface(this, surface));
+
+    VkPhysicalDevice vkPhysicalDevice = GetVkPhysicalDevice();
+    const VulkanFunctions& fn = GetVulkanInstance()->GetFunctions();
+    VkInstance vkInstance = GetVulkanInstance()->GetVkInstance();
+    const VulkanFunctions& vkFunctions = GetVulkanInstance()->GetFunctions();
+
+    // Get the surface capabilities
+    VkSurfaceCapabilitiesKHR vkCapabilities;
+    DAWN_TRY_WITH_CLEANUP(
+        CheckVkSuccess(vkFunctions.GetPhysicalDeviceSurfaceCapabilitiesKHR(
+                       vkPhysicalDevice, vkSurface, &vkCapabilities),
+                       "vkGetPhysicalDeviceSurfaceCapabilitiesKHR"),
+        {
+            fn.DestroySurfaceKHR(vkInstance, vkSurface, nullptr);
+        });
+
+    fn.DestroySurfaceKHR(vkInstance, vkSurface, nullptr);
+
+    // TODO(dawn:286): investigate composite alpha for WebGPU native
+    struct AlphaModePairs {
+        VkCompositeAlphaFlagBitsKHR vkBit;
+        wgpu::CompositeAlphaMode webgpuEnum;
+    };
+    AlphaModePairs alphaModePairs[] = {
+        {VK_COMPOSITE_ALPHA_OPAQUE_BIT_KHR, wgpu::CompositeAlphaMode::Opaque},
+        {VK_COMPOSITE_ALPHA_PRE_MULTIPLIED_BIT_KHR, wgpu::CompositeAlphaMode::Premultiplied},
+        {VK_COMPOSITE_ALPHA_POST_MULTIPLIED_BIT_KHR, wgpu::CompositeAlphaMode::Unpremultiplied},
+        {VK_COMPOSITE_ALPHA_INHERIT_BIT_KHR, wgpu::CompositeAlphaMode::Inherit},
+    };
+
+    for (auto mode : alphaModePairs) {
+        if (vkCapabilities.supportedCompositeAlpha & mode.vkBit) {
+            capabilities.alphaModes.push_back(mode.webgpuEnum);
+        }
+    }
+#endif  // #if !DAWN_PLATFORM_IS(ANDROID)
+    capabilities.alphaModes.push_back(wgpu::CompositeAlphaMode::Auto);
+
+    return capabilities;
 }
 
 void PhysicalDevice::PopulateBackendProperties(UnpackedPtr<AdapterProperties>& properties) const {

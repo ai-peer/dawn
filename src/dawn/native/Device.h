@@ -28,6 +28,8 @@
 #ifndef SRC_DAWN_NATIVE_DEVICE_H_
 #define SRC_DAWN_NATIVE_DEVICE_H_
 
+#include <shared_mutex>
+
 #include <memory>
 #include <string>
 #include <utility>
@@ -73,7 +75,6 @@ class OwnedCompilationMessages;
 struct CallbackTask;
 struct InternalPipelineStore;
 struct ShaderModuleParseResult;
-struct TrackedFutureWaitInfo;
 
 class DeviceBase : public RefCountedWithExternalCount {
   public:
@@ -264,8 +265,13 @@ class DeviceBase : public RefCountedWithExternalCount {
     ResultOrError<Ref<ShaderModuleBase>> CreateShaderModule(
         const ShaderModuleDescriptor* descriptor,
         OwnedCompilationMessages* compilationMessages = nullptr);
+    // Deprecated: this was the way to create a SwapChain when it was explicitly manipulated by the
+    // end user.
     ResultOrError<Ref<SwapChainBase>> CreateSwapChain(Surface* surface,
                                                       const SwapChainDescriptor* descriptor);
+    ResultOrError<Ref<SwapChainBase>> CreateSwapChain(Surface* surface,
+                                                      SwapChainBase* previousSwapChain,
+                                                      const SurfaceConfiguration* config);
     ResultOrError<Ref<TextureBase>> CreateTexture(const TextureDescriptor* rawDescriptor);
     ResultOrError<Ref<TextureViewBase>> CreateTextureView(TextureBase* texture,
                                                           const TextureViewDescriptor* descriptor);
@@ -302,7 +308,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     ShaderModuleBase* APICreateShaderModule(const ShaderModuleDescriptor* descriptor);
     ShaderModuleBase* APICreateErrorShaderModule(const ShaderModuleDescriptor* descriptor,
                                                  const char* errorMessage);
-    SwapChainBase* APICreateSwapChain(Surface* surface, const SwapChainDescriptor* descriptor);
+    // TODO (dawn:2320) Remove after deprecation
+    SwapChainBase* APICreateSwapChain(Surface* surface,
+                                      const SwapChainDescriptor* descriptor);  // Deprecated
     TextureBase* APICreateTexture(const TextureDescriptor* descriptor);
 
     wgpu::TextureUsage APIGetSupportedSurfaceUsage(Surface* surface);
@@ -329,10 +337,11 @@ class DeviceBase : public RefCountedWithExternalCount {
     void APISetLoggingCallback(wgpu::LoggingCallback callback, void* userdata);
     void APIPushErrorScope(wgpu::ErrorFilter filter);
     void APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata);
+    Future APIPopErrorScopeF(const PopErrorScopeCallbackInfo& callbackInfo);
 
     MaybeError ValidateIsAlive() const;
 
-    BlobCache* GetBlobCache();
+    BlobCache* GetBlobCache() const;
     Blob LoadCachedBlob(const CacheKey& key);
     void StoreCachedBlob(const CacheKey& key, const Blob& blob);
 
@@ -387,6 +396,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     void EmitWarningOnce(const std::string& message);
     void EmitLog(const char* message);
     void EmitLog(WGPULoggingType loggingType, const char* message);
+    void EmitCompilationLog(const ShaderModuleBase* module);
     void APIForceLoss(wgpu::DeviceLostReason reason, const char* message);
     QueueBase* GetQueue() const;
 
@@ -500,7 +510,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     virtual ResultOrError<Ref<SwapChainBase>> CreateSwapChainImpl(
         Surface* surface,
         SwapChainBase* previousSwapChain,
-        const SwapChainDescriptor* descriptor) = 0;
+        const SurfaceConfiguration* config) = 0;
     virtual ResultOrError<Ref<TextureBase>> CreateTextureImpl(
         const UnpackedPtr<TextureDescriptor>& descriptor) = 0;
     virtual ResultOrError<Ref<TextureViewBase>> CreateTextureViewImpl(
@@ -568,6 +578,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
     raw_ptr<void, DanglingUntriaged> mUncapturedErrorUserdata = nullptr;
 
+    std::shared_mutex mLoggingMutex;
     wgpu::LoggingCallback mLoggingCallback = nullptr;
     // TODO(https://crbug.com/dawn/2349): Investigate DanglingUntriaged in dawn/native.
     raw_ptr<void, DanglingUntriaged> mLoggingUserdata = nullptr;
@@ -596,6 +607,7 @@ class DeviceBase : public RefCountedWithExternalCount {
 
     struct DeprecationWarnings;
     std::unique_ptr<DeprecationWarnings> mDeprecationWarnings;
+    uint32_t mEmittedCompilationLogCount = 0;
 
     absl::flat_hash_set<std::string> mWarnings;
 
@@ -619,7 +631,9 @@ class DeviceBase : public RefCountedWithExternalCount {
     Ref<CallbackTaskManager> mCallbackTaskManager;
     std::unique_ptr<dawn::platform::WorkerTaskPool> mWorkerTaskPool;
     std::string mLabel;
+
     CacheKey mDeviceCacheKey;
+    std::unique_ptr<BlobCache> mBlobCache;
 
     // We cache this toggle so that we can check it without locking the device.
     bool mIsImmediateErrorHandlingEnabled = false;

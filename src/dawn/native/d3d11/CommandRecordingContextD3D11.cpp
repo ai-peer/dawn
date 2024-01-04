@@ -30,6 +30,7 @@
 #include <string>
 #include <utility>
 
+#include "dawn/native/D3DBackend.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/BufferD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
@@ -50,14 +51,15 @@ Device* ScopedCommandRecordingContext::GetDevice() const {
     return Get()->mDevice.Get();
 }
 
-void ScopedCommandRecordingContext::UpdateSubresource(ID3D11Resource* pDstResource,
-                                                      UINT DstSubresource,
-                                                      const D3D11_BOX* pDstBox,
-                                                      const void* pSrcData,
-                                                      UINT SrcRowPitch,
-                                                      UINT SrcDepthPitch) const {
-    Get()->mD3D11DeviceContext4->UpdateSubresource(pDstResource, DstSubresource, pDstBox, pSrcData,
-                                                   SrcRowPitch, SrcDepthPitch);
+void ScopedCommandRecordingContext::UpdateSubresource1(ID3D11Resource* pDstResource,
+                                                       UINT DstSubresource,
+                                                       const D3D11_BOX* pDstBox,
+                                                       const void* pSrcData,
+                                                       UINT SrcRowPitch,
+                                                       UINT SrcDepthPitch,
+                                                       UINT CopyFlags) const {
+    Get()->mD3D11DeviceContext4->UpdateSubresource1(pDstResource, DstSubresource, pDstBox, pSrcData,
+                                                    SrcRowPitch, SrcDepthPitch, CopyFlags);
 }
 
 void ScopedCommandRecordingContext::CopyResource(ID3D11Resource* pDstResource,
@@ -124,6 +126,16 @@ MaybeError ScopedCommandRecordingContext::FlushUniformBuffer() const {
         DAWN_TRY(Get()->mUniformBuffer->Write(this, 0, Get()->mUniformBufferData.data(),
                                               Get()->mUniformBufferData.size() * sizeof(uint32_t)));
         Get()->mUniformBufferDirty = false;
+    }
+    return {};
+}
+
+MaybeError ScopedCommandRecordingContext::AcquireKeyedMutex(
+    ComPtr<IDXGIKeyedMutex> dxgikeyedMutex) const {
+    if (!Get()->mAcquiredKeyedMutexes.contains(dxgikeyedMutex)) {
+        DAWN_TRY(CheckHRESULT(dxgikeyedMutex->AcquireSync(d3d::kDXGIKeyedMutexAcquireKey, INFINITE),
+                              "Failed to acquire keyed mutex for external image"));
+        Get()->mAcquiredKeyedMutexes.emplace(std::move(dxgikeyedMutex));
     }
     return {};
 }
@@ -200,6 +212,27 @@ MaybeError CommandRecordingContext::Initialize(Device* device) {
     return {};
 }
 
+void CommandRecordingContext::Destroy() {
+    DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
+    mIsOpen = false;
+    mUniformBuffer = nullptr;
+    mDevice = nullptr;
+
+    if (mD3D11DeviceContext4) {
+        ID3D11Buffer* nullBuffer = nullptr;
+        mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+                                                   &nullBuffer);
+        mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
+                                                   &nullBuffer);
+    }
+
+    ReleaseKeyedMutexes();
+
+    mD3D11DeviceContextState = nullptr;
+    mD3D11DeviceContext4 = nullptr;
+    mD3D11Device = nullptr;
+}
+
 // static
 ResultOrError<Ref<BufferBase>> CommandRecordingContext::CreateInternalUniformBuffer(
     DeviceBase* device) {
@@ -228,21 +261,11 @@ void CommandRecordingContext::SetInternalUniformBuffer(Ref<BufferBase> uniformBu
                                                &bufferPtr);
 }
 
-void CommandRecordingContext::Release() {
-    if (mIsOpen) {
-        DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
-        mIsOpen = false;
-        mUniformBuffer = nullptr;
-        mDevice = nullptr;
-        ID3D11Buffer* nullBuffer = nullptr;
-        mD3D11DeviceContext4->VSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
-                                                   &nullBuffer);
-        mD3D11DeviceContext4->CSSetConstantBuffers(PipelineLayout::kReservedConstantBufferSlot, 1,
-                                                   &nullBuffer);
-        mD3D11DeviceContextState = nullptr;
-        mD3D11DeviceContext4 = nullptr;
-        mD3D11Device = nullptr;
+void CommandRecordingContext::ReleaseKeyedMutexes() {
+    for (auto& dxgikeyedMutex : mAcquiredKeyedMutexes) {
+        dxgikeyedMutex->ReleaseSync(d3d::kDXGIKeyedMutexAcquireKey);
     }
+    mAcquiredKeyedMutexes.clear();
 }
 
 }  // namespace dawn::native::d3d11

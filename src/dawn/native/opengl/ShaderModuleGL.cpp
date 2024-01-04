@@ -167,6 +167,8 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
     const OpenGLFunctions& gl,
     const ProgrammableStage& programmableStage,
     SingleShaderStage stage,
+    bool usesInstanceIndex,
+    bool usesFragDepth,
     CombinedSamplerInfo* combinedSamplers,
     const PipelineLayout* layout,
     bool* needsPlaceholderSampler,
@@ -206,7 +208,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
 
             // For buffer bindings that can be sharable across stages, we need to rename them to
             // avoid GL program link failures due to block naming issues.
-            if (bindingInfo.bindingType == BindingInfoType::Buffer &&
+            if (std::holds_alternative<BufferBindingInfo>(bindingInfo.bindingInfo) &&
                 stage != SingleShaderStage::Compute) {
                 req.bufferBindingVariables.emplace_back(bindingInfo.name);
             }
@@ -287,6 +289,17 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                                                           version.GetMajor(), version.GetMinor());
 
     req.tintOptions.disable_robustness = false;
+
+    if (usesInstanceIndex) {
+        req.tintOptions.first_instance_offset =
+            4 * PipelineLayout::PushConstantLocation::FirstInstance;
+    }
+
+    if (usesFragDepth) {
+        req.tintOptions.depth_range_offsets = {4 * PipelineLayout::PushConstantLocation::MinDepth,
+                                               4 * PipelineLayout::PushConstantLocation::MaxDepth};
+    }
+
     req.disableSymbolRenaming = GetDevice()->IsToggleEnabled(Toggle::DisableSymbolRenaming);
 
     req.interstageVariables = {};
@@ -418,12 +431,9 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                                        /* fullSubgroups */ {}));
             }
 
-            r.tintOptions.first_instance_offset =
-                4 * PipelineLayout::PushConstantLocation::FirstInstance;
-
             auto result = tint::glsl::writer::Generate(program, r.tintOptions, remappedEntryPoint);
             DAWN_INVALID_IF(result != tint::Success, "An error occurred while generating GLSL:\n%s",
-                            result.Failure().reason.str());
+                            result.Failure().reason.Str());
 
             return GLSLCompilation{{std::move(result->glsl)}};
         },

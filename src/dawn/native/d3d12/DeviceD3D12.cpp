@@ -338,11 +338,10 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
     OwnedCompilationMessages* compilationMessages) {
     return ShaderModule::Create(this, descriptor, parseResult, compilationMessages);
 }
-ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
-    Surface* surface,
-    SwapChainBase* previousSwapChain,
-    const SwapChainDescriptor* descriptor) {
-    return SwapChain::Create(this, surface, previousSwapChain, descriptor);
+ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(Surface* surface,
+                                                              SwapChainBase* previousSwapChain,
+                                                              const SurfaceConfiguration* config) {
+    return SwapChain::Create(this, surface, previousSwapChain, config);
 }
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(
     const UnpackedPtr<TextureDescriptor>& descriptor) {
@@ -453,10 +452,11 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
     DAWN_TRY_ASSIGN(
         commandContext,
         ToBackend(GetQueue())->GetPendingCommandContext(QueueBase::SubmitMode::Passive));
+
     Texture* texture = ToBackend(dst.texture.Get());
+    DAWN_TRY(texture->SynchronizeTextureBeforeUse());
 
     SubresourceRange range = GetSubresourcesAffectedByCopy(dst, copySizePixels);
-
     if (IsCompleteSubresourceCopiedTo(texture, copySizePixels, dst.mipLevel, dst.aspect)) {
         texture->SetIsSubresourceContentInitialized(true, range);
     } else {
@@ -469,7 +469,6 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
                                             commandContext->GetCommandList(),
                                             ToBackend(source)->GetD3D12Resource(), src.offset,
                                             src.bytesPerRow, src.rowsPerImage, dst, copySizePixels);
-
     return {};
 }
 
@@ -544,9 +543,12 @@ ResultOrError<std::unique_ptr<d3d::ExternalImageDXGIImpl>> Device::CreateExterna
 
 Ref<TextureBase> Device::CreateD3DExternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor,
                                                   ComPtr<IUnknown> d3dTexture,
+                                                  ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex,
                                                   std::vector<FenceAndSignalValue> waitFences,
                                                   bool isSwapChainTexture,
                                                   bool isInitialized) {
+    // TODO(sunnyps): Reintroduce keyed mutex support.
+    DAWN_ASSERT(dxgiKeyedMutex == nullptr);
     Ref<Texture> dawnTexture;
     if (ConsumedError(
             Texture::CreateExternalImage(this, descriptor, std::move(d3dTexture),

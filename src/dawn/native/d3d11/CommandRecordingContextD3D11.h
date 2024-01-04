@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include "absl/container/flat_hash_set.h"
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
@@ -55,15 +56,19 @@ class CommandRecordingContextGuard : public ::dawn::detail::Guard<Ctx, Traits> {
 
     CommandRecordingContextGuard(CommandRecordingContextGuard&& rhs) = default;
     CommandRecordingContextGuard(Ctx* ctx, typename Traits::MutexType& mutex) : Base(ctx, mutex) {
-        if (this->Get()->mD3D11Multithread) {
+        if (this->Get() && this->Get()->mD3D11Multithread) {
             this->Get()->mD3D11Multithread->Enter();
         }
     }
     ~CommandRecordingContextGuard() {
-        if (this->Get()->mD3D11Multithread) {
+        if (this->Get() && this->Get()->mD3D11Multithread) {
             this->Get()->mD3D11Multithread->Leave();
         }
     }
+
+    CommandRecordingContextGuard(const CommandRecordingContextGuard& other) = delete;
+    CommandRecordingContextGuard& operator=(const CommandRecordingContextGuard& other) = delete;
+    CommandRecordingContextGuard& operator=(CommandRecordingContextGuard&& other) = delete;
 };
 
 class CommandRecordingContext {
@@ -73,11 +78,12 @@ class CommandRecordingContext {
                                      ::dawn::detail::MutexProtectedTraits<CommandRecordingContext>>;
 
     MaybeError Initialize(Device* device);
+    void Destroy();
 
     static ResultOrError<Ref<BufferBase>> CreateInternalUniformBuffer(DeviceBase* device);
     void SetInternalUniformBuffer(Ref<BufferBase> uniformBuffer);
 
-    void Release();
+    void ReleaseKeyedMutexes();
 
   private:
     template <typename Ctx, typename Traits>
@@ -100,6 +106,8 @@ class CommandRecordingContext {
     std::array<uint32_t, kMaxNumBuiltinElements> mUniformBufferData;
     bool mUniformBufferDirty = true;
 
+    absl::flat_hash_set<ComPtr<IDXGIKeyedMutex>> mAcquiredKeyedMutexes;
+
     Ref<Device> mDevice;
 };
 
@@ -111,12 +119,13 @@ class ScopedCommandRecordingContext : public CommandRecordingContext::Guard {
     Device* GetDevice() const;
 
     // Wrapper method which don't depend on context state.
-    void UpdateSubresource(ID3D11Resource* pDstResource,
-                           UINT DstSubresource,
-                           const D3D11_BOX* pDstBox,
-                           const void* pSrcData,
-                           UINT SrcRowPitch,
-                           UINT SrcDepthPitch) const;
+    void UpdateSubresource1(ID3D11Resource* pDstResource,
+                            UINT DstSubresource,
+                            const D3D11_BOX* pDstBox,
+                            const void* pSrcData,
+                            UINT SrcRowPitch,
+                            UINT SrcDepthPitch,
+                            UINT CopyFlags) const;
     void CopyResource(ID3D11Resource* pDstResource, ID3D11Resource* pSrcResource) const;
     void CopySubresourceRegion(ID3D11Resource* pDstResource,
                                UINT DstSubresource,
@@ -144,6 +153,8 @@ class ScopedCommandRecordingContext : public CommandRecordingContext::Guard {
     // Write the built-in variable value to the uniform buffer.
     void WriteUniformBuffer(uint32_t offset, uint32_t element) const;
     MaybeError FlushUniformBuffer() const;
+
+    MaybeError AcquireKeyedMutex(ComPtr<IDXGIKeyedMutex> dxgikeyedMutex) const;
 };
 
 // For using ID3D11DeviceContext directly. It swaps and resets ID3DDeviceContextState of

@@ -91,7 +91,7 @@ void Queue::DestroyImpl() {
     mSharedFence = nullptr;
 
     mPendingCommands.Use([&](auto pendingCommands) {
-        pendingCommands->Release();
+        pendingCommands->Destroy();
         mPendingCommandsNeedSubmit.store(false, std::memory_order_release);
     });
 }
@@ -124,10 +124,14 @@ ScopedSwapStateCommandRecordingContext Queue::GetScopedSwapStatePendingCommandCo
 }
 
 MaybeError Queue::SubmitPendingCommands() {
-    if (!mPendingCommandsNeedSubmit.exchange(false, std::memory_order_acq_rel)) {
-        return {};
+    bool needsSubmit = mPendingCommands.Use([&](auto pendingCommands) {
+        pendingCommands->ReleaseKeyedMutexes();
+        return mPendingCommandsNeedSubmit.exchange(false, std::memory_order_acq_rel);
+    });
+    if (needsSubmit) {
+        return NextSerial();
     }
-    return NextSerial();
+    return {};
 }
 
 MaybeError Queue::SubmitImpl(uint32_t commandCount, CommandBufferBase* const* commands) {
@@ -181,7 +185,7 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
     SubresourceRange subresources = GetSubresourcesAffectedByCopy(textureCopy, writeSizePixel);
 
     Texture* texture = ToBackend(destination.texture);
-
+    DAWN_TRY(texture->SynchronizeTextureBeforeUse(&commandContext));
     return texture->Write(&commandContext, subresources, destination.origin, writeSizePixel,
                           static_cast<const uint8_t*>(data) + dataLayout.offset,
                           dataLayout.bytesPerRow, dataLayout.rowsPerImage);

@@ -108,15 +108,15 @@ deps = {
   # The //build, //tools/clang, and //tools/rust deps should all be updated
   # in unison, as there are dependencies between them.
   'build': {
-    'url': '{chromium_git}/chromium/src/build@df6338f68f66357d27ea7f0354d50216c8c74473',
+    'url': '{chromium_git}/chromium/src/build@c6118a585ff6b2ef9f9a3b180d57b3cbf79e1788',
     'condition': 'dawn_standalone',
   },
   'tools/clang': {
-    'url': '{chromium_git}/chromium/src/tools/clang@419fc5706504be3cc8d17cc61bdc6b45226927e9',
+    'url': '{chromium_git}/chromium/src/tools/clang@de6b303a8915c2610e6ff30f5e7c89b2c8e4e2af',
     'condition': 'dawn_standalone',
   },
   'tools/rust': {
-    'url': '{chromium_git}/chromium/src/tools/rust@c2a0e44aaa68e02826feea4a4e152bdd8b897266',
+    'url': '{chromium_git}/chromium/src/tools/rust@bcaf16e552b19d4f5d67636d8373c172a2cf8a1a',
     'condition': 'dawn_standalone and checkout_rust',
   },
   'tools/clang/dsymutil': {
@@ -172,17 +172,17 @@ deps = {
   },
 
   'third_party/angle': {
-    'url': '{chromium_git}/angle/angle@9318a143b05cd0878e466083b443cc48710b23b9',
+    'url': '{chromium_git}/angle/angle@6d4706bfb989e8e26ec6e4892b2d2f981a89e0c9',
     'condition': 'dawn_standalone',
   },
 
   'third_party/swiftshader': {
-    'url': '{swiftshader_git}/SwiftShader@d040a5bab638bf7c226235c95787ba6288bb6416',
+    'url': '{swiftshader_git}/SwiftShader@eb75201a4e0354a36d315dd01077092ec9aa2356',
     'condition': 'dawn_standalone',
   },
 
   'third_party/vulkan-deps': {
-    'url': '{chromium_git}/vulkan-deps@d5bd211b1d1fda484bf368e1f7989bf4cf4c171e',
+    'url': '{chromium_git}/vulkan-deps@16c7058465af46e49cd1e976d499c07b3eb46a2b',
     'condition': 'dawn_standalone',
   },
 
@@ -197,7 +197,7 @@ deps = {
   },
 
   'third_party/dxc': {
-    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@2c86b0a7b112e604381bb271a7dc1e2382c9e31b',
+    'url': '{chromium_git}/external/github.com/microsoft/DirectXShaderCompiler@df588beb485958a3ece128bfbeda5fb888e2dfce',
   },
 
   'third_party/dxheaders': {
@@ -216,7 +216,7 @@ deps = {
 
   # WebGPU CTS - not used directly by Dawn, only transitively by Chromium.
   'third_party/webgpu-cts': {
-    'url': '{chromium_git}/external/github.com/gpuweb/cts@334e3805cdd426361ac42618096250e5f4a91a8a',
+    'url': '{chromium_git}/external/github.com/gpuweb/cts@559c806e5bf504bd103bb7a7a6a30517c52e0c21',
     'condition': 'build_with_chromium',
   },
 
