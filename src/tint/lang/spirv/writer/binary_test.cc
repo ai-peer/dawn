@@ -41,7 +41,7 @@ struct BinaryTestCase {
     /// The element type to test.
     TestElementType type;
     /// The binary operation.
-    core::ir::BinaryOp op;
+    core::BinaryOp op;
     /// The expected SPIR-V instruction.
     std::string spirv_inst;
     /// The expected SPIR-V result type name.
@@ -82,48 +82,48 @@ TEST_P(Arithmetic_Bitwise, Vector) {
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_I32,
     Arithmetic_Bitwise,
-    testing::Values(
-        BinaryTestCase{kI32, core::ir::BinaryOp::kAdd, "OpIAdd", "int"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kSubtract, "OpISub", "int"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kMultiply, "OpIMul", "int"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kAnd, "OpBitwiseAnd", "int"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kOr, "OpBitwiseOr", "int"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kXor, "OpBitwiseXor", "int"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kShiftLeft, "OpShiftLeftLogical", "int"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kShiftRight, "OpShiftRightArithmetic", "int"}));
+    testing::Values(BinaryTestCase{kI32, core::BinaryOp::kAdd, "OpIAdd", "int"},
+                    BinaryTestCase{kI32, core::BinaryOp::kSubtract, "OpISub", "int"},
+                    BinaryTestCase{kI32, core::BinaryOp::kMultiply, "OpIMul", "int"},
+                    BinaryTestCase{kI32, core::BinaryOp::kAnd, "OpBitwiseAnd", "int"},
+                    BinaryTestCase{kI32, core::BinaryOp::kOr, "OpBitwiseOr", "int"},
+                    BinaryTestCase{kI32, core::BinaryOp::kXor, "OpBitwiseXor", "int"},
+                    BinaryTestCase{kI32, core::BinaryOp::kShiftLeft, "OpShiftLeftLogical", "int"},
+                    BinaryTestCase{kI32, core::BinaryOp::kShiftRight, "OpShiftRightArithmetic",
+                                   "int"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_U32,
     Arithmetic_Bitwise,
-    testing::Values(
-        BinaryTestCase{kU32, core::ir::BinaryOp::kAdd, "OpIAdd", "uint"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kSubtract, "OpISub", "uint"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kMultiply, "OpIMul", "uint"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kAnd, "OpBitwiseAnd", "uint"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kOr, "OpBitwiseOr", "uint"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kXor, "OpBitwiseXor", "uint"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kShiftLeft, "OpShiftLeftLogical", "uint"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kShiftRight, "OpShiftRightLogical", "uint"}));
+    testing::Values(BinaryTestCase{kU32, core::BinaryOp::kAdd, "OpIAdd", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kSubtract, "OpISub", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kMultiply, "OpIMul", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kAnd, "OpBitwiseAnd", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kOr, "OpBitwiseOr", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kXor, "OpBitwiseXor", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kShiftLeft, "OpShiftLeftLogical", "uint"},
+                    BinaryTestCase{kU32, core::BinaryOp::kShiftRight, "OpShiftRightLogical",
+                                   "uint"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_F32,
     Arithmetic_Bitwise,
-    testing::Values(BinaryTestCase{kF32, core::ir::BinaryOp::kAdd, "OpFAdd", "float"},
-                    BinaryTestCase{kF32, core::ir::BinaryOp::kSubtract, "OpFSub", "float"},
-                    BinaryTestCase{kF32, core::ir::BinaryOp::kMultiply, "OpFMul", "float"},
-                    BinaryTestCase{kF32, core::ir::BinaryOp::kDivide, "OpFDiv", "float"},
-                    BinaryTestCase{kF32, core::ir::BinaryOp::kModulo, "OpFRem", "float"}));
+    testing::Values(BinaryTestCase{kF32, core::BinaryOp::kAdd, "OpFAdd", "float"},
+                    BinaryTestCase{kF32, core::BinaryOp::kSubtract, "OpFSub", "float"},
+                    BinaryTestCase{kF32, core::BinaryOp::kMultiply, "OpFMul", "float"},
+                    BinaryTestCase{kF32, core::BinaryOp::kDivide, "OpFDiv", "float"},
+                    BinaryTestCase{kF32, core::BinaryOp::kModulo, "OpFRem", "float"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_F16,
     Arithmetic_Bitwise,
-    testing::Values(BinaryTestCase{kF16, core::ir::BinaryOp::kAdd, "OpFAdd", "half"},
-                    BinaryTestCase{kF16, core::ir::BinaryOp::kSubtract, "OpFSub", "half"},
-                    BinaryTestCase{kF16, core::ir::BinaryOp::kMultiply, "OpFMul", "half"},
-                    BinaryTestCase{kF16, core::ir::BinaryOp::kDivide, "OpFDiv", "half"},
-                    BinaryTestCase{kF16, core::ir::BinaryOp::kModulo, "OpFRem", "half"}));
+    testing::Values(BinaryTestCase{kF16, core::BinaryOp::kAdd, "OpFAdd", "half"},
+                    BinaryTestCase{kF16, core::BinaryOp::kSubtract, "OpFSub", "half"},
+                    BinaryTestCase{kF16, core::BinaryOp::kMultiply, "OpFMul", "half"},
+                    BinaryTestCase{kF16, core::BinaryOp::kDivide, "OpFDiv", "half"},
+                    BinaryTestCase{kF16, core::BinaryOp::kModulo, "OpFRem", "half"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_Bool,
     Arithmetic_Bitwise,
-    testing::Values(BinaryTestCase{kBool, core::ir::BinaryOp::kAnd, "OpLogicalAnd", "bool"},
-                    BinaryTestCase{kBool, core::ir::BinaryOp::kOr, "OpLogicalOr", "bool"}));
+    testing::Values(BinaryTestCase{kBool, core::BinaryOp::kAnd, "OpLogicalAnd", "bool"},
+                    BinaryTestCase{kBool, core::BinaryOp::kOr, "OpLogicalOr", "bool"}));
 
 TEST_F(SpirvWriterTest, Binary_ScalarTimesVector_F32) {
     auto* scalar = b.FunctionParam("scalar", ty.f32());
@@ -266,50 +266,47 @@ INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_I32,
     Comparison,
     testing::Values(
-        BinaryTestCase{kI32, core::ir::BinaryOp::kEqual, "OpIEqual", "bool"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kNotEqual, "OpINotEqual", "bool"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kGreaterThan, "OpSGreaterThan", "bool"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kGreaterThanEqual, "OpSGreaterThanEqual", "bool"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kLessThan, "OpSLessThan", "bool"},
-        BinaryTestCase{kI32, core::ir::BinaryOp::kLessThanEqual, "OpSLessThanEqual", "bool"}));
+        BinaryTestCase{kI32, core::BinaryOp::kEqual, "OpIEqual", "bool"},
+        BinaryTestCase{kI32, core::BinaryOp::kNotEqual, "OpINotEqual", "bool"},
+        BinaryTestCase{kI32, core::BinaryOp::kGreaterThan, "OpSGreaterThan", "bool"},
+        BinaryTestCase{kI32, core::BinaryOp::kGreaterThanEqual, "OpSGreaterThanEqual", "bool"},
+        BinaryTestCase{kI32, core::BinaryOp::kLessThan, "OpSLessThan", "bool"},
+        BinaryTestCase{kI32, core::BinaryOp::kLessThanEqual, "OpSLessThanEqual", "bool"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_U32,
     Comparison,
     testing::Values(
-        BinaryTestCase{kU32, core::ir::BinaryOp::kEqual, "OpIEqual", "bool"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kNotEqual, "OpINotEqual", "bool"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kGreaterThan, "OpUGreaterThan", "bool"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kGreaterThanEqual, "OpUGreaterThanEqual", "bool"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kLessThan, "OpULessThan", "bool"},
-        BinaryTestCase{kU32, core::ir::BinaryOp::kLessThanEqual, "OpULessThanEqual", "bool"}));
+        BinaryTestCase{kU32, core::BinaryOp::kEqual, "OpIEqual", "bool"},
+        BinaryTestCase{kU32, core::BinaryOp::kNotEqual, "OpINotEqual", "bool"},
+        BinaryTestCase{kU32, core::BinaryOp::kGreaterThan, "OpUGreaterThan", "bool"},
+        BinaryTestCase{kU32, core::BinaryOp::kGreaterThanEqual, "OpUGreaterThanEqual", "bool"},
+        BinaryTestCase{kU32, core::BinaryOp::kLessThan, "OpULessThan", "bool"},
+        BinaryTestCase{kU32, core::BinaryOp::kLessThanEqual, "OpULessThanEqual", "bool"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_F32,
     Comparison,
     testing::Values(
-        BinaryTestCase{kF32, core::ir::BinaryOp::kEqual, "OpFOrdEqual", "bool"},
-        BinaryTestCase{kF32, core::ir::BinaryOp::kNotEqual, "OpFOrdNotEqual", "bool"},
-        BinaryTestCase{kF32, core::ir::BinaryOp::kGreaterThan, "OpFOrdGreaterThan", "bool"},
-        BinaryTestCase{kF32, core::ir::BinaryOp::kGreaterThanEqual, "OpFOrdGreaterThanEqual",
-                       "bool"},
-        BinaryTestCase{kF32, core::ir::BinaryOp::kLessThan, "OpFOrdLessThan", "bool"},
-        BinaryTestCase{kF32, core::ir::BinaryOp::kLessThanEqual, "OpFOrdLessThanEqual", "bool"}));
+        BinaryTestCase{kF32, core::BinaryOp::kEqual, "OpFOrdEqual", "bool"},
+        BinaryTestCase{kF32, core::BinaryOp::kNotEqual, "OpFOrdNotEqual", "bool"},
+        BinaryTestCase{kF32, core::BinaryOp::kGreaterThan, "OpFOrdGreaterThan", "bool"},
+        BinaryTestCase{kF32, core::BinaryOp::kGreaterThanEqual, "OpFOrdGreaterThanEqual", "bool"},
+        BinaryTestCase{kF32, core::BinaryOp::kLessThan, "OpFOrdLessThan", "bool"},
+        BinaryTestCase{kF32, core::BinaryOp::kLessThanEqual, "OpFOrdLessThanEqual", "bool"}));
 INSTANTIATE_TEST_SUITE_P(
     SpirvWriterTest_Binary_F16,
     Comparison,
     testing::Values(
-        BinaryTestCase{kF16, core::ir::BinaryOp::kEqual, "OpFOrdEqual", "bool"},
-        BinaryTestCase{kF16, core::ir::BinaryOp::kNotEqual, "OpFOrdNotEqual", "bool"},
-        BinaryTestCase{kF16, core::ir::BinaryOp::kGreaterThan, "OpFOrdGreaterThan", "bool"},
-        BinaryTestCase{kF16, core::ir::BinaryOp::kGreaterThanEqual, "OpFOrdGreaterThanEqual",
-                       "bool"},
-        BinaryTestCase{kF16, core::ir::BinaryOp::kLessThan, "OpFOrdLessThan", "bool"},
-        BinaryTestCase{kF16, core::ir::BinaryOp::kLessThanEqual, "OpFOrdLessThanEqual", "bool"}));
-INSTANTIATE_TEST_SUITE_P(SpirvWriterTest_Binary_Bool,
-                         Comparison,
-                         testing::Values(BinaryTestCase{kBool, core::ir::BinaryOp::kEqual,
-                                                        "OpLogicalEqual", "bool"},
-                                         BinaryTestCase{kBool, core::ir::BinaryOp::kNotEqual,
-                                                        "OpLogicalNotEqual", "bool"}));
+        BinaryTestCase{kF16, core::BinaryOp::kEqual, "OpFOrdEqual", "bool"},
+        BinaryTestCase{kF16, core::BinaryOp::kNotEqual, "OpFOrdNotEqual", "bool"},
+        BinaryTestCase{kF16, core::BinaryOp::kGreaterThan, "OpFOrdGreaterThan", "bool"},
+        BinaryTestCase{kF16, core::BinaryOp::kGreaterThanEqual, "OpFOrdGreaterThanEqual", "bool"},
+        BinaryTestCase{kF16, core::BinaryOp::kLessThan, "OpFOrdLessThan", "bool"},
+        BinaryTestCase{kF16, core::BinaryOp::kLessThanEqual, "OpFOrdLessThanEqual", "bool"}));
+INSTANTIATE_TEST_SUITE_P(
+    SpirvWriterTest_Binary_Bool,
+    Comparison,
+    testing::Values(BinaryTestCase{kBool, core::BinaryOp::kEqual, "OpLogicalEqual", "bool"},
+                    BinaryTestCase{kBool, core::BinaryOp::kNotEqual, "OpLogicalNotEqual", "bool"}));
 
 TEST_F(SpirvWriterTest, Binary_Chain) {
     auto* func = b.Function("foo", ty.void_());
@@ -334,7 +331,7 @@ TEST_F(SpirvWriterTest, Divide_u32_u32) {
     auto* func = b.Function("foo", ty.u32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kDivide, ty.u32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty.u32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -370,7 +367,7 @@ TEST_F(SpirvWriterTest, Divide_i32_i32) {
     auto* func = b.Function("foo", ty.i32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kDivide, ty.i32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty.i32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -410,7 +407,7 @@ TEST_F(SpirvWriterTest, Divide_i32_vec4i) {
     auto* func = b.Function("foo", ty.vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kDivide, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty.vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -452,7 +449,7 @@ TEST_F(SpirvWriterTest, Divide_vec4i_i32) {
     auto* func = b.Function("foo", ty.vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kDivide, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kDivide, ty.vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -494,7 +491,7 @@ TEST_F(SpirvWriterTest, Modulo_u32_u32) {
     auto* func = b.Function("foo", ty.u32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kModulo, ty.u32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty.u32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -532,7 +529,7 @@ TEST_F(SpirvWriterTest, Modulo_i32_i32) {
     auto* func = b.Function("foo", ty.i32());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kModulo, ty.i32(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty.i32(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -574,7 +571,7 @@ TEST_F(SpirvWriterTest, Modulo_i32_vec4i) {
     auto* func = b.Function("foo", ty.vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kModulo, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty.vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
@@ -618,7 +615,7 @@ TEST_F(SpirvWriterTest, Modulo_vec4i_i32) {
     auto* func = b.Function("foo", ty.vec4<i32>());
     func->SetParams(args);
     b.Append(func->Block(), [&] {
-        auto* result = b.Binary(core::ir::BinaryOp::kModulo, ty.vec4<i32>(), args[0], args[1]);
+        auto* result = b.Binary(core::BinaryOp::kModulo, ty.vec4<i32>(), args[0], args[1]);
         b.Return(func, result);
         mod.SetName(result, "result");
     });
