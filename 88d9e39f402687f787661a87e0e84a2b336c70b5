@@ -199,6 +199,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "64d9d305_ad8f8fba",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-04T15:02:40Z",
+      "side": 1,
+      "message": "Isn\u0027t the ticket that the files are not found correctly, not necessarily changing to `PROJECT_SOURCE_DIR`?",
+      "parentUuid": "8f9b7121_37196b87",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f721297d_70a908cc",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 1
