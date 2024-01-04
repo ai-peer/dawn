@@ -258,7 +258,7 @@ ResultOrError<Ref<ShaderModuleBase>> Device::CreateShaderModuleImpl(
 ResultOrError<Ref<SwapChainBase>> Device::CreateSwapChainImpl(
     Surface* surface,
     SwapChainBase* previousSwapChain,
-    const SwapChainDescriptor* descriptor) {
+    const SurfaceConfiguration* config) {
     return DAWN_VALIDATION_ERROR("New swapchains not implemented.");
 }
 ResultOrError<Ref<TextureBase>> Device::CreateTextureImpl(

@@ -227,6 +227,8 @@
             "QueueOnSubmittedWorkDoneF",
             "QueueWriteBuffer",
             "QueueWriteTexture",
+            "SurfaceGetCapabilities",
+            "SurfaceGetPreferredFormat",
             "TextureGetWidth",
             "TextureGetHeight",
             "TextureGetDepthOrArrayLayers",
@@ -246,6 +248,8 @@
             "DeviceInjectError",
             "InstanceProcessEvents",
             "InstanceWaitAny",
+            "SurfaceConfigure",
+            "SurfaceGetCurrentTexture",
             "SwapChainGetCurrentTexture"
         ],
         "client_special_objects": [
@@ -256,6 +260,8 @@
             "QuerySet",
             "Queue",
             "ShaderModule",
+            "Surface",
+            "SurfaceCapabilities",
             "SwapChain",
             "Texture"
         ],
