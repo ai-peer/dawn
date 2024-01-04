@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,38 +25,36 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
-#define SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
+#ifndef SRC_DAWN_WIRE_CLIENT_SURFACE_H_
+#define SRC_DAWN_WIRE_CLIENT_SURFACE_H_
 
-#include "dawn/native/PhysicalDevice.h"
-#include "partition_alloc/pointers/raw_ptr.h"
+#include "dawn/webgpu.h"
 
-#include "dawn/native/d3d/d3d_platform.h"
+#include "dawn/wire/client/ObjectBase.h"
 
-namespace dawn::native::d3d {
+namespace dawn::wire::client {
 
-class Backend;
+class Device;
 
-class PhysicalDevice : public PhysicalDeviceBase {
+class Surface final : public ObjectBase {
   public:
-    PhysicalDevice(Backend* backend,
-                   ComPtr<IDXGIAdapter3> hardwareAdapter,
-                   wgpu::BackendType backendType);
-    ~PhysicalDevice() override;
+    Surface(const ObjectBaseParams& params);
+    ~Surface() override;
 
-    IDXGIAdapter3* GetHardwareAdapter() const;
-    Backend* GetBackend() const;
+    void Configure(WGPUSurfaceConfiguration const* config);
 
-    ResultOrError<AdapterSurfaceCapabilities> GetSurfaceCapabilities(const Surface* surface) const override;
+    WGPUTextureFormat GetPreferredFormat(WGPUAdapter adapter) const;
 
-  protected:
-    MaybeError InitializeImpl() override;
+    void GetCapabilities(WGPUAdapter adapter, WGPUSurfaceCapabilities* capabilities) const;
 
-  private:
-    ComPtr<IDXGIAdapter3> mHardwareAdapter;
-    raw_ptr<Backend> mBackend;
+    void GetCurrentTexture(WGPUSurfaceTexture* surfaceTexture);
+
+private:
+    WGPUTextureDescriptor mTextureDescriptor;
 };
 
-}  // namespace dawn::native::d3d
+void ClientSurfaceCapabilitiesFreeMembers(WGPUSurfaceCapabilities capabilities);
 
-#endif  // SRC_DAWN_NATIVE_D3D_PHYSICALDEVICED3D_H_
+}  // namespace dawn::wire::client
+
+#endif  // SRC_DAWN_WIRE_CLIENT_SURFACE_H_
