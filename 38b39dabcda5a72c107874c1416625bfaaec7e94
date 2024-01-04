@@ -1,0 +1,157 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "385b1333_0b06bc03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "Nice progress :D",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f276562_4c5707ae",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1923,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "I don\u0027t think that we need to do this here, because the Surface::Configure already does it? Likewise we should probably check that the device is alive in the validation for Surface::Configure.",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "648c680d_80e43d1c",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "nit: could be a TODO: Remove after deprecation of ...",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf74ad79_70d5c972",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "Either name works IMHO",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38ac486d_a2b9f449",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "nit: this can be `return f(mCachedCapabilities);`",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d95aeec4_9671ee3d",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "Mmmmh I wonder if this should be a weakref. Or a serial for the adapter creation. Otherwise technically we could free the adapter and recreate a new one with exactly the same address.",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c54a7e5_f2571494",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "Note that we don\u0027t care about OOM because in most cases it just crashes the process. So this function could be:\n\n```\napiSize \u003d vector.size();\nif (apiSize \u003d\u003d 0) {\n  return;\n}\n\napiData \u003d new T[apiSize];\nmemcpy(apiData, vector.data(), apiSize * sizeof(T));\n```",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b7f6053c_a53039a8",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "nit: delete should already be doing a null check.",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "50e8945a_0e8c5f21",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-04T11:46:00Z",
+      "side": 1,
+      "message": "The mutable keyword is no longer needed I believe.",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
