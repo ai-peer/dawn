@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e71bf4de_10832fea",
+        "filename": "src/tint/lang/wgsl/ir/unary.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-04T22:04:54Z",
+      "side": 1,
+      "message": "I\u0027m not sure I understand how different dialects are going to have different sets of unary ops when they all use the same enum. Does `core::UnaryOp` have to include all the possible operators that every dialect might need?",
+      "range": {
+        "startLine": 48,
+        "startChar": 47,
+        "endLine": 48,
+        "endChar": 63
+      },
+      "revId": "f3cc00255292f62d0d14d17c7b1f31050ef75eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
