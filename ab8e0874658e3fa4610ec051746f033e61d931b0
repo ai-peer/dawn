@@ -198,6 +198,30 @@
       },
       "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85b70592_c97764a1",
+        "filename": "src/dawn/tests/unittests/EnumClassBitmasksTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-04T00:33:53Z",
+      "side": 1,
+      "message": "After writing that out I realized it didn\u0027t make any sense (you CAN name things in anonymous namespaces, of course) and went and tried again, and it worked. I must have done something wrong when I tried this before.\n\nI will both do that and add a comment.",
+      "parentUuid": "615edc82_4cf5adb0",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
