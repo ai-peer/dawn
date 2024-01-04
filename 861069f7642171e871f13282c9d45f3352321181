@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc7ce8d_df1747fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-04T15:23:03Z",
+      "side": 1,
+      "message": "I personally find the `shift*` versions a lot easier to read quickly the `sh*`. Curious to hear James\u0027s opinion.",
+      "revId": "861069f7642171e871f13282c9d45f3352321181",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
