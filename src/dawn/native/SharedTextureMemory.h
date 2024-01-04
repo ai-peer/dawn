@@ -30,6 +30,7 @@
 
 #include <map>
 #include <stack>
+#include <vector>
 
 #include "dawn/common/StackContainer.h"
 #include "dawn/common/WeakRef.h"
@@ -97,14 +98,17 @@ class SharedTextureMemoryBase : public ApiObjectBase,
 
     SharedTextureMemoryProperties mProperties;
 
-    Ref<TextureBase> mCurrentAccess;
+    bool mHasWriteAccess = false;
+    size_t mReadAccessCount = 0;
 
   private:
     virtual Ref<SharedTextureMemoryContents> CreateContents();
 
     ResultOrError<Ref<TextureBase>> CreateTexture(const TextureDescriptor* rawDescriptor);
-    MaybeError BeginAccess(TextureBase* texture, const BeginAccessDescriptor* rawDescriptor);
-    MaybeError EndAccess(TextureBase* texture, EndAccessState* state);
+    MaybeError BeginAccess(TextureBase* texture,
+                           const BeginAccessDescriptor* rawDescriptor,
+                           bool* didBegin);
+    MaybeError EndAccess(TextureBase* texture, EndAccessState* state, bool* didEnd);
     ResultOrError<FenceAndSignalValue> EndAccessInternal(TextureBase* texture,
                                                          EndAccessState* rawState);
 
