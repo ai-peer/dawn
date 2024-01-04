@@ -301,13 +301,13 @@ crbug.com/a/123 a:b,c:d:* [ Failure ]
 			updated: `# A comment
 
 ################################################################################
-# New flakes. Please triage:
+# New flakes. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 suite:dir_a,dir_b:test_c:case=5;* [ RetryOnFailure ]
 crbug.com/dawn/0000 suite:dir_a,dir_b:test_c:case=6;* [ RetryOnFailure ]
 
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 suite:dir_a,dir_b:test_a:* [ Failure ]
 crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_b:* [ Slow ]
@@ -346,7 +346,7 @@ crbug.com/dawn/0000 suite:dir_a,dir_b:test_c:case=4;* [ Failure ]
 			},
 			updated: `
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 [ gpu-a ] a:* [ Failure ]
 crbug.com/dawn/0000 [ gpu-b ] a:* [ Failure ]
@@ -376,7 +376,7 @@ crbug.com/dawn/0000 [ os-b ] a:* [ Failure ]
 			},
 			updated: `
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 [ gpu-c os-b ] a:* [ Failure ]
 crbug.com/dawn/0000 [ gpu-b os-c ] a:* [ Failure ]
@@ -399,7 +399,7 @@ crbug.com/dawn/0000 [ gpu-b os-c ] a:* [ Failure ]
 			},
 			updated: `
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 a:* [ Failure ]
 `,
@@ -421,7 +421,7 @@ crbug.com/dawn/0000 a:* [ Failure ]
 			},
 			updated: `
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 a:b,c:0:* [ Failure ]
 crbug.com/dawn/0000 a:b,c:2:* [ Failure ]
@@ -467,7 +467,7 @@ crbug.com/dawn/0000 a:b,c:8:* [ Failure ]
 			},
 			updated: `
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 a:* [ Failure ]
 `,
@@ -509,7 +509,7 @@ crbug.com/dawn/0000 a:* [ Failure ]
 			},
 			updated: `
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 a:b,c:00:* [ Failure ]
 crbug.com/dawn/0000 a:b,c:05:* [ Failure ]

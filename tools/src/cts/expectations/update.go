@@ -199,9 +199,9 @@ const (
 	// expectation.
 	consumed result.Status = "<<consumed>>"
 	// Chunk comment for new flakes
-	newFlakesComment = "# New flakes. Please triage:"
+	newFlakesComment = "# New flakes. Please triage - these expectations may be removed automatically by the next roll:"
 	// Chunk comment for new failures
-	newFailuresComment = "# New failures. Please triage:"
+	newFailuresComment = "# New failures. Please triage - these expectations may be removed automatically by the next roll:"
 )
 
 // queryTree holds tree of queries to all results (no filtering by tag or

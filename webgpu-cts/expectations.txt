@@ -702,7 +702,7 @@ crbug.com/tint/2057 [ intel-0x9bc5 webgpu-dxc-enabled win10 ] webgpu:shader,exec
 crbug.com/dawn/2269 webgpu:api,validation,capability_checks,features,query_types:timestamp:featureContainsTimestampQuery=true [ Failure ]
 
 ################################################################################
-# New flakes. Please triage:
+# New flakes. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:api,operation,compute_pipeline,overrides:workgroup_size:isAsync=false;type="i32";size=3;v="z" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ apple-angle-metal-renderer:-apple-m2 dawn-backend-validation target-cpu-64 ventura webgpu-adapter-default ] webgpu:api,operation,compute_pipeline,overrides:workgroup_size:isAsync=true;type="i32";size=3;v="z" [ RetryOnFailure ]
@@ -748,7 +748,7 @@ crbug.com/dawn/0000 [ dawn-backend-validation intel-0x3e9b webgpu-adapter-defaul
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x9bc5 ubuntu webgpu-adapter-default ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:* [ RetryOnFailure ]
 
 ################################################################################
-# New failures. Please triage:
+# New failures. Please triage - these expectations may be removed automatically by the next roll:
 ################################################################################
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x9bc5 target-cpu-64 ubuntu webgpu-adapter-default ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,compressed,non_array:* [ Failure ]
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x9bc5 target-cpu-64 ubuntu webgpu-adapter-default ] webgpu:api,operation,command_buffer,image_copy:mip_levels:* [ Failure ]
