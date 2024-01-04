@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "deeb724a_10563363",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-04T11:40:50Z",
+      "side": 1,
+      "message": "lgtm with nits",
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "78aa9376_1010bf96",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-04T11:40:50Z",
+      "side": 1,
+      "message": "nit: `const Ref\u003cSharedFence\u003e\u0026` ?",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 20
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a88a98f_b23a305f",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-04T11:40:50Z",
+      "side": 1,
+      "message": "A suggestion: how about put this SharedFence in Queue and also add `d3d::SharedFence::Signal()`, `d3d::SharedFence::GetCompletedValue()`, `d3d::SharedFence::Wait(value)`, etc?",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e68b2eb_efcf34ca",
+        "filename": "src/dawn/native/d3d11/SharedFenceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-04T11:40:50Z",
+      "side": 1,
+      "message": "nit: `ownedHandle` is not necessary for this method. It can create the handle from d3d11Fence here?",
+      "range": {
+        "startLine": 58,
+        "startChar": 52,
+        "endLine": 58,
+        "endChar": 76
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1f4997d0_704e5371",
+        "filename": "src/dawn/native/d3d12/SharedFenceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-04T11:40:50Z",
+      "side": 1,
+      "message": "nit: same here.",
+      "range": {
+        "startLine": 58,
+        "startChar": 65,
+        "endLine": 58,
+        "endChar": 76
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
