@@ -150,6 +150,30 @@
       },
       "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a0b2a052_7e978f33",
+        "filename": "src/dawn/tests/unittests/EnumClassBitmasksTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-04T00:13:42Z",
+      "side": 1,
+      "message": "If the name isn\u0027t important can\u0027t we just use an anonymous namespace?",
+      "parentUuid": "0b5e4c14_d3de0142",
+      "range": {
+        "startLine": 32,
+        "startChar": 10,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "ab8e0874658e3fa4610ec051746f033e61d931b0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
