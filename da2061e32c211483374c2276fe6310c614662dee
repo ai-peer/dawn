@@ -18,6 +18,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7ab8f06_d9d771a8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T22:05:14Z",
+      "side": 1,
+      "message": "LGTM, and nice code reduction on the callback stuff",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6305e13f_316cbc2b",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T22:05:14Z",
+      "side": 1,
+      "message": "nit: I think we usually define `std::hash` for a type, would that work here? Example:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/HashUtils.h;l\u003d108;drc\u003dcc2516ac15ebeb6c3c07a427a76d6b57832d3154",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8768450_d82a14e4",
@@ -31,6 +65,74 @@
       "writtenOn": "2024-01-05T15:11:03Z",
       "side": 1,
       "message": "it\u0027s worth also explaining that we can\u0027t store it on the instance because spontaneous mode callbacks should outlive the instance.\n\nWe also can\u0027t use ObjectStore for the EventManagers because we still need the old instance (id, generation) pairs to be tracked. (took my a while to see this while reviewing)",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3066dcc7_d79f18dc",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T22:05:14Z",
+      "side": 1,
+      "message": "nit: prefer not to use a default when we can just as easily exhaustively list the cases. Alternatively,\n```\nif (mState \u003d\u003d State::ClientDropped ||\n    (mState \u003d\u003d State::InstanceDropped \u0026\u0026 event-\u003eGetCallbackMode() !\u003d WGPUCallbackMode_AllowSpontaneous)) {\n    event-\u003eComplete(futureID, EventCompletionType::Shutdown);\n    return {futureID, false};\n}\n```",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cba2057_de65db37",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T22:05:14Z",
+      "side": 1,
+      "message": "nit: `mState \u003d state` at the end (after the switch) would be more intuitive IMO",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76f4a076_7d0167de",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T22:05:14Z",
+      "side": 1,
+      "message": "nit: IIUC this code looks like basically an optimized/specialized version of the code in the other `case`. But there\u0027s no need to optimize this so maybe we can deduplicate and just use the other logic?\n\nAlternatively maybe just the first half of the `while` body could be branched:\n\n```\nwhile (true) {\n    std::map\u003c...\u003e eventsToCompleteNow\n    switch () {}\n    if (eventsToCompleteNow.empty()) break;\n    for ( ... : eventsToCompleteNow) {}\n}\n```",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40d9a066_c5cc7fa4",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T22:05:14Z",
+      "side": 1,
+      "message": "same as above",
       "revId": "da2061e32c211483374c2276fe6310c614662dee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
