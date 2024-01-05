@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73727b51_35a92a4b",
+        "filename": "generator/dawn_json_generator.py",
+        "patchSetId": 5
+      },
+      "lineNbr": 215,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T20:30:08Z",
+      "side": 1,
+      "message": "Had to move this back to a property because it\u0027s co-recursive with any_member_requires_struct_defaulting. Otherwise it tries to read that property before it\u0027s sufficiently initialized.",
+      "revId": "96049adb5ec20bbdea355a2c64bae88e4b4abe54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "399ab483_b0ff1d49",
+        "filename": "generator/templates/dawn/native/api_structs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T20:30:08Z",
+      "side": 1,
+      "message": "The struct is copied member by member, instead of first doing a whole-struct copy then overwriting the defaulted fields, because otherwise we end up overwriting a lot of stuff. I am guessing RVO will make the recursion efficient here so even with recursion it shouldn\u0027t make any unnecessary copies.\n\nI am pretty sure these are all of the extra members that need to be copied, but it\u0027s a little tricky because of the inheritance.",
+      "revId": "96049adb5ec20bbdea355a2c64bae88e4b4abe54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
