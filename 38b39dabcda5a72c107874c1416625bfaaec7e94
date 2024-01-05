@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e29fbec_92172ffb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "Remaining:\n - Testing\n - Wire",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f276562_4c5707ae",
@@ -35,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f3e2827_a9d1e219",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1923,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f276562_4c5707ae",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "648c680d_80e43d1c",
@@ -48,6 +83,24 @@
       "writtenOn": "2024-01-04T11:46:00Z",
       "side": 1,
       "message": "nit: could be a TODO: Remove after deprecation of ...",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "19ed5239_9a4be279",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 300,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "648c680d_80e43d1c",
       "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +139,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "540d7288_bfb2c965",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 243,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "38ac486d_a2b9f449",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d95aeec4_9671ee3d",
@@ -99,6 +170,24 @@
       "writtenOn": "2024-01-04T11:46:00Z",
       "side": 1,
       "message": "Mmmmh I wonder if this should be a weakref. Or a serial for the adapter creation. Otherwise technically we could free the adapter and recreate a new one with exactly the same address.",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc2d142d_b5baf7e4",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "I agree with the weak ref! So I add the WeakRefSupport trait to AdapterBase right?",
+      "parentUuid": "d95aeec4_9671ee3d",
       "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +209,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8702a0fe_c42c2866",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 471,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "Ok I removed the DAWN_INVALID_IF check but I\u0027ll keep the apiData \u003d nullptr in case apiSize \u003d\u003d 0 to avoid calling dalate[] on a non null pointer when freeing",
+      "parentUuid": "7c54a7e5_f2571494",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b7f6053c_a53039a8",
@@ -137,6 +244,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b569ee25_8baba573",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 483,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b7f6053c_a53039a8",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "50e8945a_0e8c5f21",
@@ -150,6 +275,24 @@
       "writtenOn": "2024-01-04T11:46:00Z",
       "side": 1,
       "message": "The mutable keyword is no longer needed I believe.",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9384f42e_ab231ac9",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-05T22:44:58Z",
+      "side": 1,
+      "message": "Indeed",
+      "parentUuid": "50e8945a_0e8c5f21",
       "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
