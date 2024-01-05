@@ -16,6 +16,57 @@
       "message": "PTAL.",
       "revId": "234c5b18dc79c5db4ac675f6e7cafcea5512f80c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "60a546b0_a378697f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:38:07Z",
+      "side": 1,
+      "message": "Would be good to split this into a framework CL and another for the fuzzer. Just in case we need to revert the fuzzer.",
+      "revId": "234c5b18dc79c5db4ac675f6e7cafcea5512f80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab4e7562_86f6f46a",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:38:07Z",
+      "side": 1,
+      "message": "Please add a test.",
+      "revId": "234c5b18dc79c5db4ac675f6e7cafcea5512f80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d9177d55_fc63f707",
+        "filename": "src/tint/utils/templates/enums.tmpl.inc",
+        "patchSetId": 7
+      },
+      "lineNbr": 36,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:38:07Z",
+      "side": 1,
+      "message": "übernit: please double newline between these blocks. The density hurts my fragile eyes.",
+      "revId": "234c5b18dc79c5db4ac675f6e7cafcea5512f80c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

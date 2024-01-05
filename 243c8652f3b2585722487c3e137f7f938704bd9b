@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6e8ee3c1_a4e59eff",
+        "filename": "src/tint/lang/hlsl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:38:07Z",
+      "side": 1,
+      "message": "rm",
+      "revId": "243c8652f3b2585722487c3e137f7f938704bd9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
