@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "26641c9e_1885ab20",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-05T05:27:34Z",
+      "side": 1,
+      "message": "Hi all,\n\nThis CL can fix all the gn check failures Ben mentioned in https://dawn-review.googlesource.com/c/dawn/+/167121.\n\nPTAL, thanks!",
+      "revId": "7167cc9c8bbf81bc7fe2c2a58be44088538de538",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
