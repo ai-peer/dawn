@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ed66505_8b593877",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-05T10:40:21Z",
+      "side": 1,
+      "message": "LGTM, though I\u0027m wondering if we could have a blanket boolean to disable all polyfills that are just for UB.",
+      "revId": "343a67d335b50324257914f34c1c43c983a2ee8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
