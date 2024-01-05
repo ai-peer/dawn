@@ -82,10 +82,14 @@ class Texture final : public TextureBase {
     NSRef<MTLTextureDescriptor> CreateMetalTextureDescriptor() const;
 
     MaybeError InitializeAsInternalTexture(const UnpackedPtr<TextureDescriptor>& descriptor);
+    // If `mtlUsage` is not `MTLTextureUsageUnknown`, it will be set as the
+    // usage of the MTLTexture created to back this Texture. Otherwise, the
+    // usage of the MTLTexture will be computed from `textureDescriptor`.
     MaybeError InitializeFromIOSurface(const ExternalImageDescriptor* descriptor,
                                        const UnpackedPtr<TextureDescriptor>& textureDescriptor,
                                        IOSurfaceRef ioSurface,
-                                       std::vector<MTLSharedEventAndSignalValue> waitEvents);
+                                       std::vector<MTLSharedEventAndSignalValue> waitEvents,
+                                       MTLTextureUsage mtlUsage = MTLTextureUsageUnknown);
     void InitializeAsWrapping(const UnpackedPtr<TextureDescriptor>& descriptor,
                               NSPRef<id<MTLTexture>> wrapped);
 

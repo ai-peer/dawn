@@ -48,6 +48,10 @@ namespace dawn::native::metal {
 
 namespace {
 
+const MTLTextureUsage kAllMtlTextureUsages =
+    MTLTextureUsageShaderWrite | MTLTextureUsageShaderRead | MTLTextureUsagePixelFormatView |
+    MTLTextureUsageRenderTarget;
+
 MTLTextureUsage MetalTextureUsage(const Format& format, wgpu::TextureUsage usage) {
     MTLTextureUsage result = MTLTextureUsageUnknown;  // This is 0
 
@@ -737,8 +741,11 @@ ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
 
     Device* device = ToBackend(memory->GetDevice());
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor));
+    // When creating MTLTextures for usage by SharedTextureMemory, we always
+    // specify all usages on the MTLTexture. This will facilitate a pending
+    // change to cache the MTLTexture for reuse across different Textures.
     DAWN_TRY(texture->InitializeFromIOSurface(&ioSurfaceImageDesc, descriptor,
-                                              memory->GetIOSurface(), {}));
+                                              memory->GetIOSurface(), {}, kAllMtlTextureUsages));
     texture->mSharedTextureMemoryContents = memory->GetContents();
     return texture;
 }
@@ -783,7 +790,8 @@ void Texture::InitializeAsWrapping(const UnpackedPtr<TextureDescriptor>& descrip
 MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descriptor,
                                             const UnpackedPtr<TextureDescriptor>& textureDescriptor,
                                             IOSurfaceRef ioSurface,
-                                            std::vector<MTLSharedEventAndSignalValue> waitEvents) {
+                                            std::vector<MTLSharedEventAndSignalValue> waitEvents,
+                                            MTLTextureUsage mtlUsage /*=0*/) {
     DAWN_INVALID_IF(
         GetInternalUsage() & wgpu::TextureUsage::TransientAttachment,
         "Usage flags (%s) include %s, which is not compatible with creation from IOSurface.",
@@ -800,7 +808,7 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
         NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
         [*mtlDesc setStorageMode:kIOSurfaceStorageMode];
 
-        mMtlUsage = [*mtlDesc usage];
+        mMtlUsage = mtlUsage == MTLTextureUsageUnknown ? [*mtlDesc usage] : mtlUsage;
         mMtlFormat = [*mtlDesc pixelFormat];
         mMtlPlaneTextures->resize(1);
         mMtlPlaneTextures[0] =
@@ -808,7 +816,9 @@ MaybeError Texture::InitializeFromIOSurface(const ExternalImageDescriptor* descr
                                                                  iosurface:ioSurface
                                                                      plane:0]);
     } else {
-        mMtlUsage = MetalTextureUsage(GetFormat(), GetInternalUsage());
+        mMtlUsage = mtlUsage == MTLTextureUsageUnknown
+                        ? MetalTextureUsage(GetFormat(), GetInternalUsage())
+                        : mtlUsage;
         // Multiplanar format doesn't have equivalent MTLPixelFormat so just set it to invalid.
         mMtlFormat = MTLPixelFormatInvalid;
         const size_t numPlanes = IOSurfaceGetPlaneCount(GetIOSurface());
