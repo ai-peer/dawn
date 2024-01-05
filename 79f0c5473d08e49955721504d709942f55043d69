@@ -72,6 +72,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14e65935_fdecda78",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-05T12:40:58Z",
+      "side": 1,
+      "message": "+1 I don\u0027t think we can expect this test to run successfully and not eventually cause machines to hang up for the reason that Austin described. Windows is the only OS with a TDR mechanisms, but given Yuly\u0027s comment we can\u0027t even test there :/",
+      "parentUuid": "8ae8b2b0_a2c8960a",
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8599b611_8312526f",
