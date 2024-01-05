@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c20500e_7cf9e501",
+        "filename": "generator/templates/dawn/native/api_structs.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T04:47:16Z",
+      "side": 1,
+      "message": "Maybe not great to make a copy of the whole struct and then re-copy any that have defaulting.\nCould copy field-by-field instead.\n\nHave tried this in the next patchset.",
+      "revId": "d6bd1ec091edb22e4698d2f8ad347ba356850c69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
