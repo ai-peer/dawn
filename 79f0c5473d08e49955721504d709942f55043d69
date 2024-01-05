@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9aff7a64_dc401422",
+        "filename": "src/dawn/tests/end2end/ComputeInfiniteLoopTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 29,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-05T15:24:35Z",
+      "side": 1,
+      "message": "Good catch.  It was used at one point. \nRemoved now.",
+      "parentUuid": "8599b611_8312526f",
+      "range": {
+        "startLine": 29,
+        "startChar": 9,
+        "endLine": 29,
+        "endChar": 20
+      },
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "787f7337_29bd6909",
@@ -126,6 +150,30 @@
       "writtenOn": "2024-01-04T21:44:36Z",
       "side": 1,
       "message": "Note: all of these [are banned in the Chromium C++ style guide](https://chromium.googlesource.com/chromium/src/+/main/styleguide/c++/c++-features.md#modern-c_use-in-chromium).\nTint violates a bunch of these rules, but usually for code that\u0027s not built and run on Chromium CQ infra. Hopefully this won\u0027t trigger alarms.",
+      "range": {
+        "startLine": 28,
+        "startChar": 0,
+        "endLine": 30,
+        "endChar": 17
+      },
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5a756668_4575480f",
+        "filename": "src/dawn/tests/end2end/ComputeInfiniteLoopTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 30,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-05T15:24:35Z",
+      "side": 1,
+      "message": "Thanks for the link!\n\n\u003cchrono\u003e is rejected because of overlap with base/time\n\u003cfuture\u003e and other threading and synchronization is banned because Chrome uses base/synchronization and Chrome\u0027s Thread class is tightly coupled to the message loop.\n\nMy thinking is:\n- this test has value\n- it\u0027s test code, never to be included in Chrome itself.\n- I\u0027d be fine if we landed this in a \"never in the Chrome tree\" kind of mode.  Add a new target for it if necessary, and disable that target in the Chrome build, but enable it for a Dawn standalone build.",
+      "parentUuid": "787f7337_29bd6909",
       "range": {
         "startLine": 28,
         "startChar": 0,
@@ -189,6 +237,30 @@
       "writtenOn": "2024-01-04T21:44:36Z",
       "side": 1,
       "message": "Unfortunately any sort of time-based testing is often very unreliable and will likely cause flakes on bots. What seems like an acceptable threshold for one machine rarely works for all hardware that can run these tests.\n\nA pass / fail threshold delta of one second is small enough to cause false-positives on tests that only run on the CPU due to random process interruptions by the OS / Cloud VM (I know through repeated experience of attempting this sort of thing), and when using GPUs timing variance can get even more wild.\n\nMy general guidance is to never write tests that depend on timing (unless working on a RTOS), and for what you\u0027re trying to test, I don\u0027t have any great suggestions here. Bumping the timeout will reduce the probability of flakes, but will make the tests take longer to pass for everyone.",
+      "range": {
+        "startLine": 146,
+        "startChar": 61,
+        "endLine": 146,
+        "endChar": 85
+      },
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "436539f1_99c4d24a",
+        "filename": "src/dawn/tests/end2end/ComputeInfiniteLoopTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-05T15:24:35Z",
+      "side": 1,
+      "message": "So does that mean \"We\u0027ll never add a test like this\"?",
+      "parentUuid": "825fad81_9cd68e3f",
       "range": {
         "startLine": 146,
         "startChar": 61,
