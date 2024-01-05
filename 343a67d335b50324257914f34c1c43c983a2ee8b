@@ -16,6 +16,98 @@
       "message": "LGTM, though I\u0027m wondering if we could have a blanket boolean to disable all polyfills that are just for UB.",
       "revId": "343a67d335b50324257914f34c1c43c983a2ee8b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5aa07bd0_e74f7c08",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 177,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:16:05Z",
+      "side": 1,
+      "message": "[3]",
+      "range": {
+        "startLine": 177,
+        "startChar": 18,
+        "endLine": 177,
+        "endChar": 33
+      },
+      "revId": "343a67d335b50324257914f34c1c43c983a2ee8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c3854285_24d700a0",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 180,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:16:05Z",
+      "side": 1,
+      "message": "[2]",
+      "range": {
+        "startLine": 180,
+        "startChar": 18,
+        "endLine": 180,
+        "endChar": 33
+      },
+      "revId": "343a67d335b50324257914f34c1c43c983a2ee8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ce95b90_7be686f6",
+        "filename": "src/tint/lang/spirv/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 134,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:16:05Z",
+      "side": 1,
+      "message": "[1]",
+      "range": {
+        "startLine": 134,
+        "startChar": 18,
+        "endLine": 134,
+        "endChar": 33
+      },
+      "revId": "343a67d335b50324257914f34c1c43c983a2ee8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4de3a7ca_c8add299",
+        "filename": "src/tint/lang/spirv/writer/raise/raise.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:16:05Z",
+      "side": 1,
+      "message": "This doesn\u0027t agree with the AST code paths. Did you modify the wrong line?",
+      "range": {
+        "startLine": 75,
+        "startChar": 21,
+        "endLine": 75,
+        "endChar": 36
+      },
+      "revId": "343a67d335b50324257914f34c1c43c983a2ee8b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
