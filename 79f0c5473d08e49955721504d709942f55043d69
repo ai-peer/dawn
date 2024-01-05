@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "576a4141_718e23c0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-05T01:13:25Z",
+      "side": 1,
+      "message": "in the past, I\u0027ve run into problems where I wrote a bad Metal shader which had an infinite loop, and it was OK to terminate the process and run it again.\n\nbut then.... at some point after multiple subsequent runs, it would stall my machine entirely and I would have to force restart the machine.\n\nmy guess was that even after I terminated the process, those GPU cores were actually still spinning forever - and at some point, I ran out of GPU threads and everything came to a halt.\n\nso yes - I likewise am concerned that we might cause other tests to fall over on CI/CQ. We have some death tests, but those are more so tests that test an ASSERT is hit - not a real hang.\n\nthe test is useful though.\nat the very least, we can make it a manual test.\nsomething better - we can have a test suite that tells swarming to always reboot the machine after it runs..? @bsheedy@chromium.org @ynovikov@chromium.org is something like that possible? We could run it at most N times a day to prevent too much havoc.",
+      "parentUuid": "3003aa0f_2d997a1e",
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8599b611_8312526f",
@@ -59,6 +77,46 @@
         "startChar": 0,
         "endLine": 30,
         "endChar": 17
+      },
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "85300843_2a58615b",
+        "filename": "src/dawn/tests/end2end/ComputeInfiniteLoopTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-05T01:13:25Z",
+      "side": 1,
+      "message": "nit: throughout, use camelCase",
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0f044da_8d070a6a",
+        "filename": "src/dawn/tests/end2end/ComputeInfiniteLoopTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 127,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-05T01:13:25Z",
+      "side": 1,
+      "message": "nit: usually we don\u0027t force and wait for completion. it\u0027s worth commenting that you\u0027re doing that because in this specific test we\u0027re timing it.",
+      "range": {
+        "startLine": 126,
+        "startChar": 4,
+        "endLine": 127,
+        "endChar": 27
       },
       "revId": "79f0c5473d08e49955721504d709942f55043d69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
