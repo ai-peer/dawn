@@ -46,6 +46,30 @@
       },
       "revId": "f3cc00255292f62d0d14d17c7b1f31050ef75eec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7252f0a6_b56bcf1c",
+        "filename": "src/tint/lang/wgsl/ir/unary.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-05T19:51:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8c282062_a6de693a",
+      "range": {
+        "startLine": 48,
+        "startChar": 47,
+        "endLine": 48,
+        "endChar": 63
+      },
+      "revId": "f3cc00255292f62d0d14d17c7b1f31050ef75eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
