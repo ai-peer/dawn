@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4d8d305e_42a9dea4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-05T17:39:11Z",
+      "side": 1,
+      "message": "LGTM with nit about death test naming.",
+      "revId": "0d3464e8fd67b94016341bd4dac44be4fdf4fbc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ae70300_06a2efb4",
+        "filename": "src/tint/lang/spirv/reader/parser/struct_test.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 32,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-05T17:39:11Z",
+      "side": 1,
+      "message": "nitpick.  Death tests should be named ....DeathTest\nSee https://github.com/google/googletest/blob/main/docs/advanced.md#death-test-naming \n\nUse a using-alias to name it.\n```suggestion\nusing SpirvParserDeathTest \u003d SpirvParserTest;\n\nTEST_F(SpirvParserDeathTest, Struct_Empty) {\n```",
+      "range": {
+        "startLine": 32,
+        "startChar": 7,
+        "endLine": 32,
+        "endChar": 22
+      },
+      "revId": "0d3464e8fd67b94016341bd4dac44be4fdf4fbc2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
