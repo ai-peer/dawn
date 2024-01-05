@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a32ee7fd_44faf6bf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-01-05T01:22:08Z",
+      "side": 1,
+      "message": "AFAIK the only current way to guarantee that the swarming bot is restarted after a task is for the task to fail (i.e. return a non-zero exit code). That would be simple to implement, but I think that would confuse the builder when it sees a failing task but all other data points to the task completing successfully.\n\nThere isn\u0027t really a way for a task to communicate with the underlying swarming process at the moment, and I suspect that\u0027s by design. So while I think it would be technically pretty easy to hack something in to support this, I doubt it would get approval from swarming owners.",
+      "parentUuid": "576a4141_718e23c0",
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8599b611_8312526f",
