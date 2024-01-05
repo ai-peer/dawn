@@ -31,9 +31,9 @@
 #include <string>
 #include <tuple>
 #include <unordered_map>
-#include <unordered_set>
 #include <utility>
 
+#include "absl/container/flat_hash_set.h"
 #include "src/tint/api/options/texture_builtins_from_uniform.h"
 #include "src/tint/lang/core/builtin_value.h"
 #include "src/tint/lang/glsl/writer/common/version.h"
@@ -490,7 +490,7 @@ class ASTPrinter : public tint::TextGenerator {
     // Polyfill functions for bitcast expression, BinaryOperandType indicates the source type and
     // the destination type
     std::unordered_map<BinaryOperandType, std::string> bitcast_funcs_;
-    std::unordered_set<const core::type::Struct*> emitted_structs_;
+    absl::flat_hash_set<const core::type::Struct*> emitted_structs_;
     bool requires_oes_sample_variables_ = false;
     bool requires_default_precision_qualifier_ = false;
     bool requires_f16_extension_ = false;

@@ -50,6 +50,7 @@ if (tint_build_glsl_writer) {
       "writer.h",
     ]
     deps = [
+      "${tint_src_dir}:abseil",
       "${tint_src_dir}/api/common",
       "${tint_src_dir}/api/options",
       "${tint_src_dir}/lang/core",
