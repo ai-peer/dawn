@@ -33,6 +33,24 @@
       "message": "This is no longer needed.",
       "revId": "e9bb3d5cd5c90e9901136e5163667965838fed86",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec4dfe3d_ce2c791e",
+        "filename": "src/tint/lang/spirv/reader/parser/helper_test.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-05T20:06:45Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2c1379c7_6c97f2fa",
+      "revId": "e9bb3d5cd5c90e9901136e5163667965838fed86",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
