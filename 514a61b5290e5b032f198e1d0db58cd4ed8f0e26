@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6102dde1_12093426",
+        "filename": "src/dawn/native/SystemHandle.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-05T04:08:37Z",
+      "side": 1,
+      "message": "`rhs` won\u0027t necessarily get its destructor ~SystemHandle() called until it goes out of scope - a move operation doesn\u0027t guarantee anything about the moved-from object unless explicitly implemented in the move constructor. The current implementation of operator\u003d() behaves more like std::swap than what you would expect intuitively with a move.\n\nIn fact, the notion of a type\u0027s move operation being a destructive-move hasn\u0027t yet been standardized in C++. The proposal for marking types as trivially-relocatable is here: https://www.open-std.org/jtc1/sc22/wg21/docs/papers/2020/p1144r5.html\n\nAlso see related discussion on this bug about why this matters in the context of being able to memcpy without invoking move constructors: https://crbug.com/1302745",
+      "parentUuid": "320fc77f_e6521391",
+      "range": {
+        "startLine": 131,
+        "startChar": 8,
+        "endLine": 133,
+        "endChar": 9
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "78aa9376_1010bf96",
@@ -134,6 +158,54 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "60ee8921_d76e4815",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-05T04:08:37Z",
+      "side": 1,
+      "message": "Done - except the extra fence methods.",
+      "parentUuid": "18dfbcaf_c6552b12",
+      "range": {
+        "startLine": 79,
+        "startChar": 4,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31365f6_3c932d4d",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 79,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-05T04:08:37Z",
+      "side": 1,
+      "message": "Done - but we need to make sure GetOrCreateSharedFence() makes sense with the fence value that\u0027s returned so I made it return a new SharedFence that wraps the same native D3D fence.\n\nAlso made QueueD3D11/12 implement DestroyImpl correctly since it\u0027s now necessary for dropping the mSharedFence Ref.",
+      "parentUuid": "8693ba44_b74c4668",
+      "range": {
+        "startLine": 79,
+        "startChar": 0,
+        "endLine": 79,
+        "endChar": 34
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e68b2eb_efcf34ca",
@@ -157,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "da27bcdb_a551631b",
+        "filename": "src/dawn/native/d3d11/SharedFenceD3D11.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-05T04:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e68b2eb_efcf34ca",
+      "range": {
+        "startLine": 58,
+        "startChar": 52,
+        "endLine": 58,
+        "endChar": 76
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1f4997d0_704e5371",
@@ -170,6 +266,30 @@
       "writtenOn": "2024-01-04T11:40:50Z",
       "side": 1,
       "message": "nit: same here.",
+      "range": {
+        "startLine": 58,
+        "startChar": 65,
+        "endLine": 58,
+        "endChar": 76
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fc45e53_683f67e3",
+        "filename": "src/dawn/native/d3d12/SharedFenceD3D12.cpp",
+        "patchSetId": 7
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-05T04:08:37Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1f4997d0_704e5371",
       "range": {
         "startLine": 58,
         "startChar": 65,
