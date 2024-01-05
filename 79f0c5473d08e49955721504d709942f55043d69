@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ae8b2b0_a2c8960a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000277
+      },
+      "writtenOn": "2024-01-05T11:44:17Z",
+      "side": 1,
+      "message": "Windows is especially problematic in this regard.\nI often see machines that can\u0027t be hot-rebooted after GPU driver gets into a bad state, and then I need to file a bug for Labs folks to cold-reboot them.\nSo, I don\u0027t recommend pushing the GPU driver into a corner.",
+      "parentUuid": "a32ee7fd_44faf6bf",
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8599b611_8312526f",
