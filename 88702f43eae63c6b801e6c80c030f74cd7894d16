@@ -22,6 +22,30 @@
       },
       "revId": "88702f43eae63c6b801e6c80c030f74cd7894d16",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6044a1d9_bdac19d7",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 558,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-05T06:40:34Z",
+      "side": 1,
+      "message": "Good catch, thanks!",
+      "parentUuid": "e93c3795_cf3e405e",
+      "range": {
+        "startLine": 558,
+        "startChar": 0,
+        "endLine": 558,
+        "endChar": 59
+      },
+      "revId": "88702f43eae63c6b801e6c80c030f74cd7894d16",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
