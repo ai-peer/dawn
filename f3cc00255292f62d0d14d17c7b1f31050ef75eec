@@ -22,6 +22,30 @@
       },
       "revId": "f3cc00255292f62d0d14d17c7b1f31050ef75eec",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c282062_a6de693a",
+        "filename": "src/tint/lang/wgsl/ir/unary.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 48,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T08:35:40Z",
+      "side": 1,
+      "message": "Yes. `core::UnaryOp` is an enum of all the possible unary operators. If a dialect does not support an operator, it\u0027ll have 0 overloads in the .def file. Use of these will be caught by the validator, much like an overload with incorrect argument / result types.",
+      "parentUuid": "e71bf4de_10832fea",
+      "range": {
+        "startLine": 48,
+        "startChar": 47,
+        "endLine": 48,
+        "endChar": 63
+      },
+      "revId": "f3cc00255292f62d0d14d17c7b1f31050ef75eec",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
