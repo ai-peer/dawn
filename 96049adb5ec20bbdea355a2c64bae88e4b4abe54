@@ -33,6 +33,29 @@
       "message": "The struct is copied member by member, instead of first doing a whole-struct copy then overwriting the defaulted fields, because otherwise we end up overwriting a lot of stuff. I am guessing RVO will make the recursion efficient here so even with recursion it shouldn\u0027t make any unnecessary copies.\n\nI am pretty sure these are all of the extra members that need to be copied, but it\u0027s a little tricky because of the inheritance.",
       "revId": "96049adb5ec20bbdea355a2c64bae88e4b4abe54",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "057b00e2_a17268b9",
+        "filename": "generator/templates/dawn/native/api_structs.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-05T22:26:50Z",
+      "side": 1,
+      "message": "nit. This is a bit weird to read (mainly because of the `{{\" \"}}`). I can see why it was done like this, but I think it might be better to be more explicit i.e.:\n\n```\n{% for member in type.members %}\n    {\n        {%- if not member.requires_struct_defaulting -%}\n            copy.{{memberName}} \u003d {{memberName}};\n        {%- else -%}\n            {%- if member.type.category \u003d\u003d \"structure\" -%}\n                copy.{{memberName}} \u003d\n                    {{memberName}}.WithTrivialFrontendDefaults();\n            {%- elif member.type.category \u003d\u003d \"enum\" -%}\n                using Enum \u003d {{namespace}}::{{as_cppType(member.type.name)}};\n                copy.{{memberName}} \u003d {{memberName}} \u003d\u003d Enum::Undefined\n                    ? Enum::{{as_cppEnum(Name(member.default_value))}}\n                    : {{memberName}};\n            {%- else -%}\n                //* Other types do not currently support defaulting.\n                {{assert(False)}}\n            {%- endif -%}\n        {%- endif -%}\n    }\n{% endfor %}\n```",
+      "range": {
+        "startLine": 89,
+        "startChar": 20,
+        "endLine": 89,
+        "endChar": 48
+      },
+      "revId": "96049adb5ec20bbdea355a2c64bae88e4b4abe54",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
