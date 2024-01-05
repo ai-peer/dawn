@@ -16,6 +16,46 @@
       "message": "Hi all,\n\nThis CL can fix all the gn check failures Ben mentioned in https://dawn-review.googlesource.com/c/dawn/+/167121.\n\nPTAL, thanks!",
       "revId": "7167cc9c8bbf81bc7fe2c2a58be44088538de538",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e55017db_8af526e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:12:28Z",
+      "side": 1,
+      "message": "+2 with a request to fix a double slash (`//`) in a path",
+      "revId": "7167cc9c8bbf81bc7fe2c2a58be44088538de538",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8108bbfa_f67d547e",
+        "filename": "third_party/gn/abseil-cpp/BUILD.gn",
+        "patchSetId": 1
+      },
+      "lineNbr": 909,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:12:28Z",
+      "side": 1,
+      "message": "rm: double slash",
+      "range": {
+        "startLine": 909,
+        "startChar": 61,
+        "endLine": 909,
+        "endChar": 62
+      },
+      "revId": "7167cc9c8bbf81bc7fe2c2a58be44088538de538",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
