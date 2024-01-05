@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9cc0ddf9_da3498f1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-05T17:41:19Z",
+      "side": 1,
+      "message": "Yep, this is the first step.  Handling old-style SSBOs comes later...",
+      "revId": "3795aa86853e14b197bcc6764d491fd4c5b1ae8c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
