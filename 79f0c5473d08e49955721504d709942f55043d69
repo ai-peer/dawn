@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6effa047_1bcae581",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000193
+      },
+      "writtenOn": "2024-01-05T20:26:43Z",
+      "side": 1,
+      "message": "One workaround that was brought up in the LUCI chat was to have a special pool (e.g. `chromium.tests.gpu.always_reboot`) that we can configure to reboot after every task. Then, we can only trigger the suite that runs these tests in that pool.\n\nThat is less efficient from a resource standpoint since we\u0027re splitting machines off into their own underutilized pool, but it is an option.",
+      "parentUuid": "14e65935_fdecda78",
+      "revId": "79f0c5473d08e49955721504d709942f55043d69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8599b611_8312526f",
