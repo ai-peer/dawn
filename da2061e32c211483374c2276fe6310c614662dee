@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c2b035a_acf9937e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-05T15:11:03Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8768450_d82a14e4",
+        "filename": "src/dawn/wire/client/Client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-05T15:11:03Z",
+      "side": 1,
+      "message": "it\u0027s worth also explaining that we can\u0027t store it on the instance because spontaneous mode callbacks should outlive the instance.\n\nWe also can\u0027t use ObjectStore for the EventManagers because we still need the old instance (id, generation) pairs to be tracked. (took my a while to see this while reviewing)",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
