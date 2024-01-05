@@ -39,6 +39,30 @@
       },
       "revId": "0b122c2fc7849c9ffc9b0bd1daa6a265ffedff25",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8ccb9d13_119580df",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 404,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-05T04:28:31Z",
+      "side": 1,
+      "message": "Recursing doesn\u0027t work here because we don\u0027t have a mutable `BindGroupLayoutEntry` at any point here (`bindingInfo` is a `BindingInfo`). However the copy change does fold this into one line.",
+      "parentUuid": "661b62d5_8184c113",
+      "range": {
+        "startLine": 404,
+        "startChar": 8,
+        "endLine": 404,
+        "endChar": 59
+      },
+      "revId": "0b122c2fc7849c9ffc9b0bd1daa6a265ffedff25",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
