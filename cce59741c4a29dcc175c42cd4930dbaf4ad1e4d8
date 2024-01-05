@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20f674f5_a6f7dc24",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-05T22:58:34Z",
+      "side": 1,
+      "message": "I think this fixes the unpack4xI8 and unpack4xU8 builtins on Vulkan backends.\n\nUnfortunately the Tint IR flow doesn\u0027t validate conversions.",
+      "revId": "cce59741c4a29dcc175c42cd4930dbaf4ad1e4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
