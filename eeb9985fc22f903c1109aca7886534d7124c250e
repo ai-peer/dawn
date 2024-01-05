@@ -16,6 +16,29 @@
       "message": "PTAL",
       "revId": "eeb9985fc22f903c1109aca7886534d7124c250e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad193214_5a1649b2",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-05T13:58:33Z",
+      "side": 1,
+      "message": "```\nIn file included from /dawn/src/src/dawn/node/interop/Core.cpp:28:\n/dawn/src/src/dawn/node/interop/Core.h:463:7: error: redefinition of \u0027Converter\u003cunsigned long\u003e\u0027\nclass Converter\u003csize_t\u003e {\n      ^~~~~~~~~~~~~~~~~\n/dawn/src/src/dawn/node/interop/Core.h:456:7: note: previous definition is here\nclass Converter\u003cuint64_t\u003e {\n      ^\n```\n\nGotta love C++.\n\nThis might work:\n\n```suggestion\nnamespace detail {\nstruct InvalidType;\nstatic constexpr bool kSizetIsUniqueType \u003d\n    !std::is_same_v\u003csize_t, uint32_t\u003e \u0026\u0026 !std::is_same_v\u003csize_t, uint64_t\u003e;\n}  // namespace detail\n\ntemplate \u003c\u003e\nclass Converter\u003cstd::conditional_t\u003cdetail::kSizetIsUniqueType, size_t, detail::InvalidType\u003e\u003e {\n```",
+      "range": {
+        "startLine": 463,
+        "startChar": 16,
+        "endLine": 463,
+        "endChar": 22
+      },
+      "revId": "eeb9985fc22f903c1109aca7886534d7124c250e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
