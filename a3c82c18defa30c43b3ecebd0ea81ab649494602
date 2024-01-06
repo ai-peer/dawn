@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfe8cb8b_378865ca",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 193,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-06T00:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dda664c1_0b7dd475",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f7923e7_9fd304c4",
@@ -189,6 +207,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "nit: Maybe mSurfaceState should be (ManagesSwapChain::{Yes, No, Unknown}) so we can check that we only transition from Unknown to Yes/No once.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d61f9416_70d0c60a",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 320,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-06T00:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3e36d9cc_55cd5874",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -474,6 +510,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cb90e388_a61cb894",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 501,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-06T00:30:15Z",
+      "side": 1,
+      "message": "Given the recent updates upstream I suppose returning nullptr is the expected behavior now.",
+      "parentUuid": "0a4f42a1_53455322",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0422f5d2_b49b588f",
@@ -487,6 +541,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "We should use the cached capabilities to query the adapter\u0027s preferred format.",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b5ee4ce0_f82921fa",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 510,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-06T00:30:15Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0422f5d2_b49b588f",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
