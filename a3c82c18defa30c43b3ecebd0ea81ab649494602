@@ -946,6 +946,24 @@
       "message": "nit: we could have another array for the matching WebGPU mode, or an array of struct {vkMode, wgpuMode} so we don\u0027t need to have a switch between the two.",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "478eaf56_7719cea1",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-06T00:31:26Z",
+      "side": 1,
+      "message": "Not sure I get what you mean actually!",
+      "parentUuid": "c8c527ef_23f5f408",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
