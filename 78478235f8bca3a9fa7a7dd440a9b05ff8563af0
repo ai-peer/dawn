@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d31bc713_27cfd19a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-06T16:16:08Z",
+      "side": 1,
+      "message": "Is there any existing SwapChain validation test that I could base the surface configuration tests on? Also not 100% sure how to handle the wire part.",
+      "revId": "78478235f8bca3a9fa7a7dd440a9b05ff8563af0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
