@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c7e5314_b46a8039",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-06T04:57:07Z",
+      "side": 1,
+      "message": "Additional notes to reference from https://crbug.com/dawn/2334",
+      "revId": "c96b19bcb66022bbab411967204cfdcb84d80daf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8346468a_57e6e5da",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-06T04:57:07Z",
+      "side": 1,
+      "message": "This doesn\u0027t belong here, but I guess fine",
+      "revId": "c96b19bcb66022bbab411967204cfdcb84d80daf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
