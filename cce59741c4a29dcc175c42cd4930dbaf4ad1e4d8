@@ -33,6 +33,41 @@
       "message": "James: I tried regenerating end2end test results but they didn\u0027t get updated?!",
       "revId": "cce59741c4a29dcc175c42cd4930dbaf4ad1e4d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95ac6d23_46e89726",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-06T00:13:22Z",
+      "side": 1,
+      "message": "I assume we could now also remove the Android suppressions from the Dawn E2E tests?",
+      "revId": "cce59741c4a29dcc175c42cd4930dbaf4ad1e4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d19a903b_ec662e79",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-06T00:13:22Z",
+      "side": 1,
+      "message": "For the IR flow we currently only check-in expectations that are `SKIP`s. So for this CL I think you just need to delete the `*.expected.ir.spvasm` files in the dp4a builtin directories.",
+      "parentUuid": "df2f150b_0890ea8d",
+      "revId": "cce59741c4a29dcc175c42cd4930dbaf4ad1e4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
