@@ -88,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "acc66af8_ee8ff2f1",
+        "filename": "src/dawn/native/d3d/DeviceD3D.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-06T00:09:02Z",
+      "side": 1,
+      "message": "This is now GetOrCreateSharedFence() to handle the case when it\u0027s called after device/queue is destroyed so returning a Ref\u003cSharedFence\u003e is now necessary.",
+      "parentUuid": "78aa9376_1010bf96",
+      "range": {
+        "startLine": 59,
+        "startChar": 4,
+        "endLine": 59,
+        "endChar": 20
+      },
+      "revId": "514a61b5290e5b032f198e1d0db58cd4ed8f0e26",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2a88a98f_b23a305f",
