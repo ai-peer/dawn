@@ -68,6 +68,42 @@
       "parentUuid": "df2f150b_0890ea8d",
       "revId": "cce59741c4a29dcc175c42cd4930dbaf4ad1e4d8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c17cfde5_b3b5f4c4",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-06T15:52:29Z",
+      "side": 1,
+      "message": "I haven\u0027t tested on an Android device yet.",
+      "parentUuid": "95ac6d23_46e89726",
+      "revId": "cce59741c4a29dcc175c42cd4930dbaf4ad1e4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "520925b9_bad9b5cd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-06T15:52:29Z",
+      "side": 1,
+      "message": "ok, deleted now.",
+      "parentUuid": "d19a903b_ec662e79",
+      "revId": "cce59741c4a29dcc175c42cd4930dbaf4ad1e4d8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
