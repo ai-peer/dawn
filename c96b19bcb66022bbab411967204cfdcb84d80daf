@@ -33,6 +33,24 @@
       "message": "This doesn\u0027t belong here, but I guess fine",
       "revId": "c96b19bcb66022bbab411967204cfdcb84d80daf",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bda17e9f_a6acdd34",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T10:10:43Z",
+      "side": 1,
+      "message": "The way the roller updates expectations is to walk the expectation lines from top to bottom.\nFor each of the expectations in a non-`KEEP` block, it\u0027ll gather all the results under that **query** (excluding tags) and then try to rebuild the expectation lines from that. This means it has the ability to split course-grain expectations as things get fixed, and to simplify the tags to what it believes the failures actually cover.\nThis approach has the consequence that a single input expectation can be transformed into multiple expectations.",
+      "parentUuid": "8346468a_57e6e5da",
+      "revId": "c96b19bcb66022bbab411967204cfdcb84d80daf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

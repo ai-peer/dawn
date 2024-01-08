@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2a6ff412_89de1606",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 707,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T10:10:43Z",
+      "side": 0,
+      "message": "Most likely because it believes the test(s) no longer exist. That\u0027s was a typ validation error, so it has to remove them.",
+      "parentUuid": "ecad7064_93ab6314",
+      "revId": "c58a889b687b6a5f34689e4bda476677fa3618b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "94fe81fd_dc298a48",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 4
@@ -37,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "117ae272_718967d0",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 712,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T10:10:43Z",
+      "side": 0,
+      "message": "See above. The tool rebuilds the tags based on the actual results. The roller has decided that this affected all the machines that had a `intel-0x3e9b` GPU, and `ventura` did not provide any additional information in the classification.\nThat might be because we only see `intel-0x3e9b` GPUs on `ventura` bots.",
+      "parentUuid": "94fe81fd_dc298a48",
+      "revId": "c58a889b687b6a5f34689e4bda476677fa3618b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "07a61167_2b16d1f0",
         "filename": "webgpu-cts/expectations.txt",
         "patchSetId": 4
@@ -48,6 +84,24 @@
       "writtenOn": "2024-01-06T04:57:07Z",
       "side": 0,
       "message": "Not a big deal but I don\u0027t think this should have happened?",
+      "revId": "c58a889b687b6a5f34689e4bda476677fa3618b6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "402b46d8_bef930f2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 4
+      },
+      "lineNbr": 722,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T10:10:43Z",
+      "side": 0,
+      "message": "Are all `android-r` bots `qualcomm` GPUs?",
+      "parentUuid": "07a61167_2b16d1f0",
       "revId": "c58a889b687b6a5f34689e4bda476677fa3618b6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
