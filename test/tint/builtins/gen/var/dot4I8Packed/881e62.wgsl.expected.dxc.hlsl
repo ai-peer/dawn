@@ -41,8 +41,6 @@ void compute_main() {
   return;
 }
 DXC validation failure:
-warning: DXIL.dll not found.  Resulting DXIL will not be signed for use in release environments.
-
 error: validation errors
 shader.hlsl:3:10: error: Opcode Dot4AddI8Packed not valid in shader model vs_6_0.
 note: at '%2 = call i32 @dx.op.dot4AddPacked.i32(i32 163, i32 0, i32 1, i32 1)' in block '#0' of function 'vertex_main'.
@@ -50,16 +48,12 @@ Validation failed.
 
 
 
-warning: DXIL.dll not found.  Resulting DXIL will not be signed for use in release environments.
-
 error: validation errors
 shader.hlsl:3:10: error: Opcode Dot4AddI8Packed not valid in shader model ps_6_0.
 note: at '%2 = call i32 @dx.op.dot4AddPacked.i32(i32 163, i32 0, i32 1, i32 1)' in block '#0' of function 'fragment_main'.
 Validation failed.
 
 
-
-warning: DXIL.dll not found.  Resulting DXIL will not be signed for use in release environments.
 
 error: validation errors
 shader.hlsl:3:10: error: Opcode Dot4AddI8Packed not valid in shader model cs_6_0.

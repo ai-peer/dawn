@@ -207,6 +207,11 @@ enable chromium_experimental_subgroups;
 enable f16;
 {{    end -}}
 
+{{- /* Check and emit dot4I8Packed and dot4U8Packed */ -}}
+{{-   if  or (eq "dot4I8Packed" $builtin_name) (eq "dot4U8Packed" $builtin_name)}}
+// flags: --hlsl_shader_model 64
+{{    end -}}
+
 {{- end -}}
 
 
