@@ -33,6 +33,24 @@
       "message": "I\u0027d be happier if this asserted that current_block_ is not null.",
       "revId": "53b3ad7f715cf374895a686128fa1c9381059a49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "048e7cc3_ad9acd79",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T20:40:10Z",
+      "side": 1,
+      "message": "Null is fairly safe. It\u0027s not considered a security vulnerability, due to hard crashing on all platforms. Sanitizers (or not) will catch this very quickly.\nWe tend to avoid assertions on things that are trivial bugs.",
+      "parentUuid": "097a3289_90fdd835",
+      "revId": "53b3ad7f715cf374895a686128fa1c9381059a49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
