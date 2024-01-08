@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "38d0c66b_6046c6ad",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-08T22:32:04Z",
+      "side": 1,
+      "message": "Except I don\u0027t have access to the surface nor the adapter at this point!",
+      "parentUuid": "5dbe3978_71f3135b",
+      "range": {
+        "startLine": 225,
+        "startChar": 41,
+        "endLine": 225,
+        "endChar": 50
+      },
+      "revId": "65f3ae9c07682b66c60c25f16dd5081b4865aa7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a170b251_87be8036",
         "filename": "src/dawn/tests/CMakeLists.txt",
         "patchSetId": 10
@@ -54,6 +78,24 @@
       "writtenOn": "2024-01-08T14:10:34Z",
       "side": 1,
       "message": "nit: only SPV reader is needed?",
+      "revId": "65f3ae9c07682b66c60c25f16dd5081b4865aa7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "662a282a_3842ac94",
+        "filename": "src/dawn/utils/CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 64,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-08T22:32:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "231d374c_714172e7",
       "revId": "65f3ae9c07682b66c60c25f16dd5081b4865aa7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
