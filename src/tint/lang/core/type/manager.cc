@@ -38,6 +38,7 @@
 #include "src/tint/lang/core/type/i32.h"
 #include "src/tint/lang/core/type/matrix.h"
 #include "src/tint/lang/core/type/pointer.h"
+#include "src/tint/lang/core/type/reference.h"
 #include "src/tint/lang/core/type/type.h"
 #include "src/tint/lang/core/type/u32.h"
 #include "src/tint/lang/core/type/vector.h"
@@ -193,6 +194,12 @@ const core::type::Pointer* Manager::ptr(core::AddressSpace address_space,
                                         const core::type::Type* subtype,
                                         core::Access access /* = core::Access::kReadWrite */) {
     return Get<core::type::Pointer>(address_space, subtype, access);
+}
+
+const core::type::Reference* Manager::ref(core::AddressSpace address_space,
+                                          const core::type::Type* subtype,
+                                          core::Access access /* = core::Access::kReadWrite */) {
+    return Get<core::type::Reference>(address_space, subtype, access);
 }
 
 core::type::Struct* Manager::Struct(Symbol name, VectorRef<const StructMember*> members) {
