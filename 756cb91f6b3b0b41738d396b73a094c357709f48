@@ -301,6 +301,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "dc4b855f_2cf80905",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-08T20:16:40Z",
+      "side": 1,
+      "message": "Also - the application is allowed to use StoreOp::Discard which will leave the contents uninitialized - and then this SharedImage could be recycled and used again. Chrome could force all these things to be initialized, but it seems like unnecessary extra work when Dawn already does the lazy clearing.",
+      "parentUuid": "a9267686_90b67617",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
