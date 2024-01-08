@@ -283,6 +283,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a9267686_90b67617",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-08T19:16:03Z",
+      "side": 1,
+      "message": "I\u0027m pretty sure webgpu\u0027s backing canvas itself is created at first as uninitialized shared images. we inherit the usage from what the developer requested, so they can indeed ask for a read only TextureBinding/CopySrc usage.",
+      "parentUuid": "841ea931_ccafb830",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
