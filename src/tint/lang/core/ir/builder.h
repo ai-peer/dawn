@@ -1300,7 +1300,7 @@ class Builder {
     /// Creates a new `FunctionParam`
     /// @tparam TYPE the parameter type
     /// @returns the value
-    template<typename TYPE>
+    template <typename TYPE>
     ir::FunctionParam* FunctionParam() {
         auto* type = ir.Types().Get<TYPE>();
         return FunctionParam(type);
