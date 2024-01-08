@@ -140,6 +140,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "23d7fa99_3f76c892",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T17:12:55Z",
+      "side": 1,
+      "message": "If we split the two enums: state (active, paused, destroyed) and sharedAccessMode (None, ReadWrite, ReadOnly) then the true/false becomes a SharedAccessMode and that\u0027s slightly more explicit. The SetHasAccess() in regular creation would be SetState(Active) which seems fine.",
+      "parentUuid": "d894c689_e7352d5d",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cde2084_62563abb",
         "filename": "src/dawn/native/Texture.h",
         "patchSetId": 4
@@ -169,6 +187,24 @@
       "side": 1,
       "message": "How about we verify `SharedTextureMemoryBeginAccessDescriptor::initialized \u003d\u003d true` in `BeginAccess()` for readonly textures? Make it the API client\u0027s responsibility.",
       "parentUuid": "8cde2084_62563abb",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0c509c99_b6bfbce4",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T17:12:55Z",
+      "side": 1,
+      "message": "I think it could break some usages: for example imagine a WebGPU swapchain that a user just wants to sample from (even if that\u0027s silly), we need to be able to lazy clear, so it\u0027s not just based on the wgpu usages but additional metadata. (in this specific case I believe we add internal usages, but that type of case might still happen).",
+      "parentUuid": "d51e85eb_18bcc2ed",
       "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
