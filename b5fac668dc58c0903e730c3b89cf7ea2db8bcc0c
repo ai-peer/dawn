@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "98fd0d26_71c96d61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-08T15:51:04Z",
+      "side": 1,
+      "message": "I tested this on a Pixel 6a. Now the pack and unpack unit tests pass.\nThe dot product tests fail with invalid pipeline. I\u0027m investigating.",
+      "revId": "b5fac668dc58c0903e730c3b89cf7ea2db8bcc0c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
