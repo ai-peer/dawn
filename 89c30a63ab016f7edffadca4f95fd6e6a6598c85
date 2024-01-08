@@ -16,6 +16,41 @@
       "message": "Hi Ben,\n\nI am trying to fix the HLSL SM issue in tint_end2end_tests but this CL still doesn\u0027t work. Now I have no idea, could you help me?\n\nThanks,",
       "revId": "89c30a63ab016f7edffadca4f95fd6e6a6598c85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e5fdab4c_a8bf64c1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T09:42:02Z",
+      "side": 1,
+      "message": "\u003e but this CL still doesn\u0027t work\n\nI presume you mean the `// flag:` line isn\u0027t getting processed. [This currently](https://dawn.googlesource.com/dawn/+/refs/heads/main/tools/src/cmd/tests/main.go#912) must be the very first line of the expectation file. Because of the copyright header and blank lines, we\u0027ll need to modify `parseFlags()` to scan beyond the first line. I\u0027d recommend scanning up to the first line that isn\u0027t a line comment, blank line or whitespace.",
+      "parentUuid": "da93c6e9_a7cfc374",
+      "revId": "89c30a63ab016f7edffadca4f95fd6e6a6598c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31e111d8_8a61e3ec",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T09:42:02Z",
+      "side": 1,
+      "message": "I think this should come before any `enable` directives.",
+      "revId": "89c30a63ab016f7edffadca4f95fd6e6a6598c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
