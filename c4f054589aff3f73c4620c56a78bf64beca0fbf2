@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dc2e144_a3a2f064",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-08T19:42:22Z",
+      "side": 1,
+      "message": "This change is no longer needed, right, David?",
+      "revId": "c4f054589aff3f73c4620c56a78bf64beca0fbf2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3f5e9e79_48e05b15",
         "filename": "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.cc",
         "patchSetId": 1
