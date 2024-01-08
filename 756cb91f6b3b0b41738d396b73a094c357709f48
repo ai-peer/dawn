@@ -33,6 +33,125 @@
       "message": "Corentin and Austin, kindly ping. thanks",
       "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e2ad3cb_ed99374e",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T16:31:02Z",
+      "side": 1,
+      "message": "I think we need the read-onlyness to be part of the BeginAccessDescriptor: we need to validate the following:\n\n - The texture is marked initialized if it is accessed for read-only because we cannot do any lazy-clearing without writing.\n - The Vulkan image layout is either GENERAL or exactly the correct layout for the usage. (we need to also change the backend to assert that during readonly access we don\u0027t do any layout changes, tests that we should add will find a bug here).\n - Ditto for D3D12 although there will be what looks like barriers but they must all decay.",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d76fccd8_0c590e5c",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T16:31:02Z",
+      "side": 1,
+      "message": "Where do we validate that we can\u0027t access a destroyed texture?",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbf1e965_2e4e5cb3",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T16:31:02Z",
+      "side": 1,
+      "message": "nit: Error messages conventions would have the error be more like \"%s is already used to access %s.\" And following ones like \"%s is currently accessed for reading and writing.\" \"Read-write access used while %s is accessed in a read-only.\".",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5ad0766a_fe38e873",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 1000,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T16:31:02Z",
+      "side": 1,
+      "message": "Why is destroyed + access not an enum? We can\u0027t access a texture if it is destroyed. State could be \"Accessible, Paused, Destroyed\" or something like that? ReadonlyAccess being another boolean because it is checked independently.",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "67530e01_399f2423",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T16:31:02Z",
+      "side": 1,
+      "message": "nit: Can we rename this to be more explicit that it is for SharedTextureMemory. MarkAccessingSharedMemory();\nIsAccessingSharedMemory();",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cde2084_62563abb",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T16:31:02Z",
+      "side": 1,
+      "message": "The texture should know if it is readonly or writable access. Even a texture with readonly usages can be opened with writable access, this helps produce better barriers in Dawn potentially and allows lazy-clearing.",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7cf56ea9_e59db828",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T16:31:02Z",
+      "side": 1,
+      "message": "nit: We could have getters for things like this instead of having these members protected.",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
