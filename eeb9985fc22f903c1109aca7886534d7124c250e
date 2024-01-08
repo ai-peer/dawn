@@ -39,6 +39,30 @@
       },
       "revId": "eeb9985fc22f903c1109aca7886534d7124c250e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "944332fb_b39213fc",
+        "filename": "src/dawn/node/interop/Core.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 463,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T13:36:03Z",
+      "side": 1,
+      "message": "Thank you, I hadn\u0027t spent the time to look in the C++ craziness I\u0027d have to do, and that seems like it should work :D",
+      "parentUuid": "ad193214_5a1649b2",
+      "range": {
+        "startLine": 463,
+        "startChar": 16,
+        "endLine": 463,
+        "endChar": 22
+      },
+      "revId": "eeb9985fc22f903c1109aca7886534d7124c250e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
