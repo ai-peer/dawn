@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9095f08_3de42dc6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-08T20:08:44Z",
+      "side": 1,
+      "message": "LGTM with nit",
+      "revId": "53b3ad7f715cf374895a686128fa1c9381059a49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "097a3289_90fdd835",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-08T20:08:44Z",
+      "side": 1,
+      "message": "I\u0027d be happier if this asserted that current_block_ is not null.",
+      "revId": "53b3ad7f715cf374895a686128fa1c9381059a49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
