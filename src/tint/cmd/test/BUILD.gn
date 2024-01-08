@@ -171,7 +171,10 @@ if (tint_build_unittests) {
     }
 
     if (tint_build_wgsl_writer) {
-      deps += [ "${tint_src_dir}/lang/wgsl/writer/ast_printer:unittests" ]
+      deps += [
+        "${tint_src_dir}/lang/wgsl/writer:unittests",
+        "${tint_src_dir}/lang/wgsl/writer/ast_printer:unittests",
+      ]
     }
     configs += [ "${tint_src_dir}:tint_unittests_config" ]
 

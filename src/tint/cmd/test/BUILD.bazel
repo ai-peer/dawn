@@ -168,6 +168,7 @@ cc_binary(
   }) + select({
     ":tint_build_wgsl_writer": [
       "//src/tint/lang/wgsl/writer/ast_printer:test",
+      "//src/tint/lang/wgsl/writer:test",
     ],
     "//conditions:default": [],
   }),
