@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "724272a8_31e7aeab",
+        "filename": "src/tint/lang/spirv/reader/parser/memory_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-08T20:13:13Z",
+      "side": 1,
+      "message": "Please also test the case where the index is a signed integer constant.",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "83a3d3df_0d2741eb",
+        "filename": "src/tint/lang/spirv/reader/parser/memory_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-08T20:13:13Z",
+      "side": 1,
+      "message": "good",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd6c057f_005d7530",
+        "filename": "src/tint/lang/spirv/reader/parser/memory_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-08T20:13:13Z",
+      "side": 1,
+      "message": "nice!",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66d3bc0b_3bb197b4",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-08T20:13:13Z",
+      "side": 1,
+      "message": "Also OpInBoundsAccessChain\n\nI don\u0027t need exhaustive tests. Just one showing it goes down the same path as OpAccessChain",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
