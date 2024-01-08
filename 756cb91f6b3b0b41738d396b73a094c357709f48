@@ -265,6 +265,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "841ea931_ccafb830",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T19:11:39Z",
+      "side": 1,
+      "message": "RE: import as readonly should be able to lazy clear in the non-concurrent read case.\n\nWhy API users cannot make sure the textures are initialized by themself and pass `initialized \u003d\u003d true` for readonly textures? Is there any real use case? For chrome, I believe those readonly textures always have initialized content, either from webgl, webgpu, decoder, camera, etc.",
+      "parentUuid": "5ea817a1_93d55402",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
