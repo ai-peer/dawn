@@ -37,6 +37,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "54a9511a_5b8ccfc6",
+        "filename": "src/tint/lang/spirv/reader/parser/memory_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 283,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-08T22:50:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "724272a8_31e7aeab",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "83a3d3df_0d2741eb",
         "filename": "src/tint/lang/spirv/reader/parser/memory_test.cc",
         "patchSetId": 1
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dabc2015_f8d9d2b0",
+        "filename": "src/tint/lang/spirv/reader/parser/memory_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 656,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-08T22:50:31Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "cd6c057f_005d7530",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "66d3bc0b_3bb197b4",
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "457f4895_b7c7e302",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 419,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-08T22:50:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "66d3bc0b_3bb197b4",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "793ab085_ce8f4d57",
@@ -99,6 +153,30 @@
       "writtenOn": "2024-01-08T20:47:55Z",
       "side": 1,
       "message": "Is there any possibility of `Type` and `Value` internally bumping a counter or ID? (like symbols) ?\n\nIf so, we should break these into separate statements to prevent non-determinism.\nIf not, feel free to ignore.",
+      "range": {
+        "startLine": 454,
+        "startChar": 33,
+        "endLine": 454,
+        "endChar": 60
+      },
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf899bbc_7b102924",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-08T22:50:31Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "793ab085_ce8f4d57",
       "range": {
         "startLine": 454,
         "startChar": 33,
