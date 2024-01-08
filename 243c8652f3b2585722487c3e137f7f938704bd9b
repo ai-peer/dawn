@@ -16,6 +16,24 @@
       "message": "rm",
       "revId": "243c8652f3b2585722487c3e137f7f938704bd9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f7d0c842_e487d843",
+        "filename": "src/tint/lang/hlsl/writer/writer_ast_fuzz.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-08T20:42:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6e8ee3c1_a4e59eff",
+      "revId": "243c8652f3b2585722487c3e137f7f938704bd9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
