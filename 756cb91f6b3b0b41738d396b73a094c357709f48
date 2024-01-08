@@ -355,6 +355,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "65a0a6ac_e1a592f2",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-08T22:07:41Z",
+      "side": 1,
+      "message": "For non-concurrent read, I think the API should look the same.\n\nFor WebGPU\u0027s swapchain, generally WebGPU has exclusive access to the canvas today. So whether it is read-write usage, read-only, or uninitialized read-only (actually read-write) - I don\u0027t think it matters. We shouldn\u0027t need concurrent read. So, it should be allowed to have a read-only texture that you BeginAccess with isInitialized\u003dfalse. It will be treated as a writable usage.\n\nFor concurrent read, I think there are a few possibilities:\n - Explicit concurrent read.\n   In this world, we add a bool like BeginAccessDescriptor::concurrentRead. If it is false, then the code should behave just like it does today. If it is true, then it enables concurrentRead with some additional restrictions.\n   - isInitialized must be true\n   - Vulkan layouts need to be GENERAL (or whatever is actually needed here)\n - Implicit concurrent read.\n   We infer whether concurrent read is possible based on the texture usage, isInitialized, and the Vulkan layouts\n\nIMO it\u0027s better to make things explicit here - since concurrent read can sometimes mean you\u0027re opting into worse performance. Do you think this would make it difficult for Chrome to use?",
+      "parentUuid": "1f678684_6b7d1a4f",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
