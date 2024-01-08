@@ -472,6 +472,31 @@ class Parser {
         if (inst.NumOperands() > 3) {
             var->SetInitializer(Value(inst.GetSingleWordOperand(3)));
         }
+
+        // Handle decorations.
+        uint32_t group = UINT32_MAX;
+        uint32_t binding = 0;
+        for (auto* deco :
+             spirv_context_->get_decoration_mgr()->GetDecorationsFor(inst.result_id(), false)) {
+            auto d = deco->GetSingleWordOperand(1);
+            switch (spv::Decoration(d)) {
+                case spv::Decoration::NonWritable:
+                    break;
+                case spv::Decoration::DescriptorSet:
+                    group = deco->GetSingleWordOperand(2);
+                    break;
+                case spv::Decoration::Binding:
+                    binding = deco->GetSingleWordOperand(2);
+                    break;
+                default:
+                    TINT_UNIMPLEMENTED() << "unhandled decoration " << d;
+                    break;
+            }
+        }
+        if (group != UINT32_MAX) {
+            var->SetBindingPoint(group, binding);
+        }
+
         Emit(var, inst.result_id());
     }
 
