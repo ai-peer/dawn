@@ -122,6 +122,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d894c689_e7352d5d",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T16:49:13Z",
+      "side": 1,
+      "message": "Actually, non shared textures also use it, just dawn will call `SetHasAccess(true),`, after creating a regular texture. If we rename it, calling it at [1] will look weird. WDYT?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/SharedTextureMemory.cpp;drc\u003d67d90538f11c6b232dbfd716075db52aeb34fd15;bpv\u003d1;bpt\u003d1;l\u003d198",
+      "parentUuid": "67530e01_399f2423",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8cde2084_62563abb",
         "filename": "src/dawn/native/Texture.h",
         "patchSetId": 4
@@ -133,6 +151,24 @@
       "writtenOn": "2024-01-08T16:31:02Z",
       "side": 1,
       "message": "The texture should know if it is readonly or writable access. Even a texture with readonly usages can be opened with writable access, this helps produce better barriers in Dawn potentially and allows lazy-clearing.",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d51e85eb_18bcc2ed",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T16:49:13Z",
+      "side": 1,
+      "message": "How about we verify `SharedTextureMemoryBeginAccessDescriptor::initialized \u003d\u003d true` in `BeginAccess()` for readonly textures? Make it the API client\u0027s responsibility.",
+      "parentUuid": "8cde2084_62563abb",
       "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
