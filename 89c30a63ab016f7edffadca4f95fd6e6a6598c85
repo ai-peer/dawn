@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da93c6e9_a7cfc374",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-08T08:56:13Z",
+      "side": 1,
+      "message": "Hi Ben,\n\nI am trying to fix the HLSL SM issue in tint_end2end_tests but this CL still doesn\u0027t work. Now I have no idea, could you help me?\n\nThanks,",
+      "revId": "89c30a63ab016f7edffadca4f95fd6e6a6598c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
