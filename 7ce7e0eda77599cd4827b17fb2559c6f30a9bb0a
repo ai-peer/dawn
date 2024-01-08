@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2bd78b2_5da0fcc8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T20:47:55Z",
+      "side": 1,
+      "message": "LGTM once David\u0027s comments are addressed.",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "724272a8_31e7aeab",
@@ -65,6 +82,29 @@
       "writtenOn": "2024-01-08T20:13:13Z",
       "side": 1,
       "message": "Also OpInBoundsAccessChain\n\nI don\u0027t need exhaustive tests. Just one showing it goes down the same path as OpAccessChain",
+      "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "793ab085_ce8f4d57",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 454,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-08T20:47:55Z",
+      "side": 1,
+      "message": "Is there any possibility of `Type` and `Value` internally bumping a counter or ID? (like symbols) ?\n\nIf so, we should break these into separate statements to prevent non-determinism.\nIf not, feel free to ignore.",
+      "range": {
+        "startLine": 454,
+        "startChar": 33,
+        "endLine": 454,
+        "endChar": 60
+      },
       "revId": "7ce7e0eda77599cd4827b17fb2559c6f30a9bb0a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
