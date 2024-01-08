@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8ff3b9e5_736e60f8",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 369,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-01-08T13:50:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9475e6d4_708953b8",
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "564fedac_ab4a9f3b",
@@ -48,6 +66,30 @@
       "writtenOn": "2023-12-21T01:14:59Z",
       "side": 1,
       "message": "nit: would it be better to make this range more constrained to \noffset: `mMemoryAllocation.GetOffset() + bufferOffset`\nsize: `size`\n\n?",
+      "range": {
+        "startLine": 572,
+        "startChar": 57,
+        "endLine": 573,
+        "endChar": 71
+      },
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec3daaf7_1449c317",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 573,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-01-08T13:50:53Z",
+      "side": 1,
+      "message": "Yes, but:\n1. We still need to map the full allocation if we\u0027re zero initializing.\n2. For non-coherent memory, we need to make sure the mapping is aligned to `nonCoherentAtomSize`.\n\nI\u0027ve added this change, but only for coherent memory.",
+      "parentUuid": "564fedac_ab4a9f3b",
       "range": {
         "startLine": 572,
         "startChar": 57,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "22f18d88_ff5437ee",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 594,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-01-08T13:50:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36a7b949_2a19f35f",
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ea092dc8_84e0bccb",
@@ -88,6 +148,30 @@
       "writtenOn": "2023-12-21T01:14:59Z",
       "side": 1,
       "message": "I\u0027m not sure I understand this optimization.\n\nif you do sequential writes, the latter ones will take the fast path I think only for buffers that were just created.\nIf you writeBuffer to a uniform buffer, then use the uniform buffer in a shader, Dawn doesn\u0027t eagerly transition it back to MapWrite\n\nsecondly, `TransitionUsageNow` will enqueue the barrier, but it won\u0027t actually submit it - do we need to ensure it is submitted somewhere?",
+      "range": {
+        "startLine": 615,
+        "startChar": 4,
+        "endLine": 623,
+        "endChar": 5
+      },
+      "revId": "36ab85e97dfcd64da1dd8bef776f09e835f45326",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c19ca6c_0d3d3974",
+        "filename": "src/dawn/native/vulkan/BufferVk.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-01-08T13:50:53Z",
+      "side": 1,
+      "message": "The problem the optimization is attempting to solve is due to zero initialization.\n\nBuffers which are a multiple of the alignment requirements are fine. The first time the `writeBuffer` is called, we meet the requirements for taking the fast path, and will zero initialize the buffer on the host after mapping it (in `UploadData`). Since the zero initialization was done on the host, we didn\u0027t write to the buffer on the GPU, so the next time we call `writeBuffer`, we will also meet the requirements (assuming the regular requirements are met, like not currently being in use).\n\nThe problem is with buffers which are not a multiple of the alignment requirements. Such buffers will be padded, and the initial padding bytes will be cleared using a `vkCmdClearBuffer`. This is done in `Initialize()`. Clearing the padding bytes upfront is done so that we can still skip zero initialization of the rest of the buffer when the full buffer is overwritten (except the padding bytes the user isn\u0027t aware of). However, doing this is a GPU write to the buffer, so the buffer will now be considered as having been written to on the GPU. Since non-mappable buffers are never eagerly transitioned, we will never be able to take the fast path. So even though we only wrote 1-3 bytes in the very beginning, we\u0027re missing out on the fast path forever. This optimization takes care of this by eagerly transitioning buffers after the first write.\n\nThe reason I only want to do it once is to avoid adding the pipeline barrier every submission for buffers which are never going to meet the fast path requirements anyway (eg. the user is genuinely writing to the buffer on the GPU). And since we will only zero initialize once, it should be enough to address the intended problem.\n\nThe situation you outline of first writing to a buffer (GPU write), then reading it as a uniform buffer will be handled as follows:\n- The buffer is written to (on the GPU). `mLastWriteUsage \u003d CopyDst`\n- This code will transition it to `mLastWriteUsage \u003d MapWrite`.\n- The buffer is used as a uniform buffer.\n- It will now be transitioned to `mLastReadUsage \u003d Uniform`.\nBecause read and write usage are tracked separately, when we then check if we can take the fast path, we see that the buffer has not been written to on the GPU since the last `MapWrite` transition, so we can take the fast path. We don\u0027t care about reads on the GPU, as queue submit will do an implicit visibility operation and no pipeline barriers are necessary. We only need pipeline barriers to make GPU writes available/visible to host.\n\n\nFunctionality-wise, when we submit the command buffer doesn\u0027t really matter. If we didn\u0027t submit it in time and it is still executing on the next call to `UploadData` we will fail the `isInUse` check and will take the slow path and everything should still work. But calling `ForceEventualFlushofCommands` to make sure the pipeline barrier gets submitted on the next tick could potentially allow us to avoid such a situation and take the fast path more often. I\u0027ve added this.",
+      "parentUuid": "ea092dc8_84e0bccb",
       "range": {
         "startLine": 615,
         "startChar": 4,
