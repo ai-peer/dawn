@@ -51,6 +51,24 @@
       "parentUuid": "097a3289_90fdd835",
       "revId": "53b3ad7f715cf374895a686128fa1c9381059a49",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95c62414_7e7515db",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 331,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-08T22:50:24Z",
+      "side": 1,
+      "message": "Agree with ben, a null-deref is just as good as an assertion for catching bugs here.",
+      "parentUuid": "048e7cc3_ad9acd79",
+      "revId": "53b3ad7f715cf374895a686128fa1c9381059a49",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
