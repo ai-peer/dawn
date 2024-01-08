@@ -319,6 +319,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "02f4e5a3_2dd39421",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T20:27:23Z",
+      "side": 1,
+      "message": "OK. So how do we support it? what does the API look like?",
+      "parentUuid": "dc4b855f_2cf80905",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
