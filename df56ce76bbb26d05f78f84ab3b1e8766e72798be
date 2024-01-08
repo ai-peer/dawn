@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c25976e_e1762a57",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 1114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T21:14:35Z",
+      "side": 1,
+      "message": "same here. Does the default implementation will reset `mTexture` of the rvalue to null to avoid call dtor twice?",
+      "range": {
+        "startLine": 1113,
+        "startChar": 0,
+        "endLine": 1114,
+        "endChar": 94
+      },
+      "revId": "df56ce76bbb26d05f78f84ab3b1e8766e72798be",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

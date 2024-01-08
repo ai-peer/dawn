@@ -16,6 +16,98 @@
       "message": "PTAL",
       "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "86d8d19c_0e64acff",
+        "filename": "src/dawn/native/d3d/KeyedMutex.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T21:14:35Z",
+      "side": 1,
+      "message": "should be `delete`, right? Otherwise, what is the default implementation behavior? Will it cause double release the mutex?",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 67
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5f159d0_328c50c5",
+        "filename": "src/dawn/native/d3d/KeyedMutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T21:14:35Z",
+      "side": 1,
+      "message": "FYI, I have a CL[1] to support concurrent read access. The `mAcquireCount` should work with my change.\n\nhttps://dawn-review.googlesource.com/c/dawn/+/168240",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 22
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e61a268_4df1b502",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T21:14:35Z",
+      "side": 1,
+      "message": "`Queue::WriteTextureImpl()` also access textures. Should we add ASSERT() in some texture methods to check if the mutex is acquired?",
+      "range": {
+        "startLine": 399,
+        "startChar": 26,
+        "endLine": 399,
+        "endChar": 46
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a6035835_fb94f026",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T21:14:35Z",
+      "side": 1,
+      "message": "This class is for usages without changing device context state, so we don\u0027t want it can access ID3D11Device.",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 80
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
