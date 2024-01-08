@@ -192,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e3b37a8_c8282f32",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 248,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T14:10:34Z",
+      "side": 1,
+      "message": "That works!",
+      "parentUuid": "cc2d142d_b5baf7e4",
+      "revId": "38b39dabcda5a72c107874c1416625bfaaec7e94",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7c54a7e5_f2571494",

@@ -964,6 +964,24 @@
       "parentUuid": "c8c527ef_23f5f408",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14b0f9b8_22267ac5",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 869,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-08T14:10:34Z",
+      "side": 1,
+      "message": "Something like\n\n```\nstruct AlphaModePairs {\n  VkCompositeAlphaFlagBitsKHR vkBit;\n  wgpu::CompositeAlphaMode webgpuEnum;\n};\nAlphaModePairs alphaModes[] \u003d {\n...\n};\n\nfor (auto mode : alphaModes) {\n  if (capabilities.supportedCompositeAlpha \u0026 mode.vkBit) {\n    capabilities.alphaModes.push_back(mode.webgpuEnum);\n  }\n}\n```\n\nAlso we have two variables named `capabilities`, I\u0027m surprised this works.",
+      "parentUuid": "478eaf56_7719cea1",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
