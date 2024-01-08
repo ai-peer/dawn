@@ -136,8 +136,6 @@ class CopyExternalTextureForBrowserTests : public Parent {
             this->device.CreateTexture(&externalTexturePlane1Desc);
 
         wgpu::ImageCopyTexture plane1 = {};
-        // (Off-topic) spot-test for defaulting of .aspect.
-        plane1.aspect = wgpu::TextureAspect::Undefined;
         plane1.texture = externalTexturePlane1;
         std::array<uint8_t, 8> uvPlaneData = {
             128, 128, 106, 255, 36, 4, 255, 126,
@@ -260,44 +258,37 @@ std::ostream& operator<<(std::ostream& o, CopyRect copyRect) {
 
 DAWN_TEST_PARAM_STRUCT(CopyTestParams, CopySrcRect, CopyDstRect, ScaleType, FlipY);
 
-template <typename... Params>
-class CopyExternalTextureForBrowserTestsBase
-    : public CopyExternalTextureForBrowserTests<DawnTestWithParams<Params...>> {
+class CopyExternalTextureForBrowserTests_Basic
+    : public CopyExternalTextureForBrowserTests<DawnTestWithParams<CopyTestParams>> {
   protected:
-    using DawnTestWithParams<Params...>::AddTextureExpectation;
     void DoBasicCopyTest(const wgpu::Origin3D& srcOrigin,
                          const wgpu::Origin3D& dstOrigin,
                          const wgpu::Extent3D& copySize,
                          const wgpu::Extent2D& naturalSize,
                          const wgpu::Extent3D& dstTextureSize,
-                         const wgpu::CopyTextureForBrowserOptions options = {},
-                         const wgpu::TextureAspect dstAspect = wgpu::TextureAspect::All) {
-        wgpu::ExternalTexture externalTexture = this->CreateDefaultExternalTexture();
+                         const wgpu::CopyTextureForBrowserOptions options = {}) {
+        wgpu::ExternalTexture externalTexture = CreateDefaultExternalTexture();
         wgpu::ImageCopyExternalTexture srcImageCopyExternalTexture;
         srcImageCopyExternalTexture.externalTexture = externalTexture;
         srcImageCopyExternalTexture.origin = srcOrigin;
         srcImageCopyExternalTexture.naturalSize = naturalSize;
 
-        wgpu::Texture dstTexture =
-            Create2DTexture(this->device, dstTextureSize.width, dstTextureSize.height,
-                            wgpu::TextureFormat::RGBA8Unorm,
-                            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc |
-                                wgpu::TextureUsage::CopyDst);
+        wgpu::Texture dstTexture = Create2DTexture(
+            device, dstTextureSize.width, dstTextureSize.height, wgpu::TextureFormat::RGBA8Unorm,
+            wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc |
+                wgpu::TextureUsage::CopyDst);
         wgpu::ImageCopyTexture dstImageCopyTexture =
-            utils::CreateImageCopyTexture(dstTexture, 0, dstOrigin, dstAspect);
+            utils::CreateImageCopyTexture(dstTexture, 0, dstOrigin);
 
-        this->queue.CopyExternalTextureForBrowser(&srcImageCopyExternalTexture,
-                                                  &dstImageCopyTexture, &copySize, &options);
+        queue.CopyExternalTextureForBrowser(&srcImageCopyExternalTexture, &dstImageCopyTexture,
+                                            &copySize, &options);
 
-        std::vector<utils::RGBA8> expected = this->GetExpectedData(
+        std::vector<utils::RGBA8> expected = GetExpectedData(
             options.flipY, srcImageCopyExternalTexture.origin, copySize, naturalSize);
 
         EXPECT_TEXTURE_EQ(expected.data(), dstTexture, dstOrigin, copySize);
     }
 };
-
-class CopyExternalTextureForBrowserTests_Basic
-    : public CopyExternalTextureForBrowserTestsBase<CopyTestParams> {};
 
 TEST_P(CopyExternalTextureForBrowserTests_Basic, Copy) {
     DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
@@ -408,33 +399,6 @@ DAWN_INSTANTIATE_TEST_P(
                            CopyRect::BottomRight, CopyRect::FullSize}),
     std::vector<ScaleType>({ScaleType::UpScale, ScaleType::DownScale, ScaleType::NoScale}),
     std::vector<FlipY>({false, true}));
-
-// Spot-test for defaulting of .aspect
-class CopyExternalTextureForBrowserTests_Aspect : public CopyExternalTextureForBrowserTestsBase<> {
-};
-
-TEST_P(CopyExternalTextureForBrowserTests_Aspect, Copy) {
-    DAWN_SUPPRESS_TEST_IF(IsOpenGLES());
-    DAWN_SUPPRESS_TEST_IF(IsOpenGL() && IsLinux());
-
-    wgpu::Origin3D srcOrigin = {};
-    wgpu::Origin3D dstOrigin = {};
-    wgpu::Extent2D naturalSize = {static_cast<uint32_t>(kWidth), static_cast<uint32_t>(kHeight)};
-    wgpu::Extent3D copySize = {naturalSize.width / 2, naturalSize.height / 2};
-    wgpu::Extent3D dstTextureSize = {copySize.width * 2, copySize.height * 2};
-    wgpu::CopyTextureForBrowserOptions options = {};
-
-    DoBasicCopyTest(srcOrigin, dstOrigin, copySize, naturalSize, dstTextureSize, options,
-                    wgpu::TextureAspect::Undefined);
-}
-
-DAWN_INSTANTIATE_TEST(CopyExternalTextureForBrowserTests_Aspect,
-                      D3D11Backend(),
-                      D3D12Backend(),
-                      MetalBackend(),
-                      OpenGLBackend(),
-                      OpenGLESBackend(),
-                      VulkanBackend());
 
 }  // anonymous namespace
 }  // namespace dawn
