@@ -429,18 +429,16 @@ class CopyTextureForBrowserTests : public Parent {
         return texture;
     }
 
-    void RunCopyExternalImageToTexture(
-        const TextureSpec& srcSpec,
-        wgpu::Texture srcTexture,
-        const TextureSpec& dstSpec,
-        wgpu::Texture dstTexture,
-        const wgpu::Extent3D& copySize,
-        const wgpu::CopyTextureForBrowserOptions options,
-        const wgpu::TextureAspect aspect = wgpu::TextureAspect::All) {
+    void RunCopyExternalImageToTexture(const TextureSpec& srcSpec,
+                                       wgpu::Texture srcTexture,
+                                       const TextureSpec& dstSpec,
+                                       wgpu::Texture dstTexture,
+                                       const wgpu::Extent3D& copySize,
+                                       const wgpu::CopyTextureForBrowserOptions options) {
         wgpu::ImageCopyTexture srcImageCopyTexture =
-            utils::CreateImageCopyTexture(srcTexture, srcSpec.level, srcSpec.copyOrigin, aspect);
+            utils::CreateImageCopyTexture(srcTexture, srcSpec.level, srcSpec.copyOrigin);
         wgpu::ImageCopyTexture dstImageCopyTexture =
-            utils::CreateImageCopyTexture(dstTexture, dstSpec.level, dstSpec.copyOrigin, aspect);
+            utils::CreateImageCopyTexture(dstTexture, dstSpec.level, dstSpec.copyOrigin);
         this->device.GetQueue().CopyTextureForBrowser(&srcImageCopyTexture, &dstImageCopyTexture,
                                                       &copySize, &options);
     }
@@ -720,11 +718,9 @@ class CopyTextureForBrowser_Formats
             dstTextureSpec, wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding |
                                 wgpu::TextureUsage::RenderAttachment | wgpu::TextureUsage::CopySrc);
 
-        // (Off-topic) spot-test the defaulting of ImageCopyTexture.aspect.
-        wgpu::TextureAspect aspect = wgpu::TextureAspect::Undefined;
         // Perform the texture to texture copy
         RunCopyExternalImageToTexture(srcTextureSpec, srcTexture, dstTextureSpec, dstTexture,
-                                      copySize, options, aspect);
+                                      copySize, options);
 
         wgpu::Texture result;
         TextureSpec resultSpec = dstTextureSpec;

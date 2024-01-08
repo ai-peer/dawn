@@ -95,8 +95,6 @@ Aspect SelectFormatAspects(const Format& format, wgpu::TextureAspect aspect) {
             return format.aspects & Aspect::Plane1;
         case wgpu::TextureAspect::Plane2Only:
             return format.aspects & Aspect::Plane2;
-        case wgpu::TextureAspect::Undefined:
-            break;
     }
     DAWN_UNREACHABLE();
 }
