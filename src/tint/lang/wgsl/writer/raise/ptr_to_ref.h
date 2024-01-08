@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,37 +25,24 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/core/ir/load.h"
+#ifndef SRC_TINT_LANG_WGSL_WRITER_RAISE_PTR_TO_REF_H_
+#define SRC_TINT_LANG_WGSL_WRITER_RAISE_PTR_TO_REF_H_
 
-#include "src/tint/lang/core/ir/clone_context.h"
-#include "src/tint/lang/core/ir/module.h"
-#include "src/tint/lang/core/type/pointer.h"
-#include "src/tint/utils/ice/ice.h"
+#include "src/tint/utils/result/result.h"
 
-TINT_INSTANTIATE_TYPEINFO(tint::core::ir::Load);
-
+// Forward declarations.
 namespace tint::core::ir {
-
-Load::Load() {
-    flags_.Add(Flag::kSequenced);
+class Module;
 }
 
-Load::Load(InstructionResult* result, Value* from) {
-    flags_.Add(Flag::kSequenced);
+namespace tint::wgsl::writer::raise {
 
-    TINT_ASSERT(from->Type()->Is<core::type::MemoryView>());
-    TINT_ASSERT(from && from->Type()->UnwrapPtrOrRef() == result->Type());
+/// PtrToRef is a transform that modifies values and instructions to convert from pointer types to
+/// reference types.
+/// @param module the module to transform
+/// @returns success or failure
+Result<SuccessType> PtrToRef(core::ir::Module& module);
 
-    AddOperand(Load::kFromOperandOffset, from);
-    AddResult(result);
-}
+}  // namespace tint::wgsl::writer::raise
 
-Load::~Load() = default;
-
-Load* Load::Clone(CloneContext& ctx) {
-    auto* new_result = ctx.Clone(Result(0));
-    auto* from = ctx.Remap(From());
-    return ctx.ir.instructions.Create<Load>(new_result, from);
-}
-
-}  // namespace tint::core::ir
+#endif  // SRC_TINT_LANG_WGSL_WRITER_RAISE_PTR_TO_REF_H_
