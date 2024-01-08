@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2698ee83_cd11b833",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-08T16:03:17Z",
+      "side": 1,
+      "message": "PTAL. Removed the test change from the cherrypick as the test doesn\u0027t exist.",
+      "revId": "1b2c4e4ee8f56798514ef9a987ce8effa9f52541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
