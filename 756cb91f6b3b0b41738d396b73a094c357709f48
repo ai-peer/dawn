@@ -211,6 +211,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "192aefa7_d85cef44",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T17:58:49Z",
+      "side": 1,
+      "message": "Sorry. I don\u0027t understand the use case. For a swapchain texture, user can import it into dawn as readonly or rw texture, the texture usages used for importing has to be the subset of the real usages of the system texture (vulkan, meta, d3d,etc), but it is not necessary to be equal to the real usages. In this case, if users want to importing it as readonly textures, it means users want dawn never modify the content of the texture, even lazy clear, right?",
+      "parentUuid": "0c509c99_b6bfbce4",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
