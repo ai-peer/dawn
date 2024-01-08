@@ -46,8 +46,6 @@ namespace {
 
 GLenum TargetForTexture(const UnpackedPtr<TextureDescriptor>& descriptor) {
     switch (descriptor->dimension) {
-        case wgpu::TextureDimension::Undefined:
-            DAWN_UNREACHABLE();
         case wgpu::TextureDimension::e1D:
         case wgpu::TextureDimension::e2D:
             if (descriptor->size.depthOrArrayLayers > 1) {
@@ -349,7 +347,6 @@ MaybeError Texture::ClearTexture(const SubresourceRange& range,
                         break;
 
                     case wgpu::TextureDimension::e3D:
-                    case wgpu::TextureDimension::Undefined:
                         DAWN_UNREACHABLE();
                 }
             }
@@ -445,8 +442,6 @@ MaybeError Texture::ClearTexture(const SubresourceRange& range,
 
                     if (GetArrayLayers() == 1) {
                         switch (GetDimension()) {
-                            case wgpu::TextureDimension::Undefined:
-                                DAWN_UNREACHABLE();
                             case wgpu::TextureDimension::e1D:
                             case wgpu::TextureDimension::e2D:
                                 gl.FramebufferTexture2D(GL_DRAW_FRAMEBUFFER, attachment,
