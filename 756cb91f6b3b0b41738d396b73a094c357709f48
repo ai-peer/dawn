@@ -16,6 +16,23 @@
       "message": "Hi Austin, Corentin, PTAL. Thanks",
       "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "29de324d_4678418b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-08T16:00:46Z",
+      "side": 1,
+      "message": "Corentin and Austin, kindly ping. thanks",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
