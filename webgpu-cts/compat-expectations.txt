@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-01-02 07:34:11AM
+# Last rolled: 2024-01-09 07:47:48AM
 
 # Flaky on all platforms
 # KEEP
@@ -291,12 +291,6 @@ crbug.com/dawn/2219 webgpu:web_platform,canvas,readbackFromWebGPUCanvas:drawTo2D
 crbug.com/dawn/2219 webgpu:web_platform,canvas,readbackFromWebGPUCanvas:drawTo2DCanvas:format="rgba8unorm";alphaMode="opaque";colorSpace="display-p3";webgpuCanvasType="onscreen";canvas2DType="offscreen" [ Failure ]
 crbug.com/dawn/2219 webgpu:web_platform,canvas,readbackFromWebGPUCanvas:drawTo2DCanvas:format="rgba8unorm";alphaMode="opaque";colorSpace="display-p3";webgpuCanvasType="onscreen";canvas2DType="onscreen" [ Failure ]
 
-# workgroup_size(256, 1, 1) exceeds the maximum allowed (128, 128, 64)
-crbug.com/dawn/2318 webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_advanced:workgroupSize=256;scalarType="i32" [ Failure ]
-crbug.com/dawn/2318 webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_advanced:workgroupSize=256;scalarType="u32" [ Failure ]
-crbug.com/dawn/2318 webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_workgroup_advanced:workgroupSize=256;scalarType="i32" [ Failure ]
-crbug.com/dawn/2318 webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_workgroup_advanced:workgroupSize=256;scalarType="u32" [ Failure ]
-
 ### This section represents things that will require Compat validation
 ### These tests will never pass, but should be skipped in CTS once Compat
 ### validation has been added
@@ -373,8 +367,8 @@ crbug.com/dawn/2248 [ intel-0x9bc5 ] webgpu:api,operation,command_buffer,queries
 
 # getCurrentTexture failures
 crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:* [ Failure ]
-crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTexture:resize:* [ Failure ]
 crbug.com/dawn/2114 [ nvidia-0x2184 ] webgpu:web_platform,canvas,getCurrentTexture:multiple_frames:canvasType="onscreen" [ Failure ]
+crbug.com/dawn/2114 [ intel-0x9bc5 ] webgpu:web_platform,canvas,getCurrentTexture:resize:* [ Failure ]
 
 # Limits issues on NVidia GL
 crbug.com/dawn/2123 [ nvidia-0x2184 ] webgpu:api,validation,capability_checks,limits,maxBufferSize:createBuffer,at_over:limitTest="atMaximum";testValueName="atLimit" [ Failure ]
@@ -605,8 +599,4 @@ crbug.com/dawn/0000 webgpu:shader,execution,shader_io,fragment_builtins:inputs,i
 crbug.com/dawn/0000 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0,1];sampleCount=4;interpolation={"type":"flat"} [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0.25,0.75];sampleCount=1;interpolation={"type":"flat"} [ Failure ]
 crbug.com/dawn/0000 webgpu:shader,execution,shader_io,fragment_builtins:inputs,interStage:nearFar=[0.25,0.75];sampleCount=4;interpolation={"type":"flat"} [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,pack4xI8Clamp:supported:* [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,pack4xU8Clamp:supported:* [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,unpack4xI8:supported:* [ Failure ]
-crbug.com/dawn/0000 webgpu:shader,validation,expression,call,builtin,unpack4xU8:supported:* [ Failure ]
 crbug.com/dawn/0000 webgpu:web_platform,copyToTexture,canvas:color_space_conversion:* [ Failure ]
