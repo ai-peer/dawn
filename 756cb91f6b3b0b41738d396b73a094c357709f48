@@ -391,6 +391,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c2cd0679_4f652d9c",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T15:38:42Z",
+      "side": 1,
+      "message": "Could you please explain why Vulkan layouts need to be GENERAL for concurrent read? Thanks",
+      "parentUuid": "8b3c8d9a_59507238",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
