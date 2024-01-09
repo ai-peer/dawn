@@ -33,6 +33,24 @@
       "message": "I\u0027m confused.  Shouldn\u0027t currentCompleted be updated with a fresh atomic load in the body of the loop?\n\nI see there\u0027s the same pattern is used in CheckAndUpdateCompletedSerials",
       "revId": "83f1c1a5a49d0a0d96eb956cd6a45d67def3a71c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "89631dda_21188c1e",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-09T23:26:27Z",
+      "side": 1,
+      "message": "Never mind. I misread things and didn\u0027t realize the update occurs through the reference to the first param.",
+      "parentUuid": "c0cc0198_bc1ba179",
+      "revId": "83f1c1a5a49d0a0d96eb956cd6a45d67def3a71c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
