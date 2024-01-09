@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "79efb42d_3ab81187",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-09T23:08:04Z",
+      "side": 1,
+      "message": "I\u0027m confused about the update pattern. PTAL",
+      "revId": "83f1c1a5a49d0a0d96eb956cd6a45d67def3a71c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0cc0198_bc1ba179",
+        "filename": "src/dawn/native/metal/QueueMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-09T23:08:04Z",
+      "side": 1,
+      "message": "I\u0027m confused.  Shouldn\u0027t currentCompleted be updated with a fresh atomic load in the body of the loop?\n\nI see there\u0027s the same pattern is used in CheckAndUpdateCompletedSerials",
+      "revId": "83f1c1a5a49d0a0d96eb956cd6a45d67def3a71c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
