@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbed1344_44a98bbf",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-09T21:20:38Z",
+      "side": 0,
+      "message": "By taking this out of here, does it effect the caching in any way? I know the compile is cached, but I don\u0027t know if all these fields effect the cache. And, if it does, does removing the fields actually matter? They only way the data changes is if the program changed, so the results should be consistent either way?",
+      "revId": "6140a5998637a8b64a83c4da189d02af11a503f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
