@@ -43,6 +43,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "71dc3d2a_1d1aaebf",
+        "filename": "src/dawn/native/d3d/KeyedMutex.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-09T04:41:20Z",
+      "side": 1,
+      "message": "Nice catch - fixed the move ctor and operator. I prefer supporting move for these types so that they can go directly into containers instead of wrapping in another layer with unique_ptr.",
+      "parentUuid": "86d8d19c_0e64acff",
+      "range": {
+        "startLine": 38,
+        "startChar": 0,
+        "endLine": 39,
+        "endChar": 67
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a5f159d0_328c50c5",
         "filename": "src/dawn/native/d3d/KeyedMutex.h",
         "patchSetId": 2
@@ -89,6 +113,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "77992732_6a6c3d2d",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-09T04:41:20Z",
+      "side": 1,
+      "message": "Good catch - I don\u0027t think we need an ASSERT since D3D debug layer already catches these. I\u0027ve fixed the WriteTexture case in the latest patchset, and I couldn\u0027t find any other cases that need synchronization - most are already handled correctly when recording command buffers. I\u0027ll add a test for WriteTexture when I get back to this tomorrow.",
+      "parentUuid": "9e61a268_4df1b502",
+      "range": {
+        "startLine": 399,
+        "startChar": 26,
+        "endLine": 399,
+        "endChar": 46
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a6035835_fb94f026",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 2
@@ -100,6 +148,30 @@
       "writtenOn": "2024-01-08T21:14:35Z",
       "side": 1,
       "message": "This class is for usages without changing device context state, so we don\u0027t want it can access ID3D11Device.",
+      "range": {
+        "startLine": 74,
+        "startChar": 41,
+        "endLine": 74,
+        "endChar": 80
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "04bbc480_738ad8e8",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-09T04:41:20Z",
+      "side": 1,
+      "message": "I didn\u0027t notice that we can use ScopedCommandRecordingContext::Wait() instead of exposing the device context - reverted the changes in this file.",
+      "parentUuid": "a6035835_fb94f026",
       "range": {
         "startLine": 74,
         "startChar": 41,
