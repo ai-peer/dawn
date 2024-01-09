@@ -285,6 +285,7 @@ struct EntryPointMetadata {
     bool usesInstanceIndex = false;
     bool usesNumWorkgroups = false;
     bool usesSampleMaskOutput = false;
+    bool usesSampleIndex = false;
     bool usesVertexIndex = false;
 };
 
