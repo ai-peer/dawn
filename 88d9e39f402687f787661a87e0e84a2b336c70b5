@@ -235,6 +235,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "10e184ca_fdb1f13e",
+        "filename": "src/tint/CMakeLists.txt",
+        "patchSetId": 1
+      },
+      "lineNbr": 693,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-01-09T21:17:03Z",
+      "side": 1,
+      "message": "@dsinclair@chromium.org, @bclayton@chromium.org\nIs there anything else that should be done towards this ticket?",
+      "parentUuid": "b4e1df61_ce61885a",
+      "revId": "88d9e39f402687f787661a87e0e84a2b336c70b5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f721297d_70a908cc",
         "filename": "src/tint/CMakeLists.txt",
         "patchSetId": 1
