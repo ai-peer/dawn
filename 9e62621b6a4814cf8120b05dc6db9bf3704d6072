@@ -117,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7791066e_a5deea94",
+        "filename": "src/dawn/partition_alloc/partition_alloc/pointers/raw_ptr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-09T17:15:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e29bf045_b52bcfe8",
+      "revId": "9e62621b6a4814cf8120b05dc6db9bf3704d6072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "259f7bb7_6303e7ae",
