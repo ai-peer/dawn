@@ -409,6 +409,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d085648c_6cc329bf",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-09T17:32:08Z",
+      "side": 1,
+      "message": "Layout changes in Vulkan do compression plane compression and decompression (Hi-Z, Clear color compression, etc).\n\nImagine your texture units can handle compression planes, but not the copy engine, then a SHADER_READ_OPTIMAL -\u003e TRANSFER_SRC_OPTIMAL transition will be doing a decompression, which is technically a write, and could cause another concurrent user of the same texture to read garbage.",
+      "parentUuid": "c2cd0679_4f652d9c",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
