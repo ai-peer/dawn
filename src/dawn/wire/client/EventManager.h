@@ -127,7 +127,7 @@ class EventManager final : NonMovable {
                 return WireResult::FatalError;
             }
             static_cast<Event*>(trackedEvent.get())
-                ->ReadyHook(std::forward<ReadyArgs>(readyArgs)...);
+                ->ReadyHook(futureID, std::forward<ReadyArgs>(readyArgs)...);
             trackedEvent->SetReady();
 
             // If the event can be spontaneously completed, prepare to do so now.

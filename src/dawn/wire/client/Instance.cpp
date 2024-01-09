@@ -53,7 +53,8 @@ class RequestAdapterEvent : public TrackedEvent {
 
     EventType GetType() override { return kType; }
 
-    void ReadyHook(WGPURequestAdapterStatus status,
+    void ReadyHook(FutureID futureID,
+                   WGPURequestAdapterStatus status,
                    const char* message,
                    const WGPUAdapterProperties* properties,
                    const WGPUSupportedLimits* limits,

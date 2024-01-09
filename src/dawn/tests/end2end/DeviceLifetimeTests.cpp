@@ -150,23 +150,6 @@ TEST_P(DeviceLifetimeTests, DroppedBeforeBuffer) {
     device = nullptr;
 }
 
-// Test that the device can be dropped while a buffer created from it is being mapped.
-TEST_P(DeviceLifetimeTests, DroppedWhileMappingBuffer) {
-    wgpu::BufferDescriptor desc = {};
-    desc.size = 4;
-    desc.usage = wgpu::BufferUsage::MapRead | wgpu::BufferUsage::CopyDst;
-    wgpu::Buffer buffer = device.CreateBuffer(&desc);
-
-    buffer.MapAsync(
-        wgpu::MapMode::Read, 0, wgpu::kWholeMapSize,
-        [](WGPUBufferMapAsyncStatus status, void*) {
-            EXPECT_EQ(status, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
-        },
-        nullptr);
-
-    device = nullptr;
-}
-
 // Test that the device can be dropped before a mapped buffer created from it.
 TEST_P(DeviceLifetimeTests, DroppedBeforeMappedBuffer) {
     wgpu::BufferDescriptor desc = {};

@@ -42,7 +42,7 @@ namespace dawn::wire::client {
 
 class Device;
 
-enum class MapRequestType { None, Read, Write };
+enum class MapRequestType { Read, Write };
 
 enum class MapState {
     Unmapped,
@@ -55,13 +55,22 @@ struct MapRequestData {
     FutureID futureID = kNullFutureID;
     size_t offset = 0;
     size_t size = 0;
-    MapRequestType type = MapRequestType::None;
+    std::optional<MapRequestType> type;
 };
 
-struct MapStateData : public RefCounted {
+struct MapStateData {
     // Up to only one request can exist at a single time. Other requests are rejected.
-    std::optional<MapRequestData> pendingRequest = std::nullopt;
-    MapState mapState = MapState::Unmapped;
+    std::optional<MapRequestData> mPendingRequest = std::nullopt;
+    MapState mState = MapState::Unmapped;
+
+    // Only one mapped pointer can be active at a time
+    // TODO(enga): Use a tagged pointer to save space.
+    std::unique_ptr<MemoryTransferService::ReadHandle> mReadHandle = nullptr;
+    std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
+
+    void* mData = nullptr;
+    size_t mOffset = 0;
+    size_t mSize = 0;
 };
 
 class Buffer final : public ObjectWithEventsBase {
@@ -73,10 +82,6 @@ class Buffer final : public ObjectWithEventsBase {
            const WGPUBufferDescriptor* descriptor);
     ~Buffer() override;
 
-    bool OnMapAsyncCallback(WGPUFuture future,
-                            uint32_t status,
-                            uint64_t readDataUpdateInfoLength,
-                            const uint8_t* readDataUpdateInfo);
     void MapAsync(WGPUMapModeFlags mode,
                   size_t offset,
                   size_t size,
@@ -97,11 +102,11 @@ class Buffer final : public ObjectWithEventsBase {
     uint64_t GetSize() const;
 
     WGPUBufferMapState GetMapState() const;
+    MapStateData& GetMapStateData();
 
   private:
     // Prepares the callbacks to be called and potentially calls them
-    bool SetFutureStatus(WGPUBufferMapAsyncStatus status);
-    void SetFutureStatusAndClearPending(WGPUBufferMapAsyncStatus status);
+    void SetFutureStatus(WGPUBufferMapAsyncStatus status);
 
     bool IsMappedForReading() const;
     bool IsMappedForWriting() const;
@@ -109,24 +114,13 @@ class Buffer final : public ObjectWithEventsBase {
 
     void FreeMappedData();
 
-    // The map state is a shared resource with the TrackedEvent so that it is updated only when the
-    // callback is actually called. This is important for WaitAny and ProcessEvents cases where the
-    // server may have responded, but due to an early Unmap or Destroy before the corresponding
-    // WaitAny or ProcessEvents call, we need to update the callback result.
-    Ref<MapStateData> mMapStateData;
-
     uint64_t mSize = 0;
     WGPUBufferUsage mUsage;
-
-    // Only one mapped pointer can be active at a time
-    // TODO(enga): Use a tagged pointer to save space.
-    std::unique_ptr<MemoryTransferService::ReadHandle> mReadHandle = nullptr;
-    std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
+    bool mIsDestroyed = false;
     bool mDestructWriteHandleOnUnmap = false;
 
-    void* mMappedData = nullptr;
-    size_t mMapOffset = 0;
-    size_t mMapSize = 0;
+    // The map state encapsulates and tracks all variable buffer information related to mapping.
+    MapStateData mMapStateData;
 };
 
 }  // namespace dawn::wire::client
