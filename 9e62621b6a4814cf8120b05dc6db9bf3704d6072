@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "399cf877_259686aa",
+        "filename": "src/dawn/partition_alloc/partition_alloc/compiler_specific.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-09T17:14:18Z",
+      "side": 1,
+      "message": "Good idea!",
+      "parentUuid": "613c466b_762d9835",
+      "revId": "9e62621b6a4814cf8120b05dc6db9bf3704d6072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3b5a586f_6c446017",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-01-02T12:50:17Z",
       "side": 1,
       "message": "```suggestion\n\n#include \u003ccstddef\u003e\n#include \u003ccstdint\u003e\n```",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 40,
+        "endChar": 18
+      },
+      "revId": "9e62621b6a4814cf8120b05dc6db9bf3704d6072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7888dd6b_d4820099",
+        "filename": "src/dawn/partition_alloc/partition_alloc/pointers/raw_ptr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-09T17:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3b5a586f_6c446017",
       "range": {
         "startLine": 37,
         "startChar": 0,
@@ -98,6 +140,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3524f5cb_f019f42a",
+        "filename": "src/dawn/partition_alloc/partition_alloc/pointers/raw_ptr.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-09T17:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "259f7bb7_6303e7ae",
+      "range": {
+        "startLine": 308,
+        "startChar": 63,
+        "endLine": 308,
+        "endChar": 65
+      },
+      "revId": "9e62621b6a4814cf8120b05dc6db9bf3704d6072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ef2a9511_6b726347",
@@ -111,6 +177,24 @@
       "writtenOn": "2024-01-02T12:50:17Z",
       "side": 1,
       "message": "Maybe this could be an URL in the chromium repo as Dawn doesn\u0027t have //base 😊",
+      "revId": "9e62621b6a4814cf8120b05dc6db9bf3704d6072",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "28c8fc33_682ab535",
+        "filename": "src/dawn/partition_alloc/partition_alloc/pointers/raw_ptr_exclusion.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-09T17:14:18Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ef2a9511_6b726347",
       "revId": "9e62621b6a4814cf8120b05dc6db9bf3704d6072",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
