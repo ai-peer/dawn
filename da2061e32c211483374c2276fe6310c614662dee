@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9149c1bc_76187b80",
+        "filename": "src/dawn/wire/ObjectHandle.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-09T06:30:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6305e13f_316cbc2b",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c8768450_d82a14e4",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-01-05T15:11:03Z",
       "side": 1,
       "message": "it\u0027s worth also explaining that we can\u0027t store it on the instance because spontaneous mode callbacks should outlive the instance.\n\nWe also can\u0027t use ObjectStore for the EventManagers because we still need the old instance (id, generation) pairs to be tracked. (took my a while to see this while reviewing)",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ced2b3cb_c84591c7",
+        "filename": "src/dawn/wire/client/Client.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 130,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-09T06:30:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c8768450_d82a14e4",
       "revId": "da2061e32c211483374c2276fe6310c614662dee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c8be1952_463885a0",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 87,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-09T06:30:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3066dcc7_d79f18dc",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cba2057_de65db37",
@@ -99,6 +153,24 @@
       "writtenOn": "2024-01-05T22:05:14Z",
       "side": 1,
       "message": "nit: `mState \u003d state` at the end (after the switch) would be more intuitive IMO",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69d437a7_cd389c9d",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-09T06:30:53Z",
+      "side": 1,
+      "message": "Moved to the front because I want to make sure the transition happens before any processing so that the state change propagates if more than one thread accesses the state.",
+      "parentUuid": "8cba2057_de65db37",
       "revId": "da2061e32c211483374c2276fe6310c614662dee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -120,6 +192,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ee2681f_10ddfe97",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 146,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-09T06:30:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76f4a076_7d0167de",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "40d9a066_c5cc7fa4",
@@ -133,6 +223,24 @@
       "writtenOn": "2024-01-05T22:05:14Z",
       "side": 1,
       "message": "same as above",
+      "revId": "da2061e32c211483374c2276fe6310c614662dee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ecffb1b3_eeeb627e",
+        "filename": "src/dawn/wire/client/EventManager.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 149,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-09T06:30:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40d9a066_c5cc7fa4",
       "revId": "da2061e32c211483374c2276fe6310c614662dee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
