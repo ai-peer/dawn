@@ -16,6 +16,29 @@
       "message": "PTAL.",
       "revId": "b7b06c25cd4aef205b54f7b03b005e5c6b9d6541",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b20b8d81_3b7981e9",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-09T12:23:17Z",
+      "side": 1,
+      "message": "Please can we flip this? It\u0027s far more common for the fuzzer to have a non-zero byte, and that\u0027s going to mean the vector is far more likely to eat up the entire buffer, then EOF.",
+      "range": {
+        "startLine": 168,
+        "startChar": 17,
+        "endLine": 168,
+        "endChar": 21
+      },
+      "revId": "b7b06c25cd4aef205b54f7b03b005e5c6b9d6541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
