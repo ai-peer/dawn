@@ -156,6 +156,28 @@ class Inspector {
     /// extension.
     std::vector<std::pair<std::string, Source>> GetEnableDirectives();
 
+    /// The function which was called
+    enum class LevelSampleFunctionType : uint8_t {
+        kTextureNumLevels,
+        kTextureNumSamples,
+    };
+    /// Information on level and sample calls by a given texture binding point
+    struct LevelSampleInfo {
+        /// The type of function
+        LevelSampleFunctionType type;
+        /// The group number
+        uint32_t group;
+        /// The binding number
+        uint32_t binding;
+    };
+
+    /// @returns a vector of information for textures which call textureNumLevels and
+    /// textureNumSamples for backends which require additional support for those methods. Each
+    /// binding point will only be returned once regardless of the number of calls made. The
+    /// texture types for `textureNumSamples` is disjoint from the texture types in
+    /// `textureNumLevels` so the binding point will always be one or the other.
+    std::vector<LevelSampleInfo> GetInfoForTexturesUsedInNumLevelsAndNumSamples();
+
   private:
     const Program& program_;
     diag::List diagnostics_;
