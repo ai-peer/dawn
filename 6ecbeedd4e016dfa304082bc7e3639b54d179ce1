@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6964bca3_b878cf9f",
+        "filename": "src/dawn/wire/client/Client.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-09T19:56:24Z",
+      "side": 1,
+      "message": "nit: it\u0027d be nice if the client was not vulnerable to the server sending garbage!",
+      "revId": "6ecbeedd4e016dfa304082bc7e3639b54d179ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
