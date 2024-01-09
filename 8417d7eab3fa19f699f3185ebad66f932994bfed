@@ -1,0 +1,667 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61710623_41f25136",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,zero_init:compute,zero_init:addressSpace\u003d\"workgroup\";*\u0027 with tags [android, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8a5acc4_fff46c25",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 202,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟦 note: all 21 tests now pass",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b8b71b8b_a2fbd3b0",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,video:copy_from_video:*\u0027 with tags [android-r, qualcomm, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1bfac2a7_18bf3e4f",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 399,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,readbackFromWebGPUCanvas:offscreenCanvas,snapshot:format\u003d\"rgba16float\";alphaMode\u003d\"opaque\";colorSpace\u003d\"srgb\";snapshotType\u003d\"transferToImageBitmap\"\u0027 with tags [android-r, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "eedf0328_f382edb2",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 410,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,readbackFromWebGPUCanvas:offscreenCanvas,snapshot:format\u003d\"rgba16float\";alphaMode\u003d\"opaque\";colorSpace\u003d\"srgb\";snapshotType\u003d\"imageBitmap\"\u0027 with tags [android-r, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4217bce1_420e9ce1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,canvas,readbackFromWebGPUCanvas:onscreenCanvas,snapshot:format\u003d\"rgba16float\";alphaMode\u003d\"opaque\";colorSpace\u003d\"srgb\";snapshotType\u003d\"imageBitmap\"\u0027 with tags [android-r, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "82468244_b5b65610",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 622,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,encoding,cmds,copyTextureToTexture:copy_aspects:format\u003d\"depth32float\"\u0027 with tags [android-r, dawn-backend-validation]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "527ca33e_bcaf92ee",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 623,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,encoding,cmds,copyTextureToTexture:copy_aspects:format\u003d\"depth32float-stencil8\"\u0027 with tags [android-r, dawn-backend-validation]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f416987_988d5028",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 624,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,encoding,cmds,copyTextureToTexture:copy_aspects:format\u003d\"depth32float\"\u0027 with tags [android-r, dawn-no-backend-validation]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "07512c41_54121ab8",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 625,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,encoding,cmds,copyTextureToTexture:copy_aspects:format\u003d\"depth32float-stencil8\"\u0027 with tags [android-r, dawn-no-backend-validation]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "18a6dedc_078f8eb9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 626,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,encoding,cmds,copyTextureToTexture:copy_ranges:dimension\u003d\"1d\";copyBoxOffsets\u003d{\"x\":0,\"y\":0,\"z\":0,\"width\":0,\"height\":0,\"depthOrArrayLayers\":0};srcCopyLevel\u003d0;dstCopyLevel\u003d0\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "06889403_ea4b4814",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 627,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,encoding,cmds,copyTextureToTexture:copy_ranges:dimension\u003d\"2d\";copyBoxOffsets\u003d{\"x\":0,\"y\":0,\"z\":0,\"width\":0,\"height\":1,\"depthOrArrayLayers\":-2};srcCopyLevel\u003d1;dstCopyLevel\u003d3\u0027 with tags [android-r, dawn-backend-validation]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e639846_36400866",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,encoding,cmds,copyTextureToTexture:copy_ranges:dimension\u003d\"2d\";copyBoxOffsets\u003d{\"x\":0,\"y\":0,\"z\":0,\"width\":0,\"height\":1,\"depthOrArrayLayers\":-2};srcCopyLevel\u003d1;dstCopyLevel\u003d3\u0027 with tags [android-r, dawn-no-backend-validation]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4510b8b7_bd539d80",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 640,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:current_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d1\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f76fc13c_4ea2e415",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 641,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:current_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d10\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6656f2b6_77f05e21",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 642,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:current_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d100\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75d0e72b_40dedf46",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 643,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:current_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d1000\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e58e0378_5a132071",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 644,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:current_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d100000\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc937c93_e23ef0c9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:parent_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d1\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e2129613_d6afe35d",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 646,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:parent_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d10\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fd0cb81_28ab3710",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 647,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:parent_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d100\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "749f78e7_3811588e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,error_scope:parent_scope:errorFilter\u003d\"out-of-memory\";stackDepth\u003d1000\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3281a019_d847a157",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 673,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_basic:workgroupSize\u003d1;dispatchSize\u003d16;mapId\u003d\"remap\";scalarType\u003d\"u32\"\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a7fb839_aec8eb86",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 674,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_basic:workgroupSize\u003d1;dispatchSize\u003d4;mapId\u003d\"remap\";scalarType\u003d\"u32\"\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "920136ed_053d2c07",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 675,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,atomics,atomicCompareExchangeWeak:compare_exchange_weak_storage_basic:workgroupSize\u003d1;dispatchSize\u003d8;mapId\u003d\"remap\";scalarType\u003d\"u32\"\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22b4b253_a301e0f5",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 676,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange:exchange_storage_basic:workgroupSize\u003d1;dispatchSize\u003d16;mapId\u003d\"remap\";scalarType\u003d\"u32\"\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c00f01_177e821e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 677,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange:exchange_storage_basic:workgroupSize\u003d1;dispatchSize\u003d4;mapId\u003d\"remap\";scalarType\u003d\"u32\"\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5ea1a22_cf5a0f20",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 678,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,expression,call,builtin,atomics,atomicExchange:exchange_storage_basic:workgroupSize\u003d1;dispatchSize\u003d8;mapId\u003d\"remap\";scalarType\u003d\"u32\"\u0027 with tags [android-r]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c60bc02_4d7d793a",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 759,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,functions,alias_analysis:one_pointer_one_module_scope:*\u0027 with tags [android-r, qualcomm, target-cpu-32, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e8d1ff54_882562a7",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 760,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,compute:*\u0027 with tags [android-r, qualcomm, target-cpu-32, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a4b28be_0c174445",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 761,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,external_texture,video:importExternalTexture,sample:*\u0027 with tags [android-r, qualcomm, target-cpu-32, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f5b7895_64f34b3e",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 762,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:from_ImageData:*\u0027 with tags [android-r, qualcomm, target-cpu-32, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6f5bb7ed_ff533c27",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 763,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:web_platform,copyToTexture,ImageBitmap:from_canvas:*\u0027 with tags [android-r, qualcomm, target-cpu-32, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6fd83f75_7dbf998a",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 764,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,robust_access:linear_memory:*\u0027 with tags [android-r, qualcomm, target-cpu-32, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "65e778b1_c7da4e2a",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 765,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,robust_access_vertex:vertex_buffer_access:*\u0027 with tags [android-r, qualcomm, target-cpu-32, webgpu-adapter-default]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6049e588_a13e83c9",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 773,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,expression,call,builtin,length:vec4:stage\u003d\"constant\";*\u0027 with tags [android-r, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b9c4697_04254cb1",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 774,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,validation,functions,restrictions:call_arg_types_match_params:*\u0027 with tags [android-r, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "50e3c58b_ea81b5ec",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 775,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:shader,execution,memory_model,atomicity:atomicity:memType\u003d\"atomic_workgroup\";testType\u003d\"intra_workgroup\"\u0027 with tags [android-r, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6a3637e_de53e6ce",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 776,
+      "author": {
+        "id": 1004086
+      },
+      "writtenOn": "2024-01-09T07:47:39Z",
+      "side": 0,
+      "message": "🟨 warning: no results found for \u0027webgpu:api,validation,gpu_external_texture_expiration:use_import_to_refresh:\u0027 with tags [android-r, qualcomm]",
+      "revId": "8417d7eab3fa19f699f3185ebad66f932994bfed",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
