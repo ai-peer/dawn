@@ -373,6 +373,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "8b3c8d9a_59507238",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-09T12:27:09Z",
+      "side": 1,
+      "message": "(+1 for explicit concurrent read like Austin suggested, at least from the Dawn perspective)",
+      "parentUuid": "65a0a6ac_e1a592f2",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
