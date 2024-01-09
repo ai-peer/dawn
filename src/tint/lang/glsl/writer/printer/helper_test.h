@@ -89,8 +89,10 @@ class GlslPrinterTestHelperBase : public BASE {
     }
 };
 
+/// GLSL printer test
 using GlslPrinterTest = GlslPrinterTestHelperBase<testing::Test>;
 
+/// GLSL printer test with param
 template <typename T>
 using GlslPrinterTestWithParam = GlslPrinterTestHelperBase<testing::TestWithParam<T>>;
 

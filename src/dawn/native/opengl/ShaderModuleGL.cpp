@@ -34,6 +34,7 @@
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/Pipeline.h"
 #include "dawn/native/TintUtils.h"
+#include "dawn/native/opengl/BindGroupLayoutGL.h"
 #include "dawn/native/opengl/DeviceGL.h"
 #include "dawn/native/opengl/PipelineLayoutGL.h"
 #include "dawn/native/stream/BlobSource.h"
@@ -183,28 +184,17 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
 
     GLSLCompilationRequest req = {};
 
-    using tint::BindingPoint;
     // Since (non-Vulkan) GLSL does not support descriptor sets, generate a
     // mapping from the original group/binding pair to a binding-only
     // value. This mapping will be used by Tint to remap all global
     // variables to the 1D space.
-    const EntryPointMetadata& entryPointMetaData = GetEntryPoint(programmableStage.entryPoint);
-    const BindingInfoArray& moduleBindingInfo = entryPointMetaData.bindings;
-    BindingMap glBindings;
-    BindingMap externalTextureExpansionMap;
+    tint::glsl::writer::Bindings bindings;
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
-        uint32_t groupAsInt = static_cast<uint32_t>(group);
-        const BindGroupLayoutInternalBase* bgl = layout->GetBindGroupLayout(group);
-        const auto& indices = layout->GetBindingIndexInfo()[group];
-        const auto& groupBindingInfo = moduleBindingInfo[group];
-        for (const auto& [bindingNumber, bindingInfo] : groupBindingInfo) {
-            BindingIndex bindingIndex = bgl->GetBindingIndex(bindingNumber);
-            GLuint shaderIndex = indices[bindingIndex];
-            BindingPoint srcBindingPoint{groupAsInt, static_cast<uint32_t>(bindingNumber)};
-            BindingPoint dstBindingPoint{0, shaderIndex};
-            if (srcBindingPoint != dstBindingPoint) {
-                glBindings.emplace(srcBindingPoint, dstBindingPoint);
-            }
+        const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
+
+        for (const auto& [binding, bindingInfo] : moduleBindingInfo[group]) {
+            tint::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                               static_cast<uint32_t>(binding)};
 
             // For buffer bindings that can be sharable across stages, we need to rename them to
             // avoid GL program link failures due to block naming issues.
@@ -212,17 +202,65 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                 stage != SingleShaderStage::Compute) {
                 req.bufferBindingVariables.emplace_back(bindingInfo.name);
             }
-        }
 
-        for (const auto& [_, expansion] : bgl->GetExternalTextureBindingExpansionMap()) {
-            uint32_t plane1Slot = indices[bgl->GetBindingIndex(expansion.plane1)];
-            uint32_t paramsSlot = indices[bgl->GetBindingIndex(expansion.params)];
-            BindingPoint plane0{groupAsInt, static_cast<uint32_t>(expansion.plane0)};
-            BindingPoint plane1{groupAsInt, static_cast<uint32_t>(expansion.plane1)};
-            BindingPoint params{groupAsInt, static_cast<uint32_t>(expansion.params)};
-            glBindings.emplace(plane1, BindingPoint{0u, plane1Slot});
-            glBindings.emplace(params, BindingPoint{0u, paramsSlot});
-            externalTextureExpansionMap[plane0] = plane1;
+            BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
+            auto& bindingIndexInfo = layout->GetBindingIndexInfo()[group];
+            uint32_t shaderIndex = bindingIndexInfo[bindingIndex];
+
+            tint::BindingPoint dstBindingPoint{0, shaderIndex};
+
+            switch (bindingInfo.bindingType) {
+                case BindingInfoType::Buffer:
+                    switch (bindingInfo.buffer.type) {
+                        case wgpu::BufferBindingType::Uniform:
+                            bindings.uniform.emplace(
+                                srcBindingPoint,
+                                tint::glsl::writer::binding::Uniform{dstBindingPoint.binding});
+                            break;
+                        case kInternalStorageBufferBinding:
+                        case wgpu::BufferBindingType::Storage:
+                        case wgpu::BufferBindingType::ReadOnlyStorage:
+                            bindings.storage.emplace(
+                                srcBindingPoint,
+                                tint::glsl::writer::binding::Storage{dstBindingPoint.binding});
+                            break;
+                        case wgpu::BufferBindingType::Undefined:
+                            DAWN_UNREACHABLE();
+                            break;
+                    }
+                    break;
+                case BindingInfoType::Sampler:
+                    bindings.sampler.emplace(srcBindingPoint, tint::glsl::writer::binding::Sampler{
+                                                                  dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::Texture:
+                    bindings.texture.emplace(srcBindingPoint, tint::glsl::writer::binding::Texture{
+                                                                  dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::StorageTexture:
+                    bindings.storage_texture.emplace(
+                        srcBindingPoint,
+                        tint::glsl::writer::binding::StorageTexture{dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::ExternalTexture: {
+                    const auto& etBindingMap = bgl->GetExternalTextureBindingExpansionMap();
+                    const auto& expansion = etBindingMap.find(binding);
+                    DAWN_ASSERT(expansion != etBindingMap.end());
+
+                    const auto& bindingExpansion = expansion->second;
+                    tint::glsl::writer::binding::BindingInfo plane0{
+                        static_cast<uint32_t>(shaderIndex)};
+                    tint::glsl::writer::binding::BindingInfo plane1{
+                        bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.plane1)]};
+                    tint::glsl::writer::binding::BindingInfo metadata{
+                        bindingIndexInfo[bgl->GetBindingIndex(bindingExpansion.params)]};
+
+                    bindings.external_texture.emplace(
+                        srcBindingPoint,
+                        tint::glsl::writer::binding::ExternalTexture{metadata, plane0, plane1});
+                    break;
+                }
+            }
         }
     }
 
@@ -230,9 +268,11 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
     // uniforms.
     tint::TextureBuiltinsFromUniformOptions textureBuiltinsFromUniform;
     textureBuiltinsFromUniform.ubo_binding = {kMaxBindGroups + 1, 0};
+
     // Remap the internal ubo binding as well.
-    glBindings.emplace(textureBuiltinsFromUniform.ubo_binding,
-                       BindingPoint{0, layout->GetInternalUniformBinding()});
+    bindings.uniform.emplace(
+        textureBuiltinsFromUniform.ubo_binding,
+        tint::glsl::writer::binding::BindingInfo{0, layout->GetInternalUniformBinding()});
 
     std::optional<tint::ast::transform::SubstituteOverride::Config> substituteOverrideConfig;
     if (!programmableStage.metadata->overrides.empty()) {
@@ -262,15 +302,14 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
         }
     }
 
-    req.tintOptions.external_texture_options = BuildExternalTextureTransformBindings(layout);
-    req.tintOptions.binding_remapper_options.binding_points = std::move(glBindings);
+    req.tintOptions.bindings = std::move(bindings);
     req.tintOptions.texture_builtins_from_uniform = std::move(textureBuiltinsFromUniform);
     req.tintOptions.disable_polyfill_integer_div_mod =
         GetDevice()->IsToggleEnabled(Toggle::DisablePolyfillsOnIntegerDivisonAndModulo);
 
     // When textures are accessed without a sampler (e.g., textureLoad()),
     // GetSamplerTextureUses() will return this sentinel value.
-    BindingPoint placeholderBindingPoint{static_cast<uint32_t>(kMaxBindGroupsTyped), 0};
+    tint::BindingPoint placeholderBindingPoint{static_cast<uint32_t>(kMaxBindGroupsTyped), 0};
 
     *needsPlaceholderSampler = false;
     tint::inspector::Inspector inspector(*req.inputProgram);
@@ -291,9 +330,13 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
 
         if (info->usePlaceholderSampler) {
             *needsPlaceholderSampler = true;
-            req.tintOptions.placeholder_binding_point = placeholderBindingPoint;
+            req.tintOptions.bindings.placeholder_sampler_bind_point =
+                tint::glsl::writer::binding::BindingInfo{placeholderBindingPoint.group,
+                                                         placeholderBindingPoint.binding};
         }
-        req.tintOptions.binding_map[use] = info->GetName();
+        tint::glsl::writer::binding::CombinedTextureSamplerPair pair{use.texture_binding_point,
+                                                                     use.sampler_binding_point};
+        req.tintOptions.bindings.combined_texture_sampler_info[pair] = info->GetName();
 
         // If the texture has an associated plane1 texture (ie., it's an external texture),
         // append a new combined sampler with the same sampler and the plane1 texture.
@@ -304,7 +347,11 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                                                           plane1Texture->second};
             CombinedSampler* plane1Info =
                 AppendCombinedSampler(&combinedSamplerInfo, plane1Use, placeholderBindingPoint);
-            req.tintOptions.binding_map[plane1Use] = plane1Info->GetName();
+
+            tint::glsl::writer::binding::CombinedTextureSamplerPair pair{
+                plane1Use.texture_binding_point, plane1Use.sampler_binding_point};
+
+            req.tintOptions.bindings.combined_texture_sampler_info[pair] = plane1Info->GetName();
         }
     }
 

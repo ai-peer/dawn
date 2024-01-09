@@ -97,8 +97,8 @@ class ShaderModule final : public ShaderModuleBase {
         const PipelineLayout* layout,
         bool* needsPlaceholderSampler,
         bool* needsTextureBuiltinUniformBuffer,
-        tint::TextureBuiltinsFromUniformOptions::BindingPointToFieldAndOffset* bindingPointToData)
-        const;
+        tint::TextureBuiltinsFromUniformOptions::BindingPointToFieldAndOffset* bindingPointToData,
+        const BindingInfoArray& moduleBindingInfo) const;
 
   private:
     ShaderModule(Device* device, const UnpackedPtr<ShaderModuleDescriptor>& descriptor);
