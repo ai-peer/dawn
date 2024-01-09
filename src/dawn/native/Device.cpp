@@ -1320,6 +1320,10 @@ TextureBase* DeviceBase::APICreateErrorTexture(const TextureDescriptor* desc) {
     return TextureBase::MakeError(this, desc);
 }
 
+TextureViewBase* DeviceBase::APICreateErrorTextureView(const TextureViewDescriptor* desc) {
+    return TextureViewBase::MakeError(this, desc ? desc->label : nullptr);
+}
+
 // Other Device API methods
 
 // Returns true if future ticking is needed.

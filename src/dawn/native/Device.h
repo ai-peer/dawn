@@ -308,6 +308,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     BufferBase* APICreateErrorBuffer(const BufferDescriptor* desc);
     ExternalTextureBase* APICreateErrorExternalTexture();
     TextureBase* APICreateErrorTexture(const TextureDescriptor* desc);
+    TextureViewBase* APICreateErrorTextureView(const TextureViewDescriptor* desc);
 
     AdapterBase* APIGetAdapter();
     QueueBase* APIGetQueue();
