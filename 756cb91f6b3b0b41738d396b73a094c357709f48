@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a97eb21_c954b912",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T20:51:14Z",
+      "side": 1,
+      "message": "Since this CL is not for cross device concurrent read, I think we don\u0027t need to verify those stuff. dawn can still clear the texture of readonly access.",
+      "parentUuid": "9e2ad3cb_ed99374e",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d76fccd8_0c590e5c",
@@ -69,6 +87,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cf346795_ea464edc",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 233,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T20:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d76fccd8_0c590e5c",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbf1e965_2e4e5cb3",
@@ -82,6 +118,24 @@
       "writtenOn": "2024-01-08T16:31:02Z",
       "side": 1,
       "message": "nit: Error messages conventions would have the error be more like \"%s is already used to access %s.\" And following ones like \"%s is currently accessed for reading and writing.\" \"Read-write access used while %s is accessed in a read-only.\".",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3a8799a_4f99b413",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 249,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T20:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbf1e965_2e4e5cb3",
       "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -170,6 +224,24 @@
       "side": 1,
       "message": "If we split the two enums: state (active, paused, destroyed) and sharedAccessMode (None, ReadWrite, ReadOnly) then the true/false becomes a SharedAccessMode and that\u0027s slightly more explicit. The SetHasAccess() in regular creation would be SetState(Active) which seems fine.",
       "parentUuid": "d894c689_e7352d5d",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c8f219c_8740d210",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T20:51:14Z",
+      "side": 1,
+      "message": "Since this CL is not for supporting cross device concurrent read, I think we don\u0027t need to use the access mode for explicit readonly access.",
+      "parentUuid": "23d7fa99_3f76c892",
       "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -425,6 +497,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "58ac2a04_9b783879",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T20:51:14Z",
+      "side": 1,
+      "message": "Actually, this CL is for allowing concurrent read access from one wgpu device. It is not for cross device accessing. If we find chrome does need cross device concurrent read, we will implement it in a separate CL.\n\nI update the CL comment to make it clear.",
+      "parentUuid": "d085648c_6cc329bf",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7cf56ea9_e59db828",
@@ -438,6 +528,24 @@
       "writtenOn": "2024-01-08T16:31:02Z",
       "side": 1,
       "message": "nit: We could have getters for things like this instead of having these members protected.",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b7a74702_ee338fc0",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T20:51:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7cf56ea9_e59db828",
       "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
