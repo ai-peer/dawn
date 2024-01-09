@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76543ba8_6ad901b1",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-09T12:19:53Z",
+      "side": 1,
+      "message": "AH gotcha, that\u0027s why we have contexts in ConsumedError or DAWN_TRY macros, we could do things like [1] for all entrypoints and have simpler error messages here like \"The format (%s) is not supported for this configuration.\" or something like that.",
+      "parentUuid": "38d0c66b_6046c6ad",
+      "range": {
+        "startLine": 225,
+        "startChar": 41,
+        "endLine": 225,
+        "endChar": 50
+      },
+      "revId": "65f3ae9c07682b66c60c25f16dd5081b4865aa7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "a170b251_87be8036",
         "filename": "src/dawn/tests/CMakeLists.txt",
         "patchSetId": 10

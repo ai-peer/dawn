@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "984208a2_4773aac1",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 611,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-09T12:19:53Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "2ace5751d8a19abd0e87934cb8f2df3b8f8b7c39",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
