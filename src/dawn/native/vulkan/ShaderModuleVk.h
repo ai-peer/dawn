@@ -32,7 +32,6 @@
 #include <mutex>
 #include <optional>
 #include <string>
-#include <unordered_map>
 #include <utility>
 
 #include "dawn/common/HashUtils.h"

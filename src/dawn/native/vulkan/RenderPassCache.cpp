@@ -124,7 +124,7 @@ ResultOrError<VkRenderPass> RenderPassCache::GetRenderPass(const RenderPassCache
 
     VkRenderPass renderPass;
     DAWN_TRY_ASSIGN(renderPass, CreateRenderPassForQuery(query));
-    mCache.emplace(query, renderPass);
+    mCache.try_emplace(query, renderPass);
     return renderPass;
 }
 

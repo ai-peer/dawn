@@ -297,7 +297,7 @@ FutureID EventManager::TrackEvent(wgpu::CallbackMode mode, Ref<TrackedEvent>&& f
         return futureID;
     }
 
-    mEvents->Use([&](auto events) { events->emplace(futureID, std::move(future)); });
+    mEvents->Use([&](auto events) { events->try_emplace(futureID, std::move(future)); });
     return futureID;
 }
 
