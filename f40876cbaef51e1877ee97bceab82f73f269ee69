@@ -88,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6679b89a_4e39a032",
+        "filename": "src/dawn/native/d3d/KeyedMutex.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-09T04:44:47Z",
+      "side": 1,
+      "message": "Thanks for the pointer! I didn\u0027t realize the SharedTextureMemory spec forbids concurrent read access even across devices - it\u0027s indeed important to fix that since Chromium expects concurrent reads to just work.",
+      "parentUuid": "a5f159d0_328c50c5",
+      "range": {
+        "startLine": 62,
+        "startChar": 8,
+        "endLine": 62,
+        "endChar": 22
+      },
+      "revId": "f40876cbaef51e1877ee97bceab82f73f269ee69",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e61a268_4df1b502",
