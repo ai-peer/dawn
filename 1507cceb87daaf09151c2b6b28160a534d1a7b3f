@@ -16,6 +16,23 @@
       "message": "LGTM!",
       "revId": "1507cceb87daaf09151c2b6b28160a534d1a7b3f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df2794ea_b7143795",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-09T02:00:02Z",
+      "side": 1,
+      "message": "Thanks for your fix!\nSorry that I didn\u0027t notice we have already enabled Tint IR by default on Android.",
+      "revId": "1507cceb87daaf09151c2b6b28160a534d1a7b3f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
