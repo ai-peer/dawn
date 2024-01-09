@@ -39,6 +39,30 @@
       },
       "revId": "b7b06c25cd4aef205b54f7b03b005e5c6b9d6541",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "81beb076_af689201",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-09T12:24:53Z",
+      "side": 1,
+      "message": "Please can you apply the same thing to `unordered_map`? It looks like I forgot to flip this when you asked me to negate `bytes::Decode\u003cbool\u003e()`",
+      "parentUuid": "b20b8d81_3b7981e9",
+      "range": {
+        "startLine": 168,
+        "startChar": 17,
+        "endLine": 168,
+        "endChar": 21
+      },
+      "revId": "b7b06c25cd4aef205b54f7b03b005e5c6b9d6541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
