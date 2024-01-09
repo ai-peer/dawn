@@ -63,6 +63,30 @@
       },
       "revId": "b7b06c25cd4aef205b54f7b03b005e5c6b9d6541",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fd8460b3_99af579e",
+        "filename": "src/tint/utils/bytes/decoder.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-09T14:04:58Z",
+      "side": 1,
+      "message": "Ignore me. I hadn\u0027t had my coffee.",
+      "parentUuid": "81beb076_af689201",
+      "range": {
+        "startLine": 168,
+        "startChar": 17,
+        "endLine": 168,
+        "endChar": 21
+      },
+      "revId": "b7b06c25cd4aef205b54f7b03b005e5c6b9d6541",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
