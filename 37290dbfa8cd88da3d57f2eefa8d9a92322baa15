@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9c634832_7142bb5f",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-09T10:40:06Z",
+      "side": 1,
+      "message": "Can we have a small validation test that a view created with a valid descriptor through CreateErrorView is an error when used in things?",
+      "revId": "37290dbfa8cd88da3d57f2eefa8d9a92322baa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
