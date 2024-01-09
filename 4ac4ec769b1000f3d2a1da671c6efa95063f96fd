@@ -1,0 +1,136 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9a53921a_56e53aa5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T15:06:37Z",
+      "side": 1,
+      "message": "lgtm with nits.",
+      "revId": "4ac4ec769b1000f3d2a1da671c6efa95063f96fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c72b6715_4e8c4ac0",
+        "filename": "src/dawn/native/d3d/KeyedMutex.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T15:06:37Z",
+      "side": 1,
+      "message": "nit. use `operator\u003d()`? so we don\u0027t need to change two place, if the class members are changed.\n\n```suggestion\n{\n    this-\u003eoperator\u003d(std::move(other));\n    // or\n    // *this \u003d std::move(other);\n}\n```",
+      "range": {
+        "startLine": 39,
+        "startChar": 40,
+        "endLine": 39,
+        "endChar": 86
+      },
+      "revId": "4ac4ec769b1000f3d2a1da671c6efa95063f96fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fde737da_e1070a0a",
+        "filename": "src/dawn/native/d3d/KeyedMutex.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 44,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T15:06:37Z",
+      "side": 1,
+      "message": "nit: Add a new `Reset()` method, and share it with dtor?",
+      "range": {
+        "startLine": 42,
+        "startChar": 0,
+        "endLine": 44,
+        "endChar": 5
+      },
+      "revId": "4ac4ec769b1000f3d2a1da671c6efa95063f96fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "715be0ba_f977d45d",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1121,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T15:06:37Z",
+      "side": 1,
+      "message": "nit: share the code with `operator\u003d()`\n```suggestion\n{\n    this-\u003eoperator\u003d(std::move(other));\n    // or\n    // *this \u003d std::move(other);\n}\n```",
+      "range": {
+        "startLine": 1119,
+        "startChar": 0,
+        "endLine": 1121,
+        "endChar": 42
+      },
+      "revId": "4ac4ec769b1000f3d2a1da671c6efa95063f96fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e37d03d_a368ae73",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T15:06:37Z",
+      "side": 1,
+      "message": "nit: Move it to a new `Reset()` method, so it can be shared with dtor?",
+      "range": {
+        "startLine": 1125,
+        "startChar": 0,
+        "endLine": 1129,
+        "endChar": 5
+      },
+      "revId": "4ac4ec769b1000f3d2a1da671c6efa95063f96fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b51e33a_65aeef51",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-09T15:06:37Z",
+      "side": 1,
+      "message": "why NonMovable?",
+      "range": {
+        "startLine": 113,
+        "startChar": 36,
+        "endLine": 113,
+        "endChar": 47
+      },
+      "revId": "4ac4ec769b1000f3d2a1da671c6efa95063f96fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
