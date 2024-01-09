@@ -76,7 +76,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-01-02 07:34:11AM
+# Last rolled: 2024-01-09 05:01:45AM
 
 ################################################################################
 # copyToTexture failures on Linux
@@ -704,13 +704,13 @@ crbug.com/dawn/2269 webgpu:api,validation,capability_checks,features,query_types
 # Workgroup zero_init flaky on Mac/Intel
 # KEEP
 ################################################################################
-crbug.com/dawn/2327 [ ventura intel-0x3e9b ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="workgroup";* [ RetryOnFailure ]
+crbug.com/dawn/2327 [ intel-0x3e9b ventura ] webgpu:shader,execution,zero_init:compute,zero_init:addressSpace="workgroup";* [ RetryOnFailure ]
 
 ################################################################################
 # WebGPUTextureAlphaClearer invalid texture from IOSurface
 # KEEP
 ################################################################################
-crbug.com/1515476 [ ventura intel-0x3e9b ] webgpu:web_platform,canvas,configure:viewFormats:canvasType="onscreen";format="bgra8unorm";viewFormatFeature="_undef_" [ RetryOnFailure ]
+crbug.com/1515476 [ intel-0x3e9b ventura ] webgpu:web_platform,canvas,configure:viewFormats:canvasType="onscreen";format="bgra8unorm";viewFormatFeature="_undef_" [ RetryOnFailure ]
 
 ################################################################################
 # D3D12 create command queue failed with DXGI_ERROR_DEVICE_REMOVED. Skipped because these tests likely cause downstream flakes.
@@ -723,8 +723,8 @@ crbug.com/dawn/2325 [ nvidia-0x2184 win10 ] webgpu:api,validation,state,device_l
 # Hazard READ_AFTER_WRITE on ASTC/ETC2/BC
 # KEEP
 ################################################################################
-crbug.com/dawn/2324 [ ubuntu intel-0x9bc5 dawn-backend-validation webgpu-adapter-default ] webgpu:api,operation,command_buffer,image_copy:mip_levels:* [ Failure ]
-crbug.com/dawn/1879 [ ubuntu intel-0x9bc5 dawn-backend-validation webgpu-adapter-default ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,compressed,non_array:* [ Failure ]
+crbug.com/dawn/2324 [ dawn-backend-validation intel-0x9bc5 ubuntu webgpu-adapter-default ] webgpu:api,operation,command_buffer,image_copy:mip_levels:* [ Failure ]
+crbug.com/dawn/1879 [ dawn-backend-validation intel-0x9bc5 ubuntu webgpu-adapter-default ] webgpu:api,operation,command_buffer,copyTextureToTexture:color_textures,compressed,non_array:* [ Failure ]
 
 ################################################################################
 # CPU out of memory on Win/Intel. Possibly other problems too
@@ -747,15 +747,15 @@ crbug.com/tint/2129 [ intel-0x9bc5 win10 ] webgpu:shader,validation,shader_io,gr
 # Miscellaneous flakes
 # KEEP
 ################################################################################
-crbug.com/dawn/2332 [ ubuntu intel-0x9bc5 dawn-backend-validation ] webgpu:api,operation,command_buffer,image_copy:origins_and_extents:initMethod="WriteTexture";checkMethod="FullCopyT2B";* [ RetryOnFailure ]
-crbug.com/dawn/2331 [ ubuntu intel-0x9bc5 dawn-backend-validation ] webgpu:api,validation,render_pipeline,depth_stencil_state:* [ RetryOnFailure ]
-crbug.com/dawn/2331 [ ubuntu intel-0x9bc5 dawn-backend-validation ] webgpu:api,validation,render_pipeline,fragment_state:* [ RetryOnFailure ]
-crbug.com/dawn/2331 [ ubuntu intel-0x9bc5 dawn-backend-validation ] webgpu:api,validation,render_pipeline,inter_stage:* [ RetryOnFailure ]
-crbug.com/dawn/2331 [ ubuntu intel-0x9bc5 dawn-backend-validation ] webgpu:api,validation,render_pipeline,overrides:* [ RetryOnFailure ]
-crbug.com/dawn/2331 [ ubuntu intel-0x9bc5 dawn-backend-validation ] webgpu:api,validation,render_pipeline,primitive_state:strip_index_format:* [ RetryOnFailure ]
-crbug.com/1516044 [ ubuntu intel-0x9bc5 dawn-backend-validation ] webgpu:web_platform,canvas,configure:viewFormats:* [ RetryOnFailure ]
+crbug.com/dawn/2332 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:api,operation,command_buffer,image_copy:origins_and_extents:initMethod="WriteTexture";checkMethod="FullCopyT2B";* [ RetryOnFailure ]
+crbug.com/dawn/2331 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,depth_stencil_state:* [ RetryOnFailure ]
+crbug.com/dawn/2331 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,fragment_state:* [ RetryOnFailure ]
+crbug.com/dawn/2331 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,inter_stage:* [ RetryOnFailure ]
+crbug.com/dawn/2331 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,overrides:* [ RetryOnFailure ]
+crbug.com/dawn/2331 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:api,validation,render_pipeline,primitive_state:strip_index_format:* [ RetryOnFailure ]
+crbug.com/1516044 [ dawn-backend-validation intel-0x9bc5 ubuntu ] webgpu:web_platform,canvas,configure:viewFormats:* [ RetryOnFailure ]
 [ apple-angle-metal-renderer:-apple-m2 dawn-backend-validation ventura ] webgpu:api,operation,compute_pipeline,overrides:workgroup_size:* [ RetryOnFailure ]
-[ intel-0x9bc5 dawn-no-backend-validation webgpu-dxc-disabled win10 ] webgpu:shader,validation,uniformity,uniformity:binary_expressions:* [ RetryOnFailure ]
+[ dawn-no-backend-validation intel-0x9bc5 webgpu-dxc-disabled win10 ] webgpu:shader,validation,uniformity,uniformity:binary_expressions:* [ RetryOnFailure ]
 [ android-r qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,functions,alias_analysis:one_pointer_one_module_scope:* [ RetryOnFailure ]
 [ android-r qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:web_platform,external_texture,video:importExternalTexture,compute:* [ RetryOnFailure ]
 [ android-r qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:web_platform,external_texture,video:importExternalTexture,sample:* [ RetryOnFailure ]
@@ -787,9 +787,9 @@ crbug.com/dawn/0000 [ android-r dawn-backend-validation qualcomm target-cpu-32 w
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,expression,call,builtin,atan2:values:stage="override";type="vec3%3Cf32%3E" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-no-backend-validation intel-0x9bc5 target-cpu-32 webgpu-adapter-default webgpu-dxc-disabled win10 ] webgpu:shader,validation,expression,call,builtin,length:vec4:stage="constant";type="vec4%3Cabstract-float%3E" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ android-r dawn-no-backend-validation qualcomm target-cpu-32 webgpu-adapter-default ] webgpu:shader,validation,expression,call,builtin,radians:values:stage="constant";type="vec2%3Cf32%3E" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ win10 nvidia-0x2184 webgpu-adapter-default ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="depth24plus-stencil8" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ win10 nvidia-0x2184 webgpu-adapter-default ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="r16sint" [ RetryOnFailure ]
-crbug.com/dawn/0000 [ win10 nvidia-0x2184 webgpu-adapter-default ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="rgba16float" [ RetryOnFailure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 webgpu-adapter-default win10 ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="depth24plus-stencil8" [ RetryOnFailure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 webgpu-adapter-default win10 ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="r16sint" [ RetryOnFailure ]
+crbug.com/dawn/0000 [ nvidia-0x2184 webgpu-adapter-default win10 ] webgpu:web_platform,canvas,configure:format:canvasType="offscreen";format="rgba16float" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x3e9b webgpu-adapter-default ] webgpu:web_platform,canvas,configure:viewFormats:canvasType="offscreen";format="rgba16float";viewFormatFeature="_undef_" [ RetryOnFailure ]
 crbug.com/dawn/0000 [ dawn-backend-validation intel-0x9bc5 ubuntu webgpu-adapter-default ] webgpu:web_platform,copyToTexture,canvas:copy_contents_from_gpu_context_canvas:* [ RetryOnFailure ]
 
