@@ -42,6 +42,7 @@
 #include "dawn/native/ToBackend.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d/UtilsD3D.h"
+#include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/Forward.h"
 #include "dawn/native/d3d11/SharedFenceD3D11.h"
@@ -227,12 +228,20 @@ ResultOrError<Ref<Texture>> Texture::CreateExternalImage(
     Device* device,
     const UnpackedPtr<TextureDescriptor>& descriptor,
     ComPtr<IUnknown> d3dTexture,
+    Ref<d3d::KeyedMutex> keyedMutex,
     std::vector<FenceAndSignalValue> waitFences,
     bool isSwapChainTexture,
     bool isInitialized) {
     Ref<Texture> dawnTexture = AcquireRef(new Texture(device, descriptor, Kind::Normal));
-    DAWN_TRY(dawnTexture->InitializeAsExternalTexture(std::move(d3dTexture), std::move(waitFences),
-                                                      isSwapChainTexture));
+    DAWN_TRY(
+        dawnTexture->InitializeAsExternalTexture(std::move(d3dTexture), std::move(keyedMutex)));
+
+    auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal);
+    for (const auto& fence : waitFences) {
+        DAWN_TRY(CheckHRESULT(
+            commandContext.Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
+            "ID3D11DeviceContext4::Wait"));
+    }
 
     // Importing a multi-planar format must be initialized. This is required because
     // a shared multi-planar format cannot be initialized by Dawn.
@@ -252,7 +261,8 @@ ResultOrError<Ref<Texture>> Texture::CreateFromSharedTextureMemory(
     const UnpackedPtr<TextureDescriptor>& descriptor) {
     Device* device = ToBackend(memory->GetDevice());
     Ref<Texture> texture = AcquireRef(new Texture(device, descriptor, Kind::Normal));
-    DAWN_TRY(texture->InitializeAsExternalTexture(memory->GetD3DResource(), {}, false));
+    DAWN_TRY(
+        texture->InitializeAsExternalTexture(memory->GetD3DResource(), memory->GetKeyedMutex()));
     texture->mSharedTextureMemoryContents = memory->GetContents();
     return texture;
 }
@@ -364,19 +374,11 @@ MaybeError Texture::InitializeAsSwapChainTexture(ComPtr<ID3D11Resource> d3d11Tex
 }
 
 MaybeError Texture::InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
-                                                std::vector<FenceAndSignalValue> waitFences,
-                                                bool isSwapChainTexture) {
+                                                Ref<d3d::KeyedMutex> keyedMutex) {
     ComPtr<ID3D11Resource> d3d11Texture;
     DAWN_TRY(CheckHRESULT(d3dTexture.As(&d3d11Texture), "Query ID3D11Resource from IUnknown"));
-
-    Device* device = ToBackend(GetDevice());
-    auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal);
-    for (const auto& fence : waitFences) {
-        DAWN_TRY(CheckHRESULT(
-            commandContext.Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
-            "ID3D11DeviceContext4::Wait"));
-    }
     mD3d11Resource = std::move(d3d11Texture);
+    mKeyedMutex = std::move(keyedMutex);
     SetLabelHelper("Dawn_ExternalTexture");
     return {};
 }
@@ -1109,6 +1111,42 @@ MaybeError Texture::CopyInternal(const ScopedCommandRecordingContext* commandCon
 ResultOrError<ExecutionSerial> Texture::EndAccess() {
     // TODO(dawn:1705): submit pending commands if deferred context is used.
     return GetDevice()->GetLastSubmittedCommandSerial();
+}
+
+Texture::ScopedTextureUse::ScopedTextureUse() = default;
+Texture::ScopedTextureUse::ScopedTextureUse(ScopedTextureUse&&) = default;
+Texture::ScopedTextureUse& Texture::ScopedTextureUse::operator=(ScopedTextureUse&&) = default;
+
+Texture::ScopedTextureUse::ScopedTextureUse(Texture* texture,
+                                            std::optional<d3d::KeyedMutex::Guard> keyedMutexGuard)
+    : mTexture(texture), mKeyedMutexGuard(std::move(keyedMutexGuard)) {
+    DAWN_CHECK(mTexture != nullptr);
+}
+
+Texture::ScopedTextureUse::~ScopedTextureUse() {
+    if (mTexture != nullptr) {
+        if (auto* contents = mTexture->GetSharedTextureMemoryContents(); contents != nullptr) {
+            contents->SetLastUsageSerial(mTexture->GetDevice()->GetPendingCommandSerial());
+        }
+    }
+}
+
+ResultOrError<Texture::ScopedTextureUse> Texture::SynchronizeTextureUse(
+    const ScopedCommandRecordingContext* commandContext) {
+    SharedTextureMemoryBase::PendingFenceList fences;
+    if (auto* contents = GetSharedTextureMemoryContents(); contents != nullptr) {
+        contents->AcquirePendingFences(&fences);
+    }
+    for (const auto& fence : fences) {
+        DAWN_TRY(CheckHRESULT(commandContext->GetD3D11DeviceContext4()->Wait(
+                                  ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
+                              "ID3D11DeviceContext4::Wait"));
+    }
+    std::optional<d3d::KeyedMutex::Guard> keyedMutexGuard;
+    if (mKeyedMutex != nullptr) {
+        DAWN_TRY_ASSIGN(keyedMutexGuard, mKeyedMutex->AcquireKeyedMutex());
+    }
+    return ScopedTextureUse(this, std::move(keyedMutexGuard));
 }
 
 ResultOrError<ComPtr<ID3D11ShaderResourceView>> Texture::GetStencilSRV(

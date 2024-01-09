@@ -78,6 +78,10 @@ class ScopedCommandRecordingContext : NonMovable {
     ~ScopedCommandRecordingContext();
 
     Device* GetDevice() const;
+    ID3D11Device* GetD3D11Device() const;
+    ID3D11DeviceContext4* GetD3D11DeviceContext4() const;
+    ID3DUserDefinedAnnotation* GetD3DUserDefinedAnnotation() const;
+    Buffer* GetUniformBuffer() const;
 
     // Wrapper method which don't depend on context state.
     void UpdateSubresource(ID3D11Resource* pDstResource,
@@ -125,11 +129,6 @@ class ScopedSwapStateCommandRecordingContext : public ScopedCommandRecordingCont
   public:
     explicit ScopedSwapStateCommandRecordingContext(CommandRecordingContext* commandContext);
     ~ScopedSwapStateCommandRecordingContext();
-
-    ID3D11Device* GetD3D11Device() const;
-    ID3D11DeviceContext4* GetD3D11DeviceContext4() const;
-    ID3DUserDefinedAnnotation* GetD3DUserDefinedAnnotation() const;
-    Buffer* GetUniformBuffer() const;
 
   private:
     const bool mSwapContextState;
