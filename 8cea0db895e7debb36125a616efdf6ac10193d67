@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfbaa09a_56daaa03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 23
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-09T16:56:06Z",
+      "side": 1,
+      "message": "Thanks!\n\nI fixed the last issue. Dawn tests are also running in Chrome, causing partition_alloc to be initialized twice. Once from Dawn, and a second from Chrome.\n\nTo avoid the issue, I put enabling it behind `dawn_standalone`:\nhttps://dawn-review.googlesource.com/c/dawn/+/160088/22..23\n\nI am assuming this is okay for you. So I will land this CL. Don\u0027t hesitate to suggest follow-ups if needed.",
+      "revId": "8cea0db895e7debb36125a616efdf6ac10193d67",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
