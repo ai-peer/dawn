@@ -47,7 +47,10 @@ class WorkDoneEvent : public TrackedEvent {
 
     EventType GetType() override { return kType; }
 
-    void ReadyHook(WGPUQueueWorkDoneStatus status) { mStatus = status; }
+    bool ReadyHook(FutureID futureID, WGPUQueueWorkDoneStatus status) {
+        mStatus = status;
+        return true;
+    }
 
   private:
     void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
