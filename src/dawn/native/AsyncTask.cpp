@@ -48,7 +48,7 @@ void AsyncTaskManager::PostTask(AsyncTask asyncTask) {
         // (WaitAllPendingTasks()) or sub-thread (TaskCompleted), so mPendingTasks should be
         // protected by a mutex.
         std::lock_guard<std::mutex> lock(mPendingTasksMutex);
-        mPendingTasks.emplace(waitableTask.Get(), waitableTask);
+        mPendingTasks.try_emplace(waitableTask.Get(), waitableTask);
     }
 
     // Ref the task since it is accessed inside the worker function.
@@ -60,14 +60,11 @@ void AsyncTaskManager::PostTask(AsyncTask asyncTask) {
 
 void AsyncTaskManager::HandleTaskCompletion(WaitableTask* task) {
     std::lock_guard<std::mutex> lock(mPendingTasksMutex);
-    auto iter = mPendingTasks.find(task);
-    if (iter != mPendingTasks.end()) {
-        mPendingTasks.erase(iter);
-    }
+    mPendingTasks.erase(task);
 }
 
 void AsyncTaskManager::WaitAllPendingTasks() {
-    std::unordered_map<WaitableTask*, Ref<WaitableTask>> allPendingTasks;
+    absl::flat_hash_map<WaitableTask*, Ref<WaitableTask>> allPendingTasks;
 
     {
         std::lock_guard<std::mutex> lock(mPendingTasksMutex);

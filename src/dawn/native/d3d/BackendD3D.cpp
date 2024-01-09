@@ -267,7 +267,7 @@ ResultOrError<Ref<PhysicalDeviceBase>> Backend::GetOrCreatePhysicalDeviceFromLUI
 
     Ref<PhysicalDeviceBase> physicalDevice;
     DAWN_TRY_ASSIGN(physicalDevice, CreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapter));
-    mPhysicalDevices.emplace(luid, physicalDevice);
+    mPhysicalDevices.try_emplace(luid, physicalDevice);
     return physicalDevice;
 }
 
@@ -284,7 +284,7 @@ ResultOrError<Ref<PhysicalDeviceBase>> Backend::GetOrCreatePhysicalDeviceFromIDX
 
     Ref<PhysicalDeviceBase> physicalDevice;
     DAWN_TRY_ASSIGN(physicalDevice, CreatePhysicalDeviceFromIDXGIAdapter(dxgiAdapter));
-    mPhysicalDevices.emplace(desc.AdapterLuid, physicalDevice);
+    mPhysicalDevices.try_emplace(desc.AdapterLuid, physicalDevice);
     return physicalDevice;
 }
 

@@ -175,7 +175,7 @@ ResultOrError<RenderPipelineBase*> GetOrCreateApplyClearValueWithDrawPipeline(
 
     Ref<RenderPipelineBase> pipeline;
     DAWN_TRY_ASSIGN(pipeline, device->CreateRenderPipeline(&renderPipelineDesc));
-    store->applyClearColorValueWithDrawPipelines.insert({key, std::move(pipeline)});
+    store->applyClearColorValueWithDrawPipelines.try_emplace(key, std::move(pipeline));
 
     return GetCachedPipeline(store, key);
 }
