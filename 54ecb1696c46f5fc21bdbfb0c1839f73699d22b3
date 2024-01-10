@@ -33,6 +33,23 @@
       "message": "LGTM",
       "revId": "54ecb1696c46f5fc21bdbfb0c1839f73699d22b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ff1adc2e_386d6b92",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000480
+      },
+      "writtenOn": "2024-01-10T16:08:22Z",
+      "side": 1,
+      "message": "As discussed offline, it looks like we\u0027d have to use std::stringstream as String is not supported in NAPI world.\n\n```\n    std::stringstream s;\n    s \u003c\u003c \"0x\" \u003c\u003c 0xffff \u003c\u003c std::hex ;\n    std::cout \u003c\u003c s.str();\n```\n\nDo you know how to reproduce 0x%04x behavior with std::hex?",
+      "revId": "54ecb1696c46f5fc21bdbfb0c1839f73699d22b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
