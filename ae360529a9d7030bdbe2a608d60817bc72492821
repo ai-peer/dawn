@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40cbc37f_1f3763e0",
+        "filename": "src/tint/lang/spirv/reader/ast_lower/decompose_strided_array_test.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-10T16:34:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "84452de3_4fad2de2",
+      "range": {
+        "startLine": 147,
+        "startChar": 45,
+        "endLine": 147,
+        "endChar": 46
+      },
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7d42861c_83081eb3",
@@ -77,6 +101,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "474be7fd_5849e07e",
+        "filename": "src/tint/lang/spirv/writer/ast_raise/var_for_dynamic_index_test.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-10T16:34:53Z",
+      "side": 1,
+      "message": "We can\u0027t, actually, because this transform only does something when the object of the index-accessor expression is a matrix/array _value_, and not a ref to one. For example, it works when indexing a `let` of type array, but not on a `var` of type array. Since we can\u0027t take a pointer to a let, there\u0027s no case where this transform will do anything with a ptr-sugar. This is why my new tests are on var arrays, and the result is a no-op.",
+      "parentUuid": "7d42861c_83081eb3",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f5f7c802_6d0900a6",
         "filename": "src/tint/lang/wgsl/ast/transform/remove_phonies.cc",
         "patchSetId": 19
@@ -88,6 +130,24 @@
       "writtenOn": "2024-01-10T12:59:19Z",
       "side": 1,
       "message": "This change doesn\u0027t appear (at first glance) related to ptr sugar. Move to a separate CL?",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94994164_cb7616a8",
+        "filename": "src/tint/lang/wgsl/ast/transform/remove_phonies.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-10T16:34:53Z",
+      "side": 1,
+      "message": "I recall doing this when trying to understand whether the `UnwrapRef()` should be `UnwrapPtrOrRef()`. It\u0027s does not need to be because we\u0027re dealing with CallExpressions, which cannot be accessor expressions, and my change here just made that obvious. So yeah, not necessary, but makes the code clearer and is slightly more optimal (going through `sem.Get` rather than `sem.GetVal`). Do you still want me to revert in this CL?",
+      "parentUuid": "f5f7c802_6d0900a6",
       "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -115,6 +175,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc856101_a4db9bde",
+        "filename": "src/tint/lang/wgsl/ast/transform/simplify_pointers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-10T16:34:53Z",
+      "side": 1,
+      "message": "That is MUCH better, thank you!",
+      "parentUuid": "9a9dac05_07d24538",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 0
+      },
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c47f8639_952ba8c7",
@@ -128,6 +212,24 @@
       "writtenOn": "2024-01-10T12:52:52Z",
       "side": 1,
       "message": "[1]",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "42f6e06d_94891ceb",
+        "filename": "src/tint/lang/wgsl/ast/transform/simplify_pointers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-10T16:34:53Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c47f8639_952ba8c7",
       "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
