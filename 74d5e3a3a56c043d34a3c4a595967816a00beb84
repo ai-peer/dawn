@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6930b561_a6c1a25b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T10:27:42Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2560dd7_3dc8f3a4",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T10:27:42Z",
+      "side": 1,
+      "message": "nit: see docs/dawn/errors.md for error message conventions: this would be something like \"depthBiasClamp (%f) is not zero in compatibility mode.\"",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "904034f4_4b06117b",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T10:27:42Z",
+      "side": 1,
+      "message": "nit: entryPoint names are no longer required ... and I just realized that ComboRenderPipelineDescriptor defaults them to \"main\". We should probably remove that so tests can omit these lines.",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fe738a4b_be69fd96",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T10:27:42Z",
+      "side": 1,
+      "message": "u-nit: the loop is not much more clear than writing two blocks of two lines.",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
