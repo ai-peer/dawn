@@ -569,10 +569,10 @@ const AHBFunctions* InstanceBase::GetOrLoadAHBFunctions() {
 Surface* InstanceBase::APICreateSurface(const SurfaceDescriptor* descriptor) {
     UnpackedPtr<SurfaceDescriptor> unpacked;
     if (ConsumedError(ValidateSurfaceDescriptor(this, descriptor), &unpacked)) {
-        return Surface::MakeError(this);
+        return APIObjectReturn(Surface::MakeError(this));
     }
 
-    return new Surface(this, unpacked);
+    return APIObjectReturn(AcquireRef(new Surface(this, unpacked)));
 }
 
 const std::unordered_set<tint::wgsl::LanguageFeature>&
