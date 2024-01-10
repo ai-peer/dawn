@@ -248,7 +248,8 @@ void ValidationTest::WaitForAllOperations(const wgpu::Device& waitDevice) {
 
     // Force the currently submitted operations to completed.
     while (!done) {
-        waitDevice.Tick();
+        // waitDevice.Tick();
+        mInstance.ProcessEvents();
         FlushWire();
     }
 

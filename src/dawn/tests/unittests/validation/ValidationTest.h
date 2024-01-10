@@ -179,12 +179,12 @@ class ValidationTest : public testing::Test {
     wgpu::Device device;
     wgpu::Adapter adapter;
     WGPUDevice backendDevice;
+    wgpu::Instance mInstance;
 
     size_t mLastWarningCount = 0;
 
   private:
     std::unique_ptr<dawn::native::Instance> mDawnInstance;
-    wgpu::Instance mInstance;
     dawn::native::Adapter mBackendAdapter;
     std::unique_ptr<dawn::utils::WireHelper> mWireHelper;
     WGPUDevice mLastCreatedBackendDevice;
