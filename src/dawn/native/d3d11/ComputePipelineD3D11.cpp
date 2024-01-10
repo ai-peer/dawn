@@ -69,6 +69,10 @@ MaybeError ComputePipeline::Initialize() {
 
     const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Compute);
 
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    auto tintData = std::move(programmableStage.tintData);
+
     d3d::CompiledShader compiledShader;
     DAWN_TRY_ASSIGN(compiledShader, ToBackend(programmableStage.module)
                                         ->Compile(programmableStage, SingleShaderStage::Compute,
