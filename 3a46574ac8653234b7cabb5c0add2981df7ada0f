@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c4d25f04_20713ecc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-10T14:00:06Z",
+      "side": 1,
+      "message": "Together with https://skia-review.googlesource.com/c/skia/+/798636, I am seeing a surge of MM scores. Specifically for the \"Images\" case, it improves from 60 to 140, and the overall score rises from 1300 to 2400 roughly. Thanks to you guys. Couldn\u0027t have made it without your brainstorming and inspiring.",
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cea761c8_bd02972e",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 721,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-10T14:00:06Z",
+      "side": 1,
+      "message": "The original workload would complete too quick by GPU with the introduction of upload buffer emulation of this CL. The change here makes it unfriendly to the new change and slow to complete.",
+      "range": {
+        "startLine": 720,
+        "startChar": 12,
+        "endLine": 721,
+        "endChar": 21
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
