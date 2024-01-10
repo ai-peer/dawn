@@ -589,6 +589,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d94f6db5_1e448918",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T17:34:07Z",
+      "side": 1,
+      "message": "Ah Dawn raising an error on concurrent read + not initialized solves that problem, but my understanding was that Peng was looking to not do that for now.",
+      "parentUuid": "52324276_bdb4d625",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
