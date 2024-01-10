@@ -42,15 +42,19 @@ static constexpr size_t kPayloadBits = 1;
 static constexpr uint64_t kPayloadMask = (uint64_t(1) << kPayloadBits) - 1;
 static constexpr uint64_t kRefCountIncrement = (uint64_t(1) << kPayloadBits);
 
-RefCount::RefCount(uint64_t payload) : mRefCount(kRefCountIncrement + payload) {
+template <bool RefCountStartsFromZero>
+RefCount<RefCountStartsFromZero>::RefCount(uint64_t payload)
+    : mRefCount(RefCountStartsFromZero ? payload : kRefCountIncrement + payload) {
     DAWN_ASSERT((payload & kPayloadMask) == payload);
 }
 
-uint64_t RefCount::GetValueForTesting() const {
+template <bool RefCountStartsFromZero>
+uint64_t RefCount<RefCountStartsFromZero>::GetValueForTesting() const {
     return mRefCount >> kPayloadBits;
 }
 
-uint64_t RefCount::GetPayload() const {
+template <bool RefCountStartsFromZero>
+uint64_t RefCount<RefCountStartsFromZero>::GetPayload() const {
     // We only care about the payload bits of the refcount. These never change after
     // initialization so we can use the relaxed memory order. The order doesn't guarantee
     // anything except the atomicity of the load, which is enough since any past values of the
@@ -58,8 +62,9 @@ uint64_t RefCount::GetPayload() const {
     return kPayloadMask & mRefCount.load(std::memory_order_relaxed);
 }
 
-void RefCount::Increment() {
-    DAWN_ASSERT((mRefCount & ~kPayloadMask) != 0);
+template <bool RefCountStartsFromZero>
+void RefCount<RefCountStartsFromZero>::Increment() {
+    DAWN_ASSERT((mRefCount & ~kPayloadMask) != 0 || RefCountStartsFromZero);
 
     // The relaxed ordering guarantees only the atomicity of the update, which is enough here
     // because the reference we are copying from still exists and makes sure other threads
@@ -69,7 +74,13 @@ void RefCount::Increment() {
     mRefCount.fetch_add(kRefCountIncrement, std::memory_order_relaxed);
 }
 
-bool RefCount::TryIncrement() {
+template <bool RefCountStartsFromZero>
+bool RefCount<RefCountStartsFromZero>::TryIncrement() {
+    if constexpr (RefCountStartsFromZero) {
+        Increment();
+        return true;
+    }
+
     uint64_t current = mRefCount.load(std::memory_order_relaxed);
     bool success = false;
     do {
@@ -89,7 +100,8 @@ bool RefCount::TryIncrement() {
     return true;
 }
 
-bool RefCount::Decrement() {
+template <bool RefCountStartsFromZero>
+bool RefCount<RefCountStartsFromZero>::Decrement() {
     DAWN_ASSERT((mRefCount & ~kPayloadMask) != 0);
 
     // The release fence here is to make sure all accesses to the object on a thread A
@@ -121,6 +133,22 @@ bool RefCount::Decrement() {
     }
     return false;
 }
+
+// Specialize template method defines for RefCountStartsFromZero = false
+template RefCount<false>::RefCount(uint64_t payload);
+template uint64_t RefCount<false>::GetValueForTesting() const;
+template uint64_t RefCount<false>::GetPayload() const;
+template void RefCount<false>::Increment();
+template bool RefCount<false>::TryIncrement();
+template bool RefCount<false>::Decrement();
+
+// Specialize template method defines for RefCountStartsFromZero = true
+template RefCount<true>::RefCount(uint64_t payload);
+template uint64_t RefCount<true>::GetValueForTesting() const;
+template uint64_t RefCount<true>::GetPayload() const;
+template void RefCount<true>::Increment();
+template bool RefCount<true>::TryIncrement();
+template bool RefCount<true>::Decrement();
 
 RefCounted::RefCounted(uint64_t payload) : mRefCount(payload) {}
 RefCounted::~RefCounted() = default;

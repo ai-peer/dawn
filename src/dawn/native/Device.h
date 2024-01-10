@@ -646,6 +646,14 @@ class IgnoreLazyClearCountScope : public NonMovable {
     size_t mLazyClearCountForTesting;
 };
 
+template <>
+inline DeviceBase* ReturnToAPI<DeviceBase>(Ref<DeviceBase>&& device) {
+    if (device.Get()) {
+        device->APIReference();
+    }
+    return device.Get();
+}
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_DEVICE_H_
