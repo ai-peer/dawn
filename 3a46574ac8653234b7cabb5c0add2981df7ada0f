@@ -18,6 +18,93 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70074d58_d57e08f6",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-10T15:08:16Z",
+      "side": 1,
+      "message": "It is unbelievable. Good work!",
+      "parentUuid": "c4d25f04_20713ecc",
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3836897_c0cef1a9",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-10T15:08:16Z",
+      "side": 1,
+      "message": "Should this CL cover GPU to CPU as well?",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 13
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d77beeb4_43197a9f",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-10T15:08:16Z",
+      "side": 1,
+      "message": "Hi Corentin and Austin, \nShould we add a feature and control the behavior with it? or just always use system memory for mappable buffer.",
+      "range": {
+        "startLine": 47,
+        "startChar": 50,
+        "endLine": 47,
+        "endChar": 77
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0a49adf6_b72d14da",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-10T15:08:16Z",
+      "side": 1,
+      "message": "nit: std::unqiue_ptr\u003cuint8_t[]\u003e",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 13
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "cea761c8_bd02972e",
@@ -36,6 +123,29 @@
         "startChar": 12,
         "endLine": 721,
         "endChar": 21
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b3eac06_6c6de743",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-10T15:08:16Z",
+      "side": 1,
+      "message": "should we just do it for d3d11 with `mAllowUploadBufferEmulation \u003d\u003d true` case?",
+      "range": {
+        "startLine": 724,
+        "startChar": 0,
+        "endLine": 728,
+        "endChar": 63
       },
       "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
