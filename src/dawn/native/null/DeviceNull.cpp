@@ -452,6 +452,10 @@ MaybeError Queue::WaitForIdleForDestruction() {
 MaybeError ComputePipeline::Initialize() {
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
 
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    auto tintData = std::move(computeStage.tintData);
+
     tint::Program transformedProgram;
     tint::ast::transform::Manager transformManager;
     tint::ast::transform::DataMap transformInputs;
