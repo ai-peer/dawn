@@ -141,7 +141,7 @@ TextureBase* SharedTextureMemoryBase::APICreateTexture(const TextureDescriptor* 
                                    this, descriptor)) {
         return TextureBase::MakeError(GetDevice(), descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 Ref<SharedTextureMemoryContents> SharedTextureMemoryBase::CreateContents() {
