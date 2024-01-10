@@ -184,6 +184,45 @@ TEST_F(CompatValidationTest, CanNotCreatePipelineWithDifferentPerTargetBlendStat
     }
 }
 
+TEST_F(CompatValidationTest, CanNotCreatePipelineWithNonZeroDepthBiasClamp) {
+    wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
+        @vertex fn vs() -> @builtin(position) vec4f {
+            return vec4f(0);
+        }
+
+        @fragment fn fs() -> @location(0) vec4f {
+            return vec4f(0);
+        }
+    )");
+
+    utils::ComboRenderPipelineDescriptor testDescriptor;
+    testDescriptor.layout = {};
+    testDescriptor.vertex.module = module;
+    testDescriptor.vertex.entryPoint = "vs";
+    testDescriptor.cFragment.module = module;
+    testDescriptor.cFragment.entryPoint = "fs";
+    testDescriptor.cFragment.targetCount = 1;
+    testDescriptor.cTargets[1].format = wgpu::TextureFormat::RGBA8Unorm;
+
+    wgpu::DepthStencilState* depthStencil =
+        testDescriptor.EnableDepthStencil(wgpu::TextureFormat::Depth24Plus);
+    depthStencil->depthWriteEnabled = true;
+    depthStencil->depthBias = 0;
+    depthStencil->depthBiasSlopeScale = 0;
+
+    static const float depthClearValuesToTest[] = {0, 0.1, 1};
+    for (auto depthBiasClamp : depthClearValuesToTest) {
+        depthStencil->depthBiasClamp = depthBiasClamp;
+        bool expectError = depthBiasClamp != 0;
+
+        if (expectError) {
+            ASSERT_DEVICE_ERROR(device.CreateRenderPipeline(&testDescriptor));
+        } else {
+            device.CreateRenderPipeline(&testDescriptor);
+        }
+    }
+}
+
 TEST_F(CompatValidationTest, CanNotUseFragmentShaderWithSampleMask) {
     wgpu::ShaderModule moduleSampleMaskOutput = utils::CreateShaderModule(device, R"(
         @vertex fn vs() -> @builtin(position) vec4f {
