@@ -117,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "600e66d2_ab515651",
+        "filename": "src/tint/lang/spirv/writer/ast_raise/var_for_dynamic_index_test.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T17:03:43Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "474be7fd_5849e07e",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f5f7c802_6d0900a6",
@@ -148,6 +166,24 @@
       "side": 1,
       "message": "I recall doing this when trying to understand whether the `UnwrapRef()` should be `UnwrapPtrOrRef()`. It\u0027s does not need to be because we\u0027re dealing with CallExpressions, which cannot be accessor expressions, and my change here just made that obvious. So yeah, not necessary, but makes the code clearer and is slightly more optimal (going through `sem.Get` rather than `sem.GetVal`). Do you still want me to revert in this CL?",
       "parentUuid": "f5f7c802_6d0900a6",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0073a30b_a2abf803",
+        "filename": "src/tint/lang/wgsl/ast/transform/remove_phonies.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T17:03:43Z",
+      "side": 1,
+      "message": "I think the code change is good, but I\u0027d prefer it pulled out to a separate change if it isn\u0027t needed as part of this CL. This CL is huge, and I care about `git blame` being useful.",
+      "parentUuid": "94994164_cb7616a8",
       "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -189,6 +225,30 @@
       "side": 1,
       "message": "That is MUCH better, thank you!",
       "parentUuid": "9a9dac05_07d24538",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 0
+      },
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a734d7f6_c664026c",
+        "filename": "src/tint/lang/wgsl/ast/transform/simplify_pointers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T17:03:43Z",
+      "side": 1,
+      "message": "👍",
+      "parentUuid": "cc856101_a4db9bde",
       "range": {
         "startLine": 137,
         "startChar": 0,
