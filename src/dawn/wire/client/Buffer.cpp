@@ -52,7 +52,7 @@ WGPUBuffer CreateErrorBufferOOMAtClient(Device* device, const WGPUBufferDescript
     return GetProcs().deviceCreateErrorBuffer(ToAPI(device), &errorBufferDescriptor);
 }
 
-class MapAsyncEvent : public TrackedEvent {
+class MapAsyncEvent final : public TrackedEvent {
   public:
     static constexpr EventType kType = EventType::MapAsync;
 
