@@ -127,7 +127,6 @@
     EXPECT_CALL(mDeviceErrorCallback,                                             \
                 Call(testing::Ne(WGPUErrorType_NoError), matcher, device.Get())); \
     statement;                                                                    \
-    device.Tick();                                                                \
     FlushWire();                                                                  \
     testing::Mock::VerifyAndClearExpectations(&mDeviceErrorCallback);             \
     do {                                                                          \
