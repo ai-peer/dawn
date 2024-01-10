@@ -718,6 +718,11 @@ void DeviceBase::APIPopErrorScope(wgpu::ErrorCallback callback, void* userdata) 
          userdata] { callback(errorType, message.c_str(), userdata); });
 }
 
+Future DeviceBase::APIPopErrorScopeF(const PopErrorScopeCallbackInfo& callbackInfo) {
+    // TODO(dawn:1987) Implement this.
+    DAWN_UNREACHABLE();
+}
+
 BlobCache* DeviceBase::GetBlobCache() {
 #if TINT_BUILD_WGSL_WRITER
     // TODO(crbug.com/dawn/1481): Shader caching currently has a dependency on the WGSL writer to
