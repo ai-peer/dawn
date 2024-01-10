@@ -42,7 +42,8 @@ static constexpr size_t kPayloadBits = 1;
 static constexpr uint64_t kPayloadMask = (uint64_t(1) << kPayloadBits) - 1;
 static constexpr uint64_t kRefCountIncrement = (uint64_t(1) << kPayloadBits);
 
-RefCount::RefCount(uint64_t payload) : mRefCount(kRefCountIncrement + payload) {
+RefCount::RefCount(uint64_t payload, bool startFromZero)
+    : mRefCount(startFromZero ? 0 : kRefCountIncrement + payload), mStartFromZero(startFromZero) {
     DAWN_ASSERT((payload & kPayloadMask) == payload);
 }
 
@@ -59,7 +60,7 @@ uint64_t RefCount::GetPayload() const {
 }
 
 void RefCount::Increment() {
-    DAWN_ASSERT((mRefCount & ~kPayloadMask) != 0);
+    DAWN_ASSERT((mRefCount & ~kPayloadMask) != 0 || mStartFromZero);
 
     // The relaxed ordering guarantees only the atomicity of the update, which is enough here
     // because the reference we are copying from still exists and makes sure other threads
@@ -70,6 +71,11 @@ void RefCount::Increment() {
 }
 
 bool RefCount::TryIncrement() {
+    if (mStartFromZero) {
+        Increment();
+        return true;
+    }
+
     uint64_t current = mRefCount.load(std::memory_order_relaxed);
     bool success = false;
     do {
@@ -122,7 +128,7 @@ bool RefCount::Decrement() {
     return false;
 }
 
-RefCounted::RefCounted(uint64_t payload) : mRefCount(payload) {}
+RefCounted::RefCounted(uint64_t payload) : mRefCount(payload, /*startFromZero=*/false) {}
 RefCounted::~RefCounted() = default;
 
 uint64_t RefCounted::GetRefCountForTesting() const {

@@ -41,7 +41,7 @@ class WeakRefData;
 class RefCount {
   public:
     // Create a refcount with a payload. The refcount starts initially at one.
-    explicit RefCount(uint64_t payload = 0);
+    RefCount(uint64_t payload = 0, bool startFromZero = false);
 
     uint64_t GetValueForTesting() const;
     uint64_t GetPayload() const;
@@ -57,6 +57,7 @@ class RefCount {
 
   private:
     std::atomic<uint64_t> mRefCount;
+    const bool mStartFromZero;
 };
 
 class RefCounted {

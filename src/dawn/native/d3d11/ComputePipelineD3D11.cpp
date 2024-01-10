@@ -73,6 +73,9 @@ MaybeError ComputePipeline::Initialize() {
     DAWN_TRY_ASSIGN(compiledShader, ToBackend(programmableStage.module)
                                         ->Compile(programmableStage, SingleShaderStage::Compute,
                                                   ToBackend(GetLayout()), compileFlags));
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    programmableStage.tintData = nullptr;
     DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreateComputeShader(
                               compiledShader.shaderBlob.Data(), compiledShader.shaderBlob.Size(),
                               nullptr, &mComputeShader),

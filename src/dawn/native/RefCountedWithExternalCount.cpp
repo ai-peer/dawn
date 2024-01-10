@@ -29,6 +29,9 @@
 
 namespace dawn::native {
 
+RefCountedWithExternalCount::RefCountedWithExternalCount(uint64_t payload)
+    : RefCounted(payload), mExternalRefCount(/*payload=*/0, /*startFromZero=*/true) {}
+
 void RefCountedWithExternalCount::APIReference() {
     mExternalRefCount.Increment();
     RefCounted::APIReference();

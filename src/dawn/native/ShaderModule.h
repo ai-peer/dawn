@@ -31,6 +31,7 @@
 #include <bitset>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -39,6 +40,8 @@
 #include "absl/container/flat_hash_set.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/ContentLessObjectCacheable.h"
+#include "dawn/common/WeakRef.h"
+#include "dawn/common/WeakRefSupport.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/CachedObject.h"
@@ -322,7 +325,18 @@ class ShaderModuleBase : public ApiObjectBase,
         bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
     };
 
-    // This returns tint program before running transforms.
+    class TintData : public RefCounted, public WeakRefSupport {
+      public:
+      private:
+        friend class ShaderModuleBase;
+        TintData();
+        ~TintData() override;
+
+        std::unique_ptr<tint::Program> mTintProgram;
+        std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
+    };
+
+    const Ref<TintData>& GetOrRecreateTintData();
     const tint::Program* GetTintProgram() const;
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
@@ -340,6 +354,8 @@ class ShaderModuleBase : public ApiObjectBase,
   private:
     ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);
 
+    void WillDropLastExternalRef() override;
+
     // The original data in the descriptor for caching.
     enum class Type { Undefined, Spirv, Wgsl };
     Type mType;
@@ -349,8 +365,10 @@ class ShaderModuleBase : public ApiObjectBase,
     EntryPointMetadataTable mEntryPoints;
     PerStage<std::string> mDefaultEntryPointNames;
     PerStage<size_t> mEntryPointCounts;
-    std::unique_ptr<tint::Program> mTintProgram;
-    std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
+
+    std::mutex mTintDataLock;  // mutex for protecting mTintData & mTintDataWeakRef.
+    Ref<TintData> mTintData;
+    WeakRef<TintData> mTintDataWeakRef;
 
     std::unique_ptr<OwnedCompilationMessages> mCompilationMessages;
 };

@@ -83,7 +83,9 @@ MaybeError ComputePipeline::Initialize() {
             IsFullSubgroupsRequired()
                 ? std::make_optional(device->GetLimits().experimentalSubgroupLimits.maxSubgroupSize)
                 : std::nullopt));
-
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    computeStage.tintData = nullptr;
     createInfo.stage.module = moduleAndSpirv.module;
     createInfo.stage.pName = moduleAndSpirv.remappedEntryPoint;
 
