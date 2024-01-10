@@ -140,7 +140,7 @@ InstanceBase* APICreateInstance(const InstanceDescriptor* descriptor) {
         dawn::ErrorLog() << result.AcquireError()->GetFormattedMessage();
         return nullptr;
     }
-    return result.AcquireSuccess().Detach();
+    return APIObjectReturn(result.AcquireSuccess());
 }
 
 // InstanceBase
@@ -194,6 +194,8 @@ void InstanceBase::DeleteThis() {
 
     RefCountedWithExternalCount::DeleteThis();
 }
+
+void InstanceBase::WillHaveFirstExternalRef() {}
 
 void InstanceBase::WillDropLastExternalRef() {
     // InstanceBase uses RefCountedWithExternalCount to break refcycles.
@@ -569,10 +571,10 @@ const AHBFunctions* InstanceBase::GetOrLoadAHBFunctions() {
 Surface* InstanceBase::APICreateSurface(const SurfaceDescriptor* descriptor) {
     UnpackedPtr<SurfaceDescriptor> unpacked;
     if (ConsumedError(ValidateSurfaceDescriptor(this, descriptor), &unpacked)) {
-        return Surface::MakeError(this);
+        return APIObjectReturn(Surface::MakeError(this));
     }
 
-    return new Surface(this, unpacked);
+    return APIObjectReturn(AcquireRef(new Surface(this, unpacked)));
 }
 
 const std::unordered_set<tint::wgsl::LanguageFeature>&

@@ -401,6 +401,11 @@ MaybeError RenderPipeline::Initialize() {
 
     const PerStage<ProgrammableStage>& allStages = GetAllStages();
     const ProgrammableStage& vertexStage = allStages[wgpu::ShaderStage::Vertex];
+
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    auto tintData = std::move(vertexStage.tintData);
+
     ShaderModule::MetalFunctionData vertexData;
     DAWN_TRY(ToBackend(vertexStage.module.Get())
                  ->CreateFunction(SingleShaderStage::Vertex, vertexStage, ToBackend(GetLayout()),
@@ -413,6 +418,11 @@ MaybeError RenderPipeline::Initialize() {
 
     if (GetStageMask() & wgpu::ShaderStage::Fragment) {
         const ProgrammableStage& fragmentStage = allStages[wgpu::ShaderStage::Fragment];
+
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        auto tintData = std::move(fragmentStage.tintData);
+
         ShaderModule::MetalFunctionData fragmentData;
         DAWN_TRY(ToBackend(fragmentStage.module.Get())
                      ->CreateFunction(SingleShaderStage::Fragment, fragmentStage,
