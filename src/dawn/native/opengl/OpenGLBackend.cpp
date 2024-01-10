@@ -47,9 +47,9 @@ ExternalImageDescriptorGLTexture::ExternalImageDescriptorGLTexture()
 WGPUTexture WrapExternalEGLImage(WGPUDevice device,
                                  const ExternalImageDescriptorEGLImage* descriptor) {
     Device* backendDevice = ToBackend(FromAPI(device));
-    TextureBase* texture =
+    Ref<TextureBase> texture =
         backendDevice->CreateTextureWrappingEGLImage(descriptor, descriptor->image);
-    return ToAPI(texture);
+    return ToAPI(APIObjectReturn(texture));
 }
 
 WGPUTexture WrapExternalGLTexture(WGPUDevice device,
@@ -57,7 +57,7 @@ WGPUTexture WrapExternalGLTexture(WGPUDevice device,
     Device* backendDevice = ToBackend(FromAPI(device));
     TextureBase* texture =
         backendDevice->CreateTextureWrappingGLTexture(descriptor, descriptor->texture);
-    return ToAPI(texture);
+    return ToAPI(APIObjectReturn(texture));
 }
 
 }  // namespace dawn::native::opengl

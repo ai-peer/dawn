@@ -177,6 +177,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     ~InstanceBase() override;
 
     void DeleteThis() override;
+    void WillHaveFirstExternalRef() override;
     void WillDropLastExternalRef() override;
 
     InstanceBase(const InstanceBase& other) = delete;

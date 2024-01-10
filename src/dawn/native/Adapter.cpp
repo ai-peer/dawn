@@ -186,7 +186,7 @@ DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
         mPhysicalDevice->GetInstance()->ConsumedError(result.AcquireError());
         return nullptr;
     }
-    return result.AcquireSuccess().Detach();
+    return APIObjectReturn(result.AcquireSuccess());
 }
 
 ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor* rawDescriptor) {
@@ -259,7 +259,7 @@ void AdapterBase::APIRequestDevice(const DeviceDescriptor* descriptor,
     WGPURequestDeviceStatus status =
         device == nullptr ? WGPURequestDeviceStatus_Unknown : WGPURequestDeviceStatus_Success;
     // TODO(crbug.com/dawn/1122): Call callbacks only on wgpuInstanceProcessEvents
-    callback(status, ToAPI(device.Detach()), nullptr, userdata);
+    callback(status, ToAPI(APIObjectReturn(device)), nullptr, userdata);
 }
 
 const TogglesState& AdapterBase::GetTogglesState() const {
