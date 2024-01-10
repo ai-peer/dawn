@@ -33,6 +33,24 @@
       "message": "Same as the other CL for the error messages.",
       "revId": "8746e5ecaa544e3b61b5bbf148d441096725f1b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2930c93d_4e55a25b",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 648,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-01-10T19:55:18Z",
+      "side": 1,
+      "message": "I\u0027m not sure what you\u0027re requesting here. Looking the error.md, this message is stating the problem, not stating that solution. That seems in-line with the examples in error.md.  Did you have some other idea?",
+      "parentUuid": "594a754e_44856ef1",
+      "revId": "8746e5ecaa544e3b61b5bbf148d441096725f1b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
