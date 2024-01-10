@@ -472,6 +472,10 @@ MaybeError ComputePipeline::Initialize() {
                     RunTransforms(&transformManager, computeStage.module->GetTintProgram(),
                                   transformInputs, nullptr, nullptr));
 
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    computeStage.tintData = nullptr;
+
     // Do the workgroup size validation, although different backend will have different
     // fullSubgroups parameter.
     const CombinedLimits& limits = GetDevice()->GetLimits();
