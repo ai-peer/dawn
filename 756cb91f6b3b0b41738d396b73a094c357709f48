@@ -535,6 +535,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b2ed052_f94403a5",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-10T12:58:16Z",
+      "side": 1,
+      "message": "\u003e As discussed yesterday, even with concurrent access on a single wgpu device, Vulkan image layouts can get out of sync, which would cause issues. What are the exact use cases in Chromium that require this concurrent read-only access? \n\nOn Mac, once we cache the SharedTextureMemory objects in IOSurfaceImageBacking on a per-Device level, the WebGPU video decoder webcodecs sample code triggers concurrent reads. So it\u0027s a blocker for that line of work. I don\u0027t know what concrete issues Peng hit on Windows, but most SharedImage backings support concurrent reads, so I think that it will generally come up as we look to cache SharedTextureMemory objects within those backings at a per-Device level.\n\nEventually we will need to make the semantic for concurrent read access checked consistently with all the constraints listed in this thread.\n\u003e \n\u003e To unblock Graphite we could go forward with the change as it is now, but with extensive TODOs, bugs recorded for future work and an entry in \"Graphite/Dawn Tech Debt and Future Directions Tracking\". Ideally we have a flag that Chromium must use to say it is doing bad things and knows it (which means the test change will be undone and new tests added for that flag).\n\u003e \n\u003e Also ideally I\u0027d like to wait for Austin\u0027s opinion on this.\n\nWaiting for Austin\u0027s opinion definitely makes sense. I would suggest:\n\n* What if we go forward allowing concurrent access for Mac/Windows at this time with a separate TODO/bug for Vulkan? This would unblock both my and Peng\u0027s current lines of work, and Vulkan won\u0027t come up until we switch Chromium to use SharedTextureMemory for Vulkan in any case.\n* With respect to texture initialization and concurrent read access, what if we just treated a read of an uninitialized texture as having write semantics wrt concurrent access (in the implementation)? At least on Mac, I verified that all of the textures that were hitting the concurrent read access case were initialized.",
+      "parentUuid": "0e74f31d_afd9a4d2",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
