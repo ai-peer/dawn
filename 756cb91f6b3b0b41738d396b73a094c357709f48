@@ -517,6 +517,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e74f31d_afd9a4d2",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T12:13:04Z",
+      "side": 1,
+      "message": "As discussed yesterday, even with concurrent access on a single wgpu device, Vulkan image layouts can get out of sync, which would cause issues. What are the exact use cases in Chromium that require this concurrent read-only access? Eventually we will need to make the semantic for concurrent read access checked consistently with all the constraints listed in this thread.\n\nTo unblock Graphite we could go forward with the change as it is now, but with extensive TODOs, bugs recorded for future work and an entry in \"Graphite/Dawn Tech Debt and Future Directions Tracking\". Ideally we have a flag that Chromium must use to say it is doing bad things and knows it (which means the test change will be undone and new tests added for that flag).\n\nAlso ideally I\u0027d like to wait for Austin\u0027s opinion on this.",
+      "parentUuid": "58ac2a04_9b783879",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
