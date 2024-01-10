@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e848184_35e709c3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-10T03:30:49Z",
+      "side": 1,
+      "message": "Partial review",
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "800d2c3e_4a1dd42c",
@@ -20,6 +37,40 @@
         "endLine": 59,
         "endChar": 12
       },
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7ce15ceb_313a6461",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 110,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-10T03:30:49Z",
+      "side": 1,
+      "message": "I think this fails if the server sends the client bad data? So if we\u0027re trying to handle that case (as below) then this should also produce an error status instead of ASSERTing.\n\nOr alternatively this and all the things below could ASSERT, if the client doesn\u0027t need to handle bad server data, but I think generally it is supposed to.",
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b30fc318_c7dab7c7",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 116,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-10T03:30:49Z",
+      "side": 1,
+      "message": "I don\u0027t think this status will actually _cause_ the device to be lost, so I think this (and similar cases below) should be \"Unknown\"? Otherwise it may report DeviceLost when the device is not lost. (Also, DeviceLost is going to be removed as a status: https://crbug.com/dawn/2232)\n\nSame below.",
       "revId": "09301c8132330701686d28d463a60b5d04528670",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
