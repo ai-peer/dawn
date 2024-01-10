@@ -932,8 +932,8 @@ Ref<CommandEncoder> CommandEncoder::Create(
 }
 
 // static
-CommandEncoder* CommandEncoder::MakeError(DeviceBase* device, const char* label) {
-    return new CommandEncoder(device, ObjectBase::kError, label);
+Ref<CommandEncoder> CommandEncoder::MakeError(DeviceBase* device, const char* label) {
+    return AcquireRef(new CommandEncoder(device, ObjectBase::kError, label));
 }
 
 CommandEncoder::CommandEncoder(DeviceBase* device,
@@ -997,7 +997,8 @@ ComputePassEncoder* CommandEncoder::APIBeginComputePass(const ComputePassDescrip
     // This function will create new object, need to lock the Device.
     auto deviceLock(GetDevice()->GetScopedLock());
 
-    return BeginComputePass(descriptor).Detach();
+    Ref<ComputePassEncoder> result = BeginComputePass(descriptor);
+    return ReturnToAPI(std::move(result));
 }
 
 Ref<ComputePassEncoder> CommandEncoder::BeginComputePass(const ComputePassDescriptor* descriptor) {
@@ -1057,7 +1058,8 @@ RenderPassEncoder* CommandEncoder::APIBeginRenderPass(const RenderPassDescriptor
     // This function will create new object, need to lock the Device.
     auto deviceLock(GetDevice()->GetScopedLock());
 
-    return BeginRenderPass(descriptor).Detach();
+    Ref<RenderPassEncoder> result = BeginRenderPass(descriptor);
+    return ReturnToAPI(std::move(result));
 }
 
 Ref<RenderPassEncoder> CommandEncoder::BeginRenderPass(const RenderPassDescriptor* rawDescriptor) {
@@ -2104,13 +2106,13 @@ CommandBufferBase* CommandEncoder::APIFinish(const CommandBufferDescriptor* desc
 
     Ref<CommandBufferBase> commandBuffer;
     if (GetDevice()->ConsumedError(Finish(descriptor), &commandBuffer)) {
-        CommandBufferBase* errorCommandBuffer =
+        Ref<CommandBufferBase> errorCommandBuffer =
             CommandBufferBase::MakeError(GetDevice(), descriptor ? descriptor->label : nullptr);
         errorCommandBuffer->SetEncoderLabel(this->GetLabel());
-        return errorCommandBuffer;
+        return ReturnToAPI(std::move(errorCommandBuffer));
     }
     DAWN_ASSERT(!IsError());
-    return commandBuffer.Detach();
+    return ReturnToAPI(std::move(commandBuffer));
 }
 
 ResultOrError<Ref<CommandBufferBase>> CommandEncoder::Finish(

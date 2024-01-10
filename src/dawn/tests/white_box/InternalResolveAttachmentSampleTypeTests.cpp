@@ -76,7 +76,8 @@ class InternalResolveAttachmentSampleTypeTests : public DawnTest {
         Ref<native::BindGroupLayoutBase> bglRef =
             nativeDevice->CreateBindGroupLayout(&bglDesc, true).AcquireSuccess();
 
-        auto bindGroupLayout = wgpu::BindGroupLayout::Acquire(native::ToAPI(bglRef.Detach()));
+        auto bindGroupLayout =
+            wgpu::BindGroupLayout::Acquire(native::ToAPI(ReturnToAPI(std::move(bglRef))));
 
         // Create pipeline layout from the bind group layout.
         wgpu::PipelineLayoutDescriptor descriptor;
