@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2cac5c24_6d2df01e",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-10T16:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f442fb57_706255a4",
+      "range": {
+        "startLine": 80,
+        "startChar": 29,
+        "endLine": 80,
+        "endChar": 51
+      },
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbdf0290_739f221e",
@@ -71,6 +95,24 @@
       "writtenOn": "2024-01-10T15:50:21Z",
       "side": 1,
       "message": "```suggestion\n// DAWN_NOINLINE void DoStuff() { ... }\n```",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "db848696_80e40b79",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-10T16:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbdf0290_739f221e",
       "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -92,6 +134,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f646b598_e230ddf7",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-10T16:04:32Z",
+      "side": 1,
+      "message": "I missed the previous __forceinline for MSVC. This is now fixed.",
+      "parentUuid": "ddbb111a_8a5390a9",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f79724f_da563696",
@@ -105,6 +165,24 @@
       "writtenOn": "2024-01-10T15:50:21Z",
       "side": 1,
       "message": "Why is this needed?",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "21874928_26cf0ea6",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-10T16:04:32Z",
+      "side": 1,
+      "message": "I preserved pre-existing code:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Compiler.h;l\u003d54-56?q\u003d__has_cpp_attribute\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fdawn%2Fsrc%2Fdawn%2F\n\nHowever, you are right this doesn\u0027t appear to be useful in Dawn. Let\u0027s remove it!",
+      "parentUuid": "4f79724f_da563696",
       "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
