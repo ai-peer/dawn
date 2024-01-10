@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "076b7d3d_d24836ae",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T17:37:58Z",
+      "side": 1,
+      "message": "\"The device is in compatibility mode and depthViasClamp (%f) is not zero.\"? Not sure if it\u0027s much better.",
+      "parentUuid": "06ae3b16_2d3cd760",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "904034f4_4b06117b",
@@ -84,6 +102,24 @@
       "side": 1,
       "message": "That sounds like another PR",
       "parentUuid": "904034f4_4b06117b",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "599ad423_a287ac00",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T17:37:58Z",
+      "side": 1,
+      "message": "For sure, I should have marked that as a note:",
+      "parentUuid": "1c2140a3_7a0bd890",
       "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
