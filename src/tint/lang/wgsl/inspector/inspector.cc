@@ -27,7 +27,7 @@
 
 #include "src/tint/lang/wgsl/inspector/inspector.h"
 
-#include <limits>
+#include <unordered_set>
 #include <utility>
 
 #include "src/tint/lang/core/builtin_value.h"
@@ -1007,6 +1007,55 @@ void Inspector::GetOriginatingResources(std::array<const ast::Expression*, N> ex
         // All the expressions resolved to globals
         callback(globals);
     }
+}
+
+std::vector<Inspector::LevelSampleInfo>
+Inspector::GetInfoForTexturesUsedInNumLevelsAndNumSamples() {
+    std::vector<LevelSampleInfo> res;
+
+    std::unordered_set<BindingPoint> seen = {};
+
+    auto& sem = program_.Sem();
+    for (auto* fn_decl : sem.Module()->DependencyOrderedDeclarations()) {
+        if (auto* fn = sem.Get<sem::Function>(fn_decl)) {
+            for (auto* call : fn->DirectCalls()) {
+                if (const sem::BuiltinFn* builtin = call->Target()->As<sem::BuiltinFn>()) {
+                    if (builtin->Fn() != wgsl::BuiltinFn::kTextureNumLevels &&
+                        builtin->Fn() != wgsl::BuiltinFn::kTextureNumSamples &&
+                        builtin->Fn() != wgsl::BuiltinFn::kTextureLoad) {
+                        continue;
+                    }
+
+                    auto* texture_expr = call->Declaration()->args[0];
+                    auto* texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
+                    TINT_ASSERT(texture_sem);
+
+                    if (const sem::GlobalVariable* global =
+                            texture_sem->As<sem::GlobalVariable>()) {
+                        auto binding = global->Attributes().binding_point.value();
+
+                        // Check if we've already recorded this binding point.
+                        if (seen.find(binding) != seen.end()) {
+                            continue;
+                        }
+                        seen.insert(binding);
+
+                        LevelSampleFunctionType type = LevelSampleFunctionType::kTextureNumSamples;
+
+                        // The textureLoad can get polyfilled with a set of calls that includes
+                        // `textureNumLevels` so count it towards a num levels usage.
+                        if (builtin->Fn() == wgsl::BuiltinFn::kTextureNumLevels ||
+                            builtin->Fn() == wgsl::BuiltinFn::kTextureLoad) {
+                            type = LevelSampleFunctionType::kTextureNumLevels;
+                        }
+                        res.emplace_back(LevelSampleInfo{type, binding.group, binding.binding});
+                    }
+                }
+            }
+        }
+    }
+
+    return res;
 }
 
 }  // namespace tint::inspector
