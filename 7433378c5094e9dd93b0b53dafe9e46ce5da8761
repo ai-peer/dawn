@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6b215613_6d5cd338",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-10T15:39:24Z",
+      "side": 1,
+      "message": "@cwallez@chromium.org,\nWould you like to take another look? By addressing your suggestion, I touched another file (Compiler.h) and lost your previous vote.",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
