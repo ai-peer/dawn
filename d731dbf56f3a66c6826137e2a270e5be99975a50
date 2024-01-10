@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "640b757d_22b9ed03",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 20
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T18:31:46Z",
+      "side": 1,
+      "message": "@cwallez@chromium.org - Please can you check that the extension stuff is all hooked up correctly on the Dawn side?",
+      "revId": "d731dbf56f3a66c6826137e2a270e5be99975a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
