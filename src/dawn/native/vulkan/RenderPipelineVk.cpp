@@ -385,11 +385,16 @@ MaybeError RenderPipeline::Initialize() {
     auto AddShaderStage = [&](SingleShaderStage stage, VkShaderStageFlagBits vkStage,
                               bool clampFragDepth) -> MaybeError {
         const ProgrammableStage& programmableStage = GetStage(stage);
+        auto tintData = std::move(programmableStage.tintData);
+        std::cerr << "EEEE vk::RenderPipeline::Initialize() tintData=" << tintData.Get() << std::endl;
         ShaderModule::ModuleAndSpirv moduleAndSpirv;
         DAWN_TRY_ASSIGN(moduleAndSpirv,
                         ToBackend(programmableStage.module)
                             ->GetHandleAndSpirv(stage, programmableStage, layout, clampFragDepth,
                                                 /* fullSubgroups */ {}));
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        // programmableStage.tintData = nullptr;
         // Record cache key for each shader since it will become inaccessible later on.
         StreamIn(&mCacheKey, stream::Iterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount));
 

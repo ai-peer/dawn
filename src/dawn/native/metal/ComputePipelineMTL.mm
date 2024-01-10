@@ -68,7 +68,9 @@ MaybeError ComputePipeline::Initialize() {
                          ? std::make_optional(
                                GetDevice()->GetLimits().experimentalSubgroupLimits.maxSubgroupSize)
                          : std::nullopt));
-
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    computeStage.tintData = nullptr;
     NSError* error = nullptr;
     NSRef<NSString> label = MakeDebugName(GetDevice(), "Dawn_ComputePipeline", GetLabel());
 
