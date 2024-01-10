@@ -51,6 +51,24 @@
       "message": "I think this should come before any `enable` directives.",
       "revId": "89c30a63ab016f7edffadca4f95fd6e6a6598c85",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f42e4be_81fddbec",
+        "filename": "test/tint/builtins/gen/gen.wgsl.tmpl",
+        "patchSetId": 1
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-10T10:50:36Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "31e111d8_8a61e3ec",
+      "revId": "89c30a63ab016f7edffadca4f95fd6e6a6598c85",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
