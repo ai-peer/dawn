@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "82202b39_d00ff045",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T10:37:40Z",
+      "side": 1,
+      "message": "Reverting because of https://ci.chromium.org/ui/p/chromium/builders/try/linux-libfuzzer-asan-rel/1687419/overview https://logs.chromium.org/logs/chromium/buildbucket/cr-buildbucket/8759297065293611521/+/u/compile/stdout\n\n```\n[3461/39637] ACTION //third_party/dawn/src/dawn/fuzzers:dawn_lpmfuzz_cpp__json_tarball(//build/toolchain/linux:clang_x64)\nFAILED: gen/third_party/dawn/dawn_lpmfuzz_cpp.json_tarball \npython3 ../../third_party/dawn/generator/dawn_json_generator.py --dawn-json ../../third_party/dawn/src/dawn/dawn.json --wire-json ../../third_party/dawn/src/dawn/dawn_wire.json --lpm-json ../../third_party/dawn/src/dawn/fuzzers/lpmfuzz/dawn_lpm.json --targets dawn_lpmfuzz_cpp --template-dir ../../third_party/dawn/generator/templates --jinja2-path ../../third_party/jinja2 --output-json-tarball gen/third_party/dawn/dawn_lpmfuzz_cpp.json_tarball --depfile gen/third_party/dawn/dawn_lpmfuzz_cpp.json_tarball.d --expected-outputs-file gen/third_party/dawn/dawn_lpmfuzz_cpp.expected_outputs\nTraceback (most recent call last):\n  File \"../../third_party/dawn/generator/dawn_json_generator.py\", line 1334, in \u003cmodule\u003e\n    sys.exit(run_generator(MultiGeneratorFromDawnJSON()))\n  File \"/b/s/w/ir/cache/builder/src/third_party/dawn/generator/generator_lib.py\", line 362, in run_generator\n    outputs \u003d _do_renders(renders, args.template_dir)\n  File \"/b/s/w/ir/cache/builder/src/third_party/dawn/generator/generator_lib.py\", line 210, in _do_renders\n    content \u003d env.get_template(render.template).render(**params)\n  File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/environment.py\", line 1301, in render\n    self.environment.handle_exception()\n  File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/environment.py\", line 936, in handle_exception\n    raise rewrite_traceback_stack(source\u003dsource)\n  File \"../../third_party/dawn/generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp\", line 234, in top-level template code\n    \n  File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/runtime.py\", line 777, in _invoke\n    rv \u003d self._func(*arguments)\n  File \"../../third_party/dawn/generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp\", line 156, in template\n    //* Major WireCmd Divergence: Some member values are hardcoded in dawn_lpm.json\n  File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/runtime.py\", line 777, in _invoke\n    rv \u003d self._func(*arguments)\n  File \"../../third_party/dawn/generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp\", line 69, in template\n    {% elif member.type.name.get() \u003d\u003d \"ObjectId\" %}\n  File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/runtime.py\", line 777, in _invoke\n    rv \u003d self._func(*arguments)\n  File \"../../third_party/dawn/generator/templates/dawn/fuzzers/lpmfuzz/DawnLPMSerializer.cpp\", line 100, in template\n    );\n  File \"/b/s/w/ir/cache/builder/src/out/Release/../../third_party/jinja2/../jinja2/environment.py\", line 485, in getattr\n    return getattr(obj, attribute)\njinja2.exceptions.UndefinedError: \u0027None\u0027 has no attribute \u0027name\u0027\n```",
+      "revId": "6ecbeedd4e016dfa304082bc7e3639b54d179ce1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6964bca3_b878cf9f",
