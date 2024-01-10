@@ -48,6 +48,7 @@
 #include "dawn/native/Device.h"
 #include "dawn/native/Instance.h"
 #include "dawn/native/dawn_platform.h"
+#include "dawn/native/metal/BackendMTL.h"
 #include "dawn/tests/PartitionAllocSupport.h"
 #include "dawn/utils/ComboRenderPipelineDescriptor.h"
 #include "dawn/utils/PlatformDebugLogger.h"
@@ -950,6 +951,15 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
 
 bool DawnTestBase::IsFullBackendValidationEnabled() const {
     return gTestEnv->GetBackendValidationLevel() == native::BackendValidationLevel::Full;
+}
+
+bool DawnTestBase::IsMetalValidationEnabled() const {
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+    return IsMetal() && native::metal::IsMetalValidationEnabled(
+                            native::FromAPI(device.Get())->GetPhysicalDevice());
+#else
+    return false;
+#endif
 }
 
 bool DawnTestBase::IsCompatibilityMode() const {
