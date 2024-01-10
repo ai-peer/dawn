@@ -239,6 +239,17 @@ class InstanceBase final : public RefCountedWithExternalCount {
     MutexProtected<absl::flat_hash_set<DeviceBase*>> mDevicesList;
 };
 
+template <typename T>
+T* ReturnToAPI(Ref<T> object);
+
+template <>
+inline InstanceBase* ReturnToAPI(Ref<InstanceBase> instance) {
+    if (instance.Get()) {
+        instance->APIReference();
+    }
+    return instance.Get();
+}
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_INSTANCE_H_
