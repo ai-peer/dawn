@@ -36,8 +36,9 @@ namespace wgpu::binding {
 GPUAdapterInfo::GPUAdapterInfo(WGPUAdapterProperties properties)
     : vendor_(properties.vendorName),
       architecture_(properties.architecture),
-      device_(properties.name),
-      description_(properties.driverDescription) {}
+      device_(String::Format((properties.deviceID <= 0xffff) ? "0x%04x" : "0x%08x",
+                             properties.deviceID)),
+      description_(properties.name) {}
 
 std::string GPUAdapterInfo::getVendor(Napi::Env) {
     return vendor_;
