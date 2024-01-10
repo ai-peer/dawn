@@ -34,8 +34,9 @@ namespace dawn::native {
 DawnMockTest::DawnMockTest() {
     dawnProcSetProcs(&dawn::native::GetProcs());
 
-    mDeviceMock = new ::testing::NiceMock<DeviceMock>();
-    device = wgpu::Device::Acquire(ToAPI(mDeviceMock));
+    auto deviceMock = AcquireRef(new ::testing::NiceMock<DeviceMock>());
+    mDeviceMock = deviceMock.Get();
+    device = wgpu::Device::Acquire(ToAPI(APIObjectReturn(deviceMock)));
 }
 
 DawnMockTest::~DawnMockTest() {
