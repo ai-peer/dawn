@@ -31,6 +31,7 @@
 #include <bitset>
 #include <map>
 #include <memory>
+#include <mutex>
 #include <string>
 #include <unordered_map>
 #include <utility>
@@ -322,7 +323,30 @@ class ShaderModuleBase : public ApiObjectBase,
         bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
     };
 
-    // This returns tint program before running transforms.
+    class ScopedTintProgramLock : public NonCopyable {
+      public:
+        ScopedTintProgramLock();
+        explicit ScopedTintProgramLock(Ref<ShaderModuleBase> module);
+        ~ScopedTintProgramLock();
+
+        void Reset();
+
+      private:
+        Ref<ShaderModuleBase> mModule;
+    };
+
+    class TintData : public RefCounted {
+      public:
+      private:
+        friend class ShaderModuleBase;
+        TintData();
+        ~TintData() override;
+
+        std::unique_ptr<tint::Program> mTintProgram;
+        std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
+    };
+
+    const Ref<TintData>& GetOrRecreateTintData();
     const tint::Program* GetTintProgram() const;
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
@@ -340,6 +364,8 @@ class ShaderModuleBase : public ApiObjectBase,
   private:
     ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);
 
+    void WillDropLastExternalRef() override;
+
     // The original data in the descriptor for caching.
     enum class Type { Undefined, Spirv, Wgsl };
     Type mType;
@@ -349,10 +375,15 @@ class ShaderModuleBase : public ApiObjectBase,
     EntryPointMetadataTable mEntryPoints;
     PerStage<std::string> mDefaultEntryPointNames;
     PerStage<size_t> mEntryPointCounts;
-    std::unique_ptr<tint::Program> mTintProgram;
-    std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
+
+    RefCount mTintProgramRefCount;
+
+    std::mutex mTintDataLock;  // mutex for protecting mTintData.
+    Ref<TintData> mTintData;
 
     std::unique_ptr<OwnedCompilationMessages> mCompilationMessages;
+
+    std::optional<ScopedTintProgramLock> mExternalScopedTintProgramLock;
 };
 
 }  // namespace dawn::native

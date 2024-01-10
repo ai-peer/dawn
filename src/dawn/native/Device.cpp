@@ -1078,7 +1078,7 @@ BindGroupBase* DeviceBase::APICreateBindGroup(const BindGroupDescriptor* descrip
                       descriptor)) {
         return BindGroupBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 BindGroupLayoutBase* DeviceBase::APICreateBindGroupLayout(
     const BindGroupLayoutDescriptor* descriptor) {
@@ -1087,7 +1087,7 @@ BindGroupLayoutBase* DeviceBase::APICreateBindGroupLayout(
                       "calling %s.CreateBindGroupLayout(%s).", this, descriptor)) {
         return BindGroupLayoutBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+      return APIObjectReturn(std::move(result));
 }
 BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor) {
     Ref<BufferBase> result = nullptr;
@@ -1096,7 +1096,7 @@ BufferBase* DeviceBase::APICreateBuffer(const BufferDescriptor* descriptor) {
         DAWN_ASSERT(result == nullptr);
         return BufferBase::MakeError(this, descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 CommandEncoder* DeviceBase::APICreateCommandEncoder(const CommandEncoderDescriptor* descriptor) {
     Ref<CommandEncoder> result;
@@ -1104,7 +1104,7 @@ CommandEncoder* DeviceBase::APICreateCommandEncoder(const CommandEncoderDescript
                       "calling %s.CreateCommandEncoder(%s).", this, descriptor)) {
         return CommandEncoder::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+      return APIObjectReturn(std::move(result));
 }
 ComputePipelineBase* DeviceBase::APICreateComputePipeline(
     const ComputePipelineDescriptor* descriptor) {
@@ -1116,7 +1116,7 @@ ComputePipelineBase* DeviceBase::APICreateComputePipeline(
                       "calling %s.CreateComputePipeline(%s).", this, descriptor)) {
         return ComputePipelineBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+      return APIObjectReturn(std::move(result));
 }
 void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* descriptor,
                                                WGPUCreateComputePipelineAsyncCallback callback,
@@ -1157,7 +1157,7 @@ PipelineLayoutBase* DeviceBase::APICreatePipelineLayout(
                       "calling %s.CreatePipelineLayout(%s).", this, descriptor)) {
         return PipelineLayoutBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 QuerySetBase* DeviceBase::APICreateQuerySet(const QuerySetDescriptor* descriptor) {
     Ref<QuerySetBase> result;
@@ -1165,7 +1165,7 @@ QuerySetBase* DeviceBase::APICreateQuerySet(const QuerySetDescriptor* descriptor
                       "calling %s.CreateQuerySet(%s).", this, descriptor)) {
         return QuerySetBase::MakeError(this, descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 SamplerBase* DeviceBase::APICreateSampler(const SamplerDescriptor* descriptor) {
     Ref<SamplerBase> result;
@@ -1173,7 +1173,7 @@ SamplerBase* DeviceBase::APICreateSampler(const SamplerDescriptor* descriptor) {
                       descriptor)) {
         return SamplerBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* descriptor,
                                               WGPUCreateRenderPipelineAsyncCallback callback,
@@ -1216,7 +1216,7 @@ RenderBundleEncoder* DeviceBase::APICreateRenderBundleEncoder(
                       "calling %s.CreateRenderBundleEncoder(%s).", this, descriptor)) {
         return RenderBundleEncoder::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 RenderPipelineBase* DeviceBase::APICreateRenderPipeline(
     const RenderPipelineDescriptor* descriptor) {
@@ -1228,7 +1228,7 @@ RenderPipelineBase* DeviceBase::APICreateRenderPipeline(
                       "calling %s.CreateRenderPipeline(%s).", this, descriptor)) {
         return RenderPipelineBase::MakeError(this, descriptor ? descriptor->label : nullptr);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor* descriptor) {
     TRACE_EVENT1(GetPlatform(), General, "DeviceBase::APICreateShaderModule", "label",
@@ -1247,7 +1247,7 @@ ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor
     // is an error shader module.
     result->InjectCompilationMessages(std::move(compilationMessages));
 
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescriptor* descriptor,
                                                          const char* errorMessage) {
@@ -1262,7 +1262,7 @@ ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescr
         DAWN_VALIDATION_ERROR("Error in calling %s.CreateShaderModule(%s).", this, descriptor);
     ConsumeError(std::move(errorData));
 
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
                                               const SwapChainDescriptor* descriptor) {
@@ -1271,7 +1271,7 @@ SwapChainBase* DeviceBase::APICreateSwapChain(Surface* surface,
                       "calling %s.CreateSwapChain(%s).", this, descriptor)) {
         return SwapChainBase::MakeError(this, descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
     Ref<TextureBase> result;
@@ -1279,7 +1279,7 @@ TextureBase* DeviceBase::APICreateTexture(const TextureDescriptor* descriptor) {
                       "calling %s.CreateTexture(%s).", this, descriptor)) {
         return TextureBase::MakeError(this, descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 wgpu::TextureUsage DeviceBase::APIGetSupportedSurfaceUsage(Surface* surface) {
@@ -1377,17 +1377,14 @@ MaybeError DeviceBase::Tick() {
 }
 
 AdapterBase* DeviceBase::APIGetAdapter() {
-    mAdapter->Reference();
+    mAdapter->APIReference();
     return mAdapter.Get();
 }
 
 QueueBase* DeviceBase::APIGetQueue() {
     // Backends gave the primary queue during initialization.
     DAWN_ASSERT(mQueue != nullptr);
-
-    // Returns a new reference to the queue.
-    mQueue->Reference();
-    return mQueue.Get();
+    return APIObjectReturn(mQueue);
 }
 
 ExternalTextureBase* DeviceBase::APICreateExternalTexture(
@@ -1398,7 +1395,7 @@ ExternalTextureBase* DeviceBase::APICreateExternalTexture(
         return ExternalTextureBase::MakeError(this);
     }
 
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 SharedTextureMemoryBase* DeviceBase::APIImportSharedTextureMemory(
@@ -1412,7 +1409,7 @@ SharedTextureMemoryBase* DeviceBase::APIImportSharedTextureMemory(
             &result, "calling %s.ImportSharedTextureMemory(%s).", this, descriptor)) {
         return SharedTextureMemoryBase::MakeError(this, descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 ResultOrError<Ref<SharedTextureMemoryBase>> DeviceBase::ImportSharedTextureMemoryImpl(
@@ -1430,7 +1427,7 @@ SharedFenceBase* DeviceBase::APIImportSharedFence(const SharedFenceDescriptor* d
             &result, "calling %s.ImportSharedFence(%s).", this, descriptor)) {
         return SharedFenceBase::MakeError(this, descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 ResultOrError<Ref<SharedFenceBase>> DeviceBase::ImportSharedFenceImpl(

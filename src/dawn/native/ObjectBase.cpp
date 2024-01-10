@@ -39,12 +39,14 @@ namespace dawn::native {
 static constexpr uint64_t kErrorPayload = 0;
 static constexpr uint64_t kNotErrorPayload = 1;
 
-ErrorMonad::ErrorMonad() : RefCounted(kNotErrorPayload) {}
-ErrorMonad::ErrorMonad(ErrorTag) : RefCounted(kErrorPayload) {}
+ErrorMonad::ErrorMonad() : RefCountedWithExternalCount(kNotErrorPayload) {}
+ErrorMonad::ErrorMonad(ErrorTag) : RefCountedWithExternalCount(kErrorPayload) {}
 
 bool ErrorMonad::IsError() const {
     return GetRefCountPayload() == kErrorPayload;
 }
+
+void ErrorMonad::WillDropLastExternalRef() {}
 
 ObjectBase::ObjectBase(DeviceBase* device) : ErrorMonad(), mDevice(device) {}
 

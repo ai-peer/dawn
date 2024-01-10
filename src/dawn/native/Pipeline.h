@@ -57,6 +57,7 @@ WGPUCreatePipelineAsyncStatus CreatePipelineAsyncStatusFromErrorType(InternalErr
 
 struct ProgrammableStage {
     Ref<ShaderModuleBase> module;
+    mutable Ref<ShaderModuleBase::TintData> tintData;
     std::string entryPoint;
 
     // The metadata lives as long as module, that's ref-ed in the same structure.

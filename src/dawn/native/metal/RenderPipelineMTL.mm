@@ -405,6 +405,9 @@ MaybeError RenderPipeline::Initialize() {
     DAWN_TRY(ToBackend(vertexStage.module.Get())
                  ->CreateFunction(SingleShaderStage::Vertex, vertexStage, ToBackend(GetLayout()),
                                   &vertexData, 0xFFFFFFFF, this));
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    vertexStage.tintData = nullptr;
 
     descriptorMTL.vertexFunction = vertexData.function.Get();
     if (vertexData.needsStorageBufferLength) {
@@ -418,6 +421,9 @@ MaybeError RenderPipeline::Initialize() {
                      ->CreateFunction(SingleShaderStage::Fragment, fragmentStage,
                                       ToBackend(GetLayout()), &fragmentData, GetSampleMask(),
                                       this));
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        fragmentStage.tintData = nullptr;
 
         descriptorMTL.fragmentFunction = fragmentData.function.Get();
         if (fragmentData.needsStorageBufferLength) {
