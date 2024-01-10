@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "06ae3b16_2d3cd760",
+        "filename": "src/dawn/native/RenderPipeline.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 308,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-01-10T17:35:47Z",
+      "side": 1,
+      "message": "I changed it as you suggested but IMO that message is super confusing. To me it says that compatibility mode set the value to something not zero. It does not say that I made the error of setting it to something not sero.",
+      "parentUuid": "b2560dd7_3dc8f3a4",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "904034f4_4b06117b",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1c2140a3_7a0bd890",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 201,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-01-10T17:35:47Z",
+      "side": 1,
+      "message": "That sounds like another PR",
+      "parentUuid": "904034f4_4b06117b",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "fe738a4b_be69fd96",
         "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
         "patchSetId": 1
@@ -65,6 +101,24 @@
       "writtenOn": "2024-01-10T10:27:42Z",
       "side": 1,
       "message": "u-nit: the loop is not much more clear than writing two blocks of two lines.",
+      "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b9e8873_f3ca2db0",
+        "filename": "src/dawn/tests/unittests/validation/CompatValidationTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 213,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-01-10T17:35:47Z",
+      "side": 1,
+      "message": "done",
+      "parentUuid": "fe738a4b_be69fd96",
       "revId": "74d5e3a3a56c043d34a3c4a595967816a00beb84",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
