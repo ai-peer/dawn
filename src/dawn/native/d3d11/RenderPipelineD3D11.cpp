@@ -464,6 +464,9 @@ MaybeError RenderPipeline::InitializeShaders() {
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Vertex, ToBackend(GetLayout()),
                           compileFlags, usedInterstageVariables));
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        programmableStage.tintData = nullptr;
         const Blob& shaderBlob = compiledShader[SingleShaderStage::Vertex].shaderBlob;
         DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreateVertexShader(
                                   shaderBlob.Data(), shaderBlob.Size(), nullptr, &mVertexShader),
@@ -524,6 +527,9 @@ MaybeError RenderPipeline::InitializeShaders() {
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Fragment, ToBackend(GetLayout()),
                           compileFlags, usedInterstageVariables, pixelLocalOptions));
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        programmableStage.tintData = nullptr;
         DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreatePixelShader(
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Data(),
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Size(),

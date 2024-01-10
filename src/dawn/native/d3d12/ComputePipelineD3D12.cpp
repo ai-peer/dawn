@@ -84,6 +84,9 @@ MaybeError ComputePipeline::Initialize() {
             IsFullSubgroupsRequired()
                 ? std::make_optional(device->GetLimits().experimentalSubgroupLimits.maxSubgroupSize)
                 : std::nullopt));
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    computeStage.tintData = nullptr;
     d3dDesc.CS = {compiledShader.shaderBlob.Data(), compiledShader.shaderBlob.Size()};
 
     StreamIn(&mCacheKey, d3dDesc, ToBackend(GetLayout())->GetRootSignatureBlob());

@@ -35,6 +35,7 @@
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 #include "dawn/native/Forward.h"
+#include "dawn/native/RefCountedWithExternalCount.h"
 
 namespace absl {
 class FormatSink;
@@ -45,7 +46,7 @@ namespace dawn::native {
 class ApiObjectBase;
 class DeviceBase;
 
-class ErrorMonad : public RefCounted {
+class ErrorMonad : public RefCountedWithExternalCount {
   public:
     struct ErrorTag {};
     static constexpr ErrorTag kError = {};
@@ -54,6 +55,9 @@ class ErrorMonad : public RefCounted {
     explicit ErrorMonad(ErrorTag tag);
 
     bool IsError() const;
+
+  private:
+    void WillDropLastExternalRef() override;
 };
 
 class ObjectBase : public ErrorMonad {
@@ -149,6 +153,12 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
 
     std::string mLabel;
 };
+
+template <class T>
+T* APIObjectReturn(Ref<T> apiObject) {
+    apiObject->APIReference();
+    return apiObject.Get();
+}
 
 }  // namespace dawn::native
 
