@@ -77,17 +77,6 @@ bool Client::DoDeviceLostCallback(Device* device,
     return true;
 }
 
-bool Client::DoDevicePopErrorScopeCallback(Device* device,
-                                           uint64_t requestSerial,
-                                           WGPUErrorType errorType,
-                                           const char* message) {
-    if (device == nullptr) {
-        // The device might have been deleted or recreated so this isn't an error.
-        return true;
-    }
-    return device->OnPopErrorScopeCallback(requestSerial, errorType, message);
-}
-
 bool Client::DoShaderModuleGetCompilationInfoCallback(ShaderModule* shaderModule,
                                                       uint64_t requestSerial,
                                                       WGPUCompilationInfoRequestStatus status,

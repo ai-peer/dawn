@@ -36,7 +36,7 @@
 namespace dawn::wire::client {
 namespace {
 
-class WorkDoneEvent : public TrackedEvent {
+class WorkDoneEvent final : public TrackedEvent {
   public:
     static constexpr EventType kType = EventType::WorkDone;
 

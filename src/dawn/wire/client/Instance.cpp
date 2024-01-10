@@ -41,7 +41,7 @@
 namespace dawn::wire::client {
 namespace {
 
-class RequestAdapterEvent : public TrackedEvent {
+class RequestAdapterEvent final : public TrackedEvent {
   public:
     static constexpr EventType kType = EventType::RequestAdapter;
 
