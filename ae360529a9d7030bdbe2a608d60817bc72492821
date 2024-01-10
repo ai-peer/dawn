@@ -18,6 +18,80 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "08cde8af_19aae94c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T12:59:19Z",
+      "side": 1,
+      "message": "Fantastic job, Antonio. A few minor requests for changes.",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "84452de3_4fad2de2",
+        "filename": "src/tint/lang/spirv/reader/ast_lower/decompose_strided_array_test.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 147,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T12:59:19Z",
+      "side": 1,
+      "message": "`arr` (broken also in the above code)",
+      "range": {
+        "startLine": 147,
+        "startChar": 45,
+        "endLine": 147,
+        "endChar": 46
+      },
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7d42861c_83081eb3",
+        "filename": "src/tint/lang/spirv/writer/ast_raise/var_for_dynamic_index_test.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 472,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T12:59:19Z",
+      "side": 1,
+      "message": "Please can we have a test using the ptr-sugar that isn\u0027t a no-op for the transform?",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f5f7c802_6d0900a6",
+        "filename": "src/tint/lang/wgsl/ast/transform/remove_phonies.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T12:59:19Z",
+      "side": 1,
+      "message": "This change doesn\u0027t appear (at first glance) related to ptr sugar. Move to a separate CL?",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9a9dac05_07d24538",
