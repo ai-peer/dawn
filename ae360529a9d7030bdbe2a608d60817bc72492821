@@ -16,6 +16,46 @@
       "message": "PTAL.",
       "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9a9dac05_07d24538",
+        "filename": "src/tint/lang/wgsl/ast/transform/simplify_pointers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 168,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-10T12:52:52Z",
+      "side": 1,
+      "message": "I\u0027m not keen on this function becoming stateful. There\u0027s now an undocumented requirement that `Reduce()` must be called with all outer expressions before inner. This is currently the case, but this took me 15 minutes of head-scratching to figure out how this works.\n\nYou can revert this chunk of code (along with the `const` on the function), and add:\n\n```\n,\n                [\u0026](const AccessorExpression* accessor) {\n                    if (auto* a \u003d ctx.src-\u003eSem().Get\u003csem::ValueExpression\u003e(accessor-\u003eobject)) {\n                        if (a-\u003eType()-\u003eIs\u003ccore::type::Pointer\u003e()) {\n                            // Object is an implicitly dereferenced pointer (i.e. syntax sugar).\n                            is_accessor_object_pointer.Add(accessor-\u003eobject);\n                        }\n                    }\n                }\n```\n\nTo [1]. This gives you the same behaviour, but you\u0027re then keeping this a pure-function, and we\u0027re collecting the info in the pre-pass.",
+      "range": {
+        "startLine": 137,
+        "startChar": 0,
+        "endLine": 168,
+        "endChar": 0
+      },
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c47f8639_952ba8c7",
+        "filename": "src/tint/lang/wgsl/ast/transform/simplify_pointers.cc",
+        "patchSetId": 19
+      },
+      "lineNbr": 259,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-10T12:52:52Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "ae360529a9d7030bdbe2a608d60817bc72492821",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
