@@ -607,6 +607,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "404d06b3_186ff6fa",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-10T19:09:28Z",
+      "side": 1,
+      "message": "RE @cwallez@chromium.org\n\nDo you mean add a field `concurrentRead` in `SharedTextureMemoryBeginAccessDescriptor` to allow concurrent read on a single device, and verify it and `initialized` in `BeginAccess()`?\n\nIn this way, chrome has to always set `concurrentRead` to true for all read access, and there will be use cases with read access with un-initialized texture (It is because the SI backing doesn\u0027t known the if it will be read in same time in advance.). It works right now. We don\u0027t want to break it.\n\nFor vulkan layout issue, I still don\u0027t understand it. When we concurrent read a shared texture on a single device, dawn should be able to change vkImage to desired layout before each vulkan operation. Since all concurrent read are on the same wgpu device, they are serialized and submitted to the same VkQueue, right?\n\nI will wait Austin back, so we can discuss it.",
+      "parentUuid": "d94f6db5_1e448918",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
