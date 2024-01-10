@@ -210,6 +210,8 @@ PipelineBase::PipelineBase(DeviceBase* device,
         // Extract argument for this stage.
         SingleShaderStage shaderStage = stage.shaderStage;
         ShaderModuleBase* module = stage.module;
+        // The TintData in ShaderModuleBase could be released, so hold a ref of it to keep it alive.
+        Ref<ShaderModuleBase::TintData> tintData = module->GetTintData();
         const char* entryPointName = stage.entryPoint.c_str();
 
         const EntryPointMetadata& metadata = module->GetEntryPoint(entryPointName);
@@ -218,7 +220,7 @@ PipelineBase::PipelineBase(DeviceBase* device,
         // Record them internally.
         bool isFirstStage = mStageMask == wgpu::ShaderStage::None;
         mStageMask |= StageBit(shaderStage);
-        mStages[shaderStage] = {module, entryPointName, &metadata, {}};
+        mStages[shaderStage] = {module, std::move(tintData), entryPointName, &metadata, {}};
         auto& constants = mStages[shaderStage].constants;
         for (uint32_t i = 0; i < stage.constantCount; i++) {
             constants.emplace(stage.constants[i].key, stage.constants[i].value);
@@ -305,9 +307,9 @@ BindGroupLayoutBase* PipelineBase::APIGetBindGroupLayout(uint32_t groupIndexIn) 
     if (GetDevice()->ConsumedError(GetBindGroupLayout(groupIndexIn), &result,
                                    "Validating GetBindGroupLayout (%u) on %s", groupIndexIn,
                                    this)) {
-        return BindGroupLayoutBase::MakeError(GetDevice());
+        result = BindGroupLayoutBase::MakeError(GetDevice());
     }
-    return result.Detach();
+    return APIObjectReturn(result);
 }
 
 size_t PipelineBase::ComputeContentHash() {
