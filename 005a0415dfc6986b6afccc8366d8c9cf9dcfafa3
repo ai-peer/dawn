@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "81bf6732_2d982089",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:57:35Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "005a0415dfc6986b6afccc8366d8c9cf9dcfafa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b60da97_77d6df55",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:57:35Z",
+      "side": 1,
+      "message": "Shouldn\u0027t this give an invalid error pipeline when the device is lost?",
+      "revId": "005a0415dfc6986b6afccc8366d8c9cf9dcfafa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "61b39be4_fab2eef7",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:57:35Z",
+      "side": 1,
+      "message": "```suggestion\n    // instead of a pointer to an empty string.\n```",
+      "revId": "005a0415dfc6986b6afccc8366d8c9cf9dcfafa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
