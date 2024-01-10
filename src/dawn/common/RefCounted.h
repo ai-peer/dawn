@@ -41,13 +41,13 @@ class WeakRefData;
 class RefCount {
   public:
     // Create a refcount with a payload. The refcount starts initially at one.
-    explicit RefCount(uint64_t payload = 0);
+    explicit RefCount(uint64_t payload = 0, bool startFromZero = false);
 
     uint64_t GetValueForTesting() const;
     uint64_t GetPayload() const;
 
     // Add a reference.
-    void Increment();
+    bool Increment();
     // Tries to add a reference. Returns false if the ref count is already at 0. This is used when
     // operating on a raw pointer to a RefCounted instead of a valid Ref that may be soon deleted.
     bool TryIncrement();
@@ -57,6 +57,7 @@ class RefCount {
 
   private:
     std::atomic<uint64_t> mRefCount;
+    const bool mStartFromZero;
 };
 
 class RefCounted {
