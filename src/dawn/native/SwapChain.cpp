@@ -184,7 +184,7 @@ TextureBase* SwapChainBase::APIGetCurrentTexture() {
         SetChildLabel(errorTexture);
         return errorTexture;
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 TextureViewBase* SwapChainBase::APIGetCurrentTextureView() {
@@ -195,7 +195,7 @@ TextureViewBase* SwapChainBase::APIGetCurrentTextureView() {
         SetChildLabel(errorView);
         return errorView;
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 ResultOrError<Ref<TextureBase>> SwapChainBase::GetCurrentTexture() {

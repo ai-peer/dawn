@@ -1125,7 +1125,7 @@ TextureViewBase* TextureBase::APICreateView(const TextureViewDescriptor* descrip
                               descriptor)) {
         return CreateErrorView(descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(std::move(result));
 }
 
 TextureViewBase* TextureBase::APICreateErrorView(const TextureViewDescriptor* descriptor) {
