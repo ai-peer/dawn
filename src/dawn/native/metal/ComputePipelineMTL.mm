@@ -56,8 +56,12 @@ MaybeError ComputePipeline::Initialize() {
     auto mtlDevice = ToBackend(GetDevice())->GetMTLDevice();
 
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
-    ShaderModule::MetalFunctionData computeData;
 
+    // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+    // used elsewhere.
+    auto tintData = std::move(computeStage.tintData);
+
+    ShaderModule::MetalFunctionData computeData;
     DAWN_TRY(ToBackend(computeStage.module.Get())
                  ->CreateFunction(
                      SingleShaderStage::Compute, computeStage, ToBackend(GetLayout()), &computeData,
@@ -68,7 +72,6 @@ MaybeError ComputePipeline::Initialize() {
                          ? std::make_optional(
                                GetDevice()->GetLimits().experimentalSubgroupLimits.maxSubgroupSize)
                          : std::nullopt));
-
     NSError* error = nullptr;
     NSRef<NSString> label = MakeDebugName(GetDevice(), "Dawn_ComputePipeline", GetLabel());
 
