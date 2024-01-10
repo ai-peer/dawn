@@ -477,6 +477,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     void Destroy();
 
   private:
+    void WillHaveFirstExternalRef() override;
     void WillDropLastExternalRef() override;
 
     virtual ResultOrError<Ref<BindGroupBase>> CreateBindGroupImpl(
