@@ -275,6 +275,7 @@ class DawnTestBase {
     bool IsImplicitDeviceSyncEnabled() const;
     bool IsBackendValidationEnabled() const;
     bool IsFullBackendValidationEnabled() const;
+    bool IsMetalValidationEnabled() const;
     bool IsCompatibilityMode() const;
     bool RunSuppressedTests() const;
 

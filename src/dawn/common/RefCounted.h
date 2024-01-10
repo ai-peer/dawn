@@ -38,6 +38,7 @@ namespace detail {
 class WeakRefData;
 }  // namespace detail
 
+template <bool RefCountStartsFromZero>
 class RefCount {
   public:
     // Create a refcount with a payload. The refcount starts initially at one.
@@ -46,10 +47,12 @@ class RefCount {
     uint64_t GetValueForTesting() const;
     uint64_t GetPayload() const;
 
-    // Add a reference.
-    void Increment();
-    // Tries to add a reference. Returns false if the ref count is already at 0. This is used when
-    // operating on a raw pointer to a RefCounted instead of a valid Ref that may be soon deleted.
+    // Add a reference. Return true if the ref count is 0 before increment.
+    bool Increment();
+    // If the RefCount is created with RefCountStartsFromZero is true, TryIncrement() always returns
+    // true and increase the refcount. Otherwise tries to add a reference. Returns false if the ref
+    // count is already at 0. This is used when operating on a raw pointer to a RefCounted instead
+    // of a valid Ref that may be soon deleted.
     bool TryIncrement();
 
     // Remove a reference. Returns true if this was the last reference.
@@ -58,6 +61,22 @@ class RefCount {
   private:
     std::atomic<uint64_t> mRefCount;
 };
+
+// Specialize template method declares for RefCountStartsFromZero = false
+extern template RefCount<false>::RefCount(uint64_t payload);
+extern template uint64_t RefCount<false>::GetValueForTesting() const;
+extern template uint64_t RefCount<false>::GetPayload() const;
+extern template bool RefCount<false>::Increment();
+extern template bool RefCount<false>::TryIncrement();
+extern template bool RefCount<false>::Decrement();
+
+// Specialize template declares for RefCountStartsFromZero = true
+extern template RefCount<true>::RefCount(uint64_t payload);
+extern template uint64_t RefCount<true>::GetValueForTesting() const;
+extern template uint64_t RefCount<true>::GetPayload() const;
+extern template bool RefCount<true>::Increment();
+extern template bool RefCount<true>::TryIncrement();
+extern template bool RefCount<true>::Decrement();
 
 class RefCounted {
   public:
@@ -89,7 +108,8 @@ class RefCounted {
     // This calls DeleteThis() by default.
     virtual void LockAndDeleteThis();
 
-    RefCount mRefCount;
+    // A new created RefCounted object's ref count starts from 1.
+    RefCount</*RefCountStartsFromZero=*/false> mRefCount;
 };
 
 }  // namespace dawn

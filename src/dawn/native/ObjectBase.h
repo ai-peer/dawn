@@ -150,6 +150,15 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     std::string mLabel;
 };
 
+// Add a API reference and return object ptr for external usage.
+template <class T>
+T* ReturnToAPI(const Ref<T>& apiObject) {
+    if (apiObject.Get()) {
+        apiObject->APIReference();
+    }
+    return apiObject.Get();
+}
+
 }  // namespace dawn::native
 
 #endif  // SRC_DAWN_NATIVE_OBJECTBASE_H_
