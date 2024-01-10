@@ -61,10 +61,10 @@ class ErrorSharedTextureMemory : public SharedTextureMemoryBase {
 }  // namespace
 
 // static
-SharedTextureMemoryBase* SharedTextureMemoryBase::MakeError(
+Ref<SharedTextureMemoryBase> SharedTextureMemoryBase::MakeError(
     DeviceBase* device,
     const SharedTextureMemoryDescriptor* descriptor) {
-    return new ErrorSharedTextureMemory(device, descriptor);
+    return AcquireRef(new ErrorSharedTextureMemory(device, descriptor));
 }
 
 SharedTextureMemoryBase::SharedTextureMemoryBase(DeviceBase* device,
@@ -139,9 +139,9 @@ TextureBase* SharedTextureMemoryBase::APICreateTexture(const TextureDescriptor* 
     if (GetDevice()->ConsumedError(CreateTexture(descriptor), &result,
                                    InternalErrorType::OutOfMemory, "calling %s.CreateTexture(%s).",
                                    this, descriptor)) {
-        return TextureBase::MakeError(GetDevice(), descriptor);
+        result = TextureBase::MakeError(GetDevice(), descriptor);
     }
-    return result.Detach();
+    return APIObjectReturn(result);
 }
 
 Ref<SharedTextureMemoryContents> SharedTextureMemoryBase::CreateContents() {

@@ -390,6 +390,9 @@ MaybeError RenderPipeline::Initialize() {
                         ToBackend(programmableStage.module)
                             ->GetHandleAndSpirv(stage, programmableStage, layout, clampFragDepth,
                                                 /* fullSubgroups */ {}));
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        programmableStage.tintData = nullptr;
         // Record cache key for each shader since it will become inaccessible later on.
         StreamIn(&mCacheKey, stream::Iterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount));
 

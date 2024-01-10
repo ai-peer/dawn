@@ -377,6 +377,9 @@ MaybeError RenderPipeline::Initialize() {
                         ToBackend(programmableStage.module)
                             ->Compile(programmableStage, stage, ToBackend(GetLayout()),
                                       compileFlags, usedInterstageVariables));
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        programmableStage.tintData = nullptr;
         *shaders[stage] = {compiledShader[stage].shaderBlob.Data(),
                            compiledShader[stage].shaderBlob.Size()};
     }

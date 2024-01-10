@@ -38,8 +38,10 @@ namespace dawn::native {
 // ref is the external ref.
 // Then, when the external refcount drops to zero, WillDropLastExternalRef is called.
 // The derived class should override the behavior of WillDropLastExternalRef.
-class RefCountedWithExternalCount : private RefCounted {
+class RefCountedWithExternalCount : public RefCounted {
   public:
+    explicit RefCountedWithExternalCount(uint64_t payload = 0);
+
     using RefCounted::RefCounted;
     using RefCounted::Reference;
     using RefCounted::Release;
@@ -53,6 +55,7 @@ class RefCountedWithExternalCount : private RefCounted {
   private:
     virtual void WillDropLastExternalRef() = 0;
 
+    // The mExternalRefCount is 0 for a new created object.
     RefCount mExternalRefCount;
 };
 
