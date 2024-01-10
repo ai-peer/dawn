@@ -38,18 +38,21 @@ namespace detail {
 class WeakRefData;
 }  // namespace detail
 
-class RefCount {
+template <bool RefCountStartFromZero>
+class RefCountBase {
   public:
     // Create a refcount with a payload. The refcount starts initially at one.
-    explicit RefCount(uint64_t payload = 0);
+    explicit RefCountBase(uint64_t payload = 0);
 
     uint64_t GetValueForTesting() const;
     uint64_t GetPayload() const;
 
-    // Add a reference.
-    void Increment();
-    // Tries to add a reference. Returns false if the ref count is already at 0. This is used when
-    // operating on a raw pointer to a RefCounted instead of a valid Ref that may be soon deleted.
+    // Add a reference. Return true if the ref count is 0 before increment.
+    bool Increment();
+    // If the RefCount is created with RefCountStartFromZero is true, TryIncrement() always returns
+    // true and increase the refcount. Tries to add a reference. Returns false if the ref count is
+    // already at 0. This is used when operating on a raw pointer to a RefCounted instead of a valid
+    // Ref that may be soon deleted.
     bool TryIncrement();
 
     // Remove a reference. Returns true if this was the last reference.
@@ -58,6 +61,24 @@ class RefCount {
   private:
     std::atomic<uint64_t> mRefCount;
 };
+
+// Specialize template method declare for RefCountStartFromZero = false
+extern template RefCountBase<false>::RefCountBase(uint64_t payload);
+extern template uint64_t RefCountBase<false>::GetValueForTesting() const;
+extern template uint64_t RefCountBase<false>::GetPayload() const;
+extern template bool RefCountBase<false>::Increment();
+extern template bool RefCountBase<false>::TryIncrement();
+extern template bool RefCountBase<false>::Decrement();
+
+// Specialize template declare for RefCountStartFromZero = true
+extern template RefCountBase<true>::RefCountBase(uint64_t payload);
+extern template uint64_t RefCountBase<true>::GetValueForTesting() const;
+extern template uint64_t RefCountBase<true>::GetPayload() const;
+extern template bool RefCountBase<true>::Increment();
+extern template bool RefCountBase<true>::TryIncrement();
+extern template bool RefCountBase<true>::Decrement();
+
+using RefCount = RefCountBase</*RefCountStartFromZero=*/false>;
 
 class RefCounted {
   public:
