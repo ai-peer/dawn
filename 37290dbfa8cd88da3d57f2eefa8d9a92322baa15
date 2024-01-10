@@ -16,6 +16,24 @@
       "message": "Can we have a small validation test that a view created with a valid descriptor through CreateErrorView is an error when used in things?",
       "revId": "37290dbfa8cd88da3d57f2eefa8d9a92322baa15",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c5dababf_2e7c4422",
+        "filename": "src/dawn/native/Texture.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1132,
+      "author": {
+        "id": 1000030
+      },
+      "writtenOn": "2024-01-10T05:58:41Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9c634832_7142bb5f",
+      "revId": "37290dbfa8cd88da3d57f2eefa8d9a92322baa15",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
