@@ -30,7 +30,9 @@
 namespace dawn::native {
 
 void RefCountedWithExternalCount::APIReference() {
-    mExternalRefCount.Increment();
+    if (mExternalRefCount.Increment()) {
+        WillHaveFirstExternalRef();
+    }
     RefCounted::APIReference();
 }
 
