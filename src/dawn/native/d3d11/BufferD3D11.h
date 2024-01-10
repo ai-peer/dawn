@@ -43,7 +43,8 @@ class Buffer final : public BufferBase {
   public:
     static ResultOrError<Ref<Buffer>> Create(Device* device,
                                              const UnpackedPtr<BufferDescriptor>& descriptor,
-                                             const ScopedCommandRecordingContext* commandContext);
+                                             const ScopedCommandRecordingContext* commandContext,
+                                             bool allowUploadBufferEmulation = true);
 
     MaybeError EnsureDataInitialized(const ScopedCommandRecordingContext* commandContext);
     MaybeError EnsureDataInitializedAsDestination(
@@ -155,6 +156,10 @@ class Buffer final : public BufferBase {
     ComPtr<ID3D11Buffer> mD3d11NonConstantBuffer;
     bool mConstantBufferIsUpdated = true;
     uint8_t* mMappedData = nullptr;
+    // For CPU-to-GPU upload buffers(CopySrc|MapWrite), they can be emulated in the system memory,
+    // and then written into the dest GPU buffer via ID3D11DeviceContext::UpdateSubresource.
+    bool mAllowUploadBufferEmulation = true;
+    uint8_t* mUploadBufferData = nullptr;
 };
 
 }  // namespace dawn::native::d3d11
