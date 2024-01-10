@@ -16,6 +16,69 @@
       "message": "PTAL, thanks!",
       "revId": "051704692ba19c6cd601df52a09a1c46075f2f8e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e44ecf0_94d7caec",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T11:14:23Z",
+      "side": 1,
+      "message": "Thank you for the changes. There\u0027s a few minor things that I think could be done as polish as followup, but I\u0027m not going to block this landing.",
+      "revId": "051704692ba19c6cd601df52a09a1c46075f2f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "911cf1bc_891dd54e",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T11:14:23Z",
+      "side": 1,
+      "message": "nit: would be nice if you moved these min / max values to constants, and used them in the flag description and error message.",
+      "range": {
+        "startLine": 547,
+        "startChar": 12,
+        "endLine": 547,
+        "endChar": 50
+      },
+      "revId": "051704692ba19c6cd601df52a09a1c46075f2f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eca61054_57930440",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-10T11:14:23Z",
+      "side": 1,
+      "message": "I\u0027m not keen on `tint` silently overriding the explicit `--hlsl_shader_model` value passed to it. Ideally it would be an error if `f16` is used and the user specified a lower value. If the user did not specify the `--hlsl_shader_model` then picking the lowest required version seems like a nice thing to do.",
+      "range": {
+        "startLine": 931,
+        "startChar": 24,
+        "endLine": 931,
+        "endChar": 77
+      },
+      "revId": "051704692ba19c6cd601df52a09a1c46075f2f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
