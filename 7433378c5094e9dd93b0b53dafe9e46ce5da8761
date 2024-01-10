@@ -16,6 +16,97 @@
       "message": "@cwallez@chromium.org,\nWould you like to take another look? By addressing your suggestion, I touched another file (Compiler.h) and lost your previous vote.",
       "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d78de4f8_878dcac1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T15:50:21Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f442fb57_706255a4",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T15:50:21Z",
+      "side": 1,
+      "message": "nit: COMPILER_IS(CLANG) here and in other places.",
+      "range": {
+        "startLine": 80,
+        "startChar": 29,
+        "endLine": 80,
+        "endChar": 51
+      },
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fbdf0290_739f221e",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T15:50:21Z",
+      "side": 1,
+      "message": "```suggestion\n// DAWN_NOINLINE void DoStuff() { ... }\n```",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ddbb111a_8a5390a9",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T15:50:21Z",
+      "side": 1,
+      "message": "u-nit: that path was only on MSVC I believe.",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4f79724f_da563696",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T15:50:21Z",
+      "side": 1,
+      "message": "Why is this needed?",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
