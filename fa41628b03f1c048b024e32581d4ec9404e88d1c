@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7ae878b_03b68d4d",
+        "filename": "src/dawn/tests/end2end/D3D12CachingTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 174,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T19:45:59Z",
+      "side": 0,
+      "message": "I think this will not work because there is more than one compute entrypoint.",
+      "revId": "fa41628b03f1c048b024e32581d4ec9404e88d1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
