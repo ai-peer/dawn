@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d16df053_b0980770",
+        "filename": "src/dawn/tests/end2end/DeviceLifetimeTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 153,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:40:44Z",
+      "side": 0,
+      "message": "Why was this test removed? It would be nice to still have coverage of what happens when the device is dropped while the buffer is being mapped.",
+      "revId": "7379e22d00877bac1c5348d31f5e45cdcc2f3aaf",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

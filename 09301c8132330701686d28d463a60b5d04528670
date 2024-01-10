@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "35a4ce67_41bc737c",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 55,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:40:44Z",
+      "side": 1,
+      "message": "This could be declared as a child class of buffer, so that it can access its members directly, which would allow removing MapState and re-inlining all the members in Buffer.",
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "800d2c3e_4a1dd42c",
         "filename": "src/dawn/wire/client/Buffer.cpp",
         "patchSetId": 2
@@ -37,6 +54,23 @@
         "endLine": 59,
         "endChar": 12
       },
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "60b5db7c_2cff9152",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:40:44Z",
+      "side": 1,
+      "message": "Follow-up: I wonder if we could do obj-\u003eRelease() take care of the sending of commands directly so we don\u0027t need to go through the procs here.",
       "revId": "09301c8132330701686d28d463a60b5d04528670",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +105,74 @@
       "writtenOn": "2024-01-10T03:30:49Z",
       "side": 1,
       "message": "I don\u0027t think this status will actually _cause_ the device to be lost, so I think this (and similar cases below) should be \"Unknown\"? Otherwise it may report DeviceLost when the device is not lost. (Also, DeviceLost is going to be removed as a status: https://crbug.com/dawn/2232)\n\nSame below.",
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2987de1c_fc1de3a7",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:40:44Z",
+      "side": 1,
+      "message": "Maybe we can assert that it\u0027s a success.",
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ce5504b9_0762db11",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 378,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:40:44Z",
+      "side": 1,
+      "message": "nit: Maybe these could use WireResult as well.",
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ec94d04_0cd440a8",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 105,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:40:44Z",
+      "side": 1,
+      "message": "nit: should be const?",
+      "revId": "09301c8132330701686d28d463a60b5d04528670",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7472f97_de1f1130",
+        "filename": "src/dawn/wire/client/EventManager.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T11:40:44Z",
+      "side": 1,
+      "message": "nit: ReadyHook could use WireResult so we can use WIRE_TRY here.\n\nI\u0027m also surprised that we keep calling the event even if ReadyHook fails. The server sent us garbage so we should mark everything as lost by returning WireResult::FatalError early.",
       "revId": "09301c8132330701686d28d463a60b5d04528670",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
