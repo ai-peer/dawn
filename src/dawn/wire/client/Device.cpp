@@ -40,6 +40,39 @@
 namespace dawn::wire::client {
 namespace {
 
+class PopErrorScopeEvent final : public TrackedEvent {
+  public:
+    static constexpr EventType kType = EventType::PopErrorScope;
+
+    explicit PopErrorScopeEvent(const WGPUErrorCallbackInfo& callbackInfo)
+        : TrackedEvent(callbackInfo.mode),
+          mCallback(callbackInfo.callback),
+          mUserdata(callbackInfo.userdata) {}
+
+    EventType GetType() override { return kType; }
+
+    WireResult ReadyHook(FutureID futureID, WGPUErrorType errorType, const char* message) {
+        mType = errorType;
+        if (message != nullptr) {
+            mMessage = message;
+        }
+        return WireResult::Success;
+    }
+
+  private:
+    void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
+        if (mCallback) {
+            mCallback(mType, mMessage ? mMessage->c_str() : nullptr, mUserdata);
+        }
+    }
+
+    WGPUErrorCallback mCallback;
+    void* mUserdata;
+
+    WGPUErrorType mType;
+    std::optional<std::string> mMessage;
+};
+
 template <typename PipelineT, EventType Type, typename CallbackInfoT>
 class CreatePipelineEventBase : public TrackedEvent {
   public:
@@ -223,17 +256,36 @@ void Device::SetDeviceLostCallback(WGPUDeviceLostCallback callback, void* userda
 }
 
 void Device::PopErrorScope(WGPUErrorCallback callback, void* userdata) {
+    WGPUErrorCallbackInfo callbackInfo = {};
+    callbackInfo.mode = WGPUCallbackMode_AllowSpontaneous;
+    callbackInfo.callback = callback;
+    callbackInfo.userdata = userdata;
+    PopErrorScopeF(callbackInfo);
+}
+
+WGPUFuture Device::PopErrorScopeF(const WGPUErrorCallbackInfo& callbackInfo) {
     Client* client = GetClient();
-    if (client->IsDisconnected()) {
-        callback(WGPUErrorType_DeviceLost, "GPU device disconnected", userdata);
-        return;
+    auto [futureIDInternal, tracked] =
+        GetEventManager().TrackEvent(std::make_unique<PopErrorScopeEvent>(callbackInfo));
+    if (!tracked) {
+        return {futureIDInternal};
     }
 
-    uint64_t serial = mErrorScopes.Add({callback, userdata});
     DevicePopErrorScopeCmd cmd;
     cmd.deviceId = GetWireId();
-    cmd.requestSerial = serial;
+    cmd.eventManagerHandle = GetEventManagerHandle();
+    cmd.future = {futureIDInternal};
     client->SerializeCommand(cmd);
+    return {futureIDInternal};
+}
+
+bool Client::DoDevicePopErrorScopeCallback(ObjectHandle eventManager,
+                                           WGPUFuture future,
+                                           WGPUErrorType errorType,
+                                           const char* message) {
+    return GetEventManager(eventManager)
+               .SetFutureReady<PopErrorScopeEvent>(future.id, errorType, message) ==
+           WireResult::Success;
 }
 
 bool Device::OnPopErrorScopeCallback(uint64_t requestSerial,
