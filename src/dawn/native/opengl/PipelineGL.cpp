@@ -68,12 +68,14 @@ MaybeError PipelineGL::InitializeBase(const OpenGLFunctions& gl,
     bool needsPlaceholderSampler = false;
     std::vector<GLuint> glShaders;
     for (SingleShaderStage stage : IterateStages(activeStages)) {
-        const ShaderModule* module = ToBackend(stages[stage].module.Get());
+        ShaderModule* module = ToBackend(stages[stage].module.Get());
+        module->EnsureTintProgram();
         GLuint shader;
         DAWN_TRY_ASSIGN(shader, module->CompileShader(
                                     gl, stages[stage], stage, &combinedSamplers[stage], layout,
                                     &needsPlaceholderSampler, &mNeedsTextureBuiltinUniformBuffer,
                                     &mBindingPointEmulatedBuiltins));
+        module->ClearTintProgram();
         gl.AttachShader(mProgram, shader);
         glShaders.push_back(shader);
     }

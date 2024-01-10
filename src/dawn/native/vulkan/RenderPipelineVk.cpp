@@ -385,11 +385,13 @@ MaybeError RenderPipeline::Initialize() {
     auto AddShaderStage = [&](SingleShaderStage stage, VkShaderStageFlagBits vkStage,
                               bool clampFragDepth) -> MaybeError {
         const ProgrammableStage& programmableStage = GetStage(stage);
+        programmableStage.module->EnsureTintProgram();
         ShaderModule::ModuleAndSpirv moduleAndSpirv;
         DAWN_TRY_ASSIGN(moduleAndSpirv,
                         ToBackend(programmableStage.module)
                             ->GetHandleAndSpirv(stage, programmableStage, layout, clampFragDepth,
                                                 /* fullSubgroups */ {}));
+        programmableStage.module->ClearTintProgram();
         // Record cache key for each shader since it will become inaccessible later on.
         StreamIn(&mCacheKey, stream::Iterable(moduleAndSpirv.spirv, moduleAndSpirv.wordCount));
 

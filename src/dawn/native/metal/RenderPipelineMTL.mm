@@ -401,10 +401,12 @@ MaybeError RenderPipeline::Initialize() {
 
     const PerStage<ProgrammableStage>& allStages = GetAllStages();
     const ProgrammableStage& vertexStage = allStages[wgpu::ShaderStage::Vertex];
+    vertexStage.module->EnsureTintProgram();
     ShaderModule::MetalFunctionData vertexData;
     DAWN_TRY(ToBackend(vertexStage.module.Get())
                  ->CreateFunction(SingleShaderStage::Vertex, vertexStage, ToBackend(GetLayout()),
                                   &vertexData, 0xFFFFFFFF, this));
+    vertexStage.module->ClearTintProgram();
 
     descriptorMTL.vertexFunction = vertexData.function.Get();
     if (vertexData.needsStorageBufferLength) {
@@ -413,11 +415,13 @@ MaybeError RenderPipeline::Initialize() {
 
     if (GetStageMask() & wgpu::ShaderStage::Fragment) {
         const ProgrammableStage& fragmentStage = allStages[wgpu::ShaderStage::Fragment];
+        fragmentStage.module->EnsureTintProgram();
         ShaderModule::MetalFunctionData fragmentData;
         DAWN_TRY(ToBackend(fragmentStage.module.Get())
                      ->CreateFunction(SingleShaderStage::Fragment, fragmentStage,
                                       ToBackend(GetLayout()), &fragmentData, GetSampleMask(),
                                       this));
+        fragmentStage.module->ClearTintProgram();
 
         descriptorMTL.fragmentFunction = fragmentData.function.Get();
         if (fragmentData.needsStorageBufferLength) {

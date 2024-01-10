@@ -69,10 +69,12 @@ MaybeError ComputePipeline::Initialize() {
 
     const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Compute);
 
+    programmableStage.module->EnsureTintProgram();
     d3d::CompiledShader compiledShader;
     DAWN_TRY_ASSIGN(compiledShader, ToBackend(programmableStage.module)
                                         ->Compile(programmableStage, SingleShaderStage::Compute,
                                                   ToBackend(GetLayout()), compileFlags));
+    programmableStage.module->ClearTintProgram();
     DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreateComputeShader(
                               compiledShader.shaderBlob.Data(), compiledShader.shaderBlob.Size(),
                               nullptr, &mComputeShader),

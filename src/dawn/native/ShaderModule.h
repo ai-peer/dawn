@@ -325,6 +325,9 @@ class ShaderModuleBase : public ApiObjectBase,
     // This returns tint program before running transforms.
     const tint::Program* GetTintProgram() const;
 
+    void EnsureTintProgram();
+    void ClearTintProgram();
+
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 
     void InjectCompilationMessages(std::unique_ptr<OwnedCompilationMessages> compilationMessages);

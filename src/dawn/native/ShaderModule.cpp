@@ -1305,6 +1305,42 @@ const tint::Program* ShaderModuleBase::GetTintProgram() const {
     return mTintProgram.get();
 }
 
+void ShaderModuleBase::EnsureTintProgram() {
+    if (mTintProgram) {
+        return;
+    }
+
+    ShaderModuleDescriptor descriptor;
+    ShaderModuleWGSLDescriptor wgslDescriptor;
+    ShaderModuleSPIRVDescriptor sprivDescriptor;
+
+    switch (mType = Type::Wgsl) {
+        case Type::Spirv:
+            sprivDescriptor.codeSize = mOriginalSpirv.size();
+            sprivDescriptor.code = mOriginalSpirv.data();
+            descriptor.nextInChain = &sprivDescriptor;
+            break;
+        case Type::Wgsl:
+            wgslDescriptor.code = mWgsl.c_str();
+            descriptor.nextInChain = &wgslDescriptor;
+            break;
+        default:
+            DAWN_ASSERT(false);
+    }
+
+    ShaderModuleParseResult parseResult;
+    ValidateAndParseShaderModule(GetDevice(), Unpack(&descriptor), &parseResult,
+                                 /*compilationMessages=*/nullptr)
+        .AcquireSuccess();
+    mTintProgram = std::move(parseResult.tintProgram);
+    mTintSource = std::move(parseResult.tintSource);
+}
+
+void ShaderModuleBase::ClearTintProgram() {
+    mTintProgram = nullptr;
+    mTintSource = nullptr;
+}
+
 void ShaderModuleBase::APIGetCompilationInfo(wgpu::CompilationInfoCallback callback,
                                              void* userdata) {
     if (callback == nullptr) {

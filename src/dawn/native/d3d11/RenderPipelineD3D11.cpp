@@ -459,11 +459,13 @@ MaybeError RenderPipeline::InitializeShaders() {
 
     if (GetStageMask() & wgpu::ShaderStage::Vertex) {
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Vertex);
+        programmableStage.module->EnsureTintProgram();
         DAWN_TRY_ASSIGN(
             compiledShader[SingleShaderStage::Vertex],
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Vertex, ToBackend(GetLayout()),
                           compileFlags, usedInterstageVariables));
+        programmableStage.module->ClearTintProgram();
         const Blob& shaderBlob = compiledShader[SingleShaderStage::Vertex].shaderBlob;
         DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreateVertexShader(
                                   shaderBlob.Data(), shaderBlob.Size(), nullptr, &mVertexShader),
@@ -519,11 +521,13 @@ MaybeError RenderPipeline::InitializeShaders() {
         }
 
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Fragment);
+        programmableStage.module->EnsureTintProgram();
         DAWN_TRY_ASSIGN(
             compiledShader[SingleShaderStage::Fragment],
             ToBackend(programmableStage.module)
                 ->Compile(programmableStage, SingleShaderStage::Fragment, ToBackend(GetLayout()),
                           compileFlags, usedInterstageVariables, pixelLocalOptions));
+        programmableStage.module->ClearTintProgram();
         DAWN_TRY(CheckHRESULT(device->GetD3D11Device()->CreatePixelShader(
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Data(),
                                   compiledShader[SingleShaderStage::Fragment].shaderBlob.Size(),

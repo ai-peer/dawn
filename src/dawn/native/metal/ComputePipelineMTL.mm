@@ -58,6 +58,7 @@ MaybeError ComputePipeline::Initialize() {
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
     ShaderModule::MetalFunctionData computeData;
 
+    computeStage.module->EnsureTintProgram();
     DAWN_TRY(ToBackend(computeStage.module.Get())
                  ->CreateFunction(
                      SingleShaderStage::Compute, computeStage, ToBackend(GetLayout()), &computeData,
@@ -68,6 +69,7 @@ MaybeError ComputePipeline::Initialize() {
                          ? std::make_optional(
                                GetDevice()->GetLimits().experimentalSubgroupLimits.maxSubgroupSize)
                          : std::nullopt));
+    computeStage.module->ClearTintProgram();
 
     NSError* error = nullptr;
     NSRef<NSString> label = MakeDebugName(GetDevice(), "Dawn_ComputePipeline", GetLabel());

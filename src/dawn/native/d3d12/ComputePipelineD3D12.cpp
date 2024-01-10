@@ -74,6 +74,7 @@ MaybeError ComputePipeline::Initialize() {
     D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
     d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
 
+    module->EnsureTintProgram();
     d3d::CompiledShader compiledShader;
     DAWN_TRY_ASSIGN(
         compiledShader,
@@ -84,6 +85,8 @@ MaybeError ComputePipeline::Initialize() {
             IsFullSubgroupsRequired()
                 ? std::make_optional(device->GetLimits().experimentalSubgroupLimits.maxSubgroupSize)
                 : std::nullopt));
+    module->ClearTintProgram();
+
     d3dDesc.CS = {compiledShader.shaderBlob.Data(), compiledShader.shaderBlob.Size()};
 
     StreamIn(&mCacheKey, d3dDesc, ToBackend(GetLayout())->GetRootSignatureBlob());

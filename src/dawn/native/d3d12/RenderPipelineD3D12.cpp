@@ -373,10 +373,12 @@ MaybeError RenderPipeline::Initialize() {
 
     for (auto stage : IterateStages(GetStageMask())) {
         const ProgrammableStage& programmableStage = GetStage(stage);
+        programmableStage.module->EnsureTintProgram();
         DAWN_TRY_ASSIGN(compiledShader[stage],
                         ToBackend(programmableStage.module)
                             ->Compile(programmableStage, stage, ToBackend(GetLayout()),
                                       compileFlags, usedInterstageVariables));
+        programmableStage.module->ClearTintProgram();
         *shaders[stage] = {compiledShader[stage].shaderBlob.Data(),
                            compiledShader[stage].shaderBlob.Size()};
     }
