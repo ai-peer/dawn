@@ -553,6 +553,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c77664a5_61a66a96",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-10T15:55:17Z",
+      "side": 1,
+      "message": "Thank you for describing the use-case!\n\n\u003e With respect to texture initialization and concurrent read access, what if we just treated a read of an uninitialized texture as having write semantics wrt concurrent access (in the implementation)? At least on Mac, I verified that all of the textures that were hitting the concurrent read access case were initialized.\n\nThat\u0027s an even bigger source of inconsistency between two concurrently imported readonly textures, because one might get written to using a render pass to clear while another on is sampled / copied from. I think in the current state of this CL D3D12 happens to be correct barrier-wise, but not anymore if we allow clearing.\n\nThat\u0027s why eventually we should have all the validation mentioned and remove the mode where concurrent read accesses on the same device are assumed correct.",
+      "parentUuid": "4b2ed052_f94403a5",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
