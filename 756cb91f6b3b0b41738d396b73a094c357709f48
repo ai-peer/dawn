@@ -679,6 +679,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2bae37e5_02d86fda",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-11T18:13:23Z",
+      "side": 1,
+      "message": "My understanding is today (pre-SharedTextureMemory), concurrent read indeed happens-to-work because in most cases we aren\u0027t accessing uninitialized textures. I\u0027m fairly sure, however, there are very few guarantees that that invariant holds true - so it is very fragile and may already be the cause of some of our test failures / test flakes / synchronization issues seen in applications. Please keep in mind that with Dawn/WebGPU, the application itself can force textures to become uninitialized. Even if we don\u0027t know of situations today, they can easily be added in the future - and Javascript applications can always do whatever they want here.\n\nI understand that what Colin/Peng are suggesting is to do implicit-mode concurrent read for now. That is - if the texture has readonly usage and the texture is initialized, we consider it OK for concurrent read. I think this would match the current potentially-broken, fragile behavior to make SharedTextureMemory on-par with the prior approach on Windows and Mac.\n\nFor Vulkan, I don\u0027t think this approach will be sufficient to be correct - because of the need to make the layouts compatible. I don\u0027t fully understand how it actually works today. Perhaps it also happens-to-work because WebGPU\u0027s external video import and Chrome are both sampling videos when they are concurrently read - so the layouts happen to match. I don\u0027t know all the cases, and this would break if one of the usages became a copy. In the fullness of time, I think we will eventually need to add a `concurrentRead` flag to this for correctness on Vulkan.\n\nI am hesitant about making SharedTextureMemory work implicitly on the same kinda-broken assumptions as the current system because STM was intended to be a robust solution based on our learnings of how things need to work. If we add a stopgap hack now, it\u0027ll be more added tech debt and we would have failed to actually solve the original problem. We\u0027ll do a bunch of engineering to replace the old thing with STM - only to still have more multi-sided-patches to do to fix up STM to work more robustly and work on Vulkan later. Maybe this is fine and it can happen incrementally without a lot of churn - but it\u0027s hard to say without a clear picture of what we\u0027re going to do after this. I have a fair amount of confidence that we will eventually need a `concurrentRead` flag so that we can make WebGPU work with dual-GPU windows and Linux. Currently, we don\u0027t let you use the other GPU because of issues like this.\n\nOpen to hearing other options, but I think the least-mess way to do it would be to add the explicit `concurrentRead` flag in Dawn, and then have Chrome pass true for all read usages. Later, Chrome can be smarter about this, but we can do that without needing to change Dawn\u0027s API. In the immediate term, this would be ~2 patches - one in Dawn to add the flag and one in Chrome to use STM with concurrentRead all the time, which would then unblock Graphite on Win/Mac - so it wouldn\u0027t delay things significantly.",
+      "parentUuid": "3a5bc2e3_a56e4799",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
