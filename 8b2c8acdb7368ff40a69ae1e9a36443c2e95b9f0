@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f056e99b_5b336e00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-11T09:45:57Z",
+      "side": 1,
+      "message": "Hi Corentin,\nCould you please take a look?\n\nI am surprised no bots are complaining at the moment.\nI observed this test was failing locally under Chrome\u0027s repository.",
+      "revId": "8b2c8acdb7368ff40a69ae1e9a36443c2e95b9f0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
