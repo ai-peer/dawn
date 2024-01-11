@@ -75,6 +75,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "8336021b_986cc30d",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 547,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-11T05:11:01Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "911cf1bc_891dd54e",
+      "range": {
+        "startLine": 547,
+        "startChar": 12,
+        "endLine": 547,
+        "endChar": 50
+      },
+      "revId": "051704692ba19c6cd601df52a09a1c46075f2f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eca61054_57930440",
@@ -88,6 +112,30 @@
       "writtenOn": "2024-01-10T11:14:23Z",
       "side": 1,
       "message": "I\u0027m not keen on `tint` silently overriding the explicit `--hlsl_shader_model` value passed to it. Ideally it would be an error if `f16` is used and the user specified a lower value. If the user did not specify the `--hlsl_shader_model` then picking the lowest required version seems like a nice thing to do.",
+      "range": {
+        "startLine": 931,
+        "startChar": 24,
+        "endLine": 931,
+        "endChar": 77
+      },
+      "revId": "051704692ba19c6cd601df52a09a1c46075f2f8e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fe31f31_d9d9eca9",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 931,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-11T05:11:01Z",
+      "side": 1,
+      "message": "Done\n\nI\u0027ve made this change in another CL (https://dawn-review.googlesource.com/c/dawn/+/169065). PTAL, thanks!",
+      "parentUuid": "eca61054_57930440",
       "range": {
         "startLine": 931,
         "startChar": 24,
