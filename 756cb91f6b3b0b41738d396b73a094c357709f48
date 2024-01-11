@@ -625,6 +625,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "6d764cb6_72017667",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-11T12:22:12Z",
+      "side": 1,
+      "message": "What I had been thinking was there wouldn\u0027t be any `concurrentRead` flag but rather that the SharedTextureMemory implementation would allow concurrent read accesses of initialized textures but not concurrent accesses where at least one of the accesses was either a write or a read of an uninitialized texture. This would then work as long as Chromium doesn\u0027t have a use case for concurrent reads of an uninitialized texture - Peng, have you seen such a use case? In the Mac use case that I described above, I verified that the textures are initialized.\n\nI do recall that there is a CONCURRENT_READ_WRITE SharedImageUsage flag that we might need to deal with, but for that use case it does seem to me that we could have a client-specified `allow_concurrent_read_write` and then all bets are off from Dawn\u0027s POV if the client specifies that. That could be for followup when we hit that.",
+      "parentUuid": "404d06b3_186ff6fa",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
