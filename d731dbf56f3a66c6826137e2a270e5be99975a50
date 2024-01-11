@@ -153,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f64a89_c9dc98cd",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 20
+      },
+      "lineNbr": 1460,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-11T23:29:29Z",
+      "side": 1,
+      "message": "I filed https://bugs.chromium.org/p/tint/issues/detail?id\u003d2139 to track fixing the original issue.",
+      "parentUuid": "20b42fb0_5d229110",
+      "range": {
+        "startLine": 1452,
+        "startChar": 0,
+        "endLine": 1460,
+        "endChar": 66
+      },
+      "revId": "d731dbf56f3a66c6826137e2a270e5be99975a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3faa90cb_8977372c",
