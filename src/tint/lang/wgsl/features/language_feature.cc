@@ -63,6 +63,9 @@ LanguageFeature ParseLanguageFeature(std::string_view str) {
     if (str == "readonly_and_readwrite_storage_textures") {
         return LanguageFeature::kReadonlyAndReadwriteStorageTextures;
     }
+    if (str == "unrestricted_pointer_parameters") {
+        return LanguageFeature::kUnrestrictedPointerParameters;
+    }
     return LanguageFeature::kUndefined;
 }
 
@@ -84,6 +87,8 @@ std::string_view ToString(LanguageFeature value) {
             return "packed_4x8_integer_dot_product";
         case LanguageFeature::kReadonlyAndReadwriteStorageTextures:
             return "readonly_and_readwrite_storage_textures";
+        case LanguageFeature::kUnrestrictedPointerParameters:
+            return "unrestricted_pointer_parameters";
     }
     return "<unknown>";
 }

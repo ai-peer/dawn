@@ -80,8 +80,6 @@ using DirectVariableAccessRemoveUncalledTest = TransformTest;
 
 TEST_F(DirectVariableAccessRemoveUncalledTest, PtrUniform) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 
 fn u(pre : i32, p : ptr<uniform, i32>, post : i32) -> i32 {
@@ -91,8 +89,6 @@ fn u(pre : i32, p : ptr<uniform, i32>, post : i32) -> i32 {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 )";
 
@@ -103,8 +99,6 @@ var<private> keep_me = 42;
 
 TEST_F(DirectVariableAccessRemoveUncalledTest, PtrStorage) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 
 fn s(pre : i32, p : ptr<storage, i32>, post : i32) -> i32 {
@@ -113,8 +107,6 @@ fn s(pre : i32, p : ptr<storage, i32>, post : i32) -> i32 {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 )";
 
@@ -125,8 +117,6 @@ var<private> keep_me = 42;
 
 TEST_F(DirectVariableAccessRemoveUncalledTest, PtrWorkgroup) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 
 fn w(pre : i32, p : ptr<workgroup, i32>, post : i32) -> i32 {
@@ -136,8 +126,6 @@ fn w(pre : i32, p : ptr<workgroup, i32>, post : i32) -> i32 {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 )";
 
@@ -148,8 +136,6 @@ var<private> keep_me = 42;
 
 TEST_F(DirectVariableAccessRemoveUncalledTest, PtrPrivate_Disabled) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 
 fn f(pre : i32, p : ptr<private, i32>, post : i32) -> i32 {
@@ -166,8 +152,6 @@ fn f(pre : i32, p : ptr<private, i32>, post : i32) -> i32 {
 
 TEST_F(DirectVariableAccessRemoveUncalledTest, PtrPrivate_Enabled) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 )";
 
@@ -180,8 +164,6 @@ var<private> keep_me = 42;
 
 TEST_F(DirectVariableAccessRemoveUncalledTest, PtrFunction_Disabled) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 
 fn f(pre : i32, p : ptr<function, i32>, post : i32) -> i32 {
@@ -198,8 +180,6 @@ fn f(pre : i32, p : ptr<function, i32>, post : i32) -> i32 {
 
 TEST_F(DirectVariableAccessRemoveUncalledTest, PtrFunction_Enabled) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> keep_me = 42;
 )";
 
@@ -221,8 +201,6 @@ using DirectVariableAccessPtrChainsTest = TransformTest;
 
 TEST_F(DirectVariableAccessPtrChainsTest, ConstantIndices) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<array<vec4<i32>, 8>, 8>, 8>;
 
 fn a(pre : i32, p : ptr<uniform, vec4<i32>>, post : i32) -> vec4<i32> {
@@ -251,8 +229,6 @@ fn d() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<array<vec4<i32>, 8>, 8>, 8>;
 
 alias U_X_X_X = array<u32, 3u>;
@@ -289,8 +265,6 @@ fn d() {
 
 TEST_F(DirectVariableAccessPtrChainsTest, HoistIndices) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<array<vec4<i32>, 8>, 8>, 8>;
 
 var<private> i : i32;
@@ -331,8 +305,6 @@ fn d() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<array<vec4<i32>, 8>, 8>, 8>;
 
 var<private> i : i32;
@@ -390,8 +362,6 @@ fn d() {
 
 TEST_F(DirectVariableAccessPtrChainsTest, HoistInForLoopInit) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -426,8 +396,6 @@ fn d() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -490,8 +458,6 @@ fn d() {
 
 TEST_F(DirectVariableAccessPtrChainsTest, HoistInForLoopCond) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -528,8 +494,6 @@ fn d() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -580,8 +544,6 @@ fn d() {
 
 TEST_F(DirectVariableAccessPtrChainsTest, HoistInForLoopCont) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -618,8 +580,6 @@ fn d() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -670,8 +630,6 @@ fn d() {
 
 TEST_F(DirectVariableAccessPtrChainsTest, HoistInWhileCond) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -708,8 +666,6 @@ fn d() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<array<vec4<i32>, 8>, 8>;
 
 var<private> i : i32;
@@ -769,8 +725,6 @@ using DirectVariableAccessUniformASTest = TransformTest;
 
 TEST_F(DirectVariableAccessUniformASTest, Param_ptr_i32_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : i32;
 
 fn a(pre : i32, p : ptr<uniform, i32>, post : i32) -> i32 {
@@ -783,8 +737,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : i32;
 
 fn a_U(pre : i32, post : i32) -> i32 {
@@ -803,8 +755,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessUniformASTest, Param_ptr_vec4i32_Via_array_DynamicRead) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<vec4<i32>, 8>;
 
 fn a(pre : i32, p : ptr<uniform, vec4<i32>>, post : i32) -> vec4<i32> {
@@ -818,8 +768,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> U : array<vec4<i32>, 8>;
 
 alias U_X = array<u32, 1u>;
@@ -841,8 +789,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessUniformASTest, CallChaining) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 };
@@ -903,8 +849,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 }
@@ -1007,8 +951,6 @@ using DirectVariableAccessStorageASTest = TransformTest;
 
 TEST_F(DirectVariableAccessStorageASTest, Param_ptr_i32_Via_struct_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 };
@@ -1025,8 +967,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -1049,8 +989,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessStorageASTest, Param_ptr_arr_i32_Via_struct_write) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 };
@@ -1067,8 +1005,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 }
@@ -1091,8 +1027,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessStorageASTest, Param_ptr_vec4i32_Via_array_DynamicWrite) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage, read_write> S : array<vec4<i32>, 8>;
 
 fn a(pre : i32, p : ptr<storage, vec4<i32>, read_write>, post : i32) {
@@ -1106,8 +1040,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage, read_write> S : array<vec4<i32>, 8>;
 
 alias S_X = array<u32, 1u>;
@@ -1129,8 +1061,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessStorageASTest, CallChaining) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 };
@@ -1191,8 +1121,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 }
@@ -1295,8 +1223,6 @@ using DirectVariableAccessWorkgroupASTest = TransformTest;
 
 TEST_F(DirectVariableAccessWorkgroupASTest, Param_ptr_vec4i32_Via_array_StaticRead) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> W : array<vec4<i32>, 8>;
 
 fn a(pre : i32, p : ptr<workgroup, vec4<i32>>, post : i32) -> vec4<i32> {
@@ -1309,8 +1235,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> W : array<vec4<i32>, 8>;
 
 alias W_X = array<u32, 1u>;
@@ -1331,8 +1255,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessWorkgroupASTest, Param_ptr_vec4i32_Via_array_StaticWrite) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> W : array<vec4<i32>, 8>;
 
 fn a(pre : i32, p : ptr<workgroup, vec4<i32>>, post : i32) {
@@ -1345,8 +1267,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> W : array<vec4<i32>, 8>;
 
 alias W_X = array<u32, 1u>;
@@ -1367,8 +1287,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessWorkgroupASTest, CallChaining) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 };
@@ -1429,8 +1347,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 }
@@ -1606,8 +1522,6 @@ using DirectVariableAccessPrivateASTest = TransformTest;
 
 TEST_F(DirectVariableAccessPrivateASTest, Enabled_Param_ptr_i32_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a(pre : i32, p : ptr<private, i32>, post : i32) -> i32 {
   return *(p);
 }
@@ -1620,8 +1534,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a_F(pre : i32, p : ptr<private, i32>, post : i32) -> i32 {
   return *(p);
 }
@@ -1640,8 +1552,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Enabled_Param_ptr_i32_write) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a(pre : i32, p : ptr<private, i32>, post : i32) {
   *(p) = 42;
 }
@@ -1654,8 +1564,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a_F(pre : i32, p : ptr<private, i32>, post : i32) {
   *(p) = 42;
 }
@@ -1674,8 +1582,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Enabled_Param_ptr_i32_Via_struct_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 };
@@ -1692,8 +1598,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -1716,8 +1620,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Disabled_Param_ptr_i32_Via_struct_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -1742,8 +1644,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Enabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 };
@@ -1760,8 +1660,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 }
@@ -1784,8 +1682,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Disabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 }
@@ -1810,8 +1706,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Enabled_Param_ptr_i32_mixed) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 };
@@ -1832,8 +1726,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -1874,8 +1766,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Disabled_Param_ptr_i32_mixed) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -1906,8 +1796,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Enabled_CallChaining) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 };
@@ -1968,8 +1856,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 }
@@ -2073,8 +1959,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessPrivateASTest, Disabled_CallChaining) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct Inner {
   mat : mat3x4<f32>,
 }
@@ -2148,8 +2032,6 @@ using DirectVariableAccessFunctionASTest = TransformTest;
 
 TEST_F(DirectVariableAccessFunctionASTest, Enabled_LocalPtr) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn f() {
   var v : i32;
   let p : ptr<function, i32> = &(v);
@@ -2166,8 +2048,6 @@ fn f() {
 
 TEST_F(DirectVariableAccessFunctionASTest, Enabled_Param_ptr_i32_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a(pre : i32, p : ptr<function, i32>, post : i32) -> i32 {
   return *(p);
 }
@@ -2179,8 +2059,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a_F(pre : i32, p : ptr<function, i32>, post : i32) -> i32 {
   return *(p);
 }
@@ -2198,8 +2076,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessFunctionASTest, Enabled_Param_ptr_i32_write) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a(pre : i32, p : ptr<function, i32>, post : i32) {
   *(p) = 42;
 }
@@ -2211,8 +2087,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn a_F(pre : i32, p : ptr<function, i32>, post : i32) {
   *(p) = 42;
 }
@@ -2230,8 +2104,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessFunctionASTest, Enabled_Param_ptr_i32_Via_struct_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 };
@@ -2247,8 +2119,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -2270,8 +2140,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessFunctionASTest, Enabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 };
@@ -2287,8 +2155,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 }
@@ -2310,8 +2176,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessFunctionASTest, Enabled_Param_ptr_i32_mixed) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 };
@@ -2332,8 +2196,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -2445,8 +2307,6 @@ fn main() {
 
 TEST_F(DirectVariableAccessFunctionASTest, Disabled_Param_ptr_i32_Via_struct_read) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : i32,
 }
@@ -2470,8 +2330,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessFunctionASTest, Disabled_Param_ptr_arr_i32_Via_struct_write) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   arr : array<i32, 4>,
 }
@@ -2504,8 +2362,6 @@ using DirectVariableAccessComplexTest = TransformTest;
 
 TEST_F(DirectVariableAccessComplexTest, Param_ptr_mixed_vec4i32_ViaMultiple) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : vec4<i32>,
 };
@@ -2574,8 +2430,6 @@ fn b() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct str {
   i : vec4<i32>,
 }
@@ -2704,8 +2558,6 @@ fn b() {
 
 TEST_F(DirectVariableAccessComplexTest, Indexing) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> S : array<array<array<array<i32, 9>, 9>, 9>, 50>;
 
 fn a(i : i32) -> i32 { return i; }
@@ -2722,8 +2574,6 @@ fn c() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> S : array<array<array<array<i32, 9>, 9>, 9>, 50>;
 
 fn a(i : i32) -> i32 {
@@ -2748,8 +2598,6 @@ fn c() {
 
 TEST_F(DirectVariableAccessComplexTest, IndexingInPtrCall) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> S : array<array<array<array<i32, 9>, 9>, 9>, 50>;
 
 fn a(pre : i32, i : ptr<storage, i32>, post : i32) -> i32 {
@@ -2768,8 +2616,6 @@ fn c() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> S : array<array<array<array<i32, 9>, 9>, 9>, 50>;
 
 alias S_X_X_X_X = array<u32, 4u>;
@@ -2796,8 +2642,6 @@ fn c() {
 
 TEST_F(DirectVariableAccessComplexTest, IndexingDualPointers) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> S : array<array<array<i32, 9>, 9>, 50>;
 @group(0) @binding(0) var<uniform> U : array<array<array<vec4<i32>, 9>, 9>, 50>;
 
@@ -2815,8 +2659,6 @@ fn c() {
 )";
 
     auto* expect = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> S : array<array<array<i32, 9>, 9>, 50>;
 
 @group(0) @binding(0) var<uniform> U : array<array<array<vec4<i32>, 9>, 9>, 50>;

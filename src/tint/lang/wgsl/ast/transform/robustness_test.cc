@@ -4461,8 +4461,6 @@ fn f() {
 
 TEST_P(RobustnessTest, Read_PrivatePointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, post : i32) -> i32 {
@@ -4482,8 +4480,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, p_predicate : bool, post : i32) -> i32 {
@@ -4510,8 +4506,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_WorkgroupPointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, post : i32) -> i32 {
@@ -4531,8 +4525,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, p_predicate : bool, post : i32) -> i32 {
@@ -4559,8 +4551,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_UniformPointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<uniform, vec4i>, post : vec4i) -> vec4i {
@@ -4580,8 +4570,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<uniform, vec4i>, p_predicate : bool, post : vec4i) -> vec4i {
@@ -4608,8 +4596,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_StoragePointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<storage, vec4i>, post : vec4i) -> vec4i {
@@ -4629,8 +4615,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<storage, vec4i>, p_predicate : bool, post : vec4i) -> vec4i {
@@ -4657,8 +4641,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_FunctionPointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, post : i32) -> i32 {
   return ((pre + *(p)) + post);
 }
@@ -4677,8 +4659,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, p_predicate : bool, post : i32) -> i32 {
   var predicated_expr : i32;
   if (p_predicate) {
@@ -4704,8 +4684,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_PrivatePointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, post : i32) -> i32 {
@@ -4725,8 +4703,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, post : i32) -> i32 {
@@ -4743,8 +4719,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, p_predicate : bool, post : i32) -> i32 {
@@ -4774,8 +4748,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_WorkgroupPointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, post : i32) -> i32 {
@@ -4795,8 +4767,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, post : i32) -> i32 {
@@ -4813,8 +4783,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, p_predicate : bool, post : i32) -> i32 {
@@ -4844,8 +4812,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_UniformPointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<uniform, vec4i>, post : vec4i) -> vec4i {
@@ -4865,8 +4831,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<uniform, vec4i>, post : vec4i) -> vec4i {
@@ -4883,8 +4847,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<uniform, vec4i>, p_predicate : bool, post : vec4i) -> vec4i {
@@ -4914,8 +4876,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_StoragePointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<storage, vec4i>, post : vec4i) -> vec4i {
@@ -4935,8 +4895,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<storage, vec4i>, post : vec4i) -> vec4i {
@@ -4953,8 +4911,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage> a : array<vec4i, 4>;
 
 fn x(pre : vec4i, p : ptr<storage, vec4i>, p_predicate : bool, post : vec4i) -> vec4i {
@@ -4984,8 +4940,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Read_FunctionPointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, post : i32) -> i32 {
   return ((pre + *(p)) + post);
 }
@@ -5004,8 +4958,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, post : i32) -> i32 {
   return ((pre + *(p)) + post);
 }
@@ -5021,8 +4973,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, p_predicate : bool, post : i32) -> i32 {
   var predicated_expr : i32;
   if (p_predicate) {
@@ -5051,8 +5001,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_PrivatePointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, post : i32) {
@@ -5072,8 +5020,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, p_predicate : bool, post : i32) {
@@ -5098,8 +5044,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_WorkgroupPointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, post : i32) {
@@ -5119,8 +5063,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, p_predicate : bool, post : i32) {
@@ -5145,8 +5087,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_StoragePointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage, read_write> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<storage, i32, read_write>, post : i32) {
@@ -5166,8 +5106,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage, read_write> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<storage, i32, read_write>, p_predicate : bool, post : i32) {
@@ -5192,8 +5130,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_FunctionPointerParameter_IndexWithConstant) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, post : i32) {
   *(p) = (pre + post);
 }
@@ -5212,8 +5148,6 @@ fn z() {
                           /* ignore */ src,
                           /* clamp */ src,
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, p_predicate : bool, post : i32) {
   if (p_predicate) {
     *(p) = (pre + post);
@@ -5237,8 +5171,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_PrivatePointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, post : i32) {
@@ -5258,8 +5190,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, post : i32) {
@@ -5276,8 +5206,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<private> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<private, i32>, p_predicate : bool, post : i32) {
@@ -5305,8 +5233,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_WorkgroupPointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, post : i32) {
@@ -5326,8 +5252,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, post : i32) {
@@ -5344,8 +5268,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 var<workgroup> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<workgroup, i32>, p_predicate : bool, post : i32) {
@@ -5373,8 +5295,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_StoragePointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage, read_write> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<storage, i32, read_write>, post : i32) {
@@ -5394,8 +5314,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage, read_write> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<storage, i32, read_write>, post : i32) {
@@ -5412,8 +5330,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<storage, read_write> a : array<i32, 4>;
 
 fn x(pre : i32, p : ptr<storage, i32, read_write>, p_predicate : bool, post : i32) {
@@ -5441,8 +5357,6 @@ fn z() {
 
 TEST_P(RobustnessTest, Write_FunctionPointerParameter_IndexWithLet) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, post : i32) {
   *(p) = (pre + post);
 }
@@ -5461,8 +5375,6 @@ fn z() {
     auto* expect = Expect(GetParam(),
                           /* ignore */ src,
                           /* clamp */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, post : i32) {
   *(p) = (pre + post);
 }
@@ -5478,8 +5390,6 @@ fn z() {
 }
 )",
                           /* predicate */ R"(
-enable chromium_experimental_full_ptr_parameters;
-
 fn x(pre : i32, p : ptr<function, i32>, p_predicate : bool, post : i32) {
   if (p_predicate) {
     *(p) = (pre + post);

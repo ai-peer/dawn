@@ -53,6 +53,7 @@ enum class LanguageFeature : uint8_t {
     kChromiumTestingUnsafeExperimental,
     kPacked4X8IntegerDotProduct,
     kReadonlyAndReadwriteStorageTextures,
+    kUnrestrictedPointerParameters,
 };
 
 /// @param value the enum value
@@ -72,6 +73,7 @@ constexpr std::string_view kLanguageFeatureStrings[] = {
     "chromium_testing_unsafe_experimental",
     "packed_4x8_integer_dot_product",
     "readonly_and_readwrite_storage_textures",
+    "unrestricted_pointer_parameters",
 };
 
 /// All features
@@ -83,6 +85,7 @@ static constexpr LanguageFeature kAllLanguageFeatures[] = {
     LanguageFeature::kChromiumTestingUnsafeExperimental,
     LanguageFeature::kPacked4X8IntegerDotProduct,
     LanguageFeature::kReadonlyAndReadwriteStorageTextures,
+    LanguageFeature::kUnrestrictedPointerParameters,
 };
 
 }  // namespace tint::wgsl

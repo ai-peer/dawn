@@ -66,6 +66,7 @@ static constexpr Case kValidCases[] = {
     {"packed_4x8_integer_dot_product", LanguageFeature::kPacked4X8IntegerDotProduct},
     {"readonly_and_readwrite_storage_textures",
      LanguageFeature::kReadonlyAndReadwriteStorageTextures},
+    {"unrestricted_pointer_parameters", LanguageFeature::kUnrestrictedPointerParameters},
 };
 
 static constexpr Case kInvalidCases[] = {
@@ -90,6 +91,9 @@ static constexpr Case kInvalidCases[] = {
     {"readon44y_and_readwrite_storage_textures", LanguageFeature::kUndefined},
     {"readonly_and_readwrite_storageVVSSextures", LanguageFeature::kUndefined},
     {"rRadonly_an_rea22write_storRge_textures", LanguageFeature::kUndefined},
+    {"unrestricted_pointer_paameter9", LanguageFeature::kUndefined},
+    {"urestricted_pointer_parameters", LanguageFeature::kUndefined},
+    {"VnrHtricted_pointer_paraOOeteRRs", LanguageFeature::kUndefined},
 };
 
 using LanguageFeatureParseTest = testing::TestWithParam<Case>;

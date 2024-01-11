@@ -4544,8 +4544,6 @@ TEST_F(PackedVec3Test, ModfReturnStruct_PointerToMember) {
     // Test that we can pass a pointer to the vec3 member of the modf return struct to a function
     // parameter to which we also pass a pointer to a vec3 member on a host-shareable struct.
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   v : vec3<f32>
 }
@@ -4568,7 +4566,6 @@ fn main() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct S_tint_packed_vec3 {
   @align(16)
@@ -5197,8 +5194,6 @@ fn f() {
 
 TEST_F(PackedVec3Test, VectorPointerParameters) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   v : vec3<f32>,
   m : mat3x3<f32>,
@@ -5242,7 +5237,6 @@ fn f() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f32_array_element {
   @align(16)
@@ -5313,8 +5307,6 @@ fn f() {
 
 TEST_F(PackedVec3Test, MatrixPointerParameters) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   m : mat3x3<f32>,
   arr_m : array<mat3x3<f32>, 4>,
@@ -5346,7 +5338,6 @@ fn f() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f32_array_element {
   @align(16)
@@ -5415,8 +5406,6 @@ fn f() {
 
 TEST_F(PackedVec3Test, ArrayOfVectorPointerParameters) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   arr_v : array<vec3<f32>, 4>,
 }
@@ -5442,7 +5431,6 @@ fn f() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f32_array_element {
   @align(16)
@@ -5502,8 +5490,6 @@ fn f() {
 
 TEST_F(PackedVec3Test, ArrayOfMatrixPointerParameters) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   arr_m : array<mat3x3<f32>, 4>,
 }
@@ -5529,7 +5515,6 @@ fn f() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f32_array_element {
   @align(16)
@@ -5605,8 +5590,6 @@ fn f() {
 
 TEST_F(PackedVec3Test, StructPointerParameters) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   v : vec3<f32>,
   m : mat3x3<f32>,
@@ -5632,7 +5615,6 @@ fn f() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f32_array_element {
   @align(16)
@@ -5908,8 +5890,6 @@ TEST_F(PackedVec3Test, MixedAddressSpace_AnotherStructNotShared) {
     // Test that we can pass a pointers to a members of both shared and non-shared structs to the
     // same function.
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   v : vec3<f32>,
   arr : array<vec3<f32>, 4>,
@@ -5939,7 +5919,6 @@ fn f() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f32_array_element {
   @align(16)
@@ -6575,8 +6554,6 @@ fn f() {
 
 TEST_F(PackedVec3Test, MixedAddressSpace_PointerParameters) {
     auto* src = R"(
-enable chromium_experimental_full_ptr_parameters;
-
 struct S {
   v : vec3<f32>,
   m : mat3x3<f32>,
@@ -6607,7 +6584,6 @@ fn f() {
 
     auto* expect = R"(
 enable chromium_internal_relaxed_uniform_layout;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f32_array_element {
   @align(16)
@@ -7541,8 +7517,6 @@ TEST_F(PackedVec3Test, Mat3x3_F16_Uniform) {
     // matrix into an array of vec3s in uniform storage.
     auto* src = R"(
 enable f16;
-enable chromium_experimental_full_ptr_parameters;
-
 @group(0) @binding(0) var<uniform> m : mat3x3<f16>;
 
 fn g(p : ptr<uniform, mat3x3<f16>>) -> vec3<f16> {
@@ -7558,7 +7532,6 @@ fn f() {
         R"(
 enable chromium_internal_relaxed_uniform_layout;
 enable f16;
-enable chromium_experimental_full_ptr_parameters;
 
 struct tint_packed_vec3_f16_array_element {
   @align(8)
