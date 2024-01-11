@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc399438_83ec18ff",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T14:39:02Z",
+      "side": 1,
+      "message": "This strays from the design that we discussed with Microsoft folks (Peng, if there is nothing confidential in that doc, do you mind sharing it with Intel folks? Or publicly?) https://docs.google.com/document/d/1d2dKbNnnZOCivq5jVfrTndU9eqv64h6F468jnQGaq-0\n\nIn general emulating staging buffers should be slower for a bunch of things because instead of doing 2 copies (application -\u003e staging buffer, staging buffer -\u003e GPU-local buffer) we have three (application -\u003e emulated buffer, emulated buffer -\u003e driver staging buffer, driver staging buffer -\u003e GPU-local buffer).\n\nWhat is the map operation that was measured to be slow and what is the chain of operation that cause it?",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
