@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12f2c077_a214467b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 12
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-11T21:02:27Z",
+      "side": 1,
+      "message": "I\u0027d like to put this CL for review first. As stated in the CL description, it is now more necessary to split edge cases into seperate compute pass. But let me focus on correctness first.\n\nThe functionality is covered by CTS test\n`webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes:initMethod\u003d\"WriteTexture\";checkMethod\u003d\"PartialCopyT2B\";`, with params expansion (reverted not yet relanded): https://github.com/gpuweb/cts/pull/3264\nRight now we don\u0027t have end2end coverage for these special cases. Seems our current CopyTests framework don\u0027t support offset % 4 \u003e 0 (needs update). So again send this for review first, new end2end test coverage coming later (or in a new CL)",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
