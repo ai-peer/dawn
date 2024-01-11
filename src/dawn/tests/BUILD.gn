@@ -340,7 +340,6 @@ dawn_test("dawn_unittests") {
     "unittests/PerThreadProcTests.cpp",
     "unittests/PlacementAllocatedTests.cpp",
     "unittests/RangeTests.cpp",
-    "unittests/RawPtrTests.cpp",
     "unittests/RefBaseTests.cpp",
     "unittests/RefCountedTests.cpp",
     "unittests/ResultTests.cpp",
@@ -440,6 +439,13 @@ dawn_test("dawn_unittests") {
     "unittests/wire/WireTest.cpp",
     "unittests/wire/WireTest.h",
   ]
+
+  # Embedders, like chrome, have a more complex configuration of partition_alloc
+  # than what dawn standalone does. This file is only testing Dawn's standalone
+  # configuration.
+  if (dawn_standalone) {
+    sources += [ "unittests/RawPtrTests.cpp" ]
+  }
 
   if (is_win) {
     sources += [ "unittests/WindowsUtilsTests.cpp" ]
