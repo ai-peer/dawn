@@ -16,6 +16,23 @@
       "message": "Dan: PTAL. Thanks!",
       "revId": "ff4c3d1989c9a302f2c995c9b1d5fb1fed74c1c2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c8e82d7e_347bbabe",
+        "filename": "test/tint/var/uses/push_constant.wgsl.expected.glsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 3,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-11T19:31:04Z",
+      "side": 1,
+      "message": "Do these not need a `@location(0)` or something on them to be valid in GLSL?",
+      "revId": "ff4c3d1989c9a302f2c995c9b1d5fb1fed74c1c2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
