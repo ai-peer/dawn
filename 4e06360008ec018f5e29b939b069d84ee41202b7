@@ -16,6 +16,24 @@
       "message": "This strays from the design that we discussed with Microsoft folks (Peng, if there is nothing confidential in that doc, do you mind sharing it with Intel folks? Or publicly?) https://docs.google.com/document/d/1d2dKbNnnZOCivq5jVfrTndU9eqv64h6F468jnQGaq-0\n\nIn general emulating staging buffers should be slower for a bunch of things because instead of doing 2 copies (application -\u003e staging buffer, staging buffer -\u003e GPU-local buffer) we have three (application -\u003e emulated buffer, emulated buffer -\u003e driver staging buffer, driver staging buffer -\u003e GPU-local buffer).\n\nWhat is the map operation that was measured to be slow and what is the chain of operation that cause it?",
       "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0589c3e4_5acdd485",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-11T20:34:09Z",
+      "side": 1,
+      "message": "I shared the doc with jie.\n\nD3D11\u0027s Map() and Unmap() methods are on the ID3D11DeviceContext instead of ID3D11Buffer or ID3D11Device. Not like Metal, Vulkan and D3D12, they have to synchronize between CPU and GPU. I think it adds extra overhead. I tested with AMD and Nvidia GPU. It doubles MotionMark Images score with AMD GPU (33 -\u003e 72), and +24% with NVidia GPU (59 -\u003e 73). MotionMark Images does CopyBufferToTexture a lot.\n\nThe overall motionmark scores:\nAMD GPU: 1100 (Ganesh) vs 1263 (Graphite) vs 1447 (Graphite with this CL). \nNVidia GPU: 1126 vs 1349 vs 1392\nJie tested with Intel, it improves more. 1334 (Ganesh) -\u003e 2379(graphite with this CL)\n\nI think there are two major use cases in graphite (see below), and graphite tracks transfer buffer usages, it only reuses transfer buffers, when the previous GPU accessing is done. However we don\u0027t know how d3d11 driver track buffer usage. It may be not very smart.\n\n1. Transfer buffer -\u003e uniform buffer (vertex buffer), etc.\n   For this case, this CL may add an extra copy, but it saves Map() and Unmap() calls (Metal, Vulkan, D3D12 backends only map staging buffer once, and neve call Unmap() them), and staging buffer allocations. If the copy size is small, the one extra copy could be ignored.\n   And for UMA GPU, probably it doesn\u0027t need an extra copy (`emulated buffer -\u003e staging buffer`), I am not sure.\n \n2. Transfer buffer -\u003e textures. MotionMark images test does this a lot.\n   For this case, d3d11 doesn\u0027t support copying data between staging `ID3D11Buffer` and `ID3D11Texture2D`. With the emulated buffer, it doesn\u0027t add any extra copy, but save the calls of Map() and Unmap(), and staging buffer allocations.",
+      "parentUuid": "dc399438_83ec18ff",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

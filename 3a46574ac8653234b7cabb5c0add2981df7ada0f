@@ -85,6 +85,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bf478dab_e951ddc2",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-11T20:34:09Z",
+      "side": 1,
+      "message": "You are right. However, for Texture -\u003e Buffer copy, it can save Map()/Unmap() calls on staging buffer. We can do it in follow CLs.",
+      "parentUuid": "421696af_f3701ab3",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 13
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d77beeb4_43197a9f",
         "filename": "src/dawn/native/d3d11/BufferD3D11.h",
         "patchSetId": 1
