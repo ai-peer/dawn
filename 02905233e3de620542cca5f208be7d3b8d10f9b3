@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d67cf99c_2e3617fa",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-11T13:47:14Z",
+      "side": 1,
+      "message": "This class is only using:\n- The T* constructor\n- The ::get() accessor.\n\nSo, no pointer arithmetic.\n\n\u003e Are we supposed to add raw_ptr\u003c\u003e to function arguments as well?\n\nPreferably not.\n\nThe goal of `AllowPtrArithmetic` was to encourage developers to use `base::raw_span` more often to get out of bounds checks.",
+      "parentUuid": "3767de7b_9f5e348c",
+      "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "94a0b011_08129354",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f99a968f_a3b7705c",
+        "filename": "src/dawn/common/Math.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-11T13:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "94a0b011_08129354",
+      "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "82c935af_b9d20f9c",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-01-11T08:59:59Z",
       "side": 1,
       "message": "Can we have a dawn issue created for this?",
+      "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62689e01_c69e25d1",
+        "filename": "src/dawn/common/SlabAllocator.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-11T13:47:14Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "82c935af_b9d20f9c",
       "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
