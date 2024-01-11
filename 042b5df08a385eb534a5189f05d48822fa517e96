@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "cb30c123_3eece319",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T09:04:05Z",
+      "side": 1,
+      "message": "Can we have a comment somewhere, for example as a _comment in dawn.json that the ANGLEs are clockwise and not trigonometric?",
+      "revId": "042b5df08a385eb534a5189f05d48822fa517e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "ce72f9ec_725282ed",
@@ -14,6 +31,23 @@
       "writtenOn": "2024-01-11T09:00:30Z",
       "side": 1,
       "message": "This CL is actually a reset of this CL https://dawn-review.googlesource.com/c/dawn/+/117912.\nffmpeg set rotation metadata in ccw direction, but what it actually do is to assign values in transform matrix. Chrome extracts these matrix to a cw direction rotation enums. \n\nThis CL align with chrome behaviour. \n(Want to cc sandersd@ through sandersd@chromium.org for rotation direction confirmation but failed, don\u0027t know why ) \n\nThanks!",
+      "revId": "042b5df08a385eb534a5189f05d48822fa517e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1c5543cb_16d6a791",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T09:04:05Z",
+      "side": 1,
+      "message": "LGTM",
       "revId": "042b5df08a385eb534a5189f05d48822fa517e96",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
