@@ -34,6 +34,29 @@
       "parentUuid": "dc399438_83ec18ff",
       "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5c335db4_aa400d1c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-11T21:19:11Z",
+      "side": 1,
+      "message": "We also have a dawn bug about it. Please add it here.\nhttps://bugs.chromium.org/p/dawn/issues/detail?id\u003d1732",
+      "range": {
+        "startLine": 16,
+        "startChar": 0,
+        "endLine": 16,
+        "endChar": 3
+      },
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
