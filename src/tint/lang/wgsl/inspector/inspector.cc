@@ -27,7 +27,7 @@
 
 #include "src/tint/lang/wgsl/inspector/inspector.h"
 
-#include <limits>
+#include <unordered_set>
 #include <utility>
 
 #include "src/tint/lang/core/builtin_value.h"
@@ -1007,6 +1007,136 @@ void Inspector::GetOriginatingResources(std::array<const ast::Expression*, N> ex
         // All the expressions resolved to globals
         callback(globals);
     }
+}
+
+std::vector<Inspector::LevelSampleInfo>
+Inspector::GetInfoForTexturesUsedInNumLevelsAndNumSamples() {
+    std::vector<LevelSampleInfo> res;
+
+    std::unordered_set<BindingPoint> seen = {};
+
+    auto SampleTypeForCallAndType = [](wgsl::BuiltinFn builtin, const core::type::Type* ty) {
+        if (builtin == wgsl::BuiltinFn::kTextureNumLevels) {
+            return LevelSampleFunctionType::kTextureNumLevels;
+        }
+        if (builtin == wgsl::BuiltinFn::kTextureLoad) {
+            if (!ty->UnwrapRef()
+                     ->IsAnyOf<core::type::MultisampledTexture,
+                               core::type::DepthMultisampledTexture>()) {
+                return LevelSampleFunctionType::kTextureNumLevels;
+            }
+        }
+
+        return LevelSampleFunctionType::kTextureNumSamples;
+    };
+
+    Hashmap<const sem::Function*, Hashmap<const ast::Parameter*, LevelSampleFunctionType, 4>, 8>
+        fn_to_data;
+
+    auto record_function_param = [&fn_to_data](const sem::Function* func, const sem::Variable* var,
+                                               LevelSampleFunctionType type) {
+        auto& param_to_type = fn_to_data.GetOrCreate(
+            func, [&] { return Hashmap<const ast::Parameter*, LevelSampleFunctionType, 4>(); });
+
+        const ast::Parameter* param = nullptr;
+        for (auto p : func->Declaration()->params) {
+            if (p->As<ast::Variable>() == var->Declaration()) {
+                param = p;
+                break;
+            }
+        }
+        TINT_ASSERT(param);
+
+        auto entry = param_to_type.Get(param);
+        if (entry.has_value()) {
+            return;
+        }
+
+        param_to_type.Add(param, type);
+    };
+
+    auto save_if_needed = [&res, &seen](const sem::GlobalVariable* global,
+                                        LevelSampleFunctionType type) {
+        auto binding = global->Attributes().binding_point.value();
+
+        // Check if we've already recorded this binding point.
+        if (seen.find(binding) != seen.end()) {
+            return;
+        }
+        seen.insert(binding);
+
+        res.emplace_back(LevelSampleInfo{type, binding.group, binding.binding});
+    };
+
+    auto& sem = program_.Sem();
+    // This works in dependency order such that we'll see the texture call first and can record any
+    // function parameter information and then as we walk up the function chain we can look the call
+    // data.
+    for (auto* fn_decl : sem.Module()->DependencyOrderedDeclarations()) {
+        auto* fn = sem.Get<sem::Function>(fn_decl);
+        if (!fn) {
+            continue;
+        }
+
+        for (auto* call : fn->DirectCalls()) {
+            // Builtin function call, record the texture information. If the used texture maps back
+            // up to a function parameter just store the type of the call and we'll track the
+            // function callback up in the `sem::Function` branch.
+            if (const sem::BuiltinFn* builtin = call->Target()->As<sem::BuiltinFn>()) {
+                if (builtin->Fn() != wgsl::BuiltinFn::kTextureNumLevels &&
+                    builtin->Fn() != wgsl::BuiltinFn::kTextureNumSamples &&
+                    builtin->Fn() != wgsl::BuiltinFn::kTextureLoad) {
+                    continue;
+                }
+
+                auto* texture_expr = call->Declaration()->args[0];
+                auto* texture_sem = sem.GetVal(texture_expr)->RootIdentifier();
+                TINT_ASSERT(texture_sem);
+
+                auto type = SampleTypeForCallAndType(builtin->Fn(), texture_sem->Type());
+
+                tint::Switch(
+                    texture_sem,  //
+                    [&](const sem::GlobalVariable* global) { save_if_needed(global, type); },
+                    [&](const sem::Parameter* param) { record_function_param(fn, param, type); },
+                    TINT_ICE_ON_NO_MATCH);
+
+            } else if (const sem::Function* func = call->Target()->As<sem::Function>()) {
+                // A function call, check to see if any params needed to be tracked back to a global
+                // texture.
+
+                auto param_to_type = fn_to_data.Find(func);
+                if (!param_to_type) {
+                    continue;
+                }
+                TINT_ASSERT(call->Arguments().Length() == func->Declaration()->params.Length());
+
+                for (size_t i = 0; i < call->Arguments().Length(); i++) {
+                    auto param = func->Declaration()->params[i];
+
+                    // Determine if this had a texture we cared about
+                    auto type = param_to_type->Get(param);
+                    if (!type.has_value()) {
+                        continue;
+                    }
+
+                    auto* arg = call->Arguments()[i];
+                    auto* texture_sem = arg->RootIdentifier();
+
+                    tint::Switch(
+                        texture_sem,
+                        [&](const sem::GlobalVariable* global) {
+                            save_if_needed(global, type.value());
+                        },
+                        [&](const sem::Parameter* p) {
+                            record_function_param(fn, p, type.value());
+                        },
+                        TINT_ICE_ON_NO_MATCH);
+                }
+            }
+        }
+    }
+    return res;
 }
 
 }  // namespace tint::inspector
