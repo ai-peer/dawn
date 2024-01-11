@@ -431,7 +431,7 @@ TEST_F(IR_DirectVariableAccessTest_PtrChains, ConstantIndices) {
   %U:ptr<uniform, array<array<array<vec4<i32>, 8>, 8>, 8>, read> = var @binding_point(0, 0)
 }
 
-%a_U_X_X_X = func(%pre:i32, %p_indices:array<u32, 3>, %post:i32):vec4<i32> -> %b2 {
+%a = func(%pre:i32, %p_indices:array<u32, 3>, %post:i32):vec4<i32> -> %b2 {
   %b2 = block {
     %6:u32 = access %p_indices, 0u
     %7:u32 = access %p_indices, 1u
@@ -447,23 +447,23 @@ TEST_F(IR_DirectVariableAccessTest_PtrChains, ConstantIndices) {
     %13:u32 = convert 2i
     %14:u32 = convert 1i
     %15:array<u32, 3> = construct %14, %13, %12
-    %16:vec4<i32> = call %a_U_X_X_X, 10i, %15, 20i
+    %16:vec4<i32> = call %a, 10i, %15, 20i
     ret
   }
 }
-%c_U = func():void -> %b4 {
+%c = func():void -> %b4 {
   %b4 = block {
     %18:u32 = convert 3i
     %19:u32 = convert 2i
     %20:u32 = convert 1i
     %21:array<u32, 3> = construct %20, %19, %18
-    %22:vec4<i32> = call %a_U_X_X_X, 10i, %21, 20i
+    %22:vec4<i32> = call %a, 10i, %21, 20i
     ret
   }
 }
 %d = func():void -> %b5 {
   %b5 = block {
-    %24:void = call %c_U
+    %24:void = call %c
     ret
   }
 }
@@ -646,7 +646,7 @@ TEST_F(IR_DirectVariableAccessTest_PtrChains, DynamicIndices) {
     ret %14
   }
 }
-%a_U_X_X_X = func(%pre:i32, %p_indices:array<u32, 3>, %post:i32):vec4<i32> -> %b5 {
+%a = func(%pre:i32, %p_indices:array<u32, 3>, %post:i32):vec4<i32> -> %b5 {
   %b5 = block {
     %19:u32 = access %p_indices, 0u
     %20:u32 = access %p_indices, 1u
@@ -665,11 +665,11 @@ TEST_F(IR_DirectVariableAccessTest_PtrChains, DynamicIndices) {
     %29:u32 = convert %27
     %30:u32 = convert %25
     %31:array<u32, 3> = construct %30, %28, %29
-    %32:vec4<i32> = call %a_U_X_X_X, 10i, %31, 20i
+    %32:vec4<i32> = call %a, 10i, %31, 20i
     ret
   }
 }
-%c_U = func():void -> %b7 {
+%c = func():void -> %b7 {
   %b7 = block {
     %34:i32 = call %first
     %35:i32 = call %second
@@ -678,13 +678,13 @@ TEST_F(IR_DirectVariableAccessTest_PtrChains, DynamicIndices) {
     %38:u32 = convert %36
     %39:u32 = convert %34
     %40:array<u32, 3> = construct %39, %37, %38
-    %41:vec4<i32> = call %a_U_X_X_X, 10i, %40, 20i
+    %41:vec4<i32> = call %a, 10i, %40, 20i
     ret
   }
 }
 %d = func():void -> %b8 {
   %b8 = block {
-    %43:void = call %c_U
+    %43:void = call %c
     ret
   }
 }
@@ -753,7 +753,7 @@ TEST_F(IR_DirectVariableAccessTest_UniformAS, Param_ptr_i32_read) {
   %U:ptr<uniform, i32, read> = var @binding_point(0, 0)
 }
 
-%a_U = func(%pre:i32, %post:i32):i32 -> %b2 {
+%a = func(%pre:i32, %post:i32):i32 -> %b2 {
   %b2 = block {
     %5:ptr<uniform, i32, read> = access %U
     %6:i32 = load %5
@@ -762,7 +762,7 @@ TEST_F(IR_DirectVariableAccessTest_UniformAS, Param_ptr_i32_read) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %8:i32 = call %a_U, 10i, 20i
+    %8:i32 = call %a, 10i, 20i
     ret
   }
 }
@@ -826,7 +826,7 @@ TEST_F(IR_DirectVariableAccessTest_UniformAS, Param_ptr_vec4i32_Via_array_Dynami
   %U:ptr<uniform, array<vec4<i32>, 8>, read> = var @binding_point(0, 0)
 }
 
-%a_U_X = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):vec4<i32> -> %b2 {
+%a = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):vec4<i32> -> %b2 {
   %b2 = block {
     %6:u32 = access %p_indices, 0u
     %7:ptr<uniform, vec4<i32>, read> = access %U, %6
@@ -839,7 +839,7 @@ TEST_F(IR_DirectVariableAccessTest_UniformAS, Param_ptr_vec4i32_Via_array_Dynami
     %I:i32 = let 3i
     %11:u32 = convert %I
     %12:array<u32, 1> = construct %11
-    %13:vec4<i32> = call %a_U_X, 10i, %12, 20i
+    %13:vec4<i32> = call %a, 10i, %12, 20i
     ret
   }
 }
@@ -1123,7 +1123,7 @@ Outer = struct @align(16) {
     ret %64
   }
 }
-%f2_U_arr_X = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
+%f2 = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
   %b6 = block {
     %67:u32 = access %p_indices_3, 0u
     %68:array<u32, 1> = construct %67
@@ -1131,25 +1131,25 @@ Outer = struct @align(16) {
     ret %69
   }
 }
-%f3_U_arr_U_mat = func():f32 -> %b7 {
+%f3 = func():f32 -> %b7 {
   %b7 = block {
     %71:u32 = convert 3i
     %72:array<u32, 1> = construct %71
-    %73:f32 = call %f2_U_arr_X, %72
+    %73:f32 = call %f2, %72
     %74:f32 = call %f1_U_mat
     %75:f32 = add %73, %74
     ret %75
   }
 }
-%f4_U = func():f32 -> %b8 {
+%f4 = func():f32 -> %b8 {
   %b8 = block {
-    %77:f32 = call %f3_U_arr_U_mat
+    %77:f32 = call %f3
     ret %77
   }
 }
 %b = func():void -> %b9 {
   %b9 = block {
-    %79:f32 = call %f4_U
+    %79:f32 = call %f4
     ret
   }
 }
@@ -1232,7 +1232,7 @@ str = struct @align(4) {
   %S:ptr<storage, str, read> = var @binding_point(0, 0)
 }
 
-%a_S_i = func(%pre:i32, %post:i32):i32 -> %b2 {
+%a = func(%pre:i32, %post:i32):i32 -> %b2 {
   %b2 = block {
     %5:ptr<storage, i32, read> = access %S, 0u
     %6:i32 = load %5
@@ -1241,7 +1241,7 @@ str = struct @align(4) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %8:i32 = call %a_S_i, 10i, 20i
+    %8:i32 = call %a, 10i, 20i
     ret
   }
 }
@@ -1319,7 +1319,7 @@ str = struct @align(4) {
   %S:ptr<storage, str, read_write> = var @binding_point(0, 0)
 }
 
-%a_S_arr = func(%pre:i32, %post:i32):void -> %b2 {
+%a = func(%pre:i32, %post:i32):void -> %b2 {
   %b2 = block {
     %5:ptr<storage, array<i32, 4>, read_write> = access %S, 0u
     store %5, array<i32, 4>(0i)
@@ -1328,7 +1328,7 @@ str = struct @align(4) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %7:void = call %a_S_arr, 10i, 20i
+    %7:void = call %a, 10i, 20i
     ret
   }
 }
@@ -1395,7 +1395,7 @@ TEST_F(IR_DirectVariableAccessTest_StorageAS, Param_ptr_vec4i32_Via_array_Dynami
   %S:ptr<storage, array<vec4<i32>, 8>, read_write> = var @binding_point(0, 0)
 }
 
-%a_S_X = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):void -> %b2 {
+%a = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):void -> %b2 {
   %b2 = block {
     %6:u32 = access %p_indices, 0u
     %7:ptr<storage, vec4<i32>, read_write> = access %S, %6
@@ -1408,7 +1408,7 @@ TEST_F(IR_DirectVariableAccessTest_StorageAS, Param_ptr_vec4i32_Via_array_Dynami
     %I:i32 = let 3i
     %10:u32 = convert %I
     %11:array<u32, 1> = construct %10
-    %12:void = call %a_S_X, 10i, %11, 20i
+    %12:void = call %a, 10i, %11, 20i
     ret
   }
 }
@@ -1692,7 +1692,7 @@ Outer = struct @align(16) {
     ret %64
   }
 }
-%f2_S_arr_X = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
+%f2 = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
   %b6 = block {
     %67:u32 = access %p_indices_3, 0u
     %68:array<u32, 1> = construct %67
@@ -1700,25 +1700,25 @@ Outer = struct @align(16) {
     ret %69
   }
 }
-%f3_S_arr_S_mat = func():f32 -> %b7 {
+%f3 = func():f32 -> %b7 {
   %b7 = block {
     %71:u32 = convert 3i
     %72:array<u32, 1> = construct %71
-    %73:f32 = call %f2_S_arr_X, %72
+    %73:f32 = call %f2, %72
     %74:f32 = call %f1_S_mat
     %75:f32 = add %73, %74
     ret %75
   }
 }
-%f4_S = func():f32 -> %b8 {
+%f4 = func():f32 -> %b8 {
   %b8 = block {
-    %77:f32 = call %f3_S_arr_S_mat
+    %77:f32 = call %f3
     ret %77
   }
 }
 %b = func():void -> %b9 {
   %b9 = block {
-    %79:f32 = call %f4_S
+    %79:f32 = call %f4
     ret
   }
 }
@@ -1788,7 +1788,7 @@ TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, Param_ptr_vec4i32_Via_array_Stat
   %W:ptr<workgroup, array<vec4<i32>, 8>, read_write> = var
 }
 
-%a_W_X = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):vec4<i32> -> %b2 {
+%a = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):vec4<i32> -> %b2 {
   %b2 = block {
     %6:u32 = access %p_indices, 0u
     %7:ptr<workgroup, vec4<i32>, read_write> = access %W, %6
@@ -1800,7 +1800,7 @@ TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, Param_ptr_vec4i32_Via_array_Stat
   %b3 = block {
     %10:u32 = convert 3i
     %11:array<u32, 1> = construct %10
-    %12:vec4<i32> = call %a_W_X, 10i, %11, 20i
+    %12:vec4<i32> = call %a, 10i, %11, 20i
     ret
   }
 }
@@ -1864,7 +1864,7 @@ TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, Param_ptr_vec4i32_Via_array_Stat
   %W:ptr<workgroup, array<vec4<i32>, 8>, read_write> = var
 }
 
-%a_W_X = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):void -> %b2 {
+%a = func(%pre:i32, %p_indices:array<u32, 1>, %post:i32):void -> %b2 {
   %b2 = block {
     %6:u32 = access %p_indices, 0u
     %7:ptr<workgroup, vec4<i32>, read_write> = access %W, %6
@@ -1876,7 +1876,7 @@ TEST_F(IR_DirectVariableAccessTest_WorkgroupAS, Param_ptr_vec4i32_Via_array_Stat
   %b3 = block {
     %9:u32 = convert 3i
     %10:array<u32, 1> = construct %9
-    %11:void = call %a_W_X, 10i, %10, 20i
+    %11:void = call %a, 10i, %10, 20i
     ret
   }
 }
@@ -2159,7 +2159,7 @@ Outer = struct @align(16) {
     ret %64
   }
 }
-%f2_W_arr_X = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
+%f2 = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
   %b6 = block {
     %67:u32 = access %p_indices_3, 0u
     %68:array<u32, 1> = construct %67
@@ -2167,25 +2167,25 @@ Outer = struct @align(16) {
     ret %69
   }
 }
-%f3_W_arr_W_mat = func():f32 -> %b7 {
+%f3 = func():f32 -> %b7 {
   %b7 = block {
     %71:u32 = convert 3i
     %72:array<u32, 1> = construct %71
-    %73:f32 = call %f2_W_arr_X, %72
+    %73:f32 = call %f2, %72
     %74:f32 = call %f1_W_mat
     %75:f32 = add %73, %74
     ret %75
   }
 }
-%f4_W = func():f32 -> %b8 {
+%f4 = func():f32 -> %b8 {
   %b8 = block {
-    %77:f32 = call %f3_W_arr_W_mat
+    %77:f32 = call %f3
     ret %77
   }
 }
 %b = func():void -> %b9 {
   %b9 = block {
-    %79:f32 = call %f4_W
+    %79:f32 = call %f4
     ret
   }
 }
@@ -2253,7 +2253,7 @@ TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_read) {
   %P:ptr<private, i32, read_write> = var
 }
 
-%a_P = func(%pre:i32, %post:i32):i32 -> %b2 {
+%a = func(%pre:i32, %post:i32):i32 -> %b2 {
   %b2 = block {
     %5:ptr<private, i32, read_write> = access %P
     %6:i32 = load %5
@@ -2262,7 +2262,7 @@ TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_read) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %8:i32 = call %a_P, 10i, 20i
+    %8:i32 = call %a, 10i, 20i
     ret
   }
 }
@@ -2324,7 +2324,7 @@ TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_write) {
   %P:ptr<private, i32, read_write> = var
 }
 
-%a_P = func(%pre:i32, %post:i32):void -> %b2 {
+%a = func(%pre:i32, %post:i32):void -> %b2 {
   %b2 = block {
     %5:ptr<private, i32, read_write> = access %P
     store %5, 42i
@@ -2333,7 +2333,7 @@ TEST_F(IR_DirectVariableAccessTest_PrivateAS, Enabled_Param_ptr_i32_write) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %7:void = call %a_P, 10i, 20i
+    %7:void = call %a, 10i, 20i
     ret
   }
 }
@@ -2406,7 +2406,7 @@ str = struct @align(4) {
   %P:ptr<private, str, read_write> = var
 }
 
-%a_P_i = func(%pre:i32, %post:i32):i32 -> %b2 {
+%a = func(%pre:i32, %post:i32):i32 -> %b2 {
   %b2 = block {
     %5:ptr<private, i32, read_write> = access %P, 0u
     %6:i32 = load %5
@@ -2415,7 +2415,7 @@ str = struct @align(4) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %8:i32 = call %a_P_i, 10i, 20i
+    %8:i32 = call %a, 10i, 20i
     ret
   }
 }
@@ -2552,7 +2552,7 @@ str = struct @align(4) {
   %P:ptr<private, str, read_write> = var
 }
 
-%a_P_arr = func(%pre:i32, %post:i32):void -> %b2 {
+%a = func(%pre:i32, %post:i32):void -> %b2 {
   %b2 = block {
     %5:ptr<private, array<i32, 4>, read_write> = access %P, 0u
     store %5, array<i32, 4>(0i)
@@ -2561,7 +2561,7 @@ str = struct @align(4) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %7:void = call %a_P_arr, 10i, 20i
+    %7:void = call %a, 10i, 20i
     ret
   }
 }
@@ -3107,7 +3107,7 @@ Outer = struct @align(16) {
     ret %64
   }
 }
-%f2_P_arr_X = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
+%f2 = func(%p_indices_3:array<u32, 1>):f32 -> %b6 {  # %p_indices_3: 'p_indices'
   %b6 = block {
     %67:u32 = access %p_indices_3, 0u
     %68:array<u32, 1> = construct %67
@@ -3115,25 +3115,25 @@ Outer = struct @align(16) {
     ret %69
   }
 }
-%f3_P_arr_P_mat = func():f32 -> %b7 {
+%f3 = func():f32 -> %b7 {
   %b7 = block {
     %71:u32 = convert 3i
     %72:array<u32, 1> = construct %71
-    %73:f32 = call %f2_P_arr_X, %72
+    %73:f32 = call %f2, %72
     %74:f32 = call %f1_P_mat
     %75:f32 = add %73, %74
     ret %75
   }
 }
-%f4_P = func():f32 -> %b8 {
+%f4 = func():f32 -> %b8 {
   %b8 = block {
-    %77:f32 = call %f3_P_arr_P_mat
+    %77:f32 = call %f3
     ret %77
   }
 }
 %b = func():void -> %b9 {
   %b9 = block {
-    %79:f32 = call %f4_P
+    %79:f32 = call %f4
     ret
   }
 }
@@ -3400,7 +3400,7 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_read) {
     EXPECT_EQ(src, str());
 
     auto* expect = R"(
-%a_P = func(%pre:i32, %p_root:ptr<function, i32, read_write>, %post:i32):i32 -> %b1 {
+%a = func(%pre:i32, %p_root:ptr<function, i32, read_write>, %post:i32):i32 -> %b1 {
   %b1 = block {
     %5:ptr<function, i32, read_write> = access %p_root
     %6:i32 = load %5
@@ -3410,7 +3410,7 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_read) {
 %b = func():void -> %b2 {
   %b2 = block {
     %F:ptr<function, i32, read_write> = var
-    %9:i32 = call %a_P, 10i, %F, 20i
+    %9:i32 = call %a, 10i, %F, 20i
     ret
   }
 }
@@ -3460,7 +3460,7 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_write) {
     EXPECT_EQ(src, str());
 
     auto* expect = R"(
-%a_P = func(%pre:i32, %p_root:ptr<function, i32, read_write>, %post:i32):void -> %b1 {
+%a = func(%pre:i32, %p_root:ptr<function, i32, read_write>, %post:i32):void -> %b1 {
   %b1 = block {
     %5:ptr<function, i32, read_write> = access %p_root
     store %5, 42i
@@ -3470,7 +3470,7 @@ TEST_F(IR_DirectVariableAccessTest_FunctionAS, Enabled_Param_ptr_i32_write) {
 %b = func():void -> %b2 {
   %b2 = block {
     %F:ptr<function, i32, read_write> = var
-    %8:void = call %a_P, 10i, %F, 20i
+    %8:void = call %a, 10i, %F, 20i
     ret
   }
 }
@@ -3531,7 +3531,7 @@ str = struct @align(4) {
   i:i32 @offset(0)
 }
 
-%a_P_i = func(%pre:i32, %p_root:ptr<function, str, read_write>, %post:i32):i32 -> %b1 {
+%a = func(%pre:i32, %p_root:ptr<function, str, read_write>, %post:i32):i32 -> %b1 {
   %b1 = block {
     %5:ptr<function, i32, read_write> = access %p_root, 0u
     %6:i32 = load %5
@@ -3541,7 +3541,7 @@ str = struct @align(4) {
 %b = func():void -> %b2 {
   %b2 = block {
     %F:ptr<function, str, read_write> = var
-    %9:i32 = call %a_P_i, 10i, %F, 20i
+    %9:i32 = call %a, 10i, %F, 20i
     ret
   }
 }
@@ -3606,7 +3606,7 @@ str = struct @align(4) {
   arr:array<i32, 4> @offset(0)
 }
 
-%a_P_arr = func(%pre:i32, %p_root:ptr<function, str, read_write>, %post:i32):void -> %b1 {
+%a = func(%pre:i32, %p_root:ptr<function, str, read_write>, %post:i32):void -> %b1 {
   %b1 = block {
     %5:ptr<function, array<i32, 4>, read_write> = access %p_root, 0u
     store %5, array<i32, 4>(0i)
@@ -3616,7 +3616,7 @@ str = struct @align(4) {
 %b = func():void -> %b2 {
   %b2 = block {
     %F:ptr<function, str, read_write> = var
-    %8:void = call %a_P_arr, 10i, %F, 20i
+    %8:void = call %a, 10i, %F, 20i
     ret
   }
 }
@@ -3900,7 +3900,7 @@ TEST_F(IR_DirectVariableAccessTest_BuiltinFn, ArrayLength) {
   %S:ptr<storage, array<f32>, read_write> = var @binding_point(0, 0)
 }
 
-%len_S = func():u32 -> %b2 {
+%len = func():u32 -> %b2 {
   %b2 = block {
     %3:ptr<storage, array<f32>, read_write> = access %S
     %4:u32 = arrayLength %3
@@ -3909,7 +3909,7 @@ TEST_F(IR_DirectVariableAccessTest_BuiltinFn, ArrayLength) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %6:u32 = call %len_S
+    %6:u32 = call %len
     ret
   }
 }
@@ -3967,7 +3967,7 @@ TEST_F(IR_DirectVariableAccessTest_BuiltinFn, AtomicLoad) {
   %W:ptr<workgroup, atomic<i32>, read_write> = var
 }
 
-%load_W = func():i32 -> %b2 {
+%load = func():i32 -> %b2 {
   %b2 = block {
     %3:ptr<workgroup, atomic<i32>, read_write> = access %W
     %4:i32 = atomicLoad %3
@@ -3976,7 +3976,7 @@ TEST_F(IR_DirectVariableAccessTest_BuiltinFn, AtomicLoad) {
 }
 %b = func():void -> %b3 {
   %b3 = block {
-    %6:i32 = call %load_W
+    %6:i32 = call %load
     ret
   }
 }
@@ -4527,7 +4527,7 @@ TEST_F(IR_DirectVariableAccessTest_Complex, Indexing) {
     ret %i
   }
 }
-%b_S_X = func(%p_indices:array<u32, 1>):i32 -> %b3 {
+%b = func(%p_indices:array<u32, 1>):i32 -> %b3 {
   %b3 = block {
     %6:u32 = access %p_indices, 0u
     %7:ptr<storage, array<array<array<i32, 9>, 9>, 9>, read> = access %S, %6
@@ -4551,7 +4551,7 @@ TEST_F(IR_DirectVariableAccessTest_Complex, Indexing) {
   %b4 = block {
     %22:u32 = convert 42i
     %23:array<u32, 1> = construct %22
-    %v:i32 = call %b_S_X, %23
+    %v:i32 = call %b, %23
     ret
   }
 }
@@ -4647,7 +4647,7 @@ TEST_F(IR_DirectVariableAccessTest_Complex, IndexingInPtrCall) {
   %S:ptr<storage, array<array<array<array<i32, 9>, 9>, 9>, 50>, read> = var @binding_point(0, 0)
 }
 
-%a_S_X_X_X_X = func(%pre:i32, %i_indices:array<u32, 4>, %post:i32):i32 -> %b2 {
+%a = func(%pre:i32, %i_indices:array<u32, 4>, %post:i32):i32 -> %b2 {
   %b2 = block {
     %6:u32 = access %i_indices, 0u
     %7:u32 = access %i_indices, 1u
@@ -4658,29 +4658,29 @@ TEST_F(IR_DirectVariableAccessTest_Complex, IndexingInPtrCall) {
     ret %11
   }
 }
-%b_S_X = func(%p_indices:array<u32, 1>):i32 -> %b3 {
+%b = func(%p_indices:array<u32, 1>):i32 -> %b3 {
   %b3 = block {
     %14:u32 = access %p_indices, 0u
     %15:u32 = convert 0i
     %16:u32 = convert 1i
     %17:u32 = convert 2i
     %18:array<u32, 4> = construct %14, %15, %16, %17
-    %19:i32 = call %a_S_X_X_X_X, 20i, %18, 30i
+    %19:i32 = call %a, 20i, %18, 30i
     %20:u32 = convert 3i
     %21:u32 = convert 4i
     %22:u32 = convert 5i
     %23:array<u32, 4> = construct %14, %20, %21, %22
-    %24:i32 = call %a_S_X_X_X_X, 40i, %23, 50i
+    %24:i32 = call %a, 40i, %23, 50i
     %25:u32 = convert 6i
     %26:u32 = convert 7i
     %27:u32 = convert 8i
     %28:array<u32, 4> = construct %14, %25, %26, %27
-    %29:i32 = call %a_S_X_X_X_X, 60i, %28, 70i
+    %29:i32 = call %a, 60i, %28, 70i
     %30:u32 = convert %19
     %31:u32 = convert %24
     %32:u32 = convert %29
     %33:array<u32, 4> = construct %14, %30, %31, %32
-    %34:i32 = call %a_S_X_X_X_X, 10i, %33, 80i
+    %34:i32 = call %a, 10i, %33, 80i
     ret %34
   }
 }
@@ -4688,7 +4688,7 @@ TEST_F(IR_DirectVariableAccessTest_Complex, IndexingInPtrCall) {
   %b4 = block {
     %36:u32 = convert 42i
     %37:array<u32, 1> = construct %36
-    %v:i32 = call %b_S_X, %37
+    %v:i32 = call %b, %37
     ret
   }
 }
@@ -4789,7 +4789,7 @@ TEST_F(IR_DirectVariableAccessTest_Complex, IndexingDualPointers) {
     ret %i
   }
 }
-%b_S_X_U_X = func(%s_indices:array<u32, 1>, %u_indices:array<u32, 1>):i32 -> %b3 {
+%b = func(%s_indices:array<u32, 1>, %u_indices:array<u32, 1>):i32 -> %b3 {
   %b3 = block {
     %8:u32 = access %s_indices, 0u
     %9:ptr<storage, array<array<i32, 9>, 9>, read> = access %S, %8
@@ -4813,7 +4813,7 @@ TEST_F(IR_DirectVariableAccessTest_Complex, IndexingDualPointers) {
     %23:array<u32, 1> = construct %22
     %24:u32 = convert 24i
     %25:array<u32, 1> = construct %24
-    %v:i32 = call %b_S_X_U_X, %23, %25
+    %v:i32 = call %b, %23, %25
     ret
   }
 }

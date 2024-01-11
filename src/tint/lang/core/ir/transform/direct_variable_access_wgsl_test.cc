@@ -288,20 +288,20 @@ fn d() {
         R"(
 @group(0) @binding(0) var<uniform> U : array<array<array<vec4<i32>, 8u>, 8u>, 8u>;
 
-fn a_U_X_X_X(pre : i32, p_indices : array<u32, 3u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 3u>, post : i32) -> vec4<i32> {
   return U[p_indices[0u]][p_indices[1u]][p_indices[2u]];
 }
 
 fn b() {
-  a_U_X_X_X(10i, array<u32, 3u>(u32(1i), u32(2i), u32(3i)), 20i);
+  a(10i, array<u32, 3u>(u32(1i), u32(2i), u32(3i)), 20i);
 }
 
-fn c_U() {
-  a_U_X_X_X(10i, array<u32, 3u>(u32(1i), u32(2i), u32(3i)), 20i);
+fn c() {
+  a(10i, array<u32, 3u>(u32(1i), u32(2i), u32(3i)), 20i);
 }
 
 fn d() {
-  c_U();
+  c();
 }
 )";
 
@@ -373,24 +373,24 @@ fn third() -> i32 {
   return i;
 }
 
-fn a_U_X_X_X(pre : i32, p_indices : array<u32, 3u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 3u>, post : i32) -> vec4<i32> {
   return U[p_indices[0u]][p_indices[1u]][p_indices[2u]];
 }
 
 fn b() {
   let v = first();
   let v_1 = second();
-  a_U_X_X_X(10i, array<u32, 3u>(u32(v), u32(v_1), u32(third())), 20i);
+  a(10i, array<u32, 3u>(u32(v), u32(v_1), u32(third())), 20i);
 }
 
-fn c_U() {
+fn c() {
   let v_2 = first();
   let v_3 = second();
-  a_U_X_X_X(10i, array<u32, 3u>(u32(v_2), u32(v_3), u32(third())), 20i);
+  a(10i, array<u32, 3u>(u32(v_2), u32(v_3), u32(third())), 20i);
 }
 
 fn d() {
-  c_U();
+  c();
 }
 )";
 
@@ -451,24 +451,24 @@ fn second() -> i32 {
   return i;
 }
 
-fn a_U_X_X(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
   return U[p_indices[0u]][p_indices[1u]];
 }
 
 fn b() {
   for(let v = first(); true; ) {
-    a_U_X_X(10i, array<u32, 2u>(u32(v), u32(second())), 20i);
+    a(10i, array<u32, 2u>(u32(v), u32(second())), 20i);
   }
 }
 
-fn c_U() {
+fn c() {
   for(let v_1 = first(); true; ) {
-    a_U_X_X(10i, array<u32, 2u>(u32(v_1), u32(second())), 20i);
+    a(10i, array<u32, 2u>(u32(v_1), u32(second())), 20i);
   }
 }
 
 fn d() {
-  c_U();
+  c();
 }
 )";
 
@@ -531,28 +531,28 @@ fn second() -> i32 {
   return i;
 }
 
-fn a_U_X_X(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
   return U[p_indices[0u]][p_indices[1u]];
 }
 
 fn b() {
   let v = first();
   let v_1 = second();
-  while((a_U_X_X(10i, array<u32, 2u>(u32(v), u32(v_1)), 20i).x < 4i)) {
+  while((a(10i, array<u32, 2u>(u32(v), u32(v_1)), 20i).x < 4i)) {
     let body = 1i;
   }
 }
 
-fn c_U() {
+fn c() {
   let v_2 = first();
   let v_3 = second();
-  while((a_U_X_X(10i, array<u32, 2u>(u32(v_2), u32(v_3)), 20i).x < 4i)) {
+  while((a(10i, array<u32, 2u>(u32(v_2), u32(v_3)), 20i).x < 4i)) {
     let body = 1i;
   }
 }
 
 fn d() {
-  c_U();
+  c();
 }
 )";
 
@@ -615,28 +615,28 @@ fn second() -> i32 {
   return i;
 }
 
-fn a_U_X_X(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
   return U[p_indices[0u]][p_indices[1u]];
 }
 
 fn b() {
   let v = first();
   let v_1 = second();
-  for(var i : i32 = 0i; (i < 3i); a_U_X_X(10i, array<u32, 2u>(u32(v), u32(v_1)), 20i)) {
+  for(var i : i32 = 0i; (i < 3i); a(10i, array<u32, 2u>(u32(v), u32(v_1)), 20i)) {
     i = (i + 1i);
   }
 }
 
-fn c_U() {
+fn c() {
   let v_2 = first();
   let v_3 = second();
-  for(var i : i32 = 0i; (i < 3i); a_U_X_X(10i, array<u32, 2u>(u32(v_2), u32(v_3)), 20i)) {
+  for(var i : i32 = 0i; (i < 3i); a(10i, array<u32, 2u>(u32(v_2), u32(v_3)), 20i)) {
     i = (i + 1i);
   }
 }
 
 fn d() {
-  c_U();
+  c();
 }
 )";
 
@@ -699,28 +699,28 @@ fn second() -> i32 {
   return i;
 }
 
-fn a_U_X_X(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 2u>, post : i32) -> vec4<i32> {
   return U[p_indices[0u]][p_indices[1u]];
 }
 
 fn b() {
   let v = first();
   let v_1 = second();
-  while((a_U_X_X(10i, array<u32, 2u>(u32(v), u32(v_1)), 20i).x < 4i)) {
+  while((a(10i, array<u32, 2u>(u32(v), u32(v_1)), 20i).x < 4i)) {
     let body = 1i;
   }
 }
 
-fn c_U() {
+fn c() {
   let v_2 = first();
   let v_3 = second();
-  while((a_U_X_X(10i, array<u32, 2u>(u32(v_2), u32(v_3)), 20i).x < 4i)) {
+  while((a(10i, array<u32, 2u>(u32(v_2), u32(v_3)), 20i).x < 4i)) {
     let body = 1i;
   }
 }
 
 fn d() {
-  c_U();
+  c();
 }
 )";
 
@@ -755,12 +755,12 @@ fn b() {
     auto* expect = R"(
 @group(0) @binding(0) var<uniform> U : i32;
 
-fn a_U(pre : i32, post : i32) -> i32 {
+fn a(pre : i32, post : i32) -> i32 {
   return U;
 }
 
 fn b() {
-  a_U(10i, 20i);
+  a(10i, 20i);
 }
 )";
 
@@ -788,13 +788,13 @@ fn b() {
     auto* expect = R"(
 @group(0) @binding(0) var<uniform> U : array<vec4<i32>, 8u>;
 
-fn a_U_X(pre : i32, p_indices : array<u32, 1u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 1u>, post : i32) -> vec4<i32> {
   return U[p_indices[0u]];
 }
 
 fn b() {
   let I = 3i;
-  a_U_X(10i, array<u32, 1u>(u32(I)), 20i);
+  a(10i, array<u32, 1u>(u32(I)), 20i);
 }
 )";
 
@@ -913,20 +913,20 @@ fn f1_U_arr_X_mat(p_indices : array<u32, 1u>) -> f32 {
   return res;
 }
 
-fn f2_U_arr_X(p_indices : array<u32, 1u>) -> f32 {
+fn f2(p_indices : array<u32, 1u>) -> f32 {
   return f1_U_arr_X_mat(array<u32, 1u>(p_indices[0u]));
 }
 
-fn f3_U_arr_U_mat() -> f32 {
-  return (f2_U_arr_X(array<u32, 1u>(u32(3i))) + f1_U_mat());
+fn f3() -> f32 {
+  return (f2(array<u32, 1u>(u32(3i))) + f1_U_mat());
 }
 
-fn f4_U() -> f32 {
-  return f3_U_arr_U_mat();
+fn f4() -> f32 {
+  return f3();
 }
 
 fn b() {
-  f4_U();
+  f4();
 }
 )";
 
@@ -970,12 +970,12 @@ struct str {
 
 @group(0) @binding(0) var<storage, read> S : str;
 
-fn a_S_i(pre : i32, post : i32) -> i32 {
+fn a(pre : i32, post : i32) -> i32 {
   return S.i;
 }
 
 fn b() {
-  a_S_i(10i, 20i);
+  a(10i, 20i);
 }
 )";
 
@@ -1010,12 +1010,12 @@ struct str {
 
 @group(0) @binding(0) var<storage, read_write> S : str;
 
-fn a_S_arr(pre : i32, post : i32) {
+fn a(pre : i32, post : i32) {
   S.arr = array<i32, 4u>();
 }
 
 fn b() {
-  a_S_arr(10i, 20i);
+  a(10i, 20i);
 }
 )";
 
@@ -1043,13 +1043,13 @@ fn b() {
     auto* expect = R"(
 @group(0) @binding(0) var<storage, read_write> S : array<vec4<i32>, 8u>;
 
-fn a_S_X(pre : i32, p_indices : array<u32, 1u>, post : i32) {
+fn a(pre : i32, p_indices : array<u32, 1u>, post : i32) {
   S[p_indices[0u]] = vec4<i32>();
 }
 
 fn b() {
   let I = 3i;
-  a_S_X(10i, array<u32, 1u>(u32(I)), 20i);
+  a(10i, array<u32, 1u>(u32(I)), 20i);
 }
 )";
 
@@ -1168,20 +1168,20 @@ fn f1_S_arr_X_mat(p_indices : array<u32, 1u>) -> f32 {
   return res;
 }
 
-fn f2_S_arr_X(p_indices : array<u32, 1u>) -> f32 {
+fn f2(p_indices : array<u32, 1u>) -> f32 {
   return f1_S_arr_X_mat(array<u32, 1u>(p_indices[0u]));
 }
 
-fn f3_S_arr_S_mat() -> f32 {
-  return (f2_S_arr_X(array<u32, 1u>(u32(3i))) + f1_S_mat());
+fn f3() -> f32 {
+  return (f2(array<u32, 1u>(u32(3i))) + f1_S_mat());
 }
 
-fn f4_S() -> f32 {
-  return f3_S_arr_S_mat();
+fn f4() -> f32 {
+  return f3();
 }
 
 fn b() {
-  f4_S();
+  f4();
 }
 )";
 
@@ -1217,12 +1217,12 @@ fn b() {
     auto* expect = R"(
 var<workgroup> W : array<vec4<i32>, 8u>;
 
-fn a_W_X(pre : i32, p_indices : array<u32, 1u>, post : i32) -> vec4<i32> {
+fn a(pre : i32, p_indices : array<u32, 1u>, post : i32) -> vec4<i32> {
   return W[p_indices[0u]];
 }
 
 fn b() {
-  a_W_X(10i, array<u32, 1u>(u32(3i)), 20i);
+  a(10i, array<u32, 1u>(u32(3i)), 20i);
 }
 )";
 
@@ -1249,12 +1249,12 @@ fn b() {
     auto* expect = R"(
 var<workgroup> W : array<vec4<i32>, 8u>;
 
-fn a_W_X(pre : i32, p_indices : array<u32, 1u>, post : i32) {
+fn a(pre : i32, p_indices : array<u32, 1u>, post : i32) {
   W[p_indices[0u]] = vec4<i32>();
 }
 
 fn b() {
-  a_W_X(10i, array<u32, 1u>(u32(3i)), 20i);
+  a(10i, array<u32, 1u>(u32(3i)), 20i);
 }
 )";
 
@@ -1373,20 +1373,20 @@ fn f1_W_arr_X_mat(p_indices : array<u32, 1u>) -> f32 {
   return res;
 }
 
-fn f2_W_arr_X(p_indices : array<u32, 1u>) -> f32 {
+fn f2(p_indices : array<u32, 1u>) -> f32 {
   return f1_W_arr_X_mat(array<u32, 1u>(p_indices[0u]));
 }
 
-fn f3_W_arr_W_mat() -> f32 {
-  return (f2_W_arr_X(array<u32, 1u>(u32(3i))) + f1_W_mat());
+fn f3() -> f32 {
+  return (f2(array<u32, 1u>(u32(3i))) + f1_W_mat());
 }
 
-fn f4_W() -> f32 {
-  return f3_W_arr_W_mat();
+fn f4() -> f32 {
+  return f3();
 }
 
 fn b() {
-  f4_W();
+  f4();
 }
 )";
 
@@ -1422,12 +1422,12 @@ fn b() {
     auto* expect = R"(
 var<private> P : i32;
 
-fn a_P(pre : i32, post : i32) -> i32 {
+fn a(pre : i32, post : i32) -> i32 {
   return P;
 }
 
 fn b() {
-  a_P(10i, 20i);
+  a(10i, 20i);
 }
 )";
 
@@ -1454,12 +1454,12 @@ fn b() {
     auto* expect = R"(
 var<private> P : i32;
 
-fn a_P(pre : i32, post : i32) {
+fn a(pre : i32, post : i32) {
   P = 42i;
 }
 
 fn b() {
-  a_P(10i, 20i);
+  a(10i, 20i);
 }
 )";
 
@@ -1494,12 +1494,12 @@ struct str {
 
 var<private> P : str;
 
-fn a_P_i(pre : i32, post : i32) -> i32 {
+fn a(pre : i32, post : i32) -> i32 {
   return P.i;
 }
 
 fn b() {
-  a_P_i(10i, 20i);
+  a(10i, 20i);
 }
 )";
 
@@ -1560,12 +1560,12 @@ struct str {
 
 var<private> P : str;
 
-fn a_P_arr(pre : i32, post : i32) {
+fn a(pre : i32, post : i32) {
   P.arr = array<i32, 4u>();
 }
 
 fn b() {
-  a_P_arr(10i, 20i);
+  a(10i, 20i);
 }
 )";
 
@@ -1800,20 +1800,20 @@ fn f1_P_arr_X_mat(p_indices : array<u32, 1u>) -> f32 {
   return res;
 }
 
-fn f2_P_arr_X(p_indices : array<u32, 1u>) -> f32 {
+fn f2(p_indices : array<u32, 1u>) -> f32 {
   return f1_P_arr_X_mat(array<u32, 1u>(p_indices[0u]));
 }
 
-fn f3_P_arr_P_mat() -> f32 {
-  return (f2_P_arr_X(array<u32, 1u>(u32(3i))) + f1_P_mat());
+fn f3() -> f32 {
+  return (f2(array<u32, 1u>(u32(3i))) + f1_P_mat());
 }
 
-fn f4_P() -> f32 {
-  return f3_P_arr_P_mat();
+fn f4() -> f32 {
+  return f3();
 }
 
 fn b() {
-  f4_P();
+  f4();
 }
 )";
 
@@ -1922,13 +1922,13 @@ fn b() {
 )";
 
     auto* expect = R"(
-fn a_P(pre : i32, p_root : ptr<function, i32>, post : i32) -> i32 {
+fn a(pre : i32, p_root : ptr<function, i32>, post : i32) -> i32 {
   return *(p_root);
 }
 
 fn b() {
   var F : i32;
-  a_P(10i, &(F), 20i);
+  a(10i, &(F), 20i);
 }
 )";
 
@@ -1952,13 +1952,13 @@ fn b() {
 )";
 
     auto* expect = R"(
-fn a_P(pre : i32, p_root : ptr<function, i32>, post : i32) {
+fn a(pre : i32, p_root : ptr<function, i32>, post : i32) {
   *(p_root) = 42i;
 }
 
 fn b() {
   var F : i32;
-  a_P(10i, &(F), 20i);
+  a(10i, &(F), 20i);
 }
 )";
 
@@ -1990,13 +1990,13 @@ struct str {
   i : i32,
 }
 
-fn a_P_i(pre : i32, p_root : ptr<function, str>, post : i32) -> i32 {
+fn a(pre : i32, p_root : ptr<function, str>, post : i32) -> i32 {
   return (*(p_root)).i;
 }
 
 fn b() {
   var F : str;
-  a_P_i(10i, &(F), 20i);
+  a(10i, &(F), 20i);
 }
 )";
 
@@ -2028,13 +2028,13 @@ struct str {
   arr : array<i32, 4u>,
 }
 
-fn a_P_arr(pre : i32, p_root : ptr<function, str>, post : i32) {
+fn a(pre : i32, p_root : ptr<function, str>, post : i32) {
   (*(p_root)).arr = array<i32, 4u>();
 }
 
 fn b() {
   var F : str;
-  a_P_arr(10i, &(F), 20i);
+  a(10i, &(F), 20i);
 }
 )";
 
@@ -2175,12 +2175,12 @@ fn f() {
     auto* expect = R"(
 @group(0) @binding(0) var<storage, read> S : array<f32>;
 
-fn len_S() -> u32 {
+fn len() -> u32 {
   return arrayLength(&(S));
 }
 
 fn f() {
-  let n = len_S();
+  let n = len();
 }
 )";
 
@@ -2207,12 +2207,12 @@ fn f() {
     auto* expect = R"(
 var<workgroup> W : f32;
 
-fn load_W() -> f32 {
+fn load() -> f32 {
   return workgroupUniformLoad(&(W));
 }
 
 fn f() {
-  let v = load_W();
+  let v = load();
 }
 )";
 
@@ -2442,13 +2442,13 @@ fn a(i : i32) -> i32 {
   return i;
 }
 
-fn b_S_X(p_indices : array<u32, 1u>) -> i32 {
+fn b(p_indices : array<u32, 1u>) -> i32 {
   let v = &(S[p_indices[0u]]);
   return (*(v))[a((*(v))[0i][1i][2i])][a((*(v))[a(3i)][4i][5i])][a((*(v))[6i][a(7i)][8i])];
 }
 
 fn c() {
-  let v = b_S_X(array<u32, 1u>(u32(42i)));
+  let v = b(array<u32, 1u>(u32(42i)));
 }
 )";
 
@@ -2481,19 +2481,19 @@ fn c() {
     auto* expect = R"(
 @group(0) @binding(0) var<storage, read> S : array<array<array<array<i32, 9u>, 9u>, 9u>, 50u>;
 
-fn a_S_X_X_X_X(pre : i32, i_indices : array<u32, 4u>, post : i32) -> i32 {
+fn a(pre : i32, i_indices : array<u32, 4u>, post : i32) -> i32 {
   return S[i_indices[0u]][i_indices[1u]][i_indices[2u]][i_indices[3u]];
 }
 
-fn b_S_X(p_indices : array<u32, 1u>) -> i32 {
+fn b(p_indices : array<u32, 1u>) -> i32 {
   let v = p_indices[0u];
-  let v_1 = a_S_X_X_X_X(20i, array<u32, 4u>(v, u32(0i), u32(1i), u32(2i)), 30i);
-  let v_2 = a_S_X_X_X_X(40i, array<u32, 4u>(v, u32(3i), u32(4i), u32(5i)), 50i);
-  return a_S_X_X_X_X(10i, array<u32, 4u>(v, u32(v_1), u32(v_2), u32(a_S_X_X_X_X(60i, array<u32, 4u>(v, u32(6i), u32(7i), u32(8i)), 70i))), 80i);
+  let v_1 = a(20i, array<u32, 4u>(v, u32(0i), u32(1i), u32(2i)), 30i);
+  let v_2 = a(40i, array<u32, 4u>(v, u32(3i), u32(4i), u32(5i)), 50i);
+  return a(10i, array<u32, 4u>(v, u32(v_1), u32(v_2), u32(a(60i, array<u32, 4u>(v, u32(6i), u32(7i), u32(8i)), 70i))), 80i);
 }
 
 fn c() {
-  let v = b_S_X(array<u32, 1u>(u32(42i)));
+  let v = b(array<u32, 1u>(u32(42i)));
 }
 )";
 
@@ -2531,13 +2531,13 @@ fn a(i : i32) -> i32 {
   return i;
 }
 
-fn b_S_X_U_X(s_indices : array<u32, 1u>, u_indices : array<u32, 1u>) -> i32 {
+fn b(s_indices : array<u32, 1u>, u_indices : array<u32, 1u>) -> i32 {
   let v = &(U[u_indices[0u]]);
   return S[s_indices[0u]][a((*(v))[0i][1i].x)][a((*(v))[a(3i)][4i].y)];
 }
 
 fn c() {
-  let v = b_S_X_U_X(array<u32, 1u>(u32(42i)), array<u32, 1u>(u32(24i)));
+  let v = b(array<u32, 1u>(u32(42i)), array<u32, 1u>(u32(24i)));
 }
 )";
 

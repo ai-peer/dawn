@@ -252,6 +252,9 @@ struct State {
         // Build variants of the functions in #need_forking.
         BuildFnVariants();
 
+        // Build names for the function variants.
+        NameFnVariants();
+
         // Rebuild ir.functions.
         EmitFunctions(input_fns);
     }
@@ -260,10 +263,12 @@ struct State {
     /// transforming. These functions will be replaced with variants based on the access shapes.
     void GatherFnsThatNeedForking() {
         for (auto& fn : ir.functions) {
-            for (auto* param : fn->Params()) {
-                if (ParamNeedsTransforming(param)) {
-                    need_forking.Add(fn, fn_info_allocator.Create());
-                    break;
+            if (fn->Alive()) {
+                for (auto* param : fn->Params()) {
+                    if (ParamNeedsTransforming(param)) {
+                        need_forking.Add(fn, fn_info_allocator.Create());
+                        break;
+                    }
                 }
             }
         }
@@ -273,7 +278,7 @@ struct State {
     /// #need_forking themselves. This populates #variants_to_build with the called functions.
     void BuildRootFns() {
         for (auto& fn : ir.functions) {
-            if (!need_forking.Contains(fn)) {
+            if (fn->Alive() && !need_forking.Contains(fn)) {
                 TransformCalls(fn);
             }
         }
@@ -361,17 +366,6 @@ struct State {
                 auto* variant_fn = CloneContext{ir}.Clone(target);
                 (*target_info)->ordered_variants.Push(variant_fn);
 
-                // Build a unique name for the variant.
-                if (auto fn_name = ir.NameOf(variant_fn); fn_name.IsValid()) {
-                    StringStream variant_name;
-                    variant_name << fn_name.NameView();
-                    auto params = signature.Keys().Sort();
-                    for (auto param_idx : params) {
-                        variant_name << "_" << AccessShapeName(*signature.Get(param_idx));
-                    }
-                    ir.SetName(variant_fn, variant_name.str());
-                }
-
                 // Create an entry for the variant, and add it to the queue of variants that need to
                 // be built. We don't do this here to avoid unbounded stack usage.
                 variants_to_build.Push(FnVariant{/* signature */ signature,
@@ -395,6 +389,39 @@ struct State {
             auto variant = variants_to_build.Pop();
             BuildFnVariantParams(variant);
             TransformCalls(variant.fn);
+        }
+    }
+
+    /// Generates names for the function variants.
+    /// If a input function produces two or more variants, then these variants are given unique
+    /// names based on the pointer access patterns, otherwise the single variant adopts the original
+    /// function name.
+    void NameFnVariants() {
+        for (auto fn_it : need_forking) {
+            auto* fn = fn_it.key;
+            auto* fn_info = fn_it.value;
+            if (fn_info->variants_by_sig.Count() > 1) {
+                // Give each variant a unique name
+                for (auto variant_it : fn_info->variants_by_sig) {
+                    auto& signature = variant_it.key;
+                    auto* variant_fn = variant_it.value;
+                    // Build a unique name for the variant.
+                    if (auto fn_name = ir.NameOf(fn); fn_name.IsValid()) {
+                        StringStream variant_name;
+                        variant_name << fn_name.NameView();
+                        auto params = signature.Keys().Sort();
+                        for (auto param_idx : params) {
+                            variant_name << "_" << AccessShapeName(*signature.Get(param_idx));
+                        }
+                        ir.SetName(variant_fn, variant_name.str());
+                    }
+                }
+            } else {
+                // Only a single variant. Reuse the original function name
+                if (auto fn_name = ir.NameOf(fn); fn_name.IsValid()) {
+                    ir.SetName(fn, fn_name);
+                }
+            }
         }
     }
 
