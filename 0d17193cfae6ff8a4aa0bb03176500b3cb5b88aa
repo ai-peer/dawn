@@ -16,6 +16,24 @@
       "message": "My issue with this is it makes the error less specific, like, it no longer points to the `\u0026\u0026` which was the first issue but the start of the expression and you have to find the issue yourself?\n\nIf I had something like `a \u0026\u0026 b \u0026\u0026 (c \u0026\u0026 (d \u0026\u0026 e || f)))` does it end up pointing at `a` or `d`? Like, does it at least end up pointing to the invalid subexpression or the entire thing and you\u0027re left to sort out where the problem lies?",
       "revId": "0d17193cfae6ff8a4aa0bb03176500b3cb5b88aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aa63abef_b7d6074b",
+        "filename": "src/tint/lang/wgsl/reader/parser/expression_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-11T14:51:12Z",
+      "side": 1,
+      "message": "I\u0027d also be happy with the expanded spans if there were also `note` elements with things like:\n\n```\nerror:1 whatever the error is\na \u0026\u0026 b \u0026\u0026 (c \u0026\u0026 (d \u0026\u0026 e || f))\n^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nnote:18: from subexpression\na \u0026\u0026 b \u0026\u0026 (c \u0026\u0026 (d \u0026\u0026 e || f))\n                ^^^^^^^^^^^^^\n  \nnote:20: from subexpression\na \u0026\u0026 b \u0026\u0026 (c \u0026\u0026 (d \u0026\u0026 e || f))\n                   ^^\n```",
+      "parentUuid": "708b0801_c63f6700",
+      "revId": "0d17193cfae6ff8a4aa0bb03176500b3cb5b88aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
