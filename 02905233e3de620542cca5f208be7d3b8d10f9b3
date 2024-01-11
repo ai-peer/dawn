@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d664c949_76602a5a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 16
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T08:59:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3767de7b_9f5e348c",
+        "filename": "src/dawn/common/Enumerator.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 74,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T08:59:59Z",
+      "side": 1,
+      "message": "I think this one should be AllowPtrArithmetic, also I\u0027m surprised that the conversion raw_ptr -\u003e Value* -\u003e raw_ptr AllowArithmetic is allowed. Are we supposed to add raw_ptr\u003c\u003e to function arguments as well?",
+      "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94a0b011_08129354",
+        "filename": "src/dawn/common/Math.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T08:59:59Z",
+      "side": 1,
+      "message": "nit: slight preference for reusing AlignPtr(T*) instead of duplicating the code.",
+      "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82c935af_b9d20f9c",
+        "filename": "src/dawn/common/SlabAllocator.h",
+        "patchSetId": 16
+      },
+      "lineNbr": 102,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T08:59:59Z",
+      "side": 1,
+      "message": "Can we have a dawn issue created for this?",
+      "revId": "02905233e3de620542cca5f208be7d3b8d10f9b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
