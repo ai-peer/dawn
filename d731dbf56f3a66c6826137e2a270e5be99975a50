@@ -54,6 +54,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9aba2933_b1ff9e72",
+        "filename": "src/dawn/common/WGSLFeatureMapping.h",
+        "patchSetId": 20
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-11T16:57:45Z",
+      "side": 1,
+      "message": "I\u0027m not sure what I need to update in these files. There are already entries in all 3 files for `pointer_composite_access`.",
+      "parentUuid": "5046f860_af5f422c",
+      "revId": "d731dbf56f3a66c6826137e2a270e5be99975a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "db382462_bda7b471",
         "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
         "patchSetId": 20
