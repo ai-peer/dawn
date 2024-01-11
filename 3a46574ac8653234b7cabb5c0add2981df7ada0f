@@ -61,6 +61,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "421696af_f3701ab3",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-11T05:10:09Z",
+      "side": 1,
+      "message": "Do you mean `wgpu::BufferUsage::CopyDst | wgpu::BufferUsage::MapRead`?\nI don\u0027t know how to implement it vice versa without a D3D11 API reverse to `ID3D11DeviceContext::UpdateSubresource`. So we won\u0027t be able to get rid of map/unmap.",
+      "parentUuid": "e3836897_c0cef1a9",
+      "range": {
+        "startLine": 70,
+        "startChar": 5,
+        "endLine": 70,
+        "endChar": 13
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "d77beeb4_43197a9f",
         "filename": "src/dawn/native/d3d11/BufferD3D11.h",
         "patchSetId": 1
@@ -95,6 +119,30 @@
       "writtenOn": "2024-01-10T15:08:16Z",
       "side": 1,
       "message": "nit: std::unqiue_ptr\u003cuint8_t[]\u003e",
+      "range": {
+        "startLine": 162,
+        "startChar": 4,
+        "endLine": 162,
+        "endChar": 13
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3e899250_2001df09",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 162,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-11T05:10:09Z",
+      "side": 1,
+      "message": "Done, thanks!",
+      "parentUuid": "0a49adf6_b72d14da",
       "range": {
         "startLine": 162,
         "startChar": 4,
@@ -141,6 +189,30 @@
       "writtenOn": "2024-01-10T15:08:16Z",
       "side": 1,
       "message": "should we just do it for d3d11 with `mAllowUploadBufferEmulation \u003d\u003d true` case?",
+      "range": {
+        "startLine": 724,
+        "startChar": 0,
+        "endLine": 728,
+        "endChar": 63
+      },
+      "revId": "3a46574ac8653234b7cabb5c0add2981df7ada0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d26b0501_46661100",
+        "filename": "src/dawn/tests/end2end/BufferTests.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 728,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-11T05:10:09Z",
+      "side": 1,
+      "message": "The test case here just wants some workloads that GPU can\u0027t complete too quickly. So any such workloads should be fine. As we can\u0027t exactly tell how soon GPU will complete a workload, so it\u0027s more likely an empirical issue, and less likely an issue involving correctness. Maybe we don\u0027t need to complicate the case by introducing some backend specific things here.",
+      "parentUuid": "8b3eac06_6c6de743",
       "range": {
         "startLine": 724,
         "startChar": 0,
