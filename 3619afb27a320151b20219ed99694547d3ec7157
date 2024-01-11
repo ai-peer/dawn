@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27611ee0_936e1058",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-11T14:47:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "30a884f6_6ebc8d0e",
+      "revId": "3619afb27a320151b20219ed99694547d3ec7157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f17de7d8_d8ced7a8",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-11T14:11:33Z",
       "side": 1,
       "message": "nit: This shouldn\u0027t be needed because TextureBase defaults to tagging all resources as uninitialized.",
+      "revId": "3619afb27a320151b20219ed99694547d3ec7157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3ed0bb0e_93d82fd6",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 382,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-11T14:47:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f17de7d8_d8ced7a8",
       "revId": "3619afb27a320151b20219ed99694547d3ec7157",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
