@@ -31,6 +31,20 @@ import("//testing/test.gni")
 import("${dawn_root}/generator/dawn_generator.gni")
 import("${dawn_root}/scripts/dawn_features.gni")
 
+# When embedded by Chrome, partition_alloc and the dangling pointer detector
+# are already initialized. Dawn shouldn't attempt to initialize them again. This
+# variable is useful to avoid double initialization of the library.
+dawn_enable_partition_alloc = false
+if (dawn_standalone) {
+  # It is important to import this file, only if `dawn_standalone` is defined,
+  # because embedders might not have this file defined.
+  import("//build_overrides/partition_alloc.gni")
+  dawn_enable_partition_alloc = enable_dangling_raw_ptr_checks_default
+}
+
+print("Dawn enable partition_alloc")
+print(dawn_enable_partition_alloc)
+
 group("tests") {
   testonly = true
   deps = [
@@ -283,7 +297,6 @@ dawn_test("dawn_unittests") {
     "${dawn_root}/src/dawn/common",
     "${dawn_root}/src/dawn/native:sources",
     "${dawn_root}/src/dawn/native:static",
-    "${dawn_root}/src/dawn/partition_alloc:buildflags",
     "${dawn_root}/src/dawn/partition_alloc:raw_ptr",
     "${dawn_root}/src/dawn/utils",
     "${dawn_root}/src/dawn/wire",
@@ -440,10 +453,7 @@ dawn_test("dawn_unittests") {
     "unittests/wire/WireTest.h",
   ]
 
-  # `dawn_unittests` are known to run for both Dawn standalone and Chrome. This
-  # file is testing specifically the Dawn's standalone configuration of
-  # partition_alloc.
-  if (dawn_standalone) {
+  if (dawn_enable_partition_alloc) {
     sources += [ "unittests/RawPtrTests.cpp" ]
   }
 
@@ -467,6 +477,7 @@ dawn_test("dawn_unittests") {
 ###############################################################################
 # Dawn PartitionAlloc support for tests
 ###############################################################################
+
 source_set("partition_alloc_support") {
   testonly = true
 
@@ -478,11 +489,8 @@ source_set("partition_alloc_support") {
   public = [ "PartitionAllocSupport.h" ]
   sources = [ "PartitionAllocSupport.cpp" ]
 
-  # When embedded by Chrome, partition_alloc and the dangling pointer detector
-  # are already initialized. Dawn shouldn't attempt to initialize them again. We
-  # use `dawn_standalone` to avoid double initialization of the library.
-  if (dawn_standalone) {
-    defines = [ "DAWN_STANDALONE" ]
+  if (dawn_enable_partition_alloc) {
+    defines = [ "DAWN_ENABLE_PARTITION_ALLOC" ]
   }
 }
 
