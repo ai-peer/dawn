@@ -58,6 +58,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e6b8e00b_33b40968",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 2578,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-11T06:26:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6d9ef1ff_33011d02",
+      "range": {
+        "startLine": 2577,
+        "startChar": 12,
+        "endLine": 2578,
+        "endChar": 99
+      },
+      "revId": "3070aaeabe2c76faa0ce9fa030b8ee7909b825fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "35547219_293bdfc3",
@@ -71,6 +95,30 @@
       "writtenOn": "2024-01-05T13:34:27Z",
       "side": 1,
       "message": "I\u0027m not keen on marking these as `SKIP`, and this highlights a usability issue with emitting HLSL with the `tint` executable.\n\nI suggest parsing a new `--hlsl-sm-version` command line tint flag which defaults to `6.0`. Using this flag we enable / disable the HLSL writer\u0027s polyfill and pass this to `tint::hlsl::validate::ValidateUsingDXC()`.\n\nIf we do this, we should then add some hand-crafted e2e tests that exercise the non-polyfill path using a `// flags: --hlsl-sm-version 6.6` header.",
+      "range": {
+        "startLine": 37,
+        "startChar": 0,
+        "endLine": 37,
+        "endChar": 23
+      },
+      "revId": "3070aaeabe2c76faa0ce9fa030b8ee7909b825fd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6cd9bd7f_1e33c54d",
+        "filename": "test/tint/builtins/gen/var/pack4xI8Clamp/e42b2a.wgsl.expected.dxc.hlsl",
+        "patchSetId": 6
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-11T06:26:52Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "35547219_293bdfc3",
       "range": {
         "startLine": 37,
         "startChar": 0,
