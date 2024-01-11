@@ -927,12 +927,6 @@ fn f0_U_mat_X(p : U_mat_X) -> f32 {
 alias U_arr_X_mat_X = array<u32, 2u>;
 
 fn f0_U_arr_X_mat_X(p : U_arr_X_mat_X) -> f32 {
-  return U.arr[p[0]].mat[p[0]].x;
-}
-
-alias U_arr_X_mat_X_1 = array<u32, 2u>;
-
-fn f0_U_arr_X_mat_X_1(p : U_arr_X_mat_X_1) -> f32 {
   return U.arr[p[0]].mat[p[1]].x;
 }
 
@@ -946,11 +940,11 @@ fn f1_U_mat() -> f32 {
     res += f0_U_mat_X(U_mat_X(1));
   }
   {
-    res += f0_U_arr_X_mat_X_1(U_arr_X_mat_X_1(2, 1));
+    res += f0_U_arr_X_mat_X(U_arr_X_mat_X(2, 1));
   }
   {
     let p_vec = &(U.arr[2].mat[1]);
-    res += f0_U_arr_X_mat_X_1(U_arr_X_mat_X_1(2, 1));
+    res += f0_U_arr_X_mat_X(U_arr_X_mat_X(2, 1));
   }
   return res;
 }
@@ -967,11 +961,11 @@ fn f1_U_arr_X_mat(p : U_arr_X_mat) -> f32 {
     res += f0_U_arr_X_mat_X(U_arr_X_mat_X(p[0u], 1));
   }
   {
-    res += f0_U_arr_X_mat_X_1(U_arr_X_mat_X_1(2, 1));
+    res += f0_U_arr_X_mat_X(U_arr_X_mat_X(2, 1));
   }
   {
     let p_vec = &(U.arr[2].mat[1]);
-    res += f0_U_arr_X_mat_X_1(U_arr_X_mat_X_1(2, 1));
+    res += f0_U_arr_X_mat_X(U_arr_X_mat_X(2, 1));
   }
   return res;
 }
@@ -1221,12 +1215,6 @@ fn f0_S_mat_X(p : S_mat_X) -> f32 {
 alias S_arr_X_mat_X = array<u32, 2u>;
 
 fn f0_S_arr_X_mat_X(p : S_arr_X_mat_X) -> f32 {
-  return S.arr[p[0]].mat[p[0]].x;
-}
-
-alias S_arr_X_mat_X_1 = array<u32, 2u>;
-
-fn f0_S_arr_X_mat_X_1(p : S_arr_X_mat_X_1) -> f32 {
   return S.arr[p[0]].mat[p[1]].x;
 }
 
@@ -1240,11 +1228,11 @@ fn f1_S_mat() -> f32 {
     res += f0_S_mat_X(S_mat_X(1));
   }
   {
-    res += f0_S_arr_X_mat_X_1(S_arr_X_mat_X_1(2, 1));
+    res += f0_S_arr_X_mat_X(S_arr_X_mat_X(2, 1));
   }
   {
     let p_vec = &(S.arr[2].mat[1]);
-    res += f0_S_arr_X_mat_X_1(S_arr_X_mat_X_1(2, 1));
+    res += f0_S_arr_X_mat_X(S_arr_X_mat_X(2, 1));
   }
   return res;
 }
@@ -1261,11 +1249,11 @@ fn f1_S_arr_X_mat(p : S_arr_X_mat) -> f32 {
     res += f0_S_arr_X_mat_X(S_arr_X_mat_X(p[0u], 1));
   }
   {
-    res += f0_S_arr_X_mat_X_1(S_arr_X_mat_X_1(2, 1));
+    res += f0_S_arr_X_mat_X(S_arr_X_mat_X(2, 1));
   }
   {
     let p_vec = &(S.arr[2].mat[1]);
-    res += f0_S_arr_X_mat_X_1(S_arr_X_mat_X_1(2, 1));
+    res += f0_S_arr_X_mat_X(S_arr_X_mat_X(2, 1));
   }
   return res;
 }
@@ -1465,12 +1453,6 @@ fn f0_W_mat_X(p : W_mat_X) -> f32 {
 alias W_arr_X_mat_X = array<u32, 2u>;
 
 fn f0_W_arr_X_mat_X(p : W_arr_X_mat_X) -> f32 {
-  return W.arr[p[0]].mat[p[0]].x;
-}
-
-alias W_arr_X_mat_X_1 = array<u32, 2u>;
-
-fn f0_W_arr_X_mat_X_1(p : W_arr_X_mat_X_1) -> f32 {
   return W.arr[p[0]].mat[p[1]].x;
 }
 
@@ -1484,11 +1466,11 @@ fn f1_W_mat() -> f32 {
     res += f0_W_mat_X(W_mat_X(1));
   }
   {
-    res += f0_W_arr_X_mat_X_1(W_arr_X_mat_X_1(2, 1));
+    res += f0_W_arr_X_mat_X(W_arr_X_mat_X(2, 1));
   }
   {
     let p_vec = &(W.arr[2].mat[1]);
-    res += f0_W_arr_X_mat_X_1(W_arr_X_mat_X_1(2, 1));
+    res += f0_W_arr_X_mat_X(W_arr_X_mat_X(2, 1));
   }
   return res;
 }
@@ -1505,11 +1487,11 @@ fn f1_W_arr_X_mat(p : W_arr_X_mat) -> f32 {
     res += f0_W_arr_X_mat_X(W_arr_X_mat_X(p[0u], 1));
   }
   {
-    res += f0_W_arr_X_mat_X_1(W_arr_X_mat_X_1(2, 1));
+    res += f0_W_arr_X_mat_X(W_arr_X_mat_X(2, 1));
   }
   {
     let p_vec = &(W.arr[2].mat[1]);
-    res += f0_W_arr_X_mat_X_1(W_arr_X_mat_X_1(2, 1));
+    res += f0_W_arr_X_mat_X(W_arr_X_mat_X(2, 1));
   }
   return res;
 }
@@ -1532,6 +1514,79 @@ fn f4_W() -> f32 {
 
 fn b() {
   f4_W();
+}
+)";
+
+    auto got = Run<DirectVariableAccess>(src);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(DirectVariableAccessWorkgroupASTest, CallChaining2) {
+    auto* src = R"(
+alias T3 = vec4i;
+alias T2 = array<T3, 2>;
+alias T1 = array<T2, 3>;
+alias T = array<T1, 2>;
+
+@binding(0) @group(0) var<storage, read> input : T;
+@binding(1) @group(0) var<storage, read_write> output : T3;
+
+fn f2(p : ptr<workgroup, T2>) -> T3 {
+  return (*p)[1];
+}
+
+fn f1(p : ptr<workgroup, T1>) -> T3 {
+  return f2(&(*p)[2]);
+}
+
+fn f0(p : ptr<workgroup, T>) -> T3 {
+  return f1(&(*p)[0]);
+}
+
+var<workgroup> W : T;
+@compute @workgroup_size(1)
+fn main() {
+  W = input;
+  output = f0(&W);
+}
+)";
+
+    auto* expect = R"(
+alias T3 = vec4i;
+
+alias T2 = array<T3, 2>;
+
+alias T1 = array<T2, 3>;
+
+alias T = array<T1, 2>;
+
+@binding(0) @group(0) var<storage, read> input : T;
+
+@binding(1) @group(0) var<storage, read_write> output : T3;
+
+alias W_X_X = array<u32, 2u>;
+
+fn f2_W_X_X(p : W_X_X) -> T3 {
+  return W[p[0]][p[1]][1];
+}
+
+alias W_X = array<u32, 1u>;
+
+fn f1_W_X(p : W_X) -> T3 {
+  return f2_W_X_X(W_X_X(p[0u], 2));
+}
+
+fn f0_W() -> T3 {
+  return f1_W_X(W_X(0));
+}
+
+var<workgroup> W : T;
+
+@compute @workgroup_size(1)
+fn main() {
+  W = input;
+  output = f0_W();
 }
 )";
 
@@ -1937,18 +1992,12 @@ fn f0_F_mat_X(p_base : ptr<private, Outer>, p_indices : F_mat_X) -> f32 {
 alias F_arr_X_mat_X = array<u32, 2u>;
 
 fn f0_F_arr_X_mat_X(p_base : ptr<private, Outer>, p_indices : F_arr_X_mat_X) -> f32 {
-  return (*(p_base)).arr[p_indices[0]].mat[p_indices[0]].x;
-}
-
-alias F_arr_X_mat_X_1 = array<u32, 2u>;
-
-fn f0_F_arr_X_mat_X_1(p_base : ptr<private, Outer>, p_indices : F_arr_X_mat_X_1) -> f32 {
   return (*(p_base)).arr[p_indices[0]].mat[p_indices[1]].x;
 }
 
 alias F_mat_X_1 = array<u32, 1u>;
 
-alias F_arr_X_mat_X_2 = array<u32, 2u>;
+alias F_arr_X_mat_X_1 = array<u32, 2u>;
 
 fn f1_F_mat(p : ptr<private, Outer>) -> f32 {
   var res : f32;
@@ -1960,34 +2009,34 @@ fn f1_F_mat(p : ptr<private, Outer>) -> f32 {
     res += f0_F_mat_X(p, F_mat_X_1(1));
   }
   {
-    res += f0_F_arr_X_mat_X_1(&(P), F_arr_X_mat_X_2(2, 1));
+    res += f0_F_arr_X_mat_X(&(P), F_arr_X_mat_X_1(2, 1));
   }
   {
     let p_vec = &(P.arr[2].mat[1]);
-    res += f0_F_arr_X_mat_X_1(&(P), F_arr_X_mat_X_2(2, 1));
+    res += f0_F_arr_X_mat_X(&(P), F_arr_X_mat_X_1(2, 1));
   }
   return res;
 }
 
 alias F_arr_X_mat = array<u32, 1u>;
 
-alias F_arr_X_mat_X_3 = array<u32, 2u>;
+alias F_arr_X_mat_X_2 = array<u32, 2u>;
 
 fn f1_F_arr_X_mat(p_base : ptr<private, Outer>, p_indices : F_arr_X_mat) -> f32 {
   var res : f32;
   {
-    res += f0_F_arr_X_mat_X(p_base, F_arr_X_mat_X_3(p_indices[0u], 1));
+    res += f0_F_arr_X_mat_X(p_base, F_arr_X_mat_X_2(p_indices[0u], 1));
   }
   {
     let p_vec = &((*(p_base)).arr[p_indices[0]].mat[1]);
-    res += f0_F_arr_X_mat_X(p_base, F_arr_X_mat_X_3(p_indices[0u], 1));
+    res += f0_F_arr_X_mat_X(p_base, F_arr_X_mat_X_2(p_indices[0u], 1));
   }
   {
-    res += f0_F_arr_X_mat_X_1(&(P), F_arr_X_mat_X_2(2, 1));
+    res += f0_F_arr_X_mat_X(&(P), F_arr_X_mat_X_1(2, 1));
   }
   {
     let p_vec = &(P.arr[2].mat[1]);
-    res += f0_F_arr_X_mat_X_1(&(P), F_arr_X_mat_X_2(2, 1));
+    res += f0_F_arr_X_mat_X(&(P), F_arr_X_mat_X_1(2, 1));
   }
   return res;
 }
@@ -2312,6 +2361,80 @@ fn b() {
   a_F(10, &(Fi), 20);
   a_F_i(30, &(Fs), 40);
   a_F_X(50, &(Fa), F_X_1(2), 60);
+}
+)";
+
+    auto got = Run<DirectVariableAccess>(src, EnableFunction());
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(DirectVariableAccessFunctionASTest, Enabled_CallChaining) {
+    auto* src = R"(
+alias T3 = vec4i;
+alias T2 = array<T3, 2>;
+alias T1 = array<T2, 3>;
+alias T = array<T1, 2>;
+
+@binding(0) @group(0) var<storage, read> input : T;
+@binding(1) @group(0) var<storage, read_write> output : T3;
+
+fn f2(p : ptr<function, T2>) -> T3 {
+  return (*p)[1];
+}
+
+fn f1(p : ptr<function, T1>) -> T3 {
+  return f2(&(*p)[2]);
+}
+
+fn f0(p : ptr<function, T>) -> T3 {
+  return f1(&(*p)[0]);
+}
+
+@compute @workgroup_size(1)
+fn main() {
+  var v : T = input;
+  output = f0(&v);
+}
+)";
+
+    auto* expect = R"(
+alias T3 = vec4i;
+
+alias T2 = array<T3, 2>;
+
+alias T1 = array<T2, 3>;
+
+alias T = array<T1, 2>;
+
+@binding(0) @group(0) var<storage, read> input : T;
+
+@binding(1) @group(0) var<storage, read_write> output : T3;
+
+alias F_X_X = array<u32, 2u>;
+
+fn f2_F_X_X(p_base : ptr<function, array<array<array<vec4<i32>, 2u>, 3u>, 2u>>, p_indices : F_X_X) -> T3 {
+  return (*(p_base))[p_indices[0]][p_indices[1]][1];
+}
+
+alias F_X = array<u32, 1u>;
+
+alias F_X_X_1 = array<u32, 2u>;
+
+fn f1_F_X(p_base : ptr<function, array<array<array<vec4<i32>, 2u>, 3u>, 2u>>, p_indices : F_X) -> T3 {
+  return f2_F_X_X(p_base, F_X_X_1(p_indices[0u], 2));
+}
+
+alias F_X_1 = array<u32, 1u>;
+
+fn f0_F(p : ptr<function, array<array<array<vec4<i32>, 2u>, 3u>, 2u>>) -> T3 {
+  return f1_F_X(p, F_X_1(0));
+}
+
+@compute @workgroup_size(1)
+fn main() {
+  var v : T = input;
+  output = f0_F(&(v));
 }
 )";
 
@@ -2652,7 +2775,7 @@ enable chromium_experimental_full_ptr_parameters;
 alias S_X_X_X_X = array<u32, 4u>;
 
 fn a_S_X_X_X_X(pre : i32, i : S_X_X_X_X, post : i32) -> i32 {
-  return S[i[0]][i[0]][i[1]][i[2]];
+  return S[i[0]][i[1]][i[2]][i[3]];
 }
 
 alias S_X = array<u32, 1u>;
