@@ -643,6 +643,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a3727bca_b1117726",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-11T12:34:07Z",
+      "side": 1,
+      "message": "I understand that:\n\n 1 - Chromium has use cases that work with concurrent read right now, including uninitialized texture getting lazy-cleared.\n 2 - The behavior was not seen to be problematic so far.\n 3 - For Graphite we need to move forward.\n\nSo we can land this CL or some variant of it (with a preference for having an explicit flag to make it clear that *bad stuff can happen*, and has much validation as Graphite is comfortable with in Dawn). However, Chromium\u0027s behavior right now happens to work but isn\u0027t correct and could lead to subtle, flaky issues. We need to fix Chromium\u0027s behavior to be correct and data-race free at some point.\n\nDynamicCompoundSharedImage will provide a way to correctly have opportunistic concurrent read-only access with a fallback if a write access needs to be done. (performing a copy to the new backing for the write is only reading from the previous backing). Historical data gathered with a SharedImageStream-like concept will allow repeated uses of such copies to be optimized away if possible by adding more usages, using more general layouts, etc. This is complex but needs to be fixed at some point or we\u0027ll get rare breakages in the wild when the GPUs do read-write data races with what Chromium thinks are only read-only accesses. Dawn and SI can work together to add validation that the behavior is correct, while making it easy for users of SI to do the correct thing.",
+      "parentUuid": "6d764cb6_72017667",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
