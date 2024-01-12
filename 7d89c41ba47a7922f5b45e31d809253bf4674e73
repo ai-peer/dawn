@@ -16,6 +16,29 @@
       "message": "I just removed them in https://dawn-review.googlesource.com/c/dawn/+/169200",
       "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "13ec41e1_0206687f",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-12T16:06:59Z",
+      "side": 1,
+      "message": "I think the correct fix is to check for `clang::always_inline`\n\n\nWhat about:\n\n```suggestion\n#if !defined(NDEBUG)\n#define DAWN_FORCE_INLINE inline\n#elif DAWN_COMPILER_IS(MSVC)\n#define DAWN_FORCE_INLINE __forceinline\n#elif DAWN_HAS_ATTRIBUTE(clang::always_inline)\n#define DAWN_FORCE_INLINE inline __attribute__((clang::always_inline))\n#elif DAWN_HAS_ATTRIBUTE(always_inline)\n#define DAWN_FORCE_INLINE inline __attribute__((always_inline))\n#elif\n#define DAWN_FORCE_INLINE inline\n#endif\n```\n\n\nNote: We probably should make the same fix for base/ and partition_alloc/\n- https://source.chromium.org/chromium/chromium/src/+/main:base/compiler_specific.h;l\u003d63-71?q\u003dALWAYS_INLINE\u0026ss\u003dchromium\n- https://source.chromium.org/chromium/chromium/src/+/main:base/allocator/partition_allocator/src/partition_alloc/partition_alloc_base/compiler_specific.h;l\u003d44-53?q\u003dpartition_alloc%2F%20compiler_specific\u0026ss\u003dchromium\n\nDo you want to do it, or should I?",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 6
+      },
+      "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
