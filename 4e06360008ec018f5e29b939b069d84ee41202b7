@@ -74,6 +74,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "940511b6_3492b294",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-12T14:28:37Z",
+      "side": 1,
+      "message": "There are two cases to consider for Graphite, trying to summarize my understanding:\n\n - Use case 1: Uniform / vertex updates: Graphite writes a bunch of the updates in a mapped buffer then encodes a bunch of small copyB2B.\n - Use case 2: Texture upload: Graphite writes to a mapped buffer then encodes a few large CopyB2T calls.\n \nI\u0027m surprised that the D3D11 \"may not be very smart\" with respect to avoiding stalls on Map() calls, in my experience, D3D11 drivers are among the ones that received the most engineering and tuning so it\u0027s surprising that they don\u0027t have a way to know when resources are finished being used. Looking at the code, we never call ID3D11DevicedContext::Flush() which would help it \"segment\" our workload to track when things are used. Does calling it in CommandRecordingContext::ExecuteCommandList() help?\n\nThe design doc also calls for using a shader blit to implement CopyB2T, even for mappable buffers (with an intermediate copy to a DEFAULT buffer). This is the same amount of copying that this CL does, but the extra copy is done on the GPU instead of the CPU, so it should be faster. Any reason we can\u0027t do this now?\n\nOverall I agree that the improvements are massive and worth it, however I think that by digging in why these improvements happen, we can find even better solution that scale to more use-cases and with less heuristics.",
+      "parentUuid": "864d9543_794a7d3f",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
