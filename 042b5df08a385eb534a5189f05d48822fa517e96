@@ -20,6 +20,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "f9d1838a_1cbb34d9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000021
+      },
+      "writtenOn": "2024-01-12T06:55:03Z",
+      "side": 1,
+      "message": "Done by adding comments in dawn.json \"external texture rotation\" enums",
+      "parentUuid": "cb30c123_3eece319",
+      "revId": "042b5df08a385eb534a5189f05d48822fa517e96",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "ce72f9ec_725282ed",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 1
