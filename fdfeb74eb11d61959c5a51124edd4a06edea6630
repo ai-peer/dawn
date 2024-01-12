@@ -16,6 +16,57 @@
       "message": "I\u0027d like to put this CL for review first. As stated in the CL description, it is now more necessary to split edge cases into seperate compute pass. But let me focus on correctness first.\n\nThe functionality is covered by CTS test\n`webgpu:api,operation,command_buffer,image_copy:offsets_and_sizes:initMethod\u003d\"WriteTexture\";checkMethod\u003d\"PartialCopyT2B\";`, with params expansion (reverted not yet relanded): https://github.com/gpuweb/cts/pull/3264\nRight now we don\u0027t have end2end coverage for these special cases. Seems our current CopyTests framework don\u0027t support offset % 4 \u003e 0 (needs update). So again send this for review first, new end2end test coverage coming later (or in a new CL)",
       "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e333333_d4105cd0",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-12T16:25:02Z",
+      "side": 1,
+      "message": "Nit: integer division tends to be slower than division by a constant. Suggest passing in texelSize (I\u0027d prefer \"bytesPerTexel\"), then compute packTexelCount  as bytesPerTexel / 4.",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f946c02d_68777e53",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-12T16:25:02Z",
+      "side": 1,
+      "message": "This seems like a lot of special cases. Would the RG8 and R8 cases be made any simpler by making the dst_buf array\u003cu16\u003e and array\u003cu8\u003e respectively? You might have to templatify the shaders and calling code more, but then you could focus more on texels and less on bytes.",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75a5fe4b_57902722",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-12T16:25:02Z",
+      "side": 1,
+      "message": "Is \"texelFormatByteSize\" the same as \"texelSize\" in the shader? Suggest \"bytesPerTexel\" for both, if so.",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
