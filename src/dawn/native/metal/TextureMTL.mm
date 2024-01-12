@@ -408,14 +408,39 @@ MaybeError Texture::InitializeFromSharedTextureMemoryIOSurface(
     // Uses WGPUTexture which wraps multiplanar ioSurface needs to create
     // texture view explicitly.
     if (!GetFormat().IsMultiPlanar()) {
-        NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptor();
-        [*mtlDesc setStorageMode:IOSurfaceStorageMode()];
+        // Create the descriptor for the Metal texture. Note that the texture is
+        // guaranteed to be 2D/single-sampled/array length of 1/mipmap level of 1
+        // per SharedTextureMemory semantics and validation.
+        NSRef<MTLTextureDescriptor> mtlDescRef = AcquireNSRef([MTLTextureDescriptor new]);
+        MTLTextureDescriptor* mtlDesc = mtlDescRef.Get();
 
-        mMtlUsage = [*mtlDesc usage];
-        mMtlFormat = [*mtlDesc pixelFormat];
+        mtlDesc.width = GetBaseSize().width;
+        mtlDesc.sampleCount = 1;
+        // Metal only allows format reinterpretation to happen on swizzle pattern or conversion
+        // between linear space and sRGB. For example, creating bgra8Unorm texture view on
+        // rgba8Unorm texture or creating rgba8Unorm_srgb texture view on rgab8Unorm texture.
+        mtlDesc.usage = MetalTextureUsage(GetFormat(), GetInternalUsage());
+        mtlDesc.pixelFormat = MetalPixelFormat(GetDevice(), GetFormat().format);
+        if (GetDevice()->IsToggleEnabled(Toggle::MetalUseCombinedDepthStencilFormatForStencil8) &&
+            GetFormat().format == wgpu::TextureFormat::Stencil8) {
+            // If we used a combined depth stencil format instead of stencil8, we need
+            // MTLTextureUsagePixelFormatView to reinterpet as stencil8.
+            mtlDesc.usage |= MTLTextureUsagePixelFormatView;
+        }
+        mtlDesc.mipmapLevelCount = 1;
+
+        mtlDesc.height = GetBaseSize().height;
+        mtlDesc.arrayLength = 1;
+        mtlDesc.depth = 1;
+        mtlDesc.textureType = MTLTextureType2D;
+
+        [*mtlDescRef setStorageMode:IOSurfaceStorageMode()];
+
+        mMtlUsage = [*mtlDescRef usage];
+        mMtlFormat = [*mtlDescRef pixelFormat];
         mMtlPlaneTextures->resize(1);
         mMtlPlaneTextures[0] =
-            AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
+            AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDescRef.Get()
                                                                  iosurface:ioSurface
                                                                      plane:0]);
     } else {
