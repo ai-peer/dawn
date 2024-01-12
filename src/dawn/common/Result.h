@@ -246,8 +246,10 @@ class [[nodiscard]] Result {
     };
     PayloadType mType;
 
-    std::unique_ptr<E> mError;
-    T mSuccess;
+    union {
+        std::unique_ptr<E> mError;
+        T mSuccess;
+    };
 };
 
 // Implementation of Result<void, E>
@@ -489,16 +491,19 @@ Result<T, E>::~Result() {
 }
 
 template <typename T, typename E>
-Result<T, E>::Result(Result<T, E>&& other)
-    : mType(other.mType), mError(std::move(other.mError)), mSuccess(std::move(other.mSuccess)) {
-    other.mType = Acquired;
+Result<T, E>::Result(Result<T, E>&& other) {
+    *this = std::move(other);
 }
+
 template <typename T, typename E>
 Result<T, E>& Result<T, E>::operator=(Result<T, E>&& other) {
-    mType = other.mType;
-    mError = std::move(other.mError);
-    mSuccess = std::move(other.mSuccess);
-    other.mType = Acquired;
+    DAWN_ASSERT(mType == Acquired);
+    std::swap(mType, other.mType);
+    if (mType == Success) {
+        mSuccess = std::move(other.mSuccess);
+    } else if (mType == Error) {
+        mError = std::move(other.mError);
+    }
     return *this;
 }
 
