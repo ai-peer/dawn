@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4b552a92_71f03332",
+        "filename": "src/dawn/common/SlabAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-12T13:59:55Z",
+      "side": 1,
+      "message": "To avoid the next Slab\u0027s `prev` pointer to be dangling when we delete the current Slab, we need to clear it. That\u0027s what `Splice()` does.",
+      "parentUuid": "0d9caa73_917c8a04",
+      "revId": "a1ad4c3bb366172165722ea868494361277b2ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a64c6082_4062d873",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-12T13:20:34Z",
       "side": 1,
       "message": "u-nit: we tend to explicitly compare to nullptr.",
+      "revId": "a1ad4c3bb366172165722ea868494361277b2ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e83239e1_26148107",
+        "filename": "src/dawn/common/SlabAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 171,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-12T13:59:55Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a64c6082_4062d873",
       "revId": "a1ad4c3bb366172165722ea868494361277b2ace",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
