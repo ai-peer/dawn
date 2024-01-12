@@ -56,6 +56,30 @@
       },
       "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "abae5934_12edd894",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-12T16:10:29Z",
+      "side": 1,
+      "message": "See the CL description. You can\u0027t check for namespaced attributes that way - it just doesn\u0027t work.",
+      "parentUuid": "13ec41e1_0206687f",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 6
+      },
+      "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
