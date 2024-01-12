@@ -28,6 +28,7 @@
 #include "dawn/native/opengl/ShaderModuleGL.h"
 
 #include <sstream>
+#include <unordered_map>
 #include <utility>
 
 #include "dawn/native/BindGroupLayoutInternal.h"
@@ -362,7 +363,10 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
             // Get the entry point name after the renamer pass.
             // TODO(dawn:2180): refactor out.
             std::string remappedEntryPoint;
-            if (r.disableSymbolRenaming) {
+            // Glsl requires the main enty point to be named "main"
+            // So even when r.disableSymbolRenaming == false, Tint treats "main" as a glsl reserved
+            // keywords and renames it, resulting we need to find the remapped entry point as well.
+            if (r.disableSymbolRenaming && r.entryPointName != "main") {
                 remappedEntryPoint = r.entryPointName;
             } else {
                 auto* data = transformOutputs.Get<tint::ast::transform::Renamer::Data>();
