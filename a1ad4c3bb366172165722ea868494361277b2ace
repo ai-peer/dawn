@@ -53,6 +53,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "002dbf1d_35c0d299",
+        "filename": "src/dawn/common/SlabAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-12T14:14:08Z",
+      "side": 1,
+      "message": "Wouldn\u0027t something like this work?\n\n```\n    Slab* slab \u003d next;\n    while (true) {\n        Slab* next \u003d slab-\u003enext;\n        DAWN_ASSERT(slab-\u003eblocksInUse \u003d\u003d 0);\n\n        // Delete the slab\u0027s allocation. The slab is allocated inside slab-\u003eallocation.\n        std::unique_ptr\u003cchar\u003e acquiredAllocation(slab-\u003eallocation);\n        slab-\u003e~Slab();  // Placement delete.\n\n        slab \u003d slab-\u003enext;\n        if (slab \u003d\u003d nullptr) {\n            break;\n        }\n        \n        slab-\u003eprev \u003d nullptr;\n    }\n}\n```\n\nOk yeah that\u0027s worse xD I was trying to inline all the logic in this loop, and have a single branch on `next \u003d\u003d nullptr`.",
+      "parentUuid": "4b552a92_71f03332",
+      "revId": "a1ad4c3bb366172165722ea868494361277b2ace",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a64c6082_4062d873",
