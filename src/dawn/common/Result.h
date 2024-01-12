@@ -33,6 +33,7 @@
 #include <memory>
 #include <type_traits>
 #include <utility>
+#include <variant>
 
 #include "dawn/common/Assert.h"
 #include "dawn/common/Compiler.h"
@@ -239,15 +240,8 @@ class [[nodiscard]] Result {
     std::unique_ptr<E> AcquireError();
 
   private:
-    enum PayloadType {
-        Success = 0,
-        Error = 1,
-        Acquired = 2,
-    };
-    PayloadType mType;
-
-    std::unique_ptr<E> mError;
-    T mSuccess;
+    bool mAcquired = false;
+    std::variant<std::unique_ptr<E>, T> mPayload;
 };
 
 // Implementation of Result<void, E>
@@ -478,52 +472,53 @@ std::unique_ptr<E> Result<Ref<T>, E>::AcquireError() {
 
 // Implementation of Result<T, E>
 template <typename T, typename E>
-Result<T, E>::Result(T&& success) : mType(Success), mSuccess(std::move(success)) {}
+Result<T, E>::Result(T&& success) : mPayload(std::move(success)) {}
 
 template <typename T, typename E>
-Result<T, E>::Result(std::unique_ptr<E> error) : mType(Error), mError(std::move(error)) {}
+Result<T, E>::Result(std::unique_ptr<E> error) : mPayload(std::move(error)) {}
 
 template <typename T, typename E>
 Result<T, E>::~Result() {
-    DAWN_ASSERT(mType == Acquired);
+    DAWN_ASSERT(mAcquired);
 }
 
 template <typename T, typename E>
 Result<T, E>::Result(Result<T, E>&& other)
-    : mType(other.mType), mError(std::move(other.mError)), mSuccess(std::move(other.mSuccess)) {
-    other.mType = Acquired;
+    : mAcquired(other.mAcquired), mPayload(std::move(other.mPayload)) {
+    other.mAcquired = true;
 }
+
 template <typename T, typename E>
 Result<T, E>& Result<T, E>::operator=(Result<T, E>&& other) {
-    mType = other.mType;
-    mError = std::move(other.mError);
-    mSuccess = std::move(other.mSuccess);
-    other.mType = Acquired;
+    DAWN_ASSERT(mAcquired);
+    mPayload = std::move(other.mPayload);
+    mAcquired = other.mAcquired;
+    other.mAcquired = true;
     return *this;
 }
 
 template <typename T, typename E>
 bool Result<T, E>::IsError() const {
-    return mType == Error;
+    return !mAcquired && std::holds_alternative<std::unique_ptr<E>>(mPayload);
 }
 
 template <typename T, typename E>
 bool Result<T, E>::IsSuccess() const {
-    return mType == Success;
+    return !mAcquired && std::holds_alternative<T>(mPayload);
 }
 
 template <typename T, typename E>
 T&& Result<T, E>::AcquireSuccess() {
-    DAWN_ASSERT(mType == Success);
-    mType = Acquired;
-    return std::move(mSuccess);
+    DAWN_ASSERT(IsSuccess());
+    mAcquired = true;
+    return std::get<T>(std::move(mPayload));
 }
 
 template <typename T, typename E>
 std::unique_ptr<E> Result<T, E>::AcquireError() {
-    DAWN_ASSERT(mType == Error);
-    mType = Acquired;
-    return std::move(mError);
+    DAWN_ASSERT(IsError());
+    mAcquired = true;
+    return std::get<std::unique_ptr<E>>(std::move(mPayload));
 }
 
 }  // namespace dawn
