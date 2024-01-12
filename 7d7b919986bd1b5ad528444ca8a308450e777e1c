@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d9786cf_4c2148f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-12T14:39:45Z",
+      "side": 1,
+      "message": "Looks great, just a few minor suggestions for clarifying comments.",
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e3d3e924_61fa5f9b",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-12T14:39:45Z",
+      "side": 1,
+      "message": "This is true because we cannot have global pointers in WGSL, right? Maybe worth adding that as a comment.",
+      "range": {
+        "startLine": 1430,
+        "startChar": 24,
+        "endLine": 1430,
+        "endChar": 55
+      },
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b834906_2cf8bebb",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-12T14:39:45Z",
+      "side": 1,
+      "message": "Why is it that we never reach here for non-pointer parameters usually? Maybe worth adding a comment.",
+      "range": {
+        "startLine": 1456,
+        "startChar": 24,
+        "endLine": 1456,
+        "endChar": 98
+      },
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d05b48f8_0178dfff",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-12T14:39:45Z",
+      "side": 1,
+      "message": "I think it\u0027s worth adding a comment here and below that explains why we add this condition, like \"deref for sugared pointer access\".",
+      "range": {
+        "startLine": 1488,
+        "startChar": 37,
+        "endLine": 1488,
+        "endChar": 85
+      },
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
