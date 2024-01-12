@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "250c821a_8956f754",
+        "filename": "src/dawn/common/SlabAllocator.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-12T12:47:30Z",
+      "side": 0,
+      "message": "Note: this change is only cosmetic. Feel free to reject/accept to suit your tastes.",
+      "range": {
+        "startLine": 158,
+        "startChar": 0,
+        "endLine": 183,
+        "endChar": 1
+      },
+      "revId": "e856861fedf14ff9a480171e7ac69c78d11ae9ab",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
