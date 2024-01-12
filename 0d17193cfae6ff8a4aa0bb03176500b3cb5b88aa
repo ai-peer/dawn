@@ -34,6 +34,24 @@
       "parentUuid": "708b0801_c63f6700",
       "revId": "0d17193cfae6ff8a4aa0bb03176500b3cb5b88aa",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a668acb_1e5d0566",
+        "filename": "src/tint/lang/wgsl/reader/parser/expression_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-12T17:40:20Z",
+      "side": 1,
+      "message": "Update the spans for this specific diagnostic to start at the first and last operations (inclusive). See latest PS for updated tests showing the highlighted span.",
+      "parentUuid": "aa63abef_b7d6074b",
+      "revId": "0d17193cfae6ff8a4aa0bb03176500b3cb5b88aa",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
