@@ -22,6 +22,30 @@
       },
       "revId": "4c970089cbd25dfd1c248bd1cfab8911204ab1f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "40cdb864_03bf269a",
+        "filename": "src/tint/lang/wgsl/ast/transform/direct_variable_access.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-12T16:42:21Z",
+      "side": 1,
+      "message": "`std::monostate` is usually reserved for the default value of an variant. I\u0027ll add a comment.",
+      "parentUuid": "463a9e37_7bd44af7",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 1
+      },
+      "revId": "4c970089cbd25dfd1c248bd1cfab8911204ab1f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
