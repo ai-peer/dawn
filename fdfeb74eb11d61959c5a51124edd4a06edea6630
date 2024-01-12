@@ -73,6 +73,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93631c06_275f0bad",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-12T23:11:19Z",
+      "side": 1,
+      "message": "SGTM.",
+      "parentUuid": "fd98546a_09581ce8",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f946c02d_68777e53",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 12
@@ -102,6 +120,24 @@
       "side": 1,
       "message": "Do we have scalar type u8/u16 in wgsl? I don\u0027t think so. Do we have wgsl extension for that?\nI think we have f16 support in wgsl now. Would that make things easier or trickier? I see `pack4x8snorm` but no `pack2x8snorm`",
       "parentUuid": "f946c02d_68777e53",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cbf9d088_734aad88",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-12T23:11:19Z",
+      "side": 1,
+      "message": "Nope, you\u0027re right. No such thing. Chalk that up to morning brain as well.",
+      "parentUuid": "b707b05c_654bebe5",
       "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
