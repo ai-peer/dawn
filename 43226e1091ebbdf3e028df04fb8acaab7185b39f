@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bee6acc0_2a845955",
+        "filename": "src/dawn/common/SlabAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-12T19:05:24Z",
+      "side": 1,
+      "message": "doesn\u0027t this still need to be `delete[]` instead of `delete` ?",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "43226e1091ebbdf3e028df04fb8acaab7185b39f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
