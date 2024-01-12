@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "92b67432_150e7109",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-12T16:00:11Z",
+      "side": 1,
+      "message": "I just removed them in https://dawn-review.googlesource.com/c/dawn/+/169200",
+      "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
