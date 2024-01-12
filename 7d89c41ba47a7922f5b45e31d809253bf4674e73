@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a203f06b_bd4026a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 1
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-12T16:10:48Z",
+      "side": 1,
+      "message": "Should we use `__has_cpp_attribute` instead?",
+      "range": {
+        "startLine": 20,
+        "startChar": 0,
+        "endLine": 20,
+        "endChar": 113
+      },
+      "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "92b67432_150e7109",
