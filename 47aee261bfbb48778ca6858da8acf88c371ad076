@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8c822c0_dbe2672c",
+        "filename": "test/tint/bug/tint/2076.wgsl.expected.ir.spvasm",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-12T15:48:16Z",
+      "side": 1,
+      "message": "It looks like something was creating another `ptr\u003cuniform, image\u003e` with a different access pattern. This looks more correct now.",
+      "revId": "47aee261bfbb48778ca6858da8acf88c371ad076",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
