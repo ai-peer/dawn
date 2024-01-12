@@ -16,6 +16,40 @@
       "message": "Hi Corentin,\nCould you please take a look?",
       "revId": "6376bf07cfe07369f081b6aef4e7fb3cba0c33ee",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c77ed46_1604066f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 18
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-12T10:40:01Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "6376bf07cfe07369f081b6aef4e7fb3cba0c33ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e5b5f074_868069e7",
+        "filename": "src/dawn/utils/TerribleCommandBuffer.h",
+        "patchSetId": 18
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-12T10:40:01Z",
+      "side": 1,
+      "message": "Likewise could we have an issue for this one?",
+      "revId": "6376bf07cfe07369f081b6aef4e7fb3cba0c33ee",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
