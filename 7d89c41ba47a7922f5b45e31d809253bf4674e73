@@ -103,6 +103,30 @@
       },
       "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0bc0a3bd_962dd6ef",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-12T16:13:18Z",
+      "side": 1,
+      "message": "I see!\nMaybe something like:\n```suggestion\n// Only use __has_cpp_attribute in C++ mode. GCC defines __has_cpp_attribute in\n// C mode, but the :: in __has_cpp_attribute(scoped::attribute) is invalid.\n#if defined(__cplusplus) \u0026\u0026 defined(__has_cpp_attribute)\n#define DAWN_HAS_CPP_ATTRIBUTE(x) __has_cpp_attribute(x)\n#else\n#define DAWN_HAS_CPP_ATTRIBUTE(x) 0\n#endif\n\n// [...]\n\n#if !defined(NDEBUG)\n#define DAWN_FORCE_INLINE inline\n#elif DAWN_COMPILER_IS(MSVC)\n#define DAWN_FORCE_INLINE __forceinline\n#elif DAWN_HAS_CPP_ATTRIBUTE(clang::always_inline)\n#define DAWN_FORCE_INLINE inline __attribute__((clang::always_inline))\n#elif DAWN_HAS_ATTRIBUTE(always_inline)\n#define DAWN_FORCE_INLINE inline __attribute__((always_inline))\n#elif\n#define DAWN_FORCE_INLINE inline\n#endif\n```",
+      "parentUuid": "abae5934_12edd894",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 136,
+        "endChar": 6
+      },
+      "revId": "7d89c41ba47a7922f5b45e31d809253bf4674e73",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
