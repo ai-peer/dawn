@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "e194916b_7a04b685",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-12T18:42:44Z",
+      "side": 1,
+      "message": "Oops, morning brain. That won\u0027t work. I\u0027d still recommend the rename, though. You could pass in both, or compute packTexelCount as 4 / bytesPerTexel.",
+      "parentUuid": "3e333333_d4105cd0",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f946c02d_68777e53",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 12
