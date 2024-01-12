@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a3e7e5_8ef5e12d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-12T13:27:59Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "ba4cb0c79e79cbf3f5b00b35f0ff0c75bfccc704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8400bea2_78f8aaea",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 5
+      },
+      "lineNbr": 422,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-12T13:27:59Z",
+      "side": 1,
+      "message": "note: all of these are the default values, we can specify them, or skip them. (2D could likely be kept but the rest is more noisy and evident imho)",
+      "range": {
+        "startLine": 418,
+        "startChar": 0,
+        "endLine": 422,
+        "endChar": 26
+      },
+      "revId": "ba4cb0c79e79cbf3f5b00b35f0ff0c75bfccc704",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
