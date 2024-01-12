@@ -46,6 +46,30 @@
       },
       "revId": "4c970089cbd25dfd1c248bd1cfab8911204ab1f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ee32b31c_3376a7e7",
+        "filename": "src/tint/lang/wgsl/ast/transform/direct_variable_access.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-12T17:03:16Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "40cdb864_03bf269a",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 1
+      },
+      "revId": "4c970089cbd25dfd1c248bd1cfab8911204ab1f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
