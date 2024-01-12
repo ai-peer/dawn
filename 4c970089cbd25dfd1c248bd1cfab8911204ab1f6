@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "463a9e37_7bd44af7",
+        "filename": "src/tint/lang/wgsl/ast/transform/direct_variable_access.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-12T16:25:45Z",
+      "side": 1,
+      "message": "I think I understand the hardcoded `42` and `false`, but this looks like a bug at first glance. Is there a way to use `std::monostate` or maybe replace `AccessOp with `using MemberAccess \u003d std::optional\u003cSymbol\u003e` instead?\n\nIf not, expanding the comments to explain why the manually declared monostate struct would be useful.",
+      "range": {
+        "startLine": 87,
+        "startChar": 0,
+        "endLine": 94,
+        "endChar": 1
+      },
+      "revId": "4c970089cbd25dfd1c248bd1cfab8911204ab1f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
