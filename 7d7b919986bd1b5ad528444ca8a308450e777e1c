@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dac48eb7_0d002b56",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-12T15:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e3d3e924_61fa5f9b",
+      "range": {
+        "startLine": 1430,
+        "startChar": 24,
+        "endLine": 1430,
+        "endChar": 55
+      },
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b834906_2cf8bebb",
@@ -64,6 +88,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b52f757_aa1f7686",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1456,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-12T15:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0b834906_2cf8bebb",
+      "range": {
+        "startLine": 1456,
+        "startChar": 24,
+        "endLine": 1456,
+        "endChar": 98
+      },
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d05b48f8_0178dfff",
@@ -77,6 +125,30 @@
       "writtenOn": "2024-01-12T14:39:45Z",
       "side": 1,
       "message": "I think it\u0027s worth adding a comment here and below that explains why we add this condition, like \"deref for sugared pointer access\".",
+      "range": {
+        "startLine": 1488,
+        "startChar": 37,
+        "endLine": 1488,
+        "endChar": 85
+      },
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "882fc3e7_9d35e988",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1488,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-12T15:38:58Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d05b48f8_0178dfff",
       "range": {
         "startLine": 1488,
         "startChar": 37,
