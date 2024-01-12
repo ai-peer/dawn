@@ -2224,6 +2224,42 @@ TEST_P(ShaderTests, FragmentPositionW) {
                                renderPass.color, 32, 16);
 }
 
+// Regression test for crbug.com/dawn/2340. Glsl requires the main enty point to be named "main".
+// So "main" is renamed no matter what "disable_symbol_renaming" is.
+// We need to make sure when the entry point is "main", the renaming is always properly handled for
+// GL backend.
+TEST_P(ShaderTests, EntryPointComputePipeline) {
+    std::string shader = R"(
+@compute @workgroup_size(1) fn main() {
+    _ = 1;
+})";
+
+    wgpu::ComputePipeline pipeline = CreateComputePipeline(shader, "main");
+}
+
+// Regression test for crbug.com/dawn/2340. Glsl requires the main enty point to be named "main".
+// So "main" is renamed no matter what "disable_symbol_renaming" is.
+// We need to make sure when the entry point is "main", the renaming is always properly handled for
+// GL backend.
+TEST_P(ShaderTests, EntryPointRenderPipeline) {
+    std::string shader = R"(
+@vertex
+fn main() -> @builtin(position) vec4f {
+    return vec4f(0.0, 0.0, 0.0, 1.0);
+}
+@fragment
+fn fragmentMain() -> @location(0) vec4f {
+    return vec4f(0.0, 0.0, 0.0, 1.0);
+})";
+    wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader.c_str());
+
+    utils::ComboRenderPipelineDescriptor rpDesc;
+    rpDesc.vertex.module = shaderModule;
+    rpDesc.cFragment.module = shaderModule;
+    rpDesc.cFragment.entryPoint = "fragmentMain";
+    wgpu::RenderPipeline pipeline = device.CreateRenderPipeline(&rpDesc);
+}
+
 DAWN_INSTANTIATE_TEST(ShaderTests,
                       D3D11Backend(),
                       D3D12Backend(),
@@ -2231,6 +2267,8 @@ DAWN_INSTANTIATE_TEST(ShaderTests,
                       MetalBackend(),
                       OpenGLBackend(),
                       OpenGLESBackend(),
+                      OpenGLBackend({"disable_symbol_renaming"}),
+                      OpenGLESBackend({"disable_symbol_renaming"}),
                       VulkanBackend());
 
 }  // anonymous namespace
