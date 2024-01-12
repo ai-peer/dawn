@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8626d54a_19bc3037",
+        "filename": "src/dawn/common/Result.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-12T21:13:56Z",
+      "side": 1,
+      "message": "TBH I\u0027m not convinced that using std::variant instead of a union is better here since we have to do some bookkeeping for mAcquired anyway - the reason being that we need to return an rvalue reference in AcquireSuccess (and same behind the scenes in AcquireError) which means we can\u0027t reset the variant to an \"acquired\" state (say std::monostate). So I\u0027m inclined to use a union here and keep the previous PayloadType to disambiguate between the cases.",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 49
+      },
+      "revId": "93dec3dc286f0033274d141253af65f46f3ecae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
