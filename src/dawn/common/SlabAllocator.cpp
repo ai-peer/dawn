@@ -30,8 +30,8 @@
 #include <algorithm>
 #include <cstdlib>
 #include <limits>
+#include <memory>
 #include <new>
-
 #include "dawn/common/Assert.h"
 #include "dawn/common/Math.h"
 
@@ -44,23 +44,26 @@ SlabAllocatorImpl::IndexLinkNode::IndexLinkNode(Index index, Index nextIndex)
 
 // Slab
 
+SlabAllocatorImpl::Slab::Slab() = default;
 SlabAllocatorImpl::Slab::Slab(char allocation[], IndexLinkNode* head)
-    : allocation(allocation), freeList(head), prev(nullptr), next(nullptr), blocksInUse(0) {}
+    : allocation(allocation), freeList(head) {}
 
 SlabAllocatorImpl::Slab::Slab(Slab&& rhs) = default;
 
-SlabAllocatorImpl::SentinelSlab::SentinelSlab() : Slab(nullptr, nullptr) {}
+// SentinelSlab
 
+SlabAllocatorImpl::SentinelSlab::SentinelSlab() = default;
 SlabAllocatorImpl::SentinelSlab::SentinelSlab(SentinelSlab&& rhs) = default;
 
 SlabAllocatorImpl::SentinelSlab::~SentinelSlab() {
-    Slab* slab = this->next;
-    while (slab != nullptr) {
-        Slab* next = slab->next;
+    // Delete the full linked list.
+    while (next) {
+        Slab* slab = next;
+        slab->Splice();
         DAWN_ASSERT(slab->blocksInUse == 0);
-        // Delete the slab's allocation. The slab is allocated inside slab->allocation.
-        delete[] slab->allocation;
-        slab = next;
+        char* allocation = slab->allocation;
+        slab->~Slab();  // Placement delete.
+        delete allocation;
     }
 }
 
@@ -156,30 +159,22 @@ SlabAllocatorImpl::IndexLinkNode* SlabAllocatorImpl::PopFront(Slab* slab) const 
 }
 
 void SlabAllocatorImpl::SentinelSlab::Prepend(SlabAllocatorImpl::Slab* slab) {
-    if (this->next != nullptr) {
-        this->next->prev = slab;
+    if (next) {
+        next->prev = slab;
     }
     slab->prev = this;
-    slab->next = this->next;
-    this->next = slab;
+    slab->next = next;
+    next = slab;
 }
 
 void SlabAllocatorImpl::Slab::Splice() {
-    SlabAllocatorImpl::Slab* originalPrev = this->prev;
-    SlabAllocatorImpl::Slab* originalNext = this->next;
-
-    this->prev = nullptr;
-    this->next = nullptr;
-
-    DAWN_ASSERT(originalPrev != nullptr);
-
-    // Set the originalNext's prev pointer.
-    if (originalNext != nullptr) {
-        originalNext->prev = originalPrev;
+    DAWN_ASSERT(prev);
+    prev->next = next;
+    if (next) {
+        next->prev = prev;
     }
-
-    // Now, set the originalNext as the originalPrev's new next.
-    originalPrev->next = originalNext;
+    prev = nullptr;
+    next = nullptr;
 }
 
 void* SlabAllocatorImpl::Allocate() {
