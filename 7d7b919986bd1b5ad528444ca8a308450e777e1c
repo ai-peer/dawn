@@ -65,6 +65,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fabdbfd9_f3ef2936",
+        "filename": "src/tint/lang/wgsl/resolver/uniformity.cc",
+        "patchSetId": 3
+      },
+      "lineNbr": 1430,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-12T15:47:47Z",
+      "side": 1,
+      "message": "Comments are great, thanks!",
+      "parentUuid": "dac48eb7_0d002b56",
+      "range": {
+        "startLine": 1430,
+        "startChar": 24,
+        "endLine": 1430,
+        "endChar": 55
+      },
+      "revId": "7d7b919986bd1b5ad528444ca8a308450e777e1c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0b834906_2cf8bebb",
