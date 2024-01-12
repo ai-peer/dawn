@@ -697,6 +697,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "179b28b8_fb183822",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-12T12:49:41Z",
+      "side": 1,
+      "message": "Thanks, Austin! I have no problem with adding a `concurrentRead` flag - we just need to address the subtlety that Peng mentioned in his last comment, which is that Chromium will both need concurrent reads and will need reads of uninitialized textures (but *not* AFAIK concurrent reads *of* uninitialized textures). So Dawn having an invariant of \"concurrent reads flag implies that all reads are to initialized textures\" wouldn\u0027t work. What I would suggest instead is \"concurrent read flag -\u003e concurrent reads of *initialized* textures are allowed instead of being disallowed\", with a read of an uninitialized texture always being traced and treated as an exclusive access just as a write access would be.\n\nAgree about tackling for Windows and Mac now and opening up a broader discussion about what is currently going on in Chromium wrt Vulkan to figure out the best path forward there overall. Clearly we have time on that front.",
+      "parentUuid": "2bae37e5_02d86fda",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
