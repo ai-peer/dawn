@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd98546a_09581ce8",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-12T18:44:13Z",
+      "side": 1,
+      "message": "I can pass both as uniforms, (together with the readPreviousRow etc.)",
+      "parentUuid": "3e333333_d4105cd0",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f946c02d_68777e53",
         "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
         "patchSetId": 12
@@ -66,6 +84,24 @@
       "writtenOn": "2024-01-12T16:25:02Z",
       "side": 1,
       "message": "This seems like a lot of special cases. Would the RG8 and R8 cases be made any simpler by making the dst_buf array\u003cu16\u003e and array\u003cu8\u003e respectively? You might have to templatify the shaders and calling code more, but then you could focus more on texels and less on bytes.",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b707b05c_654bebe5",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 257,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-12T18:44:13Z",
+      "side": 1,
+      "message": "Do we have scalar type u8/u16 in wgsl? I don\u0027t think so. Do we have wgsl extension for that?\nI think we have f16 support in wgsl now. Would that make things easier or trickier? I see `pack4x8snorm` but no `pack2x8snorm`",
+      "parentUuid": "f946c02d_68777e53",
       "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
