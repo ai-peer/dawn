@@ -154,5 +154,64 @@ TEST_F(SpirvReaderTest, Store_VectorComponent) {
 )");
 }
 
+TEST_F(SpirvReaderTest, ShaderInputs) {
+    auto got = Run(R"(
+               OpCapability Shader
+               OpCapability SampleRateShading
+               OpMemoryModel Logical GLSL450
+               OpEntryPoint Fragment %main "main" %coord %colors
+               OpExecutionMode %main OriginUpperLeft
+               OpDecorate %coord BuiltIn FragCoord
+               OpDecorate %colors Location 1
+               OpMemberDecorate %str 1 NoPerspective
+       %void = OpTypeVoid
+        %f32 = OpTypeFloat 32
+      %vec4f = OpTypeVector %f32 4
+    %fn_type = OpTypeFunction %void
+        %str = OpTypeStruct %vec4f %vec4f
+        %u32 = OpTypeInt 32 0
+      %u32_0 = OpConstant %u32 0
+      %u32_1 = OpConstant %u32 1
+
+%_ptr_Input_vec4f = OpTypePointer Input %vec4f
+  %_ptr_Input_str = OpTypePointer Input %str
+      %coord = OpVariable %_ptr_Input_vec4f Input
+     %colors = OpVariable %_ptr_Input_str Input
+
+       %main = OpFunction %void None %fn_type
+ %main_start = OpLabel
+   %access_a = OpAccessChain %_ptr_Input_vec4f %colors %u32_0
+   %access_b = OpAccessChain %_ptr_Input_vec4f %colors %u32_1
+          %a = OpLoad %vec4f %access_a
+          %b = OpLoad %vec4f %access_b
+          %c = OpLoad %vec4f %coord
+        %mul = OpFMul %vec4f %a %b
+        %add = OpFAdd %vec4f %mul %c
+               OpReturn
+               OpFunctionEnd
+)");
+    ASSERT_EQ(got, Success);
+    EXPECT_EQ(got, R"(
+tint_symbol_2 = struct @align(16) {
+  tint_symbol:vec4<f32> @offset(0), @location(1)
+  tint_symbol_1:vec4<f32> @offset(16), @location(2), @interpolate(linear, center)
+}
+
+%main = @fragment func(%2:vec4<f32> [@position], %3:tint_symbol_2):void -> %b1 {
+  %b1 = block {
+    %4:vec4<f32> = access %3, 0u
+    %5:vec4<f32> = access %3, 1u
+    %6:vec4<f32> = mul %4, %5
+    %7:vec4<f32> = add %6, %2
+    ret
+  }
+}
+)");
+}
+
+// TODO: outputs
+// TODO: sample mask
+// TODO: structures
+
 }  // namespace
 }  // namespace tint::spirv::reader
