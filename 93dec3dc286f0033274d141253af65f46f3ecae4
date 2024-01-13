@@ -22,6 +22,30 @@
       },
       "revId": "93dec3dc286f0033274d141253af65f46f3ecae4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0717f431_4cd601ba",
+        "filename": "src/dawn/common/Result.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 244,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-13T00:07:21Z",
+      "side": 1,
+      "message": "That\u0027s fine too. I hadn\u0027t realized it returned an rvalue reference.\n\nYou already wrote the union, but I was going to ask if you think it would be adverse to change the return value to `T` instead of `T\u0026\u0026`. I thought that copies of T would be elided by RVO anyway.",
+      "parentUuid": "8626d54a_19bc3037",
+      "range": {
+        "startLine": 243,
+        "startChar": 0,
+        "endLine": 244,
+        "endChar": 49
+      },
+      "revId": "93dec3dc286f0033274d141253af65f46f3ecae4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
