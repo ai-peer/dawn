@@ -34,37 +34,25 @@
 #                       Do not modify this file directly
 ################################################################################
 
-include(lang/spirv/reader/ast_lower/BUILD.cmake)
-include(lang/spirv/reader/ast_parser/BUILD.cmake)
-include(lang/spirv/reader/common/BUILD.cmake)
-include(lang/spirv/reader/lower/BUILD.cmake)
-include(lang/spirv/reader/parser/BUILD.cmake)
-
-if(TINT_BUILD_SPV_READER)
 ################################################################################
-# Target:    tint_lang_spirv_reader
+# Target:    tint_lang_spirv_reader_lower
 # Kind:      lib
-# Condition: TINT_BUILD_SPV_READER
 ################################################################################
-tint_add_target(tint_lang_spirv_reader lib
-  lang/spirv/reader/reader.cc
-  lang/spirv/reader/reader.h
+tint_add_target(tint_lang_spirv_reader_lower lib
+  lang/spirv/reader/lower/lower.cc
+  lang/spirv/reader/lower/lower.h
+  lang/spirv/reader/lower/shader_io.cc
+  lang/spirv/reader/lower/shader_io.h
 )
 
-tint_target_add_dependencies(tint_lang_spirv_reader lib
+tint_target_add_dependencies(tint_lang_spirv_reader_lower lib
   tint_api_common
   tint_lang_core
   tint_lang_core_constant
+  tint_lang_core_intrinsic
   tint_lang_core_ir
+  tint_lang_core_ir_transform_common
   tint_lang_core_type
-  tint_lang_spirv_reader_common
-  tint_lang_spirv_reader_lower
-  tint_lang_wgsl
-  tint_lang_wgsl_ast
-  tint_lang_wgsl_common
-  tint_lang_wgsl_features
-  tint_lang_wgsl_program
-  tint_lang_wgsl_sem
   tint_utils_containers
   tint_utils_diagnostic
   tint_utils_ice
@@ -80,11 +68,38 @@ tint_target_add_dependencies(tint_lang_spirv_reader lib
   tint_utils_traits
 )
 
-if(TINT_BUILD_SPV_READER)
-  tint_target_add_dependencies(tint_lang_spirv_reader lib
-    tint_lang_spirv_reader_ast_parser
-    tint_lang_spirv_reader_parser
-  )
-endif(TINT_BUILD_SPV_READER)
+################################################################################
+# Target:    tint_lang_spirv_reader_lower_test
+# Kind:      test
+################################################################################
+tint_add_target(tint_lang_spirv_reader_lower_test test
+  lang/spirv/reader/lower/shader_io_test.cc
+)
 
-endif(TINT_BUILD_SPV_READER)
+tint_target_add_dependencies(tint_lang_spirv_reader_lower_test test
+  tint_api_common
+  tint_lang_core
+  tint_lang_core_constant
+  tint_lang_core_intrinsic
+  tint_lang_core_ir
+  tint_lang_core_ir_transform_test
+  tint_lang_core_type
+  tint_lang_spirv_reader_lower
+  tint_utils_containers
+  tint_utils_diagnostic
+  tint_utils_ice
+  tint_utils_id
+  tint_utils_macros
+  tint_utils_math
+  tint_utils_memory
+  tint_utils_reflection
+  tint_utils_result
+  tint_utils_rtti
+  tint_utils_symbol
+  tint_utils_text
+  tint_utils_traits
+)
+
+tint_target_add_external_dependencies(tint_lang_spirv_reader_lower_test test
+  "gtest"
+)
