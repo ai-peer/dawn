@@ -95,6 +95,8 @@ class Parser {
     /// @returns the Tint address space for a SPIR-V storage class
     core::AddressSpace AddressSpace(spv::StorageClass sc) {
         switch (sc) {
+            case spv::StorageClass::Input:
+                return core::AddressSpace::kIn;
             case spv::StorageClass::Function:
                 return core::AddressSpace::kFunction;
             case spv::StorageClass::Private:
@@ -105,6 +107,18 @@ class Parser {
                 TINT_UNIMPLEMENTED()
                     << "unhandled SPIR-V storage class: " << static_cast<uint32_t>(sc);
                 return core::AddressSpace::kUndefined;
+        }
+    }
+
+    /// @param b a SPIR-V BuiltIn
+    /// @returns the Tint builtin value for a SPIR-V BuiltIn decoration
+    core::BuiltinValue Builtin(spv::BuiltIn b) {
+        switch (b) {
+            case spv::BuiltIn::WorkgroupId:
+                return core::BuiltinValue::kWorkgroupId;
+            default:
+                TINT_UNIMPLEMENTED() << "unhandled SPIR-V BuiltIn: " << static_cast<uint32_t>(b);
+                return core::BuiltinValue::kUndefined;
         }
     }
 
@@ -504,6 +518,7 @@ class Parser {
         // Handle decorations.
         std::optional<uint32_t> group;
         std::optional<uint32_t> binding;
+        core::ir::IOAttributes io_attributes;
         for (auto* deco :
              spirv_context_->get_decoration_mgr()->GetDecorationsFor(inst.result_id(), false)) {
             auto d = deco->GetSingleWordOperand(1);
@@ -516,6 +531,9 @@ class Parser {
                 case spv::Decoration::Binding:
                     binding = deco->GetSingleWordOperand(2);
                     break;
+                case spv::Decoration::BuiltIn:
+                    io_attributes.builtin = Builtin(spv::BuiltIn(deco->GetSingleWordOperand(2)));
+                    break;
                 default:
                     TINT_UNIMPLEMENTED() << "unhandled decoration " << d;
                     break;
@@ -525,6 +543,7 @@ class Parser {
             TINT_ASSERT(group && binding);
             var->SetBindingPoint(group.value(), binding.value());
         }
+        var->SetAttributes(std::move(io_attributes));
 
         Emit(var, inst.result_id());
     }
