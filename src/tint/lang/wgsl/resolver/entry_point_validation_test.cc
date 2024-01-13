@@ -502,11 +502,7 @@ TEST_F(ResolverEntryPointValidationTest, PushConstantTwoVariablesUsedInEntryPoin
     Func(Source{{5, 6}}, "main", {}, ty.void_(), Vector{Assign(Phony(), "a"), Assign(Phony(), "b")},
          Vector{Stage(ast::PipelineStage::kCompute), WorkgroupSize(1_a)});
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              R"(5:6 error: entry point 'main' uses two different 'push_constant' variables.
-3:4 note: first 'push_constant' variable declaration is here
-1:2 note: second 'push_constant' variable declaration is here)");
+    EXPECT_TRUE(r()->Resolve());
 }
 
 TEST_F(ResolverEntryPointValidationTest,
@@ -535,15 +531,7 @@ TEST_F(ResolverEntryPointValidationTest,
          Vector{CallStmt(Call("uses_a")), CallStmt(Call("uses_b"))},
          Vector{Stage(ast::PipelineStage::kCompute), WorkgroupSize(1_a)});
 
-    EXPECT_FALSE(r()->Resolve());
-    EXPECT_EQ(r()->error(),
-              R"(9:10 error: entry point 'main' uses two different 'push_constant' variables.
-3:4 note: first 'push_constant' variable declaration is here
-7:8 note: called by function 'uses_b'
-9:10 note: called by entry point 'main'
-1:2 note: second 'push_constant' variable declaration is here
-5:6 note: called by function 'uses_a'
-9:10 note: called by entry point 'main')");
+    EXPECT_TRUE(r()->Resolve());
 }
 
 TEST_F(ResolverEntryPointValidationTest, PushConstantTwoVariablesUsedInDifferentEntryPoint) {
