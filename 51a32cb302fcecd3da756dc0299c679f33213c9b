@@ -16,6 +16,23 @@
       "message": "Updated to use the cpp-attribute pattern. PTAL",
       "revId": "51a32cb302fcecd3da756dc0299c679f33213c9b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d417d8_528454c7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-13T09:45:47Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "51a32cb302fcecd3da756dc0299c679f33213c9b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
