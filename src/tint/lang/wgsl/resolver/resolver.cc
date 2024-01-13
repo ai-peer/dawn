@@ -599,7 +599,8 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
 
     if (is_global) {
         bool has_io_address_space = sem->AddressSpace() == core::AddressSpace::kIn ||
-                                    sem->AddressSpace() == core::AddressSpace::kOut;
+                                    sem->AddressSpace() == core::AddressSpace::kOut ||
+                                    sem->AddressSpace() == core::AddressSpace::kPushConstant;
 
         std::optional<uint32_t> group, binding;
         for (auto* attribute : var->attributes) {
