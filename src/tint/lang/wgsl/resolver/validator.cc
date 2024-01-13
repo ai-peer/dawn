@@ -2845,7 +2845,8 @@ bool Validator::CheckNoMultipleModuleScopeVarsOfAddressSpace(sem::Function* entr
 
     auto check = [&](const sem::Function* func, const sem::Function* ep) {
         for (auto* var : func->DirectlyReferencedGlobals()) {
-            if (var->AddressSpace() != space || var == seen_var) {
+            if (var->AddressSpace() != space ||
+                var->AddressSpace() == core::AddressSpace::kPushConstant || var == seen_var) {
                 continue;
             }
 
