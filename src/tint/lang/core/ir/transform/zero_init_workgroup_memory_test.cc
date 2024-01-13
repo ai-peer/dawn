@@ -102,6 +102,48 @@ TEST_F(IR_ZeroInitWorkgroupMemoryTest, WorkgroupVarUnused) {
     EXPECT_EQ(expect, str());
 }
 
+TEST_F(IR_ZeroInitWorkgroupMemoryTest, NonWorkgroupVar) {
+    auto* var = b.Var("pvar", ty.ptr(private_, ty.bool_()));
+    mod.root_block->Append(var);
+
+    auto* func = MakeEntryPoint("main", 1, 1, 1);
+    b.Append(func->Block(), [&] {  //
+        b.Load(var);
+        b.Return(func);
+    });
+
+    auto* src = R"(
+%b1 = block {  # root
+  %pvar:ptr<private, bool, read_write> = var
+}
+
+%main = @compute @workgroup_size(1, 1, 1) func():void -> %b2 {
+  %b2 = block {
+    %3:bool = load %pvar
+    ret
+  }
+}
+)";
+    EXPECT_EQ(src, str());
+
+    auto* expect = R"(
+%b1 = block {  # root
+  %pvar:ptr<private, bool, read_write> = var
+}
+
+%main = @compute @workgroup_size(1, 1, 1) func():void -> %b2 {
+  %b2 = block {
+    %3:bool = load %pvar
+    ret
+  }
+}
+)";
+
+    Run(ZeroInitWorkgroupMemory);
+
+    EXPECT_EQ(expect, str());
+}
+
 TEST_F(IR_ZeroInitWorkgroupMemoryTest, ScalarBool) {
     auto* var = MakeVar("wgvar", ty.bool_());
 
