@@ -34,12 +34,11 @@
 #include <utility>
 
 #include "dawn/common/Assert.h"
-#include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/common/RefCounted.h"
 
 namespace dawn {
-class Mutex : public RefCounted, NonCopyable {
+class Mutex : public RefCounted {
   public:
     template <typename MutexRef>
     struct AutoLockBase : NonMovable {

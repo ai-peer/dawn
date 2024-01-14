@@ -32,6 +32,8 @@
 #include <cstdint>
 #include <type_traits>
 
+#include "dawn/common/NonCopyable.h"
+
 namespace dawn {
 
 namespace detail {
@@ -59,7 +61,29 @@ class RefCount {
     std::atomic<uint64_t> mRefCount;
 };
 
+<<<<<<< PATCH SET (d266fc Make RefCounted class NonMovable and NonCopyable)
+// Specialize template method declare for RefCountStartsFromZero = false
+extern template RefCountBase<false>::RefCountBase(uint64_t payload);
+extern template uint64_t RefCountBase<false>::GetValueForTesting() const;
+extern template uint64_t RefCountBase<false>::GetPayload() const;
+extern template bool RefCountBase<false>::Increment();
+extern template bool RefCountBase<false>::TryIncrement();
+extern template bool RefCountBase<false>::Decrement();
+
+// Specialize template declare for RefCountStartsFromZero = true
+extern template RefCountBase<true>::RefCountBase(uint64_t payload);
+extern template uint64_t RefCountBase<true>::GetValueForTesting() const;
+extern template uint64_t RefCountBase<true>::GetPayload() const;
+extern template bool RefCountBase<true>::Increment();
+extern template bool RefCountBase<true>::TryIncrement();
+extern template bool RefCountBase<true>::Decrement();
+
+using RefCount = RefCountBase</*RefCountStartsFromZero=*/false>;
+
+class RefCounted : public NonMovable {
+=======
 class RefCounted {
+>>>>>>> BASE      (33ffb3 Roll ANGLE from 126d7b10bf4f to 572323ccbba5 (9 revisions))
   public:
     explicit RefCounted(uint64_t payload = 0);
 
