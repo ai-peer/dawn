@@ -32,6 +32,8 @@
 #include <cstdint>
 #include <type_traits>
 
+#include "dawn/common/NonCopyable.h"
+
 namespace dawn {
 
 namespace detail {
@@ -80,7 +82,7 @@ extern template bool RefCountBase<true>::Decrement();
 
 using RefCount = RefCountBase</*RefCountStartsFromZero=*/false>;
 
-class RefCounted {
+class RefCounted : public NonMovable {
   public:
     explicit RefCounted(uint64_t payload = 0);
 
