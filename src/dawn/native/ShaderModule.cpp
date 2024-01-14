@@ -1313,7 +1313,11 @@ const Ref<ShaderModuleBase::TintData>& ShaderModuleBase::GetTintData() {
 const tint::Program* ShaderModuleBase::GetTintProgram() const {
     std::lock_guard<std::mutex> guard(mTintDataMutex);
 
+    // GetTintProgram() could be called for compiling shader on background thread, and the mTintData
+    // could be null due losing all external references.
     Ref<TintData> tintData = mTintDataWeakRef.Promote();
+    // mTintDataWeakRef.Promote() should always success, because pipeline should keep a reference of
+    // mTintData until shader compilation is done.
     DAWN_ASSERT(tintData.Get());
     return tintData->mTintProgram.get();
 }

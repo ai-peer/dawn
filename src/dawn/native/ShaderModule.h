@@ -339,6 +339,8 @@ class ShaderModuleBase : public ApiObjectBase,
     const Ref<TintData>& GetTintData();
     const tint::Program* GetTintProgram() const;
 
+    const TintData* GetTintDataForTesting() const { return mTintData.Get(); }
+
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 
     void InjectCompilationMessages(std::unique_ptr<OwnedCompilationMessages> compilationMessages);
