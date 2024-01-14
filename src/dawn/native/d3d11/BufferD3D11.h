@@ -86,7 +86,7 @@ class Buffer final : public BufferBase {
                            Buffer* destination,
                            uint64_t destinationOffset);
 
-    class ScopedMap : public NonCopyable {
+    class ScopedMap : dawn::NonCopyable {
       public:
         // Map buffer and return a ScopedMap object. If the buffer is not mappable,
         // scopedMap.GetMappedData() will return nullptr.

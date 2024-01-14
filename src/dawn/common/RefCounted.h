@@ -32,6 +32,8 @@
 #include <cstdint>
 #include <type_traits>
 
+#include "dawn/common/NonCopyable.h"
+
 namespace dawn {
 
 namespace detail {
@@ -59,7 +61,7 @@ class RefCount {
     std::atomic<uint64_t> mRefCount;
 };
 
-class RefCounted {
+class RefCounted : public NonMovable {
   public:
     explicit RefCounted(uint64_t payload = 0);
 
