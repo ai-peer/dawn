@@ -215,6 +215,11 @@ TEST_P(ShaderModuleTests, CachedShaderAndRenderPipeline) {
     }
 
     if (!SupportsCreatePipelineAsync()) {
+        do {
+            WaitABit();
+        } while (!task.isCompleted);
+
+        EXPECT_TRUE(task.renderPipeline);
         return;
     }
 
@@ -238,6 +243,8 @@ TEST_P(ShaderModuleTests, CachedShaderAndRenderPipeline) {
     do {
         WaitABit();
     } while (!task.isCompleted);
+
+    EXPECT_TRUE(task.renderPipeline);
 
     // When the pipeline compilation is done, the tintData refcount should be 1.
     EXPECT_EQ(vsTintData->GetRefCountForTesting(), 1ull);
@@ -282,6 +289,11 @@ TEST_P(ShaderModuleTests, CachedShaderAndComputePipeline) {
         EXPECT_EQ(shaderModule->GetTintDataForTesting()->GetRefCountForTesting(), 2ull);
     } else {
         EXPECT_EQ(shaderModule->GetTintDataForTesting()->GetRefCountForTesting(), 1ull);
+        do {
+            WaitABit();
+        } while (!task.isCompleted);
+
+        EXPECT_TRUE(task.computePipeline);
         return;
     }
 
@@ -297,6 +309,8 @@ TEST_P(ShaderModuleTests, CachedShaderAndComputePipeline) {
     do {
         WaitABit();
     } while (!task.isCompleted);
+
+    EXPECT_TRUE(task.computePipeline);
 
     // When the pipeline compilation is done, the tintData refcount should be 1.
     EXPECT_EQ(tintData->GetRefCountForTesting(), 1ull);
