@@ -92,6 +92,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd99feee_0d1bc6f9",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-14T09:02:33Z",
+      "side": 1,
+      "message": "I tried calling ID3D11DevicedContext::Flush() in CommandRecordingContext::ExecuteCommandList()\". Unfortunately it didn\u0027t make a difference.\n\nI also tried calling [map](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/BufferD3D11.cpp;drc\u003d16b3c288a3144342908f6b8b7aede057c40528bd;l\u003d272) with \"D3D11_MAP_FLAG_DO_NOT_WAIT\". It never returned \"DXGI_ERROR_WAS_STILL_DRAWING\". It seems D3D11 indeed doesn\u0027t know when resources are finished being used. With this CL in dawn alone, and without the the full-size write [CL](https://skia-review.googlesource.com/c/skia/+/798636) in skia, which only involves a 256 uniform buffer map write, MM can only score 1869 instead of 2379. That\u0027s to say, map/unmap a staging buffer is actually a perf key point here. \nCurrently graphite updates vertex/uniform buffers in a way as mentioned in \"Use case 1\". That\u0027s not the recommended way for D3D11. Ideally we should use dynamic buffers and map with \"D3D11_MAP_WRITE_DISCARD/D3D11_MAP_WRITE_NO_OVERWRITE\". Maybe we can try that by enabling and extending \"Feature::BufferMapExtendedUsages\" on Win as [Metal](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/BackendMTL.mm;drc\u003d73d42978dc9ec38c13f6af91e90a38e7ab1b59b2;l\u003d620).\n\nMM doesn\u0027t involve texture uploads for a very large size of data, like 720p video. So the urgency to use a shader blit to implement CopyB2T haven\u0027t come up yet. Sooner or later we will need to address that.",
+      "parentUuid": "940511b6_3492b294",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
