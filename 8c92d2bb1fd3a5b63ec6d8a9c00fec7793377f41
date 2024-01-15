@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "65587c9b_cd72bed1",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-15T15:09:16Z",
+      "side": 1,
+      "message": "Whoops. Corentin, did you mean to CR+2 or would you like me to make the move that you outlined in this CL? My preference would be to make the move in the CL where I move the rest of the MTLTexture creation code from TextureMTL to SharedTextureMemoryMTL, but happy to do it here if you prefer.",
+      "revId": "8c92d2bb1fd3a5b63ec6d8a9c00fec7793377f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bb07333_7e3d4b7e",
