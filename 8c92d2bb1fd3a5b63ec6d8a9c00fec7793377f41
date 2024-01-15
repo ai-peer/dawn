@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5774a22e_1eaafb9d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-15T15:11:44Z",
+      "side": 1,
+      "message": "Since you\u0027ll revisit it soon, I think it\u0027s good as is, thanks!",
+      "parentUuid": "65587c9b_cd72bed1",
+      "revId": "8c92d2bb1fd3a5b63ec6d8a9c00fec7793377f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bb07333_7e3d4b7e",
