@@ -34,6 +34,24 @@
       "parentUuid": "2676ce4a_77dc41bd",
       "revId": "9d172f918283126e2df738263e867a5d150cb642",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "490c6984_5a9c60ff",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_wgsl_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-15T20:31:29Z",
+      "side": 1,
+      "message": "There was a reason for `Everything()` (see diff), but you\u0027re right it wasn\u0027t a Good Reason™.\nFixed.",
+      "parentUuid": "beeca0af_141704f0",
+      "revId": "9d172f918283126e2df738263e867a5d150cb642",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
