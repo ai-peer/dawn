@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f64fbdd0_2d3cdc44",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-15T22:11:58Z",
+      "side": 1,
+      "message": "Austin, do I need to do something to invalidate the existing shader cache that was saved without this option? I assume we don\u0027t need to for official Chrome versions, but what about for devs?",
+      "revId": "c4a5b4e3319accdd807215c0b12f4864d259de76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
