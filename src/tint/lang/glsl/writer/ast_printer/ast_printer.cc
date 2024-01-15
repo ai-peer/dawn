@@ -67,6 +67,7 @@
 #include "src/tint/lang/wgsl/ast/transform/expand_compound_assignment.h"
 #include "src/tint/lang/wgsl/ast/transform/manager.h"
 #include "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.h"
+#include "src/tint/lang/wgsl/ast/transform/offset_first_index.h"
 #include "src/tint/lang/wgsl/ast/transform/preserve_padding.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_initializers_to_let.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_side_effects_to_decl.h"
@@ -235,6 +236,7 @@ SanitizedResult Sanitize(const Program& in,
     manager.Add<ast::transform::PromoteInitializersToLet>();
     manager.Add<ast::transform::AddEmptyEntryPoint>();
     manager.Add<ast::transform::AddBlockAttribute>();
+    manager.Add<ast::transform::OffsetFirstIndex>();
 
     // Std140 must come after PromoteSideEffectsToDecl and before SimplifyPointers.
     manager.Add<ast::transform::Std140>();
