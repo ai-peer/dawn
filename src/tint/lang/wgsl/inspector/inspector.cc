@@ -1154,6 +1154,7 @@ std::vector<Inspector::LevelSampleInfo> Inspector::GetInfoForTexturesUsedInNumLe
             }
         }
     }
+
     return res;
 }
 
