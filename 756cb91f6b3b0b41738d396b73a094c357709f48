@@ -733,6 +733,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4e24e52d_c458df2b",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-15T13:30:24Z",
+      "side": 1,
+      "message": "Thanks! I had mistakenly understood that you were thinking of passing an \"are concurrent reads allowed\" configuration flag when *creating* the SharedTextureMemory object and allowing uninitialized reads only if that flag wasn\u0027t set.\n\nIn any case, we had an illuminating conversation on #gpu-shared-images on Friday. Chromium disallows reads of uninitialized textures at the SI level, e.g. for Dawn this happens here [1] (AllowUnclearedAccess is always set to kNo for reads). So things are fine from that POV. (Vasiliy also mentioned that we can all have a discussion about Vulkan in this context when the time comes to make sure that we\u0027re all on the right page and figure out the way forward there).\n\nHowever, Vasiliy reminded us that we currently basically always set write usages on Dawn textures created for Graphite [2][3][4]. I think we\u0027ll have to solve [5] to get the benefits of concurrent read access.\n\nPeng, WDYT?\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/shared_image_representation.cc;l\u003d799-802\n[2] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/shared_image_format_service_utils.cc;drc\u003d98a01e556dc3c775db2a129120504518b3e9b7e0;l\u003d517\n[3] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/skia_graphite_dawn_image_representation.cc;l\u003d5?q\u003dgraphite_dawn_ima\u0026sq\u003d\u0026ss\u003dchromium\n[4] https://source.chromium.org/chromium/chromium/src/+/main:gpu/command_buffer/service/shared_image/skia_graphite_dawn_image_representation.cc;l\u003d206-207?q\u003dgraphite_dawn_ima\u0026ss\u003dchromium\n[5] https://bugs.chromium.org/p/chromium/issues/detail?id\u003d1451784",
+      "parentUuid": "a3cf92ba_6d85f25e",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
