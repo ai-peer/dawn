@@ -769,6 +769,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3249c117_8ec24240",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-15T14:09:00Z",
+      "side": 1,
+      "message": "I agree. For this CL, I will add `concurrentRead` flag in  `SharedTextureMemoryBeginAccessDescriptor`, and verify it in BeginAccess().\n\nFor D3D and Metal (maybe GL as well), the CL will check it and `initialized`, and report error if concurrentRead on an uninitialized texture.\n\nFor Vulkan, the CL will always report error if `concurrentRead` is true for now, and will have a separate CL to verify texture layout and enable concurrentRead for vulkan.",
+      "parentUuid": "179b28b8_fb183822",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
