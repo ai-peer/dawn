@@ -110,6 +110,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "62c6b417_78a0c997",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-15T14:02:02Z",
+      "side": 1,
+      "message": "It makes sense that map() never returned `D3D11_MAP_FLAG_DO_NOT_WAIT` with `D3D11_MAP_FLAG_DO_NOT_WAIT`, since graphite tracks usage of staging buffers, and only reuses them when they are not used by GPU.\n\nFor `D3D11_MAP_WRITE_DISCARD/D3D11_MAP_WRITE_NO_OVERWRITE`, do you mean map uniform or vertex buffers directly without using staging buffers? It should improve MotionMark Images scores, but the test still uses map/unmap for uploading data to textures heavily. I think we can have both emulated staging buffer and  `Feature::BufferMapExtendedUsages` for d3d11. Maybe it can improve perform further.",
+      "parentUuid": "bd99feee_0d1bc6f9",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
