@@ -787,6 +787,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "256a426e_dd7c72c9",
+        "filename": "src/dawn/native/Texture.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 114,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-15T14:13:51Z",
+      "side": 1,
+      "message": "Thank you, that\u0027d work! Note that we might need to do some barrier stuff in D3D12 as well, or at least double check / ASSERT that the correct stuff is done. We can have a TODO somewhere for now.",
+      "parentUuid": "3249c117_8ec24240",
+      "revId": "756cb91f6b3b0b41738d396b73a094c357709f48",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7cf56ea9_e59db828",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 4
