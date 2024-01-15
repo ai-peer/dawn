@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "90f74384_f4d7db57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-15T16:02:29Z",
+      "side": 1,
+      "message": "Thinking about this with Ben, I believe there is a more general fix needed here. Any name that is in the GLSL keywords would cause an issue here due to renaming. So, the correct fix is to _always_ check the renammer map for the entry point, if it\u0027s renamed, use the new name otherwise use the old name.",
+      "revId": "4cc0c55de90be45d90f3a6f19eb9839f08a32324",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1fe0a441_a3bf2f92",
