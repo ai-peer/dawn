@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7827209_ccd6af6c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-15T15:25:29Z",
+      "side": 1,
+      "message": "Hi Corentin,\nCould you please take a look?\n\nI think you will suggest me to open a bug for every DanglingUntriaged. There are probably too many for individual bugs. Do you want me to open a single general bug where I can assign them all? Or something else?\n\nA lot are easy to fix (raw_ptr \u003d\u003e unique_ptr, reorder members, etc...). I refrain myself from fixing them here to avoid mixing unrelated kind of patches. I think I will do some in follow-ups.",
+      "revId": "d3e0707c1b34140a7302af46820adbf7244df631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
