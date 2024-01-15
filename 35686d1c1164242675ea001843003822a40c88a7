@@ -50,6 +50,24 @@
       "message": "Why would the name be empty?",
       "revId": "35686d1c1164242675ea001843003822a40c88a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e7963f4a_1c0118fa",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-15T20:39:08Z",
+      "side": 1,
+      "message": "See line 1100 below. If there are no entry points in the program we pass in `\"\"` as the entry point name in order to convert the entire file (which as no entry points) to GLSL. But that also means there would be no entry points returned by Tint to validate against.",
+      "parentUuid": "088c2bdf_e1211851",
+      "revId": "35686d1c1164242675ea001843003822a40c88a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
