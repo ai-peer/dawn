@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2676ce4a_77dc41bd",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access_wgsl_test.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-15T18:21:51Z",
+      "side": 1,
+      "message": "Why `Everything()`? Isn\u0027t the point of the transform that the generated code /won\u0027t/ require the feature, in which case we actually want these tests to fail if generated code uses it?",
+      "revId": "9d172f918283126e2df738263e867a5d150cb642",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
