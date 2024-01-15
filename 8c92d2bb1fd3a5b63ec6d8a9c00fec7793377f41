@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2641e608_9470690f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-15T15:02:34Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "8c92d2bb1fd3a5b63ec6d8a9c00fec7793377f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9bb07333_7e3d4b7e",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-01-15T14:29:16Z",
       "side": 1,
       "message": "Do we expect to revisit this code? The mention of follow-up change should likely be removed at some point.\n\nIMHO we could move both this and kIOSurfaceSupportedUsages (in SharedTextureMemoryMTL.mm) to be next to one another, for example in SharedTextureMemoryMTL.h and then just have a comment explaining that there should be no cost to specifying all the usages and that we specify all of them so that the user of the STM can choose whatever it wants.",
+      "revId": "8c92d2bb1fd3a5b63ec6d8a9c00fec7793377f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bbe2256_5bf24bc2",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-15T15:02:34Z",
+      "side": 1,
+      "message": "Thanks! I am indeed going to move this code into SharedTextureMemoryMTL in a followup change where I move the MTLTexture creation into SharedTextureMemoryMTL. and will also get rid of the \"upcoming change\" ref in the CL that has SharedTextureMemoryMTL cache the MTLTexture objects.",
+      "parentUuid": "9bb07333_7e3d4b7e",
       "revId": "8c92d2bb1fd3a5b63ec6d8a9c00fec7793377f41",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
