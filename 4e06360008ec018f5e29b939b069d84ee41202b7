@@ -128,6 +128,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af35d7b7_d25dbe02",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-15T15:52:18Z",
+      "side": 1,
+      "message": "Can we have a different CL that adds the `D3D11_MAP_FLAG_DO_NOT_WAIT` and the `Flush()` in the recording context? This would be an improvement for users of Dawn because it should guarantee that MapAsync() never blocks things, and that `DXGI_ERROR_WAS_STILL_DRAWING` never happens because the flush should make sure fences are signaled correctly wrt. to what the D3D11 driver sees.\n\n\u003e  Ideally we should use dynamic buffers and map with \"D3D11_MAP_WRITE_DISCARD/D3D11_MAP_WRITE_NO_OVERWRITE\".\n\nIMHO we shouldn\u0027t do that, because even though it is recommended to avoid developers messing up, ultimately what happens is that the driver should be handling its own buffer renaming and staging internally. D3D12 goes away with it, which shows that it isn\u0027t something necessary for the hardware, just something that the driver took care off for the application in D3D11.\n\n+CC Rafael, what are the costs associated with mapping buffer with `D3D11_MAP_FLAG_DO_NOT_WAIT` compared to an `UpdateSubresource`?\n\nIf we really can\u0027t understand where the overhead comes from we can go with an approach like this, but we\u0027ll eventually need to revisit with something that\u0027s a better heuristic and more consistent.",
+      "parentUuid": "62c6b417_78a0c997",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
