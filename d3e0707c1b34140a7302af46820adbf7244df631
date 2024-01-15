@@ -105,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c905fd7_57a79bd8",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-15T15:51:48Z",
+      "side": 1,
+      "message": "Ah sorry, I missed that. Yes a single bug seems good.",
+      "parentUuid": "910023cd_e9191698",
+      "revId": "d3e0707c1b34140a7302af46820adbf7244df631",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9401444e_b4b6a33e",
