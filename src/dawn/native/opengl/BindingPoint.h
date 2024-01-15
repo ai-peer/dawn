@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,35 +25,29 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_TINT_LANG_GLSL_WRITER_OUTPUT_H_
-#define SRC_TINT_LANG_GLSL_WRITER_OUTPUT_H_
+#ifndef SRC_DAWN_NATIVE_OPENGL_BINDPOINT_H_
+#define SRC_DAWN_NATIVE_OPENGL_BINDPOINT_H_
 
-#include <string>
+#include <unordered_map>
 #include <utility>
-#include <vector>
 
-#include "src/tint/lang/wgsl/ast/pipeline_stage.h"
+#include "src/tint/api/common/binding_point.h"
 
-namespace tint::glsl::writer {
+namespace dawn::native::opengl {
 
-/// The output produced when generating GLSL.
-struct Output {
-    /// Constructor
-    Output();
-
-    /// Destructor
-    ~Output();
-
-    /// Copy constructor
-    Output(const Output&);
-
-    /// The generated GLSL.
-    std::string glsl = "";
-
-    /// The list of entry points in the generated GLSL.
-    std::vector<std::pair<std::string, ast::PipelineStage>> entry_points;
+/// Indicate the type of field for each entry to push.
+enum class BindPointFunction : uint8_t {
+    /// The number of MIP levels of the bound texture view.
+    kTextureNumLevels,
+    /// The number of samples per texel of the bound multi-sampled texture.
+    kTextureNumSamples,
 };
 
-}  // namespace tint::glsl::writer
+/// Records the field and the byte offset of the data to push in the internal uniform buffer.
+using FunctionAndOffset = std::pair<BindPointFunction, uint32_t>;
+/// Maps from binding point to data entry with the information to populate the data.
+using BindingPointToFunctionAndOffset = std::unordered_map<tint::BindingPoint, FunctionAndOffset>;
 
-#endif  // SRC_TINT_LANG_GLSL_WRITER_OUTPUT_H_
+}  // namespace dawn::native::opengl
+
+#endif  // SRC_DAWN_NATIVE_OPENGL_BINDPOINT_H_
