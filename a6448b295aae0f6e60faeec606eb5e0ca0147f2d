@@ -1,0 +1,124 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69a27f95_66c07ae7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:56:09Z",
+      "side": 1,
+      "message": "+2 all nits. Looks great!",
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "95a4b25a_bf92c8c7",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:56:09Z",
+      "side": 1,
+      "message": "nit: `object`. Source is too overloaded.",
+      "range": {
+        "startLine": 104,
+        "startChar": 14,
+        "endLine": 104,
+        "endChar": 20
+      },
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf56d5b0_ddfb969d",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:56:09Z",
+      "side": 1,
+      "message": "nit: There\u0027s no recursion here. Could be larger.",
+      "range": {
+        "startLine": 108,
+        "startChar": 37,
+        "endLine": 108,
+        "endChar": 38
+      },
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "669f2694_eafc45c9",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:56:09Z",
+      "side": 1,
+      "message": "übernit: I think this can be shortened to:\n\n```suggestion\n        auto* access_1 \u003d b.Access\u003cptr\u003cfunction, u32\u003e\u003e(ec, 2_u);\n```",
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "72c63a29_fc244748",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:56:09Z",
+      "side": 1,
+      "message": "übernit:\n\n```suggestion\n        auto* add \u003d b.Add\u003cu32\u003e(load, 1_u);\n```",
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7077082c_edfe8947",
+        "filename": "src/tint/lang/spirv/reader/reader_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:56:09Z",
+      "side": 1,
+      "message": "I could be wrong, but I think this can be simplified to `EXPECT_EQ(got, R\"(`",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 25
+      },
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
