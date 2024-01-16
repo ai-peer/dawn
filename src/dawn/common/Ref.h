@@ -49,7 +49,20 @@ struct RefCountedTraits {
     static void Release(T* value) { value->Release(); }
 };
 
+template <typename T>
+struct APIRefCountedTraits {
+    static constexpr T* kNullValue = nullptr;
+    static void Reference(T* value) { value->APIReference(); }
+    static void Release(T* value) { value->APIRelease(); }
+};
+
 }  // namespace detail
+
+template <typename T>
+class APIRef : public RefBase<T*, detail::APIRefCountedTraits<T>> {
+  public:
+    using RefBase<T*, detail::APIRefCountedTraits<T>>::RefBase;
+};
 
 template <typename T>
 class Ref : public RefBase<T*, detail::RefCountedTraits<T>> {
