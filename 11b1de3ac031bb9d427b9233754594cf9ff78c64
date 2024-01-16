@@ -99,6 +99,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4465828d_615c71f4",
+        "filename": "src/tint/lang/core/ir/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T21:45:26Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd4df9ca_7d86978a",
+      "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6fc1c302_31f4ea38",
@@ -112,6 +130,24 @@
       "writtenOn": "2024-01-16T19:45:55Z",
       "side": 1,
       "message": "Maybe move this up to 762 so it directly follows the case which the code mimics? Makes it obvious that it fails in one and passes with the cap.",
+      "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9199ed2b_5eb6db9e",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T21:45:26Z",
+      "side": 1,
+      "message": "Done and also added one for the \"via matrix\" version for good measure.",
+      "parentUuid": "6fc1c302_31f4ea38",
       "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
