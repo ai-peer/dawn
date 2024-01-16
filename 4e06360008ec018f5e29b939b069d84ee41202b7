@@ -182,6 +182,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bd516510_af03f821",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-16T18:53:46Z",
+      "side": 1,
+      "message": "In my understanding, the reason why CopyBufferToTexture with the current implementation is slow is because it is implemented with a simple and easy workaround that we knew would be slow. Performing the copy itself maps the source buffer, and then performs a CPU upload of the texture data. So of course our current fence approach does not prevent stalls in GPU execution, because our fence only controls when we map for writing into the original source buffer - but this is a separate internal map that occurs for writing into the destination buffer.\nWith the current workaround, the code will write into the source buffer, then immediately map it, and upload to the destination texture. Since we map immediately after writing, it is not surprising that a GPU wait is involved.\n\nI\u0027m confused about why we are trying this system memory approach, because as Corentin mentioned, it diverges from the design we discussed previously, and worked with Microsoft to identify what we think the best approach is - which is to use a shader blit to do the texture-to-buffer copy. Did we try this? I would like us to investigate this approach first.\nNote that we already have a blit path for various texture formats implemented [here](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/CommandEncoder.cpp;l\u003d1722;drc\u003de036a8e7200d41afa08898ccede1324355ed5741;bpv\u003d0;bpt\u003d1); you may need to expand it.",
+      "parentUuid": "2fb93077_56cb1350",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
