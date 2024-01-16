@@ -80,12 +80,7 @@ Transform::ApplyResult OffsetFirstIndex::Apply(const Program& src,
         return SkipTransform;
     }
 
-    int32_t first_vertex_location = -1;
-    int32_t first_instance_location = -1;
-    if (const Config* cfg = inputs.Get<Config>()) {
-        first_vertex_location = cfg->first_vertex_location;
-        first_instance_location = cfg->first_instance_location;
-    }
+    const Config* cfg = inputs.Get<Config>();
 
     ProgramBuilder b;
     program::CloneContext ctx{&b, &src, /* auto_clone_symbols */ true};
@@ -105,13 +100,14 @@ Transform::ApplyResult OffsetFirstIndex::Apply(const Program& src,
             for (auto* attr : var->attributes) {
                 if (auto* builtin_attr = attr->As<BuiltinAttribute>()) {
                     core::BuiltinValue builtin = src.Sem().Get(builtin_attr)->Value();
-                    if (builtin == core::BuiltinValue::kVertexIndex && first_vertex_location >= 0) {
+                    if (builtin == core::BuiltinValue::kVertexIndex &&
+                        cfg->first_vertex_location >= 0) {
                         auto* sem_var = ctx.src->Sem().Get(var);
                         builtin_vars.emplace(sem_var, kFirstVertexName);
                         has_vertex_index = true;
                     }
                     if (builtin == core::BuiltinValue::kInstanceIndex &&
-                        first_instance_location >= 0) {
+                        cfg->first_instance_location >= 0) {
                         auto* sem_var = ctx.src->Sem().Get(var);
                         builtin_vars.emplace(sem_var, kFirstInstanceName);
                         has_instance_index = true;
@@ -123,12 +119,14 @@ Transform::ApplyResult OffsetFirstIndex::Apply(const Program& src,
             for (auto* attr : member->attributes) {
                 if (auto* builtin_attr = attr->As<BuiltinAttribute>()) {
                     core::BuiltinValue builtin = src.Sem().Get(builtin_attr)->Value();
-                    if (builtin == core::BuiltinValue::kVertexIndex) {
+                    if (builtin == core::BuiltinValue::kVertexIndex &&
+                        cfg->first_vertex_location >= 0) {
                         auto* sem_mem = ctx.src->Sem().Get(member);
                         builtin_members.emplace(sem_mem, kFirstVertexName);
                         has_vertex_index = true;
                     }
-                    if (builtin == core::BuiltinValue::kInstanceIndex) {
+                    if (builtin == core::BuiltinValue::kInstanceIndex &&
+                        cfg->first_instance_location >= 0) {
                         auto* sem_mem = ctx.src->Sem().Get(member);
                         builtin_members.emplace(sem_mem, kFirstInstanceName);
                         has_instance_index = true;
@@ -140,13 +138,13 @@ Transform::ApplyResult OffsetFirstIndex::Apply(const Program& src,
 
     if (has_vertex_index || has_instance_index) {
         // Add push_constant variables
-        if (has_vertex_index && first_vertex_location >= 0) {
+        if (has_vertex_index) {
             b.GlobalVar(kFirstVertexName, b.ty.u32(), core::AddressSpace::kPushConstant,
-                        b.Location(u32(first_vertex_location)));
+                        b.Location(u32(cfg->first_vertex_location)));
         }
-        if (has_instance_index && first_instance_location >= 0) {
+        if (has_instance_index) {
             b.GlobalVar(kFirstInstanceName, b.ty.u32(), core::AddressSpace::kPushConstant,
-                        b.Location(u32(first_instance_location)));
+                        b.Location(u32(cfg->first_instance_location)));
         }
 
         // Fix up all references to the builtins with the offsets
