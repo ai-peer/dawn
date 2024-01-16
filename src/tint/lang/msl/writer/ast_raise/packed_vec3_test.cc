@@ -502,7 +502,7 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, ArrayOfVec3_ReadArray) {
+TEST_F(PackedVec3Test, ArrayOfVec3_ReadArray_Small) {
     auto* src = R"(
 @group(0) @binding(0) var<storage> arr : array<vec3<f32>, 4>;
 
@@ -521,13 +521,52 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
+  result[0] = vec3<f32>(in[0].elements);
+  result[1] = vec3<f32>(in[1].elements);
+  result[2] = vec3<f32>(in[2].elements);
+  result[3] = vec3<f32>(in[3].elements);
+  return result;
+}
+
+@group(0) @binding(0) var<storage> arr : array<tint_packed_vec3_f32_array_element, 4u>;
+
+fn f() {
+  let x = tint_unpack_vec3_in_composite(arr);
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, ArrayOfVec3_ReadArray_Large) {
+    auto* src = R"(
+@group(0) @binding(0) var<storage> arr : array<vec3<f32>, 9>;
+
+fn f() {
+  let x = arr;
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 9u>) -> array<vec3<f32>, 9u> {
+  var result : array<vec3<f32>, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
   }
   return result;
 }
 
-@group(0) @binding(0) var<storage> arr : array<tint_packed_vec3_f32_array_element, 4u>;
+@group(0) @binding(0) var<storage> arr : array<tint_packed_vec3_f32_array_element, 9u>;
 
 fn f() {
   let x = tint_unpack_vec3_in_composite(arr);
@@ -630,7 +669,7 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, ArrayOfVec3_WriteArray_ValueRHS) {
+TEST_F(PackedVec3Test, ArrayOfVec3_WriteArray_ValueRHS_Small) {
     auto* src = R"(
 @group(0) @binding(0) var<storage, read_write> arr : array<vec3<f32>, 2>;
 
@@ -649,9 +688,8 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_pack_vec3_in_composite(in : array<vec3<f32>, 2u>) -> array<tint_packed_vec3_f32_array_element, 2u> {
   var result : array<tint_packed_vec3_f32_array_element, 2u>;
-  for(var i : u32; (i < 2u); i = (i + 1)) {
-    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
-  }
+  result[0] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[0]));
+  result[1] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[1]));
   return result;
 }
 
@@ -659,6 +697,52 @@ fn tint_pack_vec3_in_composite(in : array<vec3<f32>, 2u>) -> array<tint_packed_v
 
 fn f() {
   arr = tint_pack_vec3_in_composite(array(vec3(1.5, 2.5, 3.5), vec3(4.5, 5.5, 6.5)));
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, ArrayOfVec3_WriteArray_ValueRHS_Large) {
+    auto* src = R"(
+@group(0) @binding(0) var<storage, read_write> arr : array<vec3<f32>, 9>;
+
+fn f() {
+  arr = array(vec3(1.5, 2.5, 3.5),
+              vec3(4.5, 5.5, 6.5),
+              vec3(7.5, 8.5, 9.5),
+              vec3(7.5, 8.5, 9.5),
+              vec3(7.5, 8.5, 9.5),
+              vec3(7.5, 8.5, 9.5),
+              vec3(7.5, 8.5, 9.5),
+              vec3(7.5, 8.5, 9.5),
+              vec3(7.5, 8.5, 9.5));
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+fn tint_pack_vec3_in_composite(in : array<vec3<f32>, 9u>) -> array<tint_packed_vec3_f32_array_element, 9u> {
+  var result : array<tint_packed_vec3_f32_array_element, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+@group(0) @binding(0) var<storage, read_write> arr : array<tint_packed_vec3_f32_array_element, 9u>;
+
+fn f() {
+  arr = tint_pack_vec3_in_composite(array(vec3(1.5, 2.5, 3.5), vec3(4.5, 5.5, 6.5), vec3(7.5, 8.5, 9.5), vec3(7.5, 8.5, 9.5), vec3(7.5, 8.5, 9.5), vec3(7.5, 8.5, 9.5), vec3(7.5, 8.5, 9.5), vec3(7.5, 8.5, 9.5), vec3(7.5, 8.5, 9.5)));
 }
 )";
 
@@ -848,9 +932,9 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
-  }
+  result[0] = vec3<f32>(in[0].elements);
+  result[1] = vec3<f32>(in[1].elements);
+  result[2] = vec3<f32>(in[2].elements);
   return result;
 }
 
@@ -976,9 +1060,9 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_pack_vec3_in_composite(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
   var result : array<tint_packed_vec3_f32_array_element, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
-  }
+  result[0] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[0]));
+  result[1] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[1]));
+  result[2] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[2]));
   return result;
 }
 
@@ -1156,7 +1240,7 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, ArrayOfMatrix_ReadArray) {
+TEST_F(PackedVec3Test, ArrayOfMatrix_ReadArray_Small) {
     auto* src = R"(
 @group(0) @binding(0) var<storage> arr : array<mat3x3<f32>, 4>;
 
@@ -1175,21 +1259,68 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
-  }
+  result[0] = vec3<f32>(in[0].elements);
+  result[1] = vec3<f32>(in[1].elements);
+  result[2] = vec3<f32>(in[2].elements);
   return result;
 }
 
 fn tint_unpack_vec3_in_composite_1(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>) -> array<mat3x3<f32>, 4u> {
   var result : array<mat3x3<f32>, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
+  result[0] = tint_unpack_vec3_in_composite(in[0]);
+  result[1] = tint_unpack_vec3_in_composite(in[1]);
+  result[2] = tint_unpack_vec3_in_composite(in[2]);
+  result[3] = tint_unpack_vec3_in_composite(in[3]);
+  return result;
+}
+
+@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
+
+fn f() {
+  let x = tint_unpack_vec3_in_composite_1(arr);
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, ArrayOfMatrix_ReadArray_Large) {
+    auto* src = R"(
+@group(0) @binding(0) var<storage> arr : array<mat3x3<f32>, 9>;
+
+fn f() {
+  let x = arr;
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
+  var result : mat3x3<f32>;
+  result[0] = vec3<f32>(in[0].elements);
+  result[1] = vec3<f32>(in[1].elements);
+  result[2] = vec3<f32>(in[2].elements);
+  return result;
+}
+
+fn tint_unpack_vec3_in_composite_1(in : array<array<tint_packed_vec3_f32_array_element, 3u>, 9u>) -> array<mat3x3<f32>, 9u> {
+  var result : array<mat3x3<f32>, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
     result[i] = tint_unpack_vec3_in_composite(in[i]);
   }
   return result;
 }
 
-@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 4u>;
+@group(0) @binding(0) var<storage> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 9u>;
 
 fn f() {
   let x = tint_unpack_vec3_in_composite_1(arr);
@@ -1221,9 +1352,9 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 3u>) -> mat3x3<f32> {
   var result : mat3x3<f32>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
-  }
+  result[0] = vec3<f32>(in[0].elements);
+  result[1] = vec3<f32>(in[1].elements);
+  result[2] = vec3<f32>(in[2].elements);
   return result;
 }
 
@@ -1330,7 +1461,7 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, ArrayOfMatrix_WriteArray_ValueRHS) {
+TEST_F(PackedVec3Test, ArrayOfMatrix_WriteArray_ValueRHS_Small) {
     auto* src = R"(
 @group(0) @binding(0) var<storage, read_write> arr : array<mat3x3<f32>, 2>;
 
@@ -1349,17 +1480,16 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_pack_vec3_in_composite(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
   var result : array<tint_packed_vec3_f32_array_element, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
-  }
+  result[0] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[0]));
+  result[1] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[1]));
+  result[2] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[2]));
   return result;
 }
 
 fn tint_pack_vec3_in_composite_1(in : array<mat3x3<f32>, 2u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 2u> {
   var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 2u>;
-  for(var i : u32; (i < 2u); i = (i + 1)) {
-    result[i] = tint_pack_vec3_in_composite(in[i]);
-  }
+  result[0] = tint_pack_vec3_in_composite(in[0]);
+  result[1] = tint_pack_vec3_in_composite(in[1]);
   return result;
 }
 
@@ -1367,6 +1497,60 @@ fn tint_pack_vec3_in_composite_1(in : array<mat3x3<f32>, 2u>) -> array<array<tin
 
 fn f() {
   arr = tint_pack_vec3_in_composite_1(array(mat3x3<f32>(), mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5)));
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, ArrayOfMatrix_WriteArray_ValueRHS_Large) {
+    auto* src = R"(
+@group(0) @binding(0) var<storage, read_write> arr : array<mat3x3<f32>, 9>;
+
+fn f() {
+  arr = array(mat3x3<f32>(),
+              mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5),
+              mat3x3f(),
+              mat3x3f(),
+              mat3x3f(),
+              mat3x3f(),
+              mat3x3f(),
+              mat3x3f(),
+              mat3x3f());
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+fn tint_pack_vec3_in_composite(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
+  var result : array<tint_packed_vec3_f32_array_element, 3u>;
+  result[0] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[0]));
+  result[1] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[1]));
+  result[2] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[2]));
+  return result;
+}
+
+fn tint_pack_vec3_in_composite_1(in : array<mat3x3<f32>, 9u>) -> array<array<tint_packed_vec3_f32_array_element, 3u>, 9u> {
+  var result : array<array<tint_packed_vec3_f32_array_element, 3u>, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
+    result[i] = tint_pack_vec3_in_composite(in[i]);
+  }
+  return result;
+}
+
+@group(0) @binding(0) var<storage, read_write> arr : array<array<tint_packed_vec3_f32_array_element, 3u>, 9u>;
+
+fn f() {
+  arr = tint_pack_vec3_in_composite_1(array(mat3x3<f32>(), mat3x3(1.5, 2.5, 3.5, 4.5, 5.5, 6.5, 7.5, 8.5, 9.5), mat3x3f(), mat3x3f(), mat3x3f(), mat3x3f(), mat3x3f(), mat3x3f(), mat3x3f()));
 }
 )";
 
@@ -1428,9 +1612,9 @@ struct tint_packed_vec3_f32_array_element {
 
 fn tint_pack_vec3_in_composite(in : mat3x3<f32>) -> array<tint_packed_vec3_f32_array_element, 3u> {
   var result : array<tint_packed_vec3_f32_array_element, 3u>;
-  for(var i : u32; (i < 3u); i = (i + 1)) {
-    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
-  }
+  result[0] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[0]));
+  result[1] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[1]));
+  result[2] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[2]));
   return result;
 }
 
@@ -2025,7 +2209,7 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_ReadStruct) {
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_ReadStruct_Small) {
     auto* src = R"(
 struct S {
   arr : array<vec3<f32>, 4>,
@@ -2053,9 +2237,10 @@ struct S_tint_packed_vec3 {
 
 fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
-    result[i] = vec3<f32>(in[i].elements);
-  }
+  result[0] = vec3<f32>(in[0].elements);
+  result[1] = vec3<f32>(in[1].elements);
+  result[2] = vec3<f32>(in[2].elements);
+  result[3] = vec3<f32>(in[3].elements);
   return result;
 }
 
@@ -2082,7 +2267,64 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_ReadArray) {
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_ReadStruct_Large) {
+    auto* src = R"(
+struct S {
+  arr : array<vec3<f32>, 9>,
+}
+
+@group(0) @binding(0) var<storage> P : S;
+
+fn f() {
+  let x = P;
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 9u>,
+}
+
+fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 9u>) -> array<vec3<f32>, 9u> {
+  var result : array<vec3<f32>, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
+    result[i] = vec3<f32>(in[i].elements);
+  }
+  return result;
+}
+
+fn tint_unpack_vec3_in_composite_1(in : S_tint_packed_vec3) -> S {
+  var result : S;
+  result.arr = tint_unpack_vec3_in_composite(in.arr);
+  return result;
+}
+
+struct S {
+  arr : array<vec3<f32>, 9>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
+
+fn f() {
+  let x = tint_unpack_vec3_in_composite_1(P);
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_ReadArray_Small) {
     auto* src = R"(
 struct S {
   arr : array<vec3<f32>, 4>,
@@ -2110,14 +2352,66 @@ struct S_tint_packed_vec3 {
 
 fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 4u>) -> array<vec3<f32>, 4u> {
   var result : array<vec3<f32>, 4u>;
-  for(var i : u32; (i < 4u); i = (i + 1)) {
+  result[0] = vec3<f32>(in[0].elements);
+  result[1] = vec3<f32>(in[1].elements);
+  result[2] = vec3<f32>(in[2].elements);
+  result[3] = vec3<f32>(in[3].elements);
+  return result;
+}
+
+struct S {
+  arr : array<vec3<f32>, 4>,
+}
+
+@group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
+
+fn f() {
+  let x = tint_unpack_vec3_in_composite(P.arr);
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_ReadArray_Large) {
+    auto* src = R"(
+struct S {
+  arr : array<vec3<f32>, 9>,
+}
+
+@group(0) @binding(0) var<storage> P : S;
+
+fn f() {
+  let x = P.arr;
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 9u>,
+}
+
+fn tint_unpack_vec3_in_composite(in : array<tint_packed_vec3_f32_array_element, 9u>) -> array<vec3<f32>, 9u> {
+  var result : array<vec3<f32>, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
     result[i] = vec3<f32>(in[i].elements);
   }
   return result;
 }
 
 struct S {
-  arr : array<vec3<f32>, 4>,
+  arr : array<vec3<f32>, 9>,
 }
 
 @group(0) @binding(0) var<storage> P : S_tint_packed_vec3;
@@ -2262,7 +2556,7 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_WriteStruct_ValueRHS) {
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_WriteStruct_ValueRHS_Small) {
     auto* src = R"(
 struct S {
   arr : array<vec3<f32>, 2>,
@@ -2291,9 +2585,8 @@ struct S_tint_packed_vec3 {
 
 fn tint_pack_vec3_in_composite(in : array<vec3<f32>, 2u>) -> array<tint_packed_vec3_f32_array_element, 2u> {
   var result : array<tint_packed_vec3_f32_array_element, 2u>;
-  for(var i : u32; (i < 2u); i = (i + 1)) {
-    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
-  }
+  result[0] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[0]));
+  result[1] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[1]));
   return result;
 }
 
@@ -2311,6 +2604,72 @@ struct S {
 
 fn f() {
   P = tint_pack_vec3_in_composite_1(S(array(vec3(1.5, 4.5, 7.5), vec3(9.5, 6.5, 3.5))));
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_WriteStruct_ValueRHS_Large) {
+    auto* src = R"(
+struct S {
+  arr : array<vec3<f32>, 9>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S;
+
+fn f() {
+  P = S(array(vec3(1.5, 4.5, 7.5),
+              vec3(9.5, 6.5, 3.5),
+              vec3(9.5, 6.5, 3.5),
+              vec3(9.5, 6.5, 3.5),
+              vec3(9.5, 6.5, 3.5),
+              vec3(9.5, 6.5, 3.5),
+              vec3(9.5, 6.5, 3.5),
+              vec3(9.5, 6.5, 3.5),
+              vec3(9.5, 6.5, 3.5)));
+}
+)";
+
+    auto* expect =
+        R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 9u>,
+}
+
+fn tint_pack_vec3_in_composite(in : array<vec3<f32>, 9u>) -> array<tint_packed_vec3_f32_array_element, 9u> {
+  var result : array<tint_packed_vec3_f32_array_element, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
+    result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
+  }
+  return result;
+}
+
+fn tint_pack_vec3_in_composite_1(in : S) -> S_tint_packed_vec3 {
+  var result : S_tint_packed_vec3;
+  result.arr = tint_pack_vec3_in_composite(in.arr);
+  return result;
+}
+
+struct S {
+  arr : array<vec3<f32>, 9>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
+
+fn f() {
+  P = tint_pack_vec3_in_composite_1(S(array(vec3(1.5, 4.5, 7.5), vec3(9.5, 6.5, 3.5), vec3(9.5, 6.5, 3.5), vec3(9.5, 6.5, 3.5), vec3(9.5, 6.5, 3.5), vec3(9.5, 6.5, 3.5), vec3(9.5, 6.5, 3.5), vec3(9.5, 6.5, 3.5), vec3(9.5, 6.5, 3.5))));
 }
 )";
 
@@ -2366,7 +2725,7 @@ fn f() {
     EXPECT_EQ(expect, str(got));
 }
 
-TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_WriteArray_ValueRHS) {
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_WriteArray_ValueRHS_Small) {
     auto* src = R"(
 struct S {
   arr : array<vec3<f32>, 2>,
@@ -2394,7 +2753,65 @@ struct S_tint_packed_vec3 {
 
 fn tint_pack_vec3_in_composite(in : array<vec3<f32>, 2u>) -> array<tint_packed_vec3_f32_array_element, 2u> {
   var result : array<tint_packed_vec3_f32_array_element, 2u>;
-  for(var i : u32; (i < 2u); i = (i + 1)) {
+  result[0] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[0]));
+  result[1] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[1]));
+  return result;
+}
+
+struct S {
+  arr : array<vec3<f32>, 2>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S_tint_packed_vec3;
+
+fn f() {
+  P.arr = tint_pack_vec3_in_composite(array(vec3(1.5, 4.5, 7.5), vec3(9.5, 6.5, 3.5)));
+}
+)";
+
+    ast::transform::DataMap data;
+    auto got = Run<PackedVec3>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(PackedVec3Test, StructMember_ArrayOfVec3_WriteArray_ValueRHS_Large) {
+    auto* src = R"(
+struct S {
+  arr : array<vec3<f32>, 9>,
+}
+
+@group(0) @binding(0) var<storage, read_write> P : S;
+
+fn f() {
+  P.arr = array(vec3(1.5, 4.5, 7.5),
+                vec3(9.5, 6.5, 3.5),
+                vec3(9.5, 6.5, 3.5),
+                vec3(9.5, 6.5, 3.5),
+                vec3(9.5, 6.5, 3.5),
+                vec3(9.5, 6.5, 3.5),
+                vec3(9.5, 6.5, 3.5),
+                vec3(9.5, 6.5, 3.5),
+                vec3(9.5, 6.5, 3.5));
+}
+)";
+
+    auto* expect = R"(
+enable chromium_internal_relaxed_uniform_layout;
+
+struct tint_packed_vec3_f32_array_element {
+  @align(16)
+  elements : __packed_vec3<f32>,
+}
+
+struct S_tint_packed_vec3 {
+  @align(16)
+  arr : array<tint_packed_vec3_f32_array_element, 9u>,
+}
+
+fn tint_pack_vec3_in_composite(in : array<vec3<f32>, 9u>) -> array<tint_packed_vec3_f32_array_element, 9u> {
+  var result : array<tint_packed_vec3_f32_array_element, 9u>;
+  for(var i : u32; (i < 9u); i = (i + 1)) {
     result[i] = tint_packed_vec3_f32_array_element(__packed_vec3<f32>(in[i]));
   }
   return result;

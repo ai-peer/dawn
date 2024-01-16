@@ -58,6 +58,10 @@ using namespace tint::core::fluent_types;     // NOLINT
 
 namespace tint::msl::writer {
 
+/// Arrays larger than this will be packed/unpacked with a for loop.
+/// Arrays up to this size will be packed/unpacked with a sequence of statements.
+constexpr unsigned kMaxSeriallyUnpackedArraySize = 8;
+
 /// PIMPL state for the transform
 struct PackedVec3::State {
     /// Constructor
@@ -250,15 +254,28 @@ struct PackedVec3::State {
         //   }
         auto copy_array_elements = [&](uint32_t num_elements,
                                        const core::type::Type* element_type) {
-            // Generate an expression for packing or unpacking an element of the array.
-            auto* element = pack_or_unpack_element(b.IndexAccessor("in", "i"), element_type);
-            statements.Push(b.For(                   //
-                b.Decl(b.Var("i", b.ty.u32())),      //
-                b.LessThan("i", u32(num_elements)),  //
-                b.Assign("i", b.Add("i", 1_a)),      //
-                b.Block(tint::Vector{
-                    b.Assign(b.IndexAccessor("result", "i"), element),
-                })));
+            // Generate code for unpacking the array.
+            if (num_elements <= kMaxSeriallyUnpackedArraySize) {
+                // Generate a sequence of statements.
+                tint::Vector<ast::Statement*, 8> assignments;
+                for (uint32_t i = 0; i < num_elements; i++) {
+                    statements.Push(
+                        b.Assign(b.IndexAccessor("result", b.Expr(core::AInt(i))),
+                                 pack_or_unpack_element(
+                                     b.IndexAccessor("in", b.Expr(core::AInt(i))), element_type)));
+                }
+            } else {
+                // Generate a for loop
+                // Generate an expression for packing or unpacking an element of the array.
+                auto* element = pack_or_unpack_element(b.IndexAccessor("in", "i"), element_type);
+                statements.Push(b.For(                   //
+                    b.Decl(b.Var("i", b.ty.u32())),      //
+                    b.LessThan("i", u32(num_elements)),  //
+                    b.Assign("i", b.Add("i", 1_a)),      //
+                    b.Block(tint::Vector{
+                        b.Assign(b.IndexAccessor("result", "i"), element),
+                    })));
+            }
         };
 
         // Copy the elements of the value over to the result.
