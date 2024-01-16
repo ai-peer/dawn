@@ -141,12 +141,12 @@ Transform::ApplyResult OffsetFirstIndex::Apply(const Program& src,
     if (has_vertex_index || has_instance_index) {
         // Add push_constant variables
         if (has_vertex_index && first_vertex_location >= 0) {
-            b.GlobalVar(kFirstVertexName, b.ty.u32(), core::AddressSpace::kPushConstant,
-                        b.Location(u32(static_cast<uint32_t>(first_vertex_location))));
+            b.GlobalVar(kFirstVertexName, b.ty.i32(), core::AddressSpace::kPushConstant,
+                        b.Location(u32(first_vertex_location)));
         }
         if (has_instance_index && first_instance_location >= 0) {
-            b.GlobalVar(kFirstInstanceName, b.ty.u32(), core::AddressSpace::kPushConstant,
-                        b.Location(u32(static_cast<uint32_t>(first_instance_location))));
+            b.GlobalVar(kFirstInstanceName, b.ty.i32(), core::AddressSpace::kPushConstant,
+                        b.Location(u32(first_instance_location)));
         }
 
         // Fix up all references to the builtins with the offsets

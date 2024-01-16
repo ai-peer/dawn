@@ -1121,6 +1121,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
                 vertexStateBufferBindingTracker.Apply(gl);
                 bindGroupTracker.Apply(gl);
 
+                if (lastPipeline->UsesInstanceIndex()) {
+                    gl.Uniform1i(PipelineLayout::PushConstantLocation::FirstInstance,
+                                 draw->firstInstance);
+                }
                 if (gl.DrawArraysInstancedBaseInstanceANGLE) {
                     gl.DrawArraysInstancedBaseInstanceANGLE(
                         lastPipeline->GetGLPrimitiveTopology(), draw->firstVertex,
@@ -1143,6 +1147,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
                 vertexStateBufferBindingTracker.Apply(gl);
                 bindGroupTracker.Apply(gl);
 
+                if (lastPipeline->UsesInstanceIndex()) {
+                    gl.Uniform1i(PipelineLayout::PushConstantLocation::FirstInstance,
+                                 draw->firstInstance);
+                }
                 if (gl.DrawElementsInstancedBaseVertexBaseInstanceANGLE) {
                     gl.DrawElementsInstancedBaseVertexBaseInstanceANGLE(
                         lastPipeline->GetGLPrimitiveTopology(), draw->indexCount, indexBufferFormat,

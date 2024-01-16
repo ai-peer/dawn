@@ -248,6 +248,8 @@ SanitizedResult Sanitize(const Program& in,
     data.Add<ast::transform::CanonicalizeEntryPointIO::Config>(
         ast::transform::CanonicalizeEntryPointIO::ShaderStyle::kGlsl);
 
+    data.Add<ast::transform::OffsetFirstIndex::Config>(-1, options.first_instance_location);
+
     SanitizedResult result;
     ast::transform::DataMap outputs;
     result.program = manager.Run(in, data, outputs);
@@ -2098,6 +2100,8 @@ void ASTPrinter::EmitPushConstant(const sem::GlobalVariable* var) {
     auto* decl = var->Declaration();
 
     auto out = Line();
+
+    EmitAttributes(out, var);
 
     auto name = decl->name->symbol.Name();
     auto* type = var->Type()->UnwrapRef();
