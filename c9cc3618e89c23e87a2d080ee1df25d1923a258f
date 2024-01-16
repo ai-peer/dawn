@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a730454e_913a3a4f",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T19:27:22Z",
+      "side": 1,
+      "message": "Done.\n\nNew CLS are:\nhttps://dawn-review.googlesource.com/c/dawn/+/169941\nhttps://dawn-review.googlesource.com/c/dawn/+/169943",
+      "parentUuid": "82be5ff1_c1321d70",
+      "revId": "c9cc3618e89c23e87a2d080ee1df25d1923a258f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22e46ea3_4db69d79",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-15T15:39:53Z",
       "side": 1,
       "message": "This is nice, what do you think of:\n\n```\ntemplate\u003cclass T, class APIT \u003d ...\u003e\nAPIT ReturnToAPI(Ref\u003cT\u003e\u0026\u0026 obj) {\n    return ToAPI(obj.Detach());\n}\n```\n\nIt would avoid an extra ref/release in a bunch of cases. Not sure about `ReturnToAPI` Maybe we could just make it `ToAPI(Ref\u0026\u0026 T) -\u003e APIT` be a thing. So could would look like:\n\n```\n\nRef\u003cFoo\u003e foo;\nif (ConsumedError(DoStuff(), \u0026foo)) {\n    return ToAPI(Foo::MakeError())\n}\n\nreturn ToAPI(std::move(foo));\n```\n\nGiven that the rest of this CL is non-trivial, we could land that change first to de-risk things.",
+      "revId": "c9cc3618e89c23e87a2d080ee1df25d1923a258f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5b13f2c9_066a57af",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 158,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T19:27:22Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22e46ea3_4db69d79",
       "revId": "c9cc3618e89c23e87a2d080ee1df25d1923a258f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "033fc5da_81be6bc5",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1399,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T19:27:22Z",
+      "side": 1,
+      "message": "Done. I created the Ref\u003cTintData\u003e for holding tint program. It is used for keeping tint program alive when it is needed for creating pipeline async. but shader module external ref is 0 already.",
+      "parentUuid": "b569b977_c715eac6",
+      "revId": "c9cc3618e89c23e87a2d080ee1df25d1923a258f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f6fe87_e2df7f39",
@@ -82,6 +136,24 @@
       "writtenOn": "2024-01-15T15:39:53Z",
       "side": 1,
       "message": "I\u0027m thinking one day we should really have:\n\n```\nreturn Ref\u003cErrorSharedTExtureMemory\u003e::Make(device, descriptor);\n```\n\nto avoid having a raw `new`, similarly to `std::make_unique`.",
+      "revId": "c9cc3618e89c23e87a2d080ee1df25d1923a258f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "55cba2aa_3874389f",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 67,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T19:27:22Z",
+      "side": 1,
+      "message": "Acknowledged. I can do it in a follow up cl.",
+      "parentUuid": "51f6fe87_e2df7f39",
       "revId": "c9cc3618e89c23e87a2d080ee1df25d1923a258f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
