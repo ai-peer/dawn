@@ -164,6 +164,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fb93077_56cb1350",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-16T08:10:02Z",
+      "side": 1,
+      "message": "Essentially, the problem seems to be that D3D11/driver can\u0027t tell exactly when a buffer can be recycled for mapping re-use. The current [fence](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/QueueD3D11.cpp;drc\u003dee224b663bbbd61650d528530768f9b6d247ff8c;l\u003d223) approach seems not precise enough.",
+      "parentUuid": "d60369f3_7109b644",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
