@@ -269,10 +269,23 @@ MaybeError Buffer::MapInternal(const ScopedCommandRecordingContext* commandConte
     // need write permission to initialize the buffer.
     // TODO(dawn:1705): investigate the performance impact of mapping with D3D11_MAP_READ_WRITE.
     D3D11_MAPPED_SUBRESOURCE mappedResource;
-    DAWN_TRY(CheckHRESULT(commandContext->Map(mD3d11NonConstantBuffer.Get(),
-                                              /*Subresource=*/0, D3D11_MAP_READ_WRITE,
-                                              /*MapFlags=*/0, &mappedResource),
-                          "ID3D11DeviceContext::Map"));
+    // Firstly we try mapping without waiting for GPU to finish with the buffer, so that we can
+    // report a warning of potential performance penalty.
+    auto hr = commandContext->Map(mD3d11NonConstantBuffer.Get(),
+                                  /*Subresource=*/0, D3D11_MAP_READ_WRITE,
+                                  D3D11_MAP_FLAG_DO_NOT_WAIT, &mappedResource);
+    if (hr == DXGI_ERROR_WAS_STILL_DRAWING) {
+        GetDevice()->EmitWarningOnce(
+            "Mapping a buffer, with which the GPU is not yet finished, may cause a significant "
+            "performance penalty.");
+        // Re-try the mapping with waiting.
+        DAWN_TRY(CheckHRESULT(commandContext->Map(mD3d11NonConstantBuffer.Get(),
+                                                  /*Subresource=*/0, D3D11_MAP_READ_WRITE,
+                                                  /*MapFlags=*/0, &mappedResource),
+                              "ID3D11DeviceContext::Map"));
+    } else {
+        DAWN_TRY(CheckHRESULT(hr, "ID3D11DeviceContext::Map"));
+    }
     mMappedData = reinterpret_cast<uint8_t*>(mappedResource.pData);
 
     return {};

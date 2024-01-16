@@ -246,6 +246,7 @@ MaybeError CommandRecordingContext::Initialize(Device* device) {
 MaybeError CommandRecordingContext::ExecuteCommandList() {
     // Consider using deferred DeviceContext.
     mNeedsSubmit = false;
+    mD3D11DeviceContext4->Flush();
     return {};
 }
 
