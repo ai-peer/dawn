@@ -183,7 +183,7 @@ WGPUTexture ExternalImageDXGIImpl::BeginAccess(
     }
     ++mAccessCount;
 
-    return ToAPI(texture.Detach());
+    return ToAPI(ReturnToAPI(texture));
 }
 
 void ExternalImageDXGIImpl::EndAccess(WGPUTexture texture,
