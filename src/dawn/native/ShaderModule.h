@@ -39,6 +39,7 @@
 #include "absl/container/flat_hash_set.h"
 #include "dawn/common/Constants.h"
 #include "dawn/common/ContentLessObjectCacheable.h"
+#include "dawn/common/MutexProtected.h"
 #include "dawn/common/ityp_array.h"
 #include "dawn/native/BindingInfo.h"
 #include "dawn/native/CachedObject.h"
@@ -50,6 +51,7 @@
 #include "dawn/native/Limits.h"
 #include "dawn/native/ObjectBase.h"
 #include "dawn/native/PerStage.h"
+#include "dawn/native/RefCountedWithExternalCount.h"
 #include "dawn/native/dawn_platform.h"
 #include "tint/tint.h"
 
@@ -288,10 +290,11 @@ struct EntryPointMetadata {
     bool usesVertexIndex = false;
 };
 
-class ShaderModuleBase : public ApiObjectBase,
+class ShaderModuleBase : public RefCountedWithExternalCountBase<ApiObjectBase>,
                          public CachedObject,
                          public ContentLessObjectCacheable<ShaderModuleBase> {
   public:
+    using Base = RefCountedWithExternalCountBase<ApiObjectBase>;
     ShaderModuleBase(DeviceBase* device,
                      const UnpackedPtr<ShaderModuleDescriptor>& descriptor,
                      ApiObjectBase::UntrackedByDeviceTag tag);
@@ -323,8 +326,12 @@ class ShaderModuleBase : public ApiObjectBase,
         bool operator()(const ShaderModuleBase* a, const ShaderModuleBase* b) const;
     };
 
-    // This returns tint program before running transforms.
+    using ScopedUseTintProgram = APIRef<ShaderModuleBase>;
+    ScopedUseTintProgram UseTintProgram();
+
     const tint::Program* GetTintProgram() const;
+    const tint::Program* GetTintProgramForTesting() const;
+    int GetTintProgramRecreateCountForTesting() const;
 
     void APIGetCompilationInfo(wgpu::CompilationInfoCallback callback, void* userdata);
 
@@ -341,6 +348,8 @@ class ShaderModuleBase : public ApiObjectBase,
   private:
     ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label);
 
+    void WillDropLastExternalRef() override;
+
     // The original data in the descriptor for caching.
     enum class Type { Undefined, Spirv, Wgsl };
     Type mType;
@@ -350,8 +359,14 @@ class ShaderModuleBase : public ApiObjectBase,
     EntryPointMetadataTable mEntryPoints;
     PerStage<std::string> mDefaultEntryPointNames;
     PerStage<size_t> mEntryPointCounts;
-    std::unique_ptr<tint::Program> mTintProgram;
-    std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
+
+    struct TintData {
+        std::unique_ptr<tint::Program> tintProgram;
+        std::unique_ptr<TintSource> tintSource;  // Keep the tint::Source::File alive
+        int tintProgramRecreateCount = 0;
+    };
+
+    MutexProtected<TintData> mTintData;
 
     std::unique_ptr<OwnedCompilationMessages> mCompilationMessages;
 };
