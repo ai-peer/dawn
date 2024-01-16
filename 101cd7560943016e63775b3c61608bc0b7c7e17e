@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "feb57b74_88bdfd5d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-16T12:58:50Z",
+      "side": 1,
+      "message": "Split out this small CL from the upcoming change to make life easier.",
+      "revId": "101cd7560943016e63775b3c61608bc0b7c7e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
