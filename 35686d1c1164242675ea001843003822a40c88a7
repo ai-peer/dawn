@@ -37,6 +37,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d70f0039_239c6baf",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T11:40:06Z",
+      "side": 1,
+      "message": "```suggestion\n                        [[maybe_unused]] tint::ast::PipelineStage stage) -\u003e bool {\n```",
+      "revId": "35686d1c1164242675ea001843003822a40c88a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "088c2bdf_e1211851",
         "filename": "src/tint/cmd/tint/main.cc",
         "patchSetId": 1
@@ -66,6 +83,24 @@
       "side": 1,
       "message": "See line 1100 below. If there are no entry points in the program we pass in `\"\"` as the entry point name in order to convert the entire file (which as no entry points) to GLSL. But that also means there would be no entry points returned by Tint to validate against.",
       "parentUuid": "088c2bdf_e1211851",
+      "revId": "35686d1c1164242675ea001843003822a40c88a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1d91d37c_95d6ccdf",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1083,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T11:40:06Z",
+      "side": 1,
+      "message": "Fair enough.",
+      "parentUuid": "e7963f4a_1c0118fa",
       "revId": "35686d1c1164242675ea001843003822a40c88a7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
