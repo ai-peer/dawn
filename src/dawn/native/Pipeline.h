@@ -63,6 +63,9 @@ struct ProgrammableStage {
     const EntryPointMetadata* metadata = nullptr;
 
     PipelineConstantEntries constants;
+
+    // Used to keep mTintProgram in ShaderModuleBase alive.
+    mutable ShaderModuleBase::ScopedUseTintProgram scopedUseTintProgram;
 };
 
 class PipelineBase : public ApiObjectBase, public CachedObject {
@@ -85,6 +88,10 @@ class PipelineBase : public ApiObjectBase, public CachedObject {
 
     // Implementation of the API entrypoint. Do not use in a reentrant manner.
     BindGroupLayoutBase* APIGetBindGroupLayout(uint32_t groupIndex);
+
+    // Called before calling Initialize(). For creating pipeline in async mode, the PreInitialize()
+    // should be called on main thread instead of dawn's worker threads.
+    void PreInitialize();
 
     // Initialize() should only be called once by the frontend.
     virtual MaybeError Initialize() = 0;

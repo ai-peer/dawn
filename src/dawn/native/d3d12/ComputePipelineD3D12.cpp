@@ -71,6 +71,10 @@ MaybeError ComputePipeline::Initialize() {
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
     ShaderModule* module = ToBackend(computeStage.module.Get());
 
+    // Release scopedUseTintProgram, so mTintProgram in ShaderModule could be released, if it is not
+    // used elsewhere.
+    auto scopedUseTintProgram = std::move(computeStage.scopedUseTintProgram);
+
     D3D12_COMPUTE_PIPELINE_STATE_DESC d3dDesc = {};
     d3dDesc.pRootSignature = ToBackend(GetLayout())->GetRootSignature();
 

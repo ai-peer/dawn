@@ -459,6 +459,11 @@ MaybeError RenderPipeline::InitializeShaders() {
 
     if (GetStageMask() & wgpu::ShaderStage::Vertex) {
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Vertex);
+
+        // Release scopedUseTintProgram, so mTintProgram in ShaderModule could be released, if it is
+        // not used elsewhere.
+        auto scopedUseTintProgram = std::move(programmableStage.scopedUseTintProgram);
+
         DAWN_TRY_ASSIGN(
             compiledShader[SingleShaderStage::Vertex],
             ToBackend(programmableStage.module)
@@ -519,6 +524,11 @@ MaybeError RenderPipeline::InitializeShaders() {
         }
 
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Fragment);
+
+        // Release scopedUseTintProgram, so mTintProgram in ShaderModule could be released, if it is
+        // not used elsewhere.
+        auto scopedUseTintProgram = std::move(programmableStage.scopedUseTintProgram);
+
         DAWN_TRY_ASSIGN(
             compiledShader[SingleShaderStage::Fragment],
             ToBackend(programmableStage.module)

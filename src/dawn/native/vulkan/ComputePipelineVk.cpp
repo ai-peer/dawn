@@ -73,6 +73,10 @@ MaybeError ComputePipeline::Initialize() {
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
     ShaderModule* module = ToBackend(computeStage.module.Get());
 
+    // Release scopedUseTintProgram, so mTintProgram in ShaderModule could be released, if it is not
+    // used elsewhere.
+    auto scopedUseTintProgram = std::move(computeStage.scopedUseTintProgram);
+
     ShaderModule::ModuleAndSpirv moduleAndSpirv;
     DAWN_TRY_ASSIGN(
         moduleAndSpirv,
@@ -83,7 +87,6 @@ MaybeError ComputePipeline::Initialize() {
             IsFullSubgroupsRequired()
                 ? std::make_optional(device->GetLimits().experimentalSubgroupLimits.maxSubgroupSize)
                 : std::nullopt));
-
     createInfo.stage.module = moduleAndSpirv.module;
     createInfo.stage.pName = moduleAndSpirv.remappedEntryPoint.c_str();
 
