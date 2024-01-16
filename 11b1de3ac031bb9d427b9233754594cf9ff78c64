@@ -16,6 +16,29 @@
       "message": "PTAL, I think this is what we agreed on earlier but happy to bikeshed on specifics.",
       "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "00181287_9a380810",
+        "filename": "src/tint/lang/core/ir/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:42:25Z",
+      "side": 1,
+      "message": "```suggestion\n    /// Allows access instructions to create pointers to vector elements.\n```",
+      "range": {
+        "startLine": 45,
+        "startChar": 4,
+        "endLine": 45,
+        "endChar": 6
+      },
+      "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
