@@ -56,9 +56,10 @@ namespace tint::glsl::writer {
 
 using namespace tint::core::number_suffixes;  // NOLINT
 
-CombineSamplers::BindingInfo::BindingInfo(const BindingMap& map, const BindingPoint& placeholder)
-    : binding_map(map), placeholder_binding_point(placeholder) {}
+CombineSamplers::BindingInfo::BindingInfo(const Bindings& b) : bindings(b) {}
+
 CombineSamplers::BindingInfo::BindingInfo(const BindingInfo& other) = default;
+
 CombineSamplers::BindingInfo::~BindingInfo() = default;
 
 /// PIMPL state for the transform
@@ -71,7 +72,7 @@ struct CombineSamplers::State {
     program::CloneContext ctx = {&b, &src, /* auto_clone_symbols */ true};
 
     /// The binding info
-    const BindingInfo* binding_info;
+    const Bindings* bindings;
 
     /// Map from a texture/sampler pair to the corresponding combined sampler
     /// variable
@@ -104,7 +105,7 @@ struct CombineSamplers::State {
     /// Constructor
     /// @param program the source program
     /// @param info the binding map information
-    State(const Program& program, const BindingInfo* info) : src(program), binding_info(info) {}
+    State(const Program& program, const Bindings* info) : src(program), bindings(info) {}
 
     /// Creates a combined sampler global variables.
     /// (Note this is actually a Texture node at the AST level, but it will be
@@ -119,10 +120,10 @@ struct CombineSamplers::State {
         SamplerTexturePair bp_pair;
         bp_pair.texture_binding_point =
             texture_var ? *texture_var->As<sem::GlobalVariable>()->Attributes().binding_point
-                        : binding_info->placeholder_binding_point;
+                        : bindings->placeholder_sampler_bind_point;
         bp_pair.sampler_binding_point =
             sampler_var ? *sampler_var->As<sem::GlobalVariable>()->Attributes().binding_point
-                        : binding_info->placeholder_binding_point;
+                        : bindings->placeholder_sampler_bind_point;
         auto it = binding_info->binding_map.find(bp_pair);
         if (it != binding_info->binding_map.end()) {
             name = it->second;

@@ -1,4 +1,4 @@
-/// Copyright 2023 The Dawn & Tint Authors
+/// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,21 +25,22 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/msl/writer/helpers/generate_bindings.h"
+#include "src/tint/lang/glsl/writer/helpers/generate_bindings.h"
 
 #include <algorithm>
 #include <unordered_set>
 
 #include "src/tint/api/common/binding_point.h"
 #include "src/tint/lang/core/type/external_texture.h"
+#include "src/tint/lang/core/type/pointer.h"
 #include "src/tint/lang/core/type/storage_texture.h"
-#include "src/tint/lang/msl/writer/common/options.h"
+#include "src/tint/lang/glsl/writer/common/options.h"
 #include "src/tint/lang/wgsl/ast/module.h"
 #include "src/tint/lang/wgsl/program/program.h"
 #include "src/tint/lang/wgsl/sem/variable.h"
 #include "src/tint/utils/rtti/switch.h"
 
-namespace tint::msl::writer {
+namespace tint::glsl::writer {
 
 Bindings GenerateBindings(const Program& program) {
     // TODO(tint:1491): Use Inspector once we can get binding info for all
@@ -119,4 +120,4 @@ Bindings GenerateBindings(const Program& program) {
     return bindings;
 }
 
-}  // namespace tint::msl::writer
+}  // namespace tint::glsl::writer

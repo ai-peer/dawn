@@ -93,7 +93,8 @@ class ShaderModule final : public ShaderModuleBase {
                                         const PipelineLayout* layout,
                                         bool* needsPlaceholderSampler,
                                         bool* needsTextureBuiltinUniformBuffer,
-                                        BindingPointToFunctionAndOffset* bindingPointToData) const;
+                                        BindingPointToFunctionAndOffset* bindingPointToData,
+                                        const BindingInfoArray& moduleBindingInfo) const;
 
   private:
     ShaderModule(Device* device, const UnpackedPtr<ShaderModuleDescriptor>& descriptor);
