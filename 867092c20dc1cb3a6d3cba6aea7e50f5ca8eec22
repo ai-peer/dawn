@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "64542499_ec7868a0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-16T16:59:35Z",
+      "side": 1,
+      "message": "LGTM, as long as regenerating the results of the tint WGSL tests remains unchanged.",
+      "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
