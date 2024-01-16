@@ -16,6 +16,24 @@
       "message": "LGTM, as long as regenerating the results of the tint WGSL tests remains unchanged.",
       "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b8eaf2f_4c107872",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-16T17:49:21Z",
+      "side": 1,
+      "message": "I can\u0027t think of any reason why it would, and the tests all passed on Kokoro, which as far as I understand means it created output the same as the existing expectation files.",
+      "parentUuid": "64542499_ec7868a0",
+      "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
