@@ -459,6 +459,11 @@ MaybeError RenderPipeline::InitializeShaders() {
 
     if (GetStageMask() & wgpu::ShaderStage::Vertex) {
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Vertex);
+
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        auto tintData = std::move(programmableStage.tintData);
+
         DAWN_TRY_ASSIGN(
             compiledShader[SingleShaderStage::Vertex],
             ToBackend(programmableStage.module)
@@ -519,6 +524,11 @@ MaybeError RenderPipeline::InitializeShaders() {
         }
 
         const ProgrammableStage& programmableStage = GetStage(SingleShaderStage::Fragment);
+
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        auto tintData = std::move(programmableStage.tintData);
+
         DAWN_TRY_ASSIGN(
             compiledShader[SingleShaderStage::Fragment],
             ToBackend(programmableStage.module)

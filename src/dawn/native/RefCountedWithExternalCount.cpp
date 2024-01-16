@@ -29,16 +29,4 @@
 
 namespace dawn::native {
 
-void RefCountedWithExternalCount::APIReference() {
-    mExternalRefCount.Increment();
-    RefCounted::APIReference();
-}
-
-void RefCountedWithExternalCount::APIRelease() {
-    if (mExternalRefCount.Decrement()) {
-        WillDropLastExternalRef();
-    }
-    RefCounted::APIRelease();
-}
-
 }  // namespace dawn::native

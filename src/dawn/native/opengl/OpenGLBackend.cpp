@@ -30,8 +30,6 @@
 
 #include "dawn/native/OpenGLBackend.h"
 
-#include <utility>
-
 #include "dawn/native/opengl/DeviceGL.h"
 
 namespace dawn::native::opengl {

@@ -32,29 +32,41 @@
 
 namespace dawn::native {
 
-// RecCountedWithExternalCount is a version of RefCounted which tracks a separate
+// RecCountedWithExternalCountBase is a version of RefCounted which tracks a separate
 // refcount for calls to APIReference/APIRelease (refs added/removed by the application).
 // The external refcount starts at 1, and the total refcount starts at 1 - i.e. the first
 // ref is the external ref.
 // Then, when the external refcount drops to zero, WillDropLastExternalRef is called.
 // The derived class should override the behavior of WillDropLastExternalRef.
-class RefCountedWithExternalCount : private RefCounted {
+template <typename T>
+class RefCountedWithExternalCountBase : public T {
   public:
-    using RefCounted::RefCounted;
-    using RefCounted::Reference;
-    using RefCounted::Release;
+    using T::T;
+    using T::Reference;
+    using T::Release;
 
-    void APIReference();
-    void APIRelease();
+    void APIReference() {
+        mExternalRefCount.Increment();
+        T::APIReference();
+    }
+
+    void APIRelease() {
+        if (mExternalRefCount.Decrement()) {
+            WillDropLastExternalRef();
+        }
+        T::APIRelease();
+    }
 
   protected:
-    using RefCounted::DeleteThis;
+    using T::DeleteThis;
 
   private:
     virtual void WillDropLastExternalRef() = 0;
 
     RefCount mExternalRefCount;
 };
+
+using RefCountedWithExternalCount = RefCountedWithExternalCountBase<RefCounted>;
 
 }  // namespace dawn::native
 
