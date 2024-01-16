@@ -624,7 +624,8 @@ sem::Variable* Resolver::Var(const ast::Var* var, bool is_global) {
                     return kSuccess;
                 },
                 [&](const ast::LocationAttribute* attr) {
-                    if (!has_io_address_space) {
+                    if (!has_io_address_space &&
+                        sem->AddressSpace() != core::AddressSpace::kPushConstant) {
                         return kInvalid;
                     }
                     auto value = LocationAttribute(attr);
