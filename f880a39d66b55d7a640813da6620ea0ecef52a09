@@ -16,6 +16,24 @@
       "message": "The change to introduce RefCountedWithExternalCountBase\u003cT\u003e can be in a separate smaller CL.\n\nI don\u0027t understand. Why do we need to make it so that RefCountedWithExternalCount starts at 0? The previous scheme where it starts at 1 and we return it detached works OK.",
       "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4fdba39f_0e446b61",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T19:38:11Z",
+      "side": 1,
+      "message": "RefCountedWithExternalCountBase\u0027s ref count is still starting from 1. However the mExternalRefCount in RefCountedWithExternalCountBase is starting from 0. Since a new created object has not been returned to API, the external ref should be 0, and a new created object could be used internally too instead for external usage.\n\nAnd because the CL will always use ReturnToAPI() before returning an object to API. it will add the external ref if the object\u0027s base class is RefCountedWithExternalCountBase.",
+      "parentUuid": "7a8d4709_36c20c9c",
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
