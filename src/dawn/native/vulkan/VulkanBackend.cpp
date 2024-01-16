@@ -84,18 +84,18 @@ WGPUTexture WrapVulkanImage(WGPUDevice device, const ExternalImageDescriptorVk* 
         case ExternalImageType::AHardwareBuffer: {
             const ExternalImageDescriptorAHardwareBuffer* ahbDescriptor =
                 static_cast<const ExternalImageDescriptorAHardwareBuffer*>(descriptor);
-
-            return ToAPI(backendDevice->CreateTextureWrappingVulkanImage(
-                ahbDescriptor, ahbDescriptor->handle, ahbDescriptor->waitFDs));
+            Ref<TextureBase> texture = backendDevice->CreateTextureWrappingVulkanImage(
+                ahbDescriptor, ahbDescriptor->handle, ahbDescriptor->waitFDs);
+            return ToAPI(ReturnToAPI(texture));
         }
 #elif DAWN_PLATFORM_IS(LINUX)
         case ExternalImageType::OpaqueFD:
         case ExternalImageType::DmaBuf: {
             const ExternalImageDescriptorFD* fdDescriptor =
                 static_cast<const ExternalImageDescriptorFD*>(descriptor);
-
-            return ToAPI(backendDevice->CreateTextureWrappingVulkanImage(
-                fdDescriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs));
+            Ref<TextureBase> texture = backendDevice->CreateTextureWrappingVulkanImage(
+                fdDescriptor, fdDescriptor->memoryFD, fdDescriptor->waitFDs);
+            return ToAPI(ReturnToAPI(texture));
         }
 #endif  // DAWN_PLATFORM_IS(LINUX)
 
