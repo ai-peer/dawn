@@ -1,0 +1,23 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct S1 {
+  int i;
+};
+
+struct S2 {
+  S1 s1;
+};
+
+struct S3 {
+  S2 s2;
+};
+
+struct tint_private_vars_struct {
+  S3 P;
+};
+
+kernel void tint_symbol() {
+  return;
+}
+

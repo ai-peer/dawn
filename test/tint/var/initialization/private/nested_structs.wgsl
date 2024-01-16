@@ -1,0 +1,17 @@
+struct S1 {
+    i : i32,
+}
+struct S2 {
+    s1 : S1,
+}
+struct S3 {
+    s2 : S2,
+}
+
+const C = 42;
+var<private> P = S3(S2(S1(C)));
+
+@compute @workgroup_size(1)
+fn main() {
+    _ = P.s2.s1.i;
+}
