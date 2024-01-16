@@ -16,6 +16,24 @@
       "message": "Why is there no replacement file for this? Is it because we don\u0027t run the FXC flow anymore?",
       "revId": "0f6f57784ad4240721efb83053b52244ac0153df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cccd8b29_26df9529",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.spvasm.expected.fxc.hlsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T18:36:44Z",
+      "side": 0,
+      "message": "Because my machine decided that it now passes. We don\u0027t have expectation files for non-failing test under `test/tint/vk-gl-cts/...`. It\u0027s possible that the Kokoro bot has an older FXC, and these fail for that version. In which case, I\u0027ll put them back.",
+      "parentUuid": "c135c1f4_414eb574",
+      "revId": "0f6f57784ad4240721efb83053b52244ac0153df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
