@@ -46,7 +46,8 @@ CreateComputePipelineAsyncTask::CreateComputePipelineAsyncTask(
     void* userdata)
     : mComputePipeline(std::move(nonInitializedComputePipeline)),
       mCallback(callback),
-      mUserdata(userdata) {
+      mUserdata(userdata),
+      mScopedUseShaderPrograms(mComputePipeline->UseShaderPrograms()) {
     DAWN_ASSERT(mComputePipeline != nullptr);
 }
 
@@ -66,9 +67,9 @@ void CreateComputePipelineAsyncTask::Run() {
         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(device->GetPlatform(), "CreateComputePipelineUS");
         maybeError = mComputePipeline->Initialize();
     }
+    mScopedUseShaderPrograms = {};
     DAWN_HISTOGRAM_BOOLEAN(device->GetPlatform(), "CreateComputePipelineSuccess",
                            maybeError.IsSuccess());
-
     if (maybeError.IsError()) {
         device->AddComputePipelineAsyncCallbackTask(
             maybeError.AcquireError(), mComputePipeline->GetLabel().c_str(), mCallback, mUserdata);
@@ -103,7 +104,8 @@ CreateRenderPipelineAsyncTask::CreateRenderPipelineAsyncTask(
     void* userdata)
     : mRenderPipeline(std::move(nonInitializedRenderPipeline)),
       mCallback(callback),
-      mUserdata(userdata) {
+      mUserdata(userdata),
+      mScopedUseShaderPrograms(mRenderPipeline->UseShaderPrograms()) {
     DAWN_ASSERT(mRenderPipeline != nullptr);
 }
 
@@ -123,9 +125,9 @@ void CreateRenderPipelineAsyncTask::Run() {
         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(device->GetPlatform(), "CreateRenderPipelineUS");
         maybeError = mRenderPipeline->Initialize();
     }
+    mScopedUseShaderPrograms = {};
     DAWN_HISTOGRAM_BOOLEAN(device->GetPlatform(), "CreateRenderPipelineSuccess",
                            maybeError.IsSuccess());
-
     if (maybeError.IsError()) {
         device->AddRenderPipelineAsyncCallbackTask(
             maybeError.AcquireError(), mRenderPipeline->GetLabel().c_str(), mCallback, mUserdata);
