@@ -69,6 +69,8 @@ void CreateComputePipelineAsyncTask::Run() {
     DAWN_HISTOGRAM_BOOLEAN(device->GetPlatform(), "CreateComputePipelineSuccess",
                            maybeError.IsSuccess());
 
+    mComputePipeline->PostInitialize();
+
     if (maybeError.IsError()) {
         device->AddComputePipelineAsyncCallbackTask(
             maybeError.AcquireError(), mComputePipeline->GetLabel().c_str(), mCallback, mUserdata);
@@ -125,6 +127,8 @@ void CreateRenderPipelineAsyncTask::Run() {
     }
     DAWN_HISTOGRAM_BOOLEAN(device->GetPlatform(), "CreateRenderPipelineSuccess",
                            maybeError.IsSuccess());
+
+    mRenderPipeline->PostInitialize();
 
     if (maybeError.IsError()) {
         device->AddRenderPipelineAsyncCallbackTask(

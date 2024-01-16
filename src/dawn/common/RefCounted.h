@@ -40,6 +40,8 @@ class WeakRefData;
 
 class RefCount {
   public:
+    RefCount(uint64_t initCount, uint64_t payload);
+
     // Create a refcount with a payload. The refcount starts initially at one.
     explicit RefCount(uint64_t payload = 0);
 
@@ -47,6 +49,7 @@ class RefCount {
     uint64_t GetPayload() const;
 
     // Add a reference.
+    template <bool IncrementFromZeroAllowed = false>
     void Increment();
     // Tries to add a reference. Returns false if the ref count is already at 0. This is used when
     // operating on a raw pointer to a RefCounted instead of a valid Ref that may be soon deleted.
