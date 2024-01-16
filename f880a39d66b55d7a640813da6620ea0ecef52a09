@@ -113,6 +113,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5f91e855_9f5db542",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T23:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6ab9e745_e3da41fa",
+      "range": {
+        "startLine": 50,
+        "startChar": 35,
+        "endLine": 51,
+        "endChar": 8
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36a85842_8d815ff4",
@@ -136,6 +160,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ac9c2d1e_cf2676ee",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T23:55:44Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "36a85842_8d815ff4",
+      "range": {
+        "startLine": 650,
+        "startChar": 43,
+        "endLine": 650,
+        "endChar": 65
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad73b666_01921851",
@@ -149,6 +197,30 @@
       "writtenOn": "2024-01-16T22:19:30Z",
       "side": 1,
       "message": "it\u0027s weird that this function drops the original `device`, in favor of the new reference added here.\n\nWhy not add a new method like Externalize() which bumps only the external refcount by 1, then return `device.Detach()` ?",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 652,
+        "endChar": 31
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6a6249f4_cca61853",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T23:55:44Z",
+      "side": 1,
+      "message": "I feel it is a little bit over optimization, especially it needs add a new method `Externalize()` in RefcountedWithExternalCount. And method name is not well self explain.",
+      "parentUuid": "ad73b666_01921851",
       "range": {
         "startLine": 652,
         "startChar": 0,
