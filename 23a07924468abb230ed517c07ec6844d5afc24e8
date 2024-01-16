@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "53730efe_9f84bd5c",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T15:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d259013c_cd8af9b9",
+      "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "d2ef44f8_a17ed609",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "98694ffa_99428720",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T15:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d2ef44f8_a17ed609",
+      "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2f1b978f_0f603e41",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-01-16T14:49:46Z",
       "side": 1,
       "message": "It would be worth having a test for concurrent read on backends that support it, and tests for the newly added validation of concurrentRead \u0026\u0026 !initialized being an error. Could be a follow-up if needed.",
+      "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e2c1df1_4dde6e63",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T15:46:59Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2f1b978f_0f603e41",
       "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
