@@ -1027,15 +1027,15 @@ ResultOrError<Ref<ShaderModuleBase>> DeviceBase::GetOrCreateShaderModule(
                                                       compilationMessages));
             }
 
-            ResultOrError<Ref<ShaderModuleBase>> result_or_error = [&] {
+            auto resultOrError = [&]() -> ResultOrError<Ref<ShaderModuleBase>> {
                 SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateShaderModuleUS");
                 return CreateShaderModuleImpl(descriptor, parseResult, compilationMessages);
             }();
             DAWN_HISTOGRAM_BOOLEAN(GetPlatform(), "CreateShaderModuleSuccess",
-                                   result_or_error.IsSuccess());
+                                   resultOrError.IsSuccess());
 
             Ref<ShaderModuleBase> result;
-            DAWN_TRY_ASSIGN(result, std::move(result_or_error));
+            DAWN_TRY_ASSIGN(result, std::move(resultOrError));
             result->SetContentHash(blueprintHash);
             return result;
         });
@@ -1145,6 +1145,7 @@ void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* 
             std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
                       ToAPI(ReturnToAPI(std::move(cachedComputePipeline))), "", userdata));
     } else {
+        uninitializedComputePipeline->PreInitialize();
         // Otherwise we will create the pipeline object in InitializeComputePipelineAsyncImpl(),
         // where the pipeline object may be initialized asynchronously and the result will be
         // saved to mCreatePipelineAsyncTracker.
@@ -1203,6 +1204,7 @@ void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* de
             std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
                       ToAPI(ReturnToAPI(std::move(cachedRenderPipeline))), "", userdata));
     } else {
+        uninitializedRenderPipeline->PreInitialize();
         // Otherwise we will create the pipeline object in InitializeRenderPipelineAsyncImpl(),
         // where the pipeline object may be initialized asynchronously and the result will be
         // saved to mCreatePipelineAsyncTracker.
@@ -1248,7 +1250,6 @@ ShaderModuleBase* DeviceBase::APICreateShaderModule(const ShaderModuleDescriptor
     // after all other operations are finished, even if any of them is failed and result
     // is an error shader module.
     result->InjectCompilationMessages(std::move(compilationMessages));
-
     return ReturnToAPI(std::move(result));
 }
 ShaderModuleBase* DeviceBase::APICreateErrorShaderModule(const ShaderModuleDescriptor* descriptor,
@@ -1666,6 +1667,8 @@ ResultOrError<Ref<ComputePipelineBase>> DeviceBase::CreateComputePipeline(
         return cachedComputePipeline;
     }
 
+    uninitializedComputePipeline->PreInitialize();
+
     MaybeError maybeError;
     {
         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateComputePipelineUS");
@@ -1805,6 +1808,8 @@ ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipeline(
     if (cachedRenderPipeline != nullptr) {
         return cachedRenderPipeline;
     }
+
+    uninitializedRenderPipeline->PreInitialize();
 
     MaybeError maybeError;
     {
