@@ -1603,9 +1603,8 @@ std::ostringstream& DawnTestBase::ExpectAttachmentDepthStencilTestData(
 
 void DawnTestBase::WaitABit(wgpu::Instance targetInstance) {
     if (targetInstance == nullptr) {
-        targetInstance = instance;
-    }
-    if (targetInstance != nullptr) {
+        instance.ProcessEvents();
+    } else if (targetInstance != nullptr) {
         targetInstance.ProcessEvents();
     }
     FlushWire();
