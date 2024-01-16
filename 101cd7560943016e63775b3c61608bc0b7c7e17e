@@ -16,6 +16,23 @@
       "message": "Split out this small CL from the upcoming change to make life easier.",
       "revId": "101cd7560943016e63775b3c61608bc0b7c7e17e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "963f1166_10c973e5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-16T13:55:47Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "101cd7560943016e63775b3c61608bc0b7c7e17e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
