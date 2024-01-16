@@ -146,6 +146,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d60369f3_7109b644",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-16T07:45:29Z",
+      "side": 1,
+      "message": "The CL https://dawn-review.googlesource.com/c/dawn/+/169841 for `D3D11_MAP_FLAG_DO_NOT_WAIT` and `Flush()`.\n\nI did more tests with `D3D11_MAP_FLAG_DO_NOT_WAIT`, and made some experiments with these changes:\na) skia-graphite full-size write\nb) flush in CommandRecordingContext::ExecuteCommandList()\nc) upload buffer emulation(this CL)\n\n\na(N) b(N) c(N) score(1746) DXGI_ERROR_WAS_STILL_DRAWING(Y)\na(N) b(Y) c(N) score(1738) DXGI_ERROR_WAS_STILL_DRAWING(Y)\na(Y) b(N) c(N) score(1785) DXGI_ERROR_WAS_STILL_DRAWING(Y)\na(Y) b(Y) c(N) score(1860) DXGI_ERROR_WAS_STILL_DRAWING(Y)\na(Y) b(Y) c(Y) score(2247) DXGI_ERROR_WAS_STILL_DRAWING(N)\na(Y) b(N) c(Y) score(2017) DXGI_ERROR_WAS_STILL_DRAWING(N)\n\nobservations:\n1) no DXGI_ERROR_WAS_STILL_DRAWING found with a) and c).\n2) Without a), DXGI_ERROR_WAS_STILL_DRAWING occurs immediately after chromium is launched.\n3) With a), but without c), DXGI_ERROR_WAS_STILL_DRAWING doesn\u0027t occur running \"Images\" alone, but does running the full \"MotionMarker\".\n4) DXGI_ERROR_WAS_STILL_DRAWING seems irrelevant with b)\n5) b) plays a negative impact in score when there is no DXGI_ERROR_WAS_STILL_DRAWING.\n\n\nMy only concern is about `Flush`. I am not sure about it. The manual also advises not to use it.\n\n\"Most applications don\u0027t need to call this method. If an application calls this method when not necessary, it incurs a performance penalty. Each call to Flush incurs a significant amount of overhead.\"",
+      "parentUuid": "af35d7b7_d25dbe02",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
