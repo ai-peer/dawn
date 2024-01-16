@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "59a5138a_1d0a2253",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-16T14:49:46Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d259013c_cd8af9b9",
+        "filename": "src/dawn/dawn.json",
+        "patchSetId": 8
+      },
+      "lineNbr": 1752,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-16T14:49:46Z",
+      "side": 1,
+      "message": "```suggestion\n            {\"name\": \"concurrent read\", \"type\": \"bool\"},\n```",
+      "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d2ef44f8_a17ed609",
+        "filename": "src/dawn/native/SharedTextureMemory.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 263,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-16T14:49:46Z",
+      "side": 1,
+      "message": "Same nits as usual for the error messages: https://dawn.googlesource.com/dawn/+/refs/heads/main/docs/dawn/errors.md#error-message-formatting\n\n\u003e State errors in terms of what failed, rather than how to satisfy the rule.",
+      "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2f1b978f_0f603e41",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-16T14:49:46Z",
+      "side": 1,
+      "message": "It would be worth having a test for concurrent read on backends that support it, and tests for the newly added validation of concurrentRead \u0026\u0026 !initialized being an error. Could be a follow-up if needed.",
+      "revId": "23a07924468abb230ed517c07ec6844d5afc24e8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
