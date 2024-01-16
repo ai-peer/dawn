@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0cc0bf6d_932ca28a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T19:39:29Z",
+      "side": 1,
+      "message": "PTAL, I think this is what we agreed on earlier but happy to bikeshed on specifics.",
+      "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
