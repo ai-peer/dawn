@@ -51,10 +51,6 @@ target_sources(dawn_platform PRIVATE
     "tracing/EventTracer.h"
     "tracing/TraceEvent.h"
 )
-target_link_libraries(dawn_platform
-  PUBLIC dawn_headers
-         partition_alloc
-  PRIVATE dawn_internal_config
-          dawn_common)
+target_link_libraries(dawn_platform PUBLIC dawn_headers PRIVATE dawn_internal_config dawn_common)
 
 install_if_enabled(dawn_platform)
