@@ -1,0 +1,24 @@
+#include <metal_stdlib>
+
+using namespace metal;
+struct S1 {
+  int i;
+};
+
+struct S2 {
+  S1 s1;
+};
+
+struct S3 {
+  S2 s2;
+};
+
+void f(S3 s3) {
+}
+
+kernel void tint_symbol() {
+  S3 const tint_symbol_1 = S3{.s2=S2{.s1=S1{.i=42}}};
+  f(tint_symbol_1);
+  return;
+}
+
