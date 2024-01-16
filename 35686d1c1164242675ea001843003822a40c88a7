@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "dd87f118_c96c1c01",
+        "filename": "src/tint/cmd/tint/main.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 1050,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-16T14:52:37Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "d70f0039_239c6baf",
+      "revId": "35686d1c1164242675ea001843003822a40c88a7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "088c2bdf_e1211851",
