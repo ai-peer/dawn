@@ -373,6 +373,11 @@ MaybeError RenderPipeline::Initialize() {
 
     for (auto stage : IterateStages(GetStageMask())) {
         const ProgrammableStage& programmableStage = GetStage(stage);
+
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        auto tintData = std::move(programmableStage.tintData);
+
         DAWN_TRY_ASSIGN(compiledShader[stage],
                         ToBackend(programmableStage.module)
                             ->Compile(programmableStage, stage, ToBackend(GetLayout()),
