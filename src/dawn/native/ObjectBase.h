@@ -30,6 +30,7 @@
 
 #include <mutex>
 #include <string>
+#include <type_traits>
 
 #include "dawn/common/LinkedList.h"
 #include "dawn/common/Ref.h"
@@ -150,8 +151,15 @@ class ApiObjectBase : public ObjectBase, public LinkNode<ApiObjectBase> {
     std::string mLabel;
 };
 
+template <typename T>
+class RefCountedWithExternalCountBase;
+
 template <class T>
 T* ReturnToAPI(Ref<T>&& object) {
+    if constexpr (std::is_base_of_v<RefCountedWithExternalCountBase<RefCounted>, T> == true ||
+                  std::is_base_of_v<RefCountedWithExternalCountBase<ApiObjectBase>, T> == true) {
+        object->IncrementExternalRefCount();
+    }
     return object.Detach();
 }
 
