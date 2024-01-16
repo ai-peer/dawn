@@ -387,6 +387,11 @@ MaybeError RenderPipeline::Initialize() {
     auto AddShaderStage = [&](SingleShaderStage stage, VkShaderStageFlagBits vkStage,
                               bool clampFragDepth) -> MaybeError {
         const ProgrammableStage& programmableStage = GetStage(stage);
+
+        // Release scopedUseTintProgram, so mTintProgram in ShaderModule could be released, if it is
+        // not used elsewhere.
+        auto scopedUseTintProgram = std::move(programmableStage.scopedUseTintProgram);
+
         ShaderModule::ModuleAndSpirv moduleAndSpirv;
         DAWN_TRY_ASSIGN(moduleAndSpirv,
                         ToBackend(programmableStage.module)

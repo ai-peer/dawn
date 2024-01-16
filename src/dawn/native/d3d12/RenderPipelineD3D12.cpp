@@ -373,6 +373,11 @@ MaybeError RenderPipeline::Initialize() {
 
     for (auto stage : IterateStages(GetStageMask())) {
         const ProgrammableStage& programmableStage = GetStage(stage);
+
+        // Release scopedUseTintProgram, so mTintProgram in ShaderModule could be released, if it is
+        // not used elsewhere.
+        auto scopedUseTintProgram = std::move(programmableStage.scopedUseTintProgram);
+
         DAWN_TRY_ASSIGN(compiledShader[stage],
                         ToBackend(programmableStage.module)
                             ->Compile(programmableStage, stage, ToBackend(GetLayout()),
