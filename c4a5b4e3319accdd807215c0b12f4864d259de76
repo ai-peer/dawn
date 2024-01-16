@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "43882ee5_c999af68",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-16T15:25:14Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "c4a5b4e3319accdd807215c0b12f4864d259de76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f64fbdd0_2d3cdc44",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-01-15T22:11:58Z",
       "side": 1,
       "message": "Austin, do I need to do something to invalidate the existing shader cache that was saved without this option? I assume we don\u0027t need to for official Chrome versions, but what about for devs?",
+      "revId": "c4a5b4e3319accdd807215c0b12f4864d259de76",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6b9a425_f7fcf4b5",
+        "filename": "src/dawn/native/d3d/ShaderUtils.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-16T15:25:14Z",
+      "side": 1,
+      "message": "The Dawn commit hash is included in the key for the shader cache, so there is nothing to do for devs to take advantage of this.",
+      "parentUuid": "f64fbdd0_2d3cdc44",
       "revId": "c4a5b4e3319accdd807215c0b12f4864d259de76",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
