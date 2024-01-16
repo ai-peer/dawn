@@ -34,6 +34,24 @@
       "parentUuid": "7a8d4709_36c20c9c",
       "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "57f4f3a5_59e1719e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-16T21:13:35Z",
+      "side": 1,
+      "message": "I understand how it works, but why was the prior version not sufficient?\n\nit seems a lot more complex now with two different templated types of RefCount, etc.",
+      "parentUuid": "4fdba39f_0e446b61",
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
