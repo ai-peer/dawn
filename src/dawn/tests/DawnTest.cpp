@@ -64,6 +64,10 @@
 #include "dawn/native/OpenGLBackend.h"
 #endif  // DAWN_ENABLE_BACKEND_OPENGL
 
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+#include "dawn/native/metal/BackendMTL.h"
+#endif  // DAWN_ENABLE_BACKEND_METAL
+
 namespace dawn {
 namespace {
 
@@ -951,6 +955,15 @@ bool DawnTestBase::IsBackendValidationEnabled() const {
 
 bool DawnTestBase::IsFullBackendValidationEnabled() const {
     return gTestEnv->GetBackendValidationLevel() == native::BackendValidationLevel::Full;
+}
+
+bool DawnTestBase::IsMetalValidationEnabled() const {
+#if defined(DAWN_ENABLE_BACKEND_METAL)
+    return IsMetal() && native::metal::IsMetalValidationEnabled(
+                            native::FromAPI(device.Get())->GetPhysicalDevice());
+#else
+    return false;
+#endif
 }
 
 bool DawnTestBase::IsCompatibilityMode() const {

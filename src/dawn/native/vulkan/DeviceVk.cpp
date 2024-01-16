@@ -737,7 +737,7 @@ Ref<TextureBase> Device::CreateTextureWrappingVulkanImage(
     waitSemaphores.reserve(waitHandles.size());
 
     // Cleanup in case of a failure, the image creation doesn't acquire the external objects
-    // if a failure happems.
+    // if a failure happens.
     Ref<Texture> result;
     // TODO(crbug.com/1026480): Consolidate this into a single CreateFromExternal call.
     if (ConsumedError(Texture::CreateFromExternal(this, descriptor, textureDescriptor,

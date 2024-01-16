@@ -219,7 +219,7 @@ PipelineBase::PipelineBase(DeviceBase* device,
         // Record them internally.
         bool isFirstStage = mStageMask == wgpu::ShaderStage::None;
         mStageMask |= StageBit(shaderStage);
-        mStages[shaderStage] = {module, entryPointName, &metadata, {}};
+        mStages[shaderStage] = {module, entryPointName, &metadata, {}, {}};
         auto& constants = mStages[shaderStage].constants;
         for (uint32_t i = 0; i < stage.constantCount; i++) {
             constants.emplace(stage.constants[i].key, stage.constants[i].value);
@@ -348,6 +348,27 @@ bool PipelineBase::EqualForCache(const PipelineBase* a, const PipelineBase* b) {
     }
 
     return true;
+}
+
+void PipelineBase::PreInitialize() {
+    for (SingleShaderStage shaderStage :
+         {SingleShaderStage::Vertex, SingleShaderStage::Fragment, SingleShaderStage::Compute}) {
+        auto& stage = mStages[shaderStage];
+        if (stage.module.Get()) {
+            // Hold an external API reference of ShaderModuleBase to keep mTintProgram in
+            // ShaderModuleBase alive.
+            stage.scopedUseTintProgram = stage.module->UseTintProgram();
+        }
+    }
+}
+
+MaybeError PipelineBase::Initialize() {
+    auto result = InitializeImpl();
+    for (SingleShaderStage shaderStage :
+         {SingleShaderStage::Vertex, SingleShaderStage::Fragment, SingleShaderStage::Compute}) {
+        mStages[shaderStage].scopedUseTintProgram = {};
+    }
+    return result;
 }
 
 }  // namespace dawn::native
