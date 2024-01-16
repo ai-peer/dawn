@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "76c551da_96c2a053",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-16T19:45:55Z",
+      "side": 1,
+      "message": "lgtm w/ nits",
+      "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "00181287_9a380810",
@@ -61,6 +78,40 @@
         "endLine": 45,
         "endChar": 6
       },
+      "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dd4df9ca_7d86978a",
+        "filename": "src/tint/lang/core/ir/validator.h",
+        "patchSetId": 1
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-16T19:45:55Z",
+      "side": 1,
+      "message": "Maybe `kAllowVectorElementPointer` then the usage of `!caps.contains(Capability::kAllowVectoryElementPointer)` reads a bit more naturally?",
+      "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6fc1c302_31f4ea38",
+        "filename": "src/tint/lang/core/ir/validator_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 796,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-16T19:45:55Z",
+      "side": 1,
+      "message": "Maybe move this up to 762 so it directly follows the case which the code mimics? Makes it obvious that it fails in one and passes with the cap.",
       "revId": "11b1de3ac031bb9d427b9233754594cf9ff78c64",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
