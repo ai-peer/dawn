@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a8d4709_36c20c9c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-16T19:13:24Z",
+      "side": 1,
+      "message": "The change to introduce RefCountedWithExternalCountBase\u003cT\u003e can be in a separate smaller CL.\n\nI don\u0027t understand. Why do we need to make it so that RefCountedWithExternalCount starts at 0? The previous scheme where it starts at 1 and we return it detached works OK.",
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
