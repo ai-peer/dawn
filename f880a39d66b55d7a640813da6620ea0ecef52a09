@@ -70,6 +70,93 @@
       "parentUuid": "57f4f3a5_59e1719e",
       "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a0d582f2_1d1b3554",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-16T22:19:30Z",
+      "side": 1,
+      "message": "do we need the template to accomplish this? Can\u0027t you use a constructor arg to default the external count to 0?\n\nsecondly, manually defining ReturnToAPI whenever we need it seems not ideal. \n\nCan\u0027t we have two definitions, one for when std::is_base_of\u003cT, RefCountedWithExternalCountBase\u003e and when it is not?",
+      "parentUuid": "d9001c22_76a0a269",
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6ab9e745_e3da41fa",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 51,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-16T22:19:30Z",
+      "side": 1,
+      "message": "I don\u0027t see the return value used",
+      "range": {
+        "startLine": 50,
+        "startChar": 35,
+        "endLine": 51,
+        "endChar": 8
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "36a85842_8d815ff4",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 650,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-16T22:19:30Z",
+      "side": 1,
+      "message": "the argument could be \u0026\u0026 so that we require to always call it by move to avoid making unnecessary ref+release",
+      "range": {
+        "startLine": 650,
+        "startChar": 43,
+        "endLine": 650,
+        "endChar": 65
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad73b666_01921851",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-16T22:19:30Z",
+      "side": 1,
+      "message": "it\u0027s weird that this function drops the original `device`, in favor of the new reference added here.\n\nWhy not add a new method like Externalize() which bumps only the external refcount by 1, then return `device.Detach()` ?",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 652,
+        "endChar": 31
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
