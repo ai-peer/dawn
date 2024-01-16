@@ -52,6 +52,24 @@
       "parentUuid": "4fdba39f_0e446b61",
       "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d9001c22_76a0a269",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-16T22:03:50Z",
+      "side": 1,
+      "message": "This CL was split from an ALL IN ONE CL by Corentin\u0027s comment https://dawn-review.googlesource.com/c/dawn/+/169580/2/src/dawn/native/ObjectBase.h#158 .\nIn that CL, `RefCountedWithExternalCountBase` will be used as base class for ShaderModuleBase. The previous version is not always ok for all the cases. For example, if ShaderModuleBase is created and for some reason it is not returned to API. If dawn doesn\u0027t call APIRelease() explicitly, the object will be released with `mExternalRefCount \u003d\u003d 1`. IMHO, with this approach, everything is well defined. For a new created object, refcount will be 1 because it is referenced internally, the external refcount will be 0. Before returning it to API, dawn will always call ReturnToAPI() to increase API reference explicitly, and expect APIRelease() when it is not used by API anymore.",
+      "parentUuid": "57f4f3a5_59e1719e",
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
