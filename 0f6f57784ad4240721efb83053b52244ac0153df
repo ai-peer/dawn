@@ -34,6 +34,24 @@
       "parentUuid": "c135c1f4_414eb574",
       "revId": "0f6f57784ad4240721efb83053b52244ac0153df",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dee36e2d_ddd4f60c",
+        "filename": "test/tint/vk-gl-cts/graphicsfuzz/cov-nested-loops-global-loop-counter-do-while-accumulate-float/0-opt.spvasm.expected.fxc.hlsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 1,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-16T19:23:53Z",
+      "side": 0,
+      "message": "They apparently timeout on debug builds. That\u0027s why. Restored.",
+      "parentUuid": "cccd8b29_26df9529",
+      "revId": "0f6f57784ad4240721efb83053b52244ac0153df",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
