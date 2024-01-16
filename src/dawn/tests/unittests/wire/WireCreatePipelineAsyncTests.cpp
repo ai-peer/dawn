@@ -347,8 +347,8 @@ TEST_F(WireCreatePipelineAsyncTest, CreateComputePipelineAsyncAfterDisconnect) {
 TEST_F(WireCreatePipelineAsyncTest, DeviceDeletedBeforeCallback) {
     WGPUShaderModuleDescriptor vertexDescriptor = {};
     WGPUShaderModule module = wgpuDeviceCreateShaderModule(device, &vertexDescriptor);
-    WGPUShaderModule apiModule = api.GetNewShaderModule();
-    EXPECT_CALL(api, DeviceCreateShaderModule(apiDevice, _)).WillOnce(Return(apiModule));
+    WGPUShaderModule scopedUseTintProgram = api.GetNewShaderModule();
+    EXPECT_CALL(api, DeviceCreateShaderModule(apiDevice, _)).WillOnce(Return(scopedUseTintProgram));
 
     WGPURenderPipelineDescriptor pipelineDescriptor{};
     pipelineDescriptor.vertex.module = module;
