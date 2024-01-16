@@ -1225,12 +1225,15 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
     return {};
 }
 
+ShaderModuleBase::TintData::TintData() = default;
+ShaderModuleBase::TintData::~TintData() = default;
+
 // ShaderModuleBase
 
 ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
                                    const UnpackedPtr<ShaderModuleDescriptor>& descriptor,
                                    ApiObjectBase::UntrackedByDeviceTag tag)
-    : ApiObjectBase(device, descriptor->label), mType(Type::Undefined) {
+    : Base(device, descriptor->label), mType(Type::Undefined) {
     if (auto* spirvDesc = descriptor.Get<ShaderModuleSPIRVDescriptor>()) {
         mType = Type::Spirv;
         mOriginalSpirv.assign(spirvDesc->code, spirvDesc->code + spirvDesc->codeSize);
@@ -1249,7 +1252,7 @@ ShaderModuleBase::ShaderModuleBase(DeviceBase* device,
 }
 
 ShaderModuleBase::ShaderModuleBase(DeviceBase* device, ObjectBase::ErrorTag tag, const char* label)
-    : ApiObjectBase(device, tag, label), mType(Type::Undefined) {}
+    : Base(device, tag, label), mType(Type::Undefined) {}
 
 ShaderModuleBase::~ShaderModuleBase() = default;
 
@@ -1301,9 +1304,67 @@ bool ShaderModuleBase::EqualityFunc::operator()(const ShaderModuleBase* a,
     return a->mType == b->mType && a->mOriginalSpirv == b->mOriginalSpirv && a->mWgsl == b->mWgsl;
 }
 
+const Ref<ShaderModuleBase::TintData>& ShaderModuleBase::GetTintData() {
+    std::lock_guard<std::mutex> guard(mTintDataMutex);
+
+    // When the ShaderModuleBase is not referenced externally, mTintData will be set to null.
+    // However the ShaderModuleBase itself may still alive due to being referenced by some
+    // pipelines. In this case, when DeviceBase::APICreateShaderModule() with the same shader source
+    // code, Dawn will look up from the cache and return the same ShaderModuleBase. In this case, we
+    // have to recover or recreate mTintData.
+
+    // Try recover mTintData from mTintDataWeakRef.
+    if (!mTintData.Get()) {
+        mTintData = mTintDataWeakRef.Promote();
+    }
+
+    // If the tint data recovering failed, we have to recreate tint data from the shader source
+    // code.
+    if (!mTintData.Get()) {
+        ShaderModuleDescriptor descriptor;
+        ShaderModuleWGSLDescriptor wgslDescriptor;
+        ShaderModuleSPIRVDescriptor sprivDescriptor;
+
+        switch (mType = Type::Wgsl) {
+            case Type::Spirv:
+                sprivDescriptor.codeSize = mOriginalSpirv.size();
+                sprivDescriptor.code = mOriginalSpirv.data();
+                descriptor.nextInChain = &sprivDescriptor;
+                break;
+            case Type::Wgsl:
+                wgslDescriptor.code = mWgsl.c_str();
+                descriptor.nextInChain = &wgslDescriptor;
+                break;
+            default:
+                DAWN_ASSERT(false);
+        }
+
+        ShaderModuleParseResult parseResult;
+        ValidateAndParseShaderModule(GetDevice(), Unpack(&descriptor), &parseResult,
+                                     /*compilationMessages=*/nullptr)
+            .AcquireSuccess();
+        DAWN_ASSERT(parseResult.tintProgram);
+
+        mTintData = AcquireRef(new TintData);
+        mTintData->mTintProgram = std::move(parseResult.tintProgram);
+        mTintData->mTintSource = std::move(parseResult.tintSource);
+        mTintDataWeakRef = GetWeakRef(mTintData);
+        mTintDataIsReCreated = true;
+    }
+
+    return mTintData;
+}
+
 const tint::Program* ShaderModuleBase::GetTintProgram() const {
-    DAWN_ASSERT(mTintProgram);
-    return mTintProgram.get();
+    std::lock_guard<std::mutex> guard(mTintDataMutex);
+
+    // GetTintProgram() could be called for compiling shader on background thread, and the mTintData
+    // could be null due losing all external references.
+    Ref<TintData> tintData = mTintDataWeakRef.Promote();
+    // mTintDataWeakRef.Promote() should always success, because pipeline should keep a reference of
+    // mTintData until shader compilation is done.
+    DAWN_ASSERT(tintData.Get());
+    return tintData->mTintProgram.get();
 }
 
 void ShaderModuleBase::APIGetCompilationInfo(wgpu::CompilationInfoCallback callback,
@@ -1354,10 +1415,16 @@ OwnedCompilationMessages* ShaderModuleBase::GetCompilationMessages() const {
 
 MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult,
                                             OwnedCompilationMessages* compilationMessages) {
-    mTintProgram = std::move(parseResult->tintProgram);
-    mTintSource = std::move(parseResult->tintSource);
+    DAWN_ASSERT(parseResult->tintProgram);
 
-    DAWN_TRY(ReflectShaderUsingTint(GetDevice(), mTintProgram.get(), compilationMessages,
+    std::lock_guard<std::mutex> guard(mTintDataMutex);
+
+    mTintData = AcquireRef(new TintData);
+    mTintData->mTintProgram = std::move(parseResult->tintProgram);
+    mTintData->mTintSource = std::move(parseResult->tintSource);
+    mTintDataWeakRef = GetWeakRef(mTintData);
+
+    DAWN_TRY(ReflectShaderUsingTint(GetDevice(), mTintData->mTintProgram.get(), compilationMessages,
                                     &mEntryPoints));
 
     for (auto stage : IterateStages(kAllStages)) {
@@ -1372,6 +1439,13 @@ MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult
     }
 
     return {};
+}
+
+void ShaderModuleBase::WillDropLastExternalRef() {
+    std::lock_guard<std::mutex> guard(mTintDataMutex);
+    // If the ShaderModuleBase is not referenced externally, we drop the ref of mTintData, so it can
+    // be released when the last references is dropped internally.
+    mTintData = nullptr;
 }
 
 }  // namespace dawn::native

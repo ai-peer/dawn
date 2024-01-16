@@ -387,6 +387,11 @@ MaybeError RenderPipeline::Initialize() {
     auto AddShaderStage = [&](SingleShaderStage stage, VkShaderStageFlagBits vkStage,
                               bool clampFragDepth) -> MaybeError {
         const ProgrammableStage& programmableStage = GetStage(stage);
+
+        // Release the ref of tint data in ShaderModuleBase, so it could be released, if it is not
+        // used elsewhere.
+        auto tintData = std::move(programmableStage.tintData);
+
         ShaderModule::ModuleAndSpirv moduleAndSpirv;
         DAWN_TRY_ASSIGN(moduleAndSpirv,
                         ToBackend(programmableStage.module)

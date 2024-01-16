@@ -1145,6 +1145,7 @@ void DeviceBase::APICreateComputePipelineAsync(const ComputePipelineDescriptor* 
             std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
                       ToAPI(ReturnToAPI(std::move(cachedComputePipeline))), "", userdata));
     } else {
+        uninitializedComputePipeline->PreInitialize();
         // Otherwise we will create the pipeline object in InitializeComputePipelineAsyncImpl(),
         // where the pipeline object may be initialized asynchronously and the result will be
         // saved to mCreatePipelineAsyncTracker.
@@ -1203,6 +1204,7 @@ void DeviceBase::APICreateRenderPipelineAsync(const RenderPipelineDescriptor* de
             std::bind(callback, WGPUCreatePipelineAsyncStatus_Success,
                       ToAPI(ReturnToAPI(std::move(cachedRenderPipeline))), "", userdata));
     } else {
+        uninitializedRenderPipeline->PreInitialize();
         // Otherwise we will create the pipeline object in InitializeRenderPipelineAsyncImpl(),
         // where the pipeline object may be initialized asynchronously and the result will be
         // saved to mCreatePipelineAsyncTracker.
@@ -1668,6 +1670,7 @@ ResultOrError<Ref<ComputePipelineBase>> DeviceBase::CreateComputePipeline(
 
     MaybeError maybeError;
     {
+        uninitializedComputePipeline->PreInitialize();
         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateComputePipelineUS");
         maybeError = uninitializedComputePipeline->Initialize();
     }
@@ -1808,6 +1811,7 @@ ResultOrError<Ref<RenderPipelineBase>> DeviceBase::CreateRenderPipeline(
 
     MaybeError maybeError;
     {
+        uninitializedRenderPipeline->PreInitialize();
         SCOPED_DAWN_HISTOGRAM_TIMER_MICROS(GetPlatform(), "CreateRenderPipelineUS");
         maybeError = uninitializedRenderPipeline->Initialize();
     }
