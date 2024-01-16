@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "40fc1315_ac61306b",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 104,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T21:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "95a4b25a_bf92c8c7",
+      "range": {
+        "startLine": 104,
+        "startChar": 14,
+        "endLine": 104,
+        "endChar": 20
+      },
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "bf56d5b0_ddfb969d",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-16T19:56:09Z",
       "side": 1,
       "message": "nit: There\u0027s no recursion here. Could be larger.",
+      "range": {
+        "startLine": 108,
+        "startChar": 37,
+        "endLine": 108,
+        "endChar": 38
+      },
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8aabb17f_8e88edc0",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 108,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T21:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bf56d5b0_ddfb969d",
       "range": {
         "startLine": 108,
         "startChar": 37,
@@ -81,6 +129,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "edc9cc53_79caf6d2",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T21:45:40Z",
+      "side": 1,
+      "message": "Done here and all of the others.",
+      "parentUuid": "669f2694_eafc45c9",
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "72c63a29_fc244748",
@@ -98,6 +164,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b2f71530_4e8a5330",
+        "filename": "src/tint/lang/spirv/reader/lower/vector_element_pointer_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 274,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T21:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "72c63a29_fc244748",
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7077082c_edfe8947",
@@ -111,6 +195,30 @@
       "writtenOn": "2024-01-16T19:56:09Z",
       "side": 1,
       "message": "I could be wrong, but I think this can be simplified to `EXPECT_EQ(got, R\"(`",
+      "range": {
+        "startLine": 92,
+        "startChar": 4,
+        "endLine": 93,
+        "endChar": 25
+      },
+      "revId": "a6448b295aae0f6e60faeec606eb5e0ca0147f2d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "873f1555_02176bbe",
+        "filename": "src/tint/lang/spirv/reader/reader_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-16T21:45:40Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7077082c_edfe8947",
       "range": {
         "startLine": 92,
         "startChar": 4,
