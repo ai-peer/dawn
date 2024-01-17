@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "291860b8_dd4219cc",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-17T13:43:36Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "cd8d9ae9418214fed27af59853d3be018a14bce2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "73b23272_c755b4e9",
@@ -14,6 +31,24 @@
       "writtenOn": "2024-01-17T12:52:05Z",
       "side": 1,
       "message": "It\u0027s a bit surprising that we create only on demand. Can\u0027t we create the MTLTexture when the SharedTextureMemory is created? It would avoid having to pass the descriptor in and out.",
+      "revId": "cd8d9ae9418214fed27af59853d3be018a14bce2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "adb9c55a_96b78ba6",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-17T13:43:36Z",
+      "side": 1,
+      "message": "Am I misunderstanding, or can the format and size (which are parameters to the MtlTexture creation) vary with the client-passed-in info when it asks SharedTextureMemory to create a Texture [1]? That was the assumption that I had been going on that led me to design it this way. I was going to cache MtlTexture objects in SharedTextureMemory keyed off the (MetalTextureDescriptor, plane) pairs.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/SharedTextureMemory.cpp;l\u003d131-137?q\u003dSharedTextureMemory.cpp\u0026ss\u003dchromium",
+      "parentUuid": "73b23272_c755b4e9",
       "revId": "cd8d9ae9418214fed27af59853d3be018a14bce2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
