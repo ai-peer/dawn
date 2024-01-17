@@ -253,6 +253,30 @@
       },
       "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6961d0c2_38f3b95c",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-17T19:00:33Z",
+      "side": 1,
+      "message": "Remove external refcount related changes from this CL.",
+      "parentUuid": "83bcf463_e7b41e01",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 652,
+        "endChar": 31
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

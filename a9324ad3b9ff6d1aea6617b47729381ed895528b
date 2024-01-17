@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a574e445_6c327e19",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-17T19:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22f56f9f_7d9bbeb8",
+      "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8b711bab_5d5c2fbf",
@@ -52,6 +70,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4d64705_03d2bc92",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-17T19:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8b711bab_5d5c2fbf",
+      "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "03fec105_f0ed092e",
@@ -65,6 +101,24 @@
       "writtenOn": "2024-01-17T13:04:19Z",
       "side": 1,
       "message": "Why NOLINT? Maybe it will be sufficient to move this include higher?",
+      "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4bd056c_b4f6949e",
+        "filename": "src/dawn/native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-17T19:00:33Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "03fec105_f0ed092e",
       "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
