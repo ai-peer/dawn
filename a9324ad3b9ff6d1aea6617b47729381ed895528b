@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f108c1b5_a12ea7e0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-17T13:04:19Z",
+      "side": 1,
+      "message": "LGTM with RefCounted changes reverted as they no longer seem needed given the discussion in the other CL.",
+      "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22f56f9f_7d9bbeb8",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1001,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-17T13:04:19Z",
+      "side": 1,
+      "message": "Doesn\u0027t the following work?\n\n```\nreturn ReturnToAPI(BeginComputePass(descriptor));\n```",
+      "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8b711bab_5d5c2fbf",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1061,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-17T13:04:19Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "03fec105_f0ed092e",
+        "filename": "src/dawn/native/vulkan/VulkanBackend.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 37,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-17T13:04:19Z",
+      "side": 1,
+      "message": "Why NOLINT? Maybe it will be sufficient to move this include higher?",
+      "revId": "a9324ad3b9ff6d1aea6617b47729381ed895528b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

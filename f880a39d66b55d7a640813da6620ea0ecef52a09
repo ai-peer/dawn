@@ -229,6 +229,30 @@
       },
       "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "83bcf463_e7b41e01",
+        "filename": "src/dawn/native/Device.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 652,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-17T13:04:19Z",
+      "side": 1,
+      "message": "With the discussion in the other CL, it seems we might not need to change the initial refcount of Device/Instance to start at zero so both this specialization and the one for Instance could be removed.",
+      "parentUuid": "6a6249f4_cca61853",
+      "range": {
+        "startLine": 652,
+        "startChar": 0,
+        "endLine": 652,
+        "endChar": 31
+      },
+      "revId": "f880a39d66b55d7a640813da6620ea0ecef52a09",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
