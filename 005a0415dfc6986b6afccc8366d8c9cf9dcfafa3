@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df75379f_05c794d5",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-17T00:47:28Z",
+      "side": 1,
+      "message": "Yea, but the goal is to defer all of that logic to the native side. Eventually, the `DeviceLost` and `DeviceDestroyed` statuses should be removed since in those cases native will (and already does?) just respond with `Success` with an error pipeline. \n\nAny other error, would be something like an internal or validation error where we are rejecting anyways so we just free the pipeline handle.",
+      "parentUuid": "2b60da97_77d6df55",
+      "revId": "005a0415dfc6986b6afccc8366d8c9cf9dcfafa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "61b39be4_fab2eef7",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-10T11:57:35Z",
       "side": 1,
       "message": "```suggestion\n    // instead of a pointer to an empty string.\n```",
+      "revId": "005a0415dfc6986b6afccc8366d8c9cf9dcfafa3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8a7b5821_42c68121",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 8
+      },
+      "lineNbr": 90,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-17T00:47:28Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "61b39be4_fab2eef7",
       "revId": "005a0415dfc6986b6afccc8366d8c9cf9dcfafa3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
