@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "73b23272_c755b4e9",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 133,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-17T12:52:05Z",
+      "side": 1,
+      "message": "It\u0027s a bit surprising that we create only on demand. Can\u0027t we create the MTLTexture when the SharedTextureMemory is created? It would avoid having to pass the descriptor in and out.",
+      "revId": "cd8d9ae9418214fed27af59853d3be018a14bce2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
