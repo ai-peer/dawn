@@ -122,6 +122,24 @@
       "parentUuid": "d44fac3e_253a38bb",
       "revId": "d6888ccac4f414de3b0df27a71b6edb0b4076c4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8c0b0b7e_069511d8",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-01-17T15:11:48Z",
+      "side": 1,
+      "message": "I double checked and tried to submit the CLA again, and it says:\n\"We have already received a CLA request for this Google Group.\"\n\nThe google group is: \ndistributive-google-contrib@distributive.network\n\nAnd yes, I signed in with the same email (amir@distributive.network)",
+      "parentUuid": "e5cf4973_51d91da1",
+      "revId": "d6888ccac4f414de3b0df27a71b6edb0b4076c4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
