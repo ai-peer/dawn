@@ -30,11 +30,12 @@
 
 // Include vulkan_platform.h before VulkanBackend.h includes vulkan.h so that we use our version
 // of the non-dispatchable handles.
+#include <utility>
+
 #include "dawn/common/vulkan_platform.h"
 
 #include "dawn/native/VulkanBackend.h"
 
-#include <utility>  //NOLINT
 
 #include "dawn/native/vulkan/DeviceVk.h"
 #include "dawn/native/vulkan/TextureVk.h"
