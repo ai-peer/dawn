@@ -88,6 +88,24 @@
       "parentUuid": "082ca197_940493a0",
       "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "682fb8ef_d7e48582",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T16:26:00Z",
+      "side": 1,
+      "message": "Those are all SKIP results though, yeah. So most people do --generate-expected and not --generate-skip, I guess? I usually do both, since I figure if something becomes unskipped later it\u0027s easier to see what got fixed than with a bunch of unrelated changes.",
+      "parentUuid": "de07a17e_a4067c5b",
+      "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
