@@ -33,6 +33,23 @@
       "message": "Thanks",
       "revId": "460d5b9f6829aec27c61f48db730fe92bc1049f6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8b5710f9_a26eb448",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-17T08:28:09Z",
+      "side": 1,
+      "message": "\u003cnoop\u003e",
+      "revId": "460d5b9f6829aec27c61f48db730fe92bc1049f6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
