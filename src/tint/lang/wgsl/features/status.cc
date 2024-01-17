@@ -36,10 +36,12 @@ FeatureStatus GetLanguageFeatureStatus(LanguageFeature f) {
         case LanguageFeature::kPacked4X8IntegerDotProduct:
         case LanguageFeature::kPointerCompositeAccess:
         case LanguageFeature::kReadonlyAndReadwriteStorageTextures:
-        case LanguageFeature::kUnrestrictedPointerParameters:
             return FeatureStatus::kExperimental;
         case LanguageFeature::kUndefined:
             return FeatureStatus::kUnknown;
+
+        case LanguageFeature::kUnrestrictedPointerParameters:
+            return FeatureStatus::kShippedWithKillswitch;
 
         case LanguageFeature::kChromiumTestingUnimplemented:
             return FeatureStatus::kUnimplemented;
