@@ -60,10 +60,12 @@ constexpr uint32_t kIndirectFirstInstanceEnabled = 8;
 
 // Equivalent to the BatchInfo struct defined in the shader below.
 struct BatchInfo {
-    uint64_t numIndexBufferElements;
     uint32_t numDraws;
     uint32_t flags;
 };
+
+// The size, in bytes, of the IndirectDraw struct defined in the shader below.
+constexpr uint32_t kIndirectDrawByteSize = sizeof(uint32_t) * 3;
 
 // TODO(https://crbug.com/dawn/1108): Propagate validation feedback from this shader in
 // various failure modes.
@@ -80,12 +82,16 @@ static const char sRenderValidationShaderSource[] = R"(
             const kValidationEnabled = 4u;
             const kIndirectFirstInstanceEnabled = 8u;
 
-            struct BatchInfo {
+            struct IndirectDraw {
+                indirectOffset: u32,
                 numIndexBufferElementsLow: u32,
                 numIndexBufferElementsHigh: u32,
+            }
+
+            struct BatchInfo {
                 numDraws: u32,
                 flags: u32,
-                indirectOffsets: array<u32>,
+                draws: array<IndirectDraw>,
             }
 
             struct IndirectParams {
@@ -125,7 +131,7 @@ static const char sRenderValidationShaderSource[] = R"(
             fn set_pass(drawIndex: u32) {
                 let numInputParams = numIndirectParamsPerDrawCallInput();
                 var outIndex = drawIndex * numIndirectParamsPerDrawCallOutput();
-                let inIndex = batch.indirectOffsets[drawIndex];
+                let inIndex = batch.draws[drawIndex].indirectOffset;
 
                 // The first 2 parameter is reserved for the duplicated first/baseVertex and firstInstance
 
@@ -154,7 +160,7 @@ static const char sRenderValidationShaderSource[] = R"(
                     return;
                 }
 
-                let inputIndex = batch.indirectOffsets[id.x];
+                let inputIndex = batch.draws[id.x].indirectOffset;
                 if(!bool(batch.flags & kIndirectFirstInstanceEnabled)) {
                     // firstInstance is always the last parameter
                     let firstInstance = inputParams.data[inputIndex + numIndirectParamsPerDrawCallInput() - 1u];
@@ -169,23 +175,27 @@ static const char sRenderValidationShaderSource[] = R"(
                     return;
                 }
 
-                if (batch.numIndexBufferElementsHigh >= 2u) {
+                let numIndexBufferElementsHigh = batch.draws[id.x].numIndexBufferElementsHigh;
+
+                if (numIndexBufferElementsHigh >= 2u) {
                     // firstIndex and indexCount are both u32. The maximum possible sum of these
                     // values is 0x1fffffffe, which is less than 0x200000000. Nothing to validate.
                     set_pass(id.x);
                     return;
                 }
 
+                let numIndexBufferElementsLow = batch.draws[id.x].numIndexBufferElementsLow;
+
                 let firstIndex = inputParams.data[inputIndex + kFirstIndexEntry];
-                if (batch.numIndexBufferElementsHigh == 0u &&
-                    batch.numIndexBufferElementsLow < firstIndex) {
+                if (numIndexBufferElementsHigh == 0u &&
+                    numIndexBufferElementsLow < firstIndex) {
                     fail(id.x);
                     return;
                 }
 
                 // Note that this subtraction may underflow, but only when
                 // numIndexBufferElementsHigh is 1u. The result is still correct in that case.
-                let maxIndexCount = batch.numIndexBufferElementsLow - firstIndex;
+                let maxIndexCount = numIndexBufferElementsLow - firstIndex;
                 let indexCount = inputParams.data[inputIndex + kIndexCountEntry];
                 if (indexCount > maxIndexCount) {
                     fail(id.x);
@@ -233,7 +243,7 @@ ResultOrError<ComputePipelineBase*> GetOrCreateRenderValidationPipeline(DeviceBa
 }
 
 size_t GetBatchDataSize(uint32_t numDraws) {
-    return sizeof(BatchInfo) + numDraws * sizeof(uint32_t);
+    return sizeof(BatchInfo) + (numDraws * kIndirectDrawByteSize);
 }
 
 }  // namespace
@@ -242,7 +252,7 @@ uint32_t ComputeMaxDrawCallsPerIndirectValidationBatch(const CombinedLimits& lim
     const uint64_t batchDrawCallLimitByDispatchSize =
         static_cast<uint64_t>(limits.v1.maxComputeWorkgroupsPerDimension) * kWorkgroupSize;
     const uint64_t batchDrawCallLimitByStorageBindingSize =
-        (limits.v1.maxStorageBufferBindingSize - sizeof(BatchInfo)) / sizeof(uint32_t);
+        (limits.v1.maxStorageBufferBindingSize - sizeof(BatchInfo)) / kIndirectDrawByteSize;
     return static_cast<uint32_t>(
         std::min({batchDrawCallLimitByDispatchSize, batchDrawCallLimitByStorageBindingSize,
                   uint64_t(std::numeric_limits<uint32_t>::max())}));
@@ -261,7 +271,6 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
 
     struct Batch {
         const IndirectDrawMetadata::IndirectValidationBatch* metadata;
-        uint64_t numIndexBufferElements;
         uint64_t dataBufferOffset;
         uint64_t dataSize;
         uint64_t inputIndirectOffset;
@@ -316,7 +325,6 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
 
             Batch newBatch;
             newBatch.metadata = &batch;
-            newBatch.numIndexBufferElements = config.numIndexBufferElements;
             newBatch.dataSize = GetBatchDataSize(batch.draws.size());
             newBatch.inputIndirectOffset = minOffsetAlignedDown;
             newBatch.inputIndirectSize =
@@ -391,7 +399,6 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
         uint8_t* batchData = static_cast<uint8_t*>(pass.batchData.get());
         for (Batch& batch : pass.batches) {
             batch.batchInfo = new (&batchData[batch.dataBufferOffset]) BatchInfo();
-            batch.batchInfo->numIndexBufferElements = batch.numIndexBufferElements;
             batch.batchInfo->numDraws = static_cast<uint32_t>(batch.metadata->draws.size());
             batch.batchInfo->flags = pass.flags;
 
@@ -401,6 +408,12 @@ MaybeError EncodeIndirectDrawValidationCommands(DeviceBase* device,
                 // The shader uses this to index an array of u32, hence the division by 4 bytes.
                 *indirectOffsets++ =
                     static_cast<uint32_t>((draw.inputBufferOffset - batch.inputIndirectOffset) / 4);
+                // The index buffer elements are 64 bit values, and so need to be set as a
+                // low uint32_t and a high uint32_t.
+                *indirectOffsets++ =
+                    static_cast<uint32_t>(draw.numIndexBufferElements & 0xFFFFFFFF);
+                *indirectOffsets++ =
+                    static_cast<uint32_t>((draw.numIndexBufferElements >> 32) & 0xFFFFFFFF);
 
                 draw.cmd->indirectBuffer = outputParamsBuffer.GetBuffer();
                 draw.cmd->indirectOffset = outputParamsOffset;
