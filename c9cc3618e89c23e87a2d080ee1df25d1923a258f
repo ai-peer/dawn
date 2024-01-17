@@ -141,6 +141,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3de271ef_91f29abe",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1399,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-17T00:08:22Z",
+      "side": 1,
+      "message": "I think your suggestion should work too, and should be simpler in code. Just it re-purposes the external reference and I feel a lit bit hacky. \n\nHi Corentin, what\u0027s your opinion for this suggestion?",
+      "parentUuid": "76028a72_65e07437",
+      "revId": "c9cc3618e89c23e87a2d080ee1df25d1923a258f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51f6fe87_e2df7f39",
