@@ -186,8 +186,8 @@ void IndirectDrawMetadata::AddIndexedIndirectDraw(wgpu::IndexFormat indexFormat,
             DAWN_UNREACHABLE();
     }
 
-    const IndexedIndirectConfig config = {indirectBuffer, numIndexBufferElements,
-                                          duplicateBaseVertexInstance, DrawType::Indexed};
+    const IndexedIndirectConfig config = {indirectBuffer, 0, duplicateBaseVertexInstance,
+                                          DrawType::Indexed};
     auto it = mIndexedIndirectBufferValidationInfo.find(config);
     if (it == mIndexedIndirectBufferValidationInfo.end()) {
         auto result = mIndexedIndirectBufferValidationInfo.emplace(
@@ -197,6 +197,7 @@ void IndirectDrawMetadata::AddIndexedIndirectDraw(wgpu::IndexFormat indexFormat,
 
     IndirectDraw draw{};
     draw.inputBufferOffset = indirectOffset;
+    draw.numIndexBufferElements = numIndexBufferElements;
     draw.cmd = cmd;
     it->second.AddIndirectDraw(mMaxDrawCallsPerBatch, mMaxBatchOffsetRange, draw);
 }
@@ -216,6 +217,7 @@ void IndirectDrawMetadata::AddIndirectDraw(BufferBase* indirectBuffer,
 
     IndirectDraw draw{};
     draw.inputBufferOffset = indirectOffset;
+    draw.numIndexBufferElements = 0;
     draw.cmd = cmd;
     it->second.AddIndirectDraw(mMaxDrawCallsPerBatch, mMaxBatchOffsetRange, draw);
 }
