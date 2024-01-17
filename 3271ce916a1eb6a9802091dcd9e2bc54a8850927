@@ -1,0 +1,50 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e518115_1b5566f6",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1869,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-17T17:10:16Z",
+      "side": 1,
+      "message": "this test name has both \"SeparateDevices\" and \"SameDevice\" in it which is confusing.\n\n```suggestion\nTEST_P(SharedTextureMemoryTests, SameDeviceWriteThenConcurrentReadThenWrite) {\n```",
+      "range": {
+        "startLine": 1869,
+        "startChar": 33,
+        "endLine": 1869,
+        "endChar": 95
+      },
+      "revId": "3271ce916a1eb6a9802091dcd9e2bc54a8850927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e8d893d_0cc896f3",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1962,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-17T17:10:16Z",
+      "side": 1,
+      "message": "you\u0027re performing the two reads in separate submits. Ideally this should occur within the same shader so that we know it actually occurs concurrently. Generally, GPUs do not reorder commands across command buffers, so these will run serially.",
+      "range": {
+        "startLine": 1961,
+        "startChar": 0,
+        "endLine": 1962,
+        "endChar": 58
+      },
+      "revId": "3271ce916a1eb6a9802091dcd9e2bc54a8850927",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
