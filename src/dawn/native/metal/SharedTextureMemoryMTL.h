@@ -35,6 +35,8 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/SharedTextureMemory.h"
 
+#import <Metal/Metal.h>
+
 namespace dawn::native::metal {
 
 class Device;
@@ -48,6 +50,7 @@ class SharedTextureMemory final : public SharedTextureMemoryBase {
         const SharedTextureMemoryIOSurfaceDescriptor* descriptor);
 
     IOSurfaceRef GetIOSurface() const;
+    id<MTLTexture> GetOrCreateMtlTextureForPlane(MTLTextureDescriptor* mtlDesc, size_t plane);
 
   private:
     SharedTextureMemory(Device* device,

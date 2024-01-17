@@ -130,6 +130,14 @@ IOSurfaceRef SharedTextureMemory::GetIOSurface() const {
     return mIOSurface.Get();
 }
 
+id<MTLTexture> SharedTextureMemory::GetOrCreateMtlTextureForPlane(MTLTextureDescriptor* mtlDesc,
+                                                                  size_t plane) {
+    return
+        [static_cast<Device*>(GetDevice())->GetMTLDevice() newTextureWithDescriptor:mtlDesc
+                                                                          iosurface:GetIOSurface()
+                                                                              plane:plane];
+}
+
 ResultOrError<Ref<TextureBase>> SharedTextureMemory::CreateTextureImpl(
     const UnpackedPtr<TextureDescriptor>& descriptor) {
     return Texture::CreateFromSharedTextureMemory(this, descriptor);
