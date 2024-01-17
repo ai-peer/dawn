@@ -1,5 +1,29 @@
 {
-  "comments": [],
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "df9795f7_66fd4c4c",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 3
+      },
+      "lineNbr": 697,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-17T13:50:38Z",
+      "side": 1,
+      "message": "[link]",
+      "range": {
+        "startLine": 691,
+        "startChar": 0,
+        "endLine": 697,
+        "endChar": 155
+      },
+      "revId": "b361c2b12c1a6fe6ef54ac7aa462b09406ba7b2a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ],
   "submitRequirementResults": [
     {
       "submitRequirement": {
