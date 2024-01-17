@@ -70,6 +70,24 @@
       "parentUuid": "69012871_fa481e7d",
       "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "de07a17e_a4067c5b",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T16:23:51Z",
+      "side": 1,
+      "message": "Here\u0027s what I had to land before I landed my change: https://dawn-review.googlesource.com/c/dawn/+/169260",
+      "parentUuid": "082ca197_940493a0",
+      "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
