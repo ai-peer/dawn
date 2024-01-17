@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f34b7226_254f10a2",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:26:59Z",
+      "side": 1,
+      "message": "The GLSL fix looks good, but @gman@chromium.org should take a look. \n\nThat said, I think the OpenGL backend\u0027s approach might be better than what you\u0027re proposing for D3D: rather than statically subtracting off 2 from maxVertexAttributes, let maxVertexAttributes be the upper hardware limit, but subtract off slots only if vertex_index or instance_index are used.\n\nSee: https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/RenderPipeline.cpp;l\u003d218",
+      "parentUuid": "ef1030c2_44efa0f2",
+      "range": {
+        "startLine": 17,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "6fa3a393791c9dc4dd7e591a5f612c3fb7b3d148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7b6c92_9de0e512",
