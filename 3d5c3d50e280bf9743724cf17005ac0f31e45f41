@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f823c70d_ab26e39e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-17T12:06:33Z",
+      "side": 1,
+      "message": "Thanks!\n\nI can reproduce easily using:\n```\n./out/Debug/dawn_unittests --use-wire --wire-trace-dir\u003d{}\n```\n\nThe error is in `src/dawn/utils/WireHelper.cpp`. The pointer is dangling.\nI am going to fix this immediately, by add `DanglingUntriaged` to the raw ptr.",
+      "revId": "3d5c3d50e280bf9743724cf17005ac0f31e45f41",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
