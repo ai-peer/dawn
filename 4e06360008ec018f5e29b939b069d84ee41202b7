@@ -236,6 +236,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "186e4873_30f01d09",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-17T18:29:44Z",
+      "side": 1,
+      "message": "I see - you\u0027re spot on about those buffer usages not doing any fence tracking at all. We should update the usage of the staging buffer and uniform buffer to be smarter about how we map instead of using system memory. And yes, we should also update D3D11\u0027s MapAsyncImpl to map after the serial has passed instead of when the map is requested.",
+      "parentUuid": "2fb21a17_44a859e6",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
