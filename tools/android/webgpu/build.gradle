@@ -1,0 +1,54 @@
+plugins {
+    id 'com.android.library'
+    id 'maven-publish'
+}
+
+android {
+    namespace 'net.android.webgpu'
+    defaultConfig {
+        minSdkVersion 26
+        compileSdkVersion 34
+        ndk {
+            abiFilters 'arm64-v8a', 'x86_64'
+        }
+        externalNativeBuild {
+            cmake {
+                arguments '-DANDROID_STL=c++_shared'
+                version '3.22.1'
+            }
+
+        }
+    }
+
+    externalNativeBuild {
+        cmake {
+            path file('src/main/cpp/CMakeLists.txt')
+        }
+    }
+
+    buildFeatures {
+        prefabPublishing true
+    }
+
+    prefab {
+        webgpu_dawn_bundled {
+            headers "src/main/cpp/dawn/include"
+        }
+        webgpu_cpp_bundled {
+            headers "src/main/cpp/gen/include"
+        }
+    }
+}
+
+project.afterEvaluate {
+    publishing {
+        publications {
+            libraryProject(MavenPublication) {
+                setGroupId 'net.android'
+                setArtifactId 'webgpu'
+                version '1.1.3'
+                artifact bundleReleaseAar
+            }
+        }
+    }
+}
