@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "337f3d70_487dfdf7",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.h",
+        "patchSetId": 11
+      },
+      "lineNbr": 178,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-17T18:42:21Z",
+      "side": 1,
+      "message": "typo:\n\n\n```suggestion\n    std::pair\u003cwgpu::CommandBuffer, wgpu::Texture\u003e MakeCheckBySamplingTwoTexturesCommandBuffer(\n```",
+      "range": {
+        "startLine": 178,
+        "startChar": 50,
+        "endLine": 178,
+        "endChar": 93
+      },
+      "revId": "9cc128f4224a964b2dcaa62f963f749aedf70bb2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
