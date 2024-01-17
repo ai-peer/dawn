@@ -1,0 +1,265 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c8e9a8e_cb70bae9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab06d4a3_1353439d",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n            // GLSL requires the main entry point name to be \"main\".\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "737e5720_87e3b628",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n            // So even when r.disableSymbolRenaming \u003d\u003d false, if the entry point name is \"main\" or other GLSL\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "43c8b689_2de0039c",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n            // reserved keyword, Tint renames it, requiring us to find the remapped\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4ed8fb4d_58f821a2",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n            // the entry point as well.\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc3f115b_d4f38946",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n            // Even if disableSymbolRenaming \u003d\u003d true, Tint renames GLSL reserved keywords.\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc8460a7_507fc97e",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2237,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// Regression test for crbug.com/dawn/2340. GLSL requires the main enty point to be named \"main\".\n```",
+      "range": {
+        "startLine": 2237,
+        "startChar": 44,
+        "endLine": 2237,
+        "endChar": 49
+      },
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e0d77ae_82019e49",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// We need to make sure when the entry point is \"main\" or other GLSL reserved keyword,\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "160879ee_2e9d8081",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2239,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// the renaming is always properly handled for the GL backend no matter what \"disable_symbol_renaming\"\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff42ce3_5d90fb36",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2252,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n        // Entry point is a GLSLreserved keyword other than \"main\".\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "377277c0_1663ad90",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// Regression test for crbug.com/dawn/2340. GLSL requires the main enty point to be named \"main\".\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a5326158_f8ed858e",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2272,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// We need to make sure when the entry point is \"main\" or other GLSL reserved keyword,\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2508ebc6_6e22c1e1",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// the renaming is always properly handled for the GL backend no matter what \"disable_symbol_renaming\"\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db15a7af_4ebc6313",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2282,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// Entry point is a GLSL reserved keyword other than \"main\".\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8cbff244_bc85c3e1",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:59:38Z",
+      "side": 1,
+      "message": "```suggestion\n// Entry point is not a GLSL reserved keyword.\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
