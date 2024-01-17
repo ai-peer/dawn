@@ -20,6 +20,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9941b2c9_700d3e70",
+        "filename": "tools/android/webgpu/build.gradle",
+        "patchSetId": 1
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1004846
+      },
+      "writtenOn": "2024-01-17T12:28:21Z",
+      "side": 1,
+      "message": "Suggest we remove the abiFilters. It seems we don\u0027t need to filter the abi types in order to build. Although it does make for *much* speedier dev cycles.",
+      "revId": "e3e99523107d545d68668a4cd7576ef6e5039b17",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4b6d94cc_06d7f7b3",
         "filename": "tools/android/webgpu/src/main/cpp/CMakeLists.txt",
         "patchSetId": 1
