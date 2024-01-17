@@ -50,6 +50,24 @@
       "message": "can you add a correctness test, similar to this one, that tests the concurrent read works correctly?",
       "revId": "aa7408bc9027c78b4d8d12c392b167056fe15f0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "290bc818_0982b974",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-17T15:54:11Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bb3f94b7_b7127bf3",
+      "revId": "aa7408bc9027c78b4d8d12c392b167056fe15f0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
