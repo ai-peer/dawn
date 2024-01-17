@@ -440,10 +440,7 @@ MaybeError Texture::InitializeFromSharedTextureMemory(
         mMtlUsage = mtlDesc.usage;
         mMtlFormat = mtlDesc.pixelFormat;
         mMtlPlaneTextures->resize(1);
-        mMtlPlaneTextures[0] =
-            AcquireNSPRef([device->GetMTLDevice() newTextureWithDescriptor:mtlDesc
-                                                                 iosurface:mIOSurface.Get()
-                                                                     plane:0]);
+        mMtlPlaneTextures[0] = memory->GetOrCreateMtlTextureForPlane(mtlDesc, 0);
     } else {
         mMtlUsage = kMetalTextureUsageForSharedTextureMemoryIOSurface;
         // Multiplanar format doesn't have equivalent MTLPixelFormat so just set it to invalid.
@@ -453,10 +450,7 @@ MaybeError Texture::InitializeFromSharedTextureMemory(
         for (size_t plane = 0; plane < numPlanes; ++plane) {
             NSRef<MTLTextureDescriptor> mtlDesc = CreateMetalTextureDescriptorForPlane(
                 mMtlUsage, GetFormat(), plane, device, GetSampleCount(), GetIOSurface());
-            mMtlPlaneTextures[plane] =
-                [device->GetMTLDevice() newTextureWithDescriptor:mtlDesc.Get()
-                                                       iosurface:GetIOSurface()
-                                                           plane:plane];
+            mMtlPlaneTextures[plane] = memory->GetOrCreateMtlTextureForPlane(mtlDesc.Get(), plane);
             if (mMtlPlaneTextures[plane] == nil) {
                 return DAWN_INTERNAL_ERROR("Failed to create MTLTexture plane view for IOSurface.");
             }
