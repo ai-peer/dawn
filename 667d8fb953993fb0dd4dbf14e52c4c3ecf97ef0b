@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f74cf231_88355f2b",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-17T14:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d7b7d9e_49139d1a",
+      "revId": "667d8fb953993fb0dd4dbf14e52c4c3ecf97ef0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ee83fa5c_ad58074e",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-01-17T14:18:10Z",
       "side": 1,
       "message": "übernit: `Symbol` implicitly converts to `bool` so I personally prefer these without the explicit `IsValid()` call.",
+      "range": {
+        "startLine": 367,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 44
+      },
+      "revId": "667d8fb953993fb0dd4dbf14e52c4c3ecf97ef0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "177a2a1e_75c6dd25",
+        "filename": "src/tint/lang/core/ir/transform/direct_variable_access.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-17T14:41:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ee83fa5c_ad58074e",
       "range": {
         "startLine": 367,
         "startChar": 0,
