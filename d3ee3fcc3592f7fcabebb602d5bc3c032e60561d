@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "41e413d1_d0841e7d",
+        "filename": "src/tint/lang/msl/writer/ast_raise/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 62,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-17T22:09:35Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "a07451ac_3a7570da",
+      "range": {
+        "startLine": 61,
+        "startChar": 0,
+        "endLine": 62,
+        "endChar": 80
+      },
+      "revId": "d3ee3fcc3592f7fcabebb602d5bc3c032e60561d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "17057c91_1d94b046",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-17T12:36:48Z",
       "side": 1,
       "message": "to avoid type mismatches, suggest `uint32_t`. This is also not in an anonymous namespaces, so should have `static`.\n\n```suggestion\nstatic constexpr uint32_t kMaxSeriallyUnpackedArraySize \u003d 8;\n```",
+      "range": {
+        "startLine": 63,
+        "startChar": 10,
+        "endLine": 63,
+        "endChar": 18
+      },
+      "revId": "d3ee3fcc3592f7fcabebb602d5bc3c032e60561d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1f0aa4db_84e8cd50",
+        "filename": "src/tint/lang/msl/writer/ast_raise/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-17T22:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "17057c91_1d94b046",
       "range": {
         "startLine": 63,
         "startChar": 10,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "87417646_70ab68d4",
+        "filename": "src/tint/lang/msl/writer/ast_raise/packed_vec3.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 260,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-17T22:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ecefa3c8_7fcd400b",
+      "range": {
+        "startLine": 260,
+        "startChar": 16,
+        "endLine": 260,
+        "endChar": 61
+      },
+      "revId": "d3ee3fcc3592f7fcabebb602d5bc3c032e60561d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a40b398c_14543e35",
@@ -100,6 +172,24 @@
       "writtenOn": "2024-01-17T12:36:48Z",
       "side": 1,
       "message": "übernit: Would probably be more efficient to initialize the array with the values instead of zero-initializing the array then assigning. The backend compiler should be smart enough to remove the initial zeroing, but I\u0027ve learnt to never assume.",
+      "revId": "d3ee3fcc3592f7fcabebb602d5bc3c032e60561d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "926dbd4c_f156e23f",
+        "filename": "src/tint/lang/msl/writer/ast_raise/packed_vec3_test.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 523,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-17T22:09:35Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a40b398c_14543e35",
       "revId": "d3ee3fcc3592f7fcabebb602d5bc3c032e60561d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
