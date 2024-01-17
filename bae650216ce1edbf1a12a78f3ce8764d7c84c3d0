@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a89d89a7_e6d3cda3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T23:05:01Z",
+      "side": 1,
+      "message": "BTW, this was on my list of things to investigate to see if they can be replaced\u0027improved with push constants. But it\u0027s fine to go ahead with this for now.",
+      "revId": "bae650216ce1edbf1a12a78f3ce8764d7c84c3d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
