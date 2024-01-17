@@ -1,0 +1,130 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb14ae1a_94c5b11e",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-17T15:22:48Z",
+      "side": 1,
+      "message": "`ast::Parameter` ? Then you don\u0027t need any of the loop, assert, etc. The two places this is called just needs `-\u003eDeclaration()`",
+      "range": {
+        "startLine": 1036,
+        "startChar": 85,
+        "endLine": 1036,
+        "endChar": 93
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7859c73e_6ae2fc59",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-17T15:22:48Z",
+      "side": 1,
+      "message": "```suggestion\n        auto\u0026 param_to_type \u003d *fn_to_data.GetOrZero(func);\n```",
+      "range": {
+        "startLine": 1038,
+        "startChar": 41,
+        "endLine": 1039,
+        "endChar": 96
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5fffee32_bcdcd196",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-17T15:22:48Z",
+      "side": 1,
+      "message": "no need for the dynamic cast here. \n```suggestion\n            if (p \u003d\u003d var-\u003eDeclaration()) {\n```",
+      "range": {
+        "startLine": 1043,
+        "startChar": 17,
+        "endLine": 1043,
+        "endChar": 38
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9757fcf1_283a50dc",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-17T15:22:48Z",
+      "side": 1,
+      "message": "```suggestion\n        if (seen.insert(binding).second) {\n            res.emplace_back(LevelSampleInfo{type, binding.group, binding.binding});\n        }\n```",
+      "range": {
+        "startLine": 1062,
+        "startChar": 0,
+        "endLine": 1068,
+        "endChar": 80
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "438c96ba_937fe03c",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-17T15:22:48Z",
+      "side": 1,
+      "message": "This looks to be in the wrong place. If this is applied to the `else if`, please split into:\n\n```\n\n        } else {\n            // Not an entry point, make sure it was called from the requested entry point\n            if (!fn-\u003eHasAncestorEntryPoint(ep-\u003ename-\u003esymbol)) {\n                continue;\n            }\n        }\n```",
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8bf82940_52219d02",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1002421
+      },
+      "writtenOn": "2024-01-17T15:22:48Z",
+      "side": 1,
+      "message": "Please use a Switch",
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
