@@ -934,13 +934,12 @@ MTLStorageMode IOSurfaceStorageMode() {
 #error "Unsupported Apple platform."
 #endif
 }
-
-id<MTLTexture> CreateTextureMtlForPlane(MTLTextureUsage mtlUsage,
-                                        const Format& format,
-                                        size_t plane,
-                                        Device* device,
-                                        uint32_t sampleCount,
-                                        IOSurfaceRef ioSurface) {
+NSRef<MTLTextureDescriptor> CreateMetalTextureDescriptorForPlane(MTLTextureUsage mtlUsage,
+                                                                 const Format& format,
+                                                                 size_t plane,
+                                                                 Device* device,
+                                                                 uint32_t sampleCount,
+                                                                 IOSurfaceRef ioSurface) {
     Aspect aspect = GetPlaneAspect(format, plane);
     const auto& aspectInfo = format.GetAspectInfo(aspect);
 
@@ -960,9 +959,8 @@ id<MTLTexture> CreateTextureMtlForPlane(MTLTextureUsage mtlUsage,
     mtlDesc.mipmapLevelCount = 1;
     mtlDesc.arrayLength = 1;
     mtlDesc.depth = 1;
-    return [device->GetMTLDevice() newTextureWithDescriptor:mtlDesc
-                                                  iosurface:ioSurface
-                                                      plane:plane];
+
+    return mtlDescRef;
 }
 
 }  // namespace dawn::native::metal

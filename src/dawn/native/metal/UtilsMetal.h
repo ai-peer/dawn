@@ -129,12 +129,12 @@ MaybeError EncodeMetalRenderPass(Device* device,
 
 MTLStorageMode IOSurfaceStorageMode();
 
-id<MTLTexture> CreateTextureMtlForPlane(MTLTextureUsage mtlUsage,
-                                        const Format& format,
-                                        size_t plane,
-                                        Device* device,
-                                        uint32_t sampleCount,
-                                        IOSurfaceRef ioSurface);
+NSRef<MTLTextureDescriptor> CreateMetalTextureDescriptorForPlane(MTLTextureUsage mtlUsage,
+                                                                 const Format& format,
+                                                                 size_t plane,
+                                                                 Device* device,
+                                                                 uint32_t sampleCount,
+                                                                 IOSurfaceRef ioSurface);
 
 MaybeError EncodeEmptyMetalRenderPass(Device* device,
                                       CommandRecordingContext* commandContext,
