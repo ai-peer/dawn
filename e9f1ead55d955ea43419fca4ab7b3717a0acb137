@@ -16,6 +16,24 @@
       "message": "Did the CTS test you added roll successfully?",
       "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b9e4070_5cc62d95",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-17T16:58:57Z",
+      "side": 1,
+      "message": "Yes, [it\u0027s also rolled into chromium](https://chromium-review.googlesource.com/c/chromium/src/+/5204688).\n[The CL enabling the feature as experimental](https://dawn-review.googlesource.com/c/dawn/+/169264) landed against the new CTS too.",
+      "parentUuid": "0c621664_79c46cd7",
+      "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
