@@ -16,6 +16,40 @@
       "message": "LGTM",
       "revId": "aa7408bc9027c78b4d8d12c392b167056fe15f0b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "785dafde_6c25b018",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 9
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-17T05:39:05Z",
+      "side": 1,
+      "message": "LGTM but it needs a correctness test",
+      "revId": "aa7408bc9027c78b4d8d12c392b167056fe15f0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bb3f94b7_b7127bf3",
+        "filename": "src/dawn/tests/white_box/SharedTextureMemoryTests.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 1729,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-17T05:39:05Z",
+      "side": 1,
+      "message": "can you add a correctness test, similar to this one, that tests the concurrent read works correctly?",
+      "revId": "aa7408bc9027c78b4d8d12c392b167056fe15f0b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
