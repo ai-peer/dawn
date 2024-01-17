@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "12e03d80_dd6f0861",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-17T20:23:03Z",
+      "side": 1,
+      "message": "PTAL. Provides a bit more context as to why libEGL failed to load.",
+      "revId": "2980f1fd4720dca68d434fd14dd8f08ee95cd44c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
