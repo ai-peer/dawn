@@ -16,6 +16,23 @@
       "message": "Still LGTM, we also need a second review.",
       "revId": "dc892ce671ca60b548ac09d416b4618274107fb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ed03891e_afe0b838",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-17T18:36:44Z",
+      "side": 1,
+      "message": "LGTM\n\napologies this got buried in my inbox and I missed it",
+      "revId": "dc892ce671ca60b548ac09d416b4618274107fb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
