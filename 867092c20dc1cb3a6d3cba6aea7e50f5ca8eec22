@@ -106,6 +106,24 @@
       "parentUuid": "de07a17e_a4067c5b",
       "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cad0686f_bbeeed00",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-17T16:26:46Z",
+      "side": 1,
+      "message": "I believe the cases updated last week were SKIP entries? SKIP entries aren\u0027t check, as we don\u0027t actually know if they\u0027re valid or not.",
+      "parentUuid": "de07a17e_a4067c5b",
+      "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
