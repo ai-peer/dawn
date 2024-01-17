@@ -254,6 +254,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "c4e82ed8_cb256c15",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-01-17T18:36:30Z",
+      "side": 1,
+      "message": "UpdateSubResource will make a copy of the data you pass it if the buffer is currently in use by the GPU. If you want to avoid this copy, you should keep a pool of staging buffers and look for a free one by calling Map with the \"do not wait\" flag and use the first one that returns S_OK. \n\nWith a profiler and symbols, we should be able to determine where the overhead is coming from. The Windows performance analyzer has a tool (Critical Path Analysis) which tells you when the CPU is stalled and what callstack causes it to be woken up. Happy to look at traces of workloads if you\u0027d like.",
+      "parentUuid": "2fb21a17_44a859e6",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
