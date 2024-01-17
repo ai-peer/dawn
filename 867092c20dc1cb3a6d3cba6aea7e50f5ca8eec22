@@ -34,6 +34,24 @@
       "parentUuid": "64542499_ec7868a0",
       "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "69012871_fa481e7d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-17T16:14:40Z",
+      "side": 1,
+      "message": "When I go to land a patch touching GLSL results, I often find that the existing results are out-of-date (happened last week). I\u0027m not sure how that happens, but it suggests to me that Kokoro isn\u0027t catching all changes that affect GLSL results.",
+      "parentUuid": "8b8eaf2f_4c107872",
+      "revId": "867092c20dc1cb3a6d3cba6aea7e50f5ca8eec22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
