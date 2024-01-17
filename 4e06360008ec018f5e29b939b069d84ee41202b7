@@ -218,6 +218,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2fb21a17_44a859e6",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-17T03:56:54Z",
+      "side": 1,
+      "message": "For CopyBufferToTexture, I agree we should try the shader blit approach as the original design advised. We can do that in some follow-up CLs later. However, the key factor now impacting the MM perf is CopyBufferToBuffer as I mentioned previously:\n\u003e\u003e With this CL in dawn alone, and without the the full-size write CL in skia, which only involves a 256 uniform buffer map write, MM can only score 1869 instead of 2379. That\u0027s to say, map/unmap a staging buffer is actually a perf key point here.\n\n\nMore specifically, the problem most likely is that we map a buffer still being used by GPU. To solve this problem, firstly we need to sort out how we can safely map a buffer used in previously submitted commands in case of D3D11 immediate context. The current Fence we are using should be correct according to the D3D11 manual. That\u0027s to say, when the fence value passes, all previous buffers should be safe to be mapped without stalling GPU. If this is true, we can revisit all current buffer usages to follow this rule. As far as I know, internally the [staging buffer](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/DeviceD3D11.h;drc\u003d208ce394095cff453d85f5d7070a6fa8c2970dac;l\u003d167) and the [built-in uniform buffer](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/d3d11/CommandRecordingContextD3D11.h;drc\u003dc696bee7fb87959b4db2dba8a85395439fd4110c;l\u003d67) at least are not properly tracked with fence serial. For external buffers used by clients, one problem I can identify now is [MapAsyncImpl](https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/Buffer.cpp;drc\u003de036a8e7200d41afa08898ccede1324355ed5741;l\u003d576). For D3D11, that\u0027s not right timing to do the actual map. Instead we should do that only after the buffer\u0027s `mLastUsageSerial` has passed. With these cleanup done, we can map with `D3D11_MAP_FLAG_DO_NOT_WAIT` by default, and throw out an error instead of warning in case of `DXGI_ERROR_WAS_STILL_DRAWING`. This might be the right way to solve the map perf issue. Certainly the assumption is based on that the Fence works as expected.",
+      "parentUuid": "27ea6886_743f2955",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
