@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3e8000bc_317ec903",
+        "filename": "test/tint/var/initialization/function/nested_structs.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 11,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-17T14:20:53Z",
+      "side": 1,
+      "message": "To avoid DCE I\u0027d recommend writing `s3` out to a storage buffer.",
+      "revId": "a531f5c05ac33b3118d270104ae61bcf1d4f7e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9d52353b_e712c586",
+        "filename": "test/tint/var/initialization/private/nested_structs.wgsl",
+        "patchSetId": 4
+      },
+      "lineNbr": 16,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-17T14:20:53Z",
+      "side": 1,
+      "message": "Likewise, I\u0027d prefer to see this assign to a storage buffer instead of `_`.",
+      "revId": "a531f5c05ac33b3118d270104ae61bcf1d4f7e0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
