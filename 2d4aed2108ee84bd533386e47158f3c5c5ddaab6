@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d5c5e0ce_4ea4b1c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T13:50:35Z",
+      "side": 1,
+      "message": "lgtm w/ nits",
+      "revId": "2d4aed2108ee84bd533386e47158f3c5c5ddaab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "48602f80_a44c2f85",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T13:50:35Z",
+      "side": 1,
+      "message": "```suggestion\n            // In the case of the entry-point name being a reserved GLSL keyword\n            // (including `main`) the entry-point would have been renamed\n            // regardless of the `disableSymbolRenaming` flag. Always check the\n            // rename map, and if the name was changed, get the new one.\n```",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 29
+      },
+      "revId": "2d4aed2108ee84bd533386e47158f3c5c5ddaab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f63f3cb0_c0a6864c",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T13:50:35Z",
+      "side": 1,
+      "message": "Remove, covered by above comment?",
+      "revId": "2d4aed2108ee84bd533386e47158f3c5c5ddaab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
