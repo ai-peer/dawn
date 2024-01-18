@@ -218,6 +218,30 @@
       },
       "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e30618d8_d3a8ceda",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:15:02Z",
+      "side": 1,
+      "message": "Thank you. @senorblanco@chromium.org - do you think we can make the transform work without supporting the location attribute?",
+      "parentUuid": "8e5647a4_6ba452dc",
+      "range": {
+        "startLine": 628,
+        "startChar": 24,
+        "endLine": 628,
+        "endChar": 80
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
