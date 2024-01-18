@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c6264e31_a988448e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T18:27:31Z",
+      "side": 1,
+      "message": "LGTM! Nice!",
+      "revId": "30da051d23b96ff7ee3281c3d93421ca4702b610",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7fc7c011_1c686960",
+        "filename": "docs/dangling-pointer-detector.md",
+        "patchSetId": 4
+      },
+      "lineNbr": 57,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T18:27:31Z",
+      "side": 1,
+      "message": "Maybe mention AllowArithmetic as well?",
+      "revId": "30da051d23b96ff7ee3281c3d93421ca4702b610",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
