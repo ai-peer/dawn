@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
@@ -38,21 +39,58 @@ class CommandAllocatorManager;
 class Buffer;
 class Device;
 
+class CommandRecordingContext;
+
+template <typename Ctx, typename Traits>
+class CommandRecordingContextGuard;
+
+// CommandRecordingContext::Guard is an implementation of Guard that uses two locks.
+// It uses its own lock to synchronize access within Dawn.
+// It also acquires a D3D11 lock if multithread protected mode is enabled.
+// When enabled, it also synchronizes access to the D3D11 context shared external to Dawn.
+template <typename Ctx, typename Traits>
+class CommandRecordingContextGuard : public ::dawn::detail::Guard<Ctx, Traits> {
+  protected:
+    CommandRecordingContext* Get() const { return this->mObj.get(); }
+
+  public:
+    using Base = ::dawn::detail::Guard<Ctx, Traits>;
+
+    CommandRecordingContextGuard(CommandRecordingContextGuard&& rhs) = default;
+    CommandRecordingContextGuard(Ctx* ctx, typename Traits::MutexType& mutex) : Base(ctx, mutex) {
+        if (this->mObj->mD3D11Multithread) {
+            this->mObj->mD3D11Multithread->Enter();
+        }
+    }
+    ~CommandRecordingContextGuard() {
+        if (this->mObj->mD3D11Multithread) {
+            this->mObj->mD3D11Multithread->Leave();
+        }
+    }
+};
+
 class CommandRecordingContext {
   public:
+    using Guard =
+        CommandRecordingContextGuard<CommandRecordingContext,
+                                     ::dawn::detail::MutexProtectedTraits<CommandRecordingContext>>;
+
     MaybeError Initialize(Device* device);
     void Release();
-    MaybeError ExecuteCommandList();
 
-    bool IsOpen() const { return mIsOpen; }
-    bool NeedsSubmit() const { return mNeedsSubmit; }
-    void SetNeedsSubmit() { mNeedsSubmit = true; }
+    bool NeedsSubmit() const;
+
+    // Mark the commands as no longer needing submit. Returns false
+    // if commands were already submitted or the context was not open.
+    bool MarkSubmitted();
 
   private:
+    template <typename Ctx, typename Traits>
+    friend class CommandRecordingContextGuard;
+
     friend class ScopedCommandRecordingContext;
     friend class ScopedSwapStateCommandRecordingContext;
 
-    bool mScopedAccessed = false;
     bool mIsOpen = false;
     bool mNeedsSubmit = false;
     ComPtr<ID3D11Device> mD3D11Device;
@@ -72,10 +110,9 @@ class CommandRecordingContext {
 };
 
 // For using ID3D11DeviceContext methods which don't change device context state.
-class ScopedCommandRecordingContext : NonMovable {
+class ScopedCommandRecordingContext : public CommandRecordingContext::Guard {
   public:
-    explicit ScopedCommandRecordingContext(CommandRecordingContext* commandContext);
-    ~ScopedCommandRecordingContext();
+    ScopedCommandRecordingContext(CommandRecordingContext::Guard&& guard, bool needsSubmit);
 
     Device* GetDevice() const;
 
@@ -113,17 +150,14 @@ class ScopedCommandRecordingContext : NonMovable {
     // Write the built-in variable value to the uniform buffer.
     void WriteUniformBuffer(uint32_t offset, uint32_t element) const;
     MaybeError FlushUniformBuffer() const;
-
-  protected:
-    CommandRecordingContext* const mCommandContext;
-    ComPtr<ID3D11Multithread> mD3D11Multithread;
 };
 
 // For using ID3D11DeviceContext directly. It swaps and resets ID3DDeviceContextState of
 // ID3D11DeviceContext for a scope. It is needed for sharing ID3D11Device between dawn and ANGLE.
 class ScopedSwapStateCommandRecordingContext : public ScopedCommandRecordingContext {
   public:
-    explicit ScopedSwapStateCommandRecordingContext(CommandRecordingContext* commandContext);
+    ScopedSwapStateCommandRecordingContext(CommandRecordingContext::Guard&& guard,
+                                           bool needsSubmit);
     ~ScopedSwapStateCommandRecordingContext();
 
     ID3D11Device* GetD3D11Device() const;

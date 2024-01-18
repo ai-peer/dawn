@@ -64,7 +64,7 @@ MaybeError Queue::Initialize() {
 }
 
 MaybeError Queue::InitializePendingContext() {
-    return mPendingCommands.Initialize(ToBackend(GetDevice()));
+    return mPendingCommands->Initialize(ToBackend(GetDevice()));
 }
 
 void Queue::DestroyImpl() {
@@ -77,7 +77,7 @@ void Queue::DestroyImpl() {
     // underlying native fence so that we can return a SharedFence on EndAccess after destruction.
     mSharedFence = nullptr;
 
-    mPendingCommands.Release();
+    mPendingCommands->Release();
 }
 
 ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
@@ -89,36 +89,20 @@ ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
 }
 
 ScopedCommandRecordingContext Queue::GetScopedPendingCommandContext(SubmitMode submitMode) {
-    // Callers of GetPendingCommandList do so to record commands. Only reserve a command
-    // allocator when it is needed so we don't submit empty command lists
-    DAWN_ASSERT(mPendingCommands.IsOpen());
-
-    if (submitMode == SubmitMode::Normal) {
-        mPendingCommands.SetNeedsSubmit();
-    }
-
-    return ScopedCommandRecordingContext(&mPendingCommands);
+    return ScopedCommandRecordingContext(mPendingCommands.operator->(),
+                                         submitMode == SubmitMode::Normal);
 }
 
 ScopedSwapStateCommandRecordingContext Queue::GetScopedSwapStatePendingCommandContext(
     SubmitMode submitMode) {
-    // Callers of GetPendingCommandList do so to record commands. Only reserve a command
-    // allocator when it is needed so we don't submit empty command lists
-    DAWN_ASSERT(mPendingCommands.IsOpen());
-
-    if (submitMode == SubmitMode::Normal) {
-        mPendingCommands.SetNeedsSubmit();
-    }
-
-    return ScopedSwapStateCommandRecordingContext(&mPendingCommands);
+    return ScopedSwapStateCommandRecordingContext(mPendingCommands.operator->(),
+                                                  submitMode == SubmitMode::Normal);
 }
 
 MaybeError Queue::SubmitPendingCommands() {
-    if (!mPendingCommands.IsOpen() || !mPendingCommands.NeedsSubmit()) {
+    if (!mPendingCommands->MarkSubmitted()) {
         return {};
     }
-
-    DAWN_TRY(mPendingCommands.ExecuteCommandList());
     return NextSerial();
 }
 
@@ -180,7 +164,7 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
 }
 
 bool Queue::HasPendingCommands() const {
-    return mPendingCommands.NeedsSubmit();
+    return mPendingCommands->NeedsSubmit();
 }
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
