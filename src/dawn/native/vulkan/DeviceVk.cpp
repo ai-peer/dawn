@@ -770,8 +770,7 @@ void Device::OnDebugMessage(std::string message) {
 }
 
 MaybeError Device::CheckDebugLayerAndGenerateErrors() {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled() ||
-        mDebugMessages.empty()) {
+    if (!GetAdapter()->GetInstance()->IsBackendValidationEnabled() || mDebugMessages.empty()) {
         return {};
     }
 
@@ -783,7 +782,7 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
 }
 
 void Device::AppendDebugLayerMessages(ErrorData* error) {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled()) {
+    if (!GetAdapter()->GetInstance()->IsBackendValidationEnabled()) {
         return;
     }
 
@@ -794,8 +793,7 @@ void Device::AppendDebugLayerMessages(ErrorData* error) {
 }
 
 void Device::CheckDebugMessagesAfterDestruction() const {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled() ||
-        mDebugMessages.empty()) {
+    if (!GetAdapter()->GetInstance()->IsBackendValidationEnabled() || mDebugMessages.empty()) {
         return;
     }
 
