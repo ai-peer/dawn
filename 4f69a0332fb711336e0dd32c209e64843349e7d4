@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6a9d027f_408589d2",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T22:51:33Z",
+      "side": 1,
+      "message": "LGTM (please don\u0027t block me on approval as I\u0027m still understanding the whole future concept)",
+      "revId": "4f69a0332fb711336e0dd32c209e64843349e7d4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
