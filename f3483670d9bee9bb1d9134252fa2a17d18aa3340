@@ -16,6 +16,184 @@
       "message": "Ben: PTAL. Thanks!",
       "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dae8c38a_58eeccc7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "Transform logic looks good. A few questions about transform outputs, and adding locations to push constants.",
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "151ae21a_dbe2e719",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "These need to be unique symbols as `tint_first_vertex` and `tint_first_instance` can be declared by the user.\n\nPlease add a test where the input WGSL has a module scope var, fn or type with these names.",
+      "range": {
+        "startLine": 89,
+        "startChar": 45,
+        "endLine": 89,
+        "endChar": 56
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "304b383e_d608d2d6",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "It\u0027s much faster to skip the clone if nothing needs to be done, so I\u0027d replace this with:\n\n```\nif (!has_vertex_index \u0026\u0026 !has_instance_index) {\n    return SkipTransform;\n}\n```\n\nYou\u0027ll need to fix up the `ShouldRun` tests (which is what these are usually trying to test for)",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 49
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6b7b4946_14019ab7",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "can just be `\u0026`, no?",
+      "range": {
+        "startLine": 151,
+        "startChar": 24,
+        "endLine": 151,
+        "endChar": 31
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "14761e96_962dc7b4",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "Please use `std::optional` over magic constants",
+      "range": {
+        "startLine": 48,
+        "startChar": 38,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "56edf93b_0ad417df",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "We\u0027re trying to remove transform outputs where possible. Can this information be gathered from the inspector, prior to running the GLSL writer?\n\n@dsinclair@chromium.org - FYI, as this affects writer options / output.",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 6
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca6111bd_d62ef9c3",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "Please make const, or provide an initializer",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 40
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "232d7d7a_aba914e6",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T11:03:41Z",
+      "side": 1,
+      "message": "I didn\u0027t think that we could have more than one push constant per module.\n\n@cwallez@chromium.org - does this make sense for your push constant design?",
+      "range": {
+        "startLine": 628,
+        "startChar": 24,
+        "endLine": 628,
+        "endChar": 80
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
