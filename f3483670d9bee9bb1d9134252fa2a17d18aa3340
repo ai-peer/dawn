@@ -420,6 +420,30 @@
       },
       "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "de2a4fb3_d7cb5525",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-18T16:30:16Z",
+      "side": 1,
+      "message": "I had hoped to support transforms that run on multiple backends (GL \u0026 other). For example, to reuse this transform (OffsetFirstIndex) to replace the D3D-specific one (FirstIndexOffset). I had imagined that we\u0027d have to pick either locations or byte offsets, and that it\u0027s easier to convert locations into offsets than the reverse. Also, I\u0027m still not clear on what the intermediate WGSL AST/IR looks like for transforms supporting byte offsets.",
+      "parentUuid": "a27f07d4_1bf1cf04",
+      "range": {
+        "startLine": 628,
+        "startChar": 24,
+        "endLine": 628,
+        "endChar": 80
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
