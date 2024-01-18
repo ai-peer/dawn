@@ -69,6 +69,23 @@
       "parentUuid": "2b9e4070_5cc62d95",
       "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a6d6cfa6_fa975cb0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-18T18:46:50Z",
+      "side": 1,
+      "message": "Per jrprice@ suggestion, we need CTS to check alias analysis for function paramters that are the address of a partial reference.",
+      "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
