@@ -1,0 +1,311 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58983301_2e7e1d3c",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "u-nit: slight preference for having this in ObjectBase.h because dawn/common shouldn\u0027t really know about APIReference/APIRelease that are dawn/native concepts.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ad43e681_06f80f54",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "```suggestion\nRefCount::RefCount(uint64_t initCount, uint64_t payload) : mRefCount(initCount * kRefCountIncrement + payload) {\n```\n\nCould we have a tiny tiny test for this?",
+      "range": {
+        "startLine": 45,
+        "startChar": 69,
+        "endLine": 45,
+        "endChar": 78
+      },
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b727027_cfa0824c",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "existing nit: `resultOrError`",
+      "range": {
+        "startLine": 1030,
+        "startChar": 17,
+        "endLine": 1030,
+        "endChar": 32
+      },
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9e834766_e660ec7a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "nit: we could make PipelineBase::Initialize a non-virtual methods that calls an InitializeImpl that\u0027s virtual. This way we don\u0027t need to figure out all the places to call PostInitialize().\n\n```\nMaybeError PipelineBase::Initialize() {\n  MaybeError error \u003d InitializeImpl();\n  \n  // clean up the tintData\n  \n  return error;\n}\n```",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0adc09c1_2f6a3a02",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "I worry that this is slightly brittle because what if we change the argument to `RefCountedWithExternalCountBase` in the future? If we don\u0027t update this code then we\u0027ll have a refcounting problem. Maybe we could have a trait that says if it is externally refcounted or something.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5d3b1295_170aff1f",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "[1]\n\n```suggestion\n        object-\u003eAPIReference();\n```",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f935a3d8_ac6bbfd2",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "[2]",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2b9f1fb5_2d0e246a",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "Why can\u0027t this be done at [2]?",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0eac07_4aa0ee5e",
+        "filename": "src/dawn/native/RefCountedWithExternalCount.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "nit: this file could be deleted and removed from BUILD.gn / CMakeLists.txt",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ff524855_bec9b12b",
+        "filename": "src/dawn/native/RefCountedWithExternalCount.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "The comment needs updating: the reference count starts at zero for the external refcount.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "06eb0209_7a5a5524",
+        "filename": "src/dawn/native/RefCountedWithExternalCount.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "```suggestion\n    void APIReference() {\n        if (mExternalRefCount.Increment()) {\n           // Maybe this needs to be updated to return a boolean in RefCount (with tests of course)\n           // IMHO we could just remove the assert, and in RefCounted ASSERT that Increment returns false.\n           T::APIReference();\n        }\n    }\n\n    void APIRelease() {\n        if (mExternalRefCount.Decrement()) {\n            WillDropLastExternalRef();\n            T::APIRelease();\n        }\n    }\n```\n\nSee also suggestion at [1]",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f91eb38e_87d149af",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "nit: this change is no longer needed.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "643e82a2_c11cd8ff",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "Would there be a way to deduplicate this code with the other code doing the same thing?",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23f0e39f_3e279378",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "nit: this and other methods can be in the .cpp",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c6468d4d_f0d79a56",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "nit: leftover?",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9047041a_1cdca2db",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "We have a MutexProtected\u003cT\u003e helper for this pattern.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c917d8f8_b4601335",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T12:46:21Z",
+      "side": 1,
+      "message": "Isn\u0027t this the same as `IsMetal() \u0026\u0026 IsBackendValidationEnabled()`?",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
