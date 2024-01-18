@@ -89,36 +89,19 @@ ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
 }
 
 ScopedCommandRecordingContext Queue::GetScopedPendingCommandContext(SubmitMode submitMode) {
-    // Callers of GetPendingCommandList do so to record commands. Only reserve a command
-    // allocator when it is needed so we don't submit empty command lists
-    DAWN_ASSERT(mPendingCommands.IsOpen());
-
-    if (submitMode == SubmitMode::Normal) {
-        mPendingCommands.SetNeedsSubmit();
-    }
-
-    return ScopedCommandRecordingContext(&mPendingCommands);
+    return ScopedCommandRecordingContext(&mPendingCommands, submitMode == SubmitMode::Normal);
 }
 
 ScopedSwapStateCommandRecordingContext Queue::GetScopedSwapStatePendingCommandContext(
     SubmitMode submitMode) {
-    // Callers of GetPendingCommandList do so to record commands. Only reserve a command
-    // allocator when it is needed so we don't submit empty command lists
-    DAWN_ASSERT(mPendingCommands.IsOpen());
-
-    if (submitMode == SubmitMode::Normal) {
-        mPendingCommands.SetNeedsSubmit();
-    }
-
-    return ScopedSwapStateCommandRecordingContext(&mPendingCommands);
+    return ScopedSwapStateCommandRecordingContext(&mPendingCommands,
+                                                  submitMode == SubmitMode::Normal);
 }
 
 MaybeError Queue::SubmitPendingCommands() {
-    if (!mPendingCommands.IsOpen() || !mPendingCommands.NeedsSubmit()) {
+    if (!mPendingCommands.MarkSubmitted()) {
         return {};
     }
-
-    DAWN_TRY(mPendingCommands.ExecuteCommandList());
     return NextSerial();
 }
 

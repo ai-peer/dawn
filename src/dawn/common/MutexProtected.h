@@ -71,19 +71,17 @@ struct MutexProtectedTraits<Ref<T>> {
 template <typename T, typename Traits>
 class Guard {
   public:
+    Guard(T* obj, typename Traits::MutexType& mutex) : mLock(Traits::GetMutex(mutex)), mObj(obj) {}
+
     using ReturnType = typename UnwrapRef<T>::type;
 
     // It's the programmer's burden to not save the pointer/reference and reuse it without the lock.
-    ReturnType* operator->() { return Traits::GetObj(mObj.get()); }
-    ReturnType& operator*() { return *Traits::GetObj(mObj.get()); }
-    const ReturnType* operator->() const { return Traits::GetObj(mObj); }
-    const ReturnType& operator*() const { return *Traits::GetObj(mObj); }
+    ReturnType* operator->() const { return Traits::GetObj(mObj.get()); }
+    ReturnType& operator*() const { return *Traits::GetObj(mObj.get()); }
 
   private:
     using NonConstT = typename std::remove_const<T>::type;
     friend class MutexProtected<NonConstT>;
-
-    Guard(T* obj, typename Traits::MutexType& mutex) : mLock(Traits::GetMutex(mutex)), mObj(obj) {}
 
     typename Traits::LockType mLock;
     const raw_ptr<T> mObj;

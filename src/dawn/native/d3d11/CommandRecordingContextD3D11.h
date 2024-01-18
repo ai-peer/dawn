@@ -28,6 +28,7 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_COMMANDRECORDINGCONTEXT_D3D11_H_
 
+#include "dawn/common/MutexProtected.h"
 #include "dawn/common/NonCopyable.h"
 #include "dawn/common/Ref.h"
 #include "dawn/native/Error.h"
@@ -40,21 +41,28 @@ class Device;
 
 class CommandRecordingContext {
   public:
+    using ScopedUse =
+        ::dawn::detail::Guard<CommandRecordingContext,
+                              ::dawn::detail::MutexProtectedTraits<CommandRecordingContext>>;
+
     MaybeError Initialize(Device* device);
     void Release();
-    MaybeError ExecuteCommandList();
 
-    bool IsOpen() const { return mIsOpen; }
-    bool NeedsSubmit() const { return mNeedsSubmit; }
-    void SetNeedsSubmit() { mNeedsSubmit = true; }
+    bool NeedsSubmit() const;
+
+    // Mark the commands as no longer needing submit. Returns false
+    // if commands were already submitted or the context was not open.
+    bool MarkSubmitted();
 
   private:
     friend class ScopedCommandRecordingContext;
     friend class ScopedSwapStateCommandRecordingContext;
 
+    std::mutex mMutex;
+
     bool mScopedAccessed = false;
     bool mIsOpen = false;
-    bool mNeedsSubmit = false;
+    std::atomic<bool> mNeedsSubmit = false;
     ComPtr<ID3D11Device> mD3D11Device;
     ComPtr<ID3DDeviceContextState> mD3D11DeviceContextState;
     ComPtr<ID3D11DeviceContext4> mD3D11DeviceContext4;
@@ -74,7 +82,7 @@ class CommandRecordingContext {
 // For using ID3D11DeviceContext methods which don't change device context state.
 class ScopedCommandRecordingContext : NonMovable {
   public:
-    explicit ScopedCommandRecordingContext(CommandRecordingContext* commandContext);
+    ScopedCommandRecordingContext(CommandRecordingContext* commandContext, bool needsSubmit);
     ~ScopedCommandRecordingContext();
 
     Device* GetDevice() const;
@@ -115,7 +123,7 @@ class ScopedCommandRecordingContext : NonMovable {
     MaybeError FlushUniformBuffer() const;
 
   protected:
-    CommandRecordingContext* const mCommandContext;
+    CommandRecordingContext::ScopedUse mCommandContext;
     ComPtr<ID3D11Multithread> mD3D11Multithread;
 };
 
@@ -123,7 +131,8 @@ class ScopedCommandRecordingContext : NonMovable {
 // ID3D11DeviceContext for a scope. It is needed for sharing ID3D11Device between dawn and ANGLE.
 class ScopedSwapStateCommandRecordingContext : public ScopedCommandRecordingContext {
   public:
-    explicit ScopedSwapStateCommandRecordingContext(CommandRecordingContext* commandContext);
+    ScopedSwapStateCommandRecordingContext(CommandRecordingContext* commandContext,
+                                           bool needsSubmit);
     ~ScopedSwapStateCommandRecordingContext();
 
     ID3D11Device* GetD3D11Device() const;

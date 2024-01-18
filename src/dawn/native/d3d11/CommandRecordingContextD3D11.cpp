@@ -41,11 +41,29 @@
 
 namespace dawn::native::d3d11 {
 
+bool CommandRecordingContext::NeedsSubmit() const {
+    return mNeedsSubmit.load(std::memory_order_acquire);
+}
+
+bool CommandRecordingContext::MarkSubmitted() {
+    if (!mIsOpen) {
+        return false;
+    }
+    return mNeedsSubmit.exchange(false, std::memory_order_acq_rel);
+}
+
 ScopedCommandRecordingContext::ScopedCommandRecordingContext(
-    CommandRecordingContext* commandContext)
-    : mCommandContext(commandContext), mD3D11Multithread(mCommandContext->mD3D11Multithread) {
+    CommandRecordingContext* commandContext,
+    bool needsSubmit)
+    : mCommandContext(commandContext, commandContext->mMutex),
+      mD3D11Multithread(mCommandContext->mD3D11Multithread) {
+    DAWN_ASSERT(mCommandContext->mIsOpen);
     DAWN_ASSERT(!mCommandContext->mScopedAccessed);
     mCommandContext->mScopedAccessed = true;
+
+    if (needsSubmit) {
+        mCommandContext->mNeedsSubmit.store(true, std::memory_order_release);
+    }
 
     if (mD3D11Multithread) {
         mD3D11Multithread->Enter();
@@ -145,8 +163,9 @@ MaybeError ScopedCommandRecordingContext::FlushUniformBuffer() const {
 }
 
 ScopedSwapStateCommandRecordingContext::ScopedSwapStateCommandRecordingContext(
-    CommandRecordingContext* commandContext)
-    : ScopedCommandRecordingContext(commandContext),
+    CommandRecordingContext* commandContext,
+    bool needsSubmit)
+    : ScopedCommandRecordingContext(commandContext, needsSubmit),
       mSwapContextState(
           ToBackend(mCommandContext->mDevice->GetPhysicalDevice())->IsSharedD3D11Device()) {
     if (mSwapContextState) {
@@ -180,10 +199,10 @@ Buffer* ScopedSwapStateCommandRecordingContext::GetUniformBuffer() const {
 }
 
 MaybeError CommandRecordingContext::Initialize(Device* device) {
-    DAWN_ASSERT(!IsOpen());
+    DAWN_ASSERT(!mIsOpen);
     DAWN_ASSERT(device);
     mDevice = device;
-    mNeedsSubmit = false;
+    mNeedsSubmit.store(false, std::memory_order_release);
 
     ID3D11Device5* d3d11Device = device->GetD3D11Device5();
 
@@ -243,17 +262,11 @@ MaybeError CommandRecordingContext::Initialize(Device* device) {
     return {};
 }
 
-MaybeError CommandRecordingContext::ExecuteCommandList() {
-    // Consider using deferred DeviceContext.
-    mNeedsSubmit = false;
-    return {};
-}
-
 void CommandRecordingContext::Release() {
     if (mIsOpen) {
         DAWN_ASSERT(mDevice->IsLockedByCurrentThreadIfNeeded());
         mIsOpen = false;
-        mNeedsSubmit = false;
+        mNeedsSubmit.store(false, std::memory_order_release);
         mUniformBuffer = nullptr;
         mDevice = nullptr;
         ID3D11Buffer* nullBuffer = nullptr;
