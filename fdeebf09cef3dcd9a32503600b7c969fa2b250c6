@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "223409ed_880c6955",
+        "filename": "src/dawn/common/Ref.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "58983301_2e7e1d3c",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ad43e681_06f80f54",
@@ -31,6 +49,30 @@
       "writtenOn": "2024-01-18T12:46:21Z",
       "side": 1,
       "message": "```suggestion\nRefCount::RefCount(uint64_t initCount, uint64_t payload) : mRefCount(initCount * kRefCountIncrement + payload) {\n```\n\nCould we have a tiny tiny test for this?",
+      "range": {
+        "startLine": 45,
+        "startChar": 69,
+        "endLine": 45,
+        "endChar": 78
+      },
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a893b79_7a4acc87",
+        "filename": "src/dawn/common/RefCounted.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 45,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ad43e681_06f80f54",
       "range": {
         "startLine": 45,
         "startChar": 69,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0177e6c3_c563f800",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1030,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b727027_cfa0824c",
+      "range": {
+        "startLine": 1030,
+        "startChar": 17,
+        "endLine": 1030,
+        "endChar": 32
+      },
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e834766_e660ec7a",
@@ -81,6 +147,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0a35842_2c4ab03a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e834766_e660ec7a",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0adc09c1_2f6a3a02",
@@ -94,6 +178,24 @@
       "writtenOn": "2024-01-18T12:46:21Z",
       "side": 1,
       "message": "I worry that this is slightly brittle because what if we change the argument to `RefCountedWithExternalCountBase` in the future? If we don\u0027t update this code then we\u0027ll have a refcounting problem. Maybe we could have a trait that says if it is externally refcounted or something.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "20d7dead_88257ce5",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 159,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0adc09c1_2f6a3a02",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -117,6 +219,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "633886bf_b2acddc6",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "`APIReference()` not only increases the external ref count, it always increase the totally ref count. If use it, we have to return `object` instead of `object.Detach()`, so a ref count could be removed. I though we want to avoid that, right?",
+      "parentUuid": "5d3b1295_170aff1f",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f935a3d8_ac6bbfd2",
         "filename": "src/dawn/native/Pipeline.cpp",
         "patchSetId": 10
@@ -128,6 +248,24 @@
       "writtenOn": "2024-01-18T12:46:21Z",
       "side": 1,
       "message": "[2]",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2dd29341_3aa7de92",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 221,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f935a3d8_ac6bbfd2",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -149,6 +287,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b20a6640_2f1360b3",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 352,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Sometimes, dawn just create a uninitialized shader module for looking up pipeline from cache. If dawn finds a cached pipeline, then mTintProgram is not needed.",
+      "parentUuid": "2b9f1fb5_2d0e246a",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "6c0eac07_4aa0ee5e",
@@ -166,6 +322,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "27b5de22_a7929c1d",
+        "filename": "src/dawn/native/RefCountedWithExternalCount.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6c0eac07_4aa0ee5e",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ff524855_bec9b12b",
@@ -179,6 +353,24 @@
       "writtenOn": "2024-01-18T12:46:21Z",
       "side": 1,
       "message": "The comment needs updating: the reference count starts at zero for the external refcount.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7237f425_f1217c51",
+        "filename": "src/dawn/native/RefCountedWithExternalCount.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 35,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ff524855_bec9b12b",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -206,6 +398,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e20d3fb6_becf8992",
+        "filename": "src/dawn/native/RefCountedWithExternalCount.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "06eb0209_7a5a5524",
+      "range": {
+        "startLine": 48,
+        "startChar": 0,
+        "endLine": 63,
+        "endChar": 0
+      },
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f91eb38e_87d149af",
@@ -219,6 +435,24 @@
       "writtenOn": "2024-01-18T12:46:21Z",
       "side": 1,
       "message": "nit: this change is no longer needed.",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cfa90791_35b5efc4",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1262,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f91eb38e_87d149af",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -242,6 +476,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b6b4fcb5_180eabf6",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Most code here is for constructing `ShaderModuleDescriptor`. Other places the `descriptor` is from API client.",
+      "parentUuid": "643e82a2_c11cd8ff",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23f0e39f_3e279378",
         "filename": "src/dawn/native/ShaderModule.h",
         "patchSetId": 10
@@ -253,6 +505,24 @@
       "writtenOn": "2024-01-18T12:46:21Z",
       "side": 1,
       "message": "nit: this and other methods can be in the .cpp",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2b00ee10_fb252d93",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 333,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "23f0e39f_3e279378",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -274,6 +544,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c52e9c9c_0ba7164f",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 358,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "c6468d4d_f0d79a56",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9047041a_1cdca2db",
@@ -291,6 +579,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9660297a_c19bf1eb",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9047041a_1cdca2db",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "c917d8f8_b4601335",
@@ -304,6 +610,24 @@
       "writtenOn": "2024-01-18T12:46:21Z",
       "side": 1,
       "message": "Isn\u0027t this the same as `IsMetal() \u0026\u0026 IsBackendValidationEnabled()`?",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d5411498_972d6329",
+        "filename": "src/dawn/tests/DawnTest.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-18T17:20:00Z",
+      "side": 1,
+      "message": "They could be different for some cases, sometime validation layer can be enabled externally via xcode or commandline.  See [1]\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/metal/BackendMTL.mm;l\u003d244;bpv\u003d1;bpt\u003d1?q\u003dCheckMetalValidationEnabled\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fdawn%2Fsrc%2Fdawn%2Fnative%2Fmetal%2F",
+      "parentUuid": "c917d8f8_b4601335",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
