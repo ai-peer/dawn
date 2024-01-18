@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d65b712f_506c5c0c",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T13:40:36Z",
+      "side": 1,
+      "message": "When we discussed this previously, I though the plan was to pass the push constant `@location` value in through options instead of adding the attribute to the `var`?",
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a06ff351_00b83b42",
