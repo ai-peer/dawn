@@ -1951,6 +1951,12 @@ bool ASTPrinter::EmitFunction(const ast::Function* func) {
         out << ") {";
     }
 
+    TINT_SCOPED_ASSIGNMENT(loop_preserving_true_var_,
+                           UniqueIdentifier("tint_loop_preserving_true"));
+    IncrementIndent();
+    Line() << "volatile bool " << loop_preserving_true_var_ << " = true;";
+    DecrementIndent();
+
     if (!EmitStatementsWithIndent(func->body->statements)) {
         return false;
     }
@@ -2122,8 +2128,7 @@ bool ASTPrinter::EmitLoop(const ast::LoopStatement* stmt) {
     };
 
     TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-    Line() << "while (true) {";
-    EmitLoopPreserver();
+    EmitUnconditionalLoopHeader();
     {
         ScopedIndent si(this);
         if (!EmitStatements(stmt->body->statements)) {
@@ -2193,8 +2198,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
         };
 
         TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-        Line() << "while (true) {";
-        EmitLoopPreserver();
+        EmitUnconditionalLoopHeader();
         IncrementIndent();
         TINT_DEFER({
             DecrementIndent();
@@ -2227,7 +2231,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
                     out << "; ";
                 }
 
-                out << cond_buf.str() << "; ";
+                out << "(" << cond_buf.str() << ") && " << loop_preserving_true_var_ << "; ";
 
                 if (!cont_buf.lines.empty()) {
                     out << tint::TrimSuffix(cont_buf.lines[0].content, ";");
@@ -2235,7 +2239,6 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
             }
             out << " {";
         }
-        EmitLoopPreserver();
         {
             auto emit_continuing = [] { return true; };
             TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
@@ -2268,8 +2271,7 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
     // as a regular while in MSL. Instead we need to generate a `while(true)` loop.
     bool emit_as_loop = cond_pre.lines.size() > 0;
     if (emit_as_loop) {
-        Line() << "while (true) {";
-        EmitLoopPreserver();
+        EmitUnconditionalLoopHeader();
         IncrementIndent();
         TINT_DEFER({
             DecrementIndent();
@@ -2288,11 +2290,10 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
             out << "while";
             {
                 ScopedParen sp(out);
-                out << cond_buf.str();
+                out << "(" << cond_buf.str() << ") && " << loop_preserving_true_var_;
             }
             out << " {";
         }
-        EmitLoopPreserver();
         if (!EmitStatementsWithIndent(stmt->body->statements)) {
             return false;
         }
@@ -3031,32 +3032,8 @@ bool ASTPrinter::EmitLet(const ast::Let* let) {
     return true;
 }
 
-void ASTPrinter::EmitLoopPreserver() {
-    IncrementIndent();
-    // This statement prevents the MSL compiler from erasing a loop during
-    // optimizations.  In the AIR dialiect of LLVM IR, WGSL loops should compile
-    // to a loop that contains an 'asm' call with a 'sideeffect' annotation.
-    //
-    // For example, compile a WGSL file with a trivial while(1) loop to 'a.metal',
-    // then compile that to AIR (LLVM IR dialect):
-    //
-    //    xcrun metal a.metal -S -o -
-    //
-    // The loop in the AIR should look something like this:
-    //
-    //    1: ...
-    //      br label %2
-    //
-    //    2:                                      ; preds = %1, %2
-    //      tail call void asm sideeffect "", ""() #1, !srcloc !27
-    //      br label %2, !llvm.loop !28
-    //
-    // It is important that the 'sideeffect' annotation exist. That tells the
-    // optimizer that the instruction has side effects invisible to the
-    // optimizer, and therefore the loop should not be eliminated.
-    Line() << R"(__asm__("");)";
-
-    DecrementIndent();
+void ASTPrinter::EmitUnconditionalLoopHeader() {
+    Line() << "while (" << loop_preserving_true_var_ << ") {";
 }
 
 template <typename F>
