@@ -176,7 +176,7 @@ void BindGroupLayout::DestroyImpl() {
         device->fn.DestroyDescriptorSetLayout(device->GetVkDevice(), mHandle, nullptr);
         mHandle = VK_NULL_HANDLE;
     }
-    mDescriptorSetAllocator = nullptr;
+    mDescriptorSetAllocator = Ref<DescriptorSetAllocator>(nullptr);
 }
 
 VkDescriptorSetLayout BindGroupLayout::GetHandle() const {
