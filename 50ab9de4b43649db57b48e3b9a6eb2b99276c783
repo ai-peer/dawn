@@ -1,0 +1,61 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9342b30d_15ba2d22",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-18T01:00:30Z",
+      "side": 1,
+      "message": "LGTM, sorry for the slowness",
+      "revId": "50ab9de4b43649db57b48e3b9a6eb2b99276c783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c529fe64_8582a69d",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-18T01:00:30Z",
+      "side": 1,
+      "message": "If this supposed to do the opposite of mBuffer-\u003eReference() in the constructor, should it be `mBuffer-\u003eRelease()` to match?\n\nIt seems bufferReference(b) is the same as b-\u003eReference(),\nbut bufferRelease(b) is b-\u003eRelease() _plus_ sending a DestroyObjectCmd when refcount reaches 0. Which seems necessary otherwise bufferRelease can release the last reference without ever sending DestroyObjectCmd.\n\nIf you really need bufferRelease here then IMO change line 65 to match with bufferReference, and explain why in a comment.",
+      "range": {
+        "startLine": 68,
+        "startChar": 32,
+        "endLine": 68,
+        "endChar": 73
+      },
+      "revId": "50ab9de4b43649db57b48e3b9a6eb2b99276c783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4dbff4c_cca1b1ec",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-18T01:00:30Z",
+      "side": 1,
+      "message": "Under what circumstance is this nullopt? I\u0027d have thought all MapRequests had one of these two types. It seems to happen if MapAsyncF is called with a mode of 0.\nI guess the wire client is supposed to gracefully handle this case and let the server be responsible for saying the request is bad?\n\nA comment here would be useful because it\u0027s unintuitive.\nOr maybe the old 3-value MapRequestType, but with a more descriptive third value, would be clearer (\"InvalidMode\" instead of \"None\")?",
+      "revId": "50ab9de4b43649db57b48e3b9a6eb2b99276c783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
