@@ -33,6 +33,24 @@
       "message": "Can we have a tiny test in ResultTests.cpp for the new non-default constructible type support?",
       "revId": "5e92d4f6a1c16e9e27bb133da5b0557a54119882",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "62ca6862_3030fb82",
+        "filename": "src/dawn/common/Result.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-18T21:36:10Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b101d337_de0540d2",
+      "revId": "5e92d4f6a1c16e9e27bb133da5b0557a54119882",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
