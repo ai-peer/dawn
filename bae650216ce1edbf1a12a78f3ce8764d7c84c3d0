@@ -88,6 +88,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "98e29d19_f6e1fbe3",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/texture_builtins_from_uniform.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T13:57:17Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "bcc86ede_747860a8",
+      "revId": "bae650216ce1edbf1a12a78f3ce8764d7c84c3d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "15d82488_730c306d",
         "filename": "src/tint/lang/glsl/writer/ast_raise/texture_builtins_from_uniform.cc",
         "patchSetId": 7
