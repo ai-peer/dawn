@@ -16,6 +16,23 @@
       "message": "PTAL again - tests have been added",
       "revId": "d193cd41e5e923d0a04c6aaa245ffc7393878d75",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "87f0d7ec_e5807bcb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-18T21:37:54Z",
+      "side": 1,
+      "message": "BTW did you have a preference for using absl::variant instead of std::variant as  jiawei.shao@intel.com suggested here: https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2344#c4",
+      "revId": "d193cd41e5e923d0a04c6aaa245ffc7393878d75",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
