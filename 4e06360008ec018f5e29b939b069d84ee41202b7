@@ -272,6 +272,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "46e5550d_87093a25",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-18T06:53:25Z",
+      "side": 1,
+      "message": "Thanks for the information, @rafael.cintron@microsoft.com.\nIIUC, in case of small size of data, where the overhead of data copy itself is trivial, UpdateSubResource and Map should be basically same regarding performance. One advantage for UpdateSubResource is that you don\u0027t need to worry about CPU-GPU stall, right? If so, probably we can just limit the buffer size allowed to enable this system memory emulation feature.\n\nI just tinkered with WPA for a while, but failed to find the \"Critical Path Analysis\" tool. The only doc about that I can find is this [blog](https://learn.microsoft.com/en-us/shows/defrag-tools/156-critical-path-analysis-windows-performance-analyzer). I\u0027d really appreciate it if you could share more information about it, thanks!",
+      "parentUuid": "c4e82ed8_cb256c15",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
