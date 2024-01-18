@@ -46,8 +46,7 @@ namespace dawn::native::null {
 // Implementation of pre-Device objects: the null physical device, null backend connection and
 // Connect()
 
-PhysicalDevice::PhysicalDevice(InstanceBase* instance)
-    : PhysicalDeviceBase(instance, wgpu::BackendType::Null) {
+PhysicalDevice::PhysicalDevice() : PhysicalDeviceBase(wgpu::BackendType::Null) {
     mVendorId = 0;
     mDeviceId = 0;
     mName = "Null backend";
@@ -94,9 +93,11 @@ MaybeError PhysicalDevice::InitializeSupportedLimitsImpl(CombinedLimits* limits)
     return {};
 }
 
-void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adpterToggles) const {}
+void PhysicalDevice::SetupBackendAdapterToggles(dawn::platform::Platform* platform,
+                                                TogglesState* adapterToggles) const {}
 
-void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {}
+void PhysicalDevice::SetupBackendDeviceToggles(dawn::platform::Platform* platform,
+                                               TogglesState* deviceToggles) const {}
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
     AdapterBase* adapter,
@@ -140,14 +141,9 @@ class Backend : public BackendConnection {
         // There is always a single Null physical device because it is purely CPU based
         // and doesn't depend on the system.
         if (mPhysicalDevice == nullptr) {
-            mPhysicalDevice = AcquireRef(new PhysicalDevice(GetInstance()));
+            mPhysicalDevice = AcquireRef(new PhysicalDevice());
         }
         return {mPhysicalDevice};
-    }
-
-    void ClearPhysicalDevices() override { mPhysicalDevice = nullptr; }
-    size_t GetPhysicalDeviceCountForTesting() const override {
-        return mPhysicalDevice != nullptr ? 1 : 0;
     }
 
   private:
