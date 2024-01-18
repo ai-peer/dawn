@@ -39,6 +39,30 @@
       },
       "revId": "79c370f8fbc15ad70efdea842b9c73b151438e87",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fca4d02_b31e0d69",
+        "filename": "src/tint/lang/msl/writer/ast_raise/packed_vec3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-18T17:56:09Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fb3053d2_a44ae920",
+      "range": {
+        "startLine": 264,
+        "startChar": 74,
+        "endLine": 264,
+        "endChar": 84
+      },
+      "revId": "79c370f8fbc15ad70efdea842b9c73b151438e87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
