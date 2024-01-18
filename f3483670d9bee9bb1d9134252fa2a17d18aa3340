@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed98a4fa_56e3a875",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T15:15:15Z",
+      "side": 1,
+      "message": "If you know the thing you\u0027re decorating, you can also pass in a map which goes from thing needing decoration to location. The things needing decoration can be looked up through the inspector.",
+      "parentUuid": "f7738498_ddc5f678",
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a06ff351_00b83b42",
