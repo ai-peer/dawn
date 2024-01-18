@@ -31,6 +31,7 @@
 #include <string>
 #include <unordered_map>
 
+#include "src/tint/lang/glsl/writer/common/options.h"
 #include "src/tint/lang/wgsl/ast/transform/transform.h"
 #include "src/tint/lang/wgsl/sem/sampler_texture_pair.h"
 
@@ -77,9 +78,8 @@ class CombineSamplers final : public Castable<CombineSamplers, ast::transform::T
     /// points to combined sampler binding point.
     struct BindingInfo final : public Castable<BindingInfo, ast::transform::Data> {
         /// Constructor
-        /// @param map the map of all (texture, sampler) -> (combined) pairs
-        /// @param placeholder the binding point to use for placeholder samplers.
-        BindingInfo(const BindingMap& map, const BindingPoint& placeholder);
+        /// @param b the binding information
+        explicit BindingInfo(const Bindings& b);
 
         /// Copy constructor
         /// @param other the other BindingInfo to copy
@@ -88,11 +88,8 @@ class CombineSamplers final : public Castable<CombineSamplers, ast::transform::T
         /// Destructor
         ~BindingInfo() override;
 
-        /// A map of bindings from (texture, sampler) -> combined sampler.
-        BindingMap binding_map;
-
-        /// The binding point to use for placeholder samplers.
-        BindingPoint placeholder_binding_point;
+        /// Binding information
+        const Bindings& bindings;
     };
 
     /// Constructor
