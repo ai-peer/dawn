@@ -122,6 +122,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "8db2fce6_c71bd51d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1003446
+      },
+      "writtenOn": "2024-01-18T17:12:52Z",
+      "side": 1,
+      "message": "The WebGPU spec says they just work, no having to count vertex_index and instance_index as attributes, so this seems correct for the current spec for non-compat\n\nThe compat spec says vertex_index and instance_index each count as an attribute which is different than the non-compat spec. This is because GLES 3.1 only guarantees 16 attributes so if we followed this non-compat rules in compat mode, compat would have to set the limit to 14.\n\nAssuming the other APIs can always handle 16 + vertex_index and instance_index than this is fine.",
+      "parentUuid": "a85676b5_e36ba459",
+      "range": {
+        "startLine": 17,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "6fa3a393791c9dc4dd7e591a5f612c3fb7b3d148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6a7b6c92_9de0e512",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
