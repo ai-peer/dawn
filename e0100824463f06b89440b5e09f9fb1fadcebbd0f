@@ -1,0 +1,73 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2ef4d3eb_59467f73",
+        "filename": "src/dawn/native/Pipeline.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 372,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T18:53:02Z",
+      "side": 1,
+      "message": "I don\u0027t really love how PreInitialize and Initialize get called quite far from each other in the code. It\u0027s not clear where the scope begins and where it ends.\n\nCould we do the ScopedUse as a member of `CreateComputePipelineAsyncTask` and \n `CreateRenderPipelineAsyncTask`  ?",
+      "range": {
+        "startLine": 353,
+        "startChar": 1,
+        "endLine": 372,
+        "endChar": 1
+      },
+      "revId": "e0100824463f06b89440b5e09f9fb1fadcebbd0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c6fc466_dbec3f47",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 15
+      },
+      "lineNbr": 1319,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T18:53:02Z",
+      "side": 1,
+      "message": "doesn\u0027t switching like this mean that the Spirv path is unreachable?",
+      "range": {
+        "startLine": 1319,
+        "startChar": 12,
+        "endLine": 1319,
+        "endChar": 41
+      },
+      "revId": "e0100824463f06b89440b5e09f9fb1fadcebbd0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b0877b3_4e0d9630",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 15
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T18:53:02Z",
+      "side": 1,
+      "message": "WillHaveFirstExternalRef doesn\u0027t exist anywhere",
+      "range": {
+        "startLine": 367,
+        "startChar": 52,
+        "endLine": 367,
+        "endChar": 76
+      },
+      "revId": "e0100824463f06b89440b5e09f9fb1fadcebbd0f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
