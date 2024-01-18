@@ -423,8 +423,7 @@ ResultOrError<Ref<SharedTextureMemory>> SharedTextureMemory::Create(
     // Don't add the view format if backend validation is enabled, otherwise most image creations
     // will fail with VVL. This view format is only needed for sRGB reinterpretation.
     // TODO(crbug.com/dawn/2304): Investigate if this is a bug in VVL.
-    if (addViewFormats &&
-        !device->GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled()) {
+    if (addViewFormats && !device->GetAdapter()->GetInstance()->IsBackendValidationEnabled()) {
         DAWN_ASSERT(compatibleViewFormats.size() == 1u);
         viewFormats[imageFormatListInfo.viewFormatCount++] =
             VulkanImageFormat(device, compatibleViewFormats[0]->format);

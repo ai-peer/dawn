@@ -265,7 +265,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
     PhysicalDevice(InstanceBase* instance,
                    NSPRef<id<MTLDevice>> device,
                    bool metalValidationEnabled)
-        : PhysicalDeviceBase(instance, wgpu::BackendType::Metal),
+        : PhysicalDeviceBase(wgpu::BackendType::Metal),
           mDevice(std::move(device)),
           mMetalValidationEnabled(metalValidationEnabled) {
         mName = std::string([[*mDevice name] UTF8String]);
@@ -313,7 +313,8 @@ class PhysicalDevice : public PhysicalDeviceBase {
 
     void SetupBackendAdapterToggles(TogglesState* adapterToggles) const override {}
 
-    void SetupBackendDeviceToggles(TogglesState* deviceToggles) const override {
+    void SetupBackendDeviceToggles(dawn::platform::Platform* platform,
+                                   TogglesState* deviceToggles) const override {
         {
             bool haveStoreAndMSAAResolve = false;
 #if DAWN_PLATFORM_IS(MACOS)
@@ -987,14 +988,6 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
 #endif
     }
     return std::vector<Ref<PhysicalDeviceBase>>{mPhysicalDevices};
-}
-
-void Backend::ClearPhysicalDevices() {
-    mPhysicalDevices.clear();
-}
-
-size_t Backend::GetPhysicalDeviceCountForTesting() const {
-    return mPhysicalDevices.size();
 }
 
 BackendConnection* Connect(InstanceBase* instance) {

@@ -76,10 +76,8 @@ gpu_info::DriverVersion DecodeVulkanDriverVersion(uint32_t vendorID, uint32_t ve
 
 }  // anonymous namespace
 
-PhysicalDevice::PhysicalDevice(InstanceBase* instance,
-                               VulkanInstance* vulkanInstance,
-                               VkPhysicalDevice physicalDevice)
-    : PhysicalDeviceBase(instance, wgpu::BackendType::Vulkan),
+PhysicalDevice::PhysicalDevice(VulkanInstance* vulkanInstance, VkPhysicalDevice physicalDevice)
+    : PhysicalDeviceBase(wgpu::BackendType::Vulkan),
       mVkPhysicalDevice(physicalDevice),
       mVulkanInstance(vulkanInstance) {}
 
@@ -585,7 +583,8 @@ bool PhysicalDevice::SupportsFeatureLevel(FeatureLevel) const {
 
 void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adpterToggles) const {}
 
-void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
+void PhysicalDevice::SetupBackendDeviceToggles(dawn::platform::Platform* platform,
+                                               TogglesState* deviceToggles) const {
     // TODO(crbug.com/dawn/857): tighten this workaround when this issue is fixed in both
     // Vulkan SPEC and drivers.
     deviceToggles->Default(Toggle::UseTemporaryBufferInCompressedTextureToTextureCopy, true);
@@ -595,8 +594,8 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     deviceToggles->Default(Toggle::UseTintIR, true);
 #else
     // All other platforms default to the value corresponding to the feature flag.
-    deviceToggles->Default(Toggle::UseTintIR, GetInstance()->GetPlatform()->IsFeatureEnabled(
-                                                  platform::Features::kWebGPUUseTintIR));
+    deviceToggles->Default(Toggle::UseTintIR,
+                           platform->IsFeatureEnabled(platform::Features::kWebGPUUseTintIR));
 #endif
 
     if (IsAndroidQualcomm()) {

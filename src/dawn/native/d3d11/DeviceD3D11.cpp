@@ -349,7 +349,7 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
 }
 
 void Device::AppendDebugLayerMessages(ErrorData* error) {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled()) {
+    if (!GetAdapter()->GetInstance()->IsBackendValidationEnabled()) {
         return;
     }
 

@@ -303,7 +303,8 @@ void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adpterToggles) con
     adpterToggles->ForceSet(Toggle::UseDXC, false);
 }
 
-void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
+void PhysicalDevice::SetupBackendDeviceToggles(dawn::platform::Platform* platform,
+                                               TogglesState* deviceToggles) const {
     // D3D11 can only clear RTV with float values.
     deviceToggles->Default(Toggle::ApplyClearBigIntegerColorValueWithDraw, true);
     deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);

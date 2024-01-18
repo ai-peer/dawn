@@ -40,11 +40,13 @@
 
 namespace dawn::native {
 
-AdapterBase::AdapterBase(Ref<PhysicalDeviceBase> physicalDevice,
+AdapterBase::AdapterBase(InstanceBase* instance,
+                         Ref<PhysicalDeviceBase> physicalDevice,
                          FeatureLevel featureLevel,
                          const TogglesState& requiredAdapterToggles,
                          wgpu::PowerPreference powerPreference)
-    : mPhysicalDevice(std::move(physicalDevice)),
+    : mInstance(instance),
+      mPhysicalDevice(std::move(physicalDevice)),
       mFeatureLevel(featureLevel),
       mTogglesState(requiredAdapterToggles),
       mPowerPreference(powerPreference) {
@@ -69,8 +71,12 @@ PhysicalDeviceBase* AdapterBase::GetPhysicalDevice() {
     return mPhysicalDevice.Get();
 }
 
+InstanceBase* AdapterBase::GetInstance() const {
+    return mInstance.Get();
+}
+
 InstanceBase* AdapterBase::APIGetInstance() const {
-    InstanceBase* instance = mPhysicalDevice->GetInstance();
+    InstanceBase* instance = mInstance.Get();
     DAWN_ASSERT(instance != nullptr);
     instance->APIReference();
     return instance;
@@ -78,10 +84,8 @@ InstanceBase* AdapterBase::APIGetInstance() const {
 
 bool AdapterBase::APIGetLimits(SupportedLimits* limits) const {
     DAWN_ASSERT(limits != nullptr);
-    InstanceBase* instance = mPhysicalDevice->GetInstance();
-
     UnpackedPtr<SupportedLimits> unpacked;
-    if (instance->ConsumedError(ValidateAndUnpack(limits), &unpacked)) {
+    if (mInstance->ConsumedError(ValidateAndUnpack(limits), &unpacked)) {
         return false;
     }
 
@@ -107,16 +111,14 @@ bool AdapterBase::APIGetLimits(SupportedLimits* limits) const {
 
 void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
     DAWN_ASSERT(properties != nullptr);
-    InstanceBase* instance = mPhysicalDevice->GetInstance();
-
     UnpackedPtr<AdapterProperties> unpacked;
-    if (instance->ConsumedError(ValidateAndUnpack(properties), &unpacked)) {
+    if (mInstance->ConsumedError(ValidateAndUnpack(properties), &unpacked)) {
         return;
     }
 
     if (auto* memoryHeaps = unpacked.Get<AdapterPropertiesMemoryHeaps>()) {
         if (!mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterPropertiesMemoryHeaps)) {
-            mPhysicalDevice->GetInstance()->ConsumedError(
+            mInstance->ConsumedError(
                 DAWN_VALIDATION_ERROR("Feature AdapterPropertiesMemoryHeaps is not available."));
         }
         mPhysicalDevice->PopulateMemoryHeapInfo(memoryHeaps);
@@ -183,7 +185,7 @@ DeviceBase* AdapterBase::APICreateDevice(const DeviceDescriptor* descriptor) {
 
     auto result = CreateDevice(descriptor);
     if (result.IsError()) {
-        mPhysicalDevice->GetInstance()->ConsumedError(result.AcquireError());
+        mInstance->ConsumedError(result.AcquireError());
         return nullptr;
     }
     return ReturnToAPI(result.AcquireSuccess());
@@ -207,7 +209,7 @@ ResultOrError<Ref<DeviceBase>> AdapterBase::CreateDevice(const DeviceDescriptor*
     deviceToggles.Default(Toggle::TimestampQuantization, true);
 
     // Backend-specific forced and default device toggles
-    mPhysicalDevice->SetupBackendDeviceToggles(&deviceToggles);
+    mPhysicalDevice->SetupBackendDeviceToggles(mInstance->GetPlatform(), &deviceToggles);
 
     // Validate all required features are supported by the adapter and suitable under device
     // toggles. Note that certain toggles in device toggles state may be overriden by user and

@@ -87,8 +87,6 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // Otherwise, returns adapters based on the `options`.
     std::vector<Ref<AdapterBase>> EnumerateAdapters(const RequestAdapterOptions* options = nullptr);
 
-    size_t GetPhysicalDeviceCountForTesting() const;
-
     // Used to handle error that happen up to device creation.
     bool ConsumedError(MaybeError maybeError);
 
@@ -198,7 +196,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     Ref<AdapterBase> CreateAdapter(Ref<PhysicalDeviceBase> physicalDevice,
                                    FeatureLevel featureLevel,
                                    const DawnTogglesDescriptor* requiredAdapterToggles,
-                                   wgpu::PowerPreference powerPreference) const;
+                                   wgpu::PowerPreference powerPreference);
 
     void GatherWGSLFeatures(const DawnWGSLBlocklist* wgslBlocklist);
     void ConsumeError(std::unique_ptr<ErrorData> error);
