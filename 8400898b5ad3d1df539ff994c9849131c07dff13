@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "16dd30b6_fcf440ca",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-18T00:23:13Z",
+      "side": 1,
+      "message": "FYI the failure is due to https://github.com/KhronosGroup/SPIRV-Tools/commit/c96fe8b943564fbab3424219d924d21cac2e877a.\n\nA fix is in the works at https://dawn-review.googlesource.com/c/dawn/+/170302",
+      "revId": "8400898b5ad3d1df539ff994c9849131c07dff13",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
