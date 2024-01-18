@@ -33,6 +33,23 @@
       "message": "lgtm though I\u0027m not an owner",
       "revId": "2980f1fd4720dca68d434fd14dd8f08ee95cd44c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d6c3599_fb1ead3c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-18T15:08:58Z",
+      "side": 1,
+      "message": "Good idea!",
+      "revId": "2980f1fd4720dca68d434fd14dd8f08ee95cd44c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
