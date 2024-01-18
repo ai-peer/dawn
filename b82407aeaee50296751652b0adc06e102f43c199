@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "39ca4b62_dd8df12f",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-18T02:30:05Z",
+      "side": 1,
+      "message": "Kokoro failure was an MSL validation flake on one of the MSVC bots.",
+      "revId": "b82407aeaee50296751652b0adc06e102f43c199",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
