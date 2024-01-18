@@ -1,0 +1,78 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1e051fd_e6c08f19",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T20:26:28Z",
+      "side": 1,
+      "message": "do we need to clear it? the task will be deleted sortly later, at [1]",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4eda3986_21299c8d",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T20:26:28Z",
+      "side": 1,
+      "message": "[1]",
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9084980d_8e1dd8ec",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T20:26:28Z",
+      "side": 1,
+      "message": "nit: for all the tests, put comment above it describing what it does",
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e138d963_74a44b60",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T20:26:28Z",
+      "side": 1,
+      "message": "please also test the non-async versions. We need to make sure that the tint program is recreated if it is deleted if we recreate the shader module, get a cache hit, and then do a synchronous pipeline creation.",
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
