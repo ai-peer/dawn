@@ -54,6 +54,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "07e6eab2_ec590690",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:08:49Z",
+      "side": 1,
+      "message": "Also prefer to include `Bug: dawn:1299` in the CL description for better tracking.",
+      "revId": "bae650216ce1edbf1a12a78f3ce8764d7c84c3d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bcc86ede_747860a8",
         "filename": "src/tint/lang/glsl/writer/ast_raise/texture_builtins_from_uniform.cc",
         "patchSetId": 7
