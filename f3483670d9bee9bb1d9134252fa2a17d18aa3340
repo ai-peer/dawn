@@ -378,6 +378,30 @@
       },
       "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a27f07d4_1bf1cf04",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T15:30:54Z",
+      "side": 1,
+      "message": "\u003e The questions I have for #1 are: how does this map to multiple transforms that each want to add to the push constant block without knowing about each other? \n\nIf we were to do this, then offsets are precomputed, transforms will have to lazily create or RMW the structure, possible creating padding to be replaced later in the pipeline. This is something we\u0027re likely going to have to do for dawn-private uniform buffers.\n\n\nAn alternative to this would be to use internal attributes for the location. This means we don\u0027t have to fudge the common resolver / validator for GLSL-isms.",
+      "parentUuid": "3cf961fb_25b7f4ba",
+      "range": {
+        "startLine": 628,
+        "startChar": 24,
+        "endLine": 628,
+        "endChar": 80
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
