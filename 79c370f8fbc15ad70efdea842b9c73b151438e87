@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f993a35d_e94cfacf",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T00:38:03Z",
+      "side": 1,
+      "message": "Great stuff. It looks like you might need to regenerate some e2e test expectations to make Kokoro happy.",
+      "revId": "79c370f8fbc15ad70efdea842b9c73b151438e87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fb3053d2_a44ae920",
+        "filename": "src/tint/lang/msl/writer/ast_raise/packed_vec3.cc",
+        "patchSetId": 5
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-18T00:38:03Z",
+      "side": 1,
+      "message": "nit: You don\u0027t need the `b.ExprList`, but you could replace it with `std::move`\n```suggestion\n                statements.Push(b.Decl(b.Var(\"result\", b.Call(out_type(), std::move(elements)))));\n```",
+      "range": {
+        "startLine": 264,
+        "startChar": 74,
+        "endLine": 264,
+        "endChar": 84
+      },
+      "revId": "79c370f8fbc15ad70efdea842b9c73b151438e87",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
