@@ -33,6 +33,57 @@
       "message": "LGTM, but Shrek should probably take a look at this, since he wrote the current implementation.",
       "revId": "bae650216ce1edbf1a12a78f3ce8764d7c84c3d0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "90a430bd_3d8ec173",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 7
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:07:08Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "bae650216ce1edbf1a12a78f3ce8764d7c84c3d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bcc86ede_747860a8",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/texture_builtins_from_uniform.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 371,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:07:08Z",
+      "side": 1,
+      "message": "Comment needs updating.\n```suggestion\n    /// Get and return the binding of the global texture variable.\n```",
+      "revId": "bae650216ce1edbf1a12a78f3ce8764d7c84c3d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "15d82488_730c306d",
+        "filename": "src/tint/lang/glsl/writer/ast_raise/texture_builtins_from_uniform.cc",
+        "patchSetId": 7
+      },
+      "lineNbr": 375,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:07:08Z",
+      "side": 1,
+      "message": "Now I saw benefits of adding the inspector\u0027s functionality of returning texture using num samples/levels, and add interested texture binding point as input of transform from dawn (instead of output).\nThanks.",
+      "revId": "bae650216ce1edbf1a12a78f3ce8764d7c84c3d0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

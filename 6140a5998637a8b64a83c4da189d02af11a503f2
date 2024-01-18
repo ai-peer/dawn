@@ -16,6 +16,24 @@
       "message": "By taking this out of here, does it effect the caching in any way? I know the compile is cached, but I don\u0027t know if all these fields effect the cache. And, if it does, does removing the fields actually matter? They only way the data changes is if the program changed, so the results should be consistent either way?",
       "revId": "6140a5998637a8b64a83c4da189d02af11a503f2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "726955e5_8f4ae49d",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 1
+      },
+      "lineNbr": 107,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:07:08Z",
+      "side": 0,
+      "message": "This should be fine. `GLSL_COMPILATION_REQUEST_MEMBERS` affects cache key, `GLSL_COMPILATION_MEMBERS` affects cache result. Git hash changes will invalidate previous cache results. And now these values are read from inspector instead of from cached compile result.",
+      "parentUuid": "fbed1344_44a98bbf",
+      "revId": "6140a5998637a8b64a83c4da189d02af11a503f2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
