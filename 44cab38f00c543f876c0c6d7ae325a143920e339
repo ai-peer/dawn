@@ -24,6 +24,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0fbd213b_7c2a3484",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1018,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "44a590f5_c67d4dda",
+      "range": {
+        "startLine": 1018,
+        "startChar": 9,
+        "endLine": 1018,
+        "endChar": 33
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eb14ae1a_94c5b11e",
@@ -37,6 +61,30 @@
       "writtenOn": "2024-01-17T15:22:48Z",
       "side": 1,
       "message": "`ast::Parameter` ? Then you don\u0027t need any of the loop, assert, etc. The two places this is called just needs `-\u003eDeclaration()`",
+      "range": {
+        "startLine": 1036,
+        "startChar": 85,
+        "endLine": 1036,
+        "endChar": 93
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d52e524a_1c97e965",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1036,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "eb14ae1a_94c5b11e",
       "range": {
         "startLine": 1036,
         "startChar": 85,
@@ -70,6 +118,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5cc899f3_6bf7c736",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1039,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7859c73e_6ae2fc59",
+      "range": {
+        "startLine": 1038,
+        "startChar": 41,
+        "endLine": 1039,
+        "endChar": 96
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5fffee32_bcdcd196",
@@ -83,6 +155,30 @@
       "writtenOn": "2024-01-17T15:22:48Z",
       "side": 1,
       "message": "no need for the dynamic cast here. \n```suggestion\n            if (p \u003d\u003d var-\u003eDeclaration()) {\n```",
+      "range": {
+        "startLine": 1043,
+        "startChar": 17,
+        "endLine": 1043,
+        "endChar": 38
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "41d2c766_31a4e3c3",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1043,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "5fffee32_bcdcd196",
       "range": {
         "startLine": 1043,
         "startChar": 17,
@@ -116,6 +212,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "36b9422a_aafdfe7f",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1068,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9757fcf1_283a50dc",
+      "range": {
+        "startLine": 1062,
+        "startChar": 0,
+        "endLine": 1068,
+        "endChar": 80
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "438c96ba_937fe03c",
@@ -129,6 +249,24 @@
       "writtenOn": "2024-01-17T15:22:48Z",
       "side": 1,
       "message": "This looks to be in the wrong place. If this is applied to the `else if`, please split into:\n\n```\n\n        } else {\n            // Not an entry point, make sure it was called from the requested entry point\n            if (!fn-\u003eHasAncestorEntryPoint(ep-\u003ename-\u003esymbol)) {\n                continue;\n            }\n        }\n```",
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7bc559c3_c29a3efb",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1093,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "It applies to the `else if`, formatting makes it indent which is annoying.",
+      "parentUuid": "438c96ba_937fe03c",
       "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -150,6 +288,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa170403_73d433f6",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 1102,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8bf82940_52219d02",
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cf0aed8_8acadae3",
@@ -163,6 +319,30 @@
       "writtenOn": "2024-01-17T15:23:05Z",
       "side": 1,
       "message": "Suggest `TextureQueryType`",
+      "range": {
+        "startLine": 160,
+        "startChar": 20,
+        "endLine": 160,
+        "endChar": 26
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f1d4fcfe_7ebfcb8e",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 160,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cf0aed8_8acadae3",
       "range": {
         "startLine": 160,
         "startChar": 20,
@@ -196,6 +376,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "984c74dc_d81f3a94",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 173,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dd9e2121_b857139a",
+      "range": {
+        "startLine": 168,
+        "startChar": 0,
+        "endLine": 173,
+        "endChar": 25
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "236de5dc_e1f9e06d",
@@ -209,6 +413,30 @@
       "writtenOn": "2024-01-17T15:23:05Z",
       "side": 1,
       "message": "`GetTextureQueries` ?",
+      "range": {
+        "startLine": 182,
+        "startChar": 33,
+        "endLine": 182,
+        "endChar": 79
+      },
+      "revId": "44cab38f00c543f876c0c6d7ae325a143920e339",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c1ebc953_8ab1bdb6",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-18T14:19:27Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "236de5dc_e1f9e06d",
       "range": {
         "startLine": 182,
         "startChar": 33,
