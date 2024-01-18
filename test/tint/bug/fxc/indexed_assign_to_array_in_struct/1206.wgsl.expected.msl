@@ -33,6 +33,7 @@ struct Particles_tint_packed_vec3 {
 };
 
 tint_array<float3, 8> tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 8> in) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float3, 8> result = tint_array<float3, 8>{float3(in[0].elements), float3(in[1].elements), float3(in[2].elements), float3(in[3].elements), float3(in[4].elements), float3(in[5].elements), float3(in[6].elements), float3(in[7].elements)};
   return result;
 }
@@ -45,6 +46,7 @@ struct Particle {
 };
 
 Particle tint_unpack_vec3_in_composite_1(Particle_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true_1 = true;
   Particle result = {};
   result.position = tint_unpack_vec3_in_composite(in.position);
   result.lifetime = in.lifetime;
@@ -62,6 +64,7 @@ struct Particles {
 };
 
 kernel void tint_symbol(const device Particles_tint_packed_vec3* tint_symbol_1 [[buffer(1)]], const constant Simulation* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   Particle particle = tint_unpack_vec3_in_composite_1((*(tint_symbol_1)).p[0]);
   particle.position[(*(tint_symbol_2)).i] = particle.position[(*(tint_symbol_2)).i];
   return;

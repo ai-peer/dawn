@@ -6,15 +6,18 @@ struct tint_private_vars_struct {
 };
 
 int tint_ftoi(float v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(2147483647, select(int(v), (-2147483647 - 1), (v < -2147483648.0f)), (v < 2147483520.0f));
 }
 
 float m(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).t = 1.0f;
   return float((*(tint_private_vars)).t);
 }
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_2 = true;
   float const tint_symbol = m(tint_private_vars);
   int v = tint_ftoi(tint_symbol);
 }

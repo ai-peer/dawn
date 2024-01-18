@@ -12,13 +12,16 @@ struct tint_symbol_1 {
 };
 
 void g(float a, float b, int c) {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 void f_inner(float4 pos, FBF fbf) {
+  volatile bool tint_loop_preserving_true_1 = true;
   g(fbf.c1[0], pos[1], fbf.c3[2]);
 }
 
 fragment void f(float4 pos [[position]], tint_symbol_1 tint_symbol [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   FBF const tint_symbol_2 = {.c1=tint_symbol.c1, .c3=tint_symbol.c3};
   f_inner(pos, tint_symbol_2);
   return;

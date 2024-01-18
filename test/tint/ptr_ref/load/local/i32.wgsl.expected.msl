@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   int i = 123;
   int const u = as_type<int>((as_type<uint>(i) + as_type<uint>(1)));
   return;

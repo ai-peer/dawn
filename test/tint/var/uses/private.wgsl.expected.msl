@@ -8,21 +8,26 @@ struct tint_private_vars_struct {
 };
 
 void uses_a(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).a = as_type<int>((as_type<uint>((*(tint_private_vars)).a) + as_type<uint>(1)));
 }
 
 void uses_b(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).b = as_type<int>((as_type<uint>((*(tint_private_vars)).b) * as_type<uint>(2)));
 }
 
 void uses_a_and_b(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_2 = true;
   (*(tint_private_vars)).b = (*(tint_private_vars)).a;
 }
 
 void no_uses() {
+  volatile bool tint_loop_preserving_true_3 = true;
 }
 
 void outer(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_4 = true;
   (*(tint_private_vars)).a = 0;
   uses_a(tint_private_vars);
   uses_a_and_b(tint_private_vars);
@@ -31,6 +36,7 @@ void outer(thread tint_private_vars_struct* const tint_private_vars) {
 }
 
 kernel void main1() {
+  volatile bool tint_loop_preserving_true_5 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.a = 42;
   uses_a(&(tint_private_vars));
@@ -38,6 +44,7 @@ kernel void main1() {
 }
 
 kernel void main2() {
+  volatile bool tint_loop_preserving_true_6 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.b = 7;
   uses_b(&(tint_private_vars));
@@ -45,6 +52,7 @@ kernel void main2() {
 }
 
 kernel void main3() {
+  volatile bool tint_loop_preserving_true_7 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   outer(&(tint_private_vars));
   no_uses();
@@ -52,6 +60,7 @@ kernel void main3() {
 }
 
 kernel void main4() {
+  volatile bool tint_loop_preserving_true_8 = true;
   no_uses();
   return;
 }

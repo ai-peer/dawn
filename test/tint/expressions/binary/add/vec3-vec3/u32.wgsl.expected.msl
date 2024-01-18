@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f() {
+  volatile bool tint_loop_preserving_true = true;
   uint3 const a = uint3(1u, 2u, 3u);
   uint3 const b = uint3(4u, 5u, 6u);
   uint3 const r = (a + b);

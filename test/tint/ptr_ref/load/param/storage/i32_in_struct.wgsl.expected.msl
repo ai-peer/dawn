@@ -6,10 +6,12 @@ struct str {
 };
 
 int func(const device int* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   return *(pointer);
 }
 
 kernel void tint_symbol(const device str* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   int const r = func(&((*(tint_symbol_1)).i));
   return;
 }

@@ -19,6 +19,7 @@ struct S {
 };
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   bool bool_var = false;
   bool const bool_let = false;
   int i32_var = 0;

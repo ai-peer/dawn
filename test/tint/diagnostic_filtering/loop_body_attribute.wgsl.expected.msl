@@ -18,8 +18,8 @@ struct tint_symbol_2 {
 };
 
 void tint_symbol_inner(float x) {
-  while (true) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  while (tint_loop_preserving_true) {
     {
       if ((x > 0.0f)) { break; }
     }
@@ -27,6 +27,7 @@ void tint_symbol_inner(float x) {
 }
 
 fragment void tint_symbol(tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   tint_symbol_inner(tint_symbol_1.x);
   return;
 }

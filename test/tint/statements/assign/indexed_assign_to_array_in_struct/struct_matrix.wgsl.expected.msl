@@ -10,6 +10,7 @@ struct OuterS {
 };
 
 kernel void tint_symbol(const constant Uniforms* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   OuterS s1 = {};
   s1.m1[(*(tint_symbol_1)).i] = float4(1.0f);
   s1.m1[(*(tint_symbol_1)).i][(*(tint_symbol_1)).i] = 1.0f;

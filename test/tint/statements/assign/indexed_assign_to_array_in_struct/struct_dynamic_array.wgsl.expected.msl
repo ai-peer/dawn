@@ -27,6 +27,7 @@ struct OuterS {
 };
 
 kernel void tint_symbol(device OuterS* tint_symbol_1 [[buffer(1)]], const constant Uniforms* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   InnerS v = {};
   (*(tint_symbol_1)).a1[(*(tint_symbol_2)).i] = v;
   return;

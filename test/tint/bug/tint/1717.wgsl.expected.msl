@@ -2,6 +2,7 @@
 
 using namespace metal;
 uint f() {
+  volatile bool tint_loop_preserving_true = true;
   return 2147483648u;
 }
 

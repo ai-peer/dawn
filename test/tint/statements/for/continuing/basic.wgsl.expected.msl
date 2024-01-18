@@ -2,9 +2,9 @@
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   int i = 0;
-  for(; false; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
-    __asm__("");
+  for(; (false) && tint_loop_preserving_true; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
   }
 }
 

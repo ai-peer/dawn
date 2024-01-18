@@ -40,10 +40,11 @@ TEST_F(MslASTPrinterTest, Emit_Continue) {
     ASTPrinter& gen = Build();
 
     gen.IncrementIndent();
+    gen.EmitLoopPreservingVarDecl();
 
     ASSERT_TRUE(gen.EmitStatement(loop)) << gen.Diagnostics();
-    EXPECT_EQ(gen.Result(), R"(  while (true) {
-    __asm__("");
+    EXPECT_EQ(gen.Result(), R"(  volatile bool tint_loop_preserving_true = true;
+  while (tint_loop_preserving_true) {
     if (false) {
       break;
     }

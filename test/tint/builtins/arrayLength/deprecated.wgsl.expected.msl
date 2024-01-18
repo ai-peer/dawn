@@ -23,6 +23,7 @@ struct S {
 };
 
 kernel void tint_symbol(const constant tint_symbol_1* tint_symbol_3 [[buffer(30)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint const l1 = (((*(tint_symbol_3)).buffer_size[0u][0u] - 0u) / 4u);
   uint const l2 = (((*(tint_symbol_3)).buffer_size[0u][0u] - 0u) / 4u);
   return;

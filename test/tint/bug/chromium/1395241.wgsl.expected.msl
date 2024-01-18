@@ -2,6 +2,7 @@
 
 using namespace metal;
 void fr6snorm() {
+  volatile bool tint_loop_preserving_true = true;
   int bzbxttch = 2;
 }
 

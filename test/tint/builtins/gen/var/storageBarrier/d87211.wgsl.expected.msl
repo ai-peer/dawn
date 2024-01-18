@@ -2,10 +2,12 @@
 
 using namespace metal;
 void storageBarrier_d87211() {
+  volatile bool tint_loop_preserving_true = true;
   threadgroup_barrier(mem_flags::mem_device);
 }
 
 kernel void compute_main() {
+  volatile bool tint_loop_preserving_true_1 = true;
   storageBarrier_d87211();
   return;
 }

@@ -6,6 +6,7 @@ struct Buffer {
 };
 
 void tint_symbol_1(device Buffer* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol_2)).data = ((*(tint_symbol_2)).data + 1u);
 }
 

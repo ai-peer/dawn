@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f() {
+  volatile bool tint_loop_preserving_true = true;
   int const a = 1;
   uint const b = 2u;
   int const r = (a >> (b & 31u));

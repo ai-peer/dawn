@@ -33,6 +33,7 @@ struct Mesh {
 };
 
 void main_1(thread tint_private_vars_struct* const tint_private_vars, const constant Scene* const tint_symbol_5, const constant Material_tint_packed_vec3* const tint_symbol_6, const constant Mesh* const tint_symbol_7) {
+  volatile bool tint_loop_preserving_true = true;
   float3 viewDirectionW = 0.0f;
   float4 baseColor = 0.0f;
   float3 diffuseColor = 0.0f;
@@ -122,6 +123,7 @@ struct tint_symbol_3 {
 };
 
 main_out tint_symbol_inner(float fClipDistance3_param, float fClipDistance4_param, thread tint_private_vars_struct* const tint_private_vars, const constant Scene* const tint_symbol_8, const constant Material_tint_packed_vec3* const tint_symbol_9, const constant Mesh* const tint_symbol_10) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).fClipDistance3 = fClipDistance3_param;
   (*(tint_private_vars)).fClipDistance4 = fClipDistance4_param;
   main_1(tint_private_vars, tint_symbol_8, tint_symbol_9, tint_symbol_10);
@@ -130,6 +132,7 @@ main_out tint_symbol_inner(float fClipDistance3_param, float fClipDistance4_para
 }
 
 fragment tint_symbol_3 tint_symbol(const constant Scene* tint_symbol_11 [[buffer(0)]], const constant Material_tint_packed_vec3* tint_symbol_12 [[buffer(1)]], const constant Mesh* tint_symbol_13 [[buffer(2)]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.tint_discarded = false;
   main_out const inner_result = tint_symbol_inner(tint_symbol_1.fClipDistance3_param, tint_symbol_1.fClipDistance4_param, &(tint_private_vars), tint_symbol_11, tint_symbol_12, tint_symbol_13);

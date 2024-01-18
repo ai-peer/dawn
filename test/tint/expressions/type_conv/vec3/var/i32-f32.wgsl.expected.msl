@@ -6,6 +6,7 @@ struct tint_private_vars_struct {
 };
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   float3 const v = float3((*(tint_private_vars)).u);
 }
 

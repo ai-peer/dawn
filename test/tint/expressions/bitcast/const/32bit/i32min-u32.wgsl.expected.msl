@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f() {
+  volatile bool tint_loop_preserving_true = true;
   uint const b = 2147483648u;
   return;
 }

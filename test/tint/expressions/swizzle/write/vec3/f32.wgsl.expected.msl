@@ -10,6 +10,7 @@ struct tint_private_vars_struct {
 };
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).P.v = float3(1.0f, 2.0f, 3.0f);
   (*(tint_private_vars)).P.v[0] = 1.0f;
   (*(tint_private_vars)).P.v[1] = 2.0f;

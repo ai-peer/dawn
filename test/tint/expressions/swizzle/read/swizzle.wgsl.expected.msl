@@ -19,6 +19,7 @@ struct S {
 };
 
 void a() {
+  volatile bool tint_loop_preserving_true = true;
   int4 a_1 = int4(0);
   int const b = a_1[0];
   int4 const c = a_1.zzyy;

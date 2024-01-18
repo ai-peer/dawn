@@ -2,12 +2,14 @@
 
 using namespace metal;
 void main_1() {
+  volatile bool tint_loop_preserving_true = true;
   float3x3 m = float3x3(float3(0.0f), float3(0.0f), float3(0.0f));
   float const x_16 = m[1][1];
   return;
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   main_1();
   return;
 }

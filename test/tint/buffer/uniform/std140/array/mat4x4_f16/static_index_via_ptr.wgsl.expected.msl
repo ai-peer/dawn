@@ -15,6 +15,7 @@ struct tint_array {
 };
 
 kernel void f(const constant tint_array<half4x4, 4>* tint_symbol [[buffer(0)]], device half* tint_symbol_1 [[buffer(1)]]) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<half4x4, 4> const l_a = *(tint_symbol);
   half4x4 const l_a_i = (*(tint_symbol))[2];
   half4 const l_a_i_i = (*(tint_symbol))[2][1];

@@ -14,11 +14,13 @@ struct tint_symbol {
 };
 
 Interface vert_main_inner() {
+  volatile bool tint_loop_preserving_true = true;
   Interface const tint_symbol_3 = Interface{.col1=0.40000000596046447754f, .col2=0.60000002384185791016f, .pos=float4(0.0f)};
   return tint_symbol_3;
 }
 
 vertex tint_symbol vert_main() {
+  volatile bool tint_loop_preserving_true_1 = true;
   Interface const inner_result = vert_main_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.col1 = inner_result.col1;
@@ -33,11 +35,13 @@ struct tint_symbol_2 {
 };
 
 void frag_main_inner(Interface colors) {
+  volatile bool tint_loop_preserving_true_2 = true;
   float const r = colors.col1;
   float const g = colors.col2;
 }
 
 fragment void frag_main(float4 pos [[position]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   Interface const tint_symbol_4 = {.col1=tint_symbol_1.col1, .col2=tint_symbol_1.col2, .pos=pos};
   frag_main_inner(tint_symbol_4);
   return;

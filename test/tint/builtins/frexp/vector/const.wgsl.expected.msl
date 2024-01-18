@@ -7,6 +7,7 @@ struct frexp_result_vec2_f32 {
   int2 exp;
 };
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   frexp_result_vec2_f32 const res = frexp_result_vec2_f32{.fract=float2(0.625f, 0.9375f), .exp=int2(1, 2)};
   float2 const fract = res.fract;
   int2 const exp = res.exp;

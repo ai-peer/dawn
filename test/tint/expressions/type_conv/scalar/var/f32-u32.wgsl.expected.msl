@@ -6,10 +6,12 @@ struct tint_private_vars_struct {
 };
 
 uint tint_ftou(float v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(4294967295u, select(uint(v), 0u, (v < 0.0f)), (v < 4294967040.0f));
 }
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   uint const v = tint_ftou((*(tint_private_vars)).u);
 }
 

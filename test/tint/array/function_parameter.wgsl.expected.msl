@@ -15,18 +15,22 @@ struct tint_array {
 };
 
 float f1(tint_array<float, 4> a) {
+  volatile bool tint_loop_preserving_true = true;
   return a[3];
 }
 
 float f2(tint_array<tint_array<float, 4>, 3> a) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return a[2][3];
 }
 
 float f3(tint_array<tint_array<tint_array<float, 4>, 3>, 2> a) {
+  volatile bool tint_loop_preserving_true_2 = true;
   return a[1][2][3];
 }
 
 kernel void tint_symbol(device float* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   tint_array<float, 4> const a1 = tint_array<float, 4>{};
   tint_array<tint_array<float, 4>, 3> const a2 = tint_array<tint_array<float, 4>, 3>{};
   tint_array<tint_array<tint_array<float, 4>, 3>, 2> const a3 = tint_array<tint_array<tint_array<float, 4>, 3>, 2>{};

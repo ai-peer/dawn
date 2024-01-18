@@ -2,30 +2,35 @@
 
 using namespace metal;
 void deref() {
+  volatile bool tint_loop_preserving_true = true;
   int3 a = 0;
   int const tint_symbol_2 = 0;
   a[tint_symbol_2] = as_type<int>((as_type<uint>(a[tint_symbol_2]) + as_type<uint>(42)));
 }
 
 void no_deref() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int3 a = 0;
   int const tint_symbol_4 = 0;
   a[tint_symbol_4] = as_type<int>((as_type<uint>(a[tint_symbol_4]) + as_type<uint>(42)));
 }
 
 void deref_inc() {
+  volatile bool tint_loop_preserving_true_2 = true;
   int3 a = 0;
   int const tint_symbol_6 = 0;
   a[tint_symbol_6] = as_type<int>((as_type<uint>(a[tint_symbol_6]) + as_type<uint>(1)));
 }
 
 void no_deref_inc() {
+  volatile bool tint_loop_preserving_true_3 = true;
   int3 a = 0;
   int const tint_symbol_8 = 0;
   a[tint_symbol_8] = as_type<int>((as_type<uint>(a[tint_symbol_8]) + as_type<uint>(1)));
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_4 = true;
   deref();
   no_deref();
   deref_inc();

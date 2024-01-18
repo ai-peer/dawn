@@ -19,6 +19,7 @@ struct S {
 };
 
 int foo() {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<int, 4> const src = tint_array<int, 4>{};
   tint_array<int, 4> dst = {};
   S dst_struct = {};
@@ -32,6 +33,7 @@ int foo() {
 }
 
 kernel void tint_symbol(device int* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   *(tint_symbol_1) = foo();
   return;
 }

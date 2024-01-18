@@ -37,14 +37,17 @@ struct In {
 };
 
 uint tint_ftou(float v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(4294967295u, select(uint(v), 0u, (v < 0.0f)), (v < 4294967040.0f));
 }
 
 void f_inner(In in, thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).P.a = ((*(tint_private_vars)).P.a + (tint_ftou(in.a[0]) + tint_ftou(in.b[1])));
 }
 
 f_res f_inner_1(In in, PixelLocal pixel_local_1, thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_2 = true;
   (*(tint_private_vars)).P = pixel_local_1;
   f_inner(in, tint_private_vars);
   f_res const tint_symbol_5 = {.output_0=(*(tint_private_vars)).P.a, .output_1=(*(tint_private_vars)).P.b, .output_2=(*(tint_private_vars)).P.c};
@@ -52,6 +55,7 @@ f_res f_inner_1(In in, PixelLocal pixel_local_1, thread tint_private_vars_struct
 }
 
 fragment tint_symbol_2 f(tint_symbol_1 tint_symbol [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   In const tint_symbol_3 = {.a=tint_symbol.a, .b=tint_symbol.b};
   PixelLocal const tint_symbol_4 = {.a=tint_symbol.a_1, .b=tint_symbol.b_1, .c=tint_symbol.c};

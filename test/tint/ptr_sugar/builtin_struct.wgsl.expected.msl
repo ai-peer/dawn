@@ -11,30 +11,35 @@ struct frexp_result_f32 {
   int exp;
 };
 void deref_modf() {
+  volatile bool tint_loop_preserving_true = true;
   modf_result_f32 a = modf_result_f32{.fract=0.5f, .whole=1.0f};
   float fract = a.fract;
   float whole = a.whole;
 }
 
 void no_deref_modf() {
+  volatile bool tint_loop_preserving_true_1 = true;
   modf_result_f32 a = modf_result_f32{.fract=0.5f, .whole=1.0f};
   float fract = a.fract;
   float whole = a.whole;
 }
 
 void deref_frexp() {
+  volatile bool tint_loop_preserving_true_2 = true;
   frexp_result_f32 a = frexp_result_f32{.fract=0.75f, .exp=1};
   float fract = a.fract;
   int exp = a.exp;
 }
 
 void no_deref_frexp() {
+  volatile bool tint_loop_preserving_true_3 = true;
   frexp_result_f32 a = frexp_result_f32{.fract=0.75f, .exp=1};
   float fract = a.fract;
   int exp = a.exp;
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_4 = true;
   deref_modf();
   no_deref_modf();
   deref_frexp();

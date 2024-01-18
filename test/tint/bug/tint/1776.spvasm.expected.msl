@@ -25,11 +25,13 @@ struct sb_block {
 };
 
 void main_1(device sb_block* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   S const x_18 = (*(tint_symbol_1)).inner[1];
   return;
 }
 
 kernel void tint_symbol(device sb_block* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   main_1(tint_symbol_2);
   return;
 }

@@ -7,6 +7,7 @@ struct S_tint_packed_vec3 {
 };
 
 float3 Bad(uint index, float3 rd) {
+  volatile bool tint_loop_preserving_true = true;
   float3 normal = float3(0.0f);
   normal[index] = -(sign(rd[index]));
   return normalize(normal);
@@ -18,10 +19,12 @@ struct S {
 };
 
 void tint_symbol_inner(uint idx, device S_tint_packed_vec3* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_symbol_1)).v = packed_float3(Bad((*(tint_symbol_1)).i, float3((*(tint_symbol_1)).v)));
 }
 
 kernel void tint_symbol(device S_tint_packed_vec3* tint_symbol_2 [[buffer(0)]], uint idx [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   tint_symbol_inner(idx, tint_symbol_2);
   return;
 }

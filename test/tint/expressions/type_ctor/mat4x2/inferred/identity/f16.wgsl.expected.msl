@@ -6,6 +6,7 @@ struct tint_private_vars_struct {
 };
 
 kernel void f(device half4x2* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.m = half4x2(half2(0.0h, 1.0h), half2(2.0h, 3.0h), half2(4.0h, 5.0h), half2(6.0h, 7.0h));
   *(tint_symbol) = half4x2(tint_private_vars.m);

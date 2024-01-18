@@ -26,6 +26,7 @@ struct tint_symbol_2 {
 };
 
 VertexOutput vtx_main_inner(VertexInput input, const constant Uniforms* const tint_symbol_7) {
+  volatile bool tint_loop_preserving_true = true;
   VertexOutput output = {};
   output.Position = ((*(tint_symbol_7)).modelViewProjectionMatrix * input.cur_position);
   output.vtxFragColor = input.color;
@@ -33,6 +34,7 @@ VertexOutput vtx_main_inner(VertexInput input, const constant Uniforms* const ti
 }
 
 vertex tint_symbol_2 vtx_main(const constant Uniforms* tint_symbol_8 [[buffer(0)]], tint_symbol_1 tint_symbol [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   VertexInput const tint_symbol_6 = {.cur_position=tint_symbol.cur_position, .color=tint_symbol.color};
   VertexOutput const inner_result = vtx_main_inner(tint_symbol_6, tint_symbol_8);
   tint_symbol_2 wrapper_result = {};
@@ -50,10 +52,12 @@ struct tint_symbol_5 {
 };
 
 float4 frag_main_inner(float4 fragColor) {
+  volatile bool tint_loop_preserving_true_2 = true;
   return fragColor;
 }
 
 fragment tint_symbol_5 frag_main(tint_symbol_4 tint_symbol_3 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result_1 = frag_main_inner(tint_symbol_3.fragColor);
   tint_symbol_5 wrapper_result_1 = {};
   wrapper_result_1.value = inner_result_1;

@@ -19,11 +19,13 @@ struct str {
 };
 
 void func(device str* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   str const tint_symbol_1 = str{};
   *(pointer) = tint_symbol_1;
 }
 
 kernel void tint_symbol(device tint_array<str, 4>* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   func(&((*(tint_symbol_2))[2]));
   return;
 }

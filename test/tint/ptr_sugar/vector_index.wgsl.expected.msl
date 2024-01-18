@@ -2,18 +2,21 @@
 
 using namespace metal;
 void deref_const() {
+  volatile bool tint_loop_preserving_true = true;
   int3 a = 0;
   int b = a[0];
   a[0] = 42;
 }
 
 void no_deref_const() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int3 a = 0;
   int b = a[0];
   a[0] = 42;
 }
 
 void deref_let() {
+  volatile bool tint_loop_preserving_true_2 = true;
   int3 a = 0;
   int const i = 0;
   int b = a[i];
@@ -21,6 +24,7 @@ void deref_let() {
 }
 
 void no_deref_let() {
+  volatile bool tint_loop_preserving_true_3 = true;
   int3 a = 0;
   int const i = 0;
   int b = a[i];
@@ -28,6 +32,7 @@ void no_deref_let() {
 }
 
 void deref_var() {
+  volatile bool tint_loop_preserving_true_4 = true;
   int3 a = 0;
   int i = 0;
   int b = a[i];
@@ -35,6 +40,7 @@ void deref_var() {
 }
 
 void no_deref_var() {
+  volatile bool tint_loop_preserving_true_5 = true;
   int3 a = 0;
   int const i = 0;
   int b = a[i];
@@ -42,6 +48,7 @@ void no_deref_var() {
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_6 = true;
   deref_const();
   no_deref_const();
   deref_let();

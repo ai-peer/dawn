@@ -6,10 +6,12 @@ struct tint_symbol {
 };
 
 float main1_inner() {
+  volatile bool tint_loop_preserving_true = true;
   return 1.0f;
 }
 
 fragment tint_symbol main1() {
+  volatile bool tint_loop_preserving_true_1 = true;
   float const inner_result = main1_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -21,10 +23,12 @@ struct tint_symbol_1 {
 };
 
 uint main2_inner() {
+  volatile bool tint_loop_preserving_true_2 = true;
   return 1u;
 }
 
 fragment tint_symbol_1 main2() {
+  volatile bool tint_loop_preserving_true_3 = true;
   uint const inner_result_1 = main2_inner();
   tint_symbol_1 wrapper_result_1 = {};
   wrapper_result_1.value = inner_result_1;

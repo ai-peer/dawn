@@ -15,6 +15,7 @@ struct tint_array {
 };
 
 void f(threadgroup tint_array<float, 10>* const tint_symbol, threadgroup tint_array<float, 20>* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   float const x = (*(tint_symbol))[0];
   float const y = (*(tint_symbol_1))[0];
 }

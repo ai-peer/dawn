@@ -24,11 +24,13 @@ struct tint_packed_vec3_f16_array_element {
 };
 
 half2x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f16_array_element, 2> in) {
+  volatile bool tint_loop_preserving_true = true;
   half2x3 result = half2x3(half3(in[0].elements), half3(in[1].elements));
   return result;
 }
 
 kernel void f(const constant tint_array<tint_packed_vec3_f16_array_element, 2>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.p = tint_unpack_vec3_in_composite(*(tint_symbol));
   tint_private_vars.p[1] = half3((*(tint_symbol))[0].elements);

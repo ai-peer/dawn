@@ -17,6 +17,7 @@ struct tint_symbol_3 {
 };
 
 FragIn tint_symbol_inner(FragIn in, float b) {
+  volatile bool tint_loop_preserving_true = true;
   if ((in.mask == 0u)) {
     return in;
   }
@@ -25,6 +26,7 @@ FragIn tint_symbol_inner(FragIn in, float b) {
 }
 
 fragment tint_symbol_3 tint_symbol(uint mask [[sample_mask]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   FragIn const tint_symbol_4 = {.a=tint_symbol_1.a, .mask=mask};
   FragIn const inner_result = tint_symbol_inner(tint_symbol_4, tint_symbol_1.b);
   tint_symbol_3 wrapper_result = {};

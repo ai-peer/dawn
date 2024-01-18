@@ -27,6 +27,7 @@ struct S {
 };
 
 fragment void tint_symbol_1(const constant S_tint_packed_vec3* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   half2 const x = ((*(tint_symbol_2)).tint_symbol * half3((*(tint_symbol_2)).vector));
   return;
 }

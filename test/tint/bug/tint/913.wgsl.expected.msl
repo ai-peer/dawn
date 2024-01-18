@@ -27,10 +27,12 @@ struct OutputBuf {
 };
 
 bool aboutEqual(float value, float expect) {
+  volatile bool tint_loop_preserving_true = true;
   return (fabs((value - expect)) < 0.00100000004749745131f);
 }
 
 void tint_symbol_inner(uint3 GlobalInvocationID, texture2d<float, access::sample> tint_symbol_7, texture2d<float, access::sample> tint_symbol_8, const constant Uniforms* const tint_symbol_9, device OutputBuf* const tint_symbol_10) {
+  volatile bool tint_loop_preserving_true_1 = true;
   uint2 const srcSize = uint2(tint_symbol_7.get_width(), tint_symbol_7.get_height());
   uint2 const dstSize = uint2(tint_symbol_8.get_width(), tint_symbol_8.get_height());
   uint2 const dstTexCoord = uint2(GlobalInvocationID.xy);
@@ -84,6 +86,7 @@ void tint_symbol_inner(uint3 GlobalInvocationID, texture2d<float, access::sample
 }
 
 kernel void tint_symbol(texture2d<float, access::sample> tint_symbol_11 [[texture(0)]], texture2d<float, access::sample> tint_symbol_12 [[texture(1)]], const constant Uniforms* tint_symbol_13 [[buffer(0)]], device OutputBuf* tint_symbol_14 [[buffer(1)]], uint3 GlobalInvocationID [[thread_position_in_grid]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   tint_symbol_inner(GlobalInvocationID, tint_symbol_11, tint_symbol_12, tint_symbol_13, tint_symbol_14);
   return;
 }

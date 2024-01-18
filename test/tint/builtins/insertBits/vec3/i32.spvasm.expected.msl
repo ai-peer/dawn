@@ -2,12 +2,14 @@
 
 using namespace metal;
 int3 tint_insert_bits(int3 v, int3 n, uint offset, uint count) {
+  volatile bool tint_loop_preserving_true = true;
   uint const s = min(offset, 32u);
   uint const e = min(32u, (s + count));
   return insert_bits(v, n, s, (e - s));
 }
 
 void f_1() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int3 v = int3(0);
   int3 n = int3(0);
   uint offset_1 = 0u;
@@ -17,6 +19,7 @@ void f_1() {
 }
 
 kernel void f() {
+  volatile bool tint_loop_preserving_true_2 = true;
   f_1();
   return;
 }

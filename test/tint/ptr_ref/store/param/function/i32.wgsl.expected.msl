@@ -2,10 +2,12 @@
 
 using namespace metal;
 void func(thread int* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   *(pointer) = 42;
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int F = 0;
   func(&(F));
   return;

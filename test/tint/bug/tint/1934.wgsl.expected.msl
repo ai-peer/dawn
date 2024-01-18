@@ -2,6 +2,7 @@
 
 using namespace metal;
 void v() {
+  volatile bool tint_loop_preserving_true = true;
   int const i = 1;
   int b = int2(1)[i];
 }

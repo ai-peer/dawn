@@ -2,10 +2,12 @@
 
 using namespace metal;
 half get_f16() {
+  volatile bool tint_loop_preserving_true = true;
   return 1.0h;
 }
 
 void f() {
+  volatile bool tint_loop_preserving_true_1 = true;
   half const tint_symbol = get_f16();
   half2 v2 = half2(tint_symbol);
   half const tint_symbol_1 = get_f16();

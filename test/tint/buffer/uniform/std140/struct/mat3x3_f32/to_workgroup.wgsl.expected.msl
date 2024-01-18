@@ -38,11 +38,13 @@ struct S_tint_packed_vec3 {
 };
 
 float3x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 3> in) {
+  volatile bool tint_loop_preserving_true = true;
   float3x3 result = float3x3(float3(in[0].elements), float3(in[1].elements), float3(in[2].elements));
   return result;
 }
 
 S tint_unpack_vec3_in_composite_1(S_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true_1 = true;
   S result = {};
   result.before = in.before;
   result.m = tint_unpack_vec3_in_composite(in.m);
@@ -51,13 +53,14 @@ S tint_unpack_vec3_in_composite_1(S_tint_packed_vec3 in) {
 }
 
 tint_array<S, 4> tint_unpack_vec3_in_composite_2(tint_array<S_tint_packed_vec3, 4> in) {
+  volatile bool tint_loop_preserving_true_2 = true;
   tint_array<S, 4> result = tint_array<S, 4>{tint_unpack_vec3_in_composite_1(in[0]), tint_unpack_vec3_in_composite_1(in[1]), tint_unpack_vec3_in_composite_1(in[2]), tint_unpack_vec3_in_composite_1(in[3])};
   return result;
 }
 
 void f_inner(uint local_invocation_index, threadgroup tint_array<S, 4>* const tint_symbol_1, const constant tint_array<S_tint_packed_vec3, 4>* const tint_symbol_2) {
-  for(uint idx = local_invocation_index; (idx < 4u); idx = (idx + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true_3 = true;
+  for(uint idx = local_invocation_index; ((idx < 4u)) && tint_loop_preserving_true_3; idx = (idx + 1u)) {
     uint const i = idx;
     S const tint_symbol = S{};
     (*(tint_symbol_1))[i] = tint_symbol;
@@ -70,6 +73,7 @@ void f_inner(uint local_invocation_index, threadgroup tint_array<S, 4>* const ti
 }
 
 kernel void f(const constant tint_array<S_tint_packed_vec3, 4>* tint_symbol_5 [[buffer(0)]], threadgroup tint_symbol_6* tint_symbol_4 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   threadgroup tint_array<S, 4>* const tint_symbol_3 = &((*(tint_symbol_4)).w);
   f_inner(local_invocation_index, tint_symbol_3, tint_symbol_5);
   return;

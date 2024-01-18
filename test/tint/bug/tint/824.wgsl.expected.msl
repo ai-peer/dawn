@@ -25,6 +25,7 @@ struct tint_symbol_1 {
 };
 
 Output tint_symbol_inner(uint VertexIndex, uint InstanceIndex) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float2, 4> const zv = tint_array<float2, 4>{float2(0.20000000298023223877f), float2(0.30000001192092895508f), float2(-0.10000000149011611938f), float2(1.10000002384185791016f)};
   float const z = zv[InstanceIndex][0];
   Output output = {};
@@ -35,6 +36,7 @@ Output tint_symbol_inner(uint VertexIndex, uint InstanceIndex) {
 }
 
 vertex tint_symbol_1 tint_symbol(uint VertexIndex [[vertex_id]], uint InstanceIndex [[instance_id]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   Output const inner_result = tint_symbol_inner(VertexIndex, InstanceIndex);
   tint_symbol_1 wrapper_result = {};
   wrapper_result.Position = inner_result.Position;

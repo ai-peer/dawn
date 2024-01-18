@@ -20,11 +20,13 @@ struct tint_packed_vec3_f16_array_element {
 };
 
 half3x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f16_array_element, 3> in) {
+  volatile bool tint_loop_preserving_true = true;
   half3x3 result = half3x3(half3(in[0].elements), half3(in[1].elements), half3(in[2].elements));
   return result;
 }
 
 kernel void f(const constant tint_array<tint_packed_vec3_f16_array_element, 3>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   half3x3 const t = transpose(tint_unpack_vec3_in_composite(*(tint_symbol)));
   half const l = length(half3((*(tint_symbol))[1].elements));
   half const a = fabs(half3((*(tint_symbol))[0].elements).zxy[0]);

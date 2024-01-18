@@ -2,12 +2,14 @@
 
 using namespace metal;
 void subgroupBroadcast_c36fe1(device uint* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   uint arg_0 = 1u;
   uint res = simd_broadcast(arg_0,ushort(1u));
   *(tint_symbol) = res;
 }
 
 kernel void compute_main(device uint* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   subgroupBroadcast_c36fe1(tint_symbol_1);
   return;
 }

@@ -2,9 +2,9 @@
 
 using namespace metal;
 int f() {
+  volatile bool tint_loop_preserving_true = true;
   int i = 0;
-  while (true) {
-    __asm__("");
+  while (tint_loop_preserving_true) {
     if ((i > 4)) {
       return i;
     }

@@ -6,6 +6,7 @@ struct a {
 };
 
 void f(a a_1) {
+  volatile bool tint_loop_preserving_true = true;
   a const b = a_1;
 }
 

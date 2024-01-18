@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f0() {
+  volatile bool tint_loop_preserving_true = true;
   int const a = 2147483647;
   int const b = 1;
   int const c = as_type<int>((as_type<uint>(a) + as_type<uint>(1)));
@@ -9,6 +10,7 @@ kernel void f0() {
 }
 
 void f1() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int const a = 1;
   int const b = as_type<int>((as_type<uint>((-2147483647 - 1)) - as_type<uint>(a)));
 }

@@ -6,11 +6,13 @@ struct tint_private_vars_struct {
 };
 
 int3 m(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).t = 1;
   return int3((*(tint_private_vars)).t);
 }
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   int3 const tint_symbol = m(tint_private_vars);
   uint3 v = uint3(tint_symbol);
 }

@@ -444,6 +444,7 @@ modf_result_f32 tint_modf(float param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float const f = 1.5f;
   modf_result_f32 const v = tint_modf(f);
   return;
@@ -476,6 +477,7 @@ modf_result_f16 tint_modf(half param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half const f = 1.5h;
   modf_result_f16 const v = tint_modf(f);
   return;
@@ -506,6 +508,7 @@ modf_result_vec3_f32 tint_modf(float3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float3 const f = float3(1.5f, 2.5f, 3.5f);
   modf_result_vec3_f32 const v = tint_modf(f);
   return;
@@ -538,6 +541,7 @@ modf_result_vec3_f16 tint_modf(half3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half3 const f = half3(1.5h, 2.5h, 3.5h);
   modf_result_vec3_f16 const v = tint_modf(f);
   return;
@@ -561,6 +565,7 @@ struct modf_result_f32 {
   float whole;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   modf_result_f32 const v = modf_result_f32{.fract=0.5f, .whole=1.0f};
   return;
 }
@@ -585,6 +590,7 @@ struct modf_result_f16 {
   half whole;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   modf_result_f16 const v = modf_result_f16{.fract=0.5h, .whole=1.0h};
   return;
 }
@@ -607,6 +613,7 @@ struct modf_result_vec3_f32 {
   float3 whole;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   modf_result_vec3_f32 const v = modf_result_vec3_f32{.fract=float3(0.5f), .whole=float3(1.0f, 2.0f, 3.0f)};
   return;
 }
@@ -631,6 +638,7 @@ struct modf_result_vec3_f16 {
   half3 whole;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   modf_result_vec3_f16 const v = modf_result_vec3_f16{.fract=half3(0.5h), .whole=half3(1.0h, 2.0h, 3.0h)};
   return;
 }
@@ -660,6 +668,7 @@ frexp_result_f32 tint_frexp(float param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float f = 1.0f;
   frexp_result_f32 v = tint_frexp(f);
   return;
@@ -692,6 +701,7 @@ frexp_result_f16 tint_frexp(half param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half f = 1.0h;
   frexp_result_f16 v = tint_frexp(f);
   return;
@@ -722,6 +732,7 @@ frexp_result_vec3_f32 tint_frexp(float3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float3 f = float3(0.0f);
   frexp_result_vec3_f32 v = tint_frexp(f);
   return;
@@ -754,6 +765,7 @@ frexp_result_vec3_f16 tint_frexp(half3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half3 f = half3(0.0h);
   frexp_result_vec3_f16 v = tint_frexp(f);
   return;
@@ -777,6 +789,7 @@ struct frexp_result_f32 {
   int exp;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   frexp_result_f32 const v = frexp_result_f32{.fract=0.5f, .exp=1};
   return;
 }
@@ -801,6 +814,7 @@ struct frexp_result_f16 {
   int exp;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   frexp_result_f16 const v = frexp_result_f16{.fract=0.5h, .exp=1};
   return;
 }
@@ -823,6 +837,7 @@ struct frexp_result_vec3_f32 {
   int3 exp;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   frexp_result_vec3_f32 const v = frexp_result_vec3_f32{};
   return;
 }
@@ -847,6 +862,7 @@ struct frexp_result_vec3_f16 {
   int3 exp;
 };
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   frexp_result_vec3_f16 const v = frexp_result_vec3_f16{};
   return;
 }
@@ -871,6 +887,7 @@ float tint_degrees(float param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float val = 0.0f;
   float const tint_symbol = tint_degrees(val);
   return;
@@ -896,6 +913,7 @@ float3 tint_degrees(float3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float3 val = 0.0f;
   float3 const tint_symbol = tint_degrees(val);
   return;
@@ -923,6 +941,7 @@ half tint_degrees(half param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half val = 0.0h;
   half const tint_symbol = tint_degrees(val);
   return;
@@ -950,6 +969,7 @@ half3 tint_degrees(half3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half3 val = 0.0h;
   half3 const tint_symbol = tint_degrees(val);
   return;
@@ -975,6 +995,7 @@ float tint_radians(float param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float val = 0.0f;
   float const tint_symbol = tint_radians(val);
   return;
@@ -1000,6 +1021,7 @@ float3 tint_radians(float3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   float3 val = 0.0f;
   float3 const tint_symbol = tint_radians(val);
   return;
@@ -1027,6 +1049,7 @@ half tint_radians(half param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half val = 0.0h;
   half const tint_symbol = tint_radians(val);
   return;
@@ -1054,6 +1077,7 @@ half3 tint_radians(half3 param_0) {
 }
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   half3 val = 0.0h;
   half3 const tint_symbol = tint_radians(val);
   return;
@@ -1106,6 +1130,7 @@ struct tint_private_vars_struct {
 };
 
 kernel void test_function() {
+  volatile bool tint_loop_preserving_true = true;
   thread tint_private_vars_struct tint_private_vars = {};
   int r = tint_dot3(tint_private_vars.v, tint_private_vars.v);
   return;
@@ -1131,10 +1156,12 @@ TEST_F(MslASTPrinterTest, Ignore) {
 
 using namespace metal;
 int f(int a, int b, int c) {
+  volatile bool tint_loop_preserving_true = true;
   return as_type<int>((as_type<uint>(as_type<int>((as_type<uint>(a) + as_type<uint>(b)))) * as_type<uint>(c)));
 }
 
 kernel void func() {
+  volatile bool tint_loop_preserving_true_1 = true;
   f(1, 2, 3);
   return;
 }

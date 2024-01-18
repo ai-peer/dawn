@@ -23,11 +23,13 @@ struct tint_private_vars_struct {
 };
 
 void func(thread tint_array<int, 4>* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<int, 4> const tint_symbol_1 = tint_array<int, 4>{};
   *(pointer) = tint_symbol_1;
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   func(&(tint_private_vars.P.arr));
   return;

@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f() {
+  volatile bool tint_loop_preserving_true = true;
   uint2 const a = uint2(1073757184u, 3288351232u);
   int2 const b = as_type<int2>(a);
   return;

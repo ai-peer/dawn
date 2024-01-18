@@ -15,6 +15,7 @@ struct tint_array {
 };
 
 fragment void tint_symbol(device float* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float, 4> signed_literal = {};
   tint_array<float, 4> unsigned_literal = {};
   tint_array<float, 4> signed_constant = {};

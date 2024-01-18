@@ -2,6 +2,7 @@
 
 using namespace metal;
 uint tint_workgroupUniformLoad(threadgroup uint* const p) {
+  volatile bool tint_loop_preserving_true = true;
   threadgroup_barrier(mem_flags::mem_threadgroup);
   uint const result = *(p);
   threadgroup_barrier(mem_flags::mem_threadgroup);
@@ -9,6 +10,7 @@ uint tint_workgroupUniformLoad(threadgroup uint* const p) {
 }
 
 void tint_symbol_inner(uint3 global_id, uint3 local_id, uint local_invocation_index, threadgroup uint* const tint_symbol_1, device uint* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_1 = true;
   if ((local_invocation_index < 1u)) {
     *(tint_symbol_1) = 0u;
   }
@@ -20,6 +22,7 @@ void tint_symbol_inner(uint3 global_id, uint3 local_id, uint local_invocation_in
 }
 
 kernel void tint_symbol(device uint* tint_symbol_4 [[buffer(0)]], uint3 global_id [[thread_position_in_grid]], uint3 local_id [[thread_position_in_threadgroup]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   threadgroup uint tint_symbol_3;
   tint_symbol_inner(global_id, local_id, local_invocation_index, &(tint_symbol_3), tint_symbol_4);
   return;

@@ -15,6 +15,7 @@ struct tint_array {
 };
 
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<bool, 65535> v = {};
 }
 

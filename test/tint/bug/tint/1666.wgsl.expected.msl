@@ -19,27 +19,32 @@ struct tint_symbol_3 {
 };
 
 void vector() {
+  volatile bool tint_loop_preserving_true = true;
   int const idx = 3;
   int const x = int2(1, 2)[idx];
 }
 
 void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int const idx = 4;
   float2 const x = float2x2(float2(1.0f, 2.0f), float2(3.0f, 4.0f))[idx];
 }
 
 void fixed_size_array() {
+  volatile bool tint_loop_preserving_true_2 = true;
   tint_array<int, 2> const arr = tint_array<int, 2>{1, 2};
   int const idx = 3;
   int const x = arr[idx];
 }
 
 void runtime_size_array(const device tint_array<float, 1>* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_3 = true;
   int const idx = -1;
   float const x = (*(tint_symbol_1))[idx];
 }
 
 kernel void f(const device tint_symbol_3* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   vector();
   tint_symbol();
   fixed_size_array();

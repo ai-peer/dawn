@@ -2,6 +2,7 @@
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   float4 v = float4(0.0f);
 }
 

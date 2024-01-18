@@ -20,6 +20,7 @@ struct S {
 };
 
 uint f() {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<S, 2> a = tint_array<S, 2>{};
   return a[1].n[1];
 }

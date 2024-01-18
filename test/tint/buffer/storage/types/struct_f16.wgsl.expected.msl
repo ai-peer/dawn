@@ -33,6 +33,7 @@ struct Inner {
 };
 
 Inner tint_unpack_vec3_in_composite(Inner_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true = true;
   Inner result = {};
   result.scalar_f16 = in.scalar_f16;
   result.vec3_f16 = half3(in.vec3_f16);
@@ -45,22 +46,26 @@ struct S {
 };
 
 S tint_unpack_vec3_in_composite_1(S_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true_1 = true;
   S result = {};
   result.inner = tint_unpack_vec3_in_composite(in.inner);
   return result;
 }
 
 void assign_and_preserve_padding_1(device Inner_tint_packed_vec3* const dest, Inner value) {
+  volatile bool tint_loop_preserving_true_2 = true;
   (*(dest)).scalar_f16 = value.scalar_f16;
   (*(dest)).vec3_f16 = packed_half3(value.vec3_f16);
   (*(dest)).mat2x4_f16 = value.mat2x4_f16;
 }
 
 void assign_and_preserve_padding(device S_tint_packed_vec3* const dest, S value) {
+  volatile bool tint_loop_preserving_true_3 = true;
   assign_and_preserve_padding_1(&((*(dest)).inner), value.inner);
 }
 
 kernel void tint_symbol(const device S_tint_packed_vec3* tint_symbol_1 [[buffer(1)]], device S_tint_packed_vec3* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   S const t = tint_unpack_vec3_in_composite_1(*(tint_symbol_1));
   assign_and_preserve_padding(tint_symbol_2, t);
   return;

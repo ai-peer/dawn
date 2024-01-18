@@ -6,10 +6,12 @@ struct tint_private_vars_struct {
 };
 
 void func(thread float2* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   *(pointer) = float2(0.0f);
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   func(&(tint_private_vars.P[1]));
   return;

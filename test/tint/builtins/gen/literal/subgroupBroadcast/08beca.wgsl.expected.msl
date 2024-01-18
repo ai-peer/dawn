@@ -2,11 +2,13 @@
 
 using namespace metal;
 void subgroupBroadcast_08beca(device float* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   float res = simd_broadcast(1.0f,ushort(1u));
   *(tint_symbol) = res;
 }
 
 kernel void compute_main(device float* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   subgroupBroadcast_08beca(tint_symbol_1);
   return;
 }

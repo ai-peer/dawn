@@ -2,12 +2,13 @@
 
 using namespace metal;
 void some_loop_body() {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 void f() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int j = 0;
-  for(int i = 0; ((i < 5) && (j < 10)); i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
-    __asm__("");
+  for(int i = 0; (((i < 5) && (j < 10))) && tint_loop_preserving_true_1; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
     some_loop_body();
     j = as_type<int>((as_type<uint>(i) * as_type<uint>(30)));
   }

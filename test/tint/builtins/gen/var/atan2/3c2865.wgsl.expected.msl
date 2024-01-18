@@ -2,6 +2,7 @@
 
 using namespace metal;
 void atan2_3c2865() {
+  volatile bool tint_loop_preserving_true = true;
   float3 res = float3(0.78539818525314331055f);
 }
 
@@ -10,11 +11,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   atan2_3c2865();
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main() {
+  volatile bool tint_loop_preserving_true_2 = true;
   float4 const inner_result = vertex_main_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -22,11 +25,13 @@ vertex tint_symbol vertex_main() {
 }
 
 fragment void fragment_main() {
+  volatile bool tint_loop_preserving_true_3 = true;
   atan2_3c2865();
   return;
 }
 
 kernel void compute_main() {
+  volatile bool tint_loop_preserving_true_4 = true;
   atan2_3c2865();
   return;
 }

@@ -2,6 +2,7 @@
 
 using namespace metal;
 void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   int i = 0;
   i = as_type<int>((as_type<uint>(i) - as_type<uint>(1)));
 }

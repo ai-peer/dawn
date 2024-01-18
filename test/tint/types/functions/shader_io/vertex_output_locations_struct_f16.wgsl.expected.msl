@@ -22,11 +22,13 @@ struct tint_symbol_1 {
 };
 
 VertexOutputs tint_symbol_inner() {
+  volatile bool tint_loop_preserving_true = true;
   VertexOutputs const tint_symbol_2 = VertexOutputs{.loc0=1, .loc1=1u, .loc2=1.0f, .loc3=float4(1.0f, 2.0f, 3.0f, 4.0f), .position=float4(0.0f), .loc4=2.25h, .loc5=half3(3.0h, 5.0h, 8.0h)};
   return tint_symbol_2;
 }
 
 vertex tint_symbol_1 tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   VertexOutputs const inner_result = tint_symbol_inner();
   tint_symbol_1 wrapper_result = {};
   wrapper_result.loc0 = inner_result.loc0;

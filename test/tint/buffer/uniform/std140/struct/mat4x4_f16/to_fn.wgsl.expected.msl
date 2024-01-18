@@ -24,21 +24,27 @@ struct S {
 };
 
 void a(tint_array<S, 4> a_1) {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 void b(S s) {
+  volatile bool tint_loop_preserving_true_1 = true;
 }
 
 void c(half4x4 m) {
+  volatile bool tint_loop_preserving_true_2 = true;
 }
 
 void d(half4 v) {
+  volatile bool tint_loop_preserving_true_3 = true;
 }
 
 void e(half f_1) {
+  volatile bool tint_loop_preserving_true_4 = true;
 }
 
 kernel void f(const constant tint_array<S, 4>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   a(*(tint_symbol));
   b((*(tint_symbol))[2]);
   c((*(tint_symbol))[2].m);

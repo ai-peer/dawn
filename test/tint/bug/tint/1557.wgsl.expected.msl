@@ -2,13 +2,14 @@
 
 using namespace metal;
 int f() {
+  volatile bool tint_loop_preserving_true = true;
   return 0;
 }
 
 void g() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int j = 0;
-  while (true) {
-    __asm__("");
+  while (tint_loop_preserving_true_1) {
     if ((j >= 1)) {
       break;
     }
@@ -18,6 +19,7 @@ void g() {
 }
 
 kernel void tint_symbol(const constant int* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   switch(*(tint_symbol_1)) {
     case 0: {
       switch(*(tint_symbol_1)) {

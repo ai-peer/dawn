@@ -2,6 +2,7 @@
 
 using namespace metal;
 void main_1() {
+  volatile bool tint_loop_preserving_true = true;
   float const x_11 = 2.0f;
   float2 const x_13 = float2(1.0f, 3.0f);
   float3 const x_14 = float3(1.0f, 3.0f, 2.0f);
@@ -9,6 +10,7 @@ void main_1() {
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   main_1();
   return;
 }

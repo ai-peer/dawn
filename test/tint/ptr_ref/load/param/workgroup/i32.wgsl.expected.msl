@@ -2,10 +2,12 @@
 
 using namespace metal;
 int func(threadgroup int* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   return *(pointer);
 }
 
 void tint_symbol_inner(uint local_invocation_index, threadgroup int* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   {
     *(tint_symbol_1) = 0;
   }
@@ -14,6 +16,7 @@ void tint_symbol_inner(uint local_invocation_index, threadgroup int* const tint_
 }
 
 kernel void tint_symbol(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   threadgroup int tint_symbol_2;
   tint_symbol_inner(local_invocation_index, &(tint_symbol_2));
   return;

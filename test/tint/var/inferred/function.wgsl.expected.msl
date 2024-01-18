@@ -19,28 +19,34 @@ struct MyStruct {
 };
 
 int ret_i32() {
+  volatile bool tint_loop_preserving_true = true;
   return 1;
 }
 
 uint ret_u32() {
+  volatile bool tint_loop_preserving_true_1 = true;
   return 1u;
 }
 
 float ret_f32() {
+  volatile bool tint_loop_preserving_true_2 = true;
   return 1.0f;
 }
 
 MyStruct ret_MyStruct() {
+  volatile bool tint_loop_preserving_true_3 = true;
   MyStruct const tint_symbol_2 = MyStruct{};
   return tint_symbol_2;
 }
 
 tint_array<float, 10> ret_MyArray() {
+  volatile bool tint_loop_preserving_true_4 = true;
   tint_array<float, 10> const tint_symbol_3 = tint_array<float, 10>{};
   return tint_symbol_3;
 }
 
 void var_decls() {
+  volatile bool tint_loop_preserving_true_5 = true;
   int v1 = 1;
   uint v2 = 1u;
   float v3 = 1.0f;
@@ -63,10 +69,12 @@ struct tint_symbol_1 {
 };
 
 float4 tint_symbol_inner() {
+  volatile bool tint_loop_preserving_true_6 = true;
   return float4(0.0f);
 }
 
 fragment tint_symbol_1 tint_symbol() {
+  volatile bool tint_loop_preserving_true_7 = true;
   float4 const inner_result = tint_symbol_inner();
   tint_symbol_1 wrapper_result = {};
   wrapper_result.value = inner_result;

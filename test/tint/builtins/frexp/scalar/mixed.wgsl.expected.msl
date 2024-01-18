@@ -13,6 +13,7 @@ frexp_result_f32 tint_frexp(float param_0) {
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   float const runtime_in = 1.25f;
   frexp_result_f32 res = frexp_result_f32{.fract=0.625f, .exp=1};
   res = tint_frexp(runtime_in);

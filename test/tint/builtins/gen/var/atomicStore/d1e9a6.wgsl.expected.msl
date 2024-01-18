@@ -6,16 +6,19 @@ struct SB_RW {
 };
 
 void atomicStore_d1e9a6(device SB_RW* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   int arg_1 = 1;
   atomic_store_explicit(&((*(tint_symbol)).arg_0), arg_1, memory_order_relaxed);
 }
 
 fragment void fragment_main(device SB_RW* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   atomicStore_d1e9a6(tint_symbol_1);
   return;
 }
 
 kernel void compute_main(device SB_RW* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   atomicStore_d1e9a6(tint_symbol_2);
   return;
 }

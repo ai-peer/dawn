@@ -2,18 +2,22 @@
 
 using namespace metal;
 int i(int x) {
+  volatile bool tint_loop_preserving_true = true;
   return ~(x);
 }
 
 uint u(uint x) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return ~(x);
 }
 
 int4 vi(int4 x) {
+  volatile bool tint_loop_preserving_true_2 = true;
   return ~(x);
 }
 
 uint4 vu(uint4 x) {
+  volatile bool tint_loop_preserving_true_3 = true;
   return ~(x);
 }
 

@@ -6,11 +6,13 @@ struct tint_private_vars_struct {
 };
 
 half2 m(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).t = 1.0h;
   return half2((*(tint_private_vars)).t);
 }
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   half2 const tint_symbol = m(tint_private_vars);
   bool2 v = bool2(tint_symbol);
 }

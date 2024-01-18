@@ -33,6 +33,7 @@ struct Outer_tint_packed_vec3 {
 };
 
 float2x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 2> in) {
+  volatile bool tint_loop_preserving_true = true;
   float2x3 result = float2x3(float3(in[0].elements), float3(in[1].elements));
   return result;
 }
@@ -42,12 +43,14 @@ struct Inner {
 };
 
 Inner tint_unpack_vec3_in_composite_1(Inner_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true_1 = true;
   Inner result = {};
   result.m = tint_unpack_vec3_in_composite(in.m);
   return result;
 }
 
 tint_array<Inner, 4> tint_unpack_vec3_in_composite_2(tint_array<Inner_tint_packed_vec3, 4> in) {
+  volatile bool tint_loop_preserving_true_2 = true;
   tint_array<Inner, 4> result = tint_array<Inner, 4>{tint_unpack_vec3_in_composite_1(in[0]), tint_unpack_vec3_in_composite_1(in[1]), tint_unpack_vec3_in_composite_1(in[2]), tint_unpack_vec3_in_composite_1(in[3])};
   return result;
 }
@@ -57,22 +60,26 @@ struct Outer {
 };
 
 Outer tint_unpack_vec3_in_composite_3(Outer_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true_3 = true;
   Outer result = {};
   result.a = tint_unpack_vec3_in_composite_2(in.a);
   return result;
 }
 
 tint_array<Outer, 4> tint_unpack_vec3_in_composite_4(tint_array<Outer_tint_packed_vec3, 4> in) {
+  volatile bool tint_loop_preserving_true_4 = true;
   tint_array<Outer, 4> result = tint_array<Outer, 4>{tint_unpack_vec3_in_composite_3(in[0]), tint_unpack_vec3_in_composite_3(in[1]), tint_unpack_vec3_in_composite_3(in[2]), tint_unpack_vec3_in_composite_3(in[3])};
   return result;
 }
 
 int i(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_5 = true;
   (*(tint_private_vars)).counter = as_type<int>((as_type<uint>((*(tint_private_vars)).counter) + as_type<uint>(1)));
   return (*(tint_private_vars)).counter;
 }
 
 kernel void f(const constant tint_array<Outer_tint_packed_vec3, 4>* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_6 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.counter = 0;
   int const tint_symbol = i(&(tint_private_vars));

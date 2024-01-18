@@ -2,6 +2,7 @@
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   uint2 v2 = uint2(3u);
   uint3 v3 = uint3(3u);
   uint4 v4 = uint4(3u);

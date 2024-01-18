@@ -24,11 +24,13 @@ struct tint_packed_vec3_f16_array_element {
 };
 
 void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f16_array_element, 2>* const dest, half2x3 value) {
+  volatile bool tint_loop_preserving_true = true;
   (*(dest))[0u].elements = packed_half3(value[0u]);
   (*(dest))[1u].elements = packed_half3(value[1u]);
 }
 
 kernel void f(device tint_array<tint_packed_vec3_f16_array_element, 2>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.m = half2x3(half3(0.0h, 1.0h, 2.0h), half3(3.0h, 4.0h, 5.0h));
   assign_and_preserve_padding(tint_symbol, tint_private_vars.m);

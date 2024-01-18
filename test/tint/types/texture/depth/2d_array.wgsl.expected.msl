@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void tint_symbol(depth2d_array<float, access::sample> tint_symbol_1 [[texture(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint2 dims = uint2(tint_symbol_1.get_width(0), tint_symbol_1.get_height(0));
   return;
 }

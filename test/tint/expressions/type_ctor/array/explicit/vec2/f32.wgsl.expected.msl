@@ -19,6 +19,7 @@ struct tint_private_vars_struct {
 };
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float2, 2> v = (*(tint_private_vars)).arr;
 }
 

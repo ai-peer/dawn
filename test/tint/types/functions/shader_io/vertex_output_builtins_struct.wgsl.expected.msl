@@ -10,11 +10,13 @@ struct tint_symbol_1 {
 };
 
 VertexOutputs tint_symbol_inner() {
+  volatile bool tint_loop_preserving_true = true;
   VertexOutputs const tint_symbol_2 = VertexOutputs{.position=float4(1.0f, 2.0f, 3.0f, 4.0f)};
   return tint_symbol_2;
 }
 
 vertex tint_symbol_1 tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   VertexOutputs const inner_result = tint_symbol_inner();
   tint_symbol_1 wrapper_result = {};
   wrapper_result.position = inner_result.position;

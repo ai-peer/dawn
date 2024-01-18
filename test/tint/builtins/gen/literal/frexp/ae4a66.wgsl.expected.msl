@@ -7,6 +7,7 @@ struct frexp_result_vec3_f16 {
   int3 exp;
 };
 void frexp_ae4a66() {
+  volatile bool tint_loop_preserving_true = true;
   frexp_result_vec3_f16 res = frexp_result_vec3_f16{.fract=half3(0.5h), .exp=int3(1)};
 }
 
@@ -15,11 +16,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   frexp_ae4a66();
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main() {
+  volatile bool tint_loop_preserving_true_2 = true;
   float4 const inner_result = vertex_main_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -27,11 +30,13 @@ vertex tint_symbol vertex_main() {
 }
 
 fragment void fragment_main() {
+  volatile bool tint_loop_preserving_true_3 = true;
   frexp_ae4a66();
   return;
 }
 
 kernel void compute_main() {
+  volatile bool tint_loop_preserving_true_4 = true;
   frexp_ae4a66();
   return;
 }

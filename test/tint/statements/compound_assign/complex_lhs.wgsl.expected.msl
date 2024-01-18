@@ -23,16 +23,19 @@ struct S {
 };
 
 int foo(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).counter = as_type<int>((as_type<uint>((*(tint_private_vars)).counter) + as_type<uint>(1)));
   return (*(tint_private_vars)).counter;
 }
 
 int bar(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).counter = as_type<int>((as_type<uint>((*(tint_private_vars)).counter) + as_type<uint>(2)));
   return (*(tint_private_vars)).counter;
 }
 
 void tint_symbol(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_2 = true;
   S x = S{};
   int const tint_symbol_3 = foo(tint_private_vars);
   int const tint_symbol_1_save = tint_symbol_3;

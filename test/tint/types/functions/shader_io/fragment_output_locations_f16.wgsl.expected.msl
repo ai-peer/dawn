@@ -6,10 +6,12 @@ struct tint_symbol {
 };
 
 int main0_inner() {
+  volatile bool tint_loop_preserving_true = true;
   return 1;
 }
 
 fragment tint_symbol main0() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int const inner_result = main0_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -21,10 +23,12 @@ struct tint_symbol_1 {
 };
 
 uint main1_inner() {
+  volatile bool tint_loop_preserving_true_2 = true;
   return 1u;
 }
 
 fragment tint_symbol_1 main1() {
+  volatile bool tint_loop_preserving_true_3 = true;
   uint const inner_result_1 = main1_inner();
   tint_symbol_1 wrapper_result_1 = {};
   wrapper_result_1.value = inner_result_1;
@@ -36,10 +40,12 @@ struct tint_symbol_2 {
 };
 
 float main2_inner() {
+  volatile bool tint_loop_preserving_true_4 = true;
   return 1.0f;
 }
 
 fragment tint_symbol_2 main2() {
+  volatile bool tint_loop_preserving_true_5 = true;
   float const inner_result_2 = main2_inner();
   tint_symbol_2 wrapper_result_2 = {};
   wrapper_result_2.value = inner_result_2;
@@ -51,10 +57,12 @@ struct tint_symbol_3 {
 };
 
 float4 main3_inner() {
+  volatile bool tint_loop_preserving_true_6 = true;
   return float4(1.0f, 2.0f, 3.0f, 4.0f);
 }
 
 fragment tint_symbol_3 main3() {
+  volatile bool tint_loop_preserving_true_7 = true;
   float4 const inner_result_3 = main3_inner();
   tint_symbol_3 wrapper_result_3 = {};
   wrapper_result_3.value = inner_result_3;
@@ -66,10 +74,12 @@ struct tint_symbol_4 {
 };
 
 half main4_inner() {
+  volatile bool tint_loop_preserving_true_8 = true;
   return 2.25h;
 }
 
 fragment tint_symbol_4 main4() {
+  volatile bool tint_loop_preserving_true_9 = true;
   half const inner_result_4 = main4_inner();
   tint_symbol_4 wrapper_result_4 = {};
   wrapper_result_4.value = inner_result_4;
@@ -81,10 +91,12 @@ struct tint_symbol_5 {
 };
 
 half3 main5_inner() {
+  volatile bool tint_loop_preserving_true_10 = true;
   return half3(3.0h, 5.0h, 8.0h);
 }
 
 fragment tint_symbol_5 main5() {
+  volatile bool tint_loop_preserving_true_11 = true;
   half3 const inner_result_5 = main5_inner();
   tint_symbol_5 wrapper_result_5 = {};
   wrapper_result_5.value = inner_result_5;

@@ -2,6 +2,7 @@
 
 using namespace metal;
 fragment void tint_symbol(const constant float2* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   float a = (*(tint_symbol_1))[0];
   return;
 }

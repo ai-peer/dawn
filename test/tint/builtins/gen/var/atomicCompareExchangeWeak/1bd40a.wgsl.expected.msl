@@ -17,17 +17,20 @@ struct SB_RW {
 };
 
 void atomicCompareExchangeWeak_1bd40a(device SB_RW* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   int arg_1 = 1;
   int arg_2 = 1;
   atomic_compare_exchange_result_i32 res = atomicCompareExchangeWeak_1(&((*(tint_symbol)).arg_0), arg_1, arg_2);
 }
 
 fragment void fragment_main(device SB_RW* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   atomicCompareExchangeWeak_1bd40a(tint_symbol_1);
   return;
 }
 
 kernel void compute_main(device SB_RW* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   atomicCompareExchangeWeak_1bd40a(tint_symbol_2);
   return;
 }

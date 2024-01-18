@@ -6,8 +6,8 @@ struct S {
 };
 
 void f() {
-  for(int i = 1; false; ) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  for(int i = 1; (false) && tint_loop_preserving_true; ) {
   }
 }
 

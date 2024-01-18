@@ -24,10 +24,12 @@ struct Input {
 };
 
 void tint_symbol_inner(uint3 id, const device Input_tint_packed_vec3* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   int3 const pos = as_type<int3>((as_type<uint3>(int3((*(tint_symbol_1)).position)) - as_type<uint3>(int3(0))));
 }
 
 kernel void tint_symbol(const device Input_tint_packed_vec3* tint_symbol_2 [[buffer(0)]], uint3 id [[thread_position_in_grid]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   tint_symbol_inner(id, tint_symbol_2);
   return;
 }

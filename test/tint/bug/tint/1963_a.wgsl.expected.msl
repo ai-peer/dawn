@@ -2,13 +2,16 @@
 
 using namespace metal;
 void X(float2 a, float2 b) {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 float2 Y() {
+  volatile bool tint_loop_preserving_true_1 = true;
   return float2(0.0f);
 }
 
 void f() {
+  volatile bool tint_loop_preserving_true_2 = true;
   float2 v = 0.0f;
   X(float2(0.0f), v);
   float2 const tint_symbol = float2(0.0f);

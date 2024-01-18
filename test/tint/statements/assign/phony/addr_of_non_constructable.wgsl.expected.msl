@@ -19,6 +19,7 @@ struct S {
 };
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   return;
 }
 

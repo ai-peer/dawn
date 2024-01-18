@@ -19,6 +19,7 @@ float tint_degrees_3(float param_0) {
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   float4 const va = float4(0.0f);
   float4 const a = tint_degrees(va);
   float4 const vb = float4(1.0f);

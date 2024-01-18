@@ -7,6 +7,7 @@ struct VertexOutput {
 };
 
 VertexOutput foo(float x) {
+  volatile bool tint_loop_preserving_true = true;
   VertexOutput const tint_symbol_2 = {.pos=float4(x, x, x, 1.0f), .loc0=42};
   return tint_symbol_2;
 }
@@ -17,10 +18,12 @@ struct tint_symbol {
 };
 
 VertexOutput vert_main1_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   return foo(0.5f);
 }
 
 vertex tint_symbol vert_main1() {
+  volatile bool tint_loop_preserving_true_2 = true;
   VertexOutput const inner_result = vert_main1_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.pos = inner_result.pos;
@@ -34,10 +37,12 @@ struct tint_symbol_1 {
 };
 
 VertexOutput vert_main2_inner() {
+  volatile bool tint_loop_preserving_true_3 = true;
   return foo(0.25f);
 }
 
 vertex tint_symbol_1 vert_main2() {
+  volatile bool tint_loop_preserving_true_4 = true;
   VertexOutput const inner_result_1 = vert_main2_inner();
   tint_symbol_1 wrapper_result_1 = {};
   wrapper_result_1.pos = inner_result_1.pos;

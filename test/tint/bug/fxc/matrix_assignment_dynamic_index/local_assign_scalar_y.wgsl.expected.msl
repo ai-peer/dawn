@@ -11,6 +11,7 @@ struct Uniforms {
 };
 
 kernel void tint_symbol(const constant Uniforms* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.m1[0][(*(tint_symbol_1)).j] = 1.0f;
   return;

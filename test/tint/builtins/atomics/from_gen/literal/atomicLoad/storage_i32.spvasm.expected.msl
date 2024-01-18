@@ -10,6 +10,7 @@ struct SB_RW {
 };
 
 void atomicLoad_0806ad(device SB_RW_atomic* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   int res = 0;
   int const x_9 = atomic_load_explicit(&((*(tint_symbol)).arg_0), memory_order_relaxed);
   res = x_9;
@@ -17,21 +18,25 @@ void atomicLoad_0806ad(device SB_RW_atomic* const tint_symbol) {
 }
 
 void fragment_main_1(device SB_RW_atomic* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   atomicLoad_0806ad(tint_symbol_1);
   return;
 }
 
 fragment void fragment_main(device SB_RW_atomic* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   fragment_main_1(tint_symbol_2);
   return;
 }
 
 void compute_main_1(device SB_RW_atomic* const tint_symbol_3) {
+  volatile bool tint_loop_preserving_true_3 = true;
   atomicLoad_0806ad(tint_symbol_3);
   return;
 }
 
 kernel void compute_main(device SB_RW_atomic* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   compute_main_1(tint_symbol_4);
   return;
 }

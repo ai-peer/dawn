@@ -15,6 +15,7 @@ struct tint_array {
 };
 
 int tint_workgroupUniformLoad(threadgroup int* const p) {
+  volatile bool tint_loop_preserving_true = true;
   threadgroup_barrier(mem_flags::mem_threadgroup);
   int const result = *(p);
   threadgroup_barrier(mem_flags::mem_threadgroup);
@@ -22,10 +23,12 @@ int tint_workgroupUniformLoad(threadgroup int* const p) {
 }
 
 int foo(threadgroup int* const p) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return tint_workgroupUniformLoad(p);
 }
 
 int bar(threadgroup tint_array<int, 4>* const tint_symbol) {
+  volatile bool tint_loop_preserving_true_2 = true;
   return foo(&((*(tint_symbol))[0]));
 }
 

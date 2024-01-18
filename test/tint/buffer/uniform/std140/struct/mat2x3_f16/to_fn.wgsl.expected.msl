@@ -29,6 +29,7 @@ struct S_tint_packed_vec3 {
 };
 
 half2x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f16_array_element, 2> in) {
+  volatile bool tint_loop_preserving_true = true;
   half2x3 result = half2x3(half3(in[0].elements), half3(in[1].elements));
   return result;
 }
@@ -40,6 +41,7 @@ struct S {
 };
 
 S tint_unpack_vec3_in_composite_1(S_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true_1 = true;
   S result = {};
   result.before = in.before;
   result.m = tint_unpack_vec3_in_composite(in.m);
@@ -48,26 +50,33 @@ S tint_unpack_vec3_in_composite_1(S_tint_packed_vec3 in) {
 }
 
 tint_array<S, 4> tint_unpack_vec3_in_composite_2(tint_array<S_tint_packed_vec3, 4> in) {
+  volatile bool tint_loop_preserving_true_2 = true;
   tint_array<S, 4> result = tint_array<S, 4>{tint_unpack_vec3_in_composite_1(in[0]), tint_unpack_vec3_in_composite_1(in[1]), tint_unpack_vec3_in_composite_1(in[2]), tint_unpack_vec3_in_composite_1(in[3])};
   return result;
 }
 
 void a(tint_array<S, 4> a_1) {
+  volatile bool tint_loop_preserving_true_3 = true;
 }
 
 void b(S s) {
+  volatile bool tint_loop_preserving_true_4 = true;
 }
 
 void c(half2x3 m) {
+  volatile bool tint_loop_preserving_true_5 = true;
 }
 
 void d(half3 v) {
+  volatile bool tint_loop_preserving_true_6 = true;
 }
 
 void e(half f_1) {
+  volatile bool tint_loop_preserving_true_7 = true;
 }
 
 kernel void f(const constant tint_array<S_tint_packed_vec3, 4>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_8 = true;
   a(tint_unpack_vec3_in_composite_2(*(tint_symbol)));
   b(tint_unpack_vec3_in_composite_1((*(tint_symbol))[2]));
   c(tint_unpack_vec3_in_composite((*(tint_symbol))[2].m));

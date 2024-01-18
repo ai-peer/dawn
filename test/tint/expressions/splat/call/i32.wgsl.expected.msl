@@ -2,10 +2,12 @@
 
 using namespace metal;
 int get_i32() {
+  volatile bool tint_loop_preserving_true = true;
   return 1;
 }
 
 void f() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int const tint_symbol = get_i32();
   int2 v2 = int2(tint_symbol);
   int const tint_symbol_1 = get_i32();

@@ -36,6 +36,7 @@ struct LeftOver {
 };
 
 void main_1(thread tint_private_vars_struct* const tint_private_vars, const constant LeftOver* const tint_symbol_5) {
+  volatile bool tint_loop_preserving_true = true;
   float4 q = 0.0f;
   float3 p = 0.0f;
   q = float4((*(tint_private_vars)).position_1[0], (*(tint_private_vars)).position_1[1], (*(tint_private_vars)).position_1[2], 1.0f);
@@ -65,6 +66,7 @@ struct tint_symbol_3 {
 };
 
 main_out tint_symbol_inner(float3 position_1_param, float2 uv_param, float3 normal_param, thread tint_private_vars_struct* const tint_private_vars, const constant LeftOver* const tint_symbol_6) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).position_1 = position_1_param;
   (*(tint_private_vars)).uv = uv_param;
   (*(tint_private_vars)).normal = normal_param;
@@ -74,6 +76,7 @@ main_out tint_symbol_inner(float3 position_1_param, float2 uv_param, float3 norm
 }
 
 vertex tint_symbol_3 tint_symbol(const constant LeftOver* tint_symbol_7 [[buffer(0)]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   main_out const inner_result = tint_symbol_inner(tint_symbol_1.position_1_param, tint_symbol_1.uv_param, tint_symbol_1.normal_param, &(tint_private_vars), tint_symbol_7);
   tint_symbol_3 wrapper_result = {};

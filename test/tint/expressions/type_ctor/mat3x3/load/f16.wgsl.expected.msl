@@ -20,12 +20,14 @@ struct tint_packed_vec3_f16_array_element {
 };
 
 void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f16_array_element, 3>* const dest, half3x3 value) {
+  volatile bool tint_loop_preserving_true = true;
   (*(dest))[0u].elements = packed_half3(value[0u]);
   (*(dest))[1u].elements = packed_half3(value[1u]);
   (*(dest))[2u].elements = packed_half3(value[2u]);
 }
 
 kernel void f(device tint_array<tint_packed_vec3_f16_array_element, 3>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   half3x3 m = half3x3(half3(0.0h), half3(0.0h), half3(0.0h));
   assign_and_preserve_padding(tint_symbol, half3x3(m));
   return;

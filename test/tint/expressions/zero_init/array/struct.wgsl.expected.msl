@@ -22,6 +22,7 @@ struct S {
 };
 
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<S, 4> v = tint_array<S, 4>{};
 }
 

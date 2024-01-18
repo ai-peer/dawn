@@ -52,6 +52,7 @@ TEST_F(MslASTPrinterTest, Emit_Function) {
 
   using namespace metal;
   void my_func() {
+    volatile bool tint_loop_preserving_true = true;
     return;
   }
 
@@ -78,6 +79,7 @@ TEST_F(MslASTPrinterTest, Emit_Function_WithParams) {
 
   using namespace metal;
   void my_func(float a, int b) {
+    volatile bool tint_loop_preserving_true = true;
     return;
   }
 
@@ -95,6 +97,7 @@ TEST_F(MslASTPrinterTest, Emit_Attribute_EntryPoint_NoReturn_Void) {
 
 using namespace metal;
 fragment void main() {
+  volatile bool tint_loop_preserving_true = true;
   return;
 }
 
@@ -132,10 +135,12 @@ struct tint_symbol_2 {
 };
 
 float frag_main_inner(float foo) {
+  volatile bool tint_loop_preserving_true = true;
   return foo;
 }
 
 fragment tint_symbol_2 frag_main(tint_symbol_1 tint_symbol [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float const inner_result = frag_main_inner(tint_symbol.foo);
   tint_symbol_2 wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -172,10 +177,12 @@ struct tint_symbol {
 };
 
 float frag_main_inner(float4 coord) {
+  volatile bool tint_loop_preserving_true = true;
   return coord[0];
 }
 
 fragment tint_symbol frag_main(float4 coord [[position]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float const inner_result = frag_main_inner(coord);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -236,11 +243,13 @@ struct tint_symbol {
 };
 
 Interface vert_main_inner() {
+  volatile bool tint_loop_preserving_true = true;
   Interface const tint_symbol_3 = Interface{.col1=0.5f, .col2=0.25f, .pos=float4(0.0f)};
   return tint_symbol_3;
 }
 
 vertex tint_symbol vert_main() {
+  volatile bool tint_loop_preserving_true_1 = true;
   Interface const inner_result = vert_main_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.col1 = inner_result.col1;
@@ -255,11 +264,13 @@ struct tint_symbol_2 {
 };
 
 void frag_main_inner(Interface colors) {
+  volatile bool tint_loop_preserving_true_2 = true;
   float const r = colors.col1;
   float const g = colors.col2;
 }
 
 fragment void frag_main(float4 pos [[position]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   Interface const tint_symbol_4 = {.col1=tint_symbol_1.col1, .col2=tint_symbol_1.col2, .pos=pos};
   frag_main_inner(tint_symbol_4);
   return;
@@ -310,6 +321,7 @@ struct VertexOutput {
 };
 
 VertexOutput foo(float x) {
+  volatile bool tint_loop_preserving_true = true;
   VertexOutput const tint_symbol_2 = {.pos=float4(x, x, x, 1.0f)};
   return tint_symbol_2;
 }
@@ -319,10 +331,12 @@ struct tint_symbol {
 };
 
 VertexOutput vert_main1_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   return foo(0.5f);
 }
 
 vertex tint_symbol vert_main1() {
+  volatile bool tint_loop_preserving_true_2 = true;
   VertexOutput const inner_result = vert_main1_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.pos = inner_result.pos;
@@ -334,10 +348,12 @@ struct tint_symbol_1 {
 };
 
 VertexOutput vert_main2_inner() {
+  volatile bool tint_loop_preserving_true_3 = true;
   return foo(0.25f);
 }
 
 vertex tint_symbol_1 vert_main2() {
+  volatile bool tint_loop_preserving_true_4 = true;
   VertexOutput const inner_result_1 = vert_main2_inner();
   tint_symbol_1 wrapper_result_1 = {};
   wrapper_result_1.pos = inner_result_1.pos;
@@ -379,6 +395,7 @@ struct Data {
 };
 
 fragment void frag_main(device Data* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   float v = (*(tint_symbol)).b;
   return;
 }
@@ -418,6 +435,7 @@ struct Data {
 };
 
 fragment void frag_main(const device Data* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   float v = (*(tint_symbol)).b;
   return;
 }
@@ -461,10 +479,12 @@ struct UBO {
 };
 
 float sub_func(float param, const constant UBO* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   return (*(tint_symbol)).coord[0];
 }
 
 fragment void frag_main(const constant UBO* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float v = sub_func(1.0f, tint_symbol_1);
   return;
 }
@@ -513,10 +533,12 @@ struct Data {
 };
 
 float sub_func(float param, device Data* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   return (*(tint_symbol)).b;
 }
 
 fragment void frag_main(device Data* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float v = sub_func(1.0f, tint_symbol_1);
   return;
 }
@@ -565,10 +587,12 @@ struct Data {
 };
 
 float sub_func(float param, const device Data* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   return (*(tint_symbol)).b;
 }
 
 fragment void frag_main(const device Data* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float v = sub_func(1.0f, tint_symbol_1);
   return;
 }
@@ -608,6 +632,7 @@ struct tint_array {
 };
 
   void my_func(tint_array<float, 5> a) {
+    volatile bool tint_loop_preserving_true = true;
     return;
   }
 
@@ -642,6 +667,7 @@ struct tint_array {
 };
 
   tint_array<float, 5> my_func() {
+    volatile bool tint_loop_preserving_true = true;
     tint_array<float, 5> const tint_symbol = tint_array<float, 5>{};
     return tint_symbol;
   }
@@ -710,11 +736,13 @@ struct Data {
 };
 
 kernel void a(device Data* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   float v = (*(tint_symbol)).d;
   return;
 }
 
 kernel void b(device Data* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float v = (*(tint_symbol_1)).d;
   return;
 }

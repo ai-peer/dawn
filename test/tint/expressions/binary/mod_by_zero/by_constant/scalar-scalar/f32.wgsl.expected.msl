@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f() {
+  volatile bool tint_loop_preserving_true = true;
   float const a = 1.0f;
   float const b = 0.0f;
   float const r = fmod(a, b);

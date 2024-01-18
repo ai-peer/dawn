@@ -15,6 +15,7 @@ struct tint_symbol_3 {
 };
 
 float4 tint_symbol_inner(int loc0, uint loc1, float loc2, float4 loc3, half loc4, half3 loc5) {
+  volatile bool tint_loop_preserving_true = true;
   int const i = loc0;
   uint const u = loc1;
   float const f = loc2;
@@ -25,6 +26,7 @@ float4 tint_symbol_inner(int loc0, uint loc1, float loc2, float4 loc3, half loc4
 }
 
 vertex tint_symbol_3 tint_symbol(tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float4 const inner_result = tint_symbol_inner(tint_symbol_1.loc0, tint_symbol_1.loc1, tint_symbol_1.loc2, tint_symbol_1.loc3, tint_symbol_1.loc4, tint_symbol_1.loc5);
   tint_symbol_3 wrapper_result = {};
   wrapper_result.value = inner_result;

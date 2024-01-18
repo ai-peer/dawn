@@ -15,8 +15,8 @@ struct tint_array {
 };
 
 void compute_main_inner(uint local_invocation_index, threadgroup tint_array<atomic_uint, 4>* const tint_symbol) {
-  for(uint idx = local_invocation_index; (idx < 4u); idx = (idx + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  for(uint idx = local_invocation_index; ((idx < 4u)) && tint_loop_preserving_true; idx = (idx + 1u)) {
     uint const i = idx;
     atomic_store_explicit(&((*(tint_symbol))[i]), 0u, memory_order_relaxed);
   }
@@ -25,6 +25,7 @@ void compute_main_inner(uint local_invocation_index, threadgroup tint_array<atom
 }
 
 kernel void compute_main(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup tint_array<atomic_uint, 4> tint_symbol_1;
   compute_main_inner(local_invocation_index, &(tint_symbol_1));
   return;

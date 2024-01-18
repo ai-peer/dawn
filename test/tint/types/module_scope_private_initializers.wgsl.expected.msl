@@ -7,6 +7,7 @@ struct tint_private_vars_struct {
 };
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.a = 1.0f;
   tint_private_vars.b = 0.0f;

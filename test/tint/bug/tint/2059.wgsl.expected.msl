@@ -52,52 +52,57 @@ struct S4 {
 };
 
 void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f32_array_element, 3>* const dest, float3x3 value) {
+  volatile bool tint_loop_preserving_true = true;
   (*(dest))[0u].elements = packed_float3(value[0u]);
   (*(dest))[1u].elements = packed_float3(value[1u]);
   (*(dest))[2u].elements = packed_float3(value[2u]);
 }
 
 void assign_and_preserve_padding_1(device S_tint_packed_vec3* const dest, S value) {
+  volatile bool tint_loop_preserving_true_1 = true;
   assign_and_preserve_padding(&((*(dest)).m), value.m);
 }
 
 void assign_and_preserve_padding_3(device tint_array<tint_array<tint_packed_vec3_f32_array_element, 3>, 1>* const dest, tint_array<float3x3, 1> value) {
-  for(uint i = 0u; (i < 1u); i = (i + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true_2 = true;
+  for(uint i = 0u; ((i < 1u)) && tint_loop_preserving_true_2; i = (i + 1u)) {
     assign_and_preserve_padding(&((*(dest))[i]), value[i]);
   }
 }
 
 void assign_and_preserve_padding_2(device S2_tint_packed_vec3* const dest, S2 value) {
+  volatile bool tint_loop_preserving_true_3 = true;
   assign_and_preserve_padding_3(&((*(dest)).m), value.m);
 }
 
 void assign_and_preserve_padding_4(device S3_tint_packed_vec3* const dest, S3 value) {
+  volatile bool tint_loop_preserving_true_4 = true;
   assign_and_preserve_padding_1(&((*(dest)).s), value.s);
 }
 
 void assign_and_preserve_padding_6(device tint_array<S_tint_packed_vec3, 1>* const dest, tint_array<S, 1> value) {
-  for(uint i = 0u; (i < 1u); i = (i + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true_5 = true;
+  for(uint i = 0u; ((i < 1u)) && tint_loop_preserving_true_5; i = (i + 1u)) {
     assign_and_preserve_padding_1(&((*(dest))[i]), value[i]);
   }
 }
 
 void assign_and_preserve_padding_5(device S4_tint_packed_vec3* const dest, S4 value) {
+  volatile bool tint_loop_preserving_true_6 = true;
   assign_and_preserve_padding_6(&((*(dest)).s), value.s);
 }
 
 void assign_and_preserve_padding_7(device tint_array<S2_tint_packed_vec3, 1>* const dest, tint_array<S2, 1> value) {
-  for(uint i = 0u; (i < 1u); i = (i + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true_7 = true;
+  for(uint i = 0u; ((i < 1u)) && tint_loop_preserving_true_7; i = (i + 1u)) {
     assign_and_preserve_padding_2(&((*(dest))[i]), value[i]);
   }
 }
 
 kernel void tint_symbol(device tint_array<tint_packed_vec3_f32_array_element, 3>* tint_symbol_8 [[buffer(0)]], device S_tint_packed_vec3* tint_symbol_9 [[buffer(1)]], device S2_tint_packed_vec3* tint_symbol_10 [[buffer(2)]], device S3_tint_packed_vec3* tint_symbol_11 [[buffer(3)]], device S4_tint_packed_vec3* tint_symbol_12 [[buffer(4)]], device tint_array<tint_array<tint_packed_vec3_f32_array_element, 3>, 1>* tint_symbol_13 [[buffer(5)]], device tint_array<S_tint_packed_vec3, 1>* tint_symbol_14 [[buffer(6)]], device tint_array<S2_tint_packed_vec3, 1>* tint_symbol_15 [[buffer(7)]]) {
+  volatile bool tint_loop_preserving_true_8 = true;
   float3x3 m = float3x3(0.0f);
-  for(uint c = 0u; (c < 3u); c = (c + 1u)) {
-    __asm__("");
+  for(uint c = 0u; ((c < 3u)) && tint_loop_preserving_true_8; c = (c + 1u)) {
     m[c] = float3(float(((c * 3u) + 1u)), float(((c * 3u) + 2u)), float(((c * 3u) + 3u)));
   }
   {

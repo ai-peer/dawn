@@ -2,8 +2,8 @@
 
 using namespace metal;
 fragment void tint_symbol() {
-  while (true) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  while (tint_loop_preserving_true) {
     if (false) {
     } else {
       break;

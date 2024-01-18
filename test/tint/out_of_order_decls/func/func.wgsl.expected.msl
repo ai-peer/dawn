@@ -2,9 +2,11 @@
 
 using namespace metal;
 void f2() {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 fragment void f1() {
+  volatile bool tint_loop_preserving_true_1 = true;
   f2();
   return;
 }

@@ -28,6 +28,7 @@ struct S_tint_packed_vec3 {
 };
 
 float3x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 3> in) {
+  volatile bool tint_loop_preserving_true = true;
   float3x3 result = float3x3(float3(in[0].elements), float3(in[1].elements), float3(in[2].elements));
   return result;
 }
@@ -39,6 +40,7 @@ struct S {
 };
 
 kernel void f(const constant tint_array<S_tint_packed_vec3, 4>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float3x3 const t = transpose(tint_unpack_vec3_in_composite((*(tint_symbol))[2].m));
   float const l = length(float3((*(tint_symbol))[0].m[1].elements).zxy);
   float const a = fabs(float3((*(tint_symbol))[0].m[1].elements).zxy[0]);

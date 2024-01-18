@@ -14,6 +14,7 @@
 
 using namespace metal;
 int tint_ftoi(float v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(2147483647, select(int(v), (-2147483647 - 1), (v < -2147483648.0f)), (v < 2147483520.0f));
 }
 
@@ -22,6 +23,7 @@ struct tint_symbol_2 {
 };
 
 void tint_symbol_inner(float x) {
+  volatile bool tint_loop_preserving_true_1 = true;
   switch(tint_ftoi(x)) {
     case 0: {
       break;
@@ -33,6 +35,7 @@ void tint_symbol_inner(float x) {
 }
 
 fragment void tint_symbol(tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   tint_symbol_inner(tint_symbol_1.x);
   return;
 }

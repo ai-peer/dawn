@@ -29,6 +29,7 @@ struct S_tint_packed_vec3 {
 };
 
 half2x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f16_array_element, 2> in) {
+  volatile bool tint_loop_preserving_true = true;
   half2x3 result = half2x3(half3(in[0].elements), half3(in[1].elements));
   return result;
 }
@@ -40,6 +41,7 @@ struct S {
 };
 
 kernel void f(const constant tint_array<S_tint_packed_vec3, 4>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   half3x2 const t = transpose(tint_unpack_vec3_in_composite((*(tint_symbol))[2].m));
   half const l = length(half3((*(tint_symbol))[0].m[1].elements).zxy);
   half const a = fabs(half3((*(tint_symbol))[0].m[1].elements).zxy[0]);

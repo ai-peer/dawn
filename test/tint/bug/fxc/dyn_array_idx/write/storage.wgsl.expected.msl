@@ -27,6 +27,7 @@ struct SSBO {
 };
 
 kernel void f(device SSBO* tint_symbol [[buffer(1)]], const constant UBO* tint_symbol_1 [[buffer(0)]], device Result* tint_symbol_2 [[buffer(2)]]) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol)).data[(*(tint_symbol_1)).dynamic_idx] = 1;
   (*(tint_symbol_2)).out = (*(tint_symbol)).data[3];
   return;

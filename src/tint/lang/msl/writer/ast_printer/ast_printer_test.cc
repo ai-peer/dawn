@@ -85,6 +85,7 @@ TEST_F(MslASTPrinterTest, Generate) {
 
 using namespace metal;
 kernel void my_func() {
+  volatile bool tint_loop_preserving_true = true;
   return;
 }
 
@@ -123,6 +124,7 @@ struct Out {
 };
 
 vertex Out vert_main() {
+  volatile bool tint_loop_preserving_true = true;
   return Out{};
 }
 
@@ -153,6 +155,7 @@ struct Out {
 };
 
 vertex Out vert_main() {
+  volatile bool tint_loop_preserving_true = true;
   return Out{};
 }
 
@@ -178,6 +181,7 @@ struct tint_symbol_3 {
 };
 
 void comp_main_inner(uint local_invocation_index, threadgroup float2x2* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   {
     *(tint_symbol) = float2x2(float2(0.0f), float2(0.0f));
   }
@@ -186,6 +190,7 @@ void comp_main_inner(uint local_invocation_index, threadgroup float2x2* const ti
 }
 
 kernel void comp_main(threadgroup tint_symbol_3* tint_symbol_2 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup float2x2* const tint_symbol_1 = &((*(tint_symbol_2)).m);
   comp_main_inner(local_invocation_index, tint_symbol_1);
   return;
@@ -231,8 +236,8 @@ struct tint_symbol_3 {
 };
 
 void comp_main_inner(uint local_invocation_index, threadgroup tint_array<float2x2, 4>* const tint_symbol) {
-  for(uint idx = local_invocation_index; (idx < 4u); idx = (idx + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  for(uint idx = local_invocation_index; ((idx < 4u)) && tint_loop_preserving_true; idx = (idx + 1u)) {
     uint const i = idx;
     (*(tint_symbol))[i] = float2x2(float2(0.0f), float2(0.0f));
   }
@@ -241,6 +246,7 @@ void comp_main_inner(uint local_invocation_index, threadgroup tint_array<float2x
 }
 
 kernel void comp_main(threadgroup tint_symbol_3* tint_symbol_2 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup tint_array<float2x2, 4>* const tint_symbol_1 = &((*(tint_symbol_2)).m);
   comp_main_inner(local_invocation_index, tint_symbol_1);
   return;
@@ -289,6 +295,7 @@ struct tint_symbol_4 {
 };
 
 void comp_main_inner(uint local_invocation_index, threadgroup S2* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   {
     S2 const tint_symbol = S2{};
     *(tint_symbol_1) = tint_symbol;
@@ -298,6 +305,7 @@ void comp_main_inner(uint local_invocation_index, threadgroup S2* const tint_sym
 }
 
 kernel void comp_main(threadgroup tint_symbol_4* tint_symbol_3 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup S2* const tint_symbol_2 = &((*(tint_symbol_3)).s);
   comp_main_inner(local_invocation_index, tint_symbol_2);
   return;
@@ -382,6 +390,7 @@ struct tint_symbol_23 {
 };
 
 void main1_inner(uint local_invocation_index, threadgroup float2x2* const tint_symbol, threadgroup float2x3* const tint_symbol_1, threadgroup float2x4* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true = true;
   {
     *(tint_symbol) = float2x2(float2(0.0f), float2(0.0f));
     *(tint_symbol_1) = float2x3(float3(0.0f), float3(0.0f));
@@ -394,6 +403,7 @@ void main1_inner(uint local_invocation_index, threadgroup float2x2* const tint_s
 }
 
 kernel void main1(threadgroup tint_symbol_7* tint_symbol_4 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup float2x2* const tint_symbol_3 = &((*(tint_symbol_4)).m1);
   threadgroup float2x3* const tint_symbol_5 = &((*(tint_symbol_4)).m2);
   threadgroup float2x4* const tint_symbol_6 = &((*(tint_symbol_4)).m3);
@@ -402,6 +412,7 @@ kernel void main1(threadgroup tint_symbol_7* tint_symbol_4 [[threadgroup(0)]], u
 }
 
 void main2_inner(uint local_invocation_index_1, threadgroup float3x2* const tint_symbol_8, threadgroup float3x3* const tint_symbol_9, threadgroup float3x4* const tint_symbol_10) {
+  volatile bool tint_loop_preserving_true_2 = true;
   {
     *(tint_symbol_8) = float3x2(float2(0.0f), float2(0.0f), float2(0.0f));
     *(tint_symbol_9) = float3x3(float3(0.0f), float3(0.0f), float3(0.0f));
@@ -414,6 +425,7 @@ void main2_inner(uint local_invocation_index_1, threadgroup float3x2* const tint
 }
 
 kernel void main2(threadgroup tint_symbol_15* tint_symbol_12 [[threadgroup(0)]], uint local_invocation_index_1 [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   threadgroup float3x2* const tint_symbol_11 = &((*(tint_symbol_12)).m4);
   threadgroup float3x3* const tint_symbol_13 = &((*(tint_symbol_12)).m5);
   threadgroup float3x4* const tint_symbol_14 = &((*(tint_symbol_12)).m6);
@@ -422,6 +434,7 @@ kernel void main2(threadgroup tint_symbol_15* tint_symbol_12 [[threadgroup(0)]],
 }
 
 void main3_inner(uint local_invocation_index_2, threadgroup float4x2* const tint_symbol_16, threadgroup float4x3* const tint_symbol_17, threadgroup float4x4* const tint_symbol_18) {
+  volatile bool tint_loop_preserving_true_4 = true;
   {
     *(tint_symbol_16) = float4x2(float2(0.0f), float2(0.0f), float2(0.0f), float2(0.0f));
     *(tint_symbol_17) = float4x3(float3(0.0f), float3(0.0f), float3(0.0f), float3(0.0f));
@@ -434,6 +447,7 @@ void main3_inner(uint local_invocation_index_2, threadgroup float4x2* const tint
 }
 
 kernel void main3(threadgroup tint_symbol_23* tint_symbol_20 [[threadgroup(0)]], uint local_invocation_index_2 [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   threadgroup float4x2* const tint_symbol_19 = &((*(tint_symbol_20)).m7);
   threadgroup float4x3* const tint_symbol_21 = &((*(tint_symbol_20)).m8);
   threadgroup float4x4* const tint_symbol_22 = &((*(tint_symbol_20)).m9);
@@ -442,6 +456,7 @@ kernel void main3(threadgroup tint_symbol_23* tint_symbol_20 [[threadgroup(0)]],
 }
 
 kernel void main4_no_usages() {
+  volatile bool tint_loop_preserving_true_6 = true;
   return;
 }
 

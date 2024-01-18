@@ -6,6 +6,7 @@ struct S {
 };
 
 int tint_mod(int lhs, int rhs) {
+  volatile bool tint_loop_preserving_true = true;
   int const rhs_or_one = select(rhs, 1, bool((rhs == 0) | bool((lhs == (-2147483647 - 1)) & (rhs == -1))));
   if (any(((uint((lhs | rhs_or_one)) & 2147483648u) != 0u))) {
     return as_type<int>((as_type<uint>(lhs) - as_type<uint>(as_type<int>((as_type<uint>((lhs / rhs_or_one)) * as_type<uint>(rhs_or_one))))));
@@ -15,6 +16,7 @@ int tint_mod(int lhs, int rhs) {
 }
 
 void foo(device S* const tint_symbol) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_symbol)).a = tint_mod((*(tint_symbol)).a, 2);
 }
 

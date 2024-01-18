@@ -15,22 +15,27 @@ struct tint_array {
 };
 
 half a(tint_array<half4x2, 4> a_1) {
+  volatile bool tint_loop_preserving_true = true;
   return a_1[0][0][0];
 }
 
 half b(half4x2 m) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return m[0][0];
 }
 
 half c(half2 v) {
+  volatile bool tint_loop_preserving_true_2 = true;
   return v[0];
 }
 
 half d(half f_1) {
+  volatile bool tint_loop_preserving_true_3 = true;
   return f_1;
 }
 
 kernel void f(const constant tint_array<half4x2, 4>* tint_symbol_4 [[buffer(0)]], device half* tint_symbol_5 [[buffer(1)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   half const tint_symbol = a(*(tint_symbol_4));
   half const tint_symbol_1 = b((*(tint_symbol_4))[1]);
   half const tint_symbol_2 = c((*(tint_symbol_4))[1][0].yx);

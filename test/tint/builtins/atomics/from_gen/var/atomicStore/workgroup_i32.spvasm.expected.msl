@@ -6,6 +6,7 @@ struct tint_private_vars_struct {
 };
 
 void atomicStore_8bea94(threadgroup atomic_int* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   int arg_1 = 0;
   arg_1 = 1;
   int const x_19 = arg_1;
@@ -14,6 +15,7 @@ void atomicStore_8bea94(threadgroup atomic_int* const tint_symbol) {
 }
 
 void compute_main_inner(uint local_invocation_index_2, threadgroup atomic_int* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   atomic_store_explicit(tint_symbol_1, 0, memory_order_relaxed);
   threadgroup_barrier(mem_flags::mem_threadgroup);
   atomicStore_8bea94(tint_symbol_1);
@@ -21,12 +23,14 @@ void compute_main_inner(uint local_invocation_index_2, threadgroup atomic_int* c
 }
 
 void compute_main_1(thread tint_private_vars_struct* const tint_private_vars, threadgroup atomic_int* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_2 = true;
   uint const x_32 = (*(tint_private_vars)).local_invocation_index_1;
   compute_main_inner(x_32, tint_symbol_2);
   return;
 }
 
 void compute_main_inner_1(uint local_invocation_index_1_param, thread tint_private_vars_struct* const tint_private_vars, threadgroup atomic_int* const tint_symbol_3) {
+  volatile bool tint_loop_preserving_true_3 = true;
   {
     atomic_store_explicit(tint_symbol_3, 0, memory_order_relaxed);
   }
@@ -36,6 +40,7 @@ void compute_main_inner_1(uint local_invocation_index_1_param, thread tint_priva
 }
 
 kernel void compute_main(uint local_invocation_index_1_param [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   threadgroup atomic_int tint_symbol_4;
   compute_main_inner_1(local_invocation_index_1_param, &(tint_private_vars), &(tint_symbol_4));

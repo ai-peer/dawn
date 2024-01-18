@@ -24,6 +24,7 @@ struct Outer {
 };
 
 kernel void f(const constant tint_array<Outer, 4>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<Outer, 4> const l_a = *(tint_symbol);
   Outer const l_a_3 = (*(tint_symbol))[3];
   tint_array<Inner, 4> const l_a_3_a = (*(tint_symbol))[3].a;

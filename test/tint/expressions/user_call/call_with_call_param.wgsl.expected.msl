@@ -2,14 +2,17 @@
 
 using namespace metal;
 float b(int i) {
+  volatile bool tint_loop_preserving_true = true;
   return 2.29999995231628417969f;
 }
 
 int c(uint u) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return 1;
 }
 
 void a() {
+  volatile bool tint_loop_preserving_true_2 = true;
   int const tint_symbol = c(2u);
   float a_1 = b(tint_symbol);
 }

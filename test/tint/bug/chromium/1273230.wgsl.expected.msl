@@ -26,10 +26,12 @@ struct Uniforms_tint_packed_vec3 {
 };
 
 uint3 tint_ftou(float3 v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(uint3(4294967295u), select(uint3(v), uint3(0u), (v < float3(0.0f))), (v < float3(4294967040.0f)));
 }
 
 void marg8uintin() {
+  volatile bool tint_loop_preserving_true_1 = true;
 }
 
 struct Uniforms {
@@ -77,6 +79,7 @@ struct AI32s {
 };
 
 float3 toVoxelPos(float3 position, const constant Uniforms_tint_packed_vec3* const tint_symbol) {
+  volatile bool tint_loop_preserving_true_2 = true;
   float3 bbMin = float3((*(tint_symbol)).bbMin[0], (*(tint_symbol)).bbMin[1], (*(tint_symbol)).bbMin[2]);
   float3 bbMax = float3((*(tint_symbol)).bbMax[0], (*(tint_symbol)).bbMax[1], (*(tint_symbol)).bbMax[2]);
   float3 bbSize = (bbMin - bbMin);
@@ -89,19 +92,23 @@ float3 toVoxelPos(float3 position, const constant Uniforms_tint_packed_vec3* con
 }
 
 uint toIndex1D(uint gridSize, float3 voxelPos) {
+  volatile bool tint_loop_preserving_true_3 = true;
   uint3 icoord = tint_ftou(voxelPos);
   return ((icoord[0] + (gridSize * icoord[1])) + ((gridSize * gridSize) * icoord[2]));
 }
 
 uint tint_div(uint lhs, uint rhs) {
+  volatile bool tint_loop_preserving_true_4 = true;
   return (lhs / select(rhs, 1u, (rhs == 0u)));
 }
 
 uint tint_mod(uint lhs, uint rhs) {
+  volatile bool tint_loop_preserving_true_5 = true;
   return (lhs % select(rhs, 1u, (rhs == 0u)));
 }
 
 uint3 toIndex4D(uint gridSize, uint index) {
+  volatile bool tint_loop_preserving_true_6 = true;
   uint z = tint_div(gridSize, (index * index));
   uint y = tint_div((gridSize - ((gridSize * gridSize) * z)), gridSize);
   uint x = tint_mod(index, gridSize);
@@ -109,11 +116,13 @@ uint3 toIndex4D(uint gridSize, uint index) {
 }
 
 float3 loadPosition(uint vertexIndex, device F32s* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_7 = true;
   float3 position = float3((*(tint_symbol_1)).values[((3u * vertexIndex) + 0u)], (*(tint_symbol_1)).values[((3u * vertexIndex) + 1u)], (*(tint_symbol_1)).values[((3u * vertexIndex) + 2u)]);
   return position;
 }
 
 void doIgnore(const constant Uniforms_tint_packed_vec3* const tint_symbol_2, device Dbg* const tint_symbol_3, device AU32s* const tint_symbol_4, device U32s* const tint_symbol_5, device F32s* const tint_symbol_6, device AI32s* const tint_symbol_7) {
+  volatile bool tint_loop_preserving_true_8 = true;
   uint g43 = (*(tint_symbol_2)).numTriangles;
   uint kj6 = (*(tint_symbol_3)).value1;
   uint b53 = atomic_load_explicit(&((*(tint_symbol_4)).values[0]), memory_order_relaxed);
@@ -123,6 +132,7 @@ void doIgnore(const constant Uniforms_tint_packed_vec3* const tint_symbol_2, dev
 }
 
 void main_count_inner(uint3 GlobalInvocationID, const constant Uniforms_tint_packed_vec3* const tint_symbol_8, device Dbg* const tint_symbol_9, device AU32s* const tint_symbol_10, device U32s* const tint_symbol_11, device F32s* const tint_symbol_12, device AI32s* const tint_symbol_13) {
+  volatile bool tint_loop_preserving_true_9 = true;
   uint triangleIndex = GlobalInvocationID[0];
   if ((triangleIndex >= (*(tint_symbol_8)).numTriangles)) {
     return;
@@ -141,6 +151,7 @@ void main_count_inner(uint3 GlobalInvocationID, const constant Uniforms_tint_pac
 }
 
 kernel void main_count(const constant Uniforms_tint_packed_vec3* tint_symbol_14 [[buffer(0)]], device Dbg* tint_symbol_15 [[buffer(1)]], device AU32s* tint_symbol_16 [[buffer(2)]], device U32s* tint_symbol_17 [[buffer(3)]], device F32s* tint_symbol_18 [[buffer(4)]], device AI32s* tint_symbol_19 [[buffer(5)]], uint3 GlobalInvocationID [[thread_position_in_grid]]) {
+  volatile bool tint_loop_preserving_true_10 = true;
   main_count_inner(GlobalInvocationID, tint_symbol_14, tint_symbol_15, tint_symbol_16, tint_symbol_17, tint_symbol_18, tint_symbol_19);
   return;
 }

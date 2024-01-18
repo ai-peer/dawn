@@ -87,6 +87,7 @@ struct my_struct {
 };
 
 fragment void a_func(const constant tint_symbol* tint_symbol_2 [[buffer(30)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint len = (((*(tint_symbol_2)).buffer_size[0u][1u] - 0u) / 4u);
   return;
 }
@@ -145,6 +146,7 @@ struct my_struct {
 };
 
 fragment void a_func(const constant tint_symbol* tint_symbol_2 [[buffer(30)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint len = (((*(tint_symbol_2)).buffer_size[0u][1u] - 4u) / 4u);
   return;
 }
@@ -205,6 +207,7 @@ struct my_struct {
 };
 
 fragment void a_func(const constant tint_symbol* tint_symbol_2 [[buffer(30)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint len = (((*(tint_symbol_2)).buffer_size[0u][1u] - 0u) / 4u);
   return;
 }
@@ -265,6 +268,7 @@ struct my_struct {
 };
 
 fragment void a_func(const constant tint_symbol* tint_symbol_2 [[buffer(29)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint len = ((((*(tint_symbol_2)).buffer_size[1u][3u] - 0u) / 4u) + (((*(tint_symbol_2)).buffer_size[0u][2u] - 0u) / 4u));
   return;
 }

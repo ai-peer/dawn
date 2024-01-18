@@ -6,11 +6,13 @@ struct tint_private_vars_struct {
 };
 
 half4x2 m(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).t = ((*(tint_private_vars)).t + 1.0h);
   return half4x2(half2(1.0h, 2.0h), half2(3.0h, 4.0h), half2(5.0h, 6.0h), half2(7.0h, 8.0h));
 }
 
 void f(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   half4x2 const tint_symbol = m(tint_private_vars);
   float4x2 v = float4x2(tint_symbol);
 }

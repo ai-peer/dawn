@@ -9,6 +9,7 @@ struct S {
 };
 
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   S v = S{};
 }
 

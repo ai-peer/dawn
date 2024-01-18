@@ -6,6 +6,7 @@
 
 using namespace metal;
 kernel void tint_symbol(device int* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   return;
   bool const non_uniform_cond = (*(tint_symbol_1) == 0);
   if (non_uniform_cond) {

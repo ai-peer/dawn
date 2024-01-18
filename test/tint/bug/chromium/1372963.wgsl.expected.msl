@@ -2,10 +2,12 @@
 
 using namespace metal;
 int4 g() {
+  volatile bool tint_loop_preserving_true = true;
   return int4(0);
 }
 
 fragment void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   g();
   return;
 }

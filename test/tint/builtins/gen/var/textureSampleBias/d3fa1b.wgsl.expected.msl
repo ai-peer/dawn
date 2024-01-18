@@ -2,6 +2,7 @@
 
 using namespace metal;
 void textureSampleBias_d3fa1b(texture3d<float, access::sample> tint_symbol, sampler tint_symbol_1, device float4* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true = true;
   float3 arg_2 = float3(1.0f);
   float arg_3 = 1.0f;
   float4 res = tint_symbol.sample(tint_symbol_1, arg_2, bias(arg_3));
@@ -9,6 +10,7 @@ void textureSampleBias_d3fa1b(texture3d<float, access::sample> tint_symbol, samp
 }
 
 fragment void fragment_main(texture3d<float, access::sample> tint_symbol_3 [[texture(0)]], sampler tint_symbol_4 [[sampler(0)]], device float4* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   textureSampleBias_d3fa1b(tint_symbol_3, tint_symbol_4, tint_symbol_5);
   return;
 }

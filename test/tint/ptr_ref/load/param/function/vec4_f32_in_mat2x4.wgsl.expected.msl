@@ -2,10 +2,12 @@
 
 using namespace metal;
 float4 func(thread float4* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   return *(pointer);
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   float2x4 F = float2x4(0.0f);
   float4 const r = func(&(F[1]));
   return;

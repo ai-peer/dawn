@@ -27,11 +27,11 @@ struct OuterS {
 };
 
 kernel void tint_symbol(const constant Uniforms* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   InnerS v = {};
   OuterS s1 = {};
   int i = 0;
-  for(s1.a1[(*(tint_symbol_1)).i] = v; (i < 4); i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
-    __asm__("");
+  for(s1.a1[(*(tint_symbol_1)).i] = v; ((i < 4)) && tint_loop_preserving_true; i = as_type<int>((as_type<uint>(i) + as_type<uint>(1)))) {
   }
   return;
 }

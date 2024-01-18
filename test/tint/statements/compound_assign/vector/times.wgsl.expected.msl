@@ -6,6 +6,7 @@ struct S {
 };
 
 void foo(device S* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol)).a = as_type<int4>((as_type<uint4>((*(tint_symbol)).a) * as_type<uint4>(int4(2))));
 }
 

@@ -6,10 +6,12 @@ struct S {
 };
 
 int4 tint_div(int4 lhs, int4 rhs) {
+  volatile bool tint_loop_preserving_true = true;
   return (lhs / select(rhs, int4(1), ((rhs == int4(0)) | ((lhs == int4((-2147483647 - 1))) & (rhs == int4(-1))))));
 }
 
 void foo(device S* const tint_symbol) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_symbol)).a = tint_div((*(tint_symbol)).a, int4(2));
 }
 

@@ -2,10 +2,12 @@
 
 using namespace metal;
 float tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   return 0.40000000596046447754f;
 }
 
 kernel void ep() {
+  volatile bool tint_loop_preserving_true_1 = true;
   return;
 }
 

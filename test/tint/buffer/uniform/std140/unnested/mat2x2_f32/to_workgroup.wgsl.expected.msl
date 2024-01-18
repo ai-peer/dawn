@@ -6,6 +6,7 @@ struct tint_symbol_5 {
 };
 
 void f_inner(uint local_invocation_index, threadgroup float2x2* const tint_symbol, const constant float2x2* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   {
     *(tint_symbol) = float2x2(float2(0.0f), float2(0.0f));
   }
@@ -17,6 +18,7 @@ void f_inner(uint local_invocation_index, threadgroup float2x2* const tint_symbo
 }
 
 kernel void f(const constant float2x2* tint_symbol_4 [[buffer(0)]], threadgroup tint_symbol_5* tint_symbol_3 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup float2x2* const tint_symbol_2 = &((*(tint_symbol_3)).w);
   f_inner(local_invocation_index, tint_symbol_2, tint_symbol_4);
   return;

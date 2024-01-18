@@ -10,11 +10,13 @@ struct tint_private_vars_struct {
 };
 
 void main_1(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).V.i = 5;
   return;
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   main_1(&(tint_private_vars));
   return;

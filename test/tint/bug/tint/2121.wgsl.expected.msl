@@ -6,6 +6,7 @@ struct VSOut {
 };
 
 void foo(thread VSOut* const out) {
+  volatile bool tint_loop_preserving_true = true;
   float4 pos = float4(1.0f, 2.0f, 3.0f, 4.0f);
   (*(out)).pos = pos;
 }
@@ -15,12 +16,14 @@ struct tint_symbol_1 {
 };
 
 VSOut tint_symbol_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   VSOut out = {};
   foo(&(out));
   return out;
 }
 
 vertex tint_symbol_1 tint_symbol() {
+  volatile bool tint_loop_preserving_true_2 = true;
   VSOut const inner_result = tint_symbol_inner();
   tint_symbol_1 wrapper_result = {};
   wrapper_result.pos = inner_result.pos;

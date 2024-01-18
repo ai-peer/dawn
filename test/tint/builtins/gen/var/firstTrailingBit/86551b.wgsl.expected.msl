@@ -2,6 +2,7 @@
 
 using namespace metal;
 int4 tint_first_trailing_bit(int4 v) {
+  volatile bool tint_loop_preserving_true = true;
   uint4 x = uint4(v);
   uint4 const b16 = select(uint4(16u), uint4(0u), bool4((x & uint4(65535u))));
   x = (x >> b16);
@@ -17,6 +18,7 @@ int4 tint_first_trailing_bit(int4 v) {
 }
 
 void firstTrailingBit_86551b(device int4* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   int4 arg_0 = int4(1);
   int4 res = tint_first_trailing_bit(arg_0);
   *(tint_symbol_1) = res;
@@ -27,11 +29,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner(device int4* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_2 = true;
   firstTrailingBit_86551b(tint_symbol_2);
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main(device int4* tint_symbol_3 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result = vertex_main_inner(tint_symbol_3);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -39,11 +43,13 @@ vertex tint_symbol vertex_main(device int4* tint_symbol_3 [[buffer(0)]]) {
 }
 
 fragment void fragment_main(device int4* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   firstTrailingBit_86551b(tint_symbol_4);
   return;
 }
 
 kernel void compute_main(device int4* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   firstTrailingBit_86551b(tint_symbol_5);
   return;
 }

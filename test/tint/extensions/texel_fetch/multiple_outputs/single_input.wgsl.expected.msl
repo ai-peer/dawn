@@ -18,11 +18,13 @@ struct tint_symbol_2 {
 };
 
 Out f_inner(float4 fbf) {
+  volatile bool tint_loop_preserving_true = true;
   Out const tint_symbol_3 = {.x=float4(10.0f), .y=fbf, .z=float4(30.0f)};
   return tint_symbol_3;
 }
 
 fragment tint_symbol_2 f(tint_symbol_1 tint_symbol [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   Out const inner_result = f_inner(tint_symbol.fbf);
   tint_symbol_2 wrapper_result = {};
   wrapper_result.x = inner_result.x;

@@ -25,12 +25,14 @@ struct tint_symbol_2 {
 };
 
 float4 vert_main_inner(float2 a_particlePos, float2 a_particleVel, float2 a_pos) {
+  volatile bool tint_loop_preserving_true = true;
   float angle = -(atan2(a_particleVel[0], a_particleVel[1]));
   float2 pos = float2(((a_pos[0] * cos(angle)) - (a_pos[1] * sin(angle))), ((a_pos[0] * sin(angle)) + (a_pos[1] * cos(angle))));
   return float4((pos + a_particlePos), 0.0f, 1.0f);
 }
 
 vertex tint_symbol_2 vert_main(tint_symbol_1 tint_symbol [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float4 const inner_result = vert_main_inner(tint_symbol.a_particlePos, tint_symbol.a_particleVel, tint_symbol.a_pos);
   tint_symbol_2 wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -42,10 +44,12 @@ struct tint_symbol_3 {
 };
 
 float4 frag_main_inner() {
+  volatile bool tint_loop_preserving_true_2 = true;
   return float4(1.0f);
 }
 
 fragment tint_symbol_3 frag_main() {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result_1 = frag_main_inner();
   tint_symbol_3 wrapper_result_1 = {};
   wrapper_result_1.value = inner_result_1;
@@ -72,6 +76,7 @@ struct Particles {
 };
 
 void comp_main_inner(uint3 gl_GlobalInvocationID, device Particles* const tint_symbol_4, const constant SimParams* const tint_symbol_5, device Particles* const tint_symbol_6) {
+  volatile bool tint_loop_preserving_true_4 = true;
   uint index = gl_GlobalInvocationID[0];
   if ((index >= 5u)) {
     return;
@@ -85,8 +90,7 @@ void comp_main_inner(uint3 gl_GlobalInvocationID, device Particles* const tint_s
   int cVelCount = 0;
   float2 pos = 0.0f;
   float2 vel = 0.0f;
-  for(uint i = 0u; (i < 5u); i = (i + 1u)) {
-    __asm__("");
+  for(uint i = 0u; ((i < 5u)) && tint_loop_preserving_true_4; i = (i + 1u)) {
     if ((i == index)) {
       continue;
     }
@@ -130,6 +134,7 @@ void comp_main_inner(uint3 gl_GlobalInvocationID, device Particles* const tint_s
 }
 
 kernel void comp_main(device Particles* tint_symbol_7 [[buffer(1)]], const constant SimParams* tint_symbol_8 [[buffer(0)]], device Particles* tint_symbol_9 [[buffer(2)]], uint3 gl_GlobalInvocationID [[thread_position_in_grid]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   comp_main_inner(gl_GlobalInvocationID, tint_symbol_7, tint_symbol_8, tint_symbol_9);
   return;
 }

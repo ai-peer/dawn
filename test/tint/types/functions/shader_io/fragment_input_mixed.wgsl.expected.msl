@@ -19,6 +19,7 @@ struct tint_symbol_2 {
 };
 
 void tint_symbol_inner(FragmentInputs0 inputs0, bool front_facing, uint loc1, uint sample_index, FragmentInputs1 inputs1, float loc2) {
+  volatile bool tint_loop_preserving_true = true;
   if (front_facing) {
     float4 const foo = inputs0.position;
     uint const bar = (sample_index + inputs1.sample_mask);
@@ -30,6 +31,7 @@ void tint_symbol_inner(FragmentInputs0 inputs0, bool front_facing, uint loc1, ui
 }
 
 fragment void tint_symbol(float4 position [[position]], bool front_facing [[front_facing]], uint sample_index [[sample_id]], uint sample_mask [[sample_mask]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   FragmentInputs0 const tint_symbol_3 = {.position=position, .loc0=tint_symbol_1.loc0};
   FragmentInputs1 const tint_symbol_4 = {.loc3=tint_symbol_1.loc3, .sample_mask=sample_mask};
   tint_symbol_inner(tint_symbol_3, front_facing, tint_symbol_1.loc1, sample_index, tint_symbol_4, tint_symbol_1.loc2);

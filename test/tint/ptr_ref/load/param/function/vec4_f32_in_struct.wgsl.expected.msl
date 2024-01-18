@@ -6,10 +6,12 @@ struct str {
 };
 
 float4 func(thread float4* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   return *(pointer);
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   str F = {};
   float4 const r = func(&(F.i));
   return;

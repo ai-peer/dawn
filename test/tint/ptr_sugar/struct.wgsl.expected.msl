@@ -6,18 +6,21 @@ struct S {
 };
 
 void deref() {
+  volatile bool tint_loop_preserving_true = true;
   S a = {};
   int b = a.x;
   a.x = 42;
 }
 
 void no_deref() {
+  volatile bool tint_loop_preserving_true_1 = true;
   S a = {};
   int b = a.x;
   a.x = 42;
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_2 = true;
   deref();
   no_deref();
   return;

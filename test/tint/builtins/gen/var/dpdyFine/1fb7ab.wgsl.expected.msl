@@ -2,12 +2,14 @@
 
 using namespace metal;
 void dpdyFine_1fb7ab(device packed_float3* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   float3 arg_0 = float3(1.0f);
   float3 res = dfdy(arg_0);
   *(tint_symbol) = packed_float3(res);
 }
 
 fragment void fragment_main(device packed_float3* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   dpdyFine_1fb7ab(tint_symbol_1);
   return;
 }

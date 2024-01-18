@@ -2,6 +2,7 @@
 
 using namespace metal;
 void bar(thread float* const p) {
+  volatile bool tint_loop_preserving_true = true;
   float const a = 1.0f;
   float const b = 2.0f;
   bool const cond = ((a >= 0.0f) && (b >= 0.0f));
@@ -9,6 +10,7 @@ void bar(thread float* const p) {
 }
 
 kernel void foo(device float* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float param = 0.0f;
   bar(&(param));
   *(tint_symbol) = param;

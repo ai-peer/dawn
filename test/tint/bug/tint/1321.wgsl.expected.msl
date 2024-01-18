@@ -15,16 +15,17 @@ struct tint_array {
 };
 
 int foo() {
+  volatile bool tint_loop_preserving_true = true;
   return 1;
 }
 
 fragment void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   tint_array<float, 4> arr = tint_array<float, 4>{};
   {
     int const tint_symbol_1 = foo();
     int const a_save = tint_symbol_1;
-    while (true) {
-      __asm__("");
+    while (tint_loop_preserving_true_1) {
       {
         float const x = arr[a_save];
         break;

@@ -7,6 +7,7 @@ struct modf_result_vec3_f32 {
   float3 whole;
 };
 void modf_68d8ee() {
+  volatile bool tint_loop_preserving_true = true;
   modf_result_vec3_f32 res = modf_result_vec3_f32{.fract=float3(-0.5f), .whole=float3(-1.0f)};
 }
 
@@ -15,11 +16,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   modf_68d8ee();
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main() {
+  volatile bool tint_loop_preserving_true_2 = true;
   float4 const inner_result = vertex_main_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -27,11 +30,13 @@ vertex tint_symbol vertex_main() {
 }
 
 fragment void fragment_main() {
+  volatile bool tint_loop_preserving_true_3 = true;
   modf_68d8ee();
   return;
 }
 
 kernel void compute_main() {
+  volatile bool tint_loop_preserving_true_4 = true;
   modf_68d8ee();
   return;
 }

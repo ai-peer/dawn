@@ -19,8 +19,8 @@ struct tint_symbol_5 {
 };
 
 void f_inner(uint local_invocation_index, threadgroup tint_array<float4x4, 4>* const tint_symbol, const constant tint_array<float4x4, 4>* const tint_symbol_1) {
-  for(uint idx = local_invocation_index; (idx < 4u); idx = (idx + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  for(uint idx = local_invocation_index; ((idx < 4u)) && tint_loop_preserving_true; idx = (idx + 1u)) {
     uint const i = idx;
     (*(tint_symbol))[i] = float4x4(float4(0.0f), float4(0.0f), float4(0.0f), float4(0.0f));
   }
@@ -32,6 +32,7 @@ void f_inner(uint local_invocation_index, threadgroup tint_array<float4x4, 4>* c
 }
 
 kernel void f(const constant tint_array<float4x4, 4>* tint_symbol_4 [[buffer(0)]], threadgroup tint_symbol_5* tint_symbol_3 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup tint_array<float4x4, 4>* const tint_symbol_2 = &((*(tint_symbol_3)).w);
   f_inner(local_invocation_index, tint_symbol_2, tint_symbol_4);
   return;

@@ -34,11 +34,13 @@ struct tint_symbol_2 {
 };
 
 float4 tint_symbol_1_inner(const constant S_tint_packed_vec3* const tint_symbol_3) {
+  volatile bool tint_loop_preserving_true = true;
   float const x = (*(tint_symbol_3)).matrix_view[0][2];
   return float4(x, 0.0f, 0.0f, 1.0f);
 }
 
 vertex tint_symbol_2 tint_symbol_1(const constant S_tint_packed_vec3* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float4 const inner_result = tint_symbol_1_inner(tint_symbol_4);
   tint_symbol_2 wrapper_result = {};
   wrapper_result.value = inner_result;

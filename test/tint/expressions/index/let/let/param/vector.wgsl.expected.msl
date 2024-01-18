@@ -2,6 +2,7 @@
 
 using namespace metal;
 float f(int x) {
+  volatile bool tint_loop_preserving_true = true;
   float3 const v = float3(1.0f, 2.0f, 3.0f);
   int const i = x;
   return v[i];

@@ -32,6 +32,7 @@ struct h {
 };
 
 kernel void tint_symbol(const constant g_tint_packed_vec3* tint_symbol_1 [[buffer(0)]], device h* tint_symbol_2 [[buffer(1)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint const l = tint_dot3(uint3((*(tint_symbol_1)).a), uint3((*(tint_symbol_1)).a));
   (*(tint_symbol_2)).a = (*(tint_symbol_1)).a[0];
   return;

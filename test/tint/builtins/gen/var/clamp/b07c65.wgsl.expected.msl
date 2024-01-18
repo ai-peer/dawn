@@ -2,10 +2,12 @@
 
 using namespace metal;
 int tint_clamp(int e, int low, int high) {
+  volatile bool tint_loop_preserving_true = true;
   return min(max(e, low), high);
 }
 
 void clamp_b07c65(device int* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   int arg_0 = 1;
   int arg_1 = 1;
   int arg_2 = 1;
@@ -18,11 +20,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner(device int* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_2 = true;
   clamp_b07c65(tint_symbol_2);
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main(device int* tint_symbol_3 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result = vertex_main_inner(tint_symbol_3);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -30,11 +34,13 @@ vertex tint_symbol vertex_main(device int* tint_symbol_3 [[buffer(0)]]) {
 }
 
 fragment void fragment_main(device int* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   clamp_b07c65(tint_symbol_4);
   return;
 }
 
 kernel void compute_main(device int* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   clamp_b07c65(tint_symbol_5);
   return;
 }

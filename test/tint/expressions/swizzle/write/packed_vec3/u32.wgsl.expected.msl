@@ -24,6 +24,7 @@ struct S {
 };
 
 void f(device S_tint_packed_vec3* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol)).v = packed_uint3(1u, 2u, 3u);
   (*(tint_symbol)).v[0] = 1u;
   (*(tint_symbol)).v[1] = 2u;

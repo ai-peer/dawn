@@ -6,6 +6,7 @@ struct S {
 };
 
 kernel void tint_symbol(device S* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol_1)).a = 12;
   return;
 }

@@ -2,18 +2,21 @@
 
 using namespace metal;
 void deref() {
+  volatile bool tint_loop_preserving_true = true;
   float2x3 a = float2x3(0.0f);
   float3 b = a[0];
   a[0] = float3(1.0f, 2.0f, 3.0f);
 }
 
 void no_deref() {
+  volatile bool tint_loop_preserving_true_1 = true;
   float2x3 a = float2x3(0.0f);
   float3 b = a[0];
   a[0] = float3(1.0f, 2.0f, 3.0f);
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_2 = true;
   deref();
   no_deref();
   return;

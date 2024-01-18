@@ -13,6 +13,7 @@ atomic_compare_exchange_result_u32 atomicCompareExchangeWeak_1(device atomic_uin
 }
 
 kernel void tint_symbol(device atomic_uint* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint value = 42u;
   atomic_compare_exchange_result_u32 const result = atomicCompareExchangeWeak_1(tint_symbol_1, 0u, value);
   return;

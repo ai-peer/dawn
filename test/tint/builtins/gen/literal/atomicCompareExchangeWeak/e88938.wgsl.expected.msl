@@ -13,10 +13,12 @@ atomic_compare_exchange_result_i32 atomicCompareExchangeWeak_1(threadgroup atomi
 }
 
 void atomicCompareExchangeWeak_e88938(threadgroup atomic_int* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   atomic_compare_exchange_result_i32 res = atomicCompareExchangeWeak_1(tint_symbol, 1, 1);
 }
 
 void compute_main_inner(uint local_invocation_index, threadgroup atomic_int* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   {
     atomic_store_explicit(tint_symbol_1, 0, memory_order_relaxed);
   }
@@ -25,6 +27,7 @@ void compute_main_inner(uint local_invocation_index, threadgroup atomic_int* con
 }
 
 kernel void compute_main(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   threadgroup atomic_int tint_symbol_2;
   compute_main_inner(local_invocation_index, &(tint_symbol_2));
   return;

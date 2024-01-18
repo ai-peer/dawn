@@ -89,6 +89,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_AInt) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   int const l = 1;
 }
 
@@ -107,6 +108,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_AFloat) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   float const l = 1.0f;
 }
 
@@ -125,6 +127,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_i32) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   int const l = 1;
 }
 
@@ -143,6 +146,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_u32) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   uint const l = 1u;
 }
 
@@ -161,6 +165,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_f32) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   float const l = 1.0f;
 }
 
@@ -181,6 +186,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_f16) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   half const l = 1.0h;
 }
 
@@ -199,6 +205,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_vec3_AInt) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   int3 const l = int3(1, 2, 3);
 }
 
@@ -217,6 +224,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_vec3_AFloat) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   float3 const l = float3(1.0f, 2.0f, 3.0f);
 }
 
@@ -235,6 +243,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_vec3_f32) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   float3 const l = float3(1.0f, 2.0f, 3.0f);
 }
 
@@ -255,6 +264,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_vec3_f16) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   half3 const l = half3(1.0h, 2.0h, 3.0h);
 }
 
@@ -273,6 +283,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_mat2x3_AFloat) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   float2x3 const l = float2x3(float3(1.0f, 2.0f, 3.0f), float3(4.0f, 5.0f, 6.0f));
 }
 
@@ -291,6 +302,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_mat2x3_f32) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   float2x3 const l = float2x3(float3(1.0f, 2.0f, 3.0f), float3(4.0f, 5.0f, 6.0f));
 }
 
@@ -311,6 +323,7 @@ TEST_F(MslASTPrinterTest, Emit_VariableDeclStatement_Const_mat2x3_f16) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   half2x3 const l = half2x3(half3(1.0h, 2.0h, 3.0h), half3(4.0h, 5.0h, 6.0h));
 }
 
@@ -342,6 +355,7 @@ struct tint_array {
 };
 
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float, 3> const l = tint_array<float, 3>{1.0f, 2.0f, 3.0f};
 }
 
@@ -376,6 +390,7 @@ struct tint_array {
 };
 
 void f() {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<bool2, 3> const l = tint_array<bool2, 3>{bool2(true, false), bool2(false, true), bool2(true)};
 }
 

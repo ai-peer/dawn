@@ -43,6 +43,7 @@ struct ExternalTextureParams_tint_packed_vec3 {
 };
 
 float3x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 3> in) {
+  volatile bool tint_loop_preserving_true = true;
   float3x3 result = float3x3(float3(in[0].elements), float3(in[1].elements), float3(in[2].elements));
   return result;
 }
@@ -58,6 +59,7 @@ struct ExternalTextureParams {
 };
 
 ExternalTextureParams tint_unpack_vec3_in_composite_1(ExternalTextureParams_tint_packed_vec3 in) {
+  volatile bool tint_loop_preserving_true_1 = true;
   ExternalTextureParams result = {};
   result.numPlanes = in.numPlanes;
   result.doYuvToRgbConversionOnly = in.doYuvToRgbConversionOnly;
@@ -70,10 +72,12 @@ ExternalTextureParams tint_unpack_vec3_in_composite_1(ExternalTextureParams_tint
 }
 
 int2 tint_clamp(int2 e, int2 low, int2 high) {
+  volatile bool tint_loop_preserving_true_2 = true;
   return min(max(e, low), high);
 }
 
 float3 gammaCorrection(float3 v, GammaTransferParams params) {
+  volatile bool tint_loop_preserving_true_3 = true;
   bool3 const cond = (fabs(v) < float3(params.D));
   float3 const t = (sign(v) * ((params.C * fabs(v)) + params.F));
   float3 const f = (sign(v) * (pow(((params.A * fabs(v)) + params.B), float3(params.G)) + params.E));
@@ -81,6 +85,7 @@ float3 gammaCorrection(float3 v, GammaTransferParams params) {
 }
 
 float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<float, access::sample> plane1, int2 coord, ExternalTextureParams params) {
+  volatile bool tint_loop_preserving_true_4 = true;
   int2 const coord1 = (coord >> uint2(1u));
   float4 color = 0.0f;
   if ((params.numPlanes == 1u)) {
@@ -97,6 +102,7 @@ float4 textureLoadExternal(texture2d<float, access::sample> plane0, texture2d<fl
 }
 
 kernel void tint_symbol(texture2d<float, access::sample> tint_symbol_1 [[texture(1)]], texture2d<float, access::sample> tint_symbol_2 [[texture(2)]], const constant ExternalTextureParams_tint_packed_vec3* tint_symbol_3 [[buffer(3)]], texture2d<float, access::write> tint_symbol_4 [[texture(0)]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   float4 red = textureLoadExternal(tint_symbol_1, tint_symbol_2, tint_clamp(int2(10), int2(0), int2((uint2(tint_symbol_1.get_width(), tint_symbol_1.get_height()) - uint2(1u)))), tint_unpack_vec3_in_composite_1(*(tint_symbol_3)));
   tint_symbol_4.write(red, uint2(tint_clamp(int2(0), int2(0), int2((uint2(tint_symbol_4.get_width(), tint_symbol_4.get_height()) - uint2(1u))))));
   float4 green = textureLoadExternal(tint_symbol_1, tint_symbol_2, tint_clamp(int2(70, 118), int2(0), int2((uint2(tint_symbol_1.get_width(), tint_symbol_1.get_height()) - uint2(1u)))), tint_unpack_vec3_in_composite_1(*(tint_symbol_3)));

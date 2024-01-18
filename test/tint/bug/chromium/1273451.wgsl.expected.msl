@@ -10,6 +10,7 @@ struct B {
 };
 
 B f(A a) {
+  volatile bool tint_loop_preserving_true = true;
   B const tint_symbol = B{};
   return tint_symbol;
 }

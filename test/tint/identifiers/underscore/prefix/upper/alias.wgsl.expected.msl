@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f(device int* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   int c = 0;
   int d = 0;
   *(tint_symbol) = as_type<int>((as_type<uint>(c) + as_type<uint>(d)));

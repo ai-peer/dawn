@@ -23,11 +23,13 @@ struct Outputs {
 };
 
 void push_output(uint value, thread tint_private_vars_struct* const tint_private_vars, device Outputs* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol_1)).data[(*(tint_private_vars)).count] = value;
   (*(tint_private_vars)).count = ((*(tint_private_vars)).count + 1u);
 }
 
 kernel void tint_symbol(device Outputs* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.count = 0u;
   uint a = 0u;

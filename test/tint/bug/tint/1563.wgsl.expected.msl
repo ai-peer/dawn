@@ -2,6 +2,7 @@
 
 using namespace metal;
 float foo() {
+  volatile bool tint_loop_preserving_true = true;
   int const oob = 99;
   float const b = float4(0.0f)[min(uint(oob), 3u)];
   float4 v = 0.0f;

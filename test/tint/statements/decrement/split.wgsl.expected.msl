@@ -7,6 +7,7 @@ int tint_unary_minus(const int v) {
 }
 
 void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   int b = 2;
   int c = as_type<int>((as_type<uint>(b) - as_type<uint>(tint_unary_minus(b))));
 }

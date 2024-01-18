@@ -24,6 +24,7 @@ struct S {
 };
 
 void f(device S_tint_packed_vec3* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol)).v = packed_half3(1.0h, 2.0h, 3.0h);
   (*(tint_symbol)).v[0] = 1.0h;
   (*(tint_symbol)).v[1] = 2.0h;

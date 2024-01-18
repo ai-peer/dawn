@@ -2,5 +2,6 @@
 
 using namespace metal;
 void f(thread float* const p) {
+  volatile bool tint_loop_preserving_true = true;
 }
 

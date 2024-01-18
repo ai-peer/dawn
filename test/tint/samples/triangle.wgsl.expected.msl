@@ -19,11 +19,13 @@ struct tint_symbol {
 };
 
 float4 vtx_main_inner(uint VertexIndex) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float2, 3> const tint_symbol_2 = tint_array<float2, 3>{float2(0.0f, 0.5f), float2(-0.5f), float2(0.5f, -0.5f)};
   return float4(tint_symbol_2[VertexIndex], 0.0f, 1.0f);
 }
 
 vertex tint_symbol vtx_main(uint VertexIndex [[vertex_id]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float4 const inner_result = vtx_main_inner(VertexIndex);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -35,10 +37,12 @@ struct tint_symbol_1 {
 };
 
 float4 frag_main_inner() {
+  volatile bool tint_loop_preserving_true_2 = true;
   return float4(1.0f, 0.0f, 0.0f, 1.0f);
 }
 
 fragment tint_symbol_1 frag_main() {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result_1 = frag_main_inner();
   tint_symbol_1 wrapper_result_1 = {};
   wrapper_result_1.value = inner_result_1;

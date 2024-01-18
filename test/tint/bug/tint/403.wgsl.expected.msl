@@ -27,6 +27,7 @@ struct tint_symbol_1 {
 };
 
 float4 tint_symbol_inner(uint gl_VertexIndex, const constant vertexUniformBuffer1* const tint_symbol_3, const constant vertexUniformBuffer2* const tint_symbol_4) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float2, 3> indexable = {};
   float2x2 const x_23 = (*(tint_symbol_3)).transform1;
   float2x2 const x_28 = (*(tint_symbol_4)).transform2;
@@ -39,6 +40,7 @@ float4 tint_symbol_inner(uint gl_VertexIndex, const constant vertexUniformBuffer
 }
 
 vertex tint_symbol_1 tint_symbol(const constant vertexUniformBuffer1* tint_symbol_5 [[buffer(0)]], const constant vertexUniformBuffer2* tint_symbol_6 [[buffer(1)]], uint gl_VertexIndex [[vertex_id]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float4 const inner_result = tint_symbol_inner(gl_VertexIndex, tint_symbol_5, tint_symbol_6);
   tint_symbol_1 wrapper_result = {};
   wrapper_result.value = inner_result;

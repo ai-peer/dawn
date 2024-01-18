@@ -11,10 +11,12 @@ int4 tint_unary_minus_1(const int4 v) {
 }
 
 int i(int x) {
+  volatile bool tint_loop_preserving_true = true;
   return tint_unary_minus(x);
 }
 
 int4 vi(int4 x) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return tint_unary_minus_1(x);
 }
 

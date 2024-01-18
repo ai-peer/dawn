@@ -2,6 +2,7 @@
 
 using namespace metal;
 void bar() {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 struct tint_symbol_1 {
@@ -9,12 +10,14 @@ struct tint_symbol_1 {
 };
 
 float4 tint_symbol_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   float2 a = float2(0.0f);
   bar();
   return float4(0.40000000596046447754f, 0.40000000596046447754f, 0.80000001192092895508f, 1.0f);
 }
 
 fragment tint_symbol_1 tint_symbol() {
+  volatile bool tint_loop_preserving_true_2 = true;
   float4 const inner_result = tint_symbol_inner();
   tint_symbol_1 wrapper_result = {};
   wrapper_result.value = inner_result;

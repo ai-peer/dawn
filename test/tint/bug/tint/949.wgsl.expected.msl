@@ -77,6 +77,7 @@ struct Light0 {
 };
 
 float3x3 cotangent_frame_vf3_vf3_vf2_vf2_(thread float3* const normal_1, thread float3* const p, thread float2* const uv, thread float2* const tangentSpaceParams) {
+  volatile bool tint_loop_preserving_true = true;
   float3 dp1 = 0.0f;
   float3 dp2 = 0.0f;
   float2 duv1 = 0.0f;
@@ -132,6 +133,7 @@ float3x3 cotangent_frame_vf3_vf3_vf2_vf2_(thread float3* const normal_1, thread 
 }
 
 float3x3 transposeMat3_mf33_(thread float3x3* const inMatrix) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float3 i0 = 0.0f;
   float3 i1 = 0.0f;
   float3 i2 = 0.0f;
@@ -160,12 +162,14 @@ float3x3 transposeMat3_mf33_(thread float3x3* const inMatrix) {
 }
 
 float3 perturbNormalBase_mf33_vf3_f1_(thread float3x3* const cotangentFrame, thread float3* const normal, thread float* const scale) {
+  volatile bool tint_loop_preserving_true_2 = true;
   float3x3 const x_113 = *(cotangentFrame);
   float3 const x_114 = *(normal);
   return normalize((x_113 * x_114));
 }
 
 float3 perturbNormal_mf33_vf3_f1_(thread float3x3* const cotangentFrame_1, thread float3* const textureSample, thread float* const scale_1) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float3x3 param = float3x3(0.0f);
   float3 param_1 = 0.0f;
   float param_2 = 0.0f;
@@ -180,6 +184,7 @@ float3 perturbNormal_mf33_vf3_f1_(thread float3x3* const cotangentFrame_1, threa
 }
 
 lightingInfo computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_(thread float3* const viewDirectionW, thread float3* const vNormal, thread float4* const lightData, thread float3* const diffuseColor, thread float3* const specularColor, thread float3* const groundColor, thread float* const glossiness) {
+  volatile bool tint_loop_preserving_true_4 = true;
   float ndl = 0.0f;
   lightingInfo result = {};
   float3 angleW = 0.0f;
@@ -208,6 +213,7 @@ lightingInfo computeHemisphericLighting_vf3_vf3_vf4_vf3_vf3_vf3_f1_(thread float
 }
 
 void main_1(thread tint_private_vars_struct* const tint_private_vars, texture2d<float, access::sample> tint_symbol_5, sampler tint_symbol_6, const constant LeftOver_tint_packed_vec3* const tint_symbol_7, texture2d<float, access::sample> tint_symbol_8, sampler tint_symbol_9, const constant Light0_tint_packed_vec3* const tint_symbol_10) {
+  volatile bool tint_loop_preserving_true_5 = true;
   float4 tempTextureRead = 0.0f;
   float3 rgb = 0.0f;
   float3 output5 = 0.0f;
@@ -330,8 +336,7 @@ void main_1(thread tint_private_vars_struct* const tint_private_vars, texture2d<
   lastSampledHeight = 1.0f;
   currSampledHeight = 1.0f;
   i = 0;
-  while (true) {
-    __asm__("");
+  while (tint_loop_preserving_true_5) {
     int const x_388 = i;
     if ((x_388 < 15)) {
     } else {
@@ -467,6 +472,7 @@ struct tint_symbol_3 {
 };
 
 main_out tint_symbol_inner(float2 vMainuv_param, float4 v_output1_param, bool gl_FrontFacing_param, float2 v_uv_param, float4 v_output2_param, thread tint_private_vars_struct* const tint_private_vars, texture2d<float, access::sample> tint_symbol_11, sampler tint_symbol_12, const constant LeftOver_tint_packed_vec3* const tint_symbol_13, texture2d<float, access::sample> tint_symbol_14, sampler tint_symbol_15, const constant Light0_tint_packed_vec3* const tint_symbol_16) {
+  volatile bool tint_loop_preserving_true_6 = true;
   (*(tint_private_vars)).vMainuv = vMainuv_param;
   (*(tint_private_vars)).v_output1 = v_output1_param;
   (*(tint_private_vars)).gl_FrontFacing = gl_FrontFacing_param;
@@ -478,6 +484,7 @@ main_out tint_symbol_inner(float2 vMainuv_param, float4 v_output1_param, bool gl
 }
 
 fragment tint_symbol_3 tint_symbol(texture2d<float, access::sample> tint_symbol_17 [[texture(0)]], sampler tint_symbol_18 [[sampler(0)]], const constant LeftOver_tint_packed_vec3* tint_symbol_19 [[buffer(0)]], texture2d<float, access::sample> tint_symbol_20 [[texture(1)]], sampler tint_symbol_21 [[sampler(1)]], const constant Light0_tint_packed_vec3* tint_symbol_22 [[buffer(1)]], bool gl_FrontFacing_param [[front_facing]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_7 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   main_out const inner_result = tint_symbol_inner(tint_symbol_1.vMainuv_param, tint_symbol_1.v_output1_param, gl_FrontFacing_param, tint_symbol_1.v_uv_param, tint_symbol_1.v_output2_param, &(tint_private_vars), tint_symbol_17, tint_symbol_18, tint_symbol_19, tint_symbol_20, tint_symbol_21, tint_symbol_22);
   tint_symbol_3 wrapper_result = {};

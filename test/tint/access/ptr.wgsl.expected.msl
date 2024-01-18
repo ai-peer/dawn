@@ -2,6 +2,7 @@
 
 using namespace metal;
 int tint_ftoi(float v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(2147483647, select(int(v), (-2147483647 - 1), (v < -2147483648.0f)), (v < 2147483520.0f));
 }
 
@@ -11,40 +12,48 @@ struct S {
 };
 
 int accept_value(int val) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return val;
 }
 
 int accept_ptr_deref_call_func(thread int* const val) {
+  volatile bool tint_loop_preserving_true_2 = true;
   int const tint_symbol_3 = *(val);
   int const tint_symbol_4 = accept_value(*(val));
   return as_type<int>((as_type<uint>(tint_symbol_3) + as_type<uint>(tint_symbol_4)));
 }
 
 int accept_ptr_deref_pass_through(thread int* const val) {
+  volatile bool tint_loop_preserving_true_3 = true;
   int const tint_symbol_1 = *(val);
   int const tint_symbol_2 = accept_ptr_deref_call_func(val);
   return as_type<int>((as_type<uint>(tint_symbol_1) + as_type<uint>(tint_symbol_2)));
 }
 
 int accept_ptr_to_struct_and_access(thread S* const val) {
+  volatile bool tint_loop_preserving_true_4 = true;
   return as_type<int>((as_type<uint>((*(val)).a) + as_type<uint>((*(val)).b)));
 }
 
 int accept_ptr_to_struct_access_pass_ptr(thread S* const val) {
+  volatile bool tint_loop_preserving_true_5 = true;
   (*(val)).a = 2;
   return (*(val)).a;
 }
 
 int accept_ptr_vec_access_elements(thread float3* const v1) {
+  volatile bool tint_loop_preserving_true_6 = true;
   (*(v1))[0] = cross(*(v1), *(v1))[0];
   return tint_ftoi((*(v1))[0]);
 }
 
 int call_builtin_with_mod_scope_ptr(threadgroup atomic_int* const tint_symbol_11) {
+  volatile bool tint_loop_preserving_true_7 = true;
   return atomic_load_explicit(tint_symbol_11, memory_order_relaxed);
 }
 
 void tint_symbol_inner(uint local_invocation_index, threadgroup atomic_int* const tint_symbol_12, device int* const tint_symbol_13) {
+  volatile bool tint_loop_preserving_true_8 = true;
   {
     atomic_store_explicit(tint_symbol_12, 0, memory_order_relaxed);
   }
@@ -63,6 +72,7 @@ void tint_symbol_inner(uint local_invocation_index, threadgroup atomic_int* cons
 }
 
 kernel void tint_symbol(device int* tint_symbol_15 [[buffer(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_9 = true;
   threadgroup atomic_int tint_symbol_14;
   tint_symbol_inner(local_invocation_index, &(tint_symbol_14), tint_symbol_15);
   return;

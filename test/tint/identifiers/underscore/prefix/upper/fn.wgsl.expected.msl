@@ -2,20 +2,25 @@
 
 using namespace metal;
 void A() {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 void _A() {
+  volatile bool tint_loop_preserving_true_1 = true;
 }
 
 void B() {
+  volatile bool tint_loop_preserving_true_2 = true;
   A();
 }
 
 void _B() {
+  volatile bool tint_loop_preserving_true_3 = true;
   _A();
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_4 = true;
   B();
   _B();
   return;

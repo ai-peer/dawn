@@ -2,12 +2,14 @@
 
 using namespace metal;
 void atomicAdd_794055(threadgroup atomic_int* const tint_symbol, device int* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   int arg_1 = 1;
   int res = atomic_fetch_add_explicit(tint_symbol, arg_1, memory_order_relaxed);
   *(tint_symbol_1) = res;
 }
 
 void compute_main_inner(uint local_invocation_index, threadgroup atomic_int* const tint_symbol_2, device int* const tint_symbol_3) {
+  volatile bool tint_loop_preserving_true_1 = true;
   {
     atomic_store_explicit(tint_symbol_2, 0, memory_order_relaxed);
   }
@@ -16,6 +18,7 @@ void compute_main_inner(uint local_invocation_index, threadgroup atomic_int* con
 }
 
 kernel void compute_main(device int* tint_symbol_5 [[buffer(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   threadgroup atomic_int tint_symbol_4;
   compute_main_inner(local_invocation_index, &(tint_symbol_4), tint_symbol_5);
   return;

@@ -2,6 +2,7 @@
 
 using namespace metal;
 void textureSampleBias_80e579(texture2d_array<float, access::sample> tint_symbol, sampler tint_symbol_1, device float4* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true = true;
   float2 arg_2 = float2(1.0f);
   int arg_3 = 1;
   float arg_4 = 1.0f;
@@ -10,6 +11,7 @@ void textureSampleBias_80e579(texture2d_array<float, access::sample> tint_symbol
 }
 
 fragment void fragment_main(texture2d_array<float, access::sample> tint_symbol_3 [[texture(0)]], sampler tint_symbol_4 [[sampler(0)]], device float4* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   textureSampleBias_80e579(tint_symbol_3, tint_symbol_4, tint_symbol_5);
   return;
 }

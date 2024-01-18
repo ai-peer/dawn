@@ -19,11 +19,13 @@ struct tint_private_vars_struct {
 };
 
 int i(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).counter = as_type<int>((as_type<uint>((*(tint_private_vars)).counter) + as_type<uint>(1)));
   return (*(tint_private_vars)).counter;
 }
 
 kernel void f(const constant tint_array<half4x4, 4>* tint_symbol_2 [[buffer(0)]], device half* tint_symbol_3 [[buffer(1)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.counter = 0;
   int const tint_symbol = i(&(tint_private_vars));

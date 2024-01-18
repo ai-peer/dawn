@@ -12,6 +12,7 @@ struct S {
 };
 
 uint f() {
+  volatile bool tint_loop_preserving_true = true;
   S const a = S{};
   return a.n.p;
 }

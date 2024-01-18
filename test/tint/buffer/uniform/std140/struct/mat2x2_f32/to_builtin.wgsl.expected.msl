@@ -24,6 +24,7 @@ struct S {
 };
 
 kernel void f(const constant tint_array<S, 4>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   float2x2 const t = transpose((*(tint_symbol))[2].m);
   float const l = length((*(tint_symbol))[0].m[1].yx);
   float const a = fabs((*(tint_symbol))[0].m[1].yx[0]);

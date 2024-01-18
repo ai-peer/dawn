@@ -26,6 +26,7 @@ struct x__atomic_compare_exchange_resulti32 {
 };
 
 void atomicCompareExchangeWeak_1bd40a(device SB_RW_atomic* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true = true;
   x__atomic_compare_exchange_resulti32 res = x__atomic_compare_exchange_resulti32{};
   atomic_compare_exchange_result_i32 const tint_symbol = atomicCompareExchangeWeak_1(&((*(tint_symbol_2)).arg_0), 1, 1);
   int const old_value_1 = tint_symbol.old_value;
@@ -36,21 +37,25 @@ void atomicCompareExchangeWeak_1bd40a(device SB_RW_atomic* const tint_symbol_2) 
 }
 
 void fragment_main_1(device SB_RW_atomic* const tint_symbol_3) {
+  volatile bool tint_loop_preserving_true_1 = true;
   atomicCompareExchangeWeak_1bd40a(tint_symbol_3);
   return;
 }
 
 fragment void fragment_main(device SB_RW_atomic* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   fragment_main_1(tint_symbol_4);
   return;
 }
 
 void compute_main_1(device SB_RW_atomic* const tint_symbol_5) {
+  volatile bool tint_loop_preserving_true_3 = true;
   atomicCompareExchangeWeak_1bd40a(tint_symbol_5);
   return;
 }
 
 kernel void compute_main(device SB_RW_atomic* tint_symbol_6 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   compute_main_1(tint_symbol_6);
   return;
 }

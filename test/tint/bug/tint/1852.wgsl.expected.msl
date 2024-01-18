@@ -2,5 +2,6 @@
 
 using namespace metal;
 void foo() {
+  volatile bool tint_loop_preserving_true = true;
 }
 

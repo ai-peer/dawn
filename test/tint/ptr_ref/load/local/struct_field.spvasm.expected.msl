@@ -6,6 +6,7 @@ struct S {
 };
 
 void main_1() {
+  volatile bool tint_loop_preserving_true = true;
   int i = 0;
   S V = {};
   i = V.i;
@@ -13,6 +14,7 @@ void main_1() {
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   main_1();
   return;
 }

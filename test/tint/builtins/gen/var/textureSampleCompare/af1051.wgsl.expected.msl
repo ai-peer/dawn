@@ -2,6 +2,7 @@
 
 using namespace metal;
 void textureSampleCompare_af1051(depth2d_array<float, access::sample> tint_symbol, sampler tint_symbol_1, device float* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true = true;
   float2 arg_2 = float2(1.0f);
   int arg_3 = 1;
   float arg_4 = 1.0f;
@@ -10,6 +11,7 @@ void textureSampleCompare_af1051(depth2d_array<float, access::sample> tint_symbo
 }
 
 fragment void fragment_main(depth2d_array<float, access::sample> tint_symbol_3 [[texture(0)]], sampler tint_symbol_4 [[sampler(0)]], device float* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   textureSampleCompare_af1051(tint_symbol_3, tint_symbol_4, tint_symbol_5);
   return;
 }

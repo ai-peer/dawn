@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void tint_symbol(texture2d<uint, access::sample> tint_symbol_1 [[texture(0)]], texture2d<uint, access::write> tint_symbol_2 [[texture(1)]]) {
+  volatile bool tint_loop_preserving_true = true;
   uint4 srcValue = 0u;
   uint4 const x_22 = tint_symbol_1.read(uint2(int2(0)), 0);
   srcValue = x_22;

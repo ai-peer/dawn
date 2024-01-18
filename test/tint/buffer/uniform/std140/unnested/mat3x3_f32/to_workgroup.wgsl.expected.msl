@@ -24,11 +24,13 @@ struct tint_packed_vec3_f32_array_element {
 };
 
 float3x3 tint_unpack_vec3_in_composite(tint_array<tint_packed_vec3_f32_array_element, 3> in) {
+  volatile bool tint_loop_preserving_true = true;
   float3x3 result = float3x3(float3(in[0].elements), float3(in[1].elements), float3(in[2].elements));
   return result;
 }
 
 void f_inner(uint local_invocation_index, threadgroup float3x3* const tint_symbol, const constant tint_array<tint_packed_vec3_f32_array_element, 3>* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   {
     *(tint_symbol) = float3x3(float3(0.0f), float3(0.0f), float3(0.0f));
   }
@@ -40,6 +42,7 @@ void f_inner(uint local_invocation_index, threadgroup float3x3* const tint_symbo
 }
 
 kernel void f(const constant tint_array<tint_packed_vec3_f32_array_element, 3>* tint_symbol_4 [[buffer(0)]], threadgroup tint_symbol_5* tint_symbol_3 [[threadgroup(0)]], uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   threadgroup float3x3* const tint_symbol_2 = &((*(tint_symbol_3)).w);
   f_inner(local_invocation_index, tint_symbol_2, tint_symbol_4);
   return;

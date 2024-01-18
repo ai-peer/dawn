@@ -24,6 +24,7 @@ struct UniformBuffer {
 };
 
 kernel void tint_symbol(const constant UniformBuffer_tint_packed_vec3* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   int3 const temp = as_type<int3>((as_type<uint3>(int3((*(tint_symbol_1)).d)) << uint3(0u)));
   return;
 }

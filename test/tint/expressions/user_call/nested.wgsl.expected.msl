@@ -2,17 +2,21 @@
 
 using namespace metal;
 void d() {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 void c() {
+  volatile bool tint_loop_preserving_true_1 = true;
   d();
 }
 
 void b() {
+  volatile bool tint_loop_preserving_true_2 = true;
   c();
 }
 
 void a() {
+  volatile bool tint_loop_preserving_true_3 = true;
   b();
 }
 

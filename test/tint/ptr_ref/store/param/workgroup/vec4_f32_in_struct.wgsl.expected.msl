@@ -6,10 +6,12 @@ struct str {
 };
 
 void func(threadgroup float4* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   *(pointer) = float4(0.0f);
 }
 
 void tint_symbol_inner(uint local_invocation_index, threadgroup str* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_1 = true;
   {
     str const tint_symbol_1 = str{};
     *(tint_symbol_2) = tint_symbol_1;
@@ -19,6 +21,7 @@ void tint_symbol_inner(uint local_invocation_index, threadgroup str* const tint_
 }
 
 kernel void tint_symbol(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   threadgroup str tint_symbol_3;
   tint_symbol_inner(local_invocation_index, &(tint_symbol_3));
   return;

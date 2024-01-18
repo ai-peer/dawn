@@ -15,6 +15,7 @@ struct tint_array {
 };
 
 kernel void tint_symbol(device tint_array<float, 4>* tint_symbol_1 [[buffer(0)]], const device tint_array<float, 4>* tint_symbol_2 [[buffer(1)]]) {
+  volatile bool tint_loop_preserving_true = true;
   *(tint_symbol_1) = *(tint_symbol_2);
   return;
 }

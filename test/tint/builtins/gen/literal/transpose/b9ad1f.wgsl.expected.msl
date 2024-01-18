@@ -20,11 +20,13 @@ struct tint_packed_vec3_f16_array_element {
 };
 
 void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f16_array_element, 2>* const dest, half2x3 value) {
+  volatile bool tint_loop_preserving_true = true;
   (*(dest))[0u].elements = packed_half3(value[0u]);
   (*(dest))[1u].elements = packed_half3(value[1u]);
 }
 
 void transpose_b9ad1f(device tint_array<tint_packed_vec3_f16_array_element, 2>* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   half2x3 res = half2x3(half3(1.0h), half3(1.0h));
   assign_and_preserve_padding(tint_symbol_1, res);
 }
@@ -34,11 +36,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner(device tint_array<tint_packed_vec3_f16_array_element, 2>* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_2 = true;
   transpose_b9ad1f(tint_symbol_2);
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main(device tint_array<tint_packed_vec3_f16_array_element, 2>* tint_symbol_3 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result = vertex_main_inner(tint_symbol_3);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -46,11 +50,13 @@ vertex tint_symbol vertex_main(device tint_array<tint_packed_vec3_f16_array_elem
 }
 
 fragment void fragment_main(device tint_array<tint_packed_vec3_f16_array_element, 2>* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   transpose_b9ad1f(tint_symbol_4);
   return;
 }
 
 kernel void compute_main(device tint_array<tint_packed_vec3_f16_array_element, 2>* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   transpose_b9ad1f(tint_symbol_5);
   return;
 }

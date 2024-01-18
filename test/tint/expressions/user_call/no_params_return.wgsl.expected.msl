@@ -2,12 +2,14 @@
 
 using namespace metal;
 int c() {
+  volatile bool tint_loop_preserving_true = true;
   int a = 1;
   a = as_type<int>((as_type<uint>(a) + as_type<uint>(2)));
   return a;
 }
 
 void b() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int b_1 = c();
   int const tint_symbol = b_1;
   int const tint_symbol_1 = c();

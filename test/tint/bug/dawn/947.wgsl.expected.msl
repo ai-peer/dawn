@@ -34,6 +34,7 @@ struct tint_symbol {
 };
 
 VertexOutputs vs_main_inner(uint VertexIndex, const constant Uniforms* const tint_symbol_4) {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<float2, 3> texcoord = tint_array<float2, 3>{float2(-0.5f, 0.0f), float2(1.5f, 0.0f), float2(0.5f, 2.0f)};
   VertexOutputs output = {};
   output.position = float4(((texcoord[VertexIndex] * 2.0f) - float2(1.0f)), 0.0f, 1.0f);
@@ -47,6 +48,7 @@ VertexOutputs vs_main_inner(uint VertexIndex, const constant Uniforms* const tin
 }
 
 vertex tint_symbol vs_main(const constant Uniforms* tint_symbol_5 [[buffer(0)]], uint VertexIndex [[vertex_id]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   VertexOutputs const inner_result = vs_main_inner(VertexIndex, tint_symbol_5);
   tint_symbol wrapper_result = {};
   wrapper_result.texcoords = inner_result.texcoords;
@@ -63,6 +65,7 @@ struct tint_symbol_3 {
 };
 
 float4 fs_main_inner(float2 texcoord, thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_2 = true;
   float2 clampedTexcoord = clamp(texcoord, float2(0.0f), float2(1.0f));
   if (!(all((clampedTexcoord == texcoord)))) {
     (*(tint_private_vars)).tint_discarded = true;
@@ -72,6 +75,7 @@ float4 fs_main_inner(float2 texcoord, thread tint_private_vars_struct* const tin
 }
 
 fragment tint_symbol_3 fs_main(tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.tint_discarded = false;
   float4 const inner_result_1 = fs_main_inner(tint_symbol_1.texcoord, &(tint_private_vars));

@@ -23,6 +23,7 @@ struct S2 {
 };
 
 void compute_main_inner(uint local_invocation_index, threadgroup S2* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   {
     (*(tint_symbol)).x = 0;
     (*(tint_symbol)).y = 0;
@@ -40,6 +41,7 @@ void compute_main_inner(uint local_invocation_index, threadgroup S2* const tint_
 }
 
 kernel void compute_main(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup S2 tint_symbol_1;
   compute_main_inner(local_invocation_index, &(tint_symbol_1));
   return;

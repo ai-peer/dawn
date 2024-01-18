@@ -2,10 +2,12 @@
 
 using namespace metal;
 int tint_div(int lhs, int rhs) {
+  volatile bool tint_loop_preserving_true = true;
   return (lhs / select(rhs, 1, bool((rhs == 0) | bool((lhs == (-2147483647 - 1)) & (rhs == -1)))));
 }
 
 void foo() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int a = 0;
   float4 b = 0.0f;
   float2x2 c = float2x2(0.0f);

@@ -2,10 +2,12 @@
 
 using namespace metal;
 int f(int a, int b, int c) {
+  volatile bool tint_loop_preserving_true = true;
   return as_type<int>((as_type<uint>(as_type<int>((as_type<uint>(a) * as_type<uint>(b)))) + as_type<uint>(c)));
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int const tint_symbol_1 = f(1, 2, 3);
   int const tint_symbol_2 = f(4, 5, 6);
   int const tint_symbol_3 = f(8, 9, 10);

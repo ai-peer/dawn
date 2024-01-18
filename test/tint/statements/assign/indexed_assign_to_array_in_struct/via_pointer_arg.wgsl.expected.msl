@@ -27,11 +27,13 @@ struct OuterS {
 };
 
 void f(thread OuterS* const p, const constant Uniforms* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   InnerS v = {};
   (*(p)).a1[(*(tint_symbol_1)).i] = v;
 }
 
 kernel void tint_symbol(const constant Uniforms* tint_symbol_2 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   OuterS s1 = {};
   f(&(s1), tint_symbol_2);
   return;

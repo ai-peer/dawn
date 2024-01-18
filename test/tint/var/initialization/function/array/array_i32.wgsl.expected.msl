@@ -15,6 +15,7 @@ struct tint_array {
 };
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   tint_array<tint_array<int, 3>, 2> zero = {};
   tint_array<tint_array<int, 3>, 2> init = tint_array<tint_array<int, 3>, 2>{tint_array<int, 3>{1, 2, 3}, tint_array<int, 3>{4, 5, 6}};
   return;

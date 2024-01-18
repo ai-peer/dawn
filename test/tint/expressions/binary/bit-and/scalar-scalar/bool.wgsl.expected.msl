@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f() {
+  volatile bool tint_loop_preserving_true = true;
   bool const a = true;
   bool const b = false;
   bool const r = bool(a & b);

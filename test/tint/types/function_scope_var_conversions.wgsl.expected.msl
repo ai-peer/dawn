@@ -2,11 +2,13 @@
 
 using namespace metal;
 void constant_with_non_constant() {
+  volatile bool tint_loop_preserving_true = true;
   float a = 0.0f;
   float2 b = float2(1.0f, a);
 }
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true_1 = true;
   bool bool_var1 = true;
   bool bool_var2 = true;
   bool bool_var3 = true;

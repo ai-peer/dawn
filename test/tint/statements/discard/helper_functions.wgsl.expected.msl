@@ -6,18 +6,21 @@ struct tint_private_vars_struct {
 };
 
 void foo(thread tint_private_vars_struct* const tint_private_vars, device int* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   if ((*(tint_symbol_1) < 0)) {
     (*(tint_private_vars)).tint_discarded = true;
   }
 }
 
 void bar(thread tint_private_vars_struct* const tint_private_vars, device float* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_1 = true;
   if (!((*(tint_private_vars)).tint_discarded)) {
     *(tint_symbol_2) = dfdx(1.0f);
   }
 }
 
 fragment void tint_symbol(device int* tint_symbol_3 [[buffer(0)]], device float* tint_symbol_4 [[buffer(1)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.tint_discarded = false;
   foo(&(tint_private_vars), tint_symbol_3);

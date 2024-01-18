@@ -2,10 +2,12 @@
 
 using namespace metal;
 bool get_bool() {
+  volatile bool tint_loop_preserving_true = true;
   return true;
 }
 
 void f() {
+  volatile bool tint_loop_preserving_true_1 = true;
   bool const tint_symbol = get_bool();
   bool2 v2 = bool2(tint_symbol);
   bool const tint_symbol_1 = get_bool();

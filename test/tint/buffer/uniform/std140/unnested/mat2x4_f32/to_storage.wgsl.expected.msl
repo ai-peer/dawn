@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f(device float2x4* tint_symbol [[buffer(1)]], const constant float2x4* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   *(tint_symbol) = *(tint_symbol_1);
   (*(tint_symbol))[1] = (*(tint_symbol_1))[0];
   (*(tint_symbol))[1] = (*(tint_symbol_1))[0].ywxz;

@@ -2,10 +2,12 @@
 
 using namespace metal;
 uint3 tint_div(uint3 lhs, uint3 rhs) {
+  volatile bool tint_loop_preserving_true = true;
   return (lhs / select(rhs, uint3(1u), (rhs == uint3(0u))));
 }
 
 kernel void f() {
+  volatile bool tint_loop_preserving_true_1 = true;
   uint3 const a = uint3(1u, 2u, 3u);
   uint3 const b = uint3(4u, 5u, 6u);
   uint3 const r = tint_div(a, b);

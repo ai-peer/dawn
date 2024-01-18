@@ -20,6 +20,7 @@ struct tint_packed_vec3_f32_array_element {
 };
 
 void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f32_array_element, 4>* const dest, float4x3 value) {
+  volatile bool tint_loop_preserving_true = true;
   (*(dest))[0u].elements = packed_float3(value[0u]);
   (*(dest))[1u].elements = packed_float3(value[1u]);
   (*(dest))[2u].elements = packed_float3(value[2u]);
@@ -27,6 +28,7 @@ void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f32_array_el
 }
 
 void transpose_d8f8ba(device tint_array<tint_packed_vec3_f32_array_element, 4>* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   float4x3 res = float4x3(float3(1.0f), float3(1.0f), float3(1.0f), float3(1.0f));
   assign_and_preserve_padding(tint_symbol_1, res);
 }
@@ -36,11 +38,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner(device tint_array<tint_packed_vec3_f32_array_element, 4>* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_2 = true;
   transpose_d8f8ba(tint_symbol_2);
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main(device tint_array<tint_packed_vec3_f32_array_element, 4>* tint_symbol_3 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result = vertex_main_inner(tint_symbol_3);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -48,11 +52,13 @@ vertex tint_symbol vertex_main(device tint_array<tint_packed_vec3_f32_array_elem
 }
 
 fragment void fragment_main(device tint_array<tint_packed_vec3_f32_array_element, 4>* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   transpose_d8f8ba(tint_symbol_4);
   return;
 }
 
 kernel void compute_main(device tint_array<tint_packed_vec3_f32_array_element, 4>* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   transpose_d8f8ba(tint_symbol_5);
   return;
 }

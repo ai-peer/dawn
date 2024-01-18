@@ -7,13 +7,16 @@ struct tint_symbol_1 {
 };
 
 void g(float a, float b) {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 void f_inner(float4 fbf_1, float4 fbf_3) {
+  volatile bool tint_loop_preserving_true_1 = true;
   g(fbf_1[0], fbf_3[1]);
 }
 
 fragment void f(tint_symbol_1 tint_symbol [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   f_inner(tint_symbol.fbf_1, tint_symbol.fbf_3);
   return;
 }

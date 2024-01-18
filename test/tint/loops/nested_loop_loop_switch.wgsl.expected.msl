@@ -2,10 +2,9 @@
 
 using namespace metal;
 kernel void tint_symbol() {
-  for(int i = 0; (i < 2); i = as_type<int>((as_type<uint>(i) + as_type<uint>(2)))) {
-    __asm__("");
-    for(int j = 0; (j < 2); j = as_type<int>((as_type<uint>(j) + as_type<uint>(2)))) {
-      __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  for(int i = 0; ((i < 2)) && tint_loop_preserving_true; i = as_type<int>((as_type<uint>(i) + as_type<uint>(2)))) {
+    for(int j = 0; ((j < 2)) && tint_loop_preserving_true; j = as_type<int>((as_type<uint>(j) + as_type<uint>(2)))) {
       switch(i) {
         case 0: {
           continue;

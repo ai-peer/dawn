@@ -7,6 +7,7 @@ T tint_dot4(vec<T,4> a, vec<T,4> b) {
   return a[0]*b[0] + a[1]*b[1] + a[2]*b[2] + a[3]*b[3];
 }
 uint tint_pack_4xi8_clamp(int4 a) {
+  volatile bool tint_loop_preserving_true = true;
   int4 const a_clamp = clamp(a, int4(-128), int4(127));
   uint4 const a_u32 = as_type<uint4>(a_clamp);
   uint4 const a_u8 = ((a_u32 & uint4(255u)) << uint4(0u, 8u, 16u, 24u));
@@ -14,6 +15,7 @@ uint tint_pack_4xi8_clamp(int4 a) {
 }
 
 void pack4xI8Clamp_e42b2a(device uint* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true_1 = true;
   int4 arg_0 = int4(1);
   uint res = tint_pack_4xi8_clamp(arg_0);
   *(tint_symbol_1) = res;
@@ -24,11 +26,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner(device uint* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_2 = true;
   pack4xI8Clamp_e42b2a(tint_symbol_2);
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main(device uint* tint_symbol_3 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 const inner_result = vertex_main_inner(tint_symbol_3);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -36,11 +40,13 @@ vertex tint_symbol vertex_main(device uint* tint_symbol_3 [[buffer(0)]]) {
 }
 
 fragment void fragment_main(device uint* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   pack4xI8Clamp_e42b2a(tint_symbol_4);
   return;
 }
 
 kernel void compute_main(device uint* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   pack4xI8Clamp_e42b2a(tint_symbol_5);
   return;
 }

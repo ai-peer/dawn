@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void f() {
+  volatile bool tint_loop_preserving_true = true;
   half2 const b = half2(1.0h, 2.0h);
   return;
 }

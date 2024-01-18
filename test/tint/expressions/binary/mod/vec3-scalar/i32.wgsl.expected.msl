@@ -2,6 +2,7 @@
 
 using namespace metal;
 int3 tint_mod(int3 lhs, int rhs) {
+  volatile bool tint_loop_preserving_true = true;
   int3 const r = int3(rhs);
   int3 const rhs_or_one = select(r, int3(1), ((r == int3(0)) | ((lhs == int3((-2147483647 - 1))) & (r == int3(-1)))));
   if (any(((uint3((lhs | rhs_or_one)) & uint3(2147483648u)) != uint3(0u)))) {
@@ -12,6 +13,7 @@ int3 tint_mod(int3 lhs, int rhs) {
 }
 
 kernel void f() {
+  volatile bool tint_loop_preserving_true_1 = true;
   int3 const a = int3(1, 2, 3);
   int const b = 4;
   int3 const r = tint_mod(a, b);

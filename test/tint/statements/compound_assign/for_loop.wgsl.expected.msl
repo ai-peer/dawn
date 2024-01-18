@@ -25,28 +25,31 @@ struct S {
 };
 
 int idx1(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).i = ((*(tint_private_vars)).i + 1u);
   return 1;
 }
 
 int idx2(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).i = ((*(tint_private_vars)).i + 2u);
   return 1;
 }
 
 int idx3(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_2 = true;
   (*(tint_private_vars)).i = ((*(tint_private_vars)).i + 3u);
   return 1;
 }
 
 void foo(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_3 = true;
   tint_array<float, 4> a = tint_array<float, 4>{};
   {
     int const tint_symbol_2 = idx1(tint_private_vars);
     int const tint_symbol_save = tint_symbol_2;
     a[tint_symbol_save] = (a[tint_symbol_save] * 2.0f);
-    while (true) {
-      __asm__("");
+    while (tint_loop_preserving_true_3) {
       int const tint_symbol_3 = idx2(tint_private_vars);
       if (!((a[tint_symbol_3] < 10.0f))) {
         break;

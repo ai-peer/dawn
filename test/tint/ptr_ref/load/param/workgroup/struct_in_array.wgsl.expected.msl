@@ -19,12 +19,13 @@ struct str {
 };
 
 str func(threadgroup str* const pointer) {
+  volatile bool tint_loop_preserving_true = true;
   return *(pointer);
 }
 
 void tint_symbol_inner(uint local_invocation_index, threadgroup tint_array<str, 4>* const tint_symbol_2) {
-  for(uint idx = local_invocation_index; (idx < 4u); idx = (idx + 1u)) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true_1 = true;
+  for(uint idx = local_invocation_index; ((idx < 4u)) && tint_loop_preserving_true_1; idx = (idx + 1u)) {
     uint const i_1 = idx;
     str const tint_symbol_1 = str{};
     (*(tint_symbol_2))[i_1] = tint_symbol_1;
@@ -34,6 +35,7 @@ void tint_symbol_inner(uint local_invocation_index, threadgroup tint_array<str, 
 }
 
 kernel void tint_symbol(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   threadgroup tint_array<str, 4> tint_symbol_3;
   tint_symbol_inner(local_invocation_index, &(tint_symbol_3));
   return;

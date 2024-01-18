@@ -2,6 +2,7 @@
 
 using namespace metal;
 kernel void tint_symbol(device packed_float3* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   float3 v = 0.0f;
   float const scalar = v[1];
   float2 const swizzle2 = v.xz;

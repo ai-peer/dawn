@@ -23,36 +23,43 @@ struct S {
 };
 
 int idx1(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).v = ((*(tint_private_vars)).v - 1u);
   return 1;
 }
 
 int idx2(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   (*(tint_private_vars)).v = ((*(tint_private_vars)).v - 1u);
   return 2;
 }
 
 int idx3(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_2 = true;
   (*(tint_private_vars)).v = ((*(tint_private_vars)).v - 1u);
   return 3;
 }
 
 int idx4(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_3 = true;
   (*(tint_private_vars)).v = ((*(tint_private_vars)).v - 1u);
   return 4;
 }
 
 int idx5(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_4 = true;
   (*(tint_private_vars)).v = ((*(tint_private_vars)).v - 1u);
   return 0;
 }
 
 int idx6(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_5 = true;
   (*(tint_private_vars)).v = ((*(tint_private_vars)).v - 1u);
   return 2;
 }
 
 void tint_symbol_1(thread tint_private_vars_struct* const tint_private_vars, device tint_array<S, 1>* const tint_symbol_10) {
+  volatile bool tint_loop_preserving_true_6 = true;
   {
     int const tint_symbol_6 = idx1(tint_private_vars);
     int const tint_symbol_7 = idx2(tint_private_vars);
@@ -60,8 +67,7 @@ void tint_symbol_1(thread tint_private_vars_struct* const tint_private_vars, dev
     int const tint_symbol_2_save_1 = tint_symbol_7;
     int const tint_symbol_3 = idx3(tint_private_vars);
     (*(tint_symbol_10))[tint_symbol_2_save].a[tint_symbol_2_save_1][tint_symbol_3] = as_type<int>((as_type<uint>((*(tint_symbol_10))[tint_symbol_2_save].a[tint_symbol_2_save_1][tint_symbol_3]) - as_type<uint>(1)));
-    while (true) {
-      __asm__("");
+    while (tint_loop_preserving_true_6) {
       if (!(((*(tint_private_vars)).v < 10u))) {
         break;
       }

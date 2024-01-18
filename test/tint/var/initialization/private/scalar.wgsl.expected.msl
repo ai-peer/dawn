@@ -6,6 +6,7 @@ struct tint_private_vars_struct {
 };
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   return;
 }
 

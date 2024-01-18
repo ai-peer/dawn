@@ -6,6 +6,7 @@ struct tint_private_vars_struct {
 };
 
 fragment void tint_symbol(device int* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.tint_discarded = false;
   if ((*(tint_symbol_1) < 0)) {

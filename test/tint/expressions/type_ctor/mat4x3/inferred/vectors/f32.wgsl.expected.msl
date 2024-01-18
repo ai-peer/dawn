@@ -24,6 +24,7 @@ struct tint_packed_vec3_f32_array_element {
 };
 
 void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f32_array_element, 4>* const dest, float4x3 value) {
+  volatile bool tint_loop_preserving_true = true;
   (*(dest))[0u].elements = packed_float3(value[0u]);
   (*(dest))[1u].elements = packed_float3(value[1u]);
   (*(dest))[2u].elements = packed_float3(value[2u]);
@@ -31,6 +32,7 @@ void assign_and_preserve_padding(device tint_array<tint_packed_vec3_f32_array_el
 }
 
 kernel void f(device tint_array<tint_packed_vec3_f32_array_element, 4>* tint_symbol [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   tint_private_vars.m = float4x3(float3(0.0f, 1.0f, 2.0f), float3(3.0f, 4.0f, 5.0f), float3(6.0f, 7.0f, 8.0f), float3(9.0f, 10.0f, 11.0f));
   assign_and_preserve_padding(tint_symbol, tint_private_vars.m);

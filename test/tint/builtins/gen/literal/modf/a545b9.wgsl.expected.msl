@@ -7,6 +7,7 @@ struct modf_result_vec2_f16 {
   half2 whole;
 };
 void modf_a545b9() {
+  volatile bool tint_loop_preserving_true = true;
   modf_result_vec2_f16 res = modf_result_vec2_f16{.fract=half2(-0.5h), .whole=half2(-1.0h)};
 }
 
@@ -15,11 +16,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner() {
+  volatile bool tint_loop_preserving_true_1 = true;
   modf_a545b9();
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main() {
+  volatile bool tint_loop_preserving_true_2 = true;
   float4 const inner_result = vertex_main_inner();
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -27,11 +30,13 @@ vertex tint_symbol vertex_main() {
 }
 
 fragment void fragment_main() {
+  volatile bool tint_loop_preserving_true_3 = true;
   modf_a545b9();
   return;
 }
 
 kernel void compute_main() {
+  volatile bool tint_loop_preserving_true_4 = true;
   modf_a545b9();
   return;
 }

@@ -7,6 +7,7 @@ struct Uniforms {
 };
 
 kernel void tint_symbol(const constant Uniforms* tint_symbol_1 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true = true;
   float2x4 m1 = float2x4(0.0f);
   m1[(*(tint_symbol_1)).i] = float4(1.0f);
   return;

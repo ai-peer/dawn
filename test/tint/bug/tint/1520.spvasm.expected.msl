@@ -35,6 +35,7 @@ struct UniformBuffer_tint_packed_vec3 {
 };
 
 int tint_ftoi(float v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(2147483647, select(int(v), (-2147483647 - 1), (v < -2147483648.0f)), (v < 2147483520.0f));
 }
 
@@ -46,10 +47,12 @@ struct UniformBuffer {
 };
 
 int4 tint_div(int4 lhs, int4 rhs) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return (lhs / select(rhs, int4(1), ((rhs == int4(0)) | ((lhs == int4((-2147483647 - 1))) & (rhs == int4(-1))))));
 }
 
 bool test_int_S1_c0_b(const constant UniformBuffer_tint_packed_vec3* const tint_symbol_5) {
+  volatile bool tint_loop_preserving_true_2 = true;
   int unknown = 0;
   bool ok = false;
   int4 val = 0;
@@ -102,6 +105,7 @@ bool test_int_S1_c0_b(const constant UniformBuffer_tint_packed_vec3* const tint_
 }
 
 void main_1(thread tint_private_vars_struct* const tint_private_vars, const constant UniformBuffer_tint_packed_vec3* const tint_symbol_6) {
+  volatile bool tint_loop_preserving_true_3 = true;
   float4 outputColor_S0 = 0.0f;
   float4 output_S1 = 0.0f;
   float x_8_unknown = 0.0f;
@@ -185,6 +189,7 @@ struct tint_symbol_3 {
 };
 
 main_out tint_symbol_inner(bool sk_Clockwise_param, float4 vcolor_S0_param, thread tint_private_vars_struct* const tint_private_vars, const constant UniformBuffer_tint_packed_vec3* const tint_symbol_7) {
+  volatile bool tint_loop_preserving_true_4 = true;
   (*(tint_private_vars)).sk_Clockwise = sk_Clockwise_param;
   (*(tint_private_vars)).vcolor_S0 = vcolor_S0_param;
   main_1(tint_private_vars, tint_symbol_7);
@@ -193,6 +198,7 @@ main_out tint_symbol_inner(bool sk_Clockwise_param, float4 vcolor_S0_param, thre
 }
 
 fragment tint_symbol_3 tint_symbol(const constant UniformBuffer_tint_packed_vec3* tint_symbol_8 [[buffer(0)]], bool sk_Clockwise_param [[front_facing]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_5 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   main_out const inner_result = tint_symbol_inner(sk_Clockwise_param, tint_symbol_1.vcolor_S0_param, &(tint_private_vars), tint_symbol_8);
   tint_symbol_3 wrapper_result = {};

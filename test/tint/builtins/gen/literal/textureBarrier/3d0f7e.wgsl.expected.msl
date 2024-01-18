@@ -2,10 +2,12 @@
 
 using namespace metal;
 void textureBarrier_3d0f7e() {
+  volatile bool tint_loop_preserving_true = true;
   threadgroup_barrier(mem_flags::mem_texture);
 }
 
 kernel void compute_main() {
+  volatile bool tint_loop_preserving_true_1 = true;
   textureBarrier_3d0f7e();
   return;
 }

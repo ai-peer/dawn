@@ -44,6 +44,7 @@ struct FragmentOutput {
 };
 
 float4 getColor(FragmentInput tint_symbol, const constant Uniforms* const tint_symbol_6, texture2d<float, access::sample> tint_symbol_7, sampler tint_symbol_8) {
+  volatile bool tint_loop_preserving_true = true;
   float4 color = 0.0f;
   if (((*(tint_symbol_6)).color_source == 0u)) {
     color = tint_symbol.color;
@@ -76,12 +77,14 @@ struct tint_symbol_4 {
 };
 
 FragmentOutput tint_symbol_1_inner(FragmentInput tint_symbol) {
+  volatile bool tint_loop_preserving_true_1 = true;
   FragmentOutput output = {};
   output.color = float4(1.0f, 0.0f, 0.0f, 1.0f);
   return output;
 }
 
 fragment tint_symbol_4 tint_symbol_1(float4 position [[position]], tint_symbol_3 tint_symbol_2 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   FragmentInput const tint_symbol_5 = {.position=position, .view_position=tint_symbol_2.view_position, .normal=tint_symbol_2.normal, .uv=tint_symbol_2.uv, .color=tint_symbol_2.color};
   FragmentOutput const inner_result = tint_symbol_1_inner(tint_symbol_5);
   tint_symbol_4 wrapper_result = {};

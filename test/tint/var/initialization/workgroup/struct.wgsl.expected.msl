@@ -7,6 +7,7 @@ struct S {
 };
 
 void tint_symbol_inner(uint local_invocation_index, threadgroup S* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true = true;
   {
     S const tint_symbol_1 = S{};
     *(tint_symbol_2) = tint_symbol_1;
@@ -15,6 +16,7 @@ void tint_symbol_inner(uint local_invocation_index, threadgroup S* const tint_sy
 }
 
 kernel void tint_symbol(uint local_invocation_index [[thread_index_in_threadgroup]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   threadgroup S tint_symbol_3;
   tint_symbol_inner(local_invocation_index, &(tint_symbol_3));
   return;

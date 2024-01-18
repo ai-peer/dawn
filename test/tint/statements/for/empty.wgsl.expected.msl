@@ -2,8 +2,8 @@
 
 using namespace metal;
 void f() {
-  for(; false; ) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  for(; (false) && tint_loop_preserving_true; ) {
   }
 }
 

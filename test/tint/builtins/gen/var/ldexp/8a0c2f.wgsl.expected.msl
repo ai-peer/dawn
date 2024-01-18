@@ -2,6 +2,7 @@
 
 using namespace metal;
 void ldexp_8a0c2f(device half4* const tint_symbol_1) {
+  volatile bool tint_loop_preserving_true = true;
   half4 arg_0 = half4(1.0h);
   half4 res = ldexp(arg_0, int4(1));
   *(tint_symbol_1) = res;
@@ -12,11 +13,13 @@ struct tint_symbol {
 };
 
 float4 vertex_main_inner(device half4* const tint_symbol_2) {
+  volatile bool tint_loop_preserving_true_1 = true;
   ldexp_8a0c2f(tint_symbol_2);
   return float4(0.0f);
 }
 
 vertex tint_symbol vertex_main(device half4* tint_symbol_3 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_2 = true;
   float4 const inner_result = vertex_main_inner(tint_symbol_3);
   tint_symbol wrapper_result = {};
   wrapper_result.value = inner_result;
@@ -24,11 +27,13 @@ vertex tint_symbol vertex_main(device half4* tint_symbol_3 [[buffer(0)]]) {
 }
 
 fragment void fragment_main(device half4* tint_symbol_4 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_3 = true;
   ldexp_8a0c2f(tint_symbol_4);
   return;
 }
 
 kernel void compute_main(device half4* tint_symbol_5 [[buffer(0)]]) {
+  volatile bool tint_loop_preserving_true_4 = true;
   ldexp_8a0c2f(tint_symbol_5);
   return;
 }

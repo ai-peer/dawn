@@ -2,10 +2,12 @@
 
 using namespace metal;
 void workgroupBarrier_a17f7f() {
+  volatile bool tint_loop_preserving_true = true;
   threadgroup_barrier(mem_flags::mem_threadgroup);
 }
 
 kernel void compute_main() {
+  volatile bool tint_loop_preserving_true_1 = true;
   workgroupBarrier_a17f7f();
   return;
 }

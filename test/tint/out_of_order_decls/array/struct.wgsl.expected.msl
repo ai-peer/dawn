@@ -23,6 +23,7 @@ struct tint_private_vars_struct {
 };
 
 fragment void f() {
+  volatile bool tint_loop_preserving_true = true;
   thread tint_private_vars_struct tint_private_vars = {};
   S const tint_symbol = S{.m=1};
   tint_private_vars.A[0] = tint_symbol;

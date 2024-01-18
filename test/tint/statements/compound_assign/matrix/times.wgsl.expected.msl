@@ -6,6 +6,7 @@ struct S {
 };
 
 void foo(device S* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_symbol)).a = ((*(tint_symbol)).a * float4x4(float4(0.0f), float4(0.0f), float4(0.0f), float4(0.0f)));
 }
 

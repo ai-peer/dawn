@@ -58,6 +58,7 @@ TEST_F(MslASTPrinterTest, Emit_FunctionConstAssert) {
 
 using namespace metal;
 void f() {
+  volatile bool tint_loop_preserving_true = true;
 }
 
 )");

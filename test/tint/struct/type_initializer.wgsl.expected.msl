@@ -37,6 +37,7 @@ struct T {
 };
 
 kernel void tint_symbol() {
+  volatile bool tint_loop_preserving_true = true;
   int const x = 42;
   S1 const empty = S1{};
   S1 const nonempty = S1{.a=1, .b=2, .c=3, .d=4};

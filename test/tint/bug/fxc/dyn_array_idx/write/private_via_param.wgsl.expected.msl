@@ -31,10 +31,12 @@ struct Result {
 };
 
 void x(thread S* const p, const constant UBO* const tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   (*(p)).data[(*(tint_symbol)).dynamic_idx] = 1;
 }
 
 kernel void f(const constant UBO* tint_symbol_1 [[buffer(0)]], device Result* tint_symbol_2 [[buffer(1)]]) {
+  volatile bool tint_loop_preserving_true_1 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   x(&(tint_private_vars.s), tint_symbol_1);
   (*(tint_symbol_2)).out = tint_private_vars.s.data[3];

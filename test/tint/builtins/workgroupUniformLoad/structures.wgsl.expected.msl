@@ -25,6 +25,7 @@ struct Outer {
 };
 
 Outer tint_workgroupUniformLoad(threadgroup Outer* const p) {
+  volatile bool tint_loop_preserving_true = true;
   threadgroup_barrier(mem_flags::mem_threadgroup);
   Outer const result = *(p);
   threadgroup_barrier(mem_flags::mem_threadgroup);
@@ -32,6 +33,7 @@ Outer tint_workgroupUniformLoad(threadgroup Outer* const p) {
 }
 
 Outer foo(threadgroup Outer* const tint_symbol) {
+  volatile bool tint_loop_preserving_true_1 = true;
   return tint_workgroupUniformLoad(tint_symbol);
 }
 

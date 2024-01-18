@@ -10,6 +10,7 @@ struct S1 {
 };
 
 fragment void f() {
+  volatile bool tint_loop_preserving_true = true;
   S1 v = {};
   return;
 }

@@ -2,10 +2,10 @@
 
 using namespace metal;
 void foo(texture2d<int, access::read_write> tint_symbol) {
+  volatile bool tint_loop_preserving_true = true;
   {
     int i = 0;
-    while (true) {
-      __asm__("");
+    while (tint_loop_preserving_true) {
       if (!((i < 3))) {
         break;
       }

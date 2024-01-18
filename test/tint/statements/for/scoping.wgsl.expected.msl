@@ -2,8 +2,8 @@
 
 using namespace metal;
 void f() {
-  for(int must_not_collide = 0; ; ) {
-    __asm__("");
+  volatile bool tint_loop_preserving_true = true;
+  for(int must_not_collide = 0; tint_loop_preserving_true; ) {
     break;
   }
   int must_not_collide = 0;

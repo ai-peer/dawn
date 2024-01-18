@@ -6,6 +6,7 @@ struct tint_private_vars_struct {
 };
 
 void main_1(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true = true;
   (*(tint_private_vars)).gl_Position = float4(0.0f);
   return;
 }
@@ -19,12 +20,14 @@ struct tint_symbol_1 {
 };
 
 main_out tint_symbol_inner(thread tint_private_vars_struct* const tint_private_vars) {
+  volatile bool tint_loop_preserving_true_1 = true;
   main_1(tint_private_vars);
   main_out const tint_symbol_2 = {.gl_Position=(*(tint_private_vars)).gl_Position};
   return tint_symbol_2;
 }
 
 vertex tint_symbol_1 tint_symbol() {
+  volatile bool tint_loop_preserving_true_2 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   main_out const inner_result = tint_symbol_inner(&(tint_private_vars));
   tint_symbol_1 wrapper_result = {};

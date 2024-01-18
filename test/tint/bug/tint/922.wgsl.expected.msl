@@ -26,6 +26,7 @@ struct tint_private_vars_struct {
 };
 
 int tint_ftoi(float v) {
+  volatile bool tint_loop_preserving_true = true;
   return select(2147483647, select(int(v), (-2147483647 - 1), (v < -2147483648.0f)), (v < 2147483520.0f));
 }
 
@@ -67,6 +68,7 @@ struct VertexOutput {
 };
 
 float3 Mat4x3GetCol0_(Mat4x3_ m) {
+  volatile bool tint_loop_preserving_true_1 = true;
   Mat4x3_ m1 = {};
   m1 = m;
   Mat4x3_ const x_e2 = m1;
@@ -76,6 +78,7 @@ float3 Mat4x3GetCol0_(Mat4x3_ m) {
 }
 
 float3 Mat4x3GetCol1_(Mat4x3_ m2) {
+  volatile bool tint_loop_preserving_true_2 = true;
   Mat4x3_ m3 = {};
   m3 = m2;
   Mat4x3_ const x_e2 = m3;
@@ -85,6 +88,7 @@ float3 Mat4x3GetCol1_(Mat4x3_ m2) {
 }
 
 float3 Mat4x3GetCol2_(Mat4x3_ m4) {
+  volatile bool tint_loop_preserving_true_3 = true;
   Mat4x3_ m5 = {};
   m5 = m4;
   Mat4x3_ const x_e2 = m5;
@@ -94,6 +98,7 @@ float3 Mat4x3GetCol2_(Mat4x3_ m4) {
 }
 
 float3 Mat4x3GetCol3_(Mat4x3_ m6) {
+  volatile bool tint_loop_preserving_true_4 = true;
   Mat4x3_ m7 = {};
   m7 = m6;
   Mat4x3_ const x_e2 = m7;
@@ -103,6 +108,7 @@ float3 Mat4x3GetCol3_(Mat4x3_ m6) {
 }
 
 float4 Mul(Mat4x4_ m8, float4 v) {
+  volatile bool tint_loop_preserving_true_5 = true;
   Mat4x4_ m9 = {};
   float4 v1 = 0.0f;
   m9 = m8;
@@ -119,6 +125,7 @@ float4 Mul(Mat4x4_ m8, float4 v) {
 }
 
 float3 Mul1(Mat4x3_ m10, float4 v2) {
+  volatile bool tint_loop_preserving_true_6 = true;
   Mat4x3_ m11 = {};
   float4 v3 = 0.0f;
   m11 = m10;
@@ -133,6 +140,7 @@ float3 Mul1(Mat4x3_ m10, float4 v2) {
 }
 
 float2 Mul2(Mat4x2_ m12, float4 v4) {
+  volatile bool tint_loop_preserving_true_7 = true;
   Mat4x2_ m13 = {};
   float4 v5 = 0.0f;
   m13 = m12;
@@ -145,6 +153,7 @@ float2 Mul2(Mat4x2_ m12, float4 v4) {
 }
 
 float4 Mul3(float3 v6, Mat4x3_ m14) {
+  volatile bool tint_loop_preserving_true_8 = true;
   float3 v7 = 0.0f;
   Mat4x3_ m15 = {};
   v7 = v6;
@@ -165,6 +174,7 @@ float4 Mul3(float3 v6, Mat4x3_ m14) {
 }
 
 Mat4x4_ x_Mat4x4_(float n) {
+  volatile bool tint_loop_preserving_true_9 = true;
   float n1 = 0.0f;
   Mat4x4_ o = {};
   n1 = n;
@@ -181,6 +191,7 @@ Mat4x4_ x_Mat4x4_(float n) {
 }
 
 Mat4x4_ x_Mat4x4_1(Mat4x3_ m16) {
+  volatile bool tint_loop_preserving_true_10 = true;
   Mat4x3_ m17 = {};
   Mat4x4_ o1 = {};
   m17 = m16;
@@ -197,6 +208,7 @@ Mat4x4_ x_Mat4x4_1(Mat4x3_ m16) {
 }
 
 Mat4x4_ x_Mat4x4_2(Mat4x2_ m18) {
+  volatile bool tint_loop_preserving_true_11 = true;
   Mat4x2_ m19 = {};
   Mat4x4_ o2 = {};
   m19 = m18;
@@ -211,6 +223,7 @@ Mat4x4_ x_Mat4x4_2(Mat4x2_ m18) {
 }
 
 Mat4x3_ x_Mat4x3_(float n2) {
+  volatile bool tint_loop_preserving_true_12 = true;
   float n3 = 0.0f;
   Mat4x3_ o3 = {};
   n3 = n2;
@@ -225,6 +238,7 @@ Mat4x3_ x_Mat4x3_(float n2) {
 }
 
 Mat4x3_ x_Mat4x3_1(Mat4x4_ m20) {
+  volatile bool tint_loop_preserving_true_13 = true;
   Mat4x4_ m21 = {};
   Mat4x3_ o4 = {};
   m21 = m20;
@@ -239,6 +253,7 @@ Mat4x3_ x_Mat4x3_1(Mat4x4_ m20) {
 }
 
 void main1(thread tint_private_vars_struct* const tint_private_vars, const constant ub_PacketParams* const tint_symbol_5, const constant ub_SceneParams* const tint_symbol_6, const constant ub_MaterialParams* const tint_symbol_7) {
+  volatile bool tint_loop_preserving_true_14 = true;
   Mat4x3_ t_PosMtx = {};
   float2 t_TexSpaceCoord = 0.0f;
   float const x_e15 = (*(tint_private_vars)).a_PosMtxIdx1;
@@ -300,6 +315,7 @@ struct tint_symbol_3 {
 };
 
 VertexOutput tint_symbol_inner(float3 a_Position, float2 a_UV, float4 a_Color, float3 a_Normal, float a_PosMtxIdx, thread tint_private_vars_struct* const tint_private_vars, const constant ub_PacketParams* const tint_symbol_8, const constant ub_SceneParams* const tint_symbol_9, const constant ub_MaterialParams* const tint_symbol_10) {
+  volatile bool tint_loop_preserving_true_15 = true;
   (*(tint_private_vars)).a_Position1 = a_Position;
   (*(tint_private_vars)).a_UV1 = a_UV;
   (*(tint_private_vars)).a_Color1 = a_Color;
@@ -314,6 +330,7 @@ VertexOutput tint_symbol_inner(float3 a_Position, float2 a_UV, float4 a_Color, f
 }
 
 vertex tint_symbol_3 tint_symbol(const constant ub_PacketParams* tint_symbol_11 [[buffer(0)]], const constant ub_SceneParams* tint_symbol_12 [[buffer(1)]], const constant ub_MaterialParams* tint_symbol_13 [[buffer(2)]], tint_symbol_2 tint_symbol_1 [[stage_in]]) {
+  volatile bool tint_loop_preserving_true_16 = true;
   thread tint_private_vars_struct tint_private_vars = {};
   VertexOutput const inner_result = tint_symbol_inner(tint_symbol_1.a_Position, tint_symbol_1.a_UV, tint_symbol_1.a_Color, tint_symbol_1.a_Normal, tint_symbol_1.a_PosMtxIdx, &(tint_private_vars), tint_symbol_11, tint_symbol_12, tint_symbol_13);
   tint_symbol_3 wrapper_result = {};
