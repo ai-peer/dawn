@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94ef1547_81009594",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-01-18T23:53:07Z",
+      "side": 1,
+      "message": "PTAL! This makes a massive difference in the test pages I\u0027ve tried it with. (In one case I measured the validation as being over 400x faster due to increased batching.)",
+      "revId": "22010f96a8a35a558a2c595dfb1c080667fad782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dba78f37_03a39d0c",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1001591
+      },
+      "writtenOn": "2024-01-18T23:53:07Z",
+      "side": 1,
+      "message": "FYI: I would have preferred to copy the indirectOffset and numIndexBufferElements here to a struct with properly named members but the struct alignment for a { uint32_t, uint64_t } didn\u0027t line up with the WGSL struct\u0027s binary layout. I could have made it work with additional padding, but given that we\u0027re allocating an additional 8 bytes already for every draw validation with this patch I wanted to try and keep the memory impact to a minimum.",
+      "revId": "22010f96a8a35a558a2c595dfb1c080667fad782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
