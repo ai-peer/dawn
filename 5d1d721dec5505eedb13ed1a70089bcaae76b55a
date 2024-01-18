@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a3789bd_023cdde3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-18T17:44:00Z",
+      "side": 1,
+      "message": "Hi Corentin,\nCould you please take a look?\n\nYou will see the rendered version on this link:\nhttps://dawn.googlesource.com/dawn/+/refs/changes/21/170421/1/docs/dangling-pointer-detector.md",
+      "revId": "5d1d721dec5505eedb13ed1a70089bcaae76b55a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
