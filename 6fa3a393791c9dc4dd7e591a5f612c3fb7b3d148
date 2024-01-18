@@ -96,6 +96,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "a85676b5_e36ba459",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T16:53:00Z",
+      "side": 1,
+      "message": "I believe the maximum limits we advertise have to be this way, otherwise if you you all the vertex attributes AND Vertex_ID, the d3d backend will fail to compile the shader",
+      "parentUuid": "be9649e4_3d1d7399",
+      "range": {
+        "startLine": 17,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "6fa3a393791c9dc4dd7e591a5f612c3fb7b3d148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7b6c92_9de0e512",
