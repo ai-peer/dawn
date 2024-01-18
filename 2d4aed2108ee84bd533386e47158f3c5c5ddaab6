@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "5c956db9_4ff017f7",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T18:57:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "48602f80_a44c2f85",
+      "range": {
+        "startLine": 365,
+        "startChar": 0,
+        "endLine": 368,
+        "endChar": 29
+      },
+      "revId": "2d4aed2108ee84bd533386e47158f3c5c5ddaab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f63f3cb0_c0a6864c",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-01-18T13:50:35Z",
       "side": 1,
       "message": "Remove, covered by above comment?",
+      "revId": "2d4aed2108ee84bd533386e47158f3c5c5ddaab6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a8ebdef5_35ed9ae6",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T18:57:47Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f63f3cb0_c0a6864c",
       "revId": "2d4aed2108ee84bd533386e47158f3c5c5ddaab6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
