@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "3fde82eebd7469fefc13e23f6e8614e17393b09c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "61c5a012_ba35c60e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T16:16:34Z",
+      "side": 1,
+      "message": "LGTM - I\u0027ll just submit this to avoid merge conflicts if someone uses the old serial.",
+      "revId": "3fde82eebd7469fefc13e23f6e8614e17393b09c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
