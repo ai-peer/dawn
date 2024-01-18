@@ -48,6 +48,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "ab3def08_52210983",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-18T03:09:45Z",
+      "side": 1,
+      "message": "Oh I am not proposing anything for D3D. I am just trying to align with the current WebGPU SPEC, which says `attrib.shaderLocation is \u003c device.[[device]].[[limits]].maxVertexAttributes.`. I can only choose 30 instead of 32 as `maxVertexAttributes` on D3D because the vertex shader with 32 `float32x4` user-defined inputs and `SV_VertexID` or `SV_InstanceID` cannot be compiled with FXC or DXC.\n\nNow In WebGPU SPEC only user-defined variables are counted and the slots for built-in variables are always reserved (for example, `maxInterStageShaderVariables` and `maxInterStageShaderComponents`). I think such rules are clear and easy to understand and we should keep them.",
+      "parentUuid": "f34b7226_254f10a2",
+      "range": {
+        "startLine": 17,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "6fa3a393791c9dc4dd7e591a5f612c3fb7b3d148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6a7b6c92_9de0e512",
