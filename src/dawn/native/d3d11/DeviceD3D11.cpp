@@ -121,7 +121,10 @@ ResultOrError<Ref<Device>> Device::Create(AdapterBase* adapter,
 }
 
 MaybeError Device::Initialize(const UnpackedPtr<DeviceDescriptor>& descriptor) {
-    DAWN_TRY_ASSIGN(mD3d11Device, ToBackend(GetPhysicalDevice())->CreateD3D11Device());
+    DAWN_TRY_ASSIGN(
+        mD3d11Device,
+        ToBackend(GetPhysicalDevice())
+            ->CreateD3D11Device(GetAdapter()->GetInstance()->IsBackendValidationEnabled()));
     DAWN_ASSERT(mD3d11Device != nullptr);
 
     mIsDebugLayerEnabled = IsDebugLayerEnabled(mD3d11Device);
@@ -339,7 +342,7 @@ MaybeError Device::CheckDebugLayerAndGenerateErrors() {
 }
 
 void Device::AppendDebugLayerMessages(ErrorData* error) {
-    if (!GetPhysicalDevice()->GetInstance()->IsBackendValidationEnabled()) {
+    if (!GetAdapter()->GetInstance()->IsBackendValidationEnabled()) {
         return;
     }
 
