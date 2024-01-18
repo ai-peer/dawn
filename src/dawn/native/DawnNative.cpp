@@ -189,24 +189,6 @@ const ToggleInfo* Instance::GetToggleInfo(const char* toggleName) {
     return mImpl->GetToggleInfo(toggleName);
 }
 
-void Instance::EnableBackendValidation(bool enableBackendValidation) {
-    if (enableBackendValidation) {
-        mImpl->SetBackendValidationLevel(BackendValidationLevel::Full);
-    }
-}
-
-void Instance::SetBackendValidationLevel(BackendValidationLevel level) {
-    mImpl->SetBackendValidationLevel(level);
-}
-
-void Instance::EnableBeginCaptureOnStartup(bool beginCaptureOnStartup) {
-    mImpl->EnableBeginCaptureOnStartup(beginCaptureOnStartup);
-}
-
-void Instance::EnableAdapterBlocklist(bool enable) {
-    mImpl->EnableAdapterBlocklist(enable);
-}
-
 uint64_t Instance::GetDeviceCountForTesting() const {
     return mImpl->GetDeviceCountForTesting();
 }

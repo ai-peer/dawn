@@ -172,16 +172,6 @@ class DAWN_NATIVE_EXPORT Instance {
 
     const ToggleInfo* GetToggleInfo(const char* toggleName);
 
-    // Enables backend validation layers
-    void EnableBackendValidation(bool enableBackendValidation);
-    void SetBackendValidationLevel(BackendValidationLevel validationLevel);
-
-    // Enable debug capture on Dawn startup
-    void EnableBeginCaptureOnStartup(bool beginCaptureOnStartup);
-
-    // Enable / disable the adapter blocklist.
-    void EnableAdapterBlocklist(bool enable);
-
     uint64_t GetDeviceCountForTesting() const;
 
     // Returns the underlying WGPUInstance object.
