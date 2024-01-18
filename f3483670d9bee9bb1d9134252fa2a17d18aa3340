@@ -194,6 +194,30 @@
       },
       "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8e5647a4_6ba452dc",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-18T11:13:04Z",
+      "side": 1,
+      "message": "GL can support multiple push constants per module but the other backends can\u0027t. Ideally the transforms should make sure to always add to the same push constant block.",
+      "parentUuid": "232d7d7a_aba914e6",
+      "range": {
+        "startLine": 628,
+        "startChar": 24,
+        "endLine": 628,
+        "endChar": 80
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
