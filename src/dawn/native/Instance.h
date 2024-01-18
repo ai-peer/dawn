@@ -57,7 +57,6 @@ class Platform;
 
 namespace dawn::native {
 
-class AHBFunctions;
 class CallbackTaskManager;
 class DeviceBase;
 class Surface;
@@ -86,8 +85,6 @@ class InstanceBase final : public RefCountedWithExternalCount {
     // All systems adapters that can be found are returned if no options are passed.
     // Otherwise, returns adapters based on the `options`.
     std::vector<Ref<AdapterBase>> EnumerateAdapters(const RequestAdapterOptions* options = nullptr);
-
-    size_t GetPhysicalDeviceCountForTesting() const;
 
     // Used to handle error that happen up to device creation.
     bool ConsumedError(MaybeError maybeError);
@@ -154,7 +151,6 @@ class InstanceBase final : public RefCountedWithExternalCount {
 
     // Get backend-independent libraries that need to be loaded dynamically.
     const X11Functions* GetOrLoadX11Functions();
-    const AHBFunctions* GetOrLoadAHBFunctions();
 
     // Dawn API
     Surface* APICreateSurface(const SurfaceDescriptor* descriptor);
@@ -193,7 +189,7 @@ class InstanceBase final : public RefCountedWithExternalCount {
     Ref<AdapterBase> CreateAdapter(Ref<PhysicalDeviceBase> physicalDevice,
                                    FeatureLevel featureLevel,
                                    const DawnTogglesDescriptor* requiredAdapterToggles,
-                                   wgpu::PowerPreference powerPreference) const;
+                                   wgpu::PowerPreference powerPreference);
 
     void GatherWGSLFeatures(const DawnWGSLBlocklist* wgslBlocklist);
     void ConsumeError(std::unique_ptr<ErrorData> error);
@@ -223,9 +219,6 @@ class InstanceBase final : public RefCountedWithExternalCount {
 #if defined(DAWN_USE_X11)
     std::unique_ptr<X11Functions> mX11Functions;
 #endif  // defined(DAWN_USE_X11)
-#if DAWN_PLATFORM_IS(ANDROID)
-    std::unique_ptr<AHBFunctions> mAHBFunctions;
-#endif  // DAWN_PLATFORM_IS(ANDROID)
 
     Ref<CallbackTaskManager> mCallbackTaskManager;
     EventManager mEventManager;
