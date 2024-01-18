@@ -94,7 +94,7 @@ MaybeError PhysicalDevice::InitializeImpl() {
         mAdapterType = wgpu::AdapterType::IntegratedGPU;
     }
 
-    if (GetInstance()->IsAdapterBlocklistEnabled()) {
+    if (true /*GetInstance()->IsAdapterBlocklistEnabled()*/) {
 #if DAWN_PLATFORM_IS(I386)
         DAWN_INVALID_IF(
             mDeviceInfo.shaderModel >= 60,
@@ -381,13 +381,15 @@ FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     // InitializeSupportedFeaturesImpl.
     if (feature == wgpu::FeatureName::ShaderF16 && !toggles.IsEnabled(Toggle::UseDXC)) {
         return FeatureValidationResult(absl::StrFormat(
-            "Feature %s requires DXC for D3D12.", GetInstance()->GetFeatureInfo(feature)->name));
+            "Feature %s requires DXC for D3D12.", dawn::native::GetFeatureInfo(feature)->name));
     }
     return {};
 }
 
 MaybeError PhysicalDevice::InitializeDebugLayerFilters() {
-    if (!GetInstance()->IsBackendValidationEnabled()) {
+    // If the debug layer is not installed, return immediately.
+    ComPtr<ID3D12InfoQueue> infoQueue;
+    if (FAILED(mD3d12Device.As(&infoQueue))) {
         return {};
     }
 
@@ -462,10 +464,6 @@ MaybeError PhysicalDevice::InitializeDebugLayerFilters() {
     filter.DenyList.NumIDs = ARRAYSIZE(denyIds);
     filter.DenyList.pIDList = denyIds;
 
-    ComPtr<ID3D12InfoQueue> infoQueue;
-    DAWN_TRY(CheckHRESULT(mD3d12Device.As(&infoQueue),
-                          "D3D12 QueryInterface ID3D12Device to ID3D12InfoQueue"));
-
     // To avoid flooding the console, a storage-filter is also used to
     // prevent messages from getting logged.
     DAWN_TRY(
@@ -478,10 +476,6 @@ MaybeError PhysicalDevice::InitializeDebugLayerFilters() {
 }
 
 void PhysicalDevice::CleanUpDebugLayerFilters() {
-    if (!GetInstance()->IsBackendValidationEnabled()) {
-        return;
-    }
-
     // The device may not exist if this adapter failed to initialize.
     if (mD3d12Device == nullptr) {
         return;
@@ -497,7 +491,8 @@ void PhysicalDevice::CleanUpDebugLayerFilters() {
     infoQueue->PopStorageFilter();
 }
 
-void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adapterToggles) const {
+void PhysicalDevice::SetupBackendAdapterToggles(dawn::platform::Platform* platform,
+                                                TogglesState* adapterToggles) const {
     // Check for use_dxc toggle
 #ifdef DAWN_USE_BUILT_DXC
     // Default to using DXC. If shader model < 6.0, though, we must use FXC.
@@ -505,8 +500,7 @@ void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adapterToggles) co
         adapterToggles->ForceSet(Toggle::UseDXC, false);
     }
 
-    bool useDxc =
-        GetInstance()->GetPlatform()->IsFeatureEnabled(dawn::platform::Features::kWebGPUUseDXC);
+    bool useDxc = platform->IsFeatureEnabled(dawn::platform::Features::kWebGPUUseDXC);
     adapterToggles->Default(Toggle::UseDXC, useDxc);
 #else
     // Default to using FXC
@@ -517,7 +511,8 @@ void PhysicalDevice::SetupBackendAdapterToggles(TogglesState* adapterToggles) co
 #endif
 }
 
-void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) const {
+void PhysicalDevice::SetupBackendDeviceToggles(dawn::platform::Platform* platform,
+                                               TogglesState* deviceToggles) const {
     const bool useResourceHeapTier2 = (GetDeviceInfo().resourceHeapTier >= 2);
     deviceToggles->Default(Toggle::UseD3D12ResourceHeapTier2, useResourceHeapTier2);
     deviceToggles->Default(Toggle::UseD3D12RenderPass, GetDeviceInfo().supportsRenderPass);
