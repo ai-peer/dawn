@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f7738498_ddc5f678",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-18T14:50:41Z",
+      "side": 1,
+      "message": "That\u0027ll work for a single transform, but it\u0027s not clear to me how that\u0027ll work for the multiple transform case (see above).",
+      "parentUuid": "d65b712f_506c5c0c",
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a06ff351_00b83b42",
@@ -48,6 +66,23 @@
       "writtenOn": "2024-01-18T11:03:41Z",
       "side": 1,
       "message": "Transform logic looks good. A few questions about transform outputs, and adding locations to push constants.",
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2262e754_f62cee84",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-18T14:50:41Z",
+      "side": 1,
+      "message": "Thanks for your review. Happy to meet to chat or write up a one-pager if it helps.",
       "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -169,6 +204,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "fd03fba2_dad23ce2",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-18T14:50:41Z",
+      "side": 1,
+      "message": "Sure, will give that a shot.\n\nNote that this transform was shamelessly forked from the FirstIndexOffset transform, which was using this mechanism. If it helps, you can diff the two for review purposes.",
+      "parentUuid": "56edf93b_0ad417df",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 6
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "ca6111bd_d62ef9c3",
         "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
         "patchSetId": 14
@@ -251,6 +310,30 @@
       "side": 1,
       "message": "Thank you. @senorblanco@chromium.org - do you think we can make the transform work without supporting the location attribute?",
       "parentUuid": "8e5647a4_6ba452dc",
+      "range": {
+        "startLine": 628,
+        "startChar": 24,
+        "endLine": 628,
+        "endChar": 80
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3cf961fb_25b7f4ba",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-18T14:50:41Z",
+      "side": 1,
+      "message": "OK, here\u0027s the situation as I understand it: GL has multiple uniforms, each with its own location. Each uniform is maximum of a vec4 in size. The other backends have a single push constant block (struct) which can be updated with a byte offset and size. (Correct me if I\u0027m wrong, I\u0027ve only looked at Vulkan.)\n\nSo two options I see for unifying them are:\n\n1) (current implementation) Have a single undecorated struct and break it up into multiple uniforms for GL. Access is via byte offsets into that struct.\n\n2) (this patch) Have multiple decorated push constants a la GL, and agglomerate them into a struct for the other backends. Access via location for GL, and by computed byte offsets for the other backends.\n\nThe questions I have for #1 are: how does this map to multiple transforms that each want to add to the push constant block without knowing about each other? What does the each transform write out in the WGSL that satisfies the validator? How does Dawn know what the byte offsets of the resulting combined block are? How does the GL backend assign locations to those byte offsets, and how do we ensure that they always fall on a vec4 boundary?\n\nWith #2, each can transform can write out the push constant variables it needs, decorated by Dawn-provided location, satisfying the validator. The only downside is that the Dawn side must convert those locations into byte offsets for the non-GL backends. However, this could be done by assuming a fixed layout (e.g., std430).\n\nHappy to discuss any alternatives I\u0027ve missed.",
+      "parentUuid": "e30618d8_d3a8ceda",
       "range": {
         "startLine": 628,
         "startChar": 24,
