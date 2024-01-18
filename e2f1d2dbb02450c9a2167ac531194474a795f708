@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2ff32cc8_6e312369",
+        "filename": "src/dawn/native/EventManager.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 447,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T17:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "cadd1791_68bd9661",
+      "range": {
+        "startLine": 442,
+        "startChar": 10,
+        "endLine": 447,
+        "endChar": 20
+      },
+      "revId": "e2f1d2dbb02450c9a2167ac531194474a795f708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9154c827_ae13bca4",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-18T01:06:42Z",
       "side": 1,
       "message": "Shouldn\u0027t this be `WireAdapterTestBase::SetUp()`?",
+      "range": {
+        "startLine": 70,
+        "startChar": 8,
+        "endLine": 70,
+        "endChar": 16
+      },
+      "revId": "e2f1d2dbb02450c9a2167ac531194474a795f708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e51299a8_29e276c1",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T17:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9154c827_ae13bca4",
       "range": {
         "startLine": 70,
         "startChar": 8,
@@ -87,6 +135,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d23c714b_6c089587",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 120,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T17:19:24Z",
+      "side": 1,
+      "message": "this one I still needed because otherwise the procs to do wgpuAdapterRelease aren\u0027t set anymore in the d-tor.",
+      "parentUuid": "b3e45be4_2cade59f",
+      "range": {
+        "startLine": 117,
+        "startChar": 4,
+        "endLine": 120,
+        "endChar": 5
+      },
+      "revId": "e2f1d2dbb02450c9a2167ac531194474a795f708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9f65eed0_eec9656a",
@@ -100,6 +172,30 @@
       "writtenOn": "2024-01-18T01:06:42Z",
       "side": 1,
       "message": "nit. I think we should just split this into `RequestDeviceNullptr`, `RequestDeviceEmpty`, and drop the second half since its sort of duplicated with `RequestDeviceSuccess` below.",
+      "range": {
+        "startLine": 128,
+        "startChar": 0,
+        "endLine": 128,
+        "endChar": 57
+      },
+      "revId": "e2f1d2dbb02450c9a2167ac531194474a795f708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e692825b_e95798ba",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T17:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9f65eed0_eec9656a",
       "range": {
         "startLine": 128,
         "startChar": 0,
@@ -133,6 +229,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "b277f68f_a64d72ce",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 198,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T17:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4e51731b_60b71ac0",
+      "range": {
+        "startLine": 197,
+        "startChar": 4,
+        "endLine": 198,
+        "endChar": 22
+      },
+      "revId": "e2f1d2dbb02450c9a2167ac531194474a795f708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8a961b5b_2501af80",
@@ -146,6 +266,30 @@
       "writtenOn": "2024-01-18T01:06:42Z",
       "side": 1,
       "message": "[1]",
+      "range": {
+        "startLine": 233,
+        "startChar": 4,
+        "endLine": 234,
+        "endChar": 22
+      },
+      "revId": "e2f1d2dbb02450c9a2167ac531194474a795f708",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94f0172b_3a1a1e2a",
+        "filename": "src/dawn/tests/unittests/wire/WireAdapterTests.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 234,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-18T17:19:24Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8a961b5b_2501af80",
       "range": {
         "startLine": 233,
         "startChar": 4,
