@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7314405c_4b3ee19f",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ab06d4a3_1353439d",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "737e5720_87e3b628",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-17T23:59:38Z",
       "side": 1,
       "message": "```suggestion\n            // So even when r.disableSymbolRenaming \u003d\u003d false, if the entry point name is \"main\" or other GLSL\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80c7c57a_67a6900e",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 366,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "737e5720_87e3b628",
       "revId": "3038b37a361beff435da9971a793aa92180efa52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d883e8cb_785260a9",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 367,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "43c8b689_2de0039c",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4ed8fb4d_58f821a2",
@@ -86,6 +140,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1083a47b_fdfd90f4",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 368,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4ed8fb4d_58f821a2",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fc3f115b_d4f38946",
@@ -99,6 +171,24 @@
       "writtenOn": "2024-01-17T23:59:38Z",
       "side": 1,
       "message": "```suggestion\n            // Even if disableSymbolRenaming \u003d\u003d true, Tint renames GLSL reserved keywords.\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "639d535e_60b55551",
+        "filename": "src/dawn/native/opengl/ShaderModuleGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 370,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc3f115b_d4f38946",
       "revId": "3038b37a361beff435da9971a793aa92180efa52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -126,6 +216,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bf003940_ec28ecdd",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2237,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dc8460a7_507fc97e",
+      "range": {
+        "startLine": 2237,
+        "startChar": 44,
+        "endLine": 2237,
+        "endChar": 49
+      },
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "9e0d77ae_82019e49",
@@ -139,6 +253,24 @@
       "writtenOn": "2024-01-17T23:59:38Z",
       "side": 1,
       "message": "```suggestion\n// We need to make sure when the entry point is \"main\" or other GLSL reserved keyword,\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ec578b2b_5087972e",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2238,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9e0d77ae_82019e49",
       "revId": "3038b37a361beff435da9971a793aa92180efa52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -160,6 +292,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fcdfe93c_0538e367",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2239,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "160879ee_2e9d8081",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ff42ce3_5d90fb36",
@@ -173,6 +323,24 @@
       "writtenOn": "2024-01-17T23:59:38Z",
       "side": 1,
       "message": "```suggestion\n        // Entry point is a GLSLreserved keyword other than \"main\".\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4c7bfbde_6a821486",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2252,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ff42ce3_5d90fb36",
       "revId": "3038b37a361beff435da9971a793aa92180efa52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -194,6 +362,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3262270a_b3306544",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2271,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "377277c0_1663ad90",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a5326158_f8ed858e",
@@ -207,6 +393,24 @@
       "writtenOn": "2024-01-17T23:59:38Z",
       "side": 1,
       "message": "```suggestion\n// We need to make sure when the entry point is \"main\" or other GLSL reserved keyword,\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7f6b73b0_7a18733f",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2272,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a5326158_f8ed858e",
       "revId": "3038b37a361beff435da9971a793aa92180efa52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -228,6 +432,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "133d1c8a_0fa6abaf",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2273,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2508ebc6_6e22c1e1",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db15a7af_4ebc6313",
@@ -245,6 +467,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb07dec_e5f9c764",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2282,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db15a7af_4ebc6313",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8cbff244_bc85c3e1",
@@ -258,6 +498,24 @@
       "writtenOn": "2024-01-17T23:59:38Z",
       "side": 1,
       "message": "```suggestion\n// Entry point is not a GLSL reserved keyword.\n```",
+      "revId": "3038b37a361beff435da9971a793aa92180efa52",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2fa4d4b8_2c9cf4ae",
+        "filename": "src/dawn/tests/end2end/ShaderTests.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 2287,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-18T00:18:04Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8cbff244_bc85c3e1",
       "revId": "3038b37a361beff435da9971a793aa92180efa52",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
