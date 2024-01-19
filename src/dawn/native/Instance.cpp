@@ -70,12 +70,12 @@ namespace dawn::native {
 // Conditionally compiled declarations are used to avoid using static constructors instead.
 #if defined(DAWN_ENABLE_BACKEND_D3D11)
 namespace d3d11 {
-BackendConnection* Connect(InstanceBase* instance);
+ResultOrError<BackendConnection*> Connect(InstanceBase* instance);
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D11)
 #if defined(DAWN_ENABLE_BACKEND_D3D12)
 namespace d3d12 {
-BackendConnection* Connect(InstanceBase* instance);
+ResultOrError<BackendConnection*> Connect(InstanceBase* instance);
 }
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D12)
 #if defined(DAWN_ENABLE_BACKEND_METAL)
@@ -314,7 +314,6 @@ BackendConnection* InstanceBase::GetBackendConnection(wgpu::BackendType backendT
             mBackends[connection->GetType()] = std::unique_ptr<BackendConnection>(connection);
         }
     };
-
     switch (backendType) {
 #if defined(DAWN_ENABLE_BACKEND_NULL)
         case wgpu::BackendType::Null:
@@ -323,15 +322,23 @@ BackendConnection* InstanceBase::GetBackendConnection(wgpu::BackendType backendT
 #endif  // defined(DAWN_ENABLE_BACKEND_NULL)
 
 #if defined(DAWN_ENABLE_BACKEND_D3D11)
-        case wgpu::BackendType::D3D11:
-            Register(d3d11::Connect(this), wgpu::BackendType::D3D11);
+        case wgpu::BackendType::D3D11: {
+            BackendConnection* connection;
+            if (!ConsumedError(d3d11::Connect(this), &connection)) {
+                Register(connection, wgpu::BackendType::D3D11);
+            }
             break;
+        }
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D11)
 
 #if defined(DAWN_ENABLE_BACKEND_D3D12)
-        case wgpu::BackendType::D3D12:
-            Register(d3d12::Connect(this), wgpu::BackendType::D3D12);
+        case wgpu::BackendType::D3D12: {
+            BackendConnection* connection;
+            if (!ConsumedError(d3d12::Connect(this), &connection)) {
+                Register(connection, wgpu::BackendType::D3D12);
+            }
             break;
+        }
 #endif  // defined(DAWN_ENABLE_BACKEND_D3D12)
 
 #if defined(DAWN_ENABLE_BACKEND_METAL)

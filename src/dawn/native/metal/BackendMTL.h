@@ -36,7 +36,7 @@ namespace dawn::native::metal {
 
 class Backend : public BackendConnection {
   public:
-    explicit Backend(InstanceBase* instance);
+    Backend();
     ~Backend() override;
 
     std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(

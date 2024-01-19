@@ -42,11 +42,10 @@ namespace dawn::native {
 // backend.
 class BackendConnection : NonMovable {
   public:
-    BackendConnection(InstanceBase* instance, wgpu::BackendType type);
+    explicit BackendConnection(wgpu::BackendType type);
     virtual ~BackendConnection() = default;
 
     wgpu::BackendType GetType() const;
-    InstanceBase* GetInstance() const;
 
     // Returns physical devices capable of supporting the `options`.
     // Calling this multiple times in succession should return a vector with duplicate
@@ -55,7 +54,6 @@ class BackendConnection : NonMovable {
         const UnpackedPtr<RequestAdapterOptions>& options) = 0;
 
   private:
-    InstanceBase* mInstance = nullptr;
     wgpu::BackendType mType;
 };
 
