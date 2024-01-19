@@ -28,6 +28,7 @@
 #include "dawn/native/opengl/ShaderModuleGL.h"
 
 #include <sstream>
+#include <unordered_map>
 #include <utility>
 
 #include "dawn/native/BindGroupLayoutInternal.h"
@@ -383,6 +384,8 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                     _, ValidateComputeStageWorkgroupSize(program, remappedEntryPoint.c_str(),
                                                          r.limits, /* fullSubgroups */ {}));
             }
+
+            r.tintOptions.first_instance_location = PipelineLayout::UniformLocation::FirstInstance;
 
             auto result = tint::glsl::writer::Generate(program, r.tintOptions, remappedEntryPoint);
             DAWN_INVALID_IF(result != tint::Success, "An error occurred while generating GLSL:\n%s",

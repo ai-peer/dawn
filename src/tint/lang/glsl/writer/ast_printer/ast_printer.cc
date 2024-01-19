@@ -67,6 +67,7 @@
 #include "src/tint/lang/wgsl/ast/transform/expand_compound_assignment.h"
 #include "src/tint/lang/wgsl/ast/transform/manager.h"
 #include "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.h"
+#include "src/tint/lang/wgsl/ast/transform/offset_first_index.h"
 #include "src/tint/lang/wgsl/ast/transform/preserve_padding.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_initializers_to_let.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_side_effects_to_decl.h"
@@ -203,6 +204,8 @@ SanitizedResult Sanitize(const Program& in,
         manager.Add<ast::transform::ZeroInitWorkgroupMemory>();
     }
 
+    manager.Add<ast::transform::OffsetFirstIndex>();
+
     // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<ast::transform::CanonicalizeEntryPointIO>();
 
@@ -245,6 +248,8 @@ SanitizedResult Sanitize(const Program& in,
 
     data.Add<ast::transform::CanonicalizeEntryPointIO::Config>(
         ast::transform::CanonicalizeEntryPointIO::ShaderStyle::kGlsl);
+
+    data.Add<ast::transform::OffsetFirstIndex::Config>(-1, options.first_instance_location);
 
     SanitizedResult result;
     ast::transform::DataMap outputs;
@@ -2105,6 +2110,8 @@ void ASTPrinter::EmitPushConstant(const sem::GlobalVariable* var) {
     auto* decl = var->Declaration();
 
     auto out = Line();
+
+    EmitAttributes(out, var);
 
     auto name = decl->name->symbol.Name();
     auto* type = var->Type()->UnwrapRef();
