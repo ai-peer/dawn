@@ -102,7 +102,7 @@ class VulkanInstance : public RefCounted {
 
 class Backend : public BackendConnection {
   public:
-    explicit Backend(InstanceBase* instance);
+    Backend();
     ~Backend() override;
 
     MaybeError Initialize();
