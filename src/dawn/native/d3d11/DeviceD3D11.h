@@ -32,6 +32,7 @@
 #include <vector>
 
 #include "dawn/common/SerialQueue.h"
+#include "dawn/native/Queue.h"
 #include "dawn/native/d3d/DeviceD3D.h"
 #include "dawn/native/d3d11/CommandRecordingContextD3D11.h"
 #include "dawn/native/d3d11/DeviceInfoD3D11.h"
@@ -51,11 +52,6 @@ class Device final : public d3d::Device {
 
     ID3D11Device* GetD3D11Device() const;
     ID3D11Device5* GetD3D11Device5() const;
-
-    // TODO(dawn:1413): Remove these proxy method in favor of using the Queue directly.
-    ScopedCommandRecordingContext GetScopedPendingCommandContext(SubmitMode submitMode);
-    ScopedSwapStateCommandRecordingContext GetScopedSwapStatePendingCommandContext(
-        SubmitMode submitMode);
 
     const DeviceInfo& GetDeviceInfo() const;
 
