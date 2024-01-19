@@ -398,6 +398,9 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
 
     // Use a blit to emulate stencil-only buffer-to-texture copies.
     deviceToggles->Default(Toggle::UseBlitForBufferToStencilTextureCopy, true);
+
+    // Use t2b and b2t copies to emulate a t2t copy between sRGB and non-sRGB textures.
+    deviceToggles->Default(Toggle::UseT2B2TForSRGBTextureCopy, true);
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
