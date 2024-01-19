@@ -16,6 +16,24 @@
       "message": ":applause:",
       "revId": "1cfac9ca20c77bdd03a22e66055bb0e567c05b46",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5a2392d0_e7bbc8d3",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 3043,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-19T19:16:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "c9b9e3b3_f23d3998",
+      "revId": "1cfac9ca20c77bdd03a22e66055bb0e567c05b46",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
