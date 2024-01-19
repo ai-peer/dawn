@@ -82,7 +82,7 @@ MaybeError ValidateRequestOptions(const UnpackedPtr<RequestAdapterOptions>& opti
 
 }  // namespace
 
-Backend::Backend(InstanceBase* instance) : Base(instance, wgpu::BackendType::D3D11) {}
+Backend::Backend() : Base(wgpu::BackendType::D3D11) {}
 
 MaybeError Backend::Initialize() {
     auto functions = std::make_unique<PlatformFunctions>();
@@ -144,15 +144,10 @@ ResultOrError<Ref<PhysicalDeviceBase>> Backend::CreatePhysicalDevice(
     return {std::move(physicalDevice)};
 }
 
-BackendConnection* Connect(InstanceBase* instance) {
-    Backend* backend = new Backend(instance);
-
-    if (instance->ConsumedError(backend->Initialize())) {
-        delete backend;
-        return nullptr;
-    }
-
-    return backend;
+ResultOrError<BackendConnection*> Connect(InstanceBase* instance) {
+    auto backend = std::unique_ptr<Backend>(new Backend());
+    DAWN_TRY(backend->Initialize());
+    return backend.release();
 }
 
 }  // namespace dawn::native::d3d11
