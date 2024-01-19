@@ -2122,8 +2122,7 @@ bool ASTPrinter::EmitLoop(const ast::LoopStatement* stmt) {
     };
 
     TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-    Line() << "while (true) {";
-    EmitLoopPreserver();
+    Line() << "while (true) " << LoopPreservingMacro() << " {";
     {
         ScopedIndent si(this);
         if (!EmitStatements(stmt->body->statements)) {
@@ -2193,8 +2192,7 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
         };
 
         TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-        Line() << "while (true) {";
-        EmitLoopPreserver();
+        Line() << "while (true) " << LoopPreservingMacro() << " {";
         IncrementIndent();
         TINT_DEFER({
             DecrementIndent();
@@ -2233,15 +2231,12 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
                     out << tint::TrimSuffix(cont_buf.lines[0].content, ";");
                 }
             }
-            out << " {";
+            out << " " << LoopPreservingMacro() << " {";
         }
-        EmitLoopPreserver();
-        {
-            auto emit_continuing = [] { return true; };
-            TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-            if (!EmitStatementsWithIndent(stmt->body->statements)) {
-                return false;
-            }
+        auto emit_continuing = [] { return true; };
+        TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
+        if (!EmitStatementsWithIndent(stmt->body->statements)) {
+            return false;
         }
         Line() << "}";
     }
@@ -2268,8 +2263,7 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
     // as a regular while in MSL. Instead we need to generate a `while(true)` loop.
     bool emit_as_loop = cond_pre.lines.size() > 0;
     if (emit_as_loop) {
-        Line() << "while (true) {";
-        EmitLoopPreserver();
+        Line() << "while (true) " << LoopPreservingMacro() << " {";
         IncrementIndent();
         TINT_DEFER({
             DecrementIndent();
@@ -2290,9 +2284,8 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
                 ScopedParen sp(out);
                 out << cond_buf.str();
             }
-            out << " {";
+            out << " " << LoopPreservingMacro() << " {";
         }
-        EmitLoopPreserver();
         if (!EmitStatementsWithIndent(stmt->body->statements)) {
             return false;
         }
@@ -3031,32 +3024,17 @@ bool ASTPrinter::EmitLet(const ast::Let* let) {
     return true;
 }
 
-void ASTPrinter::EmitLoopPreserver() {
-    IncrementIndent();
-    // This statement prevents the MSL compiler from erasing a loop during
-    // optimizations.  In the AIR dialiect of LLVM IR, WGSL loops should compile
-    // to a loop that contains an 'asm' call with a 'sideeffect' annotation.
-    //
-    // For example, compile a WGSL file with a trivial while(1) loop to 'a.metal',
-    // then compile that to AIR (LLVM IR dialect):
-    //
-    //    xcrun metal a.metal -S -o -
-    //
-    // The loop in the AIR should look something like this:
-    //
-    //    1: ...
-    //      br label %2
-    //
-    //    2:                                      ; preds = %1, %2
-    //      tail call void asm sideeffect "", ""() #1, !srcloc !27
-    //      br label %2, !llvm.loop !28
-    //
-    // It is important that the 'sideeffect' annotation exist. That tells the
-    // optimizer that the instruction has side effects invisible to the
-    // optimizer, and therefore the loop should not be eliminated.
-    Line() << R"(__asm__("");)";
-
-    DecrementIndent();
+std::string_view ASTPrinter::LoopPreservingMacro() {
+    if (loop_preserving_macro_.empty()) {
+        auto loop_preserving_var = UniqueIdentifier("tint_preserve_loop_var");
+        loop_preserving_macro_ = UniqueIdentifier("TINT_PRESERVE_LOOP");
+        Line(&helpers_) << "constant static volatile bool " << loop_preserving_var << " = true;";
+        Line(&helpers_) << "#define " << loop_preserving_macro_ << " if (" << loop_preserving_var
+                        << ")";
+        // Note: static_assert(true) is used to require a semicolon.
+        Line(&helpers_);
+    }
+    return loop_preserving_macro_;
 }
 
 template <typename F>

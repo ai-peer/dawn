@@ -1,10 +1,13 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_preserve_loop_var = true;
+#define TINT_PRESERVE_LOOP if (tint_preserve_loop_var)
+
 void f() {
   int i = 0;
-  for(; (i < 4); ) {
-    __asm__("");
+  for(; (i < 4); ) TINT_PRESERVE_LOOP {
   }
 }
 

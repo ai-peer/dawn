@@ -1,9 +1,12 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_preserve_loop_var = true;
+#define TINT_PRESERVE_LOOP if (tint_preserve_loop_var)
+
 fragment void tint_symbol() {
-  while (true) {
-    __asm__("");
+  while (true) TINT_PRESERVE_LOOP {
     if (false) {
     } else {
       break;

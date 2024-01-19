@@ -13,14 +13,17 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_preserve_loop_var = true;
+#define TINT_PRESERVE_LOOP if (tint_preserve_loop_var)
+
 struct tint_symbol_2 {
   float x [[user(locn0)]];
 };
 
 void tint_symbol_inner(float x, texture2d<float, access::sample> tint_symbol_3, sampler tint_symbol_4) {
   float4 v = float4(0.0f);
-  for(; (x > v[0]); ) {
-    __asm__("");
+  for(; (x > v[0]); ) TINT_PRESERVE_LOOP {
     v = tint_symbol_3.sample(tint_symbol_4, float2(0.0f));
   }
 }

@@ -13,13 +13,16 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_preserve_loop_var = true;
+#define TINT_PRESERVE_LOOP if (tint_preserve_loop_var)
+
 struct tint_symbol_2 {
   float x [[user(locn0)]];
 };
 
 void tint_symbol_inner(float x) {
-  while (true) {
-    __asm__("");
+  while (true) TINT_PRESERVE_LOOP {
     {
       if ((x > 0.0f)) { break; }
     }

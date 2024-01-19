@@ -1,9 +1,12 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_preserve_loop_var = true;
+#define TINT_PRESERVE_LOOP if (tint_preserve_loop_var)
+
 void tint_symbol(device uint* const tint_symbol_1) {
-  for(; (*(tint_symbol_1) < 10u); *(tint_symbol_1) = (*(tint_symbol_1) + 1u)) {
-    __asm__("");
+  for(; (*(tint_symbol_1) < 10u); *(tint_symbol_1) = (*(tint_symbol_1) + 1u)) TINT_PRESERVE_LOOP {
   }
 }
 
