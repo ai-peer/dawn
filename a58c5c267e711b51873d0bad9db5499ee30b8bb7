@@ -143,6 +143,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a4185d0d_f852aa45",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T23:28:35Z",
+      "side": 1,
+      "message": "Your suggestion is similar to what I did in the first patch set. It wraps tint::Program and tint::SourceFile into a RefCounted TintData object, use refcount of the TintData to keep tint::Program alive, and uses a WeakPtr to avoid recreating tint::Program. Do you want to go back to the origin design, and return Ref\u003cTintData\u003e here?\n\n[1] https://dawn-review.googlesource.com/c/dawn/+/169580/2/src/dawn/native/ShaderModule.cpp#1399",
+      "parentUuid": "f76bd040_989f5bb7",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5581f1_b1c4c3cb",
         "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
         "patchSetId": 19
