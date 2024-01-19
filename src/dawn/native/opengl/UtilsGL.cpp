@@ -82,11 +82,14 @@ void CopyImageSubData(const OpenGLFunctions& gl,
                       const Origin3D& dst,
                       const Extent3D& size) {
     if (gl.IsAtLeastGL(4, 3) || gl.IsAtLeastGLES(3, 2)) {
+        // printf("\n\n!!! gl.CopyImageSubData\n\n");
         gl.CopyImageSubData(srcHandle, srcTarget, srcLevel, src.x, src.y, src.z, dstHandle,
                             dstTarget, dstLevel, dst.x, dst.y, dst.z, size.width, size.height,
                             size.depthOrArrayLayers);
         return;
     }
+
+    // printf("\n\n!!! framebuffer path\n\n");
 
     GLint prevReadFBO = 0, prevDrawFBO = 0;
     gl.GetIntegerv(GL_READ_FRAMEBUFFER_BINDING, &prevReadFBO);
@@ -111,6 +114,9 @@ void CopyImageSubData(const OpenGLFunctions& gl,
     if (srcAspects & Aspect::Stencil) {
         blitMask |= GL_STENCIL_BUFFER_BIT;
     }
+
+    // gl.BindTexture(srcTarget, srcHandle);
+    // gl.TexParameteri(srcTarget, GL_TEXTURE_SRGB_DECODE_EXT, GL_SKIP_DECODE_EXT);
 
     // Iterate over all layers, doing a single blit for each.
     for (uint32_t layer = 0; layer < size.depthOrArrayLayers; ++layer) {

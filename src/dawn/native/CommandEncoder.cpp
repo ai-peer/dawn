@@ -1856,6 +1856,45 @@ void CommandEncoder::APICopyTextureToTexture(const ImageCopyTexture* sourceOrig,
                 return {};
             }
 
+            // temp: Emulate sRGB to non-sRGB T2T copy by calling a T2B copy and then a B2T copy
+            // for OpenGL/ES to skip decoding.
+            if (
+                // src.texture->GetFormat().format == wgpu::TextureFormat::RGBA8UnormSrgb
+                // && dst.texture->GetFormat().format ==
+                //             wgpu::TextureFormat::RGBA8Unorm
+                src.texture->GetFormat().format != dst.texture->GetFormat().format &&
+                src.texture->GetFormat().baseFormat == dst.texture->GetFormat().baseFormat
+                // sRGB
+            ) {
+                // Calculate needed buffer size to hold copied texel data.
+                const TexelBlockInfo& blockInfo =
+                    source.texture->GetFormat().GetAspectInfo(aspect).block;
+                const uint64_t bytesPerRow =
+                    Align(4 * copySize->width, kTextureBytesPerRowAlignment);
+                const uint64_t rowsPerImage = copySize->height;
+                uint64_t requiredBytes;
+                DAWN_TRY_ASSIGN(
+                    requiredBytes,
+                    ComputeRequiredBytesInCopy(blockInfo, *copySize, bytesPerRow, rowsPerImage));
+
+                // Create an intermediate dst buffer.
+                BufferDescriptor descriptor = {};
+                descriptor.size = Align(requiredBytes, 4);
+                descriptor.usage = wgpu::BufferUsage::CopySrc | wgpu::BufferUsage::CopyDst;
+                Ref<BufferBase> intermediateBuffer;
+                DAWN_TRY_ASSIGN(intermediateBuffer, GetDevice()->CreateBuffer(&descriptor));
+
+                ImageCopyBuffer buf;
+                buf.buffer = intermediateBuffer.Get();
+                buf.layout.bytesPerRow = bytesPerRow;
+                buf.layout.rowsPerImage = rowsPerImage;
+
+                APICopyTextureToBuffer(&source, &buf, copySize);
+                APICopyBufferToTexture(&buf, &destination, copySize);
+
+                return {};
+            }
+
             const bool blitDepth =
                 (aspect & Aspect::Depth) &&
                 GetDevice()->IsToggleEnabled(

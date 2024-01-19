@@ -213,6 +213,12 @@ Texture::Texture(Device* device, const UnpackedPtr<TextureDescriptor>& descripto
     // The texture is not complete if it uses mipmapping and not all levels up to
     // MAX_LEVEL have been defined.
     gl.TexParameteri(mTarget, GL_TEXTURE_MAX_LEVEL, levels - 1);
+
+    // // printf("\n\n!!!!!!!!!!!!!! %u %u\n\n", glFormat.internalFormat, glFormat.format);
+    // if (glFormat.internalFormat == GL_SRGB8_ALPHA8) {
+    //     printf("\n\nxxxxx %u %u\n\n", glFormat.internalFormat, glFormat.format);
+    //     gl.TexParameteri(mTarget, GL_TEXTURE_SRGB_DECODE_EXT, GL_SKIP_DECODE_EXT);
+    // }
 }
 
 void Texture::Touch() {
