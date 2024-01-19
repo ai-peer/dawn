@@ -179,6 +179,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "45eb3819_fa7c83bf",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T23:48:14Z",
+      "side": 1,
+      "message": "What about `ShaderModuleBase::UseTintProgram()`? Still return an `APIRef\u003cShaderModuleBase\u003e` or return a `Ref\u003cTintProgram\u003e` to just keep the program alive? If return `APIRef\u003cShaderModuleBase\u003e`, seems we have two mechanisms to keep the program alive, It is a little weird.",
+      "parentUuid": "76edd19e_36877b8c",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5581f1_b1c4c3cb",
         "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
         "patchSetId": 19
