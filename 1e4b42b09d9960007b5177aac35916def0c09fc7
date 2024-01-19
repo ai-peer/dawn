@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "94c427e4_1d3c9dff",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-19T22:46:23Z",
+      "side": 1,
+      "message": "Hmm this seems odd to put at this level. Could we instead have a `GetAdditionalPropertiesImpl(UnpackedPtr\u003cAdapterProperties\u003e\u0026)` or something that is virtual and overridden by the D3D instances? \n\nI assume we still might need the check for the struct type in the frontend class for validation purposes, but it avoids this D3D specific logic in the frontend?",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 82
+      },
+      "revId": "1e4b42b09d9960007b5177aac35916def0c09fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "22762854_fee46ff6",
         "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
         "patchSetId": 5
