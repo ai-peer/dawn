@@ -61,7 +61,7 @@ struct DxcUnavailable {
 
 class Backend : public BackendConnection {
   public:
-    Backend(InstanceBase* instance, wgpu::BackendType type);
+    explicit Backend(wgpu::BackendType type);
 
     MaybeError Initialize(std::unique_ptr<PlatformFunctions> functions);
 

@@ -119,8 +119,7 @@ FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
 
 class Backend : public BackendConnection {
   public:
-    explicit Backend(InstanceBase* instance)
-        : BackendConnection(instance, wgpu::BackendType::Null) {}
+    Backend() : BackendConnection(wgpu::BackendType::Null) {}
 
     std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(
         const UnpackedPtr<RequestAdapterOptions>& options) override {
@@ -139,8 +138,8 @@ class Backend : public BackendConnection {
     Ref<PhysicalDevice> mPhysicalDevice;
 };
 
-BackendConnection* Connect(InstanceBase* instance) {
-    return new Backend(instance);
+BackendConnection* Connect() {
+    return new Backend();
 }
 
 struct CopyFromStagingToBufferOperation : PendingOperation {

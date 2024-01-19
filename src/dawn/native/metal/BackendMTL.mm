@@ -951,11 +951,7 @@ bool IsMetalValidationEnabled(PhysicalDeviceBase* physicalDevice) {
 
 // Implementation of the Metal backend's BackendConnection
 
-Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::BackendType::Metal) {
-    if (GetInstance()->IsBackendValidationEnabled()) {
-        setenv("METAL_DEVICE_WRAPPER_TYPE", "1", 1);
-    }
-}
+Backend::Backend() : BackendConnection(wgpu::BackendType::Metal) {}
 
 Backend::~Backend() = default;
 
@@ -967,6 +963,10 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     if (!mPhysicalDevices.empty()) {
         // Devices already discovered.
         return std::vector<Ref<PhysicalDeviceBase>>{mPhysicalDevices};
+    }
+
+    if (GetInstance()->IsBackendValidationEnabled()) {
+        setenv("METAL_DEVICE_WRAPPER_TYPE", "1", 1);
     }
 
     bool metalValidationEnabled = CheckMetalValidationEnabled(GetInstance());
@@ -993,8 +993,8 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     return std::vector<Ref<PhysicalDeviceBase>>{mPhysicalDevices};
 }
 
-BackendConnection* Connect(InstanceBase* instance) {
-    return new Backend(instance);
+BackendConnection* Connect() {
+    return new Backend();
 }
 
 }  // namespace dawn::native::metal
