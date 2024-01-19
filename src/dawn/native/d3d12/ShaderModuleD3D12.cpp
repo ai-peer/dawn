@@ -179,17 +179,172 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
 
     using tint::BindingPoint;
 
-    tint::BindingRemapperOptions bindingRemapper;
-    std::unordered_map<BindingPoint, tint::core::Access> accessControls;
+    tint::BindingRemapperOptions bindingRemapper;  // amaiorano TO-REMOVE
+    // std::unordered_map<BindingPoint, tint::core::Access> accessControls; // amaiorano TO-REMOVE
 
+    // amaiorano NOTE - I THINK WE SHOULD REMOVE THIS, BUT MTL KEEPS IT
     tint::ArrayLengthFromUniformOptions arrayLengthFromUniform;
     arrayLengthFromUniform.ubo_binding = {layout->GetDynamicStorageBufferLengthsRegisterSpace(),
                                           layout->GetDynamicStorageBufferLengthsShaderRegister()};
 
+    tint::hlsl::writer::Bindings bindings;
+
     const BindingInfoArray& moduleBindingInfo = entryPoint.bindings;
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
-        const auto& moduleGroupBindingInfo = moduleBindingInfo[group];
+        const BindingGroupInfoMap& moduleGroupBindingInfo = moduleBindingInfo[group];
+
+        // d3d12::BindGroupLayout packs the bindings per HLSL register-space. We modify
+        // the Tint AST to make the "bindings" decoration match the offset chosen by
+        // d3d12::BindGroupLayout so that Tint produces HLSL with the correct registers
+        // assigned to each interface variable.
+        for (const auto& [binding, bindingInfo] : moduleGroupBindingInfo) {
+            BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
+            tint::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
+                                               static_cast<uint32_t>(binding)};
+            BindingPoint dstBindingPoint{static_cast<uint32_t>(group),
+                                         bgl->GetShaderRegister(bindingIndex)};
+
+            // TODO(amaiorano): Should we _not_ add the mapping to bindings below if src and dst
+            // are the same?
+            // TODO(amaiorano): Remove bindingRemapper. Keeping this for now for
+            // arrayLengthFromUniform.
+            if (srcBindingPoint != dstBindingPoint) {
+                bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
+            }
+
+            switch (bindingInfo.bindingType) {
+                case BindingInfoType::Buffer:
+                    switch (bindingInfo.buffer.type) {
+                        case wgpu::BufferBindingType::Uniform:
+                            bindings.uniform.emplace(
+                                srcBindingPoint,
+                                tint::hlsl::writer::binding::Uniform{dstBindingPoint.group,
+                                                                     dstBindingPoint.binding});
+                            break;
+                        case kInternalStorageBufferBinding:
+                        case wgpu::BufferBindingType::Storage:
+                        case wgpu::BufferBindingType::ReadOnlyStorage:
+                            bindings.storage.emplace(
+                                srcBindingPoint,
+                                tint::hlsl::writer::binding::Storage{dstBindingPoint.group,
+                                                                     dstBindingPoint.binding});
+                            break;
+                        case wgpu::BufferBindingType::Undefined:
+                            DAWN_UNREACHABLE();
+                            break;
+                    }
+                    break;
+                case BindingInfoType::Sampler:
+                    bindings.sampler.emplace(srcBindingPoint,
+                                             tint::hlsl::writer::binding::Sampler{
+                                                 dstBindingPoint.group, dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::Texture:
+                    bindings.texture.emplace(srcBindingPoint,
+                                             tint::hlsl::writer::binding::Texture{
+                                                 dstBindingPoint.group, dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::StorageTexture:
+                    bindings.storage_texture.emplace(
+                        srcBindingPoint, tint::hlsl::writer::binding::StorageTexture{
+                                             dstBindingPoint.group, dstBindingPoint.binding});
+                    break;
+                case BindingInfoType::ExternalTexture: {
+                    const auto& etBindingMap = bgl->GetExternalTextureBindingExpansionMap();
+                    const auto& expansion = etBindingMap.find(binding);
+                    DAWN_ASSERT(expansion != etBindingMap.end());
+
+                    const auto& bindingExpansion = expansion->second;
+                    tint::hlsl::writer::binding::BindingInfo plane0{
+                        static_cast<uint32_t>(group),
+                        static_cast<uint32_t>(bgl->GetBindingIndex(bindingExpansion.plane0))};
+                    tint::hlsl::writer::binding::BindingInfo plane1{
+                        static_cast<uint32_t>(group),
+                        static_cast<uint32_t>(bgl->GetBindingIndex(bindingExpansion.plane1))};
+                    tint::hlsl::writer::binding::BindingInfo metadata{
+                        static_cast<uint32_t>(group),
+                        static_cast<uint32_t>(bgl->GetBindingIndex(bindingExpansion.params))};
+
+                    bindings.external_texture.emplace(
+                        srcBindingPoint,
+                        tint::hlsl::writer::binding::ExternalTexture{metadata, plane0, plane1});
+                    break;
+                }
+            }
+
+            // Declaring a read-only storage buffer in HLSL but specifying a storage
+            // buffer in the BGL produces the wrong output. Force read-only storage
+            // buffer bindings to be treated as UAV instead of SRV. Internal storage
+            // buffer is a storage buffer used in the internal pipeline.
+            const bool forceStorageBufferAsUAV =
+                (bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
+                 (bgl->GetBindingInfo(bindingIndex).buffer.type ==
+                      wgpu::BufferBindingType::Storage ||
+                  bgl->GetBindingInfo(bindingIndex).buffer.type == kInternalStorageBufferBinding));
+            if (forceStorageBufferAsUAV) {
+                bindings.access_controls.emplace(srcBindingPoint, tint::core::Access::kReadWrite);
+            }
+
+            // On D3D12 backend all storage buffers without Dynamic Buffer Offset will always be
+            // bound to root descriptor tables, where D3D12 runtime can guarantee that OOB-read will
+            // always return 0 and OOB-write will always take no action, so we don't need to do
+            // robustness transform on them. Note that we still need to do robustness transform on
+            // uniform buffers because only sized array is allowed in uniform buffers, so FXC will
+            // report compilation error when the indexing to the array in a cBuffer is out of bound
+            // and can be checked at compilation time. Storage buffers are OK because they are
+            // always translated with RWByteAddressBuffers, which has no such sized arrays.
+            //
+            // For example below WGSL shader will cause compilation error when we skip robustness
+            // transform on uniform buffers:
+            //
+            // struct TestData {
+            //     data: array<vec4<u32>, 3>,
+            // };
+            // @group(0) @binding(0) var<uniform> s: TestData;
+            //
+            // fn test() -> u32 {
+            //     let index = 1000000u;
+            //     if (s.data[index][0] != 0u) {    // error X3504: array index out of bounds
+            //         return 0x1004u;
+            //     }
+            //     return 0u;
+            // }
+            if ((bindingInfo.buffer.type == wgpu::BufferBindingType::Storage ||
+                 bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage) &&
+                !bgl->GetBindingInfo(bindingIndex).buffer.hasDynamicOffset) {
+                bindings.ignored_by_robustness_transform.emplace_back(srcBindingPoint);
+            }
+
+            // Add arrayLengthFromUniform options
+            {
+                for (const auto& bindingAndRegisterOffset :
+                     layout->GetDynamicStorageBufferLengthInfo()[group].bindingAndRegisterOffsets) {
+                    BindingNumber binding = bindingAndRegisterOffset.binding;
+                    uint32_t registerOffset = bindingAndRegisterOffset.registerOffset;
+
+                    BindingPoint bindingPoint{static_cast<uint32_t>(group),
+                                              static_cast<uint32_t>(binding)};
+
+                    // Get the renamed binding point if it was remapped.
+                    // TODO(amaiorano): NO, REMOVE THIS AND DO THIS IN TINT IF WE NEED TO
+                    auto it = bindingRemapper.binding_points.find(bindingPoint);
+                    if (it != bindingRemapper.binding_points.end()) {
+                        bindingPoint = it->second;
+                    }
+
+                    arrayLengthFromUniform.bindpoint_to_size_index.emplace(bindingPoint,
+                                                                           registerOffset);
+                }
+            }
+        }
+    }
+
+    /*
+    const BindingInfoArray& moduleBindingInfo = entryPoint.bindings;
+    for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
+        const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
+        const BindingGroupInfoMap& moduleGroupBindingInfo = moduleBindingInfo[group];
 
         // d3d12::BindGroupLayout packs the bindings per HLSL register-space. We modify
         // the Tint AST to make the "bindings" decoration match the offset chosen by
@@ -270,6 +425,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
             }
         }
     }
+    */
 
     std::optional<tint::ast::transform::SubstituteOverride::Config> substituteOverrideConfig;
     if (!programmableStage.metadata->overrides.empty()) {
@@ -286,8 +442,9 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     req.hlsl.tintOptions.disable_robustness = !device->IsRobustnessEnabled();
     req.hlsl.tintOptions.disable_workgroup_init =
         device->IsToggleEnabled(Toggle::DisableWorkgroupInit);
-    req.hlsl.tintOptions.binding_remapper_options = std::move(bindingRemapper);
-    req.hlsl.tintOptions.access_controls = std::move(accessControls);
+    req.hlsl.tintOptions.bindings = std::move(bindings);
+    // req.hlsl.tintOptions.binding_remapper_options = std::move(bindingRemapper);
+    // req.hlsl.tintOptions.access_controls = std::move(accessControls);
     req.hlsl.tintOptions.external_texture_options = BuildExternalTextureTransformBindings(layout);
 
     if (entryPoint.usesNumWorkgroups) {
