@@ -58,6 +58,18 @@ layout(binding = 0, std140) uniform Simple_ubo {
 )");
 }
 
+TEST_F(GlslASTPrinterTest_UniformBuffer, WithExplicitLocation) {
+    GlobalVar("a", ty.u32(), core::AddressSpace::kUniform, Group(core::AInt(999)), Binding(3_a));
+
+    ASTPrinter& gen = Build();
+    gen.Generate();
+    EXPECT_THAT(gen.Diagnostics(), testing::IsEmpty());
+    EXPECT_EQ(gen.Result(), R"(#version 310 es
+
+layout(location = 3) uniform uint a;
+)");
+}
+
 TEST_F(GlslASTPrinterTest_UniformBuffer, Simple_Desktop) {
     auto* simple = Structure("Simple", Vector{Member("member", ty.f32())});
     GlobalVar("simple", ty.Of(simple), core::AddressSpace::kUniform, Group(0_a), Binding(0_a));
