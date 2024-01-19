@@ -158,6 +158,24 @@
       "parentUuid": "8c0b0b7e_069511d8",
       "revId": "d6888ccac4f414de3b0df27a71b6edb0b4076c4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f14784ff_be6c83fd",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1004896
+      },
+      "writtenOn": "2024-01-19T19:36:03Z",
+      "side": 1,
+      "message": "Have you received the new CLA I submitted as an individual?",
+      "parentUuid": "8a19be41_d3de85ab",
+      "revId": "d6888ccac4f414de3b0df27a71b6edb0b4076c4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
