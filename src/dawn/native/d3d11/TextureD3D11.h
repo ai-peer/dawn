@@ -88,6 +88,8 @@ class Texture final : public d3d::Texture {
         const ScopedCommandRecordingContext* commandContext,
         const SubresourceRange& range);
 
+    MaybeError SynchronizeTextureBeforeUse(const ScopedCommandRecordingContext* commandContext);
+
     MaybeError Write(const ScopedCommandRecordingContext* commandContext,
                      const SubresourceRange& subresources,
                      const Origin3D& origin,

@@ -162,8 +162,7 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
         return {};
     }
 
-    Device* device = ToBackend(GetDevice());
-    auto commandContext = device->GetScopedPendingCommandContext(Device::SubmitMode::Normal);
+    auto commandContext = GetScopedPendingCommandContext(Device::SubmitMode::Normal);
     TextureCopy textureCopy;
     textureCopy.texture = destination.texture;
     textureCopy.mipLevel = destination.mipLevel;
@@ -173,10 +172,11 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
     SubresourceRange subresources = GetSubresourcesAffectedByCopy(textureCopy, writeSizePixel);
 
     Texture* texture = ToBackend(destination.texture);
-
-    return texture->Write(&commandContext, subresources, destination.origin, writeSizePixel,
-                          static_cast<const uint8_t*>(data) + dataLayout.offset,
-                          dataLayout.bytesPerRow, dataLayout.rowsPerImage);
+    DAWN_TRY(texture->SynchronizeTextureBeforeUse(&commandContext));
+    DAWN_TRY(texture->Write(&commandContext, subresources, destination.origin, writeSizePixel,
+                            static_cast<const uint8_t*>(data) + dataLayout.offset,
+                            dataLayout.bytesPerRow, dataLayout.rowsPerImage));
+    return {};
 }
 
 bool Queue::HasPendingCommands() const {
@@ -213,15 +213,19 @@ MaybeError Queue::WaitForIdleForDestruction() {
 }
 
 MaybeError Queue::NextSerial() {
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    return NextSerial(&commandContext);
+}
+
+MaybeError Queue::NextSerial(ScopedCommandRecordingContext* commandContext) {
     IncrementLastSubmittedCommandSerial();
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
 
-    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
-    DAWN_TRY(
-        CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
-                     "D3D11 command queue signal fence"));
+    DAWN_TRY(CheckHRESULT(
+        commandContext->Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
+        "D3D11 command queue signal fence"));
 
     return {};
 }

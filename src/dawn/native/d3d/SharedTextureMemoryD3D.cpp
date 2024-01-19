@@ -92,12 +92,17 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
         mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
     }
 
+    ExecutionSerial lastUsageSerial =
+        texture->GetSharedTextureMemoryContents()->GetLastUsageSerial();
+    if (lastUsageSerial > GetDevice()->GetLastSubmittedCommandSerial()) {
+        DAWN_TRY(ToBackend(GetDevice()->GetQueue())->NextSerial());
+        DAWN_ASSERT(lastUsageSerial <= GetDevice()->GetLastSubmittedCommandSerial());
+    }
+
     Ref<SharedFence> sharedFence;
     DAWN_TRY_ASSIGN(sharedFence, ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence());
 
-    return FenceAndSignalValue{
-        std::move(sharedFence),
-        static_cast<uint64_t>(texture->GetSharedTextureMemoryContents()->GetLastUsageSerial())};
+    return FenceAndSignalValue{std::move(sharedFence), static_cast<uint64_t>(lastUsageSerial)};
 }
 
 }  // namespace dawn::native::d3d

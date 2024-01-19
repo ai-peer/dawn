@@ -455,10 +455,11 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
                                                 const Extent3D& copySizePixels) {
     CommandRecordingContext* commandContext;
     DAWN_TRY_ASSIGN(commandContext, GetPendingCommandContext(Device::SubmitMode::Passive));
+
     Texture* texture = ToBackend(dst.texture.Get());
+    DAWN_TRY(texture->SynchronizeImportedTextureBeforeUse());
 
     SubresourceRange range = GetSubresourcesAffectedByCopy(dst, copySizePixels);
-
     if (IsCompleteSubresourceCopiedTo(texture, copySizePixels, dst.mipLevel, dst.aspect)) {
         texture->SetIsSubresourceContentInitialized(true, range);
     } else {
@@ -471,6 +472,8 @@ MaybeError Device::CopyFromStagingToTextureImpl(const BufferBase* source,
                                             commandContext->GetCommandList(),
                                             ToBackend(source)->GetD3D12Resource(), src.offset,
                                             src.bytesPerRow, src.rowsPerImage, dst, copySizePixels);
+
+    DAWN_TRY(texture->SynchronizeImportedTextureAfterUse());
 
     return {};
 }
