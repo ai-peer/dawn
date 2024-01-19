@@ -163,6 +163,10 @@ void PhysicalDeviceBase::EnableFeature(Feature feature) {
     mSupportedFeatures.EnableFeature(feature);
 }
 
+void PhysicalDeviceBase::PopulateD3DProperties(AdapterPropertiesD3D* d3dProperties) const {
+    DAWN_UNREACHABLE();
+}
+
 FeatureValidationResult PhysicalDeviceBase::ValidateFeatureSupportedWithToggles(
     wgpu::FeatureName feature,
     const TogglesState& toggles) const {
