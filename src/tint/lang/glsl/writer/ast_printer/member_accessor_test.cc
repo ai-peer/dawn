@@ -106,7 +106,7 @@ class GlslASTPrinterTest_MemberAccessorBase : public BASE {
         auto* s = b.Structure("Data", members);
 
         b.GlobalVar("data", b.ty.Of(s), core::AddressSpace::kStorage, core::Access::kReadWrite,
-                    b.Group(1_a), b.Binding(0_a));
+                    b.Group(0_a), b.Binding(0_a));
     }
 
     void SetupFunction(VectorRef<const ast::Statement*> statements) {

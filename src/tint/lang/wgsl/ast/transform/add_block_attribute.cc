@@ -82,9 +82,10 @@ Transform::ApplyResult AddBlockAttribute::Apply(const Program& src,
         bool needs_wrapping = !str ||                    // Type is not a structure
                               str->HasFixedFootprint();  // Struct has a fixed footprint
 
-        if (cfg && cfg->skip_push_constants &&
-            var->AddressSpace() == core::AddressSpace::kPushConstant) {
-            continue;
+        if (auto bp = var->As<sem::GlobalVariable>()->Attributes().binding_point) {
+            if (cfg && cfg->skip_nonzero_groups && bp->group != 0) {
+                continue;
+            }
         }
 
         if (needs_wrapping) {
@@ -136,7 +137,8 @@ const AddBlockAttribute::BlockAttribute* AddBlockAttribute::BlockAttribute::Clon
                                                                          ctx.dst->AllocateNodeID());
 }
 
-AddBlockAttribute::Config::Config(bool skip_push_consts) : skip_push_constants(skip_push_consts) {}
+AddBlockAttribute::Config::Config(bool skip_nonzero_grps)
+    : skip_nonzero_groups(skip_nonzero_grps) {}
 
 AddBlockAttribute::Config::~Config() = default;
 

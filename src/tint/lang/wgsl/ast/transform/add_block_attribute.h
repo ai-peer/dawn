@@ -69,14 +69,14 @@ class AddBlockAttribute final : public Castable<AddBlockAttribute, Transform> {
     /// Transform configuration options
     struct Config final : public Castable<Config, ast::transform::Data> {
         /// Constructor
-        /// @param skip_push_const whether to skip push constants
-        explicit Config(bool skip_push_const);
+        /// @param skip_nonzero_groups skip vars with a non-zero group binding
+        explicit Config(bool skip_nonzero_grps);
 
         /// Destructor
         ~Config() override;
 
-        /// Whether to skip push constants
-        bool skip_push_constants;
+        /// Whether to skip variables with a non-zero group binding
+        bool skip_nonzero_groups;
     };
 
     /// @copydoc Transform::Apply
