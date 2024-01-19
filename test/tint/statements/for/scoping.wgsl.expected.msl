@@ -1,9 +1,13 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_preserve_loop_var = false;
+#define TINT_PRESERVE_LOOP() if (tint_preserve_loop_var) { break; } static_assert(true)
+
 void f() {
   for(int must_not_collide = 0; ; ) {
-    __asm__("");
+    TINT_PRESERVE_LOOP();
     break;
   }
   int must_not_collide = 0;
