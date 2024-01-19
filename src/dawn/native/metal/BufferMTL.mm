@@ -129,7 +129,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
     if (GetDevice()->IsToggleEnabled(Toggle::NonzeroClearResourcesOnCreationForTesting) &&
         !mappedAtCreation) {
         CommandRecordingContext* commandContext =
-            ToBackend(GetDevice())->GetPendingCommandContext();
+            ToBackend(GetDevice()->GetQueue())->GetPendingCommandContext();
         ClearBuffer(commandContext, uint8_t(1u));
     }
 
@@ -141,7 +141,7 @@ MaybeError Buffer::Initialize(bool mappedAtCreation) {
             uint64_t clearOffset = GetAllocatedSize() - clearSize;
 
             CommandRecordingContext* commandContext =
-                ToBackend(GetDevice())->GetPendingCommandContext();
+                ToBackend(GetDevice()->GetQueue())->GetPendingCommandContext();
             ClearBuffer(commandContext, 0, clearOffset, clearSize);
         }
     }
@@ -196,7 +196,8 @@ MaybeError Buffer::MapAtCreationImpl() {
 }
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
-    CommandRecordingContext* commandContext = ToBackend(GetDevice())->GetPendingCommandContext();
+    CommandRecordingContext* commandContext =
+        ToBackend(GetDevice()->GetQueue())->GetPendingCommandContext();
     EnsureDataInitialized(commandContext);
 
     return {};
