@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "76ad706b_dd2feeff",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-19T23:01:59Z",
+      "side": 1,
+      "message": "I thought I was seeing double because this seemingly duplicates code with https://dawn-review.git.corp.google.com/c/dawn/+/170540  \n\nBut it\u0027s not very much at least.",
+      "revId": "4023fcdbed5bdc969e90b03893a2261d658bc1a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
