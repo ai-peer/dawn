@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "74c6a243_04c5925a",
+        "filename": "tools/src/browser/launch.go",
+        "patchSetId": 3
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-19T17:58:11Z",
+      "side": 1,
+      "message": "Interesting. In the past, my goto was \"cmd /c start \u003curl\u003e\", which in this case, may just be `exec.Command(\"start\", url)` if it runs it with the shell.",
+      "range": {
+        "startLine": 43,
+        "startChar": 2,
+        "endLine": 43,
+        "endChar": 77
+      },
+      "revId": "00c0fdb9d84b483fdc858003bc03370747296c98",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
