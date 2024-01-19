@@ -544,7 +544,7 @@ bool VulkanInstance::HandleDeviceMessage(std::string deviceDebugPrefix, std::str
     return false;
 }
 
-Backend::Backend(InstanceBase* instance) : BackendConnection(instance, wgpu::BackendType::Vulkan) {}
+Backend::Backend() : BackendConnection(wgpu::BackendType::Vulkan) {}
 
 Backend::~Backend() = default;
 
@@ -594,8 +594,8 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     return physicalDevices;
 }
 
-BackendConnection* Connect(InstanceBase* instance) {
-    return new Backend(instance);
+BackendConnection* Connect() {
+    return new Backend();
 }
 
 }  // namespace dawn::native::vulkan
