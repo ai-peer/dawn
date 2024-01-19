@@ -50,6 +50,7 @@
 #include "src/tint/lang/hlsl/writer/ast_raise/pixel_local.h"
 #include "src/tint/lang/hlsl/writer/ast_raise/remove_continue_in_switch.h"
 #include "src/tint/lang/hlsl/writer/ast_raise/truncate_interstage_variables.h"
+#include "src/tint/lang/hlsl/writer/common/option_helpers.h"
 #include "src/tint/lang/wgsl/ast/call_statement.h"
 #include "src/tint/lang/wgsl/ast/internal_attribute.h"
 #include "src/tint/lang/wgsl/ast/interpolate_attribute.h"
@@ -207,9 +208,16 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
 
         ast::transform::Robustness::Config config = {};
 
-        config.bindings_ignored = std::unordered_set<BindingPoint>(
-            options.binding_points_ignored_in_robustness_transform.cbegin(),
-            options.binding_points_ignored_in_robustness_transform.cend());
+        if (!options.binding_points_ignored_in_robustness_transform.empty()) {
+            // TODO(amaiorano): REMOVE ONCE D3D11 UPDATED
+            config.bindings_ignored = std::unordered_set<BindingPoint>(
+                options.binding_points_ignored_in_robustness_transform.cbegin(),
+                options.binding_points_ignored_in_robustness_transform.cend());
+        } else {
+            config.bindings_ignored = std::unordered_set<BindingPoint>(
+                options.bindings.ignored_by_robustness_transform.cbegin(),
+                options.bindings.ignored_by_robustness_transform.cend());
+        }
 
         // Direct3D guarantees to return zero for any resource that is accessed out of bounds, and
         // according to the description of the assembly store_uav_typed, out of bounds addressing
@@ -219,20 +227,41 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
         data.Add<ast::transform::Robustness::Config>(config);
     }
 
-    // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
-    data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
-        options.external_texture_options.bindings_map);
-    manager.Add<ast::transform::MultiplanarExternalTexture>();
+    // TODO(amaiorano): remove once D3D11 is updated
+    const bool run_old_binding_remapper = !options.external_texture_options.bindings_map.empty() ||
+                                          !options.binding_remapper_options.binding_points.empty();
 
-    // BindingRemapper must come after MultiplanarExternalTexture
-    manager.Add<ast::transform::BindingRemapper>();
+    if (run_old_binding_remapper) {
+        // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
+        data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
+            options.external_texture_options.bindings_map);
+        manager.Add<ast::transform::MultiplanarExternalTexture>();
 
-    // D3D11 and 12 registers like `t3` and `c3` have the same bindingOffset number in
-    // the remapping but should not be considered a collision because they have
-    // different types.
-    data.Add<ast::transform::BindingRemapper::Remappings>(
-        options.binding_remapper_options.binding_points, options.access_controls,
-        /* allow_collisions */ true);
+        // BindingRemapper must come after MultiplanarExternalTexture
+        manager.Add<ast::transform::BindingRemapper>();
+
+        // D3D11 and 12 registers like `t3` and `c3` have the same bindingOffset number in
+        // the remapping but should not be considered a collision because they have
+        // different types.
+        data.Add<ast::transform::BindingRemapper::Remappings>(
+            options.binding_remapper_options.binding_points, options.access_controls,
+            /* allow_collisions */ true);
+    } else {
+        ExternalTextureOptions external_texture_options{};
+        RemapperData remapper_data{};
+        PopulateRemapperAndMultiplanarOptions(options, remapper_data, external_texture_options);
+
+        manager.Add<ast::transform::BindingRemapper>();
+        data.Add<ast::transform::BindingRemapper::Remappings>(
+            remapper_data, std::unordered_map<BindingPoint, core::Access>{},
+            /* allow_collisions */ true);
+
+        // Note: it is more efficient for MultiplanarExternalTexture to come after Robustness
+        // MultiplanarExternalTexture must come after BindingRemapper
+        data.Add<ast::transform::MultiplanarExternalTexture::NewBindingPoints>(
+            external_texture_options.bindings_map, /* allow_collisions */ true);
+        manager.Add<ast::transform::MultiplanarExternalTexture>();
+    }
 
     {  // Builtin polyfills
         ast::transform::BuiltinPolyfill::Builtins polyfills;
