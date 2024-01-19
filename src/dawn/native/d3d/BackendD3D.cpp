@@ -63,8 +63,7 @@ ResultOrError<ComPtr<IDXGIFactory4>> CreateFactory(const PlatformFunctions* func
 
 }  // anonymous namespace
 
-Backend::Backend(InstanceBase* instance, wgpu::BackendType type)
-    : BackendConnection(instance, type) {}
+Backend::Backend(wgpu::BackendType type) : BackendConnection(type) {}
 
 MaybeError Backend::Initialize(std::unique_ptr<PlatformFunctions> functions) {
     mFunctions = std::move(functions);

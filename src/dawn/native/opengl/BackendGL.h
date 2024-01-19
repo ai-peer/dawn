@@ -40,7 +40,7 @@ namespace dawn::native::opengl {
 class PhysicalDevice;
 class Backend : public BackendConnection {
   public:
-    Backend(InstanceBase* instance, wgpu::BackendType backendType);
+    explicit Backend(wgpu::BackendType backendType);
 
     std::vector<Ref<PhysicalDeviceBase>> DiscoverPhysicalDevices(
         const UnpackedPtr<RequestAdapterOptions>& options) override;
