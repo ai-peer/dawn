@@ -449,7 +449,7 @@ MaybeError Queue::WaitForIdleForDestruction() {
 }
 
 // ComputePipeline
-MaybeError ComputePipeline::Initialize() {
+MaybeError ComputePipeline::InitializeImpl() {
     const ProgrammableStage& computeStage = GetStage(SingleShaderStage::Compute);
 
     tint::Program transformedProgram;
@@ -490,7 +490,7 @@ MaybeError ComputePipeline::Initialize() {
 }
 
 // RenderPipeline
-MaybeError RenderPipeline::Initialize() {
+MaybeError RenderPipeline::InitializeImpl() {
     return {};
 }
 
