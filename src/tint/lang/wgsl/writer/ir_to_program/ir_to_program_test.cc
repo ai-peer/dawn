@@ -214,12 +214,52 @@ fn f() -> @location(1) vec4<f32> {
 )");
 }
 
+TEST_F(IRToProgramTest, EntryPoint_ReturnAttribute_Interpolation) {
+    auto* fn = b.Function("f", ty.vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
+    fn->SetReturnLocation(1, core::Interpolation{core::InterpolationType::kLinear,
+                                                 core::InterpolationSampling::kCentroid});
+
+    fn->Block()->Append(b.Return(fn, b.Splat(ty.vec4<f32>(), 0_f, 4)));
+
+    EXPECT_WGSL(R"(
+@fragment
+fn f() -> @location(1) @interpolate(linear, centroid) vec4<f32> {
+  return vec4<f32>();
+}
+)");
+}
+
+TEST_F(IRToProgramTest, EntryPoint_ReturnAttribute_Flat_IgnoreSampling) {
+    auto* fn = b.Function("f", ty.vec4<f32>(), core::ir::Function::PipelineStage::kFragment);
+    fn->SetReturnLocation(1, core::Interpolation{core::InterpolationType::kFlat,
+                                                 core::InterpolationSampling::kCenter});
+
+    fn->Block()->Append(b.Return(fn, b.Splat(ty.vec4<f32>(), 0_f, 4)));
+
+    EXPECT_WGSL(R"(
+@fragment
+fn f() -> @location(1) @interpolate(flat) vec4<f32> {
+  return vec4<f32>();
+}
+)");
+}
+
 namespace {
 core::ir::FunctionParam* MakeBuiltinParam(core::ir::Builder& b,
                                           const core::type::Type* type,
                                           enum core::BuiltinValue builtin) {
     auto* param = b.FunctionParam(type);
     param->SetBuiltin(builtin);
+    return param;
+}
+
+core::ir::FunctionParam* MakeLocationParam(
+    core::ir::Builder& b,
+    const core::type::Type* type,
+    uint32_t location,
+    std::optional<core::Interpolation> interp = std::nullopt) {
+    auto* param = b.FunctionParam(type);
+    param->SetLocation(location, interp);
     return param;
 }
 }  // namespace
@@ -261,6 +301,42 @@ TEST_F(IRToProgramTest, EntryPoint_ParameterAttribute_Fragment) {
     EXPECT_WGSL(R"(
 @fragment
 fn f(@builtin(front_facing) v : bool, @builtin(sample_index) v_1 : u32, @builtin(sample_mask) v_2 : u32) {
+}
+)");
+}
+
+TEST_F(IRToProgramTest, EntryPoint_ParameterAttribute_Fragment_Interpolation) {
+    auto* fn = b.Function("f", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    fn->SetParams({
+        MakeLocationParam(b, ty.f32(), 1),
+        MakeLocationParam(b, ty.f32(), 2,
+                          core::Interpolation{core::InterpolationType::kPerspective,
+                                              core::InterpolationSampling::kCentroid}),
+    });
+
+    fn->Block()->Append(b.Return(fn));
+
+    EXPECT_WGSL(R"(
+@fragment
+fn f(@location(1) v : f32, @location(2) @interpolate(perspective, centroid) v_1 : f32) {
+}
+)");
+}
+
+TEST_F(IRToProgramTest, EntryPoint_ParameterAttribute_Fragment_Flat_IgnoreSampling) {
+    auto* fn = b.Function("f", ty.void_(), core::ir::Function::PipelineStage::kFragment);
+    fn->SetParams({
+        MakeLocationParam(b, ty.f32(), 1, core::Interpolation{core::InterpolationType::kFlat}),
+        MakeLocationParam(b, ty.f32(), 2,
+                          core::Interpolation{core::InterpolationType::kFlat,
+                                              core::InterpolationSampling::kCentroid}),
+    });
+
+    fn->Block()->Append(b.Return(fn));
+
+    EXPECT_WGSL(R"(
+@fragment
+fn f(@location(1) @interpolate(flat) v : f32, @location(2) @interpolate(flat) v_1 : f32) {
 }
 )");
 }
