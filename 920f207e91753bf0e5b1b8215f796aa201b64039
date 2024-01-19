@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b2c2c22a_157eac8d",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-19T04:50:30Z",
+      "side": 1,
+      "message": "Not really necessary. But if without this line of code, the test will be difficult. It is because `mScopedUseShaderPrograms` will be released after calling `device-\u003eAddComputePipelineAsyncCallbackTask()`. So the mCallback will be called on the main thread (Tick() thread). The mCallback could be called before or after `mScopedUseShaderPrograms` is released. The test will difficult to write.",
+      "parentUuid": "a1e051fd_e6c08f19",
+      "range": {
+        "startLine": 70,
+        "startChar": 0,
+        "endLine": 70,
+        "endChar": 34
+      },
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4eda3986_21299c8d",
         "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
         "patchSetId": 17
@@ -37,6 +61,24 @@
       "writtenOn": "2024-01-18T20:26:28Z",
       "side": 1,
       "message": "[1]",
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa19857d_fc03b959",
+        "filename": "src/dawn/native/CreatePipelineAsyncTask.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 92,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-19T04:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4eda3986_21299c8d",
       "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -58,6 +100,42 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "aab383c4_dc38a1a7",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-19T04:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9084980d_8e1dd8ec",
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ad13c084_8561f5ce",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 152,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-19T04:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9084980d_8e1dd8ec",
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "e138d963_74a44b60",
@@ -71,6 +149,24 @@
       "writtenOn": "2024-01-18T20:26:28Z",
       "side": 1,
       "message": "please also test the non-async versions. We need to make sure that the tint program is recreated if it is deleted if we recreate the shader module, get a cache hit, and then do a synchronous pipeline creation.",
+      "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f0324441_57cc84ab",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 17
+      },
+      "lineNbr": 304,
+      "author": {
+        "id": 1003451
+      },
+      "writtenOn": "2024-01-19T04:50:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "e138d963_74a44b60",
       "revId": "920f207e91753bf0e5b1b8215f796aa201b64039",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
