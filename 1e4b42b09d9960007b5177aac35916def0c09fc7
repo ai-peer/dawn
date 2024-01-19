@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "839d4f80_78140a25",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:03:46Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "1e4b42b09d9960007b5177aac35916def0c09fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22762854_fee46ff6",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:03:46Z",
+      "side": 1,
+      "message": "```suggestion\n                        // update next pointer back to the original since it would be overwritten\n```",
+      "range": {
+        "startLine": 265,
+        "startChar": 86,
+        "endLine": 265,
+        "endChar": 98
+      },
+      "revId": "1e4b42b09d9960007b5177aac35916def0c09fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
