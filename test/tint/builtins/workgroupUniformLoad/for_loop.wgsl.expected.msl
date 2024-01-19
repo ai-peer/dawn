@@ -1,6 +1,10 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_preserve_loop_var = false;
+#define TINT_PRESERVE_LOOP() if (tint_preserve_loop_var) { break; } static_assert(true)
+
 int tint_workgroupUniformLoad(threadgroup int* const p) {
   threadgroup_barrier(mem_flags::mem_threadgroup);
   int const result = *(p);
@@ -12,7 +16,7 @@ void foo(threadgroup int* const tint_symbol_4, threadgroup int* const tint_symbo
   {
     int i = 0;
     while (true) {
-      __asm__("");
+      TINT_PRESERVE_LOOP();
       int const tint_symbol = i;
       int const tint_symbol_1 = tint_workgroupUniformLoad(tint_symbol_4);
       if (!((tint_symbol < tint_symbol_1))) {

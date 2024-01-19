@@ -2123,9 +2123,9 @@ bool ASTPrinter::EmitLoop(const ast::LoopStatement* stmt) {
 
     TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
     Line() << "while (true) {";
-    EmitLoopPreserver();
     {
         ScopedIndent si(this);
+        EmitLoopPreserver();
         if (!EmitStatements(stmt->body->statements)) {
             return false;
         }
@@ -2194,7 +2194,6 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
 
         TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
         Line() << "while (true) {";
-        EmitLoopPreserver();
         IncrementIndent();
         TINT_DEFER({
             DecrementIndent();
@@ -2235,11 +2234,12 @@ bool ASTPrinter::EmitForLoop(const ast::ForLoopStatement* stmt) {
             }
             out << " {";
         }
-        EmitLoopPreserver();
         {
             auto emit_continuing = [] { return true; };
             TINT_SCOPED_ASSIGNMENT(emit_continuing_, emit_continuing);
-            if (!EmitStatementsWithIndent(stmt->body->statements)) {
+            ScopedIndent si(this);
+            EmitLoopPreserver();
+            if (!EmitStatements(stmt->body->statements)) {
                 return false;
             }
         }
@@ -2269,8 +2269,8 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
     bool emit_as_loop = cond_pre.lines.size() > 0;
     if (emit_as_loop) {
         Line() << "while (true) {";
-        EmitLoopPreserver();
         IncrementIndent();
+        EmitLoopPreserver();
         TINT_DEFER({
             DecrementIndent();
             Line() << "}";
@@ -2292,9 +2292,12 @@ bool ASTPrinter::EmitWhile(const ast::WhileStatement* stmt) {
             }
             out << " {";
         }
-        EmitLoopPreserver();
-        if (!EmitStatementsWithIndent(stmt->body->statements)) {
-            return false;
+        {
+            ScopedIndent si(this);
+            EmitLoopPreserver();
+            if (!EmitStatements(stmt->body->statements)) {
+                return false;
+            }
         }
         Line() << "}";
     }
@@ -3032,31 +3035,20 @@ bool ASTPrinter::EmitLet(const ast::Let* let) {
 }
 
 void ASTPrinter::EmitLoopPreserver() {
-    IncrementIndent();
-    // This statement prevents the MSL compiler from erasing a loop during
-    // optimizations.  In the AIR dialiect of LLVM IR, WGSL loops should compile
-    // to a loop that contains an 'asm' call with a 'sideeffect' annotation.
-    //
-    // For example, compile a WGSL file with a trivial while(1) loop to 'a.metal',
-    // then compile that to AIR (LLVM IR dialect):
-    //
-    //    xcrun metal a.metal -S -o -
-    //
-    // The loop in the AIR should look something like this:
-    //
-    //    1: ...
-    //      br label %2
-    //
-    //    2:                                      ; preds = %1, %2
-    //      tail call void asm sideeffect "", ""() #1, !srcloc !27
-    //      br label %2, !llvm.loop !28
-    //
-    // It is important that the 'sideeffect' annotation exist. That tells the
-    // optimizer that the instruction has side effects invisible to the
-    // optimizer, and therefore the loop should not be eliminated.
-    Line() << R"(__asm__("");)";
+    Line() << LoopPreservingMacro() << "();";
+}
 
-    DecrementIndent();
+std::string_view ASTPrinter::LoopPreservingMacro() {
+    if (loop_preserving_macro_.empty()) {
+        auto loop_preserving_var = UniqueIdentifier("tint_preserve_loop_var");
+        loop_preserving_macro_ = UniqueIdentifier("TINT_PRESERVE_LOOP");
+        Line(&helpers_) << "constant static volatile bool " << loop_preserving_var << " = false;";
+        Line(&helpers_) << "#define TINT_PRESERVE_LOOP() if (" << loop_preserving_var
+                        << ") { break; } static_assert(true)";
+        // Note: static_assert(true) is used to require a semicolon.
+        Line(&helpers_);
+    }
+    return loop_preserving_macro_;
 }
 
 template <typename F>
