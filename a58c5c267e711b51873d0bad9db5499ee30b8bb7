@@ -161,6 +161,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "76edd19e_36877b8c",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-19T23:35:25Z",
+      "side": 1,
+      "message": "I don\u0027t think we need the WeakPtr though - we just need to return a pointer that is guaranteed to not be deleted since we are no longer holding the mutex.",
+      "parentUuid": "a4185d0d_f852aa45",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5581f1_b1c4c3cb",
         "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
         "patchSetId": 19
