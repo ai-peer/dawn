@@ -1922,12 +1922,21 @@ void ASTPrinter::EmitGlobalVariable(const ast::Variable* global) {
 
 void ASTPrinter::EmitUniformVariable(const ast::Var* var, const sem::Variable* sem) {
     auto* type = sem->Type()->UnwrapRef();
+    auto bp = *sem->As<sem::GlobalVariable>()->Attributes().binding_point;
+    if (bp.group == 999) {
+        auto out = Line();
+
+        auto name = var->name->symbol.Name();
+        out << "layout(location = " << bp.binding << ") ";
+        EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(), name);
+        out << ";";
+        return;
+    }
     auto* str = type->As<core::type::Struct>();
     if (TINT_UNLIKELY(!str)) {
         TINT_ICE() << "storage variable must be of struct type";
         return;
     }
-    auto bp = *sem->As<sem::GlobalVariable>()->Attributes().binding_point;
     {
         auto out = Line();
         out << "layout(binding = " << bp.binding << ", std140";
