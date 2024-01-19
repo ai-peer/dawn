@@ -20,6 +20,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3dd12f5e_49065dac",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-19T22:55:43Z",
+      "side": 1,
+      "message": "Hmm, thoughts on just making these `protected` and making `ScopedCommandRecordingContext` inherit from `dawn::detail::Guard\u003cCommandRecordingContext, dawn::detail::MutexProtectedTraits\u003cCommandRecordingContext\u003e\u003e` instead? I think that keeps these encapsulated a bit more and IMO it also makes it more obvious that `ScopedCommandRecordingContext` is a `Guard` type object?",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 73
+      },
+      "revId": "1c40fd37bc7d77f111483b872ff25d982374333b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e3a4d8_009a20e7",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 2
