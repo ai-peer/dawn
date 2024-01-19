@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4bea77ae_7b85d813",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T02:02:10Z",
+      "side": 1,
+      "message": "d3d11 lgtm",
+      "revId": "1c40fd37bc7d77f111483b872ff25d982374333b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "55e3a4d8_009a20e7",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T02:02:10Z",
+      "side": 1,
+      "message": "I though we will use `ID3D11Multithread::SetMultithreadProtected(TRUE)` to make the ID3D11DeviceContext thread safe. Why we need this extra mutex? Could you please explain why we need this mutex?  thanks",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "1c40fd37bc7d77f111483b872ff25d982374333b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
