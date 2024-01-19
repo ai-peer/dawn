@@ -308,6 +308,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f0dde8c1_5a4ebd13",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-19T06:30:57Z",
+      "side": 1,
+      "message": "@rafael.cintron@microsoft.com Thanks for the clarification!\nOne more thing I\u0027d like to confirm with you is that, for a buffer used in a previous draw, how to ensure mapping it with `D3D11_MAP_FLAG_DO_NOT_WAIT` won\u0027t return `DXGI_ERROR_WAS_STILL_DRAWING`.\nAccording to the d3d11 [fence signal](https://learn.microsoft.com/en-us/windows/win32/api/d3d11_3/nf-d3d11_3-id3d11devicecontext4-signal)\n\u003eUpdates a fence to a specified value after all previous work has completed.\n\nIf the fence value is passed, \"all previous work has completed\" here implies the buffer is ready to be mapped immediately, right?",
+      "parentUuid": "f73b69b4_f2d73e99",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
