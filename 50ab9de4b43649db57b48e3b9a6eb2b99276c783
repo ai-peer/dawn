@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "683d96da_929a4ebd",
+        "filename": "src/dawn/wire/client/Buffer.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-19T00:55:23Z",
+      "side": 1,
+      "message": "Done (using the proc one). Yea, Corentin also commented on this in https://dawn-review.googlesource.com/c/dawn/+/168800/comment/60b5db7c_2cff9152/\n\nWill investigate if possible and do in a follow up!",
+      "parentUuid": "c529fe64_8582a69d",
+      "range": {
+        "startLine": 68,
+        "startChar": 32,
+        "endLine": 68,
+        "endChar": 73
+      },
+      "revId": "50ab9de4b43649db57b48e3b9a6eb2b99276c783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "b4dbff4c_cca1b1ec",
@@ -54,6 +78,24 @@
       "writtenOn": "2024-01-18T01:00:30Z",
       "side": 1,
       "message": "Under what circumstance is this nullopt? I\u0027d have thought all MapRequests had one of these two types. It seems to happen if MapAsyncF is called with a mode of 0.\nI guess the wire client is supposed to gracefully handle this case and let the server be responsible for saying the request is bad?\n\nA comment here would be useful because it\u0027s unintuitive.\nOr maybe the old 3-value MapRequestType, but with a more descriptive third value, would be clearer (\"InvalidMode\" instead of \"None\")?",
+      "revId": "50ab9de4b43649db57b48e3b9a6eb2b99276c783",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5997074c_e90076f4",
+        "filename": "src/dawn/wire/client/Buffer.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-19T00:55:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "b4dbff4c_cca1b1ec",
       "revId": "50ab9de4b43649db57b48e3b9a6eb2b99276c783",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
