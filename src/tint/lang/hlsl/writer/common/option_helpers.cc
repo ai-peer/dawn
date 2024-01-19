@@ -25,13 +25,13 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/msl/writer/common/option_helpers.h"
+#include "src/tint/lang/hlsl/writer/common/option_helpers.h"
 
 #include <utility>
 
 #include "src/tint/utils/containers/hashset.h"
 
-namespace tint::msl::writer {
+namespace tint::hlsl::writer {
 
 /// binding::BindingInfo to tint::BindingPoint map
 using InfoToPointMap = tint::Hashmap<binding::BindingInfo, tint::BindingPoint, 8>;
@@ -41,9 +41,9 @@ Result<SuccessType> ValidateBindingOptions(const Options& options) {
 
     tint::Hashmap<tint::BindingPoint, binding::BindingInfo, 8> seen_wgsl_bindings{};
 
-    InfoToPointMap seen_msl_buffer_bindings{};
-    InfoToPointMap seen_msl_texture_bindings{};
-    InfoToPointMap seen_msl_sampler_bindings{};
+    InfoToPointMap seen_hlsl_buffer_bindings{};
+    InfoToPointMap seen_hlsl_texture_bindings{};
+    InfoToPointMap seen_hlsl_sampler_bindings{};
 
     // Both wgsl_seen and spirv_seen check to see if the pair of [src, dst] are unique. If we have
     // multiple entries that map the same [src, dst] pair, that's fine. We treat it as valid as it's
@@ -65,8 +65,8 @@ Result<SuccessType> ValidateBindingOptions(const Options& options) {
         return false;
     };
 
-    auto msl_seen = [&diagnostics](InfoToPointMap& map, const binding::BindingInfo& src,
-                                   const tint::BindingPoint& dst) -> bool {
+    auto hlsl_seen = [&diagnostics](InfoToPointMap& map, const binding::BindingInfo& src,
+                                    const tint::BindingPoint& dst) -> bool {
         if (auto binding = map.Find(src)) {
             if (*binding != dst) {
                 std::stringstream str;
@@ -79,7 +79,7 @@ Result<SuccessType> ValidateBindingOptions(const Options& options) {
         return false;
     };
 
-    auto valid = [&wgsl_seen, &msl_seen](InfoToPointMap& map, const auto& hsh) -> bool {
+    auto valid = [&wgsl_seen, &hlsl_seen](InfoToPointMap& map, const auto& hsh) -> bool {
         for (const auto& it : hsh) {
             const auto& src_binding = it.first;
             const auto& dst_binding = it.second;
@@ -88,7 +88,7 @@ Result<SuccessType> ValidateBindingOptions(const Options& options) {
                 return false;
             }
 
-            if (msl_seen(map, dst_binding, src_binding)) {
+            if (hlsl_seen(map, dst_binding, src_binding)) {
                 return false;
             }
         }
@@ -96,27 +96,27 @@ Result<SuccessType> ValidateBindingOptions(const Options& options) {
     };
 
     // Storage and uniform are both [[buffer()]]
-    if (!valid(seen_msl_buffer_bindings, options.bindings.uniform)) {
+    if (!valid(seen_hlsl_buffer_bindings, options.bindings.uniform)) {
         diagnostics.add_note(diag::System::Writer, "when processing uniform", {});
         return Failure{std::move(diagnostics)};
     }
-    if (!valid(seen_msl_buffer_bindings, options.bindings.storage)) {
+    if (!valid(seen_hlsl_buffer_bindings, options.bindings.storage)) {
         diagnostics.add_note(diag::System::Writer, "when processing storage", {});
         return Failure{std::move(diagnostics)};
     }
 
     // Sampler is [[sampler()]]
-    if (!valid(seen_msl_sampler_bindings, options.bindings.sampler)) {
+    if (!valid(seen_hlsl_sampler_bindings, options.bindings.sampler)) {
         diagnostics.add_note(diag::System::Writer, "when processing sampler", {});
         return Failure{std::move(diagnostics)};
     }
 
     // Texture and storage texture are [[texture()]]
-    if (!valid(seen_msl_texture_bindings, options.bindings.texture)) {
+    if (!valid(seen_hlsl_texture_bindings, options.bindings.texture)) {
         diagnostics.add_note(diag::System::Writer, "when processing texture", {});
         return Failure{std::move(diagnostics)};
     }
-    if (!valid(seen_msl_texture_bindings, options.bindings.storage_texture)) {
+    if (!valid(seen_hlsl_texture_bindings, options.bindings.storage_texture)) {
         diagnostics.add_note(diag::System::Writer, "when processing storage_texture", {});
         return Failure{std::move(diagnostics)};
     }
@@ -134,16 +134,16 @@ Result<SuccessType> ValidateBindingOptions(const Options& options) {
         }
 
         // Plane0 & Plane1 are [[texture()]]
-        if (msl_seen(seen_msl_texture_bindings, plane0, src_binding)) {
+        if (hlsl_seen(seen_hlsl_texture_bindings, plane0, src_binding)) {
             diagnostics.add_note(diag::System::Writer, "when processing external_texture", {});
             return Failure{std::move(diagnostics)};
         }
-        if (msl_seen(seen_msl_texture_bindings, plane1, src_binding)) {
+        if (hlsl_seen(seen_hlsl_texture_bindings, plane1, src_binding)) {
             diagnostics.add_note(diag::System::Writer, "when processing external_texture", {});
             return Failure{std::move(diagnostics)};
         }
         // Metadata is [[buffer()]]
-        if (msl_seen(seen_msl_buffer_bindings, metadata, src_binding)) {
+        if (hlsl_seen(seen_hlsl_buffer_bindings, metadata, src_binding)) {
             diagnostics.add_note(diag::System::Writer, "when processing external_texture", {});
             return Failure{std::move(diagnostics)};
         }
@@ -156,23 +156,24 @@ Result<SuccessType> ValidateBindingOptions(const Options& options) {
 // the correct place when we're done. The binding remapper is run first, so make sure that the
 // external texture uses the new binding point.
 //
-// When the data comes in we have a list of all WGSL origin (group,binding) pairs to MSL
-// (binding) in the `uniform`, `storage`, `texture`, and `sampler` arrays.
+// When the data comes in we have a list of all WGSL origin (group,binding) pairs to HLSL
+// (group,binding) in the `uniform`, `storage`, `texture`, and `sampler` arrays.
 void PopulateRemapperAndMultiplanarOptions(const Options& options,
                                            RemapperData& remapper_data,
                                            ExternalTextureOptions& external_texture) {
     auto create_remappings = [&remapper_data](const auto& hsh) {
         for (const auto& it : hsh) {
             const BindingPoint& src_binding_point = it.first;
-            const binding::BindingInfo& dst_binding_point = it.second;
+            const binding::BindingInfo& dst_binding_info = it.second;
 
-            // Bindings which go to the same slot in MSL do not need to be re-bound.
-            if (src_binding_point.group == 0 &&
-                src_binding_point.binding == dst_binding_point.binding) {
+            BindingPoint dst_binding_point{dst_binding_info.group, dst_binding_info.binding};
+
+            // Skip redundant bindings - TODO(amaiorano): do this in Dawn? Validate?
+            if (src_binding_point == dst_binding_point) {
                 continue;
             }
 
-            remapper_data.emplace(src_binding_point, BindingPoint{0, dst_binding_point.binding});
+            remapper_data.emplace(src_binding_point, dst_binding_point);
         }
     };
 
@@ -185,22 +186,20 @@ void PopulateRemapperAndMultiplanarOptions(const Options& options,
     // External textures are re-bound to their plane0 location
     for (const auto& it : options.bindings.external_texture) {
         const BindingPoint& src_binding_point = it.first;
-
         const binding::BindingInfo& plane0 = it.second.plane0;
         const binding::BindingInfo& plane1 = it.second.plane1;
         const binding::BindingInfo& metadata = it.second.metadata;
 
-        BindingPoint plane0_binding_point{0, plane0.binding};
-        BindingPoint plane1_binding_point{0, plane1.binding};
-        BindingPoint metadata_binding_point{0, metadata.binding};
+        BindingPoint plane0_binding_point{plane0.group, plane0.binding};
+        BindingPoint plane1_binding_point{plane1.group, plane1.binding};
+        BindingPoint metadata_binding_point{metadata.group, metadata.binding};
 
-        // Use the re-bound MSL plane0 value for the lookup key. The group goes to `0` which is the
-        // value always used for re-bound data.
+        // Use the re-bound HLSL plane0 value for the lookup key.
         external_texture.bindings_map.emplace(
-            BindingPoint{0, plane0_binding_point.binding},
+            plane0_binding_point,
             ExternalTextureOptions::BindingPoints{plane1_binding_point, metadata_binding_point});
 
-        // Bindings which go to the same slot in MSL do not need to be re-bound.
+        // Bindings which go to the same slot in HLSL do not need to be re-bound.
         if (src_binding_point == plane0_binding_point) {
             continue;
         }
@@ -209,18 +208,18 @@ void PopulateRemapperAndMultiplanarOptions(const Options& options,
     }
 }
 
-}  // namespace tint::msl::writer
+}  // namespace tint::hlsl::writer
 
 namespace std {
 
-/// Custom std::hash specialization for tint::msl::writer::binding::BindingInfo so
+/// Custom std::hash specialization for tint::hlsl::writer::binding::BindingInfo so
 /// they can be used as keys for std::unordered_map and std::unordered_set.
 template <>
-class hash<tint::msl::writer::binding::BindingInfo> {
+class hash<tint::hlsl::writer::binding::BindingInfo> {
   public:
     /// @param info the binding to create a hash for
     /// @return the hash value
-    inline std::size_t operator()(const tint::msl::writer::binding::BindingInfo& info) const {
+    inline std::size_t operator()(const tint::hlsl::writer::binding::BindingInfo& info) const {
         return tint::Hash(info.binding);
     }
 };
