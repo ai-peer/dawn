@@ -3040,7 +3040,7 @@ void ASTPrinter::EmitLoopCondition(StringStream& out, const std::string& cond) {
     if (cond.empty()) {
         out << LoopPreservingVar();
     } else {
-        out << "(" << cond << ") == " << LoopPreservingVar();
+        out << "(" << cond << ") && " << LoopPreservingVar();
     }
 }
 
