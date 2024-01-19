@@ -146,6 +146,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "cdd37e86_f8f4cfc8",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 20,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-19T01:15:11Z",
+      "side": 1,
+      "message": "Thanks all for clarifying!",
+      "parentUuid": "8db2fce6_c71bd51d",
+      "range": {
+        "startLine": 17,
+        "startChar": 16,
+        "endLine": 20,
+        "endChar": 49
+      },
+      "revId": "6fa3a393791c9dc4dd7e591a5f612c3fb7b3d148",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "6a7b6c92_9de0e512",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 3
