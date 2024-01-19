@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "806246eb_9e9196f0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:36:36Z",
+      "side": 1,
+      "message": "LGTM! I stumbled upon this when thinking of how to reland the change in Chromium to use DawnInstanceDescriptor. It should make things a lot easier 😊",
+      "revId": "362af6f5320533308b4c4b55c95ffe9f8b8ef178",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
