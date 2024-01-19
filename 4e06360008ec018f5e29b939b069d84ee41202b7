@@ -290,6 +290,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f73b69b4_f2d73e99",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-01-19T02:39:16Z",
+      "side": 1,
+      "message": "@Jie, `UpdateSubResource` and `Map` should be roughly equivalent _if_ your source data always comes from an external place. \n\nFor instance, say you have an algorithm which generates buffer data, a bunch of triangles or something. Best would be to find a staging resource not in use by the GPU (using `D3D11_MAP_FLAG_DO_NOT_WAIT`), generate the buffer data into the pointer returned by Map, and copy the staging resource to a default resource. Here, the data is only accessed two times. First, when you write to the pointer returned by Map. Second when the staging resource is copied to the default resource on the GPU timeline. \n\nIf you do the above using `UpdateSubResource`, the data is traversed more times. First when you generate the data to a CPU allocated buffer. Second when `UpdateSubResource` copies the data to a temporary location. Third when D3D copies the data from the temporary location to the default buffer on the GPU timeline.\n\nOn UMA systems where you don\u0027t have control over where the data comes from, you can use default mappable resources. Keep a pool of default (non-staging) resources. Use Map (with `D3D11_MAP_FLAG_DO_NOT_WAIT`) to find a free one. Call `ID3D11Device3::WriteToSubresource` to transfer the memory straight to the default resource memory. No staging resources needed. Check `D3D11_FEATURE_D3D11_OPTIONS2.MapOnDefaultTextures` and `D3D11_FEATURE_D3D11_OPTIONS1.MapOnDefaultBuffer` for support.\n\nSee https://chromium-review.googlesource.com/c/chromium/src/+/3159003 where Sunny added `WriteToSubresource` for certain SharedImage copies.\n\nFor Critical Path Analysis, check the \"CPU Usage\" box in WPRUI. In the CPU Samples view, right click on a thread and select the \"Critical Path Analysis (CPA)\" item from the menu. This will bring up a new view that lets you sort by wait time and see which waits are the longest. You\u0027ll see callstacks when the thread had to wait and which callstack woke up the thread.",
+      "parentUuid": "46e5550d_87093a25",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
