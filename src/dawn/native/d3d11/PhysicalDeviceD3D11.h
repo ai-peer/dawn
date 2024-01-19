@@ -55,6 +55,8 @@ class PhysicalDevice : public d3d::PhysicalDevice {
     uint32_t GetUAVSlotCount() const { return mUAVSlotCount; }
     bool IsSharedD3D11Device() const { return mIsSharedD3D11Device; }
 
+    void PopulateD3DProperties(AdapterPropertiesD3D* d3dProperties) const override;
+
   private:
     using Base = d3d::PhysicalDevice;
 

@@ -112,6 +112,8 @@ class PhysicalDeviceBase : public RefCounted {
     virtual void PopulateMemoryHeapInfo(
         AdapterPropertiesMemoryHeaps* memoryHeapProperties) const = 0;
 
+    virtual void PopulateD3DProperties(AdapterPropertiesD3D* propertiesD3D) const;
+
   protected:
     uint32_t mVendorId = 0xFFFFFFFF;
     std::string mVendorName;

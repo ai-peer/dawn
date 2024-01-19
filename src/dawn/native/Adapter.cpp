@@ -121,6 +121,13 @@ void AdapterBase::APIGetProperties(AdapterProperties* properties) const {
         }
         mPhysicalDevice->PopulateMemoryHeapInfo(memoryHeaps);
     }
+    if (auto* d3dProperties = unpacked.Get<AdapterPropertiesD3D>()) {
+        if (!mSupportedFeatures.IsEnabled(wgpu::FeatureName::AdapterPropertiesD3D)) {
+            mPhysicalDevice->GetInstance()->ConsumedError(
+                DAWN_VALIDATION_ERROR("Feature AdapterPropertiesD3D is not available."));
+        }
+        mPhysicalDevice->PopulateD3DProperties(d3dProperties);
+    }
     if (auto* powerPreferenceDesc = unpacked.Get<DawnAdapterPropertiesPowerPreference>()) {
         powerPreferenceDesc->powerPreference = mPowerPreference;
     }

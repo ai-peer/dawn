@@ -190,6 +190,7 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     EnableFeature(Feature::DualSourceBlending);
     EnableFeature(Feature::Norm16TextureFormats);
     EnableFeature(Feature::AdapterPropertiesMemoryHeaps);
+    EnableFeature(Feature::AdapterPropertiesD3D);
 
     // To import multi planar textures, we need to at least tier 2 support.
     if (mDeviceInfo.supportsSharedResourceCapabilityTier2) {
@@ -355,6 +356,10 @@ void PhysicalDevice::PopulateMemoryHeapInfo(
                                  wgpu::HeapProperty::HostCoherent |
                                  wgpu::HeapProperty::HostUncached | wgpu::HeapProperty::HostCached;
     }
+}
+
+void PhysicalDevice::PopulateD3DProperties(AdapterPropertiesD3D* d3dProperties) const {
+    d3dProperties->shaderModel = GetDeviceInfo().shaderModel;
 }
 
 }  // namespace dawn::native::d3d11
