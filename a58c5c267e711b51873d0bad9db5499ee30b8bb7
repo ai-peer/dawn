@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9d9ca580_d7695d3e",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T18:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "815e0a84_4af05c3f",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "89516e37_0a45c900",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-19T17:32:59Z",
       "side": 1,
       "message": "super optional nit: we can early out when `tintData-\u003eprogram !\u003d nullptr` so that the rest of the code can be dedented.",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7a59de6c_369cdb5c",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T18:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89516e37_0a45c900",
       "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -71,6 +107,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f707cccc_2b043eec",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T18:45:50Z",
+      "side": 1,
+      "message": "Do we want to hold the lock while converting mTintProgram to backend shader source code, and compiling the backend shader? It may block the main thread in non-trivial time.",
+      "parentUuid": "8840c346_aec0a1e9",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5581f1_b1c4c3cb",
         "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
         "patchSetId": 19
@@ -82,6 +136,30 @@
       "writtenOn": "2024-01-19T17:32:59Z",
       "side": 1,
       "message": "nit: here and everywhere else we don\u0027t need to specify the entrypoint if there is a single one for that stage in the module.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 48
+      },
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e1b9ad_9088473b",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T18:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "bc5581f1_b1c4c3cb",
       "range": {
         "startLine": 122,
         "startChar": 0,
@@ -115,6 +193,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "042c535b_9da7ceb8",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T18:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a78b68b4_70be5d99",
+      "range": {
+        "startLine": 197,
+        "startChar": 24,
+        "endLine": 197,
+        "endChar": 40
+      },
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "64cb3fbe_36eea8dd",
@@ -128,6 +230,30 @@
       "writtenOn": "2024-01-19T17:32:59Z",
       "side": 1,
       "message": "I\u0027m slight worried that we could have timing races between pipeline compilation and these checks that could cause very low rates of flakiness. All the tests after DoCreateRenderPipelineAsync could see the result with the render pipeline created. Ditto for the compute case. Not sure if we can keep the test for timing of things without making it flaky though.\n\nCan we make all the number equality checks be \u003c\u003d X instead of \u003d\u003d X and also only assert that the tint program is gone after the task is completed?",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c502c5a6_9ed6d294",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T18:45:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "64cb3fbe_36eea8dd",
       "range": {
         "startLine": 301,
         "startChar": 0,

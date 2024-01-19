@@ -185,6 +185,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2793d3d6_08564dc6",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-19T18:45:50Z",
+      "side": 1,
+      "message": "I reverted that change, becasue `CreateComputePipelineAsyncTask::Run()` calls `Initialize()` as well. With this suggestion, `CreateComputePipelineAsyncTask::Run()` has to call `pipeline-\u003eInitializeImpl()` directly, or still uses `pipeline-\u003eInitialize()`, but `pipeline-\u003eUseShaderPrograms()` will be called unnecessarily. Are you OK with that? If it is OK, I would like do it in a follow-up, since it will touch a lot of pipeline implementations and tests files.",
+      "parentUuid": "1610f280_590673ef",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0adc09c1_2f6a3a02",
         "filename": "src/dawn/native/ObjectBase.h",
         "patchSetId": 10
