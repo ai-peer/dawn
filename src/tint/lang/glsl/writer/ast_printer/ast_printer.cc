@@ -67,6 +67,7 @@
 #include "src/tint/lang/wgsl/ast/transform/expand_compound_assignment.h"
 #include "src/tint/lang/wgsl/ast/transform/manager.h"
 #include "src/tint/lang/wgsl/ast/transform/multiplanar_external_texture.h"
+#include "src/tint/lang/wgsl/ast/transform/offset_first_index.h"
 #include "src/tint/lang/wgsl/ast/transform/preserve_padding.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_initializers_to_let.h"
 #include "src/tint/lang/wgsl/ast/transform/promote_side_effects_to_decl.h"
@@ -203,6 +204,8 @@ SanitizedResult Sanitize(const Program& in,
         manager.Add<ast::transform::ZeroInitWorkgroupMemory>();
     }
 
+    manager.Add<ast::transform::OffsetFirstIndex>();
+
     // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<ast::transform::CanonicalizeEntryPointIO>();
 
@@ -245,6 +248,8 @@ SanitizedResult Sanitize(const Program& in,
 
     data.Add<ast::transform::CanonicalizeEntryPointIO::Config>(
         ast::transform::CanonicalizeEntryPointIO::ShaderStyle::kGlsl);
+
+    data.Add<ast::transform::OffsetFirstIndex::Config>(-1, options.first_instance_location);
 
     SanitizedResult result;
     ast::transform::DataMap outputs;
@@ -1922,12 +1927,21 @@ void ASTPrinter::EmitGlobalVariable(const ast::Variable* global) {
 
 void ASTPrinter::EmitUniformVariable(const ast::Var* var, const sem::Variable* sem) {
     auto* type = sem->Type()->UnwrapRef();
+    auto bp = *sem->As<sem::GlobalVariable>()->Attributes().binding_point;
+    if (bp.group == 999) {
+        auto out = Line();
+
+        auto name = var->name->symbol.Name();
+        out << "layout(location = " << bp.binding << ") ";
+        EmitTypeAndName(out, type, sem->AddressSpace(), sem->Access(), name);
+        out << ";";
+        return;
+    }
     auto* str = type->As<core::type::Struct>();
     if (TINT_UNLIKELY(!str)) {
         TINT_ICE() << "storage variable must be of struct type";
         return;
     }
-    auto bp = *sem->As<sem::GlobalVariable>()->Attributes().binding_point;
     {
         auto out = Line();
         out << "layout(binding = " << bp.binding << ", std140";

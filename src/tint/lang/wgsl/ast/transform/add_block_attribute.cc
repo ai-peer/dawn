@@ -87,6 +87,12 @@ Transform::ApplyResult AddBlockAttribute::Apply(const Program& src,
             continue;
         }
 
+        if (auto bp = var->As<sem::GlobalVariable>()->Attributes().binding_point) {
+            if (bp->group == 999) {
+                continue;
+            }
+        }
+
         if (needs_wrapping) {
             const char* kMemberName = "inner";
 
