@@ -891,7 +891,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
         return {};
     }
 
-    void PopulateMemoryHeapInfo(AdapterPropertiesMemoryHeaps* memoryHeapProperties) const override {
+    void PopulateBackendProperties(UnpackedPtr<AdapterProperties>& properties) const override {
         if ([*mDevice hasUnifiedMemory]) {
             auto* heapInfo = new MemoryHeapInfo[1];
             memoryHeapProperties->heapCount = 1;
