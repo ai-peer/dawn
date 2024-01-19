@@ -39,6 +39,30 @@
       },
       "revId": "1c40fd37bc7d77f111483b872ff25d982374333b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "38f95d04_6d9f7908",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-19T02:06:41Z",
+      "side": 1,
+      "message": "mD3D11Multithread isn\u0027t enabled always; only with Graphite\n\nAnd, it can be disabled externally if someone does SetMultithreadProtected(false); so it\u0027s not safe to rely on.\n\nI think here, we need our own std::mutex to protect multithreaded access to the `CommandRecordingContext` class, and use MultithreadProtected to protect access to the d3d11 device context object only.",
+      "parentUuid": "55e3a4d8_009a20e7",
+      "range": {
+        "startLine": 61,
+        "startChar": 15,
+        "endLine": 61,
+        "endChar": 21
+      },
+      "revId": "1c40fd37bc7d77f111483b872ff25d982374333b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
