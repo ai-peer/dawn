@@ -187,7 +187,7 @@ void PopulateRemapperAndMultiplanarOptions(const Options& options,
     auto create_remappings = [&remapper_data](const auto& hsh) {
         for (const auto& it : hsh) {
             const BindingPoint& src_binding_point = it.first;
-            const binding::Uniform& dst_binding_point = it.second;
+            const binding::BindingInfo& dst_binding_point = it.second;
 
             // Bindings which go to the same slot in SPIR-V do not need to be re-bound.
             if (src_binding_point.group == dst_binding_point.group &&
