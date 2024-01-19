@@ -152,10 +152,9 @@ DawnInstanceDescriptor::DawnInstanceDescriptor() {
 bool DawnInstanceDescriptor::operator==(const DawnInstanceDescriptor& rhs) const {
     return (nextInChain == rhs.nextInChain) &&
            std::tie(additionalRuntimeSearchPathsCount, additionalRuntimeSearchPaths, platform,
-                    backendValidationLevel, beginCaptureOnStartup, enableAdapterBlocklist) ==
+                    backendValidationLevel, beginCaptureOnStartup) ==
                std::tie(rhs.additionalRuntimeSearchPathsCount, rhs.additionalRuntimeSearchPaths,
-                        rhs.platform, rhs.backendValidationLevel, rhs.beginCaptureOnStartup,
-                        rhs.enableAdapterBlocklist);
+                        rhs.platform, rhs.backendValidationLevel, rhs.beginCaptureOnStartup);
 }
 
 // Instance
@@ -205,10 +204,6 @@ void Instance::SetBackendValidationLevel(BackendValidationLevel level) {
 
 void Instance::EnableBeginCaptureOnStartup(bool beginCaptureOnStartup) {
     mImpl->EnableBeginCaptureOnStartup(beginCaptureOnStartup);
-}
-
-void Instance::EnableAdapterBlocklist(bool enable) {
-    mImpl->EnableAdapterBlocklist(enable);
 }
 
 uint64_t Instance::GetDeviceCountForTesting() const {
