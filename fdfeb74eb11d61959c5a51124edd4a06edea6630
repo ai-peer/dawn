@@ -89,6 +89,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "0638ca5c_81ff4dbb",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-19T00:39:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "93631c06_275f0bad",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f946c02d_68777e53",
@@ -155,6 +173,24 @@
       "writtenOn": "2024-01-12T16:25:02Z",
       "side": 1,
       "message": "Is \"texelFormatByteSize\" the same as \"texelSize\" in the shader? Suggest \"bytesPerTexel\" for both, if so.",
+      "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3065dc6c_49f2e1c5",
+        "filename": "src/dawn/native/BlitTextureToBuffer.cpp",
+        "patchSetId": 12
+      },
+      "lineNbr": 886,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-19T00:39:29Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "75a5fe4b_57902722",
       "revId": "fdfeb74eb11d61959c5a51124edd4a06edea6630",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }

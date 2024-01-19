@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9de7a533_dc90d247",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 14
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-19T00:39:29Z",
+      "side": 1,
+      "message": "Made compute shader code more readable per offline discussion with Austin.",
+      "revId": "66dec9b55ef09fceaa96f94ebc991463f9975cd3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
