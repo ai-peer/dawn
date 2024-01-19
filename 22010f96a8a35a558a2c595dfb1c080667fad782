@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d556b98b_908144a9",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T16:57:56Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "22010f96a8a35a558a2c595dfb1c080667fad782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dba78f37_03a39d0c",
@@ -31,6 +48,24 @@
       "writtenOn": "2024-01-18T23:53:07Z",
       "side": 1,
       "message": "FYI: I would have preferred to copy the indirectOffset and numIndexBufferElements here to a struct with properly named members but the struct alignment for a { uint32_t, uint64_t } didn\u0027t line up with the WGSL struct\u0027s binary layout. I could have made it work with additional padding, but given that we\u0027re allocating an additional 8 bytes already for every draw validation with this patch I wanted to try and keep the memory impact to a minimum.",
+      "revId": "22010f96a8a35a558a2c595dfb1c080667fad782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a89105d7_e5353e4c",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T16:57:56Z",
+      "side": 1,
+      "message": "Ack, could we maybe still use a `struct DrawData { uint32_t data[3];}` and rename the `indirectOffsets` pointer?",
+      "parentUuid": "dba78f37_03a39d0c",
       "revId": "22010f96a8a35a558a2c595dfb1c080667fad782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
