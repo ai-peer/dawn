@@ -68,6 +68,24 @@
       "parentUuid": "dba78f37_03a39d0c",
       "revId": "22010f96a8a35a558a2c595dfb1c080667fad782",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2bf44370_39eb7c21",
+        "filename": "src/dawn/native/IndirectDrawValidationEncoder.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 416,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-19T17:09:11Z",
+      "side": 1,
+      "message": "or even?\n\n```\nstruct IndirectDraw {\n  indirectOffset: uint32_t;\n  numIndexBufferElementsLow: uint32_t;\n  numIndexBufferElementsHigh: uint32_t;\n};\n\nstatic_assert(sizeof(IndirectDraw) \u003d\u003d sizeof(uint32_t) * 3);\nstatic_assert(alignof(IndirectDraw) \u003d\u003d alignof(uint32_t));\n\nauto* indirectDrawData \u003d reinterpret_cast\u003cIndirectDraw*\u003e(batch.batchInfo + 1);\nfor (draw : draws) {\n  indirectDrawData-\u003eindirectOffset \u003d ...;\n  indirectDrawData-\u003enumIndexBufferElementsLow \u003d elements \u0026 0xFFFFFFFF;\n  indirectDrawData-\u003enumIndexBufferElementsHigh \u003d (elements \u003e\u003e 32) \u0026 0xFFFFFFFF;\n  indirectDrawData +\u003d 1;\n}\n```\n\nthis way it matches WGSL exactly\n\nLGTM though",
+      "parentUuid": "a89105d7_e5353e4c",
+      "revId": "22010f96a8a35a558a2c595dfb1c080667fad782",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
