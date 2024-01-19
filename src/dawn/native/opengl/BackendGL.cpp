@@ -38,8 +38,7 @@ namespace dawn::native::opengl {
 
 // Implementation of the OpenGL backend's BackendConnection
 
-Backend::Backend(InstanceBase* instance, wgpu::BackendType backendType)
-    : BackendConnection(instance, backendType) {}
+Backend::Backend(wgpu::BackendType backendType) : BackendConnection(backendType) {}
 
 std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevices(
     const UnpackedPtr<RequestAdapterOptions>& options) {
@@ -108,8 +107,8 @@ std::vector<Ref<PhysicalDeviceBase>> Backend::DiscoverPhysicalDevicesWithProcs(
     return {mPhysicalDevice};
 }
 
-BackendConnection* Connect(InstanceBase* instance, wgpu::BackendType backendType) {
-    return new Backend(instance, backendType);
+BackendConnection* Connect(wgpu::BackendType backendType) {
+    return new Backend(backendType);
 }
 
 }  // namespace dawn::native::opengl

@@ -30,15 +30,10 @@
 
 namespace dawn::native {
 
-BackendConnection::BackendConnection(InstanceBase* instance, wgpu::BackendType type)
-    : mInstance(instance), mType(type) {}
+BackendConnection::BackendConnection(wgpu::BackendType type) : mType(type) {}
 
 wgpu::BackendType BackendConnection::GetType() const {
     return mType;
-}
-
-InstanceBase* BackendConnection::GetInstance() const {
-    return mInstance;
 }
 
 }  // namespace dawn::native
