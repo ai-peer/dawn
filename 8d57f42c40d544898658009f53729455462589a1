@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "57f371fa_fc68b47a",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3041,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-19T19:03:33Z",
+      "side": 1,
+      "message": "this should be ! LoopPreservingVar()\n\n?",
+      "range": {
+        "startLine": 3041,
+        "startChar": 7,
+        "endLine": 3041,
+        "endChar": 35
+      },
+      "revId": "8d57f42c40d544898658009f53729455462589a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
