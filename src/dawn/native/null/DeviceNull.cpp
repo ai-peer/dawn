@@ -106,6 +106,10 @@ void PhysicalDevice::PopulateMemoryHeapInfo(
                              wgpu::HeapProperty::HostCached;
 }
 
+void PhysicalDevice::PopulateD3DProperties(AdapterPropertiesD3D* d3dProperties) const {
+    d3dProperties->shaderModel = 0;
+}
+
 FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     wgpu::FeatureName feature,
     const TogglesState& toggles) const {

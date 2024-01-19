@@ -51,6 +51,8 @@ class PhysicalDevice : public d3d::PhysicalDevice {
     Backend* GetBackend() const;
     ComPtr<ID3D12Device> GetDevice() const;
 
+    void PopulateD3DProperties(AdapterPropertiesD3D* d3dProperties) const override;
+
   private:
     using Base = d3d::PhysicalDevice;
 

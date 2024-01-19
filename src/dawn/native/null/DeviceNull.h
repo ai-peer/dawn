@@ -212,6 +212,7 @@ class PhysicalDevice : public PhysicalDeviceBase {
                                                     const TogglesState& deviceToggles) override;
 
     void PopulateMemoryHeapInfo(AdapterPropertiesMemoryHeaps* memoryHeapProperties) const override;
+    void PopulateD3DProperties(AdapterPropertiesD3D* d3dProperties) const override;
 };
 
 // Helper class so |BindGroup| can allocate memory for its binding data,
