@@ -86,6 +86,24 @@
       "message": "Per jrprice@ suggestion, we need CTS to check alias analysis for function paramters that are the address of a partial reference.",
       "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "20571c94_d544741e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-19T20:27:28Z",
+      "side": 1,
+      "message": "Now, per jrprice@ we need alias analysis to handle calls into builtin functions (such as atomic store and load and similar, and workgroupUniformLoad",
+      "parentUuid": "a6d6cfa6_fa975cb0",
+      "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
