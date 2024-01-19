@@ -490,6 +490,25 @@ ResultOrError<ComPtr<ID3D11DepthStencilView>> Texture::CreateD3D11DepthStencilVi
     return dsv;
 }
 
+MaybeError Texture::SynchronizeTextureBeforeUse(
+    const ScopedCommandRecordingContext* commandContext) {
+    SharedTextureMemoryContents* contents = GetSharedTextureMemoryContents();
+    if (contents == nullptr) {
+        return {};
+    }
+
+    SharedTextureMemoryBase::PendingFenceList fences;
+    contents->AcquirePendingFences(&fences);
+    contents->SetLastUsageSerial(GetDevice()->GetPendingCommandSerial());
+
+    for (auto& fence : fences) {
+        DAWN_TRY(CheckHRESULT(
+            commandContext->Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
+            "ID3D11DeviceContext4::Wait"));
+    }
+    return {};
+}
+
 MaybeError Texture::Clear(const ScopedCommandRecordingContext* commandContext,
                           const SubresourceRange& range,
                           TextureBase::ClearValue clearValue) {

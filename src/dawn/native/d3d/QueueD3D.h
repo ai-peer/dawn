@@ -44,6 +44,7 @@ class Queue : public QueueBase {
     ~Queue() override;
 
     virtual ResultOrError<Ref<SharedFence>> GetOrCreateSharedFence() = 0;
+    virtual MaybeError NextSerial() = 0;
 
   private:
     virtual void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) = 0;
