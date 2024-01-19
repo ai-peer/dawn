@@ -1,0 +1,141 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fddf47f_f7be4577",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 19
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "Thank you for the iterations. Some additional comments but LGTM!",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "815e0a84_4af05c3f",
+        "filename": "src/dawn/common/RefCounted.h",
+        "patchSetId": 19
+      },
+      "lineNbr": 43,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "In a follow-up can we have a couple tiny tests for the new constructor and the bool returned by increment?",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89516e37_0a45c900",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "super optional nit: we can early out when `tintData-\u003eprogram !\u003d nullptr` so that the rest of the code can be dedented.",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8840c346_aec0a1e9",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "It\u0027s a bit weird that we return a pointer for what\u0027s inside the mutex outside of the Use function because it is no longer guarded. Even if we know that the caller holds a ref and that the logic in ShaderModule makes that prevent writes to mTintData, it feels a bit brittle. Maybe we could do something like:\n\n```\nMutexGuard\u003cconst TintData\u003e GetTintData() const {\n  return mTintData.UseGuard();\n}\n```\n\nThis could be used for testing as well. Maybe to reduce the risks to this CL we can do that as a follow-up.",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bc5581f1_b1c4c3cb",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 123,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "nit: here and everywhere else we don\u0027t need to specify the entrypoint if there is a single one for that stage in the module.",
+      "range": {
+        "startLine": 122,
+        "startChar": 0,
+        "endLine": 123,
+        "endChar": 48
+      },
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a78b68b4_70be5d99",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "nit: `shouldn\u0027t` right? The EXPECT_TRUE below checks that the program is still there.",
+      "range": {
+        "startLine": 197,
+        "startChar": 24,
+        "endLine": 197,
+        "endChar": 40
+      },
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "64cb3fbe_36eea8dd",
+        "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "I\u0027m slight worried that we could have timing races between pipeline compilation and these checks that could cause very low rates of flakiness. All the tests after DoCreateRenderPipelineAsync could see the result with the render pipeline created. Ditto for the compute case. Not sure if we can keep the test for timing of things without making it flaky though.\n\nCan we make all the number equality checks be \u003c\u003d X instead of \u003d\u003d X and also only assert that the tint program is gone after the task is completed?",
+      "range": {
+        "startLine": 301,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 0
+      },
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -167,6 +167,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "1610f280_590673ef",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "This pattern is not used right now becuase the scoped use is very short, but we still need to remember to move /add the scoped use every time. The same Initizlie -\u003e InitializeImpl pattern can be used to do:\n\n\n```\nMaybeError PipelineBase::Initialize() {\n  ScopedShaderModuleUse use;\n  // fill it\n\n  return InitializeImpl();\n}\n```",
+      "parentUuid": "f0a35842_2c4ab03a",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0adc09c1_2f6a3a02",
         "filename": "src/dawn/native/ObjectBase.h",
         "patchSetId": 10
@@ -231,6 +249,24 @@
       "side": 1,
       "message": "`APIReference()` not only increases the external ref count, it always increase the totally ref count. If use it, we have to return `object` instead of `object.Detach()`, so a ref count could be removed. I though we want to avoid that, right?",
       "parentUuid": "5d3b1295_170aff1f",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7e00a07f_cb6b2b03",
+        "filename": "src/dawn/native/ObjectBase.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 163,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "Ack",
+      "parentUuid": "633886bf_b2acddc6",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -488,6 +524,24 @@
       "side": 1,
       "message": "Most code here is for constructing `ShaderModuleDescriptor`. Other places the `descriptor` is from API client.",
       "parentUuid": "643e82a2_c11cd8ff",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7317180_9aaad5d1",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1314,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-19T17:32:59Z",
+      "side": 1,
+      "message": "Right, it\u0027s just a bit weird that we are rebuilding the descriptor to then re-unpack it etc. Maybe in the future we can Unpack, have an owned version of the descriptor and pass that around.",
+      "parentUuid": "b6b4fcb5_180eabf6",
       "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
