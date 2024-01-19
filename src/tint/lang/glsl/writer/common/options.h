@@ -80,6 +80,9 @@ struct Options {
     /// Options used in the binding mappings for external textures
     ExternalTextureOptions external_texture_options = {};
 
+    /// Location of the firstInstance push constant.
+    int32_t first_instance_location = -1;
+
     /// Options used to map WGSL textureNumLevels/textureNumSamples builtins to internal uniform
     /// buffer values. If not specified, emits corresponding GLSL builtins
     /// textureQueryLevels/textureSamples directly.
