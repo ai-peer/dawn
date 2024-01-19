@@ -1,13 +1,10 @@
 #include <metal_stdlib>
 
 using namespace metal;
-
-constant static volatile bool tint_preserve_loop = true;
-
 kernel void tint_symbol(const constant int* tint_symbol_1 [[buffer(0)]]) {
   switch(*(tint_symbol_1)) {
     case 0: {
-      while (tint_preserve_loop) {
+      while (true) {
         return;
       }
       break;

@@ -1,16 +1,13 @@
 #include <metal_stdlib>
 
 using namespace metal;
-
-constant static volatile bool tint_preserve_loop = true;
-
 int f() {
   return 0;
 }
 
 void g() {
   int j = 0;
-  while (tint_preserve_loop) {
+  while (true) {
     if ((j >= 1)) {
       break;
     }

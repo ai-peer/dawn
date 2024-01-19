@@ -1,16 +1,13 @@
 #include <metal_stdlib>
 
 using namespace metal;
-
-constant static volatile bool tint_preserve_loop = true;
-
 struct S {
   int i;
 };
 
 void f() {
   int i = 0;
-  for(; ((i < 1)) == tint_preserve_loop; ) {
+  for(; ((i < 1)); ) {
   }
 }
 

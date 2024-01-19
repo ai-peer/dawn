@@ -3038,14 +3038,14 @@ std::string_view ASTPrinter::LoopPreservingVar() {
 
 void ASTPrinter::EmitLoopCondition(StringStream& out, const std::string& cond) {
     if (cond.empty()) {
-        out << LoopPreservingVar();
+        out << "true";
     } else {
-        out << "(" << cond << ") == " << LoopPreservingVar();
+        out << "(" << cond << ")";
     }
 }
 
 void ASTPrinter::EmitUnconditionalLoopHeader() {
-    Line() << "while (" << LoopPreservingVar() << ") {";
+    Line() << "while (true) {";
 }
 
 template <typename F>
