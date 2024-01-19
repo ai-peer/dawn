@@ -22,6 +22,30 @@
       },
       "revId": "8d57f42c40d544898658009f53729455462589a1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45fb7d8f_1211b5f4",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 3041,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-19T19:13:52Z",
+      "side": 1,
+      "message": "Fixed",
+      "parentUuid": "57f371fa_fc68b47a",
+      "range": {
+        "startLine": 3041,
+        "startChar": 7,
+        "endLine": 3041,
+        "endChar": 35
+      },
+      "revId": "8d57f42c40d544898658009f53729455462589a1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
