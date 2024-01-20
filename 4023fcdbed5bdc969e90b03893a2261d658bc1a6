@@ -16,6 +16,24 @@
       "message": "I thought I was seeing double because this seemingly duplicates code with https://dawn-review.git.corp.google.com/c/dawn/+/170540  \n\nBut it\u0027s not very much at least.",
       "revId": "4023fcdbed5bdc969e90b03893a2261d658bc1a6",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f63b5aae_e249196f",
+        "filename": "src/tint/lang/spirv/reader/parser/parser.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 267,
+      "author": {
+        "id": 1002241
+      },
+      "writtenOn": "2024-01-20T00:34:23Z",
+      "side": 1,
+      "message": "Yeah, we currently have two different but almost identical structures for IO attributes (`StructMemberAttributes` and `IOAttributes`). I\u0027m thinking about unifying these soon so that we can stop duplicating code between struct and non-cases.",
+      "parentUuid": "76ad706b_dd2feeff",
+      "revId": "4023fcdbed5bdc969e90b03893a2261d658bc1a6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
