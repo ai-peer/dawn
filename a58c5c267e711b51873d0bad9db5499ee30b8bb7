@@ -215,6 +215,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0e5bd7fa_79f34196",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-20T15:19:01Z",
+      "side": 1,
+      "message": "If we RefCounted, does `MutexProtected\u003cRef\u003cTintData\u003e\u003e` work? It starts becoming confusing. If it is OK. I would like to revisiting the previous design in a follow up CL directly, and land this patch-set without the RefCounted change. WDYT?",
+      "parentUuid": "b57387f4_5a06cd61",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5581f1_b1c4c3cb",
         "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
         "patchSetId": 19
