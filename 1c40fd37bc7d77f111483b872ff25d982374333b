@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9e6b4595_d380fcc8",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-20T00:31:24Z",
+      "side": 1,
+      "message": "I tried this but it didn\u0027t work so nicely, because currently we have member variable `CommandRecordingContext::ScopedUse mCommandContext;` and use it like `mCommandContext-\u003efooBar`\n\nif we inherit from Guard, then we\u0027ll have to use it like `this-\u003efooBar`. It\u0027s is weird because you would think that it should be possible to just say `fooBar` - but that doesn\u0027t work because you need to invoke operator-\u003e() from the Guard.",
+      "parentUuid": "3dd12f5e_49065dac",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 73
+      },
+      "revId": "1c40fd37bc7d77f111483b872ff25d982374333b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e3a4d8_009a20e7",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 2
