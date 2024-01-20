@@ -43,8 +43,12 @@ TEST_F(MslASTPrinterTest, Emit_Continue) {
     EXPECT_EQ(gen.Result(), R"(#include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_loop_var = true;
+#define TINT_LOOP if(tint_loop_var) 
+
 kernel void test_function() {
-  while (true) {
+  TINT_LOOP while(true) {
     if (false) {
       break;
     }

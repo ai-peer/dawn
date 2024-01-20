@@ -1,9 +1,13 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_loop_var = true;
+#define TINT_LOOP if(tint_loop_var) 
+
 void f() {
   int i = 0;
-  for(; ((i < 4)); ) {
+  TINT_LOOP for(; (i < 4); ) {
   }
 }
 

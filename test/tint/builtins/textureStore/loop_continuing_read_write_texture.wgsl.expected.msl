@@ -1,10 +1,14 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_loop_var = true;
+#define TINT_LOOP if(tint_loop_var) 
+
 void foo(texture2d<int, access::read_write> tint_symbol) {
   {
     int i = 0;
-    while (true) {
+    TINT_LOOP while(true) {
       if (!((i < 3))) {
         break;
       }

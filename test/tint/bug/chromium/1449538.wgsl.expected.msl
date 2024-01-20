@@ -1,22 +1,26 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_loop_var = true;
+#define TINT_LOOP if(tint_loop_var) 
+
 void f() {
-  for(int i0520 = 0; (false); ) {
+  TINT_LOOP for(int i0520 = 0; false; ) {
   }
-  for(int i62 = 0; (false); ) {
+  TINT_LOOP for(int i62 = 0; false; ) {
   }
-  for(int i0520 = 0; (false); ) {
+  TINT_LOOP for(int i0520 = 0; false; ) {
   }
-  for(int i62 = 0; (false); ) {
+  TINT_LOOP for(int i62 = 0; false; ) {
   }
-  for(int i62 = 0; (false); ) {
+  TINT_LOOP for(int i62 = 0; false; ) {
   }
-  for(int i60 = 0; (false); ) {
+  TINT_LOOP for(int i60 = 0; false; ) {
   }
-  for(int i62 = 0; (false); ) {
+  TINT_LOOP for(int i62 = 0; false; ) {
   }
-  for(int i60 = 0; (false); ) {
+  TINT_LOOP for(int i60 = 0; false; ) {
   }
 }
 
