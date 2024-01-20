@@ -41,6 +41,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "bfafee47_fae5d342",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 115,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-20T00:52:19Z",
+      "side": 1,
+      "message": "great idea! done",
+      "parentUuid": "94c427e4_1d3c9dff",
+      "range": {
+        "startLine": 115,
+        "startChar": 4,
+        "endLine": 115,
+        "endChar": 82
+      },
+      "revId": "1e4b42b09d9960007b5177aac35916def0c09fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "22762854_fee46ff6",
@@ -54,6 +78,30 @@
       "writtenOn": "2024-01-19T17:03:46Z",
       "side": 1,
       "message": "```suggestion\n                        // update next pointer back to the original since it would be overwritten\n```",
+      "range": {
+        "startLine": 265,
+        "startChar": 86,
+        "endLine": 265,
+        "endChar": 98
+      },
+      "revId": "1e4b42b09d9960007b5177aac35916def0c09fc7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "25c262aa_aaab9d52",
+        "filename": "src/dawn/tests/unittests/wire/WireInstanceTests.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 265,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-20T00:52:19Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "22762854_fee46ff6",
       "range": {
         "startLine": 265,
         "startChar": 86,
