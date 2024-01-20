@@ -203,6 +203,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "184397c1_7b0ba97a",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-20T00:17:45Z",
+      "side": 1,
+      "message": "Since adding the ref should be relatively cheap compared to creating the pipeline, I think this extra ScopedUse would be ok.",
+      "parentUuid": "2793d3d6_08564dc6",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "0adc09c1_2f6a3a02",
         "filename": "src/dawn/native/ObjectBase.h",
         "patchSetId": 10

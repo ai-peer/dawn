@@ -197,6 +197,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b57387f4_5a06cd61",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-20T00:17:45Z",
+      "side": 1,
+      "message": "Hm, I do see that it could be odd to also have Ref\u003cTintProgram\u003e. I think it is OK for now in my perspective because I think about it as APIRef keeps the mTintData member alive, and this other Ref\u003cTintProgram\u003e is mostly for safety so we don\u0027t return an unguarded raw pointer. It\u0027s not actually keeping the mTintData member alive. In the interest of landing this, I think it would be simpler to do that for now.\n\nAfterward, we can see in a follow up about revisiting the previous design. I feel that something weird in that design was that we reconstructed the data in the `WillHaveFirstExternalRef` hook which seemed odd to me. Doing it now in `UseTintProgram` is more explicit and preferable. But perhaps yes, we can have UseTintProgram instead return Ref\u003cTintData\u003e instead of APIRef\u003cShaderModuleBase\u003e.",
+      "parentUuid": "45eb3819_fa7c83bf",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "bc5581f1_b1c4c3cb",
         "filename": "src/dawn/tests/white_box/ShaderModuleTests.cpp",
         "patchSetId": 19
