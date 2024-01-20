@@ -66,7 +66,7 @@ class SystemHandle : public NonCopyable {
         SystemHandle dupHandle;
         DAWN_TRY_ASSIGN(dupHandle, tmpOwnedHandle.Duplicate());
         tmpOwnedHandle.Detach();
-        return dupHandle;
+        return ResultOrError<SystemHandle>{std::move(dupHandle)};
     }
 
     bool IsValid() const;
