@@ -1,13 +1,17 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_volatile_true = true;
+#define TINT_ISOLATE_UB if(tint_volatile_true) 
+
 int f() {
   return 0;
 }
 
 void g() {
   int j = 0;
-  while (true) {
+  TINT_ISOLATE_UB while(true) {
     if ((j >= 1)) {
       break;
     }

@@ -1,12 +1,16 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_volatile_true = true;
+#define TINT_ISOLATE_UB if(tint_volatile_true) 
+
 struct S {
   int i;
 };
 
 void f() {
-  for(int i = 1; (false); ) {
+  TINT_ISOLATE_UB for(int i = 1; false; ) {
   }
 }
 

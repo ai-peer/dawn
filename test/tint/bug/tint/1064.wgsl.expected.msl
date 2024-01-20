@@ -1,8 +1,12 @@
 #include <metal_stdlib>
 
 using namespace metal;
+
+constant static volatile bool tint_volatile_true = true;
+#define TINT_ISOLATE_UB if(tint_volatile_true) 
+
 fragment void tint_symbol() {
-  while (true) {
+  TINT_ISOLATE_UB while(true) {
     if (false) {
     } else {
       break;
