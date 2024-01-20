@@ -1,0 +1,193 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9498e744_74626339",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 13
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "Sorry for the long delay. LGTM",
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d4174572_9fc0b568",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1159,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "Should be `DAWN_CHECK(false);` to crash in release.",
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46349825_7909b38e",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 1223,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "same",
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1cff7a3f_0288c44d",
+        "filename": "src/dawn/tests/unittests/wire/WireCreatePipelineAsyncTests.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 60,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "nit: Overridden",
+      "range": {
+        "startLine": 60,
+        "startChar": 13,
+        "endLine": 60,
+        "endChar": 14
+      },
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e0e113a0_21283bab",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 46,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "nit: I\u0027m unsure if this would work but could this be a private `using Callback \u003d decltype(std::declval\u003cCallbackInfoT\u003e().callback);` instead?",
+      "range": {
+        "startLine": 46,
+        "startChar": 10,
+        "endLine": 46,
+        "endChar": 78
+      },
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "802968a2_024c79fb",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "c_str() will always return non-null, but we want null when mStatus \u003d\u003d Success",
+      "range": {
+        "startLine": 84,
+        "startChar": 57,
+        "endLine": 84,
+        "endChar": 65
+      },
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "187846c7_5184f6f8",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 91,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "mMessage isn\u0027t optional, so maybe this comment should be moved up somewhere else?",
+      "range": {
+        "startLine": 91,
+        "startChar": 21,
+        "endLine": 91,
+        "endChar": 40
+      },
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "25748c4d_e5ec10af",
+        "filename": "src/dawn/wire/client/Device.cpp",
+        "patchSetId": 13
+      },
+      "lineNbr": 314,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "nit: perhaps invert as:\n\n```\nif (tracked) {\n  serialize command\n}\nreturn WGPUFuture{futureIDInternal};\n```",
+      "range": {
+        "startLine": 302,
+        "startChar": 0,
+        "endLine": 314,
+        "endChar": 30
+      },
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ed7ea9f9_e79535e9",
+        "filename": "src/dawn/wire/client/Device.h",
+        "patchSetId": 13
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-20T03:47:15Z",
+      "side": 1,
+      "message": "similarly could this be a `using` in the function body? Or even just called `Event::Pipeline` without a `using`? (Again, I\u0027m not sure if this works)",
+      "range": {
+        "startLine": 93,
+        "startChar": 14,
+        "endLine": 93,
+        "endChar": 58
+      },
+      "revId": "e5707635d0c6f7c6f8f03649c59ef6e4976651f3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
