@@ -326,6 +326,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da529f78_0165124d",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 9,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-01-20T01:16:21Z",
+      "side": 1,
+      "message": "If you used a buffer in one frame which takes a long time for the GPU to process, the buffer may still be in use on the GPU in a subsequent frame. If you get the \"was still drawing\" error, you will have to either create a new buffer to put your data or wait until the GPU is finished with the buffer. \n\n`UpdateSubresource` will make a copy of your data if the GPU is busy with the buffer. `WriteToSubResource` will block your thread until the buffer becomes available.",
+      "parentUuid": "f0dde8c1_5a4ebd13",
+      "revId": "4e06360008ec018f5e29b939b069d84ee41202b7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "5c335db4_aa400d1c",
         "filename": "/COMMIT_MSG",
         "patchSetId": 2
