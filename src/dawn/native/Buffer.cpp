@@ -863,6 +863,10 @@ void BufferBase::MarkUsedInPendingCommands() {
     mLastUsageSerial = serial;
 }
 
+bool BufferBase::IsFinishedUseInPendingCommands() {
+    return mLastUsageSerial <= GetDevice()->GetQueue()->GetCompletedCommandSerial();
+}
+
 bool BufferBase::IsFullBufferRange(uint64_t offset, uint64_t size) const {
     return offset == 0 && size == GetSize();
 }
