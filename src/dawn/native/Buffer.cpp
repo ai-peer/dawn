@@ -877,6 +877,10 @@ void BufferBase::MarkUsedInPendingCommands() {
     mLastUsageSerial = serial;
 }
 
+bool BufferBase::IsFinishedUseInPendingCommands() {
+    return mLastUsageSerial <= GetDevice()->GetQueue()->GetCompletedCommandSerial();
+}
+
 void BufferBase::SetHasAccess(bool hasAccess) {
     mState = hasAccess ? BufferState::Unmapped : BufferState::SharedMemoryNoAccess;
 }
