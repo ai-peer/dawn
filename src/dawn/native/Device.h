@@ -465,6 +465,7 @@ class DeviceBase : public RefCountedWithExternalCount {
     // TODO(dawn:1413): Remove this proxy methods in favor of using the ExecutionQueue directly.
     ExecutionSerial GetLastSubmittedCommandSerial() const;
     ExecutionSerial GetPendingCommandSerial() const;
+    ExecutionSerial GetCompletedCommandSerial() const;
 
   protected:
     // Constructor used only for mocking and testing.

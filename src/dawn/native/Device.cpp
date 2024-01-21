@@ -2129,6 +2129,10 @@ ExecutionSerial DeviceBase::GetPendingCommandSerial() const {
     return mQueue->GetPendingCommandSerial();
 }
 
+ExecutionSerial DeviceBase::GetCompletedCommandSerial() const {
+    return mQueue->GetCompletedCommandSerial();
+}
+
 bool DeviceBase::ShouldDuplicateNumWorkgroupsForDispatchIndirect(
     ComputePipelineBase* computePipeline) const {
     return false;
