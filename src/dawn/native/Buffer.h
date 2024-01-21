@@ -103,6 +103,7 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
     void MarkUsedInPendingCommands();
+    bool IsFinishedUseInPendingCommands();
 
     // SetHasAccess determines Dawn's ability to access SharedBufferMemory.
     void SetHasAccess(bool hasAccess);
