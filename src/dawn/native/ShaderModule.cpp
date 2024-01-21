@@ -1079,7 +1079,6 @@ MaybeError ValidateAndParseShaderModule(DeviceBase* device,
     DAWN_TRY_ASSIGN(program,
                     ParseWGSL(&tintSource->file, device->GetWGSLAllowedFeatures(), outMessages));
     parseResult->tintProgram = std::make_unique<tint::Program>(std::move(program));
-    parseResult->tintSource = std::move(tintSource);
 
     return {};
 }
@@ -1355,7 +1354,6 @@ OwnedCompilationMessages* ShaderModuleBase::GetCompilationMessages() const {
 MaybeError ShaderModuleBase::InitializeBase(ShaderModuleParseResult* parseResult,
                                             OwnedCompilationMessages* compilationMessages) {
     mTintProgram = std::move(parseResult->tintProgram);
-    mTintSource = std::move(parseResult->tintSource);
 
     DAWN_TRY(ReflectShaderUsingTint(GetDevice(), mTintProgram.get(), compilationMessages,
                                     &mEntryPoints));
