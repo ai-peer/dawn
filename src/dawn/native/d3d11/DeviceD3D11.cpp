@@ -378,7 +378,7 @@ void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
 
     mImplicitPixelLocalStorageAttachmentTextureViews = {};
-    mStagingBuffer = nullptr;
+    mStagingBuffers.clear();
 
     Base::DestroyImpl();
 }
@@ -551,26 +551,52 @@ ResultOrError<Ref<BufferBase>> Device::GetStagingBuffer(
     const ScopedCommandRecordingContext* commandContext,
     uint64_t size) {
     constexpr uint64_t kMinSize = 4 * 1024;
-    constexpr uint64_t kMaxSize = 16 * 1024 * 1024;
-    uint64_t bufferSize = mStagingBuffer.Get() ? mStagingBuffer->GetSize() : 0;
-    if (size > bufferSize) {
-        bufferSize = Align(size, kMinSize);
-        BufferDescriptor descriptor;
-        descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-        descriptor.size = bufferSize;
-        descriptor.mappedAtCreation = false;
-        descriptor.label = "DawnDeviceStagingBuffer";
-        Ref<BufferBase> buffer;
+    constexpr uint64_t kMaxSize = 512 * 1024;
+    uint64_t bufferSize = Align(size, kMinSize);
+    BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+    descriptor.size = bufferSize;
+    descriptor.mappedAtCreation = false;
+    descriptor.label = "DawnDeviceStagingBuffer";
+    Ref<BufferBase> buffer;
+    // We don't cache the buffer if it's too large.
+    if (bufferSize > kMaxSize) {
         DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext));
-        // We don't cache the buffer if it's too large.
-        if (bufferSize > kMaxSize) {
-            return buffer;
-        }
-        mStagingBuffer = buffer;
+        buffer->MarkUsedInPendingCommands();
+        return buffer;
     }
-    // Ensure there is no more than 1 active usage of the staging buffer.
-    DAWN_ASSERT(mStagingBuffer->GetRefCountForTesting() <= 1);
-    return mStagingBuffer;
+
+    // Sort by mLastUsageSerial increasingly.
+    std::sort(mStagingBuffers.begin(), mStagingBuffers.end(),
+              [](Ref<BufferBase> buffer1, Ref<BufferBase> buffer2) {
+                  return buffer1->GetLastUsageSerial() < buffer2->GetLastUsageSerial();
+              });
+    auto it =
+        std::find_if(mStagingBuffers.begin(), mStagingBuffers.end(), [&](Ref<BufferBase> buffer) {
+            // This buffer can be re-used.
+            return buffer->GetSize() >= bufferSize && buffer->IsFinishedUseInPendingCommands();
+        });
+    if (it != mStagingBuffers.end()) {
+        buffer = *it;
+        buffer->MarkUsedInPendingCommands();
+    } else {
+        // Create a new staging buffer as no exsing one can be re-used.
+        DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext));
+        buffer->MarkUsedInPendingCommands();
+        mStagingBuffers.push_back(buffer);
+        mTotalStagingBufferSize += bufferSize;
+
+        // Purge the old staging buffers if the total size is too large.
+        constexpr uint64_t kMaxTotalSize = 16 * 1024 * 1024;
+        it = mStagingBuffers.begin();
+        for (; it != mStagingBuffers.end() && mTotalStagingBufferSize > kMaxTotalSize &&
+               (*it)->IsFinishedUseInPendingCommands();) {
+            mTotalStagingBufferSize -= (*it)->GetSize();
+            it = mStagingBuffers.erase(it);
+        }
+    }
+
+    return buffer;
 }
 
 }  // namespace dawn::native::d3d11

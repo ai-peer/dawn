@@ -86,6 +86,7 @@ class BufferBase : public ApiObjectBase {
 
     uint64_t GetSize() const;
     uint64_t GetAllocatedSize() const;
+    ExecutionSerial GetLastUsageSerial() const;
 
     // |GetUsageExternalOnly| returns the usage with which the buffer was created using the
     // base WebGPU API. Additional usages may be added for internal state tracking. |GetUsage|
@@ -103,6 +104,7 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
     void MarkUsedInPendingCommands();
+    bool IsFinishedUseInPendingCommands();
 
     // SetHasAccess determines Dawn's ability to access SharedBufferMemory.
     void SetHasAccess(bool hasAccess);
