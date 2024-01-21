@@ -630,7 +630,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     // mD3d11ConstantBuffer.
     Ref<BufferBase> stagingBuffer;
     DAWN_TRY_ASSIGN(stagingBuffer, ToBackend(GetDevice())->GetStagingBuffer(commandContext, size));
-
     DAWN_TRY(ToBackend(stagingBuffer)->WriteInternal(commandContext, 0, data, size));
 
     return Buffer::CopyInternal(commandContext, ToBackend(stagingBuffer.Get()), /*sourceOffset=*/0,
