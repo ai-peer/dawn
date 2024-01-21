@@ -116,7 +116,6 @@ struct ShaderModuleParseResult {
     bool HasParsedShader() const;
 
     std::unique_ptr<tint::Program> tintProgram;
-    std::unique_ptr<TintSource> tintSource;
 };
 
 struct ShaderModuleEntryPoint {
@@ -351,7 +350,6 @@ class ShaderModuleBase : public ApiObjectBase,
     PerStage<std::string> mDefaultEntryPointNames;
     PerStage<size_t> mEntryPointCounts;
     std::unique_ptr<tint::Program> mTintProgram;
-    std::unique_ptr<TintSource> mTintSource;  // Keep the tint::Source::File alive
 
     std::unique_ptr<OwnedCompilationMessages> mCompilationMessages;
 };
