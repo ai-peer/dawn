@@ -16,6 +16,24 @@
       "message": "Doesn\u0027t `return std::move(dupHandle)` or `return {std::move(dupHandle)}` work?",
       "revId": "61465951f82044dd68d66922cc29083c006fd97c",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "da4d0c9e_177124cc",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-22T11:55:04Z",
+      "side": 1,
+      "message": "Yeah, probably. But given that implicitness was the cause of the build breakage, I went for the fully-explicit solution.",
+      "parentUuid": "bd04a317_ef34dea9",
+      "revId": "61465951f82044dd68d66922cc29083c006fd97c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
