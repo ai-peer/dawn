@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "17973bbd_7662fae2",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-22T14:56:24Z",
+      "side": 1,
+      "message": "I don\u0027t think that was done, the point was the early out, not the `!\u003d nullptr` ^^\n\nAgain, can be a follow-up, I don\u0027t want to block this further.",
+      "parentUuid": "7a59de6c_369cdb5c",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "8840c346_aec0a1e9",
         "filename": "src/dawn/native/ShaderModule.cpp",
         "patchSetId": 19

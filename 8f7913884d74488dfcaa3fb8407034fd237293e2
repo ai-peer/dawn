@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ff44542_75893750",
+        "filename": "src/dawn/tests/unittests/RefCountedTests.cpp",
+        "patchSetId": 26
+      },
+      "lineNbr": 63,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-22T14:56:24Z",
+      "side": 1,
+      "message": "Not that non-0 values of the new constructor are not tested, it\u0027s be nice to have that. Can be.a follow-up.",
+      "revId": "8f7913884d74488dfcaa3fb8407034fd237293e2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
