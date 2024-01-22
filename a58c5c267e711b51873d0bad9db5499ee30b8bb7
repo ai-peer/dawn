@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "804e193e_971dbf88",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1312,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-22T15:30:51Z",
+      "side": 1,
+      "message": "Sorry. I misread it. Will address it in follow up. Will address it in the follow up",
+      "parentUuid": "17973bbd_7662fae2",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "8840c346_aec0a1e9",
@@ -262,6 +280,24 @@
       "writtenOn": "2024-01-22T14:53:31Z",
       "side": 1,
       "message": "SGTM, IMHO `MutexProtected\u003cRef\u003cTintData\u003e\u003e` is a bit verbose bit ok. But I think we could also promote `MutexProtected`\u0027s  `detail::Guard` to be a top level concept. I assume it might be useful later when we multithread Dawn.",
+      "parentUuid": "0e5bd7fa_79f34196",
+      "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "71c1317f_50f20556",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 19
+      },
+      "lineNbr": 1348,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-22T15:30:51Z",
+      "side": 1,
+      "message": "Done",
       "parentUuid": "0e5bd7fa_79f34196",
       "revId": "a58c5c267e711b51873d0bad9db5499ee30b8bb7",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"

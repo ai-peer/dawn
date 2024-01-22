@@ -219,6 +219,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c7cc695e_421516b1",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 1756,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-22T15:30:51Z",
+      "side": 1,
+      "message": "This comment will be address in https://dawn-review.googlesource.com/c/dawn/+/170740",
+      "parentUuid": "184397c1_7b0ba97a",
+      "revId": "fdeebf09cef3dcd9a32503600b7c969fa2b250c6",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "0adc09c1_2f6a3a02",
