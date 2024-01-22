@@ -46,7 +46,7 @@ class Queue final : public d3d::Queue {
   public:
     static ResultOrError<Ref<Queue>> Create(Device* device, const QueueDescriptor* descriptor);
 
-    MaybeError NextSerial();
+    MaybeError NextSerial() override;
     MaybeError WaitForSerial(ExecutionSerial serial);
     ResultOrError<CommandRecordingContext*> GetPendingCommandContext(
         SubmitMode submitMode = SubmitMode::Normal);

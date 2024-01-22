@@ -173,7 +173,7 @@ MaybeError Queue::WriteTextureImpl(const ImageCopyTexture& destination,
     SubresourceRange subresources = GetSubresourcesAffectedByCopy(textureCopy, writeSizePixel);
 
     Texture* texture = ToBackend(destination.texture);
-
+    DAWN_TRY(texture->SynchronizeTextureBeforeUse(&commandContext));
     return texture->Write(&commandContext, subresources, destination.origin, writeSizePixel,
                           static_cast<const uint8_t*>(data) + dataLayout.offset,
                           dataLayout.bytesPerRow, dataLayout.rowsPerImage);
@@ -213,15 +213,19 @@ MaybeError Queue::WaitForIdleForDestruction() {
 }
 
 MaybeError Queue::NextSerial() {
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    return NextSerial(&commandContext);
+}
+
+MaybeError Queue::NextSerial(ScopedCommandRecordingContext* commandContext) {
     IncrementLastSubmittedCommandSerial();
 
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
 
-    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
-    DAWN_TRY(
-        CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
-                     "D3D11 command queue signal fence"));
+    DAWN_TRY(CheckHRESULT(
+        commandContext->Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
+        "D3D11 command queue signal fence"));
 
     return {};
 }
