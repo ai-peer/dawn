@@ -69,14 +69,15 @@ class AddBlockAttribute final : public Castable<AddBlockAttribute, Transform> {
     /// Transform configuration options
     struct Config final : public Castable<Config, ast::transform::Data> {
         /// Constructor
-        /// @param skip_push_const whether to skip push constants
-        explicit Config(bool skip_push_const);
+        /// @param push_consts_wrap_only If true, only wrap push constants in a struct, and don't
+        /// add the BlockAttribute.
+        explicit Config(bool push_consts_wrap_only);
 
         /// Destructor
         ~Config() override;
 
-        /// Whether to skip push constants
-        bool skip_push_constants;
+        /// If true, only wrap push constants in a struct, and don't add the BlockAttribute.
+        bool push_constants_wrap_only;
     };
 
     /// @copydoc Transform::Apply
