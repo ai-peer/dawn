@@ -352,7 +352,9 @@ MaybeError CommandBuffer::Execute(const ScopedSwapStateCommandRecordingContext* 
                 }
 
                 Buffer::ScopedMap scopedMap;
-                DAWN_TRY_ASSIGN(scopedMap, Buffer::ScopedMap::Create(commandContext, buffer));
+                // TODO(dawn:2357): Use no-wait map.
+                DAWN_TRY_ASSIGN(scopedMap,
+                                Buffer::ScopedMap::Create(commandContext, buffer, /*wait*/ true));
                 DAWN_TRY(buffer->EnsureDataInitialized(commandContext));
 
                 Texture* texture = ToBackend(dst.texture.Get());
