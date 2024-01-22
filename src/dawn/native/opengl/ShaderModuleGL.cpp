@@ -28,6 +28,7 @@
 #include "dawn/native/opengl/ShaderModuleGL.h"
 
 #include <sstream>
+#include <unordered_map>
 #include <utility>
 
 #include "dawn/native/BindGroupLayoutInternal.h"
@@ -93,6 +94,7 @@ using InterstageLocationAndName = std::pair<uint32_t, std::string>;
     X(std::optional<tint::ast::transform::SubstituteOverride::Config>, substituteOverrideConfig) \
     X(LimitsForCompilationRequest, limits)                                                       \
     X(bool, disableSymbolRenaming)                                                               \
+    X(bool, usesInstanceIndex)                                                                   \
     X(std::vector<InterstageLocationAndName>, interstageVariables)                               \
     X(std::vector<std::string>, bufferBindingVariables)                                          \
     X(tint::glsl::writer::Options, tintOptions)                                                  \
@@ -261,6 +263,7 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                                                  entryPointMetaData.interStageVariables[i].name);
         }
     }
+    req.usesInstanceIndex = entryPointMetaData.usesInstanceIndex;
 
     req.tintOptions.external_texture_options = BuildExternalTextureTransformBindings(layout);
     req.tintOptions.binding_remapper_options.binding_points = std::move(glBindings);
@@ -382,6 +385,11 @@ ResultOrError<GLuint> ShaderModule::CompileShader(
                 DAWN_TRY_ASSIGN(
                     _, ValidateComputeStageWorkgroupSize(program, remappedEntryPoint.c_str(),
                                                          r.limits, /* fullSubgroups */ {}));
+            }
+
+            if (r.usesInstanceIndex) {
+                r.tintOptions.first_instance_offset =
+                    4 * PipelineLayout::PushConstantLocation::FirstInstance;
             }
 
             auto result = tint::glsl::writer::Generate(program, r.tintOptions, remappedEntryPoint);
