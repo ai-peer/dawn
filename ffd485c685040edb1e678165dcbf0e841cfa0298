@@ -16,6 +16,24 @@
       "message": "The Metal compiler issues a warning, but compiles it the way we want it to.\n\nExmaple:\na.metal:6:8: warning: \u0027if\u0027 initialization statements are a C++17 extension [-Wc++17-extensions]",
       "revId": "ffd485c685040edb1e678165dcbf0e841cfa0298",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f6b2c54e_07edc048",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-22T14:58:06Z",
+      "side": 1,
+      "message": "Yeah, I know. I ~assume~ hope it\u0027s just noise. The compound-if is useful as it means the variable is scoped to the loop, which is handy as it means we can shadow without creating a new symbol per use.",
+      "parentUuid": "38b8fc52_0291eaad",
+      "revId": "ffd485c685040edb1e678165dcbf0e841cfa0298",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
