@@ -90,6 +90,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "660df1f2_de41c57b",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "Changed to use a single push constant struct, with byte offsets into that struct for the members.",
+      "parentUuid": "17de2527_3da065d6",
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "a06ff351_00b83b42",
@@ -166,6 +184,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4b494cd2_8a1fd2e2",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "They\u0027re now struct members, so should be ok as duplicates.\n\nI\u0027ve made sure the new struct PushConstants is unique, and added a test.\nSame for the push_constants instance of that struct.",
+      "parentUuid": "151ae21a_dbe2e719",
+      "range": {
+        "startLine": 89,
+        "startChar": 45,
+        "endLine": 89,
+        "endChar": 56
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "304b383e_d608d2d6",
         "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
         "patchSetId": 14
@@ -177,6 +219,30 @@
       "writtenOn": "2024-01-18T11:03:41Z",
       "side": 1,
       "message": "It\u0027s much faster to skip the clone if nothing needs to be done, so I\u0027d replace this with:\n\n```\nif (!has_vertex_index \u0026\u0026 !has_instance_index) {\n    return SkipTransform;\n}\n```\n\nYou\u0027ll need to fix up the `ShouldRun` tests (which is what these are usually trying to test for)",
+      "range": {
+        "startLine": 138,
+        "startChar": 0,
+        "endLine": 138,
+        "endChar": 49
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "caec9a1c_33cb4279",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 138,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "304b383e_d608d2d6",
       "range": {
         "startLine": 138,
         "startChar": 0,
@@ -210,6 +276,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "e66cab01_41cc6fcc",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 151,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "6b7b4946_14019ab7",
+      "range": {
+        "startLine": 151,
+        "startChar": 24,
+        "endLine": 151,
+        "endChar": 31
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "14761e96_962dc7b4",
@@ -223,6 +313,30 @@
       "writtenOn": "2024-01-18T11:03:41Z",
       "side": 1,
       "message": "Please use `std::optional` over magic constants",
+      "range": {
+        "startLine": 48,
+        "startChar": 38,
+        "endLine": 50,
+        "endChar": 20
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "6446727a_05758119",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 50,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "14761e96_962dc7b4",
       "range": {
         "startLine": 48,
         "startChar": 38,
@@ -280,6 +394,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7c93da51_e96cf001",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 93,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fd03fba2_dad23ce2",
+      "range": {
+        "startLine": 74,
+        "startChar": 0,
+        "endLine": 93,
+        "endChar": 6
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "ca6111bd_d62ef9c3",
@@ -293,6 +431,30 @@
       "writtenOn": "2024-01-18T11:03:41Z",
       "side": 1,
       "message": "Please make const, or provide an initializer",
+      "range": {
+        "startLine": 105,
+        "startChar": 0,
+        "endLine": 109,
+        "endChar": 40
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7052ed5b_63d1bad6",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.h",
+        "patchSetId": 14
+      },
+      "lineNbr": 109,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "ca6111bd_d62ef9c3",
       "range": {
         "startLine": 105,
         "startChar": 0,
@@ -436,6 +598,30 @@
       "side": 1,
       "message": "I had hoped to support transforms that run on multiple backends (GL \u0026 other). For example, to reuse this transform (OffsetFirstIndex) to replace the D3D-specific one (FirstIndexOffset). I had imagined that we\u0027d have to pick either locations or byte offsets, and that it\u0027s easier to convert locations into offsets than the reverse. Also, I\u0027m still not clear on what the intermediate WGSL AST/IR looks like for transforms supporting byte offsets.",
       "parentUuid": "a27f07d4_1bf1cf04",
+      "range": {
+        "startLine": 628,
+        "startChar": 24,
+        "endLine": 628,
+        "endChar": 80
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "70a1a328_e3dad94b",
+        "filename": "src/tint/lang/wgsl/resolver/resolver.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 628,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-22T23:32:06Z",
+      "side": 1,
+      "message": "OK, I\u0027ve rewritten the transform to use a single push constant, and changed the locations into offsets into that struct for the vertex_index and instance_index members. Changes to resolver and validator reverted.",
+      "parentUuid": "de2a4fb3_d7cb5525",
       "range": {
         "startLine": 628,
         "startChar": 24,
