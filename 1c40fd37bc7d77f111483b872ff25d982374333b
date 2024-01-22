@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "d7952435_044868d0",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000395
+      },
+      "writtenOn": "2024-01-22T18:00:50Z",
+      "side": 1,
+      "message": "nvm, I figured out a niceish way to do this. PTAL!",
+      "parentUuid": "9e6b4595_d380fcc8",
+      "range": {
+        "startLine": 74,
+        "startChar": 4,
+        "endLine": 80,
+        "endChar": 73
+      },
+      "revId": "1c40fd37bc7d77f111483b872ff25d982374333b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "55e3a4d8_009a20e7",
         "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
         "patchSetId": 2
