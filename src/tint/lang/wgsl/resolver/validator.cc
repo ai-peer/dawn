@@ -2849,6 +2849,10 @@ bool Validator::CheckNoMultipleModuleScopeVarsOfAddressSpace(sem::Function* entr
                 continue;
             }
 
+            if (var->AddressSpace() == core::AddressSpace::kPushConstant &&
+                ast::HasAttribute<ast::LocationAttribute>(var->Declaration()->attributes)) {
+                continue;
+            }
             if (seen_var == nullptr) {
                 seen_var = var;
                 seen_func = func;

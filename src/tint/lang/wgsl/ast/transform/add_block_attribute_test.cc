@@ -398,6 +398,77 @@ fn main() {
     EXPECT_EQ(expect, str(got));
 }
 
+TEST_F(AddBlockAttributeTest, BasicScalar_PushConstantWrapOnly) {
+    auto* src = R"(
+enable chromium_experimental_push_constant;
+var<push_constant> u : f32;
+
+@fragment
+fn main() {
+  let f = u;
+}
+)";
+    auto* expect = R"(
+enable chromium_experimental_push_constant;
+
+struct u_block {
+  inner : f32,
+}
+
+var<push_constant> u : u_block;
+
+@fragment
+fn main() {
+  let f = u.inner;
+}
+)";
+
+    ast::transform::DataMap data;
+    data.Add<AddBlockAttribute::Config>(true);
+    auto got = Run<AddBlockAttribute>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
+TEST_F(AddBlockAttributeTest, BasicStruct_PushConstantWrapOnly) {
+    auto* src = R"(
+enable chromium_experimental_push_constant;
+struct S {
+  f : f32,
+};
+var<push_constant> u : S;
+
+@fragment
+fn main() {
+  let f = u.f;
+}
+)";
+    auto* expect = R"(
+enable chromium_experimental_push_constant;
+
+struct S {
+  f : f32,
+}
+
+struct u_block {
+  inner : S,
+}
+
+var<push_constant> u : u_block;
+
+@fragment
+fn main() {
+  let f = u.inner.f;
+}
+)";
+
+    ast::transform::DataMap data;
+    data.Add<AddBlockAttribute::Config>(true);
+    auto got = Run<AddBlockAttribute>(src, data);
+
+    EXPECT_EQ(expect, str(got));
+}
+
 TEST_F(AddBlockAttributeTest, Nested_OuterBuffer_InnerNotBuffer) {
     auto* src = R"(
 struct Inner {
