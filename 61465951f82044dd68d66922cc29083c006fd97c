@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bd04a317_ef34dea9",
+        "filename": "src/dawn/native/SystemHandle.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 71,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-22T11:40:38Z",
+      "side": 1,
+      "message": "Doesn\u0027t `return std::move(dupHandle)` or `return {std::move(dupHandle)}` work?",
+      "revId": "61465951f82044dd68d66922cc29083c006fd97c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
