@@ -92,6 +92,7 @@ class BufferBase : public ApiObjectBase {
 
     MaybeError MapAtCreation();
     void CallbackOnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status);
+    virtual WGPUBufferMapAsyncStatus OnPreMapCallback() { return WGPUBufferMapAsyncStatus_Success; }
 
     MaybeError ValidateCanUseOnQueueNow() const;
 
@@ -100,6 +101,7 @@ class BufferBase : public ApiObjectBase {
     bool IsDataInitialized() const;
     void SetIsDataInitialized();
     void MarkUsedInPendingCommands();
+    bool IsFinishedUseInPendingCommands();
 
     virtual void* GetMappedPointer() = 0;
     void* GetMappedRange(size_t offset, size_t size, bool writable = true);
@@ -177,6 +179,7 @@ class BufferBase : public ApiObjectBase {
     size_t mMapOffset = 0;
     size_t mMapSize = 0;
 
+    struct MapRequestTask;
     struct MapAsyncEvent;
     Ref<MapAsyncEvent> mPendingMapEvent;
 };

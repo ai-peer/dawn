@@ -377,7 +377,7 @@ void Device::DestroyImpl() {
     DAWN_ASSERT(GetState() == State::Disconnected);
 
     mImplicitPixelLocalStorageAttachmentTextureViews = {};
-    mStagingBuffer = nullptr;
+    mStagingBuffers.clear();
 
     Base::DestroyImpl();
 }
@@ -532,27 +532,58 @@ ResultOrError<TextureViewBase*> Device::GetOrCreateCachedImplicitPixelLocalStora
 ResultOrError<Ref<BufferBase>> Device::GetStagingBuffer(
     const ScopedCommandRecordingContext* commandContext,
     uint64_t size) {
-    constexpr uint64_t kMinSize = 4 * 1024;
-    constexpr uint64_t kMaxSize = 16 * 1024 * 1024;
-    uint64_t bufferSize = mStagingBuffer.Get() ? mStagingBuffer->GetSize() : 0;
-    if (size > bufferSize) {
-        bufferSize = Align(size, kMinSize);
-        BufferDescriptor descriptor;
-        descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
-        descriptor.size = bufferSize;
-        descriptor.mappedAtCreation = false;
-        descriptor.label = "DawnDeviceStagingBuffer";
-        Ref<BufferBase> buffer;
-        DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext));
-        // We don't cache the buffer if it's too large.
-        if (bufferSize > kMaxSize) {
-            return buffer;
+    auto itFound = mStagingBuffers.end();
+    auto itMax = itFound;
+    uint64_t minMargin = uint64_t(-1);
+    uint64_t maxSize = 0;
+    uint64_t totalSize = 0;
+    for (auto it = mStagingBuffers.begin(); it < mStagingBuffers.end(); ++it) {
+        auto buffer = *it;
+        uint64_t bufferSize = buffer->GetSize();
+        totalSize += bufferSize;
+        // Find the largest buffer as the candicate to be purged.
+        if (bufferSize > maxSize) {
+            maxSize = bufferSize;
+            itMax = it;
         }
-        mStagingBuffer = buffer;
+        // Find the smallest free buffer, which is larger than 'size'.
+        if (buffer->GetSize() >= size && buffer->IsFinishedUseInPendingCommands()) {
+            uint64_t margin = buffer->GetSize() - size;
+            if (margin < minMargin) {
+                minMargin = margin;
+                itFound = it;
+            }
+        }
     }
-    // Ensure there is no more than 1 active usage of the staging buffer.
-    DAWN_ASSERT(mStagingBuffer->GetRefCountForTesting() <= 1);
-    return mStagingBuffer;
+    constexpr uint64_t kMaxTotalSize = 16 * 1024 * 1024;
+    constexpr uint64_t kMaxCount = 64;
+    // Try to purge the staging buffers if either the total size or the count of them are too large.
+    if (totalSize > kMaxTotalSize || mStagingBuffers.size() > kMaxCount) {
+        if (itMax != itFound) {
+            // Purge the largest buffer first.
+            mStagingBuffers.erase(itMax);
+        }
+    }
+    if (itFound != mStagingBuffers.end()) {
+        return *itFound;
+    }
+
+    // Create a new staging buffer as no existing one can be re-used.
+    constexpr uint64_t kMinSize = 4 * 1024;
+    constexpr uint64_t kMaxSize = 512 * 1024;
+    uint64_t bufferSize = Align(size, kMinSize);
+    BufferDescriptor descriptor;
+    descriptor.usage = wgpu::BufferUsage::MapWrite | wgpu::BufferUsage::CopySrc;
+    descriptor.size = bufferSize;
+    descriptor.mappedAtCreation = false;
+    descriptor.label = "DawnDeviceStagingBuffer";
+    Ref<BufferBase> buffer;
+    DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext));
+    // We don't cache the buffer if it's too large.
+    if (bufferSize <= kMaxSize) {
+        mStagingBuffers.push_back(buffer);
+    }
+    return buffer;
 }
 
 }  // namespace dawn::native::d3d11
