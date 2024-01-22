@@ -1,0 +1,90 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b75cee88_b20a9808",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-22T23:42:45Z",
+      "side": 1,
+      "message": "Hmm overall I think this is fine. I do feel like the design of the `CommandRecordingContext` could use some clean up separately. I feel like for the most part `CommandRecordingContext` isn\u0027t doing much right now, and it\u0027s just being friend-ed by `ScopedCommandRecordingContext` so that `ScopedCommandRecordingContext` can implement all the logic using the private members of `CommandRecordingContext`? It feels like it would make more sense if the logic were all implemented in `CommandRecordingContext` and then a `ScopedCommandRecordingContext` is just a vended out `Guard\u003cCommandRecordingContext\u003e` or something like that?",
+      "revId": "2cf3a112bb37ba3f8fe277b30cd79a4346e82d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "75abfb5d_f0885604",
+        "filename": "src/dawn/common/MutexProtected.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 84,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-22T23:42:45Z",
+      "side": 1,
+      "message": "nit. Should probably keep the lock `private`.",
+      "range": {
+        "startLine": 84,
+        "startChar": 4,
+        "endLine": 84,
+        "endChar": 36
+      },
+      "revId": "2cf3a112bb37ba3f8fe277b30cd79a4346e82d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eb6f952f_fc6d3bbc",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-22T23:42:45Z",
+      "side": 1,
+      "message": "Hmm, honestly I think this existing on `Guard` itself seems fine? We already have the other `-\u003e` and `*` ones also. Having this at least `protected` under `Guard` makes it easier for all extensions to `Guard` to have a way to get the underlying without needing to know its called `mObj`. Could consider making it `public` entirely also? I feel pretty indifferent about either.",
+      "range": {
+        "startLine": 54,
+        "startChar": 4,
+        "endLine": 54,
+        "endChar": 69
+      },
+      "revId": "2cf3a112bb37ba3f8fe277b30cd79a4346e82d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0b6a7195_8d126eea",
+        "filename": "src/dawn/native/d3d11/CommandRecordingContextD3D11.h",
+        "patchSetId": 8
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-22T23:42:45Z",
+      "side": 1,
+      "message": "Huh.. are these `this`-es still needed? (is this what you were talking about in the previous result?) I would assume that since `mObj` is a protected field that we should just be able to access it O.o..\n\nCould also use `Get` if we move it up into the `Guard` class.",
+      "range": {
+        "startLine": 61,
+        "startChar": 12,
+        "endLine": 61,
+        "endChar": 16
+      },
+      "revId": "2cf3a112bb37ba3f8fe277b30cd79a4346e82d84",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
