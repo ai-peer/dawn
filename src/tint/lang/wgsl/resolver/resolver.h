@@ -314,6 +314,10 @@ class Resolver {
     /// perform alias analysis.
     void RegisterStore(const sem::ValueExpression* expr);
 
+    /// Register a memory load of an expression, to track accesses to root identifiers in order to
+    /// perform alias analysis.
+    void RegisterLoad(const sem::ValueExpression* expr);
+
     /// Perform pointer alias analysis for `call`.
     /// @returns true is the call arguments are free from aliasing issues, false otherwise.
     bool AliasAnalysis(const sem::Call* call);
@@ -681,11 +685,11 @@ class Resolver {
         /// The set of module-scope variables that are written to, and where that write occurs.
         Hashmap<const sem::Variable*, const sem::ValueExpression*, 4> module_scope_writes;
         /// The set of module-scope variables that are read from, and where that read occurs.
-        Hashmap<const sem::Variable*, const sem::ValueExpression*,4> module_scope_reads;
+        Hashmap<const sem::Variable*, const sem::ValueExpression*, 4> module_scope_reads;
         /// The set of function parameters that are written to.
-        Hashset<const sem::Variable*,4> parameter_writes;
+        Hashset<const sem::Variable*, 4> parameter_writes;
         /// The set of function parameters that are read from.
-        Hashset<const sem::Variable*,4> parameter_reads;
+        Hashset<const sem::Variable*, 4> parameter_reads;
     };
 
     ProgramBuilder& b;
