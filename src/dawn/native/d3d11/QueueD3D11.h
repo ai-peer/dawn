@@ -49,7 +49,7 @@ class Queue final : public d3d::Queue {
     ScopedSwapStateCommandRecordingContext GetScopedSwapStatePendingCommandContext(
         SubmitMode submitMode);
     MaybeError SubmitPendingCommands();
-    MaybeError NextSerial();
+    MaybeError NextSerial() override;
     MaybeError WaitForSerial(ExecutionSerial serial);
 
     // Separated from creation because it creates resources, which is not valid before the
@@ -75,6 +75,7 @@ class Queue final : public d3d::Queue {
 
     void DestroyImpl() override;
     bool HasPendingCommands() const override;
+    MaybeError NextSerial(ScopedCommandRecordingContext* commandContext);
     ResultOrError<ExecutionSerial> CheckAndUpdateCompletedSerials() override;
     void ForceEventualFlushOfCommands() override;
     MaybeError WaitForIdleForDestruction() override;
