@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "38b8fc52_0291eaad",
+        "filename": "src/tint/lang/msl/writer/ast_printer/ast_printer_test.cc",
+        "patchSetId": 8
+      },
+      "lineNbr": 230,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-22T14:33:24Z",
+      "side": 1,
+      "message": "The Metal compiler issues a warning, but compiles it the way we want it to.\n\nExmaple:\na.metal:6:8: warning: \u0027if\u0027 initialization statements are a C++17 extension [-Wc++17-extensions]",
+      "revId": "ffd485c685040edb1e678165dcbf0e841cfa0298",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
