@@ -54,33 +54,6 @@
 namespace dawn::native {
 
 namespace {
-struct MapRequestTask : TrackTaskCallback {
-    MapRequestTask(dawn::platform::Platform* platform, Ref<BufferBase> buffer, MapRequestID id)
-        : TrackTaskCallback(platform), buffer(std::move(buffer)), id(id) {}
-    ~MapRequestTask() override = default;
-
-  private:
-    void FinishImpl() override {
-        {
-            // This is called from a callback, and no lock will be held by default. Hence, we need
-            // to lock the mutex now because mSerial might be changed by another thread.
-            auto deviceLock(buffer->GetDevice()->GetScopedLock());
-            DAWN_ASSERT(mSerial != kMaxExecutionSerial);
-            TRACE_EVENT1(mPlatform, General, "Buffer::TaskInFlight::Finished", "serial",
-                         uint64_t(mSerial));
-        }
-        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
-    }
-    void HandleDeviceLossImpl() override {
-        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
-    }
-    void HandleShutDownImpl() override {
-        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
-    }
-
-    Ref<BufferBase> buffer;
-    MapRequestID id;
-};
 
 class ErrorBuffer final : public BufferBase {
   public:
@@ -123,6 +96,39 @@ class ErrorBuffer final : public BufferBase {
 static uint32_t sZeroSizedMappingData = 0xCAFED00D;
 
 }  // anonymous namespace
+
+struct BufferBase::MapRequestTask : TrackTaskCallback {
+    MapRequestTask(dawn::platform::Platform* platform, Ref<BufferBase> buffer, MapRequestID id)
+        : TrackTaskCallback(platform), buffer(std::move(buffer)), id(id) {}
+    ~MapRequestTask() override = default;
+
+  private:
+    void FinishImpl() override {
+        auto status = WGPUBufferMapAsyncStatus_Success;
+        {
+            // This is called from a callback, and no lock will be held by default. Hence, we need
+            // to lock the mutex now because mSerial might be changed by another thread.
+            auto deviceLock(buffer->GetDevice()->GetScopedLock());
+            DAWN_ASSERT(mSerial != kMaxExecutionSerial);
+            TRACE_EVENT1(mPlatform, General, "Buffer::TaskInFlight::Finished", "serial",
+                         uint64_t(mSerial));
+            status = buffer->OnPreMapCallback();
+            if (status != WGPUBufferMapAsyncStatus_Success) {
+                buffer->mState = BufferState::Unmapped;
+            }
+        }
+        buffer->CallbackOnMapRequestCompleted(id, status);
+    }
+    void HandleDeviceLossImpl() override {
+        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
+    }
+    void HandleShutDownImpl() override {
+        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DestroyedBeforeCallback);
+    }
+
+    Ref<BufferBase> buffer;
+    MapRequestID id;
+};
 
 struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
     // MapAsyncEvent stores a raw pointer to the buffer so that it can
@@ -193,8 +199,10 @@ struct BufferBase::MapAsyncEvent final : public EventManager::TrackedEvent {
                 // TODO(crbug.com/dawn/831): in order to be thread safe, mutation of the
                 // state and pending map event needs to be atomic w.r.t. UnmapInternal.
                 DAWN_ASSERT((*buffer)->mState == BufferState::PendingMap);
-                (*buffer)->mState = BufferState::Mapped;
-
+                status = FromAPI((*buffer)->OnPreMapCallback());
+                if (status == wgpu::BufferMapAsyncStatus::Success) {
+                    (*buffer)->mState = BufferState::Mapped;
+                }
                 pendingMapEvent = std::move((*buffer)->mPendingMapEvent);
             }
         });

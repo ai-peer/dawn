@@ -88,10 +88,12 @@ class Buffer final : public BufferBase {
 
     class ScopedMap : public NonCopyable {
       public:
-        // Map buffer and return a ScopedMap object. If the buffer is not mappable,
+        // Map buffer and return a ScopedMap object. If the buffer is not mappable at the time,
         // scopedMap.GetMappedData() will return nullptr.
+        // 'wait': Wait to map until GPU is done with this buffer.
         static ResultOrError<ScopedMap> Create(const ScopedCommandRecordingContext* commandContext,
-                                               Buffer* buffer);
+                                               Buffer* buffer,
+                                               bool wait = false);
 
         ScopedMap();
         ~ScopedMap();
@@ -122,13 +124,15 @@ class Buffer final : public BufferBase {
     MaybeError Initialize(bool mappedAtCreation,
                           const ScopedCommandRecordingContext* commandContext);
     MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
+    // Called right before the client's map callback.
+    WGPUBufferMapAsyncStatus OnPreMapCallback() override;
     void UnmapImpl() override;
     void DestroyImpl() override;
     bool IsCPUWritableAtCreation() const override;
     MaybeError MapAtCreationImpl() override;
     void* GetMappedPointer() override;
 
-    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext);
+    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext, bool wait = false);
     void UnmapInternal(const ScopedCommandRecordingContext* commandContext);
 
     MaybeError InitializeToZero(const ScopedCommandRecordingContext* commandContext);
