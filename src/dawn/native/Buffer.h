@@ -91,6 +91,7 @@ class BufferBase : public ApiObjectBase {
 
     MaybeError MapAtCreation();
     void CallbackOnMapRequestCompleted(MapRequestID mapID, WGPUBufferMapAsyncStatus status);
+    virtual WGPUBufferMapAsyncStatus OnPreMapCallback() { return WGPUBufferMapAsyncStatus_Success; }
 
     MaybeError ValidateCanUseOnQueueNow() const;
 
@@ -175,6 +176,7 @@ class BufferBase : public ApiObjectBase {
     size_t mMapOffset = 0;
     size_t mMapSize = 0;
 
+    struct MapRequestTask;
     struct MapAsyncEvent;
     Ref<MapAsyncEvent> mPendingMapEvent;
 };

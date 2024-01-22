@@ -262,7 +262,7 @@ bool Buffer::IsCPUWritableAtCreation() const {
     return IsMappable(GetUsage());
 }
 
-MaybeError Buffer::MapInternal(const ScopedCommandRecordingContext* commandContext) {
+MaybeError Buffer::MapInternal(const ScopedCommandRecordingContext* commandContext, bool wait) {
     DAWN_ASSERT(IsMappable(GetUsage()));
     DAWN_ASSERT(!mMappedData);
 
@@ -270,19 +270,25 @@ MaybeError Buffer::MapInternal(const ScopedCommandRecordingContext* commandConte
     // need write permission to initialize the buffer.
     // TODO(dawn:1705): investigate the performance impact of mapping with D3D11_MAP_READ_WRITE.
     D3D11_MAPPED_SUBRESOURCE mappedResource;
-    DAWN_TRY(CheckHRESULT(commandContext->Map(mD3d11NonConstantBuffer.Get(),
-                                              /*Subresource=*/0, D3D11_MAP_READ_WRITE,
-                                              /*MapFlags=*/0, &mappedResource),
-                          "ID3D11DeviceContext::Map"));
+    UINT flags = wait ? 0 : D3D11_MAP_FLAG_DO_NOT_WAIT;
+    HRESULT hr =
+        commandContext->Map(mD3d11NonConstantBuffer.Get(),
+                            /*Subresource=*/0, D3D11_MAP_READ_WRITE, flags, &mappedResource);
+    if (!wait && hr == DXGI_ERROR_WAS_STILL_DRAWING) {
+        mMappedData = nullptr;
+        return {};
+    }
+    DAWN_TRY(CheckHRESULT(hr, "ID3D11DeviceContext::Map"));
     mMappedData = reinterpret_cast<uint8_t*>(mappedResource.pData);
 
     return {};
 }
 
 void Buffer::UnmapInternal(const ScopedCommandRecordingContext* commandContext) {
-    DAWN_ASSERT(mMappedData);
-    commandContext->Unmap(mD3d11NonConstantBuffer.Get(),
-                          /*Subresource=*/0);
+    if (mMappedData != nullptr) {
+        commandContext->Unmap(mD3d11NonConstantBuffer.Get(),
+                              /*Subresource=*/0);
+    }
     mMappedData = nullptr;
 }
 
@@ -295,23 +301,30 @@ MaybeError Buffer::MapAtCreationImpl() {
 
 MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     DAWN_ASSERT(mD3d11NonConstantBuffer);
+    return {};
+}
 
+WGPUBufferMapAsyncStatus Buffer::OnPreMapCallback() {
     auto commandContext = ToBackend(GetDevice()->GetQueue())
-                              ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
+                              ->GetScopedPendingCommandContext(Device::SubmitMode::Normal);
 
     // TODO(dawn:1705): make sure the map call is not blocked by the GPU operations.
-    DAWN_TRY(MapInternal(&commandContext));
+    if (MapInternal(&commandContext).IsError()) {
+        return WGPUBufferMapAsyncStatus_Unknown;
+    }
+    DAWN_ASSERT(mMappedData != nullptr);
 
-    DAWN_TRY(EnsureDataInitialized(&commandContext));
+    if (EnsureDataInitialized(&commandContext).IsError()) {
+        return WGPUBufferMapAsyncStatus_Unknown;
+    }
 
-    return {};
+    return WGPUBufferMapAsyncStatus_Success;
 }
 
 void Buffer::UnmapImpl() {
     DAWN_ASSERT(mD3d11NonConstantBuffer);
-    DAWN_ASSERT(mMappedData);
     auto commandContext = ToBackend(GetDevice()->GetQueue())
-                              ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
+                              ->GetScopedPendingCommandContext(Device::SubmitMode::Normal);
     UnmapInternal(&commandContext);
 }
 
@@ -536,9 +549,6 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
         return {};
     }
 
-    // UpdateSubresource can only be used to update non-mappable buffers.
-    DAWN_ASSERT(!IsMappable(GetUsage()));
-
     if (mD3d11NonConstantBuffer) {
         D3D11_BOX box;
         box.left = offset;
@@ -662,7 +672,8 @@ MaybeError Buffer::CopyInternal(const ScopedCommandRecordingContext* commandCont
 
 ResultOrError<Buffer::ScopedMap> Buffer::ScopedMap::Create(
     const ScopedCommandRecordingContext* commandContext,
-    Buffer* buffer) {
+    Buffer* buffer,
+    bool wait) {
     if (!IsMappable(buffer->GetUsage())) {
         return ScopedMap();
     }
@@ -671,8 +682,8 @@ ResultOrError<Buffer::ScopedMap> Buffer::ScopedMap::Create(
         return ScopedMap(commandContext, buffer, /*needsUnmap=*/false);
     }
 
-    DAWN_TRY(buffer->MapInternal(commandContext));
-    return ScopedMap(commandContext, buffer, /*needsUnmap=*/true);
+    DAWN_TRY(buffer->MapInternal(commandContext, wait));
+    return ScopedMap(commandContext, buffer, /*needsUnmap=*/buffer->GetMappedPointer() != nullptr);
 }
 
 Buffer::ScopedMap::ScopedMap() = default;
