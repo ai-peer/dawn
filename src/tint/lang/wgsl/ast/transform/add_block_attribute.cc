@@ -82,21 +82,24 @@ Transform::ApplyResult AddBlockAttribute::Apply(const Program& src,
         bool needs_wrapping = !str ||                    // Type is not a structure
                               str->HasFixedFootprint();  // Struct has a fixed footprint
 
-        if (cfg && cfg->skip_push_constants &&
-            var->AddressSpace() == core::AddressSpace::kPushConstant) {
-            continue;
-        }
+        // Certain platforms want push constants to be wrapped in structs, but not to actually
+        // be decorated with a block attribute.
+        bool wrap_only = cfg && cfg->push_constants_wrap_only &&
+                         var->AddressSpace() == core::AddressSpace::kPushConstant;
 
         if (needs_wrapping) {
             const char* kMemberName = "inner";
 
             auto* wrapper = wrapper_structs.GetOrCreate(ty, [&] {
-                auto* block = b.ASTNodes().Create<BlockAttribute>(b.ID(), b.AllocateNodeID());
                 auto wrapper_name = global->name->symbol.Name() + "_block";
-                auto* ret =
-                    b.create<Struct>(b.Ident(b.Symbols().New(wrapper_name)),
-                                     tint::Vector{b.Member(kMemberName, CreateASTTypeFor(ctx, ty))},
-                                     tint::Vector{block});
+                tint::Vector<const ast::Attribute*, 1> attributes;
+                if (!wrap_only) {
+                    attributes.Push(
+                        b.ASTNodes().Create<BlockAttribute>(b.ID(), b.AllocateNodeID()));
+                }
+                auto* ret = b.create<Struct>(
+                    b.Ident(b.Symbols().New(wrapper_name)),
+                    tint::Vector{b.Member(kMemberName, CreateASTTypeFor(ctx, ty))}, attributes);
                 ctx.InsertBefore(src.AST().GlobalDeclarations(), global, ret);
                 return ret;
             });
@@ -136,7 +139,8 @@ const AddBlockAttribute::BlockAttribute* AddBlockAttribute::BlockAttribute::Clon
                                                                          ctx.dst->AllocateNodeID());
 }
 
-AddBlockAttribute::Config::Config(bool skip_push_consts) : skip_push_constants(skip_push_consts) {}
+AddBlockAttribute::Config::Config(bool push_consts_wrap_only)
+    : push_constants_wrap_only(push_consts_wrap_only) {}
 
 AddBlockAttribute::Config::~Config() = default;
 
