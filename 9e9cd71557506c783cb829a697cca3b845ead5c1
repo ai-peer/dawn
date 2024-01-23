@@ -18,6 +18,29 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "97208aa1_44e4905c",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-23T14:14:09Z",
+      "side": 1,
+      "message": "maybe we can always call MapAsyncImpl() when the last use serial is passed, so this new method is not necessary.",
+      "range": {
+        "startLine": 95,
+        "startChar": 37,
+        "endLine": 95,
+        "endChar": 53
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d3f8f6ca_cb7458ee",
@@ -31,6 +54,30 @@
       "writtenOn": "2024-01-23T06:45:37Z",
       "side": 1,
       "message": "This assert was triggered during the dry-run on the Nvdia bots only. So it looks even when the fence serial has passed, mapping the buffer may still run into DXGI_ERROR_WAS_STILL_DRAWING.",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a5d21a16_6df1eb70",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-23T14:14:09Z",
+      "side": 1,
+      "message": "Yeah. I tried it locally. This CL break many tests with NVidia GPU. I debugged one really small test which verifies a buffer\u0027s content by using CopyBufferToBuffer to copy data from an uniform buffer to a staging buffer, and then use MapAsync() to map the staging buffer for readback. However the Map() call returns still drawing error.\n\nI tried workaround the problem by not using the `DXGI_ERROR_WAS_STILL_DRAWING` flag in `OnPreMapCallback()`, and run motionmark, and motionmark doesn\u0027t have any improvement. Looks like there is some issues with NVidia driver.",
+      "parentUuid": "d3f8f6ca_cb7458ee",
       "range": {
         "startLine": 315,
         "startChar": 0,
