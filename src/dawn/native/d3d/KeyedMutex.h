@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,28 +25,43 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D_SHARED_TEXTURE_MEMORY_D3D_H_
-#define SRC_DAWN_NATIVE_D3D_SHARED_TEXTURE_MEMORY_D3D_H_
+#ifndef SRC_DAWN_NATIVE_D3D_KEYED_MUTEX_H_
+#define SRC_DAWN_NATIVE_D3D_KEYED_MUTEX_H_
 
-#include "dawn/native/SharedTextureMemory.h"
+#include "dawn/common/NonCopyable.h"
+#include "dawn/common/Ref.h"
+#include "dawn/common/RefCounted.h"
+#include "dawn/native/Error.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
 namespace dawn::native::d3d {
 
-class Device;
+class KeyedMutex : public RefCounted {
+  public:
+    explicit KeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex);
+    ~KeyedMutex() override;
 
-class SharedTextureMemory : public SharedTextureMemoryBase {
-  protected:
-    SharedTextureMemory(Device* device,
-                        const char* label,
-                        SharedTextureMemoryProperties properties);
+    class Guard : public NonCopyable {
+      public:
+        Guard(Guard&& other);
+        Guard& operator=(Guard&& other);
+        ~Guard();
 
-    MaybeError BeginAccessImpl(TextureBase* texture,
-                               const UnpackedPtr<BeginAccessDescriptor>& descriptor) override;
-    ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture,
-                                                     UnpackedPtr<EndAccessState>& state) override;
+      private:
+        friend class KeyedMutex;
+        explicit Guard(Ref<KeyedMutex> keyedMutex);
+        void Reset();
+        Ref<KeyedMutex> mKeyedMutex;
+    };
+    ResultOrError<Guard> AcquireKeyedMutex();
+
+  private:
+    void ReleaseKeyedMutex();
+
+    ComPtr<IDXGIKeyedMutex> mDXGIKeyedMutex;
+    int mAcquireCount = 0;
 };
 
 }  // namespace dawn::native::d3d
 
-#endif  // SRC_DAWN_NATIVE_D3D_SHARED_TEXTURE_MEMORY_D3D_H_
+#endif  // SRC_DAWN_NATIVE_D3D_KEYED_MUTEX_H_
