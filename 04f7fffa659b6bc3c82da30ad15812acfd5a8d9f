@@ -1,0 +1,96 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "23e7a428_4d8a33ea",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-23T18:22:17Z",
+      "side": 1,
+      "message": "nit: \u003d\u003d?",
+      "range": {
+        "startLine": 100,
+        "startChar": 36,
+        "endLine": 100,
+        "endChar": 38
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fab258f8_bc2be08f",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-23T18:22:17Z",
+      "side": 1,
+      "message": "nit: \u003d\u003d",
+      "range": {
+        "startLine": 1135,
+        "startChar": 39,
+        "endLine": 1135,
+        "endChar": 41
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a868edb4_ce43d080",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-23T18:22:17Z",
+      "side": 1,
+      "message": "nit: we use name `mLastUsageSerial` in BufferBase, consider using the same name.",
+      "range": {
+        "startLine": 197,
+        "startChar": 35,
+        "endLine": 197,
+        "endChar": 52
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f0def053_9c14bddb",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-23T18:22:17Z",
+      "side": 1,
+      "message": "nit: move it to with other override methods.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 36
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
