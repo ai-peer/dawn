@@ -170,6 +170,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "324c5ed5_e3beb472",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-23T15:51:50Z",
+      "side": 1,
+      "message": "BTW, the test I debugged is [1]. It creates a buffer with data, and checks the buffer content with `EXPECT_BUFFER_U32_RANGE_EQ(myData.data(), buffer, 0, kDataSize)`, and the `EXPECT_BUFFER_U32_RANGE_EQ()` uses MapAsync() and trigger the still draw problem.\n\n[1] https://source.chromium.org/chromium/chromium/src/+/main:third_party/angle/third_party/dawn/src/dawn/tests/end2end/BufferTests.cpp;l\u003d959?q\u003dMapWriteUsageLarg\u0026ss\u003dchromium",
+      "parentUuid": "cdf076c8_5d5fb1a3",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e989eae1_5e53b4e1",
