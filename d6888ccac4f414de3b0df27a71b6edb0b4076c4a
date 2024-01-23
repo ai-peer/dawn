@@ -176,6 +176,24 @@
       "parentUuid": "8a19be41_d3de85ab",
       "revId": "d6888ccac4f414de3b0df27a71b6edb0b4076c4a",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d4aed7b9_7ce73fda",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-23T14:13:13Z",
+      "side": 1,
+      "message": "LGTM. Thank you and sorry for the hassle.",
+      "parentUuid": "f14784ff_be6c83fd",
+      "revId": "d6888ccac4f414de3b0df27a71b6edb0b4076c4a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
