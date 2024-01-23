@@ -33,6 +33,7 @@
 #include <memory>
 #include <string>
 #include <utility>
+#include <variant>
 #include <vector>
 
 #include "absl/container/flat_hash_map.h"
@@ -156,17 +157,23 @@ ResultOrError<tint::Program> RunTransforms(tint::ast::transform::Manager* transf
 
 // Mirrors wgpu::SamplerBindingLayout but instead stores a single boolean
 // for isComparison instead of a wgpu::SamplerBindingType enum.
-struct ShaderSamplerBindingInfo {
+struct SamplerBindingInfo {
     bool isComparison;
 };
 
 // Mirrors wgpu::TextureBindingLayout but instead has a set of compatible sampleTypes
 // instead of a single enum.
-struct ShaderTextureBindingInfo {
+struct SampledTextureBindingInfo {
     SampleTypeBit compatibleSampleTypes;
     wgpu::TextureViewDimension viewDimension;
     bool multisampled;
 };
+
+// Mirrors wgpu::ExternalTextureBindingLayout
+struct ExternalTextureBindingInfo {};
+
+using BufferBindingInfo = BufferBindingLayout;
+using StorageTextureBindingInfo = StorageTextureBindingLayout;
 
 // Per-binding shader metadata contains some SPIRV specific information in addition to
 // most of the frontend per-binding information.
@@ -176,15 +183,16 @@ struct ShaderBindingInfo {
     uint32_t base_type_id;
 
     BindingNumber binding;
-    BindingInfoType bindingType;
 
     // The variable name of the binding resource.
     std::string name;
 
-    BufferBindingLayout buffer;
-    ShaderSamplerBindingInfo sampler;
-    ShaderTextureBindingInfo texture;
-    StorageTextureBindingLayout storageTexture;
+    std::variant<BufferBindingInfo,
+                 SamplerBindingInfo,
+                 SampledTextureBindingInfo,
+                 StorageTextureBindingInfo,
+                 ExternalTextureBindingInfo>
+        bindingInfo;
 };
 
 using BindingGroupInfoMap = std::map<BindingNumber, ShaderBindingInfo>;
