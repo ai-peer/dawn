@@ -46,6 +46,30 @@
       },
       "revId": "43226e1091ebbdf3e028df04fb8acaab7185b39f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "734651f5_390ff48e",
+        "filename": "src/dawn/common/SlabAllocator.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 65,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-23T09:22:23Z",
+      "side": 1,
+      "message": "Already fixed by: https://dawn-review.googlesource.com/c/dawn/+/171120",
+      "parentUuid": "910100c5_bc58b170",
+      "range": {
+        "startLine": 65,
+        "startChar": 8,
+        "endLine": 65,
+        "endChar": 26
+      },
+      "revId": "43226e1091ebbdf3e028df04fb8acaab7185b39f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
