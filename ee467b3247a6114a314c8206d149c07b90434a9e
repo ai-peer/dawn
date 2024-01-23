@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "96e03362_7e7344e8",
+        "filename": "DEPS",
+        "patchSetId": 3
+      },
+      "lineNbr": 42,
+      "author": {
+        "id": 1003981
+      },
+      "writtenOn": "2024-01-23T04:47:36Z",
+      "side": 0,
+      "message": "FxDrJihHh6JaV1kV7MqXxEVrNTTqS12y7NhpYkBcWKCc",
+      "revId": "ee467b3247a6114a314c8206d149c07b90434a9e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
