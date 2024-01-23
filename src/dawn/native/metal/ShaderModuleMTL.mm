@@ -132,7 +132,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
     for (BindGroupIndex group : IterateBitSet(layout->GetBindGroupLayoutsMask())) {
         const BindGroupLayout* bgl = ToBackend(layout->GetBindGroupLayout(group));
 
-        for (const auto& [binding, bindingInfo] : moduleBindingInfo[group]) {
+        for (const auto& [binding, shaderBindingInfo] : moduleBindingInfo[group]) {
             tint::BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
                                                static_cast<uint32_t>(binding)};
 
@@ -145,16 +145,24 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
             // Use the ShaderIndex as the indices for the buffer size lookups in the array length
             // uniform transform. This is used to compute the size of variable length arrays in
             // storage buffers.
-            if (bindingInfo.buffer.type == wgpu::BufferBindingType::Storage ||
-                bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage ||
-                bindingInfo.buffer.type == kInternalStorageBufferBinding) {
-                arrayLengthFromUniform.bindpoint_to_size_index.emplace(dstBindingPoint,
-                                                                       dstBindingPoint.binding);
+            if (shaderBindingInfo.bindingType == BindingInfoType::Buffer) {
+                DAWN_ASSERT(
+                    std::holds_alternative<BufferBindingLayout>(shaderBindingInfo.bindingLayout));
+                const auto& bindingLayout =
+                    std::get<BufferBindingLayout>(shaderBindingInfo.bindingLayout);
+                if (bindingLayout.type == wgpu::BufferBindingType::Storage ||
+                    bindingLayout.type == wgpu::BufferBindingType::ReadOnlyStorage ||
+                    bindingLayout.type == kInternalStorageBufferBinding) {
+                    arrayLengthFromUniform.bindpoint_to_size_index.emplace(dstBindingPoint,
+                                                                           dstBindingPoint.binding);
+                }
             }
 
-            switch (bindingInfo.bindingType) {
-                case BindingInfoType::Buffer:
-                    switch (bindingInfo.buffer.type) {
+            switch (shaderBindingInfo.bindingType) {
+                case BindingInfoType::Buffer: {
+                    DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(
+                        shaderBindingInfo.bindingLayout));
+                    switch (std::get<BufferBindingLayout>(shaderBindingInfo.bindingLayout).type) {
                         case wgpu::BufferBindingType::Uniform:
                             bindings.uniform.emplace(
                                 srcBindingPoint,
@@ -172,6 +180,8 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                             break;
                     }
                     break;
+                }
+
                 case BindingInfoType::Sampler:
                     bindings.sampler.emplace(srcBindingPoint, tint::msl::writer::binding::Sampler{
                                                                   dstBindingPoint.binding});

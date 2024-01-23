@@ -33,6 +33,7 @@
 #include <memory>
 #include <string>
 #include <utility>
+#include <variant>
 #include <vector>
 
 #include "absl/container/flat_hash_map.h"
@@ -181,10 +182,11 @@ struct ShaderBindingInfo {
     // The variable name of the binding resource.
     std::string name;
 
-    BufferBindingLayout buffer;
-    ShaderSamplerBindingInfo sampler;
-    ShaderTextureBindingInfo texture;
-    StorageTextureBindingLayout storageTexture;
+    std::variant<BufferBindingLayout,
+                 ShaderSamplerBindingInfo,
+                 ShaderTextureBindingInfo,
+                 StorageTextureBindingLayout>
+        bindingLayout;
 };
 
 using BindingGroupInfoMap = std::map<BindingNumber, ShaderBindingInfo>;

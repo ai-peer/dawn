@@ -233,20 +233,34 @@ ResultOrError<Ref<PipelineLayoutBase>> PipelineLayoutBase::CreateDefault(
         -> BindGroupLayoutEntry {
         BindGroupLayoutEntry entry = {};
         switch (shaderBinding.bindingType) {
-            case BindingInfoType::Buffer:
-                entry.buffer.type = shaderBinding.buffer.type;
-                entry.buffer.hasDynamicOffset = shaderBinding.buffer.hasDynamicOffset;
-                entry.buffer.minBindingSize = shaderBinding.buffer.minBindingSize;
+            case BindingInfoType::Buffer: {
+                DAWN_ASSERT(
+                    std::holds_alternative<BufferBindingLayout>(shaderBinding.bindingLayout));
+                const auto& shaderBindingLayoutInfo =
+                    std::get<BufferBindingLayout>(shaderBinding.bindingLayout);
+                entry.buffer.type = shaderBindingLayoutInfo.type;
+                entry.buffer.hasDynamicOffset = shaderBindingLayoutInfo.hasDynamicOffset;
+                entry.buffer.minBindingSize = shaderBindingLayoutInfo.minBindingSize;
                 break;
-            case BindingInfoType::Sampler:
-                if (shaderBinding.sampler.isComparison) {
+            }
+
+            case BindingInfoType::Sampler: {
+                DAWN_ASSERT(
+                    std::holds_alternative<ShaderSamplerBindingInfo>(shaderBinding.bindingLayout));
+                if (std::get<ShaderSamplerBindingInfo>(shaderBinding.bindingLayout).isComparison) {
                     entry.sampler.type = wgpu::SamplerBindingType::Comparison;
                 } else {
                     entry.sampler.type = wgpu::SamplerBindingType::Filtering;
                 }
                 break;
-            case BindingInfoType::Texture:
-                switch (shaderBinding.texture.compatibleSampleTypes) {
+            }
+
+            case BindingInfoType::Texture: {
+                DAWN_ASSERT(
+                    std::holds_alternative<ShaderTextureBindingInfo>(shaderBinding.bindingLayout));
+                const auto& shaderBindingLayoutInfo =
+                    std::get<ShaderTextureBindingInfo>(shaderBinding.bindingLayout);
+                switch (shaderBindingLayoutInfo.compatibleSampleTypes) {
                     case SampleTypeBit::Depth:
                         entry.texture.sampleType = wgpu::TextureSampleType::Depth;
                         break;
@@ -262,7 +276,7 @@ ResultOrError<Ref<PipelineLayoutBase>> PipelineLayoutBase::CreateDefault(
                         DAWN_UNREACHABLE();
                         break;
                     default:
-                        if (shaderBinding.texture.compatibleSampleTypes ==
+                        if (shaderBindingLayoutInfo.compatibleSampleTypes ==
                             (SampleTypeBit::Float | SampleTypeBit::UnfilterableFloat)) {
                             // Default to UnfilterableFloat. It will be promoted to Float if it
                             // is used with a sampler.
@@ -271,14 +285,22 @@ ResultOrError<Ref<PipelineLayoutBase>> PipelineLayoutBase::CreateDefault(
                             DAWN_UNREACHABLE();
                         }
                 }
-                entry.texture.viewDimension = shaderBinding.texture.viewDimension;
-                entry.texture.multisampled = shaderBinding.texture.multisampled;
+                entry.texture.viewDimension = shaderBindingLayoutInfo.viewDimension;
+                entry.texture.multisampled = shaderBindingLayoutInfo.multisampled;
                 break;
-            case BindingInfoType::StorageTexture:
-                entry.storageTexture.access = shaderBinding.storageTexture.access;
-                entry.storageTexture.format = shaderBinding.storageTexture.format;
-                entry.storageTexture.viewDimension = shaderBinding.storageTexture.viewDimension;
+            }
+
+            case BindingInfoType::StorageTexture: {
+                DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(
+                    shaderBinding.bindingLayout));
+                const auto& shaderBindingLayoutInfo =
+                    std::get<StorageTextureBindingLayout>(shaderBinding.bindingLayout);
+                entry.storageTexture.access = shaderBindingLayoutInfo.access;
+                entry.storageTexture.format = shaderBindingLayoutInfo.format;
+                entry.storageTexture.viewDimension = shaderBindingLayoutInfo.viewDimension;
                 break;
+            }
+
             case BindingInfoType::ExternalTexture:
                 entry.nextInChain = externalTextureBindingEntry;
                 break;
