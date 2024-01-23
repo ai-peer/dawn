@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "488886ba_fa7e79d7",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-23T20:26:28Z",
+      "side": 1,
+      "message": "PTAL.\n\nI\u0027ve incorporated the Dawn changes, as well as a tweak to the AddBlockAttribute transform required for GLSL. Happy to split these back up again into separate CLs if you prefer.",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
