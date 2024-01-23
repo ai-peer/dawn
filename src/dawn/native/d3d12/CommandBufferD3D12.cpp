@@ -523,7 +523,8 @@ class BindGroupStateTracker : public BindGroupTrackerBase<false, uint64_t> {
                     ToBackend(binding.buffer)->GetVA() + offset;
 
                 DAWN_ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
-                switch (bindingInfo.buffer.type) {
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                     case wgpu::BufferBindingType::Uniform:
                         if (mInCompute) {
                             commandList->SetComputeRootConstantBufferView(parameterIndex,

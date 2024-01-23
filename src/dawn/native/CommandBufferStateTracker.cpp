@@ -128,7 +128,9 @@ Return FindStorageBufferBindingAliasing(const PipelineLayoutBase* pipelineLayout
 
             // BindGroup validation already guarantees the buffer usage includes
             // wgpu::BufferUsage::Storage
-            if (bindingInfo.buffer.type != wgpu::BufferBindingType::Storage) {
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+            const auto& bindingLayout = std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
+            if (bindingLayout.type != wgpu::BufferBindingType::Storage) {
                 continue;
             }
 
@@ -141,7 +143,7 @@ Return FindStorageBufferBindingAliasing(const PipelineLayoutBase* pipelineLayout
 
             uint64_t adjustedOffset = bufferBinding.offset;
             // Apply dynamic offset if any.
-            if (bindingInfo.buffer.hasDynamicOffset) {
+            if (bindingLayout.hasDynamicOffset) {
                 // SetBindGroup validation already guarantees offsets and sizes don't overflow.
                 adjustedOffset += dynamicOffsets[groupIndex][static_cast<uint32_t>(bindingIndex)];
             }
@@ -166,7 +168,9 @@ Return FindStorageBufferBindingAliasing(const PipelineLayoutBase* pipelineLayout
                 continue;
             }
 
-            switch (bindingInfo.storageTexture.access) {
+            DAWN_ASSERT(
+                std::holds_alternative<StorageTextureBindingLayout>(bindingInfo.bindingLayout));
+            switch (std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                 case wgpu::StorageTextureAccess::WriteOnly:
                 case wgpu::StorageTextureAccess::ReadWrite:
                     break;
@@ -672,11 +676,13 @@ MaybeError CommandBufferStateTracker::CheckMissingAspects(ValidationAspects aspe
                     mBindgroups[i]->GetUnverifiedBufferSizes()[packedIndex.value()];
                 uint64_t minBufferSize = (*mMinBufferSizes)[i][packedIndex.value()];
 
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                const auto& layout = std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
                 return DAWN_VALIDATION_ERROR(
                     "%s bound with size %u at group %u, binding %u is too small. The pipeline (%s) "
                     "requires a buffer binding which is at least %u bytes.%s",
                     buffer, bufferSize, i, bindingNumber, mLastPipeline, minBufferSize,
-                    (bindingInfo.buffer.type == wgpu::BufferBindingType::Uniform
+                    (layout.type == wgpu::BufferBindingType::Uniform
                          ? " This binding is a uniform buffer binding. It is padded to a multiple "
                            "of 16 bytes, and as a result may be larger than the associated data in "
                            "the shader source."

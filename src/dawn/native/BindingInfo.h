@@ -29,6 +29,7 @@
 #define SRC_DAWN_NATIVE_BINDINGINFO_H_
 
 #include <cstdint>
+#include <variant>
 #include <vector>
 
 #include "dawn/common/Constants.h"
@@ -63,11 +64,11 @@ struct BindingInfo {
 
     BindingInfoType bindingType;
 
-    // TODO(dawn:527): These four values could be made into a union.
-    BufferBindingLayout buffer;
-    SamplerBindingLayout sampler;
-    TextureBindingLayout texture;
-    StorageTextureBindingLayout storageTexture;
+    std::variant<BufferBindingLayout,
+                 SamplerBindingLayout,
+                 TextureBindingLayout,
+                 StorageTextureBindingLayout>
+        bindingLayout;
 };
 
 struct BindingSlot {

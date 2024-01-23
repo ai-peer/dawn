@@ -195,7 +195,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
         // the Tint AST to make the "bindings" decoration match the offset chosen by
         // d3d12::BindGroupLayout so that Tint produces HLSL with the correct registers
         // assigned to each interface variable.
-        for (const auto& [binding, bindingInfo] : moduleGroupBindingInfo) {
+        for (const auto& [binding, shaderBindingInfo] : moduleGroupBindingInfo) {
             BindingIndex bindingIndex = bgl->GetBindingIndex(binding);
             BindingPoint srcBindingPoint{static_cast<uint32_t>(group),
                                          static_cast<uint32_t>(binding)};
@@ -205,48 +205,56 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
                 bindingRemapper.binding_points.emplace(srcBindingPoint, dstBindingPoint);
             }
 
-            // Declaring a read-only storage buffer in HLSL but specifying a storage
-            // buffer in the BGL produces the wrong output. Force read-only storage
-            // buffer bindings to be treated as UAV instead of SRV. Internal storage
-            // buffer is a storage buffer used in the internal pipeline.
-            const bool forceStorageBufferAsUAV =
-                (bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
-                 (bgl->GetBindingInfo(bindingIndex).buffer.type ==
-                      wgpu::BufferBindingType::Storage ||
-                  bgl->GetBindingInfo(bindingIndex).buffer.type == kInternalStorageBufferBinding));
-            if (forceStorageBufferAsUAV) {
-                accessControls.emplace(srcBindingPoint, tint::core::Access::kReadWrite);
-            }
+            const auto& bindGroupLayoutBindingInfo = bgl->GetBindingInfo(bindingIndex);
+            if (bindGroupLayoutBindingInfo.bindingType == BindingInfoType::Buffer) {
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(
+                    bindGroupLayoutBindingInfo.bindingLayout));
+                const auto& bindingLayout =
+                    std::get<BufferBindingLayout>(bindGroupLayoutBindingInfo.bindingLayout);
 
-            // On D3D12 backend all storage buffers without Dynamic Buffer Offset will always be
-            // bound to root descriptor tables, where D3D12 runtime can guarantee that OOB-read will
-            // always return 0 and OOB-write will always take no action, so we don't need to do
-            // robustness transform on them. Note that we still need to do robustness transform on
-            // uniform buffers because only sized array is allowed in uniform buffers, so FXC will
-            // report compilation error when the indexing to the array in a cBuffer is out of bound
-            // and can be checked at compilation time. Storage buffers are OK because they are
-            // always translated with RWByteAddressBuffers, which has no such sized arrays.
-            //
-            // For example below WGSL shader will cause compilation error when we skip robustness
-            // transform on uniform buffers:
-            //
-            // struct TestData {
-            //     data: array<vec4<u32>, 3>,
-            // };
-            // @group(0) @binding(0) var<uniform> s: TestData;
-            //
-            // fn test() -> u32 {
-            //     let index = 1000000u;
-            //     if (s.data[index][0] != 0u) {    // error X3504: array index out of bounds
-            //         return 0x1004u;
-            //     }
-            //     return 0u;
-            // }
-            if ((bindingInfo.buffer.type == wgpu::BufferBindingType::Storage ||
-                 bindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage) &&
-                !bgl->GetBindingInfo(bindingIndex).buffer.hasDynamicOffset) {
-                req.hlsl.tintOptions.binding_points_ignored_in_robustness_transform.emplace_back(
-                    srcBindingPoint);
+                // Declaring a read-only storage buffer in HLSL but specifying a storage
+                // buffer in the BGL produces the wrong output. Force read-only storage
+                // buffer bindings to be treated as UAV instead of SRV. Internal storage
+                // buffer is a storage buffer used in the internal pipeline.
+                const bool forceStorageBufferAsUAV =
+                    (shaderBindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage &&
+                     (bindingLayout.type == wgpu::BufferBindingType::Storage ||
+                      bindingLayout.type == kInternalStorageBufferBinding));
+                if (forceStorageBufferAsUAV) {
+                    accessControls.emplace(srcBindingPoint, tint::core::Access::kReadWrite);
+                }
+
+                // On D3D12 backend all storage buffers without Dynamic Buffer Offset will always be
+                // bound to root descriptor tables, where D3D12 runtime can guarantee that OOB-read
+                // will always return 0 and OOB-write will always take no action, so we don't need
+                // to do robustness transform on them. Note that we still need to do robustness
+                // transform on uniform buffers because only sized array is allowed in uniform
+                // buffers, so FXC will report compilation error when the indexing to the array in a
+                // cBuffer is out of bound and can be checked at compilation time. Storage buffers
+                // are OK because they are always translated with RWByteAddressBuffers, which has no
+                // such sized arrays.
+                //
+                // For example below WGSL shader will cause compilation error when we skip
+                // robustness transform on uniform buffers:
+                //
+                // struct TestData {
+                //     data: array<vec4<u32>, 3>,
+                // };
+                // @group(0) @binding(0) var<uniform> s: TestData;
+                //
+                // fn test() -> u32 {
+                //     let index = 1000000u;
+                //     if (s.data[index][0] != 0u) {    // error X3504: array index out of bounds
+                //         return 0x1004u;
+                //     }
+                //     return 0u;
+                // }
+                if ((shaderBindingInfo.buffer.type == wgpu::BufferBindingType::Storage ||
+                     shaderBindingInfo.buffer.type == wgpu::BufferBindingType::ReadOnlyStorage) &&
+                    !bindingLayout.hasDynamicOffset) {
+                    req.hlsl.tintOptions.binding_points_ignored_in_robustness_transform
+                        .emplace_back(srcBindingPoint);
+                }
             }
         }
 
@@ -350,7 +358,7 @@ ResultOrError<d3d::CompiledShader> ShaderModule::Compile(
     // outside of the compilation.
     d3d::CompiledShader result = compiledShader.Acquire();
     result.hlslSource = "";
-    return result;
+    return std::move(result);
 }
 
 }  // namespace dawn::native::d3d12

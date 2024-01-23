@@ -386,9 +386,12 @@ std::vector<uint64_t> GetBindGroupMinBufferSizes(const BindingGroupInfoMap& shad
 
     for (BindingIndex bindingIndex{0}; bindingIndex < layout->GetBufferCount(); ++bindingIndex) {
         const BindingInfo& bindingInfo = layout->GetBindingInfo(bindingIndex);
-        if (bindingInfo.buffer.minBindingSize != 0) {
-            // Skip bindings that have minimum buffer size set in the layout
-            continue;
+        if (bindingInfo.bindingType == BindingInfoType::Buffer) {
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+            if (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).minBindingSize > 0) {
+                // Skip bindings that have minimum buffer size set in the layout
+                continue;
+            }
         }
 
         DAWN_ASSERT(packedIdx < requiredBufferSizes.size());
@@ -408,10 +411,10 @@ std::vector<uint64_t> GetBindGroupMinBufferSizes(const BindingGroupInfoMap& shad
 }
 
 bool IsShaderCompatibleWithPipelineLayoutOnStorageTextureAccess(
-    const BindingInfo& bindingInfo,
+    const StorageTextureBindingLayout& bindingLayout,
     const ShaderBindingInfo& shaderBindingInfo) {
-    return bindingInfo.storageTexture.access == shaderBindingInfo.storageTexture.access ||
-           (bindingInfo.storageTexture.access == wgpu::StorageTextureAccess::ReadWrite &&
+    return bindingLayout.access == shaderBindingInfo.storageTexture.access ||
+           (bindingLayout.access == wgpu::StorageTextureAccess::ReadWrite &&
             shaderBindingInfo.storageTexture.access == wgpu::StorageTextureAccess::WriteOnly);
 }
 
@@ -463,20 +466,23 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
 
     switch (layoutInfo.bindingType) {
         case BindingInfoType::Texture: {
+            DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(layoutInfo.bindingLayout));
+            const auto& textureBindingLayout =
+                std::get<TextureBindingLayout>(layoutInfo.bindingLayout);
             DAWN_INVALID_IF(
-                layoutInfo.texture.multisampled != shaderInfo.texture.multisampled,
+                textureBindingLayout.multisampled != shaderInfo.texture.multisampled,
                 "Binding multisampled flag (%u) doesn't match the layout's multisampled "
                 "flag (%u)",
-                layoutInfo.texture.multisampled, shaderInfo.texture.multisampled);
+                textureBindingLayout.multisampled, shaderInfo.texture.multisampled);
 
             // TODO(dawn:563): Provide info about the sample types.
             SampleTypeBit requiredType;
-            if (layoutInfo.texture.sampleType == kInternalResolveAttachmentSampleType) {
+            if (textureBindingLayout.sampleType == kInternalResolveAttachmentSampleType) {
                 // If the layout's texture's sample type is kInternalResolveAttachmentSampleType,
                 // then the shader's compatible sample types must contain float.
                 requiredType = SampleTypeBit::UnfilterableFloat;
             } else {
-                requiredType = SampleTypeToSampleTypeBit(layoutInfo.texture.sampleType);
+                requiredType = SampleTypeToSampleTypeBit(textureBindingLayout.sampleType);
             }
 
             DAWN_INVALID_IF(!(shaderInfo.texture.compatibleSampleTypes & requiredType),
@@ -484,33 +490,38 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
                             "sample type of the layout.");
 
             DAWN_INVALID_IF(
-                layoutInfo.texture.viewDimension != shaderInfo.texture.viewDimension,
+                textureBindingLayout.viewDimension != shaderInfo.texture.viewDimension,
                 "The shader's binding dimension (%s) doesn't match the shader's binding "
                 "dimension (%s).",
-                layoutInfo.texture.viewDimension, shaderInfo.texture.viewDimension);
+                textureBindingLayout.viewDimension, shaderInfo.texture.viewDimension);
             break;
         }
 
         case BindingInfoType::StorageTexture: {
-            DAWN_ASSERT(layoutInfo.storageTexture.format != wgpu::TextureFormat::Undefined);
+            DAWN_ASSERT(
+                std::holds_alternative<StorageTextureBindingLayout>(layoutInfo.bindingLayout));
+            const auto& storageTextureBindingLayout =
+                std::get<StorageTextureBindingLayout>(layoutInfo.bindingLayout);
+            DAWN_ASSERT(storageTextureBindingLayout.format != wgpu::TextureFormat::Undefined);
             DAWN_ASSERT(shaderInfo.storageTexture.format != wgpu::TextureFormat::Undefined);
 
-            DAWN_INVALID_IF(
-                !IsShaderCompatibleWithPipelineLayoutOnStorageTextureAccess(layoutInfo, shaderInfo),
-                "The layout's binding access (%s) isn't compatible with the shader's "
-                "binding access (%s).",
-                layoutInfo.storageTexture.access, shaderInfo.storageTexture.access);
+            DAWN_INVALID_IF(!IsShaderCompatibleWithPipelineLayoutOnStorageTextureAccess(
+                                storageTextureBindingLayout, shaderInfo),
+                            "The layout's binding access (%s) isn't compatible with the shader's "
+                            "binding access (%s).",
+                            storageTextureBindingLayout.access, shaderInfo.storageTexture.access);
 
-            DAWN_INVALID_IF(layoutInfo.storageTexture.format != shaderInfo.storageTexture.format,
+            DAWN_INVALID_IF(storageTextureBindingLayout.format != shaderInfo.storageTexture.format,
                             "The layout's binding format (%s) doesn't match the shader's binding "
                             "format (%s).",
-                            layoutInfo.storageTexture.format, shaderInfo.storageTexture.format);
+                            storageTextureBindingLayout.format, shaderInfo.storageTexture.format);
 
-            DAWN_INVALID_IF(
-                layoutInfo.storageTexture.viewDimension != shaderInfo.storageTexture.viewDimension,
-                "The layout's binding dimension (%s) doesn't match the "
-                "shader's binding dimension (%s).",
-                layoutInfo.storageTexture.viewDimension, shaderInfo.storageTexture.viewDimension);
+            DAWN_INVALID_IF(storageTextureBindingLayout.viewDimension !=
+                                shaderInfo.storageTexture.viewDimension,
+                            "The layout's binding dimension (%s) doesn't match the "
+                            "shader's binding dimension (%s).",
+                            storageTextureBindingLayout.viewDimension,
+                            shaderInfo.storageTexture.viewDimension);
             break;
         }
 
@@ -520,33 +531,38 @@ MaybeError ValidateCompatibilityOfSingleBindingWithLayout(const DeviceBase* devi
             // group layout is invalid. For internal usage with internal shaders, a storage
             // binding in the shader with an internal storage buffer in the bind group
             // layout is also valid.
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(layoutInfo.bindingLayout));
+            const auto& bufferLayout = std::get<BufferBindingLayout>(layoutInfo.bindingLayout);
             bool validBindingConversion =
-                (layoutInfo.buffer.type == kInternalStorageBufferBinding &&
+                (bufferLayout.type == kInternalStorageBufferBinding &&
                  shaderInfo.buffer.type == wgpu::BufferBindingType::Storage);
 
             DAWN_INVALID_IF(
-                layoutInfo.buffer.type != shaderInfo.buffer.type && !validBindingConversion,
+                bufferLayout.type != shaderInfo.buffer.type && !validBindingConversion,
                 "The buffer type in the shader (%s) is not compatible with the type in the "
                 "layout (%s).",
-                shaderInfo.buffer.type, layoutInfo.buffer.type);
+                shaderInfo.buffer.type, bufferLayout.type);
 
-            DAWN_INVALID_IF(layoutInfo.buffer.minBindingSize != 0 &&
-                                shaderInfo.buffer.minBindingSize > layoutInfo.buffer.minBindingSize,
+            DAWN_INVALID_IF(bufferLayout.minBindingSize != 0 &&
+                                shaderInfo.buffer.minBindingSize > bufferLayout.minBindingSize,
                             "The shader uses more bytes of the buffer (%u) than the layout's "
                             "minBindingSize (%u).",
-                            shaderInfo.buffer.minBindingSize, layoutInfo.buffer.minBindingSize);
+                            shaderInfo.buffer.minBindingSize, bufferLayout.minBindingSize);
             break;
         }
 
-        case BindingInfoType::Sampler:
+        case BindingInfoType::Sampler: {
+            DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(layoutInfo.bindingLayout));
+            const auto& samplerLayout = std::get<SamplerBindingLayout>(layoutInfo.bindingLayout);
             DAWN_INVALID_IF(
-                (layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison) !=
+                (samplerLayout.type == wgpu::SamplerBindingType::Comparison) !=
                     shaderInfo.sampler.isComparison,
                 "The sampler type in the shader (comparison: %u) doesn't match the type in "
                 "the layout (comparison: %u).",
                 shaderInfo.sampler.isComparison,
-                layoutInfo.sampler.type == wgpu::SamplerBindingType::Comparison);
+                samplerLayout.type == wgpu::SamplerBindingType::Comparison);
             break;
+        }
 
         case BindingInfoType::ExternalTexture: {
             DAWN_UNREACHABLE();
@@ -1136,7 +1152,9 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
             layout->GetBindGroupLayout(pair.sampler.group);
         const BindingInfo& samplerInfo =
             samplerBGL->GetBindingInfo(samplerBGL->GetBindingIndex(pair.sampler.binding));
-        if (samplerInfo.sampler.type != wgpu::SamplerBindingType::Filtering) {
+        DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(samplerInfo.bindingLayout));
+        const auto& samplerLayout = std::get<SamplerBindingLayout>(samplerInfo.bindingLayout);
+        if (samplerLayout.type != wgpu::SamplerBindingType::Filtering) {
             continue;
         }
         const BindGroupLayoutInternalBase* textureBGL =
@@ -1151,6 +1169,8 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
         if (textureInfo.bindingType != BindingInfoType::Texture) {
             continue;
         }
+        DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(textureInfo.bindingLayout));
+        const auto& textureLayout = std::get<TextureBindingLayout>(textureInfo.bindingLayout);
 
         // Uint/Sint can't be statically used with a sampler, so they any
         // texture bindings reflected must be float or depth textures. If
@@ -1158,12 +1178,12 @@ MaybeError ValidateCompatibilityWithPipelineLayout(DeviceBase* device,
         // specifies a uint/sint texture binding,
         // |ValidateCompatibilityWithBindGroupLayout| will fail since the
         // sampleType does not match.
-        DAWN_ASSERT(textureInfo.texture.sampleType != wgpu::TextureSampleType::Undefined &&
-                    textureInfo.texture.sampleType != wgpu::TextureSampleType::Uint &&
-                    textureInfo.texture.sampleType != wgpu::TextureSampleType::Sint);
+        DAWN_ASSERT(textureLayout.sampleType != wgpu::TextureSampleType::Undefined &&
+                    textureLayout.sampleType != wgpu::TextureSampleType::Uint &&
+                    textureLayout.sampleType != wgpu::TextureSampleType::Sint);
 
         DAWN_INVALID_IF(
-            textureInfo.texture.sampleType == wgpu::TextureSampleType::UnfilterableFloat,
+            textureLayout.sampleType == wgpu::TextureSampleType::UnfilterableFloat,
             "Texture binding (group:%u, binding:%u) is %s but used statically with a sampler "
             "(group:%u, binding:%u) that's %s",
             pair.texture.group, pair.texture.binding, wgpu::TextureSampleType::UnfilterableFloat,

@@ -63,23 +63,28 @@ VkShaderStageFlags VulkanShaderStageFlags(wgpu::ShaderStage stages) {
 
 VkDescriptorType VulkanDescriptorType(const BindingInfo& bindingInfo) {
     switch (bindingInfo.bindingType) {
-        case BindingInfoType::Buffer:
-            switch (bindingInfo.buffer.type) {
+        case BindingInfoType::Buffer: {
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+            const auto& bindingLayout = std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
+            switch (bindingLayout.type) {
                 case wgpu::BufferBindingType::Uniform:
-                    if (bindingInfo.buffer.hasDynamicOffset) {
+                    if (bindingLayout.hasDynamicOffset) {
                         return VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER_DYNAMIC;
                     }
                     return VK_DESCRIPTOR_TYPE_UNIFORM_BUFFER;
                 case wgpu::BufferBindingType::Storage:
                 case kInternalStorageBufferBinding:
                 case wgpu::BufferBindingType::ReadOnlyStorage:
-                    if (bindingInfo.buffer.hasDynamicOffset) {
+                    if (bindingLayout.hasDynamicOffset) {
                         return VK_DESCRIPTOR_TYPE_STORAGE_BUFFER_DYNAMIC;
                     }
                     return VK_DESCRIPTOR_TYPE_STORAGE_BUFFER;
                 case wgpu::BufferBindingType::Undefined:
                     DAWN_UNREACHABLE();
             }
+            break;
+        }
+
         case BindingInfoType::Sampler:
             return VK_DESCRIPTOR_TYPE_SAMPLER;
         case BindingInfoType::Texture:

@@ -83,7 +83,8 @@ BindGroup::BindGroup(Device* device,
                     continue;
                 }
 
-                switch (bindingInfo.buffer.type) {
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                     case wgpu::BufferBindingType::Uniform: {
                         D3D12_CONSTANT_BUFFER_VIEW_DESC desc;
                         desc.SizeInBytes =
@@ -175,7 +176,9 @@ BindGroup::BindGroup(Device* device,
                     continue;
                 }
 
-                switch (bindingInfo.storageTexture.access) {
+                DAWN_ASSERT(
+                    std::holds_alternative<StorageTextureBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                     case wgpu::StorageTextureAccess::WriteOnly:
                     case wgpu::StorageTextureAccess::ReadWrite: {
                         D3D12_UNORDERED_ACCESS_VIEW_DESC uav = view->GetUAVDescriptor();

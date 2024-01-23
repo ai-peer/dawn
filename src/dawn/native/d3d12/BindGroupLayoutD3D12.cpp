@@ -39,7 +39,8 @@ namespace {
 D3D12_DESCRIPTOR_RANGE_TYPE WGPUBindingInfoToDescriptorRangeType(const BindingInfo& bindingInfo) {
     switch (bindingInfo.bindingType) {
         case BindingInfoType::Buffer:
-            switch (bindingInfo.buffer.type) {
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+            switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                 case wgpu::BufferBindingType::Uniform:
                     return D3D12_DESCRIPTOR_RANGE_TYPE_CBV;
                 case wgpu::BufferBindingType::Storage:
@@ -59,7 +60,9 @@ D3D12_DESCRIPTOR_RANGE_TYPE WGPUBindingInfoToDescriptorRangeType(const BindingIn
             return D3D12_DESCRIPTOR_RANGE_TYPE_SRV;
 
         case BindingInfoType::StorageTexture:
-            switch (bindingInfo.storageTexture.access) {
+            DAWN_ASSERT(
+                std::holds_alternative<StorageTextureBindingLayout>(bindingInfo.bindingLayout));
+            switch (std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                 case wgpu::StorageTextureAccess::WriteOnly:
                 case wgpu::StorageTextureAccess::ReadWrite:
                     return D3D12_DESCRIPTOR_RANGE_TYPE_UAV;
@@ -97,7 +100,9 @@ BindGroupLayout::BindGroupLayout(Device* device, const BindGroupLayoutDescriptor
         if (bindingIndex < GetDynamicBufferCount()) {
             continue;
         }
-        DAWN_ASSERT(!bindingInfo.buffer.hasDynamicOffset);
+        DAWN_ASSERT(bindingInfo.bindingType != BindingInfoType::Buffer ||
+                    (std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout) &&
+                     !std::get<BufferBindingLayout>(bindingInfo.bindingLayout).hasDynamicOffset));
 
         mDescriptorHeapOffsets[bindingIndex] =
             descriptorRangeType == D3D12_DESCRIPTOR_RANGE_TYPE_SAMPLER

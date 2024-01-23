@@ -63,7 +63,9 @@ MaybeError PipelineLayout::Initialize(Device* device) {
             const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
             switch (bindingInfo.bindingType) {
                 case BindingInfoType::Buffer:
-                    switch (bindingInfo.buffer.type) {
+                    DAWN_ASSERT(
+                        std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                    switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                         case wgpu::BufferBindingType::Uniform:
                             mIndexInfo[group][bindingIndex] = constantBufferIndex++;
                             break;
@@ -90,7 +92,10 @@ MaybeError PipelineLayout::Initialize(Device* device) {
                     break;
 
                 case BindingInfoType::StorageTexture:
-                    switch (bindingInfo.storageTexture.access) {
+                    DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(
+                        bindingInfo.bindingLayout));
+                    switch (
+                        std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                         case wgpu::StorageTextureAccess::ReadWrite:
                         case wgpu::StorageTextureAccess::WriteOnly:
                             mIndexInfo[group][bindingIndex] = --unorderedAccessViewIndex;

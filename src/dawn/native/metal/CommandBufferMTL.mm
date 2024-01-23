@@ -579,7 +579,9 @@ class BindGroupTracker : public BindGroupTrackerBase<true, uint64_t> {
 
                     // TODO(crbug.com/dawn/854): Record bound buffer status to use
                     // setBufferOffset to achieve better performance.
-                    if (bindingInfo.buffer.hasDynamicOffset) {
+                    DAWN_ASSERT(
+                        std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                    if (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).hasDynamicOffset) {
                         // Dynamic buffers are packed at the front of BindingIndices.
                         offset += dynamicOffsets[bindingIndex];
                     }

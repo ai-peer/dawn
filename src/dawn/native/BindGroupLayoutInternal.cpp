@@ -356,20 +356,42 @@ bool operator!=(const BindingInfo& a, const BindingInfo& b) {
     }
 
     switch (a.bindingType) {
-        case BindingInfoType::Buffer:
-            return a.buffer.type != b.buffer.type ||
-                   a.buffer.hasDynamicOffset != b.buffer.hasDynamicOffset ||
-                   a.buffer.minBindingSize != b.buffer.minBindingSize;
-        case BindingInfoType::Sampler:
-            return a.sampler.type != b.sampler.type;
-        case BindingInfoType::Texture:
-            return a.texture.sampleType != b.texture.sampleType ||
-                   a.texture.viewDimension != b.texture.viewDimension ||
-                   a.texture.multisampled != b.texture.multisampled;
-        case BindingInfoType::StorageTexture:
-            return a.storageTexture.access != b.storageTexture.access ||
-                   a.storageTexture.viewDimension != b.storageTexture.viewDimension ||
-                   a.storageTexture.format != b.storageTexture.format;
+        case BindingInfoType::Buffer: {
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(a.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(b.bindingLayout));
+            const auto& aLayout = std::get<BufferBindingLayout>(a.bindingLayout);
+            const auto& bLayout = std::get<BufferBindingLayout>(b.bindingLayout);
+            return aLayout.type != bLayout.type ||
+                   aLayout.hasDynamicOffset != bLayout.hasDynamicOffset ||
+                   aLayout.minBindingSize != bLayout.minBindingSize;
+        }
+        case BindingInfoType::Sampler: {
+            DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(a.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(b.bindingLayout));
+            const auto& aLayout = std::get<SamplerBindingLayout>(a.bindingLayout);
+            const auto& bLayout = std::get<SamplerBindingLayout>(b.bindingLayout);
+            return aLayout.type != bLayout.type;
+        }
+        case BindingInfoType::Texture: {
+            DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(a.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(b.bindingLayout));
+            const auto& aLayout = std::get<TextureBindingLayout>(a.bindingLayout);
+            const auto& bLayout = std::get<TextureBindingLayout>(b.bindingLayout);
+            return aLayout.sampleType != bLayout.sampleType ||
+                   aLayout.viewDimension != bLayout.viewDimension ||
+                   aLayout.multisampled != bLayout.multisampled;
+        }
+
+        case BindingInfoType::StorageTexture: {
+            DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(a.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(b.bindingLayout));
+            const auto& aLayout = std::get<StorageTextureBindingLayout>(a.bindingLayout);
+            const auto& bLayout = std::get<StorageTextureBindingLayout>(b.bindingLayout);
+            return aLayout.access != bLayout.access ||
+                   aLayout.viewDimension != bLayout.viewDimension ||
+                   aLayout.format != bLayout.format;
+        }
+
         case BindingInfoType::ExternalTexture:
             return false;
     }
@@ -394,23 +416,25 @@ BindingInfo CreateBindGroupLayoutInfo(const UnpackedPtr<BindGroupLayoutEntry>& b
 
     if (binding->buffer.type != wgpu::BufferBindingType::Undefined) {
         bindingInfo.bindingType = BindingInfoType::Buffer;
-        bindingInfo.buffer = binding->buffer;
+        bindingInfo.bindingLayout = binding->buffer;
     } else if (binding->sampler.type != wgpu::SamplerBindingType::Undefined) {
         bindingInfo.bindingType = BindingInfoType::Sampler;
-        bindingInfo.sampler = binding->sampler;
+        bindingInfo.bindingLayout = binding->sampler;
     } else if (binding->texture.sampleType != wgpu::TextureSampleType::Undefined) {
         bindingInfo.bindingType = BindingInfoType::Texture;
-        bindingInfo.texture = binding->texture.WithTrivialFrontendDefaults();
+        bindingInfo.bindingLayout = binding->texture.WithTrivialFrontendDefaults();
 
         if (binding->texture.viewDimension == wgpu::TextureViewDimension::Undefined) {
-            bindingInfo.texture.viewDimension = wgpu::TextureViewDimension::e2D;
+            std::get<TextureBindingLayout>(bindingInfo.bindingLayout).viewDimension =
+                wgpu::TextureViewDimension::e2D;
         }
     } else if (binding->storageTexture.access != wgpu::StorageTextureAccess::Undefined) {
         bindingInfo.bindingType = BindingInfoType::StorageTexture;
-        bindingInfo.storageTexture = binding->storageTexture.WithTrivialFrontendDefaults();
+        bindingInfo.bindingLayout = binding->storageTexture.WithTrivialFrontendDefaults();
 
         if (binding->storageTexture.viewDimension == wgpu::TextureViewDimension::Undefined) {
-            bindingInfo.storageTexture.viewDimension = wgpu::TextureViewDimension::e2D;
+            std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).viewDimension =
+                wgpu::TextureViewDimension::e2D;
         }
     } else {
         if (auto* externalTextureBindingLayout = binding.Get<ExternalTextureBindingLayout>()) {
@@ -468,38 +492,62 @@ bool SortBindingsCompare(const UnpackedPtr<BindGroupLayoutEntry>& a,
     }
 
     switch (aInfo.bindingType) {
-        case BindingInfoType::Buffer:
-            if (aInfo.buffer.minBindingSize != bInfo.buffer.minBindingSize) {
-                return aInfo.buffer.minBindingSize < bInfo.buffer.minBindingSize;
+        case BindingInfoType::Buffer: {
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(aInfo.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bInfo.bindingLayout));
+            const auto& aLayout = std::get<BufferBindingLayout>(aInfo.bindingLayout);
+            const auto& bLayout = std::get<BufferBindingLayout>(bInfo.bindingLayout);
+            if (aLayout.minBindingSize != bLayout.minBindingSize) {
+                return aLayout.minBindingSize < bLayout.minBindingSize;
             }
             break;
-        case BindingInfoType::Sampler:
-            if (aInfo.sampler.type != bInfo.sampler.type) {
-                return aInfo.sampler.type < bInfo.sampler.type;
+        }
+
+        case BindingInfoType::Sampler: {
+            DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(aInfo.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(bInfo.bindingLayout));
+            const auto& aLayout = std::get<SamplerBindingLayout>(aInfo.bindingLayout);
+            const auto& bLayout = std::get<SamplerBindingLayout>(bInfo.bindingLayout);
+            if (aLayout.type != bLayout.type) {
+                return aLayout.type < bLayout.type;
             }
             break;
-        case BindingInfoType::Texture:
-            if (aInfo.texture.multisampled != bInfo.texture.multisampled) {
-                return aInfo.texture.multisampled < bInfo.texture.multisampled;
+        }
+
+        case BindingInfoType::Texture: {
+            DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(aInfo.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(bInfo.bindingLayout));
+            const auto& aLayout = std::get<TextureBindingLayout>(aInfo.bindingLayout);
+            const auto& bLayout = std::get<TextureBindingLayout>(bInfo.bindingLayout);
+            if (aLayout.multisampled != bLayout.multisampled) {
+                return aLayout.multisampled < bLayout.multisampled;
             }
-            if (aInfo.texture.viewDimension != bInfo.texture.viewDimension) {
-                return aInfo.texture.viewDimension < bInfo.texture.viewDimension;
+            if (aLayout.viewDimension != bLayout.viewDimension) {
+                return aLayout.viewDimension < bLayout.viewDimension;
             }
-            if (aInfo.texture.sampleType != bInfo.texture.sampleType) {
-                return aInfo.texture.sampleType < bInfo.texture.sampleType;
-            }
-            break;
-        case BindingInfoType::StorageTexture:
-            if (aInfo.storageTexture.access != bInfo.storageTexture.access) {
-                return aInfo.storageTexture.access < bInfo.storageTexture.access;
-            }
-            if (aInfo.storageTexture.viewDimension != bInfo.storageTexture.viewDimension) {
-                return aInfo.storageTexture.viewDimension < bInfo.storageTexture.viewDimension;
-            }
-            if (aInfo.storageTexture.format != bInfo.storageTexture.format) {
-                return aInfo.storageTexture.format < bInfo.storageTexture.format;
+            if (aLayout.sampleType != bLayout.sampleType) {
+                return aLayout.sampleType < bLayout.sampleType;
             }
             break;
+        }
+
+        case BindingInfoType::StorageTexture: {
+            DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(aInfo.bindingLayout));
+            DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(bInfo.bindingLayout));
+            const auto& aLayout = std::get<StorageTextureBindingLayout>(aInfo.bindingLayout);
+            const auto& bLayout = std::get<StorageTextureBindingLayout>(bInfo.bindingLayout);
+            if (aLayout.access != bLayout.access) {
+                return aLayout.access < bLayout.access;
+            }
+            if (aLayout.viewDimension != bLayout.viewDimension) {
+                return aLayout.viewDimension < bLayout.viewDimension;
+            }
+            if (aLayout.format != bLayout.format) {
+                return aLayout.format < bLayout.format;
+            }
+            break;
+        }
+
         case BindingInfoType::ExternalTexture:
             break;
     }
@@ -609,11 +657,39 @@ size_t BindGroupLayoutInternalBase::ComputeContentHash() {
         recorder.Record(id, index);
 
         const BindingInfo& info = mBindingInfo[index];
-        recorder.Record(info.buffer.hasDynamicOffset, info.visibility, info.bindingType,
-                        info.buffer.type, info.buffer.minBindingSize, info.sampler.type,
-                        info.texture.sampleType, info.texture.viewDimension,
-                        info.texture.multisampled, info.storageTexture.access,
-                        info.storageTexture.format, info.storageTexture.viewDimension);
+        recorder.Record(info.visibility, info.bindingType);
+
+        switch (info.bindingType) {
+            case BindingInfoType::Buffer: {
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(info.bindingLayout));
+                const auto& layout = std::get<BufferBindingLayout>(info.bindingLayout);
+                recorder.Record(layout.type, layout.hasDynamicOffset, layout.minBindingSize);
+                break;
+            }
+            case BindingInfoType::Sampler: {
+                DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(info.bindingLayout));
+                const auto& layout = std::get<SamplerBindingLayout>(info.bindingLayout);
+                recorder.Record(layout.type);
+                break;
+            }
+            case BindingInfoType::Texture: {
+                DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(info.bindingLayout));
+                const auto& layout = std::get<TextureBindingLayout>(info.bindingLayout);
+                recorder.Record(layout.sampleType, layout.viewDimension, layout.multisampled);
+                break;
+            }
+            case BindingInfoType::StorageTexture: {
+                DAWN_ASSERT(
+                    std::holds_alternative<StorageTextureBindingLayout>(info.bindingLayout));
+                const auto& layout = std::get<StorageTextureBindingLayout>(info.bindingLayout);
+                recorder.Record(layout.access, layout.format, layout.viewDimension);
+                break;
+            }
+            case BindingInfoType::ExternalTexture: {
+                DAWN_UNREACHABLE();
+                break;
+            }
+        }
     }
 
     return recorder.GetContentHash();
@@ -705,7 +781,9 @@ BindGroupLayoutInternalBase::ComputeBindingDataPointers(void* dataStart) const {
 
 bool BindGroupLayoutInternalBase::IsStorageBufferBinding(BindingIndex bindingIndex) const {
     DAWN_ASSERT(bindingIndex < GetBufferCount());
-    switch (GetBindingInfo(bindingIndex).buffer.type) {
+    const auto& bindingLayout = GetBindingInfo(bindingIndex).bindingLayout;
+    DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingLayout));
+    switch (std::get<BufferBindingLayout>(bindingLayout).type) {
         case wgpu::BufferBindingType::Uniform:
             return false;
         case kInternalStorageBufferBinding:

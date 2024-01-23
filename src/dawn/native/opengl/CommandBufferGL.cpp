@@ -284,13 +284,18 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                     GLuint index = indices[bindingIndex];
                     GLuint offset = binding.offset;
 
-                    if (bindingInfo.buffer.hasDynamicOffset) {
+                    DAWN_ASSERT(
+                        std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                    const auto& bindingLayout =
+                        std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
+
+                    if (bindingLayout.hasDynamicOffset) {
                         // Dynamic buffers are packed at the front of BindingIndices.
                         offset += dynamicOffsets[bindingIndex];
                     }
 
                     GLenum target;
-                    switch (bindingInfo.buffer.type) {
+                    switch (bindingLayout.type) {
                         case wgpu::BufferBindingType::Uniform:
                             target = GL_UNIFORM_BUFFER;
                             break;
@@ -374,7 +379,10 @@ class BindGroupTracker : public BindGroupTrackerBase<false, uint64_t> {
                     GLuint imageIndex = indices[bindingIndex];
 
                     GLenum access;
-                    switch (bindingInfo.storageTexture.access) {
+                    DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(
+                        bindingInfo.bindingLayout));
+                    switch (
+                        std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                         case wgpu::StorageTextureAccess::WriteOnly:
                             access = GL_WRITE_ONLY;
                             break;

@@ -117,20 +117,28 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
         new absl::ParsedFormat<'u', 's', 's', 's'>("{ binding: %u, visibility: %s, %s: %s }");
     switch (value.bindingType) {
         case BindingInfoType::Buffer:
+            DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(value.bindingLayout));
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
-                                      value.bindingType, value.buffer));
+                                      value.bindingType,
+                                      std::get<BufferBindingLayout>(value.bindingLayout)));
             break;
         case BindingInfoType::Sampler:
+            DAWN_ASSERT(std::holds_alternative<SamplerBindingLayout>(value.bindingLayout));
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
-                                      value.bindingType, value.sampler));
+                                      value.bindingType,
+                                      std::get<SamplerBindingLayout>(value.bindingLayout)));
             break;
         case BindingInfoType::Texture:
+            DAWN_ASSERT(std::holds_alternative<TextureBindingLayout>(value.bindingLayout));
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
-                                      value.bindingType, value.texture));
+                                      value.bindingType,
+                                      std::get<TextureBindingLayout>(value.bindingLayout)));
             break;
         case BindingInfoType::StorageTexture:
+            DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(value.bindingLayout));
             s->Append(absl::StrFormat(*fmt, static_cast<uint32_t>(value.binding), value.visibility,
-                                      value.bindingType, value.storageTexture));
+                                      value.bindingType,
+                                      std::get<StorageTextureBindingLayout>(value.bindingLayout)));
             break;
         case BindingInfoType::ExternalTexture:
             break;

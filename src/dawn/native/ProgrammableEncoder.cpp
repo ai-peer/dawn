@@ -151,10 +151,12 @@ MaybeError ProgrammableEncoder::ValidateSetBindGroup(BindGroupIndex index,
         // BGL creation sorts bindings such that the dynamic buffer bindings are first.
         // DAWN_ASSERT that this true.
         DAWN_ASSERT(bindingInfo.bindingType == BindingInfoType::Buffer);
-        DAWN_ASSERT(bindingInfo.buffer.hasDynamicOffset);
+        DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+        const auto& bindingLayout = std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
+        DAWN_ASSERT(bindingLayout.hasDynamicOffset);
 
         uint64_t requiredAlignment;
-        switch (bindingInfo.buffer.type) {
+        switch (bindingLayout.type) {
             case wgpu::BufferBindingType::Uniform:
                 requiredAlignment = GetDevice()->GetLimits().v1.minUniformBufferOffsetAlignment;
                 break;

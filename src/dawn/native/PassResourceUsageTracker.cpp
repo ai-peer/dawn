@@ -111,7 +111,8 @@ void SyncScopeUsageTracker::AddBindGroup(BindGroupBase* group) {
         switch (bindingInfo.bindingType) {
             case BindingInfoType::Buffer: {
                 BufferBase* buffer = group->GetBindingAsBufferBinding(bindingIndex).buffer;
-                switch (bindingInfo.buffer.type) {
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                     case wgpu::BufferBindingType::Uniform:
                         BufferUsedAs(buffer, wgpu::BufferUsage::Uniform, bindingInfo.visibility);
                         break;
@@ -132,7 +133,9 @@ void SyncScopeUsageTracker::AddBindGroup(BindGroupBase* group) {
 
             case BindingInfoType::Texture: {
                 TextureViewBase* view = group->GetBindingAsTextureView(bindingIndex);
-                switch (bindingInfo.texture.sampleType) {
+                DAWN_ASSERT(
+                    std::holds_alternative<TextureBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<TextureBindingLayout>(bindingInfo.bindingLayout).sampleType) {
                     case kInternalResolveAttachmentSampleType:
                         TextureViewUsedAs(view, kResolveAttachmentLoadingUsage,
                                           bindingInfo.visibility);
@@ -147,7 +150,9 @@ void SyncScopeUsageTracker::AddBindGroup(BindGroupBase* group) {
 
             case BindingInfoType::StorageTexture: {
                 TextureViewBase* view = group->GetBindingAsTextureView(bindingIndex);
-                switch (bindingInfo.storageTexture.access) {
+                DAWN_ASSERT(
+                    std::holds_alternative<StorageTextureBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                     case wgpu::StorageTextureAccess::WriteOnly:
                         TextureViewUsedAs(view, kWriteOnlyStorageTexture, bindingInfo.visibility);
                         break;

@@ -50,7 +50,9 @@ PipelineLayout::PipelineLayout(Device* device,
             const BindingInfo& bindingInfo = bgl->GetBindingInfo(bindingIndex);
             switch (bindingInfo.bindingType) {
                 case BindingInfoType::Buffer:
-                    switch (bindingInfo.buffer.type) {
+                    DAWN_ASSERT(
+                        std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                    switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                         case wgpu::BufferBindingType::Uniform:
                             mIndexInfo[group][bindingIndex] = uboIndex;
                             uboIndex++;

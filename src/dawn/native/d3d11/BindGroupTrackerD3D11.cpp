@@ -176,12 +176,16 @@ MaybeError BindGroupTracker::Apply() {
                     case BindingInfoType::Buffer: {
                         BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                         auto offset = binding.offset;
-                        if (bindingInfo.buffer.hasDynamicOffset) {
+                        DAWN_ASSERT(
+                            std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                        const auto& layout =
+                            std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
+                        if (layout.hasDynamicOffset) {
                             // Dynamic buffers are packed at the front of BindingIndices.
                             offset += dynamicOffsets[bindingIndex];
                         }
 
-                        switch (bindingInfo.buffer.type) {
+                        switch (layout.type) {
                             case wgpu::BufferBindingType::Storage:
                             case kInternalStorageBufferBinding: {
                                 DAWN_ASSERT(IsSubset(
@@ -206,7 +210,10 @@ MaybeError BindGroupTracker::Apply() {
                     }
 
                     case BindingInfoType::StorageTexture: {
-                        switch (bindingInfo.storageTexture.access) {
+                        DAWN_ASSERT(std::holds_alternative<StorageTextureBindingLayout>(
+                            bindingInfo.bindingLayout));
+                        switch (std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout)
+                                    .access) {
                             case wgpu::StorageTextureAccess::WriteOnly:
                             case wgpu::StorageTextureAccess::ReadWrite: {
                                 ComPtr<ID3D11UnorderedAccessView> d3d11UAV;
@@ -292,12 +299,14 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
             case BindingInfoType::Buffer: {
                 BufferBinding binding = group->GetBindingAsBufferBinding(bindingIndex);
                 auto offset = binding.offset;
-                if (bindingInfo.buffer.hasDynamicOffset) {
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                const auto& layout = std::get<BufferBindingLayout>(bindingInfo.bindingLayout);
+                if (layout.hasDynamicOffset) {
                     // Dynamic buffers are packed at the front of BindingIndices.
                     offset += dynamicOffsets[bindingIndex];
                 }
 
-                switch (bindingInfo.buffer.type) {
+                switch (layout.type) {
                     case wgpu::BufferBindingType::Uniform: {
                         ToBackend(binding.buffer)->EnsureConstantBufferIsUpdated(mCommandContext);
                         ID3D11Buffer* d3d11Buffer =
@@ -408,7 +417,9 @@ MaybeError BindGroupTracker::ApplyBindGroup(BindGroupIndex index) {
 
             case BindingInfoType::StorageTexture: {
                 TextureView* view = ToBackend(group->GetBindingAsTextureView(bindingIndex));
-                switch (bindingInfo.storageTexture.access) {
+                DAWN_ASSERT(
+                    std::holds_alternative<StorageTextureBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                     case wgpu::StorageTextureAccess::WriteOnly:
                     case wgpu::StorageTextureAccess::ReadWrite: {
                         ID3D11UnorderedAccessView* d3d11UAV = nullptr;
@@ -461,7 +472,8 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
 
         switch (bindingInfo.bindingType) {
             case BindingInfoType::Buffer: {
-                switch (bindingInfo.buffer.type) {
+                DAWN_ASSERT(std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                     case wgpu::BufferBindingType::Uniform: {
                         ID3D11Buffer* nullBuffer = nullptr;
                         if (bindingVisibility & wgpu::ShaderStage::Vertex) {
@@ -543,7 +555,9 @@ void BindGroupTracker::UnApplyBindGroup(BindGroupIndex index) {
             }
 
             case BindingInfoType::StorageTexture: {
-                switch (bindingInfo.storageTexture.access) {
+                DAWN_ASSERT(
+                    std::holds_alternative<StorageTextureBindingLayout>(bindingInfo.bindingLayout));
+                switch (std::get<StorageTextureBindingLayout>(bindingInfo.bindingLayout).access) {
                     case wgpu::StorageTextureAccess::WriteOnly:
                     case wgpu::StorageTextureAccess::ReadWrite: {
                         ID3D11UnorderedAccessView* nullUAV = nullptr;
