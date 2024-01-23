@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c0d9182f_7dc75b41",
+        "filename": "src/dawn/native/Buffer.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 68,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T14:48:34Z",
+      "side": 0,
+      "message": "Small preference for keeping this here, and even moving the assert inside CallbackOnMapRequestCompleted so this class is as simple as possible.\n\nThe logic to call OnPreMapCallback could be done there as well, if mLastMapId \u003d\u003d mapId, and the logic from PrepareCallback changed to assert mapId \u003d\u003d mLastMapId instead of conditionally doing things with it (so it is the CallbackOnMapRequestCompleted to do the correct thing with it.)\n\nThat\u0027s a lot of changes so if need be I can help make a CL that shows roughly what I\u0027m suggesting.",
+      "revId": "a68594a284a8972d50f9cba80d174caeb6c0c19c",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

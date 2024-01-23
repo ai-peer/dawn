@@ -41,6 +41,40 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "d641415e_1cc9843a",
+        "filename": "src/dawn/native/Buffer.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 95,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T14:48:34Z",
+      "side": 1,
+      "message": "nit: this could be next to MapAsyncImpl and called \"FinalizeMapAsync\". Implementation can be in the .cpp. It Could use a MaybeError.\n\nAlso can we have a TODO to use it in the GL backend as well?",
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "24e35b8c_033fa718",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 312,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T14:48:34Z",
+      "side": 1,
+      "message": "The content of the error is dropped on the floor and will be leaked I believe.",
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "d3f8f6ca_cb7458ee",
@@ -88,6 +122,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fe4e5ef_57257d44",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T14:48:34Z",
+      "side": 1,
+      "message": "What was the last usage of that buffer? Does it trigger a SetAccess() (or whatever the name is?) Can we fall back by doing a wait in this case, and eventually debug what tracking is missing?\n\nThis would allow making this method return a MaybeError instead of Unknown map statuses, which streamlines the error handling. By losing the device in FinishImpl() if there is an error (using if (device-\u003eConsumedError(...)) {status \u003d unknown})",
+      "parentUuid": "d3f8f6ca_cb7458ee",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e989eae1_5e53b4e1",
@@ -107,6 +165,23 @@
         "endLine": 357,
         "endChar": 95
       },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5645a542_6d33602e",
+        "filename": "src/dawn/native/d3d11/DeviceD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 532,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T14:48:34Z",
+      "side": 1,
+      "message": "Instead of reimplementing this kind of logic, can\u0027t we use the DynamicUploader?",
       "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
