@@ -1,0 +1,67 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a88a7fb5_bcb56f52",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-23T06:45:37Z",
+      "side": 1,
+      "message": "PTAL\nThe perf data remains basically same regarding this CL.",
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d3f8f6ca_cb7458ee",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-23T06:45:37Z",
+      "side": 1,
+      "message": "This assert was triggered during the dry-run on the Nvdia bots only. So it looks even when the fence serial has passed, mapping the buffer may still run into DXGI_ERROR_WAS_STILL_DRAWING.",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e989eae1_5e53b4e1",
+        "filename": "src/dawn/native/d3d11/CommandBufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 357,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-23T06:45:37Z",
+      "side": 1,
+      "message": "We could get rid of this wait by using compute shader CopyBufferToTexture.",
+      "range": {
+        "startLine": 357,
+        "startChar": 90,
+        "endLine": 357,
+        "endChar": 95
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
