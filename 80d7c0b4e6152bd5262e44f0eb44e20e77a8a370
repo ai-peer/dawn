@@ -16,6 +16,148 @@
       "message": "PTAL, thanks!",
       "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e47b8a3f_2f0f3257",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "Nice, thank you for looking into that.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3d146ddf_5ddbdc1c",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "This could be an std::visit.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dbd9b53b_2b95d01d",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "this would be an std::visit",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d03602cc_57a741dc",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "This could switch on the tint enum directly.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4b7f4159_f2483eab",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "Isn\u0027t this redundant with `BindingInfoType`? IIRC we just need an empty struct that contains `ExternalTextureBindingInfo` to remove the usefulness of `BindingInfoType`.\n\nAlso maybe this rename could make things more consistent: `ShaderTextureBindingInfo -\u003e SampledTextureBindingLayout`.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2da429da_da59f0a4",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "From what I remember this ASSERT is already in std::get so we could skip them.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "89002c83_e815e4a6",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "nit: shaderBufferInfo?",
+      "range": {
+        "startLine": 214,
+        "startChar": 24,
+        "endLine": 214,
+        "endChar": 47
+      },
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a7b436b0_e6c4c60e",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-23T16:21:17Z",
+      "side": 1,
+      "message": "ditto, and it seems the condition above could be folded in this std::visit? Indentation will start being crazy though, not sure if there\u0027s an easy way to split things to another funciton.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
