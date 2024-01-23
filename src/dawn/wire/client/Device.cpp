@@ -72,6 +72,11 @@ class CreatePipelineEventBase : public TrackedEvent {
 
   private:
     void CompleteImpl(FutureID futureID, EventCompletionType completionType) override {
+        if (completionType == EventCompletionType::Shutdown) {
+            mStatus = WGPUCreatePipelineAsyncStatus_InstanceDropped;
+            mMessage = std::nullopt;
+        }
+
         // By default, we are initialized to a success state, and on shutdown we just return success
         // so we don't need to handle it specifically.
         if (mStatus != WGPUCreatePipelineAsyncStatus_Success) {
