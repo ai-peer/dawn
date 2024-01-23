@@ -37,6 +37,7 @@
 #include "dawn/native/ChainUtils.h"
 #include "dawn/native/CommandBuffer.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/Queue.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d11/DeviceD3D11.h"
 #include "dawn/native/d3d11/QueueD3D11.h"
@@ -262,7 +263,7 @@ bool Buffer::IsCPUWritableAtCreation() const {
     return IsMappable(GetUsage());
 }
 
-MaybeError Buffer::MapInternal(const ScopedCommandRecordingContext* commandContext) {
+MaybeError Buffer::MapInternal(const ScopedCommandRecordingContext* commandContext, bool noWait) {
     DAWN_ASSERT(IsMappable(GetUsage()));
     DAWN_ASSERT(!mMappedData);
 
@@ -270,10 +271,11 @@ MaybeError Buffer::MapInternal(const ScopedCommandRecordingContext* commandConte
     // need write permission to initialize the buffer.
     // TODO(dawn:1705): investigate the performance impact of mapping with D3D11_MAP_READ_WRITE.
     D3D11_MAPPED_SUBRESOURCE mappedResource;
-    DAWN_TRY(CheckHRESULT(commandContext->Map(mD3d11NonConstantBuffer.Get(),
-                                              /*Subresource=*/0, D3D11_MAP_READ_WRITE,
-                                              /*MapFlags=*/0, &mappedResource),
-                          "ID3D11DeviceContext::Map"));
+    UINT mapFlags = noWait ? D3D11_MAP_FLAG_DO_NOT_WAIT : 0;
+    DAWN_TRY(CheckHRESULT(
+        commandContext->Map(mD3d11NonConstantBuffer.Get(),
+                            /*Subresource=*/0, D3D11_MAP_READ_WRITE, mapFlags, &mappedResource),
+        "ID3D11DeviceContext::Map"));
     mMappedData = reinterpret_cast<uint8_t*>(mappedResource.pData);
 
     return {};
@@ -293,18 +295,22 @@ MaybeError Buffer::MapAtCreationImpl() {
     return MapInternal(&commandContext);
 }
 
-MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+ResultOrError<bool> Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     DAWN_ASSERT(mD3d11NonConstantBuffer);
+
+    if (mLastUsageSerial > GetDevice()->GetQueue()->GetCompletedCommandSerial()) {
+        return false;
+    }
 
     auto commandContext = ToBackend(GetDevice()->GetQueue())
                               ->GetScopedPendingCommandContext(QueueBase::SubmitMode::Normal);
 
     // TODO(dawn:1705): make sure the map call is not blocked by the GPU operations.
-    DAWN_TRY(MapInternal(&commandContext));
+    DAWN_TRY(MapInternal(&commandContext, true));
 
     DAWN_TRY(EnsureDataInitialized(&commandContext));
 
-    return {};
+    return true;
 }
 
 void Buffer::UnmapImpl() {

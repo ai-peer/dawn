@@ -74,7 +74,7 @@ class Buffer final : public BufferBase {
 
     MaybeError Initialize(bool mappedAtCreation);
     MaybeError InitializeHostMapped(const BufferHostMappedPointer* hostMappedDesc);
-    MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
+    ResultOrError<bool> MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
     void UnmapImpl() override;
     void DestroyImpl() override;
     bool IsCPUWritableAtCreation() const override;

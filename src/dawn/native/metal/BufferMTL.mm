@@ -196,12 +196,12 @@ MaybeError Buffer::MapAtCreationImpl() {
     return {};
 }
 
-MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+ResultOrError<bool> Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     CommandRecordingContext* commandContext =
         ToBackend(GetDevice()->GetQueue())->GetPendingCommandContext();
     EnsureDataInitialized(commandContext);
 
-    return {};
+    return true;
 }
 
 void* Buffer::GetMappedPointer() {

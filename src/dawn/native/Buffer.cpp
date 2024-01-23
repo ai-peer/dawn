@@ -54,23 +54,45 @@
 
 namespace dawn::native {
 
-namespace {
-struct MapRequestTask : TrackTaskCallback {
-    MapRequestTask(dawn::platform::Platform* platform, Ref<BufferBase> buffer, MapRequestID id)
-        : TrackTaskCallback(platform), buffer(std::move(buffer)), id(id) {}
+struct BufferBase::MapRequestTask : TrackTaskCallback {
+    MapRequestTask(dawn::platform::Platform* platform,
+                   Ref<BufferBase> buffer,
+                   MapRequestID id,
+                   bool finished,
+                   wgpu::MapMode mode,
+                   size_t offset,
+                   size_t size)
+        : TrackTaskCallback(platform),
+          buffer(std::move(buffer)),
+          id(id),
+          finished(finished),
+          mode(mode),
+          offset(offset),
+          size(size) {}
     ~MapRequestTask() override = default;
 
   private:
     void FinishImpl() override {
+        WGPUBufferMapAsyncStatus status = WGPUBufferMapAsyncStatus_Success;
         {
+            auto* device = buffer->GetDevice();
             // This is called from a callback, and no lock will be held by default. Hence, we need
             // to lock the mutex now because mSerial might be changed by another thread.
             auto deviceLock(buffer->GetDevice()->GetScopedLock());
             DAWN_ASSERT(mSerial != kMaxExecutionSerial);
+
+            if (!finished) {
+                if (device->ConsumedError(buffer->MapAsyncImpl(mode, offset, size), &finished)) {
+                    status = WGPUBufferMapAsyncStatus_DeviceLost;
+                } else if (!finished) {
+                    status = WGPUBufferMapAsyncStatus_DeviceLost;
+                }
+            }
+
             TRACE_EVENT1(mPlatform, General, "Buffer::TaskInFlight::Finished", "serial",
                          uint64_t(mSerial));
         }
-        buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_Success);
+        buffer->CallbackOnMapRequestCompleted(id, status);
     }
     void HandleDeviceLossImpl() override {
         buffer->CallbackOnMapRequestCompleted(id, WGPUBufferMapAsyncStatus_DeviceLost);
@@ -81,7 +103,13 @@ struct MapRequestTask : TrackTaskCallback {
 
     Ref<BufferBase> buffer;
     MapRequestID id;
+    bool finished;
+    wgpu::MapMode mode;
+    size_t offset;
+    size_t size;
 };
+
+namespace {
 
 class ErrorBuffer final : public BufferBase {
   public:
@@ -109,7 +137,7 @@ class ErrorBuffer final : public BufferBase {
 
     MaybeError MapAtCreationImpl() override { DAWN_UNREACHABLE(); }
 
-    MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override {
+    ResultOrError<bool> MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override {
         DAWN_UNREACHABLE();
     }
 
@@ -574,13 +602,14 @@ void BufferBase::APIMapAsync(wgpu::MapMode mode,
     mMapUserdata = userdata;
     mState = BufferState::PendingMap;
 
-    if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size))) {
+    bool finished = false;
+    if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size), &finished)) {
         GetDevice()->GetCallbackTaskManager()->AddCallbackTask(
             PrepareMappingCallback(mLastMapID, WGPUBufferMapAsyncStatus_DeviceLost));
         return;
     }
-    std::unique_ptr<MapRequestTask> request =
-        std::make_unique<MapRequestTask>(GetDevice()->GetPlatform(), this, mLastMapID);
+    std::unique_ptr<MapRequestTask> request = std::make_unique<MapRequestTask>(
+        GetDevice()->GetPlatform(), this, mLastMapID, finished, mode, offset, size);
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "Buffer::APIMapAsync", "serial",
                  uint64_t(mLastUsageSerial));
     GetDevice()->GetQueue()->TrackTask(std::move(request), mLastUsageSerial);
@@ -611,7 +640,8 @@ Future BufferBase::APIMapAsyncF(wgpu::MapMode mode,
                                        size)) {
             return static_cast<wgpu::BufferMapAsyncStatus>(status);
         }
-        if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size))) {
+        bool finished = false;
+        if (GetDevice()->ConsumedError(MapAsyncImpl(mode, offset, size), &finished)) {
             return wgpu::BufferMapAsyncStatus::DeviceLost;
         }
         return std::nullopt;

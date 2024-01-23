@@ -380,8 +380,8 @@ void Buffer::DoWriteBuffer(uint64_t bufferOffset, const void* data, size_t size)
     memcpy(mBackingData.get() + bufferOffset, data, size);
 }
 
-MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
-    return {};
+ResultOrError<bool> Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+    return true;
 }
 
 void* Buffer::GetMappedPointer() {

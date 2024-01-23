@@ -121,14 +121,15 @@ class Buffer final : public BufferBase {
 
     MaybeError Initialize(bool mappedAtCreation,
                           const ScopedCommandRecordingContext* commandContext);
-    MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
+    ResultOrError<bool> MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
     void UnmapImpl() override;
     void DestroyImpl() override;
     bool IsCPUWritableAtCreation() const override;
     MaybeError MapAtCreationImpl() override;
     void* GetMappedPointer() override;
 
-    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext);
+    MaybeError MapInternal(const ScopedCommandRecordingContext* commandContext,
+                           bool noWait = false);
     void UnmapInternal(const ScopedCommandRecordingContext* commandContext);
 
     MaybeError InitializeToZero(const ScopedCommandRecordingContext* commandContext);

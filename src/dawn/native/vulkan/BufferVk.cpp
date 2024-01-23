@@ -513,7 +513,7 @@ MaybeError Buffer::MapAtCreationImpl() {
     return {};
 }
 
-MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+ResultOrError<bool> Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     CommandRecordingContext* recordingContext =
         ToBackend(GetDevice()->GetQueue())->GetPendingRecordingContext();
 
@@ -526,7 +526,7 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
         DAWN_ASSERT(mode & wgpu::MapMode::Write);
         TransitionUsageNow(recordingContext, wgpu::BufferUsage::MapWrite);
     }
-    return {};
+    return true;
 }
 
 void Buffer::UnmapImpl() {

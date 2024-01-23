@@ -123,6 +123,8 @@ class BufferBase : public ApiObjectBase {
     wgpu::BufferMapState APIGetMapState() const;
     uint64_t APIGetSize() const;
 
+    struct MapRequestTask;
+
   protected:
     BufferBase(DeviceBase* device, const UnpackedPtr<BufferDescriptor>& descriptor);
     BufferBase(DeviceBase* device, const BufferDescriptor* descriptor, ObjectBase::ErrorTag tag);
@@ -142,7 +144,7 @@ class BufferBase : public ApiObjectBase {
                                                  WGPUBufferMapAsyncStatus status);
 
     virtual MaybeError MapAtCreationImpl() = 0;
-    virtual MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
+    virtual ResultOrError<bool> MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) = 0;
     virtual void UnmapImpl() = 0;
 
     virtual bool IsCPUWritableAtCreation() const = 0;

@@ -442,7 +442,7 @@ MaybeError Buffer::MapAtCreationImpl() {
     return {};
 }
 
-MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+ResultOrError<bool> Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     // GetPendingCommandContext() call might create a new commandList. Dawn will handle
     // it in Tick() by execute the commandList and signal a fence for it even it is empty.
     // Skip the unnecessary GetPendingCommandContext() call saves an extra fence.
@@ -453,7 +453,9 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
         DAWN_TRY(EnsureDataInitialized(commandContext));
     }
 
-    return MapInternal(mode & wgpu::MapMode::Write, offset, size, "D3D12 map async");
+    DAWN_TRY(MapInternal(mode & wgpu::MapMode::Write, offset, size, "D3D12 map async"));
+
+    return true;
 }
 
 void Buffer::UnmapImpl() {

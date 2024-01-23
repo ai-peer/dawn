@@ -256,7 +256,7 @@ class Buffer final : public BufferBase {
     void DoWriteBuffer(uint64_t bufferOffset, const void* data, size_t size);
 
   private:
-    MaybeError MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
+    ResultOrError<bool> MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) override;
     void UnmapImpl() override;
     void DestroyImpl() override;
     bool IsCPUWritableAtCreation() const override;

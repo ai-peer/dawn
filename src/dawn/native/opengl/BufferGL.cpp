@@ -156,7 +156,7 @@ MaybeError Buffer::MapAtCreationImpl() {
     return {};
 }
 
-MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
+ResultOrError<bool> Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) {
     const OpenGLFunctions& gl = ToBackend(GetDevice())->GetGL();
 
     // It is an error to map an empty range in OpenGL. We always have at least a 4-byte buffer
@@ -185,7 +185,7 @@ MaybeError Buffer::MapAsyncImpl(wgpu::MapMode mode, size_t offset, size_t size) 
     // The frontend asks that the pointer returned by GetMappedPointer is from the start of
     // the resource but OpenGL gives us the pointer at offset. Remove the offset.
     mMappedData = static_cast<uint8_t*>(mappedData) - offset;
-    return {};
+    return true;
 }
 
 void* Buffer::GetMappedPointer() {
