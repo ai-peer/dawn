@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "602e0c27_fbba6170",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 39,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-23T15:15:16Z",
+      "side": 1,
+      "message": "Yes.",
+      "parentUuid": "20721b54_d1f8440a",
+      "revId": "2db33f20fafb9df39ebcf08708d4bdc72c836a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "7791e208_fc545bdc",
@@ -54,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "af187989_0f818f39",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 125,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-23T15:15:16Z",
+      "side": 1,
+      "message": "Good idea, done!",
+      "parentUuid": "7791e208_fc545bdc",
+      "revId": "2db33f20fafb9df39ebcf08708d4bdc72c836a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f2fe773d_2661ddd9",
         "filename": "src/dawn/native/metal/TextureMTL.mm",
         "patchSetId": 3
@@ -65,6 +101,24 @@
       "writtenOn": "2024-01-23T12:08:15Z",
       "side": 1,
       "message": "A direct assignment of StackVectors doesn\u0027t work?",
+      "revId": "2db33f20fafb9df39ebcf08708d4bdc72c836a50",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccc25c56_c830f4d5",
+        "filename": "src/dawn/native/metal/TextureMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 407,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-23T15:15:16Z",
+      "side": 1,
+      "message": "It does, thanks! Done.",
+      "parentUuid": "f2fe773d_2661ddd9",
       "revId": "2db33f20fafb9df39ebcf08708d4bdc72c836a50",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
