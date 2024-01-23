@@ -3,6 +3,23 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "496a45de_a73705c5",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-23T22:49:40Z",
+      "side": 1,
+      "message": "instead of D3D\u0027s NextSerial, I\u0027d expect checking the serial against the last submitted one to happen in the frontend (perhaps SharedTextureMemoryBase::EndAccessInternal) and then calling a virtual method on the queue to ensure work is submitted up until that point. This way we have the correct synchronization for the other backends as well",
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23e7a428_4d8a33ea",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 5
