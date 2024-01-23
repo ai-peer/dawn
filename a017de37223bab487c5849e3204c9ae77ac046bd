@@ -50,6 +50,24 @@
       "message": "note: I was thinking to inline CreateMTLTextures here but either way works.",
       "revId": "a017de37223bab487c5849e3204c9ae77ac046bd",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cf1c8b0c_557db8b2",
+        "filename": "src/dawn/native/metal/SharedTextureMemoryMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1000122
+      },
+      "writtenOn": "2024-01-23T16:37:25Z",
+      "side": 1,
+      "message": "Thanks! I like keeping it separate as it\u0027s quite a meaty chunk of code, but let me know if you\u0027d prefer that I inline it in a followup and I can do that.",
+      "parentUuid": "dd0d5aa8_b2a234cc",
+      "revId": "a017de37223bab487c5849e3204c9ae77ac046bd",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
