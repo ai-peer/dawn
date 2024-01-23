@@ -1121,6 +1121,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
                 vertexStateBufferBindingTracker.Apply(gl);
                 bindGroupTracker.Apply(gl);
 
+                if (lastPipeline->UsesInstanceIndex()) {
+                    gl.Uniform1ui(PipelineLayout::PushConstantLocation::FirstInstance,
+                                  draw->firstInstance);
+                }
                 if (gl.DrawArraysInstancedBaseInstanceANGLE) {
                     gl.DrawArraysInstancedBaseInstanceANGLE(
                         lastPipeline->GetGLPrimitiveTopology(), draw->firstVertex,
@@ -1143,6 +1147,10 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
                 vertexStateBufferBindingTracker.Apply(gl);
                 bindGroupTracker.Apply(gl);
 
+                if (lastPipeline->UsesInstanceIndex()) {
+                    gl.Uniform1ui(PipelineLayout::PushConstantLocation::FirstInstance,
+                                  draw->firstInstance);
+                }
                 if (gl.DrawElementsInstancedBaseVertexBaseInstanceANGLE) {
                     gl.DrawElementsInstancedBaseVertexBaseInstanceANGLE(
                         lastPipeline->GetGLPrimitiveTopology(), draw->indexCount, indexBufferFormat,
@@ -1179,6 +1187,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
 
             case Command::DrawIndirect: {
                 DrawIndirectCmd* draw = iter->NextCommand<DrawIndirectCmd>();
+                if (lastPipeline->UsesInstanceIndex()) {
+                    gl.Uniform1ui(PipelineLayout::PushConstantLocation::FirstInstance, 0);
+                }
                 vertexStateBufferBindingTracker.Apply(gl);
                 bindGroupTracker.Apply(gl);
 
@@ -1196,6 +1207,9 @@ MaybeError CommandBuffer::ExecuteRenderPass(BeginRenderPassCmd* renderPass) {
             case Command::DrawIndexedIndirect: {
                 DrawIndexedIndirectCmd* draw = iter->NextCommand<DrawIndexedIndirectCmd>();
 
+                if (lastPipeline->UsesInstanceIndex()) {
+                    gl.Uniform1ui(PipelineLayout::PushConstantLocation::FirstInstance, 0);
+                }
                 vertexStateBufferBindingTracker.Apply(gl);
                 bindGroupTracker.Apply(gl);
 
