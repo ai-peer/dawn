@@ -246,8 +246,10 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                 static_cast<uint32_t>(group), static_cast<uint32_t>(bgl->GetBindingIndex(binding))};
 
             switch (bindingInfo.bindingType) {
-                case BindingInfoType::Buffer:
-                    switch (bindingInfo.buffer.type) {
+                case BindingInfoType::Buffer: {
+                    DAWN_ASSERT(
+                        std::holds_alternative<BufferBindingLayout>(bindingInfo.bindingLayout));
+                    switch (std::get<BufferBindingLayout>(bindingInfo.bindingLayout).type) {
                         case wgpu::BufferBindingType::Uniform:
                             bindings.uniform.emplace(
                                 srcBindingPoint,
@@ -267,6 +269,8 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                             break;
                     }
                     break;
+                }
+
                 case BindingInfoType::Sampler:
                     bindings.sampler.emplace(srcBindingPoint,
                                              tint::spirv::writer::binding::Sampler{
