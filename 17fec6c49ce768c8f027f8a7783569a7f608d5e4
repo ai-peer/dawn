@@ -72,6 +72,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "a15fd549_e2e1143f",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-24T20:59:27Z",
+      "side": 1,
+      "message": "For the RGB9E5, the `UseBlitForRGB9E5UfloatTextureCopy` toggle is also used by T2B copy.\n\nIf RGB9E5 T2B is supported, `UseBlitForRGB9E5UfloatTextureCopy` \u003d\u003d false. Both T2T and T2B is supported natively.\n\nIf RGB9E5 T2B is unsupported, `UseBlitForRGB9E5UfloatTextureCopy` \u003d\u003d true. T2T is also unsupported under this case. So we use T2B (backed by blit emulation) and then B2T to emulate T2T.\n\nIf we want a toggle named `UseT2B2TForRGB9E5uFloatTextureCopy`, we need to keep both. And I think that\u0027s verbose. If you think having both `UseT2B2TForRGB9E5uFloatTextureCopy` and `UseBlitForRGB9E5UfloatTextureCopy` is better, let me know and I will update.",
+      "parentUuid": "372c6c42_6bbea505",
+      "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "21f2a695_7d85b6f5",
         "filename": "src/dawn/native/Toggles.cpp",
         "patchSetId": 3
