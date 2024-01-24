@@ -16,6 +16,24 @@
       "message": "I\u0027m not sure we want to do this for T2T. It\u0027s a pretty expensive workaround.\n\nI think we discussed this in the group and decided to validate it out. Will check.",
       "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa73090c_d128a451",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000685
+      },
+      "writtenOn": "2024-01-24T19:00:49Z",
+      "side": 1,
+      "message": "I found\n- compat disallow texture view being *-srgb while base texture being * (non-srgb)\n- compat disallow bgra8unorm-srgb (failing test is rgba8unorm-srg)\n\nThese 2 doesn\u0027t seem related to T2T rgba8unorm \u003c-\u003e rgba8unorm-srgb though. But there maybe other bits I\u0027m missing",
+      "parentUuid": "72134cbf_c3c8a8fb",
+      "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
