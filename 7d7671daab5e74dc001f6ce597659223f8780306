@@ -71,6 +71,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f69bcd3f_2f6c1c63",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 2101,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T20:50:27Z",
+      "side": 1,
+      "message": "Done.\n\nNote that the above limitation currently applies to the SPIR-V writer as well, since the ClampFragDepth transform will error if it finds a pre-existing push_constant variable in the AST. I\u0027ve put both labels on the bug.",
+      "parentUuid": "eb4b1dd9_64dee42c",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3ecbd642_bce97f68",
