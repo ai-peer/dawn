@@ -1,0 +1,27 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a9cde929_23385745",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T20:19:16Z",
+      "side": 1,
+      "message": "I\u0027m curious. Why?",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "f6f982d5b8a48abca8d0d13b910225903a3a1222",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
