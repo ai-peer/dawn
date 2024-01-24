@@ -16,6 +16,23 @@
       "message": "Ooooh that\u0027s a tricky one, and I think I might have run into it but didn\u0027t have time to debug yet.\n\nWould it be possible to have a regression test for this? (did the VVL warn about it?)",
       "revId": "88446faa7ae1cb23c3c53c4d1de20e00b23d365f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a755301_dfbe977a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-24T22:45:32Z",
+      "side": 1,
+      "message": "LGTM too, though yes - a regression test would be great",
+      "revId": "88446faa7ae1cb23c3c53c4d1de20e00b23d365f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
