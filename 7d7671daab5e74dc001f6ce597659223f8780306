@@ -90,6 +90,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "93f246e3_8ba7b4ab",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T17:14:20Z",
+      "side": 1,
+      "message": "Oh hmm, I didn\u0027t read carefully. The problem is reusing a struct for both push constants and a UBO. I think it should be ok, since the struct will get written (UsedAs(..kPushConstant) should override is_block), as will the interface block. But I\u0027ll write a test to be sure.",
+      "parentUuid": "01f45a43_5f6f628f",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "996d236f_570bd754",
         "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.h",
         "patchSetId": 24
