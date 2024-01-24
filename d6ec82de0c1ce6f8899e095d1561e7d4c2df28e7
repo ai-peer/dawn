@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7b65a86d_65e80235",
+        "filename": "src/dawn/wire/client/Adapter.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 73,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-24T22:30:17Z",
+      "side": 1,
+      "message": "Hm, I think we want an error string with this status. As a general rule I\u0027ve been thinking (adapter \u003d\u003d nullptr) iff not (message \u003d\u003d nullptr)\nWhere adapter is for success statuses and message is for non-success statuses",
+      "revId": "d6ec82de0c1ce6f8899e095d1561e7d4c2df28e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
