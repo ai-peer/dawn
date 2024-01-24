@@ -37,6 +37,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9dedbc6f_621fb106",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 2101,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T17:07:28Z",
+      "side": 1,
+      "message": "I believe that we will have to restrict ourselves to a single push constant block for everything (transforms and user-defined), since other backends only support one.\n\nThe plan is that transforms will do a RMW of the exsting block, if it exists, both in order to get along with other transforms as well as the user-defined push constant block. Currently, both the new transform and the existing ClampFragDepth transform error if there\u0027s a push constant struct. Obviously that will have to be fixed, but I\u0027d prefer to do it iteratively.",
+      "parentUuid": "39192168_0cb3f577",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ecbd642_bce97f68",
         "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
         "patchSetId": 24
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-24T15:09:50Z",
       "side": 1,
       "message": "Can the GLSL writer handle user declared `push_constant`s ?\n\nIf so, consider:\n\n```\nstruct Shared { ... } // This will get the block annotation.\nvar\u003cpush_constant\u003e P : Shared;\n@group(0) @binding(0) var\u003cuniform\u003e U : Shared;\n```",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "01f45a43_5f6f628f",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T17:07:28Z",
+      "side": 1,
+      "message": "This should be ok, since variables in AddressSpace::kUniform become interface blocks in the GLSL backend, not uniform variables. The push constant block will become a single uniform with explicit location. No collision with UBOs.",
+      "parentUuid": "3ecbd642_bce97f68",
       "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -69,6 +105,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1744050d_3475411e",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T17:07:28Z",
+      "side": 1,
+      "message": "Oh cool, I didn\u0027t know about UsedAs(). Done.",
+      "parentUuid": "996d236f_570bd754",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "646e36bd_47525404",
@@ -82,6 +136,30 @@
       "writtenOn": "2024-01-24T15:09:50Z",
       "side": 1,
       "message": "please add `const` or add an initializer.",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 12
+      },
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c9a93946_78a0ec00",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T17:07:28Z",
+      "side": 1,
+      "message": "All of this was removed.",
+      "parentUuid": "646e36bd_47525404",
       "range": {
         "startLine": 80,
         "startChar": 8,
