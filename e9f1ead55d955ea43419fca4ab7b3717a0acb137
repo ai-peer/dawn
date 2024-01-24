@@ -104,6 +104,24 @@
       "parentUuid": "a6d6cfa6_fa975cb0",
       "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "222013d4_a994a5fe",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T20:08:33Z",
+      "side": 1,
+      "message": "Done:\nhttps://dawn-review.googlesource.com/c/dawn/+/171100\nhttps://github.com/gpuweb/cts/pull/3313\n\nIntent to ship has the necessary LGTMs:\nhttps://groups.google.com/u/0/a/chromium.org/g/blink-dev/c/PS_Ttg01m7k",
+      "parentUuid": "20571c94_d544741e",
+      "revId": "e9f1ead55d955ea43419fca4ab7b3717a0acb137",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
