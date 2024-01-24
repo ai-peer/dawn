@@ -16,6 +16,23 @@
       "message": "Pixel Wrangler owners override if that helps.",
       "revId": "e4ff408ccb14fa7ef77bbfb7b964fad7024ad0ef",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c4e8cc5_3125e245",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-24T19:13:20Z",
+      "side": 1,
+      "message": "Kokoro failed on MSVC debug and not release.\n\nAssuming it is some kind of flake and not caused by this CL. Overriding kokoro\n\ntint\\var\\initialization\\private\\matrix.wgsl msl FAIL\n    #include \u003cmetal_stdlib\u003e\n    \n    using namespace metal;\n    struct tint_private_vars_struct {\n      float2x3 v;\n    };\n    \n    kernel void tint_symbol() {\n      return;\n    }",
+      "revId": "e4ff408ccb14fa7ef77bbfb7b964fad7024ad0ef",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
