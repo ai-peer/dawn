@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "690ccc4c_d5ce3530",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T17:21:18Z",
+      "side": 1,
+      "message": "Seems ok.\n\n```\nenable chromium_experimental_push_constant;\n\nstruct Shared {\n    v : vec4\u003cf32\u003e,\n};\n\nvar\u003cpush_constant\u003e P : Shared;\n@group(0) @binding(0) var\u003cuniform\u003e U : Shared;\n\n@compute @workgroup_size(1)\nfn main() {\n  let pv \u003d P.v;\n  let uv \u003d U.v;\n}\n```\n\nbecomes:\n\n```\n#version 310 es\n\nstruct Shared {\n  vec4 v;\n};\n\nstruct P_block {\n  Shared inner;\n};\n\nlayout(location\u003d0) uniform P_block P;\nlayout(binding \u003d 0, std140) uniform P_block_ubo {\n  Shared inner;\n} U;\n\nvoid tint_symbol() {\n  vec4 pv \u003d P.inner.v;\n  vec4 uv \u003d U.inner.v;\n}\n\nlayout(local_size_x \u003d 1, local_size_y \u003d 1, local_size_z \u003d 1) in;\nvoid main() {\n  tint_symbol();\n  return;\n}\n```",
+      "parentUuid": "93f246e3_8ba7b4ab",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "996d236f_570bd754",
