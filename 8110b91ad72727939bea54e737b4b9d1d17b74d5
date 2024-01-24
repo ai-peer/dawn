@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba26fb03_d44d09cb",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-24T10:39:41Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2cd162c6_218de9cc",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-24T10:39:41Z",
+      "side": 1,
+      "message": "Ben: FYI that\u0027s a case where using tint::Switch would have been nice. I\u0027m not sure how we could eventually start sharing utility code like this between Dawn and Tint. Although Tint\u0027s switch is for Castable whereas here it is an std::variant.",
+      "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
