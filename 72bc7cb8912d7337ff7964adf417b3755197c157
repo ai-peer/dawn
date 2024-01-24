@@ -50,6 +50,24 @@
       "message": "nit: This one doesn\u0027t get RAW_PTR_EXCLUSION?",
       "revId": "72bc7cb8912d7337ff7964adf417b3755197c157",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "345fc332_1bd64771",
+        "filename": "src/dawn/native/d3d12/SamplerHeapCacheD3D12.h",
+        "patchSetId": 34
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-24T12:05:56Z",
+      "side": 1,
+      "message": "Good catch!",
+      "parentUuid": "7b2a901a_47373368",
+      "revId": "72bc7cb8912d7337ff7964adf417b3755197c157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
