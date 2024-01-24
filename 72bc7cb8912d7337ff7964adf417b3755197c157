@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "e53bdedf_2b0e34d0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 34
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003626
+      },
+      "writtenOn": "2024-01-24T09:41:38Z",
+      "side": 1,
+      "message": "Hi Corentin,\nCould you please take a look. The final rewrite patch.",
+      "revId": "72bc7cb8912d7337ff7964adf417b3755197c157",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
