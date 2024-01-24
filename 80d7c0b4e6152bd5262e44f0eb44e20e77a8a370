@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "3c82f682_eb0efe03",
+        "filename": "src/dawn/native/PipelineLayout.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 236,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-24T07:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3d146ddf_5ddbdc1c",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "dbd9b53b_2b95d01d",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-01-23T16:21:17Z",
       "side": 1,
       "message": "this would be an std::visit",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5390119a_686ea131",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 468,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-24T07:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "dbd9b53b_2b95d01d",
       "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "eff624dd_e6480eb1",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 840,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-24T07:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "d03602cc_57a741dc",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4b7f4159_f2483eab",
@@ -103,6 +157,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "2c96bba2_d12d40d3",
+        "filename": "src/dawn/native/ShaderModule.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 185,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-24T07:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "4b7f4159_f2483eab",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "2da429da_da59f0a4",
@@ -116,6 +188,24 @@
       "writtenOn": "2024-01-23T16:21:17Z",
       "side": 1,
       "message": "From what I remember this ASSERT is already in std::get so we could skip them.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa5c5a8b_e657489d",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 212,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-24T07:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "2da429da_da59f0a4",
       "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -143,6 +233,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "318e85f5_64fc462f",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 214,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-24T07:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "89002c83_e815e4a6",
+      "range": {
+        "startLine": 214,
+        "startChar": 24,
+        "endLine": 214,
+        "endChar": 47
+      },
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a7b436b0_e6c4c60e",
@@ -156,6 +270,24 @@
       "writtenOn": "2024-01-23T16:21:17Z",
       "side": 1,
       "message": "ditto, and it seems the condition above could be folded in this std::visit? Indentation will start being crazy though, not sure if there\u0027s an easy way to split things to another funciton.",
+      "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7defdab6_4f623123",
+        "filename": "src/dawn/native/metal/ShaderModuleMTL.mm",
+        "patchSetId": 2
+      },
+      "lineNbr": 161,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-24T07:09:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a7b436b0_e6c4c60e",
       "revId": "80d7c0b4e6152bd5262e44f0eb44e20e77a8a370",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
