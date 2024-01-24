@@ -26,6 +26,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3b8d1ec5_4874f879",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 12,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-24T21:05:25Z",
+      "side": 1,
+      "message": "The reason is that all the headers needed are already provided by the official SDK. The DirectXHeaders project was made for platforms where these are no available. When the platform SDK is available, AND we include DirectXHeaders, we end up with duplicate symbols.",
+      "parentUuid": "a9cde929_23385745",
+      "range": {
+        "startLine": 10,
+        "startChar": 34,
+        "endLine": 12,
+        "endChar": 12
+      },
+      "revId": "f6f982d5b8a48abca8d0d13b910225903a3a1222",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "7a69c711_a1d68162",
         "filename": "third_party/CMakeLists.txt",
         "patchSetId": 2
@@ -37,6 +61,24 @@
       "writtenOn": "2024-01-24T20:49:41Z",
       "side": 1,
       "message": "```suggestion\n        set(DIRECTX_HEADER_INCLUDE_DIR \"${DAWN_THIRD_PARTY_DIR}/dxheaders/include\")\n```\n\ncan we update this to use the DAWN_THIRD_PARTY_DIR like other folders do?",
+      "revId": "f6f982d5b8a48abca8d0d13b910225903a3a1222",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "af70588b_565a6b89",
+        "filename": "third_party/CMakeLists.txt",
+        "patchSetId": 2
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-24T21:05:25Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "7a69c711_a1d68162",
       "revId": "f6f982d5b8a48abca8d0d13b910225903a3a1222",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
