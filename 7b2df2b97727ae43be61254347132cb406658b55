@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "593653b2_7de57b8f",
+        "filename": "src/dawn/native/opengl/PhysicalDeviceGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 402,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T22:33:07Z",
+      "side": 1,
+      "message": "```suggestion\n    // Use T2B and B2T copies to emulate a T2T copy between sRGB and non-sRGB textures.\n```",
+      "revId": "7b2df2b97727ae43be61254347132cb406658b55",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

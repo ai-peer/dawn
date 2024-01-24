@@ -106,6 +106,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "d25881c2_4da36739",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T22:33:07Z",
+      "side": 1,
+      "message": "No, just one toggle is better. Thanks for the explanation.",
+      "parentUuid": "a15fd549_e2e1143f",
+      "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "21f2a695_7d85b6f5",
