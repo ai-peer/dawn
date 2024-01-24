@@ -82,6 +82,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "972230a5_9fd51076",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-24T08:52:34Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f442fb57_706255a4",
+      "range": {
+        "startLine": 80,
+        "startChar": 29,
+        "endLine": 80,
+        "endChar": 51
+      },
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fbdf0290_739f221e",
@@ -110,6 +134,24 @@
         "id": 1003626
       },
       "writtenOn": "2024-01-10T16:04:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fbdf0290_739f221e",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "353d54b1_36ce360c",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 128,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-24T08:52:34Z",
       "side": 1,
       "message": "Done",
       "parentUuid": "fbdf0290_739f221e",
@@ -152,6 +194,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "85a683a1_e9c368ae",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 142,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-24T08:52:34Z",
+      "side": 1,
+      "message": "I missed the previous __forceinline for MSVC. This is now fixed.",
+      "parentUuid": "ddbb111a_8a5390a9",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4f79724f_da563696",
@@ -180,6 +240,24 @@
         "id": 1003626
       },
       "writtenOn": "2024-01-10T16:04:32Z",
+      "side": 1,
+      "message": "I preserved pre-existing code:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Compiler.h;l\u003d54-56?q\u003d__has_cpp_attribute\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fdawn%2Fsrc%2Fdawn%2F\n\nHowever, you are right this doesn\u0027t appear to be useful in Dawn. Let\u0027s remove it!",
+      "parentUuid": "4f79724f_da563696",
+      "revId": "7433378c5094e9dd93b0b53dafe9e46ce5da8761",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "94144c72_32a32d6f",
+        "filename": "src/dawn/common/Compiler.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 223,
+      "author": {
+        "id": 1004651
+      },
+      "writtenOn": "2024-01-24T08:52:34Z",
       "side": 1,
       "message": "I preserved pre-existing code:\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/common/Compiler.h;l\u003d54-56?q\u003d__has_cpp_attribute\u0026ss\u003dchromium%2Fchromium%2Fsrc:third_party%2Fdawn%2Fsrc%2Fdawn%2F\n\nHowever, you are right this doesn\u0027t appear to be useful in Dawn. Let\u0027s remove it!",
       "parentUuid": "4f79724f_da563696",
