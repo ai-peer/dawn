@@ -55,6 +55,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "eb4b1dd9_64dee42c",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 2101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T18:58:56Z",
+      "side": 1,
+      "message": "Okay, that\u0027s fine. As we\u0027re moving towards launch of the GLES backend, I\u0027d like to ensure we\u0027re keeping on top of outstanding work here.\n\nIt\u0027s my understanding (please correct me if I\u0027m wrong) that:\n• Before this CL, push constants didn\u0027t work for the GLSL backend at all.\n• After this CL, push constants work if the user writes one and this transform is *not* in use. If both the user writes one, and this transform *is in use* then we\u0027ll get a collision and Bad Things™ will happen.\n\nIf I\u0027ve got that right, please can we have this put in a Tint bug with the `GlslWriter` label applied? Given that it\u0027s dependent on push constants, it doesn\u0027t seem blocking for compat, but we can then block the push constants bug with this.",
+      "parentUuid": "9dedbc6f_621fb106",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "3ecbd642_bce97f68",
         "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
         "patchSetId": 24

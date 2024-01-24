@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "f185fe5c_4c95182e",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.h",
+        "patchSetId": 25
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T18:58:56Z",
+      "side": 0,
+      "message": "Nice",
+      "revId": "45027ed140982caf69b3be66c67d54fc9a6856ff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
