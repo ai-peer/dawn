@@ -16,6 +16,80 @@
       "message": "PTAL.\n\nI\u0027ve incorporated the Dawn changes, as well as a tweak to the AddBlockAttribute transform required for GLSL. Happy to split these back up again into separate CLs if you prefer.",
       "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "39192168_0cb3f577",
+        "filename": "src/tint/lang/glsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 2101,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T15:09:50Z",
+      "side": 1,
+      "message": "Can the GLSL writer handle user declared `push_constant`s ?\n\nIf so, this is a location collision, right?",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3ecbd642_bce97f68",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.cc",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T15:09:50Z",
+      "side": 1,
+      "message": "Can the GLSL writer handle user declared `push_constant`s ?\n\nIf so, consider:\n\n```\nstruct Shared { ... } // This will get the block annotation.\nvar\u003cpush_constant\u003e P : Shared;\n@group(0) @binding(0) var\u003cuniform\u003e U : Shared;\n```",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "996d236f_570bd754",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T15:09:50Z",
+      "side": 1,
+      "message": "I\u0027m not sure if you need to to special case push constants in this transform. You can check the address space usages in the printer with \n`tint::type::Struct::AddressSpaceUsage()` and `tint::type::Struct::UsedAs()`.\n\nIf the only usage is `AddressSpace::PushConstant`, then ignore the block attribute.",
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "646e36bd_47525404",
+        "filename": "src/tint/lang/wgsl/ast/transform/add_block_attribute.h",
+        "patchSetId": 24
+      },
+      "lineNbr": 80,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T15:09:50Z",
+      "side": 1,
+      "message": "please add `const` or add an initializer.",
+      "range": {
+        "startLine": 80,
+        "startChar": 8,
+        "endLine": 80,
+        "endChar": 12
+      },
+      "revId": "7d7671daab5e74dc001f6ce597659223f8780306",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
