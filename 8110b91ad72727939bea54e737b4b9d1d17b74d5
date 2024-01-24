@@ -33,6 +33,24 @@
       "message": "Ben: FYI that\u0027s a case where using tint::Switch would have been nice. I\u0027m not sure how we could eventually start sharing utility code like this between Dawn and Tint. Although Tint\u0027s switch is for Castable whereas here it is an std::variant.",
       "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3fba83df_82d59033",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-24T12:16:39Z",
+      "side": 1,
+      "message": "Yeah, `tint::Switch` is a dispatch helper for inheritance using a very bespoke base class and CRTP layers. While I could probably make something that is a bit nicer to use than `std::visit`, this is probably the best way to do it using vanilla C++.",
+      "parentUuid": "2cd162c6_218de9cc",
+      "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
