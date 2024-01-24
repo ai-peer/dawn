@@ -33,6 +33,46 @@
       "message": "Much cleaner, thank you Stephen.\nOne request for tracking the outstanding work for push constants. Other than that, Tint side LGTM. 👍",
       "revId": "27665115ce3bd035664011f98c08f443503ef964",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "7de1f79a_1f5d9d32",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 25
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-24T21:26:08Z",
+      "side": 1,
+      "message": "Dawn side LGTM with one comment",
+      "revId": "27665115ce3bd035664011f98c08f443503ef964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1efd38cd_8f86d220",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-24T21:26:08Z",
+      "side": 1,
+      "message": "could be worth tracking whether or not we\u0027ve already uploaded this uniform. That way subsequent draws won\u0027t set it redundantly.",
+      "range": {
+        "startLine": 1126,
+        "startChar": 16,
+        "endLine": 1129,
+        "endChar": 17
+      },
+      "revId": "27665115ce3bd035664011f98c08f443503ef964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
