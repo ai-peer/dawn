@@ -110,6 +110,24 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "ba86b882_6670acb7",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 14
+      },
+      "lineNbr": 18,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T22:30:13Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "660df1f2_de41c57b",
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "a06ff351_00b83b42",
         "filename": "/PATCHSET_LEVEL",
         "patchSetId": 14
@@ -196,6 +214,30 @@
       "side": 1,
       "message": "They\u0027re now struct members, so should be ok as duplicates.\n\nI\u0027ve made sure the new struct PushConstants is unique, and added a test.\nSame for the push_constants instance of that struct.",
       "parentUuid": "151ae21a_dbe2e719",
+      "range": {
+        "startLine": 89,
+        "startChar": 45,
+        "endLine": 89,
+        "endChar": 56
+      },
+      "revId": "f3483670d9bee9bb1d9134252fa2a17d18aa3340",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "dc27c6ba_0a7b9829",
+        "filename": "src/tint/lang/wgsl/ast/transform/offset_first_index.cc",
+        "patchSetId": 14
+      },
+      "lineNbr": 89,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T22:30:13Z",
+      "side": 1,
+      "message": ".",
+      "parentUuid": "4b494cd2_8a1fd2e2",
       "range": {
         "startLine": 89,
         "startChar": 45,

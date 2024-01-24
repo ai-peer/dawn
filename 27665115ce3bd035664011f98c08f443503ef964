@@ -73,6 +73,30 @@
       },
       "revId": "27665115ce3bd035664011f98c08f443503ef964",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "ea13a5ee_714d9236",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 25
+      },
+      "lineNbr": 1129,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T22:30:13Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "1efd38cd_8f86d220",
+      "range": {
+        "startLine": 1126,
+        "startChar": 16,
+        "endLine": 1129,
+        "endChar": 17
+      },
+      "revId": "27665115ce3bd035664011f98c08f443503ef964",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
