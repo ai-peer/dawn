@@ -34,6 +34,74 @@
       "parentUuid": "72134cbf_c3c8a8fb",
       "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8eac2a82_9cfcf944",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 882,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T20:38:54Z",
+      "side": 1,
+      "message": "Nit: suggest \"T2B2T\" might be more concise, here and elsewhere",
+      "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "372c6c42_6bbea505",
+        "filename": "src/dawn/native/CommandEncoder.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 887,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T20:38:54Z",
+      "side": 1,
+      "message": "If the RGB9E5 workaround is using T2B2T as well, let\u0027s rename that toggle to match as well.",
+      "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "21f2a695_7d85b6f5",
+        "filename": "src/dawn/native/Toggles.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 429,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T20:38:54Z",
+      "side": 1,
+      "message": "```suggestion\n      \"Use T2B and B2T copies to emulate a T2T copy between sRGB and non-sRGB textures.\"\n```",
+      "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0df9c217_e1432e45",
+        "filename": "src/dawn/native/Toggles.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000024
+      },
+      "writtenOn": "2024-01-24T20:38:54Z",
+      "side": 1,
+      "message": "Nit: suggest \"UseT2B2TForSRGBTextureCopy\".",
+      "revId": "17fec6c49ce768c8f027f8a7783569a7f608d5e4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
