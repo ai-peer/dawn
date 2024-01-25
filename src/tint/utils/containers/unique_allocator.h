@@ -29,9 +29,9 @@
 #define SRC_TINT_UTILS_CONTAINERS_UNIQUE_ALLOCATOR_H_
 
 #include <functional>
-#include <unordered_set>
 #include <utility>
 
+#include "src/tint/utils/containers/hashmap_base.h"
 #include "src/tint/utils/memory/block_allocator.h"
 
 namespace tint {
@@ -55,14 +55,11 @@ class UniqueAllocator {
         // found in the set, then we create the persisted instance with the
         // allocator.
         TYPE key{args...};
-        auto hash = Hasher{}(key);
-        auto it = items.find(Entry{hash, &key});
-        if (it != items.end()) {
-            return static_cast<TYPE*>(it->ptr);
+        T*& ptr = items.Add(&key);
+        if (ptr == &key) {
+            ptr = allocator.template Create<TYPE>(std::forward<ARGS>(args)...);
         }
-        auto* ptr = allocator.template Create<TYPE>(std::forward<ARGS>(args)...);
-        items.emplace_hint(it, Entry{hash, ptr});
-        return ptr;
+        return static_cast<TYPE*>(ptr);
     }
 
     /// @param args the arguments used to create the temporary used for the search.
@@ -73,10 +70,8 @@ class UniqueAllocator {
         // Create a temporary T instance on the stack so that we can hash it, and
         // use it for equality lookup for the std::unordered_set.
         TYPE key{args...};
-        auto hash = Hasher{}(key);
-        auto it = items.find(Entry{hash, &key});
-        if (it != items.end()) {
-            return static_cast<TYPE*>(it->ptr);
+        if (T* ptr = items.Find(&key)) {
+            return static_cast<TYPE*>(ptr);
         }
         return nullptr;
     }
@@ -95,36 +90,52 @@ class UniqueAllocator {
     Iterator end() const { return allocator.Objects().end(); }
 
   private:
-    /// The hash function
-    using Hasher = HASH;
-    /// The equality function
-    using Equality = EQUAL;
-
-    /// Entry is used as the entry to the unordered_set
-    struct Entry {
-        /// The pre-calculated hash of the entry
-        size_t hash;
-        /// The pointer to the unique object
-        T* ptr;
-    };
-    /// Comparator is the hashing and equality function used by the unordered_set
-    struct Comparator {
+    /// Comparator is the hashing function used by the Hashset
+    struct Hasher {
         /// Hashing function
         /// @param e the entry
         /// @returns the hash of the entry
-        size_t operator()(Entry e) const { return e.hash; }
+        size_t operator()(T* e) const { return HASH{}(*e); }
+    };
 
+    /// Equality is the equality function used by the Hashset
+    struct Equality {
         /// Equality function
         /// @param a the first entry to compare
         /// @param b the second entry to compare
         /// @returns true if the two entries are equal
-        bool operator()(Entry a, Entry b) const { return EQUAL{}(*a.ptr, *b.ptr); }
+        bool operator()(T* a, T* b) const { return EQUAL{}(*a, *b); }
+    };
+
+    /// The maximum capacity of Set before it performs heap allocations.
+    static constexpr size_t kFixedSize = 32;
+
+    /// A custom Hashset implementation that allows keys to be modified.
+    class Set : public HashmapBase<T*, void, kFixedSize, Hasher, Equality> {
+        using Base = HashmapBase<T*, void, kFixedSize, Hasher, Equality>;
+        using PutMode = typename Base::PutMode;
+        using AddResult = typename Base::PutResult;
+
+      public:
+        T*& Add(T* key) {
+            struct NoValue {};
+            auto res = this->template Put<PutMode::kAdd>(key, NoValue{});
+            return *res.slot.entry;
+        }
+
+        T* Find(T* key) const {
+            struct NoValue {};
+            if (auto [found, index] = this->IndexOf(key); found) {
+                return *this->slots_[index].entry;
+            }
+            return nullptr;
+        }
     };
 
     /// The block allocator used to allocate the unique objects
     BlockAllocator<T> allocator;
-    /// The unordered_set of unique item entries
-    std::unordered_set<Entry, Comparator, Comparator> items;
+    /// The set of unique item entries
+    Set items;
 };
 
 }  // namespace tint
