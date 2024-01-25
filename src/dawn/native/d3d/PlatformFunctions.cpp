@@ -33,6 +33,7 @@
 #include <array>
 #include <sstream>
 #include <utility>
+#include <vector>
 
 namespace dawn::native::d3d {
 namespace {
@@ -106,15 +107,53 @@ std::string GetWindowsSDKBasePath() {
 
     return ostream.str();
 }
+
+// Referenced from base/win/registry.cc in Chromium
+uint32_t ReadFromDWORDRegistryKey(HKEY registerKey, const wchar_t* registerKeyName) {
+    DWORD valueType;
+    DWORD value;
+    DWORD returnSize = sizeof(value);
+
+    auto hr = RegQueryValueExW(registerKey, registerKeyName, nullptr, &valueType,
+                               reinterpret_cast<LPBYTE>(&value), &returnSize);
+    if (hr == ERROR_SUCCESS && valueType == REG_DWORD) {
+        return static_cast<uint32_t>(value);
+    }
+    return 0;
+}
+
+// Referenced from base/win/registry.cc in Chromium
+uint64_t ReadFromSZRegistryKey(HKEY registerKey, const char* registerKeyName) {
+    DWORD valueType;
+    DWORD returnSize;
+    if (RegQueryValueExA(registerKey, registerKeyName, nullptr, &valueType, nullptr, &returnSize) !=
+        ERROR_SUCCESS) {
+        return 0;
+    }
+    std::vector<char> returnStringValue(returnSize);
+    auto hr = RegQueryValueExA(registerKey, registerKeyName, nullptr, &valueType,
+                               reinterpret_cast<LPBYTE>(returnStringValue.data()), &returnSize);
+    if (hr != ERROR_SUCCESS || valueType != REG_SZ) {
+        return 0;
+    }
+    constexpr int32_t kRadix = 10;
+    return strtol(returnStringValue.data(), nullptr, kRadix);
+}
+
 }  // anonymous namespace
 
-PlatformFunctions::PlatformFunctions() = default;
+PlatformFunctions::PlatformFunctions()
+    : mCurrentMajorWindowsVersionNumber(0),
+      mCurrentMinorWindowsVersionNumber(0),
+      mCurrentBuildNumber(0) {}
+
 PlatformFunctions::~PlatformFunctions() = default;
 
 MaybeError PlatformFunctions::LoadFunctions() {
     DAWN_TRY(LoadDXGI());
     LoadDXCLibraries();
     DAWN_TRY(LoadFXCompiler());
+    InitWindowsVersion();
     return {};
 }
 
@@ -216,6 +255,31 @@ MaybeError PlatformFunctions::LoadFXCompiler() {
     }
 #endif
     return {};
+}
+
+void PlatformFunctions::InitWindowsVersion() {
+    // Referenced from base/win/windows_version.cc in Chromium
+    constexpr wchar_t kRegKeyWindowsNTCurrentVersion[] =
+        L"SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion";
+
+    HKEY hKey;
+    if (RegOpenKeyExW(HKEY_LOCAL_MACHINE, kRegKeyWindowsNTCurrentVersion, 0, KEY_QUERY_VALUE,
+                      &hKey) != ERROR_SUCCESS) {
+        return;
+    }
+
+    mCurrentMajorWindowsVersionNumber =
+        ReadFromDWORDRegistryKey(hKey, L"CurrentMajorVersionNumber");
+    mCurrentMinorWindowsVersionNumber =
+        ReadFromDWORDRegistryKey(hKey, L"CurrentMinorVersionNumber");
+    mCurrentBuildNumber = ReadFromSZRegistryKey(hKey, "CurrentBuildNumber");
+
+    RegCloseKey(hKey);
+}
+
+bool PlatformFunctions::IsWin11() const {
+    return mCurrentMajorWindowsVersionNumber == 10 && mCurrentMinorWindowsVersionNumber == 0 &&
+           mCurrentBuildNumber >= 22000;
 }
 
 // Use Backend::IsDXCAvaliable if possible, which also check the DXC is no older than a given
