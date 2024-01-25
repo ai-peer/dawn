@@ -49,6 +49,7 @@ class PlatformFunctions {
     MaybeError LoadFunctions();
     bool IsPIXEventRuntimeLoaded() const;
     bool IsDXCBinaryAvailable() const;
+    bool IsWin11() const;
 
     // Functions from dxgi.dll
     using PFN_DXGI_GET_DEBUG_INTERFACE1 = HRESULT(WINAPI*)(UINT Flags,
@@ -78,11 +79,16 @@ class PlatformFunctions {
     void LoadDXCompiler(const std::string& baseWindowsSDKPath);
     MaybeError LoadFXCompiler();
     void LoadPIXRuntime();
+    void InitWindowsVersion();
 
     DynamicLib mDXGILib;
     DynamicLib mDXILLib;
     DynamicLib mDXCompilerLib;
     DynamicLib mFXCompilerLib;
+
+    uint32_t mCurrentMajorWindowsVersionNumber;
+    uint32_t mCurrentMinorWindowsVersionNumber;
+    uint64_t mCurrentBuildNumber;
 };
 
 }  // namespace dawn::native::d3d
