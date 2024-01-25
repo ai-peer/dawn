@@ -33,6 +33,23 @@
       "message": "LGTM\n\napologies this got buried in my inbox and I missed it",
       "revId": "dc892ce671ca60b548ac09d416b4618274107fb8",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0c033183_347d3984",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-25T14:48:11Z",
+      "side": 1,
+      "message": "Presubmits failed with:\n\n```\nThe dawn directory requires source formatting. Please run: git cl format --python\n```",
+      "revId": "dc892ce671ca60b548ac09d416b4618274107fb8",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
