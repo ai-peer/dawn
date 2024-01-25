@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "6c0c8d0d_c1087e39",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 2
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-01-25T21:59:16Z",
+      "side": 1,
+      "message": "Since this only appears to be happening on pre-release versions of Windows, can you please hold off until we give the Windows team a chance to take a look at the issue before making a speculative fix?\n\nWin11 never removed support for these devices, so I don\u0027t buy the \"not supported\" argument.",
+      "range": {
+        "startLine": 9,
+        "startChar": 62,
+        "endLine": 10,
+        "endChar": 19
+      },
+      "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "6562b226_73edea0b",
@@ -48,6 +71,29 @@
       "writtenOn": "2024-01-25T18:48:47Z",
       "side": 1,
       "message": "Rafael, FYI we\u0027re trying this workaround to see if it helps",
+      "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b9fcd36_8f8bf070",
+        "filename": "src/dawn/native/d3d/PlatformFunctions.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 284,
+      "author": {
+        "id": 1000262
+      },
+      "writtenOn": "2024-01-25T21:59:16Z",
+      "side": 1,
+      "message": "If we\u0027re going to do workaround by windows version, we should use IsWindowsVersionOrGreater. See https://learn.microsoft.com/en-us/windows/win32/api/versionhelpers/nf-versionhelpers-iswindowsversionorgreater.",
+      "range": {
+        "startLine": 280,
+        "startChar": 0,
+        "endLine": 284,
+        "endChar": 0
+      },
       "revId": "abc317afbe1ca0545851b9f79fe48b696e06b910",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
