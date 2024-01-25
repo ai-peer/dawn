@@ -909,7 +909,7 @@ class Vector {
     }
 
     /// True if this vector uses a small array for small object optimization.
-    constexpr static bool HasSmallArray = N > 0;
+    constexpr static bool HasSmallArray = N > 0 && N <= 10;
 
     /// A structure that has the same size and alignment as T.
     /// Replacement for std::aligned_storage as this is broken on earlier versions of MSVC.
