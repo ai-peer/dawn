@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "fa90185c_9bfa224a",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-01-25T13:09:38Z",
+      "side": 1,
+      "message": "There is already a test to check bind groups with an empty visibility mask. However, the test only tests buffers, not textures. I expanded it to use a texture as well. I could split it into two tests: one for buffers, one for textures if that\u0027s preferable.\n\nWith validation layers enabled, the test now triggers a validation error when running it without the fix.\n\nIt turns out it is not necessary to have an initial render pass that renders to the texture to trigger the bug. Some use is necessary, but zero initialization is enough.",
+      "revId": "6c988be61b864a801e72edc3e229c2a0aa381685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

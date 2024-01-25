@@ -33,6 +33,24 @@
       "message": "LGTM too, though yes - a regression test would be great",
       "revId": "88446faa7ae1cb23c3c53c4d1de20e00b23d365f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3fb9305c_25455b1d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003586
+      },
+      "writtenOn": "2024-01-25T13:09:38Z",
+      "side": 1,
+      "message": "What content was triggering it? I haven\u0027t run across it in the wild myself. I caught it by code inspection. I had to add some hacks to my engine to get it to trigger (uses shader analysis to generate bind group layouts so can\u0027t normally get an empty visibility mask).\n\nThe validation layers have a check that checks for access masks not supported by the specified stages. (https://github.com/KhronosGroup/Vulkan-ValidationLayers/blob/1f423f945fba941bdb55135770f6406f62cd013c/layers/core_checks/cc_synchronization.cpp#L943) It catches the issue in my test.",
+      "parentUuid": "da2d265d_e7d009eb",
+      "revId": "88446faa7ae1cb23c3c53c4d1de20e00b23d365f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
