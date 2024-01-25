@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "75192f60_789b5c0c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-25T16:05:31Z",
+      "side": 1,
+      "message": "I didn\u0027t add a test that actually triggers the reported bug. One sec...",
+      "revId": "d8fdf07c6ecc80c4045eb001c05844d345de900b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
