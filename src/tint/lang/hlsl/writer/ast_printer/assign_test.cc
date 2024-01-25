@@ -69,7 +69,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Vector_Assign_LetIndex) {
 
     ASSERT_TRUE(gen.Generate());
     EXPECT_EQ(gen.Result(),
-              R"(void set_float3(inout float3 vec, int idx, float val) {
+              R"(void set_vector_element(inout float3 vec, int idx, float val) {
   vec = (idx.xxx == int3(0, 1, 2)) ? val.xxx : vec;
 }
 
@@ -77,7 +77,7 @@ void fn() {
   float3 lhs = float3(0.0f, 0.0f, 0.0f);
   float rhs = 0.0f;
   const uint index = 0u;
-  set_float3(lhs, index, rhs);
+  set_vector_element(lhs, index, rhs);
 }
 )");
 }
@@ -116,7 +116,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Vector_Assign_DynamicIndex) {
 
     ASSERT_TRUE(gen.Generate());
     EXPECT_EQ(gen.Result(),
-              R"(void set_float3(inout float3 vec, int idx, float val) {
+              R"(void set_vector_element(inout float3 vec, int idx, float val) {
   vec = (idx.xxx == int3(0, 1, 2)) ? val.xxx : vec;
 }
 
@@ -124,7 +124,7 @@ void fn() {
   float3 lhs = float3(0.0f, 0.0f, 0.0f);
   float rhs = 0.0f;
   uint index = 0u;
-  set_float3(lhs, index, rhs);
+  set_vector_element(lhs, index, rhs);
 }
 )");
 }
@@ -142,7 +142,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Matrix_Assign_Vector_LetIndex) {
 
     ASSERT_TRUE(gen.Generate());
     EXPECT_EQ(gen.Result(),
-              R"(void set_vector_float4x2(inout float4x2 mat, int col, float2 val) {
+              R"(void set_matrix_column(inout float4x2 mat, int col, float2 val) {
   switch (col) {
     case 0: mat[0] = val; break;
     case 1: mat[1] = val; break;
@@ -155,7 +155,7 @@ void fn() {
   float4x2 lhs = float4x2(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
   float2 rhs = float2(0.0f, 0.0f);
   const uint index = 0u;
-  set_vector_float4x2(lhs, index, rhs);
+  set_matrix_column(lhs, index, rhs);
 }
 )");
 }
@@ -194,7 +194,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Matrix_Assign_Vector_DynamicIndex) {
 
     ASSERT_TRUE(gen.Generate());
     EXPECT_EQ(gen.Result(),
-              R"(void set_vector_float4x2(inout float4x2 mat, int col, float2 val) {
+              R"(void set_matrix_column(inout float4x2 mat, int col, float2 val) {
   switch (col) {
     case 0: mat[0] = val; break;
     case 1: mat[1] = val; break;
@@ -207,7 +207,7 @@ void fn() {
   float4x2 lhs = float4x2(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
   float2 rhs = float2(0.0f, 0.0f);
   uint index = 0u;
-  set_vector_float4x2(lhs, index, rhs);
+  set_matrix_column(lhs, index, rhs);
 }
 )");
 }
@@ -228,7 +228,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Matrix_Assign_Scalar_LetIndices) {
 
     ASSERT_TRUE(gen.Generate());
     EXPECT_EQ(gen.Result(),
-              R"(void set_scalar_float4x2(inout float4x2 mat, int col, int row, float val) {
+              R"(void set_matrix_scalar(inout float4x2 mat, int col, int row, float val) {
   switch (col) {
     case 0:
       mat[0] = (row.xx == int2(0, 1)) ? val.xx : mat[0];
@@ -250,7 +250,7 @@ void fn() {
   float rhs = 0.0f;
   const uint col = 0u;
   const uint row = 1u;
-  set_scalar_float4x2(lhs, col, row, rhs);
+  set_matrix_scalar(lhs, col, row, rhs);
 }
 )");
 }
@@ -295,7 +295,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Matrix_Assign_Scalar_DynamicIndices) {
 
     ASSERT_TRUE(gen.Generate());
     EXPECT_EQ(gen.Result(),
-              R"(void set_scalar_float4x2(inout float4x2 mat, int col, int row, float val) {
+              R"(void set_matrix_scalar(inout float4x2 mat, int col, int row, float val) {
   switch (col) {
     case 0:
       mat[0] = (row.xx == int2(0, 1)) ? val.xx : mat[0];
@@ -317,7 +317,7 @@ void fn() {
   float rhs = 0.0f;
   uint col = 0u;
   uint row = 0u;
-  set_scalar_float4x2(lhs, col, row, rhs);
+  set_matrix_scalar(lhs, col, row, rhs);
 }
 )");
 }
