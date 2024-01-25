@@ -51,6 +51,24 @@
       "parentUuid": "da2d265d_e7d009eb",
       "revId": "88446faa7ae1cb23c3c53c4d1de20e00b23d365f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "237cbeaf_fb4be143",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-25T14:24:12Z",
+      "side": 1,
+      "message": "* Validation Error: [ SYNC-HAZARD-READ-AFTER-WRITE ] Object 0: handle \u003d 0x8d300000008d3, name \u003d DawnDbg\u003d2;Dawn_TextureView, type \u003d VK_OBJECT_TYPE_IMAGE_VIEW; | MessageID \u003d 0xe4d96472 | vkCmdDraw():  Hazard READ_AFTER_WRITE for VkImageView 0x8d300000008d3[DawnDbg\u003d2;Dawn_TextureView], in VkCommandBuffer 0x17a002309800[], and VkPipeline 0x8d200000008d2[DawnDbg\u003d2;Dawn_RenderPipeline], VkDescriptorSet 0x8cc00000008cc[DawnDbg\u003d2;Dawn_BindGroup], type: VK_DESCRIPTOR_TYPE_SAMPLED_IMAGE, imageLayout: VK_IMAGE_LAYOUT_DEPTH_STENCIL_READ_ONLY_OPTIMAL, binding #0, index 0. Access info (usage: SYNC_FRAGMENT_SHADER_SHADER_SAMPLED_READ, prior_usage: SYNC_LATE_FRAGMENT_TESTS_DEPTH_STENCIL_ATTACHMENT_WRITE, write_barriers: 0, command: vkCmdEndRenderPass, seq_no: 12, renderpass: VkRenderPass 0x8db00000008db[], reset_no: 1).\n\", source: http://127.0.0.1:45307/webgpu-cts/test_page.html (0)\nUnexpected exception while running webgpu:api,operation,memory_sync,texture,readonly_depth_stencil:sampling_while_testing:format\u003d\"depth32float\";depthReadOnly\u003dtrue;stencilReadOnly\u003d\"_undef_\"\n\nThis is when running the newly added read-only depth stencil tests with the VVLs. I have yet to look into it, but maybe it\u0027s not the same issue because the shader stages shouldn\u0027t be NONE.",
+      "parentUuid": "3fb9305c_25455b1d",
+      "revId": "88446faa7ae1cb23c3c53c4d1de20e00b23d365f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }

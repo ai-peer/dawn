@@ -16,6 +16,46 @@
       "message": "There is already a test to check bind groups with an empty visibility mask. However, the test only tests buffers, not textures. I expanded it to use a texture as well. I could split it into two tests: one for buffers, one for textures if that\u0027s preferable.\n\nWith validation layers enabled, the test now triggers a validation error when running it without the fix.\n\nIt turns out it is not necessary to have an initial render pass that renders to the texture to trigger the bug. Some use is necessary, but zero initialization is enough.",
       "revId": "6c988be61b864a801e72edc3e229c2a0aa381685",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "146ed798_4c24d197",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-25T14:24:12Z",
+      "side": 1,
+      "message": "LGTM!",
+      "revId": "6c988be61b864a801e72edc3e229c2a0aa381685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d58a64c_30f3eb0a",
+        "filename": "src/dawn/tests/end2end/BindGroupTests.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1282,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-25T14:24:12Z",
+      "side": 1,
+      "message": "```suggestion\n    textureDescriptor.size \u003d {kRTSize, kRTSize};\n    textureDescriptor.format \u003d wgpu::TextureFormat::RGBA8Unorm;\n    textureDescriptor.usage \u003d wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;\n```",
+      "range": {
+        "startLine": 1275,
+        "startChar": 0,
+        "endLine": 1282,
+        "endChar": 95
+      },
+      "revId": "6c988be61b864a801e72edc3e229c2a0aa381685",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
