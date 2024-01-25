@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "f205afa0_32256332",
+        "filename": "src/dawn/native/ShaderModule.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 397,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-25T01:54:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "96bb5b73_a0cfd41e",
+      "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5619372a_956c8ed6",
@@ -48,6 +66,24 @@
       "writtenOn": "2024-01-24T16:25:22Z",
       "side": 1,
       "message": "`auto bufferBindingInfo \u003d get_if\u003cBufferBindingInfo\u003e(shaderBindingInfo.bindingInfo)` could be just slightly nicer with less boiler plate.",
+      "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bee88f3a_87a80e04",
+        "filename": "src/dawn/native/d3d12/ShaderModuleD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 208,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-25T01:54:23Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "5619372a_956c8ed6",
       "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -101,6 +137,24 @@
       "side": 1,
       "message": "Can we file a bug to maybe create a SwitchVariant util in Dawn similar to tint::Switch kinda.",
       "parentUuid": "3fba83df_82d59033",
+      "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0a9db15d_6310c5ef",
+        "filename": "src/dawn/native/vulkan/ShaderModuleVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 252,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-25T01:54:23Z",
+      "side": 1,
+      "message": "Done. I\u0027ve filed https://bugs.chromium.org/p/dawn/issues/detail?id\u003d2370 to track this issue.",
+      "parentUuid": "bf3e291f_2cab76e5",
       "revId": "8110b91ad72727939bea54e737b4b9d1d17b74d5",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
