@@ -711,6 +711,18 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
     if (gpu_info::IsIntel(vendorId) && !deviceToggles->IsEnabled(Toggle::UseDXC)) {
         deviceToggles->Default(Toggle::D3D12PolyfillReflectVec2F32, true);
     }
+
+    // Currently this workaround is needed on some old Intel GPUs that don't support Windows 11.
+    // See http://crbug.com/dawn/2308 for more information.
+    if ((gpu_info::IsIntelGen7(vendorId, deviceId) || gpu_info::IsIntelGen8(vendorId, deviceId) ||
+         gpu_info::IsSkylake(deviceId)) &&
+        GetBackend()->GetFunctions()->IsWin11()) {
+        const gpu_info::DriverVersion kDriverVersion = {27, 20, 100, 9664};
+        if (gpu_info::CompareWindowsDriverVersion(vendorId, GetDriverVersion(), kDriverVersion) <=
+            0) {
+            deviceToggles->Default(Toggle::DisableResourceSuballocation, true);
+        }
+    }
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
