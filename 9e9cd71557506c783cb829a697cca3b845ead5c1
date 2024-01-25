@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ffbb1300_a8babd4c",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-25T05:53:12Z",
+      "side": 1,
+      "message": "for UMA GPUs, to do a fair comparison, shouldn\u0027t we be mapping the uniform buffer directly? Peng added an extension to do this. See /dawn/docs/dawn/features/buffer_map_extended_usages.md\n\nit is only implemented on Metal now but we could do it for d3d11 as well",
+      "parentUuid": "935b30a0_e152c04d",
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "97208aa1_44e4905c",
@@ -226,6 +244,30 @@
       "side": 1,
       "message": "Thanks, Peng!\nSo it seems that the passed fence serial can\u0027t ensure the buffer is ready to be mapped without wait on Nvidia. We\u0027d better figure out this issue first before moving forward with this CL.",
       "parentUuid": "324c5ed5_e3beb472",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b25c5e29_2a9cb1e7",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-25T05:53:12Z",
+      "side": 1,
+      "message": "some ideas. what if only on NVIDIA GPUs we try some or all of:\n - do ID3D11DeviceContext::Flush before or after the ID3D11DeviceContext4::Signal\n - ID3D11DeviceContext4::Wait before Map - with the fence and value that we expect it to be completed (the idea is to force the driver flush any bits saying that the fence value has passed).",
+      "parentUuid": "79c92816_400a2f88",
       "range": {
         "startLine": 315,
         "startChar": 0,
