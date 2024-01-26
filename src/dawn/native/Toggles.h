@@ -128,6 +128,7 @@ enum class Toggle {
     ExposeWGSLTestingFeatures,
     ExposeWGSLExperimentalFeatures,
     DisablePolyfillsOnIntegerDivisonAndModulo,
+    D3D12UseIntelMaxPerformanceThrottlePolicy,
     EnableImmediateErrorHandling,
 
     // Unresolved issues.
