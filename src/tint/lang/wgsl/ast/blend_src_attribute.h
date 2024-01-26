@@ -25,34 +25,40 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include "src/tint/lang/wgsl/ast/index_attribute.h"
+#ifndef SRC_TINT_LANG_WGSL_AST_BLEND_SRC_ATTRIBUTE_H_
+#define SRC_TINT_LANG_WGSL_AST_BLEND_SRC_ATTRIBUTE_H_
 
 #include <string>
 
-#include "src/tint/lang/wgsl/ast/builder.h"
-#include "src/tint/lang/wgsl/ast/clone_context.h"
-
-TINT_INSTANTIATE_TYPEINFO(tint::ast::IndexAttribute);
+#include "src/tint/lang/wgsl/ast/attribute.h"
+#include "src/tint/lang/wgsl/ast/expression.h"
 
 namespace tint::ast {
 
-IndexAttribute::IndexAttribute(GenerationID pid,
-                               NodeID nid,
-                               const Source& src,
-                               const Expression* exp)
-    : Base(pid, nid, src), expr(exp) {}
+/// An blend_src attribute for shader IO.
+class BlendSrcAttribute final : public Castable<BlendSrcAttribute, Attribute> {
+  public:
+    /// Create a blend_src ttribute.
+    /// @param pid the identifier of the program that owns this node
+    /// @param nid the unique node identifier
+    /// @param src the source of this node
+    /// @param expr the numeric id expression
+    BlendSrcAttribute(GenerationID pid, NodeID nid, const Source& src, const Expression* expr);
+    ~BlendSrcAttribute() override;
 
-IndexAttribute::~IndexAttribute() = default;
+    /// @returns the WGSL name for the attribute
+    std::string Name() const override;
 
-std::string IndexAttribute::Name() const {
-    return "index";
-}
+    /// Clones this node and all transitive child nodes using the `CloneContext`
+    /// `ctx`.
+    /// @param ctx the clone context
+    /// @return the newly cloned node
+    const BlendSrcAttribute* Clone(CloneContext& ctx) const override;
 
-const IndexAttribute* IndexAttribute::Clone(CloneContext& ctx) const {
-    // Clone arguments outside of create() call to have deterministic ordering
-    auto src = ctx.Clone(source);
-    auto* expr_ = ctx.Clone(expr);
-    return ctx.dst->create<IndexAttribute>(src, expr_);
-}
+    /// The blend_src expression
+    const Expression* const expr;
+};
 
 }  // namespace tint::ast
+
+#endif  // SRC_TINT_LANG_WGSL_AST_BLEND_SRC_ATTRIBUTE_H_

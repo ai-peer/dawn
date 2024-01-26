@@ -376,9 +376,9 @@ class Validator {
     /// @param is_input true if is an input variable, false if output variable, std::nullopt is
     /// unknown.
     /// @returns true on success, false otherwise.
-    bool IndexAttribute(const ast::IndexAttribute* index_attr,
-                        ast::PipelineStage stage,
-                        const std::optional<bool> is_input = std::nullopt) const;
+    bool BlendSrcAttribute(const ast::BlendSrcAttribute* index_attr,
+                           ast::PipelineStage stage,
+                           const std::optional<bool> is_input = std::nullopt) const;
 
     /// Validates a loop statement
     /// @param stmt the loop statement
