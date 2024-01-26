@@ -268,8 +268,16 @@ if (DAWN_USE_BUILT_DXC)
     AddSubdirectoryDXC()
 endif()
 
+# Header-only library for igdext.h
+if (DAWN_ENABLE_D3D12)
+    add_library(intel_extension INTERFACE)
+    target_sources(intel_extension INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/intel/cmd-throttle-extension/IntelExtension/include/igdext.h")
+    target_include_directories(intel_extension INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/intel/cmd-throttle-extension/IntelExtension/include")
+endif()
+
 if (TINT_BUILD_TINTD)
     set(LANGSVR_JSON_LIB_DIR "${CMAKE_CURRENT_SOURCE_DIR}/jsoncpp")
     add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/jsoncpp" EXCLUDE_FROM_ALL)
     add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/langsvr" EXCLUDE_FROM_ALL)
 endif()
+

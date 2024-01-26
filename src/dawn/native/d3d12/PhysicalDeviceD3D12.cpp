@@ -39,6 +39,7 @@
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/IntelExtensionD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -733,6 +734,14 @@ void PhysicalDevice::SetupBackendDeviceToggles(TogglesState* deviceToggles) cons
             deviceToggles->Default(Toggle::DisableResourceSuballocation, true);
         }
     }
+
+    // We must ensure Toggle::D3D12SetIntelMaxPerformanceThrottlePolicy always be disabled when we
+    // shouldn't use Throttle Policy extension.
+    // See http://crbug.com/dawn/2452 for more information.
+    if (deviceToggles->IsEnabled(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy) &&
+        GetIntelExtension() == nullptr) {
+        deviceToggles->ForceSet(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy, false);
+    }
 }
 
 ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
@@ -747,6 +756,8 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
 // and the subequent call to CreateDevice will return a handle the existing device instead of
 // creating a new one.
 MaybeError PhysicalDevice::ResetInternalDeviceForTestingImpl() {
+    mIntelExtension.reset();
+
     [[maybe_unused]] auto refCount = mD3d12Device.Reset();
     DAWN_ASSERT(refCount == 0);
     DAWN_TRY(Initialize());
@@ -792,6 +803,19 @@ void PhysicalDevice::PopulateBackendProperties(UnpackedPtr<AdapterProperties>& p
     if (auto* d3dProperties = properties.Get<AdapterPropertiesD3D>()) {
         d3dProperties->shaderModel = GetDeviceInfo().shaderModel;
     }
+}
+
+IntelExtension* PhysicalDevice::GetIntelExtension() const {
+    if (!gpu_info::IsIntel(mVendorId)) {
+        return nullptr;
+    }
+
+    // Lazily load Intel extension library
+    if (!mIntelExtension.has_value()) {
+        mIntelExtension = IntelExtension::Create(*this);
+    }
+
+    return mIntelExtension->get();
 }
 
 }  // namespace dawn::native::d3d12
