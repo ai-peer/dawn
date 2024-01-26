@@ -497,23 +497,6 @@ ResultOrError<ComPtr<ID3D11DepthStencilView>> Texture::CreateD3D11DepthStencilVi
     return dsv;
 }
 
-MaybeError Texture::SynchronizeTextureBeforeUse(
-    const ScopedCommandRecordingContext* commandContext) {
-    if (SharedTextureMemoryContents* contents = GetSharedTextureMemoryContents()) {
-        SharedTextureMemoryBase::PendingFenceList fences;
-        contents->AcquirePendingFences(&fences);
-        contents->SetLastUsageSerial(GetDevice()->GetQueue()->GetPendingCommandSerial());
-
-        for (auto& fence : fences) {
-            DAWN_TRY(CheckHRESULT(
-                commandContext->Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
-                "ID3D11DeviceContext4::Wait"));
-        }
-    }
-    mSignalFenceValue = GetDevice()->GetQueue()->GetPendingCommandSerial();
-    return {};
-}
-
 MaybeError Texture::Clear(const ScopedCommandRecordingContext* commandContext,
                           const SubresourceRange& range,
                           TextureBase::ClearValue clearValue) {
@@ -1160,16 +1143,20 @@ Texture::ScopedTextureUse::~ScopedTextureUse() = default;
 
 ResultOrError<Texture::ScopedTextureUse> Texture::SynchronizeTextureUse(
     const ScopedCommandRecordingContext* commandContext) {
-    SharedTextureMemoryBase::PendingFenceList fences;
-    if (auto* contents = GetSharedTextureMemoryContents(); contents != nullptr) {
+    if (SharedTextureMemoryContents* contents = GetSharedTextureMemoryContents()) {
+        SharedTextureMemoryBase::PendingFenceList fences;
         contents->AcquirePendingFences(&fences);
         contents->SetLastUsageSerial(GetDevice()->GetQueue()->GetPendingCommandSerial());
+
+        for (auto& fence : fences) {
+            DAWN_TRY(CheckHRESULT(
+                commandContext->Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
+                "ID3D11DeviceContext4::Wait"));
+        }
     }
-    for (const auto& fence : fences) {
-        DAWN_TRY(CheckHRESULT(
-            commandContext->Wait(ToBackend(fence.object)->GetD3DFence(), fence.signaledValue),
-            "ID3D11DeviceContext4::Wait"));
-    }
+
+    mSignalFenceValue = GetDevice()->GetQueue()->GetPendingCommandSerial();
+
     std::optional<d3d::KeyedMutex::Guard> keyedMutexGuard;
     if (mKeyedMutex != nullptr) {
         DAWN_TRY_ASSIGN(keyedMutexGuard, mKeyedMutex->AcquireKeyedMutex());

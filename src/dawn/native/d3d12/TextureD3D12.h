@@ -37,12 +37,12 @@
 #include "dawn/native/DawnNative.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/PassResourceUsage.h"
+#include "dawn/native/d3d/KeyedMutex.h"
 #include "dawn/native/d3d12/IntegerTypes.h"
 #include "dawn/native/d3d12/ResourceHeapAllocationD3D12.h"
 #include "dawn/native/d3d12/d3d12_platform.h"
 
 namespace dawn::native::d3d12 {
-
 class SharedTextureMemory;
 class CommandRecordingContext;
 class Device;
@@ -59,6 +59,7 @@ class Texture final : public d3d::Texture {
         Device* device,
         const UnpackedPtr<TextureDescriptor>& descriptor,
         ComPtr<IUnknown> d3dTexture,
+        Ref<d3d::KeyedMutex> keyedMutex,
         std::vector<FenceAndSignalValue> waitFences,
         bool isSwapChainTexture,
         bool isInitialized);
@@ -92,7 +93,18 @@ class Texture final : public d3d::Texture {
     MaybeError EnsureSubresourceContentInitialized(CommandRecordingContext* commandContext,
                                                    const SubresourceRange& range);
 
-    MaybeError SynchronizeTextureBeforeUse();
+    class ScopedTextureUse : public NonCopyable {
+      public:
+        ScopedTextureUse(ScopedTextureUse&& other);
+        ScopedTextureUse& operator=(ScopedTextureUse&& other);
+        ~ScopedTextureUse();
+
+      private:
+        friend class Texture;
+        explicit ScopedTextureUse(std::optional<d3d::KeyedMutex::Guard> keyedMutexGuard);
+        std::optional<d3d::KeyedMutex::Guard> mKeyedMutexGuard;
+    };
+    ResultOrError<ScopedTextureUse> SynchronizeTextureUse();
 
     void NotifySwapChainPresentToPIX();
 
@@ -121,6 +133,7 @@ class Texture final : public d3d::Texture {
 
     MaybeError InitializeAsInternalTexture();
     MaybeError InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
+                                           Ref<d3d::KeyedMutex> keyedMutex,
                                            std::vector<FenceAndSignalValue> waitFences,
                                            bool isSwapChainTexture);
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D12Resource> d3d12Texture);
@@ -159,6 +172,8 @@ class Texture final : public d3d::Texture {
 
     D3D12_RESOURCE_FLAGS mD3D12ResourceFlags;
     ResourceHeapAllocation mResourceAllocation;
+
+    Ref<d3d::KeyedMutex> mKeyedMutex;
 
     // TODO(dawn:1460): Encapsulate imported image fields e.g. std::unique_ptr<ExternalImportInfo>.
     std::vector<FenceAndSignalValue> mWaitFences;
