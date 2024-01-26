@@ -16,6 +16,23 @@
       "message": "PTAL, thanks!",
       "revId": "0e225953e89896c19151fdf874a6ff78eb7d7af2",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33ad88be_64f148f8",
+        "filename": "src/dawn/common/Overloaded.h",
+        "patchSetId": 4
+      },
+      "lineNbr": 70,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-26T13:39:34Z",
+      "side": 1,
+      "message": "What about using Overloaded but to do:\n\n```\nMatchVariant(bindingInfo,\n   [\u0026](const Foo\u0026 foo) { something with foo},\n   [\u0026](const Bar\u0026 bar) { something with bar});\n```\n\nAlso it would be nice to support returning values from the MatchVariant if all functors return a value.\n\nAnd tests maybe? I know I\u0027m asking for a lot.",
+      "revId": "0e225953e89896c19151fdf874a6ff78eb7d7af2",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
