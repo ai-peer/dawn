@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "73e73e66_6614fc7e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-26T05:06:16Z",
+      "side": 1,
+      "message": "Hi Dan,\n\nI\u0027ve verified this CL won\u0027t break the build on MacOS with CMake. PTAL, thanks!",
+      "revId": "22f4448afb51b7970ef302da3a46957f86feadff",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
