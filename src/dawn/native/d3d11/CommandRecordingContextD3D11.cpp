@@ -60,6 +60,17 @@ void ScopedCommandRecordingContext::UpdateSubresource(ID3D11Resource* pDstResour
                                                    SrcRowPitch, SrcDepthPitch);
 }
 
+void ScopedCommandRecordingContext::UpdateSubresource1(ID3D11Resource* pDstResource,
+                                                       UINT DstSubresource,
+                                                       const D3D11_BOX* pDstBox,
+                                                       const void* pSrcData,
+                                                       UINT SrcRowPitch,
+                                                       UINT SrcDepthPitch,
+                                                       UINT CopyFlags) const {
+    Get()->mD3D11DeviceContext4->UpdateSubresource1(pDstResource, DstSubresource, pDstBox, pSrcData,
+                                                    SrcRowPitch, SrcDepthPitch, CopyFlags);
+}
+
 void ScopedCommandRecordingContext::CopyResource(ID3D11Resource* pDstResource,
                                                  ID3D11Resource* pSrcResource) const {
     Get()->mD3D11DeviceContext4->CopyResource(pDstResource, pSrcResource);
