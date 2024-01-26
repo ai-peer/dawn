@@ -25,8 +25,8 @@ int bar() {
 
 void main() {
   S x = (S)0;
-  const int tint_symbol_save = foo();
-  const int tint_symbol_1 = bar();
+  int tint_symbol_save = foo();
+  int tint_symbol_1 = bar();
   {
     int4 tint_symbol_3[4] = x.a;
     set_int4(tint_symbol_3[tint_symbol_save], tint_symbol_1, (x.a[tint_symbol_save][tint_symbol_1] + 5));

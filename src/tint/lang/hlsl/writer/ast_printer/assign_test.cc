@@ -76,7 +76,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Vector_Assign_LetIndex) {
 void fn() {
   float3 lhs = float3(0.0f, 0.0f, 0.0f);
   float rhs = 0.0f;
-  const uint index = 0u;
+  uint index = 0u;
   set_float3(lhs, index, rhs);
 }
 )");
@@ -154,7 +154,7 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Matrix_Assign_Vector_LetIndex) {
 void fn() {
   float4x2 lhs = float4x2(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
   float2 rhs = float2(0.0f, 0.0f);
-  const uint index = 0u;
+  uint index = 0u;
   set_vector_float4x2(lhs, index, rhs);
 }
 )");
@@ -248,8 +248,8 @@ TEST_F(HlslASTPrinterTest_Assign, Emit_Matrix_Assign_Scalar_LetIndices) {
 void fn() {
   float4x2 lhs = float4x2(0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f);
   float rhs = 0.0f;
-  const uint col = 0u;
-  const uint row = 1u;
+  uint col = 0u;
+  uint row = 1u;
   set_scalar_float4x2(lhs, col, row, rhs);
 }
 )");
