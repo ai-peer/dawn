@@ -547,10 +547,11 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
         box.bottom = 1;
         box.front = 0;
         box.back = 1;
-        commandContext->UpdateSubresource(mD3d11NonConstantBuffer.Get(), /*DstSubresource=*/0, &box,
-                                          data,
-                                          /*SrcRowPitch=*/0,
-                                          /*SrcDepthPitch*/ 0);
+        commandContext->UpdateSubresource1(mD3d11NonConstantBuffer.Get(), /*DstSubresource=*/0,
+                                           &box, data,
+                                           /*SrcRowPitch=*/0,
+                                           /*SrcDepthPitch=*/0,
+                                           /*CopyFlags=*/0);
         if (!mD3d11ConstantBuffer) {
             return {};
         }
@@ -572,26 +573,51 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
 
     DAWN_ASSERT(mD3d11ConstantBuffer);
 
-    // For a full size write, UpdateSubresource() can be used to update mD3d11ConstantBuffer.
+    // For a full size write, UpdateSubresource1(D3D11_COPY_DISCARD) can be used to update
+    // mD3d11ConstantBuffer.
     if (size == GetSize() && offset == 0) {
-        if (size == mAllocatedSize) {
-            commandContext->UpdateSubresource(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
-                                              nullptr, data,
-                                              /*SrcRowPitch=*/size,
-                                              /*SrcDepthPitch*/ 0);
-        } else {
-            std::vector<uint8_t> allocatedData(mAllocatedSize, 0);
-            std::memcpy(allocatedData.data(), data, size);
-            commandContext->UpdateSubresource(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
-                                              nullptr, allocatedData.data(),
-                                              /*SrcRowPitch=*/mAllocatedSize,
-                                              /*SrcDepthPitch*/ 0);
+        size_t alignedSize = Align(size, 16);
+        DAWN_ASSERT(alignedSize <= GetAllocatedSize());
+        // Size must be aligned with 16 for UpdateSubresource1().
+        std::vector<uint8_t> alignedBuffer;
+        if (size != alignedSize) {
+            alignedBuffer.reserve(alignedSize);
+            std::memcpy(alignedBuffer.data(), data, size);
+            data = alignedBuffer.data();
         }
+        D3D11_BOX box;
+        box.left = 0;
+        box.right = alignedSize;
+        box.top = 0;
+        box.bottom = 1;
+        box.front = 0;
+        box.back = 1;
+        commandContext->UpdateSubresource1(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
+                                           &box, data,
+                                           /*SrcRowPitch=*/0,
+                                           /*SrcDepthPitch=*/0,
+                                           /*CopyFlags=*/D3D11_COPY_DISCARD);
         return {};
     }
 
-    // If the mD3d11NonConstantBuffer is null, we have to create a staging buffer for transfer the
-    // data to mD3d11ConstantBuffer.
+    if (IsAligned(offset, 16) && IsAligned(size, 16)) {
+        D3D11_BOX box;
+        box.left = offset;
+        box.right = offset + size;
+        box.top = 0;
+        box.bottom = 1;
+        box.front = 0;
+        box.back = 1;
+        commandContext->UpdateSubresource1(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
+                                           &box, data,
+                                           /*SrcRowPitch=*/0,
+                                           /*SrcDepthPitch=*/0,
+                                           /*CopyFlags=*/D3D11_COPY_DISCARD);
+    }
+
+    // If the mD3d11NonConstantBuffer is null and copy offset and size are not 16 bytes
+    // aligned, we have to create a staging buffer for transfer the data to
+    // mD3d11ConstantBuffer.
     Ref<BufferBase> stagingBuffer;
     DAWN_TRY_ASSIGN(stagingBuffer, ToBackend(GetDevice())->GetStagingBuffer(commandContext, size));
 
