@@ -547,10 +547,11 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
         box.bottom = 1;
         box.front = 0;
         box.back = 1;
-        commandContext->UpdateSubresource(mD3d11NonConstantBuffer.Get(), /*DstSubresource=*/0, &box,
-                                          data,
-                                          /*SrcRowPitch=*/0,
-                                          /*SrcDepthPitch*/ 0);
+        commandContext->UpdateSubresource1(mD3d11NonConstantBuffer.Get(), /*DstSubresource=*/0,
+                                           &box, data,
+                                           /*SrcRowPitch=*/0,
+                                           /*SrcDepthPitch=*/0,
+                                           /*CopyFlags=*/0);
         if (!mD3d11ConstantBuffer) {
             return {};
         }
@@ -574,19 +575,19 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
 
     // For a full size write, UpdateSubresource() can be used to update mD3d11ConstantBuffer.
     if (size == GetSize() && offset == 0) {
-        if (size == mAllocatedSize) {
-            commandContext->UpdateSubresource(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
-                                              nullptr, data,
-                                              /*SrcRowPitch=*/size,
-                                              /*SrcDepthPitch*/ 0);
-        } else {
-            std::vector<uint8_t> allocatedData(mAllocatedSize, 0);
-            std::memcpy(allocatedData.data(), data, size);
-            commandContext->UpdateSubresource(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
-                                              nullptr, allocatedData.data(),
-                                              /*SrcRowPitch=*/mAllocatedSize,
-                                              /*SrcDepthPitch*/ 0);
+        size_t alignedSize = Align(size, 16);
+        DAWN_ASSERT(alignedSize <= GetAllocatedSize());
+        // Size must be aligned with 16 for UpdateSubresource1().
+        std::vector<uint8_t> alignedBuffer;
+        if (size != alignedSize) {
+            alignedBuffer.reserve(alignedSize);
+            std::memcpy(alignedBuffer.data(), data, size);
+            data = alignedBuffer.data();
         }
+        commandContext->UpdateSubresource1(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
+                                           nullptr, data,
+                                           /*SrcRowPitch=*/alignedSize,
+                                           /*SrcDepthPitch=*/0, /*CopyFlags=*/D3D11_COPY_DISCARD);
         return {};
     }
 
