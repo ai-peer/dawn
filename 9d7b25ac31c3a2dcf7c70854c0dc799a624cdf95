@@ -43,6 +43,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "0c91c16a_bb79181b",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-26T18:34:14Z",
+      "side": 1,
+      "message": "Just want to avoid clearing items in vector, since it will be overwrite by memcpy.",
+      "parentUuid": "325477b6_da48daa1",
+      "range": {
+        "startLine": 585,
+        "startChar": 26,
+        "endLine": 585,
+        "endChar": 33
+      },
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f51a2973_bd95bce7",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 9
