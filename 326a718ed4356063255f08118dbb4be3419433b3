@@ -63,6 +63,30 @@
       },
       "revId": "326a718ed4356063255f08118dbb4be3419433b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "33a24ad9_4f97d1c4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T20:10:32Z",
+      "side": 1,
+      "message": "Kokoro failed\n\nhttp://sponge2.corp.google.com/c8ab73d2-a063-406a-ba7d-55fa015d4e51",
+      "parentUuid": "6ad5ceba_c505f9a4",
+      "range": {
+        "startLine": 544,
+        "startChar": 8,
+        "endLine": 551,
+        "endChar": 10
+      },
+      "revId": "326a718ed4356063255f08118dbb4be3419433b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
