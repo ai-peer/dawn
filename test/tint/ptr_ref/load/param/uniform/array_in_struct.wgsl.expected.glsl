@@ -4,6 +4,10 @@ struct str {
   ivec4 arr[4];
 };
 
+struct S_block {
+  str inner;
+};
+
 layout(binding = 0, std140) uniform S_block_ubo {
   str inner;
 } S;

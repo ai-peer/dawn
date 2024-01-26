@@ -1,8 +1,16 @@
 #version 310 es
 
+struct a_block {
+  mat2x4 inner[4];
+};
+
 layout(binding = 0, std140) uniform a_block_ubo {
   mat2x4 inner[4];
 } a;
+
+struct s_block {
+  float inner;
+};
 
 layout(binding = 1, std430) buffer s_block_ssbo {
   float inner;

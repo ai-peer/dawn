@@ -6,6 +6,10 @@ ivec4 tint_insert_bits(ivec4 v, ivec4 n, uint offset, uint count) {
   return bitfieldInsert(v, n, int(s), int((e - s)));
 }
 
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -41,6 +45,10 @@ ivec4 tint_insert_bits(ivec4 v, ivec4 n, uint offset, uint count) {
   return bitfieldInsert(v, n, int(s), int((e - s)));
 }
 
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -69,6 +77,10 @@ ivec4 tint_insert_bits(ivec4 v, ivec4 n, uint offset, uint count) {
   uint e = min(32u, (s + count));
   return bitfieldInsert(v, n, int(s), int((e - s)));
 }
+
+struct prevent_dce_block {
+  ivec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;

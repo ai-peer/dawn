@@ -1,6 +1,10 @@
 #version 310 es
 #extension GL_AMD_gpu_shader_half_float : require
 
+struct tint_symbol_block {
+  float16_t inner;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   float16_t inner;
 } tint_symbol;

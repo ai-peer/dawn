@@ -10,6 +10,10 @@ struct S_nested {
 
 ivec4 src_private[4] = ivec4[4](ivec4(0, 0, 0, 0), ivec4(0, 0, 0, 0), ivec4(0, 0, 0, 0), ivec4(0, 0, 0, 0));
 shared ivec4 src_workgroup[4];
+struct src_uniform_block {
+  S inner;
+};
+
 layout(binding = 0, std140) uniform src_uniform_block_ubo {
   S inner;
 } src_uniform;
@@ -21,6 +25,10 @@ layout(binding = 1, std430) buffer src_uniform_block_ssbo {
 layout(binding = 2, std430) buffer src_uniform_block_ssbo_1 {
   S inner;
 } dst;
+
+struct dst_nested_block {
+  S_nested inner;
+};
 
 layout(binding = 3, std430) buffer dst_nested_block_ssbo {
   S_nested inner;

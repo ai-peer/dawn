@@ -14,6 +14,10 @@ struct tint_symbol_1 {
 };
 
 layout(location = 0) out int value;
+struct a_block {
+  int inner;
+};
+
 layout(binding = 0, std430) buffer a_block_ssbo {
   int inner;
 } a;

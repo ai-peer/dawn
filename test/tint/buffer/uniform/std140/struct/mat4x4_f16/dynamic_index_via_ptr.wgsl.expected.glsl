@@ -36,6 +36,14 @@ struct Outer_std140 {
   Inner_std140 a[4];
 };
 
+struct a_block {
+  Outer inner[4];
+};
+
+struct a_block_std140 {
+  Outer_std140 inner[4];
+};
+
 layout(binding = 0, std140) uniform a_block_std140_ubo {
   Outer_std140 inner[4];
 } a;

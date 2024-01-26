@@ -4,6 +4,10 @@ struct S {
   int a;
 };
 
+struct v_block {
+  S inner;
+};
+
 layout(binding = 0, std430) buffer v_block_ssbo {
   S inner;
 } v;

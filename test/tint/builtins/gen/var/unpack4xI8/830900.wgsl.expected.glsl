@@ -6,6 +6,10 @@ ivec4 tint_unpack_4xi8(uint a) {
   return (a_vec4i >> uvec4(24u));
 }
 
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -38,6 +42,10 @@ ivec4 tint_unpack_4xi8(uint a) {
   return (a_vec4i >> uvec4(24u));
 }
 
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -63,6 +71,10 @@ ivec4 tint_unpack_4xi8(uint a) {
   ivec4 a_vec4i = ivec4((a_vec4u << uvec4(24u, 16u, 8u, 0u)));
   return (a_vec4i >> uvec4(24u));
 }
+
+struct prevent_dce_block {
+  ivec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;

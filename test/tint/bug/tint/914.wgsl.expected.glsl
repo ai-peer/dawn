@@ -19,6 +19,10 @@ layout(binding = 2, std430) buffer Matrix_ssbo_2 {
   float numbers[];
 } resultMatrix;
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 3, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;

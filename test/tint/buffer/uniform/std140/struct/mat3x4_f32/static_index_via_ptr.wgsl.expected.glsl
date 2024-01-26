@@ -12,6 +12,10 @@ struct Outer {
   Inner a[4];
 };
 
+struct a_block {
+  Outer inner[4];
+};
+
 layout(binding = 0, std140) uniform a_block_ubo {
   Outer inner[4];
 } a;

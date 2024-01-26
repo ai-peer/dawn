@@ -1,5 +1,14 @@
 #version 310 es
 
+struct m_block {
+  mat2 inner;
+};
+
+struct m_block_std140 {
+  vec2 inner_0;
+  vec2 inner_1;
+};
+
 layout(binding = 0, std140) uniform m_block_std140_ubo {
   vec2 inner_0;
   vec2 inner_1;

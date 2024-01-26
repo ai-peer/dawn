@@ -1,7 +1,13 @@
 #version 310 es
 
+struct s_block {
+  vec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer s_block_ssbo {
   vec3 inner;
+  uint pad;
 } s;
 
 void tint_symbol() {

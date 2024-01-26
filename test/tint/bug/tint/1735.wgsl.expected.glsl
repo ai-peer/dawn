@@ -4,6 +4,10 @@ struct S {
   float f;
 };
 
+struct tint_symbol_block {
+  S inner;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   S inner;
 } tint_symbol;

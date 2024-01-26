@@ -1,7 +1,17 @@
 #version 310 es
 
+struct x_block {
+  int inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
+};
+
 layout(binding = 0, std140) uniform x_block_ubo {
   int inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 } x;
 
 void tint_symbol() {

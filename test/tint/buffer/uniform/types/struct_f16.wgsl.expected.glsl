@@ -24,6 +24,14 @@ struct S_std140 {
   Inner_std140 inner;
 };
 
+struct u_block {
+  S inner;
+};
+
+struct u_block_std140 {
+  S_std140 inner;
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   S_std140 inner;
 } u;

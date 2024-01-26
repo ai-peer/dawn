@@ -7,6 +7,10 @@ struct Constants {
   uint pad_2;
 };
 
+struct constants_block {
+  Constants inner;
+};
+
 layout(binding = 0, std140) uniform constants_block_ubo {
   Constants inner;
 } constants;

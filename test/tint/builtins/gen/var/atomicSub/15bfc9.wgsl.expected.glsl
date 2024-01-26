@@ -5,9 +5,17 @@ struct SB_RW {
   uint arg_0;
 };
 
+struct sb_rw_block {
+  SB_RW inner;
+};
+
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {
   SB_RW inner;
 } sb_rw;
+
+struct prevent_dce_block {
+  uint inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
@@ -33,9 +41,17 @@ struct SB_RW {
   uint arg_0;
 };
 
+struct sb_rw_block {
+  SB_RW inner;
+};
+
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {
   SB_RW inner;
 } sb_rw;
+
+struct prevent_dce_block {
+  uint inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;

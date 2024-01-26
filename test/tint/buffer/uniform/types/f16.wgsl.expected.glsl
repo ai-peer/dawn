@@ -1,12 +1,25 @@
 #version 310 es
 #extension GL_AMD_gpu_shader_half_float : require
 
+struct u_block {
+  float16_t inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
+};
+
 layout(binding = 0, std140) uniform u_block_ubo {
   float16_t inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 } u;
 
 layout(binding = 1, std430) buffer u_block_ssbo {
   float16_t inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 } s;
 
 void tint_symbol() {

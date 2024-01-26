@@ -9,8 +9,14 @@ vec3 tint_atanh(vec3 x) {
   return tint_select(atanh(x), vec3(0.0f), greaterThanEqual(x, vec3(1.0f)));
 }
 
+struct prevent_dce_block {
+  vec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec3 inner;
+  uint pad;
 } prevent_dce;
 
 void atanh_440cca() {
@@ -44,8 +50,14 @@ vec3 tint_atanh(vec3 x) {
   return tint_select(atanh(x), vec3(0.0f), greaterThanEqual(x, vec3(1.0f)));
 }
 
+struct prevent_dce_block {
+  vec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec3 inner;
+  uint pad;
 } prevent_dce;
 
 void atanh_440cca() {
@@ -73,8 +85,14 @@ vec3 tint_atanh(vec3 x) {
   return tint_select(atanh(x), vec3(0.0f), greaterThanEqual(x, vec3(1.0f)));
 }
 
+struct prevent_dce_block {
+  vec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec3 inner;
+  uint pad;
 } prevent_dce;
 
 void atanh_440cca() {

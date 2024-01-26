@@ -8,9 +8,21 @@ struct mat4x4_f16 {
   f16vec4 col3;
 };
 
+struct u_block {
+  f16mat4 inner[4];
+};
+
+struct u_block_std140 {
+  mat4x4_f16 inner[4];
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   mat4x4_f16 inner[4];
 } u;
+
+struct s_block {
+  float16_t inner;
+};
 
 layout(binding = 1, std430) buffer s_block_ssbo {
   float16_t inner;

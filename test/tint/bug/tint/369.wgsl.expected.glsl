@@ -13,6 +13,14 @@ struct S_std140 {
   vec2 m_1;
 };
 
+struct SSBO_block {
+  S inner;
+};
+
+struct SSBO_block_std140 {
+  S_std140 inner;
+};
+
 layout(binding = 0, std430) buffer SSBO_block_ssbo {
   S inner;
 } SSBO;

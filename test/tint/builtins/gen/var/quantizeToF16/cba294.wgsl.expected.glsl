@@ -7,6 +7,10 @@ vec4 tint_quantizeToF16(vec4 param_0) {
 }
 
 
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -40,6 +44,10 @@ vec4 tint_quantizeToF16(vec4 param_0) {
 }
 
 
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -66,6 +74,10 @@ vec4 tint_quantizeToF16(vec4 param_0) {
     unpackHalf2x16(packHalf2x16(param_0.zw)));
 }
 
+
+struct prevent_dce_block {
+  vec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;

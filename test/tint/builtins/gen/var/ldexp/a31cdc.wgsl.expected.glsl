@@ -1,7 +1,13 @@
 #version 310 es
 
+struct prevent_dce_block {
+  vec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec3 inner;
+  uint pad;
 } prevent_dce;
 
 void ldexp_a31cdc() {
@@ -27,8 +33,14 @@ void main() {
 #version 310 es
 precision highp float;
 
+struct prevent_dce_block {
+  vec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec3 inner;
+  uint pad;
 } prevent_dce;
 
 void ldexp_a31cdc() {
@@ -48,8 +60,14 @@ void main() {
 }
 #version 310 es
 
+struct prevent_dce_block {
+  vec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec3 inner;
+  uint pad;
 } prevent_dce;
 
 void ldexp_a31cdc() {

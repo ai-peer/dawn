@@ -7,6 +7,10 @@ struct Uniforms {
   mat4 modelViewProjectionMatrix;
 };
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 0, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;

@@ -20,6 +20,10 @@ struct tint_symbol {
   bool exchanged;
 };
 
+struct sb_rw_block {
+  SB_RW_atomic inner;
+};
+
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {
   SB_RW_atomic inner;
 } sb_rw;
@@ -69,6 +73,10 @@ struct SB_RW {
 struct tint_symbol {
   uint old_value;
   bool exchanged;
+};
+
+struct sb_rw_block {
+  SB_RW_atomic inner;
 };
 
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {

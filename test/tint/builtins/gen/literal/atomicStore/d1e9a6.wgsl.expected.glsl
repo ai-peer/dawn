@@ -5,6 +5,10 @@ struct SB_RW {
   int arg_0;
 };
 
+struct sb_rw_block {
+  SB_RW inner;
+};
+
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {
   SB_RW inner;
 } sb_rw;
@@ -25,6 +29,10 @@ void main() {
 
 struct SB_RW {
   int arg_0;
+};
+
+struct sb_rw_block {
+  SB_RW inner;
 };
 
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {

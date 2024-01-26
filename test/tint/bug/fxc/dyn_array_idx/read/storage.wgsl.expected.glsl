@@ -7,6 +7,10 @@ struct UBO {
   uint pad_2;
 };
 
+struct ubo_block {
+  UBO inner;
+};
+
 layout(binding = 0, std140) uniform ubo_block_ubo {
   UBO inner;
 } ubo;
@@ -15,12 +19,20 @@ struct Result {
   int tint_symbol;
 };
 
+struct result_block {
+  Result inner;
+};
+
 layout(binding = 2, std430) buffer result_block_ssbo {
   Result inner;
 } result;
 
 struct SSBO {
   int data[4];
+};
+
+struct ssbo_block {
+  SSBO inner;
 };
 
 layout(binding = 1, std430) buffer ssbo_block_ssbo {

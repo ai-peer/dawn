@@ -9,6 +9,10 @@ vec4 tint_textureSampleBaseClampToEdge(highp sampler2D t_s, vec2 coord) {
 }
 
 uniform highp sampler2D arg_0_arg_1;
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -43,6 +47,10 @@ vec4 tint_textureSampleBaseClampToEdge(highp sampler2D t_s, vec2 coord) {
 }
 
 uniform highp sampler2D arg_0_arg_1;
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -71,6 +79,10 @@ vec4 tint_textureSampleBaseClampToEdge(highp sampler2D t_s, vec2 coord) {
 }
 
 uniform highp sampler2D arg_0_arg_1;
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;

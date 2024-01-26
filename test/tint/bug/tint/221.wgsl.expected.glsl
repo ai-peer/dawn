@@ -5,6 +5,10 @@ struct Buf {
   uint data[50];
 };
 
+struct b_block {
+  Buf inner;
+};
+
 layout(binding = 0, std430) buffer b_block_ssbo {
   Buf inner;
 } b;

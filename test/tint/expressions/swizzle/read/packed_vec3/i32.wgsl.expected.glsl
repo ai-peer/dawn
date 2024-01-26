@@ -9,6 +9,10 @@ struct S {
   uint pad;
 };
 
+struct U_block {
+  S inner;
+};
+
 layout(binding = 0, std140) uniform U_block_ubo {
   S inner;
 } U;

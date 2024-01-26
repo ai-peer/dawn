@@ -14,6 +14,14 @@ struct S_std140 {
   f16vec3 vector;
 };
 
+struct data_block {
+  S inner;
+};
+
+struct data_block_std140 {
+  S_std140 inner;
+};
+
 layout(binding = 0, std140) uniform data_block_std140_ubo {
   S_std140 inner;
 } data;

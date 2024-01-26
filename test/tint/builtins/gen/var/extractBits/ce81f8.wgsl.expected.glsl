@@ -6,6 +6,10 @@ uint tint_extract_bits(uint v, uint offset, uint count) {
   return bitfieldExtract(v, int(s), int((e - s)));
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -40,6 +44,10 @@ uint tint_extract_bits(uint v, uint offset, uint count) {
   return bitfieldExtract(v, int(s), int((e - s)));
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -67,6 +75,10 @@ uint tint_extract_bits(uint v, uint offset, uint count) {
   uint e = min(32u, (s + count));
   return bitfieldExtract(v, int(s), int((e - s)));
 }
+
+struct prevent_dce_block {
+  uint inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;

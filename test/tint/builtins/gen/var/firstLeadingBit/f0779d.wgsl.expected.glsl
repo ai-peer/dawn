@@ -15,6 +15,10 @@ uint tint_first_leading_bit(uint v) {
   return uint((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -56,6 +60,10 @@ uint tint_first_leading_bit(uint v) {
   return uint((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -90,6 +98,10 @@ uint tint_first_leading_bit(uint v) {
   uint is_zero = ((x == 0u) ? 4294967295u : 0u);
   return uint((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
+
+struct prevent_dce_block {
+  uint inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;

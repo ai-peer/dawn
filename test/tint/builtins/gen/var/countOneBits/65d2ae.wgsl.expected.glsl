@@ -1,7 +1,13 @@
 #version 310 es
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void countOneBits_65d2ae() {
@@ -26,8 +32,14 @@ void main() {
 #version 310 es
 precision highp float;
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void countOneBits_65d2ae() {
@@ -46,8 +58,14 @@ void main() {
 }
 #version 310 es
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void countOneBits_65d2ae() {

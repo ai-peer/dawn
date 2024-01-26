@@ -61,6 +61,10 @@ layout(binding = 0, std430) buffer S_ssbo {
   Inner arr[];
 } sb;
 
+struct s_block {
+  int inner;
+};
+
 layout(binding = 1, std430) buffer s_block_ssbo {
   int inner;
 } s;

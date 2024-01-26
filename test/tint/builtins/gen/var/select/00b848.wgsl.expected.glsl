@@ -5,6 +5,10 @@ ivec2 tint_select(ivec2 param_0, ivec2 param_1, bvec2 param_2) {
 }
 
 
+struct prevent_dce_block {
+  ivec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec2 inner;
 } prevent_dce;
@@ -38,6 +42,10 @@ ivec2 tint_select(ivec2 param_0, ivec2 param_1, bvec2 param_2) {
 }
 
 
+struct prevent_dce_block {
+  ivec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec2 inner;
 } prevent_dce;
@@ -64,6 +72,10 @@ ivec2 tint_select(ivec2 param_0, ivec2 param_1, bvec2 param_2) {
     return ivec2(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1]);
 }
 
+
+struct prevent_dce_block {
+  ivec2 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec2 inner;

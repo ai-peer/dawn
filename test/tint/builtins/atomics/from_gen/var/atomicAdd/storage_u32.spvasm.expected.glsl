@@ -9,6 +9,10 @@ struct SB_RW {
   uint arg_0;
 };
 
+struct sb_rw_block {
+  SB_RW_atomic inner;
+};
+
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {
   SB_RW_atomic inner;
 } sb_rw;
@@ -44,6 +48,10 @@ struct SB_RW_atomic {
 
 struct SB_RW {
   uint arg_0;
+};
+
+struct sb_rw_block {
+  SB_RW_atomic inner;
 };
 
 layout(binding = 0, std430) buffer sb_rw_block_ssbo {

@@ -10,6 +10,10 @@ f16vec2 tint_atanh(f16vec2 x) {
   return tint_select(atanh(x), f16vec2(0.0hf), greaterThanEqual(x, f16vec2(1.0hf)));
 }
 
+struct prevent_dce_block {
+  f16vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;
 } prevent_dce;
@@ -46,6 +50,10 @@ f16vec2 tint_atanh(f16vec2 x) {
   return tint_select(atanh(x), f16vec2(0.0hf), greaterThanEqual(x, f16vec2(1.0hf)));
 }
 
+struct prevent_dce_block {
+  f16vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;
 } prevent_dce;
@@ -75,6 +83,10 @@ f16vec2 tint_select(f16vec2 param_0, f16vec2 param_1, bvec2 param_2) {
 f16vec2 tint_atanh(f16vec2 x) {
   return tint_select(atanh(x), f16vec2(0.0hf), greaterThanEqual(x, f16vec2(1.0hf)));
 }
+
+struct prevent_dce_block {
+  f16vec2 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;

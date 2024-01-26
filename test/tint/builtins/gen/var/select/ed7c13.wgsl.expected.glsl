@@ -6,6 +6,10 @@ f16vec2 tint_select(f16vec2 param_0, f16vec2 param_1, bvec2 param_2) {
 }
 
 
+struct prevent_dce_block {
+  f16vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;
 } prevent_dce;
@@ -40,6 +44,10 @@ f16vec2 tint_select(f16vec2 param_0, f16vec2 param_1, bvec2 param_2) {
 }
 
 
+struct prevent_dce_block {
+  f16vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;
 } prevent_dce;
@@ -67,6 +75,10 @@ f16vec2 tint_select(f16vec2 param_0, f16vec2 param_1, bvec2 param_2) {
     return f16vec2(param_2[0] ? param_1[0] : param_0[0], param_2[1] ? param_1[1] : param_0[1]);
 }
 
+
+struct prevent_dce_block {
+  f16vec2 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;

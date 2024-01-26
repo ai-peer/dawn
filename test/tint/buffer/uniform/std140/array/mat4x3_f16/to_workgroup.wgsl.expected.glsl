@@ -8,6 +8,14 @@ struct mat4x3_f16 {
   f16vec3 col3;
 };
 
+struct u_block {
+  f16mat4x3 inner[4];
+};
+
+struct u_block_std140 {
+  mat4x3_f16 inner[4];
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   mat4x3_f16 inner[4];
 } u;

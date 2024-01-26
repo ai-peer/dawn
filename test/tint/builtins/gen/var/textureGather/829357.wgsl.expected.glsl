@@ -4,6 +4,10 @@ SKIP: FAILED
 
 uniform highp samplerCubeArray arg_1_arg_2;
 
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -40,6 +44,10 @@ precision highp float;
 
 uniform highp samplerCubeArray arg_1_arg_2;
 
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -69,6 +77,10 @@ ERROR: 2 compilation errors.  No code generated.
 #version 310 es
 
 uniform highp samplerCubeArray arg_1_arg_2;
+
+struct prevent_dce_block {
+  vec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;

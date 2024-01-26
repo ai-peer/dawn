@@ -10,6 +10,10 @@ uint tint_dot4_u8_packed(uint a, uint b) {
   return tint_int_dot(a_u8, b_u8);
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -47,6 +51,10 @@ uint tint_dot4_u8_packed(uint a, uint b) {
   return tint_int_dot(a_u8, b_u8);
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -77,6 +85,10 @@ uint tint_dot4_u8_packed(uint a, uint b) {
   uvec4 b_u8 = ((uvec4(b) >> uvec4(24u, 16u, 8u, 0u)) & uvec4(255u));
   return tint_int_dot(a_u8, b_u8);
 }
+
+struct prevent_dce_block {
+  uint inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;

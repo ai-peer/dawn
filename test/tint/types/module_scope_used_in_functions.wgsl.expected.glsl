@@ -2,6 +2,10 @@
 
 float p = 0.0f;
 shared float w;
+struct uniforms_block {
+  vec2 inner;
+};
+
 layout(binding = 1, std430) buffer uniforms_block_ssbo {
   vec2 inner;
 } uniforms;

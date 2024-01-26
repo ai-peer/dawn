@@ -9,6 +9,10 @@ vec4 tint_atanh(vec4 x) {
   return tint_select(atanh(x), vec4(0.0f), greaterThanEqual(x, vec4(1.0f)));
 }
 
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -44,6 +48,10 @@ vec4 tint_atanh(vec4 x) {
   return tint_select(atanh(x), vec4(0.0f), greaterThanEqual(x, vec4(1.0f)));
 }
 
+struct prevent_dce_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;
 } prevent_dce;
@@ -72,6 +80,10 @@ vec4 tint_select(vec4 param_0, vec4 param_1, bvec4 param_2) {
 vec4 tint_atanh(vec4 x) {
   return tint_select(atanh(x), vec4(0.0f), greaterThanEqual(x, vec4(1.0f)));
 }
+
+struct prevent_dce_block {
+  vec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec4 inner;

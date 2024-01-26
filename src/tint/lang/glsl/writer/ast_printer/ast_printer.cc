@@ -202,8 +202,10 @@ SanitizedResult Sanitize(const Program& in,
         manager.Add<ast::transform::ZeroInitWorkgroupMemory>();
     }
 
-    manager.Add<ast::transform::OffsetFirstIndex>();
+    manager.Add<ast::transform::AddBlockAttribute>();
 
+    // AddBlockAttribute must come before OffsetFirstIndex
+    manager.Add<ast::transform::OffsetFirstIndex>();
     // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<ast::transform::CanonicalizeEntryPointIO>();
 
@@ -234,7 +236,6 @@ SanitizedResult Sanitize(const Program& in,
 
     manager.Add<ast::transform::PromoteInitializersToLet>();
     manager.Add<ast::transform::AddEmptyEntryPoint>();
-    manager.Add<ast::transform::AddBlockAttribute>();
 
     // Std140 must come after PromoteSideEffectsToDecl and before SimplifyPointers.
     manager.Add<ast::transform::Std140>();

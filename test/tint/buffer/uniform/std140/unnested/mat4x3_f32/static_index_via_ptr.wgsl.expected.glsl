@@ -1,5 +1,9 @@
 #version 310 es
 
+struct m_block {
+  mat4x3 inner;
+};
+
 layout(binding = 0, std140) uniform m_block_ubo {
   mat4x3 inner;
 } m;

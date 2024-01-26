@@ -6,6 +6,10 @@ f16vec2 tint_radians(f16vec2 param_0) {
 }
 
 
+struct prevent_dce_block {
+  f16vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;
 } prevent_dce;
@@ -38,6 +42,10 @@ f16vec2 tint_radians(f16vec2 param_0) {
 }
 
 
+struct prevent_dce_block {
+  f16vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;
 } prevent_dce;
@@ -63,6 +71,10 @@ f16vec2 tint_radians(f16vec2 param_0) {
   return param_0 * 0.01745329251994329547hf;
 }
 
+
+struct prevent_dce_block {
+  f16vec2 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec2 inner;

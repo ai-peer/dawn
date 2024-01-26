@@ -1,11 +1,18 @@
 #version 310 es
 
+struct tint_symbol_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   ivec3 inner;
+  uint pad;
 } tint_symbol;
 
 layout(binding = 1, std430) buffer tint_symbol_block_ssbo_1 {
   ivec3 inner;
+  uint pad;
 } tint_symbol_1;
 
 void tint_symbol_2() {

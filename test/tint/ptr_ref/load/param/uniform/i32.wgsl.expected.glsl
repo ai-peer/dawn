@@ -1,7 +1,17 @@
 #version 310 es
 
+struct S_block {
+  int inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
+};
+
 layout(binding = 0, std140) uniform S_block_ubo {
   int inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 } S;
 
 int func_S() {

@@ -35,6 +35,10 @@ struct Dbg {
   float value_f32_3;
 };
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 0, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;
@@ -54,6 +58,10 @@ layout(binding = 20, std430) buffer AU32s_ssbo {
 layout(binding = 21, std430) buffer AI32s_ssbo {
   int values[];
 } LUT;
+
+struct dbg_block {
+  Dbg inner;
+};
 
 layout(binding = 50, std430) buffer dbg_block_ssbo {
   Dbg inner;
@@ -147,6 +155,10 @@ struct Dbg {
   float value_f32_3;
 };
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 0, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;
@@ -166,6 +178,10 @@ layout(binding = 20, std430) buffer AU32s_ssbo {
 layout(binding = 21, std430) buffer AI32s_ssbo {
   int values[];
 } LUT;
+
+struct dbg_block {
+  Dbg inner;
+};
 
 layout(binding = 50, std430) buffer dbg_block_ssbo {
   Dbg inner;
@@ -238,6 +254,10 @@ struct Dbg {
   float value_f32_3;
 };
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 0, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;
@@ -257,6 +277,10 @@ layout(binding = 20, std430) buffer AU32s_ssbo {
 layout(binding = 21, std430) buffer AI32s_ssbo {
   int values[];
 } LUT;
+
+struct dbg_block {
+  Dbg inner;
+};
 
 layout(binding = 50, std430) buffer dbg_block_ssbo {
   Dbg inner;

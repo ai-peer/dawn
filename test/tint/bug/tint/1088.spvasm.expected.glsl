@@ -22,6 +22,10 @@ struct LeftOver {
 };
 
 vec3 position_1 = vec3(0.0f, 0.0f, 0.0f);
+struct x_14_block {
+  LeftOver inner;
+};
+
 layout(binding = 2, std140) uniform x_14_block_ubo {
   LeftOver inner;
 } x_14;

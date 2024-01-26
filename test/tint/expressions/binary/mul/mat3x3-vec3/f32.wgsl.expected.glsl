@@ -7,6 +7,10 @@ struct S {
   uint pad;
 };
 
+struct data_block {
+  S inner;
+};
+
 layout(binding = 0, std140) uniform data_block_ubo {
   S inner;
 } data;

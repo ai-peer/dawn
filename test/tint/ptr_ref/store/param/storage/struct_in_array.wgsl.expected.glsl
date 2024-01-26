@@ -4,6 +4,10 @@ struct str {
   int i;
 };
 
+struct S_block {
+  str inner[4];
+};
+
 layout(binding = 0, std430) buffer S_block_ssbo {
   str inner[4];
 } S;

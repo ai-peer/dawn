@@ -1,5 +1,9 @@
 #version 310 es
 
+struct u_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std140) uniform u_block_ubo {
   uvec4 inner;
 } u;

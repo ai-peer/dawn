@@ -3,6 +3,10 @@ SKIP: FAILED
 #version 310 es
 
 layout(rg32i) uniform highp readonly iimage2D arg_0;
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -36,6 +40,10 @@ ERROR: 2 compilation errors.  No code generated.
 precision highp float;
 
 layout(rg32i) uniform highp readonly iimage2D arg_0;
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -63,6 +71,10 @@ ERROR: 2 compilation errors.  No code generated.
 #version 310 es
 
 layout(rg32i) uniform highp readonly iimage2D arg_0;
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;

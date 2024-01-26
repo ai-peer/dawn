@@ -2,6 +2,10 @@
 
 uniform highp isampler2DArray arg_1_arg_2;
 
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -31,6 +35,10 @@ precision highp float;
 
 uniform highp isampler2DArray arg_1_arg_2;
 
+struct prevent_dce_block {
+  ivec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;
 } prevent_dce;
@@ -53,6 +61,10 @@ void main() {
 #version 310 es
 
 uniform highp isampler2DArray arg_1_arg_2;
+
+struct prevent_dce_block {
+  ivec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec4 inner;

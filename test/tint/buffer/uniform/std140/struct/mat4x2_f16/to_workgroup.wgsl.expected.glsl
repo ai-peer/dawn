@@ -68,6 +68,14 @@ struct S_std140 {
   uint pad_25;
 };
 
+struct u_block {
+  S inner[4];
+};
+
+struct u_block_std140 {
+  S_std140 inner[4];
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   S_std140 inner[4];
 } u;

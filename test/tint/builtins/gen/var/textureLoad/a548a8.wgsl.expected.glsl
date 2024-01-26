@@ -3,6 +3,10 @@ SKIP: FAILED
 #version 310 es
 
 layout(rgba8ui) uniform highp writeonly uimage2D arg_0;
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -27,8 +31,8 @@ void main() {
   return;
 }
 error: Error parsing GLSL shader:
-ERROR: 0:10: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
-ERROR: 0:10: '' : compilation terminated 
+ERROR: 0:14: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
+ERROR: 0:14: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
 
 
@@ -37,6 +41,10 @@ ERROR: 2 compilation errors.  No code generated.
 precision highp float;
 
 layout(rgba8ui) uniform highp writeonly uimage2D arg_0;
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -56,8 +64,8 @@ void main() {
   return;
 }
 error: Error parsing GLSL shader:
-ERROR: 0:11: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
-ERROR: 0:11: '' : compilation terminated 
+ERROR: 0:15: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
+ERROR: 0:15: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
 
 
@@ -65,6 +73,10 @@ ERROR: 2 compilation errors.  No code generated.
 #version 310 es
 
 layout(rgba8ui) uniform highp writeonly uimage2D arg_0;
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -85,8 +97,8 @@ void main() {
   return;
 }
 error: Error parsing GLSL shader:
-ERROR: 0:10: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
-ERROR: 0:10: '' : compilation terminated 
+ERROR: 0:14: 'writeonly' : argument cannot drop memory qualifier when passed to formal parameter 
+ERROR: 0:14: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
 
 

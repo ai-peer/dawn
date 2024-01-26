@@ -1,7 +1,17 @@
 #version 310 es
 
+struct u_block {
+  int inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
+};
+
 layout(binding = 0, std140) uniform u_block_ubo {
   int inner;
+  uint pad;
+  uint pad_1;
+  uint pad_2;
 } u;
 
 int f() {

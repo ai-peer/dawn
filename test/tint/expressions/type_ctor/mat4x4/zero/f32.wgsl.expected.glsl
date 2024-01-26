@@ -1,6 +1,10 @@
 #version 310 es
 
 mat4 m = mat4(vec4(0.0f), vec4(0.0f), vec4(0.0f), vec4(0.0f));
+struct tint_symbol_block {
+  mat4 inner;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   mat4 inner;
 } tint_symbol;

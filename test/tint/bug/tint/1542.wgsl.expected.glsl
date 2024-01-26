@@ -5,6 +5,10 @@ struct UniformBuffer {
   uint pad;
 };
 
+struct u_input_block {
+  UniformBuffer inner;
+};
+
 layout(binding = 0, std140) uniform u_input_block_ubo {
   UniformBuffer inner;
 } u_input;

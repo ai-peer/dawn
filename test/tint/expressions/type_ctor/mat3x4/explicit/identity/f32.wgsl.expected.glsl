@@ -1,6 +1,10 @@
 #version 310 es
 
 mat3x4 m = mat3x4(vec4(0.0f, 1.0f, 2.0f, 3.0f), vec4(4.0f, 5.0f, 6.0f, 7.0f), vec4(8.0f, 9.0f, 10.0f, 11.0f));
+struct tint_symbol_block {
+  mat3x4 inner;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   mat3x4 inner;
 } tint_symbol;

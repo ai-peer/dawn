@@ -1,6 +1,10 @@
 #version 310 es
 
 uniform highp usampler2DMS arg_0_1;
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -29,6 +33,10 @@ void main() {
 precision highp float;
 
 uniform highp usampler2DMS arg_0_1;
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -51,6 +59,10 @@ void main() {
 #version 310 es
 
 uniform highp usampler2DMS arg_0_1;
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;

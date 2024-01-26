@@ -4,6 +4,10 @@ SKIP: FAILED
 
 uniform highp sampler2DArrayShadow arg_0_arg_1;
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -30,9 +34,9 @@ void main() {
   return;
 }
 error: Error parsing GLSL shader:
-ERROR: 0:13: 'textureLod(..., float lod)' : required extension not requested: GL_EXT_texture_shadow_lod
-ERROR: 0:13: 'textureLod(..., float lod)' : GL_EXT_texture_shadow_lod not supported for this ES version 
-ERROR: 0:13: '' : compilation terminated 
+ERROR: 0:17: 'textureLod(..., float lod)' : required extension not requested: GL_EXT_texture_shadow_lod
+ERROR: 0:17: 'textureLod(..., float lod)' : GL_EXT_texture_shadow_lod not supported for this ES version 
+ERROR: 0:17: '' : compilation terminated 
 ERROR: 3 compilation errors.  No code generated.
 
 
@@ -41,6 +45,10 @@ ERROR: 3 compilation errors.  No code generated.
 precision highp float;
 
 uniform highp sampler2DArrayShadow arg_0_arg_1;
+
+struct prevent_dce_block {
+  float inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
@@ -63,9 +71,9 @@ void main() {
   return;
 }
 error: Error parsing GLSL shader:
-ERROR: 0:14: 'textureLod(..., float lod)' : required extension not requested: GL_EXT_texture_shadow_lod
-ERROR: 0:14: 'textureLod(..., float lod)' : GL_EXT_texture_shadow_lod not supported for this ES version 
-ERROR: 0:14: '' : compilation terminated 
+ERROR: 0:18: 'textureLod(..., float lod)' : required extension not requested: GL_EXT_texture_shadow_lod
+ERROR: 0:18: 'textureLod(..., float lod)' : GL_EXT_texture_shadow_lod not supported for this ES version 
+ERROR: 0:18: '' : compilation terminated 
 ERROR: 3 compilation errors.  No code generated.
 
 
@@ -73,6 +81,10 @@ ERROR: 3 compilation errors.  No code generated.
 #version 310 es
 
 uniform highp sampler2DArrayShadow arg_0_arg_1;
+
+struct prevent_dce_block {
+  float inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
@@ -96,9 +108,9 @@ void main() {
   return;
 }
 error: Error parsing GLSL shader:
-ERROR: 0:13: 'textureLod(..., float lod)' : required extension not requested: GL_EXT_texture_shadow_lod
-ERROR: 0:13: 'textureLod(..., float lod)' : GL_EXT_texture_shadow_lod not supported for this ES version 
-ERROR: 0:13: '' : compilation terminated 
+ERROR: 0:17: 'textureLod(..., float lod)' : required extension not requested: GL_EXT_texture_shadow_lod
+ERROR: 0:17: 'textureLod(..., float lod)' : GL_EXT_texture_shadow_lod not supported for this ES version 
+ERROR: 0:17: '' : compilation terminated 
 ERROR: 3 compilation errors.  No code generated.
 
 

@@ -28,6 +28,10 @@ struct LeftOver {
   uint pad_2;
 };
 
+struct x_20_block {
+  LeftOver inner;
+};
+
 layout(binding = 9, std140) uniform x_20_block_ubo {
   LeftOver inner;
 } x_20;

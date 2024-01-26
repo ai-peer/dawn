@@ -18,9 +18,25 @@ struct vertexUniformBuffer2_std140 {
   vec2 transform2_1;
 };
 
+struct x_20_block {
+  vertexUniformBuffer1 inner;
+};
+
+struct x_20_block_std140 {
+  vertexUniformBuffer1_std140 inner;
+};
+
 layout(binding = 0, std140) uniform x_20_block_std140_ubo {
   vertexUniformBuffer1_std140 inner;
 } x_20;
+
+struct x_26_block {
+  vertexUniformBuffer2 inner;
+};
+
+struct x_26_block_std140 {
+  vertexUniformBuffer2_std140 inner;
+};
 
 layout(binding = 0, std140) uniform x_26_block_std140_ubo {
   vertexUniformBuffer2_std140 inner;

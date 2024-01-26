@@ -24,6 +24,10 @@ struct S {
   uint pad_17;
 };
 
+struct u_block {
+  S inner[4];
+};
+
 layout(binding = 0, std140) uniform u_block_ubo {
   S inner[4];
 } u;

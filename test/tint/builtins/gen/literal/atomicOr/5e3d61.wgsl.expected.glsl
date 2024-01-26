@@ -1,6 +1,10 @@
 #version 310 es
 
 shared uint arg_0;
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;

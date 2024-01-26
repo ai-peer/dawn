@@ -45,6 +45,14 @@ struct ExternalTextureParams_std140 {
   uint pad_3;
 };
 
+struct ext_tex_params_block {
+  ExternalTextureParams inner;
+};
+
+struct ext_tex_params_block_std140 {
+  ExternalTextureParams_std140 inner;
+};
+
 layout(binding = 4, std140) uniform ext_tex_params_block_std140_ubo {
   ExternalTextureParams_std140 inner;
 } ext_tex_params;

@@ -6,8 +6,14 @@ ivec3 tint_extract_bits(ivec3 v, uint offset, uint count) {
   return bitfieldExtract(v, int(s), int((e - s)));
 }
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void extractBits_e04f5d() {
@@ -40,8 +46,14 @@ ivec3 tint_extract_bits(ivec3 v, uint offset, uint count) {
   return bitfieldExtract(v, int(s), int((e - s)));
 }
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void extractBits_e04f5d() {
@@ -68,8 +80,14 @@ ivec3 tint_extract_bits(ivec3 v, uint offset, uint count) {
   return bitfieldExtract(v, int(s), int((e - s)));
 }
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void extractBits_e04f5d() {

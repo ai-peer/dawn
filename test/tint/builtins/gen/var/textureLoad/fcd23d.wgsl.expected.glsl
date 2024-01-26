@@ -1,6 +1,10 @@
 #version 310 es
 
 uniform highp sampler2DMS arg_0_1;
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -29,6 +33,10 @@ void main() {
 precision highp float;
 
 uniform highp sampler2DMS arg_0_1;
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -51,6 +59,10 @@ void main() {
 #version 310 es
 
 uniform highp sampler2DMS arg_0_1;
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;

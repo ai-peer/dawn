@@ -1,5 +1,9 @@
 #version 310 es
 
+struct tint_symbol_block {
+  uint inner[2];
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   uint inner[2];
 } tint_symbol;

@@ -307,6 +307,10 @@ struct Data {
   mat2x3 b;
 };
 
+struct data_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
@@ -360,6 +364,10 @@ struct Data {
   mat4x3 a;
 };
 
+struct data_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
@@ -403,6 +411,10 @@ precision highp float;
 struct Data {
   float z;
   int a[5];
+};
+
+struct data_block {
+  Data inner;
 };
 
 layout(binding = 0, std430) buffer data_block_ssbo {
@@ -453,6 +465,10 @@ struct Data {
   int a[5];
 };
 
+struct data_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
@@ -498,6 +514,10 @@ precision highp float;
 struct Data {
   float z;
   int a[5];
+};
+
+struct data_block {
+  Data inner;
 };
 
 layout(binding = 0, std430) buffer data_block_ssbo {
@@ -559,6 +579,10 @@ struct Data {
   Inner c[4];
 };
 
+struct data_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
@@ -618,6 +642,10 @@ struct Inner {
 
 struct Data {
   Inner c[4];
+};
+
+struct data_block {
+  Data inner;
 };
 
 layout(binding = 0, std430) buffer data_block_ssbo {
@@ -682,6 +710,10 @@ struct Data {
   Inner c[4];
 };
 
+struct data_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
@@ -741,6 +773,10 @@ struct Inner {
 
 struct Data {
   Inner c[4];
+};
+
+struct data_block {
+  Data inner;
 };
 
 layout(binding = 0, std430) buffer data_block_ssbo {
@@ -803,6 +839,10 @@ struct Data {
   Inner c[4];
 };
 
+struct data_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer data_block_ssbo {
   Data inner;
 } data;
@@ -862,6 +902,10 @@ struct Inner {
 
 struct Data {
   Inner c[4];
+};
+
+struct data_block {
+  Data inner;
 };
 
 layout(binding = 0, std430) buffer data_block_ssbo {

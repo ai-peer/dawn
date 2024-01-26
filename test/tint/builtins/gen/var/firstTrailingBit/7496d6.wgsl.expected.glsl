@@ -20,8 +20,14 @@ ivec3 tint_first_trailing_bit(ivec3 v) {
   return ivec3((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void firstTrailingBit_7496d6() {
@@ -66,8 +72,14 @@ ivec3 tint_first_trailing_bit(ivec3 v) {
   return ivec3((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void firstTrailingBit_7496d6() {
@@ -106,8 +118,14 @@ ivec3 tint_first_trailing_bit(ivec3 v) {
   return ivec3((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  ivec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   ivec3 inner;
+  uint pad;
 } prevent_dce;
 
 void firstTrailingBit_7496d6() {

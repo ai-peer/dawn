@@ -1,5 +1,9 @@
 #version 310 es
 
+struct S_block {
+  vec4 inner;
+};
+
 layout(binding = 0, std140) uniform S_block_ubo {
   vec4 inner;
 } S;

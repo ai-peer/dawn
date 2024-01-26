@@ -15,6 +15,10 @@ int tint_count_leading_zeros(int v) {
   return int((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
+struct prevent_dce_block {
+  int inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   int inner;
 } prevent_dce;
@@ -56,6 +60,10 @@ int tint_count_leading_zeros(int v) {
   return int((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
 
+struct prevent_dce_block {
+  int inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   int inner;
 } prevent_dce;
@@ -90,6 +98,10 @@ int tint_count_leading_zeros(int v) {
   uint is_zero = ((x == 0u) ? 1u : 0u);
   return int((((((b16 | b8) | b4) | b2) | b1) + is_zero));
 }
+
+struct prevent_dce_block {
+  int inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   int inner;

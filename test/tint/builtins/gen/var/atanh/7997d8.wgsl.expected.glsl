@@ -4,6 +4,10 @@ float tint_atanh(float x) {
   return ((x >= 1.0f) ? 0.0f : atanh(x));
 }
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -34,6 +38,10 @@ float tint_atanh(float x) {
   return ((x >= 1.0f) ? 0.0f : atanh(x));
 }
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -57,6 +65,10 @@ void main() {
 float tint_atanh(float x) {
   return ((x >= 1.0f) ? 0.0f : atanh(x));
 }
+
+struct prevent_dce_block {
+  float inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;

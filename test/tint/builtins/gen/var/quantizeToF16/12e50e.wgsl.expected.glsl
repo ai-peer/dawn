@@ -5,6 +5,10 @@ float tint_quantizeToF16(float param_0) {
 }
 
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -36,6 +40,10 @@ float tint_quantizeToF16(float param_0) {
 }
 
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -60,6 +68,10 @@ float tint_quantizeToF16(float param_0) {
   return unpackHalf2x16(packHalf2x16(vec2(param_0))).x;
 }
 
+
+struct prevent_dce_block {
+  float inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;

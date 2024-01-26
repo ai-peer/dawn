@@ -11,9 +11,17 @@ struct atomic_compare_exchange_result_i32 {
 };
 
 
+struct a_u32_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer a_u32_block_ssbo {
   uint inner;
 } a_u32;
+
+struct a_i32_block {
+  int inner;
+};
 
 layout(binding = 1, std430) buffer a_i32_block_ssbo {
   int inner;

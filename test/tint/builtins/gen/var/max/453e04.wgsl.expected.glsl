@@ -1,5 +1,9 @@
 #version 310 es
 
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -27,6 +31,10 @@ void main() {
 #version 310 es
 precision highp float;
 
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -47,6 +55,10 @@ void main() {
   return;
 }
 #version 310 es
+
+struct prevent_dce_block {
+  uvec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;

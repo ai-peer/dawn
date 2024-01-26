@@ -20,6 +20,10 @@ uvec2 tint_first_leading_bit(uvec2 v) {
   return uvec2((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  uvec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec2 inner;
 } prevent_dce;
@@ -66,6 +70,10 @@ uvec2 tint_first_leading_bit(uvec2 v) {
   return uvec2((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  uvec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec2 inner;
 } prevent_dce;
@@ -105,6 +113,10 @@ uvec2 tint_first_leading_bit(uvec2 v) {
   uvec2 is_zero = tint_select(uvec2(0u), uvec2(4294967295u), equal(x, uvec2(0u)));
   return uvec2((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
+
+struct prevent_dce_block {
+  uvec2 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec2 inner;

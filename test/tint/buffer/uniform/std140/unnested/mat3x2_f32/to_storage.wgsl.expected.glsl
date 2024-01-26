@@ -1,13 +1,31 @@
 #version 310 es
 
+struct u_block {
+  mat3x2 inner;
+  uint pad;
+  uint pad_1;
+};
+
+struct u_block_std140 {
+  vec2 inner_0;
+  vec2 inner_1;
+  vec2 inner_2;
+  uint pad;
+  uint pad_1;
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   vec2 inner_0;
   vec2 inner_1;
   vec2 inner_2;
+  uint pad;
+  uint pad_1;
 } u;
 
 layout(binding = 1, std430) buffer u_block_ssbo {
   mat3x2 inner;
+  uint pad;
+  uint pad_1;
 } s;
 
 mat3x2 load_u_inner() {

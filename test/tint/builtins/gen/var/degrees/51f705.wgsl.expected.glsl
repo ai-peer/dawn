@@ -5,6 +5,10 @@ float tint_degrees(float param_0) {
 }
 
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -36,6 +40,10 @@ float tint_degrees(float param_0) {
 }
 
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -60,6 +68,10 @@ float tint_degrees(float param_0) {
   return param_0 * 57.29577951308232286465f;
 }
 
+
+struct prevent_dce_block {
+  float inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;

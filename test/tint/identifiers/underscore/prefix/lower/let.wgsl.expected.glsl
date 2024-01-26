@@ -1,5 +1,9 @@
 #version 310 es
 
+struct s_block {
+  int inner;
+};
+
 layout(binding = 0, std430) buffer s_block_ssbo {
   int inner;
 } s;

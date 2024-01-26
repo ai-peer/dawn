@@ -4,6 +4,10 @@ vec2 tint_saturate(vec2 v) {
   return clamp(v, vec2(0.0f), vec2(1.0f));
 }
 
+struct prevent_dce_block {
+  vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec2 inner;
 } prevent_dce;
@@ -34,6 +38,10 @@ vec2 tint_saturate(vec2 v) {
   return clamp(v, vec2(0.0f), vec2(1.0f));
 }
 
+struct prevent_dce_block {
+  vec2 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec2 inner;
 } prevent_dce;
@@ -57,6 +65,10 @@ void main() {
 vec2 tint_saturate(vec2 v) {
   return clamp(v, vec2(0.0f), vec2(1.0f));
 }
+
+struct prevent_dce_block {
+  vec2 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   vec2 inner;

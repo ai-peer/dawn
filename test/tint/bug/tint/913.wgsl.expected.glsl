@@ -12,6 +12,10 @@ layout(binding = 2, std430) buffer OutputBuf_ssbo {
   uint result[];
 } tint_symbol;
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 3, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;

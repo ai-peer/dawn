@@ -5,6 +5,10 @@ struct S {
   mat3 matrix_normal;
 };
 
+struct tint_symbol_block {
+  S inner;
+};
+
 layout(binding = 0, std140) uniform tint_symbol_block_ubo {
   S inner;
 } tint_symbol;

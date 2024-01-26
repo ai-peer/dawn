@@ -6,6 +6,10 @@ struct Uniforms {
   vec2 u_offset;
 };
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 0, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;

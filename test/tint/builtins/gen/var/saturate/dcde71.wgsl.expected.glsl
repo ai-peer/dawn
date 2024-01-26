@@ -5,6 +5,10 @@ f16vec4 tint_saturate(f16vec4 v) {
   return clamp(v, f16vec4(0.0hf), f16vec4(1.0hf));
 }
 
+struct prevent_dce_block {
+  f16vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec4 inner;
 } prevent_dce;
@@ -36,6 +40,10 @@ f16vec4 tint_saturate(f16vec4 v) {
   return clamp(v, f16vec4(0.0hf), f16vec4(1.0hf));
 }
 
+struct prevent_dce_block {
+  f16vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec4 inner;
 } prevent_dce;
@@ -60,6 +68,10 @@ void main() {
 f16vec4 tint_saturate(f16vec4 v) {
   return clamp(v, f16vec4(0.0hf), f16vec4(1.0hf));
 }
+
+struct prevent_dce_block {
+  f16vec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec4 inner;

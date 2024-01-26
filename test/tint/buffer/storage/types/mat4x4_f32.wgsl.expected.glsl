@@ -1,5 +1,9 @@
 #version 310 es
 
+struct tint_symbol_block {
+  mat4 inner;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   mat4 inner;
 } tint_symbol;

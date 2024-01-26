@@ -479,6 +479,10 @@ struct Data {
   float b;
 };
 
+struct coord_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer coord_block_ssbo {
   Data inner;
 } coord;
@@ -527,6 +531,10 @@ struct Data {
   float b;
 };
 
+struct coord_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer coord_block_ssbo {
   Data inner;
 } coord;
@@ -572,6 +580,10 @@ struct Data {
   float b;
 };
 
+struct coord_block {
+  Data inner;
+};
+
 layout(binding = 0, std430) buffer coord_block_ssbo {
   Data inner;
 } coord;
@@ -615,6 +627,10 @@ precision highp float;
 struct Data {
   int a;
   float b;
+};
+
+struct coord_block {
+  Data inner;
 };
 
 layout(binding = 0, std430) buffer coord_block_ssbo {
@@ -708,6 +724,10 @@ precision highp float;
 
 struct S {
   float x;
+};
+
+struct coord_block {
+  S inner;
 };
 
 layout(binding = 0, std430) buffer coord_block_ssbo {
@@ -931,6 +951,10 @@ TEST_F(GlslASTPrinterTest_Function, Emit_Multiple_EntryPoint_With_Same_ModuleVar
 
 struct Data {
   float d;
+};
+
+struct data_block {
+  Data inner;
 };
 
 layout(binding = 0, std430) buffer data_block_ssbo {

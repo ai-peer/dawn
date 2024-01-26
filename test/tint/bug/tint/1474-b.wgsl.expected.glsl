@@ -4,6 +4,10 @@
 
 #version 310 es
 
+struct non_uniform_value_block {
+  int inner;
+};
+
 layout(binding = 0, std430) buffer non_uniform_value_block_ssbo {
   int inner;
 } non_uniform_value;

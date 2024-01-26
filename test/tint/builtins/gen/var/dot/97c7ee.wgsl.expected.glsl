@@ -4,6 +4,10 @@ uint tint_int_dot(uvec2 a, uvec2 b) {
   return a[0]*b[0] + a[1]*b[1];
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -35,6 +39,10 @@ uint tint_int_dot(uvec2 a, uvec2 b) {
   return a[0]*b[0] + a[1]*b[1];
 }
 
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -59,6 +67,10 @@ void main() {
 uint tint_int_dot(uvec2 a, uvec2 b) {
   return a[0]*b[0] + a[1]*b[1];
 }
+
+struct prevent_dce_block {
+  uint inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;

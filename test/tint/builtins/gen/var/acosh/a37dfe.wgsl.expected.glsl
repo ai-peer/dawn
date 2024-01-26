@@ -5,6 +5,10 @@ float16_t tint_acosh(float16_t x) {
   return ((x < 1.0hf) ? 0.0hf : acosh(x));
 }
 
+struct prevent_dce_block {
+  float16_t inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float16_t inner;
 } prevent_dce;
@@ -36,6 +40,10 @@ float16_t tint_acosh(float16_t x) {
   return ((x < 1.0hf) ? 0.0hf : acosh(x));
 }
 
+struct prevent_dce_block {
+  float16_t inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float16_t inner;
 } prevent_dce;
@@ -60,6 +68,10 @@ void main() {
 float16_t tint_acosh(float16_t x) {
   return ((x < 1.0hf) ? 0.0hf : acosh(x));
 }
+
+struct prevent_dce_block {
+  float16_t inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float16_t inner;

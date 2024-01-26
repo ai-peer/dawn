@@ -13,9 +13,17 @@ struct h {
   uint a;
 };
 
+struct i_block {
+  g inner;
+};
+
 layout(binding = 0, std140) uniform i_block_ubo {
   g inner;
 } i;
+
+struct j_block {
+  h inner;
+};
 
 layout(binding = 1, std430) buffer j_block_ssbo {
   h inner;

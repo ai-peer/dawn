@@ -5,6 +5,10 @@ precision highp float;
 
 uniform highp sampler2DArrayShadow arg_0_arg_1;
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;
@@ -26,8 +30,8 @@ void main() {
   return;
 }
 error: Error parsing GLSL shader:
-ERROR: 0:14: 'sampler' : TextureOffset does not support sampler2DArrayShadow :  ES Profile
-ERROR: 0:14: '' : compilation terminated 
+ERROR: 0:18: 'sampler' : TextureOffset does not support sampler2DArrayShadow :  ES Profile
+ERROR: 0:18: '' : compilation terminated 
 ERROR: 2 compilation errors.  No code generated.
 
 

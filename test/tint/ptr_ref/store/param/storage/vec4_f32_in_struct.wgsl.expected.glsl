@@ -4,6 +4,10 @@ struct str {
   vec4 i;
 };
 
+struct S_block {
+  str inner;
+};
+
 layout(binding = 0, std430) buffer S_block_ssbo {
   str inner;
 } S;

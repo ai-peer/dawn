@@ -1,6 +1,10 @@
 #version 310 es
 #extension GL_AMD_gpu_shader_half_float : require
 
+struct prevent_dce_block {
+  f16mat2x3 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16mat2x3 inner;
 } prevent_dce;
@@ -32,6 +36,10 @@ void main() {
 #extension GL_AMD_gpu_shader_half_float : require
 precision highp float;
 
+struct prevent_dce_block {
+  f16mat2x3 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16mat2x3 inner;
 } prevent_dce;
@@ -56,6 +64,10 @@ void main() {
 }
 #version 310 es
 #extension GL_AMD_gpu_shader_half_float : require
+
+struct prevent_dce_block {
+  f16mat2x3 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16mat2x3 inner;

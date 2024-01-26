@@ -1,5 +1,9 @@
 #version 310 es
 
+struct S_block {
+  mat2x4 inner;
+};
+
 layout(binding = 0, std430) buffer S_block_ssbo {
   mat2x4 inner;
 } S;

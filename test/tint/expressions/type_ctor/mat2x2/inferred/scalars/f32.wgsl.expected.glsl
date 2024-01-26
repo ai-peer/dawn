@@ -1,6 +1,10 @@
 #version 310 es
 
 mat2 m = mat2(vec2(0.0f, 1.0f), vec2(2.0f, 3.0f));
+struct tint_symbol_block {
+  mat2 inner;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   mat2 inner;
 } tint_symbol;

@@ -1,6 +1,10 @@
 #version 310 es
 
 layout(rgba16f) uniform highp readonly image2D arg_0;
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -27,6 +31,10 @@ void main() {
 precision highp float;
 
 layout(rgba16f) uniform highp readonly image2D arg_0;
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;
@@ -47,6 +55,10 @@ void main() {
 #version 310 es
 
 layout(rgba16f) uniform highp readonly image2D arg_0;
+struct prevent_dce_block {
+  uint inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uint inner;
 } prevent_dce;

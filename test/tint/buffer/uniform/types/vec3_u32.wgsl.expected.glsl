@@ -1,11 +1,18 @@
 #version 310 es
 
+struct u_block {
+  uvec3 inner;
+  uint pad;
+};
+
 layout(binding = 0, std140) uniform u_block_ubo {
   uvec3 inner;
+  uint pad;
 } u;
 
 layout(binding = 1, std430) buffer u_block_ssbo {
   uvec3 inner;
+  uint pad;
 } s;
 
 void tint_symbol() {

@@ -8,6 +8,10 @@ float tint_workgroupUniformLoad_arg_0() {
   return result;
 }
 
+struct prevent_dce_block {
+  float inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float inner;
 } prevent_dce;

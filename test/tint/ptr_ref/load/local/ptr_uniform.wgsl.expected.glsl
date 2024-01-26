@@ -7,6 +7,10 @@ struct S {
   uint pad_2;
 };
 
+struct v_block {
+  S inner;
+};
+
 layout(binding = 0, std140) uniform v_block_ubo {
   S inner;
 } v;

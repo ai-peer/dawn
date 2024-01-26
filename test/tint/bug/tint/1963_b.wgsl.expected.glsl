@@ -6,6 +6,10 @@ struct atomic_compare_exchange_result_i32 {
 };
 
 
+struct a_block {
+  int inner;
+};
+
 layout(binding = 0, std430) buffer a_block_ssbo {
   int inner;
 } a;

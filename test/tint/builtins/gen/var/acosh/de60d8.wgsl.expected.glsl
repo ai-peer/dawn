@@ -10,6 +10,10 @@ f16vec4 tint_acosh(f16vec4 x) {
   return tint_select(acosh(x), f16vec4(0.0hf), lessThan(x, f16vec4(1.0hf)));
 }
 
+struct prevent_dce_block {
+  f16vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec4 inner;
 } prevent_dce;
@@ -46,6 +50,10 @@ f16vec4 tint_acosh(f16vec4 x) {
   return tint_select(acosh(x), f16vec4(0.0hf), lessThan(x, f16vec4(1.0hf)));
 }
 
+struct prevent_dce_block {
+  f16vec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec4 inner;
 } prevent_dce;
@@ -75,6 +83,10 @@ f16vec4 tint_select(f16vec4 param_0, f16vec4 param_1, bvec4 param_2) {
 f16vec4 tint_acosh(f16vec4 x) {
   return tint_select(acosh(x), f16vec4(0.0hf), lessThan(x, f16vec4(1.0hf)));
 }
+
+struct prevent_dce_block {
+  f16vec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   f16vec4 inner;

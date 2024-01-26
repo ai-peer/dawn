@@ -6,6 +6,10 @@ struct buf0 {
   vec4 r;
 };
 
+struct x_7_block {
+  buf0 inner;
+};
+
 layout(binding = 0, std140) uniform x_7_block_ubo {
   buf0 inner;
 } x_7;

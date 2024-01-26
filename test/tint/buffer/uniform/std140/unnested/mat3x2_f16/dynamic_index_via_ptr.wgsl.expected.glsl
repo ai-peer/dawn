@@ -1,10 +1,23 @@
 #version 310 es
 #extension GL_AMD_gpu_shader_half_float : require
 
+struct m_block {
+  f16mat3x2 inner;
+  uint pad;
+};
+
+struct m_block_std140 {
+  f16vec2 inner_0;
+  f16vec2 inner_1;
+  f16vec2 inner_2;
+  uint pad;
+};
+
 layout(binding = 0, std140) uniform m_block_std140_ubo {
   f16vec2 inner_0;
   f16vec2 inner_1;
   f16vec2 inner_2;
+  uint pad;
 } m;
 
 int counter = 0;

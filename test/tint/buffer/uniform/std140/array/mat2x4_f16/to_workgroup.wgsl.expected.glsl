@@ -6,6 +6,14 @@ struct mat2x4_f16 {
   f16vec4 col1;
 };
 
+struct u_block {
+  f16mat2x4 inner[4];
+};
+
+struct u_block_std140 {
+  mat2x4_f16 inner[4];
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   mat2x4_f16 inner[4];
 } u;

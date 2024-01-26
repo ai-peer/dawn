@@ -151,9 +151,21 @@ struct S_std140 {
   Inner array_struct_inner[4];
 };
 
+struct ub_block {
+  S inner;
+};
+
+struct ub_block_std140 {
+  S_std140 inner;
+};
+
 layout(binding = 0, std140) uniform ub_block_std140_ubo {
   S_std140 inner;
 } ub;
+
+struct s_block {
+  int inner;
+};
 
 layout(binding = 1, std430) buffer s_block_ssbo {
   int inner;

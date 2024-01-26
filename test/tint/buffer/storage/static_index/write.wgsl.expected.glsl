@@ -42,6 +42,10 @@ struct S {
   uint pad_9;
 };
 
+struct sb_block {
+  S inner;
+};
+
 layout(binding = 0, std430) buffer sb_block_ssbo {
   S inner;
 } sb;

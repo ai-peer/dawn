@@ -7,6 +7,10 @@ struct Uniforms {
   uint pad_1;
 };
 
+struct uniforms_block {
+  Uniforms inner;
+};
+
 layout(binding = 4, std140) uniform uniforms_block_ubo {
   Uniforms inner;
 } uniforms;

@@ -20,6 +20,10 @@ uvec4 tint_first_trailing_bit(uvec4 v) {
   return uvec4((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -66,6 +70,10 @@ uvec4 tint_first_trailing_bit(uvec4 v) {
   return uvec4((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
 
+struct prevent_dce_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;
 } prevent_dce;
@@ -105,6 +113,10 @@ uvec4 tint_first_trailing_bit(uvec4 v) {
   uvec4 is_zero = tint_select(uvec4(0u), uvec4(4294967295u), equal(x, uvec4(0u)));
   return uvec4((((((b16 | b8) | b4) | b2) | b1) | is_zero));
 }
+
+struct prevent_dce_block {
+  uvec4 inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec4 inner;

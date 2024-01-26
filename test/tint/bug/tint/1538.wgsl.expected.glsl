@@ -1,5 +1,9 @@
 #version 310 es
 
+struct buf_block {
+  uint inner[1];
+};
+
 layout(binding = 1, std430) buffer buf_block_ssbo {
   uint inner[1];
 } buf;

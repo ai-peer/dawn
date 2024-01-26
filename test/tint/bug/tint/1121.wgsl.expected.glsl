@@ -19,6 +19,10 @@ struct Tiles {
   TileLightIdData data[4];
 };
 
+struct tileLightId_block {
+  Tiles inner;
+};
+
 layout(binding = 0, std430) buffer tileLightId_block_ssbo {
   Tiles inner;
 } tileLightId;
@@ -34,6 +38,10 @@ struct Config {
   uint pad_1;
 };
 
+struct config_block {
+  Config inner;
+};
+
 layout(binding = 0, std140) uniform config_block_ubo {
   Config inner;
 } config;
@@ -44,6 +52,10 @@ struct Uniforms {
   mat4 viewMatrix;
   mat4 projectionMatrix;
   vec4 fullScreenSize;
+};
+
+struct uniforms_block {
+  Uniforms inner;
 };
 
 layout(binding = 0, std140) uniform uniforms_block_ubo {

@@ -1,5 +1,16 @@
 #version 310 es
 
+struct u_block {
+  mat4x2 inner;
+};
+
+struct u_block_std140 {
+  vec2 inner_0;
+  vec2 inner_1;
+  vec2 inner_2;
+  vec2 inner_3;
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   vec2 inner_0;
   vec2 inner_1;

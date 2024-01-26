@@ -33,6 +33,10 @@ struct S {
   strided_arr_1 a[4];
 };
 
+struct s_block {
+  S inner;
+};
+
 layout(binding = 0, std430) buffer s_block_ssbo {
   S inner;
 } s;

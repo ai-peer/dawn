@@ -6,9 +6,21 @@ struct mat2x3_f16 {
   f16vec3 col1;
 };
 
+struct u_block {
+  f16mat2x3 inner[4];
+};
+
+struct u_block_std140 {
+  mat2x3_f16 inner[4];
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   mat2x3_f16 inner[4];
 } u;
+
+struct s_block {
+  float16_t inner;
+};
 
 layout(binding = 1, std430) buffer s_block_ssbo {
   float16_t inner;

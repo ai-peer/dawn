@@ -8,6 +8,10 @@ uint tint_workgroupUniformLoad_sh_atomic_failed() {
   return result;
 }
 
+struct tint_symbol_block {
+  uint inner;
+};
+
 layout(binding = 4, std430) buffer tint_symbol_block_ssbo {
   uint inner;
 } tint_symbol;

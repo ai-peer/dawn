@@ -4,6 +4,10 @@ struct Results {
   float colorSamples[4];
 };
 
+struct results_block {
+  Results inner;
+};
+
 layout(binding = 2, std430) buffer results_block_ssbo {
   Results inner;
 } results;

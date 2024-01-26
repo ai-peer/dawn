@@ -7,9 +7,21 @@ struct mat4x2_f32 {
   vec2 col3;
 };
 
+struct u_block {
+  mat4x2 inner[4];
+};
+
+struct u_block_std140 {
+  mat4x2_f32 inner[4];
+};
+
 layout(binding = 0, std140) uniform u_block_std140_ubo {
   mat4x2_f32 inner[4];
 } u;
+
+struct s_block {
+  float inner;
+};
 
 layout(binding = 1, std430) buffer s_block_ssbo {
   float inner;

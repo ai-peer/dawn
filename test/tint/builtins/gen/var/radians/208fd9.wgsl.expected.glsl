@@ -6,6 +6,10 @@ float16_t tint_radians(float16_t param_0) {
 }
 
 
+struct prevent_dce_block {
+  float16_t inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float16_t inner;
 } prevent_dce;
@@ -38,6 +42,10 @@ float16_t tint_radians(float16_t param_0) {
 }
 
 
+struct prevent_dce_block {
+  float16_t inner;
+};
+
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float16_t inner;
 } prevent_dce;
@@ -63,6 +71,10 @@ float16_t tint_radians(float16_t param_0) {
   return param_0 * 0.01745329251994329547hf;
 }
 
+
+struct prevent_dce_block {
+  float16_t inner;
+};
 
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   float16_t inner;

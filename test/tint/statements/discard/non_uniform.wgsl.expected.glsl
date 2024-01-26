@@ -2,9 +2,17 @@
 precision highp float;
 
 bool tint_discarded = false;
+struct non_uniform_global_block {
+  int inner;
+};
+
 layout(binding = 0, std430) buffer non_uniform_global_block_ssbo {
   int inner;
 } non_uniform_global;
+
+struct tint_symbol_block {
+  float inner;
+};
 
 layout(binding = 1, std430) buffer tint_symbol_block_ssbo {
   float inner;

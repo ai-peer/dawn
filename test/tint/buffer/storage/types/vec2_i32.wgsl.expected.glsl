@@ -1,5 +1,9 @@
 #version 310 es
 
+struct tint_symbol_block {
+  ivec2 inner;
+};
+
 layout(binding = 0, std430) buffer tint_symbol_block_ssbo {
   ivec2 inner;
 } tint_symbol;

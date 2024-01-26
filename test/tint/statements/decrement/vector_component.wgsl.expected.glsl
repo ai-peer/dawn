@@ -4,6 +4,10 @@ layout(local_size_x = 1, local_size_y = 1, local_size_z = 1) in;
 void unused_entry_point() {
   return;
 }
+struct a_block {
+  uvec4 inner;
+};
+
 layout(binding = 0, std430) buffer a_block_ssbo {
   uvec4 inner;
 } a;
