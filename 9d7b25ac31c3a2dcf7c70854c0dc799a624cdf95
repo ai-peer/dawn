@@ -67,6 +67,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "33bbf68c_c3deb1c4",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T18:41:36Z",
+      "side": 1,
+      "message": "maybe do std::unique_ptr\u003cuint8_t[]\u003e instead then and alloc with `new uint8_t[size]` ?",
+      "parentUuid": "0c91c16a_bb79181b",
+      "range": {
+        "startLine": 585,
+        "startChar": 26,
+        "endLine": 585,
+        "endChar": 33
+      },
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "f51a2973_bd95bce7",
         "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
         "patchSetId": 9
@@ -102,6 +126,30 @@
       "side": 1,
       "message": "UpdateSubresource1() for constant buffer should be supported since Windows 8, and we dropped Windows 7 support on Jan 2020, Windows 8 and 8.1 on Jan, 2023. So do we really care about those unsupported Windows versions?",
       "parentUuid": "f51a2973_bd95bce7",
+      "range": {
+        "startLine": 596,
+        "startChar": 24,
+        "endLine": 596,
+        "endChar": 42
+      },
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b2a50de9_74a255ad",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T18:41:36Z",
+      "side": 1,
+      "message": "ah ok, I stand corrected. I thought this was one of the feature level 11.1 vs 11.0 differences.",
+      "parentUuid": "836af71e_8036d4a7",
       "range": {
         "startLine": 596,
         "startChar": 24,
