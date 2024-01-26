@@ -36,6 +36,8 @@
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/CommandBufferD3D12.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/IntelExtensionD3D12.h"
+#include "dawn/native/d3d12/PhysicalDeviceD3D12.h"
 #include "dawn/native/d3d12/SharedFenceD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -57,13 +59,24 @@ MaybeError Queue::Initialize() {
 
     SetLabelImpl();
 
-    ID3D12Device* d3d12Device = ToBackend(GetDevice())->GetD3D12Device();
+    DeviceBase* device = GetDevice();
+    ID3D12Device* d3d12Device = ToBackend(device)->GetD3D12Device();
 
     D3D12_COMMAND_QUEUE_DESC queueDesc = {};
     queueDesc.Flags = D3D12_COMMAND_QUEUE_FLAG_NONE;
     queueDesc.Type = D3D12_COMMAND_LIST_TYPE_DIRECT;
-    DAWN_TRY(CheckHRESULT(d3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
-                          "D3D12 create command queue"));
+    if (device->IsToggleEnabled(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy)) {
+        IntelExtension* intelExtension =
+            ToBackend(device->GetPhysicalDevice())->GetOrLoadIntelExtension();
+        DAWN_ASSERT(intelExtension != nullptr);
+        DAWN_TRY(CheckHRESULT(intelExtension->CreateCommandQueueWithMaxPerformanceThrottlePolicy(
+                                  &queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+                              "D3D12 create command queue"));
+    } else {
+        DAWN_TRY(
+            CheckHRESULT(d3d12Device->CreateCommandQueue(&queueDesc, IID_PPV_ARGS(&mCommandQueue)),
+                         "D3D12 create command queue"));
+    }
 
     // If PIX is not attached, the QueryInterface fails. Hence, no need to check the return
     // value.

@@ -129,6 +129,7 @@ enum class Toggle {
     ExposeWGSLTestingFeatures,
     ExposeWGSLExperimentalFeatures,
     DisablePolyfillsOnIntegerDivisonAndModulo,
+    D3D12UseIntelMaxPerformanceThrottlePolicy,
     EnableImmediateErrorHandling,
     VulkanUseStorageInputOutput16,
 

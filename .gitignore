@@ -24,6 +24,7 @@
 /third_party/google_benchmark/src
 /third_party/googletest
 /third_party/gpuweb
+/third_party/intel-extension/cmd-throttle-extension
 /third_party/jinja2
 /third_party/jsoncpp
 /third_party/khronos/EGL-Registry

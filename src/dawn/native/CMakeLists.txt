@@ -424,6 +424,8 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/HeapD3D12.cpp"
         "d3d12/HeapD3D12.h"
         "d3d12/IntegerTypes.h"
+        "d3d12/IntelExtensionD3D12.cpp"
+        "d3d12/IntelExtensionD3D12.h"
         "d3d12/PageableD3D12.cpp"
         "d3d12/PageableD3D12.h"
         "d3d12/PhysicalDeviceD3D12.cpp"
@@ -474,6 +476,10 @@ if (DAWN_ENABLE_D3D12)
         "d3d12/d3d12_platform.h"
     )
     target_link_libraries(dawn_native PRIVATE dxguid.lib)
+    if (WIN32 AND NOT WINDOWS_STORE)
+        target_link_libraries(dawn_native PRIVATE cfgmgr32.lib)
+        target_link_libraries(dawn_native PRIVATE SetupAPI.lib)
+        target_link_libraries(dawn_native PRIVATE shlwapi.lib)
     if (DAWN_USE_BUILT_DXC)
         target_compile_definitions(dawn_native PRIVATE "DAWN_USE_BUILT_DXC")
         target_link_libraries(dawn_native PRIVATE dxcompiler)
