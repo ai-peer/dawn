@@ -16,6 +16,29 @@
       "message": "LGTM",
       "revId": "326a718ed4356063255f08118dbb4be3419433b3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5732f203_68348552",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 11
+      },
+      "lineNbr": 551,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T19:11:10Z",
+      "side": 1,
+      "message": "designated initializers not supported by our MSVC build I believe",
+      "range": {
+        "startLine": 544,
+        "startChar": 8,
+        "endLine": 551,
+        "endChar": 10
+      },
+      "revId": "326a718ed4356063255f08118dbb4be3419433b3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
