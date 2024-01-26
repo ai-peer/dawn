@@ -75,6 +75,7 @@ target_sources(dawn_common PRIVATE
     "NSRef.h"
     "NonCopyable.h"
     "Numeric.h"
+    "Overloaded.h"
     "PlacementAllocated.h"
     "Platform.h"
     "Preprocessor.h"
