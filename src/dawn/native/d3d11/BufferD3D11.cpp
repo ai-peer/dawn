@@ -540,17 +540,17 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
     DAWN_ASSERT(!IsMappable(GetUsage()));
 
     if (mD3d11NonConstantBuffer) {
-        D3D11_BOX box;
-        box.left = offset;
-        box.right = offset + size;
-        box.top = 0;
-        box.bottom = 1;
-        box.front = 0;
-        box.back = 1;
-        commandContext->UpdateSubresource(mD3d11NonConstantBuffer.Get(), /*DstSubresource=*/0, &box,
-                                          data,
-                                          /*SrcRowPitch=*/0,
-                                          /*SrcDepthPitch*/ 0);
+        D3D11_BOX box = {/*left=*/static_cast<UINT>(offset),
+                         /*top=*/0,
+                         /*front=*/0,
+                         /*right=*/static_cast<UINT>(offset + size),
+                         /*bottom=*/1,
+                         /*back=*/1};
+        commandContext->UpdateSubresource1(mD3d11NonConstantBuffer.Get(), /*DstSubresource=*/0,
+                                           /*pDstBox=*/&box, data,
+                                           /*SrcRowPitch=*/0,
+                                           /*SrcDepthPitch=*/0,
+                                           /*CopyFlags=*/0);
         if (!mD3d11ConstantBuffer) {
             return {};
         }
@@ -565,33 +565,45 @@ MaybeError Buffer::WriteInternal(const ScopedCommandRecordingContext* commandCon
         commandContext->CopySubresourceRegion(
             mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0, /*DstX=*/offset,
             /*DstY=*/0,
-            /*DstZ=*/0, mD3d11NonConstantBuffer.Get(), /*SrcSubresource=*/0, &box);
+            /*DstZ=*/0, mD3d11NonConstantBuffer.Get(), /*SrcSubresource=*/0, /*pSrcBux=*/&box);
 
         return {};
     }
 
     DAWN_ASSERT(mD3d11ConstantBuffer);
 
-    // For a full size write, UpdateSubresource() can be used to update mD3d11ConstantBuffer.
+    // For a full size write, UpdateSubresource1(D3D11_COPY_DISCARD) can be used to update
+    // mD3d11ConstantBuffer.
     if (size == GetSize() && offset == 0) {
-        if (size == mAllocatedSize) {
-            commandContext->UpdateSubresource(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
-                                              nullptr, data,
-                                              /*SrcRowPitch=*/size,
-                                              /*SrcDepthPitch*/ 0);
-        } else {
-            std::vector<uint8_t> allocatedData(mAllocatedSize, 0);
-            std::memcpy(allocatedData.data(), data, size);
-            commandContext->UpdateSubresource(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
-                                              nullptr, allocatedData.data(),
-                                              /*SrcRowPitch=*/mAllocatedSize,
-                                              /*SrcDepthPitch*/ 0);
+        // Offset and size must be aligned with 16 for using UpdateSubresource1() on constant
+        // buffer.
+        constexpr size_t kConstantBufferUpdateAlignment = 16;
+        size_t alignedSize = Align(size, kConstantBufferUpdateAlignment);
+        DAWN_ASSERT(alignedSize <= GetAllocatedSize());
+        std::vector<uint8_t> alignedBuffer;
+        if (size != alignedSize) {
+            alignedBuffer.reserve(alignedSize);
+            std::memcpy(alignedBuffer.data(), data, size);
+            data = alignedBuffer.data();
         }
+        D3D11_BOX dstBox = {/*left=*/0,
+                            /*top=*/0,
+                            /*front=*/0,
+                            /*right=*/static_cast<UINT>(alignedSize),
+                            /*bottom=*/1,
+                            /*back=*/1};
+        // For full buffer write, D3D11_COPY_DISCARD is used to avoid GPU CPU synchronization.
+        commandContext->UpdateSubresource1(mD3d11ConstantBuffer.Get(), /*DstSubresource=*/0,
+                                           &dstBox, data,
+                                           /*SrcRowPitch=*/0,
+                                           /*SrcDepthPitch=*/0,
+                                           /*CopyFlags=*/D3D11_COPY_DISCARD);
         return {};
     }
 
-    // If the mD3d11NonConstantBuffer is null, we have to create a staging buffer for transfer the
-    // data to mD3d11ConstantBuffer.
+    // If the mD3d11NonConstantBuffer is null and copy offset and size are not 16 bytes
+    // aligned, we have to create a staging buffer for transfer the data to
+    // mD3d11ConstantBuffer.
     Ref<BufferBase> stagingBuffer;
     DAWN_TRY_ASSIGN(stagingBuffer, ToBackend(GetDevice())->GetStagingBuffer(commandContext, size));
 
@@ -623,13 +635,12 @@ MaybeError Buffer::CopyInternal(const ScopedCommandRecordingContext* commandCont
                                 size_t size,
                                 Buffer* destination,
                                 uint64_t destinationOffset) {
-    D3D11_BOX srcBox;
-    srcBox.left = sourceOffset;
-    srcBox.right = sourceOffset + size;
-    srcBox.top = 0;
-    srcBox.bottom = 1;
-    srcBox.front = 0;
-    srcBox.back = 1;
+    D3D11_BOX srcBox = {/*left=*/static_cast<UINT>(sourceOffset),
+                        /*top=*/0,
+                        /*front=*/0,
+                        /*right=*/static_cast<UINT>(sourceOffset + size),
+                        /*bottom=*/1,
+                        /*back=*/1};
     ID3D11Buffer* d3d11SourceBuffer = source->mD3d11NonConstantBuffer
                                           ? source->mD3d11NonConstantBuffer.Get()
                                           : source->mD3d11ConstantBuffer.Get();
