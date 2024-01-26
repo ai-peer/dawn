@@ -98,6 +98,7 @@ def main(args):
     required_submodules = [
         'third_party/abseil-cpp',
         'third_party/glfw',
+        'third_party/intel/cmd-throttle-extension',
         'third_party/jinja2',
         'third_party/khronos/EGL-Registry',
         'third_party/khronos/OpenGL-Registry',
