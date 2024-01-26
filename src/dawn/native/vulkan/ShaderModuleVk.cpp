@@ -32,6 +32,7 @@
 #include <vector>
 
 #include "absl/container/flat_hash_map.h"
+#include "dawn/common/Overloaded.h"
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/PhysicalDevice.h"
 #include "dawn/native/Serializable.h"
@@ -250,12 +251,9 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
             tint::BindingPoint dstBindingPoint{
                 static_cast<uint32_t>(group), static_cast<uint32_t>(bgl->GetBindingIndex(binding))};
 
-            // TODO(dawn:2370): implement a helper in dawn/utils to simplify the call of std::visit.
             std::visit(
-                [&](const auto& bindingInfo) {
-                    using T = std::decay_t<decltype(bindingInfo)>;
-
-                    if constexpr (std::is_same_v<T, BufferBindingInfo>) {
+                Overloaded{
+                    [&](const BufferBindingInfo& bindingInfo) {
                         switch (bindingInfo.type) {
                             case wgpu::BufferBindingType::Uniform:
                                 bindings.uniform.emplace(
@@ -275,19 +273,23 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                                 DAWN_UNREACHABLE();
                                 break;
                         }
-                    } else if constexpr (std::is_same_v<T, SamplerBindingInfo>) {
+                    },
+                    [&](const SamplerBindingInfo& bindingInfo) {
                         bindings.sampler.emplace(
                             srcBindingPoint, tint::spirv::writer::binding::Sampler{
                                                  dstBindingPoint.group, dstBindingPoint.binding});
-                    } else if constexpr (std::is_same_v<T, SampledTextureBindingInfo>) {
+                    },
+                    [&](const SampledTextureBindingInfo& bindingInfo) {
                         bindings.texture.emplace(
                             srcBindingPoint, tint::spirv::writer::binding::Texture{
                                                  dstBindingPoint.group, dstBindingPoint.binding});
-                    } else if constexpr (std::is_same_v<T, StorageTextureBindingInfo>) {
+                    },
+                    [&](const StorageTextureBindingInfo& bindingInfo) {
                         bindings.storage_texture.emplace(
                             srcBindingPoint, tint::spirv::writer::binding::StorageTexture{
                                                  dstBindingPoint.group, dstBindingPoint.binding});
-                    } else if constexpr (std::is_same_v<T, ExternalTextureBindingInfo>) {
+                    },
+                    [&](const ExternalTextureBindingInfo& bindingInfo) {
                         const auto& bindingMap = bgl->GetExternalTextureBindingExpansionMap();
                         const auto& expansion = bindingMap.find(binding);
                         DAWN_ASSERT(expansion != bindingMap.end());
@@ -306,8 +308,7 @@ ResultOrError<ShaderModule::ModuleAndSpirv> ShaderModule::GetHandleAndSpirv(
                         bindings.external_texture.emplace(
                             srcBindingPoint, tint::spirv::writer::binding::ExternalTexture{
                                                  metadata, plane0, plane1});
-                    }
-                },
+                    }},
                 shaderBindingInfo.bindingInfo);
         }
     }

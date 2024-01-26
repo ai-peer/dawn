@@ -268,6 +268,7 @@ if (is_win || is_linux || is_chromeos || is_mac || is_fuchsia || is_android ||
       "NSRef.h",
       "NonCopyable.h",
       "Numeric.h",
+      "Overloaded.h",
       "PlacementAllocated.h",
       "Platform.h",
       "Preprocessor.h",
