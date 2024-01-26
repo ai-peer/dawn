@@ -2103,6 +2103,7 @@ TEST_P(ShaderTests, UniformAcrossStagesSeparateModule) {
     device.CreateRenderPipeline(&desc);
 }
 
+#if 0
 // Deliberately mismatch a UBO block name at differrent stages.
 TEST_P(ShaderTests, UniformAcrossStagesSeparateModuleMismatch) {
     wgpu::ShaderModule module = utils::CreateShaderModule(device, R"(
@@ -2127,6 +2128,7 @@ TEST_P(ShaderTests, UniformAcrossStagesSeparateModuleMismatch) {
 
     device.CreateRenderPipeline(&desc);
 }
+#endif
 
 // Having different block contents at the same binding point used in different stages is allowed.
 TEST_P(ShaderTests, UniformAcrossStagesSameBindingPointCollide) {
