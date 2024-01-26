@@ -774,6 +774,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "4ab3e76b_62902b82",
+        "filename": "src/dawn/native/SwapChain.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 229,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-26T22:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "f05f6335_d000fb88",
+      "range": {
+        "startLine": 229,
+        "startChar": 20,
+        "endLine": 229,
+        "endChar": 28
+      },
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "90a81ac7_8c189bf1",
@@ -927,6 +951,24 @@
       "writtenOn": "2024-01-03T15:11:06Z",
       "side": 1,
       "message": "Can we have a TODO / follow-up to add testing of this in ManualSwapChainTests so that we can check that CompositeAlphaMode actually behaves as it should?",
+      "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "cc7f017e_71324964",
+        "filename": "src/dawn/native/metal/SwapChainMTL.mm",
+        "patchSetId": 3
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-26T22:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fede43f4_9f771f35",
       "revId": "a3c82c18defa30c43b3ecebd0ea81ab649494602",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },

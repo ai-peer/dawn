@@ -89,6 +89,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f4bfc71_5f0d8af1",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 10
+      },
+      "lineNbr": 225,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-26T22:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "76543ba8_6ad901b1",
+      "range": {
+        "startLine": 225,
+        "startChar": 41,
+        "endLine": 225,
+        "endChar": 50
+      },
+      "revId": "65f3ae9c07682b66c60c25f16dd5081b4865aa7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a170b251_87be8036",
@@ -102,6 +126,24 @@
       "writtenOn": "2024-01-08T14:10:34Z",
       "side": 1,
       "message": "OMG I never expected that you\u0027d try to tackle adding CMake support for the tests. We usually just run them using the GN build. Maybe you could split that CL off and let one of use look at adding this support? As you might have found it will be a massive amount of work!",
+      "revId": "65f3ae9c07682b66c60c25f16dd5081b4865aa7d",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5838cad0_097f0959",
+        "filename": "src/dawn/tests/CMakeLists.txt",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-01-26T22:02:49Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a170b251_87be8036",
       "revId": "65f3ae9c07682b66c60c25f16dd5081b4865aa7d",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
