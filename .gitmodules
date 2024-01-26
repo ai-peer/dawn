@@ -114,6 +114,10 @@
 	path = third_party/gpuweb
 	url = https://github.com/gpuweb/gpuweb
 	gclient-condition = dawn_node
+[submodule "third_party/intel/cmd-throttle-extension"]
+	path = third_party/intel/cmd-throttle-extension
+	url = https://github.com/GameTechDev/CmdThrottlePolicy
+	gclient-condition = host_os == "win"
 [submodule "third_party/protobuf"]
 	path = third_party/protobuf
 	url = https://chromium.googlesource.com/chromium/src/third_party/protobuf

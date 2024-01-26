@@ -260,3 +260,10 @@ endfunction()
 if (DAWN_USE_BUILT_DXC)
     AddSubdirectoryDXC()
 endif()
+
+# Header-only library for igdext.h
+if (DAWN_ENABLE_D3D12)
+    add_library(intel_extension INTERFACE)
+    target_sources(intel_extension INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/intel/cmd-throttle-extension/IntelExtension/include/igdext.h")
+    target_include_directories(intel_extension INTERFACE "${CMAKE_CURRENT_SOURCE_DIR}/intel/cmd-throttle-extension/IntelExtension/include")
+endif()
