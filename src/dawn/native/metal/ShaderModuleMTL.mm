@@ -27,6 +27,7 @@
 
 #include "dawn/native/metal/ShaderModuleMTL.h"
 
+#include "dawn/common/Overloaded.h"
 #include "dawn/native/BindGroupLayout.h"
 #include "dawn/native/CacheRequest.h"
 #include "dawn/native/Serializable.h"
@@ -147,12 +148,9 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
 
             tint::BindingPoint dstBindingPoint{0, shaderIndex};
 
-            // TODO(dawn:2370): implement a helper in dawn/utils to simplify the call of std::visit.
             std::visit(
-                [&](const auto& bindingInfo) {
-                    using T = std::decay_t<decltype(bindingInfo)>;
-
-                    if constexpr (std::is_same_v<T, BufferBindingInfo>) {
+                Overloaded{
+                    [&](const BufferBindingInfo& bindingInfo) {
                         switch (bindingInfo.type) {
                             case wgpu::BufferBindingType::Uniform:
                                 bindings.uniform.emplace(
@@ -175,19 +173,23 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                                 DAWN_UNREACHABLE();
                                 break;
                         }
-                    } else if constexpr (std::is_same_v<T, SamplerBindingInfo>) {
+                    },
+                    [&](const SamplerBindingInfo& bindingInfo) {
                         bindings.sampler.emplace(
                             srcBindingPoint,
                             tint::msl::writer::binding::Sampler{dstBindingPoint.binding});
-                    } else if constexpr (std::is_same_v<T, SampledTextureBindingInfo>) {
+                    },
+                    [&](const SampledTextureBindingInfo& bindingInfo) {
                         bindings.texture.emplace(
                             srcBindingPoint,
                             tint::msl::writer::binding::Texture{dstBindingPoint.binding});
-                    } else if constexpr (std::is_same_v<T, StorageTextureBindingInfo>) {
+                    },
+                    [&](const StorageTextureBindingInfo& bindingInfo) {
                         bindings.storage_texture.emplace(
                             srcBindingPoint,
                             tint::msl::writer::binding::StorageTexture{dstBindingPoint.binding});
-                    } else if constexpr (std::is_same_v<T, ExternalTextureBindingInfo>) {
+                    },
+                    [&](const ExternalTextureBindingInfo& bindingInfo) {
                         const auto& etBindingMap = bgl->GetExternalTextureBindingExpansionMap();
                         const auto& expansion = etBindingMap.find(binding);
                         DAWN_ASSERT(expansion != etBindingMap.end());
@@ -203,8 +205,7 @@ ResultOrError<CacheResult<MslCompilation>> TranslateToMSL(
                         bindings.external_texture.emplace(
                             srcBindingPoint,
                             tint::msl::writer::binding::ExternalTexture{metadata, plane0, plane1});
-                    }
-                },
+                    }},
                 shaderBindingInfo.bindingInfo);
         }
     }
