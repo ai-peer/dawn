@@ -83,7 +83,7 @@ constexpr std::string_view kDiagnosticSeverityStrings[] = {
 diag::Severity ToSeverity(DiagnosticSeverity sc);
 
 /// DiagnosticRuleSeverities is a map from diagnostic rule to diagnostic severity.
-using DiagnosticRuleSeverities = Hashmap<DiagnosticRule, DiagnosticSeverity, 0>;
+using DiagnosticRuleSeverities = Hashmap<DiagnosticRule, DiagnosticSeverity, 1>;
 
 }  // namespace tint::wgsl
 
