@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "db8af526_4f5cca15",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-26T19:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "294be472_6896df89",
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "325477b6_da48daa1",
@@ -79,6 +97,30 @@
       "side": 1,
       "message": "maybe do std::unique_ptr\u003cuint8_t[]\u003e instead then and alloc with `new uint8_t[size]` ?",
       "parentUuid": "0c91c16a_bb79181b",
+      "range": {
+        "startLine": 585,
+        "startChar": 26,
+        "endLine": 585,
+        "endChar": 33
+      },
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a666aaa8_e9f8acca",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-26T19:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "33bbf68c_c3deb1c4",
       "range": {
         "startLine": 585,
         "startChar": 26,
@@ -173,6 +215,24 @@
       "writtenOn": "2024-01-26T18:23:45Z",
       "side": 1,
       "message": "ditto on preferring to assign to .left, .right, etc.",
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3d01ebb3_de4b841c",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-26T19:10:56Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "987606d2_f191c511",
       "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
