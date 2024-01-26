@@ -1,0 +1,84 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "294be472_6896df89",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 543,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T18:23:45Z",
+      "side": 1,
+      "message": "this one looks the same; what changed?\n\ntbh I liked it better when we explicitly assigned the members. It is more obviously correct instead of trusting the order of members is correct here.",
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "325477b6_da48daa1",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 585,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T18:23:45Z",
+      "side": 1,
+      "message": "shouldn\u0027t this be resize() ? right now you\u0027re copying data into the buffer which is technically past what alignedBuffer.end() would tell you is the end",
+      "range": {
+        "startLine": 585,
+        "startChar": 26,
+        "endLine": 585,
+        "endChar": 33
+      },
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f51a2973_bd95bce7",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 596,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T18:23:45Z",
+      "side": 1,
+      "message": "it is fine to do UpdateSubresource1, but it would since the old path already worked, it would be nice to add a feature check so that we use UpdateSubresource when UpdateSubresource1 is not available. We\u0027ll need to bring the old path back from WebGPU compat",
+      "range": {
+        "startLine": 596,
+        "startChar": 24,
+        "endLine": 596,
+        "endChar": 42
+      },
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "987606d2_f191c511",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 9
+      },
+      "lineNbr": 638,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-26T18:23:45Z",
+      "side": 1,
+      "message": "ditto on preferring to assign to .left, .right, etc.",
+      "revId": "9d7b25ac31c3a2dcf7c70854c0dc799a624cdf95",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
