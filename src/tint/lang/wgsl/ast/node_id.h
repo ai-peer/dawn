@@ -46,7 +46,7 @@ struct NodeID {
     bool operator<(NodeID other) const { return value < other.value; }
 
     /// The numerical value for the node identifier
-    size_t value = 0;
+    uint32_t value = 0;
 };
 
 }  // namespace tint::ast
