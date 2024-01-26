@@ -571,6 +571,14 @@ void Texture::TransitionSubresourceRange(std::vector<D3D12_RESOURCE_BARRIER>* ba
         }
     }
 
+    // Concurrent read access requires that the texture is compatible with
+    // (i.e., implicitly decayable to) the COMMON state at all times that read
+    // accesses are happening; otherwise, the texture can enter a state where it
+    // could be modified by one read access (e.g., to be compressed or
+    // decrompessed) while being read by another.
+    bool inReadAccess = HasAccess() && IsReadOnly();
+    ASSERT(state->isValidToDecay || !inReadAccess);
+
     D3D12_RESOURCE_BARRIER barrier;
     barrier.Type = D3D12_RESOURCE_BARRIER_TYPE_TRANSITION;
     barrier.Flags = D3D12_RESOURCE_BARRIER_FLAG_NONE;
