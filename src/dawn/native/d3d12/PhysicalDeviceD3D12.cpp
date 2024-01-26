@@ -39,6 +39,7 @@
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/BackendD3D12.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
+#include "dawn/native/d3d12/IntelExtensionD3D12.h"
 #include "dawn/native/d3d12/PlatformFunctionsD3D12.h"
 #include "dawn/native/d3d12/UtilsD3D12.h"
 #include "dawn/platform/DawnPlatform.h"
@@ -716,7 +717,8 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
     AdapterBase* adapter,
     const UnpackedPtr<DeviceDescriptor>& descriptor,
     const TogglesState& deviceToggles) {
-    return Device::Create(adapter, descriptor, deviceToggles);
+    TogglesState appliedTogglesState = ApplyTogglesAboutIntelExtension(adapter, deviceToggles);
+    return Device::Create(adapter, descriptor, appliedTogglesState);
 }
 
 // Resets the backend device and creates a new one. If any D3D12 objects belonging to the
@@ -724,6 +726,8 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
 // and the subequent call to CreateDevice will return a handle the existing device instead of
 // creating a new one.
 MaybeError PhysicalDevice::ResetInternalDeviceForTestingImpl() {
+    mIntelExtension.reset();
+
     [[maybe_unused]] auto refCount = mD3d12Device.Reset();
     DAWN_ASSERT(refCount == 0);
     DAWN_TRY(Initialize());
@@ -769,6 +773,37 @@ void PhysicalDevice::PopulateBackendProperties(UnpackedPtr<AdapterProperties>& p
     if (auto* d3dProperties = properties.Get<AdapterPropertiesD3D>()) {
         d3dProperties->shaderModel = GetDeviceInfo().shaderModel;
     }
+}
+
+TogglesState PhysicalDevice::ApplyTogglesAboutIntelExtension(AdapterBase* adapter,
+                                                             const TogglesState& originalToggles) {
+    TogglesState appliedTogglesState = originalToggles;
+
+    // Check if we can safely enable Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy.
+    bool shouldUseIntelMaxPerformanceThrottlePolicy =
+        originalToggles.IsEnabled(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy) &&
+        GetOrLoadIntelExtension() != nullptr;
+
+    // We must ensure Toggle::D3D12SetIntelMaxPerformanceThrottlePolicy always be disabled when
+    // we shouldn't use Throttle Policy extension.
+    if (!shouldUseIntelMaxPerformanceThrottlePolicy) {
+        appliedTogglesState.ForceSet(Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy, false);
+    }
+
+    return appliedTogglesState;
+}
+
+IntelExtension* PhysicalDevice::GetOrLoadIntelExtension() {
+    if (!gpu_info::IsIntel(mVendorId)) {
+        return nullptr;
+    }
+
+    // Lazily load Intel extension library
+    if (!mIntelExtension.has_value()) {
+        mIntelExtension = IntelExtension::Create(*this);
+    }
+
+    return mIntelExtension->get();
 }
 
 }  // namespace dawn::native::d3d12

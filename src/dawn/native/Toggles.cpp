@@ -526,6 +526,12 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
      {"disable_polyfills_on_integer_div_and_mod",
       "Disable the Tint polyfills on integer division and modulo.", "https://crbug.com/tint/2128",
       ToggleStage::Device}},
+    {Toggle::D3D12UseIntelMaxPerformanceThrottlePolicy,
+     {"d3d12_use_intel_max_performance_throttle_policy",
+      "Create D3D12 command queue with 'Max Performance' Throttle Policy through Intel Command "
+      "Throttle Policy extension so that all the commands will be executed with 'Maximum "
+      "Performance' command throttle policy on the Intel GPUs.",
+      "https://crbug.com/dawn/1516", ToggleStage::Device}},
     {Toggle::EnableImmediateErrorHandling,
      {"enable_immediate_error_handling",
       "Have the uncaptured error callback invoked immediately when an error occurs, rather than "
