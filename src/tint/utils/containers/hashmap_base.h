@@ -400,27 +400,25 @@ class HashmapBase {
             return;
         }
 
-        // Move all the values out of the map and into a vector.
-        Vector<Entry, N> entries;
-        entries.Reserve(count_);
-        for (auto& slot : slots_) {
-            if (slot.entry.has_value()) {
-                entries.Push(std::move(slot.entry.value()));
-            }
-        }
+        // Move the slots to a temporary.
+        decltype(slots_) copy;
+        std::swap(slots_, copy);
 
-        // Clear the map, grow the number of slots.
-        Clear();
+        // Clear the map, and reserve the required number of slots.
+        count_ = 0;
         slots_.Resize(num_slots);
 
-        // As the number of slots has grown, the slot indices will have changed from before, so
-        // re-add all the entries back into the map.
-        for (auto& entry : entries) {
-            if constexpr (ValueIsVoid) {
-                struct NoValue {};
-                Put<PutMode::kAdd>(std::move(entry), NoValue{});
-            } else {
-                Put<PutMode::kAdd>(std::move(entry.key), std::move(entry.value));
+        // Re-add all the entries back into the grown slots.
+        for (auto& slot : copy) {
+            if (slot.entry.has_value()) {
+                auto& entry = *slot.entry;
+                HashResult hash{Wrap(slot.hash), slot.hash};
+                if constexpr (ValueIsVoid) {
+                    struct NoValue {};
+                    PutWithHash<PutMode::kAdd>(std::move(entry), NoValue{}, hash);
+                } else {
+                    PutWithHash<PutMode::kAdd>(std::move(entry.key), std::move(entry.value), hash);
+                }
             }
         }
     }
@@ -493,8 +491,19 @@ class HashmapBase {
             Reserve((count_ + 1) * 2);
         }
 
-        const auto hash = Hash(key);
+        return PutWithHash<MODE>(std::forward<K>(key), std::forward<V>(value), Hash(key));
+    }
 
+    /// HashResult is the return value of Hash()
+    struct HashResult {
+        /// The target (zero-distance) slot index for the key.
+        size_t scan_start;
+        /// The calculated hash code of the key.
+        size_t code;
+    };
+
+    template <PutMode MODE, typename K, typename V>
+    PutResult PutWithHash(K&& key, V&& value, HashResult hash) {
         auto make_entry = [&] {
             if constexpr (ValueIsVoid) {
                 return std::forward<K>(key);
@@ -552,14 +561,6 @@ class HashmapBase {
         TINT_ICE() << "HashmapBase::Put() looped entire map without finding a slot";
         return PutResult{};
     }
-
-    /// HashResult is the return value of Hash()
-    struct HashResult {
-        /// The target (zero-distance) slot index for the key.
-        size_t scan_start;
-        /// The calculated hash code of the key.
-        size_t code;
-    };
 
     /// @param key the key to hash
     /// @returns a tuple holding the target slot index for the given value, and the hash of the
