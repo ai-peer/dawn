@@ -1422,8 +1422,8 @@ Transform::ApplyResult Renamer::Apply(const Program& src,
     ctx.Clone();
 
     Remappings out;
-    for (auto it : remappings) {
-        out[it.key.Name()] = it.value.Name();
+    for (auto& it : remappings) {
+        out[it.key->Name()] = it.value.Name();
     }
     outputs.Add<Data>(std::move(out));
 

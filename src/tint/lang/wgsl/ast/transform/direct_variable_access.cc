@@ -358,8 +358,8 @@ struct DirectVariableAccess::State {
         tint::Vector<std::pair<const FnVariant::Signature*, FnVariant*>, 8> SortedVariants() {
             tint::Vector<std::pair<const FnVariant::Signature*, FnVariant*>, 8> out;
             out.Reserve(variants.Count());
-            for (auto it : variants) {
-                out.Push({&it.key, &it.value});
+            for (auto& it : variants) {
+                out.Push({&it.key.Value(), &it.value});
             }
             out.Sort([&](auto& va, auto& vb) { return va.second->order < vb.second->order; });
             return out;
@@ -693,15 +693,15 @@ struct DirectVariableAccess::State {
                 StringStream ss;
                 ss << target->Declaration()->name->symbol.Name();
                 for (auto* param : target->Parameters()) {
-                    if (auto indices = target_signature.Find(param)) {
+                    if (auto indices = target_signature.Get(param)) {
                         ss << "_" << AccessShapeName(*indices);
                     }
                 }
 
                 // Build the pointer parameter symbols.
                 Hashmap<const sem::Parameter*, PtrParamSymbols, 4> ptr_param_symbols;
-                for (auto param_it : target_signature) {
-                    auto* param = param_it.key;
+                for (auto& param_it : target_signature) {
+                    auto* param = param_it.key.Value();
                     auto& shape = param_it.value;
 
                     // Parameter needs replacing with either zero, one or two parameters:
@@ -770,7 +770,7 @@ struct DirectVariableAccess::State {
     /// @returns the AccessChain for the expression @p expr, or nullptr if the expression does
     /// not hold an access chain.
     AccessChain* AccessChainFor(const sem::ValueExpression* expr) const {
-        if (auto chain = access_chains.Find(expr)) {
+        if (auto chain = access_chains.Get(expr)) {
             return *chain;
         }
         return nullptr;
@@ -781,7 +781,7 @@ struct DirectVariableAccess::State {
     AccessShape AbsoluteAccessShape(const FnVariant::Signature& signature,
                                     const AccessShape& shape) const {
         if (auto* root_param = shape.root.variable->As<sem::Parameter>()) {
-            if (auto incoming_chain = signature.Find(root_param)) {
+            if (auto incoming_chain = signature.Get(root_param)) {
                 // Access chain originates from a parameter, which will be transformed into an array
                 // of dynamic indices. Concatenate the signature's AccessShape for the parameter
                 // to the chain's indices, skipping over the chain's initial parameter index.
@@ -831,8 +831,8 @@ struct DirectVariableAccess::State {
                 // dynamic indices).
                 tint::Vector<const Parameter*, 8> params;
                 for (auto* param : fn->Parameters()) {
-                    if (auto incoming_shape = variant_sig.Find(param)) {
-                        auto& symbols = *variant.ptr_param_symbols.Find(param);
+                    if (auto incoming_shape = variant_sig.Get(param)) {
+                        auto& symbols = *variant.ptr_param_symbols.Get(param);
                         if (symbols.base_ptr.IsValid()) {
                             auto base_ptr_ty =
                                 b.ty.ptr(incoming_shape->root.address_space,
@@ -872,7 +872,7 @@ struct DirectVariableAccess::State {
     void TransformCall(const sem::Call* call) {
         // Register a custom handler for the specific call expression
         ctx.Replace(call->Declaration(), [this, call] {
-            auto target_variant = clone_state->current_variant->calls.Find(call);
+            auto target_variant = clone_state->current_variant->calls.Get(call);
             if (!target_variant) {
                 // The current variant does not need to transform this call.
                 return ctx.CloneWithoutTransform(call->Declaration());
@@ -921,9 +921,9 @@ struct DirectVariableAccess::State {
                     if (auto* root_param = chain->root.variable->As<sem::Parameter>()) {
                         // Access chain originates from a pointer parameter.
                         if (auto incoming_chain =
-                                clone_state->current_variant_sig->Find(root_param)) {
+                                clone_state->current_variant_sig->Get(root_param)) {
                             auto indices =
-                                clone_state->current_variant->ptr_param_symbols.Find(root_param)
+                                clone_state->current_variant->ptr_param_symbols.Get(root_param)
                                     ->indices;
 
                             // This pointer parameter will have been replaced with a array<u32, N>
@@ -1001,7 +1001,7 @@ struct DirectVariableAccess::State {
 
             // If the expression has been hoisted to a 'let', then replace the expression with an
             // identifier to the hoisted let.
-            if (auto hoisted = clone_state->current_function->hoisted_exprs.Find(expr)) {
+            if (auto hoisted = clone_state->current_function->hoisted_exprs.Get(expr)) {
                 return b.Expr(*hoisted);
             }
 
@@ -1018,7 +1018,7 @@ struct DirectVariableAccess::State {
                 return nullptr;  // Just clone the expression.
             }
 
-            auto incoming_shape = clone_state->current_variant_sig->Find(root_param);
+            auto incoming_shape = clone_state->current_variant_sig->Get(root_param);
             if (!incoming_shape) {
                 // The root parameter of the access chain is not part of the variant's signature.
                 return nullptr;  // Just clone the expression.
@@ -1033,8 +1033,8 @@ struct DirectVariableAccess::State {
             // Replace this with the variant's incoming shape. This will bring the expression up to
             // the incoming pointer.
             size_t next_dyn_idx_from_indices = 0;
-            auto indices =
-                clone_state->current_variant->ptr_param_symbols.Find(root_param)->indices;
+            auto& indices =
+                clone_state->current_variant->ptr_param_symbols.Get(root_param)->indices;
             for (auto param_access : incoming_shape->ops) {
                 chain_expr = BuildAccessExpr(chain_expr, param_access, [&] {
                     return b.IndexAccessor(indices, AInt(next_dyn_idx_from_indices++));
@@ -1120,7 +1120,7 @@ struct DirectVariableAccess::State {
     /// @param deref if true, the returned expression will always be a reference type.
     const Expression* BuildAccessRootExpr(const AccessRoot& root, bool deref) {
         if (auto* param = root.variable->As<sem::Parameter>()) {
-            if (auto symbols = clone_state->current_variant->ptr_param_symbols.Find(param)) {
+            if (auto symbols = clone_state->current_variant->ptr_param_symbols.Get(param)) {
                 if (deref) {
                     return b.Deref(b.Expr(symbols->base_ptr));
                 }

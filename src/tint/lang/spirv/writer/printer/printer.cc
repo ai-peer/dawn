@@ -790,7 +790,7 @@ class Printer {
             // Determine if this IO variable is used by the entry point.
             bool used = false;
             for (const auto& use : var->Result(0)->Usages()) {
-                auto* block = use.instruction->Block();
+                auto* block = use->instruction->Block();
                 while (block->Parent()) {
                     block = block->Parent()->Block();
                 }
