@@ -403,7 +403,7 @@ struct Std140::State {
         return Switch(
             ty,  //
             [&](const core::type::Struct* str) {
-                if (auto std140 = std140_structs.Find(str)) {
+                if (auto std140 = std140_structs.Get(str)) {
                     return b.ty(*std140);
                 }
                 return Type{};
@@ -690,7 +690,7 @@ struct Std140::State {
                     // call, or by reassembling a std140 matrix from column vector members.
                     tint::Vector<const Expression*, 8> args;
                     for (auto* member : str->Members()) {
-                        if (auto col_members = std140_mat_members.Find(member)) {
+                        if (auto col_members = std140_mat_members.Get(member)) {
                             // std140 decomposed matrix. Reassemble.
                             auto mat_ty = CreateASTTypeFor(ctx, member->Type());
                             auto mat_args =

@@ -150,7 +150,7 @@ ast::transform::Transform::ApplyResult DecomposeStridedMatrix::Apply(
     std::unordered_map<MatrixInfo, Symbol, MatrixInfo::Hasher> mat_to_arr;
     ctx.ReplaceAll([&](const ast::AssignmentStatement* stmt) -> const ast::Statement* {
         if (auto* access = src.Sem().Get<sem::StructMemberAccess>(stmt->lhs)) {
-            if (auto info = decomposed.Find(access->Member())) {
+            if (auto info = decomposed.Get(access->Member())) {
                 auto fn = tint::GetOrCreate(mat_to_arr, *info, [&] {
                     auto name =
                         b.Symbols().New("mat" + std::to_string(info->matrix->columns()) + "x" +
@@ -189,7 +189,7 @@ ast::transform::Transform::ApplyResult DecomposeStridedMatrix::Apply(
     std::unordered_map<MatrixInfo, Symbol, MatrixInfo::Hasher> arr_to_mat;
     ctx.ReplaceAll([&](const ast::MemberAccessorExpression* expr) -> const ast::Expression* {
         if (auto* access = src.Sem().Get(expr)->UnwrapLoad()->As<sem::StructMemberAccess>()) {
-            if (auto info = decomposed.Find(access->Member())) {
+            if (auto info = decomposed.Get(access->Member())) {
                 auto fn = tint::GetOrCreate(arr_to_mat, *info, [&] {
                     auto name =
                         b.Symbols().New("arr_to_mat" + std::to_string(info->matrix->columns()) +
