@@ -513,7 +513,9 @@ class HashmapBase {
         };
 
         const auto count = slots_.Length();
-        for (size_t distance = 0, index = hash.scan_start; distance < count; distance++) {
+        size_t distance = 0;
+        size_t index = hash.scan_start;
+        while (true) {
             auto& slot = slots_[index];
             if (!slot.entry.has_value()) {
                 // Found an empty slot.
@@ -556,10 +558,8 @@ class HashmapBase {
             }
 
             index = (index == count - 1) ? 0 : index + 1;
+            distance++;
         }
-
-        TINT_ICE() << "HashmapBase::Put() looped entire map without finding a slot";
-        return PutResult{MapAction::kKeptExisting, slots_[0]};
     }
 
     /// @param key the key to hash
