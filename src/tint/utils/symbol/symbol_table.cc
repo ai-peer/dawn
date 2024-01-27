@@ -42,7 +42,7 @@ SymbolTable& SymbolTable::operator=(SymbolTable&&) = default;
 Symbol SymbolTable::Register(std::string_view name) {
     TINT_ASSERT(!name.empty());
 
-    auto it = name_to_symbol_.Find(name);
+    auto it = name_to_symbol_.Get(name);
     if (it) {
         return *it;
     }
@@ -67,8 +67,7 @@ Symbol SymbolTable::RegisterInternal(std::string_view name) {
 }
 
 Symbol SymbolTable::Get(std::string_view name) const {
-    auto it = name_to_symbol_.Find(name);
-    return it ? *it : Symbol();
+    return name_to_symbol_.Get(name, Symbol{});
 }
 
 Symbol SymbolTable::New(std::string_view prefix_view /* = "" */) {
@@ -79,30 +78,19 @@ Symbol SymbolTable::New(std::string_view prefix_view /* = "" */) {
         prefix = std::string(prefix_view);
     }
 
-    auto it = name_to_symbol_.Find(prefix);
+    auto it = name_to_symbol_.Get(prefix);
     if (!it) {
         return RegisterInternal(prefix);
     }
 
-    size_t i = 0;
-    auto last_prefix = last_prefix_to_index_.Find(prefix);
-    if (last_prefix) {
-        i = *last_prefix;
-    }
-
+    size_t& i = last_prefix_to_index_.GetOrZero(prefix);
     std::string name;
     do {
         ++i;
         name = prefix + "_" + std::to_string(i);
     } while (name_to_symbol_.Contains(name));
 
-    auto sym = RegisterInternal(name);
-    if (last_prefix) {
-        *last_prefix = i;
-    } else {
-        last_prefix_to_index_.Add(prefix, i);
-    }
-    return sym;
+    return RegisterInternal(name);
 }
 
 }  // namespace tint

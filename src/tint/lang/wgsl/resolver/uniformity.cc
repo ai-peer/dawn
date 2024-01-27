@@ -431,7 +431,7 @@ class UniformityGraph {
     /// @param func the function to process
     /// @returns true if there are no uniformity issues, false otherwise
     bool ProcessFunction(const ast::Function* func) {
-        current_function_ = functions_.Add(func, FunctionInfo(func, b)).value;
+        current_function_ = &functions_.Add(func, FunctionInfo(func, b)).value;
 
         // Process function body.
         if (func->body) {
@@ -964,14 +964,14 @@ class UniformityGraph {
                     // Only add edges if the behavior for that block contains 'Next'.
                     if (true_has_next) {
                         if (true_vars.Contains(var)) {
-                            out_node->AddEdge(*true_vars.Find(var));
+                            out_node->AddEdge(*true_vars.Get(var));
                         } else {
                             out_node->AddEdge(current_function_->variables.Get(var));
                         }
                     }
                     if (false_has_next) {
                         if (false_vars.Contains(var)) {
-                            out_node->AddEdge(*false_vars.Find(var));
+                            out_node->AddEdge(*false_vars.Get(var));
                         } else {
                             out_node->AddEdge(current_function_->variables.Get(var));
                         }
@@ -1637,11 +1637,11 @@ class UniformityGraph {
             [&](const sem::Function* func) {
                 // We must have already analyzed the user-defined function since we process
                 // functions in dependency order.
-                auto info = functions_.Find(func->Declaration());
-                TINT_ASSERT(info != nullptr);
+                auto info = functions_.Get(func->Declaration());
+                TINT_ASSERT(info);
                 callsite_tag = info->callsite_tag;
                 function_tag = info->function_tag;
-                func_info = info;
+                func_info = info.value;
             },
             [&](const sem::ValueConstructor*) {
                 callsite_tag = {CallSiteTag::CallSiteNoRestriction};
@@ -1798,7 +1798,7 @@ class UniformityGraph {
         } else if (auto* user = target->As<sem::Function>()) {
             // This is a call to a user-defined function, so inspect the functions called by that
             // function and look for one whose node has an edge from the RequiredToBeUniform node.
-            auto target_info = functions_.Find(user->Declaration());
+            auto target_info = functions_.Get(user->Declaration());
             for (auto* call_node : target_info->RequiredToBeUniform(severity)->edges) {
                 if (call_node->type == Node::kRegular) {
                     auto* child_call = call_node->ast->As<ast::CallExpression>();
@@ -1983,7 +1983,7 @@ class UniformityGraph {
             auto* user_func = target->As<sem::Function>();
             if (user_func) {
                 // Recurse into the called function to show the reason for the requirement.
-                auto next_function = functions_.Find(user_func->Declaration());
+                auto next_function = functions_.Get(user_func->Declaration());
                 auto& param_info = next_function->parameters[cause->arg_index];
                 MakeError(*next_function,
                           is_value ? param_info.value : param_info.ptr_input_contents, severity);

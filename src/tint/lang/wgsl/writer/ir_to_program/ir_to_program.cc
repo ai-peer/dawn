@@ -886,7 +886,7 @@ class State {
                 return {Constant(c), PtrKind::kRef};
             },
             [&](Default) -> ExprAndPtrKind {
-                auto lookup = bindings_.Find(value);
+                auto lookup = bindings_.Get(value);
                 if (TINT_UNLIKELY(!lookup)) {
                     TINT_ICE() << "Expr(" << (value ? value->TypeInfo().name : "null")
                                << ") value has no expression";

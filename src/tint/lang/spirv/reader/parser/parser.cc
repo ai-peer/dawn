@@ -477,7 +477,7 @@ class Parser {
 
         // Handle OpExecutionMode declarations.
         for (auto& execution_mode : spirv_context_->module()->execution_modes()) {
-            auto* func = functions_.Get(execution_mode.GetSingleWordInOperand(0)).value_or(nullptr);
+            auto* func = functions_.Get(execution_mode.GetSingleWordInOperand(0), nullptr);
             auto mode = execution_mode.GetSingleWordInOperand(1);
             TINT_ASSERT_OR_RETURN(func);
 

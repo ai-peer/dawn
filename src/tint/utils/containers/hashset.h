@@ -44,7 +44,6 @@ namespace tint {
 template <typename KEY, size_t N, typename HASH = Hasher<KEY>, typename EQUAL = std::equal_to<KEY>>
 class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
     using Base = HashmapBase<KEY, void, N, HASH, EQUAL>;
-    using PutMode = typename Base::PutMode;
 
   public:
     using Base::Base;
@@ -64,7 +63,7 @@ class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
     template <typename V>
     bool Add(V&& value) {
         struct NoValue {};
-        return this->template Put<PutMode::kAdd>(std::forward<V>(value), NoValue{});
+        return this->template Put(/* replace */ false, std::forward<V>(value), NoValue{});
     }
 
     /// @returns the set entries of the map as a vector

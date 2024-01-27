@@ -39,7 +39,54 @@
 
 namespace tint {
 
-/// An unordered map that uses a robin-hood hashing algorithm.
+/// The return value of Hashmap::Get(Key)
+template <typename T>
+struct GetResult {
+    /// The value found in the map, or null if the entry was not found.
+    T* value = nullptr;
+
+    /// @returns `true` if #value is not null.
+    operator bool() const { return value; }
+
+    /// @returns the dereferenced value, which must not be null.
+    T& operator*() const { return *value; }
+
+    /// @returns the dereferenced value, which must not be null.
+    T* operator->() const { return value; }
+
+    /// @param other the value to compare against the object that #value points to.
+    /// @returns true if #value is not null and the object that #value points to is equal to @p
+    /// other.
+    template <typename O>
+    bool operator==(const O& other) const {
+        return value && *value == other;
+    }
+
+    /// @param other the value to compare against the object that #value points to.
+    /// @returns true if #value is null or the object that #value points to is not equal to @p
+    /// other.
+    template <typename O>
+    bool operator!=(const O& other) const {
+        return !value || *value != other;
+    }
+};
+
+/// The return value of Hashmap::Add(Key, Value)
+template <typename T>
+struct AddResult {
+    /// The value of the entry with the given key.
+    /// If an existing entry was found with the key, then this is the value of the existing entry,
+    /// otherwise the value of the newly inserted entry.
+    T& value;
+
+    /// True if an entry did not already exist in the map with the given key.
+    bool added = false;
+
+    /// @returns #added
+    operator bool() const { return added; }
+};
+
+/// An unordered hashmap, with a fixed-size capacity that avoids heap allocations.
 template <typename KEY,
           typename VALUE,
           size_t N,
@@ -47,7 +94,6 @@ template <typename KEY,
           typename EQUAL = EqualTo<KEY>>
 class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     using Base = HashmapBase<KEY, VALUE, N, HASH, EQUAL>;
-    using PutMode = typename Base::PutMode;
 
     template <typename T>
     using ReferenceKeyType = traits::CharArrayToCharPtr<std::remove_reference_t<T>>;
@@ -60,107 +106,54 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     /// The key-value type for a map entry
     using Entry = KeyValue<Key, Value>;
 
-    /// Result of Add()
-    using AddResult = typename Base::PutResult;
-
-    /// Reference is returned by Hashmap::Find(), and performs dynamic Hashmap lookups.
-    /// The value returned by the Reference reflects the current state of the Hashmap, and so the
-    /// referenced value may change, or transition between valid or invalid based on the current
-    /// state of the Hashmap.
-    template <bool IS_CONST, typename K>
-    class ReferenceT {
-        /// `const Value` if IS_CONST, or `Value` if !IS_CONST
-        using T = std::conditional_t<IS_CONST, const Value, Value>;
-
-        /// `const Hashmap` if IS_CONST, or `Hashmap` if !IS_CONST
-        using Map = std::conditional_t<IS_CONST, const Hashmap, Hashmap>;
-
-      public:
-        /// @returns true if the reference is valid.
-        operator bool() const { return Get() != nullptr; }
-
-        /// @returns the pointer to the Value, or nullptr if the reference is invalid.
-        operator T*() const { return Get(); }
-
-        /// @returns the pointer to the Value
-        /// @warning if the Hashmap does not contain a value for the reference, then this will
-        /// trigger a TINT_ASSERT, or invalid pointer dereference.
-        T* operator->() const {
-            auto* hashmap_reference_lookup = Get();
-            TINT_ASSERT(hashmap_reference_lookup != nullptr);
-            return hashmap_reference_lookup;
-        }
-
-        /// @returns the pointer to the Value, or nullptr if the reference is invalid.
-        T* Get() const {
-            auto generation = map_.Generation();
-            if (generation_ != generation) {
-                cached_ = map_.Lookup(key_);
-                generation_ = generation;
-            }
-            return cached_;
-        }
-
-      private:
-        friend Hashmap;
-
-        /// Constructor
-        template <typename K_ARG>
-        ReferenceT(Map& map, K_ARG&& key)
-            : map_(map),
-              key_(std::forward<K_ARG>(key)),
-              cached_(nullptr),
-              generation_(map.Generation() - 1) {}
-
-        /// Constructor
-        template <typename K_ARG>
-        ReferenceT(Map& map, K_ARG&& key, T* value)
-            : map_(map),
-              key_(std::forward<K_ARG>(key)),
-              cached_(value),
-              generation_(map.Generation()) {}
-
-        Map& map_;
-        const K key_;
-        mutable T* cached_ = nullptr;
-        mutable size_t generation_ = 0;
-    };
-
-    /// A mutable reference returned by Find()
-    template <typename K>
-    using Reference = ReferenceT</*IS_CONST*/ false, K>;
-
-    /// An immutable reference returned by Find()
-    template <typename K>
-    using ConstReference = ReferenceT</*IS_CONST*/ true, K>;
-
-    /// Adds a value to the map, if the map does not already contain an entry with the key @p key.
-    /// @param key the entry key.
-    /// @param value the value of the entry to add to the map.
-    /// @returns A AddResult describing the result of the add
+    /// Add attempts to insert a new entry into the map.
+    /// If an existing entry exists with the given key, then the entry is not replaced.
+    /// @param key the new entry's key
+    /// @param value the new entry's value
+    /// @return an AddResult.
     template <typename K, typename V>
-    AddResult Add(K&& key, V&& value) {
-        return this->template Put<PutMode::kAdd>(std::forward<K>(key), std::forward<V>(value));
+    AddResult<Value> Add(K&& key, V&& value) {
+        auto res = this->Put(/* replace */ false, std::forward<K>(key), std::forward<V>(value));
+        return {res.entry.value, res.action == Base::PutResult::kAdded};
     }
 
-    /// Adds a new entry to the map, replacing any entry that has a key equal to @p key.
-    /// @param key the entry key.
-    /// @param value the value of the entry to add to the map.
-    /// @returns A AddResult describing the result of the replace
+    /// Inserts a new entry into the map or updates an existing entry.
+    /// @param key the new entry's key
+    /// @param value the new entry's value
     template <typename K, typename V>
-    AddResult Replace(K&& key, V&& value) {
-        return this->template Put<PutMode::kReplace>(std::forward<K>(key), std::forward<V>(value));
+    void Replace(K&& key, V&& value) {
+        this->Put(/* replace */ true, std::forward<K>(key), std::forward<V>(value));
     }
 
-    /// @param key the key to search for.
-    /// @returns the value of the entry that is equal to `value`, or no value if the entry was not
-    ///          found.
     template <typename K>
-    std::optional<Value> Get(K&& key) const {
-        if (auto [found, index] = this->IndexOf(key); found) {
-            return this->slots_[index].entry->value;
+    GetResult<Value> Get(K&& key) {
+        auto const [hash, slot_idx] = this->Hash(key);
+        if (auto* node = this->FindNode(hash, slot_idx, key)) {
+            return {&node->Entry().value};
         }
-        return std::nullopt;
+        return {nullptr};
+    }
+
+    template <typename K>
+    GetResult<const Value> Get(K&& key) const {
+        auto const [hash, slot_idx] = this->Hash(key);
+        if (auto* node = this->FindNode(hash, slot_idx, key)) {
+            return {&node->Entry().value};
+        }
+        return {nullptr};
+    }
+
+    /// Searches for an entry with the given key value returning that value if found, otherwise
+    /// returns @p not_found.
+    /// @param key the entry's key value to search for.
+    /// @returns the value of the entry, if found otherwise @p not_found.
+    template <typename K>
+    const Value& Get(K&& key, const Value& not_found) const {
+        auto const [hash, slot_idx] = this->Hash(key);
+        if (auto* node = this->FindNode(hash, slot_idx, key)) {
+            return node->Entry().value;
+        }
+        return not_found;
     }
 
     /// Searches for an entry with the given key, adding and returning the result of calling
@@ -173,22 +166,14 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     /// @returns the value of the entry.
     template <typename K, typename CREATE>
     Value& GetOrCreate(K&& key, CREATE&& create) {
-        auto res = Add(std::forward<K>(key), Value{});
-        if (res.action == MapAction::kAdded) {
-            // Store the map generation before calling create()
-            auto generation = this->Generation();
-            // Call create(), which might modify this map.
-            auto value = create();
-            // Was this map mutated?
-            if (this->Generation() == generation) {
-                // Calling create() did not touch the map. No need to lookup again.
-                *res.value = std::move(value);
-            } else {
-                // Calling create() modified the map. Need to insert again.
-                res = Replace(key, std::move(value));
-            }
+        this->GrowIfNeeded();
+        auto const [hash, slot_idx] = this->Hash(key);
+        if (auto* node = this->FindNode(hash, slot_idx, key)) {
+            return node->Entry().value;
         }
-        return *res.value;
+        auto& value = this->Insert(hash, slot_idx, std::forward<K>(key), Value{})->Entry().value;
+        value = create();
+        return value;
     }
 
     /// Searches for an entry with the given key value, adding and returning a newly created
@@ -196,23 +181,13 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     /// @param key the entry's key value to search for.
     /// @returns the value of the entry.
     template <typename K>
-    auto GetOrZero(K&& key) {
-        auto res = Add(std::forward<K>(key), Value{});
-        return Reference<ReferenceKeyType<K>>(*this, key, res.value);
-    }
-
-    /// @param key the key to search for.
-    /// @returns a reference to the entry that is equal to the given value.
-    template <typename K>
-    auto Find(K&& key) {
-        return Reference<ReferenceKeyType<K>>(*this, std::forward<K>(key));
-    }
-
-    /// @param key the key to search for.
-    /// @returns a reference to the entry that is equal to the given value.
-    template <typename K>
-    auto Find(K&& key) const {
-        return ConstReference<ReferenceKeyType<K>>(*this, std::forward<K>(key));
+    Value& GetOrZero(K&& key) {
+        this->GrowIfNeeded();
+        auto const [hash, slot_idx] = this->Hash(key);
+        if (auto* node = this->FindNode(hash, slot_idx, key)) {
+            return node->Entry().value;
+        }
+        return this->Insert(hash, slot_idx, std::forward<K>(key), Value{})->Entry().value;
     }
 
     /// @returns the keys of the map as a vector.
@@ -248,7 +223,7 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
             return false;
         }
         for (auto it : *this) {
-            auto other_val = other.Find(it.key);
+            auto other_val = other.Get(it.key);
             if (!other_val || it.value != *other_val) {
                 return false;
             }
@@ -262,23 +237,6 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     template <typename K, typename V, size_t N2>
     bool operator!=(const Hashmap<K, V, N2>& other) const {
         return !(*this == other);
-    }
-
-  private:
-    template <typename K>
-    Value* Lookup(K&& key) {
-        if (auto [found, index] = this->IndexOf(key); found) {
-            return &this->slots_[index].entry->value;
-        }
-        return nullptr;
-    }
-
-    template <typename K>
-    const Value* Lookup(K&& key) const {
-        if (auto [found, index] = this->IndexOf(key); found) {
-            return &this->slots_[index].entry->value;
-        }
-        return nullptr;
     }
 };
 
@@ -297,6 +255,31 @@ struct Hasher<Hashmap<K, V, N, HASH, EQUAL>> {
         return hash;
     }
 };
+
+/// Writes the Hashmap to the stream.
+/// @param out the stream to write to
+/// @param map the Hashmap to write
+/// @returns out so calls can be chained
+template <typename STREAM,
+          typename KEY,
+          typename VALUE,
+          size_t N,
+          typename HASH,
+          typename EQUAL,
+          typename = traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, const Hashmap<KEY, VALUE, N, HASH, EQUAL>& map) {
+    out << "Hashmap{";
+    bool first = true;
+    for (auto it : map) {
+        if (!first) {
+            out << ", ";
+        }
+        first = false;
+        out << it;
+    }
+    out << "}";
+    return out;
+}
 
 }  // namespace tint
 

@@ -105,7 +105,7 @@ struct State {
                 if (ptr && ptr->AddressSpace() == core::AddressSpace::kWorkgroup) {
                     // Record the usage of the variable for each block that references it.
                     var->Result(0)->ForEachUse([&](const Usage& use) {
-                        block_to_direct_vars.GetOrZero(use.instruction->Block())->Add(var);
+                        block_to_direct_vars.GetOrZero(use.instruction->Block()).Add(var);
                     });
                     var_to_id.Add(var, next_id++);
                 }
@@ -196,7 +196,7 @@ struct State {
     /// @param vars the set of transitively referenced workgroup variables to populate
     void GetReferencedVars(Block* block, VarSet& vars) {
         // Add directly referenced vars.
-        if (auto itr = block_to_direct_vars.Find(block)) {
+        if (auto itr = block_to_direct_vars.Get(block)) {
             for (auto* var : *itr) {
                 vars.Add(var);
             }
@@ -234,7 +234,7 @@ struct State {
                        StoreMap& stores) {
         // If this type can be trivially zeroed, store to the whole element.
         if (CanTriviallyZero(type)) {
-            stores.GetOrZero(iteration_count)->Push(Store{var, type, indices});
+            stores.GetOrZero(iteration_count).Push(Store{var, type, indices});
             return;
         }
 
@@ -253,7 +253,7 @@ struct State {
                 PrepareStores(var, arr->ElemType(), iteration_count * count, new_indices, stores);
             },
             [&](const type::Atomic*) {
-                stores.GetOrZero(iteration_count)->Push(Store{var, type, indices});
+                stores.GetOrZero(iteration_count).Push(Store{var, type, indices});
             },
             [&](const type::Struct* str) {
                 for (auto* member : str->Members()) {
