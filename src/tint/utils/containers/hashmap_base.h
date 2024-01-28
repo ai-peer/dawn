@@ -180,18 +180,15 @@ class HashmapBase {
 
         Slot() = default;
 
-        Slot(E&& e, size_t h, size_t d) : hash(h), distance(d), occupied(true) {
-            new (&Entry()) E{std::move(e)};
-        }
+        Slot(E&& e, size_t d) : distance(d), occupied(true) { new (&Entry()) E{std::move(e)}; }
 
-        Slot(const Slot& other)
-            : hash(other.hash), distance(other.distance), occupied(other.occupied) {
+        Slot(const Slot& other) : distance(other.distance), occupied(other.occupied) {
             if (occupied) {
                 new (&Entry()) E{other.Entry()};
             }
         }
 
-        Slot(Slot&& other) : hash(other.hash), distance(other.distance), occupied(other.occupied) {
+        Slot(Slot&& other) : distance(other.distance), occupied(other.occupied) {
             if (occupied) {
                 new (&Entry()) E{std::move(other.Entry())};
             }
@@ -202,7 +199,6 @@ class HashmapBase {
         Slot& operator=(const Slot& other) {
             if (other.occupied) {
                 SetEntry(other.Entry());
-                hash = other.hash;
                 distance = other.distance;
             } else {
                 Clear();
@@ -213,7 +209,6 @@ class HashmapBase {
         Slot& operator=(Slot&& other) {
             if (other.occupied) {
                 SetEntry(std::move(other.Entry()));
-                hash = other.hash;
                 distance = other.distance;
             } else {
                 Clear();
@@ -223,7 +218,8 @@ class HashmapBase {
 
         template <typename K>
         bool Equals(size_t key_hash, K&& key) const {
-            return occupied && key_hash == hash && EQUAL()(std::forward<K>(key), KeyOf(Entry()));
+            const auto& entry_key = KeyOf(Entry());
+            return occupied && key_hash == HASH()(entry_key) && EQUAL()(key, entry_key);
         }
 
         /// If the Entry is occupied, destructs the entry, and marks the Slot as vacant.
@@ -232,7 +228,6 @@ class HashmapBase {
                 Entry().~E();
                 occupied = false;
             }
-            hash = 0;
             distance = 0;
         }
 
@@ -261,8 +256,6 @@ class HashmapBase {
 
         /// The slot entry. Only valid if `occupied`.
         Storage storage;
-        /// The precomputed hash of value.
-        size_t hash = 0;
         size_t distance : 63 = 0;
         bool occupied : 1 = false;
     };
@@ -490,12 +483,11 @@ class HashmapBase {
         for (auto& slot : copy) {
             if (slot.occupied) {
                 auto& entry = slot.Entry();
-                HashResult hash{Wrap(slot.hash), slot.hash};
                 if constexpr (ValueIsVoid) {
                     struct NoValue {};
-                    PutWithHash<PutMode::kAdd>(std::move(entry), NoValue{}, hash);
+                    PutNoReserve<PutMode::kAdd>(std::move(entry), NoValue{});
                 } else {
-                    PutWithHash<PutMode::kAdd>(std::move(entry.key), std::move(entry.value), hash);
+                    PutNoReserve<PutMode::kAdd>(std::move(entry.key), std::move(entry.value));
                 }
             }
         }
@@ -531,7 +523,6 @@ class HashmapBase {
             if (slot.occupied) {
                 num_alive++;
                 auto const [index, hash] = Hash(KeyOf(slot.Entry()));
-                TINT_ASSERT(hash == slot.hash);
                 TINT_ASSERT(slot_idx == Wrap(index + slot.distance));
             }
         }
@@ -569,7 +560,7 @@ class HashmapBase {
             Reserve((count_ + 1) * 2);
         }
 
-        return PutWithHash<MODE>(std::forward<K>(key), std::forward<V>(value), Hash(key));
+        return PutNoReserve<MODE>(std::forward<K>(key), std::forward<V>(value));
     }
 
     /// HashResult is the return value of Hash()
@@ -581,7 +572,8 @@ class HashmapBase {
     };
 
     template <PutMode MODE, typename K, typename V>
-    PutResult PutWithHash(K&& key, V&& value, HashResult hash) {
+    PutResult PutNoReserve(K&& key, V&& value) {
+        auto hash = Hash(key);
         auto make_entry = [&](Slot& slot) {
             if constexpr (ValueIsVoid) {
                 slot.SetEntry(std::forward<K>(key));
@@ -599,7 +591,6 @@ class HashmapBase {
                 // Found an empty slot.
                 // Place value directly into the slot, and we're done.
                 make_entry(slot);
-                slot.hash = hash.code;
                 slot.distance = distance;
                 count_++;
                 generation_++;
@@ -623,12 +614,11 @@ class HashmapBase {
                 // Existing slot has a closer distance than the value we're attempting to insert.
                 // Steal from the rich!
                 // Move the current slot to a temporary (evicted).
-                Slot evicted{std::move(slot.Entry()), slot.hash, slot.distance};
+                Slot evicted{std::move(slot.Entry()), slot.distance};
 
                 // Put the value into the slot.
                 make_entry(slot);
                 slot.distance = distance;
-                slot.hash = hash.code;
 
                 // Find a new home for the evicted slot.
                 evicted.distance++;  // We've already swapped at index.
