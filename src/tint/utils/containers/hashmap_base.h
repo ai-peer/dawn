@@ -263,16 +263,16 @@ class HashmapBase {
     /// The target length of the underlying vector length in relation to the number of entries in
     /// the map, expressed as a percentage. For example a value of `150` would mean there would be
     /// at least 50% more slots than the number of map entries.
-    static constexpr size_t kRehashFactor = 150;
+    static constexpr size_t kRehashFactor = 133;
 
     /// @returns the target slot vector size to hold `n` map entries.
-    static constexpr size_t NumSlots(size_t count) { return (count * kRehashFactor) / 100; }
+    static constexpr size_t NumSlots(size_t count) {
+        constexpr size_t kMinSlots = 4;
+        return std::max<size_t>((count * kRehashFactor) / 100, kMinSlots);
+    }
 
     /// The fixed-size slot vector length, based on N and kRehashFactor.
     static constexpr size_t kNumFixedSlots = NumSlots(N);
-
-    /// The minimum number of slots for the map.
-    static constexpr size_t kMinSlots = std::max<size_t>(kNumFixedSlots, 4);
 
   public:
     /// Iterator for entries in the map.
@@ -383,7 +383,7 @@ class HashmapBase {
     using ConstIterator = IteratorT</*IS_CONST*/ true>;
 
     /// Constructor
-    HashmapBase() { slots_.Resize(kMinSlots); }
+    HashmapBase() { slots_.Resize(kNumFixedSlots); }
 
     /// Copy constructor
     /// @param other the other HashmapBase to copy
@@ -409,7 +409,7 @@ class HashmapBase {
     /// Removes all entries from the map.
     void Clear() {
         slots_.Clear();  // Destructs all entries
-        slots_.Resize(kMinSlots);
+        slots_.Resize(kNumFixedSlots);
         count_ = 0;
         generation_++;
     }
@@ -465,7 +465,7 @@ class HashmapBase {
     /// @param capacity the new capacity of the map.
     void Reserve(size_t capacity) {
         // Calculate the number of slots required to hold `capacity` entries.
-        const size_t num_slots = std::max(NumSlots(capacity), kMinSlots);
+        const size_t num_slots = std::max(NumSlots(capacity), kNumFixedSlots);
         if (slots_.Length() >= num_slots) {
             // Already have enough slots.
             return;
@@ -712,7 +712,7 @@ class HashmapBase {
     size_t Wrap(size_t index) const { return index % slots_.Length(); }
 
     /// The vector of slots. The vector length is equal to its capacity.
-    Vector<Slot, kMinSlots> slots_;
+    Vector<Slot, kNumFixedSlots> slots_;
 
     /// The number of entries in the map.
     size_t count_ = 0;
