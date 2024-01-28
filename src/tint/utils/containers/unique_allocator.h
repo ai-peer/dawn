@@ -36,8 +36,7 @@
 
 namespace tint {
 
-/// UniqueAllocator is used to allocate unique instances of the template type
-/// `T`.
+/// UniqueAllocator is used to allocate unique instances of the template type `T`.
 template <typename T, typename HASH = std::hash<T>, typename EQUAL = std::equal_to<T>>
 class UniqueAllocator {
   public:
@@ -120,13 +119,13 @@ class UniqueAllocator {
         T*& Add(T* key) {
             struct NoValue {};
             auto res = this->template Put<PutMode::kAdd>(key, NoValue{});
-            return *res.slot.entry;
+            return res.slot.Entry();
         }
 
         T* Find(T* key) const {
             struct NoValue {};
             if (auto [found, index] = this->IndexOf(key); found) {
-                return *this->slots_[index].entry;
+                return this->slots_[index].Entry();
             }
             return nullptr;
         }
