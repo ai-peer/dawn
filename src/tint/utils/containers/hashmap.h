@@ -149,7 +149,7 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     template <typename K, typename V>
     AddResult Add(K&& key, V&& value) {
         auto res = this->template Put<PutMode::kAdd>(std::forward<K>(key), std::forward<V>(value));
-        return {res.action, &res.slot.entry->value};
+        return {res.action, &res.slot.Entry().value};
     }
 
     /// Adds a new entry to the map, replacing any entry that has a key equal to @p key.
@@ -160,7 +160,7 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     AddResult Replace(K&& key, V&& value) {
         auto res =
             this->template Put<PutMode::kReplace>(std::forward<K>(key), std::forward<V>(value));
-        return {res.action, &res.slot.entry->value};
+        return {res.action, &res.slot.Entry().value};
     }
 
     /// @param key the key to search for.
@@ -169,7 +169,7 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     template <typename K>
     std::optional<Value> Get(K&& key) const {
         if (auto [found, index] = this->IndexOf(key); found) {
-            return this->slots_[index].entry->value;
+            return this->slots_[index].Entry().value;
         }
         return std::nullopt;
     }
@@ -279,7 +279,7 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     template <typename K>
     Value* Lookup(K&& key) {
         if (auto [found, index] = this->IndexOf(key); found) {
-            return &this->slots_[index].entry->value;
+            return &this->slots_[index].Entry().value;
         }
         return nullptr;
     }
@@ -287,7 +287,7 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     template <typename K>
     const Value* Lookup(K&& key) const {
         if (auto [found, index] = this->IndexOf(key); found) {
-            return &this->slots_[index].entry->value;
+            return &this->slots_[index].Entry().value;
         }
         return nullptr;
     }
