@@ -473,8 +473,8 @@ class HashmapBase {
     struct PutResult {
         /// Whether the insert replaced or added a new entry to the map.
         MapAction action = MapAction::kAdded;
-        /// A pointer to the inserted entry value.
-        Value* value = nullptr;
+        /// A pointer to the inserted entry slot.
+        Slot& slot;
 
         /// @returns true if the entry was added to the map, or an existing entry was replaced.
         operator bool() const { return action != MapAction::kKeptExisting; }
@@ -525,7 +525,7 @@ class HashmapBase {
                 slot.distance = distance;
                 count_++;
                 generation_++;
-                return PutResult{MapAction::kAdded, ValueOf(*slot.entry)};
+                return PutResult{MapAction::kAdded, slot};
             }
 
             // Slot has an entry
@@ -535,9 +535,9 @@ class HashmapBase {
                 if constexpr (MODE == PutMode::kReplace) {
                     slot.entry = make_entry();
                     generation_++;
-                    return PutResult{MapAction::kReplaced, ValueOf(*slot.entry)};
+                    return PutResult{MapAction::kReplaced, slot};
                 } else {
-                    return PutResult{MapAction::kKeptExisting, ValueOf(*slot.entry)};
+                    return PutResult{MapAction::kKeptExisting, slot};
                 }
             }
 
@@ -554,7 +554,7 @@ class HashmapBase {
 
                 count_++;
                 generation_++;
-                return PutResult{MapAction::kAdded, ValueOf(*slot.entry)};
+                return PutResult{MapAction::kAdded, slot};
             }
 
             index = (index == count - 1) ? 0 : index + 1;
