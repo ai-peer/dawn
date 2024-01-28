@@ -61,7 +61,15 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     using Entry = KeyValue<Key, Value>;
 
     /// Result of Add()
-    using AddResult = typename Base::PutResult;
+    struct AddResult {
+        /// Whether the insert replaced or added a new entry to the map.
+        MapAction action = MapAction::kAdded;
+        /// A pointer to the inserted entry value.
+        Value* value = nullptr;
+
+        /// @returns true if the entry was added to the map, or an existing entry was replaced.
+        operator bool() const { return action != MapAction::kKeptExisting; }
+    };
 
     /// Reference is returned by Hashmap::Find(), and performs dynamic Hashmap lookups.
     /// The value returned by the Reference reflects the current state of the Hashmap, and so the
@@ -140,7 +148,8 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     /// @returns A AddResult describing the result of the add
     template <typename K, typename V>
     AddResult Add(K&& key, V&& value) {
-        return this->template Put<PutMode::kAdd>(std::forward<K>(key), std::forward<V>(value));
+        auto res = this->template Put<PutMode::kAdd>(std::forward<K>(key), std::forward<V>(value));
+        return {res.action, &res.slot.entry->value};
     }
 
     /// Adds a new entry to the map, replacing any entry that has a key equal to @p key.
@@ -149,7 +158,9 @@ class Hashmap : public HashmapBase<KEY, VALUE, N, HASH, EQUAL> {
     /// @returns A AddResult describing the result of the replace
     template <typename K, typename V>
     AddResult Replace(K&& key, V&& value) {
-        return this->template Put<PutMode::kReplace>(std::forward<K>(key), std::forward<V>(value));
+        auto res =
+            this->template Put<PutMode::kReplace>(std::forward<K>(key), std::forward<V>(value));
+        return {res.action, &res.slot.entry->value};
     }
 
     /// @param key the key to search for.
