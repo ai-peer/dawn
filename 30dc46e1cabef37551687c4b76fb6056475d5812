@@ -16,6 +16,23 @@
       "message": "LGTM",
       "revId": "30dc46e1cabef37551687c4b76fb6056475d5812",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d625a676_c8d0727e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-29T16:29:03Z",
+      "side": 1,
+      "message": "LGTM but Kokoro build seems to break",
+      "revId": "30dc46e1cabef37551687c4b76fb6056475d5812",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
