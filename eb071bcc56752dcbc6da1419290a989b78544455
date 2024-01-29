@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "bf21b639_903c41fc",
+        "filename": "src/tint/lang/core/type/builtin_structs.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 182,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-29T14:51:48Z",
+      "side": 1,
+      "message": "Why not make a GetOrCreateStruct method?",
+      "revId": "eb071bcc56752dcbc6da1419290a989b78544455",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
