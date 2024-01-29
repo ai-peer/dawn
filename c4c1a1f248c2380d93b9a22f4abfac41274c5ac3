@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d79a8940_551a70d2",
+        "filename": "src/tint/lang/hlsl/writer/ast_printer/ast_printer.cc",
+        "patchSetId": 2
+      },
+      "lineNbr": 4675,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-01-29T15:35:55Z",
+      "side": 1,
+      "message": "This is the actual change - never emit \"const\". I didn\u0027t delete this code because we could bring it back if the upstream bug ever gets fixed. I could delete all of this, though, if you think that\u0027s cleaner.",
+      "revId": "c4c1a1f248c2380d93b9a22f4abfac41274c5ac3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
