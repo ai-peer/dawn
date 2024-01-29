@@ -16,6 +16,23 @@
       "message": "PTAL!",
       "revId": "4e5e5e13278df0f5fe43ad58b66fcf82e4d6d65e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d24936ef_a7a1fa14",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1273,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-29T16:26:14Z",
+      "side": 1,
+      "message": "nit: Move this method somewhere else in the .cpp",
+      "revId": "4e5e5e13278df0f5fe43ad58b66fcf82e4d6d65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
