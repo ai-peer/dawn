@@ -85,7 +85,6 @@ ast::transform::Transform::ApplyResult PadStructs::Apply(const Program& src,
             return nullptr;
         }
         uint32_t offset = 0;
-        bool has_runtime_sized_array = false;
         tint::Vector<const ast::StructMember*, 8> new_members;
         for (auto* mem : str->Members()) {
             auto name = mem->Name().Name();
@@ -104,10 +103,6 @@ ast::transform::Transform::ApplyResult PadStructs::Apply(const Program& src,
             if (ty->Is<core::type::Struct>() && str->UsedAs(core::AddressSpace::kUniform)) {
                 // std140 structs should be padded out to 16 bytes.
                 size = tint::RoundUp(16u, size);
-            } else if (auto* array_ty = ty->As<core::type::Array>()) {
-                if (array_ty->Count()->Is<core::type::RuntimeArrayCount>()) {
-                    has_runtime_sized_array = true;
-                }
             }
             offset += size;
         }
@@ -117,14 +112,13 @@ ast::transform::Transform::ApplyResult PadStructs::Apply(const Program& src,
         if (str->UsedAs(core::AddressSpace::kUniform)) {
             struct_size = tint::RoundUp(16u, struct_size);
         }
-        if (offset < struct_size && !has_runtime_sized_array) {
+        if (offset < struct_size && str->HasFixedFootprint()) {
             CreatePadding(&new_members, &padding_members, ctx.dst, struct_size - offset);
         }
 
-        tint::Vector<const ast::Attribute*, 1> struct_attribs;
+        tint::Vector<const ast::Attribute*, 7> struct_attribs = ctx.Clone(ast_str->attributes);
         if (!padding_members.IsEmpty()) {
-            struct_attribs =
-                tint::Vector{b.Disable(ast::DisabledValidation::kIgnoreStructMemberLimit)};
+            struct_attribs.Push(b.Disable(ast::DisabledValidation::kIgnoreStructMemberLimit));
         }
 
         auto* new_struct = b.create<ast::Struct>(ctx.Clone(ast_str->name), std::move(new_members),

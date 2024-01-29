@@ -207,6 +207,8 @@ SanitizedResult Sanitize(const Program& in,
     // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<ast::transform::CanonicalizeEntryPointIO>();
 
+    manager.Add<ast::transform::AddBlockAttribute>();
+
     // PadStructs must come after CanonicalizeEntryPointIO
     manager.Add<PadStructs>();
 
@@ -234,7 +236,6 @@ SanitizedResult Sanitize(const Program& in,
 
     manager.Add<ast::transform::PromoteInitializersToLet>();
     manager.Add<ast::transform::AddEmptyEntryPoint>();
-    manager.Add<ast::transform::AddBlockAttribute>();
 
     // Std140 must come after PromoteSideEffectsToDecl and before SimplifyPointers.
     manager.Add<ast::transform::Std140>();
