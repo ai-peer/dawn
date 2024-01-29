@@ -33,6 +33,29 @@
       "message": "nit: Move this method somewhere else in the .cpp",
       "revId": "4e5e5e13278df0f5fe43ad58b66fcf82e4d6d65e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1380d3c3_9cca7617",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1291,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-01-29T16:38:28Z",
+      "side": 1,
+      "message": "dedent, maybe like ?\n```\nif (count \u003e\u003d limit) { \n  return;\n}\ncount++;\nif (count \u003d\u003d limit) {\n  return EmitLog(\"too many\");\n}\n```",
+      "range": {
+        "startLine": 1281,
+        "startChar": 4,
+        "endLine": 1291,
+        "endChar": 0
+      },
+      "revId": "4e5e5e13278df0f5fe43ad58b66fcf82e4d6d65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
