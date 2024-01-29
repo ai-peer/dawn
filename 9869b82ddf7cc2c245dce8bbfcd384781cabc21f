@@ -16,6 +16,24 @@
       "message": "If this constant isn\u0027t used anywhere else, I would consider just removing it and inlining `NumSlots(N)` into the rhs of `kMinSlots` initialization.",
       "revId": "9869b82ddf7cc2c245dce8bbfcd384781cabc21f",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f754275_501521ae",
+        "filename": "src/tint/utils/containers/hashmap_base.h",
+        "patchSetId": 3
+      },
+      "lineNbr": 200,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-29T15:48:33Z",
+      "side": 1,
+      "message": "👍 I do that in a later CL.",
+      "parentUuid": "4fdc0d96_7eae9e87",
+      "revId": "9869b82ddf7cc2c245dce8bbfcd384781cabc21f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
