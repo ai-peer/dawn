@@ -221,8 +221,8 @@ WGPUBuffer Buffer::Create(Device* device, const WGPUBufferDescriptor* descriptor
         return CreateErrorBufferOOMAtClient(device, descriptor);
     }
 
-    std::unique_ptr<MemoryTransferService::ReadHandle> readHandle = nullptr;
-    std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle = nullptr;
+    std::unique_ptr<MemoryTransferService::ReadHandle> readHandle;
+    std::unique_ptr<MemoryTransferService::WriteHandle> writeHandle;
 
     DeviceCreateBufferCmd cmd;
     cmd.deviceId = device->GetWireId();
@@ -447,7 +447,8 @@ void Buffer::Unmap() {
         // for mappedAtCreation usage. It is destroyed on unmap after flush to server
         // instead of at buffer destruction.
         if (mDestructWriteHandleOnUnmap) {
-            mWriteHandle = nullptr;
+            mMappedData = nullptr;
+            mWriteHandle.reset();
             if (mReadHandle) {
                 // If it's both mappedAtCreation and MapRead we need to reset
                 // mData to readHandle's GetData(). This could be changed to
@@ -539,11 +540,11 @@ void Buffer::FreeMappedData() {
     }
 #endif  // defined(DAWN_ENABLE_ASSERTS)
 
-    mMappedOffset = 0;
-    mMappedSize = 0;
-    mReadHandle = nullptr;
-    mWriteHandle = nullptr;
     mMappedData = nullptr;
+    mMappedSize = 0;
+    mMappedOffset = 0;
+    mReadHandle.reset();
+    mWriteHandle.reset();
     mMappedState = MapState::Unmapped;
 }
 

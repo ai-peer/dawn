@@ -109,16 +109,16 @@ class Buffer final : public ObjectWithEventsBase {
         MappedAtCreation,
     };
     std::optional<MapRequest> mPendingMapRequest = std::nullopt;
-    MapState mMappedState = MapState::Unmapped;
-    // TODO(https://crbug.com/dawn/2345): Investigate `DanglingUntriaged` in dawn/wire.
-    raw_ptr<void, DanglingUntriaged> mMappedData = nullptr;
-    size_t mMappedOffset = 0;
-    size_t mMappedSize = 0;
 
     // Only one mapped pointer can be active at a time
     // TODO(enga): Use a tagged pointer to save space.
-    std::unique_ptr<MemoryTransferService::ReadHandle> mReadHandle = nullptr;
-    std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle = nullptr;
+    std::unique_ptr<MemoryTransferService::ReadHandle> mReadHandle;
+    std::unique_ptr<MemoryTransferService::WriteHandle> mWriteHandle;
+
+    MapState mMappedState = MapState::Unmapped;
+    size_t mMappedOffset = 0;
+    size_t mMappedSize = 0;
+    raw_ptr<void> mMappedData = nullptr;
 };
 
 }  // namespace dawn::wire::client
