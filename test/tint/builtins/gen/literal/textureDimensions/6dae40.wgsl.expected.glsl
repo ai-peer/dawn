@@ -5,6 +5,7 @@ SKIP: FAILED
 layout(rg32f) uniform highp readonly image3D arg_0;
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec3 inner;
+  uint pad;
 } prevent_dce;
 
 void textureDimensions_6dae40() {
@@ -38,6 +39,7 @@ precision highp float;
 layout(rg32f) uniform highp readonly image3D arg_0;
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec3 inner;
+  uint pad;
 } prevent_dce;
 
 void textureDimensions_6dae40() {
@@ -65,6 +67,7 @@ ERROR: 2 compilation errors.  No code generated.
 layout(rg32f) uniform highp readonly image3D arg_0;
 layout(binding = 0, std430) buffer prevent_dce_block_ssbo {
   uvec3 inner;
+  uint pad;
 } prevent_dce;
 
 void textureDimensions_6dae40() {

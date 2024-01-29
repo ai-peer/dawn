@@ -49,8 +49,12 @@ TEST_F(PadStructsTest, EmptyModule) {
 
 TEST_F(PadStructsTest, Uniform) {
     auto* src = R"(
+@internal(disable_validation__ignore_struct_member)
 struct S {
   x : i32,
+  pad : u32,
+  pad_1 : u32,
+  pad_2 : u32,
 }
 
 @group(0) @binding(0) var<uniform> u : S;
@@ -505,9 +509,12 @@ struct T {
   b : i32,
 }
 
+@internal(disable_validation__ignore_struct_member)
 struct S {
   a : vec4<f32>,
   b : array<T, 1u>,
+  pad : u32,
+  pad_1 : u32,
 }
 
 @group(0) @binding(0) var<storage, read_write> s : S;
