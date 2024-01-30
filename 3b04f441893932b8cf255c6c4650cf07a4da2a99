@@ -16,6 +16,23 @@
       "message": "PTAL! kIndex gets deleted in the next CL.",
       "revId": "3b04f441893932b8cf255c6c4650cf07a4da2a99",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "c62af576_e1fbd541",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-30T12:04:47Z",
+      "side": 1,
+      "message": "Thanks!",
+      "revId": "3b04f441893932b8cf255c6c4650cf07a4da2a99",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
