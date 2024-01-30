@@ -51,6 +51,24 @@
       "parentUuid": "c9264a3d_87a817d4",
       "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ca887b6d_2aff7077",
+        "filename": "src/tint/utils/containers/scope_stack.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-30T18:14:16Z",
+      "side": 1,
+      "message": "Then should it raise an error. Eithere there is a bug in that the global scope has been popped, or we\u0027re doing it for a reason and there is now a bug that we\u0027ve left the old content in the scope.",
+      "parentUuid": "8eef5db0_89bbbf7b",
+      "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
