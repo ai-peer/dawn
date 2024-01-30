@@ -2065,7 +2065,9 @@ Maybe<const ast::BlockStatement*> Parser::continuing_statement() {
 Maybe<const ast::Expression*> Parser::primary_expression() {
     auto& t = peek();
 
-    if (match(Token::Type::kBitcast)) {
+    if (t.Is(Token::Type::kIdentifier) && t.to_str() == "bitcast") {
+        next();  // consume the peek
+
         const char* use = "bitcast expression";
 
         auto type = expect_template_arg_block(use, [&] { return expect_type(use); });
