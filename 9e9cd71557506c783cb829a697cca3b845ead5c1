@@ -326,6 +326,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "717df543_c6d06cd8",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-30T17:48:43Z",
+      "side": 1,
+      "message": "`D3D11_MAP_DISCARD` tells the driver that it can do versioning, essentially it does a new allocation of uniforms in its ringbuffer and repoints the uniform buffer to point to that. We should be able to do the same ourselves which was what the whole discussion on the other CL with Rafael was about. If we end up absolutely needing to use `D3D11_MAP_DISCARD` that\u0027s ok but let\u0027s try to figure out why our approach is slower.\n\nAlso IMHO given how much we have been spending discussing this, we should have dedicated performance tests in Dawn.",
+      "parentUuid": "f1367485_0ffa52d0",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e989eae1_5e53b4e1",
