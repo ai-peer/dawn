@@ -37,6 +37,29 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "5c77dbd9_9edad5f3",
+        "filename": "src/dawn/native/Device.cpp",
+        "patchSetId": 2
+      },
+      "lineNbr": 1284,
+      "author": {
+        "id": 1002831
+      },
+      "writtenOn": "2024-01-30T02:49:43Z",
+      "side": 1,
+      "message": "nit. double spaces",
+      "range": {
+        "startLine": 1284,
+        "startChar": 28,
+        "endLine": 1284,
+        "endChar": 30
+      },
+      "revId": "4e5e5e13278df0f5fe43ad58b66fcf82e4d6d65e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "1380d3c3_9cca7617",
         "filename": "src/dawn/native/Device.cpp",
         "patchSetId": 2
