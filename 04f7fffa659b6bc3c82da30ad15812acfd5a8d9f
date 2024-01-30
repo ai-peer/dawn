@@ -83,6 +83,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34010b8a_3844e965",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002331
+      },
+      "writtenOn": "2024-01-30T02:16:31Z",
+      "side": 1,
+      "message": "It is not a big deal. I just think `lastUsageSerial \u003c queue-\u003eGetLastSubmittedCommandSerial()` here, it means NextSerial() increased the serial by 2 at least. It could mean some unexpected thing happened? Do we care about it? It is up to you for change it or not.",
+      "parentUuid": "45c4a31e_1b8e5774",
+      "range": {
+        "startLine": 100,
+        "startChar": 36,
+        "endLine": 100,
+        "endChar": 38
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "fab258f8_bc2be08f",
