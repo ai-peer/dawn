@@ -69,10 +69,7 @@ class UniqueAllocator {
         // Create a temporary T instance on the stack so that we can hash it, and
         // use it for equality lookup for the std::unordered_set.
         TYPE key{args...};
-        if (T* ptr = items.Find(&key)) {
-            return static_cast<TYPE*>(ptr);
-        }
-        return nullptr;
+        return static_cast<TYPE*>(items.Get(&key));
     }
 
     /// Wrap sets this allocator to the objects created with the content of `inner`.
@@ -112,20 +109,18 @@ class UniqueAllocator {
     /// A custom Hashset implementation that allows keys to be modified.
     class Set : public HashmapBase<T*, void, kFixedSize, Hasher, Equality> {
         using Base = HashmapBase<T*, void, kFixedSize, Hasher, Equality>;
-        using PutMode = typename Base::PutMode;
         using AddResult = typename Base::PutResult;
 
       public:
         T*& Add(T* key) {
             struct NoValue {};
-            auto res = this->template Put<PutMode::kAdd>(key, NoValue{});
-            return res.slot.Entry();
+            return this->template Put(/* replace */ false, key, NoValue{}).entry;
         }
 
-        T* Find(T* key) const {
-            struct NoValue {};
-            if (auto [found, index] = this->IndexOf(key); found) {
-                return this->slots_[index].Entry();
+        T* Get(T* key) const {
+            auto const [hash, slot_idx] = this->Hash(key);
+            if (auto* node = this->FindNode(hash, slot_idx, key)) {
+                return node->Entry();
             }
             return nullptr;
         }

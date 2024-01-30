@@ -67,7 +67,7 @@ const ast::Node* CloneContext::CloneNode(const ast::Node* node) {
     }
 
     // Was Replace() called for this node?
-    if (auto fn = replacements_.Find(node)) {
+    if (auto fn = replacements_.Get(node)) {
         return (*fn)();
     }
 

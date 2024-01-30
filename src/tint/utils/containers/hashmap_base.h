@@ -39,19 +39,7 @@
 #include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/traits/traits.h"
 
-#define TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-
 namespace tint {
-
-/// Action taken by a map mutation
-enum class MapAction {
-    /// A new entry was added to the map
-    kAdded,
-    /// A existing entry in the map was replaced
-    kReplaced,
-    /// No action was taken as the map already contained an entry with the given key
-    kKeptExisting,
-};
 
 /// KeyValue is a key-value pair.
 template <typename KEY, typename VALUE>
@@ -66,46 +54,12 @@ struct KeyValue {
 
     /// The value
     Value value;
-
-    /// Equality operator
-    /// @param other the RHS of the operator
-    /// @returns true if both the key and value of this KeyValue are equal to the key and value
-    /// of @p other
-    template <typename K, typename V>
-    bool operator==(const KeyValue<K, V>& other) const {
-        return key == other.key && value == other.value;
-    }
-
-    /// Inequality operator
-    /// @param other the RHS of the operator
-    /// @returns true if either the key and value of this KeyValue are not equal to the key and
-    /// value of @p other
-    template <typename K, typename V>
-    bool operator!=(const KeyValue<K, V>& other) const {
-        return *this != other;
-    }
 };
 
-/// KeyValueRef is a pair of references to a key and value.
-/// #key is always a const reference.
-/// #value is always a const reference if @tparam VALUE_IS_CONST is true, otherwise a non-const
-/// reference.
-template <typename KEY, typename VALUE, bool VALUE_IS_CONST>
-struct KeyValueRef {
-    /// The reference to key type
-    using KeyRef = const KEY&;
-    /// The reference to value type
-    using ValueRef = std::conditional_t<VALUE_IS_CONST, const VALUE&, VALUE&>;
-
-    /// The reference to the key
-    KeyRef key;
-
-    /// The reference to the value
-    ValueRef value;
-
-    /// @returns a KeyValue<KEY, VALUE> with the referenced key and value
-    operator KeyValue<KEY, VALUE>() const { return {key, value}; }
-};
+template <typename K1, typename V1, typename K2, typename V2>
+inline static bool operator==(const KeyValue<K1, V1>& lhs, const KeyValue<K2, V2>& rhs) {
+    return lhs.key == rhs.key && lhs.value == rhs.value;
+}
 
 /// Writes the KeyValue to the stream.
 /// @param out the stream to write to
@@ -119,261 +73,223 @@ auto& operator<<(STREAM& out, const KeyValue<KEY, VALUE>& key_value) {
     return out << "[" << key_value.key << ": " << key_value.value << "]";
 }
 
-/// A base class for Hashmap and Hashset that uses a robin-hood hashing algorithm.
-/// @see the fantastic tutorial: https://programming.guide/robin-hood-hashing.html
 template <typename KEY,
           typename VALUE,
           size_t N,
           typename HASH = Hasher<KEY>,
           typename EQUAL = EqualTo<KEY>>
 class HashmapBase {
-    static constexpr bool ValueIsVoid = std::is_same_v<VALUE, void>;
+  protected:
+    struct Node;
 
   public:
+    /// True if Value is void
+    static constexpr bool ValueIsVoid = std::is_same_v<VALUE, void>;
+
     /// The key type
     using Key = KEY;
     /// The value type
     using Value = VALUE;
+    /// The value reference type
+    using ValueRef = std::conditional_t<ValueIsVoid, int, Value>&;
+    /// The const value reference type
+    using ConstValueRef = std::conditional_t<ValueIsVoid, int, const Value>&;
+
     /// The entry type for the map.
     /// This is:
-    /// - Key when Value is void (used by Hashset)
-    /// - KeyValue<Key, Value> when Value is not void (used by Hashmap)
+    /// - `Key` when Value is void (used by Hashset)
+    /// - `KeyValue<Key, Value>` when Value is not void (used by Hashmap)
     using Entry = std::conditional_t<ValueIsVoid, Key, KeyValue<Key, Value>>;
 
-    /// A reference to an entry in the map.
+    /// A mutable reference to an entry in the map.
     /// This is:
-    /// - const Key& when Value is void (used by Hashset)
-    /// - KeyValueRef<Key, Value> when Value is not void (used by Hashmap)
-    template <bool IS_CONST>
-    using EntryRef = std::conditional_t<
-        ValueIsVoid,
-        const Key&,
-        KeyValueRef<Key, std::conditional_t<ValueIsVoid, bool, Value>, IS_CONST>>;
+    /// - `const Key&` when Value is void (used by Hashset)
+    /// - `KeyValue<const Key&, Value&>` when Value is not void (used by Hashmap)
+    using Reference = std::conditional_t<ValueIsVoid, const Key&, KeyValue<const Key&, ValueRef>>;
 
-    /// STL-friendly alias to Entry. Used by gmock.
-    using value_type = Entry;
+    /// An immutable reference to an entry in the map.
+    /// This is:
+    /// - `const Key&` when Value is void (used by Hashset)
+    /// - `KeyValue<const Key&, Value&>` when Value is not void (used by Hashmap)
+    using ConstReference =
+        std::conditional_t<ValueIsVoid, const Key&, KeyValue<const Key&, ConstValueRef>>;
 
-  private:
-    /// @returns the key from an entry
-    static const Key& KeyOf(const Entry& entry) {
-        if constexpr (ValueIsVoid) {
-            return entry;
-        } else {
-            return entry.key;
-        }
-    }
+    /// The minimum capacity of the hashmap.
+    static constexpr size_t kMinCapacity = std::max<size_t>(N, 8);
 
-    /// @returns a pointer to the value from an entry.
-    static Value* ValueOf(Entry& entry) {
-        if constexpr (ValueIsVoid) {
-            return nullptr;  // Hashset only has keys
-        } else {
-            return &entry.value;
-        }
-    }
+    /// The capacity / number of slots.
+    static constexpr size_t kLoadFactor = 75;
 
-    /// A slot is a single entry in the underlying vector.
-    /// A slot can either be empty or filled with a value.
-    /// If the slot is vacant, #hash and #distance will be zero.
-    struct Slot {
-        using E = HashmapBase::Entry;
-
-        Slot() : distance(0), occupied(false) {}
-
-        Slot(E&& e, size_t d) : distance(d), occupied(true) { new (&Entry()) E{std::move(e)}; }
-
-        Slot(const Slot& other) : distance(other.distance), occupied(other.occupied) {
-            if (occupied) {
-                new (&Entry()) E{other.Entry()};
-            }
-        }
-
-        Slot(Slot&& other) : distance(other.distance), occupied(other.occupied) {
-            if (occupied) {
-                new (&Entry()) E{std::move(other.Entry())};
-            }
-        }
-
-        ~Slot() { Clear(); }
-
-        Slot& operator=(const Slot& other) {
-            if (other.occupied) {
-                SetEntry(other.Entry());
-                distance = other.distance;
-            } else {
-                Clear();
-            }
-            return *this;
-        }
-
-        Slot& operator=(Slot&& other) {
-            if (other.occupied) {
-                SetEntry(std::move(other.Entry()));
-                distance = other.distance;
-            } else {
-                Clear();
-            }
-            return *this;
-        }
-
-        template <typename K>
-        bool Equals(size_t key_hash, K&& key) const {
-            const auto& entry_key = KeyOf(Entry());
-            return occupied && key_hash == HASH()(entry_key) && EQUAL()(key, entry_key);
-        }
-
-        /// If the Entry is occupied, destructs the entry, and marks the Slot as vacant.
-        void Clear() {
-            if (occupied) {
-                Entry().~E();
-                occupied = false;
-            }
-            distance = 0;
-        }
-
-        /// @returns the storage reinterpreted as an Entry&
-        E& Entry() { return *Bitcast<E*>(&storage.data[0]); }
-
-        /// @returns the storage reinterpreted as a const Entry&
-        const E& Entry() const { return *Bitcast<const E*>(&storage.data[0]); }
-
-        template <typename... ARGS>
-        void SetEntry(ARGS&&... args) {
-            if (occupied) {
-                Entry() = E{std::forward<ARGS>(args)...};
-            } else {
-                new (&Entry()) E{std::forward<ARGS>(args)...};
-                occupied = true;
-            }
-        }
-
-        /// A structure that has the same size and alignment as Entry.
-        /// Replacement for std::aligned_storage as this is broken on earlier versions of MSVC.
-        struct alignas(alignof(E)) Storage {
-            /// Byte array of length sizeof(E)
-            uint8_t data[sizeof(E)];
-        };
-
-        /// The slot entry. Only valid if `occupied`.
-        Storage storage;
-        size_t distance : 63;
-        bool occupied : 1;
-    };
-
-    /// The target length of the underlying vector length in relation to the number of entries in
-    /// the map, expressed as a percentage. For example a value of `150` would mean there would be
-    /// at least 50% more slots than the number of map entries.
-    static constexpr size_t kRehashFactor = 133;
-
-    /// @returns the target slot vector size to hold `n` map entries.
+    /// @returns the target slot vector size to hold `count` map entries.
     static constexpr size_t NumSlots(size_t count) {
-        constexpr size_t kMinSlots = 4;
-        return std::max<size_t>((count * kRehashFactor) / 100, kMinSlots);
+        return (std::max<size_t>(count, kMinCapacity) * kLoadFactor) / 100;
     }
 
-    /// The fixed-size slot vector length, based on N and kRehashFactor.
-    static constexpr size_t kNumFixedSlots = NumSlots(N);
+    HashmapBase() {
+        slots_.Resize(slots_.Capacity());
+        for (auto& node : fixed_) {
+            AddToFree(&node);
+        }
+    }
 
-  public:
+    HashmapBase(const HashmapBase& other) : HashmapBase() {
+        if (&other != this) {
+            Copy(other);
+        }
+    }
+
+    HashmapBase(HashmapBase&& other) : HashmapBase() {
+        if (&other != this) {
+            Move(std::move(other));
+        }
+    }
+
+    ~HashmapBase() {
+        for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
+            auto* node = slots_[slot_idx];
+            while (node) {
+                auto next = node->next;
+                node->Destroy();
+                node = next;
+            }
+        }
+        auto* allocation = allocations_;
+        while (allocation) {
+            auto* next = allocation->next;
+            free(allocation);
+            allocation = next;
+        }
+    }
+
+    HashmapBase& operator=(const HashmapBase& other) {
+        if (&other != this) {
+            Clear();
+            Copy(other);
+        }
+        return *this;
+    }
+
+    HashmapBase& operator=(HashmapBase&& other) {
+        if (&other != this) {
+            Clear();
+            Move(std::move(other));
+        }
+        return *this;
+    }
+
+    size_t Count() const { return count_; }
+
+    bool IsEmpty() const { return count_ == 0; }
+
+    void Clear() {
+        for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
+            auto* node = slots_[slot_idx];
+            while (node) {
+                auto next = node->next;
+                node->Destroy();
+                AddToFree(node);
+                node = next;
+            }
+            slots_[slot_idx] = nullptr;
+        }
+    }
+
+    void Reserve(size_t n) {
+        if (n > capacity_) {
+            AllocateNodes(n - capacity_);
+        }
+    }
+
+    template <typename K = Key>
+    bool Contains(K&& key) const {
+        auto const [hash, slot_idx] = Hash(key);
+        if (auto* node = this->FindNode(hash, slot_idx, key)) {
+            return true;
+        }
+        return false;
+    }
+
+    template <typename K>
+    bool Remove(K&& key) {
+        auto const [hash, slot_idx] = Hash(key);
+        Node** edge = &slots_[slot_idx];
+        for (auto* node = *edge; node; node = node->next) {
+            if (node->Equals(hash, key)) {
+                *edge = node->next;
+                node->Destroy();
+                AddToFree(node);
+                count_--;
+                return true;
+            }
+            edge = &node->next;
+        }
+        return false;
+    }
+
     /// Iterator for entries in the map.
-    /// Iterators are invalidated if the map is modified.
     template <bool IS_CONST>
     class IteratorT {
+      private:
+        using MAP = std::conditional_t<IS_CONST, const HashmapBase, HashmapBase>;
+        using REFERENCE = std::conditional_t<IS_CONST, ConstReference, Reference>;
+        using NODE = std::conditional_t<IS_CONST, const Node, Node>;
+
       public:
         /// @returns the value pointed to by this iterator
-        EntryRef<IS_CONST> operator->() const {
-#ifdef TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-            TINT_ASSERT(map.Generation() == initial_generation &&
-                        "iterator invalidated by container modification");
-#endif
-            return *this;
+        REFERENCE operator->() {
+            auto& entry = node_->Entry();
+            if constexpr (ValueIsVoid) {
+                return {entry};
+            } else {
+                return {entry.key, entry.value};
+            }
         }
 
         /// @returns a reference to the value at the iterator
-        EntryRef<IS_CONST> operator*() const {
-#ifdef TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-            TINT_ASSERT(map.Generation() == initial_generation &&
-                        "iterator invalidated by container modification");
-#endif
-            auto& ref = current->Entry();
+        REFERENCE operator*() {
+            auto& entry = node_->Entry();
             if constexpr (ValueIsVoid) {
-                return ref;
+                return {entry};
             } else {
-                return {ref.key, ref.value};
+                return {entry.key, entry.value};
             }
         }
 
         /// Increments the iterator
         /// @returns this iterator
         IteratorT& operator++() {
-#ifdef TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-            TINT_ASSERT(map.Generation() == initial_generation &&
-                        "iterator invalidated by container modification");
-#endif
-            if (current == end) {
-                return *this;
-            }
-            ++current;
-            SkipToNextValue();
+            node_ = node_->next;
+            SkipEmptySlots();
             return *this;
         }
 
         /// Equality operator
         /// @param other the other iterator to compare this iterator to
         /// @returns true if this iterator is equal to other
-        bool operator==(const IteratorT& other) const {
-#ifdef TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-            TINT_ASSERT(map.Generation() == initial_generation &&
-                        "iterator invalidated by container modification");
-#endif
-            return current == other.current;
-        }
+        bool operator==(const IteratorT& other) const { return node_ == other.node_; }
 
         /// Inequality operator
         /// @param other the other iterator to compare this iterator to
         /// @returns true if this iterator is not equal to other
-        bool operator!=(const IteratorT& other) const {
-#ifdef TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-            TINT_ASSERT(map.Generation() == initial_generation &&
-                        "iterator invalidated by container modification");
-#endif
-            return current != other.current;
-        }
+        bool operator!=(const IteratorT& other) const { return node_ != other.node_; }
 
       private:
         /// Friend class
         friend class HashmapBase;
 
-        using SLOT = std::conditional_t<IS_CONST, const Slot, Slot>;
-
-        IteratorT(VectorIterator<SLOT> c,
-                  VectorIterator<SLOT> e,
-                  [[maybe_unused]] const HashmapBase& m)
-            : current(std::move(c)),
-              end(std::move(e))
-#ifdef TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-              ,
-              map(m),
-              initial_generation(m.Generation())
-#endif
-        {
-            SkipToNextValue();
+        IteratorT(MAP& map, size_t slot, NODE* node) : map_(map), slot_(slot), node_(node) {
+            SkipEmptySlots();
         }
 
-        /// Moves the iterator forward, stopping at the next slot that is occupied.
-        void SkipToNextValue() {
-            while (current != end && !current->occupied) {
-                ++current;
+        void SkipEmptySlots() {
+            while (!node_ && slot_ + 1 < map_.slots_.Length()) {
+                node_ = map_.slots_[++slot_];
             }
         }
 
-        VectorIterator<SLOT> current;  /// The slot the iterator is pointing to
-        VectorIterator<SLOT> end;      /// One past the last slot in the map
-
-#ifdef TINT_ASSERT_ITERATORS_NOT_INVALIDATED
-        const HashmapBase& map;     /// The hashmap that is being iterated over.
-        size_t initial_generation;  /// The generation ID when the iterator was created.
-#endif
+        MAP& map_;
+        size_t slot_ = 0;
+        NODE* node_ = nullptr;
     };
 
     /// An immutable key and mutable value iterator
@@ -382,343 +298,257 @@ class HashmapBase {
     /// An immutable key and value iterator
     using ConstIterator = IteratorT</*IS_CONST*/ true>;
 
-    /// Constructor
-    HashmapBase() { slots_.Resize(kNumFixedSlots); }
-
-    /// Copy constructor
-    /// @param other the other HashmapBase to copy
-    HashmapBase(const HashmapBase& other) = default;
-
-    /// Move constructor
-    /// @param other the other HashmapBase to move
-    HashmapBase(HashmapBase&& other) = default;
-
-    /// Destructor
-    ~HashmapBase() { Clear(); }
-
-    /// Copy-assignment operator
-    /// @param other the other HashmapBase to copy
-    /// @returns this so calls can be chained
-    HashmapBase& operator=(const HashmapBase& other) = default;
-
-    /// Move-assignment operator
-    /// @param other the other HashmapBase to move
-    /// @returns this so calls can be chained
-    HashmapBase& operator=(HashmapBase&& other) = default;
-
-    /// Removes all entries from the map.
-    void Clear() {
-        slots_.Clear();  // Destructs all entries
-        slots_.Resize(kNumFixedSlots);
-        count_ = 0;
-        generation_++;
-    }
-
-    /// Removes an entry from the map.
-    /// @param key the entry key.
-    /// @returns true if an entry was removed.
-    bool Remove(const Key& key) {
-        const auto [found, start] = IndexOf(key);
-        if (!found) {
-            return false;
-        }
-
-        // Shuffle the entries backwards until we either find a free slot, or a slot that has zero
-        // distance.
-        Slot* prev = nullptr;
-
-        const auto count = slots_.Length();
-        for (size_t distance = 0, index = start; distance < count; distance++) {
-            auto& slot = slots_[index];
-            if (prev) {
-                // note: `distance == 0` also includes empty slots.
-                if (slot.distance == 0) {
-                    // Clear the previous slot, and stop shuffling.
-                    prev->Clear();
-                    break;
-                }
-                // Shuffle the slot backwards.
-                *prev = std::move(slot);
-                prev->distance--;
-            }
-            prev = &slot;
-
-            index = (index == count - 1) ? 0 : index + 1;
-        }
-
-        // Entry was removed.
-        count_--;
-        generation_++;
-
-        return true;
-    }
-
-    /// Checks whether an entry exists in the map
-    /// @param key the key to search for.
-    /// @returns true if the map contains an entry with the given value.
-    bool Contains(const Key& key) const {
-        const auto [found, _] = IndexOf(key);
-        return found;
-    }
-
-    /// Pre-allocates memory so that the map can hold at least `capacity` entries.
-    /// @param capacity the new capacity of the map.
-    void Reserve(size_t capacity) {
-        // Calculate the number of slots required to hold `capacity` entries.
-        const size_t num_slots = std::max(NumSlots(capacity), kNumFixedSlots);
-        if (slots_.Length() >= num_slots) {
-            // Already have enough slots.
-            return;
-        }
-
-        // Move the slots to a temporary.
-        decltype(slots_) copy;
-        std::swap(slots_, copy);
-
-        // Clear the map, and reserve the required number of slots.
-        count_ = 0;
-        slots_.Resize(num_slots);
-
-        // Re-add all the entries back into the grown slots.
-        for (auto& slot : copy) {
-            if (slot.occupied) {
-                auto& entry = slot.Entry();
-                if constexpr (ValueIsVoid) {
-                    struct NoValue {};
-                    PutNoReserve<PutMode::kAdd>(std::move(entry), NoValue{});
-                } else {
-                    PutNoReserve<PutMode::kAdd>(std::move(entry.key), std::move(entry.value));
-                }
-            }
-        }
-    }
-
-    /// @returns the number of entries in the map.
-    size_t Count() const { return count_; }
-
-    /// @returns true if the map contains no entries.
-    bool IsEmpty() const { return count_ == 0; }
-
-    /// @returns a monotonic counter which is incremented whenever the map is mutated.
-    size_t Generation() const { return generation_; }
-
     /// @returns an immutable iterator to the start of the map.
-    ConstIterator begin() const { return ConstIterator{slots_.begin(), slots_.end(), *this}; }
+    ConstIterator begin() const { return ConstIterator{*this, 0, slots_.Front()}; }
 
     /// @returns an immutable iterator to the end of the map.
-    ConstIterator end() const { return ConstIterator{slots_.end(), slots_.end(), *this}; }
+    ConstIterator end() const { return ConstIterator{*this, slots_.Length(), nullptr}; }
 
     /// @returns an iterator to the start of the map.
-    Iterator begin() { return Iterator{slots_.begin(), slots_.end(), *this}; }
+    Iterator begin() { return Iterator{*this, 0, slots_.Front()}; }
 
     /// @returns an iterator to the end of the map.
-    Iterator end() { return Iterator{slots_.end(), slots_.end(), *this}; }
+    Iterator end() { return Iterator{*this, slots_.Length(), nullptr}; }
 
-    /// A debug function for checking that the map is in good health.
-    /// Asserts if the map is corrupted.
-    void ValidateIntegrity() const {
-        size_t num_alive = 0;
-        for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
-            const auto& slot = slots_[slot_idx];
-            if (slot.occupied) {
-                num_alive++;
-                auto const [index, hash] = Hash(KeyOf(slot.Entry()));
-                TINT_ASSERT(slot_idx == Wrap(index + slot.distance));
-            }
-        }
-        TINT_ASSERT(num_alive == count_);
-    }
+    /// STL-friendly alias to Entry. Used by gmock.
+    using value_type = ConstReference;
 
   protected:
-    /// The behaviour of Put() when an entry already exists with the given key.
-    enum class PutMode {
-        /// Do not replace existing entries with the new value.
-        kAdd,
-        /// Replace existing entries with the new value.
-        kReplace,
+    struct Node {
+        using E = HashmapBase::Entry;
+
+        /// A structure that has the same size and alignment as Entry.
+        /// Replacement for std::aligned_storage as this is broken on earlier versions of MSVC.
+        struct alignas(alignof(E)) Storage {
+            /// Byte array of length sizeof(E)
+            uint8_t data[sizeof(E)];
+        };
+
+        template <typename... ARGS>
+        void New(ARGS&&... args) {
+            new (&Entry()) E{std::forward<ARGS>(args)...};
+        }
+
+        template <typename ARG>
+        void Assign(ARG&& arg) {
+            Entry() = std::forward<ARG>(arg);
+        }
+
+        void Assign(Node& other) { Entry() = other.Entry(); }
+
+        void Destroy() {
+            Entry().~E();
+            hash = 0;
+        }
+
+        /// @returns the storage reinterpreted as an Entry&
+        E& Entry() { return *Bitcast<E*>(&storage.data[0]); }
+
+        /// @returns the storage reinterpreted as a const Entry&
+        const E& Entry() const { return *Bitcast<const E*>(&storage.data[0]); }
+
+        /// @returns true if the entry's hash is equal to @p key_hash, and the entry's key is equal
+        /// to @p key
+        template <typename K>
+        bool Equals(size_t key_hash, K&& key) const {
+            return hash == key_hash && EQUAL{}(Key(), key);
+        }
+
+        /// @returns the key of the entry
+        const KEY& Key() const {
+            if constexpr (ValueIsVoid) {
+                return Entry();
+            } else {
+                return Entry().key;
+            }
+        }
+
+        Storage storage;
+        size_t hash = 0;
+        Node* next = nullptr;
     };
 
     /// Result of Put()
     struct PutResult {
+        /// Action taken by Put()
+        enum MapAction {
+            /// A new entry was added to the map
+            kAdded,
+            /// A existing entry in the map was replaced
+            kReplaced,
+            /// No action was taken as the map already contained an entry with the given key
+            kKeptExisting,
+        };
+
+        /// A reference to the inserted entry slot.
+        Entry& entry;
+
         /// Whether the insert replaced or added a new entry to the map.
         MapAction action = MapAction::kAdded;
-        /// A pointer to the inserted entry slot.
-        Slot& slot;
 
         /// @returns true if the entry was added to the map, or an existing entry was replaced.
         operator bool() const { return action != MapAction::kKeptExisting; }
     };
 
-    /// The common implementation for Add() and Replace()
-    /// @param key the key of the entry to add to the map.
-    /// @param value the value of the entry to add to the map.
-    /// @returns A PutResult describing the result of the insertion
-    template <PutMode MODE, typename K, typename V>
-    PutResult Put(K&& key, V&& value) {
-        // Ensure the map can fit a new entry
-        if (ShouldRehash(count_ + 1)) {
-            Reserve((count_ + 1) * 2);
+    /// Copies the hashmap @p other into this empty hashmap.
+    /// @note This hashmap must be empty before calling
+    /// @param other the hashmap to copy
+    void Copy(const HashmapBase& other) {
+        Reserve(other.capacity_);
+        slots_.Resize(other.slots_.Length());
+        for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
+            for (auto* o = other.slots_[slot_idx]; o; o = o->next) {
+                Insert(o->hash, slot_idx, o->Entry());
+            }
         }
-
-        return PutNoReserve<MODE>(std::forward<K>(key), std::forward<V>(value));
+        count_ = other.count_;
     }
 
-    /// HashResult is the return value of Hash()
-    struct HashResult {
-        /// The target (zero-distance) slot index for the key.
-        size_t scan_start;
-        /// The calculated hash code of the key.
-        size_t code;
+    /// Moves the the hashmap @p other into this empty hashmap.
+    /// @note This hashmap must be empty before calling
+    /// @param other the hashmap to move
+    void Move(HashmapBase&& other) {
+        Reserve(other.capacity_);
+        slots_.Resize(other.slots_.Length());
+        for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
+            for (auto* o = other.slots_[slot_idx]; o; o = o->next) {
+                Insert(o->hash, slot_idx, std::move(o->Entry()));
+            }
+        }
+        count_ = other.count_;
+        other.Clear();
+    }
+
+    template <typename K, typename V>
+    PutResult Put(bool replace, K&& key, V&& value) {
+        GrowIfNeeded();
+
+        auto const [hash, slot_idx] = Hash(key);
+        if (auto* node = FindNode(hash, slot_idx, key)) {
+            if (!replace) {
+                return {node->Entry(), PutResult::kKeptExisting};
+            }
+            if constexpr (ValueIsVoid) {
+                node->Assign(std::forward<K>(key));
+            } else {
+                node->Assign(Entry{std::forward<K>(key), std::forward<V>(value)});
+            }
+            return {node->Entry(), PutResult::kReplaced};
+        }
+        if constexpr (ValueIsVoid) {
+            auto* node = Insert(hash, slot_idx, std::forward<K>(key));
+            return {node->Entry(), PutResult::kAdded};
+        } else {
+            auto* node = Insert(hash, slot_idx, std::forward<K>(key), std::forward<V>(value));
+            return {node->Entry(), PutResult::kAdded};
+        }
+    }
+
+    template <typename... ARGS>
+    Node* Insert(size_t hash, size_t slot_idx, ARGS&&... args) {
+        auto* node = TakeFree();
+        node->hash = hash;
+        node->New(std::forward<ARGS>(args)...);
+        AddToSlot(slot_idx, node);
+        count_++;
+        return node;
+    }
+
+    template <typename K>
+    std::pair<size_t, size_t> Hash(K&& key) const {
+        auto hash = HASH{}(key);
+        auto slot_idx = hash % slots_.Length();
+        return {hash, slot_idx};
+    }
+
+    void Rehash() {
+        size_t num_slots = NumSlots(capacity_);
+        decltype(slots_) old_slots;
+        std::swap(slots_, old_slots);
+        slots_.Resize(num_slots);
+        for (size_t slot_idx = 0; slot_idx < old_slots.Length(); slot_idx++) {
+            auto* node = old_slots[slot_idx];
+            while (node) {
+                auto next = node->next;
+                AddToSlot(node->hash % num_slots, node);
+                node = next;
+            }
+        }
+    }
+
+    template <typename K>
+    const Node* FindNode(size_t hash, size_t slot_idx, K&& key) const {
+        for (auto* node = slots_[slot_idx]; node; node = node->next) {
+            if (node->Equals(hash, key)) {
+                return node;
+            }
+        }
+        return nullptr;
+    }
+
+    template <typename K>
+    Node* FindNode(size_t hash, size_t slot_idx, K&& key) {
+        for (auto* node = slots_[slot_idx]; node; node = node->next) {
+            if (node->Equals(hash, key)) {
+                return node;
+            }
+        }
+        return nullptr;
+    }
+
+    void AddToSlot(size_t slot_idx, Node* node) {
+        node->next = slots_[slot_idx];
+        slots_[slot_idx] = node;
+    }
+
+    void GrowIfNeeded() {
+        if (!free_) {
+            AllocateNodes(capacity_ * 2);
+            Rehash();
+        }
+    }
+
+    Node* TakeFree() {
+        auto* node = free_;
+        free_ = node->next;
+        node->next = nullptr;
+        return node;
+    }
+
+    void AddToFree(Node* node) {
+        node->next = free_;
+        free_ = node;
+    }
+
+    void AllocateNodes(size_t count) {
+        auto* memory =
+            reinterpret_cast<std::byte*>(malloc(sizeof(NodesAllocation) + sizeof(Node) * count));
+        if (TINT_UNLIKELY(!memory)) {
+            TINT_ICE() << "out of memory";
+            return;
+        }
+        auto* nodes_allocation = Bitcast<NodesAllocation*>(memory);
+        nodes_allocation->next = allocations_;
+        allocations_ = nodes_allocation;
+
+        auto* nodes = Bitcast<Node*>(memory + sizeof(NodesAllocation));
+        for (size_t i = 0; i < count; i++) {
+            AddToFree(&nodes[i]);
+        }
+        capacity_ += count;
+    }
+
+    struct NodesAllocation {
+        NodesAllocation* next = nullptr;
+        // Array of Node follow
     };
 
-    template <PutMode MODE, typename K, typename V>
-    PutResult PutNoReserve(K&& key, V&& value) {
-        auto hash = Hash(key);
-        auto make_entry = [&](Slot& slot) {
-            if constexpr (ValueIsVoid) {
-                slot.SetEntry(std::forward<K>(key));
-            } else {
-                slot.SetEntry(std::forward<K>(key), std::forward<V>(value));
-            }
-        };
-
-        const auto count = slots_.Length();
-        size_t distance = 0;
-        size_t index = hash.scan_start;
-        while (true) {
-            auto& slot = slots_[index];
-            if (!slot.occupied) {
-                // Found an empty slot.
-                // Place value directly into the slot, and we're done.
-                make_entry(slot);
-                slot.distance = distance;
-                count_++;
-                generation_++;
-                return PutResult{MapAction::kAdded, slot};
-            }
-
-            // Slot has an entry
-
-            if (slot.Equals(hash.code, key)) {
-                // Slot is equal to value. Replace or preserve?
-                if constexpr (MODE == PutMode::kReplace) {
-                    make_entry(slot);
-                    generation_++;
-                    return PutResult{MapAction::kReplaced, slot};
-                } else {
-                    return PutResult{MapAction::kKeptExisting, slot};
-                }
-            }
-
-            if (slot.distance < distance) {
-                // Existing slot has a closer distance than the value we're attempting to insert.
-                // Steal from the rich!
-                // Move the current slot to a temporary (evicted).
-                Slot evicted{std::move(slot.Entry()), slot.distance};
-
-                // Put the value into the slot.
-                make_entry(slot);
-                slot.distance = distance;
-
-                // Find a new home for the evicted slot.
-                evicted.distance++;  // We've already swapped at index.
-                InsertShuffle(Wrap(index + 1), std::move(evicted));
-
-                count_++;
-                generation_++;
-                return PutResult{MapAction::kAdded, slot};
-            }
-
-            index = (index == count - 1) ? 0 : index + 1;
-            distance++;
-        }
-    }
-
-    /// @param key the key to hash
-    /// @returns a tuple holding the target slot index for the given value, and the hash of the
-    /// value, respectively.
-    template <typename K>
-    HashResult Hash(K&& key) const {
-        size_t hash = HASH()(std::forward<K>(key));
-        size_t index = Wrap(hash);
-        return {index, hash};
-    }
-
-    /// Looks for the key in the map.
-    /// @param key the key to search for.
-    /// @returns a tuple holding a boolean representing whether the key was found in the map, and
-    /// if found, the index of the slot that holds the key.
-    template <typename K>
-    std::tuple<bool, size_t> IndexOf(K&& key) const {
-        const auto hash = Hash(key);
-        const auto count = slots_.Length();
-        for (size_t distance = 0, index = hash.scan_start; distance < count; distance++) {
-            auto& slot = slots_[index];
-            if (!slot.occupied) {
-                return {/* found */ false, /* index */ 0};
-            }
-            if (slot.Equals(hash.code, key)) {
-                return {/* found */ true, index};
-            }
-            if (slot.distance < distance) {
-                // If the slot distance is less than the current probe distance, then the slot
-                // must be for entry that has an index that comes after key. In this situation,
-                // we know that the map does not contain the key, as it would have been found
-                // before this slot. The "Lookup" section of
-                // https://programming.guide/robin-hood-hashing.html suggests that the condition
-                // should inverted, but this is wrong.
-                return {/* found */ false, /* index */ 0};
-            }
-            index = (index == count - 1) ? 0 : index + 1;
-        }
-
-        TINT_ICE() << "HashmapBase::IndexOf() looped entire map without finding a slot";
-        return {/* found */ false, /* index */ 0};
-    }
-
-    /// Shuffles slots for an insertion that has been placed one slot before `start`.
-    /// @param start the index of the first slot to start shuffling.
-    /// @param evicted the slot content that was evicted for the insertion.
-    void InsertShuffle(size_t start, Slot&& evicted) {
-        const auto count = slots_.Length();
-        for (size_t distance = 0, index = start; distance < count; distance++) {
-            auto& slot = slots_[index];
-
-            if (!slot.occupied) {
-                // Empty slot found for evicted.
-                slot = std::move(evicted);
-                return;  //  We're done.
-            }
-
-            if (slot.distance < evicted.distance) {
-                // Occupied slot has shorter distance to evicted.
-                // Swap slot and evicted.
-                std::swap(slot, evicted);
-            }
-
-            // evicted moves further from the target slot...
-            evicted.distance++;
-
-            index = (index == count - 1) ? 0 : index + 1;
-        }
-    }
-
-    /// @param count the number of new entries in the map
-    /// @returns true if the map should grow the slot vector, and rehash the items.
-    bool ShouldRehash(size_t count) const { return NumSlots(count) > slots_.Length(); }
-
-    /// @param index an input value
-    /// @returns the input value modulo the number of slots.
-    size_t Wrap(size_t index) const { return index % slots_.Length(); }
-
-    /// The vector of slots. The vector length is equal to its capacity.
-    Vector<Slot, kNumFixedSlots> slots_;
-
-    /// The number of entries in the map.
+    Vector<Node*, NumSlots(N)> slots_;
+    std::array<Node, kMinCapacity> fixed_;
+    Node* free_ = nullptr;
+    NodesAllocation* allocations_ = nullptr;
+    size_t capacity_ = kMinCapacity;  // number of nodes (kMinCapacity + count_ + free)
     size_t count_ = 0;
-
-    /// Counter that's incremented with each modification to the map.
-    size_t generation_ = 0;
 };
 
 }  // namespace tint

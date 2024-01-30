@@ -172,7 +172,7 @@ ast::transform::Transform::ApplyResult TruncateInterstageVariables::Apply(
         [&](const ast::ReturnStatement* return_statement) -> const ast::ReturnStatement* {
             auto* return_sem = sem.Get(return_statement);
             if (auto mapping_fn_sym =
-                    entry_point_functions_to_truncate_functions.Find(return_sem->Function())) {
+                    entry_point_functions_to_truncate_functions.Get(return_sem->Function())) {
                 return b.Return(return_statement->source,
                                 b.Call(*mapping_fn_sym, ctx.Clone(return_statement->value)));
             }
