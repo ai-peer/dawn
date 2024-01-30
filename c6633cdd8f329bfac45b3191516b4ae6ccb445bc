@@ -33,6 +33,23 @@
       "message": "Good stuff!",
       "revId": "c6633cdd8f329bfac45b3191516b4ae6ccb445bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3a956974_97e6d610",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-30T14:38:02Z",
+      "side": 1,
+      "message": "Thanks! I\u0027ll wait for the Skia CL to land before CQing this.",
+      "revId": "c6633cdd8f329bfac45b3191516b4ae6ccb445bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
