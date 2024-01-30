@@ -1,6 +1,7 @@
 #version 310 es
 
 struct PushConstants {
+  float inner;
   uint pad;
   uint pad_1;
   uint pad_2;
@@ -12,19 +13,17 @@ struct PushConstants {
   uint pad_8;
   uint pad_9;
   uint pad_10;
-  uint pad_11;
   uint first_instance;
 };
 
-layout(location=0) uniform PushConstants push_constants;
-vec4 tint_symbol(uint vertex_index, uint instance_index) {
-  uint foo = (vertex_index + instance_index);
-  return vec4(0.0f);
+layout(location=0) uniform PushConstants a;
+vec4 tint_symbol(uint b) {
+  return vec4((a.inner + float(b)));
 }
 
 void main() {
   gl_PointSize = 1.0;
-  vec4 inner_result = tint_symbol(uint(gl_VertexID), (uint(gl_InstanceID) + push_constants.first_instance));
+  vec4 inner_result = tint_symbol((uint(gl_InstanceID) + a.first_instance));
   gl_Position = inner_result;
   gl_Position.y = -(gl_Position.y);
   gl_Position.z = ((2.0f * gl_Position.z) - gl_Position.w);
