@@ -302,6 +302,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "f1367485_0ffa52d0",
+        "filename": "src/dawn/native/d3d11/BufferD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 315,
+      "author": {
+        "id": 1000028
+      },
+      "writtenOn": "2024-01-30T12:33:11Z",
+      "side": 1,
+      "message": "Good for reading! We always use `D3D11_MAP_READ_WRITE` instead of `D3D11_MAP_DISCARD`. That might be the problem.",
+      "parentUuid": "945af829_9c3912f1",
+      "range": {
+        "startLine": 315,
+        "startChar": 0,
+        "endLine": 315,
+        "endChar": 40
+      },
+      "revId": "9e9cd71557506c783cb829a697cca3b845ead5c1",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "e989eae1_5e53b4e1",
