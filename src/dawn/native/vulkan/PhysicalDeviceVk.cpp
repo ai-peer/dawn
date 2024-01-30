@@ -244,7 +244,6 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
         mDeviceInfo.HasExt(DeviceExt::_16BitStorage) &&
         mDeviceInfo.shaderFloat16Int8Features.shaderFloat16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.storageBuffer16BitAccess == VK_TRUE &&
-        mDeviceInfo._16BitStorageFeatures.storageInputOutput16 == VK_TRUE &&
         mDeviceInfo._16BitStorageFeatures.uniformAndStorageBuffer16BitAccess == VK_TRUE) {
         EnableFeature(Feature::ShaderF16);
     }
@@ -733,6 +732,18 @@ ResultOrError<Ref<DeviceBase>> PhysicalDevice::CreateDeviceImpl(
 FeatureValidationResult PhysicalDevice::ValidateFeatureSupportedWithTogglesImpl(
     wgpu::FeatureName feature,
     const TogglesState& toggles) const {
+    // The feature `shader-f16` requires storageInputOutput16, unless the toggle to disallow f16
+    // shader I/O is used. This is to let some applications using Dawn work with f16 for compute
+    // shaders which don't care about f16 I/O (since there is no I/O).
+    // TODO(dawn:1510, tint:1473): Relax this requirement when the transform to handle shader I/O
+    // is implemented.
+    if (mDeviceInfo._16BitStorageFeatures.storageInputOutput16 == VK_FALSE &&
+        !toggles.IsEnabled(Toggle::DisallowF16ShaderIO)) {
+        return FeatureValidationResult(
+            absl::StrFormat("Feature %s requires storageInputOutput16 or opting into not using f16 "
+                            "shader IO with %s.",
+                            feature, Toggle::DisallowF16ShaderIO));
+    }
     return {};
 }
 

@@ -284,7 +284,7 @@ class DawnTestBase {
     bool IsAsan() const;
     bool IsTsan() const;
 
-    bool HasToggleEnabled(const char* workaround) const;
+    bool HasToggleEnabled(const char* toggle) const;
 
     void DestroyDevice(wgpu::Device device = nullptr);
     void LoseDeviceForTesting(wgpu::Device device = nullptr);

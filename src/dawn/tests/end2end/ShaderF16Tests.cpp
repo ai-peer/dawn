@@ -172,6 +172,13 @@ fn FSMain() -> @location(0) vec4<f16> {
     return vec4<f16>(0.0, 0.0, 1.0, 1.0);
 })";
 
+    // TODO(dawn:1510, tint:1473): Remove this once the transform to no longer require
+    // storageInputOutput16 is no longer needed.
+    if (HasToggleEnabled("disallow_f16_shader_io")) {
+        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader));
+        return;
+    }
+
     wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader);
 
     // Create render pipeline.
@@ -256,6 +263,13 @@ fn FSMain(fsInput: FSInput) -> @location(0) vec4f {
     return vec4f(fsInput.color_fsin);
 })";
 
+    // TODO(dawn:1510, tint:1473): Remove this once the transform to no longer require
+    // storageInputOutput16 is no longer needed.
+    if (HasToggleEnabled("disallow_f16_shader_io")) {
+        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader));
+        return;
+    }
+
     wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader);
 
     // Create render pipeline.
@@ -326,6 +340,13 @@ fn VSMain(in: VSInput) -> VSOutput {
 fn FSMain(@location(0) color : vec4f) -> @location(0) vec4f {
     return color;
 })";
+
+    // TODO(dawn:1510, tint:1473): Remove this once the transform to no longer require
+    // storageInputOutput16 is no longer needed.
+    if (HasToggleEnabled("disallow_f16_shader_io")) {
+        ASSERT_DEVICE_ERROR(utils::CreateShaderModule(device, shader));
+        return;
+    }
 
     wgpu::ShaderModule shaderModule = utils::CreateShaderModule(device, shader);
 
@@ -451,6 +472,7 @@ DAWN_INSTANTIATE_TEST_P(ShaderF16Tests,
                             D3D12Backend(),
                             D3D12Backend({"use_dxc"}),
                             VulkanBackend(),
+                            VulkanBackend({"disallow_f16_shader_io"}),
                             MetalBackend(),
                             OpenGLBackend(),
                             OpenGLESBackend(),
