@@ -59,7 +59,8 @@ Result<Output> Generate(core::ir::Module& ir, const Options& options) {
     }
 
     // Generate the SPIR-V code.
-    auto spirv = Print(ir, zero_initialize_workgroup_memory);
+    auto spirv =
+        Print(ir, zero_initialize_workgroup_memory, options.use_storage_input_output_16_capability);
     if (spirv != Success) {
         return std::move(spirv.Failure());
     }
@@ -94,7 +95,8 @@ Result<Output> Generate(const Program& program, const Options& options) {
     // Generate the SPIR-V code.
     auto impl =
         std::make_unique<ASTPrinter>(sanitized_result.program, zero_initialize_workgroup_memory,
-                                     options.experimental_require_subgroup_uniform_control_flow);
+                                     options.experimental_require_subgroup_uniform_control_flow,
+                                     options.use_storage_input_output_16_capability);
     if (!impl->Generate()) {
         return Failure{impl->Diagnostics()};
     }

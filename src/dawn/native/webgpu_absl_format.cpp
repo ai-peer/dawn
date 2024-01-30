@@ -42,6 +42,7 @@
 #include "dawn/native/Subresource.h"
 #include "dawn/native/Surface.h"
 #include "dawn/native/Texture.h"
+#include "dawn/native/Toggles.h"
 
 namespace dawn::native {
 
@@ -546,6 +547,18 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
         case PixelLocalMemberType::F32:
             s->Append("f32");
             break;
+    }
+    return {true};
+}
+
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
+AbslFormatConvert(Toggle value, const absl::FormatConversionSpec& spec, absl::FormatSink* s) {
+    if (value == Toggle::InvalidEnum) {
+        s->Append("[invalid Toggle]");
+    } else {
+        s->Append("[Toggle \"");
+        s->Append(ToggleEnumToName(value));
+        s->Append("\"]");
     }
     return {true};
 }

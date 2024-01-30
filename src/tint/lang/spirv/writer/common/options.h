@@ -128,6 +128,11 @@ struct Options {
     /// VK_KHR_zero_initialize_workgroup_memory is enabled.
     bool use_zero_initialize_workgroup_memory_extension = false;
 
+    /// Set to `true` to use the StorageInputOutput16 capability.
+    /// TODO(dawn:1510, tint:1473): After implementing the transform, setting this to false will
+    /// cause the transform for F16 shader IO to run.
+    bool use_storage_input_output_16_capability = false;
+
     /// Set to `true` to generate a PointSize builtin and have it set to 1.0
     /// from all vertex shaders in the module.
     bool emit_vertex_point_size = true;
@@ -158,6 +163,7 @@ struct Options {
                  disable_runtime_sized_array_index_clamping,
                  disable_workgroup_init,
                  use_zero_initialize_workgroup_memory_extension,
+                 use_storage_input_output_16_capability,
                  emit_vertex_point_size,
                  clamp_frag_depth,
                  pass_matrix_by_pointer,

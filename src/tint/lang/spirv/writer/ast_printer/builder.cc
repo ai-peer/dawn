@@ -263,12 +263,14 @@ Builder::AccessorInfo::~AccessorInfo() {}
 
 Builder::Builder(const Program& program,
                  bool zero_initialize_workgroup_memory,
-                 bool experimental_require_subgroup_uniform_control_flow)
+                 bool experimental_require_subgroup_uniform_control_flow,
+                 bool use_storage_input_output_16)
     : builder_(ProgramBuilder::Wrap(program)),
       scope_stack_{Scope{}},
       zero_initialize_workgroup_memory_(zero_initialize_workgroup_memory),
       experimental_require_subgroup_uniform_control_flow_(
-          experimental_require_subgroup_uniform_control_flow) {}
+          experimental_require_subgroup_uniform_control_flow),
+      use_storage_input_output_16_(use_storage_input_output_16) {}
 
 Builder::~Builder() = default;
 
@@ -350,7 +352,9 @@ bool Builder::GenerateExtension(wgsl::Extension extension) {
             module_.PushCapability(SpvCapabilityFloat16);
             module_.PushCapability(SpvCapabilityUniformAndStorageBuffer16BitAccess);
             module_.PushCapability(SpvCapabilityStorageBuffer16BitAccess);
-            module_.PushCapability(SpvCapabilityStorageInputOutput16);
+            if (use_storage_input_output_16_) {
+                module_.PushCapability(SpvCapabilityStorageInputOutput16);
+            }
             break;
         default:
             return false;

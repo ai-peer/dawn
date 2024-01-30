@@ -182,6 +182,14 @@ absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConv
     const absl::FormatConversionSpec& spec,
     absl::FormatSink* s);
 
+enum class Toggle;
+absl::FormatConvertResult<absl::FormatConversionCharSet::kString>
+AbslFormatConvert(Toggle value, const absl::FormatConversionSpec& spec, absl::FormatSink* s);
+
+//
+// Other
+//
+
 template <typename I, typename T>
 absl::FormatConvertResult<absl::FormatConversionCharSet::kString> AbslFormatConvert(
     const ityp::span<I, T>& values,

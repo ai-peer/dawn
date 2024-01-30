@@ -184,8 +184,15 @@ class Printer {
     /// @param module the Tint IR module to generate
     /// @param zero_init_workgroup_memory `true` to initialize all the variables in the Workgroup
     ///                                   storage class with OpConstantNull
-    Printer(core::ir::Module& module, bool zero_init_workgroup_memory)
-        : ir_(module), b_(module), zero_init_workgroup_memory_(zero_init_workgroup_memory) {}
+    /// @param use_storage_input_output_16 `true` to use the StorageInputOutput16 SPIR-V capability
+    ///                                    when the f16 enable is used.
+    Printer(core::ir::Module& module,
+            bool zero_init_workgroup_memory,
+            bool use_storage_input_output_16)
+        : ir_(module),
+          b_(module),
+          zero_init_workgroup_memory_(zero_init_workgroup_memory),
+          use_storage_input_output_16_(use_storage_input_output_16) {}
 
     /// @returns the generated SPIR-V code on success, or failure
     Result<std::vector<uint32_t>> Code() {
@@ -288,6 +295,7 @@ class Printer {
     uint32_t switch_merge_label_ = 0;
 
     bool zero_init_workgroup_memory_ = false;
+    bool use_storage_input_output_16_ = false;
 
     /// Builds the SPIR-V from the IR
     Result<SuccessType> Generate() {
@@ -497,7 +505,9 @@ class Printer {
                     module_.PushCapability(SpvCapabilityFloat16);
                     module_.PushCapability(SpvCapabilityUniformAndStorageBuffer16BitAccess);
                     module_.PushCapability(SpvCapabilityStorageBuffer16BitAccess);
-                    module_.PushCapability(SpvCapabilityStorageInputOutput16);
+                    if (use_storage_input_output_16_) {
+                        module_.PushCapability(SpvCapabilityStorageInputOutput16);
+                    }
                     module_.PushType(spv::Op::OpTypeFloat, {id, 16u});
                 },
                 [&](const core::type::Vector* vec) {
@@ -2272,12 +2282,15 @@ class Printer {
 }  // namespace
 
 tint::Result<std::vector<uint32_t>> Print(core::ir::Module& module,
-                                          bool zero_init_workgroup_memory) {
-    return Printer{module, zero_init_workgroup_memory}.Code();
+                                          bool zero_init_workgroup_memory,
+                                          bool use_storage_input_output_16) {
+    return Printer{module, zero_init_workgroup_memory, use_storage_input_output_16}.Code();
 }
 
-tint::Result<Module> PrintModule(core::ir::Module& module, bool zero_init_workgroup_memory) {
-    return Printer{module, zero_init_workgroup_memory}.Module();
+tint::Result<Module> PrintModule(core::ir::Module& module,
+                                 bool zero_init_workgroup_memory,
+                                 bool use_storage_input_output_16) {
+    return Printer{module, zero_init_workgroup_memory, use_storage_input_output_16}.Module();
 }
 
 }  // namespace tint::spirv::writer

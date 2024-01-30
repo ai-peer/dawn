@@ -59,9 +59,12 @@ class ASTPrinter {
     /// @param experimental_require_subgroup_uniform_control_flow `true` to require
     /// `SPV_KHR_subgroup_uniform_control_flow` extension and `SubgroupUniformControlFlowKHR`
     /// execution mode for compute stage entry points.
+    /// @param use_storage_input_output_16 `true` to use the StorageInputOutput16 SPIR-V capability
+    /// when the f16 enable is used.
     ASTPrinter(const Program& program,
                bool zero_initialize_workgroup_memory,
-               bool experimental_require_subgroup_uniform_control_flow);
+               bool experimental_require_subgroup_uniform_control_flow,
+               bool use_storage_input_output_16);
 
     /// @returns true on successful generation; false otherwise
     bool Generate();

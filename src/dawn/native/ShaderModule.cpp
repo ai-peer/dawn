@@ -176,10 +176,17 @@ SampleTypeBit TintSampledKindToSampleTypeBit(tint::inspector::ResourceBinding::S
 }
 
 ResultOrError<TextureComponentType> TintComponentTypeToTextureComponentType(
+    const DeviceBase* device,
     tint::inspector::ComponentType type) {
     switch (type) {
         case tint::inspector::ComponentType::kF32:
+            return TextureComponentType::Float;
         case tint::inspector::ComponentType::kF16:
+            if (device->IsToggleEnabled(Toggle::DisallowF16ShaderIO)) {
+                return DAWN_VALIDATION_ERROR("Component type %s used when %s is on.",
+                                             InterStageComponentType::F16,
+                                             Toggle::DisallowF16ShaderIO);
+            }
             return TextureComponentType::Float;
         case tint::inspector::ComponentType::kI32:
             return TextureComponentType::Sint;
@@ -192,10 +199,17 @@ ResultOrError<TextureComponentType> TintComponentTypeToTextureComponentType(
 }
 
 ResultOrError<VertexFormatBaseType> TintComponentTypeToVertexFormatBaseType(
+    const DeviceBase* device,
     tint::inspector::ComponentType type) {
     switch (type) {
         case tint::inspector::ComponentType::kF32:
+            return VertexFormatBaseType::Float;
         case tint::inspector::ComponentType::kF16:
+            if (device->IsToggleEnabled(Toggle::DisallowF16ShaderIO)) {
+                return DAWN_VALIDATION_ERROR("Component type %s used when %s is on.",
+                                             InterStageComponentType::F16,
+                                             Toggle::DisallowF16ShaderIO);
+            }
             return VertexFormatBaseType::Float;
         case tint::inspector::ComponentType::kI32:
             return VertexFormatBaseType::Sint;
@@ -238,6 +252,7 @@ ResultOrError<wgpu::StorageTextureAccess> TintResourceTypeToStorageTextureAccess
 }
 
 ResultOrError<InterStageComponentType> TintComponentTypeToInterStageComponentType(
+    const DeviceBase* device,
     tint::inspector::ComponentType type) {
     switch (type) {
         case tint::inspector::ComponentType::kF32:
@@ -247,6 +262,11 @@ ResultOrError<InterStageComponentType> TintComponentTypeToInterStageComponentTyp
         case tint::inspector::ComponentType::kU32:
             return InterStageComponentType::U32;
         case tint::inspector::ComponentType::kF16:
+            if (device->IsToggleEnabled(Toggle::DisallowF16ShaderIO)) {
+                return DAWN_VALIDATION_ERROR("Component type %s used when %s is on.",
+                                             InterStageComponentType::F16,
+                                             Toggle::DisallowF16ShaderIO);
+            }
             return InterStageComponentType::F16;
         case tint::inspector::ComponentType::kUnknown:
             return DAWN_VALIDATION_ERROR("Attempted to convert 'Unknown' component type from Tint");
@@ -651,8 +671,9 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             }
 
             VertexAttributeLocation location(static_cast<uint8_t>(unsanitizedLocation));
-            DAWN_TRY_ASSIGN(metadata->vertexInputBaseTypes[location],
-                            TintComponentTypeToVertexFormatBaseType(inputVar.component_type));
+            DAWN_TRY_ASSIGN(
+                metadata->vertexInputBaseTypes[location],
+                TintComponentTypeToVertexFormatBaseType(device, inputVar.component_type));
             metadata->usedVertexInputs.set(location);
         }
 
@@ -661,8 +682,8 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
         for (const auto& outputVar : entryPoint.output_variables) {
             EntryPointMetadata::InterStageVariableInfo variable;
             variable.name = outputVar.variable_name;
-            DAWN_TRY_ASSIGN(variable.baseType,
-                            TintComponentTypeToInterStageComponentType(outputVar.component_type));
+            DAWN_TRY_ASSIGN(variable.baseType, TintComponentTypeToInterStageComponentType(
+                                                   device, outputVar.component_type));
             DAWN_TRY_ASSIGN(variable.componentCount, TintCompositionTypeToInterStageComponentCount(
                                                          outputVar.composition_type));
             DAWN_TRY_ASSIGN(variable.interpolationType,
@@ -709,8 +730,8 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             uint32_t location = inputVar.attributes.location.value();
             EntryPointMetadata::InterStageVariableInfo variable;
             variable.name = inputVar.variable_name;
-            DAWN_TRY_ASSIGN(variable.baseType,
-                            TintComponentTypeToInterStageComponentType(inputVar.component_type));
+            DAWN_TRY_ASSIGN(variable.baseType, TintComponentTypeToInterStageComponentType(
+                                                   device, inputVar.component_type));
             DAWN_TRY_ASSIGN(variable.componentCount, TintCompositionTypeToInterStageComponentCount(
                                                          inputVar.composition_type));
             DAWN_TRY_ASSIGN(variable.interpolationType,
@@ -754,8 +775,8 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
         uint32_t maxColorAttachments = limits.v1.maxColorAttachments;
         for (const auto& outputVar : entryPoint.output_variables) {
             EntryPointMetadata::FragmentRenderAttachmentInfo variable;
-            DAWN_TRY_ASSIGN(variable.baseType,
-                            TintComponentTypeToTextureComponentType(outputVar.component_type));
+            DAWN_TRY_ASSIGN(variable.baseType, TintComponentTypeToTextureComponentType(
+                                                   device, outputVar.component_type));
             DAWN_TRY_ASSIGN(variable.componentCount, TintCompositionTypeToInterStageComponentCount(
                                                          outputVar.composition_type));
             DAWN_ASSERT(variable.componentCount <= 4);
@@ -784,8 +805,8 @@ ResultOrError<std::unique_ptr<EntryPointMetadata>> ReflectEntryPointUsingTint(
             DAWN_ASSERT(device->HasFeature(Feature::FramebufferFetch));
 
             EntryPointMetadata::FragmentRenderAttachmentInfo variable;
-            DAWN_TRY_ASSIGN(variable.baseType,
-                            TintComponentTypeToTextureComponentType(inputVar.component_type));
+            DAWN_TRY_ASSIGN(variable.baseType, TintComponentTypeToTextureComponentType(
+                                                   device, inputVar.component_type));
             DAWN_TRY_ASSIGN(variable.componentCount, TintCompositionTypeToInterStageComponentCount(
                                                          inputVar.composition_type));
             DAWN_ASSERT(variable.componentCount <= 4);

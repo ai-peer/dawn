@@ -113,15 +113,19 @@ class SpirvWriterTestHelperBase : public BASE {
     /// @param options the optional writer options to use when raising the IR
     /// @param zero_init_workgroup_memory  `true` to initialize all the variables in the Workgroup
     /// storage class with OpConstantNull
+    /// @param use_storage_input_output_16 `true` to use the StorageInputOutput16 SPIR-V capability
+    /// when the f16 enable is used.
     /// @returns true if generation and validation succeeded
-    bool Generate(Options options = {}, bool zero_init_workgroup_memory = false) {
+    bool Generate(Options options = {},
+                  bool zero_init_workgroup_memory = false,
+                  bool use_storage_input_output_16 = false) {
         auto raised = Raise(mod, options);
         if (raised != Success) {
             err_ = raised.Failure().reason.str();
             return false;
         }
 
-        auto spirv = PrintModule(mod, zero_init_workgroup_memory);
+        auto spirv = PrintModule(mod, zero_init_workgroup_memory, use_storage_input_output_16);
         if (spirv != Success) {
             err_ = spirv.Failure().reason.str();
             return false;

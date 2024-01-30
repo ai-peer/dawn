@@ -98,9 +98,12 @@ class Builder {
     /// @param experimental_require_subgroup_uniform_control_flow `true` to require
     /// `SPV_KHR_subgroup_uniform_control_flow` extension and `SubgroupUniformControlFlowKHR`
     /// execution mode for compute stage entry points.
+    /// @param use_storage_input_output_16 `true` to use the StorageInputOutput16 SPIR-V capability
+    /// when the f16 enable is used.
     explicit Builder(const Program& program,
                      bool zero_initialize_workgroup_memory = false,
-                     bool experimental_require_subgroup_uniform_control_flow = false);
+                     bool experimental_require_subgroup_uniform_control_flow = false,
+                     bool use_storage_input_output_16 = false);
     ~Builder();
 
     /// Generates the SPIR-V instructions for the given program
@@ -560,6 +563,7 @@ class Builder {
     std::vector<uint32_t> continue_stack_;
     bool zero_initialize_workgroup_memory_ = false;
     bool experimental_require_subgroup_uniform_control_flow_ = false;
+    bool use_storage_input_output_16_ = false;
 
     struct ContinuingInfo {
         ContinuingInfo(const ast::Statement* last_statement,

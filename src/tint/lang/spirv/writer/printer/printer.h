@@ -45,14 +45,21 @@ namespace tint::spirv::writer {
 /// @param module the Tint IR module to generate
 /// @param zero_init_workgroup_memory `true` to initialize all the variables in the Workgroup
 ///                                   storage class with OpConstantNull
+/// @param use_storage_input_output_16 `true` to use the StorageInputOutput16 SPIR-V capability
+///                                    when the f16 enable is used.
 tint::Result<std::vector<uint32_t>> Print(core::ir::Module& module,
-                                          bool zero_init_workgroup_memory);
+                                          bool zero_init_workgroup_memory,
+                                          bool use_storage_input_output_16);
 
 /// @returns the generated SPIR-V module on success, or failure
 /// @param module the Tint IR module to generate
 /// @param zero_init_workgroup_memory `true` to initialize all the variables in the Workgroup
 ///                                   storage class with OpConstantNull
-tint::Result<Module> PrintModule(core::ir::Module& module, bool zero_init_workgroup_memory);
+/// @param use_storage_input_output_16 `true` to use the StorageInputOutput16 SPIR-V capability
+///                                    when the f16 enable is used.
+tint::Result<Module> PrintModule(core::ir::Module& module,
+                                 bool zero_init_workgroup_memory,
+                                 bool use_storage_input_output_16);
 
 }  // namespace tint::spirv::writer
 

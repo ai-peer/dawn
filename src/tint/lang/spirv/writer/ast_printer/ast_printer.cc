@@ -201,10 +201,12 @@ SanitizedResult Sanitize(const Program& in, const Options& options) {
 
 ASTPrinter::ASTPrinter(const Program& program,
                        bool zero_initialize_workgroup_memory,
-                       bool experimental_require_subgroup_uniform_control_flow)
+                       bool experimental_require_subgroup_uniform_control_flow,
+                       bool use_storage_input_output_16)
     : builder_(program,
                zero_initialize_workgroup_memory,
-               experimental_require_subgroup_uniform_control_flow) {}
+               experimental_require_subgroup_uniform_control_flow,
+               use_storage_input_output_16) {}
 
 bool ASTPrinter::Generate() {
     if (builder_.Build()) {

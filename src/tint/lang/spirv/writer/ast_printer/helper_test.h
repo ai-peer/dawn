@@ -104,7 +104,8 @@ class TestHelperBase : public ProgramBuilder, public BASE {
             options.use_zero_initialize_workgroup_memory_extension;
         spirv_builder =
             std::make_unique<Builder>(*program, zero_initialize_workgroup_memory,
-                                      options.experimental_require_subgroup_uniform_control_flow);
+                                      options.experimental_require_subgroup_uniform_control_flow,
+                                      options.use_storage_input_output_16_capability);
         return *spirv_builder;
     }
 

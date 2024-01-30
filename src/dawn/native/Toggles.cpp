@@ -521,6 +521,11 @@ static constexpr ToggleEnumAndInfoList kToggleNameAndInfoList = {{
       "waiting for the next Tick. This enables using the stack trace in which the uncaptured error "
       "occured when breaking into the uncaptured error callback.",
       "https://crbug.com/dawn/1789", ToggleStage::Device}},
+    {Toggle::DisallowF16ShaderIO,
+     {"disallow_f16_shader_io",
+      "Opt into not using f16 types for shader I/O. This avoids requiring storageInputOutput16 on "
+      "Vulkan while the transform to decay f16 shader I/O to f32 is not present.",
+      "https://crbug.com/dawn/1510", ToggleStage::Adapter}},
     {Toggle::NoWorkaroundSampleMaskBecomesZeroForAllButLastColorTarget,
      {"no_workaround_sample_mask_becomes_zero_for_all_but_last_color_target",
       "MacOS 12.0+ Intel has a bug where the sample mask is only applied for the last color "
