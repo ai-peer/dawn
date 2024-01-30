@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "2e9a5b09_1b37726c",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 99,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-30T01:58:32Z",
+      "side": 1,
+      "message": "I looked a bit into this, and it seems what you suggested would trivially work for the D3D and Metal backends with some minor changes, but the Vulkan backend is more interesting: `vulkan::Texture::EndAccess` inserts itself into `externalTexturesForEagerTransition` before submitting the pending command buffer. It could probably be adapted to submitting pending work in SharedTextureMemoryBase::EndAccessInternal but requires more thought and feels out of scope for this CL.\n\nWDYT?",
+      "parentUuid": "496a45de_a73705c5",
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "23e7a428_4d8a33ea",
         "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
         "patchSetId": 5
@@ -31,6 +49,30 @@
       "writtenOn": "2024-01-23T18:22:17Z",
       "side": 1,
       "message": "nit: \u003d\u003d?",
+      "range": {
+        "startLine": 100,
+        "startChar": 36,
+        "endLine": 100,
+        "endChar": 38
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "45c4a31e_1b8e5774",
+        "filename": "src/dawn/native/d3d/SharedTextureMemoryD3D.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 100,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-30T01:58:32Z",
+      "side": 1,
+      "message": "IMO `\u003c\u003d` captures the intent better since all we want is that the last usage serial has been signaled / submitted. So I\u0027ll leave it as is - let me know if you still have a strong preference for `\u003d\u003d` here.",
+      "parentUuid": "23e7a428_4d8a33ea",
       "range": {
         "startLine": 100,
         "startChar": 36,
@@ -64,6 +106,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1fee5623_a0147261",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.cpp",
+        "patchSetId": 5
+      },
+      "lineNbr": 1135,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-30T01:58:32Z",
+      "side": 1,
+      "message": "same as above",
+      "parentUuid": "fab258f8_bc2be08f",
+      "range": {
+        "startLine": 1135,
+        "startChar": 39,
+        "endLine": 1135,
+        "endChar": 41
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a868edb4_ce43d080",
@@ -87,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29aec5cf_1ff4c998",
+        "filename": "src/dawn/native/d3d11/TextureD3D11.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 197,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-30T01:58:32Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "a868edb4_ce43d080",
+      "range": {
+        "startLine": 197,
+        "startChar": 35,
+        "endLine": 197,
+        "endChar": 52
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "f0def053_9c14bddb",
@@ -100,6 +190,30 @@
       "writtenOn": "2024-01-23T18:22:17Z",
       "side": 1,
       "message": "nit: move it to with other override methods.",
+      "range": {
+        "startLine": 49,
+        "startChar": 4,
+        "endLine": 49,
+        "endChar": 36
+      },
+      "revId": "04f7fffa659b6bc3c82da30ad15812acfd5a8d9f",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "2e92f3a7_7898958f",
+        "filename": "src/dawn/native/d3d12/QueueD3D12.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 49,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-30T01:58:32Z",
+      "side": 1,
+      "message": "The other override methods are in the private block so they can\u0027t called via a pointer to d3d12::Queue unless the caller casts it to a d3d::Queue.",
+      "parentUuid": "f0def053_9c14bddb",
       "range": {
         "startLine": 49,
         "startChar": 4,
