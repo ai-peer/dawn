@@ -1,0 +1,38 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ac6d65e_27a2903d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 10
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-30T16:56:57Z",
+      "side": 1,
+      "message": "lgtm w/ question",
+      "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c9264a3d_87a817d4",
+        "filename": "src/tint/utils/containers/scope_stack.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-30T16:56:57Z",
+      "side": 1,
+      "message": "Should this do a `Clear()` if you\u0027ve popped the last item?",
+      "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
