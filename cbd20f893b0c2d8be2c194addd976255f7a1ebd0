@@ -69,6 +69,24 @@
       "parentUuid": "8eef5db0_89bbbf7b",
       "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "420114a1_bf2fe628",
+        "filename": "src/tint/utils/containers/scope_stack.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-30T18:15:20Z",
+      "side": 1,
+      "message": "This is the same as the old behvaiour. I\u0027d rather do that as a separate change.",
+      "parentUuid": "ca887b6d_2aff7077",
+      "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
