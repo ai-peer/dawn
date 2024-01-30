@@ -543,7 +543,8 @@ ResultOrError<Ref<BufferBase>> Device::GetStagingBuffer(
         descriptor.mappedAtCreation = false;
         descriptor.label = "DawnDeviceStagingBuffer";
         Ref<BufferBase> buffer;
-        DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext));
+        DAWN_TRY_ASSIGN(buffer, Buffer::Create(this, Unpack(&descriptor), commandContext,
+                                               /*allowUploadBufferEmulation*/ false));
         // We don't cache the buffer if it's too large.
         if (bufferSize > kMaxSize) {
             return buffer;
