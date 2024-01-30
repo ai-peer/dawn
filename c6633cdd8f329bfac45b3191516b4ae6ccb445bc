@@ -16,6 +16,23 @@
       "message": "PTAL! After this there is one more CL that will be needed that changes the validation to require @blend_src on all outputs if it is present on at least one of them.",
       "revId": "c6633cdd8f329bfac45b3191516b4ae6ccb445bc",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "32766346_bf615797",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-30T14:36:22Z",
+      "side": 1,
+      "message": "Good stuff!",
+      "revId": "c6633cdd8f329bfac45b3191516b4ae6ccb445bc",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
