@@ -286,7 +286,7 @@ TEST(Hashmap, MutableIterator) {
     map.Add(4, "four");
     map.Add(3, "three");
     map.Add(2, "two");
-    for (auto pair : map) {
+    for (auto& pair : map) {
         pair.value += "!";
     }
     EXPECT_THAT(map, testing::UnorderedElementsAre(Entry{1, "one!"}, Entry{2, "two!"},

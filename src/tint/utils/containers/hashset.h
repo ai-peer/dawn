@@ -42,8 +42,8 @@ namespace tint {
 
 /// An unordered set that uses a robin-hood hashing algorithm.
 template <typename KEY, size_t N, typename HASH = Hasher<KEY>, typename EQUAL = std::equal_to<KEY>>
-class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
-    using Base = HashmapBase<KEY, void, N, HASH, EQUAL>;
+class Hashset : public HashmapBase<HashmapKey<KEY, HASH, EQUAL>, N> {
+    using Base = HashmapBase<HashmapKey<KEY, HASH, EQUAL>, N>;
 
   public:
     using Base::Base;
@@ -62,8 +62,7 @@ class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
     /// @returns true if the value was added, false if there was an existing value in the set.
     template <typename V>
     bool Add(V&& value) {
-        struct NoValue {};
-        return this->template Put(/* replace */ false, std::forward<V>(value), NoValue{});
+        return this->template Put(/* replace */ false, std::forward<V>(value));
     }
 
     /// @returns the set entries of the map as a vector
@@ -72,8 +71,8 @@ class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
     tint::Vector<KEY, N2> Vector() const {
         tint::Vector<KEY, N2> out;
         out.Reserve(this->Count());
-        for (auto& value : *this) {
-            out.Push(value);
+        for (auto& key : *this) {
+            out.Push(key.Value());
         }
         return out;
     }
@@ -82,8 +81,8 @@ class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
     /// @param pred a function-like with the signature `bool(T)`
     template <typename PREDICATE>
     bool Any(PREDICATE&& pred) const {
-        for (const auto& it : *this) {
-            if (pred(it)) {
+        for (const auto& key : *this) {
+            if (pred(key.Value())) {
                 return true;
             }
         }
@@ -94,8 +93,8 @@ class Hashset : public HashmapBase<KEY, void, N, HASH, EQUAL> {
     /// @param pred a function-like with the signature `bool(T)`
     template <typename PREDICATE>
     bool All(PREDICATE&& pred) const {
-        for (const auto& it : *this) {
-            if (!pred(it)) {
+        for (const auto& key : *this) {
+            if (!pred(key.Value())) {
                 return false;
             }
         }

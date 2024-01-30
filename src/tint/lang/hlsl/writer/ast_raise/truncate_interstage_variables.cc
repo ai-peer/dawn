@@ -181,7 +181,7 @@ ast::transform::Transform::ApplyResult TruncateInterstageVariables::Apply(
 
     // Remove IO attributes from old shader IO struct which is not used as entry point output
     // anymore.
-    for (auto it : old_shader_io_structs_to_new_struct_and_truncate_functions) {
+    for (auto& it : old_shader_io_structs_to_new_struct_and_truncate_functions) {
         const ast::Struct* struct_ty = it.key->Declaration();
         for (auto* member : struct_ty->members) {
             for (auto* attr : member->attributes) {

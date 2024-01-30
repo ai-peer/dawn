@@ -182,8 +182,8 @@ struct TextureBuiltinsFromUniform::State {
 
         // If any functions need extra params, add them now.
         if (!fn_to_data.IsEmpty()) {
-            for (auto pair : fn_to_data) {
-                auto* fn = pair.key;
+            for (auto& pair : fn_to_data) {
+                auto* fn = pair.key.Value();
 
                 // Reorder the param to a vector to make sure params are in the correct order.
                 Vector<const ast::Parameter*, 4> extra_params_in_order;
@@ -200,8 +200,8 @@ struct TextureBuiltinsFromUniform::State {
         }
 
         // Replace all interested texture builtin calls.
-        for (auto pair : builtin_to_replace) {
-            auto call = pair.key;
+        for (auto& pair : builtin_to_replace) {
+            auto call = pair.key.Value();
             if (std::holds_alternative<BindingPoint>(pair.value)) {
                 // This texture is a global variable with binding point.
                 // Read builtin value from uniform buffer.
@@ -215,8 +215,8 @@ struct TextureBuiltinsFromUniform::State {
         }
 
         // Insert all extra args to interested function calls.
-        for (auto pair : call_to_data) {
-            auto call = pair.key;
+        for (auto& pair : call_to_data) {
+            auto call = pair.key.Value();
             for (auto new_arg_info : pair.value) {
                 if (std::holds_alternative<BindingPoint>(new_arg_info)) {
                     // This texture is a global variable with binding point.

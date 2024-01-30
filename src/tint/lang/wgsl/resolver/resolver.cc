@@ -911,7 +911,7 @@ bool Resolver::AllocateOverridableConstantIds() {
 }
 
 void Resolver::SetShadows() {
-    for (auto it : dependencies_.shadows) {
+    for (auto& it : dependencies_.shadows) {
         CastableBase* shadowed = sem_.Get(it.value);
         if (TINT_UNLIKELY(!shadowed)) {
             StringStream err;
@@ -921,7 +921,7 @@ void Resolver::SetShadows() {
         }
 
         Switch(
-            sem_.Get(it.key),  //
+            sem_.Get(it.key.Value()),  //
             [&](sem::LocalVariable* local) { local->SetShadows(shadowed); },
             [&](sem::Parameter* param) { param->SetShadows(shadowed); });
     }

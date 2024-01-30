@@ -166,8 +166,8 @@ class DependencyScanner {
           graph_(graph),
           dependency_edges_(edges) {
         // Register all the globals at global-scope
-        for (auto it : globals_by_name) {
-            scope_stack_.Set(it.key, it.value->node);
+        for (auto& it : globals_by_name) {
+            scope_stack_.Set(it.key.Value(), it.value->node);
         }
     }
 

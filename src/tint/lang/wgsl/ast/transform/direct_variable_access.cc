@@ -358,8 +358,8 @@ struct DirectVariableAccess::State {
         tint::Vector<std::pair<const FnVariant::Signature*, FnVariant*>, 8> SortedVariants() {
             tint::Vector<std::pair<const FnVariant::Signature*, FnVariant*>, 8> out;
             out.Reserve(variants.Count());
-            for (auto it : variants) {
-                out.Push({&it.key, &it.value});
+            for (auto& it : variants) {
+                out.Push({&it.key.Value(), &it.value});
             }
             out.Sort([&](auto& va, auto& vb) { return va.second->order < vb.second->order; });
             return out;
@@ -700,8 +700,8 @@ struct DirectVariableAccess::State {
 
                 // Build the pointer parameter symbols.
                 Hashmap<const sem::Parameter*, PtrParamSymbols, 4> ptr_param_symbols;
-                for (auto param_it : target_signature) {
-                    auto* param = param_it.key;
+                for (auto& param_it : target_signature) {
+                    auto* param = param_it.key.Value();
                     auto& shape = param_it.value;
 
                     // Parameter needs replacing with either zero, one or two parameters:

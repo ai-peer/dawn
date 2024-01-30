@@ -41,78 +41,95 @@
 
 namespace tint {
 
-/// KeyValue is a key-value pair.
-template <typename KEY, typename VALUE>
-struct KeyValue {
-    /// The key type
-    using Key = KEY;
-    /// The value type
-    using Value = VALUE;
+template <typename T, typename HASH = Hasher<T>, typename EQUAL = std::equal_to<T>>
+class HashmapKey {
+    T value_;
 
-    /// The key
-    Key key;
+  public:
+    using Key = HashmapKey<T, HASH, EQUAL>;
+    using Hash = HASH;
+    using Equal = EQUAL;
 
-    /// The value
-    Value value;
+    static const Key& KeyOf(const Key& key) { return key; }
+
+    HashmapKey(size_t hash_, const T& value) : value_(value), hash(hash_) {}
+
+    HashmapKey(size_t hash_, T&& value) : value_(std::forward<T>(value)), hash(hash_) {}
+
+    HashmapKey(const T& value) : value_(value), hash(HASH{}(value_)) {}
+
+    HashmapKey(T&& value) : value_(std::forward<T>(value)), hash(HASH{}(value_)) {}
+
+    HashmapKey(const HashmapKey&) = default;
+
+    HashmapKey(HashmapKey&&) = default;
+
+    ~HashmapKey() = default;
+
+    HashmapKey& operator=(const HashmapKey& other) {
+        TINT_ASSERT(hash == other.hash);
+        value_ = other.Value();
+        return *this;
+    }
+
+    HashmapKey& operator=(HashmapKey&& other) {
+        TINT_ASSERT(hash == other.hash);
+        value_ = std::move(other.Value());
+        return *this;
+    }
+
+    bool operator==(const HashmapKey& other) const {
+        return hash == other.hash && EQUAL{}(value_, other.Value());
+    }
+
+    template <typename RHS>
+    bool operator==(const RHS& other) const {
+        return hash == HASH{}(other) && EQUAL{}(value_, other);
+    }
+
+    /// @returns the value of the key
+    const T& Value() const { return value_; }
+
+    /// @returns the value of the key
+    operator const T&() const { return value_; }
+
+    /// @returns the pointer to the value, or the value itself if T is a pointer.
+    auto operator->() const {
+        if constexpr (std::is_pointer_v<T>) {
+            // operator-> is useless if the T is a pointer, so automatically unwrap a pointer.
+            return value_;
+        } else {
+            return &value_;
+        }
+    }
+
+    /// The hash of value
+    const size_t hash;
 };
 
-template <typename K1, typename V1, typename K2, typename V2>
-inline static bool operator==(const KeyValue<K1, V1>& lhs, const KeyValue<K2, V2>& rhs) {
-    return lhs.key == rhs.key && lhs.value == rhs.value;
-}
-
-/// Writes the KeyValue to the stream.
+/// Writes the HashmapKey to the stream.
 /// @param out the stream to write to
-/// @param key_value the KeyValue to write
+/// @param key the HashmapKey to write
 /// @returns out so calls can be chained
-template <typename STREAM,
-          typename KEY,
-          typename VALUE,
-          typename = traits::EnableIfIsOStream<STREAM>>
-auto& operator<<(STREAM& out, const KeyValue<KEY, VALUE>& key_value) {
-    return out << "[" << key_value.key << ": " << key_value.value << "]";
+template <typename STREAM, typename T, typename = traits::EnableIfIsOStream<STREAM>>
+auto& operator<<(STREAM& out, const HashmapKey<T>& key) {
+    if constexpr (traits::HasOperatorShiftLeft<STREAM, T>) {
+        return out << key.Value();
+    } else {
+        return out << "<hashmap-key>";
+    }
 }
 
-template <typename KEY,
-          typename VALUE,
-          size_t N,
-          typename HASH = Hasher<KEY>,
-          typename EQUAL = EqualTo<KEY>>
+template <typename ENTRY, size_t N>
 class HashmapBase {
   protected:
     struct Node;
 
   public:
-    /// True if Value is void
-    static constexpr bool ValueIsVoid = std::is_same_v<VALUE, void>;
-
-    /// The key type
-    using Key = KEY;
-    /// The value type
-    using Value = VALUE;
-    /// The value reference type
-    using ValueRef = std::conditional_t<ValueIsVoid, int, Value>&;
-    /// The const value reference type
-    using ConstValueRef = std::conditional_t<ValueIsVoid, int, const Value>&;
-
-    /// The entry type for the map.
-    /// This is:
-    /// - `Key` when Value is void (used by Hashset)
-    /// - `KeyValue<Key, Value>` when Value is not void (used by Hashmap)
-    using Entry = std::conditional_t<ValueIsVoid, Key, KeyValue<Key, Value>>;
-
-    /// A mutable reference to an entry in the map.
-    /// This is:
-    /// - `const Key&` when Value is void (used by Hashset)
-    /// - `KeyValue<const Key&, Value&>` when Value is not void (used by Hashmap)
-    using Reference = std::conditional_t<ValueIsVoid, const Key&, KeyValue<const Key&, ValueRef>>;
-
-    /// An immutable reference to an entry in the map.
-    /// This is:
-    /// - `const Key&` when Value is void (used by Hashset)
-    /// - `KeyValue<const Key&, Value&>` when Value is not void (used by Hashmap)
-    using ConstReference =
-        std::conditional_t<ValueIsVoid, const Key&, KeyValue<const Key&, ConstValueRef>>;
+    using Entry = ENTRY;
+    using Key = typename Entry::Key;
+    using Hash = typename Key::Hash;
+    using Equal = typename Key::Equal;
 
     /// The minimum capacity of the hashmap.
     static constexpr size_t kMinCapacity = std::max<size_t>(N, 8);
@@ -202,16 +219,16 @@ class HashmapBase {
 
     template <typename K = Key>
     bool Contains(K&& key) const {
-        auto const [hash, slot_idx] = Hash(key);
+        const auto [hash, slot_idx] = HashAndSlot(key);
         if (auto* node = this->FindNode(hash, slot_idx, key)) {
             return true;
         }
         return false;
     }
 
-    template <typename K>
+    template <typename K = Key>
     bool Remove(K&& key) {
-        auto const [hash, slot_idx] = Hash(key);
+        const auto [hash, slot_idx] = HashAndSlot(key);
         Node** edge = &slots_[slot_idx];
         for (auto* node = *edge; node; node = node->next) {
             if (node->Equals(hash, key)) {
@@ -231,29 +248,14 @@ class HashmapBase {
     class IteratorT {
       private:
         using MAP = std::conditional_t<IS_CONST, const HashmapBase, HashmapBase>;
-        using REFERENCE = std::conditional_t<IS_CONST, ConstReference, Reference>;
         using NODE = std::conditional_t<IS_CONST, const Node, Node>;
 
       public:
-        /// @returns the value pointed to by this iterator
-        REFERENCE operator->() {
-            auto& entry = node_->Entry();
-            if constexpr (ValueIsVoid) {
-                return {entry};
-            } else {
-                return {entry.key, entry.value};
-            }
-        }
+        /// @returns the entry pointed to by this iterator
+        auto& operator->() { return node_->Entry(); }
 
-        /// @returns a reference to the value at the iterator
-        REFERENCE operator*() {
-            auto& entry = node_->Entry();
-            if constexpr (ValueIsVoid) {
-                return {entry};
-            } else {
-                return {entry.key, entry.value};
-            }
-        }
+        /// @returns a reference to the entry at the iterator
+        auto& operator*() { return node_->Entry(); }
 
         /// Increments the iterator
         /// @returns this iterator
@@ -311,60 +313,34 @@ class HashmapBase {
     Iterator end() { return Iterator{*this, slots_.Length(), nullptr}; }
 
     /// STL-friendly alias to Entry. Used by gmock.
-    using value_type = ConstReference;
+    using value_type = const Entry&;
 
   protected:
     struct Node {
-        using E = HashmapBase::Entry;
-
         /// A structure that has the same size and alignment as Entry.
         /// Replacement for std::aligned_storage as this is broken on earlier versions of MSVC.
-        struct alignas(alignof(E)) Storage {
-            /// Byte array of length sizeof(E)
-            uint8_t data[sizeof(E)];
+        struct alignas(alignof(ENTRY)) Storage {
+            /// Byte array of length sizeof(ENTRY)
+            uint8_t data[sizeof(ENTRY)];
         };
 
-        template <typename... ARGS>
-        void New(ARGS&&... args) {
-            new (&Entry()) E{std::forward<ARGS>(args)...};
-        }
+        void Destroy() { Entry().~ENTRY(); }
 
-        template <typename ARG>
-        void Assign(ARG&& arg) {
-            Entry() = std::forward<ARG>(arg);
-        }
+        /// @returns the storage reinterpreted as an `Entry&`
+        ENTRY& Entry() { return *Bitcast<ENTRY*>(&storage.data[0]); }
 
-        void Assign(Node& other) { Entry() = other.Entry(); }
+        /// @returns the storage reinterpreted as a `const Entry&`
+        const ENTRY& Entry() const { return *Bitcast<const ENTRY*>(&storage.data[0]); }
 
-        void Destroy() {
-            Entry().~E();
-            hash = 0;
-        }
+        const HashmapBase::Key& Key() const { return HashmapBase::Entry::KeyOf(Entry()); }
 
-        /// @returns the storage reinterpreted as an Entry&
-        E& Entry() { return *Bitcast<E*>(&storage.data[0]); }
-
-        /// @returns the storage reinterpreted as a const Entry&
-        const E& Entry() const { return *Bitcast<const E*>(&storage.data[0]); }
-
-        /// @returns true if the entry's hash is equal to @p key_hash, and the entry's key is equal
-        /// to @p key
-        template <typename K>
-        bool Equals(size_t key_hash, K&& key) const {
-            return hash == key_hash && EQUAL{}(Key(), key);
-        }
-
-        /// @returns the key of the entry
-        const KEY& Key() const {
-            if constexpr (ValueIsVoid) {
-                return Entry();
-            } else {
-                return Entry().key;
-            }
+        template <typename T>
+        bool Equals(size_t hash, T&& value) const {
+            auto& key = Key();
+            return key.hash == hash && HashmapBase::Equal{}(key.Value(), value);
         }
 
         Storage storage;
-        size_t hash = 0;
         Node* next = nullptr;
     };
 
@@ -398,7 +374,7 @@ class HashmapBase {
         slots_.Resize(other.slots_.Length());
         for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
             for (auto* o = other.slots_[slot_idx]; o; o = o->next) {
-                Insert(o->hash, slot_idx, o->Entry());
+                Insert(slot_idx, o->Entry());
             }
         }
         count_ = other.count_;
@@ -412,53 +388,42 @@ class HashmapBase {
         slots_.Resize(other.slots_.Length());
         for (size_t slot_idx = 0; slot_idx < slots_.Length(); slot_idx++) {
             for (auto* o = other.slots_[slot_idx]; o; o = o->next) {
-                Insert(o->hash, slot_idx, std::move(o->Entry()));
+                Insert(slot_idx, std::move(o->Entry()));
             }
         }
         count_ = other.count_;
         other.Clear();
     }
 
-    template <typename K, typename V>
-    PutResult Put(bool replace, K&& key, V&& value) {
+    template <typename K, typename... V>
+    PutResult Put(bool replace, K&& key, V&&... values) {
         GrowIfNeeded();
 
-        auto const [hash, slot_idx] = Hash(key);
+        const auto [hash, slot_idx] = HashAndSlot(key);
         if (auto* node = FindNode(hash, slot_idx, key)) {
             if (!replace) {
                 return {node->Entry(), PutResult::kKeptExisting};
             }
-            if constexpr (ValueIsVoid) {
-                node->Assign(std::forward<K>(key));
-            } else {
-                node->Assign(Entry{std::forward<K>(key), std::forward<V>(value)});
-            }
+            node->Entry() = Entry{Key{hash, std::forward<K>(key)}, std::forward<V>(values)...};
             return {node->Entry(), PutResult::kReplaced};
         }
-        if constexpr (ValueIsVoid) {
-            auto* node = Insert(hash, slot_idx, std::forward<K>(key));
-            return {node->Entry(), PutResult::kAdded};
-        } else {
-            auto* node = Insert(hash, slot_idx, std::forward<K>(key), std::forward<V>(value));
-            return {node->Entry(), PutResult::kAdded};
-        }
+        auto* node = Insert(slot_idx, Key{hash, std::forward<K>(key)}, std::forward<V>(values)...);
+        return {node->Entry(), PutResult::kAdded};
     }
 
     template <typename... ARGS>
-    Node* Insert(size_t hash, size_t slot_idx, ARGS&&... args) {
+    Node* Insert(size_t slot_idx, ARGS&&... args) {
         auto* node = TakeFree();
-        node->hash = hash;
-        node->New(std::forward<ARGS>(args)...);
+        new (&node->Entry()) Entry{std::forward<ARGS>(args)...};
         AddToSlot(slot_idx, node);
         count_++;
         return node;
     }
 
     template <typename K>
-    std::pair<size_t, size_t> Hash(K&& key) const {
-        auto hash = HASH{}(key);
-        auto slot_idx = hash % slots_.Length();
-        return {hash, slot_idx};
+    std::pair<size_t, size_t> HashAndSlot(K&& key) const {
+        size_t hash = Hash{}(key);
+        return {hash, hash % slots_.Length()};
     }
 
     void Rehash() {
@@ -470,7 +435,7 @@ class HashmapBase {
             auto* node = old_slots[slot_idx];
             while (node) {
                 auto next = node->next;
-                AddToSlot(node->hash % num_slots, node);
+                AddToSlot(node->Key().hash % num_slots, node);
                 node = next;
             }
         }

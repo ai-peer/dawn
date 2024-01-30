@@ -197,7 +197,7 @@ struct State {
     void GetReferencedVars(Block* block, VarSet& vars) {
         // Add directly referenced vars.
         if (auto itr = block_to_direct_vars.Get(block)) {
-            for (auto* var : *itr) {
+            for (auto& var : *itr) {
                 vars.Add(var);
             }
         }
@@ -209,7 +209,7 @@ struct State {
                 [&](UserCall* call) {
                     // Get variables referenced by a function called from this block.
                     auto callee_vars = GetReferencedVars(call->Target());
-                    for (auto* var : callee_vars) {
+                    for (auto& var : callee_vars) {
                         vars.Add(var);
                     }
                 },
