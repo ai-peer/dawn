@@ -33,6 +33,24 @@
       "message": "Should this do a `Clear()` if you\u0027ve popped the last item?",
       "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8eef5db0_89bbbf7b",
+        "filename": "src/tint/utils/containers/scope_stack.h",
+        "patchSetId": 10
+      },
+      "lineNbr": 59,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-30T18:08:29Z",
+      "side": 1,
+      "message": "The global scope can\u0027t be popped. We don\u0027t want to free stuff when hopping between the root scope and the first nesting scope. So, I don\u0027t think that\u0027s desirable.",
+      "parentUuid": "c9264a3d_87a817d4",
+      "revId": "cbd20f893b0c2d8be2c194addd976255f7a1ebd0",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
