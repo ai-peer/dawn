@@ -27,6 +27,7 @@
 
 #include "dawn/native/d3d12/PhysicalDeviceD3D12.h"
 
+#include <versionhelpers.h>
 #include <algorithm>
 #include <string>
 #include <utility>
@@ -174,7 +175,9 @@ void PhysicalDevice::InitializeSupportedFeaturesImpl() {
     D3D12_FEATURE_DATA_EXISTING_HEAPS existingHeapInfo = {};
     hr = mD3d12Device->CheckFeatureSupport(D3D12_FEATURE_EXISTING_HEAPS, &existingHeapInfo,
                                            sizeof(existingHeapInfo));
-    if (SUCCEEDED(hr) && existingHeapInfo.Supported) {
+    // Enable the feature if it is supported and >= major version 22621 (Windows 11 22H2).
+    // On earlier versions, OpenExistingHeapFromAddress has a 32Mb limit.
+    if (SUCCEEDED(hr) && existingHeapInfo.Supported && ::IsWindowsVersionOrGreater(22621, 0, 0)) {
         EnableFeature(Feature::HostMappedPointer);
     }
 
