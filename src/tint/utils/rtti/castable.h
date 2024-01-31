@@ -34,7 +34,9 @@
 #include <type_traits>
 #include <utility>
 
+#include "src/tint/utils/macros/compiler.h"
 #include "src/tint/utils/math/crc32.h"
+#include "src/tint/utils/math/hash.h"
 #include "src/tint/utils/rtti/ignore.h"
 #include "src/tint/utils/traits/traits.h"
 
@@ -43,15 +45,15 @@
 #define TINT_CASTABLE_PUSH_DISABLE_WARNINGS()                                 \
     _Pragma("clang diagnostic push")                                     /**/ \
         _Pragma("clang diagnostic ignored \"-Wundefined-var-template\"") /**/ \
-        static_assert(true, "require extra semicolon")
+        TINT_REQUIRE_SEMICOLON
 
 /// Restore disabled warnings
 #define TINT_CASTABLE_POP_DISABLE_WARNINGS() \
     _Pragma("clang diagnostic pop") /**/     \
-        static_assert(true, "require extra semicolon")
+        TINT_REQUIRE_SEMICOLON
 #else
-#define TINT_CASTABLE_PUSH_DISABLE_WARNINGS() static_assert(true, "require extra semicolon")
-#define TINT_CASTABLE_POP_DISABLE_WARNINGS() static_assert(true, "require extra semicolon")
+#define TINT_CASTABLE_PUSH_DISABLE_WARNINGS() TINT_REQUIRE_SEMICOLON
+#define TINT_CASTABLE_POP_DISABLE_WARNINGS() TINT_REQUIRE_SEMICOLON
 #endif
 
 TINT_CASTABLE_PUSH_DISABLE_WARNINGS();
@@ -96,9 +98,6 @@ enum CastFlags {
     /// impossible casts.
     kDontErrorOnImpossibleCast = 1,
 };
-
-/// The type of a hash code
-using HashCode = uint32_t;
 
 /// Maybe checks to see if an object with the full hashcode @p object_full_hashcode could
 /// potentially be of, or derive from the type with the hashcode @p query_hashcode.
