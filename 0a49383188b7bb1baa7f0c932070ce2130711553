@@ -1,0 +1,191 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f872f8e5_15a2eee0",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "If this case is never supposed to be hit, then we should probably handle it in the MatchVariant and DAWN_UNREACHABLE().",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4e6914db_bea16ca4",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 167,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ba1a6283_62aa1f92",
+        "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 238,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "940e8184_1e2ec7b1",
+        "filename": "src/dawn/native/d3d11/PipelineLayoutD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "The external texture case disappeared even if it should be unreachable.",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c7595fcc_1c30158d",
+        "filename": "src/dawn/native/d3d12/BindGroupD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 203,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "08959dfc_d093d853",
+        "filename": "src/dawn/native/d3d12/BindGroupLayoutD3D12.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 58,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "46bdd022_443538f7",
+        "filename": "src/dawn/native/metal/CommandBufferMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 645,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9546f90_00aa5971",
+        "filename": "src/dawn/native/metal/PipelineLayoutMTL.mm",
+        "patchSetId": 4
+      },
+      "lineNbr": 76,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto, ExternalTexture should be UNREACHABLE(). Or is it that std::visit will ASSERT if the case is unhandled?",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ea17a0b5_55948555",
+        "filename": "src/dawn/native/opengl/CommandBufferGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 411,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "b4780a53_19ff2373",
+        "filename": "src/dawn/native/opengl/PipelineLayoutGL.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "94055156_4f996fad",
+        "filename": "src/dawn/native/vulkan/BindGroupVk.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 148,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 0,
+      "message": "ditto",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

@@ -16,6 +16,142 @@
       "message": "PTAL, thanks!",
       "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "bac3d451_1203cea0",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "LGTM, though OMG std::variant has such verbose and terrible looking APIs.",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1071c21b_accc3db7",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "We don\u0027t need to keep the same hash values as before so hashing only the members of the current variant is fine (even the type of the variant we don\u0027t really need to hash because this is just for an unordered map so collisions get handled with operator \u003d\u003d)",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11fee213_ab79001a",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "nit: this could use std::get_if",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc1c7683_bb769cb1",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "Doesn\u0027t DAWN_TRY(MatchVariant(...)) work?",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4cfb3b38_33524ab1",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "nit: ExternalTexture could be handled here as well even if it should be decayed by this point.",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0580c9fe_c6bdeb7a",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 292,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "ditto both comments",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d6bbf253_a2a60e3b",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 459,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "984949b8_67df0295",
+        "filename": "src/dawn/native/webgpu_absl_format.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 136,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T11:41:04Z",
+      "side": 1,
+      "message": "We should handle externalTexture here I believe as this is for frontend error messages.",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
