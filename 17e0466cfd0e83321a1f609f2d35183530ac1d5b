@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ce448ec_5c226b95",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "51a5cc44_1a2c1d92",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a92ecc68_527b393d",
@@ -124,6 +142,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9e1bd032_b71912fa",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:34:30Z",
+      "side": 1,
+      "message": "I had to actually check whether there was any usage of `Remove`, and I think you\u0027re right. I had to run the tests to make sure. I\u0027ll follow up with a test to see if we can simplify all this now that maps are fast.",
+      "parentUuid": "9dfdba23_1d2175d9",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34da8c0b_4afef77b",
@@ -209,6 +245,30 @@
       "side": 1,
       "message": "Is that because add only adds if it doesn\u0027t exist so it ends up being a no-op?",
       "parentUuid": "df254e3d_5cb3ef25",
+      "range": {
+        "startLine": 1037,
+        "startChar": 38,
+        "endLine": 1037,
+        "endChar": 41
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "efedbf85_a22ef9d7",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:34:30Z",
+      "side": 1,
+      "message": "Yes. That\u0027s the difference between `Add` and `Replace`.",
+      "parentUuid": "867f82d1_283fd4a7",
       "range": {
         "startLine": 1037,
         "startChar": 38,
@@ -483,6 +543,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "fc60e534_3e159eec",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3ffd24db_18d21509",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "eab957b0_0f0279b0",
@@ -532,6 +610,24 @@
       "side": 1,
       "message": "Seemed pretty obvious that it added to the map? Add makes me think it should exist already not be generated on the fly.",
       "parentUuid": "f4b049ff_4b636341",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f47250f0_2173e085",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:34:30Z",
+      "side": 1,
+      "message": "I feel the opposite. `Create` could mean call the create function and pass through the value. `Add` is explicit that it\u0027ll add something if the `Get` failed. I fail to see when passing a create function / lambda, how the user would not expect it to be called on `Add`.",
+      "parentUuid": "d604abef_abb9f36e",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -594,6 +690,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c28b2867_7ee014ec",
+        "filename": "src/tint/utils/containers/hashset.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:34:30Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "68b302de_a89e2c97",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "1b1296be_62f98a68",
@@ -625,6 +745,24 @@
       "side": 1,
       "message": "Because it\u0027s inefficient. You\u0027re duplicating the `string_view` in both the key and value. The `generation_id` is already stored in the `SymbolTable`. The only thing we actually need to lookup is the symbol id.",
       "parentUuid": "1b1296be_62f98a68",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b3b52c54_f39204fb",
+        "filename": "src/tint/utils/symbol/symbol_table.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:34:30Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "2e7f5d8d_fc5d49ce",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
