@@ -50,6 +50,24 @@
       "message": "LGTM you could probably do the same for the CMake build. it looks like we always link in SPIRV-Tools-opt\n\n```\ntarget_link_libraries(dawn_native\n    PUBLIC dawncpp_headers\n           partition_alloc\n    PRIVATE dawn_common\n            dawn_platform\n            dawn_internal_config\n            libtint\n            SPIRV-Tools-opt\n            absl_strings\n            absl_str_format_internal\n            absl_flat_hash_map\n            absl_flat_hash_set\n)\n```",
       "revId": "37f8fedab233145c2f796cb25ced98decc52f9fb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a1439154_2c59b2f3",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-01-31T23:57:54Z",
+      "side": 1,
+      "message": "Ack. I will try it later.",
+      "parentUuid": "021ea295_7be8a6b4",
+      "revId": "37f8fedab233145c2f796cb25ced98decc52f9fb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
