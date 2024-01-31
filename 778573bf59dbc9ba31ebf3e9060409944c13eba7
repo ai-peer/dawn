@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "58e854eb_ea2d6c8a",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 13
+      },
+      "lineNbr": 53,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-31T18:48:21Z",
+      "side": 1,
+      "message": "`, chromium:1515477, dawn:2385`\n(you can add these without invalidating CQ results)",
+      "revId": "778573bf59dbc9ba31ebf3e9060409944c13eba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9659cd88_304a3924",
+        "filename": "webgpu-cts/expectations.txt",
+        "patchSetId": 13
+      },
+      "lineNbr": 323,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-31T18:48:21Z",
+      "side": 1,
+      "message": "This should point to the new bug, but it\u0027s not that critical so don\u0027t block the CL if it passes.",
+      "range": {
+        "startLine": 323,
+        "startChar": 0,
+        "endLine": 323,
+        "endChar": 17
+      },
+      "revId": "778573bf59dbc9ba31ebf3e9060409944c13eba7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
