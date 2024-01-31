@@ -1,0 +1,243 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "51a5cc44_1a2c1d92",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 189,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "This seems less clear since `transforms` is used in both sides of the `if`. Having it declared outside makes it clearer both branches use it.",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a92ecc68_527b393d",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "Does it only need to do this `if (!transforms)`? or can the pointer change out from under it?",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "34da8c0b_4afef77b",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "The previous version only did an `Add` if `param` wasn\u0027t in the map already, it\u0027s hard to tell from reading this if it will do that or overwrite.",
+      "range": {
+        "startLine": 1037,
+        "startChar": 38,
+        "endLine": 1037,
+        "endChar": 41
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "993c84ff_b4d50903",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "Why use this over just `entry.key` since you have the `entry` in order to acll this anyway and it\u0027s astruct with a public member.",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5dc59d40_97e948ae",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "What happens if the owning entry is replaced?",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "038c1e65_45517038",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "```suggestion\n        auto idx \u003d this-\u003eEditAt(key);\n        if (idx.entry) {\n            return {idx.entry-\u003evalue, /* added */ false};\n        }\n        idx.Insert(std::forward\u003cK\u003e(key), std::forward\u003cV\u003e(value));\n        return {idx.entry-\u003evalue, /* added */ true};\n```",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 9
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "49920196_b16512ad",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "ditto `idx` usage",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a1195095_d799fffc",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "Find seems like the more common name?",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cd88530c_60e819a1",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "```suggestion\n    const Value\u0026 GetOrDefault(K\u0026\u0026 key, const Value\u0026 not_found) const {\n```\n\nHaving this as just Get makes the callsites confusing as to what that second parameter is.",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eab957b0_0f0279b0",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "This one seemed a lot clearer as `GetOrCreate` as that was what we used it for. Either thing thing was returned or the lambda executed and created it.",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c5185114_ec9f6dbc",
+        "filename": "src/tint/utils/containers/hashmap_base.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "```suggestion\n/// @param ENTRY is the single record in the map. The entry type must alias \u0027Key\u0027 to the HashmapKey\n```",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "68b302de_a89e2c97",
+        "filename": "src/tint/utils/containers/hashset.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 69,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "```suggestion\n        auto idx \u003d this-\u003eEditAt(value);\n        if (idx.entry) {\n            return false;\n        }\n        idx.Insert(std::forward\u003cV\u003e(value));\n        return true;\n```",
+      "range": {
+        "startLine": 65,
+        "startChar": 0,
+        "endLine": 69,
+        "endChar": 21
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1b1296be_62f98a68",
+        "filename": "src/tint/utils/symbol/symbol_table.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T16:12:50Z",
+      "side": 1,
+      "message": "Why does this no longer go to a Symbol?",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
