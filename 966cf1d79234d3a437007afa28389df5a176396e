@@ -1,0 +1,113 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b4468528_892ad21e",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 5
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-31T01:09:09Z",
+      "side": 1,
+      "message": "Partial review. Looking good so far.",
+      "revId": "966cf1d79234d3a437007afa28389df5a176396e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "628c0835_38fb99d4",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 98,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-31T01:09:09Z",
+      "side": 1,
+      "message": "nit: this comment needs updating.\n```suggestion\n    /// @returns the pointer to the value, which must not be null.\n```",
+      "range": {
+        "startLine": 98,
+        "startChar": 17,
+        "endLine": 98,
+        "endChar": 39
+      },
+      "revId": "966cf1d79234d3a437007afa28389df5a176396e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "017ea952_f4c464c3",
+        "filename": "src/tint/utils/containers/hashmap_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 515,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-31T01:09:09Z",
+      "side": 1,
+      "message": "I presume the key can\u0027t equal the key of an existing node?\n```suggestion\n        /// @param key the key value (inner value of a HashmapKey).\n        /// @note the key must not already exist in the map.\n```",
+      "range": {
+        "startLine": 515,
+        "startChar": 19,
+        "endLine": 515,
+        "endChar": 22
+      },
+      "revId": "966cf1d79234d3a437007afa28389df5a176396e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "dc339c39_d29679dc",
+        "filename": "src/tint/utils/containers/hashmap_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 653,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-31T01:09:09Z",
+      "side": 1,
+      "message": "Strictly speaking this needs to be rounded up to alignof(Node)",
+      "range": {
+        "startLine": 653,
+        "startChar": 52,
+        "endLine": 653,
+        "endChar": 73
+      },
+      "revId": "966cf1d79234d3a437007afa28389df5a176396e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "f9b6c94a_da182c44",
+        "filename": "src/tint/utils/containers/hashmap_base.h",
+        "patchSetId": 5
+      },
+      "lineNbr": 662,
+      "author": {
+        "id": 1000033
+      },
+      "writtenOn": "2024-01-31T01:09:09Z",
+      "side": 1,
+      "message": "rounded up to alignof(Node)",
+      "range": {
+        "startLine": 662,
+        "startChar": 50,
+        "endLine": 662,
+        "endChar": 68
+      },
+      "revId": "966cf1d79234d3a437007afa28389df5a176396e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
