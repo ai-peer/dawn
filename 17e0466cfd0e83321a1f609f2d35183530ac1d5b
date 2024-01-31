@@ -197,6 +197,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "867f82d1_283fd4a7",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-01-31T17:21:47Z",
+      "side": 1,
+      "message": "Is that because add only adds if it doesn\u0027t exist so it ends up being a no-op?",
+      "parentUuid": "df254e3d_5cb3ef25",
+      "range": {
+        "startLine": 1037,
+        "startChar": 38,
+        "endLine": 1037,
+        "endChar": 41
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "993c84ff_b4d50903",
         "filename": "src/tint/utils/containers/hashmap.h",
         "patchSetId": 6
