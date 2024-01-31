@@ -69,6 +69,7 @@ class Queue final : public d3d::Queue {
     MaybeError WaitForIdleForDestruction() override;
 
     ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence() override;
+    MaybeError SignalSharedFenceIfNeeded(ExecutionSerial serial) override;
     void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) override;
 
     MaybeError OpenPendingCommands();
