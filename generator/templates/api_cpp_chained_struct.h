@@ -53,6 +53,6 @@ namespace {{metadata.namespace}} {
         SType sType = SType(0u);
     };
 
-}  // namespace {{metadata.namespace}}}
+}  // namespace {{metadata.namespace}}
 
 #endif // {{API}}_CPP_CHAINED_STRUCT_H_
