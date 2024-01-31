@@ -108,6 +108,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "9dfdba23_1d2175d9",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-01-31T17:20:01Z",
+      "side": 1,
+      "message": "But if it changes once, will we get a different response back later? Like, isn\u0027t it a list, so we\u0027d get the same list back? The first time we have to look it up because it wasn\u0027t there at all, but once it\u0027s there, it just gets extended doesn\u0027t it?",
+      "parentUuid": "1ca29d42_83ea942b",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "34da8c0b_4afef77b",
         "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
         "patchSetId": 6
