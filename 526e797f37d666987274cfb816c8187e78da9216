@@ -16,6 +16,69 @@
       "message": "PTAL!",
       "revId": "526e797f37d666987274cfb816c8187e78da9216",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "a662c74a_dfbedfee",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T09:09:36Z",
+      "side": 1,
+      "message": "Logic looks good, I just struggle with the diagnostic wording a bit.",
+      "revId": "526e797f37d666987274cfb816c8187e78da9216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "16300596_b68f4c82",
+        "filename": "src/tint/lang/wgsl/resolver/dual_source_blending_extension_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T09:09:36Z",
+      "side": 1,
+      "message": "I find this a bit hard to read. Suggestion:\n\n```\n12:34 error: use of @blend_src requires all the output @location attributes of the entry point to be paired with a @blend_src attribute\n56:78 note: use of @blend_src here\nnote: while analyzing entry point \u0027F\u0027\n```\n\nNote that I swapped the error / note locations.",
+      "range": {
+        "startLine": 256,
+        "startChar": 24,
+        "endLine": 256,
+        "endChar": 117
+      },
+      "revId": "526e797f37d666987274cfb816c8187e78da9216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "607f7635_67da31af",
+        "filename": "src/tint/lang/wgsl/resolver/dual_source_blending_extension_test.cc",
+        "patchSetId": 1
+      },
+      "lineNbr": 256,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T09:09:36Z",
+      "side": 1,
+      "message": "nit: all Tint diagnostics are untitled.",
+      "range": {
+        "startLine": 256,
+        "startChar": 24,
+        "endLine": 256,
+        "endChar": 25
+      },
+      "revId": "526e797f37d666987274cfb816c8187e78da9216",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
