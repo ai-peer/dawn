@@ -86,12 +86,31 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
                     "Required feature (%s) is missing.",
                     wgpu::FeatureName::SharedFenceDXGISharedHandle);
 
+<<<<<<< PATCH SET (905b83 Use query to replace fence)
+    // Release keyed mutex for the last access.
+    if (mDXGIKeyedMutex && !HasWriteAccess() && !HasExclusiveReadAccess() &&
+        GetReadAccessCount() == 0) {
+        mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
+    }
+
+    auto queue = ToBackend(GetDevice()->GetQueue());
+=======
     Ref<SharedFence> sharedFence;
     DAWN_TRY_ASSIGN(sharedFence, ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence());
+>>>>>>> BASE      (b6569f D3D11: add needSynchronization flag for importing D3D11 text)
 
-    return FenceAndSignalValue{
-        std::move(sharedFence),
-        static_cast<uint64_t>(texture->GetSharedTextureMemoryContents()->GetLastUsageSerial())};
+    auto lastUsageSerial = texture->GetSharedTextureMemoryContents()->GetLastUsageSerial();
+    // If GPU is done with the texture, no fence is needed.
+    if (queue->GetCompletedCommandSerial() >= lastUsageSerial) {
+        return FenceAndSignalValue{{}, 0};
+    }
+
+    DAWN_TRY(queue->SignalSharedFenceIfNeeded(lastUsageSerial));
+
+    Ref<SharedFence> sharedFence;
+    DAWN_TRY_ASSIGN(sharedFence, queue->GetOrCreateSharedFence());
+
+    return FenceAndSignalValue{std::move(sharedFence), static_cast<uint64_t>(lastUsageSerial)};
 }
 
 }  // namespace dawn::native::d3d
