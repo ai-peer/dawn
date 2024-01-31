@@ -18,6 +18,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "78fe94a5_462474f2",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 218,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:43:29Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "42a3a0ca_3197a5fb",
+      "revId": "a12633cd0f9ce9225a0181c5ca0933226ce98650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "36b03df5_f826a927",
@@ -31,6 +49,24 @@
       "writtenOn": "2024-01-31T17:38:34Z",
       "side": 1,
       "message": "```suggestion\n                // Clone(el) may have created a transformation list\n```",
+      "revId": "a12633cd0f9ce9225a0181c5ca0933226ce98650",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "411dc817_91cc6270",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 7
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:43:29Z",
+      "side": 1,
+      "message": "Fix applied.",
+      "parentUuid": "36b03df5_f826a927",
       "revId": "a12633cd0f9ce9225a0181c5ca0933226ce98650",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
