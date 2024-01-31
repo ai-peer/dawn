@@ -42,11 +42,14 @@ struct OverrideId {
     uint16_t value = 0;
 
     /// Reflect the fields of this struct so that it can be used by tint::ForeachField()
-    TINT_REFLECT(value);
+    TINT_REFLECT(OverrideId, value);
 
     /// @returns the hash code of the OverrideId
     tint::HashCode HashCode() const { return Hash(value); }
 };
+
+/// Ensure that all the fields of OverrideId are reflected.
+TINT_ASSERT_ALL_FIELDS_REFLECTED(OverrideId);
 
 /// Equality operator for OverrideId
 /// @param lhs the OverrideId on the left of the '=' operator

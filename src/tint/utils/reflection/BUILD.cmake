@@ -45,6 +45,7 @@ tint_add_target(tint_utils_reflection lib
 
 tint_target_add_dependencies(tint_utils_reflection lib
   tint_utils_macros
+  tint_utils_math
 )
 
 ################################################################################
@@ -57,6 +58,7 @@ tint_add_target(tint_utils_reflection_test test
 
 tint_target_add_dependencies(tint_utils_reflection_test test
   tint_utils_macros
+  tint_utils_math
   tint_utils_reflection
 )
 

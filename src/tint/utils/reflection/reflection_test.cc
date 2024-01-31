@@ -35,7 +35,7 @@ struct S {
     int i;
     unsigned u;
     bool b;
-    TINT_REFLECT(i, u, b);
+    TINT_REFLECT(S, i, u, b);
 };
 
 static_assert(!HasReflection<int>);
