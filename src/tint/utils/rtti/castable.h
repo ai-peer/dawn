@@ -98,7 +98,7 @@ enum CastFlags {
 };
 
 /// The type of a hash code
-using HashCode = uint64_t;
+using HashCode = uint32_t;
 
 /// Maybe checks to see if an object with the full hashcode @p object_full_hashcode could
 /// potentially be of, or derive from the type with the hashcode @p query_hashcode.
@@ -205,9 +205,9 @@ struct TypeInfo {
 #else
         constexpr uint32_t crc = tint::CRC32(__PRETTY_FUNCTION__);
 #endif
-        constexpr uint32_t bit_a = (crc & 63);
-        constexpr uint32_t bit_b = ((crc >> 6) & 63);
-        constexpr uint32_t bit_c = (bit_a == bit_b) ? ((bit_a + 1) & 63) : bit_b;
+        constexpr uint32_t bit_a = (crc & 31);
+        constexpr uint32_t bit_b = ((crc >> 6) & 31);
+        constexpr uint32_t bit_c = (bit_a == bit_b) ? ((bit_a + 1) & 31) : bit_b;
         return (static_cast<HashCode>(1) << bit_a) | (static_cast<HashCode>(1) << bit_c);
     }
 
