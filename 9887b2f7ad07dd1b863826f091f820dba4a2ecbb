@@ -16,6 +16,23 @@
       "message": "Alan PTAL (manual change is https://dawn-review.googlesource.com/c/dawn/+/172080/5..8 - hopefully it works)",
       "revId": "9887b2f7ad07dd1b863826f091f820dba4a2ecbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9f0a60a2_e8d0b1c5",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000015
+      },
+      "writtenOn": "2024-01-31T02:42:56Z",
+      "side": 1,
+      "message": "I can\u0027t `Auto-Submit` this because I\u0027m not the owner, but please submit it if it passes.",
+      "revId": "9887b2f7ad07dd1b863826f091f820dba4a2ecbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
