@@ -77,6 +77,11 @@ class Guard {
 
   protected:
     Guard(T* obj, typename Traits::MutexType& mutex) : mLock(Traits::GetMutex(mutex)), mObj(obj) {}
+    Guard(Guard&& other) : mLock(std::move(other.mLock)), mObj(std::move(other.mObj)) {
+      other.mObj = nullptr;
+    }
+
+    Guard operator=(Guard&& other) = delete;
 
     auto* Get() const { return Traits::GetObj(mObj.get()); }
 
@@ -85,7 +90,7 @@ class Guard {
     friend class MutexProtected<NonConstT, Guard>;
 
     typename Traits::LockType mLock;
-    const raw_ptr<T> mObj;
+    raw_ptr<T> mObj;
 };
 
 }  // namespace detail
