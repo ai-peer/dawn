@@ -58,6 +58,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9c323cba_78e5ca6d",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002701
+      },
+      "writtenOn": "2024-01-31T16:49:31Z",
+      "side": 1,
+      "message": "lgtm from me if Austin and Corentin are happy",
+      "revId": "14c223988ceb97b8449d06f0ce40903b034e20c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "644b4f07_b6e6fc11",
