@@ -146,6 +146,9 @@ class ScopedCommandRecordingContext : public CommandRecordingContext::Guard {
     HRESULT Signal(ID3D11Fence* pFence, UINT64 Value) const;
     HRESULT Wait(ID3D11Fence* pFence, UINT64 Value) const;
 
+    void End(ID3D11Asynchronous* pAsync) const;
+    HRESULT GetData(ID3D11Asynchronous* pAsync, void* pData, UINT DataSize, UINT GetDataFlags);
+
     // Write the built-in variable value to the uniform buffer.
     void WriteUniformBuffer(uint32_t offset, uint32_t element) const;
     MaybeError FlushUniformBuffer() const;
