@@ -109,6 +109,11 @@ ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
     return mSharedFence;
 }
 
+MaybeError Queue::SignalSharedFenceIfNeeded(ExecutionSerial serial) {
+    DAWN_ASSERT(serial <= GetLastSubmittedCommandSerial());
+    return {};
+}
+
 ID3D12CommandQueue* Queue::GetCommandQueue() const {
     return mCommandQueue.Get();
 }

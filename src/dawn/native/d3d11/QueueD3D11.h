@@ -28,8 +28,11 @@
 #ifndef SRC_DAWN_NATIVE_D3D11_QUEUED3D11_H_
 #define SRC_DAWN_NATIVE_D3D11_QUEUED3D11_H_
 
+#include <deque>
+
 #include "dawn/common/MutexProtected.h"
 #include "dawn/common/SerialMap.h"
+#include "dawn/common/SerialQueue.h"
 #include "dawn/native/SystemEvent.h"
 #include "dawn/native/d3d/QueueD3D.h"
 
@@ -80,13 +83,17 @@ class Queue final : public d3d::Queue {
     MaybeError WaitForIdleForDestruction() override;
 
     ResultOrError<Ref<d3d::SharedFence>> GetOrCreateSharedFence() override;
+    MaybeError SignalSharedFenceIfNeeded(ExecutionSerial serial) override;
     void SetEventOnCompletion(ExecutionSerial serial, HANDLE event) override;
 
     ComPtr<ID3D11Fence> mFence;
     HANDLE mFenceEvent = nullptr;
     Ref<SharedFence> mSharedFence;
+    ExecutionSerial mLastSignaledFenceSerial = kBeginningOfGPUTime;
     MutexProtected<CommandRecordingContext, CommandRecordingContextGuard> mPendingCommands;
     std::atomic<bool> mPendingCommandsNeedSubmit = false;
+    std::deque<ComPtr<ID3D11Query>> mPendingQueries;
+    std::vector<ComPtr<ID3D11Query>> mAvailableQueries;
 };
 
 }  // namespace dawn::native::d3d11
