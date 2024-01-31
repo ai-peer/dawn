@@ -27,45 +27,8 @@
 
 #include "dawn/native/d3d/QueueD3D.h"
 
-#include <utility>
-
-#include "dawn/native/WaitAnySystemEvent.h"
-
 namespace dawn::native::d3d {
 
 Queue::~Queue() = default;
-
-ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
-    ExecutionSerial completedSerial = GetCompletedCommandSerial();
-    if (serial <= completedSerial) {
-        return true;
-    }
-
-    auto receiver = mSystemEventReceivers->TakeOne(serial);
-    if (!receiver) {
-        // Anytime we may create an event, clear out any completed receivers so the list doesn't
-        // grow forever.
-        mSystemEventReceivers->ClearUpTo(completedSerial);
-
-        HANDLE fenceEvent =
-            ::CreateEvent(nullptr, /*bManualReset=*/true, /*bInitialState=*/false, nullptr);
-        DAWN_INVALID_IF(fenceEvent == nullptr, "CreateEvent failed");
-        SetEventOnCompletion(serial, fenceEvent);
-
-        receiver = SystemEventReceiver(SystemHandle::Acquire(fenceEvent));
-    }
-
-    bool ready = false;
-    std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
-        {{*receiver, &ready}}};
-    DAWN_ASSERT(serial <= GetLastSubmittedCommandSerial());
-    bool didComplete = WaitAnySystemEvent(events.begin(), events.end(), timeout);
-    if (!didComplete) {
-        // Return the SystemEventReceiver to the pool of receivers so it can be re-waited in the
-        // future.
-        mSystemEventReceivers->Enqueue(std::move(*receiver), serial);
-    }
-    return didComplete;
-}
 
 }  // namespace dawn::native::d3d
