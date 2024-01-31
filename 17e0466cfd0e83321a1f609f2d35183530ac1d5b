@@ -420,6 +420,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "14a6b536_902b4247",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-01-31T17:38:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "b5be3411_8738ed66",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 9
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "49920196_b16512ad",
@@ -455,6 +479,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "a19db979_9a3b8c51",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-01-31T17:38:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "a2d70a2e_49e7cd05",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "a1195095_d799fffc",
@@ -486,6 +528,24 @@
       "side": 1,
       "message": "Citation needed.\n* Rust: [`get()`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get)\n* Java: [`get()`](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html#get-java.lang.Object-)\n* JavaScript: [`get()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get)v\n* C#: `operator[]` and [`TryGetValue()`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue?view\u003dnet-8.0)\n\nAnd so on.",
       "parentUuid": "a1195095_d799fffc",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d8e98111_a4aa1f01",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-01-31T17:38:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "412a5a11_dba70c22",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -628,6 +688,24 @@
       "side": 1,
       "message": "I feel the opposite. `Create` could mean call the create function and pass through the value. `Add` is explicit that it\u0027ll add something if the `Get` failed. I fail to see when passing a create function / lambda, how the user would not expect it to be called on `Add`.",
       "parentUuid": "d604abef_abb9f36e",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "b1781f7d_f42e77b9",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1003216
+      },
+      "writtenOn": "2024-01-31T17:38:34Z",
+      "side": 1,
+      "message": "Acknowledged",
+      "parentUuid": "f47250f0_2173e085",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
