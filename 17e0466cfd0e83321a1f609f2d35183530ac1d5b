@@ -153,6 +153,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "df254e3d_5cb3ef25",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:18:58Z",
+      "side": 1,
+      "message": "No, this is functionally identical to before. Just more efficient now, and less verbose.",
+      "parentUuid": "ccd49b58_f3cdd957",
+      "range": {
+        "startLine": 1037,
+        "startChar": 38,
+        "endLine": 1037,
+        "endChar": 41
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "993c84ff_b4d50903",
