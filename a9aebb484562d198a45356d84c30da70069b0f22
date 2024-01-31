@@ -1,0 +1,374 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "1e41da55_0b04cb64",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "Ok almost there, the test is obviously WIP. And also do you confirm that you checked that ManualSwapChainTests still works with this change?",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "aca874cd_fc93c075",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 21
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "nit: leftover from a previous patchset",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "3522fc19_bff00dfe",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "Whichever name works really.\n\nAlso that this is cached is not a property of the struct itself.\n\n```suggestion\n// Structure that holds surface capabilities for a (Surface, PhysicalDevice) pair.\n```",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "22a95ed5_187aa296",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "Yes",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "7c5abc11_5934db7d",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "nit: const AdapterBase* I think?",
+      "range": {
+        "startLine": 261,
+        "startChar": 39,
+        "endLine": 261,
+        "endChar": 50
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "41d6c839_07e61bbb",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "```suggestion\n    DAWN_TRY_ASSIGN(mSwapChain, GetCurrentDevice()-\u003eCreateSwapChain(this, previousSwapChain, config));\n```",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 62
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "8d2382e2_315720d9",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "TODO...",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "edf3f752_47204d99",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "TODO(...) and maybe have some text that doesn\u0027t use first person of singular ^^",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9855484a_bef45e23",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "ditto and below",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "11102460_6624c82c",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "ditto",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db38b4fe_65cdb6ef",
+        "filename": "src/dawn/native/SwapChain.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "nit: We tend to mark deprecated paths with // TODO(dawn:...): Remove once the deprectation period is finished.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "cdce5598_99119bbe",
+        "filename": "src/dawn/native/SwapChain.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 47,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "Can\u0027t the struct have an extra `Ref\u003cTexture\u003e texture` member, then we change `GetCurrentTextureImpl` to return a `ResultOrError\u003cSwapChainTextureInfo\u003e`? Then `mCurrentTexture` is replaced with `mCurrent.texture`? Maybe?",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "424a149d_cd19c5fd",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "Are these maybe_unused necessary? If we get a warning without them, what we can do for function arguments is to remove the name of the arguments instead. Ditto everywhere else.",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "d7651821_d48d915b",
+        "filename": "src/dawn/native/metal/SwapChainMTL.mm",
+        "patchSetId": 21
+      },
+      "lineNbr": 75,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "FYI for this we\u0027ll need to modify ManualSwapChainTests to be able to toggle the opacity.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0d32bbe9_887278b8",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "The surface is not freed. We have an RAII helper for Vulkan objects somewhere that we could use here.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fadc9c8c_81f9b6eb",
+        "filename": "src/dawn/native/vulkan/SwapChainVk.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "nit: this could be just a freestanding function. I doesn\u0027t access SwapChain at all so it doesn\u0027t have a lot of need to be a static member function.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "db85ee8e_38be73c3",
+        "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "IMHO these are not more readable than just inlining the code",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "82aa0a4f_3c7386f7",
+        "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 61,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "See SwapChainTests.cpp https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/tests/end2end/SwapChainTests.cpp;l\u003d1?q\u003dSwapChainTests.cp\u0026sq\u003d\n\nThey use glfw in SetUp to create a window, delete it in TearDown, and use DAWN_INSTANTIATE_TEST to test on all backends (but the GL backend.)",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "31cfc519_6079e678",
+        "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 94,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "It is done automatically in the C++ wrapper. https://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/generator/templates/api_cpp.cpp;drc\u003d4090b7d2d2cb4f3e8ef448aeaca55c75a55b41ca;l\u003d127",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "1fcbaafc_1ffefa79",
+        "filename": "third_party/dxheaders",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T15:49:58Z",
+      "side": 1,
+      "message": "Nit, these should be possible to remove by doing a gclient sync. It\u0027s a common issue when updating dawn that without gclient sync, it will consider the submodules dirty.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
