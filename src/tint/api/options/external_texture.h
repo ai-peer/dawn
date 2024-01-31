@@ -47,8 +47,9 @@ struct ExternalTextureOptions {
         BindingPoint params;
 
         /// Reflect the fields of this class so that it can be used by tint::ForeachField()
-        TINT_REFLECT(plane_1, params);
+        TINT_REFLECT(BindingPoints, plane_1, params);
     };
+
 
     /// BindingsMap is a map where the key is the binding location of a
     /// texture_external and the value is a struct containing the desired
@@ -59,8 +60,14 @@ struct ExternalTextureOptions {
     BindingsMap bindings_map;
 
     /// Reflect the fields of this class so that it can be used by tint::ForeachField()
-    TINT_REFLECT(bindings_map);
+    TINT_REFLECT(ExternalTextureOptions, bindings_map);
 };
+
+/// Ensure that all the fields of ExternalTextureOptions::BindingPoints are reflected.
+TINT_ASSERT_ALL_FIELDS_REFLECTED(ExternalTextureOptions::BindingPoints);
+
+/// Ensure that all the fields of ExternalTextureOptions are reflected.
+TINT_ASSERT_ALL_FIELDS_REFLECTED(ExternalTextureOptions);
 
 }  // namespace tint
 
