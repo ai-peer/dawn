@@ -1,6 +1,23 @@
 {
   "comments": [
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "9fb681c7_850712ae",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T17:14:33Z",
+      "side": 1,
+      "message": "s",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "51a5cc44_1a2c1d92",
@@ -49,6 +66,24 @@
       "side": 1,
       "message": "Yes. See the comment just above.",
       "parentUuid": "a92ecc68_527b393d",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "962c5fa4_cff944ce",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T17:14:33Z",
+      "side": 1,
+      "message": "In that case, why not wrap it in a `if (!transforms)` so we don\u0027t do the `Get` on every iteration?",
+      "parentUuid": "29825bb2_4c6ee785",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -219,6 +254,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "b5be3411_8738ed66",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T17:14:33Z",
+      "side": 1,
+      "message": "Ok, though I have the opposite in that it\u0027s a lot less clear what\u0027s happening.",
+      "parentUuid": "4d2f7303_ad3162cc",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 9
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49920196_b16512ad",
         "filename": "src/tint/utils/containers/hashmap.h",
         "patchSetId": 6
@@ -324,6 +383,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "3ffd24db_18d21509",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T17:14:33Z",
+      "side": 1,
+      "message": "That\u0027s fine, just make it clear it isn\u0027t `Get`",
+      "parentUuid": "5545a69a_99a38541",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "eab957b0_0f0279b0",
         "filename": "src/tint/utils/containers/hashmap.h",
         "patchSetId": 6
@@ -353,6 +430,24 @@
       "side": 1,
       "message": "`Create` does not suggest that it also adds it to the map. `Add` does.",
       "parentUuid": "eab957b0_0f0279b0",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "d604abef_abb9f36e",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-01-31T17:14:33Z",
+      "side": 1,
+      "message": "Seemed pretty obvious that it added to the map? Add makes me think it should exist already not be generated on the fly.",
+      "parentUuid": "f4b049ff_4b636341",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
