@@ -186,56 +186,32 @@ class CloneContext {
     void Clone(tint::Vector<T*, N>& to, const tint::Vector<T*, N>& from) {
         to.Reserve(from.Length());
 
-        auto transforms = list_transforms_.Get(&from);
+        auto& transforms = list_transforms_.GetOrAddZero(&from);
 
-        if (transforms) {
-            for (auto& builder : transforms->insert_front_) {
-                to.Push(CheckedCast<T>(builder()));
-            }
-            for (auto& el : from) {
-                if (auto insert_before = transforms->insert_before_.Get(el)) {
-                    for (auto& builder : *insert_before) {
-                        to.Push(CheckedCast<T>(builder()));
-                    }
-                }
-                if (!transforms->remove_.Contains(el)) {
-                    to.Push(Clone(el));
-                }
-                if (auto insert_after = transforms->insert_after_.Get(el)) {
-                    for (auto& builder : *insert_after) {
-                        to.Push(CheckedCast<T>(builder()));
-                    }
-                }
-            }
-            for (auto& builder : transforms->insert_back_) {
-                to.Push(CheckedCast<T>(builder()));
-            }
-        } else {
-            for (auto& el : from) {
-                to.Push(Clone(el));
-
-                if (!transforms) {
-                    // Clone(el) may have create a transformation list
-                    transforms = list_transforms_.Get(&from);
-                }
-                if (transforms) {
-                    if (auto insert_after = transforms->insert_after_.Get(el)) {
-                        for (auto& builder : *insert_after) {
-                            to.Push(CheckedCast<T>(builder()));
-                        }
-                    }
-                }
-            }
-
-            if (!transforms) {
-                // Clone(el) may have create a transformation list
-                transforms = list_transforms_.Get(&from);
-            }
-            if (transforms) {
-                for (auto& builder : transforms->insert_back_) {
+        for (auto& builder : transforms.insert_front_) {
+            to.Push(CheckedCast<T>(builder()));
+        }
+        for (auto& el : from) {
+            if (auto insert_before = transforms.insert_before_.Get(el)) {
+                for (auto& builder : *insert_before) {
                     to.Push(CheckedCast<T>(builder()));
                 }
             }
+            if (!transforms.remove_.Contains(el)) {
+                to.Push(Clone(el));
+            }
+            if (auto insert_after = transforms.insert_after_.Get(el)) {
+                for (auto& builder : *insert_after) {
+                    to.Push(CheckedCast<T>(builder()));
+                }
+            }
+        }
+        for (auto& builder : transforms.insert_back_) {
+            to.Push(CheckedCast<T>(builder()));
+        }
+
+        if (transforms.IsEmpty()) {
+            list_transforms_.Remove(&from);
         }
     }
 
@@ -553,6 +529,12 @@ class CloneContext {
         /// Clone(const Vector<T*>& v) will use this to insert the map-value
         /// list into the target vector after cloning and inserting the map-key.
         Hashmap<const ast::Node*, NodeBuilderList, 4> insert_after_;
+
+        /// @returns true if the transform list is empty
+        inline bool IsEmpty() const {
+            return remove_.IsEmpty() && insert_front_.IsEmpty() && insert_back_.IsEmpty() &&
+                   insert_before_.IsEmpty() && insert_after_.IsEmpty();
+        }
     };
 
     CloneContext(const CloneContext&) = delete;
