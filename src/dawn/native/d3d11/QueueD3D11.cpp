@@ -27,6 +27,11 @@
 
 #include "dawn/native/d3d11/QueueD3D11.h"
 
+#include <chrono>
+#include <limits>
+#include <optional>
+#include <ratio>
+#include <thread>
 #include <utility>
 
 #include "dawn/native/d3d/D3DError.h"
@@ -52,10 +57,6 @@ MaybeError Queue::Initialize() {
                               ->GetD3D11Device5()
                               ->CreateFence(0, D3D11_FENCE_FLAG_SHARED, IID_PPV_ARGS(&mFence)),
                           "D3D11: creating fence"));
-
-    // Create the fence event.
-    mFenceEvent = CreateEvent(nullptr, FALSE, FALSE, nullptr);
-    DAWN_ASSERT(mFenceEvent != nullptr);
 
     DAWN_TRY_ASSIGN(mSharedFence, SharedFence::Create(ToBackend(GetDevice()),
                                                       "Internal shared DXGI fence", mFence));
@@ -84,11 +85,6 @@ MaybeError Queue::InitializePendingContext() {
 }
 
 void Queue::DestroyImpl() {
-    if (mFenceEvent != nullptr) {
-        ::CloseHandle(mFenceEvent);
-        mFenceEvent = nullptr;
-    }
-
     // Release the shared fence here to prevent a ref-cycle with the device, but do not destroy the
     // underlying native fence so that we can return a SharedFence on EndAccess after destruction.
     mSharedFence = nullptr;
@@ -105,6 +101,19 @@ ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
         return SharedFence::Create(ToBackend(GetDevice()), "Internal shared DXGI fence", mFence);
     }
     return mSharedFence;
+}
+
+MaybeError Queue::SignalSharedFenceIfNeeded(ExecutionSerial serial) {
+    DAWN_ASSERT(serial <= GetLastSubmittedCommandSerial());
+    if (serial <= mLastSignaledFenceSerial) {
+        return {};
+    }
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    DAWN_TRY(
+        CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
+                     "D3D11 command queue signal fence"));
+    mLastSignaledFenceSerial = GetLastSubmittedCommandSerial();
+    return {};
 }
 
 ScopedCommandRecordingContext Queue::GetScopedPendingCommandContext(SubmitMode submitMode) {
@@ -200,21 +209,21 @@ bool Queue::HasPendingCommands() const {
 }
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
-    ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
-    if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
-        // GetCompletedValue returns UINT64_MAX if the device was removed.
-        // Try to query the failure reason.
-        ID3D11Device* d3d11Device = ToBackend(GetDevice())->GetD3D11Device();
-        DAWN_TRY(CheckHRESULT(d3d11Device->GetDeviceRemovedReason(),
-                              "ID3D11Device::GetDeviceRemovedReason"));
-        // Otherwise, return a generic device lost error.
-        return DAWN_DEVICE_LOST_ERROR("Device lost");
-    }
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    auto completedSerial = GetCompletedCommandSerial();
 
-    if (completedSerial <= GetCompletedCommandSerial()) {
-        return ExecutionSerial(0);
+    while (!mPendingQueries.empty()) {
+        auto& d3d11Query = mPendingQueries.front();
+        HRESULT hr =
+            commandContext.GetData(d3d11Query.Get(), nullptr, 0, D3D11_ASYNC_GETDATA_DONOTFLUSH);
+        DAWN_TRY(CheckHRESULT(hr, "D3D11 get data of a query failed"));
+        if (hr != S_OK) {
+            break;
+        }
+        mAvailableQueries.push_back(std::move(d3d11Query));
+        mPendingQueries.pop_front();
+        ++completedSerial;
     }
-
     return completedSerial;
 }
 
@@ -223,39 +232,65 @@ void Queue::ForceEventualFlushOfCommands() {}
 MaybeError Queue::WaitForIdleForDestruction() {
     DAWN_TRY(NextSerial());
     // Wait for all in-flight commands to finish executing
-    DAWN_TRY(WaitForSerial(GetLastSubmittedCommandSerial()));
+    DAWN_TRY(WaitForQueueSerial(GetLastSubmittedCommandSerial(),
+                                std::numeric_limits<Nanoseconds>::max()));
 
     return {};
+}
+
+ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    DAWN_ASSERT(serial <= GetLastSubmittedCommandSerial());
+
+    using NanoDuration = std::chrono::duration<uint64_t, std::nano>;
+    std::optional<std::chrono::time_point<std::chrono::steady_clock>> deadLine;
+    if (timeout != std::numeric_limits<Nanoseconds>::max()) {
+        deadLine = std::chrono::steady_clock::now() + NanoDuration(static_cast<uint64_t>(timeout));
+    }
+
+    DAWN_TRY(CheckPassedSerials());
+    if (serial <= GetCompletedCommandSerial()) {
+        return true;
+    }
+
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    commandContext.Flush();
+    DAWN_TRY(CheckPassedSerials());
+    if (serial <= GetCompletedCommandSerial()) {
+        return true;
+    }
+
+    while (!deadLine.has_value() || std::chrono::steady_clock::now() < *deadLine) {
+        std::this_thread::yield();
+        DAWN_TRY(CheckPassedSerials());
+        if (serial <= GetCompletedCommandSerial()) {
+            return true;
+        }
+    }
+
+    return false;
 }
 
 MaybeError Queue::NextSerial() {
     IncrementLastSubmittedCommandSerial();
-
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
 
-    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
-    DAWN_TRY(
-        CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
-                     "D3D11 command queue signal fence"));
-
-    return {};
-}
-
-MaybeError Queue::WaitForSerial(ExecutionSerial serial) {
-    DAWN_TRY(CheckPassedSerials());
-    if (GetCompletedCommandSerial() >= serial) {
-        return {};
+    ComPtr<ID3D11Query> d3d11Query;
+    if (!mAvailableQueries.empty()) {
+        d3d11Query = std::move(mAvailableQueries.back());
+        mAvailableQueries.pop_back();
+    } else {
+        const D3D11_QUERY_DESC desc = {D3D11_QUERY_EVENT, 0};
+        DAWN_TRY(
+            CheckHRESULT(ToBackend(GetDevice())->GetD3D11Device()->CreateQuery(&desc, &d3d11Query),
+                         "D3D11 CreateQuery"));
     }
 
-    DAWN_TRY(CheckHRESULT(mFence->SetEventOnCompletion(uint64_t(serial), mFenceEvent),
-                          "D3D11 set event on completion"));
-    WaitForSingleObject(mFenceEvent, INFINITE);
-    return CheckPassedSerials();
-}
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    commandContext.End(d3d11Query.Get());
+    mPendingQueries.push_back(std::move(d3d11Query));
 
-void Queue::SetEventOnCompletion(ExecutionSerial serial, HANDLE event) {
-    mFence->SetEventOnCompletion(static_cast<uint64_t>(serial), event);
+    return {};
 }
 
 }  // namespace dawn::native::d3d11

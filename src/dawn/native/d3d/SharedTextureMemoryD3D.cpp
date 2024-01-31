@@ -86,12 +86,20 @@ ResultOrError<FenceAndSignalValue> SharedTextureMemory::EndAccessImpl(
                     "Required feature (%s) is missing.",
                     wgpu::FeatureName::SharedFenceDXGISharedHandle);
 
-    Ref<SharedFence> sharedFence;
-    DAWN_TRY_ASSIGN(sharedFence, ToBackend(GetDevice()->GetQueue())->GetOrCreateSharedFence());
+    auto lastUsageSerial = texture->GetSharedTextureMemoryContents()->GetLastUsageSerial();
 
-    return FenceAndSignalValue{
-        std::move(sharedFence),
-        static_cast<uint64_t>(texture->GetSharedTextureMemoryContents()->GetLastUsageSerial())};
+    auto queue = ToBackend(GetDevice()->GetQueue());
+    // If GPU is done with the texture, no fence is needed.
+    if (queue->GetCompletedCommandSerial() >= lastUsageSerial) {
+        return FenceAndSignalValue{{}, 0};
+    }
+
+    DAWN_TRY(queue->SignalSharedFenceIfNeeded(lastUsageSerial));
+
+    Ref<SharedFence> sharedFence;
+    DAWN_TRY_ASSIGN(sharedFence, queue->GetOrCreateSharedFence());
+
+    return FenceAndSignalValue{std::move(sharedFence), static_cast<uint64_t>(lastUsageSerial)};
 }
 
 }  // namespace dawn::native::d3d
