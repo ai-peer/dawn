@@ -26,6 +26,9 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include "src/tint/utils/reflection/reflection.h"
+#include "src/tint/utils/math/math.h"
+
+#include <algorithm>
 
 #if defined(__clang__)
 #pragma clang diagnostic ignored "-Wmissing-variable-declarations"
