@@ -32,11 +32,8 @@ namespace tint {
 /// The unique TypeInfo for the CastableBase type
 /// @return doxygen-thinks-this-static-field-is-a-function :(
 template <>
-const TypeInfo tint::detail::TypeInfoOf<CastableBase>::info{
-    nullptr,
-    "CastableBase",
-    tint::TypeInfo::HashCodeOf<CastableBase>(),
-};
+const TypeInfo tint::detail::TypeInfoOf<CastableBase>::info{nullptr, "CastableBase",
+                                                            tint::TypeCode::Of<CastableBase>()};
 
 CastableBase::CastableBase(const CastableBase&) = default;
 

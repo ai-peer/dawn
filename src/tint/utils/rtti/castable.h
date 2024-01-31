@@ -75,14 +75,16 @@ static constexpr bool IsCastable =
     !(std::is_same_v<TYPES, Ignore> && ...);
 
 /// Helper macro to instantiate the TypeInfo<T> template for `CLASS`.
-#define TINT_INSTANTIATE_TYPEINFO(CLASS)                          \
-    TINT_CASTABLE_PUSH_DISABLE_WARNINGS();                        \
-    template <>                                                   \
-    const tint::TypeInfo tint::detail::TypeInfoOf<CLASS>::info{   \
-        &tint::detail::TypeInfoOf<CLASS::TrueBase>::info, #CLASS, \
-        tint::TypeInfo::HashCodeOf<CLASS>()};                     \
-    TINT_CASTABLE_POP_DISABLE_WARNINGS();                         \
-    static_assert(std::is_same_v<CLASS, CLASS::Base::Class>,      \
+#define TINT_INSTANTIATE_TYPEINFO(CLASS)                        \
+    TINT_CASTABLE_PUSH_DISABLE_WARNINGS();                      \
+    template <>                                                 \
+    const tint::TypeInfo tint::detail::TypeInfoOf<CLASS>::info{ \
+        &tint::detail::TypeInfoOf<CLASS::TrueBase>::info,       \
+        #CLASS,                                                 \
+        tint::TypeCode::Of<CLASS>(),                            \
+    };                                                          \
+    TINT_CASTABLE_POP_DISABLE_WARNINGS();                       \
+    static_assert(std::is_same_v<CLASS, CLASS::Base::Class>,    \
                   #CLASS " does not derive from Castable<" #CLASS "[, BASE]>")
 
 /// Bit flags that can be passed to the template parameter `FLAGS` of Is() and As().
@@ -94,33 +96,81 @@ enum CastFlags {
     kDontErrorOnImpossibleCast = 1,
 };
 
-/// The type of a hash code
-using HashCode = uint64_t;
+/// TypeCode is a bit pattern used by Tint's RTTI system to determine whether two types are related
+/// by inheritance.
+/// Each derived type will have all the bits of its base type, plus up to two additional bits set.
+/// The bit pattern of the TypeCode can be used to perform bloom-filter style early rejections of
+/// dynamic casts.
+struct TypeCode {
+    /// @returns a compile-time TypeCode for the type `T`.
+    /// @note the returned TypeCode will have at least 2 bits set, as the hashes are bitwise or'd
+    /// together in a type hierarchy, and the bits can quickly become saturated.
+    template <typename T>
+    static constexpr inline TypeCode Of() {
+        static_assert(IsCastable<T>, "T is not Castable");
+        static_assert(std::is_same_v<T, std::remove_cv_t<T>>,
+                      "Strip const / volatile decorations before calling Of");
+        /// Use the compiler's "pretty" function name, which includes the template
+        /// type, to obtain a unique hash value.
+#ifdef _MSC_VER
+        constexpr Bits crc = tint::CRC32(__FUNCSIG__);
+#else
+        constexpr Bits crc = tint::CRC32(__PRETTY_FUNCTION__);
+#endif
+        constexpr Bits bit_a = (crc & 63);
+        constexpr Bits bit_b = ((crc >> 6) & 63);
+        constexpr Bits bit_c = (bit_a == bit_b) ? ((bit_a + 1) & 63) : bit_b;
+        constexpr Bits two_bits = (static_cast<Bits>(1) << bit_a) | (static_cast<Bits>(1) << bit_c);
+        if constexpr (std::is_same_v<T, CastableBase>) {
+            return {two_bits};
+        } else {
+            return {two_bits | Of<typename T::TrueBase>().bits};
+        }
+    }
 
-/// Maybe checks to see if an object with the hashcode @p object_hashcode could
-/// potentially be of, or derive from the type with the hashcode @p query_hashcode.
-/// @param type_hashcode the hashcode of the type
-/// @param object_hashcode the hashcode of the object being queried
-/// @returns true if the object with the given hashcode could be one of the template types.
-inline bool Maybe(HashCode type_hashcode, HashCode object_hashcode) {
-    return (object_hashcode & type_hashcode) == type_hashcode;
-}
+    /// @returns the bitwise-or'd TypeCodes of all the types in the tuple `TUPLE`.
+    template <typename TUPLE>
+    static constexpr inline TypeCode OfTuple() {
+        constexpr auto kCount = std::tuple_size_v<TUPLE>;
+        if constexpr (kCount == 0) {
+            return {0};
+        } else if constexpr (kCount == 1) {
+            return Of<std::remove_cv_t<std::tuple_element_t<0, TUPLE>>>();
+        } else {
+            constexpr auto kMid = kCount / 2;
+            return {OfTuple<tint::traits::SliceTuple<0, kMid, TUPLE>>().bits |
+                    OfTuple<tint::traits::SliceTuple<kMid, kCount - kMid, TUPLE>>().bits};
+        }
+    }
 
-/// MaybeAnyOf checks to see if an object with the hashcode @p object_hashcode could
-/// potentially be of, or derive from the types with the combined hashcode @p combined_hashcode.
-/// @param combined_hashcode the bitwise OR'd hashcodes of the types
-/// @param object_hashcode the hashcode of the object being queried
-/// @returns true if the object with the given hashcode could be one of the template types.
-inline bool MaybeAnyOf(HashCode combined_hashcode, HashCode object_hashcode) {
-    // Compare the object's hashcode to the bitwise-or of all the tested type's hashcodes. If
-    // there's no intersection of bits in the two masks, then we can guarantee that the type is not
-    // in `TO`.
-    HashCode mask = object_hashcode & combined_hashcode;
-    // HashCodeOf() ensures that two bits are always set for every hash, so we can quickly
-    // eliminate the bitmask where only one bit is set.
-    HashCode two_bits = mask & (mask - 1);
-    return two_bits != 0;
-}
+    /// Maybe checks to see if an object with this TypeCode could potentially be of, or derive from
+    /// the type with the TypeCode @p type.
+    /// @param type the TypeCode of the type
+    /// @returns true if an object with this TypeCode could be of, or derive from a type with the
+    /// TypeCode @p type.
+    inline bool Maybe(TypeCode type) const { return (bits & type.bits) == type.bits; }
+
+    /// MaybeAnyOf checks to see if an object with this TypeCode could potentially be of, or derive
+    /// from any of the types with the combined TypeCode @p types.
+    /// @param types the bitwise OR'd TypeCodes of all the types
+    /// @returns true if the object with the given full TypeCode could be one of the template types.
+    inline bool MaybeAnyOf(TypeCode types) const {
+        // Compare the this TypeCode to the bitwise-or of all the tested type's TypeCodes. If
+        // there's no intersection of bits in the two masks, then we can guarantee the object none
+        // of the queried types.
+        Bits mask = bits & types.bits;
+        // Of() ensures that two bits are always set for every hash, so we can quickly
+        // eliminate the bitmask where only one bit is set.
+        Bits two_bits = mask & (mask - 1);
+        return two_bits != 0;
+    }
+
+    /// The unsigned integer type that holds the bits of the TypeCode
+    using Bits = uint64_t;
+
+    /// The bits pattern of the TypeCode
+    const Bits bits;
+};
 
 /// TypeInfo holds type information for a Castable type.
 struct TypeInfo {
@@ -128,8 +178,8 @@ struct TypeInfo {
     const TypeInfo* base;
     /// The type name
     const char* name;
-    /// The type hash code
-    const HashCode hashcode;
+    /// The type's TypeCode
+    const TypeCode type_code;
 
     /// @returns true if `type` derives from the class `TO`
     /// @param object the object type to test from, which must be, or derive from type `FROM`.
@@ -164,7 +214,7 @@ struct TypeInfo {
     /// @returns true if the class with this TypeInfo is of, or derives from the
     /// class with the given TypeInfo.
     inline bool Is(const tint::TypeInfo* type) const {
-        if (!Maybe(type->hashcode, hashcode)) {
+        if (!type_code.Maybe(type->type_code)) {
             return false;
         }
 
@@ -184,58 +234,6 @@ struct TypeInfo {
         return tint::detail::TypeInfoOf<std::remove_cv_t<T>>::info;
     }
 
-    /// @returns a compile-time hashcode for the type `T`.
-    /// @note the returned hashcode will have exactly 2 bits set, as the hashes are expected to be
-    /// used in bloom-filters which will quickly saturate when multiple hashcodes are bitwise-or'd
-    /// together.
-    template <typename T>
-    static constexpr HashCode HashCodeOf() {
-        static_assert(IsCastable<T>, "T is not Castable");
-        static_assert(std::is_same_v<T, std::remove_cv_t<T>>,
-                      "Strip const / volatile decorations before calling HashCodeOf");
-        /// Use the compiler's "pretty" function name, which includes the template
-        /// type, to obtain a unique hash value.
-#ifdef _MSC_VER
-        constexpr uint32_t crc = tint::CRC32(__FUNCSIG__);
-#else
-        constexpr uint32_t crc = tint::CRC32(__PRETTY_FUNCTION__);
-#endif
-        constexpr uint32_t bit_a = (crc & 63);
-        constexpr uint32_t bit_b = ((crc >> 6) & 63);
-        constexpr uint32_t bit_c = (bit_a == bit_b) ? ((bit_a + 1) & 63) : bit_b;
-        constexpr HashCode two_bits =
-            (static_cast<HashCode>(1) << bit_a) | (static_cast<HashCode>(1) << bit_c);
-
-        if constexpr (std::is_same_v<T, CastableBase>) {
-            return two_bits;
-        } else {
-            return two_bits | HashCodeOf<typename T::TrueBase>();
-        }
-    }
-
-    /// @returns the bitwise-or'd hashcodes of all the types of the tuple `TUPLE`.
-    /// @see HashCodeOf
-    template <typename TUPLE>
-    static constexpr HashCode CombinedHashCodeOfTuple() {
-        constexpr auto kCount = std::tuple_size_v<TUPLE>;
-        if constexpr (kCount == 0) {
-            return 0;
-        } else if constexpr (kCount == 1) {
-            return HashCodeOf<std::remove_cv_t<std::tuple_element_t<0, TUPLE>>>();
-        } else {
-            constexpr auto kMid = kCount / 2;
-            return CombinedHashCodeOfTuple<tint::traits::SliceTuple<0, kMid, TUPLE>>() |
-                   CombinedHashCodeOfTuple<tint::traits::SliceTuple<kMid, kCount - kMid, TUPLE>>();
-        }
-    }
-
-    /// @returns the bitwise-or'd hashcodes of all the template parameter types.
-    /// @see HashCodeOf
-    template <typename... TYPES>
-    static constexpr HashCode CombinedHashCodeOf() {
-        return CombinedHashCodeOfTuple<std::tuple<TYPES...>>();
-    }
-
     /// @returns true if this TypeInfo is of, or derives from any of the types in `TUPLE`.
     template <typename TUPLE>
     inline bool IsAnyOfTuple() const {
@@ -245,7 +243,7 @@ struct TypeInfo {
         } else if constexpr (kCount == 1) {
             return Is(&Of<std::tuple_element_t<0, TUPLE>>());
         } else {
-            if (MaybeAnyOf(TypeInfo::CombinedHashCodeOfTuple<TUPLE>(), hashcode)) {
+            if (type_code.MaybeAnyOf(TypeCode::OfTuple<TUPLE>())) {
                 // Possibly one of the types in `TUPLE`.
                 // Split the search in two, and scan each block.
                 static constexpr auto kMid = kCount / 2;
