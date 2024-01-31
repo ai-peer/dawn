@@ -33,6 +33,7 @@
 #include "dawn/native/CommandValidation.h"
 #include "dawn/native/Commands.h"
 #include "dawn/native/DynamicUploader.h"
+#include "dawn/native/WaitAnySystemEvent.h"
 #include "dawn/native/d3d/D3DError.h"
 #include "dawn/native/d3d12/CommandBufferD3D12.h"
 #include "dawn/native/d3d12/DeviceD3D12.h"
@@ -106,6 +107,11 @@ ResultOrError<Ref<d3d::SharedFence>> Queue::GetOrCreateSharedFence() {
     return mSharedFence;
 }
 
+MaybeError Queue::SignalSharedFenceIfNeeded(ExecutionSerial serial) {
+    DAWN_ASSERT(serial <= GetLastSubmittedCommandSerial());
+    return {};
+}
+
 ID3D12CommandQueue* Queue::GetCommandQueue() const {
     return mCommandQueue.Get();
 }
@@ -172,6 +178,39 @@ MaybeError Queue::WaitForSerial(ExecutionSerial serial) {
     WaitForSingleObject(mFenceEvent, INFINITE);
     DAWN_TRY(CheckPassedSerials());
     return {};
+}
+
+ResultOrError<bool> Queue::WaitForQueueSerial(ExecutionSerial serial, Nanoseconds timeout) {
+    ExecutionSerial completedSerial = GetCompletedCommandSerial();
+    if (serial <= completedSerial) {
+        return true;
+    }
+
+    auto receiver = mSystemEventReceivers->TakeOne(serial);
+    if (!receiver) {
+        // Anytime we may create an event, clear out any completed receivers so the list doesn't
+        // grow forever.
+        mSystemEventReceivers->ClearUpTo(completedSerial);
+
+        HANDLE fenceEvent =
+            ::CreateEvent(nullptr, /*bManualReset=*/true, /*bInitialState=*/false, nullptr);
+        DAWN_INVALID_IF(fenceEvent == nullptr, "CreateEvent failed");
+        SetEventOnCompletion(serial, fenceEvent);
+
+        receiver = SystemEventReceiver(SystemHandle::Acquire(fenceEvent));
+    }
+
+    bool ready = false;
+    std::array<std::pair<const dawn::native::SystemEventReceiver&, bool*>, 1> events{
+        {{*receiver, &ready}}};
+    DAWN_ASSERT(serial <= GetLastSubmittedCommandSerial());
+    bool didComplete = WaitAnySystemEvent(events.begin(), events.end(), timeout);
+    if (!didComplete) {
+        // Return the SystemEventReceiver to the pool of receivers so it can be re-waited in the
+        // future.
+        mSystemEventReceivers->Enqueue(std::move(*receiver), serial);
+    }
+    return didComplete;
 }
 
 bool Queue::HasPendingCommands() const {
