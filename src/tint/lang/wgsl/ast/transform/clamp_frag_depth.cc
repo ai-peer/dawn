@@ -45,6 +45,7 @@
 #include "src/tint/utils/macros/scoped_assignment.h"
 
 TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::ClampFragDepth);
+TINT_INSTANTIATE_TYPEINFO(tint::ast::transform::ClampFragDepth::Config);
 
 namespace tint::ast::transform {
 
@@ -63,7 +64,11 @@ struct ClampFragDepth::State {
 
     /// Runs the transform
     /// @returns the new program or SkipTransform if the transform is not required
-    Transform::ApplyResult Run() {
+    Transform::ApplyResult Run(const DataMap& inputs) {
+        if (!ShouldRun()) {
+            return SkipTransform;
+        }
+
         // Abort on any use of push constants in the module.
         for (auto* global : src.AST().GlobalVariables()) {
             if (auto* var = global->As<ast::Var>()) {
@@ -77,9 +82,7 @@ struct ClampFragDepth::State {
             }
         }
 
-        if (!ShouldRun()) {
-            return SkipTransform;
-        }
+        const Config* cfg = inputs.Get<Config>();
 
         // At least one entry-point needs clamping. Add the following to the module:
         //
@@ -96,8 +99,16 @@ struct ClampFragDepth::State {
         //   }
         b.Enable(wgsl::Extension::kChromiumExperimentalPushConstant);
 
+        Vector<const ast::Attribute*, 1> min_attribs, max_attribs;
+        if (cfg && cfg->viewport_min_offset) {
+            min_attribs.Push(b.MemberOffset(core::AInt(*cfg->viewport_min_offset)));
+        }
+        if (cfg && cfg->viewport_max_offset) {
+            max_attribs.Push(b.MemberOffset(core::AInt(*cfg->viewport_max_offset)));
+        }
         b.Structure(b.Symbols().New("FragDepthClampArgs"),
-                    Vector{b.Member("min", b.ty.f32()), b.Member("max", b.ty.f32())});
+                    Vector{b.Member("min", b.ty.f32(), min_attribs),
+                           b.Member("max", b.ty.f32(), max_attribs)});
 
         auto args_sym = b.Symbols().New("frag_depth_clamp_args");
         b.GlobalVar(args_sym, b.ty("FragDepthClampArgs"), core::AddressSpace::kPushConstant);
@@ -237,9 +248,15 @@ ClampFragDepth::ClampFragDepth() = default;
 ClampFragDepth::~ClampFragDepth() = default;
 
 ast::transform::Transform::ApplyResult ClampFragDepth::Apply(const Program& src,
-                                                             const ast::transform::DataMap&,
+                                                             const ast::transform::DataMap& inputs,
                                                              ast::transform::DataMap&) const {
-    return State{src}.Run();
+    return State{src}.Run(inputs);
 }
+
+ClampFragDepth::Config::Config(std::optional<uint32_t> viewport_min_off,
+                               std::optional<uint32_t> viewport_max_off)
+    : viewport_min_offset(viewport_min_off), viewport_max_offset(viewport_max_off) {}
+
+ClampFragDepth::Config::~Config() = default;
 
 }  // namespace tint::ast::transform

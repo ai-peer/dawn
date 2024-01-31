@@ -201,8 +201,22 @@ TEST_F(GlslASTPrinterTest_Function, Emit_Attribute_EntryPoint_WithInOut_Builtins
     EXPECT_EQ(gen.Result(), R"(#version 310 es
 precision highp float;
 
+struct FragDepthClampArgs {
+  float min;
+  float max;
+};
+
+struct frag_depth_clamp_args_block {
+  FragDepthClampArgs inner;
+};
+
+layout(location=0) uniform frag_depth_clamp_args_block frag_depth_clamp_args;
+float clamp_frag_depth(float v) {
+  return clamp(v, frag_depth_clamp_args.inner.min, frag_depth_clamp_args.inner.max);
+}
+
 float frag_main(vec4 coord) {
-  return coord.x;
+  return clamp_frag_depth(coord.x);
 }
 
 void main() {

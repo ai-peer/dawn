@@ -61,6 +61,7 @@
 #include "src/tint/lang/wgsl/ast/transform/binding_remapper.h"
 #include "src/tint/lang/wgsl/ast/transform/builtin_polyfill.h"
 #include "src/tint/lang/wgsl/ast/transform/canonicalize_entry_point_io.h"
+#include "src/tint/lang/wgsl/ast/transform/clamp_frag_depth.h"
 #include "src/tint/lang/wgsl/ast/transform/demote_to_helper.h"
 #include "src/tint/lang/wgsl/ast/transform/direct_variable_access.h"
 #include "src/tint/lang/wgsl/ast/transform/disable_uniformity_analysis.h"
@@ -202,6 +203,8 @@ SanitizedResult Sanitize(const Program& in,
         manager.Add<ast::transform::ZeroInitWorkgroupMemory>();
     }
 
+    manager.Add<ast::transform::ClampFragDepth>();
+
     // CanonicalizeEntryPointIO must come after Robustness
     manager.Add<ast::transform::CanonicalizeEntryPointIO>();
 
@@ -231,8 +234,8 @@ SanitizedResult Sanitize(const Program& in,
     manager.Add<ast::transform::AddEmptyEntryPoint>();
     manager.Add<ast::transform::AddBlockAttribute>();
 
-    // OffsetFirstIndex must come after AddBlockAttribute, so non-struct push constants
-    // are wrapped in structs.
+    // OffsetFirstIndex and ClampFragDepth must come after AddBlockAttribute, so non-struct push
+    // constants are wrapped in structs.
     manager.Add<ast::transform::OffsetFirstIndex>();
 
     // PadStructs must come after CanonicalizeEntryPointIO
@@ -250,6 +253,8 @@ SanitizedResult Sanitize(const Program& in,
 
     data.Add<ast::transform::OffsetFirstIndex::Config>(std::nullopt, options.first_instance_offset);
 
+    data.Add<ast::transform::ClampFragDepth::Config>(options.viewport_min_offset,
+                                                     options.viewport_max_offset);
     SanitizedResult result;
     ast::transform::DataMap outputs;
     result.program = manager.Run(in, data, outputs);
