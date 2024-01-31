@@ -33,6 +33,23 @@
       "message": "I can\u0027t `Auto-Submit` this because I\u0027m not the owner, but please submit it if it passes.",
       "revId": "9887b2f7ad07dd1b863826f091f820dba4a2ecbb",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "916e1d78_71b35036",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 8
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002266
+      },
+      "writtenOn": "2024-01-31T14:42:50Z",
+      "side": 1,
+      "message": "Looks like we have one unaccounted Pixel4 failure.",
+      "revId": "9887b2f7ad07dd1b863826f091f820dba4a2ecbb",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ],
   "submitRequirementResults": [
