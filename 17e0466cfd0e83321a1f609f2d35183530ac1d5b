@@ -88,6 +88,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "1ca29d42_83ea942b",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T17:17:35Z",
+      "side": 1,
+      "message": "`Clone(el)` on L213 can add to `list_transforms_`. We need to look up every iteration.",
+      "parentUuid": "962c5fa4_cff944ce",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34da8c0b_4afef77b",
