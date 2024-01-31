@@ -1,6 +1,29 @@
 {
   "comments": [
     {
+      "unresolved": true,
+      "key": {
+        "uuid": "e94f0a44_5e23cb52",
+        "filename": "/COMMIT_MSG",
+        "patchSetId": 3
+      },
+      "lineNbr": 10,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T13:33:52Z",
+      "side": 1,
+      "message": "nit: rotation",
+      "range": {
+        "startLine": 10,
+        "startChar": 49,
+        "endLine": 10,
+        "endChar": 58
+      },
+      "revId": "14c223988ceb97b8449d06f0ce40903b034e20c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": false,
       "key": {
         "uuid": "9ab58454_3d9cbe70",
@@ -14,6 +37,63 @@
       "writtenOn": "2024-01-31T05:41:54Z",
       "side": 1,
       "message": "PTAL, thanks!",
+      "revId": "14c223988ceb97b8449d06f0ce40903b034e20c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aa73df17_7c8da569",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 3
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T13:33:52Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "14c223988ceb97b8449d06f0ce40903b034e20c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "644b4f07_b6e6fc11",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 278,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T13:33:52Z",
+      "side": 1,
+      "message": "nit: issue",
+      "range": {
+        "startLine": 278,
+        "startChar": 16,
+        "endLine": 278,
+        "endChar": 21
+      },
+      "revId": "14c223988ceb97b8449d06f0ce40903b034e20c3",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "22b97d42_a9cf919c",
+        "filename": "src/dawn/native/ExternalTexture.cpp",
+        "patchSetId": 3
+      },
+      "lineNbr": 279,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T13:33:52Z",
+      "side": 1,
+      "message": "Ok so flipY is a lie and is instead temporarily an alias for mirrored? Makes sense.",
       "revId": "14c223988ceb97b8449d06f0ce40903b034e20c3",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
