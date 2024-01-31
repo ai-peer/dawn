@@ -1,0 +1,72 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "4a07c45f_970188ec",
+        "filename": "src/tint/api/common/override_id.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T18:08:04Z",
+      "side": 1,
+      "message": "nit: double blank line.",
+      "revId": "d9f68fb225e3093e4e41c950482c0c11ddd4a0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e731022f_cc55ca78",
+        "filename": "src/tint/utils/reflection/reflection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 131,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T18:08:04Z",
+      "side": 1,
+      "message": "How impossible is it to stick the static_assert inside the ForeachField? It might work because ForeachField is instantiated only when called.",
+      "revId": "d9f68fb225e3093e4e41c950482c0c11ddd4a0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "0e8116b0_d1a6fb95",
+        "filename": "src/tint/utils/reflection/reflection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 137,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T18:08:04Z",
+      "side": 1,
+      "message": "With some offsetof trick this might be possible to check statically as well? Ah it would require making a second list of pointer to member. Heh.",
+      "revId": "d9f68fb225e3093e4e41c950482c0c11ddd4a0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "eacb3d38_0e731201",
+        "filename": "src/tint/utils/reflection/reflection.h",
+        "patchSetId": 2
+      },
+      "lineNbr": 140,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-01-31T18:08:04Z",
+      "side": 1,
+      "message": "Does that ever that a virtual class has tint reflection?",
+      "revId": "d9f68fb225e3093e4e41c950482c0c11ddd4a0e7",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
