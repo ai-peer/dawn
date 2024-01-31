@@ -27,6 +27,7 @@
 
 #include "dawn/native/d3d11/QueueD3D11.h"
 
+#include <thread>
 #include <utility>
 
 #include "dawn/native/d3d/D3DError.h"
@@ -37,6 +38,8 @@
 #include "dawn/native/d3d11/TextureD3D11.h"
 #include "dawn/platform/DawnPlatform.h"
 #include "dawn/platform/tracing/TraceEvent.h"
+
+#define USING_QUERY 1
 
 namespace dawn::native::d3d11 {
 
@@ -192,6 +195,25 @@ bool Queue::HasPendingCommands() const {
 }
 
 ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
+#if USING_QUERY
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    for (size_t i = mPendingQueries.size(); i > 0; --i) {
+        auto& d3d11Query = mPendingQueries[i - 1];
+        BOOL finished = false;
+        DAWN_TRY(CheckHRESULT(commandContext.GetData(d3d11Query.Get(), &finished, sizeof(finished),
+                                                     D3D11_ASYNC_GETDATA_DONOTFLUSH),
+                              "D3D11 GetData"));
+        if (finished) {
+            for (size_t j = 0; j < i; j++) {
+                mAvailableQueries.push_back(std::move(mPendingQueries[j]));
+            }
+            mPendingQueries.erase(mPendingQueries.begin(), mPendingQueries.begin() + i);
+            mPendingSerial += i;
+            break;
+        }
+    }
+    ExecutionSerial completedSerial = mPendingSerial - 1;
+#else
     ExecutionSerial completedSerial = ExecutionSerial(mFence->GetCompletedValue());
     if (DAWN_UNLIKELY(completedSerial == ExecutionSerial(UINT64_MAX))) {
         // GetCompletedValue returns UINT64_MAX if the device was removed.
@@ -202,6 +224,7 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
         // Otherwise, return a generic device lost error.
         return DAWN_DEVICE_LOST_ERROR("Device lost");
     }
+#endif
 
     if (completedSerial <= GetCompletedCommandSerial()) {
         return ExecutionSerial(0);
@@ -226,15 +249,44 @@ MaybeError Queue::NextSerial() {
     TRACE_EVENT1(GetDevice()->GetPlatform(), General, "D3D11Device::SignalFence", "serial",
                  uint64_t(GetLastSubmittedCommandSerial()));
 
+#if USING_QUERY
+    ComPtr<ID3D11Query> d3d11Query;
+    if (!mAvailableQueries.empty()) {
+        d3d11Query = std::move(mAvailableQueries.back());
+        mAvailableQueries.pop_back();
+    } else {
+        D3D11_QUERY_DESC desc;
+        desc.Query = D3D11_QUERY_EVENT;
+        desc.MiscFlags = 0;
+        DAWN_TRY(
+            CheckHRESULT(ToBackend(GetDevice())->GetD3D11Device()->CreateQuery(&desc, &d3d11Query),
+                         "D3D11 CreateQuery"));
+    }
+
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+    commandContext.End(d3d11Query.Get());
+    mPendingQueries.push_back(std::move(d3d11Query));
+#else
     auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
     DAWN_TRY(
         CheckHRESULT(commandContext.Signal(mFence.Get(), uint64_t(GetLastSubmittedCommandSerial())),
                      "D3D11 command queue signal fence"));
-
+#endif
     return {};
 }
 
 MaybeError Queue::WaitForSerial(ExecutionSerial serial) {
+#if USING_QUERY
+    DAWN_TRY(CheckPassedSerials());
+    auto commandContext = GetScopedPendingCommandContext(SubmitMode::Passive);
+
+    while (GetCompletedCommandSerial() < serial) {
+        std::this_thread::yield();
+        DAWN_TRY(CheckPassedSerials());
+    }
+
+    return {};
+#else
     DAWN_TRY(CheckPassedSerials());
     if (GetCompletedCommandSerial() >= serial) {
         return {};
@@ -244,6 +296,7 @@ MaybeError Queue::WaitForSerial(ExecutionSerial serial) {
                           "D3D11 set event on completion"));
     WaitForSingleObject(mFenceEvent, INFINITE);
     return CheckPassedSerials();
+#endif
 }
 
 void Queue::SetEventOnCompletion(ExecutionSerial serial, HANDLE event) {

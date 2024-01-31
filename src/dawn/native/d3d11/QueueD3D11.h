@@ -87,6 +87,9 @@ class Queue final : public d3d::Queue {
     Ref<SharedFence> mSharedFence;
     MutexProtected<CommandRecordingContext, CommandRecordingContextGuard> mPendingCommands;
     std::atomic<bool> mPendingCommandsNeedSubmit = false;
+    ExecutionSerial mPendingSerial;
+    std::vector<ComPtr<ID3D11Query>> mPendingQueries;
+    std::vector<ComPtr<ID3D11Query>> mAvailableQueries;
 };
 
 }  // namespace dawn::native::d3d11
