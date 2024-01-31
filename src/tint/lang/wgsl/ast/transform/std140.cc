@@ -57,7 +57,7 @@ namespace {
 /// UniformVariable is used by Std140::State::AccessIndex to indicate the root uniform variable
 struct UniformVariable {
     /// @returns a hash code for this object
-    size_t HashCode() const { return 0; }
+    tint::HashCode HashCode() const { return 0; }
 };
 
 /// Inequality operator for UniformVariable
@@ -70,7 +70,7 @@ struct DynamicIndex {
     size_t slot;  // The index of the expression in Std140::State::AccessChain::dynamic_indices
 
     /// @returns a hash code for this object
-    size_t HashCode() const { return Hash(slot); }
+    tint::HashCode HashCode() const { return Hash(slot); }
 };
 
 /// Inequality operator for DynamicIndex
