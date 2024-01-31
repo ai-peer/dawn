@@ -35,6 +35,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "29825bb2_4c6ee785",
+        "filename": "src/tint/lang/wgsl/ast/clone_context.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 217,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "Yes. See the comment just above.",
+      "parentUuid": "a92ecc68_527b393d",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "34da8c0b_4afef77b",
@@ -48,6 +66,30 @@
       "writtenOn": "2024-01-31T16:12:50Z",
       "side": 1,
       "message": "The previous version only did an `Add` if `param` wasn\u0027t in the map already, it\u0027s hard to tell from reading this if it will do that or overwrite.",
+      "range": {
+        "startLine": 1037,
+        "startChar": 38,
+        "endLine": 1037,
+        "endChar": 41
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "ccd49b58_f3cdd957",
+        "filename": "src/tint/lang/wgsl/inspector/inspector.cc",
+        "patchSetId": 6
+      },
+      "lineNbr": 1037,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "Good spot. Will change this to be behaviourally identical to before.",
+      "parentUuid": "34da8c0b_4afef77b",
       "range": {
         "startLine": 1037,
         "startChar": 38,
@@ -75,6 +117,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "c2fea849_3620f524",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 52,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "Because the `Hashmap::Entry` is a `HashmapEntry` which holds the key, and `Hashset::Entry` *is* the key. So `entry.key` does not work for a `Hashset`.",
+      "parentUuid": "993c84ff_b4d50903",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "5dc59d40_97e948ae",
@@ -88,6 +148,24 @@
       "writtenOn": "2024-01-31T16:12:50Z",
       "side": 1,
       "message": "What happens if the owning entry is replaced?",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "067af510_1d02afa6",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 88,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "Replaced is fine. The same memory location is reused.",
+      "parentUuid": "5dc59d40_97e948ae",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -117,6 +195,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "4d2f7303_ad3162cc",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 164,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "I prefer the CL\u0027s version. It\u0027s clearer to me that there\u0027s two paths.",
+      "parentUuid": "038c1e65_45517038",
+      "range": {
+        "startLine": 159,
+        "startChar": 0,
+        "endLine": 164,
+        "endChar": 9
+      },
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "49920196_b16512ad",
         "filename": "src/tint/utils/containers/hashmap.h",
         "patchSetId": 6
@@ -128,6 +230,24 @@
       "writtenOn": "2024-01-31T16:12:50Z",
       "side": 1,
       "message": "ditto `idx` usage",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "a2d70a2e_49e7cd05",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 172,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "Ditto response",
+      "parentUuid": "49920196_b16512ad",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -151,6 +271,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "412a5a11_dba70c22",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 183,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "Citation needed.\n* Rust: [`get()`](https://doc.rust-lang.org/std/collections/struct.HashMap.html#method.get)\n* Java: [`get()`](https://docs.oracle.com/javase/8/docs/api/java/util/HashMap.html#get-java.lang.Object-)\n* JavaScript: [`get()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map/get)v\n* C#: `operator[]` and [`TryGetValue()`](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.trygetvalue?view\u003dnet-8.0)\n\nAnd so on.",
+      "parentUuid": "a1195095_d799fffc",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "cd88530c_60e819a1",
         "filename": "src/tint/utils/containers/hashmap.h",
         "patchSetId": 6
@@ -162,6 +300,24 @@
       "writtenOn": "2024-01-31T16:12:50Z",
       "side": 1,
       "message": "```suggestion\n    const Value\u0026 GetOrDefault(K\u0026\u0026 key, const Value\u0026 not_found) const {\n```\n\nHaving this as just Get makes the callsites confusing as to what that second parameter is.",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "5545a69a_99a38541",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 209,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "`GetOr` as a compromise? That matche\u0027s `std::optional::value_or`",
+      "parentUuid": "cd88530c_60e819a1",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -185,6 +341,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "f4b049ff_4b636341",
+        "filename": "src/tint/utils/containers/hashmap.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 264,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "`Create` does not suggest that it also adds it to the map. `Add` does.",
+      "parentUuid": "eab957b0_0f0279b0",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "c5185114_ec9f6dbc",
         "filename": "src/tint/utils/containers/hashmap_base.h",
         "patchSetId": 6
@@ -196,6 +370,24 @@
       "writtenOn": "2024-01-31T16:12:50Z",
       "side": 1,
       "message": "```suggestion\n/// @param ENTRY is the single record in the map. The entry type must alias \u0027Key\u0027 to the HashmapKey\n```",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "575b5437_2e79eb2a",
+        "filename": "src/tint/utils/containers/hashmap_base.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 165,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "No. `tparam` is [the doxygen for a template parameter](https://www.doxygen.nl/manual/commands.html#cmdtparam).",
+      "parentUuid": "c5185114_ec9f6dbc",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -236,6 +428,24 @@
       "writtenOn": "2024-01-31T16:12:50Z",
       "side": 1,
       "message": "Why does this no longer go to a Symbol?",
+      "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2e7f5d8d_fc5d49ce",
+        "filename": "src/tint/utils/symbol/symbol_table.h",
+        "patchSetId": 6
+      },
+      "lineNbr": 111,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-01-31T16:31:48Z",
+      "side": 1,
+      "message": "Because it\u0027s inefficient. You\u0027re duplicating the `string_view` in both the key and value. The `generation_id` is already stored in the `SymbolTable`. The only thing we actually need to lookup is the symbol id.",
+      "parentUuid": "1b1296be_62f98a68",
       "revId": "17e0466cfd0e83321a1f609f2d35183530ac1d5b",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
