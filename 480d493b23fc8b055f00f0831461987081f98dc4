@@ -16,6 +16,40 @@
       "message": "LGTM",
       "revId": "480d493b23fc8b055f00f0831461987081f98dc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9ac4e70b_e760bf98",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 4
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-01T21:33:36Z",
+      "side": 1,
+      "message": "LGTM with a suggestion to add a couple tests",
+      "revId": "480d493b23fc8b055f00f0831461987081f98dc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "9eeaa389_67d82b01",
+        "filename": "src/tint/utils/reflection/reflection_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1002361
+      },
+      "writtenOn": "2024-02-01T21:33:36Z",
+      "side": 1,
+      "message": "As discussed offline, we should add a test that fails if we\u0027re missing a member, and pass when all are present.",
+      "revId": "480d493b23fc8b055f00f0831461987081f98dc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
