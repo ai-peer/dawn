@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "5ccec415_ec7e98ea",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 1
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000257
+      },
+      "writtenOn": "2024-02-01T15:05:34Z",
+      "side": 1,
+      "message": "PTAL. Is there any way to test this other then comitting? Will kokoro run on these changes?",
+      "revId": "55f16e4047d3faf5996c1ceca388a59feaf80c18",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
