@@ -34,6 +34,7 @@
 #include "dawn/native/Error.h"
 #include "dawn/native/IntegerTypes.h"
 #include "dawn/native/PassResourceUsage.h"
+#include "dawn/native/d3d/KeyedMutex.h"
 #include "dawn/native/d3d/TextureD3D.h"
 #include "dawn/native/d3d/d3d_platform.h"
 
@@ -67,6 +68,7 @@ class Texture final : public d3d::Texture {
         Device* device,
         const UnpackedPtr<TextureDescriptor>& descriptor,
         ComPtr<IUnknown> d3dTexture,
+        Ref<d3d::KeyedMutex> keyedMutex,
         std::vector<FenceAndSignalValue> waitFences,
         bool isSwapChainTexture,
         bool isInitialized);
@@ -88,8 +90,6 @@ class Texture final : public d3d::Texture {
         const ScopedCommandRecordingContext* commandContext,
         const SubresourceRange& range);
 
-    MaybeError SynchronizeTextureBeforeUse(const ScopedCommandRecordingContext* commandContext);
-
     MaybeError Write(const ScopedCommandRecordingContext* commandContext,
                      const SubresourceRange& subresources,
                      const Origin3D& origin,
@@ -109,6 +109,20 @@ class Texture final : public d3d::Texture {
                            CopyTextureToTextureCmd* copy);
 
     ResultOrError<ExecutionSerial> EndAccess() override;
+
+    class ScopedTextureUse : public NonCopyable {
+      public:
+        ScopedTextureUse(ScopedTextureUse&& other);
+        ScopedTextureUse& operator=(ScopedTextureUse&& other);
+        ~ScopedTextureUse();
+
+      private:
+        friend class Texture;
+        explicit ScopedTextureUse(std::optional<d3d::KeyedMutex::Guard> keyedMutexGuard);
+        std::optional<d3d::KeyedMutex::Guard> mKeyedMutexGuard;
+    };
+    ResultOrError<ScopedTextureUse> SynchronizeTextureUse(
+        const ScopedCommandRecordingContext* commandContext);
 
     // As D3D11 SRV doesn't support 'Shader4ComponentMapping' for depth-stencil textures, we can't
     // sample the stencil component directly. As a workaround we create an internal R8Uint texture,
@@ -140,8 +154,7 @@ class Texture final : public d3d::Texture {
     MaybeError InitializeAsInternalTexture();
     MaybeError InitializeAsSwapChainTexture(ComPtr<ID3D11Resource> d3d11Texture);
     MaybeError InitializeAsExternalTexture(ComPtr<IUnknown> d3dTexture,
-                                           std::vector<FenceAndSignalValue> waitFences,
-                                           bool isSwapChainTexture);
+                                           Ref<d3d::KeyedMutex> keyedMutex);
     void SetLabelHelper(const char* prefix);
 
     // Dawn API
@@ -195,6 +208,7 @@ class Texture final : public d3d::Texture {
     const Kind mKind = Kind::Normal;
     ComPtr<ID3D11Resource> mD3d11Resource;
     std::optional<ExecutionSerial> mLastUsageSerial;
+    Ref<d3d::KeyedMutex> mKeyedMutex;
     // The internal 'R8Uint' texture for sampling stencil from depth-stencil textures.
     Ref<Texture> mTextureForStencilSampling;
 };

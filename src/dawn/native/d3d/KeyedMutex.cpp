@@ -1,4 +1,4 @@
-// Copyright 2023 The Dawn & Tint Authors
+// Copyright 2024 The Dawn & Tint Authors
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are met:
@@ -25,28 +25,64 @@
 // OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef SRC_DAWN_NATIVE_D3D_SHARED_TEXTURE_MEMORY_D3D_H_
-#define SRC_DAWN_NATIVE_D3D_SHARED_TEXTURE_MEMORY_D3D_H_
+#include "dawn/native/d3d/KeyedMutex.h"
 
-#include "dawn/native/SharedTextureMemory.h"
-#include "dawn/native/d3d/d3d_platform.h"
+#include <utility>
+
+#include "dawn/native/D3DBackend.h"
+#include "dawn/native/d3d/D3DError.h"
 
 namespace dawn::native::d3d {
 
-class Device;
+KeyedMutex::Guard::Guard(Guard&& other) {
+    *this = std::move(other);
+}
 
-class SharedTextureMemory : public SharedTextureMemoryBase {
-  protected:
-    SharedTextureMemory(Device* device,
-                        const char* label,
-                        SharedTextureMemoryProperties properties);
+KeyedMutex::Guard& KeyedMutex::Guard::operator=(Guard&& other) {
+    Reset();
+    mKeyedMutex = std::move(other.mKeyedMutex);
+    return *this;
+}
 
-    MaybeError BeginAccessImpl(TextureBase* texture,
-                               const UnpackedPtr<BeginAccessDescriptor>& descriptor) override;
-    ResultOrError<FenceAndSignalValue> EndAccessImpl(TextureBase* texture,
-                                                     UnpackedPtr<EndAccessState>& state) override;
-};
+KeyedMutex::Guard::Guard(Ref<KeyedMutex> keyedMutex) : mKeyedMutex(std::move(keyedMutex)) {
+    DAWN_CHECK(mKeyedMutex != nullptr);
+}
+
+KeyedMutex::Guard::~Guard() {
+    Reset();
+}
+
+void KeyedMutex::Guard::Reset() {
+    if (mKeyedMutex != nullptr) {
+        mKeyedMutex->ReleaseKeyedMutex();
+    }
+}
+
+KeyedMutex::KeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex)
+    : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)) {
+    DAWN_CHECK(mDXGIKeyedMutex);
+}
+
+KeyedMutex::~KeyedMutex() {
+    DAWN_CHECK(mAcquireCount == 0);
+}
+
+ResultOrError<KeyedMutex::Guard> KeyedMutex::AcquireKeyedMutex() {
+    DAWN_CHECK(mAcquireCount >= 0);
+    if (mAcquireCount == 0) {
+        DAWN_TRY(CheckHRESULT(mDXGIKeyedMutex->AcquireSync(kDXGIKeyedMutexAcquireKey, INFINITE),
+                              "Failed to acquire keyed mutex for external image"));
+    }
+    mAcquireCount++;
+    return KeyedMutex::Guard(this);
+}
+
+void KeyedMutex::ReleaseKeyedMutex() {
+    DAWN_CHECK(mAcquireCount > 0);
+    mAcquireCount--;
+    if (mAcquireCount == 0) {
+        mDXGIKeyedMutex->ReleaseSync(kDXGIKeyedMutexAcquireKey);
+    }
+}
 
 }  // namespace dawn::native::d3d
-
-#endif  // SRC_DAWN_NATIVE_D3D_SHARED_TEXTURE_MEMORY_D3D_H_
