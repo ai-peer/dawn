@@ -367,15 +367,17 @@ crbug.com/a/123 a:b,c:d:* [ Failure ]
 ################################################################################
 # New flakes. Please triage:
 ################################################################################
-crbug.com/dawn/0000 suite:dir_a,dir_b:test_c:case=5;* [ RetryOnFailure ]
-crbug.com/dawn/0000 suite:dir_a,dir_b:test_c:case=6;* [ RetryOnFailure ]
+crbug.com/dawn/0000 [ gpu-b os-b ] suite:dir_a,dir_b:test_c:case=5;* [ RetryOnFailure ]
+crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_c:case=6;* [ RetryOnFailure ]
 
 ################################################################################
 # New failures. Please triage:
 ################################################################################
-crbug.com/dawn/0000 suite:dir_a,dir_b:test_a:* [ Failure ]
+crbug.com/dawn/0000 [ gpu-b os-a ] suite:* [ Failure ]
+crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_a:* [ Failure ]
 crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_b:* [ Slow ]
-crbug.com/dawn/0000 suite:dir_a,dir_b:test_c:case=4;* [ Failure ]
+crbug.com/dawn/0000 [ gpu-a os-a ] suite:dir_a,dir_b:test_c:case=4;* [ Failure ]
+crbug.com/dawn/0000 [ gpu-b os-b ] suite:dir_a,dir_b:test_c:case=4;* [ Failure ]
 `,
 		},
 		{ //////////////////////////////////////////////////////////////////////
