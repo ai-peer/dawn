@@ -1552,6 +1552,137 @@ class VideoViewsRenderTargetTests : public VideoViewsValidationTests {
 
         mBackend->DestroyVideoTextureForTest(std::move(destVideoTexture));
     }
+
+    // Tests for rendering to a multiplanar video texture through its views. It creates R/RG source
+    // textures with data which are then read into luma and chroma texture views. Since multiplanar
+    // textures don't support copy operations yet, the test renders from the luma/chroma texture
+    // views into another R/RG textures which are then compared with for rendered data.
+    template <typename T>
+    void RenderFromLumaToChromaPlane() {
+        // Create plane texture initialized with data.
+        auto CreatePlaneTexWithData = [this](int planeIndex, bool hasAlpha) -> wgpu::Texture {
+            auto kSubsampleFactor = planeIndex == kYUVAChromaPlaneIndex ? 2 : 1;
+            wgpu::Extent3D size = {kYUVAImageDataWidthInTexels / kSubsampleFactor,
+                                   kYUVAImageDataHeightInTexels / kSubsampleFactor, 1};
+
+            // Create source texture with plane format
+            wgpu::TextureDescriptor planeTextureDesc;
+            planeTextureDesc.size = size;
+            planeTextureDesc.format = GetPlaneFormat(planeIndex);
+            planeTextureDesc.usage =
+                wgpu::TextureUsage::CopyDst | wgpu::TextureUsage::TextureBinding;
+            wgpu::Texture planeTexture = device.CreateTexture(&planeTextureDesc);
+
+            // Copy plane (Y/UV/A) data to the plane source texture.
+            std::vector<T> planeSrcData = VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<T>(
+                planeIndex, kTextureBytesPerRowAlignment,
+                kYUVAImageDataHeightInTexels / kSubsampleFactor, false, hasAlpha);
+            wgpu::ImageCopyTexture imageCopyTexture = utils::CreateImageCopyTexture(planeTexture);
+            wgpu::TextureDataLayout textureDataLayout =
+                utils::CreateTextureDataLayout(0, kTextureBytesPerRowAlignment);
+            wgpu::Queue queue = device.GetQueue();
+            queue.WriteTexture(&imageCopyTexture, planeSrcData.data(),
+                               planeSrcData.size() * sizeof(T), &textureDataLayout, &size);
+
+            return planeTexture;
+        };
+
+        const bool hasAlpha = NumPlanes(GetFormat()) > 2;
+
+        // Create source texture with plane 0 format i.e. R8/R16Unorm.
+        wgpu::Texture plane0Texture = CreatePlaneTexWithData(kYUVALumaPlaneIndex, hasAlpha);
+        ASSERT_NE(plane0Texture.Get(), nullptr);
+        // Create source texture with plane 1 format i.e. RG8/RG16Unorm.
+        wgpu::Texture plane1Texture = CreatePlaneTexWithData(kYUVAChromaPlaneIndex, hasAlpha);
+        ASSERT_NE(plane1Texture.Get(), nullptr);
+
+        // TODO(dawn:1337): Allow creating uninitialized texture for rendering.
+        // Create a video texture to be rendered into with multiplanar format.
+        auto destVideoTexture = mBackend->CreateVideoTextureForTest(
+            GetFormat(), wgpu::TextureUsage::TextureBinding | wgpu::TextureUsage::RenderAttachment,
+            /*isCheckerboard*/ false,
+            /*initialized*/ true);
+        ASSERT_NE(destVideoTexture.get(), nullptr);
+        if (!destVideoTexture->CanWrapAsWGPUTexture()) {
+            mBackend->DestroyVideoTextureForTest(std::move(destVideoTexture));
+            GTEST_SKIP() << "Skipped because not supported.";
+        }
+        auto destVideoWGPUTexture = destVideoTexture->wgpuTexture;
+
+        // Perform plane operations for texting by creating render passes and comparing textures.
+        // auto PerformPlaneOperations = [this](int planeIndex, wgpu::Texture destVideoWGPUTexture,
+        //                                      wgpu::Texture planeTextureWithData, bool hasAlpha) {
+        utils::ComboRenderPipelineDescriptor renderPipelineDescriptor;
+        renderPipelineDescriptor.vertex.module = GetTestVertexShaderModule();
+        renderPipelineDescriptor.cFragment.module = utils::CreateShaderModule(device, R"(
+            @group(0) @binding(0) var sampler0 : sampler;
+            @group(0) @binding(1) var texture : texture_2d<f32>;
+
+            @fragment
+            fn main(@location(0) texCoord : vec2f) -> @location(0) vec4f {
+                return textureSample(texture, sampler0, texCoord);
+            })");
+        renderPipelineDescriptor.primitive.topology = wgpu::PrimitiveTopology::TriangleList;
+        renderPipelineDescriptor.cTargets[0].format = GetPlaneFormat(kYUVALumaPlaneIndex);
+        wgpu::RenderPipeline renderPipeline =
+            device.CreateRenderPipeline(&renderPipelineDescriptor);
+        wgpu::Sampler sampler = device.CreateSampler();
+
+        // Create luma plane texture view from the multiplanar video texture.
+        wgpu::TextureViewDescriptor planeViewDesc;
+        planeViewDesc.format = GetPlaneFormat(kYUVALumaPlaneIndex);
+        planeViewDesc.aspect = GetPlaneAspect(kYUVALumaPlaneIndex);
+        wgpu::TextureView planeTextureView = destVideoWGPUTexture.CreateView(&planeViewDesc);
+
+        // Render pass operations for reading the source data from plane1Texture view into
+        // lumaPlaneTextureView created from the multiplanar video texture.
+        wgpu::CommandEncoder encoder = device.CreateCommandEncoder();
+        utils::ComboRenderPassDescriptor renderPass({planeTextureView});
+        wgpu::RenderPassEncoder pass = encoder.BeginRenderPass(&renderPass);
+        pass.SetPipeline(renderPipeline);
+        pass.SetBindGroup(0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+                                                  {{0, sampler}, {1, plane1Texture.CreateView()}}));
+        pass.Draw(6);
+        pass.End();
+
+        // Another render pass for reading the planeTextureView into a texture of the plane's
+        // format (i.e. R8/R16Unorm for Y and RG8/RG16Unorm for UV). This is needed as
+        // multiplanar textures do not support copy operations.
+        // utils::BasicRenderPass basicRenderPass = utils::CreateBasicRenderPass(
+        //     device, kYUVAImageDataWidthInTexels / kSubsampleFactor,
+        //     kYUVAImageDataHeightInTexels / kSubsampleFactor,
+        //     GetPlaneFormat(kYUVAChromaPlaneIndex));
+        // wgpu::RenderPassEncoder secondPass =
+        //     encoder.BeginRenderPass(&basicRenderPass.renderPassInfo);
+        // secondPass.SetPipeline(renderPipeline);
+        // secondPass.SetBindGroup(
+        //     0, utils::MakeBindGroup(device, renderPipeline.GetBindGroupLayout(0),
+        //                             {{0, sampler}, {1, planeTextureView}}));
+        // secondPass.Draw(6);
+        // secondPass.End();
+
+        // Submit all commands for the encoder.
+        ASSERT_DEVICE_ERROR(encoder.Finish());
+        // queue.Submit(1, &commands);
+
+        // std::vector<T> expectedData = VideoViewsTestsBase::GetTestTextureDataWithPlaneIndex<T>(
+        //     planeIndex, kYUVAImageDataWidthInTexels * sizeof(T),
+        //     kYUVAImageDataHeightInTexels / kSubsampleFactor, false, hasAlpha);
+        // EXPECT_TEXTURE_EQ(expectedData.data(), basicRenderPass.color, {0, 0},
+        //                     {kYUVAImageDataWidthInTexels / kSubsampleFactor,
+        //                     kYUVAImageDataHeightInTexels / kSubsampleFactor},
+        //                     GetPlaneFormat(planeIndex));
+        // };
+
+        // // Perform operations for the Y plane.
+        // PerformPlaneOperations(kYUVALumaPlaneIndex, destVideoWGPUTexture, plane0Texture,
+        // hasAlpha);
+        // // Perform operations for the UV plane.
+        // PerformPlaneOperations(kYUVAChromaPlaneIndex, destVideoWGPUTexture, plane1Texture,
+        //                        hasAlpha);
+
+        mBackend->DestroyVideoTextureForTest(std::move(destVideoTexture));
+    }
 };
 
 // Tests creating a texture with a multi-plane format.
@@ -1633,6 +1764,21 @@ TEST_P(VideoViewsRenderTargetTests, RenderToMultiplanarVideoTexture) {
         RenderToMultiplanarVideoTexture<uint8_t>();
     } else if (GetFormat() == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
         RenderToMultiplanarVideoTexture<uint16_t>();
+    } else {
+        DAWN_UNREACHABLE();
+    }
+}
+
+// Tests for rendering to a multiplanar video texture through its views.
+TEST_P(VideoViewsRenderTargetTests, RenderFromLumaToChromaPlaneInvalid) {
+    if (!IsD3D12()) {
+        GTEST_SKIP() << "Skipped because not needed.";
+    }
+    if (GetFormat() == wgpu::TextureFormat::R8BG8Biplanar420Unorm ||
+        GetFormat() == wgpu::TextureFormat::R8BG8A8Triplanar420Unorm) {
+        RenderFromLumaToChromaPlane<uint8_t>();
+    } else if (GetFormat() == wgpu::TextureFormat::R10X6BG10X6Biplanar420Unorm) {
+        RenderFromLumaToChromaPlane<uint16_t>();
     } else {
         DAWN_UNREACHABLE();
     }
