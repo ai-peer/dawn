@@ -74,7 +74,7 @@
 # results: [ Failure RetryOnFailure Skip Slow ]
 # END TAG HEADER
 
-# Last rolled: 2024-01-29 01:09:50PM
+# Last rolled: 2024-02-01 09:06:32AM
 
 # Flaky on all platforms
 # KEEP
@@ -169,11 +169,6 @@ crbug.com/dawn/2196 webgpu:web_platform,copyToTexture,video:copy_from_video:vide
 
 # copyToTexture,canvas color_space_conversion failures
 crbug.com/dawn/2377 [ nvidia-0x2184 ] webgpu:web_platform,copyToTexture,canvas:color_space_conversion:srcColorSpace="display-p3";dstColorSpace="srgb";dstColorFormat="rg16float";dstPremultiplied=false;srcDoFlipYDuringCopy=false [ RetryOnFailure ]
-
-# Mapping (only fails in Telemetry, not in browser standalone)
-crbug.com/dawn/2259 webgpu:api,validation,buffer,mapping:getMappedRange,state,mappingPending: [ Failure ]
-crbug.com/dawn/2259 webgpu:api,validation,buffer,mapping:mapAsync,earlyRejection: [ Failure ]
-crbug.com/dawn/2259 webgpu:api,validation,buffer,mapping:mapAsync,state,mappingPending: [ Failure ]
 
 # Device Lost issue (only fails in Telemetry, not in browser standalone)
 crbug.com/dawn/2087 webgpu:api,validation,state,device_lost,destroy:createComputePipelineAsync:valid=false;awaitLost=false [ Failure ]
