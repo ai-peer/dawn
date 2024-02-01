@@ -18,6 +18,23 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "716332c2_f37bbe57",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Thanks for this round of feedback! I\u0027ll continue addressing it later on",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "aca874cd_fc93c075",
@@ -35,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "66f0c44c_84809752",
+        "filename": "CMakeLists.txt",
+        "patchSetId": 21
+      },
+      "lineNbr": 206,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "aca874cd_fc93c075",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "3522fc19_bff00dfe",
@@ -48,6 +83,30 @@
       "writtenOn": "2024-01-31T15:49:58Z",
       "side": 1,
       "message": "Whichever name works really.\n\nAlso that this is cached is not a property of the struct itself.\n\n```suggestion\n// Structure that holds surface capabilities for a (Surface, PhysicalDevice) pair.\n```",
+      "range": {
+        "startLine": 51,
+        "startChar": 0,
+        "endLine": 54,
+        "endChar": 49
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4a6d6e96_33e82633",
+        "filename": "src/dawn/native/PhysicalDevice.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 54,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "3522fc19_bff00dfe",
       "range": {
         "startLine": 51,
         "startChar": 0,
@@ -100,6 +159,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "bcf27caa_5007f3bb",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "The problem is that WeakRef seem to require a non const pointer (or maybe I did not find how to express it otherwise).\n\nAlso I was not sure because there was no const accessor to an adpater\u0027s physical device, but I added it then.",
+      "parentUuid": "7c5abc11_5934db7d",
+      "range": {
+        "startLine": 261,
+        "startChar": 39,
+        "endLine": 261,
+        "endChar": 50
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "41d6c839_07e61bbb",
         "filename": "src/dawn/native/Surface.cpp",
         "patchSetId": 21
@@ -111,6 +194,30 @@
       "writtenOn": "2024-01-31T15:49:58Z",
       "side": 1,
       "message": "```suggestion\n    DAWN_TRY_ASSIGN(mSwapChain, GetCurrentDevice()-\u003eCreateSwapChain(this, previousSwapChain, config));\n```",
+      "range": {
+        "startLine": 471,
+        "startChar": 0,
+        "endLine": 474,
+        "endChar": 62
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "0f26b9b1_465a7fbf",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 474,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "41d6c839_07e61bbb",
       "range": {
         "startLine": 471,
         "startChar": 0,
@@ -138,6 +245,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "34485b8c_db32d664",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 593,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "8d2382e2_315720d9",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "edf3f752_47204d99",
@@ -151,6 +276,24 @@
       "writtenOn": "2024-01-31T15:49:58Z",
       "side": 1,
       "message": "TODO(...) and maybe have some text that doesn\u0027t use first person of singular ^^",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "3f6c7697_fe835f67",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 603,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "edf3f752_47204d99",
       "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -172,6 +315,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "7b5ed9ab_351b57d6",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 617,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "9855484a_bef45e23",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11102460_6624c82c",
@@ -189,6 +350,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "186fa2d7_53f58726",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11102460_6624c82c",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "db38b4fe_65cdb6ef",
@@ -202,6 +381,24 @@
       "writtenOn": "2024-01-31T15:49:58Z",
       "side": 1,
       "message": "nit: We tend to mark deprecated paths with // TODO(dawn:...): Remove once the deprectation period is finished.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "80f9cae5_562e7137",
+        "filename": "src/dawn/native/SwapChain.h",
+        "patchSetId": 21
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "db38b4fe_65cdb6ef",
       "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -248,6 +445,30 @@
     {
       "unresolved": false,
       "key": {
+        "uuid": "9e971812_44960b6c",
+        "filename": "src/dawn/native/d3d/PhysicalDeviceD3D.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "424a149d_cd19c5fd",
+      "range": {
+        "startLine": 56,
+        "startChar": 4,
+        "endLine": 56,
+        "endChar": 20
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
         "uuid": "d7651821_d48d915b",
         "filename": "src/dawn/native/metal/SwapChainMTL.mm",
         "patchSetId": 21
@@ -276,6 +497,24 @@
       "writtenOn": "2024-01-31T15:49:58Z",
       "side": 1,
       "message": "The surface is not freed. We have an RAII helper for Vulkan objects somewhere that we could use here.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "aeb89eb1_bb7fc5d5",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 846,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:29:53Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "0d32bbe9_887278b8",
       "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
