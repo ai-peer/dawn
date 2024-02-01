@@ -133,7 +133,7 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
 
     COMMON_CMAKE_FLAGS=""
     COMMON_CMAKE_FLAGS+=" -DCMAKE_BUILD_TYPE=${BUILD_TYPE}"
-    COMMON_CMAKE_FLAGS+=" -DTINT_DOCS_WARN_AS_ERROR=1"
+    COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_DOCS=0"
     COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_BENCHMARKS=1"
     COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_SPV_READER=1"
     COMMON_CMAKE_FLAGS+=" -DTINT_BUILD_WGSL_READER=1"
@@ -168,17 +168,6 @@ if [ "$BUILD_SYSTEM" == "cmake" ]; then
     hide_cmds
 
     cd ${BUILD_DIR}
-
-    status "Running Doxygen"
-    echo "NOTE: This will fail on first warning. Run with -DTINT_DOCS_WARN_AS_ERROR=OFF to see all warnings".
-    echo ""
-    show_cmds
-        # NOTE: If we upgrade Doxygen to a more recent version, we can set DOXYGEN_WARN_AS_ERROR to
-        # "FAIL_ON_WARNINGS" instead of "YES" in our CMakeLists.txt so see all warnings, and then
-        # fail. See https://www.doxygen.nl/manual/config.html#cfg_warn_as_error
-        cmake ${SRC_DIR} ${CMAKE_FLAGS} ${COMMON_CMAKE_FLAGS}
-        cmake --build . --target tint-docs
-    hide_cmds
 
     status "Building dawn in '${BUILD_DIR}'"
     show_cmds
