@@ -50,6 +50,24 @@
       "message": "As discussed offline, we should add a test that fails if we\u0027re missing a member, and pass when all are present.",
       "revId": "480d493b23fc8b055f00f0831461987081f98dc4",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2a09938d_45d22c41",
+        "filename": "src/tint/utils/reflection/reflection_test.cc",
+        "patchSetId": 4
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-01T23:11:00Z",
+      "side": 1,
+      "message": "Ack. I\u0027ll follow up with one. In the meantime, the worst case is with false negatives, where this doesn\u0027t catch things it should and we\u0027re in the same situation as Right Now. False positives will cause people to scream, and it\u0027ll get reverted.",
+      "parentUuid": "9eeaa389_67d82b01",
+      "revId": "480d493b23fc8b055f00f0831461987081f98dc4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
   ]
 }
