@@ -1,0 +1,44 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "4f9511c5_ff5377ce",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 6
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-01T06:11:32Z",
+      "side": 1,
+      "message": "LGTM",
+      "revId": "3737d8f35759b2bc35e523afac02ec344dbc4f2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "084afb53_df92d42d",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 6
+      },
+      "lineNbr": 365,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-01T06:11:32Z",
+      "side": 1,
+      "message": "instead of doing get_if and checking - would it work to compare `a.bindingLayout.index() \u003d\u003d b.bindingLayout.index()` before the MatchVariant? Then inside the match, we can assume they are the same",
+      "range": {
+        "startLine": 362,
+        "startChar": 12,
+        "endLine": 365,
+        "endChar": 13
+      },
+      "revId": "3737d8f35759b2bc35e523afac02ec344dbc4f2b",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
