@@ -170,6 +170,11 @@ ResultOrError<ExecutionSerial> Queue::CheckAndUpdateCompletedSerials() {
     });
 }
 
+MaybeError Queue::ForceImmediateFlushOfCommands() {
+    ForceEventualFlushOfCommands();
+    return SubmitPendingCommands();
+}
+
 void Queue::ForceEventualFlushOfCommands() {
     mRecordingContext.needsSubmit |= mRecordingContext.used;
 }

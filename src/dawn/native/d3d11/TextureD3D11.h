@@ -88,6 +88,8 @@ class Texture final : public d3d::Texture {
         const ScopedCommandRecordingContext* commandContext,
         const SubresourceRange& range);
 
+    MaybeError SynchronizeTextureBeforeUse(const ScopedCommandRecordingContext* commandContext);
+
     MaybeError Write(const ScopedCommandRecordingContext* commandContext,
                      const SubresourceRange& subresources,
                      const Origin3D& origin,
@@ -192,6 +194,7 @@ class Texture final : public d3d::Texture {
 
     const Kind mKind = Kind::Normal;
     ComPtr<ID3D11Resource> mD3d11Resource;
+    std::optional<ExecutionSerial> mLastUsageSerial;
     // The internal 'R8Uint' texture for sampling stencil from depth-stencil textures.
     Ref<Texture> mTextureForStencilSampling;
 };
