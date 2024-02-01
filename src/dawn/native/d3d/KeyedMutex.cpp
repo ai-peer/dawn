@@ -31,6 +31,7 @@
 
 #include "dawn/native/D3DBackend.h"
 #include "dawn/native/d3d/D3DError.h"
+#include "dawn/native/d3d/DeviceD3D.h"
 
 namespace dawn::native::d3d {
 
@@ -58,13 +59,15 @@ void KeyedMutex::Guard::Reset() {
     }
 }
 
-KeyedMutex::KeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex)
-    : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)) {
+KeyedMutex::KeyedMutex(ComPtr<IDXGIKeyedMutex> dxgiKeyedMutex, Device* device)
+    : mDXGIKeyedMutex(std::move(dxgiKeyedMutex)), mDevice(device) {
     DAWN_CHECK(mDXGIKeyedMutex);
+    DAWN_CHECK(mDevice);
 }
 
 KeyedMutex::~KeyedMutex() {
     DAWN_CHECK(mAcquireCount == 0);
+    mDevice->DisposeKeyedMutex(std::move(mDXGIKeyedMutex));
 }
 
 ResultOrError<KeyedMutex::Guard> KeyedMutex::AcquireKeyedMutex() {
