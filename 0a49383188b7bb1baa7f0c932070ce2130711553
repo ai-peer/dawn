@@ -36,6 +36,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "70bae113_29a3dab6",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-01T15:06:07Z",
+      "side": 0,
+      "message": "After the discussion today I agree we can skip this. The only thing is I\u0027m not sure if we\u0027ll get an ASSERT in the future if the MatchVariant has an unhandled case. It would help when adding new binding types as the asserts will tell us if we miss any spot.",
+      "parentUuid": "42726d8e_05d43914",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6914db_bea16ca4",
