@@ -561,6 +561,30 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "da0956fe_d59554ce",
+        "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 56,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:31:36Z",
+      "side": 1,
+      "message": "I agree, I write this to mimick other test files but I can remove these wrappers no problem!",
+      "parentUuid": "db85ee8e_38be73c3",
+      "range": {
+        "startLine": 43,
+        "startChar": 0,
+        "endLine": 56,
+        "endChar": 5
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "82aa0a4f_3c7386f7",
         "filename": "src/dawn/tests/unittests/validation/SurfaceConfigurationValidationTests.cpp",
         "patchSetId": 21
@@ -606,6 +630,24 @@
       "writtenOn": "2024-01-31T15:49:58Z",
       "side": 1,
       "message": "Nit, these should be possible to remove by doing a gclient sync. It\u0027s a common issue when updating dawn that without gclient sync, it will consider the submodules dirty.",
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "e6420d34_2f0c9c8e",
+        "filename": "third_party/dxheaders",
+        "patchSetId": 21
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1003611
+      },
+      "writtenOn": "2024-02-01T08:31:36Z",
+      "side": 1,
+      "message": "Except as reported on Matrix I cannot get gclient to work properly :/",
+      "parentUuid": "1fcbaafc_1ffefa79",
       "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     }
