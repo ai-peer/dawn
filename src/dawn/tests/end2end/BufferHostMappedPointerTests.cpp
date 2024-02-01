@@ -27,6 +27,7 @@
 
 #include "dawn/tests/end2end/BufferHostMappedPointerTests.h"
 
+#include "dawn/common/Math.h"
 #include "dawn/utils/WGPUHelpers.h"
 
 namespace dawn {
@@ -126,7 +127,7 @@ TEST_P(BufferHostMappedPointerTests, Alignment) {
 // Then, change the host pointer, and see changes reflected on the GPU.
 TEST_P(BufferHostMappedPointerTests, InitialDataAndCopySrc) {
     // Set up expected data.
-    uint32_t bufferSize = mRequiredAlignment;
+    uint32_t bufferSize = Align(64u * 1024u * 1024u, mRequiredAlignment);
     std::vector<uint32_t> expected(bufferSize / sizeof(uint32_t));
     for (size_t i = 0; i < expected.size(); ++i) {
         expected[i] = i;
@@ -157,7 +158,7 @@ TEST_P(BufferHostMappedPointerTests, InitialDataAndCopySrc) {
 // are visible to the host.
 TEST_P(BufferHostMappedPointerTests, CopyDst) {
     // Set up expected data.
-    uint32_t bufferSize = mRequiredAlignment;
+    uint32_t bufferSize = Align(64u * 1024u * 1024u, mRequiredAlignment);
     std::vector<uint32_t> expected(bufferSize / sizeof(uint32_t));
     for (size_t i = 0; i < expected.size(); ++i) {
         expected[i] = i;
@@ -195,7 +196,7 @@ TEST_P(BufferHostMappedPointerTests, CopyDst) {
 // are visible on the GPU, and writes on the GPU are visible on the host.
 TEST_P(BufferHostMappedPointerTests, Storage) {
     // Set up expected data.
-    uint32_t bufferSize = mRequiredAlignment;
+    uint32_t bufferSize = Align(64u * 1024u * 1024u, mRequiredAlignment);
     std::vector<uint32_t> contents(bufferSize / sizeof(uint32_t));
     for (size_t i = 0; i < contents.size(); ++i) {
         contents[i] = i;
@@ -220,9 +221,12 @@ TEST_P(BufferHostMappedPointerTests, Storage) {
         @group(0) @binding(0) var<storage, read_write> buf : Buf;
 
         @workgroup_size(64)
-        @compute fn main(@builtin(global_invocation_id) gid : vec3<u32>) {
-            if (buf.values[gid.x] == gid.x) {
-                buf.values[gid.x] = gid.x + 1u;
+        @compute fn main(@builtin(workgroup_id) wgid : vec3<u32>,
+                         @builtin(num_workgroups) n_groups : vec3<u32>,
+                         @builtin(local_invocation_index) lid : u32) {
+            let id : u32 = 64u * (wgid.x + wgid.y * n_groups.x) + lid;
+            if (buf.values[id] == id) {
+                buf.values[id] = id + 1u;
             }
         }
     )");
@@ -235,7 +239,9 @@ TEST_P(BufferHostMappedPointerTests, Storage) {
     wgpu::ComputePassEncoder pass = encoder.BeginComputePass();
     pass.SetPipeline(pipeline);
     pass.SetBindGroup(0, bindGroup);
-    pass.DispatchWorkgroups(contents.size() / 64);
+
+    size_t wgCount = contents.size() / 64;
+    pass.DispatchWorkgroups(wgCount / 64, 64);
     pass.End();
     wgpu::CommandBuffer commandBuffer = encoder.Finish();
     device.GetQueue().Submit(1, &commandBuffer);
