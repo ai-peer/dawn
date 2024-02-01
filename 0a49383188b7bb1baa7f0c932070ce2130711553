@@ -54,6 +54,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "708e7c27_9790780b",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000032
+      },
+      "writtenOn": "2024-02-01T19:01:33Z",
+      "side": 0,
+      "message": "It\u0027ll fail to compile, but the error is not very helpful\nhttps://godbolt.org/z/xMjd1c3bz\n\nit fails because the structs can\u0027t be converted to each other.\nIf conversion is possible, like int-\u003efloat, then std::visit will do conversion which is probably not what we would like to happen",
+      "parentUuid": "70bae113_29a3dab6",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4e6914db_bea16ca4",
