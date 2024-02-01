@@ -1,0 +1,21 @@
+{
+  "comments": [
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "9962a9a2_2df0a433",
+        "filename": "/PATCHSET_LEVEL",
+        "patchSetId": 2
+      },
+      "lineNbr": 0,
+      "author": {
+        "id": 1001737
+      },
+      "writtenOn": "2024-02-01T09:05:17Z",
+      "side": 1,
+      "message": "LGTM. It looks like there are more expectations to update.",
+      "revId": "79f3ee92f7b7cf4c68af26018f1f8ef950d678b4",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}
