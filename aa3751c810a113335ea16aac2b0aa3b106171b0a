@@ -1,0 +1,55 @@
+{
+  "comments": [
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "c4e081e7_af04bfb6",
+        "filename": "src/dawn/native/Surface.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 113,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-01T15:01:24Z",
+      "side": 1,
+      "message": "```suggestion\n    // TODO(dawn:2320) Remove these 2 accessors once the deprecation period is finished and\n```",
+      "revId": "aa3751c810a113335ea16aac2b0aa3b106171b0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "66a616d2_668e7306",
+        "filename": "src/dawn/native/SwapChain.h",
+        "patchSetId": 22
+      },
+      "lineNbr": 40,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-01T15:01:24Z",
+      "side": 1,
+      "message": "```suggestion\n// TODO(dawn:2320) Remove the SwapChainDescriptor once the deprecation period is finished and\n```",
+      "revId": "aa3751c810a113335ea16aac2b0aa3b106171b0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "2af842a3_4f3af122",
+        "filename": "src/dawn/native/vulkan/PhysicalDeviceVk.cpp",
+        "patchSetId": 22
+      },
+      "lineNbr": 860,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-01T15:01:24Z",
+      "side": 1,
+      "message": "DAWN_TRY can return and the surface would be leaked. We could use RefCountedVkHandle or DAWN_TRY_CLEANUP",
+      "revId": "aa3751c810a113335ea16aac2b0aa3b106171b0a",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    }
+  ]
+}

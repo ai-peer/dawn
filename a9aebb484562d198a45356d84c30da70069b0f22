@@ -181,6 +181,30 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "80ecbe2d_4cd6d3dd",
+        "filename": "src/dawn/native/Surface.cpp",
+        "patchSetId": 21
+      },
+      "lineNbr": 261,
+      "author": {
+        "id": 1000002
+      },
+      "writtenOn": "2024-02-01T15:01:24Z",
+      "side": 1,
+      "message": "Doesn\u0027t `WeakRef\u003cconst AdapterBase\u003e` work? Aaaand it doesn\u0027t because TryGetRef isn\u0027t const. Ok nvm.",
+      "parentUuid": "bcf27caa_5007f3bb",
+      "range": {
+        "startLine": 261,
+        "startChar": 39,
+        "endLine": 261,
+        "endChar": 50
+      },
+      "revId": "a9aebb484562d198a45356d84c30da70069b0f22",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "41d6c839_07e61bbb",
