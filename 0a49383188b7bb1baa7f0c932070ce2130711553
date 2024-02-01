@@ -20,6 +20,24 @@
     {
       "unresolved": true,
       "key": {
+        "uuid": "42726d8e_05d43914",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 373,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-02-01T01:07:50Z",
+      "side": 0,
+      "message": "The problem is the definition of `bindingLayout` doesn\u0027t include the information about external textures, and actually it is difficult and we don\u0027t need to handle external textures after the creation of the bind group layout because each external texture will be replaced by one uniform buffer and two sampled textures in the creation of bind groups in ExtractAndExpandBglEntries().\n\nhttps://source.chromium.org/chromium/chromium/src/+/main:third_party/dawn/src/dawn/native/BindGroupLayoutInternal.cpp;l\u003d536",
+      "parentUuid": "f872f8e5_15a2eee0",
+      "revId": "0a49383188b7bb1baa7f0c932070ce2130711553",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
         "uuid": "4e6914db_bea16ca4",
         "filename": "src/dawn/native/PassResourceUsageTracker.cpp",
         "patchSetId": 4

@@ -52,6 +52,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "6118a397_ab53af2b",
+        "filename": "src/dawn/native/BindGroupLayoutInternal.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 657,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-02-01T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "1071c21b_accc3db7",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "11fee213_ab79001a",
@@ -65,6 +83,24 @@
       "writtenOn": "2024-01-31T11:41:04Z",
       "side": 1,
       "message": "nit: this could use std::get_if",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": false,
+      "key": {
+        "uuid": "8c6a932c_062e2a93",
+        "filename": "src/dawn/native/CommandBufferStateTracker.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 166,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-02-01T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "11fee213_ab79001a",
       "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
@@ -86,6 +122,24 @@
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
     {
+      "unresolved": false,
+      "key": {
+        "uuid": "ba853e36_d2a33c3b",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 176,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-02-01T01:07:50Z",
+      "side": 1,
+      "message": "Done",
+      "parentUuid": "fc1c7683_bb769cb1",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
       "unresolved": true,
       "key": {
         "uuid": "4cfb3b38_33524ab1",
@@ -99,6 +153,24 @@
       "writtenOn": "2024-01-31T11:41:04Z",
       "side": 1,
       "message": "nit: ExternalTexture could be handled here as well even if it should be decayed by this point.",
+      "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
+      "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
+    },
+    {
+      "unresolved": true,
+      "key": {
+        "uuid": "fc0574a7_0d314709",
+        "filename": "src/dawn/native/d3d11/BindGroupTrackerD3D11.cpp",
+        "patchSetId": 4
+      },
+      "lineNbr": 231,
+      "author": {
+        "id": 1000019
+      },
+      "writtenOn": "2024-02-01T01:07:50Z",
+      "side": 1,
+      "message": "I find we don\u0027t need to add `ExternalBindingLayout` in `BindingInfo.bindingLayout` because external textures have already been replaced by one uniform buffer and two sampled textures when we reach this function, what do you think?",
+      "parentUuid": "4cfb3b38_33524ab1",
       "revId": "ba8194fb3f5af37702d38be7d84585858d022e0e",
       "serverId": "dd02978d-1a8e-36d7-bcc0-a5723e5c0abd"
     },
